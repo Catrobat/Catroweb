@@ -492,103 +492,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see a( [^"]*)? help image "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   * @param mixed $arg2
-   *
-   * @throws ExpectationException
-   */
-  public function iShouldSeeAHelpImage($arg1, $arg2): void
-  {
-    $arg1 = trim($arg1);
-
-    $this->assertSession()->responseContains('help-desktop');
-    $this->assertSession()->responseContains('help-mobile');
-
-    if ('big' === $arg1) {
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
-      Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    } elseif ('small' === $arg1) {
-      Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    } elseif ('' === $arg1) {
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-split')->isVisible());
-    } else {
-      Assert::assertTrue(false);
-    }
-
-    $img = null;
-    $path = null;
-
-    switch ($arg2) {
-      case 'Hour of Code':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
-          $path = '/images/help/hour_of_code.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
-          $path = '/images/help/hour_of_code_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Step By Step':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
-          $path = '/images/help/step_by_step.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
-          $path = '/images/help/step_by_step_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Tutorials':
-        $img = $this->getSession()->getPage()->findById('tutorials');
-        $path = '/images/help/tutorials.png';
-        break;
-      case 'Starters':
-        $img = $this->getSession()->getPage()->findById('starters');
-        $path = '/images/help/starters.png';
-        break;
-      case 'Education Platform':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('edu-desktop');
-          $path = '/images/help/edu_site.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('edu-mobile');
-          $path = '/images/help/edu_site_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Discussion':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('discuss-desktop');
-          $path = '/images/help/discuss.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('discuss-mobile');
-          $path = '/images/help/discuss_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      default:
-        Assert::assertTrue(false);
-        break;
-    }
-
-    if (null != $img) {
-      Assert::assertEquals($img->getTagName(), 'img');
-      Assert::assertEquals($img->getAttribute('src'), $path);
-      Assert::assertTrue($img->isVisible());
-    } else {
-      Assert::assertTrue(false);
-    }
-  }
-
-  /**
    * @Then /^I click on the first "([^"]*)" button$/
    *
    * @param mixed $arg1
@@ -1013,15 +916,6 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $page = $this->getSession()->getPage();
     $page->find('xpath', "//a[contains(@href,'/admin/approve/".$program_id."/show')]")->click();
-  }
-
-  /**
-   * @Then /^I click on the edit button of word with id "([^"]*)"$/
-   */
-  public function iClickOnTheEditButtonOfWord(string $word_id): void
-  {
-    $page = $this->getSession()->getPage();
-    $page->find('xpath', "//a[contains(@href,'/admin/rudeword/".$word_id."/edit')]")->click();
   }
 
   /**
@@ -2301,25 +2195,7 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the starter programs table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function shouldSeeStarterProgramsTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['Starter Category']);
-      $this->assertSession()->pageTextContains($user_stat['Category Alias']);
-      $this->assertSession()->pageTextContains($user_stat['Programs']);
-      $this->assertSession()->pageTextContains($user_stat['Order']);
-    }
-  }
-
-  /**
    * @Then /^I should see the following not approved projects:$/
-   *
-   * @throws ResponseTextException
    */
   public function seeNotApprovedProjects(TableNode $table): void
   {
@@ -2338,43 +2214,6 @@ class CatrowebBrowserContext extends BrowserContext
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }
-  }
-
-  /**
-   * @Then /^I should see the following rude words:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function seeRudeWords(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
-
-    $actual_values = [];
-    foreach ($td as $value) {
-      $actual_values[] = $value->getText();
-    }
-
-    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of rude words in table');
-
-    $counter = 0;
-    foreach ($user_stats as $user_stat) {
-      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
-      ++$counter;
-    }
-  }
-
-  /**
-   * @Then /^I try to add the following word "([^"]*)"$/
-   *
-   * @throws ResponseTextException
-   */
-  public function addFollowingWord(string $word): void
-  {
-    $this->visit('/admin/rudeword/create');
-    $this->iWaitForThePageToBeLoaded();
-    $this->getSession()->getPage()->find('xpath', '//input')->setValue($word);
-    $this->pressButton('Create and return to list');
   }
 
   /**

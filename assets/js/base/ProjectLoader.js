@@ -494,11 +494,7 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
         return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
 
       default:
-        if ($(self.container).hasClass('starterDownloads')) {
-          return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
-        } else {
-          return '<div><span class="project-thumb-icon material-icons">person</span>' + self.escapeJavaScript(project.Author) + '</div>'
-        }
+        return '<div><span class="project-thumb-icon material-icons">person</span>' + self.escapeJavaScript(project.Author) + '</div>'
     }
   }
 

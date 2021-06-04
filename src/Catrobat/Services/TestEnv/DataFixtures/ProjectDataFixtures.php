@@ -116,9 +116,6 @@ class ProjectDataFixtures
     $project->setDebugBuild(isset($config['debug']) ? 'true' === $config['debug'] : false);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
 
-    $project->setAcceptedForGameJam($config['accepted'] ?? false);
-    $project->setGamejam($config['gamejam'] ?? null);
-
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new DateTime($config['apk request time'], new DateTimeZone('UTC')));
     }

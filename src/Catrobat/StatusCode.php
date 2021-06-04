@@ -52,14 +52,7 @@ class StatusCode
    * @var int
    */
   public const UNEXPECTED_FILE = 525;
-  /**
-   * @var int
-   */
-  public const RUDE_WORD_IN_PROGRAM_NAME = 511;
-  /**
-   * @var int
-   */
-  public const RUDE_WORD_IN_DESCRIPTION = 512;
+
   /**
    * @var int
    */
@@ -95,7 +88,6 @@ class StatusCode
 
   public const LOGIN_ERROR = 601;
 
-  public const RUDE_WORD_IN_NOTES_AND_CREDITS = Response::HTTP_UNPROCESSABLE_ENTITY;
   public const INVALID_PARAM = Response::HTTP_UNPROCESSABLE_ENTITY;
 
   /**

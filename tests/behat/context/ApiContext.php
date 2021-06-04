@@ -756,12 +756,6 @@ class ApiContext implements KernelAwareContext
   public function iUploadAProgramWith(string $program_attribute, string $api_version): void
   {
     switch ($program_attribute) {
-      case 'a rude word in the description':
-        $filename = 'program_with_rudeword_in_description.catrobat';
-        break;
-      case 'a rude word in the name':
-        $filename = 'program_with_rudeword_in_name.catrobat';
-        break;
       case 'a missing code.xml':
         $filename = 'program_with_missing_code_xml.catrobat';
         break;

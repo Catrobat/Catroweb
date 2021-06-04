@@ -591,17 +591,6 @@ services:
 
   # ===== Special Projects
 
-  catrowebadmin.block.programs.categories:
-    class: App\Admin\CategoriesAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Starter Projects", show_mosaic_button: false }
-    arguments:
-      - ~
-      - App\Entity\StarterCategory
-      - App\Catrobat\Controller\Admin\CategoriesController
-      - ~
-    public: true
-
   catrowebadmin.block.featured.program:
     class: App\Admin\FeaturedProgramAdmin
     tags:
@@ -800,16 +789,6 @@ services:
       - ~
       - App\Entity\Group
       - App\Catrobat\Controller\Admin\LogsController
-    public: true
-
-  catrowebadmin.block.tools.rudewords:
-    class: App\Admin\RudewordAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Rude Words" }
-    arguments:
-      - ~
-      - App\Entity\RudeWord
-      - ~
     public: true
 
   catrowebadmin.block.tools.notify:
