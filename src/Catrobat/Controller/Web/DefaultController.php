@@ -72,9 +72,9 @@ class DefaultController extends AbstractController
   /**
    * @Route("/privacypolicy", name="privacypolicy", methods={"GET"})
    */
-  public function privacypolicyAction(): Response
+  public function privacyPolicyAction(): Response
   {
-    return $this->render('PrivacyAndTerms/privacyPolicy.html.twig');
+    return $this->redirect('https://catrob.at/privacypolicy');
   }
 
   /**
