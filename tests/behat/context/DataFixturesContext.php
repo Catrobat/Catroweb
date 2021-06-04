@@ -1279,7 +1279,7 @@ class DataFixturesContext implements KernelAwareContext
   public function theUsersAreCreatedAt(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $this->getUserDataFixtures()->createdAt($config);
+      $this->getUserDataFixtures()->overwriteCreatedAt($config);
     }
     $this->getManager()->flush();
   }
@@ -1359,6 +1359,15 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then there should be :number_of_cron_jobs cron jobs in the database
+   */
+  public function thereShouldBeCronJobsInTheDatabase(int $number_of_cron_jobs): void
+  {
+    $cron_jobs = $this->getCronJobRepository()->findAll();
+    Assert::assertCount($number_of_cron_jobs, $cron_jobs);
+  }
+
+  /**
    * @Given I run the update achievements command
    */
   public function iRunTheUpdateAchievementsCommand(): void
@@ -1366,5 +1375,85 @@ class DataFixturesContext implements KernelAwareContext
     CommandHelper::executeShellCommand(
             ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
         );
+  }
+
+  /**
+   * @Given I run the special update command
+   */
+  public function iRunTheSpecialUpdateCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:special'], [], 'Updating database'
+    );
+  }
+
+  /**
+   * @Given I run the cron job command
+   */
+  public function iRunTheCronJobsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:cronjob'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add bronze_user user achievements command
+   */
+  public function iRunTheAddBronzeUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:bronze_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add silver_user user achievements command
+   */
+  public function iRunTheAddSilverUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:silver_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add gold_user user achievements command
+   */
+  public function iRunTheAddGoldUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:gold_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add diamond_user user achievements command
+   */
+  public function iRunTheAddDiamondUserAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:diamond_user'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add verified_developer user achievements command
+   */
+  public function iRunTheAddVerifiedDeveloperAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:verified_developer'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the add perfect_profile user achievements command
+   */
+  public function iRunTheAddPerfectProfileAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:perfect_profile'], [], 'Updating user achievements'
+    );
   }
 }

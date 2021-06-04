@@ -4,8 +4,10 @@ namespace App\Entity;
 
 use App\Utils\TimeUtils;
 use App\Utils\Utils;
+use DateTime;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
@@ -20,15 +22,14 @@ use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 class UserManager extends \Sonata\UserBundle\Entity\UserManager
 {
-  private ProgramManager $program_manager;
-
-  private TransformedFinder $user_finder;
-
-  private UrlHelper $url_helper;
+  protected ProgramManager $program_manager;
+  protected EntityManagerInterface $entity_manager;
+  protected TransformedFinder $user_finder;
+  protected UrlHelper $url_helper;
 
   public function __construct(PasswordUpdaterInterface $passwordUpdater,
                               CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                              EntityManagerInterface $em,
+                              EntityManagerInterface $entity_manager,
                               TransformedFinder $user_finder,
                               ProgramManager $program_manager,
                               UrlHelper $url_helper)
@@ -36,9 +37,10 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     $this->user_finder = $user_finder;
     $this->url_helper = $url_helper;
     $this->program_manager = $program_manager;
+    $this->entity_manager = $entity_manager;
 
     /** @var ObjectManager $om */
-    $om = $em;
+    $om = $entity_manager;
     parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
   }
 
@@ -122,7 +124,22 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     return $paginator->getNbResults();
   }
 
-  private function userSearchQuery(string $query): BoolQuery
+  public function getActiveUserIDList(int $years): array
+  {
+    return $this->entity_manager->createQueryBuilder()
+      ->select('user.id as id')
+      ->from('App\Entity\User', 'user')
+      ->leftjoin('App\Entity\Program', 'project', Join::WITH, 'user.id = project.user')
+      ->where('user.createdAt <= :date')
+      ->setParameter('date', new DateTime("-{$years} years"))
+      ->groupBy('user.id')
+      ->having("COUNT(user.id) >= {$years}")
+      ->getQuery()
+      ->execute()
+      ;
+  }
+
+  protected function userSearchQuery(string $query): BoolQuery
   {
     $query = Util::escapeTerm($query);
 

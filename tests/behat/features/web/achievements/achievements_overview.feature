@@ -8,9 +8,9 @@ Feature: Users have an achievement page for their overviews
       | 2  | first_achiever     | first__        | first__desc          | 3        |
       | 3  | master_of_disaster | ups__          | ups__desc            | 1        |
     And there are users:
-      | id | name      |
-      | 1  | Achiever  |
-      | 2  | Catrobat  |
+      | id | name         |
+      | 1  | Achiever     |
+      | 2  | Catrobat     |
       | 3  | ZeroAchiever |
     And there are user achievements:
       | id | user     | achievement        | seen_at | unlocked_at |

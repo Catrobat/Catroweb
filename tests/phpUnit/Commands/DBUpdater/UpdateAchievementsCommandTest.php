@@ -8,10 +8,10 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Command\Command;
 
 /**
- * Class ClearCompressedProjectsTest.
+ * Class UpdateAchievementsCommand.
  *
  * @internal
- * @covers \App\Commands\Maintenance\CleanCompressedProjectsCommand
+ * @covers \App\Commands\DBUpdater\UpdateAchievementsCommand
  */
 class UpdateAchievementsCommandTest extends KernelTestCase
 {

@@ -8,6 +8,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Process\Process;
 
 class CommandHelper
@@ -73,13 +74,22 @@ class CommandHelper
   }
 
   public static function executeShellCommand(array $command, array $config, string $description = '',
-                                             OutputInterface $output = null): bool
+                                             OutputInterface $output = null, KernelInterface $kernel = null): ?int
   {
     if (null !== $output) {
       $output->write($description." ('".implode(' ', $command)."') ... ");
     }
 
-    $process = new Process($command);
+    $app_env = $_ENV['APP_ENV'];
+    $final_command = $command;
+    if ('test' === $app_env) {
+      $final_command[] = '--env=test';
+    }
+
+    $process = new Process($final_command, null, ['APP_ENV' => 'false', 'SYMFONY_DOTENV_VARS' => 'false']);
+    if (!is_null($kernel)) {
+      $process->setWorkingDirectory($kernel->getProjectDir());
+    }
 
     if (isset($config['timeout'])) {
       $process->setTimeout($config['timeout']);
@@ -89,17 +99,19 @@ class CommandHelper
 
     if ($process->isSuccessful()) {
       if (null !== $output) {
+        $output->writeln($process->getOutput());
         $output->writeln('OK');
       }
 
-      return true;
+      return 0;
     }
 
     if (null !== $output) {
+      $output->writeln($process->getOutput());
       $output->writeln('failed! - Exit-Code: '.$process->getExitCode());
       $output->writeln('Error output: '.$process->getErrorOutput());
     }
 
-    return false;
+    return $process->getExitCode();
   }
 }

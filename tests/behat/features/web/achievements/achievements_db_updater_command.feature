@@ -15,12 +15,12 @@ Feature: Achievements are inserted/update to the database by a symfony command
     Then there should be "6" achievements in the database
 
   Scenario: Rerunning the command must keep all user achievements
-    Given I run the update achievements command
-    Then there should be "6" achievements in the database
-    And there are users:
+    Given there are users:
       | id | name     |
       | 1  | Achiever |
       | 2  | Catrobat |
+    And I run the update achievements command
+    Then there should be "6" achievements in the database
     And there are user achievements:
       | id | user     | achievement | seen_at | unlocked_at |
       | 1  | Catrobat | bronze_user |         | 2021-03-03  |

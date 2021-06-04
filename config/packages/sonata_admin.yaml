@@ -135,6 +135,17 @@ sonata_admin:
                 items:
                     - catrowebadmin.block.survey
 
+            sonata.admin.group.db_updater:
+                label: DB Updater
+                label_catalogue: Catrobat
+                icon: '<i class="fa fa-cogs"></i>'
+                items:
+                    - catrowebadmin.block.cron_jobs
+                    - catrowebadmin.block.special_updater
+                    - catrowebadmin.block.achievements
+                    - catrowebadmin.block.extensions
+                    - catrowebadmin.block.tags
+
             sonata.admin.group.tools:
                 label:           Tools
                 label_catalogue: Catrobat
@@ -147,13 +158,6 @@ sonata_admin:
                     - catrowebadmin.block.tools.gcm
                     - catrowebadmin.block.tools.broadcast
                     - catrowebadmin.block.tools.mail
-
-            sonata.admin.group.extensions:
-                label:           Extensions
-                label_catalogue: Catrobat
-                icon:            '<i class="fa fa-external-link"></i>'
-                items:
-                    - catrowebadmin.block.extensions.all
 
             sonata.admin.group.statistics:
                 label:           Statistics
