@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.10.0]
+- Backend for Studios added
+- Achievements Events added
+- Admin interface for cron job
+- Admin interface for special updater
+- Admin interface for static achievements data
+- iTranslate API improved & extended
+- update dependencies
+- update translations
+- increase and fix psalm issues to lvl 4
 ## [3.9.0]
 - new API route: authentication/upgrade
 - Removed deprecated unused API routes
@@ -329,7 +339,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.9.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.10.0...HEAD
+[3.10.0]: https://github.com/Catrobat/Catroweb/compare/v3.9.0...v3.10.0
 [3.9.0]: https://github.com/Catrobat/Catroweb/compare/v3.8.7...v3.9.0
 [3.8.5]: https://github.com/Catrobat/Catroweb/compare/v3.8.6...v3.8.7
 [3.8.5]: https://github.com/Catrobat/Catroweb/compare/v3.8.5...v3.8.6
