@@ -3,15 +3,15 @@
 namespace Tests\phpUnit\CatrowebPhpUnit;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use ReflectionException;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
  * @coversNothing
  *
  * @internal
  */
-class CatrowebTestCase extends TestCase
+class CatrowebTestCase extends KernelTestCase
 {
   /**
    * @throws ReflectionException
