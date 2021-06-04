@@ -1,7 +1,7 @@
 # Use composer image for better caching
-FROM composer AS composer-build
+FROM composer:2.0 AS composer-build
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts --prefer-dist
+RUN composer install --no-scripts
 
 # Use node image for better caching
 FROM node:16 AS node-build
