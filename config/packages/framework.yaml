@@ -10,3 +10,4 @@ framework:
   fragments:       ~
   assets:
     version_strategy: 'catrobat.versioning'
+    json_manifest_path: null

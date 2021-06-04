@@ -1,0 +1,65 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
+fos_elastica:
+    clients:
+        default: { url: '%env(ELASTICSEARCH_URL)%', host: '%es_host%', port: '%es_port%' }
+    indexes:
+        app_program:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            program_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [standard, lowercase, elision, language_stop]
+                        filter:
+                            language_stop:
+                                type: stop
+                                ignore_case: true
+                                stopwords: [_english_]
+            types:
+                program:
+                    properties:
+                        description: ~
+                        flavor: ~
+                        id: ~
+                        language_version:
+                            type: float
+                        name: { boost: 3 }
+                        private: ~
+                        visible: ~
+                        debug_build: ~
+                        getUsernameString: ~
+                        getTagsString: ~
+                        getExtensionsString: ~
+                    persistence:
+                        driver: orm
+                        model: App\Entity\Program
+                        provider: ~
+                        finder: ~
+                        listener: ~
+        app_user:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            program_analyzer:
+                                type: custom
+                                tokenizer: standard
+                                filter: [standard, lowercase, elision, language_stop]
+                        filter:
+                            language_stop:
+                                type: stop
+                                ignore_case: true
+                                stopwords: [_english_]
+            types:
+                user:
+                    properties:
+                        id: ~
+                        username: { boost: 3 }
+                    persistence:
+                        driver: orm
+                        model: App\Entity\User
+                        provider: ~
+                        finder: ~
+                        listener: ~

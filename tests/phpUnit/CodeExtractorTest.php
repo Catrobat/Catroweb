@@ -93,8 +93,7 @@ class CodeExtractorTest extends TestCase
     $code = '';
 
     /** @var CodeObject $object */
-    foreach ($objects as $object)
-    {
+    foreach ($objects as $object) {
       $code .= $object->getCode();
       $code .= $this->generateCode($object->getCodeObjects());
     }
@@ -121,15 +120,13 @@ class CodeExtractorTest extends TestCase
     $referenceOutputFile = fopen($absolutePath, 'r');
     $size = filesize($absolutePath);
 
-    if (!$referenceOutputFile || !$size)
-    {
+    if (!$referenceOutputFile || !$size) {
       exit('Unable to open file!');
     }
 
     $referenceOutput = fread($referenceOutputFile, $size);
 
-    if (!$referenceOutput)
-    {
+    if (!$referenceOutput) {
       exit('Unable to redd file!');
     }
 

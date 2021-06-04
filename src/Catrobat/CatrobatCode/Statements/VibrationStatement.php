@@ -7,11 +7,11 @@ class VibrationStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'vibrating for ';
+  public const BEGIN_STRING = 'vibrating for ';
   /**
    * @var string
    */
-  const END_STRING = ' seconds<br/>';
+  public const END_STRING = ' seconds<br/>';
 
   /**
    * VibrationStatement constructor.

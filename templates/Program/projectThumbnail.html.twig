@@ -1,38 +1,36 @@
-{% if my_program %}
-  <div class="d-none error-message text-img-upload-too-large alert alert-danger">
-    {{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}
-  </div>
-  <div class="d-none error-message text-img-upload-error alert alert-danger">
-    {{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}
-  </div>
-  <div class="d-none error-message text-mime-type-not-supported alert alert-danger">
-    {{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}
-  </div>
-  <div class="d-none error-message text-img-upload-success alert alert-success">
-    {{ 'success.imgUpload'|trans({}, 'catroweb') }}
-  </div>
-{% endif %}
-
-<div class="project-thumbnail-wrapper">
-  {% if isWebview() %}
+ {% if isWebview() %}
   <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
     {% endif %}
-
     <img alt="project thumbnail" id="project-thumbnail-big"
          src="{{ asset(program_details.screenshotBig) }}"/>
 
     {% if my_program %}
-      <div id="change-project-thumbnail-button" class="upload-image">
-        <div>
-          <input type="file" name="file">
-          <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
-          <div class="button-show-ajax"><i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i></div>
+      <div class="position-relative">
+        <div id="change-project-thumbnail-button" class="upload-project-image align-items-center justify-content-center d-flex">
+          <div>
+            <input type="file" name="file">
+            <i class="material-icons md-light">camera_alt</i>
+            <div class="button-show-ajax"></div>
+          </div>
         </div>
       </div>
+      <div class="text-center">
+        <i class="material-icons text-left d-none" id="upload-image-spinner">
+          {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'upload-image-pb', 'size': 'small'} only %}</i>
+      </div>
+      <div class="d-none error-message text-img-upload-too-large alert alert-danger">
+        {{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}
+      </div>
+      <div class="d-none error-message text-img-upload-error alert alert-danger">
+        {{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}
+      </div>
+      <div class="d-none error-message text-mime-type-not-supported alert alert-danger">
+        {{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}
+      </div>
+      <div class="d-none error-message text-img-upload-success alert alert-success">
+        {{ 'success.imgUpload'|trans({}, 'catroweb') }}
+      </div>
     {% endif %}
-
-
     {% if isWebview() %}
   </a>
-  {% endif %}
-</div>
+ {% endif %}

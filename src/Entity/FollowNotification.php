@@ -23,7 +23,7 @@ class FollowNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?User $follower = null;
+  private User $follower;
 
   /**
    *  You have to set this parameter otherwise the wrong template will be rendered.
@@ -38,7 +38,7 @@ class FollowNotification extends CatroNotification
    */
   public function __construct(User $user, User $profile)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'follow');
     $this->follower = $profile;
   }
 

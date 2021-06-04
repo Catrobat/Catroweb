@@ -7,11 +7,11 @@ class ChangeXByNStatement extends BaseChangeByNStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'X';
+  public const BEGIN_STRING = 'X';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * ChangeXByNStatement constructor.

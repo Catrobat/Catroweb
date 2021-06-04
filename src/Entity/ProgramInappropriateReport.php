@@ -17,9 +17,9 @@ use InvalidArgumentException;
  */
 class ProgramInappropriateReport
 {
-  const STATUS_NEW = 1;
-  const STATUS_REJECTED = 2;
-  const STATUS_ACCEPTED = 3;
+  public const STATUS_NEW = 1;
+  public const STATUS_REJECTED = 2;
+  public const STATUS_ACCEPTED = 3;
 
   /**
    * @ORM\Column(name="id", type="integer")
@@ -66,14 +66,19 @@ class ProgramInappropriateReport
   private int $projectVersion;
 
   /**
+   * @ORM\ManyToOne(targetEntity="\App\Entity\User", inversedBy="program_inappropriate_reports")
+   * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+   */
+  private ?User $reportedUser;
+
+  /**
    * @ORM\PrePersist
    *
    * @throws Exception
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getTime())
-    {
+    if (null === $this->getTime()) {
       $this->setTime(TimeUtils::getDateTime());
     }
   }
@@ -83,8 +88,7 @@ class ProgramInappropriateReport
    */
   public function updateState(): void
   {
-    if (null === $this->getState())
-    {
+    if (null === $this->getState()) {
       $this->setState(self::STATUS_NEW);
     }
   }
@@ -114,6 +118,18 @@ class ProgramInappropriateReport
     return $this->reportingUser;
   }
 
+  public function setReportedUser(?User $reportedUser): ProgramInappropriateReport
+  {
+    $this->reportedUser = $reportedUser;
+
+    return $this;
+  }
+
+  public function getReportedUser(): ?User
+  {
+    return $this->reportedUser;
+  }
+
   public function setCategory(string $category): ProgramInappropriateReport
   {
     $this->category = $category;
@@ -133,7 +149,7 @@ class ProgramInappropriateReport
     return $this;
   }
 
-  public function getNote(): string
+  public function getNote(): ?string
   {
     return $this->note;
   }
@@ -155,8 +171,7 @@ class ProgramInappropriateReport
    */
   public function setState(int $state): ProgramInappropriateReport
   {
-    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true))
-    {
+    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true)) {
       throw new InvalidArgumentException('Invalid state');
     }
     $this->state = $state;

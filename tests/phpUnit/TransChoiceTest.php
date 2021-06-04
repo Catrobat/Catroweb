@@ -19,7 +19,7 @@ class TransChoiceTest extends TestCase
   /**
    * @var string
    */
-  const LANGUAGE_DIR = './translations/';
+  public const LANGUAGE_DIR = './translations/';
 
   /**
    * @test
@@ -27,8 +27,7 @@ class TransChoiceTest extends TestCase
    */
   public function allTransChoiceEntriesShouldHaveACorrectSyntax(TranslatorInterface $translator, string $language_code, array $message_ids): void
   {
-    foreach ($message_ids as $message_id)
-    {
+    foreach ($message_ids as $message_id) {
       $translator->trans($message_id, ['%count%' => 1], 'catroweb', $language_code);
       $translator->trans($message_id, ['%count%' => 2], 'catroweb', $language_code);
       $translator->trans($message_id, ['%count%' => 10], 'catroweb', $language_code);
@@ -47,8 +46,7 @@ class TransChoiceTest extends TestCase
     $files = $finder->in($directory)->files();
     $language_codes = [];
     /** @var File $file */
-    foreach ($files as $file)
-    {
+    foreach ($files as $file) {
       $parts = explode('.', $file->getFilename());
       $language_codes[] = $parts[1];
       $translator->addResource('yaml', $file, $parts[1], 'catroweb');
@@ -63,8 +61,7 @@ class TransChoiceTest extends TestCase
     $message_ids = array_keys($messages['catroweb']);
 
     $data = [];
-    foreach ($language_codes as $language_code)
-    {
+    foreach ($language_codes as $language_code) {
       $data[] = [
         $translator,
         $language_code,

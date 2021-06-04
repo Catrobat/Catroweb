@@ -22,8 +22,7 @@ class BaseListStatement extends Statement
 
   public function execute(): string
   {
-    if (count(parent::getStatements()) < 1)
-    {
+    if (count(parent::getStatements()) < 1) {
       return '';
     }
 
@@ -34,8 +33,7 @@ class BaseListStatement extends Statement
   {
     $code = '';
     $spacesString = parent::addSpaces(1);
-    foreach ($this->statements as $value)
-    {
+    foreach ($this->statements as $value) {
       $code .= $spacesString.$value->execute().'<br/>';
     }
 

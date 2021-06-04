@@ -23,13 +23,13 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'media_package_category';
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Name'])
       ->add('package', EntityType::class, [
         'class' => MediaPackage::class,
@@ -40,24 +40,26 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
-      ->addIdentifier('name')
+    $list
+      ->addIdentifier('id')
+      ->add('name')
       ->add('package', EntityType::class, ['class' => MediaPackage::class])
+      ->add('priority')
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],

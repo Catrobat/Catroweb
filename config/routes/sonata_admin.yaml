@@ -11,7 +11,7 @@ sonata_user_admin_resetting:
     prefix: /admin/resetting
 
 sonata_user_admin_security_logout:
-    path: /{flavor}/logout
+    path: /{theme}/logout
     defaults: { _controller: "SonataUserBundle:AdminSecurity:logout" }
 
 admin:

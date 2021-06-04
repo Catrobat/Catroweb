@@ -16,6 +16,7 @@ services:
       - db.catroweb.dev
       - db.catroweb.test
       - chrome.catroweb
+      - elasticsearch
     ports:
       - 8080:80
     volumes:
@@ -38,12 +39,14 @@ services:
       #
       #
       - ./../config:/var/www/catroweb/config:cached
+      - ./../migrations:/var/www/catroweb/migrations:cached
       - ./../docker:/var/www/catroweb/docker:cached
       #
       # public: contains mainly generated files - no need to pollute the host with such files
       #         If needed, shared files should be explicitly defined:
       - ./../public/index.php:/var/www/catroweb/public/index.php:cached
       - ./../public/index_test.php:/var/www/catroweb/public/index_test.php:cached
+      - ./../public/build:/var/www/catroweb/public/build
       #
       - ./../src:/var/www/catroweb/src:cached
       - ./../templates:/var/www/catroweb/templates:cached
@@ -85,6 +88,8 @@ services:
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock
+      - ./../webpack.config.js:/var/www/catroweb/webpack.config.js
+      - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
 
       # Sharing npm package files is not working (at least on windows) - feel free to try it out on any other OS
 #      - ./../package.json:/var/www/catroweb/package.json
@@ -110,7 +115,7 @@ services:
     volumes:
       - ./../tests/testdata/DataFixtures:/var/www/catroweb/tests/testdata/DataFixtures:ro
       - ./../tests/testdata/UploadDownloadTemp:/var/www/catroweb/tests/testdata/UploadDownloadTemp
-    command: ["chromium-browser", "--headless", "--disable-gpu", "--no-sandbox", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222"]
+    command: ["chromium-browser", "--disable-gpu", "--headless", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222", "--disable-extensions", "--no-sandbox"]
     ports:
       - 9222
 
@@ -143,3 +148,26 @@ services:
     depends_on:
       - db.catroweb.dev
       - db.catroweb.test
+
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.9
+    container_name: elasticsearch
+    environment:
+      - cluster.name=docker-cluster
+      - transport.host=localhost
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    volumes:
+      - esdata1:/usr/share/elasticsearch/data
+    ports:
+      - 9200:9200
+
+volumes:
+  esdata1:
+    driver: local

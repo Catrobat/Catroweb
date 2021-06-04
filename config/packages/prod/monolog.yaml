@@ -6,12 +6,14 @@ monolog:
       type:  fingers_crossed
       action_level: error
       handler: nested
-      # ToDo: Starting with Symfony 4.1 we can filter specific http for specific paths
-      # excluded_http_codes: [{404: ['^/program', '^/user']}]
+      # Here we can filter http codes for specific paths
+      excluded_http_codes: [{404: ['^/resources/extract']}]
+      formatter: monolog.formatter.catrobat_custom_formatter
+
     nested:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
-      level: info
+      level: error
       max_files: 60
 
     upload:
@@ -20,6 +22,7 @@ monolog:
       level: warning
       max_files: 60
       channels: [upload]
+      formatter: monolog.formatter.catrobat_custom_formatter
 
     download_stats:
       type: rotating_file
@@ -27,6 +30,7 @@ monolog:
       level: debug
       max_files: 60
       channels: [download_stats]
+      formatter: monolog.formatter.catrobat_custom_formatter
 
     console:
       type: console

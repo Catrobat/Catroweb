@@ -26,12 +26,10 @@ class LookStatement extends Statement
 
     $code = '';
 
-    if (null !== $this->value)
-    {
+    if (null !== $this->value) {
       $code = SyntaxHighlightingConstants::VARIABLES.$this->value.SyntaxHighlightingConstants::END;
     }
-    if (null !== $this->fileName)
-    {
+    if (null !== $this->fileName) {
       $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
@@ -57,10 +55,8 @@ class LookStatement extends Statement
   private function findNames(): void
   {
     $tmpStatements = parent::getStatements();
-    foreach ($tmpStatements as $statement)
-    {
-      if (null != $statement && $statement instanceof FileNameStatement)
-      {
+    foreach ($tmpStatements as $statement) {
+      if (null != $statement && $statement instanceof FileNameStatement) {
         $this->fileName = $statement;
       }
     }

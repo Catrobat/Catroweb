@@ -54,7 +54,7 @@ class LikeNotification extends CatroNotification
    */
   public function __construct(User $user, User $like_from, Program $program)
   {
-    parent::__construct($user);
+    parent::__construct($user, '', '', 'reaction');
     $this->like_from = $like_from;
     $this->program = $program;
   }

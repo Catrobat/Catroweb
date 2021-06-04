@@ -100,8 +100,8 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           .replace(/([A-Za-z])([0-9])/g, '$1​$2') // insert zero-width space between letters and numbers
           .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
         mediafileContainer.append($('<div class="name" />').text(name))
-        mediafileContainer.append($('<div class="checkbox fas fa-check-circle" />'))
-        mediafileContainer.addClass('showName')
+        mediafileContainer.append($('<i class="checkbox material-icons">check_circle</i>'))
+        mediafileContainer.addClass('show-name')
 
         const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
         let audio, previewBtn, image
@@ -139,21 +139,22 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           case 'wav':
           case 'xm':
             mediafileContainer.attr('data-filetype', 'audio')
-            mediafileContainer.append($('<i class="fas fa-file-audio"/>'))
+            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+            mediafileContainer.append($('<i class="media-file-type material-icons">volume_up</i>'))
             audio = new Audio(file.download_url)
-            previewBtn = $('<div class="audio-control fas fa-play" />')
+            previewBtn = $('<i class="audio-control material-icons">play_arrow</i>')
             previewBtn.click(function () {
               if (audio.paused) {
-                previewBtn.removeClass('fa-play').addClass('fa-pause')
+                previewBtn.text('pause')
                 audio.play()
               } else {
-                previewBtn.removeClass('fa-pause').addClass('fa-play')
+                previewBtn.text('play_arrow')
                 audio.pause()
               }
               return false
             })
             audio.onended = function () {
-              previewBtn.removeClass('fa-pause').addClass('fa-play')
+              previewBtn.text('play_arrow')
             }
 
             mediafileContainer.append(previewBtn)
@@ -198,39 +199,42 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           case 'movie':
           case 'smv':
             mediafileContainer.attr('data-filetype', 'video')
-            mediafileContainer.append($('<i class="fas fa-file-video"/>'))
+            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+            mediafileContainer.append($('<i class="media-file-type material-icons">videocam</i>'))
             break
           case 'pdf':
             mediafileContainer.attr('data-filetype', 'pdf')
-            mediafileContainer.append($('<i class="fas fa-file-pdf"/>'))
+            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+            mediafileContainer.append($('<i class="media-file-type material-icons">picture_as_pdf</i>'))
             break
           case 'txt':
           case 'rtx':
             mediafileContainer.attr('data-filetype', 'text')
-            mediafileContainer.append($('<i class="fas fa-file-alt"/>'))
+            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+            mediafileContainer.append($('<i class="media-file-type material-icons">view_headline</i>'))
             break
           case 'zip':
           case '7z':
             mediafileContainer.attr('data-filetype', 'archive')
-            mediafileContainer.append($('<i class="fas fa-file-archive"/>'))
+            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+            mediafileContainer.append($('<i class="media-file-type material-icons">folder</i>'))
             break
           default:
             image = $('<img alt="' + file.id + '" src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
             image.attr('title', file.name)
             image.attr('alt', file.name)
             image.on('error', function () {
-              mediafileContainer.addClass('showName')
+              mediafileContainer.addClass('show-name')
 
               const pictureExtensions = ['bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu', 'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx', 'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd']
               image.remove()
 
               if (pictureExtensions.indexOf(file.extension) !== -1) {
-                mediafileContainer.prepend($('<i class="fas fa-file-image"/>'))
-              } else {
-                mediafileContainer.prepend($('<i class="fas fa-file"/>'))
+                mediafileContainer.prepend($('<i class="media-file-type material-icons">photo</i>'))
               }
+              mediafileContainer.prepend($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
             })
-            mediafileContainer.removeClass('showName')
+            mediafileContainer.removeClass('show-name')
             mediafileContainer.append(image)
             break
         }

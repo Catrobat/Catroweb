@@ -5,6 +5,9 @@ namespace App\Catrobat\Services\TestEnv\DataFixtures;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Utils\MyUuidGenerator;
+use App\Utils\TimeUtils;
+use DateTime;
+use Exception;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -29,8 +32,7 @@ class UserDataFixtures
 
   public function insertUser(array $config = [], bool $andFlush = true): User
   {
-    if (array_key_exists('id', $config))
-    {
+    if (array_key_exists('id', $config)) {
       // use a fixed ID
       MyUuidGenerator::setNextValue($config['id']);
     }
@@ -42,12 +44,13 @@ class UserDataFixtures
     $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
     $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
     $user->setPlainPassword($config['password'] ?? '123456');
-    $user->setUploadToken($config['token'] ?? 'default_token');
+    $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) ? 'true' === $config['admin'] : false);
     $user->setAdditionalEmail($config['additional_email'] ?? '');
     $user->setEnabled(isset($config['enabled']) ? 'true' === $config['enabled'] : true);
     $user->setCountry($config['country'] ?? 'at');
     $user->addRole($config['role'] ?? 'ROLE_USER');
+    $user->setOauthUser(isset($config['oauth_user']) ? 'true' === $config['oauth_user'] : false);
     $this->user_manager->updateUser($user, $andFlush);
 
     return $user;
@@ -60,43 +63,35 @@ class UserDataFixtures
 
     Assert::assertNotNull($user);
 
-    if (isset($config['name']))
-    {
+    if (isset($config['name'])) {
       Assert::assertEquals($user->getUsername(), $config['name'],
         'Name wrong'.$config['name'].'expected, but '.$user->getUsername().' found.');
     }
-    if (isset($config['email']))
-    {
+    if (isset($config['email'])) {
       Assert::assertEquals($user->getEmail(), $config['email'],
         'E-Mail wrong'.$config['email'].'expected, but '.$user->getEmail().' found.');
     }
-    if (isset($config['email']))
-    {
+    if (isset($config['email'])) {
       Assert::assertEquals($user->getCountry(), $config['country'],
         'Country wrong'.$config['country'].'expected, but '.$user->getCountry().' found.');
     }
-    if (isset($config['token']))
-    {
+    if (isset($config['token'])) {
       Assert::assertEquals($user->getUploadToken(), $config['token'], 'Token Invalid');
     }
-    if (isset($config['enabled']))
-    {
+    if (isset($config['enabled'])) {
       Assert::assertEquals($user->isEnabled(), 'true' === $config['enabled'], 'Token Invalid');
     }
-    if (isset($config['google_uid']))
-    {
+    if (isset($config['google_uid'])) {
       Assert::assertEquals($user->getGplusUid(), $config['google_uid'], 'Google UID wrong');
     }
-    if (isset($config['google_name']))
-    {
+    if (isset($config['google_name'])) {
       Assert::assertEquals($user->getGplusName(), $config['google_name'], 'Google name wrong');
     }
   }
 
   public function getDefaultUser(): User
   {
-    if (null === UserDataFixtures::$default_user)
-    {
+    if (null === UserDataFixtures::$default_user) {
       UserDataFixtures::$default_user = $this->insertUser([]);
     }
 
@@ -127,11 +122,14 @@ class UserDataFixtures
     UserDataFixtures::$current_user = null;
   }
 
-  public function createdAt(array $config = []): void
+  /**
+   * @throws Exception
+   */
+  public function overwriteCreatedAt(array $config = []): void
   {
     /** @var User $user */
     $user = $this->user_manager->findUserByUsername($config['name']);
-    $date = date_create($config['created_at']) ?? date_create($config['created_at'] ?? 'last Monday');
+    $date = isset($config['created_at']) ? new DateTime($config['created_at']) : TimeUtils::getDateTime();
     $user->changeCreatedAt($date);
     $this->user_manager->updateUser($user, true);
   }

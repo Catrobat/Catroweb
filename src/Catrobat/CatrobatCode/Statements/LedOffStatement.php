@@ -7,11 +7,11 @@ class LedOffStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'led off';
+  public const BEGIN_STRING = 'led off';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * LedOffStatement constructor.

@@ -8,7 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Services\TokenGenerator
  */
 class TokenGeneratorTest extends TestCase
 {
@@ -33,8 +33,7 @@ class TokenGeneratorTest extends TestCase
   public function testGeneratesADifferentTokenEachTime(): void
   {
     $generated_tokens = [];
-    for ($i = 0; $i < 100; ++$i)
-    {
+    for ($i = 0; $i < 100; ++$i) {
       $generated_token = $this->token_generator->generateToken();
       $generated_tokens[] = $generated_token;
     }
@@ -50,8 +49,7 @@ class TokenGeneratorTest extends TestCase
   public function getMatchers(): array
   {
     return [
-      'haveLength' => function ($subject, $key)
-      {
+      'haveLength' => function ($subject, $key) {
         return strlen($subject) === $key;
       },
     ];

@@ -18,6 +18,7 @@ Feature: Searching for programs with extensions
       | 1  | project 1 | Catrobat | Lego,Phiro |
       | 2  | project 2 | Catrobat | Lego,Drone |
       | 3  | project 3 | User1    | Drone      |
+    And I wait 1000 milliseconds
 
   Scenario: Searching other programs with the same extensions
     Given I am on "/app/project/1"

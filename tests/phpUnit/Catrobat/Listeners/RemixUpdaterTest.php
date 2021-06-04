@@ -11,6 +11,7 @@ use App\Entity\RemixManager;
 use App\Entity\User;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
+use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +22,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Listeners\RemixUpdater
  */
 class RemixUpdaterTest extends TestCase
 {
@@ -51,8 +52,8 @@ class RemixUpdaterTest extends TestCase
 
     $route_map = [
       // It is important to explicitly define all optional parameters!
-      ['program', ['id' => '3571', 'flavor' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
-      ['program', ['id' => '3572', 'flavor' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
+      ['program', ['id' => '3571', 'theme' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3571'],
+      ['program', ['id' => '3572', 'theme' => 'pocketcode'], UrlGeneratorInterface::ABSOLUTE_PATH, 'http://share.catrob.at/details/3572'],
     ];
 
     $router
@@ -142,6 +143,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -157,7 +159,11 @@ class RemixUpdaterTest extends TestCase
     $xml->header->catrobatLanguageVersion = '0.993';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+
+    $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
@@ -180,8 +186,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchPrograms')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info)
-      {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(2, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -199,6 +204,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -213,7 +219,11 @@ class RemixUpdaterTest extends TestCase
     $xml->header->catrobatLanguageVersion = '0.992';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+
+    $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
@@ -236,6 +246,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -252,7 +263,11 @@ class RemixUpdaterTest extends TestCase
     $xml->header->catrobatLanguageVersion = '0.993';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
+
+    $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
@@ -271,8 +286,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchPrograms')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info)
-      {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -285,6 +299,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -303,7 +318,11 @@ class RemixUpdaterTest extends TestCase
     ]];
     $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     $xml->header->catrobatLanguageVersion = '0.993';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+
+    $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
@@ -320,8 +339,7 @@ class RemixUpdaterTest extends TestCase
       ;
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')
-      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url)
-      {
+      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url) {
         $this->assertEquals($this->program_entity, $project);
 
         $this->assertCount(2, $remixes_data);
@@ -346,8 +364,7 @@ class RemixUpdaterTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchPrograms')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info)
-      {
+      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
@@ -357,6 +374,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -364,10 +382,8 @@ class RemixUpdaterTest extends TestCase
   {
     $current_url = 'http://share.catrob.at/details/3570';
     $new_url = 'http://share.catrob.at/details/3571';
-    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    $xml->header->url = $current_url;
-    $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
+
+    $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
@@ -379,6 +395,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -387,10 +404,8 @@ class RemixUpdaterTest extends TestCase
     $expected_scratch_program_id = '70058680';
     $current_url = 'https://scratch.mit.edu/projects/'.$expected_scratch_program_id;
     $new_url = 'http://share.catrob.at/details/3571';
-    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    $xml->header->url = $current_url;
-    $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
+
+    $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
@@ -411,6 +426,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
@@ -425,7 +441,12 @@ class RemixUpdaterTest extends TestCase
     $xml->header->catrobatLanguageVersion = '0.993';
     $xml->header->url = $current_url;
     $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+
+    $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
+
     $this->async_http_client
       ->expects($this->atLeastOnce())
       ->method('fetchScratchProgramDetails')->with($this->isType('array'))
@@ -450,16 +471,14 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
+   * @throws Exception
    * @throws ORMException
    * @throws OptimisticLockException
    */
   public function testUpdateTheRemixOfOfTheEntity(): void
   {
     $current_url = 'http://share.catrob.at/details/3570';
-    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
-    $xml->header->url = $current_url;
-    $xml->header->remixOf = '';
-    $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
@@ -467,5 +486,22 @@ class RemixUpdaterTest extends TestCase
     $this->remix_updater->update($file, $this->program_entity);
     $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     Assert::assertEquals($xml->header->userHandle, 'catroweb');
+  }
+
+  /**
+   * @throws Exception
+   */
+  private function getBaseXmlWithUrl(string $url): string
+  {
+    $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
+    $xml->header->url = $url;
+    $xml->header->remixOf = '';
+
+    $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
+
+    return $xml;
   }
 }

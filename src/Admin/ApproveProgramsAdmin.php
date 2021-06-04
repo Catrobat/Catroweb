@@ -8,7 +8,6 @@ use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -16,12 +15,15 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\AdminBundle\Show\ShowMapper;
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class ApproveProgramsAdmin extends AbstractAdmin
 {
+  use ProgramsTrait;
+
   /**
    * @var string
    */
@@ -57,49 +59,17 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
-   */
-  public function preUpdate($program): void
-  {
-    /** @var ModelManager $model_manager */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())->getUnitOfWork()
-      ->getOriginalEntityData($program)
-    ;
-
-    if (false == $old_program['approved'] && true == $program->getApproved())
-    {
-      /** @var User $user */
-      $user = $this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser();
-      $program->setApprovedByUser($user);
-      $this->getModelManager()->update($program);
-    }
-    elseif (true == $old_program['approved'] && false == $program->getApproved())
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
-  }
-
-  /**
    * @param mixed|Program $object
-   *
-   * @return string
    */
-  public function getThumbnailImageUrl($object)
+  public function getThumbnailImageUrl($object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
   /**
    * @param mixed $object
-   *
-   * @return array
    */
-  public function getContainingImageUrls($object)
+  public function getContainingImageUrls($object): array
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
@@ -107,14 +77,12 @@ class ApproveProgramsAdmin extends AbstractAdmin
      * @var $object Program
      */
 
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       return [];
     }
 
@@ -125,10 +93,8 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   /**
    * @param mixed $object
-   *
-   * @return array
    */
-  public function getContainingSoundUrls($object)
+  public function getContainingSoundUrls($object): array
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
@@ -136,15 +102,13 @@ class ApproveProgramsAdmin extends AbstractAdmin
      * @var $object Program
      */
 
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       return [];
     }
 
@@ -153,19 +117,15 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   /**
    * @param mixed|Program $object
-   *
-   * @return array
    */
-  public function getContainingStrings($object)
+  public function getContainingStrings($object): array
   {
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       return [];
     }
 
@@ -174,20 +134,16 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   /**
    * @param mixed|Program $object
-   *
-   * @return array
    */
-  public function getContainingCodeObjects($object)
+  public function getContainingCodeObjects($object): array
   {
-    if (null == $this->extractedProgram)
-    {
+    if (null == $this->extractedProgram) {
       $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
         $this->program_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes())
-    {
+    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes()) {
       return [];
     }
 
@@ -196,30 +152,22 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
+    /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
-    {
-      return $query;
-    }
-
-    /** @var QueryBuilder $qb */
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
       $qb->expr()->eq($qb->getRootAliases()[0].'.approved', $qb->expr()->literal(false))
     );
-    $qb->andWhere(
-      $qb->expr()->eq($qb->getRootAliases()[0].'.visible', $qb->expr()->literal(true))
-    );
 
     return $query;
   }
 
-  protected function configureShowFields(ShowMapper $showMapper): void
+  protected function configureShowFields(ShowMapper $show): void
   {
-    // Here we set the fields of the ShowMapper variable, $showMapper (but this can be called anything)
-    $showMapper
+    // Here we set the fields of the ShowMapper variable, $show (but this can be called anything)
+    $show
       /*
        * The default option is to just display the value as text (for boolean this will be 1 or 0)
        */
@@ -240,52 +188,55 @@ class ApproveProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Program name'])
       ->add('user', EntityType::class, ['class' => User::class])
     ;
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
+      ->add('id')
       ->add('name')
-      ->add('user.username')
+      ->add('user.username', null, ['label' => 'User'])
+      ->add('uploaded_at', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class,
+        'label' => 'Upload Time', ])
     ;
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
-      ->addIdentifier('id')
+    $list
+      ->add('uploaded_at', null, ['label' => 'Upload Time'])
+      ->add('id', null, ['sortable' => false])
       ->add('user')
-      ->add('name')
-      ->add('description')
-      ->add('visible', 'boolean', ['editable' => true])
-      ->add('approved', 'boolean', ['editable' => true])
+      ->addIdentifier('name')
+      ->add('visible', 'boolean', ['editable' => true, 'sortable' => false])
+      ->add('approved', 'boolean', ['editable' => true, 'sortable' => false])
       ->add('_action', 'actions', ['actions' => ['show' => []]])
     ;
   }
 
   protected function configureRoutes(RouteCollection $collection): void
   {
-    $collection->remove('create')->remove('delete')->remove('edit');
+    $collection->remove('create')->remove('delete');
     $collection
       ->add('approve', $this->getRouterIdParameter().'/approve')
       ->add('invisible', $this->getRouterIdParameter().'/invisible')
@@ -295,14 +246,11 @@ class ApproveProgramsAdmin extends AbstractAdmin
 
   /**
    * @param mixed $paths
-   *
-   * @return array
    */
-  private function encodeFileNameOfPathsArray($paths)
+  private function encodeFileNameOfPathsArray($paths): array
   {
     $encoded_paths = [];
-    foreach ($paths as $path)
-    {
+    foreach ($paths as $path) {
       $pieces = explode('/', $path);
       $filename = array_pop($pieces);
       $pieces[] = rawurlencode($filename);

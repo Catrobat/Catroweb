@@ -22,8 +22,7 @@ class MyUuidGenerator extends UuidGenerator
   {
     $app_env = $_ENV['APP_ENV'];
 
-    if ('test' === $app_env && '' !== MyUuidGenerator::$next_value)
-    {
+    if ('test' === $app_env && '' !== MyUuidGenerator::$next_value) {
       $new_uuid = MyUuidGenerator::$next_value;
       MyUuidGenerator::$next_value = '';
 

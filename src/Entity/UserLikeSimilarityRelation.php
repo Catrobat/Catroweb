@@ -19,7 +19,7 @@ class UserLikeSimilarityRelation
    * -----------------------------------------------------------------------------------------------------------------
    * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
    *
-   * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
+   * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
 
@@ -73,8 +73,7 @@ class UserLikeSimilarityRelation
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt())
-    {
+    if (null === $this->getCreatedAt()) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }

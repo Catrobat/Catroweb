@@ -14,10 +14,9 @@
 }
 
 @mixin force-word-break() {
-  word-wrap: break-word;
-  overflow-wrap: break-word;
-
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }

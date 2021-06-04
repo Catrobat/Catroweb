@@ -7,21 +7,18 @@
 @font-face {
   font-family: "Material Icons";
   font-style: normal;
+  font-display: block;
   font-weight: 400;
   src: url("../fonts/MaterialIcons-Regular.eot"); /* For IE6-8 */
-  src: local("Material Icons"),
-  local("MaterialIcons-Regular"),
-  url("../fonts/MaterialIcons-Regular.woff2") format("woff2"),
-  url("../fonts/MaterialIcons-Regular.woff") format("woff"),
-  url("../fonts/MaterialIcons-Regular.ttf") format("truetype");
+  src: local("Material Icons"), local("MaterialIcons-Regular"), url("../fonts/MaterialIcons-Regular.woff2") format("woff2"), url("../fonts/MaterialIcons-Regular.woff") format("woff"), url("../fonts/MaterialIcons-Regular.ttf") format("truetype");
 }
 
 .material-icons {
   display: inline-block;
-  font-family: "Material Icons";
+  font-family: "Material Icons", $font-family-sans-serif, sans-serif;
   font-size: 24px;
   font-style: normal;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   line-height: 1;
   text-transform: none;
   letter-spacing: normal;
@@ -46,44 +43,29 @@
 // --
 
 @font-face {
-  font-family: "Roboto";
+  font-family: Roboto;
   font-style: normal;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   src: url("../fonts/Roboto-Regular-webfont.eot");
-  src: local("Roboto Regular"),
-  local("Roboto-Regular"),
-  url("../fonts/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../fonts/Roboto-Regular-webfont.woff") format("woff"),
-  url("../fonts/Roboto-Regular-webfont.ttf") format("truetype"),
-  url("../fonts/Roboto-Regular-webfont.svg#RobotoRegular") format("svg");
+  src: local("Roboto Regular"), local("Roboto-Regular"), url("../fonts/Roboto-Regular-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Regular-webfont.woff2") format("woff2"), url("../fonts/Roboto-Regular-webfont.woff") format("woff"), url("../fonts/Roboto-Regular-webfont.ttf") format("truetype"), url("../fonts/Roboto-Regular-webfont.svg#RobotoRegular") format("svg");
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
+  font-family: Roboto;
   font-style: italic;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   src: url("../fonts/Roboto-Italic-webfont.eot");
-  src: local("Roboto Italic"),
-  local("Roboto-Italic"),
-  url("../fonts/Roboto-Italic-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../fonts/Roboto-Italic-webfont.woff") format("woff"),
-  url("../fonts/Roboto-Italic-webfont.ttf") format("truetype"),
-  url("../fonts/Roboto-Italic-webfont.svg#RobotoItalic") format("svg");
+  src: local("Roboto Italic"), local("Roboto-Italic"), url("../fonts/Roboto-Italic-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Italic-webfont.woff2") format("woff2"), url("../fonts/Roboto-Italic-webfont.woff") format("woff"), url("../fonts/Roboto-Italic-webfont.ttf") format("truetype"), url("../fonts/Roboto-Italic-webfont.svg#RobotoItalic") format("svg");
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Roboto";
+  font-family: Roboto;
   font-style: normal;
-  font-weight: bold;
+  font-weight: $font-weight-bold;
   src: url("../fonts/Roboto-Bold-webfont.eot");
-  src: local("Roboto Bold"),
-  local("Roboto-Bold"),
-  url("../fonts/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../fonts/Roboto-Bold-webfont.woff") format("woff"),
-  url("../fonts/Roboto-Bold-webfont.ttf") format("truetype"),
-  url("../fonts/Roboto-Bold-webfont.svg#RobotoBold") format("svg");
+  src: local("Roboto Bold"), local("Roboto-Bold"), url("../fonts/Roboto-Bold-webfont.eot?#iefix") format("embedded-opentype"), url("../fonts/Roboto-Bold-webfont.woff2") format("woff2"), url("../fonts/Roboto-Bold-webfont.woff") format("woff"), url("../fonts/Roboto-Bold-webfont.ttf") format("truetype"), url("../fonts/Roboto-Bold-webfont.svg#RobotoBold") format("svg");
   font-display: swap;
 }
 
@@ -111,14 +93,14 @@ h1,
 h2,
 .h2 {
   font-size: 1.375rem;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   letter-spacing: -0.5px;
 }
 
 h3,
 .h3 {
   font-size: 1.25rem;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   letter-spacing: 0;
 }
 
@@ -174,7 +156,7 @@ h6,
 }
 
 .text-bold {
-  font-weight: bold;
+  font-weight: $font-weight-bold;
 }
 
 .text-center {
@@ -187,4 +169,10 @@ h6,
 
 .force-word-break {
   @include force-word-break();
+}
+
+.no-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

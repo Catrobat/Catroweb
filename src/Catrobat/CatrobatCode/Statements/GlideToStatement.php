@@ -7,11 +7,11 @@ class GlideToStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'glide (';
+  public const BEGIN_STRING = 'glide (';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * GlideToStatement constructor.
@@ -33,12 +33,9 @@ class GlideToStatement extends Statement
     $formula_y_dest = '';
     $formula_duration = '';
 
-    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
-    {
-      if ($statement instanceof FormulaStatement)
-      {
-        switch ($statement->getCategory())
-        {
+    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
+      if ($statement instanceof FormulaStatement) {
+        switch ($statement->getCategory()) {
           case 'Y_DESTINATION':
             $formula_y_dest = $statement->execute();
             break;

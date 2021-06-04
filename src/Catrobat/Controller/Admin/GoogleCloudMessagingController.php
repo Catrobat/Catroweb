@@ -15,8 +15,7 @@ class GoogleCloudMessagingController extends CRUDController
 
   public function sendAction(): Response
   {
-    if (!isset($_GET['a']) || !isset($_GET['m']))
-    {
+    if (!isset($_GET['a']) || !isset($_GET['m'])) {
       return new Response('Error: Invalid parameters');
     }
     $apikey = htmlentities($_GET['a']);
@@ -33,12 +32,10 @@ class GoogleCloudMessagingController extends CRUDController
     ];
     $context = stream_context_create($options);
     $result = @file_get_contents($url, false, $context);
-    if (!$result)
-    {
+    if (!$result) {
       return new Response('Error: Invalid response or API key');
     }
-    if (strpos($result, '"message_id":') > 0)
-    {
+    if (strpos($result, '"message_id":') > 0) {
       return new Response('OK');
     }
 

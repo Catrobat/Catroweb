@@ -7,15 +7,15 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'insert item into userlist ';
+  public const BEGIN_STRING = 'insert item into userlist ';
   /**
    * @var string
    */
-  const MIDDLE_STRING = '(';
+  public const MIDDLE_STRING = '(';
   /**
    * @var string
    */
-  const END_STRING = ')<br/>';
+  public const END_STRING = ')<br/>';
 
   /**
    * InsertItemIntoUserListStatement constructor.
@@ -38,16 +38,11 @@ class InsertItemIntoUserListStatement extends BaseUserListStatement
     $formula_string_index = null;
     $formula_string_value = null;
 
-    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
-    {
-      if ($statement instanceof FormulaStatement)
-      {
-        if ('INSERT_ITEM_INTO_USERLIST_INDEX' === $statement->getCategory())
-        {
+    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
+      if ($statement instanceof FormulaStatement) {
+        if ('INSERT_ITEM_INTO_USERLIST_INDEX' === $statement->getCategory()) {
           $formula_string_index = $statement->execute();
-        }
-        else
-        {
+        } else {
           $formula_string_value = $statement->execute();
         }
       }

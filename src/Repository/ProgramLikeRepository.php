@@ -75,7 +75,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
     return $qb
       ->select('l')
-      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program'))
+      ->innerJoin(Program::class, 'p', Join::WITH, $qb->expr()->eq('p.id', 'l.program')->__toString())
       ->where($qb->expr()->in('l.user_id', ':user_ids'))
       ->andWhere($qb->expr()->neq('IDENTITY(p.user)', ':exclude_user_id'))
       ->andWhere($qb->expr()->notIn('p.id', ':exclude_program_ids'))
@@ -97,8 +97,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
    */
   public function addLike(Program $project, User $user, int $type): void
   {
-    if ($this->likeExists($project, $user, $type))
-    {
+    if ($this->likeExists($project, $user, $type)) {
       // Like exists already, nothing to do.
       return;
     }
@@ -138,12 +137,9 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter(':type', $type)
     ;
 
-    try
-    {
+    try {
       $count = $qb->getQuery()->getSingleScalarResult();
-    }
-    catch (NonUniqueResultException $nonUniqueResultException)
-    {
+    } catch (NonUniqueResultException $nonUniqueResultException) {
       return false;
     }
 

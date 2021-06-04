@@ -25,7 +25,7 @@ function ProgramShare (themeDisplayName, checkOutProject, url, shareSuccess, sha
             showSnackbar('#share-snackbar', self.shareSuccess)
           })
         // eslint-disable-next-line handle-callback-err
-          .catch((error) => {
+          .catch(() => {
             showSnackbar('#share-snackbar', self.shareError)
           })
       })

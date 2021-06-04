@@ -21,19 +21,15 @@ class ScratchManager
   public function createScratchProgramFromId(int $id): ?Program
   {
     $program_arr = $this->async_http_client->fetchScratchProgramDetails([$id]);
-    if (null == $program_arr)
-    {
+    if (null == $program_arr) {
       return null;
     }
     $program_data = $program_arr[$id];
     /** @var Program|null $old_program */
     $old_program = $this->program_manager->findOneByScratchId($id);
-    if (null === $old_program)
-    {
+    if (null === $old_program) {
       $user = $this->user_manager->createUserFromScratch($program_data['author']);
-    }
-    else
-    {
+    } else {
       $user = $old_program->getUser();
     }
 

@@ -2,13 +2,12 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
-use App\Utils\APIQueryHelper;
 use App\Utils\Utils;
 use function Deployer\Support\str_contains;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Imagick;
 use ImagickDraw;
@@ -41,19 +40,13 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
     /** @var string $path Path where files in $dir can be accessed via web */
     $path = $parameter_bag->get('catrobat.mediapackage.path');
-    $dir = preg_replace('#([^/]+)$#', '$1/', $dir);
-    $path = preg_replace('#([^/]+)$#', '$1/', $path);
     $thumb_dir = $dir.'thumbs/';
-
-    if (!is_dir($dir))
-    {
-      throw new InvalidStorageDirectoryException($dir.' is not a valid directory');
+    if (!is_dir($thumb_dir)) {
+      mkdir($thumb_dir);
     }
 
-    if (!is_dir($thumb_dir) && !mkdir($thumb_dir))
-    {
-      throw new InvalidStorageDirectoryException($thumb_dir.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($dir);
+    Utils::verifyDirectoryExists($thumb_dir);
 
     $this->dir = $dir;
     $this->path = $path;
@@ -106,8 +99,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   public function moveFile(File $file, int $id, string $extension, bool $create_thumbnail = true): void
   {
     $file->move($this->dir, $this->generateFileNameFromId((string) $id, $extension));
-    if ($create_thumbnail)
-    {
+    if ($create_thumbnail) {
       $this->createThumbnail((string) $id, $extension);
     }
   }
@@ -128,8 +120,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   {
     $target = $this->dir.$this->generateFileNameFromId((string) $id, $extension);
     $this->filesystem->copy($file->getPathname(), $target);
-    if ($create_thumbnail)
-    {
+    if ($create_thumbnail) {
       $this->createThumbnail((string) $id, $extension);
     }
   }
@@ -144,14 +135,12 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   {
     $file_name = $this->generateFileNameFromId((string) $id, $extension);
     $path = $this->dir.$file_name;
-    if (is_file($path))
-    {
+    if (is_file($path)) {
       unlink($path);
     }
 
     $thumb = $this->thumb_dir.$file_name;
-    if (is_file($thumb))
-    {
+    if (is_file($thumb)) {
       unlink($thumb);
     }
   }
@@ -168,13 +157,11 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     $finder->files()->in($this->dir)->depth(0);
 
     /** @var \SplFileInfo $file */
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       $ext = 'catrobat' == $file->getExtension() ? 'png' : $file->getExtension();
       $basename = $file->getBasename('.'.$ext);
 
-      if (!is_file($this->thumb_dir.$basename.'.'.$ext))
-      {
+      if (!is_file($this->thumb_dir.$basename.'.'.$ext)) {
         $ignored_extensions = ['adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva',
           'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya', 'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip',
           'weba', 'aac', 'aif', 'caf', 'flac', 'mka', 'm3u', 'wax', 'wma', 'ram', 'rmp', 'wav',
@@ -182,8 +169,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
           'qt', 'uvh', 'uvm', 'uvp', 'uvs', 'uvv', 'dvb', 'fvt', 'mxu', 'pyv', 'uvu', 'viv',
           'webm', 'f4v', 'fli', 'flv', 'm4v', 'mkv', 'mng', 'asf', 'vob', 'wm', 'wmv', 'wmx',
           'wvx', 'avi', 'movie', 'smv', 'pdf', 'txt', 'rtx', 'zip', '7z', ];
-        if (!in_array($file->getExtension(), $ignored_extensions, true))
-        {
+        if (!in_array($file->getExtension(), $ignored_extensions, true)) {
           echo 'Create Thumbnail for '.$file->getFilename().PHP_EOL;
           $this->createThumbnail($basename, $ext);
         }
@@ -263,10 +249,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
-    APIQueryHelper::addFileFlavorsCondition($qb, $flavor, 'f', true);
+    $this->addFileFlavorsCondition($qb, $flavor, 'f', true);
 
-    if (null !== $package_name)
-    {
+    if (null !== $package_name && '' !== trim($package_name)) {
       $qb->join('App\Entity\MediaPackageCategory', 'c')
         ->join('App\Entity\MediaPackage', 'p')
         ->andWhere('f.category = c')
@@ -290,13 +275,11 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    */
   private function createThumbnail(string $id, string $file_extension): void
   {
-    try
-    {
+    try {
       $path = $this->dir.$this->generateFileNameFromId($id, $file_extension);
       $imagick = new Imagick();
 
-      if ('catrobat' == $file_extension)
-      {
+      if ('catrobat' == $file_extension) {
         // We are dealing with an media library "object" here. An "object" is basically a .catrobat file containing scenes, characters etc.
 
         // Searching screenshot in .catrobat file
@@ -304,30 +287,23 @@ class MediaPackageFileRepository extends ServiceEntityRepository
         $catrobat_archive->open($path);
 
         $screenshot_path_inside_archive = null;
-        for ($i = 0; $i < $catrobat_archive->numFiles; ++$i)
-        {
+        for ($i = 0; $i < $catrobat_archive->numFiles; ++$i) {
           $filename = $catrobat_archive->getNameIndex($i);
-          if (str_contains($filename, 'screenshot.png'))
-          {
+          if (str_contains($filename, 'screenshot.png')) {
             $screenshot_path_inside_archive = $filename;
             break;
           }
         }
 
-        if (null != $screenshot_path_inside_archive)
-        {
+        if (null != $screenshot_path_inside_archive) {
           // Getting the screenshot out of the .catrobat file
           $imagick->readImageBlob(file_get_contents('zip://'.$path.'#'.$screenshot_path_inside_archive));
           $thumbnail_extension = 'png'; // The automatic generated screenshots int the .catrobat file are png
-        }
-        else
-        {
+        } else {
           // We don't have a screenshot inside the archive, thus we don't have to create a thumb
           return;
         }
-      }
-      else
-      {
+      } else {
         $imagick->readImage(realpath($path));
         $thumbnail_extension = $file_extension;
       }
@@ -340,8 +316,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       $mean = $meanImg->getImageChannelMean(Imagick::CHANNEL_GRAY);
 
       $background = '#ffffff';
-      if ($mean['mean'] > 0xD000 && $mean['standardDeviation'] < 2_000)
-      {
+      if ($mean['mean'] > 0xD000 && $mean['standardDeviation'] < 2_000) {
         $background = '#888888';
       }
 
@@ -350,8 +325,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       $imagick->setImageFormat($thumbnail_extension);
       $imagick->thumbnailImage(200, 0);
 
-      if ('catrobat' == $file_extension)
-      {
+      if ('catrobat' == $file_extension) {
         // We want to annotate the thumbnail so that the user can recognize that the thubnail represents an
         // media library "object"
 
@@ -371,14 +345,11 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       }
 
       $imagick->writeImage($this->thumb_dir.$id.'.'.$thumbnail_extension);
-    }
-    catch (ImagickException $imagickException)
-    {
+    } catch (ImagickException $imagickException) {
       $code = $imagickException->getCode() % 100;
       // for error codes see: https://www.imagemagick.org/script/exception.php
       // allowed: 20 non-images/unknown type; 5 font unavailable (svg etc.)
-      if (20 !== $code && 5 !== $code)
-      {
+      if (20 !== $code && 5 !== $code) {
         throw $imagickException;
       }
     }
@@ -395,5 +366,22 @@ class MediaPackageFileRepository extends ServiceEntityRepository
   private function generateFileNameFromId(string $id, string $extension): string
   {
     return $id.'.'.$extension;
+  }
+
+  public function addFileFlavorsCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  {
+    if (null !== $flavor && '' !== trim($flavor)) {
+      $where = 'fl.name = :name';
+      if ($include_pocketcode) {
+        $where .= ' OR fl.name = \'pocketcode\'';
+      }
+      $query_builder
+        ->join($alias.'.flavors', 'fl')
+        ->andWhere($where)
+        ->setParameter('name', $flavor)
+      ;
+    }
+
+    return $query_builder;
   }
 }

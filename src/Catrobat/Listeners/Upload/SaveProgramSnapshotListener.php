@@ -7,6 +7,7 @@ use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Program;
 use App\Utils\TimeUtils;
 use Exception;
+use Psr\Log\LoggerInterface;
 
 class SaveProgramSnapshotListener
 {
@@ -14,32 +15,33 @@ class SaveProgramSnapshotListener
 
   private string $snapshot_dir;
 
-  public function __construct(ProgramFileRepository $file_repository, string $snapshot_dir)
+  private LoggerInterface $logger;
+
+  public function __construct(ProgramFileRepository $file_repository, string $snapshot_dir, LoggerInterface $logger)
   {
     $this->file_repository = $file_repository;
     $this->snapshot_dir = $snapshot_dir;
+    $this->logger = $logger;
   }
 
   public function handleEvent(ProgramAfterInsertEvent $event): void
   {
-    $this->saveProgramSnapshot($event->getProgramEntity());
+    $project = $event->getProgramEntity();
+
+    if ($project->isSnapshotsEnabled()) {
+      $this->saveProgramSnapshot($project);
+    }
+    $this->file_repository->deleteProjectZipFile($project->getId());
   }
 
   public function saveProgramSnapshot(Program $program): void
   {
-    if ($program->getUser()->isLimited())
-    {
-      $file = null;
-      try
-      {
-        $file = $this->file_repository->getProgramFile($program->getId());
-        $date = date('Y-m-d_H-i-s', TimeUtils::getTimestamp());
-        $file->move($this->snapshot_dir, $program->getId().'_'.$date.'.catrobat');
-      }
-      catch (Exception $exception)
-      {
-        return;
-      }
+    try {
+      $file = $this->file_repository->getProjectZipFile($program->getId());
+      $date = TimeUtils::getDateTime()->format('Y-m-d_H-i-s');
+      $file->move($this->snapshot_dir, $program->getId().'__'.$date.'.catrobat');
+    } catch (Exception $e) {
+      $this->logger->error($e->getCode().': Failed to create Snapshot on project update: '.$e->getMessage());
     }
   }
 }

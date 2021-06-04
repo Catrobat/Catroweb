@@ -57,26 +57,23 @@ class MediaPackageCategory
 
   public function __toString(): string
   {
-    if (count($this->package))
-    {
+    if (count($this->package)) {
       $string = $this->name.' (';
       $count = count($this->package);
 
-      for ($it = 0; $it < $count; ++$it)
-      {
+      for ($it = 0; $it < $count; ++$it) {
         $string .= $this->package[$it];
 
-        if ($it < ($count - 1))
-        {
+        if ($it < ($count - 1)) {
           $string .= ', ';
         }
       }
       $string .= ')';
 
-      return (string) $string;
+      return $string;
     }
 
-    return (string) $this->name;
+    return $this->name ?? '';
   }
 
   public function getId(): ?int
@@ -107,6 +104,17 @@ class MediaPackageCategory
   public function setPackage(Collection $package): void
   {
     $this->package = $package;
+  }
+
+  public function getPackageNames(): array
+  {
+    $return = [];
+    /** @var MediaPackage $media_package */
+    foreach ($this->getPackage() as $media_package) {
+      $return[] = $media_package->getName();
+    }
+
+    return $return;
   }
 
   public function getFiles(): Collection

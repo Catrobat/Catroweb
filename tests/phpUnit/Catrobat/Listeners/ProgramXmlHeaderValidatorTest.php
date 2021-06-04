@@ -10,7 +10,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Listeners\ProgramXmlHeaderValidator
  */
 class ProgramXmlHeaderValidatorTest extends TestCase
 {

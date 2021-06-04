@@ -9,11 +9,11 @@ use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
+use App\Entity\ClickStatistic;
 use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\Flavor;
-use App\Entity\GameJam;
 use App\Entity\Notification;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
@@ -29,8 +29,9 @@ use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
 use App\Entity\UserRemixSimilarityRelation;
-use App\Kernel;
+use App\Manager\AchievementManager;
 use App\Repository\CatroNotificationRepository;
+use App\Repository\CronJobRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FlavorRepository;
 use App\Repository\ProgramRemixBackwardRepository;
@@ -43,11 +44,11 @@ use App\Repository\UserRemixSimilarityRelationRepository;
 use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Symfony2Extension\Context\KernelDictionary;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
@@ -205,6 +206,16 @@ trait SymfonySupport
     return $this->kernel->getContainer()->get('router');
   }
 
+  public function getAchievementManager(): AchievementManager
+  {
+    return $this->kernel->getContainer()->get(AchievementManager::class);
+  }
+
+  public function getCronJobRepository(): CronJobRepository
+  {
+    return $this->kernel->getContainer()->get(CronJobRepository::class);
+  }
+
   /**
    * @return mixed
    */
@@ -228,54 +239,16 @@ trait SymfonySupport
 
   public function emptyDirectory(string $directory): void
   {
-    if (!is_dir($directory))
-    {
+    if (!is_dir($directory)) {
       return;
     }
     $filesystem = new Filesystem();
 
     $finder = new Finder();
     $finder->in($directory)->depth(0);
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       $filesystem->remove($file);
     }
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function insertDefaultGameJam(array $config = []): GameJam
-  {
-    $game_jam = new GameJam();
-    $game_jam->setName($config['name'] ?? 'pocketalice');
-    $game_jam->setHashtag($config['hashtag'] ?? null);
-
-    if (isset($config['flavor']) && 'no-flavor' !== $config['flavor'])
-    {
-      $game_jam->setFlavor($config['flavor']);
-    }
-    elseif (!isset($config['flavor']))
-    {
-      $game_jam->setFlavor('pocketalice');
-    }
-
-    $start_date = TimeUtils::getDateTime();
-    $start_date->sub(new DateInterval('P10D'));
-
-    $end_date = TimeUtils::getDateTime();
-
-    $end_date->add(new DateInterval('P10D'));
-
-    $game_jam->setStart($config['start'] ?? $start_date);
-    $game_jam->setEnd($config['end'] ?? $end_date);
-
-    $game_jam->setFormUrl($config['formurl'] ?? 'https://catrob.at/url/to/form');
-
-    $this->getManager()->persist($game_jam);
-    $this->getManager()->flush();
-
-    return $game_jam;
   }
 
   public function insertUser(array $config = [], bool $andFlush = true): User
@@ -301,8 +274,7 @@ trait SymfonySupport
     $relation = new UserLikeSimilarityRelation($first_user, $second_user, $config['similarity']);
 
     $this->getManager()->persist($relation);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -322,8 +294,7 @@ trait SymfonySupport
     $relation = new UserRemixSimilarityRelation($first_user, $second_user, $config['similarity']);
 
     $this->getManager()->persist($relation);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -347,8 +318,7 @@ trait SymfonySupport
     $program_like->setCreatedAt(new DateTime($config['created at'], new DateTimeZone('UTC')));
 
     $this->getManager()->persist($program_like);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -362,8 +332,7 @@ trait SymfonySupport
     $tag->setDe($config['de'] ?? null);
 
     $this->getManager()->persist($tag);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -377,8 +346,7 @@ trait SymfonySupport
     $extension->setPrefix($config['prefix']);
 
     $this->getManager()->persist($extension);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -396,8 +364,7 @@ trait SymfonySupport
     $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int) $config['depth']);
 
     $this->getManager()->persist($forward_relation);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -415,8 +382,7 @@ trait SymfonySupport
     $backward_relation = new ProgramRemixBackwardRelation($parent, $child);
 
     $this->getManager()->persist($backward_relation);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -434,8 +400,7 @@ trait SymfonySupport
     );
 
     $this->getManager()->persist($scratch_relation);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -455,27 +420,30 @@ trait SymfonySupport
     $featured_program = new FeaturedProgram();
 
     /* @var Program $program */
-    if (isset($config['program_id']))
-    {
+    if (isset($config['program_id'])) {
       $program = $this->getProgramManager()->find($config['program_id']);
       $featured_program->setProgram($program);
-    }
-    else
-    {
+    } else {
       $program = $this->getProgramManager()->findOneByName($config['name']);
       $featured_program->setProgram($program);
     }
 
+    /* @var Flavor $flavor */
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    if (null == $flavor) {
+      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $flavor = $this->insertFlavor($new_flavor);
+    }
+    $featured_program->setFlavor($flavor);
+
     $featured_program->setUrl($config['url'] ?? null);
     $featured_program->setImageType($config['imagetype'] ?? 'jpg');
     $featured_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
-    $featured_program->setFlavor($config['flavor'] ?? 'pocketcode');
     $featured_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $featured_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
     $this->getManager()->persist($featured_program);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -487,27 +455,29 @@ trait SymfonySupport
     $example_program = new ExampleProgram();
 
     /* @var Program $program */
-    if (isset($config['program_id']))
-    {
+    if (isset($config['program_id'])) {
       $program = $this->getProgramManager()->find($config['program_id']);
       $example_program->setProgram($program);
-    }
-    else
-    {
+    } else {
       $program = $this->getProgramManager()->findOneByName($config['name']);
       $example_program->setProgram($program);
     }
 
-    $example_program->setUrl($config['url'] ?? null);
+    /* @var Flavor $flavor */
+    $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
+    if (null == $flavor) {
+      $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
+      $flavor = $this->insertFlavor($new_flavor);
+    }
+    $example_program->setFlavor($flavor);
+
     $example_program->setImageType($config['imagetype'] ?? 'jpg');
     $example_program->setActive(isset($config['active']) ? (int) $config['active'] : true);
-    $example_program->setFlavor($config['flavor'] ?? 'pocketcode');
     $example_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
     $example_program->setForIos(isset($config['ios_only']) ? 'yes' === $config['ios_only'] : false);
 
     $this->getManager()->persist($example_program);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -526,28 +496,65 @@ trait SymfonySupport
     $user = $this->getUserManager()->find($config['user_id']);
 
     $new_comment = new UserComment();
-    $new_comment->setUploadDate(new DateTime($config['upload_date'], new DateTimeZone('UTC')));
+    $new_comment->setUploadDate(isset($config['upload_date']) ?
+      new DateTime($config['upload_date'], new DateTimeZone('UTC')) :
+      new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+    );
     $new_comment->setProgram($project);
     $new_comment->setUser($user);
-    $new_comment->setUsername($config['user_name']);
-    $new_comment->setIsReported($config['reported']);
+    $new_comment->setUsername($user->getUsername());
+    $new_comment->setIsReported(isset($config['reported']) ? $config['reported'] : false);
     $new_comment->setText($config['text']);
 
     $this->getManager()->persist($new_comment);
 
-    if (isset($config['id']))
-    {
+    if (isset($config['id'])) {
       // overwrite id if desired
       $new_comment->setId($config['id']);
       $this->getManager()->persist($new_comment);
     }
 
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
     return $new_comment;
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function insertClickStatistic(array $config, bool $andFlush = true): ClickStatistic
+  {
+    $click_statistics = new ClickStatistic();
+    $click_statistics->setType($config['type']);
+    $click_statistics->setUserAgent($config['user_agent']);
+    /** @var User $user */
+    $user = $this->getUserManager()->findUserByUsername($config['user']);
+    $click_statistics->setUser($user);
+    $click_statistics->setReferrer($config['referrer']);
+    $date = new DateTime($config['clicked_at']);
+    $click_statistics->setClickedAt($date);
+    $click_statistics->setLocale($config['locale']);
+    if ('tags' === $config['type']) {
+      $tag = $this->getTagRepository()->find($config['tag_id']);
+      $click_statistics->setTag($tag);
+    } elseif ('extensions' === $config['type']) {
+      $extension = $this->getExtensionRepository()->getExtensionByName($config['extension_name']);
+      $click_statistics->setExtension($extension[0]);
+    } else {     /** @var Program $recommended_from */
+      $recommended_from = $this->getProgramManager()->find($config['rec_from_id']);
+      $click_statistics->setRecommendedFromProgram($recommended_from);
+      $recommended_program = $this->getProgramManager()->find($config['rec_program_id']);
+      $click_statistics->setProgram($recommended_program);
+    }
+    $this->getManager()->persist($click_statistics);
+
+    if ($andFlush) {
+      $this->getManager()->flush();
+    }
+
+    return $click_statistics;
   }
 
   /**
@@ -569,8 +576,7 @@ trait SymfonySupport
     $new_report->setNote($config['note']);
     $this->getManager()->persist($new_report);
 
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -594,13 +600,11 @@ trait SymfonySupport
     $program_statistics->setUserAgent($config['user_agent'] ?? 'okhttp');
     $program_statistics->setReferrer($config['referrer'] ?? 'Facebook');
 
-    if (isset($config['username']))
-    {
+    if (isset($config['username'])) {
       $user_manager = $this->getUserManager();
       /** @var User|null $user */
       $user = $user_manager->findUserByUsername($config['username']);
-      if (null === $user)
-      {
+      if (null === $user) {
         $this->insertUser(['name' => $config['username']], false);
       }
       $program_statistics->setUser($user);
@@ -610,8 +614,7 @@ trait SymfonySupport
     $project->addProgramDownloads($program_statistics);
     $this->getManager()->persist($project);
 
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -630,8 +633,7 @@ trait SymfonySupport
     $notification->setUpload($config['upload']);
     $this->getManager()->persist($notification);
 
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 
@@ -639,8 +641,10 @@ trait SymfonySupport
   }
 
   /**
-   * @param mixed $is_embroidery
    * @param mixed $parameters
+   * @param mixed $is_embroidery
+   *
+   * @throws Exception
    */
   public function generateProgramFileWith($parameters, $is_embroidery = false): string
   {
@@ -648,20 +652,15 @@ trait SymfonySupport
     $this->emptyDirectory(sys_get_temp_dir().'/program_generated/');
     $new_program_dir = sys_get_temp_dir().'/program_generated/';
 
-    if ($is_embroidery)
-    {
+    if ($is_embroidery) {
       $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/embroidery', $new_program_dir);
-    }
-    else
-    {
+    } else {
       $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/base', $new_program_dir);
     }
     $properties = simplexml_load_file($new_program_dir.'/code.xml');
 
-    foreach ($parameters as $name => $value)
-    {
-      switch ($name)
-      {
+    foreach ($parameters as $name => $value) {
+      switch ($name) {
         case 'description':
           $properties->header->description = $value;
           break;
@@ -692,7 +691,11 @@ trait SymfonySupport
       }
     }
 
-    $properties->asXML($new_program_dir.'/code.xml');
+    $file_overwritten = $properties->asXML($new_program_dir.'/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
+
     $compressor = new CatrobatFileCompressor();
 
     return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
@@ -706,13 +709,15 @@ trait SymfonySupport
     return new UploadedFile($filepath, 'test.catrobat');
   }
 
+  /**
+   * @throws JsonException
+   */
   public function assertJsonRegex(string $pattern, string $json): void
   {
     // allows to compare strings using a regex wildcard (.*?)
     $pattern = json_encode(json_decode($pattern, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR); // reformat string
 
-    if (is_countable(json_decode($pattern)))
-    {
+    if (is_countable(json_decode($pattern))) {
       Assert::assertEquals(count(json_decode($pattern)), count(json_decode($json)));
     }
 
@@ -730,9 +735,9 @@ trait SymfonySupport
     $pattern = str_replace('REGEX_STRING_WILDCARD', '(.+?)', $pattern);
     $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
 
-    $delimter = '#';
+    $delimiter = '#';
     $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
-    Assert::assertMatchesRegularExpression($delimter.$pattern.$delimter, $json);
+    Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
   }
 
   public function insertFlavor(array $config = [], bool $andFlush = true): Flavor
@@ -741,8 +746,7 @@ trait SymfonySupport
     $flavor->setName($config['name']);
 
     $this->getManager()->persist($flavor);
-    if ($andFlush)
-    {
+    if ($andFlush) {
       $this->getManager()->flush();
     }
 

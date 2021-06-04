@@ -3,23 +3,22 @@
 namespace App\Admin;
 
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\Program;
 use App\Entity\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\BlockBundle\Meta\Metadata;
-use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AllProgramsAdmin extends AbstractAdmin
 {
+  use ProgramsTrait;
   /**
    * @var string
    */
@@ -59,67 +58,29 @@ class AllProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed $program
-   *
-   * @throws \Sonata\AdminBundle\Exception\ModelManagerException
+   * {@inheritdoc}
    */
-  public function preUpdate($program): void
-  {
-    /** @var Program $program */
-    /** @var ModelManager $model_manager */
-    $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())
-      ->getUnitOfWork()->getOriginalEntityData($program);
-
-    if (false == $old_program['approved'] && true == $program->getApproved())
-    {
-      /** @var User $user */
-      $user = $this->getConfigurationPool()->getContainer()
-        ->get('security.token_storage')->getToken()->getUser();
-      $program->setApprovedByUser($user);
-      $this->getModelManager()->update($program);
-    }
-    elseif (true == $old_program['approved'] && false == $program->getApproved())
-    {
-      $program->setApprovedByUser(null);
-      $this->getModelManager()->update($program);
-    }
-    $this->checkFlavor();
-  }
-
-  public function prePersist($object): void
-  {
-    $this->checkFlavor();
-  }
-
-  /**
-   * @param mixed $object
-   *
-   * @return Metadata
-   */
-  public function getObjectMetadata($object)
+  public function getObjectMetadata($object): MetadataInterface
   {
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
   }
 
   /**
    * @param mixed $object
-   *
-   * @return string
    */
-  public function getThumbnailImageUrl($object)
+  public function getThumbnailImageUrl($object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Program name'])
       ->add('description')
       ->add('user', EntityType::class, ['class' => User::class])
@@ -132,37 +93,38 @@ class AllProgramsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('id')
       ->add('name')
       ->add('user.username', null, ['label' => 'Username'])
       ->add('uploaded_at', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class,
         'label' => 'Upload Time', ])
       ->add('flavor')
+      ->add('approved')
+      ->add('visible')
     ;
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $flavor_options = $this->parameter_bag->get('themes');
+    $flavor_options = $this->parameter_bag->get('flavors');
 
     $choices = [];
-    foreach ($flavor_options as $flavor)
-    {
+    foreach ($flavor_options as $flavor) {
       $choices[$flavor] = $flavor;
     }
-    $listMapper
+    $list
       ->add('uploaded_at', null, ['label' => 'Upload Time'])
       ->add('user')
       ->addIdentifier('name', 'string', ['sortable' => false])
@@ -189,22 +151,5 @@ class AllProgramsAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('export');
-  }
-
-  private function checkFlavor(): void
-  {
-    $flavor = $this->getForm()->get('flavor')->getData();
-
-    if (!$flavor)
-    {
-      return; // There was no required flavor form field in this Action, so no check is needed!
-    }
-
-    $flavor_options = $this->getConfigurationPool()->getContainer()->getParameter('themes');
-
-    if (!in_array($flavor, $flavor_options, true))
-    {
-      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
-    }
   }
 }

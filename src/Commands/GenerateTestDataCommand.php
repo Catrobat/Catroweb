@@ -54,14 +54,12 @@ class GenerateTestDataCommand extends Command
     $dialog = $this->getHelper('question');
     $question = new ConfirmationQuestion('<question>Generate test data in '.$this->target_directory.' (Y/n)?</question>', true);
 
-    if ($input->getOption('force') || $dialog->ask($input, $output, $question))
-    {
+    if ($input->getOption('force') || $dialog->ask($input, $output, $question)) {
       $output->writeln('<info>Deleting old test data in '.$this->target_directory.'</info>');
 
       $finder = new Finder();
       $finder->in($this->target_directory)->ignoreDotFiles(true)->depth(0);
-      foreach ($finder as $file)
-      {
+      foreach ($finder as $file) {
         $this->filesystem->remove($file);
       }
 
@@ -85,8 +83,7 @@ class GenerateTestDataCommand extends Command
       $this->generateLegoProgram('lego');
 
       $finder->directories()->in($this->target_directory)->depth(0);
-      foreach ($finder as $dir)
-      {
+      foreach ($finder as $dir) {
         $this->compressor->compress($this->target_directory.$dir->getRelativePathname(), $this->target_directory, $dir->getRelativePathname());
       }
       $output->writeln('<info>Test data generated</info>');
@@ -177,28 +174,46 @@ class GenerateTestDataCommand extends Command
     $this->filesystem->rename($this->target_directory.$directory.'/automatic_screenshot.png', $this->target_directory.$directory.'/screenshot.png');
   }
 
+  /**
+   * @throws Exception
+   */
   protected function generateProgramWithRudeWordInDescription(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
     $properties->header->description = 'FUCK YOU';
-    $properties->asXML($this->target_directory.$directory.'/code.xml');
+    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 
+  /**
+   * @throws Exception
+   */
   protected function generateProgramWithRudeWordInName(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
     $properties->header->programName = 'FUCK YOU';
-    $properties->asXML($this->target_directory.$directory.'/code.xml');
+    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 
+  /**
+   * @throws Exception
+   */
   protected function generateProgramWithTags(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
     $properties->header->tags = 'Games,Story';
-    $properties->asXML($this->target_directory.$directory.'/code.xml');
+    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
+    if (!$file_overwritten) {
+      throw new Exception("Can't overwrite code.xml file");
+    }
   }
 
   protected function generatePhiroProgram(string $directory): void

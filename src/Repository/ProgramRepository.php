@@ -2,552 +2,223 @@
 
 namespace App\Repository;
 
+use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\ORM\Query\Parameter;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProgramRepository extends ServiceEntityRepository
 {
-  private array $cached_most_remixed_programs_full_result = [];
+  protected AppRequest $app_request;
 
-  private array $cached_most_liked_programs_full_result = [];
-
-  private array $cached_most_downloaded_other_programs_full_result = [];
-
-  public function __construct(ManagerRegistry $managerRegistry)
+  public function __construct(ManagerRegistry $managerRegistry, AppRequest $app_request)
   {
     parent::__construct($managerRegistry, Program::class);
+    $this->app_request = $app_request;
   }
 
-  public function getMostDownloadedPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0'): array
+  public function getProjectByID(string $program_id, bool $include_private = false): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
-    $query_builder->select('e')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('e.downloads', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
+    $query_builder
+      ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)))
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
+    $query_builder = $this->excludeInvisibleProjects($query_builder);
+    $query_builder = $this->excludeDebugProjects($query_builder);
+
+    if (!$include_private) {
+      $query_builder = $this->excludePrivateProjects($query_builder);
+    }
 
     return $query_builder->getQuery()->getResult();
   }
 
-  public function getMostDownloadedProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function getProjects(?string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
-    $query_builder = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryAllBuilder();
+    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+    $query_builder = $this->setPagination($query_builder, $limit, $offset);
+    $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
 
-    $query_builder->select('count(e.id)')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('e.downloads', 'DESC')
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    try
-    {
-      $projects_count = $query_builder->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
+    return $query_builder->getQuery()->getResult();
   }
 
-  public function getScratchRemixesPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = '0'): array
+  public function countProjects(?string $flavor = null, string $max_version = ''): int
   {
-    $qb = $this->createQueryBuilder('e');
+    $query_builder = $this->createQueryCountBuilder();
+    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
 
+    return $this->getQueryCount($query_builder);
+  }
+
+  public function getScratchRemixProjects(?string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb = $this->setPagination($qb, $limit, $offset);
+    $qb = $this->setOrderBy($qb, 'views');
     $qb
-      ->select('e')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
       ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
-      ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'))
-      ->orderBy('e.views', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
+      ->andWhere($qb->expr()->eq('e.id', 'rp.catrobat_child'))
     ;
-
-    $qb = $this->addDebugBuildCondition($qb, $debug_build);
-    $qb = $this->addFlavorCondition($qb, $flavor);
-    $qb = $this->addMaxVersionCondition($qb, $max_version);
 
     return $qb->getQuery()->getResult();
   }
 
-  public function getScratchRemixesProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
+  public function countScratchRemixProjects(?string $flavor = null, string $max_version = ''): int
   {
-    $qb = $this->createQueryBuilder('e');
-
+    $qb = $this->createQueryCountBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
-      ->select('count(e.id)')
-      ->where($qb->expr()->eq('e.visible', $qb->expr()->literal(true)))
-      ->andWhere($qb->expr()->eq('e.private', $qb->expr()->literal(false)))
       ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
       ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'))
-      ->orderBy('e.views', 'DESC')
     ;
 
-    $qb = $this->addDebugBuildCondition($qb, $debug_build);
-    $qb = $this->addFlavorCondition($qb, $flavor);
-    $qb = $this->addMaxVersionCondition($qb, $max_version);
-
-    try
-    {
-      $projects_count = $qb->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
+    return $this->getQueryCount($qb);
   }
 
-  public function getMostViewedPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                        string $max_version = '0'): array
+  public function getPublicUserProjects(string $user_id, ?string $flavor, string $max_version, ?int $limit, ?int $offset): array
   {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('e.views', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  public function getMostViewedProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('count(e.id)')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('e.views', 'DESC')
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    try
-    {
-      $projects_count = $query_builder->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
-  }
-
-  /**
-   * @throws DBALException
-   */
-  public function getMostRemixedPrograms(bool $debug_build, string $flavor = 'pocketcode', ?int $limit = 20, int $offset = 0): array
-  {
-    if (!isset($this->cached_most_remixed_programs_full_result[$flavor]))
-    {
-      $connection = $this->getEntityManager()->getConnection();
-      $sql = $this->generateUnionSqlStatementForMostRemixedPrograms($debug_build, $limit, $offset);
-      $statement = $connection->prepare($sql);
-      $statement->bindValue('flavor', $flavor);
-      $statement->execute();
-      $results = $statement->fetchAll();
-    }
-    else
-    {
-      $results = array_slice($this->cached_most_remixed_programs_full_result[$flavor],
-        $offset, $limit);
-    }
-
-    $programs = [];
-    foreach ($results as $result)
-    {
-      $programs[] = $this->find($result['id']);
-    }
-
-    return $programs;
-  }
-
-  /**
-   * @throws DBALException
-   */
-  public function getTotalRemixedProgramsCount(bool $debug_build, string $flavor = 'pocketcode'): int
-  {
-    if (isset($this->cached_most_remixed_programs_full_result[$flavor]))
-    {
-      return count($this->cached_most_remixed_programs_full_result[$flavor]);
-    }
-
-    $connection = $this->getEntityManager()->getConnection();
-    $statement = $connection->prepare($this->generateUnionSqlStatementForMostRemixedPrograms($debug_build, 0, 0));
-    $statement->bindValue('flavor', $flavor);
-    $statement->execute();
-
-    $this->cached_most_remixed_programs_full_result[$flavor] = $statement->fetchAll();
-
-    return is_countable($this->cached_most_remixed_programs_full_result[$flavor]) ? count($this->cached_most_remixed_programs_full_result[$flavor]) : 0;
-  }
-
-  /**
-   * @return Program[]
-   */
-  public function getMostLikedPrograms(bool $debug_build, string $flavor = 'pocketcode', ?int $limit = 20, int $offset = 0): array
-  {
-    if (isset($this->cached_most_liked_programs_full_result[$flavor]))
-    {
-      return array_slice($this->cached_most_liked_programs_full_result[$flavor], $offset, $limit);
-    }
-
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select(['e as program', 'COUNT(e.id) as like_count'])
-      ->innerJoin(ProgramLike::class, 'l', Join::WITH,
-        $query_builder->expr()->eq('e.id', 'l.program_id'))
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
-      ->groupBy('e.id')
-      ->orderBy('like_count', 'DESC')
-      ->distinct()
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-
-    if ((int) $offset > 0)
-    {
-      $query_builder->setFirstResult($offset);
-    }
-
-    if ((int) $limit > 0)
-    {
-      $query_builder->setMaxResults($limit);
-    }
-
-    $results = $query_builder->getQuery()->getResult();
-
-    return array_map(fn ($result) => $result['program'], $results);
-  }
-
-  public function getTotalLikedProgramsCount(bool $debug_build, string $flavor = 'pocketcode'): int
-  {
-    if (isset($this->cached_most_liked_programs_full_result[$flavor]))
-    {
-      return count($this->cached_most_liked_programs_full_result[$flavor]);
-    }
-
-    $this->cached_most_liked_programs_full_result[$flavor] =
-      $this->getMostLikedPrograms($debug_build, $flavor, 0, 0);
-
-    return is_countable($this->cached_most_liked_programs_full_result[$flavor]) ? count($this->cached_most_liked_programs_full_result[$flavor]) : 0;
-  }
-
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-    bool $debug_build, string $flavor, Program $program, ?int $limit, int $offset): array
-  {
-    $cache_key = $flavor.'_'.$program->getId();
-    if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key]))
-    {
-      return array_slice($this->cached_most_downloaded_other_programs_full_result[$cache_key],
-        $offset, $limit);
-    }
-
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select(['e as program', 'COUNT(e.id) as user_download_count'])
-      ->innerJoin(
-        ProgramDownloads::class, 'd1',
-        Join::WITH, $query_builder->expr()->eq('e.id', 'd1.program')
-      )
-      ->innerJoin(
-        ProgramDownloads::class, 'd2',
-        Join::WITH, $query_builder->expr()->eq('d1.user', 'd2.user')
-      )
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->isNotNull('d1.user'))
-      ->andWhere($query_builder->expr()->neq('d1.user', ':user'))
-      ->andWhere($query_builder->expr()->neq('d1.program', 'd2.program'))
-      ->andWhere($query_builder->expr()->eq('d2.program', ':program'))
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-
-    $query_builder
-      ->groupBy('e.id')
-      ->orderBy('user_download_count', 'DESC')
-      ->setParameter('user', $program->getUser())
-      ->setParameter('program', $program)
-      ->distinct()
-    ;
-
-    if ((int) $offset > 0)
-    {
-      $query_builder->setFirstResult($offset);
-    }
-
-    if ((int) $limit > 0)
-    {
-      $query_builder->setMaxResults($limit);
-    }
-
-    $results = $query_builder->getQuery()->getResult();
-
-    return array_map(fn ($result) => $result['program'], $results);
-  }
-
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgramCount(
-    bool $debug_build, string $flavor, Program $program): int
-  {
-    $cache_key = $flavor.'_'.$program->getId();
-    if (isset($this->cached_most_downloaded_other_programs_full_result[$cache_key]))
-    {
-      return count($this->cached_most_downloaded_other_programs_full_result[$cache_key]);
-    }
-
-    $result = $this->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $debug_build, $flavor, $program, 0, 0
-    );
-    $this->cached_most_downloaded_other_programs_full_result[$cache_key] = $result;
-
-    return is_countable($this->cached_most_downloaded_other_programs_full_result[$cache_key]) ? count($this->cached_most_downloaded_other_programs_full_result[$cache_key]) : 0;
-  }
-
-  public function getRecentPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0'): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  public function getRecentProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('count(e.id)')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('e.uploaded_at', 'DESC')
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    try
-    {
-      $projects_count = $query_builder->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
-  }
-
-  /**
-   * @return Program[]
-   */
-  public function getExamplePrograms(bool $debug_build, ?string $flavor = null, ?int $limit = 20, int $offset = 0, string $max_version = '0'): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->where($query_builder->expr()->eq('e.example', $query_builder->expr()->literal(true)))
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  public function getRandomPrograms(bool $debug_build, string $flavor = null, int $limit = 20, int $offset = 0,
-                                    string $max_version = '0'): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('RAND()')
-      ->setMaxResults($limit)
-      ->setFirstResult($offset)
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  public function getRandomProgramsCount(bool $debug_build, string $flavor = null, string $max_version = '0'): int
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('count(e.id)')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->orderBy('RAND()')
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    try
-    {
-      $projects_count = $query_builder->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
-  }
-
-  public function getUserPublicPrograms(string $user_id, bool $debug_build, string $max_version,
-                                        int $limit, int $offset, string $flavor = null): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb = $this->setPagination($qb, $limit, $offset);
+    $qb = $this->setOrderBy($qb, 'uploaded_at');
+    $qb
       ->leftJoin('e.user', 'f')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
       ->setParameter('user_id', $user_id)
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
+    return $qb->getQuery()->getResult();
   }
 
-  public function getUserPublicProgramsCount(string $user_id, bool $debug_build, string $max_version,
-                                        string $flavor = null): int
+  public function countPublicUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
   {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('count(e.id)')
+    $qb = $this->createQueryCountBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb
       ->leftJoin('e.user', 'f')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
       ->setParameter('user_id', $user_id)
-      ->orderBy('e.uploaded_at', 'DESC')
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    try
-    {
-      $projects_count = $query_builder->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
+    return $this->getQueryCount($qb);
   }
 
-  public static function filterVisiblePrograms(array $programs, bool $debug_build, string $max_version = '0'): array
+  public function getUserProjectsIncludingPrivateOnes(string $user_id, ?string $flavor, string $max_version, ?int $limit, ?int $offset): array
   {
-    if (!is_array($programs) || 0 === count($programs))
-    {
-      return [];
-    }
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
+    $qb = $this->setPagination($qb, $limit, $offset);
+    $qb = $this->setOrderBy($qb, 'uploaded_at');
+    $qb
+      ->leftJoin('e.user', 'f')
+      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->setParameter('user_id', $user_id)
+    ;
 
-    /** @var Program[] $filtered_programs */
-    $filtered_programs = [];
-
-    foreach ($programs as $program)
-    {
-      if (true === $program->getVisible() && false === $program->getPrivate() &&
-        ($debug_build || false === $program->isDebugBuild()) &&
-        ('0' === $max_version || $max_version <= $program->getLanguageVersion()))
-      {
-        $filtered_programs[] = $program;
-      }
-    }
-
-    return $filtered_programs;
+    return $qb->getQuery()->getResult();
   }
+
+  public function countUserProjectsIncludingPrivateOnes(string $user_id, ?string $flavor = null, string $max_version = ''): int
+  {
+    $qb = $this->createQueryCountBuilder();
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
+    $qb
+      ->leftJoin('e.user', 'f')
+      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->setParameter('user_id', $user_id)
+    ;
+
+    return $this->getQueryCount($qb);
+  }
+
+  public function getProjectsByTagId(int $id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb = $this->setPagination($qb, $limit, $offset);
+    $qb = $this->setOrderBy($qb, 'uploaded_at');
+    $qb
+      ->leftJoin('e.tags', 'f')
+      ->andWhere($qb->expr()->eq('f.id', ':id'))
+      ->setParameter('id', $id)
+    ;
+
+    return $qb->getQuery()->getResult();
+  }
+
+  public function getProjectsByExtensionName(string $name, ?int $limit = 20, ?int $offset = 0): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb);
+    $qb = $this->setPagination($qb, $limit, $offset);
+    $qb = $this->setOrderBy($qb, 'uploaded_at');
+    $qb
+      ->leftJoin('e.extensions', 'f')
+      ->andWhere($qb->expr()->eq('f.name', ':name'))
+      ->setParameter('name', $name)
+    ;
+
+    return $qb->getQuery()->getResult();
+  }
+
+  public function searchTagCount(int $tag_id, ?string $flavor = null, string $max_version = ''): int
+  {
+    $qb = $this->createQueryCountBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb
+      ->leftJoin('e.tags', 'f')
+      ->andWhere($qb->expr()->eq('f.id', ':id'))
+      ->setParameter('id', $tag_id)
+    ;
+
+    return $this->getQueryCount($qb);
+  }
+
+  public function searchExtensionCount(string $name, ?string $flavor = null, string $max_version = ''): int
+  {
+    $qb = $this->createQueryCountBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb
+      ->leftJoin('e.extensions', 'f')
+      ->andWhere($qb->expr()->eq('f.name', ':name'))
+      ->setParameter('name', $name)
+    ;
+
+    return $this->getQueryCount($qb);
+  }
+
+  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?string $flavor = null, string $max_version = '', ?int $limit = 20, ?int $offset = 0): array
+  {
+    $qb = $this->createQueryAllBuilder();
+    $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
+    $qb = $this->setPagination($qb, $limit, $offset);
+    $qb = $this->setOrderBy($qb, 'uploaded_at');
+    $qb
+      ->leftJoin('e.user', 'f')
+      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->setParameter('user_id', $user_id)
+      ->andWhere($qb->expr()->neq('e.id', ':project_id'))
+      ->setParameter('project_id', $project_id)
+    ;
+
+    return $qb->getQuery()->getResult();
+  }
+
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Remix System
+  //
 
   /**
    * @param string[] $program_ids
@@ -571,68 +242,6 @@ class ProgramRepository extends ServiceEntityRepository
     ;
 
     return array_map(fn ($data) => $data['id'], $result);
-  }
-
-  public function search(string $query, bool $debug_build, ?int $limit = 10, int $offset = 0,
-                         string $max_version = '0', ?string $flavor = null): array
-  {
-    $parse_languages = $this->getLanguageQuery();
-
-    $search_terms = $this->getWordsQuery($query);
-
-    $final_query = $this->getSearchQuery($parse_languages, $search_terms)
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $this->setScore($final_query, $query);
-
-    $final_query = $this->addFlavorCondition($final_query, $flavor);
-    $final_query = $this->addMaxVersionCondition($final_query, $max_version);
-    $final_query = $this->addPrivacyCheckCondition($final_query);
-    $final_query = $this->addDebugBuildCondition($final_query, $debug_build);
-
-    try
-    {
-      $result = $final_query->getQuery()->getResult();
-    }
-    catch (\Exception $exception)
-    {
-      return [];
-    }
-
-    return array_map(function ($element)
-    {
-      return $element[0];
-    }, $result);
-  }
-
-  public function searchCount(string $query, bool $debug_build,
-                              string $max_version = '0', ?string $flavor = null): int
-  {
-    $parse_languages = $this->getLanguageQuery();
-
-    $search_terms = $this->getWordsQuery($query);
-
-    $final_query = $this->getSearchQuery($parse_languages, $search_terms);
-
-    $this->setScore($final_query, $query);
-
-    $final_query = $this->addFlavorCondition($final_query, $flavor);
-    $final_query = $this->addMaxVersionCondition($final_query, $max_version);
-    $final_query = $this->addPrivacyCheckCondition($final_query);
-    $final_query = $this->addDebugBuildCondition($final_query, $debug_build);
-
-    try
-    {
-      $result = $final_query->getQuery()->getResult();
-    }
-    catch (\Exception $exception)
-    {
-      return 0;
-    }
-
-    return count($result);
   }
 
   /**
@@ -672,290 +281,124 @@ class ProgramRepository extends ServiceEntityRepository
       ->distinct()
       ->getQuery()
       ->getSingleScalarResult()
-    ;
-  }
-
-  public function getUserPrograms(string $user_id, bool $debug_build, string $max_version): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->leftJoin('e.user', 'f')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
-      ->setParameter('user_id', $user_id)
-      ->orderBy('e.uploaded_at', 'DESC')
-    ;
-
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  public function getUserProjects(?string $username, ?int $limit, int $offset, ?string $flavor, bool $debug_build,
-                                      string $max_version): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->leftJoin('e.user', 'f')
-      ->where($query_builder->expr()->eq('f.username', ':username'))
-      ->setParameter('username', $username)
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  public function getUserProjectsCount(?string $username, ?string $flavor, bool $debug_build,
-                                  string $max_version): int
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('count(e.id)')
-      ->leftJoin('e.user', 'f')
-      ->where($query_builder->expr()->eq('f.username', ':username'))
-      ->setParameter('username', $username)
-      ->orderBy('e.uploaded_at', 'DESC')
-    ;
-
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    try
-    {
-      $projects_count = $query_builder->getQuery()->getSingleScalarResult();
-    }
-    catch (NoResultException | NonUniqueResultException $e)
-    {
-      $projects_count = 0;
-    }
-
-    return $projects_count;
-  }
-
-  public function getPublicUserPrograms(?string $user_id, bool $debug_build, string $max_version = '0'): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->leftJoin('e.user', 'f')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('f.id', ':user_id'))
-      ->setParameter('user_id', $user_id)
-      ->orderBy('e.uploaded_at', 'DESC')
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return $query_builder->getQuery()->getResult();
-  }
-
-  /**
-   * @throws NonUniqueResultException
-   * @throws NoResultException
-   */
-  public function getTotalPrograms(bool $debug_build, ?string $flavor = null, string $max_version = '0'): int
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('COUNT (e.id)')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-    $query_builder = $this->addFlavorCondition($query_builder, $flavor);
-    $query_builder = $this->addMaxVersionCondition($query_builder, $max_version);
-
-    return (int) $query_builder->getQuery()->getSingleScalarResult();
-  }
-
-  /**
-   * @return mixed
-   *
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
-   */
-  public function getProgramsWithExtractedDirectoryHash()
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    return $query_builder
-      ->select('e')
-      ->where($query_builder->expr()->isNotNull('e.directory_hash'))
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
-  public function getProgramsByTagId(int $id, bool $debug_build, ?int $limit = 20, int $offset = 0): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select('e')
-      ->leftJoin('e.tags', 'f')
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('f.id', ':id'))
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setParameter('id', $id)
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-
-    return $query_builder
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
-  public function getProgram(string $program_id, bool $debug_build): array
-  {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->where($query_builder->expr()->eq('e.id',
-        $query_builder->expr()->literal($program_id)))
-      ->andWhere($query_builder->expr()->eq('e.visible',
-        $query_builder->expr()->literal(true)))
-    ;
-
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-
-    return $query_builder
-      ->getQuery()
-      ->getResult()
       ;
   }
 
-  public function getProgramDataByIds(array $program_ids, bool $debug_build): array
+  public function getProjectDataByIds(array $program_ids): array
   {
-    $query_builder = $this->createQueryBuilder('p');
-
+    $query_builder = $this->createQueryBuilder('e');
+    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder);
     $query_builder
-      ->select(['p.id', 'p.name', 'p.uploaded_at', 'u.username'])
-      ->innerJoin('p.user', 'u')
-      ->where($query_builder->expr()->eq('p.visible',
-        $query_builder->expr()->literal(true)))
-      ->andWhere('p.id IN (:program_ids)')
+      ->select(['e.id', 'e.name', 'e.uploaded_at', 'u.username'])
+      ->innerJoin('e.user', 'u')
+      ->andWhere('e.id IN (:program_ids)')
       ->setParameter('program_ids', $program_ids)
       ->distinct()
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder, 'p');
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build, 'p');
-
-    return $query_builder
-      ->getQuery()
-      ->getResult()
-    ;
+    return $query_builder->getQuery()->getResult();
   }
 
-  public function getProgramsByExtensionName(string $name, bool $debug_build,
-                                             ?int $limit = 20, int $offset = 0): array
+  // -------------------------------------------------------------------------------------------------------------------
+  //  Recommender System
+  //
+  public function getMostLikedPrograms(?string $flavor, string $max_version, int $limit = 0, int $offset = 0): array
+  {
+    $query_builder = $this->createQueryBuilder('e');
+    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+    $query_builder = $this->setPagination($query_builder, $limit, $offset);
+
+    $query_builder
+      ->select(['e as program', 'COUNT(e.id) as like_count'])
+      ->innerJoin(ProgramLike::class, 'l', Join::WITH,
+        $query_builder->expr()->eq('e.id', 'l.program_id')->__toString())
+      ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
+      ->groupBy('e.id')
+      ->orderBy('like_count', 'DESC')
+      ->distinct()
+    ;
+
+    $results = $query_builder->getQuery()->getResult();
+
+    return array_map(fn ($result) => $result['program'], $results);
+  }
+
+  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
   {
     $query_builder = $this->createQueryBuilder('e');
 
     $query_builder
-      ->select('e')
-      ->leftJoin('e.extensions', 'f')
+      ->select(['e as program', 'COUNT(e.id) as user_download_count'])
+      ->innerJoin(
+        ProgramDownloads::class, 'd1',
+        Join::WITH, $query_builder->expr()->eq('e.id', 'd1.program')->__toString()
+      )
+      ->innerJoin(
+        ProgramDownloads::class, 'd2',
+        Join::WITH, $query_builder->expr()->eq('d1.user', 'd2.user')->__toString()
+      )
       ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('f.name', ':name'))
-      ->orderBy('e.uploaded_at', 'DESC')
-      ->setParameter('name', $name)
-      ->setFirstResult($offset)
-      ->setMaxResults($limit)
+      ->andWhere($query_builder->expr()->isNotNull('d1.user'))
+      ->andWhere($query_builder->expr()->neq('d1.user', ':user'))
+      ->andWhere($query_builder->expr()->neq('d1.program', 'd2.program'))
+      ->andWhere($query_builder->expr()->eq('d2.program', ':program'))
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
-
-    return $query_builder
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
-  public function searchTagCount(string $query, bool $debug_build): int
-  {
-    $query = str_replace('yahoo', '', $query);
-
-    $query_builder = $this->createQueryBuilder('e');
+    $query_builder = $this->excludePrivateProjects($query_builder);
+    $query_builder = $this->setFlavorConstraint($query_builder, $flavor);
+    $query_builder = $this->excludeDebugProjects($query_builder);
 
     $query_builder
-      ->select('e')
-      ->leftJoin('e.tags', 't')
-      ->where($query_builder->expr()->eq('e.visible',
-        $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('t.id', ':id'))
-      ->setParameter('id', $query)
+      ->groupBy('e.id')
+      ->orderBy('user_download_count', 'DESC')
+      ->setParameter('user', $program->getUser())
+      ->setParameter('program', $program)
+      ->distinct()
     ;
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
+    if ($offset > 0) {
+      $query_builder->setFirstResult($offset);
+    }
 
-    $result = $query_builder
-      ->getQuery()
-      ->getResult()
-    ;
+    if (!is_null($limit) && $limit > 0) {
+      $query_builder->setMaxResults($limit);
+    }
 
-    return is_countable($result) ? count($result) : 0;
+    $results = $query_builder->getQuery()->getResult();
+
+    return array_map(fn ($result) => $result['program'], $results);
   }
 
-  public function searchExtensionCount(string $query, bool $debug_build): int
+  public function filterVisiblePrograms(array $programs, string $max_version = ''): array
   {
-    $query_builder = $this->createQueryBuilder('e');
+    if (empty($programs)) {
+      return [];
+    }
 
-    $query_builder
-      ->select('e')
-      ->leftJoin('e.extensions', 't')
-      ->where($query_builder->expr()->eq('e.visible',
-        $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->eq('t.name', ':name'))
-      ->setParameter('name', $query)
-    ;
+    /** @var Program[] $filtered_programs */
+    $filtered_programs = [];
 
-    $query_builder = $this->addPrivacyCheckCondition($query_builder);
-    $query_builder = $this->addDebugBuildCondition($query_builder, $debug_build);
+    foreach ($programs as $program) {
+      if (true === $program->getVisible() && false === $program->getPrivate()
+        && ($this->app_request->isDebugBuildRequest() || false === $program->isDebugBuild())
+        && ('' === $max_version || $program->getLanguageVersion() <= $max_version)) {
+        $filtered_programs[] = $program;
+      }
+    }
 
-    $result = $query_builder
-      ->getQuery()
-      ->getResult()
-    ;
-
-    return is_countable($result) ? count($result) : 0;
+    return $filtered_programs;
   }
 
-  public function getRecommendedProgramsCount(string $id, bool $debug_build, string $flavor = 'pocketcode'): int
+  public function getRecommendedProgramsCount(string $id, string $flavor = 'pocketcode'): int
   {
-    $db_query = $this->createRecommendedProgramQuery($id, $debug_build, $flavor);
+    $db_query = $this->createRecommendedProgramQuery($id, $flavor);
 
     return is_countable($db_query->getResult()) ? count($db_query->getResult()) : 0;
   }
 
-  public function getRecommendedProgramsById(string $id, bool $debug_build, string $flavor, ?int $limit, int $offset = 0): array
+  public function getRecommendedProgramsById(string $id, string $flavor, ?int $limit, ?int $offset): array
   {
-    $db_query = $this->createRecommendedProgramQuery($id, $debug_build, $flavor);
+    $db_query = $this->createRecommendedProgramQuery($id, $flavor);
 
     $db_query->setFirstResult($offset);
     $db_query->setMaxResults($limit);
@@ -963,15 +406,14 @@ class ProgramRepository extends ServiceEntityRepository
     $id_list = array_map(fn ($value) => $value['id'], $db_query->getResult());
 
     $programs = [];
-    foreach ($id_list as $id)
-    {
+    foreach ($id_list as $id) {
       $programs[] = $this->find($id);
     }
 
     return $programs;
   }
 
-  private function createRecommendedProgramQuery(string $id, bool $debug_build, string $flavor): Query
+  private function createRecommendedProgramQuery(string $id, string $flavor): Query
   {
     $qb_tags = $this->createQueryBuilder('e');
 
@@ -998,7 +440,8 @@ class ProgramRepository extends ServiceEntityRepository
     $tag_ids = array_map('current', $result);
     $extensions_id = array_map('current', $result_2);
 
-    $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND e.debug_build = false' : '';
+    $debug_where = (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) ? 'AND e.debug_build = false' : '';
+    $flavor_where = '' !== trim($flavor) ? 'AND e.flavor = :flavor' : '';
 
     $dql = 'SELECT COUNT(e.id) cnt, e.id
       FROM App\Entity\Program e
@@ -1007,178 +450,124 @@ class ProgramRepository extends ServiceEntityRepository
       WHERE (
         t.id IN (:tag_ids)
         OR x.id IN (:extension_ids)
-      )
-      AND e.flavor = :flavor
+      ) '
+      .$flavor_where.'
       AND e.id != :id
       AND e.private = false
-      AND e.visible = TRUE '.
-      $debug_where.'  
+      AND e.visible = TRUE '
+      .$debug_where.'  
       GROUP BY e.id
       ORDER BY cnt DESC';
 
     $qb_program = $this->createQueryBuilder('e');
     $db_query = $qb_program->getEntityManager()->createQuery($dql);
 
-    $parameters = new ArrayCollection();
-    $parameters->add(new Parameter('id', $id));
-    $parameters->add(new Parameter('tag_ids', $tag_ids));
-    $parameters->add(new Parameter('extension_ids', $extensions_id));
-    $parameters->add(new Parameter('flavor', $flavor));
+    $db_query->setParameter('id', $id);
+    $db_query->setParameter('tag_ids', $tag_ids);
+    $db_query->setParameter('extension_ids', $extensions_id);
 
-    $db_query->setParameters($parameters);
+    if ('' !== trim($flavor_where)) {
+      $db_query->setParameter('flavor', $flavor);
+    }
 
     return $db_query;
   }
 
-  /**
-   * @return string
-   */
-  private function getLanguageQuery()
+  //
+  //--------------------------------------------------------------------------------------------------------------------
+  //
+  private function createQueryAllBuilder(string $alias = 'e'): QueryBuilder
   {
-    $em = $this->getEntityManager();
-    $metadata = $em->getClassMetadata('App\Entity\Tag')->getFieldNames();
-    array_shift($metadata);
-
-    $parse_languages = '';
-    foreach ($metadata as $language)
-    {
-      $parse_languages .= 't.'.$language.', ';
-    }
-
-    return rtrim($parse_languages, ', ');
+    return $this->createQueryBuilder($alias)->select($alias);
   }
 
-  private function getWordsQuery(string $query): string
+  private function createQueryCountBuilder(string $alias = 'e'): QueryBuilder
   {
-    $words = explode(' ', $query);
-    foreach ($words as &$word)
-    {
-      if (!preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $word))
-      {
-        $word = '+'.$word.'*';
-      }
-      else
-      {
-        $word = '\"'.$word.'\"';
-      }
-    }
-    unset($word);
-    $search_terms = implode(' ', $words);
-
-    return $search_terms;
+    return $this->createQueryBuilder($alias)->select("count({$alias}.id)");
   }
 
-  private function getSearchQuery(string $parse_languages, string $search_terms): QueryBuilder
+  private function getQueryCount(QueryBuilder $query_builder): int
   {
-    return $this->createQueryBuilder('e')
-      ->addSelect('MATCH(e.name, e.description, e.credits, e.id) AGAINST(:searchterm boolean) AS name_score')
-      ->addSelect('MATCH(u.username) AGAINST(:searchterm boolean) AS username_score')
-      ->addSelect('MATCH(x.name) AGAINST(:searchterm boolean) AS extension_score')
-      ->addSelect('MATCH('.$parse_languages.') AGAINST(:searchterm boolean) as language_score')
-      ->orWhere('MATCH(e.name, e.description, e.credits, e.id) AGAINST(:searchterm boolean)>:score')
-      ->orWhere('MATCH(u.username) AGAINST(:searchterm boolean)>:score')
-      ->orWhere('MATCH(x.name) AGAINST(:searchterm boolean)>:score')
-      ->orWhere('MATCH('.$parse_languages.') AGAINST(:searchterm boolean)>:score')
-      ->leftJoin('e.tags', 't')
-      ->leftJoin('e.extensions', 'x')
-      ->leftJoin('e.user', 'u')
-      ->andWhere('e.visible = true AND e.private = false')
-      ->orderBy('name_score', 'DESC')
-      ->setParameter('searchterm', $search_terms)
+    try {
+      return intval($query_builder->getQuery()->getSingleScalarResult());
+    } catch (NoResultException | NonUniqueResultException $e) {
+      return 0;
+    }
+  }
+
+  private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC', string $alias = 'e'): QueryBuilder
+  {
+    if ('' === trim($order_by)) {
+      return $query_builder;
+    }
+
+    if ('RAND()' === $order_by) {
+      return $query_builder
+        ->orderBy($order_by, $order)
+        ;
+    }
+
+    return $query_builder
+      ->orderBy($alias.'.'.$order_by, $order)
     ;
   }
 
-  private function setScore(QueryBuilder &$final_query, string $query): void
+  private function setPagination(QueryBuilder $query_builder, ?int $limit, ?int $offset): QueryBuilder
   {
-    $words = explode(' ', $query);
-    $wanted_score = 0;
-    $final_query->setParameter('score', $wanted_score);
-  }
-
-  private function generateUnionSqlStatementForMostRemixedPrograms(bool $debug_build,
-                                                                   ?int $limit, int $offset = 0): string
-  {
-    //---------------------------------------------------------------------------------------------
-    // ATTENTION: since Doctrine does not support UNION queries,
-    //            the following query is a native MySQL/SQLite query
-    //---------------------------------------------------------------------------------------------
-    $limit_clause = (int) $limit > 0 ? 'LIMIT '.(int) $limit : '';
-    $offset_clause = (int) $offset > 0 ? 'OFFSET '.(int) $offset : '';
-    $debug_where = (!$debug_build && 'dev' !== $_ENV['APP_ENV']) ? 'AND p.debug_build = false' : '';
-
-    return '
-            SELECT sum(remixes_count) AS total_remixes_count, id FROM (
-                    SELECT p.id AS id, COUNT(p.id) AS remixes_count
-                    FROM program p
-                    INNER JOIN program_remix_relation r
-                    ON p.id = r.ancestor_id
-                    INNER JOIN program rp
-                    ON r.descendant_id = rp.id
-                    WHERE p.visible = 1 '.
-      $debug_where.' 
-                    AND p.flavor = :flavor
-                    AND p.private = 0
-                    AND r.depth = 1
-                    AND p.user_id <> rp.user_id
-                    GROUP BY p.id
-                UNION ALL
-                    SELECT p.id AS id, COUNT(p.id) AS remixes_count
-                    FROM program p
-                    INNER JOIN program_remix_backward_relation b
-                    ON p.id = b.parent_id
-                    INNER JOIN program rp
-                    ON b.child_id = rp.id
-                    WHERE p.visible = 1 '.
-      $debug_where.' 
-                    AND p.flavor = :flavor
-                    AND p.private = 0
-                    AND p.user_id <> rp.user_id
-                    GROUP BY p.id
-            ) t
-            GROUP BY id
-            ORDER BY remixes_count DESC '.
-      $limit_clause.' '.
-      $offset_clause.' ';
-  }
-
-  private function addFlavorCondition(QueryBuilder $query_builder, ?string $flavor, string $alias = 'e'): QueryBuilder
-  {
-    if ($flavor)
-    {
-      if ('!' === $flavor[0])
-      {
-        $query_builder
-          ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
-          ->setParameter('flavor', substr($flavor, 1))
-        ;
-      }
-      else
-      {
-        $query_builder
-          ->andWhere($query_builder->expr()->eq($alias.'.flavor', ':flavor'))
-          ->setParameter('flavor', $flavor)
-        ;
-      }
+    if (null !== $offset && $offset > 0) {
+      $query_builder->setFirstResult($offset);
+    }
+    if (null !== $limit && $limit > 0) {
+      $query_builder->setMaxResults($limit);
     }
 
     return $query_builder;
   }
 
-  private function addDebugBuildCondition(QueryBuilder $query_builder, bool $debug_build_request, string $alias = 'e'): QueryBuilder
+  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
-    if (!$debug_build_request && 'dev' !== $_ENV['APP_ENV'])
-    {
-      $query_builder->andWhere($query_builder->expr()->eq($alias.'.debug_build',
-        $query_builder->expr()->literal(false)));
-    }
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, $alias);
 
-    return $query_builder;
+    return $this->excludePrivateProjects($qb, $alias);
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = '0', string $alias = 'e'): QueryBuilder
+  private function excludeUnavailableProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
-    if ('0' !== $max_version)
-    {
+    $qb = $this->excludeInvisibleProjects($qb, $alias);
+    $qb = $this->excludeDebugProjects($qb, $alias);
+    $qb = $this->setFlavorConstraint($qb, $flavor, $alias);
+
+    return $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version, $alias);
+  }
+
+  private function setFlavorConstraint(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e'): QueryBuilder
+  {
+    if ('' === trim($flavor)) {
+      return $query_builder;
+    }
+
+    if ('!' === $flavor[0]) {
+      // Can be used when we explicitly want projects of other flavors (E.g to fill empty categories of a new flavor)
+      return $query_builder
+        ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
+        ->setParameter('flavor', substr($flavor, 1))
+        ;
+    }
+
+    // Extensions are very similar to Flavors. (E.g. it does not care if a project has embroidery flavor or extension)
+    return $query_builder->leftJoin($alias.'.extensions', 'ext')
+      ->andWhere($query_builder->expr()->orX()->addMultiple([
+        $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
+        $query_builder->expr()->like('lower(ext.name)', ':extension'),
+      ]))
+      ->setParameter('flavor', strtolower($flavor))
+      ->setParameter('extension', strtolower($flavor))
+      ;
+  }
+
+  private function excludeProjectsWithTooHighLanguageVersion(QueryBuilder $query_builder, string $max_version = '', string $alias = 'e'): QueryBuilder
+  {
+    if ('' !== $max_version) {
       $query_builder
         ->andWhere($query_builder->expr()->lte($alias.'.language_version', ':max_version'))
         ->setParameter('max_version', $max_version)
@@ -1188,12 +577,28 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addPrivacyCheckCondition(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  private function excludeDebugProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
   {
-    $query_builder->andWhere(
-      $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
-    );
+    if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
+      $query_builder->andWhere(
+        $query_builder->expr()->eq($alias.'.debug_build', $query_builder->expr()->literal(false))
+      );
+    }
 
     return $query_builder;
+  }
+
+  private function excludeInvisibleProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    return $query_builder->andwhere(
+      $query_builder->expr()->eq($alias.'.visible', $query_builder->expr()->literal(true))
+    );
+  }
+
+  private function excludePrivateProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    return $query_builder->andWhere(
+      $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
+    );
   }
 }

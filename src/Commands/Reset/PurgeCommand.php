@@ -35,8 +35,7 @@ class PurgeCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    if (!$input->getOption('force'))
-    {
+    if (!$input->getOption('force')) {
       $output->writeln("This command will delete everything, use with caution! Use '--force' option if you are sure.");
 
       return 1;
@@ -85,7 +84,7 @@ class PurgeCommand extends Command
     );
     $progress->advance();
 
-    $progress->setMessage('Dropping Migrations');
+    $progress->setMessage('Dropping migrations');
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the migration_versions table', $output);
     $progress->advance();

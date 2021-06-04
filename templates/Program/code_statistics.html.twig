@@ -1,88 +1,97 @@
-<div class="card">
+{% extends 'Default/base.html.twig' %}
+{% block page_title %}{{ "codeStatistics.title"|trans({}, "catroweb") }}{% endblock %}
+{% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
 
-  <div class="card-header d-flex justify-content-between expansion-header" id="statistics" data-toggle="collapse"
-       data-target="#collapseStatistics" aria-expanded="false"
-       aria-controls="collapseStatistics">
-    {{ "codeStatistics.title"|trans({}, "catroweb") }}
-    <i class="material-icons rotate-left">chevron_left</i>
-  </div>
+{% block head %}
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/card.css') }}"/>
+{% endblock %}
 
-  <div id="collapseStatistics" class="card-body collapse" aria-labelledby="statistics" data-parent="#programDetails">
+{% block body %}
 
-    {% if data|default(null) and brick_data|default(null) %}
-      <div class="accordion" id="accordionStatistics">
-        <div class="card">
+{% if data|default(null) and brick_data|default(null) %}
+  <div class="accordion" id="accordionStatistics">
+    <div class="card">
 
-          <div class="card-header collapsed d-flex justify-content-between expansion-header" id="statisticsGeneral"
-               data-toggle="collapse"
-               data-target="#collapseGeneral" aria-expanded="false"
-               aria-controls="collapseGeneral">
-            {{ "codeStatistics.general"|trans({}, "catroweb") }}
-            <i class="material-icons rotate-left">chevron_left</i>
-          </div>
+      <div class="card-header d-flex justify-content-between expansion-header" id="statisticsGeneral"
+           data-toggle="collapse"
+           aria-expanded="true"
+           aria-controls="collapseGeneral">
+        {{ "codeStatistics.general"|trans({}, "catroweb") }}
+        <i class="material-icons rotate-left" style="visibility: hidden">chevron_left</i>
+      </div>
 
-          <div id="collapseGeneral" class="collapse" aria-labelledby="statisticsGeneral"
-               data-parent="#accordionStatistics">
-            <div class="card-body">
-              <table class="table center table-striped">
-                <thead>
-                <tr>
-                  <th></th>
-                  <th>Total</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for key, entry in data %}
-                  <tr>
-                    <td>{{ entry['name'] }}</td>
-                    <td id="total-number-of-{{ key }}">{{ entry['total-number'] }}</td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="card-header collapsed d-flex justify-content-between expansion-header" id="statisticsBricks"
-               data-toggle="collapse" data-target="#collapseBricks" aria-expanded="false"
-               aria-controls="collapseBricks">
-            {{ "codeStatistics.bricks"|trans({}, "catroweb") }}
-            <i class="material-icons rotate-left">chevron_left</i>
-          </div>
-
-          <div id="collapseBricks" class="collapse" aria-labelledby="statisticsBricks"
-               data-parent="#accordionStatistics">
-            <div class="card-body">
-              <table class="table center table-striped">
-                <thead>
-                <tr>
-                  <th></th>
-                  <th>Total</th>
-                  <th>Different</th>
-                </tr>
-                </thead>
-                <tbody>
-                {% for key, entry in brick_data %}
-                  <tr>
-                    <td>{{ entry['name'] }}</td>
-                    <td id="total-number-of-{{ key }}">{{ entry['total-number'] }}</td>
-                    <td id="number-of-different-{{ key }}">{{ entry['different'] }}</td>
-                  </tr>
-                {% endfor %}
-                </tbody>
-              </table>
-            </div>
-
-          </div>
+      <div id="collapseGeneral" class="collapse show" aria-labelledby="statisticsGeneral"
+           data-parent="#accordionStatistics">
+        <div class="card-body">
+          <table class="table center table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, entry in data %}
+              <tr>
+                <td>{{ entry['name'] }}</td>
+                <td id="total-number-of-{{ key }}">{{ entry['total-number'] }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
 
-    {% else %}
-      <div class="card-header">
-        <p>{{ "codeStatistics.error"|trans({}, "catroweb") }}</p>
+      <div class="card-header d-flex justify-content-between expansion-header" id="statisticsBricks"
+           data-toggle="collapse"
+           aria-expanded="true"
+           aria-controls="collapseBricks">
+        {{ "codeStatistics.bricks"|trans({}, "catroweb") }}
+        <i class="material-icons rotate-left" style="visibility: hidden">chevron_left</i>
       </div>
-    {% endif %}
 
+      <div id="collapseBricks" class="collapse show" aria-labelledby="statisticsBricks"
+           data-parent="#accordionStatistics">
+        <div class="card-body">
+          <table class="table center table-striped">
+            <thead>
+            <tr>
+              <th></th>
+              <th>Total</th>
+              <th>Different</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for key, entry in brick_data %}
+              <tr>
+                <td>{{ entry['name'] }}</td>
+                <td id="total-number-of-{{ key }}">{{ entry['total-number'] }}</td>
+                <td id="number-of-different-{{ key }}">{{ entry['different'] }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-</div>
+{% else %}
+  <div class="card-header">
+    <p>{{ "codeStatistics.error"|trans({}, "catroweb") }}</p>
+  </div>
+{% endif %}
+
+{% endblock %}
+
+
+{% block js %}
+
+  <script>
+    $(document).ready(function () {
+      showBackTopBar('{{ "codeStatistics.title"|trans({}, "catroweb") }}', '{{ path('program', { 'id' : id }) }}')
+    })
+  </script>
+
+{% endblock %}

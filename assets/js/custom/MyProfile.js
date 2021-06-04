@@ -38,8 +38,6 @@ const MyProfile = function (profileUrl, saveUsername,
   self.regex_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
   self.data_changed = false
   self.deleteAccountUrl = deleteAccountUrl
-  const blueColor = '#3085d6'
-  const redColor = '#d33'
   const passwordEditContainer = $('#password-edit-container')
   const usernameEditContainer = $('#username-edit-container')
   const usernameData = $('#username-wrapper > .profile-data')
@@ -123,8 +121,12 @@ const MyProfile = function (profileUrl, saveUsername,
         html: split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: blueColor,
-        cancelButtonColor: redColor,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
         confirmButtonText: split[3],
         cancelButtonText: split[4]
       }).then((result) => {
@@ -136,58 +138,54 @@ const MyProfile = function (profileUrl, saveUsername,
   }
 
   self.toggleVisibility = function (id) {
-    $.get(self.toggleVisibilityUrl + '/' + id, {}, function (data) {
-      const visibilityLockId = $('#visibility-lock-' + id)
-      const visibilityLockOpenId = $('#visibility-lock-open-' + id)
-      const programName = $('#program-' + id).find('.program-name').text()
-      const catalogEntry = 'programs.changeVisibility'
-      const url = stringTranslate(programName, catalogEntry)
+    const visibilityLockId = $('#visibility-lock-' + id)
+    const visibilityLockOpenId = $('#visibility-lock-open-' + id)
+    const programName = $('#program-' + id).find('.program-name').text()
+    const catalogEntry = 'programs.changeVisibility'
+    const url = stringTranslate(programName, catalogEntry)
+    const isPrivate = visibilityLockId.is(':visible')
 
-      if (data === 'true') {
-        $.get(url, function (data) {
-          const split = data.split('\n')
-          if (visibilityLockId.is(':visible')) {
-            Swal.fire({
-              title: split[0],
-              html: split[3],
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: blueColor,
-              cancelButtonColor: redColor,
-              confirmButtonText: split[4],
-              cancelButtonText: split[6]
-            }).then((result) => {
-              if (result.value) {
+    $.get(url, function (data) {
+      const split = data.split('\n')
+      Swal.fire({
+        title: split[0],
+        html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
+        icon: 'warning',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
+        confirmButtonText: (isPrivate) ? split[4] : split[5],
+        cancelButtonText: split[6]
+      }).then((result) => {
+        if (result.value) {
+          $.get(self.toggleVisibilityUrl + '/' + id, {}, function (data) {
+            if (data === 'true') {
+              if (isPrivate) {
                 visibilityLockId.hide()
                 visibilityLockOpenId.show()
-              }
-            })
-          } else {
-            Swal.fire({
-              title: split[0],
-              html: split[1] + '<br><br>' + split[2],
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonColor: blueColor,
-              cancelButtonColor: redColor,
-              confirmButtonText: split[5],
-              cancelButtonText: split[6]
-            }).then((result) => {
-              if (result.value) {
+              } else {
                 visibilityLockId.show()
                 visibilityLockOpenId.hide()
               }
-            })
-          }
-        })
-      } else if (data === 'false') {
-        Swal.fire({
-          title: programCanNotChangeVisibilityTitle,
-          text: programCanNotChangeVisibilityText,
-          icon: 'error',
-          confirmButtonClass: 'btn btn-danger'
-        })
-      }
+            } else {
+              Swal.fire({
+                title: programCanNotChangeVisibilityTitle,
+                text: programCanNotChangeVisibilityText,
+                icon: 'error',
+                customClass: {
+                  confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false,
+                allowOutsideClick: false
+              })
+            }
+          })
+        }
+      })
     })
   }
 
@@ -202,8 +200,12 @@ const MyProfile = function (profileUrl, saveUsername,
         html: split[1] + '<br><br>' + split[2],
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: blueColor,
-        cancelButtonColor: redColor,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
         confirmButtonText: split[3],
         cancelButtonText: split[4]
       }).then((result) => {
@@ -238,7 +240,11 @@ const MyProfile = function (profileUrl, saveUsername,
             title: successText,
             text: checkMailText,
             icon: 'success',
-            confirmButtonClass: 'btn btn-success'
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false,
+            allowOutsideClick: false
           }).then(() => {
             window.location.href = self.profile_edit_url
           })
@@ -376,7 +382,11 @@ const MyProfile = function (profileUrl, saveUsername,
             title: successText,
             text: passwordUpdatedText,
             icon: 'success',
-            confirmButtonClass: 'btn btn-success'
+            customClass: {
+              confirmButton: 'btn btn-primary'
+            },
+            buttonsStyling: false,
+            allowOutsideClick: false
           }).then(() => {
             window.location.href = self.profile_edit_url
           })

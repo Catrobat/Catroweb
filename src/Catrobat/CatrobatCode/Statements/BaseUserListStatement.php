@@ -43,14 +43,10 @@ class BaseUserListStatement extends Statement
   {
     $code = '';
 
-    foreach ($this->statements as $value)
-    {
-      if ($value instanceof UserListStatement)
-      {
+    foreach ($this->statements as $value) {
+      if ($value instanceof UserListStatement) {
         $this->listName = $value->execute();
-      }
-      else
-      {
+      } else {
         $code .= $value->execute();
       }
     }

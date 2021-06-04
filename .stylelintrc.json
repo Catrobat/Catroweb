@@ -2,7 +2,11 @@
   "extends": "stylelint-config-twbs-bootstrap/scss",
   "rules": {
     "number-leading-zero": "always",
-    "selector-max-id": 1,
+    "selector-max-id": null,
+    "selector-max-compound-selectors": null,
+    "selector-max-class": null,
+    "selector-max-combinators": null,
+    "selector-max-attribute": null,
     "selector-no-qualifying-type": [
       true,
       {
@@ -10,6 +14,17 @@
           "attribute"
         ]
       }
-    ]
+    ],
+    "selector-class-pattern": "^[a-z]([a-z0-9\\-]*(__|--)?)*[a-z0-9]+$",
+    "property-no-vendor-prefix": null,
+    "selector-no-vendor-prefix": null,
+    "value-no-vendor-prefix": null,
+    "at-rule-no-vendor-prefix": null,
+
+    "function-linear-gradient-no-nonstandard-direction": null,
+
+    "declaration-no-important": null,
+    "no-invalid-position-at-import-rule": null,
+    "selector-class-pattern": "^[a-z][a-z0-9\\-\\_]*[a-z0-9]$"
   }
 }

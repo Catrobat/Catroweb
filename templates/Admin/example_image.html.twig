@@ -2,6 +2,6 @@
 
 {% block field %}
   <div>
-    <img src="{{ admin.getExampleImageUrl(object) }}" width="300">
+    <img data-src="{{ admin.getExampleImageUrl(object) }}" width="300" class="lazyload">
   </div>
 {% endblock %}

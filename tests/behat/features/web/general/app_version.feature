@@ -26,11 +26,6 @@ Feature: At the bottom of every page there should be an to the user invisible ve
     Then the element "#app-version" should exist
     And the "#app-version" element should contain "TEST_VERSION"
 
-    Given I am on "app/help/"
-    And I wait for the page to be loaded
-    Then the element "#app-version" should exist
-    And the "#app-version" element should contain "TEST_VERSION"
-
     Given I am on "app/project/1"
     And I wait for the page to be loaded
     Then the element "#app-version" should exist

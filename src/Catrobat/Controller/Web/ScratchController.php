@@ -27,14 +27,12 @@ class ScratchController extends AbstractController
   public function scratchProjectAction(Request $request, int $id): Response
   {
     $program = $this->scratch_manager->createScratchProgramFromId($id);
-    if (null === $program)
-    {
+    if (null === $program) {
       throw $this->createNotFoundException('Error creating Scratch program');
     }
     $url = $this->generateUrl('program', ['id' => $program->getId()]);
 
-    if ($request->isMethod('GET'))
-    {
+    if ($request->isMethod('GET')) {
       return $this->redirect($url);
     }
 

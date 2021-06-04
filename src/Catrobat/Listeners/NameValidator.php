@@ -36,17 +36,14 @@ class NameValidator
    */
   public function validate(ExtractedCatrobatFile $file): void
   {
-    if ('' == $file->getName())
-    {
+    if ('' == $file->getName()) {
       throw new MissingProgramNameException();
     }
-    if (strlen($file->getName()) > Response::HTTP_OK)
-    {
+    if (strlen($file->getName()) > Response::HTTP_OK) {
       throw new NameTooLongException();
     }
 
-    if ($this->rudeWordFilter->containsRudeWord($file->getName()))
-    {
+    if ($this->rudeWordFilter->containsRudeWord($file->getName())) {
       throw new RudewordInNameException();
     }
   }

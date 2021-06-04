@@ -2,151 +2,155 @@
 
 namespace App\Api;
 
-use App\Catrobat\Services\TokenGenerator;
-use App\Entity\User;
-use App\Entity\UserManager;
+use App\Api\Services\Base\AbstractApiController;
+use App\Api\Services\User\UserApiFacade;
+use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
-use OpenAPI\Server\Model\Register;
-use OpenAPI\Server\Model\ValidationSchema;
+use OpenAPI\Server\Model\ExtendedUserDataResponse;
+use OpenAPI\Server\Model\RegisterErrorResponse;
+use OpenAPI\Server\Model\RegisterRequest;
+use OpenAPI\Server\Model\UpdateUserErrorResponse;
+use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Validator\Constraints\Email;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
-class UserApi implements UserApiInterface
+final class UserApi extends AbstractApiController implements UserApiInterface
 {
-  private string $token;
+  private UserApiFacade $facade;
 
-  private ValidatorInterface $validator;
-
-  private UserManager $user_manager;
-
-  private TokenGenerator $token_generator;
-
-  private TranslatorInterface $translator;
-
-  public function __construct(ValidatorInterface $validator, UserManager $user_manager, TokenGenerator $token_generator,
-                              TranslatorInterface $translator)
+  public function __construct(UserApiFacade $facade)
   {
-    $this->validator = $validator;
-    $this->user_manager = $user_manager;
-    $this->token_generator = $token_generator;
-    $this->translator = $translator;
+    $this->facade = $facade;
+  }
+
+  /**
+   * {@inheritdoc}
+   *
+   * @throws Exception
+   */
+  public function userPost(RegisterRequest $register_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+
+    $validation_wrapper = $this->facade->getRequestValidator()->validateRegistration($register_request, $accept_language);
+
+    if ($validation_wrapper->hasError()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $error_response = new RegisterErrorResponse($validation_wrapper->getErrors());
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
+    }
+
+    if ($register_request->isDryRun()) {
+      $responseCode = Response::HTTP_NO_CONTENT;
+
+      return null;
+    }
+
+    $user = $this->facade->getProcessor()->registerUser($register_request);
+
+    $responseCode = Response::HTTP_CREATED;
+    $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
+    $response = $this->facade->getResponseManager()->createUserRegisteredResponse($token);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $response;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setPandaAuth($value): void
+  public function userDelete(&$responseCode, array &$responseHeaders)
   {
-    $this->token = preg_split('#\s+#', $value)[1];
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
+
+    return null;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function userPost(Register $register, string $accept_language = null, &$responseCode, array &$responseHeaders)
+  public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
   {
-    $validation_schema = $this->validate($register);
+    $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createExtendedUserDataResponse(
+      $this->facade->getAuthenticationManager()->getAuthenticatedUser()
+    );
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    if ($validation_schema->getEmail() || $validation_schema->getUsername() || $validation_schema->getPassword())
-    {
-      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY; // 422 => Unprocessable entity
+    return $response;
+  }
 
-      return $validation_schema;
+  /**
+   * {@inheritdoc}
+   */
+  public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
+  {
+    $user = $this->facade->getLoader()->findUserByID($id);
+
+    if (null === $user) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
     }
-    if ($register->isDryRun())
-    {
-      $responseCode = Response::HTTP_NO_CONTENT; // 204 => Dry-run successful, no validation error
+
+    $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createBasicUserDataResponse($user);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+
+    $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($update_user_request, $accept_language);
+
+    if ($validation_wrapper->hasError()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $error_response = new UpdateUserErrorResponse($validation_wrapper->getErrors());
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
     }
-    else
-    {
-      // Validation successful, no dry-run requested => we can actually register the user
-      /** @var User $user */
-      $user = $this->user_manager->createUser();
-      $user->setUsername($register->getUsername());
-      $user->setEmail($register->getEmail());
-      $user->setPlainPassword($register->getPassword());
-      $user->setEnabled(true);
-      $user->setUploadToken($this->token_generator->generateToken());
-      $this->user_manager->updateUser($user);
-      $responseCode = 201; // 201 => User successfully registered
+
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    if (!$update_user_request->isDryRun()) {
+      $this->facade->getProcessor()->updateUser(
+        $this->facade->getAuthenticationManager()->getAuthenticatedUser(), $update_user_request
+      );
     }
 
     return null;
   }
 
   /**
-   * Validates the Register object passed by the request. No automatic validation provided by the OpenApi
-   * will be used cause non standard validations (e.g. validation if a username doesn't exist already) must be
-   * used here.
-   *
-   * $accept_language -> The language used for translating the validation error messages
-   *
-   * @return ValidationSchema The ValidationSchema containing possible validation errors
+   * {@inheritdoc}
    */
-  public function validate(Register $register): ValidationSchema
+  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null): array
   {
-    $validation_schema = new ValidationSchema();
+    $limit = $this->getDefaultLimitOnNull($limit);
+    $offset = $this->getDefaultOffsetOnNull($offset);
 
-    // E-Mail
-    if ('' === $register->getEmail())
-    {
-      $validation_schema->setEmail($this->translator->trans('api.registerUser.emailMissing', [], 'catroweb'));
-    }
-    elseif (0 !== count($this->validator->validate($register->getEmail(), new Email())))
-    {
-      $validation_schema->setEmail($this->translator->trans('api.registerUser.notAValidEmail', [], 'catroweb'));
-    }
-    elseif (null != $this->user_manager->findUserByEmail($register->getEmail()))
-    {
-      $validation_schema->setEmail($this->translator->trans('api.registerUser.emailAlreadyInUse', [], 'catroweb'));
-    }
+    $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
 
-    // Username
-    if ('' === $register->getUsername())
-    {
-      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameMissing', [], 'catroweb'));
-    }
-    elseif (strlen($register->getUsername()) < 3)
-    {
-      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameTooShort', [], 'catroweb'));
-    }
-    elseif (strlen($register->getUsername()) > 180)
-    {
-      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameTooLong', [], 'catroweb'));
-    }
-    elseif (filter_var(str_replace(' ', '', $register->getUsername()), FILTER_VALIDATE_EMAIL))
-    {
-      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameContainsEmail', [], 'catroweb'));
-    }
-    elseif (null != $this->user_manager->findUserByUsername($register->getUsername()))
-    {
-      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameAlreadyInUse', [], 'catroweb'));
-    }
-    elseif (0 === strncasecmp($register->getUsername(), User::$SCRATCH_PREFIX, strlen(User::$SCRATCH_PREFIX)))
-    {
-      $validation_schema->setUsername($this->translator->trans('api.registerUser.usernameInvalid', [], 'catroweb'));
-    }
+    $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createUsersDataResponse($users);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
-    // Password
-    if ('' === $register->getPassword())
-    {
-      $validation_schema->setPassword($this->translator->trans('api.registerUser.passwordMissing', [], 'catroweb'));
-    }
-    elseif (strlen($register->getPassword()) < 6)
-    {
-      $validation_schema->setPassword($this->translator->trans('api.registerUser.passwordTooShort', [], 'catroweb'));
-    }
-    elseif (strlen($register->getPassword()) > 4_096)
-    {
-      $validation_schema->setPassword($this->translator->trans('api.registerUser.passwordTooLong', [], 'catroweb'));
-    }
-    elseif (!mb_detect_encoding($register->getPassword(), 'ASCII', true))
-    {
-      $validation_schema->setPassword($this->translator->trans('api.registerUser.passwordInvalidChars', [], 'catroweb'));
-    }
-
-    return $validation_schema;
+    return $response;
   }
 }

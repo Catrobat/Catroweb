@@ -28,11 +28,9 @@ class ReportNotificator
     $notification = $event->getReport();
     $program = $notification->getProgram();
 
-    foreach ($all_users as $user)
-    {
+    foreach ($all_users as $user) {
       /* @var $user Notification */
-      if (!$user->getReport())
-      {
+      if (!$user->getReport()) {
         continue;
       }
 

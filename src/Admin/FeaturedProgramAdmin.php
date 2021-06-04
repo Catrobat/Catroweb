@@ -2,9 +2,10 @@
 
 namespace App\Admin;
 
-use App\Catrobat\Forms\FeaturedImageConstraint;
+use App\Admin\Forms\FeaturedImageConstraint;
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
+use App\Entity\Flavor;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -12,9 +13,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\BlockBundle\Meta\Metadata;
 use Sonata\Form\Validator\ErrorElement;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -22,7 +23,6 @@ use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FeaturedProgramAdmin extends AbstractAdmin
 {
@@ -77,83 +77,65 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FeaturedProgram $object
-   *
-   * @return Metadata
+   * {@inheritdoc}
    */
-  public function getObjectMetadata($object)
+  public function getObjectMetadata($object): MetadataInterface
   {
-    return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
-      $this->getFeaturedImageUrl($object));
+    /** @var FeaturedProgram $featured_program */
+    $featured_program = $object;
+
+    return new Metadata($featured_program->getProgram()->getName(), $featured_program->getProgram()->getDescription(),
+      $this->getFeaturedImageUrl($featured_program));
   }
 
   /**
-   * @param FeaturedProgram $object
-   * @param mixed           $object
+   * {@inheritdoc}
    */
   public function preUpdate($object): void
   {
-    $object->old_image_type = $object->getImageType();
-    $this->checkFlavor();
-  }
+    /** @var FeaturedProgram $featured_program */
+    $featured_program = $object;
 
-  /**
-   * @param mixed $object
-   */
-  public function prePersist($object): void
-  {
-    $this->checkFlavor();
+    $featured_program->old_image_type = $featured_program->getImageType();
   }
 
   public function validate(ErrorElement $errorElement, $object): void
   {
     $id = $this->getForm()->get('Program_Id_or_Url')->getData();
 
-    if ($this->getForm()->get('Use_Url')->getData())
-    {
-      if (filter_var($id, FILTER_VALIDATE_URL))
-      {
+    if ($this->getForm()->get('Use_Url')->getData()) {
+      if (filter_var($id, FILTER_VALIDATE_URL)) {
         $object->setUrl($id);
-        if (null !== $object->getId())
-        {
+        if (null !== $object->getId()) {
           $object->setProgram(null);
         }
-      }
-      else
-      {
+      } else {
         $errorElement->with('ID')->addViolation('Please enter a valid URL.')->end();
       }
-    }
-    else
-    {
-      if (null !== $id)
-      {
+    } else {
+      if (null !== $id) {
         $id = preg_replace('$(.*)/project/$', '', $id);
       }
 
       $program = $this->program_manager->find($id);
 
-      if (null !== $program)
-      {
+      if (null !== $program) {
         $object->setProgram($program);
-        if (null !== $object->getURL())
-        {
+        if (null !== $object->getURL()) {
           $object->setURL(null);
         }
-      }
-      else
-      {
+      } else {
         $errorElement->with('ID')->addViolation('Unable to find program with given ID.')->end();
       }
     }
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     /** @var FeaturedProgram $featured_project */
     $featured_project = $this->getSubject();
@@ -165,20 +147,25 @@ class FeaturedProgramAdmin extends AbstractAdmin
     ];
 
     $id_value = '';
+    $use_url = false;
 
-    if (null !== $this->getSubject()->getId())
-    {
+    if (null !== $this->getSubject()->getId()) {
       $file_options['help'] = '<img src="../'.$this->getFeaturedImageUrl($featured_project).'">';
+
+      $id_value = $this->getSubject()->getUrl();
+      $use_url = true;
+      if (null == $id_value) {
+        $id_value = $this->getSubject()->getProgram()->getId();
+        $use_url = false;
+      }
     }
-    $formMapper
+    $form
       ->add('file', FileType::class, $file_options,
         ['help' => 'The featured image must be of size 1024 x 400'])
       ->add('Use_Url', CheckboxType::class, ['mapped' => false, 'required' => false,
-        'help' => 'Toggle to save URL instead of Program ID.', ])
+        'help' => 'Toggle to save URL instead of Program ID.', 'data' => $use_url, ])
       ->add('Program_Id_or_Url', TextType::class, ['mapped' => false, 'data' => $id_value])
-      ->add('flavor', ChoiceFieldMaskType::class, [
-        'choices' => $this->getFlavor(),
-      ])
+      ->add('flavor', null, ['class' => Flavor::class, 'multiple' => false, 'required' => true])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
         'help' => 'Toggle for iOS featured programs api call.', ])
@@ -187,13 +174,13 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('program.name')
       ->add('for_ios')
       ->add('active')
@@ -203,14 +190,14 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
     unset($this->listModes['mosaic']);
-    $listMapper
+    $list
       ->addIdentifier('id', null, [
         'sortable' => false,
       ])
@@ -226,7 +213,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ])
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
-      ->add('active', null)
+      ->add('active')
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],
@@ -239,34 +226,5 @@ class FeaturedProgramAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->remove('acl');
-  }
-
-  private function checkFlavor(): void
-  {
-    $flavor = $this->getForm()->get('flavor')->getData();
-
-    if (!$flavor)
-    {
-      return; // There was no required flavor form field in this Action, so no check is needed!
-    }
-
-    $flavor_options = $this->parameter_bag->get('themes');
-
-    if (!in_array($flavor, $flavor_options, true))
-    {
-      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
-    }
-  }
-
-  private function getFlavor(): array
-  {
-    $flavor_options = $this->parameter_bag->get('themes');
-    $flavors = [];
-    foreach ($flavor_options as $flavor)
-    {
-      $flavors[$flavor] = $flavor;
-    }
-
-    return $flavors;
   }
 }

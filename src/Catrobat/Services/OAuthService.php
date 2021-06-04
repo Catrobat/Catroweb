@@ -79,8 +79,7 @@ class OAuthService
       'username' => $username_email,
     ]);
 
-    if (null === $user)
-    {
+    if (null === $user) {
       $user = $this->user_manager->findOneBy([
         'email' => $username_email,
       ]);
@@ -103,13 +102,10 @@ class OAuthService
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByEmail($email);
-    if (null !== $user)
-    {
+    if (null !== $user) {
       $retArray['email_available'] = true;
       $retArray['username'] = $user->getUsername();
-    }
-    else
-    {
+    } else {
       $retArray['email_available'] = false;
     }
     $retArray['statusCode'] = Response::HTTP_OK;
@@ -148,14 +144,11 @@ class OAuthService
     $google_user = $this->user_manager->findOneBy([
       'gplusUid' => $google_id,
     ]);
-    if (null !== $google_user)
-    {
+    if (null !== $google_user) {
       $retArray['token_available'] = true;
       $retArray['username'] = $google_user->getUsername();
       $retArray['email'] = $google_user->getEmail();
-    }
-    else
-    {
+    } else {
       $retArray['token_available'] = false;
     }
     $retArray['statusCode'] = Response::HTTP_OK;
@@ -176,51 +169,37 @@ class OAuthService
 
     $google_user = null;
 
-    try
-    {
+    try {
       $client = new Google_Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
       $payload = $client->verifyIdToken($id_token);
-      if ($payload)
-      {
+      if ($payload) {
         $gPlusId = $payload['sub'];
         $gEmail = $payload['email'];
         $gLocale = $payload['locale'];
-      }
-      else
-      {
+      } else {
         return new JsonResponse('Token invalid', 777);
       }
 
-      if ($gEmail)
-      {
+      if ($gEmail) {
         /** @var User|null $user */
         $user = $this->user_manager->findUserByUsernameOrEmail($gEmail);
-      }
-      else
-      {
+      } else {
         $user = null;
       }
       /** @var User|null $google_user */
       $google_user = $this->user_manager->findUserBy([
         'gplusUid' => $gPlusId,
       ]);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return new JsonResponse('Token invalid', 777);
     }
 
-    if (null !== $google_user)
-    {
+    if (null !== $google_user) {
       $this->setGoogleTokens($google_user, null, null, $id_token);
-    }
-    elseif (null !== $user)
-    {
+    } elseif (null !== $user) {
       $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $gPlusId, $username, $gLocale);
       $this->setGoogleTokens($user, null, null, $id_token);
-    }
-    else
-    {
+    } else {
       $this->registerGoogleUser($request, $retArray, $gPlusId, $username, $gEmail, $gLocale,
         null, null, $id_token);
       $retArray['statusCode'] = 201;
@@ -246,21 +225,17 @@ class OAuthService
       'gplusUid' => $google_id,
     ]);
 
-    if (null !== $google_user && null !== $google_id && '' !== $google_id)
-    {
+    if (null !== $google_user && null !== $google_id && '' !== $google_id) {
       $google_user->setUploadToken($this->token_generator->generateToken());
       $this->user_manager->updateUser($google_user);
       $retArray['token'] = $google_user->getUploadToken();
       $retArray['username'] = $google_user->getUsername();
       $retArray['statusCode'] = Response::HTTP_OK;
-    }
-    elseif (null !== $google_mail && '' !== $google_mail && null !== $google_username && '' !== $google_username)
-    {
+    } elseif (null !== $google_mail && '' !== $google_mail && null !== $google_username && '' !== $google_username) {
       /** @var User|null $user */
       $user = $this->user_manager->findUserByEmail($google_mail);
 
-      if (null !== $user)
-      {
+      if (null !== $user) {
         $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $google_id, $google_username, $locale);
         $user->setUploadToken($this->token_generator->generateToken());
         $this->user_manager->updateUser($user);
@@ -287,8 +262,7 @@ class OAuthService
       'gplusUid' => $google_id,
     ]);
 
-    if (null !== $google_user)
-    {
+    if (null !== $google_user) {
       $this->refreshGoogleAccessToken($google_user);
 
       $client = $this->getAuthenticatedGoogleClientForGPlusUser($google_user);
@@ -299,9 +273,7 @@ class OAuthService
       $retArray['displayName'] = $person->getDisplayName();
       $retArray['imageUrl'] = $person->getImage()->getUrl();
       $retArray['profileUrl'] = $person->getUrl();
-    }
-    else
-    {
+    } else {
       $retArray['error'] = 'invalid id';
     }
 
@@ -314,8 +286,7 @@ class OAuthService
 
     $user = null;
 
-    if ($request->request->has('gplus_id'))
-    {
+    if ($request->request->has('gplus_id')) {
       $id = $request->request->get('gplus_id');
       $retArray['g_id'] = $id;
       $user = $this->user_manager->findUserBy([
@@ -323,10 +294,11 @@ class OAuthService
       ]);
     }
 
-    if (null != $user)
-    {
+    if (null != $user) {
       $retArray['user'] = true;
-      $token = new UsernamePasswordToken($user, null, 'main', $user->getRoles());
+      /** @var string[] $roles */
+      $roles = $user->getRoles();
+      $token = new UsernamePasswordToken($user, null, 'main', $roles);
       $retArray['token'] = $token;
       $this->token_storage->setToken($token);
 
@@ -358,16 +330,13 @@ class OAuthService
 
   private function setGoogleTokens(User $user, ?string $access_token, ?string $refresh_token, ?string $id_token): void
   {
-    if ($access_token)
-    {
+    if ($access_token) {
       $user->setGplusAccessToken($access_token);
     }
-    if ($refresh_token)
-    {
+    if ($refresh_token) {
       $user->setGplusRefreshToken($refresh_token);
     }
-    if ($id_token)
-    {
+    if ($id_token) {
       $user->setGplusIdToken($id_token);
     }
     $this->user_manager->updateUser($user);
@@ -381,15 +350,12 @@ class OAuthService
   private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, $googleId, string $googleUsername, string $locale): void
   {
     $violations = $this->validateOAuthUser($request, $retArray);
-    if (0 === count($violations))
-    {
-      if ('' === $user->getUsername())
-      {
+    if (0 === count($violations)) {
+      if ('' === $user->getUsername()) {
         $locale = substr($locale, 0, 180);
         $user->setUsername($googleUsername);
       }
-      if ('' === $user->getCountry() && 'NO_GOOGLE_LOCALE' !== $locale)
-      {
+      if ('' === $user->getCountry() && 'NO_GOOGLE_LOCALE' !== $locale) {
         $locale = substr($locale, 0, 5);
         $user->setCountry($locale);
       }
@@ -411,8 +377,7 @@ class OAuthService
   {
     $violations = $this->validateOAuthUser($request, $retArray);
     $retArray['violations'] = count($violations);
-    if (0 == count($violations))
-    {
+    if (0 == count($violations)) {
       /** @var User $user */
       $user = $this->user_manager->createUser();
       $user->setGplusUid($googleId);
@@ -421,8 +386,7 @@ class OAuthService
       $user->setPlainPassword(Utils::randomPassword());
       $user->setEnabled(true);
       $user->setCountry($locale);
-      if ($id_token)
-      {
+      if ($id_token) {
         $user->setGplusIdToken($id_token);
       }
 
@@ -450,8 +414,7 @@ class OAuthService
     $client_id = getenv('GOOGLE_CLIENT_ID');
     $client_secret = getenv('GOOGLE_CLIENT_ID');
 
-    if (!$client_secret || !$client_id || !$application_name)
-    {
+    if (!$client_secret || !$client_id || !$application_name) {
       return new Response('Google app authentication data not found!', 401);
     }
 
@@ -486,8 +449,7 @@ class OAuthService
   {
     $create_request = new CreateOAuthUserRequest($request);
     $violations = $this->validator->validate($create_request);
-    foreach ($violations as $violation)
-    {
+    foreach ($violations as $violation) {
       $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
       $retArray['answer'] = $this->trans($violation->getMessageTemplate(), $violation->getParameters());
       break;
@@ -501,10 +463,9 @@ class OAuthService
    */
   private function deleteUser(?User $user): void
   {
-    $user_programs = $this->program_manager->getUserPrograms($user->getId(), true);
+    $user_programs = $this->program_manager->findBy(['user' => $user]);
 
-    foreach ($user_programs as $user_program)
-    {
+    foreach ($user_programs as $user_program) {
       $this->em->remove($user_program);
       $this->em->flush();
     }

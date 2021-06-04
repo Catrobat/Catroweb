@@ -17,8 +17,7 @@ class TranslationController extends AbstractController
   {
     $decodedArray = [];
 
-    if ('' !== $array)
-    {
+    if ('' !== $array) {
       $decodedArray = $this->parseJavascriptDictArrayToPhp($array);
     }
 
@@ -29,8 +28,7 @@ class TranslationController extends AbstractController
   {
     $array = (array) json_decode($array, false, 512, JSON_THROW_ON_ERROR);
     $decodedArray = [];
-    foreach ($array as $value)
-    {
+    foreach ($array as $value) {
       $value = (array) $value;
       $decodedArray[$value['key']] = $value['value'];
     }

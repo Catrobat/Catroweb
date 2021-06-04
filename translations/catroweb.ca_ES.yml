@@ -3,13 +3,18 @@
 localLanguage: Anglès
 username: Usuari
 password: Contrasenya
+createNewPassword: Create new password
 accountSettings: Account Settings
 email: E-Mail
 aboutPocketCode: Quant a Pocket Code
-aboutCatrobat: About Catrobat
+about: About
+education: Education
+chat: Chat and forums
+others: Others
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: IOS App store
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Les contrasenyes no concorden.
 error: Error
 cancel: Cancel·la
@@ -18,53 +23,48 @@ deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
-download: Download the project
+download: Descarrega
 description: Descripció
 noDescription: Cap descripció disponible.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: País
 loginText: inicia sessió
 privacyPolicy: Política de privacitat
 imprint: Peu d'impremta
+programDetails: Details
 somethingWentWrong: 'Ups... alguna cosa ha anat malament.'
 pleaseTryAgain: 'Torna-ho a provar!'
 oldVersionError: 'Actualitza a la nova versió de Pocket Code'
 more: 'més'
 less: 'menys'
-show-more: 'Show more'
-show-less: 'Show less'
-ok: D'acord
+show-more: 'More information'
+show-less: 'Less information'
+more-information: 'More information'
+less-information: 'Less information'
+ok: Ok
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'El nom d''usuari o el correu electrònic ja existeixen.'
 notifications: 'notificacions'
 allNotifications: 'All Notifications'
 FollowersNotifications: 'Followers'
 LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
 CommentNotifications: 'Comentaris'
 RemixNotifications: 'Remixes'
-oldnotification: 'Old Notifications'
 wellDone: "Ben fet!"
 done: "Acabar!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "Totes les notificacions s'han marcat com a llegides."
-deleteNotificationConfirmation: "Are you sure?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
 confirmMessage: "Yes, delete it"
 cancelMessage: "Cancel·la"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "Marca tot com a llegit"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Incapaç de marcar notificacions com a llegides!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "Si us plau, espera..."
 projects: "Projects"
+oauthPopUpTitle: "External account sign in information"
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthHere: "here"
+statistics: "Statistics"
 indexPage:
   recommendedSection:
     info:
@@ -88,6 +88,7 @@ programs:
   welcome:
     title: Welcome to Catrobat's %theme%
     subtitle: Create stories, games and more...
+    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
     download: Download the app
     statistics: More Statistics
   featured: Destacats
@@ -175,7 +176,10 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
+  reactionsText: Reactions
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
 remixGraph:
+  title: Remixes
   showRemixGraph: 'Mostra el gràfic Remix'
   by: 'by'
   open: 'Open'
@@ -267,6 +271,7 @@ profile:
     pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
     uploadError: Sorry, there was a problem during the upload!
     noSupport: This image type is not supported, please try another image.
+  goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
   edit: Edit
@@ -334,232 +339,6 @@ termsOfUse:
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 March 2014
-help:
-  stepByStep:
-    title: "Step-by-Step Intro"
-    start: "Starting position:"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: 'Tap on "New".'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "Create a new object"
-      detail:
-        text1: 'Tap:'
-        text2: 'Choose the source of the first look of your new object.'
-        text3: 'Enter an object name and tap "OK" to create the object.'
-        special1: 'Draw a new look.'
-        special2: 'Choose from gallery.'
-        special3: 'Take a picture.'
-    step3:
-      title: "Start Moving"
-      detail:
-        text1: 'Tap:'
-        text2: 'The first brick we use is out of the category "Motion".'
-        text3: 'Choose the "Glide" brick. The object will move to the new position defined with the brick on the stage.'
-        text4: 'The brick is now floating. To paste it, move the brick to the desired position. You can also move already inserted bricks by tapping the brick until it is floating again.'
-        text5: 'Tap "Play" to go to the stage and see the object gliding.'
-        text6: 'Use the Android Back Button to get back from the stage.'
-    step4:
-      title: "Change Look"
-      description: "You can change the look of your object."
-      detail:
-        text1: 'Choose the "Switch to look" brick. With this brick you can choose a look or create a new one.'
-        text2: 'Snap the brick underneath the "Glide" - brick.'
-        text3: 'Tap into the dropdown field to create a new look.'
-        text4: 'Choose the source of the image like before.'
-        text5: 'Now you have to select the new image.'
-        text6: 'Tap play to see the behaviour on the stage.'
-    step5:
-      title: "Speak"
-      description: "Now you will find out how to make an object talk."
-      detail:
-        text1: 'Choose the "Speak" brick. The object speaks the text, when this brick is executed.'
-        text2: 'Snap the brick underneath the "Switch to look" brick.'
-        text3: 'Tap play to see the behaviour on the stage.'
-    step6:
-      title: 'Again and again'
-      description: "This step shows you how to repeat behaviour of objects."
-      detail:
-        text1: 'Choose the "Forever" brick. Everything in the loop repeats forever.'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'Add another "Glide" brick.'
-        text4: 'Snap the "Glide" brick aboth the "End of loop" brick.'
-        text5: 'Tap into the text field of the x and y value and set to 0.'
-        text6: 'Tap play to see the behaviour on the stage.'
-    step7:
-      title: "Tapping is everything"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: 'Choose the "When tapped" brick. Every brick underneath the "When tapped" will be executed one time when you tap the object on the stage.'
-        text2: 'Place the "When tapped" underneath the other bricks.'
-        text3: 'Choose the "Turn right" brick and snap it underneath the "When tapped" brick.'
-        text4: 'Now you have this script.'
-        text5: 'Tap play to see the behaviour on the stage. If you now tap on the object, it spins.'
-    step8:
-      title: "Copy, delete or edit a brick"
-      detail:
-        text1: 'Single tap on the left side of each brick opens the context menu. There you can move, copy, delete or edit the values of the brick with the formula editor.'
-    step9:
-      title: "Navigation in the app"
-      detail:
-        text1: 'Use the Android Back Button to navigate in the app.'
-        text2: 'Go back one screen to the overview of your object. Here you can go into the scripts and also to an powerful representation of the looks and sounds of the object. There you can rename, copy add or delete looks and sounds.'
-        text3: 'Use again the Android Back Button to get to the overview of your objects and your background.'
-    step10:
-      title: "Change the background"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: 'The background is like an object, but you just can have one background.'
-        text2: 'You can add scripts, sounds and look in the same way to the background object.'
-    step11:
-      title: "Main Menu"
-      description: "Use the Android Back Button to get to this screen."
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'Go to the help site and discuss with other users.'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "Tutorials"
-    description1: "These tutorials show you how to use effective tricks in Pocket Code."
-    getReady: "Get Ready:"
-    tryCode: "Try this code:"
-    doIt: "Do it:"
-    tip: "Extra Tip:"
-    card1:
-      title: "Change Size"
-      description: "Change the size of an object."
-      one: "Add the object of which you would like to change the size, e.g. Animal."
-      two: "Insert the following bricks into the scripts of the object in order to minimize it (by 20% of it's original size) when tapped."
-    card2:
-      title: "Change Look"
-      description: "Change the looks of an object."
-      one: "Add the object of which you would like to change its look, e.g. items."
-      two: "Include further pictures in the object's looks."
-      three: "Insert the following bricks into the scripts of the object in order to continually switch it's look after one second."
-    card3:
-      title: "Animation"
-      description: "Animate objects"
-      one: "Add the object you want to be moving."
-      two: "Include another picture in the object's looks which illustrates the movement."
-      three: "Insert the following bricks into the scripts of the object in order to continually change the object's position after a certain time. Additionally you can margin the stage by bouncing if on edge."
-    card4:
-      title: "Glide"
-      description: "Let your object glide over the screen."
-      one: "Add the object you want to be gliding. e.g. plane."
-      two: "Insert the following bricks and define the area in which the movement should happen."
-    card5:
-      title: "Play a Sound"
-      description: "Play a sound by tapping on the object."
-      one: "Add the object you want to be playing a sound, e.g. dog."
-      two: "Insert the following bricks in order to make the playback possible. Choose a sound from your personal library, the Pocket Code media library or record one yourself."
-    card6:
-      title: "Speak"
-      description: "Let your object speak."
-      one: "Add the object you want to be speaking, e.g. Carrie."
-      two: "Insert the following bricks in order to make the voice output possible."
-    card7:
-      title: "Sensor"
-      description: "Control an object by using the inclination sensors."
-      one: "Add the object you want to be moving on stage."
-      two: "Insert the following bricks in order to control the object through your phone’s sensors. Therefore choose the „x and y inclination“. To get the suitable movement, set „- inclination“. If the object’s movement is too sensible, divide the inclination by 10 for example."
-    card8:
-      title: "Compass"
-      description: "Create you own compass"
-      one: "Add the object you want to point in compass direction."
-      two: "Insert the following bricks in order to set the object's orientation. Additionally include a forever loop."
-    card9:
-      title: "Broadcast"
-      description: "Send messages from one object to another."
-      one: "Add a new object, e.g. Alice, which should send a broadcast message. Additionally, add a second background to the background's looks. As soon as the background receives the broadcast message it will change to its other look."
-      two: "Insert the brick „Send to all“ and determine what should happen when the other object receives the message."
-      three: "In this case the background changes when the object in the front layer is tapped."
-    card10:
-      title: "Show variable"
-      description: "Show the value of a variable."
-      one: "Add an object you want to be moved through your phone’s sensors (see %tutorial_card_link_7% Tutorial Card 7 %link_end%). Additionally add a second background to which it should change when it receives a broadcast message."
-      two: "Insert the following bricks in order to save the current x and y position of the moving object in a variable."
-      three: "Through „Show variable“ you can display the values on stage."
-    card11:
-      title: "Collision detection"
-      description: "Detect a collision between two objects."
-      one: "Add two objects of which one should be moving through your phone’s sensors, e.g. Alex (see %tutorial_card_link_7% Tutorial Card 7 %link_end%)."
-      two: "Save the current „x and y position“ of the moving object Alex (see %tutorial_card_link_10% Tutorial Card 10 %link_end%) and insert the following scripts. Continually check if the two objects overlap. If they do so the fixed object should be hidden in this case."
-    card12:
-      title: "Face detection"
-      description: "Control an object by using face detection."
-      one: "First make sure that the face detection bricks are enabled. Therefore go to the settings."
-      two: "Add a new object and insert the following bricks in order to show it if a face is detected. Check if a face is detected and put this in a forever loop. If the camera perceives a face the value of the variable is „TRUE“, otherwise it is „FALSE“."
-  starterPrograms:
-    title: "Starter Projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "Games"
-      animations: "Animations"
-      interactive: "Interactive Art and Stories"
-      music: "Music And Dance"
-  gameJam:
-    title: "How to upload a Pocket Code game to the Game Jolt Site?"
-    text0: "First congratulations on your game! Now you can upload it on %link% in order to create a stand-alone Android app, which you then can upload on the Game Jolt site."
-    title1: "Registration"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "Upload"
-    text2: "After the registration process you are able to upload your game. Just think about a name and add a description. Also add #AliceJam150 in the description field."
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "Create Android app"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "Download app"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "Register/Login at GameJolt.com"
-    text6: "Visit %link% and click on ‘Log In’ or 'Sign Up!' in the menu. If you already have an account just log in, if not, you need to register with your Email address, Username and Password."
-    title7: "Upload your game on the Game Jolt Site"
-    text7: "After you're logged in, go to your dashboard. There you can add your game. First you have to click on ‘Accept rules’. Then fill out the game information. As Engine/Language/Creation Tool choose 'Other' and add to the field Other Engine/Language/Tool 'Android'. As 'Development' status choose 'Finished/Stable'. Make sure to include #AliceJam150 in the description so it appears on the %link% page."
-    text7_1: "Before you can publish your game, follow the next steps. You must at least add a ‘thumbnail image’, set a ‘maturity rating’, and upload your games by clicking on ‘build/files’."
-    text7_2: "Click on ‘Add Package’ and fill fill out the package information. Save it and add the release. "
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "Note: If the app is missing its suffix ‘.apk’, you have to add ‘.apk’ manually. Just rename the file. Now you should be able to upload it."
-    text7_5: "After the upload click on ‘OK’ to publish your game. This will later show people a link to download your game."
-    text7_6: "You have now uploaded your first game on the Game Jolt site and set it as active. Congratulations!"
-    text7_7: "Other people will now be able to find your game and it will appear on the %link% page."
-  aliceGameJamTutorialcards:
-    title1: "(Welcome to) Wonderland"
-    subtitle1: "Animate Characters and create a 'when tapped' event"
-    description1: |
-      Learn how to let one of your characters come to life with a simple animation and master how to make your characters do something when tapping on them. The video shows you how you can easily animate your character by using different looks.
-      Further we show you how to create a "when tapped" event and how to send broadcast messages between objects.
-    title2: "Save Alice!"
-    subtitle2: "Use the inclination sensors and detect a collision between objects"
-    description2: "Here you will learn how to control a character using the inclination sensors of your phone. You can control Alice's movement by tilting your phone to the left or the right. Watch our tutorial and let objects fall randomly from the sky and get experienced in detecting collisions with other objects."
-    title3: "The Hatter - Hit and Run"
-    subtitle3: "Create a moving landscape and control the Hatters' movement"
-    description3: "In this tutorial you will learn how to create a landscape that looks like it is moving. We will do it by moving objects along the screen to create the illusion of movement. We also show you how to make the Hatter move by tilting your phone."
-    title4: "The Hatter - Hit and Run"
-    subtitle4: "Let the Hatter shoot the evil cards"
-    description4: "In this tutorial we will show you how to create enemies which move randomly towards your character. Moreover, you will learn how to make the hatter shoot teadrops and check if the enemies are hit by using collision detection."
-    title5: "Whack a Cheshire Cat"
-    subtitle5: "Create a score by using variables"
-    description5: "In this tutorial we will show you how to use variables in order to create a score. Scores are useful elements within a game. Our score shows you how often you have catched the cat."
-    title6: "A Rabbits Race"
-    subtitle6: "Create a moving background"
-    description6: |
-      This tutorial shows you how to create a vertically scrolling background by gliding the background graphics in a certain way. Another thing we will teach you is to make the character jump forward by tapping on it.
-      To make the game a little bit more difficult we will show you how to slow down the speed of your character over time.
-    download: "Download the project"
-oauth:
-  username_header: Thank you for signing up to Pocket Code!
-  username_chooser: "Please choose a username:"
-  username_hint: The username should not be your real name.
-  usernameTaken: Username already taken, please choose a different one.
 search:
   dotdotdot: Search...
   search: Search
@@ -596,7 +375,7 @@ login:
   passwordSecond: Password Confirm
 apk:
   download: Download as app
-  prepare: 'Prepare app'
+  prepare: 'Get as app'
   preparing: 'Preparing app'
   text: 'The process may take a while'
 format:
@@ -671,18 +450,23 @@ failure:
   upload: There was an error during the upload of your app.
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
+    emailMissing: 'Email missing'
+    emailEmpty: 'Email cannot be empty'
+    emailInvalid: 'Email invalid'
+    emailAlreadyInUse: 'Email already in use'
     usernameMissing: 'Username missing'
     usernameTooShort: 'Username too short'
     usernameTooLong: 'Username too long'
+    usernameEmpty: 'Username cannot be empty'
     usernameAlreadyInUse: 'Username already in use'
+    usernameInvalid: 'Username invalid'
     passwordMissing: 'Password missing'
+    passwordEmpty: 'Password cannot be empty'
     passwordTooShort: 'Password too short'
     passwordTooLong: 'Password too long'
     passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    usernameContainsEmail: "Username must not contain an email address"
+    countryCodeInvalid: "Country code invalid"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -764,14 +548,6 @@ admin:
     ramMaintenance: RAM maintenance
     noRemovableObjects: No removable objects available.
     removableObjects: Removable objects
-    manualBackups: Manual backups
-    noRemovableBackupObjects: No removable backup files on this server.
-    btnCreateBackup: Create backup
-    btnDownloadBackup: Download backup
-    btnRestoreBackup: Restore backup
-    btnDeleteBackup: Delete backup
-    createBackupConfirmationTitle: Create backup file
-    createBackupConfirmationText: This process may take a while. The page will reload afterwards!
 recommender:
   similarPrograms: Similar projects
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
@@ -787,6 +563,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
+  title: 'Code View'
   showCode: 'Show code'
   hideCode: 'Hide code'
   showStatistics: 'Show code statistics'
@@ -824,6 +601,7 @@ codeStatistics:
   looksBricks: 'Looks'
   penBricks: 'Pen'
   dataBricks: 'Data'
+  deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
   language: Idioma
@@ -847,49 +625,25 @@ privacy-policy:
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
   markAsRead: "Mark as read"
-  summary: "{0}You have no new Notifications|{1}You have %amount% new Notification!|]1,Inf]You have %amount% new Notifications!"
+  noFollowers: "It looks like you don't have any follower notifications."
+  noComments: "It looks like you don't have any comment notifications."
+  noReactions: "It looks like you don't have any reaction notifications."
+  noRemixes: "It looks like you don't have any remix notifications."
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'New Follower!'
     message: 'User %user_link% follows you now.'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
 next: Següent
 previous: Previous
-help-cards:
-  headings:
-    starters: Starters
-    tutorials: Tutorials
-    stepbystep: Step by Step
-    getinvolvedGoogle: Get it on Google Play
-    getinvolvedApple: Get it on IOS
-    discord: Join on Discord
-    game_design: Game Design
-    education: Education platform
-    discuss: Discuss
-  text:
-    starters: "Try out and remix with %theme%"
-    tutorials: "Effective tricks in %theme%"
-    stepbystep: "Do 10 easy steps in %theme%"
-    getinvolved: Download the app and get started
-    discord: Join the community on discord
-    game_design_1: Effective tricks for
-    game_design_2: creating a game
-    education: Beginner's course & great resources
-    discuss_1: Get in touch with other
-    discuss_2: users
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
@@ -924,3 +678,43 @@ copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Comunitat Catrobat'
 back_to_app: 'Exit community'
+category:
+  recent: Newest projects
+  random: Random projects
+  most_viewed: Més visitats
+  most_downloaded: Els més descarregats
+  example: Example
+  scratch: Scratch remixes
+  recommended: Recommended projects
+achievements:
+  overview:
+    header: 'Achievements'
+    most_recent_achievement:
+      title: 'Newest Achievement'
+      x_out_of_y: '%unlocked% out of %total% unlocked'
+    tab_unlocked:
+      title: 'Unlocked'
+      empty: "You haven't unlocked any achievements yet."
+    tab_locked:
+      title: 'Locked'
+      empty: "You have already unlocked all achievements."
+  achievement:
+    type:
+      bronze_user:
+        title: 'Apprentice'
+        description: 'Follow someone and upload a project'
+      silver_user:
+        title: 'Artisan'
+        description: 'Active member for > 1 year'
+      gold_user:
+        title: 'Master'
+        description: 'Active member for > 4 years'
+      diamond_user:
+        title: 'Grand master'
+        description: 'Active member for > 7 years'
+      perfect_profile:
+        title: 'Initiative'
+        description: 'Add your first profile picture'
+      verified_developer:
+        title: 'Novice'
+        description: 'Create a user account'

@@ -85,17 +85,29 @@ class UserComment
    *     nullable=true
    * )
    */
-  private Program $program;
+  private ?Program $program = null;
+
+  /**
+   * @ORM\ManyToOne(targetEntity="Studio", inversedBy="comments", cascade={"persist"})
+   * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+   */
+  protected ?Studio $studio;
+
+  /**
+   * @ORM\OneToOne(targetEntity="StudioActivity", cascade={"persist"})
+   * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=true, onDelete="CASCADE")
+   */
+  protected ?StudioActivity $activity;
 
   public function __toString(): string
   {
-    return $this->text;
+    return $this->text ?? '';
   }
 
   /**
    * Returns the Program which this UserComment comments.
    */
-  public function getProgram(): Program
+  public function getProgram(): ?Program
   {
     return $this->program;
   }
@@ -188,5 +200,25 @@ class UserComment
   public function setNotification(CommentNotification $notification): void
   {
     $this->notification = $notification;
+  }
+
+  public function getStudio(): ?Studio
+  {
+    return $this->studio;
+  }
+
+  public function setStudio(?Studio $studio): void
+  {
+    $this->studio = $studio;
+  }
+
+  public function getActivity(): ?StudioActivity
+  {
+    return $this->activity;
+  }
+
+  public function setActivity(?StudioActivity $activity): void
+  {
+    $this->activity = $activity;
   }
 }

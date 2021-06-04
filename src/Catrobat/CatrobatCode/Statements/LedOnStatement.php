@@ -7,11 +7,11 @@ class LedOnStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'led on';
+  public const BEGIN_STRING = 'led on';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * LedOnStatement constructor.

@@ -8,24 +8,23 @@ use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\ORM\Mapping\Index;
 use Exception;
 
 /**
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
- * @ORM\Table(name="program", indexes={@Index(columns={"id", "name", "description", "credits"}, flags={"fulltext"})})
+ * @ORM\Table(name="program")
  * @ORM\Entity(repositoryClass="App\Repository\ProgramRepository")
  */
 class Program
 {
-  const APK_NONE = 0;
+  public const APK_NONE = 0;
 
-  const APK_PENDING = 1;
+  public const APK_PENDING = 1;
 
-  const APK_READY = 2;
+  public const APK_READY = 2;
 
-  const INITIAL_VERSION = 1;
+  public const INITIAL_VERSION = 1;
 
   /**
    * @ORM\Id
@@ -178,11 +177,6 @@ class Program
   protected int $downloads = 0;
 
   /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected ?string $directory_hash = null;
-
-  /**
    * @ORM\Column(type="datetime")
    */
   protected DateTime $uploaded_at;
@@ -203,11 +197,6 @@ class Program
    * @ORM\Column(type="string", options={"default": ""})
    */
   protected string $catrobat_version_name = '';
-
-  /**
-   * @ORM\Column(type="integer", options={"default": 0})
-   */
-  protected int $catrobat_version = 0;
 
   /**
    * @ORM\Column(type="string", options={"default": ""})
@@ -373,6 +362,11 @@ class Program
   protected Collection $reports;
 
   /**
+   * @ORM\Column(type="boolean", options={"default": false})
+   */
+  private bool $snapshots_enabled = false;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -427,8 +421,7 @@ class Program
   public function updateTimestamps(): void
   {
     $this->updateLastModifiedTimestamp();
-    if (null == $this->getUploadedAt())
-    {
+    if (null == $this->getUploadedAt()) {
       $this->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
     }
   }
@@ -579,9 +572,14 @@ class Program
   /**
    * Returns the user owning this Program.
    */
-  public function getUser(): User
+  public function getUser(): ?User
   {
     return $this->user;
+  }
+
+  public function getUsernameString(): string
+  {
+    return strval($this->user->getUsername());
   }
 
   public function getComments(): Collection
@@ -606,9 +604,9 @@ class Program
     return $this->language_version;
   }
 
-  public function setCatrobatVersionName(string $catrobatVersionName): Program
+  public function setCatrobatVersionName(string $catrobat_version_name): Program
   {
-    $this->catrobat_version_name = $catrobatVersionName;
+    $this->catrobat_version_name = $catrobat_version_name;
 
     return $this;
   }
@@ -616,18 +614,6 @@ class Program
   public function getCatrobatVersionName(): string
   {
     return $this->catrobat_version_name;
-  }
-
-  public function setCatrobatVersion(int $catrobatVersion): Program
-  {
-    $this->catrobat_version = $catrobatVersion;
-
-    return $this;
-  }
-
-  public function getCatrobatVersion(): int
-  {
-    return $this->catrobat_version;
   }
 
   public function setUploadIp(string $uploadIp): Program
@@ -730,16 +716,6 @@ class Program
     $this->category = $category;
   }
 
-  public function setExtractedDirectoryHash(?string $directory_hash): void
-  {
-    $this->directory_hash = $directory_hash;
-  }
-
-  public function getExtractedDirectoryHash(): ?string
-  {
-    return $this->directory_hash;
-  }
-
   public function getApkStatus(): int
   {
     return $this->apk_status;
@@ -839,8 +815,7 @@ class Program
 
   public function addTag(Tag $tag): void
   {
-    if ($this->tags->contains($tag))
-    {
+    if ($this->tags->contains($tag)) {
       return;
     }
     $this->tags->add($tag);
@@ -853,8 +828,7 @@ class Program
 
   public function addExtension(Extension $extension): void
   {
-    if ($this->extensions->contains($extension))
-    {
+    if ($this->extensions->contains($extension)) {
       return;
     }
     $this->extensions->add($extension);
@@ -867,8 +841,7 @@ class Program
 
   public function removeAllExtensions(): void
   {
-    foreach ($this->extensions as $extension)
-    {
+    foreach ($this->extensions as $extension) {
       $this->removeExtension($extension);
     }
   }
@@ -902,8 +875,7 @@ class Program
   {
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(function (ProgramRemixRelation $ra)
-    {
+    return array_unique(array_map(function (ProgramRemixRelation $ra) {
       return $ra->getDescendantId();
     }, $relations));
   }
@@ -928,9 +900,46 @@ class Program
     return $this->tags;
   }
 
+  public function getTagsName(): array
+  {
+    $tags = [];
+
+    /** @var Tag $tag */
+    foreach ($this->getTags() as $tag) {
+      $tags[] = $tag->getEn();
+    }
+
+    return $tags;
+  }
+
   public function getExtensions(): Collection
   {
     return $this->extensions;
+  }
+
+  public function getExtensionsString(): string
+  {
+    $extensions = [];
+    foreach ($this->extensions as $program_extension) {
+      /* @var Extension $program_extension */
+      $extensions[] = $program_extension->getName();
+    }
+
+    return implode(', ', $extensions);
+  }
+
+  public function getTagsString(): string
+  {
+    $tags = [];
+    foreach ($this->tags as $program_tag) {
+      /* @var Tag $program_tag */
+      $tags[] = $program_tag->getEn();
+      $tags[] = $program_tag->getDe();
+      $tags[] = $program_tag->getIt();
+      $tags[] = $program_tag->getFr();
+    }
+
+    return implode(', ', $tags);
   }
 
   public function isDebugBuild(): bool
@@ -1047,5 +1056,15 @@ class Program
   public function isScratchProgram(): bool
   {
     return null !== $this->scratch_id;
+  }
+
+  public function setSnapshotsEnabled(bool $snapshots_enabled): void
+  {
+    $this->snapshots_enabled = $snapshots_enabled;
+  }
+
+  public function isSnapshotsEnabled(): bool
+  {
+    return $this->snapshots_enabled;
   }
 }

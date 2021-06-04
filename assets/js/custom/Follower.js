@@ -27,8 +27,14 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
       title: self.unfollowQuestion,
       icon: 'question',
       showCancelButton: true,
+      allowOutsideClick: false,
       confirmButtonText: self.unfollowButton.replace('%username%', username),
-      cancelButtonText: self.cancelButton
+      cancelButtonText: self.cancelButton,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false
     }).then((result) => {
       if (result.value) {
         $.ajax({
@@ -82,7 +88,7 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
   function handleError (xhr, $buttons) {
     if (xhr.status === 401) {
       // a user must be logged in to (un)follow someone
-      window.location.assign('fos_user_security_login')
+      window.location.assign('login')
       return
     }
     if (xhr.status === 422) {
@@ -91,6 +97,15 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
       return
     }
     $buttons.attr('disabled', false)
-    Swal.fire(somethingWentWrongError, followError, 'error')
+    Swal.fire({
+      title: somethingWentWrongError,
+      text: followError,
+      icon: 'error',
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false,
+      allowOutsideClick: false
+    })
   }
 }

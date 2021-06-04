@@ -23,13 +23,10 @@ class ProgramFlavorListener
   public function checkFlavor(Program $program): void
   {
     $request = $this->request_stack->getCurrentRequest();
-    if (null == $request)
-    {
+    if (null == $request) {
       $program->setFlavor('pocketcode');
-    }
-    else
-    {
-      $program->setFlavor($request->get('flavor'));
+    } else {
+      $program->setFlavor($request->attributes->get('flavor'));
     }
   }
 }

@@ -13,8 +13,7 @@ class ApproveProgramController extends CRUDController
   {
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
     $object->setApproved(true);
@@ -28,8 +27,7 @@ class ApproveProgramController extends CRUDController
   public function skipAction(): RedirectResponse
   {
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
     $this->addFlash('sonata_flash_warning', $object->getName().' skipped');
@@ -41,8 +39,7 @@ class ApproveProgramController extends CRUDController
   {
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException(sprintf('unable to find the object'));
     }
     $object->setApproved(true);
@@ -57,8 +54,7 @@ class ApproveProgramController extends CRUDController
   private function getRedirectionUrl(): string
   {
     $nextId = $this->getNextRandomApproveProgramId();
-    if (null == $nextId)
-    {
+    if (null == $nextId) {
       return $this->admin->generateUrl('list');
     }
 
@@ -73,8 +69,7 @@ class ApproveProgramController extends CRUDController
     $data_grid = $this->admin->getDatagrid();
 
     $objects = $data_grid->getResults();
-    if (0 == count($objects))
-    {
+    if (0 == count($objects)) {
       return null;
     }
     $object_key = array_rand($objects);

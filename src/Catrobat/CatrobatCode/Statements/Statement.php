@@ -37,8 +37,7 @@ class Statement
   {
     $code = '';
 
-    foreach ($this->statements as $value)
-    {
+    foreach ($this->statements as $value) {
       $code .= $value->execute();
     }
 
@@ -65,7 +64,7 @@ class Statement
     return $this->endString;
   }
 
-  public function getXmlTree(): SimpleXMLElement
+  public function getXmlTree(): ?SimpleXMLElement
   {
     return $this->xmlTree;
   }
@@ -77,8 +76,7 @@ class Statement
 
   protected function createChildren(StatementFactory $statementFactory): void
   {
-    if (null != $this->xmlTree)
-    {
+    if (null != $this->xmlTree) {
       $this->addAllScripts($statementFactory->createStatement($this->xmlTree, $this->spaces + 1));
     }
   }
@@ -88,8 +86,7 @@ class Statement
    */
   protected function addAllScripts(array $statementsToAdd): void
   {
-    foreach ($statementsToAdd as $statement)
-    {
+    foreach ($statementsToAdd as $statement) {
       $this->statements[] = $statement;
     }
   }
@@ -97,8 +94,7 @@ class Statement
   protected function addSpaces(int $offset = 0): string
   {
     $stringSpaces = '';
-    for ($i = 0; $i < ($this->spaces + $offset) * 4; ++$i)
-    {
+    for ($i = 0; $i < ($this->spaces + $offset) * 4; ++$i) {
       $stringSpaces .= '&nbsp;';
     }
 
@@ -116,10 +112,8 @@ class Statement
   protected function getFormulaListChildStatement(): ?FormulaListStatement
   {
     $formula_list_stmt = null;
-    foreach ($this->statements as $child_stmt)
-    {
-      if ($child_stmt instanceof FormulaListStatement)
-      {
+    foreach ($this->statements as $child_stmt) {
+      if ($child_stmt instanceof FormulaListStatement) {
         $formula_list_stmt = $child_stmt;
       }
     }

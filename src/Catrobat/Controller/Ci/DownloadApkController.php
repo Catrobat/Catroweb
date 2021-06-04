@@ -14,37 +14,44 @@ use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * Class DownloadApkController.
+ *
+ * @deprecated - Move to Catroweb-API
+ */
 class DownloadApkController extends AbstractController
 {
+  private ProgramManager $program_manager;
+
+  private ApkRepository $apk_repository;
+
+  public function __construct(ProgramManager $program_manager, ApkRepository $apk_repository)
+  {
+    $this->program_manager = $program_manager;
+    $this->apk_repository = $apk_repository;
+  }
+
   /**
    * @Route("/ci/download/{id}", name="ci_download", methods={"GET"})
    */
-  public function downloadApkAction(Request $request, Program $program, ApkRepository $apk_repository,
-                                    ProgramManager $programManager): BinaryFileResponse
+  public function downloadApkAction(string $id, Request $request): BinaryFileResponse
   {
-    if (!$program->isVisible())
-    {
-      throw new NotFoundHttpException();
-    }
-    if (Program::APK_READY != $program->getApkStatus())
-    {
+    /** @var Program|null $program */
+    $program = $this->program_manager->find($id);
+
+    if (null === $program || !$program->isVisible() || Program::APK_READY != $program->getApkStatus()) {
       throw new NotFoundHttpException();
     }
 
-    try
-    {
-      $file = $apk_repository->getProgramFile($program->getId());
+    try {
+      $file = $this->apk_repository->getProgramFile($program->getId());
+    } catch (Exception $exception) {
+      throw new NotFoundHttpException($exception->__toString());
     }
-    catch (Exception $exception)
-    {
-      throw new NotFoundHttpException($exception);
-    }
-    if ($file->isFile())
-    {
+    if ($file->isFile()) {
       $downloaded = $request->getSession()->get('apk_downloaded', []);
-      if (!in_array($program->getId(), $downloaded, true))
-      {
-        $programManager->increaseApkDownloads($program);
+      if (!in_array($program->getId(), $downloaded, true)) {
+        $this->program_manager->increaseApkDownloads($program);
         $downloaded[] = $program->getId();
         $request->getSession()->set('apk_downloaded', $downloaded);
       }

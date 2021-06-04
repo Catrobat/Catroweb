@@ -30,7 +30,7 @@
   </button>
 
   <div id="username-ajax" class="button-show-ajax">
-    <i class="fa fa-spinner fa-pulse fa-2x fa-fw" aria-hidden="true"></i>
+    {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'save-username-spinner'} only %}
   </div>
 
 </div>

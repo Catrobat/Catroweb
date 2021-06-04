@@ -1,0 +1,12 @@
+{# Different videos for different themes #}
+<div class="youtube" id="youtube-index"
+    {% if flavor() == 'luna' %}
+     data-embed="-6AEZrSbOMg">
+    {% elseif flavor() == 'embroidery' %}
+     data-embed="IjHI0UZzuWM">
+    {% else %}
+     data-embed="BHe2r2WU-T8">
+    {% endif %}
+  <div class="play-button">
+  </div>
+</div>

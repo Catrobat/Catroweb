@@ -32,13 +32,13 @@ class CategoriesAdmin extends AbstractAdmin
   ];
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Name'])
       ->add('alias', TextType::class, ['label' => 'Alias'])
       ->add('programs', null, [
@@ -55,13 +55,13 @@ class CategoriesAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('name', null, ['label' => 'Starter Category'])
       ->add('alias', null, ['label' => 'Category Alias'])
       ->add('programs', null, ['admin_code' => 'catrowebadmin.block.programs.all'])
@@ -70,13 +70,13 @@ class CategoriesAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->add('name', null, ['label' => 'Starter Category', 'sortable' => false])
       ->add('alias', null, ['label' => 'Category Alias', 'sortable' => false])
       ->add('programs', EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])

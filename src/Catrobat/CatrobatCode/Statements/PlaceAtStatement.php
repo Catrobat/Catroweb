@@ -7,11 +7,11 @@ class PlaceAtStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'place at ';
+  public const BEGIN_STRING = 'place at ';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * PlaceAtStatement constructor.
@@ -31,10 +31,8 @@ class PlaceAtStatement extends Statement
   {
     $code = '';
 
-    foreach ($this->statements as $value)
-    {
-      if ($value instanceof FormulaListStatement)
-      {
+    foreach ($this->statements as $value) {
+      if ($value instanceof FormulaListStatement) {
         $code .= $value->executePlaceAtFormula();
       }
     }
@@ -47,16 +45,11 @@ class PlaceAtStatement extends Statement
     $formula_x_dest = '';
     $formula_y_dest = '';
 
-    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement)
-    {
-      if ($statement instanceof FormulaStatement)
-      {
-        if ('Y_POSITION' == $statement->getCategory())
-        {
+    foreach ($this->getFormulaListChildStatement()->getStatements() as $statement) {
+      if ($statement instanceof FormulaStatement) {
+        if ('Y_POSITION' == $statement->getCategory()) {
           $formula_y_dest = $statement->execute();
-        }
-        elseif ('X_POSITION' == $statement->getCategory())
-        {
+        } elseif ('X_POSITION' == $statement->getCategory()) {
           $formula_x_dest = $statement->execute();
         }
       }

@@ -1,9 +1,15 @@
-{% extends 'Notifications/NotificationTypes/baseNotification.html.twig' %}
+{% extends 'Notifications/NotificationTypes/notification_items.html.twig' %}
 
-{% block notification_title%}
-  {{ notification.title }}
+{% block notification_leftAvatar %}
+  <div class="col-2 col-sm-1 my-auto">
+    <span class="material-icons broadcast-icon">
+      notifications_active
+    </span>
+  </div>
 {% endblock %}
 
-{% block notification_body%}
-  {{ notification.message | raw}}
+{% block notification_body %}
+  <div class="col-8 col-sm-8 pl-3 my-auto">
+    {{ notification.message }}
+  </div>
 {% endblock %}

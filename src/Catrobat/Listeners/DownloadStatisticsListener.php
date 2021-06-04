@@ -29,33 +29,27 @@ class DownloadStatisticsListener
     $request = $event->getRequest();
     $attributes = $request->attributes;
 
-    if ($attributes->has('download_statistics_program_id'))
-    {
+    if ($attributes->has('download_statistics_program_id')) {
       $program_id = $attributes->get('download_statistics_program_id');
       $referrer = $attributes->get('referrer');
       $locale = strtolower($request->getLocale());
 
       $rec_by_page_id = null;
-      $rec_by_program_id = 0;
+      $rec_by_program_id = null;
       $rec_user_specific = false;
 
       $rec_tag_by_program_id = null;
 
-      if ($attributes->has('rec_by_page_id') && RecommendedPageId::isValidRecommendedPageId($attributes->get('rec_by_page_id')))
-      {
+      if ($attributes->has('rec_by_page_id') && RecommendedPageId::isValidRecommendedPageId($attributes->get('rec_by_page_id'))) {
         // all recommendations (except tag-recommendations -> see below)
         $rec_by_page_id = $attributes->get('rec_by_page_id');
-        if ($attributes->has('rec_by_program_id'))
-        {
-          $rec_by_program_id = $attributes->get('rec_by_program_id');
+        if ($attributes->has('rec_by_program_id')) {
+          $rec_by_program_id = (string) $attributes->get('rec_by_program_id');
         }
-        if ($attributes->has('rec_user_specific'))
-        {
+        if ($attributes->has('rec_user_specific')) {
           $rec_user_specific = (bool) $attributes->get('rec_user_specific');
         }
-      }
-      elseif ($attributes->has('rec_from'))
-      {
+      } elseif ($attributes->has('rec_from')) {
         // tag-recommendations
         $rec_tag_by_program_id = $attributes->get('rec_from');
       }
@@ -73,8 +67,7 @@ class DownloadStatisticsListener
                                                   ?string $rec_tag_by_program_id, ?int $rec_by_page_id,
                                                   ?string $rec_by_program_id, ?string $locale, bool $is_user_specific_recommendation = false): bool
   {
-    if ((false === strpos($request->headers->get('User-Agent'), 'okhttp')) || (null != $rec_by_page_id))
-    {
+    if ((false === strpos($request->headers->get('User-Agent'), 'okhttp')) || (null != $rec_by_page_id)) {
       return $this->statistics_service->createProgramDownloadStatistics($request, $program_id, $referrer,
         $rec_tag_by_program_id, $rec_by_page_id, $rec_by_program_id, $locale, $is_user_specific_recommendation);
     }

@@ -3,9 +3,9 @@
 # https://github.com/8p/EightPointsGuzzleBundle/blob/master/src/Resources/doc/configuration-reference.md
 eight_points_guzzle:
     clients:
-        my_client:
+        itranslate:
             # Write here the host where to do requests
-            # base_url: "http://target.url"
+            base_url: "https://api.itranslate.com"
 
             # Request options: http://docs.guzzlephp.org/en/stable/request-options.html
             options:
@@ -13,12 +13,11 @@ eight_points_guzzle:
                 timeout: 30
 
                 # set to false to disable throwing exceptions on an HTTP protocol errors (4xx and 5xx responses)
-                http_errors: true
+                http_errors: false
 
                 # each key is the name of a header, and each value is a string or array of strings representing the
                 # header field values.
-                headers:
-                    User-Agent: "EightPointsGuzzleBundle/v7"
+                # headers:
 
             # Find plugins here:
             # https://github.com/8p/EightPointsGuzzleBundle#known-and-supported-plugins

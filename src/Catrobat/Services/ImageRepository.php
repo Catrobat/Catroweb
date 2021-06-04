@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Services;
 
-use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Utils\Utils;
 use Imagick;
 use ImagickException;
@@ -28,23 +27,12 @@ class ImageRepository
   {
     $example_dir = $parameter_bag->get('catrobat.exampleimage.dir');
     $example_path = $parameter_bag->get('catrobat.exampleimage.path');
-    $example_dir = preg_replace('#([^\/]+)$#', '$1/', $example_dir);
-    $example_path = preg_replace('#([^\/]+)$#', '$1/', $example_path);
 
     $featured_dir = $parameter_bag->get('catrobat.featuredimage.dir');
     $featured_path = $parameter_bag->get('catrobat.featuredimage.path');
-    $featured_dir = preg_replace('#([^\/]+)$#', '$1/', $featured_dir);
-    $featured_path = preg_replace('#([^\/]+)$#', '$1/', $featured_path);
 
-    if (!is_dir($example_dir))
-    {
-      throw new InvalidStorageDirectoryException($example_dir.' is not a valid directory');
-    }
-
-    if (!is_dir($featured_dir))
-    {
-      throw new InvalidStorageDirectoryException($featured_dir.' is not a valid directory');
-    }
+    Utils::verifyDirectoryExists($example_dir);
+    Utils::verifyDirectoryExists($featured_dir);
 
     $this->example_dir = $example_dir;
     $this->example_path = $example_path;
@@ -59,24 +47,19 @@ class ImageRepository
   public function save(File $file, int $id, string $extension, bool $featured): void
   {
     $thumb = $this->getImagick();
-    $thumb->readImage($file);
-    if ($featured)
-    {
+    $thumb->readImage($file->__toString());
+    if ($featured) {
       $filename = $this->featured_dir.$this->generateFileNameFromId($id, $extension, $featured);
-      if (file_exists($filename))
-      {
+      if (file_exists($filename)) {
         unlink($filename);
       }
       $thumb->writeImage($filename);
       chmod($filename, 0777);
       $thumb->destroy();
-    }
-    else
-    {
+    } else {
       $thumb->cropThumbnailImage(80, 80);
       $filename = $this->example_dir.$this->generateFileNameFromId($id, $extension, $featured);
-      if (file_exists($filename))
-      {
+      if (file_exists($filename)) {
         unlink($filename);
       }
       $thumb->writeImage($filename);
@@ -87,28 +70,21 @@ class ImageRepository
 
   public function remove(int $id, string $extension, bool $featured): void
   {
-    if ($featured)
-    {
+    if ($featured) {
       $path = $this->featured_dir.$this->generateFileNameFromId($id, $extension, $featured);
-    }
-    else
-    {
+    } else {
       $path = $this->example_dir.$this->generateFileNameFromId($id, $extension, $featured);
     }
-    if (is_file($path))
-    {
+    if (is_file($path)) {
       unlink($path);
     }
   }
 
   public function getWebPath(int $id, string $extension, bool $featured): string
   {
-    if ($featured)
-    {
+    if ($featured) {
       $path = $this->featured_path.$this->generateFileNameFromId($id, $extension, $featured);
-    }
-    else
-    {
+    } else {
       $path = $this->example_path.$this->generateFileNameFromId($id, $extension, $featured);
     }
 
@@ -125,8 +101,7 @@ class ImageRepository
    */
   public function getImagick(): Imagick
   {
-    if (null == $this->imagick)
-    {
+    if (null == $this->imagick) {
       $this->imagick = new Imagick();
     }
 
@@ -135,18 +110,15 @@ class ImageRepository
 
   private function generateFileNameFromId(int $id, string $extension, bool $featured): string
   {
-    if ($featured)
-    {
-      if ('' === $extension)
-      {
+    if ($featured) {
+      if ('' === $extension) {
         return 'featured_'.$id;
       }
 
       return 'featured_'.$id.'.'.$extension;
     }
 
-    if ('' === $extension)
-    {
+    if ('' === $extension) {
       return 'example_'.$id;
     }
 

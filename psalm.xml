@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<!-- 1 is the highest and 8 the lowest error level  -->
+<psalm
+        errorLevel="4"
+        resolveFromConfigFile="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <directory name="src" />
+        <ignoreFiles>
+            <directory name="vendor" />
+            <!-- Legacy code that will be removed in the future -->
+            <directory name="src/Catrobat/CatrobatCode"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <UndefinedDocblockClass>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all UndefinedDocblockClass issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </UndefinedDocblockClass>
+        <InvalidNullableReturnType>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </InvalidNullableReturnType>
+        <NullableReturnStatement>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </NullableReturnStatement>
+        <InvalidReturnStatement>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </InvalidReturnStatement>
+        <InvalidNullableReturnType>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </InvalidNullableReturnType>
+        <InvalidReturnType>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </InvalidReturnType>
+        <InvalidArgument>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </InvalidArgument>
+        <ImplementedParamTypeMismatch>
+            <errorLevel type="info">
+                <!-- API code generation is not perfect -->
+                <!-- all InvalidNullableReturnType issues in this directory are suppressed -->
+                <file name="src/Api/*Api.php"/>
+            </errorLevel>
+        </ImplementedParamTypeMismatch>
+        <ParamNameMismatch>
+            <errorLevel type="info">
+                <!-- Circle Issues between our code, sonata and the base library -->
+                <directory name="src/Admin"/>
+            </errorLevel>
+        </ParamNameMismatch>
+        <ForbiddenCode>
+            <errorLevel type="info">
+                <directory name="src/"/>
+            </errorLevel>
+        </ForbiddenCode>
+    </issueHandlers>
+</psalm>

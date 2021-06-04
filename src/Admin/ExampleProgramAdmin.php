@@ -4,17 +4,19 @@ namespace App\Admin;
 
 use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
+use App\Entity\Flavor;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Repository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\QueryBuilder;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
-use Sonata\BlockBundle\Meta\Metadata;
+use Sonata\AdminBundle\Object\Metadata;
+use Sonata\AdminBundle\Object\MetadataInterface;
+use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
@@ -45,6 +47,8 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   private ProgramManager $program_manager;
 
+  private FlavorRepository $flavor_repository;
+
   /**
    * ExampleProgramAdmin constructor.
    *
@@ -54,44 +58,46 @@ class ExampleProgramAdmin extends AbstractAdmin
    */
   public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager,
                               ParameterBagInterface $parameter_bag, ImageRepository $example_image_repository,
-                              ProgramManager $program_manager)
+                              ProgramManager $program_manager, FlavorRepository $flavor_repository)
   {
     parent::__construct($code, $class, $baseControllerName);
     $this->entity_manager = $entity_manager;
     $this->parameter_bag = $parameter_bag;
     $this->example_image_repository = $example_image_repository;
     $this->program_manager = $program_manager;
+    $this->flavor_repository = $flavor_repository;
   }
 
   /**
    * @param ExampleProgram $object
-   *
-   * @return string
    */
-  public function getExampleImageUrl($object)
+  public function getExampleImageUrl($object): string
   {
     return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
   }
 
   /**
-   * @param ExampleProgram $object
-   *
-   * @return Metadata
+   * {@inheritdoc}
    */
-  public function getObjectMetadata($object)
+  public function getObjectMetadata($object): MetadataInterface
   {
-    return new Metadata($object->getProgram()->getName(), $object->getProgram()->getDescription(),
-      $this->getExampleImageUrl($object));
+    /** @var ExampleProgram $example_program */
+    $example_program = $object;
+
+    return new Metadata($example_program->getProgram()->getName(), $example_program->getProgram()->getDescription(),
+      $this->getExampleImageUrl($example_program));
   }
 
   /**
-   * @param ExampleProgram $object
+   * {@inheritdoc}
    */
   public function preUpdate($object): void
   {
-    $object->old_image_type = $object->getImageType();
-    $this->checkProgramID($object);
-    $this->checkFlavor();
+    /** @var ExampleProgram $example_program */
+    $example_program = $object;
+
+    $example_program->old_image_type = $example_program->getImageType();
+    $this->checkProgramID($example_program);
   }
 
   /**
@@ -100,19 +106,13 @@ class ExampleProgramAdmin extends AbstractAdmin
   public function prePersist($object): void
   {
     $this->checkProgramID($object);
-    $this->checkFlavor();
   }
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
   {
+    /** @var ProxyQuery $query */
     $query = parent::configureQuery($query);
 
-    if (!$query instanceof \Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery)
-    {
-      return $query;
-    }
-
-    /** @var QueryBuilder $qb */
     $qb = $query->getQueryBuilder();
 
     $qb->andWhere(
@@ -123,11 +123,11 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     /** @var ExampleProgram $example_project */
     $example_project = $this->getSubject();
@@ -137,21 +137,15 @@ class ExampleProgramAdmin extends AbstractAdmin
 
     $id_value = '';
 
-    if (null !== $this->getSubject()->getId())
-    {
+    if (null !== $this->getSubject()->getId()) {
       $file_options['help'] = '<img src="../'.$this->getExampleImageUrl($example_project).'">';
       $id_value = $this->getSubject()->getProgram()->getId();
     }
 
-    $formMapper
+    $form
       ->add('file', FileType::class, $file_options)
       ->add('program_id', TextType::class, ['mapped' => false, 'data' => $id_value])
-      ->add('flavor', ChoiceFieldMaskType::class, [
-        'choices' => [
-          'Arduino' => 'arduino',
-          'Embroidery' => 'embroidery',
-        ],
-      ])
+      ->add('flavor', null, ['class' => Flavor::class, 'choices' => $this->getFlavors(), 'required' => true])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
         'help' => 'Toggle for iOS example programs api call.', ])
@@ -160,38 +154,38 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $datagridMapper
+   * @param DatagridMapper $filter
    *
    * Fields to be shown on filter forms
    */
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('program.name')
     ;
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
     unset($this->listModes['mosaic']);
 
-    $listMapper
+    $list
       ->addIdentifier('id')
       ->add('Example Image', 'string', ['template' => 'Admin/example_image.html.twig'])
       ->add('program', EntityType::class, [
         'class' => Program::class,
-        'route' => ['name' => 'show'],
         'admin_code' => 'catrowebadmin.block.programs.all',
+        'editable' => false,
       ])
       ->add('flavor', 'string')
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
-      ->add('active', null)
+      ->add('active')
       ->add('_action', 'actions', [
         'actions' => [
           'edit' => [],
@@ -210,30 +204,15 @@ class ExampleProgramAdmin extends AbstractAdmin
 
     $program = $this->program_manager->find($id);
 
-    if (null !== $program)
-    {
+    if (null !== $program) {
       $object->setProgram($program);
-    }
-    else
-    {
+    } else {
       throw new NotFoundHttpException(sprintf('Unable to find program with id : %s', $id));
     }
   }
 
-  private function checkFlavor(): void
+  private function getFlavors(): array
   {
-    $flavor = $this->getForm()->get('flavor')->getData();
-
-    if (!$flavor)
-    {
-      return; // There was no required flavor form field in this Action, so no check is needed!
-    }
-
-    $flavor_options = $this->parameter_bag->get('themes');
-
-    if (!in_array($flavor, $flavor_options, true))
-    {
-      throw new NotFoundHttpException('"'.$flavor.'"Flavor is unknown! Choose either '.implode(',', $flavor_options));
-    }
+    return $this->flavor_repository->getFlavorsByNames(['arduino', 'embroidery']);
   }
 }

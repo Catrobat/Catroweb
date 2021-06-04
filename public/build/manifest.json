@@ -1,0 +1,18 @@
+{
+  "build/login.js": "/build/login.js",
+  "build/register.js": "/build/register.js",
+  "build/request.js": "/build/request.js",
+  "build/reset.js": "/build/reset.js",
+  "build/program_comments.js": "/build/program_comments.js",
+  "build/program_description.js": "/build/program_description.js",
+  "build/report.js": "/build/report.js",
+  "build/footer.js": "/build/footer.js",
+  "build/tab-bar.js": "/build/tab-bar.js",
+  "build/runtime.js": "/build/runtime.js",
+  "build/vendors-node_modules_material_ripple_component_js.js": "/build/vendors-node_modules_material_ripple_component_js.js",
+  "build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js": "/build/vendors-node_modules_material_floating-label_component_js-node_modules_material_line-ripple_c-3efcfc.js",
+  "build/vendors-node_modules_material_textfield_component_js.js": "/build/vendors-node_modules_material_textfield_component_js.js",
+  "build/vendors-node_modules_material_select_component_js.js": "/build/vendors-node_modules_material_select_component_js.js",
+  "build/vendors-node_modules_material_tab-bar_component_js.js": "/build/vendors-node_modules_material_tab-bar_component_js.js",
+  "build/vendors-node_modules_jquery_dist_jquery_js.js": "/build/vendors-node_modules_jquery_dist_jquery_js.js"
+}

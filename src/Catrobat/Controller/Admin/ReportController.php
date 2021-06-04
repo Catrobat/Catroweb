@@ -14,8 +14,7 @@ class ReportController extends CRUDController
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $program = $object->getProgram();
@@ -28,12 +27,25 @@ class ReportController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
+  public function createUrlCommentsAction(): RedirectResponse
+  {
+    $id = $this->admin->getSubject()->getId();
+
+    return new RedirectResponse('/admin/report/list?filter%5Buser%5D%5Bvalue%5D='.$id);
+  }
+
+  public function createUrlProgramsAction(): RedirectResponse
+  {
+    $id = $this->admin->getSubject()->getId();
+
+    return new RedirectResponse('/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D='.$id);
+  }
+
   public function acceptProgramReportAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $program = $object->getProgram();
@@ -50,8 +62,7 @@ class ReportController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $object->setIsReported(false);
@@ -65,14 +76,12 @@ class ReportController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($object->getId());
-    if (null === $comment)
-    {
+    if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$object->getId());
     }
     $em->remove($comment);

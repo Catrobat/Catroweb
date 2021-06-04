@@ -4,56 +4,90 @@ namespace App\Catrobat\Controller\Admin;
 
 class LogLine
 {
-  public string $date = '';
+  private string $date = '';
 
-  public string $debug_code = '';
+  private string $debug_code = '';
 
-  public int $debug_level = 0;
+  private int $debug_level = 0;
 
-  public string $msg = '';
+  private string $msg = '';
 
   public function __construct(string $line = null)
   {
-    if (null === $line)
-    {
-      $this->msg = 'No Logs with Loglevel';
-      $this->debug_code = 'No search results';
-    }
-    else
-    {
-      $this->date = $this->getSubstring($line, ']', true);
-      $line = substr($line, strlen($this->date) + 1);
-      $this->debug_code = $this->getSubstring($line, ':');
-      $line = substr($line, strlen($this->debug_code) + 2);
-      $this->msg = $line;
+    if (null === $line) {
+      $this->setMsg('No Logs with Loglevel');
+      $this->setDebugCode('No search results');
+    } else {
+      $this->setDate($this->getSubstring($line, ']', true));
+      $line = substr($line, strlen($this->getDate()) + 1);
+      $this->setDebugCode($this->getSubstring($line, ':'));
+      $line = substr($line, strlen($this->getDebugCode()) + 2);
+      $this->setMsg($line);
 
-      $this->debug_level = $this->getDebugLevel($this->debug_code);
+      $this->setDebugLevel($this->getDebugLevelByString($this->getDebugCode()));
     }
+  }
+
+  public function getDebugLevel(): int
+  {
+    return $this->debug_level;
+  }
+
+  public function setDebugLevel(int $debug_level): void
+  {
+    $this->debug_level = $debug_level;
+  }
+
+  public function getDebugCode(): string
+  {
+    return $this->debug_code;
+  }
+
+  public function setDebugCode(string $debug_code): void
+  {
+    $this->debug_code = $debug_code;
+  }
+
+  public function getDate(): string
+  {
+    return $this->date;
+  }
+
+  public function setDate(string $date): void
+  {
+    $this->date = $date;
+  }
+
+  public function getMsg(): string
+  {
+    return $this->msg;
+  }
+
+  public function setMsg(string $msg): void
+  {
+    $this->msg = $msg;
   }
 
   private function getSubstring(string $string, string $needle, bool $last_char = false): string
   {
-    $pos = strpos($string, (string) $needle);
+    $pos = strpos($string, $needle);
 
-    if (false === $pos)
-    {
+    if (false === $pos) {
       return '';
     }
-    if ($last_char)
-    {
+    if ($last_char) {
       ++$pos;
     }
 
     return substr($string, 0, $pos);
   }
 
-  private function getDebugLevel(string $string): int
+  private function getDebugLevelByString(string $string): int
   {
     $pos = strpos($string, '.');
     $extracted_string = substr($string, $pos + 1);
 
-    switch ($extracted_string)
-    {
+    switch ($extracted_string) {
       case 'INFO':
         $debug_level = LogsController::FILTER_LEVEL_INFO;
         break;

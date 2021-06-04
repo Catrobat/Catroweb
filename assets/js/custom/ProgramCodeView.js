@@ -65,6 +65,7 @@ function ProgramCodeView (shareRoot, extractedPath, projectHash, language, appen
             // Show old view instead
             $('#catblocks-code-container').innerHTML = ''
             $('#codeview-wrapper').removeClass('d-none')
+            $('#code-view-spinner').addClass('d-none')
           })
           .finally(() => {
             $('#code-view-spinner').addClass('d-none')

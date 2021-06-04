@@ -26,13 +26,11 @@ class SoundStatement extends Statement
     $code = $this->value;
     $this->findNames();
 
-    if (null !== $this->name)
-    {
+    if (null !== $this->name) {
       $code .= $this->name->execute();
     }
 
-    if (null !== $this->fileName)
-    {
+    if (null !== $this->fileName) {
       $code .= ' (filename: '.$this->fileName->execute().')';
     }
 
@@ -47,16 +45,11 @@ class SoundStatement extends Statement
   private function findNames(): void
   {
     $tmpStatements = parent::getStatements();
-    foreach ($tmpStatements as $statement)
-    {
-      if (null != $statement)
-      {
-        if ($statement instanceof ValueStatement)
-        {
+    foreach ($tmpStatements as $statement) {
+      if (null != $statement) {
+        if ($statement instanceof ValueStatement) {
           $this->name = $statement;
-        }
-        elseif ($statement instanceof FileNameStatement)
-        {
+        } elseif ($statement instanceof FileNameStatement) {
           $this->fileName = $statement;
         }
       }

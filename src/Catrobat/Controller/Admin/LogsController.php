@@ -9,80 +9,88 @@ use Symfony\Component\HttpFoundation\Response;
 
 class LogsController extends CRUDController
 {
-  const LOG_DIR = '../var/log/';
+  public const LOG_DIR = '../var/log/';
 
-  const LOG_PATTERN = '*.log';
+  public const LOG_PATTERN = '*.log';
 
-  const FILTER_LEVEL_DEBUG = 0;
-  const FILTER_LEVEL_INFO = 1;
-  const FILTER_LEVEL_NOTICE = 2;
+  public const FILTER_LEVEL_DEBUG = 0;
+  public const FILTER_LEVEL_INFO = 1;
+  public const FILTER_LEVEL_NOTICE = 2;
 
-  const FILTER_LEVEL_WARNING = 3;
-  const FILTER_LEVEL_ERROR = 4;
-  const FILTER_LEVEL_CRITICAL = 5;
-  const FILTER_LEVEL_ALERT = 6;
-  const FILTER_LEVEL_EMERGENCY = 7;
+  public const FILTER_LEVEL_WARNING = 3;
+  public const FILTER_LEVEL_ERROR = 4;
+  public const FILTER_LEVEL_CRITICAL = 5;
+  public const FILTER_LEVEL_ALERT = 6;
+  public const FILTER_LEVEL_EMERGENCY = 7;
 
   public function listAction(Request $request = null): Response
   {
     $filter = self::FILTER_LEVEL_WARNING;
     $greater_equal_than_level = true;
     $line_count = 20;
-    if ($request->isXmlHttpRequest())
-    {
-      if ($request->query->get('count'))
-      {
+    $file = null;
+    if ($request->isXmlHttpRequest()) {
+      if ($request->query->get('count')) {
         $line_count = $request->query->getInt('count');
       }
-      if (false !== $request->query->get('filter'))
-      {
+      if (false !== $request->query->get('filter')) {
         $filter = $request->query->getInt('filter');
       }
-      if ($request->query->get('greaterThan'))
-      {
+      if ($request->query->get('greaterThan')) {
         $greater_equal_than_level = $request->query->getBoolean('greaterThan');
       }
+      if ($request->query->get('file')) {
+        $file = $request->query->get('file');
+      }
+    }
+    $searchParam = [];
+    $searchParam['filter'] = $filter;
+    $searchParam['greater_equal_than_level'] = $greater_equal_than_level;
+    $searchParam['line_count'] = $line_count;
+    $allFiles = $this->getAllFilesInDirByPattern(self::LOG_DIR, self::LOG_PATTERN);
+    if (!strlen(trim($file)) || is_null($file)) {
+      $file = $allFiles[0];
     }
 
+    return $this->renderWithExtraParams('Admin/logs.html.twig',
+      ['files' => $allFiles, 'content' => $this->getLogFileContent($file, self::LOG_DIR, $searchParam)]);
+  }
+
+  protected function getAllFilesInDirByPattern(string $dir, string $pattern): array
+  {
     $finder = new Finder();
-    $finder->files()->in(self::LOG_DIR)->depth('< 2')->name(self::LOG_PATTERN);
+    $finder->files()->in($dir)->depth('< 2')->name($pattern);
     $finder->sortByName();
 
     $files = [];
-    foreach ($finder as $file)
-    {
-      array_push($files, $file->getRelativePathname());
+    foreach ($finder as $file) {
+      $files[] = $file->getRelativePathname();
     }
 
+    return $files;
+  }
+
+  protected function getLogFileContent(string $fileName, string $dir, array $searchParam): array
+  {
+    $filePath = $dir.$fileName;
+    $file = popen("tac {$filePath}", 'r');
+
+    $index = 0;
     $content = [];
-    for ($i = 0; $i < count($files); ++$i)
-    {
-      $filename = self::LOG_DIR.$files[$i];
-      $file = popen("tac {$filename}", 'r');
+    while (($line = fgets($file)) && ($index < $searchParam['line_count'])) {
+      $log_line = new LogLine($line);
 
-      $index = 0;
-      while (($line = fgets($file)) && ($index < $line_count))
-      {
-        $log_line = new LogLine($line);
+      if (($searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() >= $searchParam['filter'])
+        || (!$searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() == $searchParam['filter'])
+       ) {
+        $content[$index] = $log_line;
 
-        if (($greater_equal_than_level && $log_line->debug_level >= $filter) ||
-          (!$greater_equal_than_level && $log_line->debug_level == $filter)
-        ) {
-          $content[$i][$index] = $log_line;
-
-          ++$index;
-        }
+        ++$index;
       }
-      if (!array_key_exists($i, $content))
-      {
-        $content[$i][0] = new LogLine();
-      }
-      pclose($file);
     }
 
-    return $this->renderWithExtraParams('Admin/logs.html.twig', [
-      'files' => $files,
-      'content' => $content,
-    ]);
+    pclose($file);
+
+    return $content;
   }
 }

@@ -15,7 +15,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers  \App\Catrobat\Listeners\NameValidator
  */
 class NameValidatorTest extends TestCase
 {

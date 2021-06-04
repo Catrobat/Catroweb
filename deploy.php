@@ -62,8 +62,8 @@ set('allow_anonymous_stats', false);
 host(getenv('DEPLOY_SHARE'))
   ->stage('share')
   ->set('symfony_env', 'prod')
-  ->set('branch', 'master')
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
+  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/');
 
 
@@ -121,10 +121,24 @@ task('deploy:grunt', function () {
   cd('{{release_path}}');
   run('grunt');
 });
+task('deploy:encore', function () {
+  cd('{{release_path}}');
+  run('npm run encore dev');
+});
 
 task('deploy:jwt', function () {
   cd('{{release_path}}');
   run('sh docker/app/init-jwt-config.sh');
+});
+
+task('update:achievements', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:achievements');
+});
+
+task('update:special', function () {
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:special');
 });
 
 /**
@@ -150,9 +164,12 @@ task('deploy', [
   'database:migrate',
   'install:npm',
   'deploy:grunt',
+  'deploy:encore',
   'deploy:jwt',
   'restart:nginx',
   'restart:php-fpm',
+  'update:achievements',
+  'update:special',
   'deploy:unlock',
   'slack:notify:success',
   'cleanup',

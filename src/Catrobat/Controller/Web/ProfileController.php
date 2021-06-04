@@ -26,8 +26,8 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class ProfileController extends AbstractController
 {
-  const MIN_PASSWORD_LENGTH = 6;
-  const MAX_PASSWORD_LENGTH = 4096;
+  public const MIN_PASSWORD_LENGTH = 6;
+  public const MAX_PASSWORD_LENGTH = 4096;
   private ProgramManager $program_manager;
   private UserManager $user_manager;
 
@@ -51,40 +51,30 @@ class ProfileController extends AbstractController
 
     $view = 'UserManagement/Profile/profile.html.twig';
 
-    if ('0' === $id || ($this->getUser() && $this->getUser()->getId() === $id))
-    {
+    if ('0' === $id || ($this->getUser() && $this->getUser()->getId() === $id)) {
       $my_profile = true;
       $user = $this->getUser();
       $view = 'UserManagement/Profile/myProfile.html.twig';
-    }
-    else
-    {
+    } else {
       $user = $this->user_manager->find($id);
     }
 
-    if (null === $user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (null === $user) {
+      return $this->redirectToRoute('login');
     }
 
-    if ($my_profile)
-    {
-      $program_count = count($this->program_manager->getUserPrograms($user->getId()));
-    }
-    else
-    {
-      $program_count = count($this->program_manager->getPublicUserPrograms($id));
+    if ($my_profile) {
+      $program_count = $this->program_manager->countUserProjects($id);
+    } else {
+      $program_count = $this->program_manager->countPublicUserProjects($id);
     }
 
     $oauth_user = $user->getGplusUid();
 
     Locale::setDefault(substr($request->getLocale(), 0, 2));
-    try
-    {
+    try {
       $country = Countries::getName(strtoupper($user->getCountry()));
-    }
-    catch (MissingResourceException $missingResourceException)
-    {
+    } catch (MissingResourceException $missingResourceException) {
       $country = '';
     }
 
@@ -116,19 +106,15 @@ class ProfileController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (!$user) {
+      return $this->redirectToRoute('login');
     }
 
     $country = $request->request->get('country');
 
-    try
-    {
+    try {
       $this->validateCountryCode($country);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return JsonResponse::create([
         'statusCode' => $exception->getCode(),
       ]);
@@ -150,19 +136,19 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (!$user) {
+      return $this->redirectToRoute('login');
     }
 
     $old_password = $request->request->get('oldPassword');
 
     $encoder = $factory->getEncoder($user);
+    $bool = true;
+    if (null !== $old_password) {
+      $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
+    }
 
-    $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
-
-    if (!$bool)
-    {
+    if (!$bool && ($user->isOauthPasswordCreated() || !$user->isOauthUser())) {
       return JsonResponse::create([
         'statusCode' => StatusCode::PASSWORD_INVALID,
       ]);
@@ -171,22 +157,20 @@ class ProfileController extends AbstractController
     $newPassword = $request->request->get('newPassword');
     $repeatPassword = $request->request->get('repeatPassword');
 
-    try
-    {
+    try {
       $this->validateUserPassword($newPassword, $repeatPassword);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return JsonResponse::create([
         'statusCode' => $exception->getCode(),
       ]);
     }
 
-    if ('' !== $newPassword)
-    {
+    if ('' !== $newPassword) {
       $user->setPlainPassword($newPassword);
     }
-
+    if ($user->isOauthUser()) {
+      $user->setOauthPasswordCreated(true);
+    }
     $user_manager->updateUser($user);
 
     return JsonResponse::create([
@@ -202,64 +186,49 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (!$user) {
+      return $this->redirectToRoute('login');
     }
 
     $firstMail = $request->request->get('firstEmail');
     $secondMail = $request->request->get('secondEmail');
 
-    if ('' === $firstMail && '' === $secondMail)
-    {
+    if ('' === $firstMail && '' === $secondMail) {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_MISSING]);
     }
 
-    try
-    {
+    try {
       $this->validateEmail($firstMail);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 1]);
     }
-    try
-    {
+    try {
       $this->validateEmail($secondMail);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 2]);
     }
 
-    if ($this->checkEmailExists($firstMail, $user_manager))
-    {
+    if ($this->checkEmailExists($firstMail, $user_manager)) {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 1]);
     }
-    if ($this->checkEmailExists($secondMail, $user_manager))
-    {
+    if ($this->checkEmailExists($secondMail, $user_manager)) {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 2]);
     }
 
-    if ('' !== $firstMail && $firstMail !== $user->getEmail())
-    {
+    if ('' !== $firstMail && $firstMail !== $user->getEmail()) {
       $user->setEmail($firstMail);
     }
-    if ('' !== $firstMail && '' !== $secondMail && $secondMail !== $user->getAdditionalEmail())
-    {
+    if ('' !== $firstMail && '' !== $secondMail && $secondMail !== $user->getAdditionalEmail()) {
       $user->setAdditionalEmail($secondMail);
     }
-    if ('' !== $firstMail && '' === $secondMail)
-    {
+    if ('' !== $firstMail && '' === $secondMail) {
       $user->setAdditionalEmail('');
     }
-    if ('' === $firstMail && '' === $secondMail && '' !== $user->getAdditionalEmail())
-    {
+    if ('' === $firstMail && '' === $secondMail && '' !== $user->getAdditionalEmail()) {
       $user->setEmail($user->getAdditionalEmail());
       $user->setAdditionalEmail('');
     }
-    if ('' === $firstMail && '' !== $secondMail)
-    {
+    if ('' === $firstMail && '' !== $secondMail) {
       $user->setEmail($secondMail);
       $user->setAdditionalEmail('');
     }
@@ -277,33 +246,26 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (!$user) {
+      return $this->redirectToRoute('login');
     }
 
     $username = $request->request->get('username');
 
-    if (null === $username || '' === $username)
-    {
+    if (null === $username || '' === $username) {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_MISSING]);
     }
 
-    try
-    {
+    try {
       $this->validateUsername($username);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_INVALID]);
     }
 
-    if ($this->checkUsernameExists($username, $user_manager))
-    {
+    if ($this->checkUsernameExists($username, $user_manager)) {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_ALREADY_EXISTS]);
     }
-    if (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL))
-    {
+    if (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL)) {
       return JsonResponse::create(['statusCode' => StatusCode::USERNAME_CONTAINS_EMAIL]);
     }
 
@@ -322,19 +284,15 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (!$user) {
+      return $this->redirectToRoute('login');
     }
 
     $image_base64 = $request->request->get('image');
 
-    try
-    {
+    try {
       $image_base64 = ImageUtils::checkAndResizeBase64Image($image_base64);
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return JsonResponse::create(['statusCode' => $exception->getCode()]);
     }
 
@@ -355,9 +313,8 @@ class ProfileController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
-    if (!$user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (!$user) {
+      return $this->redirectToRoute('login');
     }
 
     $user_comments = $comment_repository->getCommentsWrittenByUser($user);
@@ -379,13 +336,11 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (null === $user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (null === $user) {
+      return $this->redirectToRoute('login');
     }
 
-    if ('0' === $id || $id === $user->getId())
-    {
+    if ('0' === $id || $id === $user->getId()) {
       return $this->redirectToRoute('profile');
     }
 
@@ -407,13 +362,11 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (null === $user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (null === $user) {
+      return $this->redirectToRoute('login');
     }
 
-    if ('0' === $id)
-    {
+    if ('0' === $id) {
       return $this->redirectToRoute('profile');
     }
 
@@ -441,8 +394,7 @@ class ProfileController extends AbstractController
     /** @var User|null $user */
     $user = $user_manager->find($request->get('id'));
 
-    switch ($type)
-    {
+    switch ($type) {
       case 'follower':
         /** @var ArrayCollection $followCollection */
         $followCollection = $user->getFollowers();
@@ -457,8 +409,7 @@ class ProfileController extends AbstractController
     $users = $followCollection->matching($criteria)->toArray();
 
     $data = [];
-    foreach ($users as $user)
-    {
+    foreach ($users as $user) {
       $data[] = [
         'username' => $user->getUsername(),
         'id' => $user->getId(),
@@ -478,23 +429,19 @@ class ProfileController extends AbstractController
    */
   private function validateUserPassword(string $pass1, string $pass2): void
   {
-    if ($pass1 !== $pass2)
-    {
+    if ($pass1 !== $pass2) {
       throw new Exception('USER_PASSWORD_NOT_EQUAL_PASSWORD2', StatusCode::USER_PASSWORD_NOT_EQUAL_PASSWORD2);
     }
 
-    if (0 === strcasecmp($this->getUser()->getUsername(), $pass1))
-    {
+    if (0 === strcasecmp($this->getUser()->getUsername(), $pass1)) {
       throw new Exception('USER_USERNAME_PASSWORD_EQUAL', StatusCode::USER_USERNAME_PASSWORD_EQUAL);
     }
 
-    if ('' !== $pass1 && strlen($pass1) < self::MIN_PASSWORD_LENGTH)
-    {
+    if ('' !== $pass1 && strlen($pass1) < self::MIN_PASSWORD_LENGTH) {
       throw new Exception('USER_PASSWORD_TOO_SHORT', StatusCode::USER_PASSWORD_TOO_SHORT);
     }
 
-    if ('' !== $pass1 && strlen($pass1) > self::MAX_PASSWORD_LENGTH)
-    {
+    if ('' !== $pass1 && strlen($pass1) > self::MAX_PASSWORD_LENGTH) {
       throw new Exception('USER_PASSWORD_TOO_LONG', StatusCode::USER_PASSWORD_TOO_LONG);
     }
   }
@@ -509,8 +456,7 @@ class ProfileController extends AbstractController
     $tld = '[a-zA-Z]{2,8}';
     $regEx = '/^('.$name.')@('.$domain.')\.('.$tld.')$/';
 
-    if (!preg_match($regEx, $email) && !empty($email))
-    {
+    if (!preg_match($regEx, $email) && !empty($email)) {
       throw new Exception('USER_EMAIL_INVALID', StatusCode::USER_EMAIL_INVALID);
     }
   }
@@ -521,8 +467,7 @@ class ProfileController extends AbstractController
   private function validateUsername(string $username): void
   {
     // also take a look at /config/validator/validation.xml when applying changes!
-    if (strlen($username) < 3 || strlen($username) > 180)
-    {
+    if (strlen($username) < 3 || strlen($username) > 180) {
       throw new Exception('USERNAME_INVALID', StatusCode::USERNAME_INVALID);
     }
   }
@@ -535,16 +480,14 @@ class ProfileController extends AbstractController
   private function validateCountryCode($country): void
   {
     //todo: check if code is really from the drop-down
-    if (!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country))
-    {
+    if (!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country)) {
       throw new Exception('USER_COUNTRY_INVALID', StatusCode::USER_COUNTRY_INVALID);
     }
   }
 
   private function checkEmailExists(string $email, UserManager $user_manager): bool
   {
-    if ('' === $email)
-    {
+    if ('' === $email) {
       return false;
     }
 
@@ -556,8 +499,7 @@ class ProfileController extends AbstractController
 
   private function checkUsernameExists(string $username, UserManager $user_manager): bool
   {
-    if ('' === $username)
-    {
+    if ('' === $username) {
       return false;
     }
 

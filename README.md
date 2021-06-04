@@ -2,6 +2,8 @@
 
 [![Tests](https://github.com/Catrobat/Catroweb/actions/workflows/tests.yml/badge.svg)](https://github.com/Catrobat/Catroweb/actions/workflows/tests.yml)
 ![Code Quality Checks](https://github.com/Catrobat/Catroweb-Symfony/workflows/Code%20Quality%20Checks/badge.svg)
+[![Dependabot Status](https://img.shields.io/badge/Dependabot-active-green.svg)](https://dependabot.com)
+[![codecov](https://codecov.io/gh/Catrobat/Catroweb/branch/develop/graph/badge.svg)](https://codecov.io/gh/Catrobat/Catroweb)
 
 [![Php 7.4](https://img.shields.io/badge/PHP-7.4-informational.svg)](https://www.php.net/)
 [![Symfony](https://img.shields.io/badge/Symfony-4.4-informational.svg)](https://cs.symfony.com/)
@@ -14,19 +16,24 @@ Uploaded projects can be shared and downloaded. Additionally, the platform provi
 The Community website with projects from users all around the world can be found at [https://share.catrob.at](https://share.catrob.at/).
 The official Swagger API documentation can be found at [GitHub](https://github.com/Catrobat/Catroweb-API/blob/develop/catroweb.yaml).
 
-**Please create a new [issue](https://github.com/Catrobat/Catroweb/issues/new) for every bug you find.**
+**Please create a new [issue](https://github.com/Catrobat/Catroweb/issues/new) for every bug you find.*
+
+## API
+
+- specification: http://developer.catrobat.org/Catroweb-API
+- repository: https://github.com/Catrobat/Catroweb-API
 
 ## How to get started: 
 
-You can find all important HowTo's in our [wiki](https://github.com/Catrobat/Catroweb-Symfony/wiki).
-Make sure all tests are passing when creating a pull request!
+You can find all important HowTo's in our [wiki](https://github.com/Catrobat/Catroweb-Symfony/wiki) and our [contribution guidelines](https://github.com/Catrobat/Catroweb/blob/develop/.github/contributing.md).
+Make sure all tests are passing when creating a pull request,
 
 [![Docker](https://img.shields.io/badge/Docker-supported-brightgreen.svg)](https://github.com/Catrobat/Catroweb/wiki/Docker)
 
 ##### Tools integrated in the project:
 
-[![Php-cs-fixer](https://img.shields.io/badge/Php_Code_Style-PHP_CS_Fixer-informational.svg)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-[![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PHPStan,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
+[![Php-cs-fixer](https://img.shields.io/badge/Php_Code_Style-Php_CS_Fixer-informational.svg)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
+[![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PhpStan,_Psalm,_PhpDD,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
 [![Grunt](https://img.shields.io/badge/Task_Runner-Grunt-orange.svg)](https://gruntjs.com/)
 [![Npm standard](https://img.shields.io/badge/JS_Code_Style-standard-green.svg)](https://standardjs.com)
 [![ESLint](https://img.shields.io/badge/JS_Code_Quality-ESLint-green.svg)](https://eslint.org/)

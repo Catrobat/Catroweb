@@ -19,7 +19,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * -----------------------------------------------------------------------------------------------------------------
    * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
    *
-   * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
+   * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
 
@@ -84,8 +84,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    */
   public function updateTimestamps(): void
   {
-    if (null == $this->getCreatedAt())
-    {
+    if (null == $this->getCreatedAt()) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
@@ -124,7 +123,7 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
 
   public function setDepth(int $depth): void
   {
-    $this->depth = (int) $depth;
+    $this->depth = $depth;
   }
 
   public function getDepth(): int

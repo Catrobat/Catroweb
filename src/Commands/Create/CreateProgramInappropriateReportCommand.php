@@ -57,25 +57,21 @@ class CreateProgramInappropriateReportCommand extends Command
     $user = $this->user_manager->findUserByUsername($username);
     $program = $this->program_manager->findOneByName($program_name);
 
-    if (null === $user || null === $program)
-    {
+    if (null === $user || null === $program) {
       return 1;
     }
 
-    if ($program->getUser() === $user)
-    {
+    if ($program->getUser() === $user) {
       return 2;
     }
 
-    try
-    {
+    try {
       $this->reportProgram($program, $user, $note);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 3;
     }
     $output->writeln('Reporting '.$program->getName());
+    $output->writeln('ReportedUser = '.$program->getUser());
 
     return 0;
   }
@@ -88,6 +84,7 @@ class CreateProgramInappropriateReportCommand extends Command
     $report->setCategory('Inappropriate');
     $report->setNote($note);
     $report->setProgram($program);
+    $report->setReportedUser($program->getUser());
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();
   }

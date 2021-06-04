@@ -65,11 +65,8 @@ class UserTestGroup
 
   public function __construct(string $user_id, int $group_number)
   {
-    if (null !== $user_id)
-    {
-      $this->setUserId($user_id);
-      $this->setGroupNumber($group_number);
-    }
+    $this->setUserId($user_id);
+    $this->setGroupNumber($group_number);
   }
 
   /**
@@ -79,8 +76,7 @@ class UserTestGroup
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt())
-    {
+    if (null === $this->getCreatedAt()) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
@@ -90,7 +86,7 @@ class UserTestGroup
     $this->user_id = $user_id;
   }
 
-  public function getUserId(): string
+  public function getUserId(): ?string
   {
     return $this->user_id;
   }
@@ -100,7 +96,7 @@ class UserTestGroup
     $this->group_number = $group_number;
   }
 
-  public function getGroupNumber(): int
+  public function getGroupNumber(): ?int
   {
     return $this->group_number;
   }

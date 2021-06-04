@@ -1,10 +1,10 @@
 # Use composer image for better caching
-FROM composer AS composer-build
+FROM composer:2.0 AS composer-build
 COPY composer.json composer.lock ./
-RUN composer install --no-scripts --prefer-dist
+RUN composer install --no-scripts
 
 # Use node image for better caching
-FROM node AS node-build
+FROM node:16 AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install grunt
@@ -21,28 +21,26 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php7.4-common \
     php7.4-cli \
+    php7.4-common \
     php7.4-curl \
-    php7.4-intl \
-    php7.4-gd \
-    php7.4-zip \
-    php7.4-mysql \
-    php7.4-xml \
     php7.4-dom \
+    php7.4-gd \
+    php7.4-imagick \
+    php7.4-intl \
+    php7.4-mbstring \
+    php7.4-mysql \
+    php7.4-xdebug \
+    php7.4-xml \
+    php7.4-zip \
     libapache2-mod-php7.4 \
     zlibc \
     acl \
     make \
     libtool \
-    php-apcu \
     apache2 \
-    php-imagick \
-    php-mbstring \
-    php-gettext \
     git \
     curl \
-    php-xdebug \
     libgconf-2-4 \
     npm
 RUN npm install -g n
@@ -51,9 +49,14 @@ RUN n stable && \
     npm install -g sass
 
 # Overwrite default apache config
+RUN a2enmod rewrite
 COPY /docker/apache/catroweb.conf /etc/apache2/sites-available/catroweb.conf
 RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
+
+# Overwrite php config:
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb
@@ -77,9 +80,15 @@ ARG APP_ENVIRONMENT
 RUN echo "\n" >> .env.local && \
     echo APP_ENV=$APP_ENVIRONMENT >> .env.local && \
     echo "\n" >> .env.dev.local && \
-    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev >> .env.dev.local && \
+    printf "%s\n" DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev \
+     ELASTICSEARCH_URL=http://elasticsearch:9200/ \
+     ES_HOST=elasticsearch \
+     ES_PORT=9200 >> .env.dev.local && \
     echo "\n" >> .env.test.local && \
-    echo DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test >> .env.test.local
+    printf "%s\n" DATABASE_URL=pdo-mysql://root:root@db.catroweb.test:3306/catroweb_test \
+     ELASTICSEARCH_URL=http://elasticsearch:9200/ \
+     ES_HOST=elasticsearch \
+     ES_PORT=9200 >> .env.test.local
 
 # Add composer executable to the container
 COPY --from=composer-build /usr/bin/composer /usr/bin/composer
@@ -96,5 +105,7 @@ RUN sh docker/app/prepare-test-env.sh
 
 # (Re-)compile public css/js files
 RUN grunt
+
+RUN npm run encore dev
 
 EXPOSE 80

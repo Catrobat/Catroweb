@@ -4,7 +4,164 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [3.10.0]
+- Backend for Studios added
+- Achievements Events added
+- Admin interface for cron job
+- Admin interface for special updater
+- Admin interface for static achievements data
+- iTranslate API improved & extended
+- update dependencies
+- update translations
+- increase and fix psalm issues to lvl 4
+## [3.9.0]
+- new API route: authentication/upgrade
+- Removed deprecated unused API routes
+- Updated dependencies
+- Fix tabs on user profiles
+- Fix invisible loading spinners
+- Disable click outside popups  
+- Achievements Overview + Updater 
+- Part 1 iTranslate integration  
+- Internal enhancements
+## [3.8.5]
+- Upgraded API version
+- Updated dependencies
+- Added automatic release PR creation to GA
+- GitHub Actions - cancel duplicated runs  
+- Admin Area refactoring
+- Minor internal refactorings
+## [3.8.3]
+- Enable auto deployment
+## [3.8.2]
+- internal API rework
+- better translation fallbacks
+- fix docker image (code coverage)
+- adapt GitHub Actions to reduce overhead and prevent crowdin clashes with other teams
+## [3.8.1]
+- Translation Hotfix
+- Dependencies
+## [3.8.0]
+- Added new API version 
+  - new routes for survey
+  - new categories oversight
+- Dependencies
+## [3.7.1]
+### Fixed 
+- fixes preloading of images
+- somue dependency updates
+## [3.7.0]
+### Added
+- New Frontend for APK Signing (hidden until backend finished)
+- New Catblocks release :hibiscus:
+- Add translation capability to project and comments via link to google translation
+### Changed
+- CAPI update 1.0.52 
+    - (GET|HEAD requests contain hash)
+    - Projects now have Tag information
+    - Register endpoint returns token
+    - Report API supports bearer and upload token
+- Admin Area
+    - Refactoring
+    - Better Logging
+- Dependencies
+- Optimized lazy loading (images)
+- Preloading (fonts, css)
+### Fixed
+- use official HWIOauth Bundle
+- Show path in remix graph working again
+- Microsoft Edge Support
+- CAPI
+    - Added project id and project url
+## [3.6.0]
+### Added
+- serve images as webp
+- CAPI v??
+- Huawei App Gallery
+- project credits & discription syncronized with XML
+- new catblocks release
+- username in project search
+### Changed
+- use webpack encore
+- help pages replaced
+- change buttons to material
+### Fixed
+- Regex Hotfix
+- fixed rremix graph on open
+- language dropdown, shows correct language in certain browsers
+### Security
+- API Hotfix
+## [3.5.0]
+### Added
+- various new bricks
+- phpUnit tests
+### Changed
+- new projectList design
+- new Notifications design
+- update dependencies
+- update translations
+- better UX feedback by loading spinners
+- Admin interface refactoring
+- internal concept to store projects (allow deduplication)
+### Fixed
+- project download error handling
+- minor style issues
+- minor CI check issues
+- project structure
+- removed code smells
+### Removed
+- GameJam (will be studios in the future)
+- Recommendation categories (will be re-added in a later release)
+
+## [3.4.5]
+### Fixed
+- welcome section for embroidery and luna
+## [3.4.4]
+### Added
+- Oauth Login - Google, Facebook, Apple (web only, no API) 
+- Crowdin Synchronization (GitHub Action)
+- CodeCov Reports (GitHub Action)
+- Psalm added (Static Analysis)
+### Changed
+- Landing page categories use Extensions in addition to flavors to find projects.
+- update dependencies
+- Embroidery color and logo
+- admin interface refactoring (media package category and files)
+### Fixed
+- remove debug projects from search results
+- Symfony project structure (migrations)
+- 
+## [3.4.3]
+### Changed
+- updated dependencies
+- admin interface (approve)
+- remove limited users
+- remove search option on code view page
+### Fixed
+- recommendation system
+- featured projects
+- max-version in search
+- button css
+- grammar of translations
+## [3.4.0]
+### Added
+- New Bricks (BackgroundRequestBrick, LookRequestBrick)
+- CAPI upgrades to v1.0.41 (user routes, health check, no total-results)
+- Detail page for scratch projects
+### Changed
+- CAPI upgrades to v1.0.41 (no total-results)
+- Bumped many dependencies (Thx to @dependabot)
+- Multiple flavors for assets
+- New project view design (remix, code view, code stats on their own pages)
+- Admin Area refactoring
+- Debug projects only hidden in production
+### Fixed
+- Default favicon.ico
+- BadRequest API response in json format
+- API validation messages
+- Do not show webview content on mobile - ony if web-view
+- Improved search (elastic search)
+- Github action computation time reduced
 ## [3.3.4]
 ### Changed
 - Admin Interface
@@ -28,7 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - various Material.io Content
 - SCSS coding standard
 - Search Progress Indicator added
-- Loading spinner for codeview added
+- Loading spinner for code view added
 - Releasing Catblocks for the first time :birthday:
 ### Changed
 - improved GithubActions :heart_eyes:
@@ -46,12 +203,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Featured and Approved projects cant be reported anymore (bad spammers :facepunch:)
 - Invisible projects can be downloaded
 - NPM & Composer Security Fixes and Updates
-- Fontloading Improved
+- Improve Font loading
 - No email in username allowed anymore
 - Upload with Tags / Extensions
 ### Removed
-- removed LDAP login
-- removed download of multiple media files
+- remove LDAP login
+- remove download of multiple media files
 ### API
 - Catroweb-API in basic version added (v1.0.38) https://app.swaggerhub.com/apis-docs/HCrane/CAPI/v1.0.38
 ## [3.2.0]
@@ -60,9 +217,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added new Scratch Remix category
 - Added new Remix Notification
 - Added new Remix Notification category
-- Admin Area: Added tool for finding rejected/reported programs and comments
+- Admin Area: Add a tool for finding rejected/reported programs and comments
 ### Changed
-- no new Upload token is generated upon upload
+- generate no new Upload token upon upload
 ### Fixed
 - account deletion refined and fixed a bug causing unnecessary code to be executed
 - Bugfix for Notification System
@@ -79,12 +236,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 
 - removed project navigation from Media Library Sidebar
-- removed LocaleBundle deprication
+- removed LocaleBundle deprecation
 - Bug with comments on remixed projects 
 - Bangala translation fixed
 - Changed buttons
-- removed ContainerAwareCommand deprication
-- removed template deprication
+- removed ContainerAwareCommand deprecation
+- removed template deprecation
 - CodeStatistics Logic updated and added missing bricks
 - Upload bug with google account
 - Hotfix forces `SECURE_SCHEMA` to `https`
@@ -100,15 +257,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - rename user account feature + translations 
 - added more from <user> on details page 
 - added tutorial tag 
-- human readable text insteaad of html quargel for search input 
-- admin falvor checks 
+- human readable text instead of html quargel for search input 
+- admin flavor checks 
 - added embroidery flavor 
 - added popup setting programs private/public
 - added arduino flavor
 - added the possibility to write credits
 ### Changed
 - themes will now be accepted via user agent not in link 
-- increased max. description length to 10.000 chars
+- increase max. description length to 10.000 chars
 - allow deep indexing by crawlers 
 - show categories (featured programs...) in sidebar 
 - generate apk button hidden for iOS users
@@ -121,17 +278,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - private programs now really private 
 - program statistics design fix 
 - optimized images for web traffic 
-- keep aspect ration when cropping thumbnails  
+- keep aspect ratio when cropping thumbnails  
 - search uses `AND` instead of `OR` 
 - fixing admin RAM cake (#343)
-- ficed a bug in `FlavorListener`  
+- fixed a bug in `FlavorListener`  
 ### Removed
 - removed the possibility to log into facebook 
 - removed the possibility to post programs to facebook 
 - removed legacy remix notification  
 - request uri too long 
 ### API
-- only public programs are now returned from api 
+- return only public programs from api 
 
 ## [2.2.0]
 
@@ -150,7 +307,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.1]
 ### Fixed
-- Fixes a problem in db connection with `server_version` in `doctrine.yml`([Source])
+- Fixes a problem in db connection with `server_version` in `doctrine.yml`([DoctrineSource])
 ## [2.1.0]
 ### Added
 - Program Owner now visible on small devices too.
@@ -161,7 +318,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Production logs are now rotating.
 - Deployment script adapted for more privacy and more modularity.
 - On the profile page all programs are loaded at once, are ordered and all own programs will be displayed.
-- Headlines are now centered through out all designs.
+- Headlines are now centered throughout all designs.
 - Programs that are uploaded ar no longer set to private if languageVersion is higher than supported.
 ### Changed
 - Recommended Program section will only be displayed if programs for this section exist.
@@ -181,8 +338,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Follow Icon gets positioned correctly again.
 - Color of text in search field is adjusted for "Luna & Cat"
 
-[Source]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.3.0...HEAD
+[DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.10.0...HEAD
+[3.10.0]: https://github.com/Catrobat/Catroweb/compare/v3.9.0...v3.10.0
+[3.9.0]: https://github.com/Catrobat/Catroweb/compare/v3.8.7...v3.9.0
+[3.8.5]: https://github.com/Catrobat/Catroweb/compare/v3.8.6...v3.8.7
+[3.8.5]: https://github.com/Catrobat/Catroweb/compare/v3.8.5...v3.8.6
+[3.8.4]: https://github.com/Catrobat/Catroweb/compare/v3.8.4...v3.8.5
+[3.8.3]: https://github.com/Catrobat/Catroweb/compare/v3.8.3...v3.8.4
+[3.8.2]: https://github.com/Catrobat/Catroweb/compare/v3.8.2...v3.8.3
+[3.8.2]: https://github.com/Catrobat/Catroweb/compare/v3.8.1...v3.8.2
+[3.8.1]: https://github.com/Catrobat/Catroweb/compare/v3.8.0...v3.8.1
+[3.8.0]: https://github.com/Catrobat/Catroweb/compare/v3.7.1...v3.8.0
+[3.7.1]: https://github.com/Catrobat/Catroweb/compare/v3.7.0...v3.7.1
+[3.7.0]: https://github.com/Catrobat/Catroweb/compare/v3.6.0...v3.7.0
+[3.6.0]: https://github.com/Catrobat/Catroweb/compare/v3.5.0...v3.6.0
+[3.5.0]: https://github.com/Catrobat/Catroweb/compare/v3.4.5...v3.5.0
+[3.4.5]: https://github.com/Catrobat/Catroweb/compare/v3.4.4...v3.4.5
+[3.4.4]: https://github.com/Catrobat/Catroweb/compare/v3.4.3...v3.4.4
+[3.4.3]: https://github.com/Catrobat/Catroweb/compare/v3.4.0...v3.4.3
+[3.4.0]: https://github.com/Catrobat/Catroweb/compare/v3.3.0...v3.4.0
 [3.3.0]: https://github.com/Catrobat/Catroweb/compare/v3.2.0...v3.3.0
 [3.2.0]: https://github.com/Catrobat/Catroweb/compare/v3.1.1...v3.2.0
 [3.1.1]: https://github.com/Catrobat/Catroweb/compare/v3.1.0...v3.1.1

@@ -1,5 +1,4 @@
-{% if '/project/'       in app.request.pathinfo and program|default(false) and program.id|default(false) or
-      '/notifications/' in app.request.pathinfo %}
+{% if '/project/'       in app.request.pathinfo and program|default(false) and program.id|default(false) %}
 
   <div class="mdc-menu-surface--anchor">
     <button id="top-app-bar__btn-options"
@@ -15,14 +14,8 @@
 
   {% include 'Header/header_project_options.html.twig' %}
 
-  {% include 'Header/header_notification_options.html.twig' %}
-
     </div>
   </div>
-
-  {% if '/project/' in app.request.pathinfo and program|default(false) and program.id|default(false) %}
-    {% include 'Default/snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
-  {% endif %}
-
 {% endif %}
+
 

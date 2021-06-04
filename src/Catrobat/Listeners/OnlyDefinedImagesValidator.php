@@ -22,13 +22,11 @@ class OnlyDefinedImagesValidator
     $files_in_directory = self::getImagesFromImageDirectory($file->getPath());
 
     $files = array_diff($files_in_directory, $files_in_xml);
-    if (count($files) > 0)
-    {
+    if (count($files) > 0) {
       throw new InvalidCatrobatFileException('Unexpected files: ['.implode(', ', $files).']', StatusCode::UNEXPECTED_FILE);
     }
     $files = array_diff($files_in_xml, $files_in_directory);
-    if (count($files) > 0)
-    {
+    if (count($files) > 0) {
       throw new MissingImageException('Missing image: '.implode(', ', $files).']');
     }
   }
@@ -41,8 +39,7 @@ class OnlyDefinedImagesValidator
     $images = [];
     $finder = new Finder();
     $finder->notPath('/^.nomedia$/')->ignoreDotFiles(false)->ignoreVCS(false)->in($base_path.'/images/');
-    foreach ($finder as $file)
-    {
+    foreach ($finder as $file) {
       $images[] = $file->getRelativePathname();
     }
 

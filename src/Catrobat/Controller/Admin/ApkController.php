@@ -17,8 +17,7 @@ class ApkController extends CRUDController
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
 
@@ -40,8 +39,7 @@ class ApkController extends CRUDController
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
 
-    if (null === $object)
-    {
+    if (null === $object) {
       throw new NotFoundHttpException();
     }
 
@@ -64,19 +62,15 @@ class ApkController extends CRUDController
     $objects = $data_grid->getResults();
 
     /** @var Program $program */
-    foreach ($objects as $program)
-    {
+    foreach ($objects as $program) {
       $program->setApkStatus(Program::APK_NONE);
       $program->setApkRequestTime(null);
       $this->admin->update($program);
     }
 
-    if (0 != count($objects))
-    {
+    if (0 != count($objects)) {
       $this->addFlash('sonata_flash_success', 'All APKs reset');
-    }
-    else
-    {
+    } else {
       $this->addFlash('sonata_flash_info', 'No APKs to reset');
     }
 
@@ -94,20 +88,16 @@ class ApkController extends CRUDController
     $dispatcher = $this->container->get(JenkinsDispatcher::class);
 
     /* @var $program Program */
-    foreach ($objects as $program)
-    {
+    foreach ($objects as $program) {
       $dispatcher->sendBuildRequest($program->getId());
       $program->setApkRequestTime(TimeUtils::getDateTime());
       $program->setApkStatus(Program::APK_PENDING);
       $this->admin->update($program);
     }
 
-    if (0 != count($objects))
-    {
+    if (0 != count($objects)) {
       $this->addFlash('sonata_flash_success', 'Requested rebuild for all APks');
-    }
-    else
-    {
+    } else {
       $this->addFlash('sonata_flash_info', 'No Rebuild-Requests were sent');
     }
 

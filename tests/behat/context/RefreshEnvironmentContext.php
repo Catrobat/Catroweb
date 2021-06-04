@@ -17,17 +17,12 @@ class RefreshEnvironmentContext implements KernelAwareContext
 {
   use SymfonySupport;
 
-  //--------------------------------------------------------------------------------------------------------------------
-  //  Database
-  //--------------------------------------------------------------------------------------------------------------------
-
   /**
+   * This hook to prepares test database and generate all files.
+   *
    * @BeforeSuite
-   *
-   * Since we don't need to recreate the whole database for every suite we will define a preparation suite
-   * in behat.yml. This preparation suite will use this hook to prepare the test database.
-   *
-   * Additionally, all test files are generated.
+   *              -> Since we don't need to recreate the whole database for every scenario we do it only once per suite.
+   *                 Suites can be defined in behat.yml.
    *
    * @throws ToolsException
    */
@@ -61,8 +56,7 @@ class RefreshEnvironmentContext implements KernelAwareContext
     $em = $this->getManager();
 
     $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
-    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName)
-    {
+    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName) {
       $q = $em->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $em->getConnection()->executeUpdate($q);
     }
@@ -71,10 +65,6 @@ class RefreshEnvironmentContext implements KernelAwareContext
     ProjectDataFixtures::clear();
     UserDataFixtures::clear();
   }
-
-  //--------------------------------------------------------------------------------------------------------------------
-  //  FileSystem
-  //--------------------------------------------------------------------------------------------------------------------
 
   /**
    * Clear all files.

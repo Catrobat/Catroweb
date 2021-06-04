@@ -3,13 +3,18 @@
 localLanguage: ইংরেজি
 username: ব্যবহারকারীর নাম
 password: পাসওয়ার্ড
+createNewPassword: নতুন পাসওয়ার্ড তৈরি করুন
 accountSettings: অ্যাকাউন্ট সেটিংস
 email: ই-মেল
 aboutPocketCode: পকেট কোড সম্পর্কে
-aboutCatrobat: ক্যাট্রোব্যাট সম্পর্কে
+about: সম্পর্কে
+education: শিক্ষা
+chat: চ্যাট এবং ফোরাম
+others: অন্যান্য
 tutorials: টিউটোরিয়াল
 googlePlay: গুগল প্লে
 iosAppStore: আইওএস অ্যাপ্লিকেশন ভাণ্ডার
+huaweiAppGallery: হুয়াওয়ে অ্যাপ্লাগারারি
 passwordsNoMatch: পাসওয়ার্ড মিলছে না
 error: ভুল
 cancel: বাতিল
@@ -18,15 +23,17 @@ deleteIt: হ্যাঁ, এটি মুছুন!
 reportIt: হ্যাঁ, রিপোর্ট করুন
 areYouSure: আপনি নিশ্চিত?
 noWayOfReturn: আপনার কাজটি পুনরুদ্ধার করার কোনও উপায় নেই!
-download: Download the project
+download: ডাউনলোড
 description: বর্ণনা
 noDescription: বর্ণনা পাওয়া যায় নি.
 credits: Credits
 noCredits: No credits available.
+notesAndCreditsDescription: আপনি এই প্রকল্পটি কীভাবে তৈরি করলেন? আপনি অন্যান্য ব্যক্তিদের কাছ থেকে ধারণা, স্ক্রিপ্ট বা শিল্পকর্ম ব্যবহার করেছেন? তাদের এখানে ধন্যবাদ।
 country: দেশ
 loginText: প্রবেশ করুন
 privacyPolicy: গোপনীয়তার নীতি
 imprint: মুদ্রিত করা
+programDetails: বিস্তারিত
 somethingWentWrong: 'ওহো, কিছু ভুল হয়েছে'
 pleaseTryAgain: 'অনুগ্রহ করে আবার চেষ্টা করুন।'
 oldVersionError: 'দয়া করে নতুন পকেট কোড সংস্করণটি আপডেট করুন!'
@@ -34,68 +41,62 @@ more: 'আরও'
 less: 'কম'
 show-more: 'আরও দেখান'
 show-less: 'অল্প দেখান'
-ok: সঠিক
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+more-information: 'আরো তথ্য'
+less-information: 'কম তথ্য'
+ok: ঠিক আছে
+clickToDownloadProgram: "\nউদাহরণটি প্রকল্পটি ডাউনলোড করতে %link_start% এখানে %link_end% ক্লিক করুন।"
 registrationError: 'ব্যবহারকারীর নাম অথবা ইমেইল পাঠানোর ঠিকানা ইতিমধ্যে ব্যবহৃত।'
 notifications: 'বিজ্ঞপ্তি'
 allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-likesNotificationsTitle: 'Reaction Notifications'
-followersNotificationsTitle: 'Follower Notifications'
-commentsNotificationsTitle: 'Comment Notifications'
-remixNotificationsTitle: 'Remix Notifications'
+FollowersNotifications: 'অনুসারীরা'
+LikeNotifications: 'প্রতিক্রিয়া'
 CommentNotifications: 'মন্তব্যসমূহ'
 RemixNotifications: 'রিমিক্স'
-oldnotification: 'Old Notifications'
 wellDone: "ভাল করেছেন"
 done: "সম্পন্ন!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-notificationsClearedMessage: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করা হয়েছে।"
-deleteNotificationConfirmation: "আপনি নিশ্চিত?"
-notificationDeleteMessage: "Are you Sure you want to delete this Notification?"
-notificationDeleteAllMessage: "Are you Sure you want to delete all Notifications?"
-confirmMessage: "Yes, delete it"
+confirmMessage: "হ্যাঁ, এটি মুছুন"
 cancelMessage: "বাতিল"
-notificationsAllMessagesDeleted: "All notifications have been deleted."
-notificationDeletedMessage: "Notification has been successfully deleted."
-clearAllNotificationsButtonTitle: "সব পড়ার জন্য চিহ্নিত করুন"
-deleteAllNotificationsButtonTitle: "Delete all"
+notificationsUnauthorizedError: "ব্যবহারকারীকে অনুমোদিত করতে অক্ষম able"
 notificationsClearError: "বিজ্ঞপ্তিগুলি পড়ার জন্য চিহ্নিত করতে অক্ষম!"
-notificationsDeleteError: "Unable to delete notifications!"
 pleaseWait: "অনুগ্রহ করে অপেক্ষা করুন..."
 projects: "প্রজেক্টসমূহ"
+oauthPopUpTitle: "বাহ্যিক অ্যাকাউন্ট সাইন ইন তথ্য"
+oauthInfo: 'আপনি সাইন ইন করতে সবেমাত্র একটি বাহ্যিক অ্যাকাউন্ট ব্যবহার করেছেন We আমরা আপনার জন্য একটি এলোমেলো ব্যবহারকারীর নাম তৈরি করেছি। আপনি যদি নিজের ব্যবহারকারীর নাম পরিবর্তন করতে চান বা আপনার অ্যাকাউন্টের জন্য একটি নতুন পাসওয়ার্ড তৈরি করতে চান তবে আমার প্রোফাইল পৃষ্ঠায় যান। আপনার প্রোফাইল পৃষ্ঠায় যেতে %link_start% এখানে ক্লিক করুন %link_end%'
+oauthHere: "এখানে"
+statistics: "পরিসংখ্যান"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'কোন প্রকল্পগুলি এখানে সুপারিশ করা হয়?'
+      description: 'আপনার প্রকল্পটি যত বেশি প্রতিক্রিয়া দেখায় (থাম্বস আপ, হাসি ...), তত বেশি এই তালিকায় প্রদর্শিত হবে।'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: অনুসরণ করছেন
+  followers: অনুসারীরা
+  follow: অনুসরণ
+  username: ব্যবহারকারী
+  followsMe: আমাকে অনুসরন কর
+  noFollowing: আপনি বর্তমানে কারও অনুসরণ করছেন না।
+  noFollowers: আপনার বর্তমানে কোনও অনুগামী নেই।
+  noOtherFollowing: বর্তমানে নিম্নলিখিত কোনও ব্যবহারকারী নেই।
+  noOtherFollowers: বর্তমানে কোনও অনুগামী ব্যবহারকারী নেই।
+  followError: "কাঙ্ক্ষিত ব্যবহারকারীর অনুসরণ করতে অক্ষম!"
+  unfollowError: "কাঙ্ক্ষিত ব্যবহারকারীকে অনুসরণ করতে অক্ষম!"
+  unfollowQuestion: "আপনি কি নিশ্চিত যে আপনি এই ব্যবহারকারীকে অনুসরণ করতে চান?"
+  unfollowButton: "অনুসরণ %username%"
 programs:
   welcome:
     title: আপনাকে স্বাগতম Catrobat's %theme%
     subtitle: গল্প, খেলা এবং আরও অনেক কিছু তৈরি করুন ...
+    subtitle_embroidery: আপনার নিজের টি-শার্ট, ব্যাগ, প্যান্ট বা স্মার্টফোনের ক্ষেত্রে নিজের প্যাটারগুলি স্টিচ করুন!
     download: অ্যাপ্লিকেশন ডাউনলোড করুন
     statistics: আরও পরিসংখ্যান
   featured: বৈশিষ্ট্য
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: উদাহরণ
+  newest: নতুন প্রকল্প
+  recommended: প্রস্তাবিত প্রকল্পগুলি
+  scratchremixes: স্ক্র্যাচ রিমিক্সস
+  noPrograms: বর্তমানে কোন প্রকল্প নেই।
   deleteConfirmation: |+
     আপনি কি নিশ্চিত?
     আপনি কি  "%programName%" মুছতে চান?
@@ -103,13 +104,13 @@ programs:
     হ্যাঁ, এটি মুছুন!
     বাতিল
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    তুমি কি নিশ্চিত?
+    আপনি যদি  '%programName%' বেসরকারীতে সেট করেন তবে এটি অন্য ব্যবহারকারীদের দ্বারা দেখা বা পাওয়া যাবে না।
+    আপনি এখনও আপনার প্রকল্পের লিঙ্কটি আপনার বন্ধুদের সাথে ভাগ করতে পারেন। প্যাডলক আইকনটি টেপ করে আপনি দৃশ্যমানতা টগল করতে পারেন।
+    যদি আপনি "%programName%" জনসাধারণের কাছে সেট করেন, এটি অন্যান্য ব্যবহারকারীদের দ্বারা দেখা ও পাওয়া যাবে।
+    হ্যাঁ, জনসাধারণের কাছে সেট করুন
+    হ্যাঁ, প্রাইভেটে সেট করুন
+    না
   reportCommentConfirmation: আপনি কি নিশ্চিত যে আপনি এই মন্তব্যটি বিবরণ পেশ করতে চান?
   deleteCommentConfirmation: আপনি কি নিশ্চিত যে আপনি এই মন্তব্যটি মুছে ফেলতে চান?
   deleteAccountConfirmation: |+
@@ -118,42 +119,42 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
+  tooLongDescription: প্রকল্পের বিবরণটি অনেক দীর্ঘ!
   rudeWordsInDescription: আপনি আপনার বিবরণে অভদ্র শব্দ ব্যবহার করতে পারবেন না!
   tooLongCredits: The project credits are too long!
   rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: সর্বোচ্চ  পরিদর্শন
     downloaded: সর্বোচ্চ ডাউনলোডকৃত
-  random: Random projects
-  related: Related projects
+  random: এলোমেলো প্রকল্প
+  related: সংশ্লিষ্ট প্রকল্প
   downloads: '%downloads% ডাউনলোড'
-  sample: Example projects
+  sample: উদাহরণ প্রকল্প
   views: '%views% পরিদর্শন'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "এই প্রকল্পে প্রতিক্রিয়াযুক্ত লোকেরা"
     all: "সব"
   remixes: '{0} ০ রিমিক্স | {1} ১ রিমিক্স |]1,Inf] %remixes% রিমিক্স'
   newRemixesNotificationTitle: '{1}"%programName%" এর ১ টি নতুন রিমিক্স রয়েছে: |]1,Inf] "%programName%" এর রয়েছে %remixes% নতুন রিমিক্স রয়েছে:'
   submitted: Submitted Projects
   uploaded: Uploaded Projects
   reportAsInappropriate: অনুপযুক্ত হিসাবে রিপোর্ট করুন
-  reportProgram: Report project
+  reportProgram: প্রকল্পের রিপোর্ট করুন
   languageVersion: 'Catrobat ভাষার সংস্করণ: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: এই প্রকল্পটি রিপোর্ট করতে দয়া করে %login%
+  reportDialogHeader: আপনি কেন এই প্রকল্পটি রিপোর্ট করতে চান?
   reportDialogReason: কারণ লিখুন
   reportRadioButtonInappropriate: এটা সঠিক না
   reportRadioButtonCopyright: কপিরাইট লঙ্ঘন
   reportRadioButtonSpam: এটি স্প্যাম
   reportRadioButtonDislike: আমি এটা পছন্দ করি না
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportOwnProgram: আপনি আপনার নিজের প্রকল্পটিকে ফ্ল্যাগ করতে পারবেন না।
+  reportAlready: আপনি ইতিমধ্যে এই প্রকল্পটি পতাকাঙ্কিত করেছেন।
+  reportDone: আপনি এই প্রকল্পের রিপোর্ট করেছেন!
   updateAppHeader: অ্যাপ্লিকেশন আপডেট করুন
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: এই প্রকল্পটি ডাউনলোড করতে সক্ষম হতে দয়া করে আপনার অ্যাপ্লিকেশনটিকে নতুন সংস্করণে আপডেট করুন।
   btnClosePopup: ঠিক আছে
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: এই ক্যাট্রোব্যাট প্রকল্পটি দেখুন
   show_more: আরও দেখান
   comments: মন্তব্যসমূহ
   send: পাঠান
@@ -174,14 +175,17 @@ programs:
   love: ভালবাসা
   wow: কি দারুন
   linkTitle: যোগসূত্র
-  link: Copy project link to clipboard
+  link: ক্লিপবোর্ডে প্রকল্পের লিঙ্কটি অনুলিপি করুন
+  reactionsText: প্রতিক্রিয়া
+  downloadErrorText: প্রকল্পটি ডাউনলোড করার সময় ত্রুটি ঘটেছে। পরে আবার চেষ্টা করুন.
 remixGraph:
+  title: রিমিক্স
   showRemixGraph: 'রিমিক্স গ্রাফ প্রদর্শন করুন'
   by: 'দিয়ে'
   open: 'খুলুন'
   showPaths: 'পথ দেখান'
   programNotAvailableErrorTitle: 'দুঃখিত'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'প্রকল্পটি আর পাওয়া যায় না!'
   programNotAvailable: 'পাওয়া যায়নি'
   programUnknownUser: 'অপরিচিত ব্যবহারকারী'
 noReply: এটি একটি স্বয়ংক্রিয় বার্তা - দয়া করে এই ইমেলের সরাসরি উত্তর দিবেন না।
@@ -193,19 +197,24 @@ accountConfirmation:
     এই লিঙ্কটি শুধুমাত্র একবার আপনার অ্যাকাউন্টটি বৈধ করার জন্য  ব্যবহার করা যেতে পারে।
     শুভেচ্ছান্তে,
     আপনার Catrobat দল।
-
   messageHtml: |
-    প্রিয় %username%.
-    আপনার অ্যাকাউন্টটি চালু করতে - দয়া করে এখানে %confirmationUrl% ক্লিক করুন
-    এই লিঙ্কটি শুধুমাত্র একবার আপনার অ্যাকাউন্টটি বৈধ করার জন্য  ব্যবহার করা যেতে পারে।
-    শুভেচ্ছান্তে,
+    <p>
+    প্রিয় %username%..<br>
+    <br>
+    আপনার অ্যাকাউন্টটি চালু করতে - দয়া করে এখানে <a 
+    <a href=%confirmationUrl%> ক্লিক করুন</a><br>
+    <br>
+    এই লিঙ্কটি শুধুমাত্র একবার আপনার অ্যাকাউন্টটি বৈধ করার জন্য  ব্যবহার করা যেতে পারে।<br>
+    <br>
+    শুভেচ্ছান্তে,<br>
     আপনার Catrobat দল।
+    </p>
 passwordRecovery:
   subject: আপনার Catrobat পাসওয়ার্ড পুনরুদ্ধার
   message: |
     প্রিয় %username%.
 
-    আপনি % appplication_url% এ আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য অনুরোধ করেছেন কারণ আপনি নিজের পাসওয়ার্ড ভুলে গেছেন।
+    আপনি %appplication_url% এ আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য অনুরোধ করেছেন কারণ আপনি নিজের পাসওয়ার্ড ভুলে গেছেন।
     আপনি যদি এটি অনুরোধ না করেন তবে দয়া করে এটিকে এড়িয়ে যান। এটি ২৪ ঘন্টা সময়ের মধ্যে অব্যবহৃত এবং অকেজো হয়ে যাবে।
 
     আপনার পাসওয়ার্ডটি পুনরায় সেট করতে এবং একটি নতুন তৈরি করতে, দয়া করে নীচের পৃষ্ঠাটি দেখুন: %confirmationUrl%
@@ -216,22 +225,23 @@ passwordRecovery:
 
     শুভেচ্ছান্তে,
     আপনার Catrobat দল।
-
-  messageHtml: |
-    প্রিয় %username%.
-
-    আপনি % appplication_url% এ আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য অনুরোধ করেছেন কারণ আপনি নিজের পাসওয়ার্ড ভুলে গেছেন।
-    আপনি যদি এটি অনুরোধ না করেন তবে দয়া করে এটিকে এড়িয়ে যান। এটি ২৪ ঘন্টা সময়ের মধ্যে অব্যবহৃত এবং অকেজো হয়ে যাবে।
-
-    আপনার পাসওয়ার্ডটি পুনরায় সেট করতে এবং একটি নতুন তৈরি করতে, দয়া করে নীচের পৃষ্ঠাটি দেখুন: %confirmationUrl%
-
-    আপনি %appplication_url%  সম্প্রদায়ে প্রবেশ করার জন্য যে কোনও সময় আপনার ব্যবহারকারীর নাম এবং পাসওয়ার্ড ব্যবহার করতে পারেন।
-    এটি করতে, কেবল নিম্নলিখিত পৃষ্ঠায় যান: %loginPage%
-    আপনার বিস্তারিত প্রোফাইল সম্পাদনা করতে, এই পৃষ্ঠায় যান: %profilePage%
-
-    শুভেচ্ছান্তে,
-    আপনার Catrobat দল।
-
+  messageHtml: |2
+    <p>
+    প্রিয় %username%। <br>
+    <br>
+    আপনি <a href=%appplication_url%>
+     পকেট কোড </a> এ আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য অনুরোধ করেছেন কারণ আপনি নিজের পাসওয়ার্ড ভুলে গেছেন।
+    আপনি যদি এটি অনুরোধ না করেন তবে দয়া করে এটিকে এড়িয়ে যান। এটি 24 ঘন্টা সময় শেষ হবে এবং অকেজো হয়ে যাবে। <br>
+    <br>
+    আপনার পাসওয়ার্ডটি পুনরায় সেট করতে এবং একটি নতুন তৈরি করতে, দয়া করে এখানে<a href=%confirmationUrl%> ক্লিক করুন  </a> <br>
+    <br>
+    <a href=%appplication_url%> পকেট কোড </a> সম্প্রদায়ে অ্যাক্সেস করতে আপনি যে কোনও সময় আপনার ব্যবহারকারীর নাম এবং পাসওয়ার্ডটি ব্যবহার করতে পারেন <br> 
+    এটি করতে, কেবল নীচের পৃষ্ঠাটি দেখুন: <a href=%loginPage%> লগইন পৃষ্ঠা </a> <br>
+    আপনার প্রোফাইল বিশদ সম্পাদনা করতে, এই <a href=%profilePage%> পৃষ্ঠা </a> এ যান <br>
+    <br>
+    শুভেচ্ছা, <br>
+    আপনার ক্যাট্রোব্যাট দল।
+    </p>
 profile:
   edit: আপনার প্রোফাইল সম্পাদনা করুন
   saveChanges: পরিবর্তনগুলো সংরক্ষণ করুন
@@ -240,12 +250,12 @@ profile:
   oldPass: পুরাতন পাসওয়ার্ড
   firstEmail: আমার প্রথম ইমেল
   secondEmail: আমার দ্বিতীয় ইমেল
-  myPrograms: My projects
+  myPrograms: আমার প্রকল্পগুলি
   follows: অনুসরণ
   follower: অনুসরণকারী
   unfollowUser: এই ব্যবহারকারীকে অনুসরণ না করুন!
   followUser: এই ব্যবহারকারীকে অনুসরণ করুন!
-  amountOfPrograms: Amount of projects
+  amountOfPrograms: প্রকল্পের পরিমাণ
   form:
     passwordTooShort: নতুন পাসওয়ার্ডে কমপক্ষে %length% অক্ষর থাকতে হবে।
     passwordTooLong: নতুন পাসওয়ার্ডে সর্বাধিক %length% অক্ষর থাকতে পারে।
@@ -254,19 +264,20 @@ profile:
     emailNotValid: এই ইমেল ঠিকানাটি বৈধ নয়।
     emailMissing: এই ইমেল ঠিকানাটি আপডেট করার সময় ভুল হয়েছে। আপনার অবশ্যই কমপক্ষে একটি বৈধ ইমেল ঠিকানা থাকতে হবে।
     emailExists: এই ই-মেইল ঠিকানাটি ইতিমধ্যে ব্যবহার করা হয়েছে
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: এই ব্যবহারকারীর নামটি বৈধ নয়।
+    usernameMissing: আপনার অবশ্যই একটি ব্যবহারকারীর নাম থাকতে হবে।
     usernameExists: ব্যবহারকারীর নাম ইতোমধ্যে রয়েছে
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: ব্যবহারকারীর নামতে কোনও ইমেল ঠিকানা থাকা উচিত নয়।
     submitSuccess: সংরক্ষিত
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: আপনি কি সত্যিই আপনার প্রকল্পটি মুছতে চান?
+  programsOf: প্রকল্প
   changePicture: ছবি পরিবর্তন করুন
   avatar:
     noImage: চিত্রবিহীন
     pictureTooLarge: আপনার নির্বাচিত ছবিটি অনেক বড়, দয়া করে ৫ম্যাগা বাইটের চেয়ে বড় ছবিগুলি ব্যবহার করবেন না।
     uploadError: দুঃখিত, ইমেজ/ ছবি আপলোড হতে সমস্যা হচ্ছিল।
     noSupport: এই ধরণের ছবি সমর্থিত নয়, দয়া করে অন্য একটি ছবি চেষ্টা করুন।
+  goToScratchProfile: স্ক্র্যাচ-এ প্রোফাইল
 myprofile:
   editProfile: প্রোফাইল সম্পাদন করুন
   edit: সম্পাদনা করুন
@@ -281,14 +292,14 @@ myprofile:
   editCountry: দেশ সম্পাদনা করুন
   editEmail: ই-মেইল সম্পাদনা করুন
   deleteAccount: অ্যাকাউন্ট মুছে ফেলুন
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccountText: আপনি কি নিশ্চিত যে আপনি নিজের খাতা মুছতে চান? এটি আপনার আপলোডকৃত প্রকল্প এবং মন্তব্যগুলি মুছবে!
   editAccountSettings: অ্যাকাউন্ট সেটিংস সম্পাদনা করুন
   notChangeVisibility: দৃশ্যটি পরিবর্তন করতে পারবেন না
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  notChangeVisibilityReason: আপনার প্রকল্পের ভাষার সংস্করণটি খুব বেশি এবং সুতরাং এটি দৃশ্যমানতে সেট করা যাবে না।
 licenseToPlay:
   link: 'খেলার জন্য লাইসেন্স'
   title: 'খেলার জন্য লাইসেন্স - কৃতিত্ব এবং শেয়ার দিন'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: কল্পনা করুন যে প্রতিটি ক্যাট্রোব্যাট প্রকল্প হ'ল একটি কেক, একটি বিশেষ কেক যা এর রেসিপি (প্রোগ্রামিং ব্লক) এর সাথে আসে। ক্যাটরোব্যাট সম্প্রদায়ের সমস্ত সদস্য তাদের রেসিপি সহ কেক ভাগ করে। এর অর্থ হল আপনি কেকগুলি উপভোগ করতে পারেন এবং সেগুলি কীভাবে সেগুলি তৈরি করবেন তা শিখতে পারেন!
   text2: 'কোনও গোপন রেসিপি নেই: এই কেকগুলি কীভাবে তৈরি করা যায় সে সম্পর্কে নির্দেশাবলী সকলের  জন্য উন্মুক্ত যারা ব্যবহার ,পুনরায় ব্যবহার , সংশোধন এবং নতুন ধারণাগুলির অনুপ্রেরণা হিসাবে কাজ করতে চান  ... মানে কেক'
   text3: "আপনি কেক খেতে পারেন পাশাপাশি নিজের তৈরি করতে অন্য ব্যক্তির রেসিপিগুলি অনুকরণ করতে পারেন, হতে পারে বিভিন্ন উপাদান সহ। এই স্বাধীনতা দুটি সহজ প্রয়োজনীয়তার সাথে আসে:"
   text4: "ক্যাট্রোব্যাট সম্প্রদায়টি স্থাপনে আমরা এই পদ্ধতিকে গ্রহণ করার সিদ্ধান্ত নিয়েছি কারণ আমরা বিশ্বাস করি যে এটি সম্প্রদায়ের মধ্যে শিক্ষা এবং সৃজনশীলতা সমর্থন করে।রেসিপি এবং উপাদানগুলি (স্ক্রিপ্ট এবং শিল্পকর্ম) ভাগ করে লোকেরা একে অপরের  ধারণা জানতে পারে এবং যার ফলে প্রত্যেকে উপকার হবে।"
@@ -301,9 +312,9 @@ licenseToPlay:
 termsOfUse:
   title: ব্যবহারের শর্তাবলী
   headline: ক্যাটরোব্যাট সম্প্রদায়টিতে আপনাকে স্বাগতম!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'ক্যাট্রোব্যাট সম্প্রদায়ের অংশ হিসাবে, আপনি প্রকল্পগুলি এবং ধারণাগুলি মানুষের সাথে ভাগ করছেন:'
   text2: "এই সম্প্রদায়টি প্রতিটি সদস্যের জন্য সহায়ক জায়গা হিসাবে গড়ে তুলতে আমাদের আপনার সহায়তা দরকার। আপনি এখানে কীভাবে সহায়তা করতে পারেন :"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "ক্যাট্রোব্যাট প্রকল্পের মাধ্যমে আমরা সহযোগিতা জাগাতে চাই এবং সকলের সৃজনশীলতাকে সমস্ত মানবতার সুবিধার জন্য একত্রিত করার অনুমতি দিতে চাই। অন্যান্য সক্রিয় সদস্যরা যেমন তাদের প্রকল্পগুলি আপনাকে দেয়, ঠিক তেমনই আপনার প্রকল্পগুলিকে উপহার হিসাবে সম্প্রদায়কে উপহার দিয়ে আপনি ক্যাটরোব্যাট সম্প্রদায়ের একজন সক্রিয় সদস্য হতে পারেন:"
   text4: 'আপনাকে আমাদের উপহার'
   text5: 'আমাদের ব্যবহার এবং সেবার শর্তাদি:'
   list1:
@@ -311,14 +322,14 @@ termsOfUse:
     item2: সমস্ত বয়সের (ছোট বাচ্চা থেকে শুরু করে কিশোর এবং দাদা-দাদি)
     item3: সমস্ত স্তরের অভিজ্ঞতার সাথে
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: শ্রদ্ধাশীল হওয়া. প্রকল্পগুলি ভাগ করার সময়, দয়া করে মনে রাখবেন যে বিভিন্ন বিভিন্ন বয়সের এবং পটভূমির লোকেরা আপনার অবদানগুলি দেখতে পাবে।
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "সৎ হও. আপনি ছাড়া অন্য কেউ হওয়ার ভান করবেন না বা সম্প্রদায়কে ঠকানোর চেষ্টা করবেন না।"
     item4: "ব্যক্তিগত তথ্য ব্যক্তিগত রাখুন। আপনার ইমেল ঠিকানা, ফোন নম্বর, বা অন্যান্য ব্যক্তিগত যোগাযোগের তথ্য শেয়ার করবেন না।"
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: "সাইটটি বন্ধুত্বপূর্ণ রাখতে সহায়তা করুন। আপনি যদি মনে করেন যে অন্যরা কোনও প্রকল্প বা মন্তব্যের অর্থ, অবমাননাকর, খুব হিংস্র, বা অন্যথায় অনুপযুক্ত খুঁজে পেয়েছে, কেবল 'অনুপযুক্ত হিসাবে প্রতিবেদন করুন' বোতামটি ক্লিক করুন এবং একটি সংক্ষিপ্ত ব্যাখ্যা রেখে যান। ক্যাটরোব্যাট টিম আপনার প্রতিবেদনটি পর্যালোচনা করবে এবং কোনও প্রকল্প, মন্তব্য বা পোস্ট সরিয়ে ফেলতে পারে।"
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
+    item1: "আমাদের ওয়েবসাইটগুলিতে একটি প্রকল্প আপলোড করার মাধ্যমে আপনি এই কাজটিকে আপলোড করা ক্যাট্রোব্যাট প্রকল্পের নির্দিষ্ট ফ্রি লাইসেন্সের আওতায় আনতে সম্মত হন এবং সম্মত হন। ক্যাট্রোব্যাট সিস্টেম নিজেই আপনার জন্য উপলব্ধ নিখরচায় লাইসেন্সগুলির অনুরূপ, আপলোড হওয়া ক্যাট্রোব্যাট প্রকল্পগুলির এই বিনামূল্যে লাইসেন্সগুলি প্রত্যেককে অন্যদের দ্বারা আপলোড করা কাজ থেকে শিখতে এবং তাদের নিজস্ব আকর্ষণীয় গেমস তৈরির জন্য অভিযোজিত এবং রিমিক্স করার অধিকার দেয়, অ্যানিমেশন এবং অন্যান্য প্রকল্প। এটি প্রত্যেককে 'নিজের সমবয়সীদের কাঁধে দাঁড়ানোর' অনুমতি দেয়, তাদের মধ্যে একজন হলেন আপনি! আপনার কাজটি এইভাবে পুরো বিশ্বকে উপকৃত করবে এবং সবার জন্য ব্যবহারের জন্য মুক্ত থাকবে, সারা বিশ্বের স্বেচ্ছাসেবকদের দ্বারা উইকিপিডিয়ায় নিখরচায় অবদান করা পাঠ্য এবং চিত্রগুলির সাথে কিছুটা মিল। এটিকে আপনার মানবতার কাছে বর্তমান হিসাবে ভাবেন: আপনি প্রত্যেককে এবং আমাদের ওয়েবসাইটগুলিতে তাদের কাজ আপলোড করে এমন অন্য সবাই আপনাকে দেয়। সুতরাং আপলোডকৃত প্রকল্পটি হ'ল একটি মূল্যবান উপহার যা আপনাকে তার শর্তাদিতে সম্প্রদায়টিতে অংশ নেওয়ার শর্ত সহ তার মালিক আপনাকে বিনামূল্যে প্রদান করে।"
+    item2: আপনি উপহার গ্রহণ করতে হবে না; যদি আপনি তা করেন, নির্দিষ্ট বিধি প্রযোজ্য। এই নিয়মের সুবিধাগুলি হ'ল আপনি কাজটি থেকে শিখতে পারেন এবং এমনকি শীতল জিনিস নিজেই তৈরি করতে এটি তৈরি করতে পারেন, যা আপনি তখন যেমন, আমাদের ওয়েবসাইটগুলিতে আবার নিজের মতো আপলোড করতে পারেন। আরেকটি সুবিধা হ'ল এই লাইসেন্সগুলি নিশ্চিত করে যে আপনার প্রকল্পের ব্যবহারের মাধ্যমে অন্যের জন্য উত্পন্ন কোনও সমস্যার জন্য আপনাকে দায়বদ্ধ রাখা যাবে না।
     item3: "একটি গুরুত্বপূর্ণ অতিরিক্ত শর্ত হ'ল আপনি লেখকদের স্পষ্টভাবে কৃতিত্ব দিন যাঁর কাজের ভিত্তিতে আপনি নিজের কাজ তৈরি করেছেন।একই সাথে, আমরা কঠোর পরিশ্রম করব যাতে আপনার কাজ  আপনার  অবদান রাখার জন্য অন্যদের দ্বারা স্পষ্টভাবে প্রশংসিত হয়,ক্যাটরোবটের সম্প্রদায়ের মধ্যে আপনাকে নির্দ্বিধায় প্রতিনিধিত্ব করার জন্য স্বতন্ত্র নাম  বেছে নেওয়ার সুযোগ দেওয়া হবে এবং অন্যকে আপনার কাজের প্রতি কৃতজ্ঞতা প্রকাশ করার সুযোগ দেওয়ার জন্য আপনার কাজ জনসমক্ষে দেওয়া হবে।"
     item4: 'সুনির্দিষ্ট আইনী শর্তাদি এবং চুক্তির জন্য দয়া করে %link-licenseUploaded% এর সাথে পরামর্শ করুন।'
   list4:
@@ -328,243 +339,16 @@ termsOfUse:
   list5:
     item1: 'যদি আপনি বা আপনার বয়স ১৩ বছরের কম হয় তবে আপনার পিতা-মাতা বা আইনী অভিভাবকরা কোনও সংস্থার সাথে জড়িত আছেন বা টানা-জাল প্রকারের গোপনীয়তা লঙ্ঘনের জন্য এবং / অথবা বাল্ক বা গণ নজরদারিগুলির জন্য দায়ী তাহলে আপনার আমাদের সফ্টওয়্যার অ্যাপ্লিকেশনগুলি এবং পরিষেবাগুলি ব্যবহার করার অনুমতি নেই। এই বিধিনিষেধের সুনির্দিষ্ট বিবরণ এবং এটিতে কিছু ব্যতিক্রমগুলি আমাদের %link-termsOfUse%.  4.a এবং 4.b বিভাগে বর্ণিত হয়েছে।'
     item2: যদি আপনার বয়স ১৩ বছরের কম হয়, তবে আপনাকে আপনার বাবা-মা বা আইনী অভিভাবকদের জিজ্ঞাসা করতে হবে যে তারা আপনাকে ক্যাট্রোব্যাট এর সফ্টওয়্যার অ্যাপ্লিকেশন এবং পরিষেবাদি ব্যবহার করতে দিবে কিনা।
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item3: "আমরা আমাদের নিজস্ব বিবেচনার ভিত্তিতে যে কোনও সময়ে ক্যাট্রোব্যাট ওয়েবসাইটগুলিতে আপলোড, মুছে ফেলা বা প্রজেক্ট, লুকানো বা লুকিয়ে রাখার অধিকার সংরক্ষণ করি, উদাহরণস্বরূপ যদি আমরা দেখতে পাই যে কোনও প্রকল্পে অনুপযুক্ত উপাদান রয়েছে বা কোনও ব্যবহারকারী লঙ্ঘন করেছে অন্য ব্যক্তির অধিকার।"
     item4: "ক্যাট্রোব্যাট এর সমস্ত সফ্টওয়্যার এবং ইন্টারনেট সংস্থানগুলি আশা করা যায় যে সেগুলি কার্যকর হবে কোনও ওয়্যারেন্টি ছাড়াই।"
     item5: 'উপরের পয়েন্টগুলির সুনির্দিষ্ট সূত্র এবং কিছু অতিরিক্ত আইনী শর্তাদি জন্য দয়া করে আমাদের %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service পরামর্শ নিন।'
   bottom1: সময়ে সময়ে এখানে আবার চেক করুন, কারণ আমরা সর্বদা আমাদের ব্যবহারের শর্তাদি উন্নত করার চেষ্টা করছি।
   bottom2: 'এই শর্তাদি ব্যবহারের বিষয়ে কোনও পরামর্শ মেইল করুন %email-webmaster%.'
   version: সংস্করণ ১.৩, ৪ মার্চ ২০১৪
-help:
-  stepByStep:
-    title: "ধাপে ধাপে শুরু"
-    start: "শুরুর অবস্থান"
-    description: |
-      Here you create your first project, an interactive postcard using the following walkthrough videos.
-      You have to follow the instructions given to you.
-      During the creation of the postcard, the basics of Pocket Code that you need for your future projects are mediated.
-      After these guided videos, all other activities will give you more freedom to create your own personal Pocket Code projects.
-    step1:
-      title: 'Make a new project'
-      detail:
-        text1: '"New" এটিতে আলতো চাপুন'
-        text2: 'Enter a project name, select "Create empty project" and tap "OK".'
-    step2:
-      title: "একটি নতুন অবজেক্ট তৈরি করুন"
-      detail:
-        text1: 'আলতো চাপুন'
-        text2: 'আপনার নতুন অবজেক্টের প্রথম দৃশ্যটি দেখতে নির্বাচন করুন।'
-        text3: 'বস্তুর নাম লিখুন এবং বস্তুটি তৈরি করতে "ঠিক আছে" আলতো চাপুন।'
-        special1: 'একটি নতুন চেহারা আঁকুন।'
-        special2: 'গ্যালারি থেকে বাছুন'
-        special3: 'ছবি তুলুন'
-    step3:
-      title: "চলাফেরা শুরু করুন"
-      detail:
-        text1: 'আলতো চাপুন'
-        text2: 'আমরা প্রথম ব্রিক ব্যবহার করি "গতি" বিভাগের বাইরে।'
-        text3: '"গ্লাইড" ব্রিকটি নির্বাচন করুন।  ব্রিকটি সংজ্ঞায়িত করে অবজেক্টটি নতুন অবস্থানে চলে যাবে।'
-        text4: 'ব্রিকটি এখন ভাসছে। এটি আটকানোর জন্য ব্রিকটি পছন্দমত অবস্থানে নিয়ে যান।আপনি ব্রিকটি আলতো চাপ দিয়েও স্থানান্তর করতে পারবেন এটি আবার ভাসমান না হওয়া পর্যন্ত।'
-        text5: 'পর্যায়ে যেতে এবং অবজেক্ট গ্লাইডিং দেখতে "খেলুন" এ আলতো চাপুন।'
-        text6: 'পর্যায় থেকে ফিরে আসতে অ্যান্ড্রয়েড ব্যাক বোতামটি ব্যবহার করুন।'
-    step4:
-      title: "চেহারা পরিবর্তন"
-      description: "আপনি আপনার বস্তুর চেহারা পরিবর্তন করতে পারেন।"
-      detail:
-        text1: '"চেহারা পরিবর্তন করিতে" ব্রিকটি নির্বাচন করুন। ব্রিকটির দ্বারা আপনি চেহারা নির্বাচন করতে বা একটি নতুন তৈরি করতে পারেন।'
-        text2: '"গ্লাইড" ব্রিকটির নীচে স্ন্যাপ করুন'
-        text3: 'একটি নতুন চেহারা তৈরি করতে ড্রপডাউন ফিল্ডে আলতো চাপুন।'
-        text4: 'আগের মতো ছবির উৎপত্তিস্থল দেখতে নির্বাচন করুন।'
-        text5: 'এখন আপনাকে নতুন ছবিটি নির্বাচন করতে হবে।'
-        text6: 'এই পর্যায়ে আচরণ দেখতে আলতো চাপুন।'
-    step5:
-      title: "কথা বলুন"
-      description: "এখন আপনি কীভাবে কোনও অবজেক্ট আলাপ তৈরী করবেন তা খুঁজে বের করিতে পারবেন।"
-      detail:
-        text1: '"কথা বলুন" নির্বাচন করুন। যখন পর্যায়টি কার্যকর হবে তখন অবজেক্টটি পাঠ্যটি বলা শুরু করবে।'
-        text2: '"চেহারা পরিবর্তন করিতে" ব্রিকটির নীচে স্ন্যাপ করুন'
-        text3: 'এই পর্যায়ে আচরণ দেখতে আলতো চাপুন।'
-    step6:
-      title: 'বারবার'
-      description: "এই পদক্ষেপটি আপনাকে দেখায় যে কীভাবে বস্তুর আচরণের পুনরাবৃত্তি করতে হয়।"
-      detail:
-        text1: '"চিরকাল" পর্যায়টি নির্বাচন করুন। লুপের সবকিছু চিরতরে পুনরাবৃত্তি হবে।'
-        text2: 'Snap the “Forever” brick underneath the "When project started" - brick.'
-        text3: 'অন্য একটি "গ্লাইড" ব্রিক যুক্ত করুন।'
-        text4: '"গ্লাইড" ব্রিকটিকে দুটি "লুপের শেষ" স্ন্যাপ করুন।'
-        text5: 'X এবং y মানের পাঠ্যের জায়গায় আলতো চাপুন এবং ০  সেট করুন।'
-        text6: 'এই পর্যায়ে আচরণ দেখতে আলতো চাপুন।'
-    step7:
-      title: "সবকিছু আলতো চাপুন"
-      description: 'You can also control the behaviour of the object when the project is running on the stage.'
-      detail:
-        text1: '"যখন ট্যাপ করা হবে" ব্রিকটি বেছে নিন। আপনি যখন মঞ্চে বস্তুটি ট্যাপ করবেন তখন "যখন ট্যাপ করা হবে" এর নীচে প্রতিটি ব্রিক একবার কার্যকর করা হবে।'
-        text2: 'অন্যান্য ব্রিকগুলির নীচে "যখন ট্যাপ করা হবে" রাখুন।'
-        text3: '"ডানদিকে ঘুরুন" ব্রিক নির্বাচন করুন এবং "যখন ট্যাপ করা হবে" ব্রিকের নীচে স্ন্যাপ করুন।'
-        text4: 'এখন আপনার এই স্ক্রিপ্টটি আছে।'
-        text5: 'এই পর্যায়ে আচরণ দেখতে আলতো চাপুন।। আপনি যদি এখন অবজেক্টে আলতো চাপুন তবে এটি ঘুরবে।'
-    step8:
-      title: "ব্রিকটি অনুলিপি করুন, মুছুন বা সংস্করণ করুন"
-      detail:
-        text1: 'প্রতিটি ব্রিকের বাম দিকে প্রথম ট্যাপে প্রসঙ্গ মেনু খুলবে। সূত্র সম্পাদকের সাহায্যে আপনি ব্রিকের মানগুলি স্থানান্তর, অনুলিপি, মুছতে বা সম্পাদনা করতে পারবেন।'
-    step9:
-      title: "অ্যাপ্লিকেশন নেভিগেশন"
-      detail:
-        text1: 'পর্যায় থেকে ফিরে আসতে অ্যান্ড্রয়েড ব্যাক বোতামটি ব্যবহার করুন।'
-        text2: 'আপনার বস্তুর ওভারভিউতে ফিরে যেতে এক পর্দা পিছুনে ফিরে যান। এখানে আপনি স্ক্রিপ্টগুলিতে যেতে পারেন এবং অবজেক্টের চেহারা এবং শব্দগুলির একটি শক্তিশালী উপস্থাপনাও করতে পারেন।সেখানে আপনি চেহারা এবং শব্দ পরিবর্তন, অনুলিপি এবং যোগ বা মুছতে পারেন।'
-        text3: 'বস্তুর সার্বিক অবস্থা এবং ব্যাকগ্রাউন্ড পেতে আবার অ্যান্ড্রয়েড ব্যাক বোতামটি পুনরায় ব্যবহার করুন।'
-    step10:
-      title: "ব্যাকগ্রাউন্ড পরিবর্তন করুন"
-      description: "This is the overview of your objects and your project's background."
-      detail:
-        text1: 'ব্যাকগ্রাউন্ডটি একটি বস্তুর মতো আপনার কেবল একটি ব্যাকগ্রাউন্ড থাকতে পারে।'
-        text2: 'আপনি স্ক্রিপ্ট, শব্দ যোগ করতে পারেন এবং একইভাবে ব্যাকগ্রাউন্ড অবজেক্ট দেখতে পারেন।'
-    step11:
-      title: "প্রধান মেনু"
-      description: "এই স্ক্রিনটি পেতে অ্যান্ড্রয়েড ব্যাক বোতামটি ব্যবহার করুন।"
-      detail:
-        text1: 'Continue with your currently opened project.'
-        text2: 'Add a new project.'
-        text3: 'See all your local projects.'
-        text4: 'সহায়তা সাইটে যান এবং অন্যান্য ব্যবহারকারীদের সাথে আলোচনা করুন।'
-        text5: 'Explore the world of the Pocket Code projects. Download and remix projects you like.'
-        text6: 'Upload the project that is currently opened.'
-  tutorialcards:
-    title: "টিউটোরিয়াল"
-    description1: "এই টিউটোরিয়ালগুলি আপনাকে দেখাবে পকেট কোডে কার্যকর কৌশলগুলি কীভাবে ব্যবহার করতে হবে।"
-    getReady: "প্রস্তুত হও:"
-    tryCode: "এই কোড চেষ্টা করুন"
-    doIt: "এটা কর"
-    tip: "অতিরিক্ত পরামর্শ"
-    card1:
-      title: "আকার পরিবর্তন করুন"
-      description: "কোনও বস্তুর আকার পরিবর্তন করুন।"
-      one: "আপনি যার আকার পরিবর্তন করতে চান সেই বস্তুটি যুক্ত করুন, উদাঃ প্রাণী।"
-      two: "বস্তুটি হ্রাস করতে (এর মূল আকারের ২০%) স্ক্রিপ্টগুলিতে নিম্নলিখিত ব্রিকগুলি যোগ করুন।"
-    card2:
-      title: "চেহারা পরিবর্তন"
-      description: "কোনও বস্তুর চেহারা পরিবর্তন করুন।"
-      one: "আপনি যার চেহারা পরিবর্তন করতে চান সেই বস্তুটি যুক্ত করুন, উদাঃ আইটেম।"
-      two: "বস্তুর চেহারাতে আরও ছবি অন্তর্ভুক্ত করুন।"
-      three: "এক সেকেন্ডের পরে নজরদারি অব্যাহতভাবে পরিবর্তন করতে অবজেক্টের স্ক্রিপ্টগুলিতে নিম্নলিখিত ব্রিকগুলি যোগ করুন।\n"
-    card3:
-      title: "অ্যানিমেশন"
-      description: "অ্যানিমেটেড বস্তু"
-      one: "বস্তুটি যুক্ত করুন যেটি আপনি স্থানান্তর করিতে চান"
-      two: "বস্তুর চেহারাতে আরও একটি ছবি অন্তর্ভুক্ত করুন যেটি নড়াচড়ার চিত্র তুলে ধরে।"
-      three: "নির্দিষ্ট সময়ের পরে অবিরত অবজেক্টের অবস্থান পরিবর্তন করার জন্য অবজেক্টের স্ক্রিপ্টগুলিতে নিম্নলিখিত ব্রিকগুলি যোগ করুন।অতিরিক্ত হিসাবে আপনি প্রান্তে বাউন্স করে পর্যায়টি মার্জিন করতে পারেন।"
-    card4:
-      title: "ধীরে ভাসিয়া চলা"
-      description: "আপনার বস্তুটি স্ক্রিনে ভাসিয়া চলতে দিন।"
-      one: "যেটি ভাসিয়া দিতে চান বস্তুটি যুক্ত করুন উদাহরণস্বরূপ প্লেন।"
-      two: "নিম্নলিখিত ব্রিক সন্নিবেশ করান এবং যে অঞ্চলটিতে নড়াচড়া হওয়া উচিত তা নির্ধারণ করুন।"
-    card5:
-      title: "শব্দ চালু করুন"
-      description: "বস্তুটিতে আলতো চাপ দিয়ে শব্দ বাজান।"
-      one: "আপনি যে শব্দটি বাজাতে চান তা যোগ করুন, উদাহরণ: কুকুর"
-      two: "প্লেব্যাকটি সম্ভব করতে নিম্নলিখিত ব্রিকটি যুক্ত করুন। আপনার ব্যক্তিগত লাইব্রেরি, পকেট কোড মিডিয়া লাইব্রেরি থেকে একটি শব্দ নির্বাচন করুন বা একটি নিজের রেকর্ড করুন।"
-    card6:
-      title: "কথা বলুন"
-      description: "আপনার বস্তুটিকে কথা বলতে দিন।"
-      one: "আপনি যে বস্তুটি কথা বলাতে চান তা যুক্ত করুন, যেমন: বাহক"
-      two: "ভয়েস আউটপুটটিকে সম্ভব করার জন্য নিম্নলিখিত ব্রিক যোগ করুন।"
-    card7:
-      title: "সেন্সর"
-      description: "প্রবণতা সেন্সর ব্যবহার করে কোনও বস্তু নিয়ন্ত্রণ করুন"
-      one: "বস্তুটি যুক্ত করুন যেটি আপনি স্থানান্তর করিতে চান"
-      two: "আপনার ফোনের সেন্সরগুলির মাধ্যমে বস্তুটি নিয়ন্ত্রণ করতে নিম্নলিখিত ব্রিক যোগ করুন। তারপর \"x এবং y প্রবণতা\" নির্বাচন করুন। উপযুক্ত চলাচল পেতে, \"- প্রবণতা\" সেট করুন। যদি অবজেক্টের চলাচল খুব বুদ্ধিমান হয় তবে প্রবণতাটিকে উদাহরণস্বরূপ ১০ দ্বারা ভাগ করুন।"
-    card8:
-      title: "কম্পাস"
-      description: "আপনার নিজস্ব কম্পাস তৈরি করুন"
-      one: "আপনি যে বস্তুটি কম্পাসের দিক নির্দেশ করতে চান তা যুক্ত করুন।"
-      two: "অবজেক্টের দিকনির্দেশ নির্ধারণ করতে নিম্নলিখিত ব্রিক যোগ করুন। অতিরিক্তভাবে চিরতরের লুপ অন্তর্ভুক্ত করুন।"
-    card9:
-      title: "সম্প্রচার"
-      description: "একটি বস্তু থেকে অন্য বস্তুতে বার্তা প্রেরণ করুন।"
-      one: "একটি নতুন অবজেক্ট যুক্ত করুন, উদাঃ অ্যালিস, যা একটি সম্প্রচার বার্তা প্রেরণ করা উচিত। অতিরিক্তভাবে, ব্যাকগ্রাউন্ড চেহারাতে একটি দ্বিতীয় ব্যাকগ্রাউন্ড যুক্ত করুন। ব্যাকগ্রাউন্ডটি সম্প্রচারিত বার্তাটি পাওয়ার সাথে সাথে এটি তার অন্য চেহারাতে বদলে যাবে।"
-      two: "ব্রিকটি যোগ করুন এবং \"সকলকে প্রেরণ করুন\" যখন অন্য বস্তুটি বার্তাটি গ্রহণ করবে তখন কী হবে তা নির্ধারণ করুন।"
-      three: "সেক্ষেত্রে সামনের স্তরের বস্তুটি টেপ করা হলে পটভূমি পরিবর্তন হয়।"
-    card10:
-      title: "ভেরিয়েবল দেখান"
-      description: "একটি চলকের মান প্রদর্শন করুন।"
-      one: "আপনার ফোনের সেন্সরগুলির মাধ্যমে আপনি যেটা সরাতে চান এমন একটি বস্তু যুক্ত করুন (%tutorial_card_link_7% টিউটোরিয়াল কার্ড 7 %link_end% দেখুন)। অতিরিক্তভাবে একটি দ্বিতীয় পটভূমি যুক্ত করুন যাতে এটি সম্প্রচারিত বার্তা পেলে এটি পরিবর্তন হয়।"
-      two: "চলমান বস্তুর বর্তমান x এবং y অবস্থান সংরক্ষণ করতে নিম্নলিখিত ব্রিকগুলি সন্নিবেশ করান।"
-      three: "আপনি মঞ্চে মানগুলি প্রদর্শন করতে পারেন \"চলক দেখান\" এর মাধ্যমে।"
-    card11:
-      title: "সংঘর্ষ সনাক্তকরণ"
-      description: "দুটি বস্তুর মধ্যে সংঘর্ষ সনাক্ত করুন।"
-      one: "দুটি বস্তু যুক্ত করুন যেটি  আপনার ফোনের সেন্সরগুলির মাধ্যমে নড়াচড়া করতে পারেন যেমনঃ  অ্যালেক্স (%tutorial_card_link_7% টিউটোরিয়াল কার্ড 7 %link_end% দেখুন)।"
-      two: "চলমান বস্তুর অ্যালেক্সের বর্তমান অবস্থান \"x এবং y \" সংরক্ষণ করুন (%tutorial_card_link_10% টিউটোরিয়াল কার্ড ১০ %link_end% দেখুন) এবং নিম্নলিখিত স্ক্রিপ্টগুলি সন্নিবেশ করান। দুটি বস্তু একটির ওপর আরেকটি  হয়ে গেছে কিনা তা ক্রমাগত পরীক্ষা করে দেখুন। যদি এটি হয় তবে স্থির বস্তুটি এই ক্ষেত্রে লুকানো উচিত।"
-    card12:
-      title: "মুখ সনাক্তকরণ"
-      description: "মুখ সনাক্তকরণ ব্যবহার করে একটি বস্তু নিয়ন্ত্রণ করুন।"
-      one: "প্রথমে নিশ্চিত করুন যে মুখ সনাক্তকরণের ব্রিকটি সক্ষম হয়েছে। অতএব সেটিংসে যান।"
-      two: "একটি নতুন অবজেক্ট যুক্ত করুন এবং যদি কোনও মুখ সনাক্ত হয় তবে তা দেখার জন্য নিম্নলিখিত ব্রিকগুলি সন্নিবেশ করুন। কোনও মুখ সনাক্ত হয়েছে কিনা তা পরীক্ষা করে এটি চিরতরে লুপে রাখুন। যদি ক্যামেরাটির মুখটি উপলব্ধি করে তবে ভেরিয়েবলের মান হ'ল \"সত্য\", অন্যথায় এটি \"মিথ্যা\"।"
-  starterPrograms:
-    title: "Starter Projects"
-    description: "Try out these starter projects. Look inside to make changes and add your ideas."
-    categories:
-      games: "খেলা"
-      animations: "অ্যানিমেশন"
-      interactive: "ইন্টারেক্টিভ আর্ট এবং গল্প"
-      music: "গান এবং নাচ"
-  gameJam:
-    title: "কীভাবে পকেট কোড গেমটি Jolt Site এ আপলোড করবেন?"
-    text0: "প্রথমে আপনাকে খেলায় অভিনন্দন! একা একা অ্যান্ড্রয়েড অ্যাপ্লিকেশন তৈরি করতে আপনি এখন এটি %link% আপলোড করতে পারেন, যা আপনি Game Jolt সাইটে আপলোড করতে পারবেন।"
-    title1: "নিবন্ধন"
-    text1: "First you need to create an account. After that you can upload your created project. Don’t worry it is easy and you only need to think of a username and a password. After filling out both, click on ‘Login or Register’. That’s it!"
-    title2: "আপলোড করুন"
-    text2: "নিবন্ধকরণ প্রক্রিয়া শেষে আপনি আপনার গেমটি আপলোড করতে পারবেন। কেবল একটি নাম সম্পর্কে ভাবুন এবং একটি বিবরণ যুক্ত করুন। বিবরণ ক্ষেত্রে #AliceJam150  বিবরণ অংশে যুক্ত করুন।"
-    title3: "Search for your project"
-    text3: "Go to your Pocket Code profile where all your projects are listed or search directly for your project by using the search and your project name."
-    title4: "অ্যান্ড্রয়েড অ্যাপ তৈরি করুন"
-    text4: "Directly on the project detail page you can create an Android app. By clicking on ‘Prepare app’ the app will be built."
-    title5: "অ্যাপ ডাউনলোড করুন"
-    text5: "After the building process you can download your project as an app. This downloaded app needs to be uploaded again directly on the Game Jolt Site in order to participate in the %link%."
-    title6: "নিবন্ধন / লগইন করুন GameJolt.com"
-    text6: "%link% দেখুন এবং 'লগইন' বা 'সাইন আপ' এ ক্লিক করুন! যদি ইতিমধ্যে একটি অ্যাকাউন্ট থাকে তবে  শুধু লগইন করুন, না হলে আপনার ইমেল ঠিকানা, ব্যবহারকারীর নাম এবং পাসওয়ার্ড দিয়ে নিবন্ধন করতে হবে।"
-    title7: "Game Jolt সাইটে আপনার গেমটি আপলোড করুন"
-    text7: "আপনি লগ ইন করার পরে, আপনার ড্যাশবোর্ডে যান। সেখানে আপনি আপনার গেম যুক্ত করতে পারেন। প্রথমে আপনাকে ‘নিয়ম স্বীকার করুন’ এ ক্লিক করতে হবে। তারপরে গেমের তথ্য পূরণ করুন। ইঞ্জিন / ভাষা / তৈরির সরঞ্জাম হিসাবে 'অন্যান্য' নির্বাচন করুন এবং যুক্ত করুন অন্যান্য ইঞ্জিন / ভাষা / সরঞ্জাম 'অ্যান্ড্রয়েড'। 'অগ্রগতি' অবস্থা হিসেবে 'সমাপ্ত / স্থিতিশীল' নির্বাচন করুন। বর্ণনায় # অ্যালিসে জ্যাম১৫০ অন্তর্ভুক্ত করার বিষয়টি নিশ্চিত করুন যাতে এটি %link%  পৃষ্ঠাতে উপস্থিত হয়।"
-    text7_1: "আপনার গেম প্রকাশের আগে আপনি পরবর্তী পদক্ষেপগুলি অনুসরণ করুন। আপনাকে অবশ্যই কমপক্ষে একটি ‘ছোট চিত্র’ যুক্ত করতে হবে, একটি ‘ম্যাচিউরিটি রেটিং’ সেট করতে হবে এবং ‘বিল্ড / ফাইলস’ ক্লিক করে আপনার গেমগুলি আপলোড করতে হবে।"
-    text7_2: "‘প্যাকেজ যুক্ত করুন’ এ ক্লিক করুন এবং প্যাকেজের তথ্য পূরণ করুন। এটি সংরক্ষণ করুন এবং রিলিজ যুক্ত করুন।"
-    text7_3: "Now you can upload the apk of your project. You find the downloaded app in your download folder. It is best to use a data explorer (e.g. es data explorer)."
-    text7_4: "দ্রষ্টব্য: যদি অ্যাপটির প্রত্যয়টি ‘.apk’ অনুপস্থিত থাকে তবে আপনাকে ম্যানুয়ালি ‘.apk’ যুক্ত করতে হবে। শুধু ফাইলটির নাম পরিবর্তন করুন। এখন আপনার এটি আপলোড করতে সক্ষম হবেন।"
-    text7_5: "আপলোডের পরে আপনার গেমটি প্রকাশ করতে ‘ঠিক আছে’ এ ক্লিক করুন। এটি পরে আপনার গেমটি ডাউনলোড করার জন্য লোকেদের একটি লিঙ্ক প্রদর্শন করবে।"
-    text7_6: "আপনি এখন Game Jolt সাইটে আপনার প্রথম গেমটি আপলোড করেছেন এবং এটিকে সক্রিয় হিসাবে সেট করেছেন। অভিনন্দন!"
-    text7_7: "অন্যান্য লোকেরা এখন আপনার গেমটি খুঁজে বের করতে সক্ষম হবে এবং এটি %link% পৃষ্ঠাতে উপস্থিত হবে।"
-  aliceGameJamTutorialcards:
-    title1: "ওয়ান্ডারল্যান্ড এ স্বাগতম"
-    subtitle1: "চরিত্রগুলি অ্যানিমেট করুন এবং একটি 'যখন টেপ করা হবে' ইভেন্টটি তৈরি হবে"
-    description1: |
-      আপনার চরিত্রগুলির মধ্যে একটিকে কীভাবে একটি সাধারণ অ্যানিমেশন দিয়ে জীবনে নিয়ে আসা যায় এবং 
-      আলতো চেপে কীভাবে আপনার চরিত্র তৈরি করবেন তা শিখুন।ভিডিওটি আপনাকে দেখায় যে কীভাবে আপনি সহজেই বিভিন্ন চেহারা ব্যবহার করে আপনার চরিত্রটি প্রাণবন্ত করতে পারেন।
-      আরও আমরা আপনাকে "কখন ট্যাপড" ইভেন্ট তৈরি করা যায় এবং কীভাবে অবজেক্টগুলির মধ্যে সম্প্রচারিত বার্তা প্রেরণ করা যায় তা আপনাকে দেখাব।
-    title2: "এলিসকে বাঁচান!"
-    subtitle2: "প্রবণতা সেন্সরগুলি ব্যবহার করুন এবং বস্তুর মধ্যে সংঘর্ষ সনাক্ত করুন"
-    description2: "আপনি এখানে আপনার ফোনের প্রবণতা সেন্সর ব্যবহার করে একটি চরিত্র কীভাবে নিয়ন্ত্রণ করবেন তা শিখবেন। আপনি আপনার ফোনটি বাম বা ডানদিকে কাত করে এলিসের চলাচল নিয়ন্ত্রণ করতে পারেন। আমাদের টিউটোরিয়ালটি দেখুন এবং অবজেক্টগুলিকে আকাশ থেকে এলোমেলোভাবে পড়তে দিন এবং অন্যান্য বস্তুর সাথে সংঘর্ষ সনাক্ত করতে অভিজ্ঞ হতে দিন।"
-    title3: "হ্যাটার - হিট এবং রান"
-    subtitle3: "চলমান ল্যান্ডস্কেপ তৈরি করুন এবং হ্যাটার্সের চলাচল নিয়ন্ত্রণ করুন"
-    description3: "এই টিউটোরিয়ালটিতে আপনি শিখবেন কীভাবে এমন একটি ল্যান্ডস্কেপ তৈরি করা যায় যা দেখে মনে হয় এটি চলমান। বিভ্রম নড়াচড়া তৈরি করতে আমরা পর্দার সাথে অবজেক্টগুলিকে সরিয়ে দিয়ে এটি করব। আপনার ফোনটি কাত করে কীভাবে হ্যাটারটি সরানো যায় তা আমরা আপনাকে দেখাব।"
-    title4: "হ্যাটার - হিট এবং রান"
-    subtitle4: "হ্যাটারকে দুষ্ট কার্ডগুলি গুলি করতে দিন"
-    description4: "এই টিউটোরিয়ালে আমরা আপনাকে শিখাব কীভাবে প্রতিপক্ষ তৈরি করতে হবে যা এলোমেলোভাবে আপনার চরিত্রের দিকে এগিয়ে যায়। তদুপরি, আপনি কীভাবে হ্যাটার শ্যুট টিড্রপস তৈরি করবেন এবং সংঘর্ষ সনাক্তকরণ ব্যবহার করে প্রতিপক্ষ আঘাত করেছে কিনা তা পরীক্ষা করবেন।"
-    title5: "একটি চিশায়ার বিড়াল ধাক্কা"
-    subtitle5: "ভেরিয়েবল ব্যবহার করে একটি স্কোর তৈরি করুন"
-    description5: "এই টিউটোরিয়ালে আপনাকে স্কোর তৈরি করার জন্য ভেরিয়েবলগুলি কীভাবে ব্যবহার করতে হবে তা দেখাবে। স্কোরগুলি একটি গেমের মধ্যে দরকারী উপাদান। আমাদের স্কোর আপনাকে দেখায় আপনি কতবার বিড়ালটিকে ধরেছেন।"
-    title6: "একটি খরগোশ জাতি"
-    subtitle6: "একটি চলমান ব্যাকগ্রাউন্ড তৈরি করুন"
-    description6: |
-      এই টিউটোরিয়ালটি আপনাকে দেখায় যে কীভাবে একটি নির্দিষ্ট উপায়ে ব্যাকগ্রাউন্ড গ্রাফিক্স গ্লাইড করে উল্লম্বভাবে স্ক্রোলিং ব্যাকগ্রাউন্ড তৈরি করতে হয়। আর একটি জিনিস যা আমরা আপনাকে শিখাব তা হ'ল চরিত্রটিতে আলতো চাপ দিয়ে এগিয়ে আসা।
-      গেমটিকে আরও কঠিন করতে আমরা আপনাকে দেখাব কীভাবে সময়ের সাথে আপনার চরিত্রের গতি কমিয়ে আনা যায়।
-    download: "Download the project"
-oauth:
-  username_header: পকেট কোড সাইন আপ করার জন্য আপনাকে ধন্যবাদ!
-  username_chooser: "অনুগ্রহ করে একটি ব্যবহারকারীর নাম নির্বাচন করুন।"
-  username_hint: ব্যবহারকারীর নামটি আপনার আসল নাম হওয়া উচিত নয়।
-  usernameTaken: ব্যবহারকারীর নাম ইতিমধ্যে নেওয়া হয়েছে, দয়া করে আলাদা একটি পছন্দ করুন।
 search:
   dotdotdot: অনুসন্ধান...
   search: অনুসন্ধান
-  inMediaLib: Search in media library
+  inMediaLib: মিডিয়া লাইব্রেরিতে অনুসন্ধান করুন
   results: ফলাফল অনুসন্ধান করুন
   resultcount: আপনার অনুসন্ধানে %count% ফলাফল ফিরে এসেছে
   fail: কমপক্ষে একটি অনুসন্ধান শব্দ লিখুন
@@ -601,7 +385,7 @@ apk:
   preparing: 'অ্যাপ্লিকেশন প্রস্তুত করুন'
   text: 'প্রক্রিয়াটি কিছুটা সময় নিতে পারে'
 format:
-  million_abbreviation: M
+  million_abbreviation: এম
 #api
 errors:
   username:
@@ -643,24 +427,24 @@ errors:
   token: 'ডিভাইসের প্রমাণীকরণ ব্যর্থ হয়েছে: অবৈধ প্রমাণীকরণ-টোকেন!'
   uploadTokenAuthFailed: 'প্রমাণীকরণ টোকেন আপলোড ব্যর্থ হয়েছে।'
   programname:
-    rude: Project name must not contain rude wordes.
+    rude: প্রকল্পের নামটিতে অবশ্যই অসভ্য শব্দ থাকতে হবে না।
   program:
-    invalid: Invalid project.
+    invalid: অবৈধ প্রকল্প।
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'দুঃখিত, আপনার প্রকল্পে ক্যাটরোব্যাট ভাষার একটি পুরানো সংস্করণ রয়েছে! আপনি কি পকেট কোডের সর্বশেষতম সংস্করণটি ব্যবহার করছেন?'
   programversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'দুঃখিত, আপনি পকেট কোডের একটি পুরানো সংস্করণ ব্যবহার করছেন। দয়া করে সর্বশেষ সংস্করণে আপডেট করুন।'
   authentication:
     title: প্রমাণ করতে ব্যর্থ
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      আপনার ব্যবহারকারীর শংসাপত্রগুলি ভুল।
+      দয়া করে অ্যাপটিতে আবার লগ ইন করার চেষ্টা করুন।
 success:
   text: সফল হয়েছে
   registration: নিবন্ধন সফল হয়েছে৷
   token: ঠিক আছে
   upload: আপনার প্রজেক্টটি সফলভাবে আপলোড হয়েছে!
-  imgUpload: Your image was uploaded successfully!
+  imgUpload: আপনার চিত্রটি সফলভাবে আপলোড হয়েছে!
   report: আপনার প্রতিবেদনটি সফলভাবে পাঠানো হয়েছে
 time:
   minutes.ago: '{0} <১ মিনিট আগে | {1} ১ মিনিট আগে |]1,Inf] %count% মিনিট আগে'
@@ -672,21 +456,26 @@ failure:
   upload: আপনার অ্যাপ্লিকেশন আপলোড করার সময় একটি ভুল ছিল।
 api:
   registerUser:
-    emailMissing: 'EMail missing'
-    notAValidEmail: 'Not a valid EMail'
-    emailAlreadyInUse: 'EMail already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameAlreadyInUse: 'Username already in use'
-    passwordMissing: 'Password missing'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username shouldn't contain an email address"
+    emailMissing: 'ইমেল অনুপস্থিত'
+    emailEmpty: 'ইমেল খালি থাকতে পারে না'
+    emailInvalid: 'ইমেল অবৈধ'
+    emailAlreadyInUse: 'ইমেইল ঠিকানাটি ইতোমধ্যেই ব্যবহৃত হচ্ছে'
+    usernameMissing: 'ব্যবহারকারীর নাম অনুপস্থিত'
+    usernameTooShort: 'ব্যবহারকারীর নাম খুব ছোট'
+    usernameTooLong: 'ব্যবহারকারীর নাম খুব দীর্ঘ'
+    usernameEmpty: 'ব্যবহারকারীর নাম খালি হতে পারে না'
+    usernameAlreadyInUse: 'ব্যবহার কারীর নাম ইতমধ্যে ব্যবহৃত'
+    usernameInvalid: 'অবৈধ ব্যবহারকারীর নাম'
+    passwordMissing: 'পাসওয়ার্ড অনুপস্থিত'
+    passwordEmpty: 'পাসওয়ার্ড খালি থাকতে পারে না'
+    passwordTooShort: 'পাসওয়ার্ড খুব ছোট'
+    passwordTooLong: 'পাসওয়ার্ড খুব দীর্ঘ'
+    passwordInvalidChars: 'পাসওয়ার্ডে অবৈধ অক্ষর রয়েছে'
+    usernameContainsEmail: "ব্যবহারকারীর নামটিতে অবশ্যই একটি ইমেল ঠিকানা থাকতে হবে না"
+    countryCodeInvalid: "দেশের কোড অবৈধ"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
+    invalid_checksum: 'অবৈধ চেকসাম। আবার আপলোড করার চেষ্টা করুন!'
+    upload_error: 'আপলোড করার সময় ত্রুটি। আবার আপলোড করার চেষ্টা করুন!'
     creating_error: 'Error while creating Program Entity. Try uploading again!'
 #languages and countries
 language:
@@ -744,7 +533,7 @@ gamejam:
   whats: '%gamejamname% কী?'
   submitown:
     header: সচেতন থাকা
-    subheader: You can only submit your own projects
+    subheader: আপনি কেবল নিজের প্রকল্পগুলি জমা দিতে পারেন
     text: |
       কেন নিজে তৈরি করবেন না!
       %gamejamtag% তে অংশ নিন
@@ -758,25 +547,17 @@ tags:
     tag4: সঙ্গীত
     tag5: শিল্প
     tag6: পরীক্ষামূলক
-    tag7: Tutorial
+    tag7: টিউটোরিয়াল
 admin:
   maintain:
     diskMaintenance: ডিস্ক রক্ষণাবেক্ষণ
     ramMaintenance: র‌্যাম রক্ষণাবেক্ষণ
     noRemovableObjects: কোন অপসারণযোগ্য সামগ্রী সহজলভ্য নেই।
     removableObjects: অপসারণযোগ্য বস্তু
-    manualBackups: ম্যানুয়াল ব্যাকআপ
-    noRemovableBackupObjects: এই সার্ভারে কোনও অপসারণযোগ্য ব্যাকআপ ফাইল নেই।
-    btnCreateBackup: ব্যাকআপ তৈরি করুন
-    btnDownloadBackup: ব্যাকআপ ডাউনলোড করুন
-    btnRestoreBackup: ব্যাকআপ পুনর্বহাল করুন
-    btnDeleteBackup: ব্যাকআপ মুছুন
-    createBackupConfirmationTitle: ব্যাকআপ ফাইল তৈরি করুন
-    createBackupConfirmationText: এই প্রক্রিয়াটি কিছুটা সময় নিতে পারে। পৃষ্ঠাটি পরে লোড হবে!
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: অনুরূপ প্রকল্প
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: থেকে আরো %username%
 pmd:
   submitBtn: আপনার প্রজেক্ট জমা দিন
   submitBox:
@@ -784,10 +565,11 @@ pmd:
     text: আপনি আপনার প্রজেক্টটি জমা দিতে চলেছেন। প্রজেক্ট কোডটি প্রবেশ করুন এবং প্রেরণ ক্লিক করুন।
     btnText: জমা দিন
   successful:
-    text: Your project upload was successful.
+    text: আপনার প্রকল্প আপলোড সফল হয়েছে।
   failed:
-    text: Project upload failed.
+    text: প্রকল্প আপলোড ব্যর্থ হয়েছে।
 codeview:
+  title: 'Code View'
   showCode: 'কোড দেখান'
   hideCode: 'কোড লুকান'
   showStatistics: 'কোড পরিসংখ্যান দেখান'
@@ -816,7 +598,7 @@ codeview:
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
-  general: 'General'
+  general: 'সাধারণ'
   bricks: 'ব্রিক'
   eventBricks: 'ঘটনা'
   controlBricks: 'নিয়ন্ত্রণ'
@@ -825,7 +607,8 @@ codeStatistics:
   looksBricks: 'চেহারা'
   penBricks: 'কলম'
   dataBricks: 'তথ্য'
-  specialBricks: 'Special'
+  deviceBricks: 'যন্ত্র'
+  specialBricks: 'বিশেষ'
 footer:
   language: ভাষা
   usefulLinks: উপকারী লিংক
@@ -834,9 +617,9 @@ footer:
   download: অ্যাপ্লিকেশনটি পান
 privacy-policy:
   header: গোপনীয়তার নীতি
-  version: Version 2.2, 17 October 2019
+  version: সংস্করণ 2.2, 17 অক্টোবর 2019
   text1: আপনাকে আমাদের পরিষেবা এবং অ্যাকাউন্টের সমস্ত সুবিধা দেওয়ার জন্য আপনার কাছ থেকে নির্দিষ্ট ডেটা সংগ্রহ করা প্রয়োজন।
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: আমাদের পরিষেবাদি (অ্যাপস এবং ওয়েবসাইটগুলি) বজায় রাখতে এবং উন্নত করতে এবং আইসিটি এবং স্টেম / স্টিম শিক্ষার উপর বৈজ্ঞানিক গবেষণা করার জন্য, আমরা গুগল এলএলসি (ইউএসএ) দ্বারা গুগল অ্যানালিটিক্স, ক্র্যাশলিটিক্স এবং ফায়ারবেস এবং ডায়নট্রেস এলএলসি দ্বারা ডায়ানট্রেস ব্যবহার করি ( মার্কিন যুক্তরাষ্ট্র) আমাদের পরিষেবাদির ব্যবহার, যেমন, ক্র্যাশ তথ্য, টাইমস্ট্যাম্পস, পরিদর্শন করা পৃষ্ঠাগুলি / পর্দা, আমাদের অ্যাপ্লিকেশন এবং পরিষেবাদির ব্যবহার, ব্যবহৃত অপারেটিং সিস্টেম এবং নেটওয়ার্ক সরবরাহকারীর তথ্য সম্পর্কে মেটাডেটা পেতে। এই বিশ্লেষণ এবং সংগৃহীত ডেটা আপনার প্রোফাইলের সাথে লিঙ্কযুক্ত নয় এবং কোনও ব্যক্তিগত তথ্য নেই (আইপি ঠিকানার শেষ বিটগুলি বেনামে যায়)। তবে সংগৃহীত ডেটা পরিষেবা সরবরাহকারীদের (গুগল এলএলসি, ইউএসএ এবং ডায়নাত্রেস এলএলসি, মার্কিন যুক্তরাষ্ট্র) স্থানান্তরিত হবে। ডেটা প্রসেসিং গুগল এলএলসি এবং ডায়নাত্রেস এলএলসি এর সাথে চুক্তির ভিত্তিতে। পরিষেবা সরবরাহকারীদের এই সম্পর্কটি ইউরোপীয় ইউনিয়নের জেনারেল ডেটা প্রোটেকশন রেগুলেশন (ইইউ জিডিপিআর) এবং ইইউ-ইউএসএ-এর "প্রাইভেসি শিল্ড" চুক্তির সাথে সঙ্গতিপূর্ণ।
   text3: আমাদের সিস্টেমগুলিতে একটি অ্যাকাউন্ট তৈরি এবং ব্যবহার করতে এবং প্রতি ইমেল অনুসারে আপনার অ্যাকাউন্ট সম্পর্কে প্রয়োজনীয় পরিবর্তন সম্পর্কে আপনাকে অবহিত করতে, যেমন আমাদের ব্যবহারের শর্তাদি, আমাদের সম্প্রদায়ের নিয়ম বা নীতিমালা আপডেট বা লঙ্ঘন, আমরা আপনার সঞ্চয় করব ব্যবহারকারীর নাম এবং, যদি আপনি ইমেল সরবরাহ করেন তবে আপনার ইমেল ঠিকানা। যদি আপনি গুগল প্লাস বা ফেসবুকের মাধ্যমে আপনার অ্যাকাউন্টটি সংযুক্ত করে থাকেন তবে আমরা অতিরিক্ত এই পরিষেবাগুলিতে আপনার অ্যাকাউন্টের সাথে সংযুক্ত একটি পরিচয় কী সংরক্ষণ করি। আপনি স্পষ্টভাবে আমাদের এটি করার অনুমতি না দিলে আমরা এই ডেটা অন্য কোনও (যেমন, বিপণন) উদ্দেশ্যে ব্যবহার করব না।
   text4: স্বেচ্ছাসেবীর ভিত্তিতে, আপনি কোন দেশে থাকেন তা আমাদের দিতে আপনার অ্যাকাউন্ট পৃষ্ঠার শেয়ার সাইটের মাধ্যমে। এটি আপনার সর্বজনীন প্রোফাইলে প্রদর্শিত হবে এবং কেবলমাত্র আমাদের পরিসংখ্যান এবং গবেষণা উদ্দেশ্যে ব্যবহার করা হবে।এটি আপনার প্রোফাইল সেটিংসে যে কোনও সময় সরানো যেতে পারে।
   text5: আপনার প্রোফাইল পৃষ্ঠার https://share.catrob.at/ মাধ্যমে আপনার অ্যাকাউন্ট মুছে ফেলার মাধ্যমে যে কোনও সময় আপনার অ্যাকাউন্টের সাথে সম্পর্কিত ব্যক্তিগত ডেটা ব্যবহার প্রত্যাহার করতে পারেন।আপনার অ্যাকাউন্ট মুছে ফেলার পরেও আপনি প্রদত্ত পরিষেবাগুলি ব্যবহার করতে সক্ষম হবেন, তবে সহযোগিতা না করে উদাঃ, প্রোগ্রামগুলি আপলোড করার মাধ্যমে, মন্তব্য করা বা পছন্দ করার মাধ্যমে।এছাড়া, আপনার অ্যাকাউন্টে লিঙ্কযুক্ত সমস্ত সরবরাহকৃত সামগ্রী, যেমন, আপলোড হওয়া প্রোগ্রাম, মন্তব্যসমূহ, ইত্যাদি মুছে ফেলা হবে।
@@ -844,65 +627,41 @@ privacy-policy:
   text7: আপনি মেইলচিম্প সেবা(রকেট সায়েন্স গ্রুপ এলএলসি ডি / বি / একটি মেইলচিম্প, আমেরিকা যুক্তরাষ্ট্র) মাধ্যমে প্রদত্ত https://catrob.at/ নিউজলেটারে স্বেচ্ছায় সাবস্ক্রাইব করতে পারেন ।তারপরে আপনি আপনার সরবরাহিত ইমেল ঠিকানাতে ক্যাটরোব্যাট প্রকল্প এবং এর পরিষেবাদির আপডেট পাবেন। আপনি প্রতিটি নিউজলেটারের ফুটারে "আনসাবস্ক্রাইব" লিঙ্কটি ব্যবহার করে যে কোনও সময় নিউজলেটারটি প্রত্যাহার করতে পারেন।এই নিউজলেটারটি মেইলচিম্প সরবরাহ করেছে যার সাথে আমাদের একটি ডেটা-প্রসেসিং চুক্তি রয়েছে এবং যারা ইইউ জেনারেল ডেটা প্রোডাকশন রেগুলেশন এবং ইইউ-মার্কিন যুক্তরাষ্ট্র "প্রাইভেসি শিল্ড" প্রতিশ্রুতিবদ্ধ।মেইলচিম্পে আরও তথ্যের জন্য দয়া করে মেইলচিম্পের গোপনীয়তা নীতি এবং ব্যবহারের শর্তাদি সন্ধান করুন।
   text8: সমস্ত পরিষেবাগুলি বিনামূল্যে ওপেন সোর্স ক্যাট্রোব্যাট প্রকল্প দ্বারা সরবরাহ করা হয়  যেটি আন্তর্জাতিক ক্যাট্রোব্যাট অ্যাসোসিয়েশনের অধীনে - ভেরেইন জুর ফার্ডারং ফ্রিয়ার সফটওয়্যার, অস্ট্রিয়া (ইউরোপীয় ইউনিয়ন) গ্রাজে অন্তর্ভুক্ত একটি অলাভজনক এনজিও।আমাদের নীতিগুলি ই ইউ এবং অস্ট্রিয়ান ডেটা সুরক্ষা আইনের (জিডিপিআর) সম্মান দেয়।আমাদের সাথে যোগাযোগ করতে, দয়া করে contact@catrobat.org এ একটি ইমেল প্রেরণ করুন বা যোগাযোগ করুন ক্যাট্রোব্যাট, সি / ও ইনস্টিটিউট অফ সফটওয়্যার টেকনোলজি, গ্রাজ ইউনিভার্সিটি অফ টেকনোলজি, ইনফেল্ডগ্যাস ১৬ বি, এ-৮০১০ গ্রাজ, অস্ট্রিয়া (ইউরোপীয় ইউনিয়ন) )।
   text9: আপনি যদি ১৪ বছরের কম বয়সী হন তবে এই নীতি অবশ্যই আইনী অভিভাবক (সাধারণত একটি পিতা বা মাতা) দ্বারা গ্রহণ করা উচিত।
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  text10: ক্যাটরোবটের সরকারী ইংরেজী ভাষার গোপনীয়তা নীতিটি ওয়েবে উপলব্ধ on %privacy_policy%
   disagree-text: অনুমোদন ছাড়াই আমরা একটি অ্যাকাউন্ট তৈরি করতে পারি না তবে মূল বৈশিষ্ট্যগুলি এখনও অ্যাক্সেসযোগ্য।
 catro-notifications:
   markAsRead: "পড়ার জন্য চিহ্নিত করুন"
-  summary: "{0} আপনার কাছে কোনও নতুন বিজ্ঞপ্তি নেই | {1} আপনার কাছে %amount% নতুন বিজ্ঞপ্তি! |]1,Inf] আপনার কাছে %amount% নতুন বিজ্ঞপ্তি রয়েছে!"
+  noFollowers: "দেখে মনে হচ্ছে আপনার কোনও অনুগামী বিজ্ঞপ্তি নেই।"
+  noComments: "দেখে মনে হচ্ছে আপনার কাছে কোনও মন্তব্য বিজ্ঞপ্তি নেই।"
+  noReactions: "দেখে মনে হচ্ছে আপনার কোনও প্রতিক্রিয়া বিজ্ঞপ্তি নেই।"
+  noRemixes: "দেখে মনে হচ্ছে আপনার কোনও রিমিক্স বিজ্ঞপ্তি নেই।"
   comment:
-    title: 'New comment for project %program_name%!'
     message: 'User %user_link% commented on your project %program_link%.'
   like:
-    title: 'New reaction to project %program_name%!'
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    title: 'নতুন অনুকরণকারী'
     message: 'ব্যবহারকারী %user_link% আপনাকে এখন অনুসরণ করে।'
   program-upload:
-    title: 'New Project from someone you follow'
     message: 'User %user_link% created a new Project %program_link%'
   remix:
-    title: 'New remix for project %program_name%!'
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Link to project copied to clipboard!
-  fail: ক্লিপবোর্ডে কপি করা যায় নি
+  success: ক্লিপবোর্ডে অনুলিপি করা প্রকল্পের লিঙ্ক!
+  fail: ক্লিপবোর্ডে কপি করা যায় নি :(
 next: পরবর্তী
 previous: পূর্ববর্তী
-help-cards:
-  headings:
-    starters: নতুনদের
-    tutorials: টিউটোরিয়াল
-    stepbystep: ধাপে ধাপে
-    getinvolvedGoogle: এটা গুগল প্লে তে পাবেন
-    getinvolvedApple: এটি আইওএসে পাবেন
-    discord: Join on Discord
-    game_design: খেলার নকশা
-    education: শিক্ষার আলোচনা
-    discuss: আলোচনা করা
-  text:
-    starters: "%theme% এর সাথে চেষ্টা এবং রিমিক্স করুন"
-    tutorials: "%theme% এ কার্যকর কৌশল"
-    stepbystep: "%theme%10 টি সহজ পদক্ষেপ করুন"
-    getinvolved: অ্যাপ্লিকেশনটি ডাউনলোড এবং শুরু করুন
-    discord: Join the community on discord
-    game_design_1: কার্যকর কৌশল
-    game_design_2: খেলা তৈরি করুন
-    education: আরম্ভকারী কোর্স এবং দুর্দান্ত সংস্থানসমূহ
-    discuss_1: অন্যের সাথে যোগাযোগ করুন
-    discuss_2: ব্যবহারকারী
 media-packages:
   title: মিডিয়া-প্যাকেজগুলি
-  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  description: নিম্নলিখিত বিভাগগুলিতে আপনি পকেট কোড প্রকল্পে যুক্ত করার জন্য অতিরিক্ত অভিনেতা এবং অবজেক্টগুলি সন্ধান করতে পারেন।
   thumb-size:
     description: পূর্বরূপ আকার
     sm: ছোট
     md: মাঝারি
     lg: বড়
   theme-special: "%flavor% থিম বিশেষ"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+  search-results: মিডিয়া লাইব্রেরি অনুসন্ধান ফলাফল
+  no-results: আপনার অনুসন্ধানে 0 টি ফলাফল ফিরে এসেছে। দয়া করে কেবল ইংরেজী অনুসন্ধান শব্দ ব্যবহার করুন।
+  download_these_files: সংরক্ষণ
 flavor:
   pocketcode: পকেট কোড
   pocketalice: পকেট এলিস
@@ -910,18 +669,58 @@ flavor:
   phirocode: ফিরো কোড
   luna: লুনা এবং বিড়াল
   create@school: তৈরি করুন @ স্কুল
-copyright: 'কপিরাইট এবং অনুলিপি %year% <a href="http://www.catrobat.org"> ক্যাট্রোব্যাট </a>। সর্বস্বত্ব সংরক্ষিত.'
+copyright: 'কপিরাইট এবং অনুলিপি &copy; %year% <a href="http://www.catrobat.org"> ক্যাট্রোব্যাট </a>। সর্বস্বত্ব সংরক্ষিত.'
 agree: একমত
 disagree: রাজি না
 profileLoader:
   noProfiles: বর্তমানে কোন প্রোফাইল নেই।
-element: 'Element'
-elements: 'Elements'
+element: 'উপাদান'
+elements: 'উপাদানসমূহ'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
+  text: 'ভাগ করুন'
+  error: 'ভাগ ব্যর্থ হয়েছে'
+  success: 'ভাগ সফল'
+copy: 'লিংক কপি করুন'
+checkOutProject: 'এই প্রকল্পটি দেখুন:'
 community: 'ক্যাট্রোব্যাট সম্প্রদায়'
-back_to_app: 'Exit community'
+back_to_app: 'সম্প্রদায় থেকে প্রস্থান করুন'
+category:
+  recent: নতুন প্রকল্প
+  random: এলোমেলো প্রকল্প
+  most_viewed: সর্বোচ্চ  পরিদর্শন
+  most_downloaded: সর্বোচ্চ ডাউনলোডকৃত
+  example: উদাহরণ
+  scratch: স্ক্র্যাচ রিমিক্সস
+  recommended: প্রস্তাবিত প্রকল্পগুলি
+achievements:
+  overview:
+    header: 'অর্জনসমূহ'
+    most_recent_achievement:
+      title: 'সর্বশেষতম অর্জন'
+      x_out_of_y: '%unlocked% আউট %total% আনলক করা'
+    tab_unlocked:
+      title: 'আনলক করা হয়েছে'
+      empty: "আপনি এখনও কোনও অর্জন আনলক করেন নি।"
+    tab_locked:
+      title: 'লকড'
+      empty: "আপনি ইতিমধ্যে সমস্ত অর্জন আনলক করেছেন।"
+  achievement:
+    type:
+      bronze_user:
+        title: 'শিক্ষানবিশ'
+        description: 'কাউকে অনুসরণ করুন এবং একটি প্রকল্প আপলোড করুন'
+      silver_user:
+        title: 'কারিগর'
+        description: '1 বছরের জন্য সক্রিয় সদস্য'
+      gold_user:
+        title: 'মাস্টার'
+        description: '> 4 বছরের জন্য সক্রিয় সদস্য'
+      diamond_user:
+        title: 'গ্র্যান্ড মাস্টার'
+        description: 'সক্রিয় সদস্য> 7 বছরের জন্য'
+      perfect_profile:
+        title: 'উদ্যোগ'
+        description: 'আপনার প্রথম প্রোফাইল ছবি যুক্ত করুন'
+      verified_developer:
+        title: 'নবীনতা'
+        description: 'একটি ব্যবহারকারী অ্যাকাউন্ট তৈরি করুন'

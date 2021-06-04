@@ -1,52 +1,6 @@
 /* eslint-env jquery */
 
 // eslint-disable-next-line no-unused-vars
-function enableNavButtonIfCategoryContainsProjects (container, url) {
-  if (setNavContainerWithSession(container)) {
-    return
-  }
-
-  $.get(url, { limit: 1, offset: 0 }, function (data) {
-    setNavContainerAndSession(container, data)
-  })
-}
-
-// eslint-disable-next-line no-unused-vars
-function enableNavButtonIfRecommendedCategoryContainsProjects (container, url, programId) {
-  if (setNavContainerWithSession(container)) {
-    return
-  }
-
-  $.get(url, { programId: programId }, function (data) {
-    setNavContainerAndSession(container, data)
-  })
-}
-
-function setNavContainerWithSession (container) {
-  const navItem = window.sessionStorage.getItem(container)
-
-  if (navItem !== null) {
-    const navItemVisible = parseInt(window.sessionStorage.getItem(container))
-    if (navItemVisible === 1) {
-      $(container).show()
-    } else {
-      $(container).hide()
-    }
-    return true
-  }
-}
-
-function setNavContainerAndSession (container, data) {
-  if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
-    window.sessionStorage.setItem(container, 0)
-    $(container).hide()
-  } else {
-    window.sessionStorage.setItem(container, 1)
-    $(container).show()
-  }
-}
-
-// eslint-disable-next-line no-unused-vars
 function manageNotificationsDropdown () {
   const notificationDropdownToggler = document.getElementById('notifications-dropdown-toggler')
   const notificationDropdownContent = document.getElementById('notifications-dropdown-content')

@@ -15,14 +15,14 @@ use Exception;
  */
 class ProgramLike
 {
-  const TYPE_NONE = 0;
-  const TYPE_THUMBS_UP = 1;
-  const TYPE_SMILE = 2;
-  const TYPE_LOVE = 3;
-  const TYPE_WOW = 4;
+  public const TYPE_NONE = 0;
+  public const TYPE_THUMBS_UP = 1;
+  public const TYPE_SMILE = 2;
+  public const TYPE_LOVE = 3;
+  public const TYPE_WOW = 4;
 
-  const ACTION_ADD = 'add';
-  const ACTION_REMOVE = 'remove';
+  public const ACTION_ADD = 'add';
+  public const ACTION_REMOVE = 'remove';
   // -> new types go here...
 
   public static array $VALID_TYPES = [
@@ -45,7 +45,7 @@ class ProgramLike
    * -----------------------------------------------------------------------------------------------------------------
    * NOTE: this entity uses a Doctrine workaround in order to allow using foreign keys as primary keys.
    *
-   * @link{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
+   * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
 
@@ -109,8 +109,7 @@ class ProgramLike
    */
   public function updateTimestamps(): void
   {
-    if (null === $this->getCreatedAt())
-    {
+    if (null === $this->getCreatedAt()) {
       $this->setCreatedAt(TimeUtils::getDateTime());
     }
   }
@@ -165,12 +164,9 @@ class ProgramLike
 
   public function getTypeAsString(): ?string
   {
-    try
-    {
+    try {
       return self::$TYPE_NAMES[$this->type];
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       return null;
     }
   }

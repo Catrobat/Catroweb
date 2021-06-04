@@ -2,7 +2,6 @@
 
 namespace App\Catrobat\Requests;
 
-use App\Entity\GameJam;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -12,21 +11,18 @@ class AddProgramRequest
 
   private File $program_file;
 
-  private string $ip;
-
-  private ?GameJam $game_jam;
+  private ?string $ip;
 
   private ?string $language;
 
-  private string $flavor;
+  private ?string $flavor;
 
-  public function __construct(User $user, File $program_file, ?string $ip = '127.0.0.1', ?GameJam $game_jam = null,
+  public function __construct(User $user, File $program_file, ?string $ip = '127.0.0.1',
                               ?string $language = null, ?string $flavor = 'pocketcode')
   {
     $this->user = $user;
     $this->program_file = $program_file;
     $this->ip = $ip;
-    $this->game_jam = $game_jam;
     $this->language = $language;
     $this->flavor = $flavor;
   }
@@ -51,14 +47,9 @@ class AddProgramRequest
     $this->program_file = $program_file;
   }
 
-  public function getIp(): string
+  public function getIp(): ?string
   {
     return $this->ip;
-  }
-
-  public function getGameJam(): ?GameJam
-  {
-    return $this->game_jam;
   }
 
   public function getLanguage(): ?string
@@ -71,7 +62,7 @@ class AddProgramRequest
     $this->language = $language;
   }
 
-  public function getFlavor(): string
+  public function getFlavor(): ?string
   {
     return $this->flavor;
   }

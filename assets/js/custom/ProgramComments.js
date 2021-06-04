@@ -89,7 +89,7 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         }
       },
       error: function () {
-        Swal.fire(defaultErrorMessage)
+        showErrorPopUp(defaultErrorMessage)
       }
     })
   }
@@ -103,14 +103,14 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         if (data === statusCodeNotLoggedIn) {
           redirectToLogin()
         } else if (data === statusCodeNoAdminRights) {
-          Swal.fire(noAdminRightsMessage)
+          showErrorPopUp(noAdminRightsMessage)
         } else {
           $('#comment-' + commentId).remove()
           showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
         }
       },
       error: function () {
-        Swal.fire(defaultErrorMessage)
+        showErrorPopUp(defaultErrorMessage)
       }
     })
   }
@@ -128,7 +128,7 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
         }
       },
       error: function () {
-        Swal.fire(defaultErrorMessage)
+        showErrorPopUp(defaultErrorMessage)
       }
     })
   }
@@ -139,8 +139,12 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
       html: text + '<br><br>' + noWayOfReturn,
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
-      cancelButtonColor: '#d33',
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false,
       confirmButtonText: okayText,
       cancelButtonText: cancel
     }).then((result) => {
@@ -151,15 +155,29 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
   }
 
   function showSuccessPopUp (title, text) {
+    showPopUp('success', title, text, location.reload)
+  }
+
+  function showErrorPopUp (title, text) {
+    showPopUp('error', title, text)
+  }
+
+  function showPopUp (type, title, text, callback) {
     Swal.fire(
       {
         title: title,
         text: text,
-        icon: 'success',
-        confirmButtonClass: 'btn btn-success'
+        icon: type,
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false,
+        allowOutsideClick: false
       }
     ).then(() => {
-      location.reload()
+      if (callback) {
+        callback()
+      }
     })
   }
 

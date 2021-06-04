@@ -4,7 +4,7 @@ parameters:
       - src
       - tests
   excludes_analyse:
-      - src/Migrations
+      - migrations
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: false
   ignoreErrors:
@@ -12,6 +12,7 @@ parameters:
       - '#Method App\\Api.*?#'
       - '#Return typehint of method App\\Api.*?#'
       - '#Parameter .*? of method App\\Api.*?#'
+      - '#Call to method [a-zA-Z0-9\\_]+\(\) on an unknown class OpenAPI\\Server\\Api\\OpenAPI\\Server\\Model\\[a-zA-Z0-9\\_]+\.#'
 
       # Even if it not is best practice, it works.
       - '#Call to static method PHPUnit\\Framework\\Assert::assertTrue\(\) with false .*?#'

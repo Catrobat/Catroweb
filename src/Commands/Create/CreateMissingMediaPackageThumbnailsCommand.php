@@ -40,8 +40,8 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
     $username = posix_getpwuid(posix_geteuid())['name'];
 
     if (
-      !$input->getOption('force') &&
-      !in_array($username, ['www-data', 'apache', 'httpd', '_www', 'nginx'], true)
+      !$input->getOption('force')
+      && !in_array($username, ['www-data', 'apache', 'httpd', '_www', 'nginx'], true)
     ) {
       throw new Exception('Please run this command as web server user '.'(e.g. sudo -u www-data bin/console ...) or run with --force.');
     }

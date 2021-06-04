@@ -6,6 +6,7 @@ phpunit.xml
 *.local
 phploc.phar
 .jwt/
+.sharedLibraries/
 
 
 ### Scripts ###
@@ -34,7 +35,9 @@ public/**
 !public/resources_test/**
 !public/index.php
 !public/index_test.php
+!public/webp-on-demand.php
 !public/robots.txt
+!public/build
 
 ### tests ###
 tests/style-report/**
@@ -52,7 +55,6 @@ vendor/
 
 ### root ###
 *.sh
-crowdin.yml
 ###> symfony/framework-bundle ###
 /.env.local
 /.env.local.php
@@ -86,6 +88,7 @@ behat.yml
 ###> friendsofphp/php-cs-fixer ###
 /.php_cs
 /.php_cs.cache
+/.php-cs-fixer.cache
 ###< friendsofphp/php-cs-fixer ###
 
 ###> lexik/jwt-authentication-bundle ###

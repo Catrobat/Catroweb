@@ -7,11 +7,11 @@ class BroadcastStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'broadcast ';
+  public const BEGIN_STRING = 'broadcast ';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * BroadcastStatement constructor.

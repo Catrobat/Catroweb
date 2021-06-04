@@ -39,18 +39,14 @@ class FollowerController extends AbstractController
     /** @var User|null */
     $user = null;
 
-    if (('0' === $id) || ($this->getUser() && $this->getUser()->getId() === $id))
-    {
+    if (('0' === $id) || ($this->getUser() && $this->getUser()->getId() === $id)) {
       $user = $this->getUser();
-    }
-    else
-    {
+    } else {
       $user = $this->user_manager->find($id);
     }
 
-    if (null === $user)
-    {
-      return $this->redirectToRoute('fos_user_security_login');
+    if (null === $user) {
+      return $this->redirectToRoute('login');
     }
 
     $criteria = Criteria::create()
@@ -89,10 +85,8 @@ class FollowerController extends AbstractController
   public function unfollowUser(Request $request, string $id): JsonResponse
   {
     $csrf_token = $request->query->get('token');
-    if (!$this->isCsrfTokenValid('follower', $csrf_token))
-    {
-      if ($request->isXmlHttpRequest())
-      {
+    if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
+      if ($request->isXmlHttpRequest()) {
         return JsonResponse::create([
           'statusCode' => StatusCode::CSRF_FAILURE,
           'message' => 'Invalid CSRF token.',
@@ -105,20 +99,17 @@ class FollowerController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
-    if (null === $user)
-    {
+    if (null === $user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
 
-    if ($user->getId() === $id)
-    {
+    if ($user->getId() === $id) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @var User|null $user_to_unfollow */
     $user_to_unfollow = $this->user_manager->find($id);
-    if (null === $user_to_unfollow)
-    {
+    if (null === $user_to_unfollow) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -127,8 +118,7 @@ class FollowerController extends AbstractController
 
     $existing_notifications = $this->notification_repo->getFollowNotificationForUser($user_to_unfollow, $user);
 
-    foreach ($existing_notifications as $notification)
-    {
+    foreach ($existing_notifications as $notification) {
       $this->notification_service->removeNotification($notification);
     }
 
@@ -143,10 +133,8 @@ class FollowerController extends AbstractController
   public function followUser(Request $request, string $id): JsonResponse
   {
     $csrf_token = $request->query->get('token');
-    if (!$this->isCsrfTokenValid('follower', $csrf_token))
-    {
-      if ($request->isXmlHttpRequest())
-      {
+    if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
+      if ($request->isXmlHttpRequest()) {
         return JsonResponse::create([
           'statusCode' => StatusCode::CSRF_FAILURE,
           'message' => 'Invalid CSRF token.',
@@ -159,20 +147,17 @@ class FollowerController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
-    if (null === $user)
-    {
+    if (null === $user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
 
-    if ($user->getId() === $id)
-    {
+    if ($user->getId() === $id) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /** @var User|null $user_to_follow */
     $user_to_follow = $this->user_manager->find($id);
-    if (null === $user_to_follow)
-    {
+    if (null === $user_to_follow) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -187,18 +172,15 @@ class FollowerController extends AbstractController
   {
     $notification_exists = false;
     $user_notifications = $this->notification_repo->findBy(['user' => $user_to_follow], ['id' => 'DESC']);
-    foreach ($user_notifications as $notification)
-    {
+    foreach ($user_notifications as $notification) {
       if ($notification instanceof FollowNotification
         && $notification->getUser()->getId() === $user_to_follow->getId()
-        && $notification->getFollower()->getId() === $user->getId())
-      {
+        && $notification->getFollower()->getId() === $user->getId()) {
         $notification_exists = true;
         break;
       }
     }
-    if (!$notification_exists)
-    {
+    if (!$notification_exists) {
       $notification = new FollowNotification($user_to_follow, $user);
       $this->notification_service->addNotification($notification);
     }

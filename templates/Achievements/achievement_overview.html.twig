@@ -1,0 +1,102 @@
+{% extends 'Default/base.html.twig' %}
+{% block page_title %}{{ "achievements.overview.header"|trans({}, "catroweb") }}{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/achievements.css') }}"/>
+{% endblock %}
+
+
+{% block body %}
+
+    {% if most_recent_achievement != null %}
+        <h2>{{ "achievements.overview.most_recent_achievement.title"|trans({}, "catroweb") }}</h2>
+        <div class="mt-4 mb-4 achievement-top__wrapper">
+            <div class="achievement-top__badge">
+                <img class="achievement-top__badge__image achievement__badge__image--small" src={{ asset(most_recent_achievement.getBadgeSvgPath()) }})" alt="">
+                <div class="achievement-top__badge__banner achievement__badge__banner--small"
+                     style="background-image: linear-gradient(0deg, {{ most_recent_achievement.getBannerColor() }}, rgba(255, 255, 255, 0.1)),url({{ asset(most_recent_achievement.getBannerSvgPath()) }});
+                             -webkit-mask-image: url({{ asset(most_recent_achievement.getBannerSvgPath()) }});
+                             mask-image: url({{ asset(most_recent_achievement.getBannerSvgPath()) }});">
+                    {{ most_recent_achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+                </div>
+            </div>
+            <div class="achievement-top__text-wrapper">
+                <div>{{ most_recent_achievement.getDescriptionLtmCode()|trans({}, "catroweb") }}</div>
+                <div>{{ most_recent_achievement_unlocked_at|trans({}, "catroweb") }}</div>
+                <div>{{ "achievements.overview.most_recent_achievement.x_out_of_y"|trans({'%unlocked%': number_of_unlocked_achievements, '%total%': total_number_of_achievements}, "catroweb") }}</div>
+            </div>
+        </div>
+    {% endif %}
+
+
+    <div class="tab-bar-container">
+        <div class="mdc-tab-bar" role="tablist">
+            <div class="mdc-tab-scroller">
+                <div class="mdc-tab-scroller__scroll-area" id="scroll-area">
+                    <div class="mdc-tab-scroller__scroll-content">
+                        <button id="unlocked-achievements-tab" class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__icon-text">{{ "achievements.overview.tab_unlocked.title"|trans({}, "catroweb") }}</span>
+                            </span>
+                            <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                        </button>
+
+                        <button id="locked-achievements-tab" class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
+                            <span class="mdc-tab__content">
+                                <span class="mdc-tab__icon-text">{{ 'achievements.overview.tab_locked.title'|trans({}, 'catroweb') }}</span>
+                            </span>
+                            <span class="mdc-tab-indicator">
+                                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-content mt-4" id="tabs-tabContent">
+
+        <div id="unlocked-achievements" class="achievement__wrapper tab-pane show active" role="tabpanel" aria-labelledby="unlocked-achievements-tab">
+            <p id="no-unlocked-achievements" class="{{ achievements_unlocked is empty ? 'd-block' : 'd-none' }}">
+                {{ "achievements.overview.tab_unlocked.empty"|trans({}, "catroweb") }}
+            </p>
+            {% for achievement in achievements_unlocked %}
+                <div class="achievement">
+                    <div class="achievement__badge">
+                        <img class="achievement__badge__image" src={{ asset(achievement.getBadgeSvgPath()) }})" alt="">
+                        <div class="achievement__badge__banner"
+                             style="background-image: linear-gradient(0deg, {{ achievement.getBannerColor() }}, rgba(255, 255, 255, 0.1)),url({{ asset(achievement.getBannerSvgPath()) }});
+                                    -webkit-mask-image: url({{ asset(achievement.getBannerSvgPath()) }});
+                                    mask-image: url({{ asset(achievement.getBannerSvgPath()) }});">
+                            {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+                        </div>
+                    </div>
+                    <p class="achievement__badge__text">{{ achievement.getDescriptionLtmCode()|trans({}, "catroweb") }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div id="locked-achievements" class="achievement__wrapper tab-pane fade" role="tabpanel" aria-labelledby="locked-achievements-tab">
+            <p id="no-locked-achievements" class="{{ achievements_locked is empty ? 'd-block' : 'd-none' }}">
+                {{ "achievements.overview.tab_locked.empty"|trans({}, "catroweb") }}
+            </p>
+            {% for achievement in achievements_locked %}
+                <div class="achievement">
+                    <div class="achievement__badge">
+                        <img class="achievement__badge__image" src={{ asset(achievement.getBadgeLockedSvgPath()) }})" alt="">
+                    </div>
+                    <p class="achievement__badge__text">{{ achievement.getDescriptionLtmCode()|trans({}, "catroweb") }}</p>
+                </div>
+            {% endfor %}
+        </div>
+
+    </div>
+{% endblock %}
+
+
+{% block js %}
+    {{ encore_entry_script_tags('tab-bar') }}
+{% endblock %}

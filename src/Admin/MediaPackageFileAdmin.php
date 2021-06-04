@@ -46,14 +46,14 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function prePersist($object): void
   {
+    /* @var MediaPackageFile $object */
     /** @var UploadedFile $file */
     $file = $object->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       return;
     }
 
@@ -61,31 +61,31 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    *
    * @throws ImagickException
    */
   public function postPersist($object): void
   {
+    /* @var MediaPackageFile $object */
     $file = $object->file;
-    if (null === $file)
-    {
+    if (null === $file) {
       return;
     }
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function preUpdate($object): void
   {
+    /* @var MediaPackageFile $object */
     $object->old_extension = $object->getExtension();
 
     /** @var UploadedFile $file */
     $file = $object->file;
-    if (null == $file)
-    {
+    if (null == $file) {
       $object->setExtension($object->old_extension);
 
       return;
@@ -94,47 +94,49 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    *
    * @throws ImagickException
    */
   public function postUpdate($object): void
   {
+    /* @var MediaPackageFile $object */
     $file = $object->file;
-    if (null === $file)
-    {
+    if (null === $file) {
       return;
     }
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function preRemove($object): void
   {
+    /* @var MediaPackageFile $object */
     $object->removed_id = $object->getId();
   }
 
   /**
-   * @param MediaPackageFile $object
+   * {@inheritdoc}
    */
   public function postRemove($object): void
   {
+    /* @var MediaPackageFile $object */
     $this->media_package_file_repository->remove($object->removed_id, $object->getExtension());
   }
 
   /**
-   * @param FormMapper $formMapper
+   * @param FormMapper $form
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
     $file_options = [
       'required' => (null === $this->getSubject()->getId()), ];
 
-    $formMapper
+    $form
       ->add('name', TextType::class, ['label' => 'Name'])
       ->add('file', FileType::class, $file_options)
       ->add('category', EntityType::class, [
@@ -147,13 +149,13 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $listMapper
+   * @param ListMapper $list
    *
    * Fields to be shown on lists
    */
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->addIdentifier('id')
       ->add('name')
       ->add('file', 'string', ['template' => 'Admin/mediapackage_file.html.twig'])

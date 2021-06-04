@@ -7,7 +7,7 @@ class BroadcastScriptStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'when receive message ';
+  public const BEGIN_STRING = 'when receive message ';
 
   /**
    * @var mixed
@@ -32,8 +32,7 @@ class BroadcastScriptStatement extends Statement
   {
     $children = $this->executeChildren();
     $code = parent::addSpaces().self::BEGIN_STRING;
-    if (null != $this->message)
-    {
+    if (null != $this->message) {
       $code .= $this->message->execute();
     }
 
@@ -43,14 +42,10 @@ class BroadcastScriptStatement extends Statement
   public function executeChildren(): string
   {
     $code = '';
-    foreach ($this->statements as $value)
-    {
-      if ($value instanceof ReceivedMessageStatement)
-      {
+    foreach ($this->statements as $value) {
+      if ($value instanceof ReceivedMessageStatement) {
         $this->message = $value;
-      }
-      else
-      {
+      } else {
         $code .= $value->execute();
       }
     }
@@ -63,8 +58,7 @@ class BroadcastScriptStatement extends Statement
    */
   public function getMessage()
   {
-    if (null == $this->message)
-    {
+    if (null == $this->message) {
       $this->message = $this->xmlTree->receivedMessage;
     }
 

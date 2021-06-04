@@ -58,12 +58,9 @@ class StatisticsService
 
     $this->logger->debug('create download stats for program id: '.$program_id.', ip: '.$ip.
       ', user agent: '.$user_agent.', referrer: '.$referrer);
-    if (null !== $user)
-    {
+    if (null !== $user) {
       $this->logger->debug('user: '.$user->getUsername());
-    }
-    else
-    {
+    } else {
       $this->logger->debug('user: anon.');
     }
 
@@ -85,37 +82,29 @@ class StatisticsService
     $program_download_statistic->setCountryName($country_name);
     $program_download_statistic->setLocale($locale);
 
-    if (null != $rec_by_page_id && RecommendedPageId::isValidRecommendedPageId($rec_by_page_id))
-    {
+    if (null != $rec_by_page_id && RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
       // all recommendations (except tag-recommendations -> see below)
       $program_download_statistic->setRecommendedByPageId($rec_by_page_id);
       /** @var Program|null $rec_by_program */
       $rec_by_program = (null != $rec_by_program_id) ? $this->program_manager->find($rec_by_program_id) : null;
       $program_download_statistic->setUserSpecificRecommendation($is_user_specific_recommendation);
-      if (null != $rec_by_program)
-      {
+      if (null != $rec_by_program) {
         $program_download_statistic->setRecommendedByProgram($rec_by_program);
       }
-    }
-    elseif (null != $rec_tag_by_program_id)
-    {
+    } elseif (null != $rec_tag_by_program_id) {
       // tag-recommendations
       $rec_program = $this->program_manager->find($rec_tag_by_program_id);
-      if (null != $rec_program)
-      {
+      if (null != $rec_program) {
         $program_download_statistic->setRecommendedFromProgramViaTag($rec_program);
       }
     }
 
-    try
-    {
+    try {
       $this->entity_manager->persist($program_download_statistic);
       $program->addProgramDownloads($program_download_statistic);
       $this->entity_manager->persist($program);
       $this->entity_manager->flush();
-    }
-    catch (Exception $exception)
-    {
+    } catch (Exception $exception) {
       $this->logger->error($exception->getMessage());
 
       return false;
@@ -180,12 +169,9 @@ class StatisticsService
 
     $this->logger->debug('create download stats for project id: '.$rec_from_id.', ip: '.$ip.
       ', user agent: '.$user_agent.', referrer: '.$referrer);
-    if (null !== $user)
-    {
+    if (null !== $user) {
       $this->logger->debug('user: '.$user->getUsername());
-    }
-    else
-    {
+    } else {
       $this->logger->debug('user: anon.');
     }
 
@@ -194,8 +180,7 @@ class StatisticsService
     $country_code = null;
     $country_name = null;
 
-    if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph'], true))
-    {
+    if (in_array($type, ['project', 'rec_homepage', 'rec_remix_graph', 'rec_remix_notification', 'rec_specific_programs', 'show_remix_graph'], true)) {
       $click_statistics = new ClickStatistic();
       $click_statistics->setType($type);
       $click_statistics->setUserAgent($user_agent);
@@ -207,26 +192,20 @@ class StatisticsService
       $click_statistics->setCountryName($country_name);
       $click_statistics->setLocale($locale);
       $click_statistics->setUserSpecificRecommendation($is_user_specific_recommendation);
-      if (null !== $rec_from_id && '0' < $rec_from_id)
-      {
+      if (null !== $rec_from_id && '0' < $rec_from_id) {
         /** @var Program $recommended_from */
         $recommended_from = $this->program_manager->find($rec_from_id);
         $click_statistics->setRecommendedFromProgram($recommended_from);
       }
-      if ($is_recommended_program_a_scratch_program)
-      {
+      if ($is_recommended_program_a_scratch_program) {
         $click_statistics->setScratchProgramId((int) $rec_program_id);
-      }
-      else
-      {
+      } else {
         $recommended_program = $this->program_manager->find($rec_program_id);
         $click_statistics->setProgram($recommended_program);
       }
       $this->entity_manager->persist($click_statistics);
       $this->entity_manager->flush();
-    }
-    elseif ('tags' === $type)
-    {
+    } elseif ('tags' === $type) {
       $tag = $this->tag_repository->find($tag_id);
       $click_statistics = new ClickStatistic();
       $click_statistics->setType($type);
@@ -241,12 +220,9 @@ class StatisticsService
       $click_statistics->setLocale($locale);
       $this->entity_manager->persist($click_statistics);
       $this->entity_manager->flush();
-    }
-    elseif ('extensions' == $type)
-    {
+    } elseif ('extensions' == $type) {
       $extension = $this->extension_repository->getExtensionByName($extension_name);
-      if (null == $extension)
-      {
+      if (null == $extension) {
         return false;
       }
       $click_statistics = new ClickStatistic();
@@ -278,16 +254,7 @@ class StatisticsService
 
     $user = 'anon.' === $session_user ? null : $session_user;
 
-    $this->logger->debug('create click stats for program id: '.$program_id.', ip: '.$ip.
-      ', user agent: '.$user_agent.', referrer: '.$referrer);
-    if (null !== $user)
-    {
-      $this->logger->debug('user: '.$user->getUsername());
-    }
-    else
-    {
-      $this->logger->debug('user: anon.');
-    }
+    $this->logger->debug('create click stats for program id: '.$program_id.', referrer: '.$referrer);
 
     $homepage_click_statistics = new HomepageClickStatistic();
     $homepage_click_statistics->setType($type);
@@ -322,8 +289,7 @@ class StatisticsService
   private function getOriginalClientIp(Request $request): ?string
   {
     $ip = $request->getClientIp();
-    if (false !== strpos($ip, ','))
-    {
+    if (false !== strpos($ip, ',')) {
       $ip = substr($ip, 0, strpos($ip, ','));
     }
 

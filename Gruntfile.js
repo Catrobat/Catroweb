@@ -4,6 +4,8 @@
 //
 const ASSETS_DIRECTORY = 'assets'
 const PUBLIC_DIRECTORY = 'public'
+const TEMPLATE_DIRECTORY = 'templates'
+
 
 // -------------------------------------------------------------------------------------------------
 // Register all grunt tasks here:
@@ -15,6 +17,7 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify-es')
   grunt.loadNpmTasks('grunt-contrib-sass')
   grunt.loadNpmTasks('grunt-contrib-watch')
+  grunt.loadNpmTasks('grunt-purgecss');
   // define project configuration
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -22,10 +25,11 @@ module.exports = function (grunt) {
     concat: CONCAT_CONFIG,
     uglify: UGLIFY_CONFIG,
     sass: SASS_CONFIG,
-    watch: WATCH_CONFIG
+    watch: WATCH_CONFIG,
+    purgecss: PURGECSS_CONFIG
   })
   // define default tasks to run on `grunt`
-  grunt.registerTask('default', ['copy', 'concat', 'sass', 'uglify'])
+  grunt.registerTask('default', ['copy', 'concat', 'sass', 'uglify', 'purgecss'])
 }
 
 // -------------------------------------------------------------------------------------------------
@@ -85,6 +89,13 @@ const COPY_CONFIG =
       src: '**',
       dest: PUBLIC_DIRECTORY + '/images/'
     },
+    favicon: {
+      // must be in root dir of public folder
+      expand: true,
+      cwd: ASSETS_DIRECTORY + '/images',
+      src: 'favicon.ico',
+      dest: PUBLIC_DIRECTORY
+    },
     catBlocks: {
       expand: true,
       cwd: ASSETS_DIRECTORY + '/catblocks',
@@ -108,8 +119,10 @@ const COPY_CONFIG =
       dest: PUBLIC_DIRECTORY + '/js/modules/clipboard.min.js'
     },
     bootstrap_js: {
-      src: 'node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
-      dest: PUBLIC_DIRECTORY + '/js/modules/bootstrap.min.js'
+      expand: true,
+      cwd: 'node_modules/bootstrap/dist/js',
+      src: '*',
+      dest: PUBLIC_DIRECTORY + '/js/modules/'
     },
     sweetalert_all: {
       src: 'node_modules/sweetalert2/dist/sweetalert2.all.min.js',
@@ -139,15 +152,84 @@ const COPY_CONFIG =
       src: 'node_modules/jquery-contextmenu/dist/jquery.ui.position.min.js',
       dest: PUBLIC_DIRECTORY + '/js/modules/jquery.ui.position.min.js'
     },
-    animatedModal_js: {
-      src: 'node_modules/animatedmodal/animatedModal.min.js',
-      dest: PUBLIC_DIRECTORY + '/js/modules/animatedModal.min.js'
-    },
     animate_css: {
       src: 'node_modules/animate.css/animate.min.css',
       dest: PUBLIC_DIRECTORY + '/css/modules/animate.min.css'
+    },
+    lazysizes: {
+      src: 'node_modules/lazysizes/lazysizes.min.js',
+      dest: PUBLIC_DIRECTORY + '/js/modules/lazysizes.min.js'
     }
   }
+
+const PURGECSS_CONFIG = {
+  pocketcode: {
+    options: {
+      content: [TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/pocketcode/base.css': ['public/css/pocketcode/base.css'],
+    }
+  },
+  arduino: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/arduino/base.css': ['public/css/arduino/base.css'],
+    }
+  },
+  school: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/create@school/base.css': ['public/css/create@school/base.css'],
+    }
+  },
+  embroidery: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/embroidery/base.css': ['public/css/embroidery/base.css'],
+    }
+  },
+  luna: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/luna/base.css': ['public/css/luna/base.css'],
+    }
+  },
+  phirocode: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/phirocode/base.css': ['public/css/phirocode/base.css'],
+    }
+  },
+  pocketalice: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/pocketalice/base.css': ['public/css/pocketalice/base.css'],
+    }
+  },
+  pocketgalaxy: {
+    options: {
+      content: [ TEMPLATE_DIRECTORY + '/**/*.html.twig',  PUBLIC_DIRECTORY + '/js/**/*.min.js']
+    },
+    files: {
+      'public/css/pocketgalaxy/base.css': ['public/css/pocketgalaxy/base.css'],
+    }
+  }
+
+
+}
 
 // -------------------------------------------------------------------------------------------------
 // Concat task:
@@ -165,7 +247,7 @@ const CONCAT_CONFIG =
 // -------------------------------------------------------------------------------------------------
 // SASS to CSS task:
 //
-//   - loading all supported themes from the liip config
+//   - loading all supported themes from the themes config
 //   - creating an entry for every theme
 //
 const SASS_CONFIG = {}
@@ -183,14 +265,14 @@ function loadThemesFromSymfonyParameters () {
 
   // load the yaml file
   try {
-    const liipConfig = yaml.safeLoad(
-      fs.readFileSync('config/packages/liip_theme.yaml', 'utf8')
+    const themeConfig = yaml.load(
+      fs.readFileSync('config/packages/themes.yaml', 'utf8')
     )
-    const themes = liipConfig.parameters.themes
-    if (!Array.isArray(themes) || !themes.length) {
-      console.error('Themes array is empty!')
+    const flavors = themeConfig.parameters.flavors
+    if (!Array.isArray(flavors) || !flavors.length) {
+      console.error('Flavors array is empty!')
     }
-    return themes
+    return flavors
   } catch (e) {
     console.error('Themes could not be loaded!\n' + e)
     return undefined
@@ -266,7 +348,7 @@ const WATCH_CONFIG =
     },
     scripts: {
       files: [ASSETS_DIRECTORY + '/js/**/*.js'],
-      tasks: ['concat', 'uglify'],
+      tasks: ['copy:custom', 'copy:analytics', 'concat', 'uglify'],
       options: {
         nospawn: true
       }

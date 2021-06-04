@@ -1,7 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~theme()~'/profile.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -19,7 +19,7 @@
         </h1>
         {% if country %}
           <span class="d-block">
-            <i class="fas fa-globe-africa"></i>
+            <i class="material-icons">location_on</i>
             <strong>
               {{ "country"|trans({}, "catroweb") }}:
             </strong>
@@ -59,26 +59,44 @@
     </div>
   </div>
 
-  <div class="row mt-3">
-    <div class="catro-tabs w-100">
-      <ul class="nav nav-tabs nav-fill" id="tabs-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="projects-tab" data-toggle="tab" href="#projects-section"
-             aria-controls="projects-section" aria-selected="true"
-             role="tab">{{ program_count }} {{ "projects"|trans({}, "catroweb") }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="follower-tab" data-toggle="tab" href="#follower-section"
-             aria-controls="follower-section"
-             aria-selected="false"
-             role="tab">{{ followers_list|length }} {{ 'follower.followers'|trans({}, 'catroweb') }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="follows-tab" data-toggle="tab" href="#following-section"
-             aria-controls="following-section" aria-selected="true"
-             role="tab">{{ following_list|length }} {{ 'follower.follows'|trans({}, 'catroweb') }}</a>
-        </li>
-      </ul>
+  <div class="tab-bar-container mt-3">
+    <div class="mdc-tab-bar" role="tablist">
+      <div class="mdc-tab-scroller">
+        <div class="mdc-tab-scroller__scroll-area" id="scroll-area">
+          <div class="mdc-tab-scroller__scroll-content">
+            <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
+              <span class="mdc-tab__content">
+                <span class="mdc-tab__icon" id="projects-count">{{ program_count }}</span>
+                <span class="mdc-tab__icon-text">{{ "projects"|trans({}, "catroweb") }}</span>
+              </span>
+              <span class="mdc-tab-indicator mdc-tab-indicator--active">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+              </span>
+            </button>
+
+            <button class="mdc-tab mdc-tab--stacked" id="test" role="tab" aria-selected="false" tabindex="0">
+              <span class="mdc-tab__content">
+                <span class="mdc-tab__icon" id="followers-count">{{ followers_list|length }}</span>
+                <span class="mdc-tab__icon-text">{{ 'follower.followers'|trans({}, 'catroweb') }}</span>
+              </span>
+              <span class="mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+              </span>
+            </button>
+
+            <button class="mdc-tab mdc-tab--stacked" role="tab" aria-selected="false" tabindex="0">
+              <span class="mdc-tab__content">
+                <span class="mdc-tab__icon" id="following-count">{{ following_list|length }}</span>
+                <span class="mdc-tab__icon-text">{{ 'follower.follows'|trans({}, 'catroweb') }}</span>
+              </span>
+              <span class="mdc-tab-indicator">
+                <span class="mdc-tab-indicator__content mdc-tab-indicator__content--underline"></span>
+              </span>
+            </button>
+
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -86,20 +104,6 @@
     <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
       <div id="user-programs">
         <div class="programs"></div>
-      </div>
-    </div>
-
-    <div id="following-section" class="tab-pane fade show" role="tabpanel" aria-labelledby="follows-tab">
-      <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
-        {{ "follower.noOtherFollowing"|trans({}, "catroweb") }}
-      </div>
-
-      <div id="following-cards" class="row mb-5">
-        {% for followsUser in following_list %}
-          <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
-            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followsUser, 'following': true} only %}
-          </div>
-        {% endfor %}
       </div>
     </div>
 
@@ -118,15 +122,31 @@
     </div>
   </div>
 
+    <div id="following-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follows-tab">
+      <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
+        {{ "follower.noOtherFollowing"|trans({}, "catroweb") }}
+      </div>
+
+      <div id="following-cards" class="row mb-5">
+        {% for followsUser in following_list %}
+          <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
+            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followsUser, 'following': true} only %}
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+
 {% endblock %}
 
 {% block js %}
+  {{ encore_entry_script_tags('tab-bar') }}
   <script>
     let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     programs.loadProjects('{{ profile.id }}')
   </script>
 
   <script src="{{ asset('js/Follower.min.js') }}"></script>
+
   <script>
     let followers = new Follower(
       "{{ csrf_token('follower') }}",

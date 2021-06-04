@@ -17,7 +17,7 @@ class Kernel extends BaseKernel
   /**
    * @var string
    */
-  const CONFIG_EXTS = '.{php,xml,yaml,yml}';
+  public const CONFIG_EXTS = '.{php,xml,yaml,yml}';
 
   public function getCacheDir(): string
   {
@@ -32,16 +32,16 @@ class Kernel extends BaseKernel
   public function registerBundles()
   {
     $contents = require $this->getProjectDir().'/config/bundles.php';
-    foreach ($contents as $class => $envs)
-    {
-      if ($envs[$this->environment] ?? $envs['all'] ?? false)
-      {
+    foreach ($contents as $class => $envs) {
+      if ($envs[$this->environment] ?? $envs['all'] ?? false) {
         yield new $class();
       }
     }
   }
 
   /**
+   * {@inheritDoc}
+   *
    * @throws Exception
    */
   protected function configureContainer(ContainerBuilder $container, LoaderInterface $loader): void

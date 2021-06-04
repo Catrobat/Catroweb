@@ -82,343 +82,343 @@ class StatementFactory
   /**
    * @var string
    */
-  const WAIT_STMT = 'WaitBrick';
+  public const WAIT_STMT = 'WaitBrick';
   /**
    * @var string
    */
-  const PLAY_SOUND_STMT = 'PlaySoundBrick';
+  public const PLAY_SOUND_STMT = 'PlaySoundBrick';
   /**
    * @var string
    */
-  const STOP_ALL_STMT = 'StopAllSoundsBrick';
+  public const STOP_ALL_STMT = 'StopAllSoundsBrick';
   /**
    * @var string
    */
-  const SET_VOLUME_TO_STMT = 'SetVolumeToBrick';
+  public const SET_VOLUME_TO_STMT = 'SetVolumeToBrick';
   /**
    * @var string
    */
-  const SPEAK_STMT = 'SpeakBrick';
+  public const SPEAK_STMT = 'SpeakBrick';
   /**
    * @var string
    */
-  const CHANGE_VOLUME_BY_N_STMT = 'ChangeVolumeByNBrick';
+  public const CHANGE_VOLUME_BY_N_STMT = 'ChangeVolumeByNBrick';
   /**
    * @var string
    */
-  const BROADCAST_WAIT_STMT = 'BroadcastWaitBrick';
+  public const BROADCAST_WAIT_STMT = 'BroadcastWaitBrick';
   /**
    * @var string
    */
-  const REPEAT_STMT = 'RepeatBrick';
+  public const REPEAT_STMT = 'RepeatBrick';
   /**
    * @var string
    */
-  const NOTE_STMT = 'NoteBrick';
+  public const NOTE_STMT = 'NoteBrick';
   /**
    * @var string
    */
-  const LOOP_END_STMT = 'LoopEndBrick';
+  public const LOOP_END_STMT = 'LoopEndBrick';
   /**
    * @var string
    */
-  const FOREVER_STMT = 'ForeverBrick';
+  public const FOREVER_STMT = 'ForeverBrick';
   /**
    * @var string
    */
-  const LOOP_ENDLESS_STMT = 'LoopEndlessBrick';
+  public const LOOP_ENDLESS_STMT = 'LoopEndlessBrick';
   /**
    * @var string
    */
-  const BROADCAST_STMT = 'BroadcastBrick';
+  public const BROADCAST_STMT = 'BroadcastBrick';
   /**
    * @var string
    */
-  const SET_Y_STMT = 'SetYBrick';
+  public const SET_Y_STMT = 'SetYBrick';
   /**
    * @var string
    */
-  const CHANGE_Y_BY_N_STMT = 'ChangeYByNBrick';
+  public const CHANGE_Y_BY_N_STMT = 'ChangeYByNBrick';
   /**
    * @var string
    */
-  const TURN_LEFT_STMT = 'TurnLeftBrick';
+  public const TURN_LEFT_STMT = 'TurnLeftBrick';
   /**
    * @var string
    */
-  const TURN_RIGHT_STMT = 'TurnRightBrick';
+  public const TURN_RIGHT_STMT = 'TurnRightBrick';
   /**
    * @var string
    */
-  const MOVE_N_STEPS_STMT = 'MoveNStepsBrick';
+  public const MOVE_N_STEPS_STMT = 'MoveNStepsBrick';
   /**
    * @var string
    */
-  const POINT_TO_STMT = 'PointToBrick';
+  public const POINT_TO_STMT = 'PointToBrick';
   /**
    * @var string
    */
-  const IF_LOGIC_BEGIN_STMT = 'IfLogicBeginBrick';
+  public const IF_LOGIC_BEGIN_STMT = 'IfLogicBeginBrick';
   /**
    * @var string
    */
-  const IF_LOGIC_ELSE_STMT = 'IfLogicElseBrick';
+  public const IF_LOGIC_ELSE_STMT = 'IfLogicElseBrick';
   /**
    * @var string
    */
-  const IF_LOGIC_END_STMT = 'IfLogicEndBrick';
+  public const IF_LOGIC_END_STMT = 'IfLogicEndBrick';
   /**
    * @var string
    */
-  const SET_VARIABLE_STMT = 'SetVariableBrick';
+  public const SET_VARIABLE_STMT = 'SetVariableBrick';
   /**
    * @var string
    */
-  const REPLACE_ITEM_IN_USER_LIST_STMT = 'ReplaceItemInUserListBrick';
+  public const REPLACE_ITEM_IN_USER_LIST_STMT = 'ReplaceItemInUserListBrick';
   /**
    * @var string
    */
-  const INSERT_ITEM_IN_INTO_USER_LIST_STMT = 'InsertItemIntoUserListBrick';
+  public const INSERT_ITEM_IN_INTO_USER_LIST_STMT = 'InsertItemIntoUserListBrick';
   /**
    * @var string
    */
-  const DELETE_ITEM_OF_USER_LIST_STMT = 'DeleteItemOfUserListBrick';
+  public const DELETE_ITEM_OF_USER_LIST_STMT = 'DeleteItemOfUserListBrick';
   /**
    * @var string
    */
-  const ADD_ITEM_TO_USER_LIST_STMT = 'AddItemToUserListBrick';
+  public const ADD_ITEM_TO_USER_LIST_STMT = 'AddItemToUserListBrick';
   /**
    * @var string
    */
-  const CHANGE_VARIABLE_STMT = 'ChangeVariableBrick';
+  public const CHANGE_VARIABLE_STMT = 'ChangeVariableBrick';
   /**
    * @var string
    */
-  const SET_LOOK_STMT = 'SetLookBrick';
+  public const SET_LOOK_STMT = 'SetLookBrick';
   /**
    * @var string
    */
-  const HIDE_STMT = 'HideBrick';
+  public const HIDE_STMT = 'HideBrick';
   /**
    * @var string
    */
-  const LED_ON_STMT = 'LedOnBrick';
+  public const LED_ON_STMT = 'LedOnBrick';
   /**
    * @var string
    */
-  const LED_OFF_STMT = 'LedOffBrick';
+  public const LED_OFF_STMT = 'LedOffBrick';
   /**
    * @var string
    */
-  const CLEAR_GRAPHICS_EFFECT_STMT = 'ClearGraphicEffectBrick';
+  public const CLEAR_GRAPHICS_EFFECT_STMT = 'ClearGraphicEffectBrick';
   /**
    * @var string
    */
-  const CHANGE_BRIGHTNESS_BY_N_STMT = 'ChangeBrightnessByNBrick';
+  public const CHANGE_BRIGHTNESS_BY_N_STMT = 'ChangeBrightnessByNBrick';
   /**
    * @var string
    */
-  const SET_BRIGHTNESS_STMT = 'SetBrightnessBrick';
+  public const SET_BRIGHTNESS_STMT = 'SetBrightnessBrick';
   /**
    * @var string
    */
-  const CHANGE_TRANSPARENCY_BY_N_STMT = 'ChangeTransparencyByNBrick';
+  public const CHANGE_TRANSPARENCY_BY_N_STMT = 'ChangeTransparencyByNBrick';
   /**
    * @var string
    */
-  const SET_TRANSPARENCY_STMT = 'SetTransparencyBrick';
+  public const SET_TRANSPARENCY_STMT = 'SetTransparencyBrick';
   /**
    * @var string
    */
-  const SHOW_STMT = 'ShowBrick';
+  public const SHOW_STMT = 'ShowBrick';
   /**
    * @var string
    */
-  const NEXT_LOOK_STMT = 'NextLookBrick';
+  public const NEXT_LOOK_STMT = 'NextLookBrick';
   /**
    * @var string
    */
-  const SET_SIZE_TO_STMT = 'SetSizeToBrick';
+  public const SET_SIZE_TO_STMT = 'SetSizeToBrick';
   /**
    * @var string
    */
-  const CHANGE_SIZE_BY_N_STMT = 'ChangeSizeByNBrick';
+  public const CHANGE_SIZE_BY_N_STMT = 'ChangeSizeByNBrick';
   /**
    * @var string
    */
-  const POINT_IN_DIRECTION_STMT = 'PointInDirectionBrick';
+  public const POINT_IN_DIRECTION_STMT = 'PointInDirectionBrick';
   /**
    * @var string
    */
-  const VIBRATION_STMT = 'VibrationBrick';
+  public const VIBRATION_STMT = 'VibrationBrick';
   /**
    * @var string
    */
-  const COME_TO_FRONT_STMT = 'ComeToFrontBrick';
+  public const COME_TO_FRONT_STMT = 'ComeToFrontBrick';
   /**
    * @var string
    */
-  const GO_N_STEPS_BACK_STMT = 'GoNStepsBackBrick';
+  public const GO_N_STEPS_BACK_STMT = 'GoNStepsBackBrick';
   /**
    * @var string
    */
-  const GLIDE_TO_STMT = 'GlideToBrick';
+  public const GLIDE_TO_STMT = 'GlideToBrick';
   /**
    * @var string
    */
-  const IF_ON_EDGE_BOUNCE_STMT = 'IfOnEdgeBounceBrick';
+  public const IF_ON_EDGE_BOUNCE_STMT = 'IfOnEdgeBounceBrick';
   /**
    * @var string
    */
-  const CHANGE_X_BY_N_STMT = 'ChangeXByNBrick';
+  public const CHANGE_X_BY_N_STMT = 'ChangeXByNBrick';
   /**
    * @var string
    */
-  const PLACE_AT_STMT = 'PlaceAtBrick';
+  public const PLACE_AT_STMT = 'PlaceAtBrick';
   /**
    * @var string
    */
-  const SET_X_STMT = 'SetXBrick';
+  public const SET_X_STMT = 'SetXBrick';
   /**
    * @var string
    */
-  const SCRIPT_STMT = 'script';
+  public const SCRIPT_STMT = 'script';
   /**
    * @var string
    */
-  const BRICK_STMT = 'brick';
+  public const BRICK_STMT = 'brick';
   /**
    * @var string
    */
-  const SCRIPT_LIST = 'scriptList';
+  public const SCRIPT_LIST = 'scriptList';
   /**
    * @var string
    */
-  const BRICK_LIST = 'brickList';
+  public const BRICK_LIST = 'brickList';
   /**
    * @var string
    */
-  const LOOK_LIST = 'lookList';
+  public const LOOK_LIST = 'lookList';
   /**
    * @var string
    */
-  const SOUND_LIST = 'soundList';
+  public const SOUND_LIST = 'soundList';
   /**
    * @var string
    */
-  const START_SCRIPT = 'StartScript';
+  public const START_SCRIPT = 'StartScript';
   /**
    * @var string
    */
-  const BROADCAST_SCRIPT = 'BroadcastScript';
+  public const BROADCAST_SCRIPT = 'BroadcastScript';
   /**
    * @var string
    */
-  const WHEN_SCRIPT = 'WhenScript';
+  public const WHEN_SCRIPT = 'WhenScript';
   /**
    * @var string
    */
-  const NAME_ATTRIBUTE = 'name';
+  public const NAME_ATTRIBUTE = 'name';
   /**
    * @var string
    */
-  const TYPE_ATTRIBUTE = 'type';
+  public const TYPE_ATTRIBUTE = 'type';
   /**
    * @var string
    */
-  const CATEGORY_ATTRIBUTE = 'category';
+  public const CATEGORY_ATTRIBUTE = 'category';
   /**
    * @var string
    */
-  const REFERENCE_ATTRIBUTE = 'reference';
+  public const REFERENCE_ATTRIBUTE = 'reference';
   /**
    * @var string
    */
-  const USER_VARIABLE_STMT = 'userVariable';
+  public const USER_VARIABLE_STMT = 'userVariable';
   /**
    * @var string
    */
-  const RIGHT_CHILD_STMT = 'rightChild';
+  public const RIGHT_CHILD_STMT = 'rightChild';
   /**
    * @var string
    */
-  const LEFT_CHILD_STMT = 'leftChild';
+  public const LEFT_CHILD_STMT = 'leftChild';
   /**
    * @var string
    */
-  const USER_LIST_STMT = 'userList';
+  public const USER_LIST_STMT = 'userList';
   /**
    * @var string
    */
-  const VALUE_STMT = 'value';
+  public const VALUE_STMT = 'value';
   /**
    * @var string
    */
-  const LOOK_STMT = 'look';
+  public const LOOK_STMT = 'look';
   /**
    * @var string
    */
-  const SOUND_STMT = 'sound';
+  public const SOUND_STMT = 'sound';
   /**
    * @var string
    */
-  const POINTED_OBJECT_STMT = 'pointedObject';
+  public const POINTED_OBJECT_STMT = 'pointedObject';
   /**
    * @var string
    */
-  const FILE_NAME_STMT = 'fileName';
+  public const FILE_NAME_STMT = 'fileName';
   /**
    * @var string
    */
-  const RECEIVED_MESSAGE_STMT = 'receivedMessage';
+  public const RECEIVED_MESSAGE_STMT = 'receivedMessage';
   /**
    * @var string
    */
-  const BROADCAST_MESSAGE_STMT = 'broadcastMessage';
+  public const BROADCAST_MESSAGE_STMT = 'broadcastMessage';
   /**
    * @var string
    */
-  const FORMULA = 'formula';
+  public const FORMULA = 'formula';
   /**
    * @var string
    */
-  const FORMULA_LIST = 'formulaList';
+  public const FORMULA_LIST = 'formulaList';
   /**
    * @var string
    */
-  const SHOW_TEXT_STMT = 'ShowTextBrick';
+  public const SHOW_TEXT_STMT = 'ShowTextBrick';
   /**
    * @var string
    */
-  const SHOW_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.ShowTextBrick';
+  public const SHOW_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.ShowTextBrick';
   /**
    * @var string
    */
-  const HIDE_TEXT_STMT = 'HideTextBrick';
+  public const HIDE_TEXT_STMT = 'HideTextBrick';
   /**
    * @var string
    */
-  const HIDE_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.HideTextBrick';
+  public const HIDE_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.HideTextBrick';
   /**
    * @var string
    */
-  const USER_BRICKS = 'userBricks';
+  public const USER_BRICKS = 'userBricks';
   /**
    * @var string
    */
-  const IS_USER_BRICK = 'inUserBrick';
+  public const IS_USER_BRICK = 'inUserBrick';
   /**
    * @var string
    */
-  const IS_USER_SCRIPT = 'isUserScript';
+  public const IS_USER_SCRIPT = 'isUserScript';
   /**
    * @var string
    */
-  const ACTION = 'action';
+  public const ACTION = 'action';
   /**
    * @var string
    */
-  const USER_VARIABLE_NAME = 'userVariableName';
+  public const USER_VARIABLE_NAME = 'userVariableName';
 
   private ?CodeObject $currentObject = null;
 
@@ -426,8 +426,7 @@ class StatementFactory
   {
     $this->currentObject = new CodeObject();
     $this->currentObject->setName($objectTree[self::NAME_ATTRIBUTE]);
-    if (null == $this->currentObject->getName())
-    {
+    if (null == $this->currentObject->getName()) {
       return null;
     }
 
@@ -439,18 +438,15 @@ class StatementFactory
   public function createStatement(SimpleXMLElement $xmlTree, ?int $spaces): array
   {
     $statements = [];
-    if (0 == $xmlTree->count())
-    {
+    if (0 == $xmlTree->count()) {
       return $statements;
     }
     $children = $xmlTree->children();
 
-    foreach ($children as $statement)
-    {
+    foreach ($children as $statement) {
       $tmpStatement = null;
 
-      switch ($statement->getName())
-      {
+      switch ($statement->getName()) {
         case self::SCRIPT_LIST:
           $tmpStatement = new ScriptListStatement($this, $statement, $spaces);
           break;
@@ -532,14 +528,10 @@ class StatementFactory
           break;
       }
 
-      if (null != $tmpStatement)
-      {
-        if ($tmpStatement instanceof UserVariableStatement)
-        {
+      if (null != $tmpStatement) {
+        if ($tmpStatement instanceof UserVariableStatement) {
           array_unshift($statements, $tmpStatement);
-        }
-        else
-        {
+        } else {
           $statements[] = $tmpStatement;
         }
         $spaces = $tmpStatement->getSpacesForNextBrick();
@@ -556,8 +548,7 @@ class StatementFactory
   {
     $stmt = null;
     $children = $statement;
-    switch ((string) $statement[self::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $statement[self::TYPE_ATTRIBUTE]) {
       case self::PLAY_SOUND_STMT:
         $stmt = new PlaySoundStatement($this, $children, $spaces);
         break;
@@ -727,8 +718,7 @@ class StatementFactory
   private function generateScriptStatement(SimpleXMLElement $statement, int $spaces): Statement
   {
     $children = $statement;
-    switch ((string) $statement[self::TYPE_ATTRIBUTE])
-    {
+    switch ((string) $statement[self::TYPE_ATTRIBUTE]) {
       case self::WHEN_SCRIPT:
         return new TappedScriptStatement($this, $children, $spaces);
       case self::START_SCRIPT:
@@ -751,10 +741,8 @@ class StatementFactory
   private function getTypeOfValue(SimpleXMLElement $statement): ?string
   {
     $siblings = $statement->xpath('preceding-sibling::* | following-sibling::*');
-    foreach ($siblings as $element)
-    {
-      if (self::TYPE_ATTRIBUTE == $element->getName())
-      {
+    foreach ($siblings as $element) {
+      if (self::TYPE_ATTRIBUTE == $element->getName()) {
         return (string) $element;
       }
     }
@@ -765,15 +753,14 @@ class StatementFactory
   private function generateUserVariableStatement(SimpleXMLElement $statement, int $spaces): UserVariableStatement
   {
     $variableName = (string) $statement;
-    if (null == $variableName)
-    {
+    if (null == $variableName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $variableName = (string) ($statement->xpath($reference)[0]);
     }
 
     $parent = 'parent::*';
-    if ($this->isTypeExisting($statement, $parent, self::SHOW_TEXT_STMT) ||
-      $this->isTypeExisting($statement, $parent, self::HIDE_TEXT_STMT)
+    if ($this->isTypeExisting($statement, $parent, self::SHOW_TEXT_STMT)
+      || $this->isTypeExisting($statement, $parent, self::HIDE_TEXT_STMT)
     ) {
       return new UserVariableStatement($this, $statement, $spaces, $variableName, true);
     }
@@ -788,10 +775,8 @@ class StatementFactory
   private function isTypeExisting(SimpleXMLElement $statement, $reference, $type): bool
   {
     $elements = $statement->xpath($reference);
-    foreach ($elements as $element)
-    {
-      if ((string) $element[self::TYPE_ATTRIBUTE] == $type)
-      {
+    foreach ($elements as $element) {
+      if ((string) $element[self::TYPE_ATTRIBUTE] == $type) {
         return true;
       }
     }
@@ -801,7 +786,7 @@ class StatementFactory
 
   private function generateObjectStatement(SimpleXMLElement $statement, int $spaces): ObjectStatement
   {
-    $name = $statement['name'];
+    $name = (string) $statement['name'];
     $factory = new StatementFactory();
     $this->currentObject->addCodeObject($factory->createObject($statement));
 
@@ -825,8 +810,7 @@ class StatementFactory
   private function generateLookStatement(SimpleXMLElement $statement, int $spaces): LookStatement
   {
     $lookName = (string) $statement[self::NAME_ATTRIBUTE];
-    if (null == $lookName)
-    {
+    if (null == $lookName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $look = $statement->xpath($reference)[0];
       $lookName = (string) $look[self::NAME_ATTRIBUTE];
@@ -847,14 +831,12 @@ class StatementFactory
     $name = '';
     $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
 
-    if (null != $reference)
-    {
+    if (null != $reference) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $userListReference = $statement->xpath($reference)[0];
-      foreach ($userListReference->children() as $child)
-      {
-        if (self::NAME_ATTRIBUTE == $child->getName())
-        {
+      // @phpstan-ignore-next-line
+      foreach ($userListReference->children() as $child) {
+        if (self::NAME_ATTRIBUTE == $child->getName()) {
           $name = (string) $child;
         }
       }

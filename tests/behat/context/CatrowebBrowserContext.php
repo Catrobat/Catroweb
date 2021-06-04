@@ -9,15 +9,12 @@ use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 use App\Catrobat\Services\TokenGenerator;
 use App\Entity\CatroNotification;
 use App\Entity\ClickStatistic;
-use App\Entity\GameJam;
 use App\Entity\Program;
 use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserRemixSimilarityRelation;
-use App\Repository\GameJamRepository;
 use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
@@ -45,13 +42,11 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class CatrowebBrowserContext extends BrowserContext
 {
-  const AVATAR_DIR = './tests/testdata/DataFixtures/AvatarImages/';
+  public const AVATAR_DIR = './tests/testdata/DataFixtures/AvatarImages/';
 
-  const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  public const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   private bool $use_real_oauth_javascript_code = false;
-
-  private GameJam $game_jam;
 
   private ?Program $my_program;
 
@@ -117,24 +112,6 @@ class CatrowebBrowserContext extends BrowserContext
     $this->getSymfonyService('profiler')->disable();
   }
 
-  /**
-   * @BeforeScenario @RealOAuth
-   */
-  public function activateRealOAuthService(): void
-  {
-    $this->setOauthServiceParameter('1');
-    $this->use_real_oauth_javascript_code = true;
-  }
-
-  /**
-   * @AfterScenario @RealOAuth
-   */
-  public function deactivateRealOAuthService(): void
-  {
-    $this->setOauthServiceParameter('0');
-    $this->use_real_oauth_javascript_code = false;
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   //  Authentication
   //--------------------------------------------------------------------------------------------------------------------
@@ -151,12 +128,11 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->visit('/app/login');
     $this->iWaitForThePageToBeLoaded();
-    $this->fillField('_username', $username);
+    $this->fillField('username', $username);
     $this->fillField('password', $password);
     $this->pressButton('Login');
     $this->iWaitForThePageToBeLoaded();
-    if ('try to' === $try_to)
-    {
+    if ('try to' === $try_to) {
       $this->assertPageNotContainsText('Your password or username was incorrect');
     }
     $this->getUserDataFixtures()->setCurrentUserByUsername($username);
@@ -188,15 +164,13 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldBeLoggedIn($arg1): void
   {
-    if ('in' === $arg1)
-    {
+    if ('in' === $arg1) {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2_000, 'window.location.href.search("login") == -1');
       $this->assertElementNotOnPage('#btn-login');
       $this->assertElementOnPage('#btn-logout');
     }
-    if ('out' == $arg1)
-    {
+    if ('out' == $arg1) {
       $this->iShouldNotBeLoggedIn();
     }
   }
@@ -288,8 +262,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSetTheCookie(string $cookie_name, string $cookie_value): void
   {
-    if ('NULL' === $cookie_value)
-    {
+    if ('NULL' === $cookie_value) {
       $cookie_value = null;
     }
     $this->getSession()->setCookie($cookie_name, $cookie_value);
@@ -301,8 +274,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iOpenTheMenu(): void
   {
     $sidebar_open = $this->getSession()->getPage()->find('css', '#sidebar')->isVisible();
-    if (!$sidebar_open)
-    {
+    if (!$sidebar_open) {
       $this->getSession()->getPage()->find('css', '#top-app-bar__btn-sidebar-toggle')->click();
     }
     $this->iWaitForAjaxToFinish();
@@ -318,10 +290,8 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $elements = $this->getSession()->getPage()->findAll('css', $css_selector);
     $count = 0;
-    foreach ($elements as $element)
-    {
-      if ($element->isVisible())
-      {
+    foreach ($elements as $element) {
+      if ($element->isVisible()) {
         ++$count;
       }
     }
@@ -481,14 +451,13 @@ class CatrowebBrowserContext extends BrowserContext
     switch ($arg1) {
       case 'English':
         $cookie = $this->getSession()->getCookie('hl');
-        if (!empty($cookie))
-        {
+        if (!empty($cookie)) {
           $this->assertSession()->cookieEquals('hl', 'en');
         }
         break;
 
       case 'Deutsch':
-        $this->assertSession()->cookieEquals('hl', 'de');
+        $this->assertSession()->cookieEquals('hl', 'de_DE');
         break;
 
       default:
@@ -508,13 +477,13 @@ class CatrowebBrowserContext extends BrowserContext
         $this->getSession()->setCookie('hl', 'en');
         break;
       case 'Deutsch':
-        $this->getSession()->setCookie('hl', 'de');
+        $this->getSession()->setCookie('hl', 'de_DE');
         break;
       case 'Russisch':
-        $this->getSession()->setCookie('hl', 'ru');
+        $this->getSession()->setCookie('hl', 'ru_RU');
         break;
       case 'French':
-        $this->getSession()->setCookie('hl', 'fr');
+        $this->getSession()->setCookie('hl', 'fr_FR');
         break;
       default:
         Assert::assertTrue(false);
@@ -537,22 +506,15 @@ class CatrowebBrowserContext extends BrowserContext
     $this->assertSession()->responseContains('help-desktop');
     $this->assertSession()->responseContains('help-mobile');
 
-    if ('big' === $arg1)
-    {
+    if ('big' === $arg1) {
       Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
       Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    }
-    elseif ('small' === $arg1)
-    {
+    } elseif ('small' === $arg1) {
       Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
       Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    }
-    elseif ('' === $arg1)
-    {
+    } elseif ('' === $arg1) {
       Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-split')->isVisible());
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false);
     }
 
@@ -561,50 +523,24 @@ class CatrowebBrowserContext extends BrowserContext
 
     switch ($arg2) {
       case 'Hour of Code':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
           $path = '/images/help/hour_of_code.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
           $path = '/images/help/hour_of_code_mobile.png';
-        }
-        else
-        {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Game Design':
-        if ('big' === $arg1)
-        {
-          $img = $this->getSession()->getPage()->findById('alice-tut-desktop');
-          $path = '/images/help/alice_tut.png';
-        }
-        elseif ('small' === $arg1)
-        {
-          $img = $this->getSession()->getPage()->findById('alice-tut-mobile');
-          $path = '/images/help/alice_tut_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
       case 'Step By Step':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
           $path = '/images/help/step_by_step.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
           $path = '/images/help/step_by_step_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
@@ -617,34 +553,24 @@ class CatrowebBrowserContext extends BrowserContext
         $path = '/images/help/starters.png';
         break;
       case 'Education Platform':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('edu-desktop');
           $path = '/images/help/edu_site.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('edu-mobile');
           $path = '/images/help/edu_site_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
       case 'Discussion':
-        if ('big' === $arg1)
-        {
+        if ('big' === $arg1) {
           $img = $this->getSession()->getPage()->findById('discuss-desktop');
           $path = '/images/help/discuss.png';
-        }
-        elseif ('small' === $arg1)
-        {
+        } elseif ('small' === $arg1) {
           $img = $this->getSession()->getPage()->findById('discuss-mobile');
           $path = '/images/help/discuss_mobile.png';
-        }
-        else
-        {
+        } else {
           Assert::assertTrue(false);
         }
         break;
@@ -653,14 +579,11 @@ class CatrowebBrowserContext extends BrowserContext
         break;
     }
 
-    if (null != $img)
-    {
+    if (null != $img) {
       Assert::assertEquals($img->getTagName(), 'img');
       Assert::assertEquals($img->getAttribute('src'), $path);
       Assert::assertTrue($img->isVisible());
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false);
     }
   }
@@ -695,8 +618,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickOntheColumnName($arg1): void
   {
     $page = $this->getSession()->getPage();
-    switch ($arg1)
-    {
+    switch ($arg1) {
       case 'Name':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[3]/a')
@@ -716,13 +638,56 @@ class CatrowebBrowserContext extends BrowserContext
         ;
         break;
       case 'Upload Time':
+      case 'Id':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[1]/a')
           ->click()
         ;
         break;
+      case 'Word':
+        $page
+          ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div[1]/table/thead/tr/th[3]/a')
+          ->click()
+        ;
+        break;
+      case 'Clicked At':
+          $page
+            ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[9]/a')
+            ->click()
+          ;
+          break;
+      case 'Locale':
+          $page
+            ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
+            ->click()
+          ;
+          break;
+      case 'Type':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[2]/a')
+             ->click()
+           ;
+           break;
+      case 'Tag':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[7]/a')
+             ->click()
+           ;
+           break;
+      case 'User Agent':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[11]/a')
+             ->click()
+           ;
+           break;
+      case 'Referrer':
+           $page
+             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[12]/a')
+             ->click()
+           ;
+           break;
 
-      default:
+        default:
         throw new Exception('Wrong Option');
     }
   }
@@ -751,6 +716,29 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I change the visibility of the project number "([^"]*)" in the approve list to "([^"]*)"$/
+   *
+   * @param string $program_number
+   * @param string $visibility
+   *
+   * @throws Exception
+   */
+  public function iChangeTheVisibilityOfTheProgramInTheApproveList($program_number, $visibility): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+    ///
+    $page = $this->getSession()->getPage();
+
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[5]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($visibility);
+  }
+
+  /**
    * @Then /^I change the approval of the project number "([^"]*)" in the list to "([^"]*)"$/
    *
    * @param mixed $program_number
@@ -766,6 +754,28 @@ class CatrowebBrowserContext extends BrowserContext
     ///click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[8]/span')
+      ->click()
+    ;
+
+    $this->iSelectTheOptionInThePopup($approved);
+  }
+
+  /**
+   * @Then /^I change the approval of the project number "([^"]*)" in the approve list to "([^"]*)"$/
+   *
+   * @param string $program_number
+   * @param string $approved
+   *
+   * @throws Exception
+   */
+  public function iChangeTheApprovalOfTheProjectInApproveList($program_number, $approved): void
+  {
+    ///param program number contains the number of the program position in the list on the admin page
+    ///
+    $page = $this->getSession()->getPage();
+    ///click the visibility button (yes/no)
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[6]/span')
       ->click()
     ;
 
@@ -796,8 +806,7 @@ class CatrowebBrowserContext extends BrowserContext
       ->click()
     ;
 
-    switch ($flavor)
-    {
+    switch ($flavor) {
       case 'pocketcode':
         $page
           ->find('css', 'select.form-control > option:nth-child(1)')
@@ -996,6 +1005,71 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Then /^I click on the show button of program with id "([^"]*)" in the approve list$/
+   *
+   * @param string $program_id
+   */
+  public function iClickOnTheShowButtonInTheApproveList($program_id): void
+  {
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', "//a[contains(@href,'/admin/approve/".$program_id."/show')]")->click();
+  }
+
+  /**
+   * @Then /^I click on the edit button of word with id "([^"]*)"$/
+   */
+  public function iClickOnTheEditButtonOfWord(string $word_id): void
+  {
+    $page = $this->getSession()->getPage();
+    $page->find('xpath', "//a[contains(@href,'/admin/rudeword/".$word_id."/edit')]")->click();
+  }
+
+  /**
+   * @Then /^I click on the code view button$/
+   */
+  public function iClickOnTheCodeViewButtonInTheApproveList(): void
+  {
+    $page = $this->getSession()->getPage();
+    $page->findById('code-view')->click();
+  }
+
+  /**
+   * @Then /^I click on the edit button of the extension number "([^"]*)" in the extensions list$/
+   *
+   * @param mixed $program_number
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheEditButtonInAllExtensions($program_number): void
+  {
+    $page = $this->getSession()->getPage();
+    $this->assertSession()->elementExists('xpath',
+      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/div/a');
+
+    $page
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/div/a')
+      ->click()
+    ;
+  }
+
+  /**
+   * @Then /^I click on the add new button$/
+   *
+   * @throws ElementNotFoundException
+   */
+  public function iClickOnTheAddNewButton(): void
+  {
+    $page = $this->getSession()->getPage();
+    $this->assertSession()->elementExists('xpath',
+      "//a[contains(text(),'Add new')]");
+
+    $page
+      ->find('xpath', "//a[contains(text(),'Add new')]")
+      ->click()
+    ;
+  }
+
+  /**
    * @When /^I report program (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
    *
    * @param mixed $program_id
@@ -1038,7 +1112,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iWriteInTextbox($arg1): void
   {
-    $textarea = $this->getSession()->getPage()->find('css', '.msg');
+    $textarea = $this->getSession()->getPage()->find('css', '#comment-message');
     Assert::assertNotNull($textarea, 'Textarea not found');
     $textarea->setValue($arg1);
   }
@@ -1117,12 +1191,9 @@ class CatrowebBrowserContext extends BrowserContext
 
     $pre_source = $this->getSession()->getPage()->find('css', '#avatar-img');
     $source = 0;
-    if (!is_null($pre_source))
-    {
+    if (!is_null($pre_source)) {
       $source = $pre_source->getAttribute('src');
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false, "Couldn't find avatar in #avatar-img");
     }
     $source = trim($source, '"');
@@ -1160,12 +1231,9 @@ class CatrowebBrowserContext extends BrowserContext
 
     $pre_source = $this->getSession()->getPage()->find('css', '#project-thumbnail-big');
     $source = 0;
-    if (!is_null($pre_source))
-    {
+    if (!is_null($pre_source)) {
       $source = $pre_source->getAttribute('src');
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false, "Couldn't find avatar in project-thumbnail-big");
     }
     $source = trim($source, '"');
@@ -1269,48 +1337,8 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $page = $this->getSession()->getPage();
     $program = $page->find('css', $arg1);
-    if (!$program->hasClass('visited-program'))
-    {
+    if (!$program->hasClass('visited-program')) {
       Assert::assertTrue(false);
-    }
-  }
-
-  /**
-   * @When /^I trigger Google login with approval prompt "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iTriggerGoogleLogin($arg1): void
-  {
-    $this->assertElementOnPage('#btn-login');
-    $this->iClickTheButton('login');
-    $this->assertPageAddress('/app/login');
-    $this->getSession()->wait(200);
-    $this->assertElementOnPage('#btn-login_google');
-    $this->getSession()->executeScript('document.getElementById("gplus_approval_prompt").type = "text";');
-    $this->getSession()->wait(200);
-    $this->getSession()->getPage()->findById('gplus_approval_prompt')->setValue($arg1);
-  }
-
-  /**
-   * @When /^I click Google login link "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iClickGoogleLoginLink($arg1): void
-  {
-    if ($this->use_real_oauth_javascript_code)
-    {
-      $this->clickLink('btn-login_google');
-      if ('twice' === $arg1)
-      {
-        $this->clickLink('btn-login_google');
-      }
-    }
-    else
-    {
-      $this->setGooglePlusFakeData();
-      $this->clickGooglePlusFakeButton();
     }
   }
 
@@ -1430,8 +1458,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSeeThePopup($arg1): void
   {
-    if ('update app' == $arg1)
-    {
+    if ('update app' == $arg1) {
       $this->assertElementOnPage('#popup-info');
       $this->assertElementOnPage('#popup-background');
     }
@@ -1444,8 +1471,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iSeeNotThePopup($arg1): void
   {
-    if ('update app' == $arg1)
-    {
+    if ('update app' == $arg1) {
       $this->assertElementNotOnPage('#popup-info');
       $this->assertElementNotOnPage('#popup-background');
     }
@@ -1458,7 +1484,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iClickTheProgramDownloadButton(): void
   {
-    $this->iClick('#url-download');
+    $this->iClick('#url-download-small');
   }
 
   /**
@@ -1499,78 +1525,9 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeElementWithIdWithSrc($url): void
   {
     $page = $this->getSession()->getPage();
-    $video = $page->find('css', '#youtube-help-video');
+    $video = $page->find('css', '#youtube-index > iframe');
     Assert::assertNotNull($video, 'Video not found on tutorial page!');
     Assert::assertTrue(false !== strpos($video->getAttribute('src'), (string) $url));
-  }
-
-  /**
-   * @Then /^I log in to Google with valid credentials$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iLogInToGoogleWithEmailAndPassword(): void
-  {
-    if ($this->use_real_oauth_javascript_code)
-    {
-      $mail = 'google_testuser_mail';
-      $password = 'google_testuser_mail';
-      echo 'Login with mail address '.$mail.' and pw '.$password."\n";
-      $page = $this->getSession()->getPage();
-      if ($page->find('css', '#approval_container') &&
-        $page->find('css', '#submit_approve_access'))
-      {
-        $this->approveGoogleAccess();
-      }
-      elseif ($page->find('css', '.google-header-bar centered') &&
-        $page->find('css', '.signin-card clearfix'))
-      {
-        $this->signInWithGoogleEMailAndPassword($mail, $password);
-      }
-      elseif ($page->find('css', '#gaia_firstform') &&
-        $page->find('css', '#Email') &&
-        $page->find('css', '#Passwd-hidden'))
-      {
-        $this->signInWithGoogleEMail($mail, $password);
-      }
-      else
-      {
-        Assert::assertTrue(false, 'No Google form appeared!
-');
-      }
-    }
-    else
-    {
-      $this->setGooglePlusFakeData();
-      $this->clickGooglePlusFakeButton();
-    }
-  }
-
-  /**
-   * @Then /^I choose the username '([^']*)'$/
-   *
-   * @param mixed $arg1
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iChooseTheUsername($arg1): void
-  {
-    $this->getSession()->wait(300);
-    $page = $this->getSession()->getPage();
-
-    $button = $page->findById('btn_oauth_username');
-    Assert::assertNotNull($button);
-    Assert::assertTrue($button->hasAttribute('disabled'));
-
-    $page->fillField('dialog_oauth_username_input', $arg1);
-    Assert::assertFalse($button->hasAttribute('disabled'));
-
-    $button->press();
-    if (self::ALREADY_IN_DB_USER !== $arg1)
-    {
-      $this->getSession()->wait(1_000, 'window.location.href.search("login") == -1');
-    }
-    $this->getSession()->wait(500);
   }
 
   /**
@@ -1581,32 +1538,23 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldSeeTutorialBanners($count, $view): void
   {
-    if ('desktop' === $view)
-    {
-      for ($i = 1;; ++$i)
-      {
+    if ('desktop' === $view) {
+      for ($i = 1;; ++$i) {
         $img = $this->getSession()->getPage()->findById('tutorial-'.$i);
-        if (null === $img)
-        {
+        if (null === $img) {
           break;
         }
       }
       Assert::assertEquals($count, $i - 1);
-    }
-    elseif ('mobile' === $view)
-    {
-      for ($i = 1;; ++$i)
-      {
+    } elseif ('mobile' === $view) {
+      for ($i = 1;; ++$i) {
         $img = $this->getSession()->getPage()->findById('tutorial-mobile-'.$i);
-        if (null === $img)
-        {
+        if (null === $img) {
           break;
         }
       }
       Assert::assertEquals($count, $i - 1);
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false);
     }
   }
@@ -1657,15 +1605,13 @@ class CatrowebBrowserContext extends BrowserContext
     $owl_items_count = count($owl_items);
     Assert::assertEquals($owl_items_count, count($slider_items));
 
-    for ($index = 0; $index < $owl_items_count; ++$index)
-    {
+    for ($index = 0; $index < $owl_items_count; ++$index) {
       $url = $slider_items[$index];
-      if (0 !== strpos($url, 'http://'))
-      {
+      if (0 !== strpos($url, 'http://')) {
         $program = $this->getProgramManager()->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'flavor' => 'pocketcode']);
+        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'theme' => 'pocketcode']);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -1855,95 +1801,91 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iClickOnAFeaturedHomepageProgram(): void
   {
-    $arg1 = '#feature-slider > div > div:first-child > a';
-    $this->assertSession()->elementExists('css', $arg1);
+    $first_featured_project = $this->getSession()->getPage()->find('css', '#feature-slider a');
+    $this->assertSession()->elementExists('xpath', $first_featured_project->getXpath());
 
     $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg1)
+      ->find('xpath', $first_featured_project->getXpath())
       ->click()
     ;
   }
 
   /**
-   * @When /^I click on a newest homepage program having program id "([^"]*)"$/
+   * @When /^I click on a "([^"]*)" homepage program having program id "([^"]*)"$/
    *
+   * @param mixed $category
    * @param mixed $program_id
    *
    * @throws ElementNotFoundException
    */
-  public function iClickOnANewestHomepageProgram($program_id): void
+  public function iClickOnANewestHomepageProgram($category, $program_id): void
   {
-    $arg1 = '#newest .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
+    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
+    $element = null;
+    foreach ($projects as $project) {
+      $link = explode('/', $project->getAttribute('href'));
+      if (end($link) === $program_id) {
+        $element = $project;
+        break;
+      }
+    }
+
+    $this->assertSession()->elementExists('xpath', $element->getXpath());
 
     $this
       ->getSession()
       ->getPage()
-      ->find('css', $arg1)
+      ->find('xpath', $element->getXpath())
       ->click()
-    ;
+        ;
   }
 
   /**
-   * @When /^I click on a most downloaded homepage program having program id "([^"]*)"$/
+   * @When /^Project with the id "([^"]*)" should be visible in the "([^"]*)" category$/
    *
    * @param mixed $program_id
+   * @param mixed $category
    *
    * @throws ElementNotFoundException
    */
-  public function iClickOnAMostDownloadedHomepageProgram($program_id): void
+  public function projectExistsinTheRecommendedCategory($program_id, $category): void
   {
-    $arg1 = '#mostDownloaded .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
+    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
+    $element = null;
+    foreach ($projects as $project) {
+      $link = explode('/', $project->getAttribute('href'));
+      if (end($link) === $program_id) {
+        $element = $project;
+        break;
+      }
+    }
 
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
+    $this->assertSession()->elementExists('xpath', $element->getXpath());
   }
 
   /**
-   * @When /^I click on a most viewed homepage program having program id "([^"]*)"$/
+   * @When /^Project with the id "([^"]*)" should not be visible in the "([^"]*)" category$/
    *
    * @param mixed $program_id
+   * @param mixed $category
    *
    * @throws ElementNotFoundException
+   * @throws ExpectationException
    */
-  public function iClickOnAMostViewedHomepageProgram($program_id): void
+  public function projectDoesNotExistsinTheRecommendedCategory($program_id, $category): void
   {
-    $arg1 = '#mostViewed .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
-  }
-
-  /**
-   * @When /^I click on a random homepage program having program id "([^"]*)"$/
-   *
-   * @param mixed $program_id
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnARandomHomepageProgram($program_id): void
-  {
-    $arg1 = '#random .programs #program-'.$program_id.' .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
+    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
+    $element = null;
+    foreach ($projects as $project) {
+      $link = explode('/', $project->getAttribute('href'));
+      if (end($link) === $program_id) {
+        $element = $project;
+        break;
+      }
+    }
+    Assert::assertNull($element, 'Element exists in the recommended category');
   }
 
   /**
@@ -2025,15 +1967,12 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $img = $this->getSession()->getPage()->findById('logo');
 
-    if (null != $img)
-    {
+    if (null != $img) {
       Assert::assertEquals($img->getTagName(), 'img');
       $src = $img->getAttribute('src');
       Assert::assertTrue(false !== strpos($src, (string) $arg1), '<'.$src.'> does not contain '.$arg1);
       Assert::assertTrue($img->isVisible(), 'Image is not visible.');
-    }
-    else
-    {
+    } else {
       Assert::assertTrue(false, '#logo not found!');
     }
   }
@@ -2044,8 +1983,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iClickTheCurrentlyVisibleSearchIcon(): void
   {
     $icon = $this->getSession()->getPage()->findById('top-app-bar__btn-search');
-    if ($icon->isVisible())
-    {
+    if ($icon->isVisible()) {
       $icon->click();
 
       return;
@@ -2185,15 +2123,13 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $parameter_defs = $table->getHash();
     $expected_parameters = [];
-    foreach ($parameter_defs as $parameter_def)
-    {
+    foreach ($parameter_defs as $parameter_def) {
       $expected_parameters[$parameter_def['parameter']] = $parameter_def['value'];
     }
     $dispatcher = $this->getSymfonyService(JenkinsDispatcher::class);
     $parameters = $dispatcher->getLastParameters();
 
-    foreach ($expected_parameters as $i => $expected_parameter)
-    {
+    foreach ($expected_parameters as $i => $expected_parameter) {
       Assert::assertMatchesRegularExpression(
         $expected_parameter,
         $parameters[$i]
@@ -2300,8 +2236,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeReportedTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['#Reported Comments']);
       $this->assertSession()->pageTextContains($user_stat['#Reported Programs']);
       $this->assertSession()->pageTextContains($user_stat['Username']);
@@ -2317,8 +2252,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeNotificationTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['User']);
       $this->assertSession()->pageTextContains($user_stat['User Email']);
       $this->assertSession()->pageTextContains($user_stat['Upload']);
@@ -2328,23 +2262,23 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I should see the table with all projects in the following order:$/
+   * @Then /^I should see the table with all click statistics in the following order:$/
    */
-  public function shouldSeeReportedProgramsTable(TableNode $table): void
+  public function shouldSeeFollowingTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
     $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
 
     $actual_values = [];
-    foreach ($td as $value)
-    {
+    foreach ($td as $value) {
       $actual_values[] = $value->getText();
     }
 
     Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of projects in table');
 
     $counter = 0;
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
+      $user_stat = array_filter($user_stat);
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }
@@ -2358,15 +2292,11 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeExampleTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['Example Image']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
       $this->assertSession()->pageTextContains($user_stat['Priority']);
-      $this->assertSession()->pageTextContains($user_stat['iOS only']);
-      $this->assertSession()->pageTextContains($user_stat['Active']);
     }
   }
 
@@ -2378,13 +2308,73 @@ class CatrowebBrowserContext extends BrowserContext
   public function shouldSeeStarterProgramsTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Starter Category']);
       $this->assertSession()->pageTextContains($user_stat['Category Alias']);
       $this->assertSession()->pageTextContains($user_stat['Programs']);
       $this->assertSession()->pageTextContains($user_stat['Order']);
     }
+  }
+
+  /**
+   * @Then /^I should see the following not approved projects:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeNotApprovedProjects(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
+
+    $actual_values = [];
+    foreach ($td as $value) {
+      $actual_values[] = $value->getText();
+    }
+
+    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of projects in table');
+
+    $counter = 0;
+    foreach ($user_stats as $user_stat) {
+      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
+      ++$counter;
+    }
+  }
+
+  /**
+   * @Then /^I should see the following rude words:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeRudeWords(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
+
+    $actual_values = [];
+    foreach ($td as $value) {
+      $actual_values[] = $value->getText();
+    }
+
+    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of rude words in table');
+
+    $counter = 0;
+    foreach ($user_stats as $user_stat) {
+      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
+      ++$counter;
+    }
+  }
+
+  /**
+   * @Then /^I try to add the following word "([^"]*)"$/
+   *
+   * @throws ResponseTextException
+   */
+  public function addFollowingWord(string $word): void
+  {
+    $this->visit('/admin/rudeword/create');
+    $this->iWaitForThePageToBeLoaded();
+    $this->getSession()->getPage()->find('xpath', '//input')->setValue($word);
+    $this->pressButton('Create and return to list');
   }
 
   /**
@@ -2395,14 +2385,44 @@ class CatrowebBrowserContext extends BrowserContext
   public function seeReportedProgramsTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Note']);
       $this->assertSession()->pageTextContains($user_stat['State']);
       $this->assertSession()->pageTextContains($user_stat['Category']);
       $this->assertSession()->pageTextContains($user_stat['Reporting User']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Program Visible']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the extensions table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeExtensionsTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Prefix']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the ready apks table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeReadyApksTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['User']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
     }
   }
 
@@ -2414,13 +2434,126 @@ class CatrowebBrowserContext extends BrowserContext
   public function seePendingApkTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['User']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
       $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
       $this->assertSession()->pageTextContains($user_stat['Apk Status']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the survey table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeSurveyTable(TableNode $table): void
+  {
+    $survey_stats = $table->getHash();
+    foreach ($survey_stats as $survey_stat) {
+      $this->assertSession()->pageTextContains($survey_stat['Language Code']);
+      $this->assertSession()->pageTextContains($survey_stat['Url']);
+      $this->assertSession()->pageTextContains($survey_stat['Active']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the achievements table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeAchievementTable(TableNode $table): void
+  {
+    $this->assertSession()->pageTextContains('Priority');
+    $this->assertSession()->pageTextContains('Internal Title');
+    $this->assertSession()->pageTextContains('Internal Description');
+    $this->assertSession()->pageTextContains('Color');
+    $this->assertSession()->pageTextContains('Enabled');
+    $this->assertSession()->pageTextContains('Unlocked by');
+
+    $survey_stats = $table->getHash();
+    foreach ($survey_stats as $survey_stat) {
+      $this->assertSession()->pageTextContains($survey_stat['Priority']);
+      $this->assertSession()->pageTextContains($survey_stat['Internal Title']);
+      $this->assertSession()->pageTextContains($survey_stat['Internal Description']);
+      $this->assertSession()->pageTextContains($survey_stat['Color']);
+      $this->assertSession()->pageTextContains($survey_stat['Enabled']);
+      $this->assertSession()->pageTextContains($survey_stat['Unlocked by']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the cron jobs table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeCronJobTable(TableNode $table): void
+  {
+    $this->assertSession()->pageTextContains('Name');
+    $this->assertSession()->pageTextContains('State');
+    $this->assertSession()->pageTextContains('Cron Interval');
+    $this->assertSession()->pageTextContains('Start At');
+    $this->assertSession()->pageTextContains('End At');
+    $this->assertSession()->pageTextContains('Result Code');
+
+    $survey_stats = $table->getHash();
+    foreach ($survey_stats as $survey_stat) {
+      $this->assertSession()->pageTextContains($survey_stat['Name']);
+      $this->assertSession()->pageTextContains($survey_stat['State']);
+      $this->assertSession()->pageTextContains($survey_stat['Cron Interval']);
+      $this->assertSession()->pageTextContains($survey_stat['Start At']);
+      $this->assertSession()->pageTextContains($survey_stat['End At']);
+      $this->assertSession()->pageTextContains($survey_stat['Result Code']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the media package categories table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeMediaPackageCategoriesTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Package']);
+      $this->assertSession()->pageTextContains($user_stat['Priority']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the media packages table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeMediaPackages(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['name']);
+      $this->assertSession()->pageTextContains($user_stat['name_url']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the media package files table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeMediaPackageFilesTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['Id']);
+      $this->assertSession()->pageTextContains($user_stat['Name']);
+      $this->assertSession()->pageTextContains($user_stat['Category']);
+      $this->assertSession()->pageTextContains($user_stat['Author']);
+      $this->assertSession()->pageTextContains($user_stat['Flavors']);
+      $this->assertSession()->pageTextContains($user_stat['Downloads']);
+      $this->assertSession()->pageTextContains($user_stat['Active']);
     }
   }
 
@@ -2448,27 +2581,15 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the extracted-folder$/
+   * @Given /^there is a file "([^"]*)" with size "([^"]*)" bytes in the compressed-folder$/
    *
    * @param mixed $filename
    * @param mixed $size
    */
   public function thereIsAFileWithSizeBytesInTheExtractedFolder($filename, $size): void
   {
-    $this->generateFileInPath($this->getSymfonyParameter('catrobat.file.extract.dir'),
+    $this->generateFileInPath($this->getSymfonyParameter('catrobat.file.storage.dir'),
       $filename, $size);
-  }
-
-  /**
-   * @Then /^program with id "([^"]*)" should have no directory_hash$/
-   *
-   * @param mixed $program_id
-   */
-  public function programWithIdShouldHaveNoDirectoryHash($program_id): void
-  {
-    $program_manager = $this->getProgramManager();
-    $program = $program_manager->find($program_id);
-    Assert::assertEquals(null, $program->getExtractedDirectoryHash());
   }
 
   /**
@@ -2492,8 +2613,7 @@ class CatrowebBrowserContext extends BrowserContext
       RecursiveIteratorIterator::CHILD_FIRST
     );
 
-    foreach ($files as $file)
-    {
+    foreach ($files as $file) {
       $filename = $file->getFilename();
       Assert::assertStringNotContainsString('remove_me', $filename);
     }
@@ -2521,8 +2641,7 @@ class CatrowebBrowserContext extends BrowserContext
     $expected_like_similarities = $table->getHash();
     Assert::assertEquals(count($expected_like_similarities), $all_like_similarities_count,
       'Wrong number of returned similarity entries');
-    for ($i = 0; $i < $all_like_similarities_count; ++$i)
-    {
+    for ($i = 0; $i < $all_like_similarities_count; ++$i) {
       /** @var UserLikeSimilarityRelation $like_similarity */
       $like_similarity = $all_like_similarities[$i];
       Assert::assertEquals(
@@ -2553,8 +2672,7 @@ class CatrowebBrowserContext extends BrowserContext
     $expected_remix_similarities = $table->getHash();
     Assert::assertEquals(count($expected_remix_similarities), $all_remix_similarities_count,
       'Wrong number of returned similarity entries');
-    for ($i = 0; $i < $all_remix_similarities_count; ++$i)
-    {
+    for ($i = 0; $i < $all_remix_similarities_count; ++$i) {
       /** @var UserRemixSimilarityRelation $remix_similarity */
       $remix_similarity = $all_remix_similarities[$i];
       Assert::assertEquals(
@@ -2617,58 +2735,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given There is an ongoing game jam
-   *
-   * @throws Exception
-   */
-  public function thereIsAnOngoingGameJam(): void
-  {
-    $this->game_jam = $this->insertDefaultGameJam();
-  }
-
-  /**
-   * @Given /^I submitted a program to the gamejam$/
-   *
-   * @throws Exception
-   */
-  public function iSubmittedAProgramToTheGamejam(): void
-  {
-    if (null == $this->game_jam)
-    {
-      $this->game_jam = $this->insertDefaultGameJam([
-        'formurl' => 'https://localhost/url/to/form',
-      ]);
-    }
-    if (null === $this->my_program)
-    {
-      $this->my_program = $this->insertProject([
-        'name' => 'My Program',
-        'gamejam' => $this->game_jam,
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-  }
-
-  /**
-   * @Given /^I filled out the google form$/
-   */
-  public function iFilledOutTheGoogleForm(): void
-  {
-    $project = $this->getProgramManager()->find('1');
-    $this->my_program = $project;
-    $this->my_program->setAcceptedForGameJam(true);
-    $this->getManager()->persist($this->my_program);
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Given /^There is no ongoing game jam$/
-   */
-  public function thereIsNoOngoingGameJam(): void
-  {
-  }
-
-  /**
    * @Then /^I do not see a form to edit my profile$/
    *
    * @throws ExpectationException
@@ -2704,18 +2770,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^There is an ongoing game jam without flavor $/
-   *
-   * @throws Exception
-   */
-  public function thereIsAnOngoingGameJamWithoutFlavor(): void
-  {
-    $this->game_jam = $this->insertDefaultGameJam([
-      'flavor' => 'no flavor',
-    ]);
-  }
-
-  /**
    * @Given /^I am not logged in$/
    */
   public function iAmNotLoggedIn(): void
@@ -2728,49 +2782,10 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then The game is not yet accepted
-   */
-  public function theGameIsNotYetAccepted(): void
-  {
-    $program = $this->getProgramManager()->find('1');
-    Assert::assertFalse($program->isAcceptedForGameJam());
-  }
-
-  /**
-   * @Then My game should be accepted
-   */
-  public function myGameShouldBeAccepted(): void
-  {
-    $program = $this->getProgramManager()->find('1');
-    Assert::assertTrue($program->isAcceptedForGameJam());
-  }
-
-  /**
-   * @Then My game should still be accepted
-   */
-  public function myGameShouldStillBeAccepted(): void
-  {
-    $program = $this->getProgramManager()->find('1');
-    Assert::assertTrue($program->isAcceptedForGameJam());
-  }
-
-  /**
    * @Given I did not fill out the google form
    */
   public function iDidNotFillOutTheGoogleForm(): void
   {
-  }
-
-  /**
-   * @Given The form url of the current jam is
-   *
-   * @throws Exception
-   */
-  public function theFormUrlOfTheCurrentJamIs(PyStringNode $string): void
-  {
-    $this->insertDefaultGameJam([
-      'formurl' => $string->getRaw(),
-    ]);
   }
 
   /**
@@ -2789,67 +2804,13 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given There are following gamejam programs:
-   *
-   * @throws Exception
+   * @Then :count copies of this program will be stored on the server
    */
-  public function thereAreFollowingGamejamPrograms(TableNode $table): void
-  {
-    $programs = $table->getHash();
-    foreach ($programs as $program)
-    {
-      @$gamejam = $program['GameJam'];
-      if (null == $gamejam)
-      {
-        $gamejam = $this->game_jam;
-      }
-      else
-      {
-        $gamejam = $this->getSymfonyService(GameJamRepository::class)->findOneByName($gamejam);
-      }
-      @$config = [
-        'name' => $program['Name'],
-        'gamejam' => ('yes' == $program['Submitted']) ? $gamejam : null,
-        'accepted' => 'yes' == $program['Accepted'],
-      ];
-      $this->insertProject($config);
-    }
-  }
-
-  /**
-   * @Given There are following gamejams:
-   *
-   * @throws Exception
-   */
-  public function thereAreFollowingGamejams(TableNode $table): void
-  {
-    $jams = $table->getHash();
-    foreach ($jams as $jam)
-    {
-      $config = ['name' => $jam['Name']];
-      $start = $jam['Starts in'];
-      if (null != $start)
-      {
-        $config['start'] = $this->getDateFromNow((int) $start);
-      }
-      $end = $jam['Ends in'];
-      if (null != $end)
-      {
-        $config['end'] = $this->getDateFromNow((int) $end);
-      }
-      $this->insertDefaultGameJam($config);
-      $this->insertProject($config);
-    }
-  }
-
-  /**
-   * @Then A copy of this program will be stored on the server
-   */
-  public function aCopyOfThisProgramWillBeStoredOnTheServer(): void
+  public function aCopyOfThisProgramWillBeStoredOnTheServer(int $count): void
   {
     $dir = $this->getSymfonyParameter('catrobat.snapshot.dir');
     $finder = new Finder();
-    Assert::assertEquals(1, $finder->files()->in($dir)->count(), 'Snapshot was not stored!');
+    Assert::assertEquals($count, $finder->files()->in($dir)->count(), 'Invalid number of snapshots');
   }
 
   /**
@@ -2858,17 +2819,6 @@ class CatrowebBrowserContext extends BrowserContext
   public function iVisitMyProfile(): void
   {
     $this->visit('/app/user');
-  }
-
-  /**
-   * @Given /^I have a limited account$/
-   */
-  public function iHaveALimitedAccount(): void
-  {
-    $user = $this->getUserDataFixtures()->getCurrentUser();
-    $user->setLimited(true);
-    $this->getManager()->persist($user);
-    $this->getManager()->flush();
   }
 
   /**
@@ -2903,8 +2853,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeTheFeaturedTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
       $this->assertSession()->pageTextContains($user_stat['Program']);
       $this->assertSession()->pageTextContains($user_stat['Url']);
@@ -2981,8 +2930,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeTheUserTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat)
-    {
+    foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['username']);
       $this->assertSession()->pageTextContains($user_stat['email']);
       $this->assertSession()->pageTextContains($user_stat['groups']);
@@ -3017,104 +2965,6 @@ class CatrowebBrowserContext extends BrowserContext
     // api-deprecated
   }
 
-  private function approveGoogleAccess(): void
-  {
-    echo 'Google Approve Access form appeared';
-    $page = $this->getSession()->getPage();
-    $button = $page->findById('submit_approve_access');
-    Assert::assertTrue(null != $button);
-    $button->press();
-    $this->getSession()->switchToWindow(null);
-  }
-
-  /**
-   * @param mixed $mail
-   * @param mixed $password
-   *
-   * @throws ElementNotFoundException
-   */
-  private function signInWithGoogleEMailAndPassword($mail, $password): void
-  {
-    echo 'Google login form with E-Mail and Password appeared
-';
-    $page = $this->getSession()->getPage();
-
-    $page->fillField('Email', $mail);
-    $page->fillField('Passwd', $password);
-
-    $button = $page->findById('signIn');
-    Assert::assertTrue(null != $button);
-    $button->press();
-    $this->approveGoogleAccess();
-  }
-
-  /**
-   * @param mixed $mail
-   * @param mixed $password
-   *
-   * @throws ElementNotFoundException
-   */
-  private function signInWithGoogleEMail($mail, $password): void
-  {
-    echo 'Google Signin with E-Mail form appeared
-';
-    $page = $this->getSession()->getPage();
-
-    $page->fillField('Email', $mail);
-
-    $button = $page->findById('next');
-    Assert::assertTrue(null != $button);
-    $button->press();
-    if ($page->find('css', '#gaia_firstform') &&
-      $page->find('css', '#Email-hidden') &&
-      $page->find('css', '#Passwd')
-    ) {
-      $this->signInWithGooglePassword($password);
-    }
-  }
-
-  /**
-   * @param mixed $password
-   *
-   * @throws ElementNotFoundException
-   */
-  private function signInWithGooglePassword($password): void
-  {
-    echo 'Google Signin with Password form appeared
-';
-    $page = $this->getSession()->getPage();
-
-    $page->fillField('Passwd', $password);
-
-    $button = $page->findById('signIn');
-    Assert::assertTrue(null != $button);
-    $button->press();
-    if ($page->find('css', '#approval_container') &&
-      $page->find('css', '#submit_approve_access')
-    ) {
-      $this->approveGoogleAccess();
-    }
-  }
-
-  private function setGooglePlusFakeData(): void
-  {
-    //simulate Google+ login by faking Javascript code and server responses from FakeOAuthService
-    $session = $this->getSession();
-    $session->wait(2_000, '(0 === jQuery.active)');
-    $session->evaluateScript("$('#btn-gplus-testhook').removeClass('hidden');");
-    $session->evaluateScript("$('#id_oauth').val('105155320106786463089');");
-    $session->evaluateScript("$('#email_oauth').val('pocketcodetester@gmail.com');");
-    $session->evaluateScript("$('#locale_oauth').val('de');");
-  }
-
-  private function clickGooglePlusFakeButton(): void
-  {
-    $page = $this->getSession()->getPage();
-    $button = $page->findButton('btn-gplus-testhook');
-    Assert::assertNotNull($button, 'button not found');
-    $button->press();
-  }
-
   /**
    * @param mixed $path
    * @param mixed $filename
@@ -3124,8 +2974,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $full_filename = $path.'/'.$filename;
     $dirname = dirname($full_filename);
-    if (!is_dir($dirname))
-    {
+    if (!is_dir($dirname)) {
       mkdir($dirname, 0755, true);
     }
     $file_path = fopen($full_filename, 'w'); // open in write mode.
@@ -3142,13 +2991,10 @@ class CatrowebBrowserContext extends BrowserContext
   private function getDateFromNow($days): DateTime
   {
     $date = TimeUtils::getDateTime();
-    if ($days < 0)
-    {
+    if ($days < 0) {
       $days = abs($days);
       $date->sub(new DateInterval('P'.$days.'D'));
-    }
-    else
-    {
+    } else {
       $date->add(new DateInterval('P'.$days.'D'));
     }
 
@@ -3170,15 +3016,12 @@ class CatrowebBrowserContext extends BrowserContext
   ;
 
     //click yes or no option
-    if ('yes' == $option)
-    {
+    if ('yes' == $option) {
       $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click()
     ;
-    }
-    else
-    {
+    } else {
       $page
         ->find('css', 'select.form-control > option:nth-child(1)')
         ->click()

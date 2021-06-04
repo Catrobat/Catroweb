@@ -10,6 +10,8 @@ Feature: Admin reported users
       | name     | password | token      | email               | id |
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
       | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
+      | Angel    | 123456   | eeeeeeeeee | dev3@pocketcode.org |  3 |
+
     And there are programs:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
       | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
@@ -39,6 +41,7 @@ Feature: Admin reported users
       | 5                  | 0                  | Superman | dev1@pocketcode.org |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     And I should not see "Adminius"
+    And I should not see "Angel"
 
   Scenario: List reported users sorted by reported programs
     Given I log in as "Adminius" with the password "123456"
@@ -49,3 +52,27 @@ Feature: Admin reported users
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     And I should not see "Adminius"
     And I should not see "Superman"
+    
+    Scenario: Show reported Programs by user
+      Given I log in as "Adminius" with the password "123456"
+      And I am on "/admin/reported_users/list"
+      And I wait for the page to be loaded
+      Then I should see the reported table:
+        | #Reported Comments | #Reported Programs | Username | Email               |
+        | 5                  | 0                  | Superman | dev1@pocketcode.org |
+        | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
+      Then I click on xpath "/body/div/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[3]/div/a[2]"
+      And I wait for the page to be loaded
+      Then I should be on "/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D=1"
+
+  Scenario: Show reported Programs by user
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/reported_users/list"
+    And I wait for the page to be loaded
+    Then I should see the reported table:
+      | #Reported Comments | #Reported Programs | Username | Email               |
+      | 5                  | 0                  | Superman | dev1@pocketcode.org |
+      | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
+    Then I click on xpath "/body/div/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[3]/div/a[1]"
+    And I wait for the page to be loaded
+    Then I should be on "/admin/report/list?filter%5Buser%5D%5Bvalue%5D=1"

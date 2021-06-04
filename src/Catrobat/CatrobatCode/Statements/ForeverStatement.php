@@ -9,11 +9,11 @@ class ForeverStatement extends Statement
   /**
    * @var string
    */
-  const BEGIN_STRING = 'forever';
+  public const BEGIN_STRING = 'forever';
   /**
    * @var string
    */
-  const END_STRING = '<br/>';
+  public const END_STRING = '<br/>';
 
   /**
    * ForeverStatement constructor.

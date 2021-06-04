@@ -1,5 +1,5 @@
 @import "variables";
-@import 'theme_settings';
+@import "theme_settings";
 
 .catro-icon-button
 {
@@ -11,6 +11,18 @@
   }
 }
 
+.catro-round-icon-button
+{
+  color: $white;
+  cursor: pointer;
+  background-color: $primary;
+  border-radius: 50%;
+  &:hover
+  {
+    background-color: darken($primary, 10);
+  }
+}
+
 .load-ajax-icon
 {
   display: none;
@@ -19,67 +31,62 @@
 
 .program-small-icon
 {
-  font-size: 1.2em;
-  margin-right: 0.3em;
-  margin-top: -0.6em;
   padding-top: 0.6em;
+  margin-top: -0.6em;
+  margin-right: 0.3em;
+  font-size: 1.2em;
 }
 
 .program-round-icon-container
 {
-  background-color: $primary;
-  text-align: center;
+  position: absolute;
   width: 2.5em;
   height: 2.5em;
+  text-align: center;
+  background-color: $primary;
   border-radius: 50%;
-  position: absolute;
 }
 
 .program-round-icon
 {
   margin-top: 0.5em;
-  color: $white;
   font-size: 1.2em;
-}
-
-.remix-close-icon
-{
-  font-size: 3em;
+  color: $primary;
 }
 
 .like-round-icon-container
 {
-  background-color: $primary;
-  text-align: center;
+  display: inline-block;
   width: 3em;
   height: 3em;
+  text-align: center;
+  background-color: $primary;
   border-radius: 50%;
-  display: inline-block;
 }
 
 .like-round-icon
 {
   margin-top: 0.37em;
-  color: $white;
   font-size: 1.7em;
+  color: $white;
 }
 
 .like-round-icon-heart
 {
   margin-top: 0.45em;
-  color: $white;
   font-size: 1.7em;
+  color: $white;
 }
 
 .like-icon
 {
+  margin-top: -0.25em;
   font-size: 3.2em;
   vertical-align: middle;
-  margin-top: -0.25em;
 }
 
 #help-button {
-  cursor:pointer
+  cursor: pointer;
 }
 
 .text-icon-aligned {
@@ -90,3 +97,11 @@
 .trailing-icon {
   margin-left: auto;
 }
+.material-icons.md-30 { font-size: 30px; }
+.material-icons.md-28 { font-size: 28px; }
+.material-icons.md-26 { font-size: 26px; }
+.material-icons.md-18 { font-size: 18px; }
+
+.material-icons.md-24 { font-size: 24px; }
+
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }

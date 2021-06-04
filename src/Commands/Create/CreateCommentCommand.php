@@ -58,27 +58,26 @@ class CreateCommentCommand extends Command
     $username = $input->getArgument('user');
     $program_name = $input->getArgument('program_name');
     $message = $input->getArgument('message');
-    $reported = 'true' === $input->getArgument('reported');
+    $reported = false;
+    if (intval($input->getArgument('reported')) >= 1) {
+      $reported = true;
+    }
 
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
 
     $program = $this->program_manager->findOneByName($program_name);
 
-    if (null === $user || null === $program)
-    {
+    if (null === $user || null === $program) {
       return 1;
     }
 
-    try
-    {
+    try {
       $this->postComment($user, $program, $message, $reported);
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       return 2;
     }
-    $output->writeln('Commenting on '.$program->getName().' with user '.$user->getUsername());
+    $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
 
     return 0;
   }
@@ -94,20 +93,16 @@ class CreateCommentCommand extends Command
     $temp_comment->setIsReported($reported);
 
     $this->em->persist($temp_comment);
-
-    $notification = new CommentNotification($user, $temp_comment);
+    $notification = new CommentNotification($program->getUser(), $temp_comment);
     $notification->setComment($temp_comment);
     $this->notification_service->addNotification($notification);
 
     $temp_comment->setNotification($notification);
 
     $this->em->persist($temp_comment);
-    try
-    {
+    try {
       $notification->setSeen(boolval(random_int(0, 2)));
-    }
-    catch (Exception $e)
-    {
+    } catch (Exception $e) {
       $notification->setSeen(false);
     }
     $this->em->persist($notification);
