@@ -119,45 +119,45 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
+  tooLongDescription: 項目描述太長！
+  rudeWordsInDescription: 你不能在描述中使用粗魯的話！
   tooLongCredits: The project credits are too long!
   rudeWordsInCredits: You can't use rude words in your credits!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    viewed: 最受關注
+    downloaded: 下載次數最多
+  random: 隨機項目
+  related: 相關項目
+  downloads: '%downloads% 下載'
+  sample: 示例項目
+  views: '%views% 次瀏覽'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "對該項目做出反應的人"
     all: "全部"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted Projects
   uploaded: Uploaded Projects
   reportAsInappropriate: 不當舉報
-  reportProgram: Report project
+  reportProgram: 報告項目
   languageVersion: 'Catrobat Language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportDialogHeader: 為什麼要舉報這個項目？
+  reportDialogReason: 輸入原因
+  reportRadioButtonInappropriate: 不合適
+  reportRadioButtonCopyright: 侵犯版權
+  reportRadioButtonSpam: 這是垃圾郵件
+  reportRadioButtonDislike: 我不喜歡
+  reportOwnProgram: 您不能標記自己的項目。
+  reportAlready: 您已經標記了此項目。
+  reportDone: 你舉報了這個項目！
   updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: 請將您的應用更新到最新版本，以便能夠下載此項目。
   btnClosePopup: 好的
-  checkout_this_program: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_program: 簽出這個 Catrobat 項目
+  show_more: 展示更多
   comments: 註釋
-  send: Send
+  send: 發送
   delete: 刪除
   report: 報告
   report_popup: The comment was successfully reported.
@@ -680,7 +680,7 @@ community: 'Catrobat社群'
 back_to_app: 'Exit community'
 category:
   recent: 最新項目
-  random: Random projects
+  random: 隨機項目
   most_viewed: Most viewed
   most_downloaded: Most downloaded
   example: Example
