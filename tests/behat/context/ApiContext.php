@@ -32,6 +32,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+use Symfony\Component\Intl\Locales;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -1844,6 +1845,71 @@ class ApiContext implements KernelAwareContext
         Assert::assertEquals($this->checkMediaFileFieldsValue($program, $key), true);
       }
     }
+  }
+
+  /**
+   * @Then /^the response should have language list structure$/
+   */
+  public function responseShouldHaveLanguageListStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_languages = json_decode($response->getContent(), true);
+
+    $all_locales = array_filter(Locales::getNames(), function ($key) {
+      return 2 == strlen($key) || 5 == strlen($key);
+    }, ARRAY_FILTER_USE_KEY);
+    $all_locales_count = count($all_locales);
+
+    Assert::assertEquals($all_locales_count, count($returned_languages),
+      'Number of languages should be '.$all_locales_count);
+
+    foreach ($returned_languages as $language_code => $display_text) {
+      Assert::assertEquals('string', gettype($language_code));
+      Assert::assertTrue(2 == strlen($language_code) || 5 == strlen($language_code));
+      Assert::assertEquals('string', gettype($display_text));
+    }
+  }
+
+  /**
+   * @Then /^the response should contain the following languages:$/
+   */
+  public function responseShouldContainTheFollowingLanguages(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_languages = json_decode($response->getContent(), true);
+
+    foreach ($table as $row) {
+      Assert::assertArrayHasKey($row['Language Code'], $returned_languages);
+      Assert::assertEquals($row['Display Name'], $returned_languages[$row['Language Code']]);
+    }
+  }
+
+  /**
+   * @Then /^I set request language to "([^"]*)"$/
+   */
+  public function iSetRequestLanguageTo(string $language): void
+  {
+    switch ($language) {
+      case 'English':
+        $this->iSetCookie('hl', 'en');
+        break;
+      case 'Deutsch':
+        $this->iSetCookie('hl', 'de_DE');
+        break;
+      case 'French':
+        $this->iSetCookie('hl', 'fr_FR');
+        break;
+      default:
+        Assert::assertTrue(false);
+    }
+  }
+
+  /**
+   * @Then /^I set cookie "([^"]*)" to "([^"]*)"$/
+   */
+  public function iSetCookie(string $key, string $value): void
+  {
+    $this->getKernelBrowser()->getCookieJar()->set(new Cookie($key, $value));
   }
 
   /**
