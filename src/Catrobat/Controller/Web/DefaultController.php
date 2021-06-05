@@ -62,6 +62,14 @@ class DefaultController extends AbstractController
   }
 
   /**
+   * @Route("/help", name="catrobat_web_help", methods={"GET"})
+   */
+  public function helpAction(): Response
+  {
+    return $this->redirect('https://wiki.catrobat.org/bin/view/Documentation/');
+  }
+
+  /**
    * @Route("/termsOfUse", name="termsOfUse", methods={"GET"})
    */
   public function termsOfUseAction(): Response

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../../../public/bootstrap/scss/functions";
 @import "../base/variables";
 @import "../../../public/bootstrap/scss/variables";
@@ -32,15 +34,15 @@ $carousel-indicator-margin: 0.2em;
   box-shadow: inset 1px 1px 1px 1px rgba(0, 0, 0, 0.5);
 
   @media screen and (max-width: 768px) {
-    width: $carousel-indicator-size / 1.3;
-    height: $carousel-indicator-size / 1.3;
-    margin: $carousel-indicator-margin / 1.3;
+    width: math.div($carousel-indicator-size, 1.3);
+    height: math.div($carousel-indicator-size, 1.3);
+    margin: math.div($carousel-indicator-margin, 1.3);
   }
 
   @media screen and (max-width: 768px) {
-    width: $carousel-indicator-size / 1.6;
-    height: $carousel-indicator-size / 1.6;
-    margin: $carousel-indicator-margin / 1.6;
+    width: math.div($carousel-indicator-size, 1.6);
+    height: math.div($carousel-indicator-size, 1.6);
+    margin: math.div($carousel-indicator-margin, 1.6);
   }
 }
 
@@ -52,11 +54,11 @@ $carousel-indicator-margin: 0.2em;
   font-size: $carousel-control-size;
 
   @include media-breakpoint-between(sm, md) {
-    font-size: $carousel-control-size / 1.3;
+    font-size: math.div($carousel-control-size, 1.3);
   }
 
   @include media-breakpoint-down(sm) {
-    font-size: $carousel-control-size / 1.6;
+    font-size: math.div($carousel-control-size, 1.6);
   }
 }
 
