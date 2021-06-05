@@ -687,6 +687,8 @@ category:
   scratch: Remixes de Scratch
   recommended: Projets recommandés
 achievements:
+  sidebar:
+    title: 'Réalisations'
   overview:
     header: 'Réalisations'
     most_recent_achievement:

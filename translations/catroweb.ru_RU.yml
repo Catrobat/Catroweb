@@ -692,6 +692,8 @@ category:
   scratch: Scratch ремиксы
   recommended: Рекомендуемые проекты
 achievements:
+  sidebar:
+    title: 'Достижения'
   overview:
     header: 'Достижения'
     most_recent_achievement:

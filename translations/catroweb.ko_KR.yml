@@ -683,6 +683,8 @@ category:
   scratch: 스크래치 리믹스
   recommended: 추천 프로그램
 achievements:
+  sidebar:
+    title: '업적'
   overview:
     header: '업적'
     most_recent_achievement:

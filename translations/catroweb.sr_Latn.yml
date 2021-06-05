@@ -690,6 +690,8 @@ category:
   scratch: Scratch remixi
   recommended: Preporučeni projekti
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

@@ -594,14 +594,14 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: '程式塊'
-  eventBricks: 'Event'
+  eventBricks: '事件'
   controlBricks: '控制'
   motionBricks: '動作'
   soundBricks: '音效'
   looksBricks: '外觀'
-  penBricks: 'Pen'
+  penBricks: '鋼筆'
   dataBricks: '變數資料'
-  deviceBricks: 'Device'
+  deviceBricks: '設備'
   specialBricks: 'Special'
 footer:
   language: 語言
@@ -687,6 +687,8 @@ category:
   scratch: 從頭開始混音
   recommended: 推薦項目
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

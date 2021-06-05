@@ -687,6 +687,8 @@ category:
   scratch: ریمیکس دوخت
   recommended: پروژه های توصیه شده
 achievements:
+  sidebar:
+    title: 'دستاوردها'
   overview:
     header: 'دستاوردها'
     most_recent_achievement:

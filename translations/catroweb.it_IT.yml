@@ -690,6 +690,8 @@ category:
   scratch: Remix da Scratch
   recommended: Progetti consigliati
 achievements:
+  sidebar:
+    title: 'Risultati'
   overview:
     header: 'Risultati'
     most_recent_achievement:

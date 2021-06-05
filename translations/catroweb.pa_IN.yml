@@ -687,6 +687,8 @@ category:
   scratch: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
   recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
 achievements:
+  sidebar:
+    title: 'ਪ੍ਰਾਪਤੀਆਂ'
   overview:
     header: 'ਪ੍ਰਾਪਤੀਆਂ'
     most_recent_achievement:
