@@ -687,6 +687,8 @@ category:
   scratch: ريميكسات سكراتش
   recommended: المشاريع الموصى بها
 achievements:
+  sidebar:
+    title: 'إنجازات'
   overview:
     header: 'إنجازات'
     most_recent_achievement:

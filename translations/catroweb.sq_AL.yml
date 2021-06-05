@@ -688,6 +688,8 @@ category:
   scratch: Scratch remixes
   recommended: Programet e rekomanduara
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

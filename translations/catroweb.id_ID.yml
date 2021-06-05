@@ -690,6 +690,8 @@ category:
   scratch: Gores remix
   recommended: Proyek yang direkomendasikan
 achievements:
+  sidebar:
+    title: 'Prestasi'
   overview:
     header: 'Prestasi'
     most_recent_achievement:

@@ -685,6 +685,8 @@ category:
   scratch: Scratch remixleri
   recommended: Önerilen projeler
 achievements:
+  sidebar:
+    title: 'Başarılar'
   overview:
     header: 'Başarılar'
     most_recent_achievement:

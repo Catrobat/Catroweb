@@ -693,6 +693,8 @@ category:
   scratch: স্ক্র্যাচ রিমিক্সস
   recommended: প্রস্তাবিত প্রকল্পগুলি
 achievements:
+  sidebar:
+    title: 'অর্জনসমূহ'
   overview:
     header: 'অর্জনসমূহ'
     most_recent_achievement:

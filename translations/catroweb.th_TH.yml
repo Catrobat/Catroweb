@@ -692,6 +692,8 @@ category:
   scratch: เกาผสม
   recommended: โครงการแนะนำ
 achievements:
+  sidebar:
+    title: 'ความสำเร็จ'
   overview:
     header: 'ความสำเร็จ'
     most_recent_achievement:

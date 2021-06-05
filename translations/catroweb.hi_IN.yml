@@ -687,6 +687,8 @@ category:
   scratch: स्क्रैच रिमिक्स
   recommended: अनुशंसित परियोजनाओं
 achievements:
+  sidebar:
+    title: 'उपलब्धियों'
   overview:
     header: 'उपलब्धियों'
     most_recent_achievement:

@@ -686,6 +686,8 @@ category:
   scratch: Remiksy Scratcha
   recommended: Polecane projekty
 achievements:
+  sidebar:
+    title: 'Osiągnięcia'
   overview:
     header: 'Osiągnięcia'
     most_recent_achievement:

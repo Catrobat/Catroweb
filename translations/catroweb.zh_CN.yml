@@ -692,6 +692,8 @@ category:
   scratch: Scratch 混成
   recommended: 推荐的项目
 achievements:
+  sidebar:
+    title: '成就'
   overview:
     header: '成就'
     most_recent_achievement:

@@ -690,6 +690,8 @@ category:
   scratch: Scratch Remixes
   recommended: Empfohlene Projekte
 achievements:
+  sidebar:
+    title: 'Erreichte Ziele'
   overview:
     header: 'Erreichte Ziele'
     most_recent_achievement:

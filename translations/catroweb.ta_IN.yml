@@ -691,6 +691,8 @@ category:
   scratch: Scratch remixes
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

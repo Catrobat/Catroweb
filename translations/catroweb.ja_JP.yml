@@ -687,6 +687,8 @@ category:
   scratch: スクラッチのリミックス
   recommended: おすすめのプロジェクト
 achievements:
+  sidebar:
+    title: '実績'
   overview:
     header: '実績'
     most_recent_achievement:
