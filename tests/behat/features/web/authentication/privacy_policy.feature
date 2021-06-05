@@ -2,9 +2,9 @@
 Feature: Privacy policy feature
 
   Scenario: Privacy policy url should be visible
-    Given  I am on "/app/privacypolicy/"
+    Given  I am on "/app/privacypolicy"
     And I wait for the page to be loaded
-    Then I should see "Privacy Policy"
+    Then I should be on "https://developer.catrobat.org/privacy_policy"
 
   Scenario: I should be able to decline the privacy policy but will not get an account
     Given I am on "/app/register/"

@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../../../public/bootstrap/scss/functions";
 @import "../base/variables";
 @import "../base/mixins";
@@ -117,9 +119,9 @@ $container-padding: 1rem;
     .projects-container {
       display: flex;
       flex-direction: row;
-      padding: $container-padding #{$grid-gutter-width / 2};
-      margin-right: -$grid-gutter-width / 2;
-      margin-left: -$grid-gutter-width / 2;
+      padding: $container-padding #{math.div($grid-gutter-width, 2)};
+      margin-right: math.div(-$grid-gutter-width, 2);
+      margin-left: math.div(-$grid-gutter-width, 2);
       overflow-y: auto;
     }
 
@@ -143,8 +145,8 @@ $container-padding: 1rem;
     width: 100vw;
     height: calc(100vh - 64px);
     padding-top: 1rem;
-    padding-right: $grid-gutter-width / 2;
-    padding-left: $grid-gutter-width / 2;
+    padding-right: math.div($grid-gutter-width, 2);
+    padding-left: math.div($grid-gutter-width, 2);
     overflow-y: auto;
     background: #fff;
     @media (max-width: 599px) {
@@ -164,7 +166,7 @@ $container-padding: 1rem;
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
-        gap: $grid-gutter-width / 2 $grid-gutter-width / 2;
+        gap: math.div($grid-gutter-width, 2) math.div($grid-gutter-width, 2);
         grid-template-areas: ". .";
       }
     }

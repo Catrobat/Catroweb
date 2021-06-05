@@ -310,12 +310,6 @@ class Program
   protected ?User $approved_by_user;
 
   /**
-   * @ORM\ManyToOne(targetEntity="StarterCategory", inversedBy="programs", cascade={"persist"})
-   * @ORM\JoinColumn(nullable=true)
-   */
-  protected ?StarterCategory $category = null;
-
-  /**
    * @ORM\Column(type="smallint", options={"default": 0})
    */
   protected int $apk_status = 0;
@@ -329,22 +323,6 @@ class Program
    * @ORM\Column(type="integer", options={"default": 0})
    */
   protected int $apk_downloads = 0;
-
-  /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\GameJam", inversedBy="programs")
-   * @ORM\JoinColumn(nullable=true)
-   */
-  protected ?GameJam $gamejam = null;
-
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
-  protected bool $gamejam_submission_accepted = false;
-
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
-  protected ?DateTime $gamejam_submission_date = null;
 
   /**
    * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program", cascade={"remove"})
@@ -706,16 +684,6 @@ class Program
     $this->flavor = $flavor;
   }
 
-  public function getCategory(): ?StarterCategory
-  {
-    return $this->category;
-  }
-
-  public function setCategory(?StarterCategory $category): void
-  {
-    $this->category = $category;
-  }
-
   public function getApkStatus(): int
   {
     return $this->apk_status;
@@ -750,55 +718,6 @@ class Program
   public function getApkDownloads(): int
   {
     return $this->apk_downloads;
-  }
-
-  public function setGamejam(?GameJam $gamejam = null): Program
-  {
-    $this->gamejam = $gamejam;
-
-    return $this;
-  }
-
-  public function getGamejam(): ?GameJam
-  {
-    return $this->gamejam;
-  }
-
-  public function setAcceptedForGameJam(bool $accepted): Program
-  {
-    $this->gamejam_submission_accepted = $accepted;
-
-    return $this;
-  }
-
-  public function setGamejamSubmissionAccepted(bool $accepted): void
-  {
-    $this->gamejam_submission_accepted = $accepted;
-  }
-
-  public function getGamejamSubmissionAccepted(): bool
-  {
-    return $this->gamejam_submission_accepted;
-  }
-
-  public function isAcceptedForGameJam(): bool
-  {
-    return $this->gamejam_submission_accepted;
-  }
-
-  public function setGameJamSubmissionDate(?DateTime $date): void
-  {
-    $this->gamejam_submission_date = $date;
-  }
-
-  public function getGameJamSubmissionDate(): ?DateTime
-  {
-    return $this->gamejam_submission_date;
-  }
-
-  public function getGamejam_submission_accepted(): bool
-  {
-    return $this->gamejam_submission_accepted;
   }
 
   public function getProgramDownloads(): Collection

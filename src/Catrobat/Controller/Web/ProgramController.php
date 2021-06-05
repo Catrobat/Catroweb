@@ -7,7 +7,6 @@ use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
-use App\Catrobat\Services\RudeWordFilter;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Catrobat\Services\StatisticsService;
 use App\Catrobat\StatusCode;
@@ -54,7 +53,6 @@ class ProgramController extends AbstractController
   private CatroNotificationRepository $notification_repo;
   private CatroNotificationService $notification_service;
   private TranslatorInterface $translator;
-  private RudeWordFilter $rude_word_filter;
   private ParameterBagInterface $parameter_bag;
   private EventDispatcherInterface $event_dispatcher;
   private ProgramFileRepository $file_repository;
@@ -68,7 +66,6 @@ class ProgramController extends AbstractController
                               CatroNotificationRepository $notification_repo,
                               CatroNotificationService $notification_service,
                               TranslatorInterface $translator,
-                              RudeWordFilter $rude_word_filter,
                               ParameterBagInterface $parameter_bag,
                               EventDispatcherInterface $event_dispatcher,
                               ProgramFileRepository $file_repository)
@@ -82,7 +79,6 @@ class ProgramController extends AbstractController
     $this->notification_repo = $notification_repo;
     $this->notification_service = $notification_service;
     $this->translator = $translator;
-    $this->rude_word_filter = $rude_word_filter;
     $this->parameter_bag = $parameter_bag;
     $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
@@ -362,12 +358,6 @@ class ProgramController extends AbstractController
           ->trans('programs.tooLongDescription', [], 'catroweb'), ]);
     }
 
-    if ($this->rude_word_filter->containsRudeWord($new_description)) {
-      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_DESCRIPTION,
-        'message' => $this->translator
-          ->trans('programs.rudeWordsInDescription', [], 'catroweb'), ]);
-    }
-
     $user = $this->getUser();
     if (null === $user) {
       return $this->redirectToRoute('login');
@@ -411,12 +401,6 @@ class ProgramController extends AbstractController
       return JsonResponse::create(['statusCode' => StatusCode::NOTES_AND_CREDITS_TOO_LONG,
         'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
-    }
-
-    if ($this->rude_word_filter->containsRudeWord($new_credits)) {
-      return JsonResponse::create(['statusCode' => StatusCode::RUDE_WORD_IN_NOTES_AND_CREDITS,
-        'message' => $this->translator
-          ->trans('programs.rudeWordsInCredits', [], 'catroweb'), ]);
     }
 
     $user = $this->getUser();

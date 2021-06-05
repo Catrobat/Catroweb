@@ -6,66 +6,47 @@
       {% if flavor() == 'embroidery' %}
         <h3>{{ "programs.welcome.subtitle_embroidery"|trans({}, "catroweb") }}</h3>
       {% else %}
-      <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
+        <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
       {% endif %}
     </div>
 
-    <div id="welcome-section-container" class="mb-3">
-      <div class="flex-shrink help-video-container">
-        {{ include('help/youtubeHelpVideo.html.twig') }}
+    <div class="row align-items-center">
+      <div class="col-12 col-lg-6">
+        {{ include('Index/youtubeHelpVideo.html.twig') }}
       </div>
-
-      <div class="flex-no-shrink help-download-container">
-        <a target="_blank" href="https://catrob.at/gp">
-          <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-            <div class="h1 {% if flavor() == 'luna'%} text-white {% endif %}">
-              <img style="width: 60px;" alt="Play Store Logo" src="{{ asset('images/help/google_playstore.png') }}"/>
-              <span class="ml-2"> {{ "googlePlay"|trans({}, "catroweb") }}</span>
-            </div>
-          </div>
+      <div class="col-12 col-lg-6 mt-2">
+        <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/gp">
+          <i class="material-icons align-bottom">get_app</i>
+          {# <img style="width: 1.5rem; height: 1.5rem;" alt="Play Store Logo" src="{{ asset('images/social/google_playstore.png') }}"/> #}
+          <span> {{ "googlePlay"|trans({}, "catroweb") }}</span>
         </a>
-
         {% if flavor() == "luna" %}
-          <a target="_blank" href="https://catrob.at/lcd">
-            <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-              <div class="h1 text-white">
-                <img style="width: 75px; vertical-align:middle;" alt="Discord server" src="{{ asset('images/help/Discord-Logo-White.svg') }}">
-                <span>Discord chat</span>
-              </div>
-            </div>
+          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/lcd">
+            <img style="height: 1.5rem; width: 1.5rem;" alt="Discord server"
+                 src="{{ asset('images/social/Discord-Logo-White.svg') }}">
+            <span>Discord chat</span>
           </a>
         {% elseif flavor() == 'arduino' %}
-          <div class="catro-card help-card primary discord" style="visibility: hidden">
-            {#   show nothing for now   #}
-          </div>
+          {# show nothing for now #}
         {% elseif flavor() == 'embroidery' %}
-          <a target="_blank" href="https://www.instagram.com/code_n_stitch/">
-            <div class="primary help-card d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-              <div class="h1">
-                <img style="width: 60px; vertical-align:middle;" alt="Code&Stitch Instagram" src="{{ asset('images/help/instagram.svg') }}">
-                <span class="ml-2">Instagram</span>
-              </div>
-            </div>
+          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/lcd">
+            <i class="material-icons align-bottom">explore</i>
+            {# <img alt="Code&Stitch Instagram" src="{{ asset('images/social/instagram.svg') }}"> #}
+            <span>Instagram</span>
           </a>
         {% else %}
-          <a target="_blank" href="https://catrob.at/ca">
-            <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-              <div class="h1">
-                <img style="width: 50px;" alt="App Store Logo" src="{{ asset('images/help/apple_logo.png') }}"/>
-                <span class="ml-2"> {{ "iosAppStore"|trans({}, "catroweb") }}</span>
-              </div>
-            </div>
+          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/ca">
+            <i class="material-icons align-bottom">get_app</i>
+            {# <img style="width: 1.5rem; height: 1.5rem;" alt="App Store Logo" src="{{ asset('images/social/apple_logo.png') }}"/> #}
+            <span> {{ "iosAppStore"|trans({}, "catroweb") }}</span>
           </a>
-          <a target="_blank" href="https://catrob.at/HuaweiAppGallery">
-            <div class="help-card primary d-flex align-items-center" style="flex-direction: column; justify-content: center;">
-              <div class="h1 {% if flavor() == 'luna'%} text-white {% endif %}">
-                <img style="width: 50px;" alt="Huawei AppGallery Logo" src="{{ asset('images/help/huawei_logo.png') }}"/>
-                <span class="ml-2"> {{ "huaweiAppGallery"|trans({}, "catroweb") }}</span>
-              </div>
-            </div>
+          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/HuaweiAppGallery">
+            <i class="material-icons align-bottom">get_app</i>
+            {# <img style="width: 1.5rem; height: 1.5rem;" alt="Huawei AppGallery Logo" src="{{ asset('images/social/huawei_logo.png') }}"/> #}
+            <span> {{ "huaweiAppGallery"|trans({}, "catroweb") }}</span>
           </a>
         {% endif %}
       </div>
     </div>
   </div>
-{% endif %}   {#{% if not isWebview() %}#}
+{% endif %}   {# {% if not isWebview() %} #}
