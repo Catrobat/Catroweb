@@ -20,6 +20,7 @@ use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
+use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -56,6 +57,7 @@ class ProgramController extends AbstractController
   private ParameterBagInterface $parameter_bag;
   private EventDispatcherInterface $event_dispatcher;
   private ProgramFileRepository $file_repository;
+  private TranslationDelegate $translation_delegate;
 
   public function __construct(StatisticsService $statistics_service,
                               RemixManager $remix_manager,
@@ -68,7 +70,8 @@ class ProgramController extends AbstractController
                               TranslatorInterface $translator,
                               ParameterBagInterface $parameter_bag,
                               EventDispatcherInterface $event_dispatcher,
-                              ProgramFileRepository $file_repository)
+                              ProgramFileRepository $file_repository,
+                              TranslationDelegate $translation_delegate)
   {
     $this->statistics = $statistics_service;
     $this->remix_manager = $remix_manager;
@@ -82,6 +85,7 @@ class ProgramController extends AbstractController
     $this->parameter_bag = $parameter_bag;
     $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
+    $this->translation_delegate = $translation_delegate;
   }
 
   /**
@@ -541,6 +545,62 @@ class ProgramController extends AbstractController
       'totalLikeCount' => $total_like_count,
       'isAdmin' => $this->isGranted('ROLE_ADMIN'),
     ];
+  }
+
+  /**
+   * @Route("/translate/project/{id}", name="translate_project", methods={"GET"})
+   *
+   * @throws \Doctrine\ORM\NoResultException
+   */
+  public function translateProjectAction(Request $request, string $id) {
+    if (!$request->query->has('target_language')) {
+      return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
+    }
+
+    $project = $this->program_manager->find($id);
+
+    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
+      return new Response('No project found for this id', Response::HTTP_NOT_FOUND);
+    }
+
+    $source_language = $request->query->get('source_language');
+    $target_language = $request->query->get('target_language');
+
+    if ($source_language === $target_language) {
+      return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    $to_translate = [$project->getName(), $project->getDescription(), $project->getCredits()];
+    $translation_result = [];
+
+    foreach ($to_translate as $text) {
+      if (null == $text) {
+        array_push($translation_result, null);
+        continue;
+      }
+
+      try {
+        $translated_text = $this->translation_delegate->translate($text, $source_language, $target_language);
+      } catch(InvalidArgumentException $exception) {
+        return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+      }
+
+      if (null === $translated_text) {
+        return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
+      }
+
+      array_push($translation_result, $translated_text);
+    }
+
+    return new JsonResponse([
+      'id' => $project->getId(),
+      'source_language' => $source_language ?? $translation_result[0]->detected_source_language,
+      'target_language' => $target_language,
+      'translated_title' => $translation_result[0]->translation,
+      'translated_description' => $translation_result[1] ? $translation_result[1]->translation : null,
+      'translated_credit' => $translation_result[2] ? $translation_result[2]->translation : null,
+      'provider' => $translation_result[0]->provider,
+    ]);
   }
 
   /**
