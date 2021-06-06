@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Najbolj ogledano
     downloaded: Največkrat prenešeni
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Manjka geslo.
     short: 'Geslo mora imeti vsaj {{ limit }} znakov.'
-  description:
-    rude: Opis ne sme vsebovati nesramnih besed.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Država manjka.
     invalid: Neveljavna država
@@ -420,8 +414,6 @@ errors:
   unknown: neznana napaka
   token: 'Preverjanje pristnosti naprave ni uspela: neveljaven auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:

@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Πιο προβεβλημμένα
     downloaded: Πιο κατεβασμένα
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Λείπει ο κωδικός πρόσβασης.
     short: 'Ο κωδικός πρόσβασης πρέπει να έχει τουλάχιστον {{ limit }} χαρακτήρες.'
-  description:
-    rude: H pεριγραφή δεν πρέπει να περιέχουνει αγενής λέξεις.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Λείπει η χώρα.
     invalid: Invalid country
@@ -420,8 +414,6 @@ errors:
   unknown: άγνωστο σφάλμα
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:

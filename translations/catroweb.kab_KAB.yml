@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: Aglam n usenfaṛ d aɣezfan aṭas!
-  rudeWordsInDescription: Ur tezmireḍ ara ad tesqedceḍ awalen icemten deg uglam-inek!
   tooLongCredits: The project notes and credits are too long!
-  rudeWordsInCredits: You can't use rude words in your notes and credits!
   most:
     viewed: Ayen yettuwalan ugar
     downloaded: Most downloaded
@@ -392,10 +390,6 @@ errors:
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
-  description:
-    rude: Description must not contain rude wordes.
-  credit:
-    rude: Notes and credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country
@@ -420,8 +414,6 @@ errors:
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:

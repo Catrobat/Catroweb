@@ -120,9 +120,7 @@ programs:
     Да, удалить!
     Отмена
   tooLongDescription: Описание проекта слишком длинное!
-  rudeWordsInDescription: Вы не можете использовать грубые слова в описании!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: Вы не можете использовать запрещенные слова в вашем описании!
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
@@ -398,10 +396,6 @@ errors:
   password:
     blank: Введите пароль.
     short: 'Ваш пароль должен содержать как минимум {{ limit }} символов.'
-  description:
-    rude: Описание не должно содержать грубых слов.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Введите страну.
     invalid: Название страны введено неправильно
@@ -426,8 +420,6 @@ errors:
   unknown: Неизвестная ошибка
   token: 'Аутентификация устройства провалилась: недействительный токен!'
   uploadTokenAuthFailed: 'Ошибка авторизации токена.'
-  programname:
-    rude: Имя программы не должно содержать нецензурных слов.
   program:
     invalid: Неверный проект.
   languageversion:

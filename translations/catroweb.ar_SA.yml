@@ -120,9 +120,7 @@ programs:
     نعم، احذفها!
     الغاء
   tooLongDescription: وصف المشروع طويل جداً!
-  rudeWordsInDescription: لا يمكنك استخدام كلمات خبيثة في الوصف الخاص بك!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
@@ -392,10 +390,6 @@ errors:
   password:
     blank: كلمة المرور غير موجودة.
     short: 'يجب أن تكون كلمة المرور على الأقل{{ limit }} حروف.'
-  description:
-    rude: لا يجب أن يتضمن الوصف كلمات وقحة.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: اسم الدولة غير موجود.
     invalid: اسم الدولة غير صحيح
@@ -420,8 +414,6 @@ errors:
   unknown: خطأ غير معروف
   token: 'لقد فشل التحقق من الجهاز : رمز مميز غير صالح!'
   uploadTokenAuthFailed: 'فشل تحميل مصادقة الرمز المميز.'
-  programname:
-    rude: اسم المشروع يجب أن لا يحتوي على كلمات خبيثة.
   program:
     invalid: مشروع غير صالح.
   languageversion:

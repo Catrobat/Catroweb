@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Xem nhiều nhất
     downloaded: Tải về nhiều nhất
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Thiếu mật khẩu.
     short: 'Mật khẩu của bạn phải có ít nhất {{ limit }} ký tự.'
-  description:
-    rude: Mô tả không chứa các từ ngữ thô lỗ.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Thiếu tên đất nước.
     invalid: Quốc gia không hợp lệ
@@ -420,8 +414,6 @@ errors:
   unknown: lỗi không xác định
   token: 'Xác thực thiết bị thất bại: auth mã thông báo không hợp lệ!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:

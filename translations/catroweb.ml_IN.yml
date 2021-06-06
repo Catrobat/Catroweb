@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -394,10 +392,6 @@ errors:
   password:
     blank: The password is missing.
     short: 'Your password must have at least {{ limit }} characters.'
-  description:
-    rude: Description must not contain rude wordes.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: The country is missing.
     invalid: Invalid country
@@ -422,8 +416,6 @@ errors:
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Programname must not contain rude wordes.
   program:
     invalid: Invalid program.
   languageversion:

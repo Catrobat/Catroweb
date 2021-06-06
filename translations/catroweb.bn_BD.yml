@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: প্রকল্পের বিবরণটি অনেক দীর্ঘ!
-  rudeWordsInDescription: আপনি আপনার বিবরণে অভদ্র শব্দ ব্যবহার করতে পারবেন না!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: সর্বোচ্চ  পরিদর্শন
     downloaded: সর্বোচ্চ ডাউনলোডকৃত
@@ -398,10 +396,6 @@ errors:
   password:
     blank: পাসওয়ার্ড অনুপস্থিত।
     short: 'আপনার পাসওয়ার্ডে অন্তত {{ limit }} হরফ থাকতে হবে।'
-  description:
-    rude: বিবরণে অভদ্র শব্দ থাকতে পারবে না।
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: দেশটি অনুপস্থিত।
     invalid: অবৈধ দেশ
@@ -426,8 +420,6 @@ errors:
   unknown: অজানা ভুল
   token: 'ডিভাইসের প্রমাণীকরণ ব্যর্থ হয়েছে: অবৈধ প্রমাণীকরণ-টোকেন!'
   uploadTokenAuthFailed: 'প্রমাণীকরণ টোকেন আপলোড ব্যর্থ হয়েছে।'
-  programname:
-    rude: প্রকল্পের নামটিতে অবশ্যই অসভ্য শব্দ থাকতে হবে না।
   program:
     invalid: অবৈধ প্রকল্প।
   languageversion:

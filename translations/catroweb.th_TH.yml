@@ -122,9 +122,7 @@ programs:
     ใช่ลบทิ้ง!
     ยกเลิก
   tooLongDescription: คำอธิบายโครงการยาวเกินไป!
-  rudeWordsInDescription: คุณไม่สามารถใช้คำหยาบในคำอธิบายของคุณ!
   tooLongCredits: เครดิตโครงการยาวเกินไป!
-  rudeWordsInCredits: คุณไม่สามารถใช้คำหยาบในเครดิตของคุณ!
   most:
     viewed: เข้าดูมากที่สุด
     downloaded: ดาวน์โหลดมากที่สุด
@@ -398,10 +396,6 @@ errors:
   password:
     blank: รหัสผ่านหายไป
     short: 'รหัสผ่านต้องมีอย่างน้อย {{ limit }} อักขระ'
-  description:
-    rude: คำอธิบายต้องไม่ประกอบด้วยคำหยาบคาย
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: ประเทศหายไป
     invalid: ประเทศไม่ถูกต้อง
@@ -426,8 +420,6 @@ errors:
   unknown: ข้อผิดพลาดที่ไม่ทราบสาเหตุ
   token: 'การรับรองความถูกต้องของอุปกรณ์ล้มเหลว: ตรวจสอบอุปกรณ์ไม่ถูกต้อง'
   uploadTokenAuthFailed: 'การตรวจสอบสิทธิ์การอัปโหลดโทเค็นล้มเหลว'
-  programname:
-    rude: ชื่อโครงการต้องไม่มีคำหยาบ
   program:
     invalid: โครงการไม่ถูกต้อง
   languageversion:

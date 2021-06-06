@@ -120,9 +120,7 @@ programs:
     Ja, löschen!
     Abbrechen
   tooLongDescription: Die Projektbeschreibung ist zu lang!
-  rudeWordsInDescription: Du kannst in deiner Beschreibung keine unhöflichen Wörter verwenden!
   tooLongCredits: Die Anerkennung ist zu lang!
-  rudeWordsInCredits: Du kannst keine unpassenden Wörter in deiner Anerkennung verwenden!
   most:
     viewed: Meist gesehen
     downloaded: Am meisten heruntergeladen
@@ -396,10 +394,6 @@ errors:
   password:
     blank: Du hast kein Passwort angegeben.
     short: 'Dein Passwort muss aus mindestens {{ limit }} Zeichen bestehen.'
-  description:
-    rude: Beschreibung darf keine unhöflichen Wörter enthalten.
-  credit:
-    rude: Credits dürfen keine unhöflichen Worte enthalten.
   country:
     blank: Du hast kein Land angegeben.
     invalid: Ungültiges Land
@@ -424,8 +418,6 @@ errors:
   unknown: Unbekannter Fehler
   token: 'Authentifizierung des Geräts fehlgeschlagen: ungültiger auth-token!'
   uploadTokenAuthFailed: 'Upload-Token-Authentifizierung fehlgeschlagen.'
-  programname:
-    rude: Projektname darf keine unhöflichen Wörter enthalten.
   program:
     invalid: Ungültiges Projekt.
   languageversion:

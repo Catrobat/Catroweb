@@ -120,9 +120,7 @@ programs:
     Sí, eliminarla!
     Cancelar
   tooLongDescription: '¡La descripción del proyecto es demasiado larga!'
-  rudeWordsInDescription: '¡No puedes usar palabras rudas en tu descripción!'
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Más visto
     downloaded: Más descargados
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Falta la contraseña.
     short: 'Su contraseña debe tener al menos {{ limit }} caracteres.'
-  description:
-    rude: La descripción no debe contener palabras groseras.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Falta el país.
     invalid: País no válido
@@ -420,8 +414,6 @@ errors:
   unknown: error desconocido
   token: 'La autenticación del dispositivo ha fallado: auth-token es inválido!'
   uploadTokenAuthFailed: 'Error al cargar la autenticación del token'
-  programname:
-    rude: El nombre del proyecto no debe contener malas palabras.
   program:
     invalid: Proyecto inválido.
   languageversion:
