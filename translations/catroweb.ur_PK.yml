@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -392,10 +390,6 @@ errors:
   password:
     blank: خفیہ کوڈ موجود نہیں۔
     short: 'آپ کا خفیہ کوڈ کم از کم {{ limit }} حروف پر مشتمل ہونا چاہیئے۔'
-  description:
-    rude: تفصیل سخت الفاظ کا حامل نہیں ہونا چاہیے ۔.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: ملک غائب ہے۔
     invalid: غلط ملک
@@ -420,8 +414,6 @@ errors:
   unknown: نامعلوم غلطی
   token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:

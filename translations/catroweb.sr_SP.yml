@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Недостаје лозинка.
     short: 'Лозинка мора да има најманје {{ limit }} знакова.'
-  description:
-    rude: Опис не сме да садржи непристојне речи.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Држава недостаје.
     invalid: Неважећа држава
@@ -420,8 +414,6 @@ errors:
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:
