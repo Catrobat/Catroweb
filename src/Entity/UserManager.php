@@ -124,9 +124,21 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     return $paginator->getNbResults();
   }
 
+  public function getUserIDList(): array
+  {
+    $associative_array = $this->entity_manager->createQueryBuilder()
+      ->select('user.id as id')
+      ->from('App\Entity\User', 'user')
+      ->getQuery()
+      ->execute()
+    ;
+
+    return array_map(function ($value) { return $value['id']; }, $associative_array);
+  }
+
   public function getActiveUserIDList(int $years): array
   {
-    return $this->entity_manager->createQueryBuilder()
+    $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
       ->from('App\Entity\User', 'user')
       ->leftjoin('App\Entity\Program', 'project', Join::WITH, 'user.id = project.user')
@@ -137,6 +149,8 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
       ->getQuery()
       ->execute()
       ;
+
+    return array_map(function ($value) { return $value['id']; }, $result);
   }
 
   protected function userSearchQuery(string $query): BoolQuery
