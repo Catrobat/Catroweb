@@ -23,7 +23,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@symfony/webpack-encore": "^1.4.0",
-    "core-js": "^3.13.1",
+    "core-js": "^3.14.0",
     "eslint": "^7.27.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-plugin-import": "^2.23.4",
