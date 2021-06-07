@@ -62,6 +62,15 @@ class AchievementManager
     return $this->user_achievement_repository->findAll();
   }
 
+  public function findUserAchievementsOfAchievement(string $internal_title): array
+  {
+    $achievement = $this->findAchievementByInternalTitle($internal_title);
+
+    return $this->user_achievement_repository->findBy([
+      'achievement' => $achievement->getId(),
+    ]);
+  }
+
   public function countUserAchievementsOfAchievement(int $achievement_id): int
   {
     return $this->user_achievement_repository->count([
