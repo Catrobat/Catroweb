@@ -1,5 +1,5 @@
 # Use composer image for better caching
-FROM composer:2.0 AS composer-build
+FROM composer:2.1.1 AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
