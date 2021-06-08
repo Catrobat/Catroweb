@@ -119,9 +119,7 @@ programs:
     예, 삭제합니다!
     취소
   tooLongDescription: 설명이 너무 깁니다!
-  rudeWordsInDescription: 설명에 나쁜 표현은 사용할 수 없습니다.
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
@@ -389,10 +387,6 @@ errors:
   password:
     blank: 암호가 없습니다.
     short: '새 암호는 적어도 {{ limit }} 문자 이상이어야 합니다.'
-  description:
-    rude: 설명에 무례한 단어를 포함할 수 없습니다.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: 국가가 없습니다.
     invalid: 잘못 된 국가
@@ -417,8 +411,6 @@ errors:
   unknown: 알 수 없는 오류
   token: '인증 장치 실패: 잘못 된 인증 토큰!'
   uploadTokenAuthFailed: '계정 확인용 토큰 업로드 실패.'
-  programname:
-    rude: 설명에 무례한 단어를 포함할 수 없습니다.
   program:
     invalid: 잘못 된 프로그램입니다.
   languageversion:
@@ -683,6 +675,8 @@ category:
   scratch: 스크래치 리믹스
   recommended: 추천 프로그램
 achievements:
+  sidebar:
+    title: '업적'
   overview:
     header: '업적'
     most_recent_achievement:

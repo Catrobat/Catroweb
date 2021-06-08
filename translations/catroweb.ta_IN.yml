@@ -120,9 +120,7 @@ programs:
     ஆம், அழித்துவிடு!
     ரத்து
   tooLongDescription: திட்ட விளக்கம் மிக நீளமாக உள்ளது!
-  rudeWordsInDescription: உங்கள் விளக்கத்தில் தகாத சொற்களைப் பயன்படுத்த இயலாது!
   tooLongCredits: திட்ட நன் மதிப்ப மிக நீளமாக உள்ளது!
-  rudeWordsInCredits: உங்கள் நன் மதிப்பில் தகாத சொற்களைப் பயன்படுத்த இயலாது!
   most:
     viewed: அதிகமாக பார்க்கபட்டது
     downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
@@ -396,10 +394,6 @@ errors:
   password:
     blank: கடவுச்சொல் காணவில்லை.
     short: 'உங்கள் கடவுச்சொல் குறைந்தது {{ limit }} எழுத்துகள் கொண்டிருக்கவேண்டும்.'
-  description:
-    rude: விளக்கத்தில் தவரான சொற்கள் இருக்கக்கூடாது.
-  credit:
-    rude: நன் மதிப்பில் தவரான சொற்கள் இருக்கக்கூடாது.
   country:
     blank: நாட்டின் விவரம் இல்லை.
     invalid: தவறான நாட்டின் விவரம்
@@ -424,8 +418,6 @@ errors:
   unknown: அறியப்படாத பிழை
   token: 'சாதனத்தின் அங்கீகாரம் தோல்வியுற்றது: தவறான அங்கீகார டோக்கன்!'
   uploadTokenAuthFailed: 'டோக்கன் பதிவேற்ற அங்கீகாரம் தோல்வியுற்றது.'
-  programname:
-    rude: திட்டப்பெயரில் தவரான சொற்கள் இருக்கக்கூடாது.
   program:
     invalid: தவறான திட்டம்.
   languageversion:
@@ -691,6 +683,8 @@ category:
   scratch: Scratch remixes
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

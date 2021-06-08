@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: توضیح پروژه خیلی طولانی است!
-  rudeWordsInDescription: تو نمی توانی از کلمات بی ادبانه در توضیحات خود استفاده کنی!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: پربیننده ترین
     downloaded: بیشترین میزان دانلود شده
@@ -392,10 +390,6 @@ errors:
   password:
     blank: رمز عبور وجود ندارد. 
     short: 'رمز عبور شما باید حداقل {{ limit }} کاراکترها داشته باشد.'
-  description:
-    rude: شرح نباید شامل واژگان بی ادبانه باشد.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: کشور وجود ندارد
     invalid: کشور نامعتبر
@@ -420,8 +414,6 @@ errors:
   unknown: خطای ناشناخته
   token: 'احراز هویت دستگاه شکست خورد: نامعتبر auth-token!'
   uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
-  programname:
-    rude: نام پروژه نباید شامل کلمات بی ادبانه باشد.
   program:
     invalid: پروژه نامعتبر
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: ریمیکس دوخت
   recommended: پروژه های توصیه شده
 achievements:
+  sidebar:
+    title: 'دستاوردها'
   overview:
     header: 'دستاوردها'
     most_recent_achievement:

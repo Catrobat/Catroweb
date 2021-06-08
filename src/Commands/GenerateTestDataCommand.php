@@ -76,9 +76,7 @@ class GenerateTestDataCommand extends Command
       $this->generateProgramWithManualScreenshot('program_with_manual_screenshot');
       $this->generateProgramWithScreenshot('program_with_screenshot');
       // $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
-      $this->generateProgramWithRudeWordInDescription('program_with_rudeword_in_description');
       $this->generateProgramWithTags('program_with_tags');
-      $this->generateProgramWithRudeWordInName('program_with_rudeword_in_name');
       $this->generatePhiroProgram('phiro');
       $this->generateLegoProgram('lego');
 
@@ -172,34 +170,6 @@ class GenerateTestDataCommand extends Command
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     $this->filesystem->rename($this->target_directory.$directory.'/automatic_screenshot.png', $this->target_directory.$directory.'/screenshot.png');
-  }
-
-  /**
-   * @throws Exception
-   */
-  protected function generateProgramWithRudeWordInDescription(string $directory): void
-  {
-    $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
-    $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
-    $properties->header->description = 'FUCK YOU';
-    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
-    if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
-    }
-  }
-
-  /**
-   * @throws Exception
-   */
-  protected function generateProgramWithRudeWordInName(string $directory): void
-  {
-    $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
-    $properties = @simplexml_load_file($this->target_directory.$directory.'/code.xml');
-    $properties->header->programName = 'FUCK YOU';
-    $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
-    if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
-    }
   }
 
   /**

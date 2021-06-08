@@ -22,8 +22,7 @@ Feature: Follow feature on profiles
     And the element ".profile-follows" should not be visible
 
   Scenario: Follow when not logged in should redirect to login
-    Given I am not logged in
-    And I am on "/app/user/1"
+    Given I am on "/app/user/1"
     And I wait for the page to be loaded
     And the element ".profile-follow" should be visible
     And I click ".profile-follow"

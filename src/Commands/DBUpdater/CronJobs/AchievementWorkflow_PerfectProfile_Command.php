@@ -2,6 +2,7 @@
 
 namespace App\Commands\DBUpdater\CronJobs;
 
+use App\Entity\Achievements\Achievement;
 use App\Entity\User;
 use App\Entity\UserManager;
 use App\Manager\AchievementManager;
@@ -45,14 +46,21 @@ class AchievementWorkflow_PerfectProfile_Command extends Command
 
   protected function addPerfectProfileAchievementToEveryUser(OutputInterface $output): void
   {
-    $users = $this->user_manager->findAll();
-    try {
-      /** @var User $user */
-      foreach ($users as $user) {
-        $this->achievement_manager->unlockAchievementPerfectProfile($user);
+    $user_achievements = $this->achievement_manager->findUserAchievementsOfAchievement(Achievement::PERFECT_PROFILE);
+    $excluded_user_id_list = array_map(function ($user_achievement) { return $user_achievement->getUser()->getId(); }, $user_achievements);
+    $user_ID_list = $this->user_manager->getUserIDList();
+    $user_id_list = array_values(array_diff($user_ID_list, $excluded_user_id_list));
+
+    foreach ($user_id_list as $user_id) {
+      /* @var User|null $user */
+      $user = $this->user_manager->find($user_id);
+      if (!is_null($user)) {
+        try {
+          $this->achievement_manager->unlockAchievementPerfectProfile($user);
+        } catch (Exception $exception) {
+          $output->writeln($exception->getMessage());
+        }
       }
-    } catch (Exception $e) {
-      $output->writeln($e->getMessage());
     }
   }
 }

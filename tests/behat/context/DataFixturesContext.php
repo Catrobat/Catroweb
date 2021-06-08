@@ -23,8 +23,6 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\RemixNotification;
-use App\Entity\RudeWord;
-use App\Entity\StarterCategory;
 use App\Entity\Survey;
 use App\Entity\Tag;
 use App\Entity\User;
@@ -411,57 +409,6 @@ class DataFixturesContext implements KernelAwareContext
       $this->insertExampleProject($config, false);
     }
     $this->getManager()->flush();
-  }
-
-  /**
-   * @Given /^there are starter programs:$/
-   * @Given /^there are starter projects:$/
-   *
-   * @throws Exception
-   */
-  public function thereAreStarterPrograms(TableNode $table): void
-  {
-    $em = $this->getManager();
-
-    $starter = new StarterCategory();
-    $starter->setName('Games');
-    $starter->setAlias('games');
-    $starter->setOrder(1);
-
-    $programs = $table->getHash();
-    foreach ($programs as $config) {
-      $program = $this->insertProject($config);
-      $starter->addProgram($program);
-    }
-    $em->persist($starter);
-    $em->flush();
-  }
-
-  /**
-   * @Given /^there are starter programs with name "([^"]*)", alias "([^"]*)" and order (\d+):$/
-   *
-   * @param mixed $category_name
-   * @param mixed $category_alias
-   * @param mixed $order
-   *
-   * @throws Exception
-   */
-  public function thereAreStarterProgramsWithNameAndAliasAndOrder($category_name, $category_alias, $order, TableNode $table): void
-  {
-    $em = $this->getManager();
-
-    $starter = new StarterCategory();
-    $starter->setName($category_name);
-    $starter->setAlias($category_alias);
-    $starter->setOrder($order);
-
-    $programs = $table->getHash();
-    foreach ($programs as $config) {
-      $program = $this->insertProject($config);
-      $starter->addProgram($program);
-    }
-    $em->persist($starter);
-    $em->flush();
   }
 
   /**
@@ -1237,38 +1184,6 @@ class DataFixturesContext implements KernelAwareContext
         case 'default':
           Assert::assertTrue(false);
       }
-    }
-    $em->flush();
-  }
-
-  /**
-   * @Given /^I define the following rude words:$/
-   */
-  public function iDefineTheFollowingRudeWords(TableNode $table): void
-  {
-    $words = $table->getHash();
-    $em = $this->getManager();
-
-    foreach ($words as $word) {
-      $rude_word = new RudeWord();
-      $rude_word->setWord($word['word']);
-      $em->persist($rude_word);
-    }
-    $em->flush();
-  }
-
-  /**
-   * @Given /^there are rude words:$/
-   */
-  public function thereAreRudeWords(TableNode $table): void
-  {
-    $words = $table->getHash();
-    $em = $this->getManager();
-
-    foreach ($words as $word) {
-      $rude_word = new RudeWord();
-      $rude_word->setWord($word['word']);
-      $em->persist($rude_word);
     }
     $em->flush();
   }

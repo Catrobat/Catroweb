@@ -6,11 +6,9 @@ use App\Catrobat\Services\TestEnv\SymfonySupport;
 use App\Utils\TimeUtils;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Element\NodeElement;
-use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
-use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Exception;
@@ -52,21 +50,6 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   public function iStartANewSession(): void
   {
     $this->getSession()->restart();
-  }
-
-  /**
-   * @Then /^I ensure pop ups work$/
-   */
-  public function iEnsurePopUpsWork(): void
-  {
-    try {
-      $this->getSession()->getDriver()->executeScript('window.confirm = function(){return true;}');
-    } catch (UnsupportedDriverActionException | DriverException $e) {
-      Assert::assertTrue(
-        false,
-        "Driver doesn't support JS injection. For Chrome this is needed since it cant deal with pop ups"
-      );
-    }
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -166,7 +149,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    *
    * @param mixed $locator
    */
-  public function atLeastOneElementShouldNotBeVisible($locator): void
+  public function noElementShouldBeVisible($locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $element) {

@@ -105,8 +105,7 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get all programs of a user no matter the flavor (pocketcode)
 
-    Given All programs are from the same user
-    When I get the user's programs with "app/api/projects/userProjects.json"
+    Given I get the user's programs with "app/api/projects/userProjects.json"
     Then I should get following programs:
       | name         |
       | Invaders     |
@@ -120,8 +119,7 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get all programs of a user no matter the flavor (luna)
 
-    Given All programs are from the same user
-    When I get the user's programs with "luna/api/projects/userProjects.json"
+    Given I get the user's programs with "luna/api/projects/userProjects.json"
     Then I should get following programs:
       | name         |
       | Invaders     |

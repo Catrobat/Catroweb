@@ -119,9 +119,7 @@ programs:
     Da, obriši!
     Poništi
   tooLongDescription: Opis projekta je predug!
-  rudeWordsInDescription: Ne možete koristiti nepristojne riječi u opisu!
   tooLongCredits: Zasluge projekta su preduge!
-  rudeWordsInCredits: Ne možete koristiti nepristojne reči u zaslugama!
   most:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
@@ -395,10 +393,6 @@ errors:
   password:
     blank: Lozinka nedostaje.
     short: 'Lozinka mora da ima najmanje {{ limit }} karaktera.'
-  description:
-    rude: Opis ne sme da sadrži nepristojne reči.
-  credit:
-    rude: Zasluga ne sme da sadrži nepristojne reči.
   country:
     blank: Država nije izabrana.
     invalid: Nevažeća država
@@ -423,8 +417,6 @@ errors:
   unknown: nepoznata greška
   token: 'Provjera autentičnosti uređaja nije uspela: neispravan auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Ime projekta ne sme da sadrži nepristojne reči.
   program:
     invalid: Neispravan projekat.
   languageversion:
@@ -690,6 +682,8 @@ category:
   scratch: Scratch remixi
   recommended: Preporučeni projekti
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

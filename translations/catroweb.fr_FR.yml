@@ -120,9 +120,7 @@ programs:
     Oui, supprimez-le !
     Annuler
   tooLongDescription: La description du projet est trop longue !
-  rudeWordsInDescription: Vous ne pouvez pas utiliser de mots grossiers dans votre description !
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Les plus populaires
     downloaded: Les plus téléchargés
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Le mot de passe est manquant.
     short: 'Votre mot de passe doit avoir au moins {{ limit }} caractères.'
-  description:
-    rude: La description ne doit pas contenir de mots grossiers.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: Le pays est absent.
     invalid: Pays non valide
@@ -420,8 +414,6 @@ errors:
   unknown: erreur inconnue
   token: 'Échec de l''authentification de l''appareil : jeton d''authentification invalide !'
   uploadTokenAuthFailed: 'Échec de l''authentification du jeton de téléchargement.'
-  programname:
-    rude: Le nom du projet ne doit pas contenir de mots grossiers.
   program:
     invalid: Projet invalide.
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: Remixes de Scratch
   recommended: Projets recommandés
 achievements:
+  sidebar:
+    title: 'Réalisations'
   overview:
     header: 'Réalisations'
     most_recent_achievement:

@@ -120,9 +120,7 @@ programs:
     はい、削除してください!
     キャンセル
   tooLongDescription: プロジェクトの説明が長すぎます！
-  rudeWordsInDescription: あなたの説明に失礼な言葉は使えません！
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
@@ -392,10 +390,6 @@ errors:
   password:
     blank: パスワードがありません。
     short: 'パスワードは、少なくとも {{ limit }} 文字必要です。'
-  description:
-    rude: 説明に失礼な言葉を含めることはできません。
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: 国は、不足しています。
     invalid: 無効な国
@@ -420,8 +414,6 @@ errors:
   unknown: 不明なエラー
   token: '失敗したデバイス認証： 認証トークンが無効です!'
   uploadTokenAuthFailed: 'トークンのアップロードに失敗しました。'
-  programname:
-    rude: プロジェクト名に失礼な言葉を含めてはいけません。
   program:
     invalid: 無効なプロジェクトです。
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: スクラッチのリミックス
   recommended: おすすめのプロジェクト
 achievements:
+  sidebar:
+    title: '実績'
   overview:
     header: '実績'
     most_recent_achievement:

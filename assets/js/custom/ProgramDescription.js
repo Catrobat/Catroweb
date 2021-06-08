@@ -3,8 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 function ProgramDescription (programId, showMoreButtonText, showLessButtonText,
-  statusCodeOk, statusCodeDescriptionTooLong,
-  statusCodeRudeWordInDescription) {
+  statusCodeOk, statusCodeDescriptionTooLong) {
   // Edit Description
   $(function () {
     const description = $('#description')
@@ -52,8 +51,7 @@ function ProgramDescription (programId, showMoreButtonText, showLessButtonText,
       $.get(url, function (data) {
         if (data.statusCode === statusCodeOk) {
           location.reload()
-        } else if (data.statusCode === statusCodeDescriptionTooLong ||
-          data.statusCode === statusCodeRudeWordInDescription) {
+        } else if (data.statusCode === statusCodeDescriptionTooLong) {
           editDescription.addClass('danger')
           editDescriptionError.show()
           editDescriptionError.text(data.message)

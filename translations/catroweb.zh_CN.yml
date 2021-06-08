@@ -120,9 +120,7 @@ programs:
     是的，删除它！
     取消
   tooLongDescription: 项目描述太长了！
-  rudeWordsInDescription: 您不能在描述中使用粗暴的单词！
   tooLongCredits: 项目致谢过长！
-  rudeWordsInCredits: 您不能在致谢中使用粗暴的词汇！
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
@@ -397,10 +395,6 @@ errors:
   password:
     blank: 密码空缺
     short: '密码必须有至少 {{ limit }} 字符'
-  description:
-    rude: 说明不能包含粗鲁的词。
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: 缺少国别。
     invalid: 无效国家
@@ -425,8 +419,6 @@ errors:
   unknown: 未知错误
   token: '设备验证失败： 无效的验证标记！'
   uploadTokenAuthFailed: '上传令牌认证失败。'
-  programname:
-    rude: 项目名称不能包含粗暴的单词。
   program:
     invalid: 无效的项目。
   languageversion:
@@ -692,6 +684,8 @@ category:
   scratch: Scratch 混成
   recommended: 推荐的项目
 achievements:
+  sidebar:
+    title: '成就'
   overview:
     header: '成就'
     most_recent_achievement:

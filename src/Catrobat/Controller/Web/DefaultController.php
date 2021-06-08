@@ -62,6 +62,14 @@ class DefaultController extends AbstractController
   }
 
   /**
+   * @Route("/help", name="catrobat_web_help", methods={"GET"})
+   */
+  public function helpAction(): Response
+  {
+    return $this->redirect('https://wiki.catrobat.org/bin/view/Documentation/');
+  }
+
+  /**
    * @Route("/termsOfUse", name="termsOfUse", methods={"GET"})
    */
   public function termsOfUseAction(): Response
@@ -72,9 +80,9 @@ class DefaultController extends AbstractController
   /**
    * @Route("/privacypolicy", name="privacypolicy", methods={"GET"})
    */
-  public function privacypolicyAction(): Response
+  public function privacyPolicyAction(): Response
   {
-    return $this->render('PrivacyAndTerms/privacyPolicy.html.twig');
+    return $this->redirect('https://catrob.at/privacypolicy');
   }
 
   /**

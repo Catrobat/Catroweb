@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Cele mai vizualizate
     downloaded: Cele mai descărcate
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Lipsește parola.
     short: 'Your password must have at least {{ limit }} characters.'
-  description:
-    rude: Description must not contain rude wordes.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: 'Autentificarea &#xEE;n board a e&#x219;uat.'
     invalid: Invalid country
@@ -420,8 +414,6 @@ errors:
   unknown: unknown error
   token: 'Autentificarea dispozitivului a e&#x219;uat: auth-token invalid!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: Scratch remixes
   recommended: Recommended projects
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

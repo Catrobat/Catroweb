@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../../../public/bootstrap/scss/functions";
 @import "../base/variables";
 @import "../base/mixins";
@@ -102,8 +104,8 @@
     $like-detail-padding: 0.5rem;
     $like-detail-button-size: 2.4rem;
     $like-detail-triangle-width: 2rem;
-    $like-detail-triangle-height: $like-detail-triangle-width / 1.38;
-    $like-detail-triangle-left: $like-button-size / 2 - $like-detail-left;
+    $like-detail-triangle-height: math.div($like-detail-triangle-width, 1.38);
+    $like-detail-triangle-left: math.div($like-button-size, 2 - $like-detail-left);
     position: absolute;
     top: -$like-detail-button-size - 2 * $like-detail-padding - $like-detail-triangle-height;
     left: $like-detail-left;

@@ -120,9 +120,7 @@ programs:
     Sim, excluir conta!
     Cancelar
   tooLongDescription: A descrição do projeto é muito longa!
-  rudeWordsInDescription: Você não pode usar palavras rudes na sua descrição!
   tooLongCredits: Os créditos do projeto são muito longos!
-  rudeWordsInCredits: Você não pode usar palavras rudes em seus créditos!
   most:
     viewed: Mais vistos
     downloaded: Mais baixados
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Faltando a senha.
     short: 'Sua senha deve conter pelo menos {{ limit }} caracteres.'
-  description:
-    rude: A descrição não pode conter palavras de baixo calão.
-  credit:
-    rude: Os créditos não devem conter palavras de mau gosto.
   country:
     blank: País está faltando.
     invalid: País inválido
@@ -420,8 +414,6 @@ errors:
   unknown: erro desconhecido
   token: 'Autenticação de dispositivo falhou: auth-token inválido!'
   uploadTokenAuthFailed: 'Falha de autenticação do token de upload.'
-  programname:
-    rude: O nome do projeto não pode conter palavras rudes.
   program:
     invalid: Projeto inválido.
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: Remixes do Scratch
   recommended: Projetos recomendados
 achievements:
+  sidebar:
+    title: 'Conquistas'
   overview:
     header: 'Conquistas'
     most_recent_achievement:

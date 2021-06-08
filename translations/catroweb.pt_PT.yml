@@ -120,9 +120,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: The project description is too long!
-  rudeWordsInDescription: You can't use rude words in your description!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: Mais vistos
     downloaded: Mais descarregados
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Faltando palavra-passe.
     short: 'Sua palavra-passe deve conter pelo menos {{ limit }} caracteres.'
-  description:
-    rude: A descrição não pode conter palavras de baixo calão.
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: País faltando.
     invalid: País inválido
@@ -420,8 +414,6 @@ errors:
   unknown: erro desconhecido
   token: 'Autenticação de dispositivo falhou: auth-token inválido!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  programname:
-    rude: Project name must not contain rude wordes.
   program:
     invalid: Invalid project.
   languageversion:
@@ -686,6 +678,8 @@ category:
   scratch: Scratch remixes
   recommended: Recommended projects
 achievements:
+  sidebar:
+    title: 'Achievements'
   overview:
     header: 'Achievements'
     most_recent_achievement:

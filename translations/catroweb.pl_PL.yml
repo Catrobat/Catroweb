@@ -120,9 +120,7 @@ programs:
     Tak, usuń!
     Anuluj
   tooLongDescription: Opis projektu jest za długi!
-  rudeWordsInDescription: Nie można używać brzydkich słów w opisie!
   tooLongCredits: Uwagi i podziękowania są za długie!
-  rudeWordsInCredits: Nie można używać brzydkich słów w uwagach i podziękowaniach!
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
@@ -392,10 +390,6 @@ errors:
   password:
     blank: Brakuje hasła.
     short: 'Hasło musi mieć co najmniej {{ limit }} znaków.'
-  description:
-    rude: Opis nie może zawierać niecenzuralnych zwrotów.
-  credit:
-    rude: Uwagi i podziękowania nie mogą zawierać brzydkich słów.
   country:
     blank: Brakuje kraju.
     invalid: Nieprawidłowy kraj
@@ -420,8 +414,6 @@ errors:
   unknown: nieznany błąd
   token: 'Uwierzytelnienie urządzenia nie powiodło się: nieprawidłowy token uwierzytelniania!'
   uploadTokenAuthFailed: 'Autoryzacja tokena wysyłania nie powiodła się.'
-  programname:
-    rude: Nazwa projektu nie może zawierać brzydkich słów.
   program:
     invalid: Nieprawidłowy projekt.
   languageversion:
@@ -686,6 +678,8 @@ category:
   scratch: Remiksy Scratcha
   recommended: Polecane projekty
 achievements:
+  sidebar:
+    title: 'Osiągnięcia'
   overview:
     header: 'Osiągnięcia'
     most_recent_achievement:

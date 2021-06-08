@@ -19,11 +19,8 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
-use DateInterval;
 use DateTime;
 use DateTimeZone;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use PHPUnit\Framework\Assert;
 use RecursiveDirectoryIterator;
@@ -46,9 +43,9 @@ class CatrowebBrowserContext extends BrowserContext
 
   public const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
-  private bool $use_real_oauth_javascript_code = false;
+  protected bool $use_real_oauth_javascript_code = false;
 
-  private ?Program $my_program;
+  protected ?Program $my_program;
 
   // -------------------------------------------------------------------------------------------------------------------
   //  Initialization
@@ -59,7 +56,6 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function __construct()
   {
-    $this->setOauthServiceParameter('0');
     setlocale(LC_ALL, 'en');
   }
 
@@ -139,15 +135,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given I am logged in
-   */
-  public function iAmLoggedIn(): void
-  {
-    $this->insertUser(['name' => 'Catrobat', 'password' => '123456']);
-    $this->iAmLoggedInAsWithThePassword('', 'Catrobat');
-  }
-
-  /**
    * @When /^I logout$/
    */
   public function iLogout(): void
@@ -162,7 +149,7 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @param mixed $arg1
    */
-  public function iShouldBeLoggedIn($arg1): void
+  public function iShouldBeLogged($arg1): void
   {
     if ('in' === $arg1) {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
@@ -171,30 +158,10 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertElementOnPage('#btn-logout');
     }
     if ('out' == $arg1) {
-      $this->iShouldNotBeLoggedIn();
+      $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
+      $this->assertElementOnPage('#btn-login');
+      $this->assertElementNotOnPage('#btn-logout');
     }
-  }
-
-  /**
-   * @Then /^I should not be logged in$/
-   */
-  public function iShouldNotBeLoggedIn(): void
-  {
-    $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
-    $this->assertElementOnPage('#btn-login');
-    $this->assertElementNotOnPage('#btn-logout');
-  }
-
-  /**
-   * @Then /^I should see the logout button$/
-   */
-  public function iShouldSeeTheLogoutButton(): void
-  {
-    $logout_button = $this->getSession()->getPage()->findById('btn-logout');
-    Assert::assertTrue(
-      null != $logout_button && $logout_button->isVisible(),
-      'The Logout button is not visible!'
-    );
   }
 
   /**
@@ -218,44 +185,9 @@ class CatrowebBrowserContext extends BrowserContext
     $this->iUseTheUserAgent($user_agent);
   }
 
-  /**
-   * @Given /^I use a specific "([^"]*)" themed app$/
-   *
-   * @param mixed $theme
-   */
-  public function iUseASpecificThemedApp($theme): void
-  {
-    $this->iUseTheUserAgentParameterized('0.998', 'PocketCode', '0.9.60',
-      'release', $theme);
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   //  Everything -> ToDo CleanUp
   //--------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * @Then the logos src should be :logo_src
-   *
-   * @param mixed $logo_src
-   */
-  public function theLogosSrcShouldBe($logo_src): void
-  {
-    $image = $this->getSession()->getPage()->findAll('css', '#logo');
-    $img_url = $image[0]->getAttribute('src');
-    Assert::assertNotFalse(strpos($img_url, (string) $logo_src));
-  }
-
-  /**
-   * @Then the logos src should not be :logo_src
-   *
-   * @param mixed $logo_src
-   */
-  public function theLogosSrcShouldNotBe($logo_src): void
-  {
-    $image = $this->getSession()->getPage()->findAll('css', '#logo');
-    $img_url = $image[0]->getAttribute('src');
-    Assert::assertFalse(strpos($img_url, (string) $logo_src));
-  }
 
   /**
    * @Given /^I set the cookie "([^"]+)" to "([^"]*)"$/
@@ -383,62 +315,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see ([^"]*) programs$/
-   *
-   * @param mixed $arg1
-   *
-   * @throws ElementNotFoundException
-   * @throws ExpectationException
-   */
-  public function iShouldSeePrograms($arg1): void
-  {
-    $arg1 = trim($arg1);
-
-    switch ($arg1) {
-      case 'some':
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      case 'no':
-        $this->assertSession()->elementNotExists('css', '.program');
-        break;
-
-      case 'newest':
-        $this->assertSession()->elementExists('css', '#newest');
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      case 'most downloaded':
-        $this->assertSession()->elementExists('css', '#mostDownloaded');
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      case 'most viewed':
-        $this->assertSession()->elementExists('css', '#mostViewed');
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      case 'scratchRemixes':
-        $this->assertSession()->elementExists('css', '#scratchRemixes');
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      case 'random':
-        $this->assertSession()->elementExists('css', '#random');
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      case 'recommended':
-        $this->assertSession()->elementExists('css', '#recommended');
-        $this->assertSession()->elementExists('css', '.program');
-        break;
-
-      default:
-        Assert::assertTrue(false);
-    }
-  }
-
-  /**
    * @Then /^the selected language should be "([^"]*)"$/
    * @Given /^the selected language is "([^"]*)"$/
    *
@@ -492,103 +368,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see a( [^"]*)? help image "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   * @param mixed $arg2
-   *
-   * @throws ExpectationException
-   */
-  public function iShouldSeeAHelpImage($arg1, $arg2): void
-  {
-    $arg1 = trim($arg1);
-
-    $this->assertSession()->responseContains('help-desktop');
-    $this->assertSession()->responseContains('help-mobile');
-
-    if ('big' === $arg1) {
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
-      Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    } elseif ('small' === $arg1) {
-      Assert::assertFalse($this->getSession()->getPage()->find('css', '.help-desktop')->isVisible());
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-mobile')->isVisible());
-    } elseif ('' === $arg1) {
-      Assert::assertTrue($this->getSession()->getPage()->find('css', '.help-split')->isVisible());
-    } else {
-      Assert::assertTrue(false);
-    }
-
-    $img = null;
-    $path = null;
-
-    switch ($arg2) {
-      case 'Hour of Code':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('hour-of-code-desktop');
-          $path = '/images/help/hour_of_code.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('hour-of-code-mobile');
-          $path = '/images/help/hour_of_code_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Step By Step':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('step-by-step-desktop');
-          $path = '/images/help/step_by_step.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('step-by-step-mobile');
-          $path = '/images/help/step_by_step_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Tutorials':
-        $img = $this->getSession()->getPage()->findById('tutorials');
-        $path = '/images/help/tutorials.png';
-        break;
-      case 'Starters':
-        $img = $this->getSession()->getPage()->findById('starters');
-        $path = '/images/help/starters.png';
-        break;
-      case 'Education Platform':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('edu-desktop');
-          $path = '/images/help/edu_site.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('edu-mobile');
-          $path = '/images/help/edu_site_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      case 'Discussion':
-        if ('big' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('discuss-desktop');
-          $path = '/images/help/discuss.png';
-        } elseif ('small' === $arg1) {
-          $img = $this->getSession()->getPage()->findById('discuss-mobile');
-          $path = '/images/help/discuss_mobile.png';
-        } else {
-          Assert::assertTrue(false);
-        }
-        break;
-      default:
-        Assert::assertTrue(false);
-        break;
-    }
-
-    if (null != $img) {
-      Assert::assertEquals($img->getTagName(), 'img');
-      Assert::assertEquals($img->getAttribute('src'), $path);
-      Assert::assertTrue($img->isVisible());
-    } else {
-      Assert::assertTrue(false);
-    }
-  }
-
-  /**
    * @Then /^I click on the first "([^"]*)" button$/
    *
    * @param mixed $arg1
@@ -615,7 +394,7 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws Exception
    */
-  public function iClickOntheColumnName($arg1): void
+  public function iClickOnTheColumnName($arg1): void
   {
     $page = $this->getSession()->getPage();
     switch ($arg1) {
@@ -1016,15 +795,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I click on the edit button of word with id "([^"]*)"$/
-   */
-  public function iClickOnTheEditButtonOfWord(string $word_id): void
-  {
-    $page = $this->getSession()->getPage();
-    $page->find('xpath', "//a[contains(@href,'/admin/rudeword/".$word_id."/edit')]")->click();
-  }
-
-  /**
    * @Then /^I click on the code view button$/
    */
   public function iClickOnTheCodeViewButtonInTheApproveList(): void
@@ -1153,18 +923,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^"([^"]*)" must be selected in "([^"]*)"$/
-   *
-   * @param mixed $country
-   * @param mixed $select
-   */
-  public function mustBeSelectedIn($country, $select): void
-  {
-    $field = $this->getSession()->getPage()->findField($select);
-    Assert::assertTrue($country === $field->getValue());
-  }
-
-  /**
    * @When /^(?:|I )attach the avatar "(?P<path>[^"]*)" to "(?P<field>(?:[^"]|\\")*)"$/
    *
    * @param mixed $field
@@ -1217,143 +975,11 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^the project img tag should( [^"]*)? have the "([^"]*)" data url$/
-   *
-   * @param mixed $not
-   * @param mixed $name
-   *
-   * @throws Exception
-   */
-  public function theProjectImgTagShouldHaveTheDataUrl($not, $name): void
-  {
-    $name = trim($name);
-    $not = trim($not);
-
-    $pre_source = $this->getSession()->getPage()->find('css', '#project-thumbnail-big');
-    $source = 0;
-    if (!is_null($pre_source)) {
-      $source = $pre_source->getAttribute('src');
-    } else {
-      Assert::assertTrue(false, "Couldn't find avatar in project-thumbnail-big");
-    }
-    $source = trim($source, '"');
-
-    switch ($name) {
-      case 'logo.png':
-        $logoUrl = 'data:image/png;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'logo.png'));
-        $isSame = ($source === $logoUrl);
-        'not' === $not ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
-        break;
-
-      case 'fail.tif':
-        $failUrl = 'data:image/tiff;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'fail.tif'));
-        $isSame = ($source === $failUrl);
-        'not' === $not ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
-        break;
-
-      default:
-        Assert::assertTrue(false);
-    }
-  }
-
-  /**
    * @When /^I press enter in the search bar$/
    */
   public function iPressEnterInTheSearchBar(): void
   {
     $this->getSession()->executeScript("$('#top-app-bar__search-form').trigger('submit')");
-  }
-
-  /**
-   * @When /^I click the "([^"]*)" button$/
-   *
-   * @param mixed $arg1
-   */
-  public function iClickTheButton($arg1): void
-  {
-    $arg1 = trim($arg1);
-    $page = $this->getSession()->getPage();
-    $button = null;
-
-    switch ($arg1) {
-      case 'login':
-        $button = $page->find('css', '#btn-login');
-        break;
-      case 'logout':
-        $button = $page->find('css', '#btn-logout');
-        break;
-      case 'profile':
-        $button = $page->find('css', '#btn-profile');
-        break;
-      case 'forgot pw or username':
-        $button = $page->find('css', '#pw-request');
-        break;
-      case 'send':
-        $button = $page->find('css', '#post-button');
-        break;
-      case 'show-more':
-        $button = $page->find('css', '#show-more-button');
-        break;
-      case 'report-comment':
-        $button = $page->find('css', '#report-button-4');
-        break;
-      case 'delete-comment':
-        $button = $page->find('css', '#delete-button-4');
-        break;
-      case 'edit':
-        $button = $page->find('css', '#edit-icon a');
-        break;
-      case 'password-edit':
-        $button = $page->find('css', '#password-button');
-        break;
-      case 'email-edit':
-        $button = $page->find('css', '#email-button');
-        break;
-      case 'country-edit':
-        $button = $page->find('css', '#country-button');
-        break;
-      case 'name-edit':
-        $button = $page->find('css', '#username-button');
-        break;
-      case 'avatar-edit':
-        $button = $page->find('css', '#avatar-button');
-        break;
-      case 'save-edit':
-        $button = $page->find('css', '.save-button');
-        break;
-      default:
-        Assert::assertTrue(false);
-    }
-    Assert::assertNotNull($button, 'button '.$arg1.' not found');
-    $button->click();
-  }
-
-  /**
-   * @Then /^I should see marked "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iShouldSeeMarked($arg1): void
-  {
-    $page = $this->getSession()->getPage();
-    $program = $page->find('css', $arg1);
-    if (!$program->hasClass('visited-program')) {
-      Assert::assertTrue(false);
-    }
-  }
-
-  /**
-   * @Then /^the media file "([^"]*)" must have the download url "([^"]*)"$/
-   *
-   * @param mixed $id
-   * @param mixed $file_url
-   */
-  public function theMediaFileMustHaveTheDownloadUrl($id, $file_url): void
-  {
-    $mediafile = $this->getSession()->getPage()->find('css', '#mediafile-'.$id);
-    Assert::assertNotNull($mediafile, 'Mediafile not found!');
-    $link = $mediafile->getAttribute('href');
-    Assert::assertTrue(is_int(strpos($link, (string) $file_url)));
   }
 
   /**
@@ -1409,115 +1035,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^the link of "([^"]*)" should open "([^"]*)"$/
-   *
-   * @param mixed $identifier
-   * @param mixed $url_type
-   */
-  public function theLinkOfShouldOpen($identifier, $url_type): void
-  {
-    $class_name = '';
-    switch ($identifier) {
-      case 'image':
-        $class_name = 'image-container';
-        break;
-
-      case 'download':
-        $class_name = 'download-container';
-        break;
-
-      default:
-        break;
-    }
-    Assert::assertTrue(strlen($class_name) > 0);
-
-    $url_text = '';
-    switch ($url_type) {
-      case 'download':
-        $url_text = 'app/download';
-        break;
-
-      case 'popup':
-        $url_text = 'program.showUpdateAppPopup';
-        break;
-
-      default:
-        break;
-    }
-    Assert::assertTrue(strlen($url_text) > 0);
-
-    $selector = '.'.$class_name.' a';
-    $href_value = $this->getSession()->getPage()->find('css', $selector)->getAttribute('href');
-    Assert::assertTrue(is_int(strpos($href_value, (string) $url_text)));
-  }
-
-  /**
-   * @Then /^I see the "([^"]*)" popup$/
-   *
-   * @param mixed $arg1
-   */
-  public function iSeeThePopup($arg1): void
-  {
-    if ('update app' == $arg1) {
-      $this->assertElementOnPage('#popup-info');
-      $this->assertElementOnPage('#popup-background');
-    }
-  }
-
-  /**
-   * @Then /^I see not the "([^"]*)" popup$/
-   *
-   * @param mixed $arg1
-   */
-  public function iSeeNotThePopup($arg1): void
-  {
-    if ('update app' == $arg1) {
-      $this->assertElementNotOnPage('#popup-info');
-      $this->assertElementNotOnPage('#popup-background');
-    }
-  }
-
-  /**
-   * @Then /^I click the program download button$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickTheProgramDownloadButton(): void
-  {
-    $this->iClick('#url-download-small');
-  }
-
-  /**
-   * @Then /^I click the program image$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickTheProgramImage(): void
-  {
-    $this->iClick('#url-image');
-  }
-
-  /**
-   * @Then /^I click on the program popup background$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheProgramPopupBackground(): void
-  {
-    $this->iClick('#popup-background');
-  }
-
-  /**
-   * @Then /^I click on the program popup button$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheProgramPopupButton(): void
-  {
-    $this->iClick('#btn-close-popup');
-  }
-
-  /**
    * @When /^I should see the video available at "([^"]*)"$/
    *
    * @param mixed $url
@@ -1528,69 +1045,6 @@ class CatrowebBrowserContext extends BrowserContext
     $video = $page->find('css', '#youtube-index > iframe');
     Assert::assertNotNull($video, 'Video not found on tutorial page!');
     Assert::assertTrue(false !== strpos($video->getAttribute('src'), (string) $url));
-  }
-
-  /**
-   * @Then /^I should see "([^"]*)" "([^"]*)" tutorial banners$/
-   *
-   * @param mixed $count
-   * @param mixed $view
-   */
-  public function iShouldSeeTutorialBanners($count, $view): void
-  {
-    if ('desktop' === $view) {
-      for ($i = 1;; ++$i) {
-        $img = $this->getSession()->getPage()->findById('tutorial-'.$i);
-        if (null === $img) {
-          break;
-        }
-      }
-      Assert::assertEquals($count, $i - 1);
-    } elseif ('mobile' === $view) {
-      for ($i = 1;; ++$i) {
-        $img = $this->getSession()->getPage()->findById('tutorial-mobile-'.$i);
-        if (null === $img) {
-          break;
-        }
-      }
-      Assert::assertEquals($count, $i - 1);
-    } else {
-      Assert::assertTrue(false);
-    }
-  }
-
-  /**
-   * @When /^I click on the "([^"]*)" banner$/
-   *
-   * @param mixed $numb
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheBanner($numb): void
-  {
-    switch ($numb) {
-      case 'first':
-        $this->iClick('#tutorial-1');
-        break;
-      case 'second':
-        $this->iClick('#tutorial-2');
-        break;
-      case 'third':
-        $this->iClick('#tutorial-3');
-        break;
-      case 'fourth':
-        $this->iClick('#tutorial-4');
-        break;
-      case 'fifth':
-        $this->iClick('#tutorial-5');
-        break;
-      case 'sixth':
-        $this->iClick('#tutorial-6');
-        break;
-      default:
-        Assert::assertTrue(false);
-        break;
-    }
   }
 
   /**
@@ -1660,70 +1114,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^I search for "([^"]*)" with the searchbar$/
-   *
-   * @param mixed $arg1
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iSearchForWithTheSearchBar($arg1): void
-  {
-    $this->iClick('#top-app-bar__btn-search');
-    $this->fillField('search-input-header', $arg1);
-    $this->iClick('#top-app-bar__btn-search-header');
-  }
-
-  /**
-   * @Then /^I should see the Google Plus 1 button in the header$/
-   */
-  public function iShouldSeeTheGoogleButtonInTheHeader(): void
-  {
-    $plus_one_button = $this->getSession()->getPage()->findById('___plusone_0');
-    Assert::assertTrue(
-      null != $plus_one_button && $plus_one_button->isVisible(),
-      'The Google +1 Button is not visible!'
-    );
-    Assert::assertTrue(
-      'nav' === $plus_one_button->getParent()->getParent()->getParent()->getTagName(),
-      'Parent is not header element'
-    );
-  }
-
-  /**
-   * @Then /^I should see the profile button$/
-   */
-  public function iShouldSeeTheProfileButton(): void
-  {
-    $profile_button = $this->getSession()->getPage()->findById('btn-profile');
-    Assert::assertTrue(
-      null != $profile_button && $profile_button->isVisible(),
-      'The profile button is not visible!'
-    );
-  }
-
-  /**
-   * @Then /^the onclick href in button with id "([^"]*)" should be void$/
-   *
-   * @param mixed $arg1
-   */
-  public function theHrefWithIdShouldBeVoid($arg1): void
-  {
-    $button = $this->getSession()->getPage()->findById($arg1);
-    Assert::assertStringContainsString('javascript:void(0)', $button->getAttribute('onclick'));
-  }
-
-  /**
-   * @Then /^the onclick href in button with id "([^"]*)" should not be void$/
-   *
-   * @param mixed $arg1
-   */
-  public function theHrefWithIdShouldNotBeVoid($arg1): void
-  {
-    $button = $this->getSession()->getPage()->findById($arg1);
-    Assert::assertStringNotContainsString('javascript:void(0)', $button->getAttribute('onclick'));
-  }
-
-  /**
    * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
    *
    * @param mixed $type_name
@@ -1756,42 +1146,6 @@ class CatrowebBrowserContext extends BrowserContext
       default:
         Assert::assertTrue(false);
     }
-  }
-
-  /**
-   * @When /^I click on the first recommended program$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheFirstRecommendedProgram(): void
-  {
-    $arg1 = '#program-2 .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
-  }
-
-  /**
-   * @When /^I click on the first recommended homepage program$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheFirstRecommendedHomepageProgram(): void
-  {
-    $arg1 = '.homepage-recommended-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
   }
 
   /**
@@ -1850,7 +1204,7 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws ElementNotFoundException
    */
-  public function projectExistsinTheRecommendedCategory($program_id, $category): void
+  public function projectExistsInTheRecommendedCategory($program_id, $category): void
   {
     $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
     $element = null;
@@ -1870,11 +1224,8 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @param mixed $program_id
    * @param mixed $category
-   *
-   * @throws ElementNotFoundException
-   * @throws ExpectationException
    */
-  public function projectDoesNotExistsinTheRecommendedCategory($program_id, $category): void
+  public function projectDoesNotExistsInTheRecommendedCategory($program_id, $category): void
   {
     $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
     $element = null;
@@ -1889,95 +1240,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @When /^I click on the first recommended specific program$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnTheFirstRecommendedSpecificProgram(): void
-  {
-    $arg1 = '#specific-programs-recommendations .programs #program-3 .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('css', $arg1)
-      ->click()
-    ;
-  }
-
-  /**
-   * @Then /^There should be recommended specific programs$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function thereShouldBeRecommendedSpecificPrograms(): void
-  {
-    $arg1 = '#specific-programs-recommendations .programs .rec-programs';
-    $this->assertSession()->elementExists('css', $arg1);
-  }
-
-  /**
-   * @Then /^There should be no recommended specific programs$/
-   *
-   * @throws ExpectationException
-   */
-  public function thereShouldBeNoRecommendedSpecificPrograms(): void
-  {
-    $this->assertSession()->elementNotExists('css',
-      '#specific-programs-recommendations .programs .rec-programs');
-  }
-
-  /**
-   * @Then /^I should see a recommended homepage program having ID "([^"]*)" and name "([^"]*)"$/
-   *
-   * @param mixed $program_id
-   * @param mixed $program_name
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iShouldSeeARecommendedHomepageProgramHavingIdAndName($program_id, $program_name): void
-  {
-    $this->assertSession()->elementExists('css',
-      '#program-'.$program_id.' .homepage-recommended-programs');
-
-    Assert::assertEquals($program_name, $this
-      ->getSession()
-      ->getPage()
-      ->find('css', '#program-'.$program_id.' .homepage-recommended-programs .program-name')
-      ->getText());
-  }
-
-  /**
-   * @Then /^I should not see any recommended homepage programs$/
-   *
-   * @throws ExpectationException
-   */
-  public function iShouldNotSeeAnyRecommendedHomepagePrograms(): void
-  {
-    $this->assertSession()->elementNotExists('css', '.homepage-recommended-programs');
-  }
-
-  /**
-   * @Then /^I should see the image "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iShouldSeeTheImage($arg1): void
-  {
-    $img = $this->getSession()->getPage()->findById('logo');
-
-    if (null != $img) {
-      Assert::assertEquals($img->getTagName(), 'img');
-      $src = $img->getAttribute('src');
-      Assert::assertTrue(false !== strpos($src, (string) $arg1), '<'.$src.'> does not contain '.$arg1);
-      Assert::assertTrue($img->isVisible(), 'Image is not visible.');
-    } else {
-      Assert::assertTrue(false, '#logo not found!');
-    }
-  }
-
-  /**
    * @Then /^I click the currently visible search icon$/
    */
   public function iClickTheCurrentlyVisibleSearchIcon(): void
@@ -1989,16 +1251,6 @@ class CatrowebBrowserContext extends BrowserContext
       return;
     }
     Assert::assertTrue(false, 'Tried to click #top-app-bar__btn-search but no visible element was found.');
-  }
-
-  /**
-   * @Given the random program section is empty
-   */
-  public function theRandomProgramSectionIsEmpty(): void
-  {
-    $this->getSession()->evaluateScript(
-      'document.getElementById("random").style.display = "none";'
-    );
   }
 
   /**
@@ -2083,13 +1335,6 @@ class CatrowebBrowserContext extends BrowserContext
       'platform' => $platform,
       'applicationVersion' => $version,
     ]);
-  }
-
-  /**
-   * @Given /^All programs are from the same user$/
-   */
-  public function allProgramsAreFromTheSameUser(): void
-  {
   }
 
   /**
@@ -2183,9 +1428,6 @@ class CatrowebBrowserContext extends BrowserContext
    * @Given /^the program apk status is flagged "([^"]*)"$/
    *
    * @param mixed $arg1
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function theProgramApkStatusIsFlagged($arg1): void
   {
@@ -2301,25 +1543,7 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the starter programs table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function shouldSeeStarterProgramsTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['Starter Category']);
-      $this->assertSession()->pageTextContains($user_stat['Category Alias']);
-      $this->assertSession()->pageTextContains($user_stat['Programs']);
-      $this->assertSession()->pageTextContains($user_stat['Order']);
-    }
-  }
-
-  /**
    * @Then /^I should see the following not approved projects:$/
-   *
-   * @throws ResponseTextException
    */
   public function seeNotApprovedProjects(TableNode $table): void
   {
@@ -2338,43 +1562,6 @@ class CatrowebBrowserContext extends BrowserContext
       Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
       ++$counter;
     }
-  }
-
-  /**
-   * @Then /^I should see the following rude words:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function seeRudeWords(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
-
-    $actual_values = [];
-    foreach ($td as $value) {
-      $actual_values[] = $value->getText();
-    }
-
-    Assert::assertEquals(count($actual_values), count($user_stats), 'Wrong number of rude words in table');
-
-    $counter = 0;
-    foreach ($user_stats as $user_stat) {
-      Assert::assertEquals(implode(' ', $user_stat), $actual_values[$counter]);
-      ++$counter;
-    }
-  }
-
-  /**
-   * @Then /^I try to add the following word "([^"]*)"$/
-   *
-   * @throws ResponseTextException
-   */
-  public function addFollowingWord(string $word): void
-  {
-    $this->visit('/admin/rudeword/create');
-    $this->iWaitForThePageToBeLoaded();
-    $this->getSession()->getPage()->find('xpath', '//input')->setValue($word);
-    $this->pressButton('Create and return to list');
   }
 
   /**
@@ -2593,17 +1780,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^we assume the next generated token will be "([^"]*)"$/
-   *
-   * @param mixed $token
-   */
-  public function weAssumeTheNextGeneratedTokenWillBe($token): void
-  {
-    $token_generator = $this->getSymfonyService(TokenGenerator::class);
-    $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
-  }
-
-  /**
    * @Then the resources should not contain the unnecessary files
    */
   public function theResourcesShouldNotContainTheUnnecessaryFiles(): void
@@ -2735,75 +1911,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I do not see a form to edit my profile$/
-   *
-   * @throws ExpectationException
-   */
-  public function iDoNotSeeAFormToEditMyProfile(): void
-  {
-    $this->assertSession()->elementNotExists('css', '#profile-form');
-  }
-
-  /**
-   * @Given /^I have a program named "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   *
-   * @throws Exception
-   */
-  public function iHaveAProgramNamed($arg1): void
-  {
-    $this->insertProject([
-      'name' => $arg1,
-      'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-    ]);
-  }
-
-  /**
-   * @Then /^I do not see a button to change the profile picture$/
-   *
-   * @throws ExpectationException
-   */
-  public function iDoNotSeeAButtonToChangeTheProfilePicture(): void
-  {
-    $this->assertSession()->elementNotExists('css', '#avatar-upload');
-  }
-
-  /**
-   * @Given /^I am not logged in$/
-   */
-  public function iAmNotLoggedIn(): void
-  {
-    $user = $this->insertUser([
-      'name' => 'Generated',
-      'password' => 'generated',
-    ]);
-    $this->getUserDataFixtures()->setCurrentUser($user);
-  }
-
-  /**
-   * @Given I did not fill out the google form
-   */
-  public function iDidNotFillOutTheGoogleForm(): void
-  {
-  }
-
-  /**
-   * @Given I am :arg1 with email :arg2
-   *
-   * @param mixed $arg1
-   * @param mixed $arg2
-   */
-  public function iAmWithEmail($arg1, $arg2): void
-  {
-    $user = $this->insertUser([
-      'name' => $arg1,
-      'email' => sprintf('%s', $arg2),
-    ]);
-    $this->getUserDataFixtures()->setCurrentUser($user);
-  }
-
-  /**
    * @Then :count copies of this program will be stored on the server
    */
   public function aCopyOfThisProgramWillBeStoredOnTheServer(int $count): void
@@ -2811,32 +1918,6 @@ class CatrowebBrowserContext extends BrowserContext
     $dir = $this->getSymfonyParameter('catrobat.snapshot.dir');
     $finder = new Finder();
     Assert::assertEquals($count, $finder->files()->in($dir)->count(), 'Invalid number of snapshots');
-  }
-
-  /**
-   * @When I visit my profile
-   */
-  public function iVisitMyProfile(): void
-  {
-    $this->visit('/app/user');
-  }
-
-  /**
-   * @Then I see the program :arg1
-   *
-   * @param mixed $arg1
-   */
-  public function iSeeTheProgram($arg1): void
-  {
-    $this->assertPageContainsText($arg1);
-  }
-
-  /**
-   * @Then I do not see a delete button
-   */
-  public function iDoNotSeeADeleteButton(): void
-  {
-    $this->assertElementNotOnPage('.img-delete');
   }
 
   /**
@@ -2888,29 +1969,11 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I check the checkbox named "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iCheckTheCheckboxNamed($arg1): void
-  {
-    $this->checkOption($arg1);
-  }
-
-  /**
-   * @Then /^I uncheck the checkbox named "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iUncheckTheCheckboxNamed($arg1): void
-  {
-    $this->uncheckOption($arg1);
-  }
-
-  /**
    * @Then /^I click on the button named "([^"]*)"/
    *
    * @param mixed $arg1
+   *
+   * @throws ElementNotFoundException
    */
   public function iClickOnTheButton($arg1): void
   {
@@ -2943,12 +2006,12 @@ class CatrowebBrowserContext extends BrowserContext
   //  User Agent
   //--------------------------------------------------------------------------------------------------------------------
 
-  private function iUseTheUserAgent(string $user_agent): void
+  protected function iUseTheUserAgent(string $user_agent): void
   {
     $this->getSession()->setRequestHeader('User-Agent', $user_agent);
   }
 
-  private function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version, string $build_type, string $theme = 'pocketcode'): void
+  protected function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version, string $build_type, string $theme = 'pocketcode'): void
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = 'Android';
@@ -2958,19 +2021,11 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @param mixed $value
-   */
-  private function setOauthServiceParameter($value): void
-  {
-    // api-deprecated
-  }
-
-  /**
    * @param mixed $path
    * @param mixed $filename
    * @param mixed $size
    */
-  private function generateFileInPath($path, $filename, $size): void
+  protected function generateFileInPath($path, $filename, $size): void
   {
     $full_filename = $path.'/'.$filename;
     $dirname = dirname($full_filename);
@@ -2984,29 +2039,11 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @param mixed $days
-   *
-   * @throws Exception
-   */
-  private function getDateFromNow($days): DateTime
-  {
-    $date = TimeUtils::getDateTime();
-    if ($days < 0) {
-      $days = abs($days);
-      $date->sub(new DateInterval('P'.$days.'D'));
-    } else {
-      $date->add(new DateInterval('P'.$days.'D'));
-    }
-
-    return $date;
-  }
-
-  /**
    * @param mixed $option
    *
    * @throws Exception
    */
-  private function iSelectTheOptionInThePopup($option): void
+  protected function iSelectTheOptionInThePopup($option): void
   {
     $page = $this->getSession()->getPage();
     //click the input on the popup to show yes or no option

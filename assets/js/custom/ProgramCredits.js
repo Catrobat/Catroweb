@@ -3,8 +3,7 @@
 
 // eslint-disable-next-line no-unused-vars
 function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
-  statusCodeOk, statusCodeCreditsTooLong,
-  statusCodeRudeWordInCredits) {
+  statusCodeOk, statusCodeCreditsTooLong) {
   // Edit Credits
   $(function () {
     const credits = $('#credits')
@@ -49,8 +48,7 @@ function ProgramCredits (programId, showMoreButtonText, showLessButtonText,
       $.get(url, function (data) {
         if (data.statusCode === statusCodeOk) {
           location.reload()
-        } else if (data.statusCode === statusCodeCreditsTooLong ||
-          data.statusCode === statusCodeRudeWordInCredits) {
+        } else if (data.statusCode === statusCodeCreditsTooLong) {
           editCredits.addClass('danger')
           editCreditsError.show()
           editCreditsError.text(data.message)

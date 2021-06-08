@@ -97,7 +97,6 @@ sonata_admin:
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-bullhorn"></i>'
                 items:
-                    - catrowebadmin.block.programs.categories
                     - catrowebadmin.block.featured.program
                     - catrowebadmin.block.example.program
 
@@ -153,7 +152,6 @@ sonata_admin:
                 items:
                     - catrowebadmin.block.tools.maintain
                     - catrowebadmin.block.tools.logs
-                    - catrowebadmin.block.tools.rudewords
                     - catrowebadmin.block.tools.notify
                     - catrowebadmin.block.tools.gcm
                     - catrowebadmin.block.tools.broadcast

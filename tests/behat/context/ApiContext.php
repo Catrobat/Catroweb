@@ -28,10 +28,9 @@ use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;
 use Symfony\Component\BrowserKit\Cookie;
-use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+use Symfony\Component\Intl\Locales;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -756,12 +755,6 @@ class ApiContext implements KernelAwareContext
   public function iUploadAProgramWith(string $program_attribute, string $api_version): void
   {
     switch ($program_attribute) {
-      case 'a rude word in the description':
-        $filename = 'program_with_rudeword_in_description.catrobat';
-        break;
-      case 'a rude word in the name':
-        $filename = 'program_with_rudeword_in_name.catrobat';
-        break;
       case 'a missing code.xml':
         $filename = 'program_with_missing_code_xml.catrobat';
         break;
@@ -1719,7 +1712,7 @@ class ApiContext implements KernelAwareContext
 
     $returned_users = json_decode($response->getContent(), true);
     $expected_users = $table->getHash();
-    $stored_users = $this->getStoredUsers($expected_users);
+    $stored_users = $this->getStoredUsers();
 
     Assert::assertEquals(count($returned_users), count($expected_users), 'Number of returned users should be '.count($expected_users));
 
@@ -1738,7 +1731,7 @@ class ApiContext implements KernelAwareContext
 
     $returned_user = json_decode($response->getContent(), true);
     $expected_user = $table->getHash();
-    $stored_users = $this->getStoredUsers($expected_user);
+    $stored_users = $this->getStoredUsers();
 
     $stored_user = $this->findUser($stored_users, $returned_user['username']);
     $this->assertUsersEqual($stored_user, $returned_user);
@@ -1844,6 +1837,71 @@ class ApiContext implements KernelAwareContext
         Assert::assertEquals($this->checkMediaFileFieldsValue($program, $key), true);
       }
     }
+  }
+
+  /**
+   * @Then /^the response should have language list structure$/
+   */
+  public function responseShouldHaveLanguageListStructure(): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_languages = json_decode($response->getContent(), true);
+
+    $all_locales = array_filter(Locales::getNames(), function ($key) {
+      return 2 == strlen($key) || 5 == strlen($key);
+    }, ARRAY_FILTER_USE_KEY);
+    $all_locales_count = count($all_locales);
+
+    Assert::assertEquals($all_locales_count, count($returned_languages),
+      'Number of languages should be '.$all_locales_count);
+
+    foreach ($returned_languages as $language_code => $display_text) {
+      Assert::assertEquals('string', gettype($language_code));
+      Assert::assertTrue(2 == strlen($language_code) || 5 == strlen($language_code));
+      Assert::assertEquals('string', gettype($display_text));
+    }
+  }
+
+  /**
+   * @Then /^the response should contain the following languages:$/
+   */
+  public function responseShouldContainTheFollowingLanguages(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    $returned_languages = json_decode($response->getContent(), true);
+
+    foreach ($table as $row) {
+      Assert::assertArrayHasKey($row['Language Code'], $returned_languages);
+      Assert::assertEquals($row['Display Name'], $returned_languages[$row['Language Code']]);
+    }
+  }
+
+  /**
+   * @Then /^I set request language to "([^"]*)"$/
+   */
+  public function iSetRequestLanguageTo(string $language): void
+  {
+    switch ($language) {
+      case 'English':
+        $this->iSetCookie('hl', 'en');
+        break;
+      case 'Deutsch':
+        $this->iSetCookie('hl', 'de_DE');
+        break;
+      case 'French':
+        $this->iSetCookie('hl', 'fr_FR');
+        break;
+      default:
+        Assert::assertTrue(false);
+    }
+  }
+
+  /**
+   * @Then /^I set cookie "([^"]*)" to "([^"]*)"$/
+   */
+  public function iSetCookie(string $key, string $value): void
+  {
+    $this->getKernelBrowser()->getCookieJar()->set(new Cookie($key, $value));
   }
 
   /**
@@ -2260,16 +2318,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^a catrobat file is attached to the request$/
-   */
-  public function iAttachACatrobatFile(): void
-  {
-    $filepath = $this->FIXTURES_DIR.'test.catrobat';
-    Assert::assertTrue(file_exists($filepath), 'File not found');
-    $this->request_files[0] = new UploadedFile($filepath, 'test.catrobat');
-  }
-
-  /**
    * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
    *
    * @param mixed $arg1
@@ -2425,18 +2473,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I have a file "([^"]*)"$/
-   *
-   * @param mixed $filename
-   */
-  public function iHaveAFile($filename): void
-  {
-    $filepath = './src/Catrobat/ApiBundle/Features/Fixtures/'.$filename;
-    Assert::assertTrue(file_exists($filepath), 'File not found');
-    $this->request_files[] = new UploadedFile($filepath, $filename);
-  }
-
-  /**
    * @Given I have a valid Catrobat file, API version :api_version
    *
    * @param string $api_version the version of the API which should be used
@@ -2481,14 +2517,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I have otherwise valid registration parameters$/
-   */
-  public function iHaveOtherwiseValidRegistrationParameters(): void
-  {
-    $this->prepareValidRegistrationParameters();
-  }
-
-  /**
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)"$/
    * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
    * @Given /^there is a project with "([^"]*)" set to "([^"]*)"$/
@@ -2501,131 +2529,6 @@ class ApiContext implements KernelAwareContext
     $this->generateProgramFileWith([
       $key => $value,
     ]);
-  }
-
-  /**
-   * @Then I should receive the following programs:
-   */
-  public function iShouldReceiveTheFollowingPrograms(TableNode $table): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['CatrobatProjects'];
-    $expected_programs = $table->getHash();
-    for ($i = 0; $i < count($returned_programs); ++$i) {
-      Assert::assertEquals($expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'], 'Wrong order of results');
-    }
-    Assert::assertEquals(count($expected_programs), count($returned_programs), 'Wrong number of returned programs');
-  }
-
-  /**
-   * @Then The total number of found projects should be :arg1
-   *
-   * @param mixed $arg1
-   */
-  public function theTotalNumberOfFoundProjectsShouldBe($arg1): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    Assert::assertEquals($arg1, $responseArray['CatrobatInformation']['TotalProjects']);
-  }
-
-  /**
-   * @Then I should receive my program
-   */
-  public function iShouldReceiveMyProgram(): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    $returned_programs = $responseArray['CatrobatProjects'];
-    Assert::assertEquals('test', $returned_programs[0]['ProjectName'], 'Could not find the program');
-  }
-
-  /**
-   * @Then I should get the url to the google form
-   */
-  public function iShouldGetTheUrlToTheGoogleForm(): void
-  {
-    $answer = json_decode($this->getKernelBrowser()
-      ->getResponse()
-      ->getContent(), true);
-    Assert::assertArrayHasKey('form', $answer);
-    Assert::assertEquals('https://catrob.at/url/to/form', $answer['form']);
-  }
-
-  /**
-   * @When /^I login$/
-   */
-  public function iLogin(): void
-  {
-    /** @var Crawler $loginButton */
-    $loginButton = $this->getKernelBrowser()->getResponse();
-    $form = $loginButton->selectButton('Login')->form();
-    $form['_username'] = 'Generated';
-    $form['_password'] = 'generated';
-    $this->getKernelBrowser()->submit($form);
-  }
-
-  /**
-   * @Then /^I should be on the details page of my program$/
-   */
-  public function iShouldBeRedirectedToTheDetailsPageOfMyProgram(): void
-  {
-    Assert::assertEquals('/app/project/1', $this->getKernelBrowser()->getRequest()->getPathInfo());
-  }
-
-  /**
-   * @Then /^I should be on page "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   */
-  public function iShouldBeRedirectedTo($arg1): void
-  {
-    Assert::assertEquals($arg1, $this->getKernelBrowser()->getRequest()->getPathInfo());
-  }
-
-  /**
-   * @When /^I visit the details page of a program from another user$/
-   *
-   * @throws Exception
-   */
-  public function iVisitTheDetailsPageOfAProgramFromAnotherUser(): void
-  {
-    $other = $this->insertUser([
-      'name' => 'other',
-    ]);
-    $this->insertProject([
-      'name' => 'other program',
-      'owned by' => $other,
-    ]);
-    $this->iRequestWith('GET', '/app/project/1')
-    ;
-  }
-
-  /**
-   * @When /^I visit the details page of my program$/
-   *
-   * @throws Exception
-   */
-  public function iVisitTheDetailsPageOfMyProgram(): void
-  {
-    if (null == $this->my_program) {
-      $this->insertProject([
-        'name' => 'My Program',
-        'owned by' => $this->getUserDataFixtures()->getCurrentUser(),
-      ]);
-    }
-    $this->iRequestWith('GET', '/app/project/1')
-    ;
-  }
-
-  /**
-   * @Then /^I should be redirected to the google form$/
-   */
-  public function iShouldBeRedirectedToTheGoogleForm(): void
-  {
-    Assert::assertTrue($this->getKernelBrowser()->getResponse() instanceof RedirectResponse);
-    Assert::assertEquals('https://localhost/url/to/form', $this->getKernelBrowser()->getResponse()->headers->get('location'));
   }
 
   /**
@@ -2993,28 +2896,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I request from an ios app$/
-   */
-  public function iRequestFromAnIOSApp(): void
-  {
-    // see org.catrobat.catroid.ui.WebViewActivity
-    $platform = 'iPhone';
-    $user_agent = ' Platform/'.$platform;
-    $this->iUseTheUserAgent($user_agent);
-  }
-
-  /**
-   * @Given /^I request from a specific "([^"]*)" themed app$/
-   *
-   * @param mixed $theme
-   */
-  public function iUseASpecificThemedApp($theme): void
-  {
-    $this->iUseTheUserAgentParameterized('0.998', 'PocketCode', '0.9.60',
-      'release', $theme);
-  }
-
-  /**
    * @When /^I upload a catrobat program with the phiro app$/
    */
   public function iUploadACatrobatProgramWithThePhiroProApp(): void
@@ -3240,7 +3121,7 @@ class ApiContext implements KernelAwareContext
     return $projects;
   }
 
-  private function getStoredUsers(array $expected_users): array
+  private function getStoredUsers(): array
   {
     $stored_users = $this->dataFixturesContext->getUsers();
     $users = [];

@@ -120,9 +120,7 @@ programs:
     हाँ, इसे हटा दें!
     रद्द करना
   tooLongDescription: परियोजना का वर्णन बहुत लंबा है!
-  rudeWordsInDescription: आप अपने विवरण में अशिष्ट शब्दों का उपयोग नहीं कर सकते हैं!
   tooLongCredits: The project credits are too long!
-  rudeWordsInCredits: You can't use rude words in your credits!
   most:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
@@ -392,10 +390,6 @@ errors:
   password:
     blank: पासवर्ड गायब है।
     short: 'आपके पासवर्ड में कम से कम {{ limit }} अक्षर होने चाहिए।'
-  description:
-    rude: विवरण में कठोर शब्द नहीं होने चाहिए।
-  credit:
-    rude: Credits must not contain rude words.
   country:
     blank: देश गायब है।
     invalid: अमान्य देश
@@ -420,8 +414,6 @@ errors:
   unknown: अज्ञात गल्ती
   token: 'उपकरण का प्रमाणीकरण विफल हुआ: अमान्य स्थिति-टोकन!'
   uploadTokenAuthFailed: 'टोकन को अपलोड करें विफल।'
-  programname:
-    rude: प्रोजेक्ट नाम में अशिष्ट शब्द नहीं होने चाहिए।
   program:
     invalid: अमान्य प्रोजेक्ट।
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: स्क्रैच रिमिक्स
   recommended: अनुशंसित परियोजनाओं
 achievements:
+  sidebar:
+    title: 'उपलब्धियों'
   overview:
     header: 'उपलब्धियों'
     most_recent_achievement:

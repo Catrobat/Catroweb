@@ -120,9 +120,7 @@ programs:
     ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
     ਰੱਦ ਕਰੋ
   tooLongDescription: ਪ੍ਰੋਜੈਕਟ ਦਾ ਵੇਰਵਾ ਬਹੁਤ ਲੰਬਾ ਹੈ!
-  rudeWordsInDescription: ਤੁਸੀਂ ਆਪਣੇ ਵੇਰਵੇ ਵਿਚ ਕਠੋਰ ਸ਼ਬਦ ਨਹੀਂ ਵਰਤ ਸਕਦੇ!
   tooLongCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਬਹੁਤ ਲੰਬੇ ਹਨ!
-  rudeWordsInCredits: ਤੁਸੀਂ ਆਪਣੇ ਨੋਟਾਂ ਅਤੇ ਕ੍ਰੈਡਿਟ ਵਿਚ ਕਠੋਰ ਸ਼ਬਦ ਨਹੀਂ ਵਰਤ ਸਕਦੇ!
   most:
     viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
     downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
@@ -392,10 +390,6 @@ errors:
   password:
     blank: ਪਾਸਵਰਡ ਗੁੰਮ ਹੈ
     short: 'ਤੁਹਾਡੇ ਪਾਸਵਰਡ ਵਿੱਚ ਘੱਟੋ ਘੱਟ {{ limit }} ਅੱਖਰ ਹੋਣੇ ਚਾਹੀਦੇ ਹਨ.'
-  description:
-    rude: ਵੇਰਵੇ ਵਿੱਚ ਰੁੱਖੇ ਸ਼ਬਦ ਨਹੀਂ ਹੋਣੇ ਚਾਹੀਦੇ.
-  credit:
-    rude: ਨੋਟਸ ਅਤੇ ਕ੍ਰੈਡਿਟ ਵਿੱਚ ਕਠੋਰ ਸ਼ਬਦ ਨਹੀਂ ਹੋਣੇ ਚਾਹੀਦੇ.
   country:
     blank: ਦੇਸ਼ ਗਾਇਬ ਹੈ
     invalid: ਅਵੈਧ ਦੇਸ਼
@@ -420,8 +414,6 @@ errors:
   unknown: ਅਣਜਾਣ ਗਲਤੀ
   token: 'ਜੰਤਰ ਦੇ ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ: ਗਲਤ auth-ਟੋਕਨ!'
   uploadTokenAuthFailed: 'ਟੋਕਨ ਲੇਖ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ.'
-  programname:
-    rude: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨਾਮ ਵਿੱਚ ਅਸ਼ੁੱਧ ਸ਼ਬਦ ਨਹੀਂ ਹੋਣੇ ਚਾਹੀਦੇ.
   program:
     invalid: ਗਲਤ ਪ੍ਰੋਜੈਕਟ.
   languageversion:
@@ -687,6 +679,8 @@ category:
   scratch: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
   recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
 achievements:
+  sidebar:
+    title: 'ਪ੍ਰਾਪਤੀਆਂ'
   overview:
     header: 'ਪ੍ਰਾਪਤੀਆਂ'
     most_recent_achievement:
