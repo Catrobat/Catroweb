@@ -83,3 +83,8 @@ services:
   App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures:
     class: App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures
     public: true
+
+  # ======== Mocking translation API services
+
+  App\Translation\TranslationDelegate:
+    class: App\Translation\TestEnv\FakeTranslationDelegate

@@ -298,11 +298,18 @@
   </script>
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
 
+  <script src=" {{ asset( 'js/TranslateWithLink.min.js') }}"></script>
+  <script>
+    new TranslateWithLink(
+      {% if program.description %} true, {% else %} false, {% endif %}
+      {% if program.credits %} true {% else %} false {% endif %}
+    )
+  </script>
+
   <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
   <script>
     new Translation(
-      {% if program.description %} true, {% else %} false, {% endif %}
-      {% if program.credits %} true {% else %} false {% endif %}
+      '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}'
     )
   </script>
 {% endblock %}
