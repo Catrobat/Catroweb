@@ -39,7 +39,7 @@
     "grunt-contrib-watch": "^1.1.0",
     "grunt-purgecss": "^4.0.3",
     "grunt-sass": "^3.1.0",
-    "grunt-uncss": "^0.10.0",
+    "grunt-uncss": "^0.10.1",
     "jit-grunt": "^0.10.0",
     "node-sass": "^6.0.0",
     "sass": "^1.34.1",
