@@ -67,14 +67,14 @@
       <div class="horizontal-scrolling-wrapper">
       {% for achievement in achievements %}
         <div class="achievement__badge">
-          <img class="achievement__badge__image achievement__badge__image--profile"
-               src="{{ asset(achievement.getBadgeSvgPath()) }}"
-               alt="{{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}">
-          <div class="achievement__badge__banner achievement__badge__banner--profile"
-               style="background-image: linear-gradient(0deg, {{ achievement.getBannerColor() }}, rgba(255, 255, 255, 0.1)), url({{ asset(achievement.getBannerSvgPath()) }});
-                   -webkit-mask-image: url({{ asset(achievement.getBannerSvgPath()) }});
-                   mask-image: url({{ asset(achievement.getBannerSvgPath()) }});
-                   ">
+          <svg class="achievement__badge__coin achievement__badge__coin--profile"
+               data-src="{{ asset(achievement.getBadgeSvgPath()) }}"
+               data-unique-ids="disabled"/>
+          <svg class="achievement__badge__banner achievement__badge__banner--profile"
+               style="color: {{ achievement.getBannerColor() }}"
+               data-src="{{ asset(achievement.getBannerSvgPath()) }}"
+               data-unique-ids="disabled"/>
+          <div class="achievement__badge__banner__text achievement__badge__banner__text--profile">
             {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
           </div>
         </div>
@@ -164,7 +164,7 @@
 {% endblock %}
 
 {% block js %}
-  {{ encore_entry_script_tags('tab-bar') }}
+  {{ encore_entry_script_tags('profile') }}
   <script>
     let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
     programs.loadProjects('{{ profile.id }}')

@@ -1248,8 +1248,8 @@ class DataFixturesContext implements KernelAwareContext
       $user_achievement = (new UserAchievement())
         ->setUser($user)
         ->setAchievement($achievement)
-        ->setSeenAt(new DateTime($config['seen_at']))
-        ->setUnlockedAt(new DateTime($config['unlocked_at']))
+        ->setSeenAt(!empty($config['seen_at']) ? new DateTime($config['seen_at']) : null)
+        ->setUnlockedAt(!empty($config['unlocked_at']) ? new DateTime($config['unlocked_at']) : new DateTime('now'))
             ;
       $this->getManager()->persist($user_achievement);
     }

@@ -57,14 +57,7 @@ jobs:
 
       - name: Create a livid environment with dummy data
         run: |
-          docker exec app.catroweb bin/console catrobat:reset --hard
-
-      - name: Test response of the website running in the container
-        run: |
-          sudo apt-get update
-          sudo apt-get install apache2 wget
-          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
-          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
+          docker exec app.catroweb bin/console catrobat:reset --hard --limit 5
 
       - name: Run a few dynamic software tests
         run: |
@@ -85,3 +78,38 @@ jobs:
         run: |
           exit -1
 
+      - name: Test response of the website running in the container
+        run: |
+          sudo apt-get update
+          sudo apt-get install apache2 wget
+          sudo sh -c "echo '\n127.0.0.1 catroweb' >> /etc/hosts"
+          wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
+
+      - name: DEBUG
+        if: always()
+        run: |
+          docker ps -a
+          echo "--- App ---"
+          docker logs app.catroweb
+          echo "--- DB ---"
+          docker logs db.catroweb.test
+          echo "--- Chrome ---"
+          docker logs chrome.catroweb
+
+      - uses: actions/upload-artifact@v2.0.1
+        if: failure()
+        with:
+          name: screenshots_dev_container
+          path: tests/testreports/screens
+
+      - uses: actions/upload-artifact@v2.0.1
+        if: failure()
+        with:
+          name: dev_logs_dev_container
+          path: var/log/dev
+
+      - uses: actions/upload-artifact@v2.0.1
+        if: failure()
+        with:
+          name: test_logs_dev_container
+          path: var/log/test

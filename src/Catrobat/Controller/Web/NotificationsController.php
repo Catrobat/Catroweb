@@ -202,6 +202,23 @@ class NotificationsController extends AbstractController
   }
 
   /**
+   * @Route("/notifications/count", name="sidebar_notifications_count", methods={"GET"})
+   * Todo -> move to CAPI
+   */
+  public function countNotifications(CatroNotificationRepository $notification_repo): JsonResponse
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (is_null($user)) {
+      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+    }
+
+    return new JsonResponse([
+      'count' => $notification_repo->count(['user' => $user, 'seen' => false]),
+    ]);
+  }
+
+  /**
    * @Route("/user_notifications/markall", name="notifications_seen", methods={"GET"})
    */
   public function userNotificationsSeenAction(CatroNotificationRepository $notification_repo,
@@ -216,9 +233,6 @@ class NotificationsController extends AbstractController
     $catro_user_notifications = $notification_repo->findBy(['user' => $user]);
     $notifications_seen = [];
     foreach ($catro_user_notifications as $notification) {
-      if (!$notification) {
-        return new JsonResponse([], Response::HTTP_NOT_FOUND);
-      }
       if (!$notification->getSeen()) {
         $notifications_seen[$notification->getID()] = $notification;
       }
@@ -226,7 +240,7 @@ class NotificationsController extends AbstractController
     $notification_service->markSeen($notifications_seen);
     $remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
 
-    return new JsonResponse([], Response::HTTP_NO_CONTENT);
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
   /**

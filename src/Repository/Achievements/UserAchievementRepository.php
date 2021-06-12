@@ -4,7 +4,10 @@ namespace App\Repository\Achievements;
 
 use App\Entity\Achievements\UserAchievement;
 use App\Entity\User;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserAchievementRepository extends ServiceEntityRepository
@@ -27,8 +30,29 @@ class UserAchievementRepository extends ServiceEntityRepository
     return $this->count(['user' => $user]);
   }
 
+  public function countUnseenUserAchievements(User $user): int
+  {
+    return $this->count(['user' => $user, 'seen_at' => null]);
+  }
+
   public function findMostRecentUserAchievement(User $user): ?UserAchievement
   {
     return $this->findOneBy(['user' => $user], ['unlocked_at' => 'DESC']);
+  }
+
+  /**
+   * @throws ORMException
+   * @throws OptimisticLockException
+   */
+  public function readAllUnseenAchievements(User $user): void
+  {
+    $user_achievements = $this->findUserAchievements($user);
+    foreach ($user_achievements as $user_achievement) {
+      if (is_null($user_achievement->getSeenAt())) {
+        $user_achievement->setSeenAt(new DateTime('now'));
+        $this->getEntityManager()->persist($user_achievement);
+      }
+    }
+    $this->getEntityManager()->flush();
   }
 }

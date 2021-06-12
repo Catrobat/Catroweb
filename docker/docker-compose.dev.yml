@@ -51,6 +51,7 @@ services:
       - ./../src:/var/www/catroweb/src:cached
       - ./../templates:/var/www/catroweb/templates:cached
       - ./../tests:/var/www/catroweb/tests:cached
+      - ./../var:/var/www/catroweb/var:cached
       - ./../translations:/var/www/catroweb/translations:cached
       #
       # 3rd party Libraries: vendor + node_modules:

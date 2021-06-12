@@ -24,10 +24,9 @@ Feature: As a user i want to see other users achievements on a user page
     Then the element ".horizontal-scrolling-wrapper" should be visible
     And the "#user-achievements" element should contain "Achievements"
     Then the element ".achievement__badge" should be visible
-    Then the element ".achievement__badge__image" should be visible
-    And one of the ".achievement__badge__banner--profile" elements should contain "best__"
-    And one of the ".achievement__badge__banner--profile" elements should contain "first__"
-    And one of the ".achievement__badge__banner--profile" elements should contain "ups__"
+    And I should see "best__"
+    And I should see "first__"
+    And I should see "ups__"
 
   Scenario: User achievements
     Given I am on "/app/user/2"
