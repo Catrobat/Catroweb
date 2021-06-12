@@ -235,3 +235,20 @@
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
   color: var(--mdc-theme-primary);
 }
+
+
+// Achievements tab:
+.horizontal-scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  > div {
+    flex: 0 0 auto;
+  }
+
+  > div + div {
+    margin-left: 1rem;
+  }
+}

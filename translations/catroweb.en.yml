@@ -743,6 +743,8 @@ achievements:
     tab_locked:
       title: 'Locked'
       empty: "You have already unlocked all achievements."
+  profile:
+    title: 'Achievements'
   achievement:
     type:
       bronze_user:

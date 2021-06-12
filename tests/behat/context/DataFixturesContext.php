@@ -3,6 +3,7 @@
 namespace Tests\behat\context;
 
 use App\Catrobat\Services\TestEnv\SymfonySupport;
+use App\Commands\DBUpdater\UpdateAchievementsCommand;
 use App\Commands\Helpers\CommandHelper;
 use App\Entity\Achievements\Achievement;
 use App\Entity\Achievements\UserAchievement;
@@ -1221,10 +1222,10 @@ class DataFixturesContext implements KernelAwareContext
         ->setInternalDescription($config['internal_description'] ?? '')
         ->setTitleLtmCode($config['title_ltm_code'] ?? '')
         ->setDescriptionLtmCode($config['description_ltm_code'] ?? '')
-        ->setBadgeSvgPath($config['badge_svg_path'] ?? '')
-        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? '')
-        ->setBannerSvgPath($config['banner_svg_path'] ?? '')
-        ->setBannerColor($config['banner_color'] ?? '')
+        ->setBadgeSvgPath($config['badge_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_1.svg')
+        ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_1.svg')
+        ->setBannerSvgPath($config['banner_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+        ->setBannerColor($config['banner_color'] ?? '#00ff00')
         ->setEnabled($config['enabled'] ?? true)
         ->setPriority($config['priority'] ?? 0)
             ;

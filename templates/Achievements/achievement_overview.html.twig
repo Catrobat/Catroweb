@@ -11,9 +11,11 @@
     {% if most_recent_achievement != null %}
         <h2>{{ "achievements.overview.most_recent_achievement.title"|trans({}, "catroweb") }}</h2>
         <div class="mt-4 mb-4 achievement-top__wrapper">
-            <div class="achievement-top__badge">
-                <img class="achievement-top__badge__image achievement__badge__image--small" src={{ asset(most_recent_achievement.getBadgeSvgPath()) }})" alt="">
-                <div class="achievement-top__badge__banner achievement__badge__banner--small"
+            <div class="achievement__badge">
+                <img class="achievement__badge__image achievement__badge__image--top"
+                     src="{{ asset(most_recent_achievement.getBadgeSvgPath()) }}"
+                     alt="{{ most_recent_achievement.getTitleLtmCode()|trans({}, "catroweb") }}">
+                <div class="achievement__badge__banner achievement__badge__banner--top"
                      style="background-image: linear-gradient(0deg, {{ most_recent_achievement.getBannerColor() }}, rgba(255, 255, 255, 0.1)),url({{ asset(most_recent_achievement.getBannerSvgPath()) }});
                              -webkit-mask-image: url({{ asset(most_recent_achievement.getBannerSvgPath()) }});
                              mask-image: url({{ asset(most_recent_achievement.getBannerSvgPath()) }});">
@@ -66,8 +68,10 @@
             {% for achievement in achievements_unlocked %}
                 <div class="achievement">
                     <div class="achievement__badge">
-                        <img class="achievement__badge__image" src={{ asset(achievement.getBadgeSvgPath()) }})" alt="">
-                        <div class="achievement__badge__banner"
+                        <img class="achievement__badge__image achievement__badge__image--tab"
+                             src="{{ asset(achievement.getBadgeSvgPath()) }}"
+                             alt="{{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}">
+                        <div class="achievement__badge__banner achievement__badge__banner--tab"
                              style="background-image: linear-gradient(0deg, {{ achievement.getBannerColor() }}, rgba(255, 255, 255, 0.1)),url({{ asset(achievement.getBannerSvgPath()) }});
                                     -webkit-mask-image: url({{ asset(achievement.getBannerSvgPath()) }});
                                     mask-image: url({{ asset(achievement.getBannerSvgPath()) }});">

@@ -2,6 +2,7 @@
 
 {% block head %}
   <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/achievements.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -58,6 +59,30 @@
       </div>
     </div>
   </div>
+
+  {% if achievements|length > 0 %}
+    <div id="user-achievements" class="mt-4 mb-2">
+      <hr>
+      <h3>{{ 'achievements.profile.title'|trans({}, "catroweb") }}</h3>
+      <div class="horizontal-scrolling-wrapper">
+      {% for achievement in achievements %}
+        <div class="achievement__badge">
+          <img class="achievement__badge__image achievement__badge__image--profile"
+               src="{{ asset(achievement.getBadgeSvgPath()) }}"
+               alt="{{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}">
+          <div class="achievement__badge__banner achievement__badge__banner--profile"
+               style="background-image: linear-gradient(0deg, {{ achievement.getBannerColor() }}, rgba(255, 255, 255, 0.1)), url({{ asset(achievement.getBannerSvgPath()) }});
+                   -webkit-mask-image: url({{ asset(achievement.getBannerSvgPath()) }});
+                   mask-image: url({{ asset(achievement.getBannerSvgPath()) }});
+                   ">
+            {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+          </div>
+        </div>
+      {% endfor %}
+      </div>
+      <hr>
+    </div>
+  {% endif %}
 
   <div class="tab-bar-container mt-3">
     <div class="mdc-tab-bar" role="tablist">

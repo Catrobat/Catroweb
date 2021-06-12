@@ -48,7 +48,7 @@ Feature: Users have an achievement page for their overviews
     And I wait for the page to be loaded
     Then the element ".achievement-top__wrapper" should be visible
     And the "h2" element should contain "Newest Achievement"
-    And the ".achievement-top__badge__banner" element should contain "best__"
+    And the ".achievement__badge__banner--top" element should contain "best__"
     And the ".achievement-top__text-wrapper" element should contain "best__desc"
     And the ".achievement-top__text-wrapper" element should contain "2021-05-05"
     And the ".achievement-top__text-wrapper" element should contain "3 out of 3 unlocked"
@@ -58,7 +58,7 @@ Feature: Users have an achievement page for their overviews
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the element ".achievement-top__wrapper" should be visible
-    And the ".achievement-top__badge__banner" element should contain "ups__"
+    And the ".achievement__badge__banner--top" element should contain "ups__"
     And the ".achievement-top__text-wrapper" element should contain "ups__desc"
     And the ".achievement-top__text-wrapper" element should contain "2021-03-03"
     And the ".achievement-top__text-wrapper" element should contain "1 out of 3 unlocked"
