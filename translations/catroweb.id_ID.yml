@@ -177,6 +177,9 @@ programs:
   link: Salin tautan proyek ke papan klip
   reactionsText: Reaksi
   downloadErrorText: Terjadi kesalahan saat mengunduh proyek. Silakan coba lagi nanti.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'

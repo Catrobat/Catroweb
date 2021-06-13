@@ -176,6 +176,9 @@ programs:
   link: Layihə bağlantısını lövhəyə kopyala
   reactionsText: Reaksiyalar
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Remixlər
   showRemixGraph: 'Remix graph'

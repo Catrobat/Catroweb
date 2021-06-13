@@ -176,6 +176,9 @@ programs:
   link: Copier le lien du projet dans le presse-papiers
   reactionsText: Réactions
   downloadErrorText: Une erreur s'est produite lors du téléchargement du projet. Veuillez réessayer plus tard.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Remixes
   showRemixGraph: 'Graphique de remix'

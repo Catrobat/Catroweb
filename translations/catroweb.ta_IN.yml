@@ -176,6 +176,9 @@ programs:
   link: திட்ட இணைப்பை கிளிப்போர்டுக்கு நகலெடுக்கவும்
   reactionsText: விருப்பம்
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'

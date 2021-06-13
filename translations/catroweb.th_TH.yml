@@ -178,6 +178,9 @@ programs:
   link: คัดลอกลิงค์โครงการไปยังคลิปบอร์ด
   reactionsText: ถูกใจ
   downloadErrorText: เกิดข้อผิดพลาดขณะดาวน์โหลดโครงการ โปรดลองอีกครั้งในภายหลัง.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'

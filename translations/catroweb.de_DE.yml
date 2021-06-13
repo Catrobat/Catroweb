@@ -176,6 +176,9 @@ programs:
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
   downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
