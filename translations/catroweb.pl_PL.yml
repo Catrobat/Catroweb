@@ -176,6 +176,9 @@ programs:
   link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
   downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż Drzewo Remiksów'

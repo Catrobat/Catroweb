@@ -176,6 +176,9 @@ programs:
   link: نسخ رابط المشروع إلى الحافظة
   reactionsText: ردود الفعل
   downloadErrorText: حدث خطأ أثناء تحميل المشروع. الرجاء المحاولة مرة أخرى لاحقاً.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: رِمكسات(خليط مُعدل)
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'

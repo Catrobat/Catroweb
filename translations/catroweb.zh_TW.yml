@@ -176,6 +176,9 @@ programs:
   link: 將項目鏈接複製到剪貼板
   reactionsText: 反應
   downloadErrorText: 下載項目時出錯。請稍後再試。
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: 調製
   showRemixGraph: '混音圖'

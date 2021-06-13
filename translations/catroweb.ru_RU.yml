@@ -176,6 +176,9 @@ programs:
   link: Скопировать ссылку проекта в буфер обмена
   reactionsText: Лайки
   downloadErrorText: Произошла ошибка при загрузке проекта. Пожалуйста, повторите попытку позже.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Показать перемешанный граф'
