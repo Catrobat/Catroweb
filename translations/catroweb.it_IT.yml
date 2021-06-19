@@ -176,9 +176,9 @@ programs:
   link: Copia negli appunti il link al progetto
   reactionsText: Mi piace
   downloadErrorText: Si è verificato un errore durante il download del progetto. Riprova più tardi.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  showTranslation: Mostra la traduzione
+  hideTranslation: Nascondi la traduzione
+  translatedByLine: Tradotto da %provider% da %sourceLanguage% a %targetLanguage%
 remixGraph:
   title: Remix
   showRemixGraph: 'Visualizza il grafo dei Remix'

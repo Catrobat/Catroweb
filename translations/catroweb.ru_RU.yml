@@ -5,7 +5,7 @@ username: Имя пользователя
 password: Пароль
 createNewPassword: Создать новый пароль
 accountSettings: Настройки аккаунта
-email: E-Mail
+email: Электронная почта
 aboutPocketCode: О Pocket Code
 about: Больше
 education: Развивающий
@@ -26,7 +26,7 @@ noWayOfReturn: Это безвозвратное действие!
 download: Скачать проект
 description: Описание
 noDescription: Без описания.
-credits: Титры
+credits: Примечания и кредиты
 noCredits: Нет информации о создателях.
 notesAndCreditsDescription: Как вы создали этот проект? Вы использовали идеи, скрипты или работы от других людей? Благодарим их здесь.
 country: Страна
@@ -43,7 +43,7 @@ show-more: 'Развернуть'
 show-less: 'Спрятать'
 more-information: 'Подробности'
 less-information: 'Меньше информации '
-ok: ОК
+ok: Ок
 clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
 notifications: 'Уведомления'
@@ -120,7 +120,7 @@ programs:
     Да, удалить!
     Отмена
   tooLongDescription: Описание проекта слишком длинное!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: Примечания к проекту и титры слишком длинные!
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
@@ -164,9 +164,9 @@ programs:
   deleted_popup_header: '﻿Удалено'
   noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
   editDescription: Редактировать описание проекта
-  saveDescription: Сохранить изменения
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: Сохранить
+  editCredits: Редактирование примечаний к проекту и кредитов
+  saveCredits: Сохранить
   addComment: Написать комментарий
   thumbsUp: Палец вверх!
   smile: Улыбка!
@@ -176,9 +176,9 @@ programs:
   link: Скопировать ссылку проекта в буфер обмена
   reactionsText: Лайки
   downloadErrorText: Произошла ошибка при загрузке проекта. Пожалуйста, повторите попытку позже.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  showTranslation: Показать перевод
+  hideTranslation: Скрыть перевод
+  translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Показать перемешанный граф'
@@ -291,7 +291,7 @@ myprofile:
   editUsername: Изменить имя пользователя
   editPassword: Изменить пароль
   editCountry: Изменить страну
-  editEmail: Изменить электронный адрес
+  editEmail: Редактировать email
   deleteAccount: Удалить аккаунт
   deleteAccountText: Вы уверены, что хотите удалить свой аккаунт? Это удалит загруженные проекты и комментарии!
   editAccountSettings: Изменить настройки аккаунта
@@ -630,15 +630,15 @@ catro-notifications:
   noReactions: "Похоже, что у вас нет уведомлений."
   noRemixes: "Похоже, что у вас нет уведомлений."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% прокомментировал %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% отправил %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% теперь подписан на вас.'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% создал новую игру %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% создал ремикс %program_link% вашей игры %remix_program_link%.'
 clipboard:
   success: Ссылка скопирована в буфер обмена
   fail: Не удалось скопировать ссылку в буфер обмена! :(

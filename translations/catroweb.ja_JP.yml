@@ -26,8 +26,8 @@ noWayOfReturn: アクションを復元する方法はありません！
 download: ダウンロード
 description: 説明
 noDescription: 説明はありません。
-credits: Credits
-noCredits: No credits available.
+credits: ノートとクレジット
+noCredits: 利用可能なメモとクレジットはありません。
 notesAndCreditsDescription: どのようにしてこのプロジェクトを作ったのですか? アイデア、スクリプト、または他の人々のアートワークを使ったのですか?
 country: 国
 loginText: ログイン
@@ -39,8 +39,8 @@ pleaseTryAgain: 'もう一度やり直してください。'
 oldVersionError: 'ポケット コードの最新のバージョンにアップデートしてください!'
 more: '詳細'
 less: '少ない'
-show-more: 'More information'
-show-less: 'Less information'
+show-more: '詳細を表示'
+show-less: '表示を減らす'
 more-information: '詳細情報'
 less-information: '情報を減らす'
 ok: OK
@@ -54,7 +54,7 @@ CommentNotifications: 'コメント'
 RemixNotifications: 'リミックス'
 wellDone: "よくできました!"
 done: "完了!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "通知がないようです。"
 confirmMessage: "はい、削除します"
 cancelMessage: "キャンセル"
 notificationsUnauthorizedError: "ユーザーを承認できません"
@@ -120,7 +120,7 @@ programs:
     はい、削除してください!
     キャンセル
   tooLongDescription: プロジェクトの説明が長すぎます！
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: プロジェクトノートとクレジットが長すぎます！
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
@@ -164,9 +164,9 @@ programs:
   deleted_popup_header: 削除しました
   noAdminRights: 管理者権限がありません。管理者としてログインしてください。
   editDescription: プロジェクトの説明を編集
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: 保存
+  editCredits: プロジェクトノートとクレジットを編集
+  saveCredits: 保存
   addComment: コメントを書く
   thumbsUp: 大げさだ！
   smile: 笑顔！
@@ -176,16 +176,16 @@ programs:
   link: プロジェクトのリンクをクリップボードにコピー
   reactionsText: リアクション
   downloadErrorText: プロジェクトのダウンロード中にエラーが発生しました。後でもう一度やり直してください。
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  showTranslation: 翻訳を表示する
+  hideTranslation: 翻訳を隠す
+  translatedByLine: '%provider%を%sourceLanguage%から%targetLanguage%に翻訳'
 remixGraph:
   title: リミックス
   showRemixGraph: 'リミックスのグラフを表示'
-  by: 'によって'
+  by: '作成者:'
   open: '開く '
   showPaths: 'パスを表示'
-  programNotAvailableErrorTitle: 'ごめんなさい...'
+  programNotAvailableErrorTitle: 'すみません・・・。'
   programNotAvailableErrorDescription: 'このプロジェクトはもう利用できません！'
   programNotAvailable: '利用できません'
   programUnknownUser: '不明なユーザー'
@@ -268,7 +268,7 @@ profile:
   programsOf: プロジェクト
   changePicture: 写真を変更
   avatar:
-    noImage: No image!
+    noImage: イメージがない！？
     pictureTooLarge: 選択した写真が大きすぎる、5 mb より大きいイメージを使用しないでください。
     uploadError: 申し訳ありませんが、アップロード中に問題があった ！
     noSupport: このタイプのイメージはサポートされていません、別の画像を試してください。
@@ -318,7 +318,7 @@ termsOfUse:
     item3: すべての経験レベルで
   list2:
     item1: 尊重してください。プロジェクトを共有するとき、多くの異なる年齢や背景を持つ人々があなたの貢献を見ることを覚えておいてください。
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "クレジットを表示する。他の人のプロジェクトを自由に変更しても構いませんが、その際には必ずクレジットを明記してください。クレジットを表示する場所としては、プロジェクトのノートとクレジットのセクションがあります。他のユーザーのプロジェクトの修正についての詳細は、この点線の下の段落をご覧ください。"
     item3: "正直でいましょう。誰か他の人になりすましたり、コミュニティを騙したりしないようにしましょう。"
     item4: "個人情報は非公開にしましょう。あなたのメール アドレス、電話番号、またはその他の個人的な連絡先情報を共有しないでください。"
     item5: "サイトをフレンドリーに保つのに役立ちます。 あなたが他の人がプロジェクトやコメントを見つけるだろうと感じる場合は、侮辱、あまりにも暴力的。 不適切な場合は「不適切として報告する」ボタンをクリックし、簡単な説明を残してください。 Catrobat チームがレポートを確認し、任意のプロジェクト、コメント、または投稿を削除します。"
@@ -572,7 +572,7 @@ codeview:
   objects: 'アクターとオブジェクト'
   looks: '外見'
   sounds: 'サウンド'
-  globals: 'Globals'
+  globals: 'グローバル'
   locals: 'ローカル'
   globalVariables: 'グローバル変数'
   localVariables: 'ローカル変数'
@@ -625,15 +625,15 @@ catro-notifications:
   noReactions: "リアクション通知がないようです。"
   noRemixes: "リミックス通知がないようです。"
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% が %program_link% にコメントしました。'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% が %program_link% にリアクションしました。'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% さんがあなたをフォローしています。'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% が新しいゲーム %program_link% を作成しました。'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% があなたのゲーム %program_link% のリミックス %remix_program_link% を作成しました。'
 clipboard:
   success: プロジェクトへのリンクをクリップボードにコピーしました！
   fail: クリップボードへのリンクのコピーに失敗しました！ :(

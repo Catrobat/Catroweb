@@ -26,17 +26,17 @@ noWayOfReturn: Hərəkətlərinizi geri qaytarmağın heç bir yolu yoxdur!
 download: Endir
 description: Açıqlama
 noDescription: Açıqlama yoxdur.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+credits: Töhfə verənlər
+noCredits: Heç kim yoxdur.
+notesAndCreditsDescription: Bu layihəni necə yaratdınız? Başqalarının ideyalarını, ssenarilərini və sənət əsərlərini istifadə etdiniz? Onlara buradan təşəkkür edin.
 country: Ölkə
 loginText: giriş
 privacyPolicy: Gizlilik Siyasəti
 imprint: Imprint
 programDetails: Təfsilatlar
 somethingWentWrong: 'Ups, nəsə səhv getdi.'
-pleaseTryAgain: 'Zəhmət olmasa yenidən sına!'
-oldVersionError: 'Ən yeni Cib Kodu versiyasına yenilə!'
+pleaseTryAgain: 'Zəhmət olmasa yenidən sınayın!'
+oldVersionError: 'Ən son Cib Kodu versiyasına yeniləyin!'
 more: 'daha çox'
 less: 'daha az'
 show-more: 'Daha çox göstər'
@@ -133,7 +133,7 @@ programs:
     likersTitle: "Bu layihəyə reaksiya verən insanlar"
     all: "Hamısı"
   remixes: '{0}0 remix |{1}1 remix |]1,Inf]%remixes% remix'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  newRemixesNotificationTitle: '|{1}"%programName%" 1 yeni remix ehtiva edir: |]1,Inf] "%programName%" %remixes% yeni remix ehtiva edir:'
   submitted: Göndərilən layihələr
   uploaded: Yüklənilən layihələr
   reportAsInappropriate: Uyğunsuz olaraq şikayət et
@@ -175,39 +175,39 @@ programs:
   linkTitle: Bağlantı
   link: Layihə bağlantısını lövhəyə kopyala
   reactionsText: Reaksiyalar
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: Layihə endirmə xətası. Zəhmət olmasa daha sonra yenidən sınayın.
+  showTranslation: Tərcüməni göstər
+  hideTranslation: Tərcüməni gizlət
+  translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə %provider% tərcümə etdi'
 remixGraph:
   title: Remixlər
-  showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
+  showRemixGraph: 'Remix qrafiki'
+  by: 'tərəfindən'
+  open: 'Aç'
+  showPaths: 'Yolları göstər'
+  programNotAvailableErrorTitle: 'Təəssüf edirik...'
+  programNotAvailableErrorDescription: 'Bu layihə artıq əlçatan deyil!'
+  programNotAvailable: 'Əlçatan deyil'
   programUnknownUser: 'Unknown User'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: Bu avto-mesajdır - Zəhmət olmasa bu e-poçta birbaşa cavab verməyin
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Hörmətli %username%.
+    Hesabı aktivləşdirmək üçün - zəhmət olmasa %confirmationUrl% ünvanını ziyarət edin
+    Bu bağlantı hesabı təsdiqləmək üçün yalnız bir dəfə istifadə edilə bilər.
+    Hörmətlə,
+    Catrobat Komandası.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Hörmətli %username%. <br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    Hesabınızı aktivləşdirmək üçün zəhmət olmasa <a href=%confirmationUrl%>bura</a><br> klikləyin
     <br>
-    This link can only be used once to validate your account.<br>
+    Bu bağlantı, hesabınızı təsdiqləmək üçün yalnız bir dəfə istifadə oluna bilər.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Hörmətlə,<br>
+    Catrobat Komandası.
     </p>
 passwordRecovery:
   subject: Your Catrobat Password Recovery
@@ -238,47 +238,47 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  edit: Profilinizə düzəliş edin
+  saveChanges: dəyişiklikləri saxla
+  newPass: yeni şifrə
+  repeatPass: şifrəni təkrar yazın
+  oldPass: köhnə şifrə
+  firstEmail: İlk e-poçtum
+  secondEmail: İkinci e-poçtum
+  myPrograms: Layihələrim
+  follows: İzləmələr
+  follower: İzləyici
+  unfollowUser: Bu istifadəçini izləmə!
+  followUser: Bu istifadəçini izlə!
+  amountOfPrograms: Layihə miqdarı
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+    passwordTooShort: Yeni şifrədən ən azı %length% simvol olmalıdır.
+    passwordTooLong: Yeni şifrədə ən çoxu %length% simvol olmalıdır.
+    passwordIsUsername: Şifrə, istifadəçi adından fərqli olmalıdır.
+    passwordWrong: Yanlış şifrə
+    emailNotValid: Bu e-poçt ünvanı etibarlı deyil.
+    emailMissing: Bu e-poçt ünvanını yeniləyərkən xəta baş verdi. Ən azı bir təsdiqlənmiş e-poçt ünvanı olmalıdır.
+    emailExists: Bu e-poçt ünvanı artıq var.
+    usernameNotValid: Bu istifadəçi adı etibarlı deyil.
+    usernameMissing: Bir istifadəçi adınız yoxdur.
+    usernameExists: Bu istifadəçi adı artıq var.
+    usernameContainsEmail: İstifadəçi adı, e-poçt ünvanını ehtiva etməməlidir.
+    submitSuccess: saxlanıldı!
+  reallyDeleteProgram: Layihənizi silmək istədiyinizə əminsiniz
+  programsOf: Layihələri
   changePicture: Şəkli dəyişdir
   avatar:
     noImage: No Image!
     pictureTooLarge: Seçdiyiniz şəkil çox böyükdür, zəhmət olmasa 5 MB-dan böyük şəkilləri istifadə etməyin.
     uploadError: Təəssüf edirik, yüklənərkən problem yarandı.
     noSupport: Bu təsvir növü dəstəklənmir, zəhmət olmasa başqasını sınayın.
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Scratch profili
 myprofile:
   editProfile: Profilə düzəliş et
-  edit: Edit
+  edit: Düzəliş et
   done: Hazırdır
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  checkMail: E-poçtunuza bir e-poçt göndərildi. Zəhmət olmasa gələn qutunuzu yoxlayın.
+  passwordUpdated: Şifrəniz uğurla yeniləndi.
   avatar: Avatar
   email: E-poçt
   editAvatar: Avatara düzəliş et
@@ -288,9 +288,9 @@ myprofile:
   editEmail: E-poçta düzəliş et
   deleteAccount: Hesabı Sil
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  editAccountSettings: Hesab tənzimləmələrinə düzəliş et
+  notChangeVisibility: Görünmə dəyişdirilə bilmir
+  notChangeVisibilityReason: Layihənizin dil versiyası çox yüksəkdir və buna görə də görünən olaraq tənzimlənə bilmir.
 licenseToPlay:
   link: 'Oynamaq üçün lisenziya'
   title: 'Oynamaq üçün lisenziya - Kredit ver və paylaş'
@@ -348,20 +348,20 @@ search:
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
-  profile: My Profile
+  profile: Profilim
   login: Giriş
   logout: Çıxış
   admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  home: Əsas səhifə
+  helpAndTutorials: Kömək və təlimatlar
+  followersAndFollowing: İzləyici
 login:
   login: Giriş
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
+  passOrUser: Şifrəniz və ya istifadəçi adınız yanlışdır.
+  noUsername: İstifadəçi adı və ya e-poçt ünvanı tapılmadı.
+  forgotPass: Şifrənizi və ya istifadəçi adınızı unutmusunuz?
   recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  recoverPassSend: E-poçtunuza bir e-poçt göndərildi. Zəhmət olmasa gələn qutunuzu yoxlayın.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
@@ -386,7 +386,7 @@ errors:
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
-    exists: This username already exists.
+    exists: Bu istifadəçi adı artıq var.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
     size: The username must have at least 3 character and not more than 180
@@ -399,7 +399,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Bu e-poçt ünvanı artıq var.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
