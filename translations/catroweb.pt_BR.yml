@@ -176,9 +176,9 @@ programs:
   link: Copiar link do projeto para a área de transferência
   reactionsText: Curtidas
   downloadErrorText: Ocorreu um erro ao baixar o projeto. Por favor, tente novamente mais tarde.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  showTranslation: Mostrar tradução
+  hideTranslation: Ocultar tradução
+  translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
 remixGraph:
   title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'

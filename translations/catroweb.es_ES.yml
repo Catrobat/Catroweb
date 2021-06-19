@@ -176,9 +176,9 @@ programs:
   link: Copiar enlace del proyecto al portapapeles
   reactionsText: Reacciones
   downloadErrorText: Error al descargar el proyecto. Inténtalo de nuevo más tarde.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  showTranslation: Mostrar traducción
+  hideTranslation: Ocultar la traducción
+  translatedByLine: Traducido por %provider% del %sourceLanguage% al %targetLanguage%
 remixGraph:
   title: Remezclar
   showRemixGraph: 'Mostrar gráfico de remixes'
