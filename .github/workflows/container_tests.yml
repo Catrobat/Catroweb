@@ -86,7 +86,7 @@ jobs:
           wget --spider -S "http://catroweb:8080" 2>&1 | awk '/HTTP\// {print $2}' | grep 200
 
       - name: DEBUG
-        if: always()
+        if: failure()
         run: |
           docker ps -a
           echo "--- App ---"

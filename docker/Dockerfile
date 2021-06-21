@@ -43,9 +43,7 @@ RUN apt-get update && \
     curl \
     libgconf-2-4 \
     npm
-RUN npm install -g n
-RUN n stable && \
-    npm install -g grunt-cli && \
+RUN npm install -g grunt-cli && \
     npm install -g sass
 
 # Overwrite default apache config
