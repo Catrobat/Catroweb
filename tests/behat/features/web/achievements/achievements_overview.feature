@@ -13,11 +13,11 @@ Feature: Users have an achievement page for their overviews
       | 2  | Catrobat     |
       | 3  | ZeroAchiever |
     And there are user achievements:
-      | id | user     | achievement        | seen_at | unlocked_at |
-      | 1  | Catrobat | master_of_disaster |         | 2021-03-03  |
-      | 2  | Achiever | best_user          |         | 2021-05-05  |
-      | 2  | Achiever | first_achiever     |         | 2021-05-03  |
-      | 2  | Achiever | master_of_disaster |         | 2021-05-02  |
+      | id | user     | achievement        | seen_at    | unlocked_at |
+      | 1  | Catrobat | master_of_disaster | 2021-03-03 | 2021-03-03  |
+      | 2  | Achiever | best_user          | 2021-05-05 | 2021-05-05  |
+      | 2  | Achiever | first_achiever     | 2021-05-03 | 2021-05-03  |
+      | 2  | Achiever | master_of_disaster | 2021-05-02 | 2021-05-02  |
 
   Scenario: Users must be logged in to see the achievements overview
     Given I am on "/app/achievements"
@@ -48,7 +48,7 @@ Feature: Users have an achievement page for their overviews
     And I wait for the page to be loaded
     Then the element ".achievement-top__wrapper" should be visible
     And the "h2" element should contain "Newest Achievement"
-    And the ".achievement-top__badge__banner" element should contain "best__"
+    And the ".achievement__badge__banner__text--top" element should contain "best__"
     And the ".achievement-top__text-wrapper" element should contain "best__desc"
     And the ".achievement-top__text-wrapper" element should contain "2021-05-05"
     And the ".achievement-top__text-wrapper" element should contain "3 out of 3 unlocked"
@@ -58,7 +58,7 @@ Feature: Users have an achievement page for their overviews
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the element ".achievement-top__wrapper" should be visible
-    And the ".achievement-top__badge__banner" element should contain "ups__"
+    And the ".achievement__badge__banner__text--top" element should contain "ups__"
     And the ".achievement-top__text-wrapper" element should contain "ups__desc"
     And the ".achievement-top__text-wrapper" element should contain "2021-03-03"
     And the ".achievement-top__text-wrapper" element should contain "1 out of 3 unlocked"
@@ -119,16 +119,3 @@ Feature: Users have an achievement page for their overviews
     And the "#locked-achievements" element should contain "best__"
     And the "#locked-achievements" element should contain "first__"
     And the element "#no-locked-achievements" should not be visible
-
-  Scenario: Achievements have a badge, a banner and and a one-line description
-    Given I log in as "Achiever"
-    And I am on "/app/achievements"
-    And I wait for the page to be loaded
-    Then the element "#unlocked-achievements" should be visible
-    Then the element ".achievement" should be visible
-    Then the element ".achievement__badge" should be visible
-    Then the element ".achievement__badge__image" should be visible
-    Then the element ".achievement__badge__banner" should be visible
-    Then the element ".achievement__badge__text" should be visible
-
-

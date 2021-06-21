@@ -15,11 +15,17 @@ class VersionStrategy implements VersionStrategyInterface
 
   public function getVersion($path): string
   {
-    if (preg_match('/\?/', $path)) {
-      return '&v='.$this->app_version;
+    $hash = '';
+    $app_env = $_ENV['APP_ENV'];
+    if ('dev' === $app_env) {
+      $hash = '--'.md5(strval(rand(0, 999999)));
     }
 
-    return '?v='.$this->app_version;
+    if (preg_match('/\?/', $path)) {
+      return '&v='.$this->app_version.$hash;
+    }
+
+    return '?v='.$this->app_version.$hash;
   }
 
   public function applyVersion($path): string

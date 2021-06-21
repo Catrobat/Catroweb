@@ -141,7 +141,7 @@ Feature: Registering a new user.
     And I should get the json object:
     """
       {
-        "email": "EMail wird bereits benützt",
+        "email": "E-Mail wird bereits verwendet",
         "username": "Benutzername wird bereits benützt"
       }
     """

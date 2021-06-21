@@ -156,12 +156,20 @@
 {% block js %}
   <script src="{{ asset('js/UserNotifications.min.js') }}"></script>
   <script>
-    let notification = new UserNotifications("{{ url('notification_mark_as_read') }}", "{{ url('notifications_seen') }}",
-      "{{ path('notifications_count') }}", "{{ path('notifications_fetch') }}", "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
+    let notification = new UserNotifications(
+      "{{ url('notification_mark_as_read') }}",
+      "{{ url('notifications_seen') }}",
+      "{{ path('notifications_fetch') }}",
+      "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
       "{{ "notificationsClearError"|trans({}, "catroweb") }}",
-      "{{ "notificationsUnauthorizedError"|trans({}, "catroweb") }}", {{ allNotificationsCount }},
-        {{ followNotificationCount }}, {{ reactionNotificationCount }}, {{ commentNotificationCount }},
-        {{ remixNotificationCount }}, "{{ path('profile') }}", "{{ path('program') }}",
+      "{{ "notificationsUnauthorizedError"|trans({}, "catroweb") }}",
+        {{ allNotificationsCount }},
+        {{ followNotificationCount }},
+        {{ reactionNotificationCount }},
+        {{ commentNotificationCount }},
+        {{ remixNotificationCount }},
+      "{{ path('profile') }}",
+      "{{ path('program') }}",
       "{{ asset('images/default/avatar_default.png') }}");
     notification.markAllRead()
   </script>

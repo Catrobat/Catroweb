@@ -8,6 +8,7 @@ use App\Entity\FollowNotification;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserManager;
+use App\Manager\AchievementManager;
 use App\Repository\UserCommentRepository;
 use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -28,13 +29,15 @@ class ProfileController extends AbstractController
 {
   public const MIN_PASSWORD_LENGTH = 6;
   public const MAX_PASSWORD_LENGTH = 4096;
-  private ProgramManager $program_manager;
-  private UserManager $user_manager;
+  protected ProgramManager $program_manager;
+  protected UserManager $user_manager;
+  protected AchievementManager $achievement_manager;
 
-  public function __construct(ProgramManager $program_manager, UserManager $user_manager)
+  public function __construct(ProgramManager $program_manager, UserManager $user_manager, AchievementManager $achievement_manager)
   {
     $this->program_manager = $program_manager;
     $this->user_manager = $user_manager;
+    $this->achievement_manager = $achievement_manager;
   }
 
   /**
@@ -47,29 +50,22 @@ class ProfileController extends AbstractController
   {
     /** @var User|null $user */
     $user = null;
-    $my_profile = false;
-
-    $view = 'UserManagement/Profile/profile.html.twig';
 
     if ('0' === $id || ($this->getUser() && $this->getUser()->getId() === $id)) {
-      $my_profile = true;
       $user = $this->getUser();
+      if (is_null($user)) {
+        return $this->redirectToRoute('login');
+      }
+      $program_count = $this->program_manager->countUserProjects($id);
       $view = 'UserManagement/Profile/myProfile.html.twig';
     } else {
       $user = $this->user_manager->find($id);
-    }
-
-    if (null === $user) {
-      return $this->redirectToRoute('login');
-    }
-
-    if ($my_profile) {
-      $program_count = $this->program_manager->countUserProjects($id);
-    } else {
+      if (is_null($user)) {
+        return $this->redirectToRoute('index');
+      }
       $program_count = $this->program_manager->countPublicUserProjects($id);
+      $view = 'UserManagement/Profile/profile.html.twig';
     }
-
-    $oauth_user = $user->getGplusUid();
 
     Locale::setDefault(substr($request->getLocale(), 0, 2));
     try {
@@ -78,23 +74,19 @@ class ProfileController extends AbstractController
       $country = '';
     }
 
-    $firstMail = $user->getEmail();
-    $secondMail = $user->getAdditionalEmail();
-    $follower_list = $this->user_manager->getMappedUserData($user->getFollowers()->toArray());
-    $following_list = $this->user_manager->getMappedUserData($user->getFollowing()->toArray());
-
     return $this->render($view, [
       'profile' => $user,
       'program_count' => $program_count,
       'country' => $country,
-      'firstMail' => $firstMail,
-      'secondMail' => $secondMail,
-      'oauth_user' => $oauth_user,
+      'firstMail' => $user->getEmail(),
+      'secondMail' => $user->getAdditionalEmail(),
+      'oauth_user' => $user->getGplusUid(),
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,
       'username' => $user->getUsername(),
-      'followers_list' => $follower_list,
-      'following_list' => $following_list,
+      'followers_list' => $this->user_manager->getMappedUserData($user->getFollowers()->toArray()),
+      'following_list' => $this->user_manager->getMappedUserData($user->getFollowing()->toArray()),
+      'achievements' => $this->achievement_manager->findUnlockedAchievements($user),
     ]);
   }
 

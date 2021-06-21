@@ -23,6 +23,8 @@ Encore
    * Each entry will result in one JavaScript file (e.g. app.js)
    * and one CSS file (e.g. app.css) if your JavaScript imports CSS.
    */
+  .addEntry('base', './assets/js/material/base.js')
+  .addEntry('sidebar', './assets/js/material/sidebar.js')
   .addEntry('login', './assets/js/material/login.js')
   .addEntry('register', './assets/js/material/register.js')
   .addEntry('request', './assets/js/material/request.js')
@@ -31,7 +33,8 @@ Encore
   .addEntry('program_description', './assets/js/material/program_description.js')
   .addEntry('report', './assets/js/material/report.js')
   .addEntry('footer', './assets/js/material/footer.js')
-  .addEntry('tab-bar', './assets/js/material/tab-bar.js')
+  .addEntry('profile', './assets/js/material/profile.js')
+  .addEntry('achievements_overview', './assets/js/material/achievements_overview.js')
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()

@@ -1,9 +1,8 @@
 /* eslint-env jquery */
-/* global FetchNotifications */
 
 // eslint-disable-next-line no-unused-vars
 class UserNotifications {
-  constructor (markAsReadUrl, markAllSeen, countNotificationsUrl, fetchNotificationsUrl, somethingWentWrongError,
+  constructor (markAsReadUrl, markAllSeen, fetchNotificationsUrl, somethingWentWrongError,
     notificationsClearError, notificationsUnauthorizedError, allNotificationsCount,
     followNotificationCount, reactionNotificationCount, commentNotificationCount, remixNotificationCount,
     profilePath, programPath, imgAsset) {
@@ -14,7 +13,6 @@ class UserNotifications {
     this.remixes = false
     this.markAsReadUrl = markAsReadUrl
     this.markAllSeen = markAllSeen
-    this.countNotificationsUrl = countNotificationsUrl
     this.fetchNotificationsUrl = fetchNotificationsUrl
     this.somethingWentWrongError = somethingWentWrongError
     this.notificationsClearError = notificationsClearError
@@ -39,7 +37,7 @@ class UserNotifications {
     $(document).on('click', '#all-notif', function () {
       if (self.all === false) {
         self.resetChips()
-        self.selectChip('all-notif', self.all)
+        self.selectChip('all-notif')
         self.all = true
       }
     })
@@ -47,7 +45,7 @@ class UserNotifications {
     $(document).on('click', '#follow-notif', function () {
       if (self.follower === false) {
         self.resetChips()
-        self.selectChip('follow-notif', self.follower)
+        self.selectChip('follow-notif')
         self.follower = true
         if (self.followerNotificationsLoaded < self.notificationsFetchCount) {
           self.followerNotificationsLoaded = document.getElementById('follow-notifications').childElementCount
@@ -60,7 +58,7 @@ class UserNotifications {
     $(document).on('click', '#comment-notif', function () {
       if (self.comment === false) {
         self.resetChips()
-        self.selectChip('comment-notif', self.comment)
+        self.selectChip('comment-notif')
         self.comment = true
         if (self.commentNotificationsLoaded < self.notificationsFetchCount) {
           self.commentNotificationsLoaded = document.getElementById('comment-notifications').childElementCount
@@ -73,7 +71,7 @@ class UserNotifications {
     $(document).on('click', '#reaction-notif', function () {
       if (self.reactions === false) {
         self.resetChips()
-        self.selectChip('reaction-notif', self.reactions)
+        self.selectChip('reaction-notif')
         self.reactions = true
         if (self.reactionNotificationsLoaded < self.notificationsFetchCount) {
           self.reactionNotificationsLoaded = document.getElementById('reaction-notifications').childElementCount
@@ -85,7 +83,7 @@ class UserNotifications {
     $(document).on('click', '#remix-notif', function () {
       if (self.remixes === false) {
         self.resetChips()
-        self.selectChip('remix-notif', self.remixes)
+        self.selectChip('remix-notif')
         self.remixes = true
         if (self.remixNotificationsLoaded < self.notificationsFetchCount) {
           self.remixNotificationsLoaded = document.getElementById('remix-notifications').childElementCount
@@ -245,8 +243,7 @@ class UserNotifications {
     document.getElementById('remix-notif').classList.replace('chip-selected', 'chip-default')
   }
 
-  selectChip (elementId, notificationType) {
-    notificationType = true
+  selectChip (elementId) {
     document.getElementById(elementId).classList.replace('chip-default', 'chip-selected')
   }
 
@@ -264,7 +261,7 @@ class UserNotifications {
       url: self.markAsReadUrl + '/' + notificationId,
       type: 'get',
       success: function () {
-        self.updateBadgeNumber()
+        self.hideBadge()
         self.reloadResources(notificationId)
       },
       error: function (xhr) {
@@ -288,7 +285,7 @@ class UserNotifications {
       url: self.markAllSeen,
       type: 'get',
       success: function () {
-        self.updateBadgeNumber()
+        self.hideBadge()
       },
       error: function (xhr) {
         self.handleError(xhr)
@@ -296,10 +293,9 @@ class UserNotifications {
     })
   }
 
-  updateBadgeNumber () {
-    const self = this
-    const fetchNotifications = new FetchNotifications(self.countNotificationsUrl, 99, 10000)
-    fetchNotifications.run('markAsRead')
+  hideBadge () {
+    const badge = document.getElementById('sidebar_badge--unseen-notifications')
+    badge.style.display = 'none'
   }
 
   reloadResources (id) {

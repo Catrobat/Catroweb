@@ -11,6 +11,8 @@ use App\Repository\Achievements\UserAchievementRepository;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 use Exception;
 
 class AchievementManager
@@ -92,6 +94,20 @@ class AchievementManager
   public function findUserAchievements(User $user): array
   {
     return $this->user_achievement_repository->findUserAchievements($user);
+  }
+
+  public function countUnseenUserAchievements(User $user): int
+  {
+    return $this->user_achievement_repository->countUnseenUserAchievements($user);
+  }
+
+  /**
+   * @throws ORMException
+   * @throws OptimisticLockException
+   */
+  public function readAllUnseenAchievements(User $user): void
+  {
+    $this->user_achievement_repository->readAllUnseenAchievements($user);
   }
 
   /**
