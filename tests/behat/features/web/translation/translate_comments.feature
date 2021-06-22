@@ -16,7 +16,45 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translate button should translate the corresponding comment
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#comment-translate-button-1" should exist
-    Then the element "#comment-translate-button-2" should exist
-    And the element "#comment-translate-button-1" should have a attribute "href" with value "https://translate.google.com/?q=c1"
-    And the element "#comment-translate-button-2" should have a attribute "href" with value "https://translate.google.com/?q=c2"
+    Then the element "#comment-translation-button-1" should exist
+    When I click "#comment-translation-button-1"
+    And I wait for AJAX to finish
+    Then the element "#remove-comment-translation-button-1" should be visible
+    And the element "#comment-translation-wrapper-1" should be visible
+    Then the "#comment-text-translation-1" element should contain "Fixed translation text"
+    When I click "#remove-comment-translation-button-1"
+    Then the element "#comment-translation-button-1" should be visible
+    And the element "#comment-text-wrapper-1" should be visible
+    And the "#comment-text-1" element should contain "c1"
+  
+  Scenario: Comment should only be translated by API once
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#comment-translation-button-2" should exist
+    When I click "#comment-translation-button-2"
+    And I wait for AJAX to finish
+    Then the element "#remove-comment-translation-button-2" should be visible
+    And the element "#comment-translation-wrapper-2" should be visible
+    And the "#comment-text-translation-2" element should contain "Fixed translation text"
+    When I click "#remove-comment-translation-button-2"
+    Then the element "#comment-translation-button-2" should be visible
+    And the element "#comment-text-wrapper-2" should be visible
+    When I click "#comment-translation-button-2"
+    Then the element "#remove-comment-translation-button-2" should be visible
+    And the element "#comment-translation-wrapper-2" should be visible
+    And the "#comment-text-translation-2" element should contain "Fixed translation text"
+
+  Scenario: Translation provider should have correct provider, source language, and target language
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#comment-translation-button-1" should exist
+    When I click "#comment-translation-button-1"
+    And I wait for AJAX to finish
+    Then the element "#remove-comment-translation-button-1" should be visible
+    And the element "#comment-translation-wrapper-1" should be visible
+    Then the "#comment-translation-before-languages-1" element should contain "Translated by iTranslate from"
+    And the "#comment-translation-first-language-1" element should contain "English"
+    And the "#comment-translation-between-languages-1" element should contain "to"
+    And the "#comment-translation-second-language-1" element should contain "English"
+    And the "#comment-translation-after-languages-1" element should contain ""
+    

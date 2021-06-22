@@ -260,6 +260,26 @@ table td:nth-child(1) {
   @include force-word-break();
 }
 
+.comment-translation-loading-spinner {
+  padding-left: 1em;
+}
+
+.comment-translation-wrapper {
+  display: block;
+  padding-top: 0.4em;
+  clear: both;
+  @include force-word-break();
+}
+
+.comment-translation-credit {
+  font-size: small;
+  color: #808080;
+}
+
+.comment-text-translation {
+  display: block;
+}
+
 .single-comment {
   min-height: 80px;
   padding-top: 10px;

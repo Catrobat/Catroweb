@@ -2,6 +2,7 @@
 
 namespace Translation;
 
+use App\Entity\Program;
 use App\Translation\TranslationApiInterface;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
@@ -84,6 +85,66 @@ class TranslationDelegateTest extends TestCase
     $translation_delegate = new TranslationDelegate();
 
     $translation_delegate->translate('test', $invalid_code, $invalid_code);
+  }
+
+  public function testTranslateProjectWithOnlyName(): void
+  {
+    $api = $this->createMock(TranslationApiInterface::class);
+    $translation_result = new TranslationResult();
+    $api->expects($this->once())
+      ->method('translate')
+      ->willReturn($translation_result)
+    ;
+
+    $project = new Program();
+    $project->setName('name');
+
+    $translation_delegate = new TranslationDelegate($api);
+
+    $actual_result = $translation_delegate->translateProject($project, 'en', 'fr');
+
+    $this->assertEquals([$translation_result, null, null], $actual_result);
+  }
+
+  public function testTranslateProjectWithDescriptionAndCredit(): void
+  {
+    $api = $this->createMock(TranslationApiInterface::class);
+    $translation_result = new TranslationResult();
+    $api->expects($this->atLeastOnce())
+      ->method('translate')
+      ->willReturn($translation_result)
+    ;
+
+    $project = new Program();
+    $project->setName('name');
+    $project->setDescription('description');
+    $project->setCredits('credit');
+
+    $translation_delegate = new TranslationDelegate($api);
+
+    $actual_result = $translation_delegate->translateProject($project, 'en', 'fr');
+
+    $this->assertEquals([$translation_result, $translation_result, $translation_result], $actual_result);
+  }
+
+  public function testTranslateProjectFailure(): void
+  {
+    $api = $this->createMock(TranslationApiInterface::class);
+    $api->expects($this->atLeastOnce())
+      ->method('translate')
+      ->willReturn(null)
+    ;
+
+    $project = new Program();
+    $project->setName('name');
+    $project->setDescription('description');
+    $project->setCredits('credit');
+
+    $translation_delegate = new TranslationDelegate($api);
+
+    $actual_result = $translation_delegate->translateProject($project, 'en', 'fr');
+
+    $this->assertNull($actual_result);
   }
 
   public function provideInvalidLanguageCode(): array

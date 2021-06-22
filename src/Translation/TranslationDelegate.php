@@ -2,6 +2,7 @@
 
 namespace App\Translation;
 
+use App\Entity\Program;
 use InvalidArgumentException;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
@@ -18,11 +19,45 @@ class TranslationDelegate
   /**
    * @throws InvalidArgumentException
    */
+  public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
+  {
+    $this->validateLanguage($source_language);
+    $this->validateLanguage($target_language);
+
+    $to_translate = [$project->getName(), $project->getDescription(), $project->getCredits()];
+    $translation_result = [];
+
+    foreach ($to_translate as $text) {
+      if (null == $text) {
+        array_push($translation_result, null);
+        continue;
+      }
+
+      $translated_text = $this->internalTranslate($text, $source_language, $target_language);
+
+      if (null === $translated_text) {
+        return null;
+      }
+
+      array_push($translation_result, $translated_text);
+    }
+
+    return $translation_result;
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
 
+    return $this->internalTranslate($text, $source_language, $target_language);
+  }
+
+  private function internalTranslate(string $text, ?string $source_language, string $target_language): ?TranslationResult
+  {
     foreach ($this->apis as $api) {
       $translation = $api->translate($text, $source_language, $target_language);
 

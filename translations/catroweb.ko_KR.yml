@@ -175,6 +175,9 @@ programs:
   link: 클립보드에 링크 복사하기
   reactionsText: 좋아요
   downloadErrorText: 프로젝트 다운중 오류 발생. 잠시 후 다시 시도.
+  showTranslation: 번역보기
+  hideTranslation: 번역 숨기기
+  translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
 remixGraph:
   title: 변환
   showRemixGraph: '리믹스 그래프 표시'

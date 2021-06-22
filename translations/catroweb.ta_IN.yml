@@ -1,25 +1,25 @@
 ---
 #homepage translation
 localLanguage: ஆங்கிலம்
-username: பயனர் பெயர்
+username: பயனர்பெயர்
 password: கடவுச்சொல்
-createNewPassword: Create new password
-accountSettings: கணக்கு அமைப்புகள்
+createNewPassword: புதிய கடவுச்சொல்லை உருவாக்குக
+accountSettings: கணக்கு செயலமைப்புகள்
 email: மின்னஞ்சல்
-aboutPocketCode: பற்றி பாக்கெட் குறியீடு
+aboutPocketCode: உடுப்புப்பை குறியீடு பற்றி
 about: பற்றி
-education: Education
-chat: Chat and forums
-others: Others
-tutorials: பயிற்சிகள்
+education: கல்வி
+chat: அரட்டை மற்றும் மன்றங்கள்
+others: மற்றவைகள்
+tutorials: உதவி
 googlePlay: கூகுள் ப்ளே
 iosAppStore: IOS செயலி அங்காடி
 huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: கடவுச்சொற்கள் பொருந்தவில்லை.
-error: தவறு
+error: பிழை
 cancel: தவிர்
 report: அறிக்கையிடு
-deleteIt: ஆம், நீக்கு!
+deleteIt: ஆமாம், அதை நீக்கு!
 reportIt: ஆம், அதைப் புகாரளிக்கவும்!
 areYouSure: உறுதியாகவா?
 noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
@@ -28,7 +28,7 @@ description: விளக்கம்
 noDescription: விவரம் இல்லை கிடைக்கும்.
 credits: பங்களித்தவர்கள்
 noCredits: வரவுகள் எதுவும் கிடைக்கவில்லை.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: இத் திட்டப்பணியை நீங்கள் எவ்வாறு உருவாக்கினீர்கள்?  மற்றவர்களிடம் இருந்து கருவாக்கங்கள், செயல்முறைகள் அல்லது கலைப்படைப்புகளைப் பயன்படுத்தினீர்களா?  அவர்களுக்கு இங்கே நன்றி கூறுங்கள்.
 country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: தனிமனித உரிமை கொள்கை
@@ -42,48 +42,48 @@ less: 'குறைந்து'
 show-more: 'மேலும் காண்பி'
 show-less: 'குறைவாக காண்பி'
 more-information: 'மேற்கொண்ட தகவல்கள்'
-less-information: 'Less information'
-ok: Ok
+less-information: 'சிறுத் தகவல்'
+ok: ஆம்
 clickToDownloadProgram: 'எடுத்துக்காட்டு திட்டத்தைப் பதிவிறக்க %link_start% இங்கே %link_end% என்பதைக் கிளிக் செய்க.'
 registrationError: 'பயனர் பெயரோ மின்னஞ்சல் முகவரியோ ஏற்கனவே உபயோகத்தில் உள்ளது.'
 notifications: 'அறிவிப்புகள்'
-allNotifications: 'அனைத்து அறிவிப்புகள்'
-FollowersNotifications: 'பின்பற்றுபவர்கள்'
-LikeNotifications: 'விருப்பம்'
-CommentNotifications: 'கருத்துகள்'
-RemixNotifications: 'ரீமிக்ஸ்கள்'
-wellDone: "நன்று!"
+allNotifications: 'அனைத்தும்'
+FollowersNotifications: 'பின்தொடர்பவர்கள்'
+LikeNotifications: 'மறுமொழிகள்'
+CommentNotifications: 'பின்கருத்துக்கள்'
+RemixNotifications: 'மறுக்கலவைகள்'
+wellDone: "சிறப்பு!"
 done: "முடிந்தது!"
 notificationsReadMessage: "உங்களிடம் எந்த அறிவிப்புகளும் இல்லை என்று தெரிகிறது."
 confirmMessage: "ஆம், நீக்கு"
 cancelMessage: "தவிர்"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "பயனரை அங்கீகரிக்க முடியவில்லை"
 notificationsClearError: "அறிவிப்புகளை படித்ததாக குறியிட இயலவில்லை!"
 pleaseWait: "தயவு செய்து காத்திருக்கவும்..."
 projects: "திட்டங்கள்"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "வெளிக் கணக்கு உள்நுழைவு தகவல்"
+oauthInfo: 'தற்போது நீங்கள் உள்நுழைய ஒரு வெளிக் கணக்கைப் பயன்படுத்தியுள்ளீர்கள். உங்களுக்காக ஒரு சீரற்ற பயனர்பெயரை நாங்கள் உருவாக்கியுள்ளோம்.  உங்கள் பயனர்பெயரை மாற்ற விரும்பினால் அல்லது உங்கள் கணக்கிற்கு புதிய கடவுச்சொல்லை உருவாக்க விரும்பினால் எனது சுயவிவரப் பக்கத்திற்குச் செல்லவும்.  உங்கள் சுயவிவரப் பக்கத்திற்குச் செல்ல %link_start% இங்கே %link_end% தோட்டு எடுங்கள்'
+oauthHere: "இங்கு"
+statistics: "புள்ளிவிவரம்"
 indexPage:
   recommendedSection:
     info:
       title: 'இங்கே என்ன திட்டங்கள் பரிந்துரைக்கப்படுகிறது?'
       description: 'எவ்வலவு அதிக விருப்பு ("த்ன்ஸ் அப்", "லாஃப்", "லவ்" மற்றும் "வோவ்!" உட்பட) உங்கள் திட்டம் பெறுகிறதோ, அது அவ்வலவு அதிகமாக இந்த பட்டியலின் மேலே தோன்றும்.'
 follower:
-  follows: Following
+  follows: பின்தொடர்தல்
   followers: பின்பற்றுபவர்கள்
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follow: பின்தொடர்க்க
+  username: பயனர்
+  followsMe: என்னைப் பின்தொடர்கிறார்
+  noFollowing: நீங்கள் தற்போது யாரையும் பின்தொடரவில்லை.
+  noFollowers: தற்போது உங்களைப் பின்தொடர்பவர்கள் யாரும் இல்லை.
+  noOtherFollowing: தற்போது நீங்கள் பின்தொடரும் பயனர்கள் யாரும் இல்லை.
+  noOtherFollowers: தற்போது உங்களைப் பின்தொடரும் பயனர்கள் யாரும் இல்லை.
+  followError: "விரும்பிய பயனரைப் பின்தொடர முடியவில்லை!"
+  unfollowError: "விரும்பிய பயனரைப் பின்தொடர்வதில் இருந்து பின்வாங்க முடியவில்லை!"
+  unfollowQuestion: "நீங்கள் இப் பயனரைப் பின்தொடர்வதில் இருந்து உறுதியாக பின்வாங்க விரும்புகிறீர்களா?"
+  unfollowButton: "%username%-ஐ பின்தொடருவதில் இருந்து பின்வாங்கு"
 programs:
   welcome:
     title: காட்ரோபாட்டின் %theme% -இற்கு நல்வரவு
@@ -92,10 +92,10 @@ programs:
     download: செயலியை பதிவிறக்கவும்
     statistics: மேற்கொண்ட புள்ளிவிவரங்கள்
   featured: சிறப்பு
-  example: Examples
+  example: சான்றுகள்
   newest: புதிய திட்டங்கள்
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
-  scratchremixes: Scratch remixes
+  scratchremixes: Scratch மறுகலவைகள்
   noPrograms: தற்போது திட்டங்கள் எதுவும் இல்லை.
   deleteConfirmation: |+
     நீ சொல்வது உறுதியா?
@@ -130,7 +130,7 @@ programs:
   sample: எடுத்துக்காட்டு திட்டங்கள்
   views: '%views% பார்வைகள்'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "அத்‌ திட்டப்பணியிற்கு மறுமொழிந்த நபர்கள்"
     all: "அனைத்தும்"
   remixes: '{0}0 ரீமிக்ஸ் |{1}1 ரீமிக்ஸ் |]1,Inf]%remixes% ரீமிக்ஸ்'
   newRemixesNotificationTitle: '|{1}"%programName%" இல் 1 புதிய ரீமிக்ஸ் உள்ளது: |]1,Inf] "%programName%" இல் %remixes% புதிய ரீமிக்ஸ் உள்ளது:'
@@ -175,7 +175,10 @@ programs:
   linkTitle: இணைப்பு
   link: திட்ட இணைப்பை கிளிப்போர்டுக்கு நகலெடுக்கவும்
   reactionsText: விருப்பம்
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadErrorText: திட்டப்பணியைப் பதிவு இறக்கும் போது பிழை நிகழ்ந்தது. தயவுசெய்து பிறகு மீண்டும் முயற்சிக்கவும்.
+  showTranslation: மொழிபெயர்ப்பைக் காட்டு
+  hideTranslation: மொழிபெயர்ப்பை மறை
+  translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
 remixGraph:
   title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'
@@ -263,7 +266,7 @@ profile:
     usernameNotValid: இந்த பயனர்பெயர் செல்லுபடியாகாது.
     usernameMissing: உங்களிடம் பயனர்பெயர் இருக்க வேண்டும்.
     usernameExists: இந்த பயனர்பெயர் ஏற்கனவே உள்ளது.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: பயனர்பெயரினுள் மின்னஞ்சல் முகவரி இருக்கக்கூடாது.
     submitSuccess: சேமிக்கப்பட்டது!
   reallyDeleteProgram: உங்கள் திட்டத்தை நீக்க விரும்புகிறீர்களா
   programsOf: திட்டங்கள்
@@ -273,7 +276,7 @@ profile:
     pictureTooLarge: நீங்கள் தேர்ந்தெடுத்த படம் மிகப் பெரியது, தயவுசெய்து 5mb ஐ விட பெரிய படங்களை பயன்படுத்த வேண்டாம்.
     uploadError: மன்னிக்கவும், பதிவேற்றத்தின் போது சிக்கல் ஏற்பட்டது!
     noSupport: இந்த பட வகை ஆதரிக்கப்படவில்லை, தயவுசெய்து மற்றொரு படத்தை முயற்சிக்கவும்.
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Scratch-இல்‌ உள்ள சுயவிவரம்
 myprofile:
   editProfile: சுயவிவர திருத்தம்
   edit: திருத்து
@@ -680,7 +683,7 @@ category:
   most_viewed: அதிகமாக பார்க்கபட்டது
   most_downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
   example: Example
-  scratch: Scratch remixes
+  scratch: Scratch மறுகலவைகள்
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
 achievements:
   sidebar:

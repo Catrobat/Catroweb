@@ -1,5 +1,5 @@
 # Use composer image for better caching
-FROM composer:2.1.1 AS composer-build
+FROM composer:2.1.3 AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
@@ -43,9 +43,7 @@ RUN apt-get update && \
     curl \
     libgconf-2-4 \
     npm
-RUN npm install -g n
-RUN n stable && \
-    npm install -g grunt-cli && \
+RUN npm install -g grunt-cli && \
     npm install -g sass
 
 # Overwrite default apache config

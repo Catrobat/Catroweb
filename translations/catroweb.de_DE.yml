@@ -176,6 +176,9 @@ programs:
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
   downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
+  showTranslation: Übersetzung anzeigen
+  hideTranslation: Übersetzung ausblenden
+  translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
@@ -446,10 +449,10 @@ failure:
   upload: Während dem Upload deiner App ist ein Fehler passiert.
 api:
   registerUser:
-    emailMissing: 'EMail fehlt'
+    emailMissing: 'E-Mail fehlt'
     emailEmpty: 'Feld für Email darf nicht leer sein'
     emailInvalid: 'Email ungültig'
-    emailAlreadyInUse: 'EMail wird bereits benützt'
+    emailAlreadyInUse: 'E-Mail wird bereits verwendet'
     usernameMissing: 'Benutzername fehlt'
     usernameTooShort: 'Benutzername zu kurz'
     usernameTooLong: 'Benutzername zu lang'
@@ -516,7 +519,7 @@ language:
 ci:
   generate: APK generieren
   pending: Generiere APK
-  download: APK downloaden
+  download: APK herunterladen
 gamejam:
   nojam: Entschuldigung, es findet gerade kein game jam statt
   submit: Einreichen zum %gamejamname%
@@ -589,7 +592,7 @@ codeStatistics:
   error: "Code-Statistiken können nicht angezeigt werden."
   general: 'Allgemein'
   bricks: 'Bausteine'
-  eventBricks: 'Event'
+  eventBricks: 'Ereignisse'
   controlBricks: 'Steuerung'
   motionBricks: 'Bewegung'
   soundBricks: 'Klang'

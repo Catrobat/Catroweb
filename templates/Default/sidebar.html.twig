@@ -21,18 +21,17 @@
         <a class="nav-link" href="{{ url('notifications') }}" id="sidebar-notifications">
           <span class="sidebar-link-icon material-icons">notifications</span>
           <span class="sidebar-link-text">{{ "notifications"|trans({}, "catroweb") }}</span>
-          <span class="badge-pill badge-danger all-notifications"></span>
+          <span class="badge-pill badge-danger all-notifications" id="sidebar_badge--unseen-notifications"></span>
         </a>
       </li>
 
-      {% if app.environment != 'prod' %}
       <li class="nav-item">
         <a class="nav-link" href="{{ url('achievements_overview') }}" id="sidebar-achievements">
           <span class="sidebar-link-icon material-icons">events</span>
           <span class="sidebar-link-text">{{ "achievements.sidebar.title"|trans({}, "catroweb") }}</span>
+          <span class="badge-pill badge-primary" id="sidebar_badge--unseen-achievements"></span>
         </a>
       </li>
-    {% endif %}
 
       <li class="nav-item">
         <a class="nav-link" href="{{ url('profile') }}" id="btn-profile">

@@ -176,6 +176,9 @@ programs:
   link: Proje bağlantısını panoya kopyala
   reactionsText: Tepkiler
   downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
+  showTranslation: Çeviriyi göster
+  hideTranslation: Çeviriyi gizle
+  translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
 remixGraph:
   title: Remixler
   showRemixGraph: 'Remixleri'

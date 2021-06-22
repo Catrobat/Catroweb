@@ -1,5 +1,8 @@
 function loadYoutubeOnClick () {
   const youtube = document.getElementById('youtube-index')
+  if (!youtube) {
+    return
+  }
   const source = 'https://img.youtube.com/vi/' + youtube.dataset.embed + '/sddefault.jpg'
   const image = document.createElement('img')
   image.setAttribute('src', source)

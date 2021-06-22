@@ -88,13 +88,13 @@ function Follower (csrfToken, unfollowUrl, followUrl, somethingWentWrongError, f
   function handleError (xhr, $buttons) {
     if (xhr.status === 401) {
       // a user must be logged in to (un)follow someone
-      window.location.assign('login')
-      return
+      window.location.href = '../login'
+      return false
     }
     if (xhr.status === 422) {
       // can't (un)follow yourself, or a user that does not exist
-      window.location.assign('profile')
-      return
+      window.location.href = '../user'
+      return false
     }
     $buttons.attr('disabled', false)
     Swal.fire({

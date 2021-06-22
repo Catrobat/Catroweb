@@ -79,18 +79,16 @@
 
 {# Sidebar #}
 <script>
-  manageNotificationsDropdown()
+  let userIsLoggedIn = false
+  {% if app.user != null %}
+    userIsLoggedIn = true
+    const countNotificationUrl = '{{ path('sidebar_notifications_count') }}'
+    const countUnseenAchievementsUrl = '{{ path('sidebar_achievements_count') }}'
+    const unseenAchievementsBadgeText = '{{ "achievements.sidebar.badge"|trans({}, "catroweb") }}';
+  {% endif %}
 </script>
-
-{% if app.user %}
-  <script src="{{ asset('js/FetchNotifications.min.js') }}"></script>
-  <script>
-    let fetchNotifications = new FetchNotifications("{{ path('notifications_count') }}", 99, 10000)
-    $(document).ready(function () {
-      fetchNotifications.run()
-    })
-  </script>
-{% endif %}
+{{ encore_entry_script_tags('base') }}
+{{ encore_entry_script_tags('sidebar') }}
 
 {# JS block where all the scripts written in the child views should appear #}
 {% block js %}{% endblock %}

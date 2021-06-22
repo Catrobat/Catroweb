@@ -175,6 +175,9 @@ programs:
   link: Kopirajte vezu projekta u međuspremnik
   reactionsText: Sviđanja
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: Remiksi
   showRemixGraph: 'Pokaži Remix Graph'
