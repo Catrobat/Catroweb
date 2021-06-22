@@ -684,6 +684,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
+    badge: 'new'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -695,6 +696,13 @@ achievements:
     tab_locked:
       title: 'Locked'
       empty: "You have already unlocked all achievements."
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "Ok"
+  profile:
+    title: 'Achievements'
   achievement:
     type:
       bronze_user:

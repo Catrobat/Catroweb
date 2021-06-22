@@ -684,6 +684,7 @@ category:
 achievements:
   sidebar:
     title: '成就'
+    badge: '新的'
   overview:
     header: '成就'
     most_recent_achievement:
@@ -695,6 +696,13 @@ achievements:
     tab_locked:
       title: '鎖定'
       empty: "您已經解鎖了所有成就。"
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "好的"
+  profile:
+    title: '成就'
   achievement:
     type:
       bronze_user:

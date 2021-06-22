@@ -684,6 +684,7 @@ category:
 achievements:
   sidebar:
     title: '実績'
+    badge: '新'
   overview:
     header: '実績'
     most_recent_achievement:
@@ -695,6 +696,13 @@ achievements:
     tab_locked:
       title: 'ロック中'
       empty: "すでにすべての実績のロックを解除しました。"
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "OK"
+  profile:
+    title: '実績'
   achievement:
     type:
       bronze_user:
