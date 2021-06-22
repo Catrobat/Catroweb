@@ -687,6 +687,7 @@ category:
 achievements:
   sidebar:
     title: 'Risultati'
+    badge: 'nuovo'
   overview:
     header: 'Risultati'
     most_recent_achievement:
@@ -698,6 +699,13 @@ achievements:
     tab_locked:
       title: 'Bloccato'
       empty: "Hai già sbloccato tutte le realizzazioni."
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "Ok"
+  profile:
+    title: 'Risultati'
   achievement:
     type:
       bronze_user:

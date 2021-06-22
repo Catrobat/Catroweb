@@ -687,6 +687,7 @@ category:
 achievements:
   sidebar:
     title: 'Prestasi'
+    badge: 'baru'
   overview:
     header: 'Prestasi'
     most_recent_achievement:
@@ -698,6 +699,13 @@ achievements:
     tab_locked:
       title: 'Terkunci'
       empty: "Anda telah membuka semua pencapaian."
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "Baik"
+  profile:
+    title: 'Prestasi'
   achievement:
     type:
       bronze_user:

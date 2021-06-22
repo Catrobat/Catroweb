@@ -683,6 +683,7 @@ category:
 achievements:
   sidebar:
     title: 'Osiągnięcia'
+    badge: 'nowy'
   overview:
     header: 'Osiągnięcia'
     most_recent_achievement:
@@ -694,6 +695,13 @@ achievements:
     tab_locked:
       title: 'Zablokowane'
       empty: "Już odblokowałeś wszystkie osiągnięcia."
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "OK"
+  profile:
+    title: 'Osiągnięcia'
   achievement:
     type:
       bronze_user:
