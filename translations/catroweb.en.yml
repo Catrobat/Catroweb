@@ -93,8 +93,10 @@ follower:
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Create stories, games and more...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Download the app
     statistics: More statistics
   featured: Featured
