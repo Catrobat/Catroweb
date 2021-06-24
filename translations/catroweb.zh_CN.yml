@@ -178,7 +178,7 @@ programs:
   downloadErrorText: 下载项目时出错。请稍后再试。
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
-  translatedByLine: 由%provider%翻译成%sourceLanguage%到%targetLanguage%
+  translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
