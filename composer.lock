@@ -3965,16 +3965,16 @@
         },
         {
             "name": "lexik/jwt-authentication-bundle",
-            "version": "v2.11.3",
+            "version": "v2.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/lexik/LexikJWTAuthenticationBundle.git",
-                "reference": "9358649d03ba41e1c98effa0a6e39c0317cceeec"
+                "reference": "7bf7eb2610fdb4ea0939eccf4f484a57dc4af77f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/9358649d03ba41e1c98effa0a6e39c0317cceeec",
-                "reference": "9358649d03ba41e1c98effa0a6e39c0317cceeec",
+                "url": "https://api.github.com/repos/lexik/LexikJWTAuthenticationBundle/zipball/7bf7eb2610fdb4ea0939eccf4f484a57dc4af77f",
+                "reference": "7bf7eb2610fdb4ea0939eccf4f484a57dc4af77f",
                 "shasum": ""
             },
             "require": {
@@ -3982,6 +3982,7 @@
                 "lcobucci/jwt": "^3.4|^4.0",
                 "namshi/jose": "^7.2",
                 "php": ">=7.1",
+                "symfony/deprecation-contracts": "^2.4",
                 "symfony/framework-bundle": "^4.4|^5.1",
                 "symfony/security-bundle": "^4.4|^5.1"
             },
@@ -4059,7 +4060,7 @@
             ],
             "support": {
                 "issues": "https://github.com/lexik/LexikJWTAuthenticationBundle/issues",
-                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.11.3"
+                "source": "https://github.com/lexik/LexikJWTAuthenticationBundle/tree/v2.12.0"
             },
             "funding": [
                 {
@@ -4071,7 +4072,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-12T09:43:57+00:00"
+            "time": "2021-06-23T08:35:33+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -11102,16 +11103,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v5.3.0",
+            "version": "v5.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "a9a0f8b6aafc5d2d1c116dcccd1573a95153515b"
+                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/a9a0f8b6aafc5d2d1c116dcccd1573a95153515b",
-                "reference": "a9a0f8b6aafc5d2d1c116dcccd1573a95153515b",
+                "url": "https://api.github.com/repos/symfony/string/zipball/0732e97e41c0a590f77e231afc16a327375d50b0",
+                "reference": "0732e97e41c0a590f77e231afc16a327375d50b0",
                 "shasum": ""
             },
             "require": {
@@ -11165,7 +11166,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v5.3.0"
+                "source": "https://github.com/symfony/string/tree/v5.3.2"
             },
             "funding": [
                 {
@@ -11181,7 +11182,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-05-26T17:43:10+00:00"
+            "time": "2021-06-06T09:51:56+00:00"
         },
         {
             "name": "symfony/swiftmailer-bundle",
