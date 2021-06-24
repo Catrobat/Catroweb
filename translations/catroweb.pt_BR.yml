@@ -698,8 +698,8 @@ achievements:
       empty: "Você já desbloqueou todas as conquistas."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Parabéns!'
+      subtitle: "Você ganhou um emblema"
       confirm: "Ok"
   profile:
     title: 'Conquistas'

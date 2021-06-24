@@ -696,8 +696,8 @@ achievements:
       empty: "Zaten tüm başarıların kilidini açtınız."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Tebrikler!'
+      subtitle: "Bir rozet kazandınız"
       confirm: "Tamam"
   profile:
     title: 'Başarılar'
