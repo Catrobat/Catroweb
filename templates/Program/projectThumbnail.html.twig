@@ -1,8 +1,8 @@
- {% if isWebview() %}
+{% if isWebview() %}
   <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
-    {% endif %}
-    <img alt="project thumbnail" id="project-thumbnail-big"
-         src="{{ asset(program_details.screenshotBig) }}"/>
+{% endif %}
+
+    <img alt="project thumbnail" id="project-thumbnail-big" src="{{ asset(program_details.screenshotBig) }}"/>
 
     {% if my_program %}
       <div class="position-relative">
@@ -31,6 +31,7 @@
         {{ 'success.imgUpload'|trans({}, 'catroweb') }}
       </div>
     {% endif %}
-    {% if isWebview() %}
+
+{% if isWebview() %}
   </a>
- {% endif %}
+{% endif %}

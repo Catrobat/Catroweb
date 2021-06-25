@@ -178,7 +178,7 @@ programs:
   downloadErrorText: 下载项目时出错。请稍后再试。
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
-  translatedByLine: 由%provider%翻译成%sourceLanguage%到%targetLanguage%
+  translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -689,6 +689,7 @@ category:
 achievements:
   sidebar:
     title: '成就'
+    badge: '新的'
   overview:
     header: '成就'
     most_recent_achievement:
@@ -700,6 +701,13 @@ achievements:
     tab_locked:
       title: '已锁定'
       empty: "您已经解锁了所有的成就。"
+  popup:
+    new:
+      title: '祝贺你!'
+      subtitle: "你已经获得了一个徽章"
+      confirm: "好"
+  profile:
+    title: '成就'
   achievement:
     type:
       bronze_user:

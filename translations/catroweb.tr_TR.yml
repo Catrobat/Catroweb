@@ -682,6 +682,7 @@ category:
 achievements:
   sidebar:
     title: 'Başarılar'
+    badge: 'yeni'
   overview:
     header: 'Başarılar'
     most_recent_achievement:
@@ -693,6 +694,13 @@ achievements:
     tab_locked:
       title: 'Kilitli'
       empty: "Zaten tüm başarıların kilidini açtınız."
+  popup:
+    new:
+      title: 'Tebrikler!'
+      subtitle: "Bir rozet kazandınız"
+      confirm: "Tamam"
+  profile:
+    title: 'Başarılar'
   achievement:
     type:
       bronze_user:

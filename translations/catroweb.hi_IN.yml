@@ -684,6 +684,7 @@ category:
 achievements:
   sidebar:
     title: 'उपलब्धियों'
+    badge: 'नवीन व'
   overview:
     header: 'उपलब्धियों'
     most_recent_achievement:
@@ -695,6 +696,13 @@ achievements:
     tab_locked:
       title: 'बंद'
       empty: "आपने पहले ही सभी उपलब्धियों को अनलॉक कर दिया है।"
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "ठीक आहे"
+  profile:
+    title: 'उपलब्धियों'
   achievement:
     type:
       bronze_user:

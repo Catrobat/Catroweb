@@ -684,6 +684,7 @@ category:
 achievements:
   sidebar:
     title: 'إنجازات'
+    badge: 'الجديد'
   overview:
     header: 'إنجازات'
     most_recent_achievement:
@@ -695,6 +696,13 @@ achievements:
     tab_locked:
       title: 'مقفل'
       empty: "لقد قمت بالفعل بإلغاء تأمين جميع الإنجازات."
+  popup:
+    new:
+      title: 'تهانينا!'
+      subtitle: "لقد حصلت على شارة"
+      confirm: "موافق"
+  profile:
+    title: 'إنجازات'
   achievement:
     type:
       bronze_user:

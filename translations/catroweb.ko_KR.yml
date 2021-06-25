@@ -680,6 +680,7 @@ category:
 achievements:
   sidebar:
     title: '업적'
+    badge: '새로운'
   overview:
     header: '업적'
     most_recent_achievement:
@@ -691,6 +692,13 @@ achievements:
     tab_locked:
       title: '잠김'
       empty: "이미 모든 업적을 잠금 해제했습니다."
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "예"
+  profile:
+    title: '업적'
   achievement:
     type:
       bronze_user:

@@ -683,6 +683,7 @@ category:
 achievements:
   sidebar:
     title: 'Logros'
+    badge: 'nuevo'
   overview:
     header: 'Logros'
     most_recent_achievement:
@@ -694,6 +695,13 @@ achievements:
     tab_locked:
       title: 'Bloqueado'
       empty: "Ya has desbloqueado todos los logros."
+  popup:
+    new:
+      title: 'Congratulations!'
+      subtitle: "You've earned a badge"
+      confirm: "Ok"
+  profile:
+    title: 'Logros'
   achievement:
     type:
       bronze_user:

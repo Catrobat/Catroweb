@@ -690,6 +690,7 @@ category:
 achievements:
   sidebar:
     title: 'অর্জনসমূহ'
+    badge: 'নতুন'
   overview:
     header: 'অর্জনসমূহ'
     most_recent_achievement:
@@ -701,6 +702,13 @@ achievements:
     tab_locked:
       title: 'লকড'
       empty: "আপনি ইতিমধ্যে সমস্ত অর্জন আনলক করেছেন।"
+  popup:
+    new:
+      title: 'অভিনন্দন!'
+      subtitle: "আপনি একটি ব্যাজ অর্জন করেছেন"
+      confirm: "ঠিক আছে"
+  profile:
+    title: 'অর্জনসমূহ'
   achievement:
     type:
       bronze_user:
