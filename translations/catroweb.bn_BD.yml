@@ -704,8 +704,8 @@ achievements:
       empty: "আপনি ইতিমধ্যে সমস্ত অর্জন আনলক করেছেন।"
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'অভিনন্দন!'
+      subtitle: "আপনি একটি ব্যাজ অর্জন করেছেন"
       confirm: "ঠিক আছে"
   profile:
     title: 'অর্জনসমূহ'

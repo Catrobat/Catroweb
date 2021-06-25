@@ -703,8 +703,8 @@ achievements:
       empty: "您已经解锁了所有的成就。"
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: '祝贺你!'
+      subtitle: "你已经获得了一个徽章"
       confirm: "好"
   profile:
     title: '成就'

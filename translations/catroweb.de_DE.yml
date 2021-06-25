@@ -701,8 +701,8 @@ achievements:
       empty: "Du hast bereits alle Errungenschaften freigeschaltet."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Herzlichen Glückwunsch!'
+      subtitle: "Du hast ein Abzeichen verdient"
       confirm: "Ok"
   profile:
     title: 'Erreichte Ziele'
