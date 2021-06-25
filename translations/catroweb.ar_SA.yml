@@ -698,8 +698,8 @@ achievements:
       empty: "لقد قمت بالفعل بإلغاء تأمين جميع الإنجازات."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'تهانينا!'
+      subtitle: "لقد حصلت على شارة"
       confirm: "موافق"
   profile:
     title: 'إنجازات'
