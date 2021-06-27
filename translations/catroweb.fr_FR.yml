@@ -698,8 +698,8 @@ achievements:
       empty: "Vous avez déjà débloqué toutes les réalisations."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Félicitations !'
+      subtitle: "Vous avez gagné un badge"
       confirm: "Ok"
   profile:
     title: 'Réalisations'

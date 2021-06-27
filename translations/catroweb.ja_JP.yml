@@ -698,8 +698,8 @@ achievements:
       empty: "すでにすべての実績のロックを解除しました。"
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'おめでとうございます。'
+      subtitle: "バッジを獲得しました"
       confirm: "OK"
   profile:
     title: '実績'
