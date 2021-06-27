@@ -701,8 +701,8 @@ achievements:
       empty: "Anda telah membuka semua pencapaian."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Selamat!'
+      subtitle: "Anda telah mendapatkan lencana"
       confirm: "Baik"
   profile:
     title: 'Prestasi'

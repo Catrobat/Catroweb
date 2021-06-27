@@ -698,8 +698,8 @@ achievements:
       empty: "आपने पहले ही सभी उपलब्धियों को अनलॉक कर दिया है।"
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'बधाई हो!'
+      subtitle: "आपने एक बैज अर्जित किया है"
       confirm: "ठीक आहे"
   profile:
     title: 'उपलब्धियों'
