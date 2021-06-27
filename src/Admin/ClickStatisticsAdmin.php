@@ -35,7 +35,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
   public function getExportFields()
   {
     return ['id', 'type', 'user.username', 'program.id', 'program.name', 'scratch_program_id',
-      'recommended_from_program.id', 'recommended_from_program.name', 'tag.en', 'extension.name',
+      'recommended_from_program.id', 'recommended_from_program.name', 'tag.internal_title', 'extension.name',
       'clicked_at', 'locale', 'user_agent', 'referrer', ];
   }
 
@@ -74,7 +74,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
       ->add('scratch_program_id')
       ->add('recommended_from_program',
         EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
-      ->add('tag.en', null, [
+      ->add('tag.internal_title', null, [
         'label' => 'Tag', ])
       ->add('extension.name', null, [
         'label' => 'Extension', ])

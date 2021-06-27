@@ -1,5 +1,3 @@
-# Not compatible with the new ProjectList and must be reworked once the new design is finished: SHARE-371
-
 @web @click_statistics
 Feature: Creating click statistics by clicking on tags, extensions and recommended programs
 
@@ -18,21 +16,21 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
       | 5  | Raspberry Pi | RASPI   |
 
     And there are tags:
-      | id | en           | de           |
-      | 1  | Game         | Spiel        |
-      | 2  | Animation    | Animation    |
-      | 3  | Story        | Geschichte   |
-      | 4  | Music        | Musik        |
-      | 5  | Art          | Kunst        |
-      | 6  | Experimental | Experimental |
+      | id | internal_title | title_ltm_code |
+      | 1  | Game           | __Game         |
+      | 2  | Animation      | __Animation    |
+      | 3  | Story          | __Story        |
+      | 4  | Music          | __Music        |
+      | 5  | Art            | __Art          |
+      | 6  | Experimental   | __Experimental |
 
     And there are projects:
-      | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version | extensions | tags_id | remix_root |
-      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 | true       |
-      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   | false      |
-      | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     | true       |
-      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       | true       |
-      | 5  | Nothing | p6          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       | true       |
+      | id | name    | description | owned by  | downloads | apk_downloads | views | upload time      | version | extensions | tags                       | remix_root |
+      | 1  | Minions | p1          | Catrobat  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | Game,Animation,Story,Music | true       |
+      | 2  | Galaxy  | p2          | OtherUser | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | Game,Animation,Story       | false      |
+      | 3  | Alone   | p3          | Catrobat  | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | Game,Animation             | true       |
+      | 4  | Trolol  | p5          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | Art                        | true       |
+      | 5  | Nothing | p6          | Catrobat  | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | Experimental               | true       |
 
     And there are forward remix relations:
       | ancestor_id | descendant_id | depth |
@@ -51,7 +49,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
   Scenario: Create one statistic entry from tags
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I press on the tag "Game"
+    When I press on the tag "__Game"
     And I wait for AJAX to finish
     Then There should be one database entry with type is "tags" and "tag_id" is "1"
     And I should see "Your search returned 3 results"

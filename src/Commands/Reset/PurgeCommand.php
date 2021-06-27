@@ -86,7 +86,7 @@ class PurgeCommand extends Command
 
     $progress->setMessage('Dropping migrations');
     CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the migration_versions table', $output);
+      ['bin/console', 'catrobat:drop:migration'], [], 'Dropping the doctrine_migration_versions table', $output);
     $progress->advance();
 
     $progress->setMessage('(Re-) Creating Database; executing migrations');

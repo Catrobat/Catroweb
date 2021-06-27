@@ -4,6 +4,11 @@ namespace App\Catrobat;
 
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @deprecated
+ *
+ * Class StatusCode
+ */
 class StatusCode
 {
   /**

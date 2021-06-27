@@ -14,20 +14,20 @@ Feature: Searching for programs
       | 4  | Phiro        | PHIRO   |
       | 5  | Raspberry Pi | RASPI   |
     And there are tags:
-      | id | en        | de         |
-      | 1  | Game      | Spiel      |
-      | 2  | Animation | Animation  |
-      | 3  | Story     | Geschichte |
+      | internal_title | title_ltm_code |
+      | game           | __Spiel        |
+      | animation      | __Animation    |
+      | story          | __Geschichte   |
     And there are projects:
-      | id | name                | description | owned by | tags_id|extensions | upload time      | version |
-      | 1  | program 1           | p1          | User1    |  1     |  arduino  | 22.04.2014 12:00 | 0.8.5   |
-      | 2  | test program        |             | User1    |  2     |  arduino  | 22.04.2014 13:00 | 0.8.5   |
-      | 3  | Test advanced app   |             | Catrobat |  3     |  drone    | 22.04.2014 14:00 | 0.8.5   |
-      | 4  | Catrobat            | my program  | User1    |  3     |  lego     | 22.04.2014 14:00 | 0.8.5   |
-      | 5  | project 3           |     lego    | Catrobat |  1,2   |  phiro    | 22.04.2014 14:00 | 0.8.5   |
-      | 6  | test advanced games |             | User1    |  2,3   |  lego     | 22.04.2014 14:00 | 0.8.5   |
-      | 7  | test                |             | Catrobat |  3,2   |  lego     | 22.04.2014 14:00 | 0.8.5   |
-      | 8  | project test        |   catrobat  | User1    |   1    |  drone    | 22.04.2014 14:00 | 0.8.5   |
+      | id | name                | description | owned by | tags             | extensions | upload time      | version |
+      | 1  | program 1           | p1          | User1    | game             | arduino    | 22.04.2014 12:00 | 0.8.5   |
+      | 2  | test program        |             | User1    | animation        | arduino    | 22.04.2014 13:00 | 0.8.5   |
+      | 3  | Test advanced app   |             | Catrobat | story            | drone      | 22.04.2014 14:00 | 0.8.5   |
+      | 4  | Catrobat            | my program  | User1    | story            | lego       | 22.04.2014 14:00 | 0.8.5   |
+      | 5  | project 3           | lego        | Catrobat | game, animation  | phiro      | 22.04.2014 14:00 | 0.8.5   |
+      | 6  | test advanced games |             | User1    | animation, story | lego       | 22.04.2014 14:00 | 0.8.5   |
+      | 7  | test                |             | Catrobat | story, animation | lego       | 22.04.2014 14:00 | 0.8.5   |
+      | 8  | project test        | catrobat    | User1    | game             | drone      | 22.04.2014 14:00 | 0.8.5   |
     And I wait 1000 milliseconds
 
 

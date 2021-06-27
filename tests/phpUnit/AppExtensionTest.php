@@ -3,7 +3,7 @@
 namespace Tests\phpUnit;
 
 use App\Catrobat\Services\MediaPackageFileRepository;
-use App\Catrobat\Twig\AppExtension;
+use App\WebView\Twig\AppExtension;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;

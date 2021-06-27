@@ -67,9 +67,9 @@ class ResetCommand extends Command
       'catrobat:purge', $this->getApplication(), ['--force' => true], $output
     );
 
-    // Tags implementation is very broken -> this command is needed to create them
+    // Create static tags
     CommandHelper::executeShellCommand(
-        ['bin/console', 'catrobat:create:tags'], [], 'Creating constant tags', $output
+        ['bin/console', 'catrobat:update:tags'], [], 'Creating constant tags', $output
     );
 
     // SetUp Acl
