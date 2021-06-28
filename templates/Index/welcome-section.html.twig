@@ -2,9 +2,16 @@
 
   <div id="welcome-section">
     <div class="mb-4">
-      <h1>{{ "programs.welcome.title"|trans({'%theme%': getThemeDisplayName()}, "catroweb") }}</h1>
+      {% if flavor() == 'mindstorms' %}
+        <h1>{{ "programs.welcome.title_mindstorms"|trans({}, "catroweb") }}</h1>
+      {% else %}
+        <h1>{{ "programs.welcome.title"|trans({'%theme%': getThemeDisplayName()}, "catroweb") }}</h1>
+      {% endif %}
+
       {% if flavor() == 'embroidery' %}
         <h3>{{ "programs.welcome.subtitle_embroidery"|trans({}, "catroweb") }}</h3>
+      {% elseif flavor() == 'mindstorms' %}
+        <h3>{{ "programs.welcome.subtitle_mindstorms"|trans({}, "catroweb") }}</h3>
       {% else %}
         <h3>{{ "programs.welcome.subtitle"|trans({}, "catroweb") }}</h3>
       {% endif %}
@@ -15,7 +22,7 @@
         {{ include('Index/youtubeHelpVideo.html.twig') }}
       </div>
       <div class="col-12 col-lg-6 mt-2">
-        <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/gp">
+        <a class="btn btn-primary btn-block" target="_blank" href="{{ url('google_play_store') }}">
           <i class="material-icons align-bottom">get_app</i>
           {# <img style="width: 1.5rem; height: 1.5rem;" alt="Play Store Logo" src="{{ asset('images/social/google_playstore.png') }}"/> #}
           <span> {{ "googlePlay"|trans({}, "catroweb") }}</span>
@@ -27,9 +34,10 @@
             <span>Discord chat</span>
           </a>
         {% elseif flavor() == 'arduino' %}
+        {% elseif flavor() == 'mindstorms' %}
           {# show nothing for now #}
         {% elseif flavor() == 'embroidery' %}
-          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/lcd">
+          <a class="btn btn-primary btn-block" target="_blank" href="https://www.instagram.com/code_n_stitch/">
             <i class="material-icons align-bottom">explore</i>
             {# <img alt="Code&Stitch Instagram" src="{{ asset('images/social/instagram.svg') }}"> #}
             <span>Instagram</span>
