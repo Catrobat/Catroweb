@@ -694,8 +694,8 @@ achievements:
       empty: "이미 모든 업적을 잠금 해제했습니다."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: '축하합니다!'
+      subtitle: "배지를 받았습니다."
       confirm: "예"
   profile:
     title: '업적'

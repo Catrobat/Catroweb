@@ -697,8 +697,8 @@ achievements:
       empty: "Ya has desbloqueado todos los logros."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: '¡Enhorabuena!'
+      subtitle: "Te has ganado una insignia"
       confirm: "Ok"
   profile:
     title: 'Logros'
