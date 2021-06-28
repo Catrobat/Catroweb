@@ -7,7 +7,6 @@ use App\Entity\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
-use Google_Client;
 use GuzzleHttp\Client;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -25,7 +24,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
   public function validateGoogleIdToken(string $id_token): bool
   {
     // Specify the CLIENT_ID of the app that accesses the backend
-    $client = new Google_Client(['client_id' => getenv('GOOGLE_ID')]);
+    $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
 
     $payload = $client->verifyIdToken($id_token);
 
