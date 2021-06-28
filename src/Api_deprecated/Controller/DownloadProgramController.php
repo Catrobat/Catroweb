@@ -28,14 +28,12 @@ class DownloadProgramController extends AbstractController
    * @Route("/download/{id}.catrobat", name="download", options={"expose": true}, defaults={"_format": "json"},
    * methods={"GET"})
    *
-   * @param mixed $id
-   *
    * @throws ORMException
    * @throws OptimisticLockException
    *
    * @return BinaryFileResponse|JsonResponse
    */
-  public function downloadProgramAction(Request $request, $id, ProgramManager $program_manager,
+  public function downloadProgramAction(Request $request, string $id, ProgramManager $program_manager,
                                         ProgramFileRepository $file_repository, LoggerInterface $logger,
                                         ExtractedFileRepository $extracted_file_repository)
   {

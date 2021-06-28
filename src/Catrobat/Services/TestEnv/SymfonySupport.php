@@ -328,8 +328,9 @@ trait SymfonySupport
   public function insertTag(array $config = [], bool $andFlush = true): Tag
   {
     $tag = new Tag();
-    $tag->setEn($config['en']);
-    $tag->setDe($config['de'] ?? null);
+    $tag->setInternalTitle($config['internal_title']);
+    $tag->setTitleLtmCode($config['title_ltm_code'] ?? 'tag_ltm');
+    $tag->setEnabled($config['enabled'] ?? true);
 
     $this->getManager()->persist($tag);
     if ($andFlush) {

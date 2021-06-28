@@ -2,18 +2,28 @@
 
 namespace App\Api_deprecated\Controller;
 
+use App\Api\Services\Base\TranslatorAwareInterface;
+use App\Api\Services\Base\TranslatorAwareTrait;
 use App\Entity\Tag;
 use App\Repository\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @deprecated
  */
-class TaggingController extends AbstractController
+class TaggingController extends AbstractController implements TranslatorAwareInterface
 {
+  use TranslatorAwareTrait;
+
+  public function __construct(TranslatorInterface $translator)
+  {
+    $this->initTranslator($translator);
+  }
+
   /**
    * @deprecated
    *
@@ -22,21 +32,17 @@ class TaggingController extends AbstractController
   public function taggingAction(Request $request, TagRepository $tags_repo): JsonResponse
   {
     $em = $this->getDoctrine()->getManager();
-    $metadata = $em->getClassMetadata(Tag::class)->getFieldNames();
 
     $tags = [];
     $tags['statusCode'] = 200;
     $tags['constantTags'] = [];
 
     $language = $request->query->get('language');
-    if (!in_array($language, $metadata, true)) {
-      $language = 'en';
-      $tags['statusCode'] = 404;
-    }
-    $results = $tags_repo->getConstantTags($language);
+    $results = $tags_repo->getAllEnabledTags();
 
+    /** @var Tag $tag */
     foreach ($results as $tag) {
-      $tags['constantTags'][] = $tag[$language];
+      $tags['constantTags'][] = $this->trans($tag->getTitleLtmCode(), [], $language);
     }
 
     return JsonResponse::create($tags);

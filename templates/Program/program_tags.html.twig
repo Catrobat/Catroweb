@@ -18,7 +18,7 @@
             <div class="list">
               {% for tag in program.tags %}
                 <a class="rec-programs badge badge-pill badge-primary"
-                   href="{{ url('tag_search', { q : tag.id }) }}">{{ ("tags.constant.tag"~tag.id)|trans({}, "catroweb") }}</a>
+                   href="{{ url('tag_search', { q : tag.id }) }}">{{ tag.getTitleLtmCode()|trans({}, "catroweb") }}</a>
               {% endfor %}
             </div>
           </div>

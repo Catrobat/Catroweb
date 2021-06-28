@@ -3,9 +3,9 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Catrobat\Twig\AppExtension;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
+use App\WebView\Twig\AppExtension;
 use Exception;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

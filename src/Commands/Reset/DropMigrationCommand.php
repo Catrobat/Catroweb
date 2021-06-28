@@ -28,7 +28,7 @@ class DropMigrationCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:drop:migration')
-      ->setDescription('Dropping the migration_versions table')
+      ->setDescription('Dropping the doctrine_migration_versions table')
     ;
   }
 
@@ -39,9 +39,9 @@ class DropMigrationCommand extends Command
   {
     $this->output = $output;
     if ($this->dropMigrationVersions()) {
-      $this->output->writeln('Table migration_versions dropped!');
+      $this->output->writeln('Table doctrine_migration_versions dropped!');
     } else {
-      $this->output->writeln('Table migration_versions doesn\'t exist!');
+      $this->output->writeln('Table doctrine_migration_versions doesn\'t exist!');
     }
 
     return 0;
@@ -53,8 +53,8 @@ class DropMigrationCommand extends Command
   private function dropMigrationVersions(): bool
   {
     $schema_manager = $this->connection->getSchemaManager();
-    if ($schema_manager->tablesExist(['migration_versions'])) {
-      $sql = 'DROP TABLE migration_versions;';
+    if ($schema_manager->tablesExist(['doctrine_migration_versions'])) {
+      $sql = 'DROP TABLE doctrine_migration_versions;';
       $connection = $this->entity_manager->getConnection();
       $stmt = $connection->prepare($sql);
       $stmt->execute();

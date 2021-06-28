@@ -13,34 +13,10 @@ class TagRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, Tag::class);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getConstantTags(string $language)
+  public function getAllEnabledTags(): array
   {
-    $qb = $this->createQueryBuilder('e');
-
-    return $qb
-      ->select('e.'.$language)
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getTagsWithProgramIdAndLanguage(string $program_id, string $language)
-  {
-    $qb = $this->createQueryBuilder('e');
-
-    return $qb
-      ->select('e.'.$language)
-      ->leftJoin('e.programs', 'p')
-      ->andWhere($qb->expr()->eq('p.id', ':id'))
-      ->setParameter('id', $program_id)
-      ->getQuery()
-      ->getResult()
-    ;
+    return $this->findBy([
+      'enabled' => true,
+    ]);
   }
 }

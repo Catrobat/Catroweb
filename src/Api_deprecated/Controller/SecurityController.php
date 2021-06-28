@@ -4,7 +4,6 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Requests\CreateUserRequest;
 use App\Api_deprecated\Requests\LoginUserRequest;
-use App\Api_deprecated\Security\UserAuthenticator;
 use App\Catrobat\Services\OAuthService;
 use App\Catrobat\Services\TokenGenerator;
 use App\Catrobat\StatusCode;
@@ -106,7 +105,7 @@ class SecurityController extends AbstractController
    * methods={"POST"})
    */
   public function loginNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
-                                  TranslatorInterface $translator, UserAuthenticator $user_authenticator,
+                                  TranslatorInterface $translator,
                                   ValidatorInterface $validator, EncoderFactoryInterface $factory): JsonResponse
   {
     $retArray = [];
@@ -266,19 +265,6 @@ class SecurityController extends AbstractController
     $retArray['gplus_appid'] = getenv('GOOGLE_CLIENT_ID');
 
     return JsonResponse::create($retArray);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/deleteOAuthUserAccounts/deleteOAuthUserAccounts.json", name="catrobat_oauth_delete_testusers",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @throws Exception
-   */
-  public function deleteOAuthTestUserAccounts(): JsonResponse
-  {
-    return $this->getOAuthService()->deleteOAuthTestUserAccounts();
   }
 
   private function getOAuthService(): OAuthService

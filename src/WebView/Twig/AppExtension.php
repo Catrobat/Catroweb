@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Catrobat\Twig;
+namespace App\WebView\Twig;
 
 use App\Catrobat\Services\CommunityStatisticsService;
 use App\Catrobat\Services\MediaPackageFileRepository;
@@ -16,7 +16,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFilter;
 use Twig\TwigFunction;
-use Twig_Function;
 
 class AppExtension extends AbstractExtension
 {
@@ -102,7 +101,7 @@ class AppExtension extends AbstractExtension
   }
 
   /**
-   * @return Twig_Function[]
+   * {@inheritDoc}
    */
   public function getFunctions(): array
   {

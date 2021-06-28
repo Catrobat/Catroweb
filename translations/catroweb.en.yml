@@ -559,16 +559,6 @@ gamejam:
 tag-text: Tags
 extenstion-text: Extensions
 
-tags:
-  constant:
-    tag1: Game
-    tag2: Animation
-    tag3: Story
-    tag4: Music
-    tag5: Art
-    tag6: Experimental
-    tag7: Tutorial
-
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -771,3 +761,20 @@ achievements:
       verified_developer:
         title: 'Novice'
         description: 'Create a user account'
+
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

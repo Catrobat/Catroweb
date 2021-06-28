@@ -495,8 +495,7 @@ class DataFixturesContext implements KernelAwareContext
     foreach ($program_tags as $program_tag) {
       /* @var Tag $program_tag */
       Assert::assertTrue(
-        in_array($program_tag->getDe(), $tags, true) || in_array($program_tag->getEn(), $tags, true),
-        'The tag is not found!'
+        in_array($program_tag->getInternalTitle(), $tags, true), 'The tag is not found!'
       );
     }
   }
@@ -509,6 +508,15 @@ class DataFixturesContext implements KernelAwareContext
     /** @var Program $program */
     $program = $this->getProgramManager()->findAll()[0];
     Assert::assertNotNull($program->getExtensions());
+  }
+
+  /**
+   * @Then the project with name :name should have :number_of_tags tags
+   */
+  public function theProjectWithNameShouldHaveTags(string $name, int $number_of_tags): void
+  {
+    $program = $this->getProgramManager()->findOneByName($name);
+    Assert::assertCount($number_of_tags, $program->getTags());
   }
 
   /**
@@ -1266,6 +1274,15 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then there should be :number_of_tags tags in the database
+   */
+  public function thereShouldBeTagsInTheDatabase(int $number_of_tags): void
+  {
+    $tags = $this->getTagRepository()->findAll();
+    Assert::assertCount($number_of_tags, $tags);
+  }
+
+  /**
    * @Then there should be :number_of_user_achievements user achievements in the database
    */
   public function thereShouldBeUserAchievementsInTheDatabase(int $number_of_user_achievements): void
@@ -1291,6 +1308,16 @@ class DataFixturesContext implements KernelAwareContext
     CommandHelper::executeShellCommand(
             ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
         );
+  }
+
+  /**
+   * @Given I run the update tags command
+   */
+  public function iRunTheUpdateTagsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:update:tags'], [], 'Creating Tags'
+    );
   }
 
   /**

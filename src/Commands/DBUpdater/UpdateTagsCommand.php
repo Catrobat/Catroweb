@@ -12,14 +12,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateTagsCommand extends Command
 {
-  protected static $defaultName = 'catrobat:create:tags';
-  private OutputInterface $output;
+  /**
+   * @var string|null
+   *
+   * @override from Command
+   */
+  protected static $defaultName = 'catrobat:update:tags';
 
   private TranslatorInterface $translator;
-
   private TagRepository $tag_repository;
-
   private EntityManagerInterface $entity_manager;
+
+  public const TAG_LTM_PREFIX = 'tags.tag.';
 
   public function __construct(EntityManagerInterface $entity_manager,TranslatorInterface $translator,
                               TagRepository $tag_repository)
@@ -32,54 +36,80 @@ class UpdateTagsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:create:tags')
-      ->setDescription('Creating constant tags in supported languages')
+    $this->setName('catrobat:update:tags')
+      ->setDescription('Inserting our static project tags into the Database')
     ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $this->output = $output;
-    $metadata = $this->entity_manager->getClassMetadata('App\Entity\Tag')->getFieldNames();
+    $count = 0;
 
-    $number_of_tags = 7; // uses the tag names defined in the translation files!
+    $tag = $this->getOrCreateTag(Tag::GAME, 1)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'game.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
 
-    for ($i = 1; $i <= $number_of_tags; ++$i) {
-      $tag = $this->tag_repository->find($i);
+    $tag = $this->getOrCreateTag(Tag::ANIMATION, 2)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'animation.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
 
-      if (null != $tag) {
-        for ($j = 1; $j < count($metadata); ++$j) {
-          $language = 'set'.$metadata[$j];
+    $tag = $this->getOrCreateTag(Tag::STORY, 3)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'story.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
 
-          $tag->{$language}($this->trans('tags.constant.tag'.$i, $metadata[$j]));
+    $tag = $this->getOrCreateTag(Tag::MUSIC, 4)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'music.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
 
-          $this->entity_manager->persist($tag);
-          $this->entity_manager->flush();
-        }
-      } else {
-        $tag = new Tag();
+    $tag = $this->getOrCreateTag(Tag::ART, 5)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'art.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
 
-        for ($j = 1; $j < count($metadata); ++$j) {
-          $language = 'set'.$metadata[$j];
-          $tag->{$language}($this->trans('tags.constant.tag'.$i, $metadata[$j]));
-        }
+    $tag = $this->getOrCreateTag(Tag::EXPERIMENTAL, 6)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'experimental.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
 
-        $this->entity_manager->persist($tag);
-        $this->entity_manager->flush();
-      }
-    }
+    $tag = $this->getOrCreateTag(Tag::TUTORIAL, 7)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'tutorial.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
+
+    $this->entity_manager->flush();
+    $output->writeln("{$count} Tags in the Database have been inserted/updated");
 
     return 0;
   }
 
   /**
-   * @param mixed $message
-   * @param mixed $locale
+   * ToDo: id is deprecated -- remove once transition was made.
    */
-  private function trans($message, $locale): string
+  protected function getOrCreateTag(string $internal_title, int $id = 0): Tag
   {
-    $parameters = [];
+    $tag = $this->tag_repository->findOneBy(['internal_title' => $internal_title]);
+    if (is_null($tag)) {
+      $tag = $this->tag_repository->findOneBy(['id' => $id]) ?? new Tag();
+    }
 
-    return $this->translator->trans($message, $parameters, 'catroweb', $locale);
+    return $tag->setInternalTitle($internal_title);
   }
 }

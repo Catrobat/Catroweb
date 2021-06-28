@@ -122,12 +122,12 @@ class ProjectDataFixtures
 
     $this->entity_manager->persist($project);
 
-    if (isset($config['tags_id']) && null !== $config['tags_id']) {
+    if (!empty($config['tags'])) {
       $tag_repo = $this->entity_manager->getRepository(Tag::class);
-      $tags = explode(',', $config['tags_id']);
-      foreach ($tags as $tag_id) {
+      $arr_tag_internal_title = explode(',', $config['tags']);
+      foreach ($arr_tag_internal_title as $internal_title) {
         /** @var Tag $tag */
-        $tag = $tag_repo->find($tag_id);
+        $tag = $tag_repo->findOneBy(['internal_title' => trim($internal_title)]);
         $project->addTag($tag);
       }
     }

@@ -316,18 +316,6 @@ class OAuthService
     return JsonResponse::create($retArray);
   }
 
-  /**
-   * @throws Exception
-   */
-  public function deleteOAuthTestUserAccounts(): JsonResponse
-  {
-    $retArray = [];
-    $retArray['deleted'] = 'deprecated';
-    $retArray['statusCode'] = Response::HTTP_OK;
-
-    return JsonResponse::create($retArray);
-  }
-
   private function setGoogleTokens(User $user, ?string $access_token, ?string $refresh_token, ?string $id_token): void
   {
     if ($access_token) {
