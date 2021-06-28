@@ -698,8 +698,8 @@ achievements:
       empty: "ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਸਾਰੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਅਣਲਾਕ ਕਰ ਦਿੱਤਾ ਹੈ."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'ਵਧਾਈਆਂ!'
+      subtitle: "ਤੁਸੀਂ ਇੱਕ ਬੈਜ ਕਮਾਇਆ ਹੈ"
       confirm: "ਠੀਕ ਹੈ"
   profile:
     title: 'ਪ੍ਰਾਪਤੀਆਂ'

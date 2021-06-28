@@ -697,8 +697,8 @@ achievements:
       empty: "Już odblokowałeś wszystkie osiągnięcia."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Gratulacje!'
+      subtitle: "Zdobyłeś odznakę"
       confirm: "OK"
   profile:
     title: 'Osiągnięcia'
