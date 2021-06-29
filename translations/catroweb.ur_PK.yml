@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: کہانیاں، کھیل اور مزید بنائیں ...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: پروگرام ڈاؤن لوڈ کریں
     statistics: مزید اعداد و شمار
   featured: نمایاں
@@ -528,15 +530,6 @@ gamejam:
       %gamejamtag% میں شرکت کریں
 tag-text: ٹیگز
 extenstion-text: توسیعات
-tags:
-  constant:
-    tag1: کھیل
-    tag2: حرکت اندازی
-    tag3: کہانی
-    tag4: موسیقی
-    tag5: آرٹ
-    tag6: تجرباتی
-    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: بحالی ڈسک
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'Novice'
         description: 'Create a user account'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

@@ -49,7 +49,7 @@ registrationError: 'Benutzername oder E-Mail-Adresse bereits verwendet.'
 notifications: 'Benachrichtigungen'
 allNotifications: 'Alle Benachrichtigungen'
 FollowersNotifications: 'Followers'
-LikeNotifications: 'Gefällt mir'
+LikeNotifications: 'Likes'
 CommentNotifications: 'Kommentare'
 RemixNotifications: 'Remixe'
 wellDone: "Gut gemacht!"
@@ -69,7 +69,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'Welche Projekte werden hier empfohlen?'
-      description: 'Je mehr "Gefällt mir" (einschließlich "Daumen hoch", "Lachen", "Liebe" und "Woow!") dein Projekt erhält, desto höher erscheint es in dieser Liste.'
+      description: 'Je mehr "Reaktionen" (einschließlich "Daumen hoch", "Lachen", "Liebe" und "Woow!") dein Projekt erhält, desto höher erscheint es in dieser Liste.'
 follower:
   follows: Abonniert
   followers: Abonnenten
@@ -79,7 +79,7 @@ follower:
   noFollowing: Du folgst derzeit niemandem.
   noFollowers: Du hast derzeit keine Follower.
   noOtherFollowing: Aktuell von niemandem abonniert.
-  noOtherFollowers: Keine Abonnenten.
+  noOtherFollowers: Aktuell gibt es keine Abonnenten.
   followError: "Es ist nicht möglich den User zu folgen!"
   unfollowError: "Es ist nicht möglich den User nicht mehr zu folgen!"
   unfollowQuestion: "Bist du sicher, dass du diesem User nicht mehr folgen möchtest?"
@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Willkommen bei Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Erstelle Animationen, Spiele und mehr...
     subtitle_embroidery: Sticke dein eigenes Muster auf deine T-shirts, Taschen, Hosen oder auf deine Smartphonehülle!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
@@ -531,15 +533,6 @@ gamejam:
       Erstelle ein eigenes und mach mit beim %gamejamtag%!
 tag-text: Tags
 extenstion-text: Erweiterungen
-tags:
-  constant:
-    tag1: Spiele
-    tag2: Bewegte Animation
-    tag3: Geschichte
-    tag4: Musik
-    tag5: Kunst
-    tag6: Experimentell
-    tag7: Anleitung
 admin:
   maintain:
     diskMaintenance: Festplattenwartung
@@ -726,3 +719,19 @@ achievements:
       verified_developer:
         title: 'Anfänger'
         description: 'Benutzerkonto erstellen'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: 欢迎使用 Catrobat %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: 书写你的故事，游戏以及更多东西...。
     subtitle_embroidery: 在您的T恤衫、袋子、裤子或智能手机等上搭起您自己的修补师！
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: 下载该APP。
     statistics: 更多统计信息
   featured: 经典程序
@@ -533,15 +535,6 @@ gamejam:
       参加 %gamejamtag%
 tag-text: 标签
 extenstion-text: 扩展
-tags:
-  constant:
-    tag1: 游戏
-    tag2: 动画
-    tag3: 故事
-    tag4: 音乐
-    tag5: 艺术
-    tag6: 实验性
-    tag7: 教程
 admin:
   maintain:
     diskMaintenance: 磁盘维护
@@ -728,3 +721,19 @@ achievements:
       verified_developer:
         title: '新手'
         description: '创建一个用户账户'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

@@ -26,8 +26,8 @@ noWayOfReturn: لاتوجد أي طريقة لإسترجاع إجراءاتك!
 download: تحميل
 description: الوصف
 noDescription: لا يوجد أي وصف .
-credits: Credits
-noCredits: No credits available.
+credits: الملاحظات والاعتمادات
+noCredits: لا توجد ملاحظات أو أرصدة متاحة.
 notesAndCreditsDescription: كيف قمت بصناعة هذا المشروع. هل إستعملت أفكار، مخطوطات أو عمل فني من أشخاص آخرين؟ قم بشكرهم هنا لو تكرمت.
 country: البلد
 loginText: تسجيل الدخول
@@ -39,22 +39,22 @@ pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
 less: 'أقل'
-show-more: 'More information'
-show-less: 'Less information'
+show-more: 'إظهار المزيد'
+show-less: 'إظهار أقل'
 more-information: 'المزيد من المعلومات'
 less-information: 'معلومات أقل'
 ok: موافق
 clickToDownloadProgram: 'لتنزيل المشروع التجريبي، انقر على %link_start% هنا %link_end%.'
 registrationError: 'اسم المستخدم أو عنوان البريد الإلكتروني قيد الاستخدام بالفعل.'
 notifications: 'الاشعارات'
-allNotifications: 'All notifications'
+allNotifications: 'جميع'
 FollowersNotifications: 'المتابِعون'
 LikeNotifications: 'ردود الفعل'
 CommentNotifications: 'التعليقات'
 RemixNotifications: 'رِمكسات(خليط مُعدل)'
 wellDone: "أحسنت صنعاً!"
 done: "تم!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "يبدو أنك لا تملك أي إشعارات."
 confirmMessage: "نعم، إحذفه!"
 cancelMessage: "إلغاء"
 notificationsUnauthorizedError: "غير قادر على تصريح المستخدم"
@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: مرحبا بك في كاتروبات %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: إنشاء قصص، ألعاب وأكثر...
     subtitle_embroidery: قم بإخفاء براءاتك الخاصة على قمصانك أو الأكياس أو البناطيل أو غلاف الهاتف الذكي!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: تحميل التطبيق
     statistics: المزيد من الإحصاءات
   featured: خصائص
@@ -120,7 +122,7 @@ programs:
     نعم، احذفها!
     الغاء
   tooLongDescription: وصف المشروع طويل جداً!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: ملاحظات المشروع والأرصدة طويلة جداً!
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
@@ -164,9 +166,9 @@ programs:
   deleted_popup_header: محذوف
   noAdminRights: ليس لديك صلاحيات للمشرف. الرجاء تسجيل الدخول كمشرف.
   editDescription: تعديل وصف المشروع
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: حفظ
+  editCredits: تعديل ملاحظات المشروع والرصيد
+  saveCredits: حفظ
   addComment: كتابة تعليق
   thumbsUp: تمسك بالأمام!
   smile: ابتسم!
@@ -528,15 +530,6 @@ gamejam:
       قم بالمشاركة في %gamejamtag%
 tag-text: وسوم
 extenstion-text: الإضافات
-tags:
-  constant:
-    tag1: الألعاب
-    tag2: تحريك الرسوم المتحركة
-    tag3: القصة
-    tag4: موسيقى
-    tag5: الفن
-    tag6: إصدار تجريبي
-    tag7: البرنامج التعليمي
 admin:
   maintain:
     diskMaintenance: صيانة القرص
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'مبتدئ'
         description: 'قم بإنشاء حساب مستخدم'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

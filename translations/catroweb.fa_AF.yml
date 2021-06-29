@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: به موضوع %theme% کاتروباتس (Catrobat) خوش آمدی
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: ایجاد کن داستان ها، بازی ها و بیشتر ...
     subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا پوش گوشی های خود را بخیه کنید!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: برنامه را دانلود کن
     statistics: More Statistics
   featured: ارایه شده
@@ -528,15 +530,6 @@ gamejam:
       در %gamejamtag% شرکت کنید
 tag-text: برچسب ها
 extenstion-text: پسوند
-tags:
-  constant:
-    tag1: بازی
-    tag2: انیمیشن
-    tag3: داستان
-    tag4: موسیقی
-    tag5: هنر
-    tag6: تجربی
-    tag7: تدبیر
 admin:
   maintain:
     diskMaintenance: تعمیر و نگهداری دیسک
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'تازه کار'
         description: 'یک حساب کاربری تشکیل دهید'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

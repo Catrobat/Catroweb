@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Catrobat の %theme% へようこそ
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: ストーリー、ゲームなどを作成する
     subtitle_embroidery: あなたのTシャツ、バッグ、ズボン、またはスマートフォンのケースであなた自身のパターを固定!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: アプリをダウンロード
     statistics: 統計情報
   featured: おすすめ
@@ -528,15 +530,6 @@ gamejam:
       %gamejamtag% に参加してください
 tag-text: タグ
 extenstion-text: 拡張
-tags:
-  constant:
-    tag1: ゲーム
-    tag2: アニメーションを動かします
-    tag3: ストーリー
-    tag4: 音楽
-    tag5: アート
-    tag6: 実験的
-    tag7: チュートリアル
 admin:
   maintain:
     diskMaintenance: ディスクのメンテナンス
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'ノービス'
         description: 'ユーザーアカウントを作成'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

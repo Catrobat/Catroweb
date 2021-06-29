@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Catrobat'ın %theme% projesinin websitesine hoş geldiniz
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Hikayeler, oyunlar ve daha fazlasını oluşturun...
     subtitle_embroidery: T-shirt, çanta, pantolon veya akıllı telefon kasanızda kendi deseninizi dikin!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Uyglama'yı indirin
     statistics: Diğer istatistikler
   featured: Öne çıkan
@@ -526,15 +528,6 @@ gamejam:
       %gamejamtag% na katılın
 tag-text: Etiketler
 extenstion-text: Uzantılar
-tags:
-  constant:
-    tag1: Oyunlar
-    tag2: Animasyon
-    tag3: Hikaye
-    tag4: Müzik
-    tag5: Sanat
-    tag6: Deneysel
-    tag7: Öğretici
 admin:
   maintain:
     diskMaintenance: Disk bakımı
@@ -721,3 +714,19 @@ achievements:
       verified_developer:
         title: 'İlk adımlar'
         description: 'Bir kullanıcı hesabı oluşturun'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial
