@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: ਕਾਟਰੋਬੈਟ ਦਾ ਸੁਆਗਤ ਹੈ%theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: ਕਹਾਣੀਆਂ, ਖੇਡਾਂ ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ ਬਣਾਓ ...
     subtitle_embroidery: ਆਪਣੀ ਟੀ-ਸ਼ਰਟ, ਬੈਗਾਂ, ਪੈਂਟਾਂ ਜਾਂ ਸਮਾਰਟਫੋਨ ਦੇ ਕੇਸਾਂ 'ਤੇ ਆਪਣੇ ਪੈਟਰਨ ਨੂੰ ਸਿਲਾਈ ਕਰੋ!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: ਐਪ ਨੂੰ ਡਾਉਨਲੋਡ ਕਰੋ
     statistics: ਹੋਰ ਅੰਕੜੇ
   featured: ਫੀਚਰਡ
@@ -528,15 +530,6 @@ gamejam:
       %gamejamtag% ਵਿਚ ਹਿੱਸਾ ਲਓ
 tag-text: ਟੈਗਸ
 extenstion-text: ਐਕਸਟੈਂਸ਼ਨਾਂ
-tags:
-  constant:
-    tag1: ਖੇਡ
-    tag2: ਐਨੀਮੇਸ਼ਨ
-    tag3: ਕਹਾਣੀ
-    tag4: ਸੰਗੀਤ
-    tag5: ਕਲਾ
-    tag6: ਪ੍ਰਯੋਗਾਤਮਕ
-    tag7: ਟਿਊਟੋਰਿਅਲ
 admin:
   maintain:
     diskMaintenance: ਡਿਸਕ ਸੰਭਾਲ
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'ਨਵੀਨਤਾ'
         description: 'ਇੱਕ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਓ'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

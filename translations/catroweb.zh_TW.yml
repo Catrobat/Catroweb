@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: 歡迎來到Catrobat的%theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: 創建故事，遊戲等...
     subtitle_embroidery: 在T卹，箱包，褲子或智能手機保護套上貼上自己喜歡的圖案！
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: 下載應用程式
     statistics: More Statistics
   featured: 推薦
@@ -528,15 +530,6 @@ gamejam:
       參加 %gamejamtag%
 tag-text: 標籤
 extenstion-text: 擴展
-tags:
-  constant:
-    tag1: 遊戲
-    tag2: 動畫片
-    tag3: 故事
-    tag4: 音樂
-    tag5: 藝術
-    tag6: 實驗性的
-    tag7: 教程
 admin:
   maintain:
     diskMaintenance: 磁盤維護
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: '新手'
         description: '創建用戶帳戶'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

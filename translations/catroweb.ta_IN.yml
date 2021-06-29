@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: காட்ரோபாட்டின் %theme% -இற்கு நல்வரவு
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: கதைகள், விளையாட்டுகள், மற்றும் பலவற்றை உருவாக்குங்கள்...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: செயலியை பதிவிறக்கவும்
     statistics: மேற்கொண்ட புள்ளிவிவரங்கள்
   featured: சிறப்பு
@@ -532,15 +534,6 @@ gamejam:
       %gamejamtag% இல் பங்கேற்கவும்
 tag-text: குறிச்சொற்கள்
 extenstion-text: நீட்டிப்புகள்
-tags:
-  constant:
-    tag1: விளையாட்டு
-    tag2: அசைவூட்டம்
-    tag3: கதை
-    tag4: இசை
-    tag5: கலை
-    tag6: பரிசோதனை
-    tag7: பயிற்சிகள்
 admin:
   maintain:
     diskMaintenance: வட்டு பராமரிப்பு
@@ -727,3 +720,19 @@ achievements:
       verified_developer:
         title: 'Novice'
         description: 'Create a user account'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

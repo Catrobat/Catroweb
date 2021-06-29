@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: ยินดีต้อนรับสู่ %theme% ของ Catrobat
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: สร้างเรื่องราว เกม และอื่น ๆ...
     subtitle_embroidery: ปักลวดลายของคุณเองบนเสื้อยืดกระเป๋ากางเกงหรือเคสสมาร์ทโฟนของคุณ!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: ดาวน์โหลดแอป
     statistics: สถิติเพิ่มเติม
   featured: รายการเด่น
@@ -533,15 +535,6 @@ gamejam:
       มีส่วนร่วมใน %gamejamtag%
 tag-text: แท็ก
 extenstion-text: ส่วนขยาย
-tags:
-  constant:
-    tag1: เกมส์
-    tag2: ย้ายภาพเคลื่อนไหว
-    tag3: เรื่องราว
-    tag4: เพลง
-    tag5: ศิลปะ
-    tag6: ทดลอง
-    tag7: วิธีการใช้งาน
 admin:
   maintain:
     diskMaintenance: การบำรุงรักษาดิสก์
@@ -728,3 +721,19 @@ achievements:
       verified_developer:
         title: 'สามเณร'
         description: 'สร้างบัญชีผู้ใช้'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial
