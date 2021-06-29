@@ -227,46 +227,6 @@ class SecurityController extends AbstractController
     return $this->getOAuthService()->loginWithGoogleAction($request);
   }
 
-  /**
-   * @deprecated
-   *
-   * @Route("/api/getGoogleUserInfo/getGoogleUserInfo.json", name="catrobat_google_userinfo",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @throws Exception
-   */
-  public function getGoogleUserProfileInfo(Request $request): JsonResponse
-  {
-    return $this->getOAuthService()->getGoogleUserProfileInfo($request);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/loginWithTokenAndRedirect/loginWithTokenAndRedirect", name="catrobat_oauth_login_redirect",
-   * options={"expose": true}, methods={"POST"})
-   *
-   * @throws Exception
-   */
-  public function loginWithTokenAndRedirectAction(Request $request): JsonResponse
-  {
-    return $this->getOAuthService()->loginWithTokenAndRedirectAction($request);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/getGoogleAppId/getGoogleAppId.json", name="catrobat_oauth_login_get_google_appid",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   */
-  public function getGoogleAppId(): JsonResponse
-  {
-    $retArray = [];
-    $retArray['gplus_appid'] = getenv('GOOGLE_CLIENT_ID');
-
-    return JsonResponse::create($retArray);
-  }
-
   private function getOAuthService(): OAuthService
   {
     return $this->oauth_service;
