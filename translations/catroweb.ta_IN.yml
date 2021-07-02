@@ -12,20 +12,20 @@ education: கல்வி
 chat: அரட்டை மற்றும் மன்றங்கள்
 others: மற்றவைகள்
 tutorials: உதவி
-googlePlay: கூகுள் ப்ளே
-iosAppStore: IOS செயலி அங்காடி
+googlePlay: கூகுள் பிளே அங்காடி
+iosAppStore: iOS பயனி அங்காடி
 huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: கடவுச்சொற்கள் பொருந்தவில்லை.
 error: பிழை
-cancel: தவிர்
+cancel: பின்வாங்கு
 report: அறிக்கையிடு
 deleteIt: ஆமாம், அதை நீக்கு!
-reportIt: ஆம், அதைப் புகாரளிக்கவும்!
-areYouSure: உறுதியாகவா?
+reportIt: ஆம், அதைப் புகாரளி!
+areYouSure: உறுதியாக இருக்கிறீர்களா?
 noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
-download: திட்டத்தை பதிவிறக்கவும்
-description: விளக்கம்
-noDescription: விவரம் இல்லை கிடைக்கும்.
+download: பதிவிறக்கம்
+description: விளக்கவுரை
+noDescription: விளக்கவுரை ஏதும் கிடைக்கவில்லை.
 credits: பங்களித்தவர்கள்
 noCredits: வரவுகள் எதுவும் கிடைக்கவில்லை.
 notesAndCreditsDescription: இத் திட்டப்பணியை நீங்கள் எவ்வாறு உருவாக்கினீர்கள்?  மற்றவர்களிடம் இருந்து கருவாக்கங்கள், செயல்முறைகள் அல்லது கலைப்படைப்புகளைப் பயன்படுத்தினீர்களா?  அவர்களுக்கு இங்கே நன்றி கூறுங்கள்.
@@ -681,7 +681,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'புதிய'
   overview:
     header: 'Achievements'
     most_recent_achievement:
