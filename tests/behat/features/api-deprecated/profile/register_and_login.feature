@@ -3,8 +3,8 @@ Feature: Login with an existing account or register a new one
 
   Background:
     Given there are users:
-      | name      |  token      | email                   | id |
-      | Catrobat  |  cccccccccc | default1@pocketcode.org |  1 |
+      | name     | token      | email                   | id |
+      | Catrobat | cccccccccc | default1@pocketcode.org | 1  |
 
   Scenario: Register
     Given the next generated token will be "rrrrrrrrrrr"

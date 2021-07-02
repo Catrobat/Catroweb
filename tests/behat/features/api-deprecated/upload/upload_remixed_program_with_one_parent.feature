@@ -4,7 +4,7 @@ Feature: Upload a remixed program with one parent
   Background:
     Given there are users:
       | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc |  1 |
+      | Catrobat | 12345    | cccccccccc | 1  |
 
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version | remix_root |

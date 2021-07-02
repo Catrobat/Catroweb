@@ -143,7 +143,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($qb);
   }
 
-  public function getProjectsByTagId(int $id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  public function getProjectsByTagInternalTitle(string $internal_title, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -151,14 +151,14 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
       ->leftJoin('e.tags', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':id'))
-      ->setParameter('id', $id)
+      ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
+      ->setParameter('internal_title', $internal_title)
     ;
 
     return $qb->getQuery()->getResult();
   }
 
-  public function getProjectsByExtensionName(string $name, ?int $limit = 20, ?int $offset = 0): array
+  public function getProjectsByExtensionInternalTitle(string $internal_title, ?int $limit = 20, ?int $offset = 0): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb);
@@ -166,34 +166,34 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
       ->leftJoin('e.extensions', 'f')
-      ->andWhere($qb->expr()->eq('f.name', ':name'))
-      ->setParameter('name', $name)
+      ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
+      ->setParameter('internal_title', $internal_title)
     ;
 
     return $qb->getQuery()->getResult();
   }
 
-  public function searchTagCount(int $tag_id, ?string $flavor = null, string $max_version = ''): int
+  public function searchTagCount(string $tag_name, ?string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
       ->leftJoin('e.tags', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':id'))
-      ->setParameter('id', $tag_id)
+      ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
+      ->setParameter('internal_title', $tag_name)
     ;
 
     return $this->getQueryCount($qb);
   }
 
-  public function searchExtensionCount(string $name, ?string $flavor = null, string $max_version = ''): int
+  public function searchExtensionCount(string $extension_internal_title, ?string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
       ->leftJoin('e.extensions', 'f')
-      ->andWhere($qb->expr()->eq('f.name', ':name'))
-      ->setParameter('name', $name)
+      ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
+      ->setParameter('internal_title', $extension_internal_title)
     ;
 
     return $this->getQueryCount($qb);
@@ -558,7 +558,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder->leftJoin($alias.'.extensions', 'ext')
       ->andWhere($query_builder->expr()->orX()->addMultiple([
         $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
-        $query_builder->expr()->like('lower(ext.name)', ':extension'),
+        $query_builder->expr()->like('lower(ext.internal_title)', ':extension'),
       ]))
       ->setParameter('flavor', strtolower($flavor))
       ->setParameter('extension', strtolower($flavor))

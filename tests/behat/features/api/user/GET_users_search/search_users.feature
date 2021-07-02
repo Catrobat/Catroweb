@@ -12,14 +12,14 @@ Feature: Search users
       | Catroweb     | 54321    | bbbbbbbbbb | 4  |
       | пользователь | 54321    | bbbbbbbbbb | 5  |
     And there are followers:
-      | name     | following      |
-      | Catrobat | User1, Catroweb|
-      | NewUser  | Catrobat       |
-      | Catroweb | User1, NewUser |
+      | name     | following       |
+      | Catrobat | User1, Catroweb |
+      | NewUser  | Catrobat        |
+      | Catroweb | User1, NewUser  |
     And there are programs:
-      | id        | name            | owned by | version | private | visible |
-      | isxs-adkt | Webteam         | Catroweb | 0.8.5   | false   | true    |
-      | tvut-irkw | Catroweb        | NewUser  | 0.8.5   | false   | true    |
+      | id        | name     | owned by | version | private | visible |
+      | isxs-adkt | Webteam  | Catroweb | 0.8.5   | false   | true    |
+      | tvut-irkw | Catroweb | NewUser  | 0.8.5   | false   | true    |
     And I wait 1000 milliseconds
 
   Scenario: Search for users with specific word in username
@@ -30,9 +30,9 @@ Feature: Search users
     Then the response status code should be "200"
     Then the response should have the users model structure
     Then the response should contain users in the following order:
-      | Name      |
-      | Catrobat  |
-      | Catroweb  |
+      | Name     |
+      | Catrobat |
+      | Catroweb |
 
   Scenario: Search for users with specific word in username
 
@@ -42,8 +42,8 @@ Feature: Search users
     Then the response status code should be "200"
     Then the response should have the users model structure
     Then the response should contain users in the following order:
-      | Name      |
-      | NewUser   |
+      | Name    |
+      | NewUser |
 
   Scenario: Search for users with specific word in username
 
@@ -53,8 +53,8 @@ Feature: Search users
     Then the response status code should be "200"
     Then the response should have the users model structure
     Then the response should contain users in the following order:
-      | Name        |
-      | пользователь|
+      | Name         |
+      | пользователь |
 
   Scenario: Search for users with specific word in id
 
@@ -64,8 +64,8 @@ Feature: Search users
     Then the response status code should be "200"
     Then the response should have the users model structure
     Then the response should contain users in the following order:
-      | Name      |
-      | User1     |
+      | Name  |
+      | User1 |
 
   Scenario: Search for users with specific word should only return users
 
@@ -75,7 +75,7 @@ Feature: Search users
     Then the response status code should be "200"
     Then the response should have the users model structure
     Then the response should contain users in the following order:
-      | Name      |
-      | Catroweb  |
+      | Name     |
+      | Catroweb |
 
 

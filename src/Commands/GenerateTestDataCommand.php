@@ -78,7 +78,7 @@ class GenerateTestDataCommand extends Command
       // $this->generateProgramWithInvalidContentCodeXML("program_with_invalid_content_code_xml");
       $this->generateProgramWithTags('program_with_tags');
       $this->generatePhiroProgram('phiro');
-      $this->generateLegoProgram('lego');
+      $this->generateMindstormsProgram('lego');
 
       $finder->directories()->in($this->target_directory)->depth(0);
       foreach ($finder as $dir) {
@@ -192,7 +192,7 @@ class GenerateTestDataCommand extends Command
     file_put_contents($this->target_directory.$directory.'/permissions.txt', "TEXT_TO_SPEECH\nBLUETOOTH_PHIRO\nVIBRATOR");
   }
 
-  protected function generateLegoProgram(string $directory): void
+  protected function generateMindstormsProgram(string $directory): void
   {
     $this->filesystem->mirror($this->extracted_source_program_directory, $this->target_directory.$directory);
     file_put_contents($this->target_directory.$directory.'/permissions.txt', "TEXT_TO_SPEECH\nBLUETOOTH_LEGO_NXT\nVIBRATOR");

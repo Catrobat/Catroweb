@@ -522,6 +522,15 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then the project with name :name should have :number_of_extensions extensions
+   */
+  public function theProjectWithNameShouldHaveExtensions(string $name, int $number_of_extensions): void
+  {
+    $program = $this->getProgramManager()->findOneByName($name);
+    Assert::assertCount($number_of_extensions, $program->getExtensions());
+  }
+
+  /**
    * @Then the embroidery program should have the :extension extension
    *
    * @param mixed $extension
@@ -534,46 +543,23 @@ class DataFixturesContext implements KernelAwareContext
 
     foreach ($program_extensions as $program_extension) {
       /* @var $program_extension Extension */
-      Assert::assertStringContainsString($program_extension->getName(), $extension, 'The Extension was not found!');
+      Assert::assertStringContainsString($program_extension->getInternalTitle(), $extension, 'The Extension was not found!');
     }
   }
 
   /**
-   * @Then /^the program should be marked with extensions in the database$/
-   */
-  public function theProgramShouldBeMarkedWithExtensionsInTheDatabase(): void
-  {
-    $program_extensions = $this->getProgramManager()->findOneByName('extensions')->getExtensions();
-
-    Assert::assertNotNull($program_extensions);
-
-    Assert::assertCount(3, $program_extensions, 'Too much or too less tags found!');
-
-    $ext = ['Arduino', 'Lego', 'Phiro'];
-    foreach ($program_extensions as $program_extension) {
-      /* @var Extension $program_extension */
-      Assert::assertContains($program_extension->getName(), $ext, 'The Extension is not found!');
-    }
-  }
-
-  /**
-   * @Then the program with id :arg1 should be marked with no extensions in the database
+   * @Then the program with id :arg1 should be marked with :arg2 extensions in the database
    *
    * @param mixed $id
+   * @param mixed $count
    */
-  public function theProgramWithIdShouldBeMarkedWithNoExtensionsInTheDatabase($id): void
+  public function theProgramShouldBeMarkedWithExtensionsInTheDatabase($id, $count): void
   {
-    $program_extensions = $this->getProgramManager()->find($id)->getExtensions();
-
+    $project = $this->getProgramManager()->find($id);
+    $this->getManager()->refresh($project);
+    $program_extensions = $project->getExtensions();
     Assert::assertNotNull($program_extensions);
-
-    Assert::assertCount(0, $program_extensions, 'Too much or too less extensions found!');
-
-    $ext = ['Arduino', 'Lego', 'Phiro'];
-    foreach ($program_extensions as $program_extension) {
-      /* @var Extension $program_extension */
-      Assert::assertContains($program_extension->getName(), $ext, 'The extension is not found!');
-    }
+    Assert::assertCount($count, $program_extensions, 'Too much or too less extensions found!');
   }
 
   /**
@@ -1285,6 +1271,15 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then there should be :number_of_extensions extensions in the database
+   */
+  public function thereShouldBeExtensionsInTheDatabase(int $number_of_extensions): void
+  {
+    $tags = $this->getExtensionRepository()->findAll();
+    Assert::assertCount($number_of_extensions, $tags);
+  }
+
+  /**
    * @Then there should be :number_of_user_achievements user achievements in the database
    */
   public function thereShouldBeUserAchievementsInTheDatabase(int $number_of_user_achievements): void
@@ -1320,6 +1315,16 @@ class DataFixturesContext implements KernelAwareContext
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:update:tags'], [], 'Creating Tags'
     );
+  }
+
+  /**
+   * @Given I run the update extensions command
+   */
+  public function iRunTheUpdateExtensionsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+            ['bin/console', 'catrobat:update:extensions'], [], 'Creating Extensions'
+        );
   }
 
   /**
@@ -1399,6 +1404,16 @@ class DataFixturesContext implements KernelAwareContext
   {
     CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:workflow:achievement:perfect_profile'], [], 'Updating user achievements'
+    );
+  }
+
+  /**
+   * @Given I run the refresh project extensions command
+   */
+  public function iRunTheRefreshProjectExtensionsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:project:refresh_extensions'], [], 'Refreshing project extensions'
     );
   }
 

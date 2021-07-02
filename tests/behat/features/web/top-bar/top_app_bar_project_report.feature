@@ -8,10 +8,10 @@ Feature: As a project owner, I should be able to give credits for my project.
       | 2  | OtherUser |
     And there are projects:
       | id | name      | owned by  | approved |
-      | 1  | project 1 | Catrobat  |  false   |
-      | 2  | project 2 | OtherUser |  false   |
-      | 3  | project 3 | Catrobat  |  false   |
-      | 4  | project 4 | Catrobat  |  true    |
+      | 1  | project 1 | Catrobat  | false    |
+      | 2  | project 2 | OtherUser | false    |
+      | 3  | project 3 | Catrobat  | false    |
+      | 4  | project 4 | Catrobat  | true     |
 
     And following projects are featured:
       | name      | active | priority |

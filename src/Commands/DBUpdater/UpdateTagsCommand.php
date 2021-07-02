@@ -8,7 +8,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateTagsCommand extends Command
 {
@@ -19,18 +18,15 @@ class UpdateTagsCommand extends Command
    */
   protected static $defaultName = 'catrobat:update:tags';
 
-  private TranslatorInterface $translator;
   private TagRepository $tag_repository;
   private EntityManagerInterface $entity_manager;
 
   public const TAG_LTM_PREFIX = 'tags.tag.';
 
-  public function __construct(EntityManagerInterface $entity_manager,TranslatorInterface $translator,
-                              TagRepository $tag_repository)
+  public function __construct(EntityManagerInterface $entity_manager, TagRepository $tag_repository)
   {
     parent::__construct();
     $this->entity_manager = $entity_manager;
-    $this->translator = $translator;
     $this->tag_repository = $tag_repository;
   }
 

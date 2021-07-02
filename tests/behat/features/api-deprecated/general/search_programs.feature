@@ -6,21 +6,21 @@ Feature: Search programs
   Background:
     Given there are users:
       | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc |  1 |
-      | User1    | vwxyz    | aaaaaaaaaa |  2 |
-      | NewUser  | 54321    | bbbbbbbbbb |  3 |
+      | Catrobat | 12345    | cccccccccc | 1  |
+      | User1    | vwxyz    | aaaaaaaaaa | 2  |
+      | NewUser  | 54321    | bbbbbbbbbb | 3  |
     And there are programs:
-      | id         | name            | description               | owned by | upload time      | version |
-      | qysm-rhwt  | Galaxy War      | description1              | User1    | 01.01.2014 12:00 | 0.8.5   |
-      | phci-etqx  | Minions         |                           | Catrobat | 02.02.2014 14:00 | 0.8.5   |
-      | bbns-hixd  | Fisch           |                           | User1    | 10.01.2012 14:00 | 0.8.5   |
-      | rppk-kkri  | Ponny           | description2              | User1    | 09.01.2012 14:00 | 0.8.5   |
-      | nhre-xzvg  | MarkoTheBest    |                           | NewUser  | 08.01.2012 14:00 | 0.8.5   |
-      | ydmf-tbms  | Whack the Marko | Universe                  | Catrobat | 07.02.2012 14:00 | 0.8.5   |
-      | anxu-nsss  | Superponny      | description1 description2 | User1    | 06.01.2012 14:00 | 0.8.5   |
-      | kbrw-khwf  | Universe        |                           | NewUser  | 05.01.2012 14:00 | 0.8.5   |
-      | isxs-adkt  | Webteam         |                           | NewUser  | 04.01.2012 14:00 | 0.8.5   |
-      | tvut-irkw  | Fritz the Cat   |                           | NewUser  | 03.01.2012 14:00 | 0.8.5   |
+      | id        | name            | description               | owned by | upload time      | version |
+      | qysm-rhwt | Galaxy War      | description1              | User1    | 01.01.2014 12:00 | 0.8.5   |
+      | phci-etqx | Minions         |                           | Catrobat | 02.02.2014 14:00 | 0.8.5   |
+      | bbns-hixd | Fisch           |                           | User1    | 10.01.2012 14:00 | 0.8.5   |
+      | rppk-kkri | Ponny           | description2              | User1    | 09.01.2012 14:00 | 0.8.5   |
+      | nhre-xzvg | MarkoTheBest    |                           | NewUser  | 08.01.2012 14:00 | 0.8.5   |
+      | ydmf-tbms | Whack the Marko | Universe                  | Catrobat | 07.02.2012 14:00 | 0.8.5   |
+      | anxu-nsss | Superponny      | description1 description2 | User1    | 06.01.2012 14:00 | 0.8.5   |
+      | kbrw-khwf | Universe        |                           | NewUser  | 05.01.2012 14:00 | 0.8.5   |
+      | isxs-adkt | Webteam         |                           | NewUser  | 04.01.2012 14:00 | 0.8.5   |
+      | tvut-irkw | Fritz the Cat   |                           | NewUser  | 03.01.2012 14:00 | 0.8.5   |
     And the current time is "01.08.2014 14:00"
     And I wait 1000 milliseconds
 
@@ -171,8 +171,8 @@ Feature: Search programs
     And I use the offset "0"
     When I search for "phci"
     Then I should get following programs:
-      | name       |
-      | Minions    |
+      | name    |
+      | Minions |
 
   Scenario: find a program with its id
 
@@ -180,8 +180,8 @@ Feature: Search programs
     And I use the offset "0"
     When I search for "-etqx"
     Then I should get following programs:
-      | name       |
-      | Minions    |
+      | name    |
+      | Minions |
 
   Scenario: only show visible programs
     Given program "Ponny" is not visible

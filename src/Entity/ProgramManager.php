@@ -215,8 +215,7 @@ class ProgramManager
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
 
-    $this->addEmbroideryExtensions($program, $extracted_file);
-    $this->addMindstormsExtensions($program, $extracted_file);
+    // Extensions are added via the ProgramExtensionListener!
 
     try {
       if (null !== $extracted_file->getScreenshotPath()) {
@@ -418,47 +417,6 @@ class ProgramManager
         }
       }
     }
-  }
-
-  /**
-   * Adding the embroidery extension if an embroidery block was used in the project.
-   */
-  public function addEmbroideryExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
-  {
-    $EMBROIDERY = 'Embroidery';
-    if (false !== strpos($extracted_file->getProgramXmlProperties()->asXML(), '<brick type="StitchBrick">')) {
-      /** @var Extension|null $embroidery_extension */
-      $embroidery_extension = $this->extension_repository->findOneBy(['name' => $EMBROIDERY]);
-      if (null === $embroidery_extension) {
-        $embroidery_extension = $this->createExtension($EMBROIDERY);
-      }
-      $program->addExtension($embroidery_extension);
-    }
-  }
-
-  /**
-   * Adding the mindstorms extension if an ev3, nxt block or sensor is used in the project.
-   */
-  public function addMindstormsExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
-  {
-    $MINDSTORMS = 'Mindstorms';
-    if (preg_match('/\"legonxt|\"legoev3/', strval($extracted_file->getProgramXmlProperties()->asXML()), $matches)) {
-      $mindstorms_extension = $this->extension_repository->findOneBy(['name' => $MINDSTORMS]);
-      if (is_null($mindstorms_extension)) {
-        $mindstorms_extension = $this->createExtension($MINDSTORMS);
-      }
-      $program->addExtension($mindstorms_extension);
-    }
-  }
-
-  protected function createExtension(string $extension_name): Extension
-  {
-    $extension = new Extension();
-    $extension->setName($extension_name);
-    $extension->setPrefix(strtoupper($extension_name));
-    $this->entity_manager->persist($extension);
-
-    return $extension;
   }
 
   public function removeAllTags(Program $program): void
@@ -684,19 +642,19 @@ class ProgramManager
     $this->entity_manager->flush();
   }
 
-  public function getProgramsByTagId(int $id, ?int $limit, int $offset): array
+  public function getProgramsByTagInternalTitle(string $name, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getProjectsByTagId($id, $limit, $offset);
+    return $this->program_repository->getProjectsByTagInternalTitle($name, $limit, $offset);
   }
 
-  public function getProjectsByExtensionName(string $name, ?int $limit, int $offset): array
+  public function getProjectsByExtensionInternalTitle(string $name, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getProjectsByExtensionName($name, $limit, $offset);
+    return $this->program_repository->getProjectsByExtensionInternalTitle($name, $limit, $offset);
   }
 
-  public function searchTagCount(int $tag_id): int
+  public function searchTagCount(string $tag_name): int
   {
-    return $this->program_repository->searchTagCount($tag_id);
+    return $this->program_repository->searchTagCount($tag_name);
   }
 
   public function searchExtensionCount(string $query): int

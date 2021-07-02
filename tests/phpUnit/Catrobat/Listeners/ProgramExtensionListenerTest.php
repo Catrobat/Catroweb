@@ -4,66 +4,138 @@ namespace Tests\phpUnit\Catrobat\Listeners;
 
 use App\Catrobat\Listeners\ProgramExtensionListener;
 use App\Catrobat\Services\ExtractedCatrobatFile;
-use App\Entity\Extension;
 use App\Entity\Program;
-use App\Repository\ExtensionRepository;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
+use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @covers  \App\Catrobat\Listeners\ProgramExtensionListener
+ * @coversDefaultClass \App\Catrobat\Listeners\ProgramExtensionListener
  */
-class ProgramExtensionListenerTest extends TestCase
+class ProgramExtensionListenerTest extends CatrowebTestCase
 {
-  public ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
-
-  public ExtractedCatrobatFile $extracted_catrobat_file_without_extensions;
-
-  private ProgramExtensionListener $program_extension_listener;
+  protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
+  protected ExtractedCatrobatFile $extracted_catrobat_file_without_extensions;
 
   /**
-   * @var Extension|MockObject
+   * @var ProgramExtensionListener|MockObject
    */
-  private $extension;
+  protected $object;
 
   protected function setUp(): void
   {
-    $this->extension = $this->createMock(Extension::class);
-    $this->extension->expects($this->any())->method('getPrefix')->willReturn('PHIRO');
+    $this->object = $this->getMockBuilder(ProgramExtensionListener::class)
+      ->disableOriginalConstructor()
+      ->getMockForAbstractClass()
+    ;
 
-    $extension_repository = $this->createMock(ExtensionRepository::class);
-    $extension_repository->expects($this->any())->method('findAll')->willReturn([$this->extension]);
+    $this->setUpCatrobatTestFiles();
+  }
 
-    $this->program_extension_listener = new ProgramExtensionListener($extension_repository);
+  /**
+   * @group unit
+   * @small
+   * @covers ::addExtensions
+   */
+  public function testAddExtensions(): void
+  {
+    $program = $this
+      ->getMockBuilder(Program::class)
+      ->onlyMethods(['removeAllExtensions'])
+      ->getMockForAbstractClass()
+    ;
 
+    $this->object = $this->getMockBuilder(ProgramExtensionListener::class)
+      ->disableOriginalConstructor()
+      ->onlyMethods(['addArduinoExtensions', 'addPhiroExtensions', 'addEmbroideryExtensions', 'addMindstormsExtensions', 'getExtension', 'saveProject'])
+      ->getMockForAbstractClass()
+    ;
+
+    $program->expects($this->once())->method('removeAllExtensions');
+    $this->object->expects($this->once())->method('addArduinoExtensions');
+    $this->object->expects($this->once())->method('addPhiroExtensions');
+    $this->object->expects($this->once())->method('addEmbroideryExtensions');
+    $this->object->expects($this->once())->method('addMindstormsExtensions');
+    $this->object->expects($this->once())->method('saveProject');
+
+    $this->object->addExtensions($this->extracted_catrobat_file_with_extensions, $program);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers ::isAnEmbroideryProject
+   * @dataProvider dataProviderIsAnEmbroideryProject
+   */
+  public function testIsAnEmbroideryProject(string $code_xml, bool $expected): void
+  {
+    $this->assertEquals(
+          $expected,
+          $this->invokeMethod($this->object, 'isAnEmbroideryProject', [$code_xml])
+      );
+  }
+
+  public function dataProviderIsAnEmbroideryProject(): array
+  {
+    return [
+      'invalid' => ['bla bla <brick type="NoStitchBrick" bla bla', false],
+      'valid' => ['bla bla <brick type="StitchBrick"> bla bla', true],
+    ];
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers ::isAMindstormsProject
+   * @dataProvider dataProviderIsAMindstormsProject
+   */
+  public function testIsAMindstormsProject(string $code_xml, bool $expected): void
+  {
+    $this->assertEquals(
+          $expected,
+          $this->invokeMethod($this->object, 'isAMindstormsProject', [$code_xml])
+      );
+  }
+
+  public function dataProviderIsAMindstormsProject(): array
+  {
+    return [
+      'invalid' => ['bla bla bla bla', false],
+      'valid 01' => ['"legonxt bla bla', true],
+      'valid 02' => ['blaaaa "legoev3/', true],
+    ];
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers ::isAPhiroProject
+   * @dataProvider dataProviderIsAPhiroProject
+   */
+  public function testIsAPhiroProject(string $code_xml, bool $expected): void
+  {
+    $this->assertEquals(
+          $expected,
+          $this->invokeMethod($this->object, 'isAPhiroProject', [$code_xml])
+      );
+  }
+
+  public function dataProviderIsAPhiroProject(): array
+  {
+    return [
+      'invalid' => ['bla bla Phiro im titel bla bla', false],
+      'valid' => ['bla bla <brick type="Phiro bla bla', true],
+    ];
+  }
+
+  protected function setUpCatrobatTestFiles(): void
+  {
     $filesystem = new Filesystem();
     $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_extensions/', RefreshTestEnvHook::$CACHE_DIR.'program_with_extensions/');
     $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', RefreshTestEnvHook::$CACHE_DIR.'base/');
-
     $this->extracted_catrobat_file_without_extensions = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '', '');
-
     $this->extracted_catrobat_file_with_extensions = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'program_with_extensions/', '', '');
-  }
-
-  public function testInitialization(): void
-  {
-    $this->assertInstanceOf(ProgramExtensionListener::class, $this->program_extension_listener);
-  }
-
-  public function testFlagsAProgramIfExtensionBricksAreUsed(): void
-  {
-    $program = $this->createMock(Program::class);
-    $program->expects($this->atLeastOnce())->method('addExtension')->with($this->extension);
-    $this->program_extension_listener->checkExtension($this->extracted_catrobat_file_with_extensions, $program);
-  }
-
-  public function testDoesNotFlagsAProgramIfNoExtensionBricksAreUsed(): void
-  {
-    $program = $this->createMock(Program::class);
-    $program->expects($this->never())->method('addExtension')->with($this->extension);
-    $this->program_extension_listener->checkExtension($this->extracted_catrobat_file_without_extensions, $program);
   }
 }

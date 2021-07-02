@@ -7,9 +7,9 @@ Feature: Admin Upload Notification
   Scenario: Email only subscribed admins directly after upload
     Given there are users:
       | name     | email           | id |
-      | Catrobat | admin@catrob.at |  1 |
-      | User1    | dog@catrob.at   |  2 |
-      | User2    | dog2@catrob.at  |  3 |
+      | Catrobat | admin@catrob.at | 1  |
+      | User1    | dog@catrob.at   | 2  |
+      | User2    | dog2@catrob.at  | 3  |
     And there are notifications:
       | user     | upload | report | summary |
       | Catrobat | true   | 1      | 1       |

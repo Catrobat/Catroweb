@@ -412,7 +412,7 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#total-number-of-special-brick" element should contain "2"
     And the "#number-of-different-special-brick" element should contain "2"
 
-  Scenario: On a project page there should be correct stats about all lego ev3 bricks
+  Scenario: On a project page there should be correct stats about all mindstorms ev3 bricks
     Given I have a project zip "CodeStatistics/code_statistics_lego_ev3_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
     Given I am on "/app/project/1/code_statistics"
@@ -442,7 +442,7 @@ Feature: As a visitor I want to see code statistics on the project page
     And the "#total-number-of-special-brick" element should contain "5"
     And the "#number-of-different-special-brick" element should contain "5"
 
-  Scenario: On a project page there should be correct stats about all lego nxt bricks
+  Scenario: On a project page there should be correct stats about all mindstorms nxt bricks
     Given I have a project zip "CodeStatistics/code_statistics_lego_nxt_blocks.catrobat"
     When I upload this generated program with id "1", API version 1
     Given I am on "/app/project/1/code_statistics"

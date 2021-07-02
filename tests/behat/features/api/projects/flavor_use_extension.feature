@@ -9,20 +9,20 @@ Feature: The extension should be used in addition to the flavor to find projects
       | 3  | User2    | 123456   |
       | 4  | User3    | 123456   |
     And there are extensions:
-      | id | name         | prefix     |
-      | 1  | Embroidery   | Embroidery |
+      | id | internal_title |
+      | 1  | embroidery     |
     And there are flavors:
       | id | name       |
       | 1  | pocketcode |
       | 2  | luna       |
       | 3  | embroidery |
     And there are programs:
-      | id | name       | extensions | flavor     |
-      | 1  | project 1  | Embroidery | pocketcode |
-      | 2  | project 2  | Embroidery | embroidery |
-      | 3  | project 3  |            | pocketcode |
-      | 4  | project 4  |            | embroidery |
-      | 5  | project 5  |            | luna       |
+      | id | name      | extensions | flavor     |
+      | 1  | project 1 | embroidery | pocketcode |
+      | 2  | project 2 | embroidery | embroidery |
+      | 3  | project 3 |            | pocketcode |
+      | 4  | project 4 |            | embroidery |
+      | 5  | project 5 |            | luna       |
 
   Scenario: Get recent projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"

@@ -6,8 +6,8 @@ Feature: Get featured ios programs (deprecated)
     And I use a secure connection
     Given there are users:
       | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc |  1 |
-      | User1    | vwxyz    | aaaaaaaaaa |  2 |
+      | Catrobat | 12345    | cccccccccc | 1  |
+      | User1    | vwxyz    | aaaaaaaaaa | 2  |
     And there are programs:
       | id | name         | description | owned by | downloads | views | upload time      | version |
       | 1  | Invaders     | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |

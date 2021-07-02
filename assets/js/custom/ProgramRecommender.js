@@ -17,7 +17,8 @@ function ProgramRecommender (programId, pathStats) {
 
         if (href.indexOf('tag') > 0) {
           clickType = 'tags'
-          additions = (href.match(/[0-9]+/))[0]
+          const list = href.split('/')
+          additions = list[list.length - 1]
         } else if (href.indexOf('extension') > 0) {
           clickType = 'extensions'
           const list = href.split('/')

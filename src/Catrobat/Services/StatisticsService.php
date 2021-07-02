@@ -4,10 +4,12 @@ namespace App\Catrobat\Services;
 
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Entity\ClickStatistic;
+use App\Entity\Extension;
 use App\Entity\HomepageClickStatistic;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramManager;
+use App\Entity\Tag;
 use App\Repository\ExtensionRepository;
 use App\Repository\TagRepository;
 use App\Utils\TimeUtils;
@@ -157,7 +159,7 @@ class StatisticsService
    * @throws Exception
    */
   public function createClickStatistics(Request $request, string $type, ?string $rec_from_id, ?string $rec_program_id,
-                                        ?int $tag_id, ?string $extension_name,
+                                        ?string $tag_name, ?string $extension_name,
                                         ?string $referrer, ?string $locale = null, bool $is_recommended_program_a_scratch_program = false,
                                         bool $is_user_specific_recommendation = false): bool
   {
@@ -206,7 +208,11 @@ class StatisticsService
       $this->entity_manager->persist($click_statistics);
       $this->entity_manager->flush();
     } elseif ('tags' === $type) {
-      $tag = $this->tag_repository->find($tag_id);
+      /** @var Tag|null $tag */
+      $tag = $this->tag_repository->findOneBy(['internal_title' => $tag_name]);
+      if (null == $tag) {
+        return false;
+      }
       $click_statistics = new ClickStatistic();
       $click_statistics->setType($type);
       $click_statistics->setTag($tag);
@@ -221,13 +227,14 @@ class StatisticsService
       $this->entity_manager->persist($click_statistics);
       $this->entity_manager->flush();
     } elseif ('extensions' == $type) {
-      $extension = $this->extension_repository->getExtensionByName($extension_name);
+      /** @var Extension|null $extension */
+      $extension = $this->extension_repository->findOneBy(['internal_title' => $extension_name]);
       if (null == $extension) {
         return false;
       }
       $click_statistics = new ClickStatistic();
       $click_statistics->setType($type);
-      $click_statistics->setExtension($extension[0]);
+      $click_statistics->setExtension($extension);
       $click_statistics->setUserAgent($user_agent);
       $click_statistics->setUser($user);
       $click_statistics->setReferrer($referrer);

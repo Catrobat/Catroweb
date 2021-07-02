@@ -835,7 +835,7 @@ class Program
     $extensions = [];
     foreach ($this->extensions as $program_extension) {
       /* @var Extension $program_extension */
-      $extensions[] = $program_extension->getName();
+      $extensions[] = $program_extension->getInternalTitle();
     }
 
     return implode(', ', $extensions);

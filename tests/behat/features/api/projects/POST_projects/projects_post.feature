@@ -97,7 +97,7 @@ Feature: Uploading a project
       }
     """
 
-   Scenario: Uploading a project should work
+  Scenario: Uploading a project should work
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
     And I have a request header "HTTP_ACCEPT" with value "application/json"

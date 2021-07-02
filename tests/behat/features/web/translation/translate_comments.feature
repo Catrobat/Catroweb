@@ -26,7 +26,7 @@ Feature: Project title, description and credits should be translatable via a but
     Then the element "#comment-translation-button-1" should be visible
     And the element "#comment-text-wrapper-1" should be visible
     And the "#comment-text-1" element should contain "c1"
-  
+
   Scenario: Comment should only be translated by API once
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
