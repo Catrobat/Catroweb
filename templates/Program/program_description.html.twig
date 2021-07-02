@@ -39,6 +39,7 @@
           {{ "noDescription"|trans({}, "catroweb") }}
         {% endif %}
       </div>
+      <div id="description-translation" class="text-break" style="display: none;"></div>
       <div class="h2 mt-3" id="credits-headline">
           <span>
             {{ "credits"|trans({}, "catroweb") }}
@@ -56,6 +57,14 @@
         {% else %}
           {{ "noCredits"|trans({}, "catroweb") }}
         {% endif %}
+      </div>
+      <div id="credits-translation-wrapper" style="display: none;">
+        <div id="credits-translation" class="text-break"></div>
+        <span id="program-translation-before-languages" class="translation-credit"></span>
+        <span id="program-translation-first-language" class="translation-credit"></span>
+        <span id="program-translation-between-languages" class="translation-credit"></span>
+        <span id="program-translation-second-language" class="translation-credit"></span>
+        <span id="program-translation-after-languages" class="translation-credit"></span>
       </div>
     </div>
   </div>
