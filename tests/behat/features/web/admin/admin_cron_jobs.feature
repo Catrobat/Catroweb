@@ -13,13 +13,14 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     And I wait for the page to be loaded
     Then I should see "Cron Jobs"
     And I should see the cron jobs table:
-      | Name                                    | State | Cron Interval | Start At | End At | Result Code |
-      | Add bronze_user UserAchievements        | idle  | 1 year        |          |        | 0           |
-      | Add diamond_user UserAchievements       | idle  | 1 week        |          |        | 0           |
-      | Add gold_user UserAchievements          | idle  | 1 week        |          |        | 0           |
-      | Add perfect_profile UserAchievements    | idle  | 1 week        |          |        | 0           |
-      | Add silver_user UserAchievements        | idle  | 1 week        |          |        | 0           |
-      | Add verified_developer UserAchievements | idle  | 1 year        |          |        | 0           |
+      | Name                                            | State | Cron Interval | Start At | End At | Result Code |
+      | Add bronze_user UserAchievements                | idle  | 1 year        |          |        | 0           |
+      | Add diamond_user UserAchievements               | idle  | 1 week        |          |        | 0           |
+      | Add gold_user UserAchievements                  | idle  | 1 week        |          |        | 0           |
+      | Add perfect_profile UserAchievements            | idle  | 1 week        |          |        | 0           |
+      | Add silver_user UserAchievements                | idle  | 1 week        |          |        | 0           |
+      | Add verified_developer UserAchievements         | idle  | 1 year        |          |        | 0           |
+      | Delete old entries in machine translation table | idle  | 1 month       |          |        | 0           |
 
   Scenario: Cron jobs can be manually triggered
     Given I log in as "Adminius"
@@ -33,7 +34,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
     Then I should see "Cron jobs finished successfully"
     When I am on "/admin/cronjobs/list"
     And I wait for the page to be loaded
-    And there should be "6" cron jobs in the database
+    And there should be "7" cron jobs in the database
 
   Scenario: Cron jobs can be resetted
     Given I log in as "Adminius"
