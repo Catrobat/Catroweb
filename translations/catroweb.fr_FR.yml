@@ -87,10 +87,10 @@ follower:
 programs:
   welcome:
     title: Bienvenue sur Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: Bienvenue sur le site de Catrobat pour Mindstorms EV3 et NXT
     subtitle: Créez des histoires, des jeux et plus encore...
     subtitle_embroidery: Stimulez vos propres patters sur vos T-shirts, sacs, pantalons ou étui pour smartphone !
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: Créez vos propres projets avec vos robots Lego Mindstorms EV3 et NXT.
     download: Télécharger l'application
     statistics: Plus de statistiques
   featured: A l'affiche
@@ -719,16 +719,16 @@ achievements:
 tags:
   tag:
     game:
-      title: Game
+      title: Jeu
     animation:
       title: Animation
     story:
-      title: Story
+      title: Histoire
     music:
-      title: Music
+      title: Musique
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: Expérimental
     tutorial:
-      title: Tutorial
+      title: Tutoriel

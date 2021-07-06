@@ -87,10 +87,10 @@ follower:
 programs:
   welcome:
     title: कैटोबैट में आपका स्वागत है %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: माइंडस्टॉर्म EV3 और NXT के लिए Catrobat की साइट में आपका स्वागत है
     subtitle: कहानियां, खेल और अधिक बनाएं ...
     subtitle_embroidery: अपने टी-शर्ट, बैग, पैंट, या स्मार्टफोन के मामले में अपने स्वयं के पेटेंट को सिलाई करें!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: अपने लेगो माइंडस्टॉर्म EV3 और NXT रोबोट के साथ अपने स्वयं के प्रोजेक्ट बनाएं
     download: ऐप डाउनलोड करें
     statistics: अधिक सांख्यिकी
   featured: विशेषताएं
@@ -721,14 +721,14 @@ tags:
     game:
       title: Game
     animation:
-      title: Animation
+      title: एनीमेशन
     story:
-      title: Story
+      title: कहानी
     music:
-      title: Music
+      title: संगीत
     art:
-      title: Art
+      title: कला
     experimental:
-      title: Experimental
+      title: प्रयोगात्मक
     tutorial:
-      title: Tutorial
+      title: ट्यूटोरियल

@@ -87,10 +87,10 @@ follower:
 programs:
   welcome:
     title: ਕਾਟਰੋਬੈਟ ਦਾ ਸੁਆਗਤ ਹੈ%theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: ਮਾਈਂਡਸਟੋਰਮਜ਼ ਈਵੀ 3 ਅਤੇ ਐਨਐਕਸਟੀ ਲਈ ਕੈਟ੍ਰੋਬੈਟ ਦੀ ਸਾਈਟ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ
     subtitle: ਕਹਾਣੀਆਂ, ਖੇਡਾਂ ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ ਬਣਾਓ ...
     subtitle_embroidery: ਆਪਣੀ ਟੀ-ਸ਼ਰਟ, ਬੈਗਾਂ, ਪੈਂਟਾਂ ਜਾਂ ਸਮਾਰਟਫੋਨ ਦੇ ਕੇਸਾਂ 'ਤੇ ਆਪਣੇ ਪੈਟਰਨ ਨੂੰ ਸਿਲਾਈ ਕਰੋ!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: ਆਪਣੇ ਲੇਗੋ ਮਾਈਂਡਸਟੋਰਮਜ਼ ਈਵੀ 3 ਅਤੇ ਐਨਐਕਸਟੀ ਰੋਬੋਟਾਂ ਨਾਲ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਬਣਾਓ
     download: ਐਪ ਨੂੰ ਡਾਉਨਲੋਡ ਕਰੋ
     statistics: ਹੋਰ ਅੰਕੜੇ
   featured: ਫੀਚਰਡ
@@ -719,16 +719,16 @@ achievements:
 tags:
   tag:
     game:
-      title: Game
+      title: ਖੇਡ
     animation:
-      title: Animation
+      title: ਐਨੀਮੇਸ਼ਨ
     story:
-      title: Story
+      title: ਕਹਾਣੀ
     music:
-      title: Music
+      title: ਸੰਗੀਤ
     art:
-      title: Art
+      title: ਕਲਾ
     experimental:
-      title: Experimental
+      title: ਪ੍ਰਯੋਗਾਤਮਕ
     tutorial:
-      title: Tutorial
+      title: ਟਿutorialਟੋਰਿਅਲ

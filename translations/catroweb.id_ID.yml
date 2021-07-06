@@ -87,10 +87,10 @@ follower:
 programs:
   welcome:
     title: Selamat datang di %theme% Catrobat
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: Selamat datang di situs Catrobat untuk Mindstorms EV3 dan NXT
     subtitle: Buat cerita, game, dan lainnya...
     subtitle_embroidery: Stich patters Anda sendiri di T-shirt, tas, celana, atau case smartphone Anda!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: Buat proyek Anda sendiri dengan robot Lego Mindstorms EV3 dan NXT Anda
     download: Unduh aplikasinya
     statistics: Lebih banyak statistik
   featured: Fitur
@@ -722,16 +722,16 @@ achievements:
 tags:
   tag:
     game:
-      title: Game
+      title: Permainan
     animation:
-      title: Animation
+      title: Animasi
     story:
-      title: Story
+      title: Cerita
     music:
-      title: Music
+      title: Musik
     art:
-      title: Art
+      title: Seni
     experimental:
-      title: Experimental
+      title: Eksperimental
     tutorial:
-      title: Tutorial
+      title: tutorial
