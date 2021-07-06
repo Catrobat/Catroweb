@@ -87,10 +87,10 @@ follower:
 programs:
   welcome:
     title: 환영합니다. Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: Mindstorms EV3 및 NXT 용 Catrobat 사이트에 오신 것을 환영합니다.
     subtitle: 이야기, 게임 등등 만들고...
     subtitle_embroidery: 티셔츠, 가방, 바지, 또는 스마트폰 케이스에 패턴을 스티치하세요!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: Lego Mindstorms EV3 및 NXT 로봇으로 자신 만의 프로젝트를 만드세요.
     download: 앱 다운로드하기
     statistics: 더 많은 통계자료
   featured: 추천
@@ -715,16 +715,16 @@ achievements:
 tags:
   tag:
     game:
-      title: Game
+      title: 경기
     animation:
-      title: Animation
+      title: 생기
     story:
-      title: Story
+      title: 이야기
     music:
-      title: Music
+      title: 음악
     art:
-      title: Art
+      title: 미술
     experimental:
-      title: Experimental
+      title: 실험적
     tutorial:
-      title: Tutorial
+      title: 지도 시간

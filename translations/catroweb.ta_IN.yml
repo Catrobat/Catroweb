@@ -6,7 +6,7 @@ password: கடவுச்சொல்
 createNewPassword: புதிய கடவுச்சொல்லை உருவாக்குக
 accountSettings: கணக்கு செயலமைப்புகள்
 email: மின்னஞ்சல்
-aboutPocketCode: உடுப்புப்பை குறியீடு பற்றி
+aboutPocketCode: Pocket Code பற்றி
 about: பற்றி
 education: கல்வி
 chat: அரட்டை மற்றும் மன்றங்கள்
@@ -21,28 +21,28 @@ cancel: பின்வாங்கு
 report: அறிக்கையிடு
 deleteIt: ஆமாம், அதை நீக்கு!
 reportIt: ஆம், அதைப் புகாரளி!
-areYouSure: உறுதியாக இருக்கிறீர்களா?
+areYouSure: உறுதியாகவா?
 noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
 download: பதிவிறக்கம்
 description: விளக்கவுரை
 noDescription: விளக்கவுரை ஏதும் கிடைக்கவில்லை.
-credits: பங்களித்தவர்கள்
-noCredits: வரவுகள் எதுவும் கிடைக்கவில்லை.
+credits: குறிப்புகளும் பொதுவொப்புதல்களும்
+noCredits: எந்த குறிப்புகளும் பொதுவொப்புதல்களும் கிடைக்கவில்லை
 notesAndCreditsDescription: இத் திட்டப்பணியை நீங்கள் எவ்வாறு உருவாக்கினீர்கள்?  மற்றவர்களிடம் இருந்து கருவாக்கங்கள், செயல்முறைகள் அல்லது கலைப்படைப்புகளைப் பயன்படுத்தினீர்களா?  அவர்களுக்கு இங்கே நன்றி கூறுங்கள்.
 country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: தனிமனித உரிமை கொள்கை
-imprint: முத்திரையிடுதல்
+imprint: அச்சிடு
 programDetails: விவரங்கள்
-somethingWentWrong: 'ஐய்யோ! ஏதோ தவறு நடந்து விட்டது.'
+somethingWentWrong: 'ஐய்யோ! ஏதோ தவறாய் நிகழ்ந்து விட்டது.'
 pleaseTryAgain: 'தயவுசெய்து மீண்டும் முயற்சிக்கவும்!'
-oldVersionError: 'தயவு செய்து புதிய பாக்கெட் கோட் பதிப்புக்கு மாறவும்!'
-more: 'அதிகம்'
-less: 'குறைந்து'
-show-more: 'மேலும் காண்பி'
-show-less: 'குறைவாக காண்பி'
-more-information: 'மேற்கொண்ட தகவல்கள்'
-less-information: 'சிறுத் தகவல்'
+oldVersionError: 'தயவு செய்து மிகப் புதிய Pocket Code பதிப்புக்கு புதிப்பிக்கவும்!'
+more: 'மிகுதி'
+less: 'குறைவு'
+show-more: 'மேலும் காட்டுக'
+show-less: 'குறைவாக காட்டுக'
+more-information: 'மேலும் தகவல்களுக்கு'
+less-information: 'குறைந்த தகவல்களுக்கு'
 ok: ஆம்
 clickToDownloadProgram: 'எடுத்துக்காட்டு திட்டத்தைப் பதிவிறக்க %link_start% இங்கே %link_end% என்பதைக் கிளிக் செய்க.'
 registrationError: 'பயனர் பெயரோ மின்னஞ்சல் முகவரியோ ஏற்கனவே உபயோகத்தில் உள்ளது.'

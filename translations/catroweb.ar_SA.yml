@@ -87,10 +87,10 @@ follower:
 programs:
   welcome:
     title: مرحبا بك في كاتروبات %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: مرحبًا بكم في موقع Catrobat الخاص بـ Mindstorms EV3 و NXT
     subtitle: إنشاء قصص، ألعاب وأكثر...
     subtitle_embroidery: قم بإخفاء براءاتك الخاصة على قمصانك أو الأكياس أو البناطيل أو غلاف الهاتف الذكي!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: قم بإنشاء مشاريعك الخاصة باستخدام روبوتات Lego Mindstorms EV3 و NXT
     download: تحميل التطبيق
     statistics: المزيد من الإحصاءات
   featured: خصائص
@@ -618,15 +618,15 @@ catro-notifications:
   noReactions: "يبدو أنك لا تملك أي إشعارات رد فعل."
   noRemixes: "يبدو أنك لا تملك أي إشعارات ريمكس."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: 'علق %user_link% على %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: 'رد %user_link% على %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% يتابعك الآن.'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: 'أنشأ %user_link% لعبة جديدة %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: 'أنشأ %user_link% ريمكس %program_link% من لعبتك %remix_program_link%.'
 clipboard:
   success: رابط للمشروع نسخ إلى الحافظة!
   fail: فشل نسخ الرابط إلى الحافظة! :(
@@ -719,16 +719,16 @@ achievements:
 tags:
   tag:
     game:
-      title: Game
+      title: لعبة
     animation:
-      title: Animation
+      title: الرسوم المتحركة
     story:
-      title: Story
+      title: قصة
     music:
-      title: Music
+      title: موسيقى
     art:
-      title: Art
+      title: فن
     experimental:
-      title: Experimental
+      title: تجريبي
     tutorial:
-      title: Tutorial
+      title: درس تعليمي
