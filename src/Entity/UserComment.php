@@ -88,6 +88,11 @@ class UserComment
   private ?Program $program = null;
 
   /**
+   * @ORM\Column(type="integer", nullable=true)
+   */
+  protected ?int $parent_id = null;
+
+  /**
    * @ORM\ManyToOne(targetEntity="Studio", inversedBy="comments", cascade={"persist"})
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
@@ -220,5 +225,15 @@ class UserComment
   public function setActivity(?StudioActivity $activity): void
   {
     $this->activity = $activity;
+  }
+
+  public function getParentId(): ?int
+  {
+    return $this->parent_id;
+  }
+
+  public function setParentId(?int $parent_id): void
+  {
+    $this->parent_id = $parent_id;
   }
 }

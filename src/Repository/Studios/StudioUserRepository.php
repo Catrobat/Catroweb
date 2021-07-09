@@ -20,7 +20,7 @@ class StudioUserRepository extends ServiceEntityRepository
     return $this->findBy(['studio' => $studio]);
   }
 
-  public function findStudioUser(User $user, Studio $studio): ?StudioUser
+  public function findStudioUser(?User $user, Studio $studio): ?StudioUser
   {
     return $this->findOneBy(['studio' => $studio, 'user' => $user]);
   }

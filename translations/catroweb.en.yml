@@ -780,3 +780,26 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+
+studio:
+  details:
+    general: 'general'
+    projects: 'projects'
+    comments: 'comments'
+    public: 'public'
+    private: 'private'
+    join: 'Join'
+    leave: 'Leave'
+    showMore: 'show more'
+    showLess: 'show less'
+    remove_project: 'Remove from studio'
+    remove_project_error: 'Failed to remove project from studio!'
+    remove_project_success: 'project removed successfully from studio!'
+    no_projects: 'Studio does not contain any projects yet'
+    no_comments: 'Studio does not contain any comments yet'
+    type_something: 'Type something'
+    send_comment: 'send'
+    comment_error: 'Something went wrong while posting your comment!'
+    remove_comment_error: 'Something went wrong while removing the comment!'
+    replies: 'replies'
+    updateCoverError: 'Something went wrong while updating the studio cover!'

@@ -1,0 +1,39 @@
+<div id="studio-info-container">
+    <div class="col-8">
+        <div id="studio-name">
+            <h2 class="mt-2">{{ studio.name }}</h2>
+        </div>
+        <div id="studio-info">
+            <div class="col-4">
+                <span>{{ studio.isEnabled ? "studio.details.public" |trans({}, 'catroweb') : "studio.details.private" |trans({}, 'catroweb') }}</span>
+            </div>
+            <div class="col-4"><span class="material-icons">person</span><span class="ml-2">{{ members_count }}</span>
+            </div>
+            <div class="col-4"><span class="material-icons">schedule</span>
+                <span id="activities_count" class="ml-2">{{ activities_count }}</span>
+            </div>
+        </div>
+    </div>
+    {% if user_role == null %}
+        <div class="col-4">
+            <button id="studio-join-leave-btn"
+                    class="btn btn-outline-primary btn-block">{{ "studio.details.join" |trans({}, 'catroweb') }}</button>
+        </div>
+    {% elseif user_role == 'admin' %}
+        <div class="col-4">
+            <button id="studio-upload-cover-btn" class="btn btn-outline-primary btn-block" onclick="(new Studio()).updateHeader()">
+                <span class="material-icons">photo_camera</span>
+            </button>
+            <form id="std-header-form" action="" method="post">
+                <input id="std-header" name="header-img" type="file" style="display: none" onchange="(new Studio()).uploadHeader()">
+                <input id="std-id" name="std-id" type="hidden" value="{{ studio.id }}">
+                <input type="submit" style="display: none">
+            </form>
+        </div>
+    {% else %}
+        <div class="col-4">
+            <button id="studio-join-leave-btn"
+                    class="btn btn-outline-primary btn-block">{{ "studio.details.leave" |trans({}, 'catroweb') }}</button>
+        </div>
+    {% endif %}
+</div>

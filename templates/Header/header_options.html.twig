@@ -1,21 +1,26 @@
 {% if '/project/'       in app.request.pathinfo and program|default(false) and program.id|default(false) %}
 
-  <div class="mdc-menu-surface--anchor">
-    <button id="top-app-bar__btn-options"
-            class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-            aria-label="Options"
-            onclick="showTopBarOptions()">
-      more_vert
-    </button>
+<div class="mdc-menu-surface--anchor">
+    {% include 'Header/header_option_button.html.twig' %}
 
     <div id="top-app-bar__options-container"
          class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed mdc-menu-surface--open"
          tabindex="0">
 
-  {% include 'Header/header_project_options.html.twig' %}
+        {% include 'Header/header_project_options.html.twig' %}
 
     </div>
-  </div>
+</div>
+{% elseif '/studio/' in app.request.pathinfo and studio|default(false) and studio.id|default(false) %}
+    {% if user_role == 'admin' %}
+        <button id="top-app-bar__btn-search"
+                class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                aria-label="Search">
+            settings
+        </button>
+    {% else %}
+        {% include 'Header/header_option_button.html.twig' %}
+        {% include 'Header/header_studio_options.html.twig' %}
+    {% endif %}
 {% endif %}
-
 
