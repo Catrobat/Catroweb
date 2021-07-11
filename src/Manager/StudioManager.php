@@ -221,10 +221,10 @@ class StudioManager
     $this->deleteActivity($studioUser->getActivity());
   }
 
-  public function findAllStudioUsers(?Studio $studio): array
-  {
-    return $this->studio_user_repository->findAllStudioUsers($studio);
-  }
+    public function findAllStudioUsers(?Studio $studio): array
+    {
+        return $this->studio_user_repository->findAllStudioUsers($studio);
+    }
 
   public function addCommentToStudio(UserInterface $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
   {
@@ -291,13 +291,13 @@ class StudioManager
 
   public function deleteCommentFromStudio(UserInterface $user, int $comment_id): void
   {
-    $comment = $this->findStudioCommentById($comment_id);
-    if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getUsername() === $comment->getUser()->getUsername() || StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $comment->getStudio()))) {
-      foreach ($this->user_comment_repository->findCommentReplies($comment_id) as $reply) {
-        $this->deleteActivity($reply->getActivity());
+      $comment = $this->findStudioCommentById($comment_id);
+      if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getUsername() === $comment->getUser()->getUsername() || StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $comment->getStudio()))) {
+          foreach ($this->user_comment_repository->findCommentReplies($comment_id) as $reply) {
+              $this->deleteActivity($reply->getActivity());
+          }
+          $this->deleteActivity($comment->getActivity());
       }
-      $this->deleteActivity($comment->getActivity());
-    }
   }
 
   public function addProjectToStudio(UserInterface $user, Studio $studio, Program $project): ?StudioProgram
@@ -337,7 +337,7 @@ class StudioManager
     return $this->studio_project_repository->findStudioProjectsCount($studio);
   }
 
-  public function deleteProjectFromStudio(UserInterface $user, Studio $studio, Program $program): void
+  public function deleteProjectFromStudio(User $user, Studio $studio, Program $program): void
   {
     $studioProject = $this->findStudioProject($studio, $program);
     if (StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studioProject->getStudio()) || ($this->isUserInStudio($user, $studio) && $program->getUser() === $user)) {
