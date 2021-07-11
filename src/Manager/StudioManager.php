@@ -103,6 +103,16 @@ class StudioManager
     $this->entity_manager->flush();
   }
 
+  public function findAllStudioActivities(Studio $studio): array
+  {
+    return $this->studio_activity_repository->findAllStudioActivities($studio);
+  }
+
+  public function findAllStudioActivitiesCombined(Studio $studio): array
+  {
+    return $this->studio_activity_repository->findAllStudioActivitiesCombined($studio);
+  }
+
   public function findStudioActivitiesCount(?Studio $studio): int
   {
     return $this->studio_activity_repository->findStudioActivitiesCount($studio);

@@ -163,4 +163,21 @@ const Studio = function () {
       })
     }
   }
+
+  this.loadActivites = function () {
+    $('#activity-list').html('')
+    $.ajax({
+      type: 'GET',
+      url: '../loadActivitesList/',
+      data: { studioID: $('#std-id').val() },
+      success: function (data, status) {
+        if (status === 'success') {
+          $('#activity-list').html(data)
+        }
+      },
+      fail: function () {
+        $('#activity-list').html('<h1>Failed to load activites</h1>')
+      }
+    })
+  }
 }

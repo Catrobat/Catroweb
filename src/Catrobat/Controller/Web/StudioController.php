@@ -4,6 +4,7 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\ProgramManager;
+use App\Entity\StudioActivity;
 use App\Entity\StudioUser;
 use App\Entity\UserComment;
 use App\Entity\UserManager;
@@ -269,6 +270,87 @@ class StudioController extends AbstractController
     $rs .= '</div></div></div>';
     if (!$isReply) {
       $rs .= '<hr class="comment-hr">';
+    }
+
+    return $rs;
+  }
+
+  /**
+   * @Route("/loadActivitesList/", name="load_activites_list", methods={"GET"})
+   */
+  public function loadActivitiesList(Request $request): Response
+  {
+    $studio = $this->studio_manager->findStudioById(trim($request->query->get('studioID')));
+    if (is_null($studio)) {
+      throw $this->createNotFoundException('Unable to find this studio');
+    }
+    $activities = $this->studio_manager->findAllStudioActivitiesCombined($studio);
+    $rs = '';
+    if (count($activities) > 0) {
+      $rs = $this->getRenderedActivitiesForAjax($activities);
+
+      return new JsonResponse($rs, Response::HTTP_OK);
+    }
+
+    return new JsonResponse($rs, Response::HTTP_NOT_FOUND);
+  }
+
+  protected function getRenderedActivitiesForAjax(array $activities): string
+  {
+    $rs = '';
+    foreach ($activities as $activity) {
+      if (is_null($activity)) {
+        continue;
+      }
+      $rs .= '<li>';
+      $rs .= '<a href="/app/user/'.$activity->getActivity()->getUser()->getId().'">';
+      $rs .= '<span class="activity-user">';
+      $rs .= $activity->getActivity()->getUser()->getUserName();
+      $rs .= '</span>';
+      $rs .= '</a>&emsp13;';
+      $rs .= '<span class="activity-type">';
+      switch ($activity->getActivity()->getType()) {
+        case StudioActivity::TYPE_COMMENT:
+          if (intval($activity->getParentId()) > 0) {
+            $rs = '';
+            break;
+          }
+          $rs .= $this->translator->trans('studio.details.activity_add_comment', [], 'catroweb');
+          $rs .= '</span>&emsp13;';
+          $rs .= '<span class="activity-object">';
+          $rs .= $activity->getText();
+          $rs .= '</span>.&emsp13;';
+          $rs .= '<span class="activity-time">';
+          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
+          $rs .= '</span>';
+          $rs .= '</li>';
+          break;
+        case StudioActivity::TYPE_PROJECT:
+          $rs .= $this->translator->trans('studio.details.activity_add_project',
+            ['%project%' => '<a href="/app/project/'.$activity->getProgram()->getId().'" >
+            <span class="activity-object">'.$activity->getProgram()->getName().'</span></a>'], 'catroweb');
+          $rs .= '</span>.&emsp13;';
+          $rs .= '<span class="activity-time">';
+          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
+          $rs .= '</span>';
+          $rs .= '</li>';
+          break;
+        case StudioActivity::TYPE_USER:
+          if ($activity->getActivity()->getUser()->getId() === $activity->getUser()->getId()) {
+            $rs .= $this->translator->trans('studio.details.created_studio', [], 'catroweb');
+          } else {
+            $rs .= $this->translator->trans('studio.details.activity_add_user',
+              ['%user%' => '<a href="/app/user/'.$activity->getUser()->getId().'" ><span class="activity-object">'.$activity->getUser()->getUserName().'</span></a>'], 'catroweb');
+          }
+          $rs .= '</span>.&emsp13;';
+          $rs .= '<span class="activity-time">';
+          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
+          $rs .= '</span>';
+          $rs .= '</li>';
+          break;
+        default:
+          $rs .= '';
+      }
     }
 
     return $rs;

@@ -19,6 +19,9 @@
                 {% include 'Studio/studio_details_project_list.html.twig' %}
                 {% include 'Studio/studio_details_comment_list.html.twig' %}
                 {% include 'Studio/studio_detail_comment_reply.html.twig' %}
+                {% if user_role == 'admin' %}
+                    {% include 'Studio/studio_details_activity_list.html.twig' %}
+                {% endif %}
             </div>
         </div>
     </section>

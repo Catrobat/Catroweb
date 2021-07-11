@@ -95,6 +95,10 @@
   list-style-type: none;
 }
 
+#activity-list li {
+  margin-bottom: 1rem;
+}
+
 .desc-show-less {
   max-height: 3rem;
   overflow: hidden;
@@ -251,4 +255,9 @@
 
 #comment-replies-body {
   padding-bottom: 20%;
+}
+
+#show-activities {
+  display: flex;
+  text-decoration: none;
 }

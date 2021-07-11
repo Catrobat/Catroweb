@@ -9,8 +9,16 @@
             </div>
             <div class="col-4"><span class="material-icons">person</span><span class="ml-2">{{ members_count }}</span>
             </div>
-            <div class="col-4"><span class="material-icons">schedule</span>
-                <span id="activities_count" class="ml-2">{{ activities_count }}</span>
+            <div class="col-4">
+                {% if user_role == 'admin' %}
+                <a id="show-activities" href="javascript:void(0)" onclick="(new Studio()).loadActivites()" data-toggle="modal" data-target="#activities-modal">
+                    <span class="material-icons">schedule</span>
+                    <span id="activities_count" class="ml-2">{{ activities_count }}</span>
+                </a>
+                {% else %}
+                    <span class="material-icons">schedule</span>
+                    <span id="activities_count" class="ml-2">{{ activities_count }}</span>
+                {% endif %}
             </div>
         </div>
     </div>

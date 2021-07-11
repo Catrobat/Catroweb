@@ -803,3 +803,8 @@ studio:
     remove_comment_error: 'Something went wrong while removing the comment!'
     replies: 'replies'
     updateCoverError: 'Something went wrong while updating the studio cover!'
+    created_studio: 'created the studio'
+    activity: 'Activity'
+    activity_add_comment: 'left a comment'
+    activity_add_project: 'added new project %project% to the studio'
+    activity_add_user: 'added new user %user% to the studio'
