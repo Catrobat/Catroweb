@@ -488,6 +488,7 @@ input[type="number"] {
 }
 
 .ellipsis-modal-btn {
+  display: flex;
   padding: 0;
   color: inherit;
   background-color: inherit;
@@ -633,12 +634,24 @@ input[type="number"] {
       }
     }
   }
+
+  .invalid-input {
+    border-color: red !important;
+  }
+
+  .error-text {
+    color: red;
+    opacity: 1 !important;
+    left: 1%;
+    font-size: 75%;
+  }
 }
 
 .years-validity-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0!important;
 
   label {
     margin: 0;
@@ -648,6 +661,14 @@ input[type="number"] {
     border: 1px solid #ccc;
   }
 }
+
+.years-error {
+  label {
+    right: 0;
+    text-align: end;
+  }
+}
+
 .years-validity-text {
   margin-left: 2%;
   font-size: 1rem;
@@ -680,7 +701,7 @@ input[type="number"] {
   }
   button {
     display: inline-block;
-    width: 40px;
+    width: 45px;
     font-size: 1.1rem;
     color: #ffff;
     background-color: var(--mdc-theme-primary, #00acc1);
@@ -727,6 +748,13 @@ input[type="number"] {
     input:focus ~ label,
     input:valid ~ label {
       left: 12% !important;
+    }
+  }
+  .form-input-right, .form-input-left {
+    .error-container {
+      label {
+        left: 2% !important;
+      }
     }
   }
   input:focus ~ label,

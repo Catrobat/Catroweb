@@ -9,21 +9,20 @@
             <div class="modal-header modal-header-full mdc-top-app-bar__row">
 
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button data-dismiss="modal"
+                    <button id="sign_app_modal" data-dismiss="modal"
                             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                             aria-label="Back to top bar">
                         arrow_back
                     </button>
-                    <span class="mdc-top-app-bar__title">Signed download</span>
+                    <span class="mdc-top-app-bar__title">{{ 'programs.sign.sign_download'|trans({}, "catroweb") }}</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button">
+                    <button id="sign-apk-done" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">
                         done
                     </button>
                     <button id="sign-app-ellipsis"
                             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-                            aria-label="Options"
-                            onclick="showHelpButton()">
+                            aria-label="Options">
                         more_vert
                     </button>
                 </section>
@@ -36,14 +35,14 @@
                         <li class="btn top-app-bar-btn-options">
                             <a class="ellipsis-modal-btn" data-toggle="modal" data-target="#new-key-store-modal">
                                 <span class="material-icons mr-2">vpn_key</span>
-                                <span class="top-app-bar__btn-options-text">{{ 'program.signApp.generate_key'|trans({}, "catroweb") }}</span>
+                                <span class="top-app-bar__btn-options-text">{{ 'programs.sign.generate_key'|trans({}, "catroweb") }}</span>
                             </a>
                         </li>
                         <li id="sign-app-help-link"
                             class="btn top-app-bar-btn-options">
                             <a class="ellipsis-modal-btn" href="{{url('help')}}">
                                 <span class="material-icons mr-2">help</span>
-                                <span class="top-app-bar__btn-options-text">{{ 'program.signApp.help'|trans({}, "catroweb") }}</span>
+                                <span class="top-app-bar__btn-options-text">{{ 'programs.sign.help'|trans({}, "catroweb") }}</span>
                             </a>
                         </li>
                     </ul>
@@ -51,20 +50,23 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form action="" method="post" class="form-horizontal sign-app-form">
+                <form id="sign-apk-form" action="" novalidate method="post" class="form-horizontal sign-app-form" enctype="multipart/form-data">
+                    <input id="signing-submit-url" type="hidden" value="{{ path('program_apk_sign', { 'id' : program.id }) }}">
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="package_name" type="text" name="package_name"
                                    class="form-control form-control-lg"
                                    placeholder="" required="required">
-                            <label for="package_name">Package name</label>
+                            <label for="package_name">{{ 'programs.sign.package_name'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="app_name" type="text" name="app_name" class="form-control form-control-lg"
                                    placeholder="" required="required">
-                            <label for="app_name">App name</label>
+                            <label for="app_name">{{ 'programs.sign.app_name'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -72,7 +74,8 @@
                             <input id="version_code" type="text" name="version_code"
                                    class="form-control form-control-lg"
                                    placeholder="" required="required">
-                            <label for="version_code">Version code</label>
+                            <label for="version_code">{{ 'programs.sign.version_code'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -80,7 +83,8 @@
                             <input id="version_name" type="text" name="version_name"
                                    class="form-control form-control-lg"
                                    placeholder="" required="required">
-                            <label for="version_name">Version name</label>
+                            <label for="version_name">{{ 'programs.sign.version_name'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -93,7 +97,8 @@
                                    placeholder="" required="required">
                             <span id="key_store_icon"
                                   class="material-icons sign-form-icon mdc-icon-button">folder</span>
-                            <label for="key_store_file" class="key-store-file-upload">Key store file</label>
+                            <label for="key_store_file" class="key-store-file-upload">{{ 'programs.sign.key_store_file'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -103,14 +108,16 @@
                                    placeholder="" required="required">
                             <span class="material-icons sign-form-icon mdc-icon-button mdc-icon-button"
                                   onclick="togglePwVisibility($(this))">visibility</span>
-                            <label for="key_store_password">Key store password</label>
+                            <label for="key_store_password">{{ 'programs.sign.key_store_file'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="key_alias" type="text" name="key_alias" class="form-control form-control-lg"
                                    placeholder="" required="required">
-                            <label for="key_alias">Key alias</label>
+                            <label for="key_alias">{{ 'programs.keystore.key_alias'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
@@ -120,20 +127,21 @@
                                    placeholder="" required="required">
                             <span class="material-icons sign-form-icon mdc-icon-button"
                                   onclick="togglePwVisibility($(this))">visibility</span>
-                            <label for="key_password">Key password</label>
+                            <label for="key_password">{{ 'programs.keystore.key_password'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <button id="btn-signing-key" class="btn btn-primary"><span id="submit-sign-app-form"
-                                                                                       class="material-icons mr-2">cloud_download</span>signingkey
-                                (download)
-                            </button>
-                        </div>
-                    </div>
+{#                    <div class="row">#}
+{#                        <div class="form-group col-lg-12">#}
+{#                            <button id="btn-signing-key" class="btn btn-primary"><span id="submit-sign-app-form"#}
+{#                                                                                       class="material-icons mr-2">cloud_download</span>signingkey#}
+{#                                (download)#}
+{#                            </button>#}
+{#                        </div>#}
+{#                    </div>#}
                     <div class="row">
                         <div class="form-group show-ads-form col-lg-12">
-                            <label id="show_add_label">Show advertisement in my app</label>
+                            <label id="show_add_label">{{ 'programs.sign.show_ads'|trans({}, "catroweb") }}</label>
                             <div class="ads-toggle-container">
                                 <label id="toggle_ads" class="toggle-control">
                                     <input id="show_ads_chk" name="show_ads" type="checkbox" checked="checked">
@@ -144,14 +152,16 @@
                     </div>
                     <div id="ads_info" class="row">
                         <div class="form-group col-lg-12">
-                            <input id="ad_app_id_" type="text" name="ad_app_id_" class="form-control form-control-lg"
+                            <input id="ad_app_id" type="text" name="ad_app_id" class="form-control form-control-lg"
                                    placeholder="" autocomplete="off" required="required">
-                            <label for="ad_app_id_">AdMob app ID</label>
+                            <label for="ad_app_id">{{ 'programs.sign.admob_app_id'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                         <div class="form-group col-lg-12">
                             <input id="ad_unit_id" type="text" name="ad_unit_id" class="form-control form-control-lg"
                                    placeholder="" required="required">
-                            <label for="ad_unit_id">AdMob unit ID</label>
+                            <label for="ad_unit_id">{{ 'programs.sign.admob_unit_id'|trans({}, "catroweb") }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                      <input type="submit" name="submit">

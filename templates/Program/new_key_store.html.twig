@@ -8,139 +8,141 @@
 
             <div class="modal-header modal-header-full mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button id="top-app-bar__btn-search-back" data-dismiss="modal"
+                    <button id="key_store_modal" data-dismiss="modal"
                             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                             aria-label="Back to top bar">
                         arrow_back
                     </button>
-                    <span class="mdc-top-app-bar__title">New key store</span>
+                    <span class="mdc-top-app-bar__title">{{ 'programs.keystore.new_key'|trans({}, 'catroweb') }}</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
                     <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button">help_outline</button>
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button">done</button>
+                    <button id="keystore-done" class="material-icons mdc-top-app-bar__action-item mdc-icon-button">done</button>
                 </section>
             </div>
             <div class="modal-body">
-                <form action="" method="post" class="form-horizontal sign-app-form">
-                    <div class="row">
-                        <div class="form-group col-lg-12">
-                            <input id="key_store_path_text" readonly type="text" name="key_store_path_text"
-                                   class="form-control form-control-lg key-store-file-text"
-                                   placeholder="" required="required">
-                            <input id="key_store_path" type="file" name="key_store_path"
-                                   class="form-control form-control-lg key-store-file"
-                                   placeholder="" required="required">
-                            <span id="key_file_path_icon"
-                                  class="material-icons sign-form-icon mdc-icon-button">folder</span>
-                            <label for="key_store_path" class="key-store-file-upload">Key store file</label>
-                        </div>
-                    </div>
+                <form id="generate-keystore-form" action="" class="form-horizontal sign-app-form" novalidate>
+                    <input id="keystore-submit-url" type="hidden" value="{{ path('program_keystore_gen', { 'id' : program.id }) }}">
                     <div class="row">
                         <div class="form-group show-hide-password col-lg-6 form-input-left">
-                            <input id="key_store_password_2" type="password" name="key_store_password"
+                            <input id="keystore_gen_password" type="password" name="keystore_gen_password"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
+                                   placeholder="" required>
                             <span class="material-icons sign-form-icon mdc-icon-button"
                                   onclick="togglePwVisibility($(this))">visibility</span>
-                            <label for="key_store_password_2">Password</label>
+                            <label for="keystore_gen_password">{{ 'programs.keystore.password'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                         <div class="form-group show-hide-password col-lg-6 form-input-right">
-                            <input id="key_store_password_conf" type="password" name="key_store_password_conf"
+                            <input id="keystore_gen_password_conf" type="password" name="keystore_gen_password_conf"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
+                                   placeholder="" required>
                             <span class="material-icons sign-form-icon mdc-icon-button"
                                   onclick="togglePwVisibility($(this))">visibility</span>
-                            <label for="key_store_password_conf">Password confirmation</label>
+                            <label for="keystore_gen_password_conf">{{ 'programs.keystore.password_conf'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
-                            <input id="key_alias_2" type="text" name="key_alias" class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="key_alias_2">Key alias</label>
+                            <input id="key_alias_add" type="text" name="key_alias" class="form-control form-control-lg"
+                                   placeholder="" required>
+                            <label for="key_alias_add">{{ 'programs.keystore.key_alias'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group show-hide-password col-lg-6 form-input-left">
-                            <input id="key_password_2" type="password" name="key_password_2"
+                            <input id="alias_password" type="password" name="alias_password"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
+                                   placeholder="" required minlength="6">
                             <span class="material-icons sign-form-icon mdc-icon-button"
                                   onclick="togglePwVisibility($(this))">visibility</span>
-                            <label for="key_password_2">Key password</label>
+                            <label for="alias_password">{{ 'programs.keystore.key_password'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                         <div class="form-group show-hide-password col-lg-6 form-input-right">
-                            <input id="key_password_2_conf" type="password" name="key_password_2_conf"
+                            <input id="alias_password_conf" type="password" name="alias_password_conf"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
+                                   placeholder="" required minlength="6">
                             <span class="material-icons sign-form-icon mdc-icon-button"
                                   onclick="togglePwVisibility($(this))">visibility</span>
-                            <label for="key_password_2_conf">Key password confirmation</label>
+                            <label for="alias_password_conf">{{ 'programs.keystore.key_psw_conf'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
-                    <div class="form-group years-validity-container col-sm-12 col-lg-12">
-                        <h6 class="years-validity-text">Validity (years):</h6>
-                        <div class="spinner-container">
-                            <button id="dec_years" type="button" class="btn btn-secondary">-</button>
-                            <input id="key_validity" class="form-control" type="number" value="25" min="1" max="99"
-                                   size="1" maxlength="2">
-                            <button id="inc_years" type="button" class="btn btn-secondary">+</button>
+                        <div class="form-group col-sm-12 col-lg-12">
+                            <div class="years-validity-container">
+                            <h6 class="years-validity-text">{{ 'programs.keystore.validity'|trans({}, 'catroweb') }}</h6>
+                            <div class="spinner-container">
+                                <button id="dec_years" type="button" class="btn btn-secondary">-</button>
+                                <input id="key_validity" name="key_validity" class="form-control" type="number"
+                                       value="25" min="1" max="99" required>
+                                <button id="inc_years" type="button" class="btn btn-secondary">+</button>
+                            </div>
+                            </div>
+                            <div class="error-container years-error"></div>
                         </div>
                     </div>
-                    </div>
                     <div class="row">
-                        <h3>Certificate</h3>
+                        <h3>{{ 'programs.keystore.certificate'|trans({}, 'catroweb') }}</h3>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="first_last_name" type="text" name="first_last_name"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="first_last_name">First and last name</label>
+                                   placeholder="" required minlength="3">
+                            <label for="first_last_name">{{ 'programs.keystore.f_l_name'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="organization_unit" type="text" name="organization_unit"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="organization_unit">Organization unit</label>
+                                   placeholder="" required>
+                            <label for="organization_unit">{{ 'programs.keystore.org_unit'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="organization" type="text" name="organization"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="organization">Organization</label>
+                                   placeholder="" required>
+                            <label for="organization">{{ 'programs.keystore.organization'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="city_locality" type="text" name="city_locality"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="city_locality">City or locality</label>
+                                   placeholder="" required>
+                            <label for="city_locality">{{ 'programs.keystore.city'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="state_province" type="text" name="state_province"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="state_province">State or province</label>
+                                   placeholder="" required>
+                            <label for="state_province">{{ 'programs.keystore.state'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <input id="country_code" type="text" name="country_code"
                                    class="form-control form-control-lg"
-                                   placeholder="" required="required">
-                            <label for="country_code">Country code</label>
+                                   placeholder="" required>
+                            <label for="country_code">{{ 'programs.keystore.country_code'|trans({}, 'catroweb') }}</label>
+                            <div class="error-container"></div>
                         </div>
                     </div>
-                     <input type="submit" name="submit" class="hide">
+                     <input id="generate-keystore-submit" type="submit" name="submit">
                 </form>
             </div>
         </div>

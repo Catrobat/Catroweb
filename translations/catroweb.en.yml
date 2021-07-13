@@ -187,6 +187,35 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  keystore:
+    new_key: New key store
+    password: Password
+    password_conf: Password confirmation
+    key_alias: Key alias
+    key_password: Key password
+    key_psw_conf: Key password confirmation
+    validity: Validity (years)
+    certificate: Certificate
+    f_l_name: First and last name
+    org_unit: Organization unit
+    organization: Organization
+    city: City or locality
+    state: State or province
+    country_code: Country code
+  sign:
+    signApp: sign app for app stores
+    sign_download: Signed download
+    generate_key: Generate key
+    help: Help
+    package_name: Package name
+    app_name: App name
+    version_code: Version code
+    version_name: Version name
+    key_store_file: Key store file
+    key_store_password: Key store password
+    show_ads: Show advertisement in my app
+    admob_app_id: AdMob app ID
+    admob_unit_id: AdMob unit ID
 
 remixGraph:
   title: Remixes

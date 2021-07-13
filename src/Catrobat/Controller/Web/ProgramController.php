@@ -5,6 +5,7 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\Events\CheckScratchProgramEvent;
 use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
+use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
@@ -34,12 +35,18 @@ use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -58,6 +65,7 @@ class ProgramController extends AbstractController
   private EventDispatcherInterface $event_dispatcher;
   private ProgramFileRepository $file_repository;
   private TranslationDelegate $translation_delegate;
+  private JenkinsDispatcher $dispatcher;
 
   public function __construct(StatisticsService $statistics_service,
                               RemixManager $remix_manager,
@@ -70,8 +78,9 @@ class ProgramController extends AbstractController
                               TranslatorInterface $translator,
                               ParameterBagInterface $parameter_bag,
                               EventDispatcherInterface $event_dispatcher,
+                              TranslationDelegate $translation_delegate,
                               ProgramFileRepository $file_repository,
-                              TranslationDelegate $translation_delegate)
+                              JenkinsDispatcher $dispatcher)
   {
     $this->statistics = $statistics_service;
     $this->remix_manager = $remix_manager;
@@ -85,6 +94,7 @@ class ProgramController extends AbstractController
     $this->parameter_bag = $parameter_bag;
     $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
+    $this->dispatcher = $dispatcher;
     $this->translation_delegate = $translation_delegate;
   }
 
@@ -631,5 +641,117 @@ class ProgramController extends AbstractController
     }
 
     return $isReportedByUser;
+  }
+
+  /**
+   *  @Route("/keystoreGenSave/", name="program_keystore_gen_save")
+   */
+  public function genarateandsavekey()
+  {
+    exec('keytool -genkeypair -alias '. rand(0,100000) .'  -keypass password -keyalg RSA -keysize 2048 -keystore ' . sys_get_temp_dir() . '/keystore.jks -storepass password -validity 10000 -dname "CN=catrobat, OU=, O=TU Graz, L=Graz, S=Styria, C=AT"', $key_output);
+    if (count($key_output))
+    {
+      return new Response('', Response::HTTP_NOT_FOUND);
+    }
+    $file = new File(sys_get_temp_dir() . '/keystore.jks');
+    $response = new BinaryFileResponse($file);
+    $d = $response->headers->makeDisposition(
+      ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+      'keystore.jks'
+    );
+    $response->headers->set('Content-Disposition', $d);
+    return $response;
+  }
+
+  /**
+   *  @Route("/project/keystore_gen/{id}/", name="program_keystore_gen")
+   */
+  public function keyStoreGenerate(Request $request): Response
+  {
+    if ($request->isXmlHttpRequest())
+    {
+      if (is_null($this->getUser()))
+      {
+        throw new AuthenticationException();
+      }
+      $keyPw = trim($request->request->get('keystore_gen_password'));
+      $keyPwConf = trim($request->request->get('keystore_gen_password_conf'));
+      $aliasPw = trim($request->request->get('alias_password'));
+      $aliasPwConf = trim($request->request->get('alias_password_conf'));
+      $keyAlias = trim($request->request->get('key_alias'));
+      $validity = $request->request->getInt('key_validity');
+      $name = trim($request->request->get('first_last_name'));
+      $organization = trim($request->request->get('organization'));
+      $orgUnit = trim($request->request->get('organization_unit'));
+      $city = trim($request->request->get('city_locality'));
+      $state = trim($request->request->get('state_province'));
+      $countryCode = trim($request->request->get('country_code'));
+      if (!preg_match("/^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/", $keyPw)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/",$aliasPw)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/",$keyAlias)
+        || (intval($validity) <= 0 || intval($validity) > 99)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß ]*$/", $name)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,() ]*$/", $organization)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,() ]*$/", $orgUnit)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß ]*$/", $city)
+        || !preg_match("/^[a-zA-Z0-9äÄöÖüÜß ]*$/", $state)
+        || !preg_match("/^[A-Z]{2}$/", $countryCode)
+      ) {
+        return new Response('', Response::HTTP_NOT_ACCEPTABLE);
+      }
+      if ($keyPw !== $keyPwConf || $aliasPw !== $aliasPwConf) {
+        return new Response('', Response::HTTP_CONFLICT);
+      }
+      $validityInDays = $validity * 365;
+      $path = sys_get_temp_dir() . '/';
+      $fileName = 'keystore.jks';
+      exec('keytool -genkeypair -alias ' . $keyAlias . ' -keypass ' . $keyPw . ' -keyalg RSA -keysize 2048 -keystore ' . $path . $fileName  . ' -storepass ' . $aliasPw . ' -validity ' . $validityInDays . ' -dname "CN= ' . $name . ', OU=' . $orgUnit . ', O=' . $organization . ', L=Cupertino' . $city . ', S=' . $state . ', C=' . $countryCode . '"', $key_output);
+      if (count($key_output))
+      {
+        return new Response('', Response::HTTP_NOT_FOUND);
+      }
+      $file = new File($path . $fileName);
+      $response = new BinaryFileResponse($file);
+      $d = $response->headers->makeDisposition(
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        $fileName
+      );
+      $response->headers->set('Content-Disposition', $d);
+      return $response;
+    }
+    return new Response('', Response::HTTP_NOT_FOUND);
+  }
+
+  /**
+   *  @Route("/project/apk_sign/{id}/", name="program_apk_sign")
+   */
+  public function apkSigning(Request $request): Response
+  {
+    if ($request->isXmlHttpRequest())
+    {
+      if (is_null($this->getUser()))
+      {
+        throw new AuthenticationException();
+      }
+      $keyFile = $request->files->get('key_store_file');
+      if(!is_null($keyFile))
+      {
+        $newKeyPath = $this->parameter_bag->get('catrobat.upload.temp.dir');
+        $newKeyName = $this->getUser()->getUsername() . '_keystore';
+        $storedKey = $keyFile->move($newKeyPath, $newKeyName);
+        $url = "https://jenkins.catrob.at/buildByToken/buildWithParameters";
+        $params = [
+          'job' => 'TestSignAPK',
+          'token' => 'JHJHD7djkjewkO',
+          'signingKeystorePassword' => $request->request->get('key_store_password'),
+          'signingKeyAlias' => $request->request->get('key_alias'),
+          'Signing_keystore_url' => $storedKey->getpathName(),
+        ];
+        $rs = JenkinsDispatcher::sendSigningRequest($url, $params);
+        dd($rs);
+//        return new Response($storedKey["pathname"],Response::HTTP_OK);
+      }
+    }
+    return new Response('', Response::HTTP_NOT_FOUND);
   }
 }

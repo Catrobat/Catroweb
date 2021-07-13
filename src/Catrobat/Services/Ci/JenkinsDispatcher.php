@@ -44,7 +44,17 @@ class JenkinsDispatcher
    */
   protected function dispatch($params): string
   {
+    var_dump($params);
+    dd($this->config['url']);
     $url = $this->config['url'].'?'.http_build_query($params);
+    file_get_contents($url);
+
+    return $url;
+  }
+
+  public static function sendSigningRequest(string $url, array $params)
+  {
+    $url = $url .'?' . http_build_query($params);
     file_get_contents($url);
 
     return $url;

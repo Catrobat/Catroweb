@@ -472,15 +472,24 @@ $(document).on('click', function (e) {
 })
 
 $(document).ready(function () {
+  var regexMsg = "Only letters, numbers and these special characters @$!%*#?&§._,() are allowed!"
+  var passwordNotMatchMsg = "Password and confirmation are not the same!"
   $('#sign-app-ellipsis').on('click', function () {
     $('#sign-app-ellipsis-container').show()
   })
 
   $('#toggle_ads').on('click', function () {
+    var container = $('#ads_info')
+    var app_id = $('#ad_app_id')
+    var unit_id = $('#ad_unit_id')
     if ($('#show_ads_chk').is(':checked')) {
-      $('#ads_info').show()
+      container.show()
+      app_id.attr('required', 'required')
+      unit_id.attr('required', 'required')
     } else {
-      $('#ads_info').hide()
+      container.hide()
+      app_id.removeAttr('required')
+      unit_id.removeAttr('required')
     }
   })
 
@@ -494,17 +503,6 @@ $(document).ready(function () {
   $('#key_store_icon').on('click', function () {
     $('#key_store_file').trigger('click')
   })
-
-  $('#key_store_path').on('change', function () {
-    $('#key_store_path_text').val($('#key_store_path').val())
-  })
-  $('#key_file_path_icon').on('click', function () {
-    $('#key_store_path').trigger('click')
-  })
-  $('#key_store_path_text').on('click', function () {
-    $('#key_store_path').trigger('click')
-    $(this).blur()
-  })
   $('#inc_years').on('click', function () {
     const yearsField = $('#key_validity')
     if (yearsField.val() < 99) {
@@ -517,4 +515,261 @@ $(document).ready(function () {
       yearsField.val(parseInt(yearsField.val()) - 1)
     }
   })
+  $.validator.addMethod("regex", function(value, element, pattern) {
+    return this.optional( element ) || pattern.test( value );
+  })
+  $('#generate-keystore-form').validate({
+    rules: {
+      keystore_gen_password: {
+        required: true,
+        minlength: 6,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      },
+      keystore_gen_password_conf: {
+        required: true,
+        equalTo: '#keystore_gen_password'
+      },
+      key_alias: {
+        required: true,
+        maxlength: 250,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      },
+      alias_password: {
+        required: true,
+        minlength: 6,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      },
+      alias_password_conf: {
+        required: true,
+        equalTo: '#alias_password',
+      },
+      key_validity: {
+        required: true,
+        range: [1,99]
+      },
+      first_last_name: {
+        required: true,
+        maxlength: 80,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß ]*$/,
+      },
+      organization_unit: {
+        required: true,
+        maxlength: 50,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,() ]*$/
+      },
+      organization: {
+        required: true,
+        maxlength: 50,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,() ]*$/
+      },
+      city_locality: {
+        required: true,
+        maxlength: 50,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß ]*$/
+      },
+      state_province: {
+        required: true,
+        maxlength: 50,
+        regex: /^[a-zA-Z0-9äÄöÖüÜß ]*$/
+
+      },
+      country_code: {
+        required: true,
+        maxlength: 2,
+        regex: /^[A-Z]{2}$/
+      }
+    },
+    messages: {
+      keystore_gen_password: {
+        regex: regexMsg
+      },
+      keystore_gen_password_conf: {
+        equalTo: passwordNotMatchMsg
+      },
+      key_alias: {
+        regex: regexMsg
+      },
+      alias_password: {
+        regex: regexMsg
+      },
+      alias_password_conf: {
+        equalTo: passwordNotMatchMsg
+      },
+      key_validity: {
+        range: 'Years range is between 1 and 99 years.',
+      },
+      first_last_name: {
+        regex: 'Special characters are not allowed.'
+      },
+      organization_unit: {
+        regex: regexMsg
+      },
+      organization: {
+        regex: regexMsg
+      },
+      city_locality: {
+        regex: 'Special characters are not allowed.'
+      },
+      state_province: {
+        regex: 'Special characters are not allowed.'
+      },
+      country_code: {
+        regex: regexMsg
+      }
+    },
+    errorPlacement: function (error, element) {
+      error.appendTo(element.parents('.form-group').find('.error-container'))
+      error.addClass('error-text')
+    },
+    highlight: function (element) {
+      $('#' + element.id).addClass('invalid-input')
+    },
+    success: function (label, element) {
+      $('#' + element.id).removeClass('invalid-input')
+    }
+  })
+  $('#keystore-done').on('click', function () {
+    let form = $('#generate-keystore-form')
+    if (form.valid()) {
+      let formSerialize = form.serialize()
+      $.ajax({
+        type: 'POST',
+        url: $('#keystore-submit-url').val(),
+        data: formSerialize,
+        xhrFields: {
+          responseType: 'blob'
+        },
+        success: function (response) {
+          download(response)
+          $('#key_store_modal').trigger('click')
+        },
+        error: function (xhr) {
+          if(xhr.status === 406) {
+            showSnackbar('#share-snackbar', 'Validation error')
+          } else if (xhr.status === 409) {
+            showSnackbar('#share-snackbar', 'Password and confirmation are not the same')
+          } else {
+            showSnackbar('#share-snackbar', 'Failed to generate the keystore, please try again!')
+          }
+        }
+      })
+    }
+  })
+  function download(response)
+  {
+    var element = document.createElement('a')
+    element.href = window.URL.createObjectURL(response)
+    element.download = 'keystore.jks'
+    element.style.display = 'none'
+    document.body.appendChild(element)
+    element.click()
+    document.body.removeChild(element)
+  }
+  $('#sign-apk-form').validate({
+    rules: {
+      // package_name: {
+      //   required: true,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      // app_name: {
+      //   required: true,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      // version_code: {
+      //   required: true,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      // version_name: {
+      //   required: true,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      key_store_file_text: {
+        required: true,
+      },
+      // key_store_password: {
+      //   required: true,
+      //   minlength: 6,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      // key_alias: {
+      //   required: true,
+      //   maxlength: 250,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      // alias_password: {
+      //   required: true,
+      //   minlength: 6,
+      //   regex: /^[a-zA-Z0-9äÄöÖüÜß@$!%*#?&§._,()]*$/
+      // },
+      // ad_app_id: {
+      //   required: true,
+      //   regex: /^[a-zA-Z0-9-/]*$/
+      // },
+      // ad_unit_id: {
+      //   required: true,
+      //   regex: /^[a-zA-Z0-9-/]*$/
+      // }
+    },
+    messages: {
+      // package_name: {
+      //   regex: regexMsg
+      // },
+      // app_name: {
+      //   regex: regexMsg
+      // },
+      // version_code: {
+      //   regex: regexMsg
+      // },
+      // version_name: {
+      //   regex: regexMsg
+      // },
+      key_store_file_text: {
+        regex: regexMsg
+      },
+      // key_alias: {
+      //   regex: regexMsg
+      // },
+      // alias_password: {
+      //   regex: regexMsg
+      // },
+      // ad_app_id: {
+      //   regex: "Invalid admob app ID"
+      // },
+      // ad_unit_id: {
+      //   regex: "Invalid admob unit ID"
+      // },
+    },
+    errorPlacement: function (error, element) {
+      error.appendTo(element.parents('.form-group').find('.error-container'))
+      error.addClass('error-text')
+    },
+    highlight: function (element) {
+      $('#' + element.id).addClass('invalid-input')
+    },
+    success: function (label, element) {
+      $('#' + element.id).removeClass('invalid-input')
+    }
+  })
+  $('#sign-apk-done').on('click', function () {
+    let signForm = $('#sign-apk-form')
+    if (signForm.valid()) {
+      $.ajax({
+        type: 'POST',
+        url: $('#signing-submit-url').val(),
+        cache: false,
+        processData: false,
+        contentType: false,
+        data: new FormData(document.getElementById('sign-apk-form')),
+        success: function (response) {
+          // $('#sign_app_modal').trigger('click')
+        },
+        error: function (xhr) {
+          // if(xhr.status === 406) {
+          //   showSnackbar('#share-snackbar', 'Validation error')
+          // }
+        }
+      })
+    }
+  })
+
 })
