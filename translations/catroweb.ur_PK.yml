@@ -3,32 +3,32 @@
 localLanguage: انگریزی
 username: صارف کا نام
 password: خفیہ کوڈ
-createNewPassword: Create new password
+createNewPassword: ایک نیا پاس ورڈ بنائیں
 accountSettings: اکاؤنٹ کی ترتیبات
 email: ای-میل
 aboutPocketCode: پاکٹ کوڈ کے بارے میں
 about: ' اِس سافٹ وٖیر کے بارے میں'
-education: Education
-chat: Chat and forums
-others: Others
+education: تعلیم
+chat: چیٹ اور فورم
+others: دیگر
 tutorials: اسباق
 googlePlay: گوگل پلے
 iosAppStore: IOS ایپ اسٹور
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: Huawei ایپ گیلری
 passwordsNoMatch: خفیہ کوڈ مشابہ نہیں۔
 error: خرابی
 cancel: منسوخ
 report: رپورٹ
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: جی ہاں، اسے حذف کریں!
+reportIt: جی ہاں، اس کو رپورٹ کریں!
+areYouSure: کیا تمہیں یقین ہے؟
+noWayOfReturn: آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
 download: ڈاؤنلوڈ
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: آپ نے اس منصوبے کو کیسے بنایا؟ کیا آپ نے دوسرے لوگوں سے خیالات، سکرپٹ یا آرٹ ورک کا استعمال کیا؟ یہاں ان کا شکریہ اداہ کریں۔
 country: ملک
 loginText: لاگ آن
 privacyPolicy: رازداری کا طریقہ کار
@@ -42,119 +42,119 @@ less: 'کم'
 show-more: 'مزید معلومات'
 show-less: 'Less information'
 more-information: 'مزید معلومات'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+less-information: 'کم معلومات'
+ok: ٹھیک
+clickToDownloadProgram: 'مثال کے طور پر پروجیکٹ ڈاؤن لوڈ کرنے کے لئے %link_start% یہا %link_end% کلک کریں'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
 notifications: 'اطلاعات'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'پیروکاروں'
+LikeNotifications: 'ردعمل'
 CommentNotifications: 'تبصرے'
 RemixNotifications: 'ریمکسس'
 wellDone: "بہت اچھا!"
 done: "ہوگیا"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "جی ہاں، اسے حذف کریں!"
 cancelMessage: "منسوخ"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "صارف کو اختیار کرنے میں ناکام"
 notificationsClearError: "اطلاعات کو پڑھنے کے طور پر نشان زد کرنے میں قاصر!"
 pleaseWait: "براہ مہربانی انتظار کریں..."
 projects: "پروگرامات"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "بیرونی اکاؤنٹ کے سائن ان معلومات"
+oauthInfo: 'آپ نے لاگ ان کرنے کے لئے صرف ایک بیرونی اکاؤنٹ استعمال کیا ہے. ہم نے آپ کے لئے بے ترتیب صارف نام بنایا. اگر آپ اپنا صارف نام تبدیل کرنا چاہتے ہیں یا اپنے اکاؤنٹ کے لئے ایک نیا پاس ورڈ بنائیں تو براہ کرم اپنے پروفائل کے صفحے پر جائیں. اپنے پروفائل کے صفحے پر جانے کے لئے %link_start% یہاں %link_end% کلک کریں'
+oauthHere: "یہاں"
+statistics: "اعداد و شمار"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'یہاں کیا منصوبوں کی سفارش کی جاتی ہے؟'
+      description: 'اگر زیادہ ردعمل (انگوٹھے اوپر، مسکراہٹ ...) آپ کا پروجیکٹ حاصل کرتا ہے، تو اس فہرست میں یہ زیادہ ظاہر ہوتا ہے.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: پیروی کر رہا ہے
+  followers: پیروکاروں
+  follow: پیروی کریں
+  username: صارف
+  followsMe: مجھے پیروی کر رہا ھے
+  noFollowing: آپ فی الحال کسی کو پیروی نہیں کر رہے ہیں.
+  noFollowers: آپ کے پاس اس وخت کوئی پیروکار نہیں ہے.
+  noOtherFollowing: فی الحال پیروکار صارفین نہیں ہیں.
+  noOtherFollowers: فی الحال پیروکار صارفین نہیں ہیں.
+  followError: "مطلوبہ صارف کی پیروی کرنے میں ناکام!"
+  unfollowError: "مطلوبہ صارف کی نا پیروی کرنے میں ناکام!"
+  unfollowQuestion: "کیا آپ واقعی اس صارف کا پیروی ناکام کرنا چاہتے ہیں؟"
+  unfollowButton: "%username% پیروی کرنا بند"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title: Catrobat کی %theme% کو خوش آمدید
+    title_mindstorms: Mindstorms EV3 اور NXT کے لئے CATROBAT کی سائٹ میں خوش آمدید
     subtitle: کہانیاں، کھیل اور مزید بنائیں ...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_embroidery: اپنے ٹی شرٹ، بیگ، پتلون، یا اسمارٹ فون کیس پر اپنے اپنے پیٹرن کو سلائی کریں!
+    subtitle_mindstorms: اپنے لیگو دماغ اسٹرموں EV3 اور NXT روبوٹ کے ساتھ اپنی اپنی منصوبوں کو بنائیں
     download: پروگرام ڈاؤن لوڈ کریں
     statistics: مزید اعداد و شمار
   featured: نمایاں
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: مثالیں
+  newest: تازہ ترین منصوبے
+  recommended: سفارش کردہ منصوبے
+  scratchremixes: سکریچ ریمکس
+  noPrograms: فی الحال کوئی منصوبے نہیں ہیں.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    کیا تمہیں یقین ہے؟
+    کیا آپ کو یقین ہے کہ آپ %programName% کو حذف کرنا چاہتے ہیں؟
+    آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
+    جی ہاں، اسے حذف کریں!
+    منسوخ
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    کیا تمہیں یقین ہے؟
+    اگر آپ نجی طور پر '%programName%' مقرر کرتے ہیں، تو یہ دوسرے صارفین کی طرف سے دیکھا یا نہیں مل جائے گا.
+    آپ اب بھی اپنے دوستوں کے ساتھ آپ کے منصوبے کے لنک کا اشتراک کر سکتے ہیں. آپ Padlock آئکن کو ٹپ کرنے کی نمائش کو ٹول کر سکتے ہیں.
+    اگر آپ عوامی طور پر "%programName%" مقرر کرتے ہیں تو، یہ دوسرے صارفین کی طرف سے دیکھا اور پایا جا سکتا ہے.
+    جی ہاں، عوامی مقرر کر دیا جاے
+    جی ہاں، نجی پر مقرر کر دیا جاے
+    نہیں
+  reportCommentConfirmation: کیا آپ واقعی یہ تبصرہ رپورٹ کرنا چاہتے ہیں؟
+  deleteCommentConfirmation: کیا آپ واقعی یہ تبصرہ حذف کرنا چاہتے ہیں؟
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    اکاؤنٹ حذف؟
+    کیا آپ کو یقین ہے کہ آپ اپنا اکاؤنٹ حذف کرنا چاہتے ہیں؟ یہ آپ کے اپ لوڈ کردہ منصوبوں اور تبصرے کو بھی حذف کرے گا!
+    آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
+    جی ہاں، اسے حذف کریں!
+    منسوخ
+  tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
   tooLongCredits: The project credits are too long!
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
-  random: Random projects
-  related: Related projects
+  random: بے ترتیب منصوبے
+  related: متعلقہ منصوبے
   downloads: '%downloads% ڈاؤن لوڈز'
-  sample: Example projects
+  sample: مثالی منصوبے
   views: '%views% مرتبہ دیکھی'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "جو لوگ اس منصوبے پر ردعمل کرتے ہیں"
     all: "تمام"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: پیش کردہ منصوبے
+  uploaded: اپ لوڈ کردہ منصوبے
   reportAsInappropriate: رپورٹ غیرموزوں ہے
-  reportProgram: Report project
+  reportProgram: پروجیکٹ کو رپورٹ کریں
   languageVersion: 'کاٹروبٹ زبان ورژن: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: اس منصوبے کی اطلاع دینے کیلئے برائے مہربانی %login% کریں.
+  reportDialogHeader: آپ اس منصوبے کی رپورٹ کیوں کرنا چاہتے ہیں؟
   reportDialogReason: وجہ بتائیں
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportRadioButtonInappropriate: یہ غیر مناسب ہے
+  reportRadioButtonCopyright: کاپی رائٹ کی خلاف ورزی
+  reportRadioButtonSpam: یہ فضول ہے
+  reportRadioButtonDislike: مجھے یہ پسند نہیں ہے
+  reportOwnProgram: آپ اپنے منصوبے مارک نہیں کر سکتے ہیں.
+  reportAlready: آپ نے پہلے ہی اس منصوبے کو مارک لگایا ہے.
+  reportDone: آپ نے اس منصوبے کی اطلاع دی!
   updateAppHeader: پروگرام اپ ڈیٹ کریں
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: براہ کرم اپنے اپلی کیشن کو تازہ ترین ورژن پر اپ ڈیٹ کریں تاکہ اس منصوبے کو ڈاؤن لوڈ کرنے کے قابل ہو.
   btnClosePopup: ٹھیک ہے
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: یہ CATROBAT منصوبہ چیک کریں
   show_more: مزید دکھائیں
   comments: تبصرے
   send: بھیجیں
@@ -162,38 +162,38 @@ programs:
   report: رپورٹ
   report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
   report_popup_header: اطلاعات کے مطابق
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  deleted_popup: تبصرہ کامیابی سے حذف کر دیا گیا تھا.
+  deleted_popup_header: حذف کر دیا گیا
+  noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
+  editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  addComment: اپنی رائے لکھیں
+  thumbsUp: بہت خوب!
+  smile: مسکراہٹ!
+  love: محبت!
+  wow: wooow!
+  linkTitle: لنک
+  link: کلپ بورڈ پر پراجیکٹ لنک کاپی کریں
+  reactionsText: ردعمل
+  downloadErrorText: منصوبے کو ڈاؤن لوڈ کرتے ہوئے خرابی ہوئی. براہ کرم کچھ دیر بعد کوشش کریں.
+  showTranslation: ترجمہ دکھائیں
+  hideTranslation: ترجمہ چھپائیں
+  translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
 remixGraph:
   title: ریمکسس
-  showRemixGraph: 'Remix graph'
+  showRemixGraph: 'ریمکس گراف'
   by: 'کی طرف سے'
   open: 'کھولیں'
   showPaths: 'راستے دکھائیں'
   programNotAvailableErrorTitle: 'معاف کریں ...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'اس منصوبہ مزید دستیاب نہیں ہے!'
   programNotAvailable: 'دستیاب نہیں ہے'
   programUnknownUser: 'نامعلوم صارف'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: یہ ایک خودکار پیغام ہے ۔ براہ مہربانی اس ای میل پر براہ راست جواب نہ دیں.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: آپ کی catrobat اکاؤنٹ کی توثیق
   message: |
     Dear %username%.
     To finish activating your account - please visit %confirmationUrl%
@@ -240,19 +240,19 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
+  edit: اپنی پروفائل میں ترمیم کریں
   saveChanges: تبدیلیاں محفوظ کریں
   newPass: نیا خفیہ کوڈ
   repeatPass: خفیہ کوڈ دہرائیے
-  oldPass: old password
+  oldPass: پرانا پاسورڈ
   firstEmail: میری پہلی ای میل
   secondEmail: میری دوسری ای میل
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
+  myPrograms: میرے منصوبے
+  follows: آپ کی پیروی
+  follower: پیروکاروں
   unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  followUser: اس صارف کی پیروی کرو!
+  amountOfPrograms: منصوبوں کی تعداد
   form:
     passwordTooShort: نیا خفیہ کوڈ کم از کم %length% حروف پر مشتمل ہونا چاہیے.
     passwordTooLong: نیا خفیہ کوڈ زیادہ سے زیادہ %length% حروف کا ہوسکتا ہے.
@@ -261,26 +261,26 @@ profile:
     emailNotValid: یہ ای میل پتہ درست نہیں ہے ۔
     emailMissing: اس ای میل پتے کی تازہ کاری کے دوران نقص۔ آپ کا کم از کم ایک توثیق شدہ ای میل پتہ ہونا چاہیے ۔
     emailExists: یہ ای میل پتہ پہلے سے استعمال میں ہے.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: یہ صارف نام درست نہیں ہے.
+    usernameMissing: آپ کو ایک صارف کا نام ہونا چاہئے.
     usernameExists: یہ صارف نام پہلے سے موجود ہے۔.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: صارف کا نام ای میل ایڈریس پر مشتمل نہیں ہونا چاہئے.
     submitSuccess: محفوظ ہوچکا!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: کیا آپ واقعی آپ کے منصوبے کو حذف کرنا چاہتے ہیں؟
+  programsOf: کی منصوبے
   changePicture: تصویر تبدیل کریں
   avatar:
-    noImage: No image!
+    noImage: کوئی تصویرنہیں!
     pictureTooLarge: آپکی منتخب کردہ تصویر بہت بڑی ہے، برائے مہربانی 5mb سے بڑے تصاویر استعمال نہ کریں۔
     uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
     noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Scratch پر پروفائل
 myprofile:
   editProfile: پروفائل میں ترمیم کریں
   edit: تدوین کریں
   done: مکمل ہوا
   checkMail: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
-  passwordUpdated: Your password was successfully updated.
+  passwordUpdated: آپ کا پاس ورڈ کامیابی سے بدل دیا گیا۔
   avatar: اوتار
   email: ای میل
   editAvatar: اوتار مین تبدیلی کریں
@@ -289,18 +289,18 @@ myprofile:
   editCountry: ملک تبدیل کریں
   editEmail: ای میل تدوین کریں
   deleteAccount: اکاؤنٹ ختم کریں
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  deleteAccountText: کیا آپ کو یقین ہے کہ آپ اپنا اکاؤنٹ حذف کرنا چاہتے ہیں؟ یہ آپ کے اپ لوڈ کردہ منصوبوں اور تبصرے کو حذف کرے گا!
+  editAccountSettings: اکاؤنٹ کی ترتیبات میں ترمیم کریں
+  notChangeVisibility: نمائش تبدیل نہیں کر سکتے ہیں
+  notChangeVisibilityReason: آپ کے منصوبے کا زبان ورژن بہت زیادہ ہے اور اس طرح یہ نظر انداز کرنے کے لئے مقرر نہیں کیا جا سکتا.
 licenseToPlay:
   link: 'کھیلنے کے لئے لائسنس'
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: تصور کریں کہ ہر catrobat منصوبے ایک کیک ہے، ایک بہت خاص کیک جو اس کی ہدایت کے ساتھ آتا ہے (پروگرامنگ بلاکس). Catrobat کمیونٹی کے تمام اراکین ان کی کیک ان کی ترکیبیں کے ساتھ اشتراک کرتے ہیں۔ اس کا مطلب یہ ہے کہ آپ کیک سے لطف اندوز کر سکتے ہیں اور سیکھیں کہ کس طرح خود بنانے!
   text2: 'کوئی خفیہ ترکیبیں نہیں: کیک کے ساتھ کیک بنانے کی دی گئی ہدایات ہر ایک کے لیے قابل استعمال، قابل ترمیم اور نئے خیالات کا اضافہ کرنے کے لیے کھلے ہیں... میرا مطلب ہے کیک۔.'
   text3: "آپ کیک کھا بھی سکتے ہیں اور دوسروں کی ترکیبیں استعمال کرکے اپنے بنا بھی سکتے ہیں، شاید مختلف اجزاء کے ساتھ۔\nیہ آزادی صرف دو آسان شرائط کے ساتھ مشروط ہے:"
   text4: "کیٹروبیٹ گروہ قائم کرتے ہوئے ہم نے یہ نقطہ نظر اپنایا کیونکہ ہمیں یقین ہے کہ یہ گروہ کے اندر سیکھنے اور تخلیقی صلاحیتیوں کو اجاگر کرنے میں معاون ثابت ہوگا۔\nترکیبیں اور اجزاء بانٹنے سے لوگ ایک دوسرے کے نظریات سے نئے بنا سکتے ہیں اور جس سے ہر ایک کو فائدہ ہوگا۔."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
+  text5: Catrobat ویب سائٹ کو ڈیزائن کرنے میں، ہم نے لوگوں کو دوسروں کو کریڈٹ دینے اور دوسروں کو کریڈٹ دینے کی حوصلہ افزائی کی خصوصیات شامل کی. ہر پروجیکٹ کے صفحے پر، آپ ہمیشہ منصوبے کے لئے اصل سکرپٹ ڈاؤن لوڈ کرسکتے ہیں. اگر آپ ایک منصوبے کو ریمکس (سکرپٹ یا آرٹ ورک میں ترمیم کریں، اور نتیجہ کا اشتراک کریں)، ہم آپ کو منصوبے کے نوٹوں میں کریڈٹ دینے کے لئے حوصلہ افزائی کرتے ہیں، لوگوں اور منصوبے کا ذکر کرتے ہیں جو آپ کو حوصلہ افزائی کرتے ہیں.
   text6: '%link-termsOfUse% پر کیٹروبیٹ کے آن لائن گروہ کے استعمال کی شرائط کے بارے میں مزید معلومات حاصل کریں ۔'
   list1:
     item1: اپنے کیک بمع ترکیب دوسروں کے ساتھ شریک کریں
@@ -345,18 +345,18 @@ termsOfUse:
 search:
   dotdotdot: تلاش کریں...
   search: تلاش
-  inMediaLib: Search in media library
+  inMediaLib: میڈیا لائبریری میں تلاش کریں
   results: تلاش کے نتائج
   resultcount: آپ کی تلاش نے %count% نتائج لوٹائے
-  fail: Please enter at least a single search term
+  fail: براہ کرم کم از کم ایک تلاش کی اصطلاح درج کریں
 menu:
   profile: میری پروفائل
   login: لاگ اِن
   logout: لاگ آؤٹ
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  admin: منتظم
+  home: صفحہ اول
+  helpAndTutorials: مدد اور سبق
+  followersAndFollowing: پیروکاروں
 login:
   login: لاگ اِن
   passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
@@ -364,25 +364,25 @@ login:
   forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
   recoverPass: خفیہ کوڈ بحال کریں
   recoverPassSend: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: اس صارف کے پاس پاس ورڈ پہلے ہی گزشتہ ۲۴ گھنٹوں کے اندر اندر درخواست کی گئی ہے.
+  confirmationSend: آپ کے رجسٹریشن کی تصدیق کرنے کے لئے ایک ای میل آپ کے میل ایڈریس پر بھیجا گیا تھا. براہ کرم اپنے ان باکس کو چیک کریں اور اپنے اکاؤنٹ کو چالو کریں.
   userOrEmail: صارف کا نام یا ای میل
   changePass: خفیہ کوڈ تبدیل کریں
   createAccount: ایک اکاؤنٹ بنائیں
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  noAccount: کیا آپ کا اکاؤنٹ نھیں ہیں؟
+  alreadyAccount: پہلے سے ہی ایک اکاؤنٹ ہے؟
   or: یا
   username: صارف کا نام
   email: ای میل
   passwordFirst: خفیہ کوڈ
-  passwordSecond: Password confirm
+  passwordSecond: پاس ورڈ کی تصدیق
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
   prepare: 'ایپ تیار کریں'
   preparing: 'ایپ تیار کر رہا ہے'
   text: 'اس عمل میں کچھ وقت لگ سکتا ہے'
 format:
-  million_abbreviation: M
+  million_abbreviation: مئی
 #api
 errors:
   username:
@@ -390,8 +390,8 @@ errors:
     invalid: آپکا صارف نام غلط ہے
     exists: یہ صارف نام پہلے سے موجود ہے۔.
     not_exists: یہ صارف نام موجود نہیں ہے.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    not_email: صارف نام ایک ای میل ایڈریس نہیں ہونا چاہئے.
+    size: صارف نام میں کم سے کم 3 کردار ہونا چاہئے اور ۱۸۰ سے زیادہ نہیں
   password:
     blank: خفیہ کوڈ موجود نہیں۔
     short: 'آپ کا خفیہ کوڈ کم از کم {{ limit }} حروف پر مشتمل ہونا چاہیئے۔'
@@ -418,24 +418,23 @@ errors:
   image.missing: پروجیکٹ xml میں ایک فائل کا ذکر ہے جو پروجیکٹ فولڈر میں موجود نہیں
   unknown: نامعلوم غلطی
   token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'ٹوکن آرٹ اپ لوڈ کریں.'
   program:
-    invalid: Invalid project.
+    invalid: غلط منصوبے
   languageversion:
-    tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
+    tooold: 'افسوس، آپ کے منصوبے میں Catrobat زبان کا ایک پرانے ورژن شامل ہے! کیا آپ جیبی کوڈ کا تازہ ترین ورژن استعمال کرتے ہیں؟'
   programversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'افسوس، آپ جیبی کوڈ کا ایک پرانے ورژن استعمال کر رہے ہیں. تازہ ترین ورژن کو اپ ڈیٹ کریں.'
   authentication:
     title: تصدیق میں ناکام رہے
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      آپ کے صارف کی اسناد غلط ہیں. براہ کرم ایپ میں دوبارہ لاگ ان کرنے کی کوشش کریں.
 success:
-  text: Success
+  text: کامیاب
   registration: رجسٹریشن کامیاب!
   token: ٹھيک ہے
   upload: آپکے پراجیکٹ کو کامیابی کے ساتھ اپ لوڈ کیا گیا!
-  imgUpload: Your image was uploaded successfully!
+  imgUpload: آپ کی تصویر کامیابی سے اپ لوڈ کی گئی تھی!
   report: آپکی رپورٹ کامیابی سے بھیج دی گئی!
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
@@ -667,13 +666,13 @@ checkOutProject: 'Check out this project:'
 community: 'کاٹروبٹ کے تمام لوگ                      '
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: تازہ ترین منصوبے
+  random: بے ترتیب منصوبے
   most_viewed: سب سے زیادہ دیکھے گئے
   most_downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: سکریچ ریمکس
+  recommended: سفارش کردہ منصوبے
 achievements:
   sidebar:
     title: 'Achievements'
@@ -693,7 +692,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "ٹھیک"
   profile:
     title: 'Achievements'
   achievement:

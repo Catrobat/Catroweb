@@ -187,7 +187,7 @@ remixGraph:
   by: 'ਨਾਲ'
   open: 'ਖੁੱਲਾ'
   showPaths: 'ਮਾਰਗ ਦਿਖਾਓ'
-  programNotAvailableErrorTitle: 'ਮਾਫ ਕਰਨਾ ...'
+  programNotAvailableErrorTitle: 'ਮਾਫ ਕਰਨਾ…'
   programNotAvailableErrorDescription: 'ਪ੍ਰੋਜੈਕਟ ਹੋਰ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!'
   programNotAvailable: 'ਉਪਲਭਦ ਨਹੀ'
   programUnknownUser: 'ਅਣਜਾਣ ਯੂਜ਼ਰ'
@@ -343,7 +343,7 @@ termsOfUse:
   bottom2: '%email-webmaster% ਨੂੰ ਵਰਤੋ ਦੇ ਇਹ ਨਿਯਮ ਬਾਰੇ ਕੋਈ ਸੁਝਾਅ ਮੇਲ ਕਰੋ ਜੀ.'
   version: ਸੰਸਕਰਣ 1.3, 4 ਮਾਰਚ 2014
 search:
-  dotdotdot: ਖੋਜੋ ...
+  dotdotdot: ਖੋਜੋ…
   search: ਖੋਜ
   inMediaLib: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਖੋਜੋ
   results: ਖੋਜ ਨਤੀਜੇ
