@@ -562,56 +562,6 @@ input[type="number"] {
     display: flex;
     align-items: center;
   }
-
-  .toggle-control {
-    position: relative;
-    display: block;
-    margin-bottom: 12px;
-    font-size: 22px;
-    cursor: pointer;
-    user-select: none;
-    opacity: 1;
-
-    #show_ads_chk {
-      position: absolute;
-      width: 0;
-      height: 0;
-      cursor: pointer;
-      opacity: 0;
-    }
-
-    input:checked ~ .control {
-      background-color: #f1f1f1;
-
-      &::after {
-        left: 17px;
-        background: var(--mdc-theme-primary, #00acc1);
-      }
-    }
-
-    .control {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 40px;
-      height: 16px;
-      background-color: #bcbbbb;
-      border-radius: 25px;
-      transition: background-color 0.3s ease-in-out;
-
-      &::after {
-        position: absolute;
-        top: -4px;
-        left: -1px;
-        width: 24px;
-        height: 24px;
-        content: "";
-        background: #f1f1f1;
-        border-radius: 25px;
-        transition: all 0.3s ease-in-out;
-      }
-    }
-  }
 }
 
 .years-validity-container {

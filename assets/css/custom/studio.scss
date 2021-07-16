@@ -268,3 +268,74 @@
     width: calc(100% - 250px);
   }
 }
+
+#studio-settings {
+  margin-top: 5%;
+  color: $black;
+}
+
+.settings-line {
+  display: flex;
+  align-items: flex-start;
+  padding-left: 3rem;
+}
+
+.settings-line input[type="text"],
+.settings-line textarea {
+  padding: 0;
+  margin-top: 0.5rem;
+  border: none;
+  border-bottom: 2px solid $gray-500;
+  border-radius: 0;
+}
+
+.settings-line textarea {
+  margin-top: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.settings-line span {
+  margin-top: 1rem;
+}
+
+.input-container {
+  width: 90%;
+  padding-left: 1rem;
+}
+
+.input-container label {
+  position: absolute;
+  top: 0;
+  font-size: 75%;
+  opacity: 0.7;
+}
+
+.input-container input:focus,
+.input-container textarea:focus {
+  border-color: $primary;
+  box-shadow: none;
+}
+
+.input-container input:focus ~ label,
+.input-container textarea:focus ~ label {
+  color: $primary;
+}
+
+.studio-options {
+  margin: 10% 0;
+}
+
+.studio-options-line {
+  margin-bottom: 2rem;
+}
+
+.studio-options-name {
+  position: relative;
+  top: -4px;
+  left: 3rem;
+}
+
+.toggle-container {
+  position: absolute;
+  left: 40%;
+}
