@@ -3,37 +3,37 @@
 localLanguage: Engelsk
 username: Brukernavn
 password: Passord
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: Opprett nytt passord
+accountSettings: Kontoinnstillinger
 email: E-post
 aboutPocketCode: Om Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: Om
+education: Utdanning
+chat: Chat og forum
+others: Annet
 tutorials: Opplæring
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: Huawei AppGalleri
 passwordsNoMatch: Passordene samsvarer ikke.
 error: Feil
 cancel: Avbryt
 report: Rapporter
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
+deleteIt: Ja, slett det!
+reportIt: Ja, rapporter det!
+areYouSure: Er du sikker?
+noWayOfReturn: Det er ingen måte å gjenopprette dine handlinger!
+download: Nedlasting
 description: Beskrivelse
 noDescription: Ingen beskrivelse tilgjengelig.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Hvordan opprettet du dette prosjektet? Bruk du ideer, skript eller kunstverk fra andre folk? Takk dem her.
 country: Land
 loginText: logg på
 privacyPolicy: Personvern
 imprint: Avtrykk
-programDetails: Details
+programDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
 oldVersionError: 'Oppdater til den nyeste versjonen av Pocket Code!'
@@ -41,120 +41,120 @@ more: 'mer'
 less: 'mindre'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
+more-information: 'Mer informasjon'
+less-information: 'Mindre informasjon'
 ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'Klikk %link_start% her  %link_end% for å laste ned eksempelprosjektet.'
 registrationError: 'Brukernavn eller e-postadresse er allerede i bruk.'
 notifications: 'Varsler'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'Følgere'
+LikeNotifications: 'Reaksjoner'
 CommentNotifications: 'Kommentarer'
 RemixNotifications: 'Remikser'
 wellDone: "Godt gjort!"
 done: "Ferdig!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Ja, slett det"
 cancelMessage: "Avbryt"
-notificationsUnauthorizedError: "Unable to authorize user"
+notificationsUnauthorizedError: "Kunne ikke godkjenne brukeren"
 notificationsClearError: "Kan ikke markere meldinger som lest!"
 pleaseWait: "Vennligst vent..."
 projects: "Programmer"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "Innloggingsinformasjon for ekstern konto"
+oauthInfo: 'Du har nettopp brukt en ekstern konto for å logge inn. Vi opprettet et tilfeldig brukernavn for deg. Hvis du ønsker å endre brukernavnet ditt eller opprette et nytt passord for din konto, kan du gå til profilsiden min. Klikk %link_start% her %link_end% for å gå til din profilside'
+oauthHere: "her"
+statistics: "Statistikk"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Hvilke prosjekter anbefales her?'
+      description: 'Jo flere reaksjoner (tumper opp, Smile ...) ditt prosjekt mottar, jo høyere vises den på denne listen.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: Følger
+  followers: Følgere
+  follow: Følg
+  username: Bruker
+  followsMe: Følger meg
+  noFollowing: Du følger ingen for øyeblikket.
+  noFollowers: Du har ingen følgere for øyeblikket.
+  noOtherFollowing: Det er ingen følgende brukere for øyeblikket.
+  noOtherFollowers: Det er ingen følgere for øyeblikket.
+  followError: "Kan ikke følge ønsket bruker!"
+  unfollowError: "Kan ikke slutte å følge den ønskede brukeren!"
+  unfollowQuestion: "Er du sikker på at du vil slutt å følge denne brukeren?"
+  unfollowButton: "Slutt å følge %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    title: Velkommen til Catrobats %theme%
+    title_mindstorms: Velkommen til Catrobats nettsted for Mindstorms EV3 og NXT
+    subtitle: Opprett historier, spill og mer...
+    subtitle_embroidery: Søm  dine egne mønstre på T-skjorter, bager, pant eller smarttelefonsak!
+    subtitle_mindstorms: Opprett dine egne prosjekter med din Lego Mindstorms EV3 og NXT roboter
     download: Last ned appen
-    statistics: More statistics
+    statistics: Mer statistikk
   featured: Anbefalt
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
+  example: Eksempler
+  newest: Nyeste prosjekter
+  recommended: Anbefalte prosjekter
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noPrograms: Det finnes ingen prosjekter for tiden.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Er du sikker?
+    Er du sikker på at du vil slette "%programName%"?
+    Det er ingen måte å gjenopprette dine handlinger!
+    Ja, slett det!
+    Avbryt
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Er du sikker?
+    Hvis du angir "%programName%" til privat, vil den ikke bli sett eller funnet av andre brukere.
+    Du kan fortsatt dele prosjektet med vennene dine. Du kan veksle synlighet ved å trykke på hengelåsikonet.
+    Hvis du setter "%programName%" til offentlig, sees den og finnes av andre brukere.
+    Ja, satt til offentlig
+    Ja, satt til privat
+    Nei
+  reportCommentConfirmation: Er du sikker på at du vil rapportere denne kommentaren?
+  deleteCommentConfirmation: Er du sikker på at du vil slette denne kommentaren?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    Konto sletting?
+    Er du sikker på at du vil slette kontoen din? Dette vil slette dine opplastede prosjekter og kommentarer også!
+    Det er ingen måte å gjenopprette dine handlinger!
+    Ja, slett det!
+    Avbryt
+  tooLongDescription: Prosjektbeskrivelsen er for lang!
   tooLongCredits: The project credits are too long!
   most:
     viewed: Mest Sett
     downloaded: Mest nedlastet
-  random: Random projects
-  related: Related projects
+  random: Tilfeldige prosjekter
+  related: Relaterte prosjekter
   downloads: '%downloads% nedlastinger'
-  sample: Example projects
+  sample: Eksempelprosjekter
   views: '%views% visninger'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Folk som reagerte på dette prosjektet"
     all: "Alle"
   remixes: '{0}0 remikser |{1}1 remiks |]1,Inf]%remixes% remikser'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  newRemixesNotificationTitle: '➤{1}"%programName%" har 1 ny remix: ″]1,Inf] "%programName%" har %remixes% nye remixes:'
+  submitted: Innsendte prosjekter
+  uploaded: Opplastede prosjekter
   reportAsInappropriate: Rapporter som upassende
-  reportProgram: Report project
+  reportProgram: Rapportere prosjekt
   languageVersion: 'Catrobat språk versjon: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: Vennligst %login% for å rapportere dette prosjektet.
+  reportDialogHeader: Hvorfor vil du rapportere dette prosjektet?
   reportDialogReason: Angi en årsak
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportRadioButtonInappropriate: Det er upassende
+  reportRadioButtonCopyright: Brudd på opphavsrett
+  reportRadioButtonSpam: Den er spam
+  reportRadioButtonDislike: Jeg liker den ikke
+  reportOwnProgram: Du kan ikke flagge ditt eget prosjekt.
+  reportAlready: Du har allerede flagget dette prosjektet.
+  reportDone: Du rapporterte dette prosjektet!
   updateAppHeader: Oppdater app
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Oppdater din app til den nyeste versjonen for å kunne laste ned dette prosjektet.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: Sjekk ut dette Catrobat prosjektet
   show_more: Vis mer
   comments: Kommentarer
   send: Send
@@ -162,25 +162,25 @@ programs:
   report: Rapporter
   report_popup: Kommentaren ble vellykket rapportert.
   report_popup_header: Rapportert
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  deleted_popup: Kommentaren ble vellykket slettet.
+  deleted_popup_header: Slettet
+  noAdminRights: Du har ingen admin rettigheter. Vennligst logg inn som en admin.
+  editDescription: Rediger prosjektbeskrivelsen
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
+  addComment: Skriv en kommentar
+  thumbsUp: Tomlene opp!
+  smile: Smil!
+  love: Elsk!
   wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  linkTitle: Lenke
+  link: Kopier prosjektlenke til utklippstavlen
+  reactionsText: Reaksjoner
+  downloadErrorText: Det oppstod en feil mens laste ned prosjektet. Prøv igjen senere.
+  showTranslation: Vis oversettelse
+  hideTranslation: Skjul oversettelse
+  translatedByLine: Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%
 remixGraph:
   title: Remikser
   showRemixGraph: 'Vis Remiks graf'
@@ -188,71 +188,72 @@ remixGraph:
   open: 'Åpne '
   showPaths: 'Vis baner'
   programNotAvailableErrorTitle: 'Beklager...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'Prosjektet er ikke tilgjengelig lenger!'
   programNotAvailable: 'Ikke tilgjengelig'
   programUnknownUser: 'Ukjent bruker'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: Dette er en automatisk melding - Vennligst ikke svar direkte på denne e-posten.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: Din Catrobat konto bekreftelse
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Kjære %username%.
+    For å fullføre aktiveringen av din konto - vennligst besøk %confirmationUrl%
+    Denne lenken kan bare bli brukt én gang for å validere kontoen din.
+    Vennlig hilsen,
+    Ditt Catrobat lag.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Kjære %username%.<br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    For å fullføre aktiveringen av kontoen din - vennligst klikk <a href=%confirmationUrl%>her.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
+    Denne linken kan bare brukes én gang for å validere din konto.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Vennlig hilsen,<br>
+    Ditt Catrobat lag.
     </p>
 passwordRecovery:
   subject: Din Catrobat passordgjenoppretting
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Kjære %username%.
+    Du har bedt om å tilbakestille passordet på %appplication_url% fordi du har glemt passordet ditt.
+    Hvis du ikke har bedt om dette, kan du ignorere den. Det utløper og blir ubrukelig i løpet av 24 timer.
+    For å tilbakestille passordet ditt og opprette et ny, besøk følgende side: %confirmationUrl%
+    Du kan bruke ditt brukernavn og passord når som helst for å få tilgang til %appplication_url% -samfunnet.
+    Å gjøre slik bare besøk følgende side: %loginPage%
+    For å redigere profildetaljene dine, gå til denne siden: %profilePage%
+    Vennlig hilsen,
+    Ditt Catrobat lag.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Kjære %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Du har bedt om å tilbakestille passordet på <a href=%appplication_url%>Pocket Code</a> fordi du har glemt passordet ditt.
+    Hvis du ikke har bedt om dette, kan du ignorer det. Det utløper og blir ubrukelig i løpet av 24 timer.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    For å tilbakestille passordet ditt og opprette et nytt, vennligst klikk  <a href=%confirmationUrl%>her.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    Du kan bruke ditt brukernavn og passord når som helst for å få tilgang til <a href=%appplication_url%>Pocket Code</a> samfunnet.
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Å gjøre slik bare besøk følgende side:  <a href=%loginPage%>Påloggingsside</a><br>
+    For å redigere profildetaljene dine, gå til denne <a href=%profilePage%>siden</a>.<br>
+    <br>
+    Vennlig hilsen,<br>
+    Ditt Catrobat lag.
     </p>
 profile:
-  edit: Edit your profile
+  edit: Rediger din profil
   saveChanges: lagre endringer
   newPass: nytt passord
   repeatPass: gjenta passord
-  oldPass: old password
+  oldPass: gammelt passord
   firstEmail: Min første e-post
   secondEmail: Min andre e-post
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: Mine prosjekter
+  follows: Følger
+  follower: Følger
+  unfollowUser: Slutt å følge denne brukeren!
+  followUser: Følg denne brukeren!
+  amountOfPrograms: Antall prosjekter
   form:
     passwordTooShort: Det nye passordet må ha minst %length% tegn.
     passwordTooLong: Det nye passordet kan ha maksimalt %length% tegn.
@@ -261,38 +262,38 @@ profile:
     emailNotValid: Denne e-postadressen er ikke gyldig.
     emailMissing: Feil under oppdatering av denne e-postadressen. Du må ha minst én validert e-postadresse.
     emailExists: Denne e-postadressen finnes allerede.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameNotValid: Dette brukernavnet er ikke gyldig.
+    usernameMissing: Du må ha et brukernavn.
+    usernameExists: Dette brukernavnet er allerede i bruk.
+    usernameContainsEmail: Brukernavn bør ikke inneholde en e-postadresse.
     submitSuccess: lagret!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: Vil du virkelig slette prosjektet ditt
+  programsOf: Prosjekter av
   changePicture: Endre bilde
   avatar:
-    noImage: No image!
+    noImage: Ingen bilde!
     pictureTooLarge: Valgte bildet er for stort, du kan ikke bruke bilder som er større enn 5mb.
     uploadError: Beklager, det oppstod et problem under opplasting!
     noSupport: Denne bildetypen støttes ikke, prøv et annet bilde.
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Profil på Scratch
 myprofile:
   editProfile: Rediger profil
   edit: Rediger
-  done: Done
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  done: Ferdig
+  checkMail: En e-post ble sendt til e-postadressen din. Vennligst sjekk innboksen din.
+  passwordUpdated: Passordet ditt ble vellykket oppdatert.
   avatar: Avatar
-  email: Email
+  email: E-post
   editAvatar: Redigere avatar
   editUsername: Rediger brukernavn
   editPassword: Redigere passord
   editCountry: Redigere land
   editEmail: Redigere e-post
   deleteAccount: Slett konto
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  deleteAccountText: Er du sikker på at du vil slette kontoen din? Dette vil slette dine opplastede prosjekter og kommentarer!
+  editAccountSettings: Rediger kontoinnstillinger
+  notChangeVisibility: Kan ikke endre synlighet
+  notChangeVisibilityReason: Språkversjonen av prosjektet ditt er for høy og derfor kan det ikke bli satt til synlig.
 licenseToPlay:
   link: 'Lisens til å spille'
   title: 'Lisens til å spille - gi anerkjennelse og del'
@@ -309,7 +310,7 @@ licenseToPlay:
 termsOfUse:
   title: Vilkår for bruk
   headline: Velkommen til Catrobat samfunnet!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'Som en del av Catrobat samfunnet deler du prosjekter og ideer med folk:'
   text2: "Vi trenger din hjelp for at fellesskapet skal kunne støtte alle medlemmer. Her er hvordan du kan hjelpe:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: 'Vår gave til deg:'
@@ -341,129 +342,129 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: Versjon 1.3, 4. mars 2014
 search:
-  dotdotdot: Search...
-  search: Search
-  inMediaLib: Search in media library
-  results: Search results
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
+  dotdotdot: Søk...
+  search: Søk
+  inMediaLib: Søk i mediebiblioteket
+  results: Søkeresultater
+  resultcount: Søket ditt returnerte %count% resultater
+  fail: Vennligst skriv inn minst ett søkeord
 menu:
-  profile: My Profile
+  profile: Min profil
   login: Logg på
   logout: Logg av
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  admin: Administrator
+  home: Hjem
+  helpAndTutorials: Hjelp & opplæringer
+  followersAndFollowing: Følger
 login:
   login: Logg på
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
-  recoverPass: Recover password
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  passOrUser: Ditt passord eller brukernavn er feil.
+  noUsername: Din brukernavn eller e-postadresse ble ikke funnet.
+  forgotPass: Glemt passord eller brukernavn?
+  recoverPass: Gjenopprett passord
+  recoverPassSend: En e-post ble sendt til e-postadressen din. Vennligst sjekk innboksen din.
+  alreadyReset: Passordet for denne brukeren har allerede blitt bedt om de siste 24 timene.
+  confirmationSend: En e-post for å bekrefte registreringen ble sendt til din e-postadresse. Vennligst sjekk din innboks og aktiver kontoen din.
+  userOrEmail: Brukernavn eller e-post
+  changePass: Endre passord
+  createAccount: Opprett en konto
+  noAccount: Du har ikke en konto!
+  alreadyAccount: Allerede har en konto?
   or: ELLER
   username: Brukernavn
-  email: Email
+  email: E-post
   passwordFirst: Passord
-  passwordSecond: Password confirm
+  passwordSecond: Bekreft passord
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: Last ned som app
+  prepare: 'Få som app'
+  preparing: 'Forbereder app'
+  text: 'Prosessen kan ta en stund'
 format:
   million_abbreviation: M
 #api
 errors:
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
-    exists: This username already exists.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    blank: Brukernavn må ikke være tomt
+    invalid: Brukernavnet ditt er ugyldig
+    exists: Dette brukernavnet er allerede i bruk.
+    not_exists: Dette brukernavnet eksisterer ikke.
+    not_email: Brukernavnet må ikke være en e-postadresse.
+    size: Brukernavnet må ha minst 3 tegn og ikke mer enn 180
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: Passordet mangler.
+    short: 'Passordet ditt må ha minst {{ limit }} tegn.'
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: Landet er mangler.
+    invalid: Ugyldig land
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: e-post må ikke være tom
+    invalid: E-posten din ser ut til å være ugyldig
     exists: Denne e-postadressen finnes allerede.
   id:
-    blank: Open authentication ID must not be blank
-  login: The password or username was incorrect.
-  post-data: POST-data not correct or missing!
+    blank: Åpen autentiserings-ID må ikke være tom
+  login: Passordet eller brukernavnet var feil.
+  post-data: POST-data er ikke korrekte eller mangler!
   checksum:
-    missing: Client did not send fileChecksum! Are you using an outdated version of Pocket Code?
-    invalid: invalid checksum
+    missing: Klienten sendte ikke filKontrolsum! Bruker du en utdatert versjon av Pocket Code?
+    invalid: ugyldig kontrollsum
   xml:
-    invalid: invalid code xml
-    missing: 'unknown error: project_xml_not_found!'
+    invalid: ugyldig kode xml
+    missing: 'ukjent feil: prosjekt_xml_ikke_funnet!'
   file:
-    unexpected: unexpected file found
-    invalid: invalid file
-  image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
-  token: 'Authentication of device failed: invalid auth-token!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+    unexpected: Uventet fil funnet
+    invalid: ugyldig fil
+  image.missing: Prosjekt XML nevner en fil som ikke eksisterer i prosjekt-katalog
+  unknown: ukjent feil
+  token: 'Autentisering av enheten feilet: Ugyldig auth-token!'
+  uploadTokenAuthFailed: 'Opplasting av token auth feilet'
   program:
-    invalid: Invalid project.
+    invalid: Ugyldig prosjekt.
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Autentisering feilet
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
 success:
-  text: Success
-  registration: Registration successful!
-  token: ok
-  upload: Your project was uploaded successfully!
-  imgUpload: Your image was uploaded successfully!
-  report: Your report was successfully sent!
+  text: Suksess
+  registration: Registrering vellykket!
+  token: Ok
+  upload: Prosjektet ditt ble lastet opp vellykket!
+  imgUpload: Bildet ditt ble lastet opp vellykket!
+  report: Rapporten din ble sendt vellykket!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 minutt siden |{1}1 minutt siden |]1,Inf] %count% minutter siden'
+  hours.ago: '{1}1 time siden |]1,Inf] %count% timer siden'
+  days.ago: '{1}1 dag siden |]1,Inf] for %count% dager siden'
+  months.ago: '{1}for 1 måned siden |]1,Inf] for %count% måneder siden'
+  years.ago: '{1}for 1 år siden |]1,Inf] for mer enn ett år siden'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: Det oppstod en feil under opplastingen av din app.
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    countryCodeInvalid: "Country code invalid"
+    emailMissing: 'E-post mangler'
+    emailEmpty: 'E-post kan ikke være tom'
+    emailInvalid: 'E-post ugyldig'
+    emailAlreadyInUse: 'E-post adresse er allerede i bruk'
+    usernameMissing: 'Brukernavn mangler'
+    usernameTooShort: 'Brukernavn er for kort'
+    usernameTooLong: 'Brukernavn er for langt'
+    usernameEmpty: 'Brukernavn kan ikke være tomt'
+    usernameAlreadyInUse: 'Brukernavn er allerede i bruk'
+    usernameInvalid: 'Brukernavn ugyldig'
+    passwordMissing: 'Passord mangler'
+    passwordEmpty: 'Passord kan ikke være tomt'
+    passwordTooShort: 'Passord er for kort'
+    passwordTooLong: 'Passord er for langt'
+    passwordInvalidChars: 'Passordet inneholder ugyldige tegn'
+    usernameContainsEmail: "Brukernavn må ikke inneholde en e-postadresse"
+    countryCodeInvalid: "Landkoden er ugyldig"
   projectsPost:
     invalid_checksum: 'Invalid checksum. Try uploading again!'
     upload_error: 'Error while uploading. Try uploading again!'
@@ -491,33 +492,33 @@ language:
   hindi: Hindi
   hungarian: Hungarian
   indonesian: Indonesian
-  italian: Italian
-  japanese: Japanese
-  korean: Korean
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  italian: Italiensk
+  japanese: Japansk
+  korean: Koreansk
+  latvian: Latvisk
+  lithuanian: Litauisk
+  malay: Malayisk
+  norwegian: Norsk
+  persian: Persisk
+  polish: Polsk
+  portuguese_brazil: Portugisisk (Brasil)
+  portuguese_portugal: Portugisisk (Portugal)
+  romanian: Rumensk
+  russian: Russisk
+  serbian: Serbisk
+  slovak: Slovakisk
+  slovenian: Slovensk
+  spanish_latin_america: Spansk (Latin-Amerika)
+  spanish_spain: Spansk (Spain)
+  swedish: Svensk
+  thai: Thailandsk
+  turkish: Tyrkisk
+  ukrainian: Ukrainsk
+  vietnamese: Vietnamesisk
 ci:
-  generate: Generate apk
-  pending: Generating apk
-  download: Download apk
+  generate: Generer apk
+  pending: Genererer apk
+  download: Last ned apk
 gamejam:
   nojam: Sorry, there is no game jam at this time
   submit: Submit to %gamejamname%
@@ -667,13 +668,13 @@ checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: Nyeste prosjekter
+  random: Tilfeldige prosjekter
   most_viewed: Mest Sett
   most_downloaded: Mest nedlastet
   example: Example
   scratch: Scratch remixes
-  recommended: Recommended projects
+  recommended: Anbefalte prosjekter
 achievements:
   sidebar:
     title: 'Achievements'
@@ -714,18 +715,18 @@ achievements:
         title: 'Initiative'
         description: 'Add your first profile picture'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Nybegynner'
+        description: 'Opprett en brukerkonto'
 tags:
   tag:
     game:
-      title: Game
+      title: Spill
     animation:
-      title: Animation
+      title: Animasjon
     story:
-      title: Story
+      title: Historie
     music:
-      title: Music
+      title: Musikk
     art:
       title: Art
     experimental:

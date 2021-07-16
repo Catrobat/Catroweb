@@ -121,7 +121,7 @@ programs:
     예, 삭제합니다!
     취소
   tooLongDescription: 설명이 너무 깁니다!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: 프로젝트 노트와 크레딧이 너무 깁니다!
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
@@ -166,8 +166,8 @@ programs:
   noAdminRights: 권한이 없습니다. 로그인 해 주세요.
   editDescription: 프로그램 설명 편집
   saveDescription: 설명 변경 저장
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editCredits: 프로젝트 메모 및 크레딧 편집
+  saveCredits: 저장
   addComment: 댓글 쓰기
   thumbsUp: 좋아요!
   smile: 웃는 표정
@@ -317,7 +317,7 @@ termsOfUse:
     item3: 경험의 모든 수준을 가지고
   list2:
     item1: 존경받도록 하세요. 프로그램을 공유할 때, 여러 나이의 다른 배경의 많은 사람들이 당신의 기여를 볼 것이라는 것을 기억하세요.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "신용을 줘라. 다른 사람들의 프로젝트를 수정하여 자유롭게 만들 수 있습니다. 그저 그들에게 크레딧을 주면됩니다. 크레딧을 제공할 수 있는 한 곳은 프로젝트의 메모 및 크레딧 섹션입니다. 다른 사용자의 프로젝트 수정에 대한 자세한 내용은 이 점 목록 아래의 단락을 참조하십시오."
     item3: "정직 하게 하세요. 다른 사람인 것처럼 하거나 커뮤니티를 속이려 하지 마세요."
     item4: "개인 개인 정보를 유지하세요. 여러분의 이메일 주소, 전화 번호 또는 기타 개인 연락처 정보를 공유하지 마십시오."
     item5: "사이트를 친절하도록 유지해 주세요. 만약 프로그램이나 설명이 거칠거나, 너무 폭력적이거나, 부적절하다고 느껴지시면, '부적절 신고'를 클릭하고 간단한 설명을 남겨 주세요. Catroba 팀에서 여러분의 신고를 검토하고 프로그램과, 설명 등 관련된 것을 삭제할 수 있습니다."
@@ -585,7 +585,7 @@ codeStatistics:
   looksBricks: '모양'
   penBricks: '펜'
   dataBricks: '변수'
-  deviceBricks: '기기'
+  deviceBricks: '장치'
   specialBricks: '특수'
 footer:
   language: 언어
@@ -609,20 +609,20 @@ privacy-policy:
   disagree-text: 승인이 없으면, 계정을 만들 수 없으나 사용할 수는 있습니다.
 catro-notifications:
   markAsRead: "읽음으로 표시"
-  noFollowers: "알림이 없습니다."
-  noComments: "알림이 없습니다."
-  noReactions: "알림이 없습니다."
-  noRemixes: "알림이 없습니다."
+  noFollowers: "팔로어 알림이없는 것 같습니다."
+  noComments: "댓글 알림이없는 것 같습니다."
+  noReactions: "\n반응 알림이없는 것 같습니다."
+  noRemixes: "리믹스 알림이 없는 것 같습니다."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link%가 %program_link%에 댓글을 달았습니다.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link%가 %program_link%에 반응했습니다.'
   follow:
     message: '%user_link% 사용자가 당신을 팔로우합니다.'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link%가 %program_link%에 반응했습니다.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link%님이 게임 %remix_program_link%의 %program_link% 리믹스를 만들었습니다.'
 clipboard:
   success: 프로그램 링크가 복사되었습니다.
   fail: 링크 복사가 안됩니다! :(
@@ -663,7 +663,7 @@ checkOutProject: '프로젝트 점검하기'
 community: 'Catrobat 공유'
 back_to_app: '커뮤니티 나가기'
 category:
-  recent: 최신 프로그램
+  recent: 최신 프로젝트
   random: 랜덤 프로젝트
   most_viewed: 가장 많이 본 프로그램
   most_downloaded: 인기 다운로드
