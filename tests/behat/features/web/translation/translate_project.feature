@@ -3,8 +3,9 @@ Feature: Project title, description and credits should be translatable via a but
 
   Background:
     Given there are users:
-      | id | name      |
-      | 1  | Catrobat  |
+      | id | name     |
+      | 1  | Catrobat |
+      | 2  | Alex     |
     And there are projects:
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat |               |          |
@@ -15,7 +16,6 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translate button should translate only title when description and credits not available
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#program-translation-button" should exist
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#remove-program-translation-button" should be visible
@@ -33,7 +33,6 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translate button should translate title and description when available
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#program-translation-button" should exist
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#remove-program-translation-button" should be visible
@@ -49,7 +48,6 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translate button should translate title and credit when available
     Given I am on "/app/project/3"
     And I wait for the page to be loaded
-    Then the element "#program-translation-button" should exist
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#remove-program-translation-button" should be visible
@@ -65,7 +63,6 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translate button should translate title, description, and credit when available
     Given I am on "/app/project/4"
     And I wait for the page to be loaded
-    Then the element "#program-translation-button" should exist
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#remove-program-translation-button" should be visible
@@ -84,7 +81,6 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translate button should translate title, description, and credit only once
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#program-translation-button" should exist
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#remove-program-translation-button" should be visible
@@ -99,7 +95,6 @@ Feature: Project title, description and credits should be translatable via a but
   Scenario: Translation should show translated by line
     Given I am on "/app/project/4"
     And I wait for the page to be loaded
-    Then the element "#program-translation-button" should exist
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#credits-translation-wrapper" should be visible
@@ -108,3 +103,20 @@ Feature: Project title, description and credits should be translatable via a but
     And the "#program-translation-between-languages" element should contain "to"
     And the "#program-translation-second-language" element should contain "English"
     And the "#program-translation-after-languages" element should contain ""
+
+  Scenario: Translation button should not be visible for projects the user created
+    Given I log in as "Catrobat"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#program-translation-button" should not exist
+
+  Scenario: Translation button should be visible for projects the user did not create
+    Given I log in as "Alex"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#program-translation-button" should be visible
+
+  Scenario: Translation button should be visible for projects when not logged in
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#program-translation-button" should be visible

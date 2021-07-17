@@ -15,6 +15,11 @@ class TranslateProgram extends Translation {
 
   _initListeners () {
     const translateProgram = this
+
+    if (document.getElementById('program-translation-button') == null) {
+      return
+    }
+
     $(document).on('click', '#program-translation-button', function () {
       $(this).hide()
 

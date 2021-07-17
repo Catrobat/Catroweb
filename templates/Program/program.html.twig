@@ -31,25 +31,28 @@
       <div class="name-wrapper">
         <span id="name" class="h2 program-name">{{ program.name }}</span>
         <span id="name-translation" class="h2 program-name" style="display: none;" lang=""></span>
-        <span class="translate-program-button-wrapper">
-          <span id="program-translation-button" class="program-translation-button catro-icon-button"
-              data-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
-            <i class="ml-2 material-icons">
-              translate
-            </i>
-          </span>
-          <span id="program-translation-loading-spinner" style="display: none;">
-            <i class="ml-2 material-icons">
-              {% include 'Default/loadingSpinner.html.twig' with {'size': 'small'} %}
-            </i>
-          </span>
-          <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none"
-              data-toggle="tooltip" title="Hide Translation">
-              <i class="ml-2 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
-                close
+
+        {% if not app.user or not my_program %}
+          <span class="translate-program-button-wrapper">
+            <span id="program-translation-button" class="program-translation-button catro-icon-button"
+                data-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
+              <i class="ml-2 material-icons">
+                translate
               </i>
+            </span>
+            <span id="program-translation-loading-spinner" style="display: none;">
+              <i class="ml-2 material-icons">
+                {% include 'Default/loadingSpinner.html.twig' with {'size': 'small'} %}
+              </i>
+            </span>
+            <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none"
+                data-toggle="tooltip" title="Hide Translation">
+                <i class="ml-2 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
+                  close
+                </i>
+            </span>
           </span>
-        </span>
+        {% endif %}
       </div>
 
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
