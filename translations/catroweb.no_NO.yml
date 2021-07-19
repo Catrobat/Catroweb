@@ -408,7 +408,7 @@ errors:
   login: Passordet eller brukernavnet var feil.
   post-data: POST-data er ikke korrekte eller mangler!
   checksum:
-    missing: Klienten sendte ikke filKontrolsum! Bruker du en utdatert versjon av Pocket Code?
+    missing: Klienten sendte ikke fil kontrolsum! Bruker du en utdatert versjon av Pocket Code?
     invalid: ugyldig kontrollsum
   xml:
     invalid: ugyldig kode xml
@@ -471,27 +471,27 @@ api:
     creating_error: 'Error while creating project entity. Try uploading again!'
 #languages and countries
 language:
-  arabic: Arabic
-  bulgarian: Bulgarian
-  catalan: Catalan
-  chinese_simplified_han: Chinese (Simplified Han)
-  chinese_traditional_han: Chinese (Traditional Han)
-  croatian: Croatian
-  czech: Czech
-  danish: Danish
-  dutch: Dutch
-  english_united_kingdom: English (United Kingdom)
-  english_united_states: English (United States)
-  estonian: Estonian
-  filipino: Filipino
-  finnish: Finnish
-  french: French
-  german: German
-  greek: Greek
-  hebrew: Hebrew
+  arabic: Arabisk
+  bulgarian: Bulgarsk
+  catalan: Katalansk
+  chinese_simplified_han: Kinesisk (Forenklet Han)
+  chinese_traditional_han: Kinesisk (Tradisjonell Han)
+  croatian: Kroatisk
+  czech: Tsjekkisk
+  danish: Dansk
+  dutch: Nederlansk
+  english_united_kingdom: Engelsk (Storbritannia)
+  english_united_states: Engelsk (Forente Stater) 
+  estonian: Estisk
+  filipino: Filippinsk
+  finnish: Finsk
+  french: Fransk
+  german: Tysk
+  greek: Gresk
+  hebrew: Hebraisk
   hindi: Hindi
-  hungarian: Hungarian
-  indonesian: Indonesian
+  hungarian: Ungarsk
+  indonesian: Indonesisk
   italian: Italiensk
   japanese: Japansk
   korean: Koreansk
@@ -520,17 +520,17 @@ ci:
   pending: Genererer apk
   download: Last ned apk
 gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
+  nojam: Beklager, det er ingen Game Jam akkurat nå
+  submit: Send til %gamejamname%
+  whats: Hva er %gamejamname%?
   submitown:
-    header: be aware
-    subheader: You can only submit your own projects
+    header: vær oppmerksom
+    subheader: Du kan bare sende inn dine egne prosjekter
     text: |
       But why not create your own!
       Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
+tag-text: Tagger
+extenstion-text: Utvidelser
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -558,31 +558,31 @@ codeview:
   showStatistics: 'Show code statistics'
   hideStatistics: 'Hide code statistics'
   cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
-  scenes: 'Scenes'
+  cantDisplayStatistics: "Kode kan ikke vises"
+  totalNumberOf: 'Totalt antall'
+  scenes: 'Scener'
   scripts: 'Skript'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
+  bricks: 'Blokker'
+  objects: 'Aktører og objekter'
   looks: 'Utseende'
   sounds: 'Lyder'
-  globals: 'Globals'
-  locals: 'Locals'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
-  eventBricks: 'Event bricks'
-  controlBricks: 'Control bricks'
-  motionBricks: 'Motion bricks'
-  soundBricks: 'Sound bricks'
-  looksBricks: 'Looks bricks'
-  penBricks: 'Pen bricks'
-  dataBricks: 'Data bricks'
-  specialBricks: 'Special bricks'
+  globals: 'Globaler'
+  locals: 'Lokaler'
+  globalVariables: 'Globale variabler'
+  localVariables: 'Lokale variabler'
+  eventBricks: 'Begivenhet blokker'
+  controlBricks: 'Kontroll blokker'
+  motionBricks: 'Bevegelse blokker'
+  soundBricks: 'Lyd blokker'
+  looksBricks: 'Se blokker'
+  penBricks: 'Penn blokker'
+  dataBricks: 'Data blokker'
+  specialBricks: 'Spesielle blokker'
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
+  title: "Statistikk for kode"
+  error: "Kode statistikk kan ikke vises."
+  general: 'Generelt'
+  bricks: 'Blokker'
   eventBricks: 'Hendelse'
   controlBricks: 'Styring'
   motionBricks: 'Bevegelse'
@@ -590,17 +590,17 @@ codeStatistics:
   looksBricks: 'Utseende'
   penBricks: 'Penn'
   dataBricks: 'Data'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
+  deviceBricks: 'Enhet'
+  specialBricks: 'Spesiell '
 footer:
-  language: Language
-  usefulLinks: Useful links
-  legalities: Legalities
-  communityStats: Community stats
-  download: Get the App
+  language: Språk
+  usefulLinks: Nyttige lenker
+  legalities: Legaliteter
+  communityStats: Samfunns statistikk
+  download: Få appen
 privacy-policy:
-  header: Privacy policy
-  version: Version 2.2, 17 October 2019
+  header: Personvernregler
+  version: Versjon 2.2, 17. oktober 2019
   text1: To offer you all the benefits of our services and the associated account, it is necessary to collect certain data from you.
   text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
   text3: To create and use an account in our systems, and to inform you about necessary changes about your account per e-mail, e.g., updates or violations of our Terms of Use and Service, our community rules, or our policies, we will store your username and, if provided by you, your e-mail address. If you have connected your account via Google Plus or Facebook, we additionally store an identification key connected to your account on these services. We will not use this data for any other (e.g., marketing) purposes, unless you explicitly allowed us to do so.
@@ -613,7 +613,7 @@ privacy-policy:
   text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
 catro-notifications:
-  markAsRead: "Mark as read"
+  markAsRead: "Merk som lest"
   noFollowers: "It looks like you don't have any follower notifications."
   noComments: "It looks like you don't have any comment notifications."
   noReactions: "It looks like you don't have any reaction notifications."
@@ -632,88 +632,88 @@ clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
 next: Neste
-previous: Previous
+previous: Forrige
 media-packages:
-  title: Media-Packages
+  title: Media-Pakker
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview size
-    sm: small
+    description: Forhåndsvisning størrelse
+    sm: liten
     md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
+    lg: stor
+  theme-special: "%flavor% Tema Spesial"
+  search-results: Søkeresultater fra mediebiblioteket
   no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+  download_these_files: lagre
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Alice
+  pocketalice: Lomme Alice
   pocketgalaxy: Galaxy Jam
-  phirocode: PhiroCode
-  luna: Luna & Cat
+  phirocode: Phiro Code
+  luna: Luna og katt
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+copyright: 'Kopirett &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. Alle rettigheter reservert.'
+agree: Enig
+disagree: Uenig
 profileLoader:
-  noProfiles: There are currently no profiles.
+  noProfiles: Det er ingen profiler for tiden.
 element: 'Element'
-elements: 'Elements'
+elements: 'Elementer'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'Del'
+  error: 'Deling mislyktes'
+  success: 'Deling vellykket'
+copy: 'Kopier lenke'
+checkOutProject: 'Sjekk ut dette prosjektet:'
+community: 'Catrobat samfunn'
+back_to_app: 'Forlat samfunnet'
 category:
   recent: Nyeste prosjekter
   random: Tilfeldige prosjekter
   most_viewed: Mest Sett
   most_downloaded: Mest nedlastet
-  example: Example
+  example: Eksempel
   scratch: Scratch remixes
   recommended: Anbefalte prosjekter
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: 'Prestasjoner'
+    badge: 'ny'
   overview:
-    header: 'Achievements'
+    header: 'Prestasjoner'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Nyeste Prestasjon'
+      x_out_of_y: '%unlocked% av %total% ulåst'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Ulåst'
+      empty: "Du har ikke låst opp noen prestasjoner enda."
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Låst'
+      empty: "Du har allerede låst opp alle prestasjoner."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Gratulerer!'
+      subtitle: "Du har fått et skilt"
       confirm: "Ok"
   profile:
-    title: 'Achievements'
+    title: 'Prestasjoner'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Lærling'
+        description: 'Følg noen og last opp et prosjekt'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Håndverker'
+        description: 'Aktivt medlem i > 1 år'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Mester'
+        description: 'Aktivt medlem i > 4 år'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Stormester'
+        description: 'Aktivt medlem i > 7 år'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Initiativ'
+        description: 'Legg til ditt første profilbilde'
       verified_developer:
         title: 'Nybegynner'
         description: 'Opprett en brukerkonto'
@@ -728,8 +728,8 @@ tags:
     music:
       title: Musikk
     art:
-      title: Art
+      title: Kunst
     experimental:
-      title: Experimental
+      title: Eksperimentell
     tutorial:
-      title: Tutorial
+      title: Opplæring
