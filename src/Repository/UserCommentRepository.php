@@ -31,11 +31,26 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function findAllStudioComments(?Studio $studio): array
   {
-    return $this->findBy(['studio' => $studio]);
+    return $this->findBy(['studio' => $studio, 'parent_id' => 0]);
+  }
+
+  public function findStudioCommentsCount(?Studio $studio): int
+  {
+    return $this->count(['studio' => $studio, 'parent_id' => 0]);
   }
 
   public function findStudioCommentById(int $comment_id): ?UserComment
   {
     return $this->findOneBy(['id' => $comment_id]);
+  }
+
+  public function findCommentReplies(int $comment_id): array
+  {
+    return $this->findBy(['parent_id' => $comment_id]);
+  }
+
+  public function findCommentRepliesCount(int $comment_id): int
+  {
+    return $this->count(['parent_id' => $comment_id]);
   }
 }

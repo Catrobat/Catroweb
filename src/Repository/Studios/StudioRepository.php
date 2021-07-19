@@ -36,7 +36,7 @@ class StudioRepository extends ServiceEntityRepository
     return $qb->getQuery()->getArrayResult();
   }
 
-  public function findStudioById(int $id): ?Studio
+  public function findStudioById(string $id): ?Studio
   {
     return $this->findOneBy(['id' => $id]);
   }

@@ -66,7 +66,7 @@ class StudioManager
     return $studio;
   }
 
-  public function findStudioById(int $studio_id): ?Studio
+  public function findStudioById(string $studio_id): ?Studio
   {
     return $this->studio_repository->findStudioById($studio_id);
   }
@@ -103,6 +103,11 @@ class StudioManager
     $this->entity_manager->flush();
   }
 
+  public function findStudioActivitiesCount(?Studio $studio): int
+  {
+    return $this->studio_activity_repository->findStudioActivitiesCount($studio);
+  }
+
   public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $userRole = StudioUser::ROLE_MEMBER): ?StudioUser
   {
     if (($this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN !== $this->getStudioUserRole($admin, $studio))
@@ -126,12 +131,17 @@ class StudioManager
     return $studioUser;
   }
 
-  public function findStudioUser(User $user, Studio $studio): ?StudioUser
+  public function findStudioUser(?User $user, Studio $studio): ?StudioUser
   {
     return $this->studio_user_repository->findStudioUser($user, $studio);
   }
 
-  public function getStudioUserRole(User $user, Studio $studio): ?string
+  public function findStudioUsersCount(?Studio $studio): int
+  {
+    return $this->studio_user_repository->findStudioUsersCount($studio);
+  }
+
+  public function getStudioUserRole(?User $user, Studio $studio): ?string
   {
     $studioUser = $this->findStudioUser($user, $studio);
     if (is_null($studioUser)) {
@@ -197,7 +207,7 @@ class StudioManager
     $this->deleteActivity($studioUser->getActivity());
   }
 
-  public function addCommentToStudio(User $user, Studio $studio, string $comment_text): ?UserComment
+  public function addCommentToStudio(User $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
   {
     if (!$this->isUserInStudio($user, $studio)) {
       return null;
@@ -214,6 +224,7 @@ class StudioManager
     $studioComment->setUploadDate(new DateTime());
     $studioComment->setUsername($user->getUsername());
     $studioComment->setIsReported(false);
+    $studioComment->setParentId(intval($parent_id));
     $this->entity_manager->persist($studioComment);
     $this->entity_manager->flush();
 
@@ -238,15 +249,33 @@ class StudioManager
     return $this->user_comment_repository->findAllStudioComments($studio);
   }
 
-  public function findStudioCommentById(int $studio_id): ?UserComment
+  public function findStudioCommentById(int $comment_id): ?UserComment
   {
-    return $this->user_comment_repository->findStudioCommentById($studio_id);
+    return $this->user_comment_repository->findStudioCommentById($comment_id);
+  }
+
+  public function findStudioCommentsCount(?Studio $studio): int
+  {
+    return $this->user_comment_repository->findStudioCommentsCount($studio);
+  }
+
+  public function findCommentReplies(int $comment_id): array
+  {
+    return $this->user_comment_repository->findCommentReplies($comment_id);
+  }
+
+  public function findCommentRepliesCount(int $comment_id): int
+  {
+    return $this->user_comment_repository->findCommentRepliesCount($comment_id);
   }
 
   public function deleteCommentFromStudio(User $user, int $comment_id): void
   {
     $comment = $this->findStudioCommentById($comment_id);
     if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getId() === $comment->getUser()->getId() || StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $comment->getStudio()))) {
+      foreach ($this->user_comment_repository->findCommentReplies($comment_id) as $reply) {
+        $this->deleteActivity($reply->getActivity());
+      }
       $this->deleteActivity($comment->getActivity());
     }
   }
@@ -280,6 +309,11 @@ class StudioManager
   public function findStudioProject(Studio $studio, Program $program): ?StudioProgram
   {
     return $this->studio_project_repository->findStudioProject($studio, $program);
+  }
+
+  public function findStudioProjectsCount(?Studio $studio): int
+  {
+    return $this->studio_project_repository->findStudioProjectsCount($studio);
   }
 
   public function deleteProjectFromStudio(User $user, Studio $studio, Program $program): void

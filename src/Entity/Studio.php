@@ -15,10 +15,11 @@ class Studio
 {
   /**
    * @ORM\Id
-   * @ORM\Column(name="id", type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(name="id", type="guid")
+   * @ORM\GeneratedValue(strategy="CUSTOM")
+   * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
    */
-  protected ?int $id = null;
+  protected ?string $id = null;
 
   /**
    * @ORM\Column(name="name", type="string", nullable=false, unique=true)
@@ -60,12 +61,12 @@ class Studio
    */
   protected ?DateTime $created_on;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(?int $id): void
+  public function setId(?string $id): void
   {
     $this->id = $id;
   }

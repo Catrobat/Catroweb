@@ -220,6 +220,7 @@ class StudioManagerTest extends CatrowebTestCase
     $this->object->deleteCommentFromStudio($newUser, $userComment_2->getId());
     $this->assertNull($this->object->findStudioCommentById($userComment_2->getId()));
     $this->assertCount(0, $this->object->findAllStudioComments($this->studio));
+    $this->assertEquals(0, $this->object->findStudioCommentsCount($this->studio));
   }
 
   /**
@@ -251,5 +252,28 @@ class StudioManagerTest extends CatrowebTestCase
     $this->object->deleteProjectFromStudio($this->user, $this->studio, $project);
     $this->assertNull($this->object->findStudioProject($this->studio, $project));
     $this->assertCount(0, $this->object->findAllStudioProjects($this->studio));
+  }
+
+  /**
+   * @group integration
+   * @small
+   */
+  public function testAddRemoveStudioCommentReplies(): void
+  {
+    $studioComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');
+    $replies = ['test reply 1', 'test reply 2'];
+    $reply_1 = $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
+    $reply_2 = $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
+    $this->assertEquals(2, $this->object->findCommentRepliesCount($studioComment->getId()));
+    $i = 0;
+    foreach ($this->object->findCommentReplies($studioComment->getId()) as $reply) {
+      $this->assertInstanceOf(UserComment::class, $reply);
+      $this->assertEquals($replies[$i], $reply->getText());
+      ++$i;
+    }
+    $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
+    $this->assertEquals(0, $this->object->findCommentRepliesCount($studioComment->getId()));
+    $this->assertNull($this->object->findStudioCommentById($reply_1->getId()));
+    $this->assertNull($this->object->findStudioCommentById($reply_2->getId()));
   }
 }
