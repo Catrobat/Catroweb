@@ -27,6 +27,6 @@ class StudioUserRepository extends ServiceEntityRepository
 
   public function findStudioUsersCount(?Studio $studio): int
   {
-    return $this->count(['studio' => $studio]);
+    return $this->count(['studio' => $studio, 'status' => 'active']);
   }
 }
