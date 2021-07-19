@@ -903,3 +903,8 @@ services:
     class: App\Translation\TranslationDelegate
     arguments:
       - '@App\Translation\ItranslateApi'
+
+  App\Translation\MachineTranslationListener:
+    class: App\Translation\MachineTranslationListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }

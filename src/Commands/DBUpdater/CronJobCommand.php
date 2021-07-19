@@ -52,6 +52,8 @@ class CronJobCommand extends Command
   {
     $output->writeln('App env: '.$_ENV['APP_ENV']);
 
+    // Achievements periodical tasks
+
     $this->runCronJob(
       'Add diamond_user UserAchievements',
       ['bin/console', 'catrobat:workflow:achievement:diamond_user'],
@@ -99,6 +101,16 @@ class CronJobCommand extends Command
       ['bin/console', 'catrobat:workflow:achievement:perfect_profile'],
       ['timeout' => self::ONE_WEEK_IN_SECONDS],
       '1 year',
+      $output
+    );
+
+    // Translation database maintenance
+
+    $this->runCronJob(
+      'Delete old entries in machine translation table',
+      ['bin/console', 'catrobat:translation:trim-storage'],
+      ['timeout' => self::ONE_DAY_IN_SECONDS],
+      '1 month',
       $output
     );
 
