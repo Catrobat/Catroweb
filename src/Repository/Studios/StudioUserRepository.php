@@ -17,7 +17,7 @@ class StudioUserRepository extends ServiceEntityRepository
 
   public function findAllStudioUsers(?Studio $studio): array
   {
-    return $this->findBy(['studio' => $studio]);
+    return $this->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE]);
   }
 
   public function findStudioUser(?User $user, Studio $studio): ?StudioUser

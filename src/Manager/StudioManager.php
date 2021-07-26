@@ -175,6 +175,7 @@ class StudioManager
     if (is_null($studioUser)) {
       return null;
     }
+    $studioUser->setUpdatedOn(new DateTime('now'));
     $studioUser->setStatus($status);
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
@@ -191,6 +192,7 @@ class StudioManager
     if (is_null($studioUser)) {
       return null;
     }
+    $studioUser->setUpdatedOn(new DateTime('now'));
     $studioUser->setRole($role);
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
@@ -205,6 +207,11 @@ class StudioManager
       return;
     }
     $this->deleteActivity($studioUser->getActivity());
+  }
+
+  public function findAllStudioUsers($studio): array
+  {
+    return $this->studio_user_repository->findAllStudioUsers($studio);
   }
 
   public function addCommentToStudio(User $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
@@ -322,5 +329,10 @@ class StudioManager
     if (StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studioProject->getStudio()) || ($this->isUserInStudio($user, $studio) && $program->getUser() === $user)) {
       $this->deleteActivity($studioProject->getActivity());
     }
+  }
+
+  public function findStudioUserProjectsCount(?Studio $studio, ?User $user): int
+  {
+    return $this->studio_project_repository->findStudioUserProjectsCount($studio, $user);
   }
 }

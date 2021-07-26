@@ -15,7 +15,7 @@ const Studio = function () {
   this.removeProject = function (projectID) {
     const removeSuccess = $('#project-remove-success').val()
     const removeError = $('#project-remove-error').val()
-    const studioID = $('#std-id').val()
+    const studioID = $('#studio-id').val()
     $.ajax({
       url: '../removeStudioProject/',
       type: 'POST',
@@ -43,7 +43,7 @@ const Studio = function () {
   }
 
   this.removeComment = function (element, commentID, isReply, parentID) {
-    const studioID = $('#std-id').val()
+    const studioID = $('#studio-id').val()
     const removeError = $('#comment-remove-error').val()
     $.ajax({
       url: '../removeStudioComment/',
@@ -75,7 +75,7 @@ const Studio = function () {
   }
 
   this.postComment = function (isReply) {
-    const studioID = $('#std-id').val()
+    const studioID = $('#studio-id').val()
     const comment = isReply ? $('#add-reply').find('input').val() : $('#add-comment').find('input').val()
     const commentError = $('#comment-error').val()
     const parentID = isReply ? $('#cmtID').val() : 0
@@ -162,5 +162,81 @@ const Studio = function () {
         }
       })
     }
+  }
+
+  this.loadActivites = function () {
+    $('#activity-list').html('')
+    $.ajax({
+      type: 'GET',
+      url: '../loadActivitesList/',
+      data: { studioID: $('#studio-id').val() },
+      success: function (data, status) {
+        if (status === 'success') {
+          $('#activity-list').html(data)
+        }
+      },
+      fail: function () {
+        $('#activity-list').html('<h1>Failed to load activites</h1>')
+      }
+    })
+  }
+
+  this.loadMembers = function () {
+    $('#members-list').html('')
+    $.ajax({
+      type: 'GET',
+      url: '../loadMembersList/',
+      data: { studioID: $('#studio-id').val() },
+      success: function (data, status) {
+        if (status === 'success') {
+          $('#members-list').html(data)
+        }
+      },
+      fail: function () {
+        $('#members-list').html('<h1>Failed to load members list</h1>')
+      }
+    })
+  }
+
+  this.promoteToAdmin = function (element, userID) {
+    const promoteError = $('#promote-failed-error').val()
+    $.ajax({
+      type: 'POST',
+      url: '../promoteToAdmin/',
+      data: {
+        userID: userID,
+        studioID: $('#studio-id').val()
+      },
+      success: function (data) {
+        if (data === 200) {
+          element.parents('.admin-options').hide()
+        }
+      },
+      fail: function () {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', promoteError)
+      }
+    })
+  }
+
+  this.banUser = function (element, userID) {
+    const banError = $('#ban-failed-error').val()
+    $.ajax({
+      type: 'POST',
+      url: '../banUser/',
+      data: {
+        userID: userID,
+        studioID: $('#studio-id').val()
+      },
+      success: function (data) {
+        if (data === 200) {
+          element.parents('li').hide()
+        }
+      },
+      fail: function () {
+        // eslint-disable-next-line no-undef
+        showSnackbar('#share-snackbar', banError)
+      }
+    })
   }
 }

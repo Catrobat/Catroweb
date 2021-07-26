@@ -4,6 +4,7 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\ProgramManager;
+use App\Entity\StudioActivity;
 use App\Entity\StudioUser;
 use App\Entity\UserComment;
 use App\Entity\UserManager;
@@ -25,8 +26,6 @@ class StudioController extends AbstractController
   protected ScreenshotRepository $screenshot_repository;
   protected TranslatorInterface $translator;
   protected ParameterBagInterface $parameter_bag;
-
-  public const EXCEPTION_MSG = 'Invalid action given!';
 
   public function __construct(StudioManager $studio_manager, UserManager $user_manager,
                               ProgramManager $program_manager, ScreenshotRepository $screenshot_repository,
@@ -71,23 +70,19 @@ class StudioController extends AbstractController
    */
   public function removeProjectFromStudio(Request $request): JsonResponse
   {
-    if ($request->isXmlHttpRequest()) {
-      $project = $this->program_manager->find(trim($request->request->get('projectID')));
-      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
-      if (is_null($project) || is_null($studio) || is_null($this->getUser())) {
-        return new JsonResponse(Response::HTTP_NOT_FOUND);
-      }
-      $this->studio_manager->deleteProjectFromStudio($this->getUser(), $studio, $project);
-      $projects_count = ' ('.$this->studio_manager->findStudioProjectsCount($studio).')';
-      $activities_count = $this->studio_manager->findStudioActivitiesCount($studio);
-      if (is_null($this->studio_manager->findStudioProject($studio, $project))) {
-        return new JsonResponse(['projects_count' => $projects_count, 'activities_count' => $activities_count], Response::HTTP_OK);
-      }
-
-      return new JsonResponse([], Response::HTTP_NOT_FOUND);
+    $project = $this->program_manager->find(trim($request->request->get('projectID')));
+    $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+    if (is_null($project) || is_null($studio)) {
+      return new JsonResponse(Response::HTTP_NOT_FOUND);
+    }
+    $this->studio_manager->deleteProjectFromStudio($this->getUser(), $studio, $project);
+    $projects_count = ' ('.$this->studio_manager->findStudioProjectsCount($studio).')';
+    $activities_count = $this->studio_manager->findStudioActivitiesCount($studio);
+    if (is_null($this->studio_manager->findStudioProject($studio, $project))) {
+      return new JsonResponse(['projects_count' => $projects_count, 'activities_count' => $activities_count], Response::HTTP_OK);
     }
 
-    throw $this->createAccessDeniedException();
+    return new JsonResponse([], Response::HTTP_NOT_FOUND);
   }
 
   /**
@@ -95,30 +90,26 @@ class StudioController extends AbstractController
    */
   public function removeCommentFromStudio(Request $request): JsonResponse
   {
-    if ($request->isXmlHttpRequest()) {
-      $comment_id = intval($request->request->get('commentID'));
-      $isReply = trim($request->request->get('isReply'));
-      $parent_id = intval($request->request->get('parentID'));
-      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
-      if (!$comment_id || is_null($studio) || is_null($this->getUser())) {
-        return new JsonResponse([], Response::HTTP_NOT_FOUND);
-      }
-      $replies_count = null;
-      $this->studio_manager->deleteCommentFromStudio($this->getUser(), $comment_id);
-      if ('true' === $isReply && $parent_id > 0) {
-        $replies_count = $this->studio_manager->findCommentRepliesCount($parent_id).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
-      }
-      $comments_count = ' ('.$this->studio_manager->findStudioCommentsCount($studio).')';
-      $activities_count = $this->studio_manager->findStudioActivitiesCount($studio);
-      if (is_null($this->studio_manager->findStudioCommentById($comment_id))) {
-        return new JsonResponse(['comments_count' => $comments_count, 'activities_count' => $activities_count,
-          'replies_count' => $replies_count, ], Response::HTTP_OK);
-      }
-
+    $comment_id = intval($request->request->get('commentID'));
+    $isReply = trim($request->request->get('isReply'));
+    $parent_id = intval($request->request->get('parentID'));
+    $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+    if (!$comment_id || is_null($studio)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
+    $replies_count = null;
+    $this->studio_manager->deleteCommentFromStudio($this->getUser(), $comment_id);
+    if ('true' === $isReply && $parent_id > 0) {
+      $replies_count = $this->studio_manager->findCommentRepliesCount($parent_id).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
+    }
+    $comments_count = ' ('.$this->studio_manager->findStudioCommentsCount($studio).')';
+    $activities_count = $this->studio_manager->findStudioActivitiesCount($studio);
+    if (is_null($this->studio_manager->findStudioCommentById($comment_id))) {
+      return new JsonResponse(['comments_count' => $comments_count, 'activities_count' => $activities_count,
+        'replies_count' => $replies_count, ], Response::HTTP_OK);
+    }
 
-    throw $this->createAccessDeniedException(self::EXCEPTION_MSG);
+    return new JsonResponse([], Response::HTTP_NOT_FOUND);
   }
 
   /**
@@ -126,53 +117,49 @@ class StudioController extends AbstractController
    */
   public function postComment(Request $request): JsonResponse
   {
-    if ($request->isXmlHttpRequest()) {
-      $isReply = 'true' == $request->request->get('isReply') && intval($request->request->get('parentID')) > 0;
-      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
-      $comment_text = trim($request->request->get('comment'));
-      if ('' === $comment_text || is_null($studio) || is_null($this->getUser())) {
-        return new JsonResponse('', Response::HTTP_NOT_FOUND);
-      }
-      $replies_count = null;
-      $comments_count = null;
-      if ($isReply) {
-        $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text, intval($request->request->get('parentID')));
-        $replies_count = $this->studio_manager->findCommentRepliesCount(intval($request->request->get('parentID'))).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
-      } else {
-        $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text);
-        $comments_count = ' ('.$this->studio_manager->findStudioCommentsCount($studio).')';
-      }
-      $activities_count = $this->studio_manager->findStudioActivitiesCount($studio);
-      $avatarSrc = $comment->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
-      $result = '<div class="studio-comment">';
-      $result .= '<img class="comment-avatar" src="'.$avatarSrc.'" alt="Card image">';
-      $result .= '<div class="comment-content">';
-      $result .= '<a href="/app/user/'.$comment->getUser()->getId().'">'.$comment->getUsername().'</a>';
-      $result .= '<a class="comment-delete-button" data-toggle="tooltip" onclick="';
-      $result .= '(new Studio()).removeComment($(this), '.$comment->getId().',';
-      $result .= $isReply ? 'true,'.$comment->getParentId().')">' : 'false, 0)">';
-      $result .= '<i class="ml-2 material-icons text-danger">delete</i></a>';
-      $result .= '<p>'.$comment->getText().'</p>';
-      $result .= '<div class="comment-info">';
-      $result .= '<span class="comment-time col-6">';
-      $result .= '<span class="material-icons comment-info-icons">watch_later</span>'.$comment->getUploadDate()->format('Y-m-d').'</span>';
-      if (!$isReply) {
-        $result .= '<a class="comment-replies col-6" onclick="(new Studio()).loadReplies('.$comment->getId().')" data-toggle="modal" data-target="#comment-reply-modal">';
-        $result .= '<span class="material-icons comment-info-icons">forum</span>';
-        $result .= '<span id="info-'.$comment->getId().'">0 '.$this->translator->trans('studio.details.replies', [], 'catroweb').'</span>';
-        $result .= '</div></div></div><hr class="comment-hr">';
-      }
-      $result .= '</div></div></div>';
+    $isReply = 'true' == $request->request->get('isReply') && intval($request->request->get('parentID')) > 0;
+    $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+    $comment_text = trim($request->request->get('comment'));
+    if ('' === $comment_text) {
+      return new JsonResponse('', Response::HTTP_NOT_FOUND);
+    }
+    $replies_count = null;
+    $comments_count = null;
+    if ($isReply) {
+      $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text, intval($request->request->get('parentID')));
+      $replies_count = $this->studio_manager->findCommentRepliesCount(intval($request->request->get('parentID'))).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
+    } else {
+      $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text);
+      $comments_count = ' ('.$this->studio_manager->findStudioCommentsCount($studio).')';
+    }
+    $activities_count = $this->studio_manager->findStudioActivitiesCount($studio);
+    $avatarSrc = $comment->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
+    $result = '<div class="studio-comment">';
+    $result .= '<img class="comment-avatar" src="'.$avatarSrc.'" alt="Card image">';
+    $result .= '<div class="comment-content">';
+    $result .= '<a href="/app/user/'.$comment->getId().'">'.$comment->getUsername().'</a>';
+    $result .= '<a class="comment-delete-button" data-toggle="tooltip" onclick="';
+    $result .= '(new Studio()).removeComment($(this), '.$comment->getId().',';
+    $result .= $isReply ? 'true,'.$comment->getParentId().')">' : 'false, 0)">';
+    $result .= '<i class="ml-2 material-icons text-danger">delete</i></a>';
+    $result .= '<p>'.$comment->getText().'</p>';
+    $result .= '<div class="comment-info">';
+    $result .= '<span class="comment-time col-6">';
+    $result .= '<span class="material-icons comment-info-icons">watch_later</span>'.$comment->getUploadDate()->format('Y-m-d').'</span>';
+    if (!$isReply) {
+      $result .= '<a class="comment-replies col-6" onclick="(new Studio()).loadReplies('.$comment->getId().')" data-toggle="modal" data-target="#comment-reply-modal">';
+      $result .= '<span class="material-icons comment-info-icons">forum</span>';
+      $result .= '<span id="info-'.$comment->getId().'">0 '.$this->translator->trans('studio.details.replies', [], 'catroweb').'</span>';
+      $result .= '</div></div></div><hr class="comment-hr">';
+    }
+    $result .= '</div></div></div>';
 
-      if ($comment->getText() === $comment_text) {
-        return new JsonResponse(['comment' => $result, 'replies_count' => $replies_count,
-          'comments_count' => $comments_count, 'activities_count' => $activities_count, ], Response::HTTP_OK);
-      }
-
-      return new JsonResponse([], Response::HTTP_NOT_FOUND);
+    if ($comment->getText() === $comment_text) {
+      return new JsonResponse(['comment' => $result, 'replies_count' => $replies_count,
+        'comments_count' => $comments_count, 'activities_count' => $activities_count, ], Response::HTTP_OK);
     }
 
-    throw $this->createAccessDeniedException(self::EXCEPTION_MSG);
+    return new JsonResponse([], Response::HTTP_NOT_FOUND);
   }
 
   /**
@@ -181,29 +168,25 @@ class StudioController extends AbstractController
   public function loadCommentReplies(Request $request): Response
   {
     $rs = '';
-    if ($request->isXmlHttpRequest()) {
-      $comment_id = intval($request->query->get('commentID'));
-      $comment = $this->studio_manager->findStudioCommentById($comment_id);
-      if (is_null($comment)) {
-        return new JsonResponse([], Response::HTTP_NOT_FOUND);
-      }
-      $rs .= $this->getRenderedCommentsAndRepliesForAjax($comment, false);
-      $replies = $this->studio_manager->findCommentReplies($comment_id);
-      foreach ($replies as $reply) {
-        $rs .= $this->getRenderedCommentsAndRepliesForAjax($reply, true);
-      }
-      if (!is_null($this->getUser()) && $this->studio_manager->isUserInStudio($this->getUser(), $comment->getStudio()) && $comment->getStudio()->isAllowComments()) {
-        $rs .= '<div id="add-reply" class="add-comment-section">';
-        $rs .= '<input type="text" placeholder="'.$this->translator->trans('studio.details.type_something', [], 'catroweb').'">';
-        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).postComment(true)">';
-        $rs .= $this->translator->trans('studio.details.send_comment', [], 'catroweb');
-        $rs .= '</a></div>';
-      }
-
-      return new JsonResponse($rs, Response::HTTP_OK);
+    $comment_id = intval($request->query->get('commentID'));
+    $comment = $this->studio_manager->findStudioCommentById($comment_id);
+    if (is_null($comment)) {
+      return new JsonResponse([], Response::HTTP_NOT_FOUND);
+    }
+    $rs .= $this->getCommentsAndRepliesForAjax($comment, false);
+    $replies = $this->studio_manager->findCommentReplies($comment_id);
+    foreach ($replies as $reply) {
+      $rs .= $this->getCommentsAndRepliesForAjax($reply, true);
+    }
+    if (!is_null($this->getUser()) && $this->studio_manager->isUserInStudio($this->getUser(), $comment->getStudio())) {
+      $rs .= '<div id="add-reply" class="add-comment-section">';
+      $rs .= '<input type="text" placeholder="'.$this->translator->trans('studio.details.type_something', [], 'catroweb').'">';
+      $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).postComment(true)">';
+      $rs .= $this->translator->trans('studio.details.send_comment', [], 'catroweb');
+      $rs .= '</a></div>';
     }
 
-    throw $this->createAccessDeniedException(self::EXCEPTION_MSG);
+    return new JsonResponse($rs, Response::HTTP_OK);
   }
 
   /**
@@ -211,28 +194,24 @@ class StudioController extends AbstractController
    */
   public function uploadStudioCover(Request $request): Response
   {
-    if ($request->isXmlHttpRequest()) {
-      $studio = $this->studio_manager->findStudioById(trim($request->request->get('std-id')));
-      $headerImg = $request->files->get('header-img');
-      if (is_null($headerImg) || is_null($studio) || is_null($this->getUser())) {
-        return new JsonResponse([], Response::HTTP_NOT_FOUND);
-      }
-      $newPath = 'images/Studios/';
-      $coverPath = $this->parameter_bag->get('catrobat.pubdir').$newPath;
-      $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
-      if (!file_exists($coverPath)) {
-        $fs = new Filesystem();
-        $fs->mkdir($coverPath);
-      }
-      $headerImg->move($coverPath, $coverName);
-      $pathToSave = '/'.$newPath.$coverName;
-      $studio->setCoverPath($pathToSave);
-      $this->studio_manager->editStudio($this->getUser(), $studio);
-
-      return new JsonResponse(['new_cover' => $pathToSave], Response::HTTP_OK);
+    $studio = $this->studio_manager->findStudioById(trim($request->request->get('std-id')));
+    $headerImg = $request->files->get('header-img');
+    if (is_null($headerImg) || is_null($studio) || is_null($this->getUser())) {
+      return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
+    $newPath = 'images/Studios/';
+    $coverPath = $this->parameter_bag->get('catrobat.pubdir').$newPath;
+    $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
+    if (!file_exists($coverPath)) {
+      $fs = new Filesystem();
+      $fs->mkdir($coverPath);
+    }
+    $headerImg->move($coverPath, $coverName);
+    $pathToSave = '/'.$newPath.$coverName;
+    $studio->setCoverPath($pathToSave);
+    $this->studio_manager->editStudio($this->getUser(), $studio);
 
-    throw $this->createAccessDeniedException(self::EXCEPTION_MSG);
+    return new JsonResponse(['new_cover' => $pathToSave], Response::HTTP_OK);
   }
 
   protected function getStudioProjectsListWithImg(array $studioProjects): array
@@ -271,7 +250,7 @@ class StudioController extends AbstractController
     return $rs;
   }
 
-  protected function getRenderedCommentsAndRepliesForAjax(UserComment $comment, bool $isReply): string
+  protected function getCommentsAndRepliesForAjax(UserComment $comment, bool $isReply): string
   {
     $avatarSrc = $comment->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
     $rs = '<div class="studio-comment">';
@@ -294,5 +273,168 @@ class StudioController extends AbstractController
     }
 
     return $rs;
+  }
+
+  protected function getRenderedActivitiesForAjax(array $activities): string
+  {
+    $rs = '';
+    foreach ($activities as $activity) {
+      if (is_null($activity)) {
+        continue;
+      }
+      $rs .= '<li>';
+      $rs .= '<a href="/app/user/'.$activity->getActivity()->getUser()->getId().'">';
+      $rs .= '<span class="activity-user">';
+      $rs .= $activity->getActivity()->getUser()->getUserName();
+      $rs .= '</span>';
+      $rs .= '</a>&emsp13;';
+      $rs .= '<span class="activity-type">';
+      switch ($activity->getActivity()->getType()) {
+        case StudioActivity::TYPE_COMMENT:
+          if (intval($activity->getParentId()) > 0) {
+            $rs = '';
+            break;
+          }
+          $rs .= $this->translator->trans('studio.details.activity_add_comment', [], 'catroweb');
+          $rs .= '</span>&emsp13;';
+          $rs .= '<span class="activity-object">';
+          $rs .= $activity->getText();
+          $rs .= '</span>.&emsp13;';
+          $rs .= '<span class="activity-time">';
+          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
+          $rs .= '</span>';
+          $rs .= '</li>';
+          break;
+        case StudioActivity::TYPE_PROJECT:
+          $rs .= $this->translator->trans('studio.details.activity_add_project',
+            ['%project%' => '<a href="/app/project/'.$activity->getProgram()->getId().'" >
+            <span class="activity-object">'.$activity->getProgram()->getName().'</span></a>'], 'catroweb');
+          $rs .= '</span>.&emsp13;';
+          $rs .= '<span class="activity-time">';
+          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
+          $rs .= '</span>';
+          $rs .= '</li>';
+          break;
+        case StudioActivity::TYPE_USER:
+          if ($activity->getActivity()->getUser()->getId() === $activity->getUser()->getId()) {
+            $rs .= $this->translator->trans('studio.details.created_studio', [], 'catroweb');
+          } else {
+            $rs .= $this->translator->trans('studio.details.activity_add_user',
+              ['%user%' => '<a href="/app/user/'.$activity->getUser()->getId().'" ><span class="activity-object">'.$activity->getUser()->getUserName().'</span></a>'], 'catroweb');
+          }
+          $rs .= '</span>.&emsp13;';
+          $rs .= '<span class="activity-time">';
+          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
+          $rs .= '</span>';
+          $rs .= '</li>';
+          break;
+        default:
+          $rs .= '';
+      }
+    }
+
+    return $rs;
+  }
+
+  /**
+   * @Route("/loadMembersList/", name="load_members_list", methods={"GET"})
+   */
+  public function loadMembersList(Request $request): Response
+  {
+    if ($request->isXmlHttpRequest()) {
+      $studio = $this->studio_manager->findStudioById(trim($request->query->get('studioID')));
+      if (is_null($studio)) {
+        throw $this->createNotFoundException('Unable to find this studio');
+      }
+      $members = $this->studio_manager->findAllStudioUsers($studio);
+      $renderedList = '';
+      if (count($members) > 0) {
+        $renderedList = $this->getRenderedAMembersForAjax($members, StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($this->getUser(), $studio));
+
+        return new JsonResponse($renderedList, Response::HTTP_OK);
+      }
+
+      return new JsonResponse($renderedList, Response::HTTP_NOT_FOUND);
+    }
+
+    throw $this->createAccessDeniedException();
+  }
+
+  protected function getRenderedAMembersForAjax(array $members, bool $forAdmin): string
+  {
+    $rs = '';
+    foreach ($members as $member) {
+      $avatarSrc = $member->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
+      $rs .= '<li class="row no-gutters mb-4">';
+      $rs .= '<div class="col-2 col-sm-1 my-auto">';
+      $rs .= '<a href="/app/user/'.$member->getUser()->getId().'">';
+      $rs .= '<img class="img-fluid round" src="'.$avatarSrc.'" alt="Card image">';
+      $rs .= '</a>';
+      $rs .= '</div>';
+      $rs .= '<div class="col-4 my-auto">';
+      $rs .= '<div class="pl-3">';
+      $rs .= '<a href="/app/user/'.$member->getUser()->getId().'">'.$member->getUser()->getUsername().'</a>';
+      $rs .= '<div class="text-dark">';
+      $count = $this->studio_manager->findStudioUserProjectsCount($member->getStudio(), $member->getUser());
+      $rs .= '<span>'.strval($count).' '.$this->translator->trans('projects', [], 'catroweb').'</span>';
+      $rs .= '</div>';
+      $rs .= '</div>';
+      $rs .= '</div>';
+      $rs .= '<div class="col-6 text-right my-auto admin-options">';
+      if ($forAdmin && StudioUser::ROLE_MEMBER === $member->getRole()) {
+        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).promoteToAdmin($(this),'."'".$member->getUser()->getId()."'".')">'.$this->translator->trans('studio.details.promote_user', [], 'catroweb').'</a>';
+        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).banUser($(this),'."'".$member->getUser()->getId()."'".')" class="" data-toggle="tooltip" title="'.$this->translator->trans('studio.details.remove_user', [], 'catroweb').'">';
+        $rs .= '<i class="ml-2 material-icons text-danger">delete</i>';
+        $rs .= '</a>';
+      }
+      $rs .= '</div>';
+      $rs .= '</li>';
+    }
+
+    return $rs;
+  }
+
+  /**
+   * @Route("/promoteToAdmin/", name="promote_to_admin", methods={"POST"})
+   */
+  public function promoteToAdmin(Request $request): Response
+  {
+    if ($request->isXmlHttpRequest()) {
+      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+      $user = $this->user_manager->findUserBy(['id' => trim($request->request->get('userID'))]);
+      if (is_null($studio) || is_null($this->getUser()) || is_null($user)) {
+        return new JsonResponse(Response::HTTP_NOT_FOUND);
+      }
+      $studioUser = $this->studio_manager->changeStudioUserRole($this->getUser(), $studio, $user, StudioUser::ROLE_ADMIN);
+      if (!is_null($studioUser) && StudioUser::ROLE_ADMIN === $studioUser->getRole()) {
+        return new JsonResponse(Response::HTTP_OK);
+      }
+
+      return new JsonResponse(Response::HTTP_NOT_FOUND);
+    }
+
+    throw $this->createAccessDeniedException();
+  }
+
+  /**
+   * @Route("/banUser/", name="ban_user", methods={"POST"})
+   */
+  public function banUser(Request $request): Response
+  {
+    if ($request->isXmlHttpRequest()) {
+      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+      $user = $this->user_manager->findUserBy(['id' => trim($request->request->get('userID'))]);
+      if (is_null($studio) || is_null($this->getUser()) || is_null($user)) {
+        return new JsonResponse(Response::HTTP_NOT_FOUND);
+      }
+      $studioUser = $this->studio_manager->changeStudioUserStatus($this->getUser(), $studio, $user, StudioUser::STATUS_BANNED);
+      if (!is_null($studioUser) && StudioUser::STATUS_BANNED === $studioUser->getStatus()) {
+        return new JsonResponse(Response::HTTP_OK);
+      }
+
+      return new JsonResponse(Response::HTTP_NOT_FOUND);
+    }
+
+    throw $this->createAccessDeniedException();
   }
 }
