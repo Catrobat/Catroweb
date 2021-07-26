@@ -7,7 +7,6 @@ use App\Entity\Studio;
 use App\Entity\StudioActivity;
 use App\Entity\StudioProgram;
 use App\Entity\StudioUser;
-use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\Studios\StudioActivityRepository;
 use App\Repository\Studios\StudioProgramRepository;
@@ -16,6 +15,7 @@ use App\Repository\Studios\StudioUserRepository;
 use App\Repository\UserCommentRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class StudioManager
 {
@@ -38,7 +38,7 @@ class StudioManager
     $this->user_comment_repository = $user_comment_repository;
   }
 
-  public function createStudio(User $user, string $studioName, string $studioDescription, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): ?Studio
+  public function createStudio(UserInterface $user, string $studioName, string $studioDescription, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): ?Studio
   {
     $studio = new Studio();
     $studio->setName($studioName);
@@ -56,7 +56,7 @@ class StudioManager
     return $studio;
   }
 
-  public function editStudio(User $user, Studio $studio): studio
+  public function editStudio(UserInterface $user, Studio $studio): studio
   {
     if (StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studio)) {
       $this->entity_manager->persist($studio);
@@ -76,7 +76,7 @@ class StudioManager
     return $this->studio_repository->findAllStudiosWithUsersAndProjectsCount();
   }
 
-  public function deleteStudio(Studio $studio, User $user): void
+  public function deleteStudio(Studio $studio, UserInterface $user): void
   {
     if (StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studio)) {
       $this->entity_manager->remove($studio);
@@ -84,11 +84,12 @@ class StudioManager
     }
   }
 
-  protected function createActivity(User $user, Studio $studio, string $type): ?StudioActivity
+  protected function createActivity(UserInterface $user, Studio $studio, string $type): ?StudioActivity
   {
     $activity = new StudioActivity();
     $activity->setStudio($studio);
     $activity->setType($type);
+    /* @phpstan-ignore-next-line */
     $activity->setUser($user);
     $activity->setCreatedOn(new DateTime());
     $this->entity_manager->persist($activity);
@@ -118,7 +119,7 @@ class StudioManager
     return $this->studio_activity_repository->findStudioActivitiesCount($studio);
   }
 
-  public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $userRole = StudioUser::ROLE_MEMBER): ?StudioUser
+  public function addUserToStudio(UserInterface $admin, Studio $studio, UserInterface $newUser, string $userRole = StudioUser::ROLE_MEMBER): ?StudioUser
   {
     if (($this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN !== $this->getStudioUserRole($admin, $studio))
       || (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN !== $userRole)) {
@@ -131,6 +132,7 @@ class StudioManager
     $studioUser = new StudioUser();
     $studioUser->setStudio($studio);
     $studioUser->setActivity($activity);
+    /* @phpstan-ignore-next-line */
     $studioUser->setUser($newUser);
     $studioUser->setRole($userRole);
     $studioUser->setStatus(StudioUser::STATUS_ACTIVE);
@@ -141,7 +143,7 @@ class StudioManager
     return $studioUser;
   }
 
-  public function findStudioUser(?User $user, Studio $studio): ?StudioUser
+  public function findStudioUser(?UserInterface $user, Studio $studio): ?StudioUser
   {
     return $this->studio_user_repository->findStudioUser($user, $studio);
   }
@@ -151,7 +153,7 @@ class StudioManager
     return $this->studio_user_repository->findStudioUsersCount($studio);
   }
 
-  public function getStudioUserRole(?User $user, Studio $studio): ?string
+  public function getStudioUserRole(?UserInterface $user, Studio $studio): ?string
   {
     $studioUser = $this->findStudioUser($user, $studio);
     if (is_null($studioUser)) {
@@ -161,7 +163,7 @@ class StudioManager
     return $studioUser->getRole();
   }
 
-  public function getStudioUserStatus(User $user, Studio $studio): ?string
+  public function getStudioUserStatus(UserInterface $user, Studio $studio): ?string
   {
     $studioUser = $this->findStudioUser($user, $studio);
     if (is_null($studioUser)) {
@@ -171,12 +173,12 @@ class StudioManager
     return $studioUser->getStatus();
   }
 
-  public function isUserInStudio(User $user, Studio $studio): bool
+  public function isUserInStudio(UserInterface $user, Studio $studio): bool
   {
     return (is_null($this->findStudioUser($user, $studio))) ? false : true;
   }
 
-  public function changeStudioUserStatus(User $admin, Studio $studio, User $user, string $status): ?StudioUser
+  public function changeStudioUserStatus(UserInterface $admin, Studio $studio, UserInterface $user, string $status): ?StudioUser
   {
     if (!$this->isUserInStudio($admin, $studio) || StudioUser::ROLE_ADMIN !== $this->getStudioUserRole($admin, $studio)) {
       return null;
@@ -185,6 +187,7 @@ class StudioManager
     if (is_null($studioUser)) {
       return null;
     }
+    $studioUser->setUpdatedOn(new DateTime('now'));
     $studioUser->setStatus($status);
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
@@ -192,7 +195,7 @@ class StudioManager
     return $studioUser;
   }
 
-  public function changeStudioUserRole(User $admin, Studio $studio, User $user, string $role): ?StudioUser
+  public function changeStudioUserRole(UserInterface $admin, Studio $studio, UserInterface $user, string $role): ?StudioUser
   {
     if (!$this->isUserInStudio($admin, $studio) || StudioUser::ROLE_ADMIN !== $this->getStudioUserRole($admin, $studio)) {
       return null;
@@ -201,6 +204,7 @@ class StudioManager
     if (is_null($studioUser)) {
       return null;
     }
+    $studioUser->setUpdatedOn(new DateTime('now'));
     $studioUser->setRole($role);
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
@@ -208,7 +212,7 @@ class StudioManager
     return $studioUser;
   }
 
-  public function deleteUserFromStudio(User $admin, Studio $studio, User $user): void
+  public function deleteUserFromStudio(UserInterface $admin, Studio $studio, UserInterface $user): void
   {
     $studioUser = $this->findStudioUser($user, $studio);
     if (StudioUser::ROLE_ADMIN !== $this->getStudioUserRole($admin, $studio) || is_null($studioUser)) {
@@ -217,7 +221,12 @@ class StudioManager
     $this->deleteActivity($studioUser->getActivity());
   }
 
-  public function addCommentToStudio(User $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
+  public function findAllStudioUsers(?Studio $studio): array
+  {
+    return $this->studio_user_repository->findAllStudioUsers($studio);
+  }
+
+  public function addCommentToStudio(UserInterface $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
   {
     if (!$this->isUserInStudio($user, $studio)) {
       return null;
@@ -230,6 +239,7 @@ class StudioManager
     $studioComment->setStudio($this->findStudioById($studio->getId()));
     $studioComment->setActivity($activity);
     $studioComment->setText($comment_text);
+    /* @phpstan-ignore-next-line */
     $studioComment->setUser($user);
     $studioComment->setUploadDate(new DateTime());
     $studioComment->setUsername($user->getUsername());
@@ -241,10 +251,10 @@ class StudioManager
     return $studioComment;
   }
 
-  public function editStudioComment(User $user, int $comment_id, string $comment_text): ?UserComment
+  public function editStudioComment(UserInterface $user, int $comment_id, string $comment_text): ?UserComment
   {
     $studioComment = $this->findStudioCommentById($comment_id);
-    if (!$this->isUserInStudio($user, $studioComment->getStudio()) || $user->getId() !== $studioComment->getUser()->getId()) {
+    if (!$this->isUserInStudio($user, $studioComment->getStudio()) || $user->getUsername() !== $studioComment->getUser()->getUsername()) {
       return null;
     }
     $studioComment->setText($comment_text);
@@ -279,10 +289,10 @@ class StudioManager
     return $this->user_comment_repository->findCommentRepliesCount($comment_id);
   }
 
-  public function deleteCommentFromStudio(User $user, int $comment_id): void
+  public function deleteCommentFromStudio(UserInterface $user, int $comment_id): void
   {
     $comment = $this->findStudioCommentById($comment_id);
-    if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getId() === $comment->getUser()->getId() || StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $comment->getStudio()))) {
+    if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getUsername() === $comment->getUser()->getUsername() || StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $comment->getStudio()))) {
       foreach ($this->user_comment_repository->findCommentReplies($comment_id) as $reply) {
         $this->deleteActivity($reply->getActivity());
       }
@@ -290,7 +300,7 @@ class StudioManager
     }
   }
 
-  public function addProjectToStudio(User $user, Studio $studio, Program $project): ?StudioProgram
+  public function addProjectToStudio(UserInterface $user, Studio $studio, Program $project): ?StudioProgram
   {
     if (!$this->isUserInStudio($user, $studio)) {
       return null;
@@ -302,6 +312,7 @@ class StudioManager
     $studioProject = new StudioProgram();
     $studioProject->setStudio($studio);
     $studioProject->setActivity($activity);
+    /* @phpstan-ignore-next-line */
     $studioProject->setUser($user);
     $studioProject->setProgram($project);
     $studioProject->setCreatedOn(new DateTime());
@@ -326,11 +337,16 @@ class StudioManager
     return $this->studio_project_repository->findStudioProjectsCount($studio);
   }
 
-  public function deleteProjectFromStudio(User $user, Studio $studio, Program $program): void
+  public function deleteProjectFromStudio(UserInterface $user, Studio $studio, Program $program): void
   {
     $studioProject = $this->findStudioProject($studio, $program);
     if (StudioUser::ROLE_ADMIN === $this->getStudioUserRole($user, $studioProject->getStudio()) || ($this->isUserInStudio($user, $studio) && $program->getUser() === $user)) {
       $this->deleteActivity($studioProject->getActivity());
     }
+  }
+
+  public function findStudioUserProjectsCount(?Studio $studio, ?UserInterface $user): int
+  {
+    return $this->studio_project_repository->findStudioUserProjectsCount($studio, $user);
   }
 }

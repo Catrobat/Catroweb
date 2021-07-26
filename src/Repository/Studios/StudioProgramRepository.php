@@ -7,6 +7,7 @@ use App\Entity\Studio;
 use App\Entity\StudioProgram;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class StudioProgramRepository extends ServiceEntityRepository
 {
@@ -28,5 +29,10 @@ class StudioProgramRepository extends ServiceEntityRepository
   public function findStudioProjectsCount(?Studio $studio): int
   {
     return $this->count(['studio' => $studio]);
+  }
+
+  public function findStudioUserProjectsCount(?Studio $studio, ?UserInterface $user): int
+  {
+    return $this->count(['studio' => $studio, 'user' => $user]);
   }
 }

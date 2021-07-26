@@ -808,3 +808,8 @@ studio:
     activity_add_comment: 'left a comment'
     activity_add_project: 'added new project %project% to the studio'
     activity_add_user: 'added new user %user% to the studio'
+    members: 'Studio Members'
+    remove_user: 'remove from the studio'
+    promote_user: 'promote to admin'
+    promote_failed: 'Failed to promote this user to admin'
+    ban_user_failed: 'Failed to ban user from studio!'
