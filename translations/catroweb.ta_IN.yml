@@ -89,7 +89,7 @@ programs:
     title: காட்ரோபாட்டின் %theme% -இற்கு நல்வரவு
     title_mindstorms: மைண்ட்ஸ்டார்ம்ஸ் EV3 மற்றும் NXT க்கான கேட்ரோபாட்டின் தளத்திற்கு வருக
     subtitle: கதைகள், விளையாட்டுகள், மற்றும் பலவற்றை உருவாக்குங்கள்...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: உங்கள் டி-ஷர்ட்கள், பைகள், பேன்ட் அல்லது ஸ்மார்ட்போன் வழக்கில் உங்கள் சொந்த வடிவங்களை தைக்கவும்!
     subtitle_mindstorms: உங்கள் லெகோ மைண்ட்ஸ்டார்ம்ஸ் EV3 மற்றும் NXT ரோபோக்களுடன் உங்கள் சொந்த திட்டங்களை உருவாக்கவும்
     download: செயலியை பதிவிறக்கவும்
     statistics: மேற்கொண்ட புள்ளிவிவரங்கள்
@@ -349,7 +349,7 @@ termsOfUse:
 search:
   dotdotdot: தேடுதல்...
   search: தேடல்
-  inMediaLib: Search in media library
+  inMediaLib: ஊடக நூலகத்தில் தேடுங்கள்
   results: தேடுதலின் முடிவு
   resultcount: உங்கள் தேடல் %count% முடிவுகளை அளித்தது
   fail: தயவுசெய்து ஒரு தேடல் காலத்தையாவது உள்ளிடவும்
@@ -451,27 +451,27 @@ failure:
   upload: உங்கள் app இன் பதிவேற்றத்தின் போது பிழை ஏற்பட்டது.
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
-    usernameTooShort: 'Username too short'
-    usernameTooLong: 'Username too long'
-    usernameEmpty: 'Username cannot be empty'
-    usernameAlreadyInUse: 'Username already in use'
-    usernameInvalid: 'Username invalid'
-    passwordMissing: 'Password missing'
-    passwordEmpty: 'Password cannot be empty'
-    passwordTooShort: 'Password too short'
-    passwordTooLong: 'Password too long'
-    passwordInvalidChars: 'Password contains invalid chars'
-    usernameContainsEmail: "Username must not contain an email address"
-    countryCodeInvalid: "Country code invalid"
+    emailMissing: 'மின்னஞ்சல் காணவில்லை'
+    emailEmpty: 'மின்னஞ்சல் காலியாக இருக்க முடியாது'
+    emailInvalid: 'மின்னஞ்சல் தவறானது'
+    emailAlreadyInUse: 'மின்னஞ்சல் ஏற்கனவே பயன்பாட்டில் உள்ளது'
+    usernameMissing: 'பயனர்பெயர் இல்லை'
+    usernameTooShort: 'பயனர்பெயர் மிகக் குறைவு'
+    usernameTooLong: 'பயனர்பெயர் மிக நீளமானது'
+    usernameEmpty: 'பயனர்பெயர் காலியாக இருக்க முடியாது'
+    usernameAlreadyInUse: 'பயனர்பெயர் ஏற்கனவே பயன்பாட்டில் உள்ளது'
+    usernameInvalid: 'பயனர்பெயர் தவறானது'
+    passwordMissing: 'கடவுச்சொல் இல்லை'
+    passwordEmpty: 'கடவுச்சொல் காலியாக இருக்கக்கூடாது'
+    passwordTooShort: 'கடவுச்சொல் மிகக் குறைவு'
+    passwordTooLong: 'கடவுச்சொல் மிக நீளமானது'
+    passwordInvalidChars: 'கடவுச்சொல் தவறான எழுத்துக்களைக் கொண்டுள்ளது'
+    usernameContainsEmail: "பயனர்பெயரில் மின்னஞ்சல் முகவரி இருக்கக்கூடாது"
+    countryCodeInvalid: "நாட்டின் குறியீடு தவறானது"
   projectsPost:
-    invalid_checksum: 'Invalid checksum. Try uploading again!'
-    upload_error: 'Error while uploading. Try uploading again!'
-    creating_error: 'Error while creating project entity. Try uploading again!'
+    invalid_checksum: 'தவறான செக்சம்.  மீண்டும் பதிவேற்ற முயற்சிக்கவும்!'
+    upload_error: 'பதிவேற்றும்போது பிழை.  மீண்டும் பதிவேற்ற முயற்சிக்கவும்!'
+    creating_error: 'திட்ட நிறுவனத்தை உருவாக்கும்போது பிழை.  மீண்டும் பதிவேற்ற முயற்சிக்கவும்!'
 #languages and countries
 language:
   arabic: அரபு
@@ -555,7 +555,7 @@ pmd:
   failed:
     text: திட்ட பதிவேற்றம் தோல்வியுற்றது.
 codeview:
-  title: 'Code view'
+  title: 'குறியீடு பார்வை'
   showCode: 'குறியீட்டை காண்பிக்கவும்'
   hideCode: 'குறியீட்டை மறைக்கவும்'
   showStatistics: 'குறியீடு புள்ளிவிவரங்களைக் காட்டவும்'
@@ -571,8 +571,8 @@ codeview:
   sounds: 'ஒலிகள்'
   globals: 'உலகளவு'
   locals: 'உள்ளூர்'
-  globalVariables: 'Global variables'
-  localVariables: 'Local variables'
+  globalVariables: 'உலகளாவிய மாறிகள்'
+  localVariables: 'உள்ளூர் மாறிகள்'
   eventBricks: 'நிகழ்வு செங்கற்கள்'
   controlBricks: 'கட்டுப்பாட்டு செங்கற்கள்'
   motionBricks: 'மோஷன் செங்கற்கள்'
@@ -582,9 +582,9 @@ codeview:
   dataBricks: 'தகவல் செங்கற்கள்'
   specialBricks: 'சிறப்பு செங்கற்கள்'
 codeStatistics:
-  title: "Code statistics"
-  error: "Code statistics can't be displayed."
-  general: 'General'
+  title: "குறியீடு புள்ளிவிவரங்கள்"
+  error: "குறியீடு புள்ளிவிவரங்களைக் காட்ட முடியாது."
+  general: 'பொது'
   bricks: 'செங்கல்'
   eventBricks: 'நிகழ்வு'
   controlBricks: 'கட்டுப்பாடு'
@@ -593,8 +593,8 @@ codeStatistics:
   looksBricks: 'தோற்றம்'
   penBricks: 'பேனா'
   dataBricks: 'தகவல்கள்'
-  deviceBricks: 'Device'
-  specialBricks: 'Special'
+  deviceBricks: 'சாதனம்'
+  specialBricks: 'சிறப்பு'
 footer:
   language: மொழி
   usefulLinks: பயனுள்ள இணைப்புகள்
@@ -617,10 +617,10 @@ privacy-policy:
   disagree-text: ஒப்புதல் இல்லாமல், எங்களால் ஒரு கணக்கை உருவாக்க முடியாது, ஆனால் முக்கிய அம்சங்கள் இன்னும் அணுகக்கூடியவை.
 catro-notifications:
   markAsRead: "படித்ததாகக் குறியிடு"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noFollowers: "உங்களிடம் பின்தொடர்பவர் அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது."
+  noComments: "உங்களிடம் கருத்து அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது."
+  noReactions: "உங்களிடம் எந்த எதிர்வினை அறிவிப்புகளும் இல்லை என்று தெரிகிறது."
+  noRemixes: "உங்களிடம் ரீமிக்ஸ் அறிவிப்புகள் எதுவும் இல்லை என்று தெரிகிறது."
   comment:
     message: 'பயனர் %user_link% உங்கள் %program_link% திட்டத்தில் கருத்து தெரிவித்தார்.'
   like:
@@ -645,9 +645,9 @@ media-packages:
     md: நடுத்தரம்
     lg: பெரிய
   theme-special: "%flavor% சிறப்பு தீம்"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+  search-results: ஊடக நூலக தேடல் முடிவுகள்
+  no-results: உங்கள் தேடல் 0 முடிவுகளை அளித்தது.  ஆங்கில தேடல் சொற்களை மட்டும் பயன்படுத்தவும்.
+  download_these_files: சேமி
 flavor:
   pocketcode: பாக்கெட் கோட்
   pocketalice: பாக்கெட் ஆலிஸ்
@@ -660,32 +660,32 @@ agree: ஏற்கிறேன்
 disagree: மறுக்கிறேன்
 profileLoader:
   noProfiles: தற்போது சுயவிவரங்கள் எதுவும் இல்லை.
-element: 'Element'
-elements: 'Elements'
+element: 'உறுப்பு'
+elements: 'உறுப்புகள்'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
+  text: 'பகிர்'
+  error: 'பகிர்வு தோல்வியடைந்தது'
+  success: 'பகிர்வு வெற்றியடைந்தது'
+copy: 'இணைப்பை நகலெடு'
+checkOutProject: 'இந்த திட்டத்தைப் பாருங்கள்:'
 community: 'கேட்ரோபாட் சமூகம்'
-back_to_app: 'Exit community'
+back_to_app: 'சமூகத்திலிருந்து வெளியேறு'
 category:
   recent: புதிய திட்டங்கள்
   random: தொடர்பின்றி எடுக்கப்பட்ட திட்டங்கள்
   most_viewed: அதிகமாக பார்க்கபட்டது
   most_downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
-  example: Example
+  example: உதாரணம்
   scratch: Scratch மறுகலவைகள்
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
 achievements:
   sidebar:
-    title: 'Achievements'
+    title: 'சாதனைகள்'
     badge: 'புதிய'
   overview:
-    header: 'Achievements'
+    header: 'சாதனைகள்'
     most_recent_achievement:
-      title: 'Newest Achievement'
+      title: 'புதிய சாதனை'
       x_out_of_y: '%unlocked% out of %total% unlocked'
     tab_unlocked:
       title: 'Unlocked'
@@ -699,7 +699,7 @@ achievements:
       subtitle: "You've earned a badge"
       confirm: "ஆம்"
   profile:
-    title: 'Achievements'
+    title: 'சாதனைகள்'
   achievement:
     type:
       bronze_user:
