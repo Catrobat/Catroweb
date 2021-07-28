@@ -35,11 +35,11 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
     $this->parameter_bag = $parameter_bag;
 
-    /** @var string $dir Directory where media package files are stored */
-    $dir = $parameter_bag->get('catrobat.mediapackage.dir');
+    /** Directory where media package files are stored */
+    $dir = (string) $parameter_bag->get('catrobat.mediapackage.dir');
 
-    /** @var string $path Path where files in $dir can be accessed via web */
-    $path = $parameter_bag->get('catrobat.mediapackage.path');
+    /** Path where files in $dir can be accessed via web */
+    $path = (string) $parameter_bag->get('catrobat.mediapackage.path');
     $thumb_dir = $dir.'thumbs/';
     if (!is_dir($thumb_dir)) {
       mkdir($thumb_dir);

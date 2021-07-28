@@ -67,7 +67,7 @@ class MigrateRemixGraphsCommand extends Command
     $this->program_manager = $program_manager;
     $this->remix_manager = $remix_manager;
     $this->entity_manager = $entity_manager;
-    $this->app_root_dir = $parameter_bag->get('kernel.project_dir');
+    $this->app_root_dir = (string) $parameter_bag->get('kernel.project_dir');
     $this->output = null;
     $this->migration_file_lock = null;
     $this->file_extractor = $file_extractor;
