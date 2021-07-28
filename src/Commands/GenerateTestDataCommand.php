@@ -34,8 +34,8 @@ class GenerateTestDataCommand extends Command
   {
     parent::__construct();
     $this->filesystem = $filesystem;
-    $this->source = $parameter_bag->get('catrobat.test.directory.source');
-    $this->target_directory = realpath($parameter_bag->get('catrobat.test.directory.target')).'/';
+    $this->source = (string) $parameter_bag->get('catrobat.test.directory.source');
+    $this->target_directory = realpath((string) $parameter_bag->get('catrobat.test.directory.target')).'/';
     $this->extractor = $extractor;
     $this->compressor = $compressor;
   }

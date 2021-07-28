@@ -37,7 +37,7 @@ class Tag
   protected Collection $programs;
 
   /**
-   * @ORM\Column(name="internal_title", type="string", nullable=false, unique=true)
+   * @ORM\Column(name="internal_title", type="string", nullable=false)
    */
   protected string $internal_title = '';
 

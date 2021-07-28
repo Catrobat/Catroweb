@@ -35,7 +35,7 @@ class CleanCompressedProjectsCommand extends Command
     $this->extracted_file_repository = $extracted_file_repository;
     $this->program_manager = $program_manager;
     $this->entity_manager = $entity_manager;
-    $this->compressed_path = $parameter_bag->get('catrobat.file.storage.dir');
+    $this->compressed_path = (string) $parameter_bag->get('catrobat.file.storage.dir');
     if (!$this->compressed_path) {
       throw new Exception('Invalid extract path given');
     }

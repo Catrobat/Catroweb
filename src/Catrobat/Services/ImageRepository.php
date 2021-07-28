@@ -25,11 +25,11 @@ class ImageRepository
 
   public function __construct(ParameterBagInterface $parameter_bag, ?UrlHelper $urlHelper = null)
   {
-    $example_dir = $parameter_bag->get('catrobat.exampleimage.dir');
-    $example_path = $parameter_bag->get('catrobat.exampleimage.path');
+    $example_dir = (string) $parameter_bag->get('catrobat.exampleimage.dir');
+    $example_path = (string) $parameter_bag->get('catrobat.exampleimage.path');
 
-    $featured_dir = $parameter_bag->get('catrobat.featuredimage.dir');
-    $featured_path = $parameter_bag->get('catrobat.featuredimage.path');
+    $featured_dir = (string) $parameter_bag->get('catrobat.featuredimage.dir');
+    $featured_path = (string) $parameter_bag->get('catrobat.featuredimage.path');
 
     Utils::verifyDirectoryExists($example_dir);
     Utils::verifyDirectoryExists($featured_dir);

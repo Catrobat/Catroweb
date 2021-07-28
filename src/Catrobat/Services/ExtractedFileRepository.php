@@ -30,9 +30,9 @@ class ExtractedFileRepository
                               ProgramManager $program_manager, ProgramFileRepository $program_file_repo,
                               LoggerInterface $logger)
   {
-    $local_extracted_path = $parameter_bag->get('catrobat.file.extract.dir');
-    $web_extracted_path = $parameter_bag->get('catrobat.file.extract.path');
-    $local_storage_path = $parameter_bag->get('catrobat.file.storage.dir');
+    $local_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.dir');
+    $web_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.path');
+    $local_storage_path = (string) $parameter_bag->get('catrobat.file.storage.dir');
 
     Utils::verifyDirectoryExists($local_extracted_path);
     Utils::verifyDirectoryExists($local_storage_path);

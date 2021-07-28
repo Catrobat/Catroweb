@@ -36,7 +36,7 @@ class CSVUserSimilaritiesCommand extends Command
     $this->program_like_repository = $program_like_repository;
     $this->entity_manager = $entity_manager;
     $this->user_manager = $user_manager;
-    $this->app_root_dir = $parameter_bag->get('kernel.project_dir');
+    $this->app_root_dir = (string) $parameter_bag->get('kernel.project_dir');
   }
 
   protected function configure(): void
