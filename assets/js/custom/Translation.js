@@ -1,42 +1,22 @@
 /* eslint-env jquery */
 
 // eslint-disable-next-line no-unused-vars
-function Translation (translatedByLine) {
-  const providerMap = {
-    itranslate: 'iTranslate'
-  }
-  let displayLanguageMap = {}
-  let translatedByLineMap = {}
-  let targetLanguage = null
-
-  $(document).ready(function () {
-    setTargetLanguage()
-    getDisplayLanguageMap()
-    splitTranslatedByLine()
-  })
-
-  $(document).on('click', '.comment-translation-button', function () {
-    const commentId = $(this).attr('id').substring('comment-translation-button-'.length)
-
-    $(this).hide()
-
-    if (isTranslationNotAvailable(commentId)) {
-      $('#comment-translation-loading-spinner-' + commentId).show()
-      translateComment(commentId)
-    } else {
-      openTranslatedComment(commentId)
+class Translation {
+  constructor (translatedByLine) {
+    this.translatedByLine = translatedByLine
+    this.providerMap = {
+      itranslate: 'iTranslate'
     }
-  })
+    this.displayLanguageMap = {}
+    this.translatedByLineMap = {}
+    this.targetLanguage = null
 
-  $(document).on('click', '.remove-comment-translation-button', function () {
-    const commentId = $(this).attr('id').substring('remove-comment-translation-button-'.length)
-    $(this).hide()
-    $('#comment-translation-button-' + commentId).show()
-    $('#comment-translation-wrapper-' + commentId).slideUp()
-    $('#comment-text-wrapper-' + commentId).slideDown()
-  })
+    this.setTargetLanguage()
+    this.setDisplayLanguageMap()
+    this.splitTranslatedByLine()
+  }
 
-  function setTargetLanguage () {
+  setTargetLanguage () {
     const decodedCookie = document.cookie
       .split(';')
       .map(v => v.split('='))
@@ -46,95 +26,76 @@ function Translation (translatedByLine) {
       }, {})
 
     if (decodedCookie.hl !== undefined) {
-      targetLanguage = decodedCookie.hl.replace('_', '-')
+      this.targetLanguage = decodedCookie.hl.replace('_', '-')
     } else {
-      targetLanguage = document.documentElement.lang
+      this.targetLanguage = document.documentElement.lang
     }
   }
 
-  function getDisplayLanguageMap () {
+  setDisplayLanguageMap () {
+    const self = this
     $.ajax({
       url: '../languages',
       type: 'get',
       success: function (data) {
-        displayLanguageMap = data
+        self.displayLanguageMap = data
       }
     })
   }
 
-  function splitTranslatedByLine () {
+  splitTranslatedByLine () {
+    const self = this
     let firstLanguage = '%sourceLanguage%'
     let secondLanguage = '%targetLanguage%'
-    if (!isSourceLanguageFirst()) {
+    if (!this.isSourceLanguageFirst()) {
       firstLanguage = '%targetLanguage%'
       secondLanguage = '%sourceLanguage%'
     }
 
-    translatedByLineMap = {
-      before: translatedByLine.substring(0, translatedByLine.indexOf(firstLanguage)),
-      between: translatedByLine.substring(translatedByLine.indexOf(firstLanguage) + firstLanguage.length, translatedByLine.indexOf(secondLanguage)),
-      after: translatedByLine.substring(translatedByLine.indexOf(secondLanguage) + secondLanguage.length)
+    self.translatedByLineMap = {
+      before: self.translatedByLine.substring(0, self.translatedByLine.indexOf(firstLanguage)),
+      between: self.translatedByLine.substring(self.translatedByLine.indexOf(firstLanguage) + firstLanguage.length, self.translatedByLine.indexOf(secondLanguage)),
+      after: self.translatedByLine.substring(self.translatedByLine.indexOf(secondLanguage) + secondLanguage.length)
     }
   }
 
-  function isTranslationNotAvailable (commentId) {
-    return $('#comment-text-translation-' + commentId).attr('lang') !== targetLanguage
+  isSourceLanguageFirst () {
+    return this.translatedByLine.indexOf('%sourceLanguage%') < this.translatedByLine.indexOf('%targetLanguage%')
   }
 
-  function isSourceLanguageFirst () {
-    return translatedByLine.indexOf('%sourceLanguage%') < translatedByLine.indexOf('%targetLanguage%')
+  isTranslationNotAvailable (elementId) {
+    return $(elementId).attr('lang') !== this.targetLanguage
   }
 
-  function openGoogleTranslatePage (commentId) {
-    const text = document.getElementById('comment-text-' + commentId).innerText
+  openGoogleTranslatePage (text) {
     window.open(
-      'https://translate.google.com/?q=' + encodeURIComponent(text) + '&sl=auto&tl=' + targetLanguage,
+      'https://translate.google.com/?q=' + encodeURIComponent(text) + '&sl=auto&tl=' + this.targetLanguage,
       '_self'
     )
   }
 
-  function setTranslatedCommentData (commentId, data) {
-    $('#comment-text-translation-' + commentId).text(data.translation)
-    $('#comment-text-translation-' + commentId).attr('lang', data.target_language)
+  setTranslationCredit (data, byLineElements) {
+    $(byLineElements.before).text(this.translatedByLineMap.before.replace('%provider%', this.providerMap[data.provider]))
+    $(byLineElements.between).text(this.translatedByLineMap.between.replace('%provider%', this.providerMap[data.provider]))
+    $(byLineElements.after).text(this.translatedByLineMap.after.replace('%provider%', this.providerMap[data.provider]))
 
-    $('#comment-translation-before-languages-' + commentId).text(translatedByLineMap.before.replace('%provider%', providerMap[data.provider]))
-    $('#comment-translation-between-languages-' + commentId).text(translatedByLineMap.between.replace('%provider%', providerMap[data.provider]))
-    $('#comment-translation-after-languages-' + commentId).text(translatedByLineMap.after.replace('%provider%', providerMap[data.provider]))
-
-    if (isSourceLanguageFirst()) {
-      $('#comment-translation-first-language-' + commentId).text(displayLanguageMap[data.source_language])
-      $('#comment-translation-second-language-' + commentId).text(displayLanguageMap[data.target_language])
+    if (this.isSourceLanguageFirst()) {
+      $(byLineElements.firstLanguage).text(this.displayLanguageMap[data.source_language])
+      $(byLineElements.secondLanguage).text(this.displayLanguageMap[data.target_language])
     } else {
-      $('#comment-translation-first-language-' + commentId).text(displayLanguageMap[data.target_language])
-      $('#comment-translation-second-language-' + commentId).text(displayLanguageMap[data.source_language])
+      $(byLineElements.secondLanguage).text(this.displayLanguageMap[data.target_language])
+      $(byLineElements.firstLanguage).text(this.displayLanguageMap[data.source_language])
     }
   }
+}
 
-  function openTranslatedComment (commentId) {
-    $('#comment-translation-loading-spinner-' + commentId).hide()
-    $('#remove-comment-translation-button-' + commentId).show()
-    $('#comment-translation-wrapper-' + commentId).slideDown()
-    $('#comment-text-wrapper-' + commentId).slideUp()
-  }
-
-  function commentNotTranslated (commentId) {
-    $('#comment-translation-loading-spinner-' + commentId).hide()
-    $('#comment-translation-button-' + commentId).show()
-    openGoogleTranslatePage(commentId)
-  }
-
-  function translateComment (commentId) {
-    $.ajax({
-      url: '../translate/comment/' + commentId,
-      type: 'get',
-      data: { target_language: targetLanguage },
-      success: function (data) {
-        setTranslatedCommentData(commentId, data)
-        openTranslatedComment(commentId)
-      },
-      error: function () {
-        commentNotTranslated(commentId)
-      }
-    })
+// eslint-disable-next-line no-unused-vars
+class ByLineElementContainer {
+  constructor (beforeElement, betweenElement, afterElement, firstLanguageElement, secondLanguageElement) {
+    this.before = beforeElement
+    this.between = betweenElement
+    this.after = afterElement
+    this.firstLanguage = firstLanguageElement
+    this.secondLanguage = secondLanguageElement
   }
 }

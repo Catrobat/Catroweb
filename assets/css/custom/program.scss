@@ -221,6 +221,28 @@ table td:nth-child(1) {
   margin-top: 10px;
 }
 
+.name-wrapper {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.program-name {
+  min-width: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.program-name-animation {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.translate-program-button-wrapper {
+  flex: 1;
+  white-space: nowrap;
+}
+
 #program-comments {
   #user-comment-wrapper {
     padding-bottom: 15px;
@@ -271,7 +293,7 @@ table td:nth-child(1) {
   @include force-word-break();
 }
 
-.comment-translation-credit {
+.translation-credit {
   font-size: small;
   color: #808080;
 }

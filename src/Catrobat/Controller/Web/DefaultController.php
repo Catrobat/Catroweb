@@ -62,11 +62,29 @@ class DefaultController extends AbstractController
   }
 
   /**
-   * @Route("/help", name="catrobat_web_help", methods={"GET"})
+   * @Route("/help", name="help", methods={"GET"})
    */
-  public function helpAction(): Response
+  public function helpAction(Request $request): Response
   {
+    $flavor = $request->attributes->get('flavor');
+    if ('mindstorms' === $flavor) {
+      return $this->redirect('https://catrob.at/MindstormsFlavorDocumentation');
+    }
+
     return $this->redirect('https://wiki.catrobat.org/bin/view/Documentation/');
+  }
+
+  /**
+   * @Route("/gp", name="google_play_store", methods={"GET"})
+   */
+  public function redirectToGooglePlayStore(Request $request): Response
+  {
+    $flavor = $request->attributes->get('flavor');
+    if ('mindstorms' === $flavor) {
+      return $this->redirect('https://catrob.at/MindstormsFlavorGooglePlay');
+    }
+
+    return $this->redirect('https://catrob.at/gp');
   }
 
   /**

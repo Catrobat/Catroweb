@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Dobrodosli u Catrobat %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Napravite price, igre i vise...
-    subtitle_embroidery: Stich your own patters on your T-shirts, bags, pants, or smartphone case!
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Preuzmite aplikaciju
     statistics: Vise statistika
   featured: Izdvojeni
@@ -533,15 +535,6 @@ gamejam:
       Take part in the %gamejamtag%
 tag-text: Oznake
 extenstion-text: Extensions
-tags:
-  constant:
-    tag1: Igre
-    tag2: Pokretne animacije
-    tag3: Prica
-    tag4: Glazba
-    tag5: Umjetnost
-    tag6: Experimental
-    tag7: Vodič
 admin:
   maintain:
     diskMaintenance: Odrzavanje diska
@@ -728,3 +721,19 @@ achievements:
       verified_developer:
         title: 'Novice'
         description: 'Create a user account'
+tags:
+  tag:
+    game:
+      title: Game
+    animation:
+      title: Animation
+    story:
+      title: Story
+    music:
+      title: Music
+    art:
+      title: Art
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

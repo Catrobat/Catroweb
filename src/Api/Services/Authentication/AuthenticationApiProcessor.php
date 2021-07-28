@@ -9,7 +9,6 @@ use App\Entity\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
-use Google_Client;
 use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Model\JWTResponse;
@@ -33,9 +32,14 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     return $this->jwt_manager->create($user);
   }
 
+  /**
+   * used in connectUserToAccount!
+   *
+   * @param mixed $id_token
+   */
   protected function getPayloadFromGoogleIdToken($id_token): array
   {
-    $client = new Google_Client(['client_id' => getenv('GOOGLE_ID')]);
+    $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
 
     $payload = $client->verifyIdToken($id_token);
 
@@ -46,6 +50,11 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     ];
   }
 
+  /**
+   * used in connectUserToAccount!
+   *
+   * @param mixed $id_token
+   */
   protected function getPayloadFromFacebookIdToken($id_token): array
   {
     $payload = JWT::decode($id_token, getenv('FB_OAUTH_PUBLIC_KEY'), ['RS256']);
@@ -57,6 +66,11 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     ];
   }
 
+  /**
+   * used in connectUserToAccount!
+   *
+   * @param mixed $id_token
+   */
   protected function getPayloadFromAppleIdToken($id_token)
   {
     $jwt = AuthenticationRequestValidator::jwt_decode($id_token);

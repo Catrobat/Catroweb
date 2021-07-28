@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: ਕਾਟਰੋਬੈਟ ਦਾ ਸੁਆਗਤ ਹੈ%theme%
+    title_mindstorms: ਮਾਈਂਡਸਟੋਰਮਜ਼ ਈਵੀ 3 ਅਤੇ ਐਨਐਕਸਟੀ ਲਈ ਕੈਟ੍ਰੋਬੈਟ ਦੀ ਸਾਈਟ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ
     subtitle: ਕਹਾਣੀਆਂ, ਖੇਡਾਂ ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ ਬਣਾਓ ...
     subtitle_embroidery: ਆਪਣੀ ਟੀ-ਸ਼ਰਟ, ਬੈਗਾਂ, ਪੈਂਟਾਂ ਜਾਂ ਸਮਾਰਟਫੋਨ ਦੇ ਕੇਸਾਂ 'ਤੇ ਆਪਣੇ ਪੈਟਰਨ ਨੂੰ ਸਿਲਾਈ ਕਰੋ!
+    subtitle_mindstorms: ਆਪਣੇ ਲੇਗੋ ਮਾਈਂਡਸਟੋਰਮਜ਼ ਈਵੀ 3 ਅਤੇ ਐਨਐਕਸਟੀ ਰੋਬੋਟਾਂ ਨਾਲ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਬਣਾਓ
     download: ਐਪ ਨੂੰ ਡਾਉਨਲੋਡ ਕਰੋ
     statistics: ਹੋਰ ਅੰਕੜੇ
   featured: ਫੀਚਰਡ
@@ -185,7 +187,7 @@ remixGraph:
   by: 'ਨਾਲ'
   open: 'ਖੁੱਲਾ'
   showPaths: 'ਮਾਰਗ ਦਿਖਾਓ'
-  programNotAvailableErrorTitle: 'ਮਾਫ ਕਰਨਾ ...'
+  programNotAvailableErrorTitle: 'ਮਾਫ ਕਰਨਾ…'
   programNotAvailableErrorDescription: 'ਪ੍ਰੋਜੈਕਟ ਹੋਰ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!'
   programNotAvailable: 'ਉਪਲਭਦ ਨਹੀ'
   programUnknownUser: 'ਅਣਜਾਣ ਯੂਜ਼ਰ'
@@ -341,7 +343,7 @@ termsOfUse:
   bottom2: '%email-webmaster% ਨੂੰ ਵਰਤੋ ਦੇ ਇਹ ਨਿਯਮ ਬਾਰੇ ਕੋਈ ਸੁਝਾਅ ਮੇਲ ਕਰੋ ਜੀ.'
   version: ਸੰਸਕਰਣ 1.3, 4 ਮਾਰਚ 2014
 search:
-  dotdotdot: ਖੋਜੋ ...
+  dotdotdot: ਖੋਜੋ…
   search: ਖੋਜ
   inMediaLib: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਖੋਜੋ
   results: ਖੋਜ ਨਤੀਜੇ
@@ -528,15 +530,6 @@ gamejam:
       %gamejamtag% ਵਿਚ ਹਿੱਸਾ ਲਓ
 tag-text: ਟੈਗਸ
 extenstion-text: ਐਕਸਟੈਂਸ਼ਨਾਂ
-tags:
-  constant:
-    tag1: ਖੇਡ
-    tag2: ਐਨੀਮੇਸ਼ਨ
-    tag3: ਕਹਾਣੀ
-    tag4: ਸੰਗੀਤ
-    tag5: ਕਲਾ
-    tag6: ਪ੍ਰਯੋਗਾਤਮਕ
-    tag7: ਟਿਊਟੋਰਿਅਲ
 admin:
   maintain:
     diskMaintenance: ਡਿਸਕ ਸੰਭਾਲ
@@ -698,8 +691,8 @@ achievements:
       empty: "ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਸਾਰੀਆਂ ਪ੍ਰਾਪਤੀਆਂ ਨੂੰ ਅਣਲਾਕ ਕਰ ਦਿੱਤਾ ਹੈ."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'ਵਧਾਈਆਂ!'
+      subtitle: "ਤੁਸੀਂ ਇੱਕ ਬੈਜ ਕਮਾਇਆ ਹੈ"
       confirm: "ਠੀਕ ਹੈ"
   profile:
     title: 'ਪ੍ਰਾਪਤੀਆਂ'
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'ਨਵੀਨਤਾ'
         description: 'ਇੱਕ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਓ'
+tags:
+  tag:
+    game:
+      title: ਖੇਡ
+    animation:
+      title: ਐਨੀਮੇਸ਼ਨ
+    story:
+      title: ਕਹਾਣੀ
+    music:
+      title: ਸੰਗੀਤ
+    art:
+      title: ਕਲਾ
+    experimental:
+      title: ਪ੍ਰਯੋਗਾਤਮਕ
+    tutorial:
+      title: ਟਿutorialਟੋਰਿਅਲ

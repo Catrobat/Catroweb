@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
+    title_mindstorms: Bem-vindo ao site do Catrobat's para Mindstorms EV3 e NXT
     subtitle: Crie histórias, jogos e muito mais...
     subtitle_embroidery: Costuri seus próprios padrões em suas camisetas, bolsas, calças ou capas de celulares!
+    subtitle_mindstorms: Crie seus próprios projetos com seus mindstorms Lego EV3 e NXT robots
     download: Baixar o aplicativo
     statistics: Mais Estatísticas
   featured: Em Destaque
@@ -528,15 +530,6 @@ gamejam:
       Faça parte do %gamejamtag%
 tag-text: Tags
 extenstion-text: Extensões
-tags:
-  constant:
-    tag1: Jogos
-    tag2: Animação
-    tag3: História
-    tag4: Música
-    tag5: Arte
-    tag6: Experimental
-    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: Manutenção de disco
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'Novato'
         description: 'Criar uma conta'
+tags:
+  tag:
+    game:
+      title: Jogos
+    animation:
+      title: Animação
+    story:
+      title: História
+    music:
+      title: Música
+    art:
+      title: Arte
+    experimental:
+      title: Experimental
+    tutorial:
+      title: Tutorial

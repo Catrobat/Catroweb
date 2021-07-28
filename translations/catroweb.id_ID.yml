@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Selamat datang di %theme% Catrobat
+    title_mindstorms: Selamat datang di situs Catrobat untuk Mindstorms EV3 dan NXT
     subtitle: Buat cerita, game, dan lainnya...
     subtitle_embroidery: Stich patters Anda sendiri di T-shirt, tas, celana, atau case smartphone Anda!
+    subtitle_mindstorms: Buat proyek Anda sendiri dengan robot Lego Mindstorms EV3 dan NXT Anda
     download: Unduh aplikasinya
     statistics: Lebih banyak statistik
   featured: Fitur
@@ -531,15 +533,6 @@ gamejam:
       Ambil bagian di %gamejamtag%
 tag-text: Label
 extenstion-text: Ekstensi
-tags:
-  constant:
-    tag1: Permainan
-    tag2: Animasi Bergerak
-    tag3: Cerita
-    tag4: Musik
-    tag5: Seni
-    tag6: Eksperimental
-    tag7: Tutorial
 admin:
   maintain:
     diskMaintenance: Pemeliharaan disk
@@ -701,8 +694,8 @@ achievements:
       empty: "Anda telah membuka semua pencapaian."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Selamat!'
+      subtitle: "Anda telah mendapatkan lencana"
       confirm: "Baik"
   profile:
     title: 'Prestasi'
@@ -726,3 +719,19 @@ achievements:
       verified_developer:
         title: 'Pemula'
         description: 'Buat akun pengguna'
+tags:
+  tag:
+    game:
+      title: Permainan
+    animation:
+      title: Animasi
+    story:
+      title: Cerita
+    music:
+      title: Musik
+    art:
+      title: Seni
+    experimental:
+      title: Eksperimental
+    tutorial:
+      title: tutorial

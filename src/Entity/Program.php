@@ -345,6 +345,11 @@ class Program
   private bool $snapshots_enabled = false;
 
   /**
+   * @ORM\OneToMany(targetEntity="App\Entity\Translation\ProjectCustomTranslation", mappedBy="project", cascade={"remove"})
+   */
+  private Collection $custom_translations;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -364,6 +369,7 @@ class Program
     $this->likes = new ArrayCollection();
     $this->program_downloads = new ArrayCollection();
     $this->reports = new ArrayCollection();
+    $this->custom_translations = new ArrayCollection();
   }
 
   public function __toString(): string
@@ -819,18 +825,6 @@ class Program
     return $this->tags;
   }
 
-  public function getTagsName(): array
-  {
-    $tags = [];
-
-    /** @var Tag $tag */
-    foreach ($this->getTags() as $tag) {
-      $tags[] = $tag->getEn();
-    }
-
-    return $tags;
-  }
-
   public function getExtensions(): Collection
   {
     return $this->extensions;
@@ -852,10 +846,7 @@ class Program
     $tags = [];
     foreach ($this->tags as $program_tag) {
       /* @var Tag $program_tag */
-      $tags[] = $program_tag->getEn();
-      $tags[] = $program_tag->getDe();
-      $tags[] = $program_tag->getIt();
-      $tags[] = $program_tag->getFr();
+      $tags[] = $program_tag->getInternalTitle();
     }
 
     return implode(', ', $tags);
@@ -985,5 +976,10 @@ class Program
   public function isSnapshotsEnabled(): bool
   {
     return $this->snapshots_enabled;
+  }
+
+  public function getCustomTranslations(): Collection
+  {
+    return $this->custom_translations;
   }
 }

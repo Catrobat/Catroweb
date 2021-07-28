@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: Catrobat の %theme% へようこそ
+    title_mindstorms: マインドストームEV3とNXTのためのCatrobatのサイトへようこそ
     subtitle: ストーリー、ゲームなどを作成する
     subtitle_embroidery: あなたのTシャツ、バッグ、ズボン、またはスマートフォンのケースであなた自身のパターを固定!
+    subtitle_mindstorms: レゴ・マインドストームEV3とNXTロボットで独自のプロジェクトを作る
     download: アプリをダウンロード
     statistics: 統計情報
   featured: おすすめ
@@ -528,15 +530,6 @@ gamejam:
       %gamejamtag% に参加してください
 tag-text: タグ
 extenstion-text: 拡張
-tags:
-  constant:
-    tag1: ゲーム
-    tag2: アニメーションを動かします
-    tag3: ストーリー
-    tag4: 音楽
-    tag5: アート
-    tag6: 実験的
-    tag7: チュートリアル
 admin:
   maintain:
     diskMaintenance: ディスクのメンテナンス
@@ -698,8 +691,8 @@ achievements:
       empty: "すでにすべての実績のロックを解除しました。"
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'おめでとうございます。'
+      subtitle: "バッジを獲得しました"
       confirm: "OK"
   profile:
     title: '実績'
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'ノービス'
         description: 'ユーザーアカウントを作成'
+tags:
+  tag:
+    game:
+      title: ゲーム
+    animation:
+      title: アニメーション
+    story:
+      title: ストーリー
+    music:
+      title: 音楽
+    art:
+      title: アート
+    experimental:
+      title: 実験
+    tutorial:
+      title: チュートリアル

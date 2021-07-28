@@ -8,6 +8,7 @@ use App\Catrobat\Services\ImageRepository;
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Entity\Tag;
 use App\Utils\ElapsedTimeStringFormatter;
 use Exception;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
@@ -55,6 +56,13 @@ final class ProjectsResponseManager extends AbstractResponseManager
     /** @var Program $project */
     $project = $program->isExample() ? $program->getProgram() : $program;
 
+    $tags = [];
+    $project_tags = $project->getTags();
+    /** @var Tag $tag */
+    foreach ($project_tags as $tag) {
+      $tags[$tag->getId()] = $tag->getInternalTitle();
+    }
+
     return new ProjectResponse([
       'id' => $project->getId(),
       'name' => $project->getName(),
@@ -65,7 +73,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       'download' => $project->getDownloads(),
       'private' => $project->getPrivate(),
       'flavor' => $project->getFlavor(),
-      'tags' => $project->getTagsName(),
+      'tags' => $tags,
       'uploaded' => $project->getUploadedAt()->getTimestamp(),
       'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
       'screenshot_large' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotLarge($project->getId()),

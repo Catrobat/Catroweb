@@ -15,20 +15,20 @@ Feature: Showing similar programs on details page of one program
       | 4  | Phiro        | PHIRO   |
       | 5  | Raspberry Pi | RASPI   |
     And there are tags:
-      | id | en           | de           |
-      | 1  | Games        | Spiel        |
-      | 2  | Animation    | Animation    |
-      | 3  | Story        | Geschichte   |
-      | 4  | Music        | Musik        |
-      | 5  | Art          | Kunst        |
-      | 6  | Experimental | Experimental |
+      | internal_title | title_ltm_code  |
+      | game           | __Spiel         |
+      | animation      | __Animation     |
+      | story          | __Geschichte    |
+      | music          | __Musik         |
+      | art            | __Kunst         |
+      | experimental   | __Experimentell |
     And there are projects:
-      | id | name    | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions | tags_id |
-      | 1  | Minions | p1          | User1    | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | 1,2,3,4 |
-      | 2  | Galaxy  | p2          | User2    | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | 1,2,3   |
-      | 3  | Alone   | p3          | User2    | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | 1,2     |
-      | 4  | Trolol  | p5          | User2    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | 5       |
-      | 5  | Nothing | p6          | User3    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | 6       |
+      | id | name    | description | owned by | downloads | apk_downloads | views | upload time      | version | extensions | tags                      |
+      | 1  | Minions | p1          | User1    | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | Lego,Phiro | game,animation,story,music |
+      | 2  | Galaxy  | p2          | User2    | 10        | 12            | 13    | 01.02.2013 12:00 | 0.8.5   | Lego,Drone | game,animation,story        |
+      | 3  | Alone   | p3          | User2    | 5         | 55            | 2     | 01.03.2013 12:00 | 0.8.5   |            | game,animation               |
+      | 4  | Trolol  | p5          | User2    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   | Lego       | art                           |
+      | 5  | Nothing | p6          | User3    | 5         | 1             | 1     | 01.03.2013 12:00 | 0.8.5   |            | experimental                  |
 
   Scenario: Showing similar programs
     When I go to "/app/project/1"

@@ -8,6 +8,7 @@ parameters:
     - 'create@school'
     - 'embroidery'
     - 'arduino'
+    - 'mindstorms'
 
   defaultFlavor: 'pocketcode'
 
@@ -15,4 +16,4 @@ parameters:
   adminTheme: 'admin'
 
   # All flavors + umbrellaTheme
-  themeRoutes: 'app|pocketcode|pocketalice|pocketgalaxy|phirocode|luna|create\@school|embroidery|arduino'
+  themeRoutes: 'app|pocketcode|pocketalice|pocketgalaxy|phirocode|luna|create\@school|embroidery|arduino|mindstorms'

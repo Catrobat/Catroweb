@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: আপনাকে স্বাগতম Catrobat's %theme%
+    title_mindstorms: মাইন্ডস্টর্মস ইভি 3 এবং এনএক্সটি-র জন্য ক্যাটরোব্যাটের সাইটে আপনাকে স্বাগতম
     subtitle: গল্প, খেলা এবং আরও অনেক কিছু তৈরি করুন ...
     subtitle_embroidery: আপনার নিজের টি-শার্ট, ব্যাগ, প্যান্ট বা স্মার্টফোনের ক্ষেত্রে নিজের প্যাটারগুলি স্টিচ করুন!
+    subtitle_mindstorms: আপনার লেগো মাইন্ডস্টর্মস ইভি 3 এবং এনএক্সটি রোবট দিয়ে আপনার নিজস্ব প্রকল্প তৈরি করুন
     download: অ্যাপ্লিকেশন ডাউনলোড করুন
     statistics: আরও পরিসংখ্যান
   featured: বৈশিষ্ট্য
@@ -534,15 +536,6 @@ gamejam:
       %gamejamtag% তে অংশ নিন
 tag-text: ট্যাগ
 extenstion-text: সংযোজন
-tags:
-  constant:
-    tag1: খেলা
-    tag2: অ্যানিমেশন
-    tag3: গল্প
-    tag4: সঙ্গীত
-    tag5: শিল্প
-    tag6: পরীক্ষামূলক
-    tag7: টিউটোরিয়াল
 admin:
   maintain:
     diskMaintenance: ডিস্ক রক্ষণাবেক্ষণ
@@ -729,3 +722,19 @@ achievements:
       verified_developer:
         title: 'নবীনতা'
         description: 'একটি ব্যবহারকারী অ্যাকাউন্ট তৈরি করুন'
+tags:
+  tag:
+    game:
+      title: গেম
+    animation:
+      title: অ্যানিমেশন
+    story:
+      title: গল্প
+    music:
+      title: সংগীত
+    art:
+      title: শিল্প
+    experimental:
+      title: পরীক্ষামূলক
+    tutorial:
+      title: টিউটোরিয়াল

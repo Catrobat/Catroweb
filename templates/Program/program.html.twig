@@ -28,13 +28,31 @@
     </div>
 
     <div class="col-7 col-sm-8 col-md-8 col-lg-5">
-      <div style="display: flex;">
-        <span id="name" class="h2" style="min-width: 30px; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;">{{ program.name }}</span>
-        <span style="flex: 1; white-space: nowrap;">
-          <a class="icon-text align-bottom" id="translate-program">
-            <i class="ml-2 material-icons">translate</i>
-          </a>
-        </span>
+      <div class="name-wrapper">
+        <span id="name" class="h2 program-name">{{ program.name }}</span>
+        <span id="name-translation" class="h2 program-name" style="display: none;" lang=""></span>
+
+        {% if not app.user or not my_program %}
+          <span class="translate-program-button-wrapper">
+            <span id="program-translation-button" class="program-translation-button catro-icon-button"
+                data-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
+              <i class="ml-2 material-icons">
+                translate
+              </i>
+            </span>
+            <span id="program-translation-loading-spinner" style="display: none;">
+              <i class="ml-2 material-icons">
+                {% include 'Default/loadingSpinner.html.twig' with {'size': 'small'} %}
+              </i>
+            </span>
+            <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none"
+                data-toggle="tooltip" title="Hide Translation">
+                <i class="ml-2 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
+                  close
+                </i>
+            </span>
+          </span>
+        {% endif %}
       </div>
 
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
@@ -299,18 +317,22 @@
   </script>
   <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
 
-  <script src=" {{ asset( 'js/TranslateWithLink.min.js') }}"></script>
+  <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
+
+  <script src=" {{ asset( 'js/TranslateProgram.min.js') }}"></script>
   <script>
-    new TranslateWithLink(
+    new TranslateProgram(
+      '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}',
+      '{{ program.id }}',
       {% if program.description %} true, {% else %} false, {% endif %}
       {% if program.credits %} true {% else %} false {% endif %}
     )
   </script>
 
-  <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
+  <script src=" {{ asset( 'js/TranslateComments.min.js') }}"></script>
   <script>
-    new Translation(
-      '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}'
+    new TranslateComments(
+      '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}',
     )
   </script>
 {% endblock %}

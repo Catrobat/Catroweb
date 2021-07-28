@@ -283,22 +283,10 @@ services:
 
 
   # ====================================================================================================================
-  #   User Authentication
-  #
-  user_authenticator:
-    class: App\Api_deprecated\Security\UserAuthenticator
-    arguments:
-      - "@security.user.provider.concrete.chain_provider"
-      - "@security.authentication.manager"
-    public: true
-  App\Api_deprecated\Security\UserAuthenticator: "@user_authenticator"
-
-
-  # ====================================================================================================================
   #   Twig
   #
-  App\Catrobat\Twig\AppExtension:
-    class: App\Catrobat\Twig\AppExtension
+  App\WebView\Twig\AppExtension:
+    class: App\WebView\Twig\AppExtension
     tags:
       - { name: twig.extension }
 
@@ -915,3 +903,8 @@ services:
     class: App\Translation\TranslationDelegate
     arguments:
       - '@App\Translation\ItranslateApi'
+
+  App\Translation\MachineTranslationListener:
+    class: App\Translation\MachineTranslationListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }

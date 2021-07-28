@@ -30,4 +30,5 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
     And I wait for the page to be loaded
     Then I should see "Congratulations"
     When I click ".swal2-confirm"
+    And I wait 500 milliseconds
     Then I should not see "Congratulations"

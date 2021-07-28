@@ -4,7 +4,6 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Requests\CreateUserRequest;
 use App\Api_deprecated\Requests\LoginUserRequest;
-use App\Api_deprecated\Security\UserAuthenticator;
 use App\Catrobat\Services\OAuthService;
 use App\Catrobat\Services\TokenGenerator;
 use App\Catrobat\StatusCode;
@@ -106,7 +105,7 @@ class SecurityController extends AbstractController
    * methods={"POST"})
    */
   public function loginNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
-                                  TranslatorInterface $translator, UserAuthenticator $user_authenticator,
+                                  TranslatorInterface $translator,
                                   ValidatorInterface $validator, EncoderFactoryInterface $factory): JsonResponse
   {
     $retArray = [];
@@ -226,59 +225,6 @@ class SecurityController extends AbstractController
   public function loginWithGoogleAction(Request $request): JsonResponse
   {
     return $this->getOAuthService()->loginWithGoogleAction($request);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/getGoogleUserInfo/getGoogleUserInfo.json", name="catrobat_google_userinfo",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
-   *
-   * @throws Exception
-   */
-  public function getGoogleUserProfileInfo(Request $request): JsonResponse
-  {
-    return $this->getOAuthService()->getGoogleUserProfileInfo($request);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/loginWithTokenAndRedirect/loginWithTokenAndRedirect", name="catrobat_oauth_login_redirect",
-   * options={"expose": true}, methods={"POST"})
-   *
-   * @throws Exception
-   */
-  public function loginWithTokenAndRedirectAction(Request $request): JsonResponse
-  {
-    return $this->getOAuthService()->loginWithTokenAndRedirectAction($request);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/getGoogleAppId/getGoogleAppId.json", name="catrobat_oauth_login_get_google_appid",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   */
-  public function getGoogleAppId(): JsonResponse
-  {
-    $retArray = [];
-    $retArray['gplus_appid'] = getenv('GOOGLE_CLIENT_ID');
-
-    return JsonResponse::create($retArray);
-  }
-
-  /**
-   * @deprecated
-   *
-   * @Route("/api/deleteOAuthUserAccounts/deleteOAuthUserAccounts.json", name="catrobat_oauth_delete_testusers",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @throws Exception
-   */
-  public function deleteOAuthTestUserAccounts(): JsonResponse
-  {
-    return $this->getOAuthService()->deleteOAuthTestUserAccounts();
   }
 
   private function getOAuthService(): OAuthService

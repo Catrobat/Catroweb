@@ -33,7 +33,7 @@ class Achievement
   protected string $internal_title = '';
 
   /**
-   * @ORM\Column(name="ltm_code", type="string", nullable=false)
+   * @ORM\Column(name="title_ltm_code", type="string", nullable=false)
    */
   protected string $title_ltm_code = '';
 

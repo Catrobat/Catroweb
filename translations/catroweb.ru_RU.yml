@@ -8,13 +8,13 @@ accountSettings: Настройки аккаунта
 email: Электронная почта
 aboutPocketCode: О Pocket Code
 about: Больше
-education: Развивающий
+education: Образование
 chat: Чат и форумы
 others: Другое
-tutorials: Обучение
+tutorials: Помощь
 googlePlay: Google Play
 iosAppStore: Магазин приложений iOS
-huaweiAppGallery: Галерея приложений Huawei
+huaweiAppGallery: Huawei AppGallery
 passwordsNoMatch: Пароли не совпадают.
 error: Ошибка
 cancel: Отменить
@@ -26,9 +26,9 @@ noWayOfReturn: Это безвозвратное действие!
 download: Скачать проект
 description: Описание
 noDescription: Без описания.
-credits: Примечания и кредиты
+credits: Примечания и авторы
 noCredits: Нет информации о создателях.
-notesAndCreditsDescription: Как вы создали этот проект? Вы использовали идеи, скрипты или работы от других людей? Благодарим их здесь.
+notesAndCreditsDescription: Как вы создали этот проект? Вы использовали идеи, скрипты или изображения от других людей? Поблагодарите их здесь.
 country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
@@ -41,8 +41,8 @@ more: 'больше'
 less: 'меньше'
 show-more: 'Развернуть'
 show-less: 'Спрятать'
-more-information: 'Подробности'
-less-information: 'Меньше информации '
+more-information: 'Больше информации'
+less-information: 'Меньше информации'
 ok: Ок
 clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
@@ -75,7 +75,7 @@ follower:
   followers: Подписчики
   follow: Подписаться
   username: Пользователь
-  followsMe: Подпишись на меня
+  followsMe: Подписаны на меня
   noFollowing: Вы ни на кого не подписаны.
   noFollowers: Сейчас у вас нет подписчиков 
   noOtherFollowing: В настоящее время нет подписанных пользователей.
@@ -83,17 +83,19 @@ follower:
   followError: "Не удалось подписаться на выбранного пользователя!"
   unfollowError: "Невозможно отписаться от выбранного пользователя."
   unfollowQuestion: "Вы действительно хотите отписаться от этого пользователя?"
-  unfollowButton: "Вы отписались от %username%"
+  unfollowButton: "Отписаться от %username%"
 programs:
   welcome:
     title: Добро пожаловать в %theme% от Catrobat
+    title_mindstorms: Добро пожаловать на сайт Catrobat для Mindstorms EV3 и NXT
     subtitle: Создавайте истории, игры и многое другое...
     subtitle_embroidery: Вышейте собственный узор на футболках, сумках, брюках или чехле для смартфона!
-    download: Загрузите приложение
+    subtitle_mindstorms: Создавайте собственные проекты с помощью роботов Lego Mindstorms EV3 и NXT
+    download: Скачать приложение
     statistics: Больше статистики
   featured: Популярное
   example: Примеры
-  newest: Новые проекты
+  newest: Новейшие проекты
   recommended: Рекомендуемые проекты
   scratchremixes: Scratch ремиксы
   noPrograms: На данный момент нет проектов.
@@ -111,7 +113,7 @@ programs:
     Да, сделать общедоступным
     Да, установить приватным
     Нет
-  reportCommentConfirmation: Вы точно хотите пожаловаться на этот комментарий?
+  reportCommentConfirmation: Вы уверены, что хотите пожаловаться на этот комментарий?
   deleteCommentConfirmation: Вы уверены, что хотите удалить этот комментарий?
   deleteAccountConfirmation: |+
     Удаление аккаунта?
@@ -165,7 +167,7 @@ programs:
   noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
   editDescription: Редактировать описание проекта
   saveDescription: Сохранить
-  editCredits: Редактирование примечаний к проекту и кредитов
+  editCredits: Редактировать описание и титры к проекту
   saveCredits: Сохранить
   addComment: Написать комментарий
   thumbsUp: Палец вверх!
@@ -174,26 +176,26 @@ programs:
   wow: Вааау!
   linkTitle: Ссылка
   link: Скопировать ссылку проекта в буфер обмена
-  reactionsText: Лайки
-  downloadErrorText: Произошла ошибка при загрузке проекта. Пожалуйста, повторите попытку позже.
+  reactionsText: Реакции
+  downloadErrorText: Во время скачивания проекта произошла ошибка. Повторите попытку позже.
   showTranslation: Показать перевод
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
 remixGraph:
   title: Ремиксы
-  showRemixGraph: 'Показать перемешанный граф'
-  by: 'на'
+  showRemixGraph: 'Показать ремиксы'
+  by: 'автор'
   open: 'Открыть '
   showPaths: 'Показать Пути'
   programNotAvailableErrorTitle: 'Извините...'
   programNotAvailableErrorDescription: 'Проект больше не доступен!'
   programNotAvailable: 'Недоступно'
   programUnknownUser: 'Неизвестный пользователь'
-noReply: Это автоматическое сообщение - Пожалуйста, не отвечайте непосредственно на это письмо.
+noReply: Это автоматическое сообщение - Пожалуйста, не отвечайте на это письмо.
 accountConfirmation:
   subject: Подтверждение учетной записи Catrobat
   message: |
-    Уважаемый %username%.
+    Уважаемый(-ая) %username%.
     Чтобы закончить активацию вашей учетной записи - пожалуйста, посетите %confirmationUrl%
     Эта ссылка может быть использована только один раз для подтверждения вашей учетной записи.
     С наилучшими пожеланиями,
@@ -212,17 +214,13 @@ accountConfirmation:
 passwordRecovery:
   subject: Восстановление пароля Catrobat
   message: |
-    Уважаемый %username%.
-
-    Мы получили запрос на восстановления вашего пароля на %appplication_url%.
-
-    Для изменения пароля пройдите по ссылке: %confirmationUrl%
-
-    Если вы не делали такой запрос, Вам не нужно предпринимать никаких действий. Срок действия ссылки закончится через 24 часа.
-
-    Вы можете использовать свой логин и пароль для доступа к %appplication_url% в любое время.
+    Уважаемый(-ая) %username%.
+    Мы получили запрос на восстановления вашего пароля на %appplication_url%, потому что вы забыли ваш пароль
+    Если вы не запрашивали изменение пароля, проигнорируйте это письмо. Срок действия ссылки закончится через 24 часа.
+    Чтобы сбросить пароль и создать новый, перейдите по ссылке: %confirmationUrl%
+    Вы можете использовать свой логин и пароль для доступа в комьюнити %appplication_url% в любое время.
     Для этого просто перейдите по ссылке: %loginPage%
-    Если вы хотите обновить свой профиль, используйте ссылку %profilePage%
+    Если вы хотите изменить информацию в своём профиле, перейдите по ссылке: %profilePage%
 
     С уважением,
     Команда Catrobat.
@@ -533,15 +531,6 @@ gamejam:
       А почему бы не создать свой собственный! Принять участие в %gamejamtag%
 tag-text: Тэги
 extenstion-text: Расширения
-tags:
-  constant:
-    tag1: Игра
-    tag2: Анимация
-    tag3: История
-    tag4: Музыка
-    tag5: Искусство
-    tag6: Экспериментальная версия
-    tag7: Обучение
 admin:
   maintain:
     diskMaintenance: Обслуживание диска
@@ -703,8 +692,8 @@ achievements:
       empty: "Вы уже открыли все достижения."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Поздравляю!'
+      subtitle: "Вы заработали значок"
       confirm: "Ок"
   profile:
     title: 'Достижения'
@@ -728,3 +717,19 @@ achievements:
       verified_developer:
         title: 'Новичок'
         description: 'Создать учетную запись пользователя'
+tags:
+  tag:
+    game:
+      title: Игра
+    animation:
+      title: Анимация
+    story:
+      title: История
+    music:
+      title: Музыка
+    art:
+      title: Искусство
+    experimental:
+      title: Экспериментальный
+    tutorial:
+      title: Учебник

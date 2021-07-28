@@ -23,7 +23,6 @@ use App\Repository\ProgramLikeRepository;
 use App\Repository\ProgramRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\ClassMetadata;
 use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -156,9 +155,6 @@ class ProgramManagerTest extends TestCase
       return $project;
     };
 
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
       ->will($this->returnCallback($func))
     ;
@@ -178,9 +174,6 @@ class ProgramManagerTest extends TestCase
    */
   public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
   {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program {
         $project->setId('1');
@@ -204,9 +197,6 @@ class ProgramManagerTest extends TestCase
    */
   public function testSavesTheScreenshotsToTheScreenshotRepository(): void
   {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->extracted_file->expects($this->atLeastOnce())->method('getScreenshotPath')->willReturn('./path/to/screenshot');
     $this->extracted_file->expects($this->atLeastOnce())->method('getDescription')->willReturn('');
     $this->extracted_file->expects($this->atLeastOnce())->method('getLanguageVersion')->willReturn('');
@@ -244,9 +234,6 @@ class ProgramManagerTest extends TestCase
       return $project;
     };
 
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback($func))
     ;
@@ -286,9 +273,6 @@ class ProgramManagerTest extends TestCase
    */
   public function testFiresAnEventWhenTheProgramIsStored(): void
   {
-    $metadata = $this->createMock(ClassMetadata::class);
-    $metadata->expects($this->atLeastOnce())->method('getFieldNames')->willReturn(['id']);
-    $this->entity_manager->expects($this->atLeastOnce())->method('getClassMetadata')->willReturn($metadata);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
       ->will($this->returnCallback(function (Program $project): Program {
         $project->setId('1');

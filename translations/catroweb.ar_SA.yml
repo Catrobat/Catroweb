@@ -26,8 +26,8 @@ noWayOfReturn: لاتوجد أي طريقة لإسترجاع إجراءاتك!
 download: تحميل
 description: الوصف
 noDescription: لا يوجد أي وصف .
-credits: Credits
-noCredits: No credits available.
+credits: الملاحظات والاعتمادات
+noCredits: لا توجد ملاحظات أو أرصدة متاحة.
 notesAndCreditsDescription: كيف قمت بصناعة هذا المشروع. هل إستعملت أفكار، مخطوطات أو عمل فني من أشخاص آخرين؟ قم بشكرهم هنا لو تكرمت.
 country: البلد
 loginText: تسجيل الدخول
@@ -39,22 +39,22 @@ pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
 less: 'أقل'
-show-more: 'More information'
-show-less: 'Less information'
+show-more: 'إظهار المزيد'
+show-less: 'إظهار أقل'
 more-information: 'المزيد من المعلومات'
 less-information: 'معلومات أقل'
 ok: موافق
 clickToDownloadProgram: 'لتنزيل المشروع التجريبي، انقر على %link_start% هنا %link_end%.'
 registrationError: 'اسم المستخدم أو عنوان البريد الإلكتروني قيد الاستخدام بالفعل.'
 notifications: 'الاشعارات'
-allNotifications: 'All notifications'
+allNotifications: 'جميع'
 FollowersNotifications: 'المتابِعون'
 LikeNotifications: 'ردود الفعل'
 CommentNotifications: 'التعليقات'
 RemixNotifications: 'رِمكسات(خليط مُعدل)'
 wellDone: "أحسنت صنعاً!"
 done: "تم!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "يبدو أنك لا تملك أي إشعارات."
 confirmMessage: "نعم، إحذفه!"
 cancelMessage: "إلغاء"
 notificationsUnauthorizedError: "غير قادر على تصريح المستخدم"
@@ -87,8 +87,10 @@ follower:
 programs:
   welcome:
     title: مرحبا بك في كاتروبات %theme%
+    title_mindstorms: مرحبًا بكم في موقع Catrobat الخاص بـ Mindstorms EV3 و NXT
     subtitle: إنشاء قصص، ألعاب وأكثر...
     subtitle_embroidery: قم بإخفاء براءاتك الخاصة على قمصانك أو الأكياس أو البناطيل أو غلاف الهاتف الذكي!
+    subtitle_mindstorms: قم بإنشاء مشاريعك الخاصة باستخدام روبوتات Lego Mindstorms EV3 و NXT
     download: تحميل التطبيق
     statistics: المزيد من الإحصاءات
   featured: خصائص
@@ -120,7 +122,7 @@ programs:
     نعم، احذفها!
     الغاء
   tooLongDescription: وصف المشروع طويل جداً!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: ملاحظات المشروع والأرصدة طويلة جداً!
   most:
     viewed: الأكثر عرضاً
     downloaded: الأكثر تنزيلا
@@ -164,9 +166,9 @@ programs:
   deleted_popup_header: محذوف
   noAdminRights: ليس لديك صلاحيات للمشرف. الرجاء تسجيل الدخول كمشرف.
   editDescription: تعديل وصف المشروع
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: حفظ
+  editCredits: تعديل ملاحظات المشروع والرصيد
+  saveCredits: حفظ
   addComment: كتابة تعليق
   thumbsUp: تمسك بالأمام!
   smile: ابتسم!
@@ -318,7 +320,7 @@ termsOfUse:
     item3: مع جميع مستويات الخبرة
   list2:
     item1: كن محترما. عند مشاركة المشاريع، يرجى تذكر أن الناس من مختلف الأعمار والخلفيات سيرون مساهماتك.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "منح الائتمان. لا تتردد في إجراء إصدارات معدلة من مشاريع الآخرين - فقط تأكد من منحهم الائتمان. مكان واحد لمنح الائتمان هو في ملاحظات المشروع وقسم رصيده. يرجى الاطلاع على الفقرة أدناه هذه القائمة ذات النقاط للحصول على تفاصيل حول تعديل مشاريع المستخدمين الآخرين."
     item3: "أن نكون صادقين. لا تدعي بأنك شخص أخر ولا تحاول خداع المجتمع."
     item4: "الحفاظ على سرية المعلومات الشخصية. عدم مشاركة عنوان البريد الإلكتروني الخاص بك أو رقم الهاتف أو معلومات الاتصال الشخصية الأخرى."
     item5: "المساعدة في الحفاظ على ودية الموقع. إذا شعرت أن الآخرين سيجدون المشروع أو التعليق يعني الإهانة والعنف، أو غير مناسب، فقط انقر فوق الزر \"تقرير غير مناسب\" و اترك تفسيرا قصيرا. فريق كاتروبات سيقوم بمراجعة التقرير الخاص بك وقد يزيل أي مشروع أو تعليق أو مشاركة."
@@ -528,15 +530,6 @@ gamejam:
       قم بالمشاركة في %gamejamtag%
 tag-text: وسوم
 extenstion-text: الإضافات
-tags:
-  constant:
-    tag1: الألعاب
-    tag2: تحريك الرسوم المتحركة
-    tag3: القصة
-    tag4: موسيقى
-    tag5: الفن
-    tag6: إصدار تجريبي
-    tag7: البرنامج التعليمي
 admin:
   maintain:
     diskMaintenance: صيانة القرص
@@ -625,15 +618,15 @@ catro-notifications:
   noReactions: "يبدو أنك لا تملك أي إشعارات رد فعل."
   noRemixes: "يبدو أنك لا تملك أي إشعارات ريمكس."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: 'علق %user_link% على %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: 'رد %user_link% على %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% يتابعك الآن.'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: 'أنشأ %user_link% لعبة جديدة %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: 'أنشأ %user_link% ريمكس %program_link% من لعبتك %remix_program_link%.'
 clipboard:
   success: رابط للمشروع نسخ إلى الحافظة!
   fail: فشل نسخ الرابط إلى الحافظة! :(
@@ -723,3 +716,19 @@ achievements:
       verified_developer:
         title: 'مبتدئ'
         description: 'قم بإنشاء حساب مستخدم'
+tags:
+  tag:
+    game:
+      title: لعبة
+    animation:
+      title: الرسوم المتحركة
+    story:
+      title: قصة
+    music:
+      title: موسيقى
+    art:
+      title: فن
+    experimental:
+      title: تجريبي
+    tutorial:
+      title: درس تعليمي
