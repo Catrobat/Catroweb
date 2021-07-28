@@ -62,7 +62,7 @@
     "@material/select": "^11.0",
     "@material/snackbar": "^11.0",
     "@material/tab": "^11.0.0",
-    "@material/tab-bar": "^11.0.0",
+    "@material/tab-bar": "^12.0.0",
     "@material/tab-indicator": "^11.0.0",
     "@material/tab-scroller": "^11.0.0",
     "@material/textfield": "^12.0",
