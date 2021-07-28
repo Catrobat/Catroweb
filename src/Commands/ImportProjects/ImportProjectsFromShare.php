@@ -24,7 +24,7 @@ class ImportProjectsFromShare extends Command
       '20')
       ->addOption('category', 'c', InputOption::VALUE_REQUIRED,
         'Downloading projects of a specific category (random, recent)',
-        'random')
+        'recent')
       ->addOption('user', 'u', InputOption::VALUE_REQUIRED,
         'User who should be the owner of the projects',
         'catroweb')
@@ -58,11 +58,11 @@ class ImportProjectsFromShare extends Command
   private function getDownloadUrl(string $category): string
   {
     switch ($category) {
-      case 'recent':
-        return 'https://share.catrob.at/app/api/projects/recent.json';
       case 'random':
+          return 'https://share.catrob.at/app/api/projects/randomProjects.json';
+      case 'recent':
       default:
-        return 'https://share.catrob.at/app/api/projects/randomProjects.json';
+        return 'https://share.catrob.at/app/api/projects/recent.json';
     }
   }
 
