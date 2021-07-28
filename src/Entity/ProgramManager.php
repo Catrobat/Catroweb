@@ -442,7 +442,7 @@ class ProgramManager
   public function addMindstormsExtensions(Program $program, ExtractedCatrobatFile $extracted_file): void
   {
     $MINDSTORMS = 'Mindstorms';
-    if (preg_match('@ToDo: mindstorms regex for bricks@', strval($extracted_file->getProgramXmlProperties()->asXML()), $matches)) {
+    if (preg_match('/\"legonxt|\"legoev3/', strval($extracted_file->getProgramXmlProperties()->asXML()), $matches)) {
       $mindstorms_extension = $this->extension_repository->findOneBy(['name' => $MINDSTORMS]);
       if (is_null($mindstorms_extension)) {
         $mindstorms_extension = $this->createExtension($MINDSTORMS);
