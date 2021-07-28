@@ -56,7 +56,7 @@
     "@material/icon-button": "^11.0",
     "@material/list": "^11.0",
     "@material/menu": "^11.0",
-    "@material/menu-surface": "^11.0",
+    "@material/menu-surface": "^12.0",
     "@material/progress-indicator": "^11.0",
     "@material/radio": "^11.0",
     "@material/select": "^11.0",
