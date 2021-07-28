@@ -908,3 +908,23 @@ services:
     class: App\Translation\MachineTranslationListener
     tags:
       - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+
+  catrowebadmin.block.statistics.project_machine_translation:
+    class: App\Admin\Translation\ProjectMachineTranslationAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Project Machine Translation" }
+    arguments:
+      - ~
+      - App\Entity\Translation\ProjectMachineTranslation
+      - App\Admin\Translation\Controller\ProjectMachineTranslationAdminController
+    public: true
+
+  catrowebadmin.block.statistics.comment_machine_translation:
+    class: App\Admin\Translation\CommentMachineTranslationAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Comment Machine Translation" }
+    arguments:
+      - ~
+      - App\Entity\Translation\CommentMachineTranslation
+      - \App\Admin\Translation\Controller\CommentMachineTranslationAdminController
+    public: true
