@@ -28,10 +28,10 @@ Feature: Using a release app I should not see debug projects
     Then one of the "#home-projects__most_viewed .project-list__project__name" elements should contain "program 2"
     Then one of the "#home-projects__most_viewed .project-list__project__name" elements should contain "debug program"
     Then one of the "#home-projects__most_viewed .project-list__project__name" elements should contain "program 4"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 1"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 2"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "debug program"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 4"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 1"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 2"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "debug program"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 4"
 
   Scenario: Viewing homepage with release app
     Given I use a release build of the Catroid app
@@ -49,10 +49,10 @@ Feature: Using a release app I should not see debug projects
     Then one of the "#home-projects__most_viewed .project-list__project__name" elements should contain "program 2"
     Then none of the "#home-projects__most_viewed .project-list__project__name" elements should contain "debug program"
     Then one of the "#home-projects__most_viewed .project-list__project__name" elements should contain "program 4"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 1"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 2"
-    Then none of the "#home-projects__random .project-list__project__name" elements should contain "debug program"
-    Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 4"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 1"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 2"
+    #Then none of the "#home-projects__random .project-list__project__name" elements should contain "debug program"
+    #Then one of the "#home-projects__random .project-list__project__name" elements should contain "program 4"
 
   Scenario: Viewing profile with debug app
     Given I use a debug build of the Catroid app
