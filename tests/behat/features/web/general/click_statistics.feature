@@ -116,7 +116,7 @@ Feature: Creating click statistics by clicking on tags, extensions and recommend
     And I should see "Trolol"
     And I should see "p5"
 
-  @javascript
+  @javascript @disabled
   Scenario: Create one statistic entry from random programs on homepage
     Given I am on the homepage
     And I wait for the page to be loaded

@@ -1,4 +1,4 @@
-@api
+@api @disabled
 Feature: Get the random programs
 
   Background:

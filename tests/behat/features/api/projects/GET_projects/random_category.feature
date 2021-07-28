@@ -1,4 +1,4 @@
-@api @projects
+@api @projects @disabled
 Feature: Get random projects
 
   Background:
