@@ -47,35 +47,35 @@ class PurgeCommand extends Command
     $progress->start();
 
     $progress->setMessage('Deleting Screenshots');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.screenshot.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.screenshot.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Thumbnails');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.thumbnail.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.thumbnail.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Catrobat Files');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.storage.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.file.storage.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Extracted Catrobat Files');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.file.extract.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.file.extract.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Featured Images');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.featuredimage.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.featuredimage.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting APKs');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.apk.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.apk.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Media Packages');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.mediapackage.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.mediapackage.dir'));
     $progress->advance();
 
     $progress->setMessage('Deleting Templates');
-    CommandHelper::emptyDirectory($this->parameter_bag->get('catrobat.template.dir'));
+    CommandHelper::emptyDirectory((string) $this->parameter_bag->get('catrobat.template.dir'));
     $progress->advance();
 
     $progress->setMessage('Dropping Database');

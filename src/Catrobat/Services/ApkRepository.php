@@ -12,7 +12,7 @@ class ApkRepository
 
   public function __construct(ParameterBagInterface $parameter_bag)
   {
-    $apk_dir = $parameter_bag->get('catrobat.apk.dir');
+    $apk_dir = (string) $parameter_bag->get('catrobat.apk.dir');
     Utils::verifyDirectoryExists($apk_dir);
     $this->dir = $apk_dir;
   }

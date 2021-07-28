@@ -26,8 +26,8 @@ class ThemeRequestListener
     $this->parameter_bag = $parameter_bag;
     $this->router = $router;
     $this->app_request = $app_request;
-    $this->routing_theme = $parameter_bag->get('umbrellaTheme');
-    $this->flavor = $parameter_bag->get('defaultFlavor');
+    $this->routing_theme = (string) $parameter_bag->get('umbrellaTheme');
+    $this->flavor = (string) $parameter_bag->get('defaultFlavor');
   }
 
   public function onKernelRequest(RequestEvent $event): void
@@ -44,7 +44,7 @@ class ThemeRequestListener
     $requested_theme = $this->app_request->getThemeDefinedInRequest();
 
     // URI should not contain a flavor but the umbrella theme
-    $this->routing_theme = $this->parameter_bag->get('umbrellaTheme');
+    $this->routing_theme = (string) $this->parameter_bag->get('umbrellaTheme');
 
     if ('' === $requested_theme) { // - @deprecated
       // However, we still support legacy theming
