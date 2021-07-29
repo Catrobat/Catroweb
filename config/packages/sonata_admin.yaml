@@ -164,6 +164,8 @@ sonata_admin:
                 items:
                     - catrowebadmin.block.statistics.programs
                     - catrowebadmin.block.statistics.clicks
+                    - catrowebadmin.block.statistics.project_machine_translation
+                    - catrowebadmin.block.statistics.comment_machine_translation
 
     security:
 
