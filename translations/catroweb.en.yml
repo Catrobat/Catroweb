@@ -813,3 +813,7 @@ studio:
     promote_user: 'promote to admin'
     promote_failed: 'Failed to promote this user to admin'
     ban_user_failed: 'Failed to ban user from studio!'
+    general_settings: 'General Settings'
+    studio_name: 'Studio Name'
+    studio_desc: 'Description'
+    private_studio: 'Private Studio'

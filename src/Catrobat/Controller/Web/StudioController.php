@@ -214,6 +214,44 @@ class StudioController extends AbstractController
     return new JsonResponse(['new_cover' => $pathToSave], Response::HTTP_OK);
   }
 
+  /**
+   * @Route("/updateStudioDetails/", name="update_studio_details", methods={"POST"})
+   */
+  public function editStudioDetails(Request $request): Response
+  {
+    if ($request->isMethod('POST')) {
+      $std_id = trim(strval($request->request->get('std_id')));
+      $studio = $this->studio_manager->findStudioById($std_id);
+      if (is_null($this->getUser()) || is_null($studio)) {
+        return $this->redirect($request->headers->get('referer'));
+      }
+      $name = trim(strval($request->request->get('studio_name')));
+      if (strlen($name) > 0) {
+        $studio->setName($name);
+      }
+      $desc = trim(strval($request->request->get('studio_desc')));
+      if (strlen($desc)) {
+        $studio->setDescription($desc);
+      }
+      $allow_comments = $request->request->get('allow_comments');
+      if (!is_null($allow_comments)) {
+        $studio->setAllowComments(true);
+      } else {
+        $studio->setAllowComments(false);
+      }
+      $is_private = $request->request->get('is_private');
+      if (!is_null($is_private)) {
+        $studio->setIsPublic(false);
+      } else {
+        $studio->setIsPublic(true);
+      }
+      $studio->setUpdatedOn(new \DateTime('now'));
+      $this->studio_manager->editStudio($this->getUser(), $studio);
+    }
+
+    return $this->redirect($request->headers->get('referer'));
+  }
+
   protected function getStudioProjectsListWithImg(array $studioProjects): array
   {
     $rs = [];

@@ -164,6 +164,10 @@ const Studio = function () {
     }
   }
 
+  this.submitUpdateStudio = function () {
+    $('#updateStudioForm').trigger('submit')
+  }
+
   this.loadActivites = function () {
     $('#activity-list').html('')
     $.ajax({
