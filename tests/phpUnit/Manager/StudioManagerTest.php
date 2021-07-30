@@ -12,10 +12,6 @@ use App\Entity\User;
 use App\Entity\UserComment;
 use App\Entity\UserManager;
 use App\Manager\StudioManager;
-use App\Repository\Studios\StudioActivityRepository;
-use App\Repository\Studios\StudioProgramRepository;
-use App\Repository\Studios\StudioUserRepository;
-use App\Repository\UserCommentRepository;
 use Doctrine\ORM\EntityManager;
 use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -52,26 +48,6 @@ class StudioManagerTest extends CatrowebTestCase
    */
   protected $user;
   /**
-   * @var StudioActivityRepository
-   */
-  protected $studio_repository;
-  /**
-   * @var StudioActivityRepository
-   */
-  protected $studio_activity_repository;
-  /**
-   * @var StudioProgramRepository
-   */
-  protected $studio_project_repository;
-  /**
-   * @var StudioUserRepository
-   */
-  protected $studio_user_repository;
-  /**
-   * @var UserCommentRepository
-   */
-  protected $user_comment_repository;
-  /**
    * @var EntityManager
    */
   protected $entity_manager;
@@ -80,14 +56,14 @@ class StudioManagerTest extends CatrowebTestCase
   {
     $kernel = self::bootKernel();
     $this->entity_manager = $kernel->getContainer()->get('doctrine')->getManager();
-    $this->studio_repository = $this->entity_manager->getRepository(Studio::class);
-    $this->studio_activity_repository = $this->entity_manager->getRepository(StudioActivity::class);
-    $this->studio_project_repository = $this->entity_manager->getRepository(StudioProgram::class);
-    $this->studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
-    $this->user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
+    $studio_repository = $this->entity_manager->getRepository(Studio::class);
+    $studio_activity_repository = $this->entity_manager->getRepository(StudioActivity::class);
+    $studio_project_repository = $this->entity_manager->getRepository(StudioProgram::class);
+    $studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
+    $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
     $this->object = $this->getMockBuilder(StudioManager::class)->setConstructorArgs(
-      [$this->entity_manager, $this->studio_repository, $this->studio_activity_repository,
-        $this->studio_project_repository, $this->studio_user_repository, $this->user_comment_repository, ])
+      [$this->entity_manager, $studio_repository, $studio_activity_repository,
+        $studio_project_repository, $studio_user_repository, $user_comment_repository, ])
       ->getMockForAbstractClass()
     ;
     $this->user_manager = $kernel->getContainer()->get(UserManager::class);
@@ -101,7 +77,6 @@ class StudioManagerTest extends CatrowebTestCase
   {
     $this->object->deleteStudio($this->studio, $this->user);
     $this->entity_manager->close();
-//    $this->entity_manager = null;
   }
 
   /**
@@ -121,14 +96,14 @@ class StudioManagerTest extends CatrowebTestCase
   public function testCreateDeleteStudio(): void
   {
     $this->assertInstanceOf(Studio::class, $this->studio);
-    $this->assertNotNull($this->studio_user_repository->findStudioUser($this->user, $this->studio));
-    $this->assertCount(1, $this->studio_activity_repository->findAllStudioActivities($this->studio));
+    $this->assertNotNull($this->object->findStudioUser($this->user, $this->studio));
+    $this->assertCount(1, $this->object->findAllStudioActivities($this->studio));
     $this->assertSame($this->studio, $this->object->findStudioById($this->studio->getId()));
     $studio_cloned = clone $this->studio;
     $this->object->deleteStudio($this->studio, $this->user);
     $this->assertNull($this->object->findStudioById($studio_cloned->getId()));
-    $this->assertNull($this->studio_user_repository->findStudioUser($this->user, $studio_cloned));
-    $this->assertEmpty($this->studio_activity_repository->findAllStudioActivities($studio_cloned));
+    $this->assertNull($this->object->findStudioUser($this->user, $studio_cloned));
+    $this->assertEmpty($this->object->findAllStudioActivities($studio_cloned));
   }
 
   /**
@@ -220,6 +195,7 @@ class StudioManagerTest extends CatrowebTestCase
     $this->object->deleteCommentFromStudio($newUser, $userComment_2->getId());
     $this->assertNull($this->object->findStudioCommentById($userComment_2->getId()));
     $this->assertCount(0, $this->object->findAllStudioComments($this->studio));
+    $this->assertEquals(0, $this->object->findStudioCommentsCount($this->studio));
   }
 
   /**
@@ -251,5 +227,28 @@ class StudioManagerTest extends CatrowebTestCase
     $this->object->deleteProjectFromStudio($this->user, $this->studio, $project);
     $this->assertNull($this->object->findStudioProject($this->studio, $project));
     $this->assertCount(0, $this->object->findAllStudioProjects($this->studio));
+  }
+
+  /**
+   * @group integration
+   * @small
+   */
+  public function testAddRemoveStudioCommentReplies(): void
+  {
+    $studioComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');
+    $replies = ['test reply 1', 'test reply 2'];
+    $reply_1 = $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
+    $reply_2 = $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
+    $this->assertEquals(2, $this->object->findCommentRepliesCount($studioComment->getId()));
+    $i = 0;
+    foreach ($this->object->findCommentReplies($studioComment->getId()) as $reply) {
+      $this->assertInstanceOf(UserComment::class, $reply);
+      $this->assertEquals($replies[$i], $reply->getText());
+      ++$i;
+    }
+    $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
+    $this->assertEquals(0, $this->object->findCommentRepliesCount($studioComment->getId()));
+    $this->assertNull($this->object->findStudioCommentById($reply_1->getId()));
+    $this->assertNull($this->object->findStudioCommentById($reply_2->getId()));
   }
 }
