@@ -32,7 +32,7 @@
     {% else %}
         <h5 id="no-comments" class="mt-5 mb-5 center">{{ 'studio.details.no_comments'|trans({}, 'catroweb') }}</h5>
     {% endif %}
-    {% if user_role != null %}
+    {% if user_role != null and studio.isAllowComments == '1' %}
         <div id="add-comment" class="add-comment-section">
             <input type="text" placeholder="{{ 'studio.details.type_something'|trans({}, 'catroweb') }}">
             <a href="javascript:void(0)"
