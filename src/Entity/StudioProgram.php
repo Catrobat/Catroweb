@@ -59,9 +59,11 @@ class StudioProgram
     return $this->id;
   }
 
-  public function setId(?int $id): void
+  public function setId(?int $id): StudioProgram
   {
     $this->id = $id;
+
+    return $this;
   }
 
   public function getStudio(): Studio
@@ -69,9 +71,11 @@ class StudioProgram
     return $this->studio;
   }
 
-  public function setStudio(Studio $studio): void
+  public function setStudio(Studio $studio): StudioProgram
   {
     $this->studio = $studio;
+
+    return $this;
   }
 
   public function getActivity(): StudioActivity
@@ -79,9 +83,11 @@ class StudioProgram
     return $this->activity;
   }
 
-  public function setActivity(StudioActivity $activity): void
+  public function setActivity(StudioActivity $activity): StudioProgram
   {
     $this->activity = $activity;
+
+    return $this;
   }
 
   public function getProgram(): Program
@@ -89,9 +95,11 @@ class StudioProgram
     return $this->program;
   }
 
-  public function setProgram(Program $program): void
+  public function setProgram(Program $program): StudioProgram
   {
     $this->program = $program;
+
+    return $this;
   }
 
   public function getUser(): User
@@ -99,9 +107,11 @@ class StudioProgram
     return $this->user;
   }
 
-  public function setUser(User $user): void
+  public function setUser(User $user): StudioProgram
   {
     $this->user = $user;
+
+    return $this;
   }
 
   public function getUpdatedOn(): ?DateTime
@@ -109,9 +119,11 @@ class StudioProgram
     return $this->updated_on;
   }
 
-  public function setUpdatedOn(?DateTime $updated_on): void
+  public function setUpdatedOn(?DateTime $updated_on): StudioProgram
   {
     $this->updated_on = $updated_on;
+
+    return $this;
   }
 
   public function getCreatedOn(): DateTime
@@ -119,8 +131,10 @@ class StudioProgram
     return $this->created_on;
   }
 
-  public function setCreatedOn(DateTime $created_on): void
+  public function setCreatedOn(DateTime $created_on): StudioProgram
   {
     $this->created_on = $created_on;
+
+    return $this;
   }
 }

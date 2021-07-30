@@ -115,7 +115,7 @@ class StudioManagerTest extends CatrowebTestCase
     $newStudio = clone $this->studio;
     $newStudio->setName('new studio name');
     $newStudio->setDescription('new studio description');
-    $this->assertSame($newStudio, $this->object->editStudio($this->user, $newStudio));
+    $this->assertSame($newStudio, $this->object->changeStudio($this->user, $newStudio));
     $this->assertNotSame($this->studio, $newStudio);
   }
 
@@ -178,24 +178,38 @@ class StudioManagerTest extends CatrowebTestCase
   public function testAddEditRemoveStudioComment(): void
   {
     $adminComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');
-    $this->assertInstanceOf(UserComment::class, $adminComment);
+    $this->assertNotNull($adminComment);
+
     $newUser = $this->user_fixture->insertUser(['name' => 'eminem', 'password' => '123456']);
-    $this->assertNull($this->object->addCommentToStudio($newUser, $this->studio, 'whaaat!'));
+    $this->assertNull($this->object->addCommentToStudio($newUser, $this->studio, 'Only members of a studio can add comments'));
+
     $this->object->addUserToStudio($this->user, $this->studio, $newUser);
-    $userComment = $this->object->addCommentToStudio($newUser, $this->studio, 'normal user comment');
+
+    $userComment = $this->object->addCommentToStudio($newUser, $this->studio, 'normal member comment');
     $this->assertNotNull($userComment);
-    $this->assertNull($this->object->editStudioComment($newUser, $adminComment->getId(), 'try fail'));
-    $this->object->deleteCommentFromStudio($newUser, $adminComment->getId());
-    $this->assertNotNull($this->object->findStudioCommentById($adminComment->getId()));
-    $this->object->deleteCommentFromStudio($this->user, $adminComment->getId());
-    $this->assertNull($this->object->findStudioCommentById($adminComment->getId()));
-    $this->object->deleteCommentFromStudio($this->user, $userComment->getId());
-    $this->assertNull($this->object->findStudioCommentById($userComment->getId()));
+
+    $this->assertNotNull($adminComment->getId());
     $userComment_2 = $this->object->addCommentToStudio($newUser, $this->studio, 'normal user comment 2');
+
+    $this->assertNull($this->object->editStudioComment($newUser, $adminComment->getId(), "can't edit comments that are not your own"));
+
+    $this->object->deleteCommentFromStudio($newUser, $adminComment->getId());
+    $this->assertNotNull($adminComment->getId(), "Can't delete comments that are not your own");
+
+    $this->object->deleteCommentFromStudio($newUser, $userComment->getId());
+    $this->assertNull($userComment->getId());
+
     $this->object->deleteCommentFromStudio($newUser, $userComment_2->getId());
-    $this->assertNull($this->object->findStudioCommentById($userComment_2->getId()));
+    $this->assertNull($userComment_2->getId());
+
+    $this->assertCount(1, $this->object->findAllStudioComments($this->studio));
+    $this->assertEquals(1, $this->object->countStudioComments($this->studio));
+
+    $this->object->deleteCommentFromStudio($this->user, $adminComment->getId());
+    $this->assertNull($adminComment->getId());
+
     $this->assertCount(0, $this->object->findAllStudioComments($this->studio));
-    $this->assertEquals(0, $this->object->findStudioCommentsCount($this->studio));
+    $this->assertEquals(0, $this->object->countStudioComments($this->studio));
   }
 
   /**
@@ -237,9 +251,9 @@ class StudioManagerTest extends CatrowebTestCase
   {
     $studioComment = $this->object->addCommentToStudio($this->user, $this->studio, 'test comment');
     $replies = ['test reply 1', 'test reply 2'];
-    $reply_1 = $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
-    $reply_2 = $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
-    $this->assertEquals(2, $this->object->findCommentRepliesCount($studioComment->getId()));
+    $this->object->addCommentToStudio($this->user, $this->studio, $replies[0], $studioComment->getId());
+    $this->object->addCommentToStudio($this->user, $this->studio, $replies[1], $studioComment->getId());
+    $this->assertEquals(2, $this->object->countCommentReplies($studioComment->getId()));
     $i = 0;
     foreach ($this->object->findCommentReplies($studioComment->getId()) as $reply) {
       $this->assertInstanceOf(UserComment::class, $reply);
@@ -247,8 +261,7 @@ class StudioManagerTest extends CatrowebTestCase
       ++$i;
     }
     $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
-    $this->assertEquals(0, $this->object->findCommentRepliesCount($studioComment->getId()));
-    $this->assertNull($this->object->findStudioCommentById($reply_1->getId()));
-    $this->assertNull($this->object->findStudioCommentById($reply_2->getId()));
+
+    $this->assertEquals(0, $this->object->countStudioComments($this->studio));
   }
 }

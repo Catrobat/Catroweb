@@ -10,7 +10,7 @@ use Doctrine\Migrations\AbstractMigration;
 /**
  * Auto-generated Migration: Please modify to your needs!
  */
-final class Version20210530193145 extends AbstractMigration
+final class Version20210730083426 extends AbstractMigration
 {
     public function getDescription(): string
     {
@@ -33,7 +33,7 @@ final class Version20210530193145 extends AbstractMigration
         $this->addSql('ALTER TABLE studio_user ADD CONSTRAINT FK_EC686DD14A2B07B6 FOREIGN KEY (studio) REFERENCES studio (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE studio_user ADD CONSTRAINT FK_EC686DD1AC74095A FOREIGN KEY (activity) REFERENCES studio_activity (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE studio_user ADD CONSTRAINT FK_EC686DD18D93D649 FOREIGN KEY (user) REFERENCES fos_user (id) ON DELETE CASCADE');
-        $this->addSql('ALTER TABLE user_comment ADD studio CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', ADD activity INT DEFAULT NULL');
+        $this->addSql('ALTER TABLE user_comment ADD studio CHAR(36) DEFAULT NULL COMMENT \'(DC2Type:guid)\', ADD activity INT DEFAULT NULL, ADD parent_id INT DEFAULT NULL');
         $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C664A2B07B6 FOREIGN KEY (studio) REFERENCES studio (id) ON DELETE CASCADE');
         $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66AC74095A FOREIGN KEY (activity) REFERENCES studio_activity (id) ON DELETE CASCADE');
         $this->addSql('CREATE INDEX IDX_CC794C664A2B07B6 ON user_comment (studio)');
@@ -56,6 +56,6 @@ final class Version20210530193145 extends AbstractMigration
         $this->addSql('DROP TABLE studio_user');
         $this->addSql('DROP INDEX IDX_CC794C664A2B07B6 ON user_comment');
         $this->addSql('DROP INDEX UNIQ_CC794C66AC74095A ON user_comment');
-        $this->addSql('ALTER TABLE user_comment DROP studio, DROP activity');
+        $this->addSql('ALTER TABLE user_comment DROP studio, DROP activity, DROP parent_id');
     }
 }
