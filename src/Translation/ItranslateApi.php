@@ -4,6 +4,7 @@ namespace App\Translation;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
+use Psr\Log\LoggerInterface;
 
 class ItranslateApi implements TranslationApiInterface
 {
@@ -16,10 +17,12 @@ class ItranslateApi implements TranslationApiInterface
 
   private Client $client;
   private string $api_key;
+  private LoggerInterface $logger;
 
-  public function __construct(Client $client)
+  public function __construct(Client $client, LoggerInterface $logger)
   {
     $this->client = $client;
+    $this->logger = $logger;
     $this->api_key = $_ENV['ITRANSLATE_API_KEY'];
   }
 
@@ -46,12 +49,16 @@ class ItranslateApi implements TranslationApiInterface
         ]
       );
     } catch (GuzzleException $e) {
+      $this->logger->error("Itranslate Guzzle client exception, source: {$source_language}, target: {$target_language}, text: {$text}, message: {$e->getMessage()}");
+
       return null;
     }
 
     $statusCode = $response->getStatusCode();
 
     if (200 != $statusCode) {
+      $this->logger->error("Itranslate returned status code {$statusCode}, source: {$source_language}, target: {$target_language}, text: {$text}, body: {$response->getBody()}");
+
       return null;
     }
 
