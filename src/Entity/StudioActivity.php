@@ -57,9 +57,11 @@ class StudioActivity
     return $this->id;
   }
 
-  public function setId(?int $id): void
+  public function setId(?int $id): StudioActivity
   {
     $this->id = $id;
+
+    return $this;
   }
 
   public function getStudio(): Studio
@@ -67,9 +69,11 @@ class StudioActivity
     return $this->studio;
   }
 
-  public function setStudio(Studio $studio): void
+  public function setStudio(Studio $studio): StudioActivity
   {
     $this->studio = $studio;
+
+    return $this;
   }
 
   public function getType(): string
@@ -77,12 +81,14 @@ class StudioActivity
     return $this->type;
   }
 
-  public function setType(string $type): void
+  public function setType(string $type): StudioActivity
   {
     if (!in_array($type, $this->activity_types, true)) {
       throw new InvalidArgumentException('invalid activity type given');
     }
     $this->type = $type;
+
+    return $this;
   }
 
   public function getUser(): User
@@ -90,9 +96,11 @@ class StudioActivity
     return $this->user;
   }
 
-  public function setUser(User $user): void
+  public function setUser(User $user): StudioActivity
   {
     $this->user = $user;
+
+    return $this;
   }
 
   public function getCreatedOn(): DateTime
@@ -100,8 +108,10 @@ class StudioActivity
     return $this->created_on;
   }
 
-  public function setCreatedOn(DateTime $created_on): void
+  public function setCreatedOn(DateTime $created_on): StudioActivity
   {
     $this->created_on = $created_on;
+
+    return $this;
   }
 }

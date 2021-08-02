@@ -88,6 +88,11 @@ class UserComment
   private ?Program $program = null;
 
   /**
+   * @ORM\Column(type="integer", nullable=true)
+   */
+  protected ?int $parent_id = null;
+
+  /**
    * @ORM\ManyToOne(targetEntity="Studio", inversedBy="comments", cascade={"persist"})
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
@@ -115,9 +120,11 @@ class UserComment
   /**
    * Sets the Program which this UserComment comments.
    */
-  public function setProgram(Program $program): void
+  public function setProgram(Program $program): UserComment
   {
     $this->program = $program;
+
+    return $this;
   }
 
   public function getId(): ?int
@@ -125,9 +132,11 @@ class UserComment
     return $this->id;
   }
 
-  public function setId(int $id): void
+  public function setId(int $id): UserComment
   {
     $this->id = $id;
+
+    return $this;
   }
 
   /**
@@ -141,9 +150,11 @@ class UserComment
   /**
    * Sets the User who wrote this UserComment.
    */
-  public function setUser(User $user): void
+  public function setUser(User $user): UserComment
   {
     $this->user = $user;
+
+    return $this;
   }
 
   public function getUploadDate(): ?DateTime
@@ -151,9 +162,11 @@ class UserComment
     return $this->uploadDate;
   }
 
-  public function setUploadDate(DateTime $uploadDate): void
+  public function setUploadDate(DateTime $uploadDate): UserComment
   {
     $this->uploadDate = $uploadDate;
+
+    return $this;
   }
 
   public function getText(): ?string
@@ -161,9 +174,11 @@ class UserComment
     return $this->text;
   }
 
-  public function setText(string $text): void
+  public function setText(string $text): UserComment
   {
     $this->text = $text;
+
+    return $this;
   }
 
   public function getUsername(): ?string
@@ -171,9 +186,11 @@ class UserComment
     return $this->username;
   }
 
-  public function setUsername(string $username): void
+  public function setUsername(string $username): UserComment
   {
     $this->username = $username;
+
+    return $this;
   }
 
   public function getIsReported(): bool
@@ -181,9 +198,11 @@ class UserComment
     return $this->isReported;
   }
 
-  public function setIsReported(bool $isReported): void
+  public function setIsReported(bool $isReported): UserComment
   {
     $this->isReported = $isReported;
+
+    return $this;
   }
 
   /**
@@ -197,9 +216,11 @@ class UserComment
   /**
    * Sets the CommentNotification triggered by creating this UserComment.
    */
-  public function setNotification(CommentNotification $notification): void
+  public function setNotification(CommentNotification $notification): UserComment
   {
     $this->notification = $notification;
+
+    return $this;
   }
 
   public function getStudio(): ?Studio
@@ -207,9 +228,11 @@ class UserComment
     return $this->studio;
   }
 
-  public function setStudio(?Studio $studio): void
+  public function setStudio(?Studio $studio): UserComment
   {
     $this->studio = $studio;
+
+    return $this;
   }
 
   public function getActivity(): ?StudioActivity
@@ -217,8 +240,22 @@ class UserComment
     return $this->activity;
   }
 
-  public function setActivity(?StudioActivity $activity): void
+  public function setActivity(?StudioActivity $activity): UserComment
   {
     $this->activity = $activity;
+
+    return $this;
+  }
+
+  public function getParentId(): ?int
+  {
+    return $this->parent_id;
+  }
+
+  public function setParentId(?int $parent_id): UserComment
+  {
+    $this->parent_id = $parent_id;
+
+    return $this;
   }
 }

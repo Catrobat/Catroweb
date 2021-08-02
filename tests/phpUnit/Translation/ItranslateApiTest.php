@@ -9,6 +9,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Psr\Log\LoggerInterface;
 
 /**
  * @internal
@@ -26,7 +27,7 @@ class ItranslateApiTest extends TestCase
   protected function setUp(): void
   {
     $this->httpClient = $this->createMock(Client::class);
-    $this->api = new ItranslateApi($this->httpClient);
+    $this->api = new ItranslateApi($this->httpClient, $this->createMock(LoggerInterface::class));
   }
 
   public function testShortenLanguageCode(): void

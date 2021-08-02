@@ -30,8 +30,6 @@ final class Version20210605095659 extends AbstractMigration
         $this->addSql('DROP INDEX IDX_92ED778454B8758D ON program');
         $this->addSql('DROP INDEX IDX_92ED778412469DE2 ON program');
         $this->addSql('ALTER TABLE program DROP category_id, DROP gamejam_id, DROP gamejam_submission_accepted, DROP gamejam_submission_date');
-        $this->addSql('ALTER TABLE studio_activity CHANGE type type ENUM(\'comment\', \'project\', \'user\')');
-        $this->addSql('ALTER TABLE studio_user CHANGE role role ENUM(\'admin\', \'member\'), CHANGE status status ENUM(\'active\', \'banned\', \'pending_request\')');
     }
 
     public function down(Schema $schema): void
@@ -48,7 +46,5 @@ final class Version20210605095659 extends AbstractMigration
         $this->addSql('ALTER TABLE program ADD CONSTRAINT FK_92ED778454B8758D FOREIGN KEY (gamejam_id) REFERENCES GameJam (id)');
         $this->addSql('CREATE INDEX IDX_92ED778454B8758D ON program (gamejam_id)');
         $this->addSql('CREATE INDEX IDX_92ED778412469DE2 ON program (category_id)');
-        $this->addSql('ALTER TABLE studio_activity CHANGE type type VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
-        $this->addSql('ALTER TABLE studio_user CHANGE role role VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`, CHANGE status status VARCHAR(255) CHARACTER SET utf8mb4 DEFAULT NULL COLLATE `utf8mb4_unicode_ci`');
     }
 }

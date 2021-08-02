@@ -15,10 +15,11 @@ class Studio
 {
   /**
    * @ORM\Id
-   * @ORM\Column(name="id", type="integer")
-   * @ORM\GeneratedValue(strategy="AUTO")
+   * @ORM\Column(name="id", type="guid")
+   * @ORM\GeneratedValue(strategy="CUSTOM")
+   * @ORM\CustomIdGenerator(class="App\Utils\MyUuidGenerator")
    */
-  protected ?int $id = null;
+  protected ?string $id = null;
 
   /**
    * @ORM\Column(name="name", type="string", nullable=false, unique=true)
@@ -26,7 +27,7 @@ class Studio
   protected string $name;
 
   /**
-   * @ORM\Column(name="description", type="text", length=300, nullable=false)
+   * @ORM\Column(name="description", type="text", length=3000, nullable=false)
    */
   protected string $description;
 
@@ -60,14 +61,16 @@ class Studio
    */
   protected ?DateTime $created_on;
 
-  public function getId(): ?int
+  public function getId(): ?string
   {
     return $this->id;
   }
 
-  public function setId(?int $id): void
+  public function setId(?string $id): Studio
   {
     $this->id = $id;
+
+    return $this;
   }
 
   public function getName(): string
@@ -75,9 +78,11 @@ class Studio
     return $this->name;
   }
 
-  public function setName(string $name): void
+  public function setName(string $name): Studio
   {
     $this->name = $name;
+
+    return $this;
   }
 
   public function getDescription(): string
@@ -85,29 +90,35 @@ class Studio
     return $this->description;
   }
 
-  public function setDescription(string $description): void
+  public function setDescription(string $description): Studio
   {
     $this->description = $description;
+
+    return $this;
   }
 
-  public function isPublic(): bool
+  public function isIsPublic(): bool
   {
     return $this->is_public;
   }
 
-  public function setIsPublic(bool $is_public): void
+  public function setIsPublic(bool $is_public): Studio
   {
     $this->is_public = $is_public;
+
+    return $this;
   }
 
-  public function isEnabled(): bool
+  public function isIsEnabled(): bool
   {
     return $this->is_enabled;
   }
 
-  public function setIsEnabled(bool $is_enabled): void
+  public function setIsEnabled(bool $is_enabled): Studio
   {
     $this->is_enabled = $is_enabled;
+
+    return $this;
   }
 
   public function isAllowComments(): bool
@@ -115,9 +126,11 @@ class Studio
     return $this->allow_comments;
   }
 
-  public function setAllowComments(bool $allow_comments): void
+  public function setAllowComments(bool $allow_comments): Studio
   {
     $this->allow_comments = $allow_comments;
+
+    return $this;
   }
 
   public function getCoverPath(): ?string
@@ -125,9 +138,11 @@ class Studio
     return $this->cover_path;
   }
 
-  public function setCoverPath(?string $cover_path): void
+  public function setCoverPath(?string $cover_path): Studio
   {
     $this->cover_path = $cover_path;
+
+    return $this;
   }
 
   public function getUpdatedOn(): ?DateTime
@@ -135,9 +150,11 @@ class Studio
     return $this->updated_on;
   }
 
-  public function setUpdatedOn(?DateTime $updated_on): void
+  public function setUpdatedOn(?DateTime $updated_on): Studio
   {
     $this->updated_on = $updated_on;
+
+    return $this;
   }
 
   public function getCreatedOn(): ?DateTime
@@ -145,8 +162,10 @@ class Studio
     return $this->created_on;
   }
 
-  public function setCreatedOn(?DateTime $created_on): void
+  public function setCreatedOn(?DateTime $created_on): Studio
   {
     $this->created_on = $created_on;
+
+    return $this;
   }
 }
