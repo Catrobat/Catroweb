@@ -4,10 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [3.12.0]
+## [3.13.0]
 - update dependencies
 - update translations
 - Adds new iTranslate features
+- Adds new flavors
+- basic studio logic: activity list, member list, detail view, admin settings
+- error logging translate api
+
+## [3.12.3]
+- update/fix dependencies
+- update translations
+- remove random category from startpage
+- Adds new iTranslate features: admin interface, 
 - Adds new flavors
 
 ## [3.11.1]
@@ -364,7 +373,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.11.1...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.13.0...HEAD
+[3.10.1]: https://github.com/Catrobat/Catroweb/compare/v3.12.3...v3.13.0
+[3.10.1]: https://github.com/Catrobat/Catroweb/compare/v3.11.1...v3.12.3
 [3.10.1]: https://github.com/Catrobat/Catroweb/compare/v3.11.0...v3.11.1
 [3.10.1]: https://github.com/Catrobat/Catroweb/compare/v3.10.1...v3.11.0
 [3.10.1]: https://github.com/Catrobat/Catroweb/compare/v3.10.0...v3.10.1
