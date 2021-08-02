@@ -29,7 +29,7 @@ class StudioActivityRepository extends ServiceEntityRepository
     return $this->findBy(['studio' => $studio, 'type' => $activityType]);
   }
 
-  public function findStudioActivitiesCount(Studio $studio): int
+  public function countStudioActivities(Studio $studio): int
   {
     return $this->count(['studio' => $studio]);
   }

@@ -26,12 +26,12 @@ class StudioProgramRepository extends ServiceEntityRepository
     return $this->findOneBy(['studio' => $studio, 'program' => $program]);
   }
 
-  public function findStudioProjectsCount(?Studio $studio): int
+  public function countStudioProjects(?Studio $studio): int
   {
     return $this->count(['studio' => $studio]);
   }
 
-  public function findStudioUserProjectsCount(?Studio $studio, ?UserInterface $user): int
+  public function countStudioUserProjects(?Studio $studio, ?UserInterface $user): int
   {
     return $this->count(['studio' => $studio, 'user' => $user]);
   }

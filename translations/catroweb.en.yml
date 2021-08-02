@@ -785,7 +785,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'Comments'
     public: 'public'
     private: 'private'
     join: 'Join'

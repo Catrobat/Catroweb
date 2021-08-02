@@ -5,13 +5,12 @@
     <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/modal.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}">
     <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}"/>
-    <script src="{{ asset('js/Studio.min.js') }}"></script>
 {% endblock %}
 
 {% block body %}
     <section>
         <div id="studio-img-container" class="row">
-            <img src="{{ studio.CoverPath }}" class="img-fluid" alt="">
+            <img src="{{ asset(studio.CoverPath) }}" class="img-fluid" alt="">
         </div>
         <div class="row">
             {% include 'Studio/studio_details_header.html.twig' %}
@@ -41,5 +40,6 @@
     <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
 {% endblock %}
 {% block js %}
-    {{ encore_entry_script_tags('tab-bar') }}
+    <script src="{{ asset('js/Studio.min.js') }}"></script>
+{#    {{ encore_entry_script_tags('tab-bar') }}#}
 {% endblock %}

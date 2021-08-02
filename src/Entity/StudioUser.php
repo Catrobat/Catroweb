@@ -18,17 +18,13 @@ class StudioUser
    * adding new constant requires adding it to the enum in the annotation of the column.
    */
   public const ROLE_ADMIN = 'admin';
-
   public const ROLE_MEMBER = 'member';
 
   public const STATUS_ACTIVE = 'active';
-
   public const STATUS_BANNED = 'banned';
-
   public const STATUS_PENDING_REQUEST = 'pending_request';
 
   private array $roles = [self::ROLE_ADMIN, self::ROLE_MEMBER];
-
   private array $statuses = [self::STATUS_ACTIVE, self::STATUS_BANNED, self::STATUS_PENDING_REQUEST];
 
   /**
@@ -81,9 +77,11 @@ class StudioUser
     return $this->id;
   }
 
-  public function setId(?int $id): void
+  public function setId(?int $id): StudioUser
   {
     $this->id = $id;
+
+    return $this;
   }
 
   public function getStudio(): Studio
@@ -91,9 +89,11 @@ class StudioUser
     return $this->studio;
   }
 
-  public function setStudio(Studio $studio): void
+  public function setStudio(Studio $studio): StudioUser
   {
     $this->studio = $studio;
+
+    return $this;
   }
 
   public function getActivity(): StudioActivity
@@ -101,9 +101,11 @@ class StudioUser
     return $this->activity;
   }
 
-  public function setActivity(StudioActivity $activity): void
+  public function setActivity(StudioActivity $activity): StudioUser
   {
     $this->activity = $activity;
+
+    return $this;
   }
 
   public function getUser(): User
@@ -111,9 +113,11 @@ class StudioUser
     return $this->user;
   }
 
-  public function setUser(User $user): void
+  public function setUser(User $user): StudioUser
   {
     $this->user = $user;
+
+    return $this;
   }
 
   public function getRole(): string
@@ -121,12 +125,14 @@ class StudioUser
     return $this->role;
   }
 
-  public function setRole(string $role): void
+  public function setRole(string $role): StudioUser
   {
     if (!in_array($role, $this->roles, true)) {
       throw new InvalidArgumentException('invalid user role given');
     }
     $this->role = $role;
+
+    return $this;
   }
 
   public function getStatus(): string
@@ -134,12 +140,14 @@ class StudioUser
     return $this->status;
   }
 
-  public function setStatus(string $status): void
+  public function setStatus(string $status): StudioUser
   {
     if (!in_array($status, $this->statuses, true)) {
       throw new InvalidArgumentException('invalid user status given');
     }
     $this->status = $status;
+
+    return $this;
   }
 
   public function getUpdatedOn(): ?DateTime
@@ -147,9 +155,11 @@ class StudioUser
     return $this->updated_on;
   }
 
-  public function setUpdatedOn(?DateTime $updated_on): void
+  public function setUpdatedOn(?DateTime $updated_on): StudioUser
   {
     $this->updated_on = $updated_on;
+
+    return $this;
   }
 
   public function getCreatedOn(): DateTime
@@ -157,8 +167,10 @@ class StudioUser
     return $this->created_on;
   }
 
-  public function setCreatedOn(DateTime $created_on): void
+  public function setCreatedOn(DateTime $created_on): StudioUser
   {
     $this->created_on = $created_on;
+
+    return $this;
   }
 }
