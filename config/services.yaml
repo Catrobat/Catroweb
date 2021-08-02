@@ -902,6 +902,7 @@ services:
   App\Translation\TranslationDelegate:
     class: App\Translation\TranslationDelegate
     arguments:
+      - '@App\Repository\ProjectCustomTranslationRepository'
       - '@App\Translation\ItranslateApi'
 
   App\Translation\MachineTranslationListener:
@@ -926,5 +927,5 @@ services:
     arguments:
       - ~
       - App\Entity\Translation\CommentMachineTranslation
-      - \App\Admin\Translation\Controller\CommentMachineTranslationAdminController
+      - App\Admin\Translation\Controller\CommentMachineTranslationAdminController
     public: true
