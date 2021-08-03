@@ -736,7 +736,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'వ్యాఖ్యలు'
     public: 'public'
     private: 'private'
     join: 'Join'

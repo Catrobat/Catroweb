@@ -740,7 +740,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'பின்கருத்துக்கள்'
     public: 'public'
     private: 'private'
     join: 'Join'
