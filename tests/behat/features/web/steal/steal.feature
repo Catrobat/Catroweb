@@ -21,3 +21,8 @@ Feature: I can steal a project from an other user
     Then I should be on "/app/project/1"
     And I wait for the page to be loaded
     And I should see "Andi"
+
+
+
+
+
