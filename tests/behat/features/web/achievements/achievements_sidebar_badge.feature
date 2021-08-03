@@ -13,8 +13,8 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
 
   Scenario: User should not see a badge if there are no new achievements
     Given there are user achievements:
-      | id | user     | achievement        | seen_at    | unlocked_at |
-      | 1  | Catrobat | best_user          | 2021-03-03 | 2021-03-03  |
+      | id | user     | achievement | seen_at    | unlocked_at |
+      | 1  | Catrobat | best_user   | 2021-03-03 | 2021-03-03  |
     Given I log in as "Catrobat"
     And I open the menu
     Then the element "#sidebar-achievements" should be visible

@@ -3,8 +3,8 @@ Feature: The admin achievements view provides a detailed list about all achievem
 
   Background:
     Given there are admins:
-      | name     |
-      | Adminius |
+      | name  |
+      | Admin |
     Given there are achievements:
       | id | internal_title  | internal_description | priority | banner_color | enabled |
       | 1  | best_user_badge | best__desc           | 777      | #ff0000      | 1       |
@@ -20,7 +20,7 @@ Feature: The admin achievements view provides a detailed list about all achievem
       | 3  | Catrobat | achiever_badge  |         | 2021-05-03  |
 
   Scenario: All achievements should be displayed with some stats
-    Given I log in as "Adminius"
+    Given I log in as "Admin"
     And I am on "/admin/achievements/list"
     And I wait for the page to be loaded
     Then I should see "Achievements"
@@ -30,7 +30,7 @@ Feature: The admin achievements view provides a detailed list about all achievem
       | 1234     | achiever_badge  | first__desc          |       |              | #00ff00 | yes     | 2 users     |
 
   Scenario: Achievements can be updated
-    Given I log in as "Adminius"
+    Given I log in as "Admin"
     And I am on "/admin/achievements/list"
     And I wait for the page to be loaded
     Then I should see "Update Achievements"

@@ -19,7 +19,6 @@ Feature: Recommendations on homepage (a.k.a. index page)
       | 6  | Awesome Game | p6          | OtherUser | 7         | 26            | 12    | 01.03.2013 12:00 | 0.8.5   |
 
 
-
   Scenario: Recommended programs on homepage (a.k.a. index page)
     Given there are project reactions:
       | user      | project | type | created at       |

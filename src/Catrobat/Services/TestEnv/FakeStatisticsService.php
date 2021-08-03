@@ -48,13 +48,13 @@ class FakeStatisticsService extends StatisticsService
    * @throws Exception
    */
   public function createClickStatistics(Request $request, string $type, ?string $rec_from_id, ?string $rec_program_id,
-                                        ?int $tag_id, ?string $extension_name,
+                                        ?string $tag_name, ?string $extension_name,
                                         ?string $referrer, ?string $locale = null,
                                         bool $is_recommended_program_a_scratch_program = false,
                                         bool $is_user_specific_recommendation = false): bool
   {
     return $this->geocoder_service->createClickStatistics($request, $type, $rec_from_id, $rec_program_id,
-      $tag_id, $extension_name, $referrer);
+      $tag_name, $extension_name, $referrer);
   }
 
   /**

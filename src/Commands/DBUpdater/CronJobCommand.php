@@ -104,6 +104,14 @@ class CronJobCommand extends Command
       $output
     );
 
+    $this->runCronJob(
+      '(Re-)Add project extensions',
+      ['bin/console', 'catrobat:workflow:project:refresh_extensions'],
+      ['timeout' => self::ONE_WEEK_IN_SECONDS],
+      '1 year',
+      $output
+    );
+
     // Translation database maintenance
 
     $this->runCronJob(

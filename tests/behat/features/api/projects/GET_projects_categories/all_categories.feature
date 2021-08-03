@@ -1,26 +1,27 @@
 @api @projects
 Feature: Get projects oversight
+
   Background:
     Given there are users:
-    | id | name     | password |
-    | 1  | Catrobat | 123456   |
-    | 2  | User1    | 123456   |
+      | id | name     | password |
+      | 1  | Catrobat | 123456   |
+      | 2  | User1    | 123456   |
     And there are programs:
-    | id | name      |  owned by | views | upload time      | FileSize | version |   flavor    |  private | visible |
-    | 1  | project 1 |  Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   |  pocketcode |   false  |  true   |
-    | 2  | project 2 |  User1    | 50    | 02.08.2014 12:00 | 1048576  | 0.8.5   |  luna       |   false  |  true   |
-    | 3  | project 3 |  Catrobat | 40    | 03.08.2014 12:00 | 1048576  | 0.8.5   |  pocketcode |   true   |  true   |
-    | 4  | project 4 |  Catrobat | 40    | 03.08.2014 12:00 | 1048576  | 0.8.5   |  pocketcode |   true   |  false  |
+      | id | name      | owned by | views | upload time      | FileSize | version | flavor     | private | visible |
+      | 1  | project 1 | Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   | pocketcode | false   | true    |
+      | 2  | project 2 | User1    | 50    | 02.08.2014 12:00 | 1048576  | 0.8.5   | luna       | false   | true    |
+      | 3  | project 3 | Catrobat | 40    | 03.08.2014 12:00 | 1048576  | 0.8.5   | pocketcode | true    | true    |
+      | 4  | project 4 | Catrobat | 40    | 03.08.2014 12:00 | 1048576  | 0.8.5   | pocketcode | true    | false   |
     And there are flavors:
-    | id | name       |
-    | 1  | pocketcode |
-    | 2  | luna       |
-    | 3  | arduino    |
+      | id | name       |
+      | 1  | pocketcode |
+      | 2  | luna       |
+      | 3  | arduino    |
     And following programs are featured:
-    | name       | active | priority | ios_only | flavor     |
-    | project 1  | 1      | 1        | no       | pocketcode |
-    | project 5  | 1      | 4        | yes      | pocketcode |
-    | project 7  | 0      | 2        | yes      | pocketcode |
+      | name      | active | priority | ios_only | flavor     |
+      | project 1 | 1      | 1        | no       | pocketcode |
+      | project 5 | 1      | 4        | yes      | pocketcode |
+      | project 7 | 0      | 2        | yes      | pocketcode |
 
   Scenario: All categories should be returned
     Given I have a request header "HTTP_ACCEPT" with value "application/json"

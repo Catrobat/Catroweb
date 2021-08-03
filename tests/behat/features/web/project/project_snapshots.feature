@@ -3,8 +3,8 @@ Feature: To avoid accidental losing program files due to overriding on limited a
 
   Background:
     Given there are admins:
-      | name     | password | id |
-      | Admin    | 123456   |  1 |
+      | name  | password | id |
+      | Admin | 123456   | 1  |
 
   Scenario: The snapshot system should create a snapshot of the project file on every upload
     Given I have a program

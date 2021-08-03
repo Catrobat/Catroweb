@@ -4,12 +4,12 @@ Feature: Media Package Categories
 
   Background:
     Given there are admins:
-      | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+      | name  | password | token      | email                | id |
+      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
     And there are users:
       | name     | password | token      | email               | id |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
     And there are media packages:
       | id | name    | name_url |
       | 1  | Looks   | looks    |
@@ -25,12 +25,12 @@ Feature: Media Package Categories
       | id | name       |
       | 1  | pocketcode |
     And there are media package files:
-      | id | category   | name   | extension | file   | active | downloads | flavors    | author   |
-      | 1  | category 1 | File 1 | png       | 1.png  | 1      | 1         | pocketcode | Adminius |
+      | id | category   | name   | extension | file  | active | downloads | flavors    | author |
+      | 1  | category 1 | File 1 | png       | 1.png | 1      | 1         | pocketcode | Admin  |
 
 
   Scenario: List media package categories sorted by ID
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/media_package_category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
@@ -41,7 +41,7 @@ Feature: Media Package Categories
       | 4  | Category 4 | Sounds  | 1        |
 
   Scenario: List media package categories sorted by priority
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/media_package_category/list?filter%5B_sort_order%5D=ASC&filter%5B_sort_by%5D=priority&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
@@ -52,15 +52,15 @@ Feature: Media Package Categories
       | 3  | Category 3 | Sounds  | 0        |
 
   Scenario: Delete media package category (fail)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/media_package_category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
-      | Id | Name       | Package  | Priority |
-      | 1  | Category 1 | Looks    | 0        |
-      | 2  | Category 2 | Objects  | 0        |
-      | 3  | Category 3 | Sounds   | 0        |
-      | 4  | Category 4 | Sounds   | 1        |
+      | Id | Name       | Package | Priority |
+      | 1  | Category 1 | Looks   | 0        |
+      | 2  | Category 2 | Objects | 0        |
+      | 3  | Category 3 | Sounds  | 0        |
+      | 4  | Category 4 | Sounds  | 1        |
     Then I am on "/admin/media_package_category/1/delete"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
@@ -72,15 +72,15 @@ Feature: Media Package Categories
     And I should see "This category is used by media package files!"
 
   Scenario: Delete media package category (success)
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/media_package_category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:
-      | Id | Name       | Package  | Priority |
-      | 1  | Category 1 | Looks    | 0        |
-      | 2  | Category 2 | Objects  | 0        |
-      | 3  | Category 3 | Sounds   | 0        |
-      | 4  | Category 4 | Sounds   | 1        |
+      | Id | Name       | Package | Priority |
+      | 1  | Category 1 | Looks   | 0        |
+      | 2  | Category 2 | Objects | 0        |
+      | 3  | Category 3 | Sounds  | 0        |
+      | 4  | Category 4 | Sounds  | 1        |
     Then I am on "/admin/media_package_category/2/delete"
     And I wait for the page to be loaded
     Then I click on the first ".btn-danger" button
@@ -92,7 +92,7 @@ Feature: Media Package Categories
       | 4  | Category 4 | Sounds  | 1        |
 
   Scenario: Adding a media package category
-    Given I log in as "Adminius" with the password "123456"
+    Given I log in as "Admin" with the password "123456"
     And I am on "/admin/media_package_category/list"
     And I wait for the page to be loaded
     Then I should see the media package categories table:

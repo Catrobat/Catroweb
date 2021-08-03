@@ -72,13 +72,13 @@ Feature: Get remixed program from Scratch
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name      |
-      | program 9 |
-      | program 7 |
-      | program 6 |
-      | program 8 |
-      | program 5 |
-      | program 18|
+      | Name       |
+      | program 9  |
+      | program 7  |
+      | program 6  |
+      | program 8  |
+      | program 5  |
+      | program 18 |
 
   Scenario: program upload with parent-URL referring to existing Catrobat programs and
   Catrobat language version 1.0 should correctly add remix relations (example #2)

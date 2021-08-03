@@ -134,10 +134,10 @@ class ProjectDataFixtures
 
     if (isset($config['extensions']) && '' !== $config['extensions']) {
       $extension_repo = $this->entity_manager->getRepository(Extension::class);
-      $extensions = explode(',', $config['extensions']);
-      foreach ($extensions as $extension_name) {
+      $arr_extension_internal_title = explode(',', $config['extensions']);
+      foreach ($arr_extension_internal_title as $internal_title) {
         /** @var Extension $extension */
-        $extension = $extension_repo->findOneBy(['name' => $extension_name]);
+        $extension = $extension_repo->findOneBy(['internal_title' => $internal_title]);
         $project->addExtension($extension);
       }
     }

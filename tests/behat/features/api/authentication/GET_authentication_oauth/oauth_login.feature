@@ -23,6 +23,7 @@ Feature: Oauth login should validate id tokens
      {
      }
     """
+
   Scenario: Invalid apple id token should return an error
     Given I have the following JSON request body:
     """
@@ -40,6 +41,7 @@ Feature: Oauth login should validate id tokens
      {
      }
     """
+
   Scenario: Invalid facebook id token should return an error
     Given I have the following JSON request body:
     """
@@ -57,6 +59,7 @@ Feature: Oauth login should validate id tokens
      {
      }
     """
+
   Scenario: Invalid resource owner should return an error
     Given I have the following JSON request body:
     """
@@ -74,6 +77,7 @@ Feature: Oauth login should validate id tokens
      {
      }
     """
+
   Scenario: Request with missing params should return an error
     Given I have the following JSON request body:
     """

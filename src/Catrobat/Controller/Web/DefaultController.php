@@ -138,8 +138,8 @@ class DefaultController extends AbstractController
     }
 
     if ('tags' == $type) {
-      $tag_id = $_POST['recID'];
-      $this->statistics->createClickStatistics($request, $type, null, null, $tag_id, null, $referrer, $locale);
+      $tag_name = $_POST['recID'];
+      $this->statistics->createClickStatistics($request, $type, null, null, $tag_name, null, $referrer, $locale);
 
       return new Response('ok');
     }

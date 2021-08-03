@@ -4,15 +4,15 @@ Feature: Project list automatically loads more projects on scrolling
   Background:
     Given there are projects:
       | id | name       | upload time      |
-      | 1  | project 01  | 01.01.2013 12:00 |
-      | 2  | project 02  | 01.01.2013 13:00 |
-      | 3  | project 03  | 01.01.2013 14:00 |
-      | 4  | project 04  | 01.01.2013 15:00 |
-      | 5  | project 05  | 01.01.2013 16:00 |
-      | 6  | project 06  | 01.01.2013 17:00 |
-      | 7  | project 07  | 01.01.2013 18:00 |
-      | 8  | project 08  | 01.01.2013 19:00 |
-      | 9  | project 09  | 01.01.2013 20:00 |
+      | 1  | project 01 | 01.01.2013 12:00 |
+      | 2  | project 02 | 01.01.2013 13:00 |
+      | 3  | project 03 | 01.01.2013 14:00 |
+      | 4  | project 04 | 01.01.2013 15:00 |
+      | 5  | project 05 | 01.01.2013 16:00 |
+      | 6  | project 06 | 01.01.2013 17:00 |
+      | 7  | project 07 | 01.01.2013 18:00 |
+      | 8  | project 08 | 01.01.2013 19:00 |
+      | 9  | project 09 | 01.01.2013 20:00 |
       | 10 | project 10 | 01.01.2013 21:00 |
       | 11 | project 11 | 01.01.2013 22:00 |
       | 12 | project 12 | 01.01.2013 23:00 |
