@@ -1,7 +1,7 @@
 <button id="steal-button{{ suffix|default('') }}"
 
         class="btn btn-outline-primary btn-block"
-        onclick="program.stealGame('{{path('steal', {'id': program.id })}}','{{ program.id }}')">
+        onclick="program.stealGame('{{path('steal', {'id': program.id })}}','{{ program.id }}', '{{ program.user}}', '{{ app.user }}', '{{ app.user.id }}')">
 
   <i class="material-icons align-bottom" id="steal-icon{{ suffix|default('') }}">person</i>
   <span>{{ "steal"|trans({}, "catroweb") }}</span>
