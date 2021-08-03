@@ -164,9 +164,10 @@ class ProgramController extends AbstractController
      */
     public function stealGameAction(Request $request, string $id): Response
     {
-        /** @var Program $project */
         /** @var User|null $user */
         $user = $this->getUser();
+
+        /** @var Program $project */
         $project = $this->program_manager->find($id);
         $project->setUser($user);
         $user->addProgram($project);
