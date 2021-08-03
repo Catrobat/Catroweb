@@ -90,8 +90,6 @@ class ProgramController extends AbstractController
     $this->translation_delegate = $translation_delegate;
   }
 
-
-
   /**
    * @Route("/project/{id}", name="program", defaults={"id": "0"})
    *
@@ -135,7 +133,6 @@ class ProgramController extends AbstractController
         $active_user_like_types[] = $like->getType();
       }
     }
-
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
 
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
