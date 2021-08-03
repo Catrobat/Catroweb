@@ -452,6 +452,23 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
   $(function () {
     initProjectLike()
   })
+  self.stealGame = function (url, programID, programName, loginName, loginID) {
+    console.log('Program_ID:' + programID + ' Program_Name: ' + programName + ' Login_ID: ' + loginID + ' Login_ID ' + loginName)
+    $.ajax({
+      url: url,
+      type: 'get',
+      data: { send_data: programID },
+      success: function (data) {
+        console.log('success')
+      }
+    }).done(function () {
+      console.log('done')
+      window.location.reload()
+      console.log(url)
+    }).fail(function () {
+      console.log('Error in Ajax response')
+    })
+  }
 }
 
 $(document).on('click', function (e) {

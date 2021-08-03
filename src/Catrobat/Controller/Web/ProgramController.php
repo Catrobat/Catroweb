@@ -18,6 +18,7 @@ use App\Entity\ProgramManager;
 use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserComment;
+use App\Entity\UserManager;
 use App\Repository\CatroNotificationRepository;
 use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
@@ -89,6 +90,8 @@ class ProgramController extends AbstractController
     $this->translation_delegate = $translation_delegate;
   }
 
+
+
   /**
    * @Route("/project/{id}", name="program", defaults={"id": "0"})
    *
@@ -107,7 +110,7 @@ class ProgramController extends AbstractController
     /** @var Program $project */
     $project = $this->program_manager->find($id);
 
-    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
+      if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
 
@@ -132,6 +135,7 @@ class ProgramController extends AbstractController
         $active_user_like_types[] = $like->getType();
       }
     }
+
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
 
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
@@ -151,7 +155,27 @@ class ProgramController extends AbstractController
     ]);
   }
 
-  /**
+    /**TODO works now I can steal programs and now i need to test it with behat
+     */
+    /**
+     * @Route("/project/{id}/steal", name="steal", methods={"GET"})
+     *
+     * @throws ORMException
+     */
+    public function stealGameAction(Request $request, string $id): Response
+    {
+        /** @var Program $project */
+        /** @var User|null $user */
+        $user = $this->getUser();
+        $project = $this->program_manager->find($id);
+        $project->setUser($user);
+        $user->addProgram($project);
+        $this->program_manager->save($project);
+        return new Response('Hallo',200);
+    }
+
+
+    /**
    * @Route("/project/like/{id}", name="project_like", methods={"GET"})
    *
    * @throws ORMException
