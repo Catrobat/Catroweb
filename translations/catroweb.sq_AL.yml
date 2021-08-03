@@ -737,7 +737,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'Komentet'
     public: 'public'
     private: 'private'
     join: 'Join'

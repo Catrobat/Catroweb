@@ -736,7 +736,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: '註釋'
     public: 'public'
     private: 'private'
     join: 'Join'

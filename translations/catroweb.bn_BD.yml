@@ -742,7 +742,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'মন্তব্যসমূহ'
     public: 'public'
     private: 'private'
     join: 'Join'

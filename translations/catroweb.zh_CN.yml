@@ -741,7 +741,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: '评论'
     public: 'public'
     private: 'private'
     join: 'Join'

@@ -732,7 +732,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: '코멘트'
     public: 'public'
     private: 'private'
     join: 'Join'
