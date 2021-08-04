@@ -524,18 +524,6 @@ ci:
   generate: Apk তৈরি করুন
   pending: Apk তৈরি করুন
   download: Apk ডাউনলোড করুন
-gamejam:
-  nojam: দুঃখিত, এই সময় কোনও গেম জ্যাম নেই
-  submit: '%gamejamname% এ জমা দিন'
-  whats: '%gamejamname% কী?'
-  submitown:
-    header: সচেতন থাকা
-    subheader: আপনি কেবল নিজের প্রকল্পগুলি জমা দিতে পারেন
-    text: |
-      কেন নিজে তৈরি করবেন না!
-      %gamejamtag% তে অংশ নিন
-tag-text: ট্যাগ
-extenstion-text: সংযোজন
 admin:
   maintain:
     diskMaintenance: ডিস্ক রক্ষণাবেক্ষণ
@@ -723,6 +711,7 @@ achievements:
         title: 'নবীনতা'
         description: 'একটি ব্যবহারকারী অ্যাকাউন্ট তৈরি করুন'
 tags:
+  title: ট্যাগ
   tag:
     game:
       title: গেম
@@ -738,6 +727,23 @@ tags:
       title: পরীক্ষামূলক
     tutorial:
       title: টিউটোরিয়াল
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: আরডুইনো
+    drone:
+      title: ড্রোন
+    lego:
+      title: Lego
+    phiro:
+      title: ফিরো
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: সূচিকর্ম
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

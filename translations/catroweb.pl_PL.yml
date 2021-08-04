@@ -518,17 +518,6 @@ ci:
   generate: Wygeneruj Apk
   pending: Generowanie Apk
   download: Pobierz APK
-gamejam:
-  nojam: Przepraszamy, w tym czasie nie odbywa się żaden game jam
-  submit: Prześlij do %gamejamname%
-  whats: Co to jest %gamejamname%?
-  submitown:
-    header: pamiętaj
-    subheader: Możesz przesyłać tylko własne projekty
-    text: |
-      Ale dlaczego nie stworzysz swojego własnego? Weź udział w %gamejamtag%
-tag-text: Tagi
-extenstion-text: Rozszerzenia
 admin:
   maintain:
     diskMaintenance: Zarządzanie dyskiem
@@ -716,6 +705,7 @@ achievements:
         title: 'Nowicjusz'
         description: 'Utwórz konto użytkownika'
 tags:
+  title: Tagi
   tag:
     game:
       title: Gra
@@ -731,6 +721,23 @@ tags:
       title: Eksperymentalne
     tutorial:
       title: Samouczek
+extensions:
+  title: Rozszerzenia
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Dron
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Haft
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'ogólny'

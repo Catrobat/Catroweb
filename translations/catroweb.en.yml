@@ -778,8 +778,6 @@ extensions:
       title: Arduino
     drone:
       title: Drone
-    lego:
-      title: Lego
     phiro:
       title: Phiro
     raspberry_pi:

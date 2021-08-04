@@ -522,17 +522,6 @@ ci:
   generate: APK generieren
   pending: Generiere APK
   download: APK herunterladen
-gamejam:
-  nojam: Entschuldigung, es findet gerade kein game jam statt
-  submit: Einreichen zum %gamejamname%
-  whats: Was ist der %gamejamname%?
-  submitown:
-    header: Achtung
-    subheader: Du kannst nur deine eigenen Projekte einreichen.
-    text: |
-      Erstelle ein eigenes und mach mit beim %gamejamtag%!
-tag-text: Tags
-extenstion-text: Erweiterungen
 admin:
   maintain:
     diskMaintenance: Festplattenwartung
@@ -720,6 +709,7 @@ achievements:
         title: 'Anfänger'
         description: 'Benutzerkonto erstellen'
 tags:
+  title: Tags
   tag:
     game:
       title: Spiel
@@ -735,6 +725,23 @@ tags:
       title: Experimentell
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drohne
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Sticken
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

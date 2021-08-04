@@ -539,7 +539,7 @@ trait SymfonySupport
     $click_statistics->setClickedAt($date);
     $click_statistics->setLocale($config['locale']);
     if ('tags' === $config['type']) {
-      /** @var Tag| null $tag */
+      /** @var Tag|null $tag */
       $tag = $this->getTagRepository()->findOneBy(['internal_title' => $config['tag_name']]);
       $click_statistics->setTag($tag);
     } elseif ('extensions' === $config['type']) {

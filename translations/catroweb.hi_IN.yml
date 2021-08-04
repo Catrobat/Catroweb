@@ -518,18 +518,6 @@ ci:
   generate: एपीके जनरेट करें
   pending: एपीके जनरेट कर रहा है
   download: Apk डाउनलोड करे
-gamejam:
-  nojam: क्षमा करें, इस समय कोई गेम जाम नहीं है
-  submit: '%gamejamname% पर सबमिट करें'
-  whats: '%gamejamname% ह?'
-  submitown:
-    header: परिचित होना
-    subheader: आप केवल अपनी परियोजनाएँ प्रस्तुत कर सकते हैं
-    text: |
-      लेकिन अपना खुद का क्यों नहीं बना!
-      %gamejamtag% में भाग लें
-tag-text: टैग
-extenstion-text: विस्तार
 admin:
   maintain:
     diskMaintenance: डिस्क रखरखाव
@@ -717,6 +705,7 @@ achievements:
         title: 'नौसिखिए'
         description: 'एक उपयोगकर्ता खाता बनाएँ'
 tags:
+  title: टैग
   tag:
     game:
       title: खेल
@@ -732,6 +721,23 @@ tags:
       title: प्रयोगात्मक
     tutorial:
       title: ट्यूटोरियल
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: मुफ़्तक़ोर
+    lego:
+      title: Lego
+    phiro:
+      title: फीरो
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: कढ़ाई
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

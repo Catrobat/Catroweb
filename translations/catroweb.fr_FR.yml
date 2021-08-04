@@ -518,18 +518,6 @@ ci:
   generate: Générer l'apk
   pending: Génération de l'apk
   download: Télécharger l'apk
-gamejam:
-  nojam: Désolé, il n'y a pas de confiture de jeu pour le moment
-  submit: Soumettre à %gamejamname%
-  whats: Qu'est-ce que le %gamejamname%?
-  submitown:
-    header: soyez au courant
-    subheader: Vous ne pouvez soumettre que vos propres projets
-    text: |
-      Mais pourquoi ne pas créer le vôtre!
-      Participez au %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
 admin:
   maintain:
     diskMaintenance: Maintenance du disque
@@ -717,6 +705,7 @@ achievements:
         title: 'Novice'
         description: 'Créer un compte utilisateur'
 tags:
+  title: Tags
   tag:
     game:
       title: Jeu
@@ -732,6 +721,23 @@ tags:
       title: Expérimental
     tutorial:
       title: Tutoriel
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Broderie
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

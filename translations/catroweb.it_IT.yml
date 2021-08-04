@@ -522,17 +522,6 @@ ci:
   generate: Generare  l'Apk
   pending: Generazione dell'Apk
   download: Scarica Apk
-gamejam:
-  nojam: Siamo spiacenti, non c'è nessun concorso in questo momento
-  submit: Invia a %gamejamname%
-  whats: Che cos'è %gamejamname%?
-  submitown:
-    header: fai attenzione
-    subheader: Puoi inviare solo i tuoi progetti
-    text: |
-      Ma perché non crearne uno personale! Prendi parte ad %gamejamtag%
-tag-text: Tag
-extenstion-text: Estensioni
 admin:
   maintain:
     diskMaintenance: Manutenzione del disco
@@ -720,6 +709,7 @@ achievements:
         title: 'Novizio'
         description: 'Crea un account utente'
 tags:
+  title: Tag
   tag:
     game:
       title: Gioco
@@ -735,6 +725,23 @@ tags:
       title: Sperimentale
     tutorial:
       title: Guida
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Ricamo
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

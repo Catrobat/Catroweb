@@ -518,18 +518,6 @@ ci:
   generate: ਏਪੀਕੇ ਤਿਆਰ ਕਰੋ
   pending: ਏਪੀਕੇ ਤਿਆਰ ਕਰਨਾ
   download: ਏਪੀਕੇ ਡਾ .ਨਲੋਡ ਕਰੋ
-gamejam:
-  nojam: ਮੁਆਫ ਕਰਨਾ, ਇਸ ਸਮੇਂ ਕੋਈ ਗੇਮ ਜਾਮ ਨਹੀਂ ਹੈ
-  submit: '%gamejamname% ਤੇ ਜਮ੍ਹਾਂ ਕਰੋ'
-  whats: '%gamejamname% ਕੀ ਹੈ?'
-  submitown:
-    header: ਸਾਵਧਾਨ ਰਹੋ
-    subheader: ਤੁਸੀਂ ਸਿਰਫ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਜਮ੍ਹਾ ਕਰ ਸਕਦੇ ਹੋ
-    text: |
-      ਪਰ ਕਿਉਂ ਨਾ ਆਪਣਾ ਬਣਾਓ!
-      %gamejamtag% ਵਿਚ ਹਿੱਸਾ ਲਓ
-tag-text: ਟੈਗਸ
-extenstion-text: ਐਕਸਟੈਂਸ਼ਨਾਂ
 admin:
   maintain:
     diskMaintenance: ਡਿਸਕ ਸੰਭਾਲ
@@ -717,6 +705,7 @@ achievements:
         title: 'ਨਵੀਨਤਾ'
         description: 'ਇੱਕ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਓ'
 tags:
+  title: ਟੈਗਸ
   tag:
     game:
       title: ਖੇਡ
@@ -732,6 +721,23 @@ tags:
       title: ਪ੍ਰਯੋਗਾਤਮਕ
     tutorial:
       title: ਟਿutorialਟੋਰਿਅਲ
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: ਅਰਦਿਨੋ
+    drone:
+      title: ਡਰੋਨ
+    lego:
+      title: Lego
+    phiro:
+      title: ਫਿਰੋ
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: ਕਢਾਈ
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

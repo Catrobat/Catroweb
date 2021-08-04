@@ -523,18 +523,6 @@ ci:
   generate: สร้าง Apk
   pending: สร้าง Apk
   download: ดาวน์โหลด Apk
-gamejam:
-  nojam: ขออภัยไม่มีเกมติดขัดในขณะนี้
-  submit: ส่งให้ %gamejamname%
-  whats: '%gamejamname% คืออะไร?'
-  submitown:
-    header: ระวัง
-    subheader: คุณสามารถส่งโปรเจคของคุณเท่านั้น
-    text: |
-      แต่ทำไมไม่สร้างของคุณเอง!
-      มีส่วนร่วมใน %gamejamtag%
-tag-text: แท็ก
-extenstion-text: ส่วนขยาย
 admin:
   maintain:
     diskMaintenance: การบำรุงรักษาดิสก์
@@ -722,6 +710,7 @@ achievements:
         title: 'สามเณร'
         description: 'สร้างบัญชีผู้ใช้'
 tags:
+  title: แท็ก
   tag:
     game:
       title: เกม
@@ -737,6 +726,23 @@ tags:
       title: ทดลอง
     tutorial:
       title: กวดวิชา
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: โดรน
+    lego:
+      title: Lego
+    phiro:
+      title: ฟีโร
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: การตกแต่ง
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
