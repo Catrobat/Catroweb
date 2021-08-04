@@ -518,18 +518,6 @@ ci:
   generate: Apk を生成
   pending: Apk を生成しています
   download: Apk をダウンロード
-gamejam:
-  nojam: この時点で、ゲーム jam はありません。
-  submit: '%gamejamname% に提出'
-  whats: '%gamejamname% は何ですか?'
-  submitown:
-    header: ご注意ください
-    subheader: あなた自身のプロジェクトのみを送信できます
-    text: |
-      独自のプログラムを作成しませんか!
-      %gamejamtag% に参加してください
-tag-text: タグ
-extenstion-text: 拡張
 admin:
   maintain:
     diskMaintenance: ディスクのメンテナンス
@@ -717,6 +705,7 @@ achievements:
         title: 'ノービス'
         description: 'ユーザーアカウントを作成'
 tags:
+  title: タグ
   tag:
     game:
       title: ゲーム
@@ -732,6 +721,23 @@ tags:
       title: 実験
     tutorial:
       title: チュートリアル
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: ドローン
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: 刺繍（刺繍）
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

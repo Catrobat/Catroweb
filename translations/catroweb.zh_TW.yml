@@ -518,18 +518,6 @@ ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
-gamejam:
-  nojam: 抱歉，目前沒有game jam
-  submit: 提交至 %gamejamname%
-  whats: '%gamejamname% 是什麼？'
-  submitown:
-    header: 意識到
-    subheader: 您只能提交自己的項目
-    text: |
-      但為什麼不創建自己的！
-      參加 %gamejamtag%
-tag-text: 標籤
-extenstion-text: 擴展
 admin:
   maintain:
     diskMaintenance: 磁盤維護
@@ -717,6 +705,7 @@ achievements:
         title: '新手'
         description: '創建用戶帳戶'
 tags:
+  title: 標籤
   tag:
     game:
       title: 遊戲
@@ -732,6 +721,23 @@ tags:
       title: 實驗性的
     tutorial:
       title: 教程
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: 阿杜諾
+    drone:
+      title: 無人機
+    lego:
+      title: Lego
+    phiro:
+      title: 菲羅
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: 刺繡
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

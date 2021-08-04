@@ -522,18 +522,6 @@ ci:
   generate: Apk ஐ உருவாக்கவும்
   pending: Apk உருவாக்கப்படுகிறது
   download: Apk ஐ பதிவிறக்கவும்
-gamejam:
-  nojam: மன்னிக்கவும், இந்த நேரத்தில் விளையாட்டு நெரிசல் இல்லை
-  submit: '%gamejamname% க்கு சமர்ப்பிக்க'
-  whats: '%gamejamname% என்ன?'
-  submitown:
-    header: விழிப்புடன் இருக்கவும்
-    subheader: உங்கள் சொந்த திட்டங்களை மட்டுமே நீங்கள் சமர்ப்பிக்க முடியும்
-    text: |
-      ஆனால் சொந்தமாக ஏன் உருவாக்கக்கூடாது!
-      %gamejamtag% இல் பங்கேற்கவும்
-tag-text: குறிச்சொற்கள்
-extenstion-text: நீட்டிப்புகள்
 admin:
   maintain:
     diskMaintenance: வட்டு பராமரிப்பு
@@ -721,6 +709,7 @@ achievements:
         title: 'Novice'
         description: 'Create a user account'
 tags:
+  title: குறிச்சொற்கள்
   tag:
     game:
       title: விளையாட்டு
@@ -736,6 +725,23 @@ tags:
       title: சோதனை
     tutorial:
       title: பயிற்சி
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: ஆர்டுயினோ
+    drone:
+      title: ட்ரோன்
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: எம்பிராய்டரி
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

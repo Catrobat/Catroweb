@@ -515,17 +515,6 @@ ci:
   generate: Apk 생성
   pending: Apk 생성중
   download: Apk 다운로드
-gamejam:
-  nojam: 죄송합니다, 현재 게임 잼이 없습니다
-  submit: '%gamejamname%에 제출'
-  whats: '%gamejamname% 이란 무엇입니까?'
-  submitown:
-    header: 알고 있어야합니다
-    subheader: 자신의 프로그램만 제출할 수 있습니다
-    text: |
-      스스로 만드세요! %gamejamtag%에 참여하세요
-tag-text: 태그
-extenstion-text: 확장 프로그램
 admin:
   maintain:
     diskMaintenance: 유지 보수 필요
@@ -713,6 +702,7 @@ achievements:
         title: '초심자'
         description: '사용자 계정 생성'
 tags:
+  title: 태그
   tag:
     game:
       title: 경기
@@ -728,6 +718,23 @@ tags:
       title: 실험적
     tutorial:
       title: 지도 시간
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: 아두이노
+    drone:
+      title: 드론
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: 자수
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

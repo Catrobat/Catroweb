@@ -521,18 +521,6 @@ ci:
   generate: Menghasilkan Apk
   pending: Menghasilkan Apk
   download: Unduh Apk
-gamejam:
-  nojam: Maaf, tidak ada kemacetan permainan saat ini
-  submit: Kirim ke %gamejamname%
-  whats: Apa itu %gamejamname%?
-  submitown:
-    header: waspadalah
-    subheader: Anda hanya dapat mengirimkan proyek Anda sendiri
-    text: |
-      Tapi mengapa tidak membuat punya Anda sendiri!
-      Ambil bagian di %gamejamtag%
-tag-text: Label
-extenstion-text: Ekstensi
 admin:
   maintain:
     diskMaintenance: Pemeliharaan disk
@@ -720,6 +708,7 @@ achievements:
         title: 'Pemula'
         description: 'Buat akun pengguna'
 tags:
+  title: Label
   tag:
     game:
       title: Permainan
@@ -735,6 +724,23 @@ tags:
       title: Eksperimental
     tutorial:
       title: tutorial
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Sulaman
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

@@ -518,18 +518,6 @@ ci:
   generate: إنشاء كـ Apk
   pending: تتم الآن عملية إنشاء Apk
   download: تنزيل كـ Apk
-gamejam:
-  nojam: عذراً, لا يوجد في الوقت الحالي لعبة الازدحام
-  submit: تقديم الى %gamejamname%
-  whats: ما هو %gamejamname%؟
-  submitown:
-    header: كن حذراً
-    subheader: يمكنك فقط تقديم مشاريعك الخاصة
-    text: |
-      لماذا لم تنشئ برنامجك الخاص!
-      قم بالمشاركة في %gamejamtag%
-tag-text: وسوم
-extenstion-text: الإضافات
 admin:
   maintain:
     diskMaintenance: صيانة القرص
@@ -717,6 +705,7 @@ achievements:
         title: 'مبتدئ'
         description: 'قم بإنشاء حساب مستخدم'
 tags:
+  title: وسوم
   tag:
     game:
       title: لعبة
@@ -732,6 +721,23 @@ tags:
       title: تجريبي
     tutorial:
       title: درس تعليمي
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: الاردوينو
+    drone:
+      title: طائرة بدون طيار
+    lego:
+      title: Lego
+    phiro:
+      title: روبوت الاطفال
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: التطريز
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

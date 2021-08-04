@@ -520,17 +520,6 @@ ci:
   generate: Генерировать Apk
   pending: Генерирование Apk
   download: Скачать Apk
-gamejam:
-  nojam: К сожалению, в данный момент game jam нет
-  submit: Отправить %gamejamname%
-  whats: Что такое %gamejamname%?
-  submitown:
-    header: быть в курсе
-    subheader: Вы можете отправить только свои собственные программы
-    text: |
-      А почему бы не создать свой собственный! Принять участие в %gamejamtag%
-tag-text: Тэги
-extenstion-text: Расширения
 admin:
   maintain:
     diskMaintenance: Обслуживание диска
@@ -718,6 +707,7 @@ achievements:
         title: 'Новичок'
         description: 'Создать учетную запись пользователя'
 tags:
+  title: Тэги
   tag:
     game:
       title: Игра
@@ -733,6 +723,23 @@ tags:
       title: Экспериментальный
     tutorial:
       title: Учебник
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Дрон
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Вышивка
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'

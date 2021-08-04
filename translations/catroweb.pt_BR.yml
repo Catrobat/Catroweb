@@ -518,18 +518,6 @@ ci:
   generate: Gerar Apk
   pending: Gerando Apk
   download: Baixar Apk
-gamejam:
-  nojam: Desculpa, não há game jams disponíveis agora
-  submit: Enviar para %gamejamname%
-  whats: Oque é o %gamejamname%?
-  submitown:
-    header: fique atento
-    subheader: Você só pode enviar seus próprios projetos
-    text: |
-      Mas por que não criar o seu próprio programa?!
-      Faça parte do %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensões
 admin:
   maintain:
     diskMaintenance: Manutenção de disco
@@ -717,6 +705,7 @@ achievements:
         title: 'Novato'
         description: 'Criar uma conta'
 tags:
+  title: Tags
   tag:
     game:
       title: Jogos
@@ -732,6 +721,23 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensões
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    lego:
+      title: Lego
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
