@@ -720,18 +720,16 @@ tags:
     tutorial:
       title: Öğretici
 extensions:
-  title: Extensions
+  title: Uzantılar
   extension:
     arduino:
       title: Arduino
     drone:
       title: İnsansız hava aracı
-    lego:
-      title: Lego
     phiro:
       title: Phiro
     raspberry_pi:
-      title: Raspberry PI
+      title: Raspberry Pi 
     embroidery:
       title: Nakış
     mindstorms:

@@ -728,8 +728,6 @@ extensions:
       title: 阿杜諾
     drone:
       title: 無人機
-    lego:
-      title: Lego
     phiro:
       title: 菲羅
     raspberry_pi:

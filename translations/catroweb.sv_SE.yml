@@ -728,8 +728,6 @@ extensions:
       title: Arduino
     drone:
       title: Drönare
-    lego:
-      title: Lego
     phiro:
       title: Phiro
     raspberry_pi:
