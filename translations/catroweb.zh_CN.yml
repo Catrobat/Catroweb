@@ -733,8 +733,6 @@ extensions:
       title: Arduino
     drone:
       title: 无人机
-    lego:
-      title: Lego
     phiro:
       title: Phiro
     raspberry_pi:

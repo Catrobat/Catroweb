@@ -728,8 +728,6 @@ extensions:
       title: Arduino
     drone:
       title: मुफ़्तक़ोर
-    lego:
-      title: Lego
     phiro:
       title: फीरो
     raspberry_pi:

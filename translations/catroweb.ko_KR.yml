@@ -725,8 +725,6 @@ extensions:
       title: 아두이노
     drone:
       title: 드론
-    lego:
-      title: Lego
     phiro:
       title: Phiro
     raspberry_pi:

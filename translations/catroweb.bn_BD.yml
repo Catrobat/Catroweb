@@ -734,8 +734,6 @@ extensions:
       title: আরডুইনো
     drone:
       title: ড্রোন
-    lego:
-      title: Lego
     phiro:
       title: ফিরো
     raspberry_pi:

@@ -728,8 +728,6 @@ extensions:
       title: الاردوينو
     drone:
       title: طائرة بدون طيار
-    lego:
-      title: Lego
     phiro:
       title: روبوت الاطفال
     raspberry_pi:

@@ -728,8 +728,6 @@ extensions:
       title: آرڊينو
     drone:
       title: Drone
-    lego:
-      title: Lego
     phiro:
       title: ڦائيرو
     raspberry_pi:
