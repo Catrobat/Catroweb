@@ -37,18 +37,18 @@
           <span class="translate-program-button-wrapper">
             <span id="program-translation-button" class="program-translation-button catro-icon-button"
                 data-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
-              <i class="ml-2 material-icons">
+              <i class="ms-2 material-icons">
                 translate
               </i>
             </span>
             <span id="program-translation-loading-spinner" style="display: none;">
-              <i class="ml-2 material-icons">
+              <i class="ms-2 material-icons">
                 {% include 'Default/loadingSpinner.html.twig' with {'size': 'small'} %}
               </i>
             </span>
             <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none"
                 data-toggle="tooltip" title="Hide Translation">
-                <i class="ml-2 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
+                <i class="ms-2 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
                   close
                 </i>
             </span>
@@ -59,7 +59,7 @@
       <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
               '#code-view-icon{{ suffix|default('') }}')">
         <a class="icon-text align-bottom" id="program-owner-username">
-          <i class="material-icons pr-2" id="user-profile-icon">person</i>
+          <i class="material-icons pe-2" id="user-profile-icon">person</i>
           {{ program.user }}
         </a>
         <span>
@@ -71,12 +71,12 @@
 
       <div class="">
         <i class="material-icons mt-2">query_builder</i>
-        <span class="icon-text ml-2 align-bottom mt-2">{{ program_details.age }}</span>
+        <span class="icon-text ms-2 align-bottom mt-2">{{ program_details.age }}</span>
       </div>
 
       <div class="">
         <i class="material-icons mt-2">description</i>
-        <span class="icon-text ml-2 align-bottom mt-2">{{ program_details.filesize }} MB</span>
+        <span class="icon-text ms-2 align-bottom mt-2">{{ program_details.filesize }} MB</span>
       </div>
 
       <div id="project-like" class="d-none d-lg-block mt-3">

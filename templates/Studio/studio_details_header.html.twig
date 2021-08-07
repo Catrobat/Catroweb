@@ -12,12 +12,12 @@
                     <a class="count-container" href="javascript:void(0)" onclick="(new Studio()).loadMembers()"
                        data-toggle="modal" data-target="#members-modal">
                         <div class="col-4">
-                            <span class="material-icons">person</span><span class="ml-2">{{ members_count }}</span>
+                            <span class="material-icons">person</span><span class="ms-2">{{ members_count }}</span>
                         </div>
                     </a>
                 {% else %}
                     <div class="col-4">
-                        <span class="material-icons">person</span><span class="ml-2">{{ members_count }}</span>
+                        <span class="material-icons">person</span><span class="ms-2">{{ members_count }}</span>
                     </div>
                 {% endif %}
             </div>
@@ -26,11 +26,11 @@
                     <a class="count-container" href="javascript:void(0)" onclick="(new Studio()).loadActivites()"
                        data-toggle="modal" data-target="#activities-modal">
                         <span class="material-icons">schedule</span>
-                        <span id="activities_count" class="ml-2">{{ activities_count }}</span>
+                        <span id="activities_count" class="ms-2">{{ activities_count }}</span>
                     </a>
                 {% else %}
                     <span class="material-icons">schedule</span>
-                    <span id="activities_count" class="ml-2">{{ activities_count }}</span>
+                    <span id="activities_count" class="ms-2">{{ activities_count }}</span>
                 {% endif %}
             </div>
         </div>

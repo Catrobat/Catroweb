@@ -2,7 +2,7 @@
         class="btn btn-outline-primary btn-block"
         onclick="program.projectViewButtonsAction('{{ path('code_statistics', {'id': program.id }) }}', '#code-statistics-button-spinner{{ suffix|default('') }}',
 '#code-statistics-icon{{ suffix|default('') }}')">
-  <i class="material-icons d-none text-left" id="code-statistics-button-spinner{{ suffix|default('') }}">
+  <i class="material-icons d-none text-start" id="code-statistics-button-spinner{{ suffix|default('') }}">
     {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'code-statistics-spinner' ~ suffix|default(), 'size': 'small'} %}
   </i>
   <i class="material-icons align-bottom" id="code-statistics-icon{{ suffix|default('') }}">show_chart</i>

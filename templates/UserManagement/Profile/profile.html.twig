@@ -8,7 +8,7 @@
 {% block body %}
 
   <div class="row no-gutters profile">
-    <div class="col-4 col-md-2 avatar-container mt-2 pr-3">
+    <div class="col-4 col-md-2 avatar-container mt-2 pe-3">
       <img alt="" id="user-image" class="img-fluid round"
            src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
     </div>
