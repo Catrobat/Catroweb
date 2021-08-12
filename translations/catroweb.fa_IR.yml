@@ -3,26 +3,26 @@
 localLanguage: انگليسی
 username: نام کاربری
 password: رمز عبور
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: ایجاد کلمه عبور جدید
+accountSettings: تنظیمات حساب کاربری
 email: ایمیل
 aboutPocketCode: درباره پاکت کد
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: درباره
+education: تحصیلات
+chat: چت و انجمن ها
+others: دیگر
 tutorials: آموزش
 googlePlay: گوگل پلی
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: گالری برنامه Huawei
 passwordsNoMatch: رمز عبور مطابقت نمی کند.
 error: خطا
 cancel: انصراف
 report: گزارش
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: بلی، این را حذف کنید
+reportIt: بله، گزارش بده!
+areYouSure: آیا مطمئنید؟
+noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
 download: دانلود
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نمی باشد.
@@ -41,21 +41,21 @@ more: 'بیشتر'
 less: 'کمتر'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
+more-information: 'اطلاعات بیشتر'
+less-information: 'اطلاعات کمتر'
+ok: تائید
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.'
-notifications: 'Notifications'
+notifications: 'اطلاعیه ها'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'پیگیری‌ها'
+LikeNotifications: 'واکنش'
 CommentNotifications: 'نظرات'
 RemixNotifications: 'Remixes'
 wellDone: "آفرین!"
 done: "انجام شد!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "بلی، این را حذف کنید"
 cancelMessage: "انصراف"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
@@ -63,19 +63,19 @@ pleaseWait: "لطفا صبر کن..."
 projects: "برنامه ها"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "اینجا"
+statistics: "آمارها"
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
-  follows: Following
-  followers: Followers
+  follows: دنبال می کند
+  followers: پیگیری‌ها
   follow: Follow
-  username: User
-  followsMe: Follows me
+  username: کاربر
+  followsMe: من را دنبال کن
   noFollowing: You are not following anybody currently.
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
@@ -176,7 +176,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: واکنش
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   showTranslation: Show translation
   hideTranslation: Hide translation
@@ -681,7 +681,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "تائید"
   profile:
     title: 'Achievements'
   achievement:
