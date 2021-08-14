@@ -182,7 +182,7 @@ programs:
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
-  title: Remixes
+  title: ریمیکس ها
   showRemixGraph: 'Remix graph'
   by: 'به وسیله'
   open: 'باز کن'
