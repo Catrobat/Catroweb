@@ -2,6 +2,9 @@
 
 namespace App\Api_deprecated\Controller;
 
+use App\Api\Services\Base\TranslatorAwareInterface;
+use App\Api\Services\Base\TranslatorAwareTrait;
+use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\StatusCode;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
@@ -9,12 +12,23 @@ use App\Entity\MediaPackageFile;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @deprecated
  */
-class MediaPackageController extends AbstractController
+class MediaPackageController extends AbstractController implements TranslatorAwareInterface
 {
+  use TranslatorAwareTrait;
+
+  protected MediaPackageFileRepository $media_package_file_repository;
+
+  public function __construct(TranslatorInterface $translator, MediaPackageFileRepository $media_package_file_repository)
+  {
+    $this->initTranslator($translator);
+    $this->media_package_file_repository = $media_package_file_repository;
+  }
+
   /**
    * @deprecated
    *
@@ -109,11 +123,39 @@ class MediaPackageController extends AbstractController
     $category = $media_package_file->getCategory()->getName();
     $author = $media_package_file->getAuthor();
     $extension = $media_package_file->getExtension();
+    $download_url = $this->generateUrl('download_media', [
+      'id' => $id,
+    ]);
+
+    $file = $this->media_package_file_repository->getMediaFile($id, $extension);
+    $size = $this->humanFileSize($file->getSize());
+    if ($this->isFileACatrobatFile($extension)) {
+      $fileType = 'catrobat';
+      $description_line1 = $this->trans('media_library.file.type_description.project');
+    } elseif ($this->isFileAnImageFile($extension)) {
+      $fileType = 'image';
+      $description_line1 = $this->trans('media_library.file.type_description.image');
+    } elseif ($this->isFileASoundFile($extension)) {
+      $fileType = 'sound';
+      $description_line1 = $this->trans('media_library.file.type_description.sound');
+    } elseif ($this->isFileAVideoFile($extension)) {
+      $fileType = 'video';
+      $description_line1 = $this->trans('media_library.file.type_description.video');
+    } else {
+      $fileType = 'unknown';
+      $description_line1 = $this->trans('media_library.file.type_description.default');
+    }
+    $description_line2 = $this->trans('media_library.file.size', ['%size%' => $size]);
+    $description = $description_line1.'</br>'.$description_line2;
+
     $url = $media_package_file->getUrl();
-    $download_url = $this->generateUrl('download_media',
-      [
-        'id' => $id,
+    $project_url = null;
+    if (!empty($url)) {
+      $project_id = $url;
+      $project_url = $this->generateUrl('program', [
+        'id' => $project_id,
       ]);
+    }
 
     return
       [
@@ -124,8 +166,53 @@ class MediaPackageController extends AbstractController
         'category' => $category,
         'author' => $author,
         'extension' => $extension,
-        'url' => $url,
+        'project_url' => $project_url,
         'download_url' => $download_url,
+        'type' => $fileType,
+        'description' => $description,
       ];
+  }
+
+  protected function isFileACatrobatFile(string $extension): bool
+  {
+    return 'catrobat' === $extension;
+  }
+
+  protected function isFileASoundFile(string $extension): bool
+  {
+    $soundExtensions = [
+      'adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva', 'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya',
+      'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip', 'weba', 'aac', 'aif', 'caf', 'flac', 'mka', 'm3u', 'wax', 'wma',
+      'ram', 'rmp', 'wav', 'xm',
+    ];
+
+    return in_array($extension, $soundExtensions, true);
+  }
+
+  protected function isFileAnImageFile(string $extension): bool
+  {
+    $imageExtensions = [
+      'bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu',
+      'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx',
+      'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd',
+    ];
+
+    return in_array($extension, $imageExtensions, true);
+  }
+
+  protected function isFileAVideoFile(string $extension): bool
+  {
+    $videoExtensions = [
+      '3gp', '3g2', 'h261', 'h263', 'h264', 'jpgv', 'jpm', 'mj2', 'mp4', 'mpeg', 'ogv', 'qt', 'uvh', 'uvm', 'uvp',
+      'uvs', 'uvv', 'dvb', 'fvt', 'mxu', 'pyv', 'uvu', 'viv', 'webm', 'f4v', 'fli', 'flv', 'm4v', 'mkv', 'mng', 'asf',
+      'vob', 'wm', 'wmv', 'wmx', 'wvx', 'avi', 'movie', 'smv',
+    ];
+
+    return in_array($extension, $videoExtensions, true);
+  }
+
+  protected function humanFileSize(int $size): string
+  {
+    return sprintf('%.2f', $size / 1048576).'MB';
   }
 }
