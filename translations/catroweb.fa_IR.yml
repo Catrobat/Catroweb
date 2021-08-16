@@ -28,7 +28,7 @@ description: توضیح
 noDescription: هیچ توضیحی در دسترس نمی باشد.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از ایده ها، اسکریپت ها یا آثار هنری از دیگران استفاده می کنید؟ از انها اینجا تشکری کنید. 
 country: کشور
 loginText: ورود به سیستم
 privacyPolicy: حریم خصوصی
@@ -44,7 +44,7 @@ show-less: 'Less information'
 more-information: 'اطلاعات بیشتر'
 less-information: 'اطلاعات کمتر'
 ok: تائید
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+clickToDownloadProgram: 'برای دانلود مثال مثال پروژه کلیک کنید %link_start% در اینجا %link_end%.'
 registrationError: 'این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.'
 notifications: 'اطلاعیه ها'
 allNotifications: 'All notifications'
@@ -69,36 +69,36 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      description: 'واکنش های بیشتر (شگفت انگیز، لبخند ...) پروژه شما دریافت می شود، بالاتر از آن در این لیست ظاهر می شود.'
 follower:
   follows: دنبال می کند
   followers: پیگیری‌ها
-  follow: Follow
+  follow: دنبال کن
   username: کاربر
   followsMe: من را دنبال کن
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  noFollowing: شما در حال حاضر هیچ کدام را دنبال نمی کنید.
+  noFollowers: شما در حال حاضر هیچ پیروان ندارید
+  noOtherFollowing: در حال حاضر هیچ کاربردی وجود ندارد.
+  noOtherFollowers: در حال حاضر کاربران دنباله ای وجود ندارد.
+  followError: "قادر به پیروی از کاربر مورد نظر نیست!"
+  unfollowError: "قادر به پیگیری کاربر دلخواه نیست!"
+  unfollowQuestion: " آیا مطمئن هستید که میخواهید این کاربر را دنبال کنید؟"
+  unfollowButton: "دنبال نکردن %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: به %theme% Catrobat خوش آمدید
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle: ایجاد داستان ها، بازی ها و بیشتر ...
+    subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا مورد گوشی های هوشمند خود را بخیه کنید!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
+    download: دانلود اپلیکیشن
+    statistics: آمار بیشتر
   featured: ' پيشنهادي'
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: نمونه ها
+  newest: جدیدترین پروژه ها
+  recommended: پروژه های توصیه شده
+  scratchremixes: ریمیکس خراش
+  noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -121,40 +121,40 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
+  tooLongDescription: شرح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
-  random: Random projects
-  related: Related projects
+  random: پروژه های تصادفی
+  related: پروژه های مرتبط
   downloads: '%downloads%دانلودها'
-  sample: Example projects
+  sample: نمونه پروژه‌ها
   views: '%views%نمایش ها'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
     all: "همه"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: پروژه های ارائه شده
+  uploaded: پروژه های آپلود شده
   reportAsInappropriate: به عنوان نامناسب گزارش بده
-  reportProgram: Report project
+  reportProgram: گزارش پروژه
   languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: یک دلیل وارد کن
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportRadioButtonInappropriate: این نامناسب است
+  reportRadioButtonCopyright: نقض قوانین حق تکثیر
+  reportRadioButtonSpam: این اسپم است
+  reportRadioButtonDislike: من این را دوست ندارم
+  reportOwnProgram: شما نمیتوانید پروژه خود را پرچم کنید.
+  reportAlready: شما قبلا این پروژه را پرچم گذاری کرده اید.
+  reportDone: شما این پروژه را گزارش کرده اید!
   updateAppHeader: به روز رسانی اپلیکیشن
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: پرداخت این پروژه Catrobat
   show_more: نمایش بیشتر
   comments: نظرات
   send: ارسال
@@ -162,33 +162,33 @@ programs:
   report: گزارش
   report_popup: نظرت با موفقیت گزارش شد.
   report_popup_header: گزارش شد
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
+  deleted_popup: نظر با موفقیت حذف شد.
+  deleted_popup_header: حذف شده
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  editDescription: توضیحات پروژه را ویرایش کنید
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: کامنتی بگذارید
+  thumbsUp: انگشت بالا
+  smile: لبخند
+  love: عشق
+  wow: ووو
+  linkTitle: لینک
+  link: پیوند پروژه را به کلیپ بورد کپی کنید
   reactionsText: واکنش
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
+  downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
+  showTranslation: مشاهده ترجمه
+  hideTranslation: پنهان‌کردن ترجمه
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: ریمیکس ها
-  showRemixGraph: 'Remix graph'
+  showRemixGraph: 'گراف ریمیکس'
   by: 'به وسیله'
   open: 'باز کن'
   showPaths: 'نمایش مسیر'
   programNotAvailableErrorTitle: 'متأسفم...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'این پروژه بیشتر در دسترس نیست!'
   programNotAvailable: 'در دسترس نیست'
   programUnknownUser: 'کاربر ناشناس'
 noReply: This is an automated message - Please do not reply directly to this email.
@@ -655,13 +655,13 @@ checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: جدیدترین پروژه ها
+  random: پروژه های تصادفی
   most_viewed: بیشترین بازدید
   most_downloaded: بیشترین برنامه دانلود شده
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: ریمیکس خراش
+  recommended: پروژه های توصیه شده
 achievements:
   sidebar:
     title: 'Achievements'
