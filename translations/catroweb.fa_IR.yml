@@ -68,7 +68,7 @@ statistics: "آمارها"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
+      title: 'چه پروژه هایی در اینجا توصیه می شود؟'
       description: 'واکنش های بیشتر (شگفت انگیز، لبخند ...) پروژه شما دریافت می شود، بالاتر از آن در این لیست ظاهر می شود.'
 follower:
   follows: دنبال می کند
@@ -90,7 +90,7 @@ programs:
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: ایجاد داستان ها، بازی ها و بیشتر ...
     subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا مورد گوشی های هوشمند خود را بخیه کنید!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: پروژه های خود را با روبات های LEGO MindStorms EV3 و NXT ایجاد کنید 
     download: دانلود اپلیکیشن
     statistics: آمار بیشتر
   featured: ' پيشنهادي'
@@ -100,11 +100,11 @@ programs:
   scratchremixes: ریمیکس خراش
   noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    مطمئنی؟
+    آیا مطمئن هستید که می خواهید "%programName%" را حذف کنید؟
+    هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
+    بله، آن را حذف کنید!
+    لغو
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -113,8 +113,8 @@ programs:
     Yes, set to public
     Yes, set to private
     No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
+  deleteCommentConfirmation: آیا مطمئن هستید که می خواهید این نظر را حذف کنید؟
   deleteAccountConfirmation: |+
     Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
@@ -240,19 +240,19 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
+  edit: پروفایل خودت را ویرایش کن
   saveChanges: ذخیره تغییرات
   newPass: رمز عبور جدید
   repeatPass: رمز عبور را تکرار کنید
-  oldPass: old password
+  oldPass: پسورد قدیمی
   firstEmail: اولین ایمیل من
   secondEmail: دومین ایمیل من
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: پروژه های من
+  follows: پیگیری‌ها
+  follower: پی‌گیر
+  unfollowUser: این کاربر را دنبال نه کنید!
+  followUser: دنبال این کاربر باشید!
+  amountOfPrograms: مقدار پروژه ها
   form:
     passwordTooShort: رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.
     passwordTooLong: رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.
@@ -261,26 +261,26 @@ profile:
     emailNotValid: اين آدرس رايانامه معتبر نیست.
     emailMissing: خطا در حین به روز رسانی این آدرس ایمیل. تو باید حداقل یک آدرس ایمیل معتبر داشته باشی.
     emailExists: این آدرس ایمیل در حال حاضر موجود است.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: این نام کاربری معتبر نیست
+    usernameMissing: ' شما باید یک نام کاربری داشته باشید'
     usernameExists: در حال حاضراین نام کاربری وجود دارد.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: نام کاربری نباید حاوی یک آدرس ایمیل باشد.
     submitSuccess: ذخیره شد!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: آیا واقعا میخواهید پروژه خود را حذف کنید
+  programsOf: پروژه های
   changePicture: تغییر عکس
   avatar:
-    noImage: No image!
+    noImage: بدون تصویر!
     pictureTooLarge: حجم عکس انتخاب شده تان خیلی بزرگ است، لطفا عکس های بزرگتر از حجم 5 مگابایت استفاده نکنید.
     uploadError: ببخشید، یه مشکلی در حین آپلود پیش اومد!
     noSupport: این نوع تصویر پشتیبانی نمی شه، لطفا تصویر دیگری را امتحان کن.
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: مشخصات بر روی Scratch
 myprofile:
   editProfile: ویرایش پروفایل
   edit: ويرايش
   done: ﺍﻧﺠﺎﻡ شد
   checkMail: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
-  passwordUpdated: Your password was successfully updated.
+  passwordUpdated: رمز عبور شما با موفقیت به روز رسانی شد.
   avatar: آواتار
   email: رایانامه
   editAvatar: ویرایش آواتار
@@ -288,15 +288,15 @@ myprofile:
   editPassword: ویرایش کلمه عبور
   editCountry: ویرایش کشور
   editEmail: ویرایش ایمیل
-  deleteAccount: Delete account
+  deleteAccount: حذف حساب کاربری
   deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  editAccountSettings: ویرایش تنظیمات حساب
+  notChangeVisibility: نمی تواند دید را تغییر دهد
+  notChangeVisibilityReason: نسخه زبان پروژه شما خیلی زیاد است و بنابراین نمی توان آن را قابل مشاهده کرد.
 licenseToPlay:
   link: 'مجوز بازی'
   title: 'مجوز بازی - اعتبار بده و به مشارکت بزار'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: تصور کنید که هر پروژه Catrobat یک کیک، کیک بسیار ویژه ای است که با دستور العمل خود (بلوک های برنامه نویسی) همراه است. همه اعضای جامعه Catrobat کیک خود را همراه با دستور العمل های خود به اشتراک می گذارند. این به این معنی است که شما می توانید از کیک لذت ببرید و یاد بگیرید چگونه خودتان را بسازید!
   text2: 'هیچ دستور پخت پنهانی وجود نداره: دستورالعمل چگونگی پخت این کیک ها برای استفاده،استفاده مجدد،تصحیح و سرو کردن بعنوان الهام ایده های جدید... یعنی کیک ها برای همه باز است.'
   text3: "تو میتونی کیک ها رو بخوری همانطوری که میتونی دستور پخت دیگران رو شاید با مواد اولیه دیگری برای پخت کیک خودت کپی کنی. این آزادی دوتا شرط ساده داره:"
   text4: "در راه اندازی انجمن کت ربات از آنجایی که معتقدیم این روش یادگیری و خلاقیت را در درون انجمن پشتیبانی می کند، ما تصمیم گرفتیم آن را به کار ببریم. با مشارکت دستورهای پخت و مواد لازم (اثر هنری و اسکریپت)، همه اشخاص میتونن کیک هایشان را بر اساس عقاید دیگران درست کنند و این به سود همه است."
@@ -309,7 +309,7 @@ licenseToPlay:
 termsOfUse:
   title: شرایط استفاده
   headline: به انجمن کت ربات خوش آمدید!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'به عنوان بخشی از جامعه Catrobat، شما پروژه ها و ایده ها را با مردم به اشتراک می گذارید:'
   text2: "ما به کمکت نیازمندیم تا این انجمن را به یک مکان قابل پشتیبانی برای هر عضو ایجاد کنیم. این که چجوری به ما کمک کنی اینجاست:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: 'کادوی ما به شما:'
@@ -319,11 +319,11 @@ termsOfUse:
     item2: همه سنین (از کودکان و نوجوانان تا پدربزرگ ها و مادربزرگ ها)
     item3: با تمام سطوح تجربی
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: با احترام رفتارکن. هنگام به اشتراک گذاری پروژه ها، لطفا به یاد داشته باشید که افراد بسیاری از سنین مختلف و زمینه های مختلف مشارکت شما را می بینند.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "صادق باش. خودت را جای کس دیگری جا نزن یا سعی نکن که انجمن را فریب بدهی."
     item4: "اطلاعات شخصی ات را محرمانه نگه دار. آدرس ایمیل، شماره تلفن یا دیگر اطلاعات شخصی ات را به اشتراک نگذار."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: "کمک به حفظ سایت دوستانه. اگر احساس دیگران می کنید، یک پروژه یا نظری را پیدا می کنید، توهین آمیز، بیش از حد خشونت آمیز یا غیرقابل قبول، فقط روی دکمه «گزارش به عنوان نامناسب» کلیک کنید و یک توضیح کوتاه را ترک کنید. تیم Catrobat گزارش شما را بررسی خواهد کرد و ممکن است هر پروژه، نظر یا پست را حذف کند."
   list3:
     item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
@@ -356,7 +356,7 @@ menu:
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  followersAndFollowing: پی‌گیر
 login:
   login: ورود به سیستم
   passOrUser: نام کاربری یا کلمه عبور نادرست است.
