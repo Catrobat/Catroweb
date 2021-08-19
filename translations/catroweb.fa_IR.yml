@@ -87,7 +87,7 @@ follower:
 programs:
   welcome:
     title: به %theme% Catrobat خوش آمدید
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: به سایت Catrobat برای Mindstorms EV3 و NXT خوش آمدید
     subtitle: ایجاد داستان ها، بازی ها و بیشتر ...
     subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا مورد گوشی های هوشمند خود را بخیه کنید!
     subtitle_mindstorms: پروژه های خود را با روبات های LEGO MindStorms EV3 و NXT ایجاد کنید 
@@ -116,11 +116,11 @@ programs:
   reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
   deleteCommentConfirmation: آیا مطمئن هستید که می خواهید این نظر را حذف کنید؟
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    حذف حساب؟
+    آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این نیز پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
+    هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
+    بله، این را حذف کنید!
+    لغو
   tooLongDescription: شرح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
   most:
@@ -141,8 +141,8 @@ programs:
   reportAsInappropriate: به عنوان نامناسب گزارش بده
   reportProgram: گزارش پروژه
   languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: لطفا %login% برای گزارش این پروژه.
+  reportDialogHeader: چرا می خواهید این پروژه را گزارش دهید؟
   reportDialogReason: یک دلیل وارد کن
   reportRadioButtonInappropriate: این نامناسب است
   reportRadioButtonCopyright: نقض قوانین حق تکثیر
@@ -164,7 +164,7 @@ programs:
   report_popup_header: گزارش شد
   deleted_popup: نظر با موفقیت حذف شد.
   deleted_popup_header: حذف شده
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
   editDescription: توضیحات پروژه را ویرایش کنید
   saveDescription: Save description change
   editCredits: Edit the project credits
@@ -191,9 +191,9 @@ remixGraph:
   programNotAvailableErrorDescription: 'این پروژه بیشتر در دسترس نیست!'
   programNotAvailable: 'در دسترس نیست'
   programUnknownUser: 'کاربر ناشناس'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: این یک پیام خودکار است - لطفا به طور مستقیم به این ایمیل پاسخ ندهید.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: تأیید حساب Catrobat شما
   message: |
     Dear %username%.
     To finish activating your account - please visit %confirmationUrl%
@@ -289,7 +289,7 @@ myprofile:
   editCountry: ویرایش کشور
   editEmail: ویرایش ایمیل
   deleteAccount: حذف حساب کاربری
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccountText: آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
   editAccountSettings: ویرایش تنظیمات حساب
   notChangeVisibility: نمی تواند دید را تغییر دهد
   notChangeVisibilityReason: نسخه زبان پروژه شما خیلی زیاد است و بنابراین نمی توان آن را قابل مشاهده کرد.
@@ -311,7 +311,7 @@ termsOfUse:
   headline: به انجمن کت ربات خوش آمدید!
   text1: 'به عنوان بخشی از جامعه Catrobat، شما پروژه ها و ایده ها را با مردم به اشتراک می گذارید:'
   text2: "ما به کمکت نیازمندیم تا این انجمن را به یک مکان قابل پشتیبانی برای هر عضو ایجاد کنیم. این که چجوری به ما کمک کنی اینجاست:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "از طریق پروژه Catrobat ما می خواهیم همکاری را تقویت کنیم و اجازه دهیم خلاقیت هر کس برای ترکیب به نفع تمام بشریت باشد. شما همچنین می توانید عضو فعال جامعه Catrobat شوید، با دادن پروژه های خود به جامعه به عنوان یک هدیه، به همان شیوه که دیگر اعضای فعال پروژه های خود را به شما می دهند:"
   text4: 'کادوی ما به شما:'
   text5: 'شرایط استفاده و خدمات:'
   list1:
@@ -325,7 +325,7 @@ termsOfUse:
     item4: "اطلاعات شخصی ات را محرمانه نگه دار. آدرس ایمیل، شماره تلفن یا دیگر اطلاعات شخصی ات را به اشتراک نگذار."
     item5: "کمک به حفظ سایت دوستانه. اگر احساس دیگران می کنید، یک پروژه یا نظری را پیدا می کنید، توهین آمیز، بیش از حد خشونت آمیز یا غیرقابل قبول، فقط روی دکمه «گزارش به عنوان نامناسب» کلیک کنید و یک توضیح کوتاه را ترک کنید. تیم Catrobat گزارش شما را بررسی خواهد کرد و ممکن است هر پروژه، نظر یا پست را حذف کند."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: "با آپلود یک پروژه به وب سایت های ما، شما قبول می کنید و موافقت می کنید که این کار را تحت مجوز خاصی از پروژه های Catrobat آپلود قرار دهید. همانند مجوز های آزاد که در آن سیستم Catrobat خود را برای شما در دسترس شما قرار می گیرد، این مجوز های رایگان پروژه های Catrobat آپلود شده به هر کس حق یادگیری از کار قبلی که توسط دیگران آپلود شده است و برای انطباق و ریمیکس برای ساخت بازی های جدید جذاب خود، یاد می گیرد انیمیشن ها و سایر پروژه ها. این اجازه می دهد تا هر کس به \"شانه های همسالان خود\" ایستاده، یکی از آنها بودن شما! بنابراین کار شما به این ترتیب به نفع تمام جهان است و برای هر کسی که از آن استفاده می شود، آزادانه باقی می ماند، کمی شبیه به متن و تصاویر آزادانه به ویکی پدیا توسط داوطلبان از سراسر جهان کمک می کند. آن را به عنوان خود به بشریت فکر کنید: شما به همه می دهید، و همه دیگران که کار خود را به وب سایت های ما آپلود می کنند، به شما می دهند. بنابراین یک پروژه آپلود شده هدیه ای از ارزش عالی است که صاحب آن به صورت رایگان به شما می دهد، با شرایطی که شما در جامعه شرکت می کنید."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "یک شرط مهم دیگر این است که تو به نویسندگانی که روی برنامشون کار کردی اعتبار میدی. همزمان ما به وضوح روی برنامه تو کار می کنیم تا توسط دیگران شناخته شود با اسم خاصی که خودت به صورت آزادانه برای معرفی در انجمن \"کت ربات\" معرفی می کنی و با دادن فرصت به دیگران برای اظهار لطف به تو به صورت عمومی به خاطر در اختیار گذاشتن کارت برای همه."
     item4: 'لطفا %link-licenseUploaded% برای شرایط و ضوابط قانونی خاص مشاوره کن.'
