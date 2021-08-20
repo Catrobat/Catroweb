@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "23b32084c6995def59452c03c4c70b43",
+    "content-hash": "faabc2ab995bb26d526ddf5bdf4b78a2",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14764,16 +14764,16 @@
         },
         {
             "name": "phpstan/phpstan-doctrine",
-            "version": "0.12.42",
+            "version": "0.12.43",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan-doctrine.git",
-                "reference": "e3173175dcdaf808d5ca6408528dca669e4de19f"
+                "reference": "134ecca0a50742575c2da22c3f65b79eff6b9427"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/e3173175dcdaf808d5ca6408528dca669e4de19f",
-                "reference": "e3173175dcdaf808d5ca6408528dca669e4de19f",
+                "url": "https://api.github.com/repos/phpstan/phpstan-doctrine/zipball/134ecca0a50742575c2da22c3f65b79eff6b9427",
+                "reference": "134ecca0a50742575c2da22c3f65b79eff6b9427",
                 "shasum": ""
             },
             "require": {
@@ -14826,9 +14826,9 @@
             "description": "Doctrine extensions for PHPStan",
             "support": {
                 "issues": "https://github.com/phpstan/phpstan-doctrine/issues",
-                "source": "https://github.com/phpstan/phpstan-doctrine/tree/0.12.42"
+                "source": "https://github.com/phpstan/phpstan-doctrine/tree/0.12.43"
             },
-            "time": "2021-07-08T08:41:15+00:00"
+            "time": "2021-08-19T14:46:51+00:00"
         },
         {
             "name": "phpstan/phpstan-phpunit",
