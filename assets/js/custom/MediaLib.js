@@ -95,148 +95,26 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           mediafileContainer.addClass('flavored')
         }
 
-        const name = file.name // make word breaks easier:
-          .replace(/([a-z])([A-Z])/g, '$1​$2') // insert zero-width space between CamelCase
-          .replace(/([A-Za-z])([0-9])/g, '$1​$2') // insert zero-width space between letters and numbers
-          .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
-        mediafileContainer.append($('<div class="name" />').text(name))
         mediafileContainer.append($('<i class="checkbox material-icons">check_circle</i>'))
-        mediafileContainer.addClass('show-name')
+        mediafileContainer.append(buildImageContainer(file))
+        if (file.project_url) {
+          mediafileContainer.append(
+            '<div class="text-container">' +
+            '  <a class="name name--link" href="' + file.project_url + '">' + getFileName(file) + '</a>' +
+            '  <div class="description">' + file.description + '</div>' +
+            '</div>'
+          )
+        } else {
+          mediafileContainer.append(
+            '<div class="text-container">' +
+            '  <div class="name">' + getFileName(file) + '</div>' +
+            '  <div class="description">' + file.description + '</div>' +
+            '</div>'
+          )
+        }
 
-        const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
-        let audio, previewBtn, image
-        switch (file.extension) {
-          case 'adp':
-          case 'au':
-          case 'mid':
-          case 'mp4a':
-          case 'mpga':
-          case 'oga':
-          case 's3m':
-          case 'sil':
-          case 'uva':
-          case 'eol':
-          case 'dra':
-          case 'dts':
-          case 'dtshd':
-          case 'lvp':
-          case 'pya':
-          case 'ecelp4800':
-          case 'ecelp7470':
-          case 'ecelp9600':
-          case 'rip':
-          case 'weba':
-          case 'aac':
-          case 'aif':
-          case 'caf':
-          case 'flac':
-          case 'mka':
-          case 'm3u':
-          case 'wax':
-          case 'wma':
-          case 'ram':
-          case 'rmp':
-          case 'wav':
-          case 'xm':
-            mediafileContainer.attr('data-filetype', 'audio')
-            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
-            mediafileContainer.append($('<i class="media-file-type material-icons">volume_up</i>'))
-            audio = new Audio(file.download_url)
-            previewBtn = $('<i class="audio-control material-icons">play_arrow</i>')
-            previewBtn.click(function () {
-              if (audio.paused) {
-                previewBtn.text('pause')
-                audio.play()
-              } else {
-                previewBtn.text('play_arrow')
-                audio.pause()
-              }
-              return false
-            })
-            audio.onended = function () {
-              previewBtn.text('play_arrow')
-            }
-
-            mediafileContainer.append(previewBtn)
-            break
-          case '3gp':
-          case '3g2':
-          case 'h261':
-          case 'h263':
-          case 'h264':
-          case 'jpgv':
-          case 'jpm':
-          case 'mj2':
-          case 'mp4':
-          case 'mpeg':
-          case 'ogv':
-          case 'qt':
-          case 'uvh':
-          case 'uvm':
-          case 'uvp':
-          case 'uvs':
-          case 'uvv':
-          case 'dvb':
-          case 'fvt':
-          case 'mxu':
-          case 'pyv':
-          case 'uvu':
-          case 'viv':
-          case 'webm':
-          case 'f4v':
-          case 'fli':
-          case 'flv':
-          case 'm4v':
-          case 'mkv':
-          case 'mng':
-          case 'asf':
-          case 'vob':
-          case 'wm':
-          case 'wmv':
-          case 'wmx':
-          case 'wvx':
-          case 'avi':
-          case 'movie':
-          case 'smv':
-            mediafileContainer.attr('data-filetype', 'video')
-            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
-            mediafileContainer.append($('<i class="media-file-type material-icons">videocam</i>'))
-            break
-          case 'pdf':
-            mediafileContainer.attr('data-filetype', 'pdf')
-            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
-            mediafileContainer.append($('<i class="media-file-type material-icons">picture_as_pdf</i>'))
-            break
-          case 'txt':
-          case 'rtx':
-            mediafileContainer.attr('data-filetype', 'text')
-            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
-            mediafileContainer.append($('<i class="media-file-type material-icons">view_headline</i>'))
-            break
-          case 'zip':
-          case '7z':
-            mediafileContainer.attr('data-filetype', 'archive')
-            mediafileContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
-            mediafileContainer.append($('<i class="media-file-type material-icons">folder</i>'))
-            break
-          default:
-            image = $('<img alt="' + file.id + '" src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
-            image.attr('title', file.name)
-            image.attr('alt', file.name)
-            image.on('error', function () {
-              mediafileContainer.addClass('show-name')
-
-              const pictureExtensions = ['bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu', 'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx', 'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd']
-              image.remove()
-
-              if (pictureExtensions.indexOf(file.extension) !== -1) {
-                mediafileContainer.prepend($('<i class="media-file-type material-icons">photo</i>'))
-              }
-              mediafileContainer.prepend($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
-            })
-            mediafileContainer.removeClass('show-name')
-            mediafileContainer.append(image)
-            break
+        if (isWebView) {
+          mediafileContainer.append('<div class="button-container">' + '<i class="material-icons">get_app</i>' + '</div>')
         }
 
         if (file.category.startsWith('ThemeSpecial')) {
@@ -259,9 +137,70 @@ function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
         $(this).show()
         $('#sidebar #menu-mediacat-' + catId).show()
       })
-    }).fail(function () {
-      console.error('Error loading media lib package ' + packageName)
+    }
+
+    )
+      .fail(function () {
+        console.error('Error loading media lib package ' + packageName)
+      })
+  }
+
+  function getFileName (file) {
+    return file.name // make word breaks easier:
+      .replace(/([a-z])([A-Z])/g, '$1​$2') // insert zero-width space between CamelCase
+      .replace(/([A-Za-z])([0-9])/g, '$1​$2') // insert zero-width space between letters and numbers
+      .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
+  }
+
+  function buildImageContainer (file) {
+    const imageContainer = $('<div class="img-container"></div>')
+    let audio, previewBtn
+
+    switch (file.type) {
+      case 'image':
+      case 'catrobat':
+        imageContainer.attr('data-filetype', 'image')
+        imageContainer.append(buildImageFromFile(file))
+        break
+      case 'sound':
+        imageContainer.attr('data-filetype', 'audio')
+        audio = new Audio(file.download_url)
+        previewBtn = $('<i class="audio-control material-icons">play_arrow</i>')
+        previewBtn.click(function () {
+          if (audio.paused) {
+            previewBtn.text('pause')
+            audio.play()
+          } else {
+            previewBtn.text('play_arrow')
+            audio.pause()
+          }
+          return false
+        })
+        audio.onended = function () {
+          previewBtn.text('play_arrow')
+        }
+        imageContainer.append(previewBtn)
+        break
+      case 'video':
+        imageContainer.append($('<i class="media-file-icon material-icons">videocam</i>'))
+        break
+      default:
+        imageContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+    }
+
+    return imageContainer
+  }
+
+  function buildImageFromFile (file) {
+    const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
+    const image = $('<img alt="' + file.id + '" src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
+    image.attr('title', file.name)
+    image.attr('alt', file.name)
+    image.on('error', function () {
+      image.remove()
     })
+
+    return image
   }
 
   function initTilePinchToZoom () {

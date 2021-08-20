@@ -145,6 +145,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->add('flavors', null, ['class' => Flavor::class, 'multiple' => true, 'required' => true])
       ->add('author', TextType::class, ['label' => 'Author', 'required' => false])
       ->add('active', null, ['required' => false])
+      ->add('url', TextType::class, ['required' => false, 'label' => 'Project ID'])
     ;
   }
 
