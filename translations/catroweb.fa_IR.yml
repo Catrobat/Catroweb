@@ -353,9 +353,9 @@ menu:
   profile: مشخصات من
   login: ورود به سیستم
   logout: خروج
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
+  admin: مدیر سیستم
+  home: صفحهٔ اصلی
+  helpAndTutorials: کمک و آموزش
   followersAndFollowing: پی‌گیر
 login:
   login: ورود به سیستم
@@ -364,18 +364,18 @@ login:
   forgotPass: نام کاربری یا رمز عبور را فراموش کرده اید؟
   recoverPass: بازیابی رمز عبور
   recoverPassSend: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: رمز عبور این کاربر قبلا در 24 ساعت گذشته درخواست شده است.
+  confirmationSend: یک ایمیل برای تأیید ثبت نام شما به آدرس ایمیل شما ارسال شد. لطفا صندوق ورودی خود را بررسی کنید و حساب خود را فعال کنید.
   userOrEmail: نام کاربری یا ایمیل
   changePass: تغییر رمز عبور
   createAccount: ایجاد یک حساب کاربری
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  noAccount: حساب کاربری ندارید؟
+  alreadyAccount: قبلا ثبت نام نموده اید؟
   or: یا
   username: نام کاربری
   email: رایانامه
   passwordFirst: رمز عبور
-  passwordSecond: Password confirm
+  passwordSecond: تایید گذرواژه
 apk:
   download: به عنوان اپلیکیشن دانلود کن
   prepare: 'تهیه ی اپلیکیشن'
@@ -391,7 +391,7 @@ errors:
     exists: در حال حاضراین نام کاربری وجود دارد.
     not_exists: این نام کاربری وجود ندارد.
     not_email: نام کاربری نباید آدرس ایمیل باشه.
-    size: The username must have at least 3 character and not more than 180
+    size: نام کاربری باید حداقل ۳ کاراکتر داشته باشد و نه بیش از ۱۸۰ باشد
   password:
     blank: تو رمزعبوری وارد نکردی.
     short: 'رمز عبورت باید حداقل  {{ limit }} نویسه داشته باشه.'
@@ -418,15 +418,15 @@ errors:
   image.missing: پروژه XML به یک فایل که در پوشه پروژه وجود ندارد اشاره می کند
   unknown: خطای نامشخص
   token: 'تأیید اعتبار دستگاه انجام نشد: نشانه معتبر نیست!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
   program:
-    invalid: Invalid project.
+    invalid: پروژه نامعتبر
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: تایید هویت موفق نبود
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
