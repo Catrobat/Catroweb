@@ -16,28 +16,14 @@ class ExtensionRepository extends ServiceEntityRepository
   /**
    * @return mixed
    */
-  public function getAllExtensionsPrefix()
-  {
-    $qb = $this->createQueryBuilder('e');
-
-    return $qb
-      ->select('e.prefix')
-      ->getQuery()
-      ->getResult()
-    ;
-  }
-
-  /**
-   * @return mixed
-   */
-  public function getExtensionByName(string $name)
+  public function getExtensionByInternalTitle(string $internal_title)
   {
     $qb = $this->createQueryBuilder('e');
 
     return $qb
       ->select('e')
-      ->where($qb->expr()->eq('e.name', ':name'))
-      ->setParameter('name', $name)
+      ->where($qb->expr()->eq('e.internal_title', ':internal_title'))
+      ->setParameter('internal_title', $internal_title)
       ->getQuery()
       ->getResult()
     ;

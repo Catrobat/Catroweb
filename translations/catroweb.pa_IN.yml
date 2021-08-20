@@ -344,7 +344,7 @@ termsOfUse:
   version: ਸੰਸਕਰਣ 1.3, 4 ਮਾਰਚ 2014
 search:
   dotdotdot: ਖੋਜੋ…
-  search: ਖੋਜ
+  search: ਖੋਜ ਕਰੋ…
   inMediaLib: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ ਵਿੱਚ ਖੋਜੋ
   results: ਖੋਜ ਨਤੀਜੇ
   resultcount: ਤੁਹਾਡੀ ਖੋਜ ਨੇ%count% ਨਤੀਜੇ ਵਾਪਸ ਕੀਤੇ
@@ -518,18 +518,6 @@ ci:
   generate: ਏਪੀਕੇ ਤਿਆਰ ਕਰੋ
   pending: ਏਪੀਕੇ ਤਿਆਰ ਕਰਨਾ
   download: ਏਪੀਕੇ ਡਾ .ਨਲੋਡ ਕਰੋ
-gamejam:
-  nojam: ਮੁਆਫ ਕਰਨਾ, ਇਸ ਸਮੇਂ ਕੋਈ ਗੇਮ ਜਾਮ ਨਹੀਂ ਹੈ
-  submit: '%gamejamname% ਤੇ ਜਮ੍ਹਾਂ ਕਰੋ'
-  whats: '%gamejamname% ਕੀ ਹੈ?'
-  submitown:
-    header: ਸਾਵਧਾਨ ਰਹੋ
-    subheader: ਤੁਸੀਂ ਸਿਰਫ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਜਮ੍ਹਾ ਕਰ ਸਕਦੇ ਹੋ
-    text: |
-      ਪਰ ਕਿਉਂ ਨਾ ਆਪਣਾ ਬਣਾਓ!
-      %gamejamtag% ਵਿਚ ਹਿੱਸਾ ਲਓ
-tag-text: ਟੈਗਸ
-extenstion-text: ਐਕਸਟੈਂਸ਼ਨਾਂ
 admin:
   maintain:
     diskMaintenance: ਡਿਸਕ ਸੰਭਾਲ
@@ -717,6 +705,7 @@ achievements:
         title: 'ਨਵੀਨਤਾ'
         description: 'ਇੱਕ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਓ'
 tags:
+  title: ਟੈਗਸ
   tag:
     game:
       title: ਖੇਡ
@@ -732,39 +721,54 @@ tags:
       title: ਪ੍ਰਯੋਗਾਤਮਕ
     tutorial:
       title: ਟਿutorialਟੋਰਿਅਲ
+extensions:
+  title: ਐਕਸਟੈਂਸ਼ਨਾਂ
+  extension:
+    arduino:
+      title: ਅਰਦਿਨੋ
+    drone:
+      title: ਡਰੋਨ
+    phiro:
+      title: ਫਿਰੋ
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: ਕਢਾਈ
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    general: 'ਆਮ'
+    projects: 'ਪ੍ਰਾਜੈਕਟ'
+    comments: 'ਟਿਪਣੀਆਂ'
+    public: 'ਜਨਤਕ'
+    private: 'ਨਿਜੀ'
+    join: 'ਜੁੜੋ'
+    leave: 'ਛੱਡੋ'
+    showMore: 'ਹੋਰ ਦਿਖਾਓ'
+    showLess: 'ਘੱਟ ਦਿਖਾਓ'
+    remove_project: 'ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਓ'
+    remove_project_error: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ!'
+    remove_project_success: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਇਆ ਗਿਆ!'
+    no_projects: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਸ਼ਾਮਲ ਨਹੀਂ ਹਨ'
+    no_comments: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਟਿੱਪਣੀ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ'
+    type_something: 'ਕੁਝ ਟਾਈਪ ਕਰੋ'
+    send_comment: 'ਭੇਜੋ'
+    comment_error: 'ਤੁਹਾਡੀ ਟਿੱਪਣੀ ਪੋਸਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
+    remove_comment_error: 'ਟਿੱਪਣੀ ਨੂੰ ਹਟਾਉਂਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
+    replies: 'ਜਵਾਬ'
+    updateCoverError: 'ਸਟੂਡੀਓ ਕਵਰ ਨੂੰ ਅਪਡੇਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
+    created_studio: 'ਸਟੂਡੀਓ ਬਣਾਇਆ'
+    activity: 'ਸਰਗਰਮੀ'
+    activity_add_comment: 'ਇੱਕ ਟਿੱਪਣੀ ਛੱਡ ਦਿੱਤੀ'
+    activity_add_project: 'ਸਟੂਡੀਓ ਵਿੱਚ ਨਵਾਂ ਪ੍ਰੋਜੈਕਟ %project% ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ'
+    activity_add_user: 'ਸਟੂਡੀਓ ਵਿੱਚ ਨਵਾਂ ਯੂਜ਼ਰ %user% ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ'
+    members: 'ਸਟੂਡੀਓ ਦੇ ਮੈਂਬਰ'
+    remove_user: 'ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਓ'
+    promote_user: 'ਐਡਮਿਨ ਨੂੰ ਤਰੱਕੀ ਦਿਓ'
+    promote_failed: 'ਇਸ ਉਪਭੋਗਤਾ ਨੂੰ ਪ੍ਰਸ਼ਾਸਕ ਦੇ ਰੂਪ ਵਿੱਚ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ'
+    ban_user_failed: 'ਸਟੂਡੀਓ ਤੋਂ ਉਪਭੋਗਤਾ ਤੇ ਪਾਬੰਦੀ ਲਗਾਉਣ ਵਿੱਚ ਅਸਫਲ!'
+    general_settings: 'ਆਮ ਸੈਟਿੰਗਜ਼'
+    studio_name: 'ਸਟੂਡੀਓ ਦਾ ਨਾਮ'
     studio_desc: 'ਵੇਰਵਾ'
-    private_studio: 'Private Studio'
+    private_studio: 'ਪ੍ਰਾਈਵੇਟ ਸਟੂਡੀਓ'

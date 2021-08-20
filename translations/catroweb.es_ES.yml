@@ -518,17 +518,6 @@ ci:
   generate: Generar Apk
   pending: Generando el Apk
   download: Descargar Apk
-gamejam:
-  nojam: Lo sentimos, no hay ningún Game Jam en este momento
-  submit: Enviar a %gamejamname%
-  whats: '¿Qué es el %gamejamname%?'
-  submitown:
-    header: tenga en cuenta
-    subheader: Sólo puedes enviar tus propios proyectos
-    text: |
-      Pero por qué no crear el tuyo propio! Participar en la %gamejamtag%
-tag-text: Etiquetas
-extenstion-text: Extensiones
 admin:
   maintain:
     diskMaintenance: Mantenimiento de disco
@@ -716,6 +705,7 @@ achievements:
         title: 'Novato'
         description: 'Crear una cuenta de usuario'
 tags:
+  title: Etiquetas
   tag:
     game:
       title: Juego
@@ -731,39 +721,54 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensiones
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    projects: 'projekter'
+    comments: 'Comentarios'
+    public: 'público'
+    private: 'privado'
+    join: 'Unirse'
+    leave: 'Abandonar'
+    showMore: 'mostrar más'
+    showLess: 'mostrar menos'
+    remove_project: 'Eliminar del estudio'
+    remove_project_error: '¡Error al eliminar el proyecto del estudio!'
+    remove_project_success: 'proyecto eliminado con éxito del estudio!'
+    no_projects: 'El estudio no contiene ningún proyecto aún'
+    no_comments: 'El estudio no contiene ningún comentario aún'
+    type_something: 'Escribe algo'
+    send_comment: 'enviar'
+    comment_error: 'Algo salió mal al publicar tu comentario!'
+    remove_comment_error: 'Algo salió mal al eliminar el comentario!'
+    replies: 'respuestas'
+    updateCoverError: 'Algo salió mal al actualizar la portada del estudio!'
+    created_studio: 'creó el estudio'
+    activity: 'Actividad'
+    activity_add_comment: 'dejó un comentario'
+    activity_add_project: 'nuevo proyecto %project% añadido al estudio'
+    activity_add_user: 'nuevo usuario %user% añadido al estudio'
+    members: 'Miembros del Estudio'
+    remove_user: 'quitar del estudio'
+    promote_user: 'promocionar a admin'
+    promote_failed: 'Error al promocionar este usuario a administrar'
+    ban_user_failed: '¡Error al banear al usuario del estudio!'
+    general_settings: 'Configuración General'
+    studio_name: 'Nombre del Estudio'
     studio_desc: 'Descripción'
-    private_studio: 'Private Studio'
+    private_studio: 'Estudio privado'

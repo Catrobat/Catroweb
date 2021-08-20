@@ -44,7 +44,7 @@ Feature: Search tagged programs
 
   Scenario: A request must have specific parameters to succeed with the tag search
 
-    Given I have a parameter "q" with the tag id "1"
+    Given I have a parameter "q" with the tag "games"
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search/tagProjects.json" with these parameters

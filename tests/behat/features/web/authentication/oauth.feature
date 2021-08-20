@@ -4,9 +4,9 @@ Feature:
 
   Background:
     Given there are users:
-      | id | name       | oauth_user |
-      | 1  | Catrobat   | true       |
-      | 2  | TestUser   | false      |
+      | id | name     | oauth_user |
+      | 1  | Catrobat | true       |
+      | 2  | TestUser | false      |
 
   Scenario: When I login for the first time using OAuth service I should see OAuth Info popup
     Given I  log in as "Catrobat"

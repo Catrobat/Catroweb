@@ -10,7 +10,7 @@ Feature: Searching for programs with ownername
 
     And there are projects:
       | id | name      | owned by |
-      | 1  | project 1 | Catrobat    |
+      | 1  | project 1 | Catrobat |
       | 2  | project 2 | User2    |
       | 3  | project 3 | User3    |
     And I wait 1000 milliseconds

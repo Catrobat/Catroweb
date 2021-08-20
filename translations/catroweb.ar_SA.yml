@@ -518,18 +518,6 @@ ci:
   generate: إنشاء كـ Apk
   pending: تتم الآن عملية إنشاء Apk
   download: تنزيل كـ Apk
-gamejam:
-  nojam: عذراً, لا يوجد في الوقت الحالي لعبة الازدحام
-  submit: تقديم الى %gamejamname%
-  whats: ما هو %gamejamname%؟
-  submitown:
-    header: كن حذراً
-    subheader: يمكنك فقط تقديم مشاريعك الخاصة
-    text: |
-      لماذا لم تنشئ برنامجك الخاص!
-      قم بالمشاركة في %gamejamtag%
-tag-text: وسوم
-extenstion-text: الإضافات
 admin:
   maintain:
     diskMaintenance: صيانة القرص
@@ -717,6 +705,7 @@ achievements:
         title: 'مبتدئ'
         description: 'قم بإنشاء حساب مستخدم'
 tags:
+  title: وسوم
   tag:
     game:
       title: لعبة
@@ -732,39 +721,54 @@ tags:
       title: تجريبي
     tutorial:
       title: درس تعليمي
+extensions:
+  title: ملحقات
+  extension:
+    arduino:
+      title: الاردوينو
+    drone:
+      title: طائرة بدون طيار
+    phiro:
+      title: روبوت الاطفال
+    raspberry_pi:
+      title: Raspberry Pi
+    embroidery:
+      title: التطريز
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    general: 'جنرال لواء'
+    projects: 'المشاريع'
+    comments: 'التعليقات'
+    public: 'عامة'
+    private: 'نشر'
+    join: 'انضم'
+    leave: 'يترك'
+    showMore: 'أظهر المزيد'
+    showLess: 'تظهر أقل'
+    remove_project: 'إزالة من الاستوديو'
+    remove_project_error: 'فشل إزالة المشروع من الاستوديو!'
+    remove_project_success: 'تمت إزالة المشروع بنجاح من الاستوديو!'
+    no_projects: 'لا يحتوي الاستوديو على أي مشاريع حتى الآن'
+    no_comments: 'الاستوديو لا يحتوي على أي تعليقات حتى الآن'
+    type_something: 'اطبع شيئا'
+    send_comment: 'يرسل'
+    comment_error: 'حدث خطأ ما أثناء نشر تعليقك!'
+    remove_comment_error: 'حدث خطأ ما أثناء إزالة التعليق!'
+    replies: 'الردود'
+    updateCoverError: 'حدث خطأ ما أثناء تحديث غلاف الاستوديو!'
+    created_studio: 'أنشأ الاستوديو'
+    activity: 'نشاط'
+    activity_add_comment: 'ترك تعليق'
+    activity_add_project: "\nتم إضافة مشروع جديد%project% إلى الاستوديو"
+    activity_add_user: 'أضاف مستخدم جديد%user% إلى الاستوديو'
+    members: 'أعضاء الاستوديو'
+    remove_user: 'إزالة من الاستوديو'
+    promote_user: 'ترقية إلى admin'
+    promote_failed: 'فشل في ترقية هذا المستخدم إلى مسؤول'
+    ban_user_failed: 'فشل في منع المستخدم من الاستوديو!'
+    general_settings: 'الاعدادات العامة'
+    studio_name: 'اسم الاستوديو'
     studio_desc: 'الوصف'
-    private_studio: 'Private Studio'
+    private_studio: 'استوديو خاص'

@@ -3,8 +3,8 @@ Feature: User has a large number of follower (> 100).
 
   Background:
     Given 501 users follow:
-      | id | name      |
-      | 1  | user0     |
+      | id | name  |
+      | 1  | user0 |
 
   Scenario: Notification number in side menu should be appropriate to the number of followers
     Given I log in as "user0"

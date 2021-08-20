@@ -4,26 +4,26 @@ Feature: Upload a program with extensions
   Background:
     Given there are users:
       | name     | password | token      | id |
-      | Catrobat | 12345    | cccccccccc |  1 |
+      | Catrobat | 12345    | cccccccccc | 1  |
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
     And there are extensions:
-      | id | name         | prefix  |
-      | 1  | Arduino      | ARDUINO |
-      | 2  | Drone        | DRONE   |
-      | 3  | Lego         | LEGO    |
-      | 4  | Phiro        | PHIRO   |
-      | 5  | Raspberry Pi | RASPI   |
+      | id | internal_title |
+      | 1  | arduino        |
+      | 2  | drone          |
+      | 3  | mindstorms     |
+      | 4  | phiro          |
+      | 5  | raspberry_pi   |
 
   Scenario: upload a program with extensions
-    Given I have a program with Arduino, Lego and Phiro extensions
-    When I upload this generated program, API version 1
-    Then the program should be marked with extensions in the database
+    Given I have a program with arduino, mindstorms and phiro extensions
+    And I upload this generated program with id "2", API version 1
+    Then the program with id "2" should be marked with "3" extensions in the database
 
   Scenario: update a program with extensions
-    Given I have a program with Arduino, Lego and Phiro extensions
+    Given I have a program with arduino, mindstorms and phiro extensions
     And I upload this generated program with id "2", API version 1
     When I upload this generated program again without extensions, API version 1
-    Then the program with id "2" should be marked with no extensions in the database
+    Then the program with id "2" should be marked with "0" extensions in the database
 

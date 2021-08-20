@@ -72,6 +72,11 @@ class ResetCommand extends Command
         ['bin/console', 'catrobat:update:tags'], [], 'Creating constant tags', $output
     );
 
+    // Create static extensions
+    CommandHelper::executeShellCommand(
+          ['bin/console', 'catrobat:update:extensions'], [], 'Creating constant tags', $output
+      );
+
     // SetUp Acl
     CommandHelper::executeShellCommand(
         ['bin/console', 'sonata:admin:setup-acl'], [], 'Set up Sonata admin ACL', $output

@@ -4,12 +4,12 @@ Feature: Media Packages
 
   Background:
     Given there are admins:
-      | name     | password | token      | email                | id |
-      | Admoon | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+      | name   | password | token      | email                | id |
+      | Admoon | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
     And there are users:
       | name     | password | token      | email               | id |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
     And there are media packages:
       | name    | name_url |
       | Looks   | looks    |
@@ -65,11 +65,11 @@ Feature: Media Packages
     And I wait for the page to be loaded
     And I am on "/admin/media_package/list"
     Then I should see the media packages table:
-      | name    | name_url |
-      | Looks   | looks    |
-      | Sounds  | sounds   |
-      | Objects | objects  |
-      | Backgrounds | backgrounds  |
+      | name        | name_url    |
+      | Looks       | looks       |
+      | Sounds      | sounds      |
+      | Objects     | objects     |
+      | Backgrounds | backgrounds |
 
   Scenario: Editing a media category
     Given I log in as "Admoon" with the password "123456"
@@ -88,7 +88,7 @@ Feature: Media Packages
     And I am on "/admin/media_package/list"
     And I wait for the page to be loaded
     Then I should see the media packages table:
-      | name    | name_url |
-      | Looks   | looks    |
-      | Sounds  | sounds   |
-      | Backgrounds | backgrounds  |
+      | name        | name_url    |
+      | Looks       | looks       |
+      | Sounds      | sounds      |
+      | Backgrounds | backgrounds |

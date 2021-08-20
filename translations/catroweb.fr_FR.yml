@@ -518,18 +518,6 @@ ci:
   generate: Générer l'apk
   pending: Génération de l'apk
   download: Télécharger l'apk
-gamejam:
-  nojam: Désolé, il n'y a pas de confiture de jeu pour le moment
-  submit: Soumettre à %gamejamname%
-  whats: Qu'est-ce que le %gamejamname%?
-  submitown:
-    header: soyez au courant
-    subheader: Vous ne pouvez soumettre que vos propres projets
-    text: |
-      Mais pourquoi ne pas créer le vôtre!
-      Participez au %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
 admin:
   maintain:
     diskMaintenance: Maintenance du disque
@@ -717,6 +705,7 @@ achievements:
         title: 'Novice'
         description: 'Créer un compte utilisateur'
 tags:
+  title: Tags
   tag:
     game:
       title: Jeu
@@ -732,39 +721,54 @@ tags:
       title: Expérimental
     tutorial:
       title: Tutoriel
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Broderie
+    mindstorms:
+      title: Tempêtes mentales
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
+    general: 'général'
+    projects: 'projets'
+    comments: 'Commentaires'
     public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    private: 'privé'
+    join: 'Rejoignez'
+    leave: 'Quitter'
+    showMore: 'afficher plus'
+    showLess: 'montrer moins'
+    remove_project: 'Retirer du studio'
+    remove_project_error: 'Impossible de supprimer le projet du studio!'
+    remove_project_success: 'le projet a été retiré du studio avec succès !'
+    no_projects: 'Studio ne contient pas encore de projets'
+    no_comments: 'Studio ne contient pas encore de commentaires'
+    type_something: 'Tapez quelque chose'
+    send_comment: 'envoyer'
+    comment_error: 'Un problème est survenu lors de la publication de votre commentaire !'
+    remove_comment_error: 'Quelque chose s''est mal passé lors de la suppression du commentaire !'
+    replies: 'répond à'
+    updateCoverError: 'Un problème est survenu lors de la mise à jour de la couverture du studio !'
+    created_studio: 'a créé le studio'
+    activity: 'Activité'
+    activity_add_comment: 'a laissé un commentaire'
+    activity_add_project: 'a ajouté un nouveau projet %project% au studio'
+    activity_add_user: 'a ajouté un nouvel utilisateur %user% au studio'
+    members: 'Membres du Studio'
+    remove_user: 'retirer du studio'
+    promote_user: 'promouvoir en tant qu''administrateur'
+    promote_failed: 'Échec de la promotion de cet utilisateur en tant qu''administrateur'
+    ban_user_failed: 'Impossible de bannir l''utilisateur du studio !'
+    general_settings: 'Paramètres généraux'
+    studio_name: 'Nom du Studio'
     studio_desc: 'Description'
-    private_studio: 'Private Studio'
+    private_studio: 'Studio privé'

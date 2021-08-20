@@ -3,32 +3,32 @@
 localLanguage: انگليسی
 username: نام کاربری
 password: رمز عبور
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: ایجاد کلمه عبور جدید
+accountSettings: تنظیمات حساب کاربری
 email: ایمیل
 aboutPocketCode: درباره پاکت کد
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+about: درباره
+education: تحصیلات
+chat: چت و انجمن ها
+others: دیگر
 tutorials: آموزش
 googlePlay: گوگل پلی
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: گالری برنامه Huawei
 passwordsNoMatch: رمز عبور مطابقت نمی کند.
 error: خطا
 cancel: انصراف
 report: گزارش
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: بلی، این را حذف کنید
+reportIt: بله، گزارش بده!
+areYouSure: آیا مطمئنید؟
+noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
 download: دانلود
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نمی باشد.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از ایده ها، اسکریپت ها یا آثار هنری از دیگران استفاده می کنید؟ از انها اینجا تشکری کنید. 
 country: کشور
 loginText: ورود به سیستم
 privacyPolicy: حریم خصوصی
@@ -41,70 +41,70 @@ more: 'بیشتر'
 less: 'کمتر'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
+more-information: 'اطلاعات بیشتر'
+less-information: 'اطلاعات کمتر'
+ok: تائید
+clickToDownloadProgram: 'برای دانلود مثال مثال پروژه کلیک کنید %link_start% در اینجا %link_end%.'
 registrationError: 'این نام کاربری یا آدرس ایمیل در حال حاضر استفاده شده.'
-notifications: 'Notifications'
+notifications: 'اطلاعیه ها'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
+FollowersNotifications: 'پیگیری‌ها'
+LikeNotifications: 'واکنش'
 CommentNotifications: 'نظرات'
-RemixNotifications: 'Remixes'
+RemixNotifications: 'ریمیکس ها'
 wellDone: "آفرین!"
 done: "انجام شد!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "بلی، این را حذف کنید"
 cancelMessage: "انصراف"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
+notificationsUnauthorizedError: "قادر به تأیید کاربر نیست"
+notificationsClearError: "علامت زدن تمام اعلانات به عنوان خوانده شده امکانپزیر نیست"
 pleaseWait: "لطفا صبر کن..."
 projects: "برنامه ها"
-oauthPopUpTitle: "External account sign in information"
+oauthPopUpTitle: "حساب خارجی ورود به سیستم اطلاعات"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "اینجا"
+statistics: "آمارها"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'چه پروژه هایی در اینجا توصیه می شود؟'
+      description: 'واکنش های بیشتر (شگفت انگیز، لبخند ...) پروژه شما دریافت می شود، بالاتر از آن در این لیست ظاهر می شود.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: دنبال می کند
+  followers: پیگیری‌ها
+  follow: دنبال کن
+  username: کاربر
+  followsMe: من را دنبال کن
+  noFollowing: شما در حال حاضر هیچ کدام را دنبال نمی کنید.
+  noFollowers: شما در حال حاضر هیچ پیروان ندارید
+  noOtherFollowing: در حال حاضر هیچ کاربردی وجود ندارد.
+  noOtherFollowers: در حال حاضر کاربران دنباله ای وجود ندارد.
+  followError: "قادر به پیروی از کاربر مورد نظر نیست!"
+  unfollowError: "قادر به پیگیری کاربر دلخواه نیست!"
+  unfollowQuestion: " آیا مطمئن هستید که میخواهید این کاربر را دنبال کنید؟"
+  unfollowButton: "دنبال نکردن %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
+    title: به %theme% Catrobat خوش آمدید
+    title_mindstorms: به سایت Catrobat برای Mindstorms EV3 و NXT خوش آمدید
+    subtitle: ایجاد داستان ها، بازی ها و بیشتر ...
+    subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا مورد گوشی های هوشمند خود را بخیه کنید!
+    subtitle_mindstorms: پروژه های خود را با روبات های LEGO MindStorms EV3 و NXT ایجاد کنید 
+    download: دانلود اپلیکیشن
+    statistics: آمار بیشتر
   featured: ' پيشنهادي'
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  example: نمونه ها
+  newest: جدیدترین پروژه ها
+  recommended: پروژه های توصیه شده
+  scratchremixes: ریمیکس خراش
+  noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    مطمئنی؟
+    آیا مطمئن هستید که می خواهید "%programName%" را حذف کنید؟
+    هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
+    بله، آن را حذف کنید!
+    لغو
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -113,48 +113,48 @@ programs:
     Yes, set to public
     Yes, set to private
     No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
+  deleteCommentConfirmation: آیا مطمئن هستید که می خواهید این نظر را حذف کنید؟
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
+    حذف حساب؟
+    آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این نیز پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
+    هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
+    بله، این را حذف کنید!
+    لغو
+  tooLongDescription: شرح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
-  random: Random projects
-  related: Related projects
+  random: پروژه های تصادفی
+  related: پروژه های مرتبط
   downloads: '%downloads%دانلودها'
-  sample: Example projects
+  sample: نمونه پروژه‌ها
   views: '%views%نمایش ها'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
     all: "همه"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: پروژه های ارائه شده
+  uploaded: پروژه های آپلود شده
   reportAsInappropriate: به عنوان نامناسب گزارش بده
-  reportProgram: Report project
+  reportProgram: گزارش پروژه
   languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
+  reportLoginText: لطفا %login% برای گزارش این پروژه.
+  reportDialogHeader: چرا می خواهید این پروژه را گزارش دهید؟
   reportDialogReason: یک دلیل وارد کن
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportRadioButtonInappropriate: این نامناسب است
+  reportRadioButtonCopyright: نقض قوانین حق تکثیر
+  reportRadioButtonSpam: این اسپم است
+  reportRadioButtonDislike: من این را دوست ندارم
+  reportOwnProgram: شما نمیتوانید پروژه خود را پرچم کنید.
+  reportAlready: شما قبلا این پروژه را پرچم گذاری کرده اید.
+  reportDone: شما این پروژه را گزارش کرده اید!
   updateAppHeader: به روز رسانی اپلیکیشن
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_program: پرداخت این پروژه Catrobat
   show_more: نمایش بیشتر
   comments: نظرات
   send: ارسال
@@ -162,38 +162,38 @@ programs:
   report: گزارش
   report_popup: نظرت با موفقیت گزارش شد.
   report_popup_header: گزارش شد
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  deleted_popup: نظر با موفقیت حذف شد.
+  deleted_popup_header: حذف شده
+  noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
+  editDescription: توضیحات پروژه را ویرایش کنید
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
+  addComment: کامنتی بگذارید
+  thumbsUp: انگشت بالا
+  smile: لبخند
+  love: عشق
+  wow: ووو
+  linkTitle: لینک
+  link: پیوند پروژه را به کلیپ بورد کپی کنید
+  reactionsText: واکنش
+  downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
+  showTranslation: مشاهده ترجمه
+  hideTranslation: پنهان‌کردن ترجمه
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
-  title: Remixes
-  showRemixGraph: 'Remix graph'
+  title: ریمیکس ها
+  showRemixGraph: 'گراف ریمیکس'
   by: 'به وسیله'
   open: 'باز کن'
   showPaths: 'نمایش مسیر'
   programNotAvailableErrorTitle: 'متأسفم...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
+  programNotAvailableErrorDescription: 'این پروژه بیشتر در دسترس نیست!'
   programNotAvailable: 'در دسترس نیست'
   programUnknownUser: 'کاربر ناشناس'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: این یک پیام خودکار است - لطفا به طور مستقیم به این ایمیل پاسخ ندهید.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: تأیید حساب Catrobat شما
   message: |
     Dear %username%.
     To finish activating your account - please visit %confirmationUrl%
@@ -240,19 +240,19 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
+  edit: پروفایل خودت را ویرایش کن
   saveChanges: ذخیره تغییرات
   newPass: رمز عبور جدید
   repeatPass: رمز عبور را تکرار کنید
-  oldPass: old password
+  oldPass: پسورد قدیمی
   firstEmail: اولین ایمیل من
   secondEmail: دومین ایمیل من
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: پروژه های من
+  follows: پیگیری‌ها
+  follower: پی‌گیر
+  unfollowUser: این کاربر را دنبال نه کنید!
+  followUser: دنبال این کاربر باشید!
+  amountOfPrograms: مقدار پروژه ها
   form:
     passwordTooShort: رمز عبور جدید باید حداقل %length% کاراکتر داشته باشد.
     passwordTooLong: رمز عبور جدید می تواند حداکثر %length% کاراکتر داشته باشد.
@@ -261,26 +261,26 @@ profile:
     emailNotValid: اين آدرس رايانامه معتبر نیست.
     emailMissing: خطا در حین به روز رسانی این آدرس ایمیل. تو باید حداقل یک آدرس ایمیل معتبر داشته باشی.
     emailExists: این آدرس ایمیل در حال حاضر موجود است.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
+    usernameNotValid: این نام کاربری معتبر نیست
+    usernameMissing: ' شما باید یک نام کاربری داشته باشید'
     usernameExists: در حال حاضراین نام کاربری وجود دارد.
-    usernameContainsEmail: Username shouldn't contain an email address.
+    usernameContainsEmail: نام کاربری نباید حاوی یک آدرس ایمیل باشد.
     submitSuccess: ذخیره شد!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
+  reallyDeleteProgram: آیا واقعا میخواهید پروژه خود را حذف کنید
+  programsOf: پروژه های
   changePicture: تغییر عکس
   avatar:
-    noImage: No image!
+    noImage: بدون تصویر!
     pictureTooLarge: حجم عکس انتخاب شده تان خیلی بزرگ است، لطفا عکس های بزرگتر از حجم 5 مگابایت استفاده نکنید.
     uploadError: ببخشید، یه مشکلی در حین آپلود پیش اومد!
     noSupport: این نوع تصویر پشتیبانی نمی شه، لطفا تصویر دیگری را امتحان کن.
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: مشخصات بر روی Scratch
 myprofile:
   editProfile: ویرایش پروفایل
   edit: ويرايش
   done: ﺍﻧﺠﺎﻡ شد
   checkMail: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
-  passwordUpdated: Your password was successfully updated.
+  passwordUpdated: رمز عبور شما با موفقیت به روز رسانی شد.
   avatar: آواتار
   email: رایانامه
   editAvatar: ویرایش آواتار
@@ -288,15 +288,15 @@ myprofile:
   editPassword: ویرایش کلمه عبور
   editCountry: ویرایش کشور
   editEmail: ویرایش ایمیل
-  deleteAccount: Delete account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  deleteAccount: حذف حساب کاربری
+  deleteAccountText: آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
+  editAccountSettings: ویرایش تنظیمات حساب
+  notChangeVisibility: نمی تواند دید را تغییر دهد
+  notChangeVisibilityReason: نسخه زبان پروژه شما خیلی زیاد است و بنابراین نمی توان آن را قابل مشاهده کرد.
 licenseToPlay:
   link: 'مجوز بازی'
   title: 'مجوز بازی - اعتبار بده و به مشارکت بزار'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
+  text1: تصور کنید که هر پروژه Catrobat یک کیک، کیک بسیار ویژه ای است که با دستور العمل خود (بلوک های برنامه نویسی) همراه است. همه اعضای جامعه Catrobat کیک خود را همراه با دستور العمل های خود به اشتراک می گذارند. این به این معنی است که شما می توانید از کیک لذت ببرید و یاد بگیرید چگونه خودتان را بسازید!
   text2: 'هیچ دستور پخت پنهانی وجود نداره: دستورالعمل چگونگی پخت این کیک ها برای استفاده،استفاده مجدد،تصحیح و سرو کردن بعنوان الهام ایده های جدید... یعنی کیک ها برای همه باز است.'
   text3: "تو میتونی کیک ها رو بخوری همانطوری که میتونی دستور پخت دیگران رو شاید با مواد اولیه دیگری برای پخت کیک خودت کپی کنی. این آزادی دوتا شرط ساده داره:"
   text4: "در راه اندازی انجمن کت ربات از آنجایی که معتقدیم این روش یادگیری و خلاقیت را در درون انجمن پشتیبانی می کند، ما تصمیم گرفتیم آن را به کار ببریم. با مشارکت دستورهای پخت و مواد لازم (اثر هنری و اسکریپت)، همه اشخاص میتونن کیک هایشان را بر اساس عقاید دیگران درست کنند و این به سود همه است."
@@ -309,9 +309,9 @@ licenseToPlay:
 termsOfUse:
   title: شرایط استفاده
   headline: به انجمن کت ربات خوش آمدید!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
+  text1: 'به عنوان بخشی از جامعه Catrobat، شما پروژه ها و ایده ها را با مردم به اشتراک می گذارید:'
   text2: "ما به کمکت نیازمندیم تا این انجمن را به یک مکان قابل پشتیبانی برای هر عضو ایجاد کنیم. این که چجوری به ما کمک کنی اینجاست:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
+  text3: "از طریق پروژه Catrobat ما می خواهیم همکاری را تقویت کنیم و اجازه دهیم خلاقیت هر کس برای ترکیب به نفع تمام بشریت باشد. شما همچنین می توانید عضو فعال جامعه Catrobat شوید، با دادن پروژه های خود به جامعه به عنوان یک هدیه، به همان شیوه که دیگر اعضای فعال پروژه های خود را به شما می دهند:"
   text4: 'کادوی ما به شما:'
   text5: 'شرایط استفاده و خدمات:'
   list1:
@@ -319,13 +319,13 @@ termsOfUse:
     item2: همه سنین (از کودکان و نوجوانان تا پدربزرگ ها و مادربزرگ ها)
     item3: با تمام سطوح تجربی
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: با احترام رفتارکن. هنگام به اشتراک گذاری پروژه ها، لطفا به یاد داشته باشید که افراد بسیاری از سنین مختلف و زمینه های مختلف مشارکت شما را می بینند.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
     item3: "صادق باش. خودت را جای کس دیگری جا نزن یا سعی نکن که انجمن را فریب بدهی."
     item4: "اطلاعات شخصی ات را محرمانه نگه دار. آدرس ایمیل، شماره تلفن یا دیگر اطلاعات شخصی ات را به اشتراک نگذار."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item5: "کمک به حفظ سایت دوستانه. اگر احساس دیگران می کنید، یک پروژه یا نظری را پیدا می کنید، توهین آمیز، بیش از حد خشونت آمیز یا غیرقابل قبول، فقط روی دکمه «گزارش به عنوان نامناسب» کلیک کنید و یک توضیح کوتاه را ترک کنید. تیم Catrobat گزارش شما را بررسی خواهد کرد و ممکن است هر پروژه، نظر یا پست را حذف کند."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: "با آپلود یک پروژه به وب سایت های ما، شما قبول می کنید و موافقت می کنید که این کار را تحت مجوز خاصی از پروژه های Catrobat آپلود قرار دهید. همانند مجوز های آزاد که در آن سیستم Catrobat خود را برای شما در دسترس شما قرار می گیرد، این مجوز های رایگان پروژه های Catrobat آپلود شده به هر کس حق یادگیری از کار قبلی که توسط دیگران آپلود شده است و برای انطباق و ریمیکس برای ساخت بازی های جدید جذاب خود، یاد می گیرد انیمیشن ها و سایر پروژه ها. این اجازه می دهد تا هر کس به \"شانه های همسالان خود\" ایستاده، یکی از آنها بودن شما! بنابراین کار شما به این ترتیب به نفع تمام جهان است و برای هر کسی که از آن استفاده می شود، آزادانه باقی می ماند، کمی شبیه به متن و تصاویر آزادانه به ویکی پدیا توسط داوطلبان از سراسر جهان کمک می کند. آن را به عنوان خود به بشریت فکر کنید: شما به همه می دهید، و همه دیگران که کار خود را به وب سایت های ما آپلود می کنند، به شما می دهند. بنابراین یک پروژه آپلود شده هدیه ای از ارزش عالی است که صاحب آن به صورت رایگان به شما می دهد، با شرایطی که شما در جامعه شرکت می کنید."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "یک شرط مهم دیگر این است که تو به نویسندگانی که روی برنامشون کار کردی اعتبار میدی. همزمان ما به وضوح روی برنامه تو کار می کنیم تا توسط دیگران شناخته شود با اسم خاصی که خودت به صورت آزادانه برای معرفی در انجمن \"کت ربات\" معرفی می کنی و با دادن فرصت به دیگران برای اظهار لطف به تو به صورت عمومی به خاطر در اختیار گذاشتن کارت برای همه."
     item4: 'لطفا %link-licenseUploaded% برای شرایط و ضوابط قانونی خاص مشاوره کن.'
@@ -353,10 +353,10 @@ menu:
   profile: مشخصات من
   login: ورود به سیستم
   logout: خروج
-  admin: Admin
-  home: Home
-  helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  admin: مدیر سیستم
+  home: صفحهٔ اصلی
+  helpAndTutorials: کمک و آموزش
+  followersAndFollowing: پی‌گیر
 login:
   login: ورود به سیستم
   passOrUser: نام کاربری یا کلمه عبور نادرست است.
@@ -364,18 +364,18 @@ login:
   forgotPass: نام کاربری یا رمز عبور را فراموش کرده اید؟
   recoverPass: بازیابی رمز عبور
   recoverPassSend: یک ایمیل به آدرس ایمیل شما فرستاده شد. لطفا صندوق پستی ایمیلتان را بررسی کنید.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
+  alreadyReset: رمز عبور این کاربر قبلا در 24 ساعت گذشته درخواست شده است.
+  confirmationSend: یک ایمیل برای تأیید ثبت نام شما به آدرس ایمیل شما ارسال شد. لطفا صندوق ورودی خود را بررسی کنید و حساب خود را فعال کنید.
   userOrEmail: نام کاربری یا ایمیل
   changePass: تغییر رمز عبور
   createAccount: ایجاد یک حساب کاربری
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  noAccount: حساب کاربری ندارید؟
+  alreadyAccount: قبلا ثبت نام نموده اید؟
   or: یا
   username: نام کاربری
   email: رایانامه
   passwordFirst: رمز عبور
-  passwordSecond: Password confirm
+  passwordSecond: تایید گذرواژه
 apk:
   download: به عنوان اپلیکیشن دانلود کن
   prepare: 'تهیه ی اپلیکیشن'
@@ -391,7 +391,7 @@ errors:
     exists: در حال حاضراین نام کاربری وجود دارد.
     not_exists: این نام کاربری وجود ندارد.
     not_email: نام کاربری نباید آدرس ایمیل باشه.
-    size: The username must have at least 3 character and not more than 180
+    size: نام کاربری باید حداقل ۳ کاراکتر داشته باشد و نه بیش از ۱۸۰ باشد
   password:
     blank: تو رمزعبوری وارد نکردی.
     short: 'رمز عبورت باید حداقل  {{ limit }} نویسه داشته باشه.'
@@ -418,15 +418,15 @@ errors:
   image.missing: پروژه XML به یک فایل که در پوشه پروژه وجود ندارد اشاره می کند
   unknown: خطای نامشخص
   token: 'تأیید اعتبار دستگاه انجام نشد: نشانه معتبر نیست!'
-  uploadTokenAuthFailed: 'Upload Token auth failed.'
+  uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
   program:
-    invalid: Invalid project.
+    invalid: پروژه نامعتبر
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: تایید هویت موفق نبود
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -518,18 +518,6 @@ ci:
   generate: تولید اپلیکیشن
   pending: تولید اپلیکیشن
   download: دانلود نرم افزار
-gamejam:
-  nojam: با عرض پوزش، الان بازی جم انجام نمی شود
-  submit: ارسال به %gamejamname%
-  whats: '%gamejamname% چیست؟'
-  submitown:
-    header: توجه
-    subheader: You can only submit your own projects
-    text: |
-      خودت یکی ایجاد کن!
-      در %gamejamtag% مشارکت کن
-tag-text: برچسب‌ها
-extenstion-text: پسوندها
 admin:
   maintain:
     diskMaintenance: تعمیر و نگهداری دیسک
@@ -667,13 +655,13 @@ checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: جدیدترین پروژه ها
+  random: پروژه های تصادفی
   most_viewed: بیشترین بازدید
   most_downloaded: بیشترین برنامه دانلود شده
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: ریمیکس خراش
+  recommended: پروژه های توصیه شده
 achievements:
   sidebar:
     title: 'Achievements'
@@ -693,7 +681,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "تائید"
   profile:
     title: 'Achievements'
   achievement:
@@ -717,6 +705,7 @@ achievements:
         title: 'Novice'
         description: 'Create a user account'
 tags:
+  title: برچسب‌ها
   tag:
     game:
       title: Game
@@ -732,11 +721,26 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'نظرات'
     public: 'public'
     private: 'private'
     join: 'Join'

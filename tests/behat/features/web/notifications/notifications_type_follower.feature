@@ -3,9 +3,9 @@ Feature: Follower and new programs of users you follow notifications
 
   Background:
     Given there are users:
-      | id           | name     |
-      | Catrobat-id  | Catrobat |
-      | User-id      | User     |
+      | id          | name     |
+      | Catrobat-id | Catrobat |
+      | User-id     | User     |
     And there are projects:
       | id | name      | owned by |
       | 1  | program 1 | Catrobat |
@@ -51,8 +51,8 @@ Feature: Follower and new programs of users you follow notifications
 
   Scenario: Clicking on a new program notification should redirect the user to the program page
     Given there are catro notifications:
-      | id  | user | type            | follower_id | program_id  |
-      | 1   | User | follow_program  |             | 1           |
+      | id | user | type           | follower_id | program_id |
+      | 1  | User | follow_program |             | 1          |
     And I log in as "User"
     And I am on "/app/user_notifications"
     When I click "#catro-notification-1"

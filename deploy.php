@@ -136,6 +136,16 @@ task('update:achievements', function () {
   run('bin/console catrobat:update:achievements');
 });
 
+task('update:tags', function () {
+    cd('{{release_path}}');
+    run('bin/console catrobat:update:tags');
+});
+
+task('update:extensions', function () {
+    cd('{{release_path}}');
+    run('bin/console catrobat:update:extensions');
+});
+
 task('update:special', function () {
   cd('{{release_path}}');
   run('bin/console catrobat:update:special');
@@ -169,6 +179,8 @@ task('deploy', [
   'restart:nginx',
   'restart:php-fpm',
   'update:achievements',
+  'update:tags',
+  'update:extensions',
   'update:special',
   'deploy:unlock',
   'slack:notify:success',

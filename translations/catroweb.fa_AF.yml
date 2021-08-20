@@ -518,18 +518,6 @@ ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
-gamejam:
-  nojam: با عرض پوزش، در این زمان هیچ جمی بازی وجود ندارد
-  submit: به %gamejamname% ارسال کنید
-  whats: '%gamejamname% چی است؟'
-  submitown:
-    header: آگاه باش
-    subheader: شما فقط می توانید پروژه های خود را ارسال کنید
-    text: |
-      اما چرا از خودت را ایجاد نمی کنید!
-      در %gamejamtag% شرکت کنید
-tag-text: برچسب ها
-extenstion-text: پسوند
 admin:
   maintain:
     diskMaintenance: تعمیر و نگهداری دیسک
@@ -717,6 +705,7 @@ achievements:
         title: 'تازه کار'
         description: 'یک حساب کاربری تشکیل دهید'
 tags:
+  title: برچسب ها
   tag:
     game:
       title: Game
@@ -732,11 +721,26 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: فیرو
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: گلدوزی
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'نظرات'
     public: 'public'
     private: 'private'
     join: 'Join'

@@ -6,14 +6,14 @@ Feature: Pocketcode homepage
 
   Background:
     Given there are users:
-      | id | name     |
-      | 1  | Catrobat |
-      | 2  | User1    |
-      | 3  | Catrobat2|
+      | id | name      |
+      | 1  | Catrobat  |
+      | 2  | User1     |
+      | 3  | Catrobat2 |
 
     And there are extensions:
-      | id | name         | prefix     |
-      | 1  | Embroidery   | Embroidery |
+      | id | internal_title |
+      | 1  | embroidery     |
 
     And there are flavors:
       | id | name       |
@@ -21,14 +21,14 @@ Feature: Pocketcode homepage
       | 3  | embroidery |
 
     And there are projects:
-      | id | name      | owned by | extensions | flavor     |
-      | 1  | project 1 | Catrobat | Embroidery | pocketcode |
-      | 2  | project 2 | Catrobat | Embroidery | embroidery |
-      | 3  | project 3 | User1    |            | pocketcode |
-      | 4  | project 4 | User1    |            | embroidery |
-      | 5  | project 5 | User1    |            | pocketcode |
-      | 6  | project 6 | Catrobat2|            | pocketcode |
-      | 7  | project 7 | Catrobat2|            | pocketcode |
+      | id | name      | owned by  | extensions | flavor     |
+      | 1  | project 1 | Catrobat  | embroidery | pocketcode |
+      | 2  | project 2 | Catrobat  | embroidery | embroidery |
+      | 3  | project 3 | User1     |            | pocketcode |
+      | 4  | project 4 | User1     |            | embroidery |
+      | 5  | project 5 | User1     |            | pocketcode |
+      | 6  | project 6 | Catrobat2 |            | pocketcode |
+      | 7  | project 7 | Catrobat2 |            | pocketcode |
 
     And following projects are featured:
       | name      | url                   | active | priority |
@@ -108,6 +108,7 @@ Feature: Pocketcode homepage
     And the "#home-projects__recent" element should contain "project 2"
     And the "#home-projects__recent" element should contain "project 4"
     And the "#home-projects__recent" element should not contain "project 3"
+
   Scenario: User should be able to see useful links
     Given I am on homepage
     And I wait for the page to be loaded

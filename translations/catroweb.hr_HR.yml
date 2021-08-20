@@ -523,18 +523,6 @@ ci:
   generate: Generiraj aplikaciju
   pending: Generiranje aplikacije
   download: Preuzmite aplikaciju
-gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
-  submitown:
-    header: be aware
-    subheader: You can only submit your own projects
-    text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
-tag-text: Oznake
-extenstion-text: Extensions
 admin:
   maintain:
     diskMaintenance: Odrzavanje diska
@@ -722,6 +710,7 @@ achievements:
         title: 'Novice'
         description: 'Create a user account'
 tags:
+  title: Oznake
   tag:
     game:
       title: Game
@@ -737,11 +726,26 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'Komentari'
     public: 'public'
     private: 'private'
     join: 'Join'

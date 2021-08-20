@@ -516,18 +516,6 @@ ci:
   generate: Apk Oluştur
   pending: Apk Oluşturuluyor
   download: Apk indir
-gamejam:
-  nojam: Maalesef şu anda Game Jam yok
-  submit: Gönder %gamejamname%
-  whats: '%gamejamname% nedir?'
-  submitown:
-    header: farkında olmak
-    subheader: Yalnızca kendi projelerinizi gönderebilirsiniz
-    text: |
-      Ama neden kendiniz yaratmıyorsunuz!
-      %gamejamtag% na katılın
-tag-text: Etiketler
-extenstion-text: Uzantılar
 admin:
   maintain:
     diskMaintenance: Disk bakımı
@@ -715,6 +703,7 @@ achievements:
         title: 'İlk adımlar'
         description: 'Bir kullanıcı hesabı oluşturun'
 tags:
+  title: Etiketler
   tag:
     game:
       title: Oyun
@@ -730,6 +719,21 @@ tags:
       title: Deneysel
     tutorial:
       title: Öğretici
+extensions:
+  title: Uzantılar
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: İnsansız hava aracı
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry Pi 
+    embroidery:
+      title: Nakış
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'genel'

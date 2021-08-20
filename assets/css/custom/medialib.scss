@@ -1,3 +1,5 @@
+@use "sass:math";
+
 @import "../../../public/bootstrap/scss/functions";
 @import "../base/variables";
 @import "../base/mixins";
@@ -43,8 +45,7 @@ $border-spacing: 8px;
       position: relative;
       display: flex;
       align-items: center;
-      justify-content: center;
-      width: $tile-size;
+      width: 100%;
       height: $tile-size;
       margin: 0.5rem;
       text-decoration: none;
@@ -72,31 +73,28 @@ $border-spacing: 8px;
           color: $white;
           visibility: visible;
         }
-
-        .media-file-type
-        {
-          z-index: initial;
-        }
       }
 
-      > img
+      > .img-container
       {
-        max-width: $tile-size - $border-spacing !important;
-        max-height: $tile-size - $border-spacing;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: $tile-size - 2px !important;
+        height: $tile-size - 2px !important;
+        border: 2px solid $primary;
+
+        img {
+          max-width: $tile-size - $border-spacing !important;
+          max-height: $tile-size - $border-spacing;
+        }
       }
 
       .media-file-icon
       {
-        font-size: $tile-size;
-        opacity: 0.13;
-      }
-
-      .media-file-type
-      {
-        z-index: 1;
-        margin-top: 1.6rem;
-        font-size: 2.4rem;
-        color: $white;
+        max-width: 90% !important;
+        max-height: 90%;
+        font-size: 4rem;
       }
 
       &.flavored
@@ -104,35 +102,57 @@ $border-spacing: 8px;
         order: -1;
       }
 
-      .name {
-        z-index: 1;
-        max-width: 100%;
-        max-height: 100%;
+      > .text-container
+      {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: center;
+        width: 100%;
+        height: $tile-size - 2px !important;
+        margin-left: 0.75rem;
+      }
+
+      .name
+      {
+        max-width: fit-content;
+        max-height: 33%;
         padding: 1px 4px;
         overflow: hidden;
-        font-size: 1.15rem;
-        color: $primary;
-        text-align: center;
+        line-height: calc(#{$tile-size} / 3);
+        color: #000;
+        text-overflow: ellipsis;
+      }
+
+      .name--link
+      {
+        color: $primary !important;
+      }
+
+      .description
+      {
+        max-width: 100%;
+        max-height: 50%;
+        padding: 1px 4px;
+        overflow: hidden;
+        font-size: 0.85rem;
+        font-weight: lighter;
+        color: #000;
         -ms-text-overflow: ellipsis;
         text-overflow: ellipsis;
         @include force-word-break();
       }
 
-      &:not(.show-name) .name
+      > .button-container
       {
-        display: none;
-      }
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: $tile-size - 2px !important;
+        height: $tile-size - 2px !important;
+        margin-left: auto;
 
-      &.show-name
-      {
-        display: grid;
-        .name,
-        .media-file-icon,
-        .media-file-type
-        {
-          grid-column: 1;
-          grid-row: 1;
-          justify-self: center;
+        i {
+          font-size: 2.5rem;
         }
       }
 
@@ -143,15 +163,13 @@ $border-spacing: 8px;
 
       .audio-control {
         position: absolute;
-        right: 12px;
-        bottom: 0;
         z-index: 2;
-        font-size: 2.4rem;
+        font-size: 3rem;
         cursor: pointer;
         transition: font-size;
 
         &:hover {
-          font-size: 2.6rem;
+          font-size: 3.2rem;
         }
       }
     }
@@ -162,23 +180,11 @@ $border-spacing: 8px;
 {
   .category > .files .mediafile
   {
-    width: $tile-size-md-smup;
     height: $tile-size-md-smup;
 
-    > img
-    {
+    img {
       max-width: $tile-size-md-smup - $border-spacing !important;
       max-height: $tile-size-md-smup - $border-spacing;
-    }
-
-    .media-file-icon
-    {
-      font-size: $tile-size-md-smup;
-    }
-
-    .media-file-type {
-      margin-top: 2rem;
-      font-size: 2.8rem;
     }
   }
 }
@@ -187,18 +193,11 @@ $border-spacing: 8px;
 {
   > .files .mediafile
   {
-    width: $tile-size-sm;
     height: $tile-size-sm;
 
-    > img
-    {
+    img {
       max-width: $tile-size-sm - $border-spacing !important;
       max-height: $tile-size-sm - $border-spacing;
-    }
-
-    .media-file-icon
-    {
-      font-size: $tile-size-sm;
     }
   }
 }
@@ -207,18 +206,11 @@ $border-spacing: 8px;
 {
   > .files .mediafile
   {
-    width: $tile-size-lg;
     height: $tile-size-lg;
 
-    > img
-    {
+    img {
       max-width: $tile-size-lg - $border-spacing !important;
       max-height: $tile-size-lg - $border-spacing;
-    }
-
-    .media-file-icon
-    {
-      font-size: $tile-size-lg - 15px;
     }
   }
 }

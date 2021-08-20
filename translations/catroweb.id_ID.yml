@@ -521,18 +521,6 @@ ci:
   generate: Menghasilkan Apk
   pending: Menghasilkan Apk
   download: Unduh Apk
-gamejam:
-  nojam: Maaf, tidak ada kemacetan permainan saat ini
-  submit: Kirim ke %gamejamname%
-  whats: Apa itu %gamejamname%?
-  submitown:
-    header: waspadalah
-    subheader: Anda hanya dapat mengirimkan proyek Anda sendiri
-    text: |
-      Tapi mengapa tidak membuat punya Anda sendiri!
-      Ambil bagian di %gamejamtag%
-tag-text: Label
-extenstion-text: Ekstensi
 admin:
   maintain:
     diskMaintenance: Pemeliharaan disk
@@ -720,6 +708,7 @@ achievements:
         title: 'Pemula'
         description: 'Buat akun pengguna'
 tags:
+  title: Label
   tag:
     game:
       title: Permainan
@@ -735,39 +724,54 @@ tags:
       title: Eksperimental
     tutorial:
       title: tutorial
+extensions:
+  title: Ekstensi
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Sulaman
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    general: 'umum'
+    projects: 'proyek'
+    comments: 'Komentar'
+    public: 'publik'
+    private: 'pribadi'
+    join: 'Bergabung'
+    leave: 'Meninggalkan'
+    showMore: 'menampilkan lebih banyak'
+    showLess: 'tampilkan lebih sedikit'
+    remove_project: 'Hapus dari studio'
+    remove_project_error: 'Gagal menghapus proyek dari studio!'
+    remove_project_success: 'proyek berhasil dihapus dari studio!'
+    no_projects: 'Studio belum memiliki proyek apa pun'
+    no_comments: 'Studio belum berisi komentar apa pun'
+    type_something: 'Ketik sesuatu'
+    send_comment: 'mengirim'
+    comment_error: 'Ada yang tidak beres saat memposting komentar Anda!'
+    remove_comment_error: 'Terjadi masalah saat menghapus komentar!'
+    replies: 'balasan'
+    updateCoverError: 'Terjadi masalah saat memperbarui sampul studio!'
+    created_studio: 'membuat studio'
+    activity: 'Aktivitas'
+    activity_add_comment: 'meninggalkan komentar'
+    activity_add_project: 'menambahkan proyek baru %project% ke studio'
+    activity_add_user: 'menambahkan pengguna baru %user% ke studio'
+    members: 'Anggota Studio'
+    remove_user: 'keluarkan dari studio'
+    promote_user: 'promosikan ke admin'
+    promote_failed: 'Gagal mempromosikan pengguna ini ke admin'
+    ban_user_failed: 'Gagal mencekal pengguna dari studio!'
+    general_settings: 'Pengaturan Umum'
+    studio_name: 'Nama Studio'
     studio_desc: 'Keterangan'
-    private_studio: 'Private Studio'
+    private_studio: 'Studio Pribadi'

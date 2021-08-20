@@ -736,23 +736,23 @@ services:
 
 
   catrowebadmin.block.extensions:
-    class: App\Admin\AllExtensionsAdmin
+    class: App\Admin\DB_Updater\ExtensionsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: Extensions (WIP) }
+      - { name: sonata.admin, manager_type: orm, label: "Extensions" }
     arguments:
       - ~
       - App\Entity\Extension
-      - App\Catrobat\Controller\Admin\ExtensionController
+      - App\Admin\DB_Updater\Controller\ExtensionsAdminController
     public: true
 
   catrowebadmin.block.tags:
-    class: App\Admin\AllExtensionsAdmin
+    class: App\Admin\DB_Updater\TagsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Tags (WIP)" }
+      - { name: sonata.admin, manager_type: orm, label: "Tags" }
     arguments:
       - ~
-      - App\Entity\Extension
-      - App\Catrobat\Controller\Admin\ExtensionController
+      - App\Entity\Tag
+      - App\Admin\DB_Updater\Controller\TagsAdminController
     public: true
 
   # ===== Tools
@@ -888,7 +888,7 @@ services:
   # HWIOAUTH
   #=====================================================================================================================
   my.oauth_aware.user_provider.service:
-    class: App\Catrobat\Security\FOSUBUserProvider
+    class: App\Catrobat\Security\FOSUBUserProviderAdapter
     arguments:
       - '@fos_user.user_manager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}

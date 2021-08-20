@@ -4,24 +4,24 @@
 #======== HWIOAUTH ========================
 hwi_oauth_redirect:
   resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-  prefix:   /connect
+  prefix: /app/connect
 
 hwi_oauth_connect:
   resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-  prefix:   /connect
+  prefix: /app/connect
 
-hwi_oauth_login:
-  resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-  prefix:   /login
+#hwi_oauth_login:
+#  resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#  prefix: /{theme}/login
 
 google_login:
-  path: /login/check-google
+  path: /app/login/check-google
 
 facebook_login:
-  path: /login/check-facebook
+  path: /app/login/check-facebook
 
 apple_login:
-  path: /login/check-apple
+  path: /app/login/check-apple
 
 # ===== Api =====
 open_api_server:
@@ -40,4 +40,4 @@ catrobat_web_index:
 
 catroweb_flavored:
   resource: "routes_flavored.yml"
-  prefix:   /{theme}/
+  prefix: /{theme}/

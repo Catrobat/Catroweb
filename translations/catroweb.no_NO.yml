@@ -519,18 +519,6 @@ ci:
   generate: Generer apk
   pending: Genererer apk
   download: Last ned apk
-gamejam:
-  nojam: Beklager, det er ingen Game Jam akkurat nå
-  submit: Send til %gamejamname%
-  whats: Hva er %gamejamname%?
-  submitown:
-    header: vær oppmerksom
-    subheader: Du kan bare sende inn dine egne prosjekter
-    text: |
-      Men hvorfor ikke lage din egen!
-      Ta del i %gamejamtag%
-tag-text: Tagger
-extenstion-text: Utvidelser
 admin:
   maintain:
     diskMaintenance: Disk vedlikehold
@@ -718,6 +706,7 @@ achievements:
         title: 'Nybegynner'
         description: 'Opprett en brukerkonto'
 tags:
+  title: Tagger
   tag:
     game:
       title: Spill
@@ -733,11 +722,26 @@ tags:
       title: Eksperimentell
     tutorial:
       title: Opplæring
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'Kommentarer'
     public: 'public'
     private: 'private'
     join: 'Join'

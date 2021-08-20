@@ -54,11 +54,7 @@
             {% endif %}
             {% if app.request.requesturi == '/admin/apk_pending/list' %}
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('resetAllApk') }}">Reset all</a>
-              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild
-                                                                                                           all</a>
-            {% endif %}
-            {% if app.request.requesturi == '/admin/all_extensions/list' %}
-              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('extensions') }}">Create Extensions</a>
+              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild all</a>
             {% endif %}
           </div>
 

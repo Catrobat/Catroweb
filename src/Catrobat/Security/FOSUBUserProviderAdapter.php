@@ -3,17 +3,35 @@
 namespace App\Catrobat\Security;
 
 use App\Entity\User;
+use Exception;
+use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider as BaseClass;
+use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
+use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
+use RuntimeException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class FOSUBUserProvider extends BaseClass
+class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
 {
+  protected FOSUBUserProvider $provider;
+  protected UserManagerInterface $user_manager;
+  protected array $properties = ['identifier' => 'id'];
+
+  public function __construct(UserManagerInterface $userManager, array $properties)
+  {
+    $this->provider = new FOSUBUserProvider($userManager, $properties);
+    $this->properties = array_merge($this->properties, $properties);
+    $this->user_manager = $userManager;
+  }
+
+  /**
+   * Overwrite the provider!
+   */
   public function connect(UserInterface $user, UserResponseInterface $response): void
   {
     if (!$user instanceof User) {
-      throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', \get_class($user)));
+      throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', get_class($user)));
     }
     //retrieve access token and the ID
     $property = $this->getProperty($response);
@@ -26,22 +44,25 @@ class FOSUBUserProvider extends BaseClass
     $access_token = $response->getAccessToken();
 
     //Disconnect previous user
-    if (null !== $previousUser = $this->userManager->findUserBy([$property => $username])) {
+    if (null !== $previousUser = $this->user_manager->findUserBy([$property => $username])) {
       $previousUser->{$setter_id}(null);
       $previousUser->{$setter_access_token}(null);
-      $this->userManager->updateUser($user);
+      $this->user_manager->updateUser($user);
     }
     //username is a unique integer
     $user->{$setter_id}($username);
     $user->{$setter_access_token}($access_token);
-    $this->userManager->updateUser($user);
+    $this->user_manager->updateUser($user);
   }
 
+  /**
+   * Overwrite the provider!
+   */
   public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
   {
     $username = $response->getUsername();
 
-    $user = $this->userManager->findUserBy([$this->getProperty($response) => $username]);
+    $user = $this->user_manager->findUserBy([$this->getProperty($response) => $username]);
     $service = $response->getResourceOwner()->getName();
     //make setter and getter names dynamic so we can use it for more services (Facebook, Google, Github)
     $setter_name = 'set'.ucfirst($service);
@@ -50,11 +71,11 @@ class FOSUBUserProvider extends BaseClass
     $access_token = $response->getAccessToken();
     //register new user
     if (null === $user) {
-      $user = $this->userManager->findUserByEmail($response->getEmail());
+      $user = $this->user_manager->findUserByEmail($response->getEmail());
       //if user with the given email doesnt exists create a new user
       if (null === $user) {
         /** @var User $user */
-        $user = $this->userManager->createUser();
+        $user = $this->user_manager->createUser();
         //generate random username for example user12345678, needs to be discussed
         $user->setUsername($this->createRandomUsername($response));
         $user->setEmail($response->getEmail());
@@ -64,13 +85,13 @@ class FOSUBUserProvider extends BaseClass
       }
       $user->{$setter_id}($username);
       $user->{$setter_access_token}($access_token);
-      $this->userManager->updateUser($user);
+      $this->user_manager->updateUser($user);
 
       return $user;
     }
 
     //if user exists just proceed with hwioauthentication
-    $user = parent::loadUserByOAuthUserResponse($response);
+    $user = $this->provider->loadUserByOAuthUserResponse($response);
 
     //update access token
     $user->{$setter_access_token}($access_token);
@@ -78,6 +99,9 @@ class FOSUBUserProvider extends BaseClass
     return $user;
   }
 
+  /**
+   * @throws Exception
+   */
   private function generateRandomPassword(int $length = 32): string
   {
     $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.
@@ -103,11 +127,27 @@ class FOSUBUserProvider extends BaseClass
     }
     $username = $username_base;
     $user_number = 0;
-    while (null !== $this->userManager->findUserByUsername($username)) {
+    while (null !== $this->user_manager->findUserByUsername($username)) {
       ++$user_number;
       $username = $username_base.$user_number;
     }
 
     return $username;
+  }
+
+  /**
+   * Copied from provider since protected access + final!
+   *
+   * @throws RuntimeException
+   */
+  protected function getProperty(UserResponseInterface $response): string
+  {
+    $resourceOwnerName = $response->getResourceOwner()->getName();
+
+    if (!isset($this->properties[$resourceOwnerName])) {
+      throw new RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
+    }
+
+    return $this->properties[$resourceOwnerName];
   }
 }

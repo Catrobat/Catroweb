@@ -548,19 +548,6 @@ ci:
   pending: Generating apk
   download: Download apk
 
-gamejam:
-  nojam: Sorry, there is no game jam at this time
-  submit: Submit to %gamejamname%
-  whats: What's the %gamejamname%?
-  submitown:
-    header: be aware
-    subheader: You can only submit your own projects
-    text: |
-      But why not create your own!
-      Take part in the %gamejamtag%
-tag-text: Tags
-extenstion-text: Extensions
-
 admin:
   maintain:
     diskMaintenance: Disk maintenance
@@ -765,6 +752,8 @@ achievements:
         description: 'Create a user account'
 
 tags:
+  title:
+    Tags
   tag:
     game:
       title: Game
@@ -780,6 +769,23 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+
+extensions:
+  title:
+    Extensions
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Embroidery
+    mindstorms:
+      title: Mindstorms
 
 studio:
   details:
@@ -817,3 +823,13 @@ studio:
     studio_name: 'Studio Name'
     studio_desc: 'Description'
     private_studio: 'Private Studio'
+
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

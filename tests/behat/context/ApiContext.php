@@ -2348,12 +2348,12 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Given /^I have a parameter "([^"]*)" with the tag id "([^"]*)"$/
+   * @Given /^I have a parameter "([^"]*)" with the tag "([^"]*)"$/
    *
    * @param mixed $name
    * @param mixed $value
    */
-  public function iHaveAParameterWithTheTagId($name, $value): void
+  public function iHaveAParameterWithTheTag($name, $value): void
   {
     $this->request_parameters[$name] = $value;
   }

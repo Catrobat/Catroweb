@@ -1583,21 +1583,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the extensions table:$/
-   *
-   * @throws ResponseTextException
-   */
-  public function seeExtensionsTable(TableNode $table): void
-  {
-    $user_stats = $table->getHash();
-    foreach ($user_stats as $user_stat) {
-      $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['Name']);
-      $this->assertSession()->pageTextContains($user_stat['Prefix']);
-    }
-  }
-
-  /**
    * @Then /^I should see the ready apks table:$/
    *
    * @throws ResponseTextException
@@ -1659,14 +1644,52 @@ class CatrowebBrowserContext extends BrowserContext
     $this->assertSession()->pageTextContains('Enabled');
     $this->assertSession()->pageTextContains('Unlocked by');
 
-    $survey_stats = $table->getHash();
-    foreach ($survey_stats as $survey_stat) {
-      $this->assertSession()->pageTextContains($survey_stat['Priority']);
-      $this->assertSession()->pageTextContains($survey_stat['Internal Title']);
-      $this->assertSession()->pageTextContains($survey_stat['Internal Description']);
-      $this->assertSession()->pageTextContains($survey_stat['Color']);
-      $this->assertSession()->pageTextContains($survey_stat['Enabled']);
-      $this->assertSession()->pageTextContains($survey_stat['Unlocked by']);
+    $data = $table->getHash();
+    foreach ($data as $entry) {
+      $this->assertSession()->pageTextContains($entry['Priority']);
+      $this->assertSession()->pageTextContains($entry['Internal Title']);
+      $this->assertSession()->pageTextContains($entry['Internal Description']);
+      $this->assertSession()->pageTextContains($entry['Color']);
+      $this->assertSession()->pageTextContains($entry['Enabled']);
+      $this->assertSession()->pageTextContains($entry['Unlocked by']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the tags table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeTagsTable(TableNode $table): void
+  {
+    $this->assertSession()->pageTextContains('Internal Title');
+    $this->assertSession()->pageTextContains('Enabled');
+    $this->assertSession()->pageTextContains('Projects with tag');
+
+    $data = $table->getHash();
+    foreach ($data as $entry) {
+      $this->assertSession()->pageTextContains($entry['Internal Title']);
+      $this->assertSession()->pageTextContains($entry['Enabled']);
+      $this->assertSession()->pageTextContains($entry['Projects with tag']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the extensions table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeExtensionsTable(TableNode $table): void
+  {
+    $this->assertSession()->pageTextContains('Internal Title');
+    $this->assertSession()->pageTextContains('Enabled');
+    $this->assertSession()->pageTextContains('Projects with extension');
+
+    $data = $table->getHash();
+    foreach ($data as $entry) {
+      $this->assertSession()->pageTextContains($entry['Internal Title']);
+      $this->assertSession()->pageTextContains($entry['Enabled']);
+      $this->assertSession()->pageTextContains($entry['Projects with extension']);
     }
   }
 
@@ -1890,9 +1913,9 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^I have a program with Arduino, Lego and Phiro extensions$/
+   * @Given /^I have a program with arduino, mindstorms and phiro extensions$/
    */
-  public function iHaveAProgramWithArduinoLegoAndPhiroExtensions(): void
+  public function iHaveAProgramWithArduinoMindstormsAndPhiroExtensions(): void
   {
     $filesystem = new Filesystem();
     $original_file = $this->FIXTURES_DIR.'extensions.catrobat';

@@ -1,7 +1,7 @@
 @web @project_page
 Feature: As a visitor I want to see the code view on a project page
-         New Code view is managed and developed by CatBlocks.
-         The old view is used on errors or when not yet supported
+  New Code view is managed and developed by CatBlocks.
+  The old view is used on errors or when not yet supported
 
   Scenario: For performance reasons the code view is on its own page
     Given there are programs:
@@ -31,7 +31,7 @@ Feature: As a visitor I want to see the code view on a project page
     Then I should be on "/app/project/1/code_view"
 
   Scenario: The OLD code view (on old projects) should use an accordion principle @deprecated
-            It must be displayed instead of the new code view
+  It must be displayed instead of the new code view
     Given I have a project zip "CodeStatistics/code_statistics_compound_blocks.catrobat"
     And I upload this generated program with id "1", API version 1
     And I am on "/app/project/1/code_view"

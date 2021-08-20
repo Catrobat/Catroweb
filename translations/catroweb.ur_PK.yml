@@ -517,18 +517,6 @@ ci:
   generate: آ  پی  کے بنائے
   pending: آ  پی  کے بن رہی ہے
   download: آ  پی  کے ڈائون لوڈ کریں
-gamejam:
-  nojam: افسوس، اس وقت کھیل جام نہیں ہے
-  submit: '%gamejamname% جمع کرائیں'
-  whats: '%gamejamname% کیا ہے؟'
-  submitown:
-    header: خبردار
-    subheader: آپ صرف اپنے منصوبوں کو جمع کر سکتے ہیں
-    text: |
-      لیکن کیوں نہ آپ اپنی تخلیق کریں!
-      %gamejamtag% میں شرکت کریں
-tag-text: ٹیگز
-extenstion-text: توسیعات
 admin:
   maintain:
     diskMaintenance: بحالی ڈسک
@@ -716,6 +704,7 @@ achievements:
         title: 'ناولز'
         description: 'صارف اکاؤنٹ بنائیں'
 tags:
+  title: ٹیگز
   tag:
     game:
       title: کھیل
@@ -731,11 +720,26 @@ tags:
       title: تجرباتی
     tutorial:
       title: Tutorial
+extensions:
+  title: Extensions
+  extension:
+    arduino:
+      title: آردوانو
+    drone:
+      title: ڈرون
+    phiro:
+      title: پہرو
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: کشیدہ کاری
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'comments'
+    comments: 'تبصرے'
     public: 'public'
     private: 'private'
     join: 'Join'

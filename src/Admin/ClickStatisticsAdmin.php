@@ -76,7 +76,7 @@ class ClickStatisticsAdmin extends AbstractAdmin
         EntityType::class, ['admin_code' => 'catrowebadmin.block.programs.all'])
       ->add('tag.internal_title', null, [
         'label' => 'Tag', ])
-      ->add('extension.name', null, [
+      ->add('extension.internal_title', null, [
         'label' => 'Extension', ])
       ->add('clicked_at')
       ->add('locale')

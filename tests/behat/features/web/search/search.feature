@@ -7,12 +7,12 @@ Feature: Searching for programs
       | 1  | Catrobat |
       | 2  | User1    |
     And there are extensions:
-      | id | name         | prefix  |
-      | 1  | Arduino      | ARDUINO |
-      | 2  | Drone        | DRONE   |
-      | 3  | Lego         | LEGO    |
-      | 4  | Phiro        | PHIRO   |
-      | 5  | Raspberry Pi | RASPI   |
+      | id | internal_title |
+      | 1  | arduino        |
+      | 2  | drone          |
+      | 3  | mindstorms     |
+      | 4  | phiro          |
+      | 5  | raspberry_pi   |
     And there are tags:
       | internal_title | title_ltm_code |
       | game           | __Spiel        |
@@ -23,10 +23,10 @@ Feature: Searching for programs
       | 1  | program 1           | p1          | User1    | game             | arduino    | 22.04.2014 12:00 | 0.8.5   |
       | 2  | test program        |             | User1    | animation        | arduino    | 22.04.2014 13:00 | 0.8.5   |
       | 3  | Test advanced app   |             | Catrobat | story            | drone      | 22.04.2014 14:00 | 0.8.5   |
-      | 4  | Catrobat            | my program  | User1    | story            | lego       | 22.04.2014 14:00 | 0.8.5   |
-      | 5  | project 3           | lego        | Catrobat | game, animation  | phiro      | 22.04.2014 14:00 | 0.8.5   |
-      | 6  | test advanced games |             | User1    | animation, story | lego       | 22.04.2014 14:00 | 0.8.5   |
-      | 7  | test                |             | Catrobat | story, animation | lego       | 22.04.2014 14:00 | 0.8.5   |
+      | 4  | Catrobat            | my program  | User1    | story            | mindstorms | 22.04.2014 14:00 | 0.8.5   |
+      | 5  | project 3           | mindstorms  | Catrobat | game, animation  | phiro      | 22.04.2014 14:00 | 0.8.5   |
+      | 6  | test advanced games |             | User1    | animation, story | mindstorms | 22.04.2014 14:00 | 0.8.5   |
+      | 7  | test                |             | Catrobat | story, animation | mindstorms | 22.04.2014 14:00 | 0.8.5   |
       | 8  | project test        | catrobat    | User1    | game             | drone      | 22.04.2014 14:00 | 0.8.5   |
     And I wait 1000 milliseconds
 
@@ -70,8 +70,8 @@ Feature: Searching for programs
     And I wait for the page to be loaded
     Then I should see "Your search returned 0 results"
 
-  Scenario: search for projects, which contain the word "lego"
-    Given I am on "/app/search/lego"
+  Scenario: search for projects, which contain the word "mindstorms"
+    Given I am on "/app/search/mindstorms"
     And I wait for the page to be loaded
     Then I should see "Your search returned 4 results"
     Then I should see "Test advanced games"

@@ -5,12 +5,12 @@ Feature: Admin reported users
   Background:
     Given there are admins:
       | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
     And there are users:
       | name     | password | token      | email               | id |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
-      | Angel    | 123456   | eeeeeeeeee | dev3@pocketcode.org |  3 |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
+      | Angel    | 123456   | eeeeeeeeee | dev3@pocketcode.org | 3  |
 
     And there are programs:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
@@ -28,9 +28,9 @@ Feature: Admin reported users
       | 3          | 1       | 01.01.2020 12:01 | c7   | Superman  | 1        |
       | 3          | 1       | 01.01.2020 12:01 | c8   | Superman  | 1        |
     And there are inappropriate reports:
-     | category      | program_id | user_id | time             | note |
-     | inappropriate | 2          | 1       | 01.01.2020 12:01 | c1   |
-     | inappropriate | 2          | 1       | 01.01.2020 12:01 | c2   |
+      | category      | program_id | user_id | time             | note |
+      | inappropriate | 2          | 1       | 01.01.2020 12:01 | c1   |
+      | inappropriate | 2          | 1       | 01.01.2020 12:01 | c2   |
 
   Scenario: List reported users sorted by reported comments
     Given I log in as "Adminius" with the password "123456"
@@ -52,18 +52,18 @@ Feature: Admin reported users
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     And I should not see "Adminius"
     And I should not see "Superman"
-    
-    Scenario: Show reported Programs by user
-      Given I log in as "Adminius" with the password "123456"
-      And I am on "/admin/reported_users/list"
-      And I wait for the page to be loaded
-      Then I should see the reported table:
-        | #Reported Comments | #Reported Programs | Username | Email               |
-        | 5                  | 0                  | Superman | dev1@pocketcode.org |
-        | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
-      Then I click on xpath "/body/div/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[3]/div/a[2]"
-      And I wait for the page to be loaded
-      Then I should be on "/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D=1"
+
+  Scenario: Show reported Programs by user
+    Given I log in as "Adminius" with the password "123456"
+    And I am on "/admin/reported_users/list"
+    And I wait for the page to be loaded
+    Then I should see the reported table:
+      | #Reported Comments | #Reported Programs | Username | Email               |
+      | 5                  | 0                  | Superman | dev1@pocketcode.org |
+      | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
+    Then I click on xpath "/body/div/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[3]/div/a[2]"
+    And I wait for the page to be loaded
+    Then I should be on "/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D=1"
 
   Scenario: Show reported Programs by user
     Given I log in as "Adminius" with the password "123456"

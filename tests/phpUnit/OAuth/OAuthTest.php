@@ -2,7 +2,7 @@
 
 namespace Tests\phpUnit\OAuth;
 
-use App\Catrobat\Security\FOSUBUserProvider;
+use App\Catrobat\Security\FOSUBUserProviderAdapter;
 use App\Entity\User;
 use App\Entity\UserManager;
 use Http\Client\Common\HttpMethodsClient;
@@ -54,18 +54,18 @@ json;
     'google' => 'id',
   ];
   protected array $tokenData = ['access_token' => 'token'];
-  private FOSUBUserProvider $fosub_user_provider;
+  private FOSUBUserProviderAdapter $fosub_user_provider;
 
   protected function setUp(): void
   {
     static::createClient();
     $user_manager = static::$container->get(UserManager::class);
-    $this->fosub_user_provider = new FOSUBUserProvider($user_manager, $this->properties);
+    $this->fosub_user_provider = new FOSUBUserProviderAdapter($user_manager, $this->properties);
   }
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(FOSUBUserProvider::class, $this->fosub_user_provider);
+    $this->assertInstanceOf(FOSUBUserProviderAdapter::class, $this->fosub_user_provider);
   }
 
   public function testLoadUserByOauthResponse(): void

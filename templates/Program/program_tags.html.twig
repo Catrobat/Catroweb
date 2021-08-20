@@ -4,21 +4,22 @@
       <div id="tag-extension-container">
         {% if program.extensions|length > 0 %}
           <div id="extensions">
-            <p>{{ ("extenstion-text")|trans({}, "catroweb") }}:</p>
+            <p>{{ ("extensions.title")|trans({}, "catroweb") }}:</p>
             <div class="list">
               {% for extension in program.extensions %}
                 <a class="rec-programs badge badge-primary"
-                   href="{{ url('extension_search', { q : extension.name }) }}">{{ extension.name }}</a>
+                   href="{{ url('extension_search', { q : extension.getInternalTitle() }) }}">{{ extension.getTitleLtmCode()|trans({}, "catroweb") }}</a>
               {% endfor %}
             </div>
           </div>
         {% endif %}
         {% if  program.tags|length > 0 %}
           <div id="tags">
+            <p>{{ ("tags.title")|trans({}, "catroweb") }}:</p>
             <div class="list">
               {% for tag in program.tags %}
                 <a class="rec-programs badge badge-pill badge-primary"
-                   href="{{ url('tag_search', { q : tag.id }) }}">{{ tag.getTitleLtmCode()|trans({}, "catroweb") }}</a>
+                   href="{{ url('tag_search', { q : tag.getInternalTitle() }) }}">{{ tag.getTitleLtmCode()|trans({}, "catroweb") }}</a>
               {% endfor %}
             </div>
           </div>

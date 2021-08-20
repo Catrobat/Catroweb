@@ -520,17 +520,6 @@ ci:
   generate: Генерировать Apk
   pending: Генерирование Apk
   download: Скачать Apk
-gamejam:
-  nojam: К сожалению, в данный момент game jam нет
-  submit: Отправить %gamejamname%
-  whats: Что такое %gamejamname%?
-  submitown:
-    header: быть в курсе
-    subheader: Вы можете отправить только свои собственные программы
-    text: |
-      А почему бы не создать свой собственный! Принять участие в %gamejamtag%
-tag-text: Тэги
-extenstion-text: Расширения
 admin:
   maintain:
     diskMaintenance: Обслуживание диска
@@ -718,6 +707,7 @@ achievements:
         title: 'Новичок'
         description: 'Создать учетную запись пользователя'
 tags:
+  title: Теги
   tag:
     game:
       title: Игра
@@ -733,39 +723,54 @@ tags:
       title: Экспериментальный
     tutorial:
       title: Учебник
+extensions:
+  title: Расширения
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Дрон
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Вышивка
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    general: 'общий'
+    projects: 'проекты'
+    comments: 'Комментарии'
+    public: 'публичный'
+    private: 'приватный'
+    join: 'Присоединиться'
+    leave: 'Покинуть'
+    showMore: 'показать больше'
+    showLess: 'показать меньше'
+    remove_project: 'Удалить из студии'
+    remove_project_error: 'Не удалось удалить проект из студии!'
+    remove_project_success: 'проект успешно удален из студии!'
+    no_projects: 'Студия пока не содержит проектов'
+    no_comments: 'Студия пока не содержит комментариев'
+    type_something: 'Напишите что-нибудь'
+    send_comment: 'отправить'
+    comment_error: 'Что-то пошло не так во время публикации вашего комментария!'
+    remove_comment_error: 'Что-то пошло не так при удалении комментария!'
+    replies: 'ответов'
+    updateCoverError: 'Что-то пошло не так при обновлении обложки студии!'
+    created_studio: 'создал студию'
+    activity: 'Активность'
+    activity_add_comment: 'оставил комментарий'
+    activity_add_project: 'добавил новый проект %project% в студию'
+    activity_add_user: 'добавил нового пользователя %user% в студию'
+    members: 'Участники студии'
+    remove_user: 'удалить из студии'
+    promote_user: 'продвигать админу'
+    promote_failed: 'Не удалось повысить этого пользователя до администратора'
+    ban_user_failed: 'Не удалось заблокировать пользователя из студии!'
+    general_settings: 'Общие настройки'
+    studio_name: 'Название студии'
     studio_desc: 'Описание'
-    private_studio: 'Private Studio'
+    private_studio: 'Частная студия'

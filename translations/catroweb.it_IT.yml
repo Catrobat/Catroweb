@@ -522,17 +522,6 @@ ci:
   generate: Generare  l'Apk
   pending: Generazione dell'Apk
   download: Scarica Apk
-gamejam:
-  nojam: Siamo spiacenti, non c'è nessun concorso in questo momento
-  submit: Invia a %gamejamname%
-  whats: Che cos'è %gamejamname%?
-  submitown:
-    header: fai attenzione
-    subheader: Puoi inviare solo i tuoi progetti
-    text: |
-      Ma perché non crearne uno personale! Prendi parte ad %gamejamtag%
-tag-text: Tag
-extenstion-text: Estensioni
 admin:
   maintain:
     diskMaintenance: Manutenzione del disco
@@ -720,6 +709,7 @@ achievements:
         title: 'Novizio'
         description: 'Crea un account utente'
 tags:
+  title: Tag
   tag:
     game:
       title: Gioco
@@ -735,39 +725,54 @@ tags:
       title: Sperimentale
     tutorial:
       title: Guida
+extensions:
+  title: Estensioni
+  extension:
+    arduino:
+      title: Arduino
+    drone:
+      title: Drone
+    phiro:
+      title: Phiro
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: Ricamo
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    general: 'generale'
+    projects: 'progetti'
+    comments: 'Commenti'
+    public: 'pubblico'
+    private: 'privato'
+    join: 'Entra'
+    leave: 'Lascia'
+    showMore: 'mostra di più'
+    showLess: 'mostra meno'
+    remove_project: 'Rimuovi dallo studio'
+    remove_project_error: 'Impossibile rimuovere il progetto dallo studio!'
+    remove_project_success: 'progetto rimosso con successo dallo studio!'
+    no_projects: 'Studio non contiene ancora nessun progetto'
+    no_comments: 'Studio non contiene ancora commenti'
+    type_something: 'Tipo qualcosa'
+    send_comment: 'inviare'
+    comment_error: 'Qualcosa è andato storto mentre postavi il tuo commento!'
+    remove_comment_error: 'Qualcosa è andato storto durante la rimozione del commento!'
+    replies: 'risponde'
+    updateCoverError: 'Qualcosa è andato storto durante l''aggiornamento della copertina dello studio!'
+    created_studio: 'ha creato lo studio'
+    activity: 'Attività'
+    activity_add_comment: 'ha lasciato un commento'
+    activity_add_project: 'ha aggiunto un nuovo progetto %project% allo studio'
+    activity_add_user: 'ha aggiunto un nuovo utente %user% allo studio'
+    members: 'Membri Studio'
+    remove_user: 'rimuovi dallo studio'
+    promote_user: 'promuovere ad amministratore'
+    promote_failed: 'Impossibile promuovere questo utente ad amministratore'
+    ban_user_failed: 'Fallito il ban dell''utente dallo studio!'
+    general_settings: 'Impostazioni generali'
+    studio_name: 'Nome Studio'
     studio_desc: 'Descrizione'
-    private_studio: 'Private Studio'
+    private_studio: 'Studio Privato'

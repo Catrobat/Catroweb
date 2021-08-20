@@ -518,18 +518,6 @@ ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
-gamejam:
-  nojam: 抱歉，目前沒有game jam
-  submit: 提交至 %gamejamname%
-  whats: '%gamejamname% 是什麼？'
-  submitown:
-    header: 意識到
-    subheader: 您只能提交自己的項目
-    text: |
-      但為什麼不創建自己的！
-      參加 %gamejamtag%
-tag-text: 標籤
-extenstion-text: 擴展
 admin:
   maintain:
     diskMaintenance: 磁盤維護
@@ -717,6 +705,7 @@ achievements:
         title: '新手'
         description: '創建用戶帳戶'
 tags:
+  title: 標籤
   tag:
     game:
       title: 遊戲
@@ -732,39 +721,54 @@ tags:
       title: 實驗性的
     tutorial:
       title: 教程
+extensions:
+  title: 擴展
+  extension:
+    arduino:
+      title: 阿杜諾
+    drone:
+      title: 無人機
+    phiro:
+      title: 菲羅
+    raspberry_pi:
+      title: Raspberry PI
+    embroidery:
+      title: 刺繡
+    mindstorms:
+      title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'comments'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    general: '一般'
+    projects: '項目'
+    comments: '註釋'
+    public: '民眾'
+    private: '私人的'
+    join: '加入'
+    leave: '離開'
+    showMore: '展示更多'
+    showLess: '顯示較少'
+    remove_project: '從工作室中移除'
+    remove_project_error: '無法從工作室中刪除項目！'
+    remove_project_success: '項目從工作室成功刪除！'
+    no_projects: 'Studio 尚不包含任何項目'
+    no_comments: '工作室還沒有任何評論'
+    type_something: '輸入一些東西'
+    send_comment: '發送'
+    comment_error: '發表評論時出了點問題！'
+    remove_comment_error: '刪除評論時出了點問題！'
+    replies: '回复'
+    updateCoverError: '更新工作室封面時出了點問題！'
+    created_studio: '創建了工作室'
+    activity: '活動'
+    activity_add_comment: '發表評論'
+    activity_add_project: '將新項目 %project% 添加到工作室'
+    activity_add_user: '將新用戶 %user% 添加到工作室'
+    members: '工作室成員'
+    remove_user: '從工作室中移除'
+    promote_user: '晉升為管理員'
+    promote_failed: '無法將此用戶提升為管理員'
+    ban_user_failed: '無法禁止用戶進入工作室！'
+    general_settings: '常規設置'
+    studio_name: '工作室名稱'
     studio_desc: '描述'
-    private_studio: 'Private Studio'
+    private_studio: '私人工作室'

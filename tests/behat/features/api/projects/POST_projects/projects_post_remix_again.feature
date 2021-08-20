@@ -3,8 +3,8 @@ Feature: Upload a remixed program with multiple parents
 
   Background:
     Given there are users:
-      |id | name     | password |
-      | 1 | Catrobat | 123456   |
+      | id | name     | password |
+      | 1  | Catrobat | 123456   |
 
     And there are programs:
       | id | name      | description | owned by | downloads | views | upload time      | version | remix_root |

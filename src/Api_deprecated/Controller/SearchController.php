@@ -78,12 +78,12 @@ class SearchController extends AbstractController
    */
   public function tagSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
-    $tag_id = (int) $request->query->get('q', 0);
+    $tag_name = (string) $request->query->get('q', 0);
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
-    $programs = $program_manager->getProgramsByTagId($tag_id, $limit, $offset);
+    $programs = $program_manager->getProgramsByTagInternalTitle($tag_name, $limit, $offset);
 
-    $numbOfTotalProjects = $program_manager->searchTagCount($tag_id);
+    $numbOfTotalProjects = $program_manager->searchTagCount($tag_name);
 
     return new ProgramListResponse($programs, $numbOfTotalProjects);
   }
@@ -99,7 +99,7 @@ class SearchController extends AbstractController
     $query = $request->query->get('q');
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
-    $programs = $program_manager->getProjectsByExtensionName($query, $limit, $offset);
+    $programs = $program_manager->getProjectsByExtensionInternalTitle($query, $limit, $offset);
 
     $numbOfTotalProjects = $program_manager->searchExtensionCount($query);
 

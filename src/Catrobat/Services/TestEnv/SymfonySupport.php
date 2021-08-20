@@ -343,8 +343,9 @@ trait SymfonySupport
   public function insertExtension(array $config = [], bool $andFlush = true): Extension
   {
     $extension = new Extension();
-    $extension->setName($config['name']);
-    $extension->setPrefix($config['prefix']);
+    $extension->setInternalTitle($config['internal_title']);
+    $extension->setTitleLtmCode($config['title_ltm_code'] ?? 'extension_ltm');
+    $extension->setEnabled($config['enabled'] ?? true);
 
     $this->getManager()->persist($extension);
     if ($andFlush) {
@@ -538,11 +539,13 @@ trait SymfonySupport
     $click_statistics->setClickedAt($date);
     $click_statistics->setLocale($config['locale']);
     if ('tags' === $config['type']) {
-      $tag = $this->getTagRepository()->find($config['tag_id']);
+      /** @var Tag|null $tag */
+      $tag = $this->getTagRepository()->findOneBy(['internal_title' => $config['tag_name']]);
       $click_statistics->setTag($tag);
     } elseif ('extensions' === $config['type']) {
-      $extension = $this->getExtensionRepository()->getExtensionByName($config['extension_name']);
-      $click_statistics->setExtension($extension[0]);
+      /** @var Extension|null $extension */
+      $extension = $this->getExtensionRepository()->findOneBy(['internal_title' => $config['extension_name']]);
+      $click_statistics->setExtension($extension);
     } else {     /** @var Program $recommended_from */
       $recommended_from = $this->getProgramManager()->find($config['rec_from_id']);
       $click_statistics->setRecommendedFromProgram($recommended_from);

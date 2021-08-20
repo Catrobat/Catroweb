@@ -105,6 +105,11 @@ class Tag
     $this->programs->add($program);
   }
 
+  public function getProjectCount(): int
+  {
+    return count($this->programs);
+  }
+
   public function removeProgram(Program $program): void
   {
     $this->programs->removeElement($program);

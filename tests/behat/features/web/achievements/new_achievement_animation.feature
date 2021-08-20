@@ -13,8 +13,8 @@ Feature: Sidebar should show an indication of unseen achievements in form of a b
 
   Scenario: User should not see an animation if there are no new achievements
     Given there are user achievements:
-      | id | user     | achievement        | seen_at    | unlocked_at |
-      | 1  | Catrobat | best_user          | 2021-03-03 | 2021-03-03  |
+      | id | user     | achievement | seen_at    | unlocked_at |
+      | 1  | Catrobat | best_user   | 2021-03-03 | 2021-03-03  |
     Given I log in as "Catrobat"
     And I am on "/app/achievements"
     Then I should not see "Congratulations"

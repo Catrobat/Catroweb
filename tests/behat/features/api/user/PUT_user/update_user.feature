@@ -3,11 +3,11 @@ Feature: Update user
 
   Background:
     Given there are users:
-      | name         | password | token      | id |
-      | Catrobat     | 12345    | cccccccccc | 1  |
-      | User1        | vwxyz    | aaaaaaaaaa | 2  |
-      | NewUser      | 54321    | bbbbbbbbbb | 3  |
-      | Catroweb     | 54321    | bbbbbbbbbb | 4  |
+      | name     | password | token      | id |
+      | Catrobat | 12345    | cccccccccc | 1  |
+      | User1    | vwxyz    | aaaaaaaaaa | 2  |
+      | NewUser  | 54321    | bbbbbbbbbb | 3  |
+      | Catroweb | 54321    | bbbbbbbbbb | 4  |
     And I wait 1000 milliseconds
 
   Scenario: Update user with dry-run option
@@ -38,8 +38,8 @@ Feature: Update user
     And I request "PUT" "/api/user"
     Then the response code should be "204"
     And the following users exist in the database:
-      | name    |
-      | User2   |
+      | name  |
+      | User2 |
     And the user "NewUser" should not exist
 
   Scenario: Update user username with an existing username

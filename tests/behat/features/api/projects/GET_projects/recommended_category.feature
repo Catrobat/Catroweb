@@ -8,10 +8,10 @@ Feature: Get recommended programs on homepage
   Background:
     Given there are users:
       | id | name      | password | token      | id |
-      | 1  | Catrobat1 | 12345    | cccccccccc |  1 |
-      | 2  | Catrobat2 | 12345    | cccccccccc |  2 |
-      | 3  | Catrobat3 | 12345    | cccccccccc |  3 |
-      | 4  | Catrobat4 | 12345    | cccccccccc |  4 |
+      | 1  | Catrobat1 | 12345    | cccccccccc | 1  |
+      | 2  | Catrobat2 | 12345    | cccccccccc | 2  |
+      | 3  | Catrobat3 | 12345    | cccccccccc | 3  |
+      | 4  | Catrobat4 | 12345    | cccccccccc | 4  |
     And there are programs:
       | id | name    | description | owned by  | downloads | views | upload time      | version | language version | flavor     |
       | 1  | Game    | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | 0.985            | pocketcode |
@@ -56,13 +56,13 @@ Feature: Get recommended programs on homepage
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name      |
-      | Game      |
-      | Minions   |
-      | Other2    |
-      | Other4    |
-      | Other6    |
-      | Other     |
+      | Name    |
+      | Game    |
+      | Minions |
+      | Other2  |
+      | Other4  |
+      | Other6  |
+      | Other   |
 
   Scenario: Get recommended projects with limit 2
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -70,9 +70,9 @@ Feature: Get recommended programs on homepage
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name      |
-      | Game      |
-      | Minions   |
+      | Name    |
+      | Game    |
+      | Minions |
 
 
   Scenario: Get recommended projects with offset 2
@@ -81,11 +81,11 @@ Feature: Get recommended programs on homepage
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name      |
-      | Other2    |
-      | Other4    |
-      | Other6    |
-      | Other     |
+      | Name   |
+      | Other2 |
+      | Other4 |
+      | Other6 |
+      | Other  |
 
   Scenario: Get recommended projects with limit 2 and offset 2
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
@@ -93,9 +93,9 @@ Feature: Get recommended programs on homepage
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name       |
-      | Other2     |
-      | Other      |
+      | Name   |
+      | Other2 |
+      | Other  |
 
 
   Scenario: Get recommended projects with luna flavor
@@ -104,16 +104,17 @@ Feature: Get recommended programs on homepage
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name      |
-      | Other4    |
+      | Name   |
+      | Other4 |
+
   Scenario: Get recommended projects with max version 0.985
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&max_version=0.985"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
-      | Name      |
-      | Game      |
-      | Minions   |
-      | Other     |
-      | Other4    |
+      | Name    |
+      | Game    |
+      | Minions |
+      | Other   |
+      | Other4  |

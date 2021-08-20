@@ -4,21 +4,21 @@ Feature: Admin approve programs
   Background:
     Given there are admins:
       | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org |  0 |
+      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
 
     And there are users:
-      | name      | password | token      | email               | id |
-      | Catrobat  | 123456   | cccccccccc | dev1@pocketcode.org |  1 |
-      | Catroweb  | 123456   | dddddddddd | dev2@pocketcode.org |  2 |
-      | User1     | 123456   | qwertyuiop | dev3@pocketcode.org |  3 |
+      | name     | password | token      | email               | id |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
+      | Catroweb | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
+      | User1    | 123456   | qwertyuiop | dev3@pocketcode.org | 3  |
 
     And there are programs:
-      | id | name      | description             | owned by  | upload time      | version | language version | visible |
-      | 1  | program 1 | description1            | Catrobat  | 01.01.2014 12:00 | 0.8.5   | 0.94             | true    |
-      | 2  | program 2 | description2            | Catroweb  | 22.04.2014 14:00 | 0.8.5   | 0.93             | true    |
-      | 3  | program 3 | description3            | Catroweb  | 22.04.2014 14:30 | 0.8.5   | 0.93             | true    |
-      | 4  | program 4 |                         | Catrobat  | 22.04.2014 14:15 | 0.8.5   | 0.93             | true    |
-      | 5  | program 5 | description2            | User1     | 22.04.2014 14:00 | 0.8.5   | 0.93             | false   |
+      | id | name      | description  | owned by | upload time      | version | language version | visible |
+      | 1  | program 1 | description1 | Catrobat | 01.01.2014 12:00 | 0.8.5   | 0.94             | true    |
+      | 2  | program 2 | description2 | Catroweb | 22.04.2014 14:00 | 0.8.5   | 0.93             | true    |
+      | 3  | program 3 | description3 | Catroweb | 22.04.2014 14:30 | 0.8.5   | 0.93             | true    |
+      | 4  | program 4 |              | Catrobat | 22.04.2014 14:15 | 0.8.5   | 0.93             | true    |
+      | 5  | program 5 | description2 | User1    | 22.04.2014 14:00 | 0.8.5   | 0.93             | false   |
 
 
   Scenario: List all programs:
@@ -26,12 +26,12 @@ Feature: Admin approve programs
     And I am on "/admin/approve/list"
     And I wait for the page to be loaded
     Then I should see the following not approved projects:
-    | Upload Time           | Id | User     | Name       | Visible | Approved | Action     |
-    | January 1, 2014 12:00 | 1  | Catrobat | program 1  |  yes    | no       | Show       |
-    | April 22, 2014 14:00  | 2  | Catroweb | program 2  |  yes    | no       | Show       |
-    | April 22, 2014 14:30  | 3  | Catroweb | program 3  |  yes    | no       | Show       |
-    | April 22, 2014 14:15  | 4  | Catrobat | program 4  |  yes    | no       | Show       |
-    | April 22, 2014 14:00  | 5  | User1    | program 5  |  no     | no       | Show       |
+      | Upload Time           | Id | User     | Name      | Visible | Approved | Action |
+      | January 1, 2014 12:00 | 1  | Catrobat | program 1 | yes     | no       | Show   |
+      | April 22, 2014 14:00  | 2  | Catroweb | program 2 | yes     | no       | Show   |
+      | April 22, 2014 14:30  | 3  | Catroweb | program 3 | yes     | no       | Show   |
+      | April 22, 2014 14:15  | 4  | Catrobat | program 4 | yes     | no       | Show   |
+      | April 22, 2014 14:00  | 5  | User1    | program 5 | no      | no       | Show   |
 
 
   Scenario: List projects sorted by upload date ascending
@@ -41,12 +41,12 @@ Feature: Admin approve programs
     And I click on the column with the name "Upload Time"
     And I wait for the page to be loaded
     Then I should see the following not approved projects:
-      | Upload Time           | Id | User     | Name       | Visible | Approved | Action     |
-      | January 1, 2014 12:00 | 1  | Catrobat | program 1  |  yes    | no       | Show       |
-      | April 22, 2014 14:00  | 2  | Catroweb | program 2  |  yes    | no       | Show       |
-      | April 22, 2014 14:00  | 5  | User1    | program 5  |  no     | no       | Show       |
-      | April 22, 2014 14:15  | 4  | Catrobat | program 4  |  yes    | no       | Show       |
-      | April 22, 2014 14:30  | 3  | Catroweb | program 3  |  yes    | no       | Show       |
+      | Upload Time           | Id | User     | Name      | Visible | Approved | Action |
+      | January 1, 2014 12:00 | 1  | Catrobat | program 1 | yes     | no       | Show   |
+      | April 22, 2014 14:00  | 2  | Catroweb | program 2 | yes     | no       | Show   |
+      | April 22, 2014 14:00  | 5  | User1    | program 5 | no      | no       | Show   |
+      | April 22, 2014 14:15  | 4  | Catrobat | program 4 | yes     | no       | Show   |
+      | April 22, 2014 14:30  | 3  | Catroweb | program 3 | yes     | no       | Show   |
 
   Scenario: Filter projects by upload date using filter options
     Given I log in as "Admin" with the password "123456"
@@ -54,9 +54,9 @@ Feature: Admin approve programs
     And I wait for the page to be loaded
     Then I am on "/admin/approve/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=Apr+22%2C+2014%2C+2%3A15%3A00+pm&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=Apr+22%2C+2014%2C+2%3A30%3A00+pm&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     Then I should see the following not approved projects:
-      | Upload Time           | Id | User     | Name       | Visible | Approved | Action     |
-      | April 22, 2014 14:30  | 3  | Catroweb | program 3  |  yes    | no       | Show       |
-      | April 22, 2014 14:15  | 4  | Catrobat | program 4  |  yes    | no       | Show       |
+      | Upload Time          | Id | User     | Name      | Visible | Approved | Action |
+      | April 22, 2014 14:30 | 3  | Catroweb | program 3 | yes     | no       | Show   |
+      | April 22, 2014 14:15 | 4  | Catrobat | program 4 | yes     | no       | Show   |
     And I should not see "program 1"
     And I should not see "program 2"
     And I should not see "program 5"
@@ -68,9 +68,9 @@ Feature: Admin approve programs
     And I wait for the page to be loaded
     Then I am on "/admin/approve/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=Catroweb&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     Then I should see the following not approved projects:
-      | Upload Time           | Id | User     | Name       | Visible | Approved | Action     |
-      | April 22, 2014 14:00  | 2  | Catroweb | program 2  |  yes    | no       | Show       |
-      | April 22, 2014 14:30  | 3  | Catroweb | program 3  |  yes    | no       | Show       |
+      | Upload Time          | Id | User     | Name      | Visible | Approved | Action |
+      | April 22, 2014 14:00 | 2  | Catroweb | program 2 | yes     | no       | Show   |
+      | April 22, 2014 14:30 | 3  | Catroweb | program 3 | yes     | no       | Show   |
     And I should not see "program 1"
     And I should not see "program 4"
     And I should not see "program 5"
@@ -81,8 +81,8 @@ Feature: Admin approve programs
     And I wait for the page to be loaded
     Then I am on "/admin/approve/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=program+1&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     Then I should see the following not approved projects:
-      | Upload Time           | Id | User     | Name       | Visible | Approved | Action     |
-      | January 1, 2014 12:00 | 1  | Catrobat | program 1  |  yes    | no       | Show       |
+      | Upload Time           | Id | User     | Name      | Visible | Approved | Action |
+      | January 1, 2014 12:00 | 1  | Catrobat | program 1 | yes     | no       | Show   |
     And I should not see "program 2"
     And I should not see "program 3"
     And I should not see "program 4"
@@ -94,8 +94,8 @@ Feature: Admin approve programs
     And I wait for the page to be loaded
     Then I am on "/admin/approve/list?filter%5Bid%5D%5Btype%5D=&filter%5Bid%5D%5Bvalue%5D=2&filter%5Bname%5D%5Btype%5D=&filter%5Bname%5D%5Bvalue%5D=&filter%5Buser__username%5D%5Btype%5D=&filter%5Buser__username%5D%5Bvalue%5D=&filter%5Buploaded_at%5D%5Btype%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bstart%5D=&filter%5Buploaded_at%5D%5Bvalue%5D%5Bend%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=ASC&filter%5B_per_page%5D=32"
     Then I should see the following not approved projects:
-      | Upload Time           | Id | User     | Name       | Visible | Approved | Action     |
-      | April 22, 2014 14:00  | 2  | Catroweb | program 2  |  yes    | no       | Show       |
+      | Upload Time          | Id | User     | Name      | Visible | Approved | Action |
+      | April 22, 2014 14:00 | 2  | Catroweb | program 2 | yes     | no       | Show   |
     And I should not see "program 1"
     And I should not see "program 3"
     And I should not see "program 4"
