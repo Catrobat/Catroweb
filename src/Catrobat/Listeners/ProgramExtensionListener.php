@@ -29,7 +29,7 @@ class ProgramExtensionListener
     $this->addExtensions($event->getExtractedFile(), $event->getProgramEntity());
   }
 
-  public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $program): void
+  public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $program, bool $flush = true): void
   {
     $program->removeAllExtensions();
 
@@ -41,7 +41,7 @@ class ProgramExtensionListener
     $this->addEmbroideryExtensions($program, $code_xml);
     $this->addMindstormsExtensions($program, $code_xml);
 
-    $this->saveProject($program);
+    $this->saveProject($program, $flush);
   }
 
   public function addArduinoExtensions(Program $program, string $code_xml): void
@@ -118,9 +118,11 @@ class ProgramExtensionListener
     return $extension;
   }
 
-  protected function saveProject(Program $project): void
+  protected function saveProject(Program $project, bool $flush = true): void
   {
     $this->entity_manager->persist($project);
-    $this->entity_manager->flush();
+    if ($flush) {
+      $this->entity_manager->flush();
+    }
   }
 }
