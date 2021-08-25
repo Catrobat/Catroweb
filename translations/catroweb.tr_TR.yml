@@ -770,3 +770,12 @@ studio:
     studio_name: 'Stüdyo Adı'
     studio_desc: 'Açıklama'
     private_studio: 'Gizli Stüdyo'
+media_library:
+  file:
+    size: 'Boyutu: %size%'
+    type_description:
+      image: 'Tür: görüntü'
+      project: 'Tür: proje'
+      sound: 'Tür: ses'
+      movie: 'Tür: video'
+      default: 'Tür: bilinmiyor'

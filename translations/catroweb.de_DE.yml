@@ -776,3 +776,12 @@ studio:
     studio_name: 'Studio-Name'
     studio_desc: 'Beschreibung'
     private_studio: 'Privates Studio'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

@@ -769,3 +769,12 @@ studio:
     studio_name: '스튜디오 이름'
     studio_desc: '설명'
     private_studio: '프라이빗 스튜디오'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'
