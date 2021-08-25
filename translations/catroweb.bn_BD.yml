@@ -778,3 +778,12 @@ studio:
     studio_name: 'স্টুডিও নাম'
     studio_desc: 'বর্ণনা'
     private_studio: 'প্রাইভেট স্টুডিও'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

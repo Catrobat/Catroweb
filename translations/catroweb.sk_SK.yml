@@ -344,7 +344,7 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  search: Search
+  search: Hľadať…
   inMediaLib: Search in media library
   results: Search Results
   resultcount: Your search returned %count% results
@@ -772,3 +772,12 @@ studio:
     studio_name: 'Studio Name'
     studio_desc: 'Description'
     private_studio: 'Private Studio'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

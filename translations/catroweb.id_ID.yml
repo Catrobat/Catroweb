@@ -775,3 +775,12 @@ studio:
     studio_name: 'Nama Studio'
     studio_desc: 'Keterangan'
     private_studio: 'Studio Pribadi'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

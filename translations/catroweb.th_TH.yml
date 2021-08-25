@@ -777,3 +777,12 @@ studio:
     studio_name: 'ชื่อสตูดิโอ'
     studio_desc: 'คำอธิบาย'
     private_studio: 'สตูดิโอส่วนตัว'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'
