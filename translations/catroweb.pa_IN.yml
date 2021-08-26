@@ -772,3 +772,12 @@ studio:
     studio_name: 'ਸਟੂਡੀਓ ਦਾ ਨਾਮ'
     studio_desc: 'ਵੇਰਵਾ'
     private_studio: 'ਪ੍ਰਾਈਵੇਟ ਸਟੂਡੀਓ'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

@@ -772,3 +772,12 @@ studio:
     studio_name: 'اسم الاستوديو'
     studio_desc: 'الوصف'
     private_studio: 'استوديو خاص'
+media_library:
+  file:
+    size: 'الحجم:%size%'
+    type_description:
+      image: 'النوع: صورة'
+      project: 'النوع: مشروع'
+      sound: 'النوع: صوت'
+      movie: 'النوع: video'
+      default: 'النوع: غير معروف'

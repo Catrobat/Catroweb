@@ -772,3 +772,12 @@ studio:
     studio_name: 'スタジオ名'
     studio_desc: '説明'
     private_studio: 'プライベートスタジオ'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

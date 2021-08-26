@@ -6,8 +6,8 @@ use App\Catrobat\Listeners\ProgramExtensionListener;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Query;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -22,17 +22,19 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
   protected static $defaultName = 'catrobat:workflow:project:refresh_extensions';
 
   protected ProgramManager $program_manager;
+  protected ProgramRepository $program_repository;
   protected ProgramExtensionListener $program_extension_listener;
   protected ExtractedFileRepository $extracted_file_repo;
   protected EntityManagerInterface $entity_manager;
 
-  public function __construct(ProgramManager $program_manager,
+  public function __construct(ProgramManager $program_manager, ProgramRepository $program_repository,
                               ProgramExtensionListener $program_extension_listener,
                               ExtractedFileRepository $extracted_file_repo,
                               EntityManagerInterface $entity_manager)
   {
     parent::__construct();
     $this->program_manager = $program_manager;
+    $this->program_repository = $program_repository;
     $this->program_extension_listener = $program_extension_listener;
     $this->extracted_file_repo = $extracted_file_repo;
     $this->entity_manager = $entity_manager;
@@ -56,10 +58,12 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
   {
     $batchSize = 50;
     $i = 1;
-    $iterator = $this->entity_manager->getRepository(Program::class)
+
+    $iterator = $this->program_repository
       ->createQueryBuilder('e')
       ->getQuery()
-      ->iterate();
+      ->iterate()
+    ;
 
     foreach ($iterator as $projects) {
       /** @var Program $project */

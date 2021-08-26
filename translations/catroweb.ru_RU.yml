@@ -774,3 +774,12 @@ studio:
     studio_name: 'Название студии'
     studio_desc: 'Описание'
     private_studio: 'Частная студия'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

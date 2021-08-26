@@ -776,3 +776,12 @@ studio:
     studio_name: 'ஸ்டுடியோ பெயர்'
     studio_desc: 'விளக்கம்'
     private_studio: 'தனியார் ஸ்டுடியோ'
+media_library:
+  file:
+    size: 'Size: %size%'
+    type_description:
+      image: 'Type: image'
+      project: 'Type: project'
+      sound: 'Type: sound'
+      movie: 'Type: video'
+      default: 'Type: unknown'

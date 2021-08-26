@@ -777,3 +777,12 @@ studio:
     studio_name: '工作室名称'
     studio_desc: '描述'
     private_studio: '私人工作室'
+media_library:
+  file:
+    size: '大小: %size%'
+    type_description:
+      image: '类型：图像'
+      project: '类型：工程'
+      sound: '类型：声音'
+      movie: '类型：视频'
+      default: '类型：未知'
