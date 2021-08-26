@@ -774,10 +774,10 @@ studio:
     private_studio: 'استوديو خاص'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'الحجم:%size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'النوع: صورة'
+      project: 'النوع: مشروع'
+      sound: 'النوع: صوت'
+      movie: 'النوع: video'
+      default: 'النوع: غير معروف'

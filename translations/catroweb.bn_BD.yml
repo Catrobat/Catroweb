@@ -780,10 +780,10 @@ studio:
     private_studio: 'প্রাইভেট স্টুডিও'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'আকার: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'প্রকার: ছবি'
+      project: 'প্রকার: প্রকল্প'
+      sound: 'প্রকার: শব্দ'
+      movie: 'প্রকার: ভিডিও'
+      default: 'প্রকার: অজানা'
