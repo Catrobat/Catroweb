@@ -774,10 +774,10 @@ studio:
     private_studio: 'निजी स्टूडियो'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'आकार: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'प्रकार: छवि'
+      project: 'प्रकार: परियोजना'
+      sound: 'प्रकार: ध्वनि'
+      movie: 'प्रकार: वीडियो'
+      default: 'प्रकार: अज्ञात'

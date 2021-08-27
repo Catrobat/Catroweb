@@ -336,7 +336,7 @@ termsOfUse:
   list5:
     item1: 'اگر تو زیر سیزده سال هستی، والدین ویا قیمان قانونی تو با سازمان هایی که به حریم خصوصی تعرض می کنند در ارتباطند،و نظارت فشرده دارند، در این صورت تو اجازه استفاده از اپلیکیشن های نرم افزاری و دسترسی به سرویس های ما رو نداری. جزئیات دقیقتر این شرط و استثنائات خاص آن در قسمت های 4.الف و 4.ب روی %link-termsOfUse% مشخص شده.'
     item2: اگر کمتر از سیزده سال سن داری، باید از والدین و یا قیمین قانونیت اجازه بگیری که از اپلیکیشن ها و سرویس های نرم افزار "کت ربات" استفاده کنی.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item3: "ما حقوق را برای رد کردن، حذف، یا پنهان کردن پروژه ها، حساب های کاربر، و هر گونه مواد دیجیتال به وب سایت های Catrobat در هر زمان که در اختیار ما قرار می دهیم حقوق افراد دیگر."
     item4: "همه ی نرم افزار کت ربات و منابع اینترنتی با امید به مفید بودن اما بدون هیچ تضمینی ارائه می شود."
     item5: "لطفا با ما مشورت کنید\n%link-termsOfUse% developer.catrobat.org/terms_of_use_and_service برای فرمول بندی دقیق نکات فوق و برخی شرایط و ضوابط قانونی اضافی."
   bottom1: مرتب اینجا را چک کن، چون ما همیشه در حال ارتقا ضوابط استفاده هستیم.
@@ -602,9 +602,9 @@ privacy-policy:
 catro-notifications:
   markAsRead: "به عنوان خوانده شده علامت بزن"
   noFollowers: "به نظر می رسد که شما هیچ اطلاعیه ای ندارید."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noComments: "به نظر می رسد که شما هیچ اطلاعیه ای ندارید."
+  noReactions: "به نظر می رسد که شما هیچ اعلان واکنش ندارید."
+  noRemixes: "به نظر می رسد که شما هیچ اطلاعیه ریمیکس ندارید."
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
@@ -616,7 +616,7 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Link to project copied to clipboard!
+  success: پیوند به پروژه کپی شده به کلیپ بورد!
   fail: Failed to copy link to clipboard! :(
 next: Next
 previous: Previous
