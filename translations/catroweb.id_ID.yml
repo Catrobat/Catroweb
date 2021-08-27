@@ -777,10 +777,10 @@ studio:
     private_studio: 'Studio Pribadi'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Ukuran: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'Jenis: gambar'
+      project: 'Jenis: proyek'
+      sound: 'Jenis: suara'
+      movie: 'Jenis: video'
+      default: 'Jenis: tidak diketahui'
