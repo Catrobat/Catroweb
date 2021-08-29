@@ -771,10 +771,10 @@ studio:
     private_studio: '프라이빗 스튜디오'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: '크기: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: '유형: 이미지'
+      project: '유형: 프로젝트'
+      sound: '유형: 소리'
+      movie: '유형: 비디오'
+      default: '유형: 불명'

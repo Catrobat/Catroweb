@@ -640,16 +640,16 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+agree: موافق
+disagree: نمی‌پذیرم
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: در حال حاضر هیچ پروفایل وجود ندارد.
+element: 'عنصر'
+elements: 'عنصرها'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
+  text: 'به شراکت بگذار'
+  error: 'اشتراک گذاری ناکام شد'
+  success: 'اشتراكگذاري موفق شد'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
@@ -669,14 +669,14 @@ achievements:
   overview:
     header: 'Achievements'
     most_recent_achievement:
-      title: 'Newest Achievement'
+      title: 'جدیدترین دستاورد'
       x_out_of_y: '%unlocked% out of %total% unlocked'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'باز شد'
+      empty: "تو هنوز هیچ دستاوردی را باز نکردی"
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'قفل شده'
+      empty: "شما هنوز هیچ دستاوردی را باز نکردید"
   popup:
     new:
       title: 'Congratulations!'

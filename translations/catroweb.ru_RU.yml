@@ -776,10 +776,10 @@ studio:
     private_studio: 'Частная студия'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Размер: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'Тип: изображение'
+      project: 'Тип: проект'
+      sound: 'Тип: звук'
+      movie: 'Тип: видео'
+      default: 'Тип: неизвестно'
