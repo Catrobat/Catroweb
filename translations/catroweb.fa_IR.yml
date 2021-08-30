@@ -617,21 +617,21 @@ catro-notifications:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
   success: پیوند به پروژه کپی شده به کلیپ بورد!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  fail: لینک کپی به کلیپ بورد نشد! :(
+next: بعدی
+previous: قبلی
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    sm: کوچک
+    md: متوسط
+    lg: بزرگ
+  theme-special: "%flavor% موضوع ویژه"
+  search-results: نتایج جستجوی کتابخانه رسانه ها
+  no-results: جستجو شما 0 نتیجه را به دست آورد. لطفا فقط از شرایط جستجوی انگلیسی استفاده کنید.
+  download_these_files: ذخیره کن
 flavor:
   pocketcode: پاکت کد
   pocketalice: Pocket Alice
@@ -650,22 +650,22 @@ share:
   text: 'به شراکت بگذار'
   error: 'اشتراک گذاری ناکام شد'
   success: 'اشتراكگذاري موفق شد'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+copy: 'کپی پیوند'
+checkOutProject: 'اتمام این پروژه:'
+community: 'جامعه Catrobat'
+back_to_app: 'خروج از جامعه'
 category:
   recent: جدیدترین پروژه ها
   random: پروژه های تصادفی
   most_viewed: بیشترین بازدید
   most_downloaded: بیشترین برنامه دانلود شده
-  example: Example
+  example: مثال
   scratch: ریمیکس خراش
   recommended: پروژه های توصیه شده
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: 'دستاوردها'
+    badge: 'جدید'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -679,7 +679,7 @@ achievements:
       empty: "شما هنوز هیچ دستاوردی را باز نکردید"
   popup:
     new:
-      title: 'Congratulations!'
+      title: 'تبریک!'
       subtitle: "You've earned a badge"
       confirm: "تائید"
   profile:
