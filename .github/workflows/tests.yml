@@ -13,8 +13,10 @@ on:
   push:
     branches:
       - master
-      - l10n_crowdin_action # translation updates
   pull_request:
+    branches:
+      - '**'        # all branches
+      - '!master'   # excludes master to prevent double test runs during release prep.
 
 
 jobs:
