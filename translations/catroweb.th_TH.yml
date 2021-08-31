@@ -779,10 +779,10 @@ studio:
     private_studio: 'สตูดิโอส่วนตัว'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'ขนาด: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'ประเภท: ภาพ'
+      project: 'ประเภท: โครงการ'
+      sound: 'ประเภท: เสียง'
+      movie: 'ประเภท: วิดีโอ'
+      default: 'ประเภท: ไม่ทราบ'

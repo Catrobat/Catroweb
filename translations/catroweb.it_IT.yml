@@ -778,10 +778,10 @@ studio:
     private_studio: 'Studio Privato'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Dimensione: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'Tipo: immagine'
+      project: 'Tipo: progetto'
+      sound: 'Tipo: suono'
+      movie: 'Tipo: video'
+      default: 'Tipo: sconosciuto'

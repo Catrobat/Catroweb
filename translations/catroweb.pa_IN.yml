@@ -774,10 +774,10 @@ studio:
     private_studio: 'ਪ੍ਰਾਈਵੇਟ ਸਟੂਡੀਓ'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'ਆਕਾਰ: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'ਕਿਸਮ: ਚਿੱਤਰ'
+      project: 'ਕਿਸਮ: ਪ੍ਰੋਜੈਕਟ'
+      sound: 'ਕਿਸਮ: ਆਵਾਜ਼'
+      movie: 'ਕਿਸਮ: ਵੀਡੀਓ'
+      default: 'ਕਿਸਮ: ਅਣਜਾਣ'

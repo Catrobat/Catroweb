@@ -336,7 +336,7 @@ termsOfUse:
   list5:
     item1: 'اگر تو زیر سیزده سال هستی، والدین ویا قیمان قانونی تو با سازمان هایی که به حریم خصوصی تعرض می کنند در ارتباطند،و نظارت فشرده دارند، در این صورت تو اجازه استفاده از اپلیکیشن های نرم افزاری و دسترسی به سرویس های ما رو نداری. جزئیات دقیقتر این شرط و استثنائات خاص آن در قسمت های 4.الف و 4.ب روی %link-termsOfUse% مشخص شده.'
     item2: اگر کمتر از سیزده سال سن داری، باید از والدین و یا قیمین قانونیت اجازه بگیری که از اپلیکیشن ها و سرویس های نرم افزار "کت ربات" استفاده کنی.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
+    item3: "ما حقوق را برای رد کردن، حذف، یا پنهان کردن پروژه ها، حساب های کاربر، و هر گونه مواد دیجیتال به وب سایت های Catrobat در هر زمان که در اختیار ما قرار می دهیم حقوق افراد دیگر."
     item4: "همه ی نرم افزار کت ربات و منابع اینترنتی با امید به مفید بودن اما بدون هیچ تضمینی ارائه می شود."
     item5: "لطفا با ما مشورت کنید\n%link-termsOfUse% developer.catrobat.org/terms_of_use_and_service برای فرمول بندی دقیق نکات فوق و برخی شرایط و ضوابط قانونی اضافی."
   bottom1: مرتب اینجا را چک کن، چون ما همیشه در حال ارتقا ضوابط استفاده هستیم.
@@ -602,9 +602,9 @@ privacy-policy:
 catro-notifications:
   markAsRead: "به عنوان خوانده شده علامت بزن"
   noFollowers: "به نظر می رسد که شما هیچ اطلاعیه ای ندارید."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noComments: "به نظر می رسد که شما هیچ اطلاعیه ای ندارید."
+  noReactions: "به نظر می رسد که شما هیچ اعلان واکنش ندارید."
+  noRemixes: "به نظر می رسد که شما هیچ اطلاعیه ریمیکس ندارید."
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
@@ -616,22 +616,22 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Link to project copied to clipboard!
-  fail: Failed to copy link to clipboard! :(
-next: Next
-previous: Previous
+  success: پیوند به پروژه کپی شده به کلیپ بورد!
+  fail: لینک کپی به کلیپ بورد نشد! :(
+next: بعدی
+previous: قبلی
 media-packages:
   title: Media-Packages
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview size
-    sm: small
-    md: medium
-    lg: large
-  theme-special: "%flavor% Theme Special"
-  search-results: Media library search results
-  no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+    sm: کوچک
+    md: متوسط
+    lg: بزرگ
+  theme-special: "%flavor% موضوع ویژه"
+  search-results: نتایج جستجوی کتابخانه رسانه ها
+  no-results: جستجو شما 0 نتیجه را به دست آورد. لطفا فقط از شرایط جستجوی انگلیسی استفاده کنید.
+  download_these_files: ذخیره کن
 flavor:
   pocketcode: پاکت کد
   pocketalice: Pocket Alice
@@ -640,46 +640,46 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+agree: موافق
+disagree: نمی‌پذیرم
 profileLoader:
-  noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+  noProfiles: در حال حاضر هیچ پروفایل وجود ندارد.
+element: 'عنصر'
+elements: 'عنصرها'
 share:
-  text: 'Share'
-  error: 'Share failed'
-  success: 'Share successful'
-copy: 'Copy link'
-checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
-back_to_app: 'Exit community'
+  text: 'به شراکت بگذار'
+  error: 'اشتراک گذاری ناکام شد'
+  success: 'اشتراكگذاري موفق شد'
+copy: 'کپی پیوند'
+checkOutProject: 'اتمام این پروژه:'
+community: 'جامعه Catrobat'
+back_to_app: 'خروج از جامعه'
 category:
   recent: جدیدترین پروژه ها
   random: پروژه های تصادفی
   most_viewed: بیشترین بازدید
   most_downloaded: بیشترین برنامه دانلود شده
-  example: Example
+  example: مثال
   scratch: ریمیکس خراش
   recommended: پروژه های توصیه شده
 achievements:
   sidebar:
-    title: 'Achievements'
-    badge: 'new'
+    title: 'دستاوردها'
+    badge: 'جدید'
   overview:
     header: 'Achievements'
     most_recent_achievement:
-      title: 'Newest Achievement'
+      title: 'جدیدترین دستاورد'
       x_out_of_y: '%unlocked% out of %total% unlocked'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'باز شد'
+      empty: "تو هنوز هیچ دستاوردی را باز نکردی"
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'قفل شده'
+      empty: "شما هنوز هیچ دستاوردی را باز نکردید"
   popup:
     new:
-      title: 'Congratulations!'
+      title: 'تبریک!'
       subtitle: "You've earned a badge"
       confirm: "تائید"
   profile:

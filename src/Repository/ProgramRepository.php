@@ -490,7 +490,7 @@ class ProgramRepository extends ServiceEntityRepository
   {
     try {
       return intval($query_builder->getQuery()->getSingleScalarResult());
-    } catch (NoResultException | NonUniqueResultException $e) {
+    } catch (NoResultException|NonUniqueResultException $e) {
       return 0;
     }
   }

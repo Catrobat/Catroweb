@@ -774,10 +774,10 @@ studio:
     private_studio: '私人工作室'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: '大小：%size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: '類型：圖像'
+      project: '類型：項目'
+      sound: '類型：聲音'
+      movie: '類型：視頻'
+      default: '類型：未知'

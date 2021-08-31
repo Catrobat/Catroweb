@@ -774,10 +774,10 @@ studio:
     private_studio: 'プライベートスタジオ'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'サイズ：%size%。'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'タイプ：画像'
+      project: 'タイプ：プロジェクト'
+      sound: 'タイプ：サウンド'
+      movie: 'タイプ：ビデオ'
+      default: 'タイプ：不明'
