@@ -19,6 +19,15 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'project_machine_translation';
 
   /**
+   * @return array
+   */
+  public function getExportFields()
+  {
+    return ['id', 'project.id', 'project.name', 'source_language', 'target_language', 'provider', 'usage_count',
+      'usage_per_month', 'last_modified_at', 'created_at', ];
+  }
+
+  /**
    * @param ListMapper $list
    *
    * Fields to be shown on lists
@@ -41,7 +50,6 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection
-      ->remove('export')
       ->remove('acl')
       ->remove('delete')
       ->remove('create')
