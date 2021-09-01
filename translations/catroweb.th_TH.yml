@@ -28,7 +28,7 @@ description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
 credits: เครดิต
 noCredits: ไม่มีเครดิต
-notesAndCreditsDescription: คุณสร้างโครงการนี้ได้อย่างไร คุณใช้ไอเดียสคริปต์หรืออาร์ตเวิร์คจากคนอื่นหรือไม่? ขอบคุณพวกเขาที่นี่
+notesAndCreditsDescription: คุณสร้างโครงการนี้ได้อย่างไร? คุณใช้ความคิด สคริปต์ หรืองานศิลปะจากผู้อื่นหรือไม่ ขอบคุณพวกเขาที่นี่
 country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
@@ -187,7 +187,7 @@ remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
   by: 'โดย'
-  open: 'เปิด​ '
+  open: 'เปิด​'
   showPaths: 'แสดงเส้นทาง'
   programNotAvailableErrorTitle: 'ขออภัย...'
   programNotAvailableErrorDescription: 'โครงการไม่สามารถใช้งานได้อีกต่อไป!'
@@ -611,15 +611,15 @@ catro-notifications:
   noReactions: "ดูเหมือนว่าคุณไม่มีการแจ้งเตือนปฏิกิริยาใด ๆ"
   noRemixes: "ดูเหมือนว่าคุณจะไม่มีการแจ้งเตือนการรีมิกซ์"
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% แสดงความคิดเห็นใน%program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% ได้ตอบกลับ %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% กำลังติดตามคุณอยู่'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% สร้างเกมใหม่ %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% สร้างรีมิกซ์ %program_link% ของเกมของคุณ %remix_program_link%'
 clipboard:
   success: คัดลอกลิงก์ไปยังโครงการไปยังคลิปบอร์ดแล้ว!
   fail: คัดลอกลิงก์ไปยังคลิปบอร์ดไม่สำเร็จ! :(
@@ -736,7 +736,7 @@ extensions:
     phiro:
       title: ฟีโร
     raspberry_pi:
-      title: Raspberry PI
+      title: ราสป์เบอร์รีพาย
     embroidery:
       title: การตกแต่ง
     mindstorms:
