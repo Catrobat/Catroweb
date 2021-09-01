@@ -640,6 +640,7 @@ class ApiContext implements KernelAwareContext
 
   /**
    * @Given /^I have a request header "([^"]*)" with value "([^"]*)"$/
+   * @Given /^I have a request header "([^"]*)" with value '([^']*)'$/
    */
   public function iHaveARequestHeaderWithValue(string $name, string $value): void
   {

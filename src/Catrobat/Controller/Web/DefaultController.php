@@ -202,6 +202,15 @@ class DefaultController extends AbstractController
   public function languagesAction(Request $request): Response
   {
     $display_locale = $request->getLocale();
+
+    $response = new JsonResponse();
+    $response->setEtag($display_locale);
+    $response->setPublic();
+
+    if ($response->isNotModified($request)) {
+      return $response;
+    }
+
     $all_locales = Locales::getNames($display_locale);
 
     $all_locales = array_filter($all_locales, function ($key) {
@@ -213,6 +222,6 @@ class DefaultController extends AbstractController
       $locales[str_replace('_', '-', $key)] = $value;
     }
 
-    return JsonResponse::create($locales);
+    return $response->setData($locales);
   }
 }
