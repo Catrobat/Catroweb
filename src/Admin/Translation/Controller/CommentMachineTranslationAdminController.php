@@ -2,7 +2,7 @@
 
 namespace App\Admin\Translation\Controller;
 
-class CommentMachineTranslationAdminController extends MachineTranslationAdminController
+class CommentMachineTranslationAdminController extends AbstractMachineTranslationAdminController
 {
   public function __construct()
   {

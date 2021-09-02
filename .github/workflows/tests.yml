@@ -145,6 +145,7 @@ jobs:
           - api-projects
           - api-user
           - api-utility
+          - api-translation
 
           - api-deprecated-general
           - api-deprecated-project

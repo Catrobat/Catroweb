@@ -3,17 +3,50 @@
 namespace App\Translation;
 
 use App\Entity\Program;
+use App\Repository\ProjectCustomTranslationRepository;
 use InvalidArgumentException;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 
 class TranslationDelegate
 {
+  private ProjectCustomTranslationRepository $project_custom_translation_repository;
   private array $apis;
 
-  public function __construct(TranslationApiInterface ...$apis)
+  public function __construct(ProjectCustomTranslationRepository $project_custom_translation_repository, TranslationApiInterface ...$apis)
   {
+    $this->project_custom_translation_repository = $project_custom_translation_repository;
     $this->apis = $apis;
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
+  public function addProjectNameCustomTranslation(Program $project, string $target_language, string $name_translation): bool
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->addNameTranslation($project, $target_language, $name_translation);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
+  public function addProjectDescriptionCustomTranslation(Program $project, string $target_language, string $description_translation): bool
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->addDescriptionTranslation($project, $target_language, $description_translation);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
+  public function addProjectCreditCustomTranslation(Program $project, string $target_language, string $credit_translation): bool
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->addCreditTranslation($project, $target_language, $credit_translation);
   }
 
   /**

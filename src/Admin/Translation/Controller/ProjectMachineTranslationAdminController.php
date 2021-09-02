@@ -2,7 +2,7 @@
 
 namespace App\Admin\Translation\Controller;
 
-class ProjectMachineTranslationAdminController extends MachineTranslationAdminController
+class ProjectMachineTranslationAdminController extends AbstractMachineTranslationAdminController
 {
   public function __construct()
   {

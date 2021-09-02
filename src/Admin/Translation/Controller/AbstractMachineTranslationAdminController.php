@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-abstract class MachineTranslationAdminController extends CRUDController
+abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
   public const TYPE_PROJECT = 'TYPE_PROJECT';
   public const TYPE_COMMENT = 'TYPE_COMMENT';

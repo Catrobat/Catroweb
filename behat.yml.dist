@@ -98,6 +98,13 @@ default:
                 - Tests\behat\context\ApiContext
                 - Tests\behat\context\CatrowebBrowserContext
 
+        api-translation:
+            paths:    [ "tests/behat/features/api/translation" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+
 ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###   ###
 
         api-deprecated-general:
