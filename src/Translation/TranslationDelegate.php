@@ -32,6 +32,16 @@ class TranslationDelegate
   /**
    * @throws InvalidArgumentException
    */
+  public function getProjectNameCustomTranslation(Program $project, string $target_language): ?string
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->getNameTranslation($project, $target_language);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
   public function addProjectDescriptionCustomTranslation(Program $project, string $target_language, string $description_translation): bool
   {
     $this->validateLanguage($target_language);
@@ -42,11 +52,31 @@ class TranslationDelegate
   /**
    * @throws InvalidArgumentException
    */
+  public function getProjectDescriptionCustomTranslation(Program $project, string $target_language): ?string
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->getDescriptionTranslation($project, $target_language);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
   public function addProjectCreditCustomTranslation(Program $project, string $target_language, string $credit_translation): bool
   {
     $this->validateLanguage($target_language);
 
     return $this->project_custom_translation_repository->addCreditTranslation($project, $target_language, $credit_translation);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
+  public function getProjectCreditCustomTranslation(Program $project, string $target_language): ?string
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->getCreditTranslation($project, $target_language);
   }
 
   /**
