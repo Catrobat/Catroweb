@@ -621,10 +621,10 @@ clipboard:
 next: بعدی
 previous: قبلی
 media-packages:
-  title: Media-Packages
+  title: بسته های رسانه ای
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
-    description: Preview size
+    description: اندازه پیش نمایش
     sm: کوچک
     md: متوسط
     lg: بزرگ
@@ -667,7 +667,7 @@ achievements:
     title: 'دستاوردها'
     badge: 'جدید'
   overview:
-    header: 'Achievements'
+    header: 'دستاوردها'
     most_recent_achievement:
       title: 'جدیدترین دستاورد'
       x_out_of_y: '%unlocked% out of %total% unlocked'
@@ -683,38 +683,38 @@ achievements:
       subtitle: "You've earned a badge"
       confirm: "تائید"
   profile:
-    title: 'Achievements'
+    title: 'دستاوردها'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'شاگرد کارآموز'
+        description: 'دنبال کردن کسی و آپلود یک پروژه'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'هنرمند'
+        description: 'عضو فعال برای > 1 سال'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'ماستر'
+        description: 'عضو فعال برای> ۴ سال'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'استاد بزرگ'
+        description: 'عضو فعال برای> ۷ سال'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'ابتکار عمل'
+        description: 'اولین تصویر نمایه خود را اضافه کنید۱'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'مبتدی'
+        description: 'یک حساب کاربری ایجاد کنید'
 tags:
   title: برچسب‌ها
   tag:
     game:
-      title: Game
+      title: بازی
     animation:
-      title: Animation
+      title: انیمیشن
     story:
-      title: Story
+      title: داستان
     music:
-      title: Music
+      title: موسیقی
     art:
       title: Art
     experimental:
@@ -751,33 +751,33 @@ studio:
     remove_project_error: 'Failed to remove project from studio!'
     remove_project_success: 'project removed successfully from studio!'
     no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
+    no_comments: 'استودیو هنوز هیچ نظری را ندارد'
+    type_something: 'چیزی را تایپ کنید'
+    send_comment: 'ارسال'
+    comment_error: 'در هنگام ارسال نظر خود چیزی اشتباه رفت!'
+    remove_comment_error: 'چیزی اشتباه رفت و در هنگام برداشتن نظر اشتباه کرد!'
+    replies: 'پاسخ ها'
+    updateCoverError: 'در حالی که به روز رسانی پوشش استودیو، چیزی اشتباه رفت!'
+    created_studio: 'استودیو را ایجاد کرد'
+    activity: 'فعالیت'
+    activity_add_comment: 'کامنتی بگذارید'
     activity_add_project: 'added new project %project% to the studio'
     activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
+    members: 'اعضای استودیو'
+    remove_user: 'حذف از استودیو'
+    promote_user: 'ترویج به مدیر'
+    promote_failed: 'موفق به ترویج این کاربر به مدیر نشد'
+    ban_user_failed: 'موفق به ممنوعیت کاربر از استودیو!'
+    general_settings: 'تنظیمات عمومی'
+    studio_name: 'نام استودیو'
     studio_desc: 'توضیح'
     private_studio: 'Private Studio'
 media_library:
   file:
     size: 'Size: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
+      image: 'نوع: تصویر'
+      project: 'نوع: پروژه'
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
