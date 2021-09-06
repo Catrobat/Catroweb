@@ -716,18 +716,18 @@ tags:
     music:
       title: موسیقی
     art:
-      title: Art
+      title: هنر
     experimental:
-      title: Experimental
+      title: آزمایشی
     tutorial:
-      title: Tutorial
+      title: آموزش
 extensions:
-  title: Extensions
+  title: پسوند‌ها
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: کوادکوپتر
     phiro:
       title: Phiro
     raspberry_pi:
@@ -738,19 +738,19 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
+    general: 'عمومی'
+    projects: 'پروژه ها'
     comments: 'نظرات'
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
+    public: 'عمومی'
+    private: 'شخصی'
+    join: 'بپیوست'
+    leave: 'ترک کن'
+    showMore: 'نمایش بیشتر'
+    showLess: 'نمایش کمتر'
+    remove_project: 'حذف از استودیو'
+    remove_project_error: 'پروژه را از استودیو حذف نکرد!'
+    remove_project_success: 'پروژه با موفقیت از استودیو حذف شد!'
+    no_projects: 'استودیو هیچ پروژه ای را شامل نمی شود'
     no_comments: 'استودیو هنوز هیچ نظری را ندارد'
     type_something: 'چیزی را تایپ کنید'
     send_comment: 'ارسال'
@@ -778,6 +778,6 @@ media_library:
     type_description:
       image: 'نوع: تصویر'
       project: 'نوع: پروژه'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      sound: 'نوع: صدا'
+      movie: 'نوع: ویدئو'
+      default: 'نوع: ناشناخته'
