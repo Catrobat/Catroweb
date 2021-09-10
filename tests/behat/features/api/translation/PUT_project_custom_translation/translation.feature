@@ -1,5 +1,5 @@
-@web
-Feature: Server stores and retrieves custom translation
+@api
+Feature: Server stores new custom translation
 
   Background:
     Given there are users:
@@ -92,3 +92,14 @@ Feature: Server stores and retrieves custom translation
       | name        |
       | description |
       | credit      |
+
+  Scenario: Return error when invalid field name is used
+    Given there are project custom translations:
+      | project_id | language | name            | description            | credit            |
+      | 1          | fr       | translated name | translated description | translated credit |
+    When I POST login with user "Catrobat" and password "123456"
+    And I request "PUT" "/app/translate/custom/project/1?field=other&language=fr&text=new"
+    Then the response status code should be "400"
+    And there should be project custom translations:
+      | project_id | language | name            | description            | credit            |
+      | 1          | fr       | translated name | translated description | translated credit |
