@@ -106,13 +106,13 @@ programs:
     بله، آن را حذف کنید!
     لغو
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    مطمئنی؟
+    اگر تو '%programName%' را به خصوصی تنظیم کنی، آن را توسط کاربران دیگر دیده نمی شود و یا یافت نمی شود.
+    شما هنوز هم می توانید لینک پروژه خود را با دوستان خود به اشتراک بگذارید. شما می توانید دید را تغییر دهید تا نماد قفل را لمس کنید.
+    اگر شما "%programName%" را به طور عمومی تنظیم کنید، می توان آن را دیده و توسط کاربران دیگر دیده می شود.
+    بله، به طور عمومی تنظیم شود
+    بله، به خصوصی تنظیم شود
+    نخیر
   reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
   deleteCommentConfirmation: آیا مطمئن هستید که می خواهید این نظر را حذف کنید؟
   deleteAccountConfirmation: |+
@@ -527,7 +527,7 @@ admin:
 recommender:
   similarPrograms: پروژه های مشابه
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: کاربران که این پروژه را دانلود کرده اند نیز دانلود شده اند
-  moreFromThisUser: More from %username%
+  moreFromThisUser: بیشتر مورد %username%
 pmd:
   submitBtn: پروژه ات را ارسال کن
   submitBox:
@@ -593,7 +593,7 @@ privacy-policy:
   text3: برای ایجاد و استفاده از یک حساب کاربری در سیستم های ما، و به شما در مورد تغییرات لازم در مورد حساب خود در هر ایمیل، به عنوان مثال، به روز رسانی یا نقض شرایط استفاده و خدمات ما، قوانین جامعه ما یا سیاست های ما، ما را ذخیره خواهیم کرد نام کاربری و، اگر توسط شما ارائه شده، آدرس ایمیل شما. اگر حساب خود را از طریق Google Plus یا فیس بوک متصل کرده اید، علاوه بر این کلید شناسایی مرتبط با حساب کاربری خود را در این خدمات ذخیره کنید. ما از این داده ها برای اهداف دیگر (به عنوان مثال، بازاریابی) استفاده نخواهیم کرد، مگر اینکه به صراحت به ما اجازه داد تا این کار را انجام دهیم.
   text4: به طور داوطلبانه، شما می توانید کشور خود را از محل اقامت خود را از طریق صفحه حساب خود در سایت به اشتراک گذاری به ما بدهید. این در نمایه عمومی شما نمایش داده می شود و تنها برای اهداف آماری و تحقیقاتی توسط ما استفاده می شود. این را می توان در هر زمان در تنظیمات نمایه خود حذف کرد.
   text5: You can withdraw the usage of the personal data belonging to your account at any time by deleting your account through your profile page on https://share.catrob.at/. After deleting your account you will still be able to use the provided services, but not to collaborate, e.g., through uploading programs, commenting, or liking. Also, all provided content linked to your account, e.g., uploaded programs, comments, etc., will be deleted.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
+  text6: برای اجتناب از سوء استفاده از خدمات ما، به عنوان مثال، از طریق کاربر آپلود یا نظرات غیرقانونی، تمام داده های عمومی تولید شده (آپلود ها، نظرات) به صورت داخلی در یک پایگاه داده ذخیره می شود، همراه با یک نوار تایپ و آدرس اینترنت استفاده می شود. این داده ها به هیچ وجه به هیچ وجه مورد استفاده قرار نمی گیرند، مگر اینکه اقدامات غیرقانونی غیرقانونی به طور منطقی مظنون باشند و به طور رسمی موسسات حقوقی را بر اساس قانون قابل اجرا درخواست کنند. هر قضیه به طور کامل بر اساس یک فرد اول توسط ما بررسی خواهد شد.
   text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: در صورتی که شما کمتر از ۱۴ ساله هستید، این سیاست باید توسط یک سرپرست قانونی (معمولا یک والد) پذیرفته شود.
