@@ -129,6 +129,75 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     return null === $translation ? null : $translation->getCredits();
   }
 
+  public function deleteNameTranslation(Program $project, string $language): bool
+  {
+    $translation = $this->findTranslation($project, $language);
+
+    if (null === $translation) {
+      return true;
+    }
+
+    try {
+      if (null === $translation->getDescription() && null === $translation->getCredits()) {
+        $this->getEntityManager()->remove($translation);
+      } else {
+        $translation->setName(null);
+        $this->getEntityManager()->persist($translation);
+      }
+      $this->getEntityManager()->flush();
+    } catch (ORMException $e) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public function deleteDescriptionTranslation(Program $project, string $language): bool
+  {
+    $translation = $this->findTranslation($project, $language);
+
+    if (null === $translation) {
+      return true;
+    }
+
+    try {
+      if (null === $translation->getName() && null === $translation->getCredits()) {
+        $this->getEntityManager()->remove($translation);
+      } else {
+        $translation->setDescription(null);
+        $this->getEntityManager()->persist($translation);
+      }
+      $this->getEntityManager()->flush();
+    } catch (ORMException $e) {
+      return false;
+    }
+
+    return true;
+  }
+
+  public function deleteCreditTranslation(Program $project, string $language): bool
+  {
+    $translation = $this->findTranslation($project, $language);
+
+    if (null === $translation) {
+      return true;
+    }
+
+    try {
+      if (null === $translation->getDescription() && null === $translation->getName()) {
+        $this->getEntityManager()->remove($translation);
+      } else {
+        $translation->setCredits(null);
+        $this->getEntityManager()->persist($translation);
+      }
+      $this->getEntityManager()->flush();
+    } catch (ORMException $e) {
+      return false;
+    }
+
+    return true;
+  }
+
   private function findTranslation(Program $project, string $language): ?ProjectCustomTranslation
   {
     return $this->findOneBy($this->getCriteria($project, $language));

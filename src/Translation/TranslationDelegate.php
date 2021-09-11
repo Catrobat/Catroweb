@@ -42,6 +42,16 @@ class TranslationDelegate
   /**
    * @throws InvalidArgumentException
    */
+  public function deleteProjectNameCustomTranslation(Program $project, string $target_language): bool
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->deleteNameTranslation($project, $target_language);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
   public function addProjectDescriptionCustomTranslation(Program $project, string $target_language, string $description_translation): bool
   {
     $this->validateLanguage($target_language);
@@ -62,6 +72,16 @@ class TranslationDelegate
   /**
    * @throws InvalidArgumentException
    */
+  public function deleteProjectDescriptionCustomTranslation(Program $project, string $target_language): bool
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->deleteDescriptionTranslation($project, $target_language);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
   public function addProjectCreditCustomTranslation(Program $project, string $target_language, string $credit_translation): bool
   {
     $this->validateLanguage($target_language);
@@ -77,6 +97,16 @@ class TranslationDelegate
     $this->validateLanguage($target_language);
 
     return $this->project_custom_translation_repository->getCreditTranslation($project, $target_language);
+  }
+
+  /**
+   * @throws InvalidArgumentException
+   */
+  public function deleteProjectCreditCustomTranslation(Program $project, string $target_language): bool
+  {
+    $this->validateLanguage($target_language);
+
+    return $this->project_custom_translation_repository->deleteCreditTranslation($project, $target_language);
   }
 
   /**
