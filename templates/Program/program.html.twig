@@ -1,12 +1,12 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/program.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/modal.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/card.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}"/>
-  <link rel="preload" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" as="style">
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/project_list.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/program.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('build/css/modal.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('build/css/card.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}"/>
+  <link rel="preload" href="{{ asset('build/css/project_list.css') }}" as="style">
+  <link rel="stylesheet" href="{{ asset('build/css/project_list.css') }}" media="screen"/>
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>
@@ -179,8 +179,8 @@
   <script>const theme = '{{ theme() }}'</script>
   <script>const flavor = '{{ flavor() }}'</script>
   <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
-  <script src="{{ asset('js/ProjectList.min.js') }}"></script>
-  <script src="{{ asset('js/ImageUpload.min.js') }}"></script>
+  <script src="{{ asset('js/ProjectList.js') }}"></script>
+  <script src="{{ asset('js/ImageUpload.js') }}"></script>
   <script>
     setImageUploadListener('{{ path('upload_project_thumbnail', { 'id': program.id }) }}',
       '#change-project-thumbnail-button', '#project-thumbnail-big',
@@ -190,8 +190,8 @@
     )
   </script>
 
-  <script src="{{ asset('js/Program.min.js') }}"></script>
-  <script src="{{ asset('js/ProgramReport.min.js') }}"></script>
+  <script src="{{ asset('js/Program.js') }}"></script>
+  <script src="{{ asset('js/ProgramReport.js') }}"></script>
   <script>
     new ProgramReport('{{ program.id }}', '{{ path('catrobat_api_report_program') }}', '{{ url('login') }}',
       "{{ 'success.report'                          |trans({}, 'catroweb') }}",
@@ -209,7 +209,7 @@
     )
   </script>
   {{ encore_entry_script_tags('report') }}
-  <script src="{{ asset('js/ProgramComments.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramComments.js') }}"></script>
   <script>
     new ProgramComments('{{ program_details.id }}', 5, 5, 5, {{ (program_details.comments|length) }},
       "{{ 'cancel'                                  |trans({}, 'catroweb') }}",
@@ -230,7 +230,7 @@
       "{{ constant('App\\Catrobat\\StatusCode::NO_ADMIN_RIGHTS') }}"
     )
   </script>
-  <script src="{{ asset('js/ProgramDescription.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramDescription.js') }}"></script>
   <script>
     new ProgramDescription('{{ program.id }}',
       '{{ ("more-information")                      |trans({}, "catroweb") }}',
@@ -240,7 +240,7 @@
     )
   </script>
 
-  <script src="{{ asset('js/ProgramCredits.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramCredits.js') }}"></script>
   <script>
     new ProgramCredits('{{ program.id }}',
       '{{ ("more-information")                      |trans({}, "catroweb") }}',
@@ -250,7 +250,7 @@
     )
   </script>
 
-  <script src="{{ asset('js/ProgramShare.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramShare.js') }}"></script>
   <script src=" {{ asset( 'js/modules/clipboard.min.js') }}"></script>
   <script>
     let share = new ProgramShare('{{ getThemeDisplayName() }}',
@@ -288,7 +288,7 @@
     program.createLinks()
   </script>
 
-  <script src="{{ asset('js/ProgramRecommender.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramRecommender.js') }}"></script>
   <script>
     const $recommendedProjects = $('#recommended-projects')
     $('.project-list', $recommendedProjects).each(function () {
@@ -316,11 +316,11 @@
     )
     programRecommender.init()
   </script>
-  <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
+  <script src="{{ asset('js/PasswordVisibilityToggler.js') }}"></script>
 
-  <script src=" {{ asset( 'js/Translation.min.js') }}"></script>
+  <script src=" {{ asset( 'js/Translation.js') }}"></script>
 
-  <script src=" {{ asset( 'js/TranslateProgram.min.js') }}"></script>
+  <script src=" {{ asset( 'js/TranslateProgram.js') }}"></script>
   <script>
     new TranslateProgram(
       '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}',
@@ -330,7 +330,7 @@
     )
   </script>
 
-  <script src=" {{ asset( 'js/TranslateComments.min.js') }}"></script>
+  <script src=" {{ asset( 'js/TranslateComments.js') }}"></script>
   <script>
     new TranslateComments(
       '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}',

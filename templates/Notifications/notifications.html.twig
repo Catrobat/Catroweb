@@ -1,7 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/notifications.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('build/css/notifications.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -154,7 +154,7 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('js/UserNotifications.min.js') }}"></script>
+  <script src="{{ asset('js/UserNotifications.js') }}"></script>
   <script>
     let notification = new UserNotifications(
       "{{ url('notification_mark_as_read') }}",

@@ -117,13 +117,9 @@ task('install:npm', function () {
   cd('{{release_path}}');
   run('npm install');
 });
-task('deploy:grunt', function () {
-  cd('{{release_path}}');
-  run('grunt');
-});
 task('deploy:encore', function () {
   cd('{{release_path}}');
-  run('npm run encore dev');
+  run('npm run encore prod');
 });
 
 task('deploy:jwt', function () {
@@ -173,7 +169,6 @@ task('deploy', [
   'deploy:symlink',
   'database:migrate',
   'install:npm',
-  'deploy:grunt',
   'deploy:encore',
   'deploy:jwt',
   'restart:nginx',

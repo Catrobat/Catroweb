@@ -1,0 +1,14 @@
+@import "../base/variables";
+// @import "theme_settings";
+
+
+#search-results-text {
+  padding-top: 10px;
+  font-size: $default-font-size + 0.25;
+}
+
+#search-results-text.no-results {
+  font-size: $default-font-size + 0.5;
+  font-weight: $font-weight-bold;
+  text-align: center;
+}

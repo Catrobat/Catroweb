@@ -7,7 +7,7 @@ RUN composer install --no-scripts
 FROM node:16 AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm install && npm install grunt
+RUN npm install && npm install -g @symfony/webpack-encore
 
 # Run on:
 FROM debian:buster
@@ -43,8 +43,7 @@ RUN apt-get update && \
     curl \
     libgconf-2-4 \
     npm
-RUN npm install -g grunt-cli && \
-    npm install -g sass
+RUN npm install -g sass
 
 # Overwrite default apache config
 RUN a2enmod rewrite
@@ -101,9 +100,7 @@ COPY --from=composer-build /app/bin bin
 # Finally we set all permissions, and create required keys and test fixtures.
 RUN sh docker/app/prepare-test-env.sh
 
-# (Re-)compile public css/js files
-RUN grunt
-
-RUN npm run encore dev
+# Run webpack encore to (re-)compile public css/js files
+RUN npm run dev
 
 EXPOSE 80

@@ -117,7 +117,7 @@
 {% block javascripts %}
   {{ parent() }}
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script src="{{ asset('js/AdminMaintain.min.js') }}"></script>
+  <script src="{{ asset('js/AdminMaintain.js') }}"></script>
   <script>
     let data_space_values = [['name', 'value'],
       ['Used ({{ usedSpace }})',          {{ usedSpace_raw }}],

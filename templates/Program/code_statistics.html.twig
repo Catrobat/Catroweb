@@ -3,7 +3,7 @@
 {% block back_path %}{{ path('program', { 'id' : id }) }}{% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/card.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('build/css/card.css') }}"/>
 {% endblock %}
 
 {% block body %}
@@ -17,7 +17,7 @@
            aria-expanded="true"
            aria-controls="collapseGeneral">
         {{ "codeStatistics.general"|trans({}, "catroweb") }}
-        <i class="material-icons rotate-left" style="visibility: hidden">chevron_left</i>
+        <i class="material-icons rotate-left" style="visibility: hidden;">chevron_left</i>
       </div>
 
       <div id="collapseGeneral" class="collapse show" aria-labelledby="statisticsGeneral"
@@ -47,7 +47,7 @@
            aria-expanded="true"
            aria-controls="collapseBricks">
         {{ "codeStatistics.bricks"|trans({}, "catroweb") }}
-        <i class="material-icons rotate-left" style="visibility: hidden">chevron_left</i>
+        <i class="material-icons rotate-left" style="visibility: hidden;">chevron_left</i>
       </div>
 
       <div id="collapseBricks" class="collapse show" aria-labelledby="statisticsBricks"

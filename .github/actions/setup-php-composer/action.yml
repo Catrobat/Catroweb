@@ -11,6 +11,8 @@ runs:
     - name: "Install dependencies (php-imagick)"
       shell: bash
       run: |
+        sudo apt-get update
+        sudo apt-get upgrade
         sudo apt-get install php-imagick
 
     - name: "Ensure composer configuration is valid"

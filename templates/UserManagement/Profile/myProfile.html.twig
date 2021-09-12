@@ -1,8 +1,8 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/login.css') }}" media="screen"/>
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/login_styles.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -20,8 +20,8 @@
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('js/MyProfile.min.js') }}"></script>
-  <script src="{{ asset('js/PasswordVisibilityToggler.min.js') }}"></script>
+  <script src="{{ asset('js/MyProfile.js') }}"></script>
+  <script src="{{ asset('js/PasswordVisibilityToggler.js') }}"></script>
 
   <script>
     let programs = new ProjectLoader('#myprofile-programs', '{{ path('api_user_programs') }}')
@@ -53,7 +53,7 @@
     )
     programs.initProfile('{{ app.user.id }}')
   </script>
-  <script src="{{ asset('js/ImageUpload.min.js') }}"></script>
+  <script src="{{ asset('js/ImageUpload.js') }}"></script>
   <script>
     setImageUploadListener('{{ path('profile_upload_avatar') }}',
       '#avatar-upload', '#avatar-img',

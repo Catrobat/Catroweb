@@ -1,0 +1,18 @@
+@import "../base/variables";
+
+.swal2-styled {
+  &.swal2-confirm {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+  }
+}
+
+.swal2-actions {
+  button {
+    margin: 0 5px;
+  }
+}
+
+.swal2-container {
+  z-index: 10000 !important;
+}

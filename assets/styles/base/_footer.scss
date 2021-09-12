@@ -1,0 +1,48 @@
+@import "variables";
+@import "~@material/form-field/mdc-form-field";
+@import "~@material/select/mdc-select";
+
+// Keep the footer at the bottom at all time.
+
+html,
+body {
+  height: 100%;
+}
+
+#page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  min-height: 100%;
+  margin: 0 auto;
+}
+
+// ----
+
+
+.footer {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  color: $footer-color;
+  background-color: $footer-background-color;
+
+  a {
+    color: inherit;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+
+  ul {
+    padding: 0;
+    list-style: none;
+
+    .list-vertical {
+      li {
+        display: block;
+        hyphens: auto;
+      }
+    }
+  }
+}
