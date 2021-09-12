@@ -27,6 +27,7 @@ use App\Entity\RemixNotification;
 use App\Entity\Survey;
 use App\Entity\Tag;
 use App\Entity\Translation\CommentMachineTranslation;
+use App\Entity\Translation\ProjectCustomTranslation;
 use App\Entity\Translation\ProjectMachineTranslation;
 use App\Entity\User;
 use App\Entity\UserComment;
@@ -1523,6 +1524,63 @@ class DataFixturesContext implements KernelAwareContext
         });
 
       Assert::assertEquals(1, count($matching_row), "row not found: {$comment_id}");
+    }
+  }
+
+  /**
+   * @Given there are project custom translations:
+   */
+  public function thereAreProjectCustomTranslations(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      $project = $this->getProgramManager()->find($config['project_id']);
+      $language = $config['language'];
+      $name = $config['name'];
+      $description = $config['description'];
+      $credit = $config['credit'];
+
+      $project_custom_translation = new ProjectCustomTranslation($project, $language);
+      $project_custom_translation->setName($name);
+      $project_custom_translation->setDescription($description);
+      $project_custom_translation->setCredits($credit);
+      $this->getManager()->persist($project_custom_translation);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Then there should be project custom translations:
+   */
+  public function thereShouldBeProjectCustomTranslations(TableNode $table): void
+  {
+    /** @var ProjectCustomTranslation[] $project_custom_translations */
+    $project_custom_translations = $this->getManager()->getRepository(ProjectCustomTranslation::class)->findAll();
+    // The returned entities may not be up to date
+    foreach ($project_custom_translations as $translation) {
+      $this->getManager()->refresh($translation);
+    }
+    $table_rows = $table->getHash();
+
+    Assert::assertEquals(count($project_custom_translations), count($table_rows), 'table has different number of rows');
+
+    foreach ($project_custom_translations as $translation) {
+      $project = $translation->getProject();
+      $project_id = $project->getId();
+      $language = $translation->getLanguage();
+      $name = $translation->getName();
+      $description = $translation->getDescription();
+      $credit = $translation->getCredits();
+
+      $matching_row = array_filter($table_rows,
+        function ($row) use ($project_id, $language, $name, $description, $credit) {
+          return $project_id == $row['project_id']
+            && $language == $row['language']
+            && $name == $row['name']
+            && $description == $row['description']
+            && $credit == $row['credit'];
+        });
+
+      Assert::assertEquals(1, count($matching_row), "row not found: {$project_id}");
     }
   }
 }

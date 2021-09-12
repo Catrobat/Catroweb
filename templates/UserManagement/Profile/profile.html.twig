@@ -1,8 +1,8 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/profile.css') }}" media="screen"/>
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/achievements.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/achievements.css') }}" media="screen"/>
 {% endblock %}
 
 {% block body %}
@@ -170,7 +170,7 @@
     programs.loadProjects('{{ profile.id }}')
   </script>
 
-  <script src="{{ asset('js/Follower.min.js') }}"></script>
+  <script src="{{ asset('js/Follower.js') }}"></script>
 
   <script>
     let followers = new Follower(

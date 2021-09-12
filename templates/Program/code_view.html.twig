@@ -6,7 +6,7 @@
 
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/card.css') }}"/>
+  <link rel="stylesheet" href="{{ asset('build/css/card.css') }}"/>
 
   {% if isVersionSupportedByCatBlocks(version) %}
     <link rel="stylesheet" href="{{ asset('catblocks/main.css') }}"/>
@@ -35,11 +35,11 @@
 
 {% block js %}
 
-<script src="{{ asset('js/OldCodeView.min.js') }}"></script>
+<script src="{{ asset('js/OldCodeView.js') }}"></script>
 
 {% if isVersionSupportedByCatBlocks(version) %}
   <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
-  <script src="{{ asset('js/ProgramCodeView.min.js') }}"></script>
+  <script src="{{ asset('js/ProgramCodeView.js') }}"></script>
   <script>
     let codeView = new ProgramCodeView('{{ app.request.getSchemeAndHttpHost() ~ '/' }}',
       '{{ extracted_path }}', '{{ extracted_dir_hash }}',

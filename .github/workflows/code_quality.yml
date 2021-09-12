@@ -29,8 +29,6 @@
 #   - Composites:
 #
 #      By using composites to build the jobs, a lot of duplicated code can be prevent.
-#      ToDo: As soon as Github Action have `uses` support use composites to prevent the duplicated (build/cache) code
-#      (https://github.com/actions/runner/issues/646)
 #
 name: "Static analysis"
 
@@ -41,9 +39,10 @@ on:
   push:
     branches:
       - master
-      - l10n_crowdin_action # translation updates
   pull_request:
-
+    branches:
+      - '**'        # all branches
+      - '!master'   # excludes master to prevent double test runs during release prep.
 
 jobs:
 
@@ -54,6 +53,7 @@ jobs:
   #  - Statically analyzes javascript code (depends on on node and npm)
   #  - Config defined in .eslintrc.yml
   #  - Automatic fix support
+  #  - npm "test" script must be defined in package.json
   #  - More information at: (https://eslint.org/)
   #
   eslint:
@@ -61,28 +61,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      # Download and set up node (caching is enabled)
-      - uses: actions/setup-node@v2.4.0
-        with:
-          node-version: '10.x'  # optional
-
-      # Optional - improve performance by caching
-      - id: npm-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # Only install modules if there is no cache hit
-      - if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm ci
-
-      # Run the checks -> test script must be defined in package.json
+      - name: "Setup Node and npm modules"
+        uses: ./.github/actions/setup-npm-node-modules
       - run: npm run test
-
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Sass,CSS **
@@ -92,35 +73,16 @@ jobs:
   #  - Config defined in .stylelintrc.json
   #  - Automatic fix support
   #  - More information at: https://stylelint.io/
+  #  - "test-style" script is defined in package.json to execute stylelint
   #
   stylelint:
     name: Sass,CSS [StyleLint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      # Download and set up node (caching is enabled)
-      - uses: actions/setup-node@v2.4.0
-        with:
-          node-version: '10.x'  # optional
-
-      # Optional - improve performance by caching
-      - id: npm-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-
-      # Only install modules if there is no cache hit
-      - if: steps.npm-cache.outputs.cache-hit != 'true'
-        run: npm install
-
-      # Run the checks -> test-style script msut be defined in package.json
+      - name: "Setup Node and npm modules"
+        uses: ./.github/actions/setup-npm-node-modules
       - run: npm run test-style
-
-
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** PHP **
@@ -137,34 +99,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: PHP_CS_FIXER_IGNORE_ENV=1 php bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes --verbose --format=txt
   #
   # PhpStan:
@@ -180,35 +116,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
-
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: bin/phpstan analyze
   #
   # Psalm:
@@ -224,40 +133,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Setup PHP 7.4
-        uses: shivammathur/setup-php@2.13.0
-        with:
-          php-version: 7.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt update
-          sudo apt install php-imagick
-
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: bin/psalm
   #
   # phpcpd (Php Copy Paste Detector):
@@ -285,34 +162,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: bin/phpdd src tests
   #
   # PhpLoc:
@@ -338,35 +189,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
-
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:twig templates/
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -379,34 +203,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yml.dist .eslintrc.yml
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -415,41 +213,11 @@ jobs:
   #  - Checks the services defined in the container
   #  - Ensures that arguments injected into services match type declarations
   #
-  #  Currently broken in Symfony 4 with doctrine. Hopefully fixed again later. Maybe Symfony 5.
-  #  https://github.com/symfony/symfony/issues/39259
-  #
   lint-container:
-    if: 'false' # always skip job
     name: Symfony Container [Lint]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2.3.4
-
-      - name: Install dependencies (php-imagick)
-        run: |
-          sudo apt-get update
-          sudo apt-get install php-imagick
-      # Optional - ensure composer configuration is valid
-      - run: composer validate
-
-      # Optional - improve performance by caching
-      - id: composer-cache
-        uses: actions/cache@v2.1.6
-        with:
-          path: |
-            vendor
-            bin/behat
-            bin/phpunit
-            bin/phpstan
-            bin/php-cs-fixer
-            bin/phpdd
-            bin/psalm
-          key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-php-
-
-      # Only install packages if there is no cache hit
-      - if: steps.composer-cache.outputs.cache-hit != 'true'
-        run: composer install --prefer-dist --no-progress
-
+      - name: "Setup PHP and composer packages"
+        uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:container

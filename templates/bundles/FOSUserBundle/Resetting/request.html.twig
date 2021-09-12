@@ -2,7 +2,7 @@
 
 {% block head %}
 
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/login.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/main.css') }}" media="screen"/>
 
 {% endblock %}
 
@@ -94,7 +94,7 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('js/register.min.js') }}"></script>
+  <script src="{{ asset('js/register.js') }}"></script>
   {{ encore_entry_script_tags('request') }}
   <script>
     const register =new Register(

@@ -26,6 +26,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
@@ -506,6 +507,21 @@ class ProgramController extends AbstractController
     ]);
   }
 
+  /**
+   * @Route("/translate/custom/project/{id}", name="project_custom_translation", methods={"PUT", "GET"})
+   */
+  public function projectCustomTranslationAction(Request $request, string $id): Response
+  {
+    switch ($request->getMethod()) {
+      case 'PUT':
+        return $this->projectCustomTranslationPutAction($request, $id);
+      case 'GET':
+        return $this->projectCustomTranslationGetAction($request, $id);
+      default:
+        return Response::create(null, Response::HTTP_NOT_IMPLEMENTED);
+    }
+  }
+
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
   {
     if (!in_array($program->getId(), $viewed, true)) {
@@ -631,5 +647,92 @@ class ProgramController extends AbstractController
     }
 
     return $isReportedByUser;
+  }
+
+  private function projectCustomTranslationGetAction(Request $request, string $id): Response
+  {
+    $project = $this->program_manager->find($id);
+    try {
+      if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
+        return Response::create(null, Response::HTTP_NOT_FOUND);
+      }
+    } catch (NoResultException $e) {
+      return Response::create(null, Response::HTTP_NOT_FOUND);
+    }
+
+    if (!$request->query->has('field')
+      || !$request->query->has('language')) {
+      return Response::create(null, Response::HTTP_BAD_REQUEST);
+    }
+
+    $field = $request->query->get('field');
+    $language = $request->query->get('language');
+
+    try {
+      switch ($field) {
+        case 'name':
+          $result = $this->translation_delegate->getProjectNameCustomTranslation($project, $language);
+          break;
+        case 'description':
+          $result = $this->translation_delegate->getProjectDescriptionCustomTranslation($project, $language);
+          break;
+        case 'credit':
+          $result = $this->translation_delegate->getProjectCreditCustomTranslation($project, $language);
+          break;
+        default:
+          return Response::create(null, Response::HTTP_BAD_REQUEST);
+      }
+    } catch (InvalidArgumentException $exception) {
+      return Response::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    }
+
+    return Response::create($result, null == $result ? Response::HTTP_NOT_FOUND : Response::HTTP_OK);
+  }
+
+  private function projectCustomTranslationPutAction(Request $request, string $id): Response
+  {
+    $user = $this->getUser();
+    if (null === $user) {
+      return Response::create(null, Response::HTTP_UNAUTHORIZED);
+    }
+
+    $project = $this->program_manager->find($id);
+    if (null === $project || $project->getUser() !== $user) {
+      return Response::create(null, Response::HTTP_NOT_FOUND);
+    }
+
+    if (!$request->query->has('field')
+      || !$request->query->has('language')
+      || !$request->query->has('text')) {
+      return Response::create(null, Response::HTTP_BAD_REQUEST);
+    }
+
+    $field = $request->query->get('field');
+    $language = $request->query->get('language');
+    $text = $request->query->get('text');
+
+    if ('' === trim($text)) {
+      return Response::create(null, Response::HTTP_BAD_REQUEST);
+    }
+
+    try {
+      switch ($field) {
+        case 'name':
+          $result = $this->translation_delegate->addProjectNameCustomTranslation($project, $language, $text);
+          break;
+        case 'description':
+          $result = $this->translation_delegate->addProjectDescriptionCustomTranslation($project, $language, $text);
+          break;
+        case 'credit':
+          $result = $this->translation_delegate->addProjectCreditCustomTranslation($project, $language, $text);
+          break;
+        default:
+          return Response::create(null, Response::HTTP_BAD_REQUEST);
+      }
+    } catch (InvalidArgumentException $exception) {
+      return Response::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    }
+
+    return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 }

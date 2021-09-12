@@ -1,7 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/login.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/css/login_styles.css') }}" media="screen"/>
 {% endblock %}
 
 {% block header "" %}
@@ -58,7 +58,7 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('js/register.min.js') }}"></script>
+  <script src="{{ asset('js/register.js') }}"></script>
   <script>
     const register =new Register(
             "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",

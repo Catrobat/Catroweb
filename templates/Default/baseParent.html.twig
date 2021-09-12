@@ -11,13 +11,7 @@
   </title>
 
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
-
-  <link rel="preload" href="/css/fonts/Roboto-Regular-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/css/fonts/Roboto-Bold-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/css/fonts/Roboto-Italic-webfont.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="/css/fonts/MaterialIcons-Regular.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
-  <link rel="preload" href="{{ asset('css/'~themeAssets()~'/base.css') }}" as="style">
-  <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/base.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('/build/css/'~themeAssets()~'.css') }}" media="screen"/>
 
   {# Head block for child views #}
   {% block head %}{% endblock %}
@@ -38,14 +32,14 @@
 
   {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
-  <div class="container body-content mb-5" style="margin-top: 6em">
+  <div class="container body-content mb-5" style="margin-top: 6em;">
     {# Body block where child views will appear #}
     {% block body %}{% endblock %}
   </div>
 
   {% include 'Default/footer.html.twig' %}
 
-  <div id="app-version" style="display:none">{{ app_version }}</div>
+  <div id="app-version" style="display: none;">{{ app_version }}</div>
 
 </div>{# page-container#}
 
@@ -60,20 +54,21 @@
 <script src="{{ asset('js/modules/sweetalert2.all.min.js') }}"></script>
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-<script src="{{ asset('js/base.min.js') }}"></script>
+<script src="{{ asset('js/Header.js') }}"></script>
+<script src="{{ asset('js/Main.js') }}"></script>
+<script src="{{ asset('js/ProjectLoader.js') }}"></script>
+<script src="{{ asset('js/Snackbar.js') }}"></script>
 
 {% if app_env == 'prod' %}
 <script> let configGA = { 'UaId': 'UA-42270417-5' } </script>
-<script async src="{{ asset('js/analytics.min.js') }}"></script>
+<script async src="{{ asset('js/analytics.js') }}"></script>
 {% endif %}
 
 {# Main Script #}
 <script>
-  new Main()
+  searchUrl = '{{ path('empty_search' ) }}'
   {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
-    setSearchUrl('{{ path('medialibrary_empty_search', {'package_name' : package} ) }}')
-  {% else %}
-    setSearchUrl('{{ path('empty_search' ) }}')
+    searchUrl = '{{ path('medialibrary_empty_search', {'package_name' : package} ) }}'
   {% endif %}
 </script>
 
@@ -87,7 +82,6 @@
     const unseenAchievementsBadgeText = '{{ "achievements.sidebar.badge"|trans({}, "catroweb") }}';
   {% endif %}
 </script>
-{{ encore_entry_script_tags('base') }}
 {{ encore_entry_script_tags('sidebar') }}
 
 {# JS block where all the scripts written in the child views should appear #}

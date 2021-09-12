@@ -5,7 +5,7 @@
 {% block head %}
     <link rel="stylesheet" href="{{ asset('css/modules/jquery.contextMenu.min.css') }}"/>
     <link rel="stylesheet" href="{{ asset('vis/vis.min.css') }}"/> {# We need acces to all images #}
-    <link rel="stylesheet" href="{{ asset('css/'~themeAssets()~'/remixgraph.css') }}"/>
+    <link rel="stylesheet" href="{{ asset('build/css/remixgraph.css') }}"/>
     <link rel="stylesheet" href="{{ asset('css/modules/animate.min.css') }}"/>
 {% endblock %}
 
@@ -26,11 +26,11 @@
     <script src=" {{ asset( 'js/modules/jquery.contextMenu.min.js') }}"></script>
     <script src=" {{ asset( 'js/modules/jquery.ui.position.min.js') }}"></script>
     <script src=" {{ asset( 'vis/vis.min.js') }}"></script>
-    <script src=" {{ asset( 'js/remixgraph.configuration.min.js') }}"></script>
-    <script src=" {{ asset( 'js/remixgraph.builder.min.js') }}"></script>
-    <script src=" {{ asset( 'js/remixgraph.visualization.min.js') }}"></script>
+    <script src=" {{ asset( 'js/remixgraph.configuration.js') }}"></script>
+    <script src=" {{ asset( 'js/remixgraph.builder.js') }}"></script>
+    <script src=" {{ asset( 'js/remixgraph.visualization.js') }}"></script>
 
-    <script src="{{ asset('js/RemixGraphHandler.min.js') }}"></script>
+    <script src="{{ asset('js/RemixGraphHandler.js') }}"></script>
     <script>
       let remixGraphHandler = new RemixGraphHandler(
         "{{ id }}",

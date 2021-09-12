@@ -778,10 +778,10 @@ studio:
     private_studio: 'தனியார் ஸ்டுடியோ'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'அளவு: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'வகை: படம்'
+      project: 'வகை: திட்டம்'
+      sound: 'வகை: ஒலி'
+      movie: 'வகை: வீடியோ'
+      default: 'வகை: தெரியவில்லை'

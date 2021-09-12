@@ -1,5 +1,4 @@
 #!/bin/bash
-grunt
 npm run encore dev
 rm -rf var/cache/test/*
 bin/console cache:clear --env=test

@@ -13,8 +13,10 @@ on:
   push:
     branches:
       - master
-      - l10n_crowdin_action # translation updates
   pull_request:
+    branches:
+      - '**'        # all branches
+      - '!master'   # excludes master to prevent double test runs during release prep.
 
 
 jobs:
@@ -143,6 +145,7 @@ jobs:
           - api-projects
           - api-user
           - api-utility
+          - api-translation
 
           - api-deprecated-general
           - api-deprecated-project

@@ -1,0 +1,12 @@
+@import "../base/variables";
+@import "../base/mixins";
+@import "~bootstrap/scss/mixins";
+
+.article-columns {
+  column-count: 2;
+
+  @include media-breakpoint-down(md) {
+    column-count: 1;
+  }
+}
+
