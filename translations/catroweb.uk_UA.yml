@@ -25,86 +25,86 @@ areYouSure: Ти впевнений?
 noWayOfReturn: Немає можливості відновити свої дії!
 download: Завантажити
 description: Опис
-noDescription: No description available.
+noDescription: Опис відсутній.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+notesAndCreditsDescription: Як ви створили цей проект? Чи використовували ідеї, скрипти чи витвори інших людей? Скажіть їм спасибі тут.
+country: Країна
+loginText: Увійти
+privacyPolicy: Політика конфіденційності
+imprint: Відомості
+programDetails: Подробиці
+somethingWentWrong: 'Упс, ось щось пішло не так.'
+pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
+oldVersionError: 'Будь ласка, оновіться до найновішої версії Pocket Code!'
+more: 'більше'
+less: 'менше'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+more-information: 'Додаткова інформація'
+less-information: 'Менше інформації'
+ok: Гаразд
+clickToDownloadProgram: 'Щоб завантажити приклад проекту, натисніть %link_start% тут %link_end%.'
+registrationError: 'Ім''я користувача або електронна адреса вже використовуються.'
+notifications: 'Сповіщення'
 allNotifications: 'All Notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+FollowersNotifications: 'Підписники'
+LikeNotifications: 'Реакції'
+CommentNotifications: 'Коментарі'
+RemixNotifications: 'Ремікси'
+wellDone: "Чудово!"
+done: "Готово!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
-oauthHere: "here"
-statistics: "Statistics"
+confirmMessage: "Так, видалити це"
+cancelMessage: "Скасувати"
+notificationsUnauthorizedError: "Не вдалося авторизувати користувача"
+notificationsClearError: "Не вдалося відзначити сповіщення як прочитані!"
+pleaseWait: "Зачекайте, будь ласка..."
+projects: "Проєкти"
+oauthPopUpTitle: "Інформація про вхід через зовнішній обліковий запис"
+oauthInfo: 'Ви щойно використали зовнішній обліковий запис для входу. Ми створили для вас випадкове ім''я користувача. Якщо ви хочете змінити своє ім''я користувача або створити новий пароль для свого облікового запису, будь ласка, перейдіть на сторінку "Мій профіль". Натисніть %link_start% тут %link_end% , щоб перейти до сторінки вашого профілю'
+oauthHere: "тут"
+statistics: "Статистика"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Які проекти тут рекомендовано?'
+      description: 'Чим більше реакцій (Палець вгору, Посмішка...) отримує ваш проєкт, тим вище він з''явиться в цьому списку.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: Підписки
+  followers: Підписники
+  follow: Підписатись
+  username: Користувач
+  followsMe: Підписані на мене
+  noFollowing: Зараз у вас немає підписок.
+  noFollowers: Зараз у вас немає підписників.
+  noOtherFollowing: Зараз немає підписаних користувачів.
+  noOtherFollowers: Зараз немає жодного підписника.
+  followError: "Не вдалося підписатися на даного користувача!"
+  unfollowError: "Не вдалося відписатися від даного користувача!"
+  unfollowQuestion: "Ви дійсно хочете відписатися від цього користувача?"
+  unfollowButton: "Відписатися від %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
+    title: Ласкаво просимо в %theme% від Catrobat
+    title_mindstorms: Ласкаво просимо на сайт Catrobat для Mindstorms EV3 та NXT
+    subtitle: Створюйте історії, ігри та багато іншого...
+    subtitle_embroidery: Вишийте власні візерунки на футболках, сумках, штанах та чохлах для смартфона!
+    subtitle_mindstorms: Створіть свої власні проєкти використовуючи роботів Lego Mindstorms EV3 та NXT
+    download: Завантажити додаток
     statistics: More Statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  featured: Рекомендовані
+  example: Приклади
+  newest: Найновіші проєкти
+  recommended: Рекомендовані проєкти
+  scratchremixes: Scratch ремікси
+  noPrograms: Наразі немає проектів.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Ви впевнені?
+    Ви впевнені, що хочете видалити "%programName%"?
+    Відновити ваші дії буде неможливо!
+    Так, видалити це!
+    Скасувати
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -113,23 +113,23 @@ programs:
     Yes, set to public
     Yes, set to private
     No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  reportCommentConfirmation: Ви впевнені, що хочете повідомити про цей коментар?
+  deleteCommentConfirmation: Ви впевнені, що хочете видалити цей коментар?
   deleteAccountConfirmation: |+
     Account Deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
+  tooLongDescription: Опис проєкту задовгий!
   tooLongCredits: The project credits are too long!
   most:
     viewed: Most viewed
     downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
+  random: Випадкові проєкти
+  related: Пов'язані проєкти
   downloads: '%downloads% downloads'
-  sample: Example projects
+  sample: Приклад проєктів
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
@@ -153,10 +153,10 @@ programs:
   reportDone: You reported this project!
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
+  btnClosePopup: Гаразд
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: Comments
+  comments: Коментарі
   send: Send
   delete: Delete
   report: Звіт
@@ -176,13 +176,13 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Реакції
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
-  title: Remixes
+  title: Ремікси
   showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Open'
@@ -655,13 +655,13 @@ checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: Найновіші проєкти
+  random: Випадкові проєкти
   most_viewed: Most viewed
   most_downloaded: Most downloaded
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: Scratch ремікси
+  recommended: Рекомендовані проєкти
 achievements:
   sidebar:
     title: 'Achievements'
@@ -681,7 +681,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "Гаразд"
   profile:
     title: 'Achievements'
   achievement:
@@ -740,7 +740,7 @@ studio:
   details:
     general: 'general'
     projects: 'projects'
-    comments: 'Comments'
+    comments: 'Коментарі'
     public: 'public'
     private: 'private'
     join: 'Join'
