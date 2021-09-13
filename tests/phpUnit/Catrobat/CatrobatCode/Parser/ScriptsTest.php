@@ -129,6 +129,7 @@ class ScriptsTest extends TestCase
   public function factoryMustGenerateUnknownScriptOtherwise(): ?Script
   {
     $script_xml_properties = $this->script_xml_properties_list[0];
+    // @phpstan-ignore-next-line
     $script_xml_properties[Constants::TYPE_ATTRIBUTE] = 'Foo'; // Fake random script
     $actual = ScriptFactory::generate($script_xml_properties);
 

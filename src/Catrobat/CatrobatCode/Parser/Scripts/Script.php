@@ -109,6 +109,7 @@ abstract class Script
   private function addBrickThatIsNotDirectlyMentionedInXml(string $type): void
   {
     $brick_as_xml = new SimpleXMLElement('<brick></brick>');
+    // @phpstan-ignore-next-line
     $brick_as_xml[Constants::TYPE_ATTRIBUTE] = $type;
     $this->bricks[] = BrickFactory::generate($brick_as_xml);
   }
