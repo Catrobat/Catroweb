@@ -60,7 +60,7 @@
     "@material/tab-scroller": "^12.0.0",
     "@material/textfield": "^12.0",
     "@material/top-app-bar": "^12.0",
-    "ajv": "^8.6.2",
+    "ajv": "^8.6.3",
     "animate.css": "^4.1.1",
     "bootstrap": "^4.6.0",
     "clipboard": "^2.0.8",
