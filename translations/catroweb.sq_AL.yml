@@ -77,7 +77,7 @@ follower:
   username: Përdorues
   followsMe: Më ndjek
   noFollowing: Ju nuk po ndiqni askënd aktualisht.
-  noFollowers: You have no followers currently.
+  noFollowers: Aktualisht, ju nuk keni asnjë ndjekës.
   noOtherFollowing: There are no following users currently.
   noOtherFollowers: There are no follower users currently.
   followError: "Unable to follow the desired user!"
@@ -175,14 +175,14 @@ programs:
   love: Love!
   wow: Wooow!
   linkTitle: Link
-  link: Copy project link to clipboard
+  link: Kopjo linkun ne nje tabele
   reactionsText: Reagimet
   downloadErrorText: Error occurred while downloading the project. Please try again later.
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  showTranslation: Shfaq përkthimin 
+  hideTranslation: Fshihe përkthimin
+  translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%
 remixGraph:
-  title: Remixes
+  title: Ripërzierje 
   showRemixGraph: 'Remix graph'
   by: 'nga'
   open: 'Hape '
@@ -279,7 +279,7 @@ profile:
 myprofile:
   editProfile: Modifiko profilin
   edit: Modifiko
-  done: Done
+  done: i përfunduar
   checkMail: Një E-mail është dërguar tek ti. Ju lutem, shikoni postën tuaj.
   passwordUpdated: Your password was successfully updated.
   avatar: Fotografia
@@ -427,7 +427,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the lastest version.'
   authentication:
-    title: Authentication failed
+    title: Autentikimi dështoi
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -666,7 +666,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'E re'
   overview:
     header: 'Achievements'
     most_recent_achievement:
