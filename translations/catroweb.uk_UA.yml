@@ -128,7 +128,7 @@ programs:
     downloaded: Most downloaded
   random: Випадкові проєкти
   related: Пов'язані проєкти
-  downloads: '%downloads% downloads'
+  downloads: '%downloads% завантажень'
   sample: Приклад проєктів
   views: '%views% views'
   likes:
