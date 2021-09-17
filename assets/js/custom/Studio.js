@@ -1,4 +1,6 @@
 /* eslint-env jquery */
+import { showSnackbar } from '../components/snackbar'
+
 // eslint-disable-next-line no-unused-vars
 const Studio = function () {
   this.showMoreLessDescription = function (element) {

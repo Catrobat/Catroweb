@@ -1,8 +1,8 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}" media="screen"/>
-  <link rel="stylesheet" href="{{ asset('build/css/achievements.css') }}" media="screen"/>
+  {{ encore_entry_link_tags('profile') }}
+  {{ encore_entry_link_tags('follower_overview') }}
 {% endblock %}
 
 {% block body %}
@@ -29,7 +29,6 @@
         {% endif %}
       </div>
 
-
       <div class="button-container w-100 mt-3">
         {% if profile.isScratchUser() %}
           <a href={{ 'https://scratch.mit.edu/users/' ~ profile.getScratchUsername() }}>
@@ -39,20 +38,21 @@
           </a>
         {% endif %}
         {% if app.user != null and app.user.id != profile.id %}
-          <button class="btn btn-outline-primary profile-follows mt-0 ml-auto"
+          <button class="btn btn-outline-primary profile-follows unfollow-btn mt-0 ml-auto"
                   style="{{ profile.hasFollower(app.user) ? 'display: block' : 'display:none' }}"
-                  onclick="followers.unfollow('{{ profile.id }}','{{ profile.username }}')">
+                  data-user-id="{{ profile.id }}"
+                  data-user-name="{{ profile.username }}">
             {{ 'follower.follows'|trans({}, 'catroweb') }}
           </button>
-          <button class="btn btn-primary profile-follow mt-0 ml-auto"
+          <button class="btn btn-primary profile-follow follow-btn mt-0 ml-auto"
                   style="{{ profile.hasFollower(app.user) ? 'display: none' : 'display:block' }}"
-                  onclick="followers.follow('{{ profile.id }}')">
+                  data-user-id="{{ profile.id }}">
             {{ 'follower.follow'|trans({}, 'catroweb') }}
           </button>
         {% endif %}
         {% if app.user == null %}
-          <button class="btn btn-primary profile-follow mt-0 mt-auto"
-                  onclick="followers.follow('{{ profile.id }}')">
+          <button class="btn btn-primary profile-follow follow-btn mt-0 mt-auto"
+                  data-user-id="{{ profile.id }}">
             {{ 'follower.follow'|trans({}, 'catroweb') }}
           </button>
         {% endif %}
@@ -125,7 +125,7 @@
     </div>
   </div>
 
-  <div class="tab-content mt-4" id="tabs-tabContent">
+  <div class="tab-content mt-4">
     <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
       <div id="user-programs">
         <div class="programs"></div>
@@ -161,29 +161,27 @@
       </div>
     </div>
 
+  <div class="js-follower-overview"
+       data-csrf-token="{{ csrf_token('follower') }}"
+       data-unfollow-url="{{ url('unfollow') }}"
+       data-follow-url="{{ url('follow') }}"
+       data-login-url="{{ url('login') }}"
+       data-something-went-wrong-error="{{ "somethingWentWrong"|trans({}, "catroweb") }}"
+       data-follow-error="{{ "follower.followError"|trans({}, "catroweb") }}"
+       data-unfollow-error="{{ "follower.unfollowError"|trans({}, "catroweb") }}"
+       data-unfollow-button="{{ "follower.unfollowButton"|trans({}, "catroweb") }}"
+       data-unfollow-question="{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}"
+       data-cancel-button="{{ "cancelMessage"|trans({}, "catroweb") }}"
+       data-number-of-following="{{ following_list|length }}"
+  ></div>
+
 {% endblock %}
 
 {% block js %}
+  <script>
+    const apiUserPrograms = '{{ path('api_user_programs') }}';
+    const profileID = '{{ profile.id }}';
+  </script>
   {{ encore_entry_script_tags('profile') }}
-  <script>
-    let programs = new ProjectLoader('#user-programs', '{{ path('api_user_programs') }}')
-    programs.loadProjects('{{ profile.id }}')
-  </script>
-
-  <script src="{{ asset('js/Follower.js') }}"></script>
-
-  <script>
-    let followers = new Follower(
-      "{{ csrf_token('follower') }}",
-      "{{ url('unfollow') }}", "{{ url('follow') }}",
-      "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
-      "{{ "follower.followError"|trans({}, "catroweb") }}",
-      "{{ "follower.unfollowError"|trans({}, "catroweb") }}",
-      "{{ "follower.unfollowButton"|trans({}, "catroweb") }}",
-      "{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}",
-      "{{ "cancelMessage"|trans({}, "catroweb") }}",
-      "{{ followers_list|length }}",
-      false
-    )
-  </script>
+  {{ encore_entry_script_tags('follower_overview') }}
 {% endblock %}

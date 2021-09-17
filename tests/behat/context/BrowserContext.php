@@ -359,22 +359,22 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @When I scroll vertical on :selector using a value of :value
+   * @When I scroll vertical on :id using a value of :value
    */
-  public function scrollVertical(string $selector, string $value): void
+  public function scrollVertical(string $selectorID, string $value): void
   {
     $this->getSession()->getDriver()->evaluateScript(
-      "$('".$selector."').animate({scrollTop: ".$value.'})'
+      "document.getElementById(\"{$selectorID}\").scrollTop = {$value}"
     );
   }
 
   /**
-   * @When I scroll horizontal on :selector using a value of :value
+   * @When I scroll horizontal on :id :className using a value of :value
    */
-  public function scrollHorizontal(string $selector, string $value): void
+  public function scrollHorizontal(string $selectorID, string $className, string $value): void
   {
     $this->getSession()->getDriver()->evaluateScript(
-      "$('".$selector."').animate({scrollLeft: ".$value.'})'
+      "document.getElementById(\"{$selectorID}\").getElementsByClassName(\"{$className}\")[0].scrollLeft = {$value}"
     );
   }
 
@@ -415,6 +415,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $this->getSession()->wait(5_000,
       '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
     );
+    $this->getSession()->wait(500);
   }
 
   /**

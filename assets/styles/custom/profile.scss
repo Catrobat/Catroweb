@@ -173,7 +173,7 @@
 
     &:hover {
       color: var(--primary) !important;
-      background-color: #{"darken(var(--primary), 10)"};
+      background-color: custom-darken(--color-primary, 10);
     }
   }
 }

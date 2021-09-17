@@ -1,7 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('build/css/login_styles.css') }}" media="screen"/>
+  {{ encore_entry_link_tags('login_styles') }}
 {% endblock %}
 
 {% block header "" %}
@@ -58,6 +58,8 @@
 {% endblock body %}
 
 {% block js %}
+  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/register.js') }}"></script>
   <script>
     const register =new Register(

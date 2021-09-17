@@ -979,7 +979,10 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iPressEnterInTheSearchBar(): void
   {
-    $this->getSession()->executeScript("$('#top-app-bar__search-form').trigger('submit')");
+    // Hacky solution since triggering the submit event is not working
+    $arg1 = trim('#top-app-bar__search-form__submit');
+    $this->assertSession()->elementExists('css', $arg1);
+    $this->getSession()->getPage()->find('css', $arg1)->click();
   }
 
   /**

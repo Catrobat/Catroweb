@@ -1,0 +1,80 @@
+.modal {
+  z-index: 6000;  // reason: top-app-bar
+}
+
+.btn,
+.button {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &:hover {
+    .mdc-circular-progress__indeterminate-circle-graphic {
+      stroke: #fff;
+    }
+  }
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  &:hover {
+    background-color: custom-darken(--color-primary, 7.5);
+    border-color: custom-darken(--color-primary, 8.5);
+  }
+  &:not(:disabled):not(.disabled):active {
+    background-color: custom-darken(--color-primary, 10);
+    border-color: custom-darken(--color-primary, 11);
+  }
+  &:not(:disabled):not(.disabled):active:focus,
+  &:focus {
+    background-color: custom-darken(--color-primary, 5);
+    border-color: custom-darken(--color-primary, 6);
+  }
+  &:disabled {
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+}
+
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+  &:hover {
+    background-color: custom-darken(--color-primary, 7.5);
+    border-color: custom-darken(--color-primary, 8.5);
+  }
+  &:not(:disabled):not(.disabled):active {
+    background-color: custom-darken(--color-primary, 10);
+    border-color: custom-darken(--color-primary, 11);
+  }
+  &:not(:disabled):not(.disabled):active:focus,
+  &:focus {
+    box-shadow: 0 0 0 0.2rem custom-alpha(--color-primary, 0.3);
+  }
+  &:disabled {
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+}
+
+/* stylelint-disable */
+.badge-primary {
+  background-color: var(--primary) !important;
+  &:hover {
+    background-color: custom-darken(--color-primary, 7.5) !important;
+  }
+  &:not(:disabled):not(.disabled):active {
+    background-color: custom-darken(--color-primary, 10) !important;
+  }
+  &:not(:disabled):not(.disabled):active:focus,
+  &:focus {
+    background-color: custom-darken(--color-primary, 5) !important;
+    box-shadow: 0 0 0 0.2rem custom-alpha(--color-primary, 0.3) !important;
+  }
+  &:disabled {
+    background-color: var(--primary) !important;
+  }
+}
+/* stylelint-enable */

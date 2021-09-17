@@ -76,7 +76,7 @@ Feature: Project list automatically loads more projects on scrolling
     And the "#home-projects__recent .projects-container" element should not contain "project 03"
     And the "#home-projects__recent .projects-container" element should not contain "project 02"
     And the "#home-projects__recent .projects-container" element should not contain "project 01"
-    When I scroll horizontal on "#home-projects__recent .projects-container" using a value of "300000"
+    When I scroll horizontal on "home-projects__recent" "projects-container" using a value of "300000"
     And I wait for the page to be loaded
     And the "#home-projects__recent .projects-container" element should contain "project 01"
     And the "#home-projects__recent .projects-container" element should contain "project 02"
@@ -122,7 +122,7 @@ Feature: Project list automatically loads more projects on scrolling
     And the "#home-projects__recent .projects-container" element should not contain "project 03"
     And the "#home-projects__recent .projects-container" element should not contain "project 02"
     And the "#home-projects__recent .projects-container" element should not contain "project 01"
-    When I scroll vertical on "#home-projects__recent" using a value of "300000"
+    When I scroll vertical on "home-projects__recent" using a value of "300000"
     And I wait for the page to be loaded
     And the "#home-projects__recent .projects-container" element should contain "project 01"
     And the "#home-projects__recent .projects-container" element should contain "project 02"

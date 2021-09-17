@@ -1223,9 +1223,9 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
           {
             /**
              * Tracks the clicks on the featured programs
-             * featuredPrograms
+             * featured-slider
              */
-            BaseSelector: '#featuredPrograms',
+            BaseSelector: '#featured-slider',
             SubSelector: 'a',
             Category: homepageCategory,
             Action: 'click - featured programs',

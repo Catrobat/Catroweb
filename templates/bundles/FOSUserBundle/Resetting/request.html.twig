@@ -2,7 +2,7 @@
 
 {% block head %}
 
-  <link rel="stylesheet" href="{{ asset('build/css/main.css') }}" media="screen"/>
+  <link rel="stylesheet" href="{{ asset('build/login_styles.css') }}" media="screen"/>
 
 {% endblock %}
 
@@ -12,7 +12,7 @@
 
   {% block fos_user_content %}
 
-    <div class="container-fluid" style="width:100%">
+    <div class="container-fluid" style="width:100%;">
 
       {% include 'UserManagement/login_logo.html.twig' %}
 
@@ -94,6 +94,8 @@
 {% endblock body %}
 
 {% block js %}
+  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
   <script src="{{ asset('js/register.js') }}"></script>
   {{ encore_entry_script_tags('request') }}
   <script>
