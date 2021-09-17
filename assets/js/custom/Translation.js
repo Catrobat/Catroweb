@@ -1,7 +1,6 @@
-/* eslint-env jquery */
+import $ from 'jquery'
 
-// eslint-disable-next-line no-unused-vars
-class Translation {
+export class Translation {
   constructor (translatedByLine) {
     this.translatedByLine = translatedByLine
     this.providerMap = {
@@ -90,7 +89,7 @@ class Translation {
 }
 
 // eslint-disable-next-line no-unused-vars
-class ByLineElementContainer {
+export class ByLineElementContainer {
   constructor (beforeElement, betweenElement, afterElement, firstLanguageElement, secondLanguageElement) {
     this.before = beforeElement
     this.between = betweenElement

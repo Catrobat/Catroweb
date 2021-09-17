@@ -1,9 +1,7 @@
-/* eslint-env jquery */
-/* global Translation */
-/* global ByLineElementContainer */
+import $ from 'jquery'
+import { Translation, ByLineElementContainer } from './Translation'
 
-// eslint-disable-next-line no-unused-vars
-class TranslateProgram extends Translation {
+export class TranslateProgram extends Translation {
   constructor (translatedByLine, programId, hasDescription, hasCredit) {
     super(translatedByLine)
     this.programId = programId

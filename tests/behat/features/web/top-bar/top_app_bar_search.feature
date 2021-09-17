@@ -57,7 +57,9 @@ Feature: Searching should be possible using a specific Search Top App Bar
     Given I am on "/app/login"
     And I wait for the page to be loaded
     Then I click "#top-app-bar__btn-search"
+    And I wait 500 milliseconds
     And I enter "search1" into visible "#top-app-bar__search-input"
+    And I wait 500 milliseconds
     And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/app/search/search1"

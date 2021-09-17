@@ -1,12 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('build/css/program.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('build/css/modal.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('build/css/card.css') }}"/>
-  <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}"/>
-  <link rel="preload" href="{{ asset('build/css/project_list.css') }}" as="style">
-  <link rel="stylesheet" href="{{ asset('build/css/project_list.css') }}" media="screen"/>
+  {{ encore_entry_link_tags('project') }}
 
   <meta property="og:image" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:type" content="website"/>
@@ -43,10 +38,10 @@
             </span>
             <span id="program-translation-loading-spinner" style="display: none;">
               <i class="ml-2 material-icons">
-                {% include 'Default/loadingSpinner.html.twig' with {'size': 'small'} %}
+                {% include 'components/loading_spinner.html.twig' with {'size': 'small'} %}
               </i>
             </span>
-            <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none"
+            <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none;"
                 data-toggle="tooltip" title="Hide Translation">
                 <i class="ml-2 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
                   close
@@ -56,18 +51,11 @@
         {% endif %}
       </div>
 
-      <div class="" onclick="program.projectViewButtonsAction('{{ path('profile', {'id': program.user.id }) }}', '#project-user-spinner{{ suffix|default('') }}',
-              '#code-view-icon{{ suffix|default('') }}')">
-        <a class="icon-text align-bottom" id="program-owner-username">
-          <i class="material-icons pr-2" id="user-profile-icon">person</i>
-          {{ program.user }}
-        </a>
-        <span>
-          <i class="material-icons d-none" id="project-user-spinner{{ suffix|default('') }}">
-            {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'user-spinner' ~ suffix|default(), 'size': 'small'} %}
-          </i>
-        </span>
-      </div>
+      <a class="icon-text align-bottom" id="program-owner-username" style="display: block;"
+         href="{{ path('profile', {'id': program.user.id }) }}">
+        <i class="material-icons pr-2" id="user-profile-icon">person</i>
+        {{ program.user }}
+      </a>
 
       <div class="">
         <i class="material-icons mt-2">query_builder</i>
@@ -92,7 +80,7 @@
       </div>
       {% endif %}
       <div class="mt-3">
-{#        {% include 'Program/program_remix_graph_button.html.twig' %}#}
+        {% include 'Program/program_remix_graph_button.html.twig' %}
       </div>
       <div class="mt-3">
         {% include 'Program/program_sign_app_button.html.twig' %}
@@ -106,7 +94,7 @@
         {% include 'Program/program_reactions.html.twig' with {'suffix': '-small'} %}
       </div>
     </div>
-    <div class="col-7 col-sm-8 mt-3" style="padding-left: 0">
+    <div class="col-7 col-sm-8 mt-3" style="padding-left: 0;">
       {% include 'Program/program_download_button.html.twig' with {'suffix': '-small'} %}
     </div>
   </div>
@@ -147,7 +135,12 @@
       ['more_from_user', 'moreFromThisUser', 'views'],
     ] %}
       <div id="recommended-projects__{{ category[0] }}" data-category="{{ category[0] }}"
-           data-property="{{ category[2] }}" class="project-list loading horizontal">
+           data-property="{{ category[2] }}" class="project-list loading horizontal"
+           data-theme="{{ theme() }}"
+           data-flavor="{{ flavor() }}"
+           data-base-url="{{ app.request.getBaseURL() }}"
+           data-project-id="{{ program.id }}"
+      >
         <div class="container">
           <div class="project-list__title">
             <h2>{{ ("recommender." ~ category[1]) | trans({"%username%": program.user.username }, "catroweb") }}</h2>
@@ -157,12 +150,12 @@
             </div>
           </div>
           <div class="lazyload projects-spinner-container">
-            {% include 'Default/loadingSpinner.html.twig' only %}
+            {% include 'components/loading_spinner.html.twig' only %}
           </div>
           <div class="lazyload project-list__wrapper">
             <div class="lazyload projects-container"></div>
             <div class="lazyload project-list__chevrons">
-              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none">chevron_left</div>
+              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
               <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
             </div>
           </div>
@@ -173,42 +166,72 @@
 
   {% include 'Program/programComments.html.twig' %}
 
+  <div class="js-project"
+       data-project-id="{{ program.id }}"
+       data-translated-by-line="{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}"
+       data-has-description="{{ program.description is not empty }}"
+       data-has-credits="{{ program.credits is not empty }}"
+       data-theme="{{ theme() }}"
+       data-flavor="{{ flavor() }}"
+       data-base-url="{{ app.request.getBaseURL() }}"
+       data-path-change-image="{{ path('upload_project_thumbnail', { 'id': program.id }) }}"
+       data-csrf-token="{{ csrf_token('project') }}"
+       data-user-role="{% if app.user %}user{% else %}guest{% endif %}"
+       data-my-program="{% if my_program %}true{% else %}false{% endif %}"
+       data-path-ci-status="{{ path('ci_status', { 'id' : program.id }) }}"
+       data-path-ci-build="{{ path('ci_build', { 'id' : program.id }) }}"
+       data-path-project-like="{{ path('project_like', { 'id' : program.id }) }}"
+       data-path-like-details="{{ path('api_project_likes', { 'id' : program.id }) }}"
+       data-trans-apk-prep="{{ 'apk.preparing'|trans({}, "catroweb") }}"
+       data-trans-apk-text="{{ 'apk.text'|trans({}, "catroweb") }}"
+       data-trans-update-app-header="{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}"
+       data-trans-update-app-text="{{ 'programs.updateAppText'|trans({}, "catroweb") }}"
+       data-trans-btn-close="{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}"
+       data-const-action-add="{{ constant('App\\Entity\\ProgramLike::ACTION_ADD') }}"
+       data-const-action-remove="{{ constant('App\\Entity\\ProgramLike::ACTION_REMOVE') }}"
+       data-path-profile="{{ path('profile', {'id': 'USERID'}) }}"
+       data-asset-wow-white="{{ asset('images/default/wow_white.svg') }}"
+       data-asset-wow-black="{{ asset('images/default/wow_black.svg') }}"
+       data-trans-reaction="{{ 'programs.reactionsText'|trans({}, 'catroweb') }}"
+       data-trans-download-error="{{ 'programs.downloadErrorText'|trans({}, 'catroweb') }}"
+  ></div>
+
+  <div class="js-project-share"
+       data-theme-display-name="{{ getThemeDisplayName() }}"
+       data-trans-check-out-project="{{ "checkOutProject"|trans({}, "catroweb") }}"
+       data-project-url="{{ url('program', { id : program.id }) }}"
+       data-trans-share-success="{{ "share.success"|trans({}, "catroweb") }}"
+       data-trans-share-error="{{ "share.error"|trans({}, "catroweb") }}"
+       data-trans-copy="{{ "copy"|trans({}, "catroweb") }}"
+       data-trans-clipboard-success="{{ "clipboard.success"|trans({}, "catroweb") }}"
+       data-trans-clipboard-fail="{{ "clipboard.fail"|trans({}, "catroweb") }}"
+  ></div>
+  <div class="js-project-report"
+       data-project-id="{{ program.id }}"
+       data-path-report="{{ path('catrobat_api_report_program') }}"
+       data-path-login="{{ url('login') }}"
+       data-trans-success="{{ 'success.report'                          |trans({}, 'catroweb') }}"
+       data-trans-error="{{ "error"                                   |trans({}, "catroweb") }}"
+       data-trans-report="{{ "programs.report"                         |trans({}, "catroweb") }}"
+       data-trans-cancel="{{ "cancel"                                  |trans({}, "catroweb") }}"
+       data-trans-header="{{ "programs.reportDialogHeader"             |trans({}, "catroweb") }}"
+       data-trans-reason="{{ "programs.reportDialogReason"             |trans({}, "catroweb") }}"
+       data-trans-inappropriate="{{ "programs.reportRadioButtonInappropriate" |trans({}, "catroweb") }}"
+       data-trans-copyright="{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}"
+       data-trans-spam="{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}"
+       data-trans-dislike="{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}"
+       data-const-ok="{{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }}"
+       data-logged-in="{{ logged_in }}"
+  ></div>
+
 {% endblock %}
 
 {% block js %}
-  <script>const theme = '{{ theme() }}'</script>
-  <script>const flavor = '{{ flavor() }}'</script>
-  <script>const baseUrl = '{{ app.request.getBaseURL() }}'</script>
-  <script src="{{ asset('js/ProjectList.js') }}"></script>
-  <script src="{{ asset('js/ImageUpload.js') }}"></script>
-  <script>
-    setImageUploadListener('{{ path('upload_project_thumbnail', { 'id': program.id }) }}',
-      '#change-project-thumbnail-button', '#project-thumbnail-big',
-        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
-        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_EXCEEDING_FILESIZE') }},
-        {{ constant('App\\Catrobat\\StatusCode::UPLOAD_UNSUPPORTED_MIME_TYPE') }}
-    )
-  </script>
+  {{ encore_entry_script_tags('project') }}
 
-  <script src="{{ asset('js/Program.js') }}"></script>
-  <script src="{{ asset('js/ProgramReport.js') }}"></script>
-  <script>
-    new ProgramReport('{{ program.id }}', '{{ path('catrobat_api_report_program') }}', '{{ url('login') }}',
-      "{{ 'success.report'                          |trans({}, 'catroweb') }}",
-      '{{ "error"                                   |trans({}, "catroweb") }}',
-      '{{ "programs.report"                         |trans({}, "catroweb") }}',
-      '{{ "cancel"                                  |trans({}, "catroweb") }}',
-      '{{ "programs.reportDialogHeader"             |trans({}, "catroweb") }}',
-      '{{ "programs.reportDialogReason"             |trans({}, "catroweb") }}',
-      '{{ "programs.reportRadioButtonInappropriate" |trans({}, "catroweb") }}',
-      '{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}',
-      '{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}',
-      '{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}',
-        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
-        {{ logged_in }}
-    )
-  </script>
-  {{ encore_entry_script_tags('report') }}
+  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
+  <script src="{{ asset('js/modules/sweetalert2.min.js') }}"></script>
   <script src="{{ asset('js/ProgramComments.js') }}"></script>
   <script>
     new ProgramComments('{{ program_details.id }}', 5, 5, 5, {{ (program_details.comments|length) }},
@@ -239,7 +262,6 @@
         {{ constant('App\\Catrobat\\StatusCode::DESCRIPTION_TOO_LONG') }}
     )
   </script>
-
   <script src="{{ asset('js/ProgramCredits.js') }}"></script>
   <script>
     new ProgramCredits('{{ program.id }}',
@@ -250,90 +272,13 @@
     )
   </script>
 
-  <script src="{{ asset('js/ProgramShare.js') }}"></script>
-  <script src=" {{ asset( 'js/modules/clipboard.min.js') }}"></script>
-  <script>
-    let share = new ProgramShare('{{ getThemeDisplayName() }}',
-      '{{ "checkOutProject"|trans({}, "catroweb") }}', '{{ url('program', { id : program.id }) }}',
-      '{{ "share.success"|trans({}, "catroweb") }}', '{{ "share.error"|trans({}, "catroweb") }}',
-      '{{ "copy"|trans({}, "catroweb") }}', '{{ "clipboard.success"|trans({}, "catroweb") }}',
-      '{{ "clipboard.fail"|trans({}, "catroweb") }}')
-    share.clipboard()
-  </script>
-
-  <script>
-    let program = new Program(
-      '{{ program.id }}',
-      '{{ csrf_token('project') }}',
-        {% if app.user %} 'user', {% else %} 'guest', {% endif %}
-        {% if my_program %} true, {% else %} false, {% endif %}
-      '{{ path('ci_status', { 'id' : program.id }) }}',
-      '{{ path('ci_build', { 'id' : program.id }) }}',
-      '{{ path('project_like', { 'id' : program.id }) }}',
-      '{{ path('api_project_likes', { 'id' : program.id }) }}',
-      '{{ 'apk.preparing'|trans({}, "catroweb") }}',
-      '{{ 'apk.text'|trans({}, "catroweb") }}',
-      '{{ 'programs.updateAppHeader'|trans({}, "catroweb") }}',
-      '{{ 'programs.updateAppText'|trans({}, "catroweb") }}',
-      '{{ 'programs.btnClosePopup'|trans({}, "catroweb") }}',
-      '{{ constant('App\\Entity\\ProgramLike::ACTION_ADD') }}',
-      '{{ constant('App\\Entity\\ProgramLike::ACTION_REMOVE') }}',
-      '{{ path('profile', {'id': 'USERID'}) }}',
-      '{{ asset('images/default/wow_white.svg') }}',
-      '{{ asset('images/default/wow_black.svg') }}',
-      '{{ 'programs.reactionsText'|trans({}, 'catroweb') }}',
-      '{{ 'programs.downloadErrorText'|trans({}, 'catroweb') }}',
-    )
-    program.getApkStatus()
-    program.createLinks()
-  </script>
 
   <script src="{{ asset('js/ProgramRecommender.js') }}"></script>
   <script>
-    const $recommendedProjects = $('#recommended-projects')
-    $('.project-list', $recommendedProjects).each(function () {
-      const $t = $(this)
-      const category = $t.data('category')
-      const property = $t.data('property')
-
-      /* eslint-disable no-undef */
-      let url = baseUrl + '/api/project/{{ program.id }}/recommendations?category=' + category
-
-      /* eslint-disable no-undef */
-      if (flavor !== 'pocketcode' || category === 'example') {
-        // The pocketcode flavor must use projects from all flavors
-        url += '&flavor=' + flavor
-      }
-
-      const list = new ProjectList(this, category, url, property, self.performClickStatisticRequest, theme)
-      /* eslint-enable no-undef */
-      $t.data('list', list)
-    })
-
     let programRecommender = new ProgramRecommender (
       '{{ program.id }}',
       "{{ path('click_stats') }}"
     )
     programRecommender.init()
-  </script>
-  <script src="{{ asset('js/PasswordVisibilityToggler.js') }}"></script>
-
-  <script src=" {{ asset( 'js/Translation.js') }}"></script>
-
-  <script src=" {{ asset( 'js/TranslateProgram.js') }}"></script>
-  <script>
-    new TranslateProgram(
-      '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}',
-      '{{ program.id }}',
-      {% if program.description %} true, {% else %} false, {% endif %}
-      {% if program.credits %} true {% else %} false {% endif %}
-    )
-  </script>
-
-  <script src=" {{ asset( 'js/TranslateComments.js') }}"></script>
-  <script>
-    new TranslateComments(
-      '{{ 'programs.translatedByLine'|trans({}, 'catroweb') }}',
-    )
   </script>
 {% endblock %}

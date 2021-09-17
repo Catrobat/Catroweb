@@ -1,7 +1,7 @@
 {# If you change #project-like-buttons, you need to change it in Program.js in sendProjectLike too #}
 {% if program_details.totalLikeCount is same as(0) %}
   <div id="project-like-buttons{{ suffix|default('') }}"
-     {% if suffix is not defined %} style="display: inline"{% endif %}>
+     {% if suffix is not defined %} style="display: inline;"{% endif %}>
     <div class="btn btn-primary btn-round d-inline-flex justify-content-center">
       <i class="material-icons thumbs-up md-24">
         thumb_up
@@ -11,7 +11,7 @@
   <span id="project-like-counter{{ suffix|default('') }}" class="like-counter d-none">0</span>
 {% else %}
   <div id="project-like-buttons{{ suffix|default('') }}"
-     {% if suffix is not defined %} style="display: inline"{% endif %}>
+     {% if suffix is not defined %} style="display: inline;"{% endif %}>
     {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeLikeTypes %}
       <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
         <i class="material-icons md-24 thumbs-up">
@@ -49,7 +49,7 @@
     </span>
     <span>
     <i class="material-icons d-none" id="project-reactions-spinner{{ suffix|default('') }}">
-      {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), 'size': 'small'} %}
+      {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'reactions-spinner' ~ suffix|default(), 'size': 'small'} %}
     </i>
     </span>
   {% if suffix is defined %}

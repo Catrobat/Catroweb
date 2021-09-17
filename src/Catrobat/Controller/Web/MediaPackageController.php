@@ -28,7 +28,7 @@ class MediaPackageController extends AbstractController
     /** @var MediaPackage $packages */
     $packages = $em->getRepository(MediaPackage::class)->findAll();
 
-    return $this->render('MediaLibrary/mediapackageindex.html.twig',
+    return $this->render('MediaLibrary/media_library_overview.html.twig',
       [
         'packages' => $packages,
         'new_nav' => true,

@@ -1,29 +1,28 @@
 {% extends 'Default/base.html.twig' %}
+{% block page_title %}{{ "follower.followers"|trans({}, "catroweb") }}{% endblock %}
 
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}" media="screen"/>
+  {{ encore_entry_link_tags('follower_overview') }}
 {% endblock %}
 
 {% block body %}
-  <div class="row follower-tabs">
-    <div class="catro-tabs w-100">
-      <ul class="nav nav-tabs nav-fill" id="tabs-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="follower-tab" data-toggle="tab" href="#follower-section"
-             aria-controls="follower-section"
-             aria-selected="true"
-             role="tab">{{ followers_list|length }} {{ 'follower.followers'|trans({}, 'catroweb') }}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="follows-tab" data-toggle="tab" href="#following-section"
-             aria-controls="following-section" aria-selected="false"
-             role="tab">{{ following_list|length }} {{ 'follower.follows'|trans({}, 'catroweb') }}</a>
-        </li>
-      </ul>
-    </div>
-  </div>
 
-  <div class="tab-content mt-4" id="tabs-tabContent">
+    {% include 'components/tab_bar.html.twig' with {
+      'tabs': [
+        {
+          'id': 'follower-tab',
+          'title': '' ~ followers_list|length ~ ' ' ~ 'follower.followers'|trans({}, 'catroweb'),
+          'controls': 'follower-section'
+        },
+        {
+          'id': 'follows-tab',
+          'title': '' ~ following_list|length ~ ' ' ~ 'follower.follows'|trans({}, 'catroweb'),
+          'controls': 'following-section'
+        }
+      ]
+    }%}
+
+  <div class="tab-content mt-4">
     <div id="follower-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="follower-tab">
       <div id="no-followers" class="text-center mb-5 {{ followers_list is empty ? 'd-block' : 'd-none' }}">
         {{ "follower.noFollowers"|trans({}, "catroweb") }}
@@ -52,23 +51,22 @@
       </div>
     </div>
   </div>
+
+  <div class="js-follower-overview"
+       data-csrf-token="{{ csrf_token('follower') }}"
+       data-unfollow-url="{{ url('unfollow') }}"
+       data-follow-url="{{ url('follow') }}"
+       data-login-url="{{ url('login') }}"
+       data-something-went-wrong-error="{{ "somethingWentWrong"|trans({}, "catroweb") }}"
+       data-follow-error="{{ "follower.followError"|trans({}, "catroweb") }}"
+       data-unfollow-error="{{ "follower.unfollowError"|trans({}, "catroweb") }}"
+       data-unfollow-button="{{ "follower.unfollowButton"|trans({}, "catroweb") }}"
+       data-unfollow-question="{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}"
+       data-cancel-button="{{ "cancelMessage"|trans({}, "catroweb") }}"
+       data-number-of-following="{{ following_list|length }}"
+  ></div>
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('js/Follower.js') }}"></script>
-  <script>
-    let followers = new Follower(
-      "{{ csrf_token('follower') }}",
-      "{{ url('unfollow') }}",
-      "{{ url('follow') }}",
-      "{{ "somethingWentWrong"|trans({}, "catroweb") }}",
-      "{{ "follower.followError"|trans({}, "catroweb") }}",
-      "{{ "follower.unfollowError"|trans({}, "catroweb") }}",
-      "{{ "follower.unfollowButton"|trans({}, "catroweb") }}",
-      "{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}",
-      "{{ "cancelMessage"|trans({}, "catroweb") }}",
-      "{{ following_list|length }}",
-      true
-    )
-  </script>
+  {{ encore_entry_script_tags('follower_overview') }}
 {% endblock %}

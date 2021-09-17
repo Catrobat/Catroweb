@@ -1,6 +1,7 @@
 {% extends 'Default/base.html.twig' %}
+
 {% block head %}
-  <link rel="stylesheet" href="{{ asset('build/css/multi_column_article.css') }}" media="screen"/>
+  {{ encore_entry_link_tags('multi_column_article') }}
 {% endblock %}
 
 {% block body %}

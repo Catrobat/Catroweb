@@ -18,11 +18,6 @@
   <div class="group">
     <input title="username" type="text" id="username" name="_username" value="{{ username }}"
            required minlength="3" maxlength="180">
-    <span class="highlight"></span>
-    <span class="bar"></span>
-    <label class="label-with-value">
-      <span class="span-input">{{ 'username'|trans({}, 'catroweb') }}</span>
-    </label>
   </div>
 
   <button id="save-username" class="btn btn-primary save-button">
@@ -30,7 +25,7 @@
   </button>
 
   <div id="username-ajax" class="button-show-ajax">
-    {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'save-username-spinner'} only %}
+    {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'save-username-spinner'} only %}
   </div>
 
 </div>

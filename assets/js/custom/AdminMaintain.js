@@ -1,5 +1,3 @@
-/* eslint-env jquery */
-
 // eslint-disable-next-line no-unused-vars
 function AdminMaintain (google, dataSpaceValues, dataMemValues, wholeSpace, wholeRam) {
   const self = this

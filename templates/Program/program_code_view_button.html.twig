@@ -1,9 +1,10 @@
 <button id="code-view{{ suffix|default('') }}"
-        class="btn btn-outline-primary btn-block"
-        onclick="program.projectViewButtonsAction('{{ path('code_view', {'id': program.id }) }}', '#code-view-button-spinner{{ suffix|default('') }}',
-                '#code-view-icon{{ suffix|default('') }}')">
+        class="btn btn-outline-primary btn-block project-redirect"
+        data-url='{{ path('code_view', {'id': program.id }) }}'
+        data-spinner='#code-view-button-spinner{{ suffix|default('') }}'
+        data-icon='#code-view-icon{{ suffix|default('') }}'>
   <i class="material-icons d-none text-left" id="code-view-button-spinner{{ suffix|default('') }}">
-    {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default(), 'size': 'small'} %}
+    {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default(), 'size': 'small'} %}
   </i>
   <i class="material-icons align-bottom" id="code-view-icon">extension</i>
   <span>{{ "codeview.title"|trans({}, "catroweb") }}</span>

@@ -19,6 +19,6 @@
     <input type="file" name="file">
     <a href="">{{ 'profile.changePicture'|trans({}, 'catroweb') }}</a>
     <div class="button-show-ajax"> <i class="material-icons text-left d-none" id="upload-image-spinner">
-        {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'upload-image-pb', 'small': 'true'} only %}</i></div>
+        {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'upload-image-pb', 'small': 'true'} only %}</i></div>
   </div>
 </div>

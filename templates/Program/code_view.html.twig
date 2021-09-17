@@ -17,7 +17,7 @@
 
   <div class="d-flex justify-content-center">
     <i class="material-icons" id="code-view-spinner">
-      {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default()} %}
+      {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'code-view-spinner' ~ suffix|default()} %}
     </i>
   </div>
   {% if isVersionSupportedByCatBlocks(version) %}
@@ -38,6 +38,8 @@
 <script src="{{ asset('js/OldCodeView.js') }}"></script>
 
 {% if isVersionSupportedByCatBlocks(version) %}
+  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
   <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
   <script src="{{ asset('js/ProgramCodeView.js') }}"></script>
   <script>

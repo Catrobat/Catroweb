@@ -1,8 +1,25 @@
-/* eslint-env jquery */
+/* global deleteUrl */
+/* global toggleVisibilityUrl */
+/* global programCanNotChangeVisibilityTitle */
+/* global programCanNotChangeVisibilityText */
 /* global Routing */
 
-// eslint-disable-next-line no-unused-vars
-const ProjectLoader = function (container, url, recommendedByProjectId, recommendedByPageId) {
+import $ from 'jquery'
+import Swal from 'sweetalert2'
+import { showTopBarSearch, controlTopBarSearchClearButton } from '../layout/header'
+
+require('../../styles/components/project_list.scss')
+
+/**
+ * @deprecated
+ *
+ * @param container
+ * @param url
+ * @param recommendedByProjectId
+ * @param recommendedByPageId
+ * @constructor
+ */
+export const ProjectLoader = function (container, url, recommendedByProjectId, recommendedByPageId) {
   const self = this
 
   // The container where the projects will be appended (must be set!)
@@ -528,19 +545,116 @@ const ProjectLoader = function (container, url, recommendedByProjectId, recommen
   }
 
   async function addMyProfileProgramButtons (htmlProject, project) {
-    $(htmlProject).prepend('<div id="delete-' + project.ProjectId + '" class="img-delete" ' +
-      'onclick="profile.deleteProgram(\'' + project.ProjectId + '\')">' +
+    $(htmlProject).prepend('<div id="delete-' + project.ProjectId + '" class="my-project-delete-btn img-delete" ' +
+      ' data-project-id="' + project.ProjectId + '">' +
       '<span class="mdc-icon-button material-icons">close</span></div>')
 
-    $(htmlProject).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="img-lock-open" ' +
+    $(htmlProject).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="my-project-visibility-toggle img-lock-open" ' +
       (project.Private ? 'style="display: none;"' : '') +
-      ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
+      ' data-project-id="' + project.ProjectId + '">' +
       '<span class="mdc-icon-button material-icons">lock_open</span></i></div>')
 
-    $(htmlProject).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="img-lock" ' +
+    $(htmlProject).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="my-project-visibility-toggle img-lock" ' +
       (project.Private ? '' : 'style="display: none;"') +
-      ' onclick="profile.toggleVisibility(\'' + project.ProjectId + '\')">' +
+      ' data-project-id="' + project.ProjectId + '">' +
       '<span class="mdc-icon-button material-icons">lock</span></div>')
+
+    $('.my-project-delete-btn').on('click', (e) => {
+      deleteProgram($(e.currentTarget).data('project-id'))
+    })
+
+    $('.my-project-visibility-toggle').on('click', (e) => {
+      toggleVisibility($(e.currentTarget).data('project-id'))
+    })
+  }
+
+  function stringTranslate (programName, catalogEntry) {
+    const translations = []
+    translations.push({ key: '%programName%', value: programName })
+    return Routing.generate('translate', {
+      word: catalogEntry,
+      array: JSON.stringify(translations),
+      domain: 'catroweb'
+    }, false)
+  }
+
+  function deleteProgram (id) {
+    const programName = $('#program-' + id).find('.program-name').text()
+    const catalogEntry = 'programs.deleteConfirmation'
+    const url = stringTranslate(programName, catalogEntry)
+    $.get(url, function (data) {
+      const split = data.split('\n')
+      Swal.fire({
+        title: split[0],
+        html: split[1] + '<br><br>' + split[2],
+        icon: 'warning',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-danger',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
+        confirmButtonText: split[3],
+        cancelButtonText: split[4]
+      }).then((result) => {
+        if (result.value) {
+          window.location.href = deleteUrl + '/' + id
+        }
+      })
+    })
+  }
+
+  function toggleVisibility (id) {
+    const visibilityLockId = $('#visibility-lock-' + id)
+    const visibilityLockOpenId = $('#visibility-lock-open-' + id)
+    const programName = $('#program-' + id).find('.program-name').text()
+    const catalogEntry = 'programs.changeVisibility'
+    const url = stringTranslate(programName, catalogEntry)
+    const isPrivate = visibilityLockId.is(':visible')
+
+    $.get(url, function (data) {
+      const split = data.split('\n')
+      Swal.fire({
+        title: split[0],
+        html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
+        icon: 'warning',
+        showCancelButton: true,
+        allowOutsideClick: false,
+        customClass: {
+          confirmButton: 'btn btn-primary',
+          cancelButton: 'btn btn-outline-primary'
+        },
+        buttonsStyling: false,
+        confirmButtonText: (isPrivate) ? split[4] : split[5],
+        cancelButtonText: split[6]
+      }).then((result) => {
+        if (result.value) {
+          $.get(toggleVisibilityUrl + '/' + id, {}, function (data) {
+            if (data === 'true') {
+              if (isPrivate) {
+                visibilityLockId.hide()
+                visibilityLockOpenId.show()
+              } else {
+                visibilityLockId.show()
+                visibilityLockOpenId.hide()
+              }
+            } else {
+              Swal.fire({
+                title: programCanNotChangeVisibilityTitle,
+                text: programCanNotChangeVisibilityText,
+                icon: 'error',
+                customClass: {
+                  confirmButton: 'btn btn-primary'
+                },
+                buttonsStyling: false,
+                allowOutsideClick: false
+              })
+            }
+          })
+        }
+      })
+    })
   }
 
   // -------------------------------------------------------------------------------------------------------------------

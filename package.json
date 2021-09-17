@@ -79,6 +79,7 @@
     "purgecss-webpack-plugin": "^4.0.3",
     "sweetalert2": "^11.1.6",
     "textfilljs": "^1.0.3-a",
+    "typeface-roboto": "^1.1.13",
     "vis": "^4.21.0"
   },
   "standard": {
