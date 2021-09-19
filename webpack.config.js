@@ -146,16 +146,16 @@ Encore
   /*
    * Plugins
    */
-  .addPlugin(new PurgeCssPlugin({
-    paths: glob.sync([
-      path.join(__dirname, 'templates/**/*.html.twig'),
-      path.join(__dirname, 'assets/**/*.js')
-    ]),
-    content: ['**/*.twig', '**/*.js'],
-    defaultExtractor: (content) => {
-      return content.match(/[\w-/:]+(?<!:)/g) || []
-    }
-  }))
+  // .addPlugin(new PurgeCssPlugin({
+  //   paths: glob.sync([
+  //     path.join(__dirname, 'templates/**/*.html.twig'),
+  //     path.join(__dirname, 'assets/**/*.js')
+  //   ]),
+  //   content: ['**/*.twig', '**/*.js'],
+  //   defaultExtractor: (content) => {
+  //     return content.match(/[\w-/:]+(?<!:)/g) || []
+  //   }
+  // }))
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
