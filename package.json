@@ -77,7 +77,7 @@
     "path": "^0.12.7",
     "popper.js": "^1.16.1",
     "purgecss-webpack-plugin": "^4.0.3",
-    "sweetalert2": "^11.1.5",
+    "sweetalert2": "^11.1.6",
     "textfilljs": "^1.0.3-a",
     "vis": "^4.21.0"
   },
