@@ -367,7 +367,7 @@ class ProgramManager
     } elseif (ProgramLike::ACTION_REMOVE === $action) {
       $this->program_like_repository->removeLike($project, $user, $type);
     } else {
-      throw new InvalidArgumentException('Invalid action "'.$action.'"');
+      throw new InvalidArgumentException("Invalid action: {$action}");
     }
   }
 

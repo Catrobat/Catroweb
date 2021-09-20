@@ -9,19 +9,14 @@ Feature:
       | 2  | TestUser | false      |
 
   Scenario: When I login for the first time using OAuth service I should see OAuth Info popup
-    Given I  log in as "Catrobat"
+    Given I log in as "Catrobat"
+    And I wait for the page to be loaded
     Then I should see "External account sign in information"
     And I logout
-    And  I  log in as "Catrobat"
+    And  I log in as "Catrobat"
     Then I should not see "External account sign in information"
     Given I log in as "TestUser"
     Then I should not see "External account sign in information"
-
-  Scenario: When I click link in the Oauth Info popup I should be redirected on my profile
-    Given I log in as "Catrobat"
-    Then I should see "External account sign in information"
-    And I click on the "here" link
-    Then I should be on "/app/user"
 
   Scenario: OAuth users should be able to create a new password
     Given I log in as "Catrobat"
@@ -32,6 +27,7 @@ Feature:
     And I fill in "repeat-password" with "test12"
     And I click "#save-password"
     And I wait for AJAX to finish
+    And I wait 500 milliseconds
     Then I should see "Success"
     And I click ".swal2-confirm"
     Then I should see "Password"

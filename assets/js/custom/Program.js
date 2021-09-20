@@ -1,32 +1,48 @@
-/* eslint-env jquery */
-/* global Swal */
+import $ from 'jquery'
+import 'bootstrap'
+import Swal from 'sweetalert2'
+import { showSnackbar } from '../components/snackbar'
 
-// eslint-disable-next-line no-unused-vars
-const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
+function redirect (url, spinner, icon = null) {
+  const buttonSpinner = $(spinner)
+  if (icon) {
+    const buttonIcon = $(icon)
+    buttonIcon.hide()
+  }
+  buttonSpinner.removeClass('d-none')
+  window.location.href = url
+}
+
+$('.project-redirect').on('click', (e) => {
+  redirect(
+    $(e.currentTarget).data('url'),
+    $(e.currentTarget).data('spinner'),
+    $(e.currentTarget).data('icon')
+  )
+})
+
+export const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText) {
-  const self = this
+  createLinks()
+  getApkStatus()
 
-  self.projectId = projectId
-  self.csrfToken = csrfToken
-  self.userRole = userRole
-  self.myProgram = myProgram
-  self.statusUrl = statusUrl
-  self.createUrl = createUrl
-  self.apkPreparing = apkPreparing
-  self.apkText = apkText
-  self.updateAppHeader = updateAppHeader
-  self.updateAppText = updateAppText
-  self.btnClosePopup = btnClosePopup
-  self.likeActionAdd = likeActionAdd
-  self.likeActionRemove = likeActionRemove
-  self.apk_url = null
-  self.apk_download_timeout = false
-  self.wowWhite = wowWhite
-  self.wowBlack = wowBlack
-  self.reactionsText = reactionsText
-  self.downloadErrorText = downloadErrorText
-  self.download = function (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
+  $('.btn-project-download').on('click', (e) => {
+    console.error($(e.currentTarget).data('is-supported'))
+    download(
+      $(e.currentTarget).data('path-url'),
+      $(e.currentTarget).data('project-id'),
+      $(e.currentTarget).data('button-id'),
+      $(e.currentTarget).data('is-supported'),
+      $(e.currentTarget).data('is-webview'),
+      $(e.currentTarget).data('pb'),
+      $(e.currentTarget).data('icon')
+    )
+  })
+
+  let apkDownloadTimeout = false
+
+  function download (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
     downloadPbID, downloadIconID) {
     const downloadProgressBar = $(downloadPbID)
     const downloadIcon = $(downloadIconID)
@@ -37,7 +53,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     }
     button.disabled = true
     if (!supported) {
-      self.showPreparingApkPopup()
+      showPreparingApkPopup()
       button.disabled = false
       return
     }
@@ -47,8 +63,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     fetch(downloadUrl)
       .then(function (response) {
         if (!response.ok) {
-          // eslint-disable-next-line no-undef
-          showSnackbar('#share-snackbar', self.downloadErrorText)
+          showSnackbar('#share-snackbar', downloadErrorText)
           return null
         }
         return response.blob()
@@ -78,18 +93,18 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
       })
   }
 
-  self.getApkStatus = function () {
-    $.get(self.statusUrl, null, self.onResult)
+  function getApkStatus () {
+    $.get(statusUrl, null, onResult)
   }
 
-  self.createApk = function () {
+  function createApk () {
     $('#apk-generate, #apk-generate-small').addClass('d-none')
     $('#apk-pending, #apk-pending-small').removeClass('d-none')
-    $.get(self.createUrl, null, self.onResult)
-    self.showPreparingApkPopup()
+    $.get(createUrl, null, onResult)
+    showPreparingApkPopup()
   }
 
-  self.onResult = function (data) {
+  function onResult (data) {
     const apkPending = $('#apk-pending, #apk-pending-small')
     const apkDownload = $('#apk-download, #apk-download-small')
     const apkGenerate = $('#apk-generate, #apk-generate-small')
@@ -97,25 +112,24 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     apkDownload.addClass('d-none')
     apkPending.addClass('d-none')
     if (data.status === 'ready') {
-      self.apk_url = data.url
       apkDownload.removeClass('d-none')
       apkDownload.click(function () {
-        if (!self.apk_download_timeout) {
-          self.apk_download_timeout = true
+        if (!apkDownloadTimeout) {
+          apkDownloadTimeout = true
 
           setTimeout(function () {
-            self.apk_download_timeout = false
+            apkDownloadTimeout = false
           }, 5000)
 
-          top.location.href = self.apk_url
+          top.location.href = data.url
         }
       })
     } else if (data.status === 'pending') {
       apkPending.removeClass('d-none')
-      setTimeout(self.getApkStatus, 5000)
+      setTimeout(getApkStatus, 5000)
     } else if (data.status === 'none') {
       apkGenerate.removeClass('d-none')
-      apkGenerate.click(self.createApk)
+      apkGenerate.click(createApk)
     } else {
       apkGenerate.removeClass('d-none')
     }
@@ -126,43 +140,24 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     }
   }
 
-  self.createLinks = function () {
+  function createLinks () {
     $('#description').each(function () {
       $(this).html($(this).html().replace(/((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a> '))
     })
   }
 
-  self.showUpdateAppPopup = function () {
-    const popupBackground = self.createPopupBackgroundDiv()
-    const popupDiv = self.createPopupDiv()
-    const body = $('body')
-    popupDiv.append('<h2>' + self.updateAppHeader + '</h2><br>')
-    popupDiv.append('<p>' + self.updateAppText + '</p>')
-
-    const closePopupButton = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btnClosePopup + '</button>'
-    popupDiv.append(closePopupButton)
-
-    body.append(popupBackground)
-    body.append(popupDiv)
-
-    $('#popup-background, #btn-close-popup').click(function () {
-      popupDiv.remove()
-      popupBackground.remove()
-    })
-  }
-
-  self.showPreparingApkPopup = function () {
-    const popupBackground = self.createPopupBackgroundDiv()
-    const popupDiv = self.createPopupDiv()
+  function showPreparingApkPopup () {
+    const popupBackground = createPopupBackgroundDiv()
+    const popupDiv = createPopupDiv()
     const body = $('body')
     const apkSpinner = $('#apk-pb')
     apkSpinner.removeClass('d-none')
 
-    popupDiv.append('<h2>' + self.apkPreparing + '</h2><br>')
+    popupDiv.append('<h2>' + apkPreparing + '</h2><br>')
     popupDiv.append(apkSpinner)
-    popupDiv.append('<p>' + self.apkText + '</p>')
+    popupDiv.append('<p>' + apkText + '</p>')
 
-    const closePopupButton = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + self.btnClosePopup + '</button>'
+    const closePopupButton = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + btnClosePopup + '</button>'
     popupDiv.append(closePopupButton)
 
     body.append(popupBackground)
@@ -175,15 +170,15 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     })
   }
 
-  self.createPopupDiv = function () {
+  function createPopupDiv () {
     return $('<div id="popup-info" class="popup-div"></div>')
   }
 
-  self.createPopupBackgroundDiv = function () {
+  function createPopupBackgroundDiv () {
     return $('<div id="popup-background" class="popup-bg"></div>')
   }
 
-  self.createCookie = function createCookie (name, value, days2expire, path) {
+  function createCookie (name, value, days2expire, path) {
     const date = new Date()
     date.setTime(date.getTime() + (days2expire * 24 * 60 * 60 * 1000))
     const expires = date.toUTCString()
@@ -192,9 +187,9 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
       'path=' + path + ';'
   }
 
-  self.createCookie('referrer', document.referrer, 1, '/')
+  createCookie('referrer', document.referrer, 1, '/')
 
-  self.showErrorAlert = function (message) {
+  function showErrorAlert (message) {
     if (typeof message !== 'string' || message === '') {
       message = 'Something went wrong! Please try again later.'
     }
@@ -211,11 +206,10 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     })
   }
 
-  self.$projectLikeCounter = undefined
-  self.$projectLikeButtons = undefined
-  self.$projectLikeDetail = undefined
+  let $projectLikeCounter, $projectLikeButtons, $projectLikeDetail
+  let $projectLikeCounterSmall, $projectLikeButtonsSmall, $projectLikeDetailSmall
 
-  self.initProjectLike = function () {
+  function initProjectLike () {
     let detailOpened = false
 
     const $container = $('#project-like')
@@ -223,9 +217,9 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     const $buttons = $('#project-like-buttons', $container)
     const $detail = $('#project-like-detail', $container)
     const $counter = $('#project-like-counter', $container)
-    self.$projectLikeCounter = $counter
-    self.$projectLikeButtons = $buttons
-    self.$projectLikeDetail = $detail
+    $projectLikeCounter = $counter
+    $projectLikeButtons = $buttons
+    $projectLikeDetail = $detail
 
     $buttons.on('click', function () {
       if ($detail.css('display') === 'flex') {
@@ -238,9 +232,9 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
     const $buttonsSmall = $('#project-like-buttons-small', $containerSmall)
     const $detailSmall = $('#project-like-detail-small', $containerSmall)
     const $counterSmall = $('#project-like-counter-small', $containerSmall)
-    self.$projectLikeCounterSmall = $counterSmall
-    self.$projectLikeButtonsSmall = $buttonsSmall
-    self.$projectLikeDetailSmall = $detailSmall
+    $projectLikeCounterSmall = $counterSmall
+    $projectLikeButtonsSmall = $buttonsSmall
+    $projectLikeDetailSmall = $detailSmall
 
     $buttonsSmall.on('click', function () {
       if ($detailSmall.css('display') === 'flex') {
@@ -257,13 +251,13 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         detailOpened = false
       }
     })
-    $counter.on('click', { small: false }, self.counterClickAction)
-    $counterSmall.on('click', { small: true }, self.counterClickAction)
-    $detail.find('.btn').on('click', self.detailsAction)
-    $detailSmall.find('.btn').on('click', self.detailsAction)
+    $counter.on('click', { small: false }, counterClickAction)
+    $counterSmall.on('click', { small: true }, counterClickAction)
+    $detail.find('.btn').on('click', detailsAction)
+    $detailSmall.find('.btn').on('click', detailsAction)
   }
 
-  self.counterClickAction = function (event) {
+  function counterClickAction (event) {
     if (event.data.small) {
       $('#project-reactions-spinner-small').removeClass('d-none')
     } else {
@@ -273,7 +267,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
       /** @param {{user: {id: string, name: string}, types: string[]}[]} data */
       function (data) {
         if (!Array.isArray(data)) {
-          self.showErrorAlert()
+          showErrorAlert()
           console.error('Invalid data returned by likeDetailUrl', data)
           return
         }
@@ -329,7 +323,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
                 $likeTypes.append($('<i/>').addClass('material-icons md-18 ' + iconMappingClasses[type]).append(iconMapping[type]))
               } else {
                 const img = document.createElement('IMG')
-                img.src = self.wowBlack
+                img.src = wowBlack
                 img.className = 'wow'
                 img.id = 'wow-reaction-modal'
                 img.alt = 'Wow Reaction'
@@ -353,25 +347,27 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
       }).fail(function (jqXHR, textStatus, errorThrown) {
       $('#project-reactions-spinner').hide()
       $('#project-reactions-spinner-small').hide()
-      self.showErrorAlert()
+      showErrorAlert()
       console.error('Failed fetching like list', jqXHR, textStatus, errorThrown)
     })
   }
-  self.detailsAction = function (event) {
+
+  function detailsAction (event) {
     event.preventDefault()
     const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
-    self.sendProjectLike($(this).data('like-type'), action, self.$projectLikeButtonsSmall,
-      self.$projectLikeCounterSmall, self.$projectLikeDetailSmall, true)
-    self.sendProjectLike($(this).data('like-type'), action, self.$projectLikeButtons,
-      self.$projectLikeCounter, self.$projectLikeDetail, false)
+    sendProjectLike($(this).data('like-type'), action, $projectLikeButtonsSmall,
+      $projectLikeCounterSmall, $projectLikeDetailSmall, true)
+    sendProjectLike($(this).data('like-type'), action, $projectLikeButtons,
+      $projectLikeCounter, $projectLikeDetail, false)
   }
-  self.sendProjectLike = function (likeType, likeAction, likeButtons, likeCounter, likeDetail, smallScreen) {
+
+  function sendProjectLike (likeType, likeAction, likeButtons, likeCounter, likeDetail, smallScreen) {
     const url = likeUrl +
       '?type=' + encodeURIComponent(likeType) +
       '&action=' + encodeURIComponent(likeAction) +
       '&token=' + encodeURIComponent(csrfToken)
 
-    if (self.userRole === 'guest') {
+    if (userRole === 'guest') {
       window.location.href = url
       return false
     }
@@ -393,7 +389,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         }
 
         // update like count
-        likeCounter.text(data.totalLikeCount.stringValue + ' ' + self.reactionsText)
+        likeCounter.text(data.totalLikeCount.stringValue + ' ' + reactionsText)
         if (data.totalLikeCount.value === 0) {
           likeCounter.addClass('d-none')
         } else {
@@ -427,7 +423,7 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
             const div = document.createElement('DIV')
             div.className = 'btn btn-primary btn-round d-inline-flex justify-content-center align-items-center'
             div.id = 'wow-reaction'
-            img.src = self.wowWhite
+            img.src = wowWhite
             img.id = 'wow-reaction-img'
             if (smallScreen) {
               img.id = 'wow-reaction-img-small'
@@ -445,23 +441,14 @@ const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, 
         window.location.href = url
       } else {
         console.error('Like failure', jqXHR, textStatus, errorThrown)
-        self.showErrorAlert()
+        showErrorAlert()
       }
     })
   }
 
   $(function () {
-    self.initProjectLike()
+    initProjectLike()
   })
-  self.projectViewButtonsAction = function (url, spinner, icon = null) {
-    const buttonSpinner = $(spinner)
-    if (icon) {
-      const buttonIcon = $(icon)
-      buttonIcon.hide()
-    }
-    buttonSpinner.removeClass('d-none')
-    window.location.href = url
-  }
 }
 
 $(document).on('click', function (e) {

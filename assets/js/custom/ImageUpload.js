@@ -1,9 +1,8 @@
-/* eslint-env jquery */
+import $ from 'jquery'
 
-// eslint-disable-next-line no-unused-vars
-function setImageUploadListener (uploadUrl, uploadButtonContainerId, imageContainerId,
-  statusCodeOK, statusCodeUploadExceedingFilesize,
-  statusCodeUploadUnsupportedMimeType) {
+export function setImageUploadListener (uploadUrl, uploadButtonContainerId, imageContainerId,
+  statusCodeOK = 200, statusCodeUploadExceedingFilesize = 413,
+  statusCodeUploadUnsupportedMimeType = 415) {
   $(uploadButtonContainerId).find('input[type=file]').change(function (data) {
     $('.error-message').addClass('d-none')
 

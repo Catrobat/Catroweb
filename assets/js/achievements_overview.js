@@ -9,17 +9,11 @@
 /* global assetPathNewAchievementPopupBackgroundSVG */
 /* global readUnseenAchievementsUrl */
 import Swal from 'sweetalert2'
-import { MDCTabBar } from '@material/tab-bar'
 import 'external-svg-loader'
 
-// Material Tab bar
-const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'))
-const tabPaneElements = document.querySelectorAll('.tab-pane')
+import './components/tab_bar'
 
-tabBar.listen('MDCTabBar:activated', function (event) {
-  document.querySelector('.show.active').classList.remove('show', 'active')
-  tabPaneElements[event.detail.index].classList.add('show', 'active')
-})
+require('../styles/achievement_overview.scss')
 
 handleNewAchievementAnimation()
 

@@ -1,9 +1,9 @@
-$primary: #00acc1;
-
-@import "../base/base";
-
 :root {
   --primary: #00acc1;
+  --color-primary: hsl(187, 100%, 38%);
+  --color-primary-h: 187;
+  --color-primary-s: 100%;
+  --color-primary-l: 38%;
   --theme-logo-color-primary: #17a6b7;
   --theme-logo-color-secondary: #ff7701;
 }

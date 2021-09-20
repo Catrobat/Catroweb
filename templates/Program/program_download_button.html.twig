@@ -1,17 +1,16 @@
 <button id="url-download{{ suffix|default('') }}"
-        class="btn btn-primary btn-block"
-
-        onclick="program.download(
-          '{{ program_details.downloadUrl }}',
-           '{{ program.id }}',
-           '#url-download{{ suffix|default('') }}',
-           '{{ checkCatrobatLanguage(program_details.languageVersion) }}',
-           '{{ isWebview() }}',
-           '#download-pb{{ suffix|default('') }}',
-           '#download-icon{{ suffix|default('') }}')">
+        class="btn btn-primary btn-block btn-project-download"
+        data-path-url='{{ program_details.downloadUrl }}'
+        data-project-id='{{ program.id }}'
+        data-button-id='#url-download{{ suffix|default('') }}'
+        data-is-supported='{% if checkCatrobatLanguage(program_details.languageVersion) %}true{% else %}false{% endif %}'
+        data-is-webview='{% if isWebview() %}true{% else %}false{% endif %}'
+        data-pb='#download-pb{{ suffix|default('') }}'
+        data-icon='#download-icon{{ suffix|default('') }}'
+>
 
   <i class="material-icons text-left d-none" id="download-pb{{ suffix|default('') }}">
-  {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'download-progressbar' ~ suffix|default(), 'size': 'small'} only %}</i>
+  {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'download-progressbar' ~ suffix|default(), 'size': 'small'} only %}</i>
   <i class="material-icons align-bottom" id="download-icon{{ suffix|default('') }}">get_app</i>
   <span>{{ "download"|trans({}, "catroweb") }}</span>
 </button>

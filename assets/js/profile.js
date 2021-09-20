@@ -1,11 +1,13 @@
-import { MDCTabBar } from '@material/tab-bar'
+/* global profileID */
+/* global apiUserPrograms */
+
 import 'external-svg-loader'
+import './components/tab_bar'
+import { ProjectLoader } from './custom/ProjectLoader'
+import './follower_overview'
 
-// Material Tab bar
-const tabBar = new MDCTabBar(document.querySelector('.mdc-tab-bar'))
-const tabPaneElements = document.querySelectorAll('.tab-pane')
+require('../styles/custom/profile.scss')
+require('../styles/components/achievements.scss')
 
-tabBar.listen('MDCTabBar:activated', function (event) {
-  document.querySelector('.show.active').classList.remove('show', 'active')
-  tabPaneElements[event.detail.index].classList.add('show', 'active')
-})
+const programs = new ProjectLoader('#user-programs', apiUserPrograms)
+programs.loadProjects(profileID)

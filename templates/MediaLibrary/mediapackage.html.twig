@@ -1,8 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-  <link rel="preload" href="{{ asset('build/css/medialib.css') }}" as="style">
-  <link rel="stylesheet" href="{{ asset('build/css/medialib.css') }}" media="screen"/>
+ {{ encore_entry_link_tags('media_library') }}
 {% endblock %}
 
 {% block sidebar_ul %}
@@ -34,19 +33,18 @@
       </div>
     {% endfor %}
   </div>
+
+  <div class="js-media-library"
+       data-package="{{ package }}"
+       data-path-media-search="{{ mediaSearchPath|default('')|raw }}"
+       data-flavor="{{ flavor }}"
+       data-media-dir="{{ mediaDir }}"
+       data-trans-element="{{ "element"|trans({}, "catroweb") }}"
+       data-trans-elements="{{ "elements"|trans({}, "catroweb") }}"
+       data-is-webview="{{ isWebview() }}"
+  ></div>
 {% endblock %}
 
 {% block js %}
-  <script src="{{ asset('js/MediaLib.js') }}"></script>
-  <script>
-    new MediaLib(
-      "{{ package }}",
-      "{{ mediaSearchPath|default('')|raw }}",
-      "{{ flavor }}",
-      "{{ mediaDir }}",
-      "{{ "element"|trans({}, "catroweb") }}",
-      "{{ "elements"|trans({}, "catroweb") }}",
-      "{{ isWebview() }}"
-    );
-  </script>
+  {{ encore_entry_script_tags('media_library') }}
 {% endblock %}

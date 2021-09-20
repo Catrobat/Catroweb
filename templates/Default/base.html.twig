@@ -1,2 +1,61 @@
-{% extends 'Default/baseParent.html.twig' %}
+<!DOCTYPE html>
+<html prefix="og: https://ogp.me/ns#" lang="{{ app.request.locale | slice(0, 2) }}">
+<head>
+  <meta http-equiv="Content-Type" content="text/html"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <meta name='viewport' content='width=device-width, user-scalable=no'/>
 
+  <title>
+    {% block title %}Catrobat community{% endblock %}
+  </title>
+
+  <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>
+
+  {% block stylesheets %}
+    {{ encore_entry_link_tags('base') }}
+    {{ encore_entry_link_tags(themeAssets()) }}
+  {% endblock stylesheets %}
+
+  {% block head %}{% endblock %}
+</head>
+
+<body class="new-nav">
+<div id="page-container" class="pr-0 pl-0">
+
+  {% include 'Header/header.html.twig' with
+    {
+      page_title: block('page_title') ?? '',
+      back_path: block('back_path') ?? '',
+      no_search: block('no_search') ?? ''
+    }
+  %}
+
+  {% include 'Default/snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
+
+  {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
+
+  <div class="container body-content page-content">
+    {% block body %}{% endblock %}
+  </div>
+
+  {% include 'Default/footer.html.twig' %}
+
+  <div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
+  <div class="js-app-env" data-app-env="'{{ app_env }}"></div>
+  <div class="js-user-state" data-is-user-logged-in="{{ app.user != null }}"></div>
+
+</div>{# page-container#}
+
+<script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+<script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
+{% if app_env == 'prod' %}
+  <script> let configGA = { 'UaId': 'UA-42270417-5' } </script>
+  <script async src="{{ asset('js/analytics.js') }}"></script>
+{% endif %}
+{{ encore_entry_script_tags('base') }}
+{% block js %}{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,20 @@
+{% extends 'Default/base.html.twig' %}
+{% block page_title %}{{ "media-packages.title"|trans({}, "catroweb") }}{% endblock %}
+
+{% block body %}
+  <div>
+    <p>{{ "media-packages.description"|trans({}, "catroweb") }}</p>
+  </div>
+  <div class="card-deck-wrapper">
+    <div class="card-deck mx-auto">
+      {% for item in packages %}
+        <div class="card">
+          <a class="card-body"
+             href="{{ path('media_library', {'package_name': item.nameUrl}) }}">
+            {{ item.name }}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

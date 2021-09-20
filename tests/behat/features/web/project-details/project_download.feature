@@ -14,7 +14,6 @@ Feature: As a visitor I want to be able to download projects
     When I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#url-download-small" should be visible
-    And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And I click "#url-download-small"
     And I wait 150 milliseconds
     And the element "#share-snackbar" should not be visible
@@ -26,7 +25,6 @@ Feature: As a visitor I want to be able to download projects
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#url-download-small" should be visible
-    And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And the element "#share-snackbar" should not be visible
     And I click "#url-download-small"
     And I wait 150 milliseconds
@@ -35,7 +33,6 @@ Feature: As a visitor I want to be able to download projects
     When I am on "/app/project/2"
     And I wait for the page to be loaded
     Then the element "#url-download-small" should be visible
-    And the element "#url-download-small" should have a attribute "onclick" with value "program.download("
     And I click "#url-download-small"
     And I wait 150 milliseconds
     Then the element "#share-snackbar" should be visible

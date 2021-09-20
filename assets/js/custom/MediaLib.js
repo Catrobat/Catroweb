@@ -1,12 +1,9 @@
-/* eslint-env jquery */
 /* global Routing */
+import $ from 'jquery'
 
-// TopAppBar.js
-/* global showTopBarDownload */
-/* global showTopBarDefault */
+import { showTopBarDownload, showTopBarDefault } from '../layout/header'
 
-// eslint-disable-next-line no-unused-vars
-function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
+export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
   elementsTranslationSingular, elementsTranslationPlural, isWebView = false) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items

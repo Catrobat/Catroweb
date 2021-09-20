@@ -1,5 +1,5 @@
 {% if isWebview() %}
-  <a href="{% if (checkCatrobatLanguage(program_details.languageVersion)) %}{{ program_details.downloadUrl }}{% else %}javascript:program.showUpdateAppPopup();{% endif %}">
+  <a href="{{ program_details.downloadUrl }}">
 {% endif %}
 
     <img alt="project thumbnail" id="project-thumbnail-big" src="{{ asset(program_details.screenshotBig) }}"/>
@@ -16,7 +16,7 @@
       </div>
       <div class="text-center">
         <i class="material-icons text-left d-none" id="upload-image-spinner">
-          {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'upload-image-pb', 'size': 'small'} only %}</i>
+          {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'upload-image-pb', 'size': 'small'} only %}</i>
       </div>
       <div class="d-none error-message text-img-upload-too-large alert alert-danger">
         {{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}
