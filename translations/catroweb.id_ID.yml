@@ -11,7 +11,7 @@ about: Tentang
 education: pendidikan
 chat: Obrolan dan forum
 others: Lainnya
-tutorials: Tutorial
+tutorials: Membantu
 googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Galeri Aplikasi Huawei
@@ -25,9 +25,9 @@ areYouSure: Apakah kamu yakin?
 noWayOfReturn: Tidak ada cara untuk memulihkan tindakan Anda!
 download: Unduh
 description: Keterangan
-noDescription: Keterangan tidak tersedia.
-credits: Credits
-noCredits: No credits available.
+noDescription: Deskripsi tidak tersedia.
+credits: Catatan dan kredit
+noCredits: Tidak ada catatan dan kredit yang tersedia.
 notesAndCreditsDescription: Bagaimana Anda membuat proyek ini? Apakah Anda menggunakan ide, skrip, atau karya seni dari orang lain? Berterimakasihlah di sini.
 country: Negara
 loginText: masuk
@@ -39,28 +39,28 @@ pleaseTryAgain: 'Silahkan coba lagi!'
 oldVersionError: 'Mohon perbaharui Pocket Code ke versi terbaru!'
 more: 'lebih'
 less: 'kurang'
-show-more: 'More information'
-show-less: 'Less information'
+show-more: 'Menampilkan lebih banyak'
+show-less: 'Tampilkan lebih sedikit'
 more-information: 'Informasi lebih lanjut'
 less-information: 'Lebih sedikit informasi'
 ok: Baik
 clickToDownloadProgram: 'Untuk mengunduh proyek contoh, klik %link_start% di sini %link_end%.'
 registrationError: 'Nama pengguna atau alamat email sudah di gunakan.'
 notifications: 'Pemberitahuan'
-allNotifications: 'All notifications'
+allNotifications: 'Semua'
 FollowersNotifications: 'Pengikut'
 LikeNotifications: 'Reaksi'
 CommentNotifications: 'Komentar'
 RemixNotifications: 'Remix'
 wellDone: "Sudah selesai dilakukan dengan baik!"
 done: "Selesai!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Sepertinya Anda tidak memiliki notifikasi apa pun."
 confirmMessage: "Ya, hapus"
 cancelMessage: "Batalkan"
 notificationsUnauthorizedError: "Tidak dapat memberi otorisasi kepada pengguna"
 notificationsClearError: "Tidak bisa menandai pemberitahuan sebagai terbaca!"
 pleaseWait: "Mohon tunggu..."
-projects: "Program"
+projects: "Proyek"
 oauthPopUpTitle: "Informasi masuk akun eksternal"
 oauthInfo: 'Anda baru saja menggunakan akun eksternal untuk masuk. Kami membuat nama pengguna acak untuk Anda. Jika Anda ingin mengubah nama pengguna atau membuat kata sandi baru untuk akun Anda, silakan buka halaman profil saya. Klik %link_start% di sini %link_end% untuk membuka halaman profil Anda'
 oauthHere: "sini"
@@ -106,7 +106,6 @@ programs:
     Ya, hapus!
     Membatalkan
   changeVisibility: |+
-
     Apakah kamu yakin
     Jika Anda menyetel '%programName%' menjadi pribadi, ini tidak akan terlihat atau ditemukan oleh pengguna lain.
     Anda masih dapat membagikan tautan proyek Anda dengan teman-teman Anda. Anda dapat mengaktifkan visibilitas dengan mengetuk ikon gembok.
@@ -123,7 +122,7 @@ programs:
     Ya, hapus!
     Membatalkan
   tooLongDescription: Deskripsi proyek terlalu panjang!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: Catatan dan kredit proyek terlalu panjang!
   most:
     viewed: Paling banyak dilihat
     downloaded: Paling banyak diunduh
@@ -167,9 +166,9 @@ programs:
   deleted_popup_header: Dihapus
   noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
   editDescription: Edit deskripsi proyek
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: Menyimpan
+  editCredits: Edit catatan dan kredit proyek
+  saveCredits: Menyimpan
   addComment: Tulis komen
   thumbsUp: Jempolan!
   smile: Tersenyum!
@@ -196,14 +195,12 @@ noReply: Ini adalah pesan otomatis - Mohon jangan balas langsung ke email ini.
 accountConfirmation:
   subject: Konfirmasi akun Catrobat Anda
   message: |
-
     %username% yang terhormat.
     Untuk menyelesaikan aktivasi akun Anda - silakan kunjungi %confirmationUrl%
     Tautan ini hanya dapat digunakan sekali untuk memvalidasi akun Anda.
     Salam Hormat,
     Tim Catrobat Anda.
   messageHtml: |
-
     <p>
     Halo %username%. <br>
     <br>
@@ -280,7 +277,7 @@ profile:
   goToScratchProfile: Profil di Scratch
 myprofile:
   editProfile: Edit profil
-  edit: Edit
+  edit: Sunting
   done: Selesai
   checkMail: Email dikirim ke alamat email Anda. Silakan cek inbox Anda.
   passwordUpdated: Kata sandi Anda berhasil diperbarui.
@@ -323,7 +320,7 @@ termsOfUse:
     item3: dengan semua tingkat pengalaman
   list2:
     item1: Bersikaplah hormat. Saat berbagi proyek, harap diingat bahwa orang-orang dari berbagai usia dan latar belakang akan melihat kontribusi Anda.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "Berikan kredit. Jangan ragu untuk membuat versi modifikasi dari proyek orang lain - pastikan untuk memberi mereka kredit. Satu tempat untuk memberikan kredit adalah di bagian catatan dan kredit proyek Anda. Silakan lihat paragraf di bawah daftar putus-putus ini untuk detail tentang memodifikasi proyek pengguna lain."
     item3: "Bersikaplah jujur. Jangan berpura-pura menjadi orang lain selain pribadi Anda  yang sesungguhnya atau mencoba untuk menipu komunitas."
     item4: "Menyimpan informasi pribadi. Tidak berbagi alamat email, nomor telepon, atau informasi kontak pribadi lainnya."
     item5: "Bantu agar situs tetap ramah. Jika Anda merasa orang lain akan menganggap proyek atau komentar jahat, menghina, terlalu kasar, atau tidak pantas, cukup klik tombol 'laporkan sebagai tidak pantas' dan berikan penjelasan singkat. Tim Catrobat akan meninjau laporan Anda dan dapat menghapus proyek, komentar, atau kiriman apa pun."
@@ -609,15 +606,15 @@ catro-notifications:
   noReactions: "Sepertinya Anda tidak memiliki pemberitahuan reaksi."
   noRemixes: "Sepertinya Anda tidak memiliki pemberitahuan remix."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% mengomentari %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% bereaksi terhadap %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% sekarang mengikuti Anda.'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% membuat game baru %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% membuat remix %program_link% dari game Anda %remix_program_link%.'
 clipboard:
   success: Tautan ke proyek disalin ke papan klip!
   fail: Gagal menyalin link ke papan klip! :(
@@ -661,7 +658,7 @@ category:
   recent: Proyek terbaru
   random: Proyek acak
   most_viewed: Paling banyak dilihat
-  most_downloaded: Paling banyak diunduh
+  most_downloaded: Paling banyak di download
   example: Contoh
   scratch: Gores remix
   recommended: Proyek yang direkomendasikan
