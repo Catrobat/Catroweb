@@ -66,15 +66,14 @@
 
     &:hover {
       .btn-primary{
-        background-color: #{"darken(var(--primary), 7.5)"};
+        background-color: custom-darken(--color-primary, 7.5);
       }
     }
 
     &:active {
       .btn-primary {
-        background-color: #{"darken(var(--primary), 10)"};
+        background-color: custom-darken(--color-primary, 10);
       }
-
     }
   }
 
@@ -83,7 +82,7 @@
     color: var(--primary);
     cursor: pointer;
     &:hover{
-      color: #{"darken(var(--primary), 7.5)"};
+      color: custom-darken(--color-primary, 7.5);
     }
   }
   #project-like-counter-small {
@@ -91,7 +90,7 @@
     color: var(--primary);
     cursor: pointer;
     &:hover{
-      color: #{"darken(var(--primary), 7.5)"};
+      color: custom-darken(--color-primary, 7.5);
     }
   }
   #project-like-detail,

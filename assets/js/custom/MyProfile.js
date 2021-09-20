@@ -1,12 +1,50 @@
-/* eslint-env jquery */
-/* global Swal */
+import $ from 'jquery'
+import Swal from 'sweetalert2'
 /* global Routing */
 
-// eslint-disable-next-line no-unused-vars
-const MyProfile = function (profileUrl, saveUsername,
-  saveEmailUrl, saveCountryUrl, savePasswordUrl,
-  deleteUrl, deleteAccountUrl,
-  toggleVisibilityUrl, uploadUrl,
+/**
+ * @deprecated
+ *
+ * @param profileUrl
+ * @param saveUsername
+ * @param saveEmailUrl
+ * @param saveCountryUrl
+ * @param savePasswordUrl
+ * @param deleteUrl
+ * @param deleteAccountUrl
+ * @param toggleVisibilityUrl
+ * @param uploadUrl
+ * @param statusCodeOk
+ * @param statusCodeUsernameAlreadyExists
+ * @param statusCodeUsernameMissing
+ * @param statusCodeUsernameInvalid
+ * @param statusCodeUserEmailAlreadyExists
+ * @param statusCodeUserEmailMissing
+ * @param statusCodeUserEmailInvalid
+ * @param statusCodeUserCountryInvalid
+ * @param statusCodeUsernamePasswordEqual
+ * @param statusCodeUserPasswordTooShort
+ * @param statusCodeUserPasswordTooLong
+ * @param statusCodeUserPasswordNotEqualPassword2
+ * @param statusCodePasswordInvalid
+ * @param successText
+ * @param checkMailText
+ * @param passwordUpdatedText
+ * @param programCanNotChangeVisibilityTitle
+ * @param programCanNotChangeVisibilityText
+ * @param statusCodeUsernameContainsEmail
+ * @constructor
+ */
+export const MyProfile = function (
+  profileUrl,
+  saveUsername,
+  saveEmailUrl,
+  saveCountryUrl,
+  savePasswordUrl,
+  deleteUrl,
+  deleteAccountUrl,
+  toggleVisibilityUrl,
+  uploadUrl,
   statusCodeOk,
   statusCodeUsernameAlreadyExists,
   statusCodeUsernameMissing,
@@ -20,24 +58,12 @@ const MyProfile = function (profileUrl, saveUsername,
   statusCodeUserPasswordTooLong,
   statusCodeUserPasswordNotEqualPassword2,
   statusCodePasswordInvalid,
-  successText, checkMailText, passwordUpdatedText,
+  successText,
+  checkMailText,
+  passwordUpdatedText,
   programCanNotChangeVisibilityTitle,
   programCanNotChangeVisibilityText,
   statusCodeUsernameContainsEmail) {
-  const self = this
-  self.profileUrl = profileUrl
-  self.profile_edit_url = profileUrl
-  self.saveUsername = saveUsername
-  self.saveEmailUrl = saveEmailUrl
-  self.saveCountryUrl = saveCountryUrl
-  self.savePasswordUrl = savePasswordUrl
-  self.deleteUrl = deleteUrl
-  self.uploadUrl = uploadUrl
-  self.toggleVisibilityUrl = toggleVisibilityUrl
-  self.country = null
-  self.regex_email = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-  self.data_changed = false
-  self.deleteAccountUrl = deleteAccountUrl
   const passwordEditContainer = $('#password-edit-container')
   const usernameEditContainer = $('#username-edit-container')
   const usernameData = $('#username-wrapper > .profile-data')
@@ -77,16 +103,6 @@ const MyProfile = function (profileUrl, saveUsername,
     toggleEditSection(accountSettingsContainer)
   })
 
-  function stringTranslate (programName, catalogEntry) {
-    const translations = []
-    translations.push({ key: '%programName%', value: programName })
-    return Routing.generate('translate', {
-      word: catalogEntry,
-      array: JSON.stringify(translations),
-      domain: 'catroweb'
-    }, false)
-  }
-
   function toggleEditSection (container, data = null) {
     const fadeTime = 250
     if (container.is(':visible')) {
@@ -110,85 +126,6 @@ const MyProfile = function (profileUrl, saveUsername,
     }
   }
 
-  self.deleteProgram = function (id) {
-    const programName = $('#program-' + id).find('.program-name').text()
-    const catalogEntry = 'programs.deleteConfirmation'
-    const url = stringTranslate(programName, catalogEntry)
-    $.get(url, function (data) {
-      const split = data.split('\n')
-      Swal.fire({
-        title: split[0],
-        html: split[1] + '<br><br>' + split[2],
-        icon: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        customClass: {
-          confirmButton: 'btn btn-danger',
-          cancelButton: 'btn btn-outline-primary'
-        },
-        buttonsStyling: false,
-        confirmButtonText: split[3],
-        cancelButtonText: split[4]
-      }).then((result) => {
-        if (result.value) {
-          window.location.href = self.deleteUrl + '/' + id
-        }
-      })
-    })
-  }
-
-  self.toggleVisibility = function (id) {
-    const visibilityLockId = $('#visibility-lock-' + id)
-    const visibilityLockOpenId = $('#visibility-lock-open-' + id)
-    const programName = $('#program-' + id).find('.program-name').text()
-    const catalogEntry = 'programs.changeVisibility'
-    const url = stringTranslate(programName, catalogEntry)
-    const isPrivate = visibilityLockId.is(':visible')
-
-    $.get(url, function (data) {
-      const split = data.split('\n')
-      Swal.fire({
-        title: split[0],
-        html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
-        icon: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-primary'
-        },
-        buttonsStyling: false,
-        confirmButtonText: (isPrivate) ? split[4] : split[5],
-        cancelButtonText: split[6]
-      }).then((result) => {
-        if (result.value) {
-          $.get(self.toggleVisibilityUrl + '/' + id, {}, function (data) {
-            if (data === 'true') {
-              if (isPrivate) {
-                visibilityLockId.hide()
-                visibilityLockOpenId.show()
-              } else {
-                visibilityLockId.show()
-                visibilityLockOpenId.hide()
-              }
-            } else {
-              Swal.fire({
-                title: programCanNotChangeVisibilityTitle,
-                text: programCanNotChangeVisibilityText,
-                icon: 'error',
-                customClass: {
-                  confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false,
-                allowOutsideClick: false
-              })
-            }
-          })
-        }
-      })
-    })
-  }
-
   $(document).on('click', '#delete-account-button', function () {
     const url = Routing.generate('translate', {
       word: 'programs.deleteAccountConfirmation'
@@ -210,7 +147,7 @@ const MyProfile = function (profileUrl, saveUsername,
         cancelButtonText: split[4]
       }).then((result) => {
         if (result.value) {
-          $.post(self.deleteAccountUrl, null, function (data) {
+          $.post(deleteAccountUrl, null, function (data) {
             switch (parseInt(data.statusCode)) {
               case statusCodeOk:
                 window.location.href = '../../'
@@ -230,7 +167,7 @@ const MyProfile = function (profileUrl, saveUsername,
     $('.error-message').addClass('d-none')
 
     const newEmail = email.val()
-    $.post(self.saveEmailUrl, {
+    $.post(saveEmailUrl, {
       firstEmail: newEmail,
       secondEmail: ''
     }, function (data) {
@@ -246,7 +183,7 @@ const MyProfile = function (profileUrl, saveUsername,
             buttonsStyling: false,
             allowOutsideClick: false
           }).then(() => {
-            window.location.href = self.profile_edit_url
+            window.location.href = profileUrl
           })
           break
 
@@ -273,12 +210,11 @@ const MyProfile = function (profileUrl, saveUsername,
           break
 
         default:
-          window.location.href = self.profile_edit_url
+          window.location.href = profileUrl
       }
       $('#email-ajax').hide()
       $('#save-email').show()
     })
-    self.data_changed = false
   })
 
   $(document).on('click', '#save-username', function () {
@@ -290,9 +226,7 @@ const MyProfile = function (profileUrl, saveUsername,
 
     const newUsername = username.val()
 
-    $.post(self.saveUsername, {
-      username: newUsername
-    }, function (data) {
+    $.post(saveUsername, { username: newUsername }, function (data) {
       switch (parseInt(data.statusCode)) {
         case statusCodeUsernameAlreadyExists:
           $('.text-username-exists').removeClass('d-none')
@@ -309,28 +243,26 @@ const MyProfile = function (profileUrl, saveUsername,
           $('.text-username-contains-email').removeClass('d-none')
           break
         default:
-          window.location.href = self.profile_edit_url
+          window.location.href = profileUrl
       }
       $('#username-ajax').hide()
       $('#save-username').show()
     })
-    self.data_changed = false
   })
 
   $(document).on('click', '#save-country', function () {
     $(this).hide()
     $('#country-ajax').show()
     const country = $('#select-country').find('select').val()
-    $.post(self.saveCountryUrl, {
+    $.post(saveCountryUrl, {
       country: country
     }, function (data) {
       switch (parseInt(data.statusCode)) {
         case statusCodeUserCountryInvalid:
-          alert('invalid country')
           break
 
         default:
-          window.location.href = self.profile_edit_url
+          window.location.href = profileUrl
           break
       }
       $('#country-ajax').hide()
@@ -351,7 +283,7 @@ const MyProfile = function (profileUrl, saveUsername,
     const oldPassword = $('#old-password').val()
     const repeatPasswordVal = repeatPassword.val()
 
-    $.post(self.savePasswordUrl, {
+    $.post(savePasswordUrl, {
       oldPassword: oldPassword,
       newPassword: newPassword,
       repeatPassword: repeatPasswordVal
@@ -388,7 +320,7 @@ const MyProfile = function (profileUrl, saveUsername,
             buttonsStyling: false,
             allowOutsideClick: false
           }).then(() => {
-            window.location.href = self.profile_edit_url
+            window.location.href = profileUrl
           })
           break
       }

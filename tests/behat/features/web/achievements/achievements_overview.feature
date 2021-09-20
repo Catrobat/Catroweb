@@ -67,8 +67,8 @@ Feature: Users have an achievement page for their overviews
     Given I log in as "Catrobat"
     And I am on "/app/achievements"
     And I wait for the page to be loaded
-    Then the ".tab-bar-container" element should contain "locked"
-    And the ".tab-bar-container" element should contain "unlocked"
+    Then the ".mdc-tab-bar" element should contain "locked"
+    And the ".mdc-tab-bar" element should contain "unlocked"
     And the element "#unlocked-achievements" should be visible
     And the element "#locked-achievements" should not be visible
     When I click "#locked-achievements-tab"

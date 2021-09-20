@@ -39,8 +39,7 @@
       <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
         <button id="top-app-bar__btn-search"
                 class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-                aria-label="Search"
-                onclick="showTopBarSearch()">
+                aria-label="Search">
           search
         </button>
 
@@ -57,5 +56,12 @@
 
     {% include 'Header/header_media_library_download.html.twig' %}
 
+    <div class="js-header"
+        {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
+          data-path-search-url="{{ path('medialibrary_empty_search', {'package_name' : package} ) }}"
+        {% else %}
+          data-path-search-url="{{ path('empty_search' ) }}"
+        {% endif %}
+    ></div>
   {% endblock %}
 </header>

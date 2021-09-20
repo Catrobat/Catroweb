@@ -14,7 +14,7 @@
     <div id="remix-graph-container">
         <div id="remix-graph-layer">
             <div id="remix-graph-spinner">
-                {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'remix-graph-spinner' ~ suffix|default()} %}
+                {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'remix-graph-spinner' ~ suffix|default()} %}
             </div>
         </div>
     </div>
@@ -23,6 +23,8 @@
 
 
 {% block js %}
+    <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+    <script src=" {{ asset( 'js/modules/jquery.contextMenu.min.js') }}"></script>
     <script src=" {{ asset( 'js/modules/jquery.contextMenu.min.js') }}"></script>
     <script src=" {{ asset( 'js/modules/jquery.ui.position.min.js') }}"></script>
     <script src=" {{ asset( 'vis/vis.min.js') }}"></script>

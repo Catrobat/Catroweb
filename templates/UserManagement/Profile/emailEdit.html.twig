@@ -14,10 +14,6 @@
 
   <div class="group">
     <input title="first_email" type="text" id="email" name="_email" value="{{ firstMail }}" required>
-    <span class="highlight"></span>
-    <span class="bar"></span>
-    <label class="label-with-value"><span
-          class="span-input">{{ 'profile.firstEmail'|trans({}, 'catroweb') }}</span></label>
   </div>
 
   <div class="mt-4">
@@ -33,7 +29,7 @@
     {{ 'profile.saveChanges'|trans({}, 'catroweb') }}
   </button>
   <div id="email-ajax" class="button-show-ajax">
-    {% include 'Default/loadingSpinner.html.twig' with {'spinner_id': 'save-email-spinner'} only %}
+    {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'save-email-spinner'} only %}
   </div>
 
 </div>

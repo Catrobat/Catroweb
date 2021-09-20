@@ -1,8 +1,7 @@
-/* eslint-env jquery */
-/* global Swal */
+import $ from 'jquery'
+import Swal from 'sweetalert2'
 
-// eslint-disable-next-line no-unused-vars
-function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorText,
+export function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorText,
   reportButtonText, cancelText, reportDialogTitle, reportDialogReason,
   inappropriateLabel, copyrightLabel, spamLabel, dislikeLabel,
   statusCodeOk, loggedIn) {
@@ -14,7 +13,7 @@ function ProgramReport (programId, reportUrl, loginUrl, reportSentText, errorTex
   const SESSION_OLD_REPORT_REASON = 'oldReportReason' + programId
   const SESSION_OLD_REPORT_CATEGORY = 'oldReportCategory' + programId
 
-  $('#top-app-bar__btn-report-project').click(function () {
+  $('#top-app-bar__btn-report-project').on('click', function () {
     if (!loggedIn) {
       window.location.href = loginUrl
       return

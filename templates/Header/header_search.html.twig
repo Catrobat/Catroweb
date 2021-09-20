@@ -1,10 +1,9 @@
-<div id="top-app-bar__search" class="mdc-top-app-bar__row body-content" style="display:none;">
+<div id="top-app-bar__search" class="mdc-top-app-bar mdc-top-app-bar__row body-content" style="display: none;">
 
   <section class="mdc-top-app-bar__section">
     <button id="top-app-bar__btn-search-back"
             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-            aria-label="Back to top bar"
-            onclick="handleSearchBackButton()">
+            aria-label="Back to top bar">
       arrow_back
     </button>
 
@@ -15,9 +14,7 @@
              required=""
              class="search-form__input"
              id="top-app-bar__search-input"
-             autocomplete="off"
-             oninput="controlTopBarSearchClearButton()"
-             onchange="controlTopBarSearchClearButton()">
+             autocomplete="off">
       <label id="top-app-bar__search-label"
              for="top-app-bar__search-input"
              alt="
@@ -31,13 +28,13 @@
 {% else %}{{ "search.search"|trans({}, "catroweb") }}
 {% endif %}">
       </label>
+      <input id="top-app-bar__search-form__submit" type="submit">
     </form>
 
     <button id="top-app-bar__btn-search-clear"
             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
             aria-label="Clear Search"
-            style="display: none"
-            onclick="clearTopBarSearch()">
+            style="display: none;">
       close
     </button>
   </section>

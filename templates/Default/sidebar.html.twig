@@ -1,8 +1,8 @@
 <nav id="sidebar">
   <a href="{{ path('index') }}">
-  <img data-src="{{ asset('images/logo/logo_catrobat_text.svg') }}" class="lazyload logo" >
+  <img alt="Catrobat logo" loading="lazy" src="{{ asset('images/logo/logo_catrobat_text.svg') }}" class="logo" >
   </a>
-  <span class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span></a>
+  <span class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span>
   <ul class="list-unstyled" id="project-navigation">
 
     {% if isWebview() %}
@@ -90,6 +90,14 @@
 
 </nav>
 <div id="sidebar-overlay"></div>
+
+{% if app.user != null %}
+  <div class="js-sidebar"
+       data-path-notifications-count="{{ path('sidebar_notifications_count') }}"
+       data-path-achievements-count="{{ path('sidebar_achievements_count') }}"
+       data-trans-achievements-bade-text="{{ "achievements.sidebar.badge"|trans({}, "catroweb") }}"
+  ></div>
+{% endif %}
 
 {% block js %}
   <script src="{{ asset('js/modules/lazysizes.min.js') }}" async></script>
