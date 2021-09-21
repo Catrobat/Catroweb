@@ -62,7 +62,7 @@ notificationsClearError: "Обавештења нису могућа да се �
 pleaseWait: "Молимо сачекајте..."
 projects: "Пројекти"
 oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "here"
 statistics: "Statistics"
 indexPage:

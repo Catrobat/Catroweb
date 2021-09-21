@@ -62,7 +62,7 @@ notificationsClearError: "علامت زدن تمام اعلانات به عنو�
 pleaseWait: "لطفا صبر کن..."
 projects: "برنامه ها"
 oauthPopUpTitle: "حساب خارجی ورود به سیستم اطلاعات"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to my profile page. Click %link_start% here %link_end% to go to your profile page'
+oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "اینجا"
 statistics: "آمارها"
 indexPage:
