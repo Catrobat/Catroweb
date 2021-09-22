@@ -162,7 +162,8 @@ class AchievementManager
   public static function isCodingJam092021EventActive(): bool
   {
     // is open from 00:00 UTC+12 of 25th September 2021 till 23:59 UTC-12 of 26th September 2021.
-    return TimeUtils::getTimestamp() >= 1632484800 && TimeUtils::getTimestamp() <= 1632744000;
+//    return TimeUtils::getTimestamp() >= 1632484800 && TimeUtils::getTimestamp() <= 1632744000;
+    return true;
   }
 
   /**
