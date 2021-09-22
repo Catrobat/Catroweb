@@ -13,14 +13,11 @@ use App\Entity\Program;
 use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserRemixSimilarityRelation;
-use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
-use DateTime;
-use DateTimeZone;
 use Exception;
 use PHPUnit\Framework\Assert;
 use RecursiveDirectoryIterator;
@@ -1900,19 +1897,6 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $token_generator = $this->getSymfonyService(TokenGenerator::class);
     $token_generator->setTokenGenerator(new FixedTokenGenerator($token));
-  }
-
-  /**
-   * @Given /^the current time is "([^"]*)"$/
-   *
-   * @param mixed $time
-   *
-   * @throws Exception
-   */
-  public function theCurrentTimeIs($time): void
-  {
-    $date = new DateTime($time, new DateTimeZone('UTC'));
-    TimeUtils::freezeTime($date);
   }
 
   /**

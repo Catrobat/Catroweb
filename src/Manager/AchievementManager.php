@@ -150,6 +150,24 @@ class AchievementManager
   /**
    * @throws Exception
    */
+  public function unlockAchievementCodingJam092021(User $user): ?UserAchievement
+  {
+    if (self::isCodingJam092021EventActive()) {
+      return $this->unlockAchievement($user, Achievement::CODING_JAM_09_2021, $user->getCreatedAt());
+    }
+
+    return null;
+  }
+
+  public static function isCodingJam092021EventActive(): bool
+  {
+    // is open from 00:00 UTC+12 of 25th September 2021 till 23:59 UTC-12 of 26th September 2021.
+    return TimeUtils::getTimestamp() >= 1632484800 && TimeUtils::getTimestamp() <= 1632744000;
+  }
+
+  /**
+   * @throws Exception
+   */
   public function unlockAchievementPerfectProfile(User $user): ?UserAchievement
   {
     if (is_null($user->getAvatar())) {

@@ -31,18 +31,17 @@ class TaggingController extends AbstractController implements TranslatorAwareInt
    */
   public function taggingAction(Request $request, TagRepository $tags_repo): JsonResponse
   {
-    $em = $this->getDoctrine()->getManager();
-
     $tags = [];
     $tags['statusCode'] = 200;
     $tags['constantTags'] = [];
 
-    $language = $request->query->get('language');
-    $results = $tags_repo->getAllEnabledTags();
+    // $language = $request->query->get('language');
+    $results = $tags_repo->getActiveTags();
 
     /** @var Tag $tag */
     foreach ($results as $tag) {
-      $tags['constantTags'][] = $this->trans($tag->getTitleLtmCode(), [], $language);
+      $tags['constantTags'][] = $tag->getInternalTitle();
+      // $tags['translated'][] = $this->trans($tag->getTitleLtmCode(), [], $language); only 4 the new API!
     }
 
     return JsonResponse::create($tags);
