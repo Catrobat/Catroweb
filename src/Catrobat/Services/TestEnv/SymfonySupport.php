@@ -740,8 +740,14 @@ trait SymfonySupport
     $pattern = str_replace('"REGEX_INT_WILDCARD"', '([0-9]+?)', $pattern);
 
     $delimiter = '#';
-    $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
-    Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
+    try {
+      $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
+      Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
+    } catch (Exception $exception) {
+      $delimiter = '~';
+      $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
+      Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
+    }
   }
 
   public function insertFlavor(array $config = [], bool $andFlush = true): Flavor

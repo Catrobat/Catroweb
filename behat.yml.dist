@@ -98,6 +98,13 @@ default:
                 - Tests\behat\context\ApiContext
                 - Tests\behat\context\CatrowebBrowserContext
 
+        api-tag:
+            paths:    [ "tests/behat/features/api/tag" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\ApiContext
+
         api-translation:
             paths:    [ "tests/behat/features/api/translation" ]
             contexts:

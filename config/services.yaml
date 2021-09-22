@@ -301,6 +301,10 @@ services:
     public: true
   App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
 
+  App\EventListener\ProjectPostUpdateNotifier:
+    tags:
+      - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Program' }
+
   App\EventListener\UserPostPersistNotifier:
     tags:
       - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\Entity\User' }

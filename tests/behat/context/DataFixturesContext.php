@@ -72,6 +72,19 @@ class DataFixturesContext implements KernelAwareContext
     MyUuidGenerator::setNextValue($id);
   }
 
+  /**
+   * @Given /^the current time is "([^"]*)"$/
+   *
+   * @param mixed $time
+   *
+   * @throws Exception
+   */
+  public function theCurrentTimeIs($time): void
+  {
+    $date = new DateTime($time, new DateTimeZone('UTC'));
+    TimeUtils::freezeTime($date);
+  }
+
   // -------------------------------------------------------------------------------------------------------------------
   //  Users
   // -------------------------------------------------------------------------------------------------------------------
@@ -491,9 +504,9 @@ class DataFixturesContext implements KernelAwareContext
    */
   public function theProgramShouldBeTaggedWithInTheDatabase($arg1): void
   {
-    $program_tags = $this->getProgramManager()->findAll()[0]->getTags();
+    $program_tags = $this->getProgramManager()->findAll()[0]->getTags() ?? [];
     $tags = explode(',', $arg1);
-    Assert::assertEquals(is_countable($program_tags) ? count($program_tags) : 0, count($tags), 'Too much or too less tags found!');
+    Assert::assertEquals(count($tags), count($program_tags), 'Too much or too less tags found!');
 
     foreach ($program_tags as $program_tag) {
       /* @var Tag $program_tag */
