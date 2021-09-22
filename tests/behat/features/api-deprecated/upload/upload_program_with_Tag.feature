@@ -21,10 +21,10 @@ Feature: Upload a program with tag
       {
         "statusCode":200,
         "constantTags":[
-                          "Spiele",
-                          "Geschichte",
-                          "Musik",
-                          "Kunst"
+                          "Games",
+                          "Story",
+                          "Music",
+                          "Art"
                        ]
       }
       """

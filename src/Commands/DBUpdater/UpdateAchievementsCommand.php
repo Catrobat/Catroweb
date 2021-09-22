@@ -123,6 +123,19 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
+    $achievement = $this->getOrCreateAchievement(Achievement::CODING_JAM_09_2021)
+      ->setInternalDescription('This achievement can only be reached if a project with the tag #catrobatfestival2021 is uploaded during the period 25.09.2021 00:00 - 26.09.2021 23:59')
+      ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'coding_jam_09_2021.title')
+      ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'coding_jam_09_2021.description')
+      ->setBadgeSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_2_v5.svg')
+      ->setBadgeLockedSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_2.svg')
+      ->setBannerSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+      ->setBannerColor('#EA7B0C')
+      ->setEnabled(true)
+      ->setPriority(++$priority)
+    ;
+    $this->entity_manager->persist($achievement);
+
     $this->entity_manager->flush();
 
     $output->writeln("{$priority} Achievements in the Database have been inserted/updated");

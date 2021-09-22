@@ -41,50 +41,57 @@ class UpdateTagsCommand extends Command
   {
     $count = 0;
 
-    $tag = $this->getOrCreateTag(Tag::GAME, 1)
+    $tag = $this->getOrCreateTag(Tag::GAME)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'game.title')
       ->setEnabled(true)
     ;
     ++$count;
     $this->entity_manager->persist($tag);
 
-    $tag = $this->getOrCreateTag(Tag::ANIMATION, 2)
+    $tag = $this->getOrCreateTag(Tag::ANIMATION)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'animation.title')
       ->setEnabled(true)
     ;
     ++$count;
     $this->entity_manager->persist($tag);
 
-    $tag = $this->getOrCreateTag(Tag::STORY, 3)
+    $tag = $this->getOrCreateTag(Tag::STORY)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'story.title')
       ->setEnabled(true)
     ;
     ++$count;
     $this->entity_manager->persist($tag);
 
-    $tag = $this->getOrCreateTag(Tag::MUSIC, 4)
+    $tag = $this->getOrCreateTag(Tag::MUSIC)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'music.title')
       ->setEnabled(true)
     ;
     ++$count;
     $this->entity_manager->persist($tag);
 
-    $tag = $this->getOrCreateTag(Tag::ART, 5)
+    $tag = $this->getOrCreateTag(Tag::ART)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'art.title')
       ->setEnabled(true)
     ;
     ++$count;
     $this->entity_manager->persist($tag);
 
-    $tag = $this->getOrCreateTag(Tag::EXPERIMENTAL, 6)
+    $tag = $this->getOrCreateTag(Tag::EXPERIMENTAL)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'experimental.title')
       ->setEnabled(true)
     ;
     ++$count;
     $this->entity_manager->persist($tag);
 
-    $tag = $this->getOrCreateTag(Tag::TUTORIAL, 7)
+    $tag = $this->getOrCreateTag(Tag::TUTORIAL)
       ->setTitleLtmCode(self::TAG_LTM_PREFIX.'tutorial.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($tag);
+
+    $tag = $this->getOrCreateTag(Tag::CODING_JAM_09_2021)
+      ->setTitleLtmCode(self::TAG_LTM_PREFIX.'coding_jam_09_2021.title')
       ->setEnabled(true)
     ;
     ++$count;
@@ -96,15 +103,9 @@ class UpdateTagsCommand extends Command
     return 0;
   }
 
-  /**
-   * ToDo: id is deprecated -- remove once transition was made.
-   */
-  protected function getOrCreateTag(string $internal_title, int $id = 0): Tag
+  protected function getOrCreateTag(string $internal_title): Tag
   {
-    $tag = $this->tag_repository->findOneBy(['internal_title' => $internal_title]);
-    if (is_null($tag)) {
-      $tag = $this->tag_repository->findOneBy(['id' => $id]) ?? new Tag();
-    }
+    $tag = $this->tag_repository->findOneBy(['internal_title' => $internal_title]) ?? new Tag();
 
     return $tag->setInternalTitle($internal_title);
   }
