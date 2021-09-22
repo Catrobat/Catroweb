@@ -21,7 +21,12 @@ function handleNewAchievementAnimation () {
   if (showNewAchievementAnimation) {
     Swal.fire({
       html: getNewAchievementAnimationHtml(),
-      confirmButtonText: ltmAchievementsPopupNewConfirm
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      confirmButtonText: ltmAchievementsPopupNewConfirm,
+      buttonsStyling: false,
+      allowOutsideClick: false
     }).then((result) => {
       if (result.value) {
         readUnseenAchievements()

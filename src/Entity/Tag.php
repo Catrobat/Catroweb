@@ -23,6 +23,7 @@ class Tag
   public const ART = 'art';
   public const EXPERIMENTAL = 'experimental';
   public const TUTORIAL = 'tutorial';
+  public const CODING_JAM_09_2021 = 'catrobatfestival2021';
 
   /**
    * @ORM\Id

@@ -19,6 +19,7 @@ class Achievement
   public const DIAMOND_USER = 'diamond_user';
   public const PERFECT_PROFILE = 'perfect_profile';
   public const VERIFIED_DEVELOPER = 'verified_developer';
+  public const CODING_JAM_09_2021 = 'coding_jam_09_2021';
 
   /**
    * @ORM\Column(name="id", type="integer")
