@@ -708,6 +708,9 @@ achievements:
       verified_developer:
         title: 'Novizio'
         description: 'Crea un account utente'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: Tag
   tag:
@@ -725,6 +728,8 @@ tags:
       title: Sperimentale
     tutorial:
       title: Guida
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: Estensioni
   extension:

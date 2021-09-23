@@ -706,6 +706,9 @@ achievements:
       verified_developer:
         title: 'Новичок'
         description: 'Создать учетную запись пользователя'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: Теги
   tag:
@@ -723,6 +726,8 @@ tags:
       title: Экспериментальный
     tutorial:
       title: Учебник
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: Расширения
   extension:

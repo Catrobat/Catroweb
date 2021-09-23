@@ -708,6 +708,9 @@ achievements:
       verified_developer:
         title: 'புதியவர்'
         description: 'ஒரு பயனர் கணக்கை உருவாக்கவும்'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: குறிச்சொற்கள்
   tag:
@@ -725,6 +728,8 @@ tags:
       title: சோதனை
     tutorial:
       title: பயிற்சி
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: நீட்டிப்புகள்
   extension:
