@@ -704,6 +704,9 @@ achievements:
       verified_developer:
         title: 'مبتدی'
         description: 'یک حساب کاربری ایجاد کنید'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: برچسب‌ها
   tag:
@@ -721,6 +724,8 @@ tags:
       title: آزمایشی
     tutorial:
       title: آموزش
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: پسوند‌ها
   extension:

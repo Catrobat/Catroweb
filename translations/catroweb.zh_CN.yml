@@ -709,6 +709,9 @@ achievements:
       verified_developer:
         title: '新手'
         description: '创建一个用户账户'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: 标签
   tag:
@@ -726,6 +729,8 @@ tags:
       title: 实验性
     tutorial:
       title: 教程
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: 扩展
   extension:

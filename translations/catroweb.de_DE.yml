@@ -708,6 +708,9 @@ achievements:
       verified_developer:
         title: 'Anfänger'
         description: 'Benutzerkonto erstellen'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: Tags
   tag:
@@ -725,6 +728,8 @@ tags:
       title: Experimentell
     tutorial:
       title: Tutorial
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: Erweiterungen
   extension:

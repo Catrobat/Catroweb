@@ -705,6 +705,9 @@ achievements:
       verified_developer:
         title: 'Novice'
         description: 'Create a user account'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: Etiketat
   tag:
@@ -722,6 +725,8 @@ tags:
       title: Experimental
     tutorial:
       title: Tutorial
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: Extensions
   extension:

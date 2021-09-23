@@ -705,6 +705,9 @@ achievements:
       verified_developer:
         title: 'Nybegynner'
         description: 'Opprett en brukerkonto'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: Tagger
   tag:
@@ -722,6 +725,8 @@ tags:
       title: Eksperimentell
     tutorial:
       title: Opplæring
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: Extensions
   extension:

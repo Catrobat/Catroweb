@@ -710,6 +710,9 @@ achievements:
       verified_developer:
         title: 'নবীনতা'
         description: 'একটি ব্যবহারকারী অ্যাকাউন্ট তৈরি করুন'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: ট্যাগ
   tag:
@@ -727,6 +730,8 @@ tags:
       title: পরীক্ষামূলক
     tutorial:
       title: টিউটোরিয়াল
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: এক্সটেনশন
   extension:

@@ -709,6 +709,9 @@ achievements:
       verified_developer:
         title: 'สามเณร'
         description: 'สร้างบัญชีผู้ใช้'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: แท็ก
   tag:
@@ -726,6 +729,8 @@ tags:
       title: ทดลอง
     tutorial:
       title: กวดวิชา
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: ส่วนขยาย
   extension:

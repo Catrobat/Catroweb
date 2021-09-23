@@ -704,6 +704,9 @@ achievements:
       verified_developer:
         title: 'ノービス'
         description: 'ユーザーアカウントを作成'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: タグ
   tag:
@@ -721,6 +724,8 @@ tags:
       title: 実験
     tutorial:
       title: チュートリアル
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: 拡張機能
   extension:
