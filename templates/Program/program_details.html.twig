@@ -7,11 +7,11 @@
   <div class="row">
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
       <i class="material-icons">visibility</i>
-      <span class="icon-text ml-2 align-bottom">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
+      <span class="icon-text ms-2 align-bottom">{{ "programs.views"|trans({ '%views%' : program_details.views }, "catroweb") }}</span>
     </div>
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
       <i class="material-icons">query_builder</i>
-      <span class="icon-text ml-2 align-bottom">{{ program_details.age }}</span>
+      <span class="icon-text ms-2 align-bottom">{{ program_details.age }}</span>
     </div>
     <div class="d-none d-lg-block col-lg-4">
       {% include 'Program/program_code_statistics_button.html.twig' %}
@@ -21,11 +21,11 @@
   <div class="row">
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
       <i class="material-icons">description</i>
-      <span class="icon-text ml-2">{{ program_details.filesize }} MB</span>
+      <span class="icon-text ms-2">{{ program_details.filesize }} MB</span>
     </div>
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
       <i class="material-icons ">get_app</i>
-      <span class="icon-text ml-2">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
+      <span class="icon-text ms-2">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
     </div>
     <div class="d-none d-lg-block col-lg-4 mt-2">
       {% include 'Program/program_code_view_button.html.twig' %}

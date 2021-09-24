@@ -1,8 +1,9 @@
 <nav id="sidebar">
   <a href="{{ path('index') }}">
-  <img alt="Catrobat logo" loading="lazy" src="{{ asset('images/logo/logo_catrobat_text.svg') }}" class="logo" >
+    <img alt="Catrobat logo" loading="lazy" src="{{ asset('images/logo/logo_catrobat_text.svg') }}" class="logo" >
+    <span class="visually-hidden">{{ "menu.home"|trans({}, "catroweb") }}</span>
   </a>
-  <span class="sr-only">{{ "menu.home"|trans({}, "catroweb") }}</span>
+
   <ul class="list-unstyled" id="project-navigation">
 
     {% if isWebview() %}
@@ -21,7 +22,7 @@
         <a class="nav-link" href="{{ url('notifications') }}" id="sidebar-notifications">
           <span class="sidebar-link-icon material-icons">notifications</span>
           <span class="sidebar-link-text">{{ "notifications"|trans({}, "catroweb") }}</span>
-          <span class="badge-pill badge-danger all-notifications" id="sidebar_badge--unseen-notifications"></span>
+          <span class="badge rounded-pill bg-primary all-notifications" id="sidebar_badge--unseen-notifications"></span>
         </a>
       </li>
 
@@ -29,7 +30,7 @@
         <a class="nav-link" href="{{ url('achievements_overview') }}" id="sidebar-achievements">
           <span class="sidebar-link-icon material-icons">events</span>
           <span class="sidebar-link-text">{{ "achievements.sidebar.title"|trans({}, "catroweb") }}</span>
-          <span class="badge-pill badge-primary" id="sidebar_badge--unseen-achievements"></span>
+          <span class="badge rounded-pill bg-primary" id="sidebar_badge--unseen-achievements"></span>
         </a>
       </li>
 

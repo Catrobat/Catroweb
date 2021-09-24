@@ -9,7 +9,7 @@
             <div class="modal-header modal-header-full mdc-top-app-bar__row">
 
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button data-dismiss="modal"
+                    <button data-bs-dismiss="modal"
                             class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                             aria-label="Back to top bar">
                         arrow_back
@@ -34,15 +34,15 @@
                         role="menu"
                         aria-hidden="true">
                         <li class="btn top-app-bar-btn-options">
-                            <a class="ellipsis-modal-btn" data-toggle="modal" data-target="#new-key-store-modal">
-                                <span class="material-icons mr-2">vpn_key</span>
+                            <a class="ellipsis-modal-btn" data-bs-toggle="modal" data-bs-target="#new-key-store-modal">
+                                <span class="material-icons me-2">vpn_key</span>
                                 <span class="top-app-bar__btn-options-text">{{ 'program.signApp.generate_key'|trans({}, "catroweb") }}</span>
                             </a>
                         </li>
                         <li id="sign-app-help-link"
                             class="btn top-app-bar-btn-options">
                             <a class="ellipsis-modal-btn" href="{{url('help')}}">
-                                <span class="material-icons mr-2">help</span>
+                                <span class="material-icons me-2">help</span>
                                 <span class="top-app-bar__btn-options-text">{{ 'program.signApp.help'|trans({}, "catroweb") }}</span>
                             </a>
                         </li>
@@ -126,7 +126,7 @@
                     <div class="row">
                         <div class="form-group col-lg-12">
                             <button id="btn-signing-key" class="btn btn-primary"><span id="submit-sign-app-form"
-                                                                                       class="material-icons mr-2">cloud_download</span>signingkey
+                                                                                       class="material-icons me-2">cloud_download</span>signingkey
                                 (download)
                             </button>
                         </div>

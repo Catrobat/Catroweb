@@ -54,7 +54,7 @@ $container-padding: 1rem;
       &__text {
         padding-right: 0.5rem;
         font-size: 0.95rem;
-        @include media-breakpoint-down(xs) {
+        @include media-breakpoint-down(sm) {
           display: none;
         }
       }
@@ -128,6 +128,7 @@ $container-padding: 1rem;
       width: 25vw;
       max-width: $max-project-thumb-size;
       margin-right: 1.5rem;
+      text-decoration: none;
 
       @include media-breakpoint-up(md) {
         width: 10vw;
@@ -178,6 +179,7 @@ $container-padding: 1rem;
       grid-template-rows: max-content auto;
       gap: 0.3rem 1rem;
       grid-template-areas: "image name" "image property";
+      text-decoration: none;
 
       &__image {
         grid-area: image;
@@ -219,7 +221,7 @@ $container-padding: 1rem;
 
     $default-opacity: 0.3;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(md) {
       display: none;
     }
 

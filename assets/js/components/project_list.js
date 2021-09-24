@@ -48,12 +48,10 @@ export class ProjectList {
           project = self._generate(project)
           self.projectsContainer.append(project)
           project.click(function () {
+            project.empty()
+            project.css('display', 'flex')
+            project.css('justify-content', 'center')
             project.append($('#project-opening-spinner').html())
-            const href = $(this).attr('href')
-            const programID = ((href.indexOf('project') > 0) ? (href.split('project/')[1]).split('?')[0] : 0)
-            const type = self.getClickStatisticType(self.category)
-            const userSpecificRecommendation = type === 'user_who_downloaded_also_downloaded'
-            self.performClickStatisticRequest(href, type[0], type[1], userSpecificRecommendation, programID)
           })
         })
         self.container.classList.remove('loading')
@@ -142,7 +140,7 @@ export class ProjectList {
       if (self.isFullView) {
         window.history.back() // to remove pushed state
       } else {
-        history.pushState(
+        window.history.pushState(
           { type: 'ProjectList', id: self.container.id, full: true },
           $(this).text(), '#' + self.container.id
         )
@@ -185,26 +183,5 @@ export class ProjectList {
     this.container.classList.remove('vertical')
     this.$body.removeClass('overflow-hidden')
     return false
-  }
-
-  getClickStatisticType (type) {
-    switch (type) {
-      case 'recent':
-        return ['newest', false]
-      case 'most_downloaded':
-        return ['mostDownloaded', false]
-      case 'most_viewed':
-        return ['mostViewed', false]
-      case 'scratch':
-        return ['scratchRemixes', false]
-      case 'recommended':
-        return ['rec_homepage', true]
-      case 'similar':
-        return ['project', true]
-      case 'user_who_downloaded_also_downloaded':
-        return ['rec_specific_programs', true]
-      default:
-        return [type, false]
-    }
   }
 }

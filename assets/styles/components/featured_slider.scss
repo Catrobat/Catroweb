@@ -18,11 +18,11 @@ $carousel-indicator-margin: 0.2em;
 .carousel-control {
   font-size: $carousel-control-size;
 
-  @include media-breakpoint-between(sm, md) {
+  @include media-breakpoint-between(sm, lg) {
     font-size: math.div($carousel-control-size, 1.3);
   }
 
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(md) {
     font-size: math.div($carousel-control-size, 1.6);
   }
 }

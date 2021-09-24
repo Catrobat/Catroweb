@@ -214,12 +214,12 @@ class UserNotifications {
     const notificationId = idPrefix + fetched.id
     let notificationDot = ''
     if (!fetched.seen) {
-      notificationDot = '<div class="my-auto mark-as-read">' +
+      notificationDot = '<div class="col-2 my-auto mark-as-read">' +
         '<span class="dot">' + '</span>' + '</div>'
     }
     const notificationBody = '<div id="' + notificationId + '" class="row my-3 no-gutters ripple notif">' +
-      '<div class="col-2 col-sm-1 my-auto">' + imgLeft + '</div>' +
-      '<div class="col-8 col-sm-8 pl-3 my-auto">' + msg + '</div>' + notificationDot + '</div>'
+      '<div class="col-2 my-auto">' + imgLeft + '</div>' +
+      '<div class="col-8 ps-3 my-auto">' + msg + '</div>' + notificationDot + '</div>'
     $container.append(notificationBody)
   }
 

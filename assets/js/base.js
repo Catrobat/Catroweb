@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import 'bootstrap'
 import textFillDefault from './components/text_fill_default'
 import './layout/header'
 import './layout/footer'
@@ -41,7 +40,7 @@ const fnCloseSidebarInternal = function () {
 }
 const fnCloseSidebarDesktop = function () {
   sidebar.addClass('inactive')
-  $('body').removeClass('new-nav')
+  $('body').removeClass('body-with-sidebar')
   sidebarToggleBtn.attr('aria-expanded', false)
 }
 const fnOpenSidebar = function () {
@@ -52,7 +51,7 @@ const fnOpenSidebar = function () {
 }
 const fnOpenSidebarDesktop = function () {
   sidebar.removeClass('inactive')
-  $('body').addClass('new-nav')
+  $('body').addClass('body-with-sidebar')
   sidebarToggleBtn.attr('aria-expanded', true)
 }
 

@@ -5,10 +5,10 @@
   </div>
   <div class="col-2 col-sm-1">
     <i id="show-add-comment-button" class="add-comment-button material-icons catro-round-icon-button"
-       data-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">add</i>
+       data-bs-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">add</i>
     <i id="hide-add-comment-button" style="display:none;"
        class="add-comment-button material-icons catro-round-icon-button"
-       data-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">remove</i>
+       data-bs-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">remove</i>
   </div>
 
 
@@ -55,8 +55,8 @@
             {% if not app.user or comment.username != app.user.username %}
               <span class="translate-comment-button-wrapper">
                 <span id="comment-translation-button-{{ comment.id }}" class="comment-translation-button catro-icon-button"
-                    data-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
-                  <i class="ml-3 material-icons">
+                    data-bs-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
+                  <i class="ms-3 material-icons">
                     translate
                   </i>
                 </span>
@@ -66,8 +66,8 @@
                   </i>
                 </span>
                 <span id="remove-comment-translation-button-{{ comment.id }}" class="remove-comment-translation-button catro-icon-button" style="display: none"
-                    data-toggle="tooltip" title="Hide Translation">
-                    <i class="ml-3 material-icons" data-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
+                    data-bs-toggle="tooltip" title="Hide Translation">
+                    <i class="ms-3 material-icons" data-bs-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
                       close
                     </i>
                 </span>
@@ -77,15 +77,15 @@
             {% if not app.user or comment.username != app.user.username %}
               {#  Everybody, but the comment owner must be able to report a comment  #}
               <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
-                 data-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
-                <i class="ml-3 material-icons text-danger">not_interested</i>
+                 data-bs-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
+                <i class="ms-3 material-icons text-danger">not_interested</i>
               </a>
             {% endif %}
             {% if program_details.isAdmin or (app.user and comment.username == app.user.username) %}
               {#  Only Admins and comment owner can delete the comment  #}
               <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
-                 data-toggle="tooltip" title="{{ 'programs.delete'|trans({}, 'catroweb') }}">
-                <i class="ml-2 material-icons text-danger">delete</i>
+                 data-bs-toggle="tooltip" title="{{ 'programs.delete'|trans({}, 'catroweb') }}">
+                <i class="ms-2 material-icons text-danger">delete</i>
               </a>
             {% endif %}
           </div>
@@ -109,12 +109,12 @@
 
   <div class="center col-12">
     <div id="show-more-comments-button" class="button-show-more">
-      <a data-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
+      <a data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
         <i class="material-icons catro-round-icon-button">expand_more</i>
       </a>
     </div>
     <div id="show-less-comments-button" class="button-show-less">
-      <a data-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
+      <a data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
         <i class="material-icons catro-round-icon-button">expand_less</i>
       </a>
     </div>

@@ -5,7 +5,7 @@
 .article-columns {
   column-count: 2;
 
-  @include media-breakpoint-down(md) {
+  @include media-breakpoint-down(lg) {
     column-count: 1;
   }
 }
