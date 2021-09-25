@@ -1,12 +1,12 @@
 @use "~@material/form-field";
 @use "~@material/icon-button";
+@use "~@material/icon-button/styles";
 @use "~@material/top-app-bar/mdc-top-app-bar";
 @use "~@material/textfield";
 
 @import "../base/variables";
 @import "../base/mixins";
 
-@include icon-button.core-styles ();
 @include textfield.core-styles ();
 @include form-field.core-styles ();
 
