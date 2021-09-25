@@ -154,7 +154,7 @@ Encore
     ]),
     content: ['**/*.twig', '**/*.js'],
     safelist: {
-      standard: [/^swal2/, /^modal/],
+      standard: [/^swal2/, /^modal/, /^mdc/]
     },
     defaultExtractor: (content) => {
       return content.match(/[\w-/:]+(?<!:)/g) || []

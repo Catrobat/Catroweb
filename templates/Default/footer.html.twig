@@ -73,8 +73,12 @@
       <hr>
 
       <div class="row justify-content-between">
-        <div class="form-group col-12 col-sm-6">
 
+        <div id="copyright" class="col-12 col-sm-6 col-md-8 col-lg-9 col-xl-10">
+          {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
+        </div>
+
+        <div class="form-group col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3 mt-sm-0">
           <div class="mdc-select mdc-select--outlined">
             <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
               <span class="mdc-notched-outline">
@@ -123,9 +127,7 @@
             </div>
           </div>
         </div>
-        <div id="copyright" class="col-12 col-sm-6">
-          {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
-        </div>
+
       </div>
 
     </div>

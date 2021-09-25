@@ -9,7 +9,7 @@ $max-project-thumb-size: 160px;
 $container-padding: 1rem;
 
 .project-list {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 
   .projects-spinner-container {
     display: none;
@@ -85,10 +85,12 @@ $container-padding: 1rem;
       //stylelint-disable-next-line value-no-vendor-prefix
       display: -webkit-box;
       max-width: 100%;
+      height: 3rem;
       overflow: hidden;
       -webkit-line-clamp: 2; // ellipse at 2nd text line
       //stylelint-disable-next-line property-no-vendor-prefix
       -webkit-box-orient: vertical;
+      line-height: 1.5rem;
     }
 
     &__property {
