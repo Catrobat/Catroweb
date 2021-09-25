@@ -32,11 +32,15 @@ Make sure all tests are passing when creating a pull request,
 
 ##### Tools integrated in the project:
 
+[![Symfony](https://img.shields.io/badge/Framework-Symfony-0379B8.svg)](https://symfony.com/)
+[![Openapi-generator](https://img.shields.io/badge/API-openapi_generator-0379B8.svg)](https://github.com/OpenAPITools/openapi-generator)
+[![Elastic](https://img.shields.io/badge/Search-Elastic-FF6940.svg)](https://www.elastic.co/)
 [![Php-cs-fixer](https://img.shields.io/badge/Php_Code_Style-Php_CS_Fixer-informational.svg)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 [![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PhpStan,_Psalm,_PhpDD,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
+[![Webpack Encore](https://img.shields.io/badge/Asset_Bundler-Webpack_Encore-75AFCC.svg)](https://github.com/symfony/webpack-encore)
 [![Npm standard](https://img.shields.io/badge/JS_Code_Style-standard-green.svg)](https://standardjs.com)
 [![ESLint](https://img.shields.io/badge/JS_Code_Quality-ESLint-green.svg)](https://eslint.org/)
-[![Sass](https://img.shields.io/badge/CSS_Preprocessor-npm_sass-ff69b4.svg)](https://sass-lang.com/)
+[![Sass](https://img.shields.io/badge/CSS_Preprocessor-Dart_Sass-ff69b4.svg)](https://sass-lang.com/)
 [![StyleLint](https://img.shields.io/badge/CSS_Code_Style-StyleLint-ff69b4.svg)](https://stylelint.io/)
 
 **Have fun!**
