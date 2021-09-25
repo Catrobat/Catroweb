@@ -9,18 +9,18 @@
                 <div class="comment-content">
                     <a href="{{ url('profile', { id : comment.user.id }) }}">{{ comment.username }}</a>
                     {% if user_role == 'admin' or comment.username == user_name %}
-                        <a class="comment-delete-button" data-toggle="tooltip"
+                        <a class="comment-delete-button" data-bs-toggle="tooltip"
                            onclick="(new Studio()).removeComment($(this),'{{ comment.id }}', false, 0)"
                            title="{{ 'studio.details.remove_comment'|trans({}, 'catroweb') }}">
-                            <i class="ml-2 material-icons text-danger">delete</i>
+                            <i class="ms-2 material-icons text-danger">delete</i>
                         </a>
                     {% endif %}
                     <p>{{ comment.text }}</p>
                     <div class="comment-info">
                 <span class="comment-time col-6">
                     <span class="material-icons comment-info-icons">watch_later</span>{{ comment.uploadDate.format('Y-m-d') }}</span>
-                        <a class="comment-replies col-6" onclick="(new Studio()).loadReplies('{{ comment.id }}')" data-toggle="modal"
-                           data-target="#comment-reply-modal">
+                        <a class="comment-replies col-6" onclick="(new Studio()).loadReplies('{{ comment.id }}')" data-bs-toggle="modal"
+                           data-bs-target="#comment-reply-modal">
                             <span class="material-icons comment-info-icons">forum</span>
                             <span id="info-{{ comment.id }}">{{ comment.repliesCount }} {{ 'studio.details.replies'|trans({}, 'catroweb') }}</span>
                         </a>

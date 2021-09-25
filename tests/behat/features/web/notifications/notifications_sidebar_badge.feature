@@ -18,7 +18,7 @@ Feature: Sidebar should show amount of new notifications in form of a badge
     Given I log in as "OtherUser"
     When I open the menu
     Then the element "#sidebar-notifications" should be visible
-    But the element "#sidebar-notifications .badge-pill" should not be visible
+    But the element "#sidebar-notifications .rounded-pill" should not be visible
 
   Scenario: If user marks the notification as read then the badge should be updated
     Given there are "5"+ notifications for "Catrobat"

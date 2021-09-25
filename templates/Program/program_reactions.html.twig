@@ -63,7 +63,7 @@
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
               {% if constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') in program_details.activeUserLikeTypes %} active{% endif %}"
      data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_THUMBS_UP') }}"
-     data-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
+     data-bs-toggle="tooltip" title="{{ 'programs.thumbsUp'|trans({}, 'catroweb') }}">
     <i class="material-icons md-24">
       thumb_up
     </i>
@@ -73,7 +73,7 @@
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
               {% if constant('App\\Entity\\ProgramLike::TYPE_SMILE') in program_details.activeUserLikeTypes %} active{% endif %}"
      data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_SMILE') }}"
-     data-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
+     data-bs-toggle="tooltip" title="{{ 'programs.smile'|trans({}, 'catroweb') }}">
             <span class="material-icons md-24">
               sentiment_very_satisfied
             </span>
@@ -83,7 +83,7 @@
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
               {% if constant('App\\Entity\\ProgramLike::TYPE_LOVE') in program_details.activeUserLikeTypes %} active{% endif %}"
      data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_LOVE') }}"
-     data-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
+     data-bs-toggle="tooltip" title="{{ 'programs.love'|trans({}, 'catroweb') }}">
             <span class="material-icons md-24">
               favorite
             </span>
@@ -93,7 +93,7 @@
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
               {% if constant('App\\Entity\\ProgramLike::TYPE_WOW') in program_details.activeUserLikeTypes %} active{% endif %}"
      data-like-type="{{ constant('App\\Entity\\ProgramLike::TYPE_WOW') }}"
-     data-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
+     data-bs-toggle="tooltip" title="{{ 'programs.wow'|trans({}, 'catroweb') }}">
     <img alt="Wow reaction" id="wow-reaction-img-small" src="{{ asset('images/default/wow_white.svg') }}">
   </div>
 </div>

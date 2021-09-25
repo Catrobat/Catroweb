@@ -145,16 +145,16 @@ class StudioController extends AbstractController
     $result .= '<img class="comment-avatar" src="'.$avatarSrc.'" alt="Card image">';
     $result .= '<div class="comment-content">';
     $result .= '<a href="/app/user/'.$comment->getId().'">'.$comment->getUsername().'</a>';
-    $result .= '<a class="comment-delete-button" data-toggle="tooltip" onclick="';
+    $result .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="';
     $result .= '(new Studio()).removeComment($(this), '.$comment->getId().',';
     $result .= $isReply ? 'true,'.$comment->getParentId().')">' : 'false, 0)">';
-    $result .= '<i class="ml-2 material-icons text-danger">delete</i></a>';
+    $result .= '<i class="ms-2 material-icons text-danger">delete</i></a>';
     $result .= '<p>'.$comment->getText().'</p>';
     $result .= '<div class="comment-info">';
     $result .= '<span class="comment-time col-6">';
     $result .= '<span class="material-icons comment-info-icons">watch_later</span>'.$comment->getUploadDate()->format('Y-m-d').'</span>';
     if (!$isReply) {
-      $result .= '<a class="comment-replies col-6" onclick="(new Studio()).loadReplies('.$comment->getId().')" data-toggle="modal" data-target="#comment-reply-modal">';
+      $result .= '<a class="comment-replies col-6" onclick="(new Studio()).loadReplies('.$comment->getId().')" data-bs-toggle="modal" data-bs-target="#comment-reply-modal">';
       $result .= '<span class="material-icons comment-info-icons">forum</span>';
       $result .= '<span id="info-'.$comment->getId().'">0 '.$this->translator->trans('studio.details.replies', [], 'catroweb').'</span>';
       $result .= '</div></div></div><hr class="comment-hr">';
@@ -310,9 +310,9 @@ class StudioController extends AbstractController
     $rs .= '<a href="/app/user/'.$comment->getUser()->getId().'">'.$comment->getUsername().'</a>';
     if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($this->getUser(), $comment->getStudio())
       || (!is_null($this->getUser()) && $this->getUser()->getUsername() === $comment->getUsername())) && $isReply) {
-      $rs .= '<a class="comment-delete-button" data-toggle="tooltip" onclick="(new Studio()).removeComment($(this),'.$comment->getId().', true, '.$comment->getParentId().')"';
+      $rs .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="(new Studio()).removeComment($(this),'.$comment->getId().', true, '.$comment->getParentId().')"';
       $rs .= ' title="'.$this->translator->trans('studio.details.remove_comment', [], 'catroweb').'">';
-      $rs .= '<i class="ml-2 material-icons text-danger">delete</i>';
+      $rs .= '<i class="ms-2 material-icons text-danger">delete</i>';
       $rs .= '</a>';
     }
     $rs .= '<p>'.$comment->getText().'</p>';
@@ -447,7 +447,7 @@ class StudioController extends AbstractController
       $rs .= '</a>';
       $rs .= '</div>';
       $rs .= '<div class="col-4 my-auto">';
-      $rs .= '<div class="pl-3">';
+      $rs .= '<div class="ps-3">';
       $rs .= '<a href="/app/user/'.$member->getUser()->getId().'">'.$member->getUser()->getUsername().'</a>';
       $rs .= '<div class="text-dark">';
       $count = $this->studio_manager->countStudioUserProjects($member->getStudio(), $member->getUser());
@@ -455,11 +455,11 @@ class StudioController extends AbstractController
       $rs .= '</div>';
       $rs .= '</div>';
       $rs .= '</div>';
-      $rs .= '<div class="col-6 text-right my-auto admin-options">';
+      $rs .= '<div class="col-6 text-end my-auto admin-options">';
       if ($forAdmin && StudioUser::ROLE_MEMBER === $member->getRole()) {
         $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).promoteToAdmin($(this),'."'".$member->getUser()->getId()."'".')">'.$this->translator->trans('studio.details.promote_user', [], 'catroweb').'</a>';
-        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).banUser($(this),'."'".$member->getUser()->getId()."'".')" class="" data-toggle="tooltip" title="'.$this->translator->trans('studio.details.remove_user', [], 'catroweb').'">';
-        $rs .= '<i class="ml-2 material-icons text-danger">delete</i>';
+        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).banUser($(this),'."'".$member->getUser()->getId()."'".')" class="" data-bs-toggle="tooltip" title="'.$this->translator->trans('studio.details.remove_user', [], 'catroweb').'">';
+        $rs .= '<i class="ms-2 material-icons text-danger">delete</i>';
         $rs .= '</a>';
       }
       $rs .= '</div>';

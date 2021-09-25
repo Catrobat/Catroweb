@@ -1,5 +1,4 @@
 {% if not isWebview() %}
-
   <div id="welcome-section">
     <div class="mb-4">
       {% if flavor() == 'mindstorms' %}
@@ -17,44 +16,6 @@
       {% endif %}
     </div>
 
-    <div class="row align-items-center">
-      <div class="col-12 col-lg-6">
-        {{ include('Index/youtubeHelpVideo.html.twig') }}
-      </div>
-      <div class="col-12 col-lg-6 mt-2">
-        <a class="btn btn-primary btn-block" target="_blank" href="{{ url('google_play_store') }}">
-          <i class="material-icons align-bottom">get_app</i>
-          {# <img style="width: 1.5rem; height: 1.5rem;" alt="Play Store Logo" src="{{ asset('images/social/google_playstore.png') }}"/> #}
-          <span> {{ "googlePlay"|trans({}, "catroweb") }}</span>
-        </a>
-        {% if flavor() == "luna" %}
-          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/lcd">
-            <img style="height: 1.5rem; width: 1.5rem;" alt="Discord server"
-                 src="{{ asset('images/social/Discord-Logo-White.svg') }}">
-            <span>Discord chat</span>
-          </a>
-        {% elseif flavor() == 'arduino' %}
-        {% elseif flavor() == 'mindstorms' %}
-          {# show nothing for now #}
-        {% elseif flavor() == 'embroidery' %}
-          <a class="btn btn-primary btn-block" target="_blank" href="https://www.instagram.com/code_n_stitch/">
-            <i class="material-icons align-bottom">explore</i>
-            {# <img alt="Code&Stitch Instagram" src="{{ asset('images/social/instagram.svg') }}"> #}
-            <span>Instagram</span>
-          </a>
-        {% else %}
-          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/ca">
-            <i class="material-icons align-bottom">get_app</i>
-            {# <img style="width: 1.5rem; height: 1.5rem;" alt="App Store Logo" src="{{ asset('images/social/apple_logo.png') }}"/> #}
-            <span> {{ "iosAppStore"|trans({}, "catroweb") }}</span>
-          </a>
-          <a class="btn btn-primary btn-block" target="_blank" href="https://catrob.at/HuaweiAppGallery">
-            <i class="material-icons align-bottom">get_app</i>
-            {# <img style="width: 1.5rem; height: 1.5rem;" alt="Huawei AppGallery Logo" src="{{ asset('images/social/huawei_logo.png') }}"/> #}
-            <span> {{ "huaweiAppGallery"|trans({}, "catroweb") }}</span>
-          </a>
-        {% endif %}
-      </div>
-    </div>
+    {{ include('Index/youtubeHelpVideo.html.twig') }}
   </div>
-{% endif %}   {# {% if not isWebview() %} #}
+{% endif %}

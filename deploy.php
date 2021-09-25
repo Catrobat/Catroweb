@@ -119,7 +119,7 @@ task('install:npm', function () {
 });
 task('deploy:encore', function () {
   cd('{{release_path}}');
-  run('npm run encore prod');
+  run('npm run prod');
 });
 
 task('deploy:jwt', function () {

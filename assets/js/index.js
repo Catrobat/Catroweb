@@ -5,9 +5,6 @@ import { ProjectList } from './components/project_list'
 require('../styles/index.scss')
 
 $(() => {
-  const lazyLoadYoutubeVideo = require('./components/lazy_load_youtube_video')
-  lazyLoadYoutubeVideo('youtube-index')
-
   initHomeProjects()
 
   const $oauthGreeting = $('.js-oauth-greeting')

@@ -59,8 +59,24 @@
   }
 }
 
+a {
+  text-decoration: none;
+}
+
+.btn-block {
+  // removed in bootstrap 5
+  --deprecated: "WARNING: deprecated, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/components/buttons/#block-buttons";
+  display: block;
+  width: 100%;
+}
+.btn-block + .btn-block {
+  // removed in bootstrap 5
+  --deprecated: "WARNING: deprecated, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/components/buttons/#block-buttons";
+  margin-top: 0.5rem;
+}
+
 /* stylelint-disable */
-.badge-primary {
+.bg-primary {
   background-color: var(--primary) !important;
   &:hover {
     background-color: custom-darken(--color-primary, 7.5) !important;

@@ -8,7 +8,7 @@
 {% block body %}
 
   <div class="row no-gutters profile">
-    <div class="col-4 col-md-2 avatar-container mt-2 pr-3">
+    <div class="col-4 col-md-2 avatar-container mt-2 pe-3">
       <img alt="" id="user-image" class="img-fluid round"
            src="{% if profile.avatar is not empty %}{{ profile.avatar }}{% else %}{{ asset('images/default/avatar_default.png') }}{% endif %}"/>
     </div>
@@ -32,19 +32,19 @@
       <div class="button-container w-100 mt-3">
         {% if profile.isScratchUser() %}
           <a href={{ 'https://scratch.mit.edu/users/' ~ profile.getScratchUsername() }}>
-            <button class="btn btn-outline-primary profile-goto-scratch mt-0 ml-auto">
+            <button class="btn btn-outline-primary profile-goto-scratch mt-0 ms-auto">
               {{ 'profile.goToScratchProfile'|trans({}, 'catroweb') }}
             </button>
           </a>
         {% endif %}
         {% if app.user != null and app.user.id != profile.id %}
-          <button class="btn btn-outline-primary profile-follows unfollow-btn mt-0 ml-auto"
+          <button class="btn btn-outline-primary profile-follows unfollow-btn mt-0 ms-auto"
                   style="{{ profile.hasFollower(app.user) ? 'display: block' : 'display:none' }}"
                   data-user-id="{{ profile.id }}"
                   data-user-name="{{ profile.username }}">
             {{ 'follower.follows'|trans({}, 'catroweb') }}
           </button>
-          <button class="btn btn-primary profile-follow follow-btn mt-0 ml-auto"
+          <button class="btn btn-primary profile-follow follow-btn mt-0 ms-auto"
                   style="{{ profile.hasFollower(app.user) ? 'display: none' : 'display:block' }}"
                   data-user-id="{{ profile.id }}">
             {{ 'follower.follow'|trans({}, 'catroweb') }}
