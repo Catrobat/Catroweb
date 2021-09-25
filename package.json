@@ -1,6 +1,6 @@
 {
   "name": "catroweb",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Catroweb =========",
   "scripts": {
     "test": "npx eslint assets/js/**/*.js --ignore-pattern \\\"assets/js/webpack/\\\"",
@@ -11,7 +11,8 @@
     "dev": "encore dev",
     "watch": "encore dev --watch",
     "build": "encore production --progress",
-    "encore": "encore"
+    "encore": "encore",
+    "prod": "encore prod"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,7 @@
     "eslint-plugin-standard": "^5.0.0",
     "file-loader": "^6.2.0",
     "node-sass": "^6.0.1",
-    "sass": "^1.39.2",
+    "sass": "1.39.2",
     "sass-loader": "^12.1.0",
     "standard": "^16.0.3",
     "stylelint": "^13.13.1",
@@ -47,7 +48,7 @@
     "@material/circular-progress": "^12.0",
     "@material/form-field": "^12.0",
     "@material/icon-button": "^12.0",
-    "@material/list": "^12.0",
+    "@material/list": "^13.0",
     "@material/menu": "^12.0",
     "@material/menu-surface": "^12.0",
     "@material/progress-indicator": "^12.0",
@@ -60,9 +61,10 @@
     "@material/tab-scroller": "^12.0.0",
     "@material/textfield": "^12.0",
     "@material/top-app-bar": "^12.0",
+    "@popperjs/core": "^2.10.1",
     "ajv": "^8.6.3",
     "animate.css": "^4.1.1",
-    "bootstrap": "^4.6.0",
+    "bootstrap": "^5.1.1",
     "clipboard": "^2.0.8",
     "external-svg-loader": "^1.3.4",
     "glob-all": "^3.2.1",
@@ -75,7 +77,6 @@
     "n": "^7.4.1",
     "npm": "^7.24.1",
     "path": "^0.12.7",
-    "popper.js": "^1.16.1",
     "purgecss-webpack-plugin": "^4.0.3",
     "sweetalert2": "^11.1.7",
     "textfilljs": "^1.0.3-a",
