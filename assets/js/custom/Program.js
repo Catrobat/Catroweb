@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import 'bootstrap'
+import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
 
@@ -28,7 +28,6 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
   getApkStatus()
 
   $('.btn-project-download').on('click', (e) => {
-    console.error($(e.currentTarget).data('is-supported'))
     download(
       $(e.currentTarget).data('path-url'),
       $(e.currentTarget).data('project-id'),
@@ -121,7 +120,7 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
             apkDownloadTimeout = false
           }, 5000)
 
-          top.location.href = data.url
+          window.top.location.href = data.url
         }
       })
     } else if (data.status === 'pending') {
@@ -273,6 +272,10 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
         }
 
         const $modal = $('#project-like-modal')
+        const bootstrapModal = new Modal('#project-like-modal')
+        const firstTabEl = document.querySelector('#reaction-modal-tab li:first-child button')
+        const firstTab = new Tab(firstTabEl)
+        firstTab.show()
 
         const thumbsUpData = data.filter(x => x.types.indexOf('thumbs_up') !== -1)
         const smileData = data.filter(x => x.types.indexOf('smile') !== -1)
@@ -284,7 +287,7 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
          * @param data {{user: {id: string, name: string}, types: string[]}[]}
          */
         const fnUpdateContent = (type, data) => {
-          const $tab = /** @type jQuery */ $modal.find('a#' + type + '-tab')
+          const $tab = /** @type jQuery */ $modal.find('button#' + type + '-tab')
           const $content = $modal.find('#' + type + '-tab-content')
           $content.empty()
 
@@ -343,7 +346,7 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
         $('#project-reactions-spinner').addClass('d-none')
         $('#project-reactions-spinner-small').addClass('d-none')
 
-        $modal.modal('show')
+        bootstrapModal.show()
       }).fail(function (jqXHR, textStatus, errorThrown) {
       $('#project-reactions-spinner').hide()
       $('#project-reactions-spinner-small').hide()

@@ -704,6 +704,9 @@ achievements:
       verified_developer:
         title: 'ਨਵੀਨਤਾ'
         description: 'ਇੱਕ ਉਪਭੋਗਤਾ ਖਾਤਾ ਬਣਾਓ'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: ਟੈਗਸ
   tag:
@@ -721,6 +724,8 @@ tags:
       title: ਪ੍ਰਯੋਗਾਤਮਕ
     tutorial:
       title: ਟਿutorialਟੋਰਿਅਲ
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: ਐਕਸਟੈਂਸ਼ਨਾਂ
   extension:

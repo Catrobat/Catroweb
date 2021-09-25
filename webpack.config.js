@@ -89,13 +89,14 @@ Encore
   .addEntry('program_comments', './assets/js/program_comments.js')
   .addEntry('program_description', './assets/js/program_description.js')
 
-  // SCSS to CSS (deprecated)
+  // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
   .addStyleEntry('program', './assets/styles/custom/program.scss')
   .addStyleEntry('multi_column_article', './assets/styles/custom/multi_column_article.scss')
   .addStyleEntry('old_code_view', './assets/styles/custom/old_code_view.scss')
   .addStyleEntry('modal', './assets/styles/custom/modal.scss')
-  .addStyleEntry('card', './assets/styles/custom/card.scss')
+  .addStyleEntry('code_statistics', './assets/styles/components/code_statistics.scss')
+  .addStyleEntry('catblocks_code_view', './assets/styles/components/catblocks_code_view.scss')
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
@@ -153,7 +154,7 @@ Encore
     ]),
     content: ['**/*.twig', '**/*.js'],
     safelist: {
-      standard: [/^swal2/, /^modal/],
+      standard: [/^swal2/, /^modal/, /^mdc/]
     },
     defaultExtractor: (content) => {
       return content.match(/[\w-/:]+(?<!:)/g) || []

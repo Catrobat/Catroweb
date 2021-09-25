@@ -86,7 +86,7 @@ Feature: Reactions to projects "likes"
     And I should see 2 "#smile-tab-content .reaction:first-child .types > i"
     And the element "#smile-tab-content .reaction:first-child .types .smile" should be visible
     And the element "#smile-tab-content .reaction:first-child .types .thumbs-up" should be visible
-    And I click "#project-like-modal button.close"
+    And I click "#project-like-modal button.btn-close"
     And I wait for AJAX to finish
     Then the element "#project-like-modal" should not be visible
 

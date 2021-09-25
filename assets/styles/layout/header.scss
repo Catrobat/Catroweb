@@ -1,12 +1,14 @@
 @use "~@material/form-field";
 @use "~@material/icon-button";
+@use "~@material/icon-button/styles";
 @use "~@material/top-app-bar/mdc-top-app-bar";
 @use "~@material/textfield";
+@use "~@material/menu/mdc-menu";
+@use "~@material/menu-surface/mdc-menu-surface";
 
 @import "../base/variables";
 @import "../base/mixins";
 
-@include icon-button.core-styles ();
 @include textfield.core-styles ();
 @include form-field.core-styles ();
 
@@ -98,16 +100,16 @@
   margin-top: 4rem;
   margin-bottom: 2rem;
 
-  @include media-breakpoint-up(sm) {
-    margin-top: 4.5rem;
+  @include media-breakpoint-up(xs) {
+    margin-top: 4.3rem;
     margin-bottom: 2.25rem;
   }
-  @include media-breakpoint-up(md) {
-    margin-top: 5rem;
+  @include media-breakpoint-up(sm) {
+    margin-top: 4.8rem;
     margin-bottom: 2.75rem;
   }
-  @include media-breakpoint-up(lg) {
-    margin-top: 6rem;
+  @include media-breakpoint-up(md) {
+    margin-top: 5.5rem;
     margin-bottom: 3.5rem;
   }
 }

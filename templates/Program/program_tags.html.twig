@@ -7,8 +7,10 @@
             <p>{{ ("extensions.title")|trans({}, "catroweb") }}:</p>
             <div class="list">
               {% for extension in program.extensions %}
-                <a class="rec-programs badge badge-primary"
-                   href="{{ url('extension_search', { q : extension.getInternalTitle() }) }}">{{ extension.getTitleLtmCode()|trans({}, "catroweb") }}</a>
+                <a class="rec-programs"
+                   href="{{ url('extension_search', { q : extension.getInternalTitle() }) }}">
+                    <span class="badge rounded-pill bg-primary">{{ extension.getTitleLtmCode()|trans({}, "catroweb") }}</span>
+                </a>
               {% endfor %}
             </div>
           </div>
@@ -18,8 +20,9 @@
             <p>{{ ("tags.title")|trans({}, "catroweb") }}:</p>
             <div class="list">
               {% for tag in program.tags %}
-                <a class="rec-programs badge badge-pill badge-primary"
-                   href="{{ url('tag_search', { q : tag.getInternalTitle() }) }}">{{ tag.getTitleLtmCode()|trans({}, "catroweb") }}</a>
+                <a class="rec-programs" href="{{ url('tag_search', { q : tag.getInternalTitle() }) }}">
+                    <span class="badge rounded-pill bg-primary">{{ tag.getTitleLtmCode()|trans({}, "catroweb") }}</span>
+                </a>
               {% endfor %}
             </div>
           </div>

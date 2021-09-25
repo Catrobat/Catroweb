@@ -701,6 +701,9 @@ achievements:
       verified_developer:
         title: '초심자'
         description: '사용자 계정 생성'
+      coding_jam_09_2021:
+        title: "Coding Jam '21"
+        description: "Participant of Coding Jam 2021"
 tags:
   title: 태그
   tag:
@@ -718,6 +721,8 @@ tags:
       title: 실험적
     tutorial:
       title: 지도 시간
+    coding_jam_09_2021:
+      title: "#catrobatfestival2021"
 extensions:
   title: 확장
   extension:

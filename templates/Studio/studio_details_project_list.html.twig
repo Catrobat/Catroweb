@@ -22,9 +22,9 @@
                                  alt="{{ project.name }}">
                             <span class="project-list__project__name">{{ project.name }}</span>
                             {% if user_role == 'admin' %}
-                                <a class="project-delete-button" data-toggle="tooltip"
+                                <a class="project-delete-button" data-bs-toggle="tooltip"
                                    onclick="(new Studio()).removeProject('{{ project.id }}')" title="{{ 'studio.details.remove_project'|trans({}, 'catroweb') }}">
-                                    <i class="ml-2 material-icons text-danger">delete</i>
+                                    <i class="ms-2 material-icons text-danger">delete</i>
                                 </a>
                             {% endif %}
                         </div>

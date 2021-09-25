@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.17.0]
+  - update dependencies
+  - update translations
+  - new welcome section
+
 ## [3.16.0]
   - new Achievement + Tag for #catrobatfestival2021
   - update dependencies
@@ -389,7 +394,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.16.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.17.0...HEAD
+[3.16.0]: https://github.com/Catrobat/Catroweb/compare/v3.16.0...v3.17.0
 [3.15.2]: https://github.com/Catrobat/Catroweb/compare/v3.15.2...v3.16.0
 [3.14.0]: https://github.com/Catrobat/Catroweb/compare/v3.14.0...v3.15.2
 [3.13.0]: https://github.com/Catrobat/Catroweb/compare/v3.13.0...v3.14.0

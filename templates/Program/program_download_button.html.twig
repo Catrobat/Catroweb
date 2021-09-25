@@ -9,7 +9,7 @@
         data-icon='#download-icon{{ suffix|default('') }}'
 >
 
-  <i class="material-icons text-left d-none" id="download-pb{{ suffix|default('') }}">
+  <i class="material-icons text-start d-none" id="download-pb{{ suffix|default('') }}">
   {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'download-progressbar' ~ suffix|default(), 'size': 'small'} only %}</i>
   <i class="material-icons align-bottom" id="download-icon{{ suffix|default('') }}">get_app</i>
   <span>{{ "download"|trans({}, "catroweb") }}</span>

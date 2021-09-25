@@ -1,14 +1,12 @@
 {# Different videos for different themes #}
-<div class="youtube" id="youtube-index"
+<div class="video-container">
     {% if flavor() == 'luna' %}
-     data-embed="-6AEZrSbOMg">
+        <iframe loading="eager" src="https://www.youtube.com/embed/-6AEZrSbOMg?controls=1&autoplay=1&mute=1"></iframe>
     {% elseif flavor() == 'embroidery' %}
-     data-embed="IjHI0UZzuWM">
+        <iframe loading="eager" src="https://www.youtube.com/embed/IjHI0UZzuWM?controls=1&autoplay=1&mute=1"></iframe>
     {% elseif flavor() == 'mindstorms' %}
-     data-embed="YnSl-fSV-nY">
+        <iframe loading="eager" src="https://www.youtube.com/embed/YnSl-fSV-nY?controls=1&autoplay=1&mute=1"></iframe>
     {% else %}
-     data-embed="BHe2r2WU-T8">
+        <iframe loading="eager" src="https://www.youtube.com/embed/BHe2r2WU-T8?controls=1&autoplay=1&mute=1"></iframe>
     {% endif %}
-  <div class="play-button">
-  </div>
 </div>

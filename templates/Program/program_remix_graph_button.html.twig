@@ -4,7 +4,7 @@
         data-spinner='#remix-graph-button-spinner{{ suffix|default('') }}'
         data-icon='#remix-graph-icon{{ suffix|default('') }}'
 >
-  <i class="material-icons d-none text-left" id="remix-graph-button-spinner{{ suffix|default('') }}">
+  <i class="material-icons d-none text-start" id="remix-graph-button-spinner{{ suffix|default('') }}">
     {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'remix-graph-spinner' ~ suffix|default(), 'size': 'small'} %}
   </i>
   <i class="material-icons align-bottom" id="remix-graph-icon{{ suffix|default('') }}">call_split</i>

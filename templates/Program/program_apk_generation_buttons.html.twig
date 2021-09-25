@@ -9,7 +9,7 @@
 <div>
   <button id="apk-pending{{ suffix|default('') }}"
           class="btn btn-outline-primary btn-block d-none">
-    <i class="material-icons align-bottom text-left">
+    <i class="material-icons align-bottom text-start">
       {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'apk-progressbar' ~ suffix|default(), 'size': 'small'} %}
     </i>
     <span>{{ "apk.preparing"|trans({}, "catroweb") }}</span>
@@ -19,12 +19,12 @@
 <div>
   <button id="apk-download{{ suffix|default('') }}"
           class="btn btn-outline-primary btn-block d-none">
-    <i class="material-icons text-left d-none">
+    <i class="material-icons text-start d-none">
       {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'download-spinner' ~ suffix|default(), 'size': 'small'} %}
     </i>
     <i class="material-icons align-bottom">casino</i>
     <span>{{ "apk.download"|trans({}, "catroweb") }}</span>
   </button>
 </div>
-<i class="material-icons text-left d-none" id="apk-pb{{ suffix|default('') }}">
+<i class="material-icons text-start d-none" id="apk-pb{{ suffix|default('') }}">
   {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'download-progressbar' ~ suffix|default(), 'size': 'small'} only %}</i>

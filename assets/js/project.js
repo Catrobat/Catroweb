@@ -8,7 +8,6 @@ import { shareProject } from './custom/ProgramShare'
 import { ProgramReport } from './custom/ProgramReport'
 
 require('../styles/custom/profile.scss')
-require('../styles/custom/card.scss')
 require('../styles/custom/modal.scss')
 require('../styles/custom/program.scss')
 
