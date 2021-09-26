@@ -992,4 +992,16 @@ class Program
   {
     return $this->custom_translations;
   }
+
+  public function getRand(): int
+  {
+    return $this->rand;
+  }
+
+  public function setRand(int $rand): Program
+  {
+    $this->rand = $rand;
+
+    return $this;
+  }
 }

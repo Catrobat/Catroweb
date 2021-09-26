@@ -122,6 +122,15 @@ class CronJobCommand extends Command
       $output
     );
 
+    // Project categories
+    $this->runCronJob(
+      "Remove and add new projects to the random projects' category",
+      ['bin/console', 'catrobat:workflow:update_random_project_category'],
+      ['timeout' => self::ONE_DAY_IN_SECONDS],
+      '1 week',
+      $output
+    );
+
     return 0;
   }
 

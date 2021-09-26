@@ -497,7 +497,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC', string $alias = 'e'): QueryBuilder
   {
-    if ('' === trim($order_by)) {
+    if ('' !== trim($order_by)) {
       $query_builder = $query_builder
         ->orderBy($alias.'.'.$order_by, $order)
         ;
