@@ -94,3 +94,7 @@ a {
   }
 }
 /* stylelint-enable */
+
+.carousel-indicators .active {
+  background-color: var(--primary);
+}

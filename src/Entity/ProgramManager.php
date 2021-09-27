@@ -593,8 +593,7 @@ class ProgramManager
 
   public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    // ToDo: "RAND()" disabled
-    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'RAND() disabled');
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'rand');
   }
 
   public function countProjects(string $flavor = null, string $max_version = ''): int

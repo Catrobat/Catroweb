@@ -1055,7 +1055,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function iShouldSeeTheSliderWithTheValues($values): void
   {
     $slider_items = explode(',', $values);
-    $owl_items = $this->getSession()->getPage()->findAll('css', 'div.carousel-item > a');
+    $owl_items = $this->getSession()->getPage()->findAll('css', '.carousel-item');
     $owl_items_count = count($owl_items);
     Assert::assertEquals($owl_items_count, count($slider_items));
 

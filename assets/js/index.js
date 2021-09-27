@@ -1,8 +1,11 @@
 import $ from 'jquery'
+import { Carousel } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { ProjectList } from './components/project_list'
 
 require('../styles/index.scss')
+
+new Carousel('#feature-slider')
 
 $(() => {
   initHomeProjects()
