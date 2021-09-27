@@ -756,8 +756,7 @@ achievements:
         description: "Participant of Coding Jam 2021"
 
 tags:
-  title:
-    Tags
+  title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
       title: Game
@@ -777,8 +776,7 @@ tags:
       title: "#catrobatfestival2021"
 
 extensions:
-  title:
-    Extensions
+  title: '{0} |{1} Extension |]1,Inf] Extensions'
   extension:
     arduino:
       title: Arduino
