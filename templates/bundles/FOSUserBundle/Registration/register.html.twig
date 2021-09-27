@@ -1,7 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-  {{ encore_entry_link_tags('login_styles') }}
+  {{ encore_entry_link_tags('register') }}
 {% endblock %}
 
 {% block header "" %}
@@ -43,7 +43,7 @@
               <span class="mdc-line-ripple"></span>
             </label>
 
-            <label class="mdc-text-field mdc-text-field--filled email">
+            <label class="mdc-text-field mdc-text-field--filled email mt-3">
               <span class="mdc-text-field__ripple"></span>
               {{ form_widget(form.email, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'email-label', 'id': 'email', 'name': '_email' }}) }}
               <span class="mdc-floating-label" id="email-label">{{ "login.email"|trans({}, "catroweb") }}</span>
@@ -51,7 +51,7 @@
             </label>
 
             <div class="show-hide-password">
-              <label class="mdc-text-field mdc-text-field--filled password-first">
+              <label class="mdc-text-field mdc-text-field--filled password-first mt-3">
                 <span class="mdc-text-field__ripple"></span>
                 {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first', 'name': '_password-first' }}) }}
                 <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
@@ -61,7 +61,7 @@
             </div>
 
             <div class="show-hide-password">
-              <label class="mdc-text-field mdc-text-field--filled password-second">
+              <label class="mdc-text-field mdc-text-field--filled password-second mt-3">
                 <span class="mdc-text-field__ripple"></span>
                 {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second', 'name': '_password-second' }}) }}
                 <span class="mdc-icon-button material-icons pw-toggler">visibility</span>

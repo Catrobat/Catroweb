@@ -17,6 +17,26 @@
   color: $theme-logo-color-secondary;
 }
 
+// Prevent chrome autofill background color
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px #f5f5f5 inset !important;
+}
+
+// overwrite material
+.mdc-text-field{
+  width: 100%;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
+  color: var(--mdc-theme-primary) !important;
+}
+
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary) !important;
+}
 
 /* BOTTOM BARS ================================= */
 
@@ -47,62 +67,10 @@
   right: 50%;
 }
 
-/* form animasyon ================ */
-
-/* @-webkit-keyframes inputHighlighter {
-  from {
-    background: rgba(var(--primary), 0.7);
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-
-@-moz-keyframes inputHighlighter {
-  from {
-    background: rgba(var(--primary), 0.7);
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-}
-
-@keyframes inputHighlighter {
-  from {
-    background: rgba(var(--primary), 0.7);
-  }
-  to {
-    width: 0;
-    background: transparent;
-  }
-} */
-
 .span-input {
   position: relative;
   top: -5px;
   margin-left: 10px;
-}
-
-/* .social-button-effects {
-  opacity: 0.9;
-}
-
-.social-button-effects:hover {
-  opacity: 1.1;
-} */
-
-.mdc-text-field{
-  width: 100%;
-}
-
-.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label {
-  color: var(--mdc-theme-primary);
-}
-
-.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
-  color: var(--mdc-theme-primary);
 }
 
 #_submit {
@@ -112,15 +80,6 @@
 .form-group {
   min-height: 39px;
 }
-
-/* #login_links {
-  font-size: 16px;
-  width: 318px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  margin-top: 12px;
-} */
 
 #seperator-text {
   position: relative;
@@ -132,24 +91,6 @@ hr {
   width: 100%;
   border-color: var(--primary);
 }
-
-/* .hidden {
-  width: 0;
-  height: 0;
-  background: transparent;
-  border: none !important;
-}
-
-.ui-widget-header, .ui-state-default {
-  background: $default-border-color;
-  border: 3px solid $default-border-color;
-  color: #FFFFFF;
-  font-weight: $font-weight-bold;
-}
-
-.align_start {
-  text-align: start;
-} */
 
 .show-hide-password {
   display: flex;

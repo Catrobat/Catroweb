@@ -1,9 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-
-  <link rel="stylesheet" href="{{ asset('build/login_styles.css') }}" media="screen"/>
-
+  {{ encore_entry_link_tags('request') }}
 {% endblock %}
 
 {% block header "" %}

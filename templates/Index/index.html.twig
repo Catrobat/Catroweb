@@ -13,14 +13,17 @@
   {% if featured|length > 0 %}
     <div id="featured-slider" class="featured-slider">
       <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
-      {{ include('Index/featured_programs_carousel.html.twig',
+      {{ include('components/carousel.html.twig',
         { 'carousel' :
           {
             'id' : 'feature-slider',
             'slideCount' : featured|length,
             'slides' : featured,
             'classes' : '',
-            'controls' : true
+            'controls' : true,
+            'width': '1024',
+            'height': '400',
+            'alt': ''
           }
         }
       ) }}

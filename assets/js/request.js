@@ -1,4 +1,7 @@
+import { MDCFloatingLabel } from '@material/floating-label'
 import { MDCTextField } from '@material/textfield'
 
-// eslint-disable-next-line no-unused-vars
-const usernameTextField = new MDCTextField(document.querySelector('.username-or-email'))
+require('../styles/login.scss')
+
+new MDCTextField(document.querySelector('.username'))
+new MDCFloatingLabel(document.querySelector('.username-label'))
