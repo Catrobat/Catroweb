@@ -1,10 +1,13 @@
+import { MDCFloatingLabel } from '@material/floating-label'
 import { MDCTextField } from '@material/textfield'
 
-// eslint-disable-next-line no-unused-vars
-const usernameTextField = new MDCTextField(document.querySelector('.username'))
-// eslint-disable-next-line no-unused-vars
-const emailTextField = new MDCTextField(document.querySelector('.email'))
-// eslint-disable-next-line no-unused-vars
-const passwordFirstTextField = new MDCTextField(document.querySelector('.password-first'))
-// eslint-disable-next-line no-unused-vars
-const passwordSecondTextField = new MDCTextField(document.querySelector('.password-second'))
+require('../styles/login.scss')
+
+new MDCTextField(document.querySelector('.username'))
+new MDCTextField(document.querySelector('.email'))
+new MDCTextField(document.querySelector('.password-first'))
+new MDCTextField(document.querySelector('.password-second'))
+new MDCFloatingLabel(document.querySelector('.username-label'))
+new MDCFloatingLabel(document.querySelector('.email-label'))
+new MDCFloatingLabel(document.querySelector('.password-first-label'))
+new MDCFloatingLabel(document.querySelector('.password-second-label'))
