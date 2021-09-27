@@ -16,7 +16,7 @@ class UpdateProjectExtensionsCommand extends Command
   private EntityManagerInterface $entity_manager;
   private ExtensionRepository $extension_repository;
 
-  public const EXTENSION_LTM_PREFIX = 'extension.extension.';
+  public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
 
   public function __construct(EntityManagerInterface $entity_manager, ExtensionRepository $extension_repository)
   {
@@ -79,7 +79,7 @@ class UpdateProjectExtensionsCommand extends Command
     $this->entity_manager->persist($extension);
 
     $this->entity_manager->flush();
-    $output->writeln("{$count} Tags in the Database have been inserted/updated");
+    $output->writeln("{$count} Extensions in the Database have been inserted/updated");
 
     return 0;
   }
