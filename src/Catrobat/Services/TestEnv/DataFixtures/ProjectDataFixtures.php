@@ -115,6 +115,7 @@ class ProjectDataFixtures
     $project->setPrivate(isset($config['private']) ? 'true' === $config['private'] : false);
     $project->setDebugBuild(isset($config['debug']) ? 'true' === $config['debug'] : false);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
+    $project->setRand($config['rand'] ?? 0);
 
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new DateTime($config['apk request time'], new DateTimeZone('UTC')));

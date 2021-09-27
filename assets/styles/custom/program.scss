@@ -356,10 +356,6 @@ input[type="number"] {
 
 #tag-extension-container {
 
-  > #tags:nth-child(2) {
-    margin-top: 0.5rem;
-  }
-
   #tags,
   #extensions {
     display: flex;
@@ -367,15 +363,15 @@ input[type="number"] {
     align-items: baseline;
     margin-top: -0.15rem;
 
-    @include media-breakpoint-down(md) {
-      flex-direction: column;
-    }
-
     p {
       margin-right: 1rem;
     }
 
     .list {
+      display: flex;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+
       .badge {
         margin: 0.15rem;
         font-size: 100%;

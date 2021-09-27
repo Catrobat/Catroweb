@@ -1,43 +1,40 @@
-<div id="{{ carousel.id }}" class="carousel slide {{ carousel.classes }} center" data-ride="carousel">
+<div id="{{ carousel.id }}" class="carousel slide {{ carousel.classes }} center mb-4" data-bs-ride="carousel">
 
   <!-- Indicators -->
-  <ul class="carousel-indicators">
+  <div class="carousel-indicators">
     {% for i in 0..carousel.slideCount - 1 %}
       {% if i == 0 %}
-        <li data-bs-target="#{{ carousel.id }}" data-slide-to="{{ i }}" class="active"></li>
+        <button type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide-to="{{ i }}" class="active" aria-current="true" aria-label="Slide {{ i }}"></button>
       {% else %}
-        <li data-bs-target="#{{ carousel.id }}" data-slide-to="{{ i }}"></li>
+        <button type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide-to="{{ i }}" aria-label="Slide {{ i }}"></button>
       {% endif %}
     {% endfor %}
-  </ul>
+  </div>
 
   <!-- Wrapper for slides -->
   <div class="carousel-inner">
     {% for slide in carousel.slides %}
       {% if loop.first %}
-        <div class="carousel-item active">
-          <a href="{{ slide.url }}">
-            <img src="{{ asset(slide.image) }}" alt="featured program" loading="eager">
+          <a class="carousel-item active" href="{{ slide.url }}">
+            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="featured program" loading="eager">
           </a>
-        </div>
       {% else %}
-        <div class="carousel-item">
-          <a href="{{ slide.url }}">
-            <img src="{{ asset(slide.image) }}" alt="featured program" loading="lazy">
+          <a class="carousel-item" href="{{ slide.url }}">
+            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="featured program" loading="lazy">
           </a>
-        </div>
       {% endif %}
     {% endfor %}
   </div>
 
   {% if carousel.controls %}
     <!-- Left and right controls -->
-    <a class="carousel-control-prev carousel-control" href="#{{ carousel.id }}" data-slide="prev">
-      <span class="mdc-icon-button material-icons">chevron_left</span>
-    </a>
-    <a class="carousel-control-next carousel-control" href="#{{ carousel.id }}" data-slide="next">
-      <span class="mdc-icon-button material-icons">chevron_right</span>
-    </a>
-
+    <button class="carousel-control-prev" type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#{{ carousel.id }}" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
   {% endif %}
 </div>

@@ -3,8 +3,9 @@
     <div class="col-12">
       <div id="tag-extension-container">
         {% if program.extensions|length > 0 %}
+          {% set count = program.extensions|length %}
           <div id="extensions">
-            <p>{{ ("extensions.title")|trans({}, "catroweb") }}:</p>
+            <p>{{ ("extensions.title")|trans({'%count%':count}, "catroweb") }}:</p>
             <div class="list">
               {% for extension in program.extensions %}
                 <a class="rec-programs"
@@ -15,9 +16,10 @@
             </div>
           </div>
         {% endif %}
-        {% if  program.tags|length > 0 %}
+        {% if program.tags|length > 0 %}
+          {% set count = program.tags|length %}
           <div id="tags">
-            <p>{{ ("tags.title")|trans({}, "catroweb") }}:</p>
+            <p>{{ ("tags.title")|trans({'%count%':count}, "catroweb") }}:</p>
             <div class="list">
               {% for tag in program.tags %}
                 <a class="rec-programs" href="{{ url('tag_search', { q : tag.getInternalTitle() }) }}">

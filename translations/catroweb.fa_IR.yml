@@ -15,6 +15,8 @@ tutorials: آموزش
 googlePlay: گوگل پلی
 iosAppStore: IOS App store
 huaweiAppGallery: گالری برنامه Huawei
+instagram: Instagram
+discordChat: Discord chat
 passwordsNoMatch: رمز عبور مطابقت نمی کند.
 error: خطا
 cancel: انصراف
@@ -738,7 +740,7 @@ extensions:
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: گلدوزی
     mindstorms:
       title: Mindstorms
 studio:
