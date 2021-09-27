@@ -16,11 +16,13 @@
     {% for slide in carousel.slides %}
       {% if loop.first %}
           <a class="carousel-item active" href="{{ slide.url }}">
-            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="featured program" loading="eager">
+            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="{{ carousel.alt }}"
+                 width="{{ carousel.width }}" height="{{ carousel.height }}" loading="eager">
           </a>
       {% else %}
-          <a class="carousel-item" href="{{ slide.url }}">
-            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="featured program" loading="lazy">
+          <a class="carousel-item" href="{{ slide.url }}" style="background: #fff;">
+            <img src="{{ asset(slide.image) }}" class="d-block w-100" alt="{{ carousel.alt }}"
+                 width="{{ carousel.width }}" height="{{ carousel.height }}" loading="lazy">
           </a>
       {% endif %}
     {% endfor %}

@@ -1,7 +1,7 @@
 {% extends "Default/base.html.twig" %}
 
 {% block head %}
-  {{ encore_entry_link_tags('login_styles') }}
+  {{ encore_entry_link_tags('reset') }}
 {% endblock %}
 
 {% block header "" %}
@@ -41,7 +41,7 @@
               </label>
             </div>
 
-            <div class="show-hide-password">
+            <div class="show-hide-password mt-3">
               <label class="mdc-text-field mdc-text-field--filled password-second">
                 <span class="mdc-text-field__ripple"></span>
                 {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second' }}) }}
