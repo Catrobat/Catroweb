@@ -469,7 +469,7 @@ class ProgramController extends AbstractController
   /**
    * @Route("/translate/project/{id}", name="translate_project", methods={"GET"})
    *
-   * @throws \Doctrine\ORM\NoResultException
+   * @throws NoResultException
    */
   public function translateProjectAction(Request $request, string $id): Response
   {
@@ -508,7 +508,7 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/translate/custom/project/{id}", name="project_custom_translation", methods={"PUT", "GET"})
+   * @Route("/translate/custom/project/{id}", name="project_custom_translation", methods={"PUT", "GET", "DELETE"})
    */
   public function projectCustomTranslationAction(Request $request, string $id): Response
   {
@@ -517,8 +517,10 @@ class ProgramController extends AbstractController
         return $this->projectCustomTranslationPutAction($request, $id);
       case 'GET':
         return $this->projectCustomTranslationGetAction($request, $id);
+      case 'DELETE':
+        return $this->projectCustomTranslationDeleteAction($request, $id);
       default:
-        return Response::create(null, Response::HTTP_NOT_IMPLEMENTED);
+        return Response::create(null, Response::HTTP_BAD_REQUEST);
     }
   }
 
@@ -647,6 +649,47 @@ class ProgramController extends AbstractController
     }
 
     return $isReportedByUser;
+  }
+
+  private function projectCustomTranslationDeleteAction(Request $request, string $id): Response
+  {
+    $user = $this->getUser();
+    if (null === $user) {
+      return Response::create(null, Response::HTTP_UNAUTHORIZED);
+    }
+
+    $project = $this->program_manager->find($id);
+    if (null === $project || $project->getUser() !== $user) {
+      return Response::create(null, Response::HTTP_NOT_FOUND);
+    }
+
+    if (!$request->query->has('field')
+      || !$request->query->has('language')) {
+      return Response::create(null, Response::HTTP_BAD_REQUEST);
+    }
+
+    $field = $request->query->get('field');
+    $language = $request->query->get('language');
+
+    try {
+      switch ($field) {
+        case 'name':
+          $result = $this->translation_delegate->deleteProjectNameCustomTranslation($project, $language);
+          break;
+        case 'description':
+          $result = $this->translation_delegate->deleteProjectDescriptionCustomTranslation($project, $language);
+          break;
+        case 'credit':
+          $result = $this->translation_delegate->deleteProjectCreditCustomTranslation($project, $language);
+          break;
+        default:
+          return Response::create(null, Response::HTTP_BAD_REQUEST);
+      }
+    } catch (InvalidArgumentException $exception) {
+      return Response::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+    }
+
+    return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 
   private function projectCustomTranslationGetAction(Request $request, string $id): Response
