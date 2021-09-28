@@ -15,8 +15,8 @@ tutorials: บทเรียน
 googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
-instagram: Instagram
-discordChat: Discord chat
+instagram: อินสตาแกรม
+discordChat: แชทดิสคอร์ด
 passwordsNoMatch: รหัสผ่านไม่ตรงกัน
 error: ผิดพลาด
 cancel: ยกเลิก
@@ -713,9 +713,9 @@ achievements:
         description: 'สร้างบัญชีผู้ใช้'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "ผู้เข้าร่วม Coding Jam 2021"
 tags:
-  title: แท็ก
+  title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
       title: เกม
@@ -734,7 +734,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: ส่วนขยาย
+  title: 'ส่วนขยาย'
   extension:
     arduino:
       title: Arduino
