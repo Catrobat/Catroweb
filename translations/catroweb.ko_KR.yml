@@ -707,7 +707,7 @@ achievements:
         title: "Coding Jam '21"
         description: "Participant of Coding Jam 2021"
 tags:
-  title: 태그
+  title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
       title: 경기
@@ -726,7 +726,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: 확장
+  title: '확장'
   extension:
     arduino:
       title: 아두이노
