@@ -147,6 +147,11 @@ task('update:special', function () {
   run('bin/console catrobat:update:special');
 });
 
+task('sonata:admin:setup:acl', function () {
+  cd('{{release_path}}');
+  run('bin/console sonata:admin:setup-acl');
+});
+
 /**
  * Main task
  */
@@ -173,6 +178,7 @@ task('deploy', [
   'deploy:jwt',
   'restart:nginx',
   'restart:php-fpm',
+  'sonata:admin:setup:acl',
   'update:achievements',
   'update:tags',
   'update:extensions',
