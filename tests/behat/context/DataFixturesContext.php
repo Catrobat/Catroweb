@@ -1548,9 +1548,9 @@ class DataFixturesContext implements KernelAwareContext
     foreach ($table->getHash() as $config) {
       $project = $this->getProgramManager()->find($config['project_id']);
       $language = $config['language'];
-      $name = $config['name'];
-      $description = $config['description'];
-      $credit = $config['credit'];
+      $name = '' === $config['name'] ? null : $config['name'];
+      $description = '' === $config['description'] ? null : $config['description'];
+      $credit = '' === $config['credit'] ? null : $config['credit'];
 
       $project_custom_translation = new ProjectCustomTranslation($project, $language);
       $project_custom_translation->setName($name);
