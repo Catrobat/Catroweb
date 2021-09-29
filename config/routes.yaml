@@ -4,24 +4,24 @@
 #======== HWIOAUTH ========================
 hwi_oauth_redirect:
   resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-  prefix: /app/connect
+  prefix: /connect
 
 hwi_oauth_connect:
   resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-  prefix: /app/connect
+  prefix: /connect
 
 #hwi_oauth_login:
 #  resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
 #  prefix: /{theme}/login
 
 google_login:
-  path: /app/login/check-google
+  path: /login/check-google
 
 facebook_login:
-  path: /app/login/check-facebook
+  path: /login/check-facebook
 
 apple_login:
-  path: /app/login/check-apple
+  path: /login/check-apple
 
 # ===== Api =====
 open_api_server:

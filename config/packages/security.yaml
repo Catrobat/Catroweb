@@ -138,12 +138,12 @@ security:
             oauth:
                 remember_me: true
                 resource_owners:
-                    google:             "/app/login/check-google"
-                    facebook:           "/app/login/check-facebook"
-                    apple:              "/app/login/check-apple"
-                login_path:        /app/login
+                    google:             "/login/check-google"
+                    facebook:           "/login/check-facebook"
+                    apple:              "/login/check-apple"
+                login_path:        /login
                 use_forward:       false
-                failure_path:      /app/login
+                failure_path:      /login
 
                 oauth_user_provider:
                     service: my.oauth_aware.user_provider.service
