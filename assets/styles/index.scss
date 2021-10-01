@@ -22,3 +22,8 @@
 img .lazyload:not([src]) {
   visibility: hidden;
 }
+
+.carousel-item__image {
+  max-width: 100%;
+  height: auto;
+}
