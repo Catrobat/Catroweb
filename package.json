@@ -62,7 +62,7 @@
     "@material/tab-scroller": "^13.0.0",
     "@material/textfield": "^13.0",
     "@material/top-app-bar": "^13.0",
-    "@popperjs/core": "^2.10.1",
+    "@popperjs/core": "^2.10.2",
     "ajv": "^8.6.3",
     "animate.css": "^4.1.1",
     "bootstrap": "^5.1.1",
