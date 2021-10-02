@@ -12,30 +12,30 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20200617205116 extends AbstractMigration
 {
-    public function getDescription() : string
-    {
-        return '';
-    }
+  public function getDescription(): string
+  {
+    return '';
+  }
 
-    public function up(Schema $schema) : void
-    {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+  public function up(Schema $schema): void
+  {
+    // this up() migration is auto-generated, please modify it to your needs
+    $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('ALTER TABLE program ADD scratch_id INT DEFAULT NULL');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_92ED7784711DBBB4 ON program (scratch_id)');
-        $this->addSql('ALTER TABLE fos_user ADD scratch_user_id INT DEFAULT NULL');
-        $this->addSql('CREATE UNIQUE INDEX UNIQ_957A64797C85A057 ON fos_user (scratch_user_id)');
-    }
+    $this->addSql('ALTER TABLE program ADD scratch_id INT DEFAULT NULL');
+    $this->addSql('CREATE UNIQUE INDEX UNIQ_92ED7784711DBBB4 ON program (scratch_id)');
+    $this->addSql('ALTER TABLE fos_user ADD scratch_user_id INT DEFAULT NULL');
+    $this->addSql('CREATE UNIQUE INDEX UNIQ_957A64797C85A057 ON fos_user (scratch_user_id)');
+  }
 
-    public function down(Schema $schema) : void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+  public function down(Schema $schema): void
+  {
+    // this down() migration is auto-generated, please modify it to your needs
+    $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-        $this->addSql('DROP INDEX UNIQ_957A64797C85A057 ON fos_user');
-        $this->addSql('ALTER TABLE fos_user DROP scratch_user_id');
-        $this->addSql('DROP INDEX UNIQ_92ED7784711DBBB4 ON program');
-        $this->addSql('ALTER TABLE program DROP scratch_id');
-    }
+    $this->addSql('DROP INDEX UNIQ_957A64797C85A057 ON fos_user');
+    $this->addSql('ALTER TABLE fos_user DROP scratch_user_id');
+    $this->addSql('DROP INDEX UNIQ_92ED7784711DBBB4 ON program');
+    $this->addSql('ALTER TABLE program DROP scratch_id');
+  }
 }

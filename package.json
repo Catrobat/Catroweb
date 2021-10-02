@@ -3,8 +3,8 @@
   "version": "2.0.1",
   "description": "Catroweb =========",
   "scripts": {
-    "test": "npx eslint assets/js/**/*.js --ignore-pattern \\\"assets/js/webpack/\\\"",
-    "fix": "npx eslint assets/js/**/*.js --fix",
+    "test": "npx eslint assets/js/**/*.js webpack.config.js",
+    "fix": "npx eslint assets/js/**/*.js webpack.config.js --fix",
     "test-style": "npx stylelint assets/styles/**/*.scss",
     "fix-style": "npx stylelint assets/styles/**/*.scss --fix",
     "dev-server": "encore dev-server",

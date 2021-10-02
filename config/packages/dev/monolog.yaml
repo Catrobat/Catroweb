@@ -23,6 +23,8 @@ monolog:
   channels: [upload, download_stats]
   handlers:
 
+    # logging in your browser
+    # you may have to allow bigger header sizes in your Web server configuration
     firephp:
       type: firephp
       level: info

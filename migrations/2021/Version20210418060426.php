@@ -12,22 +12,22 @@ use Doctrine\Migrations\AbstractMigration;
  */
 final class Version20210418060426 extends AbstractMigration
 {
-    public function getDescription() : string
-    {
-        return '';
-    }
+  public function getDescription(): string
+  {
+    return '';
+  }
 
-    public function up(Schema $schema) : void
-    {
-        // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE program ADD rand INT DEFAULT 0 NOT NULL');
-        $this->addSql('CREATE INDEX rand_idx ON program (rand)');
-    }
+  public function up(Schema $schema): void
+  {
+    // this up() migration is auto-generated, please modify it to your needs
+    $this->addSql('ALTER TABLE program ADD rand INT DEFAULT 0 NOT NULL');
+    $this->addSql('CREATE INDEX rand_idx ON program (rand)');
+  }
 
-    public function down(Schema $schema) : void
-    {
-        // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('DROP INDEX rand_idx ON program');
-        $this->addSql('ALTER TABLE program DROP rand');
-    }
+  public function down(Schema $schema): void
+  {
+    // this down() migration is auto-generated, please modify it to your needs
+    $this->addSql('DROP INDEX rand_idx ON program');
+    $this->addSql('ALTER TABLE program DROP rand');
+  }
 }

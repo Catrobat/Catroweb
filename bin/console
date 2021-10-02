@@ -4,14 +4,18 @@
 use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArgvInput;
-use Symfony\Component\Debug\Debug;
+use Symfony\Component\ErrorHandler\Debug;
+
+if (!in_array(PHP_SAPI, ['cli', 'phpdbg', 'embed'], true)) {
+    echo 'Warning: The console should be invoked via the CLI version of PHP, not the '.PHP_SAPI.' SAPI'.PHP_EOL;
+}
 
 set_time_limit(0);
 
 require dirname(__DIR__).'/vendor/autoload.php';
 
 if (!class_exists(Application::class)) {
-    throw new RuntimeException('You need to add "symfony/framework-bundle" as a Composer dependency.');
+    throw new LogicException('You need to add "symfony/framework-bundle" as a Composer dependency.');
 }
 
 $input = new ArgvInput();
@@ -24,22 +28,15 @@ if ($input->hasParameterOption('--no-debug', true)) {
 }
 
 require dirname(__DIR__).'/config/bootstrap.php';
+
 if ($_SERVER['APP_DEBUG']) {
     umask(0000);
+
     if (class_exists(Debug::class)) {
         Debug::enable();
     }
 }
 
-// ~~~~
-// ToDo Can be replaced when solution for env commands is found
-// ( reset command call clear with -e test, but dev cache gets cleared) ~~~
-$env = $input->getParameterOption(['--env', '-e'], getenv('SYMFONY_ENV') ?: 'dev');
-$debug = getenv('SYMFONY_DEBUG') !== '0' && !$input->hasParameterOption(['--no-debug', '']) && $env !== 'prod';
-$kernel = new Kernel($env, $debug);
-// ~~~~
-
-//$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
-
+$kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
 $application = new Application($kernel);
 $application->run($input);
