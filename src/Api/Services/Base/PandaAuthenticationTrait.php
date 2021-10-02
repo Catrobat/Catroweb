@@ -33,10 +33,11 @@ trait PandaAuthenticationTrait
    */
   private function extractAuthenticationToken(string $value): string
   {
-    try {
-      return preg_split('#\s+#', $value)[1];
-    } catch (Exception $e) {
-      throw new ApiException('The route must be registered under the jwt_token_authenticator! (security.yml)', Response::HTTP_UNAUTHORIZED);
+    $split = preg_split('#\s+#', $value);
+    if (count($split) > 1) {
+      return $split[1];
     }
+
+    throw new ApiException('The route must be registered under the jwt_token_authenticator! (security.yml)', Response::HTTP_UNAUTHORIZED);
   }
 }

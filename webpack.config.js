@@ -3,23 +3,30 @@ const PurgeCssPlugin = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const path = require('path')
 
+// Manually configure the runtime environment if not already configured yet by the "encore" command.
+// It's useful when you use tools that rely on webpack.config.js file.
+if (!Encore.isRuntimeEnvironmentConfigured()) {
+  Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev')
+}
+
 Encore
   // directory where compiled assets will be stored
   .setOutputPath('public/build/')
   // public path used by the web server to access the output path
   .setPublicPath('/build')
+
+  // overwriting the css versioning until the transition to webpack is full done
   .configureFilenames({
     css: 'css/[name].css', // -[contenthash] to be used once styles are only imported!
     js: 'js/[name]-[chunkhash].js'
-
   })
+
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
   .splitEntryChunks()
+
   // will require an extra script tag for runtime.js
   // but, you probably want this, unless you're building a single-page app
-  .disableSingleRuntimeChunk()
-  // emptying the build/ directory each time we build
-  .cleanupOutputBeforeBuild()
+  .enableSingleRuntimeChunk()
 
   .copyFiles([
     // Bootstrap (deprecated!)
@@ -114,6 +121,10 @@ Encore
   .addStyleEntry('pocketgalaxy', './assets/styles/themes/pocketgalaxy.scss')
   .addStyleEntry('mindstorms', './assets/styles/themes/mindstorms.scss')
 
+// ToDo:
+// enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
+// .enableStimulusBridge('./assets/controllers.json')
+
   /*
    * FEATURE CONFIG
    *
@@ -124,9 +135,12 @@ Encore
   .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
   .enableSourceMaps(!Encore.isProduction())
-
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
+
+  .configureBabel((config) => {
+    config.plugins.push('@babel/plugin-proposal-class-properties')
+  })
 
   // enables @babel/preset-env polyfills
   .configureBabelPresetEnv((config) => {
@@ -160,11 +174,5 @@ Encore
       return content.match(/[\w-/:]+(?<!:)/g) || []
     }
   }))
-
-// Manually configure the runtime environment if not already configured yet by the "encore" command.
-// It's useful when you use tools that rely on webpack.config.js file.
-if (!Encore.isRuntimeEnvironmentConfigured()) {
-  Encore.configureRuntimeEnvironment(process.env.NODE_ENV || 'dev')
-}
 
 module.exports = Encore.getWebpackConfig()

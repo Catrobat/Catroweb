@@ -30,7 +30,7 @@ set('shared_dirs',
   [
     'var/log',
     'var/sessions',
-    'public/resources'
+    'public/resources',
   ]);
 
 // Shared files between deploys
@@ -38,7 +38,7 @@ add('shared_files',
   [
     '.env.local',
     '.env.prod.local',
-    '.env.dev.local'
+    '.env.dev.local',
   ]);
 
 // Symfony writable dirs
@@ -46,9 +46,8 @@ set('writable_dirs',
   [
     'var/cache',
     'var/log',
-    'var/sessions'
+    'var/sessions',
   ]);
-
 
 // Symfony executable and variable directories
 set('bin_dir', 'bin');
@@ -63,39 +62,41 @@ host(getenv('DEPLOY_SHARE'))
   ->stage('share')
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/');
-
+  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
+  ->set('deploy_path', '/var/www/share/')
+;
 
 host(getenv('DEPLOY_WEBTEST'))
   ->stage('web-test')
   ->set('symfony_env', 'dev')
   ->set('branch', getenv('DEPLOY_WEBTEST_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/');
+  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
+  ->set('deploy_path', '/var/www/share/')
+;
 
 host(getenv('DEPLOY_POREVIEW'))
   ->stage('po-review')
   ->set('symfony_env', 'dev')
   ->set('branch', getenv('DEPLOY_POREVIEW_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/');
+  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
+  ->set('deploy_path', '/var/www/share/')
+;
 
 host(getenv('DEPLOY_CATBLOCKS'))
   ->stage('catblocks')
   ->set('symfony_env', 'dev')
   ->set('branch', getenv('DEPLOY_CATBLOCKS_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/');
+  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
+  ->set('deploy_path', '/var/www/share/')
+;
 
 host(getenv('DEPLOY_ANDROID'))
   ->stage('android')
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_ANDROID_BRANCH'))
-  ->set('composer_options','install --verbose --prefer-dist --optimize-autoloader --no-dev')
-  ->set('deploy_path', '/var/www/share/');
-
-
+  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader --no-dev')
+  ->set('deploy_path', '/var/www/share/')
+;
 
 // Tasks
 
@@ -133,13 +134,13 @@ task('update:achievements', function () {
 });
 
 task('update:tags', function () {
-    cd('{{release_path}}');
-    run('bin/console catrobat:update:tags');
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:tags');
 });
 
 task('update:extensions', function () {
-    cd('{{release_path}}');
-    run('bin/console catrobat:update:extensions');
+  cd('{{release_path}}');
+  run('bin/console catrobat:update:extensions');
 });
 
 task('update:special', function () {
@@ -152,7 +153,7 @@ task('sonata:admin:setup:acl', function () {
   run('bin/console sonata:admin:setup-acl');
 });
 
-/**
+/*
  * Main task
  */
 task('deploy', [
@@ -187,7 +188,6 @@ task('deploy', [
   'slack:notify:success',
   'cleanup',
 ])->desc('Deploy Catroweb!');
-
 
 // [Optional] if deploy fails automatically unlock.
 after('deploy:failed', 'deploy:unlock');

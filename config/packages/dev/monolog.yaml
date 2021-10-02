@@ -20,53 +20,55 @@
 #
 
 monolog:
-  channels: [upload, download_stats]
-  handlers:
+    channels: [upload, download_stats]
+    handlers:
 
-    firephp:
-      type: firephp
-      level: info
-    chromephp:
-      type: chromephp
-      level: info
+        # logging in your browser
+        # you may have to allow bigger header sizes in your Web server configuration
+        firephp:
+            type: firephp
+            level: info
+        chromephp:
+            type: chromephp
+            level: info
 
-    main:
-      type:  fingers_crossed
-      action_level: error
-      handler: nested
-      formatter: monolog.formatter.catrobat_custom_formatter
-    nested:
-      type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
-      level: info
-      max_files: 5
+        main:
+            type:  fingers_crossed
+            action_level: error
+            handler: nested
+            formatter: monolog.formatter.catrobat_custom_formatter
+        nested:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
+            level: info
+            max_files: 5
 
-    upload:
-      type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/upload/upload.log"
-      level: debug
-      max_files: 5
-      channels: [upload]
-      formatter: monolog.formatter.catrobat_custom_formatter
+        upload:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/upload/upload.log"
+            level: debug
+            max_files: 5
+            channels: [upload]
+            formatter: monolog.formatter.catrobat_custom_formatter
 
-    download_stats:
-      type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/download_stats/download_stats.log"
-      level: debug
-      max_files: 5
-      channels: [download_stats]
-      formatter: monolog.formatter.catrobat_custom_formatter
+        download_stats:
+            type: rotating_file
+            path: "%kernel.logs_dir%/%kernel.environment%/download_stats/download_stats.log"
+            level: debug
+            max_files: 5
+            channels: [download_stats]
+            formatter: monolog.formatter.catrobat_custom_formatter
 
-    console:
-      type: console
-      process_psr_3_messages: false
-      channels: ["!event", "!doctrine", "!console"]
+        console:
+            type: console
+            process_psr_3_messages: false
+            channels: ["!event", "!doctrine", "!console"]
 
-    deprecation:
-      type: stream
-      path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.deprecations.log"
-    deprecation_filter:
-      type: filter
-      handler: deprecation
-      max_level: info
-      channels: ["php"]
+        deprecation:
+            type: stream
+            path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.deprecations.log"
+        deprecation_filter:
+            type: filter
+            handler: deprecation
+            max_level: info
+            channels: ["php"]

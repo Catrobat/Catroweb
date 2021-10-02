@@ -2,6 +2,7 @@
 
 namespace App\Catrobat\Controller\Admin;
 
+use App\Entity\User;
 use App\Entity\UserManager;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Swift_Mailer;
@@ -18,6 +19,7 @@ class EmailUserMessageController extends CRUDController
 
   public function sendAction(Request $request, Swift_Mailer $mailer, UserManager $user_manager): Response
   {
+    /** @var User|null $user */
     $user = $user_manager->findUserByUsername($request->get('username'));
     if (!$user) {
       return new Response('User does not exist');

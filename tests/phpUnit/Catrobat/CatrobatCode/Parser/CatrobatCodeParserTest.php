@@ -73,13 +73,13 @@ class CatrobatCodeParserTest extends TestCase
    *
    * @param mixed $faulty_program
    */
-  public function mustReturnNullOnError($faulty_program): void
+  public function mustReturnOnError($faulty_program): void
   {
     $this->assertNull($this->parser->parse($faulty_program));
   }
 
   /**
-   * @return \App\Catrobat\Services\ExtractedCatrobatFile[][]
+   * @return ExtractedCatrobatFile[][]
    */
   public function validProgramProvider(): array
   {
@@ -92,14 +92,12 @@ class CatrobatCodeParserTest extends TestCase
   }
 
   /**
-   * @return \App\Catrobat\Services\ExtractedCatrobatFile[][]
+   * @return ExtractedCatrobatFile[][]
    */
   public function faultyProgramProvider(): array
   {
     $programs = [];
-    $programs[] = [new ExtractedCatrobatFile(
-      __DIR__.'/Resources/FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
-    ];
+
     $programs[] = [new ExtractedCatrobatFile(
       __DIR__.'/Resources/FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
     ];

@@ -1,34 +1,34 @@
 doctrine:
-  dbal:
-    url: '%env(resolve:DATABASE_URL)%'
+    dbal:
+        url: '%env(resolve:DATABASE_URL)%'
 
-    # IMPORTANT: You MUST configure your server version,
-    server_version: mariadb-10.3.11
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        server_version: mariadb-10.3.11
 
-    # needed for MySQL
-    charset: utf8mb4
-    default_table_options:
-      collate: utf8mb4_unicode_ci
+        # needed for MySQL
+        charset: utf8mb4
+        default_table_options:
+            collate: utf8mb4_unicode_ci
+        types:
+            json: Doctrine\DBAL\Types\JsonType
+        # backtrace queries in profiler (increases memory usage per request)
+        #profiling_collect_backtrace: '%kernel.debug%'
+        mapping_types:
+            enum: string
 
-    types:
-      json: Doctrine\DBAL\Types\JsonType
-
-    # backtrace queries in profiler (increases memory usage per request)
-    #profiling_collect_backtrace: '%kernel.debug%'
-    mapping_types:
-      enum: string
-
-  orm:
-    auto_generate_proxy_classes: "%kernel.debug%"
-    auto_mapping: true
-    mappings:
-      App:
-        is_bundle: false
-        type: annotation
-        dir: '%kernel.project_dir%/src/Entity'
-        prefix: 'App\Entity'
-        alias: App
-    dql:
-      string_functions:
-        match: DoctrineExtensions\Query\Mysql\MatchAgainst
-        rand: DoctrineExtensions\Query\Mysql\Rand
+    orm:
+        auto_generate_proxy_classes: true
+        # naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+        dql:
+            string_functions:
+                match: DoctrineExtensions\Query\Mysql\MatchAgainst
+                rand: DoctrineExtensions\Query\Mysql\Rand
