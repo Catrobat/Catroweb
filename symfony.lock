@@ -199,12 +199,6 @@
     "elasticsearch/elasticsearch": {
         "version": "v6.7.2"
     },
-    "ezimuel/guzzlestreams": {
-        "version": "3.0.1"
-    },
-    "ezimuel/ringphp": {
-        "version": "1.1.2"
-    },
     "felixfbecker/advanced-json-rpc": {
         "version": "v3.1.1"
     },
@@ -295,6 +289,12 @@
     "guzzlehttp/psr7": {
         "version": "1.6.1"
     },
+    "guzzlehttp/ringphp": {
+        "version": "1.1.1"
+    },
+    "guzzlehttp/streams": {
+        "version": "3.0.0"
+    },
     "hwi/oauth-bundle": {
         "version": "0.6",
         "recipe": {
@@ -345,6 +345,12 @@
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.1"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.2.0"
     },
     "lcobucci/clock": {
         "version": "2.0.0"
@@ -804,6 +810,21 @@
     "symfony/options-resolver": {
         "version": "v4.4.5"
     },
+    "symfony/phpunit-bridge": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.3",
+            "ref": "97cb3dc7b0f39c7cfc4b7553504c9d7b7795de96"
+        },
+        "files": [
+            ".env.test",
+            "bin/phpunit",
+            "phpunit.xml.dist",
+            "tests/bootstrap.php"
+        ]
+    },
     "symfony/polyfill-ctype": {
         "version": "v1.14.0"
     },
@@ -840,6 +861,9 @@
     "symfony/process": {
         "version": "v4.4.5"
     },
+    "symfony/profiler-pack": {
+        "version": "v1.0.6"
+    },
     "symfony/property-access": {
         "version": "v4.4.5"
     },
@@ -873,16 +897,16 @@
         ]
     },
     "symfony/security-core": {
-        "version": "v4.4.9"
+        "version": "v4.4.30"
     },
     "symfony/security-csrf": {
-        "version": "v4.4.9"
+        "version": "v4.4.27"
     },
     "symfony/security-guard": {
-        "version": "v4.4.9"
+        "version": "v4.4.27"
     },
     "symfony/security-http": {
-        "version": "v4.4.9"
+        "version": "v4.4.30"
     },
     "symfony/serializer": {
         "version": "v5.0.5"
@@ -945,6 +969,9 @@
             "config/packages/twig.yaml",
             "templates/base.html.twig"
         ]
+    },
+    "symfony/twig-pack": {
+        "version": "v1.0.1"
     },
     "symfony/validator": {
         "version": "4.3",
