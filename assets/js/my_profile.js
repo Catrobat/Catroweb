@@ -33,11 +33,14 @@
 import $ from 'jquery'
 import { MyProfile } from './custom/MyProfile'
 import { ProjectLoader } from './custom/ProjectLoader'
-import './custom/PasswordVisibilityToggler'
 import { setImageUploadListener } from './custom/ImageUpload'
+import { PasswordVisibilityToggle } from './components/password_visibility_toggle'
 
 require('../styles/custom/login.scss')
 require('../styles/custom/profile.scss')
+
+// eslint-disable-next-line no-new
+new PasswordVisibilityToggle()
 
 $(() => {
   setImageUploadListener(uploadAvatarUrl, '#avatar-upload', '#avatar-img')

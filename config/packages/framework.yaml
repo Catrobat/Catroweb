@@ -1,13 +1,19 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
 framework:
-  serializer: { enable_annotations: true }
-  translator: { fallback: en }
-  secret:          '%env(APP_SECRET)%'
-  form:            ~
-  csrf_protection: ~
-  validation:      { enabled: true, enable_annotations: true }
-  default_locale:  '%env(LOCALE)%'
-  session:         ~
-  fragments:       ~
-  assets:
-    version_strategy: 'catrobat.versioning'
-    json_manifest_path: null
+    secret:          '%env(APP_SECRET)%'
+    default_locale:  '%env(LOCALE)%'
+    translator: { fallback: en }
+
+    # uncomment for an API-only website
+    #csrf_protection: false
+
+    #    # Enables session support. Note that the session will ONLY be started if you read or write from it.
+    #    # Remove or comment this section to explicitly disable session support.
+    session:         ~
+    #        handler_id: null
+    #        cookie_secure: auto
+    #        cookie_samesite: lax
+
+    assets:
+        version_strategy: 'catrobat.versioning'
+        json_manifest_path: null

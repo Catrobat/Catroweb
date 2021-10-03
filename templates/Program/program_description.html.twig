@@ -1,31 +1,32 @@
 <div class="row">
   <div class="col mt-3 mb-3">
-    <div class="h2" id="description-headline">
+    <div id="description-headline">
+      <span class="h2">{{ "description"|trans({}, "catroweb") }}</span>
+      {% if app.user and my_program %}
         <span>
-          {{ "description"|trans({}, "catroweb") }}
-          {% if app.user and my_program %}
-            <a data-bs-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
-              <i id="edit-description-button"
-                 class="ms-3 material-icons catro-icon-button align-bottom">edit</i>
-            </a>
-          {% endif %}
+          <i id="edit-description-button" class="ms-3 material-icons catro-icon-button align-bottom"
+             data-bs-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
+            edit
+          </i>
         </span>
+      {% endif %}
     </div>
     {% if app.user and my_program %}
-      <div id="edit-description-ui" class="d-none">
+      <div id="edit-description-ui" class="d-none mb-5">
         <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
-        <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description">
+        <label
+            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description">
           <span class="mdc-text-field__ripple"></span>
           <span class="mdc-text-field__resizer">
-              <textarea class="mdc-text-field__input" id="edit-description" name="edit-description" class="mt-2 mb-2"
+              <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-description" name="edit-description"
                         title="_edit-description"
                         maxlength="{{ max_description_size }}" style="width: 100%;" rows="10" cols="100">
-                {% if program.description %}{{program.description}}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
+                {% if program.description %}{{ program.description }}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
               </textarea>
           </span>
           <span class="mdc-line-ripple"></span>
         </label>
-        <button id="edit-description-submit-button" class="btn btn-primary p-3 mb-5">
+        <button id="edit-description-submit-button" class="btn btn-primary">
           <i class="material-icons align-bottom">save</i>
           {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
         </button>
@@ -40,16 +41,16 @@
         {% endif %}
       </div>
       <div id="description-translation" class="text-break" style="display: none;"></div>
-      <div class="h2 mt-3" id="credits-headline">
+      <div class="mt-3" id="credits-headline">
+        <span class="h2">{{ "credits"|trans({}, "catroweb") }}</span>
+        {% if app.user and my_program %}
           <span>
-            {{ "credits"|trans({}, "catroweb") }}
-            {% if app.user and my_program %}
-              <a data-bs-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
-                <i id="edit-credits-button"
-                   class="ms-3 material-icons catro-icon-button align-bottom">edit</i>
-              </a>
-            {% endif %}
+            <i data-bs-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}"
+               class="edit-credits-button ms-3 material-icons catro-icon-button align-bottom">
+              edit
+            </i>
           </span>
+        {% endif %}
       </div>
       <div id="credits" class="text-break">
         {% if program.credits %}
@@ -72,21 +73,22 @@
 <div class="row">
   <div class="col">
     {% if app.user and my_program %}
-      <div id="edit-credits-ui" class="d-none">
-        <div class="h2 mt-3" id="credits-headline">
+      <div id="edit-credits-ui" class="d-none mb-5">
+        <div class="mt-3" id="credits-headline">
+          <span class="h2">{{ "credits"|trans({}, "catroweb") }} </span>
+          {% if app.user and my_program %}
             <span>
-              {{ "credits"|trans({}, "catroweb") }}
-              {% if app.user and my_program %}
-                <a data-bs-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}">
-                  <i id="edit-credits-button"
-                     class="ms-3 material-icons catro-icon-button align-bottom">edit</i>
-                </a>
-              {% endif %}
+              <i data-bs-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}"
+                 class="edit-credits-button ms-3 material-icons catro-icon-button align-bottom">
+                edit
+              </i>
             </span>
+          {% endif %}
         </div>
         <div id="notes-and-credits-description">{{ "notesAndCreditsDescription"|trans({}, "catroweb") }}</div>
         <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
-        <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description credits">
+        <label
+            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description credits">
           <span class="mdc-text-field__ripple"></span>
           <span class="mdc-text-field__resizer">
             <textarea class="mdc-text-field__input" id="edit-credits" name="edit-credits" title="_edit-credits"
@@ -95,7 +97,7 @@
             </textarea>          </span>
           <span class="mdc-line-ripple"></span>
         </label>
-        <button id="edit-credits-submit-button" class="btn btn-primary p-3 mb-5">
+        <button id="edit-credits-submit-button" class="btn btn-primary">
           <i class="material-icons align-bottom">save</i>
           {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
         </button>
@@ -116,9 +118,3 @@
     </a>
   </div>
 </div>
-
-{% block js %}
-  {% if app.user and my_program %}
-    {{ encore_entry_script_tags('program_description') }}
-  {% endif %}
-{% endblock js %}

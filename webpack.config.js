@@ -93,8 +93,7 @@ Encore
   .addEntry('register', './assets/js/register.js')
   .addEntry('request', './assets/js/request.js')
   .addEntry('reset', './assets/js/reset.js')
-  .addEntry('program_comments', './assets/js/program_comments.js')
-  .addEntry('program_description', './assets/js/program_description.js')
+  .addEntry('check_email', './assets/js/check_email.js')
 
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')

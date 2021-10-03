@@ -31,25 +31,21 @@
             <input type="hidden" id="fos_user_resetting_form__token" name="fos_user_resetting_form[_token]"
                    value="{{ form.children._token.vars.value }}">
 
-            <div class="show-hide-password">
-              <label class="mdc-text-field mdc-text-field--filled password-first">
-                <span class="mdc-text-field__ripple"></span>
-                {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first' }}) }}
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-                <span class="mdc-floating-label" id="password-first-label">{{ 'profile.newPass'|trans({}, 'catroweb') }}</span>
-                <span class="mdc-line-ripple"></span>
-              </label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled password-first">
+              <span class="mdc-text-field__ripple"></span>
+              {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first' }}) }}
+              <span class="mdc-icon-button material-icons password-toggle">visibility</span>
+              <span class="mdc-floating-label" id="password-first-label">{{ 'profile.newPass'|trans({}, 'catroweb') }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
-            <div class="show-hide-password mt-3">
-              <label class="mdc-text-field mdc-text-field--filled password-second">
-                <span class="mdc-text-field__ripple"></span>
-                {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second' }}) }}
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-                <span class="mdc-floating-label" id="password-second-label">{{ 'profile.repeatPass'|trans({}, 'catroweb') }}</span>
-                <span class="mdc-line-ripple"></span>
-              </label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled password-second mt-3">
+              <span class="mdc-text-field__ripple"></span>
+              {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second' }}) }}
+              <span class="mdc-icon-button material-icons password-toggle">visibility</span>
+              <span class="mdc-floating-label" id="password-second-label">{{ 'profile.repeatPass'|trans({}, 'catroweb') }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
             <input type="hidden" name="_target_path" value="{{ path('index') }}"/>
 
@@ -71,8 +67,5 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('js/PasswordVisibilityToggler.js') }}"></script>
   {{ encore_entry_script_tags('reset') }}
 {% endblock js %}

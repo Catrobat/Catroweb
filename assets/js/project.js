@@ -1,3 +1,4 @@
+import { MDCTextField } from '@material/textfield'
 import $ from 'jquery'
 import { TranslateProgram } from './custom/TranslateProgram'
 import { TranslateComments } from './custom/TranslateComments'
@@ -6,6 +7,10 @@ import { setImageUploadListener } from './custom/ImageUpload'
 import { Program } from './custom/Program'
 import { shareProject } from './custom/ProgramShare'
 import { ProgramReport } from './custom/ProgramReport'
+import { ProgramDescription } from './custom/ProgramDescription'
+import { ProgramCredits } from './custom/ProgramCredits'
+import { ProgramRecommender } from './custom/ProgramRecommender'
+import { ProgramComments } from './custom/ProgramComments'
 
 require('../styles/custom/profile.scss')
 require('../styles/custom/modal.scss')
@@ -14,6 +19,15 @@ require('../styles/custom/program.scss')
 const $project = $('.js-project')
 const $projectShare = $('.js-project-share')
 const $projectReport = $('.js-project-report')
+const $projectDescriptionCredits = $('.js-project-description-credits')
+const $projectRecommender = $('.js-project-recommender')
+const $projectComments = $('.js-project-comments')
+
+if ($project.data('my-program') === 'true') {
+  new MDCTextField(document.querySelector('.description'))
+  new MDCTextField(document.querySelector('.credits'))
+  new MDCTextField(document.querySelector('.comment-message'))
+}
 
 shareProject(
   $projectShare.data('theme-display-name'),
@@ -44,7 +58,7 @@ ProgramReport(
   $projectReport.data('logged-in')
 )
 
-new Program(
+Program(
   $project.data('project-id'),
   $project.data('csrf-token'),
   $project.data('user-role'),
@@ -65,6 +79,16 @@ new Program(
   $project.data('asset-wow-black'),
   $project.data('trans-reaction'),
   $project.data('trans-download-error')
+)
+
+ProgramDescription(
+  $projectDescriptionCredits.data('project-id'),
+  $projectDescriptionCredits.data('trans-more-info'),
+  $projectDescriptionCredits.data('trans-less-info')
+)
+
+ProgramCredits(
+  $projectDescriptionCredits.data('project-id')
 )
 
 new TranslateProgram(
@@ -102,3 +126,23 @@ function initProjects () {
     $(this).data('list', list)
   })
 }
+
+ProgramRecommender($projectRecommender.data('project-id'), $projectRecommender.data('path-click-stats'))
+
+ProgramComments(
+  $projectComments.data('project-id'), 5, 5, 5,
+  $projectComments.data('total-number-of-comments'),
+  $projectComments.data('trans-cancel'),
+  $projectComments.data('trans-delete-it'),
+  $projectComments.data('trans-report-it'),
+  $projectComments.data('trans-are-you-sure'),
+  $projectComments.data('trans-no-way-of-return'),
+  $projectComments.data('trans-delete-confirmation'),
+  $projectComments.data('trans-report-confirmation'),
+  $projectComments.data('trans-pop-up-comment-reported-title'),
+  $projectComments.data('trans-pop-up-comment-reported-text'),
+  $projectComments.data('trans-pop-up-deleted-title'),
+  $projectComments.data('trans-pop-up-deleted-text'),
+  $projectComments.data('trans-no-admin-rights-message'),
+  $projectComments.data('trans-default-error-message'),
+)
