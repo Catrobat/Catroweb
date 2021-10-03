@@ -6,7 +6,7 @@
 
 import $ from 'jquery'
 import Swal from 'sweetalert2'
-import { showTopBarSearch, controlTopBarSearchClearButton } from '../layout/header'
+import { showTopBarSearch, controlTopBarSearchClearButton } from '../layout/top_bar'
 
 require('../../styles/components/project_list.scss')
 

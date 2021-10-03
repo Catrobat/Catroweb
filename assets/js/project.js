@@ -144,5 +144,5 @@ ProgramComments(
   $projectComments.data('trans-pop-up-deleted-title'),
   $projectComments.data('trans-pop-up-deleted-text'),
   $projectComments.data('trans-no-admin-rights-message'),
-  $projectComments.data('trans-default-error-message'),
+  $projectComments.data('trans-default-error-message')
 )

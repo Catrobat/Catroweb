@@ -1,7 +1,7 @@
 /* global Routing */
 import $ from 'jquery'
 
-import { showTopBarDownload, showTopBarDefault } from '../layout/header'
+import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
 export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
   elementsTranslationSingular, elementsTranslationPlural, isWebView = false) {

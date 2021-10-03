@@ -4,7 +4,6 @@ import Swal from 'sweetalert2'
 import './components/tab_bar'
 
 require('../styles/custom/profile.scss')
-require('../styles/follower_overview.scss')
 
 const $followerOverview = $('.js-follower-overview')
 const csrfToken = $followerOverview.data('csrf-token')
@@ -58,7 +57,7 @@ function unfollow (id, username) {
           if (numberOfFollow <= 0) {
             emptyContainerMessage.removeClass('d-none').addClass('d-block')
           }
-          location.reload();
+          location.reload()
         },
         error: function (xhr) {
           handleError(xhr, $buttons)
@@ -82,7 +81,7 @@ function follow (id) {
     success: function () {
       $buttons.attr('disabled', false)
       ++numberOfFollow
-      location.reload();
+      location.reload()
       emptyContainerMessage.removeClass('d-block').addClass('d-none')
     },
     error: function (xhr) {

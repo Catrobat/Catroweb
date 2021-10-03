@@ -1,4 +1,5 @@
-import { MediaLib } from "./custom/MediaLib";
+import $ from 'jquery'
+import { MediaLib } from './custom/MediaLib'
 
 require('../styles/custom/medialib.scss')
 
@@ -12,5 +13,3 @@ MediaLib(
   $mediaLibrary.data('trans-elements'),
   $mediaLibrary.data('is-webview')
 )
-
-
