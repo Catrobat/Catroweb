@@ -36,6 +36,3 @@ hwi_oauth:
             options:
                 display: popup #dialog is optimized for popup window
                 csrf: true
-
-
-

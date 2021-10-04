@@ -1,14 +1,13 @@
 import $ from 'jquery'
 import { MDCTopAppBar } from '@material/top-app-bar'
 
-require('../../styles/layout/header.scss')
+require('../../styles/layout/top_bar.scss')
 
 /**
  * Define elements
  */
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
-// eslint-disable-next-line no-unused-vars
-const $appBar = new MDCTopAppBar(topAppBarElement)
+new MDCTopAppBar(topAppBarElement)
 
 const $title = $('#top-app-bar__title')
 const $toggleSidebarButton = $('#top-app-bar__btn-sidebar-toggle')
@@ -69,6 +68,7 @@ export function showCustomTopBarTitle (title, onBack) {
   $title.removeAttr('href')
   $backButton.hide()
 
+  $('.mdc-top-app-bar').css('top', 0)
   if (typeof onBack === 'function') {
     $backButton = $('<button/>', {
       id: 'top-app-bar__back__btn-back',
@@ -116,13 +116,13 @@ function handleSearchBackButton () {
 function showTopBarOptions () {
   const container = $optionsContainer
   container.show()
-  container.focus()
+  container.trigger('focus')
 }
 
 export function showTopBarSearch () {
   hideTopBars()
   $('#top-app-bar__search').show()
-  $searchInput.focus()
+  $searchInput.trigger('focus')
 }
 
 export function controlTopBarSearchClearButton () {
@@ -137,5 +137,5 @@ function clearTopBarSearch () {
   const inputField = $searchInput
   inputField.val('')
   $searchClearButton.hide()
-  inputField.focus()
+  inputField.trigger('focus')
 }

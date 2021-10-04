@@ -17,7 +17,6 @@
 {% endblock %}
 
 {% block body %}
-
   <div class="row">
     <div class="col-5 col-sm-4 col-md-4 col-lg-3">
       {% include 'Program/projectThumbnail.html.twig' %}
@@ -31,7 +30,7 @@
         {% if not app.user or not my_program %}
           <span class="translate-program-button-wrapper">
             <span id="program-translation-button" class="program-translation-button catro-icon-button"
-                data-bs-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
+                  data-bs-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
               <i class="ms-2 material-icons">
                 translate
               </i>
@@ -41,9 +40,11 @@
                 {% include 'components/loading_spinner.html.twig' with {'size': 'small'} %}
               </i>
             </span>
-            <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button" style="display: none;"
-                data-bs-toggle="tooltip" title="Hide Translation">
-                <i class="ms-2 material-icons" data-bs-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
+            <span id="remove-program-translation-button" class="program-comment-translation-button catro-icon-button"
+                  style="display: none;"
+                  data-bs-toggle="tooltip" title="Hide Translation">
+                <i class="ms-2 material-icons" data-bs-toggle="tooltip"
+                   title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
                   close
                 </i>
             </span>
@@ -75,9 +76,9 @@
     <div class="d-none d-lg-block col-lg-4 mt-4 ">
       {% include 'Program/program_download_button.html.twig' %}
       {% if not isIOS() %}
-      <div class="mt-3">
-        {% include 'Program/program_apk_generation_buttons.html.twig' %}
-      </div>
+        <div class="mt-3">
+          {% include 'Program/program_apk_generation_buttons.html.twig' %}
+        </div>
       {% endif %}
       <div class="mt-3">
         {% include 'Program/program_remix_graph_button.html.twig' %}
@@ -106,7 +107,7 @@
   {% include 'Program/program_tags.html.twig' %}
 
   <div class="row d-lg-none">
-    {% if not isIOS()%}
+    {% if not isIOS() %}
       <div class="col-6 mt-3">
         {% include 'Program/program_apk_generation_buttons.html.twig' with {'suffix': '-small'} %}
       </div>
@@ -114,9 +115,9 @@
         {% include 'Program/program_remix_graph_button.html.twig' with {'suffix': '-small'} %}
       </div>
     {% else %}
-    <div class="col-12 mb-3">
-      {% include 'Program/program_remix_graph_button.html.twig' with {'suffix': '-small'} %}
-    </div>
+      <div class="col-12 mb-3">
+        {% include 'Program/program_remix_graph_button.html.twig' with {'suffix': '-small'} %}
+      </div>
     {% endif %}
   </div>
   <div class="row d-lg-none">
@@ -155,7 +156,9 @@
           <div class="lazyload project-list__wrapper">
             <div class="lazyload projects-container"></div>
             <div class="lazyload project-list__chevrons">
-              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">chevron_left</div>
+              <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
+                chevron_left
+              </div>
               <div class="lazyload project-list__chevrons__right material-icons mdc-icon-button">chevron_right</div>
             </div>
           </div>
@@ -222,63 +225,37 @@
        data-trans-dislike="{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}"
        data-const-ok="{{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }}"
        data-logged-in="{{ logged_in }}"
+       data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
+       data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
   ></div>
-
+  <div class="js-project-description-credits"
+       data-project-id="{{ program.id }}"
+       data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
+       data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
+  ></div>
+  <div class="js-project-recommender"
+       data-project-id="{{ program.id }}"
+       data-path-click-stats="{{ path('click_stats') }}"
+  ></div>
+  <div class="js-project-comments"
+       data-project-id="{{ program_details.id }}"
+       data-total-number-of-comments="{{ (program_details.comments|length) }}"
+       data-trans-cancel="{{ 'cancel'|trans({}, 'catroweb') }}"
+       data-trans-delete-it="{{ 'deleteIt'|trans({}, 'catroweb') }}"
+       data-trans-report-it="{{ 'reportIt'|trans({}, 'catroweb') }}"
+       data-trans-are-you-sure="{{ 'areYouSure'|trans({}, 'catroweb') }}"
+       data-trans-no-way-of-return="{{ 'noWayOfReturn'|trans({}, 'catroweb') }}"
+       data-trans-delete-confirmation="{{ 'programs.deleteCommentConfirmation'|trans({}, 'catroweb') }}"
+       data-trans-report-confirmation="{{ 'programs.reportCommentConfirmation'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-comment-reported-title="{{ 'programs.report_popup_header'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-comment-reported-text="{{ 'programs.report_popup'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-deleted-title="{{ 'programs.deleted_popup_header'|trans({}, 'catroweb') }}"
+       data-trans-pop-up-deleted-text="{{ 'programs.deleted_popup'|trans({}, 'catroweb') }}"
+       data-trans-no-admin-rights-message="{{ 'programs.noAdminRights'|trans({}, 'catroweb') }}"
+       data-trans-default-error-message="{{ 'somethingWentWrong'|trans({}, 'catroweb') }}"
+  ></div>
 {% endblock %}
 
 {% block js %}
   {{ encore_entry_script_tags('project') }}
-
-  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('js/modules/sweetalert2.min.js') }}"></script>
-  <script src="{{ asset('js/ProgramComments.js') }}"></script>
-  <script>
-    new ProgramComments('{{ program_details.id }}', 5, 5, 5, {{ (program_details.comments|length) }},
-      "{{ 'cancel'                                  |trans({}, 'catroweb') }}",
-      "{{ 'deleteIt'                                |trans({}, 'catroweb') }}",
-      "{{ 'reportIt'                                |trans({}, 'catroweb') }}",
-      "{{ 'areYouSure'                              |trans({}, 'catroweb') }}",
-      "{{ 'noWayOfReturn'                           |trans({}, 'catroweb') }}",
-      "{{ 'programs.deleteCommentConfirmation'      |trans({}, 'catroweb') }}",
-      "{{ 'programs.reportCommentConfirmation'      |trans({}, 'catroweb') }}",
-      "{{ 'programs.report_popup_header'            |trans({}, 'catroweb') }}",
-      "{{ 'programs.report_popup'                   |trans({}, 'catroweb') }}",
-      "{{ 'programs.deleted_popup_header'           |trans({}, 'catroweb') }}",
-      "{{ 'programs.deleted_popup'                  |trans({}, 'catroweb') }}",
-      "{{ 'programs.noAdminRights'                  |trans({}, 'catroweb') }}",
-      "{{ 'somethingWentWrong'                      |trans({}, 'catroweb') }}",
-      "{{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }}",
-      "{{ constant('App\\Catrobat\\StatusCode::NOT_LOGGED_IN') }}",
-      "{{ constant('App\\Catrobat\\StatusCode::NO_ADMIN_RIGHTS') }}"
-    )
-  </script>
-  <script src="{{ asset('js/ProgramDescription.js') }}"></script>
-  <script>
-    new ProgramDescription('{{ program.id }}',
-      '{{ ("more-information")                      |trans({}, "catroweb") }}',
-      '{{ ("less-information")                      |trans({}, "catroweb") }}',
-        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
-        {{ constant('App\\Catrobat\\StatusCode::DESCRIPTION_TOO_LONG') }}
-    )
-  </script>
-  <script src="{{ asset('js/ProgramCredits.js') }}"></script>
-  <script>
-    new ProgramCredits('{{ program.id }}',
-      '{{ ("more-information")                      |trans({}, "catroweb") }}',
-      '{{ ("less-information")                      |trans({}, "catroweb") }}',
-        {{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }},
-        {{ constant('App\\Catrobat\\StatusCode::NOTES_AND_CREDITS_TOO_LONG') }}
-    )
-  </script>
-
-
-  <script src="{{ asset('js/ProgramRecommender.js') }}"></script>
-  <script>
-    let programRecommender = new ProgramRecommender (
-      '{{ program.id }}',
-      "{{ path('click_stats') }}"
-    )
-    programRecommender.init()
-  </script>
 {% endblock %}

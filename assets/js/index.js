@@ -5,19 +5,19 @@ import { ProjectList } from './components/project_list'
 
 require('../styles/index.scss')
 
-new Carousel('#feature-slider')
-
 $(() => {
+  initFeatureSlider()
   initHomeProjects()
-
-  const $oauthGreeting = $('.js-oauth-greeting')
-  showOauthPopup(
-    $oauthGreeting.data('path-oauth-first-login'),
-    $oauthGreeting.data('trans-info'),
-    $oauthGreeting.data('trans-title'),
-    $oauthGreeting.data('trans-ok')
-  )
+  initOauthGreeting()
 })
+
+function initFeatureSlider () {
+  if ($('#feature-slider').length > 0) {
+    new Carousel('#feature-slider')
+  } else {
+    console.warn("#feature-slider can't be found in the dom.")
+  }
+}
 
 function initHomeProjects () {
   const $homeProjects = $('#home-projects')
@@ -41,25 +41,35 @@ function initHomeProjects () {
   })
 }
 
+function initOauthGreeting () {
+  const $oauthGreeting = $('.js-oauth-greeting')
+  showOauthPopup(
+    $oauthGreeting.data('path-oauth-first-login'),
+    $oauthGreeting.data('trans-info'),
+    $oauthGreeting.data('trans-title'),
+    $oauthGreeting.data('trans-ok')
+  )
+}
+
 function showOauthPopup (firstOauthLoginUrl, informationText, title, okTranslation) {
   $.get(firstOauthLoginUrl, function (data) {
-      if (data.first_login === true) {
-        const shown = localStorage.getItem('oauthSignIn')
-        if (shown == null) {
-          localStorage.setItem('oauthSignIn', '1')
-          Swal.fire({
-            title: title,
-            html: informationText,
-            showCancelButton: false,
-            allowOutsideClick: false,
-            confirmButtonText: okTranslation,
-            icon: 'info',
-            customClass: {
-              confirmButton: 'btn btn-primary'
-            },
-            buttonsStyling: false
-          })
-        }
+    if (data.first_login === true) {
+      const shown = localStorage.getItem('oauthSignIn')
+      if (shown == null) {
+        localStorage.setItem('oauthSignIn', '1')
+        Swal.fire({
+          title: title,
+          html: informationText,
+          showCancelButton: false,
+          allowOutsideClick: false,
+          confirmButtonText: okTranslation,
+          icon: 'info',
+          customClass: {
+            confirmButton: 'btn btn-primary'
+          },
+          buttonsStyling: false
+        })
       }
+    }
   })
 }

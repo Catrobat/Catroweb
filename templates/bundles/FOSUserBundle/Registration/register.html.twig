@@ -50,25 +50,21 @@
               <span class="mdc-line-ripple"></span>
             </label>
 
-            <div class="show-hide-password">
-              <label class="mdc-text-field mdc-text-field--filled password-first mt-3">
-                <span class="mdc-text-field__ripple"></span>
-                {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first', 'name': '_password-first' }}) }}
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-                <span class="mdc-floating-label" id="password-first-label">{{ "login.passwordFirst"|trans({}, "catroweb") }}</span>
-                <span class="mdc-line-ripple"></span>
-              </label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled password-first mt-3">
+              <span class="mdc-text-field__ripple"></span>
+              {{ form_widget(form.plainPassword.first, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-first-label', 'id': 'password-first', 'name': '_password-first' }}) }}
+              <span class="mdc-icon-button material-icons password-toggle">visibility</span>
+              <span class="mdc-floating-label" id="password-first-label">{{ "login.passwordFirst"|trans({}, "catroweb") }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
-            <div class="show-hide-password">
-              <label class="mdc-text-field mdc-text-field--filled password-second mt-3">
-                <span class="mdc-text-field__ripple"></span>
-                {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second', 'name': '_password-second' }}) }}
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-                <span class="mdc-floating-label" id="password-second-label">{{ "login.passwordSecond"|trans({}, "catroweb") }}</span>
-                <span class="mdc-line-ripple"></span>
-              </label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled password-second mt-3">
+              <span class="mdc-text-field__ripple"></span>
+              {{ form_widget(form.plainPassword.second, {'attr': {'class':'mdc-text-field__input', 'aria-labelledby': 'password-second-label', 'id': 'password-second', 'name': '_password-second' }}) }}
+              <span class="mdc-icon-button material-icons password-toggle">visibility</span>
+              <span class="mdc-floating-label" id="password-second-label">{{ "login.passwordSecond"|trans({}, "catroweb") }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
             <!-- Button -->
             <div style="margin-top:30px; margin-bottom:30px" class="form-group">
@@ -116,16 +112,5 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('js/PasswordVisibilityToggler.js') }}"></script>
-  <script src="{{ asset('js/register.js') }}"></script>
   {{ encore_entry_script_tags('register') }}
-  <script>
-    const register =new Register(
-      "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
-      "{{ path('hwi_oauth_service_redirect', {'service': 'facebook' })  }}",
-      "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
-    )
-  </script>
 {% endblock js %}
