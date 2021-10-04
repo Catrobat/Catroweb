@@ -40,7 +40,7 @@
     "sass-loader": "^12.1.0",
     "standard": "^16.0.4",
     "stylelint": "^13.13.1",
-    "stylelint-config-twbs-bootstrap": "^2.2.3",
+    "stylelint-config-twbs-bootstrap": "^2.2.4",
     "webpack-notifier": "^1.13.0"
   },
   "dependencies": {
