@@ -78,7 +78,7 @@
         "symfony/maker-bundle": "^1.34",
         "symfony/phpunit-bridge": "5.3.*",
         "symfony/stopwatch": "4.4.*",
-        "symfony/web-profiler-bundle": "4.4.*",
+        "symfony/web-profiler-bundle": "5.0.*",
         "vimeo/psalm": "^4.10",
         "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
         "wapmorgan/php-deprecation-detector": "^2.0"
