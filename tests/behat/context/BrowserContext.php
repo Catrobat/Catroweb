@@ -37,14 +37,6 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
-   * @AfterScenario
-   */
-  public function resetSession(): void
-  {
-    $this->getSession()->getDriver()->reset();
-  }
-
-  /**
    * @Given I start a new session
    */
   public function iStartANewSession(): void
@@ -476,8 +468,11 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function makeScreenshot(AfterStepScope $scope): void
   {
-    if (!$scope->getTestResult()->isPassed()) {
-      $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
+    try {
+      if (!$scope->getTestResult()->isPassed()) {
+        $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
+      }
+    } catch (Exception $exception) {
     }
   }
 
