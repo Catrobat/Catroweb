@@ -8,7 +8,7 @@
   <meta name='viewport' content='width=device-width, user-scalable=no'/>
 
   <title>
-    {% block title %}Catrobat community{% endblock %}
+    {% block title %}{{ "title"|trans({}, "catroweb") }}{% endblock %}
   </title>
 
   <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}"/>

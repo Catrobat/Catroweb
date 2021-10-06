@@ -6,34 +6,29 @@
 //  the test db correct, but the tests running in a browser just access the dev database!
 //
 
-
 use App\Kernel;
-use Symfony\Component\Debug\Debug;
 use Symfony\Component\Dotenv\Dotenv;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
 
-require dirname(__DIR__) . '/config/bootstrap.php';
+require dirname(__DIR__).'/config/bootstrap.php';
 
-if ($_SERVER['APP_DEBUG'])
-{
+if ($_SERVER['APP_DEBUG']) {
   umask(0000);
 
   Debug::enable();
 }
 
-if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? $_ENV['TRUSTED_PROXIES'] ?? false)
-{
-  Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
+if ($trustedProxies = $_SERVER['TRUSTED_PROXIES'] ?? false) {
+  Request::setTrustedProxies(explode(',', $trustedProxies), Request::HEADER_X_FORWARDED_FOR | Request::HEADER_X_FORWARDED_PORT | Request::HEADER_X_FORWARDED_PROTO);
 }
 
-if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? $_ENV['TRUSTED_HOSTS'] ?? false)
-{
+if ($trustedHosts = $_SERVER['TRUSTED_HOSTS'] ?? false) {
   Request::setTrustedHosts([$trustedHosts]);
 }
 
 (new Dotenv(true))->load('../.env.test');
-if (file_exists('../.env.test.local'))
-{
+if (file_exists('../.env.test.local')) {
   (new Dotenv(true))->load('../.env.test.local');
 }
 

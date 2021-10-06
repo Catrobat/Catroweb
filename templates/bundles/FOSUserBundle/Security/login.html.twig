@@ -42,15 +42,13 @@
               <span class="mdc-line-ripple"></span>
             </label>
 
-            <div class="show-hide-password mt-3">
-              <label class="mdc-text-field mdc-text-field--filled password">
-                <span class="mdc-text-field__ripple"></span>
-                <input type="password" class="mdc-text-field__input" aria-labelledby="password-label" id="password" name="_password" required>
-                <span class="mdc-icon-button material-icons pw-toggler">visibility</span>
-                <span class="mdc-floating-label" id="password-label">{{ "password"|trans({}, "catroweb") }}</span>
-                <span class="mdc-line-ripple"></span>
-              </label>
-            </div>
+            <label class="mdc-text-field mdc-text-field--filled password mt-3">
+              <span class="mdc-text-field__ripple"></span>
+              <input type="password" class="mdc-text-field__input" aria-labelledby="password-label" id="password" name="_password" required>
+              <span class="mdc-icon-button material-icons password-toggle">visibility</span>
+              <span class="mdc-floating-label" id="password-label">{{ "password"|trans({}, "catroweb") }}</span>
+              <span class="mdc-line-ripple"></span>
+            </label>
 
             <div class="row">
               <div class="col">
@@ -89,7 +87,7 @@
                 <!-- Button -->
                 <div style="margin-top:10px" class="form-group">
                   <div class="col-sm-12 controls">
-                    <button id="_submit" value="Login" href="#" class="login btn btn-primary"
+                    <button id="_submit" value="Login" class="login btn btn-primary"
                             name="_submit">{{ 'login.login'|trans({}, 'catroweb') }}</button>
                   </div>
                 </div>
@@ -125,16 +123,5 @@
 {% endblock body %}
 
 {% block js %}
-  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
-  <script src="{{ asset('js/PasswordVisibilityToggler.js') }}"></script>
-  <script src="{{ asset('js/register.js') }}"></script>
   {{ encore_entry_script_tags('login') }}
-  <script>
-    const register =new Register(
-      "{{ path('hwi_oauth_service_redirect', {'service': 'google' })  }}",
-      "{{ path('hwi_oauth_service_redirect', {'service': 'facebook' })  }}",
-      "{{ path('hwi_oauth_service_redirect', {'service': 'apple' })  }}"
-    )
-  </script>
 {% endblock js %}

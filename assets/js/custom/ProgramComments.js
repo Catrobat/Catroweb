@@ -1,14 +1,12 @@
-/* eslint-env jquery */
-/* global Swal */
+import $ from 'jquery'
+import Swal from 'sweetalert2'
 
-// eslint-disable-next-line no-unused-vars
-function ProgramComments (programId, visibleComments, showStep, minAmountOfVisibleComments,
+export function ProgramComments (programId, visibleComments, showStep, minAmountOfVisibleComments,
   totalAmountOfComments, cancel, deleteIt, reportIt, areYouSure,
   noWayOfReturn, deleteConfirmation, reportConfirmation,
   popUpCommentReportedTitle, popUpCommentReportedText,
   popUpDeletedTitle, popUpDeletedText,
-  noAdminRightsMessage, defaultErrorMessage,
-  statusCodeOk, statusCodeNotLoggedIn, statusCodeNoAdminRights) {
+  noAdminRightsMessage, defaultErrorMessage) {
   let amountOfVisibleComments
 
   $(function () {
@@ -79,7 +77,7 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
       type: 'post',
       data: { Message: msg, ProgramId: programId },
       success: function (data) {
-        if (data === statusCodeNotLoggedIn) {
+        if (parseInt(data) === 401) {
           redirectToLogin()
         } else {
           $('#comments-wrapper').load(' #comments-wrapper')
@@ -100,9 +98,9 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
       success: function (data) {
-        if (data === statusCodeNotLoggedIn) {
+        if (parseInt(data) === 401) {
           redirectToLogin()
-        } else if (data === statusCodeNoAdminRights) {
+        } else if (parseInt(data) === 403) {
           showErrorPopUp(noAdminRightsMessage)
         } else {
           $('#comment-' + commentId).remove()
@@ -121,7 +119,7 @@ function ProgramComments (programId, visibleComments, showStep, minAmountOfVisib
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
       success: function (data) {
-        if (data === statusCodeNotLoggedIn) {
+        if (parseInt(data) === 401) {
           redirectToLogin()
         } else {
           showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)

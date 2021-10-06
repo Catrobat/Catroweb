@@ -20,7 +20,7 @@ final class Version20190723093025 extends AbstractMigration
   public function up(Schema $schema): void
   {
     // this up() migration is not auto generated!
-    $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+    $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
     // deleting all user.id / program.id foreign keys to allow changing the type
     $this->addSql('ALTER TABLE CatroNotification DROP FOREIGN KEY IF EXISTS FK_22087FCAAC24F853');
@@ -141,6 +141,6 @@ final class Version20190723093025 extends AbstractMigration
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs
-    $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
+    $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
   }
 }

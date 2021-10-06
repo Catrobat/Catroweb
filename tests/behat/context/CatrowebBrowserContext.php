@@ -97,14 +97,6 @@ class CatrowebBrowserContext extends BrowserContext
     $this->getSymfonyService(StatisticsService::class)->useRealService(false);
   }
 
-  /**
-   * @AfterScenario
-   */
-  public function disableProfiler(): void
-  {
-    $this->getSymfonyService('profiler')->disable();
-  }
-
   //--------------------------------------------------------------------------------------------------------------------
   //  Authentication
   //--------------------------------------------------------------------------------------------------------------------

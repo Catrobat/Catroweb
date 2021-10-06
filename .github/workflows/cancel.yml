@@ -4,7 +4,8 @@
 name: Cancel Previous Workflow Runs
 on:
   workflow_run:
-    workflows: ["Dynamic analysis", "Docker Container tests", "Static analysis"]
+#    workflows: ["Dynamic analysis", "Docker Container tests", "Static analysis"]
+    workflows: ["disabled"]
     types:
       - requested
 jobs:

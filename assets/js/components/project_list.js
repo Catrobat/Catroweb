@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/header'
+import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
 
 require('../../styles/components/project_list.scss')
 
@@ -112,6 +112,16 @@ export class ProjectList {
 
   _initListeners () {
     const self = this
+
+    // ---- History State
+    window.addEventListener('popstate', function (event) {
+      if (event.state != null) {
+        if (event.state.type === 'ProjectList' && event.state.full === true) {
+          $('#' + event.state.id).data('list').openFullView()
+        }
+      }
+    })
+
     this.projectsContainer.on('scroll', function () {
       const pctHorizontal = this.scrollLeft / (this.scrollWidth - this.clientWidth)
       if (pctHorizontal >= 0.8) {
@@ -175,7 +185,6 @@ export class ProjectList {
 
   closeFullView () {
     $(window).off('popstate', this.popStateHandler)
-    // eslint-disable-next-line no-undef
     showDefaultTopBarTitle()
     this.$title.show()
     this.isFullView = false

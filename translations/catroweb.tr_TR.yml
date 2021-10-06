@@ -1,5 +1,6 @@
 ---
 #homepage translation
+title: Catrobat topluluğu
 localLanguage: İngilizce
 username: Kullanıcı adı
 password: Şifre
@@ -16,7 +17,7 @@ googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Discord sohbet
 passwordsNoMatch: Şifreler eşleşmedi.
 error: Hata
 cancel: İptal et
@@ -705,10 +706,10 @@ achievements:
         title: 'İlk adımlar'
         description: 'Bir kullanıcı hesabı oluşturun'
       coding_jam_09_2021:
-        title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        title: "Kodlama Jam 21"
+        description: "Kodlama Jam 2021 Katılımcısı"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Etiket |]1,Inf] Etiketler'
   tag:
     game:
       title: Oyun
