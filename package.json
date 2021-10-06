@@ -65,7 +65,7 @@
     "@popperjs/core": "^2.10.2",
     "ajv": "^8.6.3",
     "animate.css": "^4.1.1",
-    "bootstrap": "^5.1.1",
+    "bootstrap": "^5.1.2",
     "clipboard": "^2.0.8",
     "external-svg-loader": "^1.3.4",
     "glob-all": "^3.2.1",
