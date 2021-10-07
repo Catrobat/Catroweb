@@ -26,8 +26,8 @@ Feature:
     And I fill in "password" with "test12"
     And I fill in "repeat-password" with "test12"
     And I click "#save-password"
-    And I wait for AJAX to finish
-    And I wait 500 milliseconds
+    And I wait for the page to be loaded
+    And I wait 1000 milliseconds
     Then I should see "Success"
     And I click ".swal2-confirm"
     Then I should see "Password"
