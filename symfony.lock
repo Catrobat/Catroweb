@@ -268,6 +268,9 @@
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
     },
+    "gesdinet/jwt-refresh-token-bundle": {
+        "version": "v0.12.0"
+    },
     "google/apiclient": {
         "version": "2.0",
         "recipe": {

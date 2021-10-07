@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f0b8746af7f6c7f262c899b0cde54b40",
+    "content-hash": "d8f711fb58ce6e51d4e78a8493940d85",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -2649,6 +2649,63 @@
                 "source": "https://github.com/FriendsOfSymfony/FOSUserBundle/tree/v2.2.2"
             },
             "time": "2021-09-08T09:54:36+00:00"
+        },
+        {
+            "name": "gesdinet/jwt-refresh-token-bundle",
+            "version": "v0.12.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
+                "reference": "4a7109df39b84b5bc41e6ee16da8cdcb9e0093fb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/4a7109df39b84b5bc41e6ee16da8cdcb9e0093fb",
+                "reference": "4a7109df39b84b5bc41e6ee16da8cdcb9e0093fb",
+                "shasum": ""
+            },
+            "require": {
+                "lexik/jwt-authentication-bundle": "^1.1|^2.0@dev",
+                "php": "^5.5.9|>=7.0.8",
+                "symfony/framework-bundle": "~3.4|~4.0|~5.0",
+                "symfony/validator": "~3.4|~4.0|~5.0"
+            },
+            "require-dev": {
+                "doctrine/doctrine-bundle": "~1.4|~2.0",
+                "doctrine/mongodb-odm-bundle": "^3.4|^4.0",
+                "doctrine/orm": "^2.4.8",
+                "phpspec/phpspec": "^3.0|^4.0|^5.0|^6.0"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gesdinet\\JWTRefreshTokenBundle\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marcos Gómez Vilches",
+                    "email": "marcos@gesdinet.com"
+                }
+            ],
+            "description": "Implements a refresh token system over Json Web Tokens in Symfony",
+            "keywords": [
+                "jwt refresh token bundle symfony json web"
+            ],
+            "support": {
+                "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v0.12.0"
+            },
+            "time": "2021-04-23T16:47:20+00:00"
         },
         {
             "name": "google/apiclient",
@@ -16968,5 +17025,5 @@
         "ext-posix": "7.4",
         "ext-zip": "1.15.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.0.0"
 }
