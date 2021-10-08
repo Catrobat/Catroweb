@@ -68,8 +68,8 @@ Feature: As a visitor I want to write, see and report comments.
     When I click "#comment-post-button"
     And I wait for the page to be loaded
     Then I should be on "/app/login"
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123456"
     Then I press "Login"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1#login"

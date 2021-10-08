@@ -113,8 +113,8 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->visit('/app/login');
     $this->iWaitForThePageToBeLoaded();
-    $this->fillField('username', $username);
-    $this->fillField('password', $password);
+    $this->fillField('_username', $username);
+    $this->fillField('_password', $password);
     $this->pressButton('Login');
     $this->iWaitForThePageToBeLoaded();
     if ('try to' === $try_to) {

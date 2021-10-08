@@ -1,71 +1,72 @@
-<div class="modal fade modal-full" id="settings-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog full-modal-dialog" role="document">
-        <div class="modal-content full-modal-content">
-            <div class="modal-header modal-header-full mdc-top-app-bar__row">
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <button id="exitUpdate" data-bs-dismiss="modal"
-                            class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
-                            aria-label="Back to top bar">
-                        close
-                    </button>
-                    <span class="mdc-top-app-bar__title">{{ 'studio.details.general_settings'|trans({}, 'catroweb') }}</span>
-                </section>
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" onclick="(new Studio()).submitUpdateStudio()">
-                        done
-                    </button>
-                </section>
-            </div>
-            <div id="studio-settings">
-                <form action="{{ path('update_studio_details') }}" method="post" class="form-horizontal">
-                    <input type="hidden" name="std_id" value="{{ studio.id }}">
-                    <div class="row">
-                        <div class="form-group col-lg-12 settings-line">
-                            <span class="material-icons">blur_circular</span>
-                            <div class="input-container">
-                                <input id="studio_name" type="text" name="studio_name"
-                                       class="form-control form-control-lg"
-                                       placeholder="" required="required" value="{{ studio.name }}">
-                                <label for="studio_name">{{ 'studio.details.studio_name'|trans({}, 'catroweb') }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-lg-12 settings-line">
-                            <span class="material-icons">description</span>
-                            <div class="input-container">
-                                <textarea id="studio_desc" type="text" name="studio_desc" rows="4"
-                                          class="form-control form-control-lg" placeholder=""
-                                          required="required">{{ studio.description }}</textarea>
-                                <label for="studio_desc">{{ 'studio.details.studio_desc'|trans({}, 'catroweb') }}</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="studio-options">
-                        <div class="row studio-options-line">
-                            <span class="studio-options-name">{{ 'studio.details.comments'|trans({}, 'catroweb') }}</span>
-                            <div class="toggle-container">
-                                <label class="toggle-control">
-                                    <input name="allow_comments" type="checkbox"
-                                           {% if studio.isAllowComments == '1' %}checked{% endif %}>
-                                    <span class="control"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row studio-options-line">
-                            <span class="studio-options-name">{{ 'studio.details.private_studio'|trans({}, 'catroweb') }}</span>
-                            <div class="toggle-container">
-                                <label class="toggle-control">
-                                    <input name="is_private" type="checkbox"
-                                           {% if studio.isPublic != '1' %}checked{% endif %}>
-                                    <span class="control"></span>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <input id="updateStudioForm"  type="submit" name="submit" style="display: none">
-                </form>
-            </div>
-        </div>
+<div class="modal fade modal-full" id="studioAdminSettingsModal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog full-modal-dialog" role="document">
+    <div class="modal-content full-modal-content">
+
+      <div class="modal-header modal-header-full mdc-top-app-bar__row">
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+          <button id="studio-settings__close-button" data-bs-dismiss="modal"
+                  class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                  aria-label="Back to top bar">
+            close
+          </button>
+          <span class="mdc-top-app-bar__title">{{ 'studio.details.admin_settings.title'|trans({}, 'catroweb') }}</span>
+        </section>
+        <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          <button id="studio-settings__submit-button" class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                  type="submit" form="studio-settings">
+            done
+          </button>
+        </section>
+      </div>
+
+      <form id="studio-settings" class="container-fluid justify-content-center" action="{{ path('update_studio_details') }}" method="post">
+
+        <input type="hidden" name="studio_id" value="{{ studio.id }}">
+
+        {% include 'components/text_field.html.twig' with {
+          'text_field':
+          {
+            'id': 'studio-settings__studio-name',
+            'label': '' ~ 'studio.details.admin_settings.studio_name'|trans({}, 'catroweb'),
+            'value': studio.name,
+            'name': 'studio_name',
+            'leading_icon': 'blur_circular'
+          }
+        }%}
+
+        {% include 'components/text_area.html.twig' with {
+          'text_area':
+          {
+            'id': 'studio-settings__studio-description',
+            'label': '' ~ 'studio.details.admin_settings.studio_description'|trans({}, 'catroweb'),
+            'value': studio.description,
+            'name': 'studio_description',
+            'max_length': '1000',
+            'rows': '4'
+          }
+        }%}
+
+        {% include 'components/switch.html.twig' with {
+          'switch':
+          {
+            'id': 'studio-setting__switch-enable-comments',
+            'label': '' ~ 'studio.details.admin_settings.toggle_allow_comments'|trans({}, 'catroweb'),
+            'selected': studio.isAllowComments,
+            'name': 'allow_comments'
+          }
+        } %}
+
+        {% include 'components/switch.html.twig' with {
+          'switch':
+          {
+            'id': 'studio-setting__switch-studio-privacy',
+            'label': '' ~ 'studio.details.admin_settings.toggle_privacy'|trans({}, 'catroweb'),
+            'selected': studio.isPublic,
+            'name': 'is_public'
+          }
+        } %}
+
+      </form>
     </div>
+  </div>
 </div>

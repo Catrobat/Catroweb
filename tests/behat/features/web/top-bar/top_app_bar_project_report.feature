@@ -30,8 +30,8 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#top-app-bar__btn-report-project"
     And I wait for AJAX to finish
     Then I should be on "/app/login"
-    When I fill in "username" with "OtherUser"
-    And I fill in "password" with "123456"
+    When I fill in "_username" with "OtherUser"
+    And I fill in "_password" with "123456"
     And I press "Login"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1#login"

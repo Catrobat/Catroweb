@@ -30,14 +30,14 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I wait for the page to be loaded
     Then I should not see "My Profile"
     And I should be on "/app/login"
-    And I should see 1 "input#password"
+    And I should see 1 "#password__input"
 
   Scenario: Log in without user cookie should be ignored
     Given I am on "/app/user"
     And I wait for the page to be loaded
     Then I should not see "My Profile"
     And I should be on "/app/login"
-    And I should see 1 "input#password"
+    And I should see 1 "#password__input"
 
   Scenario: Logout button should be hidden
     Given I set the cookie "CATRO_LOGIN_TOKEN" to "112233445566778899aabbccddeeff00"

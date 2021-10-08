@@ -1,5 +1,6 @@
 import { MDCTextField } from '@material/textfield'
 import $ from 'jquery'
+import './components/fullscreen_list_modal'
 import { TranslateProgram } from './custom/TranslateProgram'
 import { TranslateComments } from './custom/TranslateComments'
 import { ProjectList } from './components/project_list'
@@ -13,7 +14,6 @@ import { ProgramRecommender } from './custom/ProgramRecommender'
 import { ProgramComments } from './custom/ProgramComments'
 
 require('../styles/custom/profile.scss')
-require('../styles/custom/modal.scss')
 require('../styles/custom/program.scss')
 
 const $project = $('.js-project')

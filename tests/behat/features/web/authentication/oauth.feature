@@ -23,7 +23,7 @@ Feature:
     And I am on "/app/user"
     Then I should see "Create new password"
     Then I click "#edit-password-button"
-    And I fill in "password" with "test12"
+    And I fill in "_password" with "test12"
     And I fill in "repeat-password" with "test12"
     And I click "#save-password"
     And I wait for the page to be loaded

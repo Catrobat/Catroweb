@@ -21,13 +21,13 @@
         <div class="col-sm-11 col-md-8 col-lg-6 center">
 
           {% if already_reset is defined %}
-          <div class="alert alert-danger" style="margin-top: 15px">
-            {{ "login.alreadyReset"|trans({}, "catroweb") }}
-          </div>
+            <div class="alert alert-danger" style="margin-top: 15px">
+              {{ "login.alreadyReset"|trans({}, "catroweb") }}
+            </div>
           {% else %}
-          <div class="alert alert-success" style="margin-top: 15px">
-            {{ "login.recoverPassSend"|trans({}, "catroweb") }}
-          </div>
+            <div class="alert alert-success" style="margin-top: 15px">
+              {{ "login.recoverPassSend"|trans({}, "catroweb") }}
+            </div>
           {% endif %}
 
           <!-- Redirects -->
@@ -49,7 +49,7 @@
                   {{ 'login.noAccount'|trans({}, 'catroweb') }}
                   <a id="create_account"
                      href="{{ path('fos_user_registration_register') }}">
-                     {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
+                    {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
                 </div>
               </div>
             </div>

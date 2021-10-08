@@ -41,6 +41,25 @@ class StudioController extends AbstractController
   }
 
   /**
+   * move to capi as POST /studio.
+   *
+   * @internal only - just for testing!
+   *
+   * @Route("/studio/create/{name}", name="studio_create", methods={"GET"})
+   */
+  public function createStudio(string $name): Response
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (is_null($user)) {
+      throw $this->createAccessDeniedException();
+    }
+    $studio = $this->studio_manager->createStudio($user, $name, '');
+
+    return $this->redirectToRoute('studio_details', ['id' => $studio->getId()]);
+  }
+
+  /**
    * @Route("/studio/{id}", name="studio_details", methods={"GET"})
    */
   public function studioDetails(Request $request): Response
@@ -233,8 +252,8 @@ class StudioController extends AbstractController
   public function editStudioDetails(Request $request): Response
   {
     if ($request->isMethod('POST')) {
-      $std_id = trim(strval($request->request->get('std_id')));
-      $studio = $this->studio_manager->findStudioById($std_id);
+      $studio_id = trim(strval($request->request->get('studio_id')));
+      $studio = $this->studio_manager->findStudioById($studio_id);
       if (is_null($this->getUser()) || is_null($studio)) {
         return $this->redirect($request->headers->get('referer'));
       }
@@ -242,22 +261,17 @@ class StudioController extends AbstractController
       if (strlen($name) > 0) {
         $studio->setName($name);
       }
-      $desc = trim(strval($request->request->get('studio_desc')));
+      $desc = trim(strval($request->request->get('studio_description')));
       if (strlen($desc)) {
         $studio->setDescription($desc);
       }
+
       $allow_comments = $request->request->get('allow_comments');
-      if (!is_null($allow_comments)) {
-        $studio->setAllowComments(true);
-      } else {
-        $studio->setAllowComments(false);
-      }
-      $is_private = $request->request->get('is_private');
-      if (!is_null($is_private)) {
-        $studio->setIsPublic(false);
-      } else {
-        $studio->setIsPublic(true);
-      }
+      $studio->setAllowComments(!is_null($allow_comments) && true === filter_var($allow_comments, FILTER_VALIDATE_BOOLEAN));
+
+      $is_public = $request->request->get('is_public');
+      $studio->setIsPublic(!is_null($is_public) && true === filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
+
       $studio->setUpdatedOn(new \DateTime('now'));
       $this->studio_manager->changeStudio($this->getUser(), $studio);
     }

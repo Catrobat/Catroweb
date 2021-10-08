@@ -10,78 +10,73 @@
 
   {% block fos_user_content %}
 
-    <div class="container-fluid" style="width:100%;">
+    {% include 'UserManagement/login_logo.html.twig' %}
 
-      {% include 'UserManagement/login_logo.html.twig' %}
+    <!-- Policy -->
+    {% include 'PrivacyAndTerms/policy.html.twig' %}
 
-      <!-- Policy -->
-      {% include 'PrivacyAndTerms/policy.html.twig' %}
-
-      <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-6 text-center center">
-          {% if invalid_username is defined %}
-            <div id="request-alert"
-                 class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb") }}
-            </div>
-          {% endif %}
-        </div>
+    <div class="row justify-content-center">
+      <div class="col-sm-11 col-md-8 col-lg-6 text-center center">
+        {% if invalid_username is defined %}
+          <div id="request-alert"
+               class="alert alert-danger col-sm-12">{{ "login.noUsername"|trans({}, "catroweb") }}
+          </div>
+        {% endif %}
       </div>
+    </div>
 
-      <div class="row justify-content-center">
-        <div class="col-sm-11 col-md-8 col-lg-6 center">
+    <div class="row justify-content-center">
+      <div class="col-sm-11 col-md-8 col-lg-6 center">
 
-          <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
-                action="{{ path('fos_user_resetting_send_email') }}" method="post">
+        <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
+              action="{{ path('fos_user_resetting_send_email') }}" method="post">
 
-            <div class="row">
-              <div class="col">
+          <div class="row">
+            <div class="col">
 
-                <label class="mdc-text-field mdc-text-field--filled username">
-                  <span class="mdc-text-field__ripple"></span>
-                  <input type="text" class="mdc-text-field__input" aria-labelledby="username-label" id="username" name="username" required>
-                  <span class="mdc-floating-label" id="username-label">{{ "login.userOrEmail"|trans({}, "catroweb") }}</span>
-                  <span class="mdc-line-ripple"></span>
-                </label>
+              {% include 'components/text_field.html.twig' with {
+                'text_field':
+                {
+                  'id': 'username',
+                  'label': '' ~ 'login.userOrEmail'|trans({}, 'catroweb'),
+                  'name': 'username',
+                }
+              } %}
 
-                <!-- Button -->
-                <div style="margin-top:30px; margin-bottom:30px" class="form-group">
-                  <div class="col-sm-12 controls">
-                    <button id="recover" style="width: 100%;" class="login btn btn-primary"
-                            name="recover">{{ "login.recoverPass"|trans({}, "catroweb") }}</button>
+              <button id="recover" style="width: 100%;" class="login btn btn-primary" name="recover">
+                {{ "login.recoverPass"|trans({}, "catroweb") }}
+              </button>
+
+              <!-- Redirects -->
+              <div>
+                <div class="form-group">
+                  <div class="col-md-12 control">
+                    <div style="padding-top: 15px; font-size: 85%;">
+                      {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
+                      <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
+                        {{ 'login.login'|trans({}, 'catroweb') }}
+                      </a>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Redirects -->
-                <div>
-                  <div class="form-group">
-                    <div class="col-md-12 control">
-                      <div style="padding-top:15px; font-size:85%">
-                        {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
-                        <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
-                          {{ 'login.login'|trans({}, 'catroweb') }}
-                        </a>
-                      </div>
+                <div class="form-group">
+                  <div class="col-md-12 control">
+                    <div style="font-size: 85%;">
+                      {{ 'login.noAccount'|trans({}, 'catroweb') }}
+                      <a id="create_account"
+                         href="{{ path('fos_user_registration_register') }}">
+                        {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
                     </div>
                   </div>
-
-                  <div class="form-group">
-                    <div class="col-md-12 control">
-                      <div style="font-size:85%">
-                        {{ 'login.noAccount'|trans({}, 'catroweb') }}
-                        <a id="create_account"
-                           href="{{ path('fos_user_registration_register') }}">
-                          {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
-                      </div>
-                    </div>
-                  </div>
-
-                  {% include 'UserManagement/or_line.html.twig' %}
                 </div>
 
+                {% include 'UserManagement/or_line.html.twig' %}
               </div>
+
             </div>
-          </form>
-        </div>
+          </div>
+        </form>
       </div>
     </div>
 
