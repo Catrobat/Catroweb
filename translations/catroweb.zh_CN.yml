@@ -17,7 +17,7 @@ googlePlay: 谷歌 Play 商店
 iosAppStore: IOS 应用商店
 huaweiAppGallery: 华为应用市场
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Discord 聊天
 passwordsNoMatch: 两次输入的密码不一样
 error: 错误
 cancel: 取消
@@ -714,7 +714,7 @@ achievements:
         description: '创建一个用户账户'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "参与 Coding Jam '21"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
