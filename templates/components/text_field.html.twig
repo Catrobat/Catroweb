@@ -1,0 +1,60 @@
+{#
+  Wrapper template for a simple usage of material fext fields
+
+  ===== Dependencies =====
+
+    - components/text_field.js
+
+  ===== Example usage =====
+
+    {% include 'components/text_field.html.twig' with {
+    'text_field':
+      {
+        'id': 'id-1',
+        'label': 'Mail',
+        'value': 'oldmail@mail.at',
+        'name': 'name-1',
+        'leading_icon': 'blur_circular',
+        'trailing_icon': 'close',
+        'tab_index': '0',
+        'type': 'text'
+      }
+  }%}
+#}
+<label id="{{ text_field.id }}"
+       class="mdc-text-field mdc-text-field--filled mb-3
+             {#  Leading Icon (Optional) #}
+             {% if text_field.leading_icon|default() %}mdc-text-field--with-leading-icon{% endif %}
+             {#  Trailing Icon (Optional) #}
+             {% if text_field.trailing_icon|default() %}mdc-text-field--with-trailing-icon{% endif %}">
+
+  <span class="mdc-text-field__ripple"></span>
+
+  <span class="mdc-floating-label" id="{{ text_field.id }}__label">{{ text_field.label }}</span>
+
+  {#  Leading Icon (Optional) #}
+  {% if text_field.leading_icon|default() %}
+    <span class="material-icons mdc-text-field__icon mdc-text-field__icon--leading"
+          role="button">
+      {{ text_field.leading_icon }}
+    </span>
+  {% endif %}
+
+  <input id="{{ text_field.id }}__input"
+         class="mdc-text-field__input"
+         name="{{ text_field.name }}"
+         type="{{ text_field.type|default('text') }}"
+         aria-labelledby="{{ text_field.id }}__label"
+         tabindex="{{ text_field.tab_index|default('0') }}"
+         required value="{{ text_field.value|default() }}">
+
+  {#  Trailing Icon (Optional) #}
+  {% if text_field.trailing_icon|default() %}
+    <span class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing
+                {% if text_field.trailing_icon|default() == 'visibility' %}password-toggle"{% endif %}
+          role="button"
+    >{{ text_field.trailing_icon }}</span>
+  {% endif %}
+
+  <span class="mdc-line-ripple"></span>
+</label>

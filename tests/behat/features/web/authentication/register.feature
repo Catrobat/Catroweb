@@ -104,8 +104,8 @@ Feature:
     Then I should be on "/app/register/"
     When I click "#btn-login"
     And I wait for the page to be loaded
-    And I fill in "username" with "catro@bat.org"
-    And I fill in "password" with "123456"
+    And I fill in "_username" with "catro@bat.org"
+    And I fill in "_password" with "123456"
     And I press "Login"
     And I wait for the page to be loaded
     Then I should see "Your password or username was incorrect."
@@ -128,8 +128,8 @@ Feature:
     Then I should be logged out
     When I click "#btn-login"
     And I wait for the page to be loaded
-    And I fill in "username" with "CatrobatNew"
-    And I fill in "password" with "12345"
+    And I fill in "_username" with "CatrobatNew"
+    And I fill in "_password" with "12345"
     And I press "Login"
     And I wait for the page to be loaded
     Then I should see "Your password or username was incorrect."

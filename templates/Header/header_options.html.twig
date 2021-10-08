@@ -13,7 +13,7 @@
 </div>
 {% elseif '/studio/' in app.request.pathinfo and studio|default(false) and studio.id|default(false) %}
     {% if user_role == 'admin' %}
-        <button id="top-app-bar__btn-search" data-bs-toggle="modal" data-bs-target="#settings-modal"
+        <button id="top-app-bar__btn-settings" data-bs-toggle="modal" data-bs-target="#studioAdminSettingsModal"
                 class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                 aria-label="Search">
             settings

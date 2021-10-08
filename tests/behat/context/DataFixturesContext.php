@@ -24,6 +24,9 @@ use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\RemixNotification;
+use App\Entity\Studio;
+use App\Entity\StudioActivity;
+use App\Entity\StudioUser;
 use App\Entity\Survey;
 use App\Entity\Tag;
 use App\Entity\Translation\CommentMachineTranslation;
@@ -1219,6 +1222,75 @@ class DataFixturesContext implements KernelAwareContext
   {
     $users = $this->getUserManager()->findAll();
     Assert::assertCount($number_of_users, $users);
+  }
+
+  /**
+   * @Given /^there are studios:$/
+   */
+  public function thereAreStudios(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      if (array_key_exists('id', $config)) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
+
+      $studio = (new Studio())
+        ->setName($config['name'])
+        ->setDescription($config['description'] ?? '')
+        ->setAllowComments($config['allow_comments'] ?? true)
+        ->setIsPublic($config['is_public'] ?? true)
+        ->setIsEnabled($config['is_enabled'] ?? true)
+        ->setCreatedOn(isset($config['created_on']) ?
+          new DateTime($config['created_on'], new DateTimeZone('UTC')) :
+          new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+        )
+      ;
+      $this->getManager()->persist($studio);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are studio users:$/
+   */
+  public function thereAreStudioUsers(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      if (array_key_exists('id', $config)) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
+
+      $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findUserByUsername($config['user']);
+
+      $activity = (new StudioActivity())
+        ->setUser($user)
+        ->setStudio($studio)
+        ->setType('user')
+        ->setCreatedOn(isset($config['created_on']) ?
+          new DateTime($config['created_on'], new DateTimeZone('UTC')) :
+          new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+        )
+      ;
+
+      $this->getManager()->persist($activity);
+
+      $studio_user = (new StudioUser())
+        ->setUser($user)
+        ->setStudio($studio)
+        ->setRole($config['role'] ?? 'member')
+        ->setActivity($activity)
+        ->setStatus($config['status'] ?? 'active')
+        ->setCreatedOn(isset($config['created_on']) ?
+          new DateTime($config['created_on'], new DateTimeZone('UTC')) :
+          new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+        )
+      ;
+
+      $this->getManager()->persist($studio_user);
+    }
+    $this->getManager()->flush();
   }
 
   /**

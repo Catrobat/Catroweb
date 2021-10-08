@@ -1,60 +1,86 @@
-<div id="studio-info-container">
-    <div class="col-8">
-        <div id="studio-name">
-            <h2 class="mt-2">{{ studio.name }}</h2>
-        </div>
-        <div id="studio-info">
-            <div class="col-4">
-                <span>{{ studio.isEnabled ? "studio.details.public" |trans({}, 'catroweb') : "studio.details.private" |trans({}, 'catroweb') }}</span>
-            </div>
-            <div class="col-4">
-                {% if user_role != null %}
-                    <a class="count-container" href="javascript:void(0)" onclick="(new Studio()).loadMembers()"
-                       data-bs-toggle="modal" data-bs-target="#members-modal">
-                        <div class="col-4">
-                            <span class="material-icons">person</span><span class="ms-2">{{ members_count }}</span>
-                        </div>
-                    </a>
-                {% else %}
-                    <div class="col-4">
-                        <span class="material-icons">person</span><span class="ms-2">{{ members_count }}</span>
-                    </div>
-                {% endif %}
-            </div>
-            <div class="col-4">
-                {% if user_role == 'admin' %}
-                    <a class="count-container" href="javascript:void(0)" onclick="(new Studio()).loadActivites()"
-                       data-bs-toggle="modal" data-bs-target="#activities-modal">
-                        <span class="material-icons">schedule</span>
-                        <span id="activities_count" class="ms-2">{{ activities_count }}</span>
-                    </a>
-                {% else %}
-                    <span class="material-icons">schedule</span>
-                    <span id="activities_count" class="ms-2">{{ activities_count }}</span>
-                {% endif %}
-            </div>
-        </div>
+<div class="studio-detail__header">
+  <h2 class="studio-detail__header__name" class="ps-3 pe-2 mt-2">{{ studio.name }}</h2>
+  <div class="studio-detail__header__details">
+
+    <div class="col-4">
+      {{ studio.isPublic ? "studio.details.public" |trans({}, 'catroweb') : "studio.details.private" |trans({}, 'catroweb') }}
     </div>
-    {% if user_role == null %}
-        <div class="col-4">
-            <button id="studio-join-leave-btn"
-                    class="btn btn-outline-primary btn-block">{{ "studio.details.join" |trans({}, 'catroweb') }}</button>
-        </div>
-    {% elseif user_role == 'admin' %}
-        <div class="col-4">
-            <button id="studio-upload-cover-btn" class="btn btn-outline-primary btn-block" onclick="(new Studio()).updateHeader()">
-                <span class="material-icons">photo_camera</span>
-            </button>
-            <form id="std-header-form" action="" method="post">
-                <input id="std-header" name="header-img" type="file" style="display: none" onchange="(new Studio()).uploadHeader()">
-                <input id="std-id" name="std-id" type="hidden" value="{{ studio.id }}">
-                <input type="submit" style="display: none">
-            </form>
-        </div>
-    {% else %}
-        <div class="col-4">
-            <button id="studio-join-leave-btn"
-                    class="btn btn-outline-primary btn-block">{{ "studio.details.leave" |trans({}, 'catroweb') }}</button>
-        </div>
-    {% endif %}
+
+    <div class="col-4">
+      {% if user_role != null %}
+        <a type="button" class="studio-detail__header__details__button studio-detail__header__details__button--member"
+                data-bs-toggle="modal" data-bs-target="#studioDetailMembersListModal">
+          <span class="material-icons">person</span><span class="ms-2">{{ members_count }}</span>
+        </a>
+        {% include 'components/fullscreen_list_modal.html.twig' with {
+          'modal':
+          {
+            'id': 'studioDetailMembersListModal',
+            'title': '' ~ 'studio.details.members'|trans({}, 'catroweb'),
+            'list_id': 'studioDetailMembersList'
+          }
+        }%}
+      {% else %}
+        <span class="material-icons">person</span><span class="ms-2">{{ members_count }}</span>
+      {% endif %}
+    </div>
+
+    <div class="col-4">
+      {% if user_role == 'admin' %}
+        <a type="button" class="studio-detail__header__details__button studio-detail__header__details__button--activities"
+                data-bs-toggle="modal" data-bs-target="#studioDetailActivityListModal">
+          <span class="material-icons">schedule</span><span id="activities_count" class="ms-2">{{ activities_count }}</span>
+        </a>
+        {% include 'components/fullscreen_list_modal.html.twig' with {
+          'modal':
+          {
+            'id': 'studioDetailActivityListModal',
+            'title': '' ~ 'studio.details.activity'|trans({}, 'catroweb'),
+            'list_id': 'studioDetailActivityList'
+          }
+        }%}
+      {% else %}
+        <span class="material-icons">schedule</span><span id="activities_count" class="ms-2">{{ activities_count }}</span>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if user_role == null %}
+    <div class="col-4">
+      <button id="studio-join-leave-btn" class="btn btn-outline-primary btn-block">
+        {{ "studio.details.join" |trans({}, 'catroweb') }}
+      </button>
+    </div>
+  {% elseif user_role == 'admin' %}
+    <div class="col-4">
+
+{#      <div class="position-relative">#}
+{#        <div class="studio-detail__header__details__button--upload-image d-flex">#}
+{#          <div>#}
+{#            <form class="studio-detail__header__details__button--upload-image" id="std-header-form" method="post">#}
+{#              <input id="std-header" type="file" name="header-img">#}
+{#              <i class="material-icons md-light">camera_alt</i>#}
+{#              <div class="button-show-ajax"></div>#}
+{#            </form>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
+
+{#      <button id="studio-detail__header__details__button--upload-image" class="btn btn-outline-primary btn-block"#}
+{#              onclick="(new Studio()).updateHeader()">#}
+{#        <span class="material-icons">photo_camera</span>#}
+{#      </button>#}
+{#      <form class="studio-detail__header__details__button--upload-image" id="std-header-form" action="" method="post">#}
+{#        <input id="std-header" name="header-img" type="file"#}
+{#               onchange="(new Studio()).uploadHeader()">#}
+{#        <input id="std-id" name="std-id" type="hidden" value="{{ studio.id }}">#}
+{#        <input type="submit" style="display: none;">#}
+{#      </form>#}
+    </div>
+  {% else %}
+    <div class="col-4">
+      <button id="studio-join-leave-btn"
+              class="btn btn-outline-primary btn-block">{{ "studio.details.leave" |trans({}, 'catroweb') }}</button>
+    </div>
+  {% endif %}
 </div>

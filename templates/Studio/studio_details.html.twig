@@ -1,34 +1,26 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ asset('build/css/studio.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('build/css/modal.css') }}"/>
-    <link rel="stylesheet" href="{{ asset('build/css/project_list.css') }}">
-    <link rel="stylesheet" href="{{ asset('build/css/profile_styles.css') }}"/>
+  {{ encore_entry_link_tags('studio_detail') }}
 {% endblock %}
 
 {% block body %}
-    <section>
-        <div id="studio-img-container" class="row">
-            <img src="{{ asset(studio.CoverPath) }}" class="img-fluid" alt="">
-        </div>
-        <div class="row">
-            {% include 'Studio/studio_details_header.html.twig' %}
-            {% include 'Studio/studio_details_tabs.html.twig' %}
-            <div id="tabContent" class="tab-content">
-                {% include 'Studio/studio_details_project_list.html.twig' %}
-                {% include 'Studio/studio_details_comment_list.html.twig' %}
-                {% include 'Studio/studio_detail_comment_reply.html.twig' %}
-                {% if user_role == 'admin' %}
-                    {% include 'Studio/studio_details_activity_list.html.twig' %}
-                {% endif %}
-                {% if user_role != null %}
-                    {% include 'Studio/studio_details_members_list.html.twig' %}
-                {% endif %}
-            </div>
-        </div>
-    </section>
-    <input id="showMore-text" type="hidden" value="{{ 'studio.details.showMore' |trans({}, 'catroweb') }}">
+
+
+<div id="studio-img-container" class="row">
+  <img src="{{ asset(studio.CoverPath) }}" class="img-fluid" alt="">
+</div>
+
+{% include 'Studio/studio_details_header.html.twig' %}
+
+{% include 'Studio/studio_details_tabs.html.twig' %}
+<div id="tabContent" class="tab-content">
+  {% include 'Studio/studio_details_project_list.html.twig' %}
+  {% include 'Studio/studio_details_comment_list.html.twig' %}
+  {% include 'Studio/studio_detail_comment_reply.html.twig' %}
+</div>
+
+<input id="showMore-text" type="hidden" value="{{ 'studio.details.showMore' |trans({}, 'catroweb') }}">
     <input id="showLess-text" type="hidden" value="{{ 'studio.details.showLess' |trans({}, 'catroweb') }}">
     <input id="project-remove-success" type="hidden" value="{{ 'studio.details.remove_project_success'|trans({}, 'catroweb') }}">
     <input id="project-remove-error" type="hidden" value="{{ 'studio.details.remove_project_error'|trans({}, 'catroweb') }}">
@@ -38,8 +30,8 @@
     <input id="promote-failed-error" type="hidden" value="{{ 'studio.details.promote_failed'|trans({}, 'catroweb') }}">
     <input id="ban-failed-error" type="hidden" value="{{ 'studio.details.ban_user_failed'|trans({}, 'catroweb') }}">
     <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
+    <div class="js-studio-detail" data-studio-id="{{ studio.id }}"></div>
 {% endblock %}
 {% block js %}
-    <script src="{{ asset('js/Studio.js') }}"></script>
-{#    {{ encore_entry_script_tags('tab-bar') }}#}
+    {{ encore_entry_script_tags('studio_detail') }}
 {% endblock %}
