@@ -172,6 +172,7 @@ jobs:
           - web-remix-system
           - web-scratch-integration
           - web-search
+          - web-studio
           - web-top-bar
           - web-translation
 

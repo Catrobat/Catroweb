@@ -30,6 +30,7 @@ use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserManager;
 use App\Entity\UserRemixSimilarityRelation;
 use App\Manager\AchievementManager;
+use App\Manager\StudioManager;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\CronJobRepository;
 use App\Repository\ExtensionRepository;
@@ -214,6 +215,11 @@ trait SymfonySupport
   public function getCronJobRepository(): CronJobRepository
   {
     return $this->kernel->getContainer()->get(CronJobRepository::class);
+  }
+
+  public function getStudioManager(): StudioManager
+  {
+    return $this->kernel->getContainer()->get(StudioManager::class);
   }
 
   /**

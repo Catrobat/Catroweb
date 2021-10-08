@@ -15,8 +15,8 @@ Feature:
     And I wait for the page to be loaded
     Then I should be on "/app/login"
     And I wait for the page to be loaded
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123456"
     Then I press "Login"
     And I wait for the page to be loaded
     Then I should be logged in
@@ -28,8 +28,8 @@ Feature:
   Scenario: Try to login with wrong username should fail
     Given I am on "/app/login"
     And I wait for the page to be loaded
-    And I fill in "username" with "abcdefg"
-    And I fill in "password" with "123456"
+    And I fill in "_username" with "abcdefg"
+    And I fill in "_password" with "123456"
     And I press "Login"
     And I wait for the page to be loaded
     Then I should see "Your password or username was incorrect."
@@ -64,13 +64,13 @@ Feature:
     And I wait for the page to be loaded
     Then I should be on "/app/login"
     And I wait for the page to be loaded
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123"
     Then I press "Login"
     And I wait for the page to be loaded
     Then I should see "Your password or username was incorrect."
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123456"
     Then I press "Login"
     And I wait for the page to be loaded
 
@@ -80,8 +80,8 @@ Feature:
       | 1  | project 1 | Catrobat |
     And I am on "/app/login"
     And I wait for the page to be loaded
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123456"
     When I press "Login"
     And I wait for the page to be loaded
     Then I should see "Newest"
@@ -89,25 +89,25 @@ Feature:
   Scenario: The password should be hidden as default behaviour
     Given I am on "/app/login"
     And I wait for the page to be loaded
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
-    Then the element ".password input" should have type "password"
-    But the element ".password input" should not have type "text"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123456"
+    Then the element "#password__input" should have type "password"
+    But the element "#password__input" should not have type "text"
     And the ".password-toggle" element should contain "visibility"
 
   Scenario: It should be possible to change the visibility of the password
     Given I am on "/app/login"
     And I wait for the page to be loaded
-    And I fill in "username" with "Catrobat"
-    And I fill in "password" with "123456"
-    Then the element ".password input" should have type "password"
+    And I fill in "_username" with "Catrobat"
+    And I fill in "_password" with "123456"
+    Then the element "#password__input" should have type "password"
     And the ".password-toggle" element should contain "visibility"
-    But the element ".password input" should not have type "text"
+    But the element "#password__input" should not have type "text"
     When I click ".password-toggle"
-    Then the element ".password input" should have type "text"
+    Then the element "#password__input" should have type "text"
     And the ".password-toggle" element should contain "visibility_off"
-    But the element ".password input" should not have type "password"
+    But the element "#password__input" should not have type "password"
     When I click ".password-toggle"
-    Then the element ".password input" should have type "password"
+    Then the element "#password__input" should have type "password"
     And the ".password-toggle" element should contain "visibility"
-    But the element ".password input" should not have type "text"
+    But the element "#password__input" should not have type "text"

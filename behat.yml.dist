@@ -309,6 +309,14 @@ default:
                 - Tests\behat\context\CatrowebBrowserContext
                 - Tests\behat\context\ApiContext
 
+        web-studio:
+            paths:    [ "tests/behat/features/web/studio" ]
+            contexts:
+                - Tests\behat\context\RefreshEnvironmentContext
+                - Tests\behat\context\DataFixturesContext
+                - Tests\behat\context\CatrowebBrowserContext
+                - Tests\behat\context\ApiContext
+
         web-top-bar:
             paths:    [ "tests/behat/features/web/top-bar" ]
             contexts:
