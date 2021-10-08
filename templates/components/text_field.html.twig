@@ -51,8 +51,8 @@
   {#  Trailing Icon (Optional) #}
   {% if text_field.trailing_icon|default() %}
     <span class="material-icons mdc-text-field__icon mdc-text-field__icon--trailing
-                {% if text_field.trailing_icon|default() == 'visibility' %}password-toggle"{% endif %}
-          role="button"
+                {% if text_field.trailing_icon|default() == 'visibility' %}password-toggle{% endif %}"
+          role="button" style="pointer-events: all;"
     >{{ text_field.trailing_icon }}</span>
   {% endif %}
 
