@@ -776,10 +776,12 @@ studio:
     promote_user: 'promocionar a admin'
     promote_failed: 'Error al promocionar este usuario a administrar'
     ban_user_failed: '¡Error al banear al usuario del estudio!'
-    general_settings: 'Configuración General'
-    studio_name: 'Nombre del Estudio'
-    studio_desc: 'Descripción'
-    private_studio: 'Estudio privado'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'Descripción'
+      toggle_allow_comments: 'Comentarios'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Tamaño: %size%'

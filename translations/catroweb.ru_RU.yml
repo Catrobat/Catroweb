@@ -778,10 +778,12 @@ studio:
     promote_user: 'продвигать админу'
     promote_failed: 'Не удалось повысить этого пользователя до администратора'
     ban_user_failed: 'Не удалось заблокировать пользователя из студии!'
-    general_settings: 'Общие настройки'
-    studio_name: 'Название студии'
-    studio_desc: 'Описание'
-    private_studio: 'Частная студия'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'Описание'
+      toggle_allow_comments: 'Комментарии'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Размер: %size%'
