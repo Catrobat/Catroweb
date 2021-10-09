@@ -773,10 +773,12 @@ studio:
     promote_user: '관리자로 승격'
     promote_failed: '이 사용자를 관리자로 승격하지 못했습니다.'
     ban_user_failed: '사용자를 스튜디오에서 차단하지 못했습니다!'
-    general_settings: '일반 설정'
-    studio_name: '스튜디오 이름'
-    studio_desc: '설명'
-    private_studio: '프라이빗 스튜디오'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: '설명'
+      toggle_allow_comments: '코멘트'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: '크기: %size%'

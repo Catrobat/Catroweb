@@ -776,10 +776,12 @@ studio:
     promote_user: 'ਐਡਮਿਨ ਨੂੰ ਤਰੱਕੀ ਦਿਓ'
     promote_failed: 'ਇਸ ਉਪਭੋਗਤਾ ਨੂੰ ਪ੍ਰਸ਼ਾਸਕ ਦੇ ਰੂਪ ਵਿੱਚ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ'
     ban_user_failed: 'ਸਟੂਡੀਓ ਤੋਂ ਉਪਭੋਗਤਾ ਤੇ ਪਾਬੰਦੀ ਲਗਾਉਣ ਵਿੱਚ ਅਸਫਲ!'
-    general_settings: 'ਆਮ ਸੈਟਿੰਗਜ਼'
-    studio_name: 'ਸਟੂਡੀਓ ਦਾ ਨਾਮ'
-    studio_desc: 'ਵੇਰਵਾ'
-    private_studio: 'ਪ੍ਰਾਈਵੇਟ ਸਟੂਡੀਓ'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'ਵੇਰਵਾ'
+      toggle_allow_comments: 'ਟਿਪਣੀਆਂ'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'ਆਕਾਰ: %size%'

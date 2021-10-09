@@ -780,10 +780,12 @@ studio:
     promote_user: 'zum Admin fördern'
     promote_failed: 'Dieser Benutzer konnte nicht zum Admin befördert werden'
     ban_user_failed: 'Fehler beim Sperren des Benutzers im Studio!'
-    general_settings: 'Allgemeine Einstellungen'
-    studio_name: 'Studio-Name'
-    studio_desc: 'Beschreibung'
-    private_studio: 'Privates Studio'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'Beschreibung'
+      toggle_allow_comments: 'Kommentare'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Größe: %size%'

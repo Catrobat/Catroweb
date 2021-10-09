@@ -776,10 +776,12 @@ studio:
     promote_user: 'promote to admin'
     promote_failed: 'Failed to promote this user to admin'
     ban_user_failed: 'Failed to ban user from studio!'
-    general_settings: 'General Settings'
-    studio_name: 'Studio Name'
-    studio_desc: 'Описание'
-    private_studio: 'Private Studio'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'Описание'
+      toggle_allow_comments: 'Коментари'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Size: %size%'
