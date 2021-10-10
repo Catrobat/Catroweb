@@ -782,11 +782,11 @@ studio:
     promote_failed: '未能将此用户推广到管理员'
     ban_user_failed: '禁止用户进入工作室失败！'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: '常规设置'
+      studio_name: '工作室名称'
       studio_description: '描述'
       toggle_allow_comments: '评论'
-      toggle_privacy: 'Public'
+      toggle_privacy: '公开'
 media_library:
   file:
     size: '大小: %size%'

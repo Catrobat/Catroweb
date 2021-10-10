@@ -733,7 +733,7 @@ extensions:
   title: 'پسوند‌ها'
   extension:
     arduino:
-      title: Arduino
+      title: آردوینو
     drone:
       title: کوادکوپتر
     phiro:
