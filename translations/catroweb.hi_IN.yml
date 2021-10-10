@@ -777,11 +777,11 @@ studio:
     promote_failed: 'इस उपयोगकर्ता को व्यवस्थापक के रूप में प्रचारित करने में विफल'
     ban_user_failed: 'उपयोगकर्ता को स्टूडियो से प्रतिबंधित करने में विफल!'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'सामान्य सेटिंग्स'
+      studio_name: 'स्टूडियो का नाम'
       studio_description: 'वर्णन'
       toggle_allow_comments: 'टिप्पणियाँ'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'सार्वजनिक'
 media_library:
   file:
     size: 'आकार: %size%'

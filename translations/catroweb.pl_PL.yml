@@ -777,11 +777,11 @@ studio:
     promote_failed: 'Nie udało się awansować tego użytkownika na administratora'
     ban_user_failed: 'Nie udało się zbanować użytkownika ze studia!'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Ustawienia ogólne'
+      studio_name: 'Nazwa Studia'
       studio_description: 'Opis'
       toggle_allow_comments: 'Komentarze'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Publiczne'
 media_library:
   file:
     size: 'Rozmiar: %size%'
