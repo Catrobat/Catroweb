@@ -4,7 +4,6 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\ProgramManager;
-use App\Entity\StudioActivity;
 use App\Entity\StudioUser;
 use App\Entity\User;
 use App\Entity\UserComment;
@@ -83,6 +82,118 @@ class StudioController extends AbstractController
         'projects_count' => $projects_count, 'projects' => $this->getStudioProjectsListWithImg($projects),
         'comments_count' => $comments_count, 'comments' => $this->getStudioCommentsListWithAvatar($comments),
       ]);
+  }
+
+  /**
+   * Internal Route only.
+   *
+   * @Route("/studio/members/list", name="studio_members_list", methods={"GET"})
+   */
+  public function loadStudioMembersList(Request $request): Response
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $studio = $this->studio_manager->findStudioById(trim($request->query->get('studio_id')));
+    if (!is_null($studio)) {
+      $this->redirectToRoute('index');
+    }
+
+    $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
+    $members = $this->studio_manager->findAllStudioUsers($studio);
+    $projects_per_member = [];
+
+    /** @var StudioUser $member */
+    foreach ($members as $member) {
+      $projects_per_member[$member->getID()] = $this->studio_manager->countStudioUserProjects($member->getStudio(), $member->getUser());
+    }
+
+    return $this->render('Studio/_studio_members_list.html.twig', [
+      'is_studio_admin' => $is_studio_admin,
+      'members' => $members,
+      'projects_per_member' => $projects_per_member,
+    ]);
+  }
+
+  /**
+   * Internal Route only.
+   *
+   * @Route("/studio/member/promote", name="studio_promote_member", methods={"PUT"})
+   */
+  public function promoteMemberToAdmin(Request $request): Response
+  {
+    $studio = $this->studio_manager->findStudioById(trim($request->get('studio_id')));
+    /** @var User|null $user */
+    $user = $this->user_manager->findUserBy(['id' => trim($request->get('user_id'))]);
+    if (is_null($studio) || is_null($user)) {
+      return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+    }
+
+    $studio_user = $this->studio_manager->findStudioUser($user, $studio);
+    if (is_null($studio_user)) {
+      return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+    }
+
+    /** @var User|null $logged_in_user */
+    $logged_in_user = $this->getUser();
+    $studio_user = $this->studio_manager->changeStudioUserRole($logged_in_user, $studio, $user, StudioUser::ROLE_ADMIN);
+    if (is_null($studio_user)) {
+      return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
+    }
+
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+  }
+
+  /**
+   * Internal Route only.
+   *
+   * @Route("/studio/member/ban", name="studio_ban_user", methods={"PUT"})
+   */
+  public function banUserFromStudio(Request $request): Response
+  {
+    /** @var User|null $logged_in_user */
+    $logged_in_user = $this->getUser();
+
+    $studio = $this->studio_manager->findStudioById(trim($request->get('studio_id')));
+    /** @var User|null $user */
+    $user = $this->user_manager->findUserBy(['id' => trim($request->get('user_id'))]);
+    if (is_null($studio) || is_null($user)) {
+      return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+    }
+
+    $studio_user = $this->studio_manager->findStudioUser($user, $studio);
+    if (is_null($studio_user)) {
+      return new JsonResponse(null, Response::HTTP_NOT_FOUND);
+    }
+
+    $studio_user = $this->studio_manager->changeStudioUserStatus($logged_in_user, $studio, $user, StudioUser::STATUS_BANNED);
+    if (!is_null($studio_user) && StudioUser::STATUS_BANNED === $studio_user->getStatus()) {
+      return new JsonResponse(null, Response::HTTP_NO_CONTENT);
+    }
+
+    return new JsonResponse(Response::HTTP_UNAUTHORIZED);
+  }
+
+  /**
+   * Internal Route only.
+   *
+   * @Route("/studio/activities/list", name="studio_activities_list", methods={"GET"})
+   */
+  public function loadStudioActivitiesList(Request $request): Response
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $studio = $this->studio_manager->findStudioById(trim($request->query->get('studio_id')));
+    if (is_null($studio)) {
+      $this->redirectToRoute('index');
+    }
+
+    $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
+    $activities = $this->studio_manager->findAllStudioActivitiesCombined($studio);
+
+    return $this->render('Studio/_studio_activity_list.html.twig', [
+      'is_studio_admin' => $is_studio_admin,
+      'activities' => $activities,
+    ]);
   }
 
   /**
@@ -323,7 +434,7 @@ class StudioController extends AbstractController
     $rs .= '<div class="comment-content">';
     $rs .= '<a href="/app/user/'.$comment->getUser()->getId().'">'.$comment->getUsername().'</a>';
     if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($this->getUser(), $comment->getStudio())
-      || (!is_null($this->getUser()) && $this->getUser()->getUsername() === $comment->getUsername())) && $isReply) {
+        || (!is_null($this->getUser()) && $this->getUser()->getUsername() === $comment->getUsername())) && $isReply) {
       $rs .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="(new Studio()).removeComment($(this),'.$comment->getId().', true, '.$comment->getParentId().')"';
       $rs .= ' title="'.$this->translator->trans('studio.details.remove_comment', [], 'catroweb').'">';
       $rs .= '<i class="ms-2 material-icons text-danger">delete</i>';
@@ -338,206 +449,5 @@ class StudioController extends AbstractController
     }
 
     return $rs;
-  }
-
-  /**
-   * ToDo: move to capi.
-   *
-   * @Route("/loadActivitesList/", name="load_activites_list", methods={"GET"})
-   */
-  public function loadActivitiesList(Request $request): Response
-  {
-    $studio = $this->studio_manager->findStudioById(trim($request->query->get('studioID')));
-    if (is_null($studio)) {
-      throw $this->createNotFoundException('Unable to find this studio');
-    }
-    $activities = $this->studio_manager->findAllStudioActivitiesCombined($studio);
-    $rs = '';
-    if (count($activities) > 0) {
-      $rs = $this->getRenderedActivitiesForAjax($activities);
-
-      return new JsonResponse($rs, Response::HTTP_OK);
-    }
-
-    return new JsonResponse($rs, Response::HTTP_NOT_FOUND);
-  }
-
-  protected function getRenderedActivitiesForAjax(array $activities): string
-  {
-    $rs = '';
-    foreach ($activities as $activity) {
-      if (is_null($activity)) {
-        continue;
-      }
-      $rs .= '<li>';
-      $rs .= '<a href="/app/user/'.$activity->getActivity()->getUser()->getId().'">';
-      $rs .= '<span class="activity-user">';
-      $rs .= $activity->getActivity()->getUser()->getUserName();
-      $rs .= '</span>';
-      $rs .= '</a>&emsp13;';
-      $rs .= '<span class="activity-type">';
-      switch ($activity->getActivity()->getType()) {
-        case StudioActivity::TYPE_COMMENT:
-          if (intval($activity->getParentId()) > 0) {
-            $rs = '';
-            break;
-          }
-          $rs .= $this->translator->trans('studio.details.activity_add_comment', [], 'catroweb');
-          $rs .= '</span>&emsp13;';
-          $rs .= '<span class="activity-object">';
-          $rs .= $activity->getText();
-          $rs .= '</span>.&emsp13;';
-          $rs .= '<span class="activity-time">';
-          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
-          $rs .= '</span>';
-          $rs .= '</li>';
-          break;
-        case StudioActivity::TYPE_PROJECT:
-          $rs .= $this->translator->trans('studio.details.activity_add_project',
-            ['%project%' => '<a href="/app/project/'.$activity->getProgram()->getId().'" >
-            <span class="activity-object">'.$activity->getProgram()->getName().'</span></a>'], 'catroweb');
-          $rs .= '</span>.&emsp13;';
-          $rs .= '<span class="activity-time">';
-          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
-          $rs .= '</span>';
-          $rs .= '</li>';
-          break;
-        case StudioActivity::TYPE_USER:
-          if ($activity->getActivity()->getUser()->getId() === $activity->getUser()->getId()) {
-            $rs .= $this->translator->trans('studio.details.created_studio', [], 'catroweb');
-          } else {
-            $rs .= $this->translator->trans('studio.details.activity_add_user',
-              ['%user%' => '<a href="/app/user/'.$activity->getUser()->getId().'" ><span class="activity-object">'.$activity->getUser()->getUserName().'</span></a>'], 'catroweb');
-          }
-          $rs .= '</span>.&emsp13;';
-          $rs .= '<span class="activity-time">';
-          $rs .= $activity->getActivity()->getCreatedOn()->format('Y-m-d');
-          $rs .= '</span>';
-          $rs .= '</li>';
-          break;
-        default:
-          $rs .= '';
-      }
-    }
-
-    return $rs;
-  }
-
-  /**
-   * ToDo: move to capi.
-   *
-   * @Route("/loadMembersList/", name="load_members_list", methods={"GET"})
-   */
-  public function loadMembersList(Request $request): Response
-  {
-    if ($request->isXmlHttpRequest()) {
-      $studio = $this->studio_manager->findStudioById(trim($request->query->get('studioID')));
-      if (is_null($studio)) {
-        throw $this->createNotFoundException('Unable to find this studio');
-      }
-      $members = $this->studio_manager->findAllStudioUsers($studio);
-      $renderedList = '';
-      if (count($members) > 0) {
-        $renderedList = $this->getRenderedAMembersForAjax($members, StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($this->getUser(), $studio));
-
-        return new JsonResponse($renderedList, Response::HTTP_OK);
-      }
-
-      return new JsonResponse($renderedList, Response::HTTP_NOT_FOUND);
-    }
-
-    throw $this->createAccessDeniedException();
-  }
-
-  protected function getRenderedAMembersForAjax(array $members, bool $forAdmin): string
-  {
-    $rs = '';
-    foreach ($members as $member) {
-      $avatarSrc = $member->getUser()->getAvatar() ?? '/images/default/avatar_default.png';
-      $rs .= '<li class="row no-gutters mb-4">';
-      $rs .= '<div class="col-2 col-sm-1 my-auto">';
-      $rs .= '<a href="/app/user/'.$member->getUser()->getId().'">';
-      $rs .= '<img class="img-fluid round" src="'.$avatarSrc.'" alt="Card image">';
-      $rs .= '</a>';
-      $rs .= '</div>';
-      $rs .= '<div class="col-4 my-auto">';
-      $rs .= '<div class="ps-3">';
-      $rs .= '<a href="/app/user/'.$member->getUser()->getId().'">'.$member->getUser()->getUsername().'</a>';
-      $rs .= '<div class="text-dark">';
-      $count = $this->studio_manager->countStudioUserProjects($member->getStudio(), $member->getUser());
-      $rs .= '<span>'.strval($count).' '.$this->translator->trans('projects', [], 'catroweb').'</span>';
-      $rs .= '</div>';
-      $rs .= '</div>';
-      $rs .= '</div>';
-      $rs .= '<div class="col-6 text-end my-auto admin-options">';
-      if ($forAdmin && StudioUser::ROLE_MEMBER === $member->getRole()) {
-        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).promoteToAdmin($(this),'."'".$member->getUser()->getId()."'".')">'.$this->translator->trans('studio.details.promote_user', [], 'catroweb').'</a>';
-        $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).banUser($(this),'."'".$member->getUser()->getId()."'".')" class="" data-bs-toggle="tooltip" title="'.$this->translator->trans('studio.details.remove_user', [], 'catroweb').'">';
-        $rs .= '<i class="ms-2 material-icons text-danger">delete</i>';
-        $rs .= '</a>';
-      }
-      $rs .= '</div>';
-      $rs .= '</li>';
-    }
-
-    return $rs;
-  }
-
-  /**
-   * ToDo: move to capi.
-   *
-   * @Route("/promoteToAdmin/", name="promote_to_admin", methods={"POST"})
-   */
-  public function promoteToAdmin(Request $request): Response
-  {
-    if ($request->isXmlHttpRequest()) {
-      /** @var User|null $logged_in_user */
-      $logged_in_user = $this->getUser();
-
-      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
-      /** @var User|null $user */
-      $user = $this->user_manager->findUserBy(['id' => trim($request->request->get('userID'))]);
-      if (is_null($studio) || is_null($user)) {
-        return new JsonResponse(Response::HTTP_NOT_FOUND);
-      }
-      if (is_null($logged_in_user) || !$this->studio_manager->isUserAStudioAdmin($logged_in_user, $studio)) {
-        return new JsonResponse(Response::HTTP_FORBIDDEN);
-      }
-      $studioUser = $this->studio_manager->changeStudioUserRole($logged_in_user, $studio, $user, StudioUser::ROLE_ADMIN);
-      if (is_null($studioUser)) {
-        return new JsonResponse(Response::HTTP_NOT_FOUND);
-      }
-
-      return new JsonResponse(Response::HTTP_OK);
-    }
-
-    throw $this->createAccessDeniedException();
-  }
-
-  /**
-   * ToDo: move to capi.
-   *
-   * @Route("/banUser/", name="ban_user", methods={"POST"})
-   */
-  public function banUser(Request $request): Response
-  {
-    if ($request->isXmlHttpRequest()) {
-      /** @var User|null $logged_in_user */
-      $logged_in_user = $this->getUser();
-      $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
-      /** @var User|null $user */
-      $user = $this->user_manager->findUserBy(['id' => trim($request->request->get('userID'))]);
-      if (is_null($studio) || is_null($this->getUser()) || is_null($user)) {
-        return new JsonResponse(Response::HTTP_NOT_FOUND);
-      }
-      $studioUser = $this->studio_manager->changeStudioUserStatus($logged_in_user, $studio, $user, StudioUser::STATUS_BANNED);
-      if (!is_null($studioUser) && StudioUser::STATUS_BANNED === $studioUser->getStatus()) {
-        return new JsonResponse(Response::HTTP_OK);
-      }
-
-      return new JsonResponse(Response::HTTP_NOT_FOUND);
-    }
-
-    throw $this->createAccessDeniedException();
   }
 }

@@ -2,6 +2,10 @@
   z-index: 6000;  // reason: top-app-bar
 }
 
+.mdc-snackbar { // reason: modal
+  z-index: 7000;
+}
+
 .btn,
 .button {
   overflow: hidden;

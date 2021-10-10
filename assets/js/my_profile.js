@@ -36,7 +36,6 @@ import { ProjectLoader } from './custom/ProjectLoader'
 import { setImageUploadListener } from './custom/ImageUpload'
 import { PasswordVisibilityToggle } from './components/password_visibility_toggle'
 
-require('../styles/custom/login.scss')
 require('../styles/custom/profile.scss')
 
 // eslint-disable-next-line no-new
