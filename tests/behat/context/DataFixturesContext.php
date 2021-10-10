@@ -1294,6 +1294,47 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Given /^there are studio projects:$/
+   */
+  public function thereAreStudioProjects(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      if (array_key_exists('id', $config)) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
+
+      $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      $project = $this->getProgramManager()->findOneByName($config['project']);
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findUserByUsername($config['user']);
+
+      $studio_project = $this->getStudioManager()->addProjectToStudio($user, $studio, $project);
+      $this->getManager()->persist($studio_project);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are studio comments:$/
+   */
+  public function thereAreStudioComments(TableNode $table): void
+  {
+    foreach ($table->getHash() as $config) {
+      if (array_key_exists('id', $config)) {
+        MyUuidGenerator::setNextValue($config['id']);
+      }
+
+      $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findUserByUsername($config['user']);
+
+      $studio_comment = $this->getStudioManager()->addCommentToStudio($user, $studio, $config['comment']);
+      $this->getManager()->persist($studio_comment);
+    }
+    $this->getManager()->flush();
+  }
+
+  /**
    * @Given /^there are achievements:$/
    */
   public function thereAreAchievements(TableNode $table): void

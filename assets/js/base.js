@@ -4,6 +4,9 @@ import './layout/top_bar'
 import './layout/footer'
 import './layout/sidebar'
 
+// Start the stimulus app
+import './bootstrap'
+
 require('../styles/base.scss')
 
 $(() => {
