@@ -776,10 +776,12 @@ studio:
     promote_user: 'promosikan ke admin'
     promote_failed: 'Gagal mempromosikan pengguna ini ke admin'
     ban_user_failed: 'Gagal mencekal pengguna dari studio!'
-    general_settings: 'Pengaturan Umum'
-    studio_name: 'Nama Studio'
-    studio_desc: 'Keterangan'
-    private_studio: 'Studio Pribadi'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'Keterangan'
+      toggle_allow_comments: 'Komentar'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Ukuran: %size%'

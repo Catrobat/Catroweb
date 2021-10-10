@@ -776,10 +776,12 @@ studio:
     promote_user: 'ترقية إلى admin'
     promote_failed: 'فشل في ترقية هذا المستخدم إلى مسؤول'
     ban_user_failed: 'فشل في منع المستخدم من الاستوديو!'
-    general_settings: 'الاعدادات العامة'
-    studio_name: 'اسم الاستوديو'
-    studio_desc: 'الوصف'
-    private_studio: 'استوديو خاص'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'الوصف'
+      toggle_allow_comments: 'التعليقات'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'الحجم:%size%'

@@ -782,10 +782,12 @@ studio:
     promote_user: 'অ্যাডমিনকে প্রচার করুন'
     promote_failed: 'এই ব্যবহারকারীকে প্রশাসক হিসেবে প্রচার করতে ব্যর্থ হয়েছে'
     ban_user_failed: 'স্টুডিও থেকে ব্যবহারকারীকে নিষিদ্ধ করতে ব্যর্থ!'
-    general_settings: 'সাধারণ সেটিংস'
-    studio_name: 'স্টুডিও নাম'
-    studio_desc: 'বর্ণনা'
-    private_studio: 'প্রাইভেট স্টুডিও'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'বর্ণনা'
+      toggle_allow_comments: 'মন্তব্যসমূহ'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'আকার: %size%'

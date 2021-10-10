@@ -1,7 +1,32 @@
+@use "~@material/floating-label/mdc-floating-label";
+@use "~@material/line-ripple/mdc-line-ripple";
+@use "~@material/notched-outline/mdc-notched-outline";
+@use "~@material/textfield";
+
 @import "../base/variables";
+
+@include textfield.core-styles ();
+
+// Prevent chrome autofill background color
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active{
+  -webkit-box-shadow: 0 0 0 30px #fff inset !important;
+}
 
 // Overwrite material Text Field
 
-.mdc-text-field--filled:not(.mdc-text-field--disabled) {
+.mdc-text-field {
+  width: 100%;
+}
+
+.mdc-text-field--filled:not(.mdc-text-field--disabled),
+.mdc-text-field--focused:not(.mdc-text-field--disabled) {
   background-color: $body-bg !important;
+}
+
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label,
+.mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
+  color: var(--mdc-theme-primary) !important;
 }

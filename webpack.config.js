@@ -105,7 +105,6 @@ Encore
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
-  .addStyleEntry('login_styles', './assets/styles/custom/login.scss')
 
   // Themes
   .addStyleEntry('pocketcode', './assets/styles/themes/pocketcode.scss')
@@ -118,9 +117,8 @@ Encore
   .addStyleEntry('pocketgalaxy', './assets/styles/themes/pocketgalaxy.scss')
   .addStyleEntry('mindstorms', './assets/styles/themes/mindstorms.scss')
 
-// ToDo:
-// enables the Symfony UX Stimulus bridge (used in assets/bootstrap.js)
-// .enableStimulusBridge('./assets/controllers.json')
+  // enables the Symfony UX Stimulus bridge (used in assets/js/bootstrap.js)
+  .enableStimulusBridge('./assets/js/controllers.json')
 
   /*
    * FEATURE CONFIG

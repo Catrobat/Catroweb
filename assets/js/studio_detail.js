@@ -1,5 +1,4 @@
-import $ from 'jquery'
-// import { showSnackbar } from './components/snackbar'
+// import $ from 'jquery'
 import './components/tab_bar'
 import './components/fullscreen_list_modal'
 import './components/switch'
@@ -8,17 +7,9 @@ import './components/text_field'
 
 require('../styles/components/project_list.scss')
 require('../styles/components/studio_admin_settings.scss')
+require('../styles/components/studio_members_list.scss')
+require('../styles/components/studio_activity_list.scss')
 require('../styles/custom/studio.scss')
-require('../styles/custom/profile.scss')
-
-/** EventListener **/
-$('.studio-detail__header__details__button--member').on('click', () => {
-  loadMembers()
-})
-
-$('.studio-detail__header__details__button--activities').on('click', () => {
-  loadActivites()
-})
 
 // $('.studio-detail__header__details__button--upload-image').on('click', () => {
 //   uploadCoverImage()
@@ -180,79 +171,4 @@ $('.studio-detail__header__details__button--activities').on('click', () => {
 //     })
 //   }
 // }
-
-function loadActivites () {
-  $('#studioDetailActivityList').html('')
-  $.ajax({
-    type: 'GET',
-    url: '../loadActivitesList/',
-    data: { studioID: $('#studio-id').val() },
-    success: function (data, status) {
-      if (status === 'success') {
-        $('#studioDetailActivityList').html(data)
-      }
-    },
-    fail: function () {
-      $('#studioDetailActivityList').html('<h1>Failed to load activites</h1>')
-    }
-  })
-}
-
-function loadMembers () {
-  $('#studioDetailMembersList').html('')
-  $.get({
-    type: 'GET',
-    url: '../loadMembersList/',
-    data: { studioID: $('.js-studio-detail').data('studio-id') },
-    success: function (data, status) {
-      if (status === 'success') {
-        $('#studioDetailMembersList').html(data)
-      }
-    },
-    fail: function () {
-      $('#studioDetailMembersList').html('<h3>Failed to load members list</h3>') // ToDo ltm!
-    }
-  })
-}
-
-// function promoteToAdmin (element, userID) {
-//   const promoteError = $('#promote-failed-error').val()
-//   $.ajax({
-//     type: 'POST',
-//     url: '../promoteToAdmin/',
-//     data: {
-//       userID: userID,
-//       studioID: $('#studio-id').val()
-//     },
-//     success: function (data) {
-//       if (data === 200) {
-//         element.parents('.admin-options').hide()
-//       }
-//     },
-//     fail: function () {
-//       // eslint-disable-next-line no-undef
-//       showSnackbar('#share-snackbar', promoteError)
-//     }
-//   })
-// }
-//
-// function banUser (element, userID) {
-//   const banError = $('#ban-failed-error').val()
-//   $.ajax({
-//     type: 'POST',
-//     url: '../banUser/',
-//     data: {
-//       userID: userID,
-//       studioID: $('#studio-id').val()
-//     },
-//     success: function (data) {
-//       if (data === 200) {
-//         element.parents('li').hide()
-//       }
-//     },
-//     fail: function () {
-//       // eslint-disable-next-line no-undef
-//       showSnackbar('#share-snackbar', banError)
-//     }
-//   })
 // }

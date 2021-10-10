@@ -733,7 +733,7 @@ extensions:
   title: 'پسوند‌ها'
   extension:
     arduino:
-      title: Arduino
+      title: آردوینو
     drone:
       title: کوادکوپتر
     phiro:
@@ -776,10 +776,12 @@ studio:
     promote_user: 'ترویج به مدیر'
     promote_failed: 'موفق به ترویج این کاربر به مدیر نشد'
     ban_user_failed: 'موفق به ممنوعیت کاربر از استودیو!'
-    general_settings: 'تنظیمات عمومی'
-    studio_name: 'نام استودیو'
-    studio_desc: 'توضیح'
-    private_studio: 'Private Studio'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'توضیح'
+      toggle_allow_comments: 'نظرات'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Size: %size%'

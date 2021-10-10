@@ -12,7 +12,7 @@ Feature: As studio admin I must be able to configure a studio
     And there are studio users:
       | id | user        | studio_id | role   |
       | 1  | StudioAdmin | 1         | admin  |
-      | 1  | Catrobat    | 1         | member |
+      | 2  | Catrobat    | 1         | member |
 
   Scenario: If I am not logged in I must not see the button to open the settings modal
     Given I am on "/app/studio/1"
@@ -82,16 +82,46 @@ Feature: As studio admin I must be able to configure a studio
     Then the element "#studio-settings__close-button" should not be visible
     And I should see "CatrobatStudio01"
 
-  Scenario: As Studio admin I can enable and disable comments (ToDo)
+  Scenario: As Studio admin I can enable and disable comments
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
-    And the element "#studio-settings__submit-button" should not be visible
+    And I click "#comments-tab"
+    And I wait for the page to be loaded
+    Then I should see "This studio has no comments yet"
     When I click "#top-app-bar__btn-settings"
+    And I wait for the page to be loaded
+    And I click "#studio-setting__switch-enable-comments"
+    And I click "#studio-settings__submit-button"
+    And I wait for the page to be loaded
+    And I click "#comments-tab"
+    And I wait for the page to be loaded
+    Then I should not see "This studio has no comments yet"
+    Then I should see "Comments have been disabled for this studio"
+    When I click "#studio-setting__switch-enable-comments"
+    And I click "#studio-settings__submit-button"
+    And I wait for the page to be loaded
+    And I click "#comments-tab"
+    And I wait for the page to be loaded
+    Then I should see "This studio has no comments yet"
+    Then I should not see "Comments have been disabled for this studio"
 
-  Scenario: As Studio admin I can toggle the privacy of a studio (ToDo)
+  Scenario: As Studio admin I can toggle the privacy of a studio
     Given I log in as "StudioAdmin"
     And I am on "/app/studio/1"
     And I wait for the page to be loaded
-    And the element "#studio-settings__submit-button" should not be visible
+    Then I should see "public"
     When I click "#top-app-bar__btn-settings"
+    And I wait for the page to be loaded
+    And I click "#studio-setting__switch-studio-privacy"
+    And I click "#studio-settings__submit-button"
+    And I wait for the page to be loaded
+    Then I should not see "public"
+    Then I should see "private"
+    When I click "#top-app-bar__btn-settings"
+    And I wait for the page to be loaded
+    And I click "#studio-setting__switch-studio-privacy"
+    And I click "#studio-settings__submit-button"
+    And I wait for the page to be loaded
+    Then I should see "public"
+    Then I should not see "private"

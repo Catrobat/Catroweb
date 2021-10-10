@@ -4,12 +4,8 @@ namespace App\Repository\Studios;
 
 use App\Entity\Studio;
 use App\Entity\StudioActivity;
-use App\Entity\StudioProgram;
-use App\Entity\StudioUser;
-use App\Entity\UserComment;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
 class StudioActivityRepository extends ServiceEntityRepository
@@ -43,10 +39,7 @@ class StudioActivityRepository extends ServiceEntityRepository
   {
     $qb = $this->getEntityManager()->createQueryBuilder();
 
-    return $qb->addselect('p,u,c')->from(StudioActivity::class, 'a')
-      ->leftJoin(StudioProgram::class, 'p', Join::WITH, $qb->expr()->eq('p.activity', 'a.id')->__toString())
-      ->leftJoin(StudioUser::class, 'u', Join::WITH, $qb->expr()->eq('u.activity', 'a.id')->__toString())
-      ->leftJoin(UserComment::class, 'c', Join::WITH, $qb->expr()->eq('c.activity', 'a.id')->__toString())
+    return $qb->addselect('a')->from(StudioActivity::class, 'a')
       ->where($qb->expr()->eq('a.studio', "'".$studio->getId()."'"))
       ->orderBy('a.created_on', Criteria::DESC)
       ->getQuery()

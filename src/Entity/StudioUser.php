@@ -173,4 +173,14 @@ class StudioUser
 
     return $this;
   }
+
+  public function isAdmin(): bool
+  {
+    return StudioUser::ROLE_ADMIN === $this->getRole();
+  }
+
+  public function isMember(): bool
+  {
+    return StudioUser::ROLE_MEMBER === $this->getRole();
+  }
 }

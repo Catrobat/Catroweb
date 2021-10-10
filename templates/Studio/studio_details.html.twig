@@ -13,7 +13,6 @@
 
 {% include 'Studio/studio_details_header.html.twig' %}
 
-{% include 'Studio/studio_details_tabs.html.twig' %}
 <div id="tabContent" class="tab-content">
   {% include 'Studio/studio_details_project_list.html.twig' %}
   {% include 'Studio/studio_details_comment_list.html.twig' %}
@@ -24,14 +23,12 @@
     <input id="showLess-text" type="hidden" value="{{ 'studio.details.showLess' |trans({}, 'catroweb') }}">
     <input id="project-remove-success" type="hidden" value="{{ 'studio.details.remove_project_success'|trans({}, 'catroweb') }}">
     <input id="project-remove-error" type="hidden" value="{{ 'studio.details.remove_project_error'|trans({}, 'catroweb') }}">
-    <input id="comment-remove-error" type="hidden" value="{{ 'studio.details.remove_comment_error'|trans({}, 'catroweb') }}">
-    <input id="comment-error" type="hidden" value="{{ 'studio.details.comment_error'|trans({}, 'catroweb') }}">
+    <input id="comment-remove-error" type="hidden" value="{{ 'studio.details.remove_post_error'|trans({}, 'catroweb') }}">
+    <input id="comment-error" type="hidden" value="{{ 'studio.details.post_error'|trans({}, 'catroweb') }}">
     <input id="update-cover-error" type="hidden" value="{{ 'studio.details.updateCoverError'|trans({}, 'catroweb') }}">
-    <input id="promote-failed-error" type="hidden" value="{{ 'studio.details.promote_failed'|trans({}, 'catroweb') }}">
-    <input id="ban-failed-error" type="hidden" value="{{ 'studio.details.ban_user_failed'|trans({}, 'catroweb') }}">
     <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
     <div class="js-studio-detail" data-studio-id="{{ studio.id }}"></div>
 {% endblock %}
-{% block js %}
+{% block javascript %}
     {{ encore_entry_script_tags('studio_detail') }}
 {% endblock %}

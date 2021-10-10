@@ -780,10 +780,12 @@ studio:
     promote_user: 'நிர்வாகியாக பதவி உயர்வு'
     promote_failed: 'இந்த பயனரை நிர்வாகியாக விளம்பரப்படுத்த முடியவில்லை'
     ban_user_failed: 'ஸ்டுடியோவிலிருந்து பயனரைத் தடைசெய்ய முடியவில்லை!'
-    general_settings: 'பொது அமைப்புகள்'
-    studio_name: 'ஸ்டுடியோ பெயர்'
-    studio_desc: 'விளக்கம்'
-    private_studio: 'தனியார் ஸ்டுடியோ'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'விளக்கம்'
+      toggle_allow_comments: 'பின்கருத்துக்கள்'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'அளவு: %size%'

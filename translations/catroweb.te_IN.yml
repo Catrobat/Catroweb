@@ -779,10 +779,12 @@ studio:
     promote_user: 'అడ్మిన్‌గా ప్రమోట్ చేయండి'
     promote_failed: 'ఈ వినియోగదారుని అడ్మిన్‌గా ప్రచారం చేయడం విఫలమైంది'
     ban_user_failed: 'స్టూడియో నుండి వినియోగదారుని నిషేధించడం విఫలమైంది!'
-    general_settings: 'సాధారణ సెట్టింగులు'
-    studio_name: 'స్టూడియో పేరు'
-    studio_desc: 'వివరణ'
-    private_studio: 'ప్రైవేట్ స్టూడియో'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'వివరణ'
+      toggle_allow_comments: 'వ్యాఖ్యలు'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'పరిమాణం: %size%'

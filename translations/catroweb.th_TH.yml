@@ -781,10 +781,12 @@ studio:
     promote_user: 'เลื่อนขั้นเป็นแอดมิน'
     promote_failed: 'ไม่สามารถเลื่อนระดับผู้ใช้นี้เป็นผู้ดูแลระบบ'
     ban_user_failed: 'ไม่สามารถแบนผู้ใช้จากสตูดิโอ!'
-    general_settings: 'การตั้งค่าทั่วไป'
-    studio_name: 'ชื่อสตูดิโอ'
-    studio_desc: 'คำอธิบาย'
-    private_studio: 'สตูดิโอส่วนตัว'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'คำอธิบาย'
+      toggle_allow_comments: 'ความคิดเห็น'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'ขนาด: %size%'

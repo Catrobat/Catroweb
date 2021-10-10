@@ -1,7 +1,0 @@
-@import "../base/variables";
-
-// Overwrite material Text Area
-
-.mdc-text-field--filled:not(.mdc-text-field--disabled) {
-  background-color: $body-bg !important;
-}

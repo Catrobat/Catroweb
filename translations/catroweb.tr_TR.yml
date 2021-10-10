@@ -774,10 +774,12 @@ studio:
     promote_user: 'Yöneticiye yükselt'
     promote_failed: 'Bu kullanıcı yöneticiliğe yükseltilemedi'
     ban_user_failed: 'Kullanıcı stüdyodan yasaklanamadı!'
-    general_settings: 'Genel Ayarlar'
-    studio_name: 'Stüdyo Adı'
-    studio_desc: 'Açıklama'
-    private_studio: 'Gizli Stüdyo'
+    admin_settings:
+      title: 'General Settings'
+      studio_name: 'Studio Name'
+      studio_description: 'Açıklama'
+      toggle_allow_comments: 'Yorumlar'
+      toggle_privacy: 'Public'
 media_library:
   file:
     size: 'Boyutu: %size%'
