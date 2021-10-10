@@ -1,2 +1,2 @@
 @web @studio
-Feature: ToDo
+Feature: A studio has a comment section

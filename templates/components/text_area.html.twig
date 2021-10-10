@@ -16,18 +16,19 @@
         'value': 'pre-filled value',
         'name': 'name-1',
         'max_length': '1000',
-        'rows': '4'
+        'rows': '4',
+        'mb': 'mb-4'
       }
   }%}
 #}
 <label id="{{ text_area.id }}"
-       class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mb-3{% if text_area.max_length|default() %} mdc-text-field--with-internal-counter{% endif %}">
+       class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea {{ text_area.mb|default("mb-4") }}{% if text_area.max_length|default() %} mdc-text-field--with-internal-counter{% endif %}">
   <span class="mdc-text-field__ripple"></span>
   <span class="mdc-floating-label" id="{{ text_area.id }}__label">{{ text_area.label }}</span>
   <span class="mdc-text-field__resizer">
     <textarea name="{{ text_area.name }}" class="mdc-text-field__input"
               aria-labelledby="{{ text_area.id }}__label" rows="{{ text_area.rows|default('4') }}" cols="400"
-              {% if text_area.max_length|default() %}maxlength="{{ text_area.max_length }}"{% endif %}>{{ text_area.value }}</textarea>
+              {% if text_area.max_length|default() %}maxlength="{{ text_area.max_length }}"{% endif %}>{{ text_area.value|default() }}</textarea>
     {% if text_area.max_length|default() %}
       <span class="mdc-text-field-character-counter">0 / {{ text_area.max_length }}</span>
     {% endif %}

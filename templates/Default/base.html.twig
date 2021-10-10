@@ -18,6 +18,9 @@
     {{ encore_entry_link_tags(themeAssets()) }}
   {% endblock stylesheets %}
 
+  {{ encore_entry_script_tags('base') }}
+  {% block javascript %}{% endblock %}
+
   {% block head %}{% endblock %}
 </head>
 
@@ -54,8 +57,6 @@
   <script> let configGA = { 'UaId': 'UA-42270417-5' } </script>
   <script async src="{{ asset('js/analytics.js') }}"></script>
 {% endif %}
-{{ encore_entry_script_tags('base') }}
-{% block js %}{% endblock %}
 
 </body>
 </html>
