@@ -746,9 +746,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'جنرال لواء'
-    projects: 'المشاريع'
-    comments: 'التعليقات'
     public: 'عامة'
     private: 'نشر'
     join: 'انضم'
@@ -759,23 +756,30 @@ studio:
     remove_project_error: 'فشل إزالة المشروع من الاستوديو!'
     remove_project_success: 'تمت إزالة المشروع بنجاح من الاستوديو!'
     no_projects: 'لا يحتوي الاستوديو على أي مشاريع حتى الآن'
-    no_comments: 'الاستوديو لا يحتوي على أي تعليقات حتى الآن'
-    type_something: 'اطبع شيئا'
-    send_comment: 'يرسل'
-    comment_error: 'حدث خطأ ما أثناء نشر تعليقك!'
-    remove_comment_error: 'حدث خطأ ما أثناء إزالة التعليق!'
-    replies: 'الردود'
     updateCoverError: 'حدث خطأ ما أثناء تحديث غلاف الاستوديو!'
-    created_studio: 'أنشأ الاستوديو'
-    activity: 'نشاط'
-    activity_add_comment: 'ترك تعليق'
-    activity_add_project: "\nتم إضافة مشروع جديد%project% إلى الاستوديو"
-    activity_add_user: 'أضاف مستخدم جديد%user% إلى الاستوديو'
-    members: 'أعضاء الاستوديو'
-    remove_user: 'إزالة من الاستوديو'
-    promote_user: 'ترقية إلى admin'
-    promote_failed: 'فشل في ترقية هذا المستخدم إلى مسؤول'
-    ban_user_failed: 'فشل في منع المستخدم من الاستوديو!'
+    projects:
+      title: 'projects'
+    comments:
+      title: 'التعليقات'
+      type_something: 'Type something'
+      replies: 'replies'
+      send: 'send'
+      no_comments: 'This studio has no comments yet.'
+      disabled_comments: 'Comments have been disabled for this studio.'
+      post_error: 'Something went wrong while posting your comment. Try again later.'
+      delete_error: 'Something went wrong while removing the comment. Try again later.'
+    activity_list:
+      title: 'Activities'
+      join_studio: '%user% joined the studio.'
+      add_project: '%user% left a comment.'
+      add_comment: '%user% added a project.'
+    members_list:
+      title: 'Studio members'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: 'Promote member to admin'
+      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      ban_member: 'Ban member from studio'
+      ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
