@@ -760,9 +760,9 @@ studio:
       title: 'projects'
     comments:
       title: 'تبصرے'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
+      type_something: 'کچھ لکھیں'
+      replies: 'جوابات'
+      send: 'بھیجیں'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
       post_error: 'Something went wrong while posting your comment. Try again later.'
@@ -773,11 +773,11 @@ studio:
       add_project: '%user% left a comment.'
       add_comment: '%user% added a project.'
     members_list:
-      title: 'Studio members'
+      title: 'سٹوڈیو ارکان'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
       promote_member: 'Promote member to admin'
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
+      ban_member: 'سٹوڈیو سے رکن پر پابندی لگائیں'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
