@@ -711,7 +711,7 @@ achievements:
         title: "Coding Jam '21"
         description: "Uczestnik kodowania Jam 2021"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Tag |]1,Inf] Tagi'
   tag:
     game:
       title: Gra
@@ -730,7 +730,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: 'Rozszerzenia'
+  title: '{0} |{1} Rozszerzenie |]1,Inf] Rozszerzenia'
   extension:
     arduino:
       title: Arduino
@@ -758,28 +758,28 @@ studio:
     no_projects: 'Studio nie zawiera jeszcze żadnych projektów'
     updateCoverError: 'Coś poszło nie tak podczas aktualizacji okładki studia!'
     projects:
-      title: 'projects'
+      title: 'projekty'
     comments:
       title: 'Komentarze'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Wpisz coś'
+      replies: 'odpowiedzi'
+      send: 'wyślij'
+      no_comments: 'To studio nie ma jeszcze komentarzy.'
+      disabled_comments: 'Komentarze zostały wyłączone dla tego studia.'
+      post_error: 'Coś poszło nie tak podczas wysyłania komentarza. Spróbuj ponownie później.'
+      delete_error: 'Coś poszło nie tak podczas usuwania komentarza. Spróbuj ponownie później.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Aktywności'
+      join_studio: '%user% dołączył do studia.'
+      add_project: '%user% zostawił komentarz.'
+      add_comment: '%user% dodał projekt.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Członkowie Studia'
+      project_count: '{0} Brak projektów studia |{1} 1 projekt studia |]1,Inf] %count% projektów studia'
+      promote_member: 'Promuj użytkownika na administratora'
+      promotion_failed: 'Coś poszło nie tak podczas rekrutowania tego użytkownika. Spróbuj ponownie później.'
+      ban_member: 'Zabanuj członka studia'
+      ban_failed: 'Coś poszło nie tak podczas banowania tego użytkownika. Spróbuj ponownie później.'
     admin_settings:
       title: 'Ustawienia ogólne'
       studio_name: 'Nazwa Studia'

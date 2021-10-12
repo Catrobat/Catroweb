@@ -1,13 +1,13 @@
 ---
 #homepage translation
-title: Catrobat community
+title: Catrobat cəmiyyəti
 localLanguage: İngiliscə
 username: İstifadəçi adı
 password: Şifrə
 createNewPassword: Yeni şifrə yarat
 accountSettings: Hesab tənzimləmələri
 email: E-poçt
-aboutPocketCode: Cib Kodu Haqqında
+aboutPocketCode: Pocket Code haqqında
 about: Haqqında
 education: Təhsil
 chat: Söhbət və forumlar
@@ -17,15 +17,15 @@ googlePlay: Google Play
 iosAppStore: iOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Discord söhbəti
 passwordsNoMatch: Şifrələr uyğunlaşmır.
 error: Xəta
 cancel: İmtina
-report: Xəbər ver
+report: Şikayət et
 deleteIt: Bəli, sil!
-reportIt: Bəli, xəbər ver!
+reportIt: Bəli, şikayət et!
 areYouSure: Əminsiniz?
-noWayOfReturn: Hərəkətlərinizi geri qaytarmağın heç bir yolu yoxdur!
+noWayOfReturn: Əməliyyatları geri qaytarmağın heç bir yolu yoxdur!
 download: Endir
 description: Açıqlama
 noDescription: Açıqlama yoxdur.
@@ -39,7 +39,7 @@ imprint: Imprint
 programDetails: Təfsilatlar
 somethingWentWrong: 'Ups, nəsə səhv getdi.'
 pleaseTryAgain: 'Zəhmət olmasa yenidən sınayın!'
-oldVersionError: 'Ən son Cib Kodu versiyasına yeniləyin!'
+oldVersionError: 'Ən son Pocket Code versiyasına yeniləyin!'
 more: 'daha çox'
 less: 'daha az'
 show-more: 'Daha çox göstər'
@@ -93,10 +93,10 @@ programs:
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Hekayələr, oyunlar və daha çoxunu yarat...
     subtitle_embroidery: Köynək, çanta, şalvar və ya ağıllı telefon qutunuzdakı öz formalarını tikin!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: Lego Mindstorms EV3 və NXT robotlarınızla öz layihələrinizi hazırlayın
     download: Tətbiqi endir
-    statistics: Daha Çox Statistika
-  featured: Təklif Edilən
+    statistics: Daha çox statistika
+  featured: Təklif edilən
   example: Nümunələr
   newest: Yeni layihələr
   recommended: Tövsiyə edilən layihələr
@@ -125,7 +125,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongDescription: Layihənin açıqlaması çox uzundur!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: Layihənizi hazırlayanlar çox uzundur!
   most:
     viewed: Ən çox baxılan
     downloaded: Ən çox endirilən
@@ -185,18 +185,18 @@ programs:
   hideTranslation: Tərcüməni gizlət
   translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə %provider% tərcümə etdi'
 remixGraph:
-  title: Remixlər
-  showRemixGraph: 'Remix qrafiki'
+  title: Remikslər
+  showRemixGraph: 'Remiks qrafiki'
   by: 'tərəfindən'
   open: 'Aç'
   showPaths: 'Yolları göstər'
   programNotAvailableErrorTitle: 'Təəssüf edirik...'
   programNotAvailableErrorDescription: 'Bu layihə artıq əlçatan deyil!'
   programNotAvailable: 'Əlçatan deyil'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'Bilinməyən istifadəçi'
 noReply: Bu avto-mesajdır - Zəhmət olmasa bu e-poçta birbaşa cavab verməyin
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Catrobat hesab təsdiqiniz
   message: |
     Hörmətli %username%.
     Hesabı aktivləşdirmək üçün - zəhmət olmasa %confirmationUrl% ünvanını ziyarət edin
@@ -215,7 +215,7 @@ accountConfirmation:
     Catrobat Komandası.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Catrobat şifrəsinin bərpası
   message: |
     Dear %username%.
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
@@ -273,7 +273,7 @@ profile:
   programsOf: Layihələri
   changePicture: Şəkli dəyişdir
   avatar:
-    noImage: No Image!
+    noImage: Təsvir yoxdur!
     pictureTooLarge: Seçdiyiniz şəkil çox böyükdür, zəhmət olmasa 5 MB-dan böyük şəkilləri istifadə etməyin.
     uploadError: Təəssüf edirik, yüklənərkən problem yarandı.
     noSupport: Bu təsvir növü dəstəklənmir, zəhmət olmasa başqasını sınayın.
@@ -281,7 +281,7 @@ profile:
 myprofile:
   editProfile: Profilə düzəliş et
   edit: Düzəliş et
-  done: Hazırdır
+  done: Bitdi
   checkMail: E-poçtunuza bir e-poçt göndərildi. Zəhmət olmasa gələn qutunuzu yoxlayın.
   passwordUpdated: Şifrəniz uğurla yeniləndi.
   avatar: Avatar
@@ -291,8 +291,8 @@ myprofile:
   editPassword: Şifrəyə düzəliş et
   editCountry: Ölkəyə düzəliş et
   editEmail: E-poçta düzəliş et
-  deleteAccount: Hesabı Sil
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccount: Hesabı sil
+  deleteAccountText: Hesabınızı silmək istədiyinizə əminsiniz? Bu, bütün yüklənilən layihələri və rəyləri siləcək!
   editAccountSettings: Hesab tənzimləmələrinə düzəliş et
   notChangeVisibility: Görünmə dəyişdirilə bilmir
   notChangeVisibilityReason: Layihənizin dil versiyası çox yüksəkdir və buna görə də görünən olaraq tənzimlənə bilmir.
