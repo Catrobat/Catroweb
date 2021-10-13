@@ -17,7 +17,7 @@ googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: AppGallery di Huawei
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Chat su Discord
 passwordsNoMatch: Le due password non coincidono.
 error: Errore
 cancel: Annulla
@@ -762,34 +762,34 @@ studio:
     no_projects: 'Studio non contiene ancora nessun progetto'
     updateCoverError: 'Qualcosa è andato storto durante l''aggiornamento della copertina dello studio!'
     projects:
-      title: 'projects'
+      title: 'progetti'
     comments:
       title: 'Commenti'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Scrivi qualcosa'
+      replies: 'risposte'
+      send: 'invia'
+      no_comments: 'Questo studio non ha ancora commenti.'
+      disabled_comments: 'I commenti sono stati disabilitati per questo studio.'
+      post_error: 'Qualcosa è andato storto durante la pubblicazione del tuo commento. Riprova più tardi.'
+      delete_error: 'Qualcosa è andato storto durante la rimozione del commento. Riprova più tardi.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Attività'
+      join_studio: '%user% è entrato nello studio.'
+      add_project: '%user% ha lasciato un commento.'
+      add_comment: '%user% ha aggiunto un progetto.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Membri dello Studio'
+      project_count: '{0} Nessun progetto studio |{1} 1 progetto studio |]1,Inf] %count% progetti studio'
+      promote_member: 'Promuovi membro ad amministratore'
+      promotion_failed: 'Qualcosa è andato storto durante la promozione di questo membro. Riprova più tardi.'
+      ban_member: 'Espelli membro dallo studio'
+      ban_failed: 'Qualcosa è andato storto mentre si espelleva questo membro. Riprova più tardi.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Impostazioni Generali'
+      studio_name: 'Nome Studio'
       studio_description: 'Descrizione'
       toggle_allow_comments: 'Commenti'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Pubblico'
 media_library:
   file:
     size: 'Dimensione: %size%'
