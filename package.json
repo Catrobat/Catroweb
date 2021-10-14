@@ -42,7 +42,7 @@
     "stimulus": "^2.0.0",
     "stylelint": "^13.13.1",
     "stylelint-config-twbs-bootstrap": "^2.2.4",
-    "webpack-notifier": "^1.14.0"
+    "webpack-notifier": "^1.14.1"
   },
   "dependencies": {
     "@material/checkbox": "^13.0.0",
