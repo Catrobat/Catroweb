@@ -1,9 +1,18 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block head %}
+
   {{ encore_entry_link_tags('profile') }}
   {{ encore_entry_link_tags('follower_overview') }}
+
+    <meta property="og:image" content="{{ asset(profile.avatar) }}"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:image:secure_url" content="{{ asset(profile.avatar) }}"/>
+    <meta property="og:title" content="{{ profile.username |escape('html_attr') }}"/>
+    <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}"/>
+
 {% endblock %}
+
 
 {% block body %}
 
@@ -173,6 +182,17 @@
        data-unfollow-question="{{ "follower.unfollowQuestion"|trans({}, "catroweb") }}"
        data-cancel-button="{{ "cancelMessage"|trans({}, "catroweb") }}"
        data-number-of-following="{{ following_list|length }}"
+  ></div>
+
+  <div class="js-user-share"
+       data-theme-display-name="{{ getThemeDisplayName() }}"
+       data-trans-check-out-project="{{ "checkOutProject"|trans({}, "catroweb") }}"
+       data-project-url="{{ url('profile', { id : profile.id }) }}"
+       data-trans-share-success="{{ "share.success"|trans({}, "catroweb") }}"
+       data-trans-share-error="{{ "share.error"|trans({}, "catroweb") }}"
+       data-trans-copy="{{ "copy"|trans({}, "catroweb") }}"
+       data-trans-clipboard-success="{{ "clipboard.success"|trans({}, "catroweb") }}"
+       data-trans-clipboard-fail="{{ "clipboard.fail"|trans({}, "catroweb") }}"
   ></div>
 
 {% endblock %}
