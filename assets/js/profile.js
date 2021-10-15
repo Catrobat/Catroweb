@@ -6,7 +6,6 @@ import './components/tab_bar'
 import { ProjectLoader } from './custom/ProjectLoader'
 import './follower_overview'
 import { shareUser } from './custom/UserShare'
-import { shareProject } from './custom/ProgramShare'
 import $ from 'jquery'
 
 require('../styles/custom/profile.scss')
