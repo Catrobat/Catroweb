@@ -16,10 +16,12 @@ Feature: As a visitor I want to be able to download projects
     Then the element "#url-download-small" should be visible
     And I click "#url-download-small"
     And I wait 150 milliseconds
-    And the element "#share-snackbar" should not be visible
+    And the element "#share-snackbar" should be visible
     And I should not see "Error occurred while downloading the project"
+    And I should see "Download has started..."
 
-  Scenario: If download fails user should see popup and the file should not be downloaded
+  @disabled
+  Scenario: If download fails user should see popup and the file should not be downloaded | not testable because of timing issues
     When project "1" is missing its files
     And project "2" is missing its files
     And I am on "/app/project/1"
