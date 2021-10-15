@@ -78,7 +78,8 @@ Program(
   $project.data('asset-wow-white'),
   $project.data('asset-wow-black'),
   $project.data('trans-reaction'),
-  $project.data('trans-download-error')
+  $project.data('trans-download-error'),
+  $project.data('trans-download-start')
 )
 
 ProgramDescription(
