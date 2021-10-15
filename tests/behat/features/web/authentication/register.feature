@@ -21,7 +21,7 @@ Feature:
     Then I wait for AJAX to finish
     Then I click "#agreeButton"
     And I wait for the page to be loaded
-    Then I should be on "/app/register/check-email"
+    Then I should be on "/app/"
 
   Scenario: Trying to register with different passwords should fail
     Given I am on "/app/register/"
@@ -122,7 +122,7 @@ Feature:
     Then I should see a "#termsModal" element
     When I click "#agreeButton"
     And I wait for the page to be loaded
-    Then I should be on "/app/register/check-email"
+    Then I should be on "/app/"
     When I am on "/app/logout"
     And I wait for the page to be loaded
     Then I should be logged out
