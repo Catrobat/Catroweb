@@ -56,7 +56,7 @@ LikeNotifications: 'प्रतिक्रियाएं'
 CommentNotifications: 'टिप्पणियाँ'
 RemixNotifications: 'रीमिक्स'
 wellDone: "बहुत ख़ूब!"
-done: "समाप्त!"
+done: "हो गया!"
 notificationsReadMessage: "ऐसा लगता है कि आपके पास कोई सूचना नहीं है।"
 confirmMessage: "हाँ, इसे हटा दें"
 cancelMessage: "रद्द करें"
@@ -119,76 +119,76 @@ programs:
   reportCommentConfirmation: क्या आप वाकई इस टिप्पणी को रिपोर्ट करना चाहते हैं?
   deleteCommentConfirmation: क्या आप वाकई इस टिप्पणी को मिटाना चाहते हैं?
   deleteAccountConfirmation: |+
-    खाता विलोपन?
-    क्या आप वाकई अपना खाता हटाना चाहते हैं? यह आपके अपलोड किए गए प्रोजेक्ट और टिप्पणियों को भी हटा देगा!
-    अपने कार्यों को पुनर्स्थापित करने का कोई तरीका नहीं है!
+    अकाउंट हटाए?
+    क्या आप वाकई अपना अकाउंट हटाना चाहते हैं? इससे आपके अपलोड किए गए प्रोजेक्ट और टिप्पणियां भी हट जाएंगी!
+    इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
-    रद्द करना
-  tooLongDescription: परियोजना का वर्णन बहुत लंबा है!
-  tooLongCredits: प्रोजेक्ट नोट और क्रेडिट बहुत लंबे हैं!
+    रद्द करें
+  tooLongDescription: प्रोजेक्ट का वर्णन बहुत लंबा है!
+  tooLongCredits: प्रोजेक्ट का श्रेय बहुत लंबा हैं!
   most:
-    viewed: सबसे ज्यादा देखा गया
-    downloaded: सबसे ज्यादा डाउनलोड किया हुआ
-  random: यादृच्छिक परियोजनाओं
-  related: संबंधित परियोजनाएं
+    viewed: सबसे ज्यादा देखे गए
+    downloaded: सबसे ज्यादा डाउनलोड किए गए
+  random: कुछ अन्य प्रोजेक्ट
+  related: संबंधित प्रोजेक्ट
   downloads: '%downloads% डाउनलोड'
-  sample: उदाहरण परियोजनाओं
+  sample: उदाहरण की परियोजनाएं
   views: '%views% बार देखा गया'
   likes:
     likersTitle: "उस प्रोजेक्ट पर प्रतिक्रिया देने वाले लोग"
     all: "सब"
   remixes: '{0}0 रीमिक्स | {1}1 रीमिक्स |]1, Inf]%remixes% रीमिक्स'
   newRemixesNotificationTitle: '|{1} "%programName%" में 1 नया रीमिक्स है: |] 1, Inf] "%programName%" में %remixes% नए रीमिक्स हैं:'
-  submitted: प्रस्तुत परियोजनाएँ
+  submitted: प्रस्तुत किए गए प्रोजेक्ट
   uploaded: अपलोड किए गए प्रोजेक्ट
-  reportAsInappropriate: अनुचित विवरण दे
-  reportProgram: रिपोर्ट परियोजना
+  reportAsInappropriate: अनुचित रिपोर्ट करें
+  reportProgram: प्रोजेक्ट रिपोर्ट करें
   languageVersion: 'कैट्रोबैट भाषा संस्करण: %languageVersion%'
-  reportLoginText: कृपया इस परियोजना की रिपोर्ट करने के लिए %login%।
-  reportDialogHeader: आप इस परियोजना की रिपोर्ट क्यों करना चाहते हैं?
-  reportDialogReason: एक कारण दर्ज करें
+  reportLoginText: इस प्रोजेक्ट को रिपोर्ट करने के लिए कृपया %login% करें।
+  reportDialogHeader: आप इस प्रोजेक्ट को रिपोर्ट क्यों करना चाहते हैं?
+  reportDialogReason: कोई कारण डालें
   reportRadioButtonInappropriate: यह अनुचित है
-  reportRadioButtonCopyright: सत्त्वाधिकार उल्लंघन
+  reportRadioButtonCopyright: कॉपीराइट का उल्लंघन
   reportRadioButtonSpam: यह स्पैम है
   reportRadioButtonDislike: मुझे यह पसंद नहीं है
-  reportOwnProgram: आप अपनी स्वयं की परियोजना को चिह्नित नहीं कर सकते।
-  reportAlready: आपने पहले ही इस प्रोजेक्ट को झंडी दिखा दी है।
-  reportDone: आपने इस परियोजना की सूचना दी!
+  reportOwnProgram: आप खुद के प्रोजेक्ट को चिह्नित नहीं कर सकते।
+  reportAlready: आपने पहले ही इस प्रोजेक्ट को चिन्हित कर दिया है।
+  reportDone: आपने इस प्रोजेक्ट को रिपोर्ट कर दिया!
   updateAppHeader: एप्लिकेशन को अपडेट करें
-  updateAppText: इस परियोजना को डाउनलोड करने में सक्षम होने के लिए कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें।
-  btnClosePopup: ठीक
-  checkout_this_program: इस Catrobat प्रोजेक्ट को चेकआउट करें
-  show_more: और दिखाए
+  updateAppText: इस प्रोजेक्ट को डाउनलोड करने के लिए कृपया अपने ऐप को सबसे नए वर्जन में अपडेट करें।
+  btnClosePopup: ठीक है
+  checkout_this_program: इस कैट्रोबैट प्रोजेक्ट को देखें
+  show_more: और दिखाएं
   comments: टिप्पणियाँ
-  send: भेजे
-  delete: मिटायें
-  report: विवरण दे
+  send: भेजें
+  delete: हटा दें
+  report: रिपोर्ट
   report_popup: टिप्पणी को सफलतापूर्वक रिपोर्ट किया गया
-  report_popup_header: की सूचना दी
-  deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया गया था।
-  deleted_popup_header: हटाए गए
-  noAdminRights: आपके पास कोई व्यवस्थापक अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
-  editDescription: परियोजना का विवरण संपादित करें
+  report_popup_header: रिपोर्ट कर दिया
+  deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया था।
+  deleted_popup_header: हटा दिया
+  noAdminRights: आपके पास व्यवस्थापक का अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
+  editDescription: प्रोजेक्ट का वर्णन बदलें
   saveDescription: सहेजें
-  editCredits: प्रोजेक्ट नोट्स और क्रेडिट संपादित करें
+  editCredits: प्रोजेक्ट के श्रेय में बदलाव करें
   saveCredits: सहेजें
-  addComment: टिप्पणी लिखें
-  thumbsUp: थम्स अप!
-  smile: मुस्कुराओ!
-  love: प्रेम!
+  addComment: टिप्पणी दें
+  thumbsUp: पसंद करें!
+  smile: मुस्कुराए!
+  love: प्यार दें!
   wow: वाह!
-  linkTitle: संपर्क
+  linkTitle: लिंक
   link: क्लिपबोर्ड पर प्रोजेक्ट लिंक कॉपी करें
   reactionsText: प्रतिक्रियाएं
-  downloadErrorText: 'प्रोजेक्ट डाउनलोड करते समय त्रुटि आई। बाद में पुन: प्रयास करें।'
+  downloadErrorText: प्रोजेक्ट डाउनलोड करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।
   showTranslation: अनुवाद दिखाएं
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
 remixGraph:
   title: रीमिक्स
-  showRemixGraph: 'रीमिक्स ग्राफ दिखाएं'
-  by: 'द्वारा द्वारा'
-  open: 'खुला हुआ'
+  showRemixGraph: 'रीमिक्स ग्राफ'
+  by: 'द्वारा'
+  open: 'खोलें'
   showPaths: 'पथ दिखाएं'
   programNotAvailableErrorTitle: 'क्षमा करें...'
   programNotAvailableErrorDescription: 'परियोजना कोई और उपलब्ध नहीं है!'
@@ -655,11 +655,11 @@ share:
   success: 'सफल साझा करें'
 copy: 'लिंक की प्रतिलिपि करें'
 checkOutProject: 'इस परियोजना की जाँच करें'
-community: 'Catrobat समुदाय'
+community: 'कैट्रोबैट समुदाय'
 back_to_app: 'समुदाय से बाहर निकलें'
 category:
   recent: नए प्रोजेक्ट
-  random: यादृच्छिक परियोजनाओं
+  random: कुछ अन्य प्रोजेक्ट
   most_viewed: सबसे ज्यादा देखा गया
   most_downloaded: सबसे ज्यादा डाउनलोड किया हुआ
   example: उदाहरण
