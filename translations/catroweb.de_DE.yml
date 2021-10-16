@@ -181,6 +181,7 @@ programs:
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
   downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
+  downloadStartText: Download has started...
   showTranslation: Übersetzung anzeigen
   hideTranslation: Übersetzung ausblenden
   translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%

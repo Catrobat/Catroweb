@@ -181,6 +181,7 @@ programs:
   link: نسخ رابط المشروع إلى الحافظة
   reactionsText: ردود الفعل
   downloadErrorText: حدث خطأ أثناء تحميل المشروع. الرجاء المحاولة مرة أخرى لاحقاً.
+  downloadStartText: Download has started...
   showTranslation: إظهار الترجمة
   hideTranslation: إخفاء الترجمة
   translatedByLine: تمت ترجمته بواسطة%provider% من%sourceLanguage% إلى %targetLanguage%

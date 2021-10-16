@@ -181,6 +181,7 @@ programs:
   link: Kopier prosjektlenke til utklippstavlen
   reactionsText: Reaksjoner
   downloadErrorText: Det oppstod en feil mens laste ned prosjektet. Prøv igjen senere.
+  downloadStartText: Download has started...
   showTranslation: Vis oversettelse
   hideTranslation: Skjul oversettelse
   translatedByLine: Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%

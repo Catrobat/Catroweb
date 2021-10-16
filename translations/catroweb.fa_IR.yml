@@ -181,6 +181,7 @@ programs:
   link: پیوند پروژه را به کلیپ بورد کپی کنید
   reactionsText: واکنش
   downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
+  downloadStartText: Download has started...
   showTranslation: مشاهده ترجمه
   hideTranslation: پنهان‌کردن ترجمه
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
@@ -737,7 +738,7 @@ extensions:
     drone:
       title: کوادکوپتر
     phiro:
-      title: Phiro
+      title: فیرو
     raspberry_pi:
       title: Raspberry PI
     embroidery:

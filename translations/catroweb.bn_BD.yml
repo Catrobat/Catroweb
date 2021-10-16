@@ -181,6 +181,7 @@ programs:
   link: ক্লিপবোর্ডে প্রকল্পের লিঙ্কটি অনুলিপি করুন
   reactionsText: প্রতিক্রিয়া
   downloadErrorText: প্রকল্পটি ডাউনলোড করার সময় ত্রুটি ঘটেছে। পরে আবার চেষ্টা করুন.
+  downloadStartText: Download has started...
   showTranslation: অনুবাদ দেখান
   hideTranslation: অনুবাদ লুকান
   translatedByLine: '%provider% %sourceLanguage% থেকে %targetLanguage% দ্বারা অনুবাদিত'

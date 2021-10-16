@@ -181,6 +181,7 @@ programs:
   link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
   downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
+  downloadStartText: Download has started...
   showTranslation: Pokaż tłumaczenie
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%

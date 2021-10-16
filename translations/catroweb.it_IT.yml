@@ -181,6 +181,7 @@ programs:
   link: Copia negli appunti il link al progetto
   reactionsText: Mi piace
   downloadErrorText: Si è verificato un errore durante il download del progetto. Riprova più tardi.
+  downloadStartText: Download has started...
   showTranslation: Mostra la traduzione
   hideTranslation: Nascondi la traduzione
   translatedByLine: Tradotto da %provider% da %sourceLanguage% a %targetLanguage%

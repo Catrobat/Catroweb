@@ -181,6 +181,7 @@ programs:
   link: کلپ بورڈ پر پراجیکٹ لنک کاپی کریں
   reactionsText: ردعمل
   downloadErrorText: منصوبے کو ڈاؤن لوڈ کرتے ہوئے خرابی ہوئی. براہ کرم کچھ دیر بعد کوشش کریں.
+  downloadStartText: Download has started...
   showTranslation: ترجمہ دکھائیں
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'

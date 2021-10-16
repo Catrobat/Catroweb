@@ -181,6 +181,7 @@ programs:
   link: Copiar link do projeto para a área de transferência
   reactionsText: Curtidas
   downloadErrorText: Ocorreu um erro ao baixar o projeto. Por favor, tente novamente mais tarde.
+  downloadStartText: Download has started...
   showTranslation: Mostrar tradução
   hideTranslation: Ocultar tradução
   translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%

@@ -181,6 +181,7 @@ programs:
   link: 复制项目链接到剪贴板
   reactionsText: 我喜欢的
   downloadErrorText: 下载项目时出错。请稍后再试。
+  downloadStartText: Download has started...
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%

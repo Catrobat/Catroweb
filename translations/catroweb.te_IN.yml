@@ -181,6 +181,7 @@ programs:
   link: ప్రాజెక్ట్ లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయండి
   reactionsText: ప్రతిచర్యలు
   downloadErrorText: ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేస్తున్నప్పుడు లోపం సంభవించింది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి.
+  downloadStartText: Download has started...
   showTranslation: అనువాదం చూపించు
   hideTranslation: అనువాదాన్ని దాచు
   translatedByLine: ద్వారా అనువదించబడింది %provider% నుండి %sourceLanguage% కు %targetLanguage%

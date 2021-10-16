@@ -181,6 +181,7 @@ programs:
   link: Copier le lien du projet dans le presse-papiers
   reactionsText: Réactions
   downloadErrorText: Une erreur s'est produite lors du téléchargement du projet. Veuillez réessayer plus tard.
+  downloadStartText: Download has started...
   showTranslation: Montrer la traduction
   hideTranslation: Cacher la traduction
   translatedByLine: Traduit par %provider% de %sourceLanguage% à %targetLanguage%.

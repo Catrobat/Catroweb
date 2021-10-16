@@ -181,6 +181,7 @@ programs:
   link: क्लिपबोर्ड पर प्रोजेक्ट लिंक कॉपी करें
   reactionsText: प्रतिक्रियाएं
   downloadErrorText: प्रोजेक्ट डाउनलोड करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।
+  downloadStartText: Download has started...
   showTranslation: अनुवाद दिखाएं
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'

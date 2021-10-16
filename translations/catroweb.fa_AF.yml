@@ -181,6 +181,7 @@ programs:
   link: پیوند پروژه را به کلیپ بورد کپی کنید
   reactionsText: واکنش ها
   downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
+  downloadStartText: Download has started...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
