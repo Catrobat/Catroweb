@@ -181,6 +181,7 @@ programs:
   link: Layihə bağlantısını lövhəyə kopyala
   reactionsText: Reaksiyalar
   downloadErrorText: Layihə endirmə xətası. Zəhmət olmasa daha sonra yenidən sınayın.
+  downloadStartText: Download has started...
   showTranslation: Tərcüməni göstər
   hideTranslation: Tərcüməni gizlət
   translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə %provider% tərcümə etdi'

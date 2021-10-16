@@ -181,6 +181,7 @@ programs:
   link: Copiar enlace del proyecto al portapapeles
   reactionsText: Reacciones
   downloadErrorText: Error al descargar el proyecto. Inténtalo de nuevo más tarde.
+  downloadStartText: Download has started...
   showTranslation: Mostrar traducción
   hideTranslation: Ocultar la traducción
   translatedByLine: Traducido por %provider% del %sourceLanguage% al %targetLanguage%

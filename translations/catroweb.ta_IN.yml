@@ -181,6 +181,7 @@ programs:
   link: திட்ட இணைப்பை கிளிப்போர்டுக்கு நகலெடுக்கவும்
   reactionsText: விருப்பம்
   downloadErrorText: திட்டப்பணியைப் பதிவு இறக்கும் போது பிழை நிகழ்ந்தது. தயவுசெய்து பிறகு மீண்டும் முயற்சிக்கவும்.
+  downloadStartText: Download has started...
   showTranslation: மொழிபெயர்ப்பைக் காட்டு
   hideTranslation: மொழிபெயர்ப்பை மறை
   translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'

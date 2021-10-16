@@ -181,6 +181,7 @@ programs:
   link: Kopjo linkun ne nje tabele
   reactionsText: Reagimet
   downloadErrorText: Ndodhi një gabim gjatë shkarkimit të projektit. Ju lutemi provoni përsëri më vonë.
+  downloadStartText: Download has started...
   showTranslation: Shfaq përkthimin 
   hideTranslation: Fshihe përkthimin
   translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%

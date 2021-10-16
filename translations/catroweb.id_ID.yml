@@ -181,6 +181,7 @@ programs:
   link: Salin tautan proyek ke papan klip
   reactionsText: Reaksi
   downloadErrorText: Terjadi kesalahan saat mengunduh proyek. Silakan coba lagi nanti.
+  downloadStartText: Download has started...
   showTranslation: Tampilkan terjemahan
   hideTranslation: Sembunyikan terjemahan
   translatedByLine: Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%

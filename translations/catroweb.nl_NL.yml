@@ -181,6 +181,7 @@ programs:
   link: Copy project link to clipboard
   reactionsText: Reacties
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%

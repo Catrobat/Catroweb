@@ -181,6 +181,7 @@ programs:
   link: 將項目鏈接複製到剪貼板
   reactionsText: 反應
   downloadErrorText: 下載項目時出錯。請稍後再試。
+  downloadStartText: Download has started...
   showTranslation: 顯示翻譯
   hideTranslation: 隱藏翻譯
   translatedByLine: 由 %provider% 從 %sourceLanguage% 翻譯成 %targetLanguage%

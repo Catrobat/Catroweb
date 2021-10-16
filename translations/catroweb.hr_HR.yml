@@ -181,6 +181,7 @@ programs:
   link: Kopirajte poveznicu programa u medjuspremnik
   reactionsText: Sviđanja
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
