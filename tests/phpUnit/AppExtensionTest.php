@@ -27,20 +27,21 @@ class AppExtensionTest extends TestCase
 
   public function testLanguageOptions(): void
   {
-    $short = 'de_DE';
+    $short = 'de';
 
     $appExtension = $this->createAppExtension($short);
     $language_options = $appExtension->getLanguageOptions();
 
-    // Currently we have over 65 languages and dialects
-    $this->assertGreaterThanOrEqual(65, count($language_options));
+    // Currently we have over 64 languages and dialects
+    $this->assertGreaterThanOrEqual(64, count($language_options));
 
-    $this->assertFalse($this->inArray('Deutsch', $language_options));
-    $this->assertTrue($this->inArray('Deutsch (Deutschland)', $language_options));
-    $this->assertTrue($this->inArray('italiano (Italia)', $language_options));
-    $this->assertTrue($this->inArray('polski (Polska)', $language_options));
-    $this->assertTrue($this->inArray('English (Canada)', $language_options));
-    $this->assertTrue($this->inArray('English (United Kingdom)', $language_options));
+    $this->assertFalse($this->inArray('Deutsch (Deutschland)', $language_options));
+    $this->assertTrue($this->inArray('português (Brasil)', $language_options));
+    $this->assertTrue($this->inArray('português (Portugal)', $language_options));
+    $this->assertTrue($this->inArray('italiano', $language_options));
+    $this->assertTrue($this->inArray('polski', $language_options));
+    $this->assertTrue($this->inArray('English (United States)', $language_options));
+    $this->assertTrue($this->inArray('English (British)', $language_options));
     $this->assertTrue($this->isSelected($short, $language_options));
   }
 
@@ -49,7 +50,7 @@ class AppExtensionTest extends TestCase
    */
   public function englishMustBeSelected(): void
   {
-    $short = 'en';
+    $short = 'en_GB';
     $notShort = 'de';
 
     $appExtention = $this->createAppExtension($short);
@@ -62,10 +63,34 @@ class AppExtensionTest extends TestCase
   /**
    * @test
    */
-  public function englishCanadaMustBeSelected(): void
+  public function germanMustBeSelected(): void
   {
-    $short = 'en_CA';
-    $notShort = 'en';
+    $short = 'de';
+    $notShort = 'en_GB';
+
+    $app_extension = $this->createAppExtension($short);
+    $list = $app_extension->getLanguageOptions();
+
+    $this->assertTrue($this->isSelected($short, $list));
+    $this->assertFalse($this->isSelected($notShort, $list));
+  }
+
+  public function portugueseBrazilMustBeSelected(): void
+  {
+    $short = 'pt_BR';
+    $notShort = 'pt_PT';
+
+    $app_extension = $this->createAppExtension($short);
+    $list = $app_extension->getLanguageOptions();
+
+    $this->assertTrue($this->isSelected($short, $list));
+    $this->assertFalse($this->isSelected($notShort, $list));
+  }
+
+  public function portuguesePortugalMustBeSelected(): void
+  {
+    $short = 'pt_PT';
+    $notShort = 'pt_BR';
 
     $app_extension = $this->createAppExtension($short);
     $list = $app_extension->getLanguageOptions();
