@@ -464,4 +464,111 @@ final class ProjectsApiTest extends CatrowebTestCase
     $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
     $this->assertNull($response);
   }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsStealProject
+   *
+   * @throws Exception
+   */
+  public function testProjectsStealProjectUserNotFound(): void
+  {
+      $response_code = null;
+
+      $request_validator = $this->createMock(ProjectsRequestValidator::class);
+      $request_validator->method('validateUserExists')->willReturn(false);
+      $this->facade->method('getRequestValidator')->willReturn($request_validator);
+
+      $response = $this->object->projectsStealProject('id', 'programId', $response_code);
+
+      $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
+      $this->assertNull($response);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsStealProject
+   *
+   * @throws Exception
+   */
+  public function testProjectsStealProjectForbidden(): void
+  {
+      $response_code = null;
+
+      $request_validator = $this->createMock(ProjectsRequestValidator::class);
+      $request_validator->method('validateUserExists')->willReturn(true);
+      $this->facade->method('getRequestValidator')->willReturn($request_validator);
+
+      $authentication_manager = $this->createMock(AuthenticationManager::class);
+      $authentication_manager->method('getUserFromAuthenticationToken')->willReturn(null);
+      $this->object->method('getAuthenticationToken')->willReturn('');
+      $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+
+      $response = $this->object->projectsStealProject('id', 'programId', $response_code);
+
+      $this->assertEquals(Response::HTTP_FORBIDDEN, $response_code);
+      $this->assertNull($response);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsStealProject
+   *
+   * @throws Exception
+   */
+  public function testProjectsStealProjectNotFound(): void
+  {
+      $response_code = null;
+
+      $request_validator = $this->createMock(ProjectsRequestValidator::class);
+      $request_validator->method('validateUserExists')->willReturn(true);
+      $this->facade->method('getRequestValidator')->willReturn($request_validator);
+
+      $authentication_manager = $this->createMock(AuthenticationManager::class);
+      $user = $this->createMock(User::class);
+      $authentication_manager->method('getUserFromAuthenticationToken')->willReturn($user);
+      $this->object->method('getAuthenticationToken')->willReturn('');
+      $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+
+      $response = $this->object->projectsStealProject('id', 'programId', $response_code);
+
+      $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
+      $this->assertNull($response);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsStealProject
+   *
+   * @throws Exception
+   */
+  public function testProjectsStealProject(): void
+  {
+      $response_code = null;
+
+      $request_validator = $this->createMock(ProjectsRequestValidator::class);
+      $request_validator->method('validateUserExists')->willReturn(true);
+      $this->facade->method('getRequestValidator')->willReturn($request_validator);
+
+      $authentication_manager = $this->createMock(AuthenticationManager::class);
+      $user = $this->createMock(User::class);
+      $authentication_manager->method('getUserFromAuthenticationToken')->willReturn($user);
+      $this->object->method('getAuthenticationToken')->willReturn('');
+      $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+
+      $program = $this->createMock(Program::class);
+      $loader = $this->createMock(ProjectsApiLoader::class);
+      $loader->method('findProjectByID')->willReturn($program);
+      $this->facade->method('getLoader')->willReturn($loader);
+
+      $response = $this->object->projectsStealProject('id', 'programId', $response_code);
+
+      $this->assertEquals(Response::HTTP_OK, $response_code);
+      $this->assertNull($response);
+  }
+
 }

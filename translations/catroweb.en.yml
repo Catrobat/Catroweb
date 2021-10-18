@@ -189,6 +189,7 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  stealProject: 'Steal the project'
 
 remixGraph:
   title: Remixes

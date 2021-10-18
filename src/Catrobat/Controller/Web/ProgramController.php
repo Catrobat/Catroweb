@@ -148,6 +148,8 @@ class ProgramController extends AbstractController
       'logged_in' => $logged_in,
       'max_description_size' => $this->getParameter('catrobat.max_description_upload_size'),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
+      'project_user_id' => $project->getUser().$id,
+      'user_id' => $user.$id
     ]);
   }
 
@@ -778,4 +780,44 @@ class ProgramController extends AbstractController
 
     return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
+
+    /**
+     * @Route("/steal-project", name="steal-project", methods={"POST"})
+     */
+    public function stealProjectAction(Request $request): Response
+    {
+        $current_user = $this->getUser();
+        if(!$current_user)
+        {
+            return JsonResponse::create([
+                'message' => 'Even though you want to steal, you still need to be logged in.',
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        if (!isset($_POST['programId']))
+        {
+            return JsonResponse::create([
+                'message' => 'At least be a devoted thief and provide a project id, in order to steal the project.',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $programId = $_POST['programId'];
+
+        $program = $this->program_manager->find($programId);
+
+        if (!$program)
+        {
+            return JsonResponse::create([
+                'message' => 'The project with the given project ID does not exist.',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $program->setUser($this->getUser());
+
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($program);
+        $em->flush();
+
+        return JsonResponse::create([], Response::HTTP_OK);
+    }
 }

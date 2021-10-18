@@ -39,6 +39,59 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     )
   })
 
+  $('.btn-steal-project').on('click', (e) => {
+    var programId = $(e.currentTarget).data('project-id')
+
+    const alertButton = Swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger'
+      },
+      buttonsStyling: false
+    })
+
+    alertButton.fire({
+      title: 'Are you sure you want to become a thief?',
+      text: 'You will not be able to regret about this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, steal it!',
+      cancelButtonText: `No, I don't want to steal from anyone.`,
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.ajax({
+          url: '../steal-project',
+          type: 'post',
+          data: { programId: programId },
+          success: function (data) {
+            alertButton.fire(
+              'THIEF!',
+              'Congratulations! You just became a world class con, but keep in mind that stealing will not bring you' +
+              ' far.',
+              'warning'
+            ).then((result) => {
+              if (result.isConfirmed){
+                location.reload()
+              }
+            })
+          },
+          error: function (response) {
+            showErrorAlert(response.responseJSON.message)
+          }
+        })
+      } else if (
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        alertButton.fire(
+          'Cancelled',
+          'You decided to remain a good person and not become a thief. Bravo!',
+          'error'
+        )
+      }
+    })
+  })
+
   let apkDownloadTimeout = false
 
   function download (downloadUrl, projectId, buttonId, supported = true, isWebView = false,

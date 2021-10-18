@@ -298,4 +298,38 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     return null;
   }
+
+    /**
+     * {@inheritdoc}
+     *
+     * @throws Exception
+     */
+    public function projectsStealProject(string $user_id, string $programId, &$responseCode = null)
+    {
+        if (!$this->facade->getRequestValidator()->validateUserExists($user_id)) {
+            $responseCode = Response::HTTP_NOT_FOUND;
+
+            return null;
+        }
+
+        $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+        if (is_null($user)) {
+            $responseCode = Response::HTTP_FORBIDDEN;
+
+            return null;
+        }
+
+        $program = $this->facade->getLoader()->findProjectByID($programId, true);
+        if (is_null($program)) {
+            $responseCode = Response::HTTP_NOT_FOUND;
+
+            return null;
+        }
+
+        $program->setUser($user);
+
+        $this->facade->getProcessor()->saveProject($program);
+
+        $responseCode = Response::HTTP_OK;
+    }
 }
