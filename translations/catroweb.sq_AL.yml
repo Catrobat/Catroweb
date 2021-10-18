@@ -184,7 +184,7 @@ programs:
   showTranslation: Shfaq përkthimin 
   hideTranslation: Fshihe përkthimin
   translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%
-  stealProject: 'Vidh projektin
+  stealProject: 'Vidh projektin'
 remixGraph:
   title: Ripërzierje 
   showRemixGraph: 'Ripërziej grafikun'

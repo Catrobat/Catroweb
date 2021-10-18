@@ -40,7 +40,7 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
   })
 
   $('.btn-steal-project').on('click', (e) => {
-    var programId = $(e.currentTarget).data('project-id')
+    let programId = $(e.currentTarget).data('project-id')
 
     const alertButton = Swal.mixin({
       customClass: {
