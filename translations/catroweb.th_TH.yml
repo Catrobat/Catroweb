@@ -183,7 +183,7 @@ programs:
   link: คัดลอกลิงค์โครงการไปยังคลิปบอร์ด
   reactionsText: ถูกใจ
   downloadErrorText: เกิดข้อผิดพลาดขณะดาวน์โหลดโครงการ โปรดลองอีกครั้งในภายหลัง.
-  downloadStartText: Download has started...
+  downloadStartText: เริ่มดาวน์โหลดแล้ว...
   showTranslation: แสดงคำแปล
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
