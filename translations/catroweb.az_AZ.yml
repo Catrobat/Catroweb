@@ -377,7 +377,7 @@ login:
   alreadyAccount: Already having an account?
   or: OR
   username: İstifadəçi adı
-  email: Email
+  email: E-poçt
   passwordFirst: Şifrə
   passwordSecond: Password Confirm
 apk:
@@ -656,7 +656,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Catrobat cəmiyyəti'
 back_to_app: 'Exit community'
 category:
   recent: Yeni layihələr
