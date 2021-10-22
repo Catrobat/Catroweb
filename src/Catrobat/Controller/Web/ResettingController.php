@@ -27,4 +27,12 @@ class ResettingController extends AbstractController
       'already_reset' => '',
     ]);
   }
+
+  /**
+   * @Route("/register/confirmed", name="register_confirm")
+   */
+  public function handleregisterConfirmed(): Response
+  {
+    return $this->redirect('/');
+  }
 }

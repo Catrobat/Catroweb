@@ -178,6 +178,10 @@ class AppExtension extends AbstractExtension
     }
 
     foreach ($shortNames as $shortName) {
+      if ('en_AU' === $shortName || 'en_CA' === $shortName) {
+        continue;
+      }
+
       $isSelectedLanguage = $current_language === $shortName;
 
       if (strcmp($current_language, $shortName)) {
@@ -186,8 +190,9 @@ class AppExtension extends AbstractExtension
 
       // Is this locale available in Symfony?
       if (array_key_exists($shortName, $available_locales)) {
+        $shortName = $this->handleSpecialShortNames($shortName);
         $locale = Locales::getName($shortName, $shortName);
-
+        $locale = $this->handleSpecialLocales($locale, $shortName);
         $list[] = [
           $shortName,
           $locale,
@@ -201,6 +206,38 @@ class AppExtension extends AbstractExtension
     }
 
     return $list;
+  }
+
+  public function handleSpecialShortNames(string $shortName): string
+  {
+    switch ($shortName) {
+          case 'fa_AF':
+          case 'fa_IR':
+          case 'pt_BR':
+          case 'pt_PT':
+          case 'zh_CN':
+          case 'zh_TW':
+          case 'en_GB':
+              return $shortName;
+          case 'en':
+              return 'en_US';
+          default:
+              return explode('_', $shortName)[0];
+      }
+  }
+
+  public function handleSpecialLocales(string $locale, string $shortName): string
+  {
+    switch ($shortName) {
+            case 'en_GB':
+                return 'English (British)';
+            case 'zh_CN':
+                return '中文 (简化字)';
+            case 'zh_TW':
+                return '中文 (繁體字)';
+            default:
+                return $locale;
+        }
   }
 
   public function isMobile(): bool

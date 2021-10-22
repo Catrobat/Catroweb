@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.19.0]
+  - update dependencies (ElasticSearch v7, ...)
+  - update translations
+  - add ETag caching to language translation api
+  - Improved feedback loop when users trigger a download
+  - Removed email registration confirmation email
+  - Enhanced language selection menu
+
+## [3.18.3]
+  - update dependencies
+  - update translations
+  - studio enhancements
+  - fix password visibility toggle
+  - clean up configs
+  - enhance webpack usage, js, behat hooks, ..
 
 ## [3.17.2]
   - update dependencies (bootstrap 4 => 5!)
@@ -397,7 +412,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.17.2...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.19.1...HEAD
+[3.19.0]: https://github.com/Catrobat/Catroweb/compare/v3.19.0...v3.19.1
+[3.18.3]: https://github.com/Catrobat/Catroweb/compare/v3.18.3...v3.19.0
+[3.17.2]: https://github.com/Catrobat/Catroweb/compare/v3.17.2...v3.18.3
 [3.16.0]: https://github.com/Catrobat/Catroweb/compare/v3.16.0...v3.17.2
 [3.15.2]: https://github.com/Catrobat/Catroweb/compare/v3.15.2...v3.16.0
 [3.14.0]: https://github.com/Catrobat/Catroweb/compare/v3.14.0...v3.15.2

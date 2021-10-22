@@ -14,7 +14,7 @@ fos_user:
   # Sends user an email to confirm their registration
   registration:
     confirmation:
-      enabled: true
+      enabled: false
       template:   Email/registration_confirmation.email.twig
 
   # Define password resetting email

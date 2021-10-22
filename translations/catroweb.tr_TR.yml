@@ -181,6 +181,7 @@ programs:
   link: Proje bağlantısını panoya kopyala
   reactionsText: Tepkiler
   downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
+  downloadStartText: Download has started...
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
@@ -744,9 +745,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'genel'
-    projects: 'projeler'
-    comments: 'yorumlar'
     public: 'herkese açık'
     private: 'gizli'
     join: 'Katıl'
@@ -757,23 +755,30 @@ studio:
     remove_project_error: 'Proje stüdyodan kaldırılamadı!'
     remove_project_success: 'proje stüdyodan başarıyla kaldırıldı!'
     no_projects: 'Studio henüz proje içermiyor'
-    no_comments: 'Stüdyo henüz yorum içermiyor'
-    type_something: 'Birşeyler yaz'
-    send_comment: 'gönder'
-    comment_error: 'Yorumunuzu gönderirken bir şeyler ters gitti!'
-    remove_comment_error: 'Yorum kaldırılırken bir şeyler ters gitti!'
-    replies: 'yanıtlar'
     updateCoverError: 'Stüdyo kapağı güncellenirken bir şeyler ters gitti!'
-    created_studio: 'stüdyoyu oluşturdu'
-    activity: 'Aktivite'
-    activity_add_comment: 'Yorum Yap'
-    activity_add_project: 'stüdyoya yeni proje %project% eklendi'
-    activity_add_user: 'stüdyoya yeni kullanıcı %user% eklendi'
-    members: 'Stüdyo Üyeleri'
-    remove_user: 'stüdyodan kaldır'
-    promote_user: 'Yöneticiye yükselt'
-    promote_failed: 'Bu kullanıcı yöneticiliğe yükseltilemedi'
-    ban_user_failed: 'Kullanıcı stüdyodan yasaklanamadı!'
+    projects:
+      title: 'projects'
+    comments:
+      title: 'Yorumlar'
+      type_something: 'Type something'
+      replies: 'replies'
+      send: 'send'
+      no_comments: 'This studio has no comments yet.'
+      disabled_comments: 'Comments have been disabled for this studio.'
+      post_error: 'Something went wrong while posting your comment. Try again later.'
+      delete_error: 'Something went wrong while removing the comment. Try again later.'
+    activity_list:
+      title: 'Activities'
+      join_studio: '%user% joined the studio.'
+      add_project: '%user% left a comment.'
+      add_comment: '%user% added a project.'
+    members_list:
+      title: 'Studio members'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: 'Promote member to admin'
+      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      ban_member: 'Ban member from studio'
+      ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'

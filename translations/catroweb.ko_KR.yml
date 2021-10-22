@@ -180,6 +180,7 @@ programs:
   link: 클립보드에 링크 복사하기
   reactionsText: 좋아요
   downloadErrorText: 프로젝트 다운중 오류 발생. 잠시 후 다시 시도.
+  downloadStartText: Download has started...
   showTranslation: 번역보기
   hideTranslation: 번역 숨기기
   translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
@@ -743,9 +744,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: '일반'
-    projects: '프로젝트'
-    comments: '코멘트'
     public: '공공의'
     private: '사적인'
     join: '가입하다'
@@ -756,23 +754,30 @@ studio:
     remove_project_error: '스튜디오에서 프로젝트를 제거하지 못했습니다!'
     remove_project_success: '프로젝트가 스튜디오에서 성공적으로 제거되었습니다!'
     no_projects: 'Studio에는 아직 프로젝트가 없습니다.'
-    no_comments: 'Studio에는 아직 댓글이 없습니다.'
-    type_something: '뭔가를 입력'
-    send_comment: '보내다'
-    comment_error: '댓글을 게시하는 동안 문제가 발생했습니다!'
-    remove_comment_error: '댓글을 게시하는 동안 문제가 발생했습니다!'
-    replies: '답장'
     updateCoverError: '스튜디오 표지를 업데이트하는 동안 문제가 발생했습니다!'
-    created_studio: '스튜디오를 만들었습니다'
-    activity: '활동'
-    activity_add_comment: '댓글을 남겼습니다'
-    activity_add_project: '스튜디오에 새 프로젝트 %project%를 추가했습니다.'
-    activity_add_user: '스튜디오에 새 사용자 %user%을(를) 추가했습니다'
-    members: '스튜디오 회원'
-    remove_user: '스튜디오에서 제거'
-    promote_user: '관리자로 승격'
-    promote_failed: '이 사용자를 관리자로 승격하지 못했습니다.'
-    ban_user_failed: '사용자를 스튜디오에서 차단하지 못했습니다!'
+    projects:
+      title: 'projects'
+    comments:
+      title: '코멘트'
+      type_something: 'Type something'
+      replies: 'replies'
+      send: 'send'
+      no_comments: 'This studio has no comments yet.'
+      disabled_comments: 'Comments have been disabled for this studio.'
+      post_error: 'Something went wrong while posting your comment. Try again later.'
+      delete_error: 'Something went wrong while removing the comment. Try again later.'
+    activity_list:
+      title: 'Activities'
+      join_studio: '%user% joined the studio.'
+      add_project: '%user% left a comment.'
+      add_comment: '%user% added a project.'
+    members_list:
+      title: 'Studio members'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: 'Promote member to admin'
+      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      ban_member: 'Ban member from studio'
+      ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'

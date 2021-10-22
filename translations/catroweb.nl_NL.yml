@@ -181,6 +181,7 @@ programs:
   link: Copy project link to clipboard
   reactionsText: Reacties
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
@@ -746,9 +747,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'general'
-    projects: 'projects'
-    comments: 'Reacties'
     public: 'public'
     private: 'private'
     join: 'Join'
@@ -759,23 +757,30 @@ studio:
     remove_project_error: 'Failed to remove project from studio!'
     remove_project_success: 'project removed successfully from studio!'
     no_projects: 'Studio does not contain any projects yet'
-    no_comments: 'Studio does not contain any comments yet'
-    type_something: 'Type something'
-    send_comment: 'send'
-    comment_error: 'Something went wrong while posting your comment!'
-    remove_comment_error: 'Something went wrong while removing the comment!'
-    replies: 'replies'
     updateCoverError: 'Something went wrong while updating the studio cover!'
-    created_studio: 'created the studio'
-    activity: 'Activity'
-    activity_add_comment: 'left a comment'
-    activity_add_project: 'added new project %project% to the studio'
-    activity_add_user: 'added new user %user% to the studio'
-    members: 'Studio Members'
-    remove_user: 'remove from the studio'
-    promote_user: 'promote to admin'
-    promote_failed: 'Failed to promote this user to admin'
-    ban_user_failed: 'Failed to ban user from studio!'
+    projects:
+      title: 'projects'
+    comments:
+      title: 'Reacties'
+      type_something: 'Type something'
+      replies: 'replies'
+      send: 'send'
+      no_comments: 'This studio has no comments yet.'
+      disabled_comments: 'Comments have been disabled for this studio.'
+      post_error: 'Something went wrong while posting your comment. Try again later.'
+      delete_error: 'Something went wrong while removing the comment. Try again later.'
+    activity_list:
+      title: 'Activities'
+      join_studio: '%user% joined the studio.'
+      add_project: '%user% left a comment.'
+      add_comment: '%user% added a project.'
+    members_list:
+      title: 'Studio members'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: 'Promote member to admin'
+      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      ban_member: 'Ban member from studio'
+      ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'

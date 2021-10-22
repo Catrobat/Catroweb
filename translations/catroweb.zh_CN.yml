@@ -181,6 +181,7 @@ programs:
   link: 复制项目链接到剪贴板
   reactionsText: 我喜欢的
   downloadErrorText: 下载项目时出错。请稍后再试。
+  downloadStartText: Download has started...
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
@@ -751,9 +752,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: '常规的'
-    projects: '项目'
-    comments: '评论'
     public: '公开的'
     private: '私人的'
     join: '加入'
@@ -764,23 +762,30 @@ studio:
     remove_project_error: '从工作室中删除项目失败！'
     remove_project_success: '项目已成功从工作室移除！'
     no_projects: '工作室尚未包含任何项目'
-    no_comments: '工作室还没有包含任何评论'
-    type_something: '输入内容'
-    send_comment: '发送'
-    comment_error: '发表评论时出了错！'
-    remove_comment_error: '删除评论时出了错！'
-    replies: '回复'
     updateCoverError: '更新工作室封面时出了错！'
-    created_studio: '创建工作室'
-    activity: '活动'
-    activity_add_comment: '留下评论'
-    activity_add_project: '将新项目 %project% 添加到工作室'
-    activity_add_user: '添加新用户 %user% 到工作室'
-    members: '工作室成员'
-    remove_user: '从工作室移除'
-    promote_user: '提升到管理员'
-    promote_failed: '未能将此用户推广到管理员'
-    ban_user_failed: '禁止用户进入工作室失败！'
+    projects:
+      title: '项目'
+    comments:
+      title: '评论'
+      type_something: '输入内容'
+      replies: '回复'
+      send: '发送'
+      no_comments: '工作室还没有评论。'
+      disabled_comments: '此工作室的评论已被禁用。'
+      post_error: '发表评论出错。请稍后再试。'
+      delete_error: '删除评论出错。请稍后再试。'
+    activity_list:
+      title: '活动'
+      join_studio: '%user% 加入了工作室。'
+      add_project: '%user% 留下了一条评论。'
+      add_comment: '%user% 添加了一个项目。'
+    members_list:
+      title: '工作室成员'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: '将成员提升为管理员。'
+      promotion_failed: '该成员升级过程出错。请稍后再试。'
+      ban_member: '禁止工作室成员'
+      ban_failed: '禁用此成员时出错。请稍后再试。'
     admin_settings:
       title: '常规设置'
       studio_name: '工作室名称'

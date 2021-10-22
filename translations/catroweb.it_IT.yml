@@ -17,7 +17,7 @@ googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: AppGallery di Huawei
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Chat su Discord
 passwordsNoMatch: Le due password non coincidono.
 error: Errore
 cancel: Annulla
@@ -181,6 +181,7 @@ programs:
   link: Copia negli appunti il link al progetto
   reactionsText: Mi piace
   downloadErrorText: Si è verificato un errore durante il download del progetto. Riprova più tardi.
+  downloadStartText: Download avviato...
   showTranslation: Mostra la traduzione
   hideTranslation: Nascondi la traduzione
   translatedByLine: Tradotto da %provider% da %sourceLanguage% a %targetLanguage%
@@ -750,9 +751,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'generale'
-    projects: 'progetti'
-    comments: 'Commenti'
     public: 'pubblico'
     private: 'privato'
     join: 'Entra'
@@ -763,29 +761,36 @@ studio:
     remove_project_error: 'Impossibile rimuovere il progetto dallo studio!'
     remove_project_success: 'progetto rimosso con successo dallo studio!'
     no_projects: 'Studio non contiene ancora nessun progetto'
-    no_comments: 'Studio non contiene ancora commenti'
-    type_something: 'Tipo qualcosa'
-    send_comment: 'inviare'
-    comment_error: 'Qualcosa è andato storto mentre postavi il tuo commento!'
-    remove_comment_error: 'Qualcosa è andato storto durante la rimozione del commento!'
-    replies: 'risponde'
     updateCoverError: 'Qualcosa è andato storto durante l''aggiornamento della copertina dello studio!'
-    created_studio: 'ha creato lo studio'
-    activity: 'Attività'
-    activity_add_comment: 'ha lasciato un commento'
-    activity_add_project: 'ha aggiunto un nuovo progetto %project% allo studio'
-    activity_add_user: 'ha aggiunto un nuovo utente %user% allo studio'
-    members: 'Membri Studio'
-    remove_user: 'rimuovi dallo studio'
-    promote_user: 'promuovere ad amministratore'
-    promote_failed: 'Impossibile promuovere questo utente ad amministratore'
-    ban_user_failed: 'Fallito il ban dell''utente dallo studio!'
+    projects:
+      title: 'progetti'
+    comments:
+      title: 'Commenti'
+      type_something: 'Scrivi qualcosa'
+      replies: 'risposte'
+      send: 'invia'
+      no_comments: 'Questo studio non ha ancora commenti.'
+      disabled_comments: 'I commenti sono stati disabilitati per questo studio.'
+      post_error: 'Qualcosa è andato storto durante la pubblicazione del tuo commento. Riprova più tardi.'
+      delete_error: 'Qualcosa è andato storto durante la rimozione del commento. Riprova più tardi.'
+    activity_list:
+      title: 'Attività'
+      join_studio: '%user% è entrato nello studio.'
+      add_project: '%user% ha lasciato un commento.'
+      add_comment: '%user% ha aggiunto un progetto.'
+    members_list:
+      title: 'Membri dello Studio'
+      project_count: '{0} Nessun progetto studio |{1} 1 progetto studio |]1,Inf] %count% progetti studio'
+      promote_member: 'Promuovi membro ad amministratore'
+      promotion_failed: 'Qualcosa è andato storto durante la promozione di questo membro. Riprova più tardi.'
+      ban_member: 'Espelli membro dallo studio'
+      ban_failed: 'Qualcosa è andato storto mentre si espelleva questo membro. Riprova più tardi.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Impostazioni Generali'
+      studio_name: 'Nome Studio'
       studio_description: 'Descrizione'
       toggle_allow_comments: 'Commenti'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Pubblico'
 media_library:
   file:
     size: 'Dimensione: %size%'

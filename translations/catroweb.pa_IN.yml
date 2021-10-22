@@ -181,6 +181,7 @@ programs:
   link: ਪ੍ਰੋਜੈਕਟ ਲਿੰਕ ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ
   reactionsText: ਪ੍ਰਤੀਕਰਮ
   downloadErrorText: ਜਦਕਿ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ. ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ.
+  downloadStartText: Download has started...
   showTranslation: ਅਨੁਵਾਦ ਦਿਖਾਓ
   hideTranslation: ਅਨੁਵਾਦ ਲੁਕਾਓ
   translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
@@ -746,9 +747,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'ਆਮ'
-    projects: 'ਪ੍ਰਾਜੈਕਟ'
-    comments: 'ਟਿਪਣੀਆਂ'
     public: 'ਜਨਤਕ'
     private: 'ਨਿਜੀ'
     join: 'ਜੁੜੋ'
@@ -759,23 +757,30 @@ studio:
     remove_project_error: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਉਣ ਵਿੱਚ ਅਸਫਲ!'
     remove_project_success: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਇਆ ਗਿਆ!'
     no_projects: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਸ਼ਾਮਲ ਨਹੀਂ ਹਨ'
-    no_comments: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਟਿੱਪਣੀ ਸ਼ਾਮਲ ਨਹੀਂ ਹੈ'
-    type_something: 'ਕੁਝ ਟਾਈਪ ਕਰੋ'
-    send_comment: 'ਭੇਜੋ'
-    comment_error: 'ਤੁਹਾਡੀ ਟਿੱਪਣੀ ਪੋਸਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
-    remove_comment_error: 'ਟਿੱਪਣੀ ਨੂੰ ਹਟਾਉਂਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
-    replies: 'ਜਵਾਬ'
     updateCoverError: 'ਸਟੂਡੀਓ ਕਵਰ ਨੂੰ ਅਪਡੇਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
-    created_studio: 'ਸਟੂਡੀਓ ਬਣਾਇਆ'
-    activity: 'ਸਰਗਰਮੀ'
-    activity_add_comment: 'ਇੱਕ ਟਿੱਪਣੀ ਛੱਡ ਦਿੱਤੀ'
-    activity_add_project: 'ਸਟੂਡੀਓ ਵਿੱਚ ਨਵਾਂ ਪ੍ਰੋਜੈਕਟ %project% ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ'
-    activity_add_user: 'ਸਟੂਡੀਓ ਵਿੱਚ ਨਵਾਂ ਯੂਜ਼ਰ %user% ਸ਼ਾਮਲ ਕੀਤਾ ਗਿਆ'
-    members: 'ਸਟੂਡੀਓ ਦੇ ਮੈਂਬਰ'
-    remove_user: 'ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਓ'
-    promote_user: 'ਐਡਮਿਨ ਨੂੰ ਤਰੱਕੀ ਦਿਓ'
-    promote_failed: 'ਇਸ ਉਪਭੋਗਤਾ ਨੂੰ ਪ੍ਰਸ਼ਾਸਕ ਦੇ ਰੂਪ ਵਿੱਚ ਉਤਸ਼ਾਹਿਤ ਕਰਨ ਵਿੱਚ ਅਸਫਲ'
-    ban_user_failed: 'ਸਟੂਡੀਓ ਤੋਂ ਉਪਭੋਗਤਾ ਤੇ ਪਾਬੰਦੀ ਲਗਾਉਣ ਵਿੱਚ ਅਸਫਲ!'
+    projects:
+      title: 'projects'
+    comments:
+      title: 'ਟਿਪਣੀਆਂ'
+      type_something: 'Type something'
+      replies: 'replies'
+      send: 'send'
+      no_comments: 'This studio has no comments yet.'
+      disabled_comments: 'Comments have been disabled for this studio.'
+      post_error: 'Something went wrong while posting your comment. Try again later.'
+      delete_error: 'Something went wrong while removing the comment. Try again later.'
+    activity_list:
+      title: 'Activities'
+      join_studio: '%user% joined the studio.'
+      add_project: '%user% left a comment.'
+      add_comment: '%user% added a project.'
+    members_list:
+      title: 'Studio members'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: 'Promote member to admin'
+      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      ban_member: 'Ban member from studio'
+      ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'

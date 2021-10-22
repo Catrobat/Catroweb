@@ -181,6 +181,7 @@ programs:
   link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
   downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
+  downloadStartText: Rozpoczęto pobieranie...
   showTranslation: Pokaż tłumaczenie
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
@@ -711,7 +712,7 @@ achievements:
         title: "Coding Jam '21"
         description: "Uczestnik kodowania Jam 2021"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Tag |]1,Inf] Tagi'
   tag:
     game:
       title: Gra
@@ -730,7 +731,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: 'Rozszerzenia'
+  title: '{0} |{1} Rozszerzenie |]1,Inf] Rozszerzenia'
   extension:
     arduino:
       title: Arduino
@@ -746,9 +747,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'ogólny'
-    projects: 'projekty'
-    comments: 'Komentarze'
     public: 'Publiczne'
     private: 'Prywatne'
     join: 'Dołącz'
@@ -759,23 +757,30 @@ studio:
     remove_project_error: 'Nie udało się usunąć projektu ze studia!'
     remove_project_success: 'projekt został pomyślnie usunięty ze studia!'
     no_projects: 'Studio nie zawiera jeszcze żadnych projektów'
-    no_comments: 'Studio nie zawiera jeszcze żadnych komentarzy'
-    type_something: 'Wpisz coś'
-    send_comment: 'wyślij'
-    comment_error: 'Coś poszło nie tak podczas wysyłania Twojego komentarza!'
-    remove_comment_error: 'Coś poszło nie tak podczas usuwania komentarza!'
-    replies: 'odpowiedzi'
     updateCoverError: 'Coś poszło nie tak podczas aktualizacji okładki studia!'
-    created_studio: 'stworzył studio'
-    activity: 'Aktywność'
-    activity_add_comment: 'zostawił komentarz'
-    activity_add_project: 'dodał nowy projekt %project% do studia'
-    activity_add_user: 'dodał nowego użytkownika %user% do studia'
-    members: 'Członkowie studia'
-    remove_user: 'usuń ze studia'
-    promote_user: 'awansuj na administratora'
-    promote_failed: 'Nie udało się awansować tego użytkownika na administratora'
-    ban_user_failed: 'Nie udało się zbanować użytkownika ze studia!'
+    projects:
+      title: 'projekty'
+    comments:
+      title: 'Komentarze'
+      type_something: 'Wpisz coś'
+      replies: 'odpowiedzi'
+      send: 'wyślij'
+      no_comments: 'To studio nie ma jeszcze komentarzy.'
+      disabled_comments: 'Komentarze zostały wyłączone dla tego studia.'
+      post_error: 'Coś poszło nie tak podczas wysyłania komentarza. Spróbuj ponownie później.'
+      delete_error: 'Coś poszło nie tak podczas usuwania komentarza. Spróbuj ponownie później.'
+    activity_list:
+      title: 'Aktywności'
+      join_studio: '%user% dołączył do studia.'
+      add_project: '%user% zostawił komentarz.'
+      add_comment: '%user% dodał projekt.'
+    members_list:
+      title: 'Członkowie Studia'
+      project_count: '{0} Brak projektów studia |{1} 1 projekt studia |]1,Inf] %count% projektów studia'
+      promote_member: 'Promuj użytkownika na administratora'
+      promotion_failed: 'Coś poszło nie tak podczas rekrutowania tego użytkownika. Spróbuj ponownie później.'
+      ban_member: 'Zabanuj członka studia'
+      ban_failed: 'Coś poszło nie tak podczas banowania tego użytkownika. Spróbuj ponownie później.'
     admin_settings:
       title: 'Ustawienia ogólne'
       studio_name: 'Nazwa Studia'

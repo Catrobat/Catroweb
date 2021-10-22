@@ -23,7 +23,7 @@ $('.project-redirect').on('click', (e) => {
 
 export const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
-  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText) {
+  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText, downloadStartedText) {
   createLinks()
   getApkStatus()
 
@@ -46,6 +46,8 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     const downloadProgressBar = $(downloadPbID)
     const downloadIcon = $(downloadIconID)
     const button = document.querySelector(buttonId)
+    showSnackbar('#share-snackbar', downloadStartedText)
+
     if (isWebView) {
       window.location = downloadUrl
       return

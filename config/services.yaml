@@ -76,8 +76,8 @@ services:
       $catrobat_file_storage_dir: "%catrobat.file.storage.dir%"
       $catrobat_file_extract_dir: "%catrobat.file.extract.dir%"
       $snapshot_dir: "%catrobat.snapshot.dir%"
-      $program_finder: '@fos_elastica.finder.app_program.program'
-      $user_finder: '@fos_elastica.finder.app_user.user'
+      $program_finder: '@fos_elastica.finder.app_program'
+      $user_finder: '@fos_elastica.finder.app_user'
 
 
   # ====================================================================================================================

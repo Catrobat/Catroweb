@@ -751,22 +751,22 @@ class ProgramManager
     $query_string->setAnalyzeWildcard();
     $query_string->setDefaultOperator('AND');
 
-    $category_query[] = new Terms('private', [false]);
-    $category_query[] = new Terms('visible', [true]);
+    $bool_query = new BoolQuery();
+
+    $bool_query->addMust(new Terms('private', [false]));
+    $bool_query->addMust(new Terms('visible', [true]));
 
     if (!$is_debug_request) {
-      $category_query[] = new Terms('debug_build', [false]);
+      $bool_query->addMust(new Terms('debug_build', [false]));
     }
 
     if ('' !== $max_version) {
-      $category_query[] = new Range('language_version', ['lte' => $max_version]);
+      $bool_query->addMust(new Range('language_version', ['lte' => $max_version]));
     }
     if (null !== $flavor && '' !== trim($flavor)) {
-      $category_query[] = new Terms('flavor', [$flavor]);
+      $bool_query->addMust(new Terms('flavor', [$flavor]));
     }
 
-    $bool_query = new BoolQuery();
-    $bool_query->addMust($category_query);
     $bool_query->addMust($query_string);
 
     return $bool_query;

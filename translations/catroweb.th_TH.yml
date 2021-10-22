@@ -183,6 +183,7 @@ programs:
   link: คัดลอกลิงค์โครงการไปยังคลิปบอร์ด
   reactionsText: ถูกใจ
   downloadErrorText: เกิดข้อผิดพลาดขณะดาวน์โหลดโครงการ โปรดลองอีกครั้งในภายหลัง.
+  downloadStartText: เริ่มดาวน์โหลดแล้ว...
   showTranslation: แสดงคำแปล
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
@@ -751,9 +752,6 @@ extensions:
       title: Mindstorms
 studio:
   details:
-    general: 'ทั่วไป'
-    projects: 'โครงการ'
-    comments: 'ความคิดเห็น'
     public: 'สาธารณะ'
     private: 'ส่วนตัว'
     join: 'เข้าร่วม'
@@ -764,29 +762,36 @@ studio:
     remove_project_error: 'ลบโปรเจ็กต์ออกจากสตูดิโอไม่สำเร็จ!'
     remove_project_success: 'นำโครงการออกจากสตูดิโอสำเร็จแล้ว!'
     no_projects: 'สตูดิโอยังไม่มีโครงการใด ๆ'
-    no_comments: 'สตูดิโอยังไม่มีความคิดเห็นใดๆ'
-    type_something: 'พิมพ์บางอย่าง'
-    send_comment: 'ส่ง'
-    comment_error: 'เกิดข้อผิดพลาดขณะโพสต์ความคิดเห็นของคุณ!'
-    remove_comment_error: 'เกิดข้อผิดพลาดขณะนำความคิดเห็นออก'
-    replies: 'ตอบกลับ'
     updateCoverError: 'เกิดข้อผิดพลาดขณะอัปเดตหน้าปกสตูดิโอ!'
-    created_studio: 'สร้างสตูดิโอ'
-    activity: 'กิจกรรม'
-    activity_add_comment: 'แสดงความคิดเห็น'
-    activity_add_project: 'เพิ่มโครงการใหม่ %project% ให้กับสตูดิโอ'
-    activity_add_user: 'เพิ่มผู้ใช้ใหม่ %user% ในสตูดิโอ'
-    members: 'สมาชิกสตูดิโอ'
-    remove_user: 'ออกจากสตูดิโอ'
-    promote_user: 'เลื่อนขั้นเป็นแอดมิน'
-    promote_failed: 'ไม่สามารถเลื่อนระดับผู้ใช้นี้เป็นผู้ดูแลระบบ'
-    ban_user_failed: 'ไม่สามารถแบนผู้ใช้จากสตูดิโอ!'
+    projects:
+      title: 'โครงการ'
+    comments:
+      title: 'ความคิดเห็น'
+      type_something: 'พิมพ์บางอย่าง'
+      replies: 'ตอบกลับ'
+      send: 'ส่ง'
+      no_comments: 'สตูดิโอนี้ยังไม่มีความคิดเห็น'
+      disabled_comments: 'ความคิดเห็นถูกปิดการใช้งานสำหรับสตูดิโอนี้'
+      post_error: 'เกิดข้อผิดพลาดขณะโพสต์ความคิดเห็นของคุณ ลองอีกครั้งในภายหลัง'
+      delete_error: 'เกิดข้อผิดพลาดขณะนำความคิดเห็นออก ลองอีกครั้งในภายหลัง'
+    activity_list:
+      title: 'กิจกรรม'
+      join_studio: '%user% เข้าร่วมสตูดิโอ'
+      add_project: '%user% แสดงความคิดเห็น'
+      add_comment: '%user% เพิ่มโปรเจ็กต์'
+    members_list:
+      title: 'สมาชิกในสตูดิโอ'
+      project_count: '{0} ไม่มีโครงการสตูดิโอ |{1} โครงการสตูดิโอ 1 โครงการ |]1,Inf] %count% โครงการสตูดิโอ'
+      promote_member: 'เลื่อนระดับสมาชิกเป็นผู้ดูแลระบบ'
+      promotion_failed: 'เกิดข้อผิดพลาดระหว่างการโปรโมตสมาชิกรายนี้ ลองอีกครั้งในภายหลัง'
+      ban_member: 'แบนสมาชิกจากสตูดิโอ'
+      ban_failed: 'เกิดข้อผิดพลาดขณะแบนสมาชิกรายนี้ ลองอีกครั้งในภายหลัง'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'การตั้งค่าทั่วไป'
+      studio_name: 'ชื่อสตูดิโอ'
       studio_description: 'คำอธิบาย'
       toggle_allow_comments: 'ความคิดเห็น'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'สาธารณะ'
 media_library:
   file:
     size: 'ขนาด: %size%'

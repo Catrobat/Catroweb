@@ -38,4 +38,4 @@ Feature: Privacy policy feature
     And I should see "Disagree"
     When I click "#agreeButton"
     And I wait for the page to be loaded
-    Then I should be on "app/register/check-email"
+    Then I should be on "app/"

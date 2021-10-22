@@ -181,6 +181,7 @@ programs:
   link: ప్రాజెక్ట్ లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయండి
   reactionsText: ప్రతిచర్యలు
   downloadErrorText: ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేస్తున్నప్పుడు లోపం సంభవించింది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి.
+  downloadStartText: Download has started...
   showTranslation: అనువాదం చూపించు
   hideTranslation: అనువాదాన్ని దాచు
   translatedByLine: ద్వారా అనువదించబడింది %provider% నుండి %sourceLanguage% కు %targetLanguage%
@@ -749,9 +750,6 @@ extensions:
       title: మనస్సు తుఫానులు
 studio:
   details:
-    general: 'సాధారణ'
-    projects: 'ప్రాజెక్టులు'
-    comments: 'వ్యాఖ్యలు'
     public: 'ప్రజా'
     private: 'ప్రైవేట్'
     join: 'చేరండి'
@@ -762,23 +760,30 @@ studio:
     remove_project_error: 'స్టూడియో నుండి ప్రాజెక్ట్‌ను తీసివేయడంలో విఫలమైంది!'
     remove_project_success: 'ప్రాజెక్ట్ స్టూడియో నుండి విజయవంతంగా తీసివేయబడింది!'
     no_projects: 'స్టూడియోలో ఇంకా ఏ ప్రాజెక్ట్‌లు లేవు'
-    no_comments: 'స్టూడియోలో ఇంకా ఎలాంటి వ్యాఖ్యలు లేవు'
-    type_something: 'ఏదో టైప్ చేయండి'
-    send_comment: 'పంపండి'
-    comment_error: 'మీ వ్యాఖ్యను పోస్ట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
-    remove_comment_error: 'వ్యాఖ్యను తీసివేసేటప్పుడు ఏదో తప్పు జరిగింది!'
-    replies: 'ప్రత్యుత్తరాలు'
     updateCoverError: 'స్టూడియో కవర్‌ని అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
-    created_studio: 'స్టూడియోను సృష్టించారు'
-    activity: 'కార్యాచరణ'
-    activity_add_comment: 'వ్యాఖ్యానించారు'
-    activity_add_project: 'కొత్త ప్రాజెక్ట్ జోడించబడింది %project% స్టూడియోకి'
-    activity_add_user: 'కొత్త వినియోగదారుని జోడించారు %user% స్టూడియోకి'
-    members: 'స్టూడియో సభ్యులు'
-    remove_user: 'స్టూడియో నుండి తీసివేయండి'
-    promote_user: 'అడ్మిన్‌గా ప్రమోట్ చేయండి'
-    promote_failed: 'ఈ వినియోగదారుని అడ్మిన్‌గా ప్రచారం చేయడం విఫలమైంది'
-    ban_user_failed: 'స్టూడియో నుండి వినియోగదారుని నిషేధించడం విఫలమైంది!'
+    projects:
+      title: 'projects'
+    comments:
+      title: 'వ్యాఖ్యలు'
+      type_something: 'Type something'
+      replies: 'replies'
+      send: 'send'
+      no_comments: 'This studio has no comments yet.'
+      disabled_comments: 'Comments have been disabled for this studio.'
+      post_error: 'Something went wrong while posting your comment. Try again later.'
+      delete_error: 'Something went wrong while removing the comment. Try again later.'
+    activity_list:
+      title: 'Activities'
+      join_studio: '%user% joined the studio.'
+      add_project: '%user% left a comment.'
+      add_comment: '%user% added a project.'
+    members_list:
+      title: 'Studio members'
+      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      promote_member: 'Promote member to admin'
+      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      ban_member: 'Ban member from studio'
+      ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
