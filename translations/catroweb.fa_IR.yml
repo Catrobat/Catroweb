@@ -643,7 +643,7 @@ flavor:
   phirocode: PhiroCode
   luna: Luna & Cat
   create@school: Create@School
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'کپی رایت&copy;%year%<a href="http://www.catrobat.org">Catrobat</a>. همه حقوق محفوظ است.'
 agree: موافق
 disagree: نمی‌پذیرم
 profileLoader:
@@ -740,7 +740,7 @@ extensions:
     phiro:
       title: فیرو
     raspberry_pi:
-      title: Raspberry PI
+      title: رزبری پی
     embroidery:
       title: گلدوزی
     mindstorms:
@@ -786,10 +786,10 @@ studio:
       studio_name: 'Studio Name'
       studio_description: 'توضیح'
       toggle_allow_comments: 'نظرات'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'عمومی'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'اندازه: %size%'
     type_description:
       image: 'نوع: تصویر'
       project: 'نوع: پروژه'
