@@ -21,7 +21,7 @@
         "doctrine/doctrine-migrations-bundle": "^3.1",
         "doctrine/orm": "^2.7",
         "eightpoints/guzzle-bundle": "^8.2",
-        "friendsofsymfony/elastica-bundle": "^5.2",
+        "friendsofsymfony/elastica-bundle": "^6.0",
         "friendsofsymfony/jsrouting-bundle": "^2.7",
         "friendsofsymfony/rest-bundle": "^2.8",
         "gesdinet/jwt-refresh-token-bundle": "^0.12.0",
