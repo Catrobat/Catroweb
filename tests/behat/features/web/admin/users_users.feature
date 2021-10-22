@@ -4,14 +4,14 @@ Feature: Admin featured programs
 
   Background:
     Given there are admins:
-      | name  | password | token      | email                | id |
-      | Edmin | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
+      | name  | password | email                |
+      | Edmin | 123456   | admin@pocketcode.org |
 
     And there are users:
-      | name      | password | token      | email               | id | enabled |
-      | Superman  | 123456   | cccccccccc | dev1@pocketcode.org | 1  | true    |
-      | Gregor    | 123456   | dddddddddd | dev2@pocketcode.org | 2  | false   |
-      | Frank Jr. | 123456   | qwertyuiop | dev3@pocketcode.org | 3  | true    |
+      | name      | email               | enabled |
+      | Superman  | dev1@pocketcode.org | true    |
+      | Gregor    | dev2@pocketcode.org | false   |
+      | Frank Jr. | dev3@pocketcode.org | true    |
 
     And the users are created at:
       | name      | created_at          |
