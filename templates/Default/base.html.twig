@@ -25,31 +25,28 @@
 </head>
 
 <body class="body-with-sidebar">
-<div id="page-container" class="pe-0 ps-0">
 
-  {% include 'Header/header.html.twig' with
-    {
-      page_title: block('page_title') ?? '',
-      back_path: block('back_path') ?? '',
-      no_search: block('no_search') ?? ''
-    }
-  %}
+{% include 'Header/header.html.twig' with
+  {
+    page_title: block('page_title') ?? '',
+    back_path: block('back_path') ?? '',
+    no_search: block('no_search') ?? ''
+  } %}
 
-  {% include 'Default/snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
+{% include 'Default/snackbar.html.twig' with {'snackbar_id': 'share-snackbar'} only %}
 
-  {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
+{% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
-  <div class="container body-content page-content">
-    {% block body %}{% endblock %}
-  </div>
+<div class="container body-content page-content">
+  {% block body %}{% endblock %}
+</div>
 
-  {% include 'Default/footer.html.twig' %}
+{% include 'Default/footer.html.twig' %}
 
-  <div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
-  <div class="js-app-env" data-app-env="'{{ app_env }}"></div>
-  <div class="js-user-state" data-is-user-logged-in="{{ app.user != null }}"></div>
+<div id="app-version" data-app-version="{{ app_version }}" style="display: none;">{{ app_version }}</div>
+<div class="js-app-env" data-app-env="'{{ app_env }}"></div>
+<div class="js-user-state" data-is-user-logged-in="{{ app.user != null }}"></div>
 
-</div>{# page-container#}
 
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>

@@ -9,14 +9,14 @@ Feature:
     When I click "#btn-login"
     And I wait for the page to be loaded
     Then I should be on "/app/login"
-    When I follow "Create an account"
+    When I follow "Create account"
     And I wait for the page to be loaded
     Then I should be on "/app/register/"
     And I fill in "fos_user_registration_form_username" with "CatrobatNew"
     And I fill in "fos_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create an account"
+    Then I press "Create account"
     Then I should see a "#termsModal" element
     Then I wait for AJAX to finish
     Then I click "#agreeButton"
@@ -30,7 +30,7 @@ Feature:
     And I fill in "fos_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123457"
-    Then I press "Create an account"
+    Then I press "Create account"
     Then I wait for AJAX to finish
     Then I should see a "#termsModal" element
     Then I click "#agreeButton"
@@ -45,7 +45,7 @@ Feature:
     And I fill in "fos_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "12345"
     And I fill in "fos_user_registration_form_plainPassword_second" with "12345"
-    Then I press "Create an account"
+    Then I press "Create account"
     Then I should see a "#termsModal" element
     Then I wait for AJAX to finish
     Then I click "#agreeButton"
@@ -64,7 +64,7 @@ Feature:
     And I fill in "fos_user_registration_form[email]" with "Catrobat@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create an account"
+    Then I press "Create account"
     And I wait for AJAX to finish
     Then I should see a "#termsModal" element
     When I click "#agreeButton"
@@ -82,7 +82,7 @@ Feature:
     And I fill in "fos_user_registration_form[email]" with "dev1@pocketcode.org"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create an account"
+    Then I press "Create account"
     And I wait for AJAX to finish
     Then I should see a "#termsModal" element
     When I click "#agreeButton"
@@ -96,7 +96,7 @@ Feature:
     And I fill in "fos_user_registration_form[email]" with "dev1337@pocketcode.org"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create an account"
+    Then I press "Create account"
     And I wait for AJAX to finish
     Then I should see a "#termsModal" element
     When I click "#agreeButton"
@@ -117,7 +117,7 @@ Feature:
     And I fill in "fos_user_registration_form[email]" with "CatrobatNew@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    Then I press "Create an account"
+    Then I press "Create account"
     And I wait for AJAX to finish
     Then I should see a "#termsModal" element
     When I click "#agreeButton"
