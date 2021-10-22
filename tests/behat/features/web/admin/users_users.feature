@@ -4,14 +4,14 @@ Feature: Admin featured programs
 
   Background:
     Given there are admins:
-      | name  | password | email                |
-      | Edmin | 123456   | admin@pocketcode.org |
+      | id | name  | password | email                |
+      | 1  | Edmin | 123456   | admin@pocketcode.org |
 
     And there are users:
-      | name      | email               | enabled |
-      | Superman  | dev1@pocketcode.org | true    |
-      | Gregor    | dev2@pocketcode.org | false   |
-      | Frank Jr. | dev3@pocketcode.org | true    |
+      | id | name      | email               | enabled |
+      | 2  | Superman  | dev1@pocketcode.org | true    |
+      | 3  | Gregor    | dev2@pocketcode.org | false   |
+      | 4  | Frank Jr. | dev3@pocketcode.org | true    |
 
     And the users are created at:
       | name      | created_at          |
@@ -95,7 +95,7 @@ Feature: Admin featured programs
 
   Scenario: Disable user
     Given I log in as "Edmin" with the password "123456"
-    And I am on "/admin/app/user/1/edit?_tab=tab_s5ebe49e9bfdfd_282749955_2"
+    And I am on "/admin/app/user/2/edit?_tab=tab_s5ebe49e9bfdfd_282749955_2"
     And I wait for the page to be loaded
     Then I click ".iCheck-helper"
     And I wait for the page to be loaded
