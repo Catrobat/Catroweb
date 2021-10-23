@@ -13,7 +13,7 @@ Feature: Privacy policy feature
     And I fill in "fos_user_registration_form[email]" with "Newuser@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    And I press "Create an account"
+    And I press "Create account"
     And I wait for AJAX to finish
     Then I should see a "#termsModal" element
     And I should see "Privacy Policy"
@@ -30,7 +30,7 @@ Feature: Privacy policy feature
     And I fill in "fos_user_registration_form[email]" with "Newuser@gmail.com"
     And I fill in "fos_user_registration_form_plainPassword_first" with "123456"
     And I fill in "fos_user_registration_form_plainPassword_second" with "123456"
-    And I press "Create an account"
+    And I press "Create account"
     And I wait for AJAX to finish
     Then I should see a "#termsModal" element
     And I should see "Privacy Policy"
