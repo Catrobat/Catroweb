@@ -40,11 +40,11 @@
 
 {% block javascript %}
 
+<script src="{{ asset('js/modules/jquery.min.js') }}"></script>
+<script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
 <script src="{{ asset('js/OldCodeView.js') }}"></script>
 
 {% if isVersionSupportedByCatBlocks(version) %}
-  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-  <script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
   <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
   <script src="{{ asset('js/ProgramCodeView.js') }}"></script>
   <script>
