@@ -7,13 +7,8 @@
 
 {% block head %}
   {# Until catblocks supports bs5 #}
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  {{ encore_entry_link_tags('catblocks_code_view') }}
-  {% if isVersionSupportedByCatBlocks(version) %}
-    <link rel="stylesheet" href="{{ asset('catblocks/main.css') }}"/>
-  {% endif %}
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+  {{ encore_entry_link_tags('code_view') }}
 {% endblock %}
 
 {% block body %}
@@ -25,35 +20,114 @@
   </div>
   {% if isVersionSupportedByCatBlocks(version) %}
 
-    <div class="bootstrap-iso">
-      <div id='catblocks-code-container'>
-      </div>
-    </div>
+    <div id='catblocks-code-container'></div>
     {# As long as catblocks is not stable we need to also load the old view as backup #}
     {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id, 'visible' : false })) }}
   {% else %}
     {{ render(controller('App\\Catrobat\\Controller\\Web\\CodeViewController:oldView', {'id' : id })) }}
   {% endif %}
 
+  <div class="js-code-view"
+       data-app-env="{{ app_env }}"
+       data-locale="{{ app.request.getLocale() }}"
+       data-extracted-project-path="{{ app.request.getSchemeAndHttpHost() ~ '/' ~ extracted_path ~ '/' }}"
+       data-project-hash="{{ extracted_dir_hash }}"
+  ></div>
+
 {% endblock %}
 
 
 {% block javascript %}
 
-<script src="{{ asset('js/modules/jquery.min.js') }}"></script>
-<script src="{{ asset('js/modules/bootstrap.min.js') }}"></script>
-<script src="{{ asset('js/OldCodeView.js') }}"></script>
+  {{ encore_entry_script_tags('code_view') }}
 
-{% if isVersionSupportedByCatBlocks(version) %}
+  {# Until catblocks supports bs5 #}
+  <script src="{{ asset('js/modules/jquery.min.js') }}"></script>
   <script src="{{ asset('catblocks/CatBlocks.js') }}"></script>
-  <script src="{{ asset('js/ProgramCodeView.js') }}"></script>
+
   <script>
-    let codeView = new ProgramCodeView('{{ app.request.getSchemeAndHttpHost() ~ '/' }}',
-      '{{ extracted_path }}', '{{ extracted_dir_hash }}',
-      '{{ app.request.getLocale() }}', '{{ app_env }}', CatBlocks)
-    codeView.init()
+    $(() => {
+      const $codeView = $('.js-code-view')
+      const appEnv = $codeView.data('app-env')
+      const locale = $codeView.data('locale')
+      const extractedProjectPath = $codeView.data('extracted-project-path')
+      const projectHash = $codeView.data('project-hash')
+
+      if (appEnv === 'test') {
+        disableCodeViewInTestEnv()
+      } else {
+        initializeCodeView()
+      }
+
+      function initializeCodeView () {
+        /*
+         * initiate CatBlocks
+         *
+         * define element:
+         *  - container to inject CatBlocks hidden workflow
+         *  - renderSize to use for blocks
+         *  - shareRoot
+         *  - language to use for rendering texts
+         *  - i18n to define the path to the translations
+         *  - media for CatBlocks
+         *  - noImageFound is unused, just a placeholder for now
+         */
+        CatBlocks.init({
+          container: 'catblocks-code-container',
+          renderSize: 0.75,
+          language: locale,
+          shareRoot: 'catblocks',
+          media: 'media',
+          i18n: 'i18n',
+          noImageFound: 'No_Image_Available.jpg'
+        })
+
+        /**
+         * start rendering program into div
+         */
+        window.onload = function () {
+          CatBlocks.render(extractedProjectPath, projectHash)
+            .catch(err => {
+              console.error('Failed to parse catroid file.')
+              console.error(err)
+              console.warn('Using old code view instead of new one')
+              // Show old view instead
+              $('#catblocks-code-container').innerHTML = ''
+              $('#codeview-wrapper').removeClass('d-none')
+              $('#code-view-spinner').addClass('d-none')
+            })
+            .finally(() => {
+              $('#code-view-spinner').addClass('d-none')
+              $('#code-view-toggler').removeClass('d-none')
+              // CatBlocks need a visible container to calculate the svg sizes.
+              // Still it should be collapsed on a page load.
+              $('#collapseCodeView').addClass('collapse').addClass('hide')
+            })
+        }
+      }
+
+      function disableCodeViewInTestEnv () {
+        console.log('Catblocks must be disabled in the test env.  Why?\n' +
+          'Catblocks uses blockly which results in a crash our test system (Behat tests + chrome headless)\n' +
+          'Where? @ init -> blockly.inject(...)\n' +
+          '\n' +
+          'What do we know so far?\n' +
+          'Pretty sure the fault is not by Catblocks. Even the simple blockly demo crashs -> \n' +
+          '  Given I am on "https://blockly-demo.appspot.com/static/demos/fixed/index.html"\n' +
+          '  And I should see "Fixed Blockly"\n' +
+          '  Then the element "#blocklyDiv" should be visible\n' +
+          '\n' +
+          'Chrome crash does not give much useful information, only that much memory was allocated\n' +
+          'The bug could be either in the chrome headless or the mink implementation\n' +
+          'Large sites per se seem not to be the problem. E.g. tested with https://scratch.mit.edu/projects/390060499/\n' +
+          '\n'
+        )
+        $('#catblocks-code-container').text(
+          'Disabled in test env due to problems in the chrome headless/mink/blockly interactions'
+        )
+      }
+   })
   </script>
-{% endif %}
 
 {% endblock %}
 
