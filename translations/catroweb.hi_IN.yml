@@ -181,7 +181,7 @@ programs:
   link: क्लिपबोर्ड पर प्रोजेक्ट लिंक कॉपी करें
   reactionsText: प्रतिक्रियाएं
   downloadErrorText: प्रोजेक्ट डाउनलोड करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।
-  downloadStartText: Download has started...
+  downloadStartText: डाउनलोड शुरू हुआ...
   showTranslation: अनुवाद दिखाएं
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: अनुगामी
 login:
   login: प्रवेश करे
+  button:
+    loginNow: Login now
+    createAccount: खाता बनाएँ
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: आपका पासवर्ड या उपयोगकर्ता नाम गलत था।
   noUsername: आपका उपयोगकर्ता नाम या ईमेल पता नहीं मिला।
   forgotPass: आप पारण शब्द या उपयोगकर्ता नाम भूल चुके हैं ?
-  recoverPass: 'पारण शब्द पुन: प्राप्त करें'
   recoverPassSend: एक ईमेल आपके ईमेल पते पर भेजा गया था। कृपया अपने इनबॉक्स की जाँच करें।
   alreadyReset: पिछले 24 घंटों के भीतर इस उपयोगकर्ता के लिए पासवर्ड पहले ही मांगे जा चुके हैं।
   confirmationSend: आपके पंजीकरण की पुष्टि करने के लिए एक ईमेल आपके मेल पते पर भेजा गया था। कृपया अपना इनबॉक्स देखें और अपना खाता सक्रिय करें।
@@ -380,6 +385,17 @@ login:
   email: ईमेल
   passwordFirst: 'पारण शब्द:'
   passwordSecond: पासवर्ड की पुष्टि करें
+register:
+  title: Sign up
+  button:
+    cancel: रद्द करें
+    createAccount: खाता बनाएँ
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: रद्द करें
+    submit: Recover password
 apk:
   download: ऐप के रूप में डाउनलोड करें
   prepare: 'एप्लिकेशन तैयार करें'
@@ -669,7 +685,7 @@ category:
 achievements:
   sidebar:
     title: 'उपलब्धियां'
-    badge: 'नवीन व'
+    badge: 'नया'
   overview:
     header: 'उपलब्धियां'
     most_recent_achievement:

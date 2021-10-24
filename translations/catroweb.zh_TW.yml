@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: 追隨者
 login:
   login: 登入
+  button:
+    loginNow: Login now
+    createAccount: 創建帳號
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: 您的密碼或使用者名稱錯誤。
   noUsername: 找不到您的使用者名稱或電子郵件地址。
   forgotPass: 忘記密碼或使用者名稱嗎?
-  recoverPass: 恢復密碼
   recoverPassSend: 一封電子郵件已發送到您的電子郵件地址。請檢查您的收件箱。
   alreadyReset: 此用戶的密碼已在過去 24 小時內請求過。
   confirmationSend: 一封確認您註冊的電子郵件已發送到您的郵件地址。請檢查您的收件箱並激活您的帳戶。
@@ -380,6 +385,17 @@ login:
   email: 電子郵件
   passwordFirst: '&#x6210;&#x529F;&#x66F4;&#x65B0;&#x60A8;&#x7684;&#x570B;&#x5BB6;&#x3002;'
   passwordSecond: Password Confirm
+register:
+  title: Sign up
+  button:
+    cancel: 取消
+    createAccount: 創建帳號
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: 取消
+    submit: Recover password
 apk:
   download: 下載為應用程序
   prepare: '作為應用獲取'

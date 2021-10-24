@@ -366,10 +366,15 @@ menu:
   followersAndFollowing: అనుచరుడు
 login:
   login: ప్రవేశించండి
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: మీ పాస్‌వర్డ్ లేదా వినియోగదారు పేరు తప్పు.
   noUsername: మీ వినియోగదారు పేరు లేదా ఇమెయిల్ చిరునామా కనుగొనబడలేదు.
   forgotPass: పాస్‌వర్డ్ లేదా వినియోగదారు పేరు మర్చిపోయారా?
-  recoverPass: శంకేత పదం తిరిగి పొందుట
   recoverPassSend: మీ ఇమెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ని చెక్ చేయండి.
   alreadyReset: ఈ వినియోగదారు కోసం పాస్‌వర్డ్ ఇప్పటికే గత 24 గంటల్లో అభ్యర్థించబడింది.
   confirmationSend: మీ నమోదును నిర్ధారించడానికి ఒక ఇమెయిల్ మీ మెయిల్ చిరునామాకు పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ను తనిఖీ చేయండి మరియు మీ ఖాతాను సక్రియం చేయండి.
@@ -383,6 +388,17 @@ login:
   email: ఇమెయిల్
   passwordFirst: పాస్వర్డ్
   passwordSecond: పాస్వర్డ్ ధృవీకరించబడింది
+register:
+  title: Sign up
+  button:
+    cancel: రద్దు చేయు
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: రద్దు చేయు
+    submit: Recover password
 apk:
   download: యాప్‌గా డౌన్‌లోడ్ చేయండి
   prepare: 'యాప్‌గా పొందండి'

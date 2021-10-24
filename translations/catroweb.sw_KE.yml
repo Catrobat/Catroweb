@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Follower
 login:
   login: Ingia
+  button:
+    loginNow: Login now
+    createAccount: Unda akaunti
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Jina la mtumiji au nenosiri havikuwa sahihi.
   noUsername: Your username or email address was not found.
   forgotPass: Umesahau nenosiri au jina la mtumiaji?
-  recoverPass: Rudisha nenosiri
   recoverPassSend: Barua pepe imetumwa kwenye anauani ya barua pepe yako. Tafadhali angalia akaunti yako.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: Baruapepe
   passwordFirst: Nenosiri
   passwordSecond: Password Confirm
+register:
+  title: Sign up
+  button:
+    cancel: Sitisha
+    createAccount: Unda akaunti
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Sitisha
+    submit: Recover password
 apk:
   download: Download as app
   prepare: 'Get as app'

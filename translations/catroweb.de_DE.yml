@@ -367,10 +367,15 @@ menu:
   followersAndFollowing: Abonnenten
 login:
   login: Einloggen
+  button:
+    loginNow: Login now
+    createAccount: Konto erstellen
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Das Passwort oder der Username ist falsch.
   noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
   forgotPass: Passwort oder Usernamen vergessen?
-  recoverPass: Passwort wiederherstellen
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   alreadyReset: Ein Passwort für diesen Account wurde bereits innerhalb der letzten 24 Stunden angefordert.
   confirmationSend: Eine E-Mail zur Bestätigung der Registrierung wurde an deine E-Mail-Adresse gesendet. Bitte überprüfe deinen Posteingang und aktivieren deinen Account.
@@ -384,6 +389,17 @@ login:
   email: Email
   passwordFirst: Passwort
   passwordSecond: Passwort bestätigen
+register:
+  title: Sign up
+  button:
+    cancel: Abbrechen
+    createAccount: Konto erstellen
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Abbrechen
+    submit: Recover password
 apk:
   download: App herunterladen
   prepare: 'App erstellen'

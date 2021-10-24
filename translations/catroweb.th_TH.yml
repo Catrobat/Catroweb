@@ -369,10 +369,15 @@ menu:
   followersAndFollowing: ผู้ติดตาม
 login:
   login: เข้าสู่ระบบ
+  button:
+    loginNow: Login now
+    createAccount: สร้างบัญชี
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: รหัสผ่านหรือชื่อผู้ใช้ของคุณไม่ถูกต้อง
   noUsername: ไม่พบชื่อผู้ใช้หรืออีเมล์คุณ
   forgotPass: ลืมรหัสผ่านหรือชื่อผู้ใช้?
-  recoverPass: กู้รหัสผ่านคืน
   recoverPassSend: อีเมล์ถูกส่งไปยังอีเมล์แอดเดรสของคุณ กรุณาตรวจสอบกล่องขาเข้า
   alreadyReset: มีการขอรหัสผ่านสำหรับผู้ใช้รายนี้แล้วภายใน 24 ชั่วโมงที่ผ่านมา
   confirmationSend: อีเมลเพื่อยืนยันการลงทะเบียนของคุณถูกส่งไปยังที่อยู่อีเมลของคุณ โปรดตรวจสอบกล่องจดหมายของคุณและเปิดใช้งานบัญชีของคุณ
@@ -386,6 +391,17 @@ login:
   email: อีเมล์
   passwordFirst: รหัสผ่าน
   passwordSecond: ยืนยันรหัสผ่าน
+register:
+  title: Sign up
+  button:
+    cancel: ยกเลิก
+    createAccount: สร้างบัญชี
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: ยกเลิก
+    submit: Recover password
 apk:
   download: ดาวน์โหลด APK
   prepare: 'รับเป็นแอป'

@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: پیروکاروں
 login:
   login: لاگ اِن
+  button:
+    loginNow: Login now
+    createAccount: "اکاؤنٹ بنائیں\n"
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
   noUsername: آپکا یوزر نیم یا ای میل نہیں ملا.
   forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
-  recoverPass: خفیہ کوڈ بحال کریں
   recoverPassSend: ایک ای میل آپ کے ای میل پتہ پر بھیجا گیا۔ برائے مہربانی اپنے ان باکس میں دیکھئے۔
   alreadyReset: اس صارف کے پاس پاس ورڈ پہلے ہی گزشتہ ۲۴ گھنٹوں کے اندر اندر درخواست کی گئی ہے.
   confirmationSend: آپ کے رجسٹریشن کی تصدیق کرنے کے لئے ایک ای میل آپ کے میل ایڈریس پر بھیجا گیا تھا. براہ کرم اپنے ان باکس کو چیک کریں اور اپنے اکاؤنٹ کو چالو کریں.
@@ -380,6 +385,17 @@ login:
   email: ای میل
   passwordFirst: خفیہ کوڈ
   passwordSecond: پاس ورڈ کی تصدیق
+register:
+  title: Sign up
+  button:
+    cancel: منسوخ
+    createAccount: "اکاؤنٹ بنائیں\n"
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: منسوخ
+    submit: Recover password
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
   prepare: 'ایپ تیار کریں'
