@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Follower
 login:
   login: התחברות
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: שם המשתמש או הסיסמה שלך שגויים.
   noUsername: Your username or email address was not found.
   forgotPass: שכחת סיסמא או שם משתמש?
-  recoverPass: שיחזור הסיסמה
   recoverPassSend: דואר אלקטרוני נשלח לכתובת הדוא ל שלך. אנא בדוק את תיבת הדואר הנכנס שלך.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: Email
   passwordFirst: סיסמה
   passwordSecond: Password confirm
+register:
+  title: Sign up
+  button:
+    cancel: בטל
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: בטל
+    submit: Recover password
 apk:
   download: הורד כיישום (apps)
   prepare: 'הכנת ישום'

@@ -362,10 +362,15 @@ menu:
   followersAndFollowing: Takipçin
 login:
   login: Oturum aç
+  button:
+    loginNow: Login now
+    createAccount: Hesap açmak
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Kullanıcı adı veya şifre yanlış.
   noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.
   forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
-  recoverPass: Parolayı hatırlat
   recoverPassSend: Adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin.
   alreadyReset: Bu kullanıcının şifresi son 24 saat içinde istendi.
   confirmationSend: Kaydınızı onaylamak için posta adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin ve hesabınızı etkinleştirin.
@@ -379,6 +384,17 @@ login:
   email: E-posta
   passwordFirst: Şifre
   passwordSecond: Şifre onayla
+register:
+  title: Sign up
+  button:
+    cancel: İptal et
+    createAccount: Hesap açmak
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: İptal et
+    submit: Recover password
 apk:
   download: Uyglm'yı indir
   prepare: 'Uyglm yap'

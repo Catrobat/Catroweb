@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: دنبال کننده
 login:
   login: وارد شدن
+  button:
+    loginNow: Login now
+    createAccount: ایجاد حساب کاربری
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: رمز عبور یا نام کاربری شما نادرست بود.
   noUsername: نام کاربری یا آدرس ایمیل شما یافت نشد
   forgotPass: رمز عبور یا نام کاربری را فراموش کرده اید؟
-  recoverPass: بازیابی رمز عبور
   recoverPassSend: یک ایمیل به آدرس ایمیل شما ارسال شد. لطفا صندوق پستی خود را بررسی کنید.
   alreadyReset: رمز عبور این کاربر قبلا در ۲۴ ساعت گذشته درخواست شده است.
   confirmationSend: یک ایمیل برای تأیید ثبت نام شما به آدرس ایمیل شما ارسال شد. لطفا صندوق ورودی خود را بررسی کنید و حساب خود را فعال کنید.
@@ -380,6 +385,17 @@ login:
   email: پست الکترونیک
   passwordFirst: رمز عبور
   passwordSecond: Password Confirm
+register:
+  title: Sign up
+  button:
+    cancel: لغو 
+    createAccount: ایجاد حساب کاربری
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: لغو 
+    submit: Recover password
 apk:
   download: دانلود به عنوان برنامه
   prepare: 'به عنوان برنامه دریافت کنید'

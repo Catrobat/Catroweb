@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Follower
 login:
   login: Prijava
+  button:
+    loginNow: Login now
+    createAccount: Kreirajte račun
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Lozinka ili korisničko ime je netačno.
   noUsername: Korisničko ime ili email adresa nije pronađena.
   forgotPass: Lozinka ili korisničko ime zaboravljeni?
-  recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: Email
   passwordFirst: Lozinka
   passwordSecond: Password confirm
+register:
+  title: Sign up
+  button:
+    cancel: Odustani
+    createAccount: Kreirajte račun
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Odustani
+    submit: Recover password
 apk:
   download: Download as app
   prepare: 'Get as app'

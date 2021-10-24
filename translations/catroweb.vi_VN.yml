@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Follower
 login:
   login: Đăng nhập
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Mật khẩu hoặc tên người dùng của bạn không chính xác.
   noUsername: Không tìm thấy địa chỉ email hoặc tên người dùng của bạn.
   forgotPass: Quên mật khẩu hoặc tên người dùng?
-  recoverPass: Khôi phục mật khẩu
   recoverPassSend: Một email được gửi tới địa chỉ email của bạn. Xin vui lòng kiểm tra hộp thư đến.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: Thư điện tử
   passwordFirst: Mật khẩu
   passwordSecond: Password confirm
+register:
+  title: Sign up
+  button:
+    cancel: Hủy bỏ
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Hủy bỏ
+    submit: Recover password
 apk:
   download: Tải về ứng dụng
   prepare: 'Chuẩn bị ứng dụng'

@@ -366,10 +366,15 @@ menu:
   followersAndFollowing: Pratilac
 login:
   login: Prijava
+  button:
+    loginNow: Login now
+    createAccount: Napravite nalog
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Lozinka ili korisničko ime je netačno.
   noUsername: Korisničko ime ili e-mail adresa nije pronađena.
   forgotPass: Zaboravio lozinku ili korisničko ime?
-  recoverPass: Povrati svoju lozinku
   recoverPassSend: E-mail je poslan na tvoju e-mail adresu. Molimo proveri svoje prijemno sanduče.
   alreadyReset: Lozinka za ovog korisnika već je zatražena u poslednja 24 sata.
   confirmationSend: Na vašu e-mail adresu poslan je e-mail za potvrdu vaše registracije. Proverite svoj inbok i aktivirajte svoj račun.
@@ -383,6 +388,17 @@ login:
   email: Email
   passwordFirst: Lozinka
   passwordSecond: Potvrda lozinke
+register:
+  title: Sign up
+  button:
+    cancel: Otkaži
+    createAccount: Napravite nalog
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Otkaži
+    submit: Recover password
 apk:
   download: Preuzmi kao app
   prepare: 'Pripremi app'

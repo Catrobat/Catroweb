@@ -364,10 +364,15 @@ menu:
   followersAndFollowing: Følger
 login:
   login: Logg på
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Ditt passord eller brukernavn er feil.
   noUsername: Din brukernavn eller e-postadresse ble ikke funnet.
   forgotPass: Glemt passord eller brukernavn?
-  recoverPass: Gjenopprett passord
   recoverPassSend: En e-post ble sendt til e-postadressen din. Vennligst sjekk innboksen din.
   alreadyReset: Passordet for denne brukeren har allerede blitt bedt om de siste 24 timene.
   confirmationSend: En e-post for å bekrefte registreringen ble sendt til din e-postadresse. Vennligst sjekk din innboks og aktiver kontoen din.
@@ -381,6 +386,17 @@ login:
   email: E-post
   passwordFirst: Passord
   passwordSecond: Bekreft passord
+register:
+  title: Sign up
+  button:
+    cancel: Avbryt
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Avbryt
+    submit: Recover password
 apk:
   download: Last ned som app
   prepare: 'Få som app'

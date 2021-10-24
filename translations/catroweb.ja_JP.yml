@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: フォロワー
 login:
   login: ログイン
+  button:
+    loginNow: Login now
+    createAccount: アカウントを作成
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: ユーザー名またはパスワードが正しくありません。
   noUsername: あなたのユーザー名または電子メール アドレスが見つかりませんでした。
   forgotPass: パスワードまたはユーザ名を忘れましたか?
-  recoverPass: パスワードの回復
   recoverPassSend: あなたのメール アドレスにメールが送信されました。受信トレイを確認してください。
   alreadyReset: このユーザーのパスワードは過去24時間以内に要求されています。
   confirmationSend: あなたのメールアドレスに登録を確認するメールが送信されました。受信トレイを確認し、アカウントを有効にしてください。
@@ -380,6 +385,17 @@ login:
   email: Eメールアドレス
   passwordFirst: パスワード
   passwordSecond: パスワード確認
+register:
+  title: Sign up
+  button:
+    cancel: キャンセル
+    createAccount: アカウントを作成
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: キャンセル
+    submit: Recover password
 apk:
   download: アプリとしてダウンロード
   prepare: 'アプリを準備する'

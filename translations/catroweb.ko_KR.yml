@@ -360,10 +360,15 @@ menu:
   followersAndFollowing: 팔로워
 login:
   login: 로그인
+  button:
+    loginNow: Login now
+    createAccount: 계정 만들기
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: 사용자 이름 또는 암호가 잘못되었습니다.
   noUsername: 사용자 이름 또는 이메일 주소를 찾을 수 없습니다.
   forgotPass: 아이디나 비밀번호가 잘못 되었습니다.
-  recoverPass: 비밀번호 복구
   recoverPassSend: 이메일이 귀하의 이메일 주소로 보냈습니다. 받은 편지함을 확인하시기 바랍니다.
   alreadyReset: 이 사용자 암호는 지난 24시간안에 이미 요청했습니다.
   confirmationSend: 등록 확인 메일이 보내졌습니다. 메일함을 확인하여 계정을 살려주세요.
@@ -377,6 +382,17 @@ login:
   email: 이메일 주소
   passwordFirst: 비밀번호
   passwordSecond: 비밀 번호 확인
+register:
+  title: Sign up
+  button:
+    cancel: 취소
+    createAccount: 계정 만들기
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: 취소
+    submit: Recover password
 apk:
   download: 앱 다운로드하기
   prepare: '응용 프로그램 준비'

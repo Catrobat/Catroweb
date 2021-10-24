@@ -367,10 +367,15 @@ menu:
   followersAndFollowing: பின்பற்றுபவர்
 login:
   login: உள்நுழை
+  button:
+    loginNow: Login now
+    createAccount: கணக்கை உருவாக்கவும்
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: உங்கள் கடவுச்சொல் அல்லது பயனர்பெயர் தவறானது.
   noUsername: உங்கள் பயனர்பெயர் அல்லது மின்னஞ்சல் முகவரி கிடைக்கவில்லை.
   forgotPass: கடவுச்சொல் அல்லது பயனர்பெயரை மறந்துவிட்டீர்களா?
-  recoverPass: கடவுச்சொல்லை மீட்டெடு
   recoverPassSend: உங்கள் மின்னஞ்சல் முகவரிக்கு ஒரு மின்னஞ்சல் அனுப்பப்பட்டது. உங்கள் இன்பாக்ஸை சரிபார்க்கவும்.
   alreadyReset: இந்த பயனருக்கான கடவுச்சொல் கடந்த 24 மணி நேரத்திற்குள் ஏற்கனவே கோரப்பட்டுள்ளது.
   confirmationSend: உங்கள் பதிவை உறுதிப்படுத்த ஒரு மின்னஞ்சல் உங்கள் அஞ்சல் முகவரிக்கு அனுப்பப்பட்டது. உங்கள் இன்பாக்ஸை சரிபார்த்து உங்கள் கணக்கை செயல்படுத்தவும்.
@@ -384,6 +389,17 @@ login:
   email: மின்னஞ்சல்
   passwordFirst: கடவுச்சொல்
   passwordSecond: கடவுச்சொல்லை உறுதிப்படுத்து
+register:
+  title: Sign up
+  button:
+    cancel: தவிர்
+    createAccount: கணக்கை உருவாக்கவும்
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: தவிர்
+    submit: Recover password
 apk:
   download: செயலியை பதிவிறக்கவும்
   prepare: 'செயலியை தயாரிக்கவும்'

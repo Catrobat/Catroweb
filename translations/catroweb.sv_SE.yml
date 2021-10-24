@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Följare
 login:
   login: Logga in
+  button:
+    loginNow: Login now
+    createAccount: Skapa konto
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Ditt lösenord eller användarnamn var felaktigt.
   noUsername: Ditt användarnamn eller e-post adress hittades inte.
   forgotPass: Glömt lösenord eller användarnamn?
-  recoverPass: Återställ lösenord
   recoverPassSend: Ett e-postmeddelande skickades till din e-postadress. Vänligen kontrollera din inkorg.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: E-post
   passwordFirst: Lösenord
   passwordSecond: Password confirm
+register:
+  title: Sign up
+  button:
+    cancel: Avbryt
+    createAccount: Skapa konto
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Avbryt
+    submit: Recover password
 apk:
   download: Ladda ner som app
   prepare: 'Förbered app'

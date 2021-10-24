@@ -368,10 +368,15 @@ menu:
   followersAndFollowing: 关注者
 login:
   login: 登录
+  button:
+    loginNow: Login now
+    createAccount: 创造帐户
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: 您的密码或用户名不正确。
   noUsername: 找不到您的用户名或电子邮件地址。
   forgotPass: 忘记了密码或用户名？
-  recoverPass: 找回密码
   recoverPassSend: 一封电子邮件已发送到您的电子邮件地址。请检查您的收件箱。
   alreadyReset: 该用户的密码已经在过去24小时内被申请。
   confirmationSend: 一封确认您注册的电子邮件已发送到您的邮件地址。请检查您的收件箱并激活您的帐户。
@@ -385,6 +390,17 @@ login:
   email: 电子邮件
   passwordFirst: 密码
   passwordSecond: 密码确认
+register:
+  title: Sign up
+  button:
+    cancel: 取消
+    createAccount: 创造帐户
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: 取消
+    submit: Recover password
 apk:
   download: 下载程序
   prepare: '准备应用程序'

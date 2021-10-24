@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: İzləyici
 login:
   login: Giriş
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Şifrəniz və ya istifadəçi adınız yanlışdır.
   noUsername: İstifadəçi adı və ya e-poçt ünvanı tapılmadı.
   forgotPass: Şifrənizi və ya istifadəçi adınızı unutmusunuz?
-  recoverPass: Recover password
   recoverPassSend: E-poçtunuza bir e-poçt göndərildi. Zəhmət olmasa gələn qutunuzu yoxlayın.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: E-poçt
   passwordFirst: Şifrə
   passwordSecond: Password Confirm
+register:
+  title: Sign up
+  button:
+    cancel: İmtina et
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: İmtina et
+    submit: Recover password
 apk:
   download: Download as app
   prepare: 'Get as app'

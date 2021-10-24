@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Follower
 login:
   login: Σύνδεση
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Ο κωδικός ή το όνομα χρήστη ήταν λανθασμένο.
   noUsername: Το όνομα χρήστη ή η διεύθυνση email δεν βρέθηκε.
   forgotPass: Ξεχάσατε τον κωδικό πρόσβασης ή το όνομα χρήστη;
-  recoverPass: Ανάκτηση κωδικού πρόσβασης
   recoverPassSend: Ένα μήνυμα ηλεκτρονικού ταχυδρομείου εστάλη στη διεύθυνση email σας. Παρακαλούμε ελέγξτε τα Εισερχόμενά σας.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: Email
   passwordFirst: Password
   passwordSecond: Password Confirm
+register:
+  title: Sign up
+  button:
+    cancel: Ακύρωση
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Ακύρωση
+    submit: Recover password
 apk:
   download: Κατεβάστε ως app
   prepare: 'Προετοιμασία εφαρμογής'
