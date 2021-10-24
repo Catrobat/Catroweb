@@ -22,18 +22,41 @@ hr {
   border-color: var(--primary);
 }
 
-.log-in-text {
-  font-size: 18px;
-  vertical-align: middle;
+// ----------
+
+.login-text--secondary {
+  font-size: 85%;
 }
-.google-logo,
-.fb-logo{
-  -ms-transform: scale(0.6, 0.6);
-  -webkit-transform: scale(0.6, 0.6);
-  transform: scale(0.6, 0.6);
+
+.social-login-btn {
+  position: relative;
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 0 0.2em #000;
 }
-.apple-logo{
-  -ms-transform: scale(1.2, 1.2);
-  -webkit-transform: scale(1.2, 1.2);
-  transform: scale(1.2, 1.2);
+
+.social-login-btn--facebook {
+  background-color: #0572e6;
+}
+
+.social-login-btn__img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 1.25rem;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.social-login-btn__img--facebook {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.5rem;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
 }

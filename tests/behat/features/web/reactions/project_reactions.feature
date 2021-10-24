@@ -190,7 +190,7 @@ Feature: Reactions to projects "likes"
     Then I should be on "/app/login"
     Then I fill in "OtherUser" for "_username"
     And I fill in "123456" for "_password"
-    And I click "#_submit.login"
+    Then I press "Login"
     And I wait for AJAX to finish
     Then I should be logged in
     And the "#project-like-counter-small" element should contain "1"

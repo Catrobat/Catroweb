@@ -10,10 +10,15 @@
 
   {% block fos_user_content %}
 
-    {% include 'UserManagement/login_logo.html.twig' %}
-
-    <!-- Policy -->
     {% include 'PrivacyAndTerms/policy.html.twig' %}
+
+    <div class="row justify-content-center">
+      <div class="col-sm-11 col-md-8 col-lg-6 center">
+        <h1 class="h2">{{ "accountRecovery.title"|trans({}, "catroweb") }}</h1>
+
+        <p>{{ "accountRecovery.description"|trans({}, "catroweb") }}</p>
+      </div>
+    </div>
 
     <div class="row justify-content-center">
       <div class="col-sm-11 col-md-8 col-lg-6 text-center center">
@@ -26,7 +31,7 @@
     </div>
 
     <div class="row justify-content-center">
-      <div class="col-sm-11 col-md-8 col-lg-6 center">
+      <div class="col-sm-11 col-md-8 col-lg-6 mb-4">
 
         <form id="request-form form_fos" class="form-horizontal fos_user_resetting_request" role="form"
               action="{{ path('fos_user_resetting_send_email') }}" method="post">
@@ -40,38 +45,15 @@
                   'id': 'username',
                   'label': '' ~ 'login.userOrEmail'|trans({}, 'catroweb'),
                   'name': 'username',
+                  'leading_icon': 'person'
                 }
               } %}
 
-              <button id="recover" style="width: 100%;" class="login btn btn-primary" name="recover">
-                {{ "login.recoverPass"|trans({}, "catroweb") }}
-              </button>
-
-              <!-- Redirects -->
-              <div>
-                <div class="form-group">
-                  <div class="col-md-12 control">
-                    <div style="padding-top: 15px; font-size: 85%;">
-                      {{ 'login.alreadyAccount'|trans({}, 'catroweb') }}
-                      <a id="create_account" href="{{ path('login') }}" rel="noreferrer">
-                        {{ 'login.login'|trans({}, 'catroweb') }}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="form-group">
-                  <div class="col-md-12 control">
-                    <div style="font-size: 85%;">
-                      {{ 'login.noAccount'|trans({}, 'catroweb') }}
-                      <a id="create_account"
-                         href="{{ path('fos_user_registration_register') }}">
-                        {{ 'login.createAccount'|trans({}, 'catroweb') }}</a>
-                    </div>
-                  </div>
-                </div>
-
-                {% include 'UserManagement/or_line.html.twig' %}
+              <div class="mt-2" style="float: right;">
+                <a href="{{ path('login') }}" class="ms-2 btn btn-secondary">{{ "accountRecovery.button.cancel"|trans({}, "catroweb") }}</a>
+                <button id="recover" class="btn btn-primary" name="recover">
+                  {{ "accountRecovery.button.submit"|trans({}, "catroweb") }}
+                </button>
               </div>
 
             </div>
@@ -79,8 +61,6 @@
         </form>
       </div>
     </div>
-
-    {% include 'UserManagement/oauth_registration.html.twig' %}
 
   {% endblock fos_user_content %}
 

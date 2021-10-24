@@ -364,10 +364,15 @@ menu:
   followersAndFollowing: Ndjekës
 login:
   login: Kyçuni
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Përdoruesi ose fjalëkalimi juaj ishin të pasaktë.
   noUsername: Përdoruesi ose E-mail adresa nuk u gjetën.
   forgotPass: Keni harruar Fjalëkalimin ose Përdoruesin?
-  recoverPass: Rikthe fjalekalimin
   recoverPassSend: Një E-mail është dërguar tek ti. Ju lutem, shikoni postën tuaj.
   alreadyReset: Fjalëkalimi për këtë përdorues është kërkuar brenda 24 orëve të fundit. 
   confirmationSend: Një email për të konfirmuar regjistrimin tuaj u dërgua në adresën tuaj të postës. Ju lutemi kontrolloni kutinë tuaj postare dhe aktivizoni llogarinë tuaj. 
@@ -381,6 +386,17 @@ login:
   email: Email
   passwordFirst: Fjalëkalimi
   passwordSecond: Konfirmo fjalëkalimin 
+register:
+  title: Sign up
+  button:
+    cancel: Anulo
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Anulo
+    submit: Recover password
 apk:
   download: Shkarko si aplikacion
   prepare: 'Prepare app'

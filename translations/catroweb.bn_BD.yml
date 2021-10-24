@@ -369,10 +369,15 @@ menu:
   followersAndFollowing: অনুসরণকারী
 login:
   login: প্রবেশ করুন
+  button:
+    loginNow: Login now
+    createAccount: অ্যাকাউন্ট তৈরি করুন
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: আপনার পাসওয়ার্ড বা ব্যবহারকারীর নামটি ভুল ছিল।
   noUsername: আপনার ব্যবহারকারী নাম বা ইমেল ঠিকানা পাওয়া যায় নি।
   forgotPass: পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুলে গেছেন?
-  recoverPass: পাসওয়ার্ড পুনরুদ্ধার করুন
   recoverPassSend: আপনার ইমেল ঠিকানায় একটি ইমেল প্রেরণ করা হয়েছিল। অনুগ্রহ করে আপনার ইনবক্স চেক করুন।
   alreadyReset: এই ব্যবহারকারীর জন্য পাসওয়ার্ড ইতিমধ্যে গত ২৪ ঘন্টা মধ্যে অনুরোধ করা হয়েছে।
   confirmationSend: আপনার নিবন্ধন নিশ্চিত করার জন্য একটি ইমেল আপনার মেইল ঠিকানায় প্রেরণ করা হয়েছিল। আপনার ইনবক্সটি পরীক্ষা করুন এবং আপনার অ্যাকাউন্টটি সক্রিয় করুন।
@@ -386,6 +391,17 @@ login:
   email: ই-মেইল
   passwordFirst: পাসওয়ার্ড
   passwordSecond: পাসওয়ার্ড নিশ্চিত করুন
+register:
+  title: Sign up
+  button:
+    cancel: বাতিল
+    createAccount: অ্যাকাউন্ট তৈরি করুন
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: বাতিল
+    submit: Recover password
 apk:
   download: অ্যাপ্লিকেশন ডাউনলোড করুন
   prepare: 'অ্যাপ্লিকেশন প্রস্তুত করুন'

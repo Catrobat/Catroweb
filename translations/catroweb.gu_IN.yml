@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Follower
 login:
   login: લોગીન
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: પાસવર્ડ અથવા યુઝરનેમ ભૂલી ગયા છો?
-  recoverPass: પાસવર્ડ પુનઃપ્રાપ્ત કરો
   recoverPassSend: તમારા ઇમેઇલ ઍડ્રેસ પર ઍક ઇમેઇલ  મોકલવામાં આવ્યો છે. કૃપા કરીને તમારુ ઇનબૉક્સ તપાસો.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -380,6 +385,17 @@ login:
   email: Email
   passwordFirst: પાસવર્ડ
   passwordSecond: Password confirm
+register:
+  title: Sign up
+  button:
+    cancel: રદ કરો
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: રદ કરો
+    submit: Recover password
 apk:
   download: Download as app
   prepare: 'Get as app'

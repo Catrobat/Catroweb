@@ -365,10 +365,15 @@ menu:
   followersAndFollowing: Подписчик
 login:
   login: Войти
+  button:
+    loginNow: Login now
+    createAccount: Зарегистрироваться
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Ваш пароль или имя пользователя были неверны.
   noUsername: Ваше имя пользователя или адрес электронной почты не были найдены.
   forgotPass: Забыли пароль или имя пользователя?
-  recoverPass: Восстановить пароль
   recoverPassSend: Мы отправили письмо на ваш электронный адрес. Пожалуйста, проверьте входящие сообщения.
   alreadyReset: Пароль для этого пользователя уже был запрошен в течение последних 24 часов.
   confirmationSend: Письмо для подтверждения регистрации было отправлено на ваш адрес электронной почты. Пожалуйста, проверьте ваш почтовый ящик и активируйте свой аккаунт.
@@ -382,6 +387,17 @@ login:
   email: Почта
   passwordFirst: Пароль
   passwordSecond: Подтвердить пароль
+register:
+  title: Sign up
+  button:
+    cancel: Отменить
+    createAccount: Зарегистрироваться
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Отменить
+    submit: Recover password
 apk:
   download: Скачать приложение
   prepare: 'Подготовка приложения'

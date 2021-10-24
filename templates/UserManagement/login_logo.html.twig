@@ -1,8 +1,8 @@
 <!---  Logo --->
 <a href="{{ path('index') }}">
-  <div class="row justify-content-center mt-1">
-    <div class="col-sm-12 center" style="max-width: 11em;">
-      <img class="center-block img-responsive" id="logo"
+  <div class="row justify-content-center">
+    <div class="col-sm-12 center" style="max-width: 4.25rem;">
+      <img class="center-block" id="logo"
         {% if flavor() == 'luna' %}
           src="{{ asset('images/logo/logo_luna.svg') }}"
         {% elseif flavor() == 'embroidery' %}
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center mb-3">
     <div class="col-sm-12 center">
       <span class="theme-logo-title title-color-left">
       {% if flavor() == 'luna' %}

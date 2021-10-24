@@ -3,48 +3,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
 {% endblock %}
 
-<div class="row justify-content-center mt-3">
+<div class="row justify-content-center">
   <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
-    <button class="btn btn-primary btn-block p-0 text-center" id="btn-login-google"
-            style="height: 48px; color: rgba(0,0,0,0.54); background-color: #FFFFFF; border-color: rgba(0,0,0,0.54);"
-            data-bs-toggle="modal" data-bs-target="#termsModal">
-      <img class="google-logo" alt="Google Login" style="padding-left: 8px"
-           src="{{ asset('images/social/btn_google_custom.png') }}"/>
-      <span class="log-in-text"
-            style="padding-left: 24px; font-family: Roboto, sans-serif; color: rgba(0,0,0,0.54); padding-right: 8px">Sign in with Google</span>
-    </button>
+    <span class="login-text--secondary">{{ "login.oauth.title"|trans({}, "catroweb") }}</span>
   </div>
 </div>
 
 <div class="row justify-content-center">
-  <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
-    <button class="btn btn-primary btn-block p-0" id="btn-login-facebook"
-            style="background-color: #1877F2; border-color: #1877F2; height: 48px"
-            data-bs-toggle="modal" data-bs-target="#termsModal">
-      <img alt="Facebook Login" class="fb-logo"
-           style="height: 100%; display: inline-block; vertical-align: middle;padding-right: 24px; padding-left: 10px"
-           src="{{ asset('images/social/f_logo_RGB-White_58.png') }}"/>
-      <span class="log-in-text" style="color: white">Log in with Facebook</span>
+  <div class="col-11 col-sm-10 col-md-8 col-lg-6">
+    <button class="btn social-login-btn me-2" id="btn-login-google" data-bs-toggle="modal" data-bs-target="#termsModal">
+      <img class="social-login-btn__img" alt="Google Login" src="{{ asset('images/social/btn_google_custom.png') }}"/>
+    </button>
+    <button class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" data-bs-toggle="modal" data-bs-target="#termsModal">
+      <img class="social-login-btn__img social-login-btn__img--facebook" alt="Facebook Login" src="{{ asset('images/social/fb_logo.svg') }}"/>
+    </button>
+    <button class="btn social-login-btn me-2" id="btn-login-apple" data-bs-toggle="modal" data-bs-target="#termsModal">
+      <img class="social-login-btn__img" alt="Apple Login" src="{{ asset('images/social/apple_logo__black.svg') }}"/>
     </button>
   </div>
 </div>
 
-<div class="row justify-content-center">
-  <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
-    <button class="btn btn-primary btn-block p-0" id="btn-login-apple"
-            style="height: 48px; background-color: #000000; border-color: #000000;"
-            data-bs-toggle="modal" data-bs-target="#termsModal">
-      <img class="apple-logo" alt="Apple Login" style="padding-left: 8px;"
-           src="{{ asset('images/social/appleid_button1x.png') }}"/>
-      <span class="log-in-text" style="padding-right: 8px; padding-left: 36px; color: white">Sign in with Apple</span>
-    </button>
-  </div>
+<div class="js-oauth-registration"
+     data-hwi-oauth-google="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}"
+     data-hwi-oauth-facebook="{{ path('hwi_oauth_service_redirect', { service: 'facebook' }) }}"
+     data-hwi-oauth-apple="{{ path('hwi_oauth_service_redirect', { service: 'apple' }) }}"
+></div>
 
-  <div class="js-oauth-registration"
-       data-hwi-oauth-google="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}"
-       data-hwi-oauth-facebook="{{ path('hwi_oauth_service_redirect', { service: 'facebook' }) }}"
-       data-hwi-oauth-apple="{{ path('hwi_oauth_service_redirect', { service: 'apple' }) }}"
-  ></div>
-</div>
 
 

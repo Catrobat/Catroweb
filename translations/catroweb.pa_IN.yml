@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: ਚੇਲਾ
 login:
   login: ਲਾਗਿਨ
+  button:
+    loginNow: Login now
+    createAccount: ਖਾਤਾ ਬਣਾਉ
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਜਾਂ ਯੂਜ਼ਰ ਨਾਂ ਗਲਤ ਸੀ.
   noUsername: ਤੁਹਾਡਾ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਜਾਂ ਈਮੇਲ ਪਤਾ ਨਹੀਂ ਮਿਲਿਆ.
   forgotPass: ਪਾਸਵਰਡ ਜਾਂ ਯੂਜ਼ਰ ਨਾਂ ਭੁੱਲ ਗਏ ਹੋ?
-  recoverPass: ਪਾਸਵਰਡ ਮੁੜ ਪ੍ਰਾਪਤ ਕਰੋ
   recoverPassSend: ਤੁਹਾਡੇ ਈਮੇਲ ਪਤੇ ਤੇ ਇੱਕ ਈਮੇਲ ਭੇਜਿਆ ਗਿਆ ਸੀ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਇਨਬਾਕਸ ਦੀ ਜਾਂਚ ਕਰੋ.
   alreadyReset: ਪਿਛਲੇ 24 ਘੰਟਿਆਂ ਵਿੱਚ ਇਸ ਉਪਭੋਗਤਾ ਲਈ ਪਾਸਵਰਡ ਪਹਿਲਾਂ ਹੀ ਮੰਗਿਆ ਗਿਆ ਹੈ.
   confirmationSend: ਤੁਹਾਡੇ ਰਜਿਸਟਰੀ ਦੀ ਪੁਸ਼ਟੀ ਕਰਨ ਲਈ ਇੱਕ ਈਮੇਲ ਤੁਹਾਡੇ ਮੇਲ ਪਤੇ ਤੇ ਭੇਜੀ ਗਈ ਸੀ. ਕਿਰਪਾ ਕਰਕੇ ਆਪਣੇ ਇਨਬਾਕਸ ਦੀ ਜਾਂਚ ਕਰੋ ਅਤੇ ਆਪਣੇ ਖਾਤੇ ਨੂੰ ਕਿਰਿਆਸ਼ੀਲ ਕਰੋ.
@@ -380,6 +385,17 @@ login:
   email: ਈ - ਮੇਲ
   passwordFirst: ਪਾਸਵਰਡ
   passwordSecond: ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ
+register:
+  title: Sign up
+  button:
+    cancel: ਰੱਦ ਕਰੋ
+    createAccount: ਖਾਤਾ ਬਣਾਉ
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: ਰੱਦ ਕਰੋ
+    submit: Recover password
 apk:
   download: ਐਪ ਦੇ ਤੌਰ ਤੇ ਡਾਉਨਲੋਡ ਕਰੋ
   prepare: 'ਐਪ ਦੇ ਤੌਰ ਤੇ ਪ੍ਰਾਪਤ ਕਰੋ'

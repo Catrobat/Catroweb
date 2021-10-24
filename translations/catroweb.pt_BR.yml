@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Seguidor
 login:
   login: Login
+  button:
+    loginNow: Login now
+    createAccount: Criar conta
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Sua senha ou nome de usuário está incorreto.
   noUsername: Seu nome de usuário ou endereço de e-mail não foi encontrado.
   forgotPass: Esqueceu a senha ou nome de usuário?
-  recoverPass: Recuperar senha
   recoverPassSend: Um e-mail foi enviado para seu endereço de e-mail. Por favor, verifique sua caixa de entrada.
   alreadyReset: A senha para este usuário já foi solicitada nas últimas 24 horas.
   confirmationSend: Um e-mail para confirmar seu registro foi enviado para seu endereço de e-mail. Por favor, verifique sua caixa de entrada e ative sua conta.
@@ -380,6 +385,17 @@ login:
   email: E-Mail
   passwordFirst: Senha
   passwordSecond: Password Confirm
+register:
+  title: Sign up
+  button:
+    cancel: Cancelar
+    createAccount: Criar conta
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Cancelar
+    submit: Recover password
 apk:
   download: Baixar como app
   prepare: 'Baixar como app'

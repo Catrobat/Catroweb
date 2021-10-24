@@ -363,10 +363,15 @@ menu:
   followersAndFollowing: Pengikut
 login:
   login: Masuk
+  button:
+    loginNow: Login now
+    createAccount: Membuat akun
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Sandi atau nama pengguna adalah salah.
   noUsername: Nama pengguna atau alamat email Anda tidak ditemukan.
   forgotPass: Lupa sandi atau nama pengguna?
-  recoverPass: Dapatkan kembali kata sandi
   recoverPassSend: Email dikirim ke alamat email Anda. Silakan cek inbox Anda.
   alreadyReset: Kata sandi untuk pengguna ini telah diminta dalam 24 jam terakhir.
   confirmationSend: Sebuah email untuk mengkonfirmasi pendaftaran Anda telah dikirim ke alamat email Anda. Silakan periksa kotak masuk Anda dan aktifkan akun Anda.
@@ -380,6 +385,17 @@ login:
   email: Surel
   passwordFirst: Kata sandi
   passwordSecond: Konfirmasi password
+register:
+  title: Sign up
+  button:
+    cancel: Batalkan
+    createAccount: Membuat akun
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Batalkan
+    submit: Recover password
 apk:
   download: Unduh sebagai app
   prepare: 'Mempersiapkan app'
