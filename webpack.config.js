@@ -94,6 +94,7 @@ Encore
   .addEntry('reset', './assets/js/reset.js')
   .addEntry('check_email', './assets/js/check_email.js')
   .addEntry('studio_detail', './assets/js/studio_detail.js')
+  .addEntry('code_view', './assets/js/code_view.js')
 
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
@@ -101,7 +102,6 @@ Encore
   .addStyleEntry('multi_column_article', './assets/styles/custom/multi_column_article.scss')
   .addStyleEntry('old_code_view', './assets/styles/custom/old_code_view.scss')
   .addStyleEntry('code_statistics', './assets/styles/components/code_statistics.scss')
-  .addStyleEntry('catblocks_code_view', './assets/styles/components/catblocks_code_view.scss')
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
