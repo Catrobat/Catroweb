@@ -80,7 +80,7 @@
     "jwt-decode": "^3.1.2",
     "lazysizes": "^5.3.2",
     "material-icons": "^1.10.0",
-    "n": "^7.5.0",
+    "n": "^8.0.0",
     "npm": "^8.1.1",
     "path": "^0.12.7",
     "purgecss-webpack-plugin": "^4.0.3",
