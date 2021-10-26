@@ -4720,16 +4720,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.23.1",
+            "version": "1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "6c8178fb8aa4c468c67ad026c67448685a7485b0"
+                "reference": "63e55d74d58a46efab4415af5f3d013afbfdc0b8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/6c8178fb8aa4c468c67ad026c67448685a7485b0",
-                "reference": "6c8178fb8aa4c468c67ad026c67448685a7485b0",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/63e55d74d58a46efab4415af5f3d013afbfdc0b8",
+                "reference": "63e55d74d58a46efab4415af5f3d013afbfdc0b8",
                 "shasum": ""
             },
             "require": {
@@ -4767,7 +4767,7 @@
                 "symfony/dom-crawler": "^3.4.34 || ^4.2.12 || ^5.0",
                 "symfony/framework-bundle": "^3.4.34 || ^4.2.12 || ^5.0",
                 "symfony/http-foundation": "^3.4.35 || ~4.2.12 || ^4.3.8 || ^5.0",
-                "symfony/phpunit-bridge": "^3.4.34 || ^4.2.12 || ^5.0",
+                "symfony/phpunit-bridge": "^5.3",
                 "symfony/stopwatch": "^3.4.34 || ^4.2.12 || ^5.0",
                 "symfony/twig-bundle": "^3.4.34 || ^4.2.12 || ^5.0",
                 "symfony/web-profiler-bundle": "^3.4.34 || ^4.2.12 || ^5.0",
@@ -4820,9 +4820,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.23.1"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.24.0"
             },
-            "time": "2021-10-13T19:50:16+00:00"
+            "time": "2021-10-23T11:16:17+00:00"
         },
         {
             "name": "php-http/logger-plugin",
