@@ -7,7 +7,7 @@ password: Password
 createNewPassword: Create new password
 accountSettings: Account settings
 email: E-Mail
-aboutPocketCode: About Pocket Code
+aboutPocketCode: د Pocket Code په اړه
 about: په اړه
 education: Education
 chat: Chat and forums
@@ -161,7 +161,7 @@ programs:
   show_more: Show More
   comments: Comments
   send: Send
-  delete: Delete
+  delete: پاک کړی
   report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
@@ -365,7 +365,7 @@ login:
   login: Login
   button:
     loginNow: Login now
-    createAccount: Create account
+    createAccount: ګڼون جوړول
     forgetPassword: Forget password?
   oauth:
     title: Or you can join with
@@ -389,7 +389,7 @@ register:
   title: Sign up
   button:
     cancel: Cancel
-    createAccount: Create account
+    createAccount: ګڼون جوړول
 accountRecovery:
   title: Account recovery
   description: If you remember the email or username of your account we can send you a link to reset your password.
