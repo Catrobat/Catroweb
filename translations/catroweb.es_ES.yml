@@ -364,7 +364,7 @@ menu:
 login:
   login: Login
   button:
-    loginNow: Login now
+    loginNow: Iniciar sesión
     createAccount: Crear una cuenta
     forgetPassword: Forget password?
   oauth:
@@ -780,13 +780,13 @@ studio:
       title: 'Comentarios'
       type_something: 'Type something'
       replies: 'replies'
-      send: 'send'
+      send: 'enviar'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
       post_error: 'Something went wrong while posting your comment. Try again later.'
       delete_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
-      title: 'Activities'
+      title: 'Actividades'
       join_studio: '%user% joined the studio.'
       add_project: '%user% left a comment.'
       add_comment: '%user% added a project.'
