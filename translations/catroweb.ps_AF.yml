@@ -446,7 +446,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: تصدیق ناکام شو
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
