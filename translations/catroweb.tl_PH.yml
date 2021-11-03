@@ -12,7 +12,7 @@ about: About
 education: Education
 chat: Chat and forums
 others: Others
-tutorials: Help
+tutorials: Tulong
 googlePlay: Google Play
 iosAppStore: iOS App store
 huaweiAppGallery: Huawei AppGallery
@@ -34,7 +34,7 @@ noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: Country
 loginText: login
-privacyPolicy: Privacy Policy
+privacyPolicy: Patakaran sa Privacy
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
@@ -169,9 +169,9 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: Save
+  saveDescription: I-save
   editCredits: Edit the project notes and credits
-  saveCredits: Save
+  saveCredits: I-save
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -282,7 +282,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Tapos
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
@@ -348,7 +348,7 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  search: Search
+  search: Maghanap
   inMediaLib: Search in media library
   results: Search results
   resultcount: Your search returned %count% results
@@ -356,7 +356,7 @@ search:
 menu:
   profile: My Profile
   login: Login
-  logout: Logout
+  logout: Mag-Logout
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
@@ -600,7 +600,7 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Lengguahe
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
@@ -638,7 +638,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Sunod
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -685,7 +685,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'bago'
   overview:
     header: 'Achievements'
     most_recent_achievement:
