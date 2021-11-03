@@ -28,7 +28,7 @@ jobs:
     if: '[[ ${{ github.event.inputs.versionCode }} =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]'
 
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
 
       # The changes here will be overwritten, however we need changes, else the PR will be automatically closed by GitHub
       - name: Dummy Changes to keep PR open
@@ -70,7 +70,7 @@ jobs:
     needs: createRelease_01
 
     steps:
-      - uses: actions/checkout@v2.3.5
+      - uses: actions/checkout@v2.4.0
 
       - name: Set Version Code
         run: |
