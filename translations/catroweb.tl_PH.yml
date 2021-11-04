@@ -570,7 +570,7 @@ codeview:
   scenes: 'Scenes'
   scripts: 'Scripts'
   bricks: 'Bricks'
-  objects: 'Actors and objects'
+  objects: 'Aktor at mga bagay'
   looks: 'Looks'
   sounds: 'Sounds'
   globals: 'Globals'

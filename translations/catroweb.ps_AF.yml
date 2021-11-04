@@ -188,7 +188,7 @@ programs:
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
-  by: 'by'
+  by: 'لخوا'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
