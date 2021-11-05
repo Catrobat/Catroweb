@@ -20,7 +20,7 @@ instagram: Instagram
 discordChat: Discord chat
 passwordsNoMatch: The passwords didn't match.
 error: تیروتنه
-cancel: Cancel
+cancel: لغوه کړئ
 report: Report
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
@@ -59,7 +59,7 @@ wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you dont have any notifications."
 confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
+cancelMessage: "لغوه کړئ"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
@@ -388,13 +388,13 @@ login:
 register:
   title: Sign up
   button:
-    cancel: Cancel
+    cancel: لغوه کړئ
     createAccount: ګڼون جوړول
 accountRecovery:
   title: Account recovery
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
-    cancel: Cancel
+    cancel: لغوه کړئ
     submit: Recover password
 apk:
   download: Download as app
@@ -569,7 +569,7 @@ codeview:
   totalNumberOf: 'Total number of'
   scenes: 'Scenes'
   scripts: 'Scripts'
-  bricks: 'Bricks'
+  bricks: 'خښتې'
   objects: 'لوبغاړي او توکي'
   looks: 'Looks'
   sounds: 'Sounds'
@@ -589,7 +589,7 @@ codeStatistics:
   title: "Code statistics"
   error: "Code statistics can't be displayed."
   general: 'General'
-  bricks: 'Bricks'
+  bricks: 'خښتې'
   eventBricks: 'Event'
   controlBricks: 'کنټرول'
   motionBricks: 'Motion'
