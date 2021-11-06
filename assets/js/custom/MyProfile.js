@@ -1,5 +1,6 @@
 import $ from 'jquery'
 import Swal from 'sweetalert2'
+import { deleteCookie } from './CookieHelper'
 /* global Routing */
 
 /**
@@ -78,6 +79,7 @@ export const MyProfile = function (
     [emailEditContainer, emailData], [countryEditContainer, countryData],
     [accountSettingsContainer, null]
   ]
+  const routingDataset = document.getElementById('js-api-routing').dataset
 
   $(function () {
     $('.edit-container').hide()
@@ -150,7 +152,9 @@ export const MyProfile = function (
           $.post(deleteAccountUrl, null, function (data) {
             switch (parseInt(data.statusCode)) {
               case statusCodeOk:
-                window.location.href = '../../'
+                window.location.href = routingDataset.index
+                deleteCookie('BEARER', routingDataset.baseUrl + '/')
+                deleteCookie('LOGGED_IN', routingDataset.baseUrl + '/')
             }
           })
         }

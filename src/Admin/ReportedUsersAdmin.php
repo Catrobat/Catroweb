@@ -2,16 +2,13 @@
 
 namespace App\Admin;
 
-use App\Entity\User;
 use Doctrine\ORM\Query\Expr\Join;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ReportedUsersAdmin extends AbstractAdmin
 {
@@ -65,17 +62,11 @@ class ReportedUsersAdmin extends AbstractAdmin
     return $query;
   }
 
-  protected function configureFormFields(FormMapper $form): void
-  {
-    $form
-      ->add('user', EntityType::class, ['class' => User::class])
-      ;
-  }
-
   protected function configureListFields(ListMapper $list): void
   {
     $list
-      ->addIdentifier('username')
+      ->add('id')
+      ->add('username')
       ->add('email')
       ->add('_action', 'actions', ['actions' => [
         'createUrlComments' => ['template' => 'Admin/CRUD/list__action_create_url_comments.html.twig'],

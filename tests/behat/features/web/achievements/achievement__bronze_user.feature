@@ -58,9 +58,11 @@ Feature: Every registered user should have at least one achievement
       | isxs-adkt | Webteam  | Catrobat |
       | tvut-irkw | Catroweb | User1    |
     And I log in as "Catrobat"
-    When I run the update achievements command
     And I am on "/app/achievements"
     And I wait for the page to be loaded
+    Then the "#unlocked-achievements" element should not contain "Apprentice"
+    And I wait 500 milliseconds
+    When I run the update achievements command
     Then the "#unlocked-achievements" element should not contain "Apprentice"
     And I run the add bronze_user user achievements command
     And I am on "/app/achievements"

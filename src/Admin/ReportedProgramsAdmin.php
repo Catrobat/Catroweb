@@ -15,6 +15,16 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 class ReportedProgramsAdmin extends AbstractAdmin
 {
   /**
+   * @var string
+   */
+  protected $baseRouteName = 'admin_reported_projects';
+
+  /**
+   * @var string
+   */
+  protected $baseRoutePattern = 'reported_projects';
+
+  /**
    * @var array
    */
   protected $datagridValues = ['_sort_order' => 'DESC'];

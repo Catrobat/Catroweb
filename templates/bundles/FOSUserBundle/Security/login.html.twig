@@ -15,13 +15,13 @@
   <!-- Error Message -->
   <div class="row justify-content-center">
     <div class="col-sm-11 col-md-8 col-lg-6 center">
-      {% if error|default(false) %}
-        <div id="login-alert"
-             class="alert alert-danger col-sm-12">{{ "login.passOrUser"|trans({}, "catroweb") }}</div>
-      {% elseif showResetError|default(false) %}
-      <div class="alert alert-danger">
-        {{ "login.alreadyReset"|trans({}, "catroweb") }}
+      <div id="login-alert" class="alert alert-danger col-sm-12">
+        {{ "login.passOrUser"|trans({}, "catroweb") }}
       </div>
+      {% if showResetError|default(false) %}
+        <div class="alert alert-danger">
+          {{ "login.alreadyReset"|trans({}, "catroweb") }}
+        </div>
       {% elseif showResetSuccess|default(false) %}
         <div class="alert alert-success">
           {{ "login.recoverPassSend"|trans({}, "catroweb") }}
@@ -31,10 +31,7 @@
   </div>
 
   <div class="row justify-content-center">
-    <form class="col-11 col-sm-10 col-md-8 col-lg-6 mb-4"
-          id="loginform form_fos" class="form-horizontal" role="form" action="{{ url("fos_user_security_check") }}"
-          method="post">
-
+    <form id="login-form" class="col-11 col-sm-10 col-md-8 col-lg-6 mb-4 form-horizontal" role="form">
       <input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token|default('') }}"/>
 
       {% include 'components/text_field.html.twig' with {
@@ -68,15 +65,15 @@
 
       <div>
         {% if (app.session.get("catroweb_login_redirect") is not empty) %}
-          <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}"/>
+          <input id="target-path" type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_redirect") }}"/>
           {{ app.session.set("catroweb_login_referer", app.session.get("catroweb_login_redirect")) }}
           {{ app.session.set("catroweb_login_redirect", "") }}
         {% elseif ("/login" in app.request.headers.get('referer')) and app.session.has("catroweb_login_referer") %}
-            <input type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer") }}#login"/>
+            <input id="target-path" type="hidden" name="_target_path" value="{{ app.session.get("catroweb_login_referer") }}#login"/>
         {% elseif ("/login" in app.request.headers.get('referer')) %}
-            <input type="hidden" name="_target_path" value="{{ path("index") }}#login"/>
+            <input id="target-path" type="hidden" name="_target_path" value="{{ path("index") }}#login"/>
         {% elseif (app.request.headers.get('referer') is not empty) %}
-            <input type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login"/>
+            <input id="target-path" type="hidden" name="_target_path" value="{{ app.request.headers.get('referer') }}#login"/>
             {{ app.session.set("catroweb_login_referer", app.request.headers.get('referer')) }}
         {% else %}
           <input type="hidden" name="_target_path" value="index"/>

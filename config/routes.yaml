@@ -23,6 +23,11 @@ facebook_login:
 apple_login:
   path: /login/check-apple
 
+# ===== Token =====
+gesdinet_jwt_refresh_token:
+  path:       /api/authentication/refresh
+  controller: catroweb.jwt_token_refresh_service::refresh
+
 # ===== Api =====
 open_api_server:
   prefix: /api

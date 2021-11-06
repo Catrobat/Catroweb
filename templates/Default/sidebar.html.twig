@@ -119,14 +119,12 @@
     </li>
 
     {# logout #}
-    {% if app.user and app.session and not app.session.get('webview-auth') %}
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url('logout') }}" id="btn-logout">
-          <span class="sidebar-link-icon material-icons ">exit_to_app</span>
-          <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, "catroweb") }}</span>
-        </a>
-      </li>
-    {% endif %}
+    <li class="nav-item" id="logout-nav-item">
+      <a class="nav-link" href="#" id="btn-logout" data-logout-path="{{ url('logout') }}">
+        <span class="sidebar-link-icon material-icons ">exit_to_app</span>
+        <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
   </ul>
   <ul class="list-unstyled">
     {% if sidebar_ul is not empty %}

@@ -31,10 +31,10 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     And I click "#avatar-upload"
     When I attach the avatar "logo.png" to "file"
     And I wait for the element ".text-img-upload-success" to be visible
-    And I run the update achievements command
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Initiative"
+    And I run the update achievements command
     And I run the add perfect_profile user achievements command
     And I am on "/app/achievements"
     And I wait for the page to be loaded
