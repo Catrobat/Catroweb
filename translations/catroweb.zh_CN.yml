@@ -181,7 +181,7 @@ programs:
   link: 复制项目链接到剪贴板
   reactionsText: 我喜欢的
   downloadErrorText: 下载项目时出错。请稍后再试。
-  downloadStartText: Download has started...
+  downloadStartText: 下载已开始...
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
@@ -369,11 +369,11 @@ menu:
 login:
   login: 登录
   button:
-    loginNow: Login now
+    loginNow: 立即登录
     createAccount: 创造帐户
-    forgetPassword: Forget password?
+    forgetPassword: 忘记密码？
   oauth:
-    title: Or you can join with
+    title: 或者您可以加入
   passOrUser: 您的密码或用户名不正确。
   noUsername: 找不到您的用户名或电子邮件地址。
   forgotPass: 忘记了密码或用户名？
@@ -391,16 +391,16 @@ login:
   passwordFirst: 密码
   passwordSecond: 密码确认
 register:
-  title: Sign up
+  title: 注册
   button:
     cancel: 取消
     createAccount: 创造帐户
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: 账户恢复
+  description: 如果您记得您帐户的电子邮件或用户名，我们可以给您发送一个链接来重置您的密码。
   button:
     cancel: 取消
-    submit: Recover password
+    submit: 找回密码
 apk:
   download: 下载程序
   prepare: '准备应用程序'

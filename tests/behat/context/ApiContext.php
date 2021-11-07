@@ -31,7 +31,6 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Symfony\Component\Intl\Locales;
-use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
  * Class ApiContext.
@@ -451,26 +450,14 @@ class ApiContext implements KernelAwareContext
    */
   public function iPostLoginUserWithPassword($uname, $pwd): void
   {
-    $csrfToken = $this->getSymfonyService('security.csrf.token_manager')
-      ->getToken('authenticate')->getValue();
-
-    $session = $this->getKernelBrowser()
-      ->getContainer()
-      ->get('session')
-    ;
-    $session->set('_csrf_token', $csrfToken);
-    $session->set('something', $csrfToken);
-    $session->save();
-    $cookie = new Cookie($session->getName(), $session->getId());
-    $this->getKernelBrowser()
-      ->getCookieJar()
-      ->set($cookie)
-    ;
-
-    $this->iHaveAParameterWithValue('_username', $uname);
-    $this->iHaveAParameterWithValue('_password', $pwd);
-    $this->iHaveAParameterWithValue('_csrf_token', $csrfToken);
-    $this->iPostTo('/app/login_check');
+    $this->request_content = $this->getAuthenticationRequestBody($uname, $pwd);
+    $this->iPostTo('/api/authentication');
+    $response = json_decode($this->getKernelBrowser()->getResponse()->getContent());
+    $bearer_cookie = new Cookie('BEARER', $response->{'token'});
+    $refresh_cookie = new Cookie('REFRESH_TOKEN', $response->{'refresh_token'});
+    $cookieJar = $this->getKernelBrowser()->getCookieJar();
+    $cookieJar->set($bearer_cookie);
+    $cookieJar->set($refresh_cookie);
   }
 
   /**
@@ -1217,21 +1204,7 @@ class ApiContext implements KernelAwareContext
       'name' => 'generatedBehatUser',
     ]);
 
-    $client = $this->getKernelBrowser();
-    $client->getCookieJar()->set(new Cookie(session_name(), 'true'));
-
-    $session = $client->getContainer()->get('session');
-
-    $user = $this->getUserManager()->findUserByUsername('generatedBehatUser');
-
-    $providerKey = $this->getSymfonyParameter('fos_user.firewall_name');
-
-    $token = new UsernamePasswordToken($user, null, $providerKey, $user->getRoles());
-    $session->set('_security_'.$providerKey, serialize($token));
-    $session->save();
-
-    $cookie = new Cookie($session->getName(), $session->getId());
-    $client->getCookieJar()->set($cookie);
+    $this->iPostLoginUserWithPassword('generatedBehatUser', '123456');
   }
 
   /**
@@ -3013,6 +2986,16 @@ class ApiContext implements KernelAwareContext
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
+  }
+
+  private function getAuthenticationRequestBody(string $username, string $password): string
+  {
+    $credentials = [
+      'username' => $username,
+      'password' => $password,
+    ];
+
+    return json_encode($credentials);
   }
 
   private function findProgram(array $programs, string $wanted_program_name): array

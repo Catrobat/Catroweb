@@ -143,13 +143,13 @@ class CatrowebBrowserContext extends BrowserContext
     if ('in' === $arg1) {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2_000, 'window.location.href.search("login") == -1');
-      $this->assertElementNotOnPage('#btn-login');
-      $this->assertElementOnPage('#btn-logout');
+      $this->cookieShouldExist('LOGGED_IN');
+      $this->cookieShouldExist('BEARER');
     }
     if ('out' == $arg1) {
       $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
-      $this->assertElementOnPage('#btn-login');
-      $this->assertElementNotOnPage('#btn-logout');
+      $this->cookieShouldNotExist('LOGGED_IN');
+      $this->cookieShouldNotExist('BEARER');
     }
   }
 
@@ -187,6 +187,41 @@ class CatrowebBrowserContext extends BrowserContext
       $cookie_value = null;
     }
     $this->getSession()->setCookie($cookie_name, $cookie_value);
+  }
+
+  /**
+   * @Given /^cookie "([^"]+)" should exist"$/
+   *
+   * @throws ExpectationException
+   */
+  public function cookieShouldExist(string $cookie_name): void
+  {
+    $this->assertSession()->cookieExists($cookie_name);
+  }
+
+  /**
+   * @Given /^cookie "([^"]+)" should not exist"$/
+   *
+   * @throws ExpectationException
+   */
+  public function cookieShouldNotExist(string $cookie_name): void
+  {
+    $cookie = $this->getSession()->getCookie($cookie_name);
+    Assert::assertNull($cookie);
+  }
+
+  /**
+   * @Given /^cookie "([^"]+)" with value "([^"]*)" should exist"$/
+   *
+   * @throws ExpectationException
+   */
+  public function cookieWithValueShouldExist(string $cookie_name, string $cookie_value): void
+  {
+    $this->cookieShouldExist($cookie_name);
+    $cookie = $this->getSession()->getCookie($cookie_name);
+    if (null !== $cookie) {
+      $this->assertSession()->cookieEquals($cookie_name, $cookie_value);
+    }
   }
 
   /**
@@ -285,22 +320,6 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $this->assertSession()->responseContains('featured');
     Assert::assertTrue($this->getSession()->getPage()->findById('feature-slider')->isVisible());
-  }
-
-  /**
-   * @Then /^I should see the welcome section$/
-   */
-  public function iShouldSeeTheWelcomeSection(): void
-  {
-    Assert::assertTrue($this->getSession()->getPage()->findById('welcome-section')->isVisible());
-  }
-
-  /**
-   * @Then /^I should not see the welcome section$/
-   */
-  public function iShouldNotSeeTheWelcomeSection(): void
-  {
-    Assert::assertNull($this->getSession()->getPage()->findById('welcome-section'));
   }
 
   /**

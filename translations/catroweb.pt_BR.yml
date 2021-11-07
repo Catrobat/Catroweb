@@ -395,7 +395,7 @@ accountRecovery:
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
     cancel: Cancelar
-    submit: Recover password
+    submit: Recuperar senha
 apk:
   download: Baixar como app
   prepare: 'Baixar como app'

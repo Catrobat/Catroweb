@@ -73,7 +73,7 @@ Feature: Pocketcode homepage
   Scenario: Welcome Section
     Given I am on homepage
     And I wait for the page to be loaded
-    Then I should see the welcome section
+    Then the element "#welcome-section" should be visible
     Then I should see the video available at "https://www.youtube.com/embed/BHe2r2WU-T8"
     And I should see "Google Play Store"
     And I should see "iOS App Store"
@@ -82,7 +82,7 @@ Feature: Pocketcode homepage
   Scenario: Welcome Section luna
     Given I am on "/luna"
     And I wait for the page to be loaded
-    Then I should see the welcome section
+    Then the element "#welcome-section" should be visible
     Then I should see the video available at "https://www.youtube.com/embed/-6AEZrSbOMg"
     And I should see "Google Play Store"
     And I should see "Discord Chat"
@@ -92,7 +92,7 @@ Feature: Pocketcode homepage
   Scenario: Welcome Section embroidery
     Given I am on "/embroidery"
     And I wait for the page to be loaded
-    Then I should see the welcome section
+    Then the element "#welcome-section" should be visible
     Then I should see the video available at "https://www.youtube.com/embed/IjHI0UZzuWM"
     And I should see "Google Play Store"
     And I should see "Instagram"
@@ -102,7 +102,7 @@ Feature: Pocketcode homepage
   Scenario: Welcome Section mindstorms
     Given I am on "/mindstorms"
     And I wait for the page to be loaded
-    Then I should see the welcome section
+    Then the element "#welcome-section" should be visible
     Then I should see the video available at "https://www.youtube.com/embed/YnSl-fSV-nY"
     And I should see "Google Play Store"
     And I should not see "iOS App Store"
@@ -112,7 +112,7 @@ Feature: Pocketcode homepage
     Given I log in as "Catrobat"
     And I go to the homepage
     And I wait for the page to be loaded
-    Then I should not see the welcome section
+    And the element "#welcome-section" should not exist
 
   Scenario: Featured Programs and Urls
     Given I am on homepage

@@ -49,9 +49,12 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
    */
   public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
   {
-    // TODO: Implement authenticationDelete() method.
+    if ($this->facade->getProcessor()->deleteRefreshToken($x_refresh)) {
+      $responseCode = Response::HTTP_OK;
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+      return;
+    }
+    $responseCode = Response::HTTP_UNAUTHORIZED;
   }
 
   /**
@@ -59,9 +62,9 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
    */
   public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
   {
-    //TODO: Implement authenticationRefreshPost() method
-
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    // Refresh token process is handled by JWTRefreshTokenBundle
+    // Successful requests are NOT passed to this method. This method will never be called.
+    $responseCode = Response::HTTP_OK;
 
     return new JWTResponse();
   }

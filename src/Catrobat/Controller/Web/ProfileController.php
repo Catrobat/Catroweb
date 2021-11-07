@@ -3,6 +3,8 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\CatroNotificationService;
+use App\Catrobat\Services\CookieService;
+use App\Catrobat\Services\RefreshTokenService;
 use App\Catrobat\StatusCode;
 use App\Entity\FollowNotification;
 use App\Entity\ProgramManager;
@@ -14,6 +16,7 @@ use App\Utils\ImageUtils;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Exception;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,12 +35,20 @@ class ProfileController extends AbstractController
   protected ProgramManager $program_manager;
   protected UserManager $user_manager;
   protected AchievementManager $achievement_manager;
+  private JWTTokenManagerInterface $jwt_manager;
+  private CookieService $cookie_service;
+  private RefreshTokenService $token_manager;
 
-  public function __construct(ProgramManager $program_manager, UserManager $user_manager, AchievementManager $achievement_manager)
+  public function __construct(ProgramManager $program_manager, UserManager $user_manager,
+                              AchievementManager $achievement_manager, JWTTokenManagerInterface $jwt_manager,
+                              CookieService $cookie_service, RefreshTokenService $token_manager)
   {
     $this->program_manager = $program_manager;
     $this->user_manager = $user_manager;
     $this->achievement_manager = $achievement_manager;
+    $this->jwt_manager = $jwt_manager;
+    $this->cookie_service = $cookie_service;
+    $this->token_manager = $token_manager;
   }
 
   /**
@@ -264,9 +275,15 @@ class ProfileController extends AbstractController
     $user->setUsername($username);
     $user_manager->updateUser($user);
 
-    return JsonResponse::create([
+    $response = JsonResponse::create([
       'statusCode' => Response::HTTP_OK,
     ]);
+    $response->headers->setCookie($this->cookie_service->createBearerTokenCookie($this->jwt_manager->create($user)));
+    $this->token_manager->invalidateRefreshTokenOfUser($user->getUsername());
+    $refreshToken = $this->token_manager->createRefreshTokenForUsername($user->getUsername());
+    $response->headers->setCookie($this->cookie_service->createRefreshTokenCookie($refreshToken->getRefreshToken()));
+
+    return $response;
   }
 
   /**

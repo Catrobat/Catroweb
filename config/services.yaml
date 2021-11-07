@@ -169,6 +169,11 @@ services:
   #   Services:
   #                most services need to be public (mainly for testing -> easy access in SymfonySupport.php)
   #
+  catroweb.jwt_token_refresh_service:
+    class: App\Catrobat\Services\JWTTokenRefreshService
+    public: true
+    arguments: [ "@gesdinet.jwtrefreshtoken" ]
+
   App\Catrobat\Services\CatrobatFileSanitizer:
     class: App\Catrobat\Services\CatrobatFileSanitizer
     public: true
@@ -249,6 +254,19 @@ services:
     class: App\WebView\WebviewJWTAuthenticator
     public: true
 
+  App\Catrobat\Services\CookieService:
+    class: App\Catrobat\Services\CookieService
+    arguments:
+      - '%env(JWT_TTL)%'
+      - '%env(REFRESH_TOKEN_TTL)%'
+    public: true
+
+  App\Catrobat\Services\RefreshTokenService:
+    class: App\Catrobat\Services\RefreshTokenService
+    arguments:
+      - '%env(REFRESH_TOKEN_TTL)%'
+    public: true
+
   screenshot_repository:
     class: App\Catrobat\Services\ScreenshotRepository
     arguments:
@@ -319,7 +337,22 @@ services:
   #   Listeners:
   #
 
+  catroweb.jwt_authentication_success_listener:
+    class: App\Catrobat\Listeners\JWTAuthenticationSuccessListener
+    arguments:
+      - "@gesdinet.jwtrefreshtoken.send_token"
+    tags:
+      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }
+
+  catroweb.oauth_success_listener:
+    class: App\Catrobat\Listeners\OAuthSuccessListener
+
   # ======== System Validation ========
+
+  catrowebbundle.listener.refresh_token:
+    class: App\Catrobat\Listeners\JWTTokenListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 200 }
 
   catrowebbundle.listener.language:
     class: App\Catrobat\Listeners\LanguageListener

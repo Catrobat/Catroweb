@@ -364,11 +364,11 @@ menu:
 login:
   login: Logowanie
   button:
-    loginNow: Login now
+    loginNow: Zaloguj się teraz
     createAccount: Utwórz konto
-    forgetPassword: Forget password?
+    forgetPassword: Zapomniałeś hasła?
   oauth:
-    title: Or you can join with
+    title: Lub możesz dołączyć z
   passOrUser: Twoje hasło lub nazwa użytkownika były nieprawidłowe.
   noUsername: Twoja nazwa użytkownika lub adres e-mail adres nie zostały znalezione.
   forgotPass: Nie pamiętasz nazwy użytkownika lub hasła?
@@ -386,16 +386,16 @@ login:
   passwordFirst: Hasło
   passwordSecond: Potwierdź hasło
 register:
-  title: Sign up
+  title: Zarejestruj się
   button:
     cancel: Anuluj
     createAccount: Utwórz konto
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Odzyskiwanie konta
+  description: Jeśli zapomnisz swój e-mail lub nazwę użytkownika Twojego konta, możemy wysłać Ci link do zresetowania hasła.
   button:
     cancel: Anuluj
-    submit: Recover password
+    submit: Odzyskaj hasło
 apk:
   download: Pobierz aplikację
   prepare: 'Przygotuj apkę'

@@ -129,30 +129,27 @@ class SecurityController extends AbstractController
       return JsonResponse::create($retArray);
     }
 
-    if (0 == count($violations)) {
-      $username = $request->request->get('registrationUsername');
-      $password = $request->request->get('registrationPassword');
+    $username = $request->request->get('registrationUsername');
+    $password = $request->request->get('registrationPassword');
 
-      /** @var User|null $user */
-      $user = $user_manager->findUserByUsername($username);
+    /** @var User|null $user */
+    $user = $user_manager->findUserByUsername($username);
 
-      if (null === $user) {
-        $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
-        $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
+    if (null === $user) {
+      $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
+      $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
+    } else {
+      $encoder = $factory->getEncoder($user);
+      $correct_pass = $user_manager->isPasswordValid($user, $password, $encoder);
+      if ($correct_pass) {
+        $retArray['statusCode'] = Response::HTTP_OK;
+        $user->setUploadToken($token_generator->generateToken());
+        $retArray['token'] = $user->getUploadToken();
+        $retArray['email'] = $user->getEmail();
+        $user_manager->updateUser($user);
       } else {
-        $encoder = $factory->getEncoder($user);
-        $correct_pass = $user_manager->isPasswordValid($user, $password, $encoder);
-        $dd = null;
-        if ($correct_pass) {
-          $retArray['statusCode'] = Response::HTTP_OK;
-          $user->setUploadToken($token_generator->generateToken());
-          $retArray['token'] = $user->getUploadToken();
-          $retArray['email'] = $user->getEmail();
-          $user_manager->updateUser($user);
-        } else {
-          $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
-          $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
-        }
+        $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+        $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
       }
     }
 

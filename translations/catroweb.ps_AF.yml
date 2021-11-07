@@ -1,69 +1,69 @@
 ---
 #homepage translation
-title: Catrobat community
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
+title: د کاټروبیټ ټولنه
+localLanguage: انګلیسي
+username: کارن نوم
+password: رمز
+createNewPassword: نوی پټنوم جوړ کړئ
+accountSettings: د حساب ترتیبات
+email: ای میل
+aboutPocketCode: د Pocket Code په اړه
 about: په اړه
-education: Education
-chat: Chat and forums
-others: Others
+education: زده کړه
+chat: چیٹ او فورمونه
+others: نور
 tutorials: Tutorials
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
-instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
+huaweiAppGallery: د Huawei اپل ګالري
+instagram: انسټاګرام
+discordChat: د خبرو اترو اختلاف
+passwordsNoMatch: پاسورډونه سره سمون نه خوري.
 error: تیروتنه
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-description: Description
-noDescription: No description available.
+cancel: لغوه کړئ
+report: راپور
+deleteIt: هو، دا حذف کړئ!
+reportIt: هو، راپور ورکړئ!
+areYouSure: تاسو ډاډه یاست؟
+noWayOfReturn: ستاسو د عملونو د بیرته راګرځولو لپاره هیڅ لاره نشته!
+download: ډاونلوډ کړئ
+description: تفصیل
+noDescription: هیڅ تفصیل شتون نلري.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
+notesAndCreditsDescription: تاسو دا پروژه څنګه جوړه کړه؟ ایا تاسو د نورو خلکو نظریات، سکریپټ یا هنري کار کارولی؟ دلته یې مننه وکړه.
+country: هیواد
+loginText: د ننه کیدل
+privacyPolicy: د پټتیا تګلاره
+imprint: امپرنټ
+programDetails: جزیات
+somethingWentWrong: 'او یو څه غلط شو.'
+pleaseTryAgain: 'مهرباني وکړئ بیا هڅه وکړئ!'
+oldVersionError: 'مهرباني وکړئ د جیب کوډ نوي نسخه ته تازه کړئ!'
+more: 'نور'
+less: 'لږ'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+more-information: 'نور مالومات'
+less-information: 'لږ معلومات'
+ok: سمه ده
+clickToDownloadProgram: 'د مثال پروژې ډاونلوډ کولو لپاره دلته  %link_start% کلیک وکړئ %link_end%'
+registrationError: 'د کارونکي نوم یا بریښنالیک آدرس دمخه کارول کیږي.'
+notifications: 'خبرتیاوې'
 allNotifications: 'All notifications'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+FollowersNotifications: 'پیروان'
+LikeNotifications: 'غبرګونونه'
+CommentNotifications: 'تبصرې'
+RemixNotifications: 'ریمکسونه'
+wellDone: "ډیر ښه!"
+done: "وشول!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
+confirmMessage: "هو، دا حذف کړئ"
+cancelMessage: "لغوه کړئ"
+notificationsUnauthorizedError: "د کارونکي اجازه نه ورکول"
+notificationsClearError: "د لوستلو په توګه خبرتیاوې په نښه کولو توان نلري!"
+pleaseWait: "هیله کوم لږ صبر وکړه..."
+projects: "پروژې"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "here"
@@ -75,7 +75,7 @@ indexPage:
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
   follows: Following
-  followers: Followers
+  followers: پیروان
   follow: Follow
   username: User
   followsMe: Follows me
@@ -141,29 +141,29 @@ programs:
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
   uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  report_popup: The comment was successfully reported.
+  reportAsInappropriate: د نامناسب په توګه راپور ورکړئ
+  reportProgram: د پروژې راپور
+  languageVersion: 'د کاټروبیټ ژبې نسخه: %languageVersion%'
+  reportLoginText: مهرباني وکړئ د دې پروژې راپور ورکولو لپاره %login%.
+  reportDialogHeader: تاسو ولې غواړئ د دې پروژې راپور ورکړئ؟
+  reportDialogReason: یو دلیل داخل کړئ
+  reportRadioButtonInappropriate: دا نامناسب دی
+  reportRadioButtonCopyright: د کاپي د حق نقضول
+  reportRadioButtonSpam: دا سپیم دی
+  reportRadioButtonDislike: زه دا نه خوښوم
+  reportOwnProgram: تاسو نشئ کولی خپله پروژه پرچم کړئ.
+  reportAlready: تاسو لا دمخه د دې پروژې نښه کړې ده.
+  reportDone: تاسو د دې پروژې راپور ورکړی!
+  updateAppHeader: اپلیکیشن تازه کړئ
+  updateAppText: مهرباني وکړئ خپل اپلیکیشن نوي نسخه ته تازه کړئ ترڅو د دې پروژې ډاونلوډ کولو وړ وي.
+  btnClosePopup: سمه ده
+  checkout_this_program: د دې کاټروباټ پروژه چیک کړئ
+  show_more: نور ښکاره کړئ
+  comments: تبصرې
+  send: لیږل
+  delete: پاک کړی
+  report: راپور
+  report_popup: تبصره په بریالیتوب سره راپور شوې.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
@@ -179,7 +179,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: غبرګونونه
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
   showTranslation: Show translation
@@ -188,7 +188,7 @@ programs:
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
-  by: 'by'
+  by: 'لخوا'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
@@ -281,12 +281,12 @@ profile:
   goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
-  edit: Edit
+  edit: سمون
   done: ترسره شو
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: Email
+  email: ایمیل
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
@@ -365,7 +365,7 @@ login:
   login: Login
   button:
     loginNow: Login now
-    createAccount: Create account
+    createAccount: ګڼون جوړول
     forgetPassword: Forget password?
   oauth:
     title: Or you can join with
@@ -382,19 +382,19 @@ login:
   alreadyAccount: Already having an account?
   or: OR
   username: Username
-  email: Email
+  email: ایمیل
   passwordFirst: Password
   passwordSecond: Password confirm
 register:
   title: Sign up
   button:
-    cancel: Cancel
-    createAccount: Create account
+    cancel: لغوه کړئ
+    createAccount: ګڼون جوړول
 accountRecovery:
   title: Account recovery
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
-    cancel: Cancel
+    cancel: لغوه کړئ
     submit: Recover password
 apk:
   download: Download as app
@@ -446,7 +446,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: تصدیق ناکام شو
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -569,8 +569,8 @@ codeview:
   totalNumberOf: 'Total number of'
   scenes: 'Scenes'
   scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
+  bricks: 'خښتې'
+  objects: 'لوبغاړي او توکي'
   looks: 'Looks'
   sounds: 'Sounds'
   globals: 'Globals'
@@ -589,14 +589,14 @@ codeStatistics:
   title: "Code statistics"
   error: "Code statistics can't be displayed."
   general: 'General'
-  bricks: 'Bricks'
+  bricks: 'خښتې'
   eventBricks: 'Event'
-  controlBricks: 'Control'
+  controlBricks: 'کنټرول'
   motionBricks: 'Motion'
   soundBricks: 'Sound'
   looksBricks: 'Looks'
   penBricks: 'Pen'
-  dataBricks: 'Data'
+  dataBricks: 'ډاټا'
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
@@ -685,7 +685,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'نوی'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -701,7 +701,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "سمه ده"
   profile:
     title: 'Achievements'
   achievement:
@@ -777,7 +777,7 @@ studio:
     projects:
       title: 'projects'
     comments:
-      title: 'Comments'
+      title: 'تبصرې'
       type_something: 'Type something'
       replies: 'replies'
       send: 'send'
@@ -800,8 +800,8 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
+      studio_description: 'تفصیل'
+      toggle_allow_comments: 'تبصرې'
       toggle_privacy: 'Public'
 media_library:
   file:

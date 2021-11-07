@@ -7,12 +7,12 @@ Feature: Admin Report Notification
   Background:
     Given there are admins:
       | name     | email           | id | password |
-      | catroweb | admin@catrob.at | 0  | catroweb |
+      | catroweb | admin@catrob.at | 1  | catroweb |
     Given there are users:
       | name     | email           | id | password |
-      | Catrobat | catro@catrob.at | 1  | 123456   |
-      | User1    | user1@catrob.at | 2  | 123456   |
-      | User2    | user2@catrob.at | 3  | 123456   |
+      | Catrobat | catro@catrob.at | 2  | 123456   |
+      | User1    | user1@catrob.at | 3  | 123456   |
+      | User2    | user2@catrob.at | 4  | 123456   |
     And there are programs:
       | id | name      |
       | 1  | program 1 |
