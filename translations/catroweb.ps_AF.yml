@@ -281,12 +281,12 @@ profile:
   goToScratchProfile: Profile on Scratch
 myprofile:
   editProfile: Edit profile
-  edit: Edit
+  edit: سمون
   done: ترسره شو
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
-  email: Email
+  email: ایمیل
   editAvatar: Edit avatar
   editUsername: Edit username
   editPassword: Edit password
@@ -382,7 +382,7 @@ login:
   alreadyAccount: Already having an account?
   or: OR
   username: Username
-  email: Email
+  email: ایمیل
   passwordFirst: Password
   passwordSecond: Password confirm
 register:
@@ -800,7 +800,7 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_description: 'تفصیل'
       toggle_allow_comments: 'تبصرې'
       toggle_privacy: 'Public'
 media_library:
