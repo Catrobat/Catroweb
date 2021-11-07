@@ -7,6 +7,7 @@ namespace Tests\phpUnit\Api;
 use App\Api\AuthenticationApi;
 use App\Api\Services\Authentication\AuthenticationApiFacade;
 use App\Api\Services\Authentication\AuthenticationApiLoader;
+use App\Api\Services\Authentication\AuthenticationApiProcessor;
 use App\Api\Services\Base\AbstractApiController;
 use App\Entity\User;
 use OpenAPI\Server\Api\AuthenticationApiInterface;
@@ -129,9 +130,13 @@ final class AuthenticationApiTest extends CatrowebTestCase
     $response_code = null;
     $response_headers = [];
 
+    $processor = $this->createMock(AuthenticationApiProcessor::class);
+    $processor->method('deleteRefreshToken')->willReturn(true);
+    $this->facade->method('getProcessor')->willReturn($processor);
+
     $this->object->authenticationDelete('', $response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertEquals(Response::HTTP_OK, $response_code);
   }
 
   /**
@@ -147,7 +152,7 @@ final class AuthenticationApiTest extends CatrowebTestCase
     $refresh_request = $this->createMock(RefreshRequest::class);
     $response = $this->object->authenticationRefreshPost($refresh_request, $response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertInstanceOf(JWTResponse::class, $response);
   }
 

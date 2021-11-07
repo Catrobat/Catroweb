@@ -5,13 +5,13 @@ Feature: Admin featured programs
   Background:
     Given there are admins:
       | name     | password | token      | email                | id |
-      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
+      | Adminius | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
 
     And there are users:
       | name      | password | token      | email               | id |
-      | Superman  | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
-      | Gregor    | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
-      | Frank Jr. | 123456   | qwertyuiop | dev3@pocketcode.org | 3  |
+      | Superman  | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
+      | Gregor    | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
+      | Frank Jr. | 123456   | qwertyuiop | dev3@pocketcode.org | 4  |
 
     And there are programs:
       | id          | name      | description             | owned by  | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |

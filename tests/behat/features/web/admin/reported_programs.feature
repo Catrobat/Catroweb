@@ -5,11 +5,11 @@ Feature: Admin reported programs
   Background:
     Given there are admins:
       | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
+      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
     And there are users:
       | name     | password | token      | email               | id |
-      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
-      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
+      | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
+      | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
     And there are programs:
       | id | name      | description             | visible | owned by |
       | 1  | program 1 | my superman description | true    | Gregor   |
@@ -20,7 +20,7 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    And I am on "/admin/app/programinappropriatereport/list"
+    And I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State | Category | Reporting User | Program   | Program Visible |
@@ -31,14 +31,14 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    And I am on "/admin/app/programinappropriatereport/list"
+    And I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State | Category | Reporting User | Program   | Program Visible |
       | Even Worse Program | New   | Spam     | Admin          | program 2 | no              |
       | Bad Program        | New   | Spam     | Admin          | program 1 | no              |
     Then I report program 3 with category "dislike" and note "Pure Filth" in Browser
-    And I am on "/admin/app/programinappropriatereport/list"
+    And I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State | Category | Reporting User | Program   | Program Visible |
@@ -50,11 +50,11 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    And I am on "/admin/app/programinappropriatereport/list"
+    And I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
-    And I am on "/admin/app/programinappropriatereport/unreportProgram?id=2"
+    And I am on "/admin/reported_projects/unreportProgram?id=2"
     And I wait for the page to be loaded
-    Then I am on "/admin/app/programinappropriatereport/list"
+    Then I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note        | State | Category | Reporting User | Program   | Program Visible |
@@ -64,15 +64,15 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    And I am on "/admin/app/programinappropriatereport/list"
+    And I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/app/programinappropriatereport/acceptProgramReport?id=2"
+    Then I am on "/admin/reported_projects/acceptProgramReport?id=2"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State    | Category | Reporting User | Program   | Program Visible |
       | Even Worse Program | Accepted | Spam     | Admin          | program 2 | no              |
       | Bad Program        | New      | Spam     | Admin          | program 1 | no              |
-    Then I am on "/admin/app/programinappropriatereport/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=2&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
+    Then I am on "/admin/reported_projects/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=2&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
       | Note               | State    | Category | Reporting User | Program   | Program Visible |
       | Even Worse Program | Accepted | Spam     | Admin          | program 2 | no              |
@@ -86,15 +86,15 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    And I am on "/admin/app/programinappropriatereport/list"
+    And I am on "/admin/reported_projects/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/app/programinappropriatereport/unreportProgram?id=2"
+    Then I am on "/admin/reported_projects/unreportProgram?id=2"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State    | Category | Reporting User | Program   | Program Visible |
       | Even Worse Program | Rejected | Spam     | Admin          | program 2 | yes             |
       | Bad Program        | New      | Spam     | Admin          | program 1 | no              |
-    Then I am on "/admin/app/programinappropriatereport/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=3&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
+    Then I am on "/admin/reported_projects/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=3&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
       | Note               | State    | Category | Reporting User | Program   | Program Visible |
       | Even Worse Program | Rejected | Spam     | Admin          | program 2 | yes             |
@@ -108,7 +108,7 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "dislike" and note "Even Worse Program" in Browser
-    Then I am on "/admin/app/programinappropriatereport/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=Spam&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
+    Then I am on "/admin/reported_projects/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=Spam&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note        | State | Category | Reporting User | Program   | Program Visible |
@@ -119,9 +119,9 @@ Feature: Admin reported programs
     Given I log in as "Admin" with the password "123456"
     And I report program 1 with category "spam" and note "Bad Program" in Browser
     And I report program 2 with category "dislike" and note "Even Worse Program" in Browser
-    Then I am on "/admin/app/programinappropriatereport/unreportProgram?id=2"
+    Then I am on "/admin/reported_projects/unreportProgram?id=2"
     And I wait for the page to be loaded
-    Then I am on "/admin/app/programinappropriatereport/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=1&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
+    Then I am on "/admin/reported_projects/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=1&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     Then I should see the reported programs table:
       | Note               | State    | Category | Reporting User | Program   | Program Visible |
       | Even Worse Program | Rejected | Dislike  | Admin          | program 2 | yes             |
@@ -133,7 +133,7 @@ Feature: Admin reported programs
     Then I logout
     And I log in as "Admin" with the password "123456"
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    Then I am on "/admin/app/programinappropriatereport/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=Admin&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
+    Then I am on "/admin/reported_projects/list?filter%5Btime%5D%5Btype%5D=&filter%5Btime%5D%5Bvalue%5D%5Bstart%5D=&filter%5Btime%5D%5Bvalue%5D%5Bend%5D=&filter%5Bstate%5D%5Btype%5D=&filter%5Bstate%5D%5Bvalue%5D=&filter%5Bcategory%5D%5Btype%5D=&filter%5Bcategory%5D%5Bvalue%5D=&filter%5BreportingUser__username%5D%5Btype%5D=&filter%5BreportingUser__username%5D%5Bvalue%5D=Admin&filter%5Bprogram__visible%5D%5Btype%5D=&filter%5Bprogram__visible%5D%5Bvalue%5D=&filter%5B_page%5D=1&filter%5B_sort_by%5D=id&filter%5B_sort_order%5D=DESC&filter%5B_per_page%5D=32"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State | Category | Reporting User | Program   | Program Visible |
@@ -148,7 +148,7 @@ Feature: Admin reported programs
     Then I logout
     And I log in as "Admin" with the password "123456"
     And I report program 2 with category "spam" and note "Even Worse Program" in Browser
-    Then I am on "/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D=1"
+    Then I am on "/admin/reported_projects/list?filter%5BreportedUser%5D%5Bvalue%5D=2"
     And I wait for the page to be loaded
     Then I should see the reported programs table:
       | Note               | State | Category | Reported User | Reporting User | Program   | Program Visible |

@@ -4,13 +4,13 @@ Feature: Admin approve programs
   Background:
     Given there are admins:
       | name  | password | token      | email                | id |
-      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 0  |
+      | Admin | 123456   | eeeeeeeeee | admin@pocketcode.org | 1  |
 
     And there are users:
       | name     | password | token      | email               | id |
-      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org | 1  |
-      | Catroweb | 123456   | dddddddddd | dev2@pocketcode.org | 2  |
-      | User1    | 123456   | qwertyuiop | dev3@pocketcode.org | 3  |
+      | Catrobat | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
+      | Catroweb | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
+      | User1    | 123456   | qwertyuiop | dev3@pocketcode.org | 4  |
 
     And there are programs:
       | id | name      | description  | owned by | upload time      | version | language version | visible |
@@ -132,7 +132,7 @@ Feature: Admin approve programs
     And I am on "/admin/approve/list"
     And I wait for the page to be loaded
     And I click on the username "Catroweb"
-    Then I should be on "/admin/app/user/2/edit"
+    Then I should be on "/admin/app/user/3/edit"
     And I should see "Catroweb"
     And I should see "E-Mail-Address"
 

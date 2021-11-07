@@ -21,7 +21,8 @@ Feature:
     And I wait for the page to be loaded
     Then I should be logged in
     And I should see "Catrobat"
-    When I am on "/app/logout"
+    And I should see "Logout"
+    When I click "#btn-logout"
     And I wait for the page to be loaded
     Then I should be logged out
 

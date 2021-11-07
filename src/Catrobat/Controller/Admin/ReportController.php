@@ -29,16 +29,28 @@ class ReportController extends CRUDController
 
   public function createUrlCommentsAction(): RedirectResponse
   {
-    $id = $this->admin->getSubject()->getId();
+    $filter = [
+      'user' => [
+        'value' => $this->admin->getSubject()->getId(),
+      ],
+    ];
 
-    return new RedirectResponse('/admin/report/list?filter%5Buser%5D%5Bvalue%5D='.$id);
+    return new RedirectResponse($this->container->get('router')->generate(
+          'admin_report_list', ['filter' => $filter])
+      );
   }
 
   public function createUrlProgramsAction(): RedirectResponse
   {
-    $id = $this->admin->getSubject()->getId();
+    $filter = [
+      'reportedUser' => [
+        'value' => $this->admin->getSubject()->getId(),
+      ],
+    ];
 
-    return new RedirectResponse('/admin/app/programinappropriatereport/list?filter%5BreportedUser%5D%5Bvalue%5D='.$id);
+    return new RedirectResponse($this->container->get('router')->generate(
+        'admin_reported_projects_list', ['filter' => $filter])
+    );
   }
 
   public function acceptProgramReportAction(): RedirectResponse
