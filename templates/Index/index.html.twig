@@ -36,7 +36,6 @@
 
 
   <div id="home-projects">
-    {#      ['recommended', 'recommended', 'views'],  Currently disabled#}
     {# array values: [api project_type, translation, property to show] #}
     {% for category in [
       ['recent', 'newest', 'uploaded'],
@@ -45,6 +44,7 @@
       ['most_downloaded', 'most.downloaded', 'downloads'],
       ['most_viewed', 'most.viewed', 'views'],
       ['scratch', 'scratchremixes', 'views'],
+      ['recommended', 'recommended', 'views'],
     ] %}
       <div id="home-projects__{{ category[0] }}" data-category="{{ category[0] }}" data-property="{{ category[2] }}"
            data-theme="{{ theme() }}" data-flavor="{{ flavor() }}" data-base-url="{{ app.request.getBaseURL() }}"
