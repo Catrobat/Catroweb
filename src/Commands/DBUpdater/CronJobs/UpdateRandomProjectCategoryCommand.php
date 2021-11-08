@@ -37,14 +37,7 @@ class UpdateRandomProjectCategoryCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $qb = $this->entity_manager->createQueryBuilder();
-    $qb->update()
-      ->from(Program::class, 'p')
-      ->where('p.rand <> 0')
-      ->set('p.rand', 0)
-      ->getQuery()
-      ->execute()
-    ;
+    $this->resetCategoryOfIndex('rand');
 
     $qb = $this->entity_manager->createQueryBuilder();
     $random_id_list = $qb->select('p.id')
@@ -67,5 +60,17 @@ class UpdateRandomProjectCategoryCommand extends Command
     $this->entity_manager->flush();
 
     return 0;
+  }
+
+  protected function resetCategoryOfIndex(string $index): void
+  {
+    $qb = $this->entity_manager->createQueryBuilder();
+    $qb->update()
+      ->from(Program::class, 'p')
+      ->where("p.{$index} <> 0")
+      ->set("p.{$index}", 0)
+      ->getQuery()
+      ->execute()
+      ;
   }
 }
