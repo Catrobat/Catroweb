@@ -127,8 +127,8 @@ programs:
   tooLongDescription: The project description is too long!
   tooLongCredits: The project credits are too long!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: ډیری لیدل شوي
+    downloaded: ډیری ډاونلوډ شوی
   random: Random projects
   related: Related projects
   downloads: '%downloads% downloads'
@@ -186,7 +186,7 @@ programs:
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
-  title: Remixes
+  title: ریمکسونه
   showRemixGraph: 'Remix graph'
   by: 'لخوا'
   open: 'Open'
@@ -571,7 +571,7 @@ codeview:
   scripts: 'Scripts'
   bricks: 'خښتې'
   objects: 'لوبغاړي او توکي'
-  looks: 'Looks'
+  looks: 'ښکاري'
   sounds: 'Sounds'
   globals: 'Globals'
   locals: 'Locals'
@@ -590,11 +590,11 @@ codeStatistics:
   error: "Code statistics can't be displayed."
   general: 'General'
   bricks: 'خښتې'
-  eventBricks: 'Event'
+  eventBricks: 'پیښه'
   controlBricks: 'کنټرول'
-  motionBricks: 'Motion'
+  motionBricks: 'حرکت'
   soundBricks: 'Sound'
-  looksBricks: 'Looks'
+  looksBricks: 'ښکاري'
   penBricks: 'Pen'
   dataBricks: 'ډاټا'
   deviceBricks: 'Device'
@@ -672,13 +672,13 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'د کاټروبیټ ټولنه'
 back_to_app: 'Exit community'
 category:
   recent: Newest projects
   random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
+  most_viewed: ډیری لیدل شوي
+  most_downloaded: ډیری ډاونلوډ شوی
   example: Example
   scratch: Scratch remixes
   recommended: Recommended projects
@@ -758,7 +758,7 @@ extensions:
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: ګنډل
     mindstorms:
       title: Mindstorms
 studio:
