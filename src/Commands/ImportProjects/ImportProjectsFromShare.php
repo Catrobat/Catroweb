@@ -70,14 +70,25 @@ class ImportProjectsFromShare extends Command
   {
     $downloads_left = $limit;
     while ($downloads_left > 0) {
-      $server_json = json_decode(file_get_contents($url.'?limit='.$downloads_left), true);
+      $projects = @file_get_contents($url.'?limit='.$downloads_left);
+      if (false === $projects) {
+        --$downloads_left;
+        continue;
+      }
+      $server_json = json_decode($projects, true);
+
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
       foreach ($server_json['CatrobatProjects'] as $program) {
         $project_url = $base_url.$program['DownloadUrl'];
         $name = $dir.$program['ProjectId'].'.catrobat';
         $output->writeln('Saving <'.$project_url.'> to <'.$name.'>');
         try {
-          file_put_contents($name, file_get_contents($project_url));
+          $project_json = @file_get_contents($project_url);
+          file_put_contents($name, $project_json);
+          if (false === $project_json) {
+            --$downloads_left;
+            continue;
+          }
           --$downloads_left;
         } catch (Exception $e) {
           $output->writeln('File <'.$project_url.'> download failed');
