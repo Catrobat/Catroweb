@@ -355,14 +355,14 @@ search:
   fail: Please enter at least a single search term
 menu:
   profile: My Profile
-  login: Login
+  login: د ننه کیدل
   logout: وتون
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
 login:
-  login: Login
+  login: د ننه کیدل
   button:
     loginNow: Login now
     createAccount: ګڼون جوړول
