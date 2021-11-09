@@ -585,8 +585,7 @@ class ProgramManager
     return $this->program_repository->countScratchRemixProjects($flavor, $max_version);
   }
 
-  public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0,
-                                            string $max_version = ''): array
+  public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
