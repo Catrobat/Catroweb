@@ -1,12 +1,12 @@
 ---
 #homepage translation
-title: Comunità di Catrobat
+title: Community di Catrobat
 localLanguage: Inglese
 username: Nome utente
 password: Password
 createNewPassword: Crea una nuova password
 accountSettings: Impostazioni account
-email: E-Mail
+email: Email
 aboutPocketCode: Su Pocket Code
 about: Informazioni
 education: Istruzione
@@ -360,7 +360,7 @@ search:
 menu:
   profile: Il mio profilo
   login: Login
-  logout: Logout
+  logout: Disconnettiti
   admin: Admin
   home: Home
   helpAndTutorials: Tutorial e aiuto
@@ -368,11 +368,11 @@ menu:
 login:
   login: Login
   button:
-    loginNow: Login now
+    loginNow: Accedi ora
     createAccount: Crea account
-    forgetPassword: Forget password?
+    forgetPassword: Hai dimenticato la password?
   oauth:
-    title: Or you can join with
+    title: O puoi unirti con
   passOrUser: Password o nome utente errati.
   noUsername: Non è stato trovato il tuo nome utente o indirizzo email.
   forgotPass: Hai dimenticato nome utente o password?
@@ -390,16 +390,16 @@ login:
   passwordFirst: Password
   passwordSecond: Conferma password
 register:
-  title: Sign up
+  title: Registrati
   button:
     cancel: Annulla
     createAccount: Crea account
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Recupero del profilo
+  description: Se ricordi l'email o il nome utente del tuo profilo, possiamo inviarti un link per ripristinare la tua password.
   button:
     cancel: Annulla
-    submit: Recover password
+    submit: Recupera la password
 apk:
   download: Scarica come app
   prepare: 'Prepara l''app'
