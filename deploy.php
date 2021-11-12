@@ -11,6 +11,8 @@ require 'recipe/slack.php';
 (new Dotenv())->usePutenv(true)->load('.env');
 (new Dotenv())->usePutenv(true)->load('.env.local');
 
+set('default_timeout', 6000);
+
 // Project name
 set('application', getenv('APP_NAME'));
 set('repository', getenv('DEPLOY_GIT'));
