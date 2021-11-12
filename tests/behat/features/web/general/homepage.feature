@@ -65,10 +65,8 @@ Feature: Pocketcode homepage
     Then one of the ".project-list__title" elements should contain "Newest projects"
     Then one of the ".project-list__title" elements should contain "Examples"
     Then one of the ".project-list__title" elements should contain "Most downloaded"
-    Then one of the ".project-list__title" elements should contain "Most viewed"
     Then one of the ".project-list__title" elements should contain "Scratch remixes"
-#   Random category currently disabled
-#    Then one of the ".project-list__title" elements should contain "Random projects"
+    Then one of the ".project-list__title" elements should contain "Random projects"
 
   Scenario: Welcome Section
     Given I am on homepage

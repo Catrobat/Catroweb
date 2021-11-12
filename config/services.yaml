@@ -182,10 +182,6 @@ services:
     class: App\Catrobat\Services\CatroNotificationService
     public: true
 
-  App\Catrobat\Services\CommunityStatisticsService:
-    class: App\Catrobat\Services\CommunityStatisticsService
-    public: true
-
   App\Catrobat\Services\ProgramFileRepository:
     class: App\Catrobat\Services\ProgramFileRepository
     public: true

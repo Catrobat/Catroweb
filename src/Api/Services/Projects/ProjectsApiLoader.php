@@ -53,7 +53,8 @@ final class ProjectsApiLoader extends AbstractApiLoader
   public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user = null): array
   {
     if ('recommended' === $category) {
-      return $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+      return []; // Currently disabled
+//      return $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
     }
 
     return $this->project_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
@@ -70,10 +71,12 @@ final class ProjectsApiLoader extends AbstractApiLoader
 
     switch ($category) {
       case 'similar':
-        return $this->project_manager->getRecommendedProgramsById($project_id, $flavor, $limit, $offset);
+        return []; // Currently disabled ~70seconds per request is NOT OK
+//        return $this->project_manager->getRecommendedProgramsById($project_id, $flavor, $limit, $offset);
 
       case 'also_downloaded':
-        return $this->project_manager->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $project, $limit, $offset);
+        return []; // Currently disabled ~12seconds per request is NOT OK
+      //        return $this->project_manager->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $project, $limit, $offset);
 
       case 'more_from_user':
         /** @var Program $project */

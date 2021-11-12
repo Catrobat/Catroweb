@@ -2934,7 +2934,7 @@ class ApiContext implements KernelAwareContext
     $response = $this->getKernelBrowser()->getResponse();
 
     //removed recommended on purpose
-    $expected_categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch'];
+    $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch'];
     $categories = json_decode($response->getContent(), true);
     Assert::assertEquals(count($expected_categories), count($categories), 'Number of returned programs should be '.count($expected_categories));
 

@@ -59,7 +59,6 @@ Feature: Project list to provides users with different categories of projects
       | category                                                                     | value        | page |
       | "#home-projects__recent .project-list__project__property-uploaded"           | "schedule"   | "/"  |
       | "#home-projects__most_downloaded .project-list__project__property-downloads" | "get_app"    | "/"  |
-      | "#home-projects__most_viewed .project-list__project__property-views"         | "visibility" | "/"  |
 
   Scenario Outline: A click on a project redirects to the project page
     Given I am on <page>
@@ -70,7 +69,6 @@ Feature: Project list to provides users with different categories of projects
     Examples:
       | project                                              | page |
       | "#home-projects__recent .project-list__project"      | "/"  |
-      | "#home-projects__most_viewed .project-list__project" | "/"  |
 
   Scenario Outline: The show more button opens a full page only with projects from the category
     Given I am on homepage
