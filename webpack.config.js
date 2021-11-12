@@ -52,8 +52,7 @@ Encore
     { from: './assets/catblocks', to: '../catblocks/[path][name].[ext]' },
 
     // JS (deprecated!)
-    { from: './assets/js/custom', to: '../js/[path][name].[ext]' }, // Deprecated!
-    { from: './assets/js/analytics', to: '../js/[path][name].[ext]' },
+    { from: './assets/js/custom', to: '../js/[path][name].[ext]' },
     { from: './node_modules/clipboard/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/bootstrap/dist/js', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/sweetalert2/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },

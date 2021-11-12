@@ -18,7 +18,7 @@ Feature:
     Given I log in as "TestUser"
     Then I should not see "External account sign in information"
 
-  Scenario: OAuth users should be able to create a new password
+  Scenario: OAuth users should be able to create a new password (Attention: flaky test!)
     Given I log in as "Catrobat"
     And I am on "/app/user"
     Then I should see "Create new password"
@@ -27,7 +27,7 @@ Feature:
     And I fill in "repeat-password" with "test12"
     And I click "#save-password"
     And I wait for the page to be loaded
-    And I wait 1000 milliseconds
+    And I wait 2000 milliseconds
     Then I should see "Success"
     And I click ".swal2-confirm"
     Then I should see "Password"

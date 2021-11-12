@@ -109,7 +109,6 @@ Feature: MAX version feature; Allows old Apps to request only projects they can 
 
 # ----------------------------------------------------------------------------------------------------------------------
 
-  @disabled
   Scenario: show random projects with limit and max_version
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"

@@ -6,7 +6,6 @@ Feature: Help page redirect
     And I wait for the page to be loaded
     Then I should be on "https://wiki.catrobat.org/bin/view/Documentation/"
 
-  @disabled
   Scenario: Navigating to "/mindstorms/help" should redirect to the mindstorms wiki
     When I go to "/mindstorms/help"
     And I wait for the page to be loaded

@@ -2,7 +2,6 @@
 
 namespace App\WebView\Twig;
 
-use App\Catrobat\Services\CommunityStatisticsService;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
 use NumberFormatter;
@@ -119,7 +118,6 @@ class AppExtension extends AbstractExtension
       new TwigFunction('theme', [$this, 'getTheme']),
       new TwigFunction('themeAssets', [$this, 'getFlavor']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
-      new TwigFunction('getCommunityStats', [$this, 'getCommunityStats']),
       new TwigFunction('assetExists', [$this, 'assetExists']),
       new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
     ];
@@ -354,30 +352,6 @@ class AppExtension extends AbstractExtension
       default:
         return null;
     }
-  }
-
-  /**
-   * Twig extension to provide a function to retrieve the community statistics in any view.
-   * Needed to render the footer.
-   *
-   * See the fetchStatistics implementation of Services\CommunityStatisticsService.php for details.
-   *
-   * @return array|mixed
-   */
-  public function getCommunityStats(CommunityStatisticsService $communityStatisticsService)
-  {
-    $cms_s = $communityStatisticsService;
-
-    return $cms_s->fetchStatistics();
-
-    /* Numberformatter could be used to apply the locale. However this requires the intl extension to be fully working.
-
-    $nf = new NumberFormatter($this->request_stack->getCurrentRequest()->getLocale(), 1);
-    foreach ($stats as $key => $value)
-    {
-      $stats[$key] = $nf->format($value);
-    }
-    */
   }
 
   public function assetExists(string $filename): bool
