@@ -1,4 +1,4 @@
-@api
+@api @disabled
 Feature: Get recommended programs on homepage
 
   To find yet unliked programs that were liked by similar users.

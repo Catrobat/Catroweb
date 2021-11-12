@@ -1,4 +1,4 @@
-@web @project_page @recommendations
+@web @project_page @recommendations @disabled
 Feature: Showing similar programs on details page of one program
 
   Background:
