@@ -70,7 +70,6 @@ export class ProjectList {
         self.fetchActive = false
       }).fail(function (jqXHR, textStatus, errorThrown) {
       console.error('Failed loading projects in category ' + self.category, JSON.stringify(jqXHR), textStatus, errorThrown)
-      alert('Error: Failed loading ' + self.category.replace('_', ' ') + ' projects')
       self.container.classList.remove('loading')
     })
   }
