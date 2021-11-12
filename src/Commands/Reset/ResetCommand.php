@@ -91,12 +91,27 @@ class ResetCommand extends Command
 
     $this->createUsers($user_array, $output);
 
-    $this->importProjectsFromShare(
+    $share_projects_import = $this->importProjectsFromShare(
       intval($input->getOption('limit')),
       $user_array,
       intval($input->getOption('remix-layout')),
       $output
     );
+
+    if (!$share_projects_import) {
+      $local_projects_dir = $this->parameter_bag->get('catrobat.resources.dir').'projects';
+      $local_projects_import = $this->importLocalProjects(
+        $local_projects_dir,
+        intval(20),
+        $user_array,
+        intval($input->getOption('remix-layout')),
+        $output
+      );
+
+      if (!$local_projects_import) {
+        throw new Exception('Projects could neither be loaded from the share nor from '.$local_projects_dir);
+      }
+    }
 
     $programs = $this->program_manager->findAll();
     $program_names = [];
@@ -169,7 +184,37 @@ class ResetCommand extends Command
   /**
    * @throws Exception
    */
-  private function importProjectsFromShare(int $limit, array $user_array, int $remix_layout, OutputInterface $output): void
+  private function importLocalProjects(string $local_projects_dir, int $limit, array $user_array, int $remix_layout, OutputInterface $output): bool
+  {
+    if ($limit < 0) {
+      $limit = 0;
+    }
+
+    $projects_to_download = $limit;
+    while ($projects_to_download > 0) {
+      $amount = random_int(1, intval(floor($projects_to_download / 5)) + 1);
+      $username = $user_array[random_int(0, sizeof($user_array) - 1)];
+
+      CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
+                                          [
+                                            'directory' => $local_projects_dir,
+                                            'user' => $username,
+                                            '--remix-layout' => $remix_layout,
+                                          ],
+                                          $output
+      );
+      $projects_to_download -= $amount;
+    }
+
+    $projects_count = count($this->program_manager->findAll());
+
+    return $projects_count > 0;
+  }
+
+  /**
+   * @throws Exception
+   */
+  private function importProjectsFromShare(int $limit, array $user_array, int $remix_layout, OutputInterface $output): bool
   {
     if ($limit < 0) {
       $limit = 0;
@@ -181,6 +226,9 @@ class ResetCommand extends Command
       $this->userUploadProjects($amount, $user_array[random_int(0, sizeof($user_array) - 1)], $remix_layout, $output);
       $projects_to_download -= $amount;
     }
+    $projects_count = count($this->program_manager->findAll());
+
+    return $projects_count > 0;
   }
 
   /**

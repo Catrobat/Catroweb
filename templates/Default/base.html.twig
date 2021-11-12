@@ -56,10 +56,5 @@
 
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>
-{% if app_env == 'prod' %}
-  <script> let configGA = { 'UaId': 'UA-42270417-5' } </script>
-  <script async src="{{ asset('js/analytics.js') }}"></script>
-{% endif %}
-
 </body>
 </html>

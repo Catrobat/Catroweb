@@ -1,4 +1,4 @@
-@web @recommendations
+@web @recommendations @disabled
 Feature: Users see the recommended projects that have been downloaded by other users on project page
 
   Background:

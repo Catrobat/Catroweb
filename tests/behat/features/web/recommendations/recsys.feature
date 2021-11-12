@@ -1,7 +1,6 @@
-# Missing in new API - To be fixed with ticket: SHARE-370
-# Still the feature is very broken and needs a complete rework: SHARE-111
+# the feature is to resource intensive
 
-@homepage @recommendations
+@homepage @recommendations @disabled
 Feature: Recommendations on homepage (a.k.a. index page)
 
   Background:
