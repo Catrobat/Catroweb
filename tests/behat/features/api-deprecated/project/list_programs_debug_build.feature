@@ -184,7 +184,6 @@ Feature: List programs with and without debug build type
       | recent         | debug      | debug_program |
       | recent         | release    | program_2     |
 
-  @disabled
   Scenario Outline: Show random programs (ids) with debug and release app
     Given I request from a <build type> build of the Catroid app
     And I have a parameter "limit" with value "5"
