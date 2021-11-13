@@ -511,10 +511,11 @@ if (isTrackingAllowed()) {
     mapEventParameter: function (actions) {
       const mapped = {}
 
+      const _this = this
       Object.keys(actions).forEach(function (key, _) {
-        const mapIndex = this.trackingVarMap.findIndex(function (x) { return key in x })
+        const mapIndex = _this.trackingVarMap.findIndex(function (x) { return key in x })
         if (mapIndex >= 0) {
-          const parameter = this.trackingVarMap[mapIndex]
+          const parameter = _this.trackingVarMap[mapIndex]
           const mappedKey = parameter[key]
 
           if ((typeof (actions[key]) === 'string' && window.HelperFunctions.isNullOrWhitespace(actions[key]) === false) || typeof (actions[key]) === 'number') {
@@ -592,6 +593,7 @@ if (isTrackingAllowed()) {
        * @param {Object} parameter - contains the extensions for the tracked internal downloads
        */
     trackOutboundAndDownloads: function (parameter) {
+      const _this = this
       // select all a with are not beginning with '#'
       $('a:not([href^=\'#\'])').filter(function () {
         // filter only links beginning with http
@@ -599,7 +601,6 @@ if (isTrackingAllowed()) {
       }).each(function () {
         // Add click event to the link to track the outbound link
         const _hostDomain = window.HelperFunctions.getHostname()
-        const _this = this
         if (this.href.indexOf(_hostDomain) < 0) {
           // is external link
           $(this).on('click', function (sender) {
