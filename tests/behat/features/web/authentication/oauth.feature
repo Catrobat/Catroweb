@@ -18,6 +18,7 @@ Feature:
     Given I log in as "TestUser"
     Then I should not see "External account sign in information"
 
+  @disabled
   Scenario: OAuth users should be able to create a new password (Attention: flaky test!)
     Given I log in as "Catrobat"
     And I am on "/app/user"

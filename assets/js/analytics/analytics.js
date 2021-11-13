@@ -469,13 +469,13 @@ if (isTrackingAllowed()) {
        */
     trackOnKeyPressEnter: function (parameter) {
       const trackingObject = window.TrackingObjectFactory.createObj(parameter)
-
+      const _this = this
       // search for the search box
       $(trackingObject.baseSelector).keypress(function (e) {
         // Keypress 13 = Enter
         if (e.which === 13) {
-          this.addEventParameter(e, trackingObject.getEventParameter())
-          this.resolve(e)
+          _this.addEventParameter(e, trackingObject.getEventParameter())
+          _this.resolve(e)
         }
       })
     },
@@ -554,17 +554,18 @@ if (isTrackingAllowed()) {
        * @param {TrackingObject} element - Element to track
       */
     trackOnClickEvent: function (trackingObject) {
+      const _this = this
       if (trackingObject.hasSubSelector()) {
         $(trackingObject.baseSelector).on('click', trackingObject.subSelector, function (e) {
           const trackingCopy = trackingObject.copy()
-          this.addEventParameter(e, trackingCopy.getEventParameter())
-          this.resolve(e)
+          _this.addEventParameter(e, trackingCopy.getEventParameter())
+          _this.resolve(e)
         })
       } else {
         $(trackingObject.baseSelector).on('click', function (e) {
           const trackingCopy = trackingObject.copy()
-          this.addEventParameter(e, trackingCopy.getEventParameter())
-          this.resolve(e)
+          _this.addEventParameter(e, trackingCopy.getEventParameter())
+          _this.resolve(e)
         })
       }
     },
@@ -598,6 +599,7 @@ if (isTrackingAllowed()) {
       }).each(function () {
         // Add click event to the link to track the outbound link
         const _hostDomain = window.HelperFunctions.getHostname()
+        const _this = this
         if (this.href.indexOf(_hostDomain) < 0) {
           // is external link
           $(this).on('click', function (sender) {
@@ -609,13 +611,12 @@ if (isTrackingAllowed()) {
                 trackingObject = trackingObject.addEventParameter('event_callback', function () { document.location = url })
               }
 
-              this.addEventParameter(sender, trackingObject.getEventParameter())
-              this.resolve(sender)
+              _this.addEventParameter(sender, trackingObject.getEventParameter())
+              _this.resolve(sender)
             }
           })
         } else {
           // is internal downloads
-          const _this = this
           $(this).each(function () {
             $(this).on('click', function (sender) {
               const trackingObject = window.TrackingObjectFactory.createObj(parameter.Downloads)
