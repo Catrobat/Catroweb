@@ -29,9 +29,9 @@ class ProgramFileRepository
     $this->file_compressor = $file_compressor;
   }
 
-  public function zipProject(ExtractedCatrobatFile $extracted, string $id): void
+  public function zipProject(string $path, string $id): void
   {
-    $this->file_compressor->compress($extracted->getPath(), $this->zip_dir, $id);
+    $this->file_compressor->compress($path, $this->zip_dir, $id);
   }
 
   public function deleteProjectExtractFiles(string $id): void

@@ -153,14 +153,14 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   }
 
   function showSuccessPopUp (title, text) {
-    showPopUp('success', title, text, location.reload)
+    showPopUp('success', title, text, true)
   }
 
   function showErrorPopUp (title, text) {
     showPopUp('error', title, text)
   }
 
-  function showPopUp (type, title, text, callback) {
+  function showPopUp (type, title, text, refresh = false) {
     Swal.fire(
       {
         title: title,
@@ -173,8 +173,8 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
         allowOutsideClick: false
       }
     ).then(() => {
-      if (callback) {
-        callback()
+      if (refresh) {
+        location.reload()
       }
     })
   }

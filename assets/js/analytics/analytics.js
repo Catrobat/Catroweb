@@ -469,13 +469,13 @@ if (isTrackingAllowed()) {
        */
     trackOnKeyPressEnter: function (parameter) {
       const trackingObject = window.TrackingObjectFactory.createObj(parameter)
-
+      const _this = this
       // search for the search box
       $(trackingObject.baseSelector).keypress(function (e) {
         // Keypress 13 = Enter
         if (e.which === 13) {
-          this.addEventParameter(e, trackingObject.getEventParameter())
-          this.resolve(e)
+          _this.addEventParameter(e, trackingObject.getEventParameter())
+          _this.resolve(e)
         }
       })
     },
@@ -511,10 +511,11 @@ if (isTrackingAllowed()) {
     mapEventParameter: function (actions) {
       const mapped = {}
 
+      const _this = this
       Object.keys(actions).forEach(function (key, _) {
-        const mapIndex = this.trackingVarMap.findIndex(function (x) { return key in x })
+        const mapIndex = _this.trackingVarMap.findIndex(function (x) { return key in x })
         if (mapIndex >= 0) {
-          const parameter = this.trackingVarMap[mapIndex]
+          const parameter = _this.trackingVarMap[mapIndex]
           const mappedKey = parameter[key]
 
           if ((typeof (actions[key]) === 'string' && window.HelperFunctions.isNullOrWhitespace(actions[key]) === false) || typeof (actions[key]) === 'number') {
@@ -554,17 +555,18 @@ if (isTrackingAllowed()) {
        * @param {TrackingObject} element - Element to track
       */
     trackOnClickEvent: function (trackingObject) {
+      const _this = this
       if (trackingObject.hasSubSelector()) {
         $(trackingObject.baseSelector).on('click', trackingObject.subSelector, function (e) {
           const trackingCopy = trackingObject.copy()
-          this.addEventParameter(e, trackingCopy.getEventParameter())
-          this.resolve(e)
+          _this.addEventParameter(e, trackingCopy.getEventParameter())
+          _this.resolve(e)
         })
       } else {
         $(trackingObject.baseSelector).on('click', function (e) {
           const trackingCopy = trackingObject.copy()
-          this.addEventParameter(e, trackingCopy.getEventParameter())
-          this.resolve(e)
+          _this.addEventParameter(e, trackingCopy.getEventParameter())
+          _this.resolve(e)
         })
       }
     },
@@ -591,6 +593,7 @@ if (isTrackingAllowed()) {
        * @param {Object} parameter - contains the extensions for the tracked internal downloads
        */
     trackOutboundAndDownloads: function (parameter) {
+      const _this = this
       // select all a with are not beginning with '#'
       $('a:not([href^=\'#\'])').filter(function () {
         // filter only links beginning with http
@@ -609,13 +612,12 @@ if (isTrackingAllowed()) {
                 trackingObject = trackingObject.addEventParameter('event_callback', function () { document.location = url })
               }
 
-              this.addEventParameter(sender, trackingObject.getEventParameter())
-              this.resolve(sender)
+              _this.addEventParameter(sender, trackingObject.getEventParameter())
+              _this.resolve(sender)
             }
           })
         } else {
           // is internal downloads
-          const _this = this
           $(this).each(function () {
             $(this).on('click', function (sender) {
               const trackingObject = window.TrackingObjectFactory.createObj(parameter.Downloads)

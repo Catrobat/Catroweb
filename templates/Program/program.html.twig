@@ -129,10 +129,10 @@
 
   {% include 'Program/program_details.html.twig' %}
   <div id="recommended-projects">
+    {#    ['similar', 'similarPrograms', 'views'],#}
+    {#    ['also_downloaded', 'mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms', 'downloads'],#}
     {# array values: [api project_type, translation, property to show] #}
     {% for category in [
-      ['similar', 'similarPrograms', 'views'],
-      ['also_downloaded', 'mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms', 'downloads'],
       ['more_from_user', 'moreFromThisUser', 'views'],
     ] %}
       <div id="recommended-projects__{{ category[0] }}" data-category="{{ category[0] }}"

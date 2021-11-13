@@ -60,13 +60,19 @@ class CommentsController extends AbstractController
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($_GET['CommentId']);
 
-    if ($user->getId() !== $comment->getUser()->getId() && !$this->isGranted('ROLE_ADMIN')) {
-      return new Response(StatusCode::NO_ADMIN_RIGHTS);
-    }
-
     if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
     }
+
+    $comment_user_id = 0;
+    if ($comment->getUser()) {
+      $comment_user_id = $comment->getUser()->getId();
+    }
+
+    if ($user->getId() !== $comment_user_id && !$this->isGranted('ROLE_ADMIN')) {
+      return new Response(StatusCode::NO_ADMIN_RIGHTS);
+    }
+
     $em->remove($comment);
     $em->flush();
 
