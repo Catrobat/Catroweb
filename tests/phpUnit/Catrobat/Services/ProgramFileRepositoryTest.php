@@ -79,7 +79,7 @@ class ProgramFileRepositoryTest extends TestCase
     $extracted_program = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
     $id = 'test';
 
-    $this->program_file_repository->zipProject($extracted_program, $id);
+    $this->program_file_repository->zipProject($extracted_program->getPath(), $id);
 
     $finder = new Finder();
     Assert::assertEquals(1, $finder->files()->in($this->storage_dir)->count());
