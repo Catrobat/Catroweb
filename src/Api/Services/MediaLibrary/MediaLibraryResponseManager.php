@@ -6,6 +6,7 @@ use App\Api\Services\Base\AbstractResponseManager;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use OpenAPI\Server\Model\MediaFileResponse;
+use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -17,9 +18,12 @@ final class MediaLibraryResponseManager extends AbstractResponseManager
   private ParameterBagInterface $parameter_bag;
 
   public function __construct(
-    TranslatorInterface $translator, UrlGeneratorInterface $url_generator, ParameterBagInterface $parameter_bag
+    TranslatorInterface $translator,
+    SerializerInterface $serializer,
+    UrlGeneratorInterface $url_generator,
+    ParameterBagInterface $parameter_bag
   ) {
-    parent::__construct($translator);
+    parent::__construct($translator, $serializer);
     $this->url_generator = $url_generator;
     $this->parameter_bag = $parameter_bag;
   }
