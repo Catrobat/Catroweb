@@ -15,6 +15,7 @@ use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsCategory;
 use OpenAPI\Server\Model\UploadErrorResponse;
+use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -36,9 +37,10 @@ final class ProjectsResponseManager extends AbstractResponseManager
     UrlGeneratorInterface $url_generator,
     ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
+    SerializerInterface $serializer,
     ProgramManager $project_manager
   ) {
-    parent::__construct($translator);
+    parent::__construct($translator, $serializer);
     $this->time_formatter = $time_formatter;
     $this->image_repository = $image_repository;
     $this->url_generator = $url_generator;
