@@ -22,14 +22,11 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
    * and old requests did not change, there is no need to request/load the new response body. This workflow can lead
    * to a significant performance boost.
    *
-   * If you are curious why json_encode is used (tldr: It's 2.5x faster than serialize):
-   *   - https://stackoverflow.com/questions/2254220/php-best-way-to-md5-multi-dimensional-array
-   *
    * @param mixed $response
    */
   public function addResponseHashToHeaders(array &$responseHeaders, $response): void
   {
-    $responseHeaders['X-Response-Hash'] = md5(json_encode($response));
+    $responseHeaders['X-Response-Hash'] = md5(serialize($response));
   }
 
   public function addContentLanguageToHeaders(array &$responseHeaders): void
