@@ -894,6 +894,8 @@ services:
   #  CAPI:
   #        We need to register the API server as handler for our open api generated APIs
   #
+  OpenAPI\Server\Service\SerializerInterface: "@open_api_server.service.serializer"
+
   api.media-library:
     class: App\Api\MediaLibraryApi
     tags:

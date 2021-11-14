@@ -2,6 +2,7 @@
 
 namespace App\Api\Services\Base;
 
+use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
@@ -11,9 +12,12 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
 {
   use TranslatorAwareTrait;
 
-  public function __construct(TranslatorInterface $translator)
+  protected SerializerInterface $serializer;
+
+  public function __construct(TranslatorInterface $translator, SerializerInterface $serializer)
   {
     $this->initTranslator($translator);
+    $this->serializer = $serializer;
   }
 
   /**
@@ -26,11 +30,16 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
    */
   public function addResponseHashToHeaders(array &$responseHeaders, $response): void
   {
-    $responseHeaders['X-Response-Hash'] = md5(serialize($response));
+    $responseHeaders['X-Response-Hash'] = md5($this->getSerializer()->serialize($response, 'application/json'));
   }
 
   public function addContentLanguageToHeaders(array &$responseHeaders): void
   {
     $responseHeaders['Content-Language'] = $this->getLocale();
+  }
+
+  protected function getSerializer(): SerializerInterface
+  {
+    return $this->serializer;
   }
 }

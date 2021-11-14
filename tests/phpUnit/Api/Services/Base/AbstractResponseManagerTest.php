@@ -4,7 +4,10 @@ namespace Tests\phpUnit\Api\Services\Base;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareInterface;
+use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Service\JmsSerializer;
 use PHPUnit\Framework\MockObject\MockObject;
+use ReflectionException;
 use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
 /**
@@ -52,5 +55,33 @@ final class AbstractResponseManagerTest extends CatrowebTestCase
   public function testTestClassImplements(): void
   {
     $this->assertInstanceOf(TranslatorAwareInterface::class, $this->object);
+  }
+
+  /**
+   * @group integration
+   * @small
+   *
+   * @throws ReflectionException
+   */
+  public function testAddResponseHashToHeaders(): void
+  {
+    $this->mockProperty(AbstractResponseManager::class, $this->object, 'serializer', new JmsSerializer());
+
+    $responseHeaders = [];
+    $response = new ProjectResponse(['id' => '1']);
+    $this->object->addResponseHashToHeaders($responseHeaders, $response);
+    $hash_1 = $responseHeaders['X-Response-Hash'];
+
+    $responseHeaders = [];
+    $response = new ProjectResponse(['id' => '1']);
+    $this->object->addResponseHashToHeaders($responseHeaders, $response);
+    $hash_2 = $responseHeaders['X-Response-Hash'];
+
+    $response = new ProjectResponse(['id' => '2']);
+    $this->object->addResponseHashToHeaders($responseHeaders, $response);
+    $hash_3 = $responseHeaders['X-Response-Hash'];
+
+    $this->assertSame($hash_1, $hash_2);
+    $this->assertNotEquals($hash_1, $hash_3);
   }
 }
