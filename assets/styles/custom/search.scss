@@ -3,12 +3,10 @@
 
 
 #search-results-text {
-  padding-top: 10px;
-  font-size: $default-font-size + 0.25;
+  padding-right: 10px;
 }
 
-#search-results-text.no-results {
-  font-size: $default-font-size + 0.5;
-  font-weight: $font-weight-bold;
-  text-align: center;
+.project-list.search-list.vertical {
+  position: relative;
+  height: auto;
 }
