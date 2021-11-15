@@ -381,9 +381,9 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
+  username: کارن نوم
   email: ایمیل
-  passwordFirst: Password
+  passwordFirst: رمز
   passwordSecond: Password confirm
 register:
   title: Sign up

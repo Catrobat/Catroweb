@@ -20,14 +20,14 @@ instagram: Instagram
 discordChat: Discord chat
 passwordsNoMatch: The passwords didn't match.
 error: Error
-cancel: Cancel
+cancel: I-cancel
 report: Report
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
 download: Download
-description: Description
+description: Paglalarawan
 noDescription: No description available.
 credits: Notes and credits
 noCredits: No notes and credits available.
@@ -59,7 +59,7 @@ wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you don't have any notifications."
 confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
+cancelMessage: "I-cancel"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
@@ -161,7 +161,7 @@ programs:
   show_more: Show More
   comments: Comments
   send: Send
-  delete: Delete
+  delete: Burahin
   report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
@@ -355,14 +355,14 @@ search:
   fail: Please enter at least a single search term
 menu:
   profile: My Profile
-  login: Login
+  login: Mag-Login
   logout: Mag-Logout
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
 login:
-  login: Login
+  login: Mag-Login
   button:
     loginNow: Login now
     createAccount: Create account
@@ -381,20 +381,20 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
+  username: Pangalan ng gumagamit
   email: Email
   passwordFirst: Password
   passwordSecond: Password confirm
 register:
   title: Sign up
   button:
-    cancel: Cancel
+    cancel: I-cancel
     createAccount: Create account
 accountRecovery:
   title: Account recovery
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
-    cancel: Cancel
+    cancel: I-cancel
     submit: Recover password
 apk:
   download: Download as app
@@ -800,7 +800,7 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_description: 'Paglalarawan'
       toggle_allow_comments: 'Comments'
       toggle_privacy: 'Public'
 media_library:
