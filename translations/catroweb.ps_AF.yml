@@ -189,7 +189,7 @@ remixGraph:
   title: ریمکسونه
   showRemixGraph: 'Remix graph'
   by: 'لخوا'
-  open: 'Open'
+  open: 'خلاص'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
@@ -568,7 +568,7 @@ codeview:
   cantDisplayStatistics: "Code can't be displayed"
   totalNumberOf: 'Total number of'
   scenes: 'Scenes'
-  scripts: 'Scripts'
+  scripts: 'سکریپټ'
   bricks: 'خښتې'
   objects: 'لوبغاړي او توکي'
   looks: 'ښکاري'
@@ -595,7 +595,7 @@ codeStatistics:
   motionBricks: 'حرکت'
   soundBricks: 'Sound'
   looksBricks: 'ښکاري'
-  penBricks: 'Pen'
+  penBricks: 'قلم'
   dataBricks: 'ډاټا'
   deviceBricks: 'Device'
   specialBricks: 'Special'
@@ -754,7 +754,7 @@ extensions:
     drone:
       title: Drone
     phiro:
-      title: Phiro
+      title: فیرو
     raspberry_pi:
       title: Raspberry PI
     embroidery:
