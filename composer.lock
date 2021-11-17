@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "55c9ad3177d4d580780b5945c8bb90b4",
+    "content-hash": "8d42c6c9511563d3e72912de39b5b7f1",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -65,16 +65,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.0.63",
+            "version": "v1.0.64",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "d32dab4818e023c5afba39c5f1cf33b66e7d8c3c"
+                "reference": "9668df4cb37f914c430ae50db189bddfcad1ce43"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/d32dab4818e023c5afba39c5f1cf33b66e7d8c3c",
-                "reference": "d32dab4818e023c5afba39c5f1cf33b66e7d8c3c",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/9668df4cb37f914c430ae50db189bddfcad1ce43",
+                "reference": "9668df4cb37f914c430ae50db189bddfcad1ce43",
                 "shasum": ""
             },
             "require": {
@@ -117,10 +117,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.63",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.0.64",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2021-04-25T16:35:35+00:00"
+            "time": "2021-11-17T17:04:26+00:00"
         },
         {
             "name": "clue/stream-filter",
