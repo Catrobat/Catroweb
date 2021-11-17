@@ -3,19 +3,16 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Events\CheckScratchProgramEvent;
-use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Catrobat\Services\StatisticsService;
 use App\Catrobat\StatusCode;
 use App\Entity\LikeNotification;
 use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
-use App\Entity\RemixManager;
 use App\Entity\User;
 use App\Entity\UserComment;
 use App\Repository\CatroNotificationRepository;
@@ -25,9 +22,7 @@ use App\WebView\Twig\AppExtension;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;
 use ImagickException;
@@ -46,8 +41,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProgramController extends AbstractController
 {
-  private StatisticsService $statistics;
-  private RemixManager $remix_manager;
   private ScreenshotRepository $screenshot_repository;
   private ProgramManager $program_manager;
   private ElapsedTimeStringFormatter $elapsed_time;
@@ -60,9 +53,7 @@ class ProgramController extends AbstractController
   private ProgramFileRepository $file_repository;
   private TranslationDelegate $translation_delegate;
 
-  public function __construct(StatisticsService $statistics_service,
-                              RemixManager $remix_manager,
-                              ScreenshotRepository $screenshot_repository,
+  public function __construct(ScreenshotRepository $screenshot_repository,
                               ProgramManager $program_manager,
                               ElapsedTimeStringFormatter $elapsed_time,
                               ExtractedFileRepository $extracted_file_repository,
@@ -74,8 +65,6 @@ class ProgramController extends AbstractController
                               ProgramFileRepository $file_repository,
                               TranslationDelegate $translation_delegate)
   {
-    $this->statistics = $statistics_service;
-    $this->remix_manager = $remix_manager;
     $this->screenshot_repository = $screenshot_repository;
     $this->program_manager = $program_manager;
     $this->elapsed_time = $elapsed_time;
@@ -98,9 +87,7 @@ class ProgramController extends AbstractController
    * Legacy routes
    * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    *
-   * @throws NonUniqueResultException
    * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function projectAction(Request $request, string $id): Response
   {
@@ -138,7 +125,7 @@ class ProgramController extends AbstractController
     $program_comments = $this->findCommentsById($project);
     $program_details = $this->createProgramDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
-      $referrer, $program_comments, $request
+      $referrer, $program_comments
     );
 
     return $this->render('Program/program.html.twig', [
@@ -538,38 +525,9 @@ class ProgramController extends AbstractController
                                              array $active_user_like_types,
                                              int $total_like_count,
                                              ?string $referrer,
-                                             array $program_comments,
-                                             Request $request): array
+                                             array $program_comments): array
   {
-    $rec_by_page_id = intval($request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE));
-    $rec_by_program_id = intval($request->query->get('rec_by_program_id', 0));
-    $rec_user_specific = intval($request->query->get('rec_user_specific', 0));
-    $rec_tag_by_program_id = intval($request->query->get('rec_from', 0));
-
-    if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
-      // all recommendations should generate this download link!
-      // (except tag-recommendations -> see below)
-      // At the moment only recommendations based on remixes are supported!
-      $url = $this->generateUrl('download', [
-        'id' => $program->getId(),
-        'rec_by_page_id' => $rec_by_page_id,
-        'rec_by_program_id' => $rec_by_program_id,
-        'rec_user_specific' => $rec_user_specific,
-        'fname' => $program->getName(),
-      ]);
-    } else {
-      if ($rec_tag_by_program_id > 0) {
-        // tag-recommendations should generate this download link!
-        $url = $this->generateUrl('download', [
-          'id' => $program->getId(),
-          'rec_from' => $rec_tag_by_program_id,
-          'fname' => $program->getName(),
-        ]);
-      } else {
-        // case: NO recommendation
-        $url = $this->generateUrl('download', ['id' => $program->getId(), 'fname' => $program->getName()]);
-      }
-    }
+    $url = $this->generateUrl('download', ['id' => $program->getId(), 'fname' => $program->getName()]);
 
     $comments_avatars = [];
     /** @var UserComment $comment */

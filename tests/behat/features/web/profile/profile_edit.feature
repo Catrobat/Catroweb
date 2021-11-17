@@ -2,7 +2,7 @@
 Feature:
   In order to manage the my profile page
   As a logged in user
-  I want to be able to change my password, email and country, upload an avatar image and delete my own programs
+  I want to be able to change my password, email and upload an avatar image and delete my own programs
 
   Background:
     Given there are users:
@@ -142,15 +142,6 @@ Feature:
     And I click "#save-email"
     And I wait for AJAX to finish
     Then I should see "Error while updating this e-mail address. You must have at least one validated e-mail address."
-
-  Scenario: changing country should work
-    Given I click "#edit-country-button"
-    And I wait for AJAX to finish
-    When I select "Austria" from "country"
-    And I click "#save-country"
-    And I wait for the page to be loaded
-    Then I should be on "/app/user"
-    And the "#country" element should contain "Austria"
 
   Scenario: deleting a project should set the project to invisible
     Given I am on "/app/user"

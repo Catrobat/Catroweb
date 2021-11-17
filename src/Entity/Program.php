@@ -330,11 +330,6 @@ class Program
   protected int $apk_downloads = 0;
 
   /**
-   * @ORM\OneToMany(targetEntity="ProgramDownloads", mappedBy="program", cascade={"remove"})
-   */
-  protected Collection $program_downloads;
-
-  /**
    * @ORM\Column(type="boolean", options={"default": false})
    */
   protected bool $debug_build = false;
@@ -377,7 +372,6 @@ class Program
     $this->catrobat_remix_backward_child_relations = new ArrayCollection();
     $this->scratch_remix_parent_relations = new ArrayCollection();
     $this->likes = new ArrayCollection();
-    $this->program_downloads = new ArrayCollection();
     $this->reports = new ArrayCollection();
     $this->custom_translations = new ArrayCollection();
   }
@@ -734,18 +728,6 @@ class Program
   public function getApkDownloads(): int
   {
     return $this->apk_downloads;
-  }
-
-  public function getProgramDownloads(): Collection
-  {
-    return $this->program_downloads;
-  }
-
-  public function addProgramDownloads(ProgramDownloads $program_download): Collection
-  {
-    $this->program_downloads[] = $program_download;
-
-    return $this->program_downloads;
   }
 
   public function addTag(Tag $tag): void

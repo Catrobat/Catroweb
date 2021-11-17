@@ -9,7 +9,6 @@ import { deleteCookie } from './CookieHelper'
  * @param profileUrl
  * @param saveUsername
  * @param saveEmailUrl
- * @param saveCountryUrl
  * @param savePasswordUrl
  * @param deleteUrl
  * @param deleteAccountUrl
@@ -22,7 +21,6 @@ import { deleteCookie } from './CookieHelper'
  * @param statusCodeUserEmailAlreadyExists
  * @param statusCodeUserEmailMissing
  * @param statusCodeUserEmailInvalid
- * @param statusCodeUserCountryInvalid
  * @param statusCodeUsernamePasswordEqual
  * @param statusCodeUserPasswordTooShort
  * @param statusCodeUserPasswordTooLong
@@ -40,7 +38,6 @@ export const MyProfile = function (
   profileUrl,
   saveUsername,
   saveEmailUrl,
-  saveCountryUrl,
   savePasswordUrl,
   deleteUrl,
   deleteAccountUrl,
@@ -53,7 +50,6 @@ export const MyProfile = function (
   statusCodeUserEmailAlreadyExists,
   statusCodeUserEmailMissing,
   statusCodeUserEmailInvalid,
-  statusCodeUserCountryInvalid,
   statusCodeUsernamePasswordEqual,
   statusCodeUserPasswordTooShort,
   statusCodeUserPasswordTooLong,
@@ -70,13 +66,11 @@ export const MyProfile = function (
   const usernameData = $('#username-wrapper > .profile-data')
   const emailEditContainer = $('#email-edit-container')
   const emailData = $('#email-wrapper > .profile-data')
-  const countryEditContainer = $('#country-edit-container')
-  const countryData = $('#country-wrapper > .profile-data')
   const passwordData = $('#password-wrapper > .profile-data')
   const accountSettingsContainer = $('#account-settings-container')
   const profileSections = [
     [passwordEditContainer, passwordData],
-    [emailEditContainer, emailData], [countryEditContainer, countryData],
+    [emailEditContainer, emailData],
     [accountSettingsContainer, null]
   ]
   const routingDataset = document.getElementById('js-api-routing').dataset
@@ -95,10 +89,6 @@ export const MyProfile = function (
 
   $('#edit-username-button').on('click', function () {
     toggleEditSection(usernameEditContainer, usernameData)
-  })
-
-  $('#edit-country-button').on('click', function () {
-    toggleEditSection(countryEditContainer, countryData)
   })
 
   $('#account-settings-button').on('click', function () {
@@ -251,26 +241,6 @@ export const MyProfile = function (
       }
       $('#username-ajax').hide()
       $('#save-username').show()
-    })
-  })
-
-  $(document).on('click', '#save-country', function () {
-    $(this).hide()
-    $('#country-ajax').show()
-    const country = $('#select-country').find('select').val()
-    $.post(saveCountryUrl, {
-      country: country
-    }, function (data) {
-      switch (parseInt(data.statusCode)) {
-        case statusCodeUserCountryInvalid:
-          break
-
-        default:
-          window.location.href = profileUrl
-          break
-      }
-      $('#country-ajax').hide()
-      $('#save-country').show()
     })
   })
 

@@ -8,7 +8,6 @@ use App\Entity\User;
 use App\Entity\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
-use Symfony\Component\Intl\Countries;
 use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -46,10 +45,6 @@ final class UserRequestValidator extends AbstractRequestValidator
 
   public function validateUpdateRequest(UpdateUserRequest $request, string $locale): ValidationWrapper
   {
-    if (!is_null($request->getCountry())) {
-      $this->validateCountry($request->getCountry(), $locale);
-    }
-
     if (!is_null(($request->getEmail()))) {
       $this->validateEmail($request->getEmail(), $locale, self::MODE_UPDATE);
     }
@@ -164,19 +159,6 @@ final class UserRequestValidator extends AbstractRequestValidator
       return $this->getValidationWrapper()->addError(
          $this->__('api.registerUser.passwordInvalidChars', [], $locale), $KEY
        );
-    }
-
-    return $this->getValidationWrapper();
-  }
-
-  private function validateCountry(?string $country, string $locale): ValidationWrapper
-  {
-    $KEY = 'country';
-
-    if (!Countries::exists($country)) {
-      return $this->getValidationWrapper()->addError(
-        $this->__('api.registerUser.countryCodeInvalid', [], $locale), $KEY
-      );
     }
 
     return $this->getValidationWrapper();

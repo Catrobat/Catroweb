@@ -26,14 +26,12 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
 
 class MigrateRemixGraphsCommand extends Command
 {
   protected static $defaultName = 'catrobat:remixgraph:migrate';
-  private Filesystem $file_system;
 
   private AsyncHttpClient $async_http_client;
 
@@ -55,13 +53,12 @@ class MigrateRemixGraphsCommand extends Command
 
   private ProgramRepository $program_repository;
 
-  public function __construct(Filesystem $filesystem, UserManager $user_manager,
+  public function __construct(UserManager $user_manager,
                               ProgramManager $program_manager, RemixManager $remix_manager,
                               EntityManagerInterface $entity_manager, CatrobatFileExtractor $file_extractor,
                               ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->file_system = $filesystem;
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
     $this->user_manager = $user_manager;
     $this->program_manager = $program_manager;

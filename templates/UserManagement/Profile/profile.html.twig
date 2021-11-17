@@ -14,20 +14,7 @@
     </div>
 
     <div id="user-information" class="col-8 col-md-10 mt-2 user-info d-flex flex-column justify-content-between">
-      <div>
-        <h1 id="profile-header" class="h4">
-          {{ profile.username }}
-        </h1>
-        {% if country %}
-          <span class="d-block">
-            <i class="material-icons">location_on</i>
-            <strong>
-              {{ "country"|trans({}, "catroweb") }}:
-            </strong>
-            {{ country }}
-          </span>
-        {% endif %}
-      </div>
+      <h1 class="h4">{{ profile.username }}</h1>
 
       <div class="button-container w-100 mt-3">
         {% if profile.isScratchUser() %}

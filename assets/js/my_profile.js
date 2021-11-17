@@ -4,7 +4,6 @@
 /* global profileUrl */
 /* global saveUsername */
 /* global saveEmailUrl */
-/* global saveCountryUrl */
 /* global savePasswordUrl */
 /* global deleteUrl */
 /* global deleteAccountUrl */
@@ -17,7 +16,6 @@
 /* global statusCodeUserEmailAlreadyExists */
 /* global statusCodeUserEmailMissing */
 /* global statusCodeUserEmailInvalid */
-/* global statusCodeUserCountryInvalid */
 /* global statusCodeUsernamePasswordEqual */
 /* global statusCodeUserPasswordTooShort */
 /* global statusCodeUserPasswordTooLong */
@@ -48,7 +46,6 @@ $(() => {
     profileUrl,
     saveUsername,
     saveEmailUrl,
-    saveCountryUrl,
     savePasswordUrl,
     deleteUrl,
     deleteAccountUrl,
@@ -61,7 +58,6 @@ $(() => {
     parseInt(statusCodeUserEmailAlreadyExists),
     parseInt(statusCodeUserEmailMissing),
     parseInt(statusCodeUserEmailInvalid),
-    parseInt(statusCodeUserCountryInvalid),
     parseInt(statusCodeUsernamePasswordEqual),
     parseInt(statusCodeUserPasswordTooShort),
     parseInt(statusCodeUserPasswordTooLong),

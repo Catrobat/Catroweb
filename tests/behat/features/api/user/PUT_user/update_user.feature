@@ -115,40 +115,6 @@ Feature: Update user
       }
     """
 
-  Scenario: Update user country
-    Given I use a valid JWT Bearer token for "Catrobat"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I have the following JSON request body:
-    """
-      {
-        "country": "AT"
-      }
-    """
-    And I request "PUT" "/api/user"
-    Then the response code should be "204"
-    And user "Catrobat" with country code "AT" should exist
-
-  Scenario: Update user country with invalid code
-    Given I use a valid JWT Bearer token for "Catrobat"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a request header "CONTENT_TYPE" with value "application/json"
-    And I have the following JSON request body:
-    """
-      {
-        "dry-run": false,
-        "country": "test"
-      }
-    """
-    And I request "PUT" "/api/user"
-    Then the response code should be "422"
-    And I should get the json object:
-    """
-      {
-        "country": "Country code invalid"
-      }
-    """
-
   Scenario: Update user email
     Given I use a valid JWT Bearer token for "Catroweb"
     And I have a request header "HTTP_ACCEPT" with value "application/json"

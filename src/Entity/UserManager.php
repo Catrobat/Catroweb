@@ -16,8 +16,6 @@ use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
 use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use Symfony\Component\HttpFoundation\UrlHelper;
-use Symfony\Component\Intl\Countries;
-use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
 class UserManager extends \Sonata\UserBundle\Entity\UserManager
@@ -62,17 +60,11 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     $response_data = [];
 
     foreach ($raw_user_data as $user) {
-      try {
-        $country = Countries::getName(strtoupper($user->getCountry()));
-      } catch (MissingResourceException $e) {
-        $country = '';
-      }
       array_push($response_data, [
         'username' => $user->getUsername(),
         'id' => $user->getId(),
         'avatar' => $user->getAvatar(),
         'project_count' => $this->program_manager->countPublicUserProjects($user->getId()),
-        'country' => $country,
         'profile' => $user,
       ]);
     }

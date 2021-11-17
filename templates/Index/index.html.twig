@@ -74,8 +74,6 @@
     {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
   </i>
 
-  <div class="js-path-click-stats" data-path-click-stats="'{{ path('click_stats') }}"></div>
-  <div class="js-path-click-stats" data-path-homepage-click-stats="'{{ path('homepage_click_stats') }}"></div>
   <div class="js-trans-ok" data-trans-ok="'{{ "ok"|trans({}, "catroweb") }}"></div>
 
   <div class="js-oauth-greeting"

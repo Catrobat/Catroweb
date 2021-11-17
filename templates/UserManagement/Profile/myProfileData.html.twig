@@ -79,24 +79,6 @@
 
         <hr>
 
-        <div id="country-wrapper" class="mt-3 mb-3">
-          <div class="subtitle-1 text-icon-aligned">
-          <span>{{ 'country'|trans({}, 'catroweb') }}</span>
-            <span id="edit-country-button"
-                  data-bs-toggle="tooltip" title="Edit Country"
-                  class="mdc-icon-button material-icons trailing-icon">edit</span>
-          </div>
-          <div id="country" class="profile-data text-icon-aligned">
-            <span class="material-icons me-2">location_on</span>
-            {{ country }}
-          </div>
-          <div id="country-edit-container" class="edit-container">
-            {% include 'UserManagement/Profile/countryEdit.html.twig' %}
-          </div>
-        </div>
-
-        <hr>
-
         <div id="account-settings-wrapper" class="mt-3">
           <div class="subtitle-1 text-icon-aligned">
             <span class="material-icons me-2">settings</span>

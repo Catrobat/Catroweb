@@ -112,8 +112,7 @@ class ApiContext implements KernelAwareContext
   private array $user_structure = ['id', 'username',
     'projects', 'followers', 'following', ];
 
-  private array $user_structure_extended = ['id', 'username', 'email', 'country',
-    'projects', 'followers', 'following', ];
+  private array $user_structure_extended = ['id', 'username', 'email', 'projects', 'followers', 'following'];
 
   private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'url',
     'featured_image', ];
@@ -458,63 +457,6 @@ class ApiContext implements KernelAwareContext
     $cookieJar = $this->getKernelBrowser()->getCookieJar();
     $cookieJar->set($bearer_cookie);
     $cookieJar->set($refresh_cookie);
-  }
-
-  /**
-   * @When /^I try to register without (.*)$/
-   *
-   * @param mixed $missing_parameter
-   */
-  public function iTryToRegisterWithout($missing_parameter): void
-  {
-    $this->prepareValidRegistrationParameters();
-    switch ($missing_parameter) {
-      case 'a country':
-        unset($this->request_parameters['registrationCountry']);
-        break;
-      case 'a password':
-        unset($this->request_parameters['registrationPassword']);
-        break;
-      default:
-        throw new PendingException();
-    }
-    $this->iPostTo('/app/api/loginOrRegister/loginOrRegister.json');
-  }
-
-  /**
-   * @When /^I try to register$/
-   */
-  public function iTryToRegister(): void
-  {
-    $this->iPostTo('/app/api/loginOrRegister/loginOrRegister.json');
-  }
-
-  /**
-   * @When /^I register a new user$/
-   */
-  public function iRegisterANewUser(): void
-  {
-    $this->prepareValidRegistrationParameters();
-    $this->iPostTo('/app/api/loginOrRegister/loginOrRegister.json');
-  }
-
-  /**
-   * @When /^I try to register another user with the same email adress$/
-   */
-  public function iTryToRegisterAnotherUserWithTheSameEmailAdress(): void
-  {
-    $this->prepareValidRegistrationParameters();
-    $this->request_parameters['registrationUsername'] = 'AnotherUser';
-    $this->iPostTo('/app/api/loginOrRegister/loginOrRegister.json');
-  }
-
-  /**
-   * @When /^I report the program$/
-   */
-  public function iReportTheProgram(): void
-  {
-    $this->iHaveAParameterWithValue('note', 'Bad Project');
-    $this->iPostTo('/app/api/reportProject/reportProject.json');
   }
 
   /**
@@ -1240,24 +1182,6 @@ class ApiContext implements KernelAwareContext
   }
 
   /**
-   * @Then /^the client response should contain the elements:$/
-   */
-  public function theResponseShouldContainTheElements(TableNode $table): void
-  {
-    $program_stats = $table->getHash();
-    foreach ($program_stats as $program_stat) {
-      $this->theResponseShouldContain($program_stat['id']);
-      $this->theResponseShouldContain($program_stat['downloaded_at']);
-      $this->theResponseShouldContain($program_stat['ip']);
-      $this->theResponseShouldContain($program_stat['country_code']);
-      $this->theResponseShouldContain($program_stat['country_name']);
-      $this->theResponseShouldContain($program_stat['user_agent']);
-      $this->theResponseShouldContain($program_stat['user']);
-      $this->theResponseShouldContain($program_stat['referrer']);
-    }
-  }
-
-  /**
    * @Then /^the client response should not contain "([^"]*)"$/
    *
    * @param mixed $needle
@@ -1425,36 +1349,6 @@ class ApiContext implements KernelAwareContext
     Assert::assertEquals(
       $arg1, count($responseArray['CatrobatProjects']),
       'Wrong number of total projects'
-    );
-  }
-
-  /**
-   * @Then /^I should get user-specific recommended projects$/
-   */
-  public function iShouldGetUserSpecificRecommendedProjects(): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    Assert::assertTrue(
-      isset($responseArray['isUserSpecificRecommendation']),
-      'No isUserSpecificRecommendation parameter found in response!'
-    );
-    Assert::assertTrue(
-      $responseArray['isUserSpecificRecommendation'],
-      'isUserSpecificRecommendation parameter has wrong value. Is false, but should be true!'
-    );
-  }
-
-  /**
-   * @Then /^I should get no user-specific recommended projects$/
-   */
-  public function iShouldGetNoUserSpecificRecommendedProjects(): void
-  {
-    $response = $this->getKernelBrowser()->getResponse();
-    $responseArray = json_decode($response->getContent(), true);
-    Assert::assertFalse(
-      isset($responseArray['isUserSpecificRecommendation']),
-      'Unexpected isUserSpecificRecommendation parameter found in response!'
     );
   }
 
@@ -2933,7 +2827,6 @@ class ApiContext implements KernelAwareContext
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    //removed recommended on purpose
     $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch'];
     $categories = json_decode($response->getContent(), true);
     Assert::assertEquals(count($expected_categories), count($categories), 'Number of returned programs should be '.count($expected_categories));
@@ -3110,12 +3003,11 @@ class ApiContext implements KernelAwareContext
     $stored_users = $this->dataFixturesContext->getUsers();
     $users = [];
     /** @var User $user */
-    foreach ($stored_users as $program_index => $user) {
+    foreach ($stored_users as $user) {
       $result = [
         'id' => $user->getId(),
         'username' => $user->getUsername(),
         'email' => $user->getEmail(),
-        'country' => $user->getCountry(),
         'projects' => $user->getPrograms()->count(),
         'followers' => $user->getFollowers()->count(),
         'following' => $user->getFollowing()->count(),
@@ -3285,9 +3177,6 @@ class ApiContext implements KernelAwareContext
       'email' => function ($email) {
         Assert::assertIsString($email);
       },
-      'country' => function ($country) {
-        Assert::assertIsString($country);
-      },
       'projects' => function ($projects) {
         Assert::assertIsInt($projects);
       },
@@ -3402,14 +3291,6 @@ class ApiContext implements KernelAwareContext
     }
 
     return $last_uploaded_project_id;
-  }
-
-  private function prepareValidRegistrationParameters(): void
-  {
-    $this->request_parameters['registrationUsername'] = 'newuser';
-    $this->request_parameters['registrationPassword'] = 'topsecret';
-    $this->request_parameters['registrationEmail'] = 'someuser@example.com';
-    $this->request_parameters['registrationCountry'] = 'at';
   }
 
   private function iUseTheUserAgent(string $user_agent): void

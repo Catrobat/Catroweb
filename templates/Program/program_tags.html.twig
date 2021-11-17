@@ -8,8 +8,7 @@
             <p>{{ ("extensions.title")|trans({'%count%':count}, "catroweb") }}:</p>
             <div class="list">
               {% for extension in program.extensions %}
-                <a class="rec-programs"
-                   href="{{ url('extension_search', { q : extension.getInternalTitle() }) }}">
+                <a href="{{ url('extension_search', { q : extension.getInternalTitle() }) }}">
                     <span class="badge rounded-pill bg-primary">{{ extension.getTitleLtmCode()|trans({}, "catroweb") }}</span>
                 </a>
               {% endfor %}
@@ -22,7 +21,7 @@
             <p>{{ ("tags.title")|trans({'%count%':count}, "catroweb") }}:</p>
             <div class="list">
               {% for tag in program.tags %}
-                <a class="rec-programs" href="{{ url('tag_search', { q : tag.getInternalTitle() }) }}">
+                <a href="{{ url('tag_search', { q : tag.getInternalTitle() }) }}">
                     <span class="badge rounded-pill bg-primary">{{ tag.getTitleLtmCode()|trans({}, "catroweb") }}</span>
                 </a>
               {% endfor %}

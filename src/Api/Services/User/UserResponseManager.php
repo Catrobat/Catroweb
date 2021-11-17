@@ -27,7 +27,6 @@ final class UserResponseManager extends AbstractResponseManager
       'id' => $user->getId(),
       'username' => $user->getUsername(),
       'email' => $user->getEmail(),
-      'country' => $user->getCountry(),
       'projects' => $user->getPrograms()->count(),
       'followers' => $user->getFollowers()->count(),
       'following' => $user->getFollowing()->count(),

@@ -38,16 +38,6 @@ class User extends BaseUser
   protected ?string $avatar = null;
 
   /**
-   * @ORM\Column(type="string", length=75, nullable=false, options={"default": ""})
-   */
-  protected string $country = '';
-
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
-  protected ?string $additional_email = null;
-
-  /**
    * Programs owned by this user.
    * When this user is deleted, all the programs owned by him should be deleted too.
    *
@@ -322,31 +312,9 @@ class User extends BaseUser
     $this->upload_token = $upload_token;
   }
 
-  public function getCountry(): string
-  {
-    return $this->country;
-  }
-
-  public function setCountry(string $country): User
-  {
-    $this->country = $country;
-
-    return $this;
-  }
-
   public function setId(string $id): void
   {
     $this->id = $id;
-  }
-
-  public function setAdditionalEmail(?string $additional_email): void
-  {
-    $this->additional_email = $additional_email;
-  }
-
-  public function getAdditionalEmail(): ?string
-  {
-    return $this->additional_email;
   }
 
   public function getAvatar(): ?string

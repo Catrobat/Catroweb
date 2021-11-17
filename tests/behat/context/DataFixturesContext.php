@@ -9,19 +9,16 @@ use App\Entity\Achievements\Achievement;
 use App\Entity\Achievements\UserAchievement;
 use App\Entity\BroadcastNotification;
 use App\Entity\CatroNotification;
-use App\Entity\ClickStatistic;
 use App\Entity\CommentNotification;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\FollowNotification;
-use App\Entity\HomepageClickStatistic;
 use App\Entity\LikeNotification;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
 use App\Entity\NewProgramNotification;
 use App\Entity\Program;
-use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\RemixNotification;
 use App\Entity\Studio;
@@ -271,22 +268,6 @@ class DataFixturesContext implements KernelAwareContext
     Assert::assertEquals($email, $user->getEmail());
   }
 
-  /**
-   * @Then /^user "([^"]*)" with country code "([^"]*)" should exist$/
-   */
-  public function userWithUsernameWithCountryShouldExist(string $username, string $country_code): void
-  {
-    $em = $this->getManager();
-
-    /** @var User|null $user */
-    $user = $em->getRepository(User::class)->findOneBy([
-      'username' => $username,
-    ]);
-
-    Assert::assertInstanceOf(User::class, $user);
-    Assert::assertEquals($country_code, $user->getCountry());
-  }
-
   // -------------------------------------------------------------------------------------------------------------------
   //  Surveys
   // -------------------------------------------------------------------------------------------------------------------
@@ -323,19 +304,6 @@ class DataFixturesContext implements KernelAwareContext
       /** @var Program $program */
       $program = $this->insertProject($config, false);
       $this->programs[] = $program;
-    }
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Given /^there are click statistics:$/
-   *
-   * @throws Exception
-   */
-  public function thereAreClickStatistics(TableNode $table): void
-  {
-    foreach ($table->getHash() as $config) {
-      $this->insertClickStatistic($config, false);
     }
     $this->getManager()->flush();
   }
@@ -827,109 +795,6 @@ class DataFixturesContext implements KernelAwareContext
       $this->insertFlavor($config, false);
     }
     $this->getManager()->flush();
-  }
-
-  // -------------------------------------------------------------------------------------------------------------------
-  //  Statistics
-  // -------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * @Given /^there are program download statistics:$/
-   *
-   * @throws Exception
-   */
-  public function thereAreProgramDownloadStatistics(TableNode $table): void
-  {
-    foreach ($table->getHash() as $config) {
-      $this->insertProgramDownloadStatistics($config, false);
-    }
-    $this->getManager()->flush();
-  }
-
-  /**
-   * @Then /^There should be no recommended click statistic database entry$/
-   */
-  public function thereShouldBeNoRecommendedClickStatisticDatabaseEntry(): void
-  {
-    $clicks = $this->getManager()->getRepository(ClickStatistic::class)->findAll();
-    Assert::assertEquals(0, count($clicks), 'Unexpected database entry found!');
-  }
-
-  /**
-   * @Then /^There should be no homepage click statistic database entry$/
-   */
-  public function thereShouldBeNoHomepageClickStatisticDatabaseEntry(): void
-  {
-    $clicks = $this->getManager()->getRepository(HomepageClickStatistic::class)->findAll();
-    Assert::assertEquals(0, count($clicks), 'Unexpected database entry found!');
-  }
-
-  /**
-   * @Then /^There should be one homepage click database entry with type is "([^"]*)" and program id is "([^"]*)"$/
-   *
-   * @param mixed $type_name
-   * @param mixed $id
-   */
-  public function thereShouldBeOneHomepageClickDatabaseEntryWithTypeIsAndIs($type_name, $id): void
-  {
-    $clicks = $this->getManager()->getRepository(HomepageClickStatistic::class)->findAll();
-    Assert::assertEquals(1, count($clicks), 'No database entry found!');
-    $click = $clicks[0];
-    Assert::assertEquals($type_name, $click->getType());
-    Assert::assertEquals($id, $click->getProgram()->getId());
-  }
-
-  /**
-   * @Then the program download statistic should have a download timestamp, an anonymous user and the following statistics:
-   *
-   * @throws Exception
-   */
-  public function theProgramShouldHaveADownloadTimestampAndTheFollowingStatistics(TableNode $table): void
-  {
-    $statistics = $table->getHash();
-    foreach ($statistics as $statistic) {
-      $ip = $statistic['ip'];
-      $country_code = $statistic['country_code'];
-      if ('NULL' === $country_code) {
-        $country_code = null;
-      }
-      $country_name = $statistic['country_name'];
-      if ('NULL' === $country_name) {
-        $country_name = null;
-      }
-      $program_id = $statistic['program_id'];
-      $repository = $this->getManager()->getRepository(ProgramDownloads::class);
-      $program_download_statistics = $repository->find(1);
-      Assert::assertEquals($ip, $program_download_statistics->getIp(), 'Wrong IP in download statistics');
-      Assert::assertEquals(
-          $country_code, $program_download_statistics->getCountryCode(),
-          'Wrong country code in download statistics'
-        );
-      Assert::assertEquals(
-          $country_name, strtoupper($program_download_statistics->getCountryName()),
-          'Wrong country name in download statistics'
-        );
-      /** @var Program $project */
-      $project = $program_download_statistics->getProgram();
-      Assert::assertEquals(
-          $program_id, $project->getId(),
-          'Wrong program ID in download statistics'
-        );
-      Assert::assertNull($program_download_statistics->getUser(), 'Wrong username in download statistics');
-      Assert::assertNotEmpty(
-          $program_download_statistics->getUserAgent(),
-          'No user agent was written to download statistics'
-        );
-      $limit = 5.0;
-      /** @var DateTime $download_time */
-      $download_time = $program_download_statistics->getDownloadedAt();
-      $current_time = TimeUtils::getDateTime();
-      $time_delta = $current_time->getTimestamp() - $download_time->getTimestamp();
-      Assert::assertTrue(
-          $time_delta < $limit,
-          'Download time difference in download statistics too high'
-        );
-    }
   }
 
   /**
