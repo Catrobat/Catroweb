@@ -792,7 +792,7 @@ studio:
       add_comment: '%user% adicionou um projeto.'
     members_list:
       title: 'Membros do Studio'
-      project_count: '{0} Projetos de estúdio não existentes{1} 1 projeto de estúdio :trade_mark]1, Inf] %count% projetos de estúdio'
+      project_count: '{0} Projetos de estúdio não existentes |{1} 1 projeto de estúdio |]1, Inf] %count% projetos de estúdio'
       promote_member: 'Promover membro para administrador'
       promotion_failed: 'Algo deu errado durante a promoção deste membro. Tente novamente mais tarde.'
       ban_member: 'Banir membro do Studio'
