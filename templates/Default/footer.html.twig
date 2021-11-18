@@ -113,13 +113,13 @@
             </div>
             <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
               <ul class="mdc-list" role="listbox">
-                {% set countries = getLanguageOptions() %}
-                {% for country in countries %}
-                  <li class="mdc-list-item" data-value={{ country[0] }} {% if country[2] %}selected{% endif %}
+                {% set languageOptionList = getLanguageOptions() %}
+                {% for languageOption in languageOptionList %}
+                  <li class="mdc-list-item" data-value={{ languageOption[0] }} {% if languageOption[2] %}selected{% endif %}
                       role="option">
                     <span class="mdc-list-item__ripple"></span>
                     <span class="mdc-list-item__text">
-                    {{ country[1] }}
+                    {{ languageOption[1] }}
                   </span>
                   </li>
                 {% endfor %}

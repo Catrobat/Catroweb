@@ -4,11 +4,9 @@ namespace Tests\behat\context;
 
 use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
-use App\Catrobat\Services\StatisticsService;
 use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 use App\Catrobat\Services\TokenGenerator;
 use App\Entity\CatroNotification;
-use App\Entity\ClickStatistic;
 use App\Entity\Program;
 use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
@@ -79,22 +77,6 @@ class CatrowebBrowserContext extends BrowserContext
 
     $return = $application->run($input, new NullOutput());
     Assert::assertNotNull($return, 'Oh no!');
-  }
-
-  /**
-   * @BeforeScenario @RealGeocoder
-   */
-  public function activateRealGeocoderService(): void
-  {
-    $this->getSymfonyService(StatisticsService::class)->useRealService(true);
-  }
-
-  /**
-   * @AfterScenario @RealGeocoder
-   */
-  public function deactivateRealGeocoderService(): void
-  {
-    $this->getSymfonyService(StatisticsService::class)->useRealService(false);
   }
 
   //--------------------------------------------------------------------------------------------------------------------
@@ -1125,132 +1107,6 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^There should be one database entry with type is "([^"]*)" and "([^"]*)" is "([^"]*)"$/
-   *
-   * @param mixed $type_name
-   * @param mixed $name_id
-   * @param mixed $id_or_value
-   */
-  public function thereShouldBeOneDatabaseEntryWithTypeIsAndIs($type_name, $name_id, $id_or_value): void
-  {
-    $em = $this->getManager();
-    $clicks = $em->getRepository(ClickStatistic::class)->findAll();
-    Assert::assertEquals(1, count($clicks), 'No database entry found!');
-
-    $click = $clicks[0];
-
-    Assert::assertEquals($type_name, $click->getType());
-
-    switch ($name_id) {
-      case 'tag_id':
-        Assert::assertEquals($id_or_value, $click->getTag()->getId());
-        break;
-      case 'extension_id':
-        Assert::assertEquals($id_or_value, $click->getExtension()->getId());
-        break;
-      case 'program_id':
-        Assert::assertEquals($id_or_value, $click->getProgram()->getId());
-        break;
-      case 'user_specific_recommendation':
-        Assert::assertEquals('true' === $id_or_value, $click->getUserSpecificRecommendation());
-        break;
-      default:
-        Assert::assertTrue(false);
-    }
-  }
-
-  /**
-   * @When /^I click on the first featured homepage program$/
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnAFeaturedHomepageProgram(): void
-  {
-    $first_featured_project = $this->getSession()->getPage()->find('css', '#feature-slider a');
-    $this->assertSession()->elementExists('xpath', $first_featured_project->getXpath());
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('xpath', $first_featured_project->getXpath())
-      ->click()
-    ;
-  }
-
-  /**
-   * @When /^I click on a "([^"]*)" homepage program having program id "([^"]*)"$/
-   *
-   * @param mixed $category
-   * @param mixed $program_id
-   *
-   * @throws ElementNotFoundException
-   */
-  public function iClickOnANewestHomepageProgram($category, $program_id): void
-  {
-    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
-    $element = null;
-    foreach ($projects as $project) {
-      $link = explode('/', $project->getAttribute('href'));
-      if (end($link) === $program_id) {
-        $element = $project;
-        break;
-      }
-    }
-
-    $this->assertSession()->elementExists('xpath', $element->getXpath());
-
-    $this
-      ->getSession()
-      ->getPage()
-      ->find('xpath', $element->getXpath())
-      ->click()
-        ;
-  }
-
-  /**
-   * @When /^Project with the id "([^"]*)" should be visible in the "([^"]*)" category$/
-   *
-   * @param mixed $program_id
-   * @param mixed $category
-   *
-   * @throws ElementNotFoundException
-   */
-  public function projectExistsInTheRecommendedCategory($program_id, $category): void
-  {
-    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
-    $element = null;
-    foreach ($projects as $project) {
-      $link = explode('/', $project->getAttribute('href'));
-      if (end($link) === $program_id) {
-        $element = $project;
-        break;
-      }
-    }
-
-    $this->assertSession()->elementExists('xpath', $element->getXpath());
-  }
-
-  /**
-   * @When /^Project with the id "([^"]*)" should not be visible in the "([^"]*)" category$/
-   *
-   * @param mixed $program_id
-   * @param mixed $category
-   */
-  public function projectDoesNotExistsInTheRecommendedCategory($program_id, $category): void
-  {
-    $projects = $this->getSession()->getPage()->findAll('css', '#home-projects__'.$category.' a');
-    $element = null;
-    foreach ($projects as $project) {
-      $link = explode('/', $project->getAttribute('href'));
-      if (end($link) === $program_id) {
-        $element = $project;
-        break;
-      }
-    }
-    Assert::assertNull($element, 'Element exists in the recommended category');
-  }
-
-  /**
    * @Then /^I click the currently visible search icon$/
    */
   public function iClickTheCurrentlyVisibleSearchIcon(): void
@@ -1515,7 +1371,6 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^I should see the table with all projects in the following order:$/
-   * @Then /^I should see the table with all click statistics in the following order:$/
    */
   public function shouldSeeFollowingTable(TableNode $table): void
   {

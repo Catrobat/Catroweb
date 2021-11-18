@@ -85,7 +85,6 @@ class SecurityController extends AbstractController
         $user->setPlainPassword($create_request->password);
         $user->setEnabled(true);
         $user->setUploadToken($token_generator->generateToken());
-        $user->setCountry($create_request->country);
 
         $user_manager->updateUser($user);
         $retArray['statusCode'] = 201;

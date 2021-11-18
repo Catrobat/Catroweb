@@ -6,7 +6,7 @@ Feature: The admin cron jobs view provides a detailed list about all cron jobs a
       | name  |
       | Admin |
 
-  Scenario: All cron jobs should be shown with some stats
+  Scenario: All cron jobs should be shown with some statistics
     Given I run the cron job command
     And I log in as "Admin"
     When I am on "/admin/cronjobs/list"

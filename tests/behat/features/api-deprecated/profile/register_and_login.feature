@@ -12,7 +12,6 @@ Feature: Login with an existing account or register a new one
       | name                 | value                |
       | registrationUsername | newuser              |
       | registrationPassword | registrationpassword |
-      | registrationCountry  | AT                   |
       | registrationEmail    | newuser@mail.at      |
     When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:
@@ -26,7 +25,6 @@ Feature: Login with an existing account or register a new one
       | name                 | value                |
       | registrationUsername | Catrobat             |
       | registrationPassword | registrationpassword |
-      | registrationCountry  | AT                   |
       | registrationEmail    | newuser@mail.at      |
     When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:
@@ -41,7 +39,6 @@ Feature: Login with an existing account or register a new one
       | name                 | value                   |
       | registrationUsername | newuser                 |
       | registrationPassword | registrationpassword    |
-      | registrationCountry  | AT                      |
       | registrationEmail    | default1@pocketcode.org |
     When I POST these parameters to "/app/api/register/Register.json"
     Then I should get the json object:

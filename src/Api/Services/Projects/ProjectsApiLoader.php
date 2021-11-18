@@ -3,7 +3,6 @@
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
@@ -13,18 +12,15 @@ use Symfony\Component\HttpFoundation\RequestStack;
 final class ProjectsApiLoader extends AbstractApiLoader
 {
   private ProgramManager $project_manager;
-  private RecommenderManager $recommender_manager;
   private FeaturedRepository $featured_repository;
   private RequestStack $request_stack;
 
   public function __construct(
     ProgramManager $project_manager,
-    RecommenderManager $recommender_manager,
     FeaturedRepository $featured_repository,
     RequestStack $request_stack
   ) {
     $this->project_manager = $project_manager;
-    $this->recommender_manager = $recommender_manager;
     $this->featured_repository = $featured_repository;
     $this->request_stack = $request_stack;
   }
@@ -53,8 +49,7 @@ final class ProjectsApiLoader extends AbstractApiLoader
   public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user = null): array
   {
     if ('recommended' === $category) {
-      return []; // Currently disabled
-//      return $this->recommender_manager->getProjects($user, $limit, $offset, $flavor, $max_version);
+      return []; // Feature removed
     }
 
     return $this->project_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
@@ -71,12 +66,8 @@ final class ProjectsApiLoader extends AbstractApiLoader
 
     switch ($category) {
       case 'similar':
-        return []; // Currently disabled ~70seconds per request is NOT OK
-//        return $this->project_manager->getRecommendedProgramsById($project_id, $flavor, $limit, $offset);
-
       case 'also_downloaded':
-        return []; // Currently disabled ~12seconds per request is NOT OK
-      //        return $this->project_manager->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram($flavor, $project, $limit, $offset);
+        return []; // Features removed
 
       case 'more_from_user':
         /** @var Program $project */

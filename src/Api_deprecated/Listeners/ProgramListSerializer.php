@@ -100,10 +100,6 @@ class ProgramListSerializer
     $retArray['completeTerm'] = '';
     $retArray['preHeaderMessages'] = '';
 
-    if ($result->isIsUserSpecificRecommendation()) {
-      $retArray['isUserSpecificRecommendation'] = true;
-    }
-
     Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')],
       Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
     $retArray['CatrobatInformation'] = [

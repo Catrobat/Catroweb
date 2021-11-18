@@ -2,12 +2,12 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\RecommenderSystem\RecommendedPageId;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\StatusCode;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
+use App\Entity\User;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
@@ -44,11 +44,6 @@ class DownloadProgramController extends AbstractController
     if (null === $program) {
       throw new NotFoundHttpException();
     }
-
-    $rec_by_page_id = (int) $request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE);
-    $rec_by_program_id = (int) $request->query->get('rec_by_program_id', 0);
-    $rec_user_specific = 1 == (int) $request->query->get('rec_user_specific', 0);
-    $rec_tag_by_program_id = (int) $request->query->get('rec_from', 0);
     try {
       if (!$file_repository->checkIfProjectZipFileExists($program->getId())) {
         $file_repository->zipProject($extracted_file_repository->getBaseDir($program), $program->getId());
@@ -63,21 +58,12 @@ class DownloadProgramController extends AbstractController
     if ($file->isFile()) {
       $downloaded = $request->getSession()->get('downloaded', []);
       if (!in_array($program->getId(), $downloaded, true)) {
-        $program_manager->increaseDownloads($program);
+        /** @var User|null $user */
+        $user = $this->getUser();
+        $program_manager->increaseDownloads($program, $user);
         $downloaded[] = $program->getId();
         $request->getSession()->set('downloaded', $downloaded);
-        $request->attributes->set('download_statistics_program_id', $id);
         $request->attributes->set('referrer', $referrer);
-
-        if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
-          // all recommendations (except tag-recommendations -> see below)
-          $request->attributes->set('rec_by_page_id', $rec_by_page_id);
-          $request->attributes->set('rec_by_program_id', $rec_by_program_id);
-          $request->attributes->set('rec_user_specific', $rec_user_specific);
-        } elseif ($rec_tag_by_program_id > 0) {
-          // tag-recommendations
-          $request->attributes->set('rec_from', $rec_tag_by_program_id);
-        }
       }
 
       $response = new BinaryFileResponse($file);

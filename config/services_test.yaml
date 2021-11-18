@@ -49,16 +49,6 @@ services:
     arguments:
       - '@token_generator.inner'
 
-  # ======== Overwriting the statistics service
-
-  statistics.inner:
-    class: App\Catrobat\Services\StatisticsService
-
-  App\Catrobat\Services\StatisticsService:
-    class: App\Catrobat\Services\TestEnv\FakeStatisticsService
-    arguments:
-      - "@statistics.inner"
-
   # ======== Overwriting the jenkins dispatcher
 
   App\Catrobat\Services\Ci\JenkinsDispatcher:

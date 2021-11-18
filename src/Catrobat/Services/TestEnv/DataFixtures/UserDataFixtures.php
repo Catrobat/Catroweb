@@ -46,9 +46,7 @@ class UserDataFixtures
     $user->setPlainPassword($config['password'] ?? '123456');
     $user->setUploadToken($config['token'] ?? 'default_token_'.UserDataFixtures::$number_of_users);
     $user->setSuperAdmin(isset($config['admin']) ? 'true' === $config['admin'] : false);
-    $user->setAdditionalEmail($config['additional_email'] ?? '');
     $user->setEnabled(isset($config['enabled']) ? 'true' === $config['enabled'] : true);
-    $user->setCountry($config['country'] ?? 'at');
     $user->addRole($config['role'] ?? 'ROLE_USER');
     $user->setOauthUser(isset($config['oauth_user']) ? 'true' === $config['oauth_user'] : false);
     $this->user_manager->updateUser($user, $andFlush);
@@ -70,10 +68,6 @@ class UserDataFixtures
     if (isset($config['email'])) {
       Assert::assertEquals($user->getEmail(), $config['email'],
         'E-Mail wrong'.$config['email'].'expected, but '.$user->getEmail().' found.');
-    }
-    if (isset($config['email'])) {
-      Assert::assertEquals($user->getCountry(), $config['country'],
-        'Country wrong'.$config['country'].'expected, but '.$user->getCountry().' found.');
     }
     if (isset($config['token'])) {
       Assert::assertEquals($user->getUploadToken(), $config['token'], 'Token Invalid');

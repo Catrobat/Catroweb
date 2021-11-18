@@ -2,21 +2,18 @@
 
 namespace App\Catrobat\Services\TestEnv;
 
-use App\Catrobat\RecommenderSystem\RecommenderManager;
 use App\Catrobat\Services\CatrobatFileCompressor;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
-use App\Entity\ClickStatistic;
 use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\Flavor;
 use App\Entity\Notification;
 use App\Entity\Program;
-use App\Entity\ProgramDownloads;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramLike;
 use App\Entity\ProgramManager;
@@ -42,7 +39,6 @@ use App\Repository\ScratchProgramRepository;
 use App\Repository\TagRepository;
 use App\Repository\UserLikeSimilarityRelationRepository;
 use App\Repository\UserRemixSimilarityRelationRepository;
-use App\Utils\TimeUtils;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Symfony2Extension\Context\KernelDictionary;
 use DateTime;
@@ -170,11 +166,6 @@ trait SymfonySupport
   public function getMediaPackageFileRepository(): MediaPackageFileRepository
   {
     return $this->kernel->getContainer()->get(MediaPackageFileRepository::class);
-  }
-
-  public function getRecommenderManager(): RecommenderManager
-  {
-    return $this->kernel->getContainer()->get(RecommenderManager::class);
   }
 
   public function getUserLikeSimilarityRelationRepository(): UserLikeSimilarityRelationRepository
@@ -532,44 +523,6 @@ trait SymfonySupport
   /**
    * @throws Exception
    */
-  public function insertClickStatistic(array $config, bool $andFlush = true): ClickStatistic
-  {
-    $click_statistics = new ClickStatistic();
-    $click_statistics->setType($config['type']);
-    $click_statistics->setUserAgent($config['user_agent']);
-    /** @var User $user */
-    $user = $this->getUserManager()->findUserByUsername($config['user']);
-    $click_statistics->setUser($user);
-    $click_statistics->setReferrer($config['referrer']);
-    $date = new DateTime($config['clicked_at']);
-    $click_statistics->setClickedAt($date);
-    $click_statistics->setLocale($config['locale']);
-    if ('tags' === $config['type']) {
-      /** @var Tag|null $tag */
-      $tag = $this->getTagRepository()->findOneBy(['internal_title' => $config['tag_name']]);
-      $click_statistics->setTag($tag);
-    } elseif ('extensions' === $config['type']) {
-      /** @var Extension|null $extension */
-      $extension = $this->getExtensionRepository()->findOneBy(['internal_title' => $config['extension_name']]);
-      $click_statistics->setExtension($extension);
-    } else {     /** @var Program $recommended_from */
-      $recommended_from = $this->getProgramManager()->find($config['rec_from_id']);
-      $click_statistics->setRecommendedFromProgram($recommended_from);
-      $recommended_program = $this->getProgramManager()->find($config['rec_program_id']);
-      $click_statistics->setProgram($recommended_program);
-    }
-    $this->getManager()->persist($click_statistics);
-
-    if ($andFlush) {
-      $this->getManager()->flush();
-    }
-
-    return $click_statistics;
-  }
-
-  /**
-   * @throws Exception
-   */
   public function insertProjectReport(array $config, bool $andFlush = true): ProgramInappropriateReport
   {
     /** @var Program $project */
@@ -591,44 +544,6 @@ trait SymfonySupport
     }
 
     return $new_report;
-  }
-
-  /**
-   * @throws Exception
-   */
-  public function insertProgramDownloadStatistics(array $config, bool $andFlush = true): ProgramDownloads
-  {
-    /** @var Program $project */
-    $project = $this->getProgramManager()->find($config['program_id']);
-
-    $program_statistics = new ProgramDownloads();
-    $program_statistics->setProgram($project);
-    $program_statistics->setDownloadedAt(isset($config['downloaded_at']) ? new DateTime($config['downloaded_at']) : TimeUtils::getDateTime());
-    $program_statistics->setIp($config['ip'] ?? '88.116.169.222');
-    $program_statistics->setCountryCode($config['country_code'] ?? 'AT');
-    $program_statistics->setCountryName($config['country_name'] ?? 'Austria');
-    $program_statistics->setUserAgent($config['user_agent'] ?? 'okhttp');
-    $program_statistics->setReferrer($config['referrer'] ?? 'Facebook');
-
-    if (isset($config['username'])) {
-      $user_manager = $this->getUserManager();
-      /** @var User|null $user */
-      $user = $user_manager->findUserByUsername($config['username']);
-      if (null === $user) {
-        $this->insertUser(['name' => $config['username']], false);
-      }
-      $program_statistics->setUser($user);
-    }
-
-    $this->getManager()->persist($program_statistics);
-    $project->addProgramDownloads($program_statistics);
-    $this->getManager()->persist($project);
-
-    if ($andFlush) {
-      $this->getManager()->flush();
-    }
-
-    return $program_statistics;
   }
 
   public function insertNotification(array $config, bool $andFlush = true): Notification

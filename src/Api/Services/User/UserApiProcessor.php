@@ -55,9 +55,6 @@ final class UserApiProcessor extends AbstractApiProcessor
     if (!empty($request->getPassword())) {
       $user->setPassword($request->getPassword());
     }
-    if (!is_null($request->getCountry())) {
-      $user->setCountry($request->getCountry());
-    }
 
     $this->user_manager->updateUser($user, true);
   }
