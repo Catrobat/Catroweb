@@ -10,7 +10,6 @@ import { shareProject } from './custom/ProgramShare'
 import { ProgramReport } from './custom/ProgramReport'
 import { ProgramDescription } from './custom/ProgramDescription'
 import { ProgramCredits } from './custom/ProgramCredits'
-import { ProgramRecommender } from './custom/ProgramRecommender'
 import { ProgramComments } from './custom/ProgramComments'
 
 require('../styles/custom/profile.scss')
@@ -20,7 +19,6 @@ const $project = $('.js-project')
 const $projectShare = $('.js-project-share')
 const $projectReport = $('.js-project-report')
 const $projectDescriptionCredits = $('.js-project-description-credits')
-const $projectRecommender = $('.js-project-recommender')
 const $projectComments = $('.js-project-comments')
 
 if ($project.data('my-program') === 'true') {
@@ -127,8 +125,6 @@ function initProjects () {
     $(this).data('list', list)
   })
 }
-
-ProgramRecommender($projectRecommender.data('project-id'), $projectRecommender.data('path-click-stats'))
 
 ProgramComments(
   $projectComments.data('project-id'), 5, 5, 5,

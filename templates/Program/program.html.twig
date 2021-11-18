@@ -129,8 +129,6 @@
 
   {% include 'Program/program_details.html.twig' %}
   <div id="recommended-projects">
-    {#    ['similar', 'similarPrograms', 'views'],#}
-    {#    ['also_downloaded', 'mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms', 'downloads'],#}
     {# array values: [api project_type, translation, property to show] #}
     {% for category in [
       ['more_from_user', 'moreFromThisUser', 'views'],
@@ -233,10 +231,6 @@
        data-project-id="{{ program.id }}"
        data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
        data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
-  ></div>
-  <div class="js-project-recommender"
-       data-project-id="{{ program.id }}"
-       data-path-click-stats="{{ path('click_stats') }}"
   ></div>
   <div class="js-project-comments"
        data-project-id="{{ program_details.id }}"

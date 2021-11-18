@@ -72,9 +72,6 @@ class CreateDownloadsCommand extends Command
     $download->setUser($user);
     $download->setProgram($program);
     $download->setDownloadedAt(date_create());
-    $download->setIp('127.0.0.1');
-    $download->setUserAgent('TestBrowser/5.0');
-    $download->setLocale('de_at');
     $program->setDownloads($program->getDownloads() + 1);
 
     $this->entity_manager->persist($program);

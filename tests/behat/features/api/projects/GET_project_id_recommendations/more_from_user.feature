@@ -1,5 +1,5 @@
 @api @projects
-Feature: Get recommended project based on a specific project
+Feature: Get more projects from an user as recommendation
 
   Background:
     Given there are users:

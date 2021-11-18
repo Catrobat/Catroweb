@@ -17,14 +17,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
 use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use Locale;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Intl\Countries;
-use Symfony\Component\Intl\Exception\MissingResourceException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
@@ -78,19 +75,10 @@ class ProfileController extends AbstractController
       $view = 'UserManagement/Profile/profile.html.twig';
     }
 
-    Locale::setDefault(substr($request->getLocale(), 0, 2));
-    try {
-      $country = Countries::getName(strtoupper($user->getCountry()));
-    } catch (MissingResourceException $missingResourceException) {
-      $country = '';
-    }
-
     return $this->render($view, [
       'profile' => $user,
       'program_count' => $program_count,
-      'country' => $country,
       'firstMail' => $user->getEmail(),
-      'secondMail' => $user->getAdditionalEmail(),
       'oauth_user' => $user->getGplusUid(),
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,
@@ -98,37 +86,6 @@ class ProfileController extends AbstractController
       'followers_list' => $this->user_manager->getMappedUserData($user->getFollowers()->toArray()),
       'following_list' => $this->user_manager->getMappedUserData($user->getFollowing()->toArray()),
       'achievements' => $this->achievement_manager->findUnlockedAchievements($user),
-    ]);
-  }
-
-  /**
-   * @Route("/countrySave", name="country_save", methods={"POST"})
-   */
-  public function countrySaveAction(Request $request, UserManager $user_manager): Response
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-
-    if (!$user) {
-      return $this->redirectToRoute('login');
-    }
-
-    $country = $request->request->get('country');
-
-    try {
-      $this->validateCountryCode($country);
-    } catch (Exception $exception) {
-      return JsonResponse::create([
-        'statusCode' => $exception->getCode(),
-      ]);
-    }
-
-    $user->setCountry($country);
-
-    $user_manager->updateUser($user);
-
-    return JsonResponse::create([
-      'statusCode' => Response::HTTP_OK,
     ]);
   }
 
@@ -194,9 +151,8 @@ class ProfileController extends AbstractController
     }
 
     $firstMail = $request->request->get('firstEmail');
-    $secondMail = $request->request->get('secondEmail');
 
-    if ('' === $firstMail && '' === $secondMail) {
+    if ('' === $firstMail) {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_MISSING]);
     }
 
@@ -205,35 +161,13 @@ class ProfileController extends AbstractController
     } catch (Exception $exception) {
       return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 1]);
     }
-    try {
-      $this->validateEmail($secondMail);
-    } catch (Exception $exception) {
-      return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 2]);
-    }
 
     if ($this->checkEmailExists($firstMail, $user_manager)) {
       return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 1]);
     }
-    if ($this->checkEmailExists($secondMail, $user_manager)) {
-      return JsonResponse::create(['statusCode' => StatusCode::USER_EMAIL_ALREADY_EXISTS, 'email' => 2]);
-    }
 
-    if ('' !== $firstMail && $firstMail !== $user->getEmail()) {
+    if ($firstMail !== $user->getEmail()) {
       $user->setEmail($firstMail);
-    }
-    if ('' !== $firstMail && '' !== $secondMail && $secondMail !== $user->getAdditionalEmail()) {
-      $user->setAdditionalEmail($secondMail);
-    }
-    if ('' !== $firstMail && '' === $secondMail) {
-      $user->setAdditionalEmail('');
-    }
-    if ('' === $firstMail && '' === $secondMail && '' !== $user->getAdditionalEmail()) {
-      $user->setEmail($user->getAdditionalEmail());
-      $user->setAdditionalEmail('');
-    }
-    if ('' === $firstMail && '' !== $secondMail) {
-      $user->setEmail($secondMail);
-      $user->setAdditionalEmail('');
     }
     $user_manager->updateUser($user);
 
@@ -481,19 +415,6 @@ class ProfileController extends AbstractController
     }
   }
 
-  /**
-   * @param mixed $country
-   *
-   * @throws Exception
-   */
-  private function validateCountryCode($country): void
-  {
-    //todo: check if code is really from the drop-down
-    if (!empty($country) && !preg_match('/[a-zA-Z]{2}/', $country)) {
-      throw new Exception('USER_COUNTRY_INVALID', StatusCode::USER_COUNTRY_INVALID);
-    }
-  }
-
   private function checkEmailExists(string $email, UserManager $user_manager): bool
   {
     if ('' === $email) {
@@ -501,9 +422,8 @@ class ProfileController extends AbstractController
     }
 
     $userWithFirstMail = $user_manager->findOneBy(['email' => $email]);
-    $userWithSecondMail = $user_manager->findOneBy(['additional_email' => $email]);
 
-    return null !== $userWithFirstMail && $userWithFirstMail !== $this->getUser() || null !== $userWithSecondMail && $userWithSecondMail !== $this->getUser();
+    return null !== $userWithFirstMail && $userWithFirstMail !== $this->getUser();
   }
 
   private function checkUsernameExists(string $username, UserManager $user_manager): bool

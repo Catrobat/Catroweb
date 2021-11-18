@@ -43,7 +43,6 @@ Feature: There should be all projects of a user presented on a profile page
     And I wait for the page to be loaded
     Then I should see "User1"
     And I should see "2 projects"
-    And I should see "Country: Austria"
     And I should see "Projects"
     And I should see "project 1"
     And I should see "project 2"

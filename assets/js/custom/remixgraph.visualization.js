@@ -22,7 +22,6 @@ const RemixGraph = (function () {
 const _InternalRemixGraph = function () {
   const self = this
   self.programID = 0
-  self.recommendedByPageID = 0
   self.remixGraphLayerId = null
   self.network = null
   self.nodes = null
@@ -34,17 +33,13 @@ const _InternalRemixGraph = function () {
   self.backwardReverseEdgeMap = null
   self.closeButtonSelector = null
   self.programDetailsUrlTemplate = null
-  self.clickStatisticUrl = null
   self.remixGraphTranslations = null
 
-  self.init = function (programID, recommendedByPageID, modalLayerId, remixGraphLayerId,
-    programDetailsUrlTemplate, clickStatisticUrl, remixGraphTranslations) {
+  self.init = function (programID, modalLayerId, remixGraphLayerId, programDetailsUrlTemplate, remixGraphTranslations) {
     self.reset()
     self.programID = programID
-    self.recommendedByPageID = recommendedByPageID
     self.remixGraphLayerId = remixGraphLayerId
     self.remixGraphTranslations = remixGraphTranslations
-    self.clickStatisticUrl = clickStatisticUrl
     self.programDetailsUrlTemplate = programDetailsUrlTemplate
     $('<div id="context-menu" class="context-menu-trigger" style="display:none;"></div>').appendTo('#' + modalLayerId)
   }
@@ -178,16 +173,10 @@ const _InternalRemixGraph = function () {
           return 'context-menu-icon-material'
         },
         callback: function () {
-          self.performClickStatisticRequest(nodeId, (idParts[0] !== CATROBAT_NODE_PREFIX))
-
           const newUrlPrefix = (idParts[0] === CATROBAT_NODE_PREFIX)
             ? self.programDetailsUrlTemplate.replace('0', '')
             : SCRATCH_PROJECT_BASE_URL
-
-          const queryString = (idParts[0] === CATROBAT_NODE_PREFIX)
-            ? ('?rec_by_page_id=' + self.recommendedByPageID + '&rec_by_program_id=' + self.programID)
-            : ''
-          window.location = newUrlPrefix + '/' + nodeId + queryString
+          window.location = newUrlPrefix + '/' + nodeId
         }
       }
     }
@@ -277,23 +266,5 @@ const _InternalRemixGraph = function () {
 
   self.highlightEdge = function (edgeId) {
     self.edges.update([{ id: edgeId, width: 3, color: { color: '#00acc1', opacity: 1.0 } }])
-  }
-
-  self.performClickStatisticRequest = function (recommendedProgramID, isScratchProgram) {
-    const type = 'rec_remix_graph'
-    const params = {
-      type: type,
-      recFromID: self.programID,
-      recID: recommendedProgramID,
-      isScratchProgram: (isScratchProgram ? 1 : 0)
-    }
-    $.ajaxSetup({ async: false })
-    $.post(self.clickStatisticUrl, params, function (data) {
-      if (data === 'error') {
-        console.log('No click statistic is created!')
-      }
-    }).fail(function (data) {
-      console.log(data)
-    })
   }
 }

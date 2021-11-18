@@ -162,8 +162,6 @@ sonata_admin:
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-bar-chart"></i>'
                 items:
-                    - catrowebadmin.block.statistics.programs
-                    - catrowebadmin.block.statistics.clicks
                     - catrowebadmin.block.statistics.project_machine_translation
                     - catrowebadmin.block.statistics.comment_machine_translation
 

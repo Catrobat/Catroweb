@@ -129,11 +129,6 @@ services:
     class: App\Catrobat\RemixGraph\RemixSubgraphManipulator
     public: true
 
-  App\Catrobat\RecommenderSystem\RecommenderManager:
-    class: App\Catrobat\RecommenderSystem\RecommenderManager
-    public: true
-
-
   # ====================================================================================================================
   #   Controllers:
   #                  controllers are imported separately to make sure they're public
@@ -217,12 +212,6 @@ services:
   App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser:
     class: App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser
     public: true
-
-  App\Catrobat\Services\StatisticsService:
-    class: App\Catrobat\Services\StatisticsService
-    public: true
-    tags:
-      - { name: monolog.logger, channel: download_stats }
 
   App\Catrobat\Requests\AppRequest:
     class: App\Catrobat\Requests\AppRequest
@@ -536,13 +525,6 @@ services:
     class: App\Api_deprecated\Listeners\ProgramListSerializer
     tags:
       - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
-
-  # ======== Download ========
-
-  catrobat.download.stats:
-    class: App\Catrobat\Listeners\DownloadStatisticsListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
   # ======== Versioning ========
 
@@ -864,26 +846,6 @@ services:
       - "@twig"
       - "%catrobat.file.extract.dir%"
       - "%catrobat.apk.dir%"
-    public: true
-
-  catrowebadmin.block.statistics.programs:
-    class: App\Admin\ProgramDownloadStatisticsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Project Download Statistics" }
-    arguments:
-      - ~
-      - App\Entity\ProgramDownloads
-      - ~
-    public: true
-
-  catrowebadmin.block.statistics.clicks:
-    class: App\Admin\ClickStatisticsAdmin
-    tags:
-      - { name: sonata.admin, manager_type: orm, label: "Click DFStatistics" }
-    arguments:
-      - ~
-      - App\Entity\ClickStatistic
-      - ~
     public: true
 
   # ====================================================================================================================
