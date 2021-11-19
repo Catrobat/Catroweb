@@ -15,7 +15,7 @@ class CommentMachineTranslation extends MachineTranslation
 {
   /**
    * @ORM\ManyToOne(targetEntity="App\Entity\UserComment")
-   * @ORM\JoinColumn(name="comment_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
    */
   protected UserComment $comment;
 
