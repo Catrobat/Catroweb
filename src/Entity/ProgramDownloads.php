@@ -20,7 +20,7 @@ class ProgramDownloads
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program_downloads")
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
+   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   protected Program $program;
 
