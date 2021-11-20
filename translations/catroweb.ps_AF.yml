@@ -64,44 +64,44 @@ notificationsUnauthorizedError: "د کارونکي اجازه نه ورکول"
 notificationsClearError: "د لوستلو په توګه خبرتیاوې په نښه کولو توان نلري!"
 pleaseWait: "هیله کوم لږ صبر وکړه..."
 projects: "پروژې"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
+oauthPopUpTitle: "د بهرني حساب د ننوتلو معلومات"
+oauthInfo: 'تاسو یوازې د ننوتلو لپاره یو بهرنی حساب کارولی دی. موږ ستاسو لپاره یو تصادفي کارن-نوم جوړ کړ. که تاسو غواړئ خپل کارن نوم بدل کړئ یا د خپل حساب لپاره نوی پټنوم جوړ کړئ مهرباني وکړئ خپل پروفایل پاڼې ته لاړ شئ.'
+oauthHere: "دلته"
+statistics: "احصایې"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'دلته کومې پروژې وړاندیز کیږي؟'
+      description: 'هرڅومره چې ستاسو پروژه ترلاسه کوي ډیر عکس العملونه (د ګوتو پورته کول ، مسکا ...) په دې لیست کې لوړ ښکاري.'
 follower:
-  follows: Following
+  follows: تعقیب
   followers: پیروان
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follow: تعقیب کړئ
+  username: کارن
+  followsMe: ما تعقیبوي
+  noFollowing: تاسو اوس مهال د هیچا پیروي نه کوئ.
+  noFollowers: تاسو اوس مهال هیڅ پیروان نلرئ.
+  noOtherFollowing: اوس مهال هیڅ تعقیبونکي کاروونکي شتون نلري.
+  noOtherFollowers: اوس مهال هیڅ پیروکاران شتون نلري.
+  followError: "د مطلوب کارونکي تعقیب کولو توان نلري!"
+  unfollowError: "د مطلوب کارونکي د تعقیبولو توان نلري!"
+  unfollowQuestion: "ایا تاسو ډاډه یاست چې تاسو غواړئ دا کارن تعقیب کړئ؟"
+  unfollowButton: "غیر تعقیب کړئ%username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+    title: کاټروبات ته ښه راغلاست %theme%
+    title_mindstorms: د Mindstorms EV3 او NXT لپاره د Catrobat سایټ ته ښه راغلاست
+    subtitle: کیسې، لوبې او نور جوړ کړئ ...
+    subtitle_embroidery: په خپل ټي شرټونو، کڅوړو، پتلون، یا د سمارټ فون کیسه کې خپل نمونې وخورئ!
+    subtitle_mindstorms: د خپل Lego Mindstorms EV3 او NXT روبوټونو سره خپلې پروژې جوړې کړئ
+    download: اپلیکیشن ډاونلوډ کړئ
+    statistics: نور احصایې
+  featured: انځور شوی
+  example: مثالونه
+  newest: نوې پروژې
+  recommended: وړاندیز شوې پروژې
+  scratchremixes: سکریچ ریمکسونه
+  noPrograms: اوس مهال کومه پروژه نشته.
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -117,20 +117,20 @@ programs:
     Yes, set to private
     No
   reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  deleteCommentConfirmation: ایا تاسو ډاډه یاست چې دا تبصره حذف کول غواړئ؟
   deleteAccountConfirmation: |+
     Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongDescription: The project description is too long!
+  tooLongDescription: د پروژې تفصیل ډیر اوږد دی!
   tooLongCredits: The project credits are too long!
   most:
     viewed: ډیری لیدل شوي
     downloaded: ډیری ډاونلوډ شوی
-  random: Random projects
-  related: Related projects
+  random: تصادفي پروژې
+  related: اړوندې پروژې
   downloads: '%downloads% downloads'
   sample: Example projects
   views: '%views% views'
@@ -406,7 +406,7 @@ format:
 #api
 errors:
   username:
-    blank: Username must not be blank
+    blank: کارن نوم باید خالي نه وي
     invalid: Your username is invalid
     exists: This username already exists.
     not_exists: This username does not exist.
@@ -420,7 +420,7 @@ errors:
     invalid: Invalid country
   email:
     blank: email must not be blank
-    invalid: Your email seems to be invalid
+    invalid: ستاسو بریښنالیک غلط ښکاري
     exists: This email address already exists.
   id:
     blank: Open authentication ID must not be blank
@@ -572,7 +572,7 @@ codeview:
   bricks: 'خښتې'
   objects: 'لوبغاړي او توکي'
   looks: 'ښکاري'
-  sounds: 'Sounds'
+  sounds: 'غږونه'
   globals: 'Globals'
   locals: 'Locals'
   globalVariables: 'Global variables'
@@ -675,13 +675,13 @@ checkOutProject: 'Check out this project:'
 community: 'د کاټروبیټ ټولنه'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: نوې پروژې
+  random: تصادفي پروژې
   most_viewed: ډیری لیدل شوي
   most_downloaded: ډیری ډاونلوډ شوی
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: سکریچ ریمکسونه
+  recommended: وړاندیز شوې پروژې
 achievements:
   sidebar:
     title: 'Achievements'
