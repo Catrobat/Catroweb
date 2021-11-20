@@ -733,7 +733,7 @@ achievements:
         title: "Coding Jam '21"
         description: "参与 Coding Jam '21"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} 标签 |]1,Inf] 标签'
   tag:
     game:
       title: 游戏
@@ -797,7 +797,7 @@ studio:
       add_comment: '%user% 添加了一个项目。'
     members_list:
       title: '工作室成员'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      project_count: '{0} 没有工作室项目 |{1} 1个工作室项目 |]1，Inf] %count% 个工作室项目'
       promote_member: '将成员提升为管理员。'
       promotion_failed: '该成员升级过程出错。请稍后再试。'
       ban_member: '禁止工作室成员'
