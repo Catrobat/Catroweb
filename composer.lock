@@ -8845,23 +8845,23 @@
         },
         {
             "name": "symfony/inflector",
-            "version": "v5.3.4",
+            "version": "v5.3.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/inflector.git",
-                "reference": "b4a221138afa358f0833ec98de613108b6d25acf"
+                "reference": "2fe2c63ed935e362866c2e118459d4ff5d8f71de"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/inflector/zipball/b4a221138afa358f0833ec98de613108b6d25acf",
-                "reference": "b4a221138afa358f0833ec98de613108b6d25acf",
+                "url": "https://api.github.com/repos/symfony/inflector/zipball/2fe2c63ed935e362866c2e118459d4ff5d8f71de",
+                "reference": "2fe2c63ed935e362866c2e118459d4ff5d8f71de",
                 "shasum": ""
             },
             "require": {
                 "php": ">=7.2.5",
                 "symfony/deprecation-contracts": "^2.1",
                 "symfony/polyfill-php80": "^1.16",
-                "symfony/string": "^5.2.8"
+                "symfony/string": "^5.3.10"
             },
             "type": "library",
             "autoload": {
@@ -8897,7 +8897,7 @@
                 "words"
             ],
             "support": {
-                "source": "https://github.com/symfony/inflector/tree/v5.3.4"
+                "source": "https://github.com/symfony/inflector/tree/v5.3.11"
             },
             "funding": [
                 {
@@ -8914,7 +8914,7 @@
                 }
             ],
             "abandoned": "use `EnglishInflector` from the String component instead",
-            "time": "2021-07-21T12:38:00+00:00"
+            "time": "2021-10-30T15:26:44+00:00"
         },
         {
             "name": "symfony/intl",
@@ -10427,16 +10427,16 @@
         },
         {
             "name": "symfony/security",
-            "version": "v4.4.33",
+            "version": "v4.4.34",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security.git",
-                "reference": "5c463ddfa5768e7326452d0ed180b078e81168e0"
+                "reference": "e6dec06cf8fecc28f2cef80d47935b32635b42cb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security/zipball/5c463ddfa5768e7326452d0ed180b078e81168e0",
-                "reference": "5c463ddfa5768e7326452d0ed180b078e81168e0",
+                "url": "https://api.github.com/repos/symfony/security/zipball/e6dec06cf8fecc28f2cef80d47935b32635b42cb",
+                "reference": "e6dec06cf8fecc28f2cef80d47935b32635b42cb",
                 "shasum": ""
             },
             "require": {
@@ -10507,7 +10507,7 @@
             "description": "Provides a complete security system for your web application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security/tree/v4.4.33"
+                "source": "https://github.com/symfony/security/tree/v4.4.34"
             },
             "funding": [
                 {
@@ -10523,7 +10523,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-10-23T07:49:03+00:00"
+            "time": "2021-11-15T14:42:25+00:00"
         },
         {
             "name": "symfony/security-acl",
