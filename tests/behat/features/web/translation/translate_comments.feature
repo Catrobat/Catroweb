@@ -1,5 +1,5 @@
 @web @project_page
-Feature: Project title, description and credits should be translatable via a button
+Feature: Project comments should be translatable via a button
 
   Background:
     Given there are users:
