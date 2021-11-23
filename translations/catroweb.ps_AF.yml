@@ -116,14 +116,13 @@ programs:
     Yes, set to public
     Yes, set to private
     No
-  reportCommentConfirmation: Are you sure you want to report this comment?
+  reportCommentConfirmation: ایا تاسو ډاډه یاست چې تاسو غواړئ دا تبصره راپور کړئ؟
   deleteCommentConfirmation: ایا تاسو ډاډه یاست چې دا تبصره حذف کول غواړئ؟
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    حساب ړنګول؟
+    ایا تاسو ډاډه یاست چې تاسو غواړئ خپل حساب حذف کړئ؟ دا به ستاسو اپلوډ شوي پروژې او نظرونه هم حذف کړي!
+    هو، دا حذف کړئ!
+    لغوه کړئ
   tooLongDescription: د پروژې تفصیل ډیر اوږد دی!
   tooLongCredits: The project credits are too long!
   most:
@@ -131,16 +130,16 @@ programs:
     downloaded: ډیری ډاونلوډ شوی
   random: تصادفي پروژې
   related: اړوندې پروژې
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+  downloads: '%downloads%ډاونلوډونه'
+  sample: بېلګې پروژې
+  views: '%views% نظرونه'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
+    likersTitle: "هغه خلک چې دې پروژې ته یې غبرګون ښودلی"
+    all: "ټول"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: سپارل شوې پروژې
+  uploaded: پورته شوي پروژې
   reportAsInappropriate: د نامناسب په توګه راپور ورکړئ
   reportProgram: د پروژې راپور
   languageVersion: 'د کاټروبیټ ژبې نسخه: %languageVersion%'
@@ -164,40 +163,40 @@ programs:
   delete: پاک کړی
   report: راپور
   report_popup: تبصره په بریالیتوب سره راپور شوې.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  report_popup_header: راپور ورکړ
+  deleted_popup: تبصره په بریالیتوب سره ړنګه شوه.
+  deleted_popup_header: ړنګ شوی
+  noAdminRights: تاسو د اداري حق نه لرئ. مهرباني وکړئ د مدیر په توګه ننوتل.
+  editDescription: د پروژې توضیحات سم کړئ
   saveDescription: Save description change
   editCredits: Edit the project credits
   saveCredits: Save credits change
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: تبصره ولیکئ
+  thumbsUp: تړون!
+  smile: موسکا!
+  love: مینه!
+  wow: وووو!
+  linkTitle: لینک
+  link: د پروژې لینک کلپ بورډ ته کاپي کړئ
   reactionsText: غبرګونونه
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
+  downloadErrorText: د پروژې د کښته کولو په وخت کې تېروتنه رامنځته شوه. مهرباني وکړئ وروسته بیا هڅه وکړئ.
+  downloadStartText: ډاونلوډ پیل شو ...
+  showTranslation: ژباړه ښکاره کړئ
+  hideTranslation: ژباړه پټ کړئ
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
 remixGraph:
   title: ریمکسونه
-  showRemixGraph: 'Remix graph'
+  showRemixGraph: 'د ریمکس ګراف'
   by: 'لخوا'
   open: 'خلاص'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
-noReply: This is an automated message - Please do not reply directly to this email.
+  showPaths: 'لارې ښودل'
+  programNotAvailableErrorTitle: 'اوبخښه...'
+  programNotAvailableErrorDescription: 'پروژه نور شتون نلري!'
+  programNotAvailable: 'نشته'
+  programUnknownUser: 'نامعلوم کارن'
+noReply: دا یو اتوماتیک پیغام دی - مهرباني وکړئ دې بریښنالیک ته مستقیم ځواب مه ورکوئ.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: ستاسو د Catrobat حساب تصدیق
   message: |
     Dear %username%.
     To finish activating your account - please visit %confirmationUrl%
@@ -216,7 +215,7 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat password recovery
+  subject: ستاسو د Catrobat پټنوم بیا رغونه
   message: |
     Dear %username%.
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
@@ -244,13 +243,13 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
+  edit: خپل پروفایل سم کړئ
+  saveChanges: بدلونونه خوندي کړئ
+  newPass: نوئ پټ نوم
+  repeatPass: پاسورډ تکرار کړئ
+  oldPass: زوړ پټ نوم
+  firstEmail: زما لومړی بریښنالیک
+  secondEmail: زما دوهم بریښنالیک
   myPrograms: My projects
   follows: Follows
   follower: Follower
@@ -299,28 +298,28 @@ myprofile:
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the project notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  title: 'د لوبې کولو جواز - کریډیټ ورکړئ او شریک کړئ'
+  text1: تصور وکړئ چې د کاټروباټ هره پروژه یو کیک دی، یو خورا ځانګړی کیک چې د خپل ترکیب (پروګرام کولو بلاکس) سره راځي. د کاټروبیټ ټولنې ټول غړي خپل کیک د خپلو ترکیبونو سره شریکوي. دا پدې مانا ده چې تاسو کولی شئ د کیک څخه خوند واخلئ او زده کړئ چې څنګه یې پخپله جوړ کړئ!
+  text2: 'هیڅ پټ ترکیبونه شتون نلري: د دې کیک جوړولو څرنګوالي لارښوونې د هرچا لپاره خلاصې دي چې د نوي نظرونو لپاره د الهام په توګه د کارولو ، بیا کارولو ، ترمیم کولو او خدمت کولو لپاره خلاص دي ... زما مطلب دی کیک.'
+  text3: "تاسو کولی شئ کیک وخورئ او همدارنګه د نورو خلکو ترکیبونه کاپي کړئ ترڅو خپل ځان جوړ کړئ ، شاید د مختلف اجزاو سره. دا ازادي د دوو ساده غوښتنو سره راځي:"
+  text4: "د Catrobat ټولنې په جوړولو کې، موږ پریکړه وکړه چې دا طریقه غوره کړو ځکه چې موږ باور لرو چې دا په ټولنه کې د زده کړې او خلاقیت ملاتړ کوي. د ترکیبونو او اجزاوو (سکریپټونو او هنري کارونو) په شریکولو سره، خلک کولی شي د یو بل نظرونه جوړ کړي او هرڅوک به ګټه پورته کړي."
+  text5: د Catrobat ویب پاڼې په ډیزاین کولو کې، موږ د خلکو د شریکولو او نورو ته د اعتبار ورکولو لپاره د هڅولو لپاره ځانګړتیاوې شاملې کړې. د پروژې په هره پاڼه کې، تاسو کولی شئ تل د پروژې لپاره اصلي سکریپټونه ډاونلوډ کړئ. که تاسو یوه پروژه ریمکس کړئ (د سکریپټونو یا هنر کار بدلول، او پایله شریکول)، موږ تاسو هڅوو چې د پروژې نوټونو کې کریډیټ ورکړئ، د هغه خلکو او پروژې یادونه وکړئ چې تاسو یې هڅولي.
+  text6: 'د Catrobat آنلاین ټولنې د کارولو شرایطو په اړه نور معلومات ترلاسه کړئ %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: خپل کیک د ترکیب سره شریک کړئ
+    item2: هغو کسانو ته کریډیټ ورکړئ چې تاسو یې هڅولي دي
+  version: نسخه 1.1، 2 اپریل 2013
 termsOfUse:
-  title: Terms of Use
-  headline: Welcome to the Catrobat community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
+  title: د کارولو شرایط
+  headline: د Catrobat ټولنې ته ښه راغلاست!
+  text1: 'د Catrobat ټولنې د یوې برخې په توګه، تاسو د خلکو سره پروژې او نظریات شریکوئ:'
+  text2: "موږ ستاسو مرستې ته اړتیا لرو ترڅو دا ټولنه د هر غړي لپاره د ملاتړ ځای جوړ کړو. دلته تاسو څنګه مرسته کولی شئ:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text4: 'زموږ ډالۍ تاسو ته:'
+  text5: 'زموږ د کارونې او خدمت شرایط:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
+    item1: د ډیری مختلفو هیوادونو او کلتورونو څخه
+    item2: د ټولو عمرونو (له کوچنيانو څخه تر ځوانانو او نيکه ګانو پورې)
     item3: with all levels of experience
   list2:
     item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
@@ -600,7 +599,7 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: ژبه
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
