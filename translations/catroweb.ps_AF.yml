@@ -103,19 +103,19 @@ programs:
   scratchremixes: سکریچ ریمکسونه
   noPrograms: اوس مهال کومه پروژه نشته.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    تاسو ډاډه یاست؟
+    ایا تاسو ډاډه یاست چې %programName% حذف کول غواړئ؟
+    ستاسو د عملونو د بیرته راګرځولو لپاره هیڅ لاره نشته!
+    هو، دا حذف کړئ!
+    لغوه کړئ
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    تاسو ډاډه یاست؟
+    که تاسو %programName% خصوصي ته وټاکئ، دا به د نورو کاروونکو لخوا نه لیدل کیږي یا موندل کیږي.
+    تاسو اوس هم کولی شئ د خپلې پروژې لینک له خپلو ملګرو سره شریک کړئ. تاسو کولی شئ د پیډ لاک آیکون په ټایپ کولو سره لید بدل کړئ.
+    که تاسو %programName%عامه ته وټاکئ، دا د نورو کاروونکو لخوا لیدل کیدی شي او موندل کیدی شي.
+    هو، عامه ته ټاکل شوی
+    هو، شخصي ته ټاکل شوی
+    نه
   reportCommentConfirmation: ایا تاسو ډاډه یاست چې تاسو غواړئ دا تبصره راپور کړئ؟
   deleteCommentConfirmation: ایا تاسو ډاډه یاست چې دا تبصره حذف کول غواړئ؟
   deleteAccountConfirmation: |+
@@ -250,54 +250,54 @@ profile:
   oldPass: زوړ پټ نوم
   firstEmail: زما لومړی بریښنالیک
   secondEmail: زما دوهم بریښنالیک
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  myPrograms: زما پروژې
+  follows: تعقیبوي
+  follower: پیروونکی
+  unfollowUser: دا کارن تعقیب کړئ!
+  followUser: دا کاروونکي تعقیب کړئ!
+  amountOfPrograms: د پروژو اندازه
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  changePicture: Change picture
+    passwordTooShort: نوی پټنوم باید لږ تر لږ ه%length% حروف ولري.
+    passwordTooLong: نوی پټنوم کولی شي د %length% حروف ولري.
+    passwordIsUsername: پټنوم باید د کارن نوم څخه توپیر ولري.
+    passwordWrong: غلط پټنوم
+    emailNotValid: دا بریښنالیک آدرس درست ندی.
+    emailMissing: د دې بریښنالیک پتې د تازه کولو په وخت کې تېروتنه. تاسو باید لږترلږه یو باوري بریښنالیک آدرس ولرئ.
+    emailExists: دا ایمیل آدرس لا دمخه شتون لري.
+    usernameNotValid: دا کارن-نوم اعتبار نه لري.
+    usernameMissing: تاسو باید یو کارن نوم ولرئ.
+    usernameExists: دا کارن-نوم لا دمخه شتون لري.
+    usernameContainsEmail: کارن نوم باید د بریښنالیک پته ونه لري.
+    submitSuccess: خوندي شوی!
+  reallyDeleteProgram: ایا تاسو واقعیا غواړئ خپله پروژه حذف کړئ
+  programsOf: پروژې
+  changePicture: انځور بدل کړئ
   avatar:
-    noImage: No image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
-  goToScratchProfile: Profile on Scratch
+    noImage: هیڅ عکس نشته!
+    pictureTooLarge: ستاسو غوره شوی انځور ډیر لوی دی، مهرباني وکړئ د 5mb څخه لوی انځورونه مه کاروئ.
+    uploadError: بخښنه غواړم، د اپلوډ په وخت کې ستونزه وه!
+    noSupport: د دې انځور ډول ملاتړ نه کوي، مهرباني وکړئ د بل انځور هڅه وکړئ.
+  goToScratchProfile: په سکریچ کې پروفایل
 myprofile:
-  editProfile: Edit profile
+  editProfile: پروفایل ایډیټ کړئ
   edit: سمون
   done: ترسره شو
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
+  checkMail: ستاسو بریښنالیک ته یو بریښنالیک لیږل شوی. مهرباني وکړئ خپل ان باکس چیک کړئ.
+  passwordUpdated: ستاسو پټنوم په بریالیتوب سره تازه شو.
+  avatar: اوتار
   email: ایمیل
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit email
-  deleteAccount: Delete account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  editAvatar: اوتار ایډیټ کړئ
+  editUsername: د کارن نوم سمول
+  editPassword: پاسورډ ایډیټ کړئ
+  editCountry: هیواد ترمیم کړئ
+  editEmail: ایمیل ایډیټ کړئ
+  deleteAccount: حساب ړنګ کړئ
+  deleteAccountText: ایا تاسو ډاډه یاست چې تاسو غواړئ خپل حساب حذف کړئ؟ دا به ستاسو اپلوډ شوي پروژې او نظرونه حذف کړي!
+  editAccountSettings: د حساب ترتیبات سم کړئ
+  notChangeVisibility: لید بدل نشي
+  notChangeVisibilityReason: ستاسو د پروژې د ژبې نسخه ډیره لوړه ده او په دې توګه دا د لیدلو لپاره نشي ټاکل کیدی.
 licenseToPlay:
-  link: 'License to play'
+  link: 'د لوبې کولو جواز'
   title: 'د لوبې کولو جواز - کریډیټ ورکړئ او شریک کړئ'
   text1: تصور وکړئ چې د کاټروباټ هره پروژه یو کیک دی، یو خورا ځانګړی کیک چې د خپل ترکیب (پروګرام کولو بلاکس) سره راځي. د کاټروبیټ ټولنې ټول غړي خپل کیک د خپلو ترکیبونو سره شریکوي. دا پدې مانا ده چې تاسو کولی شئ د کیک څخه خوند واخلئ او زده کړئ چې څنګه یې پخپله جوړ کړئ!
   text2: 'هیڅ پټ ترکیبونه شتون نلري: د دې کیک جوړولو څرنګوالي لارښوونې د هرچا لپاره خلاصې دي چې د نوي نظرونو لپاره د الهام په توګه د کارولو ، بیا کارولو ، ترمیم کولو او خدمت کولو لپاره خلاص دي ... زما مطلب دی کیک.'
@@ -320,46 +320,46 @@ termsOfUse:
   list1:
     item1: د ډیری مختلفو هیوادونو او کلتورونو څخه
     item2: د ټولو عمرونو (له کوچنيانو څخه تر ځوانانو او نيکه ګانو پورې)
-    item3: with all levels of experience
+    item3: د تجربې د ټولو کچو سره
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: درناوی وکړئ. کله چې پروژې شریکې کړئ، مهرباني وکړئ په یاد ولرئ چې د ډیری مختلف عمرونو او پس منظر خلک به ستاسو مرستې وګوري.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item3: "صادق اوسئ. داسې مه کوه چې تاسو د بل چا په څیر یاست یا هڅه مه کوئ چې ټولنې ته دوکه ورکړئ."
+    item4: "شخصي معلومات شخصي وساتئ. خپل بریښنالیک آدرس، د تلیفون شمیره، یا د شخصي اړیکو نور معلومات مه شریکوئ."
+    item5: "د سایټ دوستانه ساتلو کې مرسته وکړئ. که تاسو احساس کوئ چې نور به یوه پروژه یا تبصره ومومي معنی، سپکاوی، ډیر تاوتریخوالی، یا بل ډول نامناسب، یوازې د 'ناامنه په توګه راپور' تڼۍ کلیک وکړئ او یو لنډ توضیح پریږدئ. د Catrobat ټیم به ستاسو راپور بیاکتنه وکړي او ممکن کومه پروژه، تبصره، یا پوسټ لرې کړي."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
-    item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
-    item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
+    item1: "زموږ ویب پاڼو ته د پروژې په اپلوډ کولو سره، تاسو دا منئ او موافق یاست چې دا کار د اپلوډ شوي کاټروبیټ پروژو ځینې وړیا جوازونو لاندې ترسره کړئ. د وړیا جوازونو په څیر چې لاندې د کیټروبیټ سیسټم پخپله تاسو ته شتون لري، د اپلوډ شوي کاټروبیټ پروژې دا وړیا جوازونه هرڅوک حق ورکوي چې د نورو لخوا اپلوډ شوي کار څخه زده کړه وکړي او د خپلو نوي زړه راښکونکو لوبو رامینځته کولو لپاره کار کولو او ریمکس کولو لپاره کار وکړي. متحرکات، او نورې پروژې. دا هرچا ته اجازه ورکوي چې 'د خپلو ملګرو په اوږو ودریږي'، یو له دوی څخه تاسو یاست! ستاسو کار به په دې توګه ټولې نړۍ ته ګټه ورسوي او د هرچا لپاره د کارولو لپاره وړیا پاتې شي، یو څه متن او انځورونو ته ورته وي چې د ټولې نړۍ رضاکارانو لخوا په وړیا توګه ویکیپیډیا کې مرسته شوې. دې ته د انسانیت لپاره د خپل ډالۍ په توګه فکر وکړئ: تاسو هرچا ته درکوي، او نور ټول هغه څوک چې خپل کار زموږ ویب پاڼې ته پورته کوي تاسو ته درکوي. په دې توګه یوه اپلوډ شوې پروژه د لوی ارزښت ډالۍ ده چې مالک یې تاسو ته وړیا درکوي، پدې شرط چې تاسو په ټولنه کې په ورته شرایطو کې برخه واخلئ."
+    item2: تاسو اړتیا نلرئ ډالۍ قبول کړئ؛ که تاسو یې کوئ، ځینې مقررات پلي کیږي. د دې قواعدو ګټې دا دي چې تاسو کولی شئ له کار څخه زده کړئ او د دې لپاره جوړ کړئ ترڅو حتی یخ توکي پخپله جوړ کړئ، کوم چې تاسو کولی شئ، د بیلګې په توګه، زموږ ویب پاڼې ته بیا د خپل ځان په توګه اپلوډ کړئ. بله ګټه دا ده چې دا جوازونه ډاډ ترلاسه کوي چې تاسو د کومې ستونزې لپاره مسؤل نه یاست چې نورو ته ستاسو د پروژې کارولو له لارې رامینځته کیږي.
+    item3: "یو مهم اضافي شرط دا دی چې تاسو په واضح ډول هغه لیکوالانو ته منسوب کړئ چې تاسو د خپل کار پراساس یاست. په ورته وخت کې، موږ به سخت کار وکړو ترڅو ستاسو کار د نورو لخوا په روښانه توګه ستاینه وشي چې تاسو یې مرسته کړې ده، د ځانګړي نوم په منسوبولو سره چې تاسو په آزاده توګه د کاټروبات په ټولنه کې ستاسو استازیتوب کولو لپاره غوره کړی، او نورو ته د فرصت په ورکولو سره. په عامه لارو کې له تاسو څخه د هرچا او په ځانګړي توګه دوی ته د خپل کار د ورکولو له امله مننه څرګند کړئ."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
   list4:
-    item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
-    item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
+    item1: "موږ د کاټروبیټ سیسټم پورې اړوند خپل ټول سافټویر او انټرنیټ سرچینې وړاندې کوو، د بیلګې په توګه، د کاټروبیټ ټیم لخوا لیکل شوي سافټویر، زموږ ویب پاڼې او انټرنیټ سرچینې، د کاټروبیټ سیسټم پورې اړوند زموږ د سرچینې کوډ، او ټول اضافي شامل شوي توکي لکه، د بیلګې په توګه. ، انځورونه، غږونه او متنونه، اوس او په راتلونکي کې تاسو ته د Catrobat وړیا جوازونو لاندې."
+    item2: دا جوازونه د کاټروباټ ټولې برخې تاسو ته وړیا او همدارنګه وړیا درکوي تاسو ته د دې په معنی چې تاسو ته یې د کارولو آزادي درکوي که څه هم تاسو یې غواړئ ، یوازې د یو څو محدودیتونو سره ډاډ ترلاسه کوي چې د نورو په مینځ کې ، د کاټروبیټ سیسټم به د تل لپاره وړیا وي. او د هرچا لپاره ګټور.
     item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
   list5:
-    item1: 'If you, or, if you are below 13 years of age, your parents or legal guardians, are associated with an organization involved in or responsible for dragnet type privacy violations and/or bulk or mass surveillance, then you are not allowed to use our software applications and to access our services. The precise details of this restriction and certain exceptions to it are delineated in Sections 4.a and 4.b on our %link-termsOfUse%.'
-    item2: If you are under 13 years of age, then you have to ask your parents or legal guardians whether they allow you to use Catrobat’s Software Applications and Services.
-    item3: "We reserve the rights to reject, delete, or hide projects, user accounts, and any digital materials uploaded to Catrobat's websites at any time in our sole discretion, for instance if we find that a project contains inappropriate material or that a user infringes on the rights of other persons."
-    item4: "All of Catrobat's software and Internet resources are offered in the hope that they will be useful, but without any warranty."
+    item1: 'که تاسو، یا، که تاسو د 13 کلونو څخه کم عمر لرئ، ستاسو مور او پالر یا قانوني ساتونکي، د هغه سازمان سره تړاو لري چې د ډریګنیټ ډول محرمیت سرغړونو او/یا ډیری یا ډله ایزې څارنې کې ښکیل وي یا مسؤل وي، نو بیا تاسو اجازه نلرئ چې زموږ څخه کار واخلئ. د سافټویر غوښتنلیکونه او زموږ خدماتو ته د لاسرسي لپاره. د دې محدودیت دقیق توضیحات او د دې لپاره ځینې استثناوې زموږ په %link-termsOfUse% کې په 4.a او 4.b برخو کې تشریح شوي.'
+    item2: که تاسو د 13 کلونو څخه کم عمر لرئ، نو تاسو باید د خپل مور او پلار یا قانوني ساتونکو څخه وپوښتئ چې ایا دوی تاسو ته اجازه درکوي چې د Catrobat سافټویر غوښتنلیکونه او خدمات وکاروئ.
+    item3: "موږ حق لرو چې زموږ په خپل اختیار کې هر وخت د کاټروباټ ویب پا و ته اپلوډ شوي پروژې ، کارونکي حسابونه ، او هر ډول ډیجیټل توکي رد کړو ، حذف کړو یا پټ کړو، د مثال په توګه که موږ ولیدل چې یوه پروژه نامناسب مواد لري یا دا چې یو کاروونکی سرغړونه کوي. د نورو خلکو حقونه."
+    item4: "د Catrobat ټول سافټویر او انټرنیټ سرچینې په دې هیله وړاندیز کیږي چې ګټور وي، مګر پرته له کوم تضمین."
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
-  bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
+  bottom1: دلته وخت په وخت بیا وګورئ، ځکه چې موږ تل هڅه کوو چې زموږ د کارولو شرایط ښه کړو.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
   version: Version 1.3, 4 March 2014
 search:
-  dotdotdot: Search...
+  dotdotdot: لټون...
   search: لټون
-  inMediaLib: Search in media library
-  results: Search results
+  inMediaLib: د رسنیو په کتابتون کې لټون وکړئ
+  results: د لټون پایلې
   resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
+  fail: مهرباني وکړئ لږ تر لږه د لټون یوه اصطلاح داخل کړئ
 menu:
-  profile: My Profile
+  profile: زما پېژنيال
   login: د ننه کیدل
   logout: وتون
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  followersAndFollowing: پیروونکی
 login:
   login: د ننه کیدل
   button:
@@ -371,7 +371,7 @@ login:
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  recoverPassSend: ستاسو بریښنالیک ته یو بریښنالیک لیږل شوی. مهرباني وکړئ خپل ان باکس چیک کړئ.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
@@ -379,26 +379,26 @@ login:
   createAccount: Create an account
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
-  or: OR
+  or: یا
   username: کارن نوم
   email: ایمیل
   passwordFirst: رمز
-  passwordSecond: Password confirm
+  passwordSecond: د پټنوم تایید
 register:
-  title: Sign up
+  title: ګډون کول
   button:
     cancel: لغوه کړئ
     createAccount: ګڼون جوړول
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: د حساب بیرته راګرځول
+  description: که تاسو د خپل حساب بریښنالیک یا کارن نوم په یاد ولرئ موږ کولی شو تاسو ته ستاسو د پټنوم د بیا تنظیمولو لپاره لینک واستوو.
   button:
     cancel: لغوه کړئ
-    submit: Recover password
+    submit: پټنوم بیرته ترلاسه کړئ
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
+  download: د اپلیکیشن په توګه ډاونلوډ کړئ
+  prepare: 'د اپلیکیشن په توګه ترلاسه کړئ'
+  preparing: 'اپلیکیشن چمتو کول'
   text: 'The process may take a while'
 format:
   million_abbreviation: M
@@ -407,7 +407,7 @@ errors:
   username:
     blank: کارن نوم باید خالي نه وي
     invalid: Your username is invalid
-    exists: This username already exists.
+    exists: دا کارن-نوم لا دمخه شتون لري.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
     size: The username must have at least 3 character and not more than 180
@@ -420,7 +420,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: ستاسو بریښنالیک غلط ښکاري
-    exists: This email address already exists.
+    exists: دا ایمیل آدرس لا دمخه شتون لري.
   id:
     blank: Open authentication ID must not be blank
   login: The password or username was incorrect.
