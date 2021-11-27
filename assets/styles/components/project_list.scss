@@ -31,6 +31,11 @@ $container-padding: 1rem;
     display: none;
   }
 
+  &.empty-with-text {
+    justify-content: center;
+    text-align: center;
+  }
+
   &__title {
     display: flex;
     justify-content: space-between;
@@ -70,7 +75,7 @@ $container-padding: 1rem;
 
       //stylelint-disable-next-line selector-class-pattern
       .project-list__project__image {
-        box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.3); // TODO: make this beautiful
+        box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.35);
       }
 
     }
@@ -78,6 +83,7 @@ $container-padding: 1rem;
     &__image {
       width: 100%;
       border-radius: 10%;
+      box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.15);
     }
 
     &__name {
@@ -111,6 +117,7 @@ $container-padding: 1rem;
     }
   }
 
+  &.project-list--full,
   &.horizontal {
     > .container {
       padding: 0;
@@ -129,12 +136,28 @@ $container-padding: 1rem;
     .project-list__project {
       width: 25vw;
       max-width: $max-project-thumb-size;
-      margin-right: 1.5rem;
       text-decoration: none;
 
       @include media-breakpoint-up(md) {
         width: 10vw;
       }
+    }
+
+    .project-list__project + .project-list__project {
+      margin-left: 1.5rem;
+    }
+  }
+
+  &.project-list--full {
+    .projects-container {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .project-list__project {
+      margin-left: 0.75rem !important;
+      margin-right: 0.75rem;
+      margin-bottom: 1.5rem;
     }
   }
 

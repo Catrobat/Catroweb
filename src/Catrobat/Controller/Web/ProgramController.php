@@ -477,13 +477,21 @@ class ProgramController extends AbstractController
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
+    $response = new JsonResponse();
+    $response->setEtag(md5($project->getName().$project->getDescription().$project->getCredits()).$target_language);
+    $response->setPublic();
+
+    if ($response->isNotModified($request)) {
+      return $response;
+    }
+
     $translation_result = $this->translation_delegate->translateProject($project, $source_language, $target_language);
 
     if (null === $translation_result) {
       return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
-    return new JsonResponse([
+    return $response->setData([
       'id' => $project->getId(),
       'source_language' => $source_language ?? $translation_result[0]->detected_source_language,
       'target_language' => $target_language,

@@ -96,7 +96,6 @@ Feature: There should be all projects of a user presented on a profile page
     And I should see "project 26"
     And I should see "project 27"
     And I should see "project 28"
-    And the element "#program-28" should be visible
 
   Scenario: at my profile page there should always all programs be visible
     Given I log in as "User1"
@@ -109,7 +108,7 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: at a profile page there should always all programs be visible
     Given I am on "/app/user/1"
     And I wait for the page to be loaded
-    Then I should see 2 "#user-programs .program"
+    Then I should see 2 "#user-programs .project-list__project"
     But the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 
@@ -124,7 +123,7 @@ Feature: There should be all projects of a user presented on a profile page
   Scenario: at a profile page there should always all programs be visible
     Given I am on "/app/user/3"
     And I wait for the page to be loaded
-    Then I should see 25 "#user-programs .program"
+    Then I should see 25 "#user-programs .project-list__project"
     But the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 

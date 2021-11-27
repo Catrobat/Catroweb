@@ -455,17 +455,13 @@ export const ProjectLoader = function (container, url) {
   }
 
   async function initDivWithCorrectContainerIcon (project) {
-    // Extend this for new containers...
+    // ToDo: Refactor to new project_list
     switch (self.container) {
       case '#search-results':
         return '<div><span class="project-thumb-icon material-icons">schedule</span>' + project.UploadedString + '</div>'
 
       case '#myprofile-programs':
-      case '#user-programs':
         return '<div><span class="project-thumb-icon material-icons">schedule</span>' + project.UploadedString + '</div>'
-
-      default:
-        return '<div><span class="project-thumb-icon material-icons">person</span>' + self.escapeJavaScript(project.Author) + '</div>'
     }
   }
 

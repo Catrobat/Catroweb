@@ -17,7 +17,7 @@ googlePlay: Google Play
 iosAppStore: Магазин приложений iOS
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Чат Discord
 passwordsNoMatch: Пароли не совпадают.
 error: Ошибка
 cancel: Отменить
@@ -181,7 +181,7 @@ programs:
   link: Скопировать ссылку проекта в буфер обмена
   reactionsText: Реакции
   downloadErrorText: Во время скачивания проекта произошла ошибка. Повторите попытку позже.
-  downloadStartText: Download has started...
+  downloadStartText: Загрузка началась...
   showTranslation: Показать перевод
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
@@ -366,11 +366,11 @@ menu:
 login:
   login: Войти
   button:
-    loginNow: Login now
+    loginNow: Войти
     createAccount: Зарегистрироваться
-    forgetPassword: Forget password?
+    forgetPassword: Забыли пароль?
   oauth:
-    title: Or you can join with
+    title: Или вы можете присоединиться к
   passOrUser: Ваш пароль или имя пользователя были неверны.
   noUsername: Ваше имя пользователя или адрес электронной почты не были найдены.
   forgotPass: Забыли пароль или имя пользователя?
@@ -388,16 +388,16 @@ login:
   passwordFirst: Пароль
   passwordSecond: Подтвердить пароль
 register:
-  title: Sign up
+  title: Регистрация
   button:
     cancel: Отменить
     createAccount: Зарегистрироваться
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Восстановление аккаунта
+  description: Если вы помните электронную почту или имя пользователя вашей учетной записи, мы можем отправить вам ссылку для сброса пароля.
   button:
     cancel: Отменить
-    submit: Recover password
+    submit: Восстановить пароль
 apk:
   download: Скачать приложение
   prepare: 'Подготовка приложения'
@@ -728,7 +728,7 @@ achievements:
         description: 'Создать учетную запись пользователя'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Участник Coding Jam 2021"
 tags:
   title: 'Теги'
   tag:
@@ -777,34 +777,34 @@ studio:
     no_projects: 'Студия пока не содержит проектов'
     updateCoverError: 'Что-то пошло не так при обновлении обложки студии!'
     projects:
-      title: 'projects'
+      title: 'проектов'
     comments:
       title: 'Комментарии'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Введите что-нибудь'
+      replies: 'Ответы'
+      send: 'Отправить'
+      no_comments: 'У этой студии пока нет комментариев.'
+      disabled_comments: 'Комментарии к этой публикации отключены.'
+      post_error: 'Что-то пошло не так во время публикации вашего комментария. Повторите попытку позже.'
+      delete_error: 'Что-то пошло не так при удалении комментария. Повторите попытку позже.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Действия'
+      join_studio: '%user% присоединился к студии.'
+      add_project: '%user% оставил комментарий.'
+      add_comment: '%user% добавил проект.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Участники студии'
+      project_count: '{0} Нет студийных проектов |{1} 1 проект |]1,Inf] %count% студийных проектов'
+      promote_member: 'Повысить участника до лидера'
+      promotion_failed: 'Что-то пошло не так во время акции этого участника. Повторите попытку позже.'
+      ban_member: 'Забанить участника из студии'
+      ban_failed: 'Что-то пошло не так во время блокировки этого участника. Повторите попытку позже.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Общие настройки'
+      studio_name: 'Название студии'
       studio_description: 'Описание'
       toggle_allow_comments: 'Комментарии'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Видно всем'
 media_library:
   file:
     size: 'Размер: %size%'
