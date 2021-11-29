@@ -181,7 +181,7 @@ programs:
   link: Proje bağlantısını panoya kopyala
   reactionsText: Tepkiler
   downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
-  downloadStartText: Download has started...
+  downloadStartText: İndirme başladı...
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
@@ -363,11 +363,11 @@ menu:
 login:
   login: Oturum aç
   button:
-    loginNow: Login now
+    loginNow: Şimdi giriş yap
     createAccount: Hesap açmak
-    forgetPassword: Forget password?
+    forgetPassword: Şifreyi mi unuttun?
   oauth:
-    title: Or you can join with
+    title: Veya şunlar ile katılabilirsiniz
   passOrUser: Kullanıcı adı veya şifre yanlış.
   noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.
   forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
@@ -385,16 +385,16 @@ login:
   passwordFirst: Şifre
   passwordSecond: Şifre onayla
 register:
-  title: Sign up
+  title: Üye ol
   button:
     cancel: İptal et
     createAccount: Hesap açmak
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Hesap kurtarma
+  description: Hesabınızın e-posta adresini veya kullanıcı adını hatırlıyorsanız, şifrenizi sıfırlamanız için size bir bağlantı gönderebiliriz.
   button:
     cancel: İptal et
-    submit: Recover password
+    submit: Şifre kurtarma
 apk:
   download: Uyglm'yı indir
   prepare: 'Uyglm yap'
@@ -773,34 +773,34 @@ studio:
     no_projects: 'Studio henüz proje içermiyor'
     updateCoverError: 'Stüdyo kapağı güncellenirken bir şeyler ters gitti!'
     projects:
-      title: 'projects'
+      title: 'projeler'
     comments:
       title: 'Yorumlar'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Birşeyler yaz'
+      replies: 'yanıtlar'
+      send: 'gönder'
+      no_comments: 'Bu stüdyoda henüz yorum yok.'
+      disabled_comments: 'Bu stüdyo için yorumlar devre dışı bırakıldı.'
+      post_error: 'Yorumunuz gönderilirken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
+      delete_error: 'Yorum kaldırılırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Aktiviteler'
+      join_studio: '%user% stüdyoya katıldı.'
+      add_project: '%user% bir yorum yaptı.'
+      add_comment: '%user% bir proje ekledi.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Stüdyo üyeleri'
+      project_count: '{0} Stüdyo projesi yok |{1} 1 stüdyo projesi |]1,Inf] %count% stüdyo projesi'
+      promote_member: 'Üyeyi yöneticiliğe yükselt'
+      promotion_failed: 'Bu üyeyi yükseltme sırasında bir şeyler ters gitti. Daha sonra tekrar deneyin.'
+      ban_member: 'Üyeyi stüdyodan yasakla'
+      ban_failed: 'Bu üye yasaklanırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Genel Ayarlar'
+      studio_name: 'Stüdyo Adı'
       studio_description: 'Açıklama'
       toggle_allow_comments: 'Yorumlar'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Herkese açık'
 media_library:
   file:
     size: 'Boyutu: %size%'
