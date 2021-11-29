@@ -83,7 +83,7 @@
     "n": "^8.0.0",
     "npm": "^8.1.4",
     "path": "^0.12.7",
-    "purgecss-webpack-plugin": "^4.0.3",
+    "purgecss-webpack-plugin": "^4.1.1",
     "sweetalert2": "^11.2.1",
     "textfilljs": "^1.0.3-a",
     "typeface-roboto": "^1.1.13",
