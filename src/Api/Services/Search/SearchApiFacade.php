@@ -119,4 +119,5 @@ final class SearchApiFacade extends AbstractApiFacade
     {
         return $this->image_repository;
     }
+
 }
