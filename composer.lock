@@ -11123,16 +11123,16 @@
         },
         {
             "name": "symfony/swiftmailer-bundle",
-            "version": "v3.5.2",
+            "version": "v3.5.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "6b72355549f02823a2209180f9c035e46ca3f178"
+                "reference": "fa7d78cbdf0a16a4da126c465f25f6547ad69cf6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/6b72355549f02823a2209180f9c035e46ca3f178",
-                "reference": "6b72355549f02823a2209180f9c035e46ca3f178",
+                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/fa7d78cbdf0a16a4da126c465f25f6547ad69cf6",
+                "reference": "fa7d78cbdf0a16a4da126c465f25f6547ad69cf6",
                 "shasum": ""
             },
             "require": {
@@ -11183,7 +11183,7 @@
             "homepage": "http://symfony.com",
             "support": {
                 "issues": "https://github.com/symfony/swiftmailer-bundle/issues",
-                "source": "https://github.com/symfony/swiftmailer-bundle/tree/v3.5.2"
+                "source": "https://github.com/symfony/swiftmailer-bundle/tree/v3.5.3"
             },
             "funding": [
                 {
@@ -11199,7 +11199,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-01-25T17:31:39+00:00"
+            "time": "2021-12-02T16:23:52+00:00"
         },
         {
             "name": "symfony/templating",
