@@ -198,11 +198,11 @@ noReply: دا یو اتوماتیک پیغام دی - مهرباني وکړئ د
 accountConfirmation:
   subject: ستاسو د Catrobat حساب تصدیق
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    ګرانه  %username%.
+    د خپل حساب فعالولو پای ته رسولو لپاره - مهرباني وکړئ %confirmationUrl% ته مراجعه وکړئ
+    دا لینک یوازې یو ځل کارول کیدی شي ترڅو ستاسو حساب تایید کړي.
+    غوره احترامات،
+    ستاسو د Catrobat ټیم.
   messageHtml: |
     <p>
     Dear %username%.<br>
@@ -331,19 +331,19 @@ termsOfUse:
     item1: "زموږ ویب پاڼو ته د پروژې په اپلوډ کولو سره، تاسو دا منئ او موافق یاست چې دا کار د اپلوډ شوي کاټروبیټ پروژو ځینې وړیا جوازونو لاندې ترسره کړئ. د وړیا جوازونو په څیر چې لاندې د کیټروبیټ سیسټم پخپله تاسو ته شتون لري، د اپلوډ شوي کاټروبیټ پروژې دا وړیا جوازونه هرڅوک حق ورکوي چې د نورو لخوا اپلوډ شوي کار څخه زده کړه وکړي او د خپلو نوي زړه راښکونکو لوبو رامینځته کولو لپاره کار کولو او ریمکس کولو لپاره کار وکړي. متحرکات، او نورې پروژې. دا هرچا ته اجازه ورکوي چې 'د خپلو ملګرو په اوږو ودریږي'، یو له دوی څخه تاسو یاست! ستاسو کار به په دې توګه ټولې نړۍ ته ګټه ورسوي او د هرچا لپاره د کارولو لپاره وړیا پاتې شي، یو څه متن او انځورونو ته ورته وي چې د ټولې نړۍ رضاکارانو لخوا په وړیا توګه ویکیپیډیا کې مرسته شوې. دې ته د انسانیت لپاره د خپل ډالۍ په توګه فکر وکړئ: تاسو هرچا ته درکوي، او نور ټول هغه څوک چې خپل کار زموږ ویب پاڼې ته پورته کوي تاسو ته درکوي. په دې توګه یوه اپلوډ شوې پروژه د لوی ارزښت ډالۍ ده چې مالک یې تاسو ته وړیا درکوي، پدې شرط چې تاسو په ټولنه کې په ورته شرایطو کې برخه واخلئ."
     item2: تاسو اړتیا نلرئ ډالۍ قبول کړئ؛ که تاسو یې کوئ، ځینې مقررات پلي کیږي. د دې قواعدو ګټې دا دي چې تاسو کولی شئ له کار څخه زده کړئ او د دې لپاره جوړ کړئ ترڅو حتی یخ توکي پخپله جوړ کړئ، کوم چې تاسو کولی شئ، د بیلګې په توګه، زموږ ویب پاڼې ته بیا د خپل ځان په توګه اپلوډ کړئ. بله ګټه دا ده چې دا جوازونه ډاډ ترلاسه کوي چې تاسو د کومې ستونزې لپاره مسؤل نه یاست چې نورو ته ستاسو د پروژې کارولو له لارې رامینځته کیږي.
     item3: "یو مهم اضافي شرط دا دی چې تاسو په واضح ډول هغه لیکوالانو ته منسوب کړئ چې تاسو د خپل کار پراساس یاست. په ورته وخت کې، موږ به سخت کار وکړو ترڅو ستاسو کار د نورو لخوا په روښانه توګه ستاینه وشي چې تاسو یې مرسته کړې ده، د ځانګړي نوم په منسوبولو سره چې تاسو په آزاده توګه د کاټروبات په ټولنه کې ستاسو استازیتوب کولو لپاره غوره کړی، او نورو ته د فرصت په ورکولو سره. په عامه لارو کې له تاسو څخه د هرچا او په ځانګړي توګه دوی ته د خپل کار د ورکولو له امله مننه څرګند کړئ."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item4: 'مهرباني وکړئ د کره قانوني شرایطو او شرایطو لپاره د %link-licenseUploaded% سره مشوره وکړئ.'
   list4:
     item1: "موږ د کاټروبیټ سیسټم پورې اړوند خپل ټول سافټویر او انټرنیټ سرچینې وړاندې کوو، د بیلګې په توګه، د کاټروبیټ ټیم لخوا لیکل شوي سافټویر، زموږ ویب پاڼې او انټرنیټ سرچینې، د کاټروبیټ سیسټم پورې اړوند زموږ د سرچینې کوډ، او ټول اضافي شامل شوي توکي لکه، د بیلګې په توګه. ، انځورونه، غږونه او متنونه، اوس او په راتلونکي کې تاسو ته د Catrobat وړیا جوازونو لاندې."
     item2: دا جوازونه د کاټروباټ ټولې برخې تاسو ته وړیا او همدارنګه وړیا درکوي تاسو ته د دې په معنی چې تاسو ته یې د کارولو آزادي درکوي که څه هم تاسو یې غواړئ ، یوازې د یو څو محدودیتونو سره ډاډ ترلاسه کوي چې د نورو په مینځ کې ، د کاټروبیټ سیسټم به د تل لپاره وړیا وي. او د هرچا لپاره ګټور.
-    item3: 'Please consult %link-licenseToPlay% for the precise legal terms and conditions. The source code of the Catrobat system as well as many other documents and resources are available via %link-developer%.'
+    item3: 'مهرباني وکړئ د کره قانوني شرایطو او شرایطو لپاره %link-licenseToPlay% سره مشوره وکړئ. د Catrobat سیسټم سرچینه کوډ او همدارنګه ډیری نور اسناد او سرچینې د %link-developer% له لارې شتون لري.'
   list5:
     item1: 'که تاسو، یا، که تاسو د 13 کلونو څخه کم عمر لرئ، ستاسو مور او پالر یا قانوني ساتونکي، د هغه سازمان سره تړاو لري چې د ډریګنیټ ډول محرمیت سرغړونو او/یا ډیری یا ډله ایزې څارنې کې ښکیل وي یا مسؤل وي، نو بیا تاسو اجازه نلرئ چې زموږ څخه کار واخلئ. د سافټویر غوښتنلیکونه او زموږ خدماتو ته د لاسرسي لپاره. د دې محدودیت دقیق توضیحات او د دې لپاره ځینې استثناوې زموږ په %link-termsOfUse% کې په 4.a او 4.b برخو کې تشریح شوي.'
     item2: که تاسو د 13 کلونو څخه کم عمر لرئ، نو تاسو باید د خپل مور او پلار یا قانوني ساتونکو څخه وپوښتئ چې ایا دوی تاسو ته اجازه درکوي چې د Catrobat سافټویر غوښتنلیکونه او خدمات وکاروئ.
     item3: "موږ حق لرو چې زموږ په خپل اختیار کې هر وخت د کاټروباټ ویب پا و ته اپلوډ شوي پروژې ، کارونکي حسابونه ، او هر ډول ډیجیټل توکي رد کړو ، حذف کړو یا پټ کړو، د مثال په توګه که موږ ولیدل چې یوه پروژه نامناسب مواد لري یا دا چې یو کاروونکی سرغړونه کوي. د نورو خلکو حقونه."
     item4: "د Catrobat ټول سافټویر او انټرنیټ سرچینې په دې هیله وړاندیز کیږي چې ګټور وي، مګر پرته له کوم تضمین."
-    item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
+    item5: 'مهرباني وکړئ زموږ سره مشوره وکړئ %link-termsOfUse% س developer.catrobat.org/terms_of_use_and_service د پورتنیو ټکو دقیق فورمولونو او ځینې اضافي قانوني شرایطو او شرایطو لپاره.'
   bottom1: دلته وخت په وخت بیا وګورئ، ځکه چې موږ تل هڅه کوو چې زموږ د کارولو شرایط ښه کړو.
-  bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
+  bottom2: 'مهرباني وکړئ د دې کارونې شرایطو په اړه کوم وړاندیزونه %email-webmaster% ته واستوئ.'
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: لټون...
@@ -434,7 +434,7 @@ errors:
   file:
     unexpected: غیر متوقع فایل وموندل شو
     invalid: ناسمه دوتنه
-  image.missing: Project XML mentions a file which does not exist in project-folder
+  image.missing: پروژه XML هغه فایل ته اشاره کوي کوم چې د پروژې فولډر کې شتون نلري
   unknown: نامعلومه تېروتنه
   token: 'د وسیلې تصدیق ناکام شو: غلط تصدیق نښه!'
   uploadTokenAuthFailed: 'د ټوکن سند اپلوډ ناکام شو.'
@@ -608,15 +608,15 @@ privacy-policy:
   header: د پټتیا تګلاره
   version: Version 2.2, 17 October 2019
   text1: تاسو ته زموږ د خدماتو او اړوند حساب ټولې ګټې وړاندیز کولو لپاره ، دا اړینه ده چې له تاسو څخه ځینې معلومات راټول کړئ.
-  text2: To maintain and improve our services (apps and websites) and to do scientific research on ICT and STEM/STEAM education, we use Google Analytics, Crashlytics, and Firebase, all by Google LLC (USA), as well as Dynatrace by Dynatrace LLC (USA) to get metadata about the usage of our services, e.g., crash information, timestamps, visited pages/screens, usage of our apps and services, used operating system, and information about the network provider. This analysis and the collected data is not linked to your profile and does not contain any personal information (last bits of the IP address get anonymized). However, the collected data will get transferred to the service-providers (Google LLC, USA and Dynatrace LLC, USA). Data processing is based on agreements with Google LLC and Dynatrace LLC. This relationship to the service providers conforms to the European Union's General Data Protection Regulation (EU GDPR) and EU-USA "Privacy Shield" agreement.
+  text2: زموږ د خدماتو (ایپس او ویب پاڼو) ساتلو او ښه کولو لپاره او د ICT او STEM/STEAM تعلیم په اړه ساینسي څیړنې ترسره کولو لپاره، موږ د Google Analytics، Crashlytics، او Firebase څخه کار اخلو، ټول د Google LLC (USA) لخوا، او همدارنګه د Dynatrace LLC لخوا Dynatrace (. USA) زموږ د خدماتو کارولو په اړه د میټاډاټا ترلاسه کولو لپاره، د بیلګې په توګه، د حادثې معلومات، مهال ویش، لیدل شوي پاڼې/اسکرین، زموږ د ایپسونو او خدماتو کارول، کارول شوي عملیاتي سیسټم، او د شبکې چمتو کونکي په اړه معلومات. دا تحلیل او راټول شوي ډاټا ستاسو د پروفایل سره تړاو نلري او هیڅ شخصي معلومات نلري (د IP پتې وروستي بټونه نامعلوم کیږي). په هرصورت، راټول شوي ډاټا به د خدماتو چمتو کونکو ته لیږدول کیږي (Google LLC، USA او Dynatrace LLC، USA). د معلوماتو پروسس کول د ګوګل LLC او Dynatrace LLC سره د تړونونو پراساس دي. د خدماتو چمتو کونکو سره دا اړیکه د اروپایی اتحادیې د عمومي معلوماتو محافظت مقرراتو (EU GDPR) او EU-USA "د محرمیت شیلډ" تړون سره مطابقت لري.
   text3: زموږ په سیسټمونو کې د حساب رامینځته کولو او کارولو لپاره ، او تاسو ته په بریښنالیک کې ستاسو د حساب په اړه د اړینو بدلونونو په اړه خبر ورکولو لپاره ، د بیلګې په توګه زموږ د کارونې او خدماتو شرایطو تازه کول یا سرغړونې ، زموږ د ټولنې قواعد ، یا زموږ پالیسي، موږ به ستاسو ذخیره ذخیره کړو. کارن نوم او که ستاسو لخوا چمتو شوی وي، ستاسو بریښنالیک پته. که تاسو خپل حساب د ګوګل پلس یا فیسبوک له لارې وصل کړی وي، نو موږ په دې خدماتو کې ستاسو د حساب سره وصل د پیژندنې کیلي هم ذخیره کوو. موږ به دا معلومات د کوم بل (د بیلګې په توګه، بازار موندنه) موخو لپاره ونه کاروو، پرته لدې چې تاسو موږ ته په واضح ډول اجازه راکړئ چې دا کار وکړو.
   text4: په داوطلبانه توګه، تاسو کولی شئ موږ ته د شریکولو سایټ کې د خپل حساب پاڼې له لارې خپل د اوسیدو هیواد راکړئ. دا به ستاسو په عامه پروفایل کې ښکاره شي او یوازې زموږ لخوا د احصایې او څیړنې موخو لپاره کارول کیږي. دا ستاسو د پروفایل تنظیماتو کې هر وخت لرې کیدی شي.
   text5: تاسو کولی شئ په هر وخت کې په https://share.catrob.at کې د خپل پروفایل پاڼې له لارې خپل حساب حذف کولو سره ستاسو د حساب پورې اړوند شخصي معلوماتو کارول بیرته واخلئ. د خپل حساب له مینځه وړلو وروسته به تاسو لاهم وکولی شئ چمتو شوي خدمات وکاروئ ، مګر د همکارۍ لپاره نه ، د مثال په توګه د برنامو اپلوډ کولو ، تبصرې کولو یا خوښولو له لارې. همدارنګه، ستاسو د حساب سره تړل شوي ټول چمتو شوي مواد، د بیلګې په توګه، اپلوډ شوي پروګرامونه، تبصرې، او نور به حذف شي.
-  text6: To avoid misuse of our services, e.g., through user contributed uploads or comments for illegal purposes, all user generated public data (uploads, comments) will be stored internally in a database, together with a timestamp and the used internet address. This data will not be used by or forwarded to any institutions, unless sufficiently illegal actions are reasonably suspected and officially entitled legal institutions request it based on applicable law. Each case will be thoroughly checked on an individual basis by us first.
-  text7: You can voluntarily subscribe to the Catrobat Newsletter, on https://catrob.at/newsletter provided by us through the MailChimp service (The Rocket Science Group LLC d/b/a MailChimp, USA). You will then receive updates on the Catrobat project and its services to your provided e-mail adress. You can withdraw the newsletter at any time by using the "unsubscribe" link in the footer of every newsletter. This newsletter is provided by MailChimp with whom we do have a data-processing agreement and who committed to the EU General Data Prodection Regulation and EU-USA "Privacy Shield". For further details on MailChimp please also look up MailChimp's Privacy Policy and Terms of Use.
-  text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
-  text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
-  text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
+  text6: زموږ د خدماتو څخه د ناوړه ګټې اخیستنې مخنیوي لپاره، د بیلګې په توګه، د غیرقانوني موخو لپاره د کاروونکي لخوا د اپلوډونو یا تبصرو له لارې، د کاروونکي ټول تولید شوي عامه ډاټا (اپلوډونه، تبصرې) به په ډیټابیس کې دننه ذخیره شي، د مهال ویش او کارول شوي انټرنیټ پته سره. دا معلومات به د هیڅ ادارې لخوا نه کارول کیږي یا لیږل کیږي، پرته لدې چې په کافي اندازه غیرقانوني کړنې په معقول ډول شکمن وي او په رسمي توګه حق لرونکي حقوقي ادارې د پلي شوي قانون پراساس د دې غوښتنه کوي. هره قضیه به لومړی زموږ لخوا په انفرادي ډول په کلکه وڅیړل شي.
+  text7: تاسو کولی شئ په داوطلبانه توګه د کاټروباټ نیوز لیټر کې ګډون وکړئ ، په https://catrob.at/newsletter کې چې زموږ لخوا د میل چیمپ خدمت له لارې چمتو شوي (د راکټ ساینس ګروپ LLC d/b/a MailChimp, USA). بیا به تاسو د کاټروباټ پروژې او د هغې خدماتو په اړه تازه معلومات ستاسو چمتو شوي بریښنالیک آدرس ته ترلاسه کړئ. تاسو کولی شئ د هرې خبرپاڼې په فوټر کې د "غیر ګډون" لینک په کارولو سره هر وخت خبر پاڼه بیرته واخلئ. دا خبر پاڼه د MailChimp لخوا چمتو شوې چې ورسره موږ د ډیټا پروسس کولو تړون لرو او څوک چې د EU عمومي ډیټا پروډیکشن مقرراتو او EU-USA "د محرمیت شیلډ" ته ژمن دی. د MailChimp په اړه د نورو جزیاتو لپاره مهرباني وکړئ د MailChimp د محرمیت پالیسي او د کارولو شرایط هم وګورئ.
+  text8: ټول خدمتونه د وړیا خلاصې سرچینې کاټروباټ پروژې لخوا د نړیوال کاټروبیټ ټولنې تر چتر لاندې چمتو شوي - ویرین زیور فرډرینګ فریر سافټویر ، یوه غیر انتفاعي غیر انتفاعي موسسه چې په ګراز، اتریش (اروپایي اتحادیه) کې جوړه شوې. زموږ پالیسۍ د EU او اتریش د معلوماتو محافظت قانون (GDPR) ته درناوی کوي. له موږ سره د تماس لپاره، مهرباني وکړئ contact@catrobat.org ته بریښنالیک واستوئ یا موږ ته د کاټروباټ، c/o د سافټویر ټیکنالوژۍ انسټیټیوټ، د ټیکنالوژۍ پوهنتون، انفیلډګاس 16b، A-8010 ګرز، اتریش (اروپایي اتحادیه) ته واستوئ ).
+  text9: په هغه صورت کې چې تاسو د ۱۴ کلنۍ څخه کم عمر لرئ، دا پالیسي باید د قانوني سرپرست (معمولا مور او پلار) لخوا ومنل شي.
+  text10: د Catrobat رسمي انګلیسي ژبې د محرمیت پالیسي په ویب کې د  %privacy_policy% لاندې شتون لري.
   disagree-text: د تایید پرته، موږ نشو کولی حساب جوړ کړو مګر اصلي ځانګړتیاوې لاهم د لاسرسي وړ دي.
 catro-notifications:
   markAsRead: "د لوستلو په توګه نښه کړئ"
@@ -647,7 +647,7 @@ media-packages:
     sm: کوچنی
     md: منځنی
     lg: لوی
-  theme-special: "%flavor% Theme Special"
+  theme-special: "%flavor% موضوع ځانګړې"
   search-results: د رسنیو کتابتون د لټون پایلې
   no-results: ستاسو لټون 0 پایلې راوګرځولې. مهرباني وکړئ یوازې د انګلیسي لټون اصطلاحات وکاروئ.
   download_these_files: خوندي کول
@@ -709,42 +709,42 @@ achievements:
         title: 'اپرېشن'
         description: 'یو څوک تعقیب کړئ او یوه پروژه اپلوډ کړئ'
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'هنرمند'
+        description: 'د ۱ کال لپاره فعال غړی'
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'ماسټر'
+        description: 'د ۴ کلونو لپاره فعال غړی'
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'لوی استاد'
+        description: 'د ۷ کلونو لپاره فعال غړی'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'نوښت'
+        description: 'خپل لومړی پروفایل عکس اضافه کړئ'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'نوی'
+        description: 'یو کارن حساب جوړ کړئ'
       coding_jam_09_2021:
-        title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        title: "کوډینګ جام '۲۱"
+        description: "د کوډینګ جام ۲۰۲۱ برخه اخیستونکی"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
-      title: Game
+      title: لوبه
     animation:
-      title: Animation
+      title: حرکت
     story:
-      title: Story
+      title: کیسه
     music:
-      title: Music
+      title: موسیقي
     art:
-      title: Art
+      title: هنر
     experimental:
-      title: Experimental
+      title: تجربوي
     tutorial:
-      title: Tutorial
+      title: ټیوټوریل
     coding_jam_09_2021:
-      title: "#catrobatfestival2021"
+      title: "ټیوټوریل"
 extensions:
   title: '{0} |{1} Extension |]1,Inf] Extensions'
   extension:
