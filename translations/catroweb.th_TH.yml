@@ -582,14 +582,14 @@ codeview:
   locals: 'คนในพื้นที่'
   globalVariables: 'ตัวแปรส่วนกลาง'
   localVariables: 'ตัวแปรท้องถิ่น'
-  eventBricks: 'อิฐเหตุการณ์'
-  controlBricks: 'ควบคุมอิฐ'
-  motionBricks: 'อิฐเคลื่อนไหว'
-  soundBricks: 'อิฐเสียง'
-  looksBricks: 'ดูเหมือนอิฐ'
-  penBricks: 'อิฐปากกา'
+  eventBricks: 'คำสั่งเหตุการณ์'
+  controlBricks: 'คำสั่งควบคุม'
+  motionBricks: 'คำสั่งเคลื่อนไหว'
+  soundBricks: 'คำสั่งเสียง'
+  looksBricks: 'คำสั่งเงื่อนไข'
+  penBricks: 'คำสั่งปากกา'
   dataBricks: 'Databricks'
-  specialBricks: 'อิฐพิเศษ'
+  specialBricks: 'คำสั่งพิเศษ'
 codeStatistics:
   title: "สถิติรหัส"
   error: "ไม่สามารถแสดงสถิติรหัส"

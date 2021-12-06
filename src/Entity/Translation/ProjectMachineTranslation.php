@@ -15,7 +15,7 @@ class ProjectMachineTranslation extends MachineTranslation
 {
   /**
    * @ORM\ManyToOne(targetEntity="App\Entity\Program")
-   * @ORM\JoinColumn(name="project_id", referencedColumnName="id")
+   * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
    */
   protected Program $project;
 
