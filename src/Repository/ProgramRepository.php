@@ -45,6 +45,7 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+    $query_builder = $this->excludePoppyProjects($query_builder);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
     $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
 
@@ -437,6 +438,16 @@ class ProgramRepository extends ServiceEntityRepository
         ->setParameter('max_version', $max_version)
       ;
     }
+
+    return $query_builder;
+  }
+
+  private function excludePoppyProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%poppy playtime%"))
+    ;
 
     return $query_builder;
   }
