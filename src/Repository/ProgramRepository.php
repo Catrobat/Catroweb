@@ -449,6 +449,21 @@ class ProgramRepository extends ServiceEntityRepository
       ->setParameter('name', strtolower("%poppy playtime%"))
     ;
 
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%poppy%"))
+    ;
+
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%popy%"))
+    ;
+
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%laytime%"))
+    ;
+
     return $query_builder;
   }
 
