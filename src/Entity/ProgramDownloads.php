@@ -11,59 +11,64 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramDownloads
 {
-  use BaseRequestStatistics;
+  /**
+   * @ORM\Column(name="id", type="integer")
+   * @ORM\Id
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity="\App\Entity\Program", inversedBy="program_downloads")
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=false)
+   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   protected Program $program;
 
   /**
-   * @ORM\Column(type="integer", nullable=true)
+   * @ORM\ManyToOne(targetEntity="App\Entity\User")
+   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  protected ?int $recommended_by_page_id = null;
-
-  /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="recommended_by_program_id", referencedColumnName="id", nullable=true)
-   */
-  protected ?Program $recommended_by_program = null;
-
-  /**
-   * @ORM\Column(type="boolean", options={"default": false}, nullable=true)
-   */
-  protected bool $user_specific_recommendation = false;
-
-  /**
-   * @ORM\ManyToOne(targetEntity="\App\Entity\Program")
-   * @ORM\JoinColumn(name="rec_from_program_id", referencedColumnName="id", nullable=true)
-   */
-  protected ?Program $recommended_from_program_via_tag = null;
+  protected ?User $user = null;
 
   /**
    * @ORM\Column(type="datetime")
    */
   protected ?DateTime $downloaded_at = null;
 
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
+
+  public function setId(int $id): ProgramDownloads
+  {
+    $this->id = $id;
+
+    return $this;
+  }
+
   public function getProgram(): Program
   {
     return $this->program;
   }
 
-  public function setProgram(Program $program): void
+  public function setProgram(Program $program): ProgramDownloads
   {
     $this->program = $program;
+
+    return $this;
   }
 
-  public function getRecommendedFromProgramViaTag(): ?Program
+  public function getUser(): ?User
   {
-    return $this->recommended_from_program_via_tag;
+    return $this->user;
   }
 
-  public function setRecommendedFromProgramViaTag(?Program $recommended_from_program_via_tag): void
+  public function setUser(?User $user): ProgramDownloads
   {
-    $this->recommended_from_program_via_tag = $recommended_from_program_via_tag;
+    $this->user = $user;
+
+    return $this;
   }
 
   public function getDownloadedAt(): ?DateTime
@@ -71,38 +76,10 @@ class ProgramDownloads
     return $this->downloaded_at;
   }
 
-  public function setDownloadedAt(?DateTime $downloaded_at): void
+  public function setDownloadedAt(?DateTime $downloaded_at): ProgramDownloads
   {
     $this->downloaded_at = $downloaded_at;
-  }
 
-  public function getRecommendedByPageId(): ?int
-  {
-    return $this->recommended_by_page_id;
-  }
-
-  public function setRecommendedByPageId(int $recommended_by_page_id): void
-  {
-    $this->recommended_by_page_id = $recommended_by_page_id;
-  }
-
-  public function getRecommendedByProgram(): ?Program
-  {
-    return $this->recommended_by_program;
-  }
-
-  public function setRecommendedByProgram(Program $recommended_by_program): void
-  {
-    $this->recommended_by_program = $recommended_by_program;
-  }
-
-  public function getUserSpecificRecommendation(): bool
-  {
-    return $this->user_specific_recommendation;
-  }
-
-  public function setUserSpecificRecommendation(bool $is_user_specific_recommendation): void
-  {
-    $this->user_specific_recommendation = $is_user_specific_recommendation;
+    return $this;
   }
 }

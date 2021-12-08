@@ -207,7 +207,7 @@ class ProgramManager
     $program->setRemixMigratedAt(null);
     $program->setFlavor($request->getFlavor());
     $program->setDebugBuild($extracted_file->isDebugBuild());
-    $this->addTags($program, $extracted_file, $request->getLanguage());
+    $this->addTags($program, $extracted_file);
 
     $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
 
@@ -283,6 +283,8 @@ class ProgramManager
 
   /**
    * Adds a new program from a scratch_program. Doesn't add the Project file.
+   *
+   * @throws Exception
    */
   public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
   {
@@ -346,7 +348,7 @@ class ProgramManager
   /**
    * @return ProgramLike[]
    */
-  public function findUserLikes(string $project_id, string $user_id)
+  public function findUserLikes(string $project_id, string $user_id): array
   {
     return $this->program_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
   }
@@ -393,10 +395,7 @@ class ProgramManager
     return $this->program_like_repository->totalLikeCount($program_id);
   }
 
-  /**
-   * @param mixed $language
-   */
-  public function addTags(Program $program, ExtractedCatrobatFile $extracted_file, $language): void
+  public function addTags(Program $program, ExtractedCatrobatFile $extracted_file): void
   {
     $tags = $extracted_file->getTags();
 
@@ -622,10 +621,14 @@ class ProgramManager
     $this->save($program);
   }
 
-  public function increaseDownloads(Program $program): void
+  public function increaseDownloads(Program $program, ?User $user): void
   {
     $program->setDownloads($program->getDownloads() + 1);
-    $this->save($program);
+    $download = new ProgramDownloads();
+    $download->setUser($user);
+    $download->setProgram($program);
+    $download->setDownloadedAt(new DateTime('now'));
+    $this->save($program, $download);
   }
 
   public function increaseApkDownloads(Program $program): void
@@ -634,9 +637,12 @@ class ProgramManager
     $this->save($program);
   }
 
-  public function save(Program $program): void
+  public function save(Program $program, ProgramDownloads $downloads = null): void
   {
     $this->entity_manager->persist($program);
+    if (!is_null($downloads)) {
+      $this->entity_manager->persist($downloads);
+    }
     $this->entity_manager->flush();
   }
 
@@ -658,16 +664,6 @@ class ProgramManager
   public function searchExtensionCount(string $query): int
   {
     return $this->program_repository->searchExtensionCount($query);
-  }
-
-  public function getRecommendedProgramsById(string $id, string $flavor, ?int $limit, ?int $offset): array
-  {
-    return $this->program_repository->getRecommendedProgramsById($id, $flavor, $limit, $offset);
-  }
-
-  public function getRecommendedProgramsCount(string $id, string $flavor): int
-  {
-    return $this->program_repository->getRecommendedProgramsCount($id, $flavor);
   }
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array

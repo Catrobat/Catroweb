@@ -4,13 +4,11 @@ namespace App\Repository;
 
 use App\Catrobat\Requests\AppRequest;
 use App\Entity\Program;
-use App\Entity\ProgramDownloads;
 use App\Entity\ProgramLike;
 use App\Entity\ScratchProgramRemixRelation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,6 +45,7 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+    $query_builder = $this->excludePoppyProjects($query_builder);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
     $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
 
@@ -299,9 +298,6 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder->getQuery()->getResult();
   }
 
-  // -------------------------------------------------------------------------------------------------------------------
-  //  Recommender System
-  //
   public function getMostLikedPrograms(?string $flavor, string $max_version, int $limit = 0, int $offset = 0): array
   {
     $query_builder = $this->createQueryBuilder('e');
@@ -325,48 +321,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
   {
-    $query_builder = $this->createQueryBuilder('e');
-
-    $query_builder
-      ->select(['e as program', 'COUNT(e.id) as user_download_count'])
-      ->innerJoin(
-        ProgramDownloads::class, 'd1',
-        Join::WITH, $query_builder->expr()->eq('e.id', 'd1.program')->__toString()
-      )
-      ->innerJoin(
-        ProgramDownloads::class, 'd2',
-        Join::WITH, $query_builder->expr()->eq('d1.user', 'd2.user')->__toString()
-      )
-      ->where($query_builder->expr()->eq('e.visible', $query_builder->expr()->literal(true)))
-      ->andWhere($query_builder->expr()->isNotNull('d1.user'))
-      ->andWhere($query_builder->expr()->neq('d1.user', ':user'))
-      ->andWhere($query_builder->expr()->neq('d1.program', 'd2.program'))
-      ->andWhere($query_builder->expr()->eq('d2.program', ':program'))
-    ;
-
-    $query_builder = $this->excludePrivateProjects($query_builder);
-    $query_builder = $this->setFlavorConstraint($query_builder, $flavor);
-    $query_builder = $this->excludeDebugProjects($query_builder);
-
-    $query_builder
-      ->groupBy('e.id')
-      ->orderBy('user_download_count', 'DESC')
-      ->setParameter('user', $program->getUser())
-      ->setParameter('program', $program)
-      ->distinct()
-    ;
-
-    if ($offset > 0) {
-      $query_builder->setFirstResult($offset);
-    }
-
-    if (!is_null($limit) && $limit > 0) {
-      $query_builder->setMaxResults($limit);
-    }
-
-    $results = $query_builder->getQuery()->getResult();
-
-    return array_map(fn ($result) => $result['program'], $results);
+    return []; // disabled
   }
 
   public function filterVisiblePrograms(array $programs, string $max_version = ''): array
@@ -387,90 +342,6 @@ class ProgramRepository extends ServiceEntityRepository
     }
 
     return $filtered_programs;
-  }
-
-  public function getRecommendedProgramsCount(string $id, string $flavor = 'pocketcode'): int
-  {
-    $db_query = $this->createRecommendedProgramQuery($id, $flavor);
-
-    return is_countable($db_query->getResult()) ? count($db_query->getResult()) : 0;
-  }
-
-  public function getRecommendedProgramsById(string $id, string $flavor, ?int $limit, ?int $offset): array
-  {
-    $db_query = $this->createRecommendedProgramQuery($id, $flavor);
-
-    $db_query->setFirstResult($offset);
-    $db_query->setMaxResults($limit);
-
-    $id_list = array_map(fn ($value) => $value['id'], $db_query->getResult());
-
-    $programs = [];
-    foreach ($id_list as $id) {
-      $programs[] = $this->find($id);
-    }
-
-    return $programs;
-  }
-
-  private function createRecommendedProgramQuery(string $id, string $flavor): Query
-  {
-    $qb_tags = $this->createQueryBuilder('e');
-
-    $result = $qb_tags
-      ->select('t.id')
-      ->leftJoin('e.tags', 't')
-      ->where($qb_tags->expr()->eq('e.id', ':id'))
-      ->setParameter('id', $id)
-      ->getQuery()
-      ->getResult()
-    ;
-
-    $qb_extensions = $this->createQueryBuilder('e');
-
-    $result_2 = $qb_extensions
-      ->select('x.id')
-      ->leftJoin('e.extensions', 'x')
-      ->where($qb_tags->expr()->eq('e.id', ':id'))
-      ->setParameter('id', $id)
-      ->getQuery()
-      ->getResult()
-    ;
-
-    $tag_ids = array_map('current', $result);
-    $extensions_id = array_map('current', $result_2);
-
-    $debug_where = (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) ? 'AND e.debug_build = false' : '';
-    $flavor_where = '' !== trim($flavor) ? 'AND e.flavor = :flavor' : '';
-
-    $dql = 'SELECT COUNT(e.id) cnt, e.id
-      FROM App\Entity\Program e
-      LEFT JOIN e.tags t
-      LEFT JOIN e.extensions x
-      WHERE (
-        t.id IN (:tag_ids)
-        OR x.id IN (:extension_ids)
-      ) '
-      .$flavor_where.'
-      AND e.id != :id
-      AND e.private = false
-      AND e.visible = TRUE '
-      .$debug_where.'  
-      GROUP BY e.id
-      ORDER BY cnt DESC';
-
-    $qb_program = $this->createQueryBuilder('e');
-    $db_query = $qb_program->getEntityManager()->createQuery($dql);
-
-    $db_query->setParameter('id', $id);
-    $db_query->setParameter('tag_ids', $tag_ids);
-    $db_query->setParameter('extension_ids', $extensions_id);
-
-    if ('' !== trim($flavor_where)) {
-      $db_query->setParameter('flavor', $flavor);
-    }
-
-    return $db_query;
   }
 
   //
@@ -567,6 +438,31 @@ class ProgramRepository extends ServiceEntityRepository
         ->setParameter('max_version', $max_version)
       ;
     }
+
+    return $query_builder;
+  }
+
+  private function excludePoppyProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%poppy playtime%"))
+    ;
+
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%poppy%"))
+    ;
+
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%popy%"))
+    ;
+
+    $query_builder
+      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
+      ->setParameter('name', strtolower("%laytime%"))
+    ;
 
     return $query_builder;
   }

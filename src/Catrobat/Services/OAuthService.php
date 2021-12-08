@@ -245,9 +245,8 @@ class OAuthService
         $locale = substr($locale, 0, 180);
         $user->setUsername($googleUsername);
       }
-      if ('' === $user->getCountry() && 'NO_GOOGLE_LOCALE' !== $locale) {
+      if ('NO_GOOGLE_LOCALE' !== $locale) {
         $locale = substr($locale, 0, 5);
-        $user->setCountry($locale);
       }
 
       $user->setGplusUid($googleId);
@@ -276,7 +275,6 @@ class OAuthService
       $user->setEmail($googleEmail);
       $user->setPlainPassword(Utils::randomPassword());
       $user->setEnabled(true);
-      $user->setCountry($locale);
       if ($id_token) {
         $user->setGplusIdToken($id_token);
       }

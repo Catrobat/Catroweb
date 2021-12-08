@@ -145,6 +145,14 @@ class CommentsController extends AbstractController
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
+    $response = new JsonResponse();
+    $response->setEtag(md5($comment->getText()).$target_language);
+    $response->setPublic();
+
+    if ($response->isNotModified($request)) {
+      return $response;
+    }
+
     try {
       $translation_result = $translation_delegate->translate($comment->getText(), $source_language, $target_language);
     } catch (InvalidArgumentException $exception) {
@@ -155,7 +163,7 @@ class CommentsController extends AbstractController
       return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
     }
 
-    return new JsonResponse([
+    return $response->setData([
       'id' => $comment->getId(),
       'source_language' => $source_language ?? $translation_result->detected_source_language,
       'target_language' => $target_language,

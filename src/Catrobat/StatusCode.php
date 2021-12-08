@@ -118,7 +118,6 @@ class StatusCode
   public const NOTES_AND_CREDITS_TOO_LONG = 707;
 
   //8xx
-  public const USER_COUNTRY_INVALID = 801;
   public const USER_PASSWORD_NOT_EQUAL_PASSWORD2 = 802;
   public const USERNAME_NOT_FOUND = 803;
   public const USERNAME_INVALID = 804;

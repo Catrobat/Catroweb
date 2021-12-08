@@ -5,8 +5,8 @@
 
 // eslint-disable-next-line no-unused-vars
 function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, remixNotAvailableTitle,
-  remixNotAvailableDescription, remixNotAvailable, remixUnknownUser, pleaseWait, remixGraphPageId,
-  detailsUrlTemplate, pathStats, programRemixGraphUrl, remixGraphCountUrl) {
+  remixNotAvailableDescription, remixNotAvailable, remixUnknownUser, pleaseWait,
+  detailsUrlTemplate, programRemixGraphUrl, remixGraphCountUrl) {
   const self = this
   self.programId = programId
   self.remixOk = remixOk
@@ -18,9 +18,7 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
   self.remixNotAvailable = remixNotAvailable
   self.remixUnknownUser = remixUnknownUser
   self.pleaseWait = pleaseWait
-  self.recommendedByRemixGraphPageId = remixGraphPageId
   self.detailsUrlTemplate = detailsUrlTemplate
-  self.pathStats = pathStats
   self.programRemixGraphUrl = programRemixGraphUrl
   self.remixGraphCountUrl = remixGraphCountUrl
 
@@ -56,9 +54,13 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
       const networkDirector = new NetworkDirector()
       const remixGraph = RemixGraph.getInstance()
 
-      remixGraph.init(self.programId, self.recommendedByRemixGraphPageId,
-        'remix-graph-container', 'remix-graph-layer',
-        self.detailsUrlTemplate, self.pathStats, remixGraphTranslations)
+      remixGraph.init(
+        self.programId,
+        'remix-graph-container',
+        'remix-graph-layer',
+        self.detailsUrlTemplate,
+        remixGraphTranslations
+      )
 
       remixGraph.destroy()
       if (cachedRemixData != null) {
