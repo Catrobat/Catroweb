@@ -27,7 +27,7 @@ class DownloadLogController extends AbstractController
     $fileName = $request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();
-    if (($finder->files()->in($path)->depth('< 2')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults())) {
+    if (($finder->files()->in($path)->depth('>= 1')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults())) {
       $file = new File($path.$fileName);
       if ($file->isFile()) {
         $response = new BinaryFileResponse($file);
