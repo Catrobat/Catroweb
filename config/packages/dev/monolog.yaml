@@ -20,7 +20,7 @@
 #
 
 monolog:
-  channels: [upload, download_stats]
+  channels: [upload, search, download_stats]
   handlers:
 
     # logging in your browser
@@ -49,6 +49,14 @@ monolog:
       level: debug
       max_files: 5
       channels: [upload]
+      formatter: monolog.formatter.catrobat_custom_formatter
+
+    search:
+      type: rotating_file
+      path: "%kernel.logs_dir%/%kernel.environment%/search/%kernel.environment%.log"
+      level: debug
+      max_files: 60
+      channels: [search]
       formatter: monolog.formatter.catrobat_custom_formatter
 
     download_stats:

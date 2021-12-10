@@ -24,6 +24,14 @@ monolog:
       channels: [upload]
       formatter: monolog.formatter.catrobat_custom_formatter
 
+    search:
+      type: rotating_file
+      path: "%kernel.logs_dir%/%kernel.environment%/search/%kernel.environment%.log"
+      level: debug
+      max_files: 60
+      channels: [ search ]
+      formatter: monolog.formatter.catrobat_custom_formatter
+
     download_stats:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/download_stats/download_stats.log"
