@@ -8,8 +8,6 @@ use App\Catrobat\StatusCode;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -27,9 +25,6 @@ class DownloadProgramController extends AbstractController
   /**
    * @Route("/download/{id}.catrobat", name="download", options={"expose": true}, defaults={"_format": "json"},
    * methods={"GET"})
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
    *
    * @return BinaryFileResponse|JsonResponse
    */

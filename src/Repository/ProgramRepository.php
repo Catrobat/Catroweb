@@ -445,23 +445,18 @@ class ProgramRepository extends ServiceEntityRepository
   private function excludePoppyProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
   {
     $query_builder
-      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
-      ->setParameter('name', strtolower("%poppy playtime%"))
+      ->andWhere($query_builder->expr()->notlike("LOWER({$alias}.name)", ':name1'))
+      ->setParameter('name1', '%poppy%')
     ;
 
     $query_builder
-      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
-      ->setParameter('name', strtolower("%poppy%"))
+      ->andWhere($query_builder->expr()->notlike("LOWER({$alias}.name)", ':name2'))
+      ->setParameter('name2', '%popy%')
     ;
 
     $query_builder
-      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
-      ->setParameter('name', strtolower("%popy%"))
-    ;
-
-    $query_builder
-      ->andWhere($query_builder->expr()->notlike($alias.'.name', ':name'))
-      ->setParameter('name', strtolower("%laytime%"))
+      ->andWhere($query_builder->expr()->notlike("LOWER({$alias}.name)", ':name3'))
+      ->setParameter('name3', '%ppopi%')
     ;
 
     return $query_builder;
