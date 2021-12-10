@@ -52,14 +52,15 @@ class LogsController extends CRUDController
       $file = $allFiles[0];
     }
 
-    return $this->renderWithExtraParams('Admin/logs.html.twig',
-      ['files' => $allFiles, 'content' => $this->getLogFileContent($file, self::LOG_DIR, $searchParam)]);
+    return $this->renderWithExtraParams('Admin/logs.html.twig', [
+      'files' => $allFiles, 'content' => $this->getLogFileContent($file, self::LOG_DIR, $searchParam), ]
+    );
   }
 
   protected function getAllFilesInDirByPattern(string $dir, string $pattern): array
   {
     $finder = new Finder();
-    $finder->files()->in($dir)->depth('< 2')->name($pattern);
+    $finder->files()->in($dir)->depth('>= 1')->name($pattern);
     $finder->sortByName();
 
     $files = [];
