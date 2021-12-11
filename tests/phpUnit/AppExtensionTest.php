@@ -27,7 +27,7 @@ class AppExtensionTest extends TestCase
 
   public function testLanguageOptions(): void
   {
-    $short = 'de';
+    $short = 'de_DE';
 
     $appExtension = $this->createAppExtension($short);
     $language_options = $appExtension->getLanguageOptions();
@@ -65,7 +65,7 @@ class AppExtensionTest extends TestCase
    */
   public function germanMustBeSelected(): void
   {
-    $short = 'de';
+    $short = 'de_DE';
     $notShort = 'en_GB';
 
     $app_extension = $this->createAppExtension($short);
