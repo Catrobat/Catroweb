@@ -125,18 +125,21 @@ class LogsControllerTest extends CatrowebTestCase
    */
   public function testGetAllLogFiles(): void
   {
-    $logDir = 'var/log/LogFilesTest/';
-    $logFilesList = ['test1.log', 'test2.log'];
+    $logDir = 'var/log/test/';
+    $logFilesList = ['test-phpunit-1.log', 'test-phpunit-2.log'];
     $fs = new Filesystem();
     if (!$fs->exists($logDir)) {
       $fs->mkdir($logDir, 0775);
-      foreach ($logFilesList as $file) {
-        $fs->touch($logDir.$file);
-      }
     }
 
-    $allFiles = $this->invokeMethod($this->object, 'getAllFilesInDirByPattern', [$logDir, '*.log']);
-    $this->assertSame($logFilesList, $allFiles);
+    foreach ($logFilesList as $file) {
+      $fs->touch($logDir.$file);
+    }
+
+    $allFiles = $this->invokeMethod($this->object, 'getAllFilesInDirByPattern', ['var/log/', '*.log']);
+    foreach ($logFilesList as $file) {
+      $this->assertContains('test/'.$file, $allFiles);
+    }
     $fs->remove($logDir);
   }
 }
