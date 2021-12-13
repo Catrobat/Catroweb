@@ -45,7 +45,6 @@ class ProgramRepository extends ServiceEntityRepository
   {
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
-    $query_builder = $this->excludePoppyProjects($query_builder);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
     $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
 
@@ -438,26 +437,6 @@ class ProgramRepository extends ServiceEntityRepository
         ->setParameter('max_version', $max_version)
       ;
     }
-
-    return $query_builder;
-  }
-
-  private function excludePoppyProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
-  {
-    $query_builder
-      ->andWhere($query_builder->expr()->notlike("LOWER({$alias}.name)", ':name1'))
-      ->setParameter('name1', '%poppy%')
-    ;
-
-    $query_builder
-      ->andWhere($query_builder->expr()->notlike("LOWER({$alias}.name)", ':name2'))
-      ->setParameter('name2', '%popy%')
-    ;
-
-    $query_builder
-      ->andWhere($query_builder->expr()->notlike("LOWER({$alias}.name)", ':name3'))
-      ->setParameter('name3', '%ppopi%')
-    ;
 
     return $query_builder;
   }
