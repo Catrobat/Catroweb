@@ -16,8 +16,8 @@ tutorials: اسباق
 googlePlay: گوگل پلے
 iosAppStore: IOS ایپ اسٹور
 huaweiAppGallery: Huawei ایپ گیلری
-instagram: Instagram
-discordChat: Discord chat
+instagram: انسٹاگرام
+discordChat: چارٹ ختم کریں
 passwordsNoMatch: خفیہ کوڈ مشابہ نہیں۔
 error: خرابی
 cancel: منسوخ
@@ -181,7 +181,7 @@ programs:
   link: کلپ بورڈ پر پراجیکٹ لنک کاپی کریں
   reactionsText: ردعمل
   downloadErrorText: منصوبے کو ڈاؤن لوڈ کرتے ہوئے خرابی ہوئی. براہ کرم کچھ دیر بعد کوشش کریں.
-  downloadStartText: Download has started...
+  downloadStartText: ڈاؤن لوڈ شروع ہو گیا ہے۔
   showTranslation: ترجمہ دکھائیں
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
@@ -386,16 +386,16 @@ login:
   passwordFirst: خفیہ کوڈ
   passwordSecond: پاس ورڈ کی تصدیق
 register:
-  title: Sign up
+  title: نیا اکاؤنٹ بنانے
   button:
     cancel: منسوخ
     createAccount: "اکاؤنٹ بنائیں\n"
 accountRecovery:
-  title: Account recovery
+  title: اکاؤنٹ کی بحالی
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
     cancel: منسوخ
-    submit: Recover password
+    submit: پاس ورڈ بحال کریں
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
   prepare: 'ایپ تیار کریں'
