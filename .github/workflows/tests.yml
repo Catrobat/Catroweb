@@ -43,7 +43,7 @@ jobs:
           docker save app.catroweb > catroweb-image.tar
 
       - name: Upload app.catroweb image
-        uses: actions/upload-artifact@v2.3.0
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: catroweb-image
           path: docker/catroweb-image.tar
@@ -94,7 +94,7 @@ jobs:
           docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage/phpunit --coverage-clover=tests/testreports/coverage/phpunit/coverage.xml
 
       - name: Upload code coverage report
-        uses: actions/upload-artifact@v2.3.0
+        uses: actions/upload-artifact@v2.3.1
         if: always()
         with:
           name: PhpUnitTestReport
@@ -292,7 +292,7 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v2.3.0
+      - uses: actions/upload-artifact@v2.3.1
         if: failure()
         with:
           name: screenshots_${{ matrix.testSuite }}
