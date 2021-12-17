@@ -13,7 +13,7 @@ education: Образование
 chat: Чат и форумы
 others: Другое
 tutorials: Помощь
-googlePlay: Google Play
+googlePlay: Google Play Маркет
 iosAppStore: Магазин приложений iOS
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
@@ -37,7 +37,7 @@ loginText: Войти
 privacyPolicy: Политика конфиденциальности
 imprint: Импринт
 programDetails: Подробности
-somethingWentWrong: 'Упс, что-то пошло не так.'
+somethingWentWrong: 'Ой, что-то пошло не так.'
 pleaseTryAgain: 'Попробуйте еще раз!'
 oldVersionError: 'Пожалуйста, обновите Pocket Code!'
 more: 'больше'
@@ -55,7 +55,7 @@ FollowersNotifications: 'Подписчики'
 LikeNotifications: 'Лайки'
 CommentNotifications: 'Комментарии'
 RemixNotifications: 'Ремиксы'
-wellDone: "Великолепно!"
+wellDone: "Хорошо сработано!"
 done: "Готово!"
 notificationsReadMessage: "Похоже, что у вас нет уведомлений."
 confirmMessage: "Да, удалить это"
@@ -66,7 +66,7 @@ pleaseWait: "Пожалуйста, подождите..."
 projects: "Проекты"
 oauthPopUpTitle: "Информация о входе с помощью учетной записи строннего ресурса."
 oauthInfo: 'Вы только что использовали учетную запись стороннего ресурса для входа. Мы создали случайное имя пользователя. Если вы хотите сменить имя пользователя или создать новый пароль для вашей учетной записи, пожалуйста, перейдите на страницу вашего профиля. Нажмите %link_start% здесь %link_end% , чтобы перейти на страницу вашего профиля'
-oauthHere: "Здесь"
+oauthHere: "здесь"
 statistics: "Статистика"
 indexPage:
   recommendedSection:
@@ -79,7 +79,7 @@ follower:
   follow: Подписаться
   username: Пользователь
   followsMe: Подписаны на меня
-  noFollowing: Вы ни на кого не подписаны.
+  noFollowing: Вы ни на кого не подписаны на данный момент.
   noFollowers: Сейчас у вас нет подписчиков 
   noOtherFollowing: В настоящее время нет подписанных пользователей.
   noOtherFollowers: Нет подписчиков
@@ -131,9 +131,9 @@ programs:
     downloaded: Самые скачиваемые
   random: Случайные проекты
   related: Связанные проекты
-  downloads: '%downloads% загрузок'
+  downloads: '%downloads% загрузки'
   sample: Примеры проектов
-  views: '%views% просмотров'
+  views: '%views% просмотры'
   likes:
     likersTitle: "Люди, которые отреагировали на этот проект"
     all: "Все"
@@ -150,7 +150,7 @@ programs:
   reportRadioButtonInappropriate: Это неуместно
   reportRadioButtonCopyright: Нарушение авторских прав
   reportRadioButtonSpam: Это спам
-  reportRadioButtonDislike: Мне не нравится
+  reportRadioButtonDislike: Мне это не нравится
   reportOwnProgram: Вы не можете отметить свой собственный проект.
   reportAlready: Вы уже отметили этот проект.
   reportDone: Вы сообщили об этом проекте!
@@ -267,7 +267,7 @@ profile:
     emailNotValid: Некорректный электронный адрес.
     emailMissing: Изменение электронного адреса отклонено. Вы должны иметь как минимум один подтвержденный электронный адрес.
     emailExists: E-mail уже используется.
-    usernameNotValid: Это имя пользователя недействительно
+    usernameNotValid: Это имя пользователя недействительно.
     usernameMissing: Необходимо указать имя пользователя.
     usernameExists: Это имя пользователя уже существует.
     usernameContainsEmail: Имя пользователя не должно содержать адрес электронной почты.
