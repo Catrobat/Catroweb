@@ -8,8 +8,6 @@ use App\Catrobat\StatusCode;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\User;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -28,13 +26,10 @@ class DownloadProgramController extends AbstractController
    * @Route("/download/{id}.catrobat", name="download", options={"expose": true}, defaults={"_format": "json"},
    * methods={"GET"})
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
    * @return BinaryFileResponse|JsonResponse
    */
   public function downloadProgramAction(Request $request, string $id, ProgramManager $program_manager,
-                                        ProgramFileRepository $file_repository, LoggerInterface $logger,
+                                        ProgramFileRepository $file_repository, LoggerInterface $downloadLogger,
                                         ExtractedFileRepository $extracted_file_repository)
   {
     /* @var $program Program */
@@ -50,7 +45,7 @@ class DownloadProgramController extends AbstractController
       }
       $file = $file_repository->getProjectZipFile($id);
     } catch (FileNotFoundException $fileNotFoundException) {
-      $logger->error('[FILE] failed to get program file with id: '.$id);
+      $downloadLogger->error('Failed to download program file with id: '.$id);
 
       return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
     }
@@ -74,8 +69,13 @@ class DownloadProgramController extends AbstractController
         'attachment; filename="'.$program->getId().'.catrobat"'
       );
 
+      $username = $this->getUser() ? $this->getUser()->getUsername() : '-';
+      $downloadLogger->debug("User \"{$username}\" downloaded project with ID \"{$id}\" successfully");
+
       return $response;
     }
+
+    $downloadLogger->error('File to download program with id: '.$id.'not found');
     throw new NotFoundHttpException();
   }
 }

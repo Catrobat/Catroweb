@@ -146,6 +146,7 @@ class AppExtension extends AbstractExtension
 
   public function getLanguageOptions(): array
   {
+    $hl_locale_code = null;
     $path = $this->translation_path;
     $current_language = $this->request_stack->getCurrentRequest()->getLocale();
 
@@ -157,22 +158,12 @@ class AppExtension extends AbstractExtension
       ->sortByName()
     ;
 
-    $isSelectedLanguage = false;
-
     $available_locales = Locales::getNames();
 
     $shortNames = [];
-    $current_language_exists = false;
     foreach ($finder as $translationFileName) {
       $shortName = $this->getShortLanguageNameFromFileName($translationFileName->getRelativePathname());
       $shortNames[] = $shortName;
-      if ($current_language === $shortName) {
-        $current_language_exists = true;
-      }
-    }
-
-    if (!$current_language_exists) {
-      $current_language = explode('_', $current_language)[0];
     }
 
     foreach ($shortNames as $shortName) {
@@ -180,26 +171,21 @@ class AppExtension extends AbstractExtension
         continue;
       }
 
-      $isSelectedLanguage = $current_language === $shortName;
-
-      if (strcmp($current_language, $shortName)) {
-        $isSelectedLanguage = true;
-      }
-
       // Is this locale available in Symfony?
       if (array_key_exists($shortName, $available_locales)) {
+        $hl_locale_code = $shortName;
         $shortName = $this->handleSpecialShortNames($shortName);
-        $locale = Locales::getName($shortName, $shortName);
-        $locale = $this->handleSpecialLocales($locale, $shortName);
+        $locale_name = Locales::getName($shortName, $shortName);
+        $locale_name = $this->handleSpecialLocales($locale_name, $shortName);
         $list[] = [
-          $shortName,
-          $locale,
-          0 === strcmp($current_language, $shortName),
+          $hl_locale_code, // We still need the full locale code for the automapping to work correctly
+          $locale_name,
+          0 === strcmp($current_language, $hl_locale_code),
         ];
       }
     }
 
-    if (!$isSelectedLanguage) {
+    if ($current_language !== $hl_locale_code) {
       $list = $this->setSelectedLanguage($list, $current_language);
     }
 

@@ -1,12 +1,12 @@
 monolog:
-  channels: [upload, download_stats]
+  channels: [ upload, search, download ]
   handlers:
 
     main:
-      type:  fingers_crossed
+      type: fingers_crossed
       action_level: error
       handler: nested
-      excluded_http_codes: [404, 405]
+      excluded_http_codes: [ 404, 405 ]
       buffer_size: 50 # How many messages should be saved? Prevent memory leaks
       formatter: monolog.formatter.catrobat_custom_formatter
 
@@ -18,24 +18,32 @@ monolog:
 
     upload:
       type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/upload/upload.log"
+      path: "%kernel.logs_dir%/%kernel.environment%/upload/%kernel.environment%.log"
       level: warning
       max_files: 60
-      channels: [upload]
+      channels: [ upload ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
-    download_stats:
+    search:
       type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/download_stats/download_stats.log"
+      path: "%kernel.logs_dir%/%kernel.environment%/search/%kernel.environment%.log"
       level: debug
       max_files: 60
-      channels: [download_stats]
+      channels: [ search ]
+      formatter: monolog.formatter.catrobat_custom_formatter
+
+    download:
+      type: rotating_file
+      path: "%kernel.logs_dir%/%kernel.environment%/download/%kernel.environment%.log"
+      level: debug
+      max_files: 60
+      channels: [ download ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
     console:
       type: console
       process_psr_3_messages: false
-      channels: ["!event", "!doctrine", "!console"]
+      channels: [ "!event", "!doctrine", "!console" ]
 
     deprecation:
       type: stream
@@ -44,4 +52,4 @@ monolog:
       type: filter
       handler: deprecation
       max_level: info
-      channels: ["php"]
+      channels: [ "php" ]
