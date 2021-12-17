@@ -2,6 +2,47 @@
 @import "../base/mixins";
 @import "~bootstrap/scss/mixins";
 
+.upload-project-image {
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(0 0 0 40%);
+  border-radius: 50%;
+
+  .button-show-ajax {
+    margin: 0 auto;
+  }
+
+  input {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    opacity: 0.001;
+  }
+}
+
+// Achievements tab:
+.horizontal-scrolling-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  > div {
+    flex: 0 0 auto;
+  }
+
+  > div + div {
+    margin-left: 1rem;
+  }
+}
+
+//
 .upload-image {
   position: relative;
   top: -45px;
@@ -25,19 +66,20 @@
     padding: 4px 15px;
     overflow: hidden;
     font-weight: $font-weight-bold;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px rgba(var(--primary), 0.8);
+    background-color: rgba(255 255 255 80%);
+    border: 1px rgba(var(--primary) 80%);
     border-radius: 5px;
+
     @include transition(width 250ms);
-    @include force-word-break();
+    @include force-word-break;
 
     &:hover {
       top: -2px;
       padding-top: 6px;
       padding-bottom: 6px;
       margin-bottom: -4px;
-      background-color: rgba(255, 255, 255, 0.95);
-      border: 1px rgba(var(--primary), 0.95);
+      background-color: rgba(255 255 255 95%);
+      border: 1px rgba(var(--primary) 95%);
     }
 
     input {
@@ -51,27 +93,6 @@
     }
   }
 }
-.upload-project-image {
-  position: absolute;
-  right: -20px;
-  bottom: 0;
-  width: 50px;
-  height: 50px;
-  background-color: rgba(0, 0, 0, 0.4);
-  border-radius: 50%;
-  .button-show-ajax {
-    margin: 0 auto;
-  }
-  input {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-    opacity: 0.001;
-  }
-}
 
 .visited-program {
   opacity: 0.6;
@@ -81,7 +102,7 @@
   }
 }
 
-/* my Profile Data, Edit */
+// my Profile Data, Edit
 
 .avatar-container {
   text-align: center;
@@ -114,7 +135,7 @@
   width: 100%;
 }
 
-/* My Programs */
+// My Programs
 
 .program {
   height: 160px !important;
@@ -134,7 +155,7 @@
     padding: 0;
     margin: 0;
     font-size: 2em;
-    background-color: rgba($white, 0.9);
+    background-color: rgba($white 90%);
     border-radius: 50%;
   }
 }
@@ -142,6 +163,7 @@
 .button-container {
   align-self: flex-end;
   text-align: right;
+
   button {
     margin-bottom: 0.2em;
   }
@@ -161,7 +183,7 @@
     padding: 0.5em;
     margin: 0;
     font-size: 1em;
-    color: rgba($white, 0.9) !important;
+    color: rgba($white 90%) !important;
     background-color: var(--primary);
     border-radius: 50%;
 
@@ -225,21 +247,4 @@
 
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
   color: var(--mdc-theme-primary);
-}
-
-
-// Achievements tab:
-.horizontal-scrolling-wrapper {
-  display: flex;
-  flex-wrap: nowrap;
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-
-  > div {
-    flex: 0 0 auto;
-  }
-
-  > div + div {
-    margin-left: 1rem;
-  }
 }
