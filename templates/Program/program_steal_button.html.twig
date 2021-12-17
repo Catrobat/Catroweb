@@ -1,3 +1,8 @@
-<div>
-    <button id="steal" class="btn btn-outline-primary btn-block">( ಠ◡ಠ ) Steal</button>
-</div>
+<button id="steal{{ suffix|default('') }}"
+        class="btn btn-outline-primary btn-block project-redirect"
+        data-url="{{ path( 'steal_project', {'id': program.id} ) }}"
+        data-button-id="#steal{{ suffix|default('') }}"
+        {% if my_program %}
+            disabled="disabled"
+        {% endif %}
+>( ಠ◡ಠ ) Steal</button>

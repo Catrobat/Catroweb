@@ -139,6 +139,36 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @Route("/project/steal/{id}", name="steal_project", defaults={"id": "0"})
+   *
+   * @throws ORMException
+   */
+  public function stealProject(Request $request, string $id): Response
+  {
+    /** @var Program $project */
+    $project = $this->program_manager->find($id);
+
+    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $logged_in = null !== $user;
+    $my_program = $logged_in && $project->getUser() === $user;
+
+    if ($logged_in) {
+      $likes = $this->program_manager->findUserLikes($project->getId(), $user->getId());
+      if (!$my_program) {
+        $project->setUser($user);
+        $this->program_manager->save($project);
+      }
+    }
+
+    return $this->redirectToRoute('program', [ "id" => $id ]);
+  }
+
+  /**
    * @Route("/project/like/{id}", name="project_like", methods={"GET"})
    *
    * @throws ORMException

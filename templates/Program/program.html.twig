@@ -86,9 +86,11 @@
       <div class="mt-3">
         {% include 'Program/program_sign_app_button.html.twig' %}
       </div>
-      <div class="mt-3">
-        {% include 'Program/program_steal_button.html.twig' %}
-      </div>
+      {% if logged_in %}
+        <div class="mt-3">
+          {% include 'Program/program_steal_button.html.twig' %}
+        </div>
+      {% endif %}
     </div>
   </div>
 
