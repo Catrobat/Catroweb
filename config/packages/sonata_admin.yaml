@@ -76,8 +76,6 @@ sonata_admin:
                     text: User
                     color: bg-green
 
-            # - { position: right, type: catrowebadmin.block.tools.statistic}
-
 
         groups:
 
