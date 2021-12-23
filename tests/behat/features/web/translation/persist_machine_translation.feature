@@ -67,3 +67,49 @@ Feature: Persist project and comment translation
       | comment_id | source_language | target_language | provider   | usage_count |
       | 1          | en              | fr-FR           | itranslate | 1           |
       | 2          | en              | fr-FR           | itranslate | 2           |
+
+  Scenario: Create new entry for etag cached response for project without source language
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider | usage_count |
+    And I have a request header "HTTP_IF_NONE_MATCH" with value '"eeb28b694e178d22952bf92a025a892cfr"'
+    When I request "GET" "/app/translate/project/1?target_language=fr"
+    Then the response status code should be "304"
+    And there should be project machine translations:
+      | project_id | source_language | target_language | provider | usage_count |
+      | 1          |                 | fr              | etag     | 1           |
+
+  Scenario: Increment usage count if etag cached response for project already exists
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider | usage_count |
+      | 1          |                 | fr              | etag     | 2           |
+      | 2          |                 | fr              | etag     | 1           |
+    And I have a request header "HTTP_IF_NONE_MATCH" with value '"eeb28b694e178d22952bf92a025a892cfr"'
+    When I request "GET" "/app/translate/project/1?target_language=fr"
+    Then the response status code should be "304"
+    And there should be project machine translations:
+      | project_id | source_language | target_language | provider | usage_count |
+      | 1          |                 | fr              | etag     | 3           |
+      | 2          |                 | fr              | etag     | 1           |
+
+  Scenario: Create new entry for etag cached response for comment without source language
+    Given there are comment machine translations:
+      | comment_id | source_language | target_language | provider | usage_count |
+    And I have a request header "HTTP_IF_NONE_MATCH" with value '"a9f7e97965d6cf799a529102a973b8b9fr"'
+    When I request "GET" "/app/translate/comment/1?target_language=fr"
+    Then the response status code should be "304"
+    And there should be comment machine translations:
+      | comment_id | source_language | target_language | provider | usage_count |
+      | 1          |                 | fr              | etag     | 1           |
+
+  Scenario: Increment usage count if etag cached response for comment already exists
+    Given there are comment machine translations:
+      | comment_id | source_language | target_language | provider | usage_count |
+      | 1          |                 | fr              | etag     | 2           |
+      | 2          |                 | fr              | etag     | 1           |
+    And I have a request header "HTTP_IF_NONE_MATCH" with value '"a9f7e97965d6cf799a529102a973b8b9fr"'
+    When I request "GET" "/app/translate/comment/1?target_language=fr"
+    Then the response status code should be "304"
+    And there should be comment machine translations:
+      | comment_id | source_language | target_language | provider | usage_count |
+      | 1          |                 | fr              | etag     | 3           |
+      | 2          |                 | fr              | etag     | 1           |
