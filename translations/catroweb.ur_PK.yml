@@ -384,7 +384,7 @@ register:
   title: نیا اکاؤنٹ بنانے
   button:
     cancel: منسوخ
-    createAccount: "اکاؤنٹ بنائیں\n"
+    createAccount: اکاؤنٹ بنائیں
 accountRecovery:
   title: اکاؤنٹ کی بحالی
   description: اگر آپ کو اپنے اکاؤنٹ کا ای میل یا صارف نام یاد ہے تو ہم آپ کو اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے ایک لنک بھیج سکتے ہیں۔
@@ -620,15 +620,15 @@ catro-notifications:
   noReactions: "ایسا لگتا ہے کہ آپ کے پاس کوئی ردعمل اطلاعات نہیں ہے."
   noRemixes: "ایسا لگتا ہے کہ آپ کے پاس کوئی ریمکس اطلاعات نہیں ہے."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% نے %program_link% پر تبصرہ کیا۔'
   like:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: '%user_link% اب آپ کی پیروی کر رہا ہے۔'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% نے ایک نیا گیم %program_link% بنایا۔'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% نے آپ کے گیم %remix_program_link% کا ایک ریمکس %program_link% بنایا۔'
 clipboard:
   success: کلپ بورڈ پر کاپی پروجیکٹ کا لنک!
   fail: کلپ بورڈ سے لنک کاپی کرنے میں ناکامی :(
@@ -666,7 +666,7 @@ share:
   success: 'اشتراک کامیاب'
 copy: 'لنک کاپی کریں'
 checkOutProject: 'بڑے پراجیکٹس چیک کریں'
-community: 'کاٹروبٹ کے تمام لوگ                      '
+community: 'کاٹروبٹ کے تمام لوگ'
 back_to_app: 'کمیونٹی سے باہر نکلیں'
 category:
   recent: تازہ ترین منصوبے
@@ -741,7 +741,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} ایکسٹینشن |]1,Inf] ایکسٹینشنز'
   extension:
     arduino:
       title: آردوانو
@@ -778,7 +778,7 @@ studio:
       no_comments: 'اس سٹوڈیو میں ابھی تک کوئی تبصرہ نہیں ہے۔'
       disabled_comments: 'اس اسٹوڈیو کے لیے تبصرے غیر فعال کر دیے گئے ہیں۔'
       post_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
-      delete_error: 'Try again. Something went wrong while removing the comment.'
+      delete_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
     activity_list:
       title: 'سرگرمیاں'
       join_studio: '%user% نے اسٹوڈیو میں شمولیت اختیار کی۔'
