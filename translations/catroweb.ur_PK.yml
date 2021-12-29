@@ -16,8 +16,8 @@ tutorials: اسباق
 googlePlay: گوگل پلے
 iosAppStore: IOS ایپ اسٹور
 huaweiAppGallery: Huawei ایپ گیلری
-instagram: Instagram
-discordChat: Discord chat
+instagram: انسٹاگرام
+discordChat: چارٹ ختم کریں
 passwordsNoMatch: خفیہ کوڈ مشابہ نہیں۔
 error: خرابی
 cancel: منسوخ
@@ -30,7 +30,7 @@ download: ڈاؤنلوڈ
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
 credits: Credits
-noCredits: No credits available.
+noCredits: کوئی نوٹس اور کریڈٹ دستیاب نہیں۔
 notesAndCreditsDescription: آپ نے اس منصوبے کو کیسے بنایا؟ کیا آپ نے دوسرے لوگوں سے خیالات، سکرپٹ یا آرٹ ورک کا استعمال کیا؟ یہاں ان کا شکریہ اداہ کریں۔
 country: ملک
 loginText: لاگ آن
@@ -50,14 +50,14 @@ ok: ٹھیک
 clickToDownloadProgram: 'مثال کے طور پر پروجیکٹ ڈاؤن لوڈ کرنے کے لئے %link_start% یہا %link_end% کلک کریں'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
 notifications: 'اطلاعات'
-allNotifications: 'All notifications'
+allNotifications: 'تمام'
 FollowersNotifications: 'پیروکاروں'
 LikeNotifications: 'ردعمل'
 CommentNotifications: 'تبصرے'
 RemixNotifications: 'ریمکسس'
 wellDone: "بہت اچھا!"
 done: "ہوگیا"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "ایسا لگتا ہے کہ آپ کے پاس کوئی اطلاع نہیں ہے۔"
 confirmMessage: "جی ہاں، اسے حذف کریں!"
 cancelMessage: "منسوخ"
 notificationsUnauthorizedError: "صارف کو اختیار کرنے میں ناکام"
@@ -125,7 +125,7 @@ programs:
     جی ہاں، اسے حذف کریں!
     منسوخ
   tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -138,7 +138,7 @@ programs:
     likersTitle: "جو لوگ اس منصوبے پر ردعمل کرتے ہیں"
     all: "تمام"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  newRemixesNotificationTitle: "{1}\"%programName%\" has 1 new remix: |]1,Inf] \"%programName%\" has %remixes% new remixes:\n"
   submitted: پیش کردہ منصوبے
   uploaded: اپ لوڈ کردہ منصوبے
   reportAsInappropriate: رپورٹ غیرموزوں ہے
@@ -169,19 +169,19 @@ programs:
   deleted_popup_header: حذف کر دیا گیا
   noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
   editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: محفوظ کریں
+  editCredits: پروجیکٹ کے نوٹس اور کریڈٹ میں ترمیم کریں۔
+  saveCredits: محفوظ کریں
   addComment: اپنی رائے لکھیں
   thumbsUp: بہت خوب!
   smile: مسکراہٹ!
   love: محبت!
-  wow: wooow!
+  wow: واہ!
   linkTitle: لنک
   link: کلپ بورڈ پر پراجیکٹ لنک کاپی کریں
   reactionsText: ردعمل
   downloadErrorText: منصوبے کو ڈاؤن لوڈ کرتے ہوئے خرابی ہوئی. براہ کرم کچھ دیر بعد کوشش کریں.
-  downloadStartText: Download has started...
+  downloadStartText: ڈاؤن لوڈ شروع ہو گیا ہے۔
   showTranslation: ترجمہ دکھائیں
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
@@ -199,49 +199,44 @@ noReply: یہ ایک خودکار پیغام ہے ۔ براہ مہربانی ا�
 accountConfirmation:
   subject: آپ کی catrobat اکاؤنٹ کی توثیق
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    پیارے صارف۔
+    اپنے اکاؤنٹ کو چالو کرنا مکمل کرنے کے لیے - براہ کرم %confirmation Url% دیکھیں
+    یہ لنک آپ کے اکاؤنٹ کی تصدیق کے لیے صرف ایک بار استعمال کیا جا سکتا ہے۔
+    نیک تمنائیں،
+    آپ کی کیٹروبیٹ ٹیم۔
   messageHtml: |
-    <p>
-    Dear %username%.<br>
-    <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
-    <br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
-    </p>
+    پیارے صارف:
+    اپنے اکاؤنٹ کو فعال کرنے کے لیے - براہ کرم یو آر ایل پر کلک کریں۔
+    یہ لنک آپ کے اکاؤنٹ کی تصدیق کے لیے صرف ایک بار استعمال کیا جا سکتا ہے۔
+    نیک تمنائیں،
+    آپ کی کیٹروبیٹ ٹیم۔
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    پیارے %username%.
+    آپ نے اپنا پاس ورڈ %application_url% پر دوبارہ ترتیب دینے کی درخواست کی ہے کیونکہ آپ اپنا پاس ورڈ بھول گئے ہیں۔
+    اگر آپ نے یہ درخواست نہیں کی ہے تو براہ کرم اسے نظر انداز کر دیں۔ یہ 24 گھنٹے میں ختم ہو جائے گا اور بیکار ہو جائے گا.
+    اپنا پاس ورڈ دوبارہ ترتیب دینے اور نیا بنانے کے لیے، براہ کرم درج ذیل صفحہ پر جائیں: %confirmationUrl%
+    آپ کسی بھی وقت %application_url% کمیونٹی تک رسائی کے لیے اپنا صارف نام اور پاس ورڈ استعمال کر سکتے ہیں۔
+    ایسا کرنے کے لیے، صرف درج ذیل صفحہ پر جائیں: %loginPage%
+    اپنے پروفائل کی تفصیلات میں ترمیم کرنے کے لیے، اس صفحہ پر جائیں: %profilePage%
+    نیک تمنائیں،
+    آپ کی کیٹروبیٹ ٹیم۔
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    محترم %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    آپ نے <a href=%appplication_url%>پاکٹ کوڈ</a> پر اپنا پاس ورڈ دوبارہ ترتیب دینے کی درخواست کی ہے کیونکہ آپ اپنا پاس ورڈ بھول گئے ہیں۔
+    اگر آپ نے یہ درخواست نہیں کی ہے تو براہ کرم اسے نظر انداز کر دیں۔ یہ 24 گھنٹے میں ختم ہو جائے گا اور بیکار ہو جائے گا۔<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    اپنا پاس ورڈ دوبارہ ترتیب دینے اور نیا بنانے کے لیے، براہ کرم <a href=%confirmationUrl%>یہاں کلک کریں۔</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    آپ <a href=%appplication_url%>پاکٹ کوڈ</a> کمیونٹی تک رسائی حاصل کرنے کے لیے کسی بھی وقت اپنا صارف نام اور اپنا پاس ورڈ استعمال کر سکتے ہیں۔<br>
+    ایسا کرنے کے لیے، صرف درج ذیل صفحہ پر جائیں: <a href=%loginPage%>لاگ ان صفحہ</a><br>
+    اپنے پروفائل کی تفصیلات میں ترمیم کرنے کے لیے، اس <a href=%profilePage%>صفحہ</a> پر جائیں۔<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    نیک تمنائیں،<br>
+    آپ کی کیٹروبیٹ ٹیم۔
     </p>
 profile:
   edit: اپنی پروفائل میں ترمیم کریں
@@ -324,7 +319,7 @@ termsOfUse:
     item3: تجربہ کی تمام سطحوں کے ساتھ
   list2:
     item1: احترام کرو. جب منصوبوں کا اشتراک کریں تو، براہ کرم یاد رکھیں کہ بہت سے مختلف عمر اور پس منظر کے لوگ آپ کے تعاون کو دیکھیں گے.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "کریڈٹ دیں۔ دوسرے لوگوں کے پروجیکٹس کے ترمیم شدہ ورژن بنانے کے لیے آزاد محسوس کریں - بس انہیں کریڈٹ دینا یقینی بنائیں۔ کریڈٹ دینے کے لیے ایک جگہ آپ کے پروجیکٹ کے نوٹس اور کریڈٹ سیکشن میں ہے۔ دوسرے صارفین کے منصوبوں میں ترمیم کرنے کے بارے میں تفصیلات کے لیے براہ کرم اس نقطے والی فہرست کے نیچے پیراگراف دیکھیں۔"
     item3: "ایماندار ہو. کسی کے علاوہ کسی دوسرے کا دعوی نہ کریں کہ آپ کون ہیں یا کمیونٹی کو چالنا چاہتے ہیں."
     item4: "ذاتی معلومات کو نجی رکھیں. اپنے ای میل ایڈریس، فون نمبر، یا دیگر ذاتی رابطے کی معلومات کا اشتراک نہ کریں."
     item5: "سائٹ دوستانہ رکھنے میں مدد کریں. اگر آپ محسوس کرتے ہیں کہ دوسروں کو ایک منصوبے یا تبصرہ کا مطلب، توہین، بھی تشدد، یا دوسری صورت میں نامناسب تلاش کریں گے، صرف 'غیر مناسب' بٹن پر کلک کریں اور مختصر وضاحت چھوڑ دیں. Catrobat ٹیم آپ کی رپورٹ کا جائزہ لیں گے اور کسی بھی منصوبے، تبصرہ، یا پوسٹ کو ہٹا دیں گے."
@@ -364,11 +359,11 @@ menu:
 login:
   login: لاگ اِن
   button:
-    loginNow: Login now
+    loginNow: ابھی لاگ ان کریں۔
     createAccount: "اکاؤنٹ بنائیں\n"
-    forgetPassword: Forget password?
+    forgetPassword: پاس ورڈ بھول گیا
   oauth:
-    title: Or you can join with
+    title: یا آپ شامل ہو سکتے ہیں۔
   passOrUser: آپ کا پاس ورڈ یا صارف نام غلط تھا۔
   noUsername: آپکا یوزر نیم یا ای میل نہیں ملا.
   forgotPass: صارف نام یا خفیہ کوڈ بھول گئے ہیں؟
@@ -386,16 +381,16 @@ login:
   passwordFirst: خفیہ کوڈ
   passwordSecond: پاس ورڈ کی تصدیق
 register:
-  title: Sign up
+  title: نیا اکاؤنٹ بنانے
   button:
     cancel: منسوخ
     createAccount: "اکاؤنٹ بنائیں\n"
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: اکاؤنٹ کی بحالی
+  description: اگر آپ کو اپنے اکاؤنٹ کا ای میل یا صارف نام یاد ہے تو ہم آپ کو اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے ایک لنک بھیج سکتے ہیں۔
   button:
     cancel: منسوخ
-    submit: Recover password
+    submit: پاس ورڈ بحال کریں
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
   prepare: 'ایپ تیار کریں'
@@ -457,11 +452,11 @@ success:
   imgUpload: آپ کی تصویر کامیابی سے اپ لوڈ کی گئی تھی!
   report: آپکی رپورٹ کامیابی سے بھیج دی گئی!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 منٹ پہلے |{1}1 منٹ پہلے |]1,Inf] %count% منٹ پہلے'
+  hours.ago: "{1}1 گھنٹہ پہلے |]1,Inf] %count% گھنٹے پہلے\n"
+  days.ago: '{1}1 دن پہلے |]1,Inf] %count% دن پہلے'
+  months.ago: '{1}1 مہینہ پہلے |]1,Inf] %count% مہینے پہلے'
+  years.ago: '{1}1 سال پہلے |]1,Inf] ایک سال سے زیادہ پہلے'
 failure:
   upload: آپ کے ایپ کے اپ لوڈ کے دوران ایک غلطی تھی.
 api:
@@ -577,13 +572,13 @@ codeview:
   globalVariables: 'عالمی متغیر'
   localVariables: 'مقامی متغیر'
   eventBricks: 'ایونٹ اینٹوں'
-  controlBricks: 'Control bricks'
-  motionBricks: 'Motion bricks'
-  soundBricks: 'Sound bricks'
-  looksBricks: 'Looks bricks'
-  penBricks: 'Pen bricks'
-  dataBricks: 'Data bricks'
-  specialBricks: 'Special bricks'
+  controlBricks: 'کنٹرول کی اینٹیں'
+  motionBricks: 'حرکت کی اینٹیں'
+  soundBricks: 'آواز کی اینٹیں'
+  looksBricks: 'شکل کی اینٹیں'
+  penBricks: 'قلم کی اینٹیں'
+  dataBricks: 'ڈیٹا کی اینٹیں'
+  specialBricks: 'خصوصی اینٹیں'
 codeStatistics:
   title: "کوڈ کے اعداد و شمار"
   error: "کوڈ کے اعداد و شمار کو ظاہر نہیں کیا جا سکتا."
@@ -629,7 +624,7 @@ catro-notifications:
   like:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% اب آپ کی پیروی کر رہا ہے۔'
   program-upload:
     message: 'User %user_link% created a new project %program_link%'
   remix:
@@ -724,8 +719,8 @@ achievements:
         title: 'ناولز'
         description: 'صارف اکاؤنٹ بنائیں'
       coding_jam_09_2021:
-        title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        title: "کوڈنگ جام '21"
+        description: "کوڈنگ جام '21 کا شریک"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -742,7 +737,7 @@ tags:
     experimental:
       title: تجرباتی
     tutorial:
-      title: Tutorial
+      title: ٹیوٹوریل
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
@@ -755,59 +750,59 @@ extensions:
     phiro:
       title: پہرو
     raspberry_pi:
-      title: Raspberry PI
+      title: راسبیری پائی
     embroidery:
       title: کشیدہ کاری
     mindstorms:
-      title: Mindstorms
+      title: مائنڈسٹروم
 studio:
   details:
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    public: 'عوامی'
+    private: 'ذاتی'
+    join: 'شامل ہونا'
+    leave: 'چھوڑو'
+    showMore: 'مزید دکھائیں'
+    showLess: 'کم دکھائیں'
+    remove_project: 'اسٹوڈیو سے ہٹا دیں۔'
+    remove_project_error: 'اسٹوڈیو سے پروجیکٹ کو ہٹانے میں ناکام'
+    remove_project_success: 'پروجیکٹ کو کامیابی سے ہٹا دیا گیا۔'
+    no_projects: 'اسٹوڈیو میں ابھی پروجیکٹ شامل نہیں ہے۔'
+    updateCoverError: 'اسٹوڈیو کور کو اپ ڈیٹ کرتے وقت کچھ غلط ہو گیا!'
     projects:
-      title: 'projects'
+      title: 'پروجیکٹس'
     comments:
       title: 'تبصرے'
       type_something: 'کچھ لکھیں'
       replies: 'جوابات'
       send: 'بھیجیں'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      no_comments: 'اس سٹوڈیو میں ابھی تک کوئی تبصرہ نہیں ہے۔'
+      disabled_comments: 'اس اسٹوڈیو کے لیے تبصرے غیر فعال کر دیے گئے ہیں۔'
+      post_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
+      delete_error: 'Try again. Something went wrong while removing the comment.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'سرگرمیاں'
+      join_studio: '%user% نے اسٹوڈیو میں شمولیت اختیار کی۔'
+      add_project: '%user% نے ایک تبصرہ چھوڑا۔'
+      add_comment: '%user% نے ایک پروجیکٹ شامل کیا۔'
     members_list:
       title: 'سٹوڈیو ارکان'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      project_count: '{0} کوئی اسٹوڈیو پروجیکٹ نہیں |{1} 1 اسٹوڈیو پروجیکٹ |]1,Inf] %count% اسٹوڈیو پروجیکٹس'
+      promote_member: 'ممبر کو ایڈمن پروموٹ کریں۔'
+      promotion_failed: 'دوبارہ کوشش کریں۔ اس ممبر کی پروموشن کے دوران کچھ غلط ہو گیا۔'
       ban_member: 'سٹوڈیو سے رکن پر پابندی لگائیں'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      ban_failed: 'دوبارہ کوشش کریں. اس ممبر پر پابندی لگاتے وقت کچھ غلط ہو گیا۔'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'عمومی ترتیب'
+      studio_name: 'اسٹوڈیو کا نام'
       studio_description: 'تفصیل (وضاحت)'
       toggle_allow_comments: 'تبصرے'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'عوامی'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'سائز'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'تصویر'
+      project: 'پروجیکٹ'
+      sound: 'آواز'
+      movie: 'ویڈیو'
+      default: 'نامعلوم'

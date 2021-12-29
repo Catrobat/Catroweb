@@ -8,10 +8,13 @@ use App\Entity\Translation\CommentMachineTranslation;
 use App\Entity\Translation\ProjectMachineTranslation;
 use App\Entity\UserComment;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;
 
 class MachineTranslationListener
 {
+  private const CACHED_PROVIDER = 'etag';
+
   private EntityManagerInterface $entity_manager;
   private ProgramManager $program_manager;
 
@@ -23,7 +26,8 @@ class MachineTranslationListener
 
   public function onTerminateEvent(TerminateEvent $event): void
   {
-    if (200 !== $event->getResponse()->getStatusCode()) {
+    $status_code = $event->getResponse()->getStatusCode();
+    if (200 !== $status_code && 304 !== $status_code) {
       return;
     }
 
@@ -31,21 +35,78 @@ class MachineTranslationListener
     $path = $request->getPathInfo();
 
     if (str_contains($path, '/translate/comment/')) {
-      $this->persistCommentTranslation($event);
+      if (200 === $status_code) {
+        $this->persistCommentTranslation($event);
+      } else {
+        $this->persistCachedCommentTranslation($request);
+      }
     } elseif (str_contains($path, '/translate/project/')) {
-      $this->persistProgramTranslation($event);
+      if (200 === $status_code) {
+        $this->persistProgramTranslation($event);
+      } else {
+        $this->persistCachedProgramTranslation($request);
+      }
     }
   }
 
   private function persistCommentTranslation(TerminateEvent $event): void
   {
+    [$comment_id, $source_language, $target_language, $provider] = $this->getParameters($event);
+
+    $this->findCommentAndIncrement($comment_id, $source_language, $target_language, $provider);
+  }
+
+  private function persistProgramTranslation(TerminateEvent $event): void
+  {
+    [$project_id, $source_language, $target_language, $provider] = $this->getParameters($event);
+
+    $this->findProjectAndIncrement($project_id, $source_language, $target_language, $provider);
+  }
+
+  private function persistCachedCommentTranslation(Request $request): void
+  {
+    $comment_id = intval($this->getId($request->getPathInfo()));
+    [$source_language, $target_language] = $this->getLanguages($request);
+
+    $this->findCommentAndIncrement($comment_id, $source_language, $target_language, self::CACHED_PROVIDER);
+  }
+
+  private function persistCachedProgramTranslation(Request $request): void
+  {
+    $project_id = $this->getId($request->getPathInfo());
+    [$source_language, $target_language] = $this->getLanguages($request);
+
+    $this->findProjectAndIncrement($project_id, $source_language, $target_language, self::CACHED_PROVIDER);
+  }
+
+  private function getParameters(TerminateEvent $event): array
+  {
     $json_response = $event->getResponse()->getContent();
     $array_response = json_decode($json_response, true);
-    $comment_id = $array_response['id'];
-    $source_language = $array_response['source_language'];
-    $target_language = $array_response['target_language'];
-    $provider = $array_response['provider'];
 
+    return [
+      $array_response['id'],
+      $array_response['source_language'],
+      $array_response['target_language'],
+      $array_response['provider'],
+    ];
+  }
+
+  private function getId(string $path): string
+  {
+    return substr(strrchr($path, '/'), 1);
+  }
+
+  private function getLanguages(Request $request): array
+  {
+    return [
+      $request->query->get('source_language', ''),
+      $request->query->get('target_language'),
+    ];
+  }
+
+  private function findCommentAndIncrement(int $comment_id, string $source_language, string $target_language, string $provider): void
+  {
     /** @var UserComment|null $comment */
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($comment_id);
 
@@ -73,15 +134,8 @@ class MachineTranslationListener
     $this->entity_manager->flush();
   }
 
-  private function persistProgramTranslation(TerminateEvent $event): void
+  private function findProjectAndIncrement(string $project_id, string $source_language, string $target_language, string $provider): void
   {
-    $json_response = $event->getResponse()->getContent();
-    $array_response = json_decode($json_response, true);
-    $project_id = $array_response['id'];
-    $source_language = $array_response['source_language'];
-    $target_language = $array_response['target_language'];
-    $provider = $array_response['provider'];
-
     /** @var Program|null $project */
     $project = $this->program_manager->find($project_id);
 

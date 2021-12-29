@@ -836,18 +836,6 @@ services:
       - App\Catrobat\Controller\Admin\EmailUserMessageController
     public: true
 
-  # ===== Statistics
-
-  catrowebadmin.block.tools.statistic:
-    class: App\Admin\StatisticBlockService
-    tags:
-      - { name: sonata.block, label: Cleanup }
-    arguments:
-      - "@twig"
-      - "%catrobat.file.extract.dir%"
-      - "%catrobat.apk.dir%"
-    public: true
-
   # ====================================================================================================================
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ====================================================================================================================

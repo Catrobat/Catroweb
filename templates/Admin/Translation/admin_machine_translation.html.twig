@@ -3,7 +3,25 @@
 {% block list_table %}
     {{ parent() }}
 
-    <div class="col-xs-12 col-md-12 mb-5">
+    <div class="col-xs-12 col-md-12">
+        <div id="piechart_3d" style="width: 100%; height: 300px; display: inline-block;"></div>
+
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script src="{{ asset('js/PieChart.js') }}"></script>
+        <script>
+          const data = [
+            ['provider', 'usage'],
+              {% for item in providerBreakdown %}
+            ['{{ item.provider }}',   {{ item.usage }}],
+              {% endfor %}
+          ]
+          const pieChart = new PieChart(google)
+          pieChart.init()
+          pieChart.add('piechart_3d', data, 'Provider breakdown')
+        </script>
+    </div>
+
+    <div class="col-xs-12 col-md-12">
 
         {% include '@SonataCore/FlashMessage/render.html.twig' %}
 

@@ -3,29 +3,52 @@
 namespace App\Admin\Translation\Controller;
 
 use App\Commands\Helpers\CommandHelper;
+use App\Entity\Translation\CommentMachineTranslation;
+use App\Entity\Translation\ProjectMachineTranslation;
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
-  public const TYPE_PROJECT = 'TYPE_PROJECT';
-  public const TYPE_COMMENT = 'TYPE_COMMENT';
+  protected const TYPE_PROJECT = 'TYPE_PROJECT';
+  protected const TYPE_COMMENT = 'TYPE_COMMENT';
 
-  private string $type;
+  protected string $type;
 
-  public function __construct(string $type)
+  private EntityManagerInterface $entity_manager;
+
+  public function __construct(EntityManagerInterface $entity_manager)
   {
-    $this->type = $type;
+    $this->entity_manager = $entity_manager;
   }
 
-  public function listAction(Request $request = null): Response
+  public function listAction(): Response
   {
+    if (self::TYPE_PROJECT === $this->type) {
+      $entity = ProjectMachineTranslation::class;
+    } elseif (self::TYPE_COMMENT === $this->type) {
+      $entity = CommentMachineTranslation::class;
+    } else {
+      $this->addFlash('sonata_flash_error', 'Invalid controller type');
+
+      return new RedirectResponse($this->admin->generateUrl('list'));
+    }
+
+    $qb = $this->entity_manager->createQueryBuilder();
+    $qb->select('e.provider')
+      ->addSelect('SUM(e.usage_per_month) as usage')
+      ->from($entity, 'e')
+      ->groupBy('e.provider')
+      ;
+    $provider_breakdown = $qb->getQuery()->getResult();
+
     return $this->renderWithExtraParams('Admin/Translation/admin_machine_translation.html.twig', [
       'action' => 'list',
       'trimUrl' => $this->admin->generateUrl('trim'),
+      'providerBreakdown' => $provider_breakdown,
     ]);
   }
 
