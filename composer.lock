@@ -17355,5 +17355,5 @@
         "ext-posix": "7.4",
         "ext-zip": "1.15.4"
     },
-    "plugin-api-version": "2.1.0"
+    "plugin-api-version": "2.2.0"
 }
