@@ -135,7 +135,7 @@ jobs:
       - uses: actions/checkout@v2.4.0
       - name: "Setup PHP and composer packages"
         uses: ./.github/actions/setup-php-composer
-      - run: bin/psalm
+      - run: vendor/vimeo/psalm/psalm
   #
   # phpcpd (Php Copy Paste Detector):
   #
