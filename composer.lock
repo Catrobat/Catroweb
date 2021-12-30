@@ -9084,16 +9084,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v5.4.0",
+            "version": "v5.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "01b11a038293916ad52aab9ac7bd6b4e711d1f3e"
+                "reference": "ee6512e06b1307ed61b32d292ecd8ee9c10e034c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/01b11a038293916ad52aab9ac7bd6b4e711d1f3e",
-                "reference": "01b11a038293916ad52aab9ac7bd6b4e711d1f3e",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/ee6512e06b1307ed61b32d292ecd8ee9c10e034c",
+                "reference": "ee6512e06b1307ed61b32d292ecd8ee9c10e034c",
                 "shasum": ""
             },
             "require": {
@@ -9152,7 +9152,7 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/symfony/intl/tree/v5.4.0"
+                "source": "https://github.com/symfony/intl/tree/v5.4.2"
             },
             "funding": [
                 {
@@ -9168,7 +9168,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2021-11-28T15:25:38+00:00"
+            "time": "2021-12-16T21:58:21+00:00"
         },
         {
             "name": "symfony/mime",
