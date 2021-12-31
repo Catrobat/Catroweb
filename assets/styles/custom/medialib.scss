@@ -42,7 +42,7 @@ $border-spacing: 8px;
       transition: border 0.5s;
 
       &:hover {
-        background: rgba(200 200 200 10%);
+        background: rgba(200 200 200 / 10%);
         box-shadow: 0 0 0 0.2rem custom-alpha(--color-primary, 0.1) !important;
       }
 

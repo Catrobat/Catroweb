@@ -47,7 +47,7 @@ $container-padding: 1rem;
 
     &:hover,
     &:active {
-      background-color: rgba(0 0 0 8%);
+      background-color: rgba(0 0 0 / 8%);
     }
 
     &__btn-toggle {
@@ -73,14 +73,14 @@ $container-padding: 1rem;
       text-decoration: none;
 
       .project-list__project__image {
-        box-shadow: 3px 3px 20px 0 rgba(50 50 50 35%);
+        box-shadow: 3px 3px 20px 0 rgba(50 50 50 / 35%);
       }
     }
 
     &__image {
       width: 100%;
       border-radius: 10%;
-      box-shadow: 3px 3px 20px 0 rgba(50 50 50 15%);
+      box-shadow: 3px 3px 20px 0 rgba(50 50 50 / 15%);
     }
 
     &__name {

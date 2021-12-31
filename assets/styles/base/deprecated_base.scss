@@ -7,10 +7,6 @@
   box-sizing: border-box;
 }
 
-input::placeholder {
-  color: $default-background-color !important;
-}
-
 ::placeholder {
   color: $default-background-color !important;
 }
@@ -164,7 +160,7 @@ label {
 }
 
 .material-icons.md-light {
-  color: rgba(255 255 255 100%);
+  color: rgb(255 255 255 / 100%);
 }
 
 .button-show-placeholder {
