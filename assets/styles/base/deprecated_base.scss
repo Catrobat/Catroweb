@@ -4,26 +4,19 @@
 *,
 *::before,
 *::after {
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-::-webkit-input-placeholder {
+input::placeholder {
   color: $default-background-color !important;
 }
 
-:-moz-placeholder {
+::placeholder {
   color: $default-background-color !important;
 }
-
-::-moz-placeholder {
-  color: $default-background-color !important;
-}
-
 
 input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 1000px $white inset;
+  box-shadow: 0 0 0 1000px $white inset;
 }
 
 body {
@@ -78,38 +71,34 @@ label {
   font-weight: $font-weight-bold;
 }
 
-.catro-icon-button
-{
+.catro-icon-button {
   color: var(--primary);
   cursor: pointer;
-  &:hover
-  {
+
+  &:hover {
     color: custom-darken(--color-primary, 10);
   }
 }
 
-.catro-round-icon-button
-{
+.catro-round-icon-button {
   color: $white;
   cursor: pointer;
   background-color: var(--primary);
   border-radius: 50%;
-  &:hover
-  {
+
+  &:hover {
     background-color: custom-darken(--color-primary, 10);
   }
 }
 
-.program-small-icon
-{
+.program-small-icon {
   padding-top: 0.6em;
   margin-top: -0.6em;
   margin-right: 0.3em;
   font-size: 1.2em;
 }
 
-.program-round-icon-container
-{
+.program-round-icon-container {
   position: absolute;
   width: 2.5em;
   height: 2.5em;
@@ -118,15 +107,13 @@ label {
   border-radius: 50%;
 }
 
-.program-round-icon
-{
+.program-round-icon {
   margin-top: 0.5em;
   font-size: 1.2em;
   color: var(--primary);
 }
 
-.like-round-icon-container
-{
+.like-round-icon-container {
   display: inline-block;
   width: 3em;
   height: 3em;
@@ -135,15 +122,13 @@ label {
   border-radius: 50%;
 }
 
-.like-round-icon
-{
+.like-round-icon {
   margin-top: 0.37em;
   font-size: 1.7em;
   color: $white;
 }
 
-.like-round-icon-heart
-{
+.like-round-icon-heart {
   margin-top: 0.45em;
   font-size: 1.7em;
   color: $white;
@@ -157,15 +142,30 @@ label {
 .trailing-icon {
   margin-left: auto;
 }
-.material-icons.md-30 { font-size: 30px; }
-.material-icons.md-28 { font-size: 28px; }
-.material-icons.md-26 { font-size: 26px; }
-.material-icons.md-18 { font-size: 18px; }
 
-.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-30 {
+  font-size: 30px;
+}
 
-.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-28 {
+  font-size: 28px;
+}
 
+.material-icons.md-26 {
+  font-size: 26px;
+}
+
+.material-icons.md-18 {
+  font-size: 18px;
+}
+
+.material-icons.md-24 {
+  font-size: 24px;
+}
+
+.material-icons.md-light {
+  color: rgba(255 255 255 100%);
+}
 
 .button-show-placeholder {
   display: flex;
@@ -197,4 +197,3 @@ label {
   font-size: 3em;
   cursor: pointer;
 }
-

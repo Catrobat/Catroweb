@@ -5,8 +5,8 @@
   "scripts": {
     "test": "npx eslint assets/js/*.js assets/js/**/*.js webpack.config.js",
     "fix": "npx eslint assets/js/*.js assets/js/**/*.js webpack.config.js --fix",
-    "test-style": "npx stylelint assets/**/*.scss",
-    "fix-style": "npx stylelint assets/**/*.scss --fix",
+    "test-style": "npx stylelint assets/**/*.scss assets/**/**/*.scss",
+    "fix-style": "npx stylelint assets/**/*.scss assets/**/**/*.scss --fix",
     "dev-server": "encore dev-server",
     "dev": "encore dev",
     "watch": "encore dev --watch",
@@ -41,7 +41,7 @@
     "standard": "^16.0.4",
     "stimulus": "^3.0.1",
     "stylelint": "^14.2.0",
-    "stylelint-config-twbs-bootstrap": "^3.0.1",
+    "stylelint-config-standard-scss": "^3.0.0",
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
