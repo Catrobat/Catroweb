@@ -12,7 +12,7 @@ about: About
 education: Education
 chat: Chat and forums
 others: Others
-tutorials: Help
+tutorials: Laguntza
 googlePlay: Google Play Store
 iosAppStore: iOS App store
 huaweiAppGallery: Huawei AppGallery
@@ -169,9 +169,9 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: Save
+  saveDescription: Gorde
   editCredits: Edit the project notes and credits
-  saveCredits: Save
+  saveCredits: Gorde
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -282,7 +282,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Eginda
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
@@ -685,7 +685,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'berria'
   overview:
     header: 'Achievements'
     most_recent_achievement:
