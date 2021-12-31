@@ -161,7 +161,6 @@
   margin-top: 0.25rem;
 }
 
-
 .popup__new-achievement__background {
   position: absolute;
   top: 0;
@@ -171,23 +170,22 @@
   height: 100%;
 }
 
-.svg_new_achievement_popup-color-1 {
-  animation-name: alternate_color-animation;
+.svg-new-achievement-popup-color-1 {
+  animation-name: alternate-color-animation;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-delay: 0s;
   animation-iteration-count: infinite;
 }
 
-.svg_new_achievement_popup-color-2 {
-  animation-name: alternate_color-animation;
+.svg-new-achievement-popup-color-2 {
+  animation-name: alternate-color-animation;
   animation-duration: 1s;
   animation-timing-function: ease-in-out;
   animation-delay: 0.5s;
   animation-iteration-count: infinite;
-  fill: rgb(255, 255, 255);
+  fill: rgb(255 255 255);
 }
-
 
 .svg__achievement__badge__star {
   animation-name: shine-animation;
@@ -215,37 +213,42 @@
 
 // --- Animation Keyframes ---
 
-@keyframes alternate_color-animation {
-  from{
-    fill: rgb(255, 255, 255);
+@keyframes alternate-color-animation {
+  from {
+    fill: rgb(255 255 255);
   }
-  50%{
+
+  50% {
     fill: var(--primary);
     fill-opacity: 30%;
   }
-  to{
-    fill: rgb(255, 255, 255);
+
+  to {
+    fill: rgb(255 255 255);
   }
 }
 
 @keyframes shine-animation {
-  0%{
+  0% {
     opacity: 0;
     animation-delay: 0.3s;
   }
-  100%{
+
+  100% {
     opacity: 1;
   }
 }
 
 @keyframes rotate-animation {
-  from{
+  from {
     transform: rotate(0deg);
   }
-  50%{
+
+  50% {
     transform: rotate(1.5deg);
   }
-  to{
+
+  to {
     transform: rotate(0deg);
   }
 }
@@ -256,6 +259,7 @@
     transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -1000px, 0);
     animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
   }
+
   60% {
     opacity: 1;
     transform: scale3d(0.475, 0.475, 0.475) translate3d(0, 60px, 0);
@@ -267,6 +271,7 @@
   0% {
     opacity: 0;
   }
+
   100% {
     opacity: 1;
   }

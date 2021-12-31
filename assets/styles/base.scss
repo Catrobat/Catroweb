@@ -1,19 +1,17 @@
 @use "~@material/circular-progress/mdc-circular-progress";
 @use "~@material/snackbar/mdc-snackbar";
 
-//
 //  Here we define all colors and variables with their base values
 //  If you have to overwrite values for base or custom scss files consider using variables and store
 //  them in the _variables.scss file! And when creating new scss use variables and put them in this file!
-//
 @import "./base/variables";
 @import "./base/mixins";
 
-///* === Boostrap Main SCSS === */
+// === Boostrap Main SCSS ===
 @import "~bootstrap/scss/bootstrap";
 @import "./base/bootstrap_overwrite";
 
-/* === Default Layout === */
+// === Default Layout ===
 @import "./base/typography";
 @import "./base/swal";
 @import "./base/progress_bar";

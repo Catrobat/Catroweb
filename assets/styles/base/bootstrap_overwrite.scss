@@ -1,5 +1,5 @@
 .modal {
-  z-index: 6000;  // reason: top-app-bar
+  z-index: 6000; // reason: top-app-bar
 }
 
 .mdc-snackbar { // reason: modal
@@ -22,19 +22,23 @@
 .btn-primary {
   background-color: var(--primary);
   border-color: var(--primary);
+
   &:hover {
     background-color: custom-darken(--color-primary, 7.5);
     border-color: custom-darken(--color-primary, 8.5);
   }
+
   &:not(:disabled):not(.disabled):active {
     background-color: custom-darken(--color-primary, 10);
     border-color: custom-darken(--color-primary, 11);
   }
+
   &:not(:disabled):not(.disabled):active:focus,
   &:focus {
     background-color: custom-darken(--color-primary, 5);
     border-color: custom-darken(--color-primary, 6);
   }
+
   &:disabled {
     background-color: var(--primary);
     border-color: var(--primary);
@@ -44,18 +48,22 @@
 .btn-outline-primary {
   color: var(--primary);
   border-color: var(--primary);
+
   &:hover {
     background-color: custom-darken(--color-primary, 7.5);
     border-color: custom-darken(--color-primary, 8.5);
   }
+
   &:not(:disabled):not(.disabled):active {
     background-color: custom-darken(--color-primary, 10);
     border-color: custom-darken(--color-primary, 11);
   }
+
   &:not(:disabled):not(.disabled):active:focus,
   &:focus {
     box-shadow: 0 0 0 0.2rem custom-alpha(--color-primary, 0.3);
   }
+
   &:disabled {
     color: var(--primary);
     border-color: var(--primary);
@@ -67,35 +75,41 @@ a {
 }
 
 .btn-block {
-  // removed in bootstrap 5
-  --deprecated: "WARNING: deprecated, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/components/buttons/#block-buttons";
   display: block;
   width: 100%;
+  // stylelint-disable-next-line
+  --deprecated: "WARNING: deprecated, removed in bs5, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/components/buttons/#block-buttons";
 }
+
 .btn-block + .btn-block {
-  // removed in bootstrap 5
-  --deprecated: "WARNING: deprecated, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/components/buttons/#block-buttons";
   margin-top: 0.5rem;
+  // stylelint-disable-next-line
+  --deprecated: "WARNING: deprecated, removed in bs5, wrap your buttons with .d-grid and a .gap-* utility to space them as needed. Switch to responsive classes for even more control over them. Read the docs for some examples: https://getbootstrap.com/docs/5.0/components/buttons/#block-buttons";
 }
 
 /* stylelint-disable */
 .bg-primary {
   background-color: var(--primary) !important;
+
   &:hover {
     background-color: custom-darken(--color-primary, 7.5) !important;
   }
+
   &:not(:disabled):not(.disabled):active {
     background-color: custom-darken(--color-primary, 10) !important;
   }
+
   &:not(:disabled):not(.disabled):active:focus,
   &:focus {
     background-color: custom-darken(--color-primary, 5) !important;
     box-shadow: 0 0 0 0.2rem custom-alpha(--color-primary, 0.3) !important;
   }
+
   &:disabled {
     background-color: var(--primary) !important;
   }
 }
+
 /* stylelint-enable */
 
 .carousel-indicators .active {
