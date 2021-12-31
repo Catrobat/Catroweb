@@ -39,7 +39,7 @@
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
     "standard": "^16.0.4",
-    "stimulus": "^2.0.0",
+    "stimulus": "^3.0.1",
     "stylelint": "^13.13.1",
     "stylelint-config-twbs-bootstrap": "^2.2.4",
     "webpack-notifier": "^1.15.0"
