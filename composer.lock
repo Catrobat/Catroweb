@@ -17161,16 +17161,16 @@
         },
         {
             "name": "wapmorgan/php-deprecation-detector",
-            "version": "2.0.25",
+            "version": "2.0.26",
             "source": {
                 "type": "git",
                 "url": "https://github.com/wapmorgan/PhpDeprecationDetector.git",
-                "reference": "a2b9e1f0cbc33264b9e7679a9a262899a5a39e4e"
+                "reference": "7120d33f0ffe7a4bb140aaf454b6b4b9c1dddc98"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/wapmorgan/PhpDeprecationDetector/zipball/a2b9e1f0cbc33264b9e7679a9a262899a5a39e4e",
-                "reference": "a2b9e1f0cbc33264b9e7679a9a262899a5a39e4e",
+                "url": "https://api.github.com/repos/wapmorgan/PhpDeprecationDetector/zipball/7120d33f0ffe7a4bb140aaf454b6b4b9c1dddc98",
+                "reference": "7120d33f0ffe7a4bb140aaf454b6b4b9c1dddc98",
                 "shasum": ""
             },
             "require": {
@@ -17220,9 +17220,9 @@
             "description": "Analyzer of PHP code to search issues with deprecated functionality in newer interpreter versions.",
             "support": {
                 "issues": "https://github.com/wapmorgan/PhpDeprecationDetector/issues",
-                "source": "https://github.com/wapmorgan/PhpDeprecationDetector/tree/2.0.25"
+                "source": "https://github.com/wapmorgan/PhpDeprecationDetector/tree/2.0.26"
             },
-            "time": "2020-12-03T11:58:56+00:00"
+            "time": "2022-01-01T13:56:54+00:00"
         },
         {
             "name": "webmozart/assert",
@@ -17363,5 +17363,5 @@
         "ext-posix": "7.4",
         "ext-zip": "1.15.4"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.1.0"
 }
