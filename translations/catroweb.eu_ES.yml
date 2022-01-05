@@ -1,168 +1,168 @@
 ---
 #homepage translation
-title: Catrobat community
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
+title: Catrobat komunitatea
+localLanguage: Ingelesa
+username: Erabiltzailearen izena
+password: Pasahitza
+createNewPassword: Sortu pasahitz berria
+accountSettings: Kontuaren ezarpenak
+email: 'Helbide elektronikoa:'
+aboutPocketCode: Pocket Coderi buruz
 about: Honi buruz
-education: Education
-chat: Chat and forums
-others: Others
+education: Hezkuntza
+chat: Txata eta foroak
+others: Bestelakoak
 tutorials: Laguntza
-googlePlay: Google Play Store
-iosAppStore: iOS App store
+googlePlay: Google Play Denda
+iosAppStore: iOS App denda
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-description: Description
-noDescription: No description available.
-credits: Notes and credits
-noCredits: No notes and credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
-loginText: login
-privacyPolicy: Privacy Policy
-imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
-show-more: 'Show more'
-show-less: 'Show less'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "It looks like you don't have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
-projects: "Projects"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
+discordChat: Discord txata
+passwordsNoMatch: Pasahitzak ez datoz bat.
+error: Errorea
+cancel: Ezeztatu
+report: Salatu
+deleteIt: Bai, ezabatu!
+reportIt: Bai, salatu!
+areYouSure: Ziur zaude?
+noWayOfReturn: Zure ekintzak ezingo dira inolaz desegin!
+download: Deskargatu
+description: Deskribapena
+noDescription: Ez dago deskribapenik eskuragarri.
+credits: Aipamenak
+noCredits: Ez dago aipamenik eskuragarri.
+notesAndCreditsDescription: Nola sortu duzu proiektu hau? Beste jende batzuen ideia, script edo artelanak erabili al dituzu? Eskerrak eman iezazkiezu hemen.
+country: Herrialdea
+loginText: Saioa hasi
+privacyPolicy: Pribatutasun politika
+imprint: Argitaratzailea
+programDetails: Xehetasunak
+somethingWentWrong: 'Ai ene! Zerbait ez doa ongi.'
+pleaseTryAgain: 'Saiatu berriro mesedez!'
+oldVersionError: 'Eguneratu Pocket Paint azkeneko bertsiora mesedez!'
+more: 'gehiago'
+less: 'gutxiago'
+show-more: 'Erakutsi gehiago'
+show-less: 'Erakutsi gutxiago'
+more-information: 'Informazio gehigarria'
+less-information: 'Informazio gutxiago'
+ok: Ados
+clickToDownloadProgram: 'Adibidez programa hau deskargatzeko sakatu %link_start% hemen%link_end%.'
+registrationError: 'Erabiltzaile izen edo helbide hau erabili egin dute dagoeneko.'
+notifications: 'Jakinarazpenak'
+allNotifications: 'Dena'
+FollowersNotifications: 'Jarraitzaileak'
+LikeNotifications: 'Erreakzioak'
+CommentNotifications: 'Iruzkinak'
+RemixNotifications: 'Nahaste borrasteak'
+wellDone: "Oso ongi!"
+done: "Eginda!"
+notificationsReadMessage: "Jakinarezpen berririk ez dagoela ematen du."
+confirmMessage: "Bai, ezabatu"
+cancelMessage: "Ezeztatu"
+notificationsUnauthorizedError: "Ezin izan da erabiltzailea onartu"
+notificationsClearError: "Jakinarazpenak ezin izan dira \"irakurrita\" bezala markatu!"
+pleaseWait: "Itxaron mesedez..."
+projects: "Proiektuak"
+oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
+oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
+oauthHere: "hemen"
+statistics: "Estatistikak"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Zer proiektu gomendatzen ditugu hemen?'
+      description: 'Zure proiektuak erreakzio gehiago jaso ahala (datsegit, irri...), gorago agertuko da zerrendan.'
 follower:
   follows: Following
-  followers: Followers
+  followers: Jarraitzaileak
   follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
+  username: Erabiltzailea
+  followsMe: Jarraitzen nau
+  noFollowing: Ez duzu inor jarraitzen oraindik.
+  noFollowers: Ez zaitu inork jarraitzen oraindik.
   noOtherFollowing: There are no following users currently.
   noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  followError: "Ezin izan duzu erabiltzaile hori jarraitu!"
+  unfollowError: "Ezin izan duzu erabiltzaile hori jarraitzeaz utzi!"
+  unfollowQuestion: "Ziur al zaude erabiltzaile hau jarraitzeari utzi nahi duzula?"
+  unfollowButton: "%username% jarraitzeari utzi"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
+    title: Ongi etorri Catrobaten %theme%-ra
+    title_mindstorms: Ongi etorri  Mindstorms EV3 eta NXTentzako Catrobaten lekura.
+    subtitle: Sortu istorioak, jokuak eta beste hainbat...
+    subtitle_embroidery: Itsatsi zuk sortutako diseinuak zure kamiseta, poltsa, galtza edo mugikorraren zorroan!
+    subtitle_mindstorms: Sortu zure proiektuak zure Lego Mindstorms EV3 eta NXT robotekin
+    download: Jeitsi aplikazioa
+    statistics: Estatistika gehiago
+  featured: ' Nabarmenak'
+  example: Adibideak
+  newest: Proiektu berrienak
+  recommended: Gomendatutako proiektuak
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noPrograms: Oraingoz ez dago proiekturik.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Ziur al  zaude?
+    Ziur zaude %programName% programa ezabatu nahi duzula?
+    Ez dago atzera itzulirik!
+    Bai, ezabatu!
+    Ezeztatu
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Ziur al zaude?
+    "%programName%" pribatua bihurtzen baduzu, ezingo du beste inork aurkitu.
+    Hale zure lagunekin proiektuaren esteka partekatu ahalko duzu. Ikusgarritasuna giltzarrapoan sakatzen aldatu dezakezu.
+    "%programName%" publiko bezala ezartzen baduzu, gainontzekoek ikusi eta aurkitu dezakete.
+    Bai, publikoa bezala ezarri
+    Bai, pribatua bezala ezarri
+    Ez
+  reportCommentConfirmation: Ziur zaude iruzkin hau salatu nahi duzula?
+  deleteCommentConfirmation: Ziur zaude iruzkin hau ezabatu nahi duzula?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
+    Kontua ezabatu?
+    Ziur zaude kontu hau ezabatu nahi duzula? Honek zuk igotako proiektuak eta zure iruzkinak ezabatuko ditu ere!
+    Ez dago atzera itzultzerik!
+    Bai, ezabatu!
+    Ezeztatu
+  tooLongDescription: Proiektuaren deskribapena luzeegia da!
+  tooLongCredits: Proiektuaren ohar eta aipamenak luzeegiak dira!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: Ikusienak
+    downloaded: Gehien deskargatutakoak
   random: Random projects
-  related: Related projects
+  related: Zerikusia duten proiektuak
   downloads: '%downloads% downloads'
-  sample: Example projects
+  sample: Adibide moduan erabilitako proiektuak
   views: '%views% views'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
+    likersTitle: "Zure proiektuari erreakzionatu dion jendea"
+    all: "Dena"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version to be able to download this project.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  submitted: Bidalitako proiektuak
+  uploaded: Igotako proiektuak
+  reportAsInappropriate: Onartezina izateagatik salatu
+  reportProgram: Proiektua salatu
+  languageVersion: 'Catrobaten hizkuntza bertsioa: %languageVersion%'
+  reportLoginText: Mesedez %login% proiektu hau salatzeko.
+  reportDialogHeader: Zergatik nahi duzu proiektu hau salatu?
+  reportDialogReason: Esan zergatik
+  reportRadioButtonInappropriate: Onartezina da
+  reportRadioButtonCopyright: Copyright urraketa
+  reportRadioButtonSpam: Spama
+  reportRadioButtonDislike: Ez dut gustukoa
+  reportOwnProgram: Ezin duzu zuk sortutako proiektu bat markatu.
+  reportAlready: Dagoeneko markatua duzu proiektu hau.
+  reportDone: Proiektu hau salatu egin duzu!
+  updateAppHeader: Aplikazioa eguneratu
+  updateAppText: Eguneratu zure aplikazioa azken bertsiora mesedez, proiektu hau deskargatu ahal izateko.
+  btnClosePopup: Ados
+  checkout_this_program: Begira Catrobat proiektu hau
   show_more: Show More
-  comments: Comments
+  comments: Iruzkinak
   send: Send
   delete: Delete
-  report: Report
+  report: Salatu
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
@@ -179,7 +179,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Erreakzioak
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
   showTranslation: Show translation
@@ -244,58 +244,58 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
-  edit: Edit your profile
-  saveChanges: save changes
+  edit: Zure profila editatu
+  saveChanges: aldaketak gorde
   newPass: new password
   repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
+  oldPass: pasahitz zaharra
+  firstEmail: Nire lehen emaila
+  secondEmail: Nire bigarren emaila
+  myPrograms: Nire proiektuak
   follows: Follows
   follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  unfollowUser: Erabiltzaile hau jarraitzeari utzi!
+  followUser: Erabiltzaile hau jarraitu!
+  amountOfPrograms: Proiektu kopurua
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
+    passwordTooShort: Parahitz berriak %length% karaktere izan behar ditu gutxienez.
+    passwordTooLong: Pasahitz berriak %length% karaktere izan ditzake gehienez.
+    passwordIsUsername: Pasahitza eta erabiltzailearen izena ezin dira berdinak izan.
+    passwordWrong: Okerreko pasahitza
+    emailNotValid: Helbide elektroniko honek ez du balio.
+    emailMissing: Arazo bat egon da helbide elektroniko hau eguneratzen. Helbide elektroniko onartu bat behintzat beharrezkoa da.
+    emailExists: Helbide elektroniko hau existitzen da dagoeneko.
+    usernameNotValid: Erabiltzaile izen honek ez du balio.
+    usernameMissing: Erabiltzaile izen bat izan behar duzu.
+    usernameExists: Erabiltzaile izen hau dagoeneko existitzen da.
+    usernameContainsEmail: Erabiltzaile izena ezin da helbide elektroniko bat izan.
+    submitSuccess: Gordeta!
+  reallyDeleteProgram: Ziur zaude zure proiektua ezabatu nahi duzula
   programsOf: Projects of
-  changePicture: Change picture
+  changePicture: Argazkia aldatu
   avatar:
-    noImage: No image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
+    noImage: Irudirik ez!
+    pictureTooLarge: Aukeratu duzun irudia handiegia da, 5MB baina txikiagoak diren irudiak aukeratu mesedez.
+    uploadError: Barkatu, arazo bat egon da igoeran!
+    noSupport: Irudi formatu hau ez dabil, saiatu beste batekin mesedez.
   goToScratchProfile: Profile on Scratch
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
+  editProfile: Profila editatu
+  edit: Editatu
   done: Eginda
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
+  checkMail: Email bat bidali dugu zure helbidera. Begiratu sarrera ontzia.
+  passwordUpdated: Zure pasahitza ongi eguneratu da.
   avatar: Avatar
-  email: Email
+  email: Emaila
   editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
-  editEmail: Edit email
-  deleteAccount: Delete account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
+  editUsername: Erabiltzaile izena aldatu
+  editPassword: Pasahitza aldatu
+  editCountry: Herrialdea aldatu
+  editEmail: Emaila aldatu
+  deleteAccount: Kontua ezabatu
+  deleteAccountText: Ziur zure kontua ezabatu nahi duzula? Honek igotako proiektuak eta zure iruzkinak ezabatuko ditu!
+  editAccountSettings: Kontuaren ezarpenak aldatu
+  notChangeVisibility: Ezin da ikusgarritasuna aldatu
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'License to play'
@@ -372,7 +372,7 @@ login:
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  recoverPassSend: Email bat bidali dugu zure helbidera. Begiratu sarrera ontzia.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
@@ -408,7 +408,7 @@ errors:
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
-    exists: This username already exists.
+    exists: Erabiltzaile izen hau dagoeneko existitzen da.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
     size: The username must have at least 3 character and not more than 180
@@ -421,7 +421,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Helbide elektroniko hau existitzen da dagoeneko.
   id:
     blank: Open authentication ID must not be blank
   login: The password or username was incorrect.
@@ -675,13 +675,13 @@ checkOutProject: 'Check out this project:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
+  recent: Proiektu berrienak
   random: Random projects
   most_viewed: Most viewed
   most_downloaded: Most downloaded
   example: Example
   scratch: Scratch remixes
-  recommended: Recommended projects
+  recommended: Gomendatutako proiektuak
 achievements:
   sidebar:
     title: 'Achievements'
@@ -701,7 +701,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "Ados"
   profile:
     title: 'Achievements'
   achievement:
@@ -777,7 +777,7 @@ studio:
     projects:
       title: 'projects'
     comments:
-      title: 'Comments'
+      title: 'Iruzkinak'
       type_something: 'Type something'
       replies: 'replies'
       send: 'send'
@@ -801,7 +801,7 @@ studio:
       title: 'General Settings'
       studio_name: 'Studio Name'
       studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
+      toggle_allow_comments: 'Iruzkinak'
       toggle_privacy: 'Public'
 media_library:
   file:
