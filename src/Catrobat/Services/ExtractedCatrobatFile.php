@@ -57,6 +57,11 @@ class ExtractedCatrobatFile
     return (string) $this->program_xml_properties->header->programName;
   }
 
+  public function setName(string $name): void
+  {
+    $this->program_xml_properties->header->programName = $name;
+  }
+
   public function isDebugBuild(): bool
   {
     if (!isset($this->program_xml_properties->header->applicationBuildType)) {
