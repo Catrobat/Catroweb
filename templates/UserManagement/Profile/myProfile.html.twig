@@ -20,9 +20,7 @@
 {% endblock %}
 
 {% block javascript %}
-
   <script>
-    // load programs need profile!
     const profileUrl = '{{ path('profile') }}';
     const saveUsername = '{{ path('username_save') }}';
     const saveEmailUrl = '{{ path('email_save') }}';
@@ -49,6 +47,10 @@
     const programCanNotChangeVisibilityTitle = '{{ "myprofile.notChangeVisibility"|trans({}, "catroweb") }}';
     const programCanNotChangeVisibilityText = '{{ "myprofile.notChangeVisibilityReason"|trans({}, "catroweb") }}';
     const statusCodeUsernameContainsEmail = '{{ constant('App\\Catrobat\\StatusCode::USERNAME_CONTAINS_EMAIL') }}';
+    const deleteConfirmationMessage = `{{ "programs.deleteAccountConfirmation"|trans({}, "catroweb") }}`;
+    const noProgramsText = '{{ "programs.noPrograms"|trans({}, "catroweb") }}';
+    const programChangeVisibility = `{{ "programs.changeVisibility"|trans({}, "catroweb") }}`;
+    const programDeleteConfirmation = `{{ "programs.deleteConfirmation"|trans({}, "catroweb") }}`;
   </script>
   <script>
     const uploadAvatarUrl = '{{ path('profile_upload_avatar') }}';

@@ -2,16 +2,6 @@ fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 # @deprecated
-translate:
-    path:  /translate/{word}/{array}/{domain}
-    controller: App\Catrobat\Controller\Web\TranslationController:translateAction
-    defaults:
-        array: ""
-        domain: "catroweb"
-    options:
-        expose: true
-
-# @deprecated
 edit_program_description:
     path:  /editProjectDescription/{id}/{new_description}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription

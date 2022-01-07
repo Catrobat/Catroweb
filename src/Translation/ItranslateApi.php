@@ -39,7 +39,7 @@ class ItranslateApi implements TranslationApiInterface
           'json' => [
             'key' => $this->api_key,
             'source' => [
-              'dialect' => $source_language ?? 'auto',
+              'dialect' => empty($source_language) ? 'auto' : $source_language,
               'text' => $text,
             ],
             'target' => [
