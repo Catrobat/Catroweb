@@ -74,9 +74,9 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   /**
    * used in connectUserToAccount!
    *
-   * @param mixed $id_token
+   * @psalm-return array{id: mixed, email: mixed}
    */
-  protected function getPayloadFromAppleIdToken($id_token)
+  protected function getPayloadFromAppleIdToken(string $id_token): array
   {
     $jwt = AuthenticationRequestValidator::jwt_decode($id_token);
 
@@ -104,7 +104,10 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     ];
   }
 
-  public function connectUserToAccount($id_token, $resource_owner)
+  /**
+   * @psalm-return array{response_code: 200|422, token: JWTResponse}
+   */
+  public function connectUserToAccount(string $id_token, string $resource_owner): array
   {
     $getPayloadMethod = 'getPayloadFrom'.ucfirst($resource_owner).'IdToken';
     $payload = $this->{$getPayloadMethod}($id_token);

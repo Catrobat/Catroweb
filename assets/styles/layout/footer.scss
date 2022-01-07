@@ -4,7 +4,6 @@
 @use "~@material/menu-surface/mdc-menu-surface";
 @use "~@material/menu/mdc-menu";
 @use "~@material/select/styles";
-
 @import "../base/variables";
 @import "../base/mixins";
 
@@ -33,6 +32,7 @@ body {
 
   a {
     color: inherit;
+
     &:hover {
       text-decoration: none;
     }

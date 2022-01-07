@@ -14,13 +14,13 @@ monolog:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
       level: error
-      max_files: 60
+      max_files: 14
 
     upload:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/upload/%kernel.environment%.log"
       level: warning
-      max_files: 60
+      max_files: 14
       channels: [ upload ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
@@ -28,7 +28,7 @@ monolog:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/search/%kernel.environment%.log"
       level: debug
-      max_files: 60
+      max_files: 14
       channels: [ search ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
@@ -36,7 +36,7 @@ monolog:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/download/%kernel.environment%.log"
       level: debug
-      max_files: 60
+      max_files: 14
       channels: [ download ]
       formatter: monolog.formatter.catrobat_custom_formatter
 

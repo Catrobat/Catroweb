@@ -1,4 +1,3 @@
-
 .accordion-button:not(.collapsed) {
   color: var(--primary);
   background-color: transparent;
@@ -6,6 +5,7 @@
 
 .accordion-body {
   padding: 0;
+
   .table {
     margin: 0;
   }
