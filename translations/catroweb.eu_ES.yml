@@ -186,7 +186,7 @@ programs:
   hideTranslation: Ezkutatu itzulpena
   translatedByLine: '%sourceLanguage%-(e)tik %targetLanguage%-(e)ra %provider%-(e)k itzulita.'
 remixGraph:
-  title: Remixes
+  title: Nahaste borrasteak
   showRemixGraph: 'Remix graph'
   by: 'by'
   open: 'Ireki'
@@ -638,7 +638,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Hurrengoa
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -672,7 +672,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Catrobat komunitatea'
 back_to_app: 'Exit community'
 category:
   recent: Proiektu berrienak
