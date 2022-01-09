@@ -3,8 +3,9 @@ Feature: As a visitor I want to see a project page
 
   Background:
     Given there are users:
-      | id | name     |
-      | 1  | Catrobat |
+      | id | name      |
+      | 1  | Catrobat  |
+      | 2  | Catrobat2 |
     And there are projects:
       | id | name      | downloads | owned by | views | apk_ready | upload time      |
       | 1  | project 1 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |
@@ -29,12 +30,33 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "6 downloads"
 
-  Scenario: Increasing download counter after download
+  Scenario: Downloading a project is possible
+    When I download "/app/download/1.catrobat"
+    Then I should receive an application file
+
+  Scenario: Download counter must not increase of not logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "5 downloads"
-    When I download "/app/download/1.catrobat"
-    Then I should receive an application file
+    When I click "#url-download-small"
+    When I reload the page
+    And I wait for the page to be loaded
+    Then I should see "5 downloads"
+
+  Scenario: Increasing download counter after download only once!
+    Given I log in as "Catrobat2"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should see "5 downloads"
+    When I click "#url-download-small"
+    And I wait 500 milliseconds
+    When I reload the page
+    And I wait for the page to be loaded
+    Then I should see "6 downloads"
+    When I start a new session
+    And I log in as "Catrobat2"
+    And I am on "/app/project/1"
+    When I click "#url-download-small"
     When I reload the page
     And I wait for the page to be loaded
     Then I should see "6 downloads"
