@@ -46,9 +46,9 @@ class ExtractedFileRepository
     $this->logger = $logger;
   }
 
-  public function getBaseDir(Program $program): string
+  public function getBaseDir(string $id): string
   {
-    return $this->local_path.$program->getId().'/';
+    return $this->local_path.$id.'/';
   }
 
   public function loadProgramExtractedFile(Program $program): ?ExtractedCatrobatFile
@@ -56,7 +56,7 @@ class ExtractedFileRepository
     try {
       $program_id = $program->getId();
 
-      return new ExtractedCatrobatFile($this->getBaseDir($program), $this->web_path.$program_id.'/', $program_id);
+      return new ExtractedCatrobatFile($this->getBaseDir($program_id), $this->web_path.$program_id.'/', $program_id);
     } catch (InvalidCatrobatFileException $e) {
       return null;
     }

@@ -503,6 +503,12 @@ services:
     tags:
       - { name: kernel.event_listener, event: App\Catrobat\Events\CheckScratchProgramEvent, method: onCheckScratchProgram }
 
+  # ======== Project Downloads ========
+  App\EventSubscriber\ProjectDownloadEventSubscriber:
+    class: App\EventSubscriber\ProjectDownloadEventSubscriber
+    tags:
+      - { name: kernel.event_subscriber }
+
   # ======== Entity ========
 
   catrobat.entity.featured.image_listener:

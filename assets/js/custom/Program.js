@@ -35,27 +35,41 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
       $(e.currentTarget).data('is-supported'),
       $(e.currentTarget).data('is-webview'),
       $(e.currentTarget).data('pb'),
-      $(e.currentTarget).data('icon')
+      $(e.currentTarget).data('icon'),
+      $(e.currentTarget).data('is-not-supported-title'),
+      $(e.currentTarget).data('is-not-supported-text')
     )
   })
 
   let apkDownloadTimeout = false
 
   function download (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
-    downloadPbID, downloadIconID) {
+    downloadPbID, downloadIconID, isNotSupportedTitle, isNotSupportedText) {
     const downloadProgressBar = $(downloadPbID)
     const downloadIcon = $(downloadIconID)
     const button = document.querySelector(buttonId)
     showSnackbar('#share-snackbar', downloadStartedText)
 
+    downloadUrl += downloadUrl.includes('?') ? '&' : '?'
+    downloadUrl += 'token=' + encodeURIComponent(csrfToken)
+
+    button.disabled = true
     if (isWebView) {
       window.location = downloadUrl
       return
     }
-    button.disabled = true
+
     if (!supported) {
-      showPreparingApkPopup()
-      button.disabled = false
+      Swal.fire({
+        icon: 'error',
+        title: isNotSupportedTitle,
+        text: isNotSupportedText,
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false,
+        allowOutsideClick: false
+      })
       return
     }
     downloadIcon.addClass('d-none')
@@ -78,19 +92,23 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
         document.body.appendChild(a)
         a.click()
         window.URL.revokeObjectURL(url)
-        button.disabled = false
         downloadIcon.removeClass('d-none')
         downloadIcon.addClass('d-inline-block')
         downloadProgressBar.removeClass('d-inline-block')
         downloadProgressBar.addClass('d-none')
+        setTimeout(() => {
+          button.disabled = false
+        }, 15000)
       })
       .catch(() => {
-        button.disabled = false
+        console.error('Downloading project ' + projectId + 'failed')
         downloadIcon.removeClass('d-none')
         downloadIcon.addClass('d-inline-block')
         downloadProgressBar.removeClass('d-inline-block')
         downloadProgressBar.addClass('d-none')
-        console.error('downloading project ' + projectId + 'failed')
+        setTimeout(() => {
+          button.disabled = false
+        }, 15000)
       })
   }
 

@@ -131,9 +131,9 @@ programs:
     downloaded: Gehien deskargatutakoak
   random: Random projects
   related: Zerikusia duten proiektuak
-  downloads: '%downloads% downloads'
+  downloads: '%downloads% deskarga'
   sample: Adibide moduan erabilitako proiektuak
-  views: '%views% views'
+  views: '%views% ikustaldi'
   likes:
     likersTitle: "Zure proiektuari erreakzionatu dion jendea"
     all: "Dena"
@@ -158,52 +158,52 @@ programs:
   updateAppText: Eguneratu zure aplikazioa azken bertsiora mesedez, proiektu hau deskargatu ahal izateko.
   btnClosePopup: Ados
   checkout_this_program: Begira Catrobat proiektu hau
-  show_more: Show More
+  show_more: Gehiago erakutsi 
   comments: Iruzkinak
-  send: Send
-  delete: Delete
+  send: Bidali
+  delete: Ezabatu
   report: Salatu
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
+  report_popup: Iruzkina ongi salatu da.
+  report_popup_header: Salatuta
+  deleted_popup: Iruzkina ongi ezabatu da.
+  deleted_popup_header: Ezabatua
+  noAdminRights: Ez daukazu admin eskubiderik. Mesedez hasi saioa admin moduan.
+  editDescription: Proiektuaren deskribapena editatu
   saveDescription: Gorde
-  editCredits: Edit the project notes and credits
+  editCredits: Proiektuaren ohar eta kredituak editatu
   saveCredits: Gorde
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: Iruzkin bat idatzi
+  thumbsUp: Ederki!
+  smile: Irribarre!
+  love: Datsegit!
+  wow: Hara!
+  linkTitle: Esteka
+  link: Kopiatu proiektuaren esteka
   reactionsText: Erreakzioak
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: Arazo bat egon da proiektua deskargatzen. Saiatu berriz beranduago.
+  downloadStartText: Deskarga hasi da...
+  showTranslation: Erakutsi itzulpena
+  hideTranslation: Ezkutatu itzulpena
+  translatedByLine: '%sourceLanguage%-(e)tik %targetLanguage%-(e)ra %provider%-(e)k itzulita.'
 remixGraph:
-  title: Remixes
+  title: Nahaste borrasteak
   showRemixGraph: 'Remix graph'
   by: 'by'
-  open: 'Open'
+  open: 'Ireki'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
-noReply: This is an automated message - Please do not reply directly to this email.
+  programNotAvailableErrorTitle: 'Barkatu...'
+  programNotAvailableErrorDescription: 'Proiektu hau jada ez dago eskuragarri!'
+  programNotAvailable: 'Ez dago eskuragarri'
+  programUnknownUser: 'Erabiltzaile ezezaguna'
+noReply: Hau automatikoki sortutako mezu bat da - Ez erantzun email honi zuzenean.
 accountConfirmation:
-  subject: Your Catrobat account confirmation
+  subject: Zure Catrobat kontuaren berrespena 
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    %username% maitea.
+    Zure kontua aktibatzez amaitzeko - sakatu mesedez %confirmationUrl%
+    Esteka hau behin bakarrik erabili daiteke zure kontua ontzat emateko.
+    Ongi izan,
+    Catrobaten taldea.
   messageHtml: |
     <p>
     Dear %username%.<br>
@@ -216,17 +216,17 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat password recovery
+  subject: Zure Catrobateko pasahitzaren berreskurapena.
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    %username% maitea.
+    Zure pasahitza aldatzeko eskatu duzu %appplication_url%-(e)n, dirudienez ahaztu egin duzulako.
+    Eskaera ez baduzu zuk egin, ez egin kasu. 24 ordutan balio gabe geratuko da eskaera.
+    Pasahitza ezabatu eta berri bat sortzeko, joan honako orrialde honetara: %confirmationUrl%
+    Zure erabiltzaile izena eta pasahitza erabiltzen jarritu dezakezu %appplication_url% komunitatean parte hartzeko.
+    Hori lortzeko, bisitatu honako orrialde hau: %loginPage%
+    Zure profileko zehetasunak aldatzeko, joan orrialde honetara: %profilePage%
+    Ongi izan,
+    Cstrobaten taldea.
   messageHtml: |
     <p>
     Dear %username%.<br>
@@ -246,8 +246,8 @@ passwordRecovery:
 profile:
   edit: Zure profila editatu
   saveChanges: aldaketak gorde
-  newPass: new password
-  repeatPass: repeat password
+  newPass: pasahitz berria
+  repeatPass: pasahitza berridatzi
   oldPass: pasahitz zaharra
   firstEmail: Nire lehen emaila
   secondEmail: Nire bigarren emaila
@@ -332,7 +332,7 @@ termsOfUse:
     item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
-    item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
+    item4: 'Xehetasun legalei eta baldintzei buruz argibide gehiago %link-licenseUploaded%-en aurkituko dituzu.'
   list4:
     item1: "We offer all our own software and Internet resources related to the Catrobat system, e.g., the software written by the Catrobat team, our websites and Internet resources, our own source code related to the Catrobat system, and all additional included materials such as, e.g., pictures, sounds, and texts, now and in the future to you under Catrobat's free licenses."
     item2: These licenses make all parts of Catrobat both free of charge to you as well as free in the sense of giving you the freedom to use them however you like, with only a few restrictions ensuring, among others, that the Catrobat system will forever remain free and useful for everyone.
@@ -638,7 +638,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Hurrengoa
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -672,7 +672,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
-community: 'Catrobat community'
+community: 'Catrobat komunitatea'
 back_to_app: 'Exit community'
 category:
   recent: Proiektu berrienak
