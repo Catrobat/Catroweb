@@ -7,6 +7,8 @@
         data-is-webview='{% if isWebview() %}true{% else %}false{% endif %}'
         data-pb='#download-pb{{ suffix|default('') }}'
         data-icon='#download-icon{{ suffix|default('') }}'
+        data-is-not-supported-title="{{ 'programs.updateAppHeaderDownload'|trans({}, 'catroweb')}}"
+        data-is-not-supported-text="{{ 'programs.updateAppTextDownload'|trans({}, 'catroweb')}}"
 >
 
   <i class="material-icons text-start d-none" id="download-pb{{ suffix|default('') }}">
