@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: 自分のプロジェクトにフラグを立てることはできません。
   reportAlready: このプロジェクトは既にフラグを立てています。
   reportDone: このプロジェクトを報告しました！
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: アプリの更新
   updateAppText: このプロジェクトをダウンロードするには、アプリを最新バージョンにアップデートしてください。
   btnClosePopup: Ok

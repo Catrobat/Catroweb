@@ -27,6 +27,7 @@
 /* global statusCodeUsernameContainsEmail */
 /* global programCanNotChangeVisibilityTitle */
 /* global programCanNotChangeVisibilityText */
+/* global deleteConfirmationMessage */
 
 import $ from 'jquery'
 import { MyProfile } from './custom/MyProfile'
@@ -68,7 +69,8 @@ $(() => {
     passwordUpdatedText,
     programCanNotChangeVisibilityTitle,
     programCanNotChangeVisibilityText,
-    parseInt(statusCodeUsernameContainsEmail)
+    parseInt(statusCodeUsernameContainsEmail),
+    deleteConfirmationMessage
   )
 
   const programs = new ProjectLoader('#myprofile-programs', apiUserPrograms)

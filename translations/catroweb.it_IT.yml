@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Non puoi contrassegnare un tuo progetto.
   reportAlready: Hai già segnalato questo progetto.
   reportDone: Il progetto è stato segnalato!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Aggiorna App
   updateAppText: Per poter scaricare questo progetto, è necessario aggiornare l'applicazione alla versione più recente.
   btnClosePopup: Ok

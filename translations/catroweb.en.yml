@@ -129,6 +129,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
   most:
@@ -159,8 +160,10 @@ programs:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More

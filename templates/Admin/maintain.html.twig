@@ -117,7 +117,7 @@
 {% block javascripts %}
   {{ parent() }}
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-  <script src="{{ asset('js/AdminMaintain.js') }}"></script>
+  <script src="{{ asset('js/PieChart.js') }}"></script>
   <script>
     let data_space_values = [['name', 'value'],
       ['Used ({{ usedSpace }})',          {{ usedSpace_raw }}],
@@ -131,7 +131,10 @@
       ['Used ({{ usedRam }})',          {{ usedRamPercentage }}],
       ['Shared ({{ sharedRam }})',      {{ sharedRamPercentage }}],
       ['Buff/Cache ({{ cachedRam }})',  {{ cachedRamPercentage }}]]
-    let maintain = new AdminMaintain(google, data_space_values, data_mem_values, '{{ wholeSpace }}', '{{ wholeRam }}')
-    maintain.init()
+
+    const pieChart = new PieChart(google)
+    pieChart.init()
+    pieChart.add('piechart_3d', data_space_values, 'Disk Space ({{ wholeSpace }})')
+    pieChart.add('piechart_3d_mem', data_mem_values, 'RAM ({{ wholeRam }})')
   </script>
 {% endblock %}

@@ -365,6 +365,53 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @Route("/editProjectName/{id}/{new_name}", name="edit_program_name",
+   * options={"expose": true}, methods={"GET"})
+   *
+   * @throws Exception
+   */
+  public function editProgramName(string $id, string $new_name): Response
+  {
+    $max_name_size = (int) $this->getParameter('catrobat.max_name_upload_size');
+
+    if (strlen($new_name) > $max_name_size) {
+      return Response::create(
+        $this->translator->trans('programs.tooLongName', [], 'catroweb'),
+        Response::HTTP_BAD_REQUEST
+      );
+    }
+
+    $user = $this->getUser();
+    if (null === $user) {
+      return $this->redirectToRoute('login');
+    }
+
+    $program = $this->program_manager->find($id);
+    if (!$program) {
+      throw $this->createNotFoundException('Unable to find Project entity.');
+    }
+
+    if ($program->getUser() !== $user) {
+      throw $this->createAccessDeniedException('Not your program!');
+    }
+
+    $program->setName($new_name);
+
+    $em = $this->getDoctrine()->getManager();
+    $em->persist($program);
+    $em->flush();
+
+    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    if ($extracted_file) {
+      $extracted_file->setName($new_name);
+      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+      $this->file_repository->deleteProjectZipFileIfExists($program->getId());
+    }
+
+    return Response::create();
+  }
+
+  /**
    * @Route("/editProjectDescription/{id}/{new_description}", name="edit_program_description",
    * options={"expose": true}, methods={"GET"})
    *

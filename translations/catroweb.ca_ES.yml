@@ -154,8 +154,10 @@ programs:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Actualitza l'aplicació
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: D'acord
   checkout_this_program: Checkout this Catrobat project
   show_more: Mostra més

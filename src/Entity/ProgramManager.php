@@ -623,12 +623,21 @@ class ProgramManager
 
   public function increaseDownloads(Program $program, ?User $user): void
   {
-    $program->setDownloads($program->getDownloads() + 1);
-    $download = new ProgramDownloads();
-    $download->setUser($user);
-    $download->setProgram($program);
-    $download->setDownloadedAt(new DateTime('now'));
-    $this->save($program, $download);
+    if (!is_null($user)) {
+      $download_repo = $this->entity_manager->getRepository(ProgramDownloads::class);
+      $download = $download_repo->findOneBy(['program' => $program, 'user' => $user]);
+
+      if (is_null($download)) {
+        // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
+        $this->entity_manager->createQuery('UPDATE App\Entity\Program p SET p.downloads = p.downloads + 1')->execute();
+        $download = new ProgramDownloads();
+        $download->setUser($user);
+        $download->setProgram($program);
+        $download->setDownloadedAt(new DateTime('now'));
+        $this->entity_manager->persist($download);
+        $this->entity_manager->flush();
+      }
+    }
   }
 
   public function increaseApkDownloads(Program $program): void

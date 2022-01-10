@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: شما نمیتوانید پروژه خود را علامت گزاری کنید.
   reportAlready: شما قبلا این پروژه را علامت گذاری کرده اید.
   reportDone: شما این پروژه را گزارش کرده اید!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Update App
   updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
   btnClosePopup: خوب

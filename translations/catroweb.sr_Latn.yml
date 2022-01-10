@@ -153,6 +153,8 @@ programs:
   reportOwnProgram: Ne možeš prijaviti vlastiti projekat.
   reportAlready: Već ste prijavili ovaj projekat.
   reportDone: Prijavili ste ovaj projekat!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Ažuriraj app
   updateAppText: Molimo vas ažurirajte aplikaciju da bi ste mogli preuzeti ovaj projekat.
   btnClosePopup: Ok

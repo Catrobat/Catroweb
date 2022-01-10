@@ -30,7 +30,7 @@ download: ڈاؤنلوڈ
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
 credits: Credits
-noCredits: No credits available.
+noCredits: کوئی نوٹس اور کریڈٹ دستیاب نہیں۔
 notesAndCreditsDescription: آپ نے اس منصوبے کو کیسے بنایا؟ کیا آپ نے دوسرے لوگوں سے خیالات، سکرپٹ یا آرٹ ورک کا استعمال کیا؟ یہاں ان کا شکریہ اداہ کریں۔
 country: ملک
 loginText: لاگ آن
@@ -50,14 +50,14 @@ ok: ٹھیک
 clickToDownloadProgram: 'مثال کے طور پر پروجیکٹ ڈاؤن لوڈ کرنے کے لئے %link_start% یہا %link_end% کلک کریں'
 registrationError: 'صارف کا نام یا ای میل پتہ پہلے سے استعمال میں ہے۔'
 notifications: 'اطلاعات'
-allNotifications: 'All notifications'
+allNotifications: 'تمام'
 FollowersNotifications: 'پیروکاروں'
 LikeNotifications: 'ردعمل'
 CommentNotifications: 'تبصرے'
 RemixNotifications: 'ریمکسس'
 wellDone: "بہت اچھا!"
 done: "ہوگیا"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "ایسا لگتا ہے کہ آپ کے پاس کوئی اطلاع نہیں ہے۔"
 confirmMessage: "جی ہاں، اسے حذف کریں!"
 cancelMessage: "منسوخ"
 notificationsUnauthorizedError: "صارف کو اختیار کرنے میں ناکام"
@@ -125,7 +125,7 @@ programs:
     جی ہاں، اسے حذف کریں!
     منسوخ
   tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: آپ اپنے منصوبے مارک نہیں کر سکتے ہیں.
   reportAlready: آپ نے پہلے ہی اس منصوبے کو مارک لگایا ہے.
   reportDone: آپ نے اس منصوبے کی اطلاع دی!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: پروگرام اپ ڈیٹ کریں
   updateAppText: براہ کرم اپنے اپلی کیشن کو تازہ ترین ورژن پر اپ ڈیٹ کریں تاکہ اس منصوبے کو ڈاؤن لوڈ کرنے کے قابل ہو.
   btnClosePopup: ٹھیک ہے
@@ -169,14 +171,14 @@ programs:
   deleted_popup_header: حذف کر دیا گیا
   noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
   editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveDescription: محفوظ کریں
+  editCredits: پروجیکٹ کے نوٹس اور کریڈٹ میں ترمیم کریں۔
+  saveCredits: محفوظ کریں
   addComment: اپنی رائے لکھیں
   thumbsUp: بہت خوب!
   smile: مسکراہٹ!
   love: محبت!
-  wow: wooow!
+  wow: واہ!
   linkTitle: لنک
   link: کلپ بورڈ پر پراجیکٹ لنک کاپی کریں
   reactionsText: ردعمل
@@ -319,7 +321,7 @@ termsOfUse:
     item3: تجربہ کی تمام سطحوں کے ساتھ
   list2:
     item1: احترام کرو. جب منصوبوں کا اشتراک کریں تو، براہ کرم یاد رکھیں کہ بہت سے مختلف عمر اور پس منظر کے لوگ آپ کے تعاون کو دیکھیں گے.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "کریڈٹ دیں۔ دوسرے لوگوں کے پروجیکٹس کے ترمیم شدہ ورژن بنانے کے لیے آزاد محسوس کریں - بس انہیں کریڈٹ دینا یقینی بنائیں۔ کریڈٹ دینے کے لیے ایک جگہ آپ کے پروجیکٹ کے نوٹس اور کریڈٹ سیکشن میں ہے۔ دوسرے صارفین کے منصوبوں میں ترمیم کرنے کے بارے میں تفصیلات کے لیے براہ کرم اس نقطے والی فہرست کے نیچے پیراگراف دیکھیں۔"
     item3: "ایماندار ہو. کسی کے علاوہ کسی دوسرے کا دعوی نہ کریں کہ آپ کون ہیں یا کمیونٹی کو چالنا چاہتے ہیں."
     item4: "ذاتی معلومات کو نجی رکھیں. اپنے ای میل ایڈریس، فون نمبر، یا دیگر ذاتی رابطے کی معلومات کا اشتراک نہ کریں."
     item5: "سائٹ دوستانہ رکھنے میں مدد کریں. اگر آپ محسوس کرتے ہیں کہ دوسروں کو ایک منصوبے یا تبصرہ کا مطلب، توہین، بھی تشدد، یا دوسری صورت میں نامناسب تلاش کریں گے، صرف 'غیر مناسب' بٹن پر کلک کریں اور مختصر وضاحت چھوڑ دیں. Catrobat ٹیم آپ کی رپورٹ کا جائزہ لیں گے اور کسی بھی منصوبے، تبصرہ، یا پوسٹ کو ہٹا دیں گے."
@@ -384,7 +386,7 @@ register:
   title: نیا اکاؤنٹ بنانے
   button:
     cancel: منسوخ
-    createAccount: "اکاؤنٹ بنائیں\n"
+    createAccount: اکاؤنٹ بنائیں
 accountRecovery:
   title: اکاؤنٹ کی بحالی
   description: اگر آپ کو اپنے اکاؤنٹ کا ای میل یا صارف نام یاد ہے تو ہم آپ کو اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے ایک لنک بھیج سکتے ہیں۔
@@ -620,15 +622,15 @@ catro-notifications:
   noReactions: "ایسا لگتا ہے کہ آپ کے پاس کوئی ردعمل اطلاعات نہیں ہے."
   noRemixes: "ایسا لگتا ہے کہ آپ کے پاس کوئی ریمکس اطلاعات نہیں ہے."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% نے %program_link% پر تبصرہ کیا۔'
   like:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: '%user_link% اب آپ کی پیروی کر رہا ہے۔'
   program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+    message: '%user_link% نے ایک نیا گیم %program_link% بنایا۔'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% نے آپ کے گیم %remix_program_link% کا ایک ریمکس %program_link% بنایا۔'
 clipboard:
   success: کلپ بورڈ پر کاپی پروجیکٹ کا لنک!
   fail: کلپ بورڈ سے لنک کاپی کرنے میں ناکامی :(
@@ -666,7 +668,7 @@ share:
   success: 'اشتراک کامیاب'
 copy: 'لنک کاپی کریں'
 checkOutProject: 'بڑے پراجیکٹس چیک کریں'
-community: 'کاٹروبٹ کے تمام لوگ                      '
+community: 'کاٹروبٹ کے تمام لوگ'
 back_to_app: 'کمیونٹی سے باہر نکلیں'
 category:
   recent: تازہ ترین منصوبے
@@ -741,7 +743,7 @@ tags:
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} ایکسٹینشن |]1,Inf] ایکسٹینشنز'
   extension:
     arduino:
       title: آردوانو
@@ -778,7 +780,7 @@ studio:
       no_comments: 'اس سٹوڈیو میں ابھی تک کوئی تبصرہ نہیں ہے۔'
       disabled_comments: 'اس اسٹوڈیو کے لیے تبصرے غیر فعال کر دیے گئے ہیں۔'
       post_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
-      delete_error: 'Try again. Something went wrong while removing the comment.'
+      delete_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
     activity_list:
       title: 'سرگرمیاں'
       join_studio: '%user% نے اسٹوڈیو میں شمولیت اختیار کی۔'

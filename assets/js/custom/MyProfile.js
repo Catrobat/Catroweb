@@ -1,7 +1,6 @@
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 import { deleteCookie } from './CookieHelper'
-/* global Routing */
 
 /**
  * @deprecated
@@ -32,6 +31,7 @@ import { deleteCookie } from './CookieHelper'
  * @param programCanNotChangeVisibilityTitle
  * @param programCanNotChangeVisibilityText
  * @param statusCodeUsernameContainsEmail
+ * @param deleteConfirmationMessage
  * @constructor
  */
 export const MyProfile = function (
@@ -60,7 +60,8 @@ export const MyProfile = function (
   passwordUpdatedText,
   programCanNotChangeVisibilityTitle,
   programCanNotChangeVisibilityText,
-  statusCodeUsernameContainsEmail) {
+  statusCodeUsernameContainsEmail,
+  deleteConfirmationMessage) {
   const passwordEditContainer = $('#password-edit-container')
   const usernameEditContainer = $('#username-edit-container')
   const usernameData = $('#username-wrapper > .profile-data')
@@ -119,38 +120,33 @@ export const MyProfile = function (
   }
 
   $(document).on('click', '#delete-account-button', function () {
-    const url = Routing.generate('translate', {
-      word: 'programs.deleteAccountConfirmation'
-    }, false)
-    $.get(url, function (data) {
-      const split = data.split('\n')
-      Swal.fire({
-        title: split[0],
-        html: split[1] + '<br><br>' + split[2],
-        icon: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        customClass: {
-          confirmButton: 'btn btn-danger',
-          cancelButton: 'btn btn-outline-primary'
-        },
-        buttonsStyling: false,
-        confirmButtonText: split[3],
-        cancelButtonText: split[4]
-      }).then((result) => {
-        if (result.value) {
-          $.post(deleteAccountUrl, null, function (data) {
-            switch (parseInt(data.statusCode)) {
-              case statusCodeOk:
-                window.location.href = routingDataset.index
-                deleteCookie('BEARER', routingDataset.baseUrl + '/')
-                deleteCookie('LOGGED_IN', routingDataset.baseUrl + '/')
-            }
-          })
-        }
-      })
-      $('.swal2-container.swal2-shown').css('background-color', 'rgba(255, 0, 0, 0.75)')// changes the color of the overlay
+    const split = deleteConfirmationMessage.split('\n')
+    Swal.fire({
+      title: split[0],
+      html: split[1] + '<br><br>' + split[2],
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false,
+      confirmButtonText: split[3],
+      cancelButtonText: split[4]
+    }).then((result) => {
+      if (result.value) {
+        $.post(deleteAccountUrl, null, function (data) {
+          switch (parseInt(data.statusCode)) {
+            case statusCodeOk:
+              window.location.href = routingDataset.index
+              deleteCookie('BEARER', routingDataset.baseUrl + '/')
+              deleteCookie('LOGGED_IN', routingDataset.baseUrl + '/')
+          }
+        })
+      }
     })
+    $('.swal2-container.swal2-shown').css('background-color', 'rgba(255, 0, 0, 0.75)')// changes the color of the overlay
   })
 
   $(document).on('click', '#save-email', function () {

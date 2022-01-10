@@ -6,6 +6,7 @@ use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixData;
 use App\Repository\ProgramRepository;
+use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use SimpleXMLElement;
@@ -38,6 +39,71 @@ class ExtractedCatrobatFileTest extends TestCase
   public function testGetsTheProgramDescriptionFromXml(): void
   {
     $this->assertSame('', $this->extracted_catrobat_file->getDescription());
+  }
+
+  public function testGetsTheProgramCreditsFromXml(): void
+  {
+    $this->assertSame('', $this->extracted_catrobat_file->getNotesAndCredits());
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function testSetsTheProgramName(): void
+  {
+    $target_dir = RefreshTestEnvHook::$CACHE_DIR.'base/';
+    $filesystem = new Filesystem();
+    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+
+    $new_name = 'new_name';
+
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile($target_dir, '/webpath', 'hash');
+    $this->extracted_catrobat_file->setName($new_name);
+    $this->extracted_catrobat_file->saveProgramXmlProperties();
+
+    $content = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $xml = @simplexml_load_string($content);
+    $this->assertSame($new_name, (string) $xml->header->programName);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function testSetsTheProgramDescription(): void
+  {
+    $target_dir = RefreshTestEnvHook::$CACHE_DIR.'base/';
+    $filesystem = new Filesystem();
+    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+
+    $new_description = 'new_description';
+
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile($target_dir, '/webpath', 'hash');
+    $this->extracted_catrobat_file->setDescription($new_description);
+    $this->extracted_catrobat_file->saveProgramXmlProperties();
+
+    $content = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $xml = @simplexml_load_string($content);
+    $this->assertSame($new_description, (string) $xml->header->description);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function testSetsTheProgramCredits(): void
+  {
+    $target_dir = RefreshTestEnvHook::$CACHE_DIR.'base/';
+    $filesystem = new Filesystem();
+    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+
+    $new_credits = 'new_credits';
+
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile($target_dir, '/webpath', 'hash');
+    $this->extracted_catrobat_file->setNotesAndCredits($new_credits);
+    $this->extracted_catrobat_file->saveProgramXmlProperties();
+
+    $content = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $xml = @simplexml_load_string($content);
+    $this->assertSame($new_credits, (string) $xml->header->notesAndCredits);
   }
 
   public function testGetsTheLanguageVersionFromXml(): void
