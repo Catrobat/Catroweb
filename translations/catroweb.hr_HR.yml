@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Ne možeš označiti vlastiti program.
   reportAlready: Vec ste oznacili ovaj program.
   reportDone: Prijavili ste ovaj program!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Ažuriraj aplikaciju
   updateAppText: Molimo azurirajte apliakciju na najnoviju verziju kako bi mogli preuzeti ovaj program.
   btnClosePopup: U redu

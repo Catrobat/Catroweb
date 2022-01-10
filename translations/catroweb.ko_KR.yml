@@ -153,6 +153,8 @@ programs:
   reportOwnProgram: 자신의 프로그램을 추천할 수 없습니다
   reportAlready: 이미 이 프로그램을 추천했습니다.
   reportDone: 이 프로젝트를 리포트했습니다.
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: 응용 프로그램 업데이트
   updateAppText: 이 프로그램을 다운로드하려면 최신 버전으로 당신의 앱을 업데이트 하세요.
   btnClosePopup: 예

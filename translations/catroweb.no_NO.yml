@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Du kan ikke flagge ditt eget prosjekt.
   reportAlready: Du har allerede flagget dette prosjektet.
   reportDone: Du rapporterte dette prosjektet!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Oppdater app
   updateAppText: Oppdater din app til den nyeste versjonen for å kunne laste ned dette prosjektet.
   btnClosePopup: Ok
