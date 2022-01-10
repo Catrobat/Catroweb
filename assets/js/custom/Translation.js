@@ -4,7 +4,8 @@ export class Translation {
   constructor (translatedByLine) {
     this.translatedByLine = translatedByLine
     this.providerMap = {
-      itranslate: 'iTranslate'
+      itranslate: 'iTranslate',
+      google: 'Google Translate'
     }
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}

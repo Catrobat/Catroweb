@@ -30,63 +30,6 @@ class ItranslateApiTest extends TestCase
     $this->api = new ItranslateApi($this->httpClient, $this->createMock(LoggerInterface::class));
   }
 
-  public function testShortenLanguageCode(): void
-  {
-    $this->httpClient
-      ->expects($this->once())
-      ->method('request')
-      ->with('POST', '/translate/v1',
-        $this->callback(function ($subject) {
-          $this->assertEquals('fr', $subject['json']['source']['dialect']);
-          $this->assertEquals('fr', $subject['json']['target']['dialect']);
-
-          return true;
-        }
-      ))
-      ->willReturn($this->mockGenericResponse())
-    ;
-
-    $this->api->translate('testing', 'fr-FR', 'fr-FR');
-  }
-
-  public function testLongLanguageCode(): void
-  {
-    $this->httpClient
-      ->expects($this->once())
-      ->method('request')
-      ->with('POST', '/translate/v1',
-        $this->callback(function ($subject) {
-          $this->assertEquals('zh-CN', $subject['json']['source']['dialect']);
-          $this->assertEquals('pt-BR', $subject['json']['target']['dialect']);
-
-          return true;
-        }
-      ))
-      ->willReturn($this->mockGenericResponse())
-    ;
-
-    $this->api->translate('testing', 'zh-CN', 'pt-BR');
-  }
-
-  public function testShortLanguageCode(): void
-  {
-    $this->httpClient
-      ->expects($this->once())
-      ->method('request')
-      ->with('POST', '/translate/v1',
-        $this->callback(function ($subject) {
-          $this->assertEquals('fr', $subject['json']['source']['dialect']);
-          $this->assertEquals('en', $subject['json']['target']['dialect']);
-
-          return true;
-        }
-      ))
-      ->willReturn($this->mockGenericResponse())
-    ;
-
-    $this->api->translate('testing', 'fr', 'en');
-  }
-
   public function testDetectLanguageCode(): void
   {
     $this->httpClient

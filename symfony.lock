@@ -289,6 +289,27 @@
     "google/auth": {
         "version": "v1.7.1"
     },
+    "google/cloud-core": {
+        "version": "v1.43.1"
+    },
+    "google/cloud-translate": {
+        "version": "v1.12.2"
+    },
+    "google/common-protos": {
+        "version": "1.4.0"
+    },
+    "google/gax": {
+        "version": "v1.10.0"
+    },
+    "google/grpc-gcp": {
+        "version": "v0.2.0"
+    },
+    "google/protobuf": {
+        "version": "v3.19.2"
+    },
+    "grpc/grpc": {
+        "version": "1.42.0"
+    },
     "guzzlehttp/guzzle": {
         "version": "6.5.2"
     },
@@ -542,6 +563,9 @@
     },
     "react/promise": {
         "version": "v2.8.0"
+    },
+    "rize/uri-template": {
+        "version": "0.3.4"
     },
     "rosell-dk/image-mime-type-guesser": {
         "version": "0.3"

@@ -26,6 +26,7 @@
         "friendsofsymfony/rest-bundle": "^2.8",
         "gesdinet/jwt-refresh-token-bundle": "^1.0.0",
         "google/apiclient": "^2.11",
+        "google/cloud-translate": "^1.12",
         "hwi/oauth-bundle": "^1.4",
         "incenteev/composer-parameter-handler": "^2.1",
         "lexik/jwt-authentication-bundle": "^2.13",
