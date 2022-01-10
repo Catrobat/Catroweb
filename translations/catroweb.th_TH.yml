@@ -156,6 +156,8 @@ programs:
   reportOwnProgram: คุณไม่สามารถตั้งค่าสถานะโครงการของคุณเอง
   reportAlready: คุณได้ทำเครื่องหมายโครงการนี้แล้ว
   reportDone: คุณรายงานโครงการนี้!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: อัพเดทแอพพลิเคชั่น
   updateAppText: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันล่าสุดเพื่อให้สามารถดาวน์โหลดโครงการนี้
   btnClosePopup: ตกลง

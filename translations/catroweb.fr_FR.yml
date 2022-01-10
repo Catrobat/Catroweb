@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Vous ne pouvez pas marquer votre propre projet.
   reportAlready: Vous avez déjà signalé ce projet.
   reportDone: Vous avez signalé ce projet !
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Mettre à jour l'application
   updateAppText: Veuillez mettre à jour votre application vers la version la plus récente pour pouvoir télécharger ce projet.
   btnClosePopup: Ok

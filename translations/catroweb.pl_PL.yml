@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Nie możesz oflagować własnego projektu.
   reportAlready: Już oflagowałeś ten projekt.
   reportDone: Zgłosiłeś ten projekt!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Aktualizacja aplikacji
   updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji, aby móc pobrać ten projekt.
   btnClosePopup: OK
