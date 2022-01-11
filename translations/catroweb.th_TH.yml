@@ -126,6 +126,7 @@ programs:
     ไม่มีวิธีใดที่จะคืนค่าการกระทำของคุณ!
     ใช่ลบทิ้ง!
     ยกเลิก
+  tooLongName: The project name is too long!
   tooLongDescription: คำอธิบายโครงการยาวเกินไป!
   tooLongCredits: เครดิตโครงการยาวเกินไป!
   most:
@@ -156,8 +157,8 @@ programs:
   reportOwnProgram: คุณไม่สามารถตั้งค่าสถานะโครงการของคุณเอง
   reportAlready: คุณได้ทำเครื่องหมายโครงการนี้แล้ว
   reportDone: คุณรายงานโครงการนี้!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppHeaderDownload: ดาวน์โหลดไม่ได้
+  updateAppTextDownload: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด โปรดทราบว่าคุณลักษณะบางอย่างของ Android อาจไม่พร้อมใช้งานบน IOS
   updateAppHeader: อัพเดทแอพพลิเคชั่น
   updateAppText: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันล่าสุดเพื่อให้สามารถดาวน์โหลดโครงการนี้
   btnClosePopup: ตกลง

@@ -124,6 +124,7 @@ programs:
     Nuk ka asnjë mënyrë për të rikthyer veprimet tuaja!
     Po, fshije!
     Anulo
+  tooLongName: The project name is too long!
   tooLongDescription: Përshkrimi i projektit është shumë i gjatë!
   tooLongCredits: The project credits are too long!
   most:

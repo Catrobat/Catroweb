@@ -123,6 +123,7 @@ programs:
     ایا تاسو ډاډه یاست چې تاسو غواړئ خپل حساب حذف کړئ؟ دا به ستاسو اپلوډ شوي پروژې او نظرونه هم حذف کړي!
     هو، دا حذف کړئ!
     لغوه کړئ
+  tooLongName: The project name is too long!
   tooLongDescription: د پروژې تفصیل ډیر اوږد دی!
   tooLongCredits: The project credits are too long!
   most:

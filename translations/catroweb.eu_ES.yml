@@ -124,6 +124,7 @@ programs:
     Ez dago atzera itzultzerik!
     Bai, ezabatu!
     Ezeztatu
+  tooLongName: The project name is too long!
   tooLongDescription: Proiektuaren deskribapena luzeegia da!
   tooLongCredits: Proiektuaren ohar eta aipamenak luzeegiak dira!
   most:
@@ -383,20 +384,20 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
-  email: Email
-  passwordFirst: Password
+  username: Erabiltzailearen izena
+  email: Emaila
+  passwordFirst: Pasahitza
   passwordSecond: Password confirm
 register:
   title: Sign up
   button:
-    cancel: Cancel
+    cancel: Ezeztatu
     createAccount: Create account
 accountRecovery:
   title: Account recovery
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
-    cancel: Cancel
+    cancel: Ezeztatu
     submit: Recover password
 apk:
   download: Download as app
@@ -679,8 +680,8 @@ back_to_app: 'Exit community'
 category:
   recent: Proiektu berrienak
   random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
+  most_viewed: Ikusienak
+  most_downloaded: Gehien deskargatutakoak
   example: Example
   scratch: Scratch remixes
   recommended: Gomendatutako proiektuak
@@ -802,7 +803,7 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_description: 'Deskribapena'
       toggle_allow_comments: 'Iruzkinak'
       toggle_privacy: 'Public'
 media_library:

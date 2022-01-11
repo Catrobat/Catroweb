@@ -124,6 +124,7 @@ programs:
     لا توجد طريقة لاستعادة إجراءاتك!
     نعم، احذفها!
     الغاء
+  tooLongName: The project name is too long!
   tooLongDescription: وصف المشروع طويل جداً!
   tooLongCredits: ملاحظات المشروع والأرصدة طويلة جداً!
   most:

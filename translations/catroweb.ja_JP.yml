@@ -124,6 +124,7 @@ programs:
     あなたの行動を復元する方法はありません!
     はい、削除してください!
     キャンセル
+  tooLongName: The project name is too long!
   tooLongDescription: プロジェクトの説明が長すぎます！
   tooLongCredits: プロジェクトノートとクレジットが長すぎます！
   most:

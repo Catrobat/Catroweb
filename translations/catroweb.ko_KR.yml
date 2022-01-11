@@ -123,6 +123,7 @@ programs:
     이렇게 하면 되돌릴 수 없습니다!
     예, 삭제합니다!
     취소
+  tooLongName: The project name is too long!
   tooLongDescription: 설명이 너무 깁니다!
   tooLongCredits: 프로젝트 노트와 크레딧이 너무 깁니다!
   most:

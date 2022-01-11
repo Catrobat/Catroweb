@@ -124,6 +124,7 @@ programs:
     Это безвозвратное действие!
     Да, удалить!
     Отмена
+  tooLongName: The project name is too long!
   tooLongDescription: Описание проекта слишком длинное!
   tooLongCredits: Примечания к проекту и титры слишком длинные!
   most:

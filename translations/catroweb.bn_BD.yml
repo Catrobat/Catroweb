@@ -124,6 +124,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongName: The project name is too long!
   tooLongDescription: প্রকল্পের বিবরণটি অনেক দীর্ঘ!
   tooLongCredits: The project credits are too long!
   most:

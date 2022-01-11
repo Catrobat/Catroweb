@@ -124,6 +124,7 @@ programs:
     Det er ingen måte å gjenopprette dine handlinger!
     Ja, slett det!
     Avbryt
+  tooLongName: The project name is too long!
   tooLongDescription: Prosjektbeskrivelsen er for lang!
   tooLongCredits: The project credits are too long!
   most:

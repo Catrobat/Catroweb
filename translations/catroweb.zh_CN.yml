@@ -124,6 +124,7 @@ programs:
     再也无法恢复您的操作！
     是的，删除它！
     取消
+  tooLongName: The project name is too long!
   tooLongDescription: 项目描述太长了！
   tooLongCredits: 项目致谢过长！
   most:

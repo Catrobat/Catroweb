@@ -124,6 +124,7 @@ programs:
     To jest nieodwracalne!
     Tak, usuń!
     Anuluj
+  tooLongName: The project name is too long!
   tooLongDescription: Opis projektu jest za długi!
   tooLongCredits: Uwagi i podziękowania są za długie!
   most:

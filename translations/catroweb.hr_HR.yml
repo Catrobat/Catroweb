@@ -124,6 +124,7 @@ programs:
     Nema nacina da ponistite vase radnje!
     Da, izbrisi!
     Otkazi
+  tooLongName: The project name is too long!
   tooLongDescription: Opis programa je predug!
   tooLongCredits: Zasluge programa su preduge!
   most:
