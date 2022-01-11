@@ -11,6 +11,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramDownloads
 {
+  public const TYPE_PROJECT = "project";
+  public const TYPE_APK = "apk";
+
   /**
    * @ORM\Column(name="id", type="integer")
    * @ORM\Id
@@ -34,6 +37,11 @@ class ProgramDownloads
    * @ORM\Column(type="datetime")
    */
   protected ?DateTime $downloaded_at = null;
+
+  /**
+   * @ORM\Column(type="string", options={"default": "project"})
+   */
+  protected ?string $type = self::TYPE_PROJECT;
 
   public function getId(): ?int
   {
@@ -80,6 +88,17 @@ class ProgramDownloads
   {
     $this->downloaded_at = $downloaded_at;
 
+    return $this;
+  }
+
+  public function getType(): ?string
+  {
+    return $this->type;
+  }
+
+  public function setType(?string $type): ProgramDownloads
+  {
+    $this->type = $type;
     return $this;
   }
 }

@@ -12,11 +12,13 @@ class ProjectDownloadEvent extends Event
   protected ?User $user;
   protected Program $project;
   protected Request $request;
+  protected string $download_type;
 
-  public function __construct(?User $user, Program $project, Request $request)
+  public function __construct(?User $user, Program $project, string $download_type, Request $request)
   {
     $this->user = $user;
     $this->project = $project;
+    $this->download_type = $download_type;
     $this->request = $request;
   }
 
@@ -33,5 +35,10 @@ class ProjectDownloadEvent extends Event
   public function getProject(): Program
   {
     return $this->project;
+  }
+
+  public function getDownloadType(): string
+  {
+    return $this->download_type;
   }
 }

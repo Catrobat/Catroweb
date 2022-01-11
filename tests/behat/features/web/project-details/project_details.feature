@@ -38,7 +38,7 @@ Feature: As a visitor I want to see a project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "5 downloads"
-    When I click "#url-download-small"
+    When I click "#projectDownloadButton-small"
     When I reload the page
     And I wait for the page to be loaded
     Then I should see "5 downloads"
@@ -48,7 +48,7 @@ Feature: As a visitor I want to see a project page
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "5 downloads"
-    When I click "#url-download-small"
+    When I click "#projectDownloadButton-small"
     And I wait 500 milliseconds
     When I reload the page
     And I wait for the page to be loaded
@@ -56,7 +56,7 @@ Feature: As a visitor I want to see a project page
     When I start a new session
     And I log in as "Catrobat2"
     And I am on "/app/project/1"
-    When I click "#url-download-small"
+    When I click "#projectDownloadButton-small"
     When I reload the page
     And I wait for the page to be loaded
     Then I should see "6 downloads"
