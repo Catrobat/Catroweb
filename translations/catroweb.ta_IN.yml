@@ -124,6 +124,7 @@ programs:
     உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
     ஆம், அழித்துவிடு!
     ரத்து
+  tooLongName: The project name is too long!
   tooLongDescription: திட்ட விளக்கம் மிக நீளமாக உள்ளது!
   tooLongCredits: திட்ட நன் மதிப்ப மிக நீளமாக உள்ளது!
   most:

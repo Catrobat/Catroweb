@@ -124,6 +124,7 @@ programs:
     هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
     بله، این را حذف کنید!
     لغو
+  tooLongName: The project name is too long!
   tooLongDescription: شرح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
   most:

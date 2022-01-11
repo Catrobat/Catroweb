@@ -124,6 +124,7 @@ programs:
     Es gibt keine Möglichkeit dein Konto wiederherzustellen!
     Ja, löschen!
     Abbrechen
+  tooLongName: The project name is too long!
   tooLongDescription: Die Projektbeschreibung ist zu lang!
   tooLongCredits: Die Anerkennung ist zu lang!
   most:

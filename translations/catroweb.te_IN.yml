@@ -124,6 +124,7 @@ programs:
     మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
     అవును, తొలగించండి!
     రద్దు చేయండి
+  tooLongName: The project name is too long!
   tooLongDescription: ప్రాజెక్ట్ వివరణ చాలా పొడవుగా ఉంది!
   tooLongCredits: The project credits are too long!
   most:

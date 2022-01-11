@@ -124,6 +124,7 @@ programs:
     Não há como restaurar suas ações!
     Sim, excluir conta!
     Cancelar
+  tooLongName: The project name is too long!
   tooLongDescription: A descrição do projeto é muito longa!
   tooLongCredits: Os créditos do projeto são muito longos!
   most:
