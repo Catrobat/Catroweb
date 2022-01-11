@@ -1,19 +1,13 @@
-import $ from 'jquery'
+export function redirect (url, buttonId, spinnerId, iconId = null) {
+  const button = document.getElementById(buttonId)
+  button.disabled = true
 
-$('.js-redirect-btn').on('click', (e) => {
-  redirect(
-    $(e.currentTarget).data('url'),
-    $(e.currentTarget).data('spinner'),
-    $(e.currentTarget).data('icon')
-  )
-})
-
-function redirect (url, spinner, icon = null) {
-  const buttonSpinner = $(spinner)
-  if (icon) {
-    const buttonIcon = $(icon)
-    buttonIcon.hide()
+  if (iconId) {
+    const icon = document.getElementById(iconId)
+    icon.classList.add('d-none')
   }
-  buttonSpinner.removeClass('d-none')
+
+  const loadingSpinner = document.getElementById(spinnerId)
+  loadingSpinner.classList.remove('d-none')
   window.location.href = url
 }

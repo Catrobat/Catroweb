@@ -643,9 +643,9 @@ class ProgramManager
 
       // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
       if (is_null($download)) {
-        if ($download_type === ProgramDownloads::TYPE_PROJECT) {
+        if (ProgramDownloads::TYPE_PROJECT === $download_type) {
           $this->entity_manager->createQuery('UPDATE App\Entity\Program p SET p.downloads = p.downloads + 1')->execute();
-        } elseif ($download_type === ProgramDownloads::TYPE_APK) {
+        } elseif (ProgramDownloads::TYPE_APK === $download_type) {
           $this->entity_manager->createQuery('UPDATE App\Entity\Program p SET p.apk_downloads = p.apk_downloads + 1')->execute();
         }
       }
@@ -654,13 +654,13 @@ class ProgramManager
 
   protected function addDownloadEntry(Program $program, ?User $user, string $download_type): void
   {
-      $download = new ProgramDownloads();
-      $download->setUser($user);
-      $download->setProgram($program);
-      $download->setType($download_type);
-      $download->setDownloadedAt(new DateTime('now'));
-      $this->entity_manager->persist($download);
-      $this->entity_manager->flush();
+    $download = new ProgramDownloads();
+    $download->setUser($user);
+    $download->setProgram($program);
+    $download->setType($download_type);
+    $download->setDownloadedAt(new DateTime('now'));
+    $this->entity_manager->persist($download);
+    $this->entity_manager->flush();
   }
 
   public function save(Program $program, ProgramDownloads $downloads = null): void

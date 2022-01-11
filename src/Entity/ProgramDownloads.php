@@ -11,8 +11,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramDownloads
 {
-  public const TYPE_PROJECT = "project";
-  public const TYPE_APK = "apk";
+  public const TYPE_PROJECT = 'project';
+  public const TYPE_APK = 'apk';
 
   /**
    * @ORM\Column(name="id", type="integer")
@@ -99,6 +99,7 @@ class ProgramDownloads
   public function setType(?string $type): ProgramDownloads
   {
     $this->type = $type;
+
     return $this;
   }
 }

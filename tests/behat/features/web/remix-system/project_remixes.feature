@@ -68,7 +68,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
   Scenario: For performance reasons the remix graph is on its own page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#remix-graph-button-small"
+    And I click "#remixGraphButton-small"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1/remix_graph"
     And the "#top-app-bar__title" element should contain "Remixes"

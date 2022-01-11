@@ -63,8 +63,8 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And the selected language is "English"
     And I wait for the page to be loaded
     Then I should see "REMIX GRAPH"
-    And the element "#remix-graph-button-small" should be visible
+    And the element "#remixGraphButton-small" should be visible
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
     Then I should see "Показать ремиксы"
-    And the element "#remix-graph-button-small" should be visible
+    And the element "#remixGraphButton-small" should be visible

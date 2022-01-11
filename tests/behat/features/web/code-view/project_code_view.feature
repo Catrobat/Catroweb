@@ -9,7 +9,7 @@ Feature: As a visitor I want to see the code view on a project page
       | 1  | program 1 |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#code-view-small"
+    And I click "#projectCodeViewButton-small"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1/code_view"
     And the "#top-app-bar__title" element should contain "Code view"
