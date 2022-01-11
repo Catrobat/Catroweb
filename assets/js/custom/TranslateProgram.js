@@ -18,7 +18,7 @@ export class TranslateProgram extends Translation {
       return
     }
 
-    $(document).on('click', '#program-translation-button', function () {
+    $('#program-translation-button').on('click', function (event) {
       $(this).hide()
 
       if (translateProgram.isTranslationNotAvailable('#name-translation')) {
@@ -29,14 +29,16 @@ export class TranslateProgram extends Translation {
       }
     })
 
-    $(document).on('click', '#remove-program-translation-button', function () {
+    $('#remove-program-translation-button').on('click', function (event) {
       $(this).hide()
       $('#program-translation-button').show()
 
-      $('#name').removeClass('program-name').addClass('program-name-animation')
-      $('#name-translation').removeClass('program-name').addClass('program-name-animation')
-      $('#name-translation').animate({ width: 'toggle' })
-      $('#name').animate({ width: 'toggle' }, translateProgram.ANIMATION_TIME,
+      const $name = $('#name')
+      const $nameTranslation = $('#name-translation')
+      $name.removeClass('program-name').addClass('program-name-animation')
+      $nameTranslation.removeClass('program-name').addClass('program-name-animation')
+      $nameTranslation.animate({ width: 'toggle' })
+      $name.animate({ width: 'toggle' }, translateProgram.ANIMATION_TIME,
         function () {
           $('#name').removeClass('program-name-animation').addClass('program-name')
           $('#name-translation').removeClass('program-name-animation').addClass('program-name')
@@ -56,8 +58,9 @@ export class TranslateProgram extends Translation {
   }
 
   setTranslatedProgramData (data) {
-    $('#name-translation').attr('lang', data.target_language)
-    $('#name-translation').text(data.translated_title)
+    const $nameTranslation = $('#name-translation')
+    $nameTranslation.attr('lang', data.target_language)
+    $nameTranslation.text(data.translated_title)
 
     if (this.hasDescription) {
       $('#description-translation').text(data.translated_description)
@@ -82,10 +85,12 @@ export class TranslateProgram extends Translation {
     $('#program-translation-loading-spinner').hide()
     $('#remove-program-translation-button').show()
 
-    $('#name').removeClass('program-name').addClass('program-name-animation')
-    $('#name-translation').removeClass('program-name').addClass('program-name-animation')
-    $('#name').animate({ width: 'toggle' })
-    $('#name-translation').animate({ width: 'toggle' }, this.ANIMATION_TIME,
+    const $name = $('#name')
+    const $nameTranslation = $('#name-translation')
+    $name.removeClass('program-name').addClass('program-name-animation')
+    $nameTranslation.removeClass('program-name').addClass('program-name-animation')
+    $name.animate({ width: 'toggle' })
+    $nameTranslation.animate({ width: 'toggle' }, this.ANIMATION_TIME,
       function () {
         $('#name').removeClass('program-name-animation').addClass('program-name')
         $('#name-translation').removeClass('program-name-animation').addClass('program-name')

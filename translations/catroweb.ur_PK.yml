@@ -124,6 +124,7 @@ programs:
     آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
     جی ہاں، اسے حذف کریں!
     منسوخ
+  tooLongName: The project name is too long!
   tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
   tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
   most:
@@ -154,8 +155,8 @@ programs:
   reportOwnProgram: آپ اپنے منصوبے مارک نہیں کر سکتے ہیں.
   reportAlready: آپ نے پہلے ہی اس منصوبے کو مارک لگایا ہے.
   reportDone: آپ نے اس منصوبے کی اطلاع دی!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppHeaderDownload: ڈاؤن لوڈ ممکن نہیں۔
+  updateAppTextDownload: براہ کرم اپنی ایپ کو تازہ ترین ورژن میں اپ ڈیٹ کریں۔ آگاہ رہیں کہ تمام اینڈرائیڈ فیچرز پہلے سے ہی IOS پر دستیاب نہیں ہیں۔
   updateAppHeader: پروگرام اپ ڈیٹ کریں
   updateAppText: براہ کرم اپنے اپلی کیشن کو تازہ ترین ورژن پر اپ ڈیٹ کریں تاکہ اس منصوبے کو ڈاؤن لوڈ کرنے کے قابل ہو.
   btnClosePopup: ٹھیک ہے

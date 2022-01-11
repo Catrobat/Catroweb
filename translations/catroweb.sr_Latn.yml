@@ -123,6 +123,7 @@ programs:
     Nema načina da obnovite svoje postupke!
     Da, obriši!
     Poništi
+  tooLongName: The project name is too long!
   tooLongDescription: Opis projekta je predug!
   tooLongCredits: Zasluge projekta su preduge!
   most:

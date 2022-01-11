@@ -1280,7 +1280,7 @@ if (isTrackingAllowed()) {
           /**
              * Tracks the display of the remix graph
              */
-          BaseSelector: '#remix-graph-button',
+          BaseSelector: '#remixGraphButton',
           Category: programCategory,
           Action: 'click - show remix graph',
           Label: function () {
@@ -1291,7 +1291,7 @@ if (isTrackingAllowed()) {
           /**
              * Tracks the display of the remix graph by link
              */
-          BaseSelector: '#remix-graph-button-small',
+          BaseSelector: '#remixGraphButton-small',
           Category: programCategory,
           Action: 'click - show remix graph',
           Label: function () {

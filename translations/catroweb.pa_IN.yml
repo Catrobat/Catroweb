@@ -124,6 +124,7 @@ programs:
     ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
     ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
     ਰੱਦ ਕਰੋ
+  tooLongName: The project name is too long!
   tooLongDescription: ਪ੍ਰੋਜੈਕਟ ਦਾ ਵੇਰਵਾ ਬਹੁਤ ਲੰਬਾ ਹੈ!
   tooLongCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਬਹੁਤ ਲੰਬੇ ਹਨ!
   most:

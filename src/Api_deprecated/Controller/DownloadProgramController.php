@@ -66,7 +66,7 @@ class DownloadProgramController extends AbstractController
   protected function validateCsrfToken(?string $token): void
   {
     // Will kill the IOS implementation (already using it as API)
-//    if (!$this->isCsrfTokenValid('project', $token)) {
+//    if ('prod' === $_ENV['APP_ENV'] && !$this->isCsrfTokenValid('project', $token)) {
 //        throw new InvalidCsrfTokenException();
 //    }
   }
@@ -91,11 +91,11 @@ class DownloadProgramController extends AbstractController
       }
       $zipFile = $this->file_repository->getProjectZipFile($id);
       if (!$zipFile->isFile()) {
-        $this->logger->error("ZIP File is no file for project with id: \"$id\" not found");
+        $this->logger->error("ZIP File is no file for project with id: \"{$id}\" not found");
         throw new NotFoundHttpException();
       }
     } catch (FileNotFoundException $fileNotFoundException) {
-      $this->logger->error("ZIP File to download project with id: \"$id\" not found");
+      $this->logger->error("ZIP File to download project with id: \"{$id}\" not found");
       throw new NotFoundHttpException();
     }
 

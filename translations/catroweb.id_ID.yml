@@ -124,6 +124,7 @@ programs:
     Tidak ada cara untuk memulihkan tindakan Anda!
     Ya, hapus!
     Membatalkan
+  tooLongName: The project name is too long!
   tooLongDescription: Deskripsi proyek terlalu panjang!
   tooLongCredits: Catatan dan kredit proyek terlalu panjang!
   most:

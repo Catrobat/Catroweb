@@ -124,6 +124,7 @@ programs:
     इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
     रद्द करें
+  tooLongName: The project name is too long!
   tooLongDescription: प्रोजेक्ट का वर्णन बहुत लंबा है!
   tooLongCredits: प्रोजेक्ट का श्रेय बहुत लंबा हैं!
   most:

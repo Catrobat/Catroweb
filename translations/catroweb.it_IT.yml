@@ -124,6 +124,7 @@ programs:
     Non esiste alcun modo per ripristinare questa azione!
     Sì, eliminalo!
     Annulla
+  tooLongName: The project name is too long!
   tooLongDescription: La descrizione del progetto è troppo lunga!
   tooLongCredits: I crediti del progetto sono troppo lunghi!
   most:
