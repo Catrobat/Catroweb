@@ -41,7 +41,7 @@ Feature: As a visitor I want to write, see and report comments.
     But the element "#hide-add-comment-button" should not be visible
     And the element "#user-comment-wrapper" should not be visible
     When I click "#show-add-comment-button"
-    And I wait for AJAX to finish
+    And I wait for the page to be loaded
     Then the element "#show-add-comment-button" should not be visible
     But the element "#hide-add-comment-button" should be visible
     And the element "#user-comment-wrapper" should be visible

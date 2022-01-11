@@ -16,15 +16,20 @@ export class Translation {
   }
 
   setTargetLanguage () {
-    const decodedCookie = document.cookie
-      .split(';')
-      .map(v => v.split('='))
-      .reduce((acc, v) => {
-        acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim())
-        return acc
-      }, {})
+    let decodedCookie
+    try {
+      decodedCookie = document.cookie
+        .split(';')
+        .map(v => v.split('='))
+        .reduce((acc, v) => {
+          acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim())
+          return acc
+        }, {})
+    } catch (e) {
+      console.error("Can't decode cookie")
+    }
 
-    if (decodedCookie.hl !== undefined) {
+    if (decodedCookie !== undefined && decodedCookie.hl !== undefined) {
       this.targetLanguage = decodedCookie.hl.replace('_', '-')
     } else {
       this.targetLanguage = document.documentElement.lang

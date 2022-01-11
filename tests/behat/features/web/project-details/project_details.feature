@@ -9,6 +9,7 @@ Feature: As a visitor I want to see a project page
     And there are projects:
       | id | name      | downloads | owned by | views | apk_ready | upload time      |
       | 1  | project 1 | 5         | Catrobat | 42    | true      | 01.01.2013 12:00 |
+    And I start a new session
 
   Scenario: Showing statistics on project page
     Given I am on "/app/project/1"
@@ -20,28 +21,46 @@ Feature: As a visitor I want to see a project page
     And I should see "5 downloads"
     And I should see "43 views"
 
-  Scenario: Increasing download counter after an APK download
-    Given I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then I should see "5 downloads"
-    When I want to download the apk file of "project 1"
-    Then I should receive the apk file
-    When I reload the page
-    And I wait for the page to be loaded
-    Then I should see "6 downloads"
-
   Scenario: Downloading a project is possible
     When I download "/app/download/1.catrobat"
     Then I should receive an application file
+
+  Scenario: Downloading a project apk is possible
+    When I want to download the apk file of "project 1"
+    Then I should receive the apk file
 
   Scenario: Download counter must not increase of not logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "5 downloads"
     When I click "#projectDownloadButton-small"
-    When I reload the page
+    And I reload the page
+    Then I should see "5 downloads"
+    When I click "#projectApkDownloadButton-small"
+    And I reload the page
     And I wait for the page to be loaded
     Then I should see "5 downloads"
+
+  Scenario: Increasing download counter after download only once! (APK)
+    Given I log in as "Catrobat2"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should see "5 downloads"
+    When I click "#projectApkDownloadButton-small"
+    When I reload the page
+    And I wait for the page to be loaded
+    Then I should see "6 downloads"
+    When I start a new session
+    And I log in as "Catrobat2"
+    And I am on "/app/project/1"
+    When I click "#projectApkDownloadButton-small"
+    And I reload the page
+    And I wait for the page to be loaded
+    Then I should see "6 downloads"
+    When I click "#projectDownloadButton-small"
+    When I reload the page
+    And I wait for the page to be loaded
+    Then I should see "6 downloads"
 
   Scenario: Increasing download counter after download only once!
     Given I log in as "Catrobat2"
@@ -49,7 +68,6 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "5 downloads"
     When I click "#projectDownloadButton-small"
-    And I wait 500 milliseconds
     When I reload the page
     And I wait for the page to be loaded
     Then I should see "6 downloads"
@@ -57,6 +75,10 @@ Feature: As a visitor I want to see a project page
     And I log in as "Catrobat2"
     And I am on "/app/project/1"
     When I click "#projectDownloadButton-small"
+    When I reload the page
+    And I wait for the page to be loaded
+    Then I should see "6 downloads"
+    When I click "#projectApkDownloadButton-small"
     When I reload the page
     And I wait for the page to be loaded
     Then I should see "6 downloads"

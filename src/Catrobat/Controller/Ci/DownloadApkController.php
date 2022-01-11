@@ -71,7 +71,7 @@ class DownloadApkController extends AbstractController
     $response = new BinaryFileResponse($file);
     $response->headers->set('Content-Disposition', $response->headers->makeDisposition(
       ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-      "$id.apk"
+      "{$id}.apk"
     ));
     $response->headers->set('Content-type', 'application/vnd.android.package-archive');
 
@@ -83,11 +83,11 @@ class DownloadApkController extends AbstractController
     try {
       $file = $this->apk_repository->getProgramFile($id);
       if (!$file->isFile()) {
-        $this->logger->error("Project apk for id: \"$id\" not found (1)");
+        $this->logger->error("Project apk for id: \"{$id}\" not found (1)");
         throw new NotFoundHttpException();
       }
     } catch (Exception $exception) {
-      $this->logger->error("Project apk for id: \"$id\" not found (2)");
+      $this->logger->error("Project apk for id: \"{$id}\" not found (2)");
       throw new NotFoundHttpException($exception->__toString());
     }
 
@@ -96,8 +96,8 @@ class DownloadApkController extends AbstractController
 
   protected function validateCsrfToken(?string $token): void
   {
-    if (!$this->isCsrfTokenValid('project', $token)) {
-        throw new InvalidCsrfTokenException();
+    if ('prod' === $_ENV['APP_ENV'] && !$this->isCsrfTokenValid('project', $token)) {
+      throw new InvalidCsrfTokenException();
     }
   }
 

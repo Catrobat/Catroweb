@@ -7,7 +7,7 @@ Feature: As a visitor I want to see code statistics on the project page
       | 1  | program 1 |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#code-statistics-small"
+    And I click "#projectCodeStatsButton-small"
     And I wait for the page to be loaded
     Then I should be on "/app/project/1/code_statistics"
     And the "#top-app-bar__title" element should contain "Code statistics"

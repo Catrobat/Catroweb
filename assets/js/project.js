@@ -90,15 +90,6 @@ ProgramCredits(
   $projectDescriptionCredits.data('project-id')
 )
 
-new TranslateProgram(
-  $project.data('translated-by-line'),
-  $project.data('project-id'),
-  $project.data('has-description'),
-  $project.data('has-credits')
-)
-
-new TranslateComments($project.data('translated-by-line'))
-
 setImageUploadListener($project.data('path-change-image'), '#change-project-thumbnail-button', '#project-thumbnail-big')
 
 initProjects()
@@ -143,3 +134,12 @@ ProgramComments(
   $projectComments.data('trans-no-admin-rights-message'),
   $projectComments.data('trans-default-error-message')
 )
+
+new TranslateProgram(
+  $project.data('translated-by-line'),
+  $project.data('project-id'),
+  $project.data('has-description'),
+  $project.data('has-credits')
+)
+
+new TranslateComments($project.data('translated-by-line'))
