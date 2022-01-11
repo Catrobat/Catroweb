@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: لا يمكنك وضع علامة على مشروعك.
   reportAlready: لقد قمت بالفعل بوضع علامة على هذا المشروع.
   reportDone: لقد أبلغت عن هذا المشروع!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: تحديث التطبيق
   updateAppText: الرجاء تحديث التطبيق الخاص بك إلى أحدث إصدار لتتمكن من تنزيل هذا المشروع.
   btnClosePopup: موافق

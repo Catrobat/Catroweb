@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Kendi projenizi işaretleyemezsiniz.
   reportAlready: Bu projeyi zaten işaretlediniz.
   reportDone: Bu projeyi bildirdiniz!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Programı güncelleyin
   updateAppText: Bu projeyi indirebilmek için lütfen uygulamanızı en yeni sürüme güncelleyin.
   btnClosePopup: Tamam

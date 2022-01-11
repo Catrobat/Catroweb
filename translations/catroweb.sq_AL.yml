@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Nuk mund ta etiketoni programin e juaj.
   reportAlready: Tashmë e keni etiketuar këtë program si të papërshtatshëm.
   reportDone: Ju raportuat këtë program si të papërshtatshëm!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Fresko Aplikacionin
   updateAppText: Ju lutem përditësoni aplikacionin tuaj në versionin më të ri për të pasur mundësi ta shkarkoni këtë program.
   btnClosePopup: Ok

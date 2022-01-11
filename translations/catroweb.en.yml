@@ -129,6 +129,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
   most:
@@ -161,6 +162,7 @@ programs:
   reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok

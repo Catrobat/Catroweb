@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: আপনি আপনার নিজের প্রকল্পটিকে ফ্ল্যাগ করতে পারবেন না।
   reportAlready: আপনি ইতিমধ্যে এই প্রকল্পটি পতাকাঙ্কিত করেছেন।
   reportDone: আপনি এই প্রকল্পের রিপোর্ট করেছেন!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: অ্যাপ্লিকেশন আপডেট করুন
   updateAppText: এই প্রকল্পটি ডাউনলোড করতে সক্ষম হতে দয়া করে আপনার অ্যাপ্লিকেশনটিকে নতুন সংস্করণে আপডেট করুন।
   btnClosePopup: ঠিক আছে

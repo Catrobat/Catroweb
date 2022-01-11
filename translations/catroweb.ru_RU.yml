@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: Вы не можете отметить свой собственный проект.
   reportAlready: Вы уже отметили этот проект.
   reportDone: Вы сообщили об этом проекте!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: Обновить приложение
   updateAppText: Пожалуйста, обновите приложение до последней версии, чтобы загрузить этот проект.
   btnClosePopup: Ок

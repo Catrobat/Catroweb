@@ -2,24 +2,7 @@ import $ from 'jquery'
 import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
-
-function redirect (url, spinner, icon = null) {
-  const buttonSpinner = $(spinner)
-  if (icon) {
-    const buttonIcon = $(icon)
-    buttonIcon.hide()
-  }
-  buttonSpinner.removeClass('d-none')
-  window.location.href = url
-}
-
-$('.project-redirect').on('click', (e) => {
-  redirect(
-    $(e.currentTarget).data('url'),
-    $(e.currentTarget).data('spinner'),
-    $(e.currentTarget).data('icon')
-  )
-})
+import '../components/redirect_button'
 
 export const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
@@ -27,90 +10,136 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
   createLinks()
   getApkStatus()
 
-  $('.btn-project-download').on('click', (e) => {
+  // -------------------------- Utils
+
+  function createLinks () {
+    $('#description').each(function () {
+      $(this).html($(this).html().replace(/((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a> '))
+    })
+  }
+
+  // -------------------------- Download
+
+  $('.js-btn-project-download').on('click', (e) => {
     download(
       $(e.currentTarget).data('path-url'),
-      $(e.currentTarget).data('project-id'),
+      $(e.currentTarget).data('project-id') + '.catrobat',
       $(e.currentTarget).data('button-id'),
-      $(e.currentTarget).data('is-supported'),
+      $(e.currentTarget).data('spinner-id'),
+      $(e.currentTarget).data('icon-id'),
       $(e.currentTarget).data('is-webview'),
-      $(e.currentTarget).data('pb'),
-      $(e.currentTarget).data('icon'),
+      $(e.currentTarget).data('is-supported'),
       $(e.currentTarget).data('is-not-supported-title'),
       $(e.currentTarget).data('is-not-supported-text')
     )
   })
 
-  let apkDownloadTimeout = false
+  $('.js-btn-project-apk-download').on('click', (e) => {
+    download(
+      $(e.currentTarget).data('path-url'),
+      $(e.currentTarget).data('project-id') + '.apk',
+      $(e.currentTarget).data('button-id'),
+      $(e.currentTarget).data('spinner-id'),
+      $(e.currentTarget).data('icon-id'),
+      $(e.currentTarget).data('is-webview'),
+      $(e.currentTarget).data('is-supported'),
+      $(e.currentTarget).data('is-not-supported-title'),
+      $(e.currentTarget).data('is-not-supported-text')
+    )
+  })
 
-  function download (downloadUrl, projectId, buttonId, supported = true, isWebView = false,
-    downloadPbID, downloadIconID, isNotSupportedTitle, isNotSupportedText) {
-    const downloadProgressBar = $(downloadPbID)
-    const downloadIcon = $(downloadIconID)
-    const button = document.querySelector(buttonId)
+  function download (downloadUrl, filename, buttonId, spinnerId, iconId, isWebView = false,
+    supported = true, isNotSupportedTitle = '', isNotSupportedText = '') {
+    const button = document.getElementById(buttonId)
+    const loadingSpinner = document.getElementById(spinnerId)
+    const icon = document.getElementById(iconId)
+
+    // UX - feedback loop: downloads of large projects can take a few seconds / minutes
     showSnackbar('#share-snackbar', downloadStartedText)
 
+    // Security
     downloadUrl += downloadUrl.includes('?') ? '&' : '?'
     downloadUrl += 'token=' + encodeURIComponent(csrfToken)
 
+    // UX + Performance: prevent multiple same downloads
     button.disabled = true
+    icon.classList.add('d-none')
+    loadingSpinner.classList.remove('d-none')
+    loadingSpinner.classList.add('d-inline-block')
+
+    // Unfortunately the android implementation of pocket code has its issues with the new download implementation
     if (isWebView) {
       window.location = downloadUrl
       return
     }
 
-    if (!supported) {
-      Swal.fire({
-        icon: 'error',
-        title: isNotSupportedTitle,
-        text: isNotSupportedText,
-        customClass: {
-          confirmButton: 'btn btn-primary'
-        },
-        buttonsStyling: false,
-        allowOutsideClick: false
-      })
+    // Older app version do not support new features and projects that use them
+    if (isWebView && !supported) {
+      showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText)
       return
     }
-    downloadIcon.addClass('d-none')
-    downloadProgressBar.removeClass('d-none')
-    downloadProgressBar.addClass('d-inline-block')
+
+    // eslint-disable-next-line no-undef
     fetch(downloadUrl)
       .then(function (response) {
-        if (!response.ok) {
-          showSnackbar('#share-snackbar', downloadErrorText)
-          return null
+        // fetching the data in the background; this allows us to detect when the download is finished!
+        if (response.ok) {
+          return response.blob()
         }
-        return response.blob()
       })
       .then(blob => {
+        // once the data was fetched the downloaded data can be saved
         const url = window.URL.createObjectURL(blob)
         const a = document.createElement('a')
         a.style.display = 'none'
         a.href = url
-        a.download = projectId + '.catrobat'
+        a.download = filename
         document.body.appendChild(a)
         a.click()
         window.URL.revokeObjectURL(url)
-        downloadIcon.removeClass('d-none')
-        downloadIcon.addClass('d-inline-block')
-        downloadProgressBar.removeClass('d-inline-block')
-        downloadProgressBar.addClass('d-none')
-        setTimeout(() => {
-          button.disabled = false
-        }, 15000)
       })
       .catch(() => {
-        console.error('Downloading project ' + projectId + 'failed')
-        downloadIcon.removeClass('d-none')
-        downloadIcon.addClass('d-inline-block')
-        downloadProgressBar.removeClass('d-inline-block')
-        downloadProgressBar.addClass('d-none')
+        // UX: Tell the use that something went wrong
+        showDownloadFailedSnackbar(downloadErrorText, filename)
+      })
+      .finally(() => {
+        // UX: Reset the button to further indicate the successful download
+        resetDownloadButtonIcon(icon, loadingSpinner)
+        // Performance: Keep the button disabled to prevent spamming the download button
         setTimeout(() => {
           button.disabled = false
         }, 15000)
       })
   }
+
+  function resetDownloadButtonIcon (icon, spinner) {
+    icon.classList.remove('d-none')
+    icon.classList.add('d-inline-block')
+    spinner.classList.remove('d-inline-block')
+    spinner.classList.add('d-none')
+  }
+
+  function showDownloadFailedSnackbar (downloadErrorText, filename) {
+    showSnackbar('#share-snackbar', downloadErrorText)
+    console.error('Downloading ' + filename + ' failed')
+  }
+
+  function showProjectIsNotSupportedMessage (isNotSupportedTitle, isNotSupportedText) {
+    Swal.fire({
+      icon: 'error',
+      title: isNotSupportedTitle,
+      text: isNotSupportedText,
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false,
+      allowOutsideClick: false
+    }).then()
+  }
+
+  // -------------------------- APK Logic
+  // Refactoring would be nice!
+  //
 
   function getApkStatus () {
     $.get(statusUrl, null, onResult)
@@ -125,24 +154,13 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
 
   function onResult (data) {
     const apkPending = $('#apk-pending, #apk-pending-small')
-    const apkDownload = $('#apk-download, #apk-download-small')
+    const apkDownload = $('#projectApkDownloadButton, #projectApkDownloadButton-small')
     const apkGenerate = $('#apk-generate, #apk-generate-small')
     apkGenerate.addClass('d-none')
     apkDownload.addClass('d-none')
     apkPending.addClass('d-none')
     if (data.status === 'ready') {
       apkDownload.removeClass('d-none')
-      apkDownload.click(function () {
-        if (!apkDownloadTimeout) {
-          apkDownloadTimeout = true
-
-          setTimeout(function () {
-            apkDownloadTimeout = false
-          }, 5000)
-
-          window.top.location.href = data.url
-        }
-      })
     } else if (data.status === 'pending') {
       apkPending.removeClass('d-none')
       setTimeout(getApkStatus, 5000)
@@ -157,12 +175,6 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     if (bgDarkPopupInfo.length > 0 && data.status === 'ready') {
       bgDarkPopupInfo.remove()
     }
-  }
-
-  function createLinks () {
-    $('#description').each(function () {
-      $(this).html($(this).html().replace(/((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a> '))
-    })
   }
 
   function showPreparingApkPopup () {
@@ -197,16 +209,9 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     return $('<div id="popup-background" class="popup-bg"></div>')
   }
 
-  function createCookie (name, value, days2expire, path) {
-    const date = new Date()
-    date.setTime(date.getTime() + (days2expire * 24 * 60 * 60 * 1000))
-    const expires = date.toUTCString()
-    document.cookie = name + '=' + value + ';' +
-      'expires=' + expires + ';' +
-      'path=' + path + ';'
-  }
-
-  createCookie('referrer', document.referrer, 1, '/')
+  // -------------------------- Project Likes / Reactions
+  // Refactoring would be nice!
+  //
 
   function showErrorAlert (message) {
     if (typeof message !== 'string' || message === '') {
@@ -473,6 +478,10 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     initProjectLike()
   })
 }
+
+// -------------------------- APK Logic
+// Implementation not even finished
+//
 
 $(document).on('click', function (e) {
   const ellipsisContainer = $('#sign-app-ellipsis-container')

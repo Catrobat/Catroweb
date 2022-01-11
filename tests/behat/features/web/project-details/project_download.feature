@@ -13,8 +13,8 @@ Feature: As a visitor I want to be able to download projects
   Scenario: I want to download a project via the button
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#url-download-small" should be visible
-    And I click "#url-download-small"
+    Then the element "#projectDownloadButton-small" should be visible
+    And I click "#projectDownloadButton-small"
     And I wait 150 milliseconds
     And the element "#share-snackbar" should be visible
     And I should not see "Error occurred while downloading the project"
@@ -26,16 +26,16 @@ Feature: As a visitor I want to be able to download projects
     And project "2" is missing its files
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#url-download-small" should be visible
+    Then the element "#projectDownloadButton-small" should be visible
     And the element "#share-snackbar" should not be visible
-    And I click "#url-download-small"
+    And I click "#projectDownloadButton-small"
     And I wait 150 milliseconds
     Then the element "#share-snackbar" should be visible
     And I should see "Error occurred while downloading the project"
     When I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#url-download-small" should be visible
-    And I click "#url-download-small"
+    Then the element "#projectDownloadButton-small" should be visible
+    And I click "#projectDownloadButton-small"
     And I wait 150 milliseconds
     Then the element "#share-snackbar" should be visible
     And I should see "Error occurred while downloading the project"
@@ -45,6 +45,6 @@ Feature: As a visitor I want to be able to download projects
     # Disabled due to its flakiness
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#url-download-small"
+    When I click "#projectDownloadButton-small"
     Then the element "#download-progressbar-small" should be visible
-    Then the button "#url-download-small" should be disabled until download is finished
+    Then the button "#projectDownloadButton-small" should be disabled until download is finished

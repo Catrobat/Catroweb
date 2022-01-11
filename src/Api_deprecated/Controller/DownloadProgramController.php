@@ -5,6 +5,7 @@ namespace App\Api_deprecated\Controller;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Program;
+use App\Entity\ProgramDownloads;
 use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Event\ProjectDownloadEvent;
@@ -30,10 +31,10 @@ class DownloadProgramController extends AbstractController
   protected LoggerInterface $logger;
 
   public function __construct(EventDispatcherInterface $event_dispatcher,
-                                ProgramFileRepository $file_repository,
-                                ProgramManager $program_manager,
-                                ExtractedFileRepository $extracted_file_repository,
-                                LoggerInterface $downloadLogger)
+                              ProgramFileRepository $file_repository,
+                              ProgramManager $program_manager,
+                              ExtractedFileRepository $extracted_file_repository,
+                              LoggerInterface $downloadLogger)
   {
     $this->event_dispatcher = $event_dispatcher;
     $this->file_repository = $file_repository;
@@ -55,7 +56,9 @@ class DownloadProgramController extends AbstractController
     $file = $this->getZipFile($id);
     $response = $this->createDownloadFileResponse($id, $file);
 
-    $this->event_dispatcher->dispatch(new ProjectDownloadEvent($user, $project, $request));
+    $this->event_dispatcher->dispatch(
+      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT, $request)
+    );
 
     return $response;
   }
@@ -86,18 +89,17 @@ class DownloadProgramController extends AbstractController
       if (!$this->file_repository->checkIfProjectZipFileExists($id)) {
         $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
       }
-
       $zipFile = $this->file_repository->getProjectZipFile($id);
       if (!$zipFile->isFile()) {
-        $this->logger->error('ZIP File is no file for project with id: '.$id.'not found');
+        $this->logger->error("ZIP File is no file for project with id: \"$id\" not found");
         throw new NotFoundHttpException();
       }
-
-      return $zipFile;
     } catch (FileNotFoundException $fileNotFoundException) {
-      $this->logger->error('ZIP File to download project with id: '.$id.'not found');
+      $this->logger->error("ZIP File to download project with id: \"$id\" not found");
       throw new NotFoundHttpException();
     }
+
+    return $zipFile;
   }
 
   protected function createDownloadFileResponse(string $id, File $file): BinaryFileResponse

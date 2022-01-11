@@ -154,6 +154,8 @@ programs:
   reportOwnProgram: உங்கள் சொந்த திட்டத்தை நீங்களே குறியிட இயலாது.
   reportAlready: இந்த திட்டத்தை நீங்கள் ஏற்கனவே கொடியிட்டுள்ளீர்கள்.
   reportDone: நீங்கள் இந்த திட்டத்தைப் புகாரளித்தீர்கள்!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppHeader: செயலியை புதுபிக்கவும்
   updateAppText: இந்த ப்ரொக்ராமை பதிவிறக்கம் செய்ய தயவுசெய்து உங்கள் செயலியை புதிய பதிப்பிற்கு புதுபிக்கவும்.
   btnClosePopup: சரி

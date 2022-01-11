@@ -187,9 +187,11 @@ class ProgramManager
       $this->removeAllTags($program);
       // it's an update
       $program->incrementVersion();
+      $program->setVisible($old_program->getVisible()); // necessary to keep reported projects invisible after re-upload!
     } else {
       $program = new Program();
       $program->setRemixRoot(true);
+      $program->setVisible(true);
     }
 
     $program->setName($extracted_file->getName());
@@ -200,7 +202,6 @@ class ProgramManager
     $program->setLanguageVersion($extracted_file->getLanguageVersion());
     $program->setUploadIp($request->getIp());
     $program->setFilesize($file->getSize());
-    $program->setVisible(true);
     $program->setApproved(false);
     $program->setUploadLanguage('en');
     $program->setUploadedAt(TimeUtils::getDateTime());
@@ -623,27 +624,43 @@ class ProgramManager
 
   public function increaseDownloads(Program $program, ?User $user): void
   {
+    $this->increaseNumberOfDownloads($program, $user, ProgramDownloads::TYPE_PROJECT);
+    $this->addDownloadEntry($program, $user, ProgramDownloads::TYPE_PROJECT);
+  }
+
+  public function increaseApkDownloads(Program $program, ?User $user): void
+  {
+    $this->increaseNumberOfDownloads($program, $user, ProgramDownloads::TYPE_APK);
+    $this->addDownloadEntry($program, $user, ProgramDownloads::TYPE_APK);
+  }
+
+  protected function increaseNumberOfDownloads(Program $program, ?User $user, string $download_type): void
+  {
     if (!is_null($user)) {
       $download_repo = $this->entity_manager->getRepository(ProgramDownloads::class);
+      // No matter which type it should only count once!
       $download = $download_repo->findOneBy(['program' => $program, 'user' => $user]);
 
+      // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
       if (is_null($download)) {
-        // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
-        $this->entity_manager->createQuery('UPDATE App\Entity\Program p SET p.downloads = p.downloads + 1')->execute();
-        $download = new ProgramDownloads();
-        $download->setUser($user);
-        $download->setProgram($program);
-        $download->setDownloadedAt(new DateTime('now'));
-        $this->entity_manager->persist($download);
-        $this->entity_manager->flush();
+        if ($download_type === ProgramDownloads::TYPE_PROJECT) {
+          $this->entity_manager->createQuery('UPDATE App\Entity\Program p SET p.downloads = p.downloads + 1')->execute();
+        } elseif ($download_type === ProgramDownloads::TYPE_APK) {
+          $this->entity_manager->createQuery('UPDATE App\Entity\Program p SET p.apk_downloads = p.apk_downloads + 1')->execute();
+        }
       }
     }
   }
 
-  public function increaseApkDownloads(Program $program): void
+  protected function addDownloadEntry(Program $program, ?User $user, string $download_type): void
   {
-    $program->setApkDownloads($program->getApkDownloads() + 1);
-    $this->save($program);
+      $download = new ProgramDownloads();
+      $download->setUser($user);
+      $download->setProgram($program);
+      $download->setType($download_type);
+      $download->setDownloadedAt(new DateTime('now'));
+      $this->entity_manager->persist($download);
+      $this->entity_manager->flush();
   }
 
   public function save(Program $program, ProgramDownloads $downloads = null): void

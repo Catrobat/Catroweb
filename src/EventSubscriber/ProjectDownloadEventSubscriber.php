@@ -20,7 +20,7 @@ class ProjectDownloadEventSubscriber implements EventSubscriberInterface
 
   public function onProjectDownload(ProjectDownloadEvent $event): void
   {
-    $sessionKey = 'projectDownloadList';
+    $sessionKey = 'projectDownloadList_'.$event->getDownloadType();
     $downloadList = $event->getRequest()->getSession()->get($sessionKey, []);
     if (!in_array($event->getProject()->getId(), $downloadList, true)) {
       $this->program_manager->increaseDownloads($event->getProject(), $event->getUser());
