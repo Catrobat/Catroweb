@@ -157,6 +157,7 @@ programs:
   reportDone: Proiektu hau salatu egin duzu!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Aplikazioa eguneratu
   updateAppText: Eguneratu zure aplikazioa azken bertsiora mesedez, proiektu hau deskargatu ahal izateko.
   btnClosePopup: Ados

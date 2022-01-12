@@ -157,6 +157,7 @@ programs:
   reportDone: Projeto reportado!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Atualizar aplicativo
   updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok

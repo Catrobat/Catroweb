@@ -156,6 +156,7 @@ programs:
   reportDone: تاسو د دې پروژې راپور ورکړی!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: اپلیکیشن تازه کړئ
   updateAppText: مهرباني وکړئ خپل اپلیکیشن نوي نسخه ته تازه کړئ ترڅو د دې پروژې ډاونلوډ کولو وړ وي.
   btnClosePopup: سمه ده

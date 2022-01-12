@@ -157,6 +157,7 @@ programs:
   reportDone: আপনি এই প্রকল্পের রিপোর্ট করেছেন!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: অ্যাপ্লিকেশন আপডেট করুন
   updateAppText: এই প্রকল্পটি ডাউনলোড করতে সক্ষম হতে দয়া করে আপনার অ্যাপ্লিকেশনটিকে নতুন সংস্করণে আপডেট করুন।
   btnClosePopup: ঠিক আছে

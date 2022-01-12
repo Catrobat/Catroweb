@@ -157,6 +157,7 @@ programs:
   reportDone: 你舉報了這個項目！
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update App
   updateAppText: 請將您的應用更新到最新版本，以便能夠下載此項目。
   btnClosePopup: 好的

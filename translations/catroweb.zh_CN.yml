@@ -124,7 +124,7 @@ programs:
     再也无法恢复您的操作！
     是的，删除它！
     取消
-  tooLongName: The project name is too long!
+  tooLongName: 项目名称过长！
   tooLongDescription: 项目描述太长了！
   tooLongCredits: 项目致谢过长！
   most:
@@ -155,8 +155,9 @@ programs:
   reportOwnProgram: 您不能标记您自己的项目。
   reportAlready: 您已经标记了这个项目。
   reportDone: 您举报了这个项目！
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppHeaderDownload: 无法下载
+  updateAppTextDownload: 请更新您的应用程序到最新版本。请注意，iOS 上并非所有的 Android 功能都可用。
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: 升级
   updateAppText: 请更新您的应用到最新版本以便能够下载此项目。
   btnClosePopup: 好
