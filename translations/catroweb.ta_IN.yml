@@ -157,6 +157,7 @@ programs:
   reportDone: நீங்கள் இந்த திட்டத்தைப் புகாரளித்தீர்கள்!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: செயலியை புதுபிக்கவும்
   updateAppText: இந்த ப்ரொக்ராமை பதிவிறக்கம் செய்ய தயவுசெய்து உங்கள் செயலியை புதிய பதிப்பிற்கு புதுபிக்கவும்.
   btnClosePopup: சரி

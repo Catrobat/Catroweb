@@ -157,6 +157,7 @@ programs:
   reportDone: You reported this program as inappropriate!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version to be able to download this program.
   btnClosePopup: OK

@@ -157,6 +157,7 @@ programs:
   reportDone: Anda melaporkan proyek ini!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Perbaharui Aplikasi
   updateAppText: Harap perbarui aplikasi Anda ke versi terbaru untuk dapat mengunduh proyek ini.
   btnClosePopup: Oke

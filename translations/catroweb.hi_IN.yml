@@ -157,6 +157,7 @@ programs:
   reportDone: आपने इस प्रोजेक्ट को रिपोर्ट कर दिया!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: एप्लिकेशन को अपडेट करें
   updateAppText: इस प्रोजेक्ट को डाउनलोड करने के लिए कृपया अपने ऐप को सबसे नए वर्जन में अपडेट करें।
   btnClosePopup: ठीक है
