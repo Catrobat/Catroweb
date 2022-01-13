@@ -157,7 +157,7 @@ programs:
   reportDone: Bu projeyi bildirdiniz!
   updateAppHeaderDownload: İndirmek mümkün değil
   updateAppTextDownload: Lütfen uygulamanızı en yeni sürüme güncelleyin. Tüm Android özelliklerinin IOS'ta mevcut olmadığını unutmayın.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppTextDownloadApk: Uygulama olarak indirme şu anda yalnızca Android'de mevcuttur ve IOS'ta mevcut değildir.
   updateAppHeader: Programı güncelleyin
   updateAppText: Bu projeyi indirebilmek için lütfen uygulamanızı en yeni sürüme güncelleyin.
   btnClosePopup: Tamam

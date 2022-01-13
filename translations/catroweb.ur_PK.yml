@@ -157,7 +157,7 @@ programs:
   reportDone: آپ نے اس منصوبے کی اطلاع دی!
   updateAppHeaderDownload: ڈاؤن لوڈ ممکن نہیں۔
   updateAppTextDownload: براہ کرم اپنی ایپ کو تازہ ترین ورژن میں اپ ڈیٹ کریں۔ آگاہ رہیں کہ تمام اینڈرائیڈ فیچرز پہلے سے ہی IOS پر دستیاب نہیں ہیں۔
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppTextDownloadApk: APK ڈاؤن لوڈ فی الحال صرف اینڈرائیڈ پر دستیاب ہے نہ کہ IOS پر۔
   updateAppHeader: پروگرام اپ ڈیٹ کریں
   updateAppText: براہ کرم اپنے اپلی کیشن کو تازہ ترین ورژن پر اپ ڈیٹ کریں تاکہ اس منصوبے کو ڈاؤن لوڈ کرنے کے قابل ہو.
   btnClosePopup: ٹھیک ہے
