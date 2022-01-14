@@ -159,7 +159,7 @@ programs:
   reportDone: คุณรายงานโครงการนี้!
   updateAppHeaderDownload: ดาวน์โหลดไม่ได้
   updateAppTextDownload: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด โปรดทราบว่าคุณลักษณะบางอย่างของ Android อาจไม่พร้อมใช้งานบน IOS
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppTextDownloadApk: การดาวน์โหลด APK มีให้บริการบน Android เท่านั้น และไม่สามารถใช้กับ IOS ได้
   updateAppHeader: อัพเดทแอพพลิเคชั่น
   updateAppText: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันล่าสุดเพื่อให้สามารถดาวน์โหลดโครงการนี้
   btnClosePopup: ตกลง
