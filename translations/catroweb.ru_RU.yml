@@ -11,7 +11,7 @@ aboutPocketCode: О Pocket Code
 about: О программе
 education: Образование
 chat: Чат и форумы
-others: Другое
+others: Другие
 tutorials: Помощь
 googlePlay: Google Play Маркет
 iosAppStore: Магазин приложений iOS
@@ -28,7 +28,7 @@ areYouSure: Вы уверены?
 noWayOfReturn: Это безвозвратное действие!
 download: Скачать
 description: Описание
-noDescription: Без описания.
+noDescription: Описание отсутствует.
 credits: Примечания и авторы
 noCredits: Нету примечаний и информации об авторах
 notesAndCreditsDescription: Как вы создали этот проект? Вы заимствовали идеи, скрипты или изображения у других людей? Поблагодарите их здесь.
@@ -36,9 +36,9 @@ country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
 imprint: Импринт
-programDetails: Подробности
+programDetails: Детали
 somethingWentWrong: 'Ой, что-то пошло не так.'
-pleaseTryAgain: 'Попробуйте еще раз!'
+pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
 oldVersionError: 'Пожалуйста, обновите Покет Код до последней версии!'
 more: 'больше'
 less: 'скрыть'
@@ -50,7 +50,7 @@ ok: Ок
 clickToDownloadProgram: 'Чтобы скачать пример проекта, нажми %link_start% здесь %link_end%.'
 registrationError: 'Имя пользователя или адрес электронной почты уже используются.'
 notifications: 'Уведомления'
-allNotifications: 'Все уведомления'
+allNotifications: 'Все'
 FollowersNotifications: 'Подписчики'
 LikeNotifications: 'Оценки'
 CommentNotifications: 'Комментарии'
@@ -93,10 +93,10 @@ programs:
     title_mindstorms: Добро пожаловать на сайт Catrobat для Mindstorms EV3 и NXT
     subtitle: Создавайте истории, игры и многое другое...
     subtitle_embroidery: Вышивайте собственные узоры на футболках, сумках, брюках или чехлах для смартфона!
-    subtitle_mindstorms: Создавайте собственные проекты с помощью роботов Lego Mindstorms EV3 и NXT
+    subtitle_mindstorms: Создавайте собственные проекты с помощью своих роботов Lego Mindstorms EV3 и NXT
     download: Скачать приложение
     statistics: Больше статистики
-  featured: Популярное
+  featured: Избранное
   example: Примеры
   newest: Новые проекты
   recommended: Рекомендуемые проекты
@@ -220,7 +220,7 @@ accountConfirmation:
     Команда Catrobat.
     </p>
 passwordRecovery:
-  subject: Восстановление пароля Catrobat
+  subject: Восстановление вашего Catrobat пароля
   message: |
     Уважаемый(-ая) %username%.
     Мы получили запрос на восстановления вашего пароля на %appplication_url%, потому что вы забыли ваш пароль
@@ -252,7 +252,7 @@ passwordRecovery:
 profile:
   edit: Редактировать свой профиль
   saveChanges: Сохранить изменения
-  newPass: Новый пароль
+  newPass: новый пароль
   repeatPass: Повторите пароль
   oldPass: Старый пароль
   firstEmail: Моя первая электронная почта
