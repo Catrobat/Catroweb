@@ -44,3 +44,48 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#edit-credits-submit-button"
     And I wait for AJAX to finish
     Then I should see "This is a credit"
+  
+  Scenario: Editing credits, closing the editor while saving edits
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#edit-credits-button" should be visible
+    When I click "#edit-credits-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-credits" with "These are new notes and credits"
+    And I click "#close-credits-editor-button"
+    And I should see "Do you want to save your changes?"
+    When I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    Then the element "#credits" should be visible
+    And the element "#edit-credits-ui" should not be visible
+    And I should see "These are new notes and credits"
+
+  Scenario: Editing credits, closing the editor while discarding edits
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#edit-credits-button" should be visible
+    When I click "#edit-credits-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-credits" with "These are new notes and credits"
+    And I click "#close-credits-editor-button"
+    And I should see "Do you want to save your changes?"
+    When I click ".swal2-deny"
+    Then the element "#credits" should be visible
+    And the element "#edit-credits-ui" should not be visible
+    And I should see "No notes and credits"
+
+  Scenario: Editing credits, closing the editor but going back to unsaved changes
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#edit-credits-button" should be visible
+    When I click "#edit-credits-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-credits" with "These are new notes and credits"
+    And I click "#close-credits-editor-button"
+    And I should see "Do you want to save your changes?"
+    When I click ".swal2-close"
+    Then the element "#edit-credits" should be visible
+    Then the "edit-credits" field should contain "These are new notes and credits"
