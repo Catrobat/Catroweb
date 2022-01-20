@@ -40,6 +40,51 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Then the element "#description" should be visible
     And the element "#edit-description-ui" should not be visible
     And I should see "This is a new description"
+  
+  Scenario: Editing description, closing the editor while saving edits
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#edit-description-button" should be visible
+    When I click "#edit-description-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-description" with "This is a new description"
+    And I click "#close-description-editor-button"
+    And I should see "Do you want to save your changes?"
+    When I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    Then the element "#description" should be visible
+    And the element "#edit-description-ui" should not be visible
+    And I should see "This is a new description"
+
+  Scenario: Editing description, closing the editor while discarding edits
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#edit-description-button" should be visible
+    When I click "#edit-description-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-description" with "This is a new description"
+    And I click "#close-description-editor-button"
+    And I should see "Do you want to save your changes?"
+    When I click ".swal2-deny"
+    Then the element "#description" should be visible
+    And the element "#edit-description-ui" should not be visible
+    And I should see "my description"
+
+  Scenario: Editing description, closing the editor but going back to unsaved changes
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#edit-description-button" should be visible
+    When I click "#edit-description-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-description" with "This is a new description"
+    And I click "#close-description-editor-button"
+    And I should see "Do you want to save your changes?"
+    When I click ".swal2-close"
+    Then the element "#edit-description" should be visible
+    Then the "edit-description" field should contain "This is a new description"
 
   Scenario: Large Project Descriptions are only fully visible when show more was clicked
     Given there are programs with a large description:

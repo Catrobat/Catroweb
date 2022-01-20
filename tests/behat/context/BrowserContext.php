@@ -370,6 +370,28 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     );
   }
 
+  /**
+   * @Then /^I choose "([^"]*)" from selector "([^"]*)"$/
+   *
+   * @param mixed $text
+   * @param mixed $selector
+   */
+  public function iChooseItemFromSelector($text, $selector): void
+  {
+    $this->getSession()->getPage()->find('css', $selector)->click();
+
+    $selected = false;
+    $items = $this->getSession()->getPage()->findAll('css', '.mdc-list-item');
+    foreach ($items as $item) {
+      if ($item->getText() == $text) {
+        $item->click();
+        $selected = true;
+      }
+    }
+
+    Assert::assertTrue($selected, "Item '".$text."' for '".$selector."' has not been selected");
+  }
+
   //--------------------------------------------------------------------------------------------------------------------
   //  WAIT - Sometimes it is necessary to wait to prevent timing issues
   //--------------------------------------------------------------------------------------------------------------------
