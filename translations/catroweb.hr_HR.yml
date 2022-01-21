@@ -174,8 +174,14 @@ programs:
   noAdminRights: Nemate prava administratora. Molimo prijavite se kao administrator.
   editDescription: Promijenite opis Projekta
   saveDescription: Spremite promjene opisa
+  closeDescriptionEditor: Close description editor
   editCredits: Promijenit zasluge za ovaj projekt
   saveCredits: Spremite promjene zasluga za ovaj projekt
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Želite li sačuvati izmjene?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Odbaci
   addComment: Ostavite komentar
   thumbsUp: Palac gore!
   smile: Osmijeh!
@@ -189,6 +195,9 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Zadano
 remixGraph:
   title: Remixi
   showRemixGraph: 'Prikazi Remix Graf'

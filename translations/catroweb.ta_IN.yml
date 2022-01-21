@@ -174,8 +174,14 @@ programs:
   noAdminRights: உங்களுக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழைக.
   editDescription: திட்ட விளக்கத்தைத் திருத்துக
   saveDescription: விளக்க மாற்றத்தை சேமிக்கவும்
+  closeDescriptionEditor: Close description editor
   editCredits: திட்ட வரவுகளைத் திருத்துக
   saveCredits: வரவுகளை மாற்றவும்
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: புறக்கணி
   addComment: தங்கள் கருத்தை பகிரவும்
   thumbsUp: வெற்றி!
   smile: புன்னகைக்கவும்!
@@ -189,6 +195,9 @@ programs:
   showTranslation: மொழிபெயர்ப்பைக் காட்டு
   hideTranslation: மொழிபெயர்ப்பை மறை
   translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: இயல்புநிலை
 remixGraph:
   title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'

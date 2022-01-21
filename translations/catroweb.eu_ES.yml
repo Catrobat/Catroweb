@@ -174,8 +174,14 @@ programs:
   noAdminRights: Ez daukazu admin eskubiderik. Mesedez hasi saioa admin moduan.
   editDescription: Proiektuaren deskribapena editatu
   saveDescription: Gorde
+  closeDescriptionEditor: Close description editor
   editCredits: Proiektuaren ohar eta kredituak editatu
   saveCredits: Gorde
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Ziur aldaketak gorde nahi dituzula?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Baztertu
   addComment: Iruzkin bat idatzi
   thumbsUp: Ederki!
   smile: Irribarre!
@@ -189,6 +195,9 @@ programs:
   showTranslation: Erakutsi itzulpena
   hideTranslation: Ezkutatu itzulpena
   translatedByLine: '%sourceLanguage%-(e)tik %targetLanguage%-(e)ra %provider%-(e)k itzulita.'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Default
 remixGraph:
   title: Nahaste borrasteak
   showRemixGraph: 'Remix graph'

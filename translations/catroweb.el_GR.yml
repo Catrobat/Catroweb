@@ -174,8 +174,14 @@ programs:
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project Description
   saveDescription: Save Description change
+  closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits
   saveCredits: Save Credits change
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Do you want to save your changes?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Discard
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -189,6 +195,9 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Default
 remixGraph:
   title: Ανακατασκευές
   showRemixGraph: 'Remix graph'
