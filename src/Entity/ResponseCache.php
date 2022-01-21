@@ -1,0 +1,104 @@
+<?php
+
+namespace App\Entity;
+
+use App\Repository\ResponseCacheRepository;
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass=ResponseCacheRepository::class)
+ * @ORM\Table(name="response_cache")
+ */
+class ResponseCache
+{
+  /**
+   * @ORM\Id
+   * @ORM\Column(type="string")
+   */
+  private ?string $id = null;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  private int $response_code;
+
+  /**
+   * @ORM\Column(type="text")
+   */
+  private string $response;
+
+  /**
+   * @ORM\Column(type="string")
+   */
+  private string $response_headers;
+
+  /**
+   * @ORM\Column(type="datetime")
+   */
+  protected DateTime $cached_at;
+
+  public function setId(string $cache_id): self
+  {
+    $this->id = $cache_id;
+
+    return $this;
+  }
+
+  public function getId(): ?string
+  {
+    return $this->id;
+  }
+
+  public function getResponseHeaders(): string
+  {
+    return $this->response_headers;
+  }
+
+  public function setResponseHeaders(string $response_headers): self
+  {
+    $this->response_headers = $response_headers;
+
+    return $this;
+  }
+
+  public function getResponse(): string
+  {
+    return $this->response;
+  }
+
+  public function setResponse(string $response): self
+  {
+    $this->response = $response;
+
+    return $this;
+  }
+
+  public function getResponseCode(): int
+  {
+    return $this->response_code;
+  }
+
+  public function setResponseCode(int $response_code): self
+  {
+    $this->response_code = $response_code;
+
+    return $this;
+  }
+
+  public function getCachedAt(): DateTime
+  {
+    return $this->cached_at;
+  }
+
+  /**
+   * @ORM\PrePersist
+   * @ORM\PreUpdate
+   */
+  public function updateTimestamps(): self
+  {
+    $this->cached_at = new DateTime('now');
+
+    return $this;
+  }
+}

@@ -9,6 +9,7 @@ use App\Entity\FeaturedProgram;
 use App\Entity\Program;
 use App\Entity\ProgramManager;
 use App\Entity\Tag;
+use App\Manager\ResponseCacheManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Exception;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
@@ -38,9 +39,10 @@ final class ProjectsResponseManager extends AbstractResponseManager
     ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ProgramManager $project_manager
+    ProgramManager $project_manager,
+    ResponseCacheManager $response_cache_manager
   ) {
-    parent::__construct($translator, $serializer);
+    parent::__construct($translator, $serializer, $response_cache_manager);
     $this->time_formatter = $time_formatter;
     $this->image_repository = $image_repository;
     $this->url_generator = $url_generator;

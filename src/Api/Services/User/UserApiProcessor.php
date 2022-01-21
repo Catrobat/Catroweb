@@ -33,6 +33,7 @@ final class UserApiProcessor extends AbstractApiProcessor
     $user->setEmail($request->getEmail());
     $user->setPlainPassword($request->getPassword());
     $user->setEnabled(true);
+    $user->setVerified(false);
     $user->setUploadToken($this->token_generator->generateToken());
     $this->user_manager->updateUser($user);
 

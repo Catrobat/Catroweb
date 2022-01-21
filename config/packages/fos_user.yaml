@@ -11,11 +11,6 @@ fos_user:
     user_manager: App\Entity\UserManager
     mailer: fos_user.mailer.twig_swift # allows usage of twig templates
 
-  # Sends user an email to confirm their registration
-  registration:
-    confirmation:
-      enabled: false
-      template:   Email/registration_confirmation.email.twig
 
   # Define password resetting email
   resetting:

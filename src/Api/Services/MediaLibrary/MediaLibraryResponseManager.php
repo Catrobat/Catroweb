@@ -5,6 +5,7 @@ namespace App\Api\Services\MediaLibrary;
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Manager\ResponseCacheManager;
 use OpenAPI\Server\Model\MediaFileResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -20,10 +21,11 @@ final class MediaLibraryResponseManager extends AbstractResponseManager
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
+    ResponseCacheManager $response_cache_manager,
     UrlGeneratorInterface $url_generator,
     ParameterBagInterface $parameter_bag
   ) {
-    parent::__construct($translator, $serializer);
+    parent::__construct($translator, $serializer, $response_cache_manager);
     $this->url_generator = $url_generator;
     $this->parameter_bag = $parameter_bag;
   }

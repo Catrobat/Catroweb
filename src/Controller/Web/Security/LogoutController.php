@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Catrobat\Controller\Web;
+namespace App\Controller\Web\Security;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;

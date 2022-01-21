@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="{{ app.request.locale | slice(0, 2) }}" xmlns="http://www.w3.org/1999/xhtml">
+<html lang="{{ app.request.locale | default('en') | slice(0, 2) }}" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
   <title> - No Reply - </title>
@@ -19,23 +19,7 @@
                 <td align="center" bgcolor="#00acc1" class="title">
                   <a style="color: white; text-decoration:none; font-size: 28px; font-weight: bold;
                   font-family: Arial, sans-serif;" href="https://share.catrob.at/">
-                    {% if flavor() == 'luna' %}
-                      LUNA &
-                    {% elseif flavor() == 'phirocode' %}
-                      PHIRO
-                    {% elseif flavor() == 'create@school' %}
-                      CREATE @
-                    {% else %}
-                      POCKET
-                    {% endif %}
-
-                    {% if flavor() == 'create@school' %}
-                      SCHOOL
-                    {% elseif flavor() == 'luna' %}
-                      CAT
-                    {% else %}
-                      CODE
-                    {% endif %}
+                      Catrobat - Share Community Platform
                   </a>
                 </td>
               </tr>
