@@ -173,8 +173,14 @@ programs:
   noAdminRights: 권한이 없습니다. 로그인 해 주세요.
   editDescription: 프로그램 설명 편집
   saveDescription: 설명 변경 저장
+  closeDescriptionEditor: Close description editor
   editCredits: 프로젝트 메모 및 크레딧 편집
   saveCredits: 저장
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: 변경 내용을 저장 하시겠습니까?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: 저장 안함
   addComment: 댓글 쓰기
   thumbsUp: 좋아요!
   smile: 웃는 표정
@@ -188,6 +194,9 @@ programs:
   showTranslation: 번역보기
   hideTranslation: 번역 숨기기
   translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: 기본값
 remixGraph:
   title: 변환
   showRemixGraph: '리믹스 그래프 표시'

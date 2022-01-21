@@ -174,8 +174,14 @@ programs:
   noAdminRights: 管理者権限がありません。管理者としてログインしてください。
   editDescription: プロジェクトの説明を編集
   saveDescription: 保存
+  closeDescriptionEditor: Close description editor
   editCredits: プロジェクトノートとクレジットを編集
   saveCredits: 保存
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: 変更内容を保存しますか？
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: 破棄
   addComment: コメントを書く
   thumbsUp: 大げさだ！
   smile: 笑顔！
@@ -189,6 +195,9 @@ programs:
   showTranslation: 翻訳を表示する
   hideTranslation: 翻訳を隠す
   translatedByLine: '%provider%を%sourceLanguage%から%targetLanguage%に翻訳'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: デフォルト
 remixGraph:
   title: リミックス
   showRemixGraph: 'リミックスのグラフを表示'
