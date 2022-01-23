@@ -24,6 +24,7 @@ const $projectShare = $('.js-project-share')
 const $projectReport = $('.js-project-report')
 const $projectDescriptionCredits = $('.js-project-description-credits')
 const $projectComments = $('.js-project-comments')
+const $appLanguage = $('#app-language')
 
 const closeEditorDialog = new ProgramEditorDialog(
   $projectDescriptionCredits.data('trans-close-editor'),
@@ -104,6 +105,7 @@ Program(
 
 ProgramDescription(
   $projectDescriptionCredits.data('project-id'),
+  $appLanguage.data('app-language'),
   $projectDescriptionCredits.data('trans-more-info'),
   $projectDescriptionCredits.data('trans-less-info'),
   $projectDescriptionCredits.data('trans-default'),
@@ -119,6 +121,7 @@ ProgramDescription(
 
 ProgramCredits(
   $projectDescriptionCredits.data('project-id'),
+  $appLanguage.data('app-language'),
   $projectDescriptionCredits.data('trans-default'),
   $projectDescriptionCredits.data('trans-translation-saved'),
   $projectDescriptionCredits.data('trans-translation-deleted'),

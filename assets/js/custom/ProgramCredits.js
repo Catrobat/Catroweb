@@ -1,7 +1,7 @@
 import $ from 'jquery'
 /* global Routing */
 
-export function ProgramCredits (programId, defaultText, translationSaved, translationDeleted, myProgram,
+export function ProgramCredits (programId, usersLanguage, defaultText, translationSaved, translationDeleted, myProgram,
   creditsSelect, closeEditorDialog, keepOrDiscardDialog, customTranslationSnackbar, customTranslationApi) {
   const credits = $('#credits')
   const editCreditsUI = $('#edit-credits-ui')
@@ -17,6 +17,8 @@ export function ProgramCredits (programId, defaultText, translationSaved, transl
   const showMoreToggle = $('#descriptionShowMoreToggle')
   const descriptionHeadline = $('#description-headline')
 
+  const noop = () => {}
+
   let languages = {}
   let previousCreditsIndex = 0
   let lastSavedCredits = credits.text().trim()
@@ -24,6 +26,13 @@ export function ProgramCredits (programId, defaultText, translationSaved, transl
   $(document).ready(function () {
     if (myProgram) {
       getLanguages()
+    } else {
+      customTranslationApi.getCustomTranslation(
+        programId,
+        usersLanguage.substring(0, 2),
+        setCredits,
+        noop
+      )
     }
   })
 
@@ -56,6 +65,10 @@ export function ProgramCredits (programId, defaultText, translationSaved, transl
 
     creditsSelect.layoutOptions()
     resetCreditsEditor()
+  }
+
+  function setCredits (value) {
+    credits.text(value)
   }
 
   function getCustomTranslationSuccess (data) {
