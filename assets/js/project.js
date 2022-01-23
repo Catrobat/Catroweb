@@ -1,5 +1,4 @@
 import { MDCTextField } from '@material/textfield'
-import { MDCSelect } from '@material/select'
 import $ from 'jquery'
 import './components/fullscreen_list_modal'
 import { TranslateProgram } from './custom/TranslateProgram'
@@ -12,9 +11,9 @@ import { ProgramReport } from './custom/ProgramReport'
 import { ProgramDescription } from './custom/ProgramDescription'
 import { ProgramCredits } from './custom/ProgramCredits'
 import { ProgramComments } from './custom/ProgramComments'
-import { ProgramEditorDialog } from './custom/ProgramEditorDialog'
 import { CustomTranslationSnackbar } from './custom/CustomTranslationSnackbar'
 import { CustomTranslationApi } from './api/CustomTranslationApi'
+import { ProjectTextEditor } from './components/ProjectTextEditor'
 
 require('../styles/custom/profile.scss')
 require('../styles/custom/program.scss')
@@ -26,28 +25,17 @@ const $projectDescriptionCredits = $('.js-project-description-credits')
 const $projectComments = $('.js-project-comments')
 const $appLanguage = $('#app-language')
 
-const closeEditorDialog = new ProgramEditorDialog(
-  $projectDescriptionCredits.data('trans-close-editor'),
-  $projectDescriptionCredits.data('trans-save'),
-  $projectDescriptionCredits.data('trans-discard')
-)
-
-const keepOrDiscardDialog = new ProgramEditorDialog(
-  $projectDescriptionCredits.data('trans-save-on-language-change'),
-  $projectDescriptionCredits.data('trans-keep'),
-  $projectDescriptionCredits.data('trans-discard')
-)
-
-let descriptionSelect = null
-let creditsSelect = null
+let editor = null
 
 if ($project.data('my-program')) {
-  new MDCTextField(document.querySelector('.description'))
-  new MDCTextField(document.querySelector('.credits'))
+  new MDCTextField(document.querySelector('#edit-mdc-text-field'))
   new MDCTextField(document.querySelector('.comment-message'))
 
-  descriptionSelect = new MDCSelect(document.querySelector('#description-language-selector'))
-  creditsSelect = new MDCSelect(document.querySelector('#credits-language-selector'))
+  editor = new ProjectTextEditor(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('trans-default'),
+    $projectDescriptionCredits.data('project-id')
+  )
 }
 
 shareProject(
@@ -103,33 +91,43 @@ Program(
   $project.data('trans-download-start')
 )
 
+const descriptionEditorConfig = {
+  maxLength: $projectDescriptionCredits.data('max-length'),
+  programSection: 'description',
+  snackbar: new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-description')),
+  headline: $projectDescriptionCredits.data('trans-description'),
+  closeText: $projectDescriptionCredits.data('trans-close-description-editor'),
+  instruction: '',
+  showLanguageSelect: $projectDescriptionCredits.data('has-description')
+}
+
 ProgramDescription(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
   $projectDescriptionCredits.data('trans-more-info'),
   $projectDescriptionCredits.data('trans-less-info'),
-  $projectDescriptionCredits.data('trans-default'),
-  $projectDescriptionCredits.data('trans-translation-saved'),
-  $projectDescriptionCredits.data('trans-translation-deleted'),
   $project.data('my-program'),
-  descriptionSelect,
-  closeEditorDialog,
-  keepOrDiscardDialog,
-  new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-description')),
+  editor,
+  descriptionEditorConfig,
   new CustomTranslationApi('description')
 )
+
+const creditsEditorConfig = {
+  maxLength: $projectDescriptionCredits.data('max-length'),
+  programSection: 'credit',
+  snackbar: new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-notes-and-credits')),
+  headline: $projectDescriptionCredits.data('trans-notes-and-credits'),
+  closeText: $projectDescriptionCredits.data('trans-close-credits-editor'),
+  instruction: $projectDescriptionCredits.data('trans-notes-and-credits-description'),
+  showLanguageSelect: $projectDescriptionCredits.data('has-credits')
+}
 
 ProgramCredits(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
-  $projectDescriptionCredits.data('trans-default'),
-  $projectDescriptionCredits.data('trans-translation-saved'),
-  $projectDescriptionCredits.data('trans-translation-deleted'),
   $project.data('my-program'),
-  creditsSelect,
-  closeEditorDialog,
-  keepOrDiscardDialog,
-  new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-notes-and-credits')),
+  editor,
+  creditsEditorConfig,
   new CustomTranslationApi('credit')
 )
 

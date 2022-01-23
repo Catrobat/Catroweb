@@ -15,67 +15,6 @@
         </span>
       {% endif %}
     </div>
-    {% if app.user and my_program %}
-      <div id="edit-description-ui" class="d-none mb-5">
-        <div id="edit-description-error" style="display:none;" class="alert alert-danger"></div>
-        <label
-            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description">
-          <span class="mdc-text-field__ripple"></span>
-          <span class="mdc-text-field__resizer">
-              <span id="description-loading-spinner" style="display: none;">
-                <i class="ms-2 material-icons">
-                  {% include 'components/loading_spinner.html.twig' with {'size': 'small'} %}
-                </i>
-              </span>
-              <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-description" name="edit-description"
-                        title="_edit-description"
-                        maxlength="{{ max_description_size }}" style="width: 100%;" rows="10" cols="100">
-                {% if program.description %}{{ program.description }}{% else %}{{ "noDescription"|trans({}, "catroweb") }}{% endif %}
-              </textarea>
-          </span>
-          <span class="mdc-line-ripple"></span>
-        </label>
-
-        <div class="row justify-content-between" style="margin-top: 1rem; padding-right: 0.75rem;">
-          <div class="form-group col-8">
-            <div id="description-language-selector" class="mdc-select mdc-select--outlined" {% if (program.description == null) %} style="display: none;" {% endif %}>
-              <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-                <span class="mdc-notched-outline">
-                  <span class="mdc-notched-outline__leading"></span>
-                  <span class="mdc-notched-outline__notch">
-                    <span id="description-outlined-select-label"
-                          class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
-                  </span>
-                  <span class="mdc-notched-outline__trailing"></span>
-                </span>
-                <span class="mdc-select__selected-text-container">
-                  <span id="description-selected-text" class="mdc-select__selected-text" data-selected-value="default"></span>
-                </span>
-                <span class="mdc-select__dropdown-icon">
-                  {% include 'components/mdc_select_svg.html.twig' %}
-                </span>
-              </div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                <ul id="description-language-selector-list" class="mdc-list" role="listbox">
-                  <li class="mdc-list-item" data-value="default" role="option">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">
-                        {{ "programs.default"|trans({}, "catroweb") }}
-                      </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <button id="edit-description-submit-button" class="btn btn-primary p-3 col-4">
-            <i class="material-icons align-bottom">save</i>
-            {{ 'programs.saveDescription'|trans({}, 'catroweb') }}
-          </button>
-        </div>
-
-      </div>
-    {% endif %}
     <div id="description-credits-container" style="height:auto; overflow: hidden;">
       <div id="description" class="text-break">
         {% if program.description %}
@@ -117,57 +56,54 @@
 <div class="row">
   <div class="col">
     {% if app.user and my_program %}
-      <div id="edit-credits-ui" class="d-none mb-5">
-        <div class="mt-3" id="credits-headline">
-          <span class="h2">{{ "credits"|trans({}, "catroweb") }} </span>
-          {% if app.user and my_program %}
+      <div id="edit-text-ui" class="d-none mb-5">
+        <div class="mt-3">
+          <span class="h2" id="edit-headline"></span>
             <span>
-              <i data-bs-toggle="tooltip" title="{{ 'programs.closeCreditsEditor'|trans({}, 'catroweb') }}"
-                 id="close-credits-editor-button" class="ml-3 material-icons catro-icon-button align-bottom">
+              <i data-bs-toggle="tooltip"
+                 id="edit-close-button" class="ml-3 material-icons catro-icon-button align-bottom">
                 close
               </i>
             </span>
-          {% endif %}
         </div>
-        <div id="notes-and-credits-description">{{ "notesAndCreditsDescription"|trans({}, "catroweb") }}</div>
-        <div id="edit-credits-error" style="display:none;" class="alert alert-danger"></div>
-        <label
-            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label description credits">
+        <div id="edit-text-instruction"></div>
+        <div id="edit-text-error" style="display:none;" class="alert alert-danger"></div>
+        <label id="edit-mdc-text-field"
+            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label">
           <span class="mdc-text-field__ripple"></span>
           <span class="mdc-text-field__resizer">
-            <span id="credits-loading-spinner" style="display: none;">
+            <span id="edit-loading-spinner" style="display: none;">
               <i class="ms-2 material-icons">
                 {% include 'components/loading_spinner.html.twig' with {'size': 'small'} %}
               </i>
             </span>
-            <textarea class="mdc-text-field__input" id="edit-credits" name="edit-credits" title="_edit-credits"
-                      maxlength="{{ max_description_size }}" style="width: 100%" rows="10" cols="100">
-              {% if program.credits %}{{ program.credits }}{% else %}{{ "noCredits"|trans({}, "catroweb") }}{% endif %}
-            </textarea>          </span>
+            <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-text" name="edit-text" title="_edit-text"
+                      style="width: 100%" rows="10" cols="100">
+            </textarea>
+          </span>
           <span class="mdc-line-ripple"></span>
         </label>
 
         <div class="row justify-content-between" style="margin-top: 1rem; padding-right: 0.75rem;">
           <div class="form-group col-8">
-            <div id="credits-language-selector" class="mdc-select mdc-select--outlined"  {% if (program.credits == null) %} style="display: none;" {% endif %}>
+            <div id="edit-language-selector" class="mdc-select mdc-select--outlined">
               <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
                 <span class="mdc-notched-outline">
                   <span class="mdc-notched-outline__leading"></span>
                   <span class="mdc-notched-outline__notch">
-                    <span id="credits-outlined-select-label"
-                          class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
+                    <span class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
                   </span>
                   <span class="mdc-notched-outline__trailing"></span>
                 </span>
                 <span class="mdc-select__selected-text-container">
-                  <span id="credits-selected-text" class="mdc-select__selected-text" data-selected-value="default"></span>
+                  <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
                 </span>
                 <span class="mdc-select__dropdown-icon">
                   {% include 'components/mdc_select_svg.html.twig' %}
                 </span>
               </div>
               <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                <ul id="credit-language-selector-list" class="mdc-list" role="listbox">
+                <ul id="edit-language-selector-list" class="mdc-list" role="listbox">
                   <li class="mdc-list-item" data-value="default" role="option">
                       <span class="mdc-list-item__ripple"></span>
                       <span class="mdc-list-item__text">
@@ -179,9 +115,9 @@
             </div>
           </div>
 
-          <button id="edit-credits-submit-button" class="btn btn-primary p-3 col-4">
+          <button id="edit-submit-button" class="btn btn-primary p-3 col-4">
             <i class="material-icons align-bottom">save</i>
-            {{ 'programs.saveCredits'|trans({}, 'catroweb') }}
+            {{ 'programs.save'|trans({}, 'catroweb') }}
           </button>
         </div>
       </div>
