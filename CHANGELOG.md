@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.21.1]
+- remove fos_user registration & reset password
+- add symfonycasts reset password
+- add symfonycasts confirm registration
+- use API for registration
+- replace registration terms of use popup with information text
+- add symfony/mailer
+- add response cache to project categories API
+- update dependencies
+- update translations API & features
+
+## [3.20.34]
+- update dependencies
+- update translations API & features
+- download counter restrictions
+- edit project name
+- add autoprefixer
+- ...
+
 ## [3.19.0]
   - update dependencies (ElasticSearch v7, ...)
   - update translations
@@ -412,8 +431,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.19.1...HEAD
-[3.19.0]: https://github.com/Catrobat/Catroweb/compare/v3.19.0...v3.19.1
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.22.0...HEAD
+[3.21.1]: https://github.com/Catrobat/Catroweb/compare/v3.21.1...v3.22.0
+[3.20.34]: https://github.com/Catrobat/Catroweb/compare/v3.20.34...v3.21.1
+[3.19.0]: https://github.com/Catrobat/Catroweb/compare/v3.19.0...v3.20.34
 [3.18.3]: https://github.com/Catrobat/Catroweb/compare/v3.18.3...v3.19.0
 [3.17.2]: https://github.com/Catrobat/Catroweb/compare/v3.17.2...v3.18.3
 [3.16.0]: https://github.com/Catrobat/Catroweb/compare/v3.16.0...v3.17.2

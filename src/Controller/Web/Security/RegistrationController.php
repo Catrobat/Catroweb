@@ -4,6 +4,7 @@ namespace App\Controller\Web\Security;
 
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,11 +16,16 @@ class RegistrationController extends AbstractController
 {
   protected VerifyEmailHelperInterface $verify_email_helper;
   protected EntityManagerInterface $entity_manager;
+  protected LoggerInterface $logger;
 
-  public function __construct(VerifyEmailHelperInterface $verify_email_helper, EntityManagerInterface $entity_manager)
-  {
+  public function __construct(
+      VerifyEmailHelperInterface $verify_email_helper,
+      EntityManagerInterface $entity_manager,
+      LoggerInterface $logger
+  ) {
     $this->verify_email_helper = $verify_email_helper;
     $this->entity_manager = $entity_manager;
+    $this->logger = $logger;
   }
 
   /**
@@ -42,13 +48,14 @@ class RegistrationController extends AbstractController
     try {
       $this->verify_email_helper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
     } catch (VerifyEmailExceptionInterface $e) {
+      $this->logger->critical('Email verification failed for '.$user->getId().$user->getEmail());
       $this->addFlash('verify_email_error', $e->getReason());
 
       return $this->redirectToRoute('register');
     }
 
     // Mark your user as verified. e.g. switch a User::verified property to true
-    $user->setEnabled(true);
+    $user->setVerified(true);
     $this->entity_manager->persist($user);
     $this->entity_manager->flush();
 

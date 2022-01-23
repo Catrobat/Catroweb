@@ -19,5 +19,5 @@ fos_user:
 
   #  Default fos user mail config
   from_email:
-    address: noreply@catrob.at
+    address: no-reply@catrob.at
     sender_name: "No Reply"

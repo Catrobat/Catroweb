@@ -421,7 +421,7 @@ login:
 
 register:
   title: Sign up
-  subText: "By continuing, you are setting up a Pocketcode account and agree to our %var1% and %var2%."
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: Cancel
     createAccount: Create account
