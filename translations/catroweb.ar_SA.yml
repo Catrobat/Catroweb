@@ -16,8 +16,8 @@ tutorials: دروس للتعلم
 googlePlay: متجرجوجل
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
-instagram: Instagram
-discordChat: Discord chat
+instagram: إنستغرام
+discordChat: دردشة ديسكورد
 passwordsNoMatch: لا تتطابق كلمات المرور.
 error: خطأ
 cancel: إلغاء
@@ -124,7 +124,7 @@ programs:
     لا توجد طريقة لاستعادة إجراءاتك!
     نعم، احذفها!
     الغاء
-  tooLongName: The project name is too long!
+  tooLongName: اسم المشروع طويل جداً!
   tooLongDescription: وصف المشروع طويل جداً!
   tooLongCredits: ملاحظات المشروع والأرصدة طويلة جداً!
   most:
@@ -155,8 +155,9 @@ programs:
   reportOwnProgram: لا يمكنك وضع علامة على مشروعك.
   reportAlready: لقد قمت بالفعل بوضع علامة على هذا المشروع.
   reportDone: لقد أبلغت عن هذا المشروع!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppHeaderDownload: التحميل غير ممكن
+  updateAppTextDownload: يرجى تحديث التطبيق الخاص بك إلى أحدث إصدار.ليست كل ميزات أندرويد متاحة بالفعل على آي أو إس.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: تحديث التطبيق
   updateAppText: الرجاء تحديث التطبيق الخاص بك إلى أحدث إصدار لتتمكن من تنزيل هذا المشروع.
   btnClosePopup: موافق
@@ -173,8 +174,14 @@ programs:
   noAdminRights: ليس لديك صلاحيات للمشرف. الرجاء تسجيل الدخول كمشرف.
   editDescription: تعديل وصف المشروع
   saveDescription: حفظ
+  closeDescriptionEditor: Close description editor
   editCredits: تعديل ملاحظات المشروع والرصيد
   saveCredits: حفظ
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: هل تريد حفظ التغييرات؟
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: تجاهل
   addComment: كتابة تعليق
   thumbsUp: تمسك بالأمام!
   smile: ابتسم!
@@ -184,10 +191,13 @@ programs:
   link: نسخ رابط المشروع إلى الحافظة
   reactionsText: ردود الفعل
   downloadErrorText: حدث خطأ أثناء تحميل المشروع. الرجاء المحاولة مرة أخرى لاحقاً.
-  downloadStartText: Download has started...
+  downloadStartText: بدأ التحميل...
   showTranslation: إظهار الترجمة
   hideTranslation: إخفاء الترجمة
   translatedByLine: تمت ترجمته بواسطة%provider% من%sourceLanguage% إلى %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: افتراضي
 remixGraph:
   title: رِمكسات(خليط مُعدل)
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
@@ -367,11 +377,11 @@ menu:
 login:
   login: تسجيل الدخول
   button:
-    loginNow: Login now
+    loginNow: تسجيل الدخول الآن
     createAccount: إنشاء حساب
-    forgetPassword: Forget password?
+    forgetPassword: نسيت كلمة المرور؟
   oauth:
-    title: Or you can join with
+    title: أو يمكنك الانضمام مع
   passOrUser: كلمة المرور أو اسم المستخدم غير صحيح.
   noUsername: لم يتم العثور على عنوان البريد الإلكتروني أو اسم المستخدم الخاص بك.
   forgotPass: نسيت كلمة المرور أو اسم المستخدم؟
@@ -389,16 +399,16 @@ login:
   passwordFirst: كلمة المرور
   passwordSecond: تأكيد كلمة المرور
 register:
-  title: Sign up
+  title: تسجيل الدخول
   button:
     cancel: إلغاء
     createAccount: إنشاء حساب
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: استرداد الحساب
+  description: إذا كنت تتذكر البريد الإلكتروني أو اسم المستخدم لحسابك ، فيمكننا أن نرسل لك رابطًا لإعادة تعيين كلمة المرور الخاصة بك.
   button:
     cancel: إلغاء
-    submit: Recover password
+    submit: استعادة كلمة المرور
 apk:
   download: تنزيل كـ تطبيق
   prepare: 'إعداد التطبيق'
@@ -778,13 +788,13 @@ studio:
     no_projects: 'لا يحتوي الاستوديو على أي مشاريع حتى الآن'
     updateCoverError: 'حدث خطأ ما أثناء تحديث غلاف الاستوديو!'
     projects:
-      title: 'projects'
+      title: 'المشاريع'
     comments:
       title: 'التعليقات'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
+      type_something: 'اكتب شيئًا'
+      replies: 'ردود'
+      send: 'إرسال'
+      no_comments: 'هذا الاستوديو ليس لديه تعليقات حتى الآن.'
       disabled_comments: 'Comments have been disabled for this studio.'
       post_error: 'Something went wrong while posting your comment. Try again later.'
       delete_error: 'Something went wrong while removing the comment. Try again later.'
@@ -794,18 +804,18 @@ studio:
       add_project: '%user% left a comment.'
       add_comment: '%user% added a project.'
     members_list:
-      title: 'Studio members'
+      title: 'أعضاء الاستوديو'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
       promote_member: 'Promote member to admin'
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
       ban_member: 'Ban member from studio'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'الإعدادات العامة'
+      studio_name: 'اسم الاستوديو'
       studio_description: 'الوصف'
       toggle_allow_comments: 'التعليقات'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'عام'
 media_library:
   file:
     size: 'الحجم:%size%'

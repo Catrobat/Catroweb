@@ -157,6 +157,7 @@ programs:
   reportDone: ਤੁਸੀਂ ਇਸ ਪ੍ਰਾਜੈਕਟ ਦੀ ਰਿਪੋਰਟ ਕੀਤੀ!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: ਐਪ ਨੂੰ ਅਪਡੇਟ ਕਰੋ
   updateAppText: ਇਸ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਯੋਗ ਹੋਣ ਲਈ ਨਵੀਨਤਮ ਵਰਜਨ ਲਈ ਆਪਣੇ ਐਪ ਨੂੰ ਅਪਡੇਟ ਕਰੋ.
   btnClosePopup: ਠੀਕ ਹੈ
@@ -173,8 +174,14 @@ programs:
   noAdminRights: ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਬੰਧਕੀ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਬੰਧਕ ਵਜੋਂ ਲੌਗਇਨ ਕਰੋ.
   editDescription: ਪ੍ਰੋਜੈਕਟ ਦੇ ਵੇਰਵੇ ਨੂੰ ਸੋਧੋ
   saveDescription: ਸੇਵ
+  closeDescriptionEditor: Close description editor
   editCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਸੰਪਾਦਿਤ ਕਰੋ
   saveCredits: ਸੇਵ
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: ਤੁਹਾਨੂੰ ਆਪਣੇ ਤਬਦੀਲੀ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਚਾਹੁੰਦੇ ਹੋ?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: ਬਰਖਾਸਤ ਕਰੋ
   addComment: ਇੱਕ ਟਿੱਪਣੀ ਲਿਖੋ
   thumbsUp: ਚੜ੍ਹਦੀ ਕਲਾਂ!
   smile: ਮੁਸਕਰਾਓ!
@@ -188,6 +195,9 @@ programs:
   showTranslation: ਅਨੁਵਾਦ ਦਿਖਾਓ
   hideTranslation: ਅਨੁਵਾਦ ਲੁਕਾਓ
   translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: ਮੂਲ
 remixGraph:
   title: ਰੀਮਿਕਸ
   showRemixGraph: 'ਰੀਮਿਕਸ ਗ੍ਰਾਫ'

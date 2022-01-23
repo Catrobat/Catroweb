@@ -124,7 +124,7 @@ programs:
     Bu, yüklediğiniz projeleri ve yorumları da silecek! Eylemlerinizi geri getirmenin bir yolu yok!
     Evet, sil!
     İptal et
-  tooLongName: The project name is too long!
+  tooLongName: Proje adı çok uzun!
   tooLongDescription: Projenin açıklaması çok uzun!
   tooLongCredits: Projenin yapanlar kısmı çok uzun!
   most:
@@ -157,6 +157,7 @@ programs:
   reportDone: Bu projeyi bildirdiniz!
   updateAppHeaderDownload: İndirmek mümkün değil
   updateAppTextDownload: Lütfen uygulamanızı en yeni sürüme güncelleyin. Tüm Android özelliklerinin IOS'ta mevcut olmadığını unutmayın.
+  updateAppTextDownloadApk: Uygulama olarak indirme şu anda yalnızca Android'de mevcuttur ve IOS'ta mevcut değildir.
   updateAppHeader: Programı güncelleyin
   updateAppText: Bu projeyi indirebilmek için lütfen uygulamanızı en yeni sürüme güncelleyin.
   btnClosePopup: Tamam
@@ -173,8 +174,14 @@ programs:
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
   editDescription: Proje açıklamasını düzenleyin
   saveDescription: Kaydet
+  closeDescriptionEditor: Açıklama düzenleyiciyi kapat
   editCredits: Yapanları düzenle
   saveCredits: Kaydet
+  closeCreditsEditor: Kredi düzenleyicisini kapat
+  closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
+  saveOnLanguageChange: Mevcut değişikliklerinizi korumak ister misiniz?
+  btnKeep: Değişiklikleri Koru
+  btnDiscard: Vazgeç
   addComment: Bir yorum Yaz
   thumbsUp: Başparmak havaya!
   smile: Gülümse!
@@ -188,6 +195,9 @@ programs:
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
+  translationSaved: '%section% programı için %language%''e çeviri kaydedildi'
+  translationDeleted: '%section% programı için %language%''e çeviri silindi'
+  default: Varsayılan
 remixGraph:
   title: Remixler
   showRemixGraph: 'Remixleri'

@@ -8,4 +8,6 @@ require('../styles/login.scss')
 
 new PasswordVisibilityToggle()
 Register()
-new LoginTokenHandler()
+
+const loginTokenHandler = new LoginTokenHandler()
+loginTokenHandler.initListeners()

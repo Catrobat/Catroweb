@@ -2,23 +2,6 @@ import $ from 'jquery'
 
 export function Register () {
   let termsModalAgreeButton = ''
-  let termsModalAgreed = false
-  //
-  // RegisterListener
-  $(() => {
-    $(document).on('click', '#agreeButton', function () {
-      termsModalAgreed = true
-      if (termsModalAgreeButton === 'registration_form') {
-        $('#registration_form').submit()
-        termsModalAgreeButton = ''
-      }
-    })
-    // Default registration
-    $('#registration_form').submit(function () {
-      termsModalAgreeButton = 'registration_form'
-      return termsModalAgreed // only submit after agreed terms of modal
-    })
-  })
 
   // -------------------------------------------------------------------------------------------------------------------
   // OAuth Sign In

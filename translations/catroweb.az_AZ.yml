@@ -157,6 +157,7 @@ programs:
   reportDone: Bu layihəni şikayət etdiniz!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Tətbiqi yenilə
   updateAppText: Bu layihəni endirə bilmək üçün tətbiqinizi son versiyaya yeniləyin.
   btnClosePopup: Oldu
@@ -173,8 +174,14 @@ programs:
   noAdminRights: Admin hüquqlarınız yoxdur. Zəhmət olmasa Admin olaraq giriş edin.
   editDescription: Layihə açıqlamasına düzəliş edin
   saveDescription: Açıqlama dəyişikliklərini saxlayın
+  closeDescriptionEditor: Close description editor
   editCredits: Layihəni hazırlayanlara düzəliş edin
   saveCredits: Hazırlayanlar dəyişikliklərini saxlayın
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Do you want to save your changes?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Ləğv et
   addComment: Bir rəy yaz
   thumbsUp: Bəyən!
   smile: Gülümsə!
@@ -188,6 +195,9 @@ programs:
   showTranslation: Tərcüməni göstər
   hideTranslation: Tərcüməni gizlət
   translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə %provider% tərcümə etdi'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Default
 remixGraph:
   title: Remikslər
   showRemixGraph: 'Remiks qrafiki'

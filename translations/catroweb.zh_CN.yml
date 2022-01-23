@@ -124,7 +124,7 @@ programs:
     再也无法恢复您的操作！
     是的，删除它！
     取消
-  tooLongName: The project name is too long!
+  tooLongName: 项目名称过长！
   tooLongDescription: 项目描述太长了！
   tooLongCredits: 项目致谢过长！
   most:
@@ -155,8 +155,9 @@ programs:
   reportOwnProgram: 您不能标记您自己的项目。
   reportAlready: 您已经标记了这个项目。
   reportDone: 您举报了这个项目！
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppHeaderDownload: 无法下载
+  updateAppTextDownload: 请更新您的应用程序到最新版本。请注意，iOS 上并非所有的 Android 功能都可用。
+  updateAppTextDownloadApk: 目前仅在 Android 上提供APK下载，iOS 上暂不可用。
   updateAppHeader: 升级
   updateAppText: 请更新您的应用到最新版本以便能够下载此项目。
   btnClosePopup: 好
@@ -173,8 +174,14 @@ programs:
   noAdminRights: 您没有管理员权限。请以管理员身份登录。
   editDescription: 编辑项目描述
   saveDescription: 保存描述更改
+  closeDescriptionEditor: 关闭描述编辑器
   editCredits: Edit the project credits
-  saveCredits: Save credits change
+  saveCredits: 保存
+  closeCreditsEditor: 关闭积分编辑器
+  closeEditorPrompt: 您要保存这些更改吗？
+  saveOnLanguageChange: 是否保存当前更改？
+  btnKeep: 保存更改
+  btnDiscard: 放弃
   addComment: 写评论
   thumbsUp: 赞
   smile: 微笑
@@ -188,6 +195,9 @@ programs:
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
+  translationSaved: 程序 %section% 的 %language% 翻译已保存
+  translationDeleted: 程序 %section% 的 %language% 翻译已删除
+  default: 默认
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -316,7 +326,7 @@ licenseToPlay:
   text6: '了解更多关于 %link-termsOfUse% 的Catrobat 在线社区使用条款。'
   list1:
     item1: 和蛋糕一起分析您的秘方
-    item2: 给那些激励您的用户好的评价
+    item2: 奖励那些激励你的人
   version: 版本 1.1，2013 年 4 月 2 日
 termsOfUse:
   title: 使用条款
@@ -332,7 +342,7 @@ termsOfUse:
     item3: 应用所有级别的经验
   list2:
     item1: 敬重。当分享项目时，请记住，许多不同年龄和背景的人都会看到您的贡献。
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "付给积分。您可以随意制作其他人项目的修改版 - 只要付给他们积分就行。您可以在您的项目的注释和学分部分找到付给积分的地方。有关修改其他用户的项目的详细信息，请参阅此虚线列表下方的段落。"
     item3: "请诚实。不要冒充其他人或做出其他戏弄社区的事情。"
     item4: "请保护好您的隐私信息。请不要公开您的电子邮件，电话号码或其他个人联系信息。"
     item5: "帮助保持网站友好。 如果你觉得其他人会发现一个项目或评论意味着侮辱、过于暴力， 或者不适当，只需单击“报告视为不适当”按钮，留下一个简短的解释。 Catrobat团队将审查您的报告，并可以删除任何项目、评论或帖子。"

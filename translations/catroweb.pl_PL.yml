@@ -157,6 +157,7 @@ programs:
   reportDone: Zgłosiłeś ten projekt!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: Pobieranie APK jest obecnie dostępne tylko na Androidzie a nie na IOS.
   updateAppHeader: Aktualizacja aplikacji
   updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji, aby móc pobrać ten projekt.
   btnClosePopup: OK
@@ -173,8 +174,14 @@ programs:
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
   editDescription: Edytuj opis projektu
   saveDescription: Zapisz
+  closeDescriptionEditor: Zamknij edytor opisu
   editCredits: Edytuj uwagi i podziękowania
   saveCredits: Zapisz
+  closeCreditsEditor: Zamknij edytor kredytów
+  closeEditorPrompt: Czy chcesz zapisać zmiany?
+  saveOnLanguageChange: Czy chcesz zachować aktualne zmiany?
+  btnKeep: Zachowaj zmiany
+  btnDiscard: Odrzuć
   addComment: Napisz komentarz
   thumbsUp: Kciuk do góry!
   smile: Uśmiech!
@@ -188,6 +195,9 @@ programs:
   showTranslation: Pokaż tłumaczenie
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
+  translationSaved: Tłumaczenie na %language% dla programu %section% zapisane
+  translationDeleted: Tłumaczenie na %language% dla programu %section% usunięte
+  default: Domyślny
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż Drzewo Remiksów'

@@ -41,6 +41,7 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "5 downloads"
 
+  @disabled
   Scenario: Increasing download counter after download only once! (APK)
     Given I log in as "Catrobat2"
     And I am on "/app/project/1"
@@ -62,6 +63,7 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "6 downloads"
 
+  @disabled
   Scenario: Increasing download counter after download only once!
     Given I log in as "Catrobat2"
     And I am on "/app/project/1"

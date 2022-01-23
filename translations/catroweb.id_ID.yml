@@ -157,6 +157,7 @@ programs:
   reportDone: Anda melaporkan proyek ini!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Perbaharui Aplikasi
   updateAppText: Harap perbarui aplikasi Anda ke versi terbaru untuk dapat mengunduh proyek ini.
   btnClosePopup: Oke
@@ -173,8 +174,14 @@ programs:
   noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
   editDescription: Edit deskripsi proyek
   saveDescription: Menyimpan
+  closeDescriptionEditor: Close description editor
   editCredits: Edit catatan dan kredit proyek
   saveCredits: Menyimpan
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Apakah Anda ingin menyimpan perubahan?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Singkirkan
   addComment: Tulis komen
   thumbsUp: Jempolan!
   smile: Tersenyum!
@@ -188,6 +195,9 @@ programs:
   showTranslation: Tampilkan terjemahan
   hideTranslation: Sembunyikan terjemahan
   translatedByLine: Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Default
 remixGraph:
   title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'

@@ -157,6 +157,7 @@ programs:
   reportDone: Ju raportuat këtë program si të papërshtatshëm!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Fresko Aplikacionin
   updateAppText: Ju lutem përditësoni aplikacionin tuaj në versionin më të ri për të pasur mundësi ta shkarkoni këtë program.
   btnClosePopup: Ok
@@ -173,8 +174,14 @@ programs:
   noAdminRights: Ju nuk keni të drejta administratori. Ju lutemi hyni si Admin.
   editDescription: Ndryshoni përshkrimin e projektit
   saveDescription: Save description change
+  closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
   saveCredits: Save credits change
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Do you want to save your changes?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Anulo
   addComment: Shkruaj një koment
   thumbsUp: Gishti i madh lart!
   smile: Buzëqeshja!
@@ -188,6 +195,9 @@ programs:
   showTranslation: Shfaq përkthimin 
   hideTranslation: Fshihe përkthimin
   translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Default
 remixGraph:
   title: Ripërzierje 
   showRemixGraph: 'Ripërziej grafikun'

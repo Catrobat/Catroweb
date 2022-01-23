@@ -4,7 +4,8 @@ export class Translation {
   constructor (translatedByLine) {
     this.translatedByLine = translatedByLine
     this.providerMap = {
-      itranslate: 'iTranslate'
+      itranslate: 'iTranslate',
+      google: 'Google Translate'
     }
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
@@ -16,24 +17,8 @@ export class Translation {
   }
 
   setTargetLanguage () {
-    let decodedCookie
-    try {
-      decodedCookie = document.cookie
-        .split(';')
-        .map(v => v.split('='))
-        .reduce((acc, v) => {
-          acc[decodeURIComponent(v[0].trim())] = decodeURIComponent(v[1].trim())
-          return acc
-        }, {})
-    } catch (e) {
-      console.error("Can't decode cookie")
-    }
-
-    if (decodedCookie !== undefined && decodedCookie.hl !== undefined) {
-      this.targetLanguage = decodedCookie.hl.replace('_', '-')
-    } else {
-      this.targetLanguage = document.documentElement.lang
-    }
+    const appLanguage = $('#app-language').data('app-language')
+    this.targetLanguage = appLanguage.replace('_', '-')
   }
 
   setDisplayLanguageMap () {

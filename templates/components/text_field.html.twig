@@ -22,7 +22,7 @@
   }%}
 #}
 <label id="{{ text_field.id }}"
-       class="mdc-text-field mdc-text-field--filled mb-2
+       class="mdc-text-field mdc-text-field--filled
              {#  Leading Icon (Optional) #}
              {% if text_field.leading_icon|default() %}mdc-text-field--with-leading-icon{% endif %}
              {#  Trailing Icon (Optional) #}
@@ -30,7 +30,7 @@
 
   <span class="mdc-text-field__ripple"></span>
 
-  <span class="mdc-floating-label mdc-floating-label--float-above" id="{{ text_field.id }}__label">{{ text_field.label }}</span>
+  <span class="mdc-floating-label" id="{{ text_field.id }}__label">{{ text_field.label }}</span>
 
   {#  Leading Icon (Optional) #}
   {% if text_field.leading_icon|default() %}
@@ -55,6 +55,9 @@
           role="button" style="pointer-events: all;"
     >{{ text_field.trailing_icon }}</span>
   {% endif %}
-
   <span class="mdc-line-ripple"></span>
 </label>
+
+<div class="mdc-text-field-helper-line mb-2">
+  <div class="mdc-text-field-helper-text" id="{{ text_field.id }}__helper" aria-hidden="true"></div>
+</div>

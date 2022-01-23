@@ -223,6 +223,11 @@ class User extends BaseUser
   protected bool $oauth_user = false;
 
   /**
+   * @ORM\Column(type="boolean", options={"default": true})
+   */
+  protected bool $verified = true;
+
+  /**
    * @ORM\OneToMany(targetEntity="App\Entity\ProgramInappropriateReport", mappedBy="reportingUser", fetch="EXTRA_LAZY")
    */
   protected Collection $program_inappropriate_reports;
@@ -529,5 +534,20 @@ class User extends BaseUser
   public function setAppleAccessToken(?string $apple_access_token): void
   {
     $this->apple_access_token = $apple_access_token;
+  }
+
+  public function setVerified(bool $verified): self
+  {
+    $this->verified = $verified;
+
+    return $this;
+  }
+
+  public function isVerified(): bool
+  {
+    // All user are automatically verified in non production environments
+    $app_env = $_ENV['APP_ENV'];
+
+    return 'prod' !== $app_env || $this->enabled;
   }
 }

@@ -126,7 +126,7 @@ programs:
     ไม่มีวิธีใดที่จะคืนค่าการกระทำของคุณ!
     ใช่ลบทิ้ง!
     ยกเลิก
-  tooLongName: The project name is too long!
+  tooLongName: ชื่อโครงการยาวเกินไป!
   tooLongDescription: คำอธิบายโครงการยาวเกินไป!
   tooLongCredits: เครดิตโครงการยาวเกินไป!
   most:
@@ -159,6 +159,7 @@ programs:
   reportDone: คุณรายงานโครงการนี้!
   updateAppHeaderDownload: ดาวน์โหลดไม่ได้
   updateAppTextDownload: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด โปรดทราบว่าคุณลักษณะบางอย่างของ Android อาจไม่พร้อมใช้งานบน IOS
+  updateAppTextDownloadApk: การดาวน์โหลด APK มีให้บริการบน Android เท่านั้น และไม่สามารถใช้กับ IOS ได้
   updateAppHeader: อัพเดทแอพพลิเคชั่น
   updateAppText: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันล่าสุดเพื่อให้สามารถดาวน์โหลดโครงการนี้
   btnClosePopup: ตกลง
@@ -175,8 +176,14 @@ programs:
   noAdminRights: คุณไม่มีสิทธิ์ของผู้ดูแลระบบ กรุณาเข้าสู่ระบบในฐานะผู้ดูแล
   editDescription: แก้ไขคำอธิบายโครงการ
   saveDescription: บันทึกการเปลี่ยนแปลงคำอธิบาย
+  closeDescriptionEditor: ตัวแก้ไขคำอธิบายปิด
   editCredits: แก้ไขเครดิตโครงการ
   saveCredits: บันทึกการเปลี่ยนแปลงเครดิต
+  closeCreditsEditor: ปิดเครดิตบรรณาธิการ
+  closeEditorPrompt: คุณต้องบันทึกการเปลี่ยนแปลงหรือไม่?
+  saveOnLanguageChange: คุณต้องการรักษาการเปลี่ยนแปลงในปัจจุบันของคุณหรือไม่?
+  btnKeep: เก็บการเปลี่ยนแปลง
+  btnDiscard: ละทิ้ง
   addComment: เขียนข้อคิดเห็น
   thumbsUp: ยกนิ้วให้เลย
   smile: ยิ้ม
@@ -190,6 +197,9 @@ programs:
   showTranslation: แสดงคำแปล
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
+  translationSaved: แปลเป็น %language% สำหรับโปรแกรม %section% ที่บันทึกไว้
+  translationDeleted: แปลเป็น %language% สำหรับโปรแกรม %section% ถูกลบ
+  default: ค่าเริ่มต้น
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'

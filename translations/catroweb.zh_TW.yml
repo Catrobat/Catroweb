@@ -157,6 +157,7 @@ programs:
   reportDone: 你舉報了這個項目！
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update App
   updateAppText: 請將您的應用更新到最新版本，以便能夠下載此項目。
   btnClosePopup: 好的
@@ -173,8 +174,14 @@ programs:
   noAdminRights: 您沒有管理員權限。請以管理員身份登錄。
   editDescription: Edit the project Description
   saveDescription: Save Description change
+  closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits
   saveCredits: Save Credits change
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: 你要儲存你的更改嗎?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: 取消
   addComment: 寫個評論
   thumbsUp: 豎起大拇指！
   smile: 微笑！
@@ -188,6 +195,9 @@ programs:
   showTranslation: 顯示翻譯
   hideTranslation: 隱藏翻譯
   translatedByLine: 由 %provider% 從 %sourceLanguage% 翻譯成 %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: 默認
 remixGraph:
   title: 調製
   showRemixGraph: '混音圖'

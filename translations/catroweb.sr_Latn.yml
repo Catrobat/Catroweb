@@ -156,6 +156,7 @@ programs:
   reportDone: Prijavili ste ovaj projekat!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Ažuriraj app
   updateAppText: Molimo vas ažurirajte aplikaciju da bi ste mogli preuzeti ovaj projekat.
   btnClosePopup: Ok
@@ -172,8 +173,14 @@ programs:
   noAdminRights: Nemate administratorska prava. Molimo prijavite se kao administrator.
   editDescription: Uredite opis projekta
   saveDescription: Sačuvaj promjenu opisa
+  closeDescriptionEditor: Close description editor
   editCredits: Izmeni zasluge projekta
   saveCredits: Sačuvaj izmene zasluga
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Da li želite da sačuvate svoje izmene?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Odbaci
   addComment: Napiši komentar
   thumbsUp: Svaka čast!
   smile: Osmeh!
@@ -187,6 +194,9 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Podrazumevano
 remixGraph:
   title: Remiksi
   showRemixGraph: 'Pokaži Remix Graph'

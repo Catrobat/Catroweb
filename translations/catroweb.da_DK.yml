@@ -157,6 +157,7 @@ programs:
   reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
@@ -173,8 +174,14 @@ programs:
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
   saveDescription: Save description change
+  closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
   saveCredits: Save credits change
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: Ønsker du at gemme ændringerne?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Discard
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -188,6 +195,9 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: Default
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'

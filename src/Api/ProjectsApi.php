@@ -123,6 +123,15 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    */
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
   {
+    // Getting the user who uploaded
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+
+    if (!$user->isVerified()) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
     $private = $private ?? false;
@@ -136,9 +145,6 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
       return $error_response;
     }
-
-    // Getting the user who uploaded
-    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     // Needed (for tests) to make sure everything is up to date (followers, ..)
     $this->facade->getProcessor()->refreshUser($user);
@@ -203,6 +209,16 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $limit = $this->getDefaultLimitOnNull(null);
     $offset = $this->getDefaultOffsetOnNull(null);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $cache_id = "projectsCategoriesGet_{$flavor}_{$locale}_{$max_version}";
+    $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+    if (null !== $cached_response) {
+      $responseCode = $cached_response->getResponseCode();
+      $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
+
+      return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+    }
 
     $response = [];
 
@@ -217,6 +233,10 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    $this->facade->getResponseManager()->cacheResponse(
+          $cache_id, $responseCode, $responseHeaders, $response
+      );
 
     return $response;
   }

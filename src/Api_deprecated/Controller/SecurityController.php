@@ -84,6 +84,7 @@ class SecurityController extends AbstractController
         $user->setEmail($create_request->mail);
         $user->setPlainPassword($create_request->password);
         $user->setEnabled(true);
+        $user->setVerified(false);
         $user->setUploadToken($token_generator->generateToken());
 
         $user_manager->updateUser($user);

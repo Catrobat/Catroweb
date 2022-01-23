@@ -375,10 +375,12 @@ final class ProjectsApiTest extends CatrowebTestCase
     $response_code = null;
     $response_headers = [];
 
+    $user = $this->createMock(User::class);
+    $user->method('isVerified')->willReturn(true);
     $processor = $this->createMock(ProjectsApiProcessor::class);
     $processor->method('addProject')->willReturn($this->createMock(Program::class));
     $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $this->facade->method('getProcessor')->willReturn($processor);
 
@@ -409,7 +411,9 @@ final class ProjectsApiTest extends CatrowebTestCase
     $processor = $this->createMock(ProjectsApiProcessor::class);
     $processor->method('addProject')->willReturn($this->createMock(Program::class));
     $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $user = $this->createMock(User::class);
+    $user->method('isVerified')->willReturn(true);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $this->facade->method('getProcessor')->willReturn($processor);
     $this->facade->method('getRequestValidator')->willReturn($validator);
@@ -436,7 +440,9 @@ final class ProjectsApiTest extends CatrowebTestCase
     $processor = $this->createMock(ProjectsApiProcessor::class);
     $processor->method('addProject')->willThrowException(new Exception());
     $authentication_manager = $this->createMock(AuthenticationManager::class);
-    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $user = $this->createMock(User::class);
+    $user->method('isVerified')->willReturn(true);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $this->facade->method('getProcessor')->willReturn($processor);
 
@@ -445,6 +451,33 @@ final class ProjectsApiTest extends CatrowebTestCase
 
     $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(UploadErrorResponse::class, $response);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsPost
+   *
+   * @throws Exception
+   */
+  public function testProjectsPostAddExceptionForbidden(): void
+  {
+    $response_code = null;
+    $response_headers = [];
+
+    $processor = $this->createMock(ProjectsApiProcessor::class);
+    $processor->method('addProject')->willThrowException(new Exception());
+    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createMock(User::class);
+    $user->method('isVerified')->willReturn(false);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+    $this->facade->method('getProcessor')->willReturn($processor);
+
+    $file = $this->createMock(UploadedFile::class);
+    $this->object->projectsPost('checksum', $file, null, null, null, $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_FORBIDDEN, $response_code);
   }
 
   /**

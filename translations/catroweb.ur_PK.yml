@@ -124,7 +124,7 @@ programs:
     آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
     جی ہاں، اسے حذف کریں!
     منسوخ
-  tooLongName: The project name is too long!
+  tooLongName: پروجیکٹ کا نام بہت لمبا ہے!
   tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
   tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
   most:
@@ -157,6 +157,7 @@ programs:
   reportDone: آپ نے اس منصوبے کی اطلاع دی!
   updateAppHeaderDownload: ڈاؤن لوڈ ممکن نہیں۔
   updateAppTextDownload: براہ کرم اپنی ایپ کو تازہ ترین ورژن میں اپ ڈیٹ کریں۔ آگاہ رہیں کہ تمام اینڈرائیڈ فیچرز پہلے سے ہی IOS پر دستیاب نہیں ہیں۔
+  updateAppTextDownloadApk: APK ڈاؤن لوڈ فی الحال صرف اینڈرائیڈ پر دستیاب ہے نہ کہ IOS پر۔
   updateAppHeader: پروگرام اپ ڈیٹ کریں
   updateAppText: براہ کرم اپنے اپلی کیشن کو تازہ ترین ورژن پر اپ ڈیٹ کریں تاکہ اس منصوبے کو ڈاؤن لوڈ کرنے کے قابل ہو.
   btnClosePopup: ٹھیک ہے
@@ -173,8 +174,14 @@ programs:
   noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
   editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
   saveDescription: محفوظ کریں
+  closeDescriptionEditor: Close description editor
   editCredits: پروجیکٹ کے نوٹس اور کریڈٹ میں ترمیم کریں۔
   saveCredits: محفوظ کریں
+  closeCreditsEditor: Close credits editor
+  closeEditorPrompt: کیا آپ تبدیلیاں محفوظ کرنا چاہتے ہیں?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: مسترد کریں
   addComment: اپنی رائے لکھیں
   thumbsUp: بہت خوب!
   smile: مسکراہٹ!
@@ -188,6 +195,9 @@ programs:
   showTranslation: ترجمہ دکھائیں
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
+  translationSaved: Translation to %language% for the program %section% saved
+  translationDeleted: Translation to %language% for the program %section% deleted
+  default: پہلے سے طے شدہ
 remixGraph:
   title: ریمکسس
   showRemixGraph: 'ریمکس گراف'
