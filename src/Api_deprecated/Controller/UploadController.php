@@ -78,7 +78,7 @@ class UploadController
     /** @var User $user */
     $user = $this->token_storage->getToken()->getUser();
 
-    if (!$user->isVerified()) {
+    if (null === $user || !$user->isVerified()) {
       throw new Exception('Account not verified!');
     }
 
