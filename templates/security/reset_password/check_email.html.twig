@@ -1,0 +1,15 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block body %}
+    <h1 class="h2">{{ "resetPassword.check.title"|trans({}, "catroweb") }}</h1>
+    <p>
+        {{ "resetPassword.check.description"|trans({
+            "%time%": resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
+        }, "catroweb") }}
+    </p>
+    <p>
+        {{ "resetPassword.check.description2"|trans({
+            "%tryAgainLink%": '<a href="'~path("app_forgot_password_request")~'">'~"resetPassword.check.tryAgain"|trans({}, "catroweb")~'</a>'
+        }, "catroweb")|raw }}
+    </p>
+{% endblock %}

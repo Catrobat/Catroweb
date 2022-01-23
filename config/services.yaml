@@ -140,6 +140,11 @@ services:
     tags: ['controller.service_arguments']
     public: true
 
+  App\Controller\:
+    resource: '../src/Controller'
+    tags: ['controller.service_arguments']
+    public: true
+
   App\Admin\:
     resource: '../src/Admin/**/Controller'
     tags: [ 'controller.service_arguments' ]
@@ -300,13 +305,6 @@ services:
   # ====================================================================================================================
   #   Event Subscribers
   #
-  resetting_send_email_initialize:
-    class: App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber
-    tags:
-      - { name: kernel.event_subscriber }
-    public: true
-  App\Catrobat\EventListener\ResettingSendEmailInitializeSubscriber: "@resetting_send_email_initialize"
-
   App\EventListener\ProjectPostUpdateNotifier:
     tags:
       - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Program' }

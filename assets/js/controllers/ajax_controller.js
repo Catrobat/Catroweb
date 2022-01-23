@@ -19,7 +19,7 @@ export class AjaxController extends Controller {
   }
 
   /**
-   * Wrapper for fetch with method put
+   * Wrapper for PUT Requests in our API
    *
    * @param {string} url
    * @param {object} data
@@ -31,9 +31,38 @@ export class AjaxController extends Controller {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Accept-Language': this.getAcceptLanguage()
       },
       body: JSON.stringify(data)
     })
+  }
+
+  /**
+   * Wrapper for POST Requests in our API
+   *
+   * @param {string} url
+   * @param {object} data
+   * @returns {Promise<Response>}
+   */
+  fetchPost (url, data) {
+    // eslint-disable-next-line no-undef
+    return fetch(url, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        'Accept-Language': this.getAcceptLanguage()
+      },
+      body: JSON.stringify(data)
+    })
+  }
+
+  getAcceptLanguage () {
+    try {
+      return document.getElementById('app-language').dataset.appLanguage
+    } catch (e) {
+      return 'en'
+    }
   }
 }

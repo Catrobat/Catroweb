@@ -75,6 +75,13 @@ class UploadController
    */
   private function processUpload(Request $request): JsonResponse
   {
+    /** @var User $user */
+    $user = $this->token_storage->getToken()->getUser();
+
+    if (!$user->isVerified()) {
+      throw new Exception('Account not verified!');
+    }
+
     /* @var $file File */
     /* @var $user User */
 
@@ -97,9 +104,6 @@ class UploadController
     }
 
     $flavor = 'pocketcode';
-
-    /** @var User $user */
-    $user = $this->token_storage->getToken()->getUser();
 
     // Needed (for tests) to make sure everything is up to date (followers, ..)
     $this->em->refresh($user);

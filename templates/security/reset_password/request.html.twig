@@ -1,0 +1,27 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block body %}
+
+  <div class="row justify-content-center">
+    <div class="col-12">
+      {% for flashError in app.flashes('reset_password_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+      {% endfor %}
+
+      <h1 class="h2">{{ "resetPassword.request.title"|trans({}, "catroweb") }}</h1>
+      <p class="subtitle-2">
+        {{ "resetPassword.request.description"|trans({}, "catroweb") }}
+      </p>
+
+      {{ form_start(requestForm) }}
+      {{ form_row(requestForm.email) }}
+
+      <div class="mt-4">
+        <button class="btn btn-primary">{{ "resetPassword.request.button.submit"|trans({}, "catroweb") }}</button>
+        <a href="{{ path('login') }}" class="btn btn-secondary">{{ "resetPassword.request.button.cancel"|trans({}, "catroweb") }}</a>
+      </div>
+      {{ form_end(requestForm) }}
+
+    </div>
+  </div>
+{% endblock %}

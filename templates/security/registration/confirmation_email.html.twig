@@ -1,4 +1,4 @@
-{% extends "Email/baseEmail.html.twig" %}
+{% extends "Default/email.html.twig" %}
 
 {% block body_title %}
   {% autoescape false %}
@@ -11,7 +11,7 @@
 
   {% autoescape false %}
     {{ 'accountConfirmation.messageHtml'|trans({'%username%': user.username,
-      '%confirmationUrl%': confirmationUrl
+      '%confirmationUrl%': signedUrl
     }, 'catroweb') }}
   {% endautoescape %}
 

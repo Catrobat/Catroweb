@@ -28,3 +28,7 @@ input:-webkit-autofill:active {
 .mdc-select:not(.mdc-select--disabled).mdc-select--focused .mdc-floating-label {
   color: var(--mdc-theme-primary) !important;
 }
+
+.mdc-text-field-helper-text--validation-msg {
+  color: var(--mdc-theme-error, #b00020) !important;
+}

@@ -58,7 +58,7 @@
 
       <div class="mb-3" style="width: 100%; text-align: right;">
         <a class="col-12 login-text--secondary" id="pw-request"
-           href="{{ path("fos_user_resetting_request") }}">
+           href="{{ path("app_forgot_password_request") }}">
           {{ "login.button.forgetPassword"|trans({}, "catroweb") }}
         </a>
       </div>
@@ -83,7 +83,7 @@
                 name="_submit">{{ "login.button.loginNow"|trans({}, "catroweb") }}
         </button>
 
-        <a href="{{ path('fos_user_registration_register') }}" class="ms-2 btn btn-secondary">{{ "login.button.createAccount"|trans({}, "catroweb") }}</a>
+        <a href="{{ path('register') }}" class="ms-2 btn btn-secondary">{{ "login.button.createAccount"|trans({}, "catroweb") }}</a>
       </div>
 
     </form>

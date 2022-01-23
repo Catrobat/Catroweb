@@ -2,6 +2,9 @@
 
 namespace App\Api\Services\Base;
 
+use App\Entity\ResponseCache;
+use App\Manager\ResponseCacheManager;
+use DateTime;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -13,11 +16,16 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
   use TranslatorAwareTrait;
 
   protected SerializerInterface $serializer;
+  protected ResponseCacheManager $response_cache_manager;
 
-  public function __construct(TranslatorInterface $translator, SerializerInterface $serializer)
-  {
+  public function __construct(
+      TranslatorInterface $translator,
+      SerializerInterface $serializer,
+      ResponseCacheManager $response_cache_manager
+  ) {
     $this->initTranslator($translator);
     $this->serializer = $serializer;
+    $this->response_cache_manager = $response_cache_manager;
   }
 
   /**
@@ -38,8 +46,38 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     $responseHeaders['Content-Language'] = $this->getLocale();
   }
 
+  public function getCachedResponse($cache_id, string $time = '-10 minutes'): ?ResponseCache
+  {
+    /** @var ResponseCache|null $cache_entry */
+    $cache_entry = $this->response_cache_manager->getResponseCacheRepository()->findOneBy(['id' => $cache_id]);
+
+    if (null !== $cache_entry && $cache_entry->getCachedAt() > new DateTime($time)) {
+      return $cache_entry;
+    }
+
+    return null;
+  }
+
+  /**
+   * @param mixed $response
+   */
+  public function cacheResponse(string $cache_id, int $response_code, array $responseHeaders, $response): void
+  {
+    $this->response_cache_manager->addCacheEntry($cache_id, $response_code, $responseHeaders, $response);
+  }
+
   protected function getSerializer(): SerializerInterface
   {
     return $this->serializer;
+  }
+
+  public function extractResponseObject(ResponseCache $cache_entry): array
+  {
+    return unserialize($cache_entry->getResponse()) ?? [];
+  }
+
+  public function extractResponseHeader(ResponseCache $cache_entry): array
+  {
+    return json_decode($cache_entry->getResponseHeaders(), true) ?? [];
   }
 }
