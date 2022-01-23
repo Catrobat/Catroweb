@@ -893,11 +893,19 @@ services:
     arguments:
       - '@eight_points_guzzle.client.itranslate'
 
+  App\Translation\GoogleTranslateApi:
+    class: App\Translation\GoogleTranslateApi
+    arguments:
+      - '@Google\Cloud\Translate\V2\TranslateClient'
+
+  Google\Cloud\Translate\V2\TranslateClient:
+
   App\Translation\TranslationDelegate:
     class: App\Translation\TranslationDelegate
     arguments:
       - '@App\Repository\ProjectCustomTranslationRepository'
       - '@App\Translation\ItranslateApi'
+      - '@App\Translation\GoogleTranslateApi'
 
   App\Translation\MachineTranslationListener:
     class: App\Translation\MachineTranslationListener
