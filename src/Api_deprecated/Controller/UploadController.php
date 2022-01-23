@@ -75,10 +75,10 @@ class UploadController
    */
   private function processUpload(Request $request): JsonResponse
   {
-    /** @var User $user */
+    /** @var User|null $user */
     $user = $this->token_storage->getToken()->getUser();
 
-    if (!$user->isVerified()) {
+    if (null === $user || !$user->isVerified()) {
       throw new Exception('Account not verified!');
     }
 

@@ -36,7 +36,7 @@ class ReportNotificator
 
       $message = (new Swift_Message())
         ->setSubject('[Pocketcode] reported project!')
-        ->setFrom('noreply@catrob.at')
+        ->setFrom('no-reply@catrob.at')
         ->setTo($user->getUser()->getEmail())
         ->setContentType('text/html')
         ->setBody('A Project got reported!

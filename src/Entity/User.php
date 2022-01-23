@@ -548,6 +548,6 @@ class User extends BaseUser
     // All user are automatically verified in non production environments
     $app_env = $_ENV['APP_ENV'];
 
-    return 'prod' !== $app_env || $this->enabled;
+    return 'prod' !== $app_env || $this->verified;
   }
 }
