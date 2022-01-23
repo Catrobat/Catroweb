@@ -70,7 +70,7 @@ class StudioManagerTest extends CatrowebTestCase
     $this->user_fixture = $kernel->getContainer()->get(UserDataFixtures::class);
     $this->project_fixture = $kernel->getContainer()->get(ProjectDataFixtures::class);
     $this->user = $this->user_manager->findUserByUsername('catroweb') ?? $this->user_fixture->insertUser(['name' => 'catroweb', 'password' => '123456']);
-    $this->studio = $this->object->createStudio($this->user, 'test name', 'test description');
+    $this->studio = $this->object->createStudio($this->user, 'testname', 'test description');
   }
 
   protected function tearDown(): void
@@ -125,7 +125,7 @@ class StudioManagerTest extends CatrowebTestCase
    */
   public function testAddAndRemoveStudioUsers(): void
   {
-    $newUser = $this->user_fixture->insertUser(['name' => 'amr diab', 'password' => '123456']);
+    $newUser = $this->user_fixture->insertUser(['name' => 'amrdiab', 'password' => '123456']);
     $this->assertFalse($this->object->isUserInStudio($newUser, $this->studio));
     $newStudioUser = $this->object->addUserToStudio($this->user, $this->studio, $newUser);
     $this->assertInstanceOf(StudioUser::class, $newStudioUser);
@@ -142,7 +142,7 @@ class StudioManagerTest extends CatrowebTestCase
    */
   public function testChangeStudioUserRole(): void
   {
-    $newUser = $this->user_fixture->insertUser(['name' => 'leo messi', 'password' => '123456']);
+    $newUser = $this->user_fixture->insertUser(['name' => 'leomessi', 'password' => '123456']);
     $this->assertNull($this->object->getStudioUserRole($newUser, $this->studio));
     if (is_null($this->object->addUserToStudio($this->user, $this->studio, $newUser))) {
       $this->markTestSkipped('unable to add new user to the studio');
@@ -160,7 +160,7 @@ class StudioManagerTest extends CatrowebTestCase
    */
   public function testChangeStudioUserStatus(): void
   {
-    $newUser = $this->user_fixture->insertUser(['name' => 'luther king', 'password' => '123456']);
+    $newUser = $this->user_fixture->insertUser(['name' => 'lutherking', 'password' => '123456']);
     $this->assertNull($this->object->getStudioUserStatus($newUser, $this->studio));
     if (is_null($this->object->addUserToStudio($this->user, $this->studio, $newUser))) {
       $this->markTestSkipped('unable to add new user to the studio');
@@ -220,8 +220,8 @@ class StudioManagerTest extends CatrowebTestCase
    */
   public function testAddRemoveStudioProject(): void
   {
-    $newUser = $this->user_fixture->insertUser(['name' => 'kit kat', 'password' => '123456']);
-    $newUser_2 = $this->user_fixture->insertUser(['name' => 'peanut butter', 'password' => '123456']);
+    $newUser = $this->user_fixture->insertUser(['name' => 'kitkat', 'password' => '123456']);
+    $newUser_2 = $this->user_fixture->insertUser(['name' => 'peanutbutter', 'password' => '123456']);
     $project = $this->project_fixture->insertProject(['owned by' => $newUser, 'name' => 'test prog',
       'description' => 'test desc', 'credit' => $newUser, ]);
     $studio_project = $this->object->addProjectToStudio($newUser, $this->studio, $project);

@@ -22,8 +22,7 @@ class RegistrationController extends AbstractController
       VerifyEmailHelperInterface $verify_email_helper,
       EntityManagerInterface $entity_manager,
       LoggerInterface $logger
-  )
-  {
+  ) {
     $this->verify_email_helper = $verify_email_helper;
     $this->entity_manager = $entity_manager;
     $this->logger = $logger;
@@ -49,7 +48,7 @@ class RegistrationController extends AbstractController
     try {
       $this->verify_email_helper->validateEmailConfirmation($request->getUri(), $user->getId(), $user->getEmail());
     } catch (VerifyEmailExceptionInterface $e) {
-        $this->logger->critical("Email verification failed for " + $user->getId());
+      $this->logger->critical('Email verification failed for '.$user->getId().$user->getEmail());
       $this->addFlash('verify_email_error', $e->getReason());
 
       return $this->redirectToRoute('register');

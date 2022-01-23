@@ -64,7 +64,7 @@ class UserPostPersistNotifier
 
       $this->mailer->send($email);
     } catch (TransportExceptionInterface $e) {
-      $this->logger->critical("Can't send verification email to \"".$user->getEmail().'" ' . $e->getMessage());
+      $this->logger->critical("Can't send verification email to \"".$user->getEmail().'" '.$e->getMessage());
     }
   }
 }
