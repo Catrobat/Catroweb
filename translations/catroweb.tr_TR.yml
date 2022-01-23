@@ -174,13 +174,13 @@ programs:
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
   editDescription: Proje açıklamasını düzenleyin
   saveDescription: Kaydet
-  closeDescriptionEditor: Close description editor
+  closeDescriptionEditor: Açıklama düzenleyiciyi kapat
   editCredits: Yapanları düzenle
   saveCredits: Kaydet
-  closeCreditsEditor: Close credits editor
+  closeCreditsEditor: Kredi düzenleyicisini kapat
   closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
-  saveOnLanguageChange: Would you like to keep your current changes?
-  btnKeep: Keep Changes
+  saveOnLanguageChange: Mevcut değişikliklerinizi korumak ister misiniz?
+  btnKeep: Değişiklikleri Koru
   btnDiscard: Vazgeç
   addComment: Bir yorum Yaz
   thumbsUp: Başparmak havaya!
@@ -195,8 +195,8 @@ programs:
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationSaved: '%section% programı için %language%''e çeviri kaydedildi'
+  translationDeleted: '%section% programı için %language%''e çeviri silindi'
   default: Varsayılan
 remixGraph:
   title: Remixler
