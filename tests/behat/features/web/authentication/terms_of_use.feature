@@ -9,7 +9,7 @@ Feature: Terms of Use feature
   Scenario: I should be informed about the Terms of Use during registration
     Given I am on "/app/register"
     And I wait for the page to be loaded
-    Then I should see "By continuing, you are setting up a Pocketcode account and agree to our Privacy Policy and Terms of Use."
+    Then I should see "By continuing, you are setting up a Catrobat community account and agree to our Privacy Policy and Terms of Use."
 
   Scenario: I should be informed about the Terms of Use during registration
     Given I am on "/app/register"

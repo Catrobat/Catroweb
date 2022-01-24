@@ -9,7 +9,7 @@ Feature: Privacy policy feature
   Scenario: I should be informed about the privacy policy during registration
     Given I am on "/app/register"
     And I wait for the page to be loaded
-    Then I should see "By continuing, you are setting up a Pocketcode account and agree to our Privacy Policy and Terms Of Use"
+    Then I should see "By continuing, you are setting up a Catrobat community account and agree to our Privacy Policy and Terms Of Use"
 
   Scenario: I should be informed about the privacy policy during registration
     Given I am on "/app/register"
