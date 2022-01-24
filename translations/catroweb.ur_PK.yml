@@ -174,13 +174,13 @@ programs:
   noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
   editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
   saveDescription: محفوظ کریں
-  closeDescriptionEditor: Close description editor
+  closeDescriptionEditor: تفصیل ایڈیٹر بند کریں۔
   editCredits: پروجیکٹ کے نوٹس اور کریڈٹ میں ترمیم کریں۔
   saveCredits: محفوظ کریں
-  closeCreditsEditor: Close credits editor
+  closeCreditsEditor: کریڈٹ ایڈیٹر بند کریں۔
   closeEditorPrompt: کیا آپ تبدیلیاں محفوظ کرنا چاہتے ہیں?
-  saveOnLanguageChange: Would you like to keep your current changes?
-  btnKeep: Keep Changes
+  saveOnLanguageChange: کیا آپ اپنی موجودہ تبدیلیوں کو برقرار رکھنا چاہیں گے؟
+  btnKeep: تبدیلیاں رکھیں
   btnDiscard: مسترد کریں
   addComment: اپنی رائے لکھیں
   thumbsUp: بہت خوب!
@@ -195,8 +195,8 @@ programs:
   showTranslation: ترجمہ دکھائیں
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationSaved: پروگرام %section% کے لیے %language% کا ترجمہ محفوظ ہو گیا۔
+  translationDeleted: پروگرام %section% کے لیے %language% کا ترجمہ حذف کر دیا گیا۔
   default: پہلے سے طے شدہ
 remixGraph:
   title: ریمکسس
@@ -395,6 +395,7 @@ login:
   passwordSecond: پاس ورڈ کی تصدیق
 register:
   title: نیا اکاؤنٹ بنانے
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: منسوخ
     createAccount: اکاؤنٹ بنائیں
@@ -404,6 +405,27 @@ accountRecovery:
   button:
     cancel: منسوخ
     submit: پاس ورڈ بحال کریں
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "منسوخ"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "پاس ورڈ ری سیٹ"
 apk:
   download: اپلی کیشن کے طور پر ڈاؤن لوڈ کریں
   prepare: 'ایپ تیار کریں'
