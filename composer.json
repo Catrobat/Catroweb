@@ -44,7 +44,7 @@
         "symfony/dotenv": "5.4.*",
         "symfony/flex": "^1.7",
         "symfony/intl": "5.4.*",
-        "symfony/mailer": "4.4.*",
+        "symfony/mailer": "5.4.*",
         "symfony/monolog-bundle": "^3.7",
         "symfony/polyfill-iconv": "^1.23",
         "symfony/process": "5.4.*",
