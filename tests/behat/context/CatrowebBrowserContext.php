@@ -326,6 +326,10 @@ class CatrowebBrowserContext extends BrowserContext
         $this->assertSession()->cookieEquals('hl', 'de_DE');
         break;
 
+      case 'French':
+        $this->assertSession()->cookieEquals('hl', 'fr_FR');
+        break;
+
       default:
         Assert::assertTrue(false);
     }
