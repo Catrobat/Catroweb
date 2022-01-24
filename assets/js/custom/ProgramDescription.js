@@ -1,8 +1,8 @@
 import $ from 'jquery'
 /* global Routing */
 
-export function ProgramDescription (programId, showMoreButtonText, showLessButtonText, defaultText,
-  translationSaved, translationDeleted, myProgram, descriptionSelect, closeEditorDialog,
+export function ProgramDescription (programId, usersLanguage, showMoreButtonText, showLessButtonText,
+  defaultText, translationSaved, translationDeleted, myProgram, descriptionSelect, closeEditorDialog,
   keepOrDiscardDialog, customTranslationSnackbar, customTranslationApi) {
   const description = $('#description')
   const editDescriptionUI = $('#edit-description-ui')
@@ -22,6 +22,8 @@ export function ProgramDescription (programId, showMoreButtonText, showLessButto
   let previousDescriptionIndex = 0
   let lastSavedDescription = description.text().trim()
 
+  const noop = () => {}
+
   initShowMore()
 
   function initShowMore () {
@@ -34,6 +36,13 @@ export function ProgramDescription (programId, showMoreButtonText, showLessButto
   $(document).ready(function () {
     if (myProgram) {
       getLanguages()
+    } else {
+      customTranslationApi.getCustomTranslation(
+        programId,
+        usersLanguage.substring(0, 2),
+        setDescription,
+        noop
+      )
     }
   })
 
@@ -66,6 +75,10 @@ export function ProgramDescription (programId, showMoreButtonText, showLessButto
 
     descriptionSelect.layoutOptions()
     resetDescriptionEditor()
+  }
+
+  function setDescription (value) {
+    description.text(value)
   }
 
   function getCustomTranslationSuccess (data) {
