@@ -12,7 +12,7 @@ about: About
 education: Education
 chat: Chat and forums
 others: Others
-tutorials: Tutorials
+tutorials: Help
 googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
@@ -72,7 +72,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      description: 'The more reactions (Thumbs up, smile ...) your project receives, the higher it appears in this list.'
 follower:
   follows: Following
   followers: Followers
@@ -186,7 +186,7 @@ programs:
   thumbsUp: Thumbs up!
   smile: Smile!
   love: Love!
-  wow: Wooow!
+  wow: Wow!
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Reactions
@@ -677,7 +677,7 @@ next: Next
 previous: Previous
 media-packages:
   title: Media-Packages
-  description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
+  description: In the following categories you can find additional actors and objects to add to you Pocket Code projects.
   thumb-size:
     description: Preview size
     sm: small

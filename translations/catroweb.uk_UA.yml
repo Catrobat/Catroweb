@@ -124,7 +124,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: The project name is too long!
+  tooLongName: Занадто довга назва проекту!
   tooLongDescription: Опис проєкту задовгий!
   tooLongCredits: The project credits are too long!
   most:

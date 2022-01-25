@@ -402,7 +402,7 @@ login:
   passwordSecond: Подтверждение пароля
 register:
   title: Регистрация
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "Продолжая, вы создаете аккаунт в сообществе Catrobat и соглашайтесь с нашими %var1% и %var2%."
   button:
     cancel: Отменить
     createAccount: Создать учётную запись
@@ -414,23 +414,23 @@ accountRecovery:
     submit: Восстановить пароль
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Сбросить пароль"
+    description: "Если вы помните адрес электронной почты который был указан в вашем аккаунте, мы сможем отправить вам ссылку на сброс пароля"
     button:
-      submit: "Send reset email"
+      submit: "Отправить письмо для сброса пароля"
       cancel: "Отменить"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "Проверьте вашу электронную почту"
+    description: "Если существует аккаунт к которому привязана ваша электронная почта, то вам будет отправлено письмо в котором есть ссылка для сброса пароля. Эта ссылка станет недействительной через %time%."
+    description2: "Если вы не получили письмо о сбросе, проверьте папку спама или %tryAgainLink%"
+    tryAgain: "Попробовать снова"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Привет!"
+    visitLink: "Чтобы сбросить пароль от аккаунта, пожалуйста перейдите по ссылке"
+    expire: "Эта ссылка станет недействительной через %time%."
+    cheers: "Ура!"
   reset:
-    title: "Reset your password"
+    title: "Сбросить пароль"
     button:
       submit: "Сбросить пароль"
 apk:
