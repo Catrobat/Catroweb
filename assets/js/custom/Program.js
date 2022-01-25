@@ -80,13 +80,13 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       return
     }
 
-    // Unfortunately the android implementation of pocket code has its issues with the new download implementation
-    if (isWebView) {
-      downloadUrl += downloadUrl.includes('?') ? '&' : '?'
-      downloadUrl += 'fname=' + encodeURIComponent(projectName)
-      window.location = downloadUrl
-      return
-    }
+    // // Unfortunately the android implementation of pocket code has its issues with the new download implementation
+    // if (isWebView) {
+    //   downloadUrl += downloadUrl.includes('?') ? '&' : '?'
+    //   downloadUrl += 'fname=' + encodeURIComponent(projectName)
+    //   window.location = downloadUrl
+    //   return
+    // }
 
     new ApiFetch(downloadUrl).generateAuthenticatedFetch()
       .then(function (response) {
