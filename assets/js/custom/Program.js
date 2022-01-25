@@ -67,15 +67,17 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     // UX - feedback loop: downloads of large projects can take a few seconds / minutes
     showSnackbar('#share-snackbar', downloadStartedText)
 
-    // Security
-    downloadUrl += downloadUrl.includes('?') ? '&' : '?'
-    downloadUrl += 'token=' + encodeURIComponent(csrfToken)
-
     // UX + Performance: prevent multiple same downloads
     button.disabled = true
     icon.classList.add('d-none')
     loadingSpinner.classList.remove('d-none')
     loadingSpinner.classList.add('d-inline-block')
+
+    // Older app version do not support new features and projects that use them
+    if (isWebView && !supported) {
+      showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText)
+      return
+    }
 
     // Unfortunately the android implementation of pocket code has its issues with the new download implementation
     if (isWebView) {
@@ -83,11 +85,9 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
       return
     }
 
-    // Older app version do not support new features and projects that use them
-    if (isWebView && !supported) {
-      showProjectIsNotSupportedMessage(isNotSupportedTitle, isNotSupportedText)
-      return
-    }
+    // Security
+    downloadUrl += downloadUrl.includes('?') ? '&' : '?'
+    downloadUrl += 'token=' + encodeURIComponent(csrfToken)
 
     // eslint-disable-next-line no-undef
     fetch(downloadUrl)
