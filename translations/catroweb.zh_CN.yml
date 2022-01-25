@@ -405,7 +405,7 @@ login:
   passwordSecond: 密码确认
 register:
   title: 注册
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "如果继续，表示您将会创建一个Catrobat社区帐户并同意我们的 %var1% 和 %var2%。"
   button:
     cancel: 取消
     createAccount: 创造帐户
@@ -417,23 +417,23 @@ accountRecovery:
     submit: 找回密码
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "重置您的密码"
+    description: "如果您记得您帐户的电子邮件，我们可以向您发送一个链接来重置您的密码。"
     button:
-      submit: "Send reset email"
+      submit: "发送密码重置电子邮件"
       cancel: "取消"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "请检查您的邮箱。"
+    description: "如果存在一个与您的电子邮件匹配的帐户，刚刚发送的一封电子邮件中会有帮您重置密码的链接。 此链接将在 %time% 后过期。"
+    description2: "如果您没有收到电子邮件，请检查您的垃圾邮件文件夹或 %tryAgainLink%"
+    tryAgain: "重试"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "您好！"
+    visitLink: "要重置您的密码，请访问以下链接"
+    expire: "此链接将在 %time% 后过期。"
+    cheers: "恭喜！"
   reset:
-    title: "Reset your password"
+    title: "重置您的密码"
     button:
       submit: "重置密码"
 apk:

@@ -395,7 +395,7 @@ login:
   passwordSecond: پاس ورڈ کی تصدیق
 register:
   title: نیا اکاؤنٹ بنانے
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "جاری رکھ کر، آپ Catrobat کمیونٹی اکاؤنٹ ترتیب دے رہے ہیں اور ہمارے %var1% اور %var2% سے اتفاق کرتے ہیں۔"
   button:
     cancel: منسوخ
     createAccount: اکاؤنٹ بنائیں
@@ -407,23 +407,23 @@ accountRecovery:
     submit: پاس ورڈ بحال کریں
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "اپنا پاس ورڈ ری سیٹ کریں"
+    description: "اگر آپ کو اپنے اکاؤنٹ کا ای میل یاد ہے تو ہم آپ کو اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے ایک لنک بھیج سکتے ہیں۔"
     button:
-      submit: "Send reset email"
+      submit: "ری سیٹ ای میل بھیجیں۔"
       cancel: "منسوخ"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "اپنا ای میل چیک کریں"
+    description: "اگر آپ کے ای میل سے مماثل اکاؤنٹ موجود ہے، تو ابھی ابھی ایک ای میل بھیجا گیا ہے جس میں ایک لنک ہے جسے آپ اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے استعمال کر سکتے ہیں۔ یہ لنک %time% میں ختم ہو جائے گا۔"
+    description2: "اگر آپ کو ای میل موصول نہیں ہوتی ہے تو براہ کرم اپنا سپیم فولڈر چیک کریں یا %tryAgainLink%"
+    tryAgain: "دوبارہ کوشش کریں"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "السلام علیکم"
+    visitLink: "اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے، براہ کرم درج ذیل لنک پر جائیں۔"
+    expire: "یہ لنک %time% میں ختم ہو جائے گا۔"
+    cheers: "شاباش"
   reset:
-    title: "Reset your password"
+    title: "اپنا پاس ورڈ ری سیٹ کریں"
     button:
       submit: "پاس ورڈ ری سیٹ"
 apk:

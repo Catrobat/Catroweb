@@ -406,7 +406,7 @@ login:
   passwordSecond: ยืนยันรหัสผ่าน
 register:
   title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "การดำเนินการต่อแสดงว่าคุณกำลังตั้งค่าบัญชีชุมชน Catrobat และยอมรับ %var1% และ %var2% ของเรา"
   button:
     cancel: ยกเลิก
     createAccount: สร้างบัญชี
@@ -418,23 +418,23 @@ accountRecovery:
     submit: Recover password
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "รีเซ็ตรหัสผ่านของคุณ"
+    description: "หากคุณจำอีเมลของบัญชีของคุณได้ เราสามารถส่งลิงก์เพื่อรีเซ็ตรหัสผ่านให้คุณได้"
     button:
-      submit: "Send reset email"
+      submit: "ส่งอีเมลรีเซ็ต"
       cancel: "ยกเลิก"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "ตรวจสอบอีเมลของคุณ"
+    description: "หากมีบัญชีที่ตรงกับอีเมลของคุณ แสดงว่าระบบเพิ่งส่งอีเมลที่มีลิงก์ซึ่งคุณสามารถใช้รีเซ็ตรหัสผ่านได้ ลิงก์นี้จะหมดอายุใน %time%"
+    description2: "หากคุณไม่ได้รับอีเมล โปรดตรวจสอบโฟลเดอร์สแปมของคุณหรือ %tryAgainLink%"
+    tryAgain: "ลองอีกครั้ง"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "สวัสดี!"
+    visitLink: "หากต้องการรีเซ็ตรหัสผ่าน โปรดไปที่ลิงก์ต่อไปนี้"
+    expire: "ลิงก์นี้จะหมดอายุใน %time%"
+    cheers: "ไชโย!"
   reset:
-    title: "Reset your password"
+    title: "รีเซ็ตรหัสผ่านของคุณ"
     button:
       submit: "รีเซ็ตรหัสผ่าน"
 apk:
