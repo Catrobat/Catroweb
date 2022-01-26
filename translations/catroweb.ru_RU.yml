@@ -516,7 +516,7 @@ api:
     usernameInvalid: 'Неверное имя пользователя'
     passwordMissing: 'Пароль отсутствует'
     passwordEmpty: 'Пароль не может быть пустым'
-    passwordTooShort: 'Пароль слишком короткий!'
+    passwordTooShort: 'Пароль слишком короткий'
     passwordTooLong: 'Пароль слишком длинный'
     passwordInvalidChars: 'Пароль содержит недопустимые символы'
     usernameContainsEmail: "Имя пользователя не должно содержать адрес электронной почты."
