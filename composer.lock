@@ -2652,16 +2652,16 @@
         },
         {
             "name": "gesdinet/jwt-refresh-token-bundle",
-            "version": "v1.0.0",
+            "version": "v1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
-                "reference": "e963f736079214627afb2a0c36386ccd0b56338a"
+                "reference": "1167006f2973064a81f1671e89c3c495969c6a50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/e963f736079214627afb2a0c36386ccd0b56338a",
-                "reference": "e963f736079214627afb2a0c36386ccd0b56338a",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/1167006f2973064a81f1671e89c3c495969c6a50",
+                "reference": "1167006f2973064a81f1671e89c3c495969c6a50",
                 "shasum": ""
             },
             "require": {
@@ -2670,7 +2670,7 @@
                 "symfony/config": "^4.4|^5.4|^6.0",
                 "symfony/console": "^4.4|^5.4|^6.0",
                 "symfony/dependency-injection": "^4.4|^5.4|^6.0",
-                "symfony/deprecation-contracts": "^2.1",
+                "symfony/deprecation-contracts": "^2.1|^3.0",
                 "symfony/event-dispatcher": "^4.4|^5.4|^6.0",
                 "symfony/http-foundation": "^4.4|^5.4|^6.0",
                 "symfony/http-kernel": "^4.4|^5.4|^6.0",
@@ -2726,9 +2726,9 @@
             ],
             "support": {
                 "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
-                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.0.0"
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.0.1"
             },
-            "time": "2022-01-11T19:50:56+00:00"
+            "time": "2022-01-25T11:32:28+00:00"
         },
         {
             "name": "google/apiclient",
