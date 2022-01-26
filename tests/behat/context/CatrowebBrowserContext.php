@@ -888,7 +888,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iWriteInTextarea($arg1): void
   {
-    $textarea = $this->getSession()->getPage()->find('css', '#edit-credits');
+    $textarea = $this->getSession()->getPage()->find('css', '#edit-text');
     Assert::assertNotNull($textarea, 'Textarea not found');
     $textarea->setValue($arg1);
   }
