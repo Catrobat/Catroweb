@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: মুছুন
   noAdminRights: আপনার অ্যাডমিন অধিকার নেই। অনুগ্রহ করে  অ্যাডমিন হিসাবে প্রবেশ করুন।
   editDescription: Edit the project Description
-  saveDescription: পরিবর্তীত বর্ণনা সংরক্ষণ করুন
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits
-  saveCredits: Save Credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: আপনি কি আপনার পরিবর্তনগুলি সংরক্ষণ করতে চান?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: পূর্ব-নির্ধারিত
+  save: সংরক্ষণ করুন
 remixGraph:
   title: রিমিক্স
   showRemixGraph: 'রিমিক্স গ্রাফ প্রদর্শন করুন'

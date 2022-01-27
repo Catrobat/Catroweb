@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Eliminato
   noAdminRights: Non hai diritti di amministratore. Effettua il login come amministratore.
   editDescription: Modifica la descrizione del progetto
-  saveDescription: Salvare le modifiche alla descrizione
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
-  saveCredits: Save credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Si desidera salvare le modifiche?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Predefinito
+  save: Salva
 remixGraph:
   title: Remix
   showRemixGraph: 'Visualizza il grafo dei Remix'

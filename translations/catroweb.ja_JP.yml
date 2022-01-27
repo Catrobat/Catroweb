@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: 削除しました
   noAdminRights: 管理者権限がありません。管理者としてログインしてください。
   editDescription: プロジェクトの説明を編集
-  saveDescription: 保存
   closeDescriptionEditor: Close description editor
   editCredits: プロジェクトノートとクレジットを編集
-  saveCredits: 保存
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: 変更内容を保存しますか？
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: デフォルト
+  save: 保存
 remixGraph:
   title: リミックス
   showRemixGraph: 'リミックスのグラフを表示'

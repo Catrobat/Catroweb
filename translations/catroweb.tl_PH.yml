@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: I-save
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project notes and credits
-  saveCredits: I-save
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Gusto mo bang i-save ang mga pagbabago?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Naka-Default
+  save: I-save
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'

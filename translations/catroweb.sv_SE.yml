@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Raderad
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Redigera projektbeskrivningen
-  saveDescription: Save description change
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
-  saveCredits: Save credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Vill du spara ändringarna?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Default
+  save: Spara
 remixGraph:
   title: Remixar
   showRemixGraph: 'Remix graph'

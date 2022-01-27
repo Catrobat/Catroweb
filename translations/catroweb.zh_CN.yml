@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: 已删除
   noAdminRights: 您没有管理员权限。请以管理员身份登录。
   editDescription: 编辑项目描述
-  saveDescription: 保存描述更改
   closeDescriptionEditor: 关闭描述编辑器
   editCredits: Edit the project credits
-  saveCredits: 保存
   closeCreditsEditor: 关闭积分编辑器
   closeEditorPrompt: 您要保存这些更改吗？
   saveOnLanguageChange: 是否保存当前更改？
@@ -198,6 +196,7 @@ programs:
   translationSaved: 程序 %section% 的 %language% 翻译已保存
   translationDeleted: 程序 %section% 的 %language% 翻译已删除
   default: 默认
+  save: 保存
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'

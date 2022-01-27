@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: हटा दिया
   noAdminRights: आपके पास व्यवस्थापक का अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
   editDescription: प्रोजेक्ट का वर्णन बदलें
-  saveDescription: सहेजें
   closeDescriptionEditor: Close description editor
   editCredits: प्रोजेक्ट के श्रेय में बदलाव करें
-  saveCredits: सहेजें
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: पूर्व निर्धारित
+  save: सहेजें
 remixGraph:
   title: रीमिक्स
   showRemixGraph: 'रीमिक्स ग्राफ'
