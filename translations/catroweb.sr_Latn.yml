@@ -172,10 +172,8 @@ programs:
   deleted_popup_header: Izbrisano
   noAdminRights: Nemate administratorska prava. Molimo prijavite se kao administrator.
   editDescription: Uredite opis projekta
-  saveDescription: Sačuvaj promjenu opisa
   closeDescriptionEditor: Close description editor
   editCredits: Izmeni zasluge projekta
-  saveCredits: Sačuvaj izmene zasluga
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Da li želite da sačuvate svoje izmene?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -197,6 +195,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Podrazumevano
+  save: Sačuvaj
 remixGraph:
   title: Remiksi
   showRemixGraph: 'Pokaži Remix Graph'

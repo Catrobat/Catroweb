@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
   editDescription: Proje açıklamasını düzenleyin
-  saveDescription: Kaydet
   closeDescriptionEditor: Açıklama düzenleyiciyi kapat
   editCredits: Yapanları düzenle
-  saveCredits: Kaydet
   closeCreditsEditor: Kredi düzenleyicisini kapat
   closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
   saveOnLanguageChange: Mevcut değişikliklerinizi korumak ister misiniz?
@@ -198,6 +196,7 @@ programs:
   translationSaved: '%section% programı için %language%''e çeviri kaydedildi'
   translationDeleted: '%section% programı için %language%''e çeviri silindi'
   default: Varsayılan
+  save: Kaydet
 remixGraph:
   title: Remixler
   showRemixGraph: 'Remixleri'

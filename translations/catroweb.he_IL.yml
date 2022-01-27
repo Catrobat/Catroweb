@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project description
-  saveDescription: Save description change
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
-  saveCredits: Save credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: האם ברצונך לשמור את השינויים?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: ברירת מחדל
+  save: שמור
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'

@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: محذوف
   noAdminRights: ليس لديك صلاحيات للمشرف. الرجاء تسجيل الدخول كمشرف.
   editDescription: تعديل وصف المشروع
-  saveDescription: حفظ
   closeDescriptionEditor: Close description editor
   editCredits: تعديل ملاحظات المشروع والرصيد
-  saveCredits: حفظ
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: هل تريد حفظ التغييرات؟
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: افتراضي
+  save: حفظ
 remixGraph:
   title: رِمكسات(خليط مُعدل)
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'

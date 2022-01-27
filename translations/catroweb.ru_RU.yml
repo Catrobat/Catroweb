@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: '﻿Удалено'
   noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
   editDescription: Редактировать описание проекта
-  saveDescription: Сохранить
   closeDescriptionEditor: Закрыть редактор описания
   editCredits: Редактировать примечания и информацию об авторах проекта
-  saveCredits: Сохранить
   closeCreditsEditor: Закрыть редактор примечаний и авторов
   closeEditorPrompt: Хотите ли вы сохранить свои изменения?
   saveOnLanguageChange: Сохранить текущие изменения?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Перевод на %language% для программы %section% сохранен
   translationDeleted: Перевод на %language% для программы %section% удален
   default: По умолчанию
+  save: Сохранить
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Показать ремиксы'
@@ -263,7 +262,7 @@ profile:
   saveChanges: Сохранить изменения
   newPass: новый пароль
   repeatPass: Повторите пароль
-  oldPass: Старый пароль
+  oldPass: старый пароль
   firstEmail: Моя первая электронная почта
   secondEmail: Моя вторая электронная почта
   myPrograms: Мои проекты

@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editDescription: Edit the project Description
-  saveDescription: Save Description change
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits
-  saveCredits: Save Credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Do you want to save your changes?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Default
+  save: Save
 remixGraph:
   title: Ремікси
   showRemixGraph: 'Remix graph'
