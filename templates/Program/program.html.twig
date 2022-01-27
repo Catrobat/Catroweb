@@ -246,19 +246,25 @@
   ></div>
   <div class="js-project-description-credits"
        data-project-id="{{ program.id }}"
+       data-max-length={{ max_description_size }}
+       data-has-description={% if program.description %} true {% else %} false {% endif %}
+       data-has-credits={% if program.credits %} true {% else %} false {% endif %}
        data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
        data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
        data-trans-description="{{ "description"|trans({}, "catroweb") }}"
        data-trans-notes-and-credits="{{ "credits"|trans({}, "catroweb") }}"
        data-trans-translation-saved="{{ "programs.translationSaved"|trans({}, "catroweb") }}"
        data-trans-translation-deleted="{{ "programs.translationDeleted"|trans({}, "catroweb") }}"
-       data-trans-close-editor="{{ "programs.closeEditorPrompt"|trans({}, "catroweb") }}"
-       data-trans-save="{{ "programs.saveDescription"|trans({}, "catroweb") }}"
+       data-trans-close-description-editor="{{ "programs.closeDescriptionEditor"|trans({}, "catroweb") }}"
+       data-trans-close-credits-editor="{{ "programs.closeCreditsEditor"|trans({}, "catroweb") }}"
+       data-trans-close-editor-prompt="{{ "programs.closeEditorPrompt"|trans({}, "catroweb") }}"
+       data-trans-save="{{ "programs.save"|trans({}, "catroweb") }}"
        data-trans-discard="{{ "programs.btnDiscard"|trans({}, "catroweb") }}"
        data-trans-cancel="{{ "cancel"|trans({}, "catroweb") }}"
        data-trans-keep="{{ "programs.btnKeep"|trans({}, "catroweb") }}"
        data-trans-default="{{ "programs.default"|trans({}, "catroweb") }}"
        data-trans-save-on-language-change="{{ "programs.saveOnLanguageChange"|trans({}, "catroweb") }}"
+       data-trans-notes-and-credits-description="{{ "notesAndCreditsDescription"|trans({}, "catroweb") }}"
   ></div>
   <div class="js-project-comments"
        data-project-id="{{ program_details.id }}"

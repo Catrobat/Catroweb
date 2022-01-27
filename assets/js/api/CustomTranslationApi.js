@@ -5,7 +5,7 @@ export class CustomTranslationApi {
     this.programSection = programSection
   }
 
-  getCustomTranslation (programId, language, successCallback, errorCallback) {
+  getCustomTranslation (programId, language, successCallback, errorCallback = () => {}) {
     $.ajax({
       url: '../translate/custom/project/' + programId + '?field=' + this.programSection + '&language=' + language,
       type: 'get',

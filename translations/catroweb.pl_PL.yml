@@ -400,7 +400,7 @@ login:
   passwordSecond: Potwierdź hasło
 register:
   title: Zarejestruj się
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "Kontynuując, konfigurujesz konto społeczności Catrobat i zgadzasz się na nasze %var1% i %var2%."
   button:
     cancel: Anuluj
     createAccount: Utwórz konto
@@ -412,23 +412,23 @@ accountRecovery:
     submit: Odzyskaj hasło
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Resetuj swoje hasło"
+    description: "Jeśli zapomnisz e-mail do Twojego konta, możemy wysłać Ci link do zresetowania hasła."
     button:
-      submit: "Send reset email"
+      submit: "Wyślij e-mail resetujący"
       cancel: "Anuluj"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "Sprawdź swoje e-maile"
+    description: "Jeśli konto pasujące do Twojego adresu e-mail istnieje, wysłano wiadomość e-mail zawierającą link, który możesz użyć do zresetowania hasła. Ten link wygaśnie za %time%."
+    description2: "Jeśli nie otrzymasz wiadomości e-mail, sprawdź folder spamu lub %tryAgainLink%"
+    tryAgain: "spróbuj ponownie"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Cześć!"
+    visitLink: "Aby zresetować hasło, odwiedź poniższy link"
+    expire: "Ten link wygaśnie za %time%."
+    cheers: "Pozdrawiamy!"
   reset:
-    title: "Reset your password"
+    title: "Resetuj swoje hasło"
     button:
       submit: "Zresetuj hasło"
 apk:
