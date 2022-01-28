@@ -77,6 +77,15 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
 
+    $cache_id = "projectsGet_{$flavor}_{$max_version}";
+    $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+    if (null !== $cached_response) {
+      $responseCode = $cached_response->getResponseCode();
+      $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
+
+      return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+    }
+
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
 
@@ -84,6 +93,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }
@@ -233,10 +243,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-
-    $this->facade->getResponseManager()->cacheResponse(
-          $cache_id, $responseCode, $responseHeaders, $response
-      );
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }

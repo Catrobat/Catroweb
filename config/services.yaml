@@ -882,7 +882,7 @@ services:
   my.oauth_aware.user_provider.service:
     class: App\Catrobat\Security\FOSUBUserProviderAdapter
     arguments:
-      - '@fos_user.user_manager'
+      - '@App\Entity\Usermanager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}
 
 

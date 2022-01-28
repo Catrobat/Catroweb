@@ -11,13 +11,7 @@ fos_user:
     user_manager: App\Entity\UserManager
     mailer: fos_user.mailer.twig_swift # allows usage of twig templates
 
-
-  # Define password resetting email
-  resetting:
-    email:
-      template:   Email/password_resetting.email.twig
-
-  #  Default fos user mail config
+  # Can be removed once fos user bundle was removed
   from_email:
     address: no-reply@catrob.at
     sender_name: "No Reply"

@@ -15,7 +15,7 @@
 
       <h1 class="h2">{{ "register.title"|trans({}, "catroweb") }}</h1>
 
-      <div id="registration_form" class="fos_user_registration_register form-horizontal" role="form"
+      <div id="registration_form" role="form"
           {{ stimulus_controller('security--registration', {apiPath: path('open_api_server_user_userpost'), baseUrl: path('index'), }) }}>
         <input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token|default('') }}"/>
 
@@ -62,7 +62,8 @@
         </p>
 
         <div class="mt-3" style="display: flex">
-          <button id="register-btn" data-action="click->security--registration#register" class="btn btn-primary"
+          <button type="submit" id="register-btn" data-action="click->security--registration#register"
+                  class="btn btn-primary"
                   style="display: flex;">
             <span id="register-btn__spinner" class="d-none">
               {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'register-spinner' ~ suffix|default(), 'size': 'small'} %}
