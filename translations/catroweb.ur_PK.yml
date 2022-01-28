@@ -196,7 +196,7 @@ programs:
   translationSaved: پروگرام %section% کے لیے %language% کا ترجمہ محفوظ ہو گیا۔
   translationDeleted: پروگرام %section% کے لیے %language% کا ترجمہ حذف کر دیا گیا۔
   default: پہلے سے طے شدہ
-  save: محفوظ 
+  save: محفوظ کریں
 remixGraph:
   title: ریمکسس
   showRemixGraph: 'ریمکس گراف'
