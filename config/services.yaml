@@ -106,20 +106,8 @@ services:
     resource: '../src/Api/Services/*'
     public: true
 
-  App\Entity\UserManager:
-    class: App\Entity\UserManager
-    public: true
-
-  App\Entity\ProgramManager:
-    class: App\Entity\ProgramManager
-    public: true
-
   App\Commands\Helpers\RemixManipulationProgramManager:
     class: App\Commands\Helpers\RemixManipulationProgramManager
-    public: true
-
-  App\Entity\RemixManager:
-    class: App\Entity\RemixManager
     public: true
 
   App\Catrobat\RemixGraph\RemixGraphManipulator:
@@ -882,9 +870,8 @@ services:
   my.oauth_aware.user_provider.service:
     class: App\Catrobat\Security\FOSUBUserProviderAdapter
     arguments:
-      - '@App\Entity\Usermanager'
+      - '@App\Manager\UserManager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}
-
 
   App\Translation\ItranslateApi:
     class: App\Translation\ItranslateApi

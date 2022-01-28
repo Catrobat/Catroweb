@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Entity;
+namespace App\Manager;
 
+use App\Entity\User;
 use App\Utils\TimeUtils;
 use App\Utils\Utils;
 use DateTime;

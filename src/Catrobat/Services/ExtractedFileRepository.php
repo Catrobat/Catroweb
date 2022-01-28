@@ -4,7 +4,7 @@ namespace App\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidCatrobatFileException;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use App\Utils\Utils;
 use Exception;
 use Psr\Log\LoggerInterface;

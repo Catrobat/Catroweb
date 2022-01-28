@@ -3,8 +3,8 @@
 namespace App\EventSubscriber;
 
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Entity\UserManager;
 use App\Event\PasswordResetRequestedEvent;
+use App\Manager\UserManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

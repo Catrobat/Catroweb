@@ -5,7 +5,7 @@ namespace App\Api\Services\Authentication;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;

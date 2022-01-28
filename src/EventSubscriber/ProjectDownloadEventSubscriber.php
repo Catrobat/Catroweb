@@ -2,8 +2,8 @@
 
 namespace App\EventSubscriber;
 
-use App\Entity\ProgramManager;
 use App\Event\ProjectDownloadEvent;
+use App\Manager\ProgramManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 

@@ -7,7 +7,7 @@ use App\Catrobat\RemixGraph\RemixGraphLayout;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Commands\Helpers\RemixManipulationProgramManager;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;

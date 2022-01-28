@@ -51,7 +51,7 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     /** @var ResponseCache|null $cache_entry */
     $cache_entry = $this->response_cache_manager->getResponseCacheRepository()->findOneBy(['id' => $cache_id]);
 
-    if (null !== $cache_entry && $cache_entry->getCachedAt() > new DateTime($time)) {
+    if ('prod' === $_ENV['APP_ENV'] && null !== $cache_entry && $cache_entry->getCachedAt() > new DateTime($time)) {
       return $cache_entry;
     }
 

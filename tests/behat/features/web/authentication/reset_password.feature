@@ -14,7 +14,7 @@ Feature:
     And I wait for the page to be loaded
     Then I should be on "/app/reset-password"
     And I wait for the page to be loaded
-    When I fill in "reset_password_request_form_email" with "abcd@gmail.com"
+    When I fill in "email" with "abcd@gmail.com"
     And I press "Send reset email"
     Then I wait for the page to be loaded
     And I should see "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in 1 hour."

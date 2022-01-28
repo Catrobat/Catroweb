@@ -4,9 +4,9 @@ namespace App\Commands\Create;
 
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\FollowNotification;
-use App\Entity\ProgramManager;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\ProgramManager;
+use App\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;

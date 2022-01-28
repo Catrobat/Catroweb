@@ -2,8 +2,8 @@
 
 namespace Tests\phpUnit\Entity;
 
-use App\Entity\ProgramManager;
-use App\Entity\UserManager;
+use App\Manager\ProgramManager;
+use App\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\ClassMetadata;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
- * @covers \App\Entity\UserManager
+ * @covers \App\Manager\UserManager
  */
 class UserManagerTest extends TestCase
 {

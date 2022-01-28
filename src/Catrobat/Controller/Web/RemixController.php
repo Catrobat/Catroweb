@@ -3,7 +3,7 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\RemixManager;
+use App\Manager\RemixManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

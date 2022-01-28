@@ -3,7 +3,7 @@
 namespace App\Catrobat\Controller\Admin;
 
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Swift_Mailer;
 use Swift_Message;

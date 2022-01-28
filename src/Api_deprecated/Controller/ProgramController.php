@@ -4,7 +4,7 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
 use App\Entity\ProgramLike;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use App\WebView\Twig\AppExtension;
 use Exception;
 use stdClass;

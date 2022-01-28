@@ -6,7 +6,7 @@ use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
 use App\Entity\Flavor;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use App\Repository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;

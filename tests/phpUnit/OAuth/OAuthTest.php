@@ -4,7 +4,7 @@ namespace Tests\phpUnit\OAuth;
 
 use App\Catrobat\Security\FOSUBUserProviderAdapter;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Http\Client\Common\HttpMethodsClient;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Manager;
 
 use App\Catrobat\Events\InvalidProgramUploadedEvent;
 use App\Catrobat\Events\ProgramAfterInsertEvent;
@@ -15,6 +15,12 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Entity\NewProgramNotification;
+use App\Entity\Program;
+use App\Entity\ProgramDownloads;
+use App\Entity\ProgramLike;
+use App\Entity\Tag;
+use App\Entity\User;
 use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;

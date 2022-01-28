@@ -2,7 +2,7 @@
 
 namespace App\Commands\Helpers;
 
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 
 class RemixManipulationProgramManager extends ProgramManager
 {

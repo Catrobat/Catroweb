@@ -14,8 +14,8 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Manager\ProgramManager;
 use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
@@ -36,7 +36,7 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 /**
  * @internal
- * @covers \App\Entity\ProgramManager
+ * @covers \App\Manager\ProgramManager
  */
 class ProgramManagerTest extends TestCase
 {

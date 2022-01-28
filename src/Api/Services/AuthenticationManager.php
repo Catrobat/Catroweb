@@ -3,7 +3,7 @@
 namespace App\Api\Services;
 
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 

@@ -3,7 +3,7 @@
 namespace App\Catrobat\Controller\Ci;
 
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
