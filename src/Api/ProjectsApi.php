@@ -77,7 +77,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
 
-    $cache_id = "projectsGet_{$flavor}_{$max_version}";
+    $cache_id = "projectsGet_{$category}_{$flavor}_{$max_version}_{$limit}_{$offset}";
     $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
     if (null !== $cached_response) {
       $responseCode = $cached_response->getResponseCode();
