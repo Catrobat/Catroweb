@@ -78,9 +78,9 @@ class UploadController
     /** @var User|null $user */
     $user = $this->token_storage->getToken()->getUser();
 
-    if (null === $user || !$user->isVerified()) {
-      throw new Exception('Account not verified!');
-    }
+//    if (null === $user || !$user->isVerified()) {
+//      throw new Exception('Account not verified!');
+//    }
 
     /* @var $file File */
     /* @var $user User */

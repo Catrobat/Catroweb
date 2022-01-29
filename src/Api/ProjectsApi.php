@@ -136,11 +136,11 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if (!$user->isVerified()) {
-      $responseCode = Response::HTTP_FORBIDDEN;
-
-      return null;
-    }
+//    if (!$user->isVerified()) {
+//      $responseCode = Response::HTTP_FORBIDDEN;
+//
+//      return null;
+//    }
 
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
