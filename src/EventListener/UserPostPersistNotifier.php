@@ -11,6 +11,7 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
+use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class UserPostPersistNotifier
@@ -22,8 +23,10 @@ class UserPostPersistNotifier
 
   public function __construct(AchievementManager $achievement_manager,
                                 VerifyEmailHelperInterface $verify_email_helper,
-                                MailerInterface $mailer, LoggerInterface $logger)
+                                MailerInterface $mailer, LoggerInterface $logger,
+                                TranslatorInterface $translator)
   {
+    $this->translator = $translator;
     $this->achievement_manager = $achievement_manager;
     $this->verify_email_helper = $verify_email_helper;
     $this->mailer = $mailer;
@@ -53,14 +56,16 @@ class UserPostPersistNotifier
                 $user->getEmail()
             );
 
-      $email = new TemplatedEmail();
-      $email->from(new Address('no-reply@catrob.at', 'Catrobat Mail Bot'));
-      $email->to($user->getEmail());
-      $email->htmlTemplate('security/registration/confirmation_email.html.twig');
-      $email->context([
-        'signedUrl' => $signatureComponents->getSignedUrl(),
-        'user' => $user,
-      ]);
+      $email = (new TemplatedEmail())
+        ->from(new Address('no-reply@catrob.at', 'Catrobat Mail Bot'))
+        ->to($user->getEmail())
+        ->subject($this->translator->trans('user.verification.email', [], 'catroweb'))
+        ->htmlTemplate('security/registration/confirmation_email.html.twig')
+        ->context([
+          'signedUrl' => $signatureComponents->getSignedUrl(),
+          'user' => $user,
+        ])
+      ;
 
       $this->mailer->send($email);
     } catch (TransportExceptionInterface $e) {

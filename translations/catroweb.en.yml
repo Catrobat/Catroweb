@@ -529,6 +529,10 @@ time:
 failure:
   upload: There was an error during the upload of your app.
 
+user:
+  verification:
+    email: 'Verify your email'
+
 api:
   registerUser:
     emailMissing: 'Email missing'
