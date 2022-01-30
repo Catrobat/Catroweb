@@ -1,3 +1,24 @@
+#
+# Possible Error levels:
+#    DEBUG:     Detailed debug information.
+#    INFO:      Interesting events. Examples: User logs in, SQL logs.
+#    NOTICE:    Normal but significant events.
+#    WARNING:   Exceptional occurrences that are not errors.
+#               Examples: deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong.
+#    ERROR:     Runtime errors that do not require immediate action but should typically be logged and monitored.
+#    CRITICAL:  Critical conditions. Example: Application component unavailable, unexpected exception.
+#    ALERT:     Action must be taken immediately. Example: Entire website down, database unavailable, etc.
+#               This should trigger the SMS alerts and wake you up.
+#    EMERGENCY: Emergency: system is unusable.
+#
+# The fingers crossed type allows us to use a nested handler which logs everything but only
+# passes them to a second handler if a minimum error level was reached.
+#
+# Rotate File can be used to create separate files for every day to prevent too large log files.
+#
+# FirePhp and ChromePhp allow us to log to the firefox and chrome browser
+#
+
 monolog:
   channels: [ upload, search, download ]
   handlers:
@@ -11,7 +32,7 @@ monolog:
 
     main:
       type: fingers_crossed
-      action_level: error
+      action_level: info
       handler: nested
       formatter: monolog.formatter.catrobat_custom_formatter
     nested:

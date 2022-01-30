@@ -169,12 +169,12 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     apkGenerate.addClass('d-none')
     apkDownload.addClass('d-none')
     apkPending.addClass('d-none')
-    if (data.status === 'ready') {
+    if (data && data.status === 'ready') {
       apkDownload.removeClass('d-none')
-    } else if (data.status === 'pending') {
+    } else if (data && data.status === 'pending') {
       apkPending.removeClass('d-none')
       setTimeout(getApkStatus, 5000)
-    } else if (data.status === 'none') {
+    } else if (data && data.status === 'none') {
       apkGenerate.removeClass('d-none')
       apkGenerate.click(createApk)
     } else {

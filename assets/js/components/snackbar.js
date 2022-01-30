@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 const SnackbarDuration = {
-  short: 30000,
+  short: 2500,
   long: 5000
 }
 
