@@ -132,15 +132,9 @@ class ProgramManager
 
   /**
    * Check visibility of the given project for the current user.
-   *
-   * @throws NoResultException
    */
-  public function isProjectVisibleForCurrentUser(?Program $project): bool
+  protected function isProjectVisibleForCurrentUser(Program $project): bool
   {
-    if (null === $project) {
-      return false;
-    }
-
     if (!$project->isVisible()) {
       // featured or approved projects should never be invisible
       if (!$this->featured_repository->isFeatured($project) && !$project->getApproved()) {
@@ -519,6 +513,20 @@ class ProgramManager
   public function find(string $id)
   {
     return $this->program_repository->find($id);
+  }
+
+  public function findProjectIfVisibleToCurrentUser(string $id): ?Program
+  {
+    /** @var Program|null $project */
+    $project = $this->find($id);
+
+    if (null === $project) {
+      $this->logger->warning("No project with `{$id}` can't be found.");
+    } elseif ($this->isProjectVisibleForCurrentUser($project)) {
+      return $project;
+    }
+
+    return null;
   }
 
   /**

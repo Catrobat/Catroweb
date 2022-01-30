@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeViewController extends AbstractController
 {
@@ -18,15 +19,19 @@ class CodeViewController extends AbstractController
   private ExtractedFileRepository $extracted_file_repository;
   private CatrobatCodeParser $code_parser;
   private ParameterBagInterface $parameter_bag;
+  private TranslatorInterface $translator;
 
   public function __construct(ProgramManager $program_manager,
                               ExtractedFileRepository $extracted_file_repository,
-                              CatrobatCodeParser $code_parser, ParameterBagInterface $parameter_bag)
+                              CatrobatCodeParser $code_parser,
+                              ParameterBagInterface $parameter_bag,
+                              TranslatorInterface $translator)
   {
     $this->program_manager = $program_manager;
     $this->extracted_file_repository = $extracted_file_repository;
     $this->code_parser = $code_parser;
     $this->parameter_bag = $parameter_bag;
+    $this->translator = $translator;
   }
 
   /**
@@ -34,11 +39,12 @@ class CodeViewController extends AbstractController
    */
   public function view(string $id): Response
   {
-    /** @var Program $project */
-    $project = $this->program_manager->find($id);
+    /** @var Program|null $project */
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $project) {
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
-    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+      return $this->redirect($this->generateUrl('index'));
     }
 
     $this->parameter_bag->get('catrobat.file.extract.path');

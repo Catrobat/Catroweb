@@ -5,6 +5,7 @@ import './layout/top_bar'
 import './layout/footer'
 import './layout/sidebar'
 import { TokenExpirationHandler } from './custom/TokenExpirationHandler'
+import { showSnackbar } from './components/snackbar'
 import { LogoutTokenHandler } from './custom/LogoutTokenHandler'
 
 // Start the stimulus app
@@ -16,9 +17,17 @@ new TokenExpirationHandler()
 new LogoutTokenHandler()
 
 $(() => {
+  showFlashSnackbar()
   fitHeadingFontSizeToAvailableWidth()
   initScrollToHash()
 })
+
+function showFlashSnackbar () {
+  const snackbarFlashMessages = document.getElementsByClassName('js-snackbar')
+  Array.from(snackbarFlashMessages).forEach((jsMsgObj) => {
+    showSnackbar('#share-snackbar', jsMsgObj.dataset.msg)
+  })
+}
 
 function fitHeadingFontSizeToAvailableWidth () {
   // Adjust heading font size or break word

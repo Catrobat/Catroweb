@@ -53,9 +53,9 @@ class ProgramController extends AbstractController
    */
   public function projectLikesAction(string $id, ProgramManager $program_manager): JsonResponse
   {
-    $program = $program_manager->find($id);
-    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program)) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+    $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $program) {
+      throw $this->createNotFoundException("Can't like a project that's not visible to you!; Id: ``{$id}");
     }
 
     $data = [];
@@ -91,9 +91,9 @@ class ProgramController extends AbstractController
   public function projectLikesCountAction(Request $request, string $id, ProgramManager $program_manager,
                                           TranslatorInterface $translator): JsonResponse
   {
-    $program = $program_manager->find($id);
-    if (!$program || !$program_manager->isProjectVisibleForCurrentUser($program)) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+    $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $program) {
+      throw $this->createNotFoundException("Can't count likes of a project that's not visible to you!; Id: ``{$id}");
     }
 
     $user_locale = $request->getLocale();

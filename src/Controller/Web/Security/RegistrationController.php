@@ -44,7 +44,7 @@ class RegistrationController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (null === $user) {
-        return $this->redirectToRoute('index');
+      return $this->redirectToRoute('index');
     }
 
     // Do not get the User's Id or Email Address from the Request object
