@@ -83,12 +83,11 @@ class DownloadApkController extends AbstractController
     try {
       $file = $this->apk_repository->getProgramFile($id);
       if (!$file->isFile()) {
-        $this->logger->error("Project apk for id: \"{$id}\" not found (1)");
         throw new NotFoundHttpException();
       }
     } catch (Exception $exception) {
-      $this->logger->error("Project apk for id: \"{$id}\" not found (2)");
-      throw new NotFoundHttpException($exception->__toString());
+      $this->logger->error("Project apk for id: \"{$id}\" not found");
+      throw new NotFoundHttpException($exception->getMessage());
     }
 
     return $file;
