@@ -47,6 +47,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\UrlHelper;
+use Symfony\Component\Security\Core\Security;
 
 class ProgramManager
 {
@@ -84,6 +85,8 @@ class ProgramManager
 
   private TransformedFinder $program_finder;
 
+  protected Security $security;
+
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
@@ -94,7 +97,7 @@ class ProgramManager
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
                               CatroNotificationService $notification_service, TransformedFinder $program_finder,
-                              UrlHelper $url_helper = null)
+                              UrlHelper $url_helper = null, Security $security)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -113,6 +116,7 @@ class ProgramManager
     $this->notification_service = $notification_service;
     $this->program_finder = $program_finder;
     $this->urlHelper = $url_helper;
+    $this->security = $security;
   }
 
   public function getFeaturedRepository(): FeaturedRepository
@@ -135,6 +139,12 @@ class ProgramManager
    */
   protected function isProjectVisibleForCurrentUser(Program $project): bool
   {
+    /** @var User|null $user */
+    $user = $this->security->getUser();
+    if (null !== $user && $user->isSuperAdmin()) {
+      return true;
+    }
+
     if (!$project->isVisible()) {
       // featured or approved projects should never be invisible
       if (!$this->featured_repository->isFeatured($project) && !$project->getApproved()) {
@@ -521,7 +531,7 @@ class ProgramManager
     $project = $this->find($id);
 
     if (null === $project) {
-      $this->logger->warning("No project with `{$id}` can't be found.");
+      $this->logger->warning("Project with `{$id}` can't be found.");
     } elseif ($this->isProjectVisibleForCurrentUser($project)) {
       return $project;
     }

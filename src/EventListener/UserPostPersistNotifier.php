@@ -20,6 +20,7 @@ class UserPostPersistNotifier
   protected VerifyEmailHelperInterface $verify_email_helper;
   protected MailerInterface $mailer;
   protected LoggerInterface $logger;
+  protected TranslatorInterface $translator;
 
   public function __construct(AchievementManager $achievement_manager,
                                 VerifyEmailHelperInterface $verify_email_helper,

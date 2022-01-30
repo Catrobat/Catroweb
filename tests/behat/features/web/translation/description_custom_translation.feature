@@ -90,5 +90,6 @@ Feature: Projects should have descriptions where a custom translation can be def
     Then I choose "Russian" from selector "#edit-language-selector"
     And I should see "Would you like to keep your current changes?"
     When I click ".swal2-close"
+    And I wait for AJAX to finish
     Then the "edit-text" field should contain "This is a description translation"
     And I should see "French"

@@ -33,6 +33,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\UrlHelper;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @internal
@@ -110,12 +111,13 @@ class ProgramManagerTest extends TestCase
     $notification_service = $this->createMock(CatroNotificationService::class);
     $program_finder = $this->createMock(TransformedFinder::class);
     $url_helper = new UrlHelper(new RequestStack());
+    $security = $this->createMock(Security::class);
 
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
       $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper
+      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper, $security
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');

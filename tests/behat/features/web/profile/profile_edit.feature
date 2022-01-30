@@ -155,11 +155,12 @@ Feature:
     And there should be "3" programs in the database
     When I go to "/app/project/2"
     And I wait for AJAX to finish
-    Then I should see "Ooooops something went wrong."
+    And I should be on "/app/"
 
   Scenario: deleting another user's project should not work
     Given I go to "/app/userDeleteProject/3"
-    Then I should see "Ooooops something went wrong."
+    And I wait for AJAX to finish
+    And I should be on "/app/user"
 
   Scenario: check deletion PopUp
     Given I am on "/app/user"

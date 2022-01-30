@@ -93,14 +93,14 @@ class ProgramController extends AbstractController
   {
     $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $program) {
-      throw $this->createNotFoundException("Can't count likes of a project that's not visible to you!; Id: ``{$id}");
+      throw $this->createNotFoundException("Can't count likes of a project that's not visible to you!; Id: `{$id}`");
     }
 
     $user_locale = $request->getLocale();
 
     $data = new stdClass();
     $data->total = new stdClass();
-    $data->total->value = $program_manager->totalLikeCount($program->getId());
+    $data->total->value = $program_manager->totalLikeCount($id);
     $data->total->stringValue = AppExtension::humanFriendlyNumber(
       $data->total->value, $translator, $user_locale
     );
@@ -108,7 +108,7 @@ class ProgramController extends AbstractController
     foreach (ProgramLike::$VALID_TYPES as $type_id) {
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
       $data->{$type_name} = new stdClass();
-      $data->{$type_name}->value = $program_manager->likeTypeCount($program->getId(), $type_id);
+      $data->{$type_name}->value = $program_manager->likeTypeCount($id, $type_id);
       $data->{$type_name}->stringValue = AppExtension::humanFriendlyNumber(
         $data->{$type_name}->value, $translator, $user_locale
       );

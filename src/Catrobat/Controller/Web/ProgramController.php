@@ -89,7 +89,6 @@ class ProgramController extends AbstractController
    */
   public function projectAction(Request $request, string $id): Response
   {
-    /** @var Program $project */
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
@@ -278,12 +277,11 @@ class ProgramController extends AbstractController
 
     /** @var ArrayCollection $user_programs */
     $user_programs = $user->getPrograms();
-
     $programs = $user_programs->matching(Criteria::create()
       ->where(Criteria::expr()->eq('id', $id)));
 
     if ($programs->isEmpty()) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+      return $this->redirectToRoute('profile');
     }
 
     /** @var Program $program */

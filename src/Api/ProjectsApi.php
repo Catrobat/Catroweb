@@ -76,14 +76,17 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $offset = $this->getDefaultOffsetOnNull($offset);
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
-    $cache_id = "projectsGet_{$category}_{$flavor}_{$max_version}_{$limit}_{$offset}";
-    $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
-    if (null !== $cached_response) {
-      $responseCode = $cached_response->getResponseCode();
-      $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
+    $cache_id = "projectsGet_{$category}_{$locale}_{$flavor}_{$max_version}_{$limit}_{$offset}";
+    if ('recent' !== $category) {
+      $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+      if (null !== $cached_response) {
+        $responseCode = $cached_response->getResponseCode();
+        $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
 
-      return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+        return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+      }
     }
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();

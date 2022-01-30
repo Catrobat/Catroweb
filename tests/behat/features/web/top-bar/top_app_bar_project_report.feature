@@ -152,7 +152,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     Then I should be on "/app/"
     When I go to "/app/project/3"
     And I wait for the page to be loaded
-    Then I should see "Ooooops something went wrong."
+    And I should be on "/app/"
 
   Scenario: Clicking on a reported featured project should still show its page
     Given I log in as "OtherUser"

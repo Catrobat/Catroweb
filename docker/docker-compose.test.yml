@@ -13,8 +13,9 @@ services:
     image: app.catroweb
     command: ["sh", "/var/www/catroweb/docker/app/startup-test.sh"]
     volumes:
-      # We share the test directory for easy access to test reports, error logs, ..
+      # We share the test & var directory for easy access to test reports, error logs, ..
       - ./../tests:/var/www/catroweb/tests
+      - ./../var:/var/www/catroweb/var:cached
     depends_on:
       - db.catroweb.test
       - chrome.catroweb
