@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Dihapus
   noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
   editDescription: Edit deskripsi proyek
-  saveDescription: Menyimpan
   closeDescriptionEditor: Close description editor
   editCredits: Edit catatan dan kredit proyek
-  saveCredits: Menyimpan
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Apakah Anda ingin menyimpan perubahan?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Default
+  save: Simpan
 remixGraph:
   title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'

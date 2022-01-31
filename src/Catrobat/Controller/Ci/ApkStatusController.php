@@ -3,10 +3,9 @@
 namespace App\Catrobat\Controller\Ci;
 
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -34,10 +33,9 @@ class ApkStatusController extends AbstractController
   public function getApkStatusAction(string $id): JsonResponse
   {
     /** @var Program|null $program */
-    $program = $this->program_manager->find($id);
-
-    if (null === $program || !$program->isVisible()) {
-      throw new NotFoundHttpException();
+    $program = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $program) {
+      return JsonResponse::create(null, 404);
     }
 
     $result = [];

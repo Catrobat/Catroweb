@@ -87,5 +87,6 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I click "#edit-close-button"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
+    And I wait for AJAX to finish
     Then the element "#edit-text" should be visible
     Then the "edit-text" field should contain "These are new notes and credits"

@@ -3,7 +3,7 @@
 namespace App\Catrobat\Services\TestEnv\DataFixtures;
 
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use App\Utils\MyUuidGenerator;
 use App\Utils\TimeUtils;
 use DateTime;

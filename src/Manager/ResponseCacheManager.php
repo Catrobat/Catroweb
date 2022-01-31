@@ -38,7 +38,7 @@ class ResponseCacheManager
         ->setResponse(serialize($response))
         ->setResponseHeaders(json_encode($response_headers))
         ->updateTimestamps()
-          ;
+      ;
     }
 
     $this->entity_manager->persist($cache_entry);

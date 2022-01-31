@@ -3,7 +3,7 @@
 namespace App\Commands\DBUpdater\CronJobs;
 
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;

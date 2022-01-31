@@ -1,10 +1,7 @@
 {% extends 'Default/base.html.twig' %}
 
 {% block body %}
-
-  <div id="error">
-    <img src="{{ asset('images/default/404-white.png') }}" alt="An Error Occurred"/>
-    <p>{{ "somethingWentWrong"|trans({}, "catroweb") }} <br> {{ "pleaseTryAgain"|trans({}, "catroweb") }}</p>
-  </div>
-
+{#  <h2>{{ "somethingWentWrong"|trans({}, "catroweb") }}</h2>#}
+{#  <h2>{{ "pleaseTryAgain"|trans({}, "catroweb") }}</h2>#}
+  <p>Error {{ status_code|default("unknown")}}: {% if exception %}{{ exception.message | default('') | nl2br }}{% endif %}</p>
 {% endblock %}

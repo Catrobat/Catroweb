@@ -4,8 +4,8 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiLoader;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Manager\ProgramManager;
 use App\Repository\FeaturedRepository;
 use Symfony\Component\HttpFoundation\RequestStack;
 

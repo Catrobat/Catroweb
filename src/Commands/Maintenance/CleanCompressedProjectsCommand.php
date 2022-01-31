@@ -3,7 +3,7 @@
 namespace App\Commands\Maintenance;
 
 use App\Catrobat\Services\ExtractedFileRepository;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;

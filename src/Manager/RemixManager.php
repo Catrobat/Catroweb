@@ -1,10 +1,19 @@
 <?php
 
-namespace App\Entity;
+namespace App\Manager;
 
 use App\Catrobat\RemixGraph\RemixGraphManipulator;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\RemixData;
+use App\Entity\Program;
+use App\Entity\ProgramCatrobatRemixRelationInterface;
+use App\Entity\ProgramRemixBackwardRelation;
+use App\Entity\ProgramRemixRelation;
+use App\Entity\ProgramRemixRelationInterface;
+use App\Entity\RemixNotification;
+use App\Entity\ScratchProgram;
+use App\Entity\ScratchProgramRemixRelation;
+use App\Entity\User;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ProgramRepository;

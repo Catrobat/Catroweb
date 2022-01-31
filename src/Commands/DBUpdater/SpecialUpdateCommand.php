@@ -2,8 +2,8 @@
 
 namespace App\Commands\DBUpdater;
 
-use App\Entity\UserManager;
 use App\Manager\AchievementManager;
+use App\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

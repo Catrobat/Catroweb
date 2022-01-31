@@ -34,4 +34,20 @@ class RedirectController extends AbstractController
 
     return $this->redirect('https://catrob.at/gp');
   }
+
+  /**
+   * @Route("/robots.txt", name="robots.txt", methods={"GET"})
+   */
+  public function robotsTxt(Request $request): Response
+  {
+    return $this->redirect('../../robots.txt', Response::HTTP_MOVED_PERMANENTLY); // The file is only hosted without flavors/themes!
+  }
+
+  /**
+   * @Route("resetting/request", name="legacy_app_forgot_password_request")
+   */
+  public function legacyAppReset(Request $request): Response
+  {
+    return $this->redirect($this->generateUrl('app_forgot_password_request'), Response::HTTP_MOVED_PERMANENTLY);
+  }
 }

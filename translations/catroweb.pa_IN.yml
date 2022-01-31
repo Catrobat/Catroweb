@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: ਮਿਟਾਇਆ ਗਿਆ
   noAdminRights: ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਬੰਧਕੀ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਬੰਧਕ ਵਜੋਂ ਲੌਗਇਨ ਕਰੋ.
   editDescription: ਪ੍ਰੋਜੈਕਟ ਦੇ ਵੇਰਵੇ ਨੂੰ ਸੋਧੋ
-  saveDescription: ਸੇਵ
   closeDescriptionEditor: Close description editor
   editCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਸੰਪਾਦਿਤ ਕਰੋ
-  saveCredits: ਸੇਵ
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: ਤੁਹਾਨੂੰ ਆਪਣੇ ਤਬਦੀਲੀ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਚਾਹੁੰਦੇ ਹੋ?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: ਮੂਲ
+  save: ਸੇਵ
 remixGraph:
   title: ਰੀਮਿਕਸ
   showRemixGraph: 'ਰੀਮਿਕਸ ਗ੍ਰਾਫ'

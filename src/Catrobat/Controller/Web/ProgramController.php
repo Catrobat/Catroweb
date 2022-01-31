@@ -12,9 +12,9 @@ use App\Entity\LikeNotification;
 use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramLike;
-use App\Entity\ProgramManager;
 use App\Entity\User;
 use App\Entity\UserComment;
+use App\Manager\ProgramManager;
 use App\Repository\CatroNotificationRepository;
 use App\Translation\TranslationDelegate;
 use App\Utils\ElapsedTimeStringFormatter;
@@ -86,16 +86,14 @@ class ProgramController extends AbstractController
    *
    * Legacy routes
    * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
-   *
-   * @throws ORMException
    */
   public function projectAction(Request $request, string $id): Response
   {
-    /** @var Program $project */
-    $project = $this->program_manager->find($id);
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $project) {
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
-    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+      return $this->redirect($this->generateUrl('index'));
     }
 
     if ($project->isScratchProgram()) {
@@ -279,12 +277,11 @@ class ProgramController extends AbstractController
 
     /** @var ArrayCollection $user_programs */
     $user_programs = $user->getPrograms();
-
     $programs = $user_programs->matching(Criteria::create()
       ->where(Criteria::expr()->eq('id', $id)));
 
     if ($programs->isEmpty()) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
+      return $this->redirectToRoute('profile');
     }
 
     /** @var Program $program */
@@ -511,9 +508,8 @@ class ProgramController extends AbstractController
       return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
     }
 
-    $project = $this->program_manager->find($id);
-
-    if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $project) {
       return new Response('No project found for this id', Response::HTTP_NOT_FOUND);
     }
 
@@ -707,12 +703,8 @@ class ProgramController extends AbstractController
 
   private function projectCustomTranslationGetAction(Request $request, string $id): Response
   {
-    $project = $this->program_manager->find($id);
-    try {
-      if (!$this->program_manager->isProjectVisibleForCurrentUser($project)) {
-        return Response::create(null, Response::HTTP_NOT_FOUND);
-      }
-    } catch (NoResultException $e) {
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $project) {
       return Response::create(null, Response::HTTP_NOT_FOUND);
     }
 

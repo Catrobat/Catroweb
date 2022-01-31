@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: తొలగించబడింది
   noAdminRights: మీకు నిర్వాహక హక్కులు లేవు. దయచేసి అడ్మిన్‌గా లాగిన్ అవ్వండి.
   editDescription: ప్రాజెక్ట్ వివరణను సవరించండి
-  saveDescription: Save description change
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
-  saveCredits: Save credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: Do you want to save your changes?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: Default
+  save: Save
 remixGraph:
   title: రీమిక్స్‌లు
   showRemixGraph: 'రీమిక్స్ గ్రాఫ్'

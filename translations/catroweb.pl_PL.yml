@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
   editDescription: Edytuj opis projektu
-  saveDescription: Zapisz
   closeDescriptionEditor: Zamknij edytor opisu
   editCredits: Edytuj uwagi i podziękowania
-  saveCredits: Zapisz
   closeCreditsEditor: Zamknij edytor kredytów
   closeEditorPrompt: Czy chcesz zapisać zmiany?
   saveOnLanguageChange: Czy chcesz zachować aktualne zmiany?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Tłumaczenie na %language% dla programu %section% zapisane
   translationDeleted: Tłumaczenie na %language% dla programu %section% usunięte
   default: Domyślny
+  save: Zapisz
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż Drzewo Remiksów'

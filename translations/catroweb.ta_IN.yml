@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: நீக்கப்பட்டது
   noAdminRights: உங்களுக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழைக.
   editDescription: திட்ட விளக்கத்தைத் திருத்துக
-  saveDescription: விளக்க மாற்றத்தை சேமிக்கவும்
   closeDescriptionEditor: Close description editor
   editCredits: திட்ட வரவுகளைத் திருத்துக
-  saveCredits: வரவுகளை மாற்றவும்
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -198,6 +196,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: இயல்புநிலை
+  save: சேமி
 remixGraph:
   title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'

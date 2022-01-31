@@ -4,7 +4,7 @@ namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\AsyncHttpClient;
 use App\Entity\Program;
-use App\Entity\ScratchManager;
+use App\Manager\ScratchManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

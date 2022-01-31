@@ -7,7 +7,7 @@ use App\Catrobat\Services\AsyncHttpClient;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
-use App\Entity\RemixManager;
+use App\Manager\RemixManager;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
 use Exception;

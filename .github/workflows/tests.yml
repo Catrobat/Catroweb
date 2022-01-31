@@ -209,6 +209,7 @@ jobs:
         # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
           echo ::set-output name=status::failure
+          docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
           |& tee tests/testreports/behat/${{ matrix.testSuite }}.log ; \
           ( exit ${PIPESTATUS[0]} )
@@ -261,6 +262,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
+          docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 

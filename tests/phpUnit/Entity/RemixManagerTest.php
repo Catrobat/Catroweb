@@ -7,10 +7,10 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\RemixData;
 use App\Entity\Program;
 use App\Entity\ProgramRemixRelation;
-use App\Entity\RemixManager;
 use App\Entity\ScratchProgram;
 use App\Entity\ScratchProgramRemixRelation;
 use App\Entity\User;
+use App\Manager\RemixManager;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ProgramRepository;
@@ -26,7 +26,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers \App\Entity\RemixManager
+ * @covers \App\Manager\RemixManager
  */
 class RemixManagerTest extends TestCase
 {

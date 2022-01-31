@@ -5,7 +5,7 @@ namespace App\Catrobat\Controller\Web;
 use App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;

@@ -173,10 +173,8 @@ programs:
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
   editDescription: Proje açıklamasını düzenleyin
-  saveDescription: Kaydet
   closeDescriptionEditor: Açıklama düzenleyiciyi kapat
   editCredits: Yapanları düzenle
-  saveCredits: Kaydet
   closeCreditsEditor: Kredi düzenleyicisini kapat
   closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
   saveOnLanguageChange: Mevcut değişikliklerinizi korumak ister misiniz?
@@ -198,6 +196,7 @@ programs:
   translationSaved: '%section% programı için %language%''e çeviri kaydedildi'
   translationDeleted: '%section% programı için %language%''e çeviri silindi'
   default: Varsayılan
+  save: Kaydet
 remixGraph:
   title: Remixler
   showRemixGraph: 'Remixleri'
@@ -399,7 +398,7 @@ login:
   passwordSecond: Şifre onayla
 register:
   title: Üye ol
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "Devam ederek, bir Catrobat Topluluğu hesabı oluşturuyorsunuz ve %var1% ve %var2%'mizi kabul etmiş oluyorsunuz."
   button:
     cancel: İptal et
     createAccount: Hesap açmak
@@ -411,23 +410,23 @@ accountRecovery:
     submit: Şifre kurtarma
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Şifrenizi sıfırlayın"
+    description: "Hesabınızın e-postasını hatırlıyorsanız, şifrenizi sıfırlamanız için size bir bağlantı gönderebiliriz.."
     button:
-      submit: "Send reset email"
+      submit: "Sıfırlama e-postası gönder"
       cancel: "İptal et"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "E-postalarınızı kontrol edin"
+    description: "E-postanızla eşleşen bir hesap varsa, şifrenizi sıfırlamak için kullanabileceğiniz bir bağlantı içeren bir e-posta gönderildi. Bu bağlantı %time% içinde sona erecek."
+    description2: "E-posta almazsanız, lütfen spam klasörünüzü kontrol edin veya %tryAgainLink%"
+    tryAgain: "Tekrar deneyin"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Merhaba!"
+    visitLink: "Şifrenizi sıfırlamak için lütfen aşağıdaki bağlantıyı ziyaret edin"
+    expire: "Bu bağlantı %time% içinde sona erecek."
+    cheers: "Şerefe!"
   reset:
-    title: "Reset your password"
+    title: "Şifrenizi Sıfırlayın"
     button:
       submit: "Şifre sıfırlama"
 apk:

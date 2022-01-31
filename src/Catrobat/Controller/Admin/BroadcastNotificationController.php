@@ -4,7 +4,7 @@ namespace App\Catrobat\Controller\Admin;
 
 use App\Catrobat\Services\CatroNotificationService;
 use App\Entity\BroadcastNotification;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Generator;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;

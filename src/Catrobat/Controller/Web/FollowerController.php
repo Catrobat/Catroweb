@@ -6,7 +6,7 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\FollowNotification;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use App\Repository\CatroNotificationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;

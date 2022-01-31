@@ -3,10 +3,10 @@
 namespace App\Translation;
 
 use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Entity\Translation\CommentMachineTranslation;
 use App\Entity\Translation\ProjectMachineTranslation;
 use App\Entity\UserComment;
+use App\Manager\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;

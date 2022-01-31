@@ -9,9 +9,9 @@ use App\Catrobat\Requests\AddProgramRequest;
 use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\StatusCode;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\ProgramManager;
+use App\Manager\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -78,9 +78,9 @@ class UploadController
     /** @var User|null $user */
     $user = $this->token_storage->getToken()->getUser();
 
-    if (null === $user || !$user->isVerified()) {
-      throw new Exception('Account not verified!');
-    }
+//    if (null === $user || !$user->isVerified()) {
+//      throw new Exception('Account not verified!');
+//    }
 
     /* @var $file File */
     /* @var $user User */

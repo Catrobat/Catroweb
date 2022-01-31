@@ -172,10 +172,8 @@ programs:
   deleted_popup_header: ړنګ شوی
   noAdminRights: تاسو د اداري حق نه لرئ. مهرباني وکړئ د مدیر په توګه ننوتل.
   editDescription: د پروژې توضیحات سم کړئ
-  saveDescription: Save description change
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits
-  saveCredits: Save credits change
   closeCreditsEditor: Close credits editor
   closeEditorPrompt: ایا تاسو غواړئ خپل بدلونونه خوندي کړئ؟
   saveOnLanguageChange: Would you like to keep your current changes?
@@ -197,6 +195,7 @@ programs:
   translationSaved: Translation to %language% for the program %section% saved
   translationDeleted: Translation to %language% for the program %section% deleted
   default: ډیفالټ
+  save: خوندي کړئ
 remixGraph:
   title: ریمکسونه
   showRemixGraph: 'د ریمکس ګراف'
