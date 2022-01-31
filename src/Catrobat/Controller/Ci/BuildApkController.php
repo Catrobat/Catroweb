@@ -5,7 +5,7 @@ namespace App\Catrobat\Controller\Ci;
 use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use App\Utils\TimeUtils;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

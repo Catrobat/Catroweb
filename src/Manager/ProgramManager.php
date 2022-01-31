@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Manager;
 
 use App\Catrobat\Events\InvalidProgramUploadedEvent;
 use App\Catrobat\Events\ProgramAfterInsertEvent;
@@ -15,6 +15,12 @@ use App\Catrobat\Services\CatroNotificationService;
 use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
+use App\Entity\NewProgramNotification;
+use App\Entity\Program;
+use App\Entity\ProgramDownloads;
+use App\Entity\ProgramLike;
+use App\Entity\Tag;
+use App\Entity\User;
 use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
@@ -41,6 +47,7 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\UrlHelper;
+use Symfony\Component\Security\Core\Security;
 
 class ProgramManager
 {
@@ -78,6 +85,8 @@ class ProgramManager
 
   private TransformedFinder $program_finder;
 
+  protected Security $security;
+
   public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
                               ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
                               ProgramRepository $program_repository, TagRepository $tag_repository,
@@ -88,7 +97,7 @@ class ProgramManager
                               LoggerInterface $logger, AppRequest $app_request,
                               ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
                               CatroNotificationService $notification_service, TransformedFinder $program_finder,
-                              UrlHelper $url_helper = null)
+                              UrlHelper $url_helper = null, Security $security)
   {
     $this->file_extractor = $file_extractor;
     $this->event_dispatcher = $event_dispatcher;
@@ -107,6 +116,7 @@ class ProgramManager
     $this->notification_service = $notification_service;
     $this->program_finder = $program_finder;
     $this->urlHelper = $url_helper;
+    $this->security = $security;
   }
 
   public function getFeaturedRepository(): FeaturedRepository
@@ -126,13 +136,13 @@ class ProgramManager
 
   /**
    * Check visibility of the given project for the current user.
-   *
-   * @throws NoResultException
    */
-  public function isProjectVisibleForCurrentUser(?Program $project): bool
+  protected function isProjectVisibleForCurrentUser(Program $project): bool
   {
-    if (null === $project) {
-      return false;
+    /** @var User|null $user */
+    $user = $this->security->getUser();
+    if (null !== $user && $user->isSuperAdmin()) {
+      return true;
     }
 
     if (!$project->isVisible()) {
@@ -513,6 +523,20 @@ class ProgramManager
   public function find(string $id)
   {
     return $this->program_repository->find($id);
+  }
+
+  public function findProjectIfVisibleToCurrentUser(string $id): ?Program
+  {
+    /** @var Program|null $project */
+    $project = $this->find($id);
+
+    if (null === $project) {
+      $this->logger->warning("Project with `{$id}` can't be found.");
+    } elseif ($this->isProjectVisibleForCurrentUser($project)) {
+      return $project;
+    }
+
+    return null;
   }
 
   /**

@@ -33,10 +33,11 @@ monolog:
       level: info
 
     main:
-      type:  fingers_crossed
-      action_level: error
+      type: fingers_crossed
+      action_level: info
       handler: nested
       formatter: monolog.formatter.catrobat_custom_formatter
+
     nested:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"

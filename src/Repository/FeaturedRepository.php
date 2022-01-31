@@ -129,9 +129,6 @@ class FeaturedRepository extends ServiceEntityRepository
       ->getQuery()->getSingleScalarResult();
   }
 
-  /**
-   * @throws NoResultException
-   */
   public function isFeatured(Program $program): bool
   {
     $qb = $this->createQueryBuilder('e');

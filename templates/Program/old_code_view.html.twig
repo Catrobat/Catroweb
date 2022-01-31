@@ -14,10 +14,10 @@
 
   {% if object.getLooks()|length > 0 %}
 
-    {% if scene_name is null and assetExists(path~'images/'~object.getLooks()[0].getFileName()) %}
+    {% if scene_name is null and assetFileExists(path~'images/'~object.getLooks()[0].getFileName()) %}
       <img src="{{ asset(path~'images/'~object.getLooks()[0].getFileName()) }}"
            class="object-icon">
-    {% elseif assetExists(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) %}
+    {% elseif assetFileExists(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) %}
       <img src="{{ asset(path~scene_name~'/images/'~object.getLooks()[0].getFileName()) }}"
            class="object-icon">
     {% else %}

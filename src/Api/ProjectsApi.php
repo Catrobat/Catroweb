@@ -76,6 +76,18 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $offset = $this->getDefaultOffsetOnNull($offset);
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $cache_id = "projectsGet_{$category}_{$locale}_{$flavor}_{$max_version}_{$limit}_{$offset}";
+    if ('recent' !== $category) {
+      $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+      if (null !== $cached_response) {
+        $responseCode = $cached_response->getResponseCode();
+        $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
+
+        return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+      }
+    }
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
@@ -84,6 +96,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }
@@ -126,11 +139,11 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
-    if (!$user->isVerified()) {
-      $responseCode = Response::HTTP_FORBIDDEN;
-
-      return null;
-    }
+//    if (!$user->isVerified()) {
+//      $responseCode = Response::HTTP_FORBIDDEN;
+//
+//      return null;
+//    }
 
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
@@ -233,10 +246,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
-
-    $this->facade->getResponseManager()->cacheResponse(
-          $cache_id, $responseCode, $responseHeaders, $response
-      );
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }

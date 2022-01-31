@@ -14,8 +14,8 @@ use App\Catrobat\Services\ExtractedCatrobatFile;
 use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\ScreenshotRepository;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Manager\ProgramManager;
 use App\Repository\ExampleRepository;
 use App\Repository\ExtensionRepository;
 use App\Repository\FeaturedRepository;
@@ -33,10 +33,11 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\UrlHelper;
+use Symfony\Component\Security\Core\Security;
 
 /**
  * @internal
- * @covers \App\Entity\ProgramManager
+ * @covers \App\Manager\ProgramManager
  */
 class ProgramManagerTest extends TestCase
 {
@@ -110,12 +111,13 @@ class ProgramManagerTest extends TestCase
     $notification_service = $this->createMock(CatroNotificationService::class);
     $program_finder = $this->createMock(TransformedFinder::class);
     $url_helper = new UrlHelper(new RequestStack());
+    $security = $this->createMock(Security::class);
 
     $this->program_manager = new ProgramManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
       $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
       $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper
+      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper, $security
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');

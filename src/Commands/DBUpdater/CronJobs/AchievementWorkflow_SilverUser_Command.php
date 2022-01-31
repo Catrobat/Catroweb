@@ -4,8 +4,8 @@ namespace App\Commands\DBUpdater\CronJobs;
 
 use App\Entity\Achievements\Achievement;
 use App\Entity\User;
-use App\Entity\UserManager;
 use App\Manager\AchievementManager;
+use App\Manager\UserManager;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;

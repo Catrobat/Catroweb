@@ -119,6 +119,7 @@ class AppExtension extends AbstractExtension
       new TwigFunction('themeAssets', [$this, 'getFlavor']),
       new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
       new TwigFunction('assetExists', [$this, 'assetExists']),
+      new TwigFunction('assetFileExists', [$this, 'assetFileExists']),
       new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
     ];
   }
@@ -342,11 +343,24 @@ class AppExtension extends AbstractExtension
 
   public function assetExists(string $filename): bool
   {
+    $path = $this->getPublicFilenamePath($filename);
+
+    return file_exists($path);
+  }
+
+  public function assetFileExists(string $filename): bool
+  {
+    $path = $this->getPublicFilenamePath($filename);
+
+    return file_exists($path) && !is_dir($path);
+  }
+
+  protected function getPublicFilenamePath(string $filename): string
+  {
     $public_dir = $this->parameter_bag->get('catrobat.pubdir');
     $filename = rawurldecode($filename);
-    $filename = $public_dir.$filename;
 
-    return file_exists($filename);
+    return $public_dir.$filename;
   }
 
   private function setSelectedLanguage(array $languages, string $currentLanguage): array

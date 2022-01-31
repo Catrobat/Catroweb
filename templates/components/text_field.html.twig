@@ -17,7 +17,9 @@
         'leading_icon': 'blur_circular',
         'trailing_icon': 'close',
         'tab_index': '0',
-        'type': 'text'
+        'type': 'text',
+        'required: 'required',
+        'input': '',
       }
   }%}
 #}
@@ -40,13 +42,15 @@
     </span>
   {% endif %}
 
-  <input id="{{ text_field.id }}__input"
+  <input id="{{ text_field.input|default(text_field.id~'__input') }}"
          class="mdc-text-field__input"
          name="{{ text_field.name }}"
          type="{{ text_field.type|default('text') }}"
          aria-labelledby="{{ text_field.id }}__label"
          tabindex="{{ text_field.tab_index|default('0') }}"
-         required value="{{ text_field.value|default() }}">
+         {% if text_field.type|default('') %}autocomplete="{{ text_field.type }}"{% endif %}
+         required="{{ text_field.required|default('required') }}"
+         value="{{ text_field.value|default() }}">
 
   {#  Trailing Icon (Optional) #}
   {% if text_field.trailing_icon|default() %}

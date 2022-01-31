@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Controller\Admin;
 
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use App\Repository\CatroNotificationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;

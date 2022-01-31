@@ -4,8 +4,8 @@ namespace App\Commands\Create;
 
 use App\Entity\FeaturedProgram;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
-use App\Entity\UserManager;
+use App\Manager\ProgramManager;
+use App\Manager\UserManager;
 use App\Repository\FlavorRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;

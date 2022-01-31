@@ -8,7 +8,7 @@ use App\Catrobat\Services\OAuthService;
 use App\Catrobat\Services\TokenGenerator;
 use App\Catrobat\StatusCode;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

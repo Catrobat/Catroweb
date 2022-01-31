@@ -3,7 +3,7 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Events\CheckScratchProgramEvent;
-use App\Entity\ScratchManager;
+use App\Manager\ScratchManager;
 
 class ScratchProgramUpdater
 {

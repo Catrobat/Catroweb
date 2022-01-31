@@ -1,8 +1,10 @@
 <?php
 
-namespace App\Entity;
+namespace App\Manager;
 
 use App\Catrobat\Services\AsyncHttpClient;
+use App\Entity\Program;
+use Exception;
 
 class ScratchManager
 {
@@ -18,6 +20,9 @@ class ScratchManager
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
   }
 
+  /**
+   * @throws Exception
+   */
   public function createScratchProgramFromId(int $id): ?Program
   {
     $program_arr = $this->async_http_client->fetchScratchProgramDetails([$id]);

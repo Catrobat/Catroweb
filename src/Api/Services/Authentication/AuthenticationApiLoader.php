@@ -4,7 +4,7 @@ namespace App\Api\Services\Authentication;
 
 use App\Api\Services\Base\AbstractApiLoader;
 use App\Entity\User;
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 
 final class AuthenticationApiLoader extends AbstractApiLoader
 {

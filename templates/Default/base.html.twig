@@ -47,13 +47,15 @@
 <div id="app-language" data-app-language="{{ app.request.locale }}"></div>
 <div class="js-app-env" data-app-env="'{{ app_env }}"></div>
 <div class="js-user-state" data-is-user-logged-in="{{ app.user != null }}"></div>
+{% for snackbarMsg in app.flashes('snackbar') %}
+  <div class="js-snackbar" data-msg="{{ snackbarMsg }}"></div>
+{% endfor %}
 <div id="js-api-routing"
      data-base-url="{{ app.request.baseUrl }}"
      data-index="{{ path("index") }}"
      data-authentication="{{ path("open_api_server_authentication_authenticationpost") }}"
      data-authentication-refresh="{{ path("open_api_server_authentication_authenticationrefreshpost") }}"
 ></div>
-
 
 <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
 <script src="{{ path('fos_js_routing_js', {"callback": "fos.Router.setData"}) }}"></script>

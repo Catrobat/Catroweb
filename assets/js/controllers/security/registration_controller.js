@@ -1,4 +1,3 @@
-import { setCookie } from '../../custom/CookieHelper'
 import { showSnackbar } from '../../components/snackbar'
 import { showValidationMessage } from '../../components/text_field'
 import { AjaxController } from '../ajax_controller'
@@ -45,7 +44,9 @@ export default class extends AjaxController {
       return
     }
 
-    console.error("Registration error: " + response.status)
+    response.text().then(function (text) {
+      console.error("Registration error: " + response.status +  text)
+    })
     showSnackbar('#share-snackbar', "Unexpected Error. Try again later.")
   }
 

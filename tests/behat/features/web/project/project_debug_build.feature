@@ -77,4 +77,4 @@ Feature: Using a release app I should not see debug projects
     And I am on "/app/project/3"
     And I wait for the page to be loaded
     And I should not see "debug program"
-    And I should see "Ooooops something went wrong"
+    And I should be on "/app/"

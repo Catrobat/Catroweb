@@ -5,8 +5,8 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\Catrobat\Requests\AddProgramRequest;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
 use App\Entity\User;
+use App\Manager\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 

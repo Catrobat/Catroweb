@@ -5,7 +5,7 @@ namespace App\Commands\DBUpdater\CronJobs;
 use App\Catrobat\Listeners\ProgramExtensionListener;
 use App\Catrobat\Services\ExtractedFileRepository;
 use App\Entity\Program;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use App\Repository\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;

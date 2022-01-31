@@ -2,7 +2,7 @@
 
 namespace App\Catrobat\Listeners;
 
-use App\Entity\UserManager;
+use App\Manager\UserManager;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;

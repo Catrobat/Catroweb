@@ -83,6 +83,7 @@ Feature: Projects should have descriptions that can be changed by the project ow
     And I click "#edit-close-button"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
+    And I wait for AJAX to finish
     Then the element "#edit-text" should be visible
     Then the "edit-text" field should contain "This is a new description"
 

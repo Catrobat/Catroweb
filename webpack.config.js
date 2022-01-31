@@ -146,8 +146,8 @@ Encore
   // enables Sass/SCSS support
   .enableSassLoader()
 
-  // integrity="..." attributes on your script & link tags
-  .enableIntegrityHashes(Encore.isProduction())
+// integrity="..." attributes on your script & link tags
+// .enableIntegrityHashes(Encore.isProduction())
 
   // uncomment if you're having problems with a jQuery plugin
   .autoProvidejQuery()

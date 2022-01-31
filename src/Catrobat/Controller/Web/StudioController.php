@@ -3,12 +3,12 @@
 namespace App\Catrobat\Controller\Web;
 
 use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\ProgramManager;
 use App\Entity\StudioUser;
 use App\Entity\User;
 use App\Entity\UserComment;
-use App\Entity\UserManager;
+use App\Manager\ProgramManager;
 use App\Manager\StudioManager;
+use App\Manager\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;

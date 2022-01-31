@@ -33,6 +33,7 @@ set('shared_dirs',
     'var/log',
     'var/sessions',
     'public/resources',
+    '.jwt',
   ]);
 
 // Shared files between deploys

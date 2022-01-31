@@ -4,7 +4,7 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
 use App\Catrobat\Requests\AppRequest;
-use App\Entity\ProgramManager;
+use App\Manager\ProgramManager;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
