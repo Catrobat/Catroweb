@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 rok temu |]1,Inf] ponad rok temu'
 failure:
   upload: Wystąpił błąd podczas wysyłania aplikacji.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
@@ -846,3 +849,5 @@ media_library:
       sound: 'Typ: dźwięk'
       movie: 'Typ: wideo'
       default: 'Typ: nieznany'
+snackbar:
+  project_not_found: 'The requested project is not available'

@@ -504,6 +504,9 @@ time:
   years.ago: '{1}一年前|]1,Inf]一年多前'
 failure:
   upload: 上传您的应用程序时出错。
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: '电子邮件丢失'
@@ -851,3 +854,5 @@ media_library:
       sound: '类型：声音'
       movie: '类型：视频'
       default: '类型：未知'
+snackbar:
+  project_not_found: 'The requested project is not available'

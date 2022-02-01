@@ -499,6 +499,9 @@ time:
   years.ago: '{1} 1 ਸਾਲ ਪਹਿਲਾਂ |] 1, Inf] ਇੱਕ ਸਾਲ ਪਹਿਲਾਂ'
 failure:
   upload: ਤੁਹਾਡੀ ਐਪ ਨੂੰ ਅਪਲੋਡ ਕਰਨ ਵੇਲੇ ਕੋਈ ਤਰੁੱਟੀ ਹੋ ਗਈ ਸੀ.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ਈਮੇਲ ਗੁੰਮ'
@@ -846,3 +849,5 @@ media_library:
       sound: 'ਕਿਸਮ: ਆਵਾਜ਼'
       movie: 'ਕਿਸਮ: ਵੀਡੀਓ'
       default: 'ਕਿਸਮ: ਅਣਜਾਣ'
+snackbar:
+  project_not_found: 'The requested project is not available'

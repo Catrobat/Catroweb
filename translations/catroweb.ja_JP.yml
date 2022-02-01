@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 年前 |]1,Inf] 1 年以上前'
 failure:
   upload: アプリのアップロード中にエラーが発生しました。
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'メールアドレスがありません'
@@ -846,3 +849,5 @@ media_library:
       sound: 'タイプ：サウンド'
       movie: 'タイプ：ビデオ'
       default: 'タイプ：不明'
+snackbar:
+  project_not_found: 'The requested project is not available'

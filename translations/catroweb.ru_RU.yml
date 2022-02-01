@@ -501,6 +501,9 @@ time:
   years.ago: '{1}1 год назад |]1,Inf] более года назад'
 failure:
   upload: Во время выгрузки приложения произошла ошибка.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'E-mail не введен'
@@ -848,3 +851,5 @@ media_library:
       sound: 'Тип: звук'
       movie: 'Тип: видео'
       default: 'Тип: неизвестно'
+snackbar:
+  project_not_found: 'The requested project is not available'

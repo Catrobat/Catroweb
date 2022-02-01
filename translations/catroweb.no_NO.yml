@@ -500,6 +500,9 @@ time:
   years.ago: '{1}for 1 år siden |]1,Inf] for mer enn ett år siden'
 failure:
   upload: Det oppstod en feil under opplastingen av din app.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'E-post mangler'
@@ -847,3 +850,5 @@ media_library:
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
+snackbar:
+  project_not_found: 'The requested project is not available'

@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 साल पहले |] 1, Inf] एक साल से अधिक समय पहले'
 failure:
   upload: आपके ऐप के अपलोड के दौरान एक त्रुटि हुई थी।
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ईमेल गायब है'
@@ -846,3 +849,5 @@ media_library:
       sound: 'प्रकार: ध्वनि'
       movie: 'प्रकार: वीडियो'
       default: 'प्रकार: अज्ञात'
+snackbar:
+  project_not_found: 'The requested project is not available'

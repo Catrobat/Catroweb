@@ -499,6 +499,9 @@ time:
   years.ago: '{1}hace 1 año |]1,Inf] hace más de un año'
 failure:
   upload: Hubo un error mientras se subía tu app.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Falta el correo'
@@ -846,3 +849,5 @@ media_library:
       sound: 'Tipo: sonido'
       movie: 'Tipo: vídeo'
       default: 'Tipo: desconocido'
+snackbar:
+  project_not_found: 'The requested project is not available'
