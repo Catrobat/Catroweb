@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 tahun yang lalu |] 1, Inf] lebih dari satu tahun yang lalu'
 failure:
   upload: Terjadi kesalahan ketika mengupload aplikasi anda.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Email hilang'
@@ -846,3 +849,5 @@ media_library:
       sound: 'Jenis: suara'
       movie: 'Jenis: video'
       default: 'Jenis: tidak diketahui'
+snackbar:
+  project_not_found: 'The requested project is not available'

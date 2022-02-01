@@ -499,6 +499,9 @@ time:
   years.ago: '{1} il y a 1 an |]1, Inf] il y a plus d''un an'
 failure:
   upload: Il y a eu une erreur lors du téléchargement de votre application.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Courriel manquant'
@@ -846,3 +849,5 @@ media_library:
       sound: 'Type : son'
       movie: 'Type : vidéo'
       default: 'Type : inconnu'
+snackbar:
+  project_not_found: 'The requested project is not available'

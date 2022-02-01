@@ -503,6 +503,9 @@ time:
   years.ago: '{1}1 வருடம் முன்பு |]1,Inf] ஒரு வருடத்திற்கு முன்பு'
 failure:
   upload: உங்கள் app இன் பதிவேற்றத்தின் போது பிழை ஏற்பட்டது.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'மின்னஞ்சல் காணவில்லை'
@@ -850,3 +853,5 @@ media_library:
       sound: 'வகை: ஒலி'
       movie: 'வகை: வீடியோ'
       default: 'வகை: தெரியவில்லை'
+snackbar:
+  project_not_found: 'The requested project is not available'

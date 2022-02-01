@@ -502,6 +502,9 @@ time:
   years.ago: '{1}1 సంవత్సరం క్రితం |] 1, Inf] ఒకటి కంటే ఎక్కువ సంవత్సరాల క్రితం'
 failure:
   upload: మీ యాప్ అప్‌లోడ్ చేస్తున్నప్పుడు లోపం ఏర్పడింది.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ఇమెయిల్ లేదు'
@@ -849,3 +852,5 @@ media_library:
       sound: 'రకం: ధ్వని'
       movie: 'రకం: వీడియో'
       default: 'రకం: తెలియదు'
+snackbar:
+  project_not_found: 'The requested project is not available'

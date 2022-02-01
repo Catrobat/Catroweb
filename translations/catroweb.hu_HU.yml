@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 éve |]1,Inf] több, mint egy éve'
 failure:
   upload: There was an error during the upload of your app.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Email missing'
@@ -846,3 +849,5 @@ media_library:
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
+snackbar:
+  project_not_found: 'The requested project is not available'

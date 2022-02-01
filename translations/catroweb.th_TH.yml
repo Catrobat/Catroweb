@@ -504,6 +504,9 @@ time:
   years.ago: '{1}1 ปี |] 1, Inf] เกินกว่าหนึ่งปีแล้ว'
 failure:
   upload: เกิดข้อผิดพลาดระหว่างอัปโหลดแอป
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ไม่พบอีเมล'
@@ -851,3 +854,5 @@ media_library:
       sound: 'ประเภท: เสียง'
       movie: 'ประเภท: วิดีโอ'
       default: 'ประเภท: ไม่ทราบ'
+snackbar:
+  project_not_found: 'The requested project is not available'

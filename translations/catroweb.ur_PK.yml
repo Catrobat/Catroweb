@@ -493,6 +493,9 @@ time:
   years.ago: '{1}1 سال پہلے |]1,Inf] ایک سال سے زیادہ پہلے'
 failure:
   upload: آپ کے ایپ کے اپ لوڈ کے دوران ایک غلطی تھی.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ای میل موجود نہیں'
@@ -840,3 +843,5 @@ media_library:
       sound: 'آواز'
       movie: 'ویڈیو'
       default: 'نامعلوم'
+snackbar:
+  project_not_found: 'The requested project is not available'

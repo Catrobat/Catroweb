@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 年前 |]1,Inf] 一年多前'
 failure:
   upload: 上傳您的應用程序時出錯。
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: '電子郵件丟失'
@@ -846,3 +849,5 @@ media_library:
       sound: '類型：聲音'
       movie: '類型：視頻'
       default: '類型：未知'
+snackbar:
+  project_not_found: 'The requested project is not available'
