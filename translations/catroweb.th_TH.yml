@@ -506,7 +506,7 @@ failure:
   upload: เกิดข้อผิดพลาดระหว่างอัปโหลดแอป
 user:
   verification:
-    email: 'Verify your email'
+    email: 'ยืนยันอีเมลของคุณ'
 api:
   registerUser:
     emailMissing: 'ไม่พบอีเมล'
@@ -855,4 +855,4 @@ media_library:
       movie: 'ประเภท: วิดีโอ'
       default: 'ประเภท: ไม่ทราบ'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'ไม่มีโครงการที่ร้องขอ'

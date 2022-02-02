@@ -294,7 +294,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Дайын
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar

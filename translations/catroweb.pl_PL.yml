@@ -501,7 +501,7 @@ failure:
   upload: Wystąpił błąd podczas wysyłania aplikacji.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Potwierdź swój adres e-mail'
 api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
@@ -850,4 +850,4 @@ media_library:
       movie: 'Typ: wideo'
       default: 'Typ: nieznany'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'Żądany projekt nie jest dostępny'
