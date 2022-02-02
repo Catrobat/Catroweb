@@ -138,10 +138,10 @@ class ApkPendingAdmin extends AbstractAdmin
 
   protected function configureRoutes(RouteCollection $collection): void
   {
-    $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
-    $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
+    $collection->add('resetApkBuildStatus', $this->getRouterIdParameter().'/resetApkBuildStatus');
+    $collection->add('requestApkRebuild', $this->getRouterIdParameter().'/requestApkRebuild');
     $collection->add('rebuildAllApk');
-    $collection->add('resetAllApk');
+    $collection->add('resetPendingProjects');
     $collection->remove('create')->remove('delete')->remove('export');
   }
 }

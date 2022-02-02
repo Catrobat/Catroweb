@@ -30,7 +30,7 @@ Feature: APK-Generation Pending in Admin Area
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/apk_pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/3/rebuildApk"
+    Then I am on "/admin/apk_pending/3/requestApkRebuild"
     And I wait for the page to be loaded
     And I should see the pending apk table:
       | Id | User  | Name      | Apk Request Time | Apk Status |
@@ -41,7 +41,7 @@ Feature: APK-Generation Pending in Admin Area
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/apk_pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/3/resetStatus"
+    Then I am on "/admin/apk_pending/3/resetApkBuildStatus"
     And I wait for the page to be loaded
     And I am on "/admin/apk_pending/list"
     And I wait for the page to be loaded
@@ -51,7 +51,7 @@ Feature: APK-Generation Pending in Admin Area
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/apk_pending/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_pending/resetAllApk"
+    Then I am on "/admin/apk_pending/resetPendingProjects"
     And I wait for the page to be loaded
     And I should not see "program 3"
     And I should not see "program 4"

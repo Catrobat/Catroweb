@@ -652,7 +652,7 @@ services:
     arguments:
       - ~
       - App\Entity\Program
-      - App\Catrobat\Controller\Admin\ApkController
+      - App\Controller\Web\Admin\ApkController
     public: true
 
   catrowebadmin.block.apk.list:
@@ -662,7 +662,7 @@ services:
     arguments:
       - ~
       - App\Entity\Program
-      - App\Catrobat\Controller\Admin\ApkController
+      - App\Controller\Web\Admin\ApkController
     public: true
 
   # ===== Users
