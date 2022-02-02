@@ -441,7 +441,7 @@ class ProgramController extends AbstractController
 
     $user = $this->getUser();
     if (null === $user) {
-      return $this->redirectToRoute('login');
+      return JsonResponse::create(null, Response::HTTP_UNAUTHORIZED);
     }
 
     $program = $this->program_manager->find($id);

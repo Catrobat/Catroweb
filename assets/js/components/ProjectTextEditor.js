@@ -168,10 +168,12 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
 
       $.get(url, function (data) {
         if (parseInt(data.statusCode) === 200) {
-          location.reload()
+          window.location.reload()
         } else if (parseInt(data.statusCode) === 707 ||
           parseInt(data.statusCode()) === 527) {
           showError(data)
+        } else if (parseInt(data.statusCode) === 401) {
+          window.location.href = '../login'
         }
       })
     } else if (newText === '') {

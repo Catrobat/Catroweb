@@ -4,6 +4,7 @@ namespace App\Catrobat\Controller\Admin;
 
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Entity\Program;
+use App\Manager\ProgramManager;
 use App\Utils\TimeUtils;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -12,6 +13,13 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ApkController extends CRUDController
 {
+  protected ProgramManager $program_manager;
+
+  public function __construct(ProgramManager $program_manager)
+  {
+    $this->program_manager = $program_manager;
+  }
+
   public function resetStatusAction(): RedirectResponse
   {
     /** @var Program|null $object */
@@ -58,17 +66,16 @@ class ApkController extends CRUDController
 
   public function resetAllApkAction(): RedirectResponse
   {
-    $data_grid = $this->admin->getDatagrid();
-    $objects = $data_grid->getResults();
+    $projects = $this->program_manager->findBy(['apk_status' => Program::APK_PENDING]);
 
     /** @var Program $program */
-    foreach ($objects as $program) {
+    foreach ($projects as $program) {
       $program->setApkStatus(Program::APK_NONE);
       $program->setApkRequestTime(null);
       $this->admin->update($program);
     }
 
-    if (0 != count($objects)) {
+    if (0 != count($projects)) {
       $this->addFlash('sonata_flash_success', 'All APKs reset');
     } else {
       $this->addFlash('sonata_flash_info', 'No APKs to reset');
@@ -82,20 +89,18 @@ class ApkController extends CRUDController
    */
   public function rebuildAllApkAction(): RedirectResponse
   {
-    $data_grid = $this->admin->getDatagrid();
-
-    $objects = $data_grid->getResults();
+    $projects = $this->program_manager->findBy(['apk_status' => Program::APK_PENDING]);
     $dispatcher = $this->container->get(JenkinsDispatcher::class);
 
     /* @var $program Program */
-    foreach ($objects as $program) {
+    foreach ($projects as $program) {
       $dispatcher->sendBuildRequest($program->getId());
       $program->setApkRequestTime(TimeUtils::getDateTime());
       $program->setApkStatus(Program::APK_PENDING);
       $this->admin->update($program);
     }
 
-    if (0 != count($objects)) {
+    if (0 != count($projects)) {
       $this->addFlash('sonata_flash_success', 'Requested rebuild for all APks');
     } else {
       $this->addFlash('sonata_flash_info', 'No Rebuild-Requests were sent');
