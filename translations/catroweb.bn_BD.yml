@@ -505,6 +505,9 @@ time:
   years.ago: '{1} ১ বছর আগে |]1,Inf] এক বছরেরও বেশি আগে'
 failure:
   upload: আপনার অ্যাপ্লিকেশন আপলোড করার সময় একটি ভুল ছিল।
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ইমেল অনুপস্থিত'
@@ -852,3 +855,5 @@ media_library:
       sound: 'প্রকার: শব্দ'
       movie: 'প্রকার: ভিডিও'
       default: 'প্রকার: অজানা'
+snackbar:
+  project_not_found: 'The requested project is not available'

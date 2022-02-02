@@ -43,6 +43,8 @@ class ResetCommand extends Command
       ->addOption('remix-layout', null, InputOption::VALUE_REQUIRED,
         'Generates remix graph based on given layout',
         ProgramImportCommand::REMIX_GRAPH_NO_LAYOUT)
+      ->addOption('with-remixes', null, InputOption::VALUE_NONE,
+        'Should projects have remixes?')
     ;
   }
 
@@ -121,7 +123,9 @@ class ResetCommand extends Command
     }
 
     $this->reportProjects($program_names, $user_array, $output);
-    $this->remixGen($program_names, $output);
+    if ($input->hasOption('with-remixes')) {
+      $this->remixGen($program_names, $output);
+    }
     $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);

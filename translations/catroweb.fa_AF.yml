@@ -499,6 +499,9 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: در آپلود برنامه شما یک خطا وجود داشت.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ایمیل موجود نیست'
@@ -846,3 +849,5 @@ media_library:
       sound: 'نوع: صدا'
       movie: 'نوع: ویدیویی'
       default: 'نوع: ناشناخته'
+snackbar:
+  project_not_found: 'The requested project is not available'

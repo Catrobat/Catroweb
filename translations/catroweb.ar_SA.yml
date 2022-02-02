@@ -499,6 +499,9 @@ time:
   years.ago: '{1}منذ 1 عام |]1,Inf] منذ أكثر من عام'
 failure:
   upload: حدث خطأ أثناء رفع التطبيق الخاص بك.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'البريد الإلكتروني مفقود'
@@ -846,3 +849,5 @@ media_library:
       sound: 'النوع: صوت'
       movie: 'النوع: video'
       default: 'النوع: غير معروف'
+snackbar:
+  project_not_found: 'The requested project is not available'

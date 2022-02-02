@@ -503,6 +503,9 @@ time:
   years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
 failure:
   upload: Während dem Upload deiner App ist ein Fehler passiert.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'E-Mail fehlt'
@@ -850,3 +853,5 @@ media_library:
       sound: 'Typ: Ton'
       movie: 'Typ: Video'
       default: 'Typ: unbekannt'
+snackbar:
+  project_not_found: 'The requested project is not available'

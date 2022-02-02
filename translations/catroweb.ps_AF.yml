@@ -498,6 +498,9 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: ستاسو د اپلوډ اپلوډ پرمهال یوه تېروتنه وه.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'بریښنالیک ورک دی'
@@ -845,3 +848,5 @@ media_library:
       sound: 'ډول: غږ'
       movie: 'ډول: ویډیو'
       default: 'ډول: نامعلوم'
+snackbar:
+  project_not_found: 'The requested project is not available'

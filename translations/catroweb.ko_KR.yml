@@ -496,6 +496,9 @@ time:
   years.ago: '{1}1 년 전에 |] 1, Inf] 1 년 전'
 failure:
   upload: 업로드 중에 오류가 발생했습니다.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: '이메일 주소 없음'
@@ -843,3 +846,5 @@ media_library:
       sound: '유형: 소리'
       movie: '유형: 비디오'
       default: '유형: 불명'
+snackbar:
+  project_not_found: 'The requested project is not available'

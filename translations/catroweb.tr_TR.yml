@@ -497,6 +497,9 @@ time:
   years.ago: '{1} 1 yıl önce |]1,Inf] bir yıldan fazla'
 failure:
   upload: Uygulamanız yüklenirken bir hata oluştu.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'E-posta eksik'
@@ -844,3 +847,5 @@ media_library:
       sound: 'Tür: ses'
       movie: 'Tür: video'
       default: 'Tür: bilinmiyor'
+snackbar:
+  project_not_found: 'The requested project is not available'
