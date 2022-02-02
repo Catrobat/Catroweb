@@ -24,7 +24,7 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
   public function getExportFields()
   {
     return ['id', 'project.id', 'project.name', 'source_language', 'target_language', 'provider', 'usage_count',
-      'usage_per_month', 'last_modified_at', 'created_at', ];
+      'usage_per_month', 'last_modified_at', 'created_at', 'cached_name', 'cached_description', 'cached_credits', ];
   }
 
   /**
@@ -42,6 +42,9 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
       ->add('provider')
       ->add('usage_count')
       ->add('usage_per_month')
+      ->add('cached_name')
+      ->add('cached_description')
+      ->add('cached_credits')
       ->add('last_modified_at')
       ->add('created_at')
     ;
