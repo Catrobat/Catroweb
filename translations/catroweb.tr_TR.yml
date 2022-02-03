@@ -499,7 +499,7 @@ failure:
   upload: Uygulamanız yüklenirken bir hata oluştu.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Eposta adresinizi doğrulayın'
 api:
   registerUser:
     emailMissing: 'E-posta eksik'
@@ -848,4 +848,4 @@ media_library:
       movie: 'Tür: video'
       default: 'Tür: bilinmiyor'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'İstenen proje mevcut değil'
