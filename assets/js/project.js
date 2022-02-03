@@ -14,6 +14,7 @@ import { ProgramComments } from './custom/ProgramComments'
 import { CustomTranslationSnackbar } from './custom/CustomTranslationSnackbar'
 import { CustomTranslationApi } from './api/CustomTranslationApi'
 import { ProjectTextEditor } from './components/ProjectTextEditor'
+import { ProgramName } from './custom/ProgramName'
 
 require('../styles/custom/profile.scss')
 require('../styles/custom/program.scss')
@@ -89,6 +90,25 @@ Program(
   $project.data('trans-reaction'),
   $project.data('trans-download-error'),
   $project.data('trans-download-start')
+)
+
+const nameEditorConfig = {
+  maxLength: $projectDescriptionCredits.data('max-name-length'),
+  programSection: 'name',
+  snackbar: new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-name')),
+  headline: $projectDescriptionCredits.data('trans-name'),
+  closeText: $projectDescriptionCredits.data('trans-close-name-editor'),
+  instruction: '',
+  showLanguageSelect: true
+}
+
+ProgramName(
+  $projectDescriptionCredits.data('project-id'),
+  $appLanguage.data('app-language'),
+  $project.data('my-program'),
+  editor,
+  nameEditorConfig,
+  new CustomTranslationApi('name')
 )
 
 const descriptionEditorConfig = {

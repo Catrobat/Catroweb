@@ -131,6 +131,7 @@ class ProgramController extends AbstractController
       'program_details' => $program_details,
       'my_program' => $my_program,
       'logged_in' => $logged_in,
+      'max_name_size' => $this->getParameter('catrobat.max_name_upload_size'),
       'max_description_size' => $this->getParameter('catrobat.max_description_upload_size'),
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
     ]);
@@ -344,7 +345,7 @@ class ProgramController extends AbstractController
     if (strlen($new_name) > $max_name_size) {
       return Response::create(
         $this->translator->trans('programs.tooLongName', [], 'catroweb'),
-        Response::HTTP_BAD_REQUEST
+        Response::HTTP_UNPROCESSABLE_ENTITY
       );
     }
 

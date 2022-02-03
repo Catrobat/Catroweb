@@ -27,7 +27,14 @@
         <span id="name" class="h2 program-name">{{ program.name }}</span>
         <span id="name-translation" class="h2 program-name" style="display: none;" lang=""></span>
 
-        {% if not app.user or not my_program %}
+        {% if app.user and my_program %}
+          <span>
+            <i id="edit-name-button" class="ms-3 material-icons catro-icon-button align-bottom"
+              data-bs-toggle="tooltip" title="{{ 'programs.editName'|trans({}, 'catroweb') }}">
+              edit
+            </i>
+          </span>
+        {% else %}
           <span class="translate-program-button-wrapper">
             <span id="program-translation-button" class="program-translation-button catro-icon-button"
                   data-bs-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
@@ -246,15 +253,18 @@
   ></div>
   <div class="js-project-description-credits"
        data-project-id="{{ program.id }}"
+       data-max-name-length={{ max_name_size }}
        data-max-length={{ max_description_size }}
        data-has-description={% if program.description %} true {% else %} false {% endif %}
        data-has-credits={% if program.credits %} true {% else %} false {% endif %}
        data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
        data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
+       data-trans-name="{{ "name"|trans({}, "catroweb") }}"
        data-trans-description="{{ "description"|trans({}, "catroweb") }}"
        data-trans-notes-and-credits="{{ "credits"|trans({}, "catroweb") }}"
        data-trans-translation-saved="{{ "programs.translationSaved"|trans({}, "catroweb") }}"
        data-trans-translation-deleted="{{ "programs.translationDeleted"|trans({}, "catroweb") }}"
+       data-trans-close-name-editor="{{ "programs.closeNameEditor"|trans({}, "catroweb") }}"
        data-trans-close-description-editor="{{ "programs.closeDescriptionEditor"|trans({}, "catroweb") }}"
        data-trans-close-credits-editor="{{ "programs.closeCreditsEditor"|trans({}, "catroweb") }}"
        data-trans-close-editor-prompt="{{ "programs.closeEditorPrompt"|trans({}, "catroweb") }}"
