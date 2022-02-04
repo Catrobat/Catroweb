@@ -114,9 +114,9 @@ class ApkReadyAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept(['list']);
-    $collection->add('rebuildApk', $this->getRouterIdParameter().'/rebuildApk');
-    $collection->add('resetStatus', $this->getRouterIdParameter().'/resetStatus');
+    $collection->add('requestApkRebuild', $this->getRouterIdParameter().'/requestApkRebuild');
+    $collection->add('resetApkBuildStatus', $this->getRouterIdParameter().'/resetApkBuildStatus');
     $collection->add('rebuildAllApk');
-    $collection->add('resetAllApk');
+    $collection->add('resetPendingProjects');
   }
 }

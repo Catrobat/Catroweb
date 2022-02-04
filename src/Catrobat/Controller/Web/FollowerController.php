@@ -78,7 +78,7 @@ class FollowerController extends AbstractController
   }
 
   /**
-   * @Route("/follower/unfollow/{id}", name="unfollow", methods={"GET"}, defaults={"id": 0})
+   * @Route("/follower/unfollow/{id}", name="unfollow", methods={"DELETE"}, defaults={"id": 0})
    *
    * Todo -> move to CAPI
    */
@@ -122,11 +122,11 @@ class FollowerController extends AbstractController
       $this->notification_service->removeNotification($notification);
     }
 
-    return new JsonResponse([], Response::HTTP_OK);
+    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
   }
 
   /**
-   * @Route("/follower/follow/{id}", name="follow", methods={"GET"}, defaults={"id": 0})
+   * @Route("/follower/follow/{id}", name="follow", methods={"POST"}, defaults={"id": 0})
    *
    * Todo -> move to CAPI
    */
@@ -158,6 +158,11 @@ class FollowerController extends AbstractController
     /** @var User|null $user_to_follow */
     $user_to_follow = $this->user_manager->find($id);
     if (null === $user_to_follow) {
+      return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
+    }
+
+    $followings = $user->getFollowing();
+    if ($followings->contains($user_to_follow)) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
