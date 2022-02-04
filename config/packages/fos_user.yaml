@@ -13,5 +13,5 @@ fos_user:
 
   # Can be removed once fos user bundle was removed
   from_email:
-    address: no-reply@catrob.at
+    address: share@catrob.at
     sender_name: "No Reply"
