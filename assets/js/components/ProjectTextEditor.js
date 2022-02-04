@@ -83,6 +83,7 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
 
   // region private
   this.close = () => {
+    self.editTextError.hide()
     this.editTextUI.addClass('d-none')
     this.reset()
     this.closedCallback()
@@ -166,14 +167,24 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
         url = Routing.generate('edit_program_credits', { id: this.programId, new_credits: newText }, false)
       }
 
-      $.get(url, function (data) {
-        if (parseInt(data.statusCode) === 200) {
-          window.location.reload()
-        } else if (parseInt(data.statusCode) === 707 ||
-          parseInt(data.statusCode()) === 527) {
-          showError(data)
-        } else if (parseInt(data.statusCode) === 401) {
-          window.location.href = '../login'
+      $.ajax({
+        url: url,
+        type: 'get',
+        success: function (data) {
+          const statusCode = parseInt(data.statusCode)
+          if (statusCode === 527 || statusCode === 707) {
+            showError(data)
+          } else {
+            window.location.reload()
+          }
+        },
+        error: function (error) {
+          if (error.status === 422) {
+            error.message = error.responseText
+            showError(error)
+          } else if (error.status === 401) {
+            window.location.href = '../login'
+          }
         }
       })
     } else if (newText === '') {

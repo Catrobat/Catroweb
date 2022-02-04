@@ -2,6 +2,13 @@ fos_js_routing:
     resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
 
 # @deprecated
+edit_program_name:
+    path:  /editProjectName/{id}/{new_name}
+    controller: App\Catrobat\Controller\Web\ProgramController:editProgramName
+    options:
+        expose: true
+
+# @deprecated
 edit_program_description:
     path:  /editProjectDescription/{id}/{new_description}
     controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription
