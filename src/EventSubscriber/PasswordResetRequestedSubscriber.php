@@ -57,7 +57,7 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
     }
     try {
       $email = (new TemplatedEmail())
-        ->from(new Address('no-reply@catrob.at', 'Catrobat Mail Bot'))
+        ->from(new Address('share@catrob.at'))
         ->to($user->getEmail())
         ->subject($this->__('passwordRecovery.subject', [], $locale))
         ->htmlTemplate('security/reset_password/email.html.twig')

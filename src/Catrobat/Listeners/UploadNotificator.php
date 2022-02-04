@@ -36,7 +36,7 @@ class UploadNotificator
 
       $message = (new Swift_Message())
         ->setSubject('[Pocketcode] Project upload')
-        ->setFrom('no-reply@catrob.at')
+        ->setFrom('share@catrob.at')
         ->setTo($notification->getUser()->getEmail())
         ->setContentType('text/html')
         ->setBody($body)
