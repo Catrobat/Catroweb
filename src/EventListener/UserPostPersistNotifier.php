@@ -58,7 +58,7 @@ class UserPostPersistNotifier
             );
 
       $email = (new TemplatedEmail())
-        ->from(new Address('no-reply@catrob.at', 'Catrobat Mail Bot'))
+        ->from(new Address('share@catrob.at'))
         ->to($user->getEmail())
         ->subject($this->translator->trans('user.verification.email', [], 'catroweb'))
         ->htmlTemplate('security/registration/confirmation_email.html.twig')
