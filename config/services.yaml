@@ -14,7 +14,7 @@ parameters:
   catrobat.file.storage.dir:            "%kernel.project_dir%/public/resources/programs/"
   catrobat.file.storage.path:           "resources/programs/"
   catrobat.logs.dir:                    "%kernel.project_dir%/var/log/"
-  catrobat.max_name_upload_size: 1000
+  catrobat.max_name_upload_size: 50
   catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
   catrobat.max_notes_and_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
@@ -652,7 +652,7 @@ services:
     arguments:
       - ~
       - App\Entity\Program
-      - App\Catrobat\Controller\Admin\ApkController
+      - App\Controller\Web\Admin\ApkController
     public: true
 
   catrowebadmin.block.apk.list:
@@ -662,7 +662,7 @@ services:
     arguments:
       - ~
       - App\Entity\Program
-      - App\Catrobat\Controller\Admin\ApkController
+      - App\Controller\Web\Admin\ApkController
     public: true
 
   # ===== Users

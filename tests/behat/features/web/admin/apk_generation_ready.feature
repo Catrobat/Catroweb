@@ -30,7 +30,7 @@ Feature: APK-Generation Pending in Admin Area
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/apk_ready/list"
     And I wait for the page to be loaded
-    Then I am on "/admin/apk_ready/3/rebuildApk"
+    Then I am on "/admin/apk_ready/3/requestApkRebuild"
     And I wait for the page to be loaded
     When I am on "/admin/apk_ready/list"
     And I wait for the page to be loaded
@@ -44,7 +44,7 @@ Feature: APK-Generation Pending in Admin Area
     Given I log in as "Admin" with the password "123456"
     And I am on "/admin/apk_ready/list"
     And I wait for the page to be loaded
-    And I am on "/admin/apk_ready/3/resetStatus"
+    And I am on "/admin/apk_ready/3/resetApkBuildStatus"
     And I wait for the page to be loaded
     When I am on "/admin/apk_ready/list"
     And I wait for the page to be loaded

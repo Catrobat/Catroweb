@@ -50,14 +50,14 @@ function unfollow (id, username) {
     if (result.value) {
       $.ajax({
         url: $followerOverview.data('unfollow-url') + '/' + id + '?token=' + encodeURIComponent(csrfToken),
-        type: 'get',
+        type: 'delete',
         success: function () {
           $buttons.attr('disabled', false)
           --numberOfFollow
           if (numberOfFollow <= 0) {
             emptyContainerMessage.removeClass('d-none').addClass('d-block')
           }
-          location.reload()
+          window.location.reload()
         },
         error: function (xhr) {
           handleError(xhr, $buttons)
@@ -77,11 +77,11 @@ function follow (id) {
 
   $.ajax({
     url: url + '/' + id + '?token=' + encodeURIComponent(csrfToken),
-    type: 'get',
+    type: 'post',
     success: function () {
       $buttons.attr('disabled', false)
       ++numberOfFollow
-      location.reload()
+      window.location.reload()
       emptyContainerMessage.removeClass('d-block').addClass('d-none')
     },
     error: function (xhr) {

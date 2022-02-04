@@ -53,7 +53,7 @@
               {{ _tab_menu|raw }}
             {% endif %}
             {% if app.request.requesturi == '/admin/apk_pending/list' %}
-              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('resetAllApk') }}">Reset all</a>
+              <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('resetPendingProjects') }}">Reset all</a>
               <a class="btn btn-sm btn-default navbar-btn" href="{{ admin.generateUrl('rebuildAllApk') }}">Rebuild all</a>
             {% endif %}
           </div>
