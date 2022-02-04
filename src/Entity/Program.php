@@ -345,11 +345,6 @@ class Program
   protected int $rand = 0;
 
   /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
-  private bool $snapshots_enabled = false;
-
-  /**
    * @ORM\OneToMany(targetEntity="App\Entity\Translation\ProjectCustomTranslation", mappedBy="project", cascade={"remove"})
    */
   private Collection $custom_translations;
@@ -958,16 +953,6 @@ class Program
   public function isScratchProgram(): bool
   {
     return null !== $this->scratch_id;
-  }
-
-  public function setSnapshotsEnabled(bool $snapshots_enabled): void
-  {
-    $this->snapshots_enabled = $snapshots_enabled;
-  }
-
-  public function isSnapshotsEnabled(): bool
-  {
-    return $this->snapshots_enabled;
   }
 
   public function getCustomTranslations(): Collection

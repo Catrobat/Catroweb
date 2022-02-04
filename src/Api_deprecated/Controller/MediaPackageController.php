@@ -4,11 +4,11 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api\Services\Base\TranslatorAwareInterface;
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Catrobat\StatusCode;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageCategory;
 use App\Entity\MediaPackageFile;
+use App\Repository\MediaPackageFileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;

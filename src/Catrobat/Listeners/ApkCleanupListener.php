@@ -3,8 +3,8 @@
 namespace App\Catrobat\Listeners;
 
 use App\Catrobat\Events\ProgramBeforePersistEvent;
-use App\Catrobat\Services\ApkRepository;
 use App\Entity\Program;
+use App\Repository\ApkRepository;
 
 class ApkCleanupListener
 {

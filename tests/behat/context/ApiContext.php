@@ -24,9 +24,7 @@ use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
 use RuntimeException;
-use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
-use Symfony\Bundle\SwiftmailerBundle\DataCollector\MessageDataCollector;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpKernel\Profiler\Profile;
@@ -1100,38 +1098,6 @@ class ApiContext implements KernelAwareContext
     $pattern = json_encode(json_decode($string));
     $pattern = str_replace('\\', '\\\\', $pattern);
     Assert::assertMatchesRegularExpression($pattern, $response->getContent());
-  }
-
-  /**
-   * @Then /^I should see (\d+) outgoing emails$/
-   *
-   * @param mixed $email_amount
-   */
-  public function iShouldSeeOutgoingEmailsInTheProfiler($email_amount): void
-  {
-    $profile = $this->getSymfonyProfile();
-    /** @var MessageDataCollector $collector */
-    $collector = $profile->getCollector('swiftmailer');
-    Assert::assertEquals($email_amount, $collector->getMessageCount());
-  }
-
-  /**
-   * @Then /^I should see a email with recipient "([^"]*)"$/
-   *
-   * @param mixed $recipient
-   */
-  public function iShouldSeeAEmailWithRecipient($recipient): void
-  {
-    $profile = $this->getSymfonyProfile();
-    /** @var MessageDataCollector $collector */
-    $collector = $profile->getCollector('swiftmailer');
-    foreach ($collector->getMessages() as $message) {
-      /** @var Swift_Message $message */
-      if ($recipient === array_keys($message->getTo())[0]) {
-        return;
-      }
-    }
-    Assert::assertTrue(false, "Didn't find ".$recipient.' in recipients.');
   }
 
   /**

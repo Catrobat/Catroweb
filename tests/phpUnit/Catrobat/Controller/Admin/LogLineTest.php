@@ -2,15 +2,15 @@
 
 namespace Tests\phpUnit\Catrobat\Controller\Admin;
 
-use App\Catrobat\Controller\Admin\LogLine;
-use App\Catrobat\Controller\Admin\LogsController;
+use App\Admin\Tools\Logs\LogLine;
+use App\Admin\Tools\Logs\LogsController;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;
 use Tests\phpUnit\CatrowebPhpUnit\CatrowebTestCase;
 
 /**
  * @internal
- * @covers \App\Catrobat\Controller\Admin\LogLine
+ * @covers \App\Admin\Tools\Logs\LogLine
  */
 class LogLineTest extends CatrowebTestCase
 {

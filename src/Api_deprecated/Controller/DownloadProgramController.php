@@ -2,13 +2,13 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\Services\ExtractedFileRepository;
-use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Program;
 use App\Entity\ProgramDownloads;
 use App\Entity\User;
 use App\Event\ProjectDownloadEvent;
 use App\Manager\ProgramManager;
+use App\Repository\ExtractedFileRepository;
+use App\Repository\ProgramFileRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

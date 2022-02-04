@@ -3,17 +3,18 @@
 namespace Tests\phpUnit\Catrobat\Services;
 
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
-use App\Catrobat\Services\ScreenshotRepository;
+use App\Repository\ScreenshotRepository;
 use ImagickException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @covers  \App\Catrobat\Services\ScreenshotRepository
+ * @covers  \App\Repository\ScreenshotRepository
  */
 class ScreenshotRepositoryTest extends TestCase
 {
@@ -26,8 +27,6 @@ class ScreenshotRepositoryTest extends TestCase
   private string $thumbnail_base_url;
 
   private string $tmp_dir;
-
-  private string $tmp_base_url;
 
   private string $tmp_extract_dir;
 
@@ -48,7 +47,6 @@ class ScreenshotRepositoryTest extends TestCase
     $this->tmp_zip_dir = RefreshTestEnvHook::$CACHE_DIR.'zips/';
     $this->screenshot_base_url = 'screenshots/';
     $this->thumbnail_base_url = 'thumbnails/';
-    $this->tmp_base_url = 'tmp/';
     $this->filesystem = new Filesystem();
     $this->filesystem->mkdir($this->screenshot_dir);
     $this->filesystem->mkdir($this->thumbnail_dir);
@@ -59,10 +57,15 @@ class ScreenshotRepositoryTest extends TestCase
     $this->project_id = 'test_id';
     $this->filesystem->mkdir($this->tmp_extract_dir.$this->project_id);
 
-    $this->screenshot_repository = new ScreenshotRepository(
-      $this->screenshot_dir, $this->screenshot_base_url, $this->thumbnail_dir, $this->thumbnail_base_url,
-      $this->tmp_dir, $this->tmp_base_url, $this->tmp_extract_dir, $this->tmp_zip_dir
-    );
+    $this->screenshot_repository = new ScreenshotRepository(new ParameterBag([
+      'catrobat.screenshot.dir' => $this->screenshot_dir,
+      'catrobat.screenshot.path' => $this->screenshot_base_url,
+      'catrobat.thumbnail.dir' => $this->thumbnail_dir,
+      'catrobat.thumbnail.path' => $this->thumbnail_base_url,
+      'catrobat.upload.temp.dir' => $this->tmp_dir,
+      'catrobat.file.extract.dir' => $this->tmp_extract_dir,
+      'catrobat.file.storage.dir' => $this->tmp_zip_dir,
+    ]));
   }
 
   protected function tearDown(): void
@@ -80,8 +83,15 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $this->expectException(InvalidStorageDirectoryException::class);
     $this->screenshot_repository->__construct(
-      __DIR__.'/invalid_directory/', $this->screenshot_base_url, $this->thumbnail_dir,
-      $this->thumbnail_base_url, $this->tmp_dir, $this->tmp_base_url, $this->tmp_extract_dir, $this->tmp_zip_dir
+        new ParameterBag([
+          'catrobat.screenshot.dir' => __DIR__.'/invalid_directory/',
+          'catrobat.screenshot.path' => $this->screenshot_base_url,
+          'catrobat.thumbnail.dir' => $this->thumbnail_dir,
+          'catrobat.thumbnail.path' => $this->thumbnail_base_url,
+          'catrobat.upload.temp.dir' => $this->tmp_dir,
+          'catrobat.file.extract.dir' => $this->tmp_extract_dir,
+          'catrobat.file.storage.dir' => $this->tmp_zip_dir,
+        ])
     );
   }
 
@@ -89,8 +99,15 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $this->expectException(InvalidStorageDirectoryException::class);
     $this->screenshot_repository->__construct(
-      $this->screenshot_dir, $this->screenshot_base_url, __DIR__.'/invalid_directory/',
-      $this->thumbnail_base_url, $this->tmp_dir, $this->tmp_base_url, $this->tmp_extract_dir, $this->tmp_zip_dir
+        new ParameterBag([
+          'catrobat.screenshot.dir' => $this->screenshot_dir,
+          'catrobat.screenshot.path' => $this->screenshot_base_url,
+          'catrobat.thumbnail.dir' => __DIR__.'/invalid_directory/',
+          'catrobat.thumbnail.path' => $this->thumbnail_base_url,
+          'catrobat.upload.temp.dir' => $this->tmp_dir,
+          'catrobat.file.extract.dir' => $this->tmp_extract_dir,
+          'catrobat.file.storage.dir' => $this->tmp_zip_dir,
+        ])
     );
   }
 

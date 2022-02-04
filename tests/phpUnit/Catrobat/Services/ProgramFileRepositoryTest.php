@@ -5,7 +5,7 @@ namespace Tests\phpUnit\Catrobat\Services;
 use App\Catrobat\Exceptions\InvalidStorageDirectoryException;
 use App\Catrobat\Services\CatrobatFileCompressor;
 use App\Catrobat\Services\ExtractedCatrobatFile;
-use App\Catrobat\Services\ProgramFileRepository;
+use App\Repository\ProgramFileRepository;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -15,7 +15,7 @@ use Tests\phpUnit\Hook\RefreshTestEnvHook;
 
 /**
  * @internal
- * @covers  \App\Catrobat\Services\ProgramFileRepository
+ * @covers  \App\Repository\ProgramFileRepository
  */
 class ProgramFileRepositoryTest extends TestCase
 {

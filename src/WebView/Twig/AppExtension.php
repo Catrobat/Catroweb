@@ -2,8 +2,8 @@
 
 namespace App\WebView\Twig;
 
-use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
+use App\Repository\MediaPackageFileRepository;
 use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;

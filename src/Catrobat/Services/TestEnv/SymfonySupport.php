@@ -3,16 +3,12 @@
 namespace App\Catrobat\Services\TestEnv;
 
 use App\Catrobat\Services\CatrobatFileCompressor;
-use App\Catrobat\Services\ExtractedFileRepository;
-use App\Catrobat\Services\MediaPackageFileRepository;
-use App\Catrobat\Services\ProgramFileRepository;
 use App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures;
 use App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures;
 use App\Entity\ExampleProgram;
 use App\Entity\Extension;
 use App\Entity\FeaturedProgram;
 use App\Entity\Flavor;
-use App\Entity\Notification;
 use App\Entity\Program;
 use App\Entity\ProgramInappropriateReport;
 use App\Entity\ProgramLike;
@@ -31,7 +27,10 @@ use App\Manager\UserManager;
 use App\Repository\CatroNotificationRepository;
 use App\Repository\CronJobRepository;
 use App\Repository\ExtensionRepository;
+use App\Repository\ExtractedFileRepository;
 use App\Repository\FlavorRepository;
+use App\Repository\MediaPackageFileRepository;
+use App\Repository\ProgramFileRepository;
 use App\Repository\ProgramRemixBackwardRepository;
 use App\Repository\ProgramRemixRepository;
 use App\Repository\ScratchProgramRemixRepository;
@@ -544,25 +543,6 @@ trait SymfonySupport
     }
 
     return $new_report;
-  }
-
-  public function insertNotification(array $config, bool $andFlush = true): Notification
-  {
-    /** @var User|null $user */
-    $user = $this->getUserManager()->findUserByUsername($config['user']);
-
-    $notification = new Notification();
-    $notification->setUser($user);
-    $notification->setReport($config['report']);
-    $notification->setSummary($config['summary']);
-    $notification->setUpload($config['upload']);
-    $this->getManager()->persist($notification);
-
-    if ($andFlush) {
-      $this->getManager()->flush();
-    }
-
-    return $notification;
   }
 
   /**

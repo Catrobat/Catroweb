@@ -2,9 +2,9 @@
 
 namespace App\Commands\Create;
 
-use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Repository\FlavorRepository;
 use App\Repository\MediaPackageCategoryRepository;
+use App\Repository\MediaPackageFileRepository;
 use App\Repository\MediaPackageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Console\Command\Command;

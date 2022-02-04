@@ -3,9 +3,9 @@
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackage;
 use App\Entity\MediaPackageFile;
+use App\Repository\MediaPackageFileRepository;
 use App\Repository\MediaPackageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 

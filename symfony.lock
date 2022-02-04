@@ -953,20 +953,6 @@
     "symfony/string": {
         "version": "v5.1.0"
     },
-    "symfony/swiftmailer-bundle": {
-        "version": "2.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.5",
-            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
-        },
-        "files": [
-            "config/packages/dev/swiftmailer.yaml",
-            "config/packages/swiftmailer.yaml",
-            "config/packages/test/swiftmailer.yaml"
-        ]
-    },
     "symfony/templating": {
         "version": "v4.4.5"
     },

@@ -17,7 +17,6 @@ parameters:
   catrobat.mediapackage.font.dir:  "%catrobat.pubdir%webfonts/fa-solid-900.ttf"
   catrobat.mediapackage.font.path: "webfonts/fa-solid-900.ttf"
   catrobat.tests.upld-dwnld-dir: "tests/testdata/UploadDownloadTemp"
-  catrobat.snapshot.dir:       "%catrobat.pubdir%resources_test/snapshots/"
   catrobat.logs.dir:           "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/log/"
   catrobat.testreports.behat:  "tests/testreports/behat/"
   catrobat.testreports.screenshot:  "tests/testreports/screens/"

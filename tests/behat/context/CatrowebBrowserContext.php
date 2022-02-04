@@ -2,7 +2,6 @@
 
 namespace Tests\behat\context;
 
-use App\Catrobat\Services\ApkRepository;
 use App\Catrobat\Services\Ci\JenkinsDispatcher;
 use App\Catrobat\Services\TestEnv\FixedTokenGenerator;
 use App\Catrobat\Services\TokenGenerator;
@@ -11,6 +10,7 @@ use App\Entity\Program;
 use App\Entity\UserComment;
 use App\Entity\UserLikeSimilarityRelation;
 use App\Entity\UserRemixSimilarityRelation;
+use App\Repository\ApkRepository;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
@@ -1788,16 +1788,6 @@ class CatrowebBrowserContext extends BrowserContext
   public function weCantTestAnythingHere(): void
   {
     throw new Exception(':(');
-  }
-
-  /**
-   * @Then :count copies of this program will be stored on the server
-   */
-  public function aCopyOfThisProgramWillBeStoredOnTheServer(int $count): void
-  {
-    $dir = $this->getSymfonyParameter('catrobat.snapshot.dir');
-    $finder = new Finder();
-    Assert::assertEquals($count, $finder->files()->in($dir)->count(), 'Invalid number of snapshots');
   }
 
   /**

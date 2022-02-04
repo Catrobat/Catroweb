@@ -2,11 +2,11 @@
 
 namespace Tests\phpUnit\Catrobat\Controller;
 
-use App\Catrobat\Controller\Admin\RemovableMemory;
+use App\Admin\Tools\Maintenance\RemovableMemory;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @covers \App\Catrobat\Controller\Admin\RemovableMemory
+ * @covers \App\Admin\Tools\Maintenance\RemovableMemory
  *
  * @internal
  */

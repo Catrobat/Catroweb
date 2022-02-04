@@ -2,14 +2,14 @@
 
 namespace App\Catrobat\Services\TestEnv\DataFixtures;
 
-use App\Catrobat\Services\ApkRepository;
-use App\Catrobat\Services\ProgramFileRepository;
 use App\Entity\Extension;
 use App\Entity\Program;
 use App\Entity\Tag;
 use App\Entity\User;
 use App\Manager\ProgramManager;
 use App\Manager\UserManager;
+use App\Repository\ApkRepository;
+use App\Repository\ProgramFileRepository;
 use App\Utils\MyUuidGenerator;
 use App\Utils\Utils;
 use DateTime;

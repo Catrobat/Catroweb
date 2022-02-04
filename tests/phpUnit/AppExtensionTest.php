@@ -2,7 +2,7 @@
 
 namespace Tests\phpUnit;
 
-use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Repository\MediaPackageFileRepository;
 use App\WebView\Twig\AppExtension;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;

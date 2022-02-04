@@ -4,21 +4,21 @@ fos_js_routing:
 # @deprecated
 edit_program_name:
     path:  /editProjectName/{id}/{new_name}
-    controller: App\Catrobat\Controller\Web\ProgramController:editProgramName
+    controller: App\Controller\ProgramController:editProgramName
     options:
         expose: true
 
 # @deprecated
 edit_program_description:
     path:  /editProjectDescription/{id}/{new_description}
-    controller: App\Catrobat\Controller\Web\ProgramController:editProgramDescription
+    controller: App\Controller\ProgramController:editProgramDescription
     options:
         expose: true
 
 # @deprecated
 edit_program_credits:
     path: /editProjectCredits/{id}/{new_credits}
-    controller: App\Catrobat\Controller\Web\ProgramController:editProgramCredits
+    controller: App\Controller\ProgramController:editProgramCredits
     options:
         expose: true
 

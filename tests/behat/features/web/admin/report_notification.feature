@@ -18,32 +18,6 @@ Feature: Admin Report Notification
       | 1  | program 1 |
       | 2  | program 2 |
       | 3  | program 3 |
-    And there are notifications:
-      | user     | upload | report | summary |
-      | catroweb | 0      | 0      | 0       |
-      | Catrobat | 1      | 1      | 0       |
-      | User1    | 1      | 0      | 0       |
-      | User2    | 0      | 1      | 0       |
-
-  Scenario: Users with access to the admin interface can subscribe to Reports and get notified
-    Given I activate the Profiler
-    And I use a valid JWT Bearer token for "Catrobat"
-    And I report program 1 with category "spam" and note "Bad Program"
-    Then I should see 2 outgoing emails
-    And I should see a email with recipient "catro@catrob.at"
-    And I should see a email with recipient "user2@catrob.at"
-
-  Scenario: Users with access to the admin interface can subscribe to Uploads and get notified
-    Given I activate the Profiler
-    Given I use a valid JWT Bearer token for "Catrobat"
-    And I have a request header "CONTENT_TYPE" with value "multipart/form-data"
-    And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I have a parameter "checksum" with value "B472E2CB01AEACE0F359D0A1FE9A4036"
-    And I have a valid Catrobat file, API version 2
-    And I request "POST" "/api/projects"
-    Then I should see 2 outgoing emails
-    And I should see a email with recipient "catro@catrob.at"
-    And I should see a email with recipient "user1@catrob.at"
 
   Scenario: Change upload and report
     When I log in as "catroweb" with the password "catroweb"

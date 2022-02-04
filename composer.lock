@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a007e829f6093511dd185a8223812911",
+    "content-hash": "83a91327e5ca169562a1138917438c37",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1977,23 +1977,23 @@
         },
         {
             "name": "elasticsearch/elasticsearch",
-            "version": "v7.16.0",
+            "version": "v7.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/elastic/elasticsearch-php.git",
-                "reference": "f87f93f71f564d4bbdc5f008d296d1c37d828e10"
+                "reference": "1890f9d7fde076b5a3ddcf579a802af05b2e781b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/f87f93f71f564d4bbdc5f008d296d1c37d828e10",
-                "reference": "f87f93f71f564d4bbdc5f008d296d1c37d828e10",
+                "url": "https://api.github.com/repos/elastic/elasticsearch-php/zipball/1890f9d7fde076b5a3ddcf579a802af05b2e781b",
+                "reference": "1890f9d7fde076b5a3ddcf579a802af05b2e781b",
                 "shasum": ""
             },
             "require": {
                 "ext-json": ">=1.3.7",
                 "ezimuel/ringphp": "^1.1.2",
                 "php": "^7.3 || ^8.0",
-                "psr/log": "^1|^2"
+                "psr/log": "^1|^2|^3"
             },
             "require-dev": {
                 "ext-yaml": "*",
@@ -2038,9 +2038,9 @@
             ],
             "support": {
                 "issues": "https://github.com/elastic/elasticsearch-php/issues",
-                "source": "https://github.com/elastic/elasticsearch-php/tree/v7.16.0"
+                "source": "https://github.com/elastic/elasticsearch-php/tree/v7.17.0"
             },
-            "time": "2021-12-09T20:04:01+00:00"
+            "time": "2022-02-03T13:40:04+00:00"
         },
         {
             "name": "ezimuel/guzzlestreams",
@@ -2823,12 +2823,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Google\\Service\\": "src"
-                },
                 "files": [
                     "autoload.php"
-                ]
+                ],
+                "psr-4": {
+                    "Google\\Service\\": "src"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -2903,16 +2903,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.43.2",
+            "version": "v1.44.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "93fc44af3ebf60a35fbc70e13e6113b1122ba495"
+                "reference": "72706f7d1824777f42294a3c9ccdaddaad670017"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/93fc44af3ebf60a35fbc70e13e6113b1122ba495",
-                "reference": "93fc44af3ebf60a35fbc70e13e6113b1122ba495",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/72706f7d1824777f42294a3c9ccdaddaad670017",
+                "reference": "72706f7d1824777f42294a3c9ccdaddaad670017",
                 "shasum": ""
             },
             "require": {
@@ -2927,7 +2927,7 @@
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "google/common-protos": "^1.0",
+                "google/common-protos": "^1.0||^2.0",
                 "google/gax": "^1.9",
                 "opis/closure": "^3",
                 "phpdocumentor/reflection": "^3.0",
@@ -2961,9 +2961,9 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.43.2"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.44.0"
             },
-            "time": "2022-01-12T16:19:20+00:00"
+            "time": "2022-01-31T21:39:13+00:00"
         },
         {
             "name": "google/cloud-translate",
@@ -6244,12 +6244,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "React\\Promise\\": "src/"
-                },
                 "files": [
                     "src/functions_include.php"
-                ]
+                ],
+                "psr-4": {
+                    "React\\Promise\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -11775,86 +11775,6 @@
             "time": "2022-01-02T09:53:40+00:00"
         },
         {
-            "name": "symfony/swiftmailer-bundle",
-            "version": "v3.5.3",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/swiftmailer-bundle.git",
-                "reference": "fa7d78cbdf0a16a4da126c465f25f6547ad69cf6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/swiftmailer-bundle/zipball/fa7d78cbdf0a16a4da126c465f25f6547ad69cf6",
-                "reference": "fa7d78cbdf0a16a4da126c465f25f6547ad69cf6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "swiftmailer/swiftmailer": "^6.1.3",
-                "symfony/config": "^4.4|^5.0",
-                "symfony/dependency-injection": "^4.4|^5.0",
-                "symfony/http-kernel": "^4.4|^5.0"
-            },
-            "conflict": {
-                "twig/twig": "<1.41|>=2.0,<2.10"
-            },
-            "require-dev": {
-                "symfony/console": "^4.4|^5.0",
-                "symfony/framework-bundle": "^4.4|^5.0",
-                "symfony/phpunit-bridge": "^4.4|^5.0",
-                "symfony/yaml": "^4.4|^5.0"
-            },
-            "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "3.5-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bundle\\SwiftmailerBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony SwiftmailerBundle",
-            "homepage": "http://symfony.com",
-            "support": {
-                "issues": "https://github.com/symfony/swiftmailer-bundle/issues",
-                "source": "https://github.com/symfony/swiftmailer-bundle/tree/v3.5.3"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2021-12-02T16:23:52+00:00"
-        },
-        {
             "name": "symfony/templating",
             "version": "v4.4.37",
             "source": {
@@ -12869,16 +12789,16 @@
         },
         {
             "name": "twig/extra-bundle",
-            "version": "v3.3.7",
+            "version": "v3.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/twig-extra-bundle.git",
-                "reference": "e0cc9c35a0650006b0da232a3f749cc060c65d3b"
+                "reference": "2e58256b0e9fe52f30149347c0547e4633304765"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/e0cc9c35a0650006b0da232a3f749cc060c65d3b",
-                "reference": "e0cc9c35a0650006b0da232a3f749cc060c65d3b",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/2e58256b0e9fe52f30149347c0547e4633304765",
+                "reference": "2e58256b0e9fe52f30149347c0547e4633304765",
                 "shasum": ""
             },
             "require": {
@@ -12932,7 +12852,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.7"
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/v3.3.8"
             },
             "funding": [
                 {
@@ -12944,7 +12864,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-03T21:04:59+00:00"
+            "time": "2022-01-04T13:58:53+00:00"
         },
         {
             "name": "twig/string-extra",
@@ -13020,16 +12940,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v2.14.10",
+            "version": "v2.14.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "95fb194cd4dd6ac373a27af2bde2bad5d3f27aba"
+                "reference": "66baa66f29ee30e487e05f1679903e36eb01d727"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/95fb194cd4dd6ac373a27af2bde2bad5d3f27aba",
-                "reference": "95fb194cd4dd6ac373a27af2bde2bad5d3f27aba",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/66baa66f29ee30e487e05f1679903e36eb01d727",
+                "reference": "66baa66f29ee30e487e05f1679903e36eb01d727",
                 "shasum": ""
             },
             "require": {
@@ -13084,7 +13004,7 @@
             ],
             "support": {
                 "issues": "https://github.com/twigphp/Twig/issues",
-                "source": "https://github.com/twigphp/Twig/tree/v2.14.10"
+                "source": "https://github.com/twigphp/Twig/tree/v2.14.11"
             },
             "funding": [
                 {
@@ -13096,7 +13016,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-03T21:13:26+00:00"
+            "time": "2022-02-04T06:57:25+00:00"
         },
         {
             "name": "willdurand/jsonp-callback-validator",
@@ -13832,23 +13752,23 @@
         },
         {
             "name": "composer/semver",
-            "version": "3.2.7",
+            "version": "3.2.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/composer/semver.git",
-                "reference": "deac27056b57e46faf136fae7b449eeaa71661ee"
+                "reference": "a951f614bd64dcd26137bc9b7b2637ddcfc57649"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/composer/semver/zipball/deac27056b57e46faf136fae7b449eeaa71661ee",
-                "reference": "deac27056b57e46faf136fae7b449eeaa71661ee",
+                "url": "https://api.github.com/repos/composer/semver/zipball/a951f614bd64dcd26137bc9b7b2637ddcfc57649",
+                "reference": "a951f614bd64dcd26137bc9b7b2637ddcfc57649",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.3.2 || ^7.0 || ^8.0"
             },
             "require-dev": {
-                "phpstan/phpstan": "^0.12.54",
+                "phpstan/phpstan": "^1.4",
                 "symfony/phpunit-bridge": "^4.2 || ^5"
             },
             "type": "library",
@@ -13893,7 +13813,7 @@
             "support": {
                 "irc": "irc://irc.freenode.org/composer",
                 "issues": "https://github.com/composer/semver/issues",
-                "source": "https://github.com/composer/semver/tree/3.2.7"
+                "source": "https://github.com/composer/semver/tree/3.2.9"
             },
             "funding": [
                 {
@@ -13909,7 +13829,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-01-04T09:57:54+00:00"
+            "time": "2022-02-04T13:58:43+00:00"
         },
         {
             "name": "composer/xdebug-handler",
@@ -14007,13 +13927,13 @@
             ],
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "Deployer\\": "src/"
-                },
                 "files": [
                     "src/Support/helpers.php",
                     "src/functions.php"
-                ]
+                ],
+                "psr-4": {
+                    "Deployer\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -14811,12 +14731,12 @@
             },
             "type": "library",
             "autoload": {
-                "psr-4": {
-                    "DeepCopy\\": "src/DeepCopy/"
-                },
                 "files": [
                     "src/DeepCopy/deep_copy.php"
-                ]
+                ],
+                "psr-4": {
+                    "DeepCopy\\": "src/DeepCopy/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [

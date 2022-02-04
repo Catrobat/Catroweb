@@ -2,7 +2,7 @@
 
 namespace App\Commands\Create;
 
-use App\Catrobat\Services\MediaPackageFileRepository;
+use App\Repository\MediaPackageFileRepository;
 use Exception;
 use ImagickException;
 use Symfony\Component\Console\Command\Command;

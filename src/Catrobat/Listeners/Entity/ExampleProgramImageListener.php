@@ -2,8 +2,8 @@
 
 namespace App\Catrobat\Listeners\Entity;
 
-use App\Catrobat\Services\ImageRepository;
 use App\Entity\ExampleProgram;
+use App\Repository\ImageRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class ExampleProgramImageListener

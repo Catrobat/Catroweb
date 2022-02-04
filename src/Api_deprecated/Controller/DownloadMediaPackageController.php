@@ -2,8 +2,8 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\Services\MediaPackageFileRepository;
 use App\Entity\MediaPackageFile;
+use App\Repository\MediaPackageFileRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;

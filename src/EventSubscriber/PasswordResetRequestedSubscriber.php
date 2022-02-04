@@ -55,6 +55,7 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
     if (!$user) {
       return; // Do not reveal whether a user account was found or not. Nothing to do here
     }
+    $mailTo = $user->getEmail();
     try {
       $email = (new TemplatedEmail())
         ->from(new Address('share@catrob.at'))
@@ -67,9 +68,9 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
       ;
       $this->mailer->send($email);
     } catch (TransportExceptionInterface $e) {
-      $this->logger->error("Can't send email to {$email}; Reason ".$e->getMessage());
+      $this->logger->error("Can't send email to {$mailTo}; Reason ".$e->getMessage());
     } catch (ResetPasswordExceptionInterface $e) {
-      $this->logger->error("Can't create reset token for {$email}; Reason ".$e->getMessage());
+      $this->logger->error("Can't create reset token for {$mailTo}; Reason ".$e->getMessage());
     }
   }
 }
