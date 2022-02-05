@@ -27,6 +27,7 @@ reportIt: Po, raportoje!
 areYouSure: A je i Sigurtë?
 noWayOfReturn: Nuk ka asnjë mundësi për të rikthyer veprimet tuaja!
 download: Shkarko si program
+name: Name
 description: Përshkrimi
 noDescription: Nuk ka përshkrim.
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Komenti u fshi me sukses.
   deleted_popup_header: I fshirë
   noAdminRights: Ju nuk keni të drejta administratori. Ju lutemi hyni si Admin.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Ndryshoni përshkrimin e projektit
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits

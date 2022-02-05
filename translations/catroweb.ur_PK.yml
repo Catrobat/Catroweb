@@ -27,6 +27,7 @@ reportIt: جی ہاں، اس کو رپورٹ کریں!
 areYouSure: کیا تمہیں یقین ہے؟
 noWayOfReturn: آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
 download: ڈاؤنلوڈ
+name: "نام\n"
 description: تفصیل (وضاحت)
 noDescription: کوئی وضاحت دستیاب نہیں۔
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: تبصرہ کامیابی سے حذف کر دیا گیا تھا.
   deleted_popup_header: حذف کر دیا گیا
   noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
   closeDescriptionEditor: تفصیل ایڈیٹر بند کریں۔
   editCredits: پروجیکٹ کے نوٹس اور کریڈٹ میں ترمیم کریں۔

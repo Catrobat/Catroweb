@@ -27,6 +27,7 @@ reportIt: हाँ, रिपोर्ट करें!
 areYouSure: वाकई में?
 noWayOfReturn: इसे दोबारा नहीं बदला जाएगा!
 download: डाउनलोड
+name: नाम
 description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
 credits: इसका श्रेय
@@ -172,6 +173,8 @@ programs:
   deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया था।
   deleted_popup_header: हटा दिया
   noAdminRights: आपके पास व्यवस्थापक का अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: प्रोजेक्ट का वर्णन बदलें
   closeDescriptionEditor: Close description editor
   editCredits: प्रोजेक्ट के श्रेय में बदलाव करें

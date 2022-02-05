@@ -27,6 +27,7 @@ reportIt: Да, пријавите!
 areYouSure: Да ли сте сигурни?
 noWayOfReturn: Нема начина да обновите своје поступке!
 download: Преузми пројекат
+name: Име
 description: Опис
 noDescription: Нема доступног описа.
 credits: "Заслуге\n"
@@ -172,6 +173,8 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Edit the project Description
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits

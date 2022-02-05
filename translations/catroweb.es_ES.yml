@@ -27,6 +27,7 @@ reportIt: Sí, ¡avísalo!
 areYouSure: '¿Estás seguro?'
 noWayOfReturn: '¡No hay forma de restaurar sus acciones!'
 download: Descargar
+name: Nombre
 description: Descripción
 noDescription: No hay descripción disponible
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: El comentario se ha eliminado correctamente.
   deleted_popup_header: Eliminado
   noAdminRights: No tiene derechos de administrador. Por favor, inicie sesión como administrador.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Editar la descripción del proyecto
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits

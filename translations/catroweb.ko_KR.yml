@@ -27,6 +27,7 @@ reportIt: 예, 신고합니다.
 areYouSure: 계속하시겠습니까?
 noWayOfReturn: 다시 되돌릴 수 없습니다!
 download: 프로그램 다운로드
+name: 이름
 description: 설명
 noDescription: 설명 없음
 credits: 만든이
@@ -171,6 +172,8 @@ programs:
   deleted_popup: 코멘트가 삭제되었습니다.
   deleted_popup_header: 삭제됨
   noAdminRights: 권한이 없습니다. 로그인 해 주세요.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: 프로그램 설명 편집
   closeDescriptionEditor: Close description editor
   editCredits: 프로젝트 메모 및 크레딧 편집

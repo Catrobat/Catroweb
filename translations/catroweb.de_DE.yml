@@ -27,6 +27,7 @@ reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Herunterladen
+name: Name
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 credits: Notizen und Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Der Kommentar wurde erfolgreich gelöscht.
   deleted_popup_header: Gelöscht
   noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Projektbeschreibung bearbeiten
   closeDescriptionEditor: Beschreibungseditor schließen
   editCredits: Projekt Anerkennung bearbeiten

@@ -27,6 +27,7 @@ reportIt: Bəli, şikayət et!
 areYouSure: Əminsiniz?
 noWayOfReturn: Əməliyyatları geri qaytarmağın heç bir yolu yoxdur!
 download: Endir
+name: Name
 description: Açıqlama
 noDescription: Açıqlama yoxdur.
 credits: Töhfə verənlər
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Bu rəy uğurla silindi.
   deleted_popup_header: Silindi
   noAdminRights: Admin hüquqlarınız yoxdur. Zəhmət olmasa Admin olaraq giriş edin.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Layihə açıqlamasına düzəliş edin
   closeDescriptionEditor: Close description editor
   editCredits: Layihəni hazırlayanlara düzəliş edin

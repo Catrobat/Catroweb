@@ -27,6 +27,7 @@ reportIt: نعم، أبلغ عنه!
 areYouSure: هل أنت متأكد؟
 noWayOfReturn: لاتوجد أي طريقة لإسترجاع إجراءاتك!
 download: تحميل
+name: الإسم
 description: الوصف
 noDescription: لا يوجد أي وصف .
 credits: الملاحظات والاعتمادات
@@ -172,6 +173,8 @@ programs:
   deleted_popup: تم حذف التعليق بنجاح.
   deleted_popup_header: محذوف
   noAdminRights: ليس لديك صلاحيات للمشرف. الرجاء تسجيل الدخول كمشرف.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: تعديل وصف المشروع
   closeDescriptionEditor: Close description editor
   editCredits: تعديل ملاحظات المشروع والرصيد
