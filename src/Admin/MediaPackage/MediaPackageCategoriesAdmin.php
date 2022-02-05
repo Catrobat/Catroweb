@@ -2,7 +2,7 @@
 
 namespace App\Admin\MediaPackage;
 
-use App\Entity\MediaPackage;
+use App\DB\Entity\MediaLibrary\MediaPackage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Survey;
 
-use App\Entity\Survey;
+use App\DB\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;

@@ -3,9 +3,9 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Entity\ProgramLike;
-use App\Manager\ProgramManager;
-use App\WebView\Twig\AppExtension;
+use App\Application\Twig\TwigExtension;
+use App\DB\Entity\Project\ProgramLike;
+use App\Project\ProgramManager;
 use Exception;
 use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -101,7 +101,7 @@ class ProgramController extends AbstractController
     $data = new stdClass();
     $data->total = new stdClass();
     $data->total->value = $program_manager->totalLikeCount($id);
-    $data->total->stringValue = AppExtension::humanFriendlyNumber(
+    $data->total->stringValue = TwigExtension::humanFriendlyNumber(
       $data->total->value, $translator, $user_locale
     );
 
@@ -109,7 +109,7 @@ class ProgramController extends AbstractController
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
       $data->{$type_name} = new stdClass();
       $data->{$type_name}->value = $program_manager->likeTypeCount($id, $type_id);
-      $data->{$type_name}->stringValue = AppExtension::humanFriendlyNumber(
+      $data->{$type_name}->stringValue = TwigExtension::humanFriendlyNumber(
         $data->{$type_name}->value, $translator, $user_locale
       );
     }

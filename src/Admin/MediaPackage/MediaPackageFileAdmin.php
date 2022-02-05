@@ -2,10 +2,10 @@
 
 namespace App\Admin\MediaPackage;
 
-use App\Entity\Flavor;
-use App\Entity\MediaPackageCategory;
-use App\Entity\MediaPackageFile;
-use App\Repository\MediaPackageFileRepository;
+use App\DB\Entity\Flavor;
+use App\DB\Entity\MediaLibrary\MediaPackageCategory;
+use App\DB\Entity\MediaLibrary\MediaPackageFile;
+use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use ImagickException;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;

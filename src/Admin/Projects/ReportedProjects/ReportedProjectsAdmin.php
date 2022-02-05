@@ -2,8 +2,8 @@
 
 namespace App\Admin\Projects\ReportedProjects;
 
-use App\Entity\Program;
-use App\Entity\User;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

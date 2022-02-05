@@ -4,8 +4,8 @@ namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractRequestValidator;
 use App\Api\Services\ValidationWrapper;
-use App\Entity\User;
-use App\Manager\UserManager;
+use App\DB\Entity\User\User;
+use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;

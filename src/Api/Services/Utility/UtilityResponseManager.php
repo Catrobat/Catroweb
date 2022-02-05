@@ -3,7 +3,7 @@
 namespace App\Api\Services\Utility;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Entity\Survey;
+use App\DB\Entity\Survey;
 use OpenAPI\Server\Model\SurveyResponse;
 
 final class UtilityResponseManager extends AbstractResponseManager

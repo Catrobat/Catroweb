@@ -3,12 +3,12 @@
 namespace App\Admin\Projects\ApproveProjects;
 
 use App\Admin\Projects\ProjectPreUpdateTrait;
-use App\Catrobat\Services\ExtractedCatrobatFile;
-use App\Entity\Program;
-use App\Entity\User;
-use App\Manager\ProgramManager;
-use App\Repository\ExtractedFileRepository;
-use App\Repository\ScreenshotRepository;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\User\User;
+use App\Project\CatrobatFile\ExtractedCatrobatFile;
+use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\Project\ProgramManager;
+use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

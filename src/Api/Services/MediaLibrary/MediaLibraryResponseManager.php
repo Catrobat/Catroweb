@@ -3,9 +3,9 @@
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Entity\MediaPackageCategory;
-use App\Entity\MediaPackageFile;
-use App\Manager\ResponseCacheManager;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
+use App\DB\Entity\MediaLibrary\MediaPackageCategory;
+use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use OpenAPI\Server\Model\MediaFileResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;

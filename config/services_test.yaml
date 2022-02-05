@@ -16,10 +16,10 @@ parameters:
   catrobat.mediapackage.path:  "resources_test/mediapackage/"
   catrobat.mediapackage.font.dir:  "%catrobat.pubdir%webfonts/fa-solid-900.ttf"
   catrobat.mediapackage.font.path: "webfonts/fa-solid-900.ttf"
-  catrobat.tests.upld-dwnld-dir: "tests/testdata/UploadDownloadTemp"
-  catrobat.logs.dir:           "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/log/"
-  catrobat.testreports.behat:  "tests/testreports/behat/"
-  catrobat.testreports.screenshot:  "tests/testreports/screens/"
+  catrobat.tests.upld-dwnld-dir: "tests/TestData/UploadDownloadTemp"
+  catrobat.logs.dir:           "%kernel.project_dir%/tests/TestData/Cache/log/"
+  catrobat.testreports.behat:  "tests/TestReports/Behat/"
+  catrobat.testreports.screenshot:  "tests/TestReports/TestScreenshots/"
 
 services:
 
@@ -40,40 +40,40 @@ services:
 
   # ======== Overwriting the token generator
   token_generator.inner:
-    class: App\Catrobat\Services\TokenGenerator
+    class: App\Security\TokenGenerator
 
-  App\Catrobat\Services\TokenGenerator:
-    class: App\Catrobat\Services\TestEnv\ProxyTokenGenerator
+  App\Security\TokenGenerator:
+    class: App\System\Testing\ProxyTokenGenerator
     autowire: false
     arguments:
       - '@token_generator.inner'
 
   # ======== Overwriting the jenkins dispatcher
 
-  App\Catrobat\Services\Ci\JenkinsDispatcher:
-    class: App\Catrobat\Services\TestEnv\FakeJenkinsDispatcher
+  App\Project\Apk\JenkinsDispatcher:
+    class: App\System\Testing\FakeJenkinsDispatcher
     arguments:
       - "%jenkins%"
 
   # ========
 
-  App\Catrobat\Services\CatrobatFileExtractor:
-    class: App\Catrobat\Services\CatrobatFileExtractor
+  App\Project\CatrobatFile\CatrobatFileExtractor:
+    class: App\Project\CatrobatFile\CatrobatFileExtractor
     arguments:
       - "%catrobat.file.extract.dir%"
       - "%catrobat.file.extract.path%"
     public: true
 
   # ======== Data fixtures helper services
-  App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures:
-    class: App\Catrobat\Services\TestEnv\DataFixtures\ProjectDataFixtures
+  App\System\Testing\DataFixtures\ProjectDataFixtures:
+    class: App\System\Testing\DataFixtures\ProjectDataFixtures
     public: true
 
-  App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures:
-    class: App\Catrobat\Services\TestEnv\DataFixtures\UserDataFixtures
+  App\System\Testing\DataFixtures\UserDataFixtures:
+    class: App\System\Testing\DataFixtures\UserDataFixtures
     public: true
 
   # ======== Mocking translation API services
 
   App\Translation\TranslationDelegate:
-    class: App\Translation\TestEnv\FakeTranslationDelegate
+    class: App\System\Testing\FakeTranslationDelegate

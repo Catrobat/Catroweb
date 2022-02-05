@@ -3,8 +3,8 @@
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\Entity\User;
-use App\Manager\UserManager;
+use App\DB\Entity\User\User;
+use App\User\UserManager;
 
 final class UserApiLoader extends AbstractApiLoader
 {

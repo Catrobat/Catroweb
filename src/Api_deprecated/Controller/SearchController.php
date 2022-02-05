@@ -3,8 +3,8 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Catrobat\Requests\AppRequest;
-use App\Manager\ProgramManager;
+use App\Project\ProgramManager;
+use App\Utils\RequestHelper;
 use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,12 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SearchController extends AbstractController
 {
-  protected AppRequest $app_request;
+  protected RequestHelper $app_request;
   private int $DEFAULT_LIMIT = 20;
 
   private int $DEFAULT_OFFSET = 0;
 
-  public function __construct(AppRequest $app_request)
+  public function __construct(RequestHelper $app_request)
   {
     $this->app_request = $app_request;
   }

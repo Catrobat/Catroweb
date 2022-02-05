@@ -2,8 +2,8 @@
 
 namespace App\Admin\Comments\ReportedComments;
 
-use App\Entity\ProgramInappropriateReport;
-use App\Entity\UserComment;
+use App\DB\Entity\Project\ProgramInappropriateReport;
+use App\DB\Entity\User\Comment\UserComment;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

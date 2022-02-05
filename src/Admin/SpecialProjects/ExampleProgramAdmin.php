@@ -2,12 +2,12 @@
 
 namespace App\Admin\SpecialProjects;
 
-use App\Entity\ExampleProgram;
-use App\Entity\Flavor;
-use App\Entity\Program;
-use App\Manager\ProgramManager;
-use App\Repository\FlavorRepository;
-use App\Repository\ImageRepository;
+use App\DB\Entity\Flavor;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Special\ExampleProgram;
+use App\DB\EntityRepository\FlavorRepository;
+use App\Project\ProgramManager;
+use App\Storage\ImageRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -192,7 +192,6 @@ class ExampleProgramAdmin extends AbstractAdmin
   private function checkProgramID($object): void
   {
     $id = $this->getForm()->get('program_id')->getData();
-
     $program = $this->program_manager->find($id);
 
     if (null !== $program) {

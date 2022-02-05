@@ -19,8 +19,8 @@ parameters:
   catrobat.max_notes_and_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
   catrobat.mediapackage.path:           "resources/mediapackage/"
-  catrobat.mediapackage.sample.dir:     "%catrobat.pubdir%tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
-  catrobat.mediapackage.sample.path:    "tests/testdata/DataFixtures/MediaPackage/SampleMediaPackage/"
+  catrobat.mediapackage.sample.dir:     "%catrobat.pubdir%tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/"
+  catrobat.mediapackage.sample.path:    "tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/"
   catrobat.mediapackage.font.dir:  "%catrobat.pubdir%webfonts/fa-solid-900.ttf"
   catrobat.mediapackage.font.path: "webfonts/fa-solid-900.ttf"
   catrobat.pubdir:                      "%kernel.project_dir%/public/"
@@ -35,8 +35,8 @@ parameters:
   catrobat.template.storage.path:       "resources/templates/"
   catrobat.template.thumbnail.dir:      "%catrobat.pubdir%resources/templates/thumbnails/"
   catrobat.template.thumbnail.path:     "resources/templates/thumbnails/"
-  catrobat.test.directory.source:       "%kernel.project_dir%/tests/testdata/DataFixtures/"
-  catrobat.test.directory.target:       "%kernel.project_dir%/tests/testdata/DataFixtures/GeneratedFixtures/"
+  catrobat.test.directory.source:       "%kernel.project_dir%/tests/TestData/DataFixtures/"
+  catrobat.test.directory.target:       "%kernel.project_dir%/tests/TestData/DataFixtures/GeneratedFixtures/"
   catrobat.thumbnail.dir:               "%catrobat.pubdir%resources/thumbnails/"
   catrobat.thumbnail.path:              "resources/thumbnails/"
   catrobat.translations.dir:            "%kernel.project_dir%/translations"
@@ -84,34 +84,32 @@ services:
   #
   #              Repositories and Managers need to be public!
   #
-  App\Catrobat\:
-    resource: '../src/Catrobat/*'
-
-  App\Entity\:
-    resource: '../src/Entity/*'
-
-  App\Manager\:
-    resource: '../src/Manager'
-    public: true
-
-  App\Repository\:
-    resource: '../src/Repository'
+  App\DB\EntityRepository\:
+    resource: '../src/DB/EntityRepository/*'
     public: true
 
   App\Api\Services\:
     resource: '../src/Api/Services/*'
     public: true
 
-  App\Commands\Helpers\RemixManipulationProgramManager:
-    class: App\Commands\Helpers\RemixManipulationProgramManager
+  App\User\UserManager:
+    class: App\User\UserManager
     public: true
 
-  App\Catrobat\RemixGraph\RemixGraphManipulator:
-    class: App\Catrobat\RemixGraph\RemixGraphManipulator
+  App\Project\ProgramManager:
+    class: App\Project\ProgramManager
     public: true
 
-  App\Catrobat\RemixGraph\RemixSubgraphManipulator:
-    class: App\Catrobat\RemixGraph\RemixSubgraphManipulator
+  App\System\Commands\Helpers\RemixManipulationProgramManager:
+    class: App\System\Commands\Helpers\RemixManipulationProgramManager
+    public: true
+
+  App\Project\Remix\RemixGraphManipulator:
+    class: App\Project\Remix\RemixGraphManipulator
+    public: true
+
+  App\Project\Remix\RemixSubgraphManipulator:
+    class: App\Project\Remix\RemixSubgraphManipulator
     public: true
 
   # ====================================================================================================================
@@ -119,8 +117,8 @@ services:
   #                  controllers are imported separately to make sure they're public
   #                  and have a tag that allows actions to type-hint services
   #
-  App\Controller\:
-    resource: '../src/Controller'
+  App\Application\Controller\:
+    resource: '../src/Application/Controller'
     public: true
 
   App\Api_deprecated\Controller\:
@@ -143,6 +141,10 @@ services:
     class: App\Admin\Tools\SendMailToUser\SendMailToUserController
     public: true
 
+  App\Admin\Tools\BroadcastNotification\BroadcastNotificationController:
+    class: App\Admin\Tools\BroadcastNotification\BroadcastNotificationController
+    public: true
+
   App\Admin\DB_Updater\Controller\:
     resource: '../src/Admin/DB_Updater/Controller'
     public: true
@@ -155,9 +157,9 @@ services:
   #   Commands:
   #               need a console tag; make sure all commands are in the correct folder and extend Command
   #
-  App\Commands\:
-    resource: '../src/Commands'
-    exclude: '../src/Commands/Helpers'
+  App\System\Commands\:
+    resource: '../src/System/Commands'
+    exclude: '../src/System/Commands/Helpers'
     tags:
       - { name: console.command }
 
@@ -167,109 +169,131 @@ services:
   #                most services need to be public (mainly for testing -> easy access in SymfonySupport.php)
   #
   catroweb.jwt_token_refresh_service:
-    class: App\Catrobat\Services\JWTTokenRefreshService
+    class: App\Security\Authentication\JWTTokenRefreshService
     public: true
     arguments: [ "@gesdinet.jwtrefreshtoken" ]
 
-  App\Catrobat\Services\CatrobatFileSanitizer:
-    class: App\Catrobat\Services\CatrobatFileSanitizer
+  App\Project\CatrobatFile\CatrobatFileSanitizer:
+    class: App\Project\CatrobatFile\CatrobatFileSanitizer
     public: true
 
-  App\Catrobat\Services\CatroNotificationService:
-    class: App\Catrobat\Services\CatroNotificationService
+  App\User\Notification\NotificationManager:
+    class: App\User\Notification\NotificationManager
     public: true
 
-  App\Repository\ProgramFileRepository:
-    class: App\Repository\ProgramFileRepository
+  App\Project\Remix\RemixManager:
+    class: App\Project\Remix\RemixManager
     public: true
 
-  App\Repository\ExtractedFileRepository:
-    class: App\Repository\ExtractedFileRepository
+  App\User\Achievements\AchievementManager:
+    class: App\User\Achievements\AchievementManager
     public: true
 
-  App\Repository\ImageRepository:
-    class: App\Repository\ImageRepository
+  App\Project\Scratch\ScratchManager:
+    class: App\Project\Scratch\ScratchManager
     public: true
 
-  App\Repository\MediaPackageFileRepository:
-    class: App\Repository\MediaPackageFileRepository
+  App\Studio\StudioManager:
+    class: App\Studio\StudioManager
     public: true
 
-  App\Repository\ApkRepository:
-    class: App\Repository\ApkRepository
+  App\Storage\ScreenshotRepository:
+    class: App\Storage\ScreenshotRepository
     public: true
 
-  App\Catrobat\Services\ProgramDevicePermissionReader:
-    class: App\Catrobat\Services\ProgramDevicePermissionReader
+  App\Project\CatrobatFile\ProgramFileRepository:
+    class: App\Project\CatrobatFile\ProgramFileRepository
     public: true
 
-  App\Catrobat\Services\CatrobatFileCompressor:
-    class: App\Catrobat\Services\CatrobatFileCompressor
+  App\Project\CatrobatFile\ExtractedFileRepository:
+    class: App\Project\CatrobatFile\ExtractedFileRepository
     public: true
 
-  App\Catrobat\Services\TokenGenerator:
-    class: App\Catrobat\Services\TokenGenerator
+  App\Storage\ImageRepository:
+    class: App\Storage\ImageRepository
     public: true
 
-  App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser:
-    class: App\Catrobat\CatrobatCode\Parser\CatrobatCodeParser
+  App\Project\Apk\ApkRepository:
+    class: App\Project\Apk\ApkRepository
     public: true
 
-  App\Catrobat\Requests\AppRequest:
-    class: App\Catrobat\Requests\AppRequest
+  App\Project\CatrobatFile\CatrobatFileCompressor:
+    class: App\Project\CatrobatFile\CatrobatFileCompressor
+    public: true
+
+  App\Security\TokenGenerator:
+    class: App\Security\TokenGenerator
+    public: true
+
+  App\Project\CatrobatCode\Parser\CatrobatCodeParser:
+    class: App\Project\CatrobatCode\Parser\CatrobatCodeParser
+    public: true
+
+  App\Utils\RequestHelper:
+    class: App\Utils\RequestHelper
     public: true
 
   App\Utils\ElapsedTimeStringFormatter:
     class: App\Utils\ElapsedTimeStringFormatter
     public: true
 
-  App\Catrobat\Services\Ci\JenkinsDispatcher:
-    class: App\Catrobat\Services\Ci\JenkinsDispatcher
+  App\Project\Apk\JenkinsDispatcher:
+    class: App\Project\Apk\JenkinsDispatcher
     arguments:
       - "%jenkins%"
     public: true
+
+  # ======== Views ========
+  catrobat.view.uploadexception:
+    class: App\Api_deprecated\Listeners\UploadExceptionListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
 
   App\Api_deprecated\Security\ApiTokenAuthenticator:
     class: App\Api_deprecated\Security\ApiTokenAuthenticator
     public: true
 
-  App\WebView\WebviewAuthenticator:
-    class: App\WebView\WebviewAuthenticator
+  App\Security\Authentication\WebView\WebviewAuthenticator:
+    class: App\Security\Authentication\WebView\WebviewAuthenticator
     public: true
 
-  App\WebView\WebviewJWTAuthenticator:
-    class: App\WebView\WebviewJWTAuthenticator
+  App\Security\Authentication\WebView\WebviewJWTAuthenticator:
+    class: App\Security\Authentication\WebView\WebviewJWTAuthenticator
     public: true
 
-  App\Catrobat\Services\CookieService:
-    class: App\Catrobat\Services\CookieService
+  App\Security\Authentication\CookieService:
+    class: App\Security\Authentication\CookieService
     arguments:
       - '%env(JWT_TTL)%'
       - '%env(REFRESH_TOKEN_TTL)%'
     public: true
 
-  App\Catrobat\Services\RefreshTokenService:
-    class: App\Catrobat\Services\RefreshTokenService
+  App\Security\Authentication\RefreshTokenService:
+    class: App\Security\Authentication\RefreshTokenService
     arguments:
       - '%env(REFRESH_TOKEN_TTL)%'
     public: true
 
-  App\Catrobat\Services\AsyncHttpClient:
-    class: App\Catrobat\Services\AsyncHttpClient
+  App\Api_deprecated\OAuth\OAuthService:
+    class: App\Api_deprecated\OAuth\OAuthService
+    public: true
+
+  App\Project\Scratch\AsyncHttpClient:
+    class: App\Project\Scratch\AsyncHttpClient
     arguments:
       - timeout: 8.0
       - max_number_of_total_requests: 12
       - max_number_of_concurrent_requests: 4
     public: true
 
-  App\Utils\MyUuidGenerator:
-    class: App\Utils\MyUuidGenerator
+  App\DB\Generator\MyUuidGenerator:
+    class: App\DB\Generator\MyUuidGenerator
     public: true
 
   # =============== Stuff that needs different parameters/services based on the environment
 
-  App\Catrobat\Services\CatrobatFileExtractor:
-    class: App\Catrobat\Services\CatrobatFileExtractor
+  App\Project\CatrobatFile\CatrobatFileExtractor:
+    class: App\Project\CatrobatFile\CatrobatFileExtractor
     arguments:
       - "%catrobat.file.extract.dir%"
       - "%catrobat.file.extract.path%"
@@ -279,164 +303,153 @@ services:
   # ====================================================================================================================
   #   Twig
   #
-  App\WebView\Twig\AppExtension:
-    class: App\WebView\Twig\AppExtension
+  App\Application\Twig\TwigExtension:
+    class: App\Application\Twig\TwigExtension
     tags:
       - { name: twig.extension }
 
 
   # ====================================================================================================================
-  #   Event Subscribers
+  #   Event Notifier / Subscriber
   #
-  App\EventListener\ProjectPostUpdateNotifier:
+  App\Project\EventListener\ProjectPostUpdateNotifier:
     tags:
-      - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\Program' }
+      - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\DB\Entity\Project\Program' }
 
-  App\EventListener\UserPostPersistNotifier:
+  App\User\EventListener\UserPostPersistNotifier:
     tags:
-      - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\Entity\User' }
+      - { name: 'doctrine.orm.entity_listener', event: 'postPersist', entity: 'App\DB\Entity\User\User' }
 
-  App\EventListener\UserPostUpdateNotifier:
+  App\User\EventListener\UserPostUpdateNotifier:
     tags:
-      - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\Entity\User' }
+      - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\DB\Entity\User\User' }
 
   # ====================================================================================================================
   #   Listeners:
   #
-
   catroweb.jwt_authentication_success_listener:
-    class: App\Catrobat\Listeners\JWTAuthenticationSuccessListener
+    class: App\Security\Authentication\JWTAuthenticationSuccessListener
     arguments:
       - "@gesdinet.jwtrefreshtoken.send_token"
     tags:
       - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }
 
   catroweb.oauth_success_listener:
-    class: App\Catrobat\Listeners\OAuthSuccessListener
+    class: App\Security\OAuth\OAuthSuccessListener
 
-  # ======== System Validation ========
+  # ======== System CatrobatFile ========
 
   catrowebbundle.listener.refresh_token:
-    class: App\Catrobat\Listeners\JWTTokenListener
+    class: App\Security\Authentication\JWTTokenListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 200 }
 
-  catrowebbundle.listener.language:
-    class: App\Catrobat\Listeners\LanguageListener
+  App\Application\Locale\LocaleListener:
+    class: App\Application\Locale\LocaleListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
 
-  catrowebbundle.listener.themeRequest:
-    class: App\Catrobat\Listeners\ThemeRequestListener
+  App\Application\Theme\ThemeRequestListener:
+    class: App\Application\Theme\ThemeRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
 
-  # ======== Upload Validation ========
+  # ======== Upload CatrobatFile ========
 
-  catroweb.file.validator.name:
-    class: App\Catrobat\Listeners\NameValidator
+  App\Project\CatrobatFile\NameValidator:
+    class: App\Project\CatrobatFile\NameValidator
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforeInsertEvent,
+        event: App\Project\Event\ProgramBeforeInsertEvent,
         method: onProgramBeforeInsert
       }
 
-  catroweb.file.validator.description:
-    class: App\Catrobat\Listeners\DescriptionValidator
+  App\Project\CatrobatFile\DescriptionValidator:
+    class: App\Project\CatrobatFile\DescriptionValidator
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        event: App\Project\Event\ProgramBeforeInsertEvent ,
         method: onProgramBeforeInsert
       }
 
-  catroweb.file.validator.notesandcredits:
-    class: App\Catrobat\Listeners\NotesAndCreditsValidator
+  App\Project\CatrobatFile\NotesAndCreditsValidator:
+    class: App\Project\CatrobatFile\NotesAndCreditsValidator
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        event: App\Project\Event\ProgramBeforeInsertEvent ,
         method: onProgramBeforeInsert
       }
 
-  catroweb.file.validator.languageversion:
-    class: App\Catrobat\Listeners\VersionValidator
+  App\Project\CatrobatFile\VersionValidator:
+    class: App\Project\CatrobatFile\VersionValidator
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        event: App\Project\Event\ProgramBeforeInsertEvent ,
         method: onProgramBeforeInsert
       }
 
-  catroweb.file.validator.xmlheadervalidator:
-    class: App\Catrobat\Listeners\ProgramXmlHeaderValidator
+  App\Project\CatrobatFile\ProgramXmlHeaderValidator:
+    class: App\Project\CatrobatFile\ProgramXmlHeaderValidator
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforeInsertEvent ,
+        event: App\Project\Event\ProgramBeforeInsertEvent ,
         method: onProgramBeforeInsert
       }
 
   # ======== Upload Modification ========
 
-  catroweb.file.license.updater:
-    class: App\Catrobat\Listeners\LicenseUpdater
+  App\Project\CatrobatFile\LicenseUpdater:
+    class: App\Project\CatrobatFile\LicenseUpdater
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforeInsertEvent,
+        event: App\Project\Event\ProgramBeforeInsertEvent,
         method: onProgramBeforeInsert,
         priority: -1
       }
 
-  catroweb.file.remix.updater:
-    class: App\Catrobat\Listeners\RemixUpdater
+  App\Project\Remix\RemixUpdater:
+    class: App\Project\Remix\RemixUpdater
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramAfterInsertEvent,
+        event: App\Project\Event\ProgramAfterInsertEvent,
         method: onProgramAfterInsert
       }
 
-  catroweb.flavor.check:
-    class: App\Catrobat\Listeners\ProgramFlavorListener
+  App\Project\CatrobatFile\ProgramFlavorListener:
+    class: App\Project\CatrobatFile\ProgramFlavorListener
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        event: App\Project\Event\ProgramBeforePersistEvent,
         method: onEvent
       }
 
-  catroweb.apk.cleanup:
-    class: App\Catrobat\Listeners\ApkCleanupListener
+  App\Project\Apk\ApkCleanupListener:
+    class: App\Project\Apk\ApkCleanupListener
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        event: App\Project\Event\ProgramBeforePersistEvent,
         method: handleEvent
       }
 
-  catroweb.extension.check:
-    class: App\Catrobat\Listeners\ProgramExtensionListener
+  App\Project\CatrobatFile\ProgramExtensionListener:
+    class: App\Project\CatrobatFile\ProgramExtensionListener
     tags:
       - {
         name: kernel.event_listener,
-        event: App\Catrobat\Events\ProgramBeforePersistEvent,
+        event: App\Project\Event\ProgramBeforePersistEvent,
         method: onEvent
       }
 
   # ======== Logging ========
-
-  catrobat.core.services.invalidprogramuploadlogger:
-    class:  App\Catrobat\Listeners\InvalidProgramUploadLogger
-    tags:
-      - { name: monolog.logger, channel: upload }
-      - {
-        name: kernel.event_listener,
-        event: App\Catrobat\Events\InvalidProgramUploadedEvent,
-        method: onInvalidProgramUploadedEvent
-      }
 
   monolog.formatter.catrobat_custom_formatter:
     class: Monolog\Formatter\LineFormatter
@@ -446,31 +459,31 @@ services:
     calls:
       - [ includeStacktraces ]
 
-  App\Logger\LoggerProcessor:
+  App\System\Log\LoggerProcessor:
     tags:
       - { name: monolog.processor }
 
   # ======== Scratch ========
-  catrobat.scratch.check:
-    class: App\Catrobat\Listeners\ScratchProgramUpdater
+  App\Project\Scratch\ScratchProgramUpdater:
+    class: App\Project\Scratch\ScratchProgramUpdater
     tags:
-      - { name: kernel.event_listener, event: App\Catrobat\Events\CheckScratchProgramEvent, method: onCheckScratchProgram }
+      - { name: kernel.event_listener, event: App\Project\Event\CheckScratchProgramEvent, method: onCheckScratchProgram }
 
   # ======== Project Downloads ========
-  App\EventSubscriber\ProjectDownloadEventSubscriber:
-    class: App\EventSubscriber\ProjectDownloadEventSubscriber
+  App\Project\EventSubscriber\ProjectDownloadEventSubscriber:
+    class: App\Project\EventSubscriber\ProjectDownloadEventSubscriber
     tags:
       - { name: kernel.event_subscriber }
 
   # ======== Entity ========
 
-  catrobat.entity.featured.image_listener:
-    class: App\Catrobat\Listeners\Entity\FeaturedProgramImageListener
+  App\Project\EventListener\FeaturedProgramImageListener:
+    class: App\Project\EventListener\FeaturedProgramImageListener
     tags:
       - { name: doctrine.orm.entity_listener }
 
-  catrobat.entity.example.image_listener:
-    class: App\Catrobat\Listeners\Entity\ExampleProgramImageListener
+  App\Project\EventListener\ExampleProgramImageListener:
+    class: App\Project\EventListener\ExampleProgramImageListener
     tags:
       - { name: doctrine.orm.entity_listener }
 
@@ -482,8 +495,8 @@ services:
 
   # ======== Versioning ========
 
-  catrobat.versioning:
-    class: App\Utils\VersionStrategy
+  App\Application\Framework\VersionStrategy:
+    class: App\Application\Framework\VersionStrategy
     arguments:
       - '%env(string:APP_VERSION)%'
 
@@ -503,7 +516,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Projects Overview", show_mosaic_button: false}
     arguments:
       - ~
-      - App\Entity\Program
+      - App\DB\Entity\Project\Program
       - ~
     public: true
 
@@ -513,7 +526,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Approve Projects" }
     arguments:
       - ~
-      - App\Entity\Program
+      - App\DB\Entity\Project\Program
       - App\Admin\Projects\ApproveProjects\ApproveProjectsController
     public: true
 
@@ -523,7 +536,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Reported Projects" }
     arguments:
       - ~
-      - App\Entity\ProgramInappropriateReport
+      - App\DB\Entity\Project\ProgramInappropriateReport
       - App\Admin\Projects\ReportedProjects\ReportedProjectsController
     public: true
 
@@ -535,7 +548,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Comments Overview", show_mosaic_button: false}
     arguments:
       - ~
-      - App\Entity\UserComment
+      - App\DB\Entity\User\Comment\UserComment
       - ~
     public: true
 
@@ -545,7 +558,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Reported Comments" }
     arguments:
       - ~
-      - App\Entity\UserComment
+      - App\DB\Entity\User\Comment\UserComment
       - App\Admin\Comments\ReportedComments\ReportedCommentsController
     public: true
 
@@ -557,7 +570,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Featured Projects" }
     arguments:
       - ~
-      - App\Entity\FeaturedProgram
+      - App\DB\Entity\Project\Special\FeaturedProgram
       - ~
     public: true
 
@@ -567,7 +580,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Example Projects" }
     arguments:
       - ~
-      - App\Entity\ExampleProgram
+      - App\DB\Entity\Project\Special\ExampleProgram
       - ~
     public: true
 
@@ -579,7 +592,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Packages" }
     arguments:
       - ~
-      - App\Entity\MediaPackage
+      - App\DB\Entity\MediaLibrary\MediaPackage
       - ~
     public: true
 
@@ -589,7 +602,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Categories" }
     arguments:
       - ~
-      - App\Entity\MediaPackageCategory
+      - App\DB\Entity\MediaLibrary\MediaPackageCategory
       - App\Admin\MediaPackage\MediaPackageCategoryController
     public: true
 
@@ -599,7 +612,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Files" }
     arguments:
       - ~
-      - App\Entity\MediaPackageFile
+      - App\DB\Entity\MediaLibrary\MediaPackageFile
       - ~
     public: true
 
@@ -611,7 +624,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Pending" }
     arguments:
       - ~
-      - App\Entity\Program
+      - App\DB\Entity\Project\Program
       - App\Admin\ApkGeneration\ApkController
     public: true
 
@@ -621,7 +634,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Ready" }
     arguments:
       - ~
-      - App\Entity\Program
+      - App\DB\Entity\Project\Program
       - App\Admin\ApkGeneration\ApkController
     public: true
 
@@ -630,10 +643,10 @@ services:
   admin.block.users.overview:
     class: App\Admin\Users\UserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: 'User overview', show_mosaic_button: false }
+      - { name: sonata.admin, manager_type: orm, label: 'User Overview', show_mosaic_button: false }
     arguments:
       - ~
-      - App\Entity\User
+      - App\DB\Entity\User\User
       - ~
 
   admin.block.users.data_report:
@@ -642,7 +655,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "User Data Report" }
     arguments:
       - ~
-      - App\Entity\User
+      - App\DB\Entity\User\User
       - App\Admin\Users\UserDataReport\UserDataReportController
     public: true
 
@@ -652,7 +665,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Reported Users", pager_type: "simple" }
     arguments:
       - ~
-      - App\Entity\User
+      - App\DB\Entity\User\User
       - App\Admin\Users\ReportedUsers\ReportedUsersController
     public: true
 
@@ -666,7 +679,7 @@ services:
           icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
-      - App\Entity\Survey
+      - App\DB\Entity\Survey
       - ~
     public: true
 
@@ -688,7 +701,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Cron Jobs", icon: '<i class="fa fa-hourglass"></i>' }
     arguments:
       - ~
-      - App\Entity\CronJob
+      - App\DB\Entity\System\CronJob
       - App\Admin\DB_Updater\Controller\CronJobsAdminController
     public: true
 
@@ -698,7 +711,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Achievements" }
     arguments:
       - ~
-      - App\Entity\Achievements\Achievement
+      - App\DB\Entity\User\Achievements\Achievement
       - App\Admin\DB_Updater\Controller\AchievementsAdminController
     public: true
 
@@ -709,7 +722,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Extensions" }
     arguments:
       - ~
-      - App\Entity\Extension
+      - App\DB\Entity\Project\Extension
       - App\Admin\DB_Updater\Controller\ExtensionsAdminController
     public: true
 
@@ -719,7 +732,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Tags" }
     arguments:
       - ~
-      - App\Entity\Tag
+      - App\DB\Entity\Project\Tag
       - App\Admin\DB_Updater\Controller\TagsAdminController
     public: true
 
@@ -753,7 +766,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Broadcast Notification" }
     arguments:
       - ~
-      - App\Entity\BroadcastNotification
+      - App\DB\Entity\User\Notifications\BroadcastNotification
       - App\Admin\Tools\BroadcastNotification\BroadcastNotificationController
     public: true
 
@@ -806,9 +819,9 @@ services:
   # HWIOAUTH
   #=====================================================================================================================
   my.oauth_aware.user_provider.service:
-    class: App\Catrobat\Security\FOSUBUserProviderAdapter
+    class: App\Security\OAuth\FOSUBUserProviderAdapter
     arguments:
-      - '@App\Manager\UserManager'
+      - '@App\User\UserManager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}
 
   App\Translation\ItranslateApi:
@@ -826,7 +839,7 @@ services:
   App\Translation\TranslationDelegate:
     class: App\Translation\TranslationDelegate
     arguments:
-      - '@App\Repository\ProjectCustomTranslationRepository'
+      - '@App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository'
       - '@App\Translation\ItranslateApi'
       - '@App\Translation\GoogleTranslateApi'
 
@@ -841,7 +854,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Project Machine Translation" }
     arguments:
       - ~
-      - App\Entity\Translation\ProjectMachineTranslation
+      - App\DB\Entity\Translation\ProjectMachineTranslation
       - App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController
     public: true
 
@@ -851,6 +864,6 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Comment Machine Translation" }
     arguments:
       - ~
-      - App\Entity\Translation\CommentMachineTranslation
+      - App\DB\Entity\Translation\CommentMachineTranslation
       - App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController
     public: true

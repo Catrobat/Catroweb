@@ -2,8 +2,8 @@
 
 namespace App\Admin\Projects;
 
-use App\Entity\User;
-use App\Repository\ScreenshotRepository;
+use App\DB\Entity\User\User;
+use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

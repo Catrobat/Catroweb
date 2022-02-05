@@ -6,8 +6,6 @@ return [
   Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
   Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle::class => ['all' => true],
   EightPoints\Bundle\GuzzleBundle\EightPointsGuzzleBundle::class => ['all' => true],
-  FOS\JsRoutingBundle\FOSJsRoutingBundle::class => ['all' => true],
-  FOS\RestBundle\FOSRestBundle::class => ['all' => true],
   Knp\Bundle\MenuBundle\KnpMenuBundle::class => ['all' => true],
   Sonata\DatagridBundle\SonataDatagridBundle::class => ['all' => true],
   Sonata\BlockBundle\SonataBlockBundle::class => ['all' => true],

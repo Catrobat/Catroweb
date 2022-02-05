@@ -148,8 +148,8 @@ security:
                 httponly: false
             guard:
                 authenticators:
-                    - App\WebView\WebviewAuthenticator     # @deprecated v1
-                    - App\WebView\WebviewJWTAuthenticator
+                    - App\Security\Authentication\WebView\WebviewAuthenticator     # @deprecated v1
+                    - App\Security\Authentication\WebView\WebviewJWTAuthenticator
                 entry_point: App\WebView\WebviewJWTAuthenticator
             oauth:
                 remember_me: true

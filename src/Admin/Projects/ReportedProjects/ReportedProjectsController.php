@@ -2,7 +2,7 @@
 
 namespace App\Admin\Projects\ReportedProjects;
 
-use App\Entity\ProgramInappropriateReport;
+use App\DB\Entity\Project\ProgramInappropriateReport;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

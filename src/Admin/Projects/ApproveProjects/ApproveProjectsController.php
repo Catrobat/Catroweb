@@ -2,7 +2,7 @@
 
 namespace App\Admin\Projects\ApproveProjects;
 
-use App\Entity\Program;
+use App\DB\Entity\Project\Program;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

@@ -3,10 +3,10 @@
 namespace App\Api\Services\MediaLibrary;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\Entity\MediaPackage;
-use App\Entity\MediaPackageFile;
-use App\Repository\MediaPackageFileRepository;
-use App\Repository\MediaPackageRepository;
+use App\DB\Entity\MediaLibrary\MediaPackage;
+use App\DB\Entity\MediaLibrary\MediaPackageFile;
+use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use App\DB\EntityRepository\MediaLibrary\MediaPackageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class MediaLibraryApiLoader extends AbstractApiLoader
@@ -43,7 +43,7 @@ final class MediaLibraryApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder()
       ->select('f')
-      ->from('App\Entity\MediaPackageFile', 'f')
+      ->from('App\DB\Entity\MediaLibrary\MediaPackageFile', 'f')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;

@@ -3,10 +3,10 @@
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\Entity\Program;
-use App\Entity\User;
-use App\Manager\ProgramManager;
-use App\Repository\FeaturedRepository;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Project\Special\FeaturedRepository;
+use App\Project\ProgramManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProjectsApiLoader extends AbstractApiLoader

@@ -2,8 +2,8 @@
 
 namespace App\Api\Services\Base;
 
-use App\Entity\ResponseCache;
-use App\Manager\ResponseCacheManager;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
+use App\DB\Entity\Api\ResponseCache;
 use DateTime;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

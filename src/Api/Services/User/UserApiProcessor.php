@@ -3,9 +3,9 @@
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\Catrobat\Services\TokenGenerator;
-use App\Entity\User;
-use App\Manager\UserManager;
+use App\DB\Entity\User\User;
+use App\Security\TokenGenerator;
+use App\User\UserManager;
 use Exception;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;

@@ -4,13 +4,13 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api\Services\Base\TranslatorAwareInterface;
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Catrobat\StatusCode;
-use App\Entity\MediaPackage;
-use App\Entity\MediaPackageCategory;
-use App\Entity\MediaPackageFile;
-use App\Repository\MediaPackageFileRepository;
+use App\DB\Entity\MediaLibrary\MediaPackage;
+use App\DB\Entity\MediaLibrary\MediaPackageCategory;
+use App\DB\Entity\MediaLibrary\MediaPackageFile;
+use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -45,7 +45,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     ;
     if (null === $media_package) {
       return JsonResponse::create(
-        ['statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
+        ['statusCode' => 523,
           'message' => $package.' not found', ]
       );
     }
@@ -75,11 +75,15 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
   /**
    * @deprecated
    *
-   * @Route("/api/media/packageByNameUrl/{package}/json", name="api_media_lib_package_bynameurl",
+   * @Route("/api/media/packageByNameUrl/package", name="api_media_lib_package_bynameurl")
+   * @Route("/api/media/packageByNameUrl/{package}/json", name="api_media_lib_package_bynameurl_old",
    * requirements={"package": "\w+"}, defaults={"_format": "json"}, methods={"GET"})
    */
-  public function getMediaFilesForPackageByNameUrl(string $package): JsonResponse
+  public function getMediaFilesForPackageByNameUrl(Request $request, string $package = ''): JsonResponse
   {
+    if (!$package) {
+      $package = strval($request->query->get('package'));
+    }
     $em = $this->getDoctrine()->getManager();
 
     /** @var MediaPackage|null $media_package */
@@ -88,7 +92,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     ;
     if (null === $media_package) {
       return JsonResponse::create(
-        ['statusCode' => StatusCode::MEDIA_LIB_PACKAGE_NOT_FOUND,
+        ['statusCode' => 523,
           'message' => $package.' not found', ]
       );
     }

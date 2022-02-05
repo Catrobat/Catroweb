@@ -16,16 +16,23 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MaintainController extends CRUDController
 {
+  protected KernelInterface $kernel;
+
+  public function __construct(KernelInterface $kernel)
+  {
+    $this->kernel = $kernel;
+  }
+
   /**
    * @throws Exception
    */
-  public function compressedAction(KernelInterface $kernel): RedirectResponse
+  public function compressedAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('EXTRACTED')) {
       throw new AccessDeniedException();
     }
 
-    $application = new Application($kernel);
+    $application = new Application($this->kernel);
     $application->setAutoExit(false);
 
     $input = new ArrayInput([
@@ -43,13 +50,13 @@ class MaintainController extends CRUDController
   /**
    * @throws Exception
    */
-  public function archiveLogsAction(KernelInterface $kernel): RedirectResponse
+  public function archiveLogsAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('EXTRACTED')) {
       throw new AccessDeniedException();
     }
 
-    $application = new Application($kernel);
+    $application = new Application($this->kernel);
     $application->setAutoExit(false);
 
     $input = new ArrayInput([
@@ -67,13 +74,13 @@ class MaintainController extends CRUDController
   /**
    * @throws Exception
    */
-  public function deleteLogsAction(KernelInterface $kernel): RedirectResponse
+  public function deleteLogsAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('EXTRACTED')) {
       throw new AccessDeniedException();
     }
 
-    $application = new Application($kernel);
+    $application = new Application($this->kernel);
     $application->setAutoExit(false);
 
     $input = new ArrayInput([
@@ -98,13 +105,13 @@ class MaintainController extends CRUDController
   /**
    * @throws Exception
    */
-  public function apkAction(KernelInterface $kernel): RedirectResponse
+  public function apkAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('APK')) {
       throw new AccessDeniedException();
     }
 
-    $application = new Application($kernel);
+    $application = new Application($this->kernel);
     $application->setAutoExit(false);
 
     $input = new ArrayInput([

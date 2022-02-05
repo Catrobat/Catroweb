@@ -208,9 +208,10 @@ sonata_doctrine_orm_admin:
 sonata_user:
     security_acl:  true
     manager_type:  orm
+    mailer: 'fos_user.mailer.noop'
     class:
-        user:   App\Entity\User
-        group:  App\Entity\Group
+        user:   App\DB\Entity\User\User
+        group:  App\DB\Entity\User\Group
 
     admin:                  # Admin Classes
         user:

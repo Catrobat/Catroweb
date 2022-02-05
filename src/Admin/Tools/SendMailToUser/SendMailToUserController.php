@@ -2,8 +2,8 @@
 
 namespace App\Admin\Tools\SendMailToUser;
 
-use App\Entity\User;
-use App\Manager\UserManager;
+use App\DB\Entity\User\User;
+use App\User\UserManager;
 use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -55,11 +55,11 @@ class SendMailToUserController extends CRUDController
         ->from(new Address('share@catrob.at'))
         ->to($mailTo)
         ->subject($subject)
-        ->htmlTemplate('Email/simple_message.html.twig')
+        ->htmlTemplate('Admin/Tools/Email/simple_message.html.twig')
         ->context([
           ['message' => $htmlText],
         ])
-            ;
+      ;
       $this->mailer->send($email);
     } catch (TransportExceptionInterface $e) {
       $this->logger->error("Can't send email to {$mailTo}; Reason ".$e->getMessage());

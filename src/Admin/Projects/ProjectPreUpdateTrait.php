@@ -2,8 +2,8 @@
 
 namespace App\Admin\Projects;
 
-use App\Entity\Program;
-use App\Entity\User;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Exception\ModelManagerException;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;

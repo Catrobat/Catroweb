@@ -2,8 +2,8 @@
 
 namespace App\Admin\ApkGeneration;
 
-use App\Entity\Program;
-use App\Repository\ScreenshotRepository;
+use App\DB\Entity\Project\Program;
+use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

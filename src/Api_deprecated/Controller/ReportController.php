@@ -2,13 +2,12 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\Events\ReportInsertEvent;
-use App\Catrobat\StatusCode;
-use App\Entity\Program;
-use App\Entity\ProgramInappropriateReport;
-use App\Entity\User;
-use App\Manager\ProgramManager;
-use App\Manager\UserManager;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\ProgramInappropriateReport;
+use App\DB\Entity\User\User;
+use App\Project\Event\ReportInsertEvent;
+use App\Project\ProgramManager;
+use App\User\UserManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -51,7 +50,7 @@ class ReportController extends AbstractController
 
     $response = [];
     if (!$request->get('program') || !$request->get('category') || !$request->get('note')) {
-      $response['statusCode'] = StatusCode::MISSING_POST_DATA;
+      $response['statusCode'] = 501; // should be a bad request!
       $response['answer'] = $this->translator->trans('errors.post-data', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 
@@ -60,7 +59,7 @@ class ReportController extends AbstractController
 
     $program = $this->program_manager->find($request->get('program'));
     if (null == $program) {
-      $response['statusCode'] = StatusCode::INVALID_PROGRAM;
+      $response['statusCode'] = 506; // should be 404!
       $response['answer'] = $this->translator->trans('errors.program.invalid', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 

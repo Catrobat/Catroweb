@@ -2,9 +2,9 @@
 
 namespace App\Admin\ApkGeneration;
 
-use App\Catrobat\Services\Ci\JenkinsDispatcher;
-use App\Entity\Program;
-use App\Manager\ProgramManager;
+use App\DB\Entity\Project\Program;
+use App\Project\Apk\JenkinsDispatcher;
+use App\Project\ProgramManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;

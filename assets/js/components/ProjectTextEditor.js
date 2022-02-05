@@ -3,7 +3,6 @@ import { MDCSelect } from '@material/select'
 import { ProgramEditorDialog } from '../custom/ProgramEditorDialog'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
-/* global Routing */
 export function ProjectTextEditor (projectDescriptionCredits, defaultText, programId) {
   const self = this
   this.defaultText = defaultText
@@ -22,6 +21,10 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
 
   this.translationSaved = projectDescriptionCredits.data('trans-translation-saved')
   this.translationDeleted = projectDescriptionCredits.data('trans-translation-deleted')
+
+  this.pathEditName = projectDescriptionCredits.data('path-edit-program-name')
+  this.pathEditDescription = projectDescriptionCredits.data('path-edit-program-description')
+  this.pathEditCredits = projectDescriptionCredits.data('path-edit-program-credits')
 
   this.closeEditorDialog = new ProgramEditorDialog(
     projectDescriptionCredits.data('trans-close-editor-prompt'),
@@ -160,16 +163,17 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
     if (languageSelected === '' || languageSelected === 'default') {
       let url
       if (this.programSection === 'name') {
-        url = Routing.generate('edit_program_name', { id: this.programId, new_name: newText }, false)
+        url = this.pathEditName
       } else if (this.programSection === 'description') {
-        url = Routing.generate('edit_program_description', { id: this.programId, new_description: newText }, false)
+        url = this.pathEditDescription
       } else if (this.programSection === 'credit') {
-        url = Routing.generate('edit_program_credits', { id: this.programId, new_credits: newText }, false)
+        url = this.pathEditCredits
       }
 
       $.ajax({
         url: url,
-        type: 'get',
+        type: 'put',
+        data: { value: newText },
         success: function (data) {
           const statusCode = parseInt(data.statusCode)
           if (statusCode === 527 || statusCode === 707) {

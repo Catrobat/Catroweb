@@ -2,7 +2,7 @@
 
 namespace App\Admin\Comments\ReportedComments;
 
-use App\Entity\Program;
+use App\DB\Entity\Project\Program;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

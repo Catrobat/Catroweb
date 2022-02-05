@@ -2,9 +2,9 @@
 
 namespace App\Admin\Statistics\Translation\Controller;
 
-use App\Commands\Helpers\CommandHelper;
-use App\Entity\Translation\CommentMachineTranslation;
-use App\Entity\Translation\ProjectMachineTranslation;
+use App\DB\Entity\Translation\CommentMachineTranslation;
+use App\DB\Entity\Translation\ProjectMachineTranslation;
+use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -19,10 +19,12 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
   protected string $type;
 
   private EntityManagerInterface $entity_manager;
+  private KernelInterface $kernel;
 
-  public function __construct(EntityManagerInterface $entity_manager)
+  public function __construct(EntityManagerInterface $entity_manager, KernelInterface $kernel)
   {
     $this->entity_manager = $entity_manager;
+    $this->kernel = $kernel;
   }
 
   public function listAction(): Response
@@ -52,7 +54,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
     ]);
   }
 
-  public function trimAction(KernelInterface $kernel): Response
+  public function trimAction(): Response
   {
     // TODO check permission
 
@@ -77,7 +79,7 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
 
     $result = CommandHelper::executeShellCommand(
       ['bin/console', 'catrobat:translation:trim-storage', '--older-than', $days, $entity],
-      ['timeout' => 86400], '', null, $kernel
+      ['timeout' => 86400], '', null, $this->kernel
     );
 
     if (0 === $result) {

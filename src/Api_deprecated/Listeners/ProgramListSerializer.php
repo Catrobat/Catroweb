@@ -3,9 +3,9 @@
 namespace App\Api_deprecated\Listeners;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Entity\Program;
-use App\Repository\ImageRepository;
-use App\Repository\ScreenshotRepository;
+use App\DB\Entity\Project\Program;
+use App\Storage\ImageRepository;
+use App\Storage\ScreenshotRepository;
 use App\Utils\ElapsedTimeStringFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;

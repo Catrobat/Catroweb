@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Project\CatrobatCode\Parser\Bricks;
+
+use App\Project\CatrobatCode\Parser\Constants;
+
+class FinishStageBrick extends Brick
+{
+  protected function create(): void
+  {
+    $this->type = Constants::FINISH_STAGE_BRICK;
+    $this->caption = 'Finish Stage Brick';
+    $this->setImgFile(Constants::FINISH_STAGE_BRICK);
+  }
+}

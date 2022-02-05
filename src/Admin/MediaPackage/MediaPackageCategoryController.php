@@ -2,7 +2,7 @@
 
 namespace App\Admin\MediaPackage;
 
-use App\Entity\MediaPackageCategory;
+use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

@@ -4,12 +4,12 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Entity\FeaturedProgram;
-use App\Entity\Program;
-use App\Entity\Tag;
-use App\Manager\ProgramManager;
-use App\Manager\ResponseCacheManager;
-use App\Repository\ImageRepository;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Tag;
+use App\Project\ProgramManager;
+use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
 use Exception;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
