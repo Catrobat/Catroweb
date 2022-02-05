@@ -27,6 +27,7 @@ reportIt: Da, prijavi!
 areYouSure: Jeste li sigurni?
 noWayOfReturn: Ne postoji nacin da ponistite vase radnje!
 download: Preuzmi program
+name: Ime
 description: Opis
 noDescription: Opis nije dostupan.
 credits: Zasluge
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Komentar je uspješno izbrisan.
   deleted_popup_header: Izbrisano
   noAdminRights: Nemate prava administratora. Molimo prijavite se kao administrator.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Promijenite opis Projekta
   closeDescriptionEditor: Close description editor
   editCredits: Promijenit zasluge za ovaj projekt

@@ -27,6 +27,7 @@ reportIt: Ya, laporkan!
 areYouSure: Apakah kamu yakin?
 noWayOfReturn: Tidak ada cara untuk memulihkan tindakan Anda!
 download: Unduh
+name: Nama
 description: Keterangan
 noDescription: Deskripsi tidak tersedia.
 credits: Catatan dan kredit
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Komentar tersebut berhasil dihapus.
   deleted_popup_header: Dihapus
   noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Edit deskripsi proyek
   closeDescriptionEditor: Close description editor
   editCredits: Edit catatan dan kredit proyek

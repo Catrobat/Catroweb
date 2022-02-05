@@ -27,6 +27,7 @@ reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
 download: Download
+name: Pangalan
 description: Paglalarawan
 noDescription: No description available.
 credits: Notes and credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Edit the project description
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project notes and credits

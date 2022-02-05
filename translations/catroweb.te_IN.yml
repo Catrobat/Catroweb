@@ -27,6 +27,7 @@ reportIt: అవును, నివేదించండి!
 areYouSure: మీరు చెప్పేది నిజమా?
 noWayOfReturn: మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
 download: డౌన్‌లోడ్ చేయండి
+name: Name
 description: వివరణ
 noDescription: డిస్క్రిప్షన్ అంధుబాటులొ లెదు.
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: వ్యాఖ్య విజయవంతంగా తొలగించబడింది.
   deleted_popup_header: తొలగించబడింది
   noAdminRights: మీకు నిర్వాహక హక్కులు లేవు. దయచేసి అడ్మిన్‌గా లాగిన్ అవ్వండి.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: ప్రాజెక్ట్ వివరణను సవరించండి
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits

@@ -27,6 +27,7 @@ reportIt: Ja, rapportera det!
 areYouSure: Är du säker?
 noWayOfReturn: Det finns inget sätt att återställa dina åtgärder!
 download: Ladda ner
+name: Namn
 description: Beskrivning
 noDescription: Ingen beskrivning tillgänglig.
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Kommentaren har raderats.
   deleted_popup_header: Raderad
   noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Redigera projektbeskrivningen
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits

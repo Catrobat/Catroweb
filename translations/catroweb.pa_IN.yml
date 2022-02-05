@@ -27,6 +27,7 @@ reportIt: ਹਾਂ, ਇਸ ਦੀ ਰਿਪੋਰਟ ਕਰੋ!
 areYouSure: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
 noWayOfReturn: ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
 download: ਡਾ .ਨਲੋਡ
+name: ਨਾਮ
 description: ਵੇਰਵਾ
 noDescription: ਕੋਈ ਵੇਰਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
 credits: ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ
@@ -172,6 +173,8 @@ programs:
   deleted_popup: ਟਿੱਪਣੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ ਸੀ.
   deleted_popup_header: ਮਿਟਾਇਆ ਗਿਆ
   noAdminRights: ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਬੰਧਕੀ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਬੰਧਕ ਵਜੋਂ ਲੌਗਇਨ ਕਰੋ.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: ਪ੍ਰੋਜੈਕਟ ਦੇ ਵੇਰਵੇ ਨੂੰ ਸੋਧੋ
   closeDescriptionEditor: Close description editor
   editCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਸੰਪਾਦਿਤ ਕਰੋ

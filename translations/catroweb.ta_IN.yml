@@ -27,6 +27,7 @@ reportIt: ஆம், அதைப் புகாரளி!
 areYouSure: உறுதியாகவா?
 noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
 download: பதிவிறக்கம்
+name: பெயர்
 description: விளக்கவுரை
 noDescription: விளக்கவுரை ஏதும் கிடைக்கவில்லை.
 credits: குறிப்புகளும் பொதுவொப்புதல்களும்
@@ -172,6 +173,8 @@ programs:
   deleted_popup: உங்கள் கருத்து வெற்றிகரமாக நீக்கப்பட்டது.
   deleted_popup_header: நீக்கப்பட்டது
   noAdminRights: உங்களுக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழைக.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: திட்ட விளக்கத்தைத் திருத்துக
   closeDescriptionEditor: Close description editor
   editCredits: திட்ட வரவுகளைத் திருத்துக
