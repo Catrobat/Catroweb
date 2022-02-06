@@ -173,8 +173,8 @@ programs:
   deleted_popup: Yorum başarıyla silindi.
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
+  editName: Proje adını düzenleyin
+  closeNameEditor: Ad düzenleyiciyi kapat
   editDescription: Proje açıklamasını düzenleyin
   closeDescriptionEditor: Açıklama düzenleyiciyi kapat
   editCredits: Yapanları düzenle
