@@ -175,8 +175,8 @@ programs:
   deleted_popup: ลบความคิดเห็นสำเร็จแล้ว
   deleted_popup_header: ลบทิ้งแล้ว
   noAdminRights: คุณไม่มีสิทธิ์ของผู้ดูแลระบบ กรุณาเข้าสู่ระบบในฐานะผู้ดูแล
-  editName: Edit the project name
-  closeNameEditor: Close name editor
+  editName: แก้ไขชื่อโครงการ
+  closeNameEditor: ปิดตัวแก้ไขชื่อ
   editDescription: แก้ไขคำอธิบายโครงการ
   closeDescriptionEditor: ตัวแก้ไขคำอธิบายปิด
   editCredits: แก้ไขเครดิตโครงการ
