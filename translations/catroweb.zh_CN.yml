@@ -173,8 +173,8 @@ programs:
   deleted_popup: 评论已成功删除。
   deleted_popup_header: 已删除
   noAdminRights: 您没有管理员权限。请以管理员身份登录。
-  editName: Edit the project name
-  closeNameEditor: Close name editor
+  editName: 编辑项目名称
+  closeNameEditor: 关闭名称编辑器
   editDescription: 编辑项目描述
   closeDescriptionEditor: 关闭描述编辑器
   editCredits: Edit the project credits
@@ -509,7 +509,7 @@ failure:
   upload: 上传您的应用程序时出错。
 user:
   verification:
-    email: 'Verify your email'
+    email: '验证您的电子邮件'
 api:
   registerUser:
     emailMissing: '电子邮件丢失'
@@ -858,4 +858,4 @@ media_library:
       movie: '类型：视频'
       default: '类型：未知'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: '请求的项目不可用'
