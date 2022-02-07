@@ -8,7 +8,7 @@ function AdminMail () {
     const message = $('#content').val()
     const resultBox = $('.resultBox')
 
-    // calls _/Controller/Admin/EmailUserMessageController::sendAction
+    // calls _/Controller/Admin/Tools/SendMailToUserController::sendAction
     $.get('send', { username: username, subject: subject, message: message }, function (data) {
       if (data && data.length >= 2 && data.substring(0, 2) === 'OK') {
         resultBox.switchClass('error', 'success')

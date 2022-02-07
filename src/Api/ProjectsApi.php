@@ -4,7 +4,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
-use App\Catrobat\Requests\AddProgramRequest;
+use App\Project\AddProgramRequest;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;

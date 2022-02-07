@@ -4,10 +4,10 @@ namespace App\Api\Services\Authentication;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\Entity\User;
-use App\Manager\UserManager;
+use App\DB\Entity\User\User;
+use App\Security\PasswordGenerator;
+use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
-use Exception;
 use Firebase\JWT\JWT;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use GuzzleHttp\Client;
@@ -154,7 +154,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     $user->setEnabled(true);
     $user->setEmail($user_email);
     $user->setUsername($username);
-    $user->setPassword($this->generateRandomPassword());
+    $user->setPassword(PasswordGenerator::generateRandomPassword());
     $user->setOauthUser(true);
     $this->user_manager->updateUser($user);
     $responseCode = Response::HTTP_OK;
@@ -189,23 +189,5 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     }
 
     return $username;
-  }
-
-  /**
-   * @throws Exception
-   */
-  protected function generateRandomPassword(int $length = 32): string
-  {
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.
-      '0123456789-=~!@#$%&*()_+,.<>?;:[]{}|';
-
-    $password = '';
-    $max = strlen($chars) - 1;
-
-    for ($i = 0; $i < $length; ++$i) {
-      $password .= $chars[random_int(0, $max)];
-    }
-
-    return $password;
   }
 }

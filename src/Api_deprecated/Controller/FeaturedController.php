@@ -2,9 +2,9 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\Services\ImageRepository;
-use App\Entity\FeaturedProgram;
-use App\Repository\FeaturedRepository;
+use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\EntityRepository\Project\Special\FeaturedRepository;
+use App\Storage\ImageRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;

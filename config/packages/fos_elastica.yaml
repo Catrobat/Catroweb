@@ -37,7 +37,7 @@ fos_elastica:
                 getExtensionsString: ~
             persistence:
                 driver: orm
-                model: App\Entity\Program
+                model: App\DB\Entity\Project\Program
 
         app_user:
             settings:
@@ -57,4 +57,4 @@ fos_elastica:
                 username: { boost: 3 }
             persistence:
                 driver: orm
-                model: App\Entity\User
+                model: App\DB\Entity\User\User

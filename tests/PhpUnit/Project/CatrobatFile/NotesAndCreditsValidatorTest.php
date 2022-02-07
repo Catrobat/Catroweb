@@ -1,0 +1,43 @@
+<?php
+
+namespace Tests\PhpUnit\Project\CatrobatFile;
+
+use App\Project\CatrobatFile\ExtractedCatrobatFile;
+use App\Project\CatrobatFile\InvalidCatrobatFileException;
+use App\Project\CatrobatFile\NotesAndCreditsValidator;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * @internal
+ * @covers \App\Project\CatrobatFile\NotesAndCreditsValidator
+ */
+class NotesAndCreditsValidatorTest extends TestCase
+{
+  private NotesAndCreditsValidator $notes_and_credits_validator;
+
+  protected function setUp(): void
+  {
+    $this->notes_and_credits_validator = new NotesAndCreditsValidator();
+  }
+
+  public function testInitialization(): void
+  {
+    $this->assertInstanceOf(NotesAndCreditsValidator::class, $this->notes_and_credits_validator);
+  }
+
+  public function testThrowsAnExceptionIfNotesAndCreditsAreTooLong(): void
+  {
+    $file = $this->createMock(ExtractedCatrobatFile::class);
+    $notes_and_credits = str_pad('a', 3_001, 'a');
+    $file->expects($this->atLeastOnce())->method('getNotesAndCredits')->willReturn($notes_and_credits);
+    $this->expectException(InvalidCatrobatFileException::class);
+    $this->notes_and_credits_validator->validate($file);
+  }
+
+  public function testThrowsNothingIfANormalNotesAndCreditsAreValidated(): void
+  {
+    $file = $this->createMock(ExtractedCatrobatFile::class);
+    $file->expects($this->atLeastOnce())->method('getNotesAndCredits')->willReturn('Hello Text.');
+    $this->notes_and_credits_validator->validate($file);
+  }
+}

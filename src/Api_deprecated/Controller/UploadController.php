@@ -2,16 +2,12 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\Exceptions\Upload\InvalidChecksumException;
-use App\Catrobat\Exceptions\Upload\MissingChecksumException;
-use App\Catrobat\Exceptions\Upload\MissingPostDataException;
-use App\Catrobat\Requests\AddProgramRequest;
-use App\Catrobat\Services\CatroNotificationService;
-use App\Catrobat\StatusCode;
-use App\Entity\Program;
-use App\Entity\User;
-use App\Manager\ProgramManager;
-use App\Manager\UserManager;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\User\User;
+use App\Project\AddProgramRequest;
+use App\Project\CatrobatFile\InvalidCatrobatFileException;
+use App\Project\ProgramManager;
+use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Psr\Log\LoggerInterface;
@@ -36,8 +32,6 @@ class UploadController
 
   private TranslatorInterface $translator;
 
-  private CatroNotificationService $catro_notification_service;
-
   private LoggerInterface $logger;
 
   private EntityManagerInterface $em;
@@ -45,14 +39,13 @@ class UploadController
   public function __construct(UserManager $user_manager, TokenStorageInterface $token_storage,
                               ProgramManager $program_manager,
                               TranslatorInterface $translator, LoggerInterface $logger,
-                              CatroNotificationService $catro_notification_service, EntityManagerInterface $em)
+                              EntityManagerInterface $em)
   {
     $this->user_manager = $user_manager;
     $this->token_storage = $token_storage;
     $this->program_manager = $program_manager;
     $this->translator = $translator;
     $this->logger = $logger;
-    $this->catro_notification_service = $catro_notification_service;
     $this->em = $em;
   }
 
@@ -87,20 +80,20 @@ class UploadController
 
     if (1 !== $request->files->count()) {
       $this->logger->error('Missing POST data');
-      throw new MissingPostDataException();
+      throw new InvalidCatrobatFileException('errors.post-data', 501);
     }
     if (!$request->request->has('fileChecksum')) {
       $this->logger->error('Missing Checksum');
-      throw new MissingChecksumException();
+      throw new InvalidCatrobatFileException('errors.checksum.missing', 503);
     }
 
     $file = array_values($request->files->all())[0];
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum')) {
-      $this->logger->error('UploadError '.StatusCode::INVALID_CHECKSUM, [
+      $this->logger->error('UploadError checksum', [
         'checksum_symfony' => md5($file->getPathname()),
         'checksum_app' => $request->request->get('fileChecksum'),
       ]);
-      throw new InvalidChecksumException();
+      throw new InvalidCatrobatFileException('errors.checksum.invalid', 504);
     }
 
     $flavor = 'pocketcode';
@@ -163,7 +156,7 @@ class UploadController
     $this->user_manager->updateUser($user);
 
     $response['projectId'] = 0;
-    $response['statusCode'] = StatusCode::FILE_UPLOAD_FAILED;
+    $response['statusCode'] = 521;
     $response['answer'] = $this->trans('failure.upload');
     $response['token'] = $user->getUploadToken();
 

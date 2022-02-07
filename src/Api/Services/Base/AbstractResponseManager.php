@@ -2,8 +2,8 @@
 
 namespace App\Api\Services\Base;
 
-use App\Entity\ResponseCache;
-use App\Manager\ResponseCacheManager;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
+use App\DB\Entity\Api\ResponseCache;
 use DateTime;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -46,7 +46,7 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     $responseHeaders['Content-Language'] = $this->getLocale();
   }
 
-  public function getCachedResponse($cache_id, string $time = '-3 minutes'): ?ResponseCache
+  public function getCachedResponse($cache_id, string $time = '-10 minutes'): ?ResponseCache
   {
     /** @var ResponseCache|null $cache_entry */
     $cache_entry = $this->response_cache_manager->getResponseCacheRepository()->findOneBy(['id' => $cache_id]);

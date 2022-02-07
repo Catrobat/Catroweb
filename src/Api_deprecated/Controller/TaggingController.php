@@ -4,8 +4,8 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api\Services\Base\TranslatorAwareInterface;
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Entity\Tag;
-use App\Repository\TagRepository;
+use App\DB\Entity\Project\Tag;
+use App\DB\EntityRepository\Project\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

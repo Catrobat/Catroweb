@@ -2,8 +2,8 @@
 
 namespace App\Translation;
 
-use App\Entity\Program;
-use App\Repository\ProjectCustomTranslationRepository;
+use App\DB\Entity\Project\Program;
+use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use InvalidArgumentException;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;

@@ -2,7 +2,7 @@
 
 namespace App\Admin\DB_Updater;
 
-use App\Manager\AchievementManager;
+use App\User\Achievements\AchievementManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;

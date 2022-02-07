@@ -26,6 +26,8 @@ export class AjaxController extends Controller {
    * @returns {Promise<Response>}
    */
   fetchPut (url, data) {
+
+    console.error(JSON.stringify(data));
     // eslint-disable-next-line no-undef
     return fetch(url, {
       method: 'PUT',

@@ -9,7 +9,7 @@ import $ from 'jquery'
 
 if (isTrackingAllowed()) {
   /**
-     * Contains Helper functions
+     * Contains Generator functions
      *
      * @module Tracker
      * @class HelperFunctions

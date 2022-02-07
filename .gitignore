@@ -41,9 +41,11 @@ public/**
 ### tests ###
 tests/style-report/**
 !tests/style-report/catroweb.xml
-tests/testreports/behat/**
-tests/testreports/coverage/**
-tests/testreports/screens/**
+tests/TestReports/Behat/**
+tests/TestReports/CoverageReports/**
+tests/TestReports/TestScreenshots/**
+tests/TestData/DataFixtures/GeneratedFixtures**
+tests/TestData/Cache/**
 
 ### var ###
 var/cache/**

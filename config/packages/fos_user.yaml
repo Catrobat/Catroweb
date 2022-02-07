@@ -1,17 +1,15 @@
 fos_user:
   db_driver: orm
   firewall_name: main
-  user_class: App\Entity\User
+  user_class: App\DB\Entity\User\User
 
   group:
-    group_class:   App\Entity\Group
+    group_class:   App\DB\Entity\User\Group
     group_manager: sonata.user.orm.group_manager
 
   service:
-    user_manager: App\Manager\UserManager
-    mailer: fos_user.mailer.twig_swift # allows usage of twig templates
-
-  # Can be removed once fos user bundle was removed
+    user_manager: App\User\UserManager
+    mailer: 'fos_user.mailer.noop'
   from_email:
-    address: share@catrob.at
-    sender_name: "No Reply"
+    address: NOT USED
+    sender_name: NOT USED

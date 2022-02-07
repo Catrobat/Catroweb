@@ -2,11 +2,11 @@
 
 namespace App\Translation;
 
-use App\Entity\Program;
-use App\Entity\Translation\CommentMachineTranslation;
-use App\Entity\Translation\ProjectMachineTranslation;
-use App\Entity\UserComment;
-use App\Manager\ProgramManager;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\Translation\CommentMachineTranslation;
+use App\DB\Entity\Translation\ProjectMachineTranslation;
+use App\DB\Entity\User\Comment\UserComment;
+use App\Project\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\TerminateEvent;

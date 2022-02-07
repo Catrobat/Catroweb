@@ -3,7 +3,7 @@
 namespace App\Api\Services\Authentication;
 
 use App\Api\Services\Base\AbstractRequestValidator;
-use App\Manager\UserManager;
+use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;

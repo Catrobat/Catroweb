@@ -1,0 +1,13 @@
+Application/Controller:
+    resource: ../../src/Application/Controller
+    type: annotation
+    prefix:   /{theme}/
+    requirements:
+        theme: '%themeRoutes%'
+
+Api_deprecated/Controller:
+    resource: ../../src/Api_deprecated/Controller
+    type: annotation
+    prefix:   /{theme}/
+    requirements:
+        theme: '%themeRoutes%'

@@ -21,7 +21,7 @@
 
     <testsuites>
         <testsuite name="Project Test Suite">
-            <directory>tests/phpUnit</directory>
+            <directory>tests/PhpUnit</directory>
         </testsuite>
     </testsuites>
 
@@ -32,8 +32,8 @@
     </coverage>
 
     <extensions>
-        <extension class="Tests\phpUnit\Hook\BypassFinalHook"/>
-        <extension class="Tests\phpUnit\Hook\RefreshTestEnvHook"/>
+        <extension class="App\System\Testing\PhpUnit\Hook\BypassFinalHook"/>
+        <extension class="App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook"/>
         <!-- Run `composer require symfony/panther` before enabling this extension -->
         <!-- <extension class="Symfony\Component\Panther\ServerExtension" /> -->
     </extensions>
