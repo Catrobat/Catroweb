@@ -39,7 +39,7 @@ registration_confirmation_route:
   path: /app/verify
   methods:  [GET]
   defaults:
-    _controller: App\Controller\Web\Security\RegistrationController::verifyUserEmail
+    _controller: App\ApplicationController\Security\RegistrationController::verifyUserEmail
 
 # ===== Themes and flavors =====
 catrobat_web_index:

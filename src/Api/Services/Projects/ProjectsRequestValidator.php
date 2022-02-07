@@ -4,7 +4,7 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractRequestValidator;
 use App\Api\Services\ValidationWrapper;
-use App\Manager\UserManager;
+use App\User\UserManager;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;

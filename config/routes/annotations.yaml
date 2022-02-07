@@ -1,8 +1,0 @@
-# Routing Themes
-
-controllers:
-    resource: ../../src/
-    type: annotation
-    prefix:   /{theme}/
-    requirements:
-        theme: '%themeRoutes%'

@@ -38,40 +38,17 @@ sonata_admin:
                 position: bottom
                 type:     sonata.admin.block.stats
                 settings:
-                    code: catrowebadmin.block.programs.all
+                    code: admin.block.projects.overview
                     icon: fa-cubes
                     text: All projects
                     color: bg-blue
-
-
-            -  # Programs Approve
-                class:    col-lg-3 col-xs-6
-                position: bottom
-                type:     sonata.admin.block.stats
-                settings:
-                    code: catrowebadmin.block.programs.approve
-                    icon: fa-warning
-                    text: Unapproved projects
-                    color: bg-yellow
-
-            -  # Reported Programs
-                class:    col-lg-3 col-xs-6
-                position: bottom
-                type:     sonata.admin.block.stats
-                settings:
-                    code: catrowebadmin.block.programs.reported
-                    icon: fa-bullhorn
-                    text: Reported projects
-                    color: bg-red
-                    filters:
-                        state: { type: 3, value: 1 } # 3 => NumberType::TYPE_EQUAL
 
             -  # User
                 class:    col-lg-3 col-xs-6
                 position: bottom
                 type:     sonata.admin.block.stats
                 settings:
-                    code: catrowebadmin.block.users.user
+                    code: admin.block.users.overview
                     icon: fa-users
                     text: User
                     color: bg-green
@@ -84,19 +61,34 @@ sonata_admin:
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-cubes"></i>'
                 items:
-                    - catrowebadmin.block.programs.all
-                    - catrowebadmin.block.programs.approve
-                    - catrowebadmin.block.programs.reported
-                    - catrowebadmin.block.programs.comments
-                    - catrowebadmin.block.programs.snapshots
+                    - admin.block.projects.overview
+                    - admin.block.projects.approve
+                    - admin.block.projects.reported
+
+            sonata.admin.group.users:
+                label:           Users
+                label_catalogue: Catrobat
+                icon:            '<i class="fa fa-users"></i>'
+                items:
+                    - admin.block.users.overview
+                    - admin.block.users.data_report
+                    - admin.block.users.reported
+
+            sonata.admin.group.comments:
+                label: Comments
+                label_catalogue: Catrobat
+                icon: '<i class="fa fa-comments"></i>'
+                items:
+                    - admin.block.comments.overview
+                    - admin.block.comments.reported
 
             sonata.admin.group.featured:
                 label:           Special Projects
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-bullhorn"></i>'
                 items:
-                    - catrowebadmin.block.featured.program
-                    - catrowebadmin.block.example.program
+                    - admin.block.featured.program
+                    - admin.block.example.program
 
 
             sonata.admin.group.mediapackage:
@@ -104,64 +96,53 @@ sonata_admin:
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-newspaper-o"></i>'
                 items:
-                    - catrowebadmin.block.mediapackage.package
-                    - catrowebadmin.block.mediapackage.category
-                    - catrowebadmin.block.mediapackage.file
+                    - admin.block.mediapackage.package
+                    - admin.block.mediapackage.category
+                    - admin.block.mediapackage.file
 
             sonata.admin.group.apk:
                 label:           Apk Generation
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-android"></i>'
                 items:
-                    - catrowebadmin.block.apk.pending
-                    - catrowebadmin.block.apk.list
-
-            sonata.admin.group.users:
-                label:           Users
-                label_catalogue: Catrobat
-                icon:            '<i class="fa fa-users"></i>'
-                items:
-                    - sonata.user.admin.user
-                    - catrowebadmin.block.users.storeduserdata
-                    - catrowebadmin.block.users.reported
+                    - admin.block.apk.pending
+                    - admin.block.apk.list
 
             sonata.admin.group.survey:
                 label: Survey
                 label_catalogue: Catrobat
                 icon: '<i class="fa fa-bar-chart"></i>'
                 items:
-                    - catrowebadmin.block.survey
+                    - admin.block.survey
 
             sonata.admin.group.db_updater:
                 label: DB Updater
                 label_catalogue: Catrobat
                 icon: '<i class="fa fa-cogs"></i>'
                 items:
-                    - catrowebadmin.block.cron_jobs
-                    - catrowebadmin.block.special_updater
-                    - catrowebadmin.block.achievements
-                    - catrowebadmin.block.extensions
-                    - catrowebadmin.block.tags
+                    - admin.block.cron_jobs
+                    - admin.block.special_updater
+                    - admin.block.achievements
+                    - admin.block.extensions
+                    - admin.block.tags
 
             sonata.admin.group.tools:
                 label:           Tools
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
-                    - catrowebadmin.block.tools.maintain
-                    - catrowebadmin.block.tools.logs
-                    - catrowebadmin.block.tools.notify
-                    - catrowebadmin.block.tools.gcm
-                    - catrowebadmin.block.tools.broadcast
-                    - catrowebadmin.block.tools.mail
+                    - admin.block.tools.maintain
+                    - admin.block.tools.logs
+                    - admin.block.tools.broadcast
+                    - admin.block.tools.mail
 
             sonata.admin.group.statistics:
                 label:           Statistics
                 label_catalogue: Catrobat
                 icon:            '<i class="fa fa-bar-chart"></i>'
                 items:
-                    - catrowebadmin.block.statistics.project_machine_translation
-                    - catrowebadmin.block.statistics.comment_machine_translation
+                    - admin.block.statistics.project_machine_translation
+                    - admin.block.statistics.comment_machine_translation
 
     security:
 
@@ -227,11 +208,12 @@ sonata_doctrine_orm_admin:
 sonata_user:
     security_acl:  true
     manager_type:  orm
+    mailer: 'fos_user.mailer.noop'
     class:
-        user:   App\Entity\User
-        group:  App\Entity\Group
+        user:   App\DB\Entity\User\User
+        group:  App\DB\Entity\User\Group
 
     admin:                  # Admin Classes
         user:
-            class:          App\Admin\UserAdmin
+            class:          App\Admin\Users\UserAdmin
             translation:    SonataUserBundle

@@ -2,8 +2,8 @@
 
 namespace App\Admin\DB_Updater\Controller;
 
-use App\Commands\Helpers\CommandHelper;
-use App\Repository\CronJobRepository;
+use App\DB\EntityRepository\System\CronJobRepository;
+use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -18,11 +18,13 @@ class CronJobsAdminController extends CRUDController
 {
   protected CronJobRepository $cron_job_repository;
   protected EntityManagerInterface $entity_manager;
+  protected KernelInterface $kernel;
 
-  public function __construct(CronJobRepository $cron_job_repository, EntityManagerInterface $entity_manager)
+  public function __construct(CronJobRepository $cron_job_repository, EntityManagerInterface $entity_manager, KernelInterface $kernel)
   {
     $this->cron_job_repository = $cron_job_repository;
     $this->entity_manager = $entity_manager;
+    $this->kernel = $kernel;
   }
 
   public function listAction(Request $request = null): Response
@@ -57,7 +59,7 @@ class CronJobsAdminController extends CRUDController
   /**
    * @throws Exception
    */
-  public function triggerCronJobsAction(KernelInterface $kernel): RedirectResponse
+  public function triggerCronJobsAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('TRIGGER_CRON_JOB')) {
       throw new AccessDeniedException();
@@ -65,7 +67,7 @@ class CronJobsAdminController extends CRUDController
 
     $output = new BufferedOutput();
     $result = CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:cronjob'], ['timeout' => 86400], '', $output, $kernel
+      ['bin/console', 'catrobat:cronjob'], ['timeout' => 86400], '', $output, $this->kernel
     );
 
     if (0 === $result) {

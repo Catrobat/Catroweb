@@ -27,6 +27,7 @@ reportIt: Sim, denunciar!
 areYouSure: Você tem certeza?
 noWayOfReturn: Não há maneira de desfazer suas ações!
 download: Baixe o projeto
+name: Nome
 description: Descrição
 noDescription: Sem descrição disponível.
 credits: Créditos
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Comentário apagado com sucesso.
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Editar a Descrição do projeto
   closeDescriptionEditor: Close description editor
   editCredits: Editar Créditos do projeto

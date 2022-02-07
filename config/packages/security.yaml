@@ -148,8 +148,8 @@ security:
                 httponly: false
             guard:
                 authenticators:
-                    - App\WebView\WebviewAuthenticator     # @deprecated v1
-                    - App\WebView\WebviewJWTAuthenticator
+                    - App\Security\Authentication\WebView\WebviewAuthenticator     # @deprecated v1
+                    - App\Security\Authentication\WebView\WebviewJWTAuthenticator
                 entry_point: App\WebView\WebviewJWTAuthenticator
             oauth:
                 remember_me: true
@@ -214,23 +214,23 @@ security:
 
         # Define custom roles here; all catroweb blocks can be found in the admin interface
         ROLE_FEATURED:
-            - ROLE_CATROWEBADMIN_BLOCK_FEATURED_PROGRAM_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_CATEGORIES_ADMIN
+            - ROLE_ADMIN_BLOCK_FEATURED_PROGRAM_ADMIN
+            - ROLE_ADMIN_BLOCK_PROGRAMS_CATEGORIES_ADMIN
             - ROLE_ADMIN
         ROLE_APPROVE:
-            - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_ALL_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_APPROVE_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_REPORTED_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_PROGRAMS_COMMENTS_ADMIN
+            - ROLE_ADMIN_BLOCK_PROGRAMS_ALL_ADMIN
+            - ROLE_ADMIN_BLOCK_PROGRAMS_APPROVE_ADMIN
+            - ROLE_ADMIN_BLOCK_PROGRAMS_REPORTED_ADMIN
+            - ROLE_ADMIN_BLOCK_PROGRAMS_COMMENTS_ADMIN
             - ROLE_ADMIN
         ROLE_MEDIAPACKAGE:
-            - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
+            - ROLE_ADMIN_BLOCK_MEDIAPACKAGE_FILE_ADMIN
+            - ROLE_ADMIN_BLOCK_MEDIAPACKAGE_CATEGORY_ADMIN
+            - ROLE_ADMIN_BLOCK_MEDIAPACKAGE_PACKAGE_ADMIN
             - ROLE_ADMIN
         ROLE_STATISICS:
-            - ROLE_CATROWEBADMIN_BLOCK_STATISTICS_PROJECT_MACHINE_TRANSLATION_ADMIN
-            - ROLE_CATROWEBADMIN_BLOCK_STATISTICS_COMMENT_MACHINE_TRANSLATION_ADMIN
+            - ROLE_ADMIN_BLOCK_STATISTICS_PROJECT_MACHINE_TRANSLATION_ADMIN
+            - ROLE_ADMIN_BLOCK_STATISTICS_COMMENT_MACHINE_TRANSLATION_ADMIN
             - ROLE_ADMIN
 
 acl:

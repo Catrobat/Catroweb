@@ -3,7 +3,7 @@
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Entity\User;
+use App\DB\Entity\User\User;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;

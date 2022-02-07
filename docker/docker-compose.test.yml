@@ -14,7 +14,7 @@ services:
     command: ["sh", "/var/www/catroweb/docker/app/startup-test.sh"]
     volumes:
       # We share the test & var directory for easy access to test reports, error logs, ..
-      - ./../tests:/var/www/catroweb/tests
+      - ./../tests/TestReports:/var/www/catroweb/tests/TestReports
       - ./../var:/var/www/catroweb/var:cached
     depends_on:
       - db.catroweb.test
@@ -30,7 +30,7 @@ services:
     container_name: chrome.catroweb
     restart: on-failure
     volumes:
-      - ./../tests/testdata/DataFixtures:/var/www/catroweb/tests/testdata/DataFixtures:ro
+      - ./../tests/TestData/DataFixtures:/var/www/catroweb/tests/TestData/DataFixtures:ro
     command: ["chromium-browser", "--disable-gpu", "--headless", "--remote-debugging-address=0.0.0.0", "--remote-debugging-port=9222", "--disable-extensions", "--no-sandbox"]
     ports:
       - 9222

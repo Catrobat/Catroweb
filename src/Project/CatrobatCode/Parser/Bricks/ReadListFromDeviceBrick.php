@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Project\CatrobatCode\Parser\Bricks;
+
+use App\Project\CatrobatCode\Parser\Constants;
+
+class ReadListFromDeviceBrick extends Brick
+{
+  protected function create(): void
+  {
+    $this->type = Constants::READ_LIST_FROM_DEVICE_BRICK;
+    $this->caption = 'Read list from device';
+    $this->setImgFile(Constants::DATA_BRICK_IMG);
+  }
+}

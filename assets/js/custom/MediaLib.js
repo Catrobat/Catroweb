@@ -1,10 +1,9 @@
-/* global Routing */
 import $ from 'jquery'
 
 import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
 export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
-  elementsTranslationSingular, elementsTranslationPlural, isWebView = false) {
+  elementsTranslationSingular, elementsTranslationPlural, isWebView, mediaLibPackageByNameUrlApi) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
@@ -40,7 +39,7 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
     if (mediaSearchPath !== '') {
       url = mediaSearchPath
     } else {
-      url = Routing.generate('api_media_lib_package_bynameurl', { flavor: flavor, package: packageName }, false)
+      url = mediaLibPackageByNameUrlApi + '?package=' + packageName
     }
 
     $.get(url, {}, pkgFiles => {

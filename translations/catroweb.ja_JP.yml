@@ -27,6 +27,7 @@ reportIt: はい、報告してください！
 areYouSure: よろしいですか？
 noWayOfReturn: アクションを復元する方法はありません！
 download: ダウンロード
+name: 名前
 description: 説明
 noDescription: 説明はありません。
 credits: ノートとクレジット
@@ -172,6 +173,8 @@ programs:
   deleted_popup: コメントは正常に削除されました。
   deleted_popup_header: 削除しました
   noAdminRights: 管理者権限がありません。管理者としてログインしてください。
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: プロジェクトの説明を編集
   closeDescriptionEditor: Close description editor
   editCredits: プロジェクトノートとクレジットを編集

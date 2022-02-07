@@ -27,6 +27,7 @@ reportIt: Evet, bildir!
 areYouSure: Emin misiniz?
 noWayOfReturn: Eylemlerinizi geri getirmenin bir yolu yok!
 download: İndir
+name: Isim
 description: Açıklama
 noDescription: Açıklama mevcut değil.
 credits: Yapanlar
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Yorum başarıyla silindi.
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
+  editName: Proje adını düzenleyin
+  closeNameEditor: Ad düzenleyiciyi kapat
   editDescription: Proje açıklamasını düzenleyin
   closeDescriptionEditor: Açıklama düzenleyiciyi kapat
   editCredits: Yapanları düzenle

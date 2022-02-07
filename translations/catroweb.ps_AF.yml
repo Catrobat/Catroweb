@@ -27,6 +27,7 @@ reportIt: هو، راپور ورکړئ!
 areYouSure: تاسو ډاډه یاست؟
 noWayOfReturn: ستاسو د عملونو د بیرته راګرځولو لپاره هیڅ لاره نشته!
 download: ډاونلوډ کړئ
+name: نوم
 description: تفصیل
 noDescription: هیڅ تفصیل شتون نلري.
 credits: Credits
@@ -171,6 +172,8 @@ programs:
   deleted_popup: تبصره په بریالیتوب سره ړنګه شوه.
   deleted_popup_header: ړنګ شوی
   noAdminRights: تاسو د اداري حق نه لرئ. مهرباني وکړئ د مدیر په توګه ننوتل.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: د پروژې توضیحات سم کړئ
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits

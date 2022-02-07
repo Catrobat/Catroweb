@@ -27,6 +27,7 @@ reportIt: بله، گزارش دهید!
 areYouSure: مطمئنی؟
 noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
 download: دانلود 
+name: نام
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نیست. 
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: نظر با موفقیت حذف شد.
   deleted_popup_header: حذف شد
   noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Edit the project Description
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits

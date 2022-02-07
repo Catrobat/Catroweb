@@ -105,7 +105,7 @@ if (count($diff_result_not_in_web_but_app) > 0 || count($diff_result_not_in_app_
     '// 5) Write a test to check the code statistics of the new block script!!'."\n".
     '//    -> Create project with app (E.g. upload & download it)'."\n".
     '//    put project file into tests/testdata/DataFixtures/CodeStatistics/'."\n".
-    '//    write the test in tests/behat/features/web/code_statistics.feature'."\n".
+    '//    write the test in tests/BehatFeatures/web/code_statistics.feature'."\n".
     '//'."\n".
     '// Now should not only this test case work, the new block is implemented and tested in catroweb'."\n".
     '//'."\n\n" : '';

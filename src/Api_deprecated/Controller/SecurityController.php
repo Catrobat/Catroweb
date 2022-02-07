@@ -2,13 +2,12 @@
 
 namespace App\Api_deprecated\Controller;
 
+use App\Api_deprecated\OAuth\OAuthService;
 use App\Api_deprecated\Requests\CreateUserRequest;
 use App\Api_deprecated\Requests\LoginUserRequest;
-use App\Catrobat\Services\OAuthService;
-use App\Catrobat\Services\TokenGenerator;
-use App\Catrobat\StatusCode;
-use App\Entity\User;
-use App\Manager\UserManager;
+use App\DB\Entity\User\User;
+use App\Security\TokenGenerator;
+use App\User\UserManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -60,11 +59,11 @@ class SecurityController extends AbstractController
     $create_request = new CreateUserRequest($request);
     $violations = $validator->validate($create_request);
     foreach ($violations as $violation) {
-      $retArray['statusCode'] = StatusCode::REGISTRATION_ERROR;
+      $retArray['statusCode'] = Response::HTTP_UNAUTHORIZED;
       if ('errors.password.short' == $violation->getMessageTemplate()) {
-        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+        $retArray['statusCode'] = 753;
       } elseif ('errors.email.invalid' == $violation->getMessageTemplate()) {
-        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+        $retArray['statusCode'] = 765;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
@@ -72,10 +71,10 @@ class SecurityController extends AbstractController
 
     if (0 == count($violations)) {
       if (null != $user_manager->findUserByEmail($create_request->mail)) {
-        $retArray['statusCode'] = StatusCode::USER_ADD_EMAIL_EXISTS;
+        $retArray['statusCode'] = 757;
         $retArray['answer'] = $translator->trans('errors.email.exists', [], 'catroweb');
       } elseif (null != $user_manager->findUserByUsername($create_request->username)) {
-        $retArray['statusCode'] = StatusCode::USER_ADD_USERNAME_EXISTS;
+        $retArray['statusCode'] = 777;
         $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
       } else {
         /** @var User $user */
@@ -113,11 +112,11 @@ class SecurityController extends AbstractController
     $login_request = new LoginUserRequest($request);
     $violations = $validator->validate($login_request);
     foreach ($violations as $violation) {
-      $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+      $retArray['statusCode'] = 601;
       if ('errors.password.short' == $violation->getMessageTemplate()) {
-        $retArray['statusCode'] = StatusCode::USER_PASSWORD_TOO_SHORT;
+        $retArray['statusCode'] = 753;
       } elseif ('errors.email.invalid' == $violation->getMessageTemplate()) {
-        $retArray['statusCode'] = StatusCode::USER_EMAIL_INVALID;
+        $retArray['statusCode'] = 765;
       }
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
@@ -136,7 +135,7 @@ class SecurityController extends AbstractController
     $user = $user_manager->findUserByUsername($username);
 
     if (null === $user) {
-      $retArray['statusCode'] = StatusCode::USERNAME_NOT_FOUND;
+      $retArray['statusCode'] = 803;
       $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
     } else {
       $encoder = $factory->getEncoder($user);
@@ -148,7 +147,7 @@ class SecurityController extends AbstractController
         $retArray['email'] = $user->getEmail();
         $user_manager->updateUser($user);
       } else {
-        $retArray['statusCode'] = StatusCode::LOGIN_ERROR;
+        $retArray['statusCode'] = 601;
         $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
       }
     }

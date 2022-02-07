@@ -27,6 +27,7 @@ reportIt: হ্যাঁ, রিপোর্ট করুন
 areYouSure: আপনি নিশ্চিত?
 noWayOfReturn: আপনার কাজটি পুনরুদ্ধার করার কোনও উপায় নেই!
 download: ডাউনলোড
+name: নাম
 description: বর্ণনা
 noDescription: বর্ণনা পাওয়া যায় নি.
 credits: Credits
@@ -172,6 +173,8 @@ programs:
   deleted_popup: মন্তব্যটি সফলভাবে মুছে ফেলা হয়েছে।
   deleted_popup_header: মুছুন
   noAdminRights: আপনার অ্যাডমিন অধিকার নেই। অনুগ্রহ করে  অ্যাডমিন হিসাবে প্রবেশ করুন।
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Edit the project Description
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project Credits

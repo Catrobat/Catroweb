@@ -27,6 +27,7 @@ reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
 download: Pobierz
+name: Nazwa
 description: Opis
 noDescription: Brak opisu.
 credits: Uwagi i podziękowania
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Komentarz został pomyślnie usunięty.
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
+  editName: Edytuj nazwę projektu
+  closeNameEditor: Zamknij edytor nazw
   editDescription: Edytuj opis projektu
   closeDescriptionEditor: Zamknij edytor opisu
   editCredits: Edytuj uwagi i podziękowania

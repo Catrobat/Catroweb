@@ -4,7 +4,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\MediaLibrary\MediaLibraryApiFacade;
-use App\Entity\MediaPackage;
+use App\DB\Entity\MediaLibrary\MediaPackage;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use Symfony\Component\HttpFoundation\Response;
 

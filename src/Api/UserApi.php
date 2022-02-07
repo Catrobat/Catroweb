@@ -4,7 +4,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
-use App\Event\PasswordResetRequestedEvent;
+use App\User\ResetPassword\PasswordResetRequestedEvent;
 use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;

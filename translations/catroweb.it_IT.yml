@@ -27,6 +27,7 @@ reportIt: Sì, segnalalo!
 areYouSure: Sei sicuro?
 noWayOfReturn: Non è possibile ripristinare queste azioni!
 download: Scarica il progetto
+name: Nome
 description: Descrizione
 noDescription: Nessuna descrizione disponibile.
 credits: Riconoscimenti
@@ -172,6 +173,8 @@ programs:
   deleted_popup: Il commento è stato eliminato.
   deleted_popup_header: Eliminato
   noAdminRights: Non hai diritti di amministratore. Effettua il login come amministratore.
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: Modifica la descrizione del progetto
   closeDescriptionEditor: Close description editor
   editCredits: Edit the project credits

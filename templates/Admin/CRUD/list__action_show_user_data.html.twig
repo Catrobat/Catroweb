@@ -160,42 +160,6 @@
         </div>
 
         <div class="mtable">
-          <div class="table-name">CatroNotifications (for this user)</div>
-
-          {% if catro_user_notifications is empty %} <div>No entries for this user</div> {%  endif %}
-
-          {% for catro_user_notification in catro_user_notifications %}
-            <div class="lrow">ID</div><div class="rrow">{{ catro_user_notification.id }}</div>
-            <div class="lrow">User</div><div class="rrow">{{ catro_user_notification.user }}</div>
-            <div class="lrow">Title</div><div class="rrow">{{ catro_user_notification.title}}</div>
-            <div class="lrow">Message</div><div class="rrow">{{ catro_user_notification.message }}</div>
-            <div class="lrow">Seen</div><div class="rrow">{{ catro_user_notification.seen }}</div>
-            {% if catro_user_notification.price is defined %}
-              <div class="lrow">Price</div><div class="rrow">{{ catro_user_notification.price }}</div>
-            {%  endif %}
-            {% if catro_user_notification.imagePath is defined %}
-              <div class="lrow">Image Path</div><div class="rrow">{{ catro_user_notification.imagePath }}</div>
-            {% endif %}
-            {% if catro_user_notification.comment is defined %}
-              <div class="lrow">Comment</div><div class="rrow">{{ catro_user_notification.comment }}</div>
-            {% endif %}
-            {% if catro_user_notification.likeFrom is defined %}
-              <div class="lrow">Like from</div><div class="rrow">{{ catro_user_notification.likeFrom }}</div>
-            {% endif %}
-            {% if catro_user_notification.follower is defined %}
-              <div class="lrow">Follower</div><div class="rrow">{{ catro_user_notification.follower }}</div>
-            {% endif %}
-            {% if catro_user_notification.program is defined %}
-              <div class="lrow">Program</div><div class="rrow">{{ catro_user_notification.program }}</div>
-            {% endif %}
-                <div class="lrow separator"></div><div class="rrow separator"></div>
-          {%  endfor %}
-
-          </div>
-
-        </div>
-
-        <div class="mtable">
           <div class="table-name">Notifications (for this user)</div>
 
           {% if notifications is empty %} <div>No entries for this user</div> {%  endif %}
@@ -203,11 +167,31 @@
           {% for notification in notifications %}
             <div class="lrow">ID</div><div class="rrow">{{ notification.id }}</div>
             <div class="lrow">User</div><div class="rrow">{{ notification.user }}</div>
-            <div class="lrow">Upload</div><div class="rrow">{{ notification.upload }}</div>
-            <div class="lrow">Report</div><div class="rrow">{{ notification.report }}</div>
-            <div class="lrow">Summary</div><div class="rrow">{{ notification.summary }}</div>
-            <div class="lrow separator"></div><div class="rrow separator"></div>
+            <div class="lrow">Title</div><div class="rrow">{{ notification.title}}</div>
+            <div class="lrow">Message</div><div class="rrow">{{ notification.message }}</div>
+            <div class="lrow">Seen</div><div class="rrow">{{ notification.seen }}</div>
+            {% if notification.price is defined %}
+              <div class="lrow">Price</div><div class="rrow">{{ notification.price }}</div>
+            {%  endif %}
+            {% if notification.imagePath is defined %}
+              <div class="lrow">Image Path</div><div class="rrow">{{ notification.imagePath }}</div>
+            {% endif %}
+            {% if notification.comment is defined %}
+              <div class="lrow">Comment</div><div class="rrow">{{ notification.comment }}</div>
+            {% endif %}
+            {% if notification.likeFrom is defined %}
+              <div class="lrow">Like from</div><div class="rrow">{{ notification.likeFrom }}</div>
+            {% endif %}
+            {% if notification.follower is defined %}
+              <div class="lrow">Follower</div><div class="rrow">{{ notification.follower }}</div>
+            {% endif %}
+            {% if notification.program is defined %}
+              <div class="lrow">Program</div><div class="rrow">{{ notification.program }}</div>
+            {% endif %}
+                <div class="lrow separator"></div><div class="rrow separator"></div>
           {%  endfor %}
+
+          </div>
 
         </div>
     </div>

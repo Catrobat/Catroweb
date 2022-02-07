@@ -10,7 +10,7 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
   createLinks()
   getApkStatus()
 
-  // -------------------------- Utils
+  // -------------------------- FileHelper
 
   function createLinks () {
     $('#description').each(function () {

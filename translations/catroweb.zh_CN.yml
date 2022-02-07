@@ -27,6 +27,7 @@ reportIt: 是的，我要举报
 areYouSure: 您确定吗？
 noWayOfReturn: 再也无法恢复您的操作！
 download: 下载项目
+name: 名称
 description: 描述
 noDescription: 没有可用的描述
 credits: 致谢
@@ -172,6 +173,8 @@ programs:
   deleted_popup: 评论已成功删除。
   deleted_popup_header: 已删除
   noAdminRights: 您没有管理员权限。请以管理员身份登录。
+  editName: Edit the project name
+  closeNameEditor: Close name editor
   editDescription: 编辑项目描述
   closeDescriptionEditor: 关闭描述编辑器
   editCredits: Edit the project credits
