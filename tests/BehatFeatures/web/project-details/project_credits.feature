@@ -53,7 +53,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "These are new notes and credits"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
@@ -69,7 +69,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "These are new notes and credits"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
     Then the element "#credits" should be visible
@@ -84,7 +84,7 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "These are new notes and credits"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
     And I wait for AJAX to finish
