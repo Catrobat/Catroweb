@@ -860,6 +860,16 @@ services:
       - App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController
     public: true
 
+  admin.block.statistics.project_custom_translation:
+    class: App\Admin\Statistics\Translation\ProjectCustomTranslationAdmin
+    tags:
+      - { name: sonata.admin, manager_type: orm, label: "Project Custom Translation" }
+    arguments:
+      - ~
+      - App\DB\Entity\Translation\ProjectCustomTranslation
+      - ~
+    public: true
+
   admin.block.statistics.comment_machine_translation:
     class: App\Admin\Statistics\Translation\CommentMachineTranslationAdmin
     tags:
