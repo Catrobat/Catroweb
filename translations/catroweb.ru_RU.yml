@@ -173,8 +173,8 @@ programs:
   deleted_popup: Комментарий был успешно удален.
   deleted_popup_header: '﻿Удалено'
   noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
+  editName: Изменить название проекта
+  closeNameEditor: Закрыть редактор
   editDescription: Редактировать описание проекта
   closeDescriptionEditor: Закрыть редактор описания
   editCredits: Редактировать примечания и информацию об авторах проекта
