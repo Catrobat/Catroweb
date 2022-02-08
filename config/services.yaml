@@ -40,6 +40,7 @@ parameters:
   catrobat.thumbnail.dir:               "%catrobat.pubdir%resources/thumbnails/"
   catrobat.thumbnail.path:              "resources/thumbnails/"
   catrobat.translations.dir:            "%kernel.project_dir%/translations"
+  catrobat.translations.project_cache_threshold: 15
   catrobat.upload.temp.dir:             "%catrobat.pubdir%resources/tmp/uploads/"
   catrobat.upload.temp.path:            "resources/tmp/uploads/"
   es_host:                              "%env(ES_HOST)%"
