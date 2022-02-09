@@ -49,7 +49,7 @@ Feature: Projects should have descriptions that can be changed by the project ow
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "This is a new description"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
@@ -65,7 +65,7 @@ Feature: Projects should have descriptions that can be changed by the project ow
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "This is a new description"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
     Then the element "#description" should be visible
@@ -80,7 +80,7 @@ Feature: Projects should have descriptions that can be changed by the project ow
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "This is a new description"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
     And I wait for AJAX to finish

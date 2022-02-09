@@ -48,7 +48,7 @@ Feature: Projects should have a name that can be changed by the project owner
     When I click "#edit-name-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "This is a new name"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
@@ -64,7 +64,7 @@ Feature: Projects should have a name that can be changed by the project owner
     When I click "#edit-name-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "This is a new name"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
     Then the element "#name" should be visible
@@ -79,7 +79,7 @@ Feature: Projects should have a name that can be changed by the project owner
     When I click "#edit-name-button"
     And I wait for AJAX to finish
     Then I fill in "edit-text" with "This is a new name"
-    And I click "#edit-close-button"
+    And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
     Then the element "#edit-text" should be visible

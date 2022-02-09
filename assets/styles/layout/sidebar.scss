@@ -92,6 +92,11 @@ $sidebar-width: 250px;
       left: $sidebar-width;
       width: calc(100vw - #{$sidebar-width});
     }
+
+    .full-screen {
+      left: $sidebar-width;
+      width: calc(100vw - #{$sidebar-width});
+    }
   }
 }
 

@@ -52,16 +52,7 @@
 <div class="row">
   <div class="col">
     {% if app.user and my_program %}
-      <div id="edit-text-ui" class="d-none mb-5">
-        <div class="mt-3">
-          <span class="h2" id="edit-headline"></span>
-            <span>
-              <i data-bs-toggle="tooltip"
-                 id="edit-close-button" class="ml-3 material-icons catro-icon-button align-bottom">
-                close
-              </i>
-            </span>
-        </div>
+      <div id="edit-text-ui" class="d-none mb-5 full-screen">
         <div id="edit-text-instruction"></div>
         <div id="edit-text-error" style="display:none;" class="alert alert-danger"></div>
         <label id="edit-mdc-text-field"

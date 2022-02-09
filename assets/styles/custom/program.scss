@@ -613,6 +613,20 @@ input[type="number"] {
   }
 }
 
+.full-screen {
+  position: fixed;
+  top: 50px;
+  left: 0;
+  z-index: 100;
+  width: 100vw;
+  height: calc(100vh - 50px);
+  padding-top: 1rem;
+  padding-right: math.div($grid-gutter-width, 2);
+  padding-left: math.div($grid-gutter-width, 2);
+  overflow-y: auto;
+  background: #fff;
+}
+
 @media only screen and (min-width: 768px) {
   .sign-app-form {
     label {
