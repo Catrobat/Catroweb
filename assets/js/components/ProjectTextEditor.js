@@ -2,12 +2,14 @@ import $ from 'jquery'
 import { MDCSelect } from '@material/select'
 import { ProgramEditorDialog } from '../custom/ProgramEditorDialog'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
+import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
 
 export function ProjectTextEditor (projectDescriptionCredits, defaultText, programId) {
   const self = this
   this.defaultText = defaultText
   this.programId = programId
 
+  this.body = $('body')
   this.editTextUI = $('#edit-text-ui')
   this.editText = $('#edit-text')
   this.editTextError = $('#edit-text-error')
@@ -39,13 +41,6 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
   )
 
   $('#edit-submit-button').on('click', () => { this.save() })
-  $('#edit-close-button').on('click', () => {
-    if (this.areChangesSaved()) {
-      this.close()
-    } else {
-      this.closeEditorDialog.show(closeEditorDialogResult)
-    }
-  })
 
   this.languageSelect.listen('MDCSelect:change', () => {
     if (!this.editText.is(':visible') || this.languageSelect.selectedIndex === this.previousIndex) {
@@ -60,6 +55,14 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
     }
   })
 
+  this.popStateHandler = function () {
+    if (self.areChangesSaved()) {
+      self.close()
+    } else {
+      self.closeEditorDialog.show(closeEditorDialogResult)
+    }
+  }
+
   $(document).ready(getLanguages)
 
   this.show = (config, initialText, closedCallback) => {
@@ -70,8 +73,6 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
     this.editText.maxLength = config.maxLength
     this.snackbar = config.snackbar
     this.closedCallback = closedCallback
-    $('#edit-headline').text(config.headline)
-    $('#edit-close-button').attr('title', config.closeText)
     $('#edit-text-instruction').text(config.instruction)
 
     const langaugeSelectElement = $('#edit-language-selector')
@@ -81,11 +82,27 @@ export function ProjectTextEditor (projectDescriptionCredits, defaultText, progr
       langaugeSelectElement.addClass('d-none')
     }
 
+    window.history.pushState(
+      { type: 'ProjectTextEditor', id: programId, full: true },
+      $(this).text(),
+      '#' + programId
+    )
+
+    $(window).on('popstate', this.popStateHandler)
+    showCustomTopBarTitle(config.headline, function () {
+      window.history.back()
+    })
+
+    this.body.addClass('overflow-hidden')
     this.editTextUI.removeClass('d-none')
   }
 
   // region private
   this.close = () => {
+    $(window).off('popstate', this.popStateHandler)
+    showDefaultTopBarTitle()
+
+    this.body.removeClass('overflow-hidden')
     self.editTextError.hide()
     this.editTextUI.addClass('d-none')
     this.reset()

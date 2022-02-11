@@ -40,6 +40,7 @@ parameters:
   catrobat.thumbnail.dir:               "%catrobat.pubdir%resources/thumbnails/"
   catrobat.thumbnail.path:              "resources/thumbnails/"
   catrobat.translations.dir:            "%kernel.project_dir%/translations"
+  catrobat.translations.project_cache_threshold: 15
   catrobat.upload.temp.dir:             "%catrobat.pubdir%resources/tmp/uploads/"
   catrobat.upload.temp.path:            "resources/tmp/uploads/"
   es_host:                              "%env(ES_HOST)%"
@@ -75,6 +76,7 @@ services:
       $catrobat_file_extract_dir: "%catrobat.file.extract.dir%"
       $program_finder: '@fos_elastica.finder.app_program'
       $user_finder: '@fos_elastica.finder.app_user'
+      $refresh_token_ttl: '%lexik_jwt_authentication.token_ttl%'
 
 
   # ====================================================================================================================

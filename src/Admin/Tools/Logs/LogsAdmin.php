@@ -20,9 +20,5 @@ class LogsAdmin extends AbstractAdmin
   protected function configureRoutes(RouteCollection $collection): void
   {
     $collection->clearExcept(['list']);
-    $collection->add('apk')
-      ->add('extracted')
-      ->add('backup')
-    ;
   }
 }

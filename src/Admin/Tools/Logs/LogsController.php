@@ -10,13 +10,11 @@ use Symfony\Component\HttpFoundation\Response;
 class LogsController extends CRUDController
 {
   public const LOG_DIR = '../var/log/';
-
   public const LOG_PATTERN = '*.log';
 
   public const FILTER_LEVEL_DEBUG = 0;
   public const FILTER_LEVEL_INFO = 1;
   public const FILTER_LEVEL_NOTICE = 2;
-
   public const FILTER_LEVEL_WARNING = 3;
   public const FILTER_LEVEL_ERROR = 4;
   public const FILTER_LEVEL_CRITICAL = 5;

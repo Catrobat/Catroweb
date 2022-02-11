@@ -1414,14 +1414,21 @@ class DataFixturesContext implements KernelAwareContext
       $target_language = $translation->getTargetLanguage();
       $provider = $translation->getProvider();
       $usage_count = $translation->getUsageCount();
+      $cached_name = $translation->getCachedName();
+      $cached_description = $translation->getCachedDescription();
+      $cached_credits = $translation->getCachedCredits();
 
       $matching_row = array_filter($table_rows,
-        function ($row) use ($project_id, $source_language, $target_language, $provider, $usage_count) {
+        function ($row) use ($project_id, $source_language, $target_language, $provider, $usage_count, $cached_name,
+          $cached_description, $cached_credits) {
           return $project_id == $row['project_id']
             && $source_language == $row['source_language']
             && $target_language == $row['target_language']
             && $provider == $row['provider']
-            && $usage_count == $row['usage_count'];
+            && $usage_count == $row['usage_count']
+            && $cached_name == ($row['cached_name'] ?? null)
+            && $cached_description == ($row['cached_description'] ?? null)
+            && $cached_credits == ($row['cached_credits'] ?? null);
         });
 
       Assert::assertEquals(1, count($matching_row), "row not found: {$project_id}");

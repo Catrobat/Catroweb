@@ -6,9 +6,10 @@ Feature: Persist project and comment translation
       | id | name     |
       | 1  | Catrobat |
     And there are projects:
-      | id | name     | owned by | description | credit |
-      | 1  | project1 | Catrobat |             |        |
-      | 2  | project2 | Catrobat |             |        |
+      | id | name     | owned by | description  | credit  |
+      | 1  | project1 | Catrobat |              |         |
+      | 2  | project2 | Catrobat |              |         |
+      | 3  | project3 | Catrobat | description3 | credit3 |
     And there are comments:
       | id | program_id | user_id | text |
       | 1  | 2          | 1       | c1   |
@@ -40,6 +41,19 @@ Feature: Persist project and comment translation
       | project_id | source_language | target_language | provider   | usage_count |
       | 1          | en              | fr-FR           | itranslate | 3           |
       | 2          | en              | fr-FR           | itranslate | 1           |
+
+  Scenario: Cache program translation if used often
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count |
+      | 3          | en              | fr-FR           | itranslate | 15          |
+    And I switch the language to "French"
+    And I am on "/app/project/3"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then there should be project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
 
   Scenario: Create new entry the first time a comment is translated
     Given there are comment machine translations:
