@@ -45,7 +45,7 @@
                         {% endfor %}
                     </div>
 
-                    <form action="/app/downloadLogs/" method="post">
+                    <form action="/admin/downloadLogs/" method="post">
                         <input id="currentFile" name="file" type="hidden" value="{{ files[0] }}">
                         <input value="Download this file" type="submit" formtarget="_blank" class="btn panel-heading">
                     </form>

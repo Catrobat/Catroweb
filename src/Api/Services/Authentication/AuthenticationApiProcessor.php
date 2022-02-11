@@ -9,7 +9,6 @@ use App\Security\PasswordGenerator;
 use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Firebase\JWT\JWT;
-use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use OpenAPI\Server\Model\JWTResponse;
@@ -20,31 +19,24 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   private AuthenticationManager $authentication_manager;
   private UserManager $user_manager;
   private JWTTokenManagerInterface $jwt_manager;
-  private RefreshTokenGeneratorInterface $refresh_token_generator;
-  protected int $refresh_token_ttl;
 
   public function __construct(UserManager $user_manager,
                               JWTTokenManagerInterface $jwt_manager,
-                              AuthenticationManager $authentication_manager,
-                              RefreshTokenGeneratorInterface $refresh_token_generator,
-                              int $refresh_token_ttl // bind in services.yml
-  )
-  {
+                              AuthenticationManager $authentication_manager
+  ) {
     $this->user_manager = $user_manager;
     $this->authentication_manager = $authentication_manager;
     $this->jwt_manager = $jwt_manager;
-    $this->refresh_token_generator = $refresh_token_generator;
-    $this->refresh_token_ttl = $refresh_token_ttl;
   }
 
   public function createJWTByUser(User $user): string
   {
-    return $this->jwt_manager->create($user);
+    return $this->authentication_manager->createAuthenticationTokenFromUser($user);
   }
 
   public function createRefreshTokenByUser(User $user): string
   {
-    return $this->refresh_token_generator->createForUserWithTtl($user, $this->refresh_token_ttl);
+    return $this->authentication_manager->createRefreshTokenByUser($user);
   }
 
   /**
@@ -176,13 +168,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
 
   public function deleteRefreshToken(string $x_refresh): bool
   {
-    $refreshToken = $this->refresh_token_generator->get($x_refresh);
-    if (null === $refreshToken) {
-      return false;
-    }
-    $this->refresh_token_generator->delete($refreshToken);
-
-    return true;
+    return $this->authentication_manager->deleteRefreshToken($x_refresh);
   }
 
   protected function createRandomUsername($name = null): string
