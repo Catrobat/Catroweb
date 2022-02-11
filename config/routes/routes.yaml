@@ -5,6 +5,13 @@ Application/Controller:
     requirements:
         theme: '%themeRoutes%'
 
+Admin/Controller:
+    resource: ../../src/Admin/
+    type: annotation
+    prefix: /admin/
+    requirements:
+        theme: 'admin'
+
 Api_deprecated/Controller:
     resource: ../../src/Api_deprecated/Controller
     type: annotation

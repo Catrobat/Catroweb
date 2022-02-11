@@ -119,11 +119,12 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     }
 
     $token = $this->facade->getProcessor()->createJWTByUser($user);
+    $refresh_token = $this->facade->getProcessor()->createRefreshTokenByUser($user);
     $responseCode = Response::HTTP_OK;
 
     return (new JWTResponse())
       ->setToken($token)
-      ->setRefreshToken('ToDo')
+      ->setRefreshToken($refresh_token)
     ;
   }
 }
