@@ -76,6 +76,7 @@ services:
       $catrobat_file_extract_dir: "%catrobat.file.extract.dir%"
       $program_finder: '@fos_elastica.finder.app_program'
       $user_finder: '@fos_elastica.finder.app_user'
+      $refresh_token_ttl: '%lexik_jwt_authentication.token_ttl%'
 
 
   # ====================================================================================================================
