@@ -43,6 +43,7 @@ add('shared_files',
     '.env.prod.local',
     '.env.dev.local',
     'google_cloud_key.json',
+    '.dkim/private.key',
   ]);
 
 // Symfony writable dirs

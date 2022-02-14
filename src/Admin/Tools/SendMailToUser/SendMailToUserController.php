@@ -3,23 +3,20 @@
 namespace App\Admin\Tools\SendMailToUser;
 
 use App\DB\Entity\User\User;
+use App\System\Mail\MailerAdapter;
 use App\User\UserManager;
 use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 
 class SendMailToUserController extends CRUDController
 {
-  protected MailerInterface $mailer;
+  protected MailerAdapter $mailer;
   protected UserManager $user_manager;
   protected LoggerInterface $logger;
 
-  public function __construct(MailerInterface $mailer, UserManager $user_manager, LoggerInterface $logger)
+  public function __construct(MailerAdapter $mailer, UserManager $user_manager, LoggerInterface $logger)
   {
     $this->user_manager = $user_manager;
     $this->mailer = $mailer;
@@ -48,22 +45,13 @@ class SendMailToUserController extends CRUDController
       return new Response('Empty message!');
     }
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
-
     $mailTo = $user->getEmail();
-    try {
-      $email = (new TemplatedEmail())
-        ->from(new Address('share@catrob.at'))
-        ->to($mailTo)
-        ->subject($subject)
-        ->htmlTemplate('Admin/Tools/Email/simple_message.html.twig')
-        ->context([
-          ['message' => $htmlText],
-        ])
-      ;
-      $this->mailer->send($email);
-    } catch (TransportExceptionInterface $e) {
-      $this->logger->error("Can't send email to {$mailTo}; Reason ".$e->getMessage());
-    }
+    $this->mailer->send(
+      $mailTo,
+      $subject,
+      'Admin/Tools/Email/simple_message.html.twig',
+      ['message' => $htmlText]
+    );
 
     return new Response('OK - message sent');
   }
