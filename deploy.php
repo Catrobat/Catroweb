@@ -52,6 +52,7 @@ set('writable_dirs',
     'var/cache',
     'var/log',
     'var/sessions',
+    'public/resources'
   ]);
 
 // Symfony executable and variable directories
