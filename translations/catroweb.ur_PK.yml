@@ -498,7 +498,7 @@ failure:
   upload: آپ کے ایپ کے اپ لوڈ کے دوران ایک غلطی تھی.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'اپنے ای میل کی تصدیق کریں۔'
 api:
   registerUser:
     emailMissing: 'ای میل موجود نہیں'
@@ -847,4 +847,4 @@ media_library:
       movie: 'ویڈیو'
       default: 'نامعلوم'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'درخواست کردہ پروجیکٹ دستیاب نہیں ہے۔'
