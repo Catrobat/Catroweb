@@ -3,14 +3,11 @@
 namespace App\User\EventListener;
 
 use App\DB\Entity\User\User;
+use App\System\Mail\MailerAdapter;
 use App\User\Achievements\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
 use Exception;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Twig\Mime\TemplatedEmail;
-use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Address;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
@@ -18,13 +15,14 @@ class UserPostPersistNotifier
 {
   protected AchievementManager $achievement_manager;
   protected VerifyEmailHelperInterface $verify_email_helper;
-  protected MailerInterface $mailer;
+  protected MailerAdapter $mailer;
   protected LoggerInterface $logger;
   protected TranslatorInterface $translator;
 
   public function __construct(AchievementManager $achievement_manager,
                                 VerifyEmailHelperInterface $verify_email_helper,
-                                MailerInterface $mailer, LoggerInterface $logger,
+                                MailerAdapter $mailer,
+                              LoggerInterface $logger,
                                 TranslatorInterface $translator)
   {
     $this->translator = $translator;
@@ -50,27 +48,20 @@ class UserPostPersistNotifier
 
   protected function sendVerifyEmail(User $user): void
   {
-    try {
-      $signatureComponents = $this->verify_email_helper->generateSignature(
-                'registration_confirmation_route',
-                $user->getId(),
-                $user->getEmail()
-            );
+    $signatureComponents = $this->verify_email_helper->generateSignature(
+      'registration_confirmation_route',
+      $user->getId(),
+      $user->getEmail()
+    );
 
-      $email = (new TemplatedEmail())
-        ->from(new Address('share@catrob.at'))
-        ->to($user->getEmail())
-        ->subject($this->translator->trans('user.verification.email', [], 'catroweb'))
-        ->htmlTemplate('security/registration/confirmation_email.html.twig')
-        ->context([
-          'signedUrl' => $signatureComponents->getSignedUrl(),
-          'user' => $user,
-        ])
-      ;
-
-      $this->mailer->send($email);
-    } catch (TransportExceptionInterface $e) {
-      $this->logger->critical("Can't send verification email to \"".$user->getEmail().'" '.$e->getMessage());
-    }
+    $this->mailer->send(
+      $user->getEmail(),
+      $this->translator->trans('user.verification.email', [], 'catroweb'),
+      'security/registration/confirmation_email.html.twig',
+      [
+        'signedUrl' => $signatureComponents->getSignedUrl(),
+        'user' => $user,
+      ]
+    );
   }
 }

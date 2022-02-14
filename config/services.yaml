@@ -465,6 +465,12 @@ services:
     tags:
       - { name: monolog.processor }
 
+  # ======== Mails ========
+
+  App\System\Mail\MailerAdapter:
+    class: App\System\Mail\MailerAdapter
+    public: true
+
   # ======== Scratch ========
   App\Project\Scratch\ScratchProgramUpdater:
     class: App\Project\Scratch\ScratchProgramUpdater
