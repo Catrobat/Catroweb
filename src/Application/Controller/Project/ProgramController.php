@@ -9,6 +9,7 @@ use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
@@ -558,6 +559,35 @@ class ProgramController extends AbstractController
         return $this->projectCustomTranslationGetAction($request, $id);
       case 'DELETE':
         return $this->projectCustomTranslationDeleteAction($request, $id);
+      default:
+        return Response::create(null, Response::HTTP_BAD_REQUEST);
+    }
+  }
+
+  /**
+   * @Route("/translate/custom/project/{id}/list", name="project_custom_translation_language_list", methods={"GET"})
+   */
+  public function projectCustomTranslationLanguageListAction(Request $request, string $id,
+                                                             ProjectCustomTranslationRepository $repository): Response
+  {
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $project) {
+      return Response::create(null, Response::HTTP_NOT_FOUND);
+    }
+
+    if (!$request->query->has('field')) {
+      return JsonResponse::create($repository->listDefinedLanguages($project));
+    }
+
+    $field = $request->query->get('field');
+
+    switch ($field) {
+      case 'name':
+        return JsonResponse::create($repository->listDefinedLanguagesForName($project));
+      case 'description':
+        return JsonResponse::create($repository->listDefinedLanguagesForDescription($project));
+      case 'credit':
+        return JsonResponse::create($repository->listDefinedLanguagesForCredit($project));
       default:
         return Response::create(null, Response::HTTP_BAD_REQUEST);
     }
