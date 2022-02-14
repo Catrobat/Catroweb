@@ -43,7 +43,7 @@ class MailerAdapter
   protected function signEmail(Message $email): Message
   {
     try {
-      $signer = new DkimSigner('.dkim/dkim.id_rsa', 'catrob.at', 'sf');
+      $signer = new DkimSigner('.dkim/private.key', 'catrob.at', 'sf');
 
       return $signer->sign($email);
     } catch (InvalidArgumentException $e) {
