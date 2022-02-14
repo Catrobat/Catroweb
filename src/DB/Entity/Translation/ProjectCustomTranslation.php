@@ -64,9 +64,19 @@ class ProjectCustomTranslation
     return $this->project;
   }
 
+  public function setProject(Program $program): void
+  {
+    $this->project = $program;
+  }
+
   public function getLanguage(): string
   {
     return $this->language;
+  }
+
+  public function setLanguage(string $language): void
+  {
+    $this->language = $language;
   }
 
   public function getName(): ?string
