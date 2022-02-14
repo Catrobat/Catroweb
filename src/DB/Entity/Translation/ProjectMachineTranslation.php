@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\DB\EntityRepository\Project\ProjectMachineTranslationRepository")
  * @ORM\Table(name="project_machine_translation")
  * @HasLifecycleCallbacks
  */

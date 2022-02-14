@@ -1385,8 +1385,12 @@ class DataFixturesContext implements KernelAwareContext
       $target_language = $config['target_language'];
       $provider = $config['provider'];
       $usage_count = $config['usage_count'];
+      $cached_name = $config['cached_name'] ?? null;
+      $cached_description = $config['cached_description'] ?? null;
+      $cached_credits = $config['cached_credits'] ?? null;
 
       $project_machine_translation = new ProjectMachineTranslation($project, $source_language, $target_language, $provider, $usage_count);
+      $project_machine_translation->setCachedTranslation($cached_name, $cached_description, $cached_credits);
       $this->getManager()->persist($project_machine_translation);
     }
     $this->getManager()->flush();
