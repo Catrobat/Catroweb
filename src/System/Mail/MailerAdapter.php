@@ -15,11 +15,16 @@ class MailerAdapter
 {
   protected MailerInterface $mailer;
   protected LoggerInterface $logger;
+  protected string $dkim_private_key_path;
 
-  public function __construct(MailerInterface $mailer, LoggerInterface $logger)
-  {
+  public function __construct(
+    MailerInterface $mailer,
+    LoggerInterface $logger,
+    string $dkim_private_key_path // bind in services!
+  ) {
     $this->mailer = $mailer;
     $this->logger = $logger;
+    $this->dkim_private_key_path = $dkim_private_key_path;
   }
 
   public function send(string $to, string $subject, string $template, array $context = []): void
@@ -43,12 +48,10 @@ class MailerAdapter
   protected function signEmail(Message $email): Message
   {
     try {
-      $signer = new DkimSigner('.dkim/private.key', 'catrob.at', 'sf');
-
-      return $signer->sign($email);
+      return (new DkimSigner($this->dkim_private_key_path, 'catrob.at', 'sf'))->sign($email);
     } catch (InvalidArgumentException $e) {
       if ('prod' === $_ENV['APP_ENV']) {
-        $this->logger->error('Private dkim key is missing: '.$e->getMessage());
+        $this->logger->error("Private dkim key is missing ({$this->dkim_private_key_path}): ".$e->getMessage());
       }
 
       return $email;

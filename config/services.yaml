@@ -45,6 +45,7 @@ parameters:
   catrobat.upload.temp.path:            "resources/tmp/uploads/"
   es_host:                              "%env(ES_HOST)%"
   es_port:                              "%env(ES_PORT)%"
+  dkim.private.key:                     "%kernel.project_dir%/.dkim/private.key"
 
   #      This can drastically improve DX by reducing the time to load classes
   container.dumper.inline_class_loader: true
@@ -77,6 +78,7 @@ services:
       $program_finder: '@fos_elastica.finder.app_program'
       $user_finder: '@fos_elastica.finder.app_user'
       $refresh_token_ttl: '%lexik_jwt_authentication.token_ttl%'
+      $dkim_private_key_path: "%dkim.private.key%"
 
 
   # ====================================================================================================================
