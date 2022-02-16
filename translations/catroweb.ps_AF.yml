@@ -124,7 +124,7 @@ programs:
     ایا تاسو ډاډه یاست چې تاسو غواړئ خپل حساب حذف کړئ؟ دا به ستاسو اپلوډ شوي پروژې او نظرونه هم حذف کړي!
     هو، دا حذف کړئ!
     لغوه کړئ
-  tooLongName: The project name is too long!
+  tooLongName: د پروژې نوم ډیر اوږد دی!
   tooLongDescription: د پروژې تفصیل ډیر اوږد دی!
   tooLongCredits: The project credits are too long!
   most:
@@ -138,8 +138,8 @@ programs:
   likes:
     likersTitle: "هغه خلک چې دې پروژې ته یې غبرګون ښودلی"
     all: "ټول"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  remixes: '{0}0 ریمکسونه |{1}1 ریمکس |]1,Inf]%remixes% ریمکس'
+  newRemixesNotificationTitle: '|{1}"%%programName%" 1 نوي ریمکسونه لري: |]1,Inf] "%programName%" %remixes%% نوي ریمکسونه لري:'
   submitted: سپارل شوې پروژې
   uploaded: پورته شوي پروژې
   reportAsInappropriate: د نامناسب په توګه راپور ورکړئ
@@ -155,9 +155,9 @@ programs:
   reportOwnProgram: تاسو نشئ کولی خپله پروژه پرچم کړئ.
   reportAlready: تاسو لا دمخه د دې پروژې نښه کړې ده.
   reportDone: تاسو د دې پروژې راپور ورکړی!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeaderDownload: ډاونلوډ ممکن نه وي
+  updateAppTextDownload: مهرباني وکړئ خپل اپلیکیشن نوي نسخه ته تازه کړئ. په یاد ولرئ چې د Android ټولې ځانګړتیاوې لا دمخه په IOS کې شتون نلري.
+  updateAppTextDownloadApk: د APK ډاونلوډ اوس مهال یوازې په Android کې شتون لري نه په IOS کې.
   updateAppHeader: اپلیکیشن تازه کړئ
   updateAppText: مهرباني وکړئ خپل اپلیکیشن نوي نسخه ته تازه کړئ ترڅو د دې پروژې ډاونلوډ کولو وړ وي.
   btnClosePopup: سمه ده
@@ -172,15 +172,15 @@ programs:
   deleted_popup: تبصره په بریالیتوب سره ړنګه شوه.
   deleted_popup_header: ړنګ شوی
   noAdminRights: تاسو د اداري حق نه لرئ. مهرباني وکړئ د مدیر په توګه ننوتل.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
+  editName: د پروژې نوم سم کړئ
+  closeNameEditor: د نوم مدیر بند کړئ
   editDescription: د پروژې توضیحات سم کړئ
-  closeDescriptionEditor: Close description editor
+  closeDescriptionEditor: د توضیحاتو مدیر بند کړئ
   editCredits: Edit the project credits
-  closeCreditsEditor: Close credits editor
+  closeCreditsEditor: د کریډیټ مدیر بند کړئ
   closeEditorPrompt: ایا تاسو غواړئ خپل بدلونونه خوندي کړئ؟
-  saveOnLanguageChange: Would you like to keep your current changes?
-  btnKeep: Keep Changes
+  saveOnLanguageChange: ایا تاسو غواړئ خپل اوسني بدلونونه وساتئ؟
+  btnKeep: بدلونونه وساتئ
   btnDiscard: رد کړئ
   addComment: تبصره ولیکئ
   thumbsUp: تړون!
@@ -194,9 +194,9 @@ programs:
   downloadStartText: ډاونلوډ پیل شو ...
   showTranslation: ژباړه ښکاره کړئ
   hideTranslation: ژباړه پټ کړئ
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translatedByLine: '%provider%لخوا ژباړل شوی له %sourceLanguage% څخه تر %targetLanguage%'
+  translationSaved: د پروګرام لپاره %language% ته ژباړه %section% خوندي شوه
+  translationDeleted: د پروګرام لپاره %language% ته ژباړه %section%حذف شوې
   default: ډیفالټ
   save: خوندي کړئ
 remixGraph:
@@ -220,42 +220,44 @@ accountConfirmation:
     ستاسو د Catrobat ټیم.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    ګرانه %username%. <br>
+    د خپل حساب فعالولو پای ته رسولو لپاره - مهرباني وکړئ کلیک وکړئ<a href=%confirmationUrl%></a><br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    دا لینک یوازې یو ځل ستاسو د حساب تصدیق کولو لپاره کارول کیدی شي.<br>
     <br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    په درنښت،<br>
+    ستاسو د Catrobat ټیم.
     </p>
 passwordRecovery:
   subject: ستاسو د Catrobat پټنوم بیا رغونه
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    ګرانه %username%.
+    تاسو په %appplication_url% کې د خپل پټنوم د بیا تنظیمولو غوښتنه کړې ده ځکه چې تاسو خپل پټنوم هیر کړی دی.
+    که تاسو دا غوښتنه نه ده کړې، مهرباني وکړئ دا یې له پامه غورځوئ. دا به په 24 ساعتونو کې پای ته ورسیږي او بې ګټې شي.
+    د خپل پټنوم بیا تنظیمولو او یو نوی جوړولو لپاره، مهرباني وکړئ لاندې پاڼې ته لاړ شئ:
+    %confirmationUrl%
+    تاسو کولی شئ خپل کارن-نوم او خپل پټنوم په هر وخت کې د %appplication_url% ټولنې ته د لاسرسي لپاره وکاروئ.
+    د دې کولو لپاره، یوازې لاندې پاڼې ته لاړ شئ: %loginPage%
+    د خپل پروفایل توضیحاتو سمولو لپاره، دې پاڼې ته لاړ شئ: %profilePage%
+    غوره احترامات،
+    ستاسو د Catrobat ټیم.
+
+
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    ګرانه %username%.<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    تاسو په <a href=%appplication_url%>جیب کوډ</a> کې د خپل پټنوم د بیا تنظیمولو غوښتنه کړې ځکه چې تاسو خپل پټنوم هیر کړی دی.
+    که تاسو دا غوښتنه نه ده کړې، مهرباني وکړئ دا یې له پامه غورځوئ. دا به په 24 ساعتونو کې پای ته ورسیږي او بې ګټې شي.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    د دې لپاره چې خپل پټنوم بیا تنظیم کړئ او یو نوی جوړ کړئ، مهرباني وکړئ کلیک وکړئ<a href=%confirmationUrl%>دلته.</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    تاسو کولی شئ هر وخت خپل کارن نوم او پټنوم وکاروئ ترڅو د<a href=%appplication_url%>د جیب کوډ</a> ټولنې ته لاسرسی ومومئ.<br>
+    د دې کولو لپاره، یوازې لاندې پاڼې ته لاړ شئ:<a href=%loginPage%>د ننوتلو پاڼه</a><br>
+    د خپل پروفایل توضیحاتو سمولو لپاره، دې <a href=%profilePage%>پاڼې ته لاړ شئ</a>.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    غوره احترامات،<br>
+    ستاسو د Catrobat ټیم.
     </p>
 profile:
   edit: خپل پروفایل سم کړئ
@@ -401,7 +403,7 @@ login:
   passwordSecond: د پټنوم تایید
 register:
   title: ګډون کول
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "په دوام ورکولو سره، تاسو د Catrobat ټولنې حساب ترتیب کوئ او زموږ سره موافق یاست %var1% او%var2%."
   button:
     cancel: لغوه کړئ
     createAccount: ګڼون جوړول
@@ -413,13 +415,13 @@ accountRecovery:
     submit: پټنوم بیرته ترلاسه کړئ
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "خپل پټنوم بیا تنظیم کړئ"
+    description: "که تاسو د خپل حساب بریښنالیک په یاد ولرئ موږ کولی شو تاسو ته ستاسو د پټنوم د بیا تنظیمولو لپاره لینک واستوو."
     button:
-      submit: "Send reset email"
+      submit: "د ری سیٹ بریښنالیک واستوئ"
       cancel: "لغوه کړئ"
   check:
-    title: "Check your emails"
+    title: "خپل بریښنالیکونه چیک کړئ"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
     description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
     tryAgain: "try again"
@@ -429,7 +431,7 @@ resetPassword:
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
   reset:
-    title: "Reset your password"
+    title: "خپل پټنوم بیا تنظیم کړئ"
     button:
       submit: "پټنوم بیا تنظیم کړئ"
 apk:

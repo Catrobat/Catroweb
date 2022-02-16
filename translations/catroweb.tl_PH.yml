@@ -432,7 +432,7 @@ resetPassword:
   reset:
     title: "Reset your password"
     button:
-      submit: "Reset password"
+      submit: "Baguhin ang password"
 apk:
   download: Download as app
   prepare: 'Get as app'
@@ -612,7 +612,7 @@ codeview:
   bricks: 'Bricks'
   objects: 'Aktor at mga bagay'
   looks: 'Larawan'
-  sounds: 'Sounds'
+  sounds: 'Tunog'
   globals: 'Globals'
   locals: 'Locals'
   globalVariables: 'Global variables'
