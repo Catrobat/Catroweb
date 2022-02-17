@@ -8,6 +8,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     And there are projects:
       | id | name      | owned by | description    |
       | 1  | project 1 | Catrobat | my description |
+    And I wait 1000 milliseconds
 
   Scenario: Custom translation editor should be visible
     Given I log in as "Catrobat"
@@ -25,6 +26,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -41,6 +43,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -51,6 +54,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -66,6 +70,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -82,6 +87,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-description-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"

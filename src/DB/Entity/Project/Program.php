@@ -360,6 +360,11 @@ class Program
   private Collection $custom_translations;
 
   /**
+   * No ORM entry.
+   */
+  private bool $should_invalidate_translation_cache = false;
+
+  /**
    * Program constructor.
    */
   public function __construct()
@@ -440,6 +445,7 @@ class Program
   public function setName(string $name): Program
   {
     $this->name = $name;
+    $this->should_invalidate_translation_cache = true;
 
     return $this;
   }
@@ -452,6 +458,7 @@ class Program
   public function setDescription(?string $description): Program
   {
     $this->description = $description;
+    $this->should_invalidate_translation_cache = true;
 
     return $this;
   }
@@ -464,6 +471,7 @@ class Program
   public function setCredits(?string $credits): Program
   {
     $this->credits = $credits;
+    $this->should_invalidate_translation_cache = true;
 
     return $this;
   }
@@ -980,5 +988,10 @@ class Program
     $this->rand = $rand;
 
     return $this;
+  }
+
+  public function shouldInvalidateTranslationCache(): bool
+  {
+    return $this->should_invalidate_translation_cache;
   }
 }
