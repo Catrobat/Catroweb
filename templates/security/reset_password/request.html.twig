@@ -1,10 +1,15 @@
 {% extends 'Default/base.html.twig' %}
 
+{% block head %}
+  {{ encore_entry_link_tags('request') }}
+{% endblock %}
+
 {% block body %}
 
+<div class="content-card">
   <div class="row justify-content-center">
-    <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-4">
-      <h1 class="h2">{{ "resetPassword.request.title"|trans({}, "catroweb") }}</h1>
+    <div class="login-container mb-4">
+      <h1>{{ "resetPassword.request.title"|trans({}, "catroweb") }}</h1>
       <p>
         {{ "resetPassword.request.description"|trans({}, "catroweb") }}
       </p>
@@ -37,4 +42,10 @@
       </div>
     </div>
   </div>
+</div>
 {% endblock %}
+
+{% block javascript %}
+{{ encore_entry_script_tags('request') }}
+{% endblock %}
+

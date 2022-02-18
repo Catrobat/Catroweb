@@ -38,11 +38,7 @@ Feature:
     Then the element "#btn-login-google" should be visible
     And the element "#btn-login-facebook" should be visible
     And the element "#btn-login-apple" should be visible
-    And I click "#btn-login-google"
-    Then the element "#termsModal" should be visible
     Given I am on "app/register"
     Then the element "#btn-login-google" should be visible
     And the element "#btn-login-facebook" should be visible
     And the element "#btn-login-apple" should be visible
-    And I click "#btn-login-facebook"
-    Then the element "#termsModal" should be visible

@@ -31,7 +31,6 @@ class MediaPackageController extends AbstractController
     return $this->render('MediaLibrary/media_library_overview.html.twig',
       [
         'packages' => $packages,
-        'new_nav' => true,
       ]
     );
   }
@@ -67,7 +66,6 @@ class MediaPackageController extends AbstractController
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories,
-      'new_nav' => true,
       'mediaDir' => '/'.$this->getParameter('catrobat.mediapackage.path'),
     ]);
   }
@@ -111,7 +109,6 @@ class MediaPackageController extends AbstractController
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories,
-      'new_nav' => true,
       'mediaDir' => '/'.$this->getParameter('catrobat.mediapackage.path'),
       'foundResults' => (count($found_media_files) ? true : false),
       'mediaSearchPath' => $url_generator->generate(

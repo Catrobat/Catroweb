@@ -51,16 +51,15 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
     if (!$user) {
       return; // Do not reveal whether a user account was found or not. Nothing to do here
     }
-    $mailTo = $user->getEmail();
     try {
       $this->mailer->send(
-        $user->getEmail(),
+        $email,
         $this->__('passwordRecovery.subject', [], $locale),
         'security/reset_password/email.html.twig',
         ['resetToken' => $this->reset_password_helper->generateResetToken($user)]
       );
     } catch (ResetPasswordExceptionInterface $e) {
-      $this->logger->error("Can't create reset token for {$mailTo}; Reason ".$e->getMessage());
+      $this->logger->error("Can't create reset token for {$email}; Reason ".$e);
     }
   }
 }

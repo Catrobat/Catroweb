@@ -44,12 +44,12 @@ final class UserResponseManager extends AbstractResponseManager
     return $users_data_response;
   }
 
-  public function createUserRegisteredResponse(string $token): JWTResponse
+  public function createUserRegisteredResponse(string $token, string $refresh_token): JWTResponse
   {
     return new JWTResponse(
       [
         'token' => $token,
-        'refresh_token' => 'ToDo!',
+        'refresh_token' => $refresh_token,
       ]
     );
   }

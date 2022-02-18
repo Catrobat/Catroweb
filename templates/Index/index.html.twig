@@ -52,11 +52,22 @@
               <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>
             </div>
           </div>
-          <div class="lazyload projects-spinner-container">
-            {% include 'components/loading_spinner.html.twig' only %}
-          </div>
           <div class="lazyload project-list__wrapper">
-            <div class="lazyload projects-container"></div>
+            <div class="lazyload projects-container">
+
+              {% for i in range(0, 10) %} {# Fill with dummy data until loaded to prevent cls #}
+                <div class="project-list__project">
+                  <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20360'%3E%3Crect%20width='360'%20height='360'%20fill='%23E8E8E8'%20/%3E%3C/svg%3E"
+                       class="project-list__project__image">
+                  <span class="project-list__project__name"></span>
+                  <div class="project-list__project__property project-list__project__property-uploaded lazyloaded">
+                    <i class="material-icons"></i>
+                    <span class="project-list__project__property__value"></span>
+                  </div>
+                </div>
+              {% endfor %}
+
+            </div>
             <div class="lazyload project-list__chevrons">
               <div class="lazyload project-list__chevrons__left material-icons mdc-icon-button" style="display: none;">
                 chevron_left

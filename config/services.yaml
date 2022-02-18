@@ -328,6 +328,14 @@ services:
     tags:
       - { name: 'doctrine.orm.entity_listener', event: 'postUpdate', entity: 'App\DB\Entity\User\User' }
 
+  App\Project\EventSubscriber\ProjectDownloadEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\User\ResetPassword\PasswordResetRequestedSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
   # ====================================================================================================================
   #   Listeners:
   #
@@ -460,8 +468,8 @@ services:
     arguments:
       - "[%%datetime%%] %%channel%%.%%level_name%%: %%message%% %%context%%
       [Client IP: %%extra.client_ip%%, User Agent: %%extra.user_agent%%, Session User: %%extra.session_user%%]\n"
-    calls:
-      - [ includeStacktraces ]
+#    calls:
+#      - [ includeStacktraces ]
 
   App\System\Log\LoggerProcessor:
     tags:
@@ -478,12 +486,6 @@ services:
     class: App\Project\Scratch\ScratchProgramUpdater
     tags:
       - { name: kernel.event_listener, event: App\Project\Event\CheckScratchProgramEvent, method: onCheckScratchProgram }
-
-  # ======== Project Downloads ========
-  App\Project\EventSubscriber\ProjectDownloadEventSubscriber:
-    class: App\Project\EventSubscriber\ProjectDownloadEventSubscriber
-    tags:
-      - { name: kernel.event_subscriber }
 
   # ======== Entity ========
 
