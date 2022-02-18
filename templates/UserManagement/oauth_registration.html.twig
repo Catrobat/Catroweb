@@ -4,30 +4,21 @@
 {% endblock %}
 
 <div class="row justify-content-center">
-  <div class="col-11 col-sm-10 col-md-8 col-lg-6 mb-3">
+  <div class="login-container mb-3">
     <span class="login-text--secondary">{{ "login.oauth.title"|trans({}, "catroweb") }}</span>
   </div>
 </div>
 
 <div class="row justify-content-center">
-  <div class="col-11 col-sm-10 col-md-8 col-lg-6">
-    <button class="btn social-login-btn me-2" id="btn-login-google" data-bs-toggle="modal" data-bs-target="#termsModal">
+  <div class="login-container" href="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}">
+    <a class="btn social-login-btn me-2" id="btn-login-google">
       <img class="social-login-btn__img" alt="Google Login" src="{{ asset('images/social/btn_google_custom.png') }}"/>
-    </button>
-    <button class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" data-bs-toggle="modal" data-bs-target="#termsModal">
+    </a>
+    <a class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" href="{{ path('hwi_oauth_service_redirect', { service: 'facebook' }) }}">
       <img class="social-login-btn__img social-login-btn__img--facebook" alt="Facebook Login" src="{{ asset('images/social/fb_logo.svg') }}"/>
-    </button>
-    <button class="btn social-login-btn me-2" id="btn-login-apple" data-bs-toggle="modal" data-bs-target="#termsModal">
+    </a>
+    <a class="btn social-login-btn me-2" id="btn-login-apple" href="{{ path('hwi_oauth_service_redirect', { service: 'apple' }) }}">
       <img class="social-login-btn__img" alt="Apple Login" src="{{ asset('images/social/apple_logo__black.svg') }}"/>
-    </button>
+    </a>
   </div>
 </div>
-
-<div class="js-oauth-registration"
-     data-hwi-oauth-google="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}"
-     data-hwi-oauth-facebook="{{ path('hwi_oauth_service_redirect', { service: 'facebook' }) }}"
-     data-hwi-oauth-apple="{{ path('hwi_oauth_service_redirect', { service: 'apple' }) }}"
-></div>
-
-
-

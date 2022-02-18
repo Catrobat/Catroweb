@@ -8,11 +8,10 @@ use App\DB\Entity\User\User;
 use App\Security\PasswordGenerator;
 use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
+use Exception;
 use Firebase\JWT\JWT;
 use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use OpenAPI\Server\Model\JWTResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 final class AuthenticationApiProcessor extends AbstractApiProcessor
 {
@@ -107,63 +106,52 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   }
 
   /**
-   * @psalm-return array{response_code: 200|422, token: JWTResponse}
+   * @throws Exception
    */
-  public function connectUserToAccount(string $id_token, string $resource_owner): array
+  public function connectUserToAccount(string $id_token, string $resource_owner): User
   {
-    $getPayloadMethod = 'getPayloadFrom'.ucfirst($resource_owner).'IdToken';
-    $payload = $this->{$getPayloadMethod}($id_token);
+    // Dynamic methods: setAppleId, setGoogleId, setFacebookId
+    $set_id = 'set'.ucfirst($resource_owner).'Id';
 
+    // Dynamic methods: getPayloadFromAppleIdToken, getPayloadFromGoogleIdToken, getPayloadFromFacebookIdToken
+    $getPayloadMethod = 'getPayloadFrom'.ucfirst($resource_owner).'IdToken';
+
+    // Extract payload
+    $payload = $this->{$getPayloadMethod}($id_token);
     $user_id = $payload['id'];
     $email = $payload['email'];
     $name = $payload['name'] ?? '';
-    $username = $this->createRandomUsername($name);
 
+    /** @var User|null $user */
     $user = $this->user_manager->findOneBy([$resource_owner.'_id' => $user_id]);
-
     if ($user) {
-      //create JWT token
-      $responseCode = Response::HTTP_OK;
-      $token = $this->jwt_manager->create($user);
-      $token = new JWTResponse(['token' => $token]);
-
-      return ['response_code' => $responseCode, 'token' => $token];
+      // User already exists and is already connected to this service
+      return $user;
     }
 
-    $user_email = $email;
-    $user = $this->user_manager->findUserByEmail($user_email);
-    $set_id = 'set'.ucfirst($resource_owner).'Id';
+    /** @var User|null $user */
+    $user = $this->user_manager->findUserByEmail($email);
     if ($user) {
-      $get_id = 'get'.ucfirst($resource_owner).'Id';
-      if ($user->{$get_id}()) {
-        $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-        $token = new JWTResponse();
-
-        return ['response_code' => $responseCode, 'token' => $token];
-      }
+      // User already exists but is not connected to this service
       $user->{$set_id}($user_id);
-      $token = $this->jwt_manager->create($user);
-      $token = new JWTResponse(['token' => $token]);
       $this->user_manager->updateUser($user);
-      $responseCode = Response::HTTP_OK;
 
-      return ['response_code' => $responseCode, 'token' => $token];
+      return $user;
     }
 
+    // User does not exist yet
     /** @var User $user */
     $user = $this->user_manager->createUser();
     $user->{$set_id}($user_id);
     $user->setEnabled(true);
-    $user->setEmail($user_email);
-    $user->setUsername($username);
+    $user->setEmail($email);
+    $user->setUsername($this->createRandomUsername($name));
     $user->setPassword(PasswordGenerator::generateRandomPassword());
     $user->setOauthUser(true);
+    $user->setVerified(true);
     $this->user_manager->updateUser($user);
-    $responseCode = Response::HTTP_OK;
-    $token = $this->jwt_manager->create($user);
-    $token = new JWTResponse(['token' => $token]);
 
-    return ['response_code' => $responseCode, 'token' => $token];
+    return $user;
   }
 
   public function deleteRefreshToken(string $x_refresh): bool

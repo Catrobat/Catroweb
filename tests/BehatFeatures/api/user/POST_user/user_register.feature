@@ -182,7 +182,7 @@ Feature: Registering a new user.
     """
       {
         "token": "REGEX_STRING_WILDCARD",
-        "refresh_token": "REGEX_STRING_WILDCARD!"
+        "refresh_token": "REGEX_STRING_WILDCARD"
       }
     """
     And the user "Testuser" with email "test@test.at" should exist and be enabled

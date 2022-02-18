@@ -37,8 +37,10 @@
 
 {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
-<div class="container body-content page-content">
-  {% block body %}{% endblock %}
+<div class="body-content">
+  <div class="page-content container">
+    {% block body %}{% endblock %}
+  </div>
 </div>
 
 {% include 'Default/footer.html.twig' %}

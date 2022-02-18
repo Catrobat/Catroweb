@@ -22,7 +22,10 @@ export class TokenExpirationHandler {
         if (decodedToken.exp < now || decodedToken.exp < (now + 60)) {
           this.refreshToken()
         } else {
-          document.getElementById('logout-nav-item').style.display = 'block'
+          const logoutNavItem = document.getElementById('logout-nav-item')
+          if (logoutNavItem) {
+            logoutNavItem.style.display = 'block'
+          }
           setCookie('LOGGED_IN', 'true', 'Tue, 19 Jan 2038 00:00:01 GMT', self.baseUrl + '/')
         }
       }

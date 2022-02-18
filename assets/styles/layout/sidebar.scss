@@ -81,7 +81,8 @@ $sidebar-width: 250px;
 @include media-breakpoint-up(md) {
   .body-with-sidebar {
     .body-content {
-      padding-left: 15px + $sidebar-width;
+      margin-left: $sidebar-width;
+      width: calc(100% - #{$sidebar-width});
     }
 
     &.modal-open .modal {
