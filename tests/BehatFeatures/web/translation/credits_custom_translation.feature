@@ -8,96 +8,82 @@ Feature: Projects should have credits where a custom translation can be defined
     And there are projects:
       | id | name      | owned by | credit     |
       | 1  | project 1 | Catrobat | my credits |
+      | 2  | project 2 | Catrobat |            |
     And I wait 1000 milliseconds
-
-  Scenario: Custom translation editor should be visible
-    Given I log in as "Catrobat"
-    And I go to "/app/project/1"
-    And I wait for the page to be loaded
-    When I click "#edit-credits-button"
-    And I wait for AJAX to finish
-    Then the element "#credits" should not be visible
-    But the element "#edit-text" should be visible
-    And the element "#edit-text-ui" should be visible
-    And the element "#edit-language-selector" should be visible
-    And the element "#edit-submit-button" should be visible
-
-  Scenario: Adding a custom credits translation
-    Given I log in as "Catrobat"
-    And I go to "/app/project/1"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-credits-button"
-    And I wait for AJAX to finish
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a credit translation"
-    And I click "#edit-submit-button"
-    And I wait for AJAX to finish
-    And I should see "my credits"
-
-  Scenario: Viewing a custom description translation
-    Given there are project custom translations:
-      | project_id | language | name | description | credit                       |
-      | 1          | fr       |      |             | This is a credit translation |
-    And I log in as "Catrobat"
-    And I go to "/app/project/1"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-credits-button"
-    And I wait for AJAX to finish
-    Then the element "#edit-text" should be visible
-    And the element "#edit-language-selector" should be visible
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then the "edit-text" field should contain "This is a credit translation"
 
   Scenario: Editing custom translation, then changing the language and keeping the unsaved changes
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
-    When I click "#edit-credits-button"
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a credit translation"
+    Then I fill in "edit-credits-text" with "This is a credit translation"
     Then I choose "Russian" from selector "#edit-language-selector"
     And I should see "Would you like to keep your current changes?"
     When I click ".swal2-confirm"
-    Then the "edit-text" field should contain "This is a credit translation"
-    And I should see "Russian"
+    Then the "edit-credits-text" field should contain "This is a credit translation"
+    And the "#edit-selected-language" element should contain "Russian"
 
   Scenario: Editing custom translation, then changing the language while discarding changes
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
-    When I click "#edit-credits-button"
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a credit translation"
+    Then I fill in "edit-credits-text" with "This is a credit translation"
     Then I choose "Russian" from selector "#edit-language-selector"
     And I should see "Would you like to keep your current changes?"
     When I click ".swal2-deny"
     And I wait for AJAX to finish
-    Then the "edit-text" field should contain ""
-    And I should see "Russian"
+    Then the "edit-credits-text" field should contain ""
+    And the "#edit-selected-language" element should contain "Russian"
 
   Scenario: Editing custom translation, then changing the language but going back to unsaved changes
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
-    When I click "#edit-credits-button"
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a credit translation"
+    Then I fill in "edit-credits-text" with "This is a credit translation"
     Then I choose "Russian" from selector "#edit-language-selector"
     And I should see "Would you like to keep your current changes?"
     When I click ".swal2-close"
     And I wait for AJAX to finish
-    Then the "edit-text" field should contain "This is a credit translation"
-    And I should see "French"
+    Then the "edit-credits-text" field should contain "This is a credit translation"
+    And the "#edit-selected-language" element should contain "French"
+
+  Scenario: Credit text field should be disabled if there is not a default credit defined
+    Given I log in as "Catrobat"
+    And I go to "/app/project/2"
+    And I wait for the page to be loaded
+    And I wait 10000 milliseconds
+    When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#edit-credits-text" should not be disabled
+    Then I choose "French" from selector "#edit-language-selector"
+    And I wait for AJAX to finish
+    Then the element "#edit-credits-text" should be disabled
+
+  Scenario: Adding a default credit, then changing the language without saving and keeping the unsaved changes
+    Given I log in as "Catrobat"
+    And I go to "/app/project/2"
+    And I wait for the page to be loaded
+    And I wait 10000 milliseconds
+    When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then I fill in "edit-credits-text" with "This is a default credit"
+    When I choose "French" from selector "#edit-language-selector"
+    Then I should see "Would you like to keep your current changes?"
+    When I click ".swal2-confirm"
+    And I wait for AJAX to finish
+    Then the element "#edit-credits-text" should be disabled
+    And I should see "No notes and credits available."

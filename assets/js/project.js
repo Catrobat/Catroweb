@@ -11,9 +11,9 @@ import { ProgramReport } from './custom/ProgramReport'
 import { ProgramDescription } from './custom/ProgramDescription'
 import { ProgramCredits } from './custom/ProgramCredits'
 import { ProgramComments } from './custom/ProgramComments'
-import { CustomTranslationSnackbar } from './custom/CustomTranslationSnackbar'
 import { CustomTranslationApi } from './api/CustomTranslationApi'
-import { ProjectTextEditor } from './components/ProjectTextEditor'
+import { ProjectEditor } from './components/ProjectEditor'
+import { ProjectEditorTextField } from './components/ProjectEditorTextField'
 import { ProgramName } from './custom/ProgramName'
 
 require('../styles/custom/profile.scss')
@@ -29,13 +29,37 @@ const $appLanguage = $('#app-language')
 let editor = null
 
 if ($project.data('my-program')) {
-  new MDCTextField(document.querySelector('#edit-mdc-text-field'))
   new MDCTextField(document.querySelector('.comment-message'))
 
-  editor = new ProjectTextEditor(
+  const nameEditorTextField = new ProjectEditorTextField(
     $projectDescriptionCredits,
-    $projectDescriptionCredits.data('trans-default'),
-    $projectDescriptionCredits.data('project-id')
+    $projectDescriptionCredits.data('project-id'),
+    'name',
+    true
+  )
+
+  const descriptionEditorTextField = new ProjectEditorTextField(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    'description',
+    $projectDescriptionCredits.data('has-description')
+  )
+
+  const creditsEditorTextField = new ProjectEditorTextField(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    'credits',
+    $projectDescriptionCredits.data('has-credits')
+  )
+
+  const showLanguageSelect = $projectDescriptionCredits.data('has-description') || $projectDescriptionCredits.data('has-credits')
+
+  editor = new ProjectEditor(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    [nameEditorTextField, descriptionEditorTextField, creditsEditorTextField],
+    showLanguageSelect,
+    $projectDescriptionCredits.data('trans-default')
   )
 }
 
@@ -92,34 +116,13 @@ Program(
   $project.data('trans-download-start')
 )
 
-const nameEditorConfig = {
-  maxLength: $projectDescriptionCredits.data('max-name-length'),
-  programSection: 'name',
-  snackbar: new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-name')),
-  headline: $projectDescriptionCredits.data('trans-name'),
-  closeText: $projectDescriptionCredits.data('trans-close-name-editor'),
-  instruction: '',
-  showLanguageSelect: true
-}
-
 ProgramName(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
   $project.data('my-program'),
-  editor,
-  nameEditorConfig,
-  new CustomTranslationApi('name')
+  new CustomTranslationApi('name'),
+  editor
 )
-
-const descriptionEditorConfig = {
-  maxLength: $projectDescriptionCredits.data('max-length'),
-  programSection: 'description',
-  snackbar: new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-description')),
-  headline: $projectDescriptionCredits.data('trans-description'),
-  closeText: $projectDescriptionCredits.data('trans-close-description-editor'),
-  instruction: '',
-  showLanguageSelect: $projectDescriptionCredits.data('has-description')
-}
 
 ProgramDescription(
   $projectDescriptionCredits.data('project-id'),
@@ -127,27 +130,13 @@ ProgramDescription(
   $projectDescriptionCredits.data('trans-more-info'),
   $projectDescriptionCredits.data('trans-less-info'),
   $project.data('my-program'),
-  editor,
-  descriptionEditorConfig,
   new CustomTranslationApi('description')
 )
-
-const creditsEditorConfig = {
-  maxLength: $projectDescriptionCredits.data('max-length'),
-  programSection: 'credit',
-  snackbar: new CustomTranslationSnackbar($projectDescriptionCredits.data('trans-notes-and-credits')),
-  headline: $projectDescriptionCredits.data('trans-notes-and-credits'),
-  closeText: $projectDescriptionCredits.data('trans-close-credits-editor'),
-  instruction: $projectDescriptionCredits.data('trans-notes-and-credits-description'),
-  showLanguageSelect: $projectDescriptionCredits.data('has-credits')
-}
 
 ProgramCredits(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
   $project.data('my-program'),
-  editor,
-  creditsEditorConfig,
   new CustomTranslationApi('credit')
 )
 
