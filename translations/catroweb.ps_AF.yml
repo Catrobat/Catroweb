@@ -422,14 +422,14 @@ resetPassword:
       cancel: "لغوه کړئ"
   check:
     title: "خپل بریښنالیکونه چیک کړئ"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    description: "که ستاسو د بریښنالیک سره یو حساب شتون ولري، نو بیا یوازې یو بریښنالیک لیږل شوی چې یو لینک لري چې تاسو یې د خپل پټنوم بیا تنظیمولو لپاره کارولی شئ. دا لینک به په%time% کې پای ته ورسیږي."
+    description2: "که تاسو بریښنالیک ترلاسه نکړئ مهرباني وکړئ خپل سپیم فولډر وګورئ یا %tryAgainLink%"
+    tryAgain: "بیا هڅه وکړه"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "سلام!"
+    visitLink: "د خپل پټنوم بیا تنظیمولو لپاره، مهرباني وکړئ لاندې لینک ته لاړ شئ"
+    expire: "دا لینک به په%time% کې پای ته ورسیږي."
+    cheers: "هڅول!"
   reset:
     title: "خپل پټنوم بیا تنظیم کړئ"
     button:
@@ -496,16 +496,16 @@ success:
   imgUpload: ستاسو عکس په بریالیتوب سره پورته شو!
   report: ستاسو راپور په بریالیتوب سره واستول شو!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 دقیقه وړاندې |{1}1 دقیقه وړاندې'
+  hours.ago: '{1}1 ساعت وړاندې'
+  days.ago: '{1}1 ورځ وړاندې |]1,Inf] %count% ورځې وړاندې'
+  months.ago: '{1}1 میاشت وړاندې |]1,Inf] %count% میاشتې مخکې'
+  years.ago: '{1}1 کال دمخه |]1,Inf] یو کال دمخه'
 failure:
   upload: ستاسو د اپلوډ اپلوډ پرمهال یوه تېروتنه وه.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'خپل بریښنالیک تایید کړئ'
 api:
   registerUser:
     emailMissing: 'بریښنالیک ورک دی'
@@ -700,7 +700,7 @@ flavor:
   phirocode: PhiroCode
   luna: لونا او پیشو
   create@school: جوړ کړئ @ ښوونځی
-copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
+copyright: 'د چاپ حق &کاپي; &copy;%year%<a href="http://www.catrobat.org">Catrobat</a>. ټول حقونه خوندي دي.'
 agree: زه دا منم
 disagree: اختلاف
 profileLoader:
@@ -731,7 +731,7 @@ achievements:
     header: 'لاسته راوړنې'
     most_recent_achievement:
       title: 'تازه لاسته راوړنه'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      x_out_of_y: 'د %unlocked% نه خلاص شوی%total% خلاص شوی'
     tab_unlocked:
       title: 'خلاص شوی'
       empty: "تاسو تراوسه هیڅ لاسته راوړنه نه ده خلاص کړې."
@@ -769,7 +769,7 @@ achievements:
         title: "کوډینګ جام '۲۱"
         description: "د کوډینګ جام ۲۰۲۱ برخه اخیستونکی"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Tag |]1,Inf] ټاګونه'
   tag:
     game:
       title: لوبه
@@ -788,7 +788,7 @@ tags:
     coding_jam_09_2021:
       title: "ټیوټوریل"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Tag |]1,Inf] ټاګونه'
   extension:
     arduino:
       title: Arduino
@@ -833,7 +833,7 @@ studio:
       add_comment: '%user% یوه پروژه زیاته کړه.'
     members_list:
       title: 'د سټوډیو غړي'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      project_count: '{0} د سټوډیو پروژه نشته |'
       promote_member: 'غړي ته اډمین ته وده ورکړئ'
       promotion_failed: 'د دې غړي د ترویج پرمهال یو څه غلط شوي. وروسته بیا هڅه وکړئ.'
       ban_member: 'د سټوډیو غړی منع کړئ'
@@ -854,4 +854,4 @@ media_library:
       movie: 'ډول: ویډیو'
       default: 'ډول: نامعلوم'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'غوښتنه شوې پروژه شتون نلري'
