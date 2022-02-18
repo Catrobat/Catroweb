@@ -1,5 +1,5 @@
 @web
-Feature: Persist project and comment translation
+Feature: Persist project and comment machine translation
 
   Background:
     Given there are users:

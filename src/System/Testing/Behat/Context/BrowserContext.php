@@ -33,7 +33,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   public function setup(): void
   {
     $this->getSession()->start();
-    $this->getSession()->resizeWindow(320 + 15, 1_024);
+    $this->getSession()->resizeWindow(360, 1_024);
   }
 
   /**

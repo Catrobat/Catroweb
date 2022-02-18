@@ -27,11 +27,11 @@ export class ProjectList {
       self.closeFullView()
     }
 
-    this.fetchMore()
+    this.fetchMore(true)
     this._initListeners()
   }
 
-  fetchMore () {
+  fetchMore (clear = false) {
     if (this.empty === true || this.fetchActive === true) {
       return
     }
@@ -50,6 +50,11 @@ export class ProjectList {
           self.container.classList.remove('loading')
           return
         }
+
+        if (clear) {
+          self.projectsContainer.empty()
+        }
+
         data.forEach(function (project) {
           project = self._generate(project)
           self.projectsContainer.append(project)

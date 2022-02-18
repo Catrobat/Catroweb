@@ -125,7 +125,7 @@ programs:
     Não há como restaurar suas ações!
     Sim, excluir conta!
     Cancelar
-  tooLongName: The project name is too long!
+  tooLongName: O nome do projeto é muito extenso!
   tooLongDescription: A descrição do projeto é muito longa!
   tooLongCredits: Os créditos do projeto são muito longos!
   most:
@@ -156,9 +156,9 @@ programs:
   reportOwnProgram: Você não pode sinalizar o seu próprio projeto.
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeaderDownload: Não é possível baixar
+  updateAppTextDownload: Por favor, atualize seu aplicativo para a versão mais recente. Esteja ciente de que nem todos os recursos do Android já estão disponíveis no IOS.
+  updateAppTextDownloadApk: O download de APK está disponível apenas no Android e não no IOS.
   updateAppHeader: Atualizar aplicativo
   updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok
@@ -173,15 +173,15 @@ programs:
   deleted_popup: Comentário apagado com sucesso.
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
+  editName: Editar o nome do projeto
+  closeNameEditor: Fechar editor de nomes
   editDescription: Editar a Descrição do projeto
-  closeDescriptionEditor: Close description editor
+  closeDescriptionEditor: Fechar editor de descrição
   editCredits: Editar Créditos do projeto
-  closeCreditsEditor: Close credits editor
+  closeCreditsEditor: Fechar editor de créditos
   closeEditorPrompt: Deseja salvar as alterações?
-  saveOnLanguageChange: Would you like to keep your current changes?
-  btnKeep: Keep Changes
+  saveOnLanguageChange: Gostaria de manter suas alterações atuais?
+  btnKeep: Manter alterações
   btnDiscard: Descartar
   addComment: Escrever comentário
   thumbsUp: Joinha!
@@ -196,8 +196,8 @@ programs:
   showTranslation: Mostrar tradução
   hideTranslation: Ocultar tradução
   translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationSaved: Tradução para %language% do programa %section% salva
+  translationDeleted: Tradução para %language% do programa %section% excluída
   default: Padrão
   save: Salvar
 remixGraph:
@@ -402,7 +402,7 @@ login:
   passwordSecond: Password Confirm
 register:
   title: Criar conta
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  subText: "Ao continuar, você está criando uma conta na comunidade Catrobat e concordando com %var1% e %var2%."
   button:
     cancel: Cancelar
     createAccount: Criar conta
@@ -414,23 +414,23 @@ accountRecovery:
     submit: Recuperar senha
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Redefinir sua senha"
+    description: "Se você se lembra do e-mail da sua conta, podemos lhe enviar um link para redefinir sua senha."
     button:
-      submit: "Send reset email"
+      submit: "Enviar e-mail de redefinição"
       cancel: "Cancelar"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "Verifique seus e-mails"
+    description: "Caso exista uma conta correspondente ao seu endereço de e-mail, você receberá uma mensagem contendo um link que pode ser usado para redefinir sua senha. Este link expirará em %time%."
+    description2: "Se você não receber o e-mail, verifique a sua pasta de spam ou %tryAgainLink%"
+    tryAgain: "tente novamente"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Oi!"
+    visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"
+    expire: "Este link expirará em %time%."
+    cheers: "Saudações!"
   reset:
-    title: "Reset your password"
+    title: "Redefinir sua senha"
     button:
       submit: "Redefinir senha"
 apk:
@@ -504,7 +504,7 @@ failure:
   upload: Houve um erro durante o envio do seu aplicativo.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Verifique seu e-mail'
 api:
   registerUser:
     emailMissing: 'Email faltando'
@@ -853,4 +853,4 @@ media_library:
       movie: 'Tipo: vídeo'
       default: 'Tipo: desconhecido'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'O projeto solicitado não está disponível'

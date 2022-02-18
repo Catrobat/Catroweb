@@ -18,11 +18,6 @@ Feature: Oauth login should validate id tokens
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/authentication/oauth"
     Then the response status code should be "401"
-    And I should get the json object:
-    """
-     {
-     }
-    """
 
   Scenario: Invalid apple id token should return an error
     Given I have the following JSON request body:
@@ -36,11 +31,6 @@ Feature: Oauth login should validate id tokens
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/authentication/oauth"
     Then the response status code should be "401"
-    And I should get the json object:
-    """
-     {
-     }
-    """
 
   Scenario: Invalid facebook id token should return an error
     Given I have the following JSON request body:
@@ -54,11 +44,6 @@ Feature: Oauth login should validate id tokens
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/authentication/oauth"
     Then the response status code should be "401"
-    And I should get the json object:
-    """
-     {
-     }
-    """
 
   Scenario: Invalid resource owner should return an error
     Given I have the following JSON request body:
@@ -106,7 +91,8 @@ Feature: Oauth login should validate id tokens
     And I should get the json object:
     """
      {
-       "token": "REGEX_STRING_WILDCARD"
+       "token": "REGEX_STRING_WILDCARD",
+       "refresh_token": "REGEX_STRING_WILDCARD"
      }
     """
 
@@ -122,11 +108,6 @@ Feature: Oauth login should validate id tokens
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/authentication/oauth"
     Then the response status code should be "401"
-    And I should get the json object:
-    """
-     {
-     }
-    """
 
   Scenario: Id token with wrong signature should return an error
     Given I have the following JSON request body:
@@ -140,11 +121,6 @@ Feature: Oauth login should validate id tokens
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/authentication/oauth"
     Then the response status code should be "401"
-    And I should get the json object:
-    """
-     {
-     }
-    """
 
   Scenario: Id token with wrong app id should return an error
     Given I have the following JSON request body:
@@ -158,8 +134,3 @@ Feature: Oauth login should validate id tokens
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "POST" "/api/authentication/oauth"
     Then the response status code should be "401"
-    And I should get the json object:
-    """
-     {
-     }
-    """

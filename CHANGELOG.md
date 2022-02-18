@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.22.6]
+  - Add DKIM mail signing
+  - update dependencies
+  - update translations API & features
+  - Add refresh token to register API
+  - Add refresh token to OAuth API
+  - Fix verify/email service controller registration
+  - Fix ResetPasswordSubscriber event
+  - Disable Stacktrace logging and increase min level to warning
+  - Get rid of bs container-max with to better fit the sidebar design
+  - Slightly enhance authentication desktop design
+  - fix bearer token-expiration null pointer exception
+  - increase behat test window size to a more modern size 335->360
+
 ## [3.21.1]
 - remove fos_user registration & reset password
 - add symfonycasts reset password
@@ -431,8 +445,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.22.0...HEAD
-[3.21.1]: https://github.com/Catrobat/Catroweb/compare/v3.21.1...v3.22.0
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.23.0...HEAD
+[3.22.6]: https://github.com/Catrobat/Catroweb/compare/v3.22.6...v3.23.0
+[3.21.1]: https://github.com/Catrobat/Catroweb/compare/v3.21.1...v3.22.6
 [3.20.34]: https://github.com/Catrobat/Catroweb/compare/v3.20.34...v3.21.1
 [3.19.0]: https://github.com/Catrobat/Catroweb/compare/v3.19.0...v3.20.34
 [3.18.3]: https://github.com/Catrobat/Catroweb/compare/v3.18.3...v3.19.0

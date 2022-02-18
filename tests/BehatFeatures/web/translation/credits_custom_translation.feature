@@ -8,6 +8,7 @@ Feature: Projects should have credits where a custom translation can be defined
     And there are projects:
       | id | name      | owned by | credit     |
       | 1  | project 1 | Catrobat | my credits |
+    And I wait 1000 milliseconds
 
   Scenario: Custom translation editor should be visible
     Given I log in as "Catrobat"
@@ -25,6 +26,7 @@ Feature: Projects should have credits where a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -41,6 +43,7 @@ Feature: Projects should have credits where a custom translation can be defined
     And I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then the element "#edit-text" should be visible
@@ -53,6 +56,7 @@ Feature: Projects should have credits where a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -68,6 +72,7 @@ Feature: Projects should have credits where a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
@@ -84,6 +89,7 @@ Feature: Projects should have credits where a custom translation can be defined
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
+    And I wait 10000 milliseconds
     When I click "#edit-credits-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"

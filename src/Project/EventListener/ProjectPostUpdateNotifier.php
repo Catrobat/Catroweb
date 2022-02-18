@@ -5,6 +5,7 @@ namespace App\Project\EventListener;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Project\ProjectMachineTranslationRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\User\Achievements\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
@@ -14,17 +15,21 @@ class ProjectPostUpdateNotifier
 {
   protected AchievementManager $achievement_manager;
   protected TagRepository $tag_repository;
+  private ProjectMachineTranslationRepository $machine_translation_repository;
 
-  public function __construct(AchievementManager $achievement_manager, TagRepository $tag_repository)
+  public function __construct(AchievementManager $achievement_manager, TagRepository $tag_repository,
+                              ProjectMachineTranslationRepository $machine_translation_repository)
   {
     $this->achievement_manager = $achievement_manager;
     $this->tag_repository = $tag_repository;
+    $this->machine_translation_repository = $machine_translation_repository;
   }
 
   public function postUpdate(Program $project, LifecycleEventArgs $event): void
   {
     $user = $project->getUser();
     $this->addCodingJam092021Achievement($project, $user);
+    $this->invalidateTranslationCacheIfNecessary($project);
   }
 
   /**
@@ -47,6 +52,13 @@ class ProjectPostUpdateNotifier
         $program->addTag($coding_jam_09_2021_tag);
       }
       $this->achievement_manager->unlockAchievementCodingJam092021($user);
+    }
+  }
+
+  private function invalidateTranslationCacheIfNecessary(Program $project): void
+  {
+    if ($project->shouldInvalidateTranslationCache()) {
+      $this->machine_translation_repository->invalidateCachedTranslation($project);
     }
   }
 }

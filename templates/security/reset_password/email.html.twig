@@ -8,7 +8,7 @@
 
 {% block body_content %}
 <p>{{ "resetPassword.email.visitLink"|trans({}, "catroweb") }}</p>
-<a href="{{ url('app_reset_password', {token: resetToken.token}) }}">{{ url('app_reset_password', {token: resetToken.token}) }}</a>
+<a href="{{ url('app_reset_password', {theme: 'app', token: resetToken.token}) }}">{{ url('app_reset_password', {theme: 'app', token: resetToken.token}) }}</a>
 <p>{{ "resetPassword.email.expire"|trans({'%time%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')}, "catroweb") }}</p>
 <p>{{ "resetPassword.email.cheers"|trans({}, "catroweb") }}</p>
 {% endblock %}

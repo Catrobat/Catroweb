@@ -54,7 +54,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
 
     $responseCode = Response::HTTP_CREATED;
     $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
-    $response = $this->facade->getResponseManager()->createUserRegisteredResponse($token);
+    $refresh_token = $this->facade->getAuthenticationManager()->createRefreshTokenByUser($user);
+    $response = $this->facade->getResponseManager()->createUserRegisteredResponse($token, $refresh_token);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -173,6 +174,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
       return $error_response;
     }
 
+    // Do not reveal whether a user account was found or not.
     $this->facade->getEventDispatcher()->dispatch(new PasswordResetRequestedEvent($reset_password_request->getEmail(), $accept_language));
     $responseCode = Response::HTTP_NO_CONTENT;
 

@@ -17,16 +17,15 @@ body {
 }
 
 .page-content {
-  padding-top: 0.25rem;
-  padding-bottom: 3rem;
+  padding: 1.5rem !important;
+  margin-bottom: 1.25rem;
 }
 
 // ----
 
 .footer {
   margin-top: auto;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding: 1.5rem;
   color: $footer-color;
   background-color: $footer-background-color;
 
