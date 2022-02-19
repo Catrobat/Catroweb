@@ -4,6 +4,7 @@ namespace App\Translation;
 
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
+use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use InvalidArgumentException;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
@@ -12,10 +13,14 @@ class TranslationDelegate
 {
   private ProjectCustomTranslationRepository $project_custom_translation_repository;
   private array $apis;
+  private ProjectMachineTranslationRepository $project_machine_translation_repository;
 
-  public function __construct(ProjectCustomTranslationRepository $project_custom_translation_repository, TranslationApiInterface ...$apis)
+  public function __construct(ProjectCustomTranslationRepository $project_custom_translation_repository,
+                              ProjectMachineTranslationRepository $project_machine_translation_repository,
+                              TranslationApiInterface ...$apis)
   {
     $this->project_custom_translation_repository = $project_custom_translation_repository;
+    $this->project_machine_translation_repository = $project_machine_translation_repository;
     $this->apis = $apis;
   }
 
@@ -111,11 +116,18 @@ class TranslationDelegate
 
   /**
    * @throws InvalidArgumentException
+   *
+   * @psalm-return array<array-key, TranslationResult|null>|null
    */
   public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
   {
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
+
+    $cached_result = $this->getCachedProjectTranslation($project, $source_language, $target_language);
+    if (null !== $cached_result) {
+      return $cached_result;
+    }
 
     $to_translate = [$project->getName(), $project->getDescription(), $project->getCredits()];
     $translation_result = [];
@@ -198,5 +210,10 @@ class TranslationDelegate
     } elseif (null !== $language) {
       throw new InvalidArgumentException('language has to be null, 2-character or 5-character language code');
     }
+  }
+
+  protected function getCachedProjectTranslation(Program $project, ?string $source_language, string $target_language): ?array
+  {
+    return $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language);
   }
 }

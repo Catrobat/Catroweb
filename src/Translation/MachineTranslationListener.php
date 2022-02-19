@@ -61,10 +61,10 @@ class MachineTranslationListener
 
   private function persistProgramTranslation(TerminateEvent $event): void
   {
-    [$project_id, $source_language, $target_language, $provider] = $this->getParameters($event);
+    [$project_id, $source_language, $target_language, $provider, $cache] = $this->getParameters($event);
     [$translated_name, $translated_description, $translated_credits] = $this->getTranslation($event);
 
-    $this->findProjectAndIncrement($project_id, $source_language, $target_language, $provider,
+    $this->findProjectAndIncrement($project_id, $source_language, $target_language, $provider, $cache,
       $translated_name, $translated_description, $translated_credits);
   }
 
@@ -93,6 +93,7 @@ class MachineTranslationListener
       $json['source_language'],
       $json['target_language'],
       $json['provider'],
+      $json['_cache'],
     ];
   }
 
@@ -156,7 +157,8 @@ class MachineTranslationListener
     $this->entity_manager->flush();
   }
 
-  private function findProjectAndIncrement(string $project_id, string $source_language, string $target_language, string $provider,
+  private function findProjectAndIncrement(string $project_id, string $source_language, string $target_language,
+                                           string $provider, ?string $cache = null,
                                            ?string $translated_name = null, ?string $translated_description = null, ?string $translated_credits = null): void
   {
     /** @var Program|null $project */
@@ -165,6 +167,8 @@ class MachineTranslationListener
     if (null === $project) {
       return;
     }
+
+    $provider = $cache ?? $provider;
 
     /** @var ProjectMachineTranslation|null $project_machine_translation */
     $project_machine_translation = $this->entity_manager->getRepository(ProjectMachineTranslation::class)
@@ -182,11 +186,17 @@ class MachineTranslationListener
       $project_machine_translation->incrementCount();
     }
 
-    if ($project_machine_translation->getUsagePerMonth() >= $this->project_caching_threshold) {
+    if ($this->cacheable($cache) && $project_machine_translation->getUsagePerMonth() >= $this->project_caching_threshold) {
       $project_machine_translation->setCachedTranslation($translated_name, $translated_description, $translated_credits);
     }
 
     $this->entity_manager->persist($project_machine_translation);
     $this->entity_manager->flush();
+  }
+
+  private function cacheable(?string $cache): bool
+  {
+    // do not cache "cached" value, i.e. double cache
+    return null === $cache;
   }
 }

@@ -851,9 +851,9 @@ services:
   App\Translation\TranslationDelegate:
     class: App\Translation\TranslationDelegate
     arguments:
-      - '@App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository'
-      - '@App\Translation\ItranslateApi'
-      - '@App\Translation\GoogleTranslateApi'
+      $apis:
+        - '@App\Translation\ItranslateApi'
+        - '@App\Translation\GoogleTranslateApi'
 
   App\Translation\MachineTranslationListener:
     class: App\Translation\MachineTranslationListener
