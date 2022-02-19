@@ -2,14 +2,6 @@
   <div class="col mt-3 mb-3">
     <div id="description-headline">
       <span class="h2">{{ "description"|trans({}, "catroweb") }}</span>
-      {% if app.user and my_program %}
-        <span>
-          <i id="edit-description-button" class="ms-3 material-icons catro-icon-button align-bottom"
-             data-bs-toggle="tooltip" title="{{ 'programs.editDescription'|trans({}, 'catroweb') }}">
-            edit
-          </i>
-        </span>
-      {% endif %}
     </div>
     <div id="description-credits-container" style="height:auto; overflow: hidden;">
       <div id="description" class="text-break">
@@ -22,14 +14,6 @@
       <div id="description-translation" class="text-break" style="display: none;"></div>
       <div class="mt-3" id="credits-headline">
         <span class="h2">{{ "credits"|trans({}, "catroweb") }}</span>
-        {% if app.user and my_program %}
-          <span>
-            <i id="edit-credits-button" data-bs-toggle="tooltip" title="{{ 'programs.editCredits'|trans({}, 'catroweb') }}"
-               class="edit-credits-button ms-3 material-icons catro-icon-button align-bottom">
-              edit
-            </i>
-          </span>
-        {% endif %}
       </div>
       <div id="credits" class="text-break">
         {% if program.credits %}
@@ -47,68 +31,6 @@
         <span id="program-translation-after-languages" class="translation-credit"></span>
       </div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-    {% if app.user and my_program %}
-      <div id="edit-text-ui" class="d-none mb-5 full-screen">
-        <div id="edit-text-instruction"></div>
-        <div id="edit-text-error" style="display:none;" class="alert alert-danger"></div>
-        <label id="edit-mdc-text-field"
-            class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label">
-          <span class="mdc-text-field__ripple"></span>
-          <span class="mdc-text-field__resizer">
-            <span id="edit-loading-spinner" style="display: none;">
-              <i class="ms-2 material-icons">
-                {% include 'components/loading_spinner.html.twig' with {'size': 'small'} %}
-              </i>
-            </span>
-            <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-text" name="edit-text" title="_edit-text"
-                      style="width: 100%" rows="10" cols="100">
-            </textarea>
-          </span>
-          <span class="mdc-line-ripple"></span>
-        </label>
-
-        <div class="row justify-content-between" style="margin-top: 1rem; padding-right: 0.75rem;">
-          <div class="form-group col-8">
-            <div id="edit-language-selector" class="mdc-select mdc-select--outlined">
-              <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-                <span class="mdc-notched-outline">
-                  <span class="mdc-notched-outline__leading"></span>
-                  <span class="mdc-notched-outline__notch">
-                    <span class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
-                  </span>
-                  <span class="mdc-notched-outline__trailing"></span>
-                </span>
-                <span class="mdc-select__selected-text-container">
-                  <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
-                </span>
-                <span class="mdc-select__dropdown-icon">
-                  {% include 'components/mdc_select_svg.html.twig' %}
-                </span>
-              </div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                <ul id="edit-language-selector-list" class="mdc-list" role="listbox">
-                  <li class="mdc-list-item" data-value="default" role="option">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">
-                        {{ "programs.default"|trans({}, "catroweb") }}
-                      </span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <button id="edit-submit-button" class="btn btn-primary p-3 col-4">
-            <i class="material-icons align-bottom">save</i>
-            {{ 'programs.save'|trans({}, 'catroweb') }}
-          </button>
-        </div>
-      </div>
-    {% endif %}
   </div>
 </div>
 
