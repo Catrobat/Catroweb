@@ -187,9 +187,10 @@ ProgramComments(
 
 new TranslateProgram(
   $project.data('translated-by-line'),
+  $project.data('google-translate-display-name'),
   $project.data('project-id'),
   $project.data('has-description'),
   $project.data('has-credits')
 )
 
-new TranslateComments($project.data('translated-by-line'))
+new TranslateComments($project.data('translated-by-line'), $project.data('google-translate-display-name'))

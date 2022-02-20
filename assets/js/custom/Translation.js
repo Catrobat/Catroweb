@@ -1,11 +1,11 @@
 import $ from 'jquery'
 
 export class Translation {
-  constructor (translatedByLine) {
+  constructor (translatedByLine, googleTranslateDisplayName) {
     this.translatedByLine = translatedByLine
     this.providerMap = {
       itranslate: 'iTranslate',
-      google: 'Google Translate'
+      google: googleTranslateDisplayName
     }
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
