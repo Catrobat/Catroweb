@@ -172,12 +172,8 @@ programs:
   deleted_popup: 코멘트가 삭제되었습니다.
   deleted_popup_header: 삭제됨
   noAdminRights: 권한이 없습니다. 로그인 해 주세요.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: 프로그램 설명 편집
-  closeDescriptionEditor: Close description editor
-  editCredits: 프로젝트 메모 및 크레딧 편집
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: 변경 내용을 저장 하시겠습니까?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -195,8 +191,7 @@ programs:
   showTranslation: 번역보기
   hideTranslation: 번역 숨기기
   translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: 기본값
   save: 저장
 remixGraph:

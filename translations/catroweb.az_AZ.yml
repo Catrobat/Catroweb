@@ -173,12 +173,8 @@ programs:
   deleted_popup: Bu rəy uğurla silindi.
   deleted_popup_header: Silindi
   noAdminRights: Admin hüquqlarınız yoxdur. Zəhmət olmasa Admin olaraq giriş edin.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: Layihə açıqlamasına düzəliş edin
-  closeDescriptionEditor: Close description editor
-  editCredits: Layihəni hazırlayanlara düzəliş edin
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Do you want to save your changes?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: Tərcüməni göstər
   hideTranslation: Tərcüməni gizlət
   translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə %provider% tərcümə etdi'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: Default
   save: Saxla
 remixGraph:

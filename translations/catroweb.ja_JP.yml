@@ -173,12 +173,8 @@ programs:
   deleted_popup: コメントは正常に削除されました。
   deleted_popup_header: 削除しました
   noAdminRights: 管理者権限がありません。管理者としてログインしてください。
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: プロジェクトの説明を編集
-  closeDescriptionEditor: Close description editor
-  editCredits: プロジェクトノートとクレジットを編集
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: 変更内容を保存しますか？
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: 翻訳を表示する
   hideTranslation: 翻訳を隠す
   translatedByLine: '%provider%を%sourceLanguage%から%targetLanguage%に翻訳'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: デフォルト
   save: 保存
 remixGraph:

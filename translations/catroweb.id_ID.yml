@@ -173,12 +173,8 @@ programs:
   deleted_popup: Komentar tersebut berhasil dihapus.
   deleted_popup_header: Dihapus
   noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: Edit deskripsi proyek
-  closeDescriptionEditor: Close description editor
-  editCredits: Edit catatan dan kredit proyek
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Apakah Anda ingin menyimpan perubahan?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: Tampilkan terjemahan
   hideTranslation: Sembunyikan terjemahan
   translatedByLine: Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: Default
   save: Simpan
 remixGraph:
