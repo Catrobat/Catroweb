@@ -4,8 +4,14 @@ export class Translation {
   constructor (translatedByLine, googleTranslateDisplayName) {
     this.translatedByLine = translatedByLine
     this.providerMap = {
-      itranslate: 'iTranslate',
-      google: googleTranslateDisplayName
+      itranslate: {
+        displayName: 'iTranslate',
+        link: 'https://itranslate.com'
+      },
+      google: {
+        displayName: googleTranslateDisplayName,
+        link: 'https://translate.google.com'
+      }
     }
     this.displayLanguageMap = {}
     this.translatedByLineMap = {}
@@ -64,9 +70,9 @@ export class Translation {
   }
 
   setTranslationCredit (data, byLineElements) {
-    $(byLineElements.before).text(this.translatedByLineMap.before.replace('%provider%', this.providerMap[data.provider]))
-    $(byLineElements.between).text(this.translatedByLineMap.between.replace('%provider%', this.providerMap[data.provider]))
-    $(byLineElements.after).text(this.translatedByLineMap.after.replace('%provider%', this.providerMap[data.provider]))
+    $(byLineElements.before).html(this.formatProvider(this.translatedByLineMap.before, this.providerMap[data.provider]))
+    $(byLineElements.between).html(this.formatProvider(this.translatedByLineMap.between, this.providerMap[data.provider]))
+    $(byLineElements.after).html(this.formatProvider(this.translatedByLineMap.after, this.providerMap[data.provider]))
 
     if (this.isSourceLanguageFirst()) {
       $(byLineElements.firstLanguage).text(this.displayLanguageMap[data.source_language])
@@ -75,6 +81,11 @@ export class Translation {
       $(byLineElements.secondLanguage).text(this.displayLanguageMap[data.target_language])
       $(byLineElements.firstLanguage).text(this.displayLanguageMap[data.source_language])
     }
+  }
+
+  formatProvider (byLine, provider) {
+    return byLine.replace('%provider%', '<a href="' + provider.link + '" class="translation-credit" style="text-decoration: none">' +
+      provider.displayName + '</a>')
   }
 }
 

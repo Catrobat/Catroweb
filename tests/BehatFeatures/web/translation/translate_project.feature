@@ -98,7 +98,8 @@ Feature: Project title, description and credits should be translatable via a but
     When I click "#program-translation-button"
     And I wait for AJAX to finish
     Then the element "#credits-translation-wrapper" should be visible
-    And the "#program-translation-before-languages" element should contain "Translated by iTranslate from"
+    And the "#program-translation-before-languages" element should contain "Translated by"
+    And the "#program-translation-before-languages" element should contain "iTranslate"
     And the "#program-translation-first-language" element should contain "English"
     And the "#program-translation-between-languages" element should contain "to"
     And the "#program-translation-second-language" element should contain "English"
