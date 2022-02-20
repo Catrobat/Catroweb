@@ -173,12 +173,8 @@ programs:
   deleted_popup: تم حذف التعليق بنجاح.
   deleted_popup_header: محذوف
   noAdminRights: ليس لديك صلاحيات للمشرف. الرجاء تسجيل الدخول كمشرف.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: تعديل وصف المشروع
-  closeDescriptionEditor: Close description editor
-  editCredits: تعديل ملاحظات المشروع والرصيد
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: هل تريد حفظ التغييرات؟
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: إظهار الترجمة
   hideTranslation: إخفاء الترجمة
   translatedByLine: تمت ترجمته بواسطة%provider% من%sourceLanguage% إلى %targetLanguage%
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: افتراضي
   save: حفظ
 remixGraph:

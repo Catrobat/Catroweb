@@ -173,12 +173,8 @@ programs:
   deleted_popup: نظر با موفقیت حذف شد.
   deleted_popup_header: حذف شده
   noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
-  editName: نام پروژه را ویرایش کنید
-  closeNameEditor: ویرایشگر نام را ببندید
-  editDescription: توضیحات پروژه را ویرایش کنید
-  closeDescriptionEditor: ویرایشگر توضیحات را ببندید
-  editCredits: Edit the project credits
-  closeCreditsEditor: بستن ویرایشگر اعتبار
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: آیا مایلی تغییرات را ذخیره کنی؟
   saveOnLanguageChange: آیا می خواهید تغییرات فعلی خود را حفظ کنید؟
   btnKeep: تغییرات را حفظ کنید
@@ -196,8 +192,7 @@ programs:
   showTranslation: مشاهده ترجمه
   hideTranslation: پنهان‌کردن ترجمه
   translatedByLine: ترجمه شده توسط%provider% %sourceLanguage% به %targetLanguage%
-  translationSaved: ترجمه به %language% برای برنامه %section% ذخیره شد
-  translationDeleted: ترجمه به %language% برای برنامه %section% حذف شد
+  translationUpdated: Changes for the translation to %language% updated
   default: پیش فرض
   save: ذخيره
 remixGraph:
