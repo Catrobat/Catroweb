@@ -173,8 +173,8 @@ programs:
   deleted_popup: Komentarz został pomyślnie usunięty.
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: Edytuj projekt
+  closeProjectEditor: Zamknij edytor projektu
   closeEditorPrompt: Czy chcesz zapisać zmiany?
   saveOnLanguageChange: Czy chcesz zachować aktualne zmiany?
   btnKeep: Zachowaj zmiany
@@ -192,7 +192,7 @@ programs:
   showTranslation: Pokaż tłumaczenie
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
-  translationUpdated: Changes for the translation to %language% updated
+  translationUpdated: Zaktualizowano zmiany dla tłumaczenia na %language%
   default: Domyślny
   save: Zapisz
 remixGraph:

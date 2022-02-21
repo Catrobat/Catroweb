@@ -175,8 +175,8 @@ programs:
   deleted_popup: ลบความคิดเห็นสำเร็จแล้ว
   deleted_popup_header: ลบทิ้งแล้ว
   noAdminRights: คุณไม่มีสิทธิ์ของผู้ดูแลระบบ กรุณาเข้าสู่ระบบในฐานะผู้ดูแล
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: แก้ไขโครงการ
+  closeProjectEditor: ปิดตัวแก้ไขโครงการ
   closeEditorPrompt: คุณต้องบันทึกการเปลี่ยนแปลงหรือไม่?
   saveOnLanguageChange: คุณต้องการรักษาการเปลี่ยนแปลงในปัจจุบันของคุณหรือไม่?
   btnKeep: เก็บการเปลี่ยนแปลง
@@ -194,7 +194,7 @@ programs:
   showTranslation: แสดงคำแปล
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
-  translationUpdated: Changes for the translation to %language% updated
+  translationUpdated: การเปลี่ยนแปลงสำหรับการแปลเป็น %language% อัพเดท
   default: ค่าเริ่มต้น
   save: บันทึก
 remixGraph:
