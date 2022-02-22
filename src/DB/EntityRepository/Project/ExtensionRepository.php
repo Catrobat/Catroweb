@@ -28,4 +28,19 @@ class ExtensionRepository extends ServiceEntityRepository
       ->getResult()
     ;
   }
+
+  public function getActiveExtensions(): array
+  {
+    $extensions = $this->findBy([
+      'enabled' => true,
+    ]);
+
+    $active_extensions = [];
+    /** @var Extension $extension */
+    foreach ($extensions as $extension) {
+      $active_extensions[] = $extension;
+    }
+
+    return $active_extensions;
+  }
 }

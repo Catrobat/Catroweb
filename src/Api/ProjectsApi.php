@@ -320,11 +320,50 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     return null;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function projectIdDelete(string $id, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectIdDelete() method.
     $responseCode = Response::HTTP_NOT_IMPLEMENTED;
 
     return null;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsExtensionsGet(string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $extensions = $this->facade->getLoader()->getProjectExtensions();
+
+    $response = $this->facade->getResponseManager()->createProjectsExtensionsResponse($extensions, $locale);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsTagsGet(string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $tags = $this->facade->getLoader()->getProjectTags();
+
+    $response = $this->facade->getResponseManager()->createProjectsTagsResponse($tags, $locale);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
   }
 }
