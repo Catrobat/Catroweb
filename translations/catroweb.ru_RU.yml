@@ -173,12 +173,8 @@ programs:
   deleted_popup: Комментарий был успешно удален.
   deleted_popup_header: '﻿Удалено'
   noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
-  editName: Изменить название проекта
-  closeNameEditor: Закрыть редактор
-  editDescription: Редактировать описание проекта
-  closeDescriptionEditor: Закрыть редактор описания
-  editCredits: Редактировать примечания и информацию об авторах проекта
-  closeCreditsEditor: Закрыть редактор примечаний и авторов
+  editProject: Редактировать проект
+  closeProjectEditor: Закрыть редактор
   closeEditorPrompt: Хотите ли вы сохранить свои изменения?
   saveOnLanguageChange: Сохранить текущие изменения?
   btnKeep: Сохранить изменения
@@ -196,8 +192,7 @@ programs:
   showTranslation: Показать перевод
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
-  translationSaved: Перевод на %language% для программы %section% сохранен
-  translationDeleted: Перевод на %language% для программы %section% удален
+  translationUpdated: Изменения для %language% были применены
   default: По умолчанию
   save: Сохранить
 remixGraph:

@@ -173,12 +173,8 @@ programs:
   deleted_popup: ਟਿੱਪਣੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ ਸੀ.
   deleted_popup_header: ਮਿਟਾਇਆ ਗਿਆ
   noAdminRights: ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਬੰਧਕੀ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਬੰਧਕ ਵਜੋਂ ਲੌਗਇਨ ਕਰੋ.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: ਪ੍ਰੋਜੈਕਟ ਦੇ ਵੇਰਵੇ ਨੂੰ ਸੋਧੋ
-  closeDescriptionEditor: Close description editor
-  editCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਸੰਪਾਦਿਤ ਕਰੋ
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: ਤੁਹਾਨੂੰ ਆਪਣੇ ਤਬਦੀਲੀ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਚਾਹੁੰਦੇ ਹੋ?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: ਅਨੁਵਾਦ ਦਿਖਾਓ
   hideTranslation: ਅਨੁਵਾਦ ਲੁਕਾਓ
   translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: ਮੂਲ
   save: ਸੇਵ
 remixGraph:

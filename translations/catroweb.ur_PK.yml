@@ -173,12 +173,8 @@ programs:
   deleted_popup: تبصرہ کامیابی سے حذف کر دیا گیا تھا.
   deleted_popup_header: حذف کر دیا گیا
   noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
-  editName: پروجیکٹ کے نام میں ترمیم کریں۔
-  closeNameEditor: نام کا ایڈیٹر بند کریں۔
-  editDescription: پراجیکٹ کی تفصیل میں ترمیم کریں
-  closeDescriptionEditor: تفصیل ایڈیٹر بند کریں۔
-  editCredits: پروجیکٹ کے نوٹس اور کریڈٹ میں ترمیم کریں۔
-  closeCreditsEditor: کریڈٹ ایڈیٹر بند کریں۔
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: کیا آپ تبدیلیاں محفوظ کرنا چاہتے ہیں?
   saveOnLanguageChange: کیا آپ اپنی موجودہ تبدیلیوں کو برقرار رکھنا چاہیں گے؟
   btnKeep: تبدیلیاں رکھیں
@@ -196,8 +192,7 @@ programs:
   showTranslation: ترجمہ دکھائیں
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
-  translationSaved: پروگرام %section% کے لیے %language% کا ترجمہ محفوظ ہو گیا۔
-  translationDeleted: پروگرام %section% کے لیے %language% کا ترجمہ حذف کر دیا گیا۔
+  translationUpdated: Changes for the translation to %language% updated
   default: پہلے سے طے شدہ
   save: محفوظ کریں
 remixGraph:

@@ -5,7 +5,9 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
+use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\ProgramManager;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -13,15 +15,21 @@ final class ProjectsApiLoader extends AbstractApiLoader
 {
   private ProgramManager $project_manager;
   private FeaturedRepository $featured_repository;
+  private TagRepository $tag_repository;
+  private ExtensionRepository $extension_repository;
   private RequestStack $request_stack;
 
   public function __construct(
     ProgramManager $project_manager,
     FeaturedRepository $featured_repository,
+    TagRepository $tag_repository,
+    ExtensionRepository $extension_repository,
     RequestStack $request_stack
   ) {
     $this->project_manager = $project_manager;
     $this->featured_repository = $featured_repository;
+    $this->tag_repository = $tag_repository;
+    $this->extension_repository = $extension_repository;
     $this->request_stack = $request_stack;
   }
 
@@ -93,5 +101,15 @@ final class ProjectsApiLoader extends AbstractApiLoader
   public function getClientIp(): ?string
   {
     return $this->request_stack->getCurrentRequest()->getClientIp();
+  }
+
+  public function getProjectExtensions(): array
+  {
+    return $this->extension_repository->getActiveExtensions();
+  }
+
+  public function getProjectTags(): array
+  {
+    return $this->tag_repository->getActiveTags();
   }
 }

@@ -177,6 +177,30 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   }
 
   /**
+   * @Then /^the element "([^"]*)" should not be disabled$/
+   *
+   * @param mixed $element
+   */
+  public function theElementShouldNotBeDisabled($element): void
+  {
+    $page = $this->getMink()->getSession()->getPage();
+    $disabled = $page->find('css', $element)->getAttribute('disabled');
+    Assert::assertEquals('', $disabled);
+  }
+
+  /**
+   * @Then /^the element "([^"]*)" should be disabled$/
+   *
+   * @param mixed $element
+   */
+  public function theElementShouldBeDisabled($element): void
+  {
+    $page = $this->getMink()->getSession()->getPage();
+    $disabled = $page->find('css', $element)->getAttribute('disabled');
+    Assert::assertEquals('disabled', $disabled);
+  }
+
+  /**
    * @Given /^the element "([^"]*)" should be visible$/
    *
    * @param mixed $element

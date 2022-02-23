@@ -172,12 +172,8 @@ programs:
   deleted_popup: تبصره په بریالیتوب سره ړنګه شوه.
   deleted_popup_header: ړنګ شوی
   noAdminRights: تاسو د اداري حق نه لرئ. مهرباني وکړئ د مدیر په توګه ننوتل.
-  editName: د پروژې نوم سم کړئ
-  closeNameEditor: د نوم مدیر بند کړئ
-  editDescription: د پروژې توضیحات سم کړئ
-  closeDescriptionEditor: د توضیحاتو مدیر بند کړئ
-  editCredits: Edit the project credits
-  closeCreditsEditor: د کریډیټ مدیر بند کړئ
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: ایا تاسو غواړئ خپل بدلونونه خوندي کړئ؟
   saveOnLanguageChange: ایا تاسو غواړئ خپل اوسني بدلونونه وساتئ؟
   btnKeep: بدلونونه وساتئ
@@ -195,8 +191,7 @@ programs:
   showTranslation: ژباړه ښکاره کړئ
   hideTranslation: ژباړه پټ کړئ
   translatedByLine: '%provider%لخوا ژباړل شوی له %sourceLanguage% څخه تر %targetLanguage%'
-  translationSaved: د پروګرام لپاره %language% ته ژباړه %section% خوندي شوه
-  translationDeleted: د پروګرام لپاره %language% ته ژباړه %section%حذف شوې
+  translationUpdated: Changes for the translation to %language% updated
   default: ډیفالټ
   save: خوندي کړئ
 remixGraph:

@@ -1,9 +1,8 @@
 import $ from 'jquery'
 
 export function ProgramDescription (programId, usersLanguage, showMoreButtonText, showLessButtonText,
-  myProgram, editor, editorConfig, customTranslationApi) {
+  myProgram, customTranslationApi) {
   const description = $('#description')
-  const editDescriptionButton = $('#edit-description-button')
   const descriptionCreditsContainer = $('#description-credits-container')
   const showMoreToggle = $('#descriptionShowMoreToggle')
   const descriptionShowMoreText = $('#descriptionShowMoreText')
@@ -17,27 +16,7 @@ export function ProgramDescription (programId, usersLanguage, showMoreButtonText
     }
   }
 
-  if (myProgram) {
-    const descriptionHeadline = $('#description-headline')
-
-    editDescriptionButton.on('click', () => {
-      descriptionCreditsContainer.hide()
-      descriptionHeadline.hide()
-      showMoreToggle.addClass('d-none')
-
-      editor.show(
-        editorConfig,
-        $('#description').text().trim(),
-        closeDescriptionEditor
-      )
-    })
-
-    function closeDescriptionEditor () {
-      descriptionCreditsContainer.show()
-      descriptionHeadline.show()
-      handleShowMore()
-    }
-  } else {
+  if (!myProgram) {
     customTranslationApi.getCustomTranslation(
       programId,
       usersLanguage.substring(0, 2),
@@ -66,10 +45,4 @@ export function ProgramDescription (programId, usersLanguage, showMoreButtonText
       descriptionCreditsContainer.css({ height: '100%' })
     }
   })
-
-  function handleShowMore () {
-    if (descriptionCreditsContainer.height() === 200 || descriptionCreditsContainer.height() > 300) {
-      showMoreToggle.removeClass('d-none')
-    }
-  }
 }

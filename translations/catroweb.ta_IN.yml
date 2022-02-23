@@ -173,12 +173,8 @@ programs:
   deleted_popup: உங்கள் கருத்து வெற்றிகரமாக நீக்கப்பட்டது.
   deleted_popup_header: நீக்கப்பட்டது
   noAdminRights: உங்களுக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழைக.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: திட்ட விளக்கத்தைத் திருத்துக
-  closeDescriptionEditor: Close description editor
-  editCredits: திட்ட வரவுகளைத் திருத்துக
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: மொழிபெயர்ப்பைக் காட்டு
   hideTranslation: மொழிபெயர்ப்பை மறை
   translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: இயல்புநிலை
   save: சேமி
 remixGraph:

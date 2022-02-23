@@ -172,12 +172,8 @@ programs:
   deleted_popup: Komentar je uspešno izbrisan.
   deleted_popup_header: Izbrisano
   noAdminRights: Nemate administratorska prava. Molimo prijavite se kao administrator.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: Uredite opis projekta
-  closeDescriptionEditor: Close description editor
-  editCredits: Izmeni zasluge projekta
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Da li želite da sačuvate svoje izmene?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -195,8 +191,7 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: Podrazumevano
   save: Sačuvaj
 remixGraph:

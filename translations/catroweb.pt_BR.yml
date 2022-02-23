@@ -173,12 +173,8 @@ programs:
   deleted_popup: Comentário apagado com sucesso.
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
-  editName: Editar o nome do projeto
-  closeNameEditor: Fechar editor de nomes
-  editDescription: Editar a Descrição do projeto
-  closeDescriptionEditor: Fechar editor de descrição
-  editCredits: Editar Créditos do projeto
-  closeCreditsEditor: Fechar editor de créditos
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Deseja salvar as alterações?
   saveOnLanguageChange: Gostaria de manter suas alterações atuais?
   btnKeep: Manter alterações
@@ -196,8 +192,7 @@ programs:
   showTranslation: Mostrar tradução
   hideTranslation: Ocultar tradução
   translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
-  translationSaved: Tradução para %language% do programa %section% salva
-  translationDeleted: Tradução para %language% do programa %section% excluída
+  translationUpdated: Changes for the translation to %language% updated
   default: Padrão
   save: Salvar
 remixGraph:

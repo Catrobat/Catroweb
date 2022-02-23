@@ -173,12 +173,8 @@ programs:
   deleted_popup: মন্তব্যটি সফলভাবে মুছে ফেলা হয়েছে।
   deleted_popup_header: মুছুন
   noAdminRights: আপনার অ্যাডমিন অধিকার নেই। অনুগ্রহ করে  অ্যাডমিন হিসাবে প্রবেশ করুন।
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: Edit the project Description
-  closeDescriptionEditor: Close description editor
-  editCredits: Edit the project Credits
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: আপনি কি আপনার পরিবর্তনগুলি সংরক্ষণ করতে চান?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: অনুবাদ দেখান
   hideTranslation: অনুবাদ লুকান
   translatedByLine: '%provider% %sourceLanguage% থেকে %targetLanguage% দ্বারা অনুবাদিত'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: পূর্ব-নির্ধারিত
   save: সংরক্ষণ করুন
 remixGraph:

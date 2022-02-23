@@ -11,30 +11,15 @@ Feature: Projects should have descriptions that can be changed by the project ow
       | 1  | project 1 | Catrobat  | my description |
       | 2  | project 2 | OtherUser |                |
 
-  Scenario: Changing a project description is not possible if not logged in
-    Given I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then the element "#edit-description-button" should not exist
-    And the element "#edit-text-ui" should not exist
-
-  Scenario: Changing description is not possible if it's not my project
-    Given I log in as "OtherUser"
-    When I go to "/app/project/1"
-    And I wait for the page to be loaded
-    Then the element "#edit-description-button" should not exist
-    And the element "#edit-text-ui" should not exist
-
   Scenario: Changing description is possible if it's my project
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#edit-description-button" should be visible
-    When I click "#edit-description-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then the element "#description" should not be visible
-    But the element "#edit-text" should be visible
-    And the element "#edit-submit-button" should be visible
-    When I fill in "edit-text" with "This is a new description"
+    Then the element "#edit-description-text" should be visible
+    When I fill in "edit-description-text" with "This is a new description"
     And I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#description" should be visible
@@ -45,10 +30,10 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-description-button" should be visible
-    When I click "#edit-description-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a new description"
+    Then I fill in "edit-description-text" with "This is a new description"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
@@ -61,10 +46,10 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-description-button" should be visible
-    When I click "#edit-description-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a new description"
+    Then I fill in "edit-description-text" with "This is a new description"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
@@ -76,16 +61,16 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-description-button" should be visible
-    When I click "#edit-description-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a new description"
+    Then I fill in "edit-description-text" with "This is a new description"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
     And I wait for AJAX to finish
-    Then the element "#edit-text" should be visible
-    Then the "edit-text" field should contain "This is a new description"
+    Then the element "#edit-description-text" should be visible
+    Then the "edit-description-text" field should contain "This is a new description"
 
   Scenario: Large Project Descriptions are only fully visible when show more was clicked
     Given there are programs with a large description:

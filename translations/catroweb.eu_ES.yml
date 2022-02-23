@@ -173,12 +173,8 @@ programs:
   deleted_popup: Iruzkina ongi ezabatu da.
   deleted_popup_header: Ezabatua
   noAdminRights: Ez daukazu admin eskubiderik. Mesedez hasi saioa admin moduan.
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: Proiektuaren deskribapena editatu
-  closeDescriptionEditor: Close description editor
-  editCredits: Proiektuaren ohar eta kredituak editatu
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Ziur aldaketak gorde nahi dituzula?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: Erakutsi itzulpena
   hideTranslation: Ezkutatu itzulpena
   translatedByLine: '%sourceLanguage%-(e)tik %targetLanguage%-(e)ra %provider%-(e)k itzulita.'
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: Default
   save: Gorde
 remixGraph:

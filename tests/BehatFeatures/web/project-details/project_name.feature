@@ -11,29 +11,16 @@ Feature: Projects should have a name that can be changed by the project owner
       | 1  | project 1 | Catrobat  |
       | 2  | project 2 | OtherUser |
 
-  Scenario: Changing a project name is not possible if not logged in
-    Given I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then the element "#edit-name-button" should not exist
-    And the element "#edit-text-ui" should not exist
-
-  Scenario: Changing name is not possible if it's not my project
-    Given I log in as "OtherUser"
-    When I go to "/app/project/1"
-    And I wait for the page to be loaded
-    Then the element "#edit-name-button" should not exist
-    And the element "#edit-text-ui" should not exist
-
   Scenario: Changing name is possible if it's my project
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#edit-name-button" should be visible
-    When I click "#edit-name-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then the element "#edit-text" should be visible
+    Then the element "#edit-name-text" should be visible
     And the element "#edit-submit-button" should be visible
-    When I fill in "edit-text" with "This is a new name"
+    When I fill in "edit-name-text" with "This is a new name"
     And I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#name" should be visible
@@ -44,10 +31,10 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-name-button" should be visible
-    When I click "#edit-name-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a new name"
+    Then I fill in "edit-name-text" with "This is a new name"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
@@ -60,10 +47,10 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-name-button" should be visible
-    When I click "#edit-name-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a new name"
+    Then I fill in "edit-name-text" with "This is a new name"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
@@ -75,12 +62,12 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-name-button" should be visible
-    When I click "#edit-name-button"
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then I fill in "edit-text" with "This is a new name"
+    Then I fill in "edit-name-text" with "This is a new name"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-close"
-    Then the element "#edit-text" should be visible
-    Then the "edit-text" field should contain "This is a new name"
+    Then the element "#edit-name-text" should be visible
+    Then the "edit-name-text" field should contain "This is a new name"

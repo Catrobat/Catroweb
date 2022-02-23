@@ -497,4 +497,40 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
     $this->assertNull($response);
   }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsExtensionsGet
+   *
+   * @throws Exception
+   */
+  public function testProjectsExtensionsGet(): void
+  {
+    $response_code = null;
+    $response_headers = [];
+
+    $response = $this->object->projectsExtensionsGet('en', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertIsArray($response);
+  }
+
+  /**
+   * @group unit
+   * @small
+   * @covers \App\Api\ProjectsApi::projectsTagsGet
+   *
+   * @throws Exception
+   */
+  public function testProjectsTagsGet(): void
+  {
+    $response_code = null;
+    $response_headers = [];
+
+    $response = $this->object->projectsTagsGet('', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertIsArray($response);
+  }
 }

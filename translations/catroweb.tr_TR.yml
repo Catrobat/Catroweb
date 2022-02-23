@@ -173,12 +173,8 @@ programs:
   deleted_popup: Yorum başarıyla silindi.
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
-  editName: Proje adını düzenleyin
-  closeNameEditor: Ad düzenleyiciyi kapat
-  editDescription: Proje açıklamasını düzenleyin
-  closeDescriptionEditor: Açıklama düzenleyiciyi kapat
-  editCredits: Yapanları düzenle
-  closeCreditsEditor: Kredi düzenleyicisini kapat
+  editProject: Projeyi düzenle
+  closeProjectEditor: Proje düzenleyiciyi kapat
   closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
   saveOnLanguageChange: Mevcut değişikliklerinizi korumak ister misiniz?
   btnKeep: Değişiklikleri Koru
@@ -196,8 +192,7 @@ programs:
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
-  translationSaved: '%section% programı için %language%''e çeviri kaydedildi'
-  translationDeleted: '%section% programı için %language%''e çeviri silindi'
+  translationUpdated: '%language% çevirisi için yapılan değişiklikler güncellendi'
   default: Varsayılan
   save: Kaydet
 remixGraph:

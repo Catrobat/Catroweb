@@ -173,12 +173,8 @@ programs:
   deleted_popup: 評論已成功刪除。
   deleted_popup_header: 已刪除
   noAdminRights: 您沒有管理員權限。請以管理員身份登錄。
-  editName: Edit the project name
-  closeNameEditor: Close name editor
-  editDescription: Edit the project Description
-  closeDescriptionEditor: Close description editor
-  editCredits: Edit the project Credits
-  closeCreditsEditor: Close credits editor
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: 你要儲存你的更改嗎?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
@@ -196,8 +192,7 @@ programs:
   showTranslation: 顯示翻譯
   hideTranslation: 隱藏翻譯
   translatedByLine: 由 %provider% 從 %sourceLanguage% 翻譯成 %targetLanguage%
-  translationSaved: Translation to %language% for the program %section% saved
-  translationDeleted: Translation to %language% for the program %section% deleted
+  translationUpdated: Changes for the translation to %language% updated
   default: 默認
   save: 存檔
 remixGraph:
