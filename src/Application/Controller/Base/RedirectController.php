@@ -50,4 +50,14 @@ class RedirectController extends AbstractController
   {
     return $this->redirect($this->generateUrl('app_forgot_password_request'), Response::HTTP_MOVED_PERMANENTLY);
   }
+
+  /**
+   * Users coming from hour of code -> https://hourofcode.com/us/de/beyond
+   *
+   * @Route("/hourOfCode", methods={"GET"})
+   */
+  public function hourOfCodeAction(Request $request): Response
+  {
+    return $this->redirect('/');
+  }
 }

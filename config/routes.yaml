@@ -41,6 +41,22 @@ registration_confirmation_route:
   defaults:
     _controller: App\Application\Controller\Security\RegistrationController::verifyUserEmail
 
+# ===== Legacy Support
+
+legacy_hour_of_code_route: # Users coming from https://hourofcode.com/us/de/beyond
+  path: /hourOfCode
+  methods:  [GET]
+  defaults:
+    _controller: App\Application\Controller\Base\RedirectController::hourOfCodeAction
+
+# ===== Base
+
+robots_txt_route:
+  path: /robots.txt
+  methods:  [GET]
+  defaults:
+    _controller: App\Application\Controller\Base\RedirectController::robotsTxt
+
 # ===== Themes and flavors =====
 catrobat_web_index:
   path: /
