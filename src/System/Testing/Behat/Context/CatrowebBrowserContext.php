@@ -1137,6 +1137,18 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Given I use a valid BEARER cookie for :username
+   *
+   * @param mixed $username
+   */
+  public function iUseAValidBEARERCookieFor($username): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    $token = $this->getJwtManager()->create($user);
+    $this->getSession()->setCookie('BEARER', $token);
+  }
+
+  /**
    * @Given I use an invalid JWT token for :username
    */
   public function iUseAnInvalidJwtTokenFor(): void
