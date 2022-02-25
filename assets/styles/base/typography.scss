@@ -3,7 +3,6 @@
 @import "~material-icons/iconfont/material-icons";
 @import "~typeface-roboto";
 
-
 .body {
   font-size: $default-font-size;
   letter-spacing: 0.25px;
@@ -12,6 +11,7 @@
 a,
 textarea {
   color: var(--primary);
+
   &:hover {
     color: custom-darken(--color-primary, 15);
   }
@@ -24,8 +24,9 @@ i {
 h1,
 .h1 {
   font-size: 2rem;
-  font-weight: 200;
+  font-weight: 300;
   letter-spacing: -1.5px;
+  margin-bottom: 1rem;
 }
 
 h2,
@@ -76,6 +77,10 @@ h6,
   letter-spacing: 0.1px;
 }
 
+.subtext {
+  font-size: 0.75rem;
+}
+
 .caption {
   font-size: 0.75rem;
   letter-spacing: 0.4px;
@@ -106,7 +111,7 @@ h6,
 }
 
 .force-word-break {
-  @include force-word-break();
+  @include force-word-break;
 }
 
 .no-overflow {

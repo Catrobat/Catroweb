@@ -1,4 +1,4 @@
-<footer class="footer d-flex justify-content-center mt-auto body-content">
+<footer class="footer d-flex justify-content-center body-content">
   {% block footer %}
     <div class="container mt-2">
       <div class="row justify-content-between">
@@ -79,7 +79,7 @@
         </div>
 
         <div class="form-group col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3 mt-sm-0">
-          <div class="mdc-select mdc-select--outlined mdc-select--locale">
+          <div id="footer-language-selector" class="mdc-select mdc-select--outlined mdc-select--locale">
             <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
               <span class="mdc-notched-outline">
                 <span class="mdc-notched-outline__leading"></span>
@@ -113,13 +113,13 @@
             </div>
             <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
               <ul class="mdc-list" role="listbox">
-                {% set countries = getLanguageOptions() %}
-                {% for country in countries %}
-                  <li class="mdc-list-item" data-value={{ country[0] }} {% if country[2] %}selected{% endif %}
+                {% set languageOptionList = getLanguageOptions() %}
+                {% for languageOption in languageOptionList %}
+                  <li class="mdc-list-item" data-value={{ languageOption[0] }} {% if languageOption[2] %}selected{% endif %}
                       role="option">
                     <span class="mdc-list-item__ripple"></span>
                     <span class="mdc-list-item__text">
-                    {{ country[1] }}
+                    {{ languageOption[1] }}
                   </span>
                   </li>
                 {% endfor %}

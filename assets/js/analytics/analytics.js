@@ -1,4 +1,5 @@
-/* eslint-disable */
+import $ from 'jquery'
+/* global YT */
 
 //
 // This file contains the classes for the
@@ -6,153 +7,142 @@
 //  * YouTube video tracking
 //
 
-if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msTrackingProtectionEnabled' in window.external) &&
-  (window.doNotTrack === '1' || navigator.doNotTrack === 'yes' || navigator.doNotTrack === '1' || navigator.msDoNotTrack === '1')) {
-  // The browser supports Do Not Track!
-  // Do Not Track is enabled!
-} else {
-  // Do Not Track is not supported || // Do Not Track is disabled!
-
-  (function ($, window, document, undefined) {
-    'use strict'
-
-    /**
-     * Contains Helper functions
+if (isTrackingAllowed()) {
+  /**
+     * Contains Generator functions
      *
      * @module Tracker
      * @class HelperFunctions
-     * @memberof Tracker
+     * @member of Tracker
      * @static
-     * @final
-     * @readonly
      */
-    const HelperFunctions = {
+  window.HelperFunctions = {
 
-      /*
+    /*
       * Returns the hostname of the currently viewed window
       *
       * @method getHostname
       * @return {String} Hostname
       */
-      getHostname: function () {
-        return window.location.hostname
-      },
+    getHostname: function () {
+      return window.location.hostname
+    },
 
-      /*
+    /*
       * Returns the value of the URL after program/
       *
       * @method getProgramNumberFromUrl
       * @return {String} value
       */
-      getProgramNumberFromUrl: function () {
-        if (window.location === undefined) {
-          return undefined
-        }
+    getProgramNumberFromUrl: function () {
+      if (window.location === undefined) {
+        return undefined
+      }
 
-        if (/.*program\/\d+$/.test(window.location.pathname)) {
-          return HelperFunctions.getLastValue(window.location.pathname)
-        } else {
-          return undefined
-        }
-      },
+      if (/.*program\/.+$/.test(window.location.pathname)) {
+        return this.getLastValue(window.location.pathname)
+      } else {
+        return undefined
+      }
+    },
 
-      /*
+    /*
       * Returns the value of the last connected digits
       *
       * @method getLastValue
       * @param {string} uri - string to extract the last value
       * @return {string} value
       */
-      getLastValue: function (uri) {
-        if (uri === undefined || typeof (uri) !== 'string') {
-          return undefined
-        }
+    getLastValue: function (uri) {
+      if (uri === undefined || typeof (uri) !== 'string') {
+        return undefined
+      }
 
-        return uri.match(/\d+$/)[0]
-      },
+      return uri.match(/\d+$/)[0]
+    },
 
-      /*
+    /*
        * Function to remove query parameter and the current domain from the uri
        * Format {domain}/page/subpage?{parameter}
        * @method removeDomainAndQuery
        * @param {String} uri - URI
        * @return {String} uri
       */
-      removeDomainAndQuery: function (uri) {
-        if (uri === undefined || typeof (uri) !== 'string') {
-          return undefined
-        }
+    removeDomainAndQuery: function (uri) {
+      if (uri === undefined || typeof (uri) !== 'string') {
+        return undefined
+      }
 
-        const hostname = HelperFunctions.getHostname()
+      const hostname = this.getHostname()
 
-        // remove protocol = "https:"
-        if (uri.indexOf(window.location.protocol) >= 0) {
-          uri = uri.replace(window.location.protocol + '//', '')
-        }
+      // remove protocol = "https:"
+      if (uri.indexOf(window.location.protocol) >= 0) {
+        uri = uri.replace(window.location.protocol + '//', '')
+      }
 
-        // remove hostdomain
-        if (uri.indexOf(hostname) >= 0) {
-          uri = uri.replace(hostname, '')
-        }
+      // remove host domain
+      if (uri.indexOf(hostname) >= 0) {
+        uri = uri.replace(hostname, '')
+      }
 
-        // remove query parameters
-        uri = HelperFunctions.removeQueryParameterFromUri(uri)
+      // remove query parameters
+      uri = this.removeQueryParameterFromUri(uri)
 
-        return uri
-      },
+      return uri
+    },
 
-      /*
+    /*
        * Function to remove query parameter from the uri
        * Format /page/subpage?{parameter}
        * @method removeQueryParameterFromUri
        * @param {String} uri - URI
        * @return {String} uri
       */
-      removeQueryParameterFromUri: function (uri) {
-        if (uri === undefined || typeof (uri) !== 'string') {
-          return undefined
-        }
+    removeQueryParameterFromUri: function (uri) {
+      if (uri === undefined || typeof (uri) !== 'string') {
+        return undefined
+      }
 
-        // remove query parameters
-        if (uri.indexOf('?') >= 0) {
-          uri = uri.substring(0, uri.indexOf('?'))
-        }
+      // remove query parameters
+      if (uri.indexOf('?') >= 0) {
+        uri = uri.substring(0, uri.indexOf('?'))
+      }
 
-        return uri
-      },
+      return uri
+    },
 
-      /*
+    /*
        * Checks if the input string is null or whitespace
        * @method isNullOrWhitespace
        * param{string} text - input parameter
       */
-      isNullOrWhitespace: function (text) {
-        if (text === undefined || typeof (text) !== 'string') {
-          return undefined
-        }
+    isNullOrWhitespace: function (text) {
+      if (text === undefined || typeof (text) !== 'string') {
+        return undefined
+      }
 
-        return (!text || text.trim() === '')
-      },
+      return (!text || text.trim() === '')
+    },
 
-      /* Returns the the query parameter from the given url
+    /* Returns the the query parameter from the given url
        * @method getParameterByName
        * @param{String} name - the query parameter
        * @param{String} url - the url
        * @return{String} - the query value
       */
-      getParameterByName: function (name, url) {
-        if (name === undefined || typeof (name) !== 'string') {
-          return ''
-        }
-        if (url === undefined || typeof (url) !== 'string') {
-          return ''
-        }
+    getParameterByName: function (name, url) {
+      if (name === undefined || typeof (name) !== 'string') {
+        return ''
+      }
+      if (url === undefined || typeof (url) !== 'string') {
+        return ''
+      }
 
-        const match = RegExp('[?&]' + name + '=([^&]*)').exec(url)
-        return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
-      },
+      const match = RegExp('[?&]' + name + '=([^&]*)').exec(url)
+      return match && decodeURIComponent(match[1].replace(/\+/g, ' '))
+    },
 
-      /* Returns an array of 3 elements for the tracking of
+    /* Returns an array of 3 elements for the tracking of
        * a link
        * a more button
        * a less button
@@ -162,848 +152,794 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
        * @param{String} category - the category
        * @return{Array} - an array of three elements
       */
-      createTripleElementProgram: function (ident, descriptor, category) {
-        const tripleList = [
-          {
-            /*
+    createTripleElementProgram: function (ident, descriptor, category) {
+      return [
+        {
+          /*
              * Tracks the clicks on the programs
             */
-            BaseSelector: '#' + ident,
-            SubSelector: 'a',
-            Category: category,
-            Action: 'click - ' + descriptor + ' programs',
-            Label: function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')) }
-          },
-          {
-            /*
+          BaseSelector: '#' + ident,
+          SubSelector: 'a',
+          Category: category,
+          Action: 'click - ' + descriptor + ' programs',
+          Label: function (e) { return this.removeDomainAndQuery($(e).attr('href')) }
+        },
+        {
+          /*
              * Tracks the clicks on the more button
             */
-            BaseSelector: '#' + ident,
-            SubSelector: '.button-show-more',
-            Category: category,
-            Action: 'click - ' + descriptor + ' programs - more'
-          },
-          {
-            /*
+          BaseSelector: '#' + ident,
+          SubSelector: '.button-show-more',
+          Category: category,
+          Action: 'click - ' + descriptor + ' programs - more'
+        },
+        {
+          /*
              * Tracks the clicks on the less button
              */
-            BaseSelector: '#' + ident,
-            SubSelector: '.button-show-less',
-            Category: category,
-            Action: 'click - ' + descriptor + ' programs - less'
-          }
-        ]
-
-        return tripleList
-      }
-
+          BaseSelector: '#' + ident,
+          SubSelector: '.button-show-less',
+          Category: category,
+          Action: 'click - ' + descriptor + ' programs - less'
+        }
+      ]
     }
+  }
 
-    // Register the HelperFunctions in the global window context
-    window.HelperFunctions = HelperFunctions
-  })(window.jQuery, window, document);
-
-  (function ($, window, document, undefined) {
-    'use strict'
-
-    /**
-     * UrlMapper
-     * maps the url defined in the map
-     *
-     * @module Tracker
-     * @class UrlMapper
-     * @memberof Tracker
-     * @requires jQuery
-     * @static
-     */
-    const UrlMapper = {
-      /*
+  window.UrlMapper = {
+    /*
        * Function to remove query parameter from the uri
        * Format /page/subpage?{parameter}
        * @method removeQueryParameterFromUri
        * @param {String} uri - URI
        * @return {String} uri
       */
-      map: function (url, mappings) {
-        url = url || window.location.href || ''
-        mappings = mappings || []
+    map: function (url, mappings) {
+      url = url || window.location.href || ''
+      mappings = mappings || []
 
-        $.each(mappings, function (j, map) {
-          if (map.RegEx.test(url)) {
-            url = url.match(map.RegEx)[map.ValueIndex]
-            return url
-          }
-        })
+      $.each(mappings, function (j, map) {
+        if (map.RegEx.test(url)) {
+          url = url.match(map.RegEx)[map.ValueIndex]
+          return url
+        }
+      })
 
-        return url
-      }
+      return url
     }
+  }
 
-    // Register the UrlMapper in the global window context
-    window.UrlMapper = UrlMapper
-  })(window.jQuery, window, document);
-
-  (function ($, window, document, undefined) {
-    'use strict'
-
-    /**
+  /**
      * TrackingObjectFactory
      * Factory to create Tracking Objects
      *
      * @module Tracker
      * @class TrackingObjectFactory
-     * @memberof Tracker
+     * @member of Tracker
      * @requires jQuery
      * @static
      */
-    const TrackingObjectFactory = {
-      /*
+  window.TrackingObjectFactory = {
+    /*
        * Function to create trackingObjects from plain object
        * @method trackingObjectFactoryArray
        * @param {Array[Object]} trackingObjectArray - Source Array for the trackingObjects
        * @return {Array[TrackingObject]} - Array of trackingObjects
   */
-      createArray: function (trackingObjectArray) {
-        const returnArray = []
+    createArray: function (trackingObjectArray) {
+      const returnArray = []
+      const _this = this
+      $.each(trackingObjectArray, function (index, elementToTrack) {
+        returnArray.push(_this.createObj(elementToTrack))
+      })
 
-        jQuery.each(trackingObjectArray, function (index, elementToTrack) {
-          returnArray.push(TrackingObjectFactory.createObj(elementToTrack))
-        })
+      return returnArray
+    },
 
-        return returnArray
-      },
-
-      /*
+    /*
        * Function to create a trackingObject from plain object
        * @method trackingObjectFactoryObj
        * @param {Object} obj - Source for the trackingObject
        * @return {TrackingObject} - TrackingObjects
        */
-      createObj: function (obj) {
-        const trackingObject = new TrackingObject()
+    createObj: function (obj) {
+      const trackingObject = new TrackingObject()
 
-        Object.keys(obj).forEach(function (key, index) {
-          // key: the name of the object key
-          // index: the ordinal position of the key within the object
-          switch (key) {
-            case 'BaseSelector':
-              trackingObject.addBaseSelector(obj[key])
-              break
-            case 'SubSelector':
-              trackingObject.addSubSelector(obj[key])
-              break
-            default:
-              trackingObject.addEventParameter(key, obj[key])
-          }
-        })
-
-        if (AnalyticsTracker.debugOutput) {
-          AnalyticsTracker.isBaseSeletorValid(trackingObject.baseSelector)
+      Object.keys(obj).forEach(function (key, _) {
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object
+        switch (key) {
+          case 'BaseSelector':
+            trackingObject.addBaseSelector(obj[key])
+            break
+          case 'SubSelector':
+            trackingObject.addSubSelector(obj[key])
+            break
+          default:
+            trackingObject.addEventParameter(key, obj[key])
         }
+      })
 
-        return trackingObject
+      if (window.AnalyticsTracker.debugOutput) {
+        window.AnalyticsTracker.isBaseSelectorValid(trackingObject.baseSelector)
       }
+
+      return trackingObject
+    }
+  }
+
+  class TrackingObject {
+    /**
+     * Tracking Object
+     * contains the selectors and the event parameter for the analytics tracking
+     *
+     * @module Tracker
+     * @class TrackingObject
+     * @member of Tracker
+     * @constructor
+     */
+    constructor () {
+      /**
+       * The Event parameter for the event tracking
+       * @property Parameter
+       * @type string
+       */
+      this.baseSelector = ''
+
+      /**
+       * The Event parameter for the event tracking
+       * @property Parameter
+       * @type string
+       */
+      this.subSelector = ''
+
+      /**
+       * The Event parameter for the event tracking
+       * @property Parameter
+       * @type object
+       */
+      this.eventParameter = {}
     }
 
-    // Register the TrackingObjectFactory in the global window context
-    window.TrackingObjectFactory = TrackingObjectFactory
-  })(window.jQuery, window, document);
-
-  (function ($, window, document, undefined) {
-    'use strict'
-
-    let TrackingObject
-
-    TrackingObject = (function () {
-      /**
-       * Tracking Object
-       * contrains the selectors and the event parameter for the analytics tracking
-       *
-       * @module Tracker
-       * @class TrackingObject
-       * @memberof Tracker
-       * @constructor
-       */
-      TrackingObject = function () {
-        /**
-         * The Event parameter for the event tracking
-         * @property Parameter
-         * @type collection
-         */
-        this.baseSelector = ''
-
-        /**
-         * The Event parameter for the event tracking
-         * @property Parameter
-         * @type collection
-         */
-        this.subSelector = ''
-
-        /**
-         * The Event parameter for the event tracking
-         * @property Parameter
-         * @type collection
-         */
-        this.eventParameter = {}
-      }
-
-      /**
-       * Adds the base identifier for the tracked element
-       *
-       * @method addBaseSelector
-       * @param {String} baseSelector - The indentifier of the base element to be tracked
-       * @return {TrackingObject} - returns same object
-       */
-      TrackingObject.prototype.addBaseSelector = function (baseSelector) {
-        this.baseSelector = baseSelector
-        return this
-      }
-
-      /**
-       * Adds a sub identifier for the tracked element
-       *
-       * @method addSubSelector
-       * @param {String} subSelector - The indentifier of the sub element to be tracked
-       * @return {TrackingObject} - returns same object
-       */
-      TrackingObject.prototype.addSubSelector = function (subSelector) {
-        this.subSelector = subSelector
-        return this
-      }
-
-      /**
-       * Adds an event parameter
-       *
-       * @method addEventParameter
-       * @param {String} key - The name of the event parameter
-       * @param {String} value - The value of the event parameter
-       * @return {TrackingObject} - returns same object
-       */
-      TrackingObject.prototype.addEventParameter = function (key, value) {
-        this.eventParameter[key] = value
-        return this
-      }
-
-      /**
-       * Returns the event parameters
-       *
-       * @method getEventParameter
-       * @return {Object} - returns the event parameter
-       */
-      TrackingObject.prototype.getEventParameter = function () {
-        return this.eventParameter
-      }
-
-      /**
-       * Returns true if a Subselector exits
-       *
-       * @method hasSubselector
-       * @return {boolean} - true if a subselector exits, else false
-       */
-      TrackingObject.prototype.hasSubSelector = function () {
-        return ((this.subSelector.length > 0))
-      }
-
-      /**
-       * Creates a deep copy of the TrackingObject
-       *
-       * @method copy
-       * @return {TrackingObject} - returns copy of the object
-       */
-      TrackingObject.prototype.copy = function () {
-        const copy = new TrackingObject()
-        const toCopy = this
-
-        // iterates the parameters of the TrackingObject and
-        // executes functions of the parametes
-        Object.keys(toCopy).forEach(function (key, index) {
-          // key: the name of the object key
-          // index: the ordinal position of the key within the object
-          copy[key] = ((typeof (copy[key]) === 'object') ? Object.assign({}, toCopy[key]) : toCopy[key])
-        })
-        return copy
-      }
-
-      return TrackingObject
-    })()
-
-    // Register the TrackingObject in the global window context
-    window.TrackingObject = TrackingObject
-  })(window.jQuery, window, document);
-
-  (function ($, window, document, undefined) {
-    'use strict'
+    /**
+     * Adds the base identifier for the tracked element
+     *
+     * @method addBaseSelector
+     * @param {String} baseSelector - The indentifier of the base element to be tracked
+     * @return {TrackingObject} - returns same object
+     */
+    addBaseSelector (baseSelector) {
+      this.baseSelector = baseSelector
+      return this
+    }
 
     /**
+     * Adds a sub identifier for the tracked element
+     *
+     * @method addSubSelector
+     * @param {String} subSelector - The indentifier of the sub element to be tracked
+     * @return {TrackingObject} - returns same object
+     */
+    addSubSelector (subSelector) {
+      this.subSelector = subSelector
+      return this
+    }
+
+    /**
+     * Adds an event parameter
+     *
+     * @method addEventParameter
+     * @param {String} key - The name of the event parameter
+     * @param {String} value - The value of the event parameter
+     * @return {TrackingObject} - returns same object
+     */
+    addEventParameter (key, value) {
+      this.eventParameter[key] = value
+      return this
+    }
+
+    /**
+     * Returns the event parameters
+     *
+     * @method getEventParameter
+     * @return {Object} - returns the event parameter
+     */
+    getEventParameter () {
+      return this.eventParameter
+    }
+
+    /**
+     * Returns true if a Subselector exits
+     *
+     * @method hasSubselector
+     * @return {boolean} - true if a subselector exits, else false
+     */
+    hasSubSelector () {
+      return ((this.subSelector.length > 0))
+    }
+
+    /**
+     * Creates a deep copy of the TrackingObject
+     *
+     * @method copy
+     * @return {TrackingObject} - returns copy of the object
+     */
+    copy () {
+      const copy = new TrackingObject()
+      const toCopy = this
+
+      // iterates the parameters of the TrackingObject and
+      // executes functions of the parameters
+      Object.keys(toCopy).forEach(function (key, _) {
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object
+        copy[key] = ((typeof (copy[key]) === 'object') ? Object.assign({}, toCopy[key]) : toCopy[key])
+      })
+      return copy
+    }
+  }
+
+  /**
      * Contains methods to create tracking objects and
      * add click event handlers to html elements
      *
      * @module Tracker
      * @class AnalyticsTracker
-     * @memberof Tracker
+     * @member of Tracker
      * @requires jQuery
      * @static
      */
-    let AnalyticsTracker
+  window.AnalyticsTracker = {
 
-    AnalyticsTracker = {
-
-      /**
+    /**
        * Indicates if the send event should be displayed
        * @property debugOutput
        * @type boolean
        */
-      debugOutput: false,
+    debugOutput: false,
 
-      /**
+    /**
        * Indicates if the event is send
        * @property isSending
        * @type boolean
        */
-      isSending: true,
+    isSending: true,
 
-      /**
+    /**
        * Contains the tracking function of the analytics system
        * @property trackingFunction
        * @type function
        */
-      trackingFunction: undefined,
+    trackingFunction: undefined,
 
-      /**
+    /**
        * Contains the filter for the valid download extensions
        * @property validDownloadExtensions
-       * @type string
+       * @type Array
        */
-      validDownloadExtensions: [],
+    validDownloadExtensions: [],
 
-      /**
+    /**
        * Contains the mapping of the tracking actions
        * @property trackingVarMap
        * @type Array
        */
-      trackingVarMap: [],
+    trackingVarMap: [],
 
-      /**
+    /**
        * initializes the AnalyticsTracker withe the tracking function
        * @method initialize
        * @param {function} trackingFunction - the tracking function
        * @param {array} map - the mapping of the tracking actions
-       * @param {array} validDownloadExtensions - valid download extions for the event tracking
+       * @param {array} validDownloadExtensions - valid download extensions for the event tracking
        */
-      initialize: function (trackingFunction, map, validDownloadExtensions) {
-        AnalyticsTracker.trackingFunction = trackingFunction
-        AnalyticsTracker.trackingVarMap = map
-        AnalyticsTracker.validDownloadExtensions = validDownloadExtensions
-      },
+    initialize: function (trackingFunction, map, validDownloadExtensions) {
+      this.trackingFunction = trackingFunction
+      this.trackingVarMap = map
+      this.validDownloadExtensions = validDownloadExtensions
+    },
 
-      /**
+    /**
        * adds the data.eventParameter to the object
        * @method addEventParameter
        * @param {object} obj - the object
        * @param {object} eventParameter - event parameter to add
        */
-      addEventParameter: function (obj, eventParameter) {
-        obj.data = obj.data || {}
-        obj.data.eventParameter = eventParameter
-      },
+    addEventParameter: function (obj, eventParameter) {
+      obj.data = obj.data || {}
+      obj.data.eventParameter = eventParameter
+    },
 
-      /*
+    /*
        * Function to track all email links on the web page
        * @method trackEmails
        * @param {object} parameter - contains the parameter for the tracking
        */
-      trackEmails: function (parameter) {
-        parameter.BaseSelector = 'a[href^="mailto"]'
-        const trackingObject = TrackingObjectFactory.createObj(parameter)
+    trackEmails: function (parameter) {
+      parameter.BaseSelector = 'a[href^="mailto"]'
+      const trackingObject = window.TrackingObjectFactory.createObj(parameter)
 
-        AnalyticsTracker.trackOnClickEvent(trackingObject)
-      },
+      this.trackOnClickEvent(trackingObject)
+    },
 
-      /*
+    /*
        * Function to track the field by keypress enter
        * @method trackOnKeyPressEnter
        * @param {string} parameter - parameter for tracking
        */
-      trackOnKeyPressEnter: function (parameter) {
-        const trackingObject = TrackingObjectFactory.createObj(parameter)
+    trackOnKeyPressEnter: function (parameter) {
+      const trackingObject = window.TrackingObjectFactory.createObj(parameter)
+      const _this = this
+      // search for the search box
+      $(trackingObject.baseSelector).keypress(function (e) {
+        // Keypress 13 = Enter
+        if (e.which === 13) {
+          _this.addEventParameter(e, trackingObject.getEventParameter())
+          _this.resolve(e)
+        }
+      })
+    },
 
-        // search for the searchbox
-        jQuery(trackingObject.baseSelector).keypress(function (e) {
-          // Keypress 13 = Enter
-          if (e.which == 13) {
-            AnalyticsTracker.addEventParameter(e, trackingObject.getEventParameter())
-            AnalyticsTracker.resolve(e)
-          }
-        })
-      },
-
-      /*
-       * Function to interpret the trackingobject parameters and send the Google Analytics event
+    /*
+       * Function to interpret the tracking object parameters and send the Google Analytics event
        * @method resolve
        * @param {event} event - click event send from jQuery
        */
-      resolve: function (event) {
-        // gets the event parameters
-        const params = event.data.eventParameter
+    resolve: function (event) {
+      // gets the event parameters
+      const params = event.data.eventParameter
 
-        // iterates the parameters of the TrackingObject and
-        // executes functions of the parametes
-        Object.keys(params).forEach(function (key, index) {
-          // key: the name of the object key
-          // index: the ordinal position of the key within the object
-          if (typeof (params[key]) === 'function' && key.indexOf('callback') < 0) {
-            params[key] = params[key](event.currentTarget)
-          }
-        })
+      // iterates the parameters of the TrackingObject and
+      // executes functions of the parameters
+      Object.keys(params).forEach(function (key, _) {
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object
+        if (typeof (params[key]) === 'function' && key.indexOf('callback') < 0) {
+          params[key] = params[key](event.currentTarget)
+        }
+      })
 
-        AnalyticsTracker.sendEvent(event.currentTarget, params)
-      },
+      this.sendEvent(event.currentTarget, params)
+    },
 
-      /*
+    /*
        * Function to map the event parameters accordingly to the tracking let Map
        * @method mapEventParameter
        * @param {object} actions - parameters to map
        * @return {object} - mapped parameters
        */
-      mapEventParameter: function (actions) {
-        const mapped = {}
+    mapEventParameter: function (actions) {
+      const mapped = {}
 
-        Object.keys(actions).forEach(function (key, index) {
-          const mapIndex = AnalyticsTracker.trackingVarMap.findIndex(function (x) { return key in x })
-          if (mapIndex >= 0) {
-            const parameter = AnalyticsTracker.trackingVarMap[mapIndex]
-            const mappedKey = parameter[key]
+      const _this = this
+      Object.keys(actions).forEach(function (key, _) {
+        const mapIndex = _this.trackingVarMap.findIndex(function (x) { return key in x })
+        if (mapIndex >= 0) {
+          const parameter = _this.trackingVarMap[mapIndex]
+          const mappedKey = parameter[key]
 
-            if (typeof (actions[key]) === 'string' && HelperFunctions.isNullOrWhitespace(actions[key]) === false ||
-              typeof (actions[key]) === 'number') {
-              mapped[mappedKey] = actions[key]
-            }
-          } else {
-            mapped[key] = actions[key]
+          if ((typeof (actions[key]) === 'string' && window.HelperFunctions.isNullOrWhitespace(actions[key]) === false) || typeof (actions[key]) === 'number') {
+            mapped[mappedKey] = actions[key]
           }
-        })
+        } else {
+          mapped[key] = actions[key]
+        }
+      })
 
-        return mapped
-      },
+      return mapped
+    },
 
-      /*
+    /*
        * Function to send tracking event to the analytics system
        * @method sendEvent
        * @param {HTMLElement} element - element which triggered the click
        * @param {Object} eventParameter  - event Parameter to send
       */
-      sendEvent: function (element, eventParameter) {
-        const mapped = AnalyticsTracker.mapEventParameter(eventParameter)
+    sendEvent: function (element, eventParameter) {
+      const mapped = this.mapEventParameter(eventParameter)
 
-        // prints the tracking parameter
-        if (AnalyticsTracker.debugOutput === true) {
-          console.log('event send : \r\n' + AnalyticsTracker.printObjectParameter(mapped))
-        }
+      // prints the tracking parameter
+      if (this.debugOutput === true) {
+        console.log('event send : \r\n' + this.printObjectParameter(mapped))
+      }
 
-        if (AnalyticsTracker.isSending === true) {
-          // execute tracking code
-          AnalyticsTracker.trackingFunction('event', eventParameter.Action, mapped)
-        }
-      },
+      if (this.isSending === true) {
+        // execute tracking code
+        this.trackingFunction('event', eventParameter.Action, mapped)
+      }
+    },
 
-      /*
+    /*
        * Function to add the click event handler to the elements to track
        * @method trackOnClickEvent
        * @param {TrackingObject} element - Element to track
       */
-      trackOnClickEvent: function (trackingObject) {
-        if (trackingObject.hasSubSelector()) {
-          jQuery(trackingObject.baseSelector).on('click', trackingObject.subSelector, function (e) {
-            const tracking_copy = trackingObject.copy()
-            AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter())
-            AnalyticsTracker.resolve(e)
-          })
-        } else {
-          jQuery(trackingObject.baseSelector).on('click', function (e) {
-            const tracking_copy = trackingObject.copy()
-            AnalyticsTracker.addEventParameter(e, tracking_copy.getEventParameter())
-            AnalyticsTracker.resolve(e)
-          })
-        }
-      },
+    trackOnClickEvent: function (trackingObject) {
+      const _this = this
+      if (trackingObject.hasSubSelector()) {
+        $(trackingObject.baseSelector).on('click', trackingObject.subSelector, function (e) {
+          const trackingCopy = trackingObject.copy()
+          _this.addEventParameter(e, trackingCopy.getEventParameter())
+          _this.resolve(e)
+        })
+      } else {
+        $(trackingObject.baseSelector).on('click', function (e) {
+          const trackingCopy = trackingObject.copy()
+          _this.addEventParameter(e, trackingCopy.getEventParameter())
+          _this.resolve(e)
+        })
+      }
+    },
 
-      /*
+    /*
        * Function to register the TrackingObjects for Click tracking
        * @method registerElementsForClickTracking
        * @param  {Array[TrackingObject]} trackingList - Array of trackingObjects
        */
-      registerElementsForClickTracking: function (trackingList) {
-        if (Array.isArray(trackingList)) {
-          jQuery.each(trackingList, function (index, trackingObjectToTrack) {
-            AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack)
-          })
-        } else {
-          AnalyticsTracker.trackOnClickEvent(trackingList)
-        }
-      },
+    registerElementsForClickTracking: function (trackingList) {
+      if (Array.isArray(trackingList)) {
+        $.each(trackingList, function (index, trackingObjectToTrack) {
+          window.AnalyticsTracker.trackOnClickEvent(trackingObjectToTrack)
+        })
+      } else {
+        this.trackOnClickEvent(trackingList)
+      }
+    },
 
-      /*
+    /*
        * Function to add click event handler to all outbound links and
        * to all internal downloads
        * @method trackOutboundAndDownloads
        * @param {Object} parameter - contains the extensions for the tracked internal downloads
        */
-      trackOutboundAndDownloads: function (parameter) {
-        // select all a with are not beginning with '#'
-        jQuery('a:not([href^=\'#\'])').filter(function () {
-          // filter only links beginning with http
-          return /^http.*/.test(this.href)
-        }).each(function () {
-          // Add click event to the link to track the outbound link
-          const _hostDomain = HelperFunctions.getHostname()
-          if (this.href.indexOf(_hostDomain) < 0) {
-            // is external link
-            jQuery(this).on('click', function (sender) {
-              if (this.href !== undefined) {
-                const url = this.href
-                let trackingObject = TrackingObjectFactory.createObj(parameter.Outbound)
+    trackOutboundAndDownloads: function (parameter) {
+      const _this = this
+      // select all a with are not beginning with '#'
+      $('a:not([href^=\'#\'])').filter(function () {
+        // filter only links beginning with http
+        return /^http.*/.test(this.href)
+      }).each(function () {
+        // Add click event to the link to track the outbound link
+        const _hostDomain = window.HelperFunctions.getHostname()
+        if (this.href.indexOf(_hostDomain) < 0) {
+          // is external link
+          $(this).on('click', function (sender) {
+            if ($(this).href !== undefined) {
+              const url = $(this).href
+              let trackingObject = window.TrackingObjectFactory.createObj(parameter.Outbound)
 
-                if (jQuery(this).attr('target') !== '_blank') {
-                  trackingObject = trackingObject.addEventParameter('event_callback', function () { document.location = url })
-                }
-
-                AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter())
-                AnalyticsTracker.resolve(sender)
+              if ($(this).attr('target') !== '_blank') {
+                trackingObject = trackingObject.addEventParameter('event_callback', function () { document.location = url })
               }
-            })
-          } else {
-            // is internal downloads
-            jQuery(this).filter(function () {
-              // file extensions
-              // valid download extensions
-              return AnalyticsTracker.validDownloadExtensions.test(this.href)
-            }).each(function () {
-              jQuery(this).on('click', function (sender) {
-                const trackingObject = TrackingObjectFactory.createObj(parameter.Downloads)
-                AnalyticsTracker.addEventParameter(sender, trackingObject.getEventParameter())
-                AnalyticsTracker.resolve(sender)
-              })
-            })
-          }
-        })
-      },
 
-      /*
+              _this.addEventParameter(sender, trackingObject.getEventParameter())
+              _this.resolve(sender)
+            }
+          })
+        } else {
+          // is internal downloads
+          $(this).each(function () {
+            $(this).on('click', function (sender) {
+              const trackingObject = window.TrackingObjectFactory.createObj(parameter.Downloads)
+              _this.addEventParameter(sender, trackingObject.getEventParameter())
+              _this.resolve(sender)
+            })
+          })
+        }
+      })
+    },
+
+    /*
        * Function to check if the base selector is valid
        * on the current page
-       * @method isBaseSeletorValid
+       * @method isBaseSelectorValid
        * @param {string} baseSelector - the base selector
        * @return {boolean}
        */
-      isBaseSeletorValid: function (baseSelector) {
-        let isValid = false
-        // Chech if the tracked object exits on the page
-        if ($(baseSelector).length) {
-          console.log('Selector found: ' + baseSelector)
-          isValid = true
-        } else {
-          console.log('%cSelector not found: ' + baseSelector, 'color:red')
-        }
+    isBaseSelectorValid: function (baseSelector) {
+      let isValid = false
+      // Check if the tracked object exits on the page
+      if ($(baseSelector).length) {
+        console.log('Selector found: ' + baseSelector)
+        isValid = true
+      } else {
+        console.log('%cSelector not found: ' + baseSelector, 'color:red')
+      }
 
-        return isValid
-      },
+      return isValid
+    },
 
-      /*
+    /*
        * Function to print the parameter of an objects as string
        * @method printObjectParameter
        * @param {object} obj - the object
        * @return {string}
       */
-      printObjectParameter: function (obj) {
-        let output = ''
-        Object.keys(obj).forEach(function (key, index) {
-          // key: the name of the object key
-          // index: the ordinal position of the key within the object
-          output += key + ': ' + obj[key] + '\r\n'
-        })
+    printObjectParameter: function (obj) {
+      let output = ''
+      Object.keys(obj).forEach(function (key, _) {
+        // key: the name of the object key
+        // index: the ordinal position of the key within the object
+        output += key + ': ' + obj[key] + '\r\n'
+      })
 
-        return output
-      }
+      return output
     }
+  }
 
-    // Register the AnalyticsTracker in the global window context
-    window.AnalyticsTracker = AnalyticsTracker
-  })(window.jQuery, window, document);
-
-  (function ($, window, document, undefined) {
-    /**
+  /**
      * YoutubeTracker
      * contains function to track Youtoube videos
      *
      * @module Tracker
      * @class YoutubeTracker
-     * @memberof Tracker
+     * @member of Tracker
      * @requires jQuery
      * @static
      */
-    let YoutubeTracker
+  window.YoutubeTracker = {
 
-    YoutubeTracker = {
-
-      /**
+    /**
        * Contains the reference to the AnalyticsTracker
        * @property analyticsTracker
        * @type AnalyticsTracker
        */
-      analyticsTracker: undefined,
+    analyticsTracker: undefined,
 
-      /**
+    /**
        * Defines the percentage of the video video content in which tracking events are send
        * @property percentageToTrack
-       * @type Array[interger]
+       * @type Array[integer]
        */
-      percentageToTrack: [25, 50, 75],
+    percentageToTrack: [25, 50, 75],
 
-      /**
-       * Contains all Youtoube Players
+    /**
+       * Contains all Youtube Players
        * @property playerArray
        * @type Array[YT.Player]
        */
-      playerArray: [],
+    playerArray: [],
 
-      /**
+    /**
        * Internal array to store currently playing videos
        * @property players
        * @type Array[YT.Player]
        */
-      players: [],
+    players: [],
 
-      /**
-       * Contains handle of the intervall thread
+    /**
+       * Contains handle of the interval thread
        * @property intervalId
-       * @type integer
+       * @type number
        */
-      intervalId: 0,
+    intervalId: 0,
 
-      /*
+    /*
        * Function initializes the YoutubeTracker
        * to all internal downloads
        * @method initialize
        * @param {AnalyticsTracker} analyticsTracker - contains a reference to the AnalyticsTracker
        */
-      initialize: function (analyticsTracker) {
-        YoutubeTracker.analyticsTracker = analyticsTracker
-      },
+    initialize: function (analyticsTracker) {
+      this.analyticsTracker = analyticsTracker
+    },
 
-      /*
+    /*
        * Function to get the percentage viewed for each video
        * creates new if not exists
        * @method getPercentage
        * @param {string} id - ID if the video
        * @return {integer} tracked percent of the video
        */
-      getPercentage: function (id) {
-        if (YoutubeTracker.players[id] === undefined) {
-          YoutubeTracker.players[id] = {}
-        }
+    getPercentage: function (id) {
+      if (this.players[id] === undefined) {
+        this.players[id] = {}
+      }
 
-        if (YoutubeTracker.players[id].timePercent === undefined) {
-          YoutubeTracker.players[id].timePercent = 0
-        }
+      if (this.players[id].timePercent === undefined) {
+        this.players[id].timePercent = 0
+      }
 
-        return YoutubeTracker.players[id].timePercent
-      },
+      return this.players[id].timePercent
+    },
 
-      /*
+    /*
        * Function to set the percentage tracked for each video
        * creates new if not exists
        * @method setPercentage
        * @param {string} id - ID if the video
        * @param {integer} value - percentage viewed
        */
-      setPercentage: function (id, value) {
-        if (YoutubeTracker.players[id] === undefined) {
-          YoutubeTracker.players[id] = {}
-        }
+    setPercentage: function (id, value) {
+      if (this.players[id] === undefined) {
+        this.players[id] = {}
+      }
 
-        YoutubeTracker.players[id].timePercent = value
-      },
+      this.players[id].timePercent = value
+    },
 
-      /*
+    /*
        * Get the id of the Youtube video
        * @method getId
        * @param {event} event - youtube video event
        * @return {string} id of the video
       */
-      getId: function (event) {
-        return event.getVideoData().video_id
-      },
+    getId: function (event) {
+      return event.getVideoData().video_id
+    },
 
-      /*
+    /*
        * Registers the YoutubeVideos on the web page for the viewing
        * @method registerYoutubeVideos
       */
-      registerYoutubeVideos: function () {
-        const regex = /(http)?s?\:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/
-        const i = 0
+    registerYoutubeVideos: function () {
+      const regex = /(http)?s?:?\/\/www\.youtube\.com\/embed\/([\w-]{11})(?:\?.*)?/
 
-        $('iframe').each(function (i, element) {
-          if (regex.test(element.src)) {
-            $(this).load(function () {
-              const matches = element.src.match(regex)
-              $(element).attr('data-video-id', matches[2])
-              YoutubeTracker.onYouTubeIframeAPIReady(element, matches[2])
-            })
-          } else { return false }
-        })
-      },
+      const _this = this
+      $('iframe').each(function (i, element) {
+        if (regex.test(element.src)) {
+          $(this).on('load', function () {
+            const matches = element.src.match(regex)
+            $(element).attr('data-video-id', matches[2])
+            _this.onYouTubeIframeAPIReady(element, matches[2])
+          })
+        } else { return false }
+      })
+    },
 
-      /*
+    /*
        * Method to track changes in the Youtube video player
        * @method checkStateChange
        * @param {event} event - Youtube video event
       */
-      checkStateChange: function (event) {
-        const player = event.target
-        const id = YoutubeTracker.getId(player)
+    checkStateChange: function (event) {
+      const player = event.target
+      const id = this.getId(player)
 
-        player.PlayerState = event.data
+      player.PlayerState = event.data
 
-        if (event.data == YT.PlayerState.UNSTARTED) {
-          player.lastPlayerState = YT.PlayerState.UNSTARTED
-        }
-        // track when user clicks Play
-        if (event.data == YT.PlayerState.PLAYING && player.lastPlayerState != YT.PlayerState.PLAYING) {
-          player.lastPlayerState = YT.PlayerState.PLAYING
-          YoutubeTracker.trackEvent(player, id, 'play', '')
-          YoutubeTracker.startChecking(player)
-        }
-        // track when user clicks Pause
-        if (event.data == YT.PlayerState.PAUSED) {
-          player.lastPlayerState = YT.PlayerState.PAUSED
-          YoutubeTracker.trackEvent(player, id, 'pause', '')
-        }
-        // track when video ends
-        if (event.data == YT.PlayerState.ENDED) {
-          player.lastPlayerState = YT.PlayerState.ENDED
-          YoutubeTracker.setPercentage(id, 0)
-          YoutubeTracker.trackEvent(player, id, 'ended', '')
-        }
-        // track buffering
-        if (event.data == YT.PlayerState.BUFFERING) {
-          player.lastPlayerState = YT.PlayerState.BUFFERING
-          YoutubeTracker.trackEvent(player, id, 'buffering', '')
-        }
-      },
+      if (event.data === YT.PlayerState.UNSTARTED) {
+        player.lastPlayerState = YT.PlayerState.UNSTARTED
+      }
+      // track when user clicks Play
+      if (event.data === YT.PlayerState.PLAYING && player.lastPlayerState !== YT.PlayerState.PLAYING) {
+        player.lastPlayerState = YT.PlayerState.PLAYING
+        this.trackEvent(player, id, 'play', '')
+        this.startChecking(player)
+      }
+      // track when user clicks Pause
+      if (event.data === YT.PlayerState.PAUSED) {
+        player.lastPlayerState = YT.PlayerState.PAUSED
+        this.trackEvent(player, id, 'pause', '')
+      }
+      // track when video ends
+      if (event.data === YT.PlayerState.ENDED) {
+        player.lastPlayerState = YT.PlayerState.ENDED
+        this.setPercentage(id, 0)
+        this.trackEvent(player, id, 'ended', '')
+      }
+      // track buffering
+      if (event.data === YT.PlayerState.BUFFERING) {
+        player.lastPlayerState = YT.PlayerState.BUFFERING
+        this.trackEvent(player, id, 'buffering', '')
+      }
+    },
 
-      /*
+    /*
        * Function to start the tracking thread
        * for the tracking of the video players
        * @method startChecking
        * @param {YoutubePlayer} player - Youtube video player
       */
-      startChecking: function (player) {
-        // check if not already started
-        if (YoutubeTracker.intervalId === 0) {
-          YoutubeTracker.intervalId = setInterval(YoutubeTracker.checkPercentage, 500)
+    startChecking: function (player) {
+      // check if not already started
+      if (this.intervalId === 0) {
+        this.intervalId = setInterval(this.checkPercentage, 500)
+      }
+
+      const id = this.getId(player)
+      let isAdded = false
+
+      Object.keys(this.players).forEach(function (key, _) {
+        if (key === id) {
+          isAdded = true
         }
+      })
 
-        const id = YoutubeTracker.getId(player)
-        let isAdded = false
+      if (isAdded === false) {
+        this.players[id] = player
+      }
+    },
 
-        Object.keys(YoutubeTracker.players).forEach(function (key, index) {
-          if (key == id) {
-            isAdded = true
-          }
-        })
-
-        if (isAdded === false) {
-          YoutubeTracker.players[id] = player
-        }
-      },
-
-      /*
+    /*
        * Function to stop the interval, if not already stopped
        * @method stopChecking
        */
-      stopChecking: function () {
-        // check if not already stopped
-        if (YoutubeTracker.intervalId !== 0) {
-          clearInterval(YoutubeTracker.intervalId)
-          YoutubeTracker.intervalId = 0
-        }
-      },
+    stopChecking: function () {
+      // check if not already stopped
+      if (this.intervalId !== 0) {
+        clearInterval(this.intervalId)
+        this.intervalId = 0
+      }
+    },
 
-      /*
-       * Interall Function to check periodicaly the states of the plying youtube videos
+    /*
+       * Interall Function to periodically check the states of the plying youtube videos
        * and sends a tracking event if a tracked percentage is reached
        * @method checkPercentage
        */
-      checkPercentage: function () {
-        let anyPlaying = false
+    checkPercentage: function () {
+      let anyPlaying = false
 
-        Object.keys(YoutubeTracker.players).forEach(function (key, index) {
-          const player = YoutubeTracker.players[key]
+      const _this = this
+      Object.keys(this.players).forEach(function (key, _) {
+        const player = _this.players[key]
 
-          if (player.PlayerState == YT.PlayerState.PLAYING) {
-            anyPlaying = true
-            const trackedPercentage = YoutubeTracker.getPercentage(key)
+        if (player.PlayerState === YT.PlayerState.PLAYING) {
+          anyPlaying = true
+          const trackedPercentage = _this.getPercentage(key)
 
-            const duration = player.getDuration()
-            const currentTime = player.getCurrentTime()
+          const duration = player.getDuration()
+          const currentTime = player.getCurrentTime()
 
-            if (duration > 0) {
-              let currentPerc = (currentTime / duration) * 100
-              currentPerc = Math.round(currentPerc)
+          if (duration > 0) {
+            let currentPerc = (currentTime / duration) * 100
+            currentPerc = Math.round(currentPerc)
 
-              // check each percentage
-              $.each(YoutubeTracker.percentageToTrack, function (j, percentage) {
-                // check if we reached a defined percentage
-                if (trackedPercentage < percentage && currentPerc > percentage) {
-                  YoutubeTracker.setPercentage(key, percentage)
-                  YoutubeTracker.trackEvent(player, key, 'watched-' + percentage + '%', '')
-                }
-              })
-            }
+            // check each percentage
+            const _this = this
+            $.each(this.percentageToTrack, function (j, percentage) {
+              // check if we reached a defined percentage
+              if (trackedPercentage < percentage && currentPerc > percentage) {
+                _this.setPercentage(key, percentage)
+                _this.trackEvent(player, key, 'watched-' + percentage + '%', '')
+              }
+            })
           }
-        })
-
-        // if no video is currently playing stop the intervall
-        if (!anyPlaying) {
-          YoutubeTracker.stopChecking()
         }
-      },
+      })
 
-      /*
+      // if no video is currently playing stop the interval
+      if (!anyPlaying) {
+        this.stopChecking()
+      }
+    },
+
+    /*
        * Function to create YT.Palyers object and and adds the to the monitored videos
        * add EventHanlder to the onReady and onStateChange events
        * @method onYouTubeIframeAPIReady
        * @param {Youtube video element} element - Youtube video element
        * @param {string} id - id of the video
        */
-      onYouTubeIframeAPIReady: function (element, id) {
-        if (YoutubeTracker.playerArray[id] === undefined) {
-          YoutubeTracker.playerArray[id] = new YT.Player(element, {
-            events: {
-              onReady: YoutubeTracker.onPlayerReady,
-              onStateChange: YoutubeTracker.onPlayerStateChange
-            }
-          })
-        }
-      },
+    onYouTubeIframeAPIReady: function (element, id) {
+      if (this.playerArray[id] === undefined) {
+        this.playerArray[id] = new YT.Player(element, {
+          events: {
+            onReady: this.onPlayerReady,
+            onStateChange: this.onPlayerStateChange
+          }
+        })
+      }
+    },
 
-      /*
+    /*
        * Event handler function for the onReady event of the Youtube player
        * @method onPlayerReady
        * @param {Youtube video element} event - Youtube video event
        */
-      onPlayerReady: function (event) { },
+    onPlayerReady: function (event) { },
 
-      /*
+    /*
        * Event handler function for the onStateChange event of the Youtube player
        * @method onPlayerStateChange
        * @param {Youtube video element} event - Youtube video event
        */
-      onPlayerStateChange: function (event) {
-        YoutubeTracker.checkStateChange(event)
-      },
+    onPlayerStateChange: function (event) {
+      this.checkStateChange(event)
+    },
 
-      /*
+    /*
        * Function to enable the Youtoube tracking api
        * adds the parameter
        * * enablejsapi = 1
@@ -1012,21 +948,21 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
        * and loads the tracking api
        * @method addTrackingApiToYoutoubeVideos
        */
-      addTrackingApiToYoutoubeVideos: function () {
-        // Enable JSAPI if it's not already on the URL
-        $('iframe').each(function (i, elem) {
-          if (/youtube.com\/embed/.test(elem.src)) {
-            if (elem.src.indexOf('enablejsapi=') === -1) {
-              elem.src += (elem.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1&origin=' + window.location.origin
-            }
+    addTrackingApiToYoutubeVideos: function () {
+      // Enable JSAPI if it's not already on the URL
+      $('iframe').each(function (i, elem) {
+        if (/youtube.com\/embed/.test(elem.src)) {
+          if (elem.src.indexOf('enablejsapi=') === -1) {
+            elem.src += (elem.src.indexOf('?') === -1 ? '?' : '&') + 'enablejsapi=1&origin=' + window.location.origin
           }
-        })
+        }
+      })
 
-        // load the tracking script
-        $.getScript('https://www.youtube.com/iframe_api')
-      },
+      // load the tracking script
+      getScript('https://www.youtube.com/iframe_api')
+    },
 
-      /*
+    /*
        * Sends the event to the Analytics tracker
        * @method trackEvent
        * @param {event} event - Youtube video event
@@ -1034,564 +970,570 @@ if ((window.doNotTrack || navigator.doNotTrack || navigator.msDoNotTrack || 'msT
        * @param {string} action - action of the event
        * @param {string} label - label of the event
        */
-      trackEvent: function (event, id, action, label) {
-        const videoName = event.getVideoData().title
-        const actionName = action + ' - ' + videoName
+    trackEvent: function (event, id, action, label) {
+      const videoName = event.getVideoData().title
+      const actionName = action + ' - ' + videoName
 
-        const trackingObject = TrackingObjectFactory.createObj({
-          Category: 'videos',
-          Action: actionName,
-          Label: window.location.pathname
-        })
+      const trackingObject = window.TrackingObjectFactory.createObj({
+        Category: 'videos',
+        Action: actionName,
+        Label: window.location.pathname
+      })
 
-        YoutubeTracker.sendEvent(trackingObject.getEventParameter())
-      },
+      this.sendEvent(trackingObject.getEventParameter())
+    },
 
-      /*
+    /*
        * Function to send the analytics event
        * @method sendEvent
        * @param {Object} parameter - event parameter of the event
       */
-      sendEvent: function (parameter) {
-        if (YoutubeTracker.analyticsTracker === undefined) {
-          console.log('AnalyticsTracker is undefined')
-          return
-        }
-        YoutubeTracker.analyticsTracker.sendEvent(null, parameter)
+    sendEvent: function (parameter) {
+      if (this.analyticsTracker === undefined) {
+        console.log('AnalyticsTracker is undefined')
+        return
       }
+      this.analyticsTracker.sendEvent(null, parameter)
     }
+  }
 
-    // Register the YoutubeTracker in the global window context
-    window.YoutubeTracker = YoutubeTracker
-  })(window.jQuery, window, document);
-
-  (function ($, window, document, configCustom, undefined) {
-    'use strict'
-
-    // initializes the configCustom as copy of configCustom or as empty object
-    configCustom = configCustom || {}
-
-    /**
+  /**
      * configuration object to set global configuration parameters
      * @param {String} UaId - Google Analytics tracking id
      */
-    const configDefault = {
-      UaId: 'UA-42270417-5',
-      validDownloadExtensions: /\.*.(zip|rar|mp\\d+|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff*|avi|svg)/,
-      GoogleAnalyticsUri: 'https://www.googletagmanager.com/gtag/js?id=',
-      DebugOutput: false,
+  const configDefault = {
+    UaId: 'UA-42270417-5',
+    validDownloadExtensions: /\.*.(zip|rar|mp\\d+|mpe*g|pdf|docx*|pptx*|xlsx*|jpe*g|png|gif|tiff*|avi|svg)/,
+    GoogleAnalyticsUri: 'https://www.googletagmanager.com/gtag/js?id=',
+    DebugOutput: false,
 
-      UrlMapping: [
-        {
-          // removes the parameters from the program url
-          // origin:  https://share.catrob.at//app/project/44132
-          // cleaned: https://share.catrob.at//app/project/
-          RegEx: /(.*\/program\/)(\d+)/,
-          ValueIndex: 1
-        },
-        {
-          // removes the parameters from the search and tag search url
-          // origin:  http://127.0.0.1/app/search/test
-          // cleaned: http://127.0.0.1/app/search/
-          // or
-          // https://share.catrob.at/app/search/test%20der%20test
-          // https://share.catrob.at/app/search/
-          // or
-          // https://share.catrob.at/app/tag/search/1
-          // https://share.catrob.at/app/tag/search/
-          RegEx: /(.*\/search\/)(.*)/,
-          ValueIndex: 1
-        },
-        {
-          // removes the query parameters from every url
-          // origin:  /app/?username=sonicjack2007&token=b1889b23f0f77ece495f5b2f9b358289
-          // cleaned: /app/
-          RegEx: /(.*\/?)(\?.*)/,
-          ValueIndex: 1
-        }
-      ],
-
-      // Mapping from the tracking object parameter to the analytics parameters
-      // Parameters required are:
-      // * Category
-      // * Action
-      // * Label
-      // * Value
-      TrackingVarMap: [
-        { Category: 'event_category' },
-        { Action: 'event_action' },
-        { Label: 'event_label' },
-        { Value: 'value' }
-      ]
-    }
-
-    // copy and overwrite the custom parameter to the default parameters
-    Object.keys(configCustom).forEach(function (key, index) {
-      configDefault[key] = configCustom[key]
-    })
-
-    // defintion of the Google Analytics tracking function
-    function gtag () { dataLayer.push(arguments) }
-
-    // configurate the Analytics Tracker
-    AnalyticsTracker.initialize(gtag, configDefault.TrackingVarMap, configDefault.validDownloadExtensions)
-    AnalyticsTracker.debugOutput = configDefault.DebugOutput
-    // configurate the Youtube Tracker
-    YoutubeTracker.initialize(AnalyticsTracker)
-
-    // loads the analytics script and tracks the pageview
-    $.getScript(configDefault.GoogleAnalyticsUri + configDefault.UaId, function () {
-      if (AnalyticsTracker.isSending === true) {
-        gtag('js', new Date())
-        // map the url
-        const href = UrlMapper.map(window.location.href, configDefault.UrlMapping)
-        gtag('config', configDefault.UaId, {
-          anonymize_ip: true,
-          page_location: href
-        })
+    UrlMapping: [
+      {
+        // removes the parameters from the program url
+        // origin:  https://share.catrob.at//app/project/44132
+        // cleaned: https://share.catrob.at//app/project/
+        RegEx: /(.*\/program\/)(\d+)/,
+        ValueIndex: 1
+      },
+      {
+        // removes the parameters from the search and tag search url
+        // origin:  http://127.0.0.1/app/search/test
+        // cleaned: http://127.0.0.1/app/search/
+        // or
+        // https://share.catrob.at/app/search/test%20der%20test
+        // https://share.catrob.at/app/search/
+        // or
+        // https://share.catrob.at/app/tag/search/1
+        // https://share.catrob.at/app/tag/search/
+        RegEx: /(.*\/search\/)(.*)/,
+        ValueIndex: 1
+      },
+      {
+        // removes the query parameters from every url
+        // origin:  /app/?username=sonicjack2007&token=b1889b23f0f77ece495f5b2f9b358289
+        // cleaned: /app/
+        RegEx: /(.*\/?)(\?.*)/,
+        ValueIndex: 1
       }
-    })
+    ],
 
-    /**
-     * Document realdy function
+    // Mapping from the tracking object parameter to the analytics parameters
+    // Parameters required are:
+    // * Category
+    // * Action
+    // * Label
+    // * Value
+    TrackingVarMap: [
+      { Category: 'event_category' },
+      { Action: 'event_action' },
+      { Label: 'event_label' },
+      { Value: 'value' }
+    ]
+  }
+
+  window.dataLayer = window.dataLayer || []
+  // definition of the Google Analytics tracking function
+  function gtag () { window.dataLayer.push(arguments) }
+
+  // configure the Analytics Tracker
+  window.AnalyticsTracker.initialize(gtag, configDefault.TrackingVarMap, configDefault.validDownloadExtensions)
+  window.AnalyticsTracker.debugOutput = configDefault.DebugOutput
+  // configure the Youtube Tracker
+  window.YoutubeTracker.initialize(window.AnalyticsTracker)
+
+  // loads the analytics script and tracks the pageview
+  getScript(configDefault.GoogleAnalyticsUri + configDefault.UaId, function () {
+    if (window.AnalyticsTracker.isSending === true) {
+      gtag('js', new Date())
+      // map the url
+      const href = window.UrlMapper.map(window.location.href, configDefault.UrlMapping)
+      gtag('config', configDefault.UaId, {
+        anonymize_ip: true,
+        page_location: href
+      })
+    }
+  })
+
+  /**
+     * Document ready function
      * executes when the DOM of the document is ready for manipulation
      */
-    jQuery(document).ready(function () {
-      // check if the hostname is avialable else abort the script
-      if (HelperFunctions.getHostname() === undefined) {
-        return
-      }
+  $(document).ready(function () {
+    // check if the hostname is available else abort the script
+    if (window.HelperFunctions.getHostname() === undefined) {
+      return
+    }
 
-      // Track Youtube Videos
-      // registers the Youtube videos on the web page for the tracking
-      YoutubeTracker.addTrackingApiToYoutoubeVideos()
-      YoutubeTracker.registerYoutubeVideos()
+    // Track Youtube Videos
+    // registers the Youtube videos on the web page for the tracking
+    window.YoutubeTracker.addTrackingApiToYoutubeVideos()
+    window.YoutubeTracker.registerYoutubeVideos()
 
-      // track emails
-      AnalyticsTracker.trackEmails({
-        Category: 'engagement',
-        Action: 'send email',
-        Label: function (e) { return e.href.replace(/^mailto\:/i, '') }
-      })
+    // track emails
+    window.AnalyticsTracker.trackEmails({
+      Category: 'engagement',
+      Action: 'send email',
+      Label: function (e) { return e.href.replace(/^mailto:/i, '') }
+    })
 
-      // track the search input
-      // the input button
-      const searchButton = TrackingObjectFactory.createObj({
-        BaseSelector: 'nav button#top-app-bar__btn-search',
-        Category: 'engagement',
-        Action: 'search',
-        Label: function (e) { return e.parentElement.previousElementSibling.value },
-        search_term: function (e) { return e.parentElement.previousElementSibling.value }
-      })
+    // track the search input
+    // the input button
+    const searchButton = window.TrackingObjectFactory.createObj({
+      BaseSelector: 'nav button#top-app-bar__btn-search',
+      Category: 'engagement',
+      Action: 'search',
+      Label: function (e) { return e.parentElement.previousElementSibling.value },
+      search_term: function (e) { return e.parentElement.previousElementSibling.value }
+    })
 
-      AnalyticsTracker.registerElementsForClickTracking(searchButton)
+    window.AnalyticsTracker.registerElementsForClickTracking(searchButton)
 
-      //
-      // tracks the search input
-      AnalyticsTracker.trackOnKeyPressEnter({
-        BaseSelector: '#top-app-bar__search-input',
-        Category: 'engagement',
-        Action: 'search',
+    //
+    // tracks the search input
+    window.AnalyticsTracker.trackOnKeyPressEnter({
+      BaseSelector: '#top-app-bar__search-input',
+      Category: 'engagement',
+      Action: 'search',
+      Label: function (e) { return e.value },
+      search_term: function (e) { return e.value }
+    })
+
+    // tracks the outbound links and downloads
+    window.AnalyticsTracker.trackOutboundAndDownloads({
+      Outbound: {
+        Category: 'outbound',
+        Action: function (e) { return 'outbound - ' + e.href.replace(/^https?:\/\//i, '') },
+        Label: window.location.pathname,
+        transport_type: 'beacon',
+        pathname: window.location.pathname
+      },
+      Downloads: {
+        Category: 'download',
+        Action: function (e) { return 'download - ' + e.href },
         Label: function (e) { return e.value },
-        search_term: function (e) { return e.value }
-      })
+        pathname: window.location.pathname
+      }
+    })
 
-      // tracks the outbound links and downloads
-      AnalyticsTracker.trackOutboundAndDownloads({
-        Outbound: {
-          Category: 'outbound',
-          Action: function (e) { return 'outbound - ' + e.href.replace(/^https?\:\/\//i, '') },
-          Label: window.location.pathname,
-          transport_type: 'beacon',
-          pathname: window.location.pathname
-        },
-        Downloads: {
-          Category: 'download',
-          Action: function (e) { return 'download - ' + e.href },
-          Label: function (e) { return e.value },
-          file_path: function (e) { return e.href },
-          pathname: window.location.pathname
-        }
-      })
+    if (/^(\/[a-zA-Z@]+\/)(?![a-zA-Z]+)(.*)/.test(window.location.pathname)) {
+      // sets the category name of the branch
 
-      if (/^(\/[a-zA-Z@]+\/)(?![a-zA-Z]+)(.*)/.test(window.location.pathname)) {
-        // sets the category name of the branch
+      const homepageCategory = 'home page'
 
-        const homepageCategory = 'home page'
-
-        const elementList = [
-          {
-            /**
+      const elementList = [
+        {
+          /**
              * Tracks the clicks on the featured programs
              * featured-slider
              */
-            BaseSelector: '#featured-slider',
-            SubSelector: 'a',
-            Category: homepageCategory,
-            Action: 'click - featured programs',
-            Label: function (e) { return HelperFunctions.removeDomainAndQuery($(e).attr('href')) }
-          },
-          {
-            /*
+          BaseSelector: '#featured-slider',
+          SubSelector: 'a',
+          Category: homepageCategory,
+          Action: 'click - featured programs',
+          Label: function (e) { return this.removeDomainAndQuery($(e).attr('href')) }
+        },
+        {
+          /*
              * Tracks the clicks on the help button
              */
-            BaseSelector: '#recommended .help-icon',
-            Category: homepageCategory,
-            Action: 'click - recommended programs - help'
-          }
-        ]
-
-        if (/\/(pocketalice|pocketgalaxy)\/.*/.test(window.location.pathname)) {
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('submissions', 'submissions', homepageCategory))
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('sample', 'sample', homepageCategory))
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('related', 'related', homepageCategory))
-        } else {
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('newest', 'newest', homepageCategory))
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('recommended', 'recommended', homepageCategory))
-          elementList.push.apply(elementList,
-            HelperFunctions.createTripleElementProgram('mostDownloaded', 'most Downloaded', homepageCategory))
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('mostViewed', 'most viewed', homepageCategory))
-          elementList.push.apply(elementList, HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory))
+          BaseSelector: '#recommended .help-icon',
+          Category: homepageCategory,
+          Action: 'click - recommended programs - help'
         }
+      ]
 
-        const trackingObjectList = TrackingObjectFactory.createArray(elementList)
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
+      if (/\/(pocketalice|pocketgalaxy)\/.*/.test(window.location.pathname)) {
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('submissions', 'submissions', homepageCategory))
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('sample', 'sample', homepageCategory))
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('related', 'related', homepageCategory))
+      } else {
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('newest', 'newest', homepageCategory))
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('recommended', 'recommended', homepageCategory))
+        elementList.push.apply(elementList,
+          window.HelperFunctions.createTripleElementProgram('mostDownloaded', 'most Downloaded', homepageCategory))
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('mostViewed', 'most viewed', homepageCategory))
+        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory))
       }
 
-      if (/.*\/login.*/.test(window.location.pathname)) {
-        /**
+      const trackingObjectList = window.TrackingObjectFactory.createArray(elementList)
+      window.AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
+    }
+
+    if (/.*\/login.*/.test(window.location.pathname)) {
+      /**
          * Login page tracking code
          */
-        const loginCategory = 'engagement'
+      const loginCategory = 'engagement'
 
-        const elementList = [
-          {
-            /**
+      const elementList = [
+        {
+          /**
              * Tracks the direct logins
              */
-            BaseSelector: 'button#_submit.login',
-            Category: loginCategory,
-            Action: 'sign_up',
-            Label: 'direct',
-            method: 'direct'
-          },
-          {
-            /**
+          BaseSelector: 'button#_submit.login',
+          Category: loginCategory,
+          Action: 'sign_up',
+          Label: 'direct',
+          method: 'direct'
+        },
+        {
+          /**
              * Tracks the Google logins
              */
-            BaseSelector: 'a#btn-login_google',
-            Category: loginCategory,
-            Action: 'sign_up',
-            Label: 'Google',
-            method: 'Google'
-          }
-        ]
+          BaseSelector: 'a#btn-login_google',
+          Category: loginCategory,
+          Action: 'sign_up',
+          Label: 'Google',
+          method: 'Google'
+        }
+      ]
 
-        const trackingObjectList = TrackingObjectFactory.createArray(elementList)
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
-      }
+      const trackingObjectList = window.TrackingObjectFactory.createArray(elementList)
+      window.AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
+    }
 
-      if (/.*\/program.*/.test(window.location.pathname)) {
-        const programCategory = 'program page'
+    if (/.*\/program.*/.test(window.location.pathname)) {
+      const programCategory = 'program page'
 
-        const elementList = [
-          {
-            /**
+      const elementList = [
+        {
+          /**
              * Tracks the interactive execution of the program
              */
-            BaseSelector: 'button.pc-start-button',
-            Category: programCategory,
-            Action: 'click - launch program',
-            Label: function () {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'button.pc-start-button',
+          Category: programCategory,
+          Action: 'click - launch program',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the clicks on tags
              */
-            BaseSelector: 'div#tag-container',
-            SubSelector: 'a',
-            Category: programCategory,
-            Action: function (e) {
-              return 'tag - ' + $(e).find('button').attr('id')
-            },
-            Label: function (e) {
-              return window.location.pathname
-            }
+          BaseSelector: 'div#tag-container',
+          SubSelector: 'a',
+          Category: programCategory,
+          Action: function (e) {
+            return 'tag - ' + $(e).find('button').attr('id')
           },
-          {
-            /**
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the program download
              */
-            BaseSelector: 'div.download-container > a',
-            Category: programCategory,
-            Action: 'click - download program',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'div.download-container > a',
+          Category: programCategory,
+          Action: 'click - download program',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the apk download
              */
-            BaseSelector: 'div.download-container',
-            SubSelector: 'button#apk-generate',
-            Category: programCategory,
-            Action: 'click - download apk',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'div.download-container',
+          SubSelector: 'button#apk-generate',
+          Category: programCategory,
+          Action: 'click - download apk',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the apk download
              */
-            BaseSelector: 'div.download-container',
-            SubSelector: 'button#apk-pending',
-            Category: programCategory,
-            Action: 'click - download apk pending',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'div.download-container',
+          SubSelector: 'button#apk-pending',
+          Category: programCategory,
+          Action: 'click - download apk pending',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the display of the remix graph
              */
-            BaseSelector: '#remix-graph-button',
-            Category: programCategory,
-            Action: 'click - show remix graph',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: '#remixGraphButton',
+          Category: programCategory,
+          Action: 'click - show remix graph',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the display of the remix graph by link
              */
-            BaseSelector: '#remix-graph-button-small',
-            Category: programCategory,
-            Action: 'click - show remix graph',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: '#remixGraphButton-small',
+          Category: programCategory,
+          Action: 'click - show remix graph',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the display of code statistics
              */
-            BaseSelector: 'div.show-hide-code-statistic',
-            SubSelector: 'div.show-hide-code-statistic-arrow:not(.showing-code)',
-            Category: programCategory,
-            Action: 'click - code statistics - show',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'div.show-hide-code-statistic',
+          SubSelector: 'div.show-hide-code-statistic-arrow:not(.showing-code)',
+          Category: programCategory,
+          Action: 'click - code statistics - show',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the hide of code statistics
              */
-            BaseSelector: 'div.show-hide-code-statistic',
-            SubSelector: 'div.show-hide-code-statistic-arrow.showing-code',
-            Category: programCategory,
-            Action: 'click - code statistics - hide',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'div.show-hide-code-statistic',
+          SubSelector: 'div.show-hide-code-statistic-arrow.showing-code',
+          Category: programCategory,
+          Action: 'click - code statistics - hide',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the display of program code
              */
-            BaseSelector: 'div.show-hide-code',
-            SubSelector: 'div.show-hide-code-arrow:not(.showing-code)',
-            Category: programCategory,
-            Action: 'click - program code - show',
-            Label: function (e) {
-              return window.location.pathname
-            }
-          },
-          {
-            /**
+          BaseSelector: 'div.show-hide-code',
+          SubSelector: 'div.show-hide-code-arrow:not(.showing-code)',
+          Category: programCategory,
+          Action: 'click - program code - show',
+          Label: function () {
+            return window.location.pathname
+          }
+        },
+        {
+          /**
              * Tracks the hide of program code
              */
-            BaseSelector: 'div.show-hide-code',
-            SubSelector: 'div.show-hide-code-arrow.showing-code',
-            Category: programCategory,
-            Action: 'click - program code - hide',
-            Label: function (e) {
-              return window.location.pathname
-            }
+          BaseSelector: 'div.show-hide-code',
+          SubSelector: 'div.show-hide-code-arrow.showing-code',
+          Category: programCategory,
+          Action: 'click - program code - hide',
+          Label: function () {
+            return window.location.pathname
           }
-        ]
+        }
+      ]
 
-        elementList.push.apply(elementList,
-          HelperFunctions.createTripleElementProgram('recommendations', 'similar', programCategory))
-        elementList.push.apply(elementList,
-          HelperFunctions.createTripleElementProgram('specific-programs-recommendations', 'recommended', programCategory))
+      elementList.push.apply(elementList,
+        window.HelperFunctions.createTripleElementProgram('recommendations', 'similar', programCategory))
+      elementList.push.apply(elementList,
+        window.HelperFunctions.createTripleElementProgram('specific-programs-recommendations', 'recommended', programCategory))
 
-        // Social interactions
-        const socialInteraction = [
-          {
-            /**
+      // Social interactions
+      const socialInteraction = [
+        {
+          /**
              * Tracks the click thumpsUp button
              */
-            BaseSelector: '#program-like-thumbs-up',
-            Category: 'engagement',
-            Action: 'socialEngagement - program',
-            Label: window.location.pathname,
-            Value: 10
-          },
-          {
-            /**
+          BaseSelector: '#program-like-thumbs-up',
+          Category: 'engagement',
+          Action: 'socialEngagement - program',
+          Label: window.location.pathname,
+          Value: 10
+        },
+        {
+          /**
              * Tracks the click smile button
              */
-            BaseSelector: '#program-like-smile',
-            Category: 'engagement',
-            Action: 'socialEngagement - program',
-            Label: window.location.pathname,
-            Value: 10
-          },
-          {
-            /**
+          BaseSelector: '#program-like-smile',
+          Category: 'engagement',
+          Action: 'socialEngagement - program',
+          Label: window.location.pathname,
+          Value: 10
+        },
+        {
+          /**
              * Tracks the click love button
              */
-            BaseSelector: '#program-like-love',
-            Category: 'engagement',
-            Action: 'socialEngagement - program',
-            Label: window.location.pathname,
-            Value: 10
-          },
-          {
-            /**
+          BaseSelector: '#program-like-love',
+          Category: 'engagement',
+          Action: 'socialEngagement - program',
+          Label: window.location.pathname,
+          Value: 10
+        },
+        {
+          /**
              * Tracks the click love button
              */
-            BaseSelector: '#program-like-wow',
-            Category: 'engagement',
-            Action: 'socialEngagement - program',
-            Label: window.location.pathname,
-            Value: 10
-          },
-          {
-            /**
+          BaseSelector: '#program-like-wow',
+          Category: 'engagement',
+          Action: 'socialEngagement - program',
+          Label: window.location.pathname,
+          Value: 10
+        },
+        {
+          /**
              * Tracks the click comment button
              */
-            BaseSelector: '#program-comments button#post-button',
-            Category: 'engagement',
-            Action: 'socialEngagement - program',
-            Label: window.location.pathname,
-            Value: 30
-          }
-        ]
+          BaseSelector: '#program-comments button#post-button',
+          Category: 'engagement',
+          Action: 'socialEngagement - program',
+          Label: window.location.pathname,
+          Value: 30
+        }
+      ]
 
-        const trackingObjectList = TrackingObjectFactory.createArray(elementList)
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
+      const trackingObjectList = window.TrackingObjectFactory.createArray(elementList)
+      window.AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
 
-        const trackingObjectListSocialInteraction = TrackingObjectFactory.createArray(socialInteraction)
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction)
-      }
+      const trackingObjectListSocialInteraction = window.TrackingObjectFactory.createArray(socialInteraction)
+      window.AnalyticsTracker.registerElementsForClickTracking(trackingObjectListSocialInteraction)
+    }
 
-      if (/.*\/search.*/.test(window.location.pathname)) {
-        const searchCategory = 'search page'
-        const actionSubstring = ((window.location.pathname.indexOf('/tag/search') >= 0) ? 'tag' : 'program')
+    if (/.*\/search.*/.test(window.location.pathname)) {
+      const searchCategory = 'search page'
+      const actionSubstring = ((window.location.pathname.indexOf('/tag/search') >= 0) ? 'tag' : 'program')
 
-        const elementList = [
-          {
-            /**
+      const elementList = [
+        {
+          /**
              * Tracks the clicks on a searched program
              */
-            BaseSelector: '.programs',
-            SubSelector: 'a',
-            Category: searchCategory,
-            Action: 'click - searched ' + actionSubstring,
-            Label: function (e) {
-              return HelperFunctions.removeDomainAndQuery($(e).attr('href'))
-            }
-          },
-          {
-            /**
+          BaseSelector: '.programs',
+          SubSelector: 'a',
+          Category: searchCategory,
+          Action: 'click - searched ' + actionSubstring,
+          Label: function (e) {
+            return window.HelperFunctions.removeDomainAndQuery($(e).attr('href'))
+          }
+        },
+        {
+          /**
              * Tracks the clicks on the more button of the searched program
              */
-            BaseSelector: '#search-results',
-            SubSelector: '.button-show-more',
-            Category: searchCategory,
-            Action: 'click - searched ' + actionSubstring + ' - more'
-          },
-          {
-            /**
+          BaseSelector: '#search-results',
+          SubSelector: '.button-show-more',
+          Category: searchCategory,
+          Action: 'click - searched ' + actionSubstring + ' - more'
+        },
+        {
+          /**
              * Tracks the clicks on the less button of the searched program
              */
-            BaseSelector: '#search-results',
-            SubSelector: '.button-show-less',
-            Category: searchCategory,
-            Action: 'click - searched ' + actionSubstring + ' - less'
+          BaseSelector: '#search-results',
+          SubSelector: '.button-show-less',
+          Category: searchCategory,
+          Action: 'click - searched ' + actionSubstring + ' - less'
+        }
+      ]
+
+      const trackingObjectList = window.TrackingObjectFactory.createArray(elementList)
+      window.AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
+    }
+
+    if (/.*\/pocket-library.*/.test(window.location.pathname)) {
+      // tracks the internal downloads
+      const libraryDownload = window.TrackingObjectFactory.createObj(
+        {
+          BaseSelector: 'a[onclick^="onDownload',
+          Category: 'download',
+          Action: 'click - ' + window.location.pathname,
+          Label: function (e) {
+            const dataHref = $(e).attr('data-href')
+            return this.getParameterByName('fname', dataHref)
           }
-        ]
-
-        const trackingObjectList = TrackingObjectFactory.createArray(elementList)
-        AnalyticsTracker.registerElementsForClickTracking(trackingObjectList)
-      }
-
-      if (/.*\/pocket-library.*/.test(window.location.pathname)) {
-        // tracks the internal downloads
-        const libraryDownload = TrackingObjectFactory.createObj(
-          {
-            BaseSelector: 'a[onclick^="onDownload',
-            Category: 'download',
-            Action: 'click - ' + window.location.pathname,
-            Label: function (e) {
-              const dataHref = $(e).attr('data-href')
-              return HelperFunctions.getParameterByName('fname', dataHref)
-            }
-          })
-
-        jQuery(libraryDownload.baseSelector).each(function () {
-          $(this).attr('data-href', $(this).attr('href'))
         })
 
-        // let libraryDownloadList = [];
-        // libraryDownloadList.push(libraryDownload);
-        AnalyticsTracker.registerElementsForClickTracking(libraryDownload)
-      }
+      $(libraryDownload.baseSelector).each(function () {
+        $(this).attr('data-href', $(this).attr('href'))
+      })
 
-      if (/.*\/user.*/.test(window.location.pathname)) {
-        const profileCategory = 'profile page'
-        const profileElements = [
-          {
-            /**
+      // let libraryDownloadList = [];
+      // libraryDownloadList.push(libraryDownload);
+      window.AnalyticsTracker.registerElementsForClickTracking(libraryDownload)
+    }
+
+    if (/.*\/user.*/.test(window.location.pathname)) {
+      const profileCategory = 'profile page'
+      const profileElements = [
+        {
+          /**
              * Tracks the click on the delete button
              */
-            BaseSelector: '#myprofile-programs',
-            SubSelector: '.img-delete',
-            Category: profileCategory,
-            Action: 'click - delete own program'
-          },
-          {
-            /**
+          BaseSelector: '#myprofile-programs',
+          SubSelector: '.img-delete',
+          Category: profileCategory,
+          Action: 'click - delete own program'
+        },
+        {
+          /**
              * Tracks the click on the make invisible button
              */
-            BaseSelector: '#myprofile-programs',
-            SubSelector: '.img-lock-open',
-            Category: profileCategory,
-            Action: 'click - set invisible own program'
-          },
-          {
-            /**
+          BaseSelector: '#myprofile-programs',
+          SubSelector: '.img-lock-open',
+          Category: profileCategory,
+          Action: 'click - set invisible own program'
+        },
+        {
+          /**
              * Tracks the click on the make visible button
              */
-            BaseSelector: '#myprofile-programs',
-            SubSelector: '.img-lock',
-            Category: profileCategory,
-            Action: 'click - set visible own program'
-          }
-        ]
+          BaseSelector: '#myprofile-programs',
+          SubSelector: '.img-lock',
+          Category: profileCategory,
+          Action: 'click - set visible own program'
+        }
+      ]
 
-        const profileObjectList = TrackingObjectFactory.createArray(profileElements)
-        AnalyticsTracker.registerElementsForClickTracking(profileObjectList)
-      }
-      // end of tracked events
-    })
-  })(window.jQuery, window, document, configGA = configGA || {})
+      const profileObjectList = window.TrackingObjectFactory.createArray(profileElements)
+      window.AnalyticsTracker.registerElementsForClickTracking(profileObjectList)
+    }
+    // end of tracked events
+  })
+}
+
+function isTrackingAllowed () {
+  return !(window.doNotTrack === '1' || navigator.doNotTrack === 'yes' || navigator.doNotTrack === '1')
+}
+
+function getScript (source, callback) {
+  let script = document.createElement('script')
+  const prior = document.getElementsByTagName('script')[0]
+  script.async = 1
+
+  script.onload = script.onreadystatechange = function (_, isAbort) {
+    if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+      script.onload = script.onreadystatechange = null
+      script = undefined
+
+      if (!isAbort && callback) setTimeout(callback, 0)
+    }
+  }
+
+  script.src = source
+  prior.parentNode.insertBefore(script, prior)
 }

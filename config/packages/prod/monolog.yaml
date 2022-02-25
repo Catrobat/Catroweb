@@ -1,12 +1,32 @@
+#
+# Possible Error levels:
+#    DEBUG:     Detailed debug information.
+#    INFO:      Interesting events. Examples: User logs in, SQL logs.
+#    NOTICE:    Normal but significant events.
+#    WARNING:   Exceptional occurrences that are not errors.
+#               Examples: deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong.
+#    ERROR:     Runtime errors that do not require immediate action but should typically be logged and monitored.
+#    CRITICAL:  Critical conditions. Example: Application component unavailable, unexpected exception.
+#    ALERT:     Action must be taken immediately. Example: Entire website down, database unavailable, etc.
+#               This should trigger the SMS alerts and wake you up.
+#    EMERGENCY: Emergency: system is unusable.
+#
+# The fingers crossed type allows us to use a nested handler which logs everything but only
+# passes them to a second handler if a minimum error level was reached.
+#
+# Rotate File can be used to create separate files for every day to prevent too large log files.
+#
+# FirePhp and ChromePhp allow us to log to the firefox and chrome browser
+#
+
 monolog:
-  channels: [upload, download_stats]
+  channels: [ upload, search, download ]
   handlers:
 
     main:
-      type:  fingers_crossed
-      action_level: error
+      type: fingers_crossed
+      action_level: warning
       handler: nested
-      excluded_http_codes: [404, 405]
       buffer_size: 50 # How many messages should be saved? Prevent memory leaks
       formatter: monolog.formatter.catrobat_custom_formatter
 
@@ -14,28 +34,36 @@ monolog:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
       level: error
-      max_files: 60
+      max_files: 14
 
     upload:
       type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/upload/upload.log"
+      path: "%kernel.logs_dir%/%kernel.environment%/upload/%kernel.environment%.log"
       level: warning
-      max_files: 60
-      channels: [upload]
+      max_files: 14
+      channels: [ upload ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
-    download_stats:
+    search:
       type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/download_stats/download_stats.log"
+      path: "%kernel.logs_dir%/%kernel.environment%/search/%kernel.environment%.log"
       level: debug
-      max_files: 60
-      channels: [download_stats]
+      max_files: 14
+      channels: [ search ]
+      formatter: monolog.formatter.catrobat_custom_formatter
+
+    download:
+      type: rotating_file
+      path: "%kernel.logs_dir%/%kernel.environment%/download/%kernel.environment%.log"
+      level: debug
+      max_files: 14
+      channels: [ download ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
     console:
       type: console
       process_psr_3_messages: false
-      channels: ["!event", "!doctrine", "!console"]
+      channels: [ "!event", "!doctrine", "!console" ]
 
     deprecation:
       type: stream
@@ -44,4 +72,4 @@ monolog:
       type: filter
       handler: deprecation
       max_level: info
-      channels: ["php"]
+      channels: [ "php" ]

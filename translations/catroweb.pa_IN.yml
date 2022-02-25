@@ -27,6 +27,7 @@ reportIt: ਹਾਂ, ਇਸ ਦੀ ਰਿਪੋਰਟ ਕਰੋ!
 areYouSure: ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
 noWayOfReturn: ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
 download: ਡਾ .ਨਲੋਡ
+name: ਨਾਮ
 description: ਵੇਰਵਾ
 noDescription: ਕੋਈ ਵੇਰਵਾ ਉਪਲਬਧ ਨਹੀਂ ਹੈ.
 credits: ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ
@@ -124,6 +125,7 @@ programs:
     ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
     ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
     ਰੱਦ ਕਰੋ
+  tooLongName: The project name is too long!
   tooLongDescription: ਪ੍ਰੋਜੈਕਟ ਦਾ ਵੇਰਵਾ ਬਹੁਤ ਲੰਬਾ ਹੈ!
   tooLongCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਬਹੁਤ ਲੰਬੇ ਹਨ!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: ਤੁਸੀਂ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਫਲੈਗ ਨਹੀਂ ਕਰ ਸਕਦੇ.
   reportAlready: ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਇਸ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਫਲੈਗ ਕਰ ਚੁੱਕੇ ਹੋ.
   reportDone: ਤੁਸੀਂ ਇਸ ਪ੍ਰਾਜੈਕਟ ਦੀ ਰਿਪੋਰਟ ਕੀਤੀ!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: ਐਪ ਨੂੰ ਅਪਡੇਟ ਕਰੋ
   updateAppText: ਇਸ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਯੋਗ ਹੋਣ ਲਈ ਨਵੀਨਤਮ ਵਰਜਨ ਲਈ ਆਪਣੇ ਐਪ ਨੂੰ ਅਪਡੇਟ ਕਰੋ.
   btnClosePopup: ਠੀਕ ਹੈ
@@ -168,10 +173,12 @@ programs:
   deleted_popup: ਟਿੱਪਣੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ ਸੀ.
   deleted_popup_header: ਮਿਟਾਇਆ ਗਿਆ
   noAdminRights: ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਬੰਧਕੀ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਬੰਧਕ ਵਜੋਂ ਲੌਗਇਨ ਕਰੋ.
-  editDescription: ਪ੍ਰੋਜੈਕਟ ਦੇ ਵੇਰਵੇ ਨੂੰ ਸੋਧੋ
-  saveDescription: ਸੇਵ
-  editCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਸੰਪਾਦਿਤ ਕਰੋ
-  saveCredits: ਸੇਵ
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: ਤੁਹਾਨੂੰ ਆਪਣੇ ਤਬਦੀਲੀ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਚਾਹੁੰਦੇ ਹੋ?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: ਬਰਖਾਸਤ ਕਰੋ
   addComment: ਇੱਕ ਟਿੱਪਣੀ ਲਿਖੋ
   thumbsUp: ਚੜ੍ਹਦੀ ਕਲਾਂ!
   smile: ਮੁਸਕਰਾਓ!
@@ -185,6 +192,9 @@ programs:
   showTranslation: ਅਨੁਵਾਦ ਦਿਖਾਓ
   hideTranslation: ਅਨੁਵਾਦ ਲੁਕਾਓ
   translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
+  translationUpdated: Changes for the translation to %language% updated
+  default: ਮੂਲ
+  save: ਸੇਵ
 remixGraph:
   title: ਰੀਮਿਕਸ
   showRemixGraph: 'ਰੀਮਿਕਸ ਗ੍ਰਾਫ'
@@ -387,6 +397,7 @@ login:
   passwordSecond: ਪਾਸਵਰਡ ਦੀ ਪੁਸ਼ਟੀ
 register:
   title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: ਰੱਦ ਕਰੋ
     createAccount: ਖਾਤਾ ਬਣਾਉ
@@ -396,6 +407,27 @@ accountRecovery:
   button:
     cancel: ਰੱਦ ਕਰੋ
     submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "ਰੱਦ ਕਰੋ"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "ਪਾਸਵਰਡ ਰੀਸੈਟ ਕਰੋ"
 apk:
   download: ਐਪ ਦੇ ਤੌਰ ਤੇ ਡਾਉਨਲੋਡ ਕਰੋ
   prepare: 'ਐਪ ਦੇ ਤੌਰ ਤੇ ਪ੍ਰਾਪਤ ਕਰੋ'
@@ -465,6 +497,9 @@ time:
   years.ago: '{1} 1 ਸਾਲ ਪਹਿਲਾਂ |] 1, Inf] ਇੱਕ ਸਾਲ ਪਹਿਲਾਂ'
 failure:
   upload: ਤੁਹਾਡੀ ਐਪ ਨੂੰ ਅਪਲੋਡ ਕਰਨ ਵੇਲੇ ਕੋਈ ਤਰੁੱਟੀ ਹੋ ਗਈ ਸੀ.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ਈਮੇਲ ਗੁੰਮ'
@@ -812,3 +847,5 @@ media_library:
       sound: 'ਕਿਸਮ: ਆਵਾਜ਼'
       movie: 'ਕਿਸਮ: ਵੀਡੀਓ'
       default: 'ਕਿਸਮ: ਅਣਜਾਣ'
+snackbar:
+  project_not_found: 'The requested project is not available'

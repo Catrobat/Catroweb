@@ -8,14 +8,13 @@ $sidebar-width: 250px;
   top: 0;
   left: ($sidebar-width * -1) - 50px;
 
-  /* top layer */
+  // top layer
   z-index: 9999;
   width: $sidebar-width;
   height: 100vh;
   overflow-y: auto;
   background: #fff;
-  box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.2);
-
+  box-shadow: 3px 3px 3px rgba(0 0 0 / 20%);
   transition: all 0.3s;
 
   &.active {
@@ -36,22 +35,20 @@ $sidebar-width: 250px;
     display: none;
   }
 
-  .nav-link { //a-element in li
+  .nav-link {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: flex-start;
-
     padding-top: 1rem;
     padding-bottom: 1rem;
     color: #222;
     text-decoration: none;
-
     cursor: pointer;
 
     &:hover {
       text-decoration: none;
-      background: rgba(0, 0, 0, 0.2);
+      background: rgba(0 0 0 / 20%);
     }
 
     &:active,
@@ -68,7 +65,8 @@ $sidebar-width: 250px;
   }
 
   .sidebar-link-text {
-    @include force-word-break();
+    @include force-word-break;
+
     flex-grow: 1;
     overflow: hidden;
   }
@@ -83,7 +81,8 @@ $sidebar-width: 250px;
 @include media-breakpoint-up(md) {
   .body-with-sidebar {
     .body-content {
-      padding-left: 15px + $sidebar-width;
+      margin-left: $sidebar-width;
+      width: calc(100% - #{$sidebar-width});
     }
 
     &.modal-open .modal {
@@ -91,6 +90,11 @@ $sidebar-width: 250px;
     }
 
     .project-list.vertical {
+      left: $sidebar-width;
+      width: calc(100vw - #{$sidebar-width});
+    }
+
+    .full-screen {
       left: $sidebar-width;
       width: calc(100vw - #{$sidebar-width});
     }
@@ -111,14 +115,13 @@ $sidebar-width: 250px;
   height: 100vh;
 
   /* transparent black */
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0 0 0 / 70%);
   opacity: 0;
 
   /* animate the transition */
   transition: all 0.5s ease-in-out;
 }
 
-// stylelint-disable-next-line selector-max-id
 #sidebar.active + #sidebar-overlay {
   display: block;
   opacity: 1;

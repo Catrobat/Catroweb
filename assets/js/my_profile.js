@@ -4,7 +4,6 @@
 /* global profileUrl */
 /* global saveUsername */
 /* global saveEmailUrl */
-/* global saveCountryUrl */
 /* global savePasswordUrl */
 /* global deleteUrl */
 /* global deleteAccountUrl */
@@ -17,7 +16,6 @@
 /* global statusCodeUserEmailAlreadyExists */
 /* global statusCodeUserEmailMissing */
 /* global statusCodeUserEmailInvalid */
-/* global statusCodeUserCountryInvalid */
 /* global statusCodeUsernamePasswordEqual */
 /* global statusCodeUserPasswordTooShort */
 /* global statusCodeUserPasswordTooLong */
@@ -29,6 +27,7 @@
 /* global statusCodeUsernameContainsEmail */
 /* global programCanNotChangeVisibilityTitle */
 /* global programCanNotChangeVisibilityText */
+/* global deleteConfirmationMessage */
 
 import $ from 'jquery'
 import { MyProfile } from './custom/MyProfile'
@@ -48,7 +47,6 @@ $(() => {
     profileUrl,
     saveUsername,
     saveEmailUrl,
-    saveCountryUrl,
     savePasswordUrl,
     deleteUrl,
     deleteAccountUrl,
@@ -61,7 +59,6 @@ $(() => {
     parseInt(statusCodeUserEmailAlreadyExists),
     parseInt(statusCodeUserEmailMissing),
     parseInt(statusCodeUserEmailInvalid),
-    parseInt(statusCodeUserCountryInvalid),
     parseInt(statusCodeUsernamePasswordEqual),
     parseInt(statusCodeUserPasswordTooShort),
     parseInt(statusCodeUserPasswordTooLong),
@@ -72,7 +69,8 @@ $(() => {
     passwordUpdatedText,
     programCanNotChangeVisibilityTitle,
     programCanNotChangeVisibilityText,
-    parseInt(statusCodeUsernameContainsEmail)
+    parseInt(statusCodeUsernameContainsEmail),
+    deleteConfirmationMessage
   )
 
   const programs = new ProjectLoader('#myprofile-programs', apiUserPrograms)

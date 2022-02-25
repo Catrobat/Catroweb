@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Project\CatrobatCode\Parser\Scripts;
+
+use App\Project\CatrobatCode\Parser\Constants;
+
+class WhenScript extends Script
+{
+  protected function create(): void
+  {
+    $this->type = Constants::WHEN_SCRIPT;
+    $this->caption = 'When tapped';
+    $this->setImgFile(Constants::EVENT_SCRIPT_IMG);
+  }
+}

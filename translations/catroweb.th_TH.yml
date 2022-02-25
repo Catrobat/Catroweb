@@ -27,6 +27,7 @@ reportIt: ใช่ รายงานเลย!
 areYouSure: คุณแน่ใจหรือไม่?
 noWayOfReturn: ไม่มีทางที่จะกู้คืนการกระทำของคุณ!
 download: ดาวน์โหลดโครงการ
+name: ชื่อ
 description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
 credits: เครดิต
@@ -126,6 +127,7 @@ programs:
     ไม่มีวิธีใดที่จะคืนค่าการกระทำของคุณ!
     ใช่ลบทิ้ง!
     ยกเลิก
+  tooLongName: ชื่อโครงการยาวเกินไป!
   tooLongDescription: คำอธิบายโครงการยาวเกินไป!
   tooLongCredits: เครดิตโครงการยาวเกินไป!
   most:
@@ -156,6 +158,9 @@ programs:
   reportOwnProgram: คุณไม่สามารถตั้งค่าสถานะโครงการของคุณเอง
   reportAlready: คุณได้ทำเครื่องหมายโครงการนี้แล้ว
   reportDone: คุณรายงานโครงการนี้!
+  updateAppHeaderDownload: ดาวน์โหลดไม่ได้
+  updateAppTextDownload: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด โปรดทราบว่าคุณลักษณะบางอย่างของ Android อาจไม่พร้อมใช้งานบน IOS
+  updateAppTextDownloadApk: การดาวน์โหลด APK มีให้บริการบน Android เท่านั้น และไม่สามารถใช้กับ IOS ได้
   updateAppHeader: อัพเดทแอพพลิเคชั่น
   updateAppText: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันล่าสุดเพื่อให้สามารถดาวน์โหลดโครงการนี้
   btnClosePopup: ตกลง
@@ -170,10 +175,12 @@ programs:
   deleted_popup: ลบความคิดเห็นสำเร็จแล้ว
   deleted_popup_header: ลบทิ้งแล้ว
   noAdminRights: คุณไม่มีสิทธิ์ของผู้ดูแลระบบ กรุณาเข้าสู่ระบบในฐานะผู้ดูแล
-  editDescription: แก้ไขคำอธิบายโครงการ
-  saveDescription: บันทึกการเปลี่ยนแปลงคำอธิบาย
-  editCredits: แก้ไขเครดิตโครงการ
-  saveCredits: บันทึกการเปลี่ยนแปลงเครดิต
+  editProject: แก้ไขโครงการ
+  closeProjectEditor: ปิดตัวแก้ไขโครงการ
+  closeEditorPrompt: คุณต้องบันทึกการเปลี่ยนแปลงหรือไม่?
+  saveOnLanguageChange: คุณต้องการรักษาการเปลี่ยนแปลงในปัจจุบันของคุณหรือไม่?
+  btnKeep: เก็บการเปลี่ยนแปลง
+  btnDiscard: ละทิ้ง
   addComment: เขียนข้อคิดเห็น
   thumbsUp: ยกนิ้วให้เลย
   smile: ยิ้ม
@@ -187,6 +194,9 @@ programs:
   showTranslation: แสดงคำแปล
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
+  translationUpdated: การเปลี่ยนแปลงสำหรับการแปลเป็น %language% อัพเดท
+  default: ค่าเริ่มต้น
+  save: บันทึก
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
@@ -393,6 +403,7 @@ login:
   passwordSecond: ยืนยันรหัสผ่าน
 register:
   title: Sign up
+  subText: "การดำเนินการต่อแสดงว่าคุณกำลังตั้งค่าบัญชีชุมชน Catrobat และยอมรับ %var1% และ %var2% ของเรา"
   button:
     cancel: ยกเลิก
     createAccount: สร้างบัญชี
@@ -402,6 +413,27 @@ accountRecovery:
   button:
     cancel: ยกเลิก
     submit: Recover password
+resetPassword:
+  request:
+    title: "รีเซ็ตรหัสผ่านของคุณ"
+    description: "หากคุณจำอีเมลของบัญชีของคุณได้ เราสามารถส่งลิงก์เพื่อรีเซ็ตรหัสผ่านให้คุณได้"
+    button:
+      submit: "ส่งอีเมลรีเซ็ต"
+      cancel: "ยกเลิก"
+  check:
+    title: "ตรวจสอบอีเมลของคุณ"
+    description: "หากมีบัญชีที่ตรงกับอีเมลของคุณ แสดงว่าระบบเพิ่งส่งอีเมลที่มีลิงก์ซึ่งคุณสามารถใช้รีเซ็ตรหัสผ่านได้ ลิงก์นี้จะหมดอายุใน %time%"
+    description2: "หากคุณไม่ได้รับอีเมล โปรดตรวจสอบโฟลเดอร์สแปมของคุณหรือ %tryAgainLink%"
+    tryAgain: "ลองอีกครั้ง"
+  email:
+    title: "สวัสดี!"
+    visitLink: "หากต้องการรีเซ็ตรหัสผ่าน โปรดไปที่ลิงก์ต่อไปนี้"
+    expire: "ลิงก์นี้จะหมดอายุใน %time%"
+    cheers: "ไชโย!"
+  reset:
+    title: "รีเซ็ตรหัสผ่านของคุณ"
+    button:
+      submit: "รีเซ็ตรหัสผ่าน"
 apk:
   download: ดาวน์โหลด APK
   prepare: 'รับเป็นแอป'
@@ -470,6 +502,9 @@ time:
   years.ago: '{1}1 ปี |] 1, Inf] เกินกว่าหนึ่งปีแล้ว'
 failure:
   upload: เกิดข้อผิดพลาดระหว่างอัปโหลดแอป
+user:
+  verification:
+    email: 'ยืนยันอีเมลของคุณ'
 api:
   registerUser:
     emailMissing: 'ไม่พบอีเมล'
@@ -582,14 +617,14 @@ codeview:
   locals: 'คนในพื้นที่'
   globalVariables: 'ตัวแปรส่วนกลาง'
   localVariables: 'ตัวแปรท้องถิ่น'
-  eventBricks: 'อิฐเหตุการณ์'
-  controlBricks: 'ควบคุมอิฐ'
-  motionBricks: 'อิฐเคลื่อนไหว'
-  soundBricks: 'อิฐเสียง'
-  looksBricks: 'ดูเหมือนอิฐ'
-  penBricks: 'อิฐปากกา'
+  eventBricks: 'คำสั่งเหตุการณ์'
+  controlBricks: 'คำสั่งควบคุม'
+  motionBricks: 'คำสั่งเคลื่อนไหว'
+  soundBricks: 'คำสั่งเสียง'
+  looksBricks: 'คำสั่งเงื่อนไข'
+  penBricks: 'คำสั่งปากกา'
   dataBricks: 'Databricks'
-  specialBricks: 'อิฐพิเศษ'
+  specialBricks: 'คำสั่งพิเศษ'
 codeStatistics:
   title: "สถิติรหัส"
   error: "ไม่สามารถแสดงสถิติรหัส"
@@ -817,3 +852,5 @@ media_library:
       sound: 'ประเภท: เสียง'
       movie: 'ประเภท: วิดีโอ'
       default: 'ประเภท: ไม่ทราบ'
+snackbar:
+  project_not_found: 'ไม่มีโครงการที่ร้องขอ'

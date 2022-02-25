@@ -1,14 +1,12 @@
-# www.robotstxt.org/
-# www.google.com/support/webmasters/bin/answer.py?hl=en&answer=156449
-
 User-agent: *
-Disallow: /app/scratch
-Disallow: /pocketcode/scratch
-Disallow: /pocketalice/scratch
-Disallow: /pocketgalaxy/scratch
-Disallow: /pocketphiro/scratch
-Disallow: /phirocode/scratch
-Disallow: /luna/scratch
-Disallow: /create@school/scratch
-Disallow: /embroidery/scratch
-Disallow: /arduino/scratch
+Allow: /app$
+Allow: /pocketcode$
+Allow: /luna$
+Allow: /pocketalice$
+Allow: /pocketgalaxy$
+Allow: /phirocode$
+Allow: /create@school$
+Allow: /embroidery$
+Allow: /arduino$
+Allow: /mindstorms$
+Disallow: /

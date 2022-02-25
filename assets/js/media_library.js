@@ -11,5 +11,6 @@ MediaLib(
   $mediaLibrary.data('media-dir'),
   $mediaLibrary.data('trans-element'),
   $mediaLibrary.data('trans-elements'),
-  $mediaLibrary.data('is-webview')
+  $mediaLibrary.data('is-webview'),
+  $mediaLibrary.data('path-medialibpackagebynameurl')
 )

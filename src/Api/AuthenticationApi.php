@@ -86,19 +86,18 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     }
 
     $validation_response = $this->facade->getRequestValidator()->{$resource_owner_method}($id_token);
-
     if (!$validation_response) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
-      $token = new JWTResponse();
 
-      return ['response_code' => $responseCode, 'token' => $token];
+      return null;
     }
 
-    $response = $this->facade->getProcessor()->connectUserToAccount($id_token, $resource_owner);
+    $user = $this->facade->getProcessor()->connectUserToAccount($id_token, $resource_owner);
+    $token = $this->facade->getProcessor()->createJWTByUser($user);
+    $refresh_token = $this->facade->getProcessor()->createRefreshTokenByUser($user);
+    $responseCode = Response::HTTP_OK;
 
-    $responseCode = $response['response_code'];
-
-    return $response['token'];
+    return $this->facade->getResponseManager()->createOAuthPostResponse($token, $refresh_token);
   }
 
   public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, &$responseCode, array &$responseHeaders)
@@ -119,11 +118,12 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     }
 
     $token = $this->facade->getProcessor()->createJWTByUser($user);
+    $refresh_token = $this->facade->getProcessor()->createRefreshTokenByUser($user);
     $responseCode = Response::HTTP_OK;
 
     return (new JWTResponse())
       ->setToken($token)
-      ->setRefreshToken('ToDo')
+      ->setRefreshToken($refresh_token)
     ;
   }
 }

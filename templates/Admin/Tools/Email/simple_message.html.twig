@@ -1,0 +1,9 @@
+{% extends "Default/email.html.twig" %}
+
+{% block body_content %}
+
+  {% autoescape false %}
+    {{ message }}
+  {% endautoescape %}
+
+{% endblock %}

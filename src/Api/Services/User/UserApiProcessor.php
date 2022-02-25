@@ -3,9 +3,9 @@
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\Catrobat\Services\TokenGenerator;
-use App\Entity\User;
-use App\Entity\UserManager;
+use App\DB\Entity\User\User;
+use App\Security\TokenGenerator;
+use App\User\UserManager;
 use Exception;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
@@ -33,6 +33,7 @@ final class UserApiProcessor extends AbstractApiProcessor
     $user->setEmail($request->getEmail());
     $user->setPlainPassword($request->getPassword());
     $user->setEnabled(true);
+    $user->setVerified(false);
     $user->setUploadToken($this->token_generator->generateToken());
     $this->user_manager->updateUser($user);
 
@@ -54,9 +55,6 @@ final class UserApiProcessor extends AbstractApiProcessor
     }
     if (!empty($request->getPassword())) {
       $user->setPassword($request->getPassword());
-    }
-    if (!is_null($request->getCountry())) {
-      $user->setCountry($request->getCountry());
     }
 
     $this->user_manager->updateUser($user, true);

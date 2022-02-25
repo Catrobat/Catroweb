@@ -25,7 +25,7 @@ apple_login:
 
 # ===== Token =====
 gesdinet_jwt_refresh_token:
-  path:       /api/authentication/refresh
+  path: /api/authentication/refresh
   controller: catroweb.jwt_token_refresh_service::refresh
 
 # ===== Api =====
@@ -35,6 +35,12 @@ open_api_server:
   defaults:
     _format: json
 
+registration_confirmation_route:
+  path: /app/verify
+  methods:  [GET]
+  defaults:
+    _controller: App\Application\Controller\Security\RegistrationController::verifyUserEmail
+
 # ===== Themes and flavors =====
 catrobat_web_index:
   path: /
@@ -42,7 +48,3 @@ catrobat_web_index:
     _controller: FrameworkBundle:Redirect:redirect
     route: index
     theme: "app"
-
-catroweb_flavored:
-  resource: "routes_flavored.yml"
-  prefix: /{theme}/

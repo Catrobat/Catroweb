@@ -4,11 +4,13 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
+use App\User\ResetPassword\PasswordResetRequestedEvent;
 use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
+use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
@@ -52,7 +54,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
 
     $responseCode = Response::HTTP_CREATED;
     $token = $this->facade->getAuthenticationManager()->createAuthenticationTokenFromUser($user);
-    $response = $this->facade->getResponseManager()->createUserRegisteredResponse($token);
+    $refresh_token = $this->facade->getAuthenticationManager()->createRefreshTokenByUser($user);
+    $response = $this->facade->getResponseManager()->createUserRegisteredResponse($token, $refresh_token);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -152,5 +155,29 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
     return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+    $validation_wrapper = $this->facade->getRequestValidator()->validateResetPasswordRequest($reset_password_request, $accept_language);
+
+    if ($validation_wrapper->hasError()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $error_response = new RegisterErrorResponse($validation_wrapper->getErrors());
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
+    }
+
+    // Do not reveal whether a user account was found or not.
+    $this->facade->getEventDispatcher()->dispatch(new PasswordResetRequestedEvent($reset_password_request->getEmail(), $accept_language));
+    $responseCode = Response::HTTP_NO_CONTENT;
+
+    return null;
   }
 }

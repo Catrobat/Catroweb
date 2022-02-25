@@ -27,6 +27,7 @@ reportIt: Po, raportoje!
 areYouSure: A je i Sigurtë?
 noWayOfReturn: Nuk ka asnjë mundësi për të rikthyer veprimet tuaja!
 download: Shkarko si program
+name: Name
 description: Përshkrimi
 noDescription: Nuk ka përshkrim.
 credits: Credits
@@ -124,6 +125,7 @@ programs:
     Nuk ka asnjë mënyrë për të rikthyer veprimet tuaja!
     Po, fshije!
     Anulo
+  tooLongName: The project name is too long!
   tooLongDescription: Përshkrimi i projektit është shumë i gjatë!
   tooLongCredits: The project credits are too long!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Nuk mund ta etiketoni programin e juaj.
   reportAlready: Tashmë e keni etiketuar këtë program si të papërshtatshëm.
   reportDone: Ju raportuat këtë program si të papërshtatshëm!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Fresko Aplikacionin
   updateAppText: Ju lutem përditësoni aplikacionin tuaj në versionin më të ri për të pasur mundësi ta shkarkoni këtë program.
   btnClosePopup: Ok
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Komenti u fshi me sukses.
   deleted_popup_header: I fshirë
   noAdminRights: Ju nuk keni të drejta administratori. Ju lutemi hyni si Admin.
-  editDescription: Ndryshoni përshkrimin e projektit
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Do you want to save your changes?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Anulo
   addComment: Shkruaj një koment
   thumbsUp: Gishti i madh lart!
   smile: Buzëqeshja!
@@ -185,6 +192,9 @@ programs:
   showTranslation: Shfaq përkthimin 
   hideTranslation: Fshihe përkthimin
   translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Default
+  save: Ruaj
 remixGraph:
   title: Ripërzierje 
   showRemixGraph: 'Ripërziej grafikun'
@@ -388,6 +398,7 @@ login:
   passwordSecond: Konfirmo fjalëkalimin 
 register:
   title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: Anulo
     createAccount: Create account
@@ -397,6 +408,27 @@ accountRecovery:
   button:
     cancel: Anulo
     submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "Anulo"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Reset password"
 apk:
   download: Shkarko si aplikacion
   prepare: 'Prepare app'
@@ -466,6 +498,9 @@ time:
   years.ago: '{1}1 vit më parë |]1,Inf] më shumë se një vit më parë'
 failure:
   upload: Pati një gabim gjatë ngarkimit të aplikacionit tuaj.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Emaili mungon'
@@ -813,3 +848,5 @@ media_library:
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
+snackbar:
+  project_not_found: 'The requested project is not available'

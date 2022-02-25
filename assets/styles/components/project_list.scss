@@ -1,12 +1,15 @@
 @use "sass:math";
-
 @import "../base/variables";
 @import "../base/mixins";
 @import "~bootstrap/scss/mixins";
 
-
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;
+
+@keyframes spinner {
+  from { opacity: 1; }
+  to { opacity: 0.3; }
+}
 
 .project-list {
   margin-bottom: 1rem;
@@ -16,19 +19,22 @@ $container-padding: 1rem;
   }
 
   &.loading {
-    //stylelint-disable-next-line selector-class-pattern
     .project-list__wrapper {
-      display: none;
-    }
-
-    .projects-spinner-container {
-      display: flex;
-      justify-content: center;
+      animation: spinner;
+      animation-fill-mode: both;
+      animation-iteration-count: infinite;
+      animation-duration: 1s;
+      animation-direction: alternate;
     }
   }
 
   &.empty {
     display: none;
+  }
+
+  &.empty-with-text {
+    justify-content: center;
+    text-align: center;
   }
 
   &__title {
@@ -38,13 +44,14 @@ $container-padding: 1rem;
     margin-right: -1rem;
     margin-left: -1rem;
     cursor: pointer;
+
     @include media-breakpoint-up(sm) {
       border-radius: $border-radius;
     }
 
     &:hover,
     &:active {
-      background-color: rgba(0, 0, 0, 0.08);
+      background-color: rgba(0 0 0 / 8%);
     }
 
     &__btn-toggle {
@@ -54,6 +61,7 @@ $container-padding: 1rem;
       &__text {
         padding-right: 0.5rem;
         font-size: 0.95rem;
+
         @include media-breakpoint-down(sm) {
           display: none;
         }
@@ -68,27 +76,27 @@ $container-padding: 1rem;
     &:hover {
       text-decoration: none;
 
-      //stylelint-disable-next-line selector-class-pattern
       .project-list__project__image {
-        box-shadow: 3px 3px 20px 0 rgba(50, 50, 50, 0.3); // TODO: make this beautiful
+        box-shadow: 3px 3px 20px 0 rgba(50 50 50 / 35%);
       }
-
     }
 
     &__image {
       width: 100%;
       border-radius: 10%;
+      aspect-ratio: auto 1 / 1;
+      box-shadow: 3px 3px 20px 0 rgba(50 50 50 / 15%);
     }
 
     &__name {
       display: inline-block;
-      //stylelint-disable-next-line value-no-vendor-prefix
+      // stylelint-disable-next-line value-no-vendor-prefix
       display: -webkit-box;
       max-width: 100%;
       height: 3rem;
       overflow: hidden;
       -webkit-line-clamp: 2; // ellipse at 2nd text line
-      //stylelint-disable-next-line property-no-vendor-prefix
+      // stylelint-disable-next-line property-no-vendor-prefix
       -webkit-box-orient: vertical;
       line-height: 1.5rem;
     }
@@ -106,11 +114,13 @@ $container-padding: 1rem;
       &__value {
         padding-left: 0.3rem;
         font-size: 0.9rem;
-        @include text-truncate();
+
+        @include text-truncate;
       }
     }
   }
 
+  &.project-list--full,
   &.horizontal {
     > .container {
       padding: 0;
@@ -125,16 +135,31 @@ $container-padding: 1rem;
       overflow-y: auto;
     }
 
-    //stylelint-disable-next-line selector-class-pattern
     .project-list__project {
       width: 25vw;
       max-width: $max-project-thumb-size;
-      margin-right: 1.5rem;
       text-decoration: none;
 
       @include media-breakpoint-up(md) {
         width: 10vw;
       }
+    }
+
+    .project-list__project + .project-list__project {
+      margin-left: 1.5rem;
+    }
+  }
+
+  &.project-list--full {
+    .projects-container {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .project-list__project {
+      margin-right: 0.5rem;
+      margin-bottom: 1.5rem;
+      margin-left: 0.5rem !important;
     }
   }
 
@@ -150,12 +175,12 @@ $container-padding: 1rem;
     padding-left: math.div($grid-gutter-width, 2);
     overflow-y: auto;
     background: #fff;
+
     @media (max-width: 599px) {
       top: 56px;
       height: calc(100vh - 56px);
     }
 
-    //stylelint-disable-next-line selector-class-pattern
     .project-list__title {
       padding-bottom: 1rem;
     }
@@ -163,16 +188,17 @@ $container-padding: 1rem;
     .projects-container {
       display: flex;
       flex-direction: column;
+
       @include media-breakpoint-up(lg) {
         display: grid;
         grid-template-columns: 1fr 1fr;
         grid-template-rows: 1fr;
         gap: math.div($grid-gutter-width, 2) math.div($grid-gutter-width, 2);
+        // stylelint-disable-next-line
         grid-template-areas: ". .";
       }
     }
 
-    //stylelint-disable-next-line selector-class-pattern
     .project-list__project {
       display: grid;
       align-items: start;
@@ -180,6 +206,7 @@ $container-padding: 1rem;
       grid-template-columns: 25% auto;
       grid-template-rows: max-content auto;
       gap: 0.3rem 1rem;
+      // stylelint-disable-next-line
       grid-template-areas: "image name" "image property";
       text-decoration: none;
 
@@ -197,7 +224,6 @@ $container-padding: 1rem;
       }
     }
 
-    //stylelint-disable-next-line selector-class-pattern
     .project-list__chevrons {
       display: none;
     }
@@ -212,7 +238,6 @@ $container-padding: 1rem;
     top: $container-padding;
     right: 0;
     left: 0;
-
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -249,7 +274,6 @@ $container-padding: 1rem;
       }
 
       &:active::after {
-        //stylelint-disable-next-line declaration-no-important
         opacity: $default-opacity + 0.12 !important;
       }
     }
@@ -275,7 +299,6 @@ $program-tile-width: 85px;
   justify-content: center;
 
   > .program {
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -284,7 +307,6 @@ $program-tile-width: 85px;
     margin: 0.35rem;
 
     > a {
-
       display: block;
       width: 100%;
 
@@ -322,6 +344,5 @@ $program-tile-width: 85px;
         }
       }
     }
-
   }
 }

@@ -16,8 +16,8 @@ tutorials: کمک
 googlePlay: فروشگاه گوگل پلی (Google Play)
 iosAppStore: فروشگاه برنامه آیوس (IOS App)
 huaweiAppGallery: گالری برنامهای هواوایی (Huawei)
-instagram: Instagram
-discordChat: Discord chat
+instagram: اینستاگرام
+discordChat: اختلاف چت
 passwordsNoMatch: رمزها مطابقت نداشتند.
 error: اشتباه
 cancel: لغو 
@@ -27,6 +27,7 @@ reportIt: بله، گزارش دهید!
 areYouSure: مطمئنی؟
 noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
 download: دانلود 
+name: نام
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نیست. 
 credits: Credits
@@ -90,10 +91,10 @@ follower:
 programs:
   welcome:
     title: به موضوع %theme% کاتروباتس (Catrobat) خوش آمدی
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    title_mindstorms: به سایت کاتروبات برای Mindstorms EV3 و NXT خوش آمدید
     subtitle: ایجاد کن داستان ها، بازی ها و بیشتر ...
     subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا پوش گوشی های خود را بخیه کنید!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    subtitle_mindstorms: پروژه های خود را با ربات های Lego Mindstorms EV3 و NXT خود ایجاد کنید
     download: برنامه را دانلود کن
     statistics: More Statistics
   featured: ارایه شده
@@ -124,6 +125,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongName: نام پروژه خیلی طولانی است!
   tooLongDescription: توضیح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: شما نمیتوانید پروژه خود را علامت گزاری کنید.
   reportAlready: شما قبلا این پروژه را علامت گذاری کرده اید.
   reportDone: شما این پروژه را گزارش کرده اید!
+  updateAppHeaderDownload: دانلود امکان پذیر نیست
+  updateAppTextDownload: لطفاً برنامه خود را به جدیدترین نسخه به روز کنید. توجه داشته باشید که همه ویژگی های اندروید از قبل در IOS در دسترس نیستند.
+  updateAppTextDownloadApk: دانلود APK در حال حاضر فقط در اندروید و نه در IOS در دسترس است.
   updateAppHeader: Update App
   updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
   btnClosePopup: خوب
@@ -168,10 +173,12 @@ programs:
   deleted_popup: نظر با موفقیت حذف شد.
   deleted_popup_header: حذف شد
   noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
-  editDescription: Edit the project Description
-  saveDescription: Save Description change
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: آیا می خواهید تغییرات خود را ذخیره کنید؟
+  saveOnLanguageChange: آیا می خواهید تغییرات فعلی خود را حفظ کنید؟
+  btnKeep: تغییرات را حفظ کنیدd
+  btnDiscard: لغو تغییرات
   addComment: یک نظر بنویسید
   thumbsUp: شست بالا!
   smile: لبخند!
@@ -181,10 +188,13 @@ programs:
   link: پیوند پروژه را به کلیپ بورد کپی کنید
   reactionsText: واکنش ها
   downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadStartText: دانلود شروع شد...
+  showTranslation: نمایش ترجمه
+  hideTranslation: مخفی کردن ترجمه
+  translatedByLine: ترجمه شده توسط %provider% از %sourceLanguage% به %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: پیش فرض
+  save: ذخیره
 remixGraph:
   title: ریمیکس ها
   showRemixGraph: 'ریمیکس گراف'
@@ -364,11 +374,11 @@ menu:
 login:
   login: وارد شدن
   button:
-    loginNow: Login now
+    loginNow: اکنون وارد شوید
     createAccount: ایجاد حساب کاربری
-    forgetPassword: Forget password?
+    forgetPassword: فراموشی رمز عبور؟
   oauth:
-    title: Or you can join with
+    title: یا می توانید به آن ملحق شوید
   passOrUser: رمز عبور یا نام کاربری شما نادرست بود.
   noUsername: نام کاربری یا آدرس ایمیل شما یافت نشد
   forgotPass: رمز عبور یا نام کاربری را فراموش کرده اید؟
@@ -386,16 +396,38 @@ login:
   passwordFirst: رمز عبور
   passwordSecond: Password Confirm
 register:
-  title: Sign up
+  title: ثبت نام
+  subText: "با ادامه، یک حساب انجمن Catrobat راه‌اندازی می‌کنید و با %var1% و %var2% ما موافقت می‌کنید."
   button:
     cancel: لغو 
     createAccount: ایجاد حساب کاربری
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: بازیابی حساب کاربری
+  description: اگر ایمیل یا نام کاربری حساب خود را به خاطر دارید، می‌توانیم پیوندی برای تنظیم مجدد رمز عبور برای شما ارسال کنیم.
   button:
     cancel: لغو 
-    submit: Recover password
+    submit: بازیابی رمز عبور
+resetPassword:
+  request:
+    title: "رمز عبور خود را بازنشانی کنید"
+    description: "اگر ایمیل حساب خود را به خاطر دارید، می‌توانیم پیوندی برای تنظیم مجدد رمز عبور برای شما ارسال کنیم."
+    button:
+      submit: "ارسال ایمیل ریست"
+      cancel: "لغو "
+  check:
+    title: "ایمیل های خود را بررسی کنید"
+    description: "اگر حسابی مطابق با ایمیل شما وجود داشته باشد، ایمیلی ارسال شده است که حاوی پیوندی است که می توانید از آن برای بازنشانی رمز عبور خود استفاده کنید. این پیوند در %time% منقضی می‌شود."
+    description2: "اگر ایمیلی دریافت نکردید، لطفاً پوشه هرزنامه یا %tryAgainLink% خود را بررسی کنید"
+    tryAgain: "دوباره امتحان کن"
+  email:
+    title: "سلام!"
+    visitLink: "برای بازنشانی رمز عبور خود به لینک زیر مراجعه کنید"
+    expire: "این پیوند در %time% منقضی می‌شود."
+    cheers: "به سلامتی!"
+  reset:
+    title: "رمز عبور خود را بازنشانی کنید"
+    button:
+      submit: "بازنشانی رمز عبور"
 apk:
   download: دانلود به عنوان برنامه
   prepare: 'به عنوان برنامه دریافت کنید'
@@ -465,6 +497,9 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: در آپلود برنامه شما یک خطا وجود داشت.
+user:
+  verification:
+    email: 'ایمیل خود را تایید کنید'
 api:
   registerUser:
     emailMissing: 'ایمیل موجود نیست'
@@ -685,7 +720,7 @@ category:
 achievements:
   sidebar:
     title: 'دستاوردها'
-    badge: 'new'
+    badge: 'جدید'
   overview:
     header: 'دستاوردها'
     most_recent_achievement:
@@ -699,8 +734,8 @@ achievements:
       empty: "شما قبلا تمام دستاوردهای را باز کرده اید."
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'تبریک می گویم!'
+      subtitle: "شما یک نشان به دست آورده اید"
       confirm: "خوب"
   profile:
     title: 'دستاوردها'
@@ -725,34 +760,34 @@ achievements:
         title: 'تازه کار'
         description: 'یک حساب کاربری تشکیل دهید'
       coding_jam_09_2021:
-        title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        title: "کد نویسی Jam '21"
+        description: "شرکت کننده در Coding Jam 2021"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} برچسب |]1,Inf] برچسب'
   tag:
     game:
-      title: Game
+      title: بازی
     animation:
-      title: Animation
+      title: انیمیشن
     story:
-      title: Story
+      title: داستان
     music:
-      title: Music
+      title: موسیقی
     art:
-      title: Art
+      title: هنر
     experimental:
-      title: Experimental
+      title: تجربی
     tutorial:
-      title: Tutorial
+      title: آموزش
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} پسوند |]1,Inf] برنامه‌های افزودنی'
   extension:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: پهپاد
     phiro:
       title: فیرو
     raspberry_pi:
@@ -760,55 +795,57 @@ extensions:
     embroidery:
       title: گلدوزی
     mindstorms:
-      title: Mindstorms
+      title: طوفان های ذهنی
 studio:
   details:
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    public: 'عمومی'
+    private: 'خصوصی'
+    join: 'پیوستن'
+    leave: 'ترک کردن'
+    showMore: 'بیشتر نشان بده، اطلاعات بیشتر'
+    showLess: 'کمتر نشان دهد'
+    remove_project: 'حذف از استودیو'
+    remove_project_error: 'پروژه از استودیو حذف نشد!'
+    remove_project_success: 'پروژه با موفقیت از استودیو حذف شد!'
+    no_projects: 'استودیو هنوز هیچ پروژه ای ندارد'
+    updateCoverError: 'هنگام به‌روزرسانی جلد استودیو، مشکلی پیش آمد!'
     projects:
-      title: 'projects'
+      title: 'پروژه ها'
     comments:
       title: 'نظرات'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'چیزی تایپ کنید'
+      replies: 'پاسخ می دهد'
+      send: 'ارسال'
+      no_comments: 'این استودیو هنوز نظری نداشته است.'
+      disabled_comments: 'نظرات برای این استودیو غیرفعال شده است.'
+      post_error: 'هنگام ارسال نظر شما مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
+      delete_error: 'هنگام ارسال نظر شما مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'فعالیت ها'
+      join_studio: '%user% به استودیو پیوست.'
+      add_project: '%user% نظر گذاشت.'
+      add_comment: '%user% یک پروژه اضافه کرد.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'اعضای استودیو'
+      project_count: '{0} بدون پروژه استودیویی |{1} 1 پروژه استودیویی |]1,Inf] %count% پروژه های استودیویی'
+      promote_member: 'ارتقاء عضو به مدیر'
+      promotion_failed: 'هنگام ارتقاء این عضو مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
+      ban_member: 'ممنوعیت عضویت در استودیو'
+      ban_failed: 'هنگام ممنوع کردن این عضو مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'تنظیمات عمومی'
+      studio_name: 'نام استودیو'
       studio_description: 'توضیح '
       toggle_allow_comments: 'نظرات'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'عمومی'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'اندازه: %size%'
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'نوع: تصویر'
+      project: 'نوع: پروژه'
+      sound: 'نوع: صدا'
+      movie: 'نوع: ویدیویی'
+      default: 'نوع: ناشناخته'
+snackbar:
+  project_not_found: 'پروژه درخواستی موجود نیست'

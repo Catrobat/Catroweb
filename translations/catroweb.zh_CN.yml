@@ -27,6 +27,7 @@ reportIt: 是的，我要举报
 areYouSure: 您确定吗？
 noWayOfReturn: 再也无法恢复您的操作！
 download: 下载项目
+name: 名称
 description: 描述
 noDescription: 没有可用的描述
 credits: 致谢
@@ -92,7 +93,7 @@ programs:
     title: 欢迎使用 Catrobat %theme%
     title_mindstorms: 欢迎来到Catrobat的Mindstorms EV3和NXT的网站
     subtitle: 书写你的故事，游戏以及更多东西...。
-    subtitle_embroidery: 在您的T恤衫、袋子、裤子或智能手机等上搭起您自己的修补师！
+    subtitle_embroidery: 在您的T恤衫、袋子、裤子或智能手机等上制作您自己的图案！
     subtitle_mindstorms: 用乐高Mindstorms EV3和NXT机器人创建你自己的项目
     download: 下载该APP。
     statistics: 更多统计信息
@@ -124,6 +125,7 @@ programs:
     再也无法恢复您的操作！
     是的，删除它！
     取消
+  tooLongName: 项目名称过长！
   tooLongDescription: 项目描述太长了！
   tooLongCredits: 项目致谢过长！
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: 您不能标记您自己的项目。
   reportAlready: 您已经标记了这个项目。
   reportDone: 您举报了这个项目！
+  updateAppHeaderDownload: 无法下载
+  updateAppTextDownload: 请更新您的应用程序到最新版本。请注意，iOS 上并非所有的 Android 功能都可用。
+  updateAppTextDownloadApk: 目前仅在 Android 上提供APK下载，iOS 上暂不可用。
   updateAppHeader: 升级
   updateAppText: 请更新您的应用到最新版本以便能够下载此项目。
   btnClosePopup: 好
@@ -168,10 +173,12 @@ programs:
   deleted_popup: 评论已成功删除。
   deleted_popup_header: 已删除
   noAdminRights: 您没有管理员权限。请以管理员身份登录。
-  editDescription: 编辑项目描述
-  saveDescription: 保存描述更改
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: 您要保存这些更改吗？
+  saveOnLanguageChange: 是否保存当前更改？
+  btnKeep: 保存更改
+  btnDiscard: 放弃
   addComment: 写评论
   thumbsUp: 赞
   smile: 微笑
@@ -185,6 +192,9 @@ programs:
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: 默认
+  save: 保存
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -313,7 +323,7 @@ licenseToPlay:
   text6: '了解更多关于 %link-termsOfUse% 的Catrobat 在线社区使用条款。'
   list1:
     item1: 和蛋糕一起分析您的秘方
-    item2: 给那些激励您的用户好的评价
+    item2: 奖励那些激励你的人
   version: 版本 1.1，2013 年 4 月 2 日
 termsOfUse:
   title: 使用条款
@@ -329,7 +339,7 @@ termsOfUse:
     item3: 应用所有级别的经验
   list2:
     item1: 敬重。当分享项目时，请记住，许多不同年龄和背景的人都会看到您的贡献。
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "付给积分。您可以随意制作其他人项目的修改版 - 只要付给他们积分就行。您可以在您的项目的注释和学分部分找到付给积分的地方。有关修改其他用户的项目的详细信息，请参阅此虚线列表下方的段落。"
     item3: "请诚实。不要冒充其他人或做出其他戏弄社区的事情。"
     item4: "请保护好您的隐私信息。请不要公开您的电子邮件，电话号码或其他个人联系信息。"
     item5: "帮助保持网站友好。 如果你觉得其他人会发现一个项目或评论意味着侮辱、过于暴力， 或者不适当，只需单击“报告视为不适当”按钮，留下一个简短的解释。 Catrobat团队将审查您的报告，并可以删除任何项目、评论或帖子。"
@@ -392,6 +402,7 @@ login:
   passwordSecond: 密码确认
 register:
   title: 注册
+  subText: "如果继续，表示您将会创建一个Catrobat社区帐户并同意我们的 %var1% 和 %var2%。"
   button:
     cancel: 取消
     createAccount: 创造帐户
@@ -401,6 +412,27 @@ accountRecovery:
   button:
     cancel: 取消
     submit: 找回密码
+resetPassword:
+  request:
+    title: "重置您的密码"
+    description: "如果您记得您帐户的电子邮件，我们可以向您发送一个链接来重置您的密码。"
+    button:
+      submit: "发送密码重置电子邮件"
+      cancel: "取消"
+  check:
+    title: "请检查您的邮箱。"
+    description: "如果存在一个与您的电子邮件匹配的帐户，刚刚发送的一封电子邮件中会有帮您重置密码的链接。 此链接将在 %time% 后过期。"
+    description2: "如果您没有收到电子邮件，请检查您的垃圾邮件文件夹或 %tryAgainLink%"
+    tryAgain: "重试"
+  email:
+    title: "您好！"
+    visitLink: "要重置您的密码，请访问以下链接"
+    expire: "此链接将在 %time% 后过期。"
+    cheers: "恭喜！"
+  reset:
+    title: "重置您的密码"
+    button:
+      submit: "重置密码"
 apk:
   download: 下载程序
   prepare: '准备应用程序'
@@ -470,6 +502,9 @@ time:
   years.ago: '{1}一年前|]1,Inf]一年多前'
 failure:
   upload: 上传您的应用程序时出错。
+user:
+  verification:
+    email: '验证您的电子邮件'
 api:
   registerUser:
     emailMissing: '电子邮件丢失'
@@ -733,7 +768,7 @@ achievements:
         title: "Coding Jam '21"
         description: "参与 Coding Jam '21"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} 标签 |]1,Inf] 标签'
   tag:
     game:
       title: 游戏
@@ -797,7 +832,7 @@ studio:
       add_comment: '%user% 添加了一个项目。'
     members_list:
       title: '工作室成员'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      project_count: '{0} 没有工作室项目 |{1} 1个工作室项目 |]1，Inf] %count% 个工作室项目'
       promote_member: '将成员提升为管理员。'
       promotion_failed: '该成员升级过程出错。请稍后再试。'
       ban_member: '禁止工作室成员'
@@ -817,3 +852,5 @@ media_library:
       sound: '类型：声音'
       movie: '类型：视频'
       default: '类型：未知'
+snackbar:
+  project_not_found: '请求的项目不可用'

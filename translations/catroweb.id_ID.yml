@@ -27,6 +27,7 @@ reportIt: Ya, laporkan!
 areYouSure: Apakah kamu yakin?
 noWayOfReturn: Tidak ada cara untuk memulihkan tindakan Anda!
 download: Unduh
+name: Nama
 description: Keterangan
 noDescription: Deskripsi tidak tersedia.
 credits: Catatan dan kredit
@@ -124,6 +125,7 @@ programs:
     Tidak ada cara untuk memulihkan tindakan Anda!
     Ya, hapus!
     Membatalkan
+  tooLongName: The project name is too long!
   tooLongDescription: Deskripsi proyek terlalu panjang!
   tooLongCredits: Catatan dan kredit proyek terlalu panjang!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Anda tidak dapat menandai proyek Anda sendiri.
   reportAlready: Anda sudah menandai proyek ini.
   reportDone: Anda melaporkan proyek ini!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Perbaharui Aplikasi
   updateAppText: Harap perbarui aplikasi Anda ke versi terbaru untuk dapat mengunduh proyek ini.
   btnClosePopup: Oke
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Komentar tersebut berhasil dihapus.
   deleted_popup_header: Dihapus
   noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
-  editDescription: Edit deskripsi proyek
-  saveDescription: Menyimpan
-  editCredits: Edit catatan dan kredit proyek
-  saveCredits: Menyimpan
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Apakah Anda ingin menyimpan perubahan?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Singkirkan
   addComment: Tulis komen
   thumbsUp: Jempolan!
   smile: Tersenyum!
@@ -185,6 +192,9 @@ programs:
   showTranslation: Tampilkan terjemahan
   hideTranslation: Sembunyikan terjemahan
   translatedByLine: Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Default
+  save: Simpan
 remixGraph:
   title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'
@@ -387,6 +397,7 @@ login:
   passwordSecond: Konfirmasi password
 register:
   title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: Batalkan
     createAccount: Membuat akun
@@ -396,6 +407,27 @@ accountRecovery:
   button:
     cancel: Batalkan
     submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "Batalkan"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Setel ulang kata sandi"
 apk:
   download: Unduh sebagai app
   prepare: 'Mempersiapkan app'
@@ -465,6 +497,9 @@ time:
   years.ago: '{1}1 tahun yang lalu |] 1, Inf] lebih dari satu tahun yang lalu'
 failure:
   upload: Terjadi kesalahan ketika mengupload aplikasi anda.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Email hilang'
@@ -812,3 +847,5 @@ media_library:
       sound: 'Jenis: suara'
       movie: 'Jenis: video'
       default: 'Jenis: tidak diketahui'
+snackbar:
+  project_not_found: 'The requested project is not available'

@@ -18,18 +18,20 @@ class ItranslateApi implements TranslationApiInterface
   private Client $client;
   private string $api_key;
   private LoggerInterface $logger;
+  private TranslationApiHelper $helper;
 
   public function __construct(Client $client, LoggerInterface $logger)
   {
     $this->client = $client;
     $this->logger = $logger;
     $this->api_key = $_ENV['ITRANSLATE_API_KEY'];
+    $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
-    $target_language = $this->transformLanguageCode($target_language);
-    $source_language = $this->transformLanguageCode($source_language);
+    $target_language = $this->helper->transformLanguageCode($target_language);
+    $source_language = $this->helper->transformLanguageCode($source_language);
 
     try {
       $response = $this->client->request(
@@ -39,7 +41,7 @@ class ItranslateApi implements TranslationApiInterface
           'json' => [
             'key' => $this->api_key,
             'source' => [
-              'dialect' => $source_language ?? 'auto',
+              'dialect' => empty($source_language) ? 'auto' : $source_language,
               'text' => $text,
             ],
             'target' => [
@@ -73,22 +75,5 @@ class ItranslateApi implements TranslationApiInterface
     $translation_result->translation = $result['target']['text'];
 
     return $translation_result;
-  }
-
-  private function transformLanguageCode(?string $language): ?string
-  {
-    if (null === $language) {
-      return null;
-    }
-
-    if (2 == strlen($language)) {
-      return $language;
-    }
-
-    if (in_array($language, self::LONG_LANGUAGE_CODE, true)) {
-      return $language;
-    }
-
-    return substr($language, 0, 2);
   }
 }

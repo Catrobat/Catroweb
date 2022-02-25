@@ -20,43 +20,52 @@
 #
 
 monolog:
-  channels: [upload, download_stats]
+  channels: [upload, search, download]
   handlers:
 
     # logging in your browser
     # you may have to allow bigger header sizes in your Web server configuration
     firephp:
       type: firephp
-      level: info
+      level: warning
     chromephp:
       type: chromephp
-      level: info
+      level: warning
 
     main:
-      type:  fingers_crossed
-      action_level: error
+      type: fingers_crossed
+      action_level: warning
       handler: nested
       formatter: monolog.formatter.catrobat_custom_formatter
+
     nested:
       type: rotating_file
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
-      level: info
-      max_files: 5
+      level: warning
+      max_files: 1
 
     upload:
       type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/upload/upload.log"
-      level: debug
-      max_files: 5
-      channels: [upload]
+      path: "%kernel.logs_dir%/%kernel.environment%/upload/%kernel.environment%.log"
+      level: warning
+      max_files: 1
+      channels: [ upload ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
-    download_stats:
+    search:
       type: rotating_file
-      path: "%kernel.logs_dir%/%kernel.environment%/download_stats/download_stats.log"
+      path: "%kernel.logs_dir%/%kernel.environment%/search/%kernel.environment%.log"
       level: debug
-      max_files: 5
-      channels: [download_stats]
+      max_files: 1
+      channels: [ search ]
+      formatter: monolog.formatter.catrobat_custom_formatter
+
+    download:
+      type: rotating_file
+      path: "%kernel.logs_dir%/%kernel.environment%/download/%kernel.environment%.log"
+      level: debug
+      max_files: 1
+      channels: [ download ]
       formatter: monolog.formatter.catrobat_custom_formatter
 
     console:

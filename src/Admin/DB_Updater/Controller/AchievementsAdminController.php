@@ -2,8 +2,8 @@
 
 namespace App\Admin\DB_Updater\Controller;
 
-use App\Commands\Helpers\CommandHelper;
-use App\Manager\AchievementManager;
+use App\System\Commands\Helpers\CommandHelper;
+use App\User\Achievements\AchievementManager;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -16,10 +16,12 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class AchievementsAdminController extends CRUDController
 {
   protected AchievementManager $achievement_manager;
+  protected KernelInterface $kernel;
 
-  public function __construct(AchievementManager $achievement_manager)
+  public function __construct(AchievementManager $achievement_manager, KernelInterface $kernel)
   {
     $this->achievement_manager = $achievement_manager;
+    $this->kernel = $kernel;
   }
 
   public function listAction(Request $request = null): Response
@@ -42,7 +44,7 @@ class AchievementsAdminController extends CRUDController
   /**
    * @throws Exception
    */
-  public function updateAchievementsAction(KernelInterface $kernel): RedirectResponse
+  public function updateAchievementsAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('ACHIEVEMENTS')) {
       throw new AccessDeniedException();
@@ -50,7 +52,7 @@ class AchievementsAdminController extends CRUDController
 
     $output = new BufferedOutput();
     $result = CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:achievements'], ['timeout' => 86400], '', $output, $kernel
+      ['bin/console', 'catrobat:update:achievements'], ['timeout' => 86400], '', $output, $this->kernel
     );
 
     if (0 === $result) {

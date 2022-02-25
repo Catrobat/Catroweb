@@ -3,7 +3,7 @@
 namespace App\Api\Services\Utility;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\Entity\Survey;
+use App\DB\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class UtilityApiLoader extends AbstractApiLoader

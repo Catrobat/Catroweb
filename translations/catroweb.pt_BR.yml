@@ -17,7 +17,7 @@ googlePlay: Google Play
 iosAppStore: Loja de Aplicativos IOS
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Bate-papo do Discord
 passwordsNoMatch: As senhas não coincidem.
 error: Erro
 cancel: Cancelar
@@ -27,6 +27,7 @@ reportIt: Sim, denunciar!
 areYouSure: Você tem certeza?
 noWayOfReturn: Não há maneira de desfazer suas ações!
 download: Baixe o projeto
+name: Nome
 description: Descrição
 noDescription: Sem descrição disponível.
 credits: Créditos
@@ -124,6 +125,7 @@ programs:
     Não há como restaurar suas ações!
     Sim, excluir conta!
     Cancelar
+  tooLongName: O nome do projeto é muito extenso!
   tooLongDescription: A descrição do projeto é muito longa!
   tooLongCredits: Os créditos do projeto são muito longos!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Você não pode sinalizar o seu próprio projeto.
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
+  updateAppHeaderDownload: Não é possível baixar
+  updateAppTextDownload: Por favor, atualize seu aplicativo para a versão mais recente. Esteja ciente de que nem todos os recursos do Android já estão disponíveis no IOS.
+  updateAppTextDownloadApk: O download de APK está disponível apenas no Android e não no IOS.
   updateAppHeader: Atualizar aplicativo
   updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Comentário apagado com sucesso.
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
-  editDescription: Editar a Descrição do projeto
-  saveDescription: Salvar
-  editCredits: Editar Créditos do projeto
-  saveCredits: Salvar
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Deseja salvar as alterações?
+  saveOnLanguageChange: Gostaria de manter suas alterações atuais?
+  btnKeep: Manter alterações
+  btnDiscard: Descartar
   addComment: Escrever comentário
   thumbsUp: Joinha!
   smile: Sorriso!
@@ -181,10 +188,13 @@ programs:
   link: Copiar link do projeto para a área de transferência
   reactionsText: Curtidas
   downloadErrorText: Ocorreu um erro ao baixar o projeto. Por favor, tente novamente mais tarde.
-  downloadStartText: Download has started...
+  downloadStartText: Download iniciado...
   showTranslation: Mostrar tradução
   hideTranslation: Ocultar tradução
   translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Padrão
+  save: Salvar
 remixGraph:
   title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
@@ -364,11 +374,11 @@ menu:
 login:
   login: Login
   button:
-    loginNow: Login now
+    loginNow: Entrar agora
     createAccount: Criar conta
-    forgetPassword: Forget password?
+    forgetPassword: Esqueceu a senha?
   oauth:
-    title: Or you can join with
+    title: Ou entrar com
   passOrUser: Sua senha ou nome de usuário está incorreto.
   noUsername: Seu nome de usuário ou endereço de e-mail não foi encontrado.
   forgotPass: Esqueceu a senha ou nome de usuário?
@@ -386,16 +396,38 @@ login:
   passwordFirst: Senha
   passwordSecond: Password Confirm
 register:
-  title: Sign up
+  title: Criar conta
+  subText: "Ao continuar, você está criando uma conta na comunidade Catrobat e concordando com %var1% e %var2%."
   button:
     cancel: Cancelar
     createAccount: Criar conta
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Recuperar conta
+  description: Se você se lembrar do e-mail ou nome de usuário da sua conta, podemos lhe enviar um link para redefinir sua senha.
   button:
     cancel: Cancelar
     submit: Recuperar senha
+resetPassword:
+  request:
+    title: "Redefinir sua senha"
+    description: "Se você se lembra do e-mail da sua conta, podemos lhe enviar um link para redefinir sua senha."
+    button:
+      submit: "Enviar e-mail de redefinição"
+      cancel: "Cancelar"
+  check:
+    title: "Verifique seus e-mails"
+    description: "Caso exista uma conta correspondente ao seu endereço de e-mail, você receberá uma mensagem contendo um link que pode ser usado para redefinir sua senha. Este link expirará em %time%."
+    description2: "Se você não receber o e-mail, verifique a sua pasta de spam ou %tryAgainLink%"
+    tryAgain: "tente novamente"
+  email:
+    title: "Oi!"
+    visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"
+    expire: "Este link expirará em %time%."
+    cheers: "Saudações!"
+  reset:
+    title: "Redefinir sua senha"
+    button:
+      submit: "Redefinir senha"
 apk:
   download: Baixar como app
   prepare: 'Baixar como app'
@@ -465,6 +497,9 @@ time:
   years.ago: '{1}1 ano atrás |]1,Inf] mais de um ano atrás'
 failure:
   upload: Houve um erro durante o envio do seu aplicativo.
+user:
+  verification:
+    email: 'Verifique seu e-mail'
 api:
   registerUser:
     emailMissing: 'Email faltando'
@@ -726,7 +761,7 @@ achievements:
         description: 'Criar uma conta'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Participante da programação Jam 2021"
 tags:
   title: 'Etiquetas'
   tag:
@@ -775,34 +810,34 @@ studio:
     no_projects: 'Este estúdio ainda não contém nenhum projeto'
     updateCoverError: 'Algo deu errado ao atualizar a capa de estúdio!'
     projects:
-      title: 'projects'
+      title: 'Projetos'
     comments:
       title: 'Comentários'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Digite algo'
+      replies: 'respostas'
+      send: 'enviar'
+      no_comments: 'Este estúdio ainda não tem comentários.'
+      disabled_comments: 'Os comentários foram desativados para este estúdio.'
+      post_error: 'Algo deu errado ao postar seu comentário. Tente novamente mais tarde.'
+      delete_error: 'Algo deu errado ao remover o comentário. Tente novamente mais tarde.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Atividades'
+      join_studio: '%user% entrou no estúdio.'
+      add_project: '%user% deixou um comentário.'
+      add_comment: '%user% adicionou um projeto.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Membros do Studio'
+      project_count: '{0} Projetos de estúdio não existentes |{1} 1 projeto de estúdio |]1, Inf] %count% projetos de estúdio'
+      promote_member: 'Promover membro para administrador'
+      promotion_failed: 'Algo deu errado durante a promoção deste membro. Tente novamente mais tarde.'
+      ban_member: 'Banir membro do Studio'
+      ban_failed: 'Algo deu errado ao banir este membro. Tente novamente mais tarde.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Configurações Gerais'
+      studio_name: 'Nome do Estúdio'
       studio_description: 'Descrição'
       toggle_allow_comments: 'Comentários'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Público'
 media_library:
   file:
     size: 'Tamanho: %size%'
@@ -812,3 +847,5 @@ media_library:
       sound: 'Tipo: som'
       movie: 'Tipo: vídeo'
       default: 'Tipo: desconhecido'
+snackbar:
+  project_not_found: 'O projeto solicitado não está disponível'

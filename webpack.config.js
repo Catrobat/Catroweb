@@ -52,8 +52,7 @@ Encore
     { from: './assets/catblocks', to: '../catblocks/[path][name].[ext]' },
 
     // JS (deprecated!)
-    { from: './assets/js/custom', to: '../js/[path][name].[ext]' }, // Deprecated!
-    { from: './assets/js/analytics', to: '../js/[path][name].[ext]' },
+    { from: './assets/js/custom', to: '../js/[path][name].[ext]' },
     { from: './node_modules/clipboard/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/bootstrap/dist/js', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/sweetalert2/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
@@ -147,11 +146,14 @@ Encore
   // enables Sass/SCSS support
   .enableSassLoader()
 
-  // integrity="..." attributes on your script & link tags
-  .enableIntegrityHashes(Encore.isProduction())
+// integrity="..." attributes on your script & link tags
+// .enableIntegrityHashes(Encore.isProduction())
 
   // uncomment if you're having problems with a jQuery plugin
   .autoProvidejQuery()
+
+  // Post CSS processing; E.g. auto vendor prefixing, px to rem, ...
+  .enablePostCssLoader()
 
   /*
    * Plugins

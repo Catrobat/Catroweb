@@ -3,7 +3,7 @@
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractResponseManager;
-use App\Entity\User;
+use App\DB\Entity\User\User;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
@@ -27,7 +27,6 @@ final class UserResponseManager extends AbstractResponseManager
       'id' => $user->getId(),
       'username' => $user->getUsername(),
       'email' => $user->getEmail(),
-      'country' => $user->getCountry(),
       'projects' => $user->getPrograms()->count(),
       'followers' => $user->getFollowers()->count(),
       'following' => $user->getFollowing()->count(),
@@ -45,12 +44,12 @@ final class UserResponseManager extends AbstractResponseManager
     return $users_data_response;
   }
 
-  public function createUserRegisteredResponse(string $token): JWTResponse
+  public function createUserRegisteredResponse(string $token, string $refresh_token): JWTResponse
   {
     return new JWTResponse(
       [
         'token' => $token,
-        'refresh_token' => 'ToDo!',
+        'refresh_token' => $refresh_token,
       ]
     );
   }

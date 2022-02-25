@@ -11,6 +11,8 @@ require 'recipe/slack.php';
 (new Dotenv())->usePutenv(true)->load('.env');
 (new Dotenv())->usePutenv(true)->load('.env.local');
 
+set('default_timeout', 6000);
+
 // Project name
 set('application', getenv('APP_NAME'));
 set('repository', getenv('DEPLOY_GIT'));
@@ -31,6 +33,7 @@ set('shared_dirs',
     'var/log',
     'var/sessions',
     'public/resources',
+    '.jwt',
   ]);
 
 // Shared files between deploys
@@ -39,6 +42,8 @@ add('shared_files',
     '.env.local',
     '.env.prod.local',
     '.env.dev.local',
+    'google_cloud_key.json',
+    '.dkim/private.key',
   ]);
 
 // Symfony writable dirs
@@ -47,6 +52,7 @@ set('writable_dirs',
     'var/cache',
     'var/log',
     'var/sessions',
+    'public/resources',
   ]);
 
 // Symfony executable and variable directories

@@ -1,0 +1,20 @@
+Application/Controller:
+    resource: ../../src/Application/Controller
+    type: annotation
+    prefix:   /{theme}/
+    requirements:
+        theme: '%themeRoutes%'
+
+Admin/Controller:
+    resource: ../../src/Admin/
+    type: annotation
+    prefix: /admin/
+    requirements:
+        theme: 'admin'
+
+Api_deprecated/Controller:
+    resource: ../../src/Api_deprecated/Controller
+    type: annotation
+    prefix:   /{theme}/
+    requirements:
+        theme: '%themeRoutes%'

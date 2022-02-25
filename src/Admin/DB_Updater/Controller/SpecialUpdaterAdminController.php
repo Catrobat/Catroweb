@@ -2,7 +2,7 @@
 
 namespace App\Admin\DB_Updater\Controller;
 
-use App\Commands\Helpers\CommandHelper;
+use App\System\Commands\Helpers\CommandHelper;
 use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -14,6 +14,13 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SpecialUpdaterAdminController extends CRUDController
 {
+  protected KernelInterface $kernel;
+
+  public function __construct(KernelInterface $kernel)
+  {
+    $this->kernel = $kernel;
+  }
+
   public function listAction(Request $request = null): Response
   {
     return $this->renderWithExtraParams('Admin/DB_Updater/admin_special_updater.html.twig', [
@@ -24,7 +31,7 @@ class SpecialUpdaterAdminController extends CRUDController
   /**
    * @throws Exception
    */
-  public function updateSpecialAction(KernelInterface $kernel): RedirectResponse
+  public function updateSpecialAction(): RedirectResponse
   {
     if (!$this->admin->isGranted('UPDATE_SPECIAL')) {
       throw new AccessDeniedException();
@@ -32,7 +39,7 @@ class SpecialUpdaterAdminController extends CRUDController
 
     $output = new BufferedOutput();
     $result = CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:update:special'], ['timeout' => 86400], '', $output, $kernel
+      ['bin/console', 'catrobat:update:special'], ['timeout' => 86400], '', $output, $this->kernel
     );
 
     if (0 === $result) {

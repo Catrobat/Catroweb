@@ -27,6 +27,7 @@ reportIt: ஆம், அதைப் புகாரளி!
 areYouSure: உறுதியாகவா?
 noWayOfReturn: உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
 download: பதிவிறக்கம்
+name: பெயர்
 description: விளக்கவுரை
 noDescription: விளக்கவுரை ஏதும் கிடைக்கவில்லை.
 credits: குறிப்புகளும் பொதுவொப்புதல்களும்
@@ -124,6 +125,7 @@ programs:
     உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
     ஆம், அழித்துவிடு!
     ரத்து
+  tooLongName: The project name is too long!
   tooLongDescription: திட்ட விளக்கம் மிக நீளமாக உள்ளது!
   tooLongCredits: திட்ட நன் மதிப்ப மிக நீளமாக உள்ளது!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: உங்கள் சொந்த திட்டத்தை நீங்களே குறியிட இயலாது.
   reportAlready: இந்த திட்டத்தை நீங்கள் ஏற்கனவே கொடியிட்டுள்ளீர்கள்.
   reportDone: நீங்கள் இந்த திட்டத்தைப் புகாரளித்தீர்கள்!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: செயலியை புதுபிக்கவும்
   updateAppText: இந்த ப்ரொக்ராமை பதிவிறக்கம் செய்ய தயவுசெய்து உங்கள் செயலியை புதிய பதிப்பிற்கு புதுபிக்கவும்.
   btnClosePopup: சரி
@@ -168,10 +173,12 @@ programs:
   deleted_popup: உங்கள் கருத்து வெற்றிகரமாக நீக்கப்பட்டது.
   deleted_popup_header: நீக்கப்பட்டது
   noAdminRights: உங்களுக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழைக.
-  editDescription: திட்ட விளக்கத்தைத் திருத்துக
-  saveDescription: விளக்க மாற்றத்தை சேமிக்கவும்
-  editCredits: திட்ட வரவுகளைத் திருத்துக
-  saveCredits: வரவுகளை மாற்றவும்
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: புறக்கணி
   addComment: தங்கள் கருத்தை பகிரவும்
   thumbsUp: வெற்றி!
   smile: புன்னகைக்கவும்!
@@ -185,6 +192,9 @@ programs:
   showTranslation: மொழிபெயர்ப்பைக் காட்டு
   hideTranslation: மொழிபெயர்ப்பை மறை
   translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
+  translationUpdated: Changes for the translation to %language% updated
+  default: இயல்புநிலை
+  save: சேமி
 remixGraph:
   title: ரீமிக்ஸ்கள்
   showRemixGraph: 'ரீமிக்ஸ் வரைபடத்தைக் காட்டு'
@@ -391,6 +401,7 @@ login:
   passwordSecond: கடவுச்சொல்லை உறுதிப்படுத்து
 register:
   title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: தவிர்
     createAccount: கணக்கை உருவாக்கவும்
@@ -400,6 +411,27 @@ accountRecovery:
   button:
     cancel: தவிர்
     submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "தவிர்"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Reset password"
 apk:
   download: செயலியை பதிவிறக்கவும்
   prepare: 'செயலியை தயாரிக்கவும்'
@@ -469,6 +501,9 @@ time:
   years.ago: '{1}1 வருடம் முன்பு |]1,Inf] ஒரு வருடத்திற்கு முன்பு'
 failure:
   upload: உங்கள் app இன் பதிவேற்றத்தின் போது பிழை ஏற்பட்டது.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'மின்னஞ்சல் காணவில்லை'
@@ -816,3 +851,5 @@ media_library:
       sound: 'வகை: ஒலி'
       movie: 'வகை: வீடியோ'
       default: 'வகை: தெரியவில்லை'
+snackbar:
+  project_not_found: 'The requested project is not available'

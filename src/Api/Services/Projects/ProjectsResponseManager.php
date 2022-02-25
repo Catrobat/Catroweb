@@ -4,17 +4,21 @@ namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
-use App\Catrobat\Services\ImageRepository;
-use App\Entity\FeaturedProgram;
-use App\Entity\Program;
-use App\Entity\ProgramManager;
-use App\Entity\Tag;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
+use App\DB\Entity\Project\Extension;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Tag;
+use App\Project\ProgramManager;
+use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
 use Exception;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsCategory;
+use OpenAPI\Server\Model\TagResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
+use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -36,9 +40,11 @@ final class ProjectsResponseManager extends AbstractResponseManager
     UrlGeneratorInterface $url_generator,
     ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
-    ProgramManager $project_manager
+    SerializerInterface $serializer,
+    ProgramManager $project_manager,
+    ResponseCacheManager $response_cache_manager
   ) {
-    parent::__construct($translator);
+    parent::__construct($translator, $serializer, $response_cache_manager);
     $this->time_formatter = $time_formatter;
     $this->image_repository = $image_repository;
     $this->url_generator = $url_generator;
@@ -175,6 +181,45 @@ final class ProjectsResponseManager extends AbstractResponseManager
   {
     return new UploadErrorResponse([
       'error' => $this->__('api.projectsPost.creating_error', [], $locale),
+    ]);
+  }
+
+  public function createProjectsExtensionsResponse(array $extensions, string $locale): array
+  {
+    $response = [];
+
+    /** @var Extension $extension */
+    foreach ($extensions as $extension) {
+      $response[] = $this->createExtensionResponse($extension, $locale);
+    }
+
+    return $response;
+  }
+
+  public function createExtensionResponse(Extension $extension, string $locale): TagResponse
+  {
+    return new TagResponse([
+      'id' => $extension->getInternalTitle(),
+      'text' => $this->__($extension->getTitleLtmCode(), [], $locale),
+    ]);
+  }
+
+  public function createProjectsTagsResponse(array $tags, string $locale): array
+  {
+    $response = [];
+    /** @var Tag $tag */
+    foreach ($tags as $tag) {
+      $response[] = $this->createTagResponse($tag, $locale);
+    }
+
+    return $response;
+  }
+
+  public function createTagResponse(Tag $tag, string $locale): TagResponse
+  {
+    return new TagResponse([
+      'id' => $tag->getInternalTitle(),
+      'text' => $this->__($tag->getTitleLtmCode(), [], $locale),
     ]);
   }
 }

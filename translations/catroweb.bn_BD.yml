@@ -16,8 +16,8 @@ tutorials: টিউটোরিয়াল
 googlePlay: গুগল প্লে
 iosAppStore: আইওএস অ্যাপ্লিকেশন ভাণ্ডার
 huaweiAppGallery: হুয়াওয়ে অ্যাপ্লাগারারি
-instagram: Instagram
-discordChat: Discord chat
+instagram: ইনস্টাগ্রাম
+discordChat: ডিসকর্ড চ্যাট
 passwordsNoMatch: পাসওয়ার্ড মিলছে না
 error: ভুল
 cancel: বাতিল
@@ -27,6 +27,7 @@ reportIt: হ্যাঁ, রিপোর্ট করুন
 areYouSure: আপনি নিশ্চিত?
 noWayOfReturn: আপনার কাজটি পুনরুদ্ধার করার কোনও উপায় নেই!
 download: ডাউনলোড
+name: নাম
 description: বর্ণনা
 noDescription: বর্ণনা পাওয়া যায় নি.
 credits: Credits
@@ -124,6 +125,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongName: The project name is too long!
   tooLongDescription: প্রকল্পের বিবরণটি অনেক দীর্ঘ!
   tooLongCredits: The project credits are too long!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: আপনি আপনার নিজের প্রকল্পটিকে ফ্ল্যাগ করতে পারবেন না।
   reportAlready: আপনি ইতিমধ্যে এই প্রকল্পটি পতাকাঙ্কিত করেছেন।
   reportDone: আপনি এই প্রকল্পের রিপোর্ট করেছেন!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: অ্যাপ্লিকেশন আপডেট করুন
   updateAppText: এই প্রকল্পটি ডাউনলোড করতে সক্ষম হতে দয়া করে আপনার অ্যাপ্লিকেশনটিকে নতুন সংস্করণে আপডেট করুন।
   btnClosePopup: ঠিক আছে
@@ -168,10 +173,12 @@ programs:
   deleted_popup: মন্তব্যটি সফলভাবে মুছে ফেলা হয়েছে।
   deleted_popup_header: মুছুন
   noAdminRights: আপনার অ্যাডমিন অধিকার নেই। অনুগ্রহ করে  অ্যাডমিন হিসাবে প্রবেশ করুন।
-  editDescription: Edit the project Description
-  saveDescription: পরিবর্তীত বর্ণনা সংরক্ষণ করুন
-  editCredits: Edit the project Credits
-  saveCredits: Save Credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: আপনি কি আপনার পরিবর্তনগুলি সংরক্ষণ করতে চান?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: বাতিল করুন
   addComment: মন্তব্য লিখুন
   thumbsUp: সাবাস
   smile: হাসি!
@@ -181,10 +188,13 @@ programs:
   link: ক্লিপবোর্ডে প্রকল্পের লিঙ্কটি অনুলিপি করুন
   reactionsText: প্রতিক্রিয়া
   downloadErrorText: প্রকল্পটি ডাউনলোড করার সময় ত্রুটি ঘটেছে। পরে আবার চেষ্টা করুন.
-  downloadStartText: Download has started...
+  downloadStartText: ডাউনলোড শুরু হয়েছে...
   showTranslation: অনুবাদ দেখান
   hideTranslation: অনুবাদ লুকান
   translatedByLine: '%provider% %sourceLanguage% থেকে %targetLanguage% দ্বারা অনুবাদিত'
+  translationUpdated: Changes for the translation to %language% updated
+  default: পূর্ব-নির্ধারিত
+  save: সংরক্ষণ করুন
 remixGraph:
   title: রিমিক্স
   showRemixGraph: 'রিমিক্স গ্রাফ প্রদর্শন করুন'
@@ -370,11 +380,11 @@ menu:
 login:
   login: প্রবেশ করুন
   button:
-    loginNow: Login now
+    loginNow: এখনি প্রবেশ করুন
     createAccount: অ্যাকাউন্ট তৈরি করুন
-    forgetPassword: Forget password?
+    forgetPassword: পাসওয়ার্ড ভুলে গেছেন?
   oauth:
-    title: Or you can join with
+    title: অথবা আপনি সাথে যোগ দিতে পারেন
   passOrUser: আপনার পাসওয়ার্ড বা ব্যবহারকারীর নামটি ভুল ছিল।
   noUsername: আপনার ব্যবহারকারী নাম বা ইমেল ঠিকানা পাওয়া যায় নি।
   forgotPass: পাসওয়ার্ড বা ব্যবহারকারীর নাম ভুলে গেছেন?
@@ -392,16 +402,38 @@ login:
   passwordFirst: পাসওয়ার্ড
   passwordSecond: পাসওয়ার্ড নিশ্চিত করুন
 register:
-  title: Sign up
+  title: সাইন আপ
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: বাতিল
     createAccount: অ্যাকাউন্ট তৈরি করুন
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: একাউন্ট পুনরুদ্ধার
+  description: আপনি যদি আপনার অ্যাকাউন্টের ইমেল বা ব্যবহারকারীর নাম মনে রাখেন আমরা আপনার পাসওয়ার্ড পুনরায় সেট করার জন্য আপনাকে একটি লিঙ্ক পাঠাতে পারি৷
   button:
     cancel: বাতিল
-    submit: Recover password
+    submit: পাসওয়ার্ড পুনরুদ্ধার করুন
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "বাতিল"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "পাসওয়ার্ড রিসেট করুন"
 apk:
   download: অ্যাপ্লিকেশন ডাউনলোড করুন
   prepare: 'অ্যাপ্লিকেশন প্রস্তুত করুন'
@@ -471,6 +503,9 @@ time:
   years.ago: '{1} ১ বছর আগে |]1,Inf] এক বছরেরও বেশি আগে'
 failure:
   upload: আপনার অ্যাপ্লিকেশন আপলোড করার সময় একটি ভুল ছিল।
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ইমেল অনুপস্থিত'
@@ -731,8 +766,8 @@ achievements:
         title: 'নবীনতা'
         description: 'একটি ব্যবহারকারী অ্যাকাউন্ট তৈরি করুন'
       coding_jam_09_2021:
-        title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        title: "কোডিং জ্যাম '২১"
+        description: "কোডিং জ্যাম ২০২১-এর অংশগ্রহণকারী"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -751,7 +786,7 @@ tags:
     tutorial:
       title: টিউটোরিয়াল
     coding_jam_09_2021:
-      title: "#catrobatfestival2021"
+      title: "#catrobatfestival২০২১"
 extensions:
   title: 'এক্সটেনশন'
   extension:
@@ -781,28 +816,28 @@ studio:
     no_projects: 'স্টুডিওতে এখনও কোনো প্রকল্প নেই'
     updateCoverError: 'স্টুডিও কভার আপডেট করার সময় কিছু ভুল হয়েছে!'
     projects:
-      title: 'projects'
+      title: 'প্রজেক্টগুলো'
     comments:
       title: 'মন্তব্যসমূহ'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'কিছু টাইপ করুন'
+      replies: 'উত্তর'
+      send: 'পাঠান'
+      no_comments: 'এই স্টুডিও মন্তব্য নেই'
+      disabled_comments: 'এই স্টুডিওর জন্য মন্তব্য নিষ্ক্রিয় করা হয়েছে.'
+      post_error: 'কোনো একটা সমস্যা হলো ভোট করার সময়, দয়া করে পরে আবার চেষ্টা করো'
+      delete_error: 'মন্তব্যটি সরানোর সময় কিছু ভুল হয়েছে৷ পরে আবার চেষ্টা করুন.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'কার্যক্রম'
+      join_studio: '% ব্যবহারকারী% স্টুডিওতে যোগদান করেছে৷'
+      add_project: '%ব্যবহারকারী% একটি মন্তব্য করেছেন।'
+      add_comment: '%ব্যবহারকারী% একটি প্রকল্প যোগ করেছে।'
     members_list:
-      title: 'Studio members'
+      title: 'স্টুডিও সদস্যরা'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      promote_member: 'সদস্যকে অ্যাডমিনে উন্নীত করুন'
+      promotion_failed: 'এই সদস্যের প্রচারের সময় কিছু ভুল হয়েছে৷ পরে আবার চেষ্টা করুন.'
+      ban_member: 'স্টুডিও থেকে সদস্য নিষিদ্ধ'
+      ban_failed: 'এই সদস্যকে নিষিদ্ধ করার সময় কিছু ভুল হয়েছে৷ পরে আবার চেষ্টা করুন.'
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
@@ -818,3 +853,5 @@ media_library:
       sound: 'প্রকার: শব্দ'
       movie: 'প্রকার: ভিডিও'
       default: 'প্রকার: অজানা'
+snackbar:
+  project_not_found: 'The requested project is not available'

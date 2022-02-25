@@ -27,6 +27,7 @@ reportIt: بله، گزارش بده!
 areYouSure: آیا مطمئنید؟
 noWayOfReturn: هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
 download: دانلود
+name: نام
 description: توضیح
 noDescription: هیچ توضیحی در دسترس نمی باشد.
 credits: Credits
@@ -124,6 +125,7 @@ programs:
     هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
     بله، این را حذف کنید!
     لغو
+  tooLongName: نام پروژه خیلی طولانی است!
   tooLongDescription: شرح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
   most:
@@ -137,8 +139,8 @@ programs:
   likes:
     likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
     all: "همه"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  remixes: '{0}0 ریمیکس |{1}1 ریمیکس |]1,Inf]%remixes%% ریمیکس'
+  newRemixesNotificationTitle: '{1}%programName%دارای 1 ریمیکس جدید: |]1,Inf]%programName%دارای %remixes% ریمیکس جدید:'
   submitted: پروژه های ارائه شده
   uploaded: پروژه های آپلود شده
   reportAsInappropriate: به عنوان نامناسب گزارش بده
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: شما نمیتوانید پروژه خود را پرچم کنید.
   reportAlready: شما قبلا این پروژه را پرچم گذاری کرده اید.
   reportDone: شما این پروژه را گزارش کرده اید!
+  updateAppHeaderDownload: دانلود امکان پذیر نیست
+  updateAppTextDownload: لطفا برنامه خود را به جدیدترین نسخه به روز کنید. توجه داشته باشید که همه ویژگی های اندروید از قبل در IOS در دسترس نیستند.
+  updateAppTextDownloadApk: دانلود APK در حال حاضر فقط در اندروید و نه در IOS در دسترس است.
   updateAppHeader: به روز رسانی اپلیکیشن
   updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
   btnClosePopup: Ok
@@ -168,10 +173,12 @@ programs:
   deleted_popup: نظر با موفقیت حذف شد.
   deleted_popup_header: حذف شده
   noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
-  editDescription: توضیحات پروژه را ویرایش کنید
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: آیا مایلی تغییرات را ذخیره کنی؟
+  saveOnLanguageChange: آیا می خواهید تغییرات فعلی خود را حفظ کنید؟
+  btnKeep: تغییرات را حفظ کنید
+  btnDiscard: لغو
   addComment: کامنتی بگذارید
   thumbsUp: انگشت بالا
   smile: لبخند
@@ -185,6 +192,9 @@ programs:
   showTranslation: مشاهده ترجمه
   hideTranslation: پنهان‌کردن ترجمه
   translatedByLine: ترجمه شده توسط%provider% %sourceLanguage% به %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: پیش فرض
+  save: ذخيره
 remixGraph:
   title: ریمیکس ها
   showRemixGraph: 'گراف ریمیکس'
@@ -206,42 +216,46 @@ accountConfirmation:
     تیم Catrobat شما
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    محترم %username%<br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
+    این پیوند فقط یک بار می تواند برای تأیید اعتبار حساب شما استفاده شود<a href=%confirmationUrl%>
+    <a href=%confirmationUrl%>اینجا.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
+    این پیوند فقط یک بار می تواند برای تأیید اعتبار حساب شما استفاده شود.<br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    با احترام،<br>
+    تیم کاتروبات شما. 
     </p>
 passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    محترم %username%.
+    شما درخواست کرده اید رمز عبور خود را در %appplication_url% بازنشانی کنید زیرا رمز عبور خود را فراموش کرده اید.
+    اگر این را درخواست نکردید، لطفاً آن را نادیده بگیرید. در عرض 24 ساعت منقضی می شود و بی فایده می شود.
+    برای بازنشانی رمز عبور و ایجاد رمز عبور جدید، لطفاً به صفحه زیر مراجعه کنید:%confirmationUrl%
+    شما می توانید در هر زمان از نام کاربری و رمز عبور خود برای دسترسی به انجمن %appplication_url% استفاده کنید.
+    برای این کار کافیست به صفحه زیر مراجعه کنید:%loginPage%
+    برای ویرایش مشخصات پروفایل خود به این صفحه بروید:%profilePage%
+    با احترام،
+    تیم کاتروبات شما
+
+
+
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    محترم%username%<br>
     <br>
-    You have requested to reset your password on <a href=%appplication_url%>Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    شما درخواست کرده اید که رمز عبور خود را بازنشانی در <a href=%appplication_url%> Pocket Code</a> زیرا رمز عبور خود را فراموش کرده اید.
+    اگر این را درخواست نکردید، لطفاً آن را نادیده بگیرید. در عرض 24 ساعت منقضی می شود و بی فایده می شود.<br>
     <br>
-    To reset your password and create a new one, please click <a href=%confirmationUrl%>here.</a><br>
+    برای تنظیم مجدد رمز عبور و ایجاد رمز عبور جدید، لطفا <a href=%confirmationUrl%>اینجا</a><br> کلیک کنید
     <br>
-    You can use your username and your password at any time to access the <a href=%appplication_url%>Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href=%loginPage%>Login Page</a><br>
-    To edit your profile details, go to this <a href=%profilePage%>page</a>.<br>
+    شما می توانید در هر زمان از نام کاربری و رمز عبور خود برای دسترسی به انجمن<a href=%appplication_url%> Pocket Code </a>استفاده کنید.<br>
+    برای انجام این کار، فقط به صفحه زیر مراجعه کنید: <a href=%loginPage%>صفحه ورود</a><br>
+    برای ویرایش مشخصات پروفایل خود به این <a href=%profilePage%> صفحه</a>.<br> بروید
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    با احترام،<br>
+    تیم کاتروبات شما
     </p>
 profile:
   edit: پروفایل خودت را ویرایش کن
@@ -364,11 +378,11 @@ menu:
 login:
   login: ورود به سیستم
   button:
-    loginNow: Login now
+    loginNow: اکنون وارد شوید
     createAccount: ایجاد حساب کاربری
-    forgetPassword: Forget password?
+    forgetPassword: فراموشی رمز عبور؟
   oauth:
-    title: Or you can join with
+    title: یا می توانید به آن بپیوندید
   passOrUser: نام کاربری یا کلمه عبور نادرست است.
   noUsername: آدرس ایمیل یا نام کاربری یافت نشد.
   forgotPass: نام کاربری یا رمز عبور را فراموش کرده اید؟
@@ -386,16 +400,38 @@ login:
   passwordFirst: رمز عبور
   passwordSecond: تایید گذرواژه
 register:
-  title: Sign up
+  title: ثبت نام
+  subText: "با ادامه، یک حساب انجمن Catrobat راه‌اندازی می‌کنید و با %var1%و %var2% ما موافقت می‌کنید."
   button:
     cancel: انصراف
     createAccount: ایجاد حساب کاربری
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: بازیابی حساب کاربری
+  description: اگر ایمیل یا نام کاربری حساب خود را به خاطر دارید، می‌توانیم پیوندی برای تنظیم مجدد رمز عبور برای شما ارسال کنیم.
   button:
     cancel: انصراف
-    submit: Recover password
+    submit: بازیابی رمز عبور
+resetPassword:
+  request:
+    title: "رمز عبور خود را بازنشانی کنید"
+    description: "اگر ایمیل حساب خود را به خاطر دارید، می‌توانیم پیوندی برای تنظیم مجدد رمز عبور برای شما ارسال کنیم."
+    button:
+      submit: "ارسال ایمیل ریست"
+      cancel: "انصراف"
+  check:
+    title: "ایمیل های خود را بررسی کنید"
+    description: "اگر حسابی مطابق با ایمیل شما وجود داشته باشد، ایمیلی ارسال شده است که حاوی پیوندی است که می توانید از آن برای بازنشانی رمز عبور خود استفاده کنید. این پیوند در %time% منقضی می‌شود."
+    description2: "اگر ایمیلی دریافت نکردید، لطفاً پوشه هرزنامه یا %tryAgainLink% خود را بررسی کنید"
+    tryAgain: "دوباره امتحان کنید"
+  email:
+    title: "سلام!"
+    visitLink: "برای بازنشانی رمز عبور خود به لینک زیر مراجعه کنید"
+    expire: "این پیوند در %time% منقضی می‌شود."
+    cheers: "به سلامتی!"
+  reset:
+    title: "رمز عبور خود را بازنشانی کنید"
+    button:
+      submit: "تنظیم مجدد گذرواژه"
 apk:
   download: به عنوان اپلیکیشن دانلود کن
   prepare: 'تهیه ی اپلیکیشن'
@@ -465,6 +501,9 @@ time:
   years.ago: '{1}۱ سال پیش |]1,Inf] بیش از یک سال'
 failure:
   upload: در آپلود برنامه شما یک خطا وجود داشت.
+user:
+  verification:
+    email: 'ایمیل خود را تایید کنید'
 api:
   registerUser:
     emailMissing: 'ایمیل گم شده'
@@ -728,7 +767,7 @@ achievements:
         title: "برنامه نویسی جم 21"
         description: "شرکت کننده Coding Jam 2021"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} برچسب |]1,Inf] برچسب'
   tag:
     game:
       title: بازی
@@ -792,7 +831,7 @@ studio:
       add_comment: '%user% یک پروژه اضافه کرد.'
     members_list:
       title: 'اعضای استودیو'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
+      project_count: '{0} بدون پروژه استودیویی |{1} 1 پروژه استودیویی |]1,Inf]%count%% پروژه های استودیویی'
       promote_member: 'ارتقاء عضو به مدیر'
       promotion_failed: 'هنگام ارتقاء این عضو مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
       ban_member: 'ممنوعیت عضویت در استودیو'
@@ -812,3 +851,5 @@ media_library:
       sound: 'نوع: صدا'
       movie: 'نوع: ویدئو'
       default: 'نوع: ناشناخته'
+snackbar:
+  project_not_found: 'پروژه درخواستی موجود نیست'

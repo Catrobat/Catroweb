@@ -43,7 +43,7 @@ jobs:
           docker save app.catroweb > catroweb-image.tar
 
       - name: Upload app.catroweb image
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2.3.1
         with:
           name: catroweb-image
           path: docker/catroweb-image.tar
@@ -87,27 +87,25 @@ jobs:
 
       - name: Enable BypassFinals
         run:
-          docker exec app.catroweb bin/phpunit --filter testNothingButEnableBypassFinals tests/phpUnit/BypassFinals/BypassFinals.php
+          docker exec app.catroweb bin/phpunit --filter testNothingButEnableBypassFinals src/System/Testing/PhpUnit/BypassFinals.php
 
       - name: PhpUnit tests
         run:
-          docker exec app.catroweb bin/phpunit --coverage-html tests/testreports/coverage/phpunit --coverage-clover=tests/testreports/coverage/phpunit/coverage.xml
+          docker exec app.catroweb bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 
       - name: Upload code coverage report
-        uses: actions/upload-artifact@v2.2.4
+        uses: actions/upload-artifact@v2.3.1
         if: always()
         with:
           name: PhpUnitTestReport
-          path: tests/testreports/coverage/phpunit
+          path: tests/TestReports/CoverageReports/PhpUnit
 
       - uses: codecov/codecov-action@v2.1.0
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          file: tests/testreports/coverage/phpunit/coverage.xml
+          file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
           flags: phpunit # optional
           name: codecov-umbrella # optional
-          # fail_ci_if_error: true # optional (default = false) ToDo: enable once their service stability has
-
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Behat:
@@ -209,8 +207,9 @@ jobs:
         # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
           echo ::set-output name=status::failure
+          docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
-          |& tee tests/testreports/behat/${{ matrix.testSuite }}.log ; \
+          |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log ; \
           ( exit ${PIPESTATUS[0]} )
           echo ::set-output name=status::success
 
@@ -220,8 +219,8 @@ jobs:
         if: always()
         id: missing-check
         run: |
-          if grep -q 'has missing steps. Define them with these snippets:' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          if grep -q 'has missing steps. Define them with these snippets:' tests/TestReports/Behat/${{ matrix.testSuite }}.log; then
+            cat tests/TestReports/Behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -231,8 +230,8 @@ jobs:
         if: always()
         id: pending-check
         run: |
-          if grep -q 'pending)' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          if grep -q 'pending)' tests/TestReports/Behat/${{ matrix.testSuite }}.log; then
+            cat tests/TestReports/Behat/${{ matrix.testSuite }}.log;
             false;
           fi
 
@@ -241,15 +240,15 @@ jobs:
         if: always()
         id: chrome-exception-check
         run: |
-          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/testreports/behat/${{ matrix.testSuite }}.log; then
-            cat tests/testreports/behat/${{ matrix.testSuite }}.log;
+          if grep -q '\[DMore\\ChromeDriver\\StreamReadException\]' tests/TestReports/Behat/${{ matrix.testSuite }}.log; then
+            cat tests/TestReports/Behat/${{ matrix.testSuite }}.log;
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
 
       - uses: codecov/codecov-action@v2.1.0
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-          file: tests/testreports/coverage/behat/coverage.xml
+          file: tests/TestReports/CoverageReports/Behat/coverage.xml
           flags: behat # optional
           name: codecov-umbrella # optional
           # fail_ci_if_error: true # optional (default = false)
@@ -261,6 +260,7 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
+          docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
           echo ::set-output name=status::success
 
@@ -281,8 +281,8 @@ jobs:
         run: |
           docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
 
-      - name: DEBUG
-        if: always()
+      ## Failure debugging
+      - if: failure()
         run: |
           docker ps -a
           echo "--- App ---"
@@ -292,8 +292,15 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v2.2.4
+      - uses: actions/upload-artifact@v2.3.1
         if: failure()
         with:
           name: screenshots_${{ matrix.testSuite }}
-          path: tests/testreports/screens
+          path: tests/TestReports/TestScreenshots
+
+      - uses: actions/upload-artifact@v2.3.1
+        if: failure()
+        with:
+          name: logs_${{ matrix.testSuite }}
+          path: var/log/test
+
