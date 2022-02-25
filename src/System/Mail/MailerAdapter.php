@@ -49,7 +49,7 @@ class MailerAdapter
     }
 
     return (new TemplatedEmail())
-      ->from(new Address('share@catrob.at'))
+      ->from(new Address('support@catrob.at'))
       ->to($to)
       ->subject($subject)
       ->htmlTemplate($template)

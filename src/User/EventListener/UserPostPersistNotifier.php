@@ -35,7 +35,7 @@ class UserPostPersistNotifier
   public function postPersist(User $user, LifecycleEventArgs $event): void
   {
     $this->addVerifiedDeveloperAchievement($user);
-    $this->sendVerifyEmail($user);
+    // $this->sendVerifyEmail($user); Disabled until mail issues are resolved
   }
 
   /**
