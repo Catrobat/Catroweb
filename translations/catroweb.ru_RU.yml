@@ -572,8 +572,8 @@ language:
   ukrainian: Украинский
   vietnamese: Вьетнамский
 ci:
-  generate: Генерировать Apk
-  pending: Генерирование Apk
+  generate: Сгенерировать apk
+  pending: Генерация apk
   download: Скачать Apk
 admin:
   maintain:
@@ -583,16 +583,16 @@ admin:
     removableObjects: Удаляемые объекты
 recommender:
   similarPrograms: Похожие проекты
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также загружены
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также скачали
   moreFromThisUser: Ещё от %username%
 pmd:
   submitBtn: Отправьте ваш проект
   submitBox:
     header: Отправка
-    text: Чтобы отправить ваш проект, введите код проекта и нажмите "отослать".
+    text: Чтобы отправить ваш проект, введите код проекта и нажмите "Отправить".
     btnText: Отправить
   successful:
-    text: Ваш проект загружен успешно.
+    text: Загрузка вашего проекта прошла успешно.
   failed:
     text: Не удалось загрузить проект.
 codeview:
@@ -600,7 +600,7 @@ codeview:
   showCode: 'Показать код'
   hideCode: 'Скрыть код'
   showStatistics: 'Показать статистику кода'
-  hideStatistics: 'Скрыть статистику по коду'
+  hideStatistics: 'Скрыть статистику кода'
   cantDisplayCode: "Код не может быть отображен"
   cantDisplayStatistics: "Код не может быть отображен"
   totalNumberOf: 'Общее количество'
