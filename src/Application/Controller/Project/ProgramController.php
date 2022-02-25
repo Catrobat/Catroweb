@@ -254,7 +254,7 @@ class ProgramController extends AbstractController
    * @Route("/search/{q}", name="search", requirements={"q": ".+"}, methods={"GET"})
    * @Route("/search/", name="empty_search", defaults={"q": null}, methods={"GET"})
    */
-  public function searchAction(string $q): Response
+  public function searchAction(?string $q = null): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
