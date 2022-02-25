@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RedirectController extends AbstractController
 {
   /**
+   * @Route("/stepByStep", name="legacy_stepByStep_routed_used_by_unkwown", methods={"GET"})
    * @Route("/help", name="help", methods={"GET"})
    */
   public function helpAction(Request $request): Response
@@ -49,5 +50,15 @@ class RedirectController extends AbstractController
   public function legacyAppReset(Request $request): Response
   {
     return $this->redirect($this->generateUrl('app_forgot_password_request'), Response::HTTP_MOVED_PERMANENTLY);
+  }
+
+  /**
+   * Users coming from hour of code -> https://hourofcode.com/us/de/beyond.
+   *
+   * @Route("/hourOfCode", methods={"GET"})
+   */
+  public function hourOfCodeAction(Request $request): Response
+  {
+    return $this->redirect('/');
   }
 }

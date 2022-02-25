@@ -6,6 +6,19 @@ Feature: Users should be logged in automatically when they are logged in in the 
       | id | name        | email          |
       | 1  | WebViewUser | dev1@catrob.at |
 
+  Scenario: Log in using Catrobat user and show profile (cookie)
+    Given I use a valid BEARER cookie for "WebViewUser"
+    When I go to "/app/user"
+    And I wait for the page to be loaded
+    Then I should see "My Profile"
+    Then I should see "dev1@catrob.at"
+
+  Scenario: Log in using Catrobat user and show profile (cookie)
+    Given I set the cookie "BEARER" to "invalid"
+    When I go to "/app/user"
+    And I wait for the page to be loaded
+    Then I should be on "app/login"
+
   Scenario: Log in using Catrobat user and show profile
     Given I use a valid JWT token for "WebViewUser"
     And I am on "/app/user"
@@ -19,7 +32,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I wait for the page to be loaded
     Then I should not see "dev1@catrob.at"
     Then I should not see "My Profile"
-    And I should see "Your user credentials are wrong"
+    And I should be on "app/login"
 
   Scenario: Log in using empty token should be ignored
     Given I use an empty JWT token for "WebViewUser"
