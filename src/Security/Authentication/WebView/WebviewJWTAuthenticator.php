@@ -2,14 +2,17 @@
 
 namespace App\Security\Authentication\WebView;
 
+use App\Security\Authentication\CookieService;
 use Lexik\Bundle\JWTAuthenticationBundle\Security\Guard\JWTTokenAuthenticator;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
-use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -18,8 +21,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class WebviewJWTAuthenticator extends JWTTokenAuthenticator
 {
   protected TranslatorInterface $translator;
-
   protected SessionInterface $session;
+  protected LoggerInterface $logger;
+  protected UrlGeneratorInterface $url_generator;
 
   public function __construct(
     JWTTokenManagerInterface $jwtManager,
@@ -27,11 +31,15 @@ class WebviewJWTAuthenticator extends JWTTokenAuthenticator
     TokenExtractorInterface $tokenExtractor,
     TokenStorageInterface $tokenStorage,
     TranslatorInterface $translator,
-    SessionInterface $session
+    SessionInterface $session,
+    LoggerInterface $logger,
+    UrlGeneratorInterface $url_generator
   ) {
     parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $tokenStorage);
     $this->translator = $translator;
     $this->session = $session;
+    $this->logger = $logger;
+    $this->url_generator = $url_generator;
   }
 
   /**
@@ -59,12 +67,19 @@ class WebviewJWTAuthenticator extends JWTTokenAuthenticator
   /**
    * @psalm-suppress ParamNameMismatch
    *
-   * @throws HttpException
-   *
-   * @return Response|void|null
+   * {@inheritDoc}
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $authException)
   {
-    throw new HttpException(Response::HTTP_UNAUTHORIZED, $this->translator->trans('errors.authentication.webview', [], 'catroweb'), null, [], 0);
+    $this->logger->warning('WebviewJWT Authentication failed: '.$authException->getMessage());
+    CookieService::clearCookie('LOGGED_IN');
+    CookieService::clearCookie('BEARER');
+    CookieService::clearCookie('REFRESH_TOKEN');
+    $request->getSession()->invalidate();
+    if ($request->headers->get('Authorization')) {
+      return null;
+    }
+
+    return new RedirectResponse($this->url_generator->generate('login', ['theme' => 'app']));
   }
 }

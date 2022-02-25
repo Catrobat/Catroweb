@@ -53,4 +53,12 @@ class CookieService
       'strict' // same-site parameter, can be 'lax' or 'strict'.
     );
   }
+
+  public static function clearCookie(string $cookie): void
+  {
+    if (isset($_COOKIE[$cookie])) {
+      setcookie($cookie, '', time() - 3600, '/');
+      unset($_COOKIE[$cookie]);
+    }
+  }
 }
