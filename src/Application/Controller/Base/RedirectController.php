@@ -10,6 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class RedirectController extends AbstractController
 {
   /**
+   * @Route("/stepByStep", name="legacy_stepByStep_routed_used_by_unkwown", methods={"GET"})
    * @Route("/help", name="help", methods={"GET"})
    */
   public function helpAction(Request $request): Response
