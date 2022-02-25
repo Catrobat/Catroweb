@@ -10,6 +10,6 @@ class FinishStageBrick extends Brick
   {
     $this->type = Constants::FINISH_STAGE_BRICK;
     $this->caption = 'Finish Stage Brick';
-    $this->setImgFile(Constants::FINISH_STAGE_BRICK);
+    $this->setImgFile(Constants::UNKNOWN_BRICK_IMG);
   }
 }
