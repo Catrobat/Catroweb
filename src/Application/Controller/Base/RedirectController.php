@@ -53,7 +53,7 @@ class RedirectController extends AbstractController
   }
 
   /**
-   * Users coming from hour of code -> https://hourofcode.com/us/de/beyond
+   * Users coming from hour of code -> https://hourofcode.com/us/de/beyond.
    *
    * @Route("/hourOfCode", methods={"GET"})
    */
