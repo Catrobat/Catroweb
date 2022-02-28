@@ -38,6 +38,8 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
 
   $('#edit-submit-button').on('click', () => { this.save() })
 
+  $('#edit-cancel-button').on('click', () => { this.cancelChanges() })
+
   this.languageSelect.listen('MDCSelect:change', () => {
     if (!this.editTextUI.is(':visible') || this.languageSelect.selectedIndex === this.previousIndex) {
       return
@@ -194,6 +196,12 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
         }
       }
     })
+  }
+
+  this.cancelChanges = () => {
+    for (const textField of this.textFields) {
+      textField.cancelChanges()
+    }
   }
 
   self.getNewText = () => {
