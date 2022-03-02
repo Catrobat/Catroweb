@@ -4,14 +4,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Search\SearchApiFacade;
-use App\Entity\Program;
-use App\Entity\User;
 use OpenAPI\Server\Api\SearchApiInterface;
-use OpenAPI\Server\Model\BasicUserDataResponse;
-use OpenAPI\Server\Model\ProjectResponse;
-use OpenAPI\Server\Model\SearchResponse;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use App\Api\Services\Search\SearchResponseManager;
 
 final class SearchApi extends AbstractApiController implements SearchApiInterface
 {
@@ -65,5 +58,4 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
 
     return $result;
   }
-
 }

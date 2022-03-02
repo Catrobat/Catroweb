@@ -4,9 +4,9 @@ namespace App\Api\Services\Search;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
-use App\Catrobat\Services\ImageRepository;
-use App\Entity\ProgramManager;
-use App\Entity\UserManager;
+use App\Project\ProgramManager;
+use App\Storage\ImageRepository;
+use App\User\UserManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -115,9 +115,8 @@ final class SearchApiFacade extends AbstractApiFacade
     return $this->parameter_bag;
   }
 
-    public function getImageRepository(): ImageRepository
-    {
-        return $this->image_repository;
-    }
-
+  public function getImageRepository(): ImageRepository
+  {
+    return $this->image_repository;
+  }
 }
