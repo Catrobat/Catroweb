@@ -50,7 +50,8 @@ Feature: Project comments should be translatable via a button
     And I wait for AJAX to finish
     Then the element "#remove-comment-translation-button-1" should be visible
     And the element "#comment-translation-wrapper-1" should be visible
-    Then the "#comment-translation-before-languages-1" element should contain "Translated by iTranslate from"
+    Then the "#comment-translation-before-languages-1" element should contain "Translated by"
+    Then the "#comment-translation-before-languages-1" element should contain "iTranslate"
     And the "#comment-translation-first-language-1" element should contain "English"
     And the "#comment-translation-between-languages-1" element should contain "to"
     And the "#comment-translation-second-language-1" element should contain "English"
