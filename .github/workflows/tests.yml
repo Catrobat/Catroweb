@@ -34,7 +34,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Build catroweb app image
         run: |
@@ -64,7 +64,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -176,7 +176,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Pull the latest images to build (Faster than caching)
         run: |

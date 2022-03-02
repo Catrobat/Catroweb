@@ -45,7 +45,7 @@ jobs:
     name: Synchronize Crowdin Translations
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.4.0
+      - uses: actions/checkout@v3
 
       - uses: crowdin/github-action@1.4.6
         with:
