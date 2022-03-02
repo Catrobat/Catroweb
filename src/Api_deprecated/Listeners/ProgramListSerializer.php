@@ -3,9 +3,9 @@
 namespace App\Api_deprecated\Listeners;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Catrobat\Services\ImageRepository;
-use App\Catrobat\Services\ScreenshotRepository;
-use App\Entity\Program;
+use App\DB\Entity\Project\Program;
+use App\Storage\ImageRepository;
+use App\Storage\ScreenshotRepository;
 use App\Utils\ElapsedTimeStringFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -99,10 +99,6 @@ class ProgramListSerializer
 
     $retArray['completeTerm'] = '';
     $retArray['preHeaderMessages'] = '';
-
-    if ($result->isIsUserSpecificRecommendation()) {
-      $retArray['isUserSpecificRecommendation'] = true;
-    }
 
     Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')],
       Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);

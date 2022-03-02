@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import Swal from 'sweetalert2'
-/* global Routing */
+import { deleteCookie } from './CookieHelper'
 
 /**
  * @deprecated
@@ -8,7 +8,6 @@ import Swal from 'sweetalert2'
  * @param profileUrl
  * @param saveUsername
  * @param saveEmailUrl
- * @param saveCountryUrl
  * @param savePasswordUrl
  * @param deleteUrl
  * @param deleteAccountUrl
@@ -21,7 +20,6 @@ import Swal from 'sweetalert2'
  * @param statusCodeUserEmailAlreadyExists
  * @param statusCodeUserEmailMissing
  * @param statusCodeUserEmailInvalid
- * @param statusCodeUserCountryInvalid
  * @param statusCodeUsernamePasswordEqual
  * @param statusCodeUserPasswordTooShort
  * @param statusCodeUserPasswordTooLong
@@ -33,13 +31,13 @@ import Swal from 'sweetalert2'
  * @param programCanNotChangeVisibilityTitle
  * @param programCanNotChangeVisibilityText
  * @param statusCodeUsernameContainsEmail
+ * @param deleteConfirmationMessage
  * @constructor
  */
 export const MyProfile = function (
   profileUrl,
   saveUsername,
   saveEmailUrl,
-  saveCountryUrl,
   savePasswordUrl,
   deleteUrl,
   deleteAccountUrl,
@@ -52,7 +50,6 @@ export const MyProfile = function (
   statusCodeUserEmailAlreadyExists,
   statusCodeUserEmailMissing,
   statusCodeUserEmailInvalid,
-  statusCodeUserCountryInvalid,
   statusCodeUsernamePasswordEqual,
   statusCodeUserPasswordTooShort,
   statusCodeUserPasswordTooLong,
@@ -63,21 +60,21 @@ export const MyProfile = function (
   passwordUpdatedText,
   programCanNotChangeVisibilityTitle,
   programCanNotChangeVisibilityText,
-  statusCodeUsernameContainsEmail) {
+  statusCodeUsernameContainsEmail,
+  deleteConfirmationMessage) {
   const passwordEditContainer = $('#password-edit-container')
   const usernameEditContainer = $('#username-edit-container')
   const usernameData = $('#username-wrapper > .profile-data')
   const emailEditContainer = $('#email-edit-container')
   const emailData = $('#email-wrapper > .profile-data')
-  const countryEditContainer = $('#country-edit-container')
-  const countryData = $('#country-wrapper > .profile-data')
   const passwordData = $('#password-wrapper > .profile-data')
   const accountSettingsContainer = $('#account-settings-container')
   const profileSections = [
     [passwordEditContainer, passwordData],
-    [emailEditContainer, emailData], [countryEditContainer, countryData],
+    [emailEditContainer, emailData],
     [accountSettingsContainer, null]
   ]
+  const routingDataset = document.getElementById('js-api-routing').dataset
 
   $(function () {
     $('.edit-container').hide()
@@ -93,10 +90,6 @@ export const MyProfile = function (
 
   $('#edit-username-button').on('click', function () {
     toggleEditSection(usernameEditContainer, usernameData)
-  })
-
-  $('#edit-country-button').on('click', function () {
-    toggleEditSection(countryEditContainer, countryData)
   })
 
   $('#account-settings-button').on('click', function () {
@@ -127,36 +120,33 @@ export const MyProfile = function (
   }
 
   $(document).on('click', '#delete-account-button', function () {
-    const url = Routing.generate('translate', {
-      word: 'programs.deleteAccountConfirmation'
-    }, false)
-    $.get(url, function (data) {
-      const split = data.split('\n')
-      Swal.fire({
-        title: split[0],
-        html: split[1] + '<br><br>' + split[2],
-        icon: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        customClass: {
-          confirmButton: 'btn btn-danger',
-          cancelButton: 'btn btn-outline-primary'
-        },
-        buttonsStyling: false,
-        confirmButtonText: split[3],
-        cancelButtonText: split[4]
-      }).then((result) => {
-        if (result.value) {
-          $.post(deleteAccountUrl, null, function (data) {
-            switch (parseInt(data.statusCode)) {
-              case statusCodeOk:
-                window.location.href = '../../'
-            }
-          })
-        }
-      })
-      $('.swal2-container.swal2-shown').css('background-color', 'rgba(255, 0, 0, 0.75)')// changes the color of the overlay
+    const split = deleteConfirmationMessage.split('\n')
+    Swal.fire({
+      title: split[0],
+      html: split[1] + '<br><br>' + split[2],
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false,
+      confirmButtonText: split[3],
+      cancelButtonText: split[4]
+    }).then((result) => {
+      if (result.value) {
+        $.post(deleteAccountUrl, null, function (data) {
+          switch (parseInt(data.statusCode)) {
+            case statusCodeOk:
+              window.location.href = routingDataset.index
+              deleteCookie('BEARER', routingDataset.baseUrl + '/')
+              deleteCookie('LOGGED_IN', routingDataset.baseUrl + '/')
+          }
+        })
+      }
     })
+    $('.swal2-container.swal2-shown').css('background-color', 'rgba(255, 0, 0, 0.75)')// changes the color of the overlay
   })
 
   $(document).on('click', '#save-email', function () {
@@ -247,26 +237,6 @@ export const MyProfile = function (
       }
       $('#username-ajax').hide()
       $('#save-username').show()
-    })
-  })
-
-  $(document).on('click', '#save-country', function () {
-    $(this).hide()
-    $('#country-ajax').show()
-    const country = $('#select-country').find('select').val()
-    $.post(saveCountryUrl, {
-      country: country
-    }, function (data) {
-      switch (parseInt(data.statusCode)) {
-        case statusCodeUserCountryInvalid:
-          break
-
-        default:
-          window.location.href = profileUrl
-          break
-      }
-      $('#country-ajax').hide()
-      $('#save-country').show()
     })
   })
 

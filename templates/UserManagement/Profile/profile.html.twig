@@ -23,20 +23,7 @@
     </div>
 
     <div id="user-information" class="col-8 col-md-10 mt-2 user-info d-flex flex-column justify-content-between">
-      <div>
-        <h1 id="profile-header" class="h4">
-          {{ profile.username }}
-        </h1>
-        {% if country %}
-          <span class="d-block">
-            <i class="material-icons">location_on</i>
-            <strong>
-              {{ "country"|trans({}, "catroweb") }}:
-            </strong>
-            {{ country }}
-          </span>
-        {% endif %}
-      </div>
+      <h1 class="h4">{{ profile.username }}</h1>
 
       <div class="button-container w-100 mt-3">
         {% if profile.isScratchUser() %}
@@ -136,8 +123,22 @@
 
   <div class="tab-content mt-4">
     <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
-      <div id="user-programs">
-        <div class="programs"></div>
+      <div id="user-programs"
+           data-property="uploaded"
+           data-theme="{{ theme() }}"
+           data-base-url="{{ app.request.getBaseURL() }}"
+           data-user-id="{{ profile.id }}"
+           data-flavor="{{ flavor() }}"
+           data-empty-message="{{ "programs.noPrograms"|trans({}, 'catroweb') }}"
+           class="project-list loading project-list--full">
+        <div class="container">
+          <div class="lazyload projects-spinner-container">
+            {% include 'components/loading_spinner.html.twig' only %}
+          </div>
+          <div class="lazyload project-list__wrapper">
+            <div class="lazyload projects-container"></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -186,8 +187,8 @@
 
   <div class="js-user-share"
        data-theme-display-name="{{ getThemeDisplayName() }}"
-       data-trans-check-out-project="{{ "checkOutProject"|trans({}, "catroweb") }}"
-       data-project-url="{{ url('profile', { id : profile.id }) }}"
+       data-trans-check-out-project="{{ "checkOutUser"|trans({}, "catroweb") }}"
+       data-user-url="{{ url('profile', { id : profile.id }) }}"
        data-trans-share-success="{{ "share.success"|trans({}, "catroweb") }}"
        data-trans-share-error="{{ "share.error"|trans({}, "catroweb") }}"
        data-trans-copy="{{ "copy"|trans({}, "catroweb") }}"
@@ -198,10 +199,6 @@
 {% endblock %}
 
 {% block javascript %}
-  <script>
-    const apiUserPrograms = '{{ path('api_user_programs') }}';
-    const profileID = '{{ profile.id }}';
-  </script>
   {{ encore_entry_script_tags('profile') }}
   {{ encore_entry_script_tags('follower_overview') }}
 {% endblock %}

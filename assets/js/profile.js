@@ -1,27 +1,42 @@
-/* global profileID */
-/* global apiUserPrograms */
-
 import 'external-svg-loader'
 import './components/tab_bar'
-import { ProjectLoader } from './custom/ProjectLoader'
 import './follower_overview'
+
 import { shareUser } from './custom/UserShare'
+import { ProjectList } from './components/project_list'
+
 import $ from 'jquery'
 
 require('../styles/custom/profile.scss')
 require('../styles/components/achievements.scss')
 
-const programs = new ProjectLoader('#user-programs', apiUserPrograms)
-const $projectShare = $('.js-user-share')
-programs.loadProjects(profileID)
+const $userShare = $('.js-user-share')
 
 shareUser(
-  $projectShare.data('theme-display-name'),
-  $projectShare.data('trans-check-out-project'),
-  $projectShare.data('project-url'),
-  $projectShare.data('trans-share-success'),
-  $projectShare.data('trans-share-error'),
-  $projectShare.data('trans-copy'),
-  $projectShare.data('trans-clipboard-success'),
-  $projectShare.data('trans-clipboard-fail')
+  $userShare.data('theme-display-name'),
+  $userShare.data('trans-check-out-project'),
+  $userShare.data('project-url'),
+  $userShare.data('trans-share-success'),
+  $userShare.data('trans-share-error'),
+  $userShare.data('trans-copy'),
+  $userShare.data('trans-clipboard-success'),
+  $userShare.data('trans-clipboard-fail')
 )
+
+initUserProjects()
+
+function initUserProjects () {
+  const $userProjects = $('#projects-section')
+  $('.project-list', $userProjects).each(function () {
+    const property = $(this).data('property')
+    const theme = $(this).data('theme')
+    const baseUrl = $(this).data('base-url')
+    const userId = $(this).data('user-id')
+    const emptyMessage = $(this).data('empty-message')
+
+    const url = baseUrl + '/api/projects/user/' + userId
+
+    const list = new ProjectList(this, 'user-projects', url, property, theme, 999, emptyMessage)
+    $(this).data('list', list)
+  })
+}

@@ -4,7 +4,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
-use App\Catrobat\Requests\AddProgramRequest;
+use App\Project\AddProgramRequest;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
@@ -76,6 +76,18 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $offset = $this->getDefaultOffsetOnNull($offset);
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $cache_id = "projectsGet_{$category}_{$locale}_{$flavor}_{$max_version}_{$limit}_{$offset}";
+    if ('recent' !== $category) {
+      $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+      if (null !== $cached_response) {
+        $responseCode = $cached_response->getResponseCode();
+        $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
+
+        return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+      }
+    }
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
@@ -84,6 +96,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }
@@ -123,6 +136,15 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    */
   public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
   {
+    // Getting the user who uploaded
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+
+//    if (!$user->isVerified()) {
+//      $responseCode = Response::HTTP_FORBIDDEN;
+//
+//      return null;
+//    }
+
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
     $private = $private ?? false;
@@ -136,9 +158,6 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
       return $error_response;
     }
-
-    // Getting the user who uploaded
-    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     // Needed (for tests) to make sure everything is up to date (followers, ..)
     $this->facade->getProcessor()->refreshUser($user);
@@ -203,11 +222,20 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $limit = $this->getDefaultLimitOnNull(null);
     $offset = $this->getDefaultOffsetOnNull(null);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $cache_id = "projectsCategoriesGet_{$flavor}_{$locale}_{$max_version}";
+    $cached_response = $this->facade->getResponseManager()->getCachedResponse($cache_id);
+    if (null !== $cached_response) {
+      $responseCode = $cached_response->getResponseCode();
+      $responseHeaders = $this->facade->getResponseManager()->extractResponseHeader($cached_response);
+
+      return $this->facade->getResponseManager()->extractResponseObject($cached_response);
+    }
 
     $response = [];
 
-    //removed recommended + random on purpose
-    $categories = ['recent', 'random', 'most_viewed', 'most_downloaded', 'example', 'scratch'];
+    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch'];
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     foreach ($categories as $category) {
@@ -218,6 +246,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $responseCode = Response::HTTP_OK;
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
 
     return $response;
   }
@@ -291,11 +320,50 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     return null;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function projectIdDelete(string $id, &$responseCode, array &$responseHeaders)
   {
     // TODO: Implement projectIdDelete() method.
     $responseCode = Response::HTTP_NOT_IMPLEMENTED;
 
     return null;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsExtensionsGet(string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $extensions = $this->facade->getLoader()->getProjectExtensions();
+
+    $response = $this->facade->getResponseManager()->createProjectsExtensionsResponse($extensions, $locale);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsTagsGet(string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  {
+    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
+    $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
+
+    $tags = $this->facade->getLoader()->getProjectTags();
+
+    $response = $this->facade->getResponseManager()->createProjectsTagsResponse($tags, $locale);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    $responseCode = Response::HTTP_OK;
+
+    return $response;
   }
 }

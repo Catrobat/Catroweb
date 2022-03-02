@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Project\CatrobatCode\Parser\Bricks;
+
+use App\Project\CatrobatCode\Parser\Constants;
+
+class DronePlayedAnimationBrick extends Brick
+{
+  protected function create(): void
+  {
+    $this->type = Constants::AR_DRONE_PLAYED_ANIMATION_BRICK;
+    $this->caption = 'Played drone animation';
+    $this->setImgFile(Constants::AR_DRONE_MOTION_BRICK_IMG);
+  }
+}

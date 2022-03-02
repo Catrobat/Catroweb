@@ -13,7 +13,7 @@ education: Edukacja
 chat: Czat i fora
 others: Inne
 tutorials: Poradniki
-googlePlay: Google Play
+googlePlay: Google Play Store
 iosAppStore: Sklep iOS App
 huaweiAppGallery: Galeria Huawei
 instagram: Instagram
@@ -27,6 +27,7 @@ reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
 download: Pobierz
+name: Nazwa
 description: Opis
 noDescription: Brak opisu.
 credits: Uwagi i podziękowania
@@ -124,6 +125,7 @@ programs:
     To jest nieodwracalne!
     Tak, usuń!
     Anuluj
+  tooLongName: Nazwa projektu jest zbyt długa!
   tooLongDescription: Opis projektu jest za długi!
   tooLongCredits: Uwagi i podziękowania są za długie!
   most:
@@ -154,8 +156,11 @@ programs:
   reportOwnProgram: Nie możesz oflagować własnego projektu.
   reportAlready: Już oflagowałeś ten projekt.
   reportDone: Zgłosiłeś ten projekt!
+  updateAppHeaderDownload: Pobieranie nie jest możliwe
+  updateAppTextDownload: Zaktualizuj swoją aplikację do najnowszej wersji. Pamiętaj, że nie wszystkie funkcje Androida są już dostępne na IOS.
+  updateAppTextDownloadApk: Pobieranie APK jest obecnie dostępne tylko na Androidzie a nie na IOS.
   updateAppHeader: Aktualizacja aplikacji
-  updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji, aby móc pobrać ten projekt.
+  updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji.
   btnClosePopup: OK
   checkout_this_program: Sprawdź ten projekt z Catrobat
   show_more: Pokaż więcej
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Komentarz został pomyślnie usunięty.
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
-  editDescription: Edytuj opis projektu
-  saveDescription: Zapisz
-  editCredits: Edytuj uwagi i podziękowania
-  saveCredits: Zapisz
+  editProject: Edytuj projekt
+  closeProjectEditor: Zamknij edytor projektu
+  closeEditorPrompt: Czy chcesz zapisać zmiany?
+  saveOnLanguageChange: Czy chcesz zachować aktualne zmiany?
+  btnKeep: Zachowaj zmiany
+  btnDiscard: Odrzuć
   addComment: Napisz komentarz
   thumbsUp: Kciuk do góry!
   smile: Uśmiech!
@@ -181,9 +188,13 @@ programs:
   link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
   downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
+  downloadStartText: Rozpoczęto pobieranie...
   showTranslation: Pokaż tłumaczenie
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
+  translationUpdated: Zaktualizowano zmiany dla tłumaczenia na %language%
+  default: Domyślny
+  save: Zapisz
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż Drzewo Remiksów'
@@ -362,10 +373,15 @@ menu:
   followersAndFollowing: Obserwujący
 login:
   login: Logowanie
+  button:
+    loginNow: Zaloguj się teraz
+    createAccount: Utwórz konto
+    forgetPassword: Zapomniałeś hasła?
+  oauth:
+    title: Lub możesz dołączyć z
   passOrUser: Twoje hasło lub nazwa użytkownika były nieprawidłowe.
   noUsername: Twoja nazwa użytkownika lub adres e-mail adres nie zostały znalezione.
   forgotPass: Nie pamiętasz nazwy użytkownika lub hasła?
-  recoverPass: Odzyskaj hasło
   recoverPassSend: E-mail został wysłany na Twój adres. Sprawdź swoją skrzynkę odbiorczą.
   alreadyReset: Hasło tego użytkownika zostało już wysłane w ciągu ostatnich 24 godzin.
   confirmationSend: Wiadomość z potwierdzeniem rejestracji została wysłana na Twój adres e-mail. Sprawdź swoją skrzynkę odbiorczą i aktywuj swoje konto.
@@ -379,6 +395,39 @@ login:
   email: Adres e-mail
   passwordFirst: Hasło
   passwordSecond: Potwierdź hasło
+register:
+  title: Zarejestruj się
+  subText: "Kontynuując, konfigurujesz konto społeczności Catrobat i zgadzasz się na nasze %var1% i %var2%."
+  button:
+    cancel: Anuluj
+    createAccount: Utwórz konto
+accountRecovery:
+  title: Odzyskiwanie konta
+  description: Jeśli zapomnisz swój e-mail lub nazwę użytkownika Twojego konta, możemy wysłać Ci link do zresetowania hasła.
+  button:
+    cancel: Anuluj
+    submit: Odzyskaj hasło
+resetPassword:
+  request:
+    title: "Resetuj swoje hasło"
+    description: "Jeśli zapomnisz e-mail do Twojego konta, możemy wysłać Ci link do zresetowania hasła."
+    button:
+      submit: "Wyślij e-mail resetujący"
+      cancel: "Anuluj"
+  check:
+    title: "Sprawdź swoje e-maile"
+    description: "Jeśli konto pasujące do Twojego adresu e-mail istnieje, wysłano wiadomość e-mail zawierającą link, który możesz użyć do zresetowania hasła. Ten link wygaśnie za %time%."
+    description2: "Jeśli nie otrzymasz wiadomości e-mail, sprawdź folder spamu lub %tryAgainLink%"
+    tryAgain: "spróbuj ponownie"
+  email:
+    title: "Cześć!"
+    visitLink: "Aby zresetować hasło, odwiedź poniższy link"
+    expire: "Ten link wygaśnie za %time%."
+    cheers: "Pozdrawiamy!"
+  reset:
+    title: "Resetuj swoje hasło"
+    button:
+      submit: "Zresetuj hasło"
 apk:
   download: Pobierz aplikację
   prepare: 'Przygotuj apkę'
@@ -448,6 +497,9 @@ time:
   years.ago: '{1}1 rok temu |]1,Inf] ponad rok temu'
 failure:
   upload: Wystąpił błąd podczas wysyłania aplikacji.
+user:
+  verification:
+    email: 'Potwierdź swój adres e-mail'
 api:
   registerUser:
     emailMissing: 'Brak adresu e-mail'
@@ -795,3 +847,5 @@ media_library:
       sound: 'Typ: dźwięk'
       movie: 'Typ: wideo'
       default: 'Typ: nieznany'
+snackbar:
+  project_not_found: 'Żądany projekt nie jest dostępny'

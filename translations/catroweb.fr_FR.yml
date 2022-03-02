@@ -27,6 +27,7 @@ reportIt: Oui, rapportez-le !
 areYouSure: Êtes-vous sûr(e) ?
 noWayOfReturn: Il n'y a aucun moyen de restaurer vos actions !
 download: Télécharger
+name: Nom
 description: Description
 noDescription: Aucune description disponible.
 credits: Credits
@@ -124,6 +125,7 @@ programs:
     Il n'y a aucun moyen de restaurer vos actions !
     Oui, supprimez-le !
     Annuler
+  tooLongName: The project name is too long!
   tooLongDescription: La description du projet est trop longue !
   tooLongCredits: The project credits are too long!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Vous ne pouvez pas marquer votre propre projet.
   reportAlready: Vous avez déjà signalé ce projet.
   reportDone: Vous avez signalé ce projet !
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Mettre à jour l'application
   updateAppText: Veuillez mettre à jour votre application vers la version la plus récente pour pouvoir télécharger ce projet.
   btnClosePopup: Ok
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Le commentaire a été supprimé avec succès.
   deleted_popup_header: Supprimé
   noAdminRights: Vous n'avez pas de droits d'administrateur. Veuillez vous connecter en tant qu'administrateur.
-  editDescription: Modifier la description du projet
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Voulez-vous enregistrer vos modifications?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Abandonner
   addComment: Écrire un commentaire
   thumbsUp: Les pouces en l'air !
   smile: Souriez !
@@ -181,9 +188,13 @@ programs:
   link: Copier le lien du projet dans le presse-papiers
   reactionsText: Réactions
   downloadErrorText: Une erreur s'est produite lors du téléchargement du projet. Veuillez réessayer plus tard.
+  downloadStartText: Download has started...
   showTranslation: Montrer la traduction
   hideTranslation: Cacher la traduction
   translatedByLine: Traduit par %provider% de %sourceLanguage% à %targetLanguage%.
+  translationUpdated: Changes for the translation to %language% updated
+  default: Par défaut
+  save: Enregistrer
 remixGraph:
   title: Remixes
   showRemixGraph: 'Graphique de remix'
@@ -362,10 +373,15 @@ menu:
   followersAndFollowing: Abonné
 login:
   login: Se connecter
+  button:
+    loginNow: Login now
+    createAccount: Créer un compte
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Votre mot de passe ou votre nom d'utilisateur est incorrect.
   noUsername: Votre nom d'utilisateur ou votre adresse e-mail n'a pas été trouvé.
   forgotPass: Identifiants oubliés?
-  recoverPass: Retrouver le mot de passe
   recoverPassSend: Un email a été envoyé à votre adresse. Vérifiez votre boite de réception.
   alreadyReset: Le mot de passe pour cet utilisateur a déjà été demandé au cours des dernières 24 heures.
   confirmationSend: Un email pour confirmer votre inscription a été envoyé à votre adresse e-mail. Veuillez vérifier votre boîte de réception et activer votre compte.
@@ -379,6 +395,39 @@ login:
   email: Courriel
   passwordFirst: Mot de passe
   passwordSecond: Confirmation du mot de passe
+register:
+  title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  button:
+    cancel: Annuler
+    createAccount: Créer un compte
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Annuler
+    submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "Annuler"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Réinitialiser le mot de passe"
 apk:
   download: Télécharger comme une application
   prepare: 'Préparer l''application'
@@ -448,6 +497,9 @@ time:
   years.ago: '{1} il y a 1 an |]1, Inf] il y a plus d''un an'
 failure:
   upload: Il y a eu une erreur lors du téléchargement de votre application.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Courriel manquant'
@@ -795,3 +847,5 @@ media_library:
       sound: 'Type : son'
       movie: 'Type : vidéo'
       default: 'Type : inconnu'
+snackbar:
+  project_not_found: 'The requested project is not available'

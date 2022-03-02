@@ -27,6 +27,7 @@ reportIt: అవును, నివేదించండి!
 areYouSure: మీరు చెప్పేది నిజమా?
 noWayOfReturn: మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
 download: డౌన్‌లోడ్ చేయండి
+name: Name
 description: వివరణ
 noDescription: డిస్క్రిప్షన్ అంధుబాటులొ లెదు.
 credits: Credits
@@ -124,6 +125,7 @@ programs:
     మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
     అవును, తొలగించండి!
     రద్దు చేయండి
+  tooLongName: The project name is too long!
   tooLongDescription: ప్రాజెక్ట్ వివరణ చాలా పొడవుగా ఉంది!
   tooLongCredits: The project credits are too long!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: మీరు మీ స్వంత ప్రాజెక్ట్‌ను ఫ్లాగ్ చేయలేరు.
   reportAlready: మీరు ఇప్పటికే ఈ ప్రాజెక్ట్‌ను ఫ్లాగ్ చేసారు.
   reportDone: మీరు ఈ ప్రాజెక్ట్ గురించి నివేదించారు!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: యాప్‌ని అప్‌డేట్ చేయండి
   updateAppText: దయచేసి ఈ ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేయడానికి మీ యాప్‌ని సరికొత్త వెర్షన్‌కు అప్‌డేట్ చేయండి.
   btnClosePopup: సరే
@@ -168,10 +173,12 @@ programs:
   deleted_popup: వ్యాఖ్య విజయవంతంగా తొలగించబడింది.
   deleted_popup_header: తొలగించబడింది
   noAdminRights: మీకు నిర్వాహక హక్కులు లేవు. దయచేసి అడ్మిన్‌గా లాగిన్ అవ్వండి.
-  editDescription: ప్రాజెక్ట్ వివరణను సవరించండి
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Do you want to save your changes?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Discard
   addComment: వ్యాఖ్య రాయండి
   thumbsUp: బ్రొటనవేళ్లు!
   smile: చిరునవ్వు!
@@ -181,9 +188,13 @@ programs:
   link: ప్రాజెక్ట్ లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయండి
   reactionsText: ప్రతిచర్యలు
   downloadErrorText: ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేస్తున్నప్పుడు లోపం సంభవించింది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి.
+  downloadStartText: Download has started...
   showTranslation: అనువాదం చూపించు
   hideTranslation: అనువాదాన్ని దాచు
   translatedByLine: ద్వారా అనువదించబడింది %provider% నుండి %sourceLanguage% కు %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Default
+  save: Save
 remixGraph:
   title: రీమిక్స్‌లు
   showRemixGraph: 'రీమిక్స్ గ్రాఫ్'
@@ -365,10 +376,15 @@ menu:
   followersAndFollowing: అనుచరుడు
 login:
   login: ప్రవేశించండి
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: మీ పాస్‌వర్డ్ లేదా వినియోగదారు పేరు తప్పు.
   noUsername: మీ వినియోగదారు పేరు లేదా ఇమెయిల్ చిరునామా కనుగొనబడలేదు.
   forgotPass: పాస్‌వర్డ్ లేదా వినియోగదారు పేరు మర్చిపోయారా?
-  recoverPass: శంకేత పదం తిరిగి పొందుట
   recoverPassSend: మీ ఇమెయిల్ చిరునామాకు ఒక ఇమెయిల్ పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ని చెక్ చేయండి.
   alreadyReset: ఈ వినియోగదారు కోసం పాస్‌వర్డ్ ఇప్పటికే గత 24 గంటల్లో అభ్యర్థించబడింది.
   confirmationSend: మీ నమోదును నిర్ధారించడానికి ఒక ఇమెయిల్ మీ మెయిల్ చిరునామాకు పంపబడింది. దయచేసి మీ ఇన్‌బాక్స్‌ను తనిఖీ చేయండి మరియు మీ ఖాతాను సక్రియం చేయండి.
@@ -382,6 +398,39 @@ login:
   email: ఇమెయిల్
   passwordFirst: పాస్వర్డ్
   passwordSecond: పాస్వర్డ్ ధృవీకరించబడింది
+register:
+  title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  button:
+    cancel: రద్దు చేయు
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: రద్దు చేయు
+    submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "రద్దు చేయు"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Reset password"
 apk:
   download: యాప్‌గా డౌన్‌లోడ్ చేయండి
   prepare: 'యాప్‌గా పొందండి'
@@ -451,6 +500,9 @@ time:
   years.ago: '{1}1 సంవత్సరం క్రితం |] 1, Inf] ఒకటి కంటే ఎక్కువ సంవత్సరాల క్రితం'
 failure:
   upload: మీ యాప్ అప్‌లోడ్ చేస్తున్నప్పుడు లోపం ఏర్పడింది.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'ఇమెయిల్ లేదు'
@@ -798,3 +850,5 @@ media_library:
       sound: 'రకం: ధ్వని'
       movie: 'రకం: వీడియో'
       default: 'రకం: తెలియదు'
+snackbar:
+  project_not_found: 'The requested project is not available'

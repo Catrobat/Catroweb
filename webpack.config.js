@@ -52,8 +52,7 @@ Encore
     { from: './assets/catblocks', to: '../catblocks/[path][name].[ext]' },
 
     // JS (deprecated!)
-    { from: './assets/js/custom', to: '../js/[path][name].[ext]' }, // Deprecated!
-    { from: './assets/js/analytics', to: '../js/[path][name].[ext]' },
+    { from: './assets/js/custom', to: '../js/[path][name].[ext]' },
     { from: './node_modules/clipboard/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/bootstrap/dist/js', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/sweetalert2/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
@@ -63,6 +62,7 @@ Encore
     { from: './node_modules/jquery-contextmenu/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/jquery-contextmenu/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
     { from: './node_modules/lazysizes/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
+    { from: './node_modules/jwt-decode/build/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
 
     // CSS (deprecated!)
     { from: './node_modules/jquery-contextmenu/dist/', pattern: /\.css$/, to: '../css/modules/[path][name].[ext]' },
@@ -94,6 +94,7 @@ Encore
   .addEntry('reset', './assets/js/reset.js')
   .addEntry('check_email', './assets/js/check_email.js')
   .addEntry('studio_detail', './assets/js/studio_detail.js')
+  .addEntry('code_view', './assets/js/code_view.js')
 
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
@@ -101,7 +102,6 @@ Encore
   .addStyleEntry('multi_column_article', './assets/styles/custom/multi_column_article.scss')
   .addStyleEntry('old_code_view', './assets/styles/custom/old_code_view.scss')
   .addStyleEntry('code_statistics', './assets/styles/components/code_statistics.scss')
-  .addStyleEntry('catblocks_code_view', './assets/styles/components/catblocks_code_view.scss')
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
@@ -146,11 +146,14 @@ Encore
   // enables Sass/SCSS support
   .enableSassLoader()
 
-  // integrity="..." attributes on your script & link tags
-  .enableIntegrityHashes(Encore.isProduction())
+// integrity="..." attributes on your script & link tags
+// .enableIntegrityHashes(Encore.isProduction())
 
   // uncomment if you're having problems with a jQuery plugin
   .autoProvidejQuery()
+
+  // Post CSS processing; E.g. auto vendor prefixing, px to rem, ...
+  .enablePostCssLoader()
 
   /*
    * Plugins

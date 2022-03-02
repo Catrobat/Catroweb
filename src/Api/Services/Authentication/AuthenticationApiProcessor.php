@@ -4,15 +4,14 @@ namespace App\Api\Services\Authentication;
 
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\Entity\User;
-use App\Entity\UserManager;
+use App\DB\Entity\User\User;
+use App\Security\PasswordGenerator;
+use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
 use GuzzleHttp\Client;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
-use OpenAPI\Server\Model\JWTResponse;
-use Symfony\Component\HttpFoundation\Response;
 
 final class AuthenticationApiProcessor extends AbstractApiProcessor
 {
@@ -20,8 +19,10 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   private UserManager $user_manager;
   private JWTTokenManagerInterface $jwt_manager;
 
-  public function __construct(UserManager $user_manager, JWTTokenManagerInterface $jwt_manager, AuthenticationManager $authentication_manager)
-  {
+  public function __construct(UserManager $user_manager,
+                              JWTTokenManagerInterface $jwt_manager,
+                              AuthenticationManager $authentication_manager
+  ) {
     $this->user_manager = $user_manager;
     $this->authentication_manager = $authentication_manager;
     $this->jwt_manager = $jwt_manager;
@@ -29,7 +30,12 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
 
   public function createJWTByUser(User $user): string
   {
-    return $this->jwt_manager->create($user);
+    return $this->authentication_manager->createAuthenticationTokenFromUser($user);
+  }
+
+  public function createRefreshTokenByUser(User $user): string
+  {
+    return $this->authentication_manager->createRefreshTokenByUser($user);
   }
 
   /**
@@ -69,9 +75,9 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   /**
    * used in connectUserToAccount!
    *
-   * @param mixed $id_token
+   * @psalm-return array{id: mixed, email: mixed}
    */
-  protected function getPayloadFromAppleIdToken($id_token)
+  protected function getPayloadFromAppleIdToken(string $id_token): array
   {
     $jwt = AuthenticationRequestValidator::jwt_decode($id_token);
 
@@ -99,61 +105,58 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     ];
   }
 
-  public function connectUserToAccount($id_token, $resource_owner)
+  /**
+   * @throws Exception
+   */
+  public function connectUserToAccount(string $id_token, string $resource_owner): User
   {
-    $getPayloadMethod = 'getPayloadFrom'.ucfirst($resource_owner).'IdToken';
-    $payload = $this->{$getPayloadMethod}($id_token);
+    // Dynamic methods: setAppleId, setGoogleId, setFacebookId
+    $set_id = 'set'.ucfirst($resource_owner).'Id';
 
+    // Dynamic methods: getPayloadFromAppleIdToken, getPayloadFromGoogleIdToken, getPayloadFromFacebookIdToken
+    $getPayloadMethod = 'getPayloadFrom'.ucfirst($resource_owner).'IdToken';
+
+    // Extract payload
+    $payload = $this->{$getPayloadMethod}($id_token);
     $user_id = $payload['id'];
     $email = $payload['email'];
     $name = $payload['name'] ?? '';
-    $username = $this->createRandomUsername($name);
 
+    /** @var User|null $user */
     $user = $this->user_manager->findOneBy([$resource_owner.'_id' => $user_id]);
-
     if ($user) {
-      //create JWT token
-      $responseCode = Response::HTTP_OK;
-      $token = $this->jwt_manager->create($user);
-      $token = new JWTResponse(['token' => $token]);
-
-      return ['response_code' => $responseCode, 'token' => $token];
+      // User already exists and is already connected to this service
+      return $user;
     }
 
-    $user_email = $email;
-    $user = $this->user_manager->findUserByEmail($user_email);
-    $set_id = 'set'.ucfirst($resource_owner).'Id';
+    /** @var User|null $user */
+    $user = $this->user_manager->findUserByEmail($email);
     if ($user) {
-      $get_id = 'get'.ucfirst($resource_owner).'Id';
-      if ($user->{$get_id}()) {
-        $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
-        $token = new JWTResponse();
-
-        return ['response_code' => $responseCode, 'token' => $token];
-      }
+      // User already exists but is not connected to this service
       $user->{$set_id}($user_id);
-      $token = $this->jwt_manager->create($user);
-      $token = new JWTResponse(['token' => $token]);
       $this->user_manager->updateUser($user);
-      $responseCode = Response::HTTP_OK;
 
-      return ['response_code' => $responseCode, 'token' => $token];
+      return $user;
     }
 
+    // User does not exist yet
     /** @var User $user */
     $user = $this->user_manager->createUser();
     $user->{$set_id}($user_id);
     $user->setEnabled(true);
-    $user->setEmail($user_email);
-    $user->setUsername($username);
-    $user->setPassword($this->generateRandomPassword());
+    $user->setEmail($email);
+    $user->setUsername($this->createRandomUsername($name));
+    $user->setPassword(PasswordGenerator::generateRandomPassword());
     $user->setOauthUser(true);
+    $user->setVerified(true);
     $this->user_manager->updateUser($user);
-    $responseCode = Response::HTTP_OK;
-    $token = $this->jwt_manager->create($user);
-    $token = new JWTResponse(['token' => $token]);
 
-    return ['response_code' => $responseCode, 'token' => $token];
+    return $user;
+  }
+
+  public function deleteRefreshToken(string $x_refresh): bool
+  {
+    return $this->authentication_manager->deleteRefreshToken($x_refresh);
   }
 
   protected function createRandomUsername($name = null): string
@@ -170,23 +173,5 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     }
 
     return $username;
-  }
-
-  /**
-   * @throws Exception
-   */
-  protected function generateRandomPassword(int $length = 32): string
-  {
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.
-      '0123456789-=~!@#$%&*()_+,.<>?;:[]{}|';
-
-    $password = '';
-    $max = strlen($chars) - 1;
-
-    for ($i = 0; $i < $length; ++$i) {
-      $password .= $chars[random_int(0, $max)];
-    }
-
-    return $password;
   }
 }

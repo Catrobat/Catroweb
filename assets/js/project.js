@@ -10,8 +10,11 @@ import { shareProject } from './custom/ProgramShare'
 import { ProgramReport } from './custom/ProgramReport'
 import { ProgramDescription } from './custom/ProgramDescription'
 import { ProgramCredits } from './custom/ProgramCredits'
-import { ProgramRecommender } from './custom/ProgramRecommender'
 import { ProgramComments } from './custom/ProgramComments'
+import { CustomTranslationApi } from './api/CustomTranslationApi'
+import { ProjectEditor } from './components/ProjectEditor'
+import { ProjectEditorTextField } from './components/ProjectEditorTextField'
+import { ProgramName } from './custom/ProgramName'
 
 require('../styles/custom/profile.scss')
 require('../styles/custom/program.scss')
@@ -20,13 +23,44 @@ const $project = $('.js-project')
 const $projectShare = $('.js-project-share')
 const $projectReport = $('.js-project-report')
 const $projectDescriptionCredits = $('.js-project-description-credits')
-const $projectRecommender = $('.js-project-recommender')
 const $projectComments = $('.js-project-comments')
+const $appLanguage = $('#app-language')
 
-if ($project.data('my-program') === 'true') {
-  new MDCTextField(document.querySelector('.description'))
-  new MDCTextField(document.querySelector('.credits'))
+let editor = null
+
+if ($project.data('my-program')) {
   new MDCTextField(document.querySelector('.comment-message'))
+
+  const nameEditorTextField = new ProjectEditorTextField(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    'name',
+    true
+  )
+
+  const descriptionEditorTextField = new ProjectEditorTextField(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    'description',
+    $projectDescriptionCredits.data('has-description')
+  )
+
+  const creditsEditorTextField = new ProjectEditorTextField(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    'credits',
+    $projectDescriptionCredits.data('has-credits')
+  )
+
+  const showLanguageSelect = $projectDescriptionCredits.data('has-description') || $projectDescriptionCredits.data('has-credits')
+
+  editor = new ProjectEditor(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    [nameEditorTextField, descriptionEditorTextField, creditsEditorTextField],
+    showLanguageSelect,
+    $projectDescriptionCredits.data('trans-default')
+  )
 }
 
 shareProject(
@@ -82,24 +116,29 @@ Program(
   $project.data('trans-download-start')
 )
 
+ProgramName(
+  $projectDescriptionCredits.data('project-id'),
+  $appLanguage.data('app-language'),
+  $project.data('my-program'),
+  new CustomTranslationApi('name'),
+  editor
+)
+
 ProgramDescription(
   $projectDescriptionCredits.data('project-id'),
+  $appLanguage.data('app-language'),
   $projectDescriptionCredits.data('trans-more-info'),
-  $projectDescriptionCredits.data('trans-less-info')
+  $projectDescriptionCredits.data('trans-less-info'),
+  $project.data('my-program'),
+  new CustomTranslationApi('description')
 )
 
 ProgramCredits(
-  $projectDescriptionCredits.data('project-id')
+  $projectDescriptionCredits.data('project-id'),
+  $appLanguage.data('app-language'),
+  $project.data('my-program'),
+  new CustomTranslationApi('credit')
 )
-
-new TranslateProgram(
-  $project.data('translated-by-line'),
-  $project.data('project-id'),
-  $project.data('has-description'),
-  $project.data('has-credits')
-)
-
-new TranslateComments($project.data('translated-by-line'))
 
 setImageUploadListener($project.data('path-change-image'), '#change-project-thumbnail-button', '#project-thumbnail-big')
 
@@ -128,8 +167,6 @@ function initProjects () {
   })
 }
 
-ProgramRecommender($projectRecommender.data('project-id'), $projectRecommender.data('path-click-stats'))
-
 ProgramComments(
   $projectComments.data('project-id'), 5, 5, 5,
   $projectComments.data('total-number-of-comments'),
@@ -147,3 +184,13 @@ ProgramComments(
   $projectComments.data('trans-no-admin-rights-message'),
   $projectComments.data('trans-default-error-message')
 )
+
+new TranslateProgram(
+  $project.data('translated-by-line'),
+  $project.data('google-translate-display-name'),
+  $project.data('project-id'),
+  $project.data('has-description'),
+  $project.data('has-credits')
+)
+
+new TranslateComments($project.data('translated-by-line'), $project.data('google-translate-display-name'))

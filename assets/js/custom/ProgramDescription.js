@@ -1,13 +1,8 @@
 import $ from 'jquery'
-/* global Routing */
 
-export function ProgramDescription (programId, showMoreButtonText, showLessButtonText) {
+export function ProgramDescription (programId, usersLanguage, showMoreButtonText, showLessButtonText,
+  myProgram, customTranslationApi) {
   const description = $('#description')
-  const editDescriptionUI = $('#edit-description-ui')
-  const editDescriptionButton = $('#edit-description-button')
-  const editDescription = $('#edit-description')
-  const editDescriptionSubmitButton = $('#edit-description-submit-button')
-  const editDescriptionError = $('#edit-description-error')
   const descriptionCreditsContainer = $('#description-credits-container')
   const showMoreToggle = $('#descriptionShowMoreToggle')
   const descriptionShowMoreText = $('#descriptionShowMoreText')
@@ -21,38 +16,17 @@ export function ProgramDescription (programId, showMoreButtonText, showLessButto
     }
   }
 
-  editDescriptionButton.on('click', () => {
-    if (editDescriptionUI.hasClass('d-none')) {
-      descriptionCreditsContainer.hide()
-      editDescriptionUI.removeClass('d-none')
-      showMoreToggle.addClass('d-none')
-    } else {
-      descriptionCreditsContainer.show()
-      editDescriptionUI.addClass('d-none')
-      handleShowMore()
-    }
-  })
+  if (!myProgram) {
+    customTranslationApi.getCustomTranslation(
+      programId,
+      usersLanguage.substring(0, 2),
+      setDescription
+    )
 
-  editDescriptionSubmitButton.on('click', () => {
-    const newDescription = editDescription.val().trim()
-    if (newDescription === description.text().trim()) {
-      editDescriptionUI.addClass('d-none')
-      descriptionCreditsContainer.show()
-      handleShowMore()
-      return
+    function setDescription (value) {
+      description.text(value)
     }
-
-    const url = Routing.generate('edit_program_description', { id: programId, new_description: newDescription }, false)
-    $.get(url, function (data) {
-      if (parseInt(data.statusCode) === 200) {
-        location.reload()
-      } else if (parseInt(data.statusCode) === 527) {
-        editDescription.addClass('danger')
-        editDescriptionError.show()
-        editDescriptionError.text(data.message)
-      }
-    })
-  })
+  }
 
   showMoreToggle.on('click', () => {
     const icon = showMoreToggle.find('i')
@@ -71,10 +45,4 @@ export function ProgramDescription (programId, showMoreButtonText, showLessButto
       descriptionCreditsContainer.css({ height: '100%' })
     }
   })
-
-  function handleShowMore () {
-    if (descriptionCreditsContainer.height() === 200 || descriptionCreditsContainer.height() > 300) {
-      showMoreToggle.removeClass('d-none')
-    }
-  }
 }

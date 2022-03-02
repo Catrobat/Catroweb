@@ -1,9 +1,9 @@
 import $ from 'jquery'
-import { Translation, ByLineElementContainer } from './Translation'
+import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateComments extends Translation {
-  constructor (translatedByLine) {
-    super(translatedByLine)
+  constructor (translatedByLine, googleTranslateDisplayName) {
+    super(translatedByLine, googleTranslateDisplayName)
     this._initListeners()
   }
 

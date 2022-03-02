@@ -33,6 +33,7 @@ function updateBadge (url, badgeID, badgeText = null, maxAmountToFetch = 99, ref
   if (!badge) {
     return
   }
+  // eslint-disable-next-line no-undef
   fetch(url)
     .then(response => response.json())
     .then(data => {

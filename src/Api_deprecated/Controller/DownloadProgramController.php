@@ -2,19 +2,19 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\Catrobat\RecommenderSystem\RecommendedPageId;
-use App\Catrobat\Services\ExtractedFileRepository;
-use App\Catrobat\Services\ProgramFileRepository;
-use App\Catrobat\StatusCode;
-use App\Entity\Program;
-use App\Entity\ProgramManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\User\User;
+use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\Event\ProjectDownloadEvent;
+use App\Project\ProgramManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -24,73 +24,95 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DownloadProgramController extends AbstractController
 {
-  /**
-   * @Route("/download/{id}.catrobat", name="download", options={"expose": true}, defaults={"_format": "json"},
-   * methods={"GET"})
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   *
-   * @return BinaryFileResponse|JsonResponse
-   */
-  public function downloadProgramAction(Request $request, string $id, ProgramManager $program_manager,
-                                        ProgramFileRepository $file_repository, LoggerInterface $logger,
-                                        ExtractedFileRepository $extracted_file_repository)
-  {
-    /* @var $program Program */
-    $referrer = $request->getSession()->get('referer');
+  protected EventDispatcherInterface $event_dispatcher;
+  protected ProgramManager $program_manager;
+  protected ProgramFileRepository $file_repository;
+  protected ExtractedFileRepository $extracted_file_repository;
+  protected LoggerInterface $logger;
 
-    $program = $program_manager->find($id);
-    if (null === $program) {
+  public function __construct(EventDispatcherInterface $event_dispatcher,
+                              ProgramFileRepository $file_repository,
+                              ProgramManager $program_manager,
+                              ExtractedFileRepository $extracted_file_repository,
+                              LoggerInterface $downloadLogger)
+  {
+    $this->event_dispatcher = $event_dispatcher;
+    $this->file_repository = $file_repository;
+    $this->extracted_file_repository = $extracted_file_repository;
+    $this->program_manager = $program_manager;
+    $this->logger = $downloadLogger; // Automatically injects the download logger here thx to this syntax. (camelCase)
+  }
+
+  /**
+   * @Route("/download/{id}.catrobat", name="download", defaults={"_format": "json"}, methods={"GET"})
+   */
+  public function downloadProgramAction(Request $request, string $id): BinaryFileResponse
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+
+    $this->validateCsrfToken($request->query->get('token'));
+    $project = $this->findProject($id);
+    $file = $this->getZipFile($id);
+    $response = $this->createDownloadFileResponse($id, $file);
+
+    $this->event_dispatcher->dispatch(
+      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT, $request)
+    );
+
+    return $response;
+  }
+
+  protected function validateCsrfToken(?string $token): void
+  {
+    // Will kill the IOS implementation (already using it as API)
+//    if ('prod' === $_ENV['APP_ENV'] && !$this->isCsrfTokenValid('project', $token)) {
+//        throw new InvalidCsrfTokenException();
+//    }
+  }
+
+  protected function findProject(string $id): Program
+  {
+    /* @var $project Program|null */
+    $project = $this->program_manager->find($id);
+    if (null === $project) {
+      $this->logger->error('Project with ID: '.$id.' not found');
       throw new NotFoundHttpException();
     }
 
-    $rec_by_page_id = (int) $request->query->get('rec_by_page_id', RecommendedPageId::INVALID_PAGE);
-    $rec_by_program_id = (int) $request->query->get('rec_by_program_id', 0);
-    $rec_user_specific = 1 == (int) $request->query->get('rec_user_specific', 0);
-    $rec_tag_by_program_id = (int) $request->query->get('rec_from', 0);
-    try {
-      if (!$file_repository->checkIfProjectZipFileExists($program->getId())) {
-        $extracted_file = $extracted_file_repository->loadProgramExtractedFile($program);
-        $file_repository->zipProject($extracted_file, $program->getId());
-      }
-      $file = $file_repository->getProjectZipFile($id);
-    } catch (FileNotFoundException $fileNotFoundException) {
-      $logger->error('[FILE] failed to get program file with id: '.$id);
+    return $project;
+  }
 
-      return JsonResponse::create('Invalid file upload', StatusCode::INVALID_FILE_UPLOAD);
+  protected function getZipFile(string $id): File
+  {
+    try {
+      if (!$this->file_repository->checkIfProjectZipFileExists($id)) {
+        $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
+      }
+      $zipFile = $this->file_repository->getProjectZipFile($id);
+      if (!$zipFile->isFile()) {
+        $this->logger->error("ZIP File is no file for project with id: \"{$id}\" not found");
+        throw new NotFoundHttpException();
+      }
+    } catch (FileNotFoundException $fileNotFoundException) {
+      $this->logger->error("ZIP File to download project with id: \"{$id}\" not found");
+      throw new NotFoundHttpException();
     }
 
-    if ($file->isFile()) {
-      $downloaded = $request->getSession()->get('downloaded', []);
-      if (!in_array($program->getId(), $downloaded, true)) {
-        $program_manager->increaseDownloads($program);
-        $downloaded[] = $program->getId();
-        $request->getSession()->set('downloaded', $downloaded);
-        $request->attributes->set('download_statistics_program_id', $id);
-        $request->attributes->set('referrer', $referrer);
+    return $zipFile;
+  }
 
-        if (RecommendedPageId::isValidRecommendedPageId($rec_by_page_id)) {
-          // all recommendations (except tag-recommendations -> see below)
-          $request->attributes->set('rec_by_page_id', $rec_by_page_id);
-          $request->attributes->set('rec_by_program_id', $rec_by_program_id);
-          $request->attributes->set('rec_user_specific', $rec_user_specific);
-        } elseif ($rec_tag_by_program_id > 0) {
-          // tag-recommendations
-          $request->attributes->set('rec_from', $rec_tag_by_program_id);
-        }
-      }
+  protected function createDownloadFileResponse(string $id, File $file): BinaryFileResponse
+  {
+    $username = $this->getUser() ? $this->getUser()->getUsername() : '-';
+    $this->logger->debug("User \"{$username}\" downloaded project with ID \"{$id}\" successfully");
 
-      $response = new BinaryFileResponse($file);
-      // can be changed back to $response->setContentDisposition
-      // after https://github.com/symfony/symfony/issues/34099 has been fixed
-      $response->headers->set(
-        'Content-Disposition',
-        'attachment; filename="'.$program->getId().'.catrobat"'
+    $response = new BinaryFileResponse($file);
+    $response->headers->set(
+          'Content-Disposition',
+          'attachment; filename="'.$id.'.catrobat"'
       );
 
-      return $response;
-    }
-    throw new NotFoundHttpException();
+    return $response;
   }
 }

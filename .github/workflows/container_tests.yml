@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.3.4
+        uses: actions/checkout@v3
 
       - name: Build and start all containers (Docker Compose)
         run: |
@@ -60,11 +60,11 @@ jobs:
 
       - name: Create a livid environment with dummy data
         run: |
-          docker exec app.catroweb bin/console catrobat:reset --hard --limit 5
+          docker exec app.catroweb bin/console catrobat:reset --hard
 
       - name: Run a few dynamic software tests
         run: |
-          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+          docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature
 
       - name: Test shared volumes
         id: shared-test-run-must-fail
@@ -73,8 +73,8 @@ jobs:
         continue-on-error: true
         run: |
           echo ::set-output name=status::failure
-          echo "INVALID" > tests/behat/features/web/general/homepage.feature
-          docker exec app.catroweb bin/behat -s web-general tests/behat/features/web/general/homepage.feature
+          echo "INVALID" > tests/BehatFeatures/web/general/homepage.feature
+          docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature
           echo ::set-output name=status::success
       - name: This step is only executed if shared volumes are not working
         if: steps.shared-test-run-must-fail.outputs.status == 'success'
@@ -99,19 +99,19 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v2.2.4
+      - uses: actions/upload-artifact@v2.3.1
         if: failure()
         with:
           name: screenshots_dev_container
-          path: tests/testreports/screens
+          path: tests/TestReports/TestScreenshots
 
-      - uses: actions/upload-artifact@v2.2.4
+      - uses: actions/upload-artifact@v2.3.1
         if: failure()
         with:
           name: dev_logs_dev_container
           path: var/log/dev
 
-      - uses: actions/upload-artifact@v2.2.4
+      - uses: actions/upload-artifact@v2.3.1
         if: failure()
         with:
           name: test_logs_dev_container

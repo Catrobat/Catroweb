@@ -6,7 +6,6 @@
   width: 100%;
 
   .scenes-wrapper {
-
     .scene {
       margin-bottom: 15px;
 
@@ -30,6 +29,7 @@
           }
         }
       }
+
       &:hover {
         cursor: pointer;
       }
@@ -52,7 +52,7 @@
     margin-left: 10px;
     font-size: $default-font-size;
     color: $black;
-    border-bottom: solid 3px rgba(115, 154, 166, 0.3);
+    border-bottom: solid 3px rgba(115 154 166 / 30%);
   }
 
   .object,
@@ -70,7 +70,7 @@
   .dropbtn {
     position: relative;
     padding: 5px;
-    background-color: rgb(23, 165, 184);
+    background-color: rgb(23 165 184);
     border-top: solid 2px #739aa6;
     border-bottom: solid 2px $black;
     border-radius: 3px;
@@ -120,13 +120,9 @@
     }
   }
 
-
   .dropbtn:hover {
     cursor: pointer;
     background-color: #006c87;
-    -webkit-transition: background-color 0.15s ease-in-out;
-    -moz-transition: background-color 0.15s ease-in-out;
-    -o-transition: background-color 0.15s ease-in-out;
     transition: background-color 0.15s ease-in-out;
   }
 
@@ -162,11 +158,9 @@
           width: 35px;
           height: 35px;
         }
-
       }
 
       .script-bricks-wrapper {
-
         .brick {
           position: relative;
           height: 48px;
@@ -206,7 +200,6 @@
         bottom: 13px;
         z-index: 1;
       }
-
     }
   }
 
@@ -235,16 +228,11 @@
 
   .rotate {
     display: inline-block;
-    -webkit-transform: rotate(-90deg);
-    -moz-transform: rotate(-90deg);
-    -o-transform: rotate(-90deg);
-    -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
   }
 }
 
 @media (max-width: 640px) {
-
   #codeview-wrapper {
     width: 100%;
 
@@ -257,7 +245,6 @@
 
         .scene-dropbtn {
           margin-right: 0;
-
           margin-left: 0;
 
           .scene-arrow {
@@ -282,4 +269,3 @@
     text-align: center;
   }
 }
-

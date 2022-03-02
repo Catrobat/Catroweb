@@ -241,30 +241,6 @@
             "config/packages/fos_elastica.yaml"
         ]
     },
-    "friendsofsymfony/jsrouting-bundle": {
-        "version": "2.3",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.3",
-            "ref": "a9f2e49180f75cdc71ae279a929c4b2e0638de84"
-        },
-        "files": [
-            "config/routes/fos_js_routing.yaml"
-        ]
-    },
-    "friendsofsymfony/rest-bundle": {
-        "version": "2.2",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "2.2",
-            "ref": "fa845143b7e0a4c70aedd1a88c549e6d977e9ae5"
-        },
-        "files": [
-            "config/packages/fos_rest.yaml"
-        ]
-    },
     "friendsofsymfony/user-bundle": {
         "version": "v2.1.2"
     },
@@ -288,6 +264,27 @@
     },
     "google/auth": {
         "version": "v1.7.1"
+    },
+    "google/cloud-core": {
+        "version": "v1.43.1"
+    },
+    "google/cloud-translate": {
+        "version": "v1.12.2"
+    },
+    "google/common-protos": {
+        "version": "1.4.0"
+    },
+    "google/gax": {
+        "version": "v1.10.0"
+    },
+    "google/grpc-gcp": {
+        "version": "v0.2.0"
+    },
+    "google/protobuf": {
+        "version": "v3.19.2"
+    },
+    "grpc/grpc": {
+        "version": "1.42.0"
     },
     "guzzlehttp/guzzle": {
         "version": "6.5.2"
@@ -543,6 +540,9 @@
     "react/promise": {
         "version": "v2.8.0"
     },
+    "rize/uri-template": {
+        "version": "0.3.4"
+    },
     "rosell-dk/image-mime-type-guesser": {
         "version": "0.3"
     },
@@ -774,6 +774,18 @@
     "symfony/intl": {
         "version": "v5.0.5"
     },
+    "symfony/mailer": {
+        "version": "4.4",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "4.3",
+            "ref": "bbfc7e27257d3a3f12a6fb0a42540a42d9623a37"
+        },
+        "files": [
+            "config/packages/mailer.yaml"
+        ]
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -905,9 +917,6 @@
     "symfony/security-http": {
         "version": "v4.4.9"
     },
-    "symfony/serializer": {
-        "version": "v5.0.5"
-    },
     "symfony/service-contracts": {
         "version": "v2.0.1"
     },
@@ -916,20 +925,6 @@
     },
     "symfony/string": {
         "version": "v5.1.0"
-    },
-    "symfony/swiftmailer-bundle": {
-        "version": "2.5",
-        "recipe": {
-            "repo": "github.com/symfony/recipes",
-            "branch": "master",
-            "version": "2.5",
-            "ref": "f0b2fccdca2dfd97dc2fd5ad216d5e27c4f895ac"
-        },
-        "files": [
-            "config/packages/dev/swiftmailer.yaml",
-            "config/packages/swiftmailer.yaml",
-            "config/packages/test/swiftmailer.yaml"
-        ]
     },
     "symfony/templating": {
         "version": "v4.4.5"
@@ -1025,6 +1020,21 @@
     "symfony/yaml": {
         "version": "v4.4.5"
     },
+    "symfonycasts/reset-password-bundle": {
+        "version": "1.11",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "1.0",
+            "ref": "97c1627c0384534997ae1047b93be517ca16de43"
+        },
+        "files": [
+            "config/packages/reset_password.yaml"
+        ]
+    },
+    "symfonycasts/verify-email-bundle": {
+        "version": "v1.7.0"
+    },
     "textalk/websocket": {
         "version": "1.2.0"
     },
@@ -1066,12 +1076,6 @@
     },
     "webmozart/path-util": {
         "version": "2.3.0"
-    },
-    "willdurand/jsonp-callback-validator": {
-        "version": "v1.1.0"
-    },
-    "willdurand/negotiation": {
-        "version": "v2.3.1"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"

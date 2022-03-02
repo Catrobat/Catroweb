@@ -2,7 +2,10 @@
 /* global toggleVisibilityUrl */
 /* global programCanNotChangeVisibilityTitle */
 /* global programCanNotChangeVisibilityText */
-/* global Routing */
+/* global noProgramsText */
+/* global programDeleteConfirmation */
+/* global programChangeVisibility */
+/* global sessionStorage */
 
 import $ from 'jquery'
 import Swal from 'sweetalert2'
@@ -15,11 +18,9 @@ require('../../styles/components/project_list.scss')
  *
  * @param container
  * @param url
- * @param recommendedByProjectId
- * @param recommendedByPageId
  * @constructor
  */
-export const ProjectLoader = function (container, url, recommendedByProjectId, recommendedByPageId) {
+export const ProjectLoader = function (container, url) {
   const self = this
 
   // The container where the projects will be appended (must be set!)
@@ -27,10 +28,6 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
 
   // the url where the correct projects will be loaded (must be set!)
   self.url = url
-
-  self.recommendedByProjectId = (typeof recommendedByProjectId === 'undefined') ? null : recommendedByProjectId
-
-  self.recommendedByPageId = (typeof recommendedByPageId === 'undefined') ? null : recommendedByPageId
 
   // before changing columns_min, columns_max, have a look at '.projects{.project{width:.%}}' in 'brain.scss' first
   self.defaultRows = 2
@@ -59,26 +56,6 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
       limit: self.initialDownloadLimit,
       offset: self.numberOfLoadedProjects
     }, function (data) {
-      if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
-        $(self.container).hide()
-        return
-      }
-      $(self.container).show()
-      self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
-      setup(data)
-    })
-  }
-
-  // ----------------------------------
-  // - Recommended Programs
-  //
-  self.initRecsys = function () {
-    if (($(self.container).length <= 0)) {
-      return
-    }
-
-    restoreParamsWithSessionStorage()
-    $.get(self.url, { program_id: self.recommendedByProjectId }, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
         $(self.container).hide()
         return
@@ -126,13 +103,7 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
       user_id: userId
     }, function (data) {
       if (data.CatrobatProjects === undefined || data.CatrobatProjects.length === 0) {
-        const url = Routing.generate('translate', {
-          word: 'programs.noPrograms',
-          domain: 'catroweb'
-        })
-        $.get(url, function (data) {
-          $(self.container).find('.programs').append('<div class="no-programs">' + data + '</div>')
-        })
+        $(self.container).find('.programs').append('<div class="no-programs">' + noProgramsText + '</div>')
         return
       }
       self.totalNumberOfFoundProjects = parseInt(data.CatrobatInformation.TotalProjects)
@@ -228,7 +199,7 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
     const projects = data.CatrobatProjects
     for (let i = 0; i < projects.length; i++) {
       if (projects[i].ProjectId === self.projectId) {
-        // When the user is on a projects detail page no recommendations etc. should contain the same project
+        // When the user is on a projects detail page no project category should contain the same project
         continue
       }
 
@@ -461,7 +432,6 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
 
   async function buildProjectInHtml (project, data) {
     const div = await initDivWithCorrectContainerIcon(project)
-    const linkCssClasses = await getLinkCssClasses()
     const projectLink = await getProjectLink(project, data)
     const storedVisits = sessionStorage.getItem('visits')
     let visited = false
@@ -473,7 +443,7 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
 
     return $(
       '<div class="program ' + (visited ? 'visited-program ' : '') + '" id="program-' + project.ProjectId + '">' +
-      '<a href="' + projectLink + '" class="' + linkCssClasses + '">' +
+      '<a href="' + projectLink + '">' +
       '<img data-src="' + data.CatrobatInformation.BaseUrl + project.ScreenshotSmall + '" alt="" class="lazyload" />' +
       '<span class="program-name">' + self.escapeJavaScript(project.ProjectName) + '</span>' +
       div +
@@ -482,62 +452,18 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
   }
 
   async function initDivWithCorrectContainerIcon (project) {
-    // Extend this for new containers...
+    // ToDo: Refactor to new project_list
     switch (self.container) {
-      case '#newest':
       case '#search-results':
-      case '#random':
         return '<div><span class="project-thumb-icon material-icons">schedule</span>' + project.UploadedString + '</div>'
 
       case '#myprofile-programs':
-      case '#user-programs':
         return '<div><span class="project-thumb-icon material-icons">schedule</span>' + project.UploadedString + '</div>'
-
-      case '#mostDownloaded':
-        return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
-
-      case '#scratchRemixes':
-      case '#mostViewed':
-        return '<div><span class="project-thumb-icon material-icons">visibility</span>' + project.Views + '</div>'
-
-      case '#recommendations':
-      case '#more-from-this-user-recommendations':
-        return '<div><span class="project-thumb-icon material-icons">visibility</span>' + project.Views + '</div>'
-
-      case '#recommended':
-        return '<div><span class="project-thumb-icon material-icons">visibility</span>' + project.Views + '</div>'
-
-      case '#specific-programs-recommendations':
-        return '<div><span class="project-thumb-icon material-icons">get_app</span>' + project.Downloads + '</div>'
-
-      default:
-        return '<div><span class="project-thumb-icon material-icons">person</span>' + self.escapeJavaScript(project.Author) + '</div>'
     }
-  }
-
-  async function getLinkCssClasses () {
-    let additionalLinkCssClass = ''
-    if (self.container === '#recommended') {
-      additionalLinkCssClass = 'homepage-recommended-programs'
-    }
-    return 'rec-programs' + ' ' + additionalLinkCssClass + ' '
   }
 
   async function getProjectLink (project, data) {
-    let link = data.CatrobatInformation.BaseUrl + project.ProjectUrl
-    switch (self.container) {
-      case '#recommendations':
-        return link + '?rec_from=' + self.recommendedByProjectId
-
-      case '#recommended':
-      case '#specific-programs-recommendations':
-        link += '?rec_by_page_id=' + self.recommendedByPageId
-        if (self.recommendedByProjectId !== null) {
-          link += '&rec_by_program_id=' + self.recommendedByProjectId
-        }
-        link += '&rec_user_specific=' + (('isUserSpecificRecommendation' in data) && data.isUserSpecificRecommendation ? 1 : 0)
-    }
-    return link
+    return data.CatrobatInformation.BaseUrl + project.ProjectUrl
   }
 
   function isMyProject () {
@@ -568,40 +494,26 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
     })
   }
 
-  function stringTranslate (programName, catalogEntry) {
-    const translations = []
-    translations.push({ key: '%programName%', value: programName })
-    return Routing.generate('translate', {
-      word: catalogEntry,
-      array: JSON.stringify(translations),
-      domain: 'catroweb'
-    }, false)
-  }
-
   function deleteProgram (id) {
     const programName = $('#program-' + id).find('.program-name').text()
-    const catalogEntry = 'programs.deleteConfirmation'
-    const url = stringTranslate(programName, catalogEntry)
-    $.get(url, function (data) {
-      const split = data.split('\n')
-      Swal.fire({
-        title: split[0],
-        html: split[1] + '<br><br>' + split[2],
-        icon: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        customClass: {
-          confirmButton: 'btn btn-danger',
-          cancelButton: 'btn btn-outline-primary'
-        },
-        buttonsStyling: false,
-        confirmButtonText: split[3],
-        cancelButtonText: split[4]
-      }).then((result) => {
-        if (result.value) {
-          window.location.href = deleteUrl + '/' + id
-        }
-      })
+    const split = programDeleteConfirmation.replace('%programName%', '"' + programName + '"').split('\n')
+    Swal.fire({
+      title: split[0],
+      html: split[1] + '<br><br>' + split[2],
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-danger',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false,
+      confirmButtonText: split[3],
+      cancelButtonText: split[4]
+    }).then((result) => {
+      if (result.value) {
+        window.location.href = deleteUrl + '/' + id
+      }
     })
   }
 
@@ -609,51 +521,46 @@ export const ProjectLoader = function (container, url, recommendedByProjectId, r
     const visibilityLockId = $('#visibility-lock-' + id)
     const visibilityLockOpenId = $('#visibility-lock-open-' + id)
     const programName = $('#program-' + id).find('.program-name').text()
-    const catalogEntry = 'programs.changeVisibility'
-    const url = stringTranslate(programName, catalogEntry)
     const isPrivate = visibilityLockId.is(':visible')
-
-    $.get(url, function (data) {
-      const split = data.split('\n')
-      Swal.fire({
-        title: split[0],
-        html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
-        icon: 'warning',
-        showCancelButton: true,
-        allowOutsideClick: false,
-        customClass: {
-          confirmButton: 'btn btn-primary',
-          cancelButton: 'btn btn-outline-primary'
-        },
-        buttonsStyling: false,
-        confirmButtonText: (isPrivate) ? split[4] : split[5],
-        cancelButtonText: split[6]
-      }).then((result) => {
-        if (result.value) {
-          $.get(toggleVisibilityUrl + '/' + id, {}, function (data) {
-            if (data === 'true') {
-              if (isPrivate) {
-                visibilityLockId.hide()
-                visibilityLockOpenId.show()
-              } else {
-                visibilityLockId.show()
-                visibilityLockOpenId.hide()
-              }
+    const split = programChangeVisibility.replaceAll('%programName%', programName).split('\n')
+    Swal.fire({
+      title: split[0],
+      html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
+      icon: 'warning',
+      showCancelButton: true,
+      allowOutsideClick: false,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+        cancelButton: 'btn btn-outline-primary'
+      },
+      buttonsStyling: false,
+      confirmButtonText: (isPrivate) ? split[4] : split[5],
+      cancelButtonText: split[6]
+    }).then((result) => {
+      if (result.value) {
+        $.get(toggleVisibilityUrl + '/' + id, {}, function (data) {
+          if (data === 'true') {
+            if (isPrivate) {
+              visibilityLockId.hide()
+              visibilityLockOpenId.show()
             } else {
-              Swal.fire({
-                title: programCanNotChangeVisibilityTitle,
-                text: programCanNotChangeVisibilityText,
-                icon: 'error',
-                customClass: {
-                  confirmButton: 'btn btn-primary'
-                },
-                buttonsStyling: false,
-                allowOutsideClick: false
-              })
+              visibilityLockId.show()
+              visibilityLockOpenId.hide()
             }
-          })
-        }
-      })
+          } else {
+            Swal.fire({
+              title: programCanNotChangeVisibilityTitle,
+              text: programCanNotChangeVisibilityText,
+              icon: 'error',
+              customClass: {
+                confirmButton: 'btn btn-primary'
+              },
+              buttonsStyling: false,
+              allowOutsideClick: false
+            })
+          }
+        })
+      }
     })
   }
 

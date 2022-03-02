@@ -27,6 +27,7 @@ reportIt: Evet, bildir!
 areYouSure: Emin misiniz?
 noWayOfReturn: Eylemlerinizi geri getirmenin bir yolu yok!
 download: İndir
+name: Isim
 description: Açıklama
 noDescription: Açıklama mevcut değil.
 credits: Yapanlar
@@ -124,6 +125,7 @@ programs:
     Bu, yüklediğiniz projeleri ve yorumları da silecek! Eylemlerinizi geri getirmenin bir yolu yok!
     Evet, sil!
     İptal et
+  tooLongName: Proje adı çok uzun!
   tooLongDescription: Projenin açıklaması çok uzun!
   tooLongCredits: Projenin yapanlar kısmı çok uzun!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Kendi projenizi işaretleyemezsiniz.
   reportAlready: Bu projeyi zaten işaretlediniz.
   reportDone: Bu projeyi bildirdiniz!
+  updateAppHeaderDownload: İndirmek mümkün değil
+  updateAppTextDownload: Lütfen uygulamanızı en yeni sürüme güncelleyin. Tüm Android özelliklerinin IOS'ta mevcut olmadığını unutmayın.
+  updateAppTextDownloadApk: Uygulama olarak indirme şu anda yalnızca Android'de mevcuttur ve IOS'ta mevcut değildir.
   updateAppHeader: Programı güncelleyin
   updateAppText: Bu projeyi indirebilmek için lütfen uygulamanızı en yeni sürüme güncelleyin.
   btnClosePopup: Tamam
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Yorum başarıyla silindi.
   deleted_popup_header: Silindi
   noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
-  editDescription: Proje açıklamasını düzenleyin
-  saveDescription: Kaydet
-  editCredits: Yapanları düzenle
-  saveCredits: Kaydet
+  editProject: Projeyi düzenle
+  closeProjectEditor: Proje düzenleyiciyi kapat
+  closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
+  saveOnLanguageChange: Mevcut değişikliklerinizi korumak ister misiniz?
+  btnKeep: Değişiklikleri Koru
+  btnDiscard: Vazgeç
   addComment: Bir yorum Yaz
   thumbsUp: Başparmak havaya!
   smile: Gülümse!
@@ -181,9 +188,13 @@ programs:
   link: Proje bağlantısını panoya kopyala
   reactionsText: Tepkiler
   downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
+  downloadStartText: İndirme başladı...
   showTranslation: Çeviriyi göster
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
+  translationUpdated: '%language% çevirisi için yapılan değişiklikler güncellendi'
+  default: Varsayılan
+  save: Kaydet
 remixGraph:
   title: Remixler
   showRemixGraph: 'Remixleri'
@@ -361,10 +372,15 @@ menu:
   followersAndFollowing: Takipçin
 login:
   login: Oturum aç
+  button:
+    loginNow: Şimdi giriş yap
+    createAccount: Hesap açmak
+    forgetPassword: Şifreyi mi unuttun?
+  oauth:
+    title: Veya şunlar ile katılabilirsiniz
   passOrUser: Kullanıcı adı veya şifre yanlış.
   noUsername: Kullanıcı adı veya e-posta adresi bulunamadı.
   forgotPass: Şifre yada kullanıcı adını unuttunuz mu?
-  recoverPass: Parolayı hatırlat
   recoverPassSend: Adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin.
   alreadyReset: Bu kullanıcının şifresi son 24 saat içinde istendi.
   confirmationSend: Kaydınızı onaylamak için posta adresinize bir e-posta gönderildi. Lütfen gelen kutunuzu kontrol edin ve hesabınızı etkinleştirin.
@@ -378,6 +394,39 @@ login:
   email: E-posta
   passwordFirst: Şifre
   passwordSecond: Şifre onayla
+register:
+  title: Üye ol
+  subText: "Devam ederek, bir Catrobat Topluluğu hesabı oluşturuyorsunuz ve %var1% ve %var2%'mizi kabul etmiş oluyorsunuz."
+  button:
+    cancel: İptal et
+    createAccount: Hesap açmak
+accountRecovery:
+  title: Hesap kurtarma
+  description: Hesabınızın e-posta adresini veya kullanıcı adını hatırlıyorsanız, şifrenizi sıfırlamanız için size bir bağlantı gönderebiliriz.
+  button:
+    cancel: İptal et
+    submit: Şifre kurtarma
+resetPassword:
+  request:
+    title: "Şifrenizi sıfırlayın"
+    description: "Hesabınızın e-postasını hatırlıyorsanız, şifrenizi sıfırlamanız için size bir bağlantı gönderebiliriz.."
+    button:
+      submit: "Sıfırlama e-postası gönder"
+      cancel: "İptal et"
+  check:
+    title: "E-postalarınızı kontrol edin"
+    description: "E-postanızla eşleşen bir hesap varsa, şifrenizi sıfırlamak için kullanabileceğiniz bir bağlantı içeren bir e-posta gönderildi. Bu bağlantı %time% içinde sona erecek."
+    description2: "E-posta almazsanız, lütfen spam klasörünüzü kontrol edin veya %tryAgainLink%"
+    tryAgain: "Tekrar deneyin"
+  email:
+    title: "Merhaba!"
+    visitLink: "Şifrenizi sıfırlamak için lütfen aşağıdaki bağlantıyı ziyaret edin"
+    expire: "Bu bağlantı %time% içinde sona erecek."
+    cheers: "Şerefe!"
+  reset:
+    title: "Şifrenizi Sıfırlayın"
+    button:
+      submit: "Şifre sıfırlama"
 apk:
   download: Uyglm'yı indir
   prepare: 'Uyglm yap'
@@ -446,6 +495,9 @@ time:
   years.ago: '{1} 1 yıl önce |]1,Inf] bir yıldan fazla'
 failure:
   upload: Uygulamanız yüklenirken bir hata oluştu.
+user:
+  verification:
+    email: 'Eposta adresinizi doğrulayın'
 api:
   registerUser:
     emailMissing: 'E-posta eksik'
@@ -756,34 +808,34 @@ studio:
     no_projects: 'Studio henüz proje içermiyor'
     updateCoverError: 'Stüdyo kapağı güncellenirken bir şeyler ters gitti!'
     projects:
-      title: 'projects'
+      title: 'projeler'
     comments:
       title: 'Yorumlar'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Birşeyler yaz'
+      replies: 'yanıtlar'
+      send: 'gönder'
+      no_comments: 'Bu stüdyoda henüz yorum yok.'
+      disabled_comments: 'Bu stüdyo için yorumlar devre dışı bırakıldı.'
+      post_error: 'Yorumunuz gönderilirken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
+      delete_error: 'Yorum kaldırılırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Aktiviteler'
+      join_studio: '%user% stüdyoya katıldı.'
+      add_project: '%user% bir yorum yaptı.'
+      add_comment: '%user% bir proje ekledi.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Stüdyo üyeleri'
+      project_count: '{0} Stüdyo projesi yok |{1} 1 stüdyo projesi |]1,Inf] %count% stüdyo projesi'
+      promote_member: 'Üyeyi yöneticiliğe yükselt'
+      promotion_failed: 'Bu üyeyi yükseltme sırasında bir şeyler ters gitti. Daha sonra tekrar deneyin.'
+      ban_member: 'Üyeyi stüdyodan yasakla'
+      ban_failed: 'Bu üye yasaklanırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Genel Ayarlar'
+      studio_name: 'Stüdyo Adı'
       studio_description: 'Açıklama'
       toggle_allow_comments: 'Yorumlar'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Herkese açık'
 media_library:
   file:
     size: 'Boyutu: %size%'
@@ -793,3 +845,5 @@ media_library:
       sound: 'Tür: ses'
       movie: 'Tür: video'
       default: 'Tür: bilinmiyor'
+snackbar:
+  project_not_found: 'İstenen proje mevcut değil'

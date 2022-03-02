@@ -1,10 +1,10 @@
 # Use composer image for better caching
-FROM composer:2.1.9 AS composer-build
+FROM composer:2.2.7 AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
 # Use node image for better caching
-FROM node:16 AS node-build
+FROM node:17 AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install -g @symfony/webpack-encore

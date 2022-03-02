@@ -3,7 +3,7 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Entity\ProgramManager;
+use App\Project\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;

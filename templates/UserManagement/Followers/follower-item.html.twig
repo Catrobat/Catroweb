@@ -17,9 +17,6 @@
         </div>
 
         <div class="text-muted text-uppercase follower-item__info">
-          {% if user.country %}
-            <div class="d-inline me-2"><i class="material-icons info-icon">location_on</i> {{ user.country }}</div>
-          {% endif %}
           {% if app.user != null and app.user.hasFollower(user.profile) and (hideFollowsMe is not defined or hideFollowsMe != true) %}
             <div class="d-inline">
               <i class="material-icons info-icon">done</i> {{ "follower.followsMe"|trans({}, "catroweb") }}

@@ -2,7 +2,7 @@
 
 namespace App\Api_deprecated\Listeners;
 
-use App\Catrobat\Exceptions\InvalidCatrobatFileException;
+use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Contracts\Translation\TranslatorInterface;

@@ -17,7 +17,7 @@ googlePlay: Google Play Store
 iosAppStore: iOS App Store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Discord Chat
 passwordsNoMatch: Die Passwörter stimmen nicht überein.
 error: Fehler
 cancel: Abbrechen
@@ -27,6 +27,7 @@ reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Herunterladen
+name: Name
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 credits: Notizen und Credits
@@ -124,6 +125,7 @@ programs:
     Es gibt keine Möglichkeit dein Konto wiederherzustellen!
     Ja, löschen!
     Abbrechen
+  tooLongName: Der Projektname ist zu lang!
   tooLongDescription: Die Projektbeschreibung ist zu lang!
   tooLongCredits: Die Anerkennung ist zu lang!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Du kannst dein eigenes Programm nicht melden.
   reportAlready: Du hast dieses Projekt bereits gemeldet.
   reportDone: Du hast dieses Projekt gemeldet!
+  updateAppHeaderDownload: Download ist nicht möglich
+  updateAppTextDownload: Bitte aktualisiere diese App auf die neueste Version. Bitte beachte, dass nicht alle Android-Funktionen bereits auf IOS verfügbar sind.
+  updateAppTextDownloadApk: Der APK-Download ist derzeit nur für Android und nicht für IOS verfügbar.
   updateAppHeader: App aktualisieren
   updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Projekt herunterladen zu können.
   btnClosePopup: Ok
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Der Kommentar wurde erfolgreich gelöscht.
   deleted_popup_header: Gelöscht
   noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
-  editDescription: Projektbeschreibung bearbeiten
-  saveDescription: Beschreibungsänderung speichern
-  editCredits: Projekt Anerkennung bearbeiten
-  saveCredits: Speichern
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Möchtest du deine Änderungen speichern?
+  saveOnLanguageChange: Möchtest du deine derzeitigen Änderungen behalten?
+  btnKeep: Änderungen behalten
+  btnDiscard: Verwerfen
   addComment: Kommentar schreiben
   thumbsUp: Daumen hoch!
   smile: Smile!
@@ -181,9 +188,13 @@ programs:
   link: Link in Zwischenablage kopieren
   reactionsText: Gefällt mir
   downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
+  downloadStartText: Der Download hat begonnen...
   showTranslation: Übersetzung anzeigen
   hideTranslation: Übersetzung ausblenden
   translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Standard
+  save: Speichern
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
@@ -366,10 +377,15 @@ menu:
   followersAndFollowing: Abonnenten
 login:
   login: Einloggen
+  button:
+    loginNow: Login now
+    createAccount: Konto erstellen
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Das Passwort oder der Username ist falsch.
   noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
   forgotPass: Passwort oder Usernamen vergessen?
-  recoverPass: Passwort wiederherstellen
   recoverPassSend: Eine E-Mail wurde an deine E-Mail-Adresse verschickt. Bitte überprüfe deinen Posteingang.
   alreadyReset: Ein Passwort für diesen Account wurde bereits innerhalb der letzten 24 Stunden angefordert.
   confirmationSend: Eine E-Mail zur Bestätigung der Registrierung wurde an deine E-Mail-Adresse gesendet. Bitte überprüfe deinen Posteingang und aktivieren deinen Account.
@@ -383,6 +399,39 @@ login:
   email: Email
   passwordFirst: Passwort
   passwordSecond: Passwort bestätigen
+register:
+  title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  button:
+    cancel: Abbrechen
+    createAccount: Konto erstellen
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Abbrechen
+    submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "Abbrechen"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Passwort zurücksetzen"
 apk:
   download: App herunterladen
   prepare: 'App erstellen'
@@ -452,6 +501,9 @@ time:
   years.ago: '{1} vor einem Jahr |]1, Inf] vor mehr als einem Jahr'
 failure:
   upload: Während dem Upload deiner App ist ein Fehler passiert.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'E-Mail fehlt'
@@ -799,3 +851,5 @@ media_library:
       sound: 'Typ: Ton'
       movie: 'Typ: Video'
       default: 'Typ: unbekannt'
+snackbar:
+  project_not_found: 'The requested project is not available'

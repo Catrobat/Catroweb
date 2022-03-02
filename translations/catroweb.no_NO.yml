@@ -27,6 +27,7 @@ reportIt: Ja, rapporter det!
 areYouSure: Er du sikker?
 noWayOfReturn: Det er ingen måte å gjenopprette dine handlinger!
 download: Nedlasting
+name: Name
 description: Beskrivelse
 noDescription: Ingen beskrivelse tilgjengelig.
 credits: Credits
@@ -124,6 +125,7 @@ programs:
     Det er ingen måte å gjenopprette dine handlinger!
     Ja, slett det!
     Avbryt
+  tooLongName: The project name is too long!
   tooLongDescription: Prosjektbeskrivelsen er for lang!
   tooLongCredits: The project credits are too long!
   most:
@@ -154,6 +156,9 @@ programs:
   reportOwnProgram: Du kan ikke flagge ditt eget prosjekt.
   reportAlready: Du har allerede flagget dette prosjektet.
   reportDone: Du rapporterte dette prosjektet!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Oppdater app
   updateAppText: Oppdater din app til den nyeste versjonen for å kunne laste ned dette prosjektet.
   btnClosePopup: Ok
@@ -168,10 +173,12 @@ programs:
   deleted_popup: Kommentaren ble vellykket slettet.
   deleted_popup_header: Slettet
   noAdminRights: Du har ingen admin rettigheter. Vennligst logg inn som en admin.
-  editDescription: Rediger prosjektbeskrivelsen
-  saveDescription: Save description change
-  editCredits: Edit the project credits
-  saveCredits: Save credits change
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Vil du lagre endringene?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: Discard
   addComment: Skriv en kommentar
   thumbsUp: Tomlene opp!
   smile: Smil!
@@ -181,9 +188,13 @@ programs:
   link: Kopier prosjektlenke til utklippstavlen
   reactionsText: Reaksjoner
   downloadErrorText: Det oppstod en feil mens laste ned prosjektet. Prøv igjen senere.
+  downloadStartText: Download has started...
   showTranslation: Vis oversettelse
   hideTranslation: Skjul oversettelse
   translatedByLine: Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Default
+  save: Save
 remixGraph:
   title: Remikser
   showRemixGraph: 'Vis Remiks graf'
@@ -363,10 +374,15 @@ menu:
   followersAndFollowing: Følger
 login:
   login: Logg på
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Ditt passord eller brukernavn er feil.
   noUsername: Din brukernavn eller e-postadresse ble ikke funnet.
   forgotPass: Glemt passord eller brukernavn?
-  recoverPass: Gjenopprett passord
   recoverPassSend: En e-post ble sendt til e-postadressen din. Vennligst sjekk innboksen din.
   alreadyReset: Passordet for denne brukeren har allerede blitt bedt om de siste 24 timene.
   confirmationSend: En e-post for å bekrefte registreringen ble sendt til din e-postadresse. Vennligst sjekk din innboks og aktiver kontoen din.
@@ -380,6 +396,39 @@ login:
   email: E-post
   passwordFirst: Passord
   passwordSecond: Bekreft passord
+register:
+  title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  button:
+    cancel: Avbryt
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: Avbryt
+    submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "Avbryt"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Reset password"
 apk:
   download: Last ned som app
   prepare: 'Få som app'
@@ -449,6 +498,9 @@ time:
   years.ago: '{1}for 1 år siden |]1,Inf] for mer enn ett år siden'
 failure:
   upload: Det oppstod en feil under opplastingen av din app.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'E-post mangler'
@@ -796,3 +848,5 @@ media_library:
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
+snackbar:
+  project_not_found: 'The requested project is not available'

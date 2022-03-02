@@ -1,18 +1,18 @@
 ---
 #homepage translation
 title: Catrobat community
-localLanguage: English
-username: Username
+localLanguage: Ingles
+username: Pangalan ng gumagamit
 password: Password
-createNewPassword: Create new password
-accountSettings: Account settings
+createNewPassword: Lumikha ng panibagong password
+accountSettings: Settings ng account
 email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
-tutorials: Help
+aboutPocketCode: Tungkol sa Pocket Code
+about: Tungkol sa
+education: Edukasyon
+chat: Mga usapan at forums
+others: Iba pa
+tutorials: Tulong
 googlePlay: Google Play
 iosAppStore: iOS App store
 huaweiAppGallery: Huawei AppGallery
@@ -20,21 +20,22 @@ instagram: Instagram
 discordChat: Discord chat
 passwordsNoMatch: The passwords didn't match.
 error: Error
-cancel: Cancel
+cancel: I-cancel
 report: Report
 deleteIt: Yes, delete it!
 reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
 download: Download
-description: Description
+name: Pangalan
+description: Paglalarawan
 noDescription: No description available.
 credits: Notes and credits
 noCredits: No notes and credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Paano mo nabuo ang iyong proyekto? Gumamit ka ba ng mga ideya,mga script o artwork mula sa ibang tao? Pasalamatan mo sila rito.
 country: Country
 loginText: login
-privacyPolicy: Privacy Policy
+privacyPolicy: Patakaran sa Privacy
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
@@ -59,11 +60,11 @@ wellDone: "Well done!"
 done: "Done!"
 notificationsReadMessage: "It looks like you don't have any notifications."
 confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
+cancelMessage: "I-cancel"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
-projects: "Projects"
+projects: "Mga Proyekto"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "here"
@@ -124,6 +125,7 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
   most:
@@ -154,24 +156,29 @@ programs:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version to be able to download this project.
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
   comments: Comments
   send: Send
-  delete: Delete
+  delete: Burahin
   report: Report
   report_popup: The comment was successfully reported.
   report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editDescription: Edit the project description
-  saveDescription: Save
-  editCredits: Edit the project notes and credits
-  saveCredits: Save
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
+  closeEditorPrompt: Gusto mo bang i-save ang mga pagbabago?
+  saveOnLanguageChange: Would you like to keep your current changes?
+  btnKeep: Keep Changes
+  btnDiscard: I-discard
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -181,9 +188,13 @@ programs:
   link: Copy project link to clipboard
   reactionsText: Reactions
   downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  translationUpdated: Changes for the translation to %language% updated
+  default: Naka-Default
+  save: I-save
 remixGraph:
   title: Remixes
   showRemixGraph: 'Remix graph'
@@ -281,7 +292,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Tapos
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
@@ -347,25 +358,30 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  search: Search
+  search: Maghanap
   inMediaLib: Search in media library
   results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
 menu:
   profile: My Profile
-  login: Login
-  logout: Logout
+  login: Mag-Login
+  logout: Mag-Logout
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
 login:
-  login: Login
+  login: Mag-Login
+  button:
+    loginNow: Login now
+    createAccount: Create account
+    forgetPassword: Forget password?
+  oauth:
+    title: Or you can join with
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
-  recoverPass: Recover password
   recoverPassSend: An email was sent to your email address. Please check your inbox.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
@@ -375,10 +391,43 @@ login:
   noAccount: Don't have an account!
   alreadyAccount: Already having an account?
   or: OR
-  username: Username
+  username: Pangalan ng gumagamit
   email: Email
   passwordFirst: Password
   passwordSecond: Password confirm
+register:
+  title: Sign up
+  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  button:
+    cancel: I-cancel
+    createAccount: Create account
+accountRecovery:
+  title: Account recovery
+  description: If you remember the email or username of your account we can send you a link to reset your password.
+  button:
+    cancel: I-cancel
+    submit: Recover password
+resetPassword:
+  request:
+    title: "Reset your password"
+    description: "If you remember the email of your account we can send you a link to reset your password."
+    button:
+      submit: "Send reset email"
+      cancel: "I-cancel"
+  check:
+    title: "Check your emails"
+    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
+    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    tryAgain: "try again"
+  email:
+    title: "Hi!"
+    visitLink: "To reset your password, please visit the following link"
+    expire: "This link will expire in %time%."
+    cheers: "Cheers!"
+  reset:
+    title: "Reset your password"
+    button:
+      submit: "Baguhin ang password"
 apk:
   download: Download as app
   prepare: 'Get as app'
@@ -448,6 +497,9 @@ time:
   years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
 failure:
   upload: There was an error during the upload of your app.
+user:
+  verification:
+    email: 'Verify your email'
 api:
   registerUser:
     emailMissing: 'Email missing'
@@ -553,9 +605,9 @@ codeview:
   scenes: 'Scenes'
   scripts: 'Scripts'
   bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  objects: 'Aktor at mga bagay'
+  looks: 'Larawan'
+  sounds: 'Tunog'
   globals: 'Globals'
   locals: 'Locals'
   globalVariables: 'Global variables'
@@ -577,13 +629,13 @@ codeStatistics:
   controlBricks: 'Control'
   motionBricks: 'Motion'
   soundBricks: 'Sound'
-  looksBricks: 'Looks'
+  looksBricks: 'Larawan'
   penBricks: 'Pen'
   dataBricks: 'Data'
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Lengguahe
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
@@ -621,7 +673,7 @@ catro-notifications:
 clipboard:
   success: Link to project copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Sunod
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -668,7 +720,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'bago'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -783,7 +835,7 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_description: 'Paglalarawan'
       toggle_allow_comments: 'Comments'
       toggle_privacy: 'Public'
 media_library:
@@ -795,3 +847,5 @@ media_library:
       sound: 'Type: sound'
       movie: 'Type: video'
       default: 'Type: unknown'
+snackbar:
+  project_not_found: 'The requested project is not available'

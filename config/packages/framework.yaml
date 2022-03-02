@@ -15,5 +15,5 @@ framework:
     #        cookie_samesite: lax
 
     assets:
-        version_strategy: 'catrobat.versioning'
+        version_strategy: App\Application\Framework\VersionStrategy
         json_manifest_path: null

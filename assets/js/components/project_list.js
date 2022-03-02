@@ -4,18 +4,19 @@ import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar
 require('../../styles/components/project_list.scss')
 
 export class ProjectList {
-  constructor (container, category, apiUrl, propertyToShow, theme) {
+  constructor (container, category, apiUrl, propertyToShow, theme, fetchCount = 30, emptyMessage = '') {
     this.container = container
     this.projectsContainer = $('.projects-container', container)
     this.category = category
     this.apiUrl = apiUrl
     this.propertyToShow = propertyToShow
     this.projectsLoaded = 0
-    this.projectFetchCount = 30
+    this.projectFetchCount = fetchCount
     this.empty = false
     this.fetchActive = false
     this.isFullView = false
     this.theme = theme
+    this.emptyMessage = emptyMessage
 
     this.$title = $('.project-list__title', $(this.container))
     this.$body = $('body')
@@ -26,17 +27,22 @@ export class ProjectList {
       self.closeFullView()
     }
 
-    this.fetchMore()
+    this.fetchMore(true)
     this._initListeners()
   }
 
-  fetchMore () {
+  fetchMore (clear = false) {
     if (this.empty === true || this.fetchActive === true) {
       return
     }
 
     this.fetchActive = true
     const self = this
+
+    if (!this.apiUrl.includes('?')) {
+      this.apiUrl += '?'
+    }
+
     $.getJSON(this.apiUrl + '&limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded,
       function (data) {
         if (!Array.isArray(data)) {
@@ -44,6 +50,11 @@ export class ProjectList {
           self.container.classList.remove('loading')
           return
         }
+
+        if (clear) {
+          self.projectsContainer.empty()
+        }
+
         data.forEach(function (project) {
           project = self._generate(project)
           self.projectsContainer.append(project)
@@ -63,14 +74,18 @@ export class ProjectList {
         self.projectsLoaded += data.length
 
         if (self.projectsLoaded === 0) {
-          self.container.classList.add('empty')
           this.empty = true
+          if (self.emptyMessage) {
+            self.projectsContainer.append(self.emptyMessage)
+            self.container.classList.add('empty-with-text')
+          } else {
+            self.container.classList.add('empty')
+          }
         }
 
         self.fetchActive = false
       }).fail(function (jqXHR, textStatus, errorThrown) {
       console.error('Failed loading projects in category ' + self.category, JSON.stringify(jqXHR), textStatus, errorThrown)
-      alert('Error: Failed loading ' + self.category.replace('_', ' ') + ' projects')
       self.container.classList.remove('loading')
     })
   }

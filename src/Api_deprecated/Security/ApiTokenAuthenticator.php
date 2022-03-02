@@ -2,7 +2,7 @@
 
 namespace App\Api_deprecated\Security;
 
-use App\Entity\User;
+use App\DB\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
