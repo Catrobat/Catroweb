@@ -120,3 +120,63 @@ Feature: Project title, description and credits should be translatable via a but
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#program-translation-button" should be visible
+
+  Scenario: Use cached translation for title when description and credits not available
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description | cached_credits |
+      | 1          | ru              | en              | itranslate | 16          | cached project1 |                    |                |
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then the element "#remove-program-translation-button" should be visible
+    And the element "#name-translation" should be visible
+    And the "#name-translation" element should contain "cached project1"
+    And the element "#description" should be visible
+    And the "#description" element should contain "No description available."
+    And the element "#credits" should be visible
+    And the "#credits" element should contain "No notes and credits available."
+
+  Scenario: Use cached translation for title and description when available
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description  | cached_credits |
+      | 2          | ru              | en              | itranslate | 16          | cached project2 | cached description2 |                |
+    And I am on "/app/project/2"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then the element "#remove-program-translation-button" should be visible
+    And the element "#name-translation" should be visible
+    And the "#name-translation" element should contain "cached project2"
+    And the element "#description-translation" should be visible
+    And the "#description-translation" element should contain "cached description2"
+
+  Scenario: Use cached translation for title and credit when available
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description | cached_credits |
+      | 3          | ru              | en              | itranslate | 16          | cached project3 |                    | cached credit3 |
+    And I am on "/app/project/3"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then the element "#remove-program-translation-button" should be visible
+    And the element "#name-translation" should be visible
+    And the "#name-translation" element should contain "cached project3"
+    And the element "#credits-translation" should be visible
+    And the "#credits-translation" element should contain "cached credit3"
+
+  Scenario: Use cached translation for ttitle, description, and credit when available
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name     | cached_description  | cached_credits |
+      | 4          | ru              | en              | itranslate | 16          | cached project4 | cached description4 | cached credit4 |
+    And I am on "/app/project/4"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then the element "#remove-program-translation-button" should be visible
+    And the element "#name-translation" should be visible
+    And the "#name-translation" element should contain "cached project4"
+    And the element "#description-translation" should be visible
+    And the "#description-translation" element should contain "cached description4"
+    And the element "#credits-translation" should be visible
+    And the "#credits-translation" element should contain "cached credit4"

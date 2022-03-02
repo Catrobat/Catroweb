@@ -544,6 +544,7 @@ class ProgramController extends AbstractController
       'translated_description' => $translation_result[1] ? $translation_result[1]->translation : null,
       'translated_credit' => $translation_result[2] ? $translation_result[2]->translation : null,
       'provider' => $translation_result[0]->provider,
+      '_cache' => $translation_result[0]->cache,
     ]);
   }
 

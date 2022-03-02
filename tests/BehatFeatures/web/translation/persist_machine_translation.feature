@@ -55,6 +55,50 @@ Feature: Persist project and comment machine translation
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
 
+  Scenario: Create new entry for database cached program translation
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
+    And I switch the language to "French"
+    And I am on "/app/project/3"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then there should be project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
+      | 3          | en              | fr-FR           | db         | 1           |                     |                         |                    |
+
+  Scenario: Increment usage count for database cached program translation
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
+      | 3          | en              | fr-FR           | db         | 1           |                     |                         |                    |
+    And I switch the language to "French"
+    And I am on "/app/project/3"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then there should be project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
+      | 3          | en              | fr-FR           | db         | 2           |                     |                         |                    |
+
+  Scenario: Do not cache "cached" program translation
+    Given there are project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
+      | 3          | en              | fr-FR           | db         | 16          |                     |                         |                    |
+    And I switch the language to "French"
+    And I am on "/app/project/3"
+    And I wait for the page to be loaded
+    When I click "#program-translation-button"
+    And I wait for AJAX to finish
+    Then there should be project machine translations:
+      | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
+      | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
+      | 3          | en              | fr-FR           | db         | 17          |                     |                         |                    |
+
   Scenario: Create new entry the first time a comment is translated
     Given there are comment machine translations:
       | comment_id | source_language | target_language | provider | usage_count |

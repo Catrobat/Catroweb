@@ -5,15 +5,19 @@ namespace App\System\Testing;
 use App\DB\Entity\Project\Program;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
-use InvalidArgumentException;
 
 class FakeTranslationDelegate extends TranslationDelegate
 {
   /**
-   * @throws InvalidArgumentException
+   * {@inheritDoc}
    */
   public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
   {
+    $cached_result = $this->getCachedProjectTranslation($project, $source_language, $target_language);
+    if (null !== $cached_result) {
+      return $cached_result;
+    }
+
     $to_translate = [$project->getName(), $project->getDescription(), $project->getCredits()];
     $translation_result = [];
 
@@ -37,7 +41,7 @@ class FakeTranslationDelegate extends TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * {@inheritDoc}
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
