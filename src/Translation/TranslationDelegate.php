@@ -163,7 +163,9 @@ class TranslationDelegate
 
   private function internalTranslate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
-    foreach ($this->apis as $api) {
+    $apis = $this->orderApi($text, $source_language, $target_language);
+
+    foreach ($apis as $api) {
       $translation = $api->translate($text, $source_language, $target_language);
 
       if (null != $translation) {
@@ -172,6 +174,18 @@ class TranslationDelegate
     }
 
     return null;
+  }
+
+  private function orderApi(string $text, ?string $source_language, string $target_language): array
+  {
+    $apis = $this->apis;
+
+    usort($apis, function (TranslationApiInterface $api_1, TranslationApiInterface $api_2) use ($text, $source_language, $target_language) {
+      return -($api_1->getPreference($text, $source_language, $target_language) <=>
+        $api_2->getPreference($text, $source_language, $target_language));
+    });
+
+    return $apis;
   }
 
   private function validateLanguage(?string $language): void
