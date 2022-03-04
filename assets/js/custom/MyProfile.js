@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import Swal from 'sweetalert2'
-import { deleteCookie } from './CookieHelper'
+import { deleteCookie } from '../security/CookieHelper'
 
 /**
  * @deprecated
@@ -141,7 +141,6 @@ export const MyProfile = function (
             case statusCodeOk:
               window.location.href = routingDataset.index
               deleteCookie('BEARER', routingDataset.baseUrl + '/')
-              deleteCookie('LOGGED_IN', routingDataset.baseUrl + '/')
           }
         })
       }

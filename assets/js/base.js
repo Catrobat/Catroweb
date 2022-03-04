@@ -4,9 +4,9 @@ import textFillDefault from './components/text_fill_default'
 import './layout/top_bar'
 import './layout/footer'
 import './layout/sidebar'
-import { TokenExpirationHandler } from './custom/TokenExpirationHandler'
+import { TokenExpirationHandler } from './security/TokenExpirationHandler'
 import { showSnackbar } from './components/snackbar'
-import { LogoutTokenHandler } from './custom/LogoutTokenHandler'
+import { LogoutTokenHandler } from './security/LogoutTokenHandler'
 
 // Start the stimulus app
 import './bootstrap'
@@ -23,7 +23,7 @@ $(() => {
 })
 
 function showFlashSnackbar () {
-  const snackbarFlashMessages = document.getElementsByClassName('js-snackbar')
+  const snackbarFlashMessages = document.getElementsByClassName('js-flash-snackbar')
   Array.from(snackbarFlashMessages).forEach((jsMsgObj) => {
     showSnackbar('#share-snackbar', jsMsgObj.dataset.msg)
   })

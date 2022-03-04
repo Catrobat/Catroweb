@@ -118,13 +118,15 @@
       </a>
     </li>
 
-    {# logout #}
-    <li class="nav-item" id="logout-nav-item">
-      <a class="nav-link" href="#" id="btn-logout" data-logout-path="{{ url('logout') }}">
-        <span class="sidebar-link-icon material-icons ">exit_to_app</span>
-        <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, "catroweb") }}</span>
-      </a>
-    </li>
+    {% if not isWebview() and app.user %}
+      {# logout #}
+      <li class="nav-item" id="logout-nav-item">
+        <a class="nav-link" href="#" id="btn-logout" data-logout-path="{{ url('logout') }}">
+          <span class="sidebar-link-icon material-icons ">exit_to_app</span>
+          <span class="sidebar-link-text">{{ 'menu.logout'|trans({}, "catroweb") }}</span>
+        </a>
+      </li>
+    {% endif %}
   </ul>
   <ul class="list-unstyled">
     {% if sidebar_ul is not empty %}

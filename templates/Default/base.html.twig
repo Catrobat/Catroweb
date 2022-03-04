@@ -50,7 +50,7 @@
 <div class="js-app-env" data-app-env="'{{ app_env }}"></div>
 <div class="js-user-state" data-is-user-logged-in="{{ app.user != null }}"></div>
 {% for snackbarMsg in app.flashes('snackbar') %}
-  <div class="js-snackbar" data-msg="{{ snackbarMsg }}"></div>
+  <div class="js-flash-snackbar" data-msg="{{ snackbarMsg }}"></div>
 {% endfor %}
 <div id="js-api-routing"
      data-base-url="{{ app.request.baseUrl }}"

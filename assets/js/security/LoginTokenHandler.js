@@ -18,31 +18,35 @@ export class LoginTokenHandler {
     const self = this
     document.getElementById('login-form').addEventListener('submit', function (event) {
       event.preventDefault()
-      const data = JSON.stringify({
+      self.login({
         username: document.getElementById('username__input').value,
         password: document.getElementById('password__input').value
       })
-
-      self.login(data)
     })
   }
 
   login (data) {
-    const self = this
-    const xhr = new XMLHttpRequest()
-    xhr.open('POST', self.authenticationPath, true)
-    xhr.setRequestHeader('Content-Type', 'application/json')
-    xhr.addEventListener('readystatechange', function () {
-      if (this.readyState === this.DONE) {
-        if (this.status === 200) {
-          setCookie('LOGGED_IN', 'true', 'Tue, 19 Jan 2038 00:00:01 GMT', self.baseUrl + '/')
-          window.location.href = self.getRedirectUri()
-        } else {
-          document.getElementById('login-alert').style.display = 'block'
-        }
+    // eslint-disable-next-line no-undef
+    fetch(this.authenticationPath, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    }).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      }
+    }).then(data => {
+      setCookie('BEARER', data.token, 'Tue, 19 Jan 2038 00:00:01 GMT', this.baseUrl + '/')
+      setCookie('REFRESH_TOKEN', data.refresh_token, 'Tue, 19 Jan 2038 00:00:01 GMT', this.baseUrl + '/')
+      window.location.href = this.getRedirectUri()
+    }).catch(() => {
+      const element = document.getElementById('login-alert')
+      if (element) {
+        element.style.display = 'block'
       }
     })
-
-    xhr.send(data)
   }
 }
