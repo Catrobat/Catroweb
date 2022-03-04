@@ -193,6 +193,7 @@ programs:
   hideTranslation: 隱藏翻譯
   translatedByLine: 由 %provider% 從 %sourceLanguage% 翻譯成 %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: 默認
   save: 存檔
 remixGraph:

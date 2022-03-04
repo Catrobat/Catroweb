@@ -193,6 +193,7 @@ programs:
   hideTranslation: 翻訳を隠す
   translatedByLine: '%provider%を%sourceLanguage%から%targetLanguage%に翻訳'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: デフォルト
   save: 保存
 remixGraph:

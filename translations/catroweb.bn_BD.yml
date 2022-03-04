@@ -193,6 +193,7 @@ programs:
   hideTranslation: অনুবাদ লুকান
   translatedByLine: '%provider% %sourceLanguage% থেকে %targetLanguage% দ্বারা অনুবাদিত'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: পূর্ব-নির্ধারিত
   save: সংরক্ষণ করুন
 remixGraph:

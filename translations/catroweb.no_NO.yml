@@ -193,6 +193,7 @@ programs:
   hideTranslation: Skjul oversettelse
   translatedByLine: Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: Default
   save: Save
 remixGraph:

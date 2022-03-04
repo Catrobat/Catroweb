@@ -193,6 +193,7 @@ programs:
   hideTranslation: Fshihe përkthimin
   translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: Default
   save: Ruaj
 remixGraph:

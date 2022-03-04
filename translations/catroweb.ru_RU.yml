@@ -193,6 +193,7 @@ programs:
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
   translationUpdated: Изменения для %language% были применены
+  googleTranslate: Google Переводчик
   default: По умолчанию
   save: Сохранить
 remixGraph:

@@ -192,6 +192,7 @@ programs:
   hideTranslation: ژباړه پټ کړئ
   translatedByLine: '%provider%لخوا ژباړل شوی له %sourceLanguage% څخه تر %targetLanguage%'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: ډیفالټ
   save: خوندي کړئ
 remixGraph:

@@ -193,6 +193,7 @@ programs:
   hideTranslation: ترجمہ چھپائیں
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: پہلے سے طے شدہ
   save: محفوظ کریں
 remixGraph:

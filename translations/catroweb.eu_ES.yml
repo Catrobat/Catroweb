@@ -193,6 +193,7 @@ programs:
   hideTranslation: Ezkutatu itzulpena
   translatedByLine: '%sourceLanguage%-(e)tik %targetLanguage%-(e)ra %provider%-(e)k itzulita.'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: Default
   save: Gorde
 remixGraph:
