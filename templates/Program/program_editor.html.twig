@@ -16,7 +16,7 @@
               </i>
             </span>
             <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-name-text" name="edit-name-text" title="_edit-text"
-                      maxlength="{{ max_name_size }}" style="width: 100%" rows="1" cols="100">
+                      maxlength="{{ max_name_size }}" style="width: 100%" rows="1" cols="1000">
             </textarea>
           </span>
           <span class="mdc-line-ripple"></span>
@@ -36,7 +36,7 @@
               </i>
             </span>
             <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-description-text" name="edit-description-text" title="_edit-text"
-                      maxlength="{{ max_description_size }}" style="width: 100%" rows="7" cols="100">
+                      maxlength="{{ max_description_size }}" style="width: 100%" rows="7" cols="1000">
             </textarea>
           </span>
           <span class="mdc-line-ripple"></span>
@@ -57,46 +57,51 @@
               </i>
             </span>
             <textarea class="mdc-text-field__input mt-2 mb-2" id="edit-credits-text" name="edit-credits-text" title="_edit-text"
-                      maxlength="{{ max_description_size }}" style="width: 100%" rows="7" cols="100">
+                      maxlength="{{ max_description_size }}" style="width: 100%" rows="7" cols="1000">
             </textarea>
           </span>
           <span class="mdc-line-ripple"></span>
         </label>
 
-        <div class="row justify-content-between" style="margin-top: 1rem; padding-right: 0.75rem;">
-          <div class="form-group col-8">
-            <div id="edit-language-selector" class="mdc-select mdc-select--outlined">
-              <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-                <span class="mdc-notched-outline">
-                  <span class="mdc-notched-outline__leading"></span>
-                  <span class="mdc-notched-outline__notch">
-                    <span class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
-                  </span>
-                  <span class="mdc-notched-outline__trailing"></span>
+        <div class="row justify-content-between" style="margin-top: 1rem;">
+          <div id="edit-language-selector" class="mdc-select mdc-select--outlined">
+            <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
+              <span class="mdc-notched-outline">
+                <span class="mdc-notched-outline__leading"></span>
+                <span class="mdc-notched-outline__notch">
+                  <span class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
                 </span>
-                <span class="mdc-select__selected-text-container">
-                  <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
-                </span>
-                <span class="mdc-select__dropdown-icon">
-                  {% include 'components/mdc_select_svg.html.twig' %}
-                </span>
-              </div>
-              <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-                <ul id="edit-language-selector-list" class="mdc-list" role="listbox">
-                  <li class="mdc-list-item" data-value="default" role="option">
-                      <span class="mdc-list-item__ripple"></span>
-                      <span class="mdc-list-item__text">
-                        {{ "programs.default"|trans({}, "catroweb") }}
-                      </span>
-                  </li>
-                </ul>
-              </div>
+                <span class="mdc-notched-outline__trailing"></span>
+              </span>
+              <span class="mdc-select__selected-text-container">
+                <span id="edit-selected-language" class="mdc-select__selected-text" data-selected-value="default"></span>
+              </span>
+              <span class="mdc-select__dropdown-icon">
+                {% include 'components/mdc_select_svg.html.twig' %}
+              </span>
+            </div>
+            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
+              <ul id="edit-language-selector-list" class="mdc-list" role="listbox">
+                <li class="mdc-list-item" data-value="default" role="option">
+                    <span class="mdc-list-item__ripple"></span>
+                    <span class="mdc-list-item__text">
+                      {{ "programs.default"|trans({}, "catroweb") }}
+                    </span>
+                </li>
+              </ul>
             </div>
           </div>
+        </div>
 
-          <button id="edit-submit-button" class="btn btn-primary p-3 col-4">
+        <div class="justify-content-between" style="margin-top: 1rem; float: right;">
+          <button id="edit-cancel-button" class="btn btn-primary" style="padding: 10px;">
+            <i class="material-icons align-bottom">cancel</i>
+            {{ "cancel"|trans({}, "catroweb") }}
+          </button>
+
+          <button id="edit-submit-button" class="btn btn-primary" style="padding: 10px;">
             <i class="material-icons align-bottom">save</i>
-            {{ 'programs.save'|trans({}, 'catroweb') }}
+            {{ "programs.save"|trans({}, "catroweb") }}
           </button>
         </div>
       </div>
