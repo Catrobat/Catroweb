@@ -14,8 +14,8 @@ const $userShare = $('.js-user-share')
 
 shareLink(
   $userShare.data('theme-display-name'),
-  $userShare.data('trans-check-out-project'),
-  $userShare.data('project-url'),
+  $userShare.data('trans-check-out-user'),
+  $userShare.data('user-url'),
   $userShare.data('trans-share-success'),
   $userShare.data('trans-share-error'),
   $userShare.data('trans-copy'),
