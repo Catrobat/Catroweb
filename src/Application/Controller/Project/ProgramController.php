@@ -260,6 +260,15 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @Route("/search_new/{q}", name="search_new", requirements={"q": ".+"}, methods={"GET"})
+   * @Route("/search_new/", name="empty_search_new", defaults={"q": null}, methods={"GET"})
+   */
+  public function searchNewAction(string $q): Response
+  {
+    return $this->render('Search/searchNew.html.twig', ['q' => $q]);
+  }
+
+  /**
    * @Route("/userDeleteProject/{id}", name="profile_delete_program", methods={"GET"})
    *
    * @throws Exception

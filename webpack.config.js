@@ -87,6 +87,7 @@ Encore
   .addEntry('profile', './assets/js/profile.js')
   .addEntry('project', './assets/js/project.js')
   .addEntry('search', './assets/js/search.js')
+  .addEntry('search_new', './assets/js/search_new.js')
   .addEntry('media_library', './assets/js/media_library.js')
   .addEntry('login', './assets/js/login.js')
   .addEntry('register', './assets/js/register.js')

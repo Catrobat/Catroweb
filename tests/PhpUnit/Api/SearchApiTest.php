@@ -89,7 +89,7 @@ class SearchApiTest extends DefaultTestCase
 
     $response = $this->object->searchGet('query', 'type', null, null, $response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
-    $this->assertNull($response);
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertIsArray($response);
   }
 }
