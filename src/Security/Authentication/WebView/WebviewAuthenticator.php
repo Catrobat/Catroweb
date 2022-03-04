@@ -3,11 +3,10 @@
 namespace App\Security\Authentication\WebView;
 
 use App\DB\Entity\User\User;
-use App\Security\Authentication\CookieService;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
@@ -137,9 +136,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
-    $this->logger->error('Legacy Webview Authentication failed (start): '.$exception->getMessage());
-
-    return $this->getAuthenticateRedirect($request);
+    throw new HttpException(Response::HTTP_UNAUTHORIZED, $exception->getMessage(), null, [], Response::HTTP_UNAUTHORIZED);
   }
 
   /**
@@ -149,9 +146,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function start(Request $request, AuthenticationException $authException = null)
   {
-    $this->logger->warning('Legacy Webview Authentication failed (start): '.$authException->getMessage());
-
-    return $this->getAuthenticateRedirect($request);
+    throw new AuthenticationException($authException->getMessage());
   }
 
   /**
@@ -168,14 +163,5 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   private function hasValidTokenCookieSet(Request $request)
   {
     return $request->cookies->has(self::COOKIE_TOKEN_KEY) && '' !== $request->cookies->get(self::COOKIE_TOKEN_KEY);
-  }
-
-  protected function getAuthenticateRedirect(Request $request): RedirectResponse
-  {
-    CookieService::clearCookie('LOGGED_IN');
-    CookieService::clearCookie('CATRO_LOGIN_TOKEN');
-    $request->getSession()->invalidate();
-
-    return new RedirectResponse($this->url_generator->generate('login', ['theme' => 'app']));
   }
 }

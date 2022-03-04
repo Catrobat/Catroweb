@@ -1,7 +1,7 @@
 import { showSnackbar } from '../../components/snackbar'
 import { showValidationMessage } from '../../components/text_field'
 import { AjaxController } from '../ajax_controller'
-import { LoginTokenHandler } from '../../custom/LoginTokenHandler'
+import { LoginTokenHandler } from '../../security/LoginTokenHandler'
 
 export default class extends AjaxController {
 
@@ -32,7 +32,7 @@ export default class extends AjaxController {
 
     if (response.status === 201) {
       const loginTokenHandler = new LoginTokenHandler()
-      loginTokenHandler.login(JSON.stringify(data))
+      loginTokenHandler.login(data)
       return
     }
 

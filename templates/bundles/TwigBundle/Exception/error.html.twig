@@ -1,7 +1,0 @@
-{% extends 'Default/base.html.twig' %}
-
-{% block body %}
-{#  <h2>{{ "somethingWentWrong"|trans({}, "catroweb") }}</h2>#}
-{#  <h2>{{ "pleaseTryAgain"|trans({}, "catroweb") }}</h2>#}
-  <p>Error {{ status_code|default("unknown")}}: {% if exception %}{{ exception.message | default('') | nl2br }}{% endif %}</p>
-{% endblock %}

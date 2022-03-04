@@ -49,8 +49,9 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I should be on "/app/login"
     And I should see 1 "#password__input"
 
-  Scenario: Logout button should be hidden
+  Scenario: Logout button should be hidden in webview
     Given I use a valid JWT token for "WebViewUser"
+    And I use a release build of the Catroid app
     And I am on the homepage
     And I wait for the page to be loaded
     And I open the menu

@@ -10,7 +10,7 @@ Feature: As a visitor I want to see scratch projects
 
   Scenario: Visiting a not existing Scratch program
     Given I am on "/app/scratch/project/1"
-    Then the response status code should be 404
+    Then I should be on "/app/"
     And there should be "0" programs in the database
     And there should be "0" users in the database
 
