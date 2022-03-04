@@ -193,6 +193,7 @@ programs:
   hideTranslation: Tərcüməni gizlət
   translatedByLine: '%sourceLanguage% dilindən %targetLanguage% dilinə %provider% tərcümə etdi'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: Default
   save: Saxla
 remixGraph:

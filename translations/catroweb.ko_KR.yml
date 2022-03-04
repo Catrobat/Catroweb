@@ -192,6 +192,7 @@ programs:
   hideTranslation: 번역 숨기기
   translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: 기본값
   save: 저장
 remixGraph:

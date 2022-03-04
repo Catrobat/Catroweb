@@ -193,6 +193,7 @@ programs:
   hideTranslation: Übersetzung ausblenden
   translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: Standard
   save: Speichern
 remixGraph:

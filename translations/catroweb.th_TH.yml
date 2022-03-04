@@ -195,6 +195,7 @@ programs:
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
   translationUpdated: การเปลี่ยนแปลงสำหรับการแปลเป็น %language% อัพเดท
+  googleTranslate: Google แปลภาษา
   default: ค่าเริ่มต้น
   save: บันทึก
 remixGraph:

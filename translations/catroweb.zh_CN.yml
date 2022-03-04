@@ -173,8 +173,8 @@ programs:
   deleted_popup: 评论已成功删除。
   deleted_popup_header: 已删除
   noAdminRights: 您没有管理员权限。请以管理员身份登录。
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: 编辑项目
+  closeProjectEditor: 关闭项目编辑器
   closeEditorPrompt: 您要保存这些更改吗？
   saveOnLanguageChange: 是否保存当前更改？
   btnKeep: 保存更改
@@ -192,7 +192,8 @@ programs:
   showTranslation: 显示翻译
   hideTranslation: 隐藏翻译
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
-  translationUpdated: Changes for the translation to %language% updated
+  translationUpdated: 修改后的%language%翻译已更新
+  googleTranslate: 谷歌翻译
   default: 默认
   save: 保存
 remixGraph:

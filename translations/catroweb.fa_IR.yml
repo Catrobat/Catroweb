@@ -193,6 +193,7 @@ programs:
   hideTranslation: پنهان‌کردن ترجمه
   translatedByLine: ترجمه شده توسط%provider% %sourceLanguage% به %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: پیش فرض
   save: ذخيره
 remixGraph:
