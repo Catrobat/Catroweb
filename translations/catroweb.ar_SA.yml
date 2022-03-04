@@ -193,6 +193,7 @@ programs:
   hideTranslation: إخفاء الترجمة
   translatedByLine: تمت ترجمته بواسطة%provider% من%sourceLanguage% إلى %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: افتراضي
   save: حفظ
 remixGraph:

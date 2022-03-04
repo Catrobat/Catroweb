@@ -1,9 +1,9 @@
 import $ from 'jquery'
-import { Translation, ByLineElementContainer } from './Translation'
+import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateProgram extends Translation {
-  constructor (translatedByLine, programId, hasDescription, hasCredit) {
-    super(translatedByLine)
+  constructor (translatedByLine, googleTranslateDisplayName, programId, hasDescription, hasCredit) {
+    super(translatedByLine, googleTranslateDisplayName)
     this.programId = programId
     this.hasDescription = hasDescription
     this.hasCredit = hasCredit

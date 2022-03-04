@@ -13,7 +13,7 @@ education: Edukacja
 chat: Czat i fora
 others: Inne
 tutorials: Poradniki
-googlePlay: Google Play
+googlePlay: Sklep Google Play
 iosAppStore: Sklep iOS App
 huaweiAppGallery: Galeria Huawei
 instagram: Instagram
@@ -193,6 +193,7 @@ programs:
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
   translationUpdated: Zaktualizowano zmiany dla tłumaczenia na %language%
+  googleTranslate: Tłumacz Google
   default: Domyślny
   save: Zapisz
 remixGraph:

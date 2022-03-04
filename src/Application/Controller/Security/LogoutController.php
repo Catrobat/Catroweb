@@ -11,11 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class LogoutController extends AbstractController
 {
   /**
-   * @Route("/logout", name="logout", methods={"GET"})
+   * @Route("/logout", name="logout")
    */
   public function logoutAction(Request $request): RedirectResponse
   {
-    CookieService::clearCookie('LOGGED_IN');
     CookieService::clearCookie('BEARER');
     CookieService::clearCookie('REFRESH_TOKEN');
     $this->get('security.token_storage')->setToken();

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Security\Authentication;
+namespace App\Api\Services\Authentication;
 
 use Gesdinet\JWTRefreshTokenBundle\Service\RefreshToken;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class JWTTokenRefreshService
 {
@@ -14,12 +15,7 @@ class JWTTokenRefreshService
     $this->refreshToken = $refreshToken;
   }
 
-  /**
-   * Refresh token.
-   *
-   * @return mixed
-   */
-  public function refresh(Request $request)
+  public function refresh(Request $request): Response
   {
     if ($bearer = $request->cookies->get('REFRESH_TOKEN')) {
       $request->request->set('refresh_token', $bearer);

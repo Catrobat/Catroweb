@@ -31,7 +31,7 @@ name: Название
 description: Описание
 noDescription: Описание отсутствует.
 credits: Примечания и авторы
-noCredits: Нету примечаний и информации об авторах
+noCredits: Нет примечаний и упоминаний об авторах
 notesAndCreditsDescription: Как вы создали этот проект? Вы заимствовали идеи, скрипты или изображения у других людей? Поблагодарите их здесь.
 country: Страна
 loginText: Войти
@@ -193,6 +193,7 @@ programs:
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
   translationUpdated: Изменения для %language% были применены
+  googleTranslate: Google Переводчик
   default: По умолчанию
   save: Сохранить
 remixGraph:
@@ -572,8 +573,8 @@ language:
   ukrainian: Украинский
   vietnamese: Вьетнамский
 ci:
-  generate: Генерировать Apk
-  pending: Генерирование Apk
+  generate: Сгенерировать apk
+  pending: Генерация apk
   download: Скачать Apk
 admin:
   maintain:
@@ -583,16 +584,16 @@ admin:
     removableObjects: Удаляемые объекты
 recommender:
   similarPrograms: Похожие проекты
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также загружены
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также скачали
   moreFromThisUser: Ещё от %username%
 pmd:
   submitBtn: Отправьте ваш проект
   submitBox:
     header: Отправка
-    text: Чтобы отправить ваш проект, введите код проекта и нажмите "отослать".
+    text: Чтобы отправить ваш проект, введите код проекта и нажмите "Отправить".
     btnText: Отправить
   successful:
-    text: Ваш проект загружен успешно.
+    text: Загрузка вашего проекта прошла успешно.
   failed:
     text: Не удалось загрузить проект.
 codeview:
@@ -600,7 +601,7 @@ codeview:
   showCode: 'Показать код'
   hideCode: 'Скрыть код'
   showStatistics: 'Показать статистику кода'
-  hideStatistics: 'Скрыть статистику по коду'
+  hideStatistics: 'Скрыть статистику кода'
   cantDisplayCode: "Код не может быть отображен"
   cantDisplayStatistics: "Код не может быть отображен"
   totalNumberOf: 'Общее количество'
@@ -704,9 +705,9 @@ profileLoader:
 element: 'Элемент'
 elements: 'Элементы'
 share:
-  text: 'Опубликовать'
-  error: 'Ошибка публикации'
-  success: 'Публикация завершена'
+  text: 'Поделиться'
+  error: 'Не удалось поделиться'
+  success: 'Спасибо, что поделились!'
 copy: 'Скопировать ссылку'
 checkOutProject: 'Посмотреть проект:'
 community: 'Сообщество Catrobat'

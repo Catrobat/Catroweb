@@ -193,6 +193,7 @@ programs:
   hideTranslation: ਅਨੁਵਾਦ ਲੁਕਾਓ
   translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: ਮੂਲ
   save: ਸੇਵ
 remixGraph:

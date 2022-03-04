@@ -193,6 +193,7 @@ programs:
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: पूर्व निर्धारित
   save: सहेजें
 remixGraph:

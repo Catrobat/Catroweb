@@ -168,6 +168,7 @@ class CommentsController extends AbstractController
       'target_language' => $target_language,
       'translation' => $translation_result->translation,
       'provider' => $translation_result->provider,
+      '_cache' => null,
     ]);
   }
 }

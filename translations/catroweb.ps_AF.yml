@@ -192,6 +192,7 @@ programs:
   hideTranslation: ژباړه پټ کړئ
   translatedByLine: '%provider%لخوا ژباړل شوی له %sourceLanguage% څخه تر %targetLanguage%'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: ډیفالټ
   save: خوندي کړئ
 remixGraph:
@@ -491,7 +492,7 @@ success:
   imgUpload: ستاسو عکس په بریالیتوب سره پورته شو!
   report: ستاسو راپور په بریالیتوب سره واستول شو!
 time:
-  minutes.ago: '{0} < 1 دقیقه وړاندې |{1}1 دقیقه وړاندې'
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 ساعت وړاندې'
   days.ago: '{1}1 ورځ وړاندې |]1,Inf] %count% ورځې وړاندې'
   months.ago: '{1}1 میاشت وړاندې |]1,Inf] %count% میاشتې مخکې'

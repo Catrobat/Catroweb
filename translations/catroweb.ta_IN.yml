@@ -193,6 +193,7 @@ programs:
   hideTranslation: மொழிபெயர்ப்பை மறை
   translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: இயல்புநிலை
   save: சேமி
 remixGraph:

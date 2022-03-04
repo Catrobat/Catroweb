@@ -193,6 +193,7 @@ programs:
   hideTranslation: అనువాదాన్ని దాచు
   translatedByLine: ద్వారా అనువదించబడింది %provider% నుండి %sourceLanguage% కు %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
   default: Default
   save: Save
 remixGraph:

@@ -89,6 +89,10 @@ export function ProjectEditorTextField (projectDescriptionCredits, programId, pr
     }
   }
 
+  this.cancelChanges = () => {
+    this.editText.val(this.lastSavedText)
+  }
+
   this.getNewText = (language) => {
     hideError()
     if (language === 'default') {

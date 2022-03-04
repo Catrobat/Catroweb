@@ -193,6 +193,7 @@ programs:
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
   translationUpdated: '%language% çevirisi için yapılan değişiklikler güncellendi'
+  googleTranslate: Google Translate
   default: Varsayılan
   save: Kaydet
 remixGraph:

@@ -140,7 +140,7 @@ class OAuthService
       $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $gPlusId, $username, $gLocale);
       $this->setGoogleTokens($user, null, null, $id_token);
     } else {
-      $this->registerGoogleUser($request, $retArray, $gPlusId, $username, $gEmail, $gLocale, $id_token);
+      $this->registerGoogleUser($request, $retArray, $gPlusId, $username, $gEmail, $id_token);
       $retArray['statusCode'] = 201;
     }
 
@@ -239,8 +239,7 @@ class OAuthService
    * @throws Exception
    */
   private function registerGoogleUser(Request $request, array &$retArray, string $googleId,
-                                      string $googleUsername, string $googleEmail,
-                                      string $locale, ?string $id_token = null): void
+                                      string $googleUsername, string $googleEmail, ?string $id_token = null): void
   {
     if ($this->user_manager->findUserByUsername($googleUsername)) {
       $username = PasswordGenerator::generateRandomPassword();

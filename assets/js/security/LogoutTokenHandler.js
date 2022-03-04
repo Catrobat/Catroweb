@@ -11,12 +11,15 @@ export class LogoutTokenHandler {
   initListeners () {
     const self = this
     const logoutButton = document.getElementById('btn-logout')
+    if (!logoutButton) {
+      return
+    }
     logoutButton.onclick = function () {
       const xhr = new XMLHttpRequest()
       xhr.addEventListener('readystatechange', function () {
         if (this.readyState === this.DONE) {
           deleteCookie('BEARER', self.baseUrl + '/')
-          deleteCookie('LOGGED_IN', self.baseUrl + '/')
+          deleteCookie('REFRESH_TOKEN', self.baseUrl + '/')
           if (logoutButton.dataset && logoutButton.dataset.logoutPath) {
             window.location.href = logoutButton.dataset.logoutPath
           }
