@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -17,15 +16,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ExceptionListener
 {
   protected LoggerInterface $logger;
-  protected LoggerInterface $notfoundLogger;
+  protected LoggerInterface $softLogger;
   protected TranslatorInterface $translator;
   protected ParameterBagInterface $parameter_bag;
   protected UrlGeneratorInterface $url_generator;
 
-  public function __construct(LoggerInterface $logger, LoggerInterface $notfoundLogger, TranslatorInterface $translator, ParameterBagInterface $parameter_bag, UrlGeneratorInterface $url_generator)
+  public function __construct(LoggerInterface $logger, LoggerInterface $softLogger, TranslatorInterface $translator, ParameterBagInterface $parameter_bag, UrlGeneratorInterface $url_generator)
   {
     $this->logger = $logger;
-    $this->notfoundLogger = $notfoundLogger;
+    $this->softLogger = $softLogger;
     $this->translator = $translator;
     $this->parameter_bag = $parameter_bag;
     $this->url_generator = $url_generator;
@@ -34,9 +33,6 @@ class ExceptionListener
   public function onKernelException(ExceptionEvent $event): ?Response
   {
     $exception = $event->getThrowable();
-    if ($exception instanceof NotFoundHttpException) {
-      $this->notfoundLogger->warning($this->getHttpLogMsg($exception));
-    }
 
     $themes = explode('|', strval($this->parameter_bag->get('themeRoutes')));
     $request = $event->getRequest();
@@ -55,6 +51,7 @@ class ExceptionListener
     }
 
     if ($exception instanceof NotFoundHttpException) {
+      $this->softLogger->error('Http '.$exception->getStatusCode().': '.$exception->getMessage());
       /** @var Session $session */
       $session = $event->getRequest()->getSession();
       $session->getFlashBag()->add('snackbar', $this->translator->trans('doesNotExist', [], 'catroweb'));
@@ -73,11 +70,6 @@ class ExceptionListener
     }
 
     return $event->getResponse();
-  }
-
-  protected function getHttpLogMsg(HttpExceptionInterface $exception): string
-  {
-    return 'Http Error '.$exception->getStatusCode().': '.$exception->getMessage();
   }
 
   protected function isNoLegacyApiCall(string $requestUri, string $theme): bool
