@@ -39,6 +39,7 @@ privacyPolicy: গোপনীয়তার নীতি
 imprint: মুদ্রিত করা
 programDetails: বিস্তারিত
 somethingWentWrong: 'ওহো, কিছু ভুল হয়েছে'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'অনুগ্রহ করে আবার চেষ্টা করুন।'
 oldVersionError: 'দয়া করে নতুন পকেট কোড সংস্করণটি আপডেট করুন!'
 more: 'আরও'

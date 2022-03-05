@@ -39,6 +39,7 @@ privacyPolicy: Política de privacitat
 imprint: Peu d'impremta
 programDetails: Details
 somethingWentWrong: 'Ups... alguna cosa ha anat malament.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Torna-ho a provar!'
 oldVersionError: 'Actualitza a la nova versió de Pocket Code'
 more: 'més'

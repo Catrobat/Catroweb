@@ -39,6 +39,7 @@ privacyPolicy: Privatësia
 imprint: Ngulit
 programDetails: Detaje
 somethingWentWrong: 'Uuuuups diçka shkoj keq.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Ju lutemi provoni përsëri!'
 oldVersionError: 'Ju lutem merrni verionin më të ri të Pocket Code!'
 more: 'më shumë'

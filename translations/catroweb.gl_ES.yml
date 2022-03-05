@@ -39,6 +39,7 @@ privacyPolicy: Política de privacidade
 imprint: Aviso legal
 programDetails: Details
 somethingWentWrong: 'Algo non saíu ben.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Téntao de novo!'
 oldVersionError: 'Actualiza á nova versión de Pocket Code!'
 more: 'máis'

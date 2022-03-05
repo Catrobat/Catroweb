@@ -39,6 +39,7 @@ privacyPolicy: Patakaran sa Privacy
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Please try again!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'

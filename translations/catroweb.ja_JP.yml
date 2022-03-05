@@ -39,6 +39,7 @@ privacyPolicy: プライバシーポリシー
 imprint: インプリント
 programDetails: 詳細
 somethingWentWrong: '何か間違っています。'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'もう一度やり直してください。'
 oldVersionError: 'ポケット コードの最新のバージョンにアップデートしてください!'
 more: '詳細'

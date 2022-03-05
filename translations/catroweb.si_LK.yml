@@ -39,6 +39,7 @@ privacyPolicy: Privacy Policy
 imprint: Imprint
 programDetails: විස්තර
 somethingWentWrong: 'Ooooops something went wrong.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'කරුණාකර නැවත උත්සාහ කරන්න!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'more'

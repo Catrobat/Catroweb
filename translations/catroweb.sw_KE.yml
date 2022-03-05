@@ -39,6 +39,7 @@ privacyPolicy: Sera ya Faragha
 imprint: Imprint
 programDetails: Maelezo
 somethingWentWrong: 'Ooooops kitu kilienda vibaya.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Tafadhali jaribu tena!'
 oldVersionError: 'Tafadhali Sasisha toleo jipya zaidi la Msimbo Mfuko!'
 more: 'zaidi'

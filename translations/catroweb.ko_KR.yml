@@ -39,6 +39,7 @@ privacyPolicy: 개인 정보 보호 정책
 imprint: 표시하기
 programDetails: 세부 사항
 somethingWentWrong: '죄송합니다. 오류가 발생했습니다.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: '다시 시도하세요!'
 oldVersionError: '포켓코드를 최신 버전으로 업데이트 하시기 바랍니다!'
 more: '자세히'

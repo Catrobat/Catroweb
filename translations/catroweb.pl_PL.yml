@@ -39,6 +39,7 @@ privacyPolicy: Polityka prywatności
 imprint: Stopka
 programDetails: Szczegóły
 somethingWentWrong: 'Ups, coś poszło nie tak.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Spróbuj ponownie!'
 oldVersionError: 'Zaktualizuj do najnowszej wersji Pocket code!'
 more: 'więcej'

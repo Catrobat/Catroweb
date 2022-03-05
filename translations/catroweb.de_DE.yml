@@ -39,6 +39,7 @@ privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
 programDetails: Details
 somethingWentWrong: 'Ooooops etwas ging schief.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
 more: 'mehr'

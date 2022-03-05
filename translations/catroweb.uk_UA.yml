@@ -39,6 +39,7 @@ privacyPolicy: Політика конфіденційності
 imprint: Відомості
 programDetails: Подробиці
 somethingWentWrong: 'Упс, ось щось пішло не так.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
 oldVersionError: 'Будь ласка, оновіться до найновішої версії Pocket Code!'
 more: 'більше'

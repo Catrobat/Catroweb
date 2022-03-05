@@ -39,6 +39,7 @@ privacyPolicy: Πολιτική απορρήτου
 imprint: Εντύπωσε
 programDetails: Details
 somethingWentWrong: 'Ούπς, κάτι πήγε στραβά...'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Παρακαλώ δοκιμάστε ξανά!'
 oldVersionError: 'Παρακαλούμε ενημερώστε στην νεότερη έκδοση Pocket Code!'
 more: 'Περισσότερα'

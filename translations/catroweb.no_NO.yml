@@ -39,6 +39,7 @@ privacyPolicy: Personvern
 imprint: Avtrykk
 programDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
 oldVersionError: 'Oppdater til den nyeste versjonen av Pocket Code!'
 more: 'mer'

@@ -39,6 +39,7 @@ privacyPolicy: 隐私策略
 imprint: 版权信息
 programDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: '再试一次吧！'
 oldVersionError: '请更新到最新版的口袋编程！'
 more: '更多'

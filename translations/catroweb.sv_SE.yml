@@ -39,6 +39,7 @@ privacyPolicy: Sekretesspolicy
 imprint: Avtryck
 programDetails: Detaljer
 somethingWentWrong: 'Hoppsan! Något gick fel.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Försök igen!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'mer'

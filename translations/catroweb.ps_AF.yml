@@ -39,6 +39,7 @@ privacyPolicy: د پټتیا تګلاره
 imprint: امپرنټ
 programDetails: جزیات
 somethingWentWrong: 'او یو څه غلط شو.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'مهرباني وکړئ بیا هڅه وکړئ!'
 oldVersionError: 'مهرباني وکړئ د جیب کوډ نوي نسخه ته تازه کړئ!'
 more: 'نور'

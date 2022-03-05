@@ -39,6 +39,7 @@ privacyPolicy: Adatvédelem
 imprint: Impresszum
 programDetails: Részletek
 somethingWentWrong: 'Hoppá, hiba történt.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Kérjük, próbálkozz újra!'
 oldVersionError: 'Kérjük frissíts a legújabb Pocket Code verzióra!'
 more: 'több'

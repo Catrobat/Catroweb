@@ -39,6 +39,7 @@ privacyPolicy: Pravilnik o zasebnosti
 imprint: Imprint
 programDetails: Podrobnosti
 somethingWentWrong: 'Ojej, nekaj ni šlo prav.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Prosimo, poskusite znova!'
 oldVersionError: 'Prosimo, posodobite na najnovejšo različico Pocket Code!'
 more: 'več'

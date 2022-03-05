@@ -39,6 +39,7 @@ privacyPolicy: Gizlilik Politikası
 imprint: Damga
 programDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
 oldVersionError: 'Lütfen en yeni Cep Kodu sürümüne güncelleyin!'
 more: 'daha fazla'
