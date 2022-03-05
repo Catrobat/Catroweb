@@ -39,6 +39,7 @@ privacyPolicy: Chính sách bảo mật
 imprint: Nhà xuất bản
 programDetails: Chi tiêt
 somethingWentWrong: 'Thao tác sai.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Làm ơn hãy thử lại!'
 oldVersionError: 'Làm ơn hãy cập nhật phiên bản Pocket Code mới nhất!'
 more: 'hơn/thêm/nhiều hơn'

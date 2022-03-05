@@ -39,6 +39,7 @@ privacyPolicy: Privatumo taisyklės
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops kažkas negerai.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Bandykite dar kartą!'
 oldVersionError: 'Atnaujinkite į naujausią programos versija!'
 more: 'daugiau'

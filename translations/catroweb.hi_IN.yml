@@ -39,6 +39,7 @@ privacyPolicy: गोपनीयता नीति
 imprint: मोहर
 programDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'कृपया फिर से कोशिश करें!'
 oldVersionError: 'कृपया पॉकेट कोड को सबसे नए वर्जन में अपडेट करें!'
 more: 'अधिक'

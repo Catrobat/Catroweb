@@ -39,6 +39,7 @@ privacyPolicy: מדיניות פרטיות
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ooooops משהו השתבש.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'אנא נסה שנית!'
 oldVersionError: 'נא לעדכן הגירסה החדשה ביותר של פוקטקוד!'
 more: 'יותר'

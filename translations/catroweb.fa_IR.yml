@@ -39,6 +39,7 @@ privacyPolicy: حریم خصوصی
 imprint: مشخصات ناشر
 programDetails: جزئيات
 somethingWentWrong: 'ای وای یک مشکلی پیش اومد.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'لطفا دوباره سعی کن!'
 oldVersionError: 'لطفا نسخه ی جدید پاکد کد را به روز کن!'
 more: 'بیشتر'

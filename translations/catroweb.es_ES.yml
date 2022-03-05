@@ -39,6 +39,7 @@ privacyPolicy: Política de privacidad
 imprint: Grabado
 programDetails: Detalles
 somethingWentWrong: 'Ooooops algo está mal.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Por favor inténtalo de nuevo!'
 oldVersionError: 'Por favor actualice a la versión de Pocket Code más nueva!'
 more: 'más'

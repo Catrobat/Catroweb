@@ -39,6 +39,7 @@ privacyPolicy: Informativa sulla privacy
 imprint: Imprint
 programDetails: Dettagli
 somethingWentWrong: 'Ooooops qualcosa è andato storto.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Per favore riprova!'
 oldVersionError: 'Si prega di aggiornare alla nuova versione di Pocket Code!'
 more: 'altro'

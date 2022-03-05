@@ -39,6 +39,7 @@ privacyPolicy: นโยบายความเป็นส่วนตัว
 imprint: ประทับตรา
 programDetails: รายละเอียด
 somethingWentWrong: 'Ooooops เกิดข้อผิดพลาดบางอย่าง'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'กรุณาลองอีกครั้ง!'
 oldVersionError: 'กรุณาอัพเดต Pocket Code ให้เป็นเวอร์ชั่นล่าสุด'
 more: 'เพิ่มเติม'

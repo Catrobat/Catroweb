@@ -39,6 +39,7 @@ privacyPolicy: தனிமனித உரிமை கொள்கை
 imprint: அச்சிடு
 programDetails: விவரங்கள்
 somethingWentWrong: 'ஐய்யோ! ஏதோ தவறாய் நிகழ்ந்து விட்டது.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'தயவுசெய்து மீண்டும் முயற்சிக்கவும்!'
 oldVersionError: 'தயவு செய்து மிகப் புதிய Pocket Code பதிப்புக்கு புதிப்பிக்கவும்!'
 more: 'மிகுதி'

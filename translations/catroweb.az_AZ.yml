@@ -39,6 +39,7 @@ privacyPolicy: Gizlilik Siyasəti
 imprint: Imprint
 programDetails: Təfsilatlar
 somethingWentWrong: 'Ups, nəsə səhv getdi.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Zəhmət olmasa yenidən sınayın!'
 oldVersionError: 'Ən son Pocket Code versiyasına yeniləyin!'
 more: 'daha çox'

@@ -39,6 +39,7 @@ privacyPolicy: Политика конфиденциальности
 imprint: Импринт
 programDetails: Детали
 somethingWentWrong: 'Ой, что-то пошло не так.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
 oldVersionError: 'Пожалуйста, обновите Покет Код до последней версии!'
 more: 'больше'

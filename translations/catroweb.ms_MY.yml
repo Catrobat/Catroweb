@@ -39,6 +39,7 @@ privacyPolicy: Polisi peribadi
 imprint: Mendalam
 programDetails: Details
 somethingWentWrong: 'Ooooops ada masalah.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Sila cuba sekali lagi!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'lebih'

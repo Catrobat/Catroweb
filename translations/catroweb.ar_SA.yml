@@ -39,6 +39,7 @@ privacyPolicy: سياسة الخصوصية
 imprint: بصمة
 programDetails: التفاصيل
 somethingWentWrong: 'عذرا, هناك شيء خاطئ.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'الرجاء المحاولة مرة أخرى!'
 oldVersionError: 'الرجاء الترقية إلى أحدث إصدار من بوكت كوود!'
 more: 'المزيد'
