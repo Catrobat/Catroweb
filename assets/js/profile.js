@@ -1,11 +1,27 @@
 import 'external-svg-loader'
 import './components/tab_bar'
 import './follower_overview'
-import $ from 'jquery'
+
+import { shareLink } from './custom/ShareLink'
 import { ProjectList } from './components/project_list'
+
+import $ from 'jquery'
 
 require('../styles/custom/profile.scss')
 require('../styles/components/achievements.scss')
+
+const $userShare = $('.js-user-share')
+
+shareLink(
+  $userShare.data('theme-display-name'),
+  $userShare.data('trans-check-out-user'),
+  $userShare.data('user-url'),
+  $userShare.data('trans-share-success'),
+  $userShare.data('trans-share-error'),
+  $userShare.data('trans-copy'),
+  $userShare.data('trans-clipboard-success'),
+  $userShare.data('trans-clipboard-fail')
+)
 
 initUserProjects()
 

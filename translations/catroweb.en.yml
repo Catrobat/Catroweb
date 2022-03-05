@@ -716,7 +716,8 @@ catro-notifications:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
 
 clipboard:
-  success: Link to project copied to clipboard!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Failed to copy link to clipboard! :(
 next: Next
 previous: Previous
@@ -758,6 +759,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
+checkOutUser: 'Check out this user:'
 
 community: 'Catrobat community'
 back_to_app: 'Exit community'
