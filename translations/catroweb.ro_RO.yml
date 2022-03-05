@@ -39,6 +39,7 @@ privacyPolicy: Politică de confidenţialitate
 imprint: Imprint
 programDetails: Details
 somethingWentWrong: 'Ups... ceva nu a mers bine.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Încearcă din nou!'
 oldVersionError: 'Te rog să actualizezi cea mai nouă versiune de Pocket Code!'
 more: 'Mai mult'

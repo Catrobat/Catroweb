@@ -39,6 +39,7 @@ privacyPolicy: Ochrana soukromí
 imprint: Tiráž
 programDetails: Podrobnosti
 somethingWentWrong: 'Ooooops něco se pokazilo.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Prosím, zkuste to znovu!'
 oldVersionError: 'Aktualizujte na nejnovější verzi Pocket Code!'
 more: 'více'

@@ -39,6 +39,7 @@ privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
 programDetails: تفصیلات
 somethingWentWrong: 'اف، کچھ غلط ہوگیا۔.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'برائے مہربانی دوبارہ کوشش کریں!'
 oldVersionError: 'برائے مہربانی پاکٹ کوڈ کو تازہ ترین ورژن پر اپ ڈیٹ کریں!'
 more: 'مزید'

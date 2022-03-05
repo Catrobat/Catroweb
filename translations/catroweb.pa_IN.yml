@@ -39,6 +39,7 @@ privacyPolicy: ਪਰਾਈਵੇਟ ਨੀਤੀ
 imprint: ਛਾਪ
 programDetails: ਵੇਰਵਾ
 somethingWentWrong: 'ਓਓਓਫਸ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ!'
 oldVersionError: 'ਕਿਰਪਾ ਕਰਕੇ ਨਵੀਨਤਮ ਪਾਕੇਟ ਕੋਡ ਸੰਸਕਰਣ ਨੂੰ ਅਪਡੇਟ ਕਰੋ!'
 more: 'ਹੋਰ'

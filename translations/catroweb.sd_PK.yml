@@ -39,6 +39,7 @@ privacyPolicy: پرئيويسي پوليسي
 imprint: نشان لڳايو
 programDetails: Details
 somethingWentWrong: 'اوه... ڪجھ ڳڙ ٻڙ ٿي وئي آهي.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'ٻيهر ڪوشش ڪيو!'
 oldVersionError: 'مهرباني ڪري تازو ترين پاڪيٽ ڪوڊ کي اپڊيٽ ڪيو!'
 more: 'وڌيڪ'

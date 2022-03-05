@@ -39,6 +39,7 @@ privacyPolicy: Правила за поверителност
 imprint: Oтпечатък
 programDetails: Details
 somethingWentWrong: 'Опа, нещо се обърка.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Моля, опитайте отново!'
 oldVersionError: 'Моля, обновете до най-новата версия на Pocket код!'
 more: 'още'

@@ -39,6 +39,7 @@ privacyPolicy: Tasertit tabaḍnit
 imprint: Imprint
 programDetails: Tfaṣil
 somethingWentWrong: 'Ooooops yella kra ur yeddan akken iwata.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Ttxilek ɛreḍ tikkelt nniḍen!'
 oldVersionError: 'Please update to the newest Pocket Code version!'
 more: 'ugar'

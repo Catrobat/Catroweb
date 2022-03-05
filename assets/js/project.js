@@ -6,7 +6,7 @@ import { TranslateComments } from './custom/TranslateComments'
 import { ProjectList } from './components/project_list'
 import { setImageUploadListener } from './custom/ImageUpload'
 import { Program } from './custom/Program'
-import { shareProject } from './custom/ProgramShare'
+import { shareLink } from './custom/ShareLink'
 import { ProgramReport } from './custom/ProgramReport'
 import { ProgramDescription } from './custom/ProgramDescription'
 import { ProgramCredits } from './custom/ProgramCredits'
@@ -63,7 +63,7 @@ if ($project.data('my-program')) {
   )
 }
 
-shareProject(
+shareLink(
   $projectShare.data('theme-display-name'),
   $projectShare.data('trans-check-out-project'),
   $projectShare.data('project-url'),

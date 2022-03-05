@@ -23,5 +23,20 @@
         {% include 'Header/header_option_button.html.twig' %}
         {% include 'Header/header_studio_options.html.twig' %}
     {% endif %}
+
+{% elseif '/user/' in app.request.pathinfo and profile|default(false) and profile.id|default(false) %}
+    <div class="mdc-menu-surface--anchor">
+        {% include 'Header/header_option_button.html.twig' %}
+
+        <div id="top-app-bar__options-container"
+             class="mdc-menu mdc-menu-surface mdc-menu-surface--fixed mdc-menu-surface--open"
+             tabindex="0">
+
+            {% include 'Header/header_user_options.html.twig' %}
+
+        </div>
+    </div>
 {% endif %}
+
+
 

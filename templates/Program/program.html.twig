@@ -7,6 +7,8 @@
   <meta property="og:type" content="website"/>
   <meta property="og:image:secure_url" content="{{ asset(program_details.screenshotBig) }}"/>
   <meta property="og:title" content="{{ program.name|escape('html_attr') }}"/>
+
+
   {% if program.description is empty %}
     <meta property="og:description"
           content="{{ "programs.checkout_this_program"|trans({}, "catroweb") }}"/>
@@ -232,7 +234,7 @@
        data-trans-share-success="{{ "share.success"|trans({}, "catroweb") }}"
        data-trans-share-error="{{ "share.error"|trans({}, "catroweb") }}"
        data-trans-copy="{{ "copy"|trans({}, "catroweb") }}"
-       data-trans-clipboard-success="{{ "clipboard.success"|trans({}, "catroweb") }}"
+       data-trans-clipboard-success="{{ "clipboard.success_project"|trans({}, "catroweb") }}"
        data-trans-clipboard-fail="{{ "clipboard.fail"|trans({}, "catroweb") }}"
   ></div>
   <div class="js-project-report"
@@ -261,12 +263,16 @@
        data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
        data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
        data-trans-translation-updated="{{ "programs.translationUpdated"|trans({}, "catroweb") }}"
+       data-trans-translation-deleted="{{ "programs.translationDeleted"|trans({}, "catroweb") }}"
+       data-trans-cannot-delete="{{ "programs.cannotDelete"|trans({}, "catroweb") }}"
+       data-trans-confirm-delete="{{ "programs.confrimDelete"|trans({}, "catroweb") }}"
        data-trans-close-editor="{{ "programs.closeEditor"|trans({}, "catroweb") }}"
        data-trans-close-editor-prompt="{{ "programs.closeEditorPrompt"|trans({}, "catroweb") }}"
        data-trans-save="{{ "programs.save"|trans({}, "catroweb") }}"
        data-trans-discard="{{ "programs.btnDiscard"|trans({}, "catroweb") }}"
        data-trans-cancel="{{ "cancel"|trans({}, "catroweb") }}"
        data-trans-keep="{{ "programs.btnKeep"|trans({}, "catroweb") }}"
+       data-trans-delete="{{ "programs.delete"|trans({}, "catroweb") }}"
        data-trans-default="{{ "programs.default"|trans({}, "catroweb") }}"
        data-trans-save-on-language-change="{{ "programs.saveOnLanguageChange"|trans({}, "catroweb") }}"\
        data-path-edit-program-name="{{ path('edit_program_name', {'id': program.id}) }}"

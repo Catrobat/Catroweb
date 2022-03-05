@@ -39,6 +39,7 @@ privacyPolicy: Kebijakan privasi
 imprint: Jejak
 programDetails: Rincian
 somethingWentWrong: 'Ups ada kesalahan.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Silahkan coba lagi!'
 oldVersionError: 'Mohon perbaharui Pocket Code ke versi terbaru!'
 more: 'lebih'

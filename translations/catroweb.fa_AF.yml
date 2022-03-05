@@ -39,6 +39,7 @@ privacyPolicy: سیاست حفظ حریم خصوصی
 imprint: دیدگاه
 programDetails: جزئیات
 somethingWentWrong: 'اوهو، چیزی اشتباه شد.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'لطفا دوباره کوشش کن!'
 oldVersionError: 'لطفا به جدیدترین نسخه کد جیبی (Pocket Code) به روز رسانی کن!'
 more: 'بیشتر'

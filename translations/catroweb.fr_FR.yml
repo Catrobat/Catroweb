@@ -39,6 +39,7 @@ privacyPolicy: Politique de confidentialité
 imprint: Mentions légales
 programDetails: Détails du produit
 somethingWentWrong: 'Ooooops, quelque chose s''est mal passé.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Essayez à nouveau !'
 oldVersionError: 'Veuillez mettre à jour vers la dernière version de Pocket Code !'
 more: 'plus'

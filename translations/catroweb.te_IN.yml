@@ -39,6 +39,7 @@ privacyPolicy: ప్రయివసి పాలిసి
 imprint: ఇంప్రింట్
 programDetails: వివరాలు
 somethingWentWrong: 'ఊప్స్ ఎధొ తప్పు జరిగొనది.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'మళ్ళి ప్రయత్నించండి!'
 oldVersionError: 'కొత్త పాకెట్ కొడ్ వర్షెన్ కి అప్గ్రెడ్ చెసుకొండి!'
 more: 'ఎక్కువ'

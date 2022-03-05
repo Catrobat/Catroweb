@@ -39,6 +39,7 @@ privacyPolicy: Политика за приватност
 imprint: Отпечаток
 programDetails: Details
 somethingWentWrong: 'Ooooops се појави случајна грешка.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Ве молиме обидете се повторно!'
 oldVersionError: 'Ве молиме ажурирајте ја вашата верзија на Pocket Code!'
 more: 'повеќе'

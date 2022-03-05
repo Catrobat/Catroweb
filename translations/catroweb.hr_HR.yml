@@ -39,6 +39,7 @@ privacyPolicy: Pravila privatnosti
 imprint: Impresum
 programDetails: Detalji
 somethingWentWrong: 'Ups... nešto je otišlo kvragu.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Molimo pokušajte ponovno!'
 oldVersionError: 'Molimo Vas azurirajte na najnoviju Pocket Codeu verziju!'
 more: 'više'

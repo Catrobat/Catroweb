@@ -39,6 +39,7 @@ privacyPolicy: Privacybeleid
 imprint: Contact & disclaimer
 programDetails: Details
 somethingWentWrong: 'Oeps, er is iets fout gegaan.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Probeer het opnieuw!'
 oldVersionError: 'Gelieve bij te werken tot de nieuwste versie van Pocket Code!'
 more: 'meer'
