@@ -127,6 +127,18 @@ class ItranslateApiTest extends TestCase
     $this->assertNull($result);
   }
 
+  public function testUnsupportedLanguage(): void
+  {
+    $this->assertEquals(0, $this->api->getPreference('testing', 'xx', 'en'));
+    $this->assertEquals(0, $this->api->getPreference('testing', 'en', 'xx'));
+  }
+
+  public function testSupportedLanguage(): void
+  {
+    $this->assertEquals(1, $this->api->getPreference('testing', null, 'en'));
+    $this->assertEquals(1, $this->api->getPreference('testing', 'de', 'en'));
+  }
+
   private function mockGenericResponse(): ResponseInterface
   {
     $response = $this->createMock(ResponseInterface::class);

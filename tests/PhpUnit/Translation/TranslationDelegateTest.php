@@ -51,6 +51,29 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals($expected_result, $actual_result);
   }
 
+  public function testOrderApis(): void
+  {
+    $api1 = $this->createMock(TranslationApiInterface::class);
+    $api2 = $this->createMock(TranslationApiInterface::class);
+
+    $api1->method('getPreference')->willReturn(0.0);
+    $api2->method('getPreference')->willReturn(1.0);
+
+    $api1->expects($this->never())->method('translate');
+
+    $expected_result = new TranslationResult();
+    $api2->expects($this->once())
+      ->method('translate')
+      ->willReturn($expected_result)
+    ;
+
+    $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository, $api1, $api2);
+
+    $actual_result = $translation_delegate->translate('test', 'en', 'fr');
+
+    $this->assertEquals($expected_result, $actual_result);
+  }
+
   public function testTryNextApiIfFirstFails(): void
   {
     $api1 = $this->createMock(TranslationApiInterface::class);

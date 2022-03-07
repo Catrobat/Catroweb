@@ -13,14 +13,126 @@ class GoogleTranslateApi implements TranslationApiInterface
     'zh-TW',
   ];
 
+  private const SUPPORTED_LANGUAGE_CODE = [
+    'af',
+    'am',
+    'ar',
+    'az',
+    'be',
+    'bg',
+    'bn',
+    'bs',
+    'ca',
+    'co',
+    'cs',
+    'cy',
+    'da',
+    'de',
+    'el',
+    'en',
+    'eo',
+    'es',
+    'et',
+    'eu',
+    'fa',
+    'fi',
+    'fr',
+    'fy',
+    'ga',
+    'gd',
+    'gl',
+    'gu',
+    'ha',
+    'he',
+    'hi',
+    'hr',
+    'ht',
+    'hu',
+    'hy',
+    'id',
+    'ig',
+    'is',
+    'it',
+    'ja',
+    'jv',
+    'ka',
+    'kk',
+    'km',
+    'kn',
+    'ko',
+    'ku',
+    'ky',
+    'lb',
+    'lo',
+    'lt',
+    'lv',
+    'mg',
+    'mi',
+    'mk',
+    'ml',
+    'mn',
+    'mr',
+    'ms',
+    'mt',
+    'my',
+    'ne',
+    'nl',
+    'no',
+    'ny',
+    'or',
+    'pa',
+    'pl',
+    'ps',
+    'pt',
+    'ro',
+    'ru',
+    'rw',
+    'sd',
+    'si',
+    'sk',
+    'sl',
+    'sm',
+    'sn',
+    'so',
+    'sq',
+    'sr',
+    'st',
+    'su',
+    'sv',
+    'sw',
+    'ta',
+    'te',
+    'tg',
+    'th',
+    'tk',
+    'tl',
+    'tr',
+    'tt',
+    'ug',
+    'uk',
+    'ur',
+    'ur',
+    'uz',
+    'vi',
+    'xh',
+    'yi',
+    'yo',
+    'zh',
+    'zh-CN',
+    'zh-TW',
+    'zu',
+  ];
+
   private TranslateClient $client;
   private LoggerInterface $logger;
   private TranslationApiHelper $helper;
+  private int $short_text_length;
 
-  public function __construct(TranslateClient $client, LoggerInterface $logger)
+  public function __construct(TranslateClient $client, LoggerInterface $logger, int $short_text_length)
   {
     $this->client = $client;
     $this->logger = $logger;
+    $this->short_text_length = $short_text_length;
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 
@@ -53,5 +165,25 @@ class GoogleTranslateApi implements TranslationApiInterface
     $translation_result->translation = $result['text'];
 
     return $translation_result;
+  }
+
+  public function getPreference(string $text, ?string $source_language, string $target_language): float
+  {
+    $target_language = $this->helper->transformLanguageCode($target_language);
+    $source_language = $this->helper->transformLanguageCode($source_language);
+
+    if (null !== $source_language && !in_array($source_language, self::SUPPORTED_LANGUAGE_CODE, true)) {
+      return 0;
+    }
+
+    if (!in_array($target_language, self::SUPPORTED_LANGUAGE_CODE, true)) {
+      return 0;
+    }
+
+    if (strlen($text) > $this->short_text_length) {
+      return 0;
+    }
+
+    return 1;
   }
 }
