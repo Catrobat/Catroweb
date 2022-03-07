@@ -195,6 +195,9 @@ programs:
   translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: پہلے سے طے شدہ
   save: محفوظ کریں
 remixGraph:
@@ -667,7 +670,8 @@ catro-notifications:
   remix:
     message: '%user_link% نے آپ کے گیم %remix_program_link% کا ایک ریمکس %program_link% بنایا۔'
 clipboard:
-  success: کلپ بورڈ پر کاپی پروجیکٹ کا لنک!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: کلپ بورڈ سے لنک کاپی کرنے میں ناکامی :(
 next: اگلا
 previous: پچھلا
@@ -703,6 +707,7 @@ share:
   success: 'اشتراک کامیاب'
 copy: 'لنک کاپی کریں'
 checkOutProject: 'بڑے پراجیکٹس چیک کریں'
+checkOutUser: 'Check out this user:'
 community: 'کاٹروبٹ کے تمام لوگ'
 back_to_app: 'کمیونٹی سے باہر نکلیں'
 category:

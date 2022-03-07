@@ -195,6 +195,9 @@ programs:
   translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: இயல்புநிலை
   save: சேமி
 remixGraph:
@@ -677,7 +680,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: திட்டத்திற்க்கான இணைப்பு கிளிப்போர்டுக்கு நகலெடுக்கப்பட்டது!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: இனைப்பை கிளிப்போர்டுக்கு நகலெடுப்பது தோல்வி :(
 next: அடுத்து
 previous: முந்தைய
@@ -713,6 +717,7 @@ share:
   success: 'பகிர்வு வெற்றியடைந்தது'
 copy: 'இணைப்பை நகலெடு'
 checkOutProject: 'இந்த திட்டத்தைப் பாருங்கள்:'
+checkOutUser: 'Check out this user:'
 community: 'கேட்ரோபாட் சமூகம்'
 back_to_app: 'சமூகத்திலிருந்து வெளியேறு'
 category:

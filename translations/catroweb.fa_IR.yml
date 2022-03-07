@@ -195,6 +195,9 @@ programs:
   translatedByLine: ترجمه شده توسط%provider% %sourceLanguage% به %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: پیش فرض
   save: ذخيره
 remixGraph:
@@ -677,7 +680,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: پیوند به پروژه کپی شده به کلیپ بورد!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: لینک کپی به کلیپ بورد نشد! :(
 next: بعدی
 previous: قبلی
@@ -713,6 +717,7 @@ share:
   success: 'اشتراكگذاري موفق شد'
 copy: 'کپی پیوند'
 checkOutProject: 'اتمام این پروژه:'
+checkOutUser: 'Check out this user:'
 community: 'جامعه Catrobat'
 back_to_app: 'خروج از جامعه'
 category:

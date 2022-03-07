@@ -195,6 +195,9 @@ programs:
   translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: ਮੂਲ
   save: ਸੇਵ
 remixGraph:
@@ -673,7 +676,8 @@ catro-notifications:
   remix:
     message: '%user_link% ਇੱਕ ਰੀਮਿਕਸ ਬਣਾਇਆ %program_link% ਤੁਹਾਡੀ ਖੇਡ ਦਾ %remix_program_link%'
 clipboard:
-  success: ਪ੍ਰੋਜੈਕਟ ਦਾ ਲਿੰਕ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕੀਤਾ ਗਿਆ!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਲਿੰਕ ਦੀ ਨਕਲ ਕਰਨ ਵਿੱਚ ਅਸਫਲ! :(
 next: ਅਗਲਾ
 previous: ਪਿਛਲਾ
@@ -709,6 +713,7 @@ share:
   success: 'ਸਾਂਝਾ ਕਰੋ ਸਫਲ'
 copy: 'ਲਿੰਕ ਨੂੰ ਕਾਪੀ ਕਰੋ'
 checkOutProject: 'ਇਸ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਵੇਖੋ:'
+checkOutUser: 'Check out this user:'
 community: 'ਕੈਟ੍ਰੋਬੈਟ ਕਮਿ communityਨਿਟੀ'
 back_to_app: 'ਬੰਦ ਕਰੋ ਭਾਈਚਾਰੇ'
 category:
