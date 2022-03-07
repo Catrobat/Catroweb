@@ -61,7 +61,7 @@
             {% if package|default and ('/media-library/' in app.request.pathinfo or '/pocket-library/' in app.request.pathinfo) %}
               data-path-search-url="{{ path('medialibrary_empty_search', {'package_name' : package} ) }}"
             {% else %}
-              data-path-search-url="{{ path('empty_search' ) }}"
+              data-path-search-url="{{ path('empty_search_new' ) }}"
             {% endif %}
         ></div>
       {% endblock %}

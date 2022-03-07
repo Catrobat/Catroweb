@@ -30,8 +30,6 @@ function initProjects () {
   const noUsers = $search.data('no-users')
   const noProjects = $search.data('no-projects')
 
-  console.log($search.data('path-search'))
-
   const projectUrl = baseUrl + '/api/projects/search?query=' + query
   const userUrl = baseUrl + '/api/users/search?query=' + query
 

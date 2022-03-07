@@ -48,7 +48,7 @@
       {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'project-opening-spinner' ~ suffix|default(), 'small': 'true'} %}
     </i>
 
-    <div id="search-users" class="user-list search-list loading horizontal">
+    <div id="search-users" class="user-list loading horizontal">
       <div class="container">
         <div class="user-list__title">
           <h2>{{ "users" | trans({}, "catroweb") }}</h2>
@@ -60,7 +60,7 @@
         <div class="lazyload user-list__wrapper">
           <div class="lazyload users-container">
 
-            {% for i in range(0, 10) %}  {#Fill with dummy data until loaded to prevent cls#}
+            {% for i in range(0, 10) %}  {# Fill with dummy data until loaded to prevent cls #}
               <div class="user-list__user">
                 <img src="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20360%20360'%3E%3Crect%20width='360'%20height='360'%20fill='%23E8E8E8'%20/%3E%3C/svg%3E"
                      class="user-list__user__image">
@@ -103,5 +103,5 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('search_new')  }}
+    {{ encore_entry_script_tags('search_new')  }}
 {% endblock %}
