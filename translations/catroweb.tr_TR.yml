@@ -195,6 +195,9 @@ programs:
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
   translationUpdated: '%language% çevirisi için yapılan değişiklikler güncellendi'
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Varsayılan
   save: Kaydet
 remixGraph:
@@ -671,7 +674,8 @@ catro-notifications:
   remix:
     message: 'Kullanıcı %user_link% projenizi %program_link% yeniden düzenledi. Remix''i aşağıdaki %remix_program_link% bağlantısında görebilirsiniz.'
 clipboard:
-  success: Panoya kopyalanan projeye bağlantı!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Bağlantı panoya kopyalanamadı!
 next: İleri
 previous: Önceki
@@ -707,6 +711,7 @@ share:
   success: 'Paylaşım başarılı'
 copy: 'Bağlantıyı kopyala'
 checkOutProject: 'Bu projeye göz atın:'
+checkOutUser: 'Check out this user:'
 community: 'Catrobat Topluluğu'
 back_to_app: 'Topluluktan çık'
 category:

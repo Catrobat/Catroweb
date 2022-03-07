@@ -194,6 +194,9 @@ programs:
   translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: 기본값
   save: 저장
 remixGraph:
@@ -670,7 +673,8 @@ catro-notifications:
   remix:
     message: '%user_link%님이 게임 %remix_program_link%의 %program_link% 리믹스를 만들었습니다.'
 clipboard:
-  success: 프로그램 링크가 복사되었습니다.
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: 링크 복사가 안됩니다! :(
 next: 다음
 previous: 이전
@@ -706,6 +710,7 @@ share:
   success: '공유 성공'
 copy: '링크 복사'
 checkOutProject: '프로젝트 점검하기'
+checkOutUser: 'Check out this user:'
 community: 'Catrobat 공유'
 back_to_app: '커뮤니티 나가기'
 category:

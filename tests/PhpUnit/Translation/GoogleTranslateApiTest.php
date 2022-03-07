@@ -25,7 +25,7 @@ class GoogleTranslateApiTest extends TestCase
   protected function setUp(): void
   {
     $this->client = $this->createMock(TranslateClient::class);
-    $this->api = new GoogleTranslateApi($this->client, $this->createMock(LoggerInterface::class));
+    $this->api = new GoogleTranslateApi($this->client, $this->createMock(LoggerInterface::class), 5);
   }
 
   public function testSuccessDetectedLanguage(): void
@@ -69,5 +69,21 @@ class GoogleTranslateApiTest extends TestCase
     $this->client->expects($this->once())->method('translate')->willThrowException($exception);
     $result = $this->api->translate('testing', null, 'fr');
     $this->assertNull($result);
+  }
+
+  public function testUnsupportedLanguage(): void
+  {
+    $this->assertEquals(0, $this->api->getPreference('testing', 'xx', 'en'));
+    $this->assertEquals(0, $this->api->getPreference('testing', 'en', 'xx'));
+  }
+
+  public function testLongText(): void
+  {
+    $this->assertEquals(0, $this->api->getPreference('testing', null, 'en'));
+  }
+
+  public function testShortText(): void
+  {
+    $this->assertEquals(1, $this->api->getPreference('test', null, 'en'));
   }
 }

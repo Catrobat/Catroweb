@@ -195,6 +195,9 @@ programs:
   translatedByLine: '%provider% %sourceLanguage% থেকে %targetLanguage% দ্বারা অনুবাদিত'
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: পূর্ব-নির্ধারিত
   save: সংরক্ষণ করুন
 remixGraph:
@@ -679,7 +682,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: ক্লিপবোর্ডে অনুলিপি করা প্রকল্পের লিঙ্ক!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: ক্লিপবোর্ডে কপি করা যায় নি :(
 next: পরবর্তী
 previous: পূর্ববর্তী
@@ -715,6 +719,7 @@ share:
   success: 'ভাগ সফল'
 copy: 'লিংক কপি করুন'
 checkOutProject: 'এই প্রকল্পটি দেখুন:'
+checkOutUser: 'Check out this user:'
 community: 'ক্যাট্রোব্যাট সম্প্রদায়'
 back_to_app: 'সম্প্রদায় থেকে প্রস্থান করুন'
 category:
