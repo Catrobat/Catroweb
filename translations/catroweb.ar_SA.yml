@@ -195,6 +195,9 @@ programs:
   translatedByLine: تمت ترجمته بواسطة%provider% من%sourceLanguage% إلى %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: افتراضي
   save: حفظ
 remixGraph:
@@ -673,7 +676,8 @@ catro-notifications:
   remix:
     message: 'أنشأ %user_link% ريمكس %program_link% من لعبتك %remix_program_link%.'
 clipboard:
-  success: رابط للمشروع نسخ إلى الحافظة!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: فشل نسخ الرابط إلى الحافظة! :(
 next: التالي
 previous: السابق
@@ -709,6 +713,7 @@ share:
   success: 'تم المشاركة بنجاح'
 copy: 'نسخ الرابط'
 checkOutProject: 'تحقق من هذا المشروع:'
+checkOutUser: 'Check out this user:'
 community: 'مجتمع كاتروبات'
 back_to_app: 'الخروج من المجتمع'
 category:

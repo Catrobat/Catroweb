@@ -195,6 +195,9 @@ programs:
   translatedByLine: '%provider%を%sourceLanguage%から%targetLanguage%に翻訳'
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: デフォルト
   save: 保存
 remixGraph:
@@ -673,7 +676,8 @@ catro-notifications:
   remix:
     message: '%user_link% があなたのゲーム %program_link% のリミックス %remix_program_link% を作成しました。'
 clipboard:
-  success: プロジェクトへのリンクをクリップボードにコピーしました！
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: クリップボードへのリンクのコピーに失敗しました！ :(
 next: 次へ
 previous: 前
@@ -709,6 +713,7 @@ share:
   success: '共有に成功しました'
 copy: 'リンクをコピー'
 checkOutProject: 'このプロジェクトをチェックしてください:'
+checkOutUser: 'Check out this user:'
 community: 'Catrobat コミュニティ'
 back_to_app: 'コミュニティを終了'
 category:

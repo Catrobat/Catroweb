@@ -195,6 +195,9 @@ programs:
   translatedByLine: Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Default
   save: Simpan
 remixGraph:
@@ -673,7 +676,8 @@ catro-notifications:
   remix:
     message: '%user_link% membuat remix %program_link% dari game Anda %remix_program_link%.'
 clipboard:
-  success: Tautan ke proyek disalin ke papan klip!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Gagal menyalin link ke papan klip! :(
 next: Lanjut
 previous: Sebelumnya
@@ -709,6 +713,7 @@ share:
   success: 'Berbagi berhasil'
 copy: 'Salin tautan'
 checkOutProject: 'Lihat proyek ini:'
+checkOutUser: 'Check out this user:'
 community: 'Komunitas Catrobat'
 back_to_app: 'Keluar dari komunitas'
 category:

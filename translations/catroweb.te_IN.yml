@@ -195,6 +195,9 @@ programs:
   translatedByLine: ద్వారా అనువదించబడింది %provider% నుండి %sourceLanguage% కు %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Default
   save: Save
 remixGraph:
@@ -676,7 +679,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: ప్రాజెక్ట్ లింక్ క్లిప్‌బోర్డ్‌కు కాపీ చేయబడింది!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయడం విఫలమైంది! :(
 next: తరువాత
 previous: మునుపటి
@@ -712,6 +716,7 @@ share:
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
+checkOutUser: 'Check out this user:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:

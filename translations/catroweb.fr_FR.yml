@@ -195,6 +195,9 @@ programs:
   translatedByLine: Traduit par %provider% de %sourceLanguage% à %targetLanguage%.
   translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Par défaut
   save: Enregistrer
 remixGraph:
@@ -673,7 +676,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Lien vers le projet copié dans le presse-papiers !
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Impossible de copier le lien dans le presse-papiers ! :(
 next: Suivant
 previous: Précédent
@@ -709,6 +713,7 @@ share:
   success: 'Partage réussi'
 copy: 'Copier le lien'
 checkOutProject: 'Jetez un œil à ce projet :'
+checkOutUser: 'Check out this user:'
 community: 'Communauté Catrobat'
 back_to_app: 'Quitter la communauté'
 category:

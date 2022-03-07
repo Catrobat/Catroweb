@@ -30,16 +30,16 @@ download: 下载项目
 name: 名称
 description: 描述
 noDescription: 没有可用的描述
-credits: 致谢
-noCredits: 没有可用的致谢。
-notesAndCreditsDescription: 你是如何创建这个项目的？你是否使用了其他人的想法、脚本或艺术作品？请对他们表示感谢。
+credits: 说明和版权信息
+noCredits: 没有说明和版权信息
+notesAndCreditsDescription: 您是如何创建这个项目的？是否使用了其他人的想法、脚本或艺术作品？您可以在此对他们表示感谢。
 country: 国家
 loginText: 登录
 privacyPolicy: 隐私策略
 imprint: 版权信息
 programDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: '请求的资源不存在。'
 pleaseTryAgain: '再试一次吧！'
 oldVersionError: '请更新到最新版的口袋编程！'
 more: '更多'
@@ -128,7 +128,7 @@ programs:
     取消
   tooLongName: 项目名称过长！
   tooLongDescription: 项目描述太长了！
-  tooLongCredits: 项目致谢过长！
+  tooLongCredits: 项目说明和版权信息过长！
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
@@ -195,6 +195,9 @@ programs:
   translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
   translationUpdated: 修改后的%language%翻译已更新
   googleTranslate: 谷歌翻译
+  translationDeleted: 自定义的%language%翻译已删除
+  cannotDelete: 无法删除默认名称、说明和版权信息
+  confrimDelete: 您确定要删除该翻译吗？
   default: 默认
   save: 保存
 remixGraph:
@@ -341,7 +344,7 @@ termsOfUse:
     item3: 应用所有级别的经验
   list2:
     item1: 敬重。当分享项目时，请记住，许多不同年龄和背景的人都会看到您的贡献。
-    item2: "付给积分。您可以随意制作其他人项目的修改版 - 只要付给他们积分就行。您可以在您的项目的注释和学分部分找到付给积分的地方。有关修改其他用户的项目的详细信息，请参阅此虚线列表下方的段落。"
+    item2: "付给积分。您可以随意制作其他人项目的修改版 - 只要付给他们积分就行。您可以在您的项目的说明和版权信息部分找到付给积分的地方。有关修改其他用户的项目的详细信息，请参阅此虚线列表下方的段落。"
     item3: "请诚实。不要冒充其他人或做出其他戏弄社区的事情。"
     item4: "请保护好您的隐私信息。请不要公开您的电子邮件，电话号码或其他个人联系信息。"
     item5: "帮助保持网站友好。 如果你觉得其他人会发现一个项目或评论意味着侮辱、过于暴力， 或者不适当，只需单击“报告视为不适当”按钮，留下一个简短的解释。 Catrobat团队将审查您的报告，并可以删除任何项目、评论或帖子。"
@@ -678,7 +681,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: 项目链接已复制到剪贴板！
+  success_project: 项目链接已复制到剪贴板！
+  success_user: 用户链接已复制到剪贴板！
   fail: 复制链接到剪贴板失败！ :(
 next: 下一步
 previous: 上一步
@@ -714,6 +718,7 @@ share:
   success: '分享成功'
 copy: '复制链接'
 checkOutProject: '查看此项目：'
+checkOutUser: '查看此用户：'
 community: 'Catrobat社区'
 back_to_app: '退出社区'
 category:
