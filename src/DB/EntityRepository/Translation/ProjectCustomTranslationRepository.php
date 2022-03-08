@@ -10,9 +10,9 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class ProjectCustomTranslationRepository extends ServiceEntityRepository
 {
-  public function __construct(ManagerRegistry $managerRegistry)
+  public function __construct(ManagerRegistry $manager_registry)
   {
-    parent::__construct($managerRegistry, ProjectCustomTranslation::class);
+    parent::__construct($manager_registry, ProjectCustomTranslation::class);
   }
 
   public function addNameTranslation(Program $project, string $language, string $name_translation): bool
@@ -271,6 +271,19 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
         return $e['language'];
       }, $result
     );
+  }
+
+  /**
+   * @psalm-param array<Program> $projects
+   */
+  public function countDefinedLanguages(array $projects): int
+  {
+    $languages = [];
+    foreach ($projects as $project) {
+      $languages = array_unique(array_merge($languages, $this->listDefinedLanguages($project)));
+    }
+
+    return sizeof($languages);
   }
 
   private function findTranslation(Program $project, string $language): ?ProjectCustomTranslation

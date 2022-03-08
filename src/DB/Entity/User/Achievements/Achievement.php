@@ -21,6 +21,9 @@ class Achievement
   public const PERFECT_PROFILE = 'perfect_profile';
   public const VERIFIED_DEVELOPER = 'verified_developer';
   public const CODING_JAM_09_2021 = 'coding_jam_09_2021';
+  public const BILINGUAL = 'bilingual';
+  public const TRILINGUAL = 'trilingual';
+  public const LINGUIST = 'linguist';
 
   /**
    * @ORM\Column(name="id", type="integer")
