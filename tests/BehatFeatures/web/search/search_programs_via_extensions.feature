@@ -28,15 +28,15 @@ Feature: Searching for programs with extensions
     And I should see "__phiro"
     When I press on the extension "__mindstorms"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 2 results"
+    Then I should see "Search results"
     Then I should see "project 1"
     And I should see "project 2"
     And I should not see "project 3"
 
   Scenario: search for programs should work
-    When I am on "/app/search/mindstorms"
+    When I am on "/app/search_old/mindstorms"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 2 results"
+    Then I should see "Search results"
     And I should see "project 1"
     And I should see "project 2"
     And I should not see "project 3"

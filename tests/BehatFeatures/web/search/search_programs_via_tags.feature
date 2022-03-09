@@ -32,7 +32,7 @@ Feature: Searching for programs with tags
     But I should not see "project 3"
 
   Scenario: search for tags should work
-    When I am on "/app/search/Animation"
+    When I am on "/app/search_old/Animation"
     And I wait for the page to be loaded
     Then I should see "Your search returned 2 results"
     And I should see "project 1"

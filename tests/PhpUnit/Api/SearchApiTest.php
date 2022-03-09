@@ -9,6 +9,7 @@ use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Search\SearchApiFacade;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Api\SearchApiInterface;
+use OpenAPI\Server\Model\SearchResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -16,7 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
  * @internal
  * @coversDefaultClass \App\Api\SearchApi
  */
-class SearchApiTest extends DefaultTestCase
+final class SearchApiTest extends DefaultTestCase
 {
   /**
    * @var SearchApi|MockObject
@@ -89,7 +90,7 @@ class SearchApiTest extends DefaultTestCase
 
     $response = $this->object->searchGet('query', 'type', null, null, $response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
-    $this->assertNull($response);
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertInstanceOf(SearchResponse::class, $response);
   }
 }
