@@ -3,32 +3,47 @@
 namespace App\Api\Services\Search;
 
 use App\Api\Services\Base\AbstractResponseManager;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\Project\ProgramManager;
 use App\Storage\ImageRepository;
+use App\Utils\ElapsedTimeStringFormatter;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\SearchResponse;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
+use OpenAPI\Server\Service\SerializerInterface;
 
 final class SearchResponseManager extends AbstractResponseManager
 {
+    private ElapsedTimeStringFormatter $time_formatter;
   private UrlGeneratorInterface $url_generator;
   private ParameterBagInterface $parameter_bag;
   private ImageRepository $imageRepository;
   private ProgramManager $programManager;
 
   public function __construct(
-        TranslatorInterface $translator, UrlGeneratorInterface $url_generator, ParameterBagInterface $parameter_bag, ImageRepository $imageRepository, ProgramManager $programManager
+      ElapsedTimeStringFormatter $time_formatter,
+        TranslatorInterface $translator,
+        UrlGeneratorInterface $url_generator,
+        ParameterBagInterface $parameter_bag,
+        ImageRepository $imageRepository,
+        ProgramManager $programManager,
+        SerializerInterface $serializer,
+        ResponseCacheManager $response_cache_manager
+
     ) {
-    parent::__construct($translator);
+    parent::__construct($translator, $serializer, $response_cache_manager);
+    $this->time_formatter = $time_formatter;
     $this->url_generator = $url_generator;
     $this->parameter_bag = $parameter_bag;
     $this->imageRepository = $imageRepository;
     $this->programManager = $programManager;
+
   }
 
   public function getSearchResponse(array $projects_response, array $users_response): SearchResponse
@@ -85,6 +100,13 @@ final class SearchResponseManager extends AbstractResponseManager
     /** @var Program $project */
     $project = $program->isExample() ? $program->getProgram() : $program;
 
+      $tags = [];
+      $project_tags = $project->getTags();
+      /** @var Tag $tag */
+      foreach ($project_tags as $tag) {
+          $tags[$tag->getId()] = $tag->getInternalTitle();
+      }
+
     return new ProjectResponse([
       'id' => $project->getId(),
       'name' => $project->getName(),
@@ -95,12 +117,12 @@ final class SearchResponseManager extends AbstractResponseManager
       'download' => $project->getDownloads(),
       'private' => $project->getPrivate(),
       'flavor' => $project->getFlavor(),
-      'tags' => $project->getTagsName(),
+        'tags' => $tags,
       'uploaded' => $project->getUploadedAt()->getTimestamp(),
-      'uploaded_string' => $this->facade->getTimeFormatter()->getElapsedTime($project->getUploadedAt()->getTimestamp()),
+      'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
       'screenshot_large' => $program->isExample() ? $this->imageRepository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->programManager->getScreenshotLarge($project->getId()),
       'screenshot_small' => $program->isExample() ? $this->imageRepository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->programManager->getScreenshotSmall($project->getId()),
-      'project_url' => ltrim($this->generateUrl(
+      'project_url' => ltrim($this->url_generator->generate(
           'program',
           [
             'theme' => $this->parameter_bag->get('umbrellaTheme'),
@@ -108,7 +130,7 @@ final class SearchResponseManager extends AbstractResponseManager
           ],
           UrlGeneratorInterface::ABSOLUTE_URL), '/'
       ),
-      'download_url' => ltrim($this->url_generator->generateUrl(
+      'download_url' => ltrim($this->url_generator->generate(
           'download',
           [
             'theme' => $this->parameter_bag->get('umbrellaTheme'),

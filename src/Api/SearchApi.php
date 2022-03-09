@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Search\SearchApiFacade;
 use OpenAPI\Server\Api\SearchApiInterface;
+use Symfony\Component\HttpFoundation\Response;
 
 final class SearchApi extends AbstractApiController implements SearchApiInterface
 {
