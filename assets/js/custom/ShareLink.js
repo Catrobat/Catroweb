@@ -2,9 +2,9 @@ import $ from 'jquery'
 import Clipboard from 'clipboard'
 import { showSnackbar } from '../components/snackbar'
 
-export function shareProject (
+export function shareLink (
   themeDisplayName,
-  checkOutProject,
+  checkOutTranslation,
   url,
   shareSuccess,
   shareError,
@@ -16,7 +16,7 @@ export function shareProject (
     $('#top-app-bar__btn-share').on('click', function () {
       navigator.share({
         title: themeDisplayName,
-        text: checkOutProject,
+        text: checkOutTranslation,
         url: url
       })
         .then(() => {

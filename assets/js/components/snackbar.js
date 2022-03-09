@@ -1,8 +1,8 @@
 import $ from 'jquery'
 
 const SnackbarDuration = {
-  short: 2500,
-  long: 5000
+  short: 4500,
+  long: 7500
 }
 
 export function showSnackbar (id, text = '', duration = SnackbarDuration.short) {

@@ -4,10 +4,12 @@ namespace App\Security\Authentication\WebView;
 
 use App\DB\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -33,16 +35,18 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   public const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
   protected TranslatorInterface $translator;
-
   protected SessionInterface $session;
-
   private EntityManagerInterface $em;
+  protected LoggerInterface $logger;
+  protected UrlGeneratorInterface $url_generator;
 
-  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, SessionInterface $session)
+  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator, SessionInterface $session, LoggerInterface $logger, UrlGeneratorInterface $url_generator)
   {
     $this->em = $em;
     $this->translator = $translator;
     $this->session = $session;
+    $this->logger = $logger;
+    $this->url_generator = $url_generator;
   }
 
   /**
@@ -82,7 +86,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
     $token = $credentials[self::COOKIE_TOKEN_KEY];
 
     if (null === $token || '' === $token) {
-      throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
+      throw new AuthenticationException('Empty token!');
     }
 
     $user = $this->em->getRepository(User::class)
@@ -90,7 +94,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
     ;
 
     if (null === $user) {
-      throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
+      throw new AuthenticationException('User not found!');
     }
 
     // if a User object, checkCredentials() is called
@@ -132,7 +136,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
   {
-    throw new HttpException(Response::HTTP_UNAUTHORIZED, $exception->getMessage(), null, [], 0);
+    throw new HttpException(Response::HTTP_UNAUTHORIZED, $exception->getMessage(), null, [], Response::HTTP_UNAUTHORIZED);
   }
 
   /**
@@ -142,7 +146,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function start(Request $request, AuthenticationException $authException = null)
   {
-    throw new AuthenticationException($this->translator->trans('errors.authentication.webview', [], 'catroweb'));
+    throw new AuthenticationException($authException->getMessage());
   }
 
   /**

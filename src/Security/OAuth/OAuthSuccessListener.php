@@ -3,7 +3,7 @@
 namespace App\Security\OAuth;
 
 use App\Security\Authentication\CookieService;
-use App\Security\Authentication\RefreshTokenService;
+use App\Security\Authentication\JwtRefresh\RefreshTokenService;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

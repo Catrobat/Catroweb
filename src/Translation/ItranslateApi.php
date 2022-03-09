@@ -15,6 +15,65 @@ class ItranslateApi implements TranslationApiInterface
     'pt-PT',
   ];
 
+  private const SUPPORTED_LANGUAGE_CODE = [
+    'af',
+    'ar',
+    'az',
+    'bg',
+    'bn',
+    'bs',
+    'cs',
+    'da',
+    'de',
+    'el',
+    'en',
+    'es',
+    'et',
+    'fa',
+    'fi',
+    'fr',
+    'he',
+    'hi',
+    'hr',
+    'hu',
+    'id',
+    'is',
+    'it',
+    'ja',
+    'ka',
+    'ko',
+    'lt',
+    'lv',
+    'mk',
+    'mn',
+    'ms',
+    'my',
+    'ne',
+    'nl',
+    'no',
+    'pl',
+    'pt-BR',
+    'pt-PT',
+    'ro',
+    'ru',
+    'sk',
+    'sl',
+    'so',
+    'sq',
+    'sr',
+    'sv',
+    'sw',
+    'ta',
+    'th',
+    'tl',
+    'tr',
+    'uk',
+    'ur',
+    'vi',
+    'zh-CN',
+    'zh-TW',
+  ];
+
   private Client $client;
   private string $api_key;
   private LoggerInterface $logger;
@@ -75,5 +134,21 @@ class ItranslateApi implements TranslationApiInterface
     $translation_result->translation = $result['target']['text'];
 
     return $translation_result;
+  }
+
+  public function getPreference(string $text, ?string $source_language, string $target_language): float
+  {
+    $target_language = $this->helper->transformLanguageCode($target_language);
+    $source_language = $this->helper->transformLanguageCode($source_language);
+
+    if (null !== $source_language && !in_array($source_language, self::SUPPORTED_LANGUAGE_CODE, true)) {
+      return 0;
+    }
+
+    if (!in_array($target_language, self::SUPPORTED_LANGUAGE_CODE, true)) {
+      return 0;
+    }
+
+    return 0.5;
   }
 }

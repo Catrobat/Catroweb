@@ -21,4 +21,15 @@ interface TranslationApiInterface
    * @return TranslationResult|null null if any error occurred
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult;
+
+  /**
+   * Translation API may have preference on certain types of translation tasks, depending on language
+   * and text length, etc.
+   *
+   * The parameters are the same as @see TranslationApiInterface::translate
+   *
+   * @return float between 0 and 1, with 0 meaning the API will not be able to handle this translation
+   *               task, and 1 meaning the API is best at handling this task
+   */
+  public function getPreference(string $text, ?string $source_language, string $target_language): float;
 }

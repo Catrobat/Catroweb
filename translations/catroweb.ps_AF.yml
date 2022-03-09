@@ -39,6 +39,7 @@ privacyPolicy: د پټتیا تګلاره
 imprint: امپرنټ
 programDetails: جزیات
 somethingWentWrong: 'او یو څه غلط شو.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'مهرباني وکړئ بیا هڅه وکړئ!'
 oldVersionError: 'مهرباني وکړئ د جیب کوډ نوي نسخه ته تازه کړئ!'
 more: 'نور'
@@ -192,6 +193,10 @@ programs:
   hideTranslation: ژباړه پټ کړئ
   translatedByLine: '%provider%لخوا ژباړل شوی له %sourceLanguage% څخه تر %targetLanguage%'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: ډیفالټ
   save: خوندي کړئ
 remixGraph:
@@ -491,7 +496,7 @@ success:
   imgUpload: ستاسو عکس په بریالیتوب سره پورته شو!
   report: ستاسو راپور په بریالیتوب سره واستول شو!
 time:
-  minutes.ago: '{0} < 1 دقیقه وړاندې |{1}1 دقیقه وړاندې'
+  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 ساعت وړاندې'
   days.ago: '{1}1 ورځ وړاندې |]1,Inf] %count% ورځې وړاندې'
   months.ago: '{1}1 میاشت وړاندې |]1,Inf] %count% میاشتې مخکې'
@@ -672,7 +677,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: د پروژې لینک کلپ بورډ ته کاپي شوی!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: کلیپبورډ ته د لینک کاپي کولو کې پاتې راغلی! :(
 next: وړاندی
 previous: مخکینی
@@ -708,6 +714,7 @@ share:
   success: 'شریک یی کړۍ'
 copy: 'لینک کاپي کړئ'
 checkOutProject: 'دا پروژه وګورئ:'
+checkOutUser: 'Check out this user:'
 community: 'د کاټروبیټ ټولنه'
 back_to_app: 'د ټولنې څخه وتل'
 category:

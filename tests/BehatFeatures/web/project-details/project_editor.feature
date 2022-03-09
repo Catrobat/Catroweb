@@ -58,7 +58,7 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Then the element "#edit-text-ui" should be visible
     And the element "#edit-submit-button" should be visible
     When I fill in "edit-name-text" with "This is a new name"
-    When I fill in "edit-description-text" with "This is a new description"
+    And I fill in "edit-description-text" with "This is a new description"
     And I fill in "edit-credits-text" with "This is a new credit"
     And I click "#edit-submit-button"
     And I wait for AJAX to finish
@@ -66,3 +66,20 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     And I should see "This is a new name"
     And I should see "This is a new description"
     And I should see "This is a new credit"
+  
+  Scenario: Canceling changes for all fields is possible with cancel button
+    Given I log in as "OtherUser"
+    And I go to "/app/project/2"
+    And I wait for the page to be loaded
+    Then the element "#edit-program-button" should be visible
+    When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#edit-text-ui" should be visible
+    And the element "#edit-cancel-button" should be visible
+    When I fill in "edit-name-text" with "This is a new name"
+    And I fill in "edit-description-text" with "This is a new description"
+    And I fill in "edit-credits-text" with "This is a new credit"
+    And I click "#edit-cancel-button"
+    Then I should see "project 2"
+    And I should see "description 2"
+    And I should see "credit 2"

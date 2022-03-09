@@ -125,12 +125,10 @@ class CatrowebBrowserContext extends BrowserContext
     if ('in' === $arg1) {
       $this->assertPageNotContainsText('Your password or username was incorrect.');
       $this->getSession()->wait(2_000, 'window.location.href.search("login") == -1');
-      $this->cookieShouldExist('LOGGED_IN');
       $this->cookieShouldExist('BEARER');
     }
     if ('out' == $arg1) {
       $this->getSession()->wait(1_000, 'window.location.href.search("profile") == -1');
-      $this->cookieShouldNotExist('LOGGED_IN');
       $this->cookieShouldNotExist('BEARER');
     }
   }
@@ -1134,6 +1132,18 @@ class CatrowebBrowserContext extends BrowserContext
     $user = $this->getUserManager()->findUserByUsername($username);
     $token = $this->getJwtManager()->create($user);
     $this->getSession()->setRequestHeader('Authorization', 'Bearer '.$token);
+  }
+
+  /**
+   * @Given I use a valid BEARER cookie for :username
+   *
+   * @param mixed $username
+   */
+  public function iUseAValidBEARERCookieFor($username): void
+  {
+    $user = $this->getUserManager()->findUserByUsername($username);
+    $token = $this->getJwtManager()->create($user);
+    $this->getSession()->setCookie('BEARER', $token);
   }
 
   /**

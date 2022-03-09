@@ -39,6 +39,7 @@ privacyPolicy: นโยบายความเป็นส่วนตัว
 imprint: ประทับตรา
 programDetails: รายละเอียด
 somethingWentWrong: 'Ooooops เกิดข้อผิดพลาดบางอย่าง'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'กรุณาลองอีกครั้ง!'
 oldVersionError: 'กรุณาอัพเดต Pocket Code ให้เป็นเวอร์ชั่นล่าสุด'
 more: 'เพิ่มเติม'
@@ -195,6 +196,10 @@ programs:
   hideTranslation: ซ่อนคำแปล
   translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
   translationUpdated: การเปลี่ยนแปลงสำหรับการแปลเป็น %language% อัพเดท
+  googleTranslate: Google แปลภาษา
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: ค่าเริ่มต้น
   save: บันทึก
 remixGraph:
@@ -676,7 +681,8 @@ catro-notifications:
   remix:
     message: '%user_link% สร้างรีมิกซ์ %program_link% ของเกมของคุณ %remix_program_link%'
 clipboard:
-  success: คัดลอกลิงก์ไปยังโครงการไปยังคลิปบอร์ดแล้ว!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: คัดลอกลิงก์ไปยังคลิปบอร์ดไม่สำเร็จ! :(
 next: ถัดไป
 previous: ก่อนหน้า
@@ -712,6 +718,7 @@ share:
   success: 'แบ่งปันที่ประสบความสำเร็จ'
 copy: 'คัดลอกลิงค์'
 checkOutProject: 'ตรวจสอบโครงการนี้:'
+checkOutUser: 'Check out this user:'
 community: 'ชุมชน Catrobat'
 back_to_app: 'ออกจากชุมชน'
 category:

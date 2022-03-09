@@ -140,7 +140,7 @@ class OAuthService
       $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $gPlusId, $username, $gLocale);
       $this->setGoogleTokens($user, null, null, $id_token);
     } else {
-      $this->registerGoogleUser($request, $retArray, $gPlusId, $username, $gEmail, $gLocale, $id_token);
+      $this->registerGoogleUser($request, $retArray, $gPlusId, $username, $gEmail, $id_token);
       $retArray['statusCode'] = 201;
     }
 
@@ -212,7 +212,15 @@ class OAuthService
     if (0 === count($violations)) {
       if ('' === $user->getUsername()) {
         $locale = substr($locale, 0, 180);
-        $user->setUsername($googleUsername);
+
+        if ($user->getUsername() != $googleUsername) {
+          if ($this->user_manager->findUserByUsername($googleUsername)) {
+            $username = PasswordGenerator::generateRandomPassword();
+          } else {
+            $username = $googleUsername;
+          }
+          $user->setUsername($username);
+        }
       }
       if ('NO_GOOGLE_LOCALE' !== $locale) {
         $locale = substr($locale, 0, 5);
@@ -231,16 +239,21 @@ class OAuthService
    * @throws Exception
    */
   private function registerGoogleUser(Request $request, array &$retArray, string $googleId,
-                                      string $googleUsername, string $googleEmail,
-                                      string $locale, ?string $id_token = null): void
+                                      string $googleUsername, string $googleEmail, ?string $id_token = null): void
   {
+    if ($this->user_manager->findUserByUsername($googleUsername)) {
+      $username = PasswordGenerator::generateRandomPassword();
+    } else {
+      $username = $googleUsername;
+    }
+
     $violations = $this->validateOAuthUser($request, $retArray);
     $retArray['violations'] = count($violations);
     if (0 == count($violations)) {
       /** @var User $user */
       $user = $this->user_manager->createUser();
       $user->setGplusUid($googleId);
-      $user->setUsername($googleUsername);
+      $user->setUsername($username);
       $user->setEmail($googleEmail);
       $user->setPlainPassword(PasswordGenerator::generateRandomPassword());
       $user->setEnabled(true);

@@ -26,7 +26,7 @@ apple_login:
 # ===== Token =====
 gesdinet_jwt_refresh_token:
   path: /api/authentication/refresh
-  controller: catroweb.jwt_token_refresh_service::refresh
+  controller: App\Api\Services\Authentication\JWTTokenRefreshService::refresh
 
 # ===== Api =====
 open_api_server:
@@ -40,6 +40,22 @@ registration_confirmation_route:
   methods:  [GET]
   defaults:
     _controller: App\Application\Controller\Security\RegistrationController::verifyUserEmail
+
+# ===== Legacy Support
+
+legacy_hour_of_code_route: # Users coming from https://hourofcode.com/us/de/beyond
+  path: /hourOfCode
+  methods:  [GET]
+  defaults:
+    _controller: App\Application\Controller\Base\RedirectController::hourOfCodeAction
+
+# ===== Base
+
+robots_txt_route:
+  path: /robots.txt
+  methods:  [GET]
+  defaults:
+    _controller: App\Application\Controller\Base\RedirectController::robotsTxt
 
 # ===== Themes and flavors =====
 catrobat_web_index:

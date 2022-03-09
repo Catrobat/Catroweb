@@ -46,7 +46,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.4.0
+        uses: actions/checkout@v3
 
       - name: Build and start all containers (Docker Compose)
         run: |
@@ -99,19 +99,19 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v2.3.1
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: screenshots_dev_container
           path: tests/TestReports/TestScreenshots
 
-      - uses: actions/upload-artifact@v2.3.1
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: dev_logs_dev_container
           path: var/log/dev
 
-      - uses: actions/upload-artifact@v2.3.1
+      - uses: actions/upload-artifact@v3
         if: failure()
         with:
           name: test_logs_dev_container

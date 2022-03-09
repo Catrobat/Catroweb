@@ -254,7 +254,7 @@ class ProgramController extends AbstractController
    * @Route("/search/{q}", name="search", requirements={"q": ".+"}, methods={"GET"})
    * @Route("/search/", name="empty_search", defaults={"q": null}, methods={"GET"})
    */
-  public function searchNewAction(string $q): Response
+  public function searchAction(?string $q = null): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
@@ -263,7 +263,7 @@ class ProgramController extends AbstractController
    * @Route("/search_old/{q}", name="search_old", requirements={"q": ".+"}, methods={"GET"})
    * @Route("/search_old/", name="empty_search_old", defaults={"q": null}, methods={"GET"})
    */
-  public function searchAction(string $q): Response
+  public function searchActionOld(string $q): Response
   {
     return $this->render('Search/searchOld.html.twig', ['q' => $q]);
   }
@@ -553,6 +553,7 @@ class ProgramController extends AbstractController
       'translated_description' => $translation_result[1] ? $translation_result[1]->translation : null,
       'translated_credit' => $translation_result[2] ? $translation_result[2]->translation : null,
       'provider' => $translation_result[0]->provider,
+      '_cache' => $translation_result[0]->cache,
     ]);
   }
 

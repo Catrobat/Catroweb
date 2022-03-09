@@ -10,8 +10,8 @@
 </div>
 
 <div class="row justify-content-center">
-  <div class="login-container" href="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}">
-    <a class="btn social-login-btn me-2" id="btn-login-google">
+  <div class="login-container">
+    <a class="btn social-login-btn me-2" id="btn-login-google" href="{{ path('hwi_oauth_service_redirect', { service: 'google' }) }}">
       <img class="social-login-btn__img" alt="Google Login" src="{{ asset('images/social/btn_google_custom.png') }}"/>
     </a>
     <a class="btn social-login-btn social-login-btn--facebook me-2" id="btn-login-facebook" href="{{ path('hwi_oauth_service_redirect', { service: 'facebook' }) }}">

@@ -39,6 +39,7 @@ privacyPolicy: गोपनीयता नीति
 imprint: मोहर
 programDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'कृपया फिर से कोशिश करें!'
 oldVersionError: 'कृपया पॉकेट कोड को सबसे नए वर्जन में अपडेट करें!'
 more: 'अधिक'
@@ -193,6 +194,10 @@ programs:
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: पूर्व निर्धारित
   save: सहेजें
 remixGraph:
@@ -671,7 +676,8 @@ catro-notifications:
   remix:
     message: '%user_link% ने आपके गेम %remix_program_link% का रीमिक्स %program_link% बनाया है।'
 clipboard:
-  success: क्लिपबोर्ड पर कॉपी किए गए प्रोजेक्ट की लिंक!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: क्लिपबोर्ड की लिंक कॉपी करने में विफल! :(
 next: अगला
 previous: पहले का
@@ -707,6 +713,7 @@ share:
   success: 'सफल साझा करें'
 copy: 'लिंक की प्रतिलिपि करें'
 checkOutProject: 'इस परियोजना की जाँच करें'
+checkOutUser: 'Check out this user:'
 community: 'कैट्रोबैट समुदाय'
 back_to_app: 'समुदाय से बाहर निकलें'
 category:

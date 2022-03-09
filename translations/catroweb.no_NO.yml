@@ -39,6 +39,7 @@ privacyPolicy: Personvern
 imprint: Avtrykk
 programDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
 oldVersionError: 'Oppdater til den nyeste versjonen av Pocket Code!'
 more: 'mer'
@@ -193,6 +194,10 @@ programs:
   hideTranslation: Skjul oversettelse
   translatedByLine: Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Default
   save: Save
 remixGraph:
@@ -672,7 +677,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success: Lenke til prosjek kopiert til utklippstavlen!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Kan ikke kopiere lenke til utklippstavlen! :(
 next: Neste
 previous: Forrige
@@ -708,6 +714,7 @@ share:
   success: 'Deling vellykket'
 copy: 'Kopier lenke'
 checkOutProject: 'Sjekk ut dette prosjektet:'
+checkOutUser: 'Check out this user:'
 community: 'Catrobat samfunn'
 back_to_app: 'Forlat samfunnet'
 category:

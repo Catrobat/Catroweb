@@ -172,8 +172,7 @@ services:
   #   Services:
   #                most services need to be public (mainly for testing -> easy access in SymfonySupport.php)
   #
-  catroweb.jwt_token_refresh_service:
-    class: App\Security\Authentication\JWTTokenRefreshService
+  App\Api\Services\Authentication\JWTTokenRefreshService:
     public: true
     arguments: [ "@gesdinet.jwtrefreshtoken" ]
 
@@ -272,8 +271,7 @@ services:
       - '%env(REFRESH_TOKEN_TTL)%'
     public: true
 
-  App\Security\Authentication\RefreshTokenService:
-    class: App\Security\Authentication\RefreshTokenService
+  App\Security\Authentication\JwtRefresh\RefreshTokenService:
     arguments:
       - '%env(REFRESH_TOKEN_TTL)%'
     public: true
@@ -339,30 +337,22 @@ services:
   # ====================================================================================================================
   #   Listeners:
   #
-  catroweb.jwt_authentication_success_listener:
-    class: App\Security\Authentication\JWTAuthenticationSuccessListener
-    arguments:
-      - "@gesdinet.jwtrefreshtoken.send_token"
-    tags:
-      - { name: kernel.event_listener, event: lexik_jwt_authentication.on_authentication_success, method: onAuthenticationSuccess }
-
   catroweb.oauth_success_listener:
     class: App\Security\OAuth\OAuthSuccessListener
 
-  # ======== System CatrobatFile ========
-
-  catrowebbundle.listener.refresh_token:
-    class: App\Security\Authentication\JWTTokenListener
+  App\Application\Framework\ExceptionListener:
     tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 200 }
+      - { name: kernel.event_listener, event: kernel.exception }
+
+  App\Security\Authentication\JwtRefresh\RefreshBearerCookieOnKernelResponse:
+    tags:
+      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 200 }
 
   App\Application\Locale\LocaleListener:
-    class: App\Application\Locale\LocaleListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
 
   App\Application\Theme\ThemeRequestListener:
-    class: App\Application\Theme\ThemeRequestListener
     tags:
       - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
 
@@ -849,16 +839,17 @@ services:
   App\Translation\GoogleTranslateApi:
     class: App\Translation\GoogleTranslateApi
     arguments:
-      - '@Google\Cloud\Translate\V2\TranslateClient'
+      $client: '@Google\Cloud\Translate\V2\TranslateClient'
+      $short_text_length: 5
 
   Google\Cloud\Translate\V2\TranslateClient:
 
   App\Translation\TranslationDelegate:
     class: App\Translation\TranslationDelegate
     arguments:
-      - '@App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository'
-      - '@App\Translation\ItranslateApi'
-      - '@App\Translation\GoogleTranslateApi'
+      $apis:
+        - '@App\Translation\ItranslateApi'
+        - '@App\Translation\GoogleTranslateApi'
 
   App\Translation\MachineTranslationListener:
     class: App\Translation\MachineTranslationListener

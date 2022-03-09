@@ -13,7 +13,7 @@ education: Edukacja
 chat: Czat i fora
 others: Inne
 tutorials: Poradniki
-googlePlay: Google Play
+googlePlay: Sklep Google Play
 iosAppStore: Sklep iOS App
 huaweiAppGallery: Galeria Huawei
 instagram: Instagram
@@ -39,6 +39,7 @@ privacyPolicy: Polityka prywatności
 imprint: Stopka
 programDetails: Szczegóły
 somethingWentWrong: 'Ups, coś poszło nie tak.'
+doesNotExist: 'Żądany zasób nie istnieje.'
 pleaseTryAgain: 'Spróbuj ponownie!'
 oldVersionError: 'Zaktualizuj do najnowszej wersji Pocket code!'
 more: 'więcej'
@@ -193,6 +194,10 @@ programs:
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
   translationUpdated: Zaktualizowano zmiany dla tłumaczenia na %language%
+  googleTranslate: Tłumacz Google
+  translationDeleted: Niestandardowe tłumaczenie na %language% zostało usunięte
+  cannotDelete: Nie można usunąć domyślnej nazwy, opisu lub kredytów
+  confrimDelete: Czy na pewno chcesz usunąć tłumaczenie?
   default: Domyślny
   save: Zapisz
 remixGraph:
@@ -671,7 +676,8 @@ catro-notifications:
   remix:
     message: 'Użytkownik %user_link% zremiksował Twój projekt %program_link%. Możesz zobaczyć remiks klikając link %remix_program_link%.'
 clipboard:
-  success: Link do projektu skopiowany do schowka!
+  success_project: Link do projektu skopiowany do schowka!
+  success_user: Link do użytkownika skopiowany do schowka!
   fail: Nie udało się skopiować linku do schowka! :(
 next: Następny
 previous: Poprzedni
@@ -707,6 +713,7 @@ share:
   success: 'Udostępnianie zakończone sukcesem'
 copy: 'Skopiuj link'
 checkOutProject: 'Sprawdź ten projekt:'
+checkOutUser: 'Sprawdź tego użytkownika:'
 community: 'Społeczność Catrobat'
 back_to_app: 'Opuść społeczność'
 category:

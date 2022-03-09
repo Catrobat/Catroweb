@@ -7,7 +7,7 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\Project\ProgramManager;
 use App\Security\Authentication\CookieService;
-use App\Security\Authentication\RefreshTokenService;
+use App\Security\Authentication\JwtRefresh\RefreshTokenService;
 use App\User\Achievements\AchievementManager;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;

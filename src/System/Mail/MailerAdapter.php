@@ -43,13 +43,13 @@ class MailerAdapter
   {
     $html = '';
     try {
-      $this->templateWrapper->render($template, $context);
+      $html = $this->templateWrapper->render($template, $context);
     } catch (Exception $e) {
       $this->logger->error("Can't render mail template: {$template}".$e->getMessage());
     }
 
     return (new TemplatedEmail())
-      ->from(new Address('share@catrob.at'))
+      ->from(new Address('support@catrob.at'))
       ->to($to)
       ->subject($subject)
       ->htmlTemplate($template)
@@ -61,7 +61,7 @@ class MailerAdapter
   protected function signEmail(Message $email): Message
   {
     try {
-      return (new DkimSigner('file://'.$this->dkim_private_key_path, 'catrob.at', 'sf'))->sign($email);
+      return (new DkimSigner('file://'.$this->dkim_private_key_path, 'share.catrob.at', 'sf'))->sign($email);
     } catch (InvalidArgumentException $e) {
       if ('prod' === $_ENV['APP_ENV']) {
         $this->logger->error("Private dkim key is missing ({$this->dkim_private_key_path}): ".$e->getMessage());

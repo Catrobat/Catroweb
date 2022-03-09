@@ -34,9 +34,21 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
     projectDescriptionCredits.data('trans-discard')
   )
 
+  this.confirmDeleteDialog = new ProgramEditorDialog(
+    projectDescriptionCredits.data('trans-confirm-delete'),
+    projectDescriptionCredits.data('trans-cancel'),
+    projectDescriptionCredits.data('trans-delete')
+  )
+
   this.translationUpdated = projectDescriptionCredits.data('trans-translation-updated')
+  this.translationDeleted = projectDescriptionCredits.data('trans-translation-deleted')
+  this.cannotDelete = projectDescriptionCredits.data('trans-cannot-delete')
 
   $('#edit-submit-button').on('click', () => { this.save() })
+
+  $('#edit-cancel-button').on('click', () => { this.cancelChanges() })
+
+  $('#edit-delete-button').on('click', () => { this.deleteTranslation() })
 
   this.languageSelect.listen('MDCSelect:change', () => {
     if (!this.editTextUI.is(':visible') || this.languageSelect.selectedIndex === this.previousIndex) {
@@ -194,6 +206,45 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
         }
       }
     })
+  }
+
+  this.cancelChanges = () => {
+    for (const textField of this.textFields) {
+      textField.cancelChanges()
+    }
+  }
+
+  this.deleteTranslation = () => {
+    const languageSelected = this.languageSelect.value
+    if (languageSelected === '' || languageSelected === 'default') {
+      showSnackbar('#share-snackbar', this.cannotDelete)
+    } else {
+      this.confirmDeleteDialog.show(deleteTranslationResult)
+    }
+  }
+
+  function deleteTranslationResult (result) {
+    if (result.isDenied) {
+      const languageSelected = self.languageSelect.value
+      Promise.all([
+        self.textFields[0].delete(languageSelected),
+        self.textFields[1].delete(languageSelected),
+        self.textFields[2].delete(languageSelected)
+      ]).then(function (results) {
+        const deletedText = self.translationDeleted.replace('%language%', self.selectedLanguage.text())
+        showSnackbar('#share-snackbar', deletedText)
+
+        if (results.length === self.textFields.length) {
+          self.close()
+        }
+      }).catch(function (reason) {
+        for (const error of reason) {
+          if (error === 401) {
+            window.location.href = '../login'
+          }
+        }
+      })
+    }
   }
 
   self.getNewText = () => {

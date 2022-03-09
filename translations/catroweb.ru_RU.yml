@@ -31,7 +31,7 @@ name: Название
 description: Описание
 noDescription: Описание отсутствует.
 credits: Примечания и авторы
-noCredits: Нету примечаний и информации об авторах
+noCredits: Нет примечаний и упоминаний об авторах
 notesAndCreditsDescription: Как вы создали этот проект? Вы заимствовали идеи, скрипты или изображения у других людей? Поблагодарите их здесь.
 country: Страна
 loginText: Войти
@@ -39,6 +39,7 @@ privacyPolicy: Политика конфиденциальности
 imprint: Импринт
 programDetails: Детали
 somethingWentWrong: 'Ой, что-то пошло не так.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
 oldVersionError: 'Пожалуйста, обновите Покет Код до последней версии!'
 more: 'больше'
@@ -193,6 +194,10 @@ programs:
   hideTranslation: Скрыть перевод
   translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
   translationUpdated: Изменения для %language% были применены
+  googleTranslate: Google Переводчик
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: По умолчанию
   save: Сохранить
 remixGraph:
@@ -572,8 +577,8 @@ language:
   ukrainian: Украинский
   vietnamese: Вьетнамский
 ci:
-  generate: Генерировать Apk
-  pending: Генерирование Apk
+  generate: Сгенерировать apk
+  pending: Генерация apk
   download: Скачать Apk
 admin:
   maintain:
@@ -583,16 +588,16 @@ admin:
     removableObjects: Удаляемые объекты
 recommender:
   similarPrograms: Похожие проекты
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также загружены
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также скачали
   moreFromThisUser: Ещё от %username%
 pmd:
   submitBtn: Отправьте ваш проект
   submitBox:
     header: Отправка
-    text: Чтобы отправить ваш проект, введите код проекта и нажмите "отослать".
+    text: Чтобы отправить ваш проект, введите код проекта и нажмите "Отправить".
     btnText: Отправить
   successful:
-    text: Ваш проект загружен успешно.
+    text: Загрузка вашего проекта прошла успешно.
   failed:
     text: Не удалось загрузить проект.
 codeview:
@@ -600,7 +605,7 @@ codeview:
   showCode: 'Показать код'
   hideCode: 'Скрыть код'
   showStatistics: 'Показать статистику кода'
-  hideStatistics: 'Скрыть статистику по коду'
+  hideStatistics: 'Скрыть статистику кода'
   cantDisplayCode: "Код не может быть отображен"
   cantDisplayStatistics: "Код не может быть отображен"
   totalNumberOf: 'Общее количество'
@@ -673,7 +678,8 @@ catro-notifications:
   remix:
     message: '%user_link% создал ремикс %program_link% вашей игры %remix_program_link%.'
 clipboard:
-  success: Ссылка скопирована в буфер обмена
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Не удалось скопировать ссылку в буфер обмена! :(
 next: Далее
 previous: Предыдущий
@@ -704,11 +710,12 @@ profileLoader:
 element: 'Элемент'
 elements: 'Элементы'
 share:
-  text: 'Опубликовать'
-  error: 'Ошибка публикации'
-  success: 'Публикация завершена'
+  text: 'Поделиться'
+  error: 'Не удалось поделиться'
+  success: 'Спасибо, что поделились!'
 copy: 'Скопировать ссылку'
 checkOutProject: 'Посмотреть проект:'
+checkOutUser: 'Check out this user:'
 community: 'Сообщество Catrobat'
 back_to_app: 'Выйти из  сообщества'
 category:

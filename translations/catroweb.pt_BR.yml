@@ -39,6 +39,7 @@ privacyPolicy: Política de Privacidade
 imprint: Imprimir
 programDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, atualize para a versão mais recente do Pocket Code!'
 more: 'mais'
@@ -193,6 +194,10 @@ programs:
   hideTranslation: Ocultar tradução
   translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Padrão
   save: Salvar
 remixGraph:
@@ -671,7 +676,8 @@ catro-notifications:
   remix:
     message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
 clipboard:
-  success: Link para o projeto copiado para área de transferência!
+  success_project: Link para o projeto copiado para área de transferência!
+  success_user: Link to user copied to clipboard!
   fail: Falha ao copiar link para área de transferência! :(
 next: Próximo
 previous: Anterior
@@ -707,6 +713,7 @@ share:
   success: 'Compartilhado com sucesso'
 copy: 'Copiar link'
 checkOutProject: 'Confira este projeto:'
+checkOutUser: 'Check out this user:'
 community: 'Comunidade Catrobat'
 back_to_app: 'Sair da comunidade'
 category:

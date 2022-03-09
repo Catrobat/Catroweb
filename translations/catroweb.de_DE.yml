@@ -39,6 +39,7 @@ privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
 programDetails: Details
 somethingWentWrong: 'Ooooops etwas ging schief.'
+doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
 more: 'mehr'
@@ -193,6 +194,10 @@ programs:
   hideTranslation: Übersetzung ausblenden
   translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
   translationUpdated: Changes for the translation to %language% updated
+  googleTranslate: Google Translate
+  translationDeleted: Custom translation to %language% deleted
+  cannotDelete: Cannot delete default name, description, or credits
+  confrimDelete: Are you sure you want to delete the translation?
   default: Standard
   save: Speichern
 remixGraph:
@@ -675,7 +680,8 @@ catro-notifications:
   remix:
     message: 'Benutzer %user_link% hat einen Remix deines Programms %program_link% erstellt. Du kannst diesen unter folgendem Link sehen: %remix_program_link%.'
 clipboard:
-  success: Link zum Projekt in die Zwischenablage kopiert!
+  success_project: Link to project copied to clipboard!
+  success_user: Link to user copied to clipboard!
   fail: Fehler beim Kopieren! :(
 next: Weiter
 previous: Vorheriges
@@ -711,6 +717,7 @@ share:
   success: 'Teilen erfolgreich'
 copy: 'Link kopieren'
 checkOutProject: 'Sieh dir dieses Projekt an:'
+checkOutUser: 'Check out this user:'
 community: 'Catrobat Community'
 back_to_app: 'Community verlassen'
 category:
