@@ -57,6 +57,8 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
 
     $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
 
+    $responseCode = Response::HTTP_OK;
+
     return $result;
   }
 }

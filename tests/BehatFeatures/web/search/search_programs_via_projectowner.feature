@@ -18,7 +18,7 @@ Feature: Searching for programs with ownername
   Scenario: search for programs with full name should work
     When I am on "/app/search/User3"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 1 results"
+    Then I should see "Search results"
     And I should not see "project 1"
     And I should not see "project 2"
     But I should see "project 3"
@@ -26,7 +26,7 @@ Feature: Searching for programs with ownername
   Scenario: search for programs with parts of name should work
     When I am on "/app/search/User"
     And I wait for the page to be loaded
-    Then I should see "Your search returned 2 results"
+    Then I should see "Search results"
     And I should not see "project 1"
     And I should see "project 2"
     But I should see "project 3"

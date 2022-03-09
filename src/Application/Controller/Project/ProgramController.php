@@ -249,25 +249,24 @@ class ProgramController extends AbstractController
       'activeLikeTypes' => $active_like_types,
     ]);
   }
-    /**
-     * @Route("/search_new/{q}", name="search_new", requirements={"q": ".+"}, methods={"GET"})
-     * @Route("/search_new/", name="empty_search_new", defaults={"q": null}, methods={"GET"})
-     */
-    public function searchNewAction(string $q): Response
-    {
-        return $this->render('Search/searchNew.html.twig', ['q' => $q]);
-    }
-
 
   /**
    * @Route("/search/{q}", name="search", requirements={"q": ".+"}, methods={"GET"})
    * @Route("/search/", name="empty_search", defaults={"q": null}, methods={"GET"})
    */
-  public function searchAction(string $q): Response
+  public function searchNewAction(string $q): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
 
+  /**
+   * @Route("/search_old/{q}", name="search_old", requirements={"q": ".+"}, methods={"GET"})
+   * @Route("/search_old/", name="empty_search_old", defaults={"q": null}, methods={"GET"})
+   */
+  public function searchAction(string $q): Response
+  {
+    return $this->render('Search/searchOld.html.twig', ['q' => $q]);
+  }
 
   /**
    * @Route("/userDeleteProject/{id}", name="profile_delete_program", methods={"GET"})
