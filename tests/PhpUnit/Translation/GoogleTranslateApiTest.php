@@ -79,7 +79,7 @@ class GoogleTranslateApiTest extends TestCase
 
   public function testLongText(): void
   {
-    $this->assertEquals(0, $this->api->getPreference('testing', null, 'en'));
+    $this->assertEquals(0.5, $this->api->getPreference('testing', null, 'en'));
   }
 
   public function testShortText(): void
