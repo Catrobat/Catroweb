@@ -86,6 +86,7 @@ Encore
   .addEntry('my_profile', './assets/js/my_profile.js')
   .addEntry('profile', './assets/js/profile.js')
   .addEntry('project', './assets/js/project.js')
+  .addEntry('search_old', './assets/js/search_old.js')
   .addEntry('search', './assets/js/search.js')
   .addEntry('media_library', './assets/js/media_library.js')
   .addEntry('login', './assets/js/login.js')
@@ -103,6 +104,7 @@ Encore
   .addStyleEntry('old_code_view', './assets/styles/custom/old_code_view.scss')
   .addStyleEntry('code_statistics', './assets/styles/components/code_statistics.scss')
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
+  .addStyleEntry('user_list', './assets/styles/components/user_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
 

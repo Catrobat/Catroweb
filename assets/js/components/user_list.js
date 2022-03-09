@@ -1,27 +1,27 @@
 import $ from 'jquery'
 import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
 
-require('../../styles/components/project_list.scss')
+require('../../styles/components/user_list.scss')
 
-export class ProjectList {
-  constructor (container, category, apiUrl, propertyToShow, theme, fetchCount = 30, emptyMessage = '') {
+export class UserList {
+  constructor (container, baseUrl, apiUrl, theme, projectString, fetchCount = 30, emptyMessage = '') {
     this.container = container
-    this.projectsContainer = $('.projects-container', container)
-    this.category = category
+    this.usersContainer = $('.users-container', container)
     this.apiUrl = apiUrl
-    this.propertyToShow = propertyToShow
-    this.projectsLoaded = 0
-    this.projectFetchCount = fetchCount
+    this.baseUrl = baseUrl
+    this.usersLoaded = 0
+    this.userFetchCount = fetchCount
     this.empty = false
     this.fetchActive = false
     this.isFullView = false
     this.theme = theme
     this.emptyMessage = emptyMessage
+    this.projectString = projectString
 
-    this.$title = $('.project-list__title', $(this.container))
+    this.$title = $('.user-list__title', $(this.container))
     this.$body = $('body')
-    this.$chevronLeft = $('.project-list__chevrons__left', $(this.container))
-    this.$chevronRight = $('.project-list__chevrons__right', $(this.container))
+    this.$chevronLeft = $('.user-list__chevrons__left', $(this.container))
+    this.$chevronRight = $('.user-list__chevrons__right', $(this.container))
     const self = this
     this.popStateHandler = function () {
       self.closeFullView()
@@ -43,26 +43,26 @@ export class ProjectList {
       this.apiUrl += '?'
     }
 
-    $.getJSON(this.apiUrl + '&limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded,
+    $.getJSON(this.apiUrl + '&limit=' + this.userFetchCount + '&offset=' + this.usersLoaded,
       function (data) {
         if (!Array.isArray(data)) {
-          console.error('Data received for ' + self.category + ' is no array!')
+          console.error('Data received for users is no array!')
           self.container.classList.remove('loading')
           return
         }
 
         if (clear) {
-          self.projectsContainer.empty()
+          self.usersContainer.empty()
         }
 
-        data.forEach(function (project) {
-          project = self._generate(project)
-          self.projectsContainer.append(project)
-          project.click(function () {
-            project.empty()
-            project.css('display', 'flex')
-            project.css('justify-content', 'center')
-            project.append($('#project-opening-spinner').html())
+        data.forEach(function (user) {
+          user = self._generate(user)
+          self.usersContainer.append(user)
+          user.click(function () {
+            user.empty()
+            user.css('display', 'flex')
+            user.css('justify-content', 'center')
+            user.append($('#user-opening-spinner').html())
           })
         })
         self.container.classList.remove('loading')
@@ -71,12 +71,12 @@ export class ProjectList {
           self.$chevronRight.show()
         }
 
-        self.projectsLoaded += data.length
+        self.usersLoaded += data.length
 
-        if (self.projectsLoaded === 0 && self.empty === false) {
+        if (self.usersLoaded === 0 && self.empty === false) {
           self.empty = true
           if (self.emptyMessage) {
-            self.projectsContainer.append(self.emptyMessage)
+            self.usersContainer.append(self.emptyMessage)
             self.container.classList.add('empty-with-text')
           } else {
             self.container.classList.add('empty')
@@ -85,43 +85,32 @@ export class ProjectList {
 
         self.fetchActive = false
       }).fail(function (jqXHR, textStatus, errorThrown) {
-      console.error('Failed loading projects in category ' + self.category, JSON.stringify(jqXHR), textStatus, errorThrown)
+      console.error('Failed loading users', JSON.stringify(jqXHR), textStatus, errorThrown)
       self.container.classList.remove('loading')
     })
   }
 
   _generate (data) {
     /*
-    * Necessary to support legacy flavoring with URL:
-    *   Absolute url always uses new 'app' routing flavor. We have to replace it!
-    */
-    let projectUrl = data.project_url
-    projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
-    //
+        * Necessary to support legacy flavoring with URL:
+        *   Absolute url always uses new 'app' routing flavor. We have to replace it!
+        */
+    const userUrl = this.baseUrl + '/app/user/' + data.id
 
-    const $p = $('<a />', { class: 'project-list__project', href: projectUrl })
+    const $p = $('<a />', { class: 'user-list__user', href: userUrl })
     $p.data('id', data.id)
     $('<img/>', {
-      'data-src': data.screenshot_small,
-      // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
-      'data-srcset': data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
+      // TODO: use real images
+      'data-src': '/images/default/avatar_default.png?v=3.7.1',
+      'data-srcset': '/images/default/avatar_default.png?v=3.7.1' + ' 80w, ' + '/images/default/avatar_default.png?v=3.7.1' + ' 480w',
       'data-sizes': '(min-width: 768px) 10vw, 25vw',
-      class: 'lazyload project-list__project__image'
+      class: 'lazyload user-list__user__image'
     }).appendTo($p)
-    $('<span/>', { class: 'project-list__project__name' }).text(data.name).appendTo($p)
-    const $prop = $('<div />', { class: 'lazyload project-list__project__property project-list__project__property-' + this.propertyToShow })
+    $('<span/>', { class: 'user-list__user__name' }).text(data.username).appendTo($p)
+    const $prop = $('<div />', { class: 'lazyload user-list__user__property' })
     $prop.appendTo($p)
+    $('<span/>', { class: 'user-list__user__property__value' }).text(data.projects + ' ' + this.projectString).appendTo($prop)
 
-    const icons = {
-      views: 'visibility',
-      downloads: 'get_app',
-      uploaded: 'schedule',
-      author: 'person'
-    }
-
-    const propertyValue = this.propertyToShow === 'downloads' ? data.download : this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
-    $('<i/>', { class: 'material-icons' }).text(icons[this.propertyToShow]).appendTo($prop)
-    $('<span/>', { class: 'project-list__project__property__value' }).text(propertyValue).appendTo($prop)
     return $p
   }
 
@@ -131,13 +120,13 @@ export class ProjectList {
     // ---- History State
     window.addEventListener('popstate', function (event) {
       if (event.state != null) {
-        if (event.state.type === 'ProjectList' && event.state.full === true) {
+        if (event.state.type === 'UserList' && event.state.full === true) {
           $('#' + event.state.id).data('list').openFullView()
         }
       }
     })
 
-    this.projectsContainer.on('scroll', function () {
+    this.usersContainer.on('scroll', function () {
       const pctHorizontal = this.scrollLeft / (this.scrollWidth - this.clientWidth)
       if (pctHorizontal >= 0.8) {
         self.fetchMore()
@@ -166,7 +155,7 @@ export class ProjectList {
         window.history.back() // to remove pushed state
       } else {
         window.history.pushState(
-          { type: 'ProjectList', id: self.container.id, full: true },
+          { type: 'UserList', id: self.container.id, full: true },
           $(this).text(), '#' + self.container.id
         )
         self.openFullView()
@@ -174,12 +163,12 @@ export class ProjectList {
     })
 
     this.$chevronLeft.on('click', function () {
-      const width = self.projectsContainer.find('.project-list__project').outerWidth(true)
-      self.projectsContainer.scrollLeft(self.projectsContainer.scrollLeft() - 2 * width)
+      const width = self.usersContainer.find('.user-list__project').outerWidth(true)
+      self.usersContainer.scrollLeft(self.usersContainer.scrollLeft() - 2 * width)
     })
     this.$chevronRight.on('click', function () {
-      const width = self.projectsContainer.find('.project-list__project').outerWidth(true)
-      self.projectsContainer.scrollLeft(self.projectsContainer.scrollLeft() + 2 * width)
+      const width = self.usersContainer.find('.user-list__project').outerWidth(true)
+      self.usersContainer.scrollLeft(self.usersContainer.scrollLeft() + 2 * width)
     })
   }
 

@@ -17,12 +17,12 @@
 
   <div class="js-search"
        data-result-container="#search-results"
-       data-path-search="{{ path('api_search_extension') }}"
+       data-path-search="{{ path('api_search_programs') }}"
        data-query="{{ q }}"
   ></div>
 
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('search_old')  }}
+{{ encore_entry_script_tags('search_old')  }}
 {% endblock %}

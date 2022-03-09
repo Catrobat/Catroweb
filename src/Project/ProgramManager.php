@@ -161,7 +161,7 @@ class ProgramManager
     return true;
   }
 
-  /**
+  /*
    * Adds a new program and notifies all followers of the uploader about it.
    *
    * @throws Exception
