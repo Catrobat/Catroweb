@@ -142,6 +142,7 @@
        data-path-notifications-count="{{ path('sidebar_notifications_count') }}"
        data-path-achievements-count="{{ path('sidebar_achievements_count') }}"
        data-trans-achievements-bade-text="{{ "achievements.sidebar.badge"|trans({}, "catroweb") }}"
+       data-base-url="{{ app.request.getBaseURL() }}"
   ></div>
 {% endif %}
 

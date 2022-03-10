@@ -30,11 +30,20 @@ final class NotificationsApi extends AbstractApiController implements Notificati
 
   public function notificationsCountGet(&$responseCode = null, array &$responseHeaders = null)
   {
-    // TODO: Implement notificationsCountGet() method.
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+      $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+      if (is_null($user)) {
+          $responseCode = Response::HTTP_FORBIDDEN;
 
-    return null;
+          return null;
+      }
+
+    $response = $this->facade->getResponseManager()->createNotificationsCountResponse($user);
+
+      $responseCode = Response::HTTP_OK;
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+    return $response;
   }
 
   public function notificationsGet(?string $accept_language = null, ?int $limit = 20, ?int $offset = 0, NotificationsType $type = null, &$responseCode = null, array &$responseHeaders = null)
