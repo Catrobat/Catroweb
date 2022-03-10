@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "उपयोगकर्ता को अधि
 notificationsClearError: "सूचना को पढ़कर मार्क करने में असमर्थ!"
 pleaseWait: "कृपया प्रतीक्षा करें..."
 projects: "प्रोजेक्ट"
+users: "Users"
 oauthPopUpTitle: "बाहरी अकाउंट में प्रवेश की जानकारी"
 oauthInfo: "\nआपने अभी प्रवेश करने के लिए किसी बाहरी अकाउंट का उपयोग किया है। हमने आपके लिए नया उपभोक्ता नाम बनाया है। अगर आप अपना उपभोक्ता नाम बदलना चाहते हैं या नया पासवर्ड बनाना चाहते हैं तो अपने प्रोफाइल पेज पर जाएं।"
 oauthHere: "यहां"
@@ -368,6 +369,8 @@ search:
   results: खोज परिणाम
   resultcount: आपकी खोज ने %count% परिणाम लौटा दिए
   fail: कृपया कम से कम एक खोज शब्द दर्ज करें
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: मेरी पार्श्वचित्र
   login: प्रवेश करे

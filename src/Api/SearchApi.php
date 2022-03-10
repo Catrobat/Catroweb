@@ -25,10 +25,40 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
 
-    // TODO: Implement notificationIdReadPut() method.
+    if ('' === $query || ctype_space($query)) {
+      return [];
+    }
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    switch ($type) {
+          case 'projects':
+              $projects = $this->facade->getProgramManager()->search($query, $limit, $offset);
+              $projects_total = $this->facade->getProgramManager()->searchCount($query);
 
-    return null;
+              $result = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+              break;
+          case 'users':
+              $users = $this->facade->getUserManager()->search($query, $limit, $offset);
+              $users_total = $this->facade->getUserManager()->searchCount($query);
+              $result = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
+              break;
+          case 'all':
+          default:
+              $projects = $this->facade->getProgramManager()->search($query, $limit, $offset);
+              $projects_total = $this->facade->getProgramManager()->searchCount($query);
+              $projects_response = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+
+              $users = $this->facade->getUserManager()->search($query, $limit, $offset);
+              $users_total = $this->facade->getUserManager()->searchCount($query);
+              $users_response = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
+
+              $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response);
+              break;
+      }
+
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+
+    $responseCode = Response::HTTP_OK;
+
+    return $result;
   }
 }

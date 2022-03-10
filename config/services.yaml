@@ -817,6 +817,11 @@ services:
     tags:
       - { name: "open_api_server.api", api: "utility" }
 
+  api.search:
+    class: App\Api\SearchApi
+    tags:
+      - { name: "open_api_server.api", api: "search" }
+
   api.notifications:
     class: App\Api\NotificationsApi
     tags:

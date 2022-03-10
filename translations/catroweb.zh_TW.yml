@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "無法授權用戶"
 notificationsClearError: "無法將通知標記為已讀！"
 pleaseWait: "請稍等..."
 projects: "程式檔"
+users: "Users"
 oauthPopUpTitle: "外部帳戶登錄信息"
 oauthInfo: '您剛剛使用外部帳戶登錄。我們為您創建了一個隨機用戶名。如果您想更改用戶名或為您的帳戶創建新密碼，請轉到我的個人資料頁面。點擊此處%link_end%的%link_start%轉到您的個人資料頁面'
 oauthHere: "這裡"
@@ -368,6 +369,8 @@ search:
   results: 搜尋結果
   resultcount: 您的搜索返回了 %count% 個結果
   fail: 請至少輸入一個搜索詞
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: 我的個人資料
   login: 登入

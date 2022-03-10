@@ -112,7 +112,7 @@ Feature: Searching should be possible using a specific Search Top App Bar
     And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/app/search/program"
-    And I should see "Your search returned 2 results"
+    Then I should see "Search results"
     And the element "#top-app-bar__btn-search-back" should be visible
     And the element "#top-app-bar__search-form" should be visible
     And the element "#top-app-bar__search-input" should be visible
@@ -122,7 +122,7 @@ Feature: Searching should be possible using a specific Search Top App Bar
     And I press enter in the search bar
     And I wait for the page to be loaded
     Then I should be on "/app/search/Test%20advanced"
-    And I should see "Your search returned 2 results"
+    Then I should see "Search results"
     And the element "#top-app-bar__btn-search-back" should be visible
     And the element "#top-app-bar__search-form" should be visible
     And the element "#top-app-bar__search-input" should be visible

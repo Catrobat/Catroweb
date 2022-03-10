@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "قادر به تأیید کاربر نیست"
 notificationsClearError: "علامت زدن تمام اعلانات به عنوان خوانده شده امکانپزیر نیست"
 pleaseWait: "لطفا صبر کن..."
 projects: "برنامه ها"
+users: "Users"
 oauthPopUpTitle: "حساب خارجی ورود به سیستم اطلاعات"
 oauthInfo: 'شما به تازگی از یک حساب خارجی برای ورود استفاده کرده اید. ما یک نام کاربری تصادفی برای شما ایجاد کردیم. اگر می خواهید نام کاربری خود را تغییر دهید یا گذرواژه جدیدی برای حساب خود ایجاد کنید ، لطفاً به صفحه نمایه خود بروید.'
 oauthHere: "اینجا"
@@ -372,6 +373,8 @@ search:
   results: نتایج جستجو
   resultcount: جستجوی تو %count% نتیجه برگرداند
   fail: لطفا حداقل یک اصطلاح جستجو را وارد کنید
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: مشخصات من
   login: ورود به سیستم
