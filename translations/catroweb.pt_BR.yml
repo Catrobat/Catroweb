@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "Não é possível autorizar o usuário"
 notificationsClearError: "Não foi possível marcar as notificações como lidas!"
 pleaseWait: "Por favor, aguarde..."
 projects: "Programas"
+users: "Users"
 oauthPopUpTitle: "Informação de login da conta externa"
 oauthInfo: 'Você acabou de usar uma conta externa para entrar. Nós criamos um nome de usuário aleatório para você. Se quiser mudar seu nome de usuário ou criar uma nova senha para sua conta, acesse minha página de perfil. Clique %link_start% aqui %link_end% para ir para a sua página de perfil'
 oauthHere: "aqui"
@@ -368,6 +369,8 @@ search:
   results: Resultados da Busca
   resultcount: Sua busca retornou %count% resultados
   fail: Por favor, insira ao menos um termo de busca
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: Meu Perfil
   login: Login

@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "E pamundur të autorizohet përdoruesi"
 notificationsClearError: "E pamundur të shënohen lamerimet si të lexuara!"
 pleaseWait: "Ju lutem prisni..."
 projects: "Programet"
+users: "Users"
 oauthPopUpTitle: "të dhënat e identifikimit të llogarisë së jashtme"
 oauthInfo: 'Sapo keni përdorur një llogari të jashtme për t''u identifikuar. Ne krijuam një emër përdorimi të rastësishëm për ju. Nëse dëshironi të ndryshoni emrin tuaj të përdoruesit ose të krijoni një fjalëkalim të ri për llogarinë tuaj, ju lutemi shkoni në faqen tuaj të profilit. Klikoni  %link_start% këtu %link_end% për të shkuar në faqen tuaj të profilit'
 oauthHere: "këtu"
@@ -369,6 +370,8 @@ search:
   results: Search Results
   resultcount: Kërkimi juaj solli %count% rezultate
   fail: Ju lutemi shkruani të paktën një term të vetëm kërkimi 
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: Profili im
   login: Kyçuni

@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "Benutzer kann nicht autorisiert werden"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
+users: "Users"
 oauthPopUpTitle: "Externe Logininformationen"
 oauthInfo: 'Du hast einen externen Account zum Einloggen benutzt. Wir haben für dich einen zufälligen Benutzernamen erstellt. Wenn du den Benutzernamen ändern willst oder ein neues Passwort setzen willst, geh auf deine Profilseite. Klicke %link_start% hier %link_end% um zu deiner Profilseite zu gelangen.'
 oauthHere: "hier"
@@ -372,6 +373,8 @@ search:
   results: Suchergebnisse
   resultcount: Ihre Suche brachte %count% Ergebnisse
   fail: Bitte gib zumindest ein Wort ein
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: Mein Profil
   login: Einloggen

@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "Не вдалося авторизувати к
 notificationsClearError: "Не вдалося відзначити сповіщення як прочитані!"
 pleaseWait: "Зачекайте, будь ласка..."
 projects: "Проєкти"
+users: "Users"
 oauthPopUpTitle: "Інформація про вхід через зовнішній обліковий запис"
 oauthInfo: 'Ви щойно використали зовнішній обліковий запис для входу. Ми створили для вас випадкове ім''я користувача. Якщо ви хочете змінити своє ім''я користувача або створити новий пароль для свого облікового запису, будь ласка, перейдіть на сторінку "Мій профіль". Натисніть %link_start% тут %link_end% , щоб перейти до сторінки вашого профілю'
 oauthHere: "тут"
@@ -368,6 +369,8 @@ search:
   results: Search Results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: My Profile
   login: Login
