@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "ਉਪਭੋਗਤਾ ਨੂੰ ਅਧਿਕਾ
 notificationsClearError: "ਨੋਟੀਫਿਕੇਸ਼ਨਜ ਨੂੰ ਪੜਿਆ ਮਾਰਕ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ!"
 pleaseWait: "ਕ੍ਰਿਪਾ ਕਰਕੇ ਉਡੀਕ ਕਰੋ..."
 projects: "ਪ੍ਰੋਜੈਕਟ"
+users: "Users"
 oauthPopUpTitle: "ਬਾਹਰੀ ਖਾਤਾ ਸਾਈਨ ਇਨ ਜਾਣਕਾਰੀ"
 oauthInfo: 'ਤੁਸੀਂ ਲੌਗ ਇਨ ਕਰਨ ਲਈ ਹੁਣੇ ਇੱਕ ਬਾਹਰੀ ਖਾਤਾ ਵਰਤਿਆ ਹੈ. ਅਸੀਂ ਤੁਹਾਡੇ ਲਈ ਇੱਕ ਬੇਤਰਤੀਬੇ ਉਪਯੋਗਕਰਤਾ ਬਣਾਇਆ ਹੈ. ਜੇ ਤੁਸੀਂ ਆਪਣਾ ਉਪਭੋਗਤਾ ਨਾਮ ਬਦਲਣਾ ਚਾਹੁੰਦੇ ਹੋ ਜਾਂ ਆਪਣੇ ਖਾਤੇ ਲਈ ਨਵਾਂ ਪਾਸਵਰਡ ਬਣਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ ਤਾਂ ਕਿਰਪਾ ਕਰਕੇ ਮੇਰੇ ਪ੍ਰੋਫਾਈਲ ਪੇਜ ਤੇ ਜਾਓ. ਕਲਿਕ%link_start% ਇੱਥੇ%link_end% ਆਪਣੇ ਪ੍ਰੋਫ਼ਾਈਲ ਸਫੇ ਤੇ ਜਾਣ ਲਈ'
 oauthHere: "ਇਥੇ"
@@ -368,6 +369,8 @@ search:
   results: ਖੋਜ ਨਤੀਜੇ
   resultcount: ਤੁਹਾਡੀ ਖੋਜ ਨੇ%count% ਨਤੀਜੇ ਵਾਪਸ ਕੀਤੇ
   fail: ਕਿਰਪਾ ਕਰਕੇ ਘੱਟੋ ਘੱਟ ਇਕੋ ਖੋਜ ਸ਼ਬਦ ਦਾਖਲ ਕਰੋ
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: ਮੇਰਾ ਪ੍ਰੋਫਾਈਲ
   login: ਲਾਗਿਨ

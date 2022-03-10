@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "ユーザーを承認できません"
 notificationsClearError: "通知を既読にできません!"
 pleaseWait: "しばらくお待ちください..."
 projects: "プログラム"
+users: "Users"
 oauthPopUpTitle: "外部アカウントのサインイン情報"
 oauthInfo: '外部アカウントを使用してログインしました。ランダムなユーザー名を作成しました。 ユーザー名を変更したい場合、またはアカウントの新しいパスワードを作成したい場合は、プロフィールページにアクセスしてください。 ここで %link_start% をクリックして %link_end% プロフィールページに移動'
 oauthHere: "ここ"
@@ -368,6 +369,8 @@ search:
   results: 検索結果
   resultcount: 検索結果は %count% です
   fail: 少なくとも1つの検索語を入力してください
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: マイプロフィール
   login: ログイン

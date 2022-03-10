@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "Kullanıcıya yetki verilemiyor"
 notificationsClearError: "Bildirimler okundu olarak işaretlenemedi!"
 pleaseWait: "Lütfen bekleyiniz..."
 projects: "Projeler"
+users: "Users"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Oturum açmak için harici bir hesap kullandınız. Sizin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adınızı değiştirmek veya hesabınız için yeni bir şifre oluşturmak istiyorsanız lütfen profil sayfama gidin. Tıklayın %link_start% buraya %link_end% profil sayfanıza gitmek için.'
 oauthHere: "buraya"
@@ -367,6 +368,8 @@ search:
   results: Sonuçlarda Ara
   resultcount: '%count% tane sonuç bulundu'
   fail: Lütfen en az bir arama terimi girin
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: Benim profilim
   login: Oturum aç

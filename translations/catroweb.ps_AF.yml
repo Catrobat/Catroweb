@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "د کارونکي اجازه نه ورکول"
 notificationsClearError: "د لوستلو په توګه خبرتیاوې په نښه کولو توان نلري!"
 pleaseWait: "هیله کوم لږ صبر وکړه..."
 projects: "پروژې"
+users: "Users"
 oauthPopUpTitle: "د بهرني حساب د ننوتلو معلومات"
 oauthInfo: 'تاسو یوازې د ننوتلو لپاره یو بهرنی حساب کارولی دی. موږ ستاسو لپاره یو تصادفي کارن-نوم جوړ کړ. که تاسو غواړئ خپل کارن نوم بدل کړئ یا د خپل حساب لپاره نوی پټنوم جوړ کړئ مهرباني وکړئ خپل پروفایل پاڼې ته لاړ شئ.'
 oauthHere: "دلته"
@@ -369,6 +370,8 @@ search:
   results: د لټون پایلې
   resultcount: ستاسو لټون د %count% پایلې بیرته راګرځولې
   fail: مهرباني وکړئ لږ تر لږه د لټون یوه اصطلاح داخل کړئ
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: زما پېژنيال
   login: د ننه کیدل

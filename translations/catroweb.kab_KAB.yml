@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Please wait..."
 projects: "Projects"
+users: "Users"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "here"
@@ -368,6 +369,8 @@ search:
   results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: My Profile
   login: Login

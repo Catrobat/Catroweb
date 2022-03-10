@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "İstifadəçiyə səlahiyyət verilə bilmir"
 notificationsClearError: "Bildirişlər oxunmuş kimi işarələnə bilmədi!"
 pleaseWait: "Zəhmət olmasa gözləyin..."
 projects: "Layihələr"
+users: "Users"
 oauthPopUpTitle: "Xarici hesabla daxil olma məlumatları"
 oauthInfo: 'Giriş etmək üçün xarici bir hesab istifadə etdiniz. Sizin üçün təsadüfi bir istifadəçi adı yaratdıq. İstifadəçi adınızı dəyişdirmək və ya hesabınız üçün yeni bir şifrə yaratmaq istəyirsinizsə, zəhmət olmasa "profil səhifəm"ə gedin. Profil səhifənizə getmək üçün %link_start% bura%link_end% klikləyin'
 oauthHere: "bura"
@@ -368,6 +369,8 @@ search:
   results: Search Results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: Profilim
   login: Giriş
