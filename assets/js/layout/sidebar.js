@@ -35,53 +35,30 @@ function updateBadge (url, badgeID, apiToCall = 'old', badgeText = null, maxAmou
   if (!badge) {
     return
   }
-  if (apiToCall === 'new') {
-    $.ajax({
-      url: url,
-      type: 'get',
-      beforeSend: function (request) { request.setRequestHeader('Authorization', 'Bearer ' + getCookie('BEARER')) },
-      success: function (data) {
-        const count = data.total
-        if (count > 0) {
-          if (badgeText === null) {
-            badge.innerHTML = (count <= maxAmountToFetch) ? count.toString() : (maxAmountToFetch + '+')
-          } else {
-            badge.innerHTML = badgeText
-          }
-          badge.style.display = 'block'
-        } else {
-          badge.innerHTML = ''
-          badge.style.display = 'none'
-        }
-        setTimeout(updateBadge, refreshRate, url, badgeID, 'new', badgeText, maxAmountToFetch, refreshRate)
-      },
-      error: function (error) {
-        console.error(error)
-      }
+  fetch(url, {
+    headers: new Headers({
+      Authorization: 'Bearer ' + getCookie('BEARER')
     })
-  } else {
-  // eslint-disable-next-line no-undef
-    fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        const count = data.count
-        if (count > 0) {
-          if (badgeText === null) {
-            badge.innerHTML = (count <= maxAmountToFetch) ? count.toString() : (maxAmountToFetch + '+')
-          } else {
-            badge.innerHTML = badgeText
-          }
-          badge.style.display = 'block'
+  })
+    .then(response => response.json())
+    .then(data => {
+      const count = apiToCall === 'new' ? data.total : data.count
+      if (count > 0) {
+        if (badgeText === null) {
+          badge.innerHTML = (count <= maxAmountToFetch) ? count.toString() : (maxAmountToFetch + '+')
         } else {
-          badge.innerHTML = ''
-          badge.style.display = 'none'
+          badge.innerHTML = badgeText
         }
-        setTimeout(updateBadge, refreshRate, url, badgeID, 'old', badgeText, maxAmountToFetch, refreshRate)
-      })
-      .catch((error) => {
-        console.error('Unable to update sidebar badge! Error: ', error)
-      })
-  }
+        badge.style.display = 'block'
+      } else {
+        badge.innerHTML = ''
+        badge.style.display = 'none'
+      }
+      setTimeout(updateBadge, refreshRate, url, badgeID, apiToCall, badgeText, maxAmountToFetch, refreshRate)
+    })
+    .catch((error) => {
+      console.error('Unable to update sidebar badge! Error: ', error)
+    })
 }
 
 const fnCloseSidebar = function () {
