@@ -105,7 +105,7 @@ class DownloadApkController extends AbstractController
     /* @var $project Program|null */
     $project = $this->program_manager->find($id);
     if (null === $project || !$project->isVisible() || Program::APK_READY != $project->getApkStatus()) {
-      $this->logger->error('Project with ID: '.$id.' not found');
+      $this->logger->warning('Project with ID: '.$id.' not found');
       throw new NotFoundHttpException();
     }
 

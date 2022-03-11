@@ -120,8 +120,10 @@ class ProjectsAdmin extends AbstractAdmin
     $flavor_options = $this->parameter_bag->get('flavors');
 
     $choices = [];
-    foreach ($flavor_options as $flavor) {
-      $choices[$flavor] = $flavor;
+    if (is_array($flavor_options)) {
+      foreach ($flavor_options as $flavor) {
+        $choices[$flavor] = $flavor;
+      }
     }
     $list
       ->add('uploaded_at', null, ['label' => 'Upload Time'])
