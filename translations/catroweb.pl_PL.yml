@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "Nie można autoryzować użytkownika"
 notificationsClearError: "Nie można oznaczyć powiadomień jako przeczytanych!"
 pleaseWait: "Proszę czekać..."
 projects: "Projekty"
-users: "Users"
+users: "Użytkownicy"
 oauthPopUpTitle: "Informacje o logowaniu do konta zewnętrznego"
 oauthInfo: 'Właśnie użyłeś zewnętrznego konta, aby się zalogować. Stworzyliśmy dla Ciebie losową nazwę użytkownika. Jeśli chcesz zmienić nazwę użytkownika lub utworzyć nowe hasło dla swojego konta, przejdź do swojej strony profilowej. Kliknij %link_start% tutaj %link_end% , aby przejść do strony profilu'
 oauthHere: "tutaj"
@@ -369,8 +369,8 @@ search:
   results: Wyniki wyszukiwania
   resultcount: Znaleziono %count% wyników wyszukiwania
   fail: Wprowadź co najmniej jedno wyszukiwane hasło
-  noUsers: No users found
-  noProjects: No projects found
+  noUsers: Nie znaleziono użytkowników
+  noProjects: Nie znaleziono projektów
 menu:
   profile: Mój profil
   login: Logowanie
