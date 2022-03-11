@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api;
 
 use App\Api\NotificationsApi;
+use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
+use App\DB\Entity\User\User;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Api\NotificationsApiInterface;
+use OpenAPI\Server\Model\NotificationsCountResponse;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -32,6 +35,7 @@ class NotificationsApiTest extends DefaultTestCase
   {
     $this->object = $this->getMockBuilder(NotificationsApi::class)
       ->disableOriginalConstructor()
+      ->onlyMethods(['getAuthenticationToken'])
       ->getMockForAbstractClass()
     ;
 
@@ -103,10 +107,17 @@ class NotificationsApiTest extends DefaultTestCase
     $response_code = null;
     $response_headers = [];
 
+    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $user = $this->createMock(User::class);
+    $user->method('getId')->willReturn('1');
+    $authentication_manager->method('getUserFromAuthenticationToken')->willReturn($user);
+    $this->object->method('getAuthenticationToken')->willReturn('');
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+
     $response = $this->object->notificationsCountGet($response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
-    $this->assertNull($response);
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+    $this->assertInstanceOf(NotificationsCountResponse::class, $response);
   }
 
   /**

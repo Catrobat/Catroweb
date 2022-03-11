@@ -10,61 +10,60 @@ use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\Notifications\NewProgramNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
+use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use OpenAPI\Server\Model\NotificationsCountResponse;
-use App\DB\Entity\User\User;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NotificationsResponseManager extends AbstractResponseManager
 {
-    private NotificationRepository $notificationRepository;
+  private NotificationRepository $notificationRepository;
 
-    public function __construct(TranslatorInterface $translator,
+  public function __construct(TranslatorInterface $translator,
                                 SerializerInterface $serializer,
                                 ResponseCacheManager $response_cache_manager,
                                 NotificationRepository $notification_repository)
-    {
-        parent::__construct($translator, $serializer, $response_cache_manager);
-        $this->notification_repository=$notification_repository;
+  {
+    parent::__construct($translator, $serializer, $response_cache_manager);
+    $this->notification_repository = $notification_repository;
+  }
+
+  public function createNotificationsCountResponse(User $user): NotificationsCountResponse
+  {
+    $user->getFollowNotificationMentions();
+
+    $notifications_all = $this->notification_repository->findBy(['user' => $user]);
+    $likes = 0;
+    $followers = 0;
+    $comments = 0;
+    $remixes = 0;
+    $all = 0;
+    foreach ($notifications_all as $notification) {
+      /** @var CatroNotification $notification */
+      if ($notification->getSeen()) {
+        continue;
+      }
+
+      if ($notification instanceof LikeNotification) {
+        ++$likes;
+      } elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification) {
+        ++$followers;
+      } elseif ($notification instanceof CommentNotification) {
+        ++$comments;
+      } elseif ($notification instanceof RemixNotification) {
+        ++$remixes;
+      }
+
+      ++$all;
     }
 
-    public function createNotificationsCountResponse(User $user): NotificationsCountResponse
-    {
-        $user->getFollowNotificationMentions();
-
-        $notifications_all = $this->notification_repository->findBy(['user' => $user]);
-        $likes = 0;
-        $followers = 0;
-        $comments = 0;
-        $remixes = 0;
-        $all = 0;
-        foreach ($notifications_all as $notification) {
-            /** @var CatroNotification $notification */
-            if ($notification->getSeen()) {
-                continue;
-            }
-
-            if ($notification instanceof LikeNotification) {
-                ++$likes;
-            } elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification) {
-                ++$followers;
-            } elseif ($notification instanceof CommentNotification) {
-                ++$comments;
-            } elseif ($notification instanceof RemixNotification) {
-                ++$remixes;
-            }
-
-            ++$all;
-        }
-
-        return new NotificationsCountResponse([
-            'total' => $all,
-            'like' => $likes,
-            'follower' => $followers,
-            'comment' => $comments,
-            'remix' => $remixes
-        ]);
-    }
+    return new NotificationsCountResponse([
+      'total' => $all,
+      'like' => $likes,
+      'follower' => $followers,
+      'comment' => $comments,
+      'remix' => $remixes,
+    ]);
+  }
 }
-
