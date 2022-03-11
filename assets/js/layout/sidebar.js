@@ -24,6 +24,7 @@ function initSidebarBadges () {
     updateBadge(
       sidebarJs.data('path-achievements-count'),
       'sidebar_badge--unseen-achievements',
+      'old',
       sidebarJs.data('trans-achievements-bade-text')
     )
   }
