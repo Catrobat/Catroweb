@@ -14,7 +14,7 @@ Feature:
       | job       | /Build-Program/                                               |
       | token     | /SECRETTOKEN/                                                 |
       | SUFFIX    | /generated(.*?)/                                              |
-      | DOWNLOAD  | #http://pocketcode.org/app/download/(.*?).catrobat#           |
+      | DOWNLOAD  | #http://pocketcode.org/api/project/(.*?)/catrobat#           |
       | UPLOAD    | #http://pocketcode.org/app/ci/upload/(.*?)?token=UPLOADTOKEN# |
       | ONERROR   | #http://pocketcode.org/app/ci/failed/(.*?)?token=UPLOADTOKEN# |
     And the program apk status will be flagged "pending"

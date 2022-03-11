@@ -57,7 +57,7 @@ class DownloadApkController extends AbstractController
     $response = $this->createDownloadApkFileResponse($id, $file);
 
     $this->event_dispatcher->dispatch(
-      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK, $request)
+      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK)
     );
 
     return $response;
