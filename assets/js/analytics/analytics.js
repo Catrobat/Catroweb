@@ -1171,7 +1171,6 @@ if (isTrackingAllowed()) {
         elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('recommended', 'recommended', homepageCategory))
         elementList.push.apply(elementList,
           window.HelperFunctions.createTripleElementProgram('mostDownloaded', 'most Downloaded', homepageCategory))
-        elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('mostViewed', 'most viewed', homepageCategory))
         elementList.push.apply(elementList, window.HelperFunctions.createTripleElementProgram('random', 'random', homepageCategory))
       }
 
