@@ -180,7 +180,7 @@ class GoogleTranslateApi implements TranslationApiInterface
       return 0;
     }
 
-    if (strlen($text) <= $this->short_text_length) {
+    if (mb_strlen($text) <= $this->short_text_length) {
       return 1;
     }
 
