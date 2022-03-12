@@ -98,7 +98,7 @@
 
   <div class="js-notifications"
        data-mark-as-read-url="{{ url('notification_mark_as_read') }}"
-       data-mark-all-seen="{{ url('notifications_seen') }}"
+       data-base-url="{{ app.request.getBaseURL() }}"
        data-fetch-url="{{ path('notifications_fetch') }}"
        data-something-went-wrong-error="{{ "somethingWentWrong"|trans({}, "catroweb") }}"
        data-notifications-clear-error="{{ "notificationsClearError"|trans({}, "catroweb") }}"
