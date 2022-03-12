@@ -822,6 +822,11 @@ services:
     tags:
       - { name: "open_api_server.api", api: "search" }
 
+  api.notifications:
+    class: App\Api\NotificationsApi
+    tags:
+      - { name: "open_api_server.api", api: "notifications" }
+
   #=====================================================================================================================
   # HWIOAUTH
   #=====================================================================================================================
