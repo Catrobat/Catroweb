@@ -15,9 +15,9 @@ Feature: Download programs
     Then i should receive a project file
     And the response code should be "200"
 
-  Scenario: Invisible projects can be downloaded
+  Scenario: Invisible projects can't be be downloaded
     When I download "/app/download/2.catrobat"
-    Then the response code should be "200"
+    Then the response code should be "404"
 
   Scenario: Projects can't be downloaded if they do not exist
     When I download "/app/download/999.catrobat"

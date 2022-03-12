@@ -66,6 +66,7 @@ notificationsUnauthorizedError: "Ezin izan da erabiltzailea onartu"
 notificationsClearError: "Jakinarazpenak ezin izan dira \"irakurrita\" bezala markatu!"
 pleaseWait: "Itxaron mesedez..."
 projects: "Proiektuak"
+users: "Users"
 oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
 oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
 oauthHere: "hemen"
@@ -368,6 +369,8 @@ search:
   results: Search results
   resultcount: Your search returned %count% results
   fail: Please enter at least a single search term
+  noUsers: No users found
+  noProjects: No projects found
 menu:
   profile: My Profile
   login: Login

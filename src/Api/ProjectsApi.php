@@ -4,11 +4,14 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
+use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProgramRequest;
+use App\Project\Event\ProjectDownloadEvent;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\UploadErrorResponse;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -28,7 +31,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    */
   public function projectIdGet(string $id, &$responseCode, array &$responseHeaders)
   {
-    $project = $this->facade->getLoader()->findProjectByID($id);
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -363,6 +366,39 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $responseCode = Response::HTTP_OK;
+
+    return $response;
+  }
+
+  public function projectIdCatrobatGet(string $id, &$responseCode = null, array &$responseHeaders = null)
+  {
+    // Currently not used due to an issue with the serializer and accept encoding in the generated code
+    // The route is overwritten by the OverwriteController which uses the method: customProjectIdCatrobatGet
+    return null;
+  }
+
+  public function customProjectIdCatrobatGet(string $id, &$responseCode = null, array &$responseHeaders = null): ?BinaryFileResponse
+  {
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
+    if (null === $project) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $zipFile = $this->facade->getLoader()->getProjectCatrobatZipFile($id);
+    if (null === $zipFile) {
+      $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+
+      return null;
+    }
+
+    $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project->getId(), $zipFile);
+    $responseCode = Response::HTTP_OK;
+
+    $this->facade->getEventDispatcher()->dispatch(
+      new ProjectDownloadEvent($this->facade->getAuthenticationManager()->getAuthenticatedUser(), $project, ProgramDownloads::TYPE_PROJECT)
+    );
 
     return $response;
   }

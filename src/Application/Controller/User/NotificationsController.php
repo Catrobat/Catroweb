@@ -2,7 +2,6 @@
 
 namespace App\Application\Controller\User;
 
-use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
@@ -151,54 +150,6 @@ class NotificationsController extends AbstractController
     $notification_service->markSeen([$notification_seen]);
 
     return new JsonResponse([], Response::HTTP_NO_CONTENT);
-  }
-
-  /**
-   * @Route("/user_notifications/notifications/count", name="notifications_count", methods={"GET"})
-   * Todo -> move to CAPI
-   */
-  public function unseenNotificationsCountAction(NotificationRepository $notification_repo,
-                                                 RemixManager $remix_manager): JsonResponse
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (!$user) {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
-    }
-
-    $notifications_all = $notification_repo->findBy(['user' => $user]);
-    $likes = 0;
-    $followers = 0;
-    $comments = 0;
-    $remixes = 0;
-    $all = 0;
-    foreach ($notifications_all as $notification) {
-      /** @var CatroNotification $notification */
-      if ($notification->getSeen()) {
-        continue;
-      }
-
-      if ($notification instanceof LikeNotification) {
-        ++$likes;
-      } elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification) {
-        ++$followers;
-      } elseif ($notification instanceof CommentNotification) {
-        ++$comments;
-      } elseif ($notification instanceof RemixNotification) {
-        ++$remixes;
-      }
-
-      ++$all;
-    }
-
-    $unseen_remixed_program_data = $remix_manager->getUnseenRemixProgramsDataOfUser($user);
-
-    return new JsonResponse([
-      'all-notifications' => $all,
-      'likes' => $likes,
-      'followers' => $followers,
-      'comments' => $comments,
-      'remixes' => $remixes, ], Response::HTTP_OK);
   }
 
   /**

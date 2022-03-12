@@ -89,8 +89,7 @@ class ProgramListSerializer
         'theme' => $this->parameter_bag->get('umbrellaTheme'),
         'id' => $program->getId(),
       ]), '/');
-      $new_program['DownloadUrl'] = ltrim($this->generateUrl('download', [
-        'theme' => $this->parameter_bag->get('umbrellaTheme'),
+      $new_program['DownloadUrl'] = ltrim($this->generateUrl('open_api_server_projects_projectidcatrobatget', [
         'id' => $program->getId(),
       ]), '/');
       $new_program['FileSize'] = $program->getFilesize() / 1_048_576;

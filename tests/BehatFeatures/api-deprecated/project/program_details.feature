@@ -34,7 +34,7 @@ Feature: Get details for a specific program
                                 "ScreenshotBig":"images/default/screenshot.png",
                                 "ScreenshotSmall":"images/default/thumbnail.png",
                                 "ProjectUrl":"app/project/REGEX_STRING_WILDCARD",
-                                "DownloadUrl":"app/download/REGEX_STRING_WILDCARD.catrobat",
+                                "DownloadUrl":"api/project/REGEX_STRING_WILDCARD/catrobat",
                                 "FileSize":2.5
 
                             }],

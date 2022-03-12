@@ -35,6 +35,16 @@ open_api_server:
   defaults:
     _format: json
 
+# Overwrite since there are issues with the generator
+open_api_server_projects_projectidcatrobatget:
+  path: /api/project/{id}/catrobat
+  methods: [ GET ]
+  defaults:
+    _controller: App\Api\Services\OverwriteController::projectIdCatrobatGetAction
+  requirements:
+    id: '^[a-zA-Z0-9\\-]+$'
+
+
 registration_confirmation_route:
   path: /app/verify
   methods:  [GET]

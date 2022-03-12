@@ -1,8 +1,11 @@
 import $ from 'jquery'
+import { getCookie } from '../security/CookieHelper'
 
 require('../../styles/layout/sidebar.scss')
 
 const sidebar = $('#sidebar')
+const sidebarJs = $('.js-sidebar')
+
 const sidebarToggleBtn = $('#top-app-bar__btn-sidebar-toggle')
 
 $(() => {
@@ -10,34 +13,36 @@ $(() => {
   setClickListener()
   initSidebarSwipe()
 })
-
 function initSidebarBadges () {
   if ($('.js-user-state').data('is-user-logged-in')) {
-    const sidebar = $('.js-sidebar')
-
     updateBadge(
-      sidebar.data('path-notifications-count'),
-      'sidebar_badge--unseen-notifications'
+      sidebarJs.data('base-url') + '/api/notifications/count',
+      'sidebar_badge--unseen-notifications',
+      'new'
     )
 
     updateBadge(
-      sidebar.data('path-achievements-count'),
+      sidebarJs.data('path-achievements-count'),
       'sidebar_badge--unseen-achievements',
-      sidebar.data('trans-achievements-bade-text')
+      'old',
+      sidebarJs.data('trans-achievements-bade-text')
     )
   }
 }
 
-function updateBadge (url, badgeID, badgeText = null, maxAmountToFetch = 99, refreshRate = 10000) {
+function updateBadge (url, badgeID, apiToCall = 'old', badgeText = null, maxAmountToFetch = 99, refreshRate = 10000) {
   const badge = document.getElementById(badgeID)
   if (!badge) {
     return
   }
-  // eslint-disable-next-line no-undef
-  fetch(url)
+  fetch(url, {
+    headers: new Headers({
+      Authorization: 'Bearer ' + getCookie('BEARER')
+    })
+  })
     .then(response => response.json())
     .then(data => {
-      const count = data.count
+      const count = apiToCall === 'new' ? data.total : data.count
       if (count > 0) {
         if (badgeText === null) {
           badge.innerHTML = (count <= maxAmountToFetch) ? count.toString() : (maxAmountToFetch + '+')
@@ -49,7 +54,7 @@ function updateBadge (url, badgeID, badgeText = null, maxAmountToFetch = 99, ref
         badge.innerHTML = ''
         badge.style.display = 'none'
       }
-      setTimeout(updateBadge, refreshRate, url, badgeID, badgeText, maxAmountToFetch, refreshRate)
+      setTimeout(updateBadge, refreshRate, url, badgeID, apiToCall, badgeText, maxAmountToFetch, refreshRate)
     })
     .catch((error) => {
       console.error('Unable to update sidebar badge! Error: ', error)

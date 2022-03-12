@@ -1099,7 +1099,7 @@ class ApiContext implements KernelAwareContext
   public function iHaveDownloadedAValidProgram(): void
   {
     $id = 1;
-    $this->iGetFrom('/app/download/'.$id.'.catrobat');
+    $this->iGetFrom('/api/project/'.$id.'/catrobat');
     $this->iShouldReceiveAProjectFile();
     $this->theResponseCodeShouldBe(200);
   }
@@ -2931,7 +2931,7 @@ class ApiContext implements KernelAwareContext
         'private' => $program->getPrivate(),
         'flavor' => $program->getFlavor(),
         'project_url' => 'http://localhost/app/project/'.$program->getId(),
-        'download_url' => 'http://localhost/app/download/'.$program->getId().'.catrobat',
+        'download_url' => 'http://localhost/api/project/'.$program->getId().'/catrobat',
         'filesize' => ($program->getFilesize() / 1_048_576),
       ];
       $projects[] = $result;
@@ -3062,7 +3062,7 @@ class ApiContext implements KernelAwareContext
       },
       'download_url' => function ($download_url) {
         Assert::assertIsString($download_url);
-        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/download\\/([a-zA-Z0-9-]+)\\.catrobat/',
+        Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
           $download_url);
       },
       'filesize' => function ($filesize) {
