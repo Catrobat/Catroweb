@@ -827,6 +827,12 @@ services:
     tags:
       - { name: "open_api_server.api", api: "notifications" }
 
+  App\Api\Services\OverwriteController:
+    public: true
+
+  App\Api\ProjectsApi:
+    public: true
+
   #=====================================================================================================================
   # HWIOAUTH
   #=====================================================================================================================

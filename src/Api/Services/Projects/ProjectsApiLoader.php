@@ -8,7 +8,11 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
+use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Project\ProgramManager;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProjectsApiLoader extends AbstractApiLoader
@@ -18,19 +22,25 @@ final class ProjectsApiLoader extends AbstractApiLoader
   private TagRepository $tag_repository;
   private ExtensionRepository $extension_repository;
   private RequestStack $request_stack;
+  protected ProgramFileRepository $file_repository;
+  protected ExtractedFileRepository $extracted_file_repository;
 
   public function __construct(
     ProgramManager $project_manager,
     FeaturedRepository $featured_repository,
     TagRepository $tag_repository,
     ExtensionRepository $extension_repository,
-    RequestStack $request_stack
+    RequestStack $request_stack,
+    ProgramFileRepository $file_repository,
+    ExtractedFileRepository $extracted_file_repository
   ) {
     $this->project_manager = $project_manager;
     $this->featured_repository = $featured_repository;
     $this->tag_repository = $tag_repository;
     $this->extension_repository = $extension_repository;
     $this->request_stack = $request_stack;
+    $this->file_repository = $file_repository;
+    $this->extracted_file_repository = $extracted_file_repository;
   }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
@@ -111,5 +121,22 @@ final class ProjectsApiLoader extends AbstractApiLoader
   public function getProjectTags(): array
   {
     return $this->tag_repository->getActiveTags();
+  }
+
+  public function getProjectCatrobatZipFile(string $id): ?File
+  {
+    try {
+      if (!$this->file_repository->checkIfProjectZipFileExists($id)) {
+        $this->file_repository->zipProject($this->extracted_file_repository->getBaseDir($id), $id);
+      }
+      $zipFile = $this->file_repository->getProjectZipFile($id);
+      if (!$zipFile->isFile()) {
+        return null;
+      }
+    } catch (FileNotFoundException $fileNotFoundException) {
+      return null;
+    }
+
+    return $zipFile;
   }
 }

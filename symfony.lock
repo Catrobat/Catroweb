@@ -20,9 +20,6 @@
     "behat/mink-extension": {
         "version": "2.3.1"
     },
-    "behat/mink-selenium2-driver": {
-        "version": "v1.4.0"
-    },
     "behat/symfony2-extension": {
         "version": "2.1",
         "recipe": {
@@ -52,6 +49,12 @@
     },
     "codercat/jwk-to-pem": {
         "version": "0.0.3"
+    },
+    "composer/package-versions-deprecated": {
+        "version": "1.11.99.5"
+    },
+    "composer/pcre": {
+        "version": "1.0.1"
     },
     "composer/semver": {
         "version": "1.5.1"
@@ -311,9 +314,6 @@
     "incenteev/composer-parameter-handler": {
         "version": "v2.1.3"
     },
-    "instaclick/php-webdriver": {
-        "version": "1.4.7"
-    },
     "jms/metadata": {
         "version": "1.7.0"
     },
@@ -379,11 +379,8 @@
     "nikic/php-parser": {
         "version": "v4.3.0"
     },
-    "ocramius/package-versions": {
-        "version": "1.9.0"
-    },
-    "ocramius/proxy-manager": {
-        "version": "2.2.3"
+    "nyholm/dsn": {
+        "version": "2.0.1"
     },
     "openlss/lib-array2xml": {
         "version": "1.0.0"
@@ -402,9 +399,6 @@
     },
     "phar-io/version": {
         "version": "2.0.1"
-    },
-    "php": {
-        "version": "7.4"
     },
     "php-cs-fixer/diff": {
         "version": "v1.3.0"
@@ -469,9 +463,6 @@
     "phpspec/prophecy": {
         "version": "v1.10.3"
     },
-    "phpstan/extension-installer": {
-        "version": "1.0.3"
-    },
     "phpstan/phpstan": {
         "version": "0.12.17"
     },
@@ -522,6 +513,9 @@
     "psr/container": {
         "version": "1.0.0"
     },
+    "psr/event-dispatcher": {
+        "version": "1.0.0"
+    },
     "psr/http-client": {
         "version": "1.0.0"
     },
@@ -542,6 +536,9 @@
     },
     "rize/uri-template": {
         "version": "0.3.4"
+    },
+    "rosell-dk/exec-with-fallback": {
+        "version": "1.2.0"
     },
     "rosell-dk/image-mime-type-guesser": {
         "version": "0.3"
@@ -843,9 +840,6 @@
     "symfony/polyfill-intl-grapheme": {
         "version": "v1.17.0"
     },
-    "symfony/polyfill-intl-icu": {
-        "version": "v1.23.0"
-    },
     "symfony/polyfill-intl-idn": {
         "version": "v1.14.0"
     },
@@ -890,6 +884,9 @@
             "config/routes.yaml"
         ]
     },
+    "symfony/security": {
+        "version": "v4.4.38"
+    },
     "symfony/security-acl": {
         "version": "v3.0.4"
     },
@@ -904,18 +901,6 @@
         "files": [
             "config/packages/security.yaml"
         ]
-    },
-    "symfony/security-core": {
-        "version": "v4.4.9"
-    },
-    "symfony/security-csrf": {
-        "version": "v4.4.9"
-    },
-    "symfony/security-guard": {
-        "version": "v4.4.9"
-    },
-    "symfony/security-http": {
-        "version": "v4.4.9"
     },
     "symfony/service-contracts": {
         "version": "v2.0.1"
@@ -1076,11 +1061,5 @@
     },
     "webmozart/path-util": {
         "version": "2.3.0"
-    },
-    "zendframework/zend-code": {
-        "version": "3.4.1"
-    },
-    "zendframework/zend-eventmanager": {
-        "version": "3.2.1"
     }
 }

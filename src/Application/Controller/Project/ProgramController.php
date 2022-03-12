@@ -619,7 +619,7 @@ class ProgramController extends AbstractController
                                              ?string $referrer,
                                              array $program_comments): array
   {
-    $url = $this->generateUrl('download', ['id' => $program->getId(), 'fname' => $program->getName()]);
+    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
 
     $comments_avatars = [];
     /** @var UserComment $comment */

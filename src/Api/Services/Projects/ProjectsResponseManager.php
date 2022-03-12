@@ -20,6 +20,8 @@ use OpenAPI\Server\Model\TagResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -93,9 +95,8 @@ final class ProjectsResponseManager extends AbstractResponseManager
         UrlGeneratorInterface::ABSOLUTE_URL), '/'
       ),
       'download_url' => ltrim($this->url_generator->generate(
-        'download',
+        'open_api_server_projects_projectidcatrobatget',
         [
-          'theme' => $this->parameter_bag->get('umbrellaTheme'),
           'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'),
@@ -221,5 +222,16 @@ final class ProjectsResponseManager extends AbstractResponseManager
       'id' => $tag->getInternalTitle(),
       'text' => $this->__($tag->getTitleLtmCode(), [], $locale),
     ]);
+  }
+
+  public function createProjectCatrobatFileResponse(string $id, File $file): BinaryFileResponse
+  {
+    $response = new BinaryFileResponse($file);
+    $response->headers->set(
+      'Content-Disposition',
+      'attachment; filename="'.$id.'.catrobat"'
+    );
+
+    return $response;
   }
 }

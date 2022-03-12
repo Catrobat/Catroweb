@@ -80,7 +80,7 @@ class BuildApkController extends AbstractController
     }
 
     $config = $this->getParameter('jenkins');
-    if ($request->query->get('token') !== $config['uploadtoken']) {
+    if (!is_array($config) || $request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
     if (1 != $request->files->count()) {
@@ -108,7 +108,7 @@ class BuildApkController extends AbstractController
     }
 
     $config = $this->getParameter('jenkins');
-    if ($request->query->get('token') !== $config['uploadtoken']) {
+    if (!is_array($config) || $request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
     if (Program::APK_PENDING === $program->getApkStatus()) {

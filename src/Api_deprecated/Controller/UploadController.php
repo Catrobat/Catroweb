@@ -58,7 +58,7 @@ class UploadController
    */
   public function uploadAction(Request $request): JsonResponse
   {
-    $this->logger->info('Uploading a project...');
+    $this->logger->warning('Deprecated upload route is used!');
 
     return $this->processUpload($request);
   }
