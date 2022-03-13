@@ -30,14 +30,6 @@ final class NotificationsApiProcessor extends AbstractApiProcessor
    */
   public function markAllAsSeen(User $user): void
   {
-    $notifications = $this->notification_repository->findBy(['user' => $user]);
-    $notifications_seen = [];
-    foreach ($notifications as $notification) {
-      if (!$notification->getSeen()) {
-        $notifications_seen[$notification->getID()] = $notification;
-      }
-    }
-    $this->notification_manager->markSeen($notifications_seen);
-    $this->remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
+    $this->notification_repository->markAllNotificationsFromUserAsSeen($user);
   }
 }
