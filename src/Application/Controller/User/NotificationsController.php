@@ -24,7 +24,7 @@ class NotificationsController extends AbstractController
   public const load_offset = 0;
 
   /**
-   * @Route("/user_notifications", name="notifications", methods={"GET"})
+   * @Route("/user_notifications", name="notifications", methods={"GET"})SHARE-479
    */
   public function NotificationsAction(NotificationRepository $notification_repository, Request $request): Response
   {

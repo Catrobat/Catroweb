@@ -8,6 +8,9 @@ use App\Api\NotificationsApi;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
+use App\Api\Services\Notifications\NotificationsApiLoader;
+use App\DB\Entity\User\Notifications\CatroNotification;
+use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\User;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Api\NotificationsApiInterface;
@@ -91,9 +94,17 @@ class NotificationsApiTest extends DefaultTestCase
     $response_code = null;
     $response_headers = [];
 
-    $response = $this->object->notificationIdReadPut(1, null, $response_code, $response_headers);
+      $authentication_manager = $this->createMock(AuthenticationManager::class);
+      $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+      $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+      $loader = $this->createMock(NotificationsApiLoader::class);
+
+      $loader->method('findNotificationByID')->willReturn($this->createMock(CatroNotification::class));
+      $this->facade->method('getLoader')->willReturn($loader);
+      $response = $this->object->notificationIdReadPut(1, null, $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
     $this->assertNull($response);
   }
 

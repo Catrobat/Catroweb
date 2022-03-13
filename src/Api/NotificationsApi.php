@@ -6,6 +6,7 @@ use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
 use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationsType;
+use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
@@ -21,9 +22,7 @@ final class NotificationsApi extends AbstractApiController implements Notificati
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
 
-    // TODO: Implement notificationIdReadPut() method.
-
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+      $responseCode = $this->facade->getProcessor()->markNotificationAsSeen($id, $this->facade->getAuthenticationManager()->getAuthenticatedUser());
 
     return null;
   }
