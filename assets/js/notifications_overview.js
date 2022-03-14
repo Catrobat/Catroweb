@@ -2,6 +2,7 @@ import $ from 'jquery'
 import { showSnackbar } from './components/snackbar'
 
 import { MDCChipSet } from '@material/chips'
+import { getCookie } from './security/CookieHelper'
 const chipset = new MDCChipSet(document.querySelector('.mdc-chip-set'))
 const tabPaneElements = document.querySelectorAll('.tab-pane')
 
@@ -16,7 +17,7 @@ $(() => {
   const $notifications = $('.js-notifications')
   const userNotifications = new UserNotifications(
     $notifications.data('mark-as-read-url'),
-    $notifications.data('mark-all-seen'),
+    $notifications.data('base-url') + '/api/notifications/read',
     $notifications.data('fetch-url'),
     $notifications.data('something-went-wrong-error'),
     $notifications.data('notifications-clear-error'),
@@ -309,16 +310,17 @@ class UserNotifications {
 
   markAllRead () {
     const self = this
-    $.ajax({
-      url: self.markAllSeen,
-      type: 'get',
-      success: function () {
-        self.hideBadge()
-      },
-      error: function (xhr) {
-        self.handleError(xhr)
-      }
+
+    fetch(self.markAllSeen, {
+      method: 'PUT',
+      headers: new Headers({
+        Authorization: 'Bearer ' + getCookie('BEARER')
+      })
     })
+      .then(() => self.hideBadge())
+      .catch((error) => {
+        self.handleError(error)
+      })
   }
 
   hideBadge () {

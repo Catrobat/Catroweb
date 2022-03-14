@@ -76,4 +76,30 @@ class NotificationRepository extends ServiceEntityRepository
 
     return $qb->getQuery()->getResult();
   }
+
+  /**
+   * @throws \Doctrine\ORM\OptimisticLockException
+   * @throws \Doctrine\ORM\ORMException
+   */
+  public function markAllNotificationsFromUserAsSeen(User $user): void
+  {
+    $qb = $this->_em->createQueryBuilder();
+
+    $qb
+      ->select('n')
+      ->from(CatroNotification::class, 'n')
+      ->andWhere($qb->expr()->eq('n.user', ':user_id'))
+      ->setParameter(':user_id', $user->getId())
+      ->andWhere($qb->expr()->eq('n.seen', 0))
+        ;
+
+    $unseen_notifications = $qb->getQuery()->getResult();
+
+    foreach ($unseen_notifications as $unseen_notification) {
+      $unseen_notification->setSeen(1);
+      $this->getEntityManager()->persist($unseen_notification);
+    }
+
+    $this->getEntityManager()->flush();
+  }
 }

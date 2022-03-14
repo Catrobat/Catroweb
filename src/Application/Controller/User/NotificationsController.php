@@ -170,31 +170,6 @@ class NotificationsController extends AbstractController
   }
 
   /**
-   * @Route("/user_notifications/markall", name="notifications_seen", methods={"GET"})
-   */
-  public function userNotificationsSeenAction(NotificationRepository $notification_repo,
-                                              NotificationManager $notification_service,
-                                              RemixManager $remix_manager): JsonResponse
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (!$user) {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
-    }
-    $notifications = $notification_repo->findBy(['user' => $user]);
-    $notifications_seen = [];
-    foreach ($notifications as $notification) {
-      if (!$notification->getSeen()) {
-        $notifications_seen[$notification->getID()] = $notification;
-      }
-    }
-    $notification_service->markSeen($notifications_seen);
-    $remix_manager->markAllUnseenRemixRelationsOfUserAsSeen($user);
-
-    return new JsonResponse(null, Response::HTTP_NO_CONTENT);
-  }
-
-  /**
    * @Route("/user_notifications/fetch/{limit}/{offset}/{type}", name="notifications_fetch",
    * defaults={"limit": null, "offset": null, "type": null}, methods={"GET"})
    */
