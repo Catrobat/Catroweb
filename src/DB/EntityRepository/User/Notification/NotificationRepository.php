@@ -76,4 +76,15 @@ class NotificationRepository extends ServiceEntityRepository
 
     return $qb->getQuery()->getResult();
   }
+
+  public function getNotificationByID(int $id): ?CatroNotification
+  {
+    $query_builder = $this->createQueryBuilder('e');
+
+    $query_builder
+      ->where($query_builder->expr()->eq('e.id', $id))
+        ;
+
+    return $query_builder->getQuery()->getResult();
+  }
 }

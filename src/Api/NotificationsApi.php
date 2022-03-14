@@ -6,7 +6,6 @@ use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
 use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationsType;
-use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
@@ -22,7 +21,14 @@ final class NotificationsApi extends AbstractApiController implements Notificati
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
 
-      $responseCode = $this->facade->getProcessor()->markNotificationAsSeen($id, $this->facade->getAuthenticationManager()->getAuthenticatedUser());
+    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    if (is_null($user)) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $responseCode = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
 
     return null;
   }

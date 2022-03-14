@@ -142,6 +142,7 @@ jobs:
           - api-mediapackage
           - api-projects
           - api-user
+          - api-notifications
           - api-utility
           - api-translation
           - api-tag

@@ -117,7 +117,7 @@ security:
 
         api_notifications_id_read:
             provider: chain_provider
-            pattern: ^/api/notification/id/read
+            pattern: ^api/notification/.+?/read$
             methods: [ PUT ]
             stateless: true
             guard:
