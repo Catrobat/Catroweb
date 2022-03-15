@@ -32,10 +32,10 @@ Feature: Get project
       | Name      |
       | project 2 |
 
-  Scenario: Accessing private project must be not possible
+  Scenario: Accessing private project must be possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/3"
-    Then the response status code should be "404"
+    Then the response status code should be "200"
     Then the response content must be empty
 
   Scenario: Accessing hidden project must be not possible
