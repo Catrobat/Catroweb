@@ -180,7 +180,7 @@ programs:
   closeEditorPrompt: Do you want to save your changes?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
-  btnDiscard: Discard
+  btnDiscard: Відкинути
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -200,7 +200,7 @@ programs:
   cannotDelete: Cannot delete default name, description, or credits
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
-  save: Save
+  save: Зберегти
 remixGraph:
   title: Ремікси
   showRemixGraph: 'Remix graph'
@@ -298,7 +298,7 @@ profile:
 myprofile:
   editProfile: Edit profile
   edit: Edit
-  done: Done
+  done: Готово
   checkMail: An email was sent to your email address. Please check your inbox.
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
@@ -730,7 +730,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'буде'
   overview:
     header: 'Achievements'
     most_recent_achievement:

@@ -68,9 +68,9 @@ final class NotificationsApi extends AbstractApiController implements Notificati
 
   public function notificationsReadPut(&$responseCode = null, array &$responseHeaders = null)
   {
-    // TODO: Implement notificationsReadPut() method.
+    $this->facade->getProcessor()->markAllAsSeen($this->facade->getAuthenticationManager()->getAuthenticatedUser());
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $responseCode = Response::HTTP_NO_CONTENT;
 
     return null;
   }

@@ -146,9 +146,13 @@ class NotificationsApiTest extends DefaultTestCase
     $response_code = null;
     $response_headers = [];
 
+    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
+
     $response = $this->object->notificationsReadPut($response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
     $this->assertNull($response);
   }
 }
