@@ -20,7 +20,7 @@ final class NotificationsApiLoader extends AbstractApiLoader
     $this->notification_repository = $notification_repository;
   }
 
-  public function findNotificationByID(int $id): object
+  public function findNotificationByID(int $id): ?object
   {
     return $this->notification_repository->find($id);
   }
