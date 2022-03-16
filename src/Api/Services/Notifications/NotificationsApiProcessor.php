@@ -15,7 +15,7 @@ final class NotificationsApiProcessor extends AbstractApiProcessor
 
   public function __construct(
         NotificationRepository $notification_repository,
-        NotificationManager $notification_manager,
+        NotificationManager $notification_manager
     ) {
     $this->notification_repository = $notification_repository;
     $this->notification_manager = $notification_manager;
