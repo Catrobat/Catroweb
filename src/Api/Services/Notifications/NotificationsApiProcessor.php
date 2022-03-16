@@ -6,7 +6,6 @@ use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\User\Notification\NotificationManager;
-use Symfony\Component\HttpFoundation\Response;
 
 final class NotificationsApiProcessor extends AbstractApiProcessor
 {
@@ -21,14 +20,14 @@ final class NotificationsApiProcessor extends AbstractApiProcessor
     $this->notification_manager = $notification_manager;
   }
 
-  public function markNotificationAsSeen(int $notification_id, User $user): int
+  public function markNotificationAsSeen(int $notification_id, User $user): bool
   {
     $notification_seen = $this->notification_repository->findOneBy(['id' => $notification_id, 'user' => $user]);
     if (null === $notification_seen) {
-      return Response::HTTP_NOT_FOUND;
+      return false;
     }
     $this->notification_manager->markSeen([$notification_seen]);
 
-    return Response::HTTP_NO_CONTENT;
+    return true;
   }
 }

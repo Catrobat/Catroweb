@@ -23,12 +23,14 @@ final class NotificationsApi extends AbstractApiController implements Notificati
 
     $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
     if (is_null($user)) {
-      $responseCode = Response::HTTP_FORBIDDEN;
+      $responseCode = Response::HTTP_UNAUTHORIZED;
 
       return null;
     }
 
-    $responseCode = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
+    $successful = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
+
+    $responseCode = $successful ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
 
     return null;
   }
