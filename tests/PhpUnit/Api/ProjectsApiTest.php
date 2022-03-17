@@ -494,7 +494,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $response = $this->object->projectIdDelete('id', $response_code, $response_headers);
 
-    $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
+    $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response_code);
     $this->assertNull($response);
   }
 

@@ -269,43 +269,6 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/userDeleteProject/{id}", name="profile_delete_program", methods={"GET"})
-   *
-   * @throws Exception
-   */
-  public function deleteProgramAction(string $id = ''): Response
-  {
-    if ('' === $id) {
-      return $this->redirectToRoute('profile');
-    }
-
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (!$user) {
-      return $this->redirectToRoute('login');
-    }
-
-    /** @var ArrayCollection $user_programs */
-    $user_programs = $user->getPrograms();
-    $programs = $user_programs->matching(Criteria::create()
-      ->where(Criteria::expr()->eq('id', $id)));
-
-    if ($programs->isEmpty()) {
-      return $this->redirectToRoute('profile');
-    }
-
-    /** @var Program $program */
-    $program = $programs[0];
-    $program->setVisible(false);
-
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($program);
-    $em->flush();
-
-    return $this->redirectToRoute('profile');
-  }
-
-  /**
    * @Route("/userToggleProjectVisibility/{id}", name="profile_toggle_program_visibility",
    * defaults={"id": 0}, methods={"GET"})
    *

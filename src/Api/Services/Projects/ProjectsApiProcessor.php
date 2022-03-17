@@ -38,4 +38,21 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
   {
     $this->entity_manager->refresh($user);
   }
+
+  public function deleteProjectById(string $id, User $user): bool
+  {
+    if ('' === $id) {
+      return false;
+    }
+
+    $program = $this->project_manager->getProjectByID($id);
+
+    if (!$program || $program[0]->getUser() != $user) {
+      return false;
+    }
+
+    $this->project_manager->deleteProject($program[0]);
+
+    return true;
+  }
 }
