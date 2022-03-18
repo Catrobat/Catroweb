@@ -266,7 +266,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $offset = $this->getDefaultOffsetOnNull($offset);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
 
-    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 

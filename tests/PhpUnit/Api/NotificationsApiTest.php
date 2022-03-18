@@ -110,8 +110,7 @@ class NotificationsApiTest extends DefaultTestCase
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $user = $this->createMock(User::class);
     $user->method('getId')->willReturn('1');
-    $authentication_manager->method('getUserFromAuthenticationToken')->willReturn($user);
-    $this->object->method('getAuthenticationToken')->willReturn('');
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
     $response = $this->object->notificationsCountGet($response_code, $response_headers);

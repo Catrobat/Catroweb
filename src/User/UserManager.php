@@ -13,6 +13,7 @@ use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
+use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use FOS\UserBundle\Model\UserInterface;
 use FOS\UserBundle\Util\CanonicalFieldsUpdater;
@@ -46,10 +47,19 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
 
   public function decodeToken(string $token): array
   {
-    $tokenParts = explode('.', $token);
-    $tokenPayload = base64_decode($tokenParts[1], true);
+    try {
+      $tokenParts = explode('.', $token);
+      $tokenPayload = base64_decode($tokenParts[1], true);
 
-    return json_decode($tokenPayload, true);
+      $payload = json_decode($tokenPayload, true);
+      if (!is_array($payload)) {
+        return [];
+      }
+
+      return json_decode($tokenPayload, true);
+    } catch (Exception $e) {
+      return [];
+    }
   }
 
   public function isPasswordValid(UserInterface $user, string $password, PasswordEncoderInterface $encoder): bool
@@ -62,13 +72,13 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     $response_data = [];
 
     foreach ($raw_user_data as $user) {
-      array_push($response_data, [
+      $response_data[] = [
         'username' => $user->getUsername(),
         'id' => $user->getId(),
         'avatar' => $user->getAvatar(),
         'project_count' => $this->program_manager->countPublicUserProjects($user->getId()),
         'profile' => $user,
-      ]);
+      ];
     }
 
     return $response_data;
