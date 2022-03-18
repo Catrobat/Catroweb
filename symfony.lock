@@ -756,6 +756,9 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/http-client": {
+        "version": "v5.4.5"
+    },
     "symfony/http-client-contracts": {
         "version": "v2.3.1"
     },

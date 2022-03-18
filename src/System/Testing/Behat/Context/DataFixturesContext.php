@@ -498,6 +498,20 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then the project :id should have :downloads downloads
+   *
+   * @param mixed $id
+   * @param mixed $downloads
+   */
+  public function theProjectShouldHaveDownloads($id, $downloads): void
+  {
+    /** @var Program $program */
+    $program = $this->getProgramManager()->find($id);
+    $this->getManager()->refresh($program);
+    Assert::assertEquals($downloads, $program->getDownloads());
+  }
+
+  /**
    * @Then the project with name :name should have :number_of_tags tags
    */
   public function theProjectWithNameShouldHaveTags(string $name, int $number_of_tags): void
