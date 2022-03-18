@@ -16,7 +16,7 @@ require('../styles/notifications_overview.scss')
 $(() => {
   const $notifications = $('.js-notifications')
   const userNotifications = new UserNotifications(
-    $notifications.data('mark-as-read-url'),
+
     $notifications.data('base-url') + '/api/notifications/read',
     $notifications.data('fetch-url'),
     $notifications.data('something-went-wrong-error'),
@@ -44,7 +44,7 @@ $(() => {
 
 // eslint-disable-next-line no-unused-vars
 class UserNotifications {
-  constructor (markAsReadUrl, markAllSeen, fetchNotificationsUrl, somethingWentWrongError,
+  constructor (markAllSeen, fetchNotificationsUrl, somethingWentWrongError,
     notificationsClearError, notificationsUnauthorizedError, allNotificationsCount,
     followNotificationCount, reactionNotificationCount, commentNotificationCount, remixNotificationCount,
     profilePath, programPath, imgAsset) {
@@ -53,7 +53,6 @@ class UserNotifications {
     this.comment = false
     this.reactions = false
     this.remixes = false
-    this.markAsReadUrl = markAsReadUrl
     this.markAllSeen = markAllSeen
     this.fetchNotificationsUrl = fetchNotificationsUrl
     this.somethingWentWrongError = somethingWentWrongError

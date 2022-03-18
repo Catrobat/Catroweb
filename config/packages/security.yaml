@@ -115,6 +115,15 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
+        api_notifications_id_read:
+            provider: chain_provider
+            pattern: ^api/notification/.+?/read$
+            methods: [ PUT ]
+            stateless: true
+            guard:
+              authenticators:
+                - lexik_jwt_authentication.jwt_token_authenticator
+
         api_notifications_read:
             provider: chain_provider
             pattern: ^/api/notifications/read

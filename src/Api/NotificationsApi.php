@@ -21,9 +21,16 @@ final class NotificationsApi extends AbstractApiController implements Notificati
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
 
-    // TODO: Implement notificationIdReadPut() method.
+    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    if (is_null($user)) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
 
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+      return null;
+    }
+
+    $successful = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
+
+    $responseCode = $successful ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
 
     return null;
   }

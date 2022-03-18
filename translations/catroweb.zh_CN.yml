@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     亲爱的 %username%。<br>
     <br>
-    要完成激活您的帐户，请点击这里 <a href=%confirmationUrl%></a><br>
+    要完成激活您的帐户，请点击这里 <a href="%confirmationUrl%"></a><br>
     <br>
     此链接只能用来验证您的帐户。<br>
     <br>
@@ -252,14 +252,14 @@ passwordRecovery:
     <p>
     亲爱的%username%.<br>
     <br>
-    由于您忘记了您的密码，您已要求在<a href=%appplication_url%>Pocket Code</a>上重置密码。
+    由于您忘记了您的密码，您已要求在<a href="%appplication_url%">Pocket Code</a>上重置密码。
     如果您没有提出要求，请忽略它。它将在24小时内过期并变得毫无用处。<br>
     <br>
-    要重新设置密码和创建新密码，请点击<<a href=%confirmationUrl%>这里。</a><br>。
+    要重新设置密码和创建新密码，请点击<<a href="%confirmationUrl%">这里。</a><br>。
     <br>
-    您可以随时使用您的用户名和密码访问<a href=%appplication_url%>Pocket Code</a>社区<br>。
-    要做到这一点，只需访问以下页面。<a href=%loginPage%>登录页面</a><br>。
-    要编辑您的个人资料，请到这个<a href=%profilePage%>页面</a>.<br>。
+    您可以随时使用您的用户名和密码访问<a href="%appplication_url%">Pocket Code</a>社区<br>。
+    要做到这一点，只需访问以下页面。<a href="%loginPage%">登录页面</a><br>。
+    要编辑您的个人资料，请到这个<a href="%profilePage%">页面</a>.<br>。
     <br>
     问候，<br>
     你的杂技团。

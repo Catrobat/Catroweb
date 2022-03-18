@@ -966,9 +966,29 @@ class DataFixturesContext implements KernelAwareContext
       if (isset($notification['id'])) {
         $to_create->setId($notification['id']);
       }
+      if (isset($notification['seen'])) {
+        $to_create->setSeen($notification['seen']);
+      }
 
       $em->persist($to_create);
       $em->flush();
+    }
+  }
+
+  /**
+   * @Given /^the following catro notifications exist in the database:$/
+   */
+  public function followingCatroNotificationsExist(TableNode $table): void
+  {
+    $em = $this->getManager();
+    $notifications = $table->getHash();
+
+    foreach ($notifications as $notification) {
+      $notification_found = $em->getRepository(CatroNotification::class)->find($notification['id']);
+      Assert::assertNotNull($notification_found);
+      if (isset($notification['seen'])) {
+        Assert::assertEquals($notification['seen'], $notification_found->getSeen(), 'seen wrong'.$notification['seen'].'expected, but '.$notification_found->getSeen().'found');
+      }
     }
   }
 

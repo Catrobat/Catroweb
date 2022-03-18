@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Drogi %username%.<br>
     <br>
-    Aby dokończyć aktywację konta - kliknij <a href=%confirmationUrl%>tutaj.</a><br>
+    Aby dokończyć aktywację konta - kliknij <a href="%confirmationUrl%">tutaj.</a><br>
     <br>
     Ten link może zostać użyty tylko raz do zweryfikowania konta.<br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     Drogi %username%.<br>
     <br>
-    Żądasz zresetowania swojego hasła do <a href=%appplication_url%>Pocket Code</a> ponieważ je zapomniałeś.
+    Żądasz zresetowania swojego hasła do <a href="%appplication_url%">Pocket Code</a> ponieważ je zapomniałeś.
     Jeśli nie prosiłeś, zignoruj to. Po 24 godzinach wiadomość stanie się nieaktualna.<br>
     <br>
-    Aby zresetować hasło i stworzyć nowe, kliknij <a href=%confirmationUrl%>tutaj.</a><br>
+    Aby zresetować hasło i stworzyć nowe, kliknij <a href="%confirmationUrl%">tutaj.</a><br>
     <br>
-    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności <a href=%appplication_url%>Pocket Code</a>.<br>
-    Aby to zrobić, odwiedź następującą stronę: <a href=%loginPage%>Strona logowania</a><br>
-    Aby edytować swój profil, przejdź do tej <a href=%profilePage%>strony</a>.<br>
+    W każdej chwili możesz użyć swojej nazwy użytkownika i hasła, aby uzyskać dostęp do społeczności <a href="%appplication_url%">Pocket Code</a>.<br>
+    Aby to zrobić, odwiedź następującą stronę: <a href="%loginPage%">Strona logowania</a><br>
+    Aby edytować swój profil, przejdź do tej <a href="%profilePage%">strony</a>.<br>
     <br>
     Pozdrawiamy,<br>
     Twój zespół Catrobat.
