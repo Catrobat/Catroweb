@@ -225,7 +225,6 @@ accountConfirmation:
     Dear %username%.<br>
     <br>
     To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    <br>
     This link can only be used once to validate your account.<br>
     <br>
     Best regards,<br>

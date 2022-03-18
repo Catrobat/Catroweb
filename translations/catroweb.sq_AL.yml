@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     I dashur %username%.<br>
     <br>
-    Për të përfunduar aktivizimin e llogarisë tuaj - ju lutemi klikoni <a href="%confirmationUrl%">këtu.</a><br>
+    Për të përfunduar aktivizimin e llogarisë tuaj - ju lutemi klikoni <a href=%confirmationUrl%>këtu.</a><br>
     <br>
     Ky link mund të përdoret vetëm një herë për të vërtetuar llogarinë tuaj.<br>
     <br>
@@ -248,14 +248,14 @@ passwordRecovery:
     <p>
     I dashur %username%.<br>
     <br>
-    Ju keni kërkuar të rivendosni fjalëkalimin tuaj në <a href="%appplication_url%"> Pocket Code </a> sepse keni harruar fjalëkalimin tuaj.
+    Ju keni kërkuar të rivendosni fjalëkalimin tuaj në <a href=%appplication_url%> Pocket Code </a> sepse keni harruar fjalëkalimin tuaj.
     Nëse nuk e keni kërkuar këtë, ju lutemi injorojeni. Do të skadojë dhe do të bëhet e pavlefshme në 24 orë.<br>
     <br>
-    Për të rivendosur fjalëkalimin tuaj dhe për të krijuar një të ri, ju lutemi klikoni <a href="%confirmationUrl%"> këtu.</a><br>
+    Për të rivendosur fjalëkalimin tuaj dhe për të krijuar një të ri, ju lutemi klikoni <a href=%confirmationUrl%> këtu.</a><br>
     <br>
-    Ju mund të përdorni emrin tuaj të përdoruesit dhe fjalëkalimin tuaj në çdo kohë për të hyrë në komunitetin <a href="%appplication_url%"> Pocket Code</a>.<br>
-    Për ta bërë këtë, thjesht vizitoni faqen e mëposhtme: <a href="%loginPage%"> Faqja e hyrjes</a><br>
-    Për të modifikuar detajet e profilit tuaj, shkoni te kjo faqe <a href="%profilePage%"></a>.<br>
+    Ju mund të përdorni emrin tuaj të përdoruesit dhe fjalëkalimin tuaj në çdo kohë për të hyrë në komunitetin <a href=%appplication_url%> Pocket Code</a>.<br>
+    Për ta bërë këtë, thjesht vizitoni faqen e mëposhtme: <a href=%loginPage%> Faqja e hyrjes</a><br>
+    Për të modifikuar detajet e profilit tuaj, shkoni te kjo faqe <a href=%profilePage%></a>.<br>
     <br>
     Përshëndetjet më të përzemërta,<br>
     Ekipi juaj Catrobat.

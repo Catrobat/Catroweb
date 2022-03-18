@@ -225,7 +225,7 @@ accountConfirmation:
     Gentile %username%.
     <br>
     <br>
-    per completare l'attivazione del tuo account vai a <a href="%confirmationUrl%">questa pagina.</a><br>
+    per completare l'attivazione del tuo account vai a <a href=%confirmationUrl%>questa pagina.</a><br>
     <br>
     Il link può essere usato una sola volta per la validazione dell'account.
     <br>
@@ -251,14 +251,14 @@ passwordRecovery:
     <p>
     Gentile %username%.<br>
     <br>
-    Hai chiesto un reset della tua password su <a href="%appplication_url%">Pocket Code</a> perché l'hai dimenticata.
+    Hai chiesto un reset della tua password su <a href=%appplication_url%>Pocket Code</a> perché l'hai dimenticata.
     Se non sei stato tu a richiederlo, ignora questo messaggio: diventerà obsoleto in 24 ore.<br>
     <br>
-    Per reimpostare la tua password a crearne una nuova, fai clic <a href="%confirmationUrl%">qui.</a><br>
+    Per reimpostare la tua password a crearne una nuova, fai clic <a href=%confirmationUrl%>qui.</a><br>
     <br>
-    Puoi sempre utilizzare il tuo nome utente e la tua password per accedere alla community di <a href="%appplication_url%">Pocket Code</a>.<br>
-    Puoi entrare nella tua <a href="%loginPage%">pagina di login</a><br>
-    Per modificare i dettagli del tuo profilo va a <a href="%profilePage%">questa pagina</a>.<br>
+    Puoi sempre utilizzare il tuo nome utente e la tua password per accedere alla community di <a href=%appplication_url%>Pocket Code</a>.<br>
+    Puoi entrare nella tua <a href=%loginPage%>pagina di login</a><br>
+    Per modificare i dettagli del tuo profilo va a <a href=%profilePage%>questa pagina</a>.<br>
     <br>
     Cordiali saluti,<br>
     Il Team di Catrobat.
