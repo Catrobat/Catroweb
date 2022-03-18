@@ -81,18 +81,18 @@ class MediaPackageController extends AbstractController
    * @Route("/pocket-library/{package_name}/search/{q}", name="pocketlibrary_search", requirements={"q": ".+"}, methods={"GET"})
    * @Route("/pocket-library/{package_name}/search/", name="pocketlibrary_empty_search", defaults={"q": null}, methods={"GET"})
    *
-   * @param string $q            Search term
-   * @param string $package_name Name of MediaPackage to be searched for files
+   * @param string|null $q            Search term
+   * @param string      $package_name Name of MediaPackage to be searched for files
    *
    * @return Response the response containing the found media library objects
    */
-  public function mediaPackageSearchAction(string $q, string $package_name, TranslatorInterface $translator,
+  public function mediaPackageSearchAction(?string $q, string $package_name, TranslatorInterface $translator,
                                            MediaPackageFileRepository $media_file_repository,
                                            UrlGeneratorInterface $url_generator, Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');
 
-    $found_media_files = $media_file_repository->search($q, $flavor, $package_name);
+    $found_media_files = $media_file_repository->search($q ?? '', $flavor, $package_name);
 
     $categories_of_found_files = [];
     /** @var MediaPackageFile $found_media_file */
