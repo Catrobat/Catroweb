@@ -3,6 +3,7 @@ import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
+import { getCookie } from '../security/CookieHelper'
 
 export const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
@@ -90,7 +91,12 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
     downloadUrl += 'token=' + encodeURIComponent(csrfToken)
 
     // eslint-disable-next-line no-undef
-    fetch(downloadUrl)
+    fetch(downloadUrl, {
+      // eslint-disable-next-line no-undef
+      headers: new Headers({
+        Authorization: 'Bearer ' + getCookie('BEARER')
+      })
+    })
       .then(function (response) {
         // fetching the data in the background; this allows us to detect when the download is finished!
         if (response.ok) {

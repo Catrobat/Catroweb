@@ -39,7 +39,7 @@ privacyPolicy: Gizlilik Politikası
 imprint: Damga
 programDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'İstenen kaynak mevcut değil.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
 oldVersionError: 'Lütfen en yeni Cep Kodu sürümüne güncelleyin!'
 more: 'daha fazla'
@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "Kullanıcıya yetki verilemiyor"
 notificationsClearError: "Bildirimler okundu olarak işaretlenemedi!"
 pleaseWait: "Lütfen bekleyiniz..."
 projects: "Projeler"
-users: "Users"
+users: "Kullanıcılar"
 oauthPopUpTitle: "Harici hesap oturum açma bilgileri"
 oauthInfo: 'Oturum açmak için harici bir hesap kullandınız. Sizin için rastgele bir kullanıcı adı oluşturduk. Kullanıcı adınızı değiştirmek veya hesabınız için yeni bir şifre oluşturmak istiyorsanız lütfen profil sayfama gidin. Tıklayın %link_start% buraya %link_end% profil sayfanıza gitmek için.'
 oauthHere: "buraya"
@@ -195,10 +195,10 @@ programs:
   hideTranslation: Çeviriyi gizle
   translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
   translationUpdated: '%language% çevirisi için yapılan değişiklikler güncellendi'
-  googleTranslate: Google Translate
-  translationDeleted: Custom translation to %language% deleted
-  cannotDelete: Cannot delete default name, description, or credits
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: Google Çeviri
+  translationDeleted: '%language% diline özel çeviri silindi'
+  cannotDelete: Varsayılan ad, açıklama veya krediler silinemez
+  confrimDelete: Çeviriyi silmek istediğinizden emin misiniz?
   default: Varsayılan
   save: Kaydet
 remixGraph:
@@ -368,8 +368,8 @@ search:
   results: Sonuçlarda Ara
   resultcount: '%count% tane sonuç bulundu'
   fail: Lütfen en az bir arama terimi girin
-  noUsers: No users found
-  noProjects: No projects found
+  noUsers: Kullanıcı bulunamadı
+  noProjects: Proje bulunamadı
 menu:
   profile: Benim profilim
   login: Oturum aç
@@ -677,8 +677,8 @@ catro-notifications:
   remix:
     message: 'Kullanıcı %user_link% projenizi %program_link% yeniden düzenledi. Remix''i aşağıdaki %remix_program_link% bağlantısında görebilirsiniz.'
 clipboard:
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success_project: Proje bağlantısı panoya kopyalandı!
+  success_user: Kullanıcının bağlantısı panoya kopyalandı!
   fail: Bağlantı panoya kopyalanamadı!
 next: İleri
 previous: Önceki
@@ -714,7 +714,7 @@ share:
   success: 'Paylaşım başarılı'
 copy: 'Bağlantıyı kopyala'
 checkOutProject: 'Bu projeye göz atın:'
-checkOutUser: 'Check out this user:'
+checkOutUser: 'Bu kullanıcıya göz atın:'
 community: 'Catrobat Topluluğu'
 back_to_app: 'Topluluktan çık'
 category:
