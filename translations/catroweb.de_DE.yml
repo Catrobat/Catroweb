@@ -224,8 +224,7 @@ accountConfirmation:
     <p>
     Lieber oder Liebe  %username%.<br>
     <br>
-    Um die Aktivierung deines Kontos abzuschließen klicke bitte hier <a href=%confirmationUrl%>.</a><br>
-    <br>
+    Um die Aktivierung deines Kontos abzuschließen klicke bitte <a href="%confirmationUrl%">hier.</a><br>
     Dieser Link kann nur einmal verwendet werden um dein Konto zu bestätigen.<br>
     <br>
     Grüße,<br>
@@ -251,14 +250,14 @@ passwordRecovery:
     <p>
     Lieber oder Liebe %username%.<br>
     <br>
-    Du hast ein neues Passwort auf <a href=%appplication_url%>Pocket Code</a> angefordert, da du dein Passwort vergessen hast.
+    Du hast ein neues Passwort auf <a href="%appplication_url%">Pocket Code</a> angefordert, da du dein Passwort vergessen hast.
     Wenn du kein neues Passwort angefordert hast, ignoriere bitte diese Mail. Dein Passwort läuft ab und wird in 24 Stunden unbrauchbar.<br>
     <br>
-    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: <a href=%confirmationUrl%>.</a><br>
+    Um dein Passwort zurückzusetzen und ein neues zu erstellen besuche bitte die folgende Seite: <a href="%confirmationUrl%">.</a><br>
     <br>
-    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die <a href=%appplication_url%>Pocket Code</a> Community zuzugreifen.<br>
-    Besuche dafür einfach die folgende Seite:  <a href=%loginPage%>Anmeldeseite</a><br>
-    Um deine Profildaten zu bearbeiten, gehen auf diese Seite <a href=%profilePage%>Seite</a>.<br>
+    Du kannst jederzeit mit deinem Benutzernamen und deinem Passwort auf die <a href="%appplication_url%">Pocket Code</a> Community zuzugreifen.<br>
+    Besuche dafür einfach die folgende Seite:  <a href="%loginPage%">Anmeldeseite</a><br>
+    Um deine Profildaten zu bearbeiten, gehen auf diese Seite <a href="%profilePage%">Seite</a>.<br>
     <br>
     Beste Grüße,<br>
     Dein Catrobat Team.
