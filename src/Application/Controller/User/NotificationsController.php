@@ -131,28 +131,6 @@ class NotificationsController extends AbstractController
   }
 
   /**
-   * @Route("/user_notifications/markasread/{notification_id}", name="notification_mark_as_read",
-   * requirements={"notification_id": "\d+"}, defaults={"notification_id": null}, methods={"GET"})
-   * Todo -> move to CAPI
-   */
-  public function markNotificationAsRead(int $notification_id,
-                                         NotificationManager $notification_service,
-                                         NotificationRepository $notification_repo): JsonResponse
-  {
-    $user = $this->getUser();
-    if (null === $user) {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
-    }
-    $notification_seen = $notification_repo->findOneBy(['id' => $notification_id, 'user' => $user]);
-    if (null === $notification_seen) {
-      return new JsonResponse([], Response::HTTP_NOT_FOUND);
-    }
-    $notification_service->markSeen([$notification_seen]);
-
-    return new JsonResponse([], Response::HTTP_NO_CONTENT);
-  }
-
-  /**
    * @Route("/notifications/count", name="sidebar_notifications_count", methods={"GET"})
    * Todo -> move to CAPI
    */
