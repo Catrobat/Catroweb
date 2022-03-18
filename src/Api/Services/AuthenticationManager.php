@@ -66,7 +66,7 @@ class AuthenticationManager
     return $this->jwt_manager->create($user);
   }
 
-  public function getUserFromAuthenticationToken(string $token): ?User
+  protected function getUserFromAuthenticationToken(string $token): ?User
   {
     $payload = $this->user_manager->decodeToken($token);
     $idClaim = $this->jwt_manager->getUserIdClaim();

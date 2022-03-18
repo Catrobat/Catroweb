@@ -21,7 +21,7 @@ final class NotificationsApi extends AbstractApiController implements Notificati
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
 
-    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
@@ -29,7 +29,6 @@ final class NotificationsApi extends AbstractApiController implements Notificati
     }
 
     $successful = $this->facade->getProcessor()->markNotificationAsSeen($id, $user);
-
     $responseCode = $successful ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
 
     return null;
@@ -37,7 +36,7 @@ final class NotificationsApi extends AbstractApiController implements Notificati
 
   public function notificationsCountGet(&$responseCode = null, array &$responseHeaders = null)
   {
-    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
@@ -68,7 +67,14 @@ final class NotificationsApi extends AbstractApiController implements Notificati
 
   public function notificationsReadPut(&$responseCode = null, array &$responseHeaders = null)
   {
-    $this->facade->getProcessor()->markAllAsSeen($this->facade->getAuthenticationManager()->getAuthenticatedUser());
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (is_null($user)) {
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $this->facade->getProcessor()->markAllAsSeen($user);
 
     $responseCode = Response::HTTP_NO_CONTENT;
 
