@@ -84,7 +84,7 @@
     "lazysizes": "^5.3.2",
     "material-icons": "^1.10.8",
     "n": "^8.0.2",
-    "npm": "^8.5.4",
+    "npm": "^8.5.5",
     "path": "^0.12.7",
     "postcss-loader": "^6.2.1",
     "purgecss-webpack-plugin": "^4.1.3",
