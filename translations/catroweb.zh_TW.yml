@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     親愛的 %username%。<br>
     <br>
-    要完成激活您的帳戶 - 請點擊<a href=%confirmationUrl%>此處。</a><br>
+    要完成激活您的帳戶 - 請點擊<a href="%confirmationUrl%">此處。</a><br>
     <br>
     此鏈接只能用於驗證您的帳戶一次。<br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     親愛的 %username%。<br>
     <br>
-    您已通過 <a href=%appplication_url%>Pocket Code</a> 請求重置密碼，因為您忘記了密碼。
+    您已通過 <a href="%appplication_url%">Pocket Code</a> 請求重置密碼，因為您忘記了密碼。
     如果你沒有要求這個，請忽略它。它將在 24 小時內過期並變得無用。<br>
     <br>
-    要重置密碼並創建新密碼，請點擊<a href=%confirmationUrl%>此處。</a><br>
+    要重置密碼並創建新密碼，請點擊<a href="%confirmationUrl%">此處。</a><br>
     <br>
-    您可以隨時使用您的用戶名和密碼訪問<a href=%appplication_url%>袖珍代碼</a>社區。<br>
-    為此，只需訪問以下頁面：<a href=%loginPage%>登錄頁面</a><br>
-    要編輯您的個人資料詳細信息，請轉到此<a href=%profilePage%>頁面</a>。<br>
+    您可以隨時使用您的用戶名和密碼訪問<a href="%appplication_url%">袖珍代碼</a>社區。<br>
+    為此，只需訪問以下頁面：<a href="%loginPage%">登錄頁面</a><br>
+    要編輯您的個人資料詳細信息，請轉到此<a href="%profilePage%">頁面</a>。<br>
     <br>
     最好的問候，<br>
     您的 Catrobat 團隊。

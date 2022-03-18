@@ -223,7 +223,7 @@ accountConfirmation:
     <p>
     Dragi %username%.<br>
     <br>
-    Da završite sa aktivacijom naloga - molimo posjetite <a href=%confirmationUrl%>here.</a><br>
+    Da završite sa aktivacijom naloga - molimo posjetite <a href="%confirmationUrl%">here.</a><br>
     <br>
     Ovaj link se može samo jednom iskoristiti da potvrdite Vaš nalog.<br>
     <br>
@@ -250,14 +250,14 @@ passwordRecovery:
     <p>
     Dragi %username%.<br>
     <br>
-    Zatražili ste promenu šifre na <a href=%appplication_url%>Pocket Code</a> jer ste zaboravili postojeću.
+    Zatražili ste promenu šifre na <a href="%appplication_url%">Pocket Code</a> jer ste zaboravili postojeću.
     Ako ovo Vi niste tražili, molimo da ignorišete ovu poruku. Isteći će i postaje beskorisna za 24. sata.<br>
     <br>
-    Da promenite i napravite novu lozinku, molimo kliknite <a href=%confirmationUrl%>ovde.</a><br>
+    Da promenite i napravite novu lozinku, molimo kliknite <a href="%confirmationUrl%">ovde.</a><br>
     <br>
-    Možete koristiti korisničko ime i lozinku bilo kada da pristupite <a href=%appplication_url%>Pocket Code</a> zajednici.<br>
-    Da učinite to, samo posetite datu stranicu: <a href=%loginPage%>Login Page</a><br>
-    Da izmenite detalje Vašega profila, idite na ovu <a href=%profilePage%>stranicu</a>.<br>
+    Možete koristiti korisničko ime i lozinku bilo kada da pristupite <a href="%appplication_url%">Pocket Code</a> zajednici.<br>
+    Da učinite to, samo posetite datu stranicu: <a href="%loginPage%">Login Page</a><br>
+    Da izmenite detalje Vašega profila, idite na ovu <a href="%profilePage%">stranicu</a>.<br>
     <br>
     Srdačan pozdrav,<br>
     Vaš Catrobat Tim.

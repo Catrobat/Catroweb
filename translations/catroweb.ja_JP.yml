@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Dear %username%.<br>。
     <br>
-    アカウントのアクティベーションを完了するには、<a href=%confirmationUrl%>ここをクリックしてください。</a><br>
+    アカウントのアクティベーションを完了するには、<a href="%confirmationUrl%">ここをクリックしてください。</a><br>
     <br>
     このリンクはお客様のアカウントを認証するために一度だけ使用することができます。<br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     Dear %username%.<br>。
     <br>
-    パスワードを忘れてしまったため、<a href=%appplication_url%>Pocket Code</a>のパスワードのリセットをリクエストしました。
+    パスワードを忘れてしまったため、<a href="%appplication_url%">Pocket Code</a>のパスワードのリセットをリクエストしました。
     リクエストしていない場合は、無視してください。24時間後には期限切れとなり、使えなくなります。<br>。
     <br>。
-    パスワードをリセットして、新しいパスワードを作成するには、<a href=%confirmationUrl%>ここをクリックしてください。</a><br>
+    パスワードをリセットして、新しいパスワードを作成するには、<a href="%confirmationUrl%">ここをクリックしてください。</a><br>
     <br>
-    ユーザー名とパスワードは、いつでも<a href=%appplication_url%>Pocket Code</a>のコミュニティにアクセスすることができます。<br>
-    そのためには、次のページにアクセスすればいいのです。<a href=%loginPage%>Login Page</a><br>。
-    プロフィールの詳細を編集するには、この<a href=%profilePage%>ページ</a>にアクセスしてください.<br>。
+    ユーザー名とパスワードは、いつでも<a href="%appplication_url%">Pocket Code</a>のコミュニティにアクセスすることができます。<br>
+    そのためには、次のページにアクセスすればいいのです。<a href="%loginPage%">Login Page</a><br>。
+    プロフィールの詳細を編集するには、この<a href="%profilePage%">ページ</a>にアクセスしてください.<br>。
     <br>
     よろしくお願いします。<br>
     Your Catrobat Teamです。
