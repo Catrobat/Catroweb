@@ -12,18 +12,35 @@ Feature: Download programs
       | 3  | program 3 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | true    | true    |
 
   Scenario: Projects can be downloaded
-    When I download "/api/project/1/catrobat"
+    When I request "GET" "/api/project/1/catrobat"
     Then i should receive a project file
     And the response code should be "200"
 
   Scenario: Invisible projects can't be downloaded
-    When I download "/api/project/2/catrobat"
+    When I request "GET" "/api/project/2/catrobat"
     Then the response code should be "404"
 
   Scenario: Private projects can be downloaded!
-    When I download "/api/project/3/catrobat"
+    When I request "GET" "/api/project/3/catrobat"
     Then the response code should be "200"
 
   Scenario: Projects can't be downloaded if they do not exist
-    When I download "/api/project/999/catrobat"
+    When I request "GET" "/api/project/999/catrobat"
     Then the response code should be "404"
+
+  Scenario: Projects download counter increases not when not authenticated
+    When I request "GET" "/api/project/1/catrobat"
+    Then i should receive a project file
+    And the response code should be "200"
+    Then the project "1" should have "3" downloads
+
+  Scenario: Projects download counter increases only once
+    Given I use a valid JWT Bearer token for "Catrobat"
+    When I request "GET" "/api/project/1/catrobat"
+    Then i should receive a project file
+    And the response code should be "200"
+    Then the project "1" should have "4" downloads
+    When I request "GET" "/api/project/1/catrobat"
+    Then i should receive a project file
+    And the response code should be "200"
+    Then the project "1" should have "4" downloads

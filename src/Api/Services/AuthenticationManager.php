@@ -4,6 +4,7 @@ namespace App\Api\Services;
 
 use App\DB\Entity\User\User;
 use App\User\UserManager;
+use App\Utils\RequestHelper;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -17,6 +18,7 @@ class AuthenticationManager
   private RefreshTokenManagerInterface $refresh_manager;
   private RefreshTokenGeneratorInterface $refresh_token_generator;
   protected int $refresh_token_ttl;
+  protected RequestHelper $request_helper;
 
   public function __construct(
     TokenStorageInterface $token_storage,
@@ -24,6 +26,7 @@ class AuthenticationManager
     UserManager $user_manager,
     RefreshTokenGeneratorInterface $refresh_token_generator,
     RefreshTokenManagerInterface $refresh_manager,
+    RequestHelper $request_helper,
     int $refresh_token_ttl // bind in services.yml
   ) {
     $this->token_storage = $token_storage;
@@ -32,14 +35,23 @@ class AuthenticationManager
     $this->refresh_manager = $refresh_manager;
     $this->refresh_token_generator = $refresh_token_generator;
     $this->refresh_token_ttl = $refresh_token_ttl;
+    $this->request_helper = $request_helper;
   }
 
   public function getAuthenticatedUser(): ?User
   {
     $token = $this->token_storage->getToken();
+
     if (!$token) {
+      $tokenAsString = $this->extractTokenFromRequest();
+      if (!empty($tokenAsString)) {
+        return $this->getUserFromAuthenticationToken($tokenAsString);
+      }
+
       return null;
     }
+
+    $token = $this->token_storage->getToken();
 
     $user = $token->getUser();
     if (!($user instanceof User)) {
@@ -56,16 +68,13 @@ class AuthenticationManager
 
   public function getUserFromAuthenticationToken(string $token): ?User
   {
-    $tokenParts = explode('.', $token);
-    $tokenPayload = base64_decode($tokenParts[1], true);
-
-    $jwtPayload = json_decode($tokenPayload, true);
-
-    if (!array_key_exists('username', $jwtPayload)) {
+    $payload = $this->user_manager->decodeToken($token);
+    $idClaim = $this->jwt_manager->getUserIdClaim();
+    if (!isset($payload[$idClaim]) || 'username' !== $idClaim) {
       return null;
     }
 
-    return $this->user_manager->findUserByUsername($jwtPayload['username']);
+    return $this->user_manager->findUserByUsername($payload[$idClaim]);
   }
 
   public function deleteRefreshToken(string $x_refresh): bool
@@ -84,5 +93,23 @@ class AuthenticationManager
     return $this->refresh_token_generator
       ->createForUserWithTtl($user, $this->refresh_token_ttl)
       ->getRefreshToken() ?? '';
+  }
+
+  protected function extractTokenFromRequest(): ?string
+  {
+    $request = $this->request_helper->getCurrentRequest();
+
+    if (!$request->headers->has('Authorization')) {
+      return null;
+    }
+
+    $authorizationHeader = $request->headers->get('Authorization');
+
+    $headerParts = explode(' ', $authorizationHeader);
+    if (!(2 === count($headerParts) && 0 === strcasecmp($headerParts[0], 'Bearer'))) {
+      return null;
+    }
+
+    return $headerParts[1];
   }
 }

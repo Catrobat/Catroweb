@@ -218,23 +218,19 @@ class ApiContext implements KernelAwareContext
    *
    * @param string $method The desired HTTP method
    * @param string $uri    The requested URI
+   *
+   * @throws Exception
    */
   public function iRequestWith($method, $uri): void
   {
-    $this->request_parameters = (null == $this->request_parameters) ? [] : $this->request_parameters;
-    $this->request_files = (null == $this->request_files) ? [] : $this->request_files;
-    $this->request_headers = (null == $this->request_headers) ? [] : $this->request_headers;
-    $this->request_content = (null == $this->request_content) ? '' : $this->request_content;
-
-    if (0 == strcasecmp($method, 'GET')) {
-      $this->getKernelBrowser()->request(
-        $method, $uri, $this->request_parameters, [], $this->request_headers, $this->request_content
-      );
-    } else {
-      $this->getKernelBrowser()->request(
-        $method, $uri, $this->request_parameters, $this->request_files, $this->request_headers, $this->request_content
-      );
-    }
+    $this->getKernelBrowser()->request(
+      $method,
+      $uri,
+      $this->request_parameters,
+      $this->request_files,
+      $this->request_headers,
+      $this->request_content ?? ''
+    );
   }
 
   /**

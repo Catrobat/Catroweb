@@ -396,8 +396,9 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project->getId(), $zipFile);
     $responseCode = Response::HTTP_OK;
 
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $this->facade->getEventDispatcher()->dispatch(
-      new ProjectDownloadEvent($this->facade->getAuthenticationManager()->getAuthenticatedUser(), $project, ProgramDownloads::TYPE_PROJECT)
+      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT)
     );
 
     return $response;

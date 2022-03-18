@@ -646,13 +646,11 @@ class ProgramManager
   public function increaseDownloads(Program $program, ?User $user): void
   {
     $this->increaseNumberOfDownloads($program, $user, ProgramDownloads::TYPE_PROJECT);
-    $this->addDownloadEntry($program, $user, ProgramDownloads::TYPE_PROJECT);
   }
 
   public function increaseApkDownloads(Program $program, ?User $user): void
   {
     $this->increaseNumberOfDownloads($program, $user, ProgramDownloads::TYPE_APK);
-    $this->addDownloadEntry($program, $user, ProgramDownloads::TYPE_APK);
   }
 
   protected function increaseNumberOfDownloads(Program $program, ?User $user, string $download_type): void
@@ -660,8 +658,7 @@ class ProgramManager
     if (!is_null($user)) {
       $download_repo = $this->entity_manager->getRepository(ProgramDownloads::class);
       // No matter which type it should only count once!
-      $download = $download_repo->findOneBy(['program' => $program, 'user' => $user]);
-
+      $download = $download_repo->findOneBy(['program' => $program, 'user' => $user, 'type' => $download_type]);
       // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
       if (is_null($download)) {
         if (ProgramDownloads::TYPE_PROJECT === $download_type) {
@@ -669,6 +666,7 @@ class ProgramManager
         } elseif (ProgramDownloads::TYPE_APK === $download_type) {
           $this->entity_manager->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_downloads = p.apk_downloads + 1')->execute();
         }
+        $this->addDownloadEntry($program, $user, $download_type);
       }
     }
   }

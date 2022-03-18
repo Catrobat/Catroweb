@@ -36,7 +36,10 @@ Feature: Get project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/project/3"
     Then the response status code should be "200"
-    Then the response content must be empty
+    Then the response should have the project model structure
+    Then the response should contain the following project:
+      | Name      |
+      | project 3 |
 
   Scenario: Accessing hidden project must be not possible
     And I have a request header "HTTP_ACCEPT" with value "application/json"
