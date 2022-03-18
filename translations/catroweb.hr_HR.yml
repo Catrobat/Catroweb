@@ -225,7 +225,7 @@ accountConfirmation:
     <p>
     Postovani %username%.<br>
     <br>
-    Kako bi zavrsili aktivaciju vasega korisnickoga racuna - molimo posjetite <a href="%confirmationUrl%">here.</a><br>
+    Kako bi zavrsili aktivaciju vasega korisnickoga racuna - molimo posjetite <a href=%confirmationUrl%>here.</a><br>
     <br>
     Ovaj link moze biti iskoristen samo jednom za potvrdu vasega racuna.<br>
     <br>
@@ -252,14 +252,14 @@ passwordRecovery:
     <p>
     Postovani %username%.<br>
     <br>
-    Zatrazili ste resetiranje vase lozinke na <a href="%appplication_url%">Pocket Code</a> zato sto se zaboravili vasu lozinku.
+    Zatrazili ste resetiranje vase lozinke na <a href=%appplication_url%>Pocket Code</a> zato sto se zaboravili vasu lozinku.
     Ako vi niste zatrazili ovo, onda igrnorirajte ovu poruku. Isteci ce za 24 sata i nece se vise moci koristiti.<br>
     <br>
-    Kako bi resetirali vasu lozinku i kreirali novu, molimo vas posjetite sljedecu stranicu: <a href="%confirmationUrl%">here.</a><br>
+    Kako bi resetirali vasu lozinku i kreirali novu, molimo vas posjetite sljedecu stranicu: <a href=%confirmationUrl%>here.</a><br>
     <br>
-    Mozete koristiti vase korisnicko ime i lozinku u bilo kojem trenutku kako bi pristupili the <a href="%appplication_url%">Pocket Code</a> zajednici.<br>
-    Kako bi to ucinili, posjetite sljedecu stranicu:<a href="%loginPage%">Login Page</a><br>
-    Kako bi promijenili vase korisnicke podatke, idite ne sljedecu stranicu: <a href="%profilePage%">page</a>.<br>
+    Mozete koristiti vase korisnicko ime i lozinku u bilo kojem trenutku kako bi pristupili the <a href=%appplication_url%>Pocket Code</a> zajednici.<br>
+    Kako bi to ucinili, posjetite sljedecu stranicu:<a href=%loginPage%>Login Page</a><br>
+    Kako bi promijenili vase korisnicke podatke, idite ne sljedecu stranicu: <a href=%profilePage%>page</a>.<br>
     <br>
     Srdacan Pozdrav,<br>
     Vas Catrobat Team.

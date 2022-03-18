@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Hörmətli %username%. <br>
     <br>
-    Hesabınızı aktivləşdirmək üçün zəhmət olmasa <a href="%confirmationUrl%">bura</a><br> klikləyin
+    Hesabınızı aktivləşdirmək üçün zəhmət olmasa <a href=%confirmationUrl%>bura</a><br> klikləyin
     <br>
     Bu bağlantı, hesabınızı təsdiqləmək üçün yalnız bir dəfə istifadə oluna bilər.<br>
     <br>

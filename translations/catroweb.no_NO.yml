@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Kjære %username%.<br>
     <br>
-    For å fullføre aktiveringen av kontoen din - vennligst klikk <a href="%confirmationUrl%">her.</a><br>
+    For å fullføre aktiveringen av kontoen din - vennligst klikk <a href=%confirmationUrl%>her.</a><br>
     <br>
     Denne linken kan bare brukes én gang for å validere din konto.<br>
     <br>
@@ -247,15 +247,15 @@ passwordRecovery:
     <p>
     Kjære %username%.<br>
     <br>
-    Du har bedt om å tilbakestille passordet på <a href="%appplication_url%">Pocket Code</a> fordi du har glemt passordet ditt.
+    Du har bedt om å tilbakestille passordet på <a href=%appplication_url%>Pocket Code</a> fordi du har glemt passordet ditt.
     Hvis du ikke har bedt om dette, kan du ignorer det. Det utløper og blir ubrukelig i løpet av 24 timer.<br>
     <br>
-    For å tilbakestille passordet ditt og opprette et nytt, vennligst klikk  <a href="%confirmationUrl%">her.</a><br>
+    For å tilbakestille passordet ditt og opprette et nytt, vennligst klikk  <a href=%confirmationUrl%>her.</a><br>
     <br>
-    Du kan bruke ditt brukernavn og passord når som helst for å få tilgang til <a href="%appplication_url%">Pocket Code</a> samfunnet.
+    Du kan bruke ditt brukernavn og passord når som helst for å få tilgang til <a href=%appplication_url%>Pocket Code</a> samfunnet.
     <br>
-    Å gjøre slik bare besøk følgende side:  <a href="%loginPage%">Påloggingsside</a><br>
-    For å redigere profildetaljene dine, gå til denne <a href="%profilePage%">siden</a>.<br>
+    Å gjøre slik bare besøk følgende side:  <a href=%loginPage%>Påloggingsside</a><br>
+    For å redigere profildetaljene dine, gå til denne <a href=%profilePage%>siden</a>.<br>
     <br>
     Vennlig hilsen,<br>
     Ditt Catrobat lag.

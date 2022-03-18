@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Caro(a) %username%.<br>
     <br>
-    Para finalizar a ativação da sua conta - por favor, clique <a href="%confirmationUrl%">aqui.</a><br>
+    Para finalizar a ativação da sua conta - por favor, clique <a href=%confirmationUrl%>aqui.</a><br>
     <br>
     Este link só pode ser usado uma única vez para validar sua conta.<br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     Para %username%.<br>
     <br>
-    Você solicitou redefinir sua senha no <a href="%appplication_url%">Pocket Code</a> por tê-la esquecido.
+    Você solicitou redefinir sua senha no <a href=%appplication_url%>Pocket Code</a> por tê-la esquecido.
     Se você não fez esta solicitação, por favor, ignore-a. Ela expirará e se tornará inutilizável em 24 horas.<br>
     <br>
-    Para redefinir sua senha e criar uma nova, por favor clique <a href="%confirmationUrl%">aqui.</a><br>
+    Para redefinir sua senha e criar uma nova, por favor clique <a href=%confirmationUrl%>aqui.</a><br>
     <br>
-    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a <a href="%appplication_url%">comunidade</a> do Pocket Code.<br>
-    Para isso, siga para a página: <a href="%loginPage%">Página de Login</a><br>
-    Para alterar os detalhes do seu perfil, siga para esta <a href="%profilePage%">página</a>.<br>
+    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a <a href=%appplication_url%>comunidade</a> do Pocket Code.<br>
+    Para isso, siga para a página: <a href=%loginPage%>Página de Login</a><br>
+    Para alterar os detalhes do seu perfil, siga para esta <a href=%profilePage%>página</a>.<br>
     <br>
     Sinceros cumprimentos,<br>
     O time do Catrobat.
