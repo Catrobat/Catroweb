@@ -337,7 +337,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     $success = $this->facade->getProcessor()->deleteProjectById($id, $user);
 
-    $responseCode = $success ? Response::HTTP_NO_CONTENT : Response::HTTP_BAD_REQUEST;
+    $responseCode = $success ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
 
     return null;
   }

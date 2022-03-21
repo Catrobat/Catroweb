@@ -143,25 +143,6 @@ Feature:
     And I wait for AJAX to finish
     Then I should see "Error while updating this e-mail address. You must have at least one validated e-mail address."
 
-  Scenario: deleting a project should set the project to invisible
-    Given I am on "/app/user"
-    And I wait for the page to be loaded
-    Then I should see "project 1"
-    And I should see "project 2"
-    When I go to "/app/userDeleteProject/2"
-    And I wait for AJAX to finish
-    Then I should not see "project 2"
-    And I should see "project 1"
-    And there should be "3" programs in the database
-    When I go to "/app/project/2"
-    And I wait for AJAX to finish
-    And I should be on "/app/"
-
-  Scenario: deleting another user's project should not work
-    Given I go to "/app/userDeleteProject/3"
-    And I wait for AJAX to finish
-    And I should be on "/app/user"
-
   Scenario: check deletion PopUp
     Given I am on "/app/user"
     And I wait for the page to be loaded
@@ -171,12 +152,11 @@ Feature:
     And I wait for AJAX to finish
     Then I should see "delete it"
     When I click ".swal2-cancel"
+    Then I should not see "delete it"
     And I wait for AJAX to finish
     Then I should see "project 1"
-    When I click "#delete-1"
-    And I wait for AJAX to finish
-    And I click ".swal2-confirm"
-    Then I should not see "project 1"
+    And I should see "project 2"
+
 
   Scenario: It should be possible toggle the project privacy on myprofile
     Given I am on "/app/user"
