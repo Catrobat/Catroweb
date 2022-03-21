@@ -24,20 +24,20 @@ Feature: Delete project
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "DELETE" "/api/project/4"
-    Then the response status code should be "400"
+    Then the response status code should be "404"
     Then program "project 4" is not visible
 
   Scenario: Delete project with invalid id
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "DELETE" "/api/project/10"
-    Then the response status code should be "400"
+    Then the response status code should be "404"
 
   Scenario: trying to delete project of other user
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "DELETE" "/api/project/2"
-    Then the response status code should be "400"
+    Then the response status code should be "404"
 
   Scenario: trying to delete project without JWT token
     And I have a request header "HTTP_ACCEPT" with value "application/json"
