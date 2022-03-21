@@ -266,7 +266,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $offset = $this->getDefaultOffsetOnNull($offset);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
 
-    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_FORBIDDEN;
 
@@ -404,8 +404,9 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $response = $this->facade->getResponseManager()->createProjectCatrobatFileResponse($project->getId(), $zipFile);
     $responseCode = Response::HTTP_OK;
 
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $this->facade->getEventDispatcher()->dispatch(
-      new ProjectDownloadEvent($this->facade->getAuthenticationManager()->getAuthenticatedUser(), $project, ProgramDownloads::TYPE_PROJECT)
+      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT)
     );
 
     return $response;

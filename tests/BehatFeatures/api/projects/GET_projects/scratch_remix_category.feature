@@ -31,8 +31,9 @@ Feature: Get remixed program from Scratch
   Scenario: show scratch remixes programs with limit and offset
     Given I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
+    And I have a parameter "category" with value "scratch"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?category=scratch"
+    And I request "GET" "/api/projects"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
@@ -67,8 +68,9 @@ Feature: Get remixed program from Scratch
     And the uploaded program should have RemixOf "Music Inventor [https://scratch.mit.edu/projects/29495624], The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/]" in the xml, API version 2
     Given I have a parameter "limit" with value "6"
     And I have a parameter "offset" with value "0"
+    And I have a parameter "category" with value "scratch"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?category=scratch"
+    And I request "GET" "/api/projects"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:
@@ -104,8 +106,9 @@ Feature: Get remixed program from Scratch
     And the uploaded program should have RemixOf "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/project/2], Merge 1 [Program 6 [/app/project/6], Program 8 [https://share.catrob.at/app/project/8]]]" in the xml, API version 2
     Given I have a parameter "limit" with value "9"
     And I have a parameter "offset" with value "0"
+    And I have a parameter "category" with value "scratch"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/projects/?category=scratch"
+    And I request "GET" "/api/projects"
     Then the response status code should be "200"
     Then the response should have the projects model structure
     Then the response should contain projects in the following order:

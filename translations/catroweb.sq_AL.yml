@@ -17,7 +17,7 @@ googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Galeri aplikacionesh Huawei 
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Chati i Diskordit
 passwordsNoMatch: Fjalëkalimet nuk përputhen.
 error: Gabim
 cancel: Anulo
@@ -27,7 +27,7 @@ reportIt: Po, raportoje!
 areYouSure: A je i Sigurtë?
 noWayOfReturn: Nuk ka asnjë mundësi për të rikthyer veprimet tuaja!
 download: Shkarko si program
-name: Name
+name: Emri
 description: Përshkrimi
 noDescription: Nuk ka përshkrim.
 credits: Credits
@@ -39,7 +39,7 @@ privacyPolicy: Privatësia
 imprint: Ngulit
 programDetails: Detaje
 somethingWentWrong: 'Uuuuups diçka shkoj keq.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'Resurset e kerkuara nuk ekzistojnë'
 pleaseTryAgain: 'Ju lutemi provoni përsëri!'
 oldVersionError: 'Ju lutem merrni verionin më të ri të Pocket Code!'
 more: 'më shumë'
@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "E pamundur të autorizohet përdoruesi"
 notificationsClearError: "E pamundur të shënohen lamerimet si të lexuara!"
 pleaseWait: "Ju lutem prisni..."
 projects: "Programet"
-users: "Users"
+users: "Përdoruesit"
 oauthPopUpTitle: "të dhënat e identifikimit të llogarisë së jashtme"
 oauthInfo: 'Sapo keni përdorur një llogari të jashtme për t''u identifikuar. Ne krijuam një emër përdorimi të rastësishëm për ju. Nëse dëshironi të ndryshoni emrin tuaj të përdoruesit ose të krijoni një fjalëkalim të ri për llogarinë tuaj, ju lutemi shkoni në faqen tuaj të profilit. Klikoni  %link_start% këtu %link_end% për të shkuar në faqen tuaj të profilit'
 oauthHere: "këtu"
@@ -127,7 +127,7 @@ programs:
     Nuk ka asnjë mënyrë për të rikthyer veprimet tuaja!
     Po, fshije!
     Anulo
-  tooLongName: The project name is too long!
+  tooLongName: Emri i skedarit është shumë i gjatë.
   tooLongDescription: Përshkrimi i projektit është shumë i gjatë!
   tooLongCredits: The project credits are too long!
   most:
@@ -158,9 +158,9 @@ programs:
   reportOwnProgram: Nuk mund ta etiketoni programin e juaj.
   reportAlready: Tashmë e keni etiketuar këtë program si të papërshtatshëm.
   reportDone: Ju raportuat këtë program si të papërshtatshëm!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeaderDownload: Shkarkimet nuk janë të mundura
+  updateAppTextDownload: Ju lutemi, bëjini nje update aplikacionit tuaj ne versionin me te fundit. Bëni kujdes që, jo të gjitha veçoritë e Androidit ndodhen në IOS.
+  updateAppTextDownloadApk: Shkarkimi i APK-së aktualisht disponohet vetëm në Android dhe jo në IOS.
   updateAppHeader: Fresko Aplikacionin
   updateAppText: Ju lutem përditësoni aplikacionin tuaj në versionin më të ri për të pasur mundësi ta shkarkoni këtë program.
   btnClosePopup: Ok
@@ -175,11 +175,11 @@ programs:
   deleted_popup: Komenti u fshi me sukses.
   deleted_popup_header: I fshirë
   noAdminRights: Ju nuk keni të drejta administratori. Ju lutemi hyni si Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  saveOnLanguageChange: Would you like to keep your current changes?
-  btnKeep: Keep Changes
+  editProject: Përpunoni projektin
+  closeProjectEditor: Mbyllni editorin e projektit
+  closeEditorPrompt: A doni të ruani ndryshimet tuaja?
+  saveOnLanguageChange: A doni të mbani ndryshimet tuaja aktuale?
+  btnKeep: Mbaj ndryshimet
   btnDiscard: Anulo
   addComment: Shkruaj një koment
   thumbsUp: Gishti i madh lart!
@@ -190,16 +190,16 @@ programs:
   link: Kopjo linkun ne nje tabele
   reactionsText: Reagimet
   downloadErrorText: Ndodhi një gabim gjatë shkarkimit të projektit. Ju lutemi provoni përsëri më vonë.
-  downloadStartText: Download has started...
+  downloadStartText: Shkarkimi ka filluar
   showTranslation: Shfaq përkthimin 
   hideTranslation: Fshihe përkthimin
   translatedByLine: Perkthyer nga %provider% prej %sourceLanguage% në %targetLanguage%
-  translationUpdated: Changes for the translation to %language% updated
+  translationUpdated: Ndryshimet për përkthimin në %language% u përditësuan
   googleTranslate: Google Translate
-  translationDeleted: Custom translation to %language% deleted
-  cannotDelete: Cannot delete default name, description, or credits
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
+  translationDeleted: Përkthimi i personalizuar në %language% u fshi
+  cannotDelete: Emri, përshkrimi ose kreditet e paracaktuara nuk mund të fshihen
+  confrimDelete: Jeni i sigurt që dëshironi të fshini përkthimin?
+  default: parazgjedhje
   save: Ruaj
 remixGraph:
   title: Ripërzierje 
@@ -370,8 +370,8 @@ search:
   results: Search Results
   resultcount: Kërkimi juaj solli %count% rezultate
   fail: Ju lutemi shkruani të paktën një term të vetëm kërkimi 
-  noUsers: No users found
-  noProjects: No projects found
+  noUsers: Nuk u gjet asnjë përdorues
+  noProjects: Nuk u gjet asnjë projekt
 menu:
   profile: Profili im
   login: Kyçuni
@@ -383,11 +383,11 @@ menu:
 login:
   login: Kyçuni
   button:
-    loginNow: Login now
-    createAccount: Create account
-    forgetPassword: Forget password?
+    loginNow: Identifikohu tani
+    createAccount: Krijo një llogari
+    forgetPassword: Harrove fjalëkalimin?
   oauth:
-    title: Or you can join with
+    title: Ose mund të bashkoheni me
   passOrUser: Përdoruesi ose fjalëkalimi juaj ishin të pasaktë.
   noUsername: Përdoruesi ose E-mail adresa nuk u gjetën.
   forgotPass: Keni harruar Fjalëkalimin ose Përdoruesin?
@@ -405,38 +405,38 @@ login:
   passwordFirst: Fjalëkalimi
   passwordSecond: Konfirmo fjalëkalimin 
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  title: Regjistrohu
+  subText: "Duke vazhduar, ju po krijoni një llogari të komunitetit Catrobat dhe pranoni %var1% dhe %var2%."
   button:
     cancel: Anulo
-    createAccount: Create account
+    createAccount: Krijo një llogari
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Rikuperimi i llogarisë
+  description: Nëse e mbani mend emailin ose emrin e përdoruesit të llogarisë suaj, ne mund t'ju dërgojmë një link për të rivendosur fjalëkalimin tuaj.
   button:
     cancel: Anulo
-    submit: Recover password
+    submit: Rikthe fjalekalimin
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Ricilëso fjalëkalimin"
+    description: "Nëse e mbani mend emailin të llogarisë suaj, ne mund t'ju dërgojmë një link për të rivendosur fjalëkalimin tuaj."
     button:
-      submit: "Send reset email"
+      submit: "Dërgo email për rivendosjen"
       cancel: "Anulo"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "Kontrolloni email-in tuaj"
+    description: "Nëse ekziston një llogari që përputhet me emailin tuaj, atëherë sapo është dërguar një email që përmban një link që mund ta përdorni për të rivendosur fjalëkalimin tuaj. Ky link do të skadojë për %time%."
+    description2: "Nëse nuk merrni një email, ju lutemi kontrolloni dosjen tuaj të postës elektronike ose %tryAgainLink%"
+    tryAgain: "Provo përsëri"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
+    title: "Përshëndetje!"
+    visitLink: "Për të rivendosur fjalëkalimin tuaj, ju lutemi vizitoni linkun e mëposhtme"
+    expire: "Ky link do të skadojë për %time%."
     cheers: "Cheers!"
   reset:
-    title: "Reset your password"
+    title: "Ricilëso fjalëkalimin tuaj"
     button:
-      submit: "Reset password"
+      submit: "Ricaktoni fjalëkalimin"
 apk:
   download: Shkarko si aplikacion
   prepare: 'Prepare app'
@@ -508,7 +508,7 @@ failure:
   upload: Pati një gabim gjatë ngarkimit të aplikacionit tuaj.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Verifiko e-mailin'
 api:
   registerUser:
     emailMissing: 'Emaili mungon'
@@ -680,8 +680,8 @@ catro-notifications:
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success_project: Linku me projektin u kopjua në clipboard! 
+  success_user: Linku me përdoruesin u kopjua në clipboard! 
   fail: Kopjimi i lidhjes në kujtesën e fragmenteve dështoi! :( 
 next: Mbas
 previous: Mëpëpara
@@ -717,7 +717,7 @@ share:
   success: 'Ndarja ishte e suksesshme '
 copy: 'Kopjo linkun'
 checkOutProject: 'Shikoni këtë projekt: '
-checkOutUser: 'Check out this user:'
+checkOutUser: 'Shikoni këtë përdorues: '
 community: 'Komuniteti Catrobat'
 back_to_app: 'Dil nga komuniteti'
 category:
@@ -735,65 +735,65 @@ achievements:
   overview:
     header: 'Arritjet'
     most_recent_achievement:
-      title: 'Newest Achievement'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      title: 'Arritja më e re '
+      x_out_of_y: '%unlocked% nga %total% e shkyçur'
     tab_unlocked:
-      title: 'Unlocked'
-      empty: "You haven't unlocked any achievements yet."
+      title: 'Zhbllokoj'
+      empty: "Nuk ke zhbllokuar ende asnjë arritje. "
     tab_locked:
-      title: 'Locked'
-      empty: "You have already unlocked all achievements."
+      title: 'Bllokuar'
+      empty: "Ju keni zhbllokuar të gjitha arritjet. "
   popup:
     new:
-      title: 'Congratulations!'
-      subtitle: "You've earned a badge"
+      title: 'Urime!'
+      subtitle: "Ju keni fituar një emblemë"
       confirm: "OK"
   profile:
     title: 'Arritjet'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Nxënësi '
+        description: 'Ndiqni dikë dhe ngarkoni një projekt '
       silver_user:
-        title: 'Artisan'
-        description: 'Active member for > 1 year'
+        title: 'Artizan'
+        description: 'Anëtar aktiv për > 1 vit '
       gold_user:
-        title: 'Master'
-        description: 'Active member for > 4 years'
+        title: 'Mjeshtër'
+        description: 'Anëtar aktiv për > 4 vjet '
       diamond_user:
-        title: 'Grand master'
-        description: 'Active member for > 7 years'
+        title: 'Mjeshtër i madh '
+        description: 'Anëtar aktiv për > 7 vjet '
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Iniciativa '
+        description: 'Shtoni foton tuaj të parë të profilit '
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Fillestar '
+        description: 'Krijo një llogari përdoruesi '
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Pjesëmarrës i Coding Jam 2021 "
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} Etiketa |]1,Inf] Etiketa '
   tag:
     game:
-      title: Game
+      title: Lojë
     animation:
-      title: Animation
+      title: Animacioni
     story:
-      title: Story
+      title: Ngjarja
     music:
-      title: Music
+      title: Muzikë
     art:
       title: Art
     experimental:
-      title: Experimental
+      title: Eksperimental
     tutorial:
-      title: Tutorial
+      title: Ndihmë për perdorimin
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
-  title: '{0} |{1} Extension |]1,Inf] Extensions'
+  title: '{0} |{1} Shtesa |]1,Inf] Zgjerime '
   extension:
     arduino:
       title: Arduino
@@ -804,59 +804,59 @@ extensions:
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: Qëndisje 
     mindstorms:
       title: Mindstorms
 studio:
   details:
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
-    remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    public: 'Publik'
+    private: 'Private'
+    join: 'Bëhuni Pjesë'
+    leave: 'Largohuni'
+    showMore: 'Trego më shumë'
+    showLess: 'Trego më pak'
+    remove_project: 'Hiqe nga studio '
+    remove_project_error: 'Heqja e projektit nga studio dështoi! '
+    remove_project_success: 'projekti u hoq me sukses nga studio! '
+    no_projects: 'Studio nuk përmban ende asnjë projekt '
+    updateCoverError: 'Diçka shkoi keq gjatë përditësimit të kopertinës së studios! '
     projects:
-      title: 'projects'
+      title: 'Projektet'
     comments:
       title: 'Komentet'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Shkruani diçka '
+      replies: 'përgjigjet'
+      send: 'Dergo'
+      no_comments: 'Kjo studio nuk ka ende komente. '
+      disabled_comments: 'Komentet janë çaktivizuar për këtë studio.'
+      post_error: 'Ndodhi një gabim gjatë postimit të komentit tuaj. Provo sërish më vonë. '
+      delete_error: 'Ndodhi një gabim gjatë heqjes të komentit tuaj. Provo sërish më vonë. '
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Aktivitetet'
+      join_studio: '%user% iu bashkua studios. '
+      add_project: '%user% la një koment. '
+      add_comment: '%user% shtoi një projekt. '
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Anëtarët e studios '
+      project_count: '{0} Nuk ka projekte në studio |{1} 1 projekt në studio |]1,Inf] %count% projekte në studio '
+      promote_member: 'Promovoni një anëtar në administrator '
+      promotion_failed: 'Diçka shkoi keq gjatë promovimit të këtij anëtari. Provo sërish më vonë. '
+      ban_member: 'Ndalo një anëtar nga studio '
+      ban_failed: 'Ndodhi një gabim gjatë ndalimit të këtij anëtari. Provo sërish më vonë. '
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Cilësimet e përgjithshme '
+      studio_name: 'Emri i studios '
       studio_description: 'Përshkrimi'
       toggle_allow_comments: 'Komentet'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Publik'
 media_library:
   file:
-    size: 'Size: %size%'
+    size: 'Madhësia: %size% '
     type_description:
-      image: 'Type: image'
-      project: 'Type: project'
-      sound: 'Type: sound'
-      movie: 'Type: video'
-      default: 'Type: unknown'
+      image: 'Lloji: imazh '
+      project: 'Lloji: projekt '
+      sound: 'Lloji: zë '
+      movie: 'Lloji: video '
+      default: 'Lloji: i panjohur '
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'Projekti i kërkuar nuk është i disponueshëm '

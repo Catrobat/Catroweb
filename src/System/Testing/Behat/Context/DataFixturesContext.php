@@ -498,6 +498,20 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Then the project :id should have :downloads downloads
+   *
+   * @param mixed $id
+   * @param mixed $downloads
+   */
+  public function theProjectShouldHaveDownloads($id, $downloads): void
+  {
+    /** @var Program $program */
+    $program = $this->getProgramManager()->find($id);
+    $this->getManager()->refresh($program);
+    Assert::assertEquals($downloads, $program->getDownloads());
+  }
+
+  /**
    * @Then the project with name :name should have :number_of_tags tags
    */
   public function theProjectWithNameShouldHaveTags(string $name, int $number_of_tags): void
@@ -952,9 +966,29 @@ class DataFixturesContext implements KernelAwareContext
       if (isset($notification['id'])) {
         $to_create->setId($notification['id']);
       }
+      if (isset($notification['seen'])) {
+        $to_create->setSeen($notification['seen']);
+      }
 
       $em->persist($to_create);
       $em->flush();
+    }
+  }
+
+  /**
+   * @Given /^the following catro notifications exist in the database:$/
+   */
+  public function followingCatroNotificationsExist(TableNode $table): void
+  {
+    $em = $this->getManager();
+    $notifications = $table->getHash();
+
+    foreach ($notifications as $notification) {
+      $notification_found = $em->getRepository(CatroNotification::class)->find($notification['id']);
+      Assert::assertNotNull($notification_found);
+      if (isset($notification['seen'])) {
+        Assert::assertEquals($notification['seen'], $notification_found->getSeen(), 'seen wrong'.$notification['seen'].'expected, but '.$notification_found->getSeen().'found');
+      }
     }
   }
 

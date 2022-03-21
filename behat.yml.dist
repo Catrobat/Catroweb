@@ -90,6 +90,14 @@ default:
                 - App\System\Testing\Behat\Context\ApiContext
                 - App\System\Testing\Behat\Context\CatrowebBrowserContext
 
+        api-notifications:
+            paths:    [ "tests/BehatFeatures/api/notifications" ]
+            contexts:
+                - App\System\Testing\Behat\Context\RefreshEnvironmentContext
+                - App\System\Testing\Behat\Context\DataFixturesContext
+                - App\System\Testing\Behat\Context\ApiContext
+                - App\System\Testing\Behat\Context\CatrowebBrowserContext
+
         api-utility:
             paths:    [ "tests/BehatFeatures/api/utility" ]
             contexts:
