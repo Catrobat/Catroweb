@@ -25,6 +25,9 @@ Feature: As a project owner, I should be able to give credits for my project.
     And the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then the element "#edit-credits-text" should be visible
     And I fill in "edit-credits-text" with "This is a credit"
     When I click "#edit-submit-button"
@@ -38,12 +41,16 @@ Feature: As a project owner, I should be able to give credits for my project.
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then I fill in "edit-credits-text" with "These are new notes and credits"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then the element "#credits" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "These are new notes and credits"
 
@@ -54,11 +61,17 @@ Feature: As a project owner, I should be able to give credits for my project.
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then I fill in "edit-credits-text" with "These are new notes and credits"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
+    Then the element "#edit-text-navigation" should be visible
+    When I click "#top-app-bar__back__btn-back"
     Then the element "#credits" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "No notes and credits available."
 
@@ -68,6 +81,9 @@ Feature: As a project owner, I should be able to give credits for my project.
     And I wait for the page to be loaded
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
     And I wait for AJAX to finish
     Then I fill in "edit-credits-text" with "These are new notes and credits"
     And I click "#top-app-bar__back__btn-back"

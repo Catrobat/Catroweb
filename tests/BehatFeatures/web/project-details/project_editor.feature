@@ -27,6 +27,7 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#edit-program-button" should not exist
+    And the element "#edit-text-navigation" should not exist
     And the element "#edit-text-ui" should not exist
 
   Scenario: Creating all fields is possible if it's my project
@@ -36,6 +37,11 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then the element "#edit-text-navigation" should be visible
+    And I should see "Default"
+    And the element "#edit-default-button" should be visible
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then the element "#edit-text-ui" should be visible
     And the element "#edit-submit-button" should be visible
     When I fill in "edit-name-text" with "This is a new name"
@@ -44,6 +50,7 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     And I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-ui" should not be visible
+    And the element "#edit-text-navigation" should not be visible
     And I should see "This is a new name"
     And I should see "This is a new description"
     And I should see "This is a new credit"
@@ -55,6 +62,10 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then the element "#edit-text-navigation" should be visible
+    And I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then the element "#edit-text-ui" should be visible
     And the element "#edit-submit-button" should be visible
     When I fill in "edit-name-text" with "This is a new name"
@@ -63,6 +74,7 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     And I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-ui" should not be visible
+    And the element "#edit-text-navigation" should not be visible
     And I should see "This is a new name"
     And I should see "This is a new description"
     And I should see "This is a new credit"
@@ -73,6 +85,10 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     And I wait for the page to be loaded
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#edit-text-navigation" should be visible
+    And I should see "Default"
+    When I click "#edit-default-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-ui" should be visible
     And the element "#edit-cancel-button" should be visible

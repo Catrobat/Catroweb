@@ -18,12 +18,16 @@ Feature: Projects should have a name that can be changed by the project owner
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then the element "#edit-name-text" should be visible
     And the element "#edit-submit-button" should be visible
     When I fill in "edit-name-text" with "This is a new name"
     And I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#name" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "This is a new name"
   
@@ -34,12 +38,16 @@ Feature: Projects should have a name that can be changed by the project owner
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then I fill in "edit-name-text" with "This is a new name"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then the element "#name" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "This is a new name"
 
@@ -50,11 +58,17 @@ Feature: Projects should have a name that can be changed by the project owner
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then I fill in "edit-name-text" with "This is a new name"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
+    Then the element "#edit-text-navigation" should be visible
+    When I click "#top-app-bar__back__btn-back"
     Then the element "#name" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "project 1"
 
@@ -64,6 +78,9 @@ Feature: Projects should have a name that can be changed by the project owner
     And I wait for the page to be loaded
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
     And I wait for AJAX to finish
     Then I fill in "edit-name-text" with "This is a new name"
     And I click "#top-app-bar__back__btn-back"
