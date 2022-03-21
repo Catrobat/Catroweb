@@ -328,7 +328,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    */
   public function projectIdDelete(string $id, &$responseCode, array &$responseHeaders)
   {
-    $user = $this->facade->getAuthenticationManager()->getUserFromAuthenticationToken($this->getAuthenticationToken());
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
