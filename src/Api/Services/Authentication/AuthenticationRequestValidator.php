@@ -3,7 +3,6 @@
 namespace App\Api\Services\Authentication;
 
 use App\Api\Services\Base\AbstractRequestValidator;
-use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
@@ -13,22 +12,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class AuthenticationRequestValidator extends AbstractRequestValidator
 {
-  private UserManager $user_manager;
-
-  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, UserManager $user_manager)
+  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator)
   {
     parent::__construct($validator, $translator);
-    $this->user_manager = $user_manager;
   }
 
   public function validateGoogleIdToken(string $id_token): bool
   {
-    // Specify the CLIENT_ID of the app that accesses the backend
-    $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
+    try {
+      // Specify the CLIENT_ID of the app that accesses the backend
+      $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
+      $payload = $client->verifyIdToken($id_token);
 
-    $payload = $client->verifyIdToken($id_token);
-
-    return boolval($payload);
+      return boolval($payload);
+    } catch (Exception $e) {
+      return false;
+    }
   }
 
   public function validateFacebookIdToken(string $id_token): bool
