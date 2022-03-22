@@ -2,14 +2,12 @@ import $ from 'jquery'
 import { MDCSelect } from '@material/select'
 import { ProgramEditorDialog } from '../custom/ProgramEditorDialog'
 import { showSnackbar } from './snackbar'
-import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
+import { showCustomTopBarTitle } from '../layout/top_bar'
 
-export function ProjectEditor (projectDescriptionCredits, programId, textFields, showLanguageSelect, defaultText) {
+export function ProjectEditor (projectDescriptionCredits, programId, textFields) {
   const self = this
 
-  this.defaultText = defaultText
   this.programId = programId
-  this.showLanguageSelect = showLanguageSelect
   this.textFields = textFields
 
   this.body = $('body')
@@ -40,6 +38,7 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
     projectDescriptionCredits.data('trans-delete')
   )
 
+  this.defaultText = projectDescriptionCredits.data('trans-default')
   this.translationUpdated = projectDescriptionCredits.data('trans-translation-updated')
   this.translationDeleted = projectDescriptionCredits.data('trans-translation-deleted')
   this.cannotDelete = projectDescriptionCredits.data('trans-cannot-delete')
@@ -65,10 +64,17 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
 
   $(document).ready(getLanguages)
 
-  this.show = () => {
-    for (const textField of this.textFields) {
-      textField.setText()
+  this.show = (navigationCallback, language, showLanguageSelect, showDeleteButton, headerText) => {
+    this.navigationCallback = navigationCallback
+    this.showLanguageSelect = showLanguageSelect
+    this.showDeleteButton = showDeleteButton
+
+    if (language !== null) {
+      this.languageSelect.value = language
+      this.languageSelect.emit('change')
     }
+
+    this.getNewText()
 
     const langaugeSelectElement = $('#edit-language-selector')
     if (this.showLanguageSelect) {
@@ -77,14 +83,21 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
       langaugeSelectElement.addClass('d-none')
     }
 
+    const deleteButtonElement = $('#edit-delete-button')
+    if (this.showDeleteButton) {
+      deleteButtonElement.removeClass('d-none')
+    } else {
+      deleteButtonElement.addClass('d-none')
+    }
+
     window.history.pushState(
       { type: 'ProjectEditor', id: programId, full: true },
       $(this).text(),
-      '#' + programId
+      '#editor'
     )
 
     $(window).on('popstate', this.popStateHandler)
-    showCustomTopBarTitle('', function () {
+    showCustomTopBarTitle(headerText, function () {
       window.history.back()
     })
 
@@ -103,15 +116,15 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields,
 
   this.close = () => {
     $(window).off('popstate', this.popStateHandler)
-    showDefaultTopBarTitle()
 
     if (this.reloadScreen) {
       window.location.reload()
     }
 
-    this.body.removeClass('overflow-hidden')
     this.editTextUI.addClass('d-none')
+
     this.reset()
+    this.navigationCallback()
   }
 
   this.reset = () => {

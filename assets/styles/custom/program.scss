@@ -625,6 +625,39 @@ input[type="number"] {
   background: #fff;
 }
 
+.translation-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.edit-defined-translation {
+  padding: 1rem 2rem;
+  border-bottom: solid;
+  border-color: grey;
+  cursor: pointer;
+}
+
+.language-code {
+  width: 3rem;
+  color: grey;
+}
+
+.language-name {
+  font-weight: bold;
+}
+
+.add-translation-button {
+  position: fixed;
+  width: 60px;
+  height: 60px;
+  bottom: 40px;
+  right: 40px;
+  text-align: center;
+  font-size: 40px;
+  padding-top: 8px;
+  box-shadow: 2px 2px 3px #999;
+}
+
 @media only screen and (min-width: 768px) {
   .sign-app-form {
     label {

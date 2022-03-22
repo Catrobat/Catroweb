@@ -53,4 +53,13 @@ export class CustomTranslationApi {
       })
     })
   }
+
+  getCustomTranslationLanguages (programId, successCallback, errorCallback = () => {}) {
+    $.ajax({
+      url: '../translate/custom/project/' + programId + '/list',
+      type: 'get',
+      success: successCallback,
+      error: errorCallback
+    })
+  }
 }
