@@ -1,4 +1,3 @@
-/* global deleteUrl */
 /* global toggleVisibilityUrl */
 /* global programCanNotChangeVisibilityTitle */
 /* global programCanNotChangeVisibilityText */
@@ -10,6 +9,7 @@
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 import { showTopBarSearch, controlTopBarSearchClearButton } from '../layout/top_bar'
+import { getCookie } from '../security/CookieHelper'
 
 require('../../styles/components/project_list.scss')
 
@@ -209,7 +209,7 @@ export const ProjectLoader = function (container, url) {
       $(self.container).show()
 
       if (isMyProject()) {
-        await addMyProfileProgramButtons(htmlProject, projects[i])
+        await addMyProfileProgramButtons(htmlProject, projects[i], data)
       }
     }
     self.numberOfLoadedProjects += projects.length
@@ -470,7 +470,7 @@ export const ProjectLoader = function (container, url) {
     return self.container === '#myprofile-programs'
   }
 
-  async function addMyProfileProgramButtons (htmlProject, project) {
+  async function addMyProfileProgramButtons (htmlProject, project, data) {
     $(htmlProject).prepend('<div id="delete-' + project.ProjectId + '" class="my-project-delete-btn img-delete" ' +
       ' data-project-id="' + project.ProjectId + '">' +
       '<span class="mdc-icon-button material-icons">close</span></div>')
@@ -486,7 +486,7 @@ export const ProjectLoader = function (container, url) {
       '<span class="mdc-icon-button material-icons">lock</span></div>')
 
     $('.my-project-delete-btn').on('click', (e) => {
-      deleteProgram($(e.currentTarget).data('project-id'))
+      deleteProgram($(e.currentTarget).data('project-id'), data)
     })
 
     $('.my-project-visibility-toggle').on('click', (e) => {
@@ -494,7 +494,7 @@ export const ProjectLoader = function (container, url) {
     })
   }
 
-  function deleteProgram (id) {
+  function deleteProgram (id, data) {
     const programName = $('#program-' + id).find('.program-name').text()
     const split = programDeleteConfirmation.replace('%programName%', '"' + programName + '"').split('\n')
     Swal.fire({
@@ -512,7 +512,19 @@ export const ProjectLoader = function (container, url) {
       cancelButtonText: split[4]
     }).then((result) => {
       if (result.value) {
-        window.location.href = deleteUrl + '/' + id
+        url = data.CatrobatInformation.BaseUrl + 'api/project/' + id
+        fetch(url, {
+          method: 'DELETE',
+          headers: new Headers({
+            Authorization: 'Bearer ' + getCookie('BEARER')
+          })
+        })
+          .then(() => {
+            window.location.reload()
+          })
+          .catch((error) => {
+            console.error(error)
+          })
       }
     })
   }

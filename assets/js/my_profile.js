@@ -5,7 +5,6 @@
 /* global saveUsername */
 /* global saveEmailUrl */
 /* global savePasswordUrl */
-/* global deleteUrl */
 /* global deleteAccountUrl */
 /* global toggleVisibilityUrl */
 /* global uploadUrl */
@@ -48,7 +47,6 @@ $(() => {
     saveUsername,
     saveEmailUrl,
     savePasswordUrl,
-    deleteUrl,
     deleteAccountUrl,
     toggleVisibilityUrl,
     uploadUrl,
