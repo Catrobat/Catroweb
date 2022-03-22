@@ -106,6 +106,15 @@ security:
                 authenticators:
                     - lexik_jwt_authentication.jwt_token_authenticator
 
+        api_project_delete_id:
+            provider: chain_provider
+            pattern: ^/api/project/.+?$
+            methods: [ DELETE ]
+            stateless: true
+            guard:
+                authenticators:
+                    - lexik_jwt_authentication.jwt_token_authenticator
+
         api_notifications_count:
             provider: chain_provider
             pattern: ^/api/notifications/count

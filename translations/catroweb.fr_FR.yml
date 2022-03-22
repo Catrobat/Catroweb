@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Cher %username%.<br>
     <br>
-    Pour terminer l'activation de votre compte - veuillez cliquer sur <a href="%confirmationUrl%">ici.</a><br>.
+    Pour terminer l'activation de votre compte - veuillez cliquer sur <a href=%confirmationUrl%>ici.</a><br>.
     <br>
     Ce lien ne peut être utilisé qu'une seule fois pour valider votre compte.<br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     Cher %username%.<br>
     <br>
-    Vous avez demandé la réinitialisation de votre mot de passe sur <a href="%appplication_url%">Pocket Code</a> car vous avez oublié votre mot de passe.
+    Vous avez demandé la réinitialisation de votre mot de passe sur <a href=%appplication_url%>Pocket Code</a> car vous avez oublié votre mot de passe.
     Si vous n'avez pas fait cette demande, veuillez l'ignorer. Il expirera et deviendra inutile dans 24 heures.<br>
     <br>
-    Pour réinitialiser votre mot de passe et en créer un nouveau, veuillez cliquer sur <a href="%confirmationUrl%">ici.</a><br>.
+    Pour réinitialiser votre mot de passe et en créer un nouveau, veuillez cliquer sur <a href=%confirmationUrl%>ici.</a><br>.
     <br>
-    Vous pouvez utiliser votre nom d'utilisateur et votre mot de passe à tout moment pour accéder à la communauté<a href="%appplication_url%">Pocket Code</a>.<br>
-    Pour ce faire, il vous suffit de vous rendre sur la page suivante : <a href="%loginPage%">Login Page</a><br>.
-    Pour modifier les détails de votre profil, rendez-vous sur cette <a href="%profilePage%">page</a>.<br>
+    Vous pouvez utiliser votre nom d'utilisateur et votre mot de passe à tout moment pour accéder à la communauté<a href=%appplication_url%>Pocket Code</a>.<br>
+    Pour ce faire, il vous suffit de vous rendre sur la page suivante : <a href=%loginPage%>Login Page</a><br>.
+    Pour modifier les détails de votre profil, rendez-vous sur cette <a href=%profilePage%>page</a>.<br>
     <br>
     Meilleures salutations,<br>
     Votre équipe Catrobat.

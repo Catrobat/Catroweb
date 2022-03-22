@@ -11,12 +11,15 @@ Feature: Projects should have descriptions where a custom translation can be def
       | 2  | project 2 | Catrobat |                |
     And I wait 1000 milliseconds
 
-  Scenario: Editing custom translation, then changing the language and keeping the unsaved changes
+  Scenario: Adding a custom description translation, then changing the language and keeping the unsaved changes
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#add-translation-button" should be visible
+    When I click "#add-translation-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
@@ -27,12 +30,15 @@ Feature: Projects should have descriptions where a custom translation can be def
     Then the "edit-description-text" field should contain "This is a description translation"
     And the "#edit-selected-language" element should contain "Russian"
 
-  Scenario: Editing custom translation, then changing the language while discarding changes
+  Scenario: Adding a custom description translation, then changing the language while discarding changes
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#add-translation-button" should be visible
+    When I click "#add-translation-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
@@ -44,12 +50,15 @@ Feature: Projects should have descriptions where a custom translation can be def
     Then the "edit-description-text" field should contain ""
     And the "#edit-selected-language" element should contain "Russian"
 
-  Scenario: Editing custom translation, then changing the language but going back to unsaved changes
+  Scenario: Adding a custom description translation, then changing the language but going back to unsaved changes
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#add-translation-button" should be visible
+    When I click "#add-translation-button"
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
@@ -68,17 +77,23 @@ Feature: Projects should have descriptions where a custom translation can be def
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then the element "#add-translation-button" should be visible
+    When I click "#add-translation-button"
+    And I wait for AJAX to finish
     Then the element "#edit-description-text" should not be disabled
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
     Then the element "#edit-description-text" should be disabled
-  
+
   Scenario: Adding a default description, then changing the language without saving and keeping the unsaved changes
     Given I log in as "Catrobat"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then the element "#add-translation-button" should be visible
+    When I click "#add-translation-button"
     And I wait for AJAX to finish
     Then I fill in "edit-description-text" with "This is a default description"
     When I choose "French" from selector "#edit-language-selector"

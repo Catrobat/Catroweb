@@ -1,6 +1,6 @@
 import $ from 'jquery'
 
-export function ProgramName (programId, usersLanguage, myProgram, customTranslationApi, editor) {
+export function ProgramName (programId, usersLanguage, myProgram, customTranslationApi, editorNavigation) {
   const name = $('#name')
   const editProgramButton = $('#edit-program-button')
 
@@ -17,6 +17,6 @@ export function ProgramName (programId, usersLanguage, myProgram, customTranslat
   }
 
   editProgramButton.on('click', () => {
-    editor.show()
+    editorNavigation.show()
   })
 }

@@ -118,6 +118,8 @@
 
   {% include 'Program/program_description.html.twig' %}
 
+  {% include 'Program/program_editor_navigation.html.twig' %}
+
   {% include 'Program/program_editor.html.twig' %}
 
   {% include 'Program/program_tags.html.twig' %}
@@ -274,7 +276,12 @@
        data-trans-keep="{{ "programs.btnKeep"|trans({}, "catroweb") }}"
        data-trans-delete="{{ "programs.delete"|trans({}, "catroweb") }}"
        data-trans-default="{{ "programs.default"|trans({}, "catroweb") }}"
-       data-trans-save-on-language-change="{{ "programs.saveOnLanguageChange"|trans({}, "catroweb") }}"\
+       data-trans-save-on-language-change="{{ "programs.saveOnLanguageChange"|trans({}, "catroweb") }}"
+       data-trans-translation-title="{{ "programs.translationTitle"|trans({}, "catroweb") }}"
+       data-trans-edit-default="{{ "programs.editDefault"|trans({}, "catroweb") }}"
+       data-trans-edit-translation="{{ "programs.editTranslation"|trans({}, "catroweb") }}"
+       data-trans-create-translation="{{ "programs.createTranslation"|trans({}, "catroweb") }}"
+       data-trans-translations="{{ "programs.translations"|trans({}, "catroweb") }}"
        data-path-edit-program-name="{{ path('edit_program_name', {'id': program.id}) }}"
        data-path-edit-program-description="{{ path('edit_program_description', {'id': program.id}) }}"
        data-path-edit-program-credits="{{ path('edit_program_credits', {'id': program.id}) }}"

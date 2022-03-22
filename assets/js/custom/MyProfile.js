@@ -9,7 +9,6 @@ import { deleteCookie } from '../security/CookieHelper'
  * @param saveUsername
  * @param saveEmailUrl
  * @param savePasswordUrl
- * @param deleteUrl
  * @param deleteAccountUrl
  * @param toggleVisibilityUrl
  * @param uploadUrl
@@ -39,7 +38,6 @@ export const MyProfile = function (
   saveUsername,
   saveEmailUrl,
   savePasswordUrl,
-  deleteUrl,
   deleteAccountUrl,
   toggleVisibilityUrl,
   uploadUrl,

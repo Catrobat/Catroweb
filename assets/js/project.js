@@ -12,6 +12,7 @@ import { ProgramDescription } from './custom/ProgramDescription'
 import { ProgramCredits } from './custom/ProgramCredits'
 import { ProgramComments } from './custom/ProgramComments'
 import { CustomTranslationApi } from './api/CustomTranslationApi'
+import { ProjectEditorNavigation } from './components/ProjectEditorNavigation'
 import { ProjectEditor } from './components/ProjectEditor'
 import { ProjectEditorTextField } from './components/ProjectEditorTextField'
 import { ProgramName } from './custom/ProgramName'
@@ -26,7 +27,7 @@ const $projectDescriptionCredits = $('.js-project-description-credits')
 const $projectComments = $('.js-project-comments')
 const $appLanguage = $('#app-language')
 
-let editor = null
+let editorNavigation = null
 
 if ($project.data('my-program')) {
   new MDCTextField(document.querySelector('.comment-message'))
@@ -52,14 +53,16 @@ if ($project.data('my-program')) {
     $projectDescriptionCredits.data('has-credits')
   )
 
-  const showLanguageSelect = $projectDescriptionCredits.data('has-description') || $projectDescriptionCredits.data('has-credits')
-
-  editor = new ProjectEditor(
+  const projectEditor = new ProjectEditor(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
-    [nameEditorTextField, descriptionEditorTextField, creditsEditorTextField],
-    showLanguageSelect,
-    $projectDescriptionCredits.data('trans-default')
+    [nameEditorTextField, descriptionEditorTextField, creditsEditorTextField]
+  )
+
+  editorNavigation = new ProjectEditorNavigation(
+    $projectDescriptionCredits,
+    $projectDescriptionCredits.data('project-id'),
+    projectEditor
   )
 }
 
@@ -121,7 +124,7 @@ ProgramName(
   $appLanguage.data('app-language'),
   $project.data('my-program'),
   new CustomTranslationApi('name'),
-  editor
+  editorNavigation
 )
 
 ProgramDescription(

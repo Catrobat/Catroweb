@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Estimado %username%.<br>
     <br>
-    Para terminar de activar tu cuenta - por favor haz clic en <a href="%confirmationUrl%">aquí.</a><br>
+    Para terminar de activar tu cuenta - por favor haz clic en <a href=%confirmationUrl%>aquí.</a><br>
     <br>
     Este enlace sólo puede ser usado una vez para validar tu cuenta.<br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     Estimado %username%.<br>
     <br>
-    Ha solicitado restablecer su contraseña en <a href="%appplication_url%">Código de bolsillo</a> porque ha olvidado su contraseña.
+    Ha solicitado restablecer su contraseña en <a href=%appplication_url%>Código de bolsillo</a> porque ha olvidado su contraseña.
     Si no lo ha solicitado, por favor, ignórelo. Caducará y quedará inservible en 24 horas.<br>
     <br>
-    Para restablecer su contraseña y crear una nueva, haga clic en <a href="%confirmationUrl%">aquí.</a><br>
+    Para restablecer su contraseña y crear una nueva, haga clic en <a href=%confirmationUrl%>aquí.</a><br>
     <br>
-    Puedes utilizar tu nombre de usuario y tu contraseña en cualquier momento para acceder a la comunidad <a href="%appplication_url%">Código de bolsillo</a>.<br>
-    Para ello, sólo tienes que visitar la siguiente página: <a href="%loginPage%">Página de inicio de sesión</a><br>
-    Para editar los datos de su perfil, vaya a esta página <a href="%profilePage%"></a>.<br>
+    Puedes utilizar tu nombre de usuario y tu contraseña en cualquier momento para acceder a la comunidad <a href=%appplication_url%>Código de bolsillo</a>.<br>
+    Para ello, sólo tienes que visitar la siguiente página: <a href=%loginPage%>Página de inicio de sesión</a><br>
+    Para editar los datos de su perfil, vaya a esta página <a href=%profilePage%></a>.<br>
     <br>
     Saludos cordiales,<br>
     Tu equipo de Catrobat.

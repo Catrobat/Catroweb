@@ -18,6 +18,9 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then the element "#edit-description-text" should be visible
     When I fill in "edit-description-text" with "This is a new description"
     And I click "#edit-submit-button"
@@ -33,12 +36,16 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then I fill in "edit-description-text" with "This is a new description"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then the element "#description" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "This is a new description"
 
@@ -49,11 +56,17 @@ Feature: Projects should have descriptions that can be changed by the project ow
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
     And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
+    And I wait for AJAX to finish
     Then I fill in "edit-description-text" with "This is a new description"
     And I click "#top-app-bar__back__btn-back"
     And I should see "Do you want to save your changes?"
     When I click ".swal2-deny"
+    Then the element "#edit-text-navigation" should be visible
+    When I click "#top-app-bar__back__btn-back"
     Then the element "#description" should be visible
+    And the element "#edit-text-navigation" should not be visible
     And the element "#edit-text-ui" should not be visible
     And I should see "my description"
 
@@ -63,6 +76,9 @@ Feature: Projects should have descriptions that can be changed by the project ow
     And I wait for the page to be loaded
     Then the element "#edit-program-button" should be visible
     When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    Then I should see "Default"
+    When I click "#edit-default-button"
     And I wait for AJAX to finish
     Then I fill in "edit-description-text" with "This is a new description"
     And I click "#top-app-bar__back__btn-back"

@@ -224,7 +224,7 @@ accountConfirmation:
     <p>
     Halo %username%. <br>
     <br>
-    Untuk menyelesaikan aktivasi akun Anda - silakan klik <a href="%confirmationUrl%"> di sini. </a> <br>
+    Untuk menyelesaikan aktivasi akun Anda - silakan klik <a href=%confirmationUrl%> di sini. </a> <br>
     <br>
     Tautan ini hanya dapat digunakan sekali untuk memvalidasi akun Anda. <br>
     <br>
@@ -247,14 +247,14 @@ passwordRecovery:
     <p>
     Halo %username%. <br>
     <br>
-    Anda telah meminta untuk mengatur ulang kata sandi Anda di <a href="%appplication_url%"> Pocket Code </a> karena Anda lupa kata sandi Anda.
+    Anda telah meminta untuk mengatur ulang kata sandi Anda di <a href=%appplication_url%> Pocket Code </a> karena Anda lupa kata sandi Anda.
     Jika Anda tidak memintanya, harap abaikan. Ini akan kedaluwarsa dan menjadi tidak berguna dalam waktu 24 jam. <br>
     <br>
-    Untuk menyetel ulang sandi Anda dan membuat yang baru, harap klik <a href="%confirmationUrl%"> di sini. </a> <br>
+    Untuk menyetel ulang sandi Anda dan membuat yang baru, harap klik <a href=%confirmationUrl%> di sini. </a> <br>
     <br>
-    Anda dapat menggunakan nama pengguna dan sandi Anda kapan saja untuk mengakses komunitas <a href="%appplication_url%"> Pocket Code </a>. <br>
-    Untuk melakukannya, cukup kunjungi halaman berikut: <a href="%loginPage%"> Halaman Login </a> <br>
-    Untuk mengedit detail profil Anda, buka <a href="%profilePage%"> halaman </a> ini. <br>
+    Anda dapat menggunakan nama pengguna dan sandi Anda kapan saja untuk mengakses komunitas <a href=%appplication_url%> Pocket Code </a>. <br>
+    Untuk melakukannya, cukup kunjungi halaman berikut: <a href=%loginPage%> Halaman Login </a> <br>
+    Untuk mengedit detail profil Anda, buka <a href=%profilePage%> halaman </a> ini. <br>
     <br>
     Salam, <br>
     Tim Catrobat Anda.

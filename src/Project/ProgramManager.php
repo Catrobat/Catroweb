@@ -820,4 +820,12 @@ class ProgramManager
       $this->notification_service->addNotification($notification);
     }
   }
+
+  public function deleteProject(Program $program): void
+  {
+    $program->setVisible(false);
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($program);
+  }
 }

@@ -177,7 +177,7 @@ programs:
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
+  closeEditorPrompt: Бажаєте зберегти свої зміни?
   saveOnLanguageChange: Would you like to keep your current changes?
   btnKeep: Keep Changes
   btnDiscard: Відкинути
@@ -225,7 +225,6 @@ accountConfirmation:
     Dear %username%.<br>
     <br>
     To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    <br>
     This link can only be used once to validate your account.<br>
     <br>
     Best regards,<br>
