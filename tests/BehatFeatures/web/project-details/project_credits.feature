@@ -29,7 +29,8 @@ Feature: As a project owner, I should be able to give credits for my project.
     When I click "#edit-default-button"
     And I wait for AJAX to finish
     Then the element "#edit-credits-text" should be visible
-    And I fill in "edit-credits-text" with "This is a credit"
+    When I fill in "edit-credits-text" with "This is a credit"
+    Then the element "#edit-submit-button" should not be disabled
     When I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then I should see "This is a credit"

@@ -23,7 +23,8 @@ Feature: Projects should have descriptions that can be changed by the project ow
     And I wait for AJAX to finish
     Then the element "#edit-description-text" should be visible
     When I fill in "edit-description-text" with "This is a new description"
-    And I click "#edit-submit-button"
+    Then the element "#edit-submit-button" should not be disabled
+    When I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#description" should be visible
     And the element "#edit-text-ui" should not be visible
