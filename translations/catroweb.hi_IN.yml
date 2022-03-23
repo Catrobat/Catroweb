@@ -201,6 +201,11 @@ programs:
   confrimDelete: Are you sure you want to delete the translation?
   default: पूर्व निर्धारित
   save: सहेजें
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
 remixGraph:
   title: रीमिक्स
   showRemixGraph: 'रीमिक्स ग्राफ'

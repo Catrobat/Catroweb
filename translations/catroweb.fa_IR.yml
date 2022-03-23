@@ -201,6 +201,11 @@ programs:
   confrimDelete: Are you sure you want to delete the translation?
   default: پیش فرض
   save: ذخيره
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
 remixGraph:
   title: ریمیکس ها
   showRemixGraph: 'گراف ریمیکس'

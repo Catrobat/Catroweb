@@ -201,6 +201,11 @@ programs:
   confrimDelete: Are you sure you want to delete the translation?
   default: افتراضي
   save: حفظ
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
 remixGraph:
   title: رِمكسات(خليط مُعدل)
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
