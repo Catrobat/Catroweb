@@ -201,6 +201,11 @@ programs:
   confrimDelete: Jeni i sigurt që dëshironi të fshini përkthimin?
   default: parazgjedhje
   save: Ruaj
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
 remixGraph:
   title: Ripërzierje 
   showRemixGraph: 'Ripërziej grafikun'

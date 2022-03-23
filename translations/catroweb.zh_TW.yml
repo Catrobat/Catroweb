@@ -201,6 +201,11 @@ programs:
   confrimDelete: Are you sure you want to delete the translation?
   default: 默認
   save: 存檔
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
 remixGraph:
   title: 調製
   showRemixGraph: '混音圖'
