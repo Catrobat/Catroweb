@@ -29,6 +29,8 @@ Feature: Projects should have descriptions where a custom translation can be def
     When I click ".swal2-confirm"
     Then the "edit-description-text" field should contain "This is a description translation"
     And the "#edit-selected-language" element should contain "Russian"
+    And the element "#edit-submit-button" should not be disabled
+    And the element "#edit-cancel-button" should not be disabled
 
   Scenario: Adding a custom description translation, then changing the language while discarding changes
     Given I log in as "Catrobat"
@@ -49,6 +51,8 @@ Feature: Projects should have descriptions where a custom translation can be def
     And I wait for AJAX to finish
     Then the "edit-description-text" field should contain ""
     And the "#edit-selected-language" element should contain "Russian"
+    And the element "#edit-submit-button" should be disabled
+    And the element "#edit-cancel-button" should be disabled
 
   Scenario: Adding a custom description translation, then changing the language but going back to unsaved changes
     Given I log in as "Catrobat"
@@ -69,6 +73,8 @@ Feature: Projects should have descriptions where a custom translation can be def
     And I wait for AJAX to finish
     Then the "edit-description-text" field should contain "This is a description translation"
     And the "#edit-selected-language" element should contain "French"
+    And the element "#edit-submit-button" should not be disabled
+    And the element "#edit-cancel-button" should not be disabled
 
   Scenario: Description text field should be disabled if there is not a default description defined
     Given I log in as "Catrobat"
@@ -84,6 +90,8 @@ Feature: Projects should have descriptions where a custom translation can be def
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
     Then the element "#edit-description-text" should be disabled
+    And the element "#edit-submit-button" should be disabled
+    And the element "#edit-cancel-button" should be disabled
 
   Scenario: Adding a default description, then changing the language without saving and keeping the unsaved changes
     Given I log in as "Catrobat"

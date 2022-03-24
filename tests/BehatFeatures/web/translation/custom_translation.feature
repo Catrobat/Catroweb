@@ -30,6 +30,8 @@ Feature: Projects should have an editor a custom translation can be defined
     And the element "#edit-cancel-button" should be visible
     And the element "#edit-submit-button" should be visible
     And the element "#edit-delete-button" should not be visible
+    And the element "#edit-submit-button" should be disabled
+    And the element "#edit-cancel-button" should be disabled
 
   Scenario: Adding a custom translation
     Given I log in as "Catrobat"
@@ -43,10 +45,14 @@ Feature: Projects should have an editor a custom translation can be defined
     And I wait for AJAX to finish
     Then I choose "French" from selector "#edit-language-selector"
     And I wait for AJAX to finish
-    Then I fill in "edit-name-text" with "This is a name translation"
+    Then the element "#edit-submit-button" should be disabled
+    And the element "#edit-cancel-button" should be disabled
+    When I fill in "edit-name-text" with "This is a name translation"
     And I fill in "edit-description-text" with "This is a description translation"
     And I fill in "edit-credits-text" with "This is a credit translation"
-    And I click "#edit-submit-button"
+    Then the element "#edit-submit-button" should not be disabled
+    And the element "#edit-cancel-button" should not be disabled 
+    When I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-navigation" should be visible
     And the element "#edit-fr-button" should exist
@@ -79,6 +85,8 @@ Feature: Projects should have an editor a custom translation can be defined
     And the element "#edit-cancel-button" should be visible
     And the element "#edit-delete-button" should be visible
     And the element "#edit-language-selector" should not be visible
+    And the element "#edit-submit-button" should be disabled
+    And the element "#edit-cancel-button" should be disabled
     And the "edit-name-text" field should contain "name translation"
     And the "edit-description-text" field should contain "description translation"
     And the "edit-credits-text" field should contain "credit translation"
