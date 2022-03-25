@@ -19,7 +19,7 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'project_machine_translation';
 
   /**
-   * @return array
+   * {@inheritDoc}
    */
   public function getExportFields()
   {

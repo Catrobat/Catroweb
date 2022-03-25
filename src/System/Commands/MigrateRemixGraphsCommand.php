@@ -27,6 +27,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
 class MigrateRemixGraphsCommand extends Command
@@ -419,8 +420,9 @@ class MigrateRemixGraphsCommand extends Command
 
     $batch_size = 300;
 
+    /** @var SplFileInfo $program_file_path */
     foreach ($finder as $program_file_path) {
-      $program_file = new File($program_file_path);
+      $program_file = new File($program_file_path->__toString());
       $extracted_file = $this->file_extractor->extract($program_file);
 
       $url_string = $extracted_file->getRemixUrlsString();

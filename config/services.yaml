@@ -489,6 +489,10 @@ services:
     tags:
       - { name: doctrine.orm.entity_listener }
 
+  Ramsey\Uuid\Doctrine\UuidGenerator:
+    class: Ramsey\Uuid\Doctrine\UuidGenerator
+    public: true
+
   # ======== Views ========
   catrobat.view.programlist:
     class: App\Api_deprecated\Listeners\ProgramListSerializer
