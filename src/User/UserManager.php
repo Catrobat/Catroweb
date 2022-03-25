@@ -7,9 +7,9 @@ use App\Project\ProgramManager;
 use App\Security\PasswordGenerator;
 use App\Utils\TimeUtils;
 use DateTime;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\Persistence\ObjectManager;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
@@ -21,6 +21,11 @@ use FOS\UserBundle\Util\PasswordUpdaterInterface;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 
+/**
+ * ToDo: fix extend.
+ *
+ * @psalm-suppress InvalidExtendClass
+ */
 class UserManager extends \Sonata\UserBundle\Entity\UserManager
 {
   protected ProgramManager $program_manager;

@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -102,7 +103,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('id')
       ->add('name')
       ->add('user.username', null, ['label' => 'Username'])
-      ->add('uploaded_at', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class,
+      ->add('uploaded_at', DateTimeRangeFilter::class, ['field_type' => DateTimeRangePickerType::class,
         'label' => 'Upload Time', ])
       ->add('flavor')
       ->add('approved')

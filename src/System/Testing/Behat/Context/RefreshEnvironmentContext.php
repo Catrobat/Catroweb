@@ -19,7 +19,7 @@ class RefreshEnvironmentContext implements KernelAwareContext
   use SymfonySupport;
 
   /**
-   * This hook to prepares test database and generate all files.
+   * This hook is used to prepare the test database and generate all files.
    *
    * @BeforeSuite
    *              -> Since we don't need to recreate the whole database for every scenario we do it only once per suite.
@@ -45,8 +45,8 @@ class RefreshEnvironmentContext implements KernelAwareContext
   }
 
   /**
-   * We do the clean up before the scenarios and keep all the data after a scenario
-   * to allow easy debugging at the end of an scenario. Also we need to make sure that the DB is clean anyway.
+   * We do the cleanup before the scenarios and keep all the data after a scenario
+   * to allow easy debugging at the end of a scenario. Also, we need to make sure that the DB is clean anyway.
    *
    * @BeforeScenario
    *

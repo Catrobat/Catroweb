@@ -14,8 +14,8 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
 class ProgramImportCommand extends Command
@@ -24,17 +24,13 @@ class ProgramImportCommand extends Command
 
   protected static $defaultName = 'catrobat:import';
 
-  private Filesystem $file_system;
-
   private UserManager $user_manager;
 
   private RemixManipulationProgramManager $remix_manipulation_program_manager;
 
-  public function __construct(Filesystem $filesystem, UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager)
+  public function __construct(UserManager $user_manager, RemixManipulationProgramManager $program_manager)
   {
     parent::__construct();
-    $this->file_system = $filesystem;
     $this->user_manager = $user_manager;
     $this->remix_manipulation_program_manager = $program_manager;
   }
@@ -85,10 +81,11 @@ class ProgramImportCommand extends Command
       return 1;
     }
 
+    /** @var SplFileInfo $file */
     foreach ($finder as $file) {
       try {
         $output->writeln('Importing file '.$file);
-        $add_program_request = new AddProgramRequest($user, new File($file));
+        $add_program_request = new AddProgramRequest($user, new File($file->__toString()));
         $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
         $program->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$program->getName().'> for user: <'.$username.'>');

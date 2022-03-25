@@ -22,7 +22,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'project_custom_translation';
 
   /**
-   * @return array
+   * {@inheritDoc}
    */
   public function getExportFields()
   {

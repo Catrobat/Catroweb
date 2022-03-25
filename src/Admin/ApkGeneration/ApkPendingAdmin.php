@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
@@ -88,7 +89,7 @@ class ApkPendingAdmin extends AbstractAdmin
       ->add('id')
       ->add('user.username', null, ['label' => 'User'])
       ->add('name')
-      ->add('apk_request_time', 'doctrine_orm_datetime_range',
+      ->add('apk_request_time', DateTimeRangeFilter::class,
         [
           'field_type' => DateTimeRangePickerType::class,
         ])

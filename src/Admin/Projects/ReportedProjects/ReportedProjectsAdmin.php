@@ -8,6 +8,9 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\NumberFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\StringListFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
@@ -37,16 +40,16 @@ class ReportedProjectsAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
-      ->add('time', 'doctrine_orm_datetime_range',
+      ->add('time', DateTimeRangeFilter::class,
         [
           'field_type' => DateTimeRangePickerType::class,
         ])
-      ->add('state', 'doctrine_orm_string',
+      ->add('state', NumberFilter::class,
         [
           'field_type' => SymfonyChoiceType::class,
-          'field_options' => ['choices' => ['New' => '1', 'Accepted' => '2', 'Rejected' => '3']],
+          'field_options' => ['choices' => ['New' => 1, 'Accepted' => 2, 'Rejected' => 3]],
         ])
-      ->add('category', 'doctrine_orm_string',
+      ->add('category', StringListFilter::class,
         [
           'field_type' => SymfonyChoiceType::class,
           'field_options' => ['choices' => ['Dislike' => 'Dislike', 'Spam' => 'Spam',
