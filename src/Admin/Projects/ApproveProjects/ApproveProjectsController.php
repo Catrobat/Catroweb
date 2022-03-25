@@ -61,14 +61,11 @@ class ApproveProjectsController extends CRUDController
     return $this->admin->generateUrl('show', ['id' => $nextId]);
   }
 
-  /**
-   * @return mixed|null
-   */
-  private function getNextRandomApproveProgramId()
+  private function getNextRandomApproveProgramId(): ?string
   {
     $data_grid = $this->admin->getDatagrid();
 
-    $objects = $data_grid->getResults();
+    $objects = [...$data_grid->getResults()];
     if (0 == count($objects)) {
       return null;
     }
@@ -85,6 +82,6 @@ class ApproveProjectsController extends CRUDController
     $datagrid = $this->admin->getDatagrid();
     $objects = $datagrid->getResults();
 
-    return count($objects);
+    return count([...$objects]);
   }
 }

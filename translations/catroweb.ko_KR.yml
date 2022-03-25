@@ -200,6 +200,11 @@ programs:
   confrimDelete: Are you sure you want to delete the translation?
   default: 기본값
   save: 저장
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
 remixGraph:
   title: 변환
   showRemixGraph: '리믹스 그래프 표시'

@@ -15,6 +15,8 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
   this.languageSelectorList = $('#edit-language-selector-list')
   this.selectedLanguage = $('#edit-selected-language')
   this.textLoadingSpinner = $('#edit-loading-spinner')
+  this.saveButton = $('#edit-submit-button')
+  this.cancelButton = $('#edit-cancel-button')
 
   this.languageSelect = new MDCSelect(document.querySelector('#edit-language-selector'))
   this.languages = {}
@@ -43,9 +45,9 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
   this.translationDeleted = projectDescriptionCredits.data('trans-translation-deleted')
   this.cannotDelete = projectDescriptionCredits.data('trans-cannot-delete')
 
-  $('#edit-submit-button').on('click', () => { this.save() })
+  this.saveButton.on('click', () => { this.save() })
 
-  $('#edit-cancel-button').on('click', () => { this.cancelChanges() })
+  this.cancelButton.on('click', () => { this.cancelChanges() })
 
   $('#edit-delete-button').on('click', () => { this.deleteTranslation() })
 
@@ -61,6 +63,8 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
       this.keepOrDiscardDialog.show(keepOrDiscardChangesResult)
     }
   })
+
+  $('.mdc-text-field__input').change(checkTextFields)
 
   $(document).ready(getLanguages)
 
@@ -174,6 +178,15 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
     return true
   }
 
+  function checkTextFields () {
+    disableButtons(self.areChangesSaved())
+  }
+
+  function disableButtons (disable) {
+    self.saveButton.attr('disabled', disable)
+    self.cancelButton.attr('disabled', disable)
+  }
+
   function keepOrDiscardChangesResult (result) {
     if (result.isConfirmed) {
       self.previousIndex = self.languageSelect.selectedIndex
@@ -264,6 +277,8 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
     for (const textField of this.textFields) {
       textField.getNewText(this.languageSelect.value)
     }
+
+    disableButtons(true)
   }
 
   // end region

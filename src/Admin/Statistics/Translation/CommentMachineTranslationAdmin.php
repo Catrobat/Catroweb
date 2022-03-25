@@ -19,7 +19,7 @@ class CommentMachineTranslationAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'comment_machine_translation';
 
   /**
-   * @return array
+   * {@inheritDoc}
    */
   public function getExportFields()
   {

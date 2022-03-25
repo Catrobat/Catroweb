@@ -38,6 +38,9 @@
     "behat/transliterator": {
         "version": "v1.3.0"
     },
+    "brick/math": {
+        "version": "0.9.3"
+    },
     "catrobat/capi": {
         "version": "v1.0.43"
     },
@@ -45,7 +48,7 @@
         "version": "v1.4.1"
     },
     "cocur/slugify": {
-        "version": "v4.0.0"
+        "version": "v4.1.0"
     },
     "codercat/jwk-to-pem": {
         "version": "0.0.3"
@@ -175,9 +178,6 @@
     "doctrine/persistence": {
         "version": "1.3.6"
     },
-    "doctrine/reflection": {
-        "version": "1.2.2"
-    },
     "doctrine/sql-formatter": {
         "version": "1.1.0"
     },
@@ -245,7 +245,7 @@
         ]
     },
     "friendsofsymfony/user-bundle": {
-        "version": "v2.1.2"
+        "version": "v2.2.4"
     },
     "gesdinet/jwt-refresh-token-bundle": {
         "version": "v0.12.0"
@@ -316,9 +316,6 @@
     },
     "jms/metadata": {
         "version": "1.7.0"
-    },
-    "jms/parser-lib": {
-        "version": "1.0.0"
     },
     "jms/serializer": {
         "version": "1.14.1"
@@ -442,9 +439,6 @@
     "php-http/stopwatch-plugin": {
         "version": "1.3.0"
     },
-    "phpcollection/phpcollection": {
-        "version": "0.5.0"
-    },
     "phpdocumentor/reflection-common": {
         "version": "2.0.0"
     },
@@ -454,14 +448,14 @@
     "phpdocumentor/type-resolver": {
         "version": "1.1.0"
     },
-    "phpoption/phpoption": {
-        "version": "1.7.5"
-    },
     "phpseclib/phpseclib": {
         "version": "2.0.25"
     },
     "phpspec/prophecy": {
         "version": "v1.10.3"
+    },
+    "phpstan/phpdoc-parser": {
+        "version": "1.2.0"
     },
     "phpstan/phpstan": {
         "version": "0.12.17"
@@ -530,6 +524,24 @@
     },
     "ralouphie/getallheaders": {
         "version": "3.0.3"
+    },
+    "ramsey/collection": {
+        "version": "1.2.2"
+    },
+    "ramsey/uuid": {
+        "version": "4.2.3"
+    },
+    "ramsey/uuid-doctrine": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.3",
+            "ref": "471aed0fbf5620b8d7f92b7a5ebbbf6c0945c27a"
+        },
+        "files": [
+            "config/packages/ramsey_uuid_doctrine.yaml"
+        ]
     },
     "react/promise": {
         "version": "v2.8.0"
@@ -618,7 +630,7 @@
         "version": "2.0.1"
     },
     "sonata-project/core-bundle": {
-        "version": "3.9",
+        "version": "3.20",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "master",
@@ -630,7 +642,7 @@
         ]
     },
     "sonata-project/datagrid-bundle": {
-        "version": "2.5.0"
+        "version": "3.5.0"
     },
     "sonata-project/doctrine-extensions": {
         "version": "1.5.1"
@@ -638,17 +650,26 @@
     "sonata-project/doctrine-orm-admin-bundle": {
         "version": "3.13.0"
     },
-    "sonata-project/easy-extends-bundle": {
-        "version": "2.5.0"
-    },
     "sonata-project/exporter": {
         "version": "2.1.0"
     },
+    "sonata-project/form-extensions": {
+        "version": "1.13",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "master",
+            "version": "1.4",
+            "ref": "9c8a1e8ce2b1f215015ed16652c4ed18eb5867fd"
+        },
+        "files": [
+            "config/packages/sonata_form.yaml"
+        ]
+    },
+    "sonata-project/twig-extensions": {
+        "version": "1.9.1"
+    },
     "sonata-project/user-bundle": {
         "version": "4.5.0"
-    },
-    "swiftmailer/swiftmailer": {
-        "version": "v6.2.3"
     },
     "symfony/acl-bundle": {
         "version": "v2.0.0"
@@ -769,7 +790,7 @@
         "version": "v4.4.5"
     },
     "symfony/inflector": {
-        "version": "v5.2.6"
+        "version": "v5.4.3"
     },
     "symfony/intl": {
         "version": "v5.0.5"
@@ -1030,7 +1051,7 @@
         "version": "1.1.3"
     },
     "twig/extensions": {
-        "version": "1.0",
+        "version": "1.5",
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",

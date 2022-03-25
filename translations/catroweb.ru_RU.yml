@@ -201,6 +201,11 @@ programs:
   confrimDelete: Вы уверены, что хотите удалить перевод?
   default: По умолчанию
   save: Сохранить
+  translationTitle: 'перевод на %language%'
+  editDefault: Изменить по умолчанию
+  editTranslation: Редактировать %language% перевод
+  translations: Локализации
+  createTranslation: Создать перевод
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Показать ремиксы'

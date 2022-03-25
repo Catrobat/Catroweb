@@ -14,6 +14,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\Finder\SplFileInfo;
 
 define('HOURS', 24);
 define('MINUTES', 60);
@@ -65,10 +66,11 @@ class CleanOldApkCommand extends Command
     $removed_apk_ids = new ArrayObject();
     $amount_of_files = sizeof($finder);
 
+    /** @var SplFileInfo $file */
     foreach ($finder as $file) {
       $access_time = $file->getATime();
       if ($access_time < $last_point_of_time_to_save) {
-        unlink($file);
+        unlink($file->__toString());
         $removed_apk_ids->append(explode('.', $file->getFilename())[0]);
       }
     }

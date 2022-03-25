@@ -201,6 +201,11 @@ programs:
   confrimDelete: Czy na pewno chcesz usunąć tłumaczenie?
   default: Domyślny
   save: Zapisz
+  translationTitle: '%language% tłumaczenie'
+  editDefault: Edytuj domyślne
+  editTranslation: Edytuj tłumaczenie %language%
+  translations: Tłumaczenia
+  createTranslation: Utwórz tłumaczenie
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż Drzewo Remiksów'

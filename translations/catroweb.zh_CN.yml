@@ -201,6 +201,11 @@ programs:
   confrimDelete: 您确定要删除该翻译吗？
   default: 默认
   save: 保存
+  translationTitle: '%language% 翻译'
+  editDefault: 编辑默认值
+  editTranslation: 编辑 %language% 翻译
+  translations: 翻译
+  createTranslation: 创建翻译
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'

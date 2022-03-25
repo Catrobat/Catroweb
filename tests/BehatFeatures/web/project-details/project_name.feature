@@ -24,7 +24,8 @@ Feature: Projects should have a name that can be changed by the project owner
     Then the element "#edit-name-text" should be visible
     And the element "#edit-submit-button" should be visible
     When I fill in "edit-name-text" with "This is a new name"
-    And I click "#edit-submit-button"
+    Then the element "#edit-submit-button" should not be disabled
+    When I click "#edit-submit-button"
     And I wait for AJAX to finish
     Then the element "#name" should be visible
     And the element "#edit-text-navigation" should not be visible

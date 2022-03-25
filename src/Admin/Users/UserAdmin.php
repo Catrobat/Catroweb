@@ -6,6 +6,7 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Sonata\Form\Validator\ErrorElement;
 use Sonata\UserBundle\Admin\Model\UserAdmin as BaseUserAdmin;
@@ -102,7 +103,7 @@ class UserAdmin extends BaseUserAdmin
       ->add('email')
       ->add('enabled')
       ->add('verified')
-      ->add('createdAt', 'doctrine_orm_datetime_range', ['field_type' => DateTimeRangePickerType::class])
+      ->add('createdAt', DateTimeRangeFilter::class, ['field_type' => DateTimeRangePickerType::class])
       ;
   }
 
