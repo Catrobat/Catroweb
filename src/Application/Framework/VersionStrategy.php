@@ -13,7 +13,7 @@ class VersionStrategy implements VersionStrategyInterface
     $this->app_version = $app_version;
   }
 
-  public function getVersion($path): string
+  public function getVersion(string $path): string
   {
     $hash = '';
     $app_env = $_ENV['APP_ENV'];
@@ -28,7 +28,7 @@ class VersionStrategy implements VersionStrategyInterface
     return '?v='.$this->app_version.$hash;
   }
 
-  public function applyVersion($path): string
+  public function applyVersion(string $path): string
   {
     return $path.$this->getVersion($path);
   }
