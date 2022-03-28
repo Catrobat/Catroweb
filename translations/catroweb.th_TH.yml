@@ -203,11 +203,11 @@ programs:
   confrimDelete: คุณแน่ใจหรือไม่ว่าต้องการลบการแปล
   default: ค่าเริ่มต้น
   save: บันทึก
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: '%language% การแปล'
+  editDefault: แก้ไขค่าเริ่มต้น
+  editTranslation: แก้ไข %language% การแปล
+  translations: คำแปล
+  createTranslation: สร้างการแปล
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
