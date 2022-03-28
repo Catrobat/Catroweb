@@ -5,11 +5,13 @@
   {{ encore_entry_link_tags('profile') }}
   {{ encore_entry_link_tags('follower_overview') }}
 
+  <meta property="og:type" content="website"/>
+  {% if profile.avatar is not empty %}
     <meta property="og:image" content="{{ asset(profile.avatar) }}"/>
-    <meta property="og:type" content="website"/>
     <meta property="og:image:secure_url" content="{{ asset(profile.avatar) }}"/>
-    <meta property="og:title" content="{{ profile.username |escape('html_attr') }}"/>
-    <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}"/>
+  {% endif %}
+  <meta property="og:title" content="{{ profile.username |escape('html_attr') }}"/>
+  <meta property="og:url" content="{{ url('profile', {id: profile.id}) }}"/>
 
 {% endblock %}
 
@@ -61,20 +63,20 @@
       <hr>
       <h3>{{ 'achievements.profile.title'|trans({}, "catroweb") }}</h3>
       <div class="horizontal-scrolling-wrapper">
-      {% for achievement in achievements %}
-        <div class="achievement__badge">
-          <svg class="achievement__badge__coin achievement__badge__coin--profile"
-               data-src="{{ asset(achievement.getBadgeSvgPath()) }}"
-               data-unique-ids="disabled"/>
-          <svg class="achievement__badge__banner achievement__badge__banner--profile"
-               style="color: {{ achievement.getBannerColor() }}"
-               data-src="{{ asset(achievement.getBannerSvgPath()) }}"
-               data-unique-ids="disabled"/>
-          <div class="achievement__badge__banner__text achievement__badge__banner__text--profile">
-            {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+        {% for achievement in achievements %}
+          <div class="achievement__badge">
+            <svg class="achievement__badge__coin achievement__badge__coin--profile"
+                 data-src="{{ asset(achievement.getBadgeSvgPath()) }}"
+                 data-unique-ids="disabled"/>
+            <svg class="achievement__badge__banner achievement__badge__banner--profile"
+                 style="color: {{ achievement.getBannerColor() }}"
+                 data-src="{{ asset(achievement.getBannerSvgPath()) }}"
+                 data-unique-ids="disabled"/>
+            <div class="achievement__badge__banner__text achievement__badge__banner__text--profile">
+              {{ achievement.getTitleLtmCode()|trans({}, "catroweb") }}
+            </div>
           </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
       </div>
       <hr>
     </div>
@@ -157,19 +159,19 @@
     </div>
   </div>
 
-    <div id="following-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follows-tab">
-      <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
-        {{ "follower.noOtherFollowing"|trans({}, "catroweb") }}
-      </div>
-
-      <div id="following-cards" class="row mb-5">
-        {% for followsUser in following_list %}
-          <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
-            {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followsUser, 'following': true} only %}
-          </div>
-        {% endfor %}
-      </div>
+  <div id="following-section" class="tab-pane fade" role="tabpanel" aria-labelledby="follows-tab">
+    <div id="no-following" class="text-center mb-5 {{ following_list is empty ? 'd-block' : 'd-none' }}">
+      {{ "follower.noOtherFollowing"|trans({}, "catroweb") }}
     </div>
+
+    <div id="following-cards" class="row mb-5">
+      {% for followsUser in following_list %}
+        <div id="following-{{ followsUser.id }}" class="col-12 single-following my-3">
+          {% include 'UserManagement/Followers/follower-item.html.twig' with {'user': followsUser, 'following': true} only %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
 
   <div class="js-follower-overview"
        data-csrf-token="{{ csrf_token('follower') }}"
@@ -199,6 +201,6 @@
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('profile') }}
-  {{ encore_entry_script_tags('follower_overview') }}
+{{ encore_entry_script_tags('profile') }}
+{{ encore_entry_script_tags('follower_overview') }}
 {% endblock %}

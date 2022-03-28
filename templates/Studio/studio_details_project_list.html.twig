@@ -8,7 +8,7 @@
           {% for project in projects %}
             <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin">
               <img class="project-list__project__image"
-                   src="{{ asset(project.thumbnail) }}"
+                   src="{{ asset(project.thumbnail|default("")) }}"
                    alt="{{ project.name }}">
               <span class="project-list__project__name">{{ project.name }}</span>
               {% if user_role == 'admin' %}

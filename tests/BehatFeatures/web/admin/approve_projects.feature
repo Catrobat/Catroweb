@@ -132,9 +132,9 @@ Feature: Admin approve programs
     And I am on "/admin/approve/list"
     And I wait for the page to be loaded
     And I click on the username "Catroweb"
-    Then I should be on "/admin/app/db/user-user/3/edit"
+    Then I should be on "/admin/app/db/user-user/3/show"
     And I should see "Catroweb"
-    And I should see "E-Mail-Address"
+    And I should see "Email"
 
 
   Scenario: Clicking on the show button should take me to the page with program details
