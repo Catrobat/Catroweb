@@ -136,6 +136,45 @@ class UpdateAchievementsCommand extends Command
     ;
     $this->entity_manager->persist($achievement);
 
+    $achievement = $this->getOrCreateAchievement(Achievement::BILINGUAL)
+      ->setInternalDescription('Translate your projects to 2 languages')
+      ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'bilingual.title')
+      ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'bilingual.description')
+      ->setBadgeSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_2_v5.svg')
+      ->setBadgeLockedSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_2.svg')
+      ->setBannerSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+      ->setBannerColor('#EA7B0C')
+      ->setEnabled(true)
+      ->setPriority(++$priority)
+    ;
+    $this->entity_manager->persist($achievement);
+
+    $achievement = $this->getOrCreateAchievement(Achievement::TRILINGUAL)
+      ->setInternalDescription('Translate your projects to 3 languages')
+      ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'trilingual.title')
+      ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'trilingual.description')
+      ->setBadgeSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_2_v5.svg')
+      ->setBadgeLockedSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_2.svg')
+      ->setBannerSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+      ->setBannerColor('#EA7B0C')
+      ->setEnabled(true)
+      ->setPriority(++$priority)
+    ;
+    $this->entity_manager->persist($achievement);
+
+    $achievement = $this->getOrCreateAchievement(Achievement::LINGUIST)
+      ->setInternalDescription('Translate your projects to 5 languages')
+      ->setTitleLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'linguist.title')
+      ->setDescriptionLtmCode(self::ACHIEVEMENT_LTM_PREFIX.'linguist.description')
+      ->setBadgeSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_2_v5.svg')
+      ->setBadgeLockedSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_2.svg')
+      ->setBannerSvgPath(self::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
+      ->setBannerColor('#EA7B0C')
+      ->setEnabled(true)
+      ->setPriority(++$priority)
+    ;
+    $this->entity_manager->persist($achievement);
+
     $this->entity_manager->flush();
 
     $output->writeln("{$priority} Achievements in the Database have been inserted/updated");

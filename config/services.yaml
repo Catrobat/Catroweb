@@ -871,6 +871,11 @@ services:
     tags:
       - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 
+  App\Translation\CustomTranslationAchievementListener:
+    class: App\Translation\CustomTranslationAchievementListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+
   admin.block.statistics.project_machine_translation:
     class: App\Admin\Statistics\Translation\ProjectMachineTranslationAdmin
     tags:

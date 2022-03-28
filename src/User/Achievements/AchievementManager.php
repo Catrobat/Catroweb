@@ -6,8 +6,10 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\Achievements\UserAchievement;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Achievements\AchievementRepository;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
+use App\Project\ProgramManager;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,14 +22,20 @@ class AchievementManager
   protected EntityManagerInterface $entity_manager;
   protected AchievementRepository $achievement_repository;
   protected UserAchievementRepository $user_achievement_repository;
+  private ProgramManager $program_manager;
+  private ProjectCustomTranslationRepository $project_custom_translation_repository;
 
   public function __construct(EntityManagerInterface $entity_manager,
                               AchievementRepository $achievement_repository,
-                              UserAchievementRepository $user_achievement_repository)
+                              UserAchievementRepository $user_achievement_repository,
+                              ProgramManager $program_manager,
+                              ProjectCustomTranslationRepository $project_custom_translation_repository)
   {
     $this->entity_manager = $entity_manager;
     $this->achievement_repository = $achievement_repository;
     $this->user_achievement_repository = $user_achievement_repository;
+    $this->program_manager = $program_manager;
+    $this->project_custom_translation_repository = $project_custom_translation_repository;
   }
 
   public function findAchievementByInternalTitle(string $internal_title): ?Achievement
@@ -255,6 +263,27 @@ class AchievementManager
     }
 
     return $this->unlockAchievement($user, Achievement::DIAMOND_USER);
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function unlockAchievementCustomTranslation(User $user): void
+  {
+    $projects = $this->program_manager->getPublicUserProjects($user->getId());
+
+    $definedLanguages = $this->project_custom_translation_repository->countDefinedLanguages($projects);
+    if ($definedLanguages >= 2) {
+      $this->unlockAchievement($user, Achievement::BILINGUAL);
+    }
+
+    if ($definedLanguages >= 3) {
+      $this->unlockAchievement($user, Achievement::TRILINGUAL);
+    }
+
+    if ($definedLanguages >= 5) {
+      $this->unlockAchievement($user, Achievement::LINGUIST);
+    }
   }
 
   /**
