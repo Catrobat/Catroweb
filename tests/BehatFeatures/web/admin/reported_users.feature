@@ -32,6 +32,7 @@ Feature: Admin reported users
       | inappropriate | 2          | 2       | 01.01.2020 12:01 | c1   |
       | inappropriate | 2          | 2       | 01.01.2020 12:01 | c2   |
 
+  @disabled
   Scenario: List reported users sorted by reported comments
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getReportedCommentsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
@@ -43,6 +44,7 @@ Feature: Admin reported users
     And I should not see "Adminius"
     And I should not see "Angel"
 
+  @disabled
   Scenario: List reported users sorted by reported programs
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getProgramInappropriateReportsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
