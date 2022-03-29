@@ -775,6 +775,15 @@ achievements:
       coding_jam_09_2021:
         title: "Kodlama Jam 21"
         description: "Kodlama Jam 2021 Katılımcısı"
+      bilingual:
+        title: "Bilingual"
+        description: "Translate your projects to 2 languages"
+      trilingual:
+        title: "Trilingual"
+        description: "Translate your projects to 3 languages"
+      linguist:
+        title: "Linguist"
+        description: "Translate your projects to 5 languages"
 tags:
   title: '{0} |{1} Etiket |]1,Inf] Etiketler'
   tag:
