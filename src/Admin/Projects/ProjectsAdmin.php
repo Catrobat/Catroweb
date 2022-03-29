@@ -11,6 +11,7 @@ use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -22,17 +23,17 @@ class ProjectsAdmin extends AbstractAdmin
   use ProjectPreUpdateTrait;
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_projectsadmin';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'projects';
 
   /**
-   * @var array
+   * {@inheritdoc}
    */
   protected $datagridValues = [
     '_sort_by' => 'uploaded_at',
@@ -148,6 +149,41 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('_action', 'actions', ['actions' => [
         'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
       ]])
+    ;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  protected function configureShowFields(ShowMapper $showMapper): void
+  {
+    $flavor_options = $this->parameter_bag->get('flavors');
+
+    $choices = [];
+    if (is_array($flavor_options)) {
+      foreach ($flavor_options as $flavor) {
+        $choices[$flavor] = $flavor;
+      }
+    }
+
+    $showMapper
+      ->add('uploaded_at', null, ['label' => 'Upload Time'])
+      ->add('user')
+      ->add('flavor', 'choice', [
+        'editable' => true,
+        'sortable' => false,
+        'choices' => $choices,
+      ])
+      ->add('views')
+      ->add('downloads')
+      ->add('thumbnail', 'string',
+        [
+          'template' => 'Admin/program_thumbnail_image_list.html.twig',
+        ]
+      )
+      ->add('private', null, ['editable' => false, 'sortable' => false])
+      ->add('approved', null, ['editable' => true, 'sortable' => false])
+      ->add('visible', null, ['editable' => true, 'sortable' => false])
     ;
   }
 

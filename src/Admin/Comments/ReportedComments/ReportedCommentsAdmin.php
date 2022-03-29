@@ -61,7 +61,6 @@ class ReportedCommentsAdmin extends AbstractAdmin
       ->add('program', EntityType::class,
         [
           'class' => Program::class,
-          'admin_code' => 'admin.block.projects.overview',
           'editable' => false,
         ])
       ->add('user')
