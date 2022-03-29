@@ -130,7 +130,7 @@ Feature: Admin featured programs
       | 4  | program 4 (#b100d-c01d)  |     | embroidery | 3        |
     And I click on the "program 1 (#1337-c0ffee)" link
     And I wait for the page to be loaded
-    Then I should see "Edit \"program 1 (#1337-c0ffee)\""
+    Then I should see "Show \"program 1 (#1337-c0ffee)\""
 
   Scenario: Adding a featured Program (success)
     Given I log in as "Adminius" with the password "123456"

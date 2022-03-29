@@ -113,7 +113,7 @@ Feature: Admin reported programs
     Then I should see the reported programs table:
       | Note        | State | Category | Reporting User | Program   | Program Visible |
       | Bad Program | New   | Spam     | Admin          | program 1 | no              |
-    And I should not see "Dislike"
+    And I should not see "dislike"
 
   Scenario: Visible filter
     Given I log in as "Admin" with the password "123456"

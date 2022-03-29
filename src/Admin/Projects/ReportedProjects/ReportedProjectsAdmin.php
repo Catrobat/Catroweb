@@ -10,7 +10,6 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollection;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\NumberFilter;
-use Sonata\DoctrineORMAdminBundle\Filter\StringListFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
@@ -49,12 +48,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
           'field_type' => SymfonyChoiceType::class,
           'field_options' => ['choices' => ['New' => 1, 'Accepted' => 2, 'Rejected' => 3]],
         ])
-      ->add('category', StringListFilter::class,
-        [
-          'field_type' => SymfonyChoiceType::class,
-          'field_options' => ['choices' => ['Dislike' => 'Dislike', 'Spam' => 'Spam',
-            'Copyright Infringement' => 'Copyright Infringement', 'Inappropriate' => 'Inappropriate', ]],
-        ])
+      ->add('category')
       ->add('reportingUser.username')
       ->add('program.visible')
       ->add('reportedUser')
@@ -81,7 +75,6 @@ class ReportedProjectsAdmin extends AbstractAdmin
       ->add('program', EntityType::class,
         [
           'class' => Program::class,
-          'admin_code' => 'admin.block.projects.overview',
           'editable' => false,
         ])
       ->add('program.visible')
