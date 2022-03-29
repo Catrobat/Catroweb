@@ -216,63 +216,6 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     );
   }
 
-  public function listDefinedLanguagesForName(Program $project): array
-  {
-    $qb = $this->createQueryBuilder('t');
-
-    $result = $qb->select('t.language')
-      ->where($qb->expr()->eq('t.project', ':project'))
-      ->andWhere($qb->expr()->isNotNull('t.name'))
-      ->setParameter(':project', $project)
-      ->getQuery()
-      ->execute()
-    ;
-
-    return array_map(
-      function ($e) {
-        return $e['language'];
-      }, $result
-    );
-  }
-
-  public function listDefinedLanguagesForDescription(Program $project): array
-  {
-    $qb = $this->createQueryBuilder('t');
-
-    $result = $qb->select('t.language')
-      ->where($qb->expr()->eq('t.project', ':project'))
-      ->andWhere($qb->expr()->isNotNull('t.description'))
-      ->setParameter(':project', $project)
-      ->getQuery()
-      ->execute()
-    ;
-
-    return array_map(
-      function ($e) {
-        return $e['language'];
-      }, $result
-    );
-  }
-
-  public function listDefinedLanguagesForCredit(Program $project): array
-  {
-    $qb = $this->createQueryBuilder('t');
-
-    $result = $qb->select('t.language')
-      ->where($qb->expr()->eq('t.project', ':project'))
-      ->andWhere($qb->expr()->isNotNull('t.credits'))
-      ->setParameter(':project', $project)
-      ->getQuery()
-      ->execute()
-    ;
-
-    return array_map(
-      function ($e) {
-        return $e['language'];
-      }, $result
-    );
-  }
-
   /**
    * @psalm-param array<Program> $projects
    */

@@ -540,30 +540,14 @@ class ProgramController extends AbstractController
   /**
    * @Route("/translate/custom/project/{id}/list", name="project_custom_translation_language_list", methods={"GET"})
    */
-  public function projectCustomTranslationLanguageListAction(Request $request, string $id,
-                                                             ProjectCustomTranslationRepository $repository): Response
+  public function projectCustomTranslationLanguageListAction(string $id, ProjectCustomTranslationRepository $repository): Response
   {
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       return Response::create(null, Response::HTTP_NOT_FOUND);
     }
 
-    if (!$request->query->has('field')) {
-      return JsonResponse::create($repository->listDefinedLanguages($project));
-    }
-
-    $field = $request->query->get('field');
-
-    switch ($field) {
-      case 'name':
-        return JsonResponse::create($repository->listDefinedLanguagesForName($project));
-      case 'description':
-        return JsonResponse::create($repository->listDefinedLanguagesForDescription($project));
-      case 'credit':
-        return JsonResponse::create($repository->listDefinedLanguagesForCredit($project));
-      default:
-        return Response::create(null, Response::HTTP_BAD_REQUEST);
-    }
+    return JsonResponse::create($repository->listDefinedLanguages($project));
   }
 
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
