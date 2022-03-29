@@ -24,16 +24,12 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ExampleProgramAdmin extends AbstractAdmin
 {
   /**
-   * @override
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'adminexample_program';
 
   /**
-   * @override
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'example_program';
 
@@ -168,11 +164,7 @@ class ExampleProgramAdmin extends AbstractAdmin
     $list
       ->addIdentifier('id')
       ->add('Example Image', 'string', ['template' => 'Admin/example_image.html.twig'])
-      ->add('program', EntityType::class, [
-        'class' => Program::class,
-        'admin_code' => 'admin.block.projects.overview',
-        'editable' => false,
-      ])
+      ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
       ->add('flavor', 'string')
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])

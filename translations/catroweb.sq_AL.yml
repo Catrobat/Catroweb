@@ -778,6 +778,15 @@ achievements:
       coding_jam_09_2021:
         title: "Coding Jam '21"
         description: "Pjesëmarrës i Coding Jam 2021 "
+      bilingual:
+        title: "Bilingual"
+        description: "Translate your projects to 2 languages"
+      trilingual:
+        title: "Trilingual"
+        description: "Translate your projects to 3 languages"
+      linguist:
+        title: "Linguist"
+        description: "Translate your projects to 5 languages"
 tags:
   title: '{0} |{1} Etiketa |]1,Inf] Etiketa '
   tag:

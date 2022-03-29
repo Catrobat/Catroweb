@@ -186,9 +186,9 @@ Feature: Admin all projects
     And I am on "/admin/projects/list"
     And I wait for the page to be loaded
     And I click on the username "Pauli"
-    Then I should be on "/admin/app/db/user-user/3/edit"
+    Then I should be on "/admin/app/db/user-user/3/show"
     And I should see "Pauli"
-    And I should see "E-Mail-Address"
+    And I should see "Email"
 
   Scenario: Clicking on the show button should take me to the page with program details
     Given I log in as "Admin" with the password "123456"

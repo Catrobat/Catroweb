@@ -771,6 +771,15 @@ achievements:
       coding_jam_09_2021:
         title: "کوڈنگ جام '21"
         description: "کوڈنگ جام '21 کا شریک"
+      bilingual:
+        title: "Bilingual"
+        description: "Translate your projects to 2 languages"
+      trilingual:
+        title: "Trilingual"
+        description: "Translate your projects to 3 languages"
+      linguist:
+        title: "Linguist"
+        description: "Translate your projects to 5 languages"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:

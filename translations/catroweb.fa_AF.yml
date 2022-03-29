@@ -777,6 +777,15 @@ achievements:
       coding_jam_09_2021:
         title: "کد نویسی Jam '21"
         description: "شرکت کننده در Coding Jam 2021"
+      bilingual:
+        title: "Bilingual"
+        description: "Translate your projects to 2 languages"
+      trilingual:
+        title: "Trilingual"
+        description: "Translate your projects to 3 languages"
+      linguist:
+        title: "Linguist"
+        description: "Translate your projects to 5 languages"
 tags:
   title: '{0} |{1} برچسب |]1,Inf] برچسب'
   tag:

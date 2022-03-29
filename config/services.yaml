@@ -519,7 +519,7 @@ services:
   admin.block.projects.overview:
     class: App\Admin\Projects\ProjectsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Projects Overview", show_mosaic_button: false}
+      - { name: sonata.admin, manager_type: orm, label: "Projects Overview", show_mosaic_button: false, default: true}
     arguments:
       - ~
       - App\DB\Entity\Project\Program
@@ -868,6 +868,11 @@ services:
 
   App\Translation\MachineTranslationListener:
     class: App\Translation\MachineTranslationListener
+    tags:
+      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
+
+  App\Translation\CustomTranslationAchievementListener:
+    class: App\Translation\CustomTranslationAchievementListener
     tags:
       - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
 

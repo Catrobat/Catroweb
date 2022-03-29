@@ -195,7 +195,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
       ->add('program', EntityType::class, [
         'class' => Program::class,
-        'admin_code' => 'admin.block.projects.overview',
         'editable' => false,
       ])
       ->add('url', UrlType::class)
