@@ -783,14 +783,14 @@ achievements:
         title: "Coding Jam '21"
         description: "参与 Coding Jam '21"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "双语言"
+        description: "将您的项目翻译为 2 种语言"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "三种语言"
+        description: "将您的项目翻译成3种语言"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "语言学家"
+        description: "将您的项目翻译成5种语言"
 tags:
   title: '{0} |{1} 标签 |]1,Inf] 标签'
   tag:

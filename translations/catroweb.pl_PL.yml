@@ -778,14 +778,14 @@ achievements:
         title: "Coding Jam '21"
         description: "Uczestnik kodowania Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Dwujęzyczny"
+        description: "Przetłumacz swoje projekty na 2 języki"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Trójjęzyczny"
+        description: "Przetłumacz swoje projekty na 3 języki"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Język"
+        description: "Przetłumacz swoje projekty na 5 języków"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tagi'
   tag:
