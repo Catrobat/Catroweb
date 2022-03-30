@@ -1399,6 +1399,16 @@ class DataFixturesContext implements KernelAwareContext
   }
 
   /**
+   * @Given I run the add translation user achievements command
+   */
+  public function iRunTheAddTranslationAchievementsCommand(): void
+  {
+    CommandHelper::executeShellCommand(
+      ['bin/console', 'catrobat:workflow:achievement:translation'], []
+    );
+  }
+
+  /**
    * @Given I run the refresh project extensions command
    */
   public function iRunTheRefreshProjectExtensionsCommand(): void
