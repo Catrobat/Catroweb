@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Translation\GoogleTranslateApi
  */
 class GoogleTranslateApiTest extends TestCase
 {
