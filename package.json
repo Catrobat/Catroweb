@@ -36,7 +36,7 @@
     "eslint-plugin-standard": "^5.0.0",
     "file-loader": "^6.2.0",
     "node-sass": "^7.0.1",
-    "sass": "^1.49.9",
+    "sass": "^1.49.11",
     "sass-loader": "^12.6.0",
     "standard": "^16.0.4",
     "stimulus": "^3.0.1",
