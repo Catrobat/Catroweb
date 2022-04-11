@@ -197,7 +197,7 @@ programs:
   translationUpdated: Изменения для %language% были применены
   googleTranslate: Google Переводчик
   translationDeleted: Перевод %language% удалён
-  cannotDelete: Не удаётся удалить имя, описание или упоминание авторов по умолчанию
+  cannotDelete: Не удается удалить имя, описание или упоминание авторов по умолчанию
   confrimDelete: Вы уверены, что хотите удалить перевод?
   default: По умолчанию
   save: Сохранить
@@ -780,14 +780,14 @@ achievements:
         title: "Coding Jam '21"
         description: "Участник Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Двуязычный"
+        description: "Перевести ваши проекты на 2 языка"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Трехязычный"
+        description: "Перевести ваши проекты на 3 языка"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Лингвист"
+        description: "Перевести ваши проекты на 5 языков"
 tags:
   title: 'Теги'
   tag:
