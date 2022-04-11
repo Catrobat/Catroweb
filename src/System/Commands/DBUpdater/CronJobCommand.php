@@ -131,6 +131,16 @@ class CronJobCommand extends Command
       $output
     );
 
+    // Custom translation achievements
+
+    $this->runCronJob(
+      'Retroactively unlock custom translation achievements',
+      ['bin/console', 'catrobat:workflow:achievement:translation'],
+      ['timeout' => self::ONE_DAY_IN_SECONDS],
+      '1 month',
+      $output
+    );
+
     return 0;
   }
 

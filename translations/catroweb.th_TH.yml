@@ -783,14 +783,14 @@ achievements:
         title: "Coding Jam '21"
         description: "ผู้เข้าร่วม Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "สองภาษา"
+        description: "แปลโครงการของคุณเป็น 2 ภาษา"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "สามภาษา"
+        description: "แปลโครงการของคุณเป็น 3 ภาษา"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "นักภาษาศาสตร์"
+        description: "แปลโครงการของคุณเป็น 5 ภาษา"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
