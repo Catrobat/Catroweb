@@ -771,4 +771,25 @@ class ProgramController extends AbstractController
 
     return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
+
+
+  /**
+   * @Route("/project/steal/{id}", name="steal_project", methods={"GET"})
+   *
+   * @throws Exception
+   */
+  public function stealProject(Request $request, string $id): Response {
+    //$logger = new Logger('stealLogger');
+    //$logger->info("Steal " . $id);
+
+    if (!empty($id)) {
+      $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+      $user = $this->getUser();
+      $project->setUser($user);
+      $this->program_manager->save($project);
+    }
+
+    //return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+    return $this->redirect($this->generateUrl('program', array('id' => $id) ));
+  }
 }
