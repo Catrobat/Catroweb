@@ -1,5 +1,5 @@
 @homepage
-Feature: Steal projects as logged in user
+Feature: Steal projects of other users
 
   Background:
     Given there are users:
