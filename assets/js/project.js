@@ -97,6 +97,7 @@ ProgramReport(
 
 Program(
   $project.data('project-id'),
+  $project.data('project-name'),
   $project.data('csrf-token'),
   $project.data('user-role'),
   $project.data('my-program') === 'true',
