@@ -23,30 +23,3 @@ Feature: List languages with defined custom translation
     And the client response should contain "en"
     And the client response should contain "es"
     And the client response should contain "de"
-
-  Scenario: List languages with custom translations defined for name
-    When I request "GET" "/app/translate/custom/project/1/list?field=name"
-    Then the response code should be "200"
-    And the response should be in json format
-    And the client response should contain "fr"
-    And the client response should contain "en"
-    And the client response should not contain "es"
-    And the client response should not contain "de"
-
-  Scenario: List languages with custom translations defined for description
-    When I request "GET" "/app/translate/custom/project/1/list?field=description"
-    Then the response code should be "200"
-    And the response should be in json format
-    And the client response should contain "fr"
-    And the client response should not contain "en"
-    And the client response should contain "es"
-    And the client response should not contain "de"
-
-  Scenario: List languages with custom translations defined for credit
-    When I request "GET" "/app/translate/custom/project/1/list?field=credit"
-    Then the response code should be "200"
-    And the response should be in json format
-    And the client response should contain "fr"
-    And the client response should not contain "en"
-    And the client response should not contain "es"
-    And the client response should contain "de"

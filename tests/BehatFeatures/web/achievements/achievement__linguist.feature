@@ -15,9 +15,7 @@ Feature: Owner should get linguist achievement when projects have custom transla
       | 5  | project 5 | Catrobat |
 
   Scenario: Owner should get achievement when one project has custom translations for five languages
-    Given there are project custom translations:
-      | project_id | language | name | description | credit |
-    And I POST login with user "Catrobat" and password "123456"
+    Given I POST login with user "Catrobat" and password "123456"
     And I request "PUT" "/app/translate/custom/project/1?field=name&language=fr&text=translated"
     And I request "PUT" "/app/translate/custom/project/1?field=description&language=es&text=translated"
     And I request "PUT" "/app/translate/custom/project/1?field=credit&language=it&text=translated"
@@ -29,9 +27,7 @@ Feature: Owner should get linguist achievement when projects have custom transla
     Then the "#unlocked-achievements" element should contain "Linguist"
 
   Scenario: Owner should get achievement when five projects each have a custom translations for a different language
-    Given there are project custom translations:
-      | project_id | language | name | description | credit |
-    And I POST login with user "Catrobat" and password "123456"
+    Given I POST login with user "Catrobat" and password "123456"
     And I request "PUT" "/app/translate/custom/project/1?field=name&language=fr&text=translated"
     And I request "PUT" "/app/translate/custom/project/2?field=description&language=es&text=translated"
     And I request "PUT" "/app/translate/custom/project/3?field=credit&language=it&text=translated"
@@ -43,9 +39,7 @@ Feature: Owner should get linguist achievement when projects have custom transla
     Then the "#unlocked-achievements" element should contain "Linguist"
 
   Scenario: Owner should not get achievement when five projects have a custom translations for the same language
-    Given there are project custom translations:
-      | project_id | language | name | description | credit |
-    And I POST login with user "Catrobat" and password "123456"
+    Given I POST login with user "Catrobat" and password "123456"
     And I request "PUT" "/app/translate/custom/project/1?field=credit&language=fr&text=translated"
     And I request "PUT" "/app/translate/custom/project/2?field=name&language=fr&text=translated"
     And I request "PUT" "/app/translate/custom/project/3?field=name&language=fr&text=translated"

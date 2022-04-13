@@ -18,7 +18,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 /**
  * Class DownloadApkController.
@@ -51,7 +50,6 @@ class DownloadApkController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
 
-    $this->validateCsrfToken($request->query->get('token'));
     $project = $this->findProject($id);
     $file = $this->getApkFile($id);
     $response = $this->createDownloadApkFileResponse($id, $file);
@@ -96,13 +94,6 @@ class DownloadApkController extends AbstractController
     }
 
     return $file;
-  }
-
-  protected function validateCsrfToken(?string $token): void
-  {
-    if ('prod' === $_ENV['APP_ENV'] && !$this->isCsrfTokenValid('project', $token)) {
-      throw new InvalidCsrfTokenException();
-    }
   }
 
   protected function findProject(string $id): Program

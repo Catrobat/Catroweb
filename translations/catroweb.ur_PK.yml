@@ -772,14 +772,14 @@ achievements:
         title: "کوڈنگ جام '21"
         description: "کوڈنگ جام '21 کا شریک"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "دوزبانی"
+        description: "اپنے پراجکٹ کا دو ذبانوں میں ترجمہ کریں"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "سہلسانی"
+        description: "اپنے پراجکٹ کا تین ذبانوں میں ترجمہ کریں"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "ماہر لسانیات"
+        description: "اپنے پراجکٹ کا پانچ ذبانوں میں ترجمہ کریں"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:

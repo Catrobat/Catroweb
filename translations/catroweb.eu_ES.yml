@@ -27,7 +27,7 @@ reportIt: Bai, salatu!
 areYouSure: Ziur zaude?
 noWayOfReturn: Zure ekintzak ezingo dira inolaz desegin!
 download: Deskargatu
-name: Name
+name: Izena
 description: Deskribapena
 noDescription: Ez dago deskribapenik eskuragarri.
 credits: Aipamenak
@@ -39,7 +39,7 @@ privacyPolicy: Pribatutasun politika
 imprint: Argitaratzailea
 programDetails: Xehetasunak
 somethingWentWrong: 'Ai ene! Zerbait ez doa ongi.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'Eskatutako baliabidea ez da existitzen.'
 pleaseTryAgain: 'Saiatu berriro mesedez!'
 oldVersionError: 'Eguneratu Pocket Paint azkeneko bertsiora mesedez!'
 more: 'gehiago'
@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "Ezin izan da erabiltzailea onartu"
 notificationsClearError: "Jakinarazpenak ezin izan dira \"irakurrita\" bezala markatu!"
 pleaseWait: "Itxaron mesedez..."
 projects: "Proiektuak"
-users: "Users"
+users: "Erabiltzaileak"
 oauthPopUpTitle: "Kanpoko kontu baten saio hasteari buruzko informazioa"
 oauthInfo: 'Kanpoko kontu bat erabili berri duzu saioa hasteko. Ausazko izen bat asmatu dugu zuretzat. Erabiltzailearen izena edo pasahitza aldatu nahi baduzu joan mesedez zure profilaren orrialdera.'
 oauthHere: "hemen"
@@ -77,15 +77,15 @@ indexPage:
       title: 'Zer proiektu gomendatzen ditugu hemen?'
       description: 'Zure proiektuak erreakzio gehiago jaso ahala (datsegit, irri...), gorago agertuko da zerrendan.'
 follower:
-  follows: Following
+  follows: Jarraitzen
   followers: Jarraitzaileak
-  follow: Follow
+  follow: Jarraitu
   username: Erabiltzailea
   followsMe: Jarraitzen nau
   noFollowing: Ez duzu inor jarraitzen oraindik.
   noFollowers: Ez zaitu inork jarraitzen oraindik.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
+  noOtherFollowing: Oraingoz ez du inork jarraitzaitzen
+  noOtherFollowers: Oraingoz ez dago jarraitzailerik
   followError: "Ezin izan duzu erabiltzaile hori jarraitu!"
   unfollowError: "Ezin izan duzu erabiltzaile hori jarraitzeaz utzi!"
   unfollowQuestion: "Ziur al zaude erabiltzaile hau jarraitzeari utzi nahi duzula?"
@@ -114,7 +114,7 @@ programs:
   changeVisibility: |+
     Ziur al zaude?
     "%programName%" pribatua bihurtzen baduzu, ezingo du beste inork aurkitu.
-    Hale zure lagunekin proiektuaren esteka partekatu ahalko duzu. Ikusgarritasuna giltzarrapoan sakatzen aldatu dezakezu.
+    Hala ere zure lagunekin proiektuaren esteka partekatu ahalko duzu. Ikusgarritasuna giltzarrapoan sakatzen aldatu dezakezu.
     "%programName%" publiko bezala ezartzen baduzu, gainontzekoek ikusi eta aurkitu dezakete.
     Bai, publikoa bezala ezarri
     Bai, pribatua bezala ezarri

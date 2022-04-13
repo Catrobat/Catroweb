@@ -776,14 +776,14 @@ achievements:
         title: "Kodlama Jam 21"
         description: "Kodlama Jam 2021 Katılımcısı"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "İki dilli"
+        description: "Projelerinizi 2 dile çevirin"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Üç dilli"
+        description: "Projelerinizi 3 dile çevirin"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Dilbilimci"
+        description: "Projelerinizi 5 dile çevirin"
 tags:
   title: '{0} |{1} Etiket |]1,Inf] Etiketler'
   tag:

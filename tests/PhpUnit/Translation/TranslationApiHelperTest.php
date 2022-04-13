@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @coversNothing
+ * @covers \App\Translation\TranslationApiHelper
  */
 class TranslationApiHelperTest extends TestCase
 {

@@ -1,6 +1,6 @@
 ---
 #homepage translation
-title: Catrobat community
+title: Catrobat közösség
 localLanguage: Angol
 username: Felhasználónév
 password: Jelszó
@@ -647,7 +647,7 @@ codeStatistics:
   deviceBricks: 'Device'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Nyelv
   usefulLinks: Useful links
   legalities: Legalities
   communityStats: Community stats
@@ -686,7 +686,7 @@ clipboard:
   success_project: Link to project copied to clipboard!
   success_user: Link to user copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Következő
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -721,7 +721,7 @@ share:
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
+community: 'Catrobat közösség'
 back_to_app: 'Exit community'
 category:
   recent: Newest projects

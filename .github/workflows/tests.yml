@@ -72,7 +72,7 @@ jobs:
           docker-compose -f docker-compose.test.yml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: catroweb-image
           path: docker
@@ -100,7 +100,7 @@ jobs:
           name: PhpUnitTestReport
           path: tests/TestReports/CoverageReports/PhpUnit
 
-      - uses: codecov/codecov-action@v2.1.0
+      - uses: codecov/codecov-action@v3
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
@@ -185,7 +185,7 @@ jobs:
           docker-compose -f docker-compose.test.yml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
           name: catroweb-image
           path: docker
@@ -246,7 +246,7 @@ jobs:
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
 
-      - uses: codecov/codecov-action@v2.1.0
+      - uses: codecov/codecov-action@v3
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/TestReports/CoverageReports/Behat/coverage.xml
