@@ -5,7 +5,7 @@ import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
 import { getCookie } from '../security/CookieHelper'
 
-export const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
+export const Program = function (projectId, projectName, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText, downloadStartedText) {
   createLinks()
@@ -82,13 +82,11 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
 
     // Unfortunately the android implementation of pocket code has its issues with the new download implementation
     if (isWebView) {
+      downloadUrl += downloadUrl.includes('?') ? '&' : '?'
+      downloadUrl += 'fname=' + encodeURIComponent(projectName)
       window.location = downloadUrl
       return
     }
-
-    // Security
-    downloadUrl += downloadUrl.includes('?') ? '&' : '?'
-    downloadUrl += 'token=' + encodeURIComponent(csrfToken)
 
     // eslint-disable-next-line no-undef
     fetch(downloadUrl, {

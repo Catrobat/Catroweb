@@ -207,6 +207,7 @@
        data-flavor="{{ flavor() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
        data-path-change-image="{{ path('upload_project_thumbnail', { 'id': program.id }) }}"
+       data-project-name="{{ program.name }}"
        data-csrf-token="{{ csrf_token('project') }}"
        data-user-role="{% if app.user %}user{% else %}guest{% endif %}"
        data-my-program="{% if my_program %}true{% else %}false{% endif %}"
