@@ -779,9 +779,6 @@ class ProgramController extends AbstractController
    * @throws Exception
    */
   public function stealProject(Request $request, string $id): Response {
-    //$logger = new Logger('stealLogger');
-    //$logger->info("Steal " . $id);
-
     if (!empty($id)) {
       $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
       $user = $this->getUser();
@@ -789,7 +786,6 @@ class ProgramController extends AbstractController
       $this->program_manager->save($project);
     }
 
-    //return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-    return $this->redirect($this->generateUrl('program', array('id' => $id) ));
+    return $this->redirect($this->generateUrl('program', ['id' => $id]));
   }
 }
