@@ -99,12 +99,7 @@
       </div>
       {% if app.user and not my_program %}
         <div class="mt-3">
-          {% include 'components/redirect_button.twig' with {
-            'id': 'stealProjectButton',
-            'url': path('steal_project', {'id': program.id }),
-            'icon': 'visibility',
-            'text': 'Steal Project'
-          } %}
+          {% include 'Program/program_steal_button.twig' %}
         </div>
       {% endif %}
       <div class="mt-3">
@@ -161,12 +156,7 @@
     {% endif %}
     {% if app.user and not my_program %}
       <div class="col-12 mt-3">
-        {% include 'components/redirect_button.twig' with {
-          'id': 'stealProjectButton',
-          'url': path('steal_project', {'id': program.id }),
-          'icon': 'visibility',
-          'text': 'Steal Project'
-        } %}
+        {% include 'Program/program_steal_button.twig' %}
       </div>
     {% endif %}
   </div>

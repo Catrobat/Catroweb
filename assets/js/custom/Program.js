@@ -4,6 +4,7 @@ import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
 import { getCookie } from '../security/CookieHelper'
+import { steal } from '../components/steal_button'
 
 export const Program = function (projectId, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
@@ -23,6 +24,17 @@ export const Program = function (projectId, csrfToken, userRole, myProgram, stat
   $('.js-redirect-button').on('click', (e) => {
     redirect(
       $(e.currentTarget).data('url'),
+      $(e.currentTarget).data('button-id'),
+      $(e.currentTarget).data('spinner-id'),
+      $(e.currentTarget).data('icon-id')
+    )
+  })
+
+  // -------------------------- Steal Button
+  $('.js-steal-button').on('click', (e) => {
+    steal(
+      $(e.currentTarget).data('url'),
+      $(e.currentTarget).data('project-id'),
       $(e.currentTarget).data('button-id'),
       $(e.currentTarget).data('spinner-id'),
       $(e.currentTarget).data('icon-id')

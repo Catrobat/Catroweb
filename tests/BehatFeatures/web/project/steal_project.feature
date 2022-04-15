@@ -37,7 +37,7 @@ Feature: Steal projects of other users
     And I wait for the page to be loaded
     Then I should see "other project"
     And I should see "Steal Project"
-    Then I click "#stealProjectButton"
+    Then I click "#projectStealButton"
     And I wait for the page to be loaded
     Then I should see "Me"
     And I should not see "Steal Project"

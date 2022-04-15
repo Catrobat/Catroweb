@@ -1,0 +1,23 @@
+<button id="projectStealButton{{ suffix|default('') }}"
+        class="btn btn-outline-primary btn-block js-steal-button"
+        data-url="{{ path('steal_project', {'id': program.id }) }}"
+        data-project-id="{{ program.id }}"
+        data-button-id="projectStealButton{{ suffix|default('') }}"
+        data-spinner-id="projectStealButton__spinner{{ suffix|default('') }}"
+        data-icon-id="projectStealButton__icon{{ suffix|default('') }}"
+>
+
+  {# Loading spinner during stealing #}
+  <i id="projectStealButton__spinner{{ suffix|default('') }}" class="material-icons text-start d-none">
+    {% include 'components/loading_spinner.html.twig' with {
+      'spinner_id': 'projectStealButton__spinner' ~ suffix|default(),
+      'size': 'small'}
+    %}  </i>
+
+  {# Icon #}
+  <i id="projectStealButton__icon{{ suffix|default('') }}" class="material-icons align-bottom">visibility</i>
+
+  {# Text #}
+  <span>Steal Project</span>
+
+</button>

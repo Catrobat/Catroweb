@@ -773,19 +773,25 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/project/steal/{id}", name="steal_project", methods={"GET"})
+   * @Route("/project/steal/{id}", name="steal_project", methods={"PUT"})
    *
    * @throws Exception
    */
   public function stealProject(Request $request, string $id): Response
   {
+    $result = false;
+
     if (!empty($id)) {
       $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+      /** @var User $user */
       $user = $this->getUser();
-      $project->setUser($user);
-      $this->program_manager->save($project);
+      if ($user) {
+        $project->setUser($user);
+        $this->program_manager->save($project);
+        $result = true;
+      }
     }
 
-    return $this->redirect($this->generateUrl('program', ['id' => $id]));
+    return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
   }
 }
