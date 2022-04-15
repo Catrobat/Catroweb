@@ -772,13 +772,13 @@ class ProgramController extends AbstractController
     return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 
-
   /**
    * @Route("/project/steal/{id}", name="steal_project", methods={"GET"})
    *
    * @throws Exception
    */
-  public function stealProject(Request $request, string $id): Response {
+  public function stealProject(Request $request, string $id): Response
+  {
     if (!empty($id)) {
       $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
       $user = $this->getUser();
