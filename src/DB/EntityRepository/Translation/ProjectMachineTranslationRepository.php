@@ -7,8 +7,6 @@ use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\Translation\TranslationResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\Criteria;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProjectMachineTranslationRepository extends ServiceEntityRepository
@@ -65,10 +63,6 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     return $result;
   }
 
-  /**
-   * @throws OptimisticLockException
-   * @throws ORMException
-   */
   public function invalidateCachedTranslation(Program $project): void
   {
     /** @var ProjectMachineTranslation[] $entries */

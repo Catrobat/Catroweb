@@ -10,22 +10,19 @@ use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use GuzzleHttp\Client;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
 final class AuthenticationApiProcessor extends AbstractApiProcessor
 {
   private AuthenticationManager $authentication_manager;
   private UserManager $user_manager;
-  private JWTTokenManagerInterface $jwt_manager;
 
   public function __construct(UserManager $user_manager,
-                              JWTTokenManagerInterface $jwt_manager,
                               AuthenticationManager $authentication_manager
   ) {
     $this->user_manager = $user_manager;
     $this->authentication_manager = $authentication_manager;
-    $this->jwt_manager = $jwt_manager;
   }
 
   public function createJWTByUser(User $user): string
@@ -63,7 +60,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
    */
   protected function getPayloadFromFacebookIdToken($id_token): array
   {
-    $payload = JWT::decode($id_token, getenv('FB_OAUTH_PUBLIC_KEY'), ['RS256']);
+    $payload = JWT::decode($id_token, new Key(getenv('FB_OAUTH_PUBLIC_KEY'), 'RS256'));
 
     return [
       'id' => $payload->user_id,
@@ -76,6 +73,8 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
    * used in connectUserToAccount!
    *
    * @psalm-return array{id: mixed, email: mixed}
+   *
+   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   protected function getPayloadFromAppleIdToken(string $id_token): array
   {
@@ -97,7 +96,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
 
     $jwkConverter = new JWKConverter();
     $PEM = $jwkConverter->toPEM($public_key);
-    $payload = JWT::decode($id_token, $PEM, ['RS256']);
+    $payload = JWT::decode($id_token, new Key($PEM, 'RS256'));
 
     return [
       'id' => $payload->user_id,

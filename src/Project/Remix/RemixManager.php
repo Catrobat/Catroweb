@@ -20,8 +20,6 @@ use App\User\Notification\NotificationManager;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 
 class RemixManager
@@ -103,12 +101,10 @@ class RemixManager
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
-   * @throws Exception
-   *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
+   *
+   * @throws Exception
    */
   public function addRemixes(Program $program, array $remixes_data): void
   {

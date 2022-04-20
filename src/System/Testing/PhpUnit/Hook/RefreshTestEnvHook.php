@@ -37,6 +37,10 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
   }
 
   // Unit tests should not need a database rollback. For performance reasons we only execute it when needed.
+
+  /**
+   * @throws \Doctrine\DBAL\Exception
+   */
   public static function databaseRollback(): void
   {
     $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
@@ -46,7 +50,7 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
     $em = $kernel->getContainer()->get('doctrine')->getManager();
 
     $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
-    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName) {
+    foreach ($em->getConnection()->createSchemaManager()->listTableNames() as $tableName) {
       $q = $em->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $em->getConnection()->executeUpdate($q);
     }

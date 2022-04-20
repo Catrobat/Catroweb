@@ -217,6 +217,9 @@
     "firebase/php-jwt": {
         "version": "v5.1.0"
     },
+    "friends-of-behat/mink-extension": {
+        "version": "2.3.1"
+    },
     "friendsofphp/php-cs-fixer": {
         "version": "3.0",
         "recipe": {

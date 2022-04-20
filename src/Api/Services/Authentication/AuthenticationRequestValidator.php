@@ -6,6 +6,7 @@ use App\Api\Services\Base\AbstractRequestValidator;
 use CoderCat\JWKToPEM\JWKConverter;
 use Exception;
 use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -34,7 +35,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
   {
     try {
       $public_key = getenv('FB_OAUTH_PUBLIC_KEY');
-      $decoded = JWT::decode($id_token, $public_key, ['RS256']);
+      $decoded = JWT::decode($id_token, new Key($public_key, 'RS256'));
     } catch (Exception $e) {
       return false;
     }
@@ -77,7 +78,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
 
     try {
       $PEM = $jwkConverter->toPEM($public_key);
-      $decoded = JWT::decode($id_token, $PEM, ['RS256']);
+      $decoded = JWT::decode($id_token, new Key($PEM, 'RS256'));
     } catch (Exception $e) {
       return false;
     }
