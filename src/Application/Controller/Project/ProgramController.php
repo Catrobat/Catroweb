@@ -23,7 +23,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use ImagickException;
 use InvalidArgumentException;
@@ -140,7 +139,7 @@ class ProgramController extends AbstractController
   /**
    * @Route("/project/like/{id}", name="project_like", methods={"GET"})
    *
-   * @throws ORMException
+   * @throws NoResultException
    */
   public function projectLikeAction(Request $request, string $id): Response
   {

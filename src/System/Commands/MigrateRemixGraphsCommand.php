@@ -17,8 +17,8 @@ use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
@@ -108,8 +108,8 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws NoResultException
+   * @throws NonUniqueResultException
    * @throws Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -144,13 +144,10 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @param mixed $directory
-   *
-   * @throws ORMException
-   * @throws OptimisticLockException
-   * @throws Exception
+   * @throws NoResultException
+   * @throws NonUniqueResultException
    */
-  private function migrateRemixDataOfExistingPrograms(OutputInterface $output, $directory): void
+  private function migrateRemixDataOfExistingPrograms(OutputInterface $output, string $directory): void
   {
     /* @var Program $unmigrated_program */
 
@@ -355,8 +352,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   private function addRemixData(Program $program, array $remixes_data, bool $is_update = false): void
   {

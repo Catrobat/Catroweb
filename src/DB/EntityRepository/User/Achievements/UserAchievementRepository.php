@@ -6,8 +6,6 @@ use App\DB\Entity\User\Achievements\UserAchievement;
 use App\DB\Entity\User\User;
 use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class UserAchievementRepository extends ServiceEntityRepository
@@ -40,10 +38,6 @@ class UserAchievementRepository extends ServiceEntityRepository
     return $this->findOneBy(['user' => $user], ['unlocked_at' => 'DESC']);
   }
 
-  /**
-   * @throws ORMException
-   * @throws OptimisticLockException
-   */
   public function readAllUnseenAchievements(User $user): void
   {
     $user_achievements = $this->findUserAchievements($user);

@@ -18,8 +18,6 @@ use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
@@ -961,8 +959,6 @@ class ApiContext implements KernelAwareContext
    * @param mixed  $value
    * @param string $api_version The version of the API to be used
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   public function theUploadedProgramShouldHaveRemixOfInTheXml($value, string $api_version): void

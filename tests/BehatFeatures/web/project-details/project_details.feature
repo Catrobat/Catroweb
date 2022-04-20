@@ -25,10 +25,12 @@ Feature: As a visitor I want to see a project page
     When I download "/api/project/1/catrobat"
     Then I should receive an application file
 
+  @disabled
   Scenario: Downloading a project apk is possible
     When I want to download the apk file of "project 1"
     Then I should receive the apk file
 
+  @disabled
   Scenario: Download counter must not increase of not logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded

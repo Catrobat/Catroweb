@@ -10,8 +10,6 @@ use App\Project\Remix\RemixManager;
 use App\Project\Remix\RemixUpdater;
 use App\Project\Scratch\AsyncHttpClient;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -90,8 +88,7 @@ class RemixUpdaterTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testSavesTheNewUrlToXml(): void
   {
@@ -144,8 +141,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testCallFetchesScratchProgramDetailsAndAddScratchProgramMethodIfCatrobatLanguageVersionIs0993(): void
   {
@@ -205,8 +200,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testIgnoresMultipleRemixParentsIfCatrobatLanguageVersionIs0992OrLower(): void
   {
@@ -247,8 +240,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testCallFetchesOnlyDetailsOfNotYetExistingScratchPrograms(): void
   {
@@ -300,8 +291,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testCallAddRemixesMethodOfRemixManagerWithCorrectRemixesData(): void
   {
@@ -375,8 +364,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testSavesTheOldUrlToRemixOf(): void
   {
@@ -396,8 +383,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testSavesTheScratchUrlToRemixOf(): void
   {
@@ -427,8 +412,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testSavesRemixOfMultipleScratchUrlsToRemixOf(): void
   {
@@ -472,8 +455,6 @@ class RemixUpdaterTest extends TestCase
 
   /**
    * @throws Exception
-   * @throws ORMException
-   * @throws OptimisticLockException
    */
   public function testUpdateTheRemixOfOfTheEntity(): void
   {

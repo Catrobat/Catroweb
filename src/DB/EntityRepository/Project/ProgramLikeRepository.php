@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\ORMException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -93,7 +92,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
   }
 
   /**
-   * @throws ORMException
+   * @throws NoResultException
    */
   public function addLike(Program $project, User $user, int $type): void
   {

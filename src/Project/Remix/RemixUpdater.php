@@ -6,8 +6,6 @@ use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Event\ProgramAfterInsertEvent;
 use App\Project\Scratch\AsyncHttpClient;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -37,8 +35,7 @@ class RemixUpdater
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function onProgramAfterInsert(ProgramAfterInsertEvent $event): void
   {
@@ -46,8 +43,6 @@ class RemixUpdater
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
    * @throws Exception
    */
   public function update(ExtractedCatrobatFile $file, Program $program): void
