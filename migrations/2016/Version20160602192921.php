@@ -2,7 +2,6 @@
 
 namespace DoctrineMigrations;
 
-use Doctrine\DBAL\DBALException;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
@@ -12,7 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
 class Version20160602192921 extends AbstractMigration
 {
   /**
-   * @throws DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   public function up(Schema $schema): void
   {
@@ -53,7 +52,7 @@ class Version20160602192921 extends AbstractMigration
   }
 
   /**
-   * @throws DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   public function down(Schema $schema): void
   {

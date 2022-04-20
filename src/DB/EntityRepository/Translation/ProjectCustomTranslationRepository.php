@@ -5,7 +5,6 @@ namespace App\DB\EntityRepository\Translation;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
 class ProjectCustomTranslationRepository extends ServiceEntityRepository
@@ -22,12 +21,8 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     if (1 != $entry_count) {
       $translation = new ProjectCustomTranslation($project, $language);
       $translation->setName($name_translation);
-      try {
-        $this->getEntityManager()->persist($translation);
-        $this->getEntityManager()->flush();
-      } catch (ORMException $e) {
-        return false;
-      }
+      $this->getEntityManager()->persist($translation);
+      $this->getEntityManager()->flush();
     } else {
       $qb = $this->createQueryBuilder('t');
 
@@ -53,12 +48,8 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     if (1 != $entry_count) {
       $translation = new ProjectCustomTranslation($project, $language);
       $translation->setDescription($description_translation);
-      try {
-        $this->getEntityManager()->persist($translation);
-        $this->getEntityManager()->flush();
-      } catch (ORMException $e) {
-        return false;
-      }
+      $this->getEntityManager()->persist($translation);
+      $this->getEntityManager()->flush();
     } else {
       $qb = $this->createQueryBuilder('t');
 
@@ -84,12 +75,8 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     if (1 != $entry_count) {
       $translation = new ProjectCustomTranslation($project, $language);
       $translation->setCredits($credit_translation);
-      try {
-        $this->getEntityManager()->persist($translation);
-        $this->getEntityManager()->flush();
-      } catch (ORMException $e) {
-        return false;
-      }
+      $this->getEntityManager()->persist($translation);
+      $this->getEntityManager()->flush();
     } else {
       $qb = $this->createQueryBuilder('t');
 
@@ -137,17 +124,13 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       return true;
     }
 
-    try {
-      if (null === $translation->getDescription() && null === $translation->getCredits()) {
-        $this->getEntityManager()->remove($translation);
-      } else {
-        $translation->setName(null);
-        $this->getEntityManager()->persist($translation);
-      }
-      $this->getEntityManager()->flush();
-    } catch (ORMException $e) {
-      return false;
+    if (null === $translation->getDescription() && null === $translation->getCredits()) {
+      $this->getEntityManager()->remove($translation);
+    } else {
+      $translation->setName(null);
+      $this->getEntityManager()->persist($translation);
     }
+    $this->getEntityManager()->flush();
 
     return true;
   }
@@ -160,17 +143,13 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       return true;
     }
 
-    try {
-      if (null === $translation->getName() && null === $translation->getCredits()) {
-        $this->getEntityManager()->remove($translation);
-      } else {
-        $translation->setDescription(null);
-        $this->getEntityManager()->persist($translation);
-      }
-      $this->getEntityManager()->flush();
-    } catch (ORMException $e) {
-      return false;
+    if (null === $translation->getName() && null === $translation->getCredits()) {
+      $this->getEntityManager()->remove($translation);
+    } else {
+      $translation->setDescription(null);
+      $this->getEntityManager()->persist($translation);
     }
+    $this->getEntityManager()->flush();
 
     return true;
   }
@@ -183,17 +162,13 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
       return true;
     }
 
-    try {
-      if (null === $translation->getDescription() && null === $translation->getName()) {
-        $this->getEntityManager()->remove($translation);
-      } else {
-        $translation->setCredits(null);
-        $this->getEntityManager()->persist($translation);
-      }
-      $this->getEntityManager()->flush();
-    } catch (ORMException $e) {
-      return false;
+    if (null === $translation->getDescription() && null === $translation->getName()) {
+      $this->getEntityManager()->remove($translation);
+    } else {
+      $translation->setCredits(null);
+      $this->getEntityManager()->persist($translation);
     }
+    $this->getEntityManager()->flush();
 
     return true;
   }

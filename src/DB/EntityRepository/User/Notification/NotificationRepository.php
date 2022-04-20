@@ -77,10 +77,6 @@ class NotificationRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  /**
-   * @throws \Doctrine\ORM\OptimisticLockException
-   * @throws \Doctrine\ORM\ORMException
-   */
   public function markAllNotificationsFromUserAsSeen(User $user): void
   {
     $qb = $this->_em->createQueryBuilder();

@@ -17,8 +17,6 @@ use App\Project\Remix\RemixGraphManipulator;
 use App\Project\Remix\RemixManager;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\OptimisticLockException;
-use Doctrine\ORM\ORMException;
 use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -197,8 +195,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsWhenNoParentsAreGiven(): void
   {
@@ -216,8 +213,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsForNonExistingParents(): void
   {
@@ -262,8 +258,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testSetProgramAsRootIfOnlyHasScratchParents(): void
   {
@@ -312,8 +307,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForOnlyOneExistingParent(): void
   {
@@ -359,8 +353,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForExistingParents(): void
   {
@@ -403,8 +396,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForExistingParentsSharingSameParent(): void
   {
@@ -467,8 +459,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForExistingParentsHavingDifferentParent(): void
   {
@@ -554,8 +545,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForScratchParent(): void
   {
@@ -625,8 +615,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph1(): void
   {
@@ -689,8 +678,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph2(): void
   {
@@ -765,8 +753,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph3(): void
   {
@@ -839,8 +826,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph4(): void
   {
@@ -928,8 +914,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph5(): void
   {
@@ -1021,8 +1006,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph6(): void
   {
@@ -1109,8 +1093,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph7(): void
   {
@@ -1211,14 +1194,11 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @param mixed $program_entity
-   * @param mixed $parent_data
-   * @param mixed $expected_relations
+   * @param Program|MockObject $program_entity
    *
-   * @throws ORMException
-   * @throws OptimisticLockException
+   * @throws Exception
    */
-  private function checkRemixRelations($program_entity, $parent_data, $expected_relations): void
+  private function checkRemixRelations($program_entity, array $parent_data, array $expected_relations): void
   {
     /** @var MockObject|Program $program_entity */
     $expected_relations_map = [];
@@ -1275,7 +1255,7 @@ class RemixManagerTest extends TestCase
         : 'https://scratch.mit.edu/projects/'.$parent_id.'/');
     }
 
-    Assert::assertCount(is_countable($expected_relations) ? count($expected_relations) : 0, $expected_relations_map);
+    Assert::assertCount(count($expected_relations), $expected_relations_map);
 
     $expected_to_be_root = (1 === count($expected_catrobat_relations));
     $program_entity->expects($this->atLeastOnce())
@@ -1303,7 +1283,7 @@ class RemixManagerTest extends TestCase
           ->willReturn(true)
         ;
       }
-      array_push($array, $program_entity);
+      $array[] = $program_entity;
     }
 
     return $array;

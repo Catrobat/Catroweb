@@ -9,7 +9,6 @@ use App\System\Testing\Behat\SymfonySupport;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\ToolsException;
@@ -50,14 +49,14 @@ class RefreshEnvironmentContext implements KernelAwareContext
    *
    * @BeforeScenario
    *
-   * @throws DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   public function databaseRollback(): void
   {
     $em = $this->getManager();
 
     $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
-    foreach ($em->getConnection()->getSchemaManager()->listTableNames() as $tableName) {
+    foreach ($em->getConnection()->createSchemaManager()->listTableNames() as $tableName) {
       $q = $em->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
       $em->getConnection()->executeUpdate($q);
     }

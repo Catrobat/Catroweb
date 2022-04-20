@@ -3,7 +3,6 @@
 namespace App\System\Commands\Reset;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\DBALException;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +32,7 @@ class DropMigrationCommand extends Command
   }
 
   /**
-   * @throws DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -48,17 +47,16 @@ class DropMigrationCommand extends Command
   }
 
   /**
-   * @throws DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   private function dropMigrationVersions(): bool
   {
-    $schema_manager = $this->connection->getSchemaManager();
+    $schema_manager = $this->connection->createSchemaManager();
     if ($schema_manager->tablesExist(['doctrine_migration_versions'])) {
       $sql = 'DROP TABLE doctrine_migration_versions;';
       $connection = $this->entity_manager->getConnection();
       $stmt = $connection->prepare($sql);
-      $stmt->execute();
-      $stmt->closeCursor();
+      $stmt->executeStatement();
 
       return true;
     }
@@ -67,8 +65,7 @@ class DropMigrationCommand extends Command
       $sql = 'DROP TABLE doctrine_migration_versions;';
       $connection = $this->entity_manager->getConnection();
       $stmt = $connection->prepare($sql);
-      $stmt->execute();
-      $stmt->closeCursor();
+      $stmt->executeStatement();
 
       return true;
     }

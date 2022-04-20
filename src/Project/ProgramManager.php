@@ -30,7 +30,6 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Doctrine\ORM\ORMException;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Query\Range;
@@ -367,8 +366,7 @@ class ProgramManager
   }
 
   /**
-   * @throws InvalidArgumentException
-   * @throws ORMException
+   * @throws NoResultException
    */
   public function changeLike(Program $project, User $user, int $type, string $action): void
   {

@@ -11,7 +11,7 @@ use Doctrine\Migrations\AbstractMigration;
 class Version20180803175251 extends AbstractMigration
 {
   /**
-   * @throws \Doctrine\DBAL\DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   public function up(Schema $schema): void
   {
@@ -26,7 +26,7 @@ class Version20180803175251 extends AbstractMigration
   }
 
   /**
-   * @throws \Doctrine\DBAL\DBALException
+   * @throws \Doctrine\DBAL\Exception
    */
   public function down(Schema $schema): void
   {
