@@ -297,6 +297,9 @@ final class UserApiTest extends DefaultTestCase
     $response_code = null;
     $response_headers = [];
 
+    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $request_validator = $this->createMock(UserRequestValidator::class);
     $validator_wrapper = $this->createMock(ValidationWrapper::class);
     $validator_wrapper->method('hasError')->willReturn(false);
@@ -324,6 +327,9 @@ final class UserApiTest extends DefaultTestCase
     $response_code = null;
     $response_headers = [];
 
+    $authentication_manager = $this->createMock(AuthenticationManager::class);
+    $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
+    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
     $request_validator = $this->createMock(UserRequestValidator::class);
     $validator_wrapper = $this->createMock(ValidationWrapper::class);
     $validator_wrapper->method('hasError')->willReturn(true);

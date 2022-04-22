@@ -43,13 +43,13 @@ final class UserRequestValidator extends AbstractRequestValidator
     return $this->getValidationWrapper();
   }
 
-  public function validateUpdateRequest(UpdateUserRequest $request, string $locale): ValidationWrapper
+  public function validateUpdateRequest(User $user, UpdateUserRequest $request, string $locale): ValidationWrapper
   {
-    if (!is_null(($request->getEmail()))) {
+    if (!is_null(($request->getEmail())) && $user->getEmail() !== $request->getEmail()) {
       $this->validateEmail($request->getEmail(), $locale, self::MODE_UPDATE);
     }
 
-    if (!is_null(($request->getUsername()))) {
+    if (!is_null(($request->getUsername())) && $user->getUsername() !== $request->getUsername()) {
       $this->validateUsername($request->getUsername(), $locale, self::MODE_UPDATE);
     }
 
