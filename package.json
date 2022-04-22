@@ -39,7 +39,7 @@
     "node-sass": "^7.0.1",
     "sass": "^1.50.1",
     "sass-loader": "^12.6.0",
-    "standard": "^16.0.4",
+    "standard": "^17.0.0",
     "stimulus": "^3.0.1",
     "stylelint": "^14.7.1",
     "stylelint-config-standard-scss": "^3.0.0",
