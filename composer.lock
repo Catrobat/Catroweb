@@ -2444,16 +2444,16 @@
         },
         {
             "name": "google/apiclient",
-            "version": "v2.12.3",
+            "version": "v2.12.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-api-php-client.git",
-                "reference": "506c488cb22c960022adf515bf0acc1d266e81db"
+                "reference": "702eed9ae7022ba20dc7118c8161060cb50ee9f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/506c488cb22c960022adf515bf0acc1d266e81db",
-                "reference": "506c488cb22c960022adf515bf0acc1d266e81db",
+                "url": "https://api.github.com/repos/googleapis/google-api-php-client/zipball/702eed9ae7022ba20dc7118c8161060cb50ee9f8",
+                "reference": "702eed9ae7022ba20dc7118c8161060cb50ee9f8",
                 "shasum": ""
             },
             "require": {
@@ -2509,9 +2509,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/google-api-php-client/issues",
-                "source": "https://github.com/googleapis/google-api-php-client/tree/v2.12.3"
+                "source": "https://github.com/googleapis/google-api-php-client/tree/v2.12.4"
             },
-            "time": "2022-04-18T16:01:04+00:00"
+            "time": "2022-04-20T16:44:03+00:00"
         },
         {
             "name": "google/apiclient-services",
@@ -18076,5 +18076,5 @@
         "ext-posix": "7.4",
         "ext-zip": "1.15.4"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
