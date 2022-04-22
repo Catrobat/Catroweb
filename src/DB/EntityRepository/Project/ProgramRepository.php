@@ -116,7 +116,8 @@ class ProgramRepository extends ServiceEntityRepository
   public function getUserProjectsIncludingPrivateOnes(string $user_id, ?string $flavor, string $max_version, ?int $limit, ?int $offset): array
   {
     $qb = $this->createQueryAllBuilder();
-    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
+    $qb = $this->setFlavorConstraint($qb, $flavor);
+    $qb = $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version);
     $qb = $this->setPagination($qb, $limit, $offset);
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb

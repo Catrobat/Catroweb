@@ -117,7 +117,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
 
-    $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($update_user_request, $accept_language);
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($user, $update_user_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
@@ -132,7 +133,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
 
     if (!$update_user_request->isDryRun()) {
       $this->facade->getProcessor()->updateUser(
-        $this->facade->getAuthenticationManager()->getAuthenticatedUser(), $update_user_request
+        $user, $update_user_request
       );
     }
 
