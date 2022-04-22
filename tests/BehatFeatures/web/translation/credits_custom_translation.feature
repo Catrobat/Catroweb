@@ -30,7 +30,6 @@ Feature: Projects should have credits where a custom translation can be defined
     Then the "edit-credits-text" field should contain "This is a credit translation"
     And the "#edit-selected-language" element should contain "Russian"
     And the element "#edit-submit-button" should not be disabled
-    And the element "#edit-cancel-button" should not be disabled
 
   Scenario: Adding a custom credits translation, then changing the language while discarding changes
     Given I log in as "Catrobat"
@@ -52,7 +51,6 @@ Feature: Projects should have credits where a custom translation can be defined
     Then the "edit-credits-text" field should contain ""
     And the "#edit-selected-language" element should contain "Russian"
     And the element "#edit-submit-button" should be disabled
-    And the element "#edit-cancel-button" should be disabled
 
   Scenario: Adding a custom credits translation, then changing the language but going back to unsaved changes
     Given I log in as "Catrobat"
@@ -74,8 +72,7 @@ Feature: Projects should have credits where a custom translation can be defined
     Then the "edit-credits-text" field should contain "This is a credit translation"
     And the "#edit-selected-language" element should contain "French"
     And the element "#edit-submit-button" should not be disabled
-    And the element "#edit-cancel-button" should not be disabled
-  
+
   Scenario: Credit text field should be disabled if there is not a default credit defined
     Given I log in as "Catrobat"
     And I go to "/app/project/2"
@@ -92,7 +89,6 @@ Feature: Projects should have credits where a custom translation can be defined
     Then the element "#edit-credits-text" should be disabled
     And I should see "No notes and credits available."
     And the element "#edit-submit-button" should be disabled
-    And the element "#edit-cancel-button" should be disabled
 
   Scenario: Adding a default credit, then changing the language without saving and keeping the unsaved changes
     Given I log in as "Catrobat"
