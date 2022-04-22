@@ -855,7 +855,7 @@ services:
     class: App\Translation\GoogleTranslateApi
     arguments:
       $client: '@Google\Cloud\Translate\V2\TranslateClient'
-      $short_text_length: 10
+      $short_text_length: 20
 
   Google\Cloud\Translate\V2\TranslateClient:
 
