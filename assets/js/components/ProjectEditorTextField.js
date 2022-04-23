@@ -89,10 +89,6 @@ export function ProjectEditorTextField (projectDescriptionCredits, programId, pr
     }
   }
 
-  this.cancelChanges = () => {
-    this.editText.val(this.lastSavedText)
-  }
-
   this.delete = (languageSelected) => {
     hideError()
     return this.customTranslationApi.deleteCustomTranslation(

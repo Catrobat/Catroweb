@@ -16,7 +16,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
   this.selectedLanguage = $('#edit-selected-language')
   this.textLoadingSpinner = $('#edit-loading-spinner')
   this.saveButton = $('#edit-submit-button')
-  this.cancelButton = $('#edit-cancel-button')
 
   this.languageSelect = new MDCSelect(document.querySelector('#edit-language-selector'))
   this.languages = {}
@@ -47,8 +46,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
 
   this.saveButton.on('click', () => { this.save() })
 
-  this.cancelButton.on('click', () => { this.cancelChanges() })
-
   $('#edit-delete-button').on('click', () => { this.deleteTranslation() })
 
   this.languageSelect.listen('MDCSelect:change', () => {
@@ -64,7 +61,9 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
     }
   })
 
-  $('.mdc-text-field__input').change(checkTextFields)
+  $('.mdc-text-field__input').on('input', function () {
+    disableButtons(self.areChangesSaved())
+  })
 
   $(document).ready(getLanguages)
 
@@ -169,22 +168,11 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
   }
 
   this.areChangesSaved = () => {
-    for (const textField of this.textFields) {
-      if (!textField.areChangesSaved()) {
-        return false
-      }
-    }
-
-    return true
-  }
-
-  function checkTextFields () {
-    disableButtons(self.areChangesSaved())
+    return this.textFields.every(textField => textField.areChangesSaved())
   }
 
   function disableButtons (disable) {
     self.saveButton.attr('disabled', disable)
-    self.cancelButton.attr('disabled', disable)
   }
 
   function keepOrDiscardChangesResult (result) {
@@ -232,12 +220,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
         }
       }
     })
-  }
-
-  this.cancelChanges = () => {
-    for (const textField of this.textFields) {
-      textField.cancelChanges()
-    }
   }
 
   this.deleteTranslation = () => {

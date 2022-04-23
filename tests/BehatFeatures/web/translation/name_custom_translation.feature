@@ -29,7 +29,6 @@ Feature: Projects should have a name where a custom translation can be defined
     Then the "edit-name-text" field should contain "This is a name translation"
     And the "#edit-selected-language" element should contain "Russian"
     And the element "#edit-submit-button" should not be disabled
-    And the element "#edit-cancel-button" should not be disabled
 
   Scenario: Adding a custom name translation, then changing the language while discarding changes
     Given I log in as "Catrobat"
@@ -51,7 +50,6 @@ Feature: Projects should have a name where a custom translation can be defined
     Then the "edit-name-text" field should contain ""
     And the "#edit-selected-language" element should contain "Russian"
     And the element "#edit-submit-button" should be disabled
-    And the element "#edit-cancel-button" should be disabled
 
   Scenario: Adding a custom name translation, then changing the language but going back to unsaved changes
     Given I log in as "Catrobat"
@@ -72,4 +70,3 @@ Feature: Projects should have a name where a custom translation can be defined
     Then the "edit-name-text" field should contain "This is a name translation"
     And the "#edit-selected-language" element should contain "French"
     And the element "#edit-submit-button" should not be disabled
-    And the element "#edit-cancel-button" should not be disabled
