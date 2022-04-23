@@ -62,6 +62,19 @@ class User extends BaseUser
   protected Collection $programs;
 
   /**
+   * Requests to change the password issued by this user.
+   * When this user is deleted, all the reset-password requests issued by him should be deleted too.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity=ResetPasswordRequest::class,
+   *     mappedBy="user",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   * )
+   */
+  protected Collection $reset_password_requests;
+
+  /**
    * Notifications which are available for this user (shown upon login).
    * When this user is deleted, all notifications for him should also be deleted.
    *
