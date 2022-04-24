@@ -142,9 +142,25 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
       type: 'get',
       success: function (data) {
         self.languages = data
+        self.filterLanguages()
         self.populateSelector()
       }
     })
+  }
+
+  this.filterLanguages = () => {
+    const specialLanguages = [
+      'zh-CN',
+      'zh-TW',
+      'pt-BR',
+      'pt-PT'
+    ]
+
+    for (const language in this.languages) {
+      if (!specialLanguages.includes(language) && language.length !== 2) {
+        delete this.languages[language]
+      }
+    }
   }
 
   this.populateSelector = () => {
@@ -155,12 +171,10 @@ export function ProjectEditor (projectDescriptionCredits, programId, textFields)
       '</li>')
 
     for (const language in this.languages) {
-      if (language.length <= 2) {
-        this.languageSelectorList.append(`<li class="mdc-list-item" data-value="${language}" role="option" tabindex="-1">\
-          <span class="mdc-list-item__ripple"></span>\
-          <span class="mdc-list-item__text">${this.languages[language]}</span>\
-          </li>`)
-      }
+      this.languageSelectorList.append(`<li class="mdc-list-item" data-value="${language}" role="option" tabindex="-1">\
+        <span class="mdc-list-item__ripple"></span>\
+        <span class="mdc-list-item__text">${this.languages[language]}</span>\
+        </li>`)
     }
 
     this.languageSelect.layoutOptions()

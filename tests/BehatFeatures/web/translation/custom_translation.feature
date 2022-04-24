@@ -31,6 +31,21 @@ Feature: Projects should have an editor a custom translation can be defined
     And the element "#edit-delete-button" should not be visible
     And the element "#edit-submit-button" should be disabled
 
+  Scenario: Special language variants should be included in language list
+    Given I log in as "Catrobat"
+    And I go to "/app/project/1"
+    And I wait for the page to be loaded
+    And I wait 10000 milliseconds
+    When I click "#edit-program-button"
+    And I wait for AJAX to finish
+    And I click "#add-translation-button"
+    And I wait for AJAX to finish
+    And I click "#edit-language-selector"
+    Then I should see "Chinese (China)"
+    And I should see "Chinese (Taiwan)"
+    And I should see "Portuguese (Brazil)"
+    And I should see "Portuguese (Portugal)"
+
   Scenario: Adding a custom translation
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
@@ -53,10 +68,6 @@ Feature: Projects should have an editor a custom translation can be defined
     Then the element "#edit-text-navigation" should be visible
     And the element "#edit-fr-button" should exist
     And I should see "French"
-    When I click "#top-app-bar__back__btn-back"
-    Then I should see "project 1"
-    And I should see "my description"
-    And I should see "my credits"
 
   Scenario: Viewing a custom translation
     Given there are project custom translations:

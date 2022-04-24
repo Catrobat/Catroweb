@@ -631,15 +631,17 @@ input[type="number"] {
 }
 
 .edit-defined-translation {
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1rem 1rem;
   border-bottom: solid;
   border-color: grey;
   cursor: pointer;
 }
 
 .language-code {
-  width: 3rem;
+  width: 4rem;
   color: grey;
+  padding-right: 1rem;
+  text-align: center;
 }
 
 .language-name {
