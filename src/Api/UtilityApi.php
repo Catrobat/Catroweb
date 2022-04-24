@@ -29,7 +29,7 @@ final class UtilityApi extends AbstractApiController implements UtilityApiInterf
   /**
    * {@inheritdoc}
    */
-  public function surveyLangCodeGet(string $lang_code, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function surveyLangCodeGet(string $lang_code, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?\OpenAPI\Server\Model\SurveyResponse
   {
     $survey = $this->facade->getLoader()->getActiveSurvey($lang_code);
 

@@ -5,6 +5,7 @@ namespace App\DB\Entity\User\Achievements;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,12 +44,12 @@ class UserAchievement
   /**
    * @ORM\Column(name="unlocked_at", type="datetime", nullable=true)
    */
-  protected ?DateTime $unlocked_at = null;
+  protected ?DateTimeInterface $unlocked_at = null;
 
   /**
    * @ORM\Column(name="seen_at", type="datetime", nullable=true)
    */
-  protected ?DateTime $seen_at = null;
+  protected ?DateTimeInterface $seen_at = null;
 
   public function getId(): ?int
   {
@@ -86,19 +87,19 @@ class UserAchievement
     return $this;
   }
 
-  public function getUnlockedAt(): ?DateTime
+  public function getUnlockedAt(): ?DateTimeInterface
   {
     return $this->unlocked_at;
   }
 
-  public function setUnlockedAt(?DateTime $unlocked_at): UserAchievement
+  public function setUnlockedAt(?DateTimeInterface $unlocked_at): UserAchievement
   {
     $this->unlocked_at = $unlocked_at;
 
     return $this;
   }
 
-  public function getSeenAt(): ?DateTime
+  public function getSeenAt(): ?DateTimeInterface
   {
     return $this->seen_at;
   }

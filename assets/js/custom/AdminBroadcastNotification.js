@@ -3,7 +3,8 @@
 // eslint-disable-next-line no-unused-vars
 function AdminBroadcastNotification () {
   $('.btn').click(function () {
-    $('.resultBox').html('')
+    const resultBox = $('.resultBox')
+    resultBox.html('')
 
     const message = $('#msg').val()
     $.ajax({
@@ -12,9 +13,11 @@ function AdminBroadcastNotification () {
       data: { Message: message },
       success: function (data) {
         if (data === 'OK') {
-          $('.resultBox').switchClass('error', 'success')
+          resultBox.removeClass('error')
+          resultBox.addClass('success')
         } else {
-          $('.resultBox').switchClass('success', 'error')
+          resultBox.removeClass('success')
+          resultBox.addClass('error')
         }
         $('.resultBox').html(data)
         // Do Something

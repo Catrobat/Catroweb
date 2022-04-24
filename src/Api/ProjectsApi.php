@@ -29,7 +29,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders)
+  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders): ?\OpenAPI\Server\Model\ProjectResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -107,7 +107,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
   {
     $max_version = $this->getDefaultMaxVersionOnNull($max_version);
     $limit = $this->getDefaultLimitOnNull($limit);
@@ -137,7 +137,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null): ?UploadErrorResponse
   {
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -259,7 +259,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
   {
     $max_version = $this->getDefaultMaxVersionOnNull($max_version);
     $limit = $this->getDefaultLimitOnNull($limit);
@@ -288,7 +288,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsUserIdGet(string $id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsUserIdGet(string $id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
   {
     $max_version = $this->getDefaultMaxVersionOnNull($max_version);
     $limit = $this->getDefaultLimitOnNull($limit);
@@ -385,7 +385,10 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     return null;
   }
 
-  public function customProjectIdCatrobatGet(string $id, &$responseCode = null, array &$responseHeaders = null): ?BinaryFileResponse
+  /**
+   * @psalm-param 200 $responseCode
+   */
+  public function customProjectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders = null): ?BinaryFileResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (null === $project) {

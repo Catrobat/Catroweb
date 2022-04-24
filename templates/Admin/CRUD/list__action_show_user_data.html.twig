@@ -76,10 +76,7 @@
           <div class="lrow">Following</div><div class="rrow">
             {% for following in user.following %} {{ following }}; {%  endfor %}
           </div>
-          <div class="lrow">Gplus data</div><div class="rrow">{{ user.gplusData }}</div>
-          <div class="lrow">Gplus ID token</div><div class="rrow">{{ user.gplusIdToken }}</div>
-          <div class="lrow">Gplus name</div><div class="rrow">{{ user.gplusName }}</div>
-          <div class="lrow">Gplus uid</div><div class="rrow">{{ user.gplusUid }}</div>
+          <div class="lrow">Google ID</div><div class="rrow">{{ user.googleId }}</div>
           <div class="lrow">Group names</div>
           <div class="rrow">
             {% for groupname in user.groupnames %} {{ groupname }}; {%  endfor %}

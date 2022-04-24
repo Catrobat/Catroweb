@@ -139,7 +139,7 @@ class NotificationsController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (is_null($user)) {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+      return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
 
     return new JsonResponse([
@@ -159,7 +159,7 @@ class NotificationsController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (!$user) {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+      return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
     $notifications = null;
     if ('all' === $type) {

@@ -44,6 +44,6 @@ class TaggingController extends AbstractController implements TranslatorAwareInt
       // $tags['translated'][] = $this->trans($tag->getTitleLtmCode(), [], $language); only 4 the new API!
     }
 
-    return JsonResponse::create($tags);
+    return new JsonResponse($tags);
   }
 }

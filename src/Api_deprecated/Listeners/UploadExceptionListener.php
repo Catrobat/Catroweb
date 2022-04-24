@@ -23,7 +23,7 @@ class UploadExceptionListener
   {
     if ($event->getThrowable() instanceof InvalidCatrobatFileException) {
       $event->allowCustomResponseCode();
-      $event->setResponse(JsonResponse::create([
+      $event->setResponse(new JsonResponse([
         'statusCode' => $event->getThrowable()->getCode(),
         'answer' => $this->translator->trans($event->getThrowable()->getMessage(), [], 'catroweb'),
         'preHeaderMessages' => '',

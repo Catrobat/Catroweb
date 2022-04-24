@@ -11,6 +11,7 @@ use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
+use App\DB\EntityRepository\User\UserRepository;
 use App\DB\Generator\MyUuidGenerator;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
@@ -258,7 +259,6 @@ class User extends BaseUser
 
   public function __construct()
   {
-    parent::__construct();
     $this->programs = new ArrayCollection();
     $this->notifications = new ArrayCollection();
     $this->comments = new ArrayCollection();

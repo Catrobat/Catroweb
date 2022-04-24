@@ -3,5 +3,5 @@ gesdinet_jwt_refresh_token:
   user_identity_field: username
   firewall: api_authentication_refresh_token
   token_parameter_name: refresh_token
-  user_provider: fos_user.user_provider.username
+  user_provider: sonata.user.security.user_provider
   single_use: true

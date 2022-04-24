@@ -1,7 +1,6 @@
 {% extends '@SonataAdmin/CRUD/base_list_field.html.twig' %}
 {% block field %}
-  <link rel="stylesheet" href="{{ asset('build/css/program.css') }}"/>
   <div>
-    <img src="{{ admin.getThumbnailImageUrl(object) }}" class="sonata-admin-thumbnail-image">
+    <img src="{{ admin.getThumbnailImageUrl(object) }}" style="width: 96px; height: 96px;" alt="Thumbnail">
   </div>
 {% endblock %}
