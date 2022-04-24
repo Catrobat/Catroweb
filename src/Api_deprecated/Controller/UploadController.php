@@ -98,16 +98,18 @@ class UploadController
 
     $flavor = 'pocketcode';
 
-    // Needed (for tests) to make sure everything is up to date (followers, ..)
+    // Needed to make sure everything is up to date (followers, ..)
     $this->em->refresh($user);
     // ---
 
     if ($request->request->has('flavor')) {
       $flavor = $request->request->get('flavor');
+      $flavor = is_null($flavor) ? $flavor : (string) $flavor;
     }
 
-    $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(),
-      $request->request->get('deviceLanguage'), $flavor);
+    $language = $request->request->get('deviceLanguage');
+    $language = is_null($language) ? $language : (string) $language;
+    $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $language, $flavor);
 
     $program = $this->program_manager->addProgram($add_program_request);
     if (null === $program) {
@@ -117,7 +119,7 @@ class UploadController
     }
     $this->logger->info('Uploading a project done : '.json_encode($response, JSON_THROW_ON_ERROR));
 
-    return JsonResponse::create($response);
+    return new JsonResponse($response);
   }
 
   private function trans(string $message, array $parameters = []): string

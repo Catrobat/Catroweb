@@ -143,10 +143,10 @@ class ProgramController extends AbstractController
    */
   public function projectLikeAction(Request $request, string $id): Response
   {
-    $csrf_token = $request->query->get('token');
+    $csrf_token = (string) $request->query->get('token');
     if (!$this->isCsrfTokenValid('project', $csrf_token)) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
+        return new JsonResponse([
           'statusCode' => 706,
           'message' => 'Invalid CSRF token.',
         ], Response::HTTP_BAD_REQUEST);
@@ -155,12 +155,12 @@ class ProgramController extends AbstractController
       throw new InvalidCsrfTokenException();
     }
 
-    $type = intval($request->query->get('type'));
-    $action = $request->query->get('action');
+    $type = $request->query->getInt('type');
+    $action = (string) $request->query->get('action');
 
     if (!ProgramLike::isValidType($type)) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
+        return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
           'message' => 'Invalid like type given!',
         ], Response::HTTP_BAD_REQUEST);
@@ -172,7 +172,7 @@ class ProgramController extends AbstractController
     $project = $this->program_manager->find($id);
     if (null === $project) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
+        return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
           'message' => 'Project with given ID does not exist!',
         ], Response::HTTP_NOT_FOUND);
@@ -185,7 +185,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (!$user) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create(['statusCode' => 601], Response::HTTP_UNAUTHORIZED);
+        return new JsonResponse(['statusCode' => 601], Response::HTTP_UNAUTHORIZED);
       }
 
       $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
@@ -201,7 +201,7 @@ class ProgramController extends AbstractController
       $this->program_manager->changeLike($project, $user, $type, $action);
     } catch (InvalidArgumentException $exception) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
+        return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
           'message' => 'Invalid action given!',
         ], Response::HTTP_BAD_REQUEST);
@@ -311,10 +311,10 @@ class ProgramController extends AbstractController
   public function editProgramName(Request $request, string $id): Response
   {
     $max_name_size = (int) $this->getParameter('catrobat.max_name_upload_size');
-    $value = $request->request->get('value');
+    $value = (string) $request->request->get('value');
 
     if (strlen($value) > $max_name_size) {
-      return Response::create(
+      return new Response(
         $this->translator->trans('programs.tooLongName', [], 'catroweb'),
         Response::HTTP_UNPROCESSABLE_ENTITY
       );
@@ -347,7 +347,7 @@ class ProgramController extends AbstractController
       $this->file_repository->deleteProjectZipFileIfExists($program->getId());
     }
 
-    return Response::create();
+    return new Response();
   }
 
   /**
@@ -358,10 +358,10 @@ class ProgramController extends AbstractController
   public function editProgramDescription(Request $request, string $id): Response
   {
     $max_description_size = (int) $this->getParameter('catrobat.max_description_upload_size');
-    $value = $request->request->get('value');
+    $value = (string) $request->request->get('value');
 
     if (strlen($value) > $max_description_size) {
-      return JsonResponse::create(['statusCode' => 527,
+      return new JsonResponse(['statusCode' => 527,
         'message' => $this->translator
           ->trans('programs.tooLongDescription', [], 'catroweb'), ]);
     }
@@ -393,7 +393,7 @@ class ProgramController extends AbstractController
       $this->file_repository->deleteProjectZipFileIfExists($program->getId());
     }
 
-    return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
+    return new JsonResponse(['statusCode' => Response::HTTP_OK]);
   }
 
   /**
@@ -404,17 +404,17 @@ class ProgramController extends AbstractController
   public function editProgramCredits(Request $request, string $id): Response
   {
     $max_credits_size = (int) $this->getParameter('catrobat.max_notes_and_credits_upload_size');
-    $value = $request->request->get('value');
+    $value = (string) $request->request->get('value');
 
     if (strlen($value) > $max_credits_size) {
-      return JsonResponse::create(['statusCode' => 707,
+      return new JsonResponse(['statusCode' => 707,
         'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
     }
 
     $user = $this->getUser();
     if (null === $user) {
-      return JsonResponse::create(null, Response::HTTP_UNAUTHORIZED);
+      return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
 
     $program = $this->program_manager->find($id);
@@ -439,7 +439,7 @@ class ProgramController extends AbstractController
       $this->file_repository->deleteProjectZipFileIfExists($program->getId());
     }
 
-    return JsonResponse::create(['statusCode' => Response::HTTP_OK]);
+    return new JsonResponse(['statusCode' => Response::HTTP_OK]);
   }
 
   /**
@@ -463,11 +463,11 @@ class ProgramController extends AbstractController
       return $this->redirectToRoute('login');
     }
 
-    $image = $request->request->get('image');
+    $image = (string) $request->request->get('image');
 
     $this->screenshot_repository->updateProgramAssets($image, $id);
 
-    return JsonResponse::create();
+    return new JsonResponse();
   }
 
   /**
@@ -487,7 +487,8 @@ class ProgramController extends AbstractController
     }
 
     $source_language = $request->query->get('source_language');
-    $target_language = $request->query->get('target_language');
+    $source_language = is_null($source_language) ? $source_language : (string) $source_language;
+    $target_language = (string) $request->query->get('target_language');
 
     if ($source_language === $target_language) {
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
@@ -532,7 +533,7 @@ class ProgramController extends AbstractController
       case 'DELETE':
         return $this->projectCustomTranslationDeleteAction($request, $id);
       default:
-        return Response::create(null, Response::HTTP_BAD_REQUEST);
+        return new Response(null, Response::HTTP_BAD_REQUEST);
     }
   }
 
@@ -543,10 +544,10 @@ class ProgramController extends AbstractController
   {
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
-      return Response::create(null, Response::HTTP_NOT_FOUND);
+      return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
-    return JsonResponse::create($repository->listDefinedLanguages($project));
+    return new JsonResponse($repository->listDefinedLanguages($project));
   }
 
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
@@ -651,21 +652,21 @@ class ProgramController extends AbstractController
   {
     $user = $this->getUser();
     if (null === $user) {
-      return Response::create(null, Response::HTTP_UNAUTHORIZED);
+      return new Response(null, Response::HTTP_UNAUTHORIZED);
     }
 
     $project = $this->program_manager->find($id);
     if (null === $project || $project->getUser() !== $user) {
-      return Response::create(null, Response::HTTP_NOT_FOUND);
+      return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
     if (!$request->query->has('field')
       || !$request->query->has('language')) {
-      return Response::create(null, Response::HTTP_BAD_REQUEST);
+      return new Response(null, Response::HTTP_BAD_REQUEST);
     }
 
-    $field = $request->query->get('field');
-    $language = $request->query->get('language');
+    $field = (string) $request->query->get('field');
+    $language = (string) $request->query->get('language');
 
     try {
       switch ($field) {
@@ -679,29 +680,29 @@ class ProgramController extends AbstractController
           $result = $this->translation_delegate->deleteProjectCreditCustomTranslation($project, $language);
           break;
         default:
-          return Response::create(null, Response::HTTP_BAD_REQUEST);
+          return new Response(null, Response::HTTP_BAD_REQUEST);
       }
     } catch (InvalidArgumentException $exception) {
-      return Response::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
-    return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
+    return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 
   private function projectCustomTranslationGetAction(Request $request, string $id): Response
   {
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
-      return Response::create(null, Response::HTTP_NOT_FOUND);
+      return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
     if (!$request->query->has('field')
       || !$request->query->has('language')) {
-      return Response::create(null, Response::HTTP_BAD_REQUEST);
+      return new Response(null, Response::HTTP_BAD_REQUEST);
     }
 
-    $field = $request->query->get('field');
-    $language = $request->query->get('language');
+    $field = (string) $request->query->get('field');
+    $language = (string) $request->query->get('language');
 
     try {
       switch ($field) {
@@ -715,39 +716,39 @@ class ProgramController extends AbstractController
           $result = $this->translation_delegate->getProjectCreditCustomTranslation($project, $language);
           break;
         default:
-          return Response::create(null, Response::HTTP_BAD_REQUEST);
+          return new Response(null, Response::HTTP_BAD_REQUEST);
       }
     } catch (InvalidArgumentException $exception) {
-      return Response::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
-    return Response::create($result, null == $result ? Response::HTTP_NOT_FOUND : Response::HTTP_OK);
+    return new Response($result, null == $result ? Response::HTTP_NOT_FOUND : Response::HTTP_OK);
   }
 
   private function projectCustomTranslationPutAction(Request $request, string $id): Response
   {
     $user = $this->getUser();
     if (null === $user) {
-      return Response::create(null, Response::HTTP_UNAUTHORIZED);
+      return new Response(null, Response::HTTP_UNAUTHORIZED);
     }
 
     $project = $this->program_manager->find($id);
     if (null === $project || $project->getUser() !== $user) {
-      return Response::create(null, Response::HTTP_NOT_FOUND);
+      return new Response(null, Response::HTTP_NOT_FOUND);
     }
 
     if (!$request->query->has('field')
       || !$request->query->has('language')
       || !$request->query->has('text')) {
-      return Response::create(null, Response::HTTP_BAD_REQUEST);
+      return new Response(null, Response::HTTP_BAD_REQUEST);
     }
 
-    $field = $request->query->get('field');
-    $language = $request->query->get('language');
-    $text = $request->query->get('text');
+    $field = (string) $request->query->get('field');
+    $language = (string) $request->query->get('language');
+    $text = (string) $request->query->get('text');
 
     if ('' === trim($text)) {
-      return Response::create(null, Response::HTTP_BAD_REQUEST);
+      return new Response(null, Response::HTTP_BAD_REQUEST);
     }
 
     try {
@@ -762,12 +763,12 @@ class ProgramController extends AbstractController
           $result = $this->translation_delegate->addProjectCreditCustomTranslation($project, $language, $text);
           break;
         default:
-          return Response::create(null, Response::HTTP_BAD_REQUEST);
+          return new Response(null, Response::HTTP_BAD_REQUEST);
       }
     } catch (InvalidArgumentException $exception) {
-      return Response::create($exception->getMessage(), Response::HTTP_BAD_REQUEST);
+      return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
-    return Response::create(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
+    return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 }

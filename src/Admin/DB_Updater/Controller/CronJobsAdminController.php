@@ -44,7 +44,7 @@ class CronJobsAdminController extends CRUDController
       throw new AccessDeniedException();
     }
 
-    $cron_job = $this->cron_job_repository->findByName($request->query->get('id'));
+    $cron_job = $this->cron_job_repository->findByName(strval($request->query->get('id')));
     if (is_null($cron_job)) {
       $this->addFlash('sonata_flash_error', 'Resetting cron job failed');
     }

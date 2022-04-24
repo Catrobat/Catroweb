@@ -4,7 +4,6 @@ namespace App\Admin\MediaPackage;
 
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -13,17 +12,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class MediaPackageCategoriesAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'adminmedia_package_category';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'media_package_category';
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -40,16 +39,7 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
-   *
-   * Fields to be shown on filter forms
-   */
-  protected function configureDatagridFilters(DatagridMapper $filter): void
-  {
-  }
-
-  /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -60,7 +50,7 @@ class MediaPackageCategoriesAdmin extends AbstractAdmin
       ->add('name')
       ->add('package', EntityType::class, ['class' => MediaPackage::class])
       ->add('priority')
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'edit' => [],
           'delete' => [],

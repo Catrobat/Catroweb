@@ -6,31 +6,31 @@ use App\DB\Entity\Project\Program;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProjectCustomTranslationAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_custom_translation';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'project_custom_translation';
 
   /**
    * {@inheritDoc}
    */
-  public function getExportFields()
+  protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'language', 'name', 'description', 'credits'];
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -43,7 +43,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
       ->add('name')
       ->add('description')
       ->add('credits')
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'edit' => [],
           'delete' => [],
@@ -53,13 +53,13 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $formMapper
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('project', EntityType::class, ['class' => Program::class], [
         'admin_code' => 'admin.block.projects.overview',
       ])
@@ -70,7 +70,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('acl');
   }

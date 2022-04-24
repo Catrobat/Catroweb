@@ -6,10 +6,11 @@ use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class MediaPackageCategoryController extends CRUDController
 {
-  protected function preDelete(Request $request, $object)
+  protected function preDelete(Request $request, object $object): ?Response
   {
     /* @var $object MediaPackageCategory */
     if ($object->getFiles()->count() > 0) {

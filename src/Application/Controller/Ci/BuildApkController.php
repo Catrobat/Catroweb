@@ -51,10 +51,10 @@ class BuildApkController extends AbstractController
     }
 
     if (Program::APK_READY === $program->getApkStatus()) {
-      return JsonResponse::create(['status' => 'ready']);
+      return new JsonResponse(['status' => 'ready']);
     }
     if (Program::APK_PENDING === $program->getApkStatus()) {
-      return JsonResponse::create(['status' => 'pending']);
+      return new JsonResponse(['status' => 'pending']);
     }
 
     $this->dispatcher->sendBuildRequest($program->getId());
@@ -64,7 +64,7 @@ class BuildApkController extends AbstractController
 
     $this->program_manager->save($program);
 
-    return JsonResponse::create(['status' => 'pending']);
+    return new JsonResponse(['status' => 'pending']);
   }
 
   /**
@@ -92,7 +92,7 @@ class BuildApkController extends AbstractController
     $program->setApkStatus(Program::APK_READY);
     $this->program_manager->save($program);
 
-    return JsonResponse::create(['result' => 'success']);
+    return new JsonResponse(['result' => 'success']);
   }
 
   /**
@@ -115,9 +115,9 @@ class BuildApkController extends AbstractController
       $program->setApkStatus(Program::APK_NONE);
       $this->program_manager->save($program);
 
-      return JsonResponse::create(['OK']);
+      return new JsonResponse(['OK']);
     }
 
-    return JsonResponse::create(['error' => 'program is not building']);
+    return new JsonResponse(['error' => 'program is not building']);
   }
 }

@@ -11,17 +11,17 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 class MediaPackageAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'adminmedia_package_package';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'media_package';
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -34,7 +34,7 @@ class MediaPackageAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -43,7 +43,7 @@ class MediaPackageAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -52,20 +52,12 @@ class MediaPackageAdmin extends AbstractAdmin
     $list
       ->addIdentifier('name')
       ->add('name_url', null, ['label' => 'Url'])
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'edit' => [],
           'delete' => [],
         ],
       ])
     ;
-  }
-
-  /**
-   * @return bool
-   */
-  public function isAclEnabled()
-  {
-    return false;
   }
 }

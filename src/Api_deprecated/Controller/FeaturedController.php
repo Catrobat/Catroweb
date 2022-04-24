@@ -62,7 +62,7 @@ class FeaturedController extends AbstractController
       'ProjectsExtension' => '.catrobat',
     ];
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   private function generateProgramObject(FeaturedProgram $featured_program, ImageRepository $image_repository): array

@@ -92,7 +92,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userIdGet(string $id, &$responseCode, array &$responseHeaders)
+  public function userIdGet(string $id, &$responseCode, array &$responseHeaders): ?\OpenAPI\Server\Model\BasicUserDataResponse
   {
     $user = $this->facade->getLoader()->findUserByID($id);
 
@@ -113,7 +113,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): ?UpdateUserErrorResponse
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
 
@@ -161,7 +161,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): ?RegisterErrorResponse
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $validation_wrapper = $this->facade->getRequestValidator()->validateResetPasswordRequest($reset_password_request, $accept_language);

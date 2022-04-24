@@ -266,9 +266,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function iSelectPackageForMediaPackageCategory($arg1): void
   {
-    $this->getSession()->getPage()->find('css', '.select2-choices')->click();
+    $this->getSession()->getPage()->find('css', '.select2-selection__rendered')->click();
 
-    $packages = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    $packages = $this->getSession()->getPage()->findAll('css', '.select2-results__options li');
     foreach ($packages as $package) {
       if ($package->getText() == $arg1) {
         $package->click();
@@ -284,9 +284,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function iSelectFlavorForMediaPackageFile($arg1): void
   {
-    $this->getSession()->getPage()->find('css', '.select2-choices')->click();
+    $this->getSession()->getPage()->findAll('css', '.select2-selection__rendered')[1]->click();
 
-    $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results li');
+    $flavors = $this->getSession()->getPage()->findAll('css', '.select2-results__options li');
     foreach ($flavors as $flavor) {
       if ($flavor->getText() == $arg1) {
         $flavor->click();
