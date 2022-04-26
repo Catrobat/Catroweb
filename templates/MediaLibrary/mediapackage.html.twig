@@ -14,21 +14,27 @@
 {% endblock %}
 
 {% block body %}
-
-  {% if foundResults is defined and foundResults == false %}
-    <div id="search-results">
+  {% if foundResults is defined %}
+    <div id="search-results" class="mb-4">
       <h1>{{ "media-packages.search-results"|trans({}, "catroweb") }}</h1>
       <div id="search-results-text">
-        {{ "media-packages.no-results"|trans({}, "catroweb") }}
+        {% if foundResults is empty %}
+          {{ "media-packages.no-results"|trans({}, "catroweb") }}
+        {% else %}
+          {{ "search.resultcount"|trans({'%count%': foundResults|length}, "catroweb") }}.
+        {% endif %}
       </div>
     </div>
   {% endif %}
 
   <div id="content" class="medialib-content">
+    {% if foundResults is not defined %}
+      <h1>{{ ("codeview."~package)|lower|trans({}, "catroweb") }}</h1>
+    {% endif %}
     {% for category in categories %}
       <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"
            style="display: none;" class="category">
-        <h1>{{ category.name }}</h1>
+        <h2>{{ category.name }}</h2>
         <div class="files"></div>
       </div>
     {% endfor %}
