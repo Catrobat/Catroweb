@@ -32,8 +32,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
     projectDescriptionCredits.data('trans-delete')
   )
 
-  this.defaultText = projectDescriptionCredits.data('trans-default')
-
   this.saveButton.on('click', model.save)
 
   $('#edit-delete-button').on('click', model.deleteTranslation)
@@ -96,10 +94,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
 
   model.setOnLanguageList((languages) => {
     this.languageSelectorList.empty()
-    this.languageSelectorList.append('<li class="mdc-list-item" data-value="default" role="option" tabindex="-1">' +
-      '<span class="mdc-list-item__ripple"></span>' +
-      '<span class="mdc-list-item__text">' + this.defaultText + '</span>' +
-      '</li>')
 
     for (const language in languages) {
       this.languageSelectorList.append(`<li class="mdc-list-item" data-value="${language}" role="option" tabindex="-1">\

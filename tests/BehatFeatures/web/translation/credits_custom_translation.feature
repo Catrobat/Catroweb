@@ -80,30 +80,7 @@ Feature: Projects should have credits where a custom translation can be defined
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
     When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then the element "#edit-credits-text" should not be disabled
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then the element "#edit-credits-text" should be disabled
-    And I should see "No notes and credits available."
-    And the element "#edit-submit-button" should be disabled
-
-  Scenario: Adding a default credit, then changing the language without saving and keeping the unsaved changes
-    Given I log in as "Catrobat"
-    And I go to "/app/project/2"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-program-button"
-    And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
-    When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then I fill in "edit-credits-text" with "This is a default credit"
-    When I choose "French" from selector "#edit-language-selector"
-    Then I should see "Would you like to keep your current changes?"
-    When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then the element "#edit-credits-text" should be disabled
     And I should see "No notes and credits available."
