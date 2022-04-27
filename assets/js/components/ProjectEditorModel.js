@@ -1,0 +1,199 @@
+import $ from 'jquery'
+
+export const DIALOG = {
+  CLOSE_EDITOR: 'close_editor',
+  KEEP_CHANGES: 'keep_changes',
+  CONFIRM_DELETE: 'confirm_delete'
+}
+
+export function ProjectEditorModel (programId, textFieldModels) {
+  const self = this
+
+  this.programId = programId
+  this.textFieldModels = textFieldModels
+
+  this.languages = {}
+  this.selectedLanguage = ''
+  this.selectedLanguageIndex = 0
+  this.previousLanguageIndex = 0
+
+  this.setOnLanguageList = (onLanguageList) => {
+    this.onLanguageList = onLanguageList
+  }
+
+  this.setOnDialog = (onDialog) => {
+    this.onDialog = onDialog
+  }
+
+  this.setOnButtonEnabled = (onButtonEnabled) => {
+    this.onButtonEnabled = onButtonEnabled
+  }
+
+  this.setOnLanguageSelected = (onLanguageSelected) => {
+    this.onLanguageSelected = onLanguageSelected
+  }
+
+  this.setOnClose = (onClose) => {
+    this.onClose = onClose
+  }
+
+  this.setOnReload = (onReload) => {
+    this.onReload = onReload
+  }
+
+  this.setOnUnauthorized = (onUnauthorized) => {
+    this.onUnauthorized = onUnauthorized
+  }
+
+  this.setLanguage = (language, languageIndex) => {
+    if (languageIndex === this.previousLanguageIndex) {
+      return
+    }
+
+    this.selectedLanguage = language
+    this.selectedLanguageIndex = languageIndex
+
+    if (this.areChangesSaved()) {
+      this.previousLanguageIndex = languageIndex
+      this.fetchText()
+    } else {
+      this.onDialog(DIALOG.KEEP_CHANGES)
+    }
+  }
+
+  this.onInput = () => {
+    this.onButtonEnabled(!this.areChangesSaved())
+  }
+
+  this.show = (language) => {
+    if (language === null) {
+      this.selectedLanguage = 'default'
+      this.onLanguageSelected(0)
+    } else {
+      this.selectedLanguage = language
+    }
+    this.fetchText()
+  }
+
+  this.popStateHandler = () => {
+    if (this.areChangesSaved()) {
+      this.onClose()
+    } else {
+      this.onDialog(DIALOG.CLOSE_EDITOR)
+    }
+  }
+
+  this.reset = () => {
+    this.selectedLanguageIndex = 0
+    this.previousLanguageIndex = 0
+  }
+
+  this.keepChangesResult = (result) => {
+    if (result.isConfirmed) {
+      this.previousLanguageIndex = this.selectedLanguageIndex
+      for (const textField of this.textFieldModels) {
+        textField.fetchTextKeepChanges(this.selectedLanguage)
+      }
+    } else if (result.isDenied) {
+      this.previousLanguageIndex = this.selectedLanguageIndex
+      this.fetchText()
+    } else if (result.isDismissed) {
+      this.selectedLanguageIndex = this.previousLanguageIndex
+      this.onLanguageSelected(this.selectedLanguageIndex)
+    }
+  }
+
+  this.closeEditorResult = (result) => {
+    if (result.isConfirmed) {
+      this.save()
+    } else if (result.isDenied) {
+      this.onClose()
+    }
+  }
+
+  this.deleteTranslationResult = (result) => {
+    if (result.isDenied) {
+      Promise.all(
+        self.textFieldModels.map((textField) => textField.delete(this.selectedLanguage))
+      ).then((results) => {
+        if (results.length === self.textFieldModels.length) {
+          this.onClose()
+        }
+      }).catch((reason) => {
+        for (const error of reason) {
+          if (error === 401) {
+            this.onUnauthorized()
+          }
+        }
+      })
+    }
+  }
+
+  this.save = () => {
+    Promise.all(
+      this.textFieldModels.map((textField) => textField.save(this.selectedLanguage))
+    ).then((results) => {
+      if (this.selectedLanguage === '' || this.selectedLanguage === 'default') {
+        this.onReload()
+      } else if (results.length === this.textFieldModels.length) {
+        this.onClose()
+      }
+    }).catch((reason) => {
+      for (const error of reason) {
+        if (error === 401) {
+          this.onUnauthorized()
+        }
+      }
+    })
+  }
+
+  this.deleteTranslation = () => {
+    if (this.selectedLanguage !== '' && this.selectedLanguage !== 'default') {
+      this.onDialog(DIALOG.CONFIRM_DELETE)
+    }
+  }
+
+  // region private
+  $(document).ready(() => this.getLanguages())
+
+  this.getLanguages = () => {
+    $.ajax({
+      url: '../languages',
+      type: 'get',
+      success: (data) => {
+        this.languages = data
+        this.filterLanguages()
+        this.onLanguageList(this.languages)
+        this.reset()
+      }
+    })
+  }
+
+  this.filterLanguages = () => {
+    const specialLanguages = [
+      'zh-CN',
+      'zh-TW',
+      'pt-BR',
+      'pt-PT'
+    ]
+
+    for (const language in this.languages) {
+      if (!specialLanguages.includes(language) && language.length !== 2) {
+        delete this.languages[language]
+      }
+    }
+  }
+
+  this.areChangesSaved = () => {
+    return this.textFieldModels.every(textField => textField.areChangesSaved())
+  }
+
+  self.fetchText = () => {
+    for (const textField of this.textFieldModels) {
+      textField.fetchText(this.selectedLanguage)
+    }
+
+    this.onButtonEnabled(false)
+  }
+  // end region
+}
