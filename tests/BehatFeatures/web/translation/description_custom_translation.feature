@@ -80,29 +80,7 @@ Feature: Projects should have descriptions where a custom translation can be def
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
     When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then the element "#edit-description-text" should not be disabled
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then the element "#edit-description-text" should be disabled
-    And the element "#edit-submit-button" should be disabled
-
-  Scenario: Adding a default description, then changing the language without saving and keeping the unsaved changes
-    Given I log in as "Catrobat"
-    And I go to "/app/project/2"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-program-button"
-    And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
-    When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then I fill in "edit-description-text" with "This is a default description"
-    When I choose "French" from selector "#edit-language-selector"
-    Then I should see "Would you like to keep your current changes?"
-    When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then the element "#edit-description-text" should be disabled
     And I should see "No description available."

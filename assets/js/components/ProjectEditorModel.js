@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
 export const DIALOG = {
   CLOSE_EDITOR: 'close_editor',
@@ -13,9 +14,12 @@ export function ProjectEditorModel (programId, textFieldModels) {
   this.textFieldModels = textFieldModels
 
   this.languages = {}
+  this.definedLanguages = {}
   this.selectedLanguage = ''
-  this.selectedLanguageIndex = 0
-  this.previousLanguageIndex = 0
+  this.selectedLanguageIndex = -1
+  this.previousLanguageIndex = -1
+
+  this.customTranslationApi = new CustomTranslationApi()
 
   this.setOnLanguageList = (onLanguageList) => {
     this.onLanguageList = onLanguageList
@@ -67,7 +71,7 @@ export function ProjectEditorModel (programId, textFieldModels) {
 
   this.show = (language) => {
     if (language === null) {
-      this.selectedLanguage = 'default'
+      this.selectedLanguage = Object.keys(this.languages)[0]
       this.onLanguageSelected(0)
     } else {
       this.selectedLanguage = language
@@ -157,16 +161,17 @@ export function ProjectEditorModel (programId, textFieldModels) {
   $(document).ready(() => this.getLanguages())
 
   this.getLanguages = () => {
-    $.ajax({
-      url: '../languages',
-      type: 'get',
-      success: (data) => {
-        this.languages = data
+    const languagesPromise = $.get('../languages')
+    const definedLanguagesPromise = this.customTranslationApi.getCustomTranslationLanguages(this.programId)
+
+    Promise.all([languagesPromise, definedLanguagesPromise])
+      .then((results) => {
+        this.languages = results[0]
+        this.definedLanguages = results[1]
         this.filterLanguages()
         this.onLanguageList(this.languages)
         this.reset()
-      }
-    })
+      })
   }
 
   this.filterLanguages = () => {
@@ -178,7 +183,8 @@ export function ProjectEditorModel (programId, textFieldModels) {
     ]
 
     for (const language in this.languages) {
-      if (!specialLanguages.includes(language) && language.length !== 2) {
+      if (this.definedLanguages.includes(language) ||
+        (language.length !== 2 && !specialLanguages.includes(language))) {
         delete this.languages[language]
       }
     }

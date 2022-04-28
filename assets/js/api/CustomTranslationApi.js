@@ -54,12 +54,10 @@ export class CustomTranslationApi {
     })
   }
 
-  getCustomTranslationLanguages (programId, successCallback, errorCallback = () => {}) {
-    $.ajax({
+  getCustomTranslationLanguages (programId) {
+    return $.ajax({
       url: '../translate/custom/project/' + programId + '/list',
-      type: 'get',
-      success: successCallback,
-      error: errorCallback
+      type: 'get'
     })
   }
 }
