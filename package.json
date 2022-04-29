@@ -68,7 +68,7 @@
     "@material/switch": "^13.0.0",
     "@material/tab": "^13.0.0",
     "@material/tab-bar": "^13.0.0",
-    "@material/tab-indicator": "^13.0.0",
+    "@material/tab-indicator": "^14.0.0",
     "@material/tab-scroller": "^13.0.0",
     "@material/textfield": "^13.0",
     "@material/top-app-bar": "^13.0",
