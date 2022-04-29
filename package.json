@@ -61,7 +61,7 @@
     "@material/list": "^13.0",
     "@material/menu": "^13.0",
     "@material/menu-surface": "^13.0",
-    "@material/progress-indicator": "^13.0",
+    "@material/progress-indicator": "^14.0",
     "@material/radio": "^13.0",
     "@material/select": "^13.0",
     "@material/snackbar": "^13.0",
