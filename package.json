@@ -58,7 +58,7 @@
     "@material/floating-label": "^13.0.0",
     "@material/form-field": "^13.0",
     "@material/icon-button": "^13.0",
-    "@material/list": "^13.0",
+    "@material/list": "^14.0",
     "@material/menu": "^13.0",
     "@material/menu-surface": "^13.0",
     "@material/progress-indicator": "^13.0",
