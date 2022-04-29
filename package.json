@@ -69,7 +69,7 @@
     "@material/tab": "^13.0.0",
     "@material/tab-bar": "^13.0.0",
     "@material/tab-indicator": "^13.0.0",
-    "@material/tab-scroller": "^13.0.0",
+    "@material/tab-scroller": "^14.0.0",
     "@material/textfield": "^13.0",
     "@material/top-app-bar": "^13.0",
     "@popperjs/core": "^2.11.5",
