@@ -56,7 +56,7 @@
     "@material/chips": "^13.0",
     "@material/circular-progress": "^13.0",
     "@material/floating-label": "^13.0.0",
-    "@material/form-field": "^13.0",
+    "@material/form-field": "^14.0",
     "@material/icon-button": "^13.0",
     "@material/list": "^13.0",
     "@material/menu": "^13.0",
