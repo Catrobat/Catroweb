@@ -145,28 +145,6 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
     }
   }
 
-  this.fetchTextKeepChanges = (language) => {
-    if (this.shouldDisable(language)) {
-      this.setEnabled(false)
-      this.onTextChanged(this.initialText)
-      this.lastSavedText = this.initialText
-    } else if (language === 'default') {
-      this.setEnabled(true)
-      this.lastSavedText = this.initialText
-    } else {
-      this.customTranslationApi.getCustomTranslation(
-        this.programId,
-        language,
-        (data) => {
-          self.lastSavedText = data
-        },
-        () => {
-          self.lastSavedText = ''
-        }
-      )
-    }
-  }
-
   this.areChangesSaved = () => {
     return this.text === this.lastSavedText
   }

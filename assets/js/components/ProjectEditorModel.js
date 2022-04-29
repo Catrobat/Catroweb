@@ -3,7 +3,6 @@ import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
 export const DIALOG = {
   CLOSE_EDITOR: 'close_editor',
-  KEEP_CHANGES: 'keep_changes',
   CONFIRM_DELETE: 'confirm_delete'
 }
 
@@ -16,8 +15,6 @@ export function ProjectEditorModel (programId, textFieldModels) {
   this.languages = {}
   this.definedLanguages = {}
   this.selectedLanguage = ''
-  this.selectedLanguageIndex = -1
-  this.previousLanguageIndex = -1
 
   this.customTranslationApi = new CustomTranslationApi()
 
@@ -49,20 +46,8 @@ export function ProjectEditorModel (programId, textFieldModels) {
     this.onUnauthorized = onUnauthorized
   }
 
-  this.setLanguage = (language, languageIndex) => {
-    if (languageIndex === this.previousLanguageIndex) {
-      return
-    }
-
+  this.setLanguage = (language) => {
     this.selectedLanguage = language
-    this.selectedLanguageIndex = languageIndex
-
-    if (this.areChangesSaved()) {
-      this.previousLanguageIndex = languageIndex
-      this.fetchText()
-    } else {
-      this.onDialog(DIALOG.KEEP_CHANGES)
-    }
   }
 
   this.onInput = () => {
@@ -84,26 +69,6 @@ export function ProjectEditorModel (programId, textFieldModels) {
       this.onClose()
     } else {
       this.onDialog(DIALOG.CLOSE_EDITOR)
-    }
-  }
-
-  this.reset = () => {
-    this.selectedLanguageIndex = 0
-    this.previousLanguageIndex = 0
-  }
-
-  this.keepChangesResult = (result) => {
-    if (result.isConfirmed) {
-      this.previousLanguageIndex = this.selectedLanguageIndex
-      for (const textField of this.textFieldModels) {
-        textField.fetchTextKeepChanges(this.selectedLanguage)
-      }
-    } else if (result.isDenied) {
-      this.previousLanguageIndex = this.selectedLanguageIndex
-      this.fetchText()
-    } else if (result.isDismissed) {
-      this.selectedLanguageIndex = this.previousLanguageIndex
-      this.onLanguageSelected(this.selectedLanguageIndex)
     }
   }
 
@@ -170,7 +135,6 @@ export function ProjectEditorModel (programId, textFieldModels) {
         this.definedLanguages = results[1]
         this.filterLanguages()
         this.onLanguageList(this.languages)
-        this.reset()
       })
   }
 

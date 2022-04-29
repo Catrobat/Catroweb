@@ -20,12 +20,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
     projectDescriptionCredits.data('trans-discard')
   )
 
-  this.keepOrDiscardDialog = new ProgramEditorDialog(
-    projectDescriptionCredits.data('trans-save-on-language-change'),
-    projectDescriptionCredits.data('trans-keep'),
-    projectDescriptionCredits.data('trans-discard')
-  )
-
   this.confirmDeleteDialog = new ProgramEditorDialog(
     projectDescriptionCredits.data('trans-confirm-delete'),
     projectDescriptionCredits.data('trans-cancel'),
@@ -41,7 +35,7 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
       return
     }
 
-    model.setLanguage(this.languageSelect.value, this.languageSelect.selectedIndex)
+    model.setLanguage(this.languageSelect.value)
   })
 
   $('.mdc-text-field__input').on('input', model.onInput)
@@ -88,7 +82,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
 
     this.editTextUI.addClass('d-none')
 
-    model.reset()
     this.navigationCallback()
   }
 
@@ -107,9 +100,6 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
 
   model.setOnDialog((dialog) => {
     switch (dialog) {
-      case DIALOG.KEEP_CHANGES:
-        this.keepOrDiscardDialog.show(model.keepChangesResult)
-        break
       case DIALOG.CLOSE_EDITOR:
         this.closeEditorDialog.show(model.closeEditorResult)
         break
