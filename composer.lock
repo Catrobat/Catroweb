@@ -8131,16 +8131,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v4.4.40",
+            "version": "v4.4.41",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "bdcc66f3140421038f495e5b50e3ca6ffa14c773"
+                "reference": "0e1e62083b20ccb39c2431293de060f756af905c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/bdcc66f3140421038f495e5b50e3ca6ffa14c773",
-                "reference": "bdcc66f3140421038f495e5b50e3ca6ffa14c773",
+                "url": "https://api.github.com/repos/symfony/console/zipball/0e1e62083b20ccb39c2431293de060f756af905c",
+                "reference": "0e1e62083b20ccb39c2431293de060f756af905c",
                 "shasum": ""
             },
             "require": {
@@ -8201,7 +8201,7 @@
             "description": "Eases the creation of beautiful and testable command line interfaces",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/console/tree/v4.4.40"
+                "source": "https://github.com/symfony/console/tree/v4.4.41"
             },
             "funding": [
                 {
@@ -8217,7 +8217,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-03-26T22:12:04+00:00"
+            "time": "2022-04-12T15:19:55+00:00"
         },
         {
             "name": "symfony/debug",
@@ -17702,16 +17702,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "4.22.0",
+            "version": "4.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "fc2c6ab4d5fa5d644d8617089f012f3bb84b8703"
+                "reference": "f1fe6ff483bf325c803df9f510d09a03fd796f88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/fc2c6ab4d5fa5d644d8617089f012f3bb84b8703",
-                "reference": "fc2c6ab4d5fa5d644d8617089f012f3bb84b8703",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/f1fe6ff483bf325c803df9f510d09a03fd796f88",
+                "reference": "f1fe6ff483bf325c803df9f510d09a03fd796f88",
                 "shasum": ""
             },
             "require": {
@@ -17736,6 +17736,7 @@
                 "php": "^7.1|^8",
                 "sebastian/diff": "^3.0 || ^4.0",
                 "symfony/console": "^3.4.17 || ^4.1.6 || ^5.0 || ^6.0",
+                "symfony/polyfill-php80": "^1.25",
                 "webmozart/path-util": "^2.3"
             },
             "provide": {
@@ -17802,9 +17803,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vimeo/psalm/issues",
-                "source": "https://github.com/vimeo/psalm/tree/4.22.0"
+                "source": "https://github.com/vimeo/psalm/tree/4.23.0"
             },
-            "time": "2022-02-24T20:34:05+00:00"
+            "time": "2022-04-28T17:35:49+00:00"
         },
         {
             "name": "vipsoft/doctrine-data-fixtures-extension",
