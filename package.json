@@ -27,7 +27,7 @@
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
     "@symfony/webpack-encore": "^1.8.2",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.7",
     "core-js": "^3.22.2",
     "eslint": "^7.12.0",
     "eslint-config-standard": "^16.0.3",
