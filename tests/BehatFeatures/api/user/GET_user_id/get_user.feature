@@ -36,6 +36,6 @@ Feature: Get user by id
     Then the response status code should be "404"
 
   Scenario: Get user without setting accept header should return 406 status code
-
-    Given I request "GET" "/api/user/2"
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
+    When I request "GET" "/api/user/2"
     Then the response status code should be "406"

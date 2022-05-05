@@ -8,8 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
@@ -63,7 +63,7 @@ class ResetPasswordController extends AbstractController
    *
    * @Route("/reset/{token}", name="app_reset_password")
    */
-  public function reset(Request $request, UserPasswordEncoderInterface $userPasswordEncoder, string $token = null): Response
+  public function reset(Request $request, UserPasswordHasherInterface $user_password_hasher, string $token = null): Response
   {
     if ($token) {
       // We store the token in session and remove it from the URL, to avoid the URL being
@@ -99,9 +99,9 @@ class ResetPasswordController extends AbstractController
       $this->resetPasswordHelper->removeResetRequest($token);
 
       // Encode(hash) the plain password, and set it.
-      $encodedPassword = $userPasswordEncoder->encodePassword($user, $form->get('plainPassword')->getData());
+      $hashedPassword = $user_password_hasher->hashPassword($user, $form->get('plainPassword')->getData());
 
-      $user->setPassword($encodedPassword);
+      $user->setPassword($hashedPassword);
       $this->entityManager->flush();
 
       // The session is cleaned up after the password has been changed.

@@ -54,5 +54,6 @@ Feature: Get project
     Then the response content must be empty
 
   Scenario: Get specific project without accept header
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     And I request "GET" "/api/project/1"
     Then the response status code should be "406"

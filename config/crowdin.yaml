@@ -21,13 +21,13 @@ files: [
     # Source files filter
     # e.g. "/resources/en/*.json"
     #
-    "source": "/translations/catroweb.en.yml",
+    "source": "/translations/catroweb.en.yaml",
 
     #
     # Where translations will be placed
     # e.g. "/resources/%two_letters_code%/%original_file_name%"
     #
-    "translation": "/translations/catroweb.%locale_with_underscore%.yml",
+    "translation": "/translations/catroweb.%locale_with_underscore%.yaml",
 
     #
     # Files or directories for ignore
@@ -39,7 +39,7 @@ files: [
     # The dest allows you to specify a file name in Crowdin
     # e.g. "/messages.json"
     #
-    "dest": "/catroweb/translations/catroweb.en.yml",
+    "dest": "/catroweb/translations/catroweb.en.yaml",
 
     #
     # File type

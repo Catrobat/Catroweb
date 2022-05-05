@@ -1,4 +1,4 @@
-# In this file we can overwrite services an parameters defined in services.yml
+# In this file we can overwrite services an parameters defined in services.yaml
 # Services and parameters defined in this file will only be used in the 'test' environment.
 
 parameters:
@@ -26,8 +26,12 @@ services:
   # default configuration for services in *this* file
   _defaults:
     autowire: true       # Automatically injects dependencies in your services.
-    autoconfigure: false # Automatically registers your services as commands, event subscribers, etc.
+    autoconfigure: true  # Automatically registers your services as commands, event subscribers, etc.
     public: true         # Since we are overriding only public services
+
+  App\System\Testing\Behat\Context\:
+    resource: '../src/System/Testing/Behat/Context/*'
+
 
   #
   #  How To overwrite services?

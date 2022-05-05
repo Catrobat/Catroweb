@@ -19,7 +19,7 @@ class MaintainAdmin extends AbstractAdmin
 
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {
-    //Find the implementation in the Controller-Folder
+    // Find the implementation in the Controller-Folder
     $collection->clearExcept(['list']);
     $collection->add('apk')
       ->add('compressed')

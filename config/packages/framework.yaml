@@ -3,9 +3,7 @@ framework:
     secret:          '%env(APP_SECRET)%'
     default_locale:  '%env(LOCALE)%'
     translator: { fallback: en }
-
-    # uncomment for an API-only website
-    #csrf_protection: false
+    csrf_protection: false
 
     #    # Enables session support. Note that the session will ONLY be started if you read or write from it.
     #    # Remove or comment this section to explicitly disable session support.

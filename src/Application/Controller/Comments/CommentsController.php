@@ -89,8 +89,8 @@ class CommentsController extends AbstractController
       return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
-    $user = $this->get('security.token_storage')->getToken()->getUser();
-
+    /** @var User|null $user */
+    $user = $this->getUser();
     $program = $program_manager->find($_POST['ProgramId']);
 
     $temp_comment = new UserComment();

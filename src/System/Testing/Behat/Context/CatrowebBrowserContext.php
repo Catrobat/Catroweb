@@ -26,6 +26,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * Class CatrowebBrowserContext.
@@ -47,10 +48,11 @@ class CatrowebBrowserContext extends BrowserContext
   // -------------------------------------------------------------------------------------------------------------------
 
   /**
-   * Initializes context with parameters from behat.yml.
+   * Initializes context with parameters from behat.yaml.
    */
-  public function __construct()
+  public function __construct(KernelInterface $kernel)
   {
+    parent::__construct($kernel);
     setlocale(LC_ALL, 'en');
   }
 
@@ -79,9 +81,9 @@ class CatrowebBrowserContext extends BrowserContext
     Assert::assertNotNull($return, 'Oh no!');
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Authentication
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @Given /^I( [^"]*)? log in as "([^"]*)" with the password "([^"]*)"$/
@@ -154,9 +156,9 @@ class CatrowebBrowserContext extends BrowserContext
     $this->iUseTheUserAgent($user_agent);
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Everything -> ToDo CleanUp
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @Given /^I set the cookie "([^"]+)" to "([^"]*)"$/
@@ -473,11 +475,11 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iChangeTheVisibilityOfTheProgram($program_number, $visibility): void
   {
-    ///param program number contains the number of the program position in the list on the admin page
-    ///
+    // /param program number contains the number of the program position in the list on the admin page
+    // /
     $page = $this->getSession()->getPage();
 
-    ///click the visibility button (yes/no)
+    // /click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[10]/span')
       ->click()
@@ -496,11 +498,11 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iChangeTheVisibilityOfTheProgramInTheApproveList($program_number, $visibility): void
   {
-    ///param program number contains the number of the program position in the list on the admin page
-    ///
+    // /param program number contains the number of the program position in the list on the admin page
+    // /
     $page = $this->getSession()->getPage();
 
-    ///click the visibility button (yes/no)
+    // /click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[5]/span')
       ->click()
@@ -519,10 +521,10 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iChangeTheApprovalOfTheProject($program_number, $approved): void
   {
-    ///param program number contains the number of the program position in the list on the admin page
-    ///
+    // /param program number contains the number of the program position in the list on the admin page
+    // /
     $page = $this->getSession()->getPage();
-    ///click the visibility button (yes/no)
+    // /click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[9]/span')
       ->click()
@@ -541,10 +543,10 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iChangeTheApprovalOfTheProjectInApproveList($program_number, $approved): void
   {
-    ///param program number contains the number of the program position in the list on the admin page
-    ///
+    // /param program number contains the number of the program position in the list on the admin page
+    // /
     $page = $this->getSession()->getPage();
-    ///click the visibility button (yes/no)
+    // /click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[6]/span')
       ->click()
@@ -563,15 +565,15 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iChangeTheFlavorOfTheProject($program_number, $flavor): void
   {
-    ///param program number contains the number of the program position in the list on the admin page
+    // /param program number contains the number of the program position in the list on the admin page
 
     $page = $this->getSession()->getPage();
-    ///click the visibility button (yes/no)
+    // /click the visibility button (yes/no)
     $page
       ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/span')
       ->click()
     ;
-    //click the input on the popup to show yes or no option
+    // click the input on the popup to show yes or no option
     $page
       ->find('css', '.editable-input')
       ->click()
@@ -630,7 +632,7 @@ class CatrowebBrowserContext extends BrowserContext
         throw new Exception('Wrong flavor');
     }
 
-    //click button to confirm the selection
+    // click button to confirm the selection
     $page
       ->find('css', 'button.btn-sm:nth-child(1)')
       ->click()
@@ -1223,7 +1225,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function theTokenToUploadAnApkFileIs(): void
   {
-    // Defined in config_test.yml
+    // Defined in config_test.yaml
   }
 
   /**
@@ -1231,7 +1233,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function theJenkinsJobIdIs(): void
   {
-    // Defined in config_test.yml
+    // Defined in config_test.yaml
   }
 
   /**
@@ -1239,7 +1241,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function theJenkinsTokenIs(): void
   {
-    // Defined in config_test.yml
+    // Defined in config_test.yaml
   }
 
   /**
@@ -1299,7 +1301,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function itWillBeStoredOnTheServer(): void
   {
-    $directory = $this->getSymfonyParameter('catrobat.apk.dir');
+    $directory = $this->getSymfonyParameterAsString('catrobat.apk.dir');
     $finder = new Finder();
     $finder->in($directory)->depth(0);
     Assert::assertEquals(1, $finder->count());
@@ -1882,9 +1884,9 @@ class CatrowebBrowserContext extends BrowserContext
     }
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  User Agent
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   protected function iUseTheUserAgent(string $user_agent): void
   {
@@ -1926,13 +1928,13 @@ class CatrowebBrowserContext extends BrowserContext
   protected function iSelectTheOptionInThePopup($option): void
   {
     $page = $this->getSession()->getPage();
-    //click the input on the popup to show yes or no option
+    // click the input on the popup to show yes or no option
     $page
       ->find('css', '.editable-input')
       ->click()
   ;
 
-    //click yes or no option
+    // click yes or no option
     if ('yes' == $option) {
       $page
         ->find('css', 'select.form-control > option:nth-child(2)')
@@ -1944,7 +1946,7 @@ class CatrowebBrowserContext extends BrowserContext
         ->click()
     ;
     }
-    //click button to confirm the selection
+    // click button to confirm the selection
     $page
       ->find('css', 'button.btn-sm:nth-child(1)')
       ->click()

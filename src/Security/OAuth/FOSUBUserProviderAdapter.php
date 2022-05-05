@@ -30,7 +30,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
     if (!$user instanceof User) {
       throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', get_class($user)));
     }
-    //retrieve access token and the ID
+    // retrieve access token and the ID
     $property = $this->getProperty($response);
     $username = $response->getUsername();
     $service = $response->getResourceOwner()->getName();
@@ -40,13 +40,13 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
     $setter_access_token = $setter_name.'AccessToken';
     $access_token = $response->getAccessToken();
 
-    //Disconnect previous user
+    // Disconnect previous user
     if (null !== $previousUser = $this->user_manager->findOneBy([$property => $username])) {
       $previousUser->{$setter_id}(null);
       $previousUser->{$setter_access_token}(null);
       $this->user_manager->updateUser($user);
     }
-    //username is a unique integer
+    // username is a unique integer
     $user->{$setter_id}($username);
     $user->{$setter_access_token}($access_token);
     $this->user_manager->updateUser($user);
@@ -61,19 +61,19 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
 
     $user = $this->user_manager->findOneBy([$this->getProperty($response) => $username]);
     $service = $response->getResourceOwner()->getName();
-    //make setter and getter names dynamic so we can use it for more services (Facebook, Google, Github)
+    // make setter and getter names dynamic so we can use it for more services (Facebook, Google, Github)
     $setter_name = 'set'.ucfirst($service);
     $setter_id = $setter_name.'Id';
     $setter_access_token = $setter_name.'AccessToken';
     $access_token = $response->getAccessToken();
-    //register new user
+    // register new user
     if (null === $user) {
       $user = $this->user_manager->findUserByEmail($response->getEmail());
-      //if user with the given email doesnt exists create a new user
+      // if user with the given email doesnt exists create a new user
       if (null === $user) {
         /** @var User $user */
         $user = $this->user_manager->create();
-        //generate random username for example user12345678, needs to be discussed
+        // generate random username for example user12345678, needs to be discussed
         $user->setUsername($this->createRandomUsername($response));
         $user->setEmail($response->getEmail());
         $user->setEnabled(true);
@@ -87,7 +87,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
       return $user;
     }
 
-    //update access token
+    // update access token
     $user->{$setter_access_token}($access_token);
 
     return $user;

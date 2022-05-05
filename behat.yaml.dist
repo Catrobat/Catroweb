@@ -14,9 +14,10 @@ default:
 #
     extensions:
 
-        Behat\Symfony2Extension:
+        FriendsOfBehat\SymfonyExtension:
             kernel:
-                bootstrap: config/bootstrap_test.php
+                # bootstrap: config/bootstrap_test.php
+                environment: test
                 class: App\Kernel
 
         DMore\ChromeExtension\Behat\ServiceContainer\ChromeExtension: ~

@@ -186,7 +186,7 @@ class Constants
   public const USER_DEFINED_BRICK = 'UserDefinedBrick';
   public const USER_DEFINED_RECEIVER_BRICK = 'UserDefinedReceiverBrick';
 
-  //Your Scripts
+  // Your Scripts
   public const USER_DEFINED_SCRIPT = 'UserDefinedScript';
 
   // Embroidery

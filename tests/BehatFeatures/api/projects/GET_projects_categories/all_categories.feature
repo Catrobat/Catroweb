@@ -30,6 +30,7 @@ Feature: Get projects oversight
     Then the response status code should be "200"
     And the response should contain all categories
 
-  Scenario: Get response without language header
+  Scenario: Get response without accept
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     And I request "GET" "/api/projects/categories"
     Then the response status code should be "406"

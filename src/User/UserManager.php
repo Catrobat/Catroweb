@@ -21,8 +21,7 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Sonata\UserBundle\Model\UserInterface;
 use Sonata\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\UrlHelper;
-use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @psalm-suppress InvalidExtendClass
@@ -35,14 +34,10 @@ class UserManager implements UserManagerInterface
   protected TransformedFinder $user_finder;
   protected UrlHelper $url_helper;
   protected UserRepository $user_repository;
-
-  /**
-   * TODO: Adapt once support for Symfony 4.4 is dropped -> UserPasswordHasherInterface.
-   */
-  protected UserPasswordEncoderInterface $userPasswordHasher;
+  protected UserPasswordHasherInterface $userPasswordHasher;
 
   public function __construct(CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                              UserPasswordEncoderInterface $userPasswordHasher,
+                              UserPasswordHasherInterface $userPasswordHasher,
                               EntityManagerInterface $entity_manager,
                               TransformedFinder $user_finder,
                               ProgramManager $program_manager,
@@ -75,9 +70,9 @@ class UserManager implements UserManagerInterface
     }
   }
 
-  public function isPasswordValid(UserInterface $user, string $password, PasswordEncoderInterface $encoder): bool
+  public function isPasswordValid(UserInterface $user, string $password): bool
   {
-    return $encoder->isPasswordValid($user->getPassword(), $password, $user->getSalt());
+    return $this->userPasswordHasher->isPasswordValid($user, $password);
   }
 
   public function getMappedUserData(array $raw_user_data): array
@@ -214,9 +209,7 @@ class UserManager implements UserManagerInterface
       return;
     }
 
-    // TODO: Adapt once support for Symfony 4.4 is dropped -> UserPasswordHasherInterface
-    // $password = $this->userPasswordHasher->hashPassword($user, $plainPassword);
-    $password = $this->userPasswordHasher->encodePassword($user, $plainPassword);
+    $password = $this->userPasswordHasher->hashPassword($user, $plainPassword);
 
     $user->setPassword($password);
     $user->eraseCredentials();
@@ -258,6 +251,9 @@ class UserManager implements UserManagerInterface
     return User::class;
   }
 
+  /**
+   * @deprecated without replacement
+   */
   public function getTableName()
   {
     @trigger_error(sprintf(

@@ -40,7 +40,6 @@ use App\System\Testing\DataFixtures\UserDataFixtures;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use Behat\Behat\Tester\Exception\PendingException;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
@@ -55,7 +54,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\Router;
 
 /**
- * Trait SymfonySupport.
+ * Trait ContextTrait.
  *
  * Php only supports single inheritance, therefore we can't extend all our Context Classes from the same BaseContext.
  * Some Context Classes must extend the (Mink)BrowserContext. That's why we use this trait in all our Context
@@ -64,150 +63,147 @@ use Symfony\Component\Routing\Router;
  * A trait is basically just a copy & paste and therefore every context uses its own instances.
  * Since some variables must exist only once, we have to set them to static members. (E.g. kernel_browser)
  */
-trait SymfonySupport
+trait ContextTrait
 {
-  use KernelDictionary;
+  private KernelInterface $kernel;
 
   public string $ERROR_DIR;
-
   public string $FIXTURES_DIR;
-
   public string $SCREENSHOT_DIR;
-
   public string $MEDIA_PACKAGE_DIR = './tests/TestData/DataFixtures/MediaPackage/';
-
   public string $EXTRACT_RESOURCES_DIR;
 
-  /**
-   * @override
-   * Sets Kernel instance.
-   */
-  public function setKernel(KernelInterface $kernel): void
+  public function __construct(KernelInterface $kernel)
   {
     $this->kernel = $kernel;
-    $this->ERROR_DIR = $this->getSymfonyParameter('catrobat.testreports.behat');
-    $this->SCREENSHOT_DIR = $this->getSymfonyParameter('catrobat.testreports.screenshot');
-    $this->FIXTURES_DIR = $this->getSymfonyParameter('catrobat.test.directory.source');
+    $this->ERROR_DIR = $this->getSymfonyParameterAsString('catrobat.testreports.behat');
+    $this->SCREENSHOT_DIR = $this->getSymfonyParameterAsString('catrobat.testreports.screenshot');
+    $this->FIXTURES_DIR = $this->getSymfonyParameterAsString('catrobat.test.directory.source');
     $this->MEDIA_PACKAGE_DIR = $this->FIXTURES_DIR.'MediaPackage/';
-    $this->EXTRACT_RESOURCES_DIR = $this->getSymfonyParameter('catrobat.file.extract.dir');
+    $this->EXTRACT_RESOURCES_DIR = strval($this->getSymfonyParameterAsString('catrobat.file.extract.dir'));
   }
 
-  public function getUserManager(): UserManager
+  public function getKernel(): KernelInterface
+  {
+    return $this->kernel;
+  }
+
+  public function getUserManager(): ?UserManager
   {
     return $this->kernel->getContainer()->get(UserManager::class);
   }
 
-  public function getUserDataFixtures(): UserDataFixtures
+  public function getUserDataFixtures(): ?UserDataFixtures
   {
     return $this->kernel->getContainer()->get(UserDataFixtures::class);
   }
 
-  public function getProgramManager(): ProgramManager
+  public function getProgramManager(): ?ProgramManager
   {
     return $this->kernel->getContainer()->get(ProgramManager::class);
   }
 
-  public function getProjectDataFixtures(): ProjectDataFixtures
+  public function getProjectDataFixtures(): ?ProjectDataFixtures
   {
     return $this->kernel->getContainer()->get(ProjectDataFixtures::class);
   }
 
-  public function getJwtManager(): JWTManager
+  public function getJwtManager(): ?JWTManager
   {
     return $this->kernel->getContainer()->get('lexik_jwt_authentication.jwt_manager');
   }
 
-  public function getJwtEncoder(): JWTEncoderInterface
+  public function getJwtEncoder(): ?JWTEncoderInterface
   {
     return $this->kernel->getContainer()->get('lexik_jwt_authentication.encoder');
   }
 
-  public function getTagRepository(): TagRepository
+  public function getTagRepository(): ?TagRepository
   {
     return $this->kernel->getContainer()->get(TagRepository::class);
   }
 
-  public function getExtensionRepository(): ExtensionRepository
+  public function getExtensionRepository(): ?ExtensionRepository
   {
     return $this->kernel->getContainer()->get(ExtensionRepository::class);
   }
 
-  public function getProgramRemixForwardRepository(): ProgramRemixRepository
+  public function getProgramRemixForwardRepository(): ?ProgramRemixRepository
   {
     return $this->kernel->getContainer()->get(ProgramRemixRepository::class);
   }
 
-  public function getProgramRemixBackwardRepository(): ProgramRemixBackwardRepository
+  public function getProgramRemixBackwardRepository(): ?ProgramRemixBackwardRepository
   {
     return $this->kernel->getContainer()->get(ProgramRemixBackwardRepository::class);
   }
 
-  public function getScratchProgramRepository(): ScratchProgramRepository
+  public function getScratchProgramRepository(): ?ScratchProgramRepository
   {
     return $this->kernel->getContainer()->get(ScratchProgramRepository::class);
   }
 
-  public function getScratchProgramRemixRepository(): ScratchProgramRemixRepository
+  public function getScratchProgramRemixRepository(): ?ScratchProgramRemixRepository
   {
     return $this->kernel->getContainer()->get(ScratchProgramRemixRepository::class);
   }
 
-  public function getFileRepository(): ProgramFileRepository
+  public function getFileRepository(): ?ProgramFileRepository
   {
     return $this->kernel->getContainer()->get(ProgramFileRepository::class);
   }
 
-  public function getExtractedFileRepository(): ExtractedFileRepository
+  public function getExtractedFileRepository(): ?ExtractedFileRepository
   {
     return $this->kernel->getContainer()->get(ExtractedFileRepository::class);
   }
 
-  public function getMediaPackageFileRepository(): MediaPackageFileRepository
+  public function getMediaPackageFileRepository(): ?MediaPackageFileRepository
   {
     return $this->kernel->getContainer()->get(MediaPackageFileRepository::class);
   }
 
-  public function getUserLikeSimilarityRelationRepository(): UserLikeSimilarityRelationRepository
+  public function getUserLikeSimilarityRelationRepository(): ?UserLikeSimilarityRelationRepository
   {
     return $this->kernel->getContainer()->get(UserLikeSimilarityRelationRepository::class);
   }
 
-  public function getUserRemixSimilarityRelationRepository(): UserRemixSimilarityRelationRepository
+  public function getUserRemixSimilarityRelationRepository(): ?UserRemixSimilarityRelationRepository
   {
     return $this->kernel->getContainer()->get(UserRemixSimilarityRelationRepository::class);
   }
 
-  public function getCatroNotificationRepository(): NotificationRepository
+  public function getCatroNotificationRepository(): ?NotificationRepository
   {
     return $this->kernel->getContainer()->get(NotificationRepository::class);
   }
 
-  public function getFlavorRepository(): FlavorRepository
+  public function getFlavorRepository(): ?FlavorRepository
   {
     return $this->kernel->getContainer()->get(FlavorRepository::class);
   }
 
-  public function getManager(): EntityManagerInterface
+  public function getManager(): ?EntityManagerInterface
   {
     return $this->kernel->getContainer()->get('doctrine')->getManager();
   }
 
-  public function getRouter(): Router
+  public function getRouter(): ?Router
   {
     return $this->kernel->getContainer()->get('router');
   }
 
-  public function getAchievementManager(): AchievementManager
+  public function getAchievementManager(): ?AchievementManager
   {
     return $this->kernel->getContainer()->get(AchievementManager::class);
   }
 
-  public function getCronJobRepository(): CronJobRepository
+  public function getCronJobRepository(): ?CronJobRepository
   {
     return $this->kernel->getContainer()->get(CronJobRepository::class);
   }
 
-  public function getStudioManager(): StudioManager
+  public function getStudioManager(): ?StudioManager
   {
     return $this->kernel->getContainer()->get(StudioManager::class);
   }
@@ -220,9 +216,17 @@ trait SymfonySupport
     return $this->kernel->getContainer()->getParameter($param);
   }
 
-  public function getSymfonyService(string $service_name): object
+  public function getSymfonyParameterAsString(string $param): string
   {
-    return $this->kernel->getContainer()->get($service_name);
+    return strval($this->kernel->getContainer()->getParameter($param));
+  }
+
+  /**
+   * @throws Exception
+   */
+  public function getSymfonyService(string $service_class): ?object
+  {
+    return $this->kernel->getContainer()->get($service_class);
   }
 
   public function getDefaultProgramFile(): string

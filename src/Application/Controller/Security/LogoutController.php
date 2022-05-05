@@ -7,9 +7,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class LogoutController extends AbstractController
 {
+  protected TokenStorageInterface $token_storage;
+
+  public function __construct(TokenStorageInterface $token_storage)
+  {
+    $this->token_storage = $token_storage;
+  }
+
   /**
    * @Route("/logout", name="logout")
    */
@@ -17,7 +25,7 @@ class LogoutController extends AbstractController
   {
     CookieService::clearCookie('BEARER');
     CookieService::clearCookie('REFRESH_TOKEN');
-    $this->get('security.token_storage')->setToken();
+    $this->token_storage->setToken();
     $request->getSession()->invalidate();
 
     return $this->redirect($this->generateUrl('index'));

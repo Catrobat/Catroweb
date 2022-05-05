@@ -66,12 +66,12 @@ services:
     #
     #   Here one can bind variable names to specific parameters or services. This allows dependency injection
     #   of specific strings or classes. E.g $kernel_root_dir used as parameter in an constructor signals the
-    #   dependency service that the "kernel.root_dir" parameter string must be injected.
+    #   dependency service that the "kernel.project_dir" parameter string must be injected.
     #
     #   It is also possible to inject the ParameterBagInterface with which one has easy access to all defined parameters
     #
     bind:
-      $kernel_root_dir: "%kernel.root_dir%"
+      $kernel_root_dir: "%kernel.project_dir%"
       $catrobat_translation_dir: "%catrobat.translations.dir%"
       $catrobat_file_storage_dir: "%catrobat.file.storage.dir%"
       $catrobat_file_extract_dir: "%catrobat.file.extract.dir%"
