@@ -27,7 +27,7 @@ class CommentsController extends AbstractController
   {
     $user = $this->getUser();
     if (null === $user) {
-      return new Response(Response::HTTP_UNAUTHORIZED);
+      return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -40,7 +40,7 @@ class CommentsController extends AbstractController
     $comment->setIsReported(true);
     $em->flush();
 
-    return new Response(Response::HTTP_OK);
+    return new Response('', Response::HTTP_OK);
   }
 
   /**
@@ -53,7 +53,7 @@ class CommentsController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (!$user) {
-      return new Response(Response::HTTP_UNAUTHORIZED);
+      return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
     $em = $this->getDoctrine()->getManager();
@@ -69,13 +69,13 @@ class CommentsController extends AbstractController
     }
 
     if ($user->getId() !== $comment_user_id && !$this->isGranted('ROLE_ADMIN')) {
-      return new Response(Response::HTTP_FORBIDDEN);
+      return new Response('', Response::HTTP_FORBIDDEN);
     }
 
     $em->remove($comment);
     $em->flush();
 
-    return new Response(Response::HTTP_OK);
+    return new Response('', Response::HTTP_OK);
   }
 
   /**
@@ -86,7 +86,7 @@ class CommentsController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (null === $user) {
-      return new Response(Response::HTTP_UNAUTHORIZED);
+      return new Response('', Response::HTTP_UNAUTHORIZED);
     }
 
     $user = $this->get('security.token_storage')->getToken()->getUser();
@@ -118,7 +118,7 @@ class CommentsController extends AbstractController
       $em->flush();
     }
 
-    return new Response(Response::HTTP_OK);
+    return new Response('', Response::HTTP_OK);
   }
 
   /**
@@ -138,7 +138,8 @@ class CommentsController extends AbstractController
     }
 
     $source_language = $request->query->get('source_language');
-    $target_language = $request->query->get('target_language');
+    $source_language = is_null($source_language) ? $source_language : (string) $source_language;
+    $target_language = (string) $request->query->get('target_language');
 
     if ($source_language === $target_language) {
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);

@@ -6,8 +6,10 @@ use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Sonata\AdminBundle\Bridge\Exporter\AdminExporter;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 
@@ -27,7 +29,10 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
     $this->kernel = $kernel;
   }
 
-  public function listAction(): Response
+  /**
+   * {@inheritdoc}
+   */
+  public function listAction(Request $request): Response
   {
     if (self::TYPE_PROJECT === $this->type) {
       $entity = ProjectMachineTranslation::class;
@@ -39,27 +44,56 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
       return new RedirectResponse($this->admin->generateUrl('list'));
     }
 
+    $this->assertObjectExists($request);
+
+    $this->admin->checkAccess('list');
+
+    $preResponse = $this->preList($request);
+    if (null !== $preResponse) {
+      return $preResponse;
+    }
+
+    $listMode = $request->query->get('_list_mode');
+    if (\is_string($listMode)) {
+      $this->admin->setListMode($listMode);
+    }
+
+    $datagrid = $this->admin->getDatagrid();
+    $formView = $datagrid->getForm()->createView();
+
+    // set the theme for the current Admin Form
+    $this->setFormTheme($formView, $this->admin->getFilterTheme());
+
+    if ($this->container->has('sonata.admin.admin_exporter')) {
+      $exporter = $this->container->get('sonata.admin.admin_exporter');
+      \assert($exporter instanceof AdminExporter);
+      $exportFormats = $exporter->getAvailableFormats($this->admin);
+    }
+
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->select('e.provider')
       ->addSelect('SUM(e.usage_per_month) as usage')
       ->from($entity, 'e')
       ->groupBy('e.provider')
-      ;
+    ;
     $provider_breakdown = $qb->getQuery()->getResult();
 
     return $this->renderWithExtraParams('Admin/Translation/admin_machine_translation.html.twig', [
       'action' => 'list',
       'trimUrl' => $this->admin->generateUrl('trim'),
       'providerBreakdown' => $provider_breakdown,
+      'form' => $formView,
+      'datagrid' => $datagrid,
+      'csrf_token' => $this->getCsrfToken('sonata.batch'),
+      'export_formats' => $exportFormats ?? $this->admin->getExportFormats(),
     ]);
   }
 
-  public function trimAction(): Response
+  public function trimAction(Request $request): Response
   {
     // TODO check permission
 
-    $request = $this->getRequest();
-    $days = $request->get('days');
+    $days = (string) $request->query->get('days');
 
     if (3 < strlen($days) || !ctype_digit($days) || 1 > $days) {
       $this->addFlash('sonata_flash_error', 'Days must be greater than 1');

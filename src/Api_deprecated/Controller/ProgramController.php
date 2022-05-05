@@ -30,12 +30,12 @@ class ProgramController extends AbstractController
   public function showProgramAction(Request $request, ProgramManager $program_manager)
   {
     /** @var ProgramManager $program_manager */
-    $id = $request->get('id', 0);
+    $id = (string) $request->query->get('id', '0');
 
     $programs = [];
     $program = $program_manager->find($id);
     if (null === $program) {
-      return JsonResponse::create(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
+      return new JsonResponse(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }
 
     $numbOfTotalProjects = 1;
@@ -78,7 +78,7 @@ class ProgramController extends AbstractController
       }
     }
 
-    return JsonResponse::create($data);
+    return new JsonResponse($data);
   }
 
   /**
@@ -114,6 +114,6 @@ class ProgramController extends AbstractController
       );
     }
 
-    return JsonResponse::create($data);
+    return new JsonResponse($data);
   }
 }

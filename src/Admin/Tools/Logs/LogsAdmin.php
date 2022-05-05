@@ -3,21 +3,21 @@
 namespace App\Admin\Tools\Logs;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class LogsAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'logs';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'logs';
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);
   }

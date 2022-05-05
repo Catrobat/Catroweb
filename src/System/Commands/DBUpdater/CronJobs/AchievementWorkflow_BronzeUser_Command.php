@@ -52,7 +52,7 @@ class AchievementWorkflow_BronzeUser_Command extends Command
     $user_id_list = array_values(array_diff($user_ID_list, $excluded_user_id_list));
 
     foreach ($user_id_list as $user_id) {
-      /* @var User|null $user */
+      /** @var User|null $user */
       $user = $this->user_manager->find($user_id);
       if (!is_null($user)) {
         try {

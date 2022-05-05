@@ -60,7 +60,7 @@ class AchievementsController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (is_null($user)) {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+      return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
 
     return new JsonResponse([
@@ -77,7 +77,7 @@ class AchievementsController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (is_null($user)) {
-      return JsonResponse::create(null, Response::HTTP_UNAUTHORIZED);
+      return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
 
     try {

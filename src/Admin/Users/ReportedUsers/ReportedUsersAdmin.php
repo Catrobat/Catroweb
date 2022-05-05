@@ -7,18 +7,18 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class ReportedUsersAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_reported_users';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'reported_users';
 
@@ -32,7 +32,7 @@ class ReportedUsersAdmin extends AbstractAdmin
     $rootAlias = $qb->getRootAliases()[0];
     $parameters = $this->getFilterParameters();
 
-    if ('getReportedCommentsCount' === $parameters['_sort_by']) {
+    if (isset($parameters['_sort_by']) && 'getReportedCommentsCount' === $parameters['_sort_by']) {
       $qb
         ->leftJoin('App\DB\Entity\User\Comment\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
         ->leftJoin('App\DB\Entity\Project\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
@@ -41,7 +41,7 @@ class ReportedUsersAdmin extends AbstractAdmin
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(user_comment.user )', $parameters['_sort_order'])
           ;
-    } elseif ('getProgramInappropriateReportsCount' === $parameters['_sort_by']) {
+    } elseif (isset($parameters['_sort_by']) && 'getProgramInappropriateReportsCount' === $parameters['_sort_by']) {
       $qb
         ->leftJoin('App\DB\Entity\User\Comment\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
         ->leftJoin('App\DB\Entity\Project\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
@@ -68,7 +68,7 @@ class ReportedUsersAdmin extends AbstractAdmin
       ->add('id')
       ->add('username')
       ->add('email')
-      ->add('_action', 'actions', ['actions' => [
+      ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'createUrlComments' => ['template' => 'Admin/CRUD/list__action_create_url_comments.html.twig'],
         'createUrlPrograms' => ['template' => 'Admin/CRUD/list__action_create_url_programs.html.twig'],
       ]])
@@ -94,7 +94,7 @@ class ReportedUsersAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -107,7 +107,7 @@ class ReportedUsersAdmin extends AbstractAdmin
       ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete');
     $collection->add('createUrlComments');

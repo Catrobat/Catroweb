@@ -15,7 +15,7 @@ class OverwriteController extends AbstractController
     $this->projectsApi = $projectsApi;
   }
 
-  public function projectIdCatrobatGetAction(string $id)
+  public function projectIdCatrobatGetAction(string $id): ?Response
   {
     $responseCode = 200;
     $responseHeaders = [];

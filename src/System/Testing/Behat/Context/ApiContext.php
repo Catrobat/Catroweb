@@ -3000,64 +3000,64 @@ class ApiContext implements KernelAwareContext
   private function checkProjectFieldsValue(array $program, string $key): bool
   {
     $fields = [
-      'id' => function ($id) {
+      'id' => function ($id): void {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'name' => function ($name) {
+      'name' => function ($name): void {
         Assert::assertIsString($name);
       },
-      'author' => function ($author) {
+      'author' => function ($author): void {
         Assert::assertIsString($author);
       },
-      'description' => function ($description) {
+      'description' => function ($description): void {
         Assert::assertIsString($description);
       },
-      'version' => function ($version) {
+      'version' => function ($version): void {
         Assert::assertIsString($version);
         Assert::assertMatchesRegularExpression('/[0-9]\\.[0-9]\\.[0-9]/', $version);
       },
-      'views' => function ($views) {
+      'views' => function ($views): void {
         Assert::assertIsInt($views);
       },
-      'download' => function ($download) {
+      'download' => function ($download): void {
         Assert::assertIsInt($download);
       },
-      'private' => function ($private) {
+      'private' => function ($private): void {
         Assert::assertIsBool($private);
       },
-      'flavor' => function ($flavor) {
+      'flavor' => function ($flavor): void {
         Assert::assertIsString($flavor);
       },
-      'tags' => function ($tags) {
+      'tags' => function ($tags): void {
         Assert::assertIsArray($tags, 'Tags is not an array!');
       },
-      'uploaded' => function ($uploaded) {
+      'uploaded' => function ($uploaded): void {
         Assert::assertIsInt($uploaded);
       },
-      'uploaded_string' => function ($uploaded_string) {
+      'uploaded_string' => function ($uploaded_string): void {
         Assert::assertIsString($uploaded_string);
       },
-      'screenshot_large' => function ($screenshot_large) {
+      'screenshot_large' => function ($screenshot_large): void {
         Assert::assertIsString($screenshot_large);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/screenshots\/screen_[0-9]+)|(images\\/default\\/screenshot))\\.png/',
           $screenshot_large);
       },
-      'screenshot_small' => function ($screenshot_small) {
+      'screenshot_small' => function ($screenshot_small): void {
         Assert::assertIsString($screenshot_small);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/((resources_test\\/thumbnails\/screen_[0-9]+)|(images\\/default\\/thumbnail))\\.png/',
           $screenshot_small);
       },
-      'project_url' => function ($project_url) {
+      'project_url' => function ($project_url): void {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/app\\/project\\/[a-zA-Z0-9-]+/', $project_url);
       },
-      'download_url' => function ($download_url) {
+      'download_url' => function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression('/http:\\/\\/localhost\\/api\\/project\\/([a-zA-Z0-9-]+)\\/catrobat/',
           $download_url);
       },
-      'filesize' => function ($filesize) {
+      'filesize' => function ($filesize): void {
         Assert::assertEquals(is_float($filesize) || is_int($filesize), true);
       },
     ];
@@ -3071,29 +3071,29 @@ class ApiContext implements KernelAwareContext
   private function checkFeaturedProjectFieldsValue(array $program, string $key): bool
   {
     $fields = [
-      'id' => function ($id) {
+      'id' => function ($id): void {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'name' => function ($name) {
+      'name' => function ($name): void {
         Assert::assertIsString($name);
       },
-      'author' => function ($author) {
+      'author' => function ($author): void {
         Assert::assertIsString($author);
       },
-      'project_id' => function ($project_id) {
+      'project_id' => function ($project_id): void {
         Assert::assertIsString($project_id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $project_id, 'project_id');
       },
-      'project_url' => function ($project_url) {
+      'project_url' => function ($project_url): void {
         Assert::assertIsString($project_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/project\/[a-zA-Z0-9-]+$/', $project_url);
       },
-      'url' => function ($url) {
+      'url' => function ($url): void {
         Assert::assertIsString($url);
         Assert::assertNotFalse(filter_var($url, FILTER_VALIDATE_URL));
       },
-      'featured_image' => function ($featured_image) {
+      'featured_image' => function ($featured_image): void {
         Assert::assertIsString($featured_image);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/resources_test\/featured\/featured_[0-9]+\.(jpg|png)/',
           $featured_image);
@@ -3109,28 +3109,28 @@ class ApiContext implements KernelAwareContext
   private function checkMediaFileFieldsValue(array $program, string $key): bool
   {
     $fields = [
-      'id' => function ($id) {
+      'id' => function ($id): void {
         Assert::assertIsInt($id);
       },
-      'name' => function ($name) {
+      'name' => function ($name): void {
         Assert::assertIsString($name);
       },
-      'flavor' => function ($flavor) {
+      'flavor' => function ($flavor): void {
         Assert::assertIsString($flavor);
       },
-      'package' => function ($package) {
+      'package' => function ($package): void {
         Assert::assertIsString($package);
       },
-      'category' => function ($category) {
+      'category' => function ($category): void {
         Assert::assertIsString($category);
       },
-      'author' => function ($author) {
+      'author' => function ($author): void {
         Assert::assertIsString($author);
       },
-      'extension' => function ($extension) {
+      'extension' => function ($extension): void {
         Assert::assertIsString($extension);
       },
-      'download_url' => function ($download_url) {
+      'download_url' => function ($download_url): void {
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
           $download_url, 'download_url');
@@ -3146,23 +3146,23 @@ class ApiContext implements KernelAwareContext
   private function checkUserFieldsValue(array $user, string $key): bool
   {
     $fields = [
-      'id' => function ($id) {
+      'id' => function ($id): void {
         Assert::assertIsString($id);
         Assert::assertMatchesRegularExpression('/^[a-zA-Z0-9-]+$/', $id, 'id');
       },
-      'username' => function ($username) {
+      'username' => function ($username): void {
         Assert::assertIsString($username);
       },
-      'email' => function ($email) {
+      'email' => function ($email): void {
         Assert::assertIsString($email);
       },
-      'projects' => function ($projects) {
+      'projects' => function ($projects): void {
         Assert::assertIsInt($projects);
       },
-      'followers' => function ($followers) {
+      'followers' => function ($followers): void {
         Assert::assertIsInt($followers);
       },
-      'following' => function ($following) {
+      'following' => function ($following): void {
         Assert::assertIsInt($following);
       },
     ];
@@ -3176,7 +3176,7 @@ class ApiContext implements KernelAwareContext
   private function checkSurveyFieldsValue(array $user, string $key): bool
   {
     $fields = [
-      'url' => function ($username) {
+      'url' => function ($username): void {
         Assert::assertIsString($username);
       },
     ];

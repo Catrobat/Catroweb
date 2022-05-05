@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Admin\Tools\Logs;
+namespace App\Admin\Tools\Logs\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
@@ -24,7 +24,7 @@ class DownloadLogController extends AbstractController
     if (is_null($user) || !$user->hasRole('ROLE_SUPER_ADMIN')) {
       throw new AuthenticationException();
     }
-    $fileName = $request->get('file');
+    $fileName = (string) $request->request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();
     if (($finder->files()->in($path)->depth('>= 1')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults())) {

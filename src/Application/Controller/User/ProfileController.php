@@ -78,7 +78,6 @@ class ProfileController extends AbstractController
       'profile' => $user,
       'program_count' => $program_count,
       'firstMail' => $user->getEmail(),
-      'oauth_user' => $user->getGplusUid(),
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,
       'username' => $user->getUsername(),
@@ -99,27 +98,27 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('login');
     }
 
-    $old_password = $request->request->get('oldPassword');
+    $old_password = (string) $request->request->get('oldPassword');
 
     $encoder = $factory->getEncoder($user);
     $bool = true;
-    if (null !== $old_password) {
+    if ('' !== $old_password) {
       $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
     }
 
     if (!$bool && ($user->isOauthPasswordCreated() || !$user->isOauthUser())) {
-      return JsonResponse::create([
+      return new JsonResponse([
         'statusCode' => Response::HTTP_UNAUTHORIZED,
       ]);
     }
 
-    $newPassword = $request->request->get('newPassword');
-    $repeatPassword = $request->request->get('repeatPassword');
+    $newPassword = (string) $request->request->get('newPassword');
+    $repeatPassword = (string) $request->request->get('repeatPassword');
 
     try {
       $this->validateUserPassword($newPassword, $repeatPassword);
     } catch (Exception $exception) {
-      return JsonResponse::create([
+      return new JsonResponse([
         'statusCode' => $exception->getCode(),
       ]);
     }
@@ -130,9 +129,10 @@ class ProfileController extends AbstractController
     if ($user->isOauthUser()) {
       $user->setOauthPasswordCreated(true);
     }
+
     $user_manager->updateUser($user);
 
-    return JsonResponse::create([
+    return new JsonResponse([
       'statusCode' => Response::HTTP_OK,
       'saved_password' => 'supertoll',
     ]);
@@ -149,20 +149,20 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('login');
     }
 
-    $firstMail = $request->request->get('firstEmail');
+    $firstMail = strval($request->request->get('firstEmail'));
 
     if ('' === $firstMail) {
-      return JsonResponse::create(['statusCode' => 808]);
+      return new JsonResponse(['statusCode' => 808]);
     }
 
     try {
       $this->validateEmail($firstMail);
     } catch (Exception $exception) {
-      return JsonResponse::create(['statusCode' => $exception->getCode(), 'email' => 1]);
+      return new JsonResponse(['statusCode' => $exception->getCode(), 'email' => 1]);
     }
 
     if ($this->checkEmailExists($firstMail, $user_manager)) {
-      return JsonResponse::create(['statusCode' => 810, 'email' => 1]);
+      return new JsonResponse(['statusCode' => 810, 'email' => 1]);
     }
 
     if ($firstMail !== $user->getEmail()) {
@@ -170,7 +170,7 @@ class ProfileController extends AbstractController
     }
     $user_manager->updateUser($user);
 
-    return JsonResponse::create([
+    return new JsonResponse([
       'statusCode' => Response::HTTP_OK,
     ]);
   }
@@ -186,29 +186,29 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('login');
     }
 
-    $username = $request->request->get('username');
+    $username = (string) $request->request->get('username');
 
-    if (null === $username || '' === $username) {
-      return JsonResponse::create(['statusCode' => 811]);
+    if ('' === $username) {
+      return new JsonResponse(['statusCode' => 811]);
     }
 
     try {
       $this->validateUsername($username);
     } catch (Exception $exception) {
-      return JsonResponse::create(['statusCode' => 804]);
+      return new JsonResponse(['statusCode' => 804]);
     }
 
     if ($this->checkUsernameExists($username, $user_manager)) {
-      return JsonResponse::create(['statusCode' => 812]);
+      return new JsonResponse(['statusCode' => 812]);
     }
     if (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL)) {
-      return JsonResponse::create(['statusCode' => 809]);
+      return new JsonResponse(['statusCode' => 809]);
     }
 
     $user->setUsername($username);
     $user_manager->updateUser($user);
 
-    $response = JsonResponse::create([
+    $response = new JsonResponse([
       'statusCode' => Response::HTTP_OK,
     ]);
     $response->headers->setCookie($this->cookie_service->createBearerTokenCookie($this->jwt_manager->create($user)));
@@ -230,18 +230,18 @@ class ProfileController extends AbstractController
       return $this->redirectToRoute('login');
     }
 
-    $image_base64 = $request->request->get('image');
+    $image_base64 = (string) $request->request->get('image');
 
     try {
       $image_base64 = ImageUtils::checkAndResizeBase64Image($image_base64);
     } catch (Exception $exception) {
-      return JsonResponse::create(['statusCode' => $exception->getCode()]);
+      return new JsonResponse(['statusCode' => $exception->getCode()]);
     }
 
     $user->setAvatar($image_base64);
     $user_manager->updateUser($user);
 
-    return JsonResponse::create([
+    return new JsonResponse([
       'statusCode' => Response::HTTP_OK,
       'image_base64' => $image_base64,
     ]);
@@ -265,7 +265,7 @@ class ProfileController extends AbstractController
     $em->remove($user);
     $em->flush();
 
-    return JsonResponse::create([
+    return new JsonResponse([
       'statusCode' => Response::HTTP_OK,
       'count' => count($user_comments),
     ]);
@@ -326,15 +326,17 @@ class ProfileController extends AbstractController
    */
   public function listFollow(Request $request, string $type, UserManager $user_manager): JsonResponse
   {
+    $page = $request->request->getInt('page');
+    $pageSize = $request->request->getInt('pageSize');
     $followCollection = null;
     $criteria = Criteria::create()
       ->orderBy(['username' => Criteria::ASC])
-      ->setFirstResult($request->get('page') * $request->get('pageSize'))
-      ->setMaxResults($request->get('pageSize'))
+      ->setFirstResult($page * $pageSize)
+      ->setMaxResults($pageSize)
     ;
 
     /** @var User|null $user */
-    $user = $user_manager->find($request->get('id'));
+    $user = $user_manager->find($request->request->get('id'));
 
     switch ($type) {
       case 'follower':
@@ -359,7 +361,7 @@ class ProfileController extends AbstractController
       ];
     }
 
-    return JsonResponse::create(['profiles' => $data, 'maximum' => $length]);
+    return new JsonResponse(['profiles' => $data, 'maximum' => $length]);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

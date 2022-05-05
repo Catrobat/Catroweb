@@ -4,21 +4,21 @@ namespace App\Admin\DB_Updater;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class TagsAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_tagssadmin';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'tags';
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
       ->remove('export')
@@ -30,7 +30,7 @@ class TagsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -39,7 +39,7 @@ class TagsAdmin extends AbstractAdmin
     $list
       ->add('internal_title')
       ->add('enabled')
-      ->add('projects_with_tag', 'int', ['code' => 'getProjectCount'])
+      ->add('projects_with_tag', 'int', ['accessor' => 'getProjectCount'])
     ;
   }
 }

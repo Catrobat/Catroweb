@@ -12,6 +12,7 @@ use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
 use App\Project\ProgramManager;
 use App\Utils\TimeUtils;
 use DateTime;
+use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 
@@ -283,7 +284,7 @@ class AchievementManager
   /**
    * @throws Exception
    */
-  protected function unlockAchievement(User $user, string $internal_title, ?DateTime $unlocked_at = null): ?UserAchievement
+  protected function unlockAchievement(User $user, string $internal_title, ?DateTimeInterface $unlocked_at = null): ?UserAchievement
   {
     $achievement = $this->findAchievementByInternalTitle($internal_title);
     if (is_null($achievement)) {

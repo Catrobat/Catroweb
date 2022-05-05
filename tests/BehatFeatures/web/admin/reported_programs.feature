@@ -153,4 +153,4 @@ Feature: Admin reported programs
     Then I should see the reported programs table:
       | Note               | State | Category | Reported User | Reporting User | Program   | Program Visible |
       | Even Worse Program | New   | Spam     | Superman      | Admin          | program 2 | no              |
-    And I should not see "Gregor"
+    And I should not see "Bad Program"

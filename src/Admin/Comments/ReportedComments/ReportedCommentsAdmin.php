@@ -7,19 +7,19 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ReportedCommentsAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_report';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'report';
 
@@ -38,7 +38,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -50,7 +50,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -67,14 +67,14 @@ class ReportedCommentsAdmin extends AbstractAdmin
       ->add('uploadDate')
       ->add('text')
       ->add('username')
-      ->add('_action', 'actions', ['actions' => [
+      ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'delete' => ['template' => 'Admin/CRUD/list__action_delete_comment.html.twig'],
         'unreportComment' => ['template' => 'Admin/CRUD/list__action_unreportComment.html.twig'],
       ]])
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->add('deleteComment');
     $collection->add('unreportComment');

@@ -140,7 +140,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
 
     // User does not exist yet
     /** @var User $user */
-    $user = $this->user_manager->createUser();
+    $user = $this->user_manager->create();
     $user->{$set_id}($user_id);
     $user->setEnabled(true);
     $user->setEmail($email);

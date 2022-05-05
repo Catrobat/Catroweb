@@ -35,9 +35,10 @@ class FollowerController extends AbstractController
    */
   public function followerAction(Request $request, string $id = '0'): Response
   {
-    /** @var User|null */
-    $user = null;
+    $page = $request->request->getInt('page');
+    $pageSize = $request->request->getInt('pageSize');
 
+    /* @var User|null */
     if (('0' === $id) || ($this->getUser() && $this->getUser()->getId() === $id)) {
       $user = $this->getUser();
     } else {
@@ -50,8 +51,8 @@ class FollowerController extends AbstractController
 
     $criteria = Criteria::create()
       ->orderBy(['username' => Criteria::ASC])
-      ->setFirstResult($request->get('page') * $request->get('pageSize'))
-      ->setMaxResults($request->get('pageSize'))
+      ->setFirstResult($page * $pageSize)
+      ->setMaxResults($pageSize)
     ;
 
     /** @var ArrayCollection $followersCollection */
@@ -83,10 +84,10 @@ class FollowerController extends AbstractController
    */
   public function unfollowUser(Request $request, string $id): JsonResponse
   {
-    $csrf_token = $request->query->get('token');
+    $csrf_token = (string) $request->query->get('token');
     if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
+        return new JsonResponse([
           'statusCode' => 706,
           'message' => 'Invalid CSRF token.',
         ], Response::HTTP_BAD_REQUEST);
@@ -131,10 +132,10 @@ class FollowerController extends AbstractController
    */
   public function followUser(Request $request, string $id): JsonResponse
   {
-    $csrf_token = $request->query->get('token');
+    $csrf_token = (string) $request->query->get('token');
     if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
       if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
+        return new JsonResponse([
           'statusCode' => 706,
           'message' => 'Invalid CSRF token.',
         ], Response::HTTP_BAD_REQUEST);

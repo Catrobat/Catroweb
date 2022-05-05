@@ -31,17 +31,17 @@ class SendMailToUserController extends CRUDController
   public function sendAction(Request $request): Response
   {
     /** @var User|null $user */
-    $user = $this->user_manager->findUserByUsername($request->get('username'));
+    $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
     if (!$user) {
       return new Response('User does not exist');
     }
-    $subject = $request->get('subject');
-    if (null === $subject || '' === $subject) {
+    $subject = (string) $request->query->get('subject');
+    if ('' === $subject) {
       return new Response('Empty subject!');
     }
 
-    $messageText = $request->get('message');
-    if (null === $messageText || '' === $messageText) {
+    $messageText = (string) $request->query->get('message');
+    if ('' === $messageText) {
       return new Response('Empty message!');
     }
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);

@@ -5,18 +5,20 @@ namespace App\Admin\Projects;
 use App\DB\Entity\User\User;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ProjectsAdmin extends AbstractAdmin
 {
@@ -33,31 +35,31 @@ class ProjectsAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'projects';
 
   /**
-   * {@inheritdoc}
+   * {@inheritDoc}
    */
-  protected $datagridValues = [
-    '_sort_by' => 'uploaded_at',
-    '_sort_order' => 'DESC',
-  ];
+  protected function configureDefaultSortValues(array &$sortValues): void
+  {
+    $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';
+    $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
+  }
 
   private ParameterBagInterface $parameter_bag;
-
   private ScreenshotRepository $screenshot_repository;
+  protected TokenStorageInterface $security_token_storage;
 
-  /**
-   * ProjectsAdmin constructor.
-   *
-   * @param mixed $code
-   * @param mixed $class
-   * @param mixed $baseControllerName
-   */
-  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository,
-                              ParameterBagInterface $parameter_bag)
-  {
+  public function __construct(
+        ?string $code,
+        ?string $class,
+        ?string $baseControllerName,
+        ScreenshotRepository $screenshot_repository,
+        TokenStorageInterface $security_token_storage,
+        ParameterBagInterface $parameter_bag
+  ) {
     parent::__construct($code, $class, $baseControllerName);
 
     $this->screenshot_repository = $screenshot_repository;
     $this->parameter_bag = $parameter_bag;
+    $this->security_token_storage = $security_token_storage;
   }
 
   /**
@@ -77,7 +79,7 @@ class ProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -94,7 +96,7 @@ class ProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -113,7 +115,7 @@ class ProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -140,13 +142,14 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
+          'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
           'template' => 'Admin/program_thumbnail_image_list.html.twig',
         ]
       )
       ->add('private', null, ['editable' => false, 'sortable' => false])
       ->add('approved', null, ['editable' => true, 'sortable' => false])
       ->add('visible', null, ['editable' => true, 'sortable' => false])
-      ->add('_action', 'actions', ['actions' => [
+      ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
       ]])
     ;
@@ -155,7 +158,7 @@ class ProjectsAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    */
-  protected function configureShowFields(ShowMapper $showMapper): void
+  protected function configureShowFields(ShowMapper $show): void
   {
     $flavor_options = $this->parameter_bag->get('flavors');
 
@@ -166,7 +169,7 @@ class ProjectsAdmin extends AbstractAdmin
       }
     }
 
-    $showMapper
+    $show
       ->add('uploaded_at', null, ['label' => 'Upload Time'])
       ->add('user')
       ->add('flavor', 'choice', [
@@ -178,6 +181,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
+          'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
           'template' => 'Admin/program_thumbnail_image_list.html.twig',
         ]
       )
@@ -187,7 +191,7 @@ class ProjectsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('export');
   }

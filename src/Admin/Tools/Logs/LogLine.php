@@ -2,6 +2,8 @@
 
 namespace App\Admin\Tools\Logs;
 
+use App\Admin\Tools\Logs\Controller\LogsController;
+
 class LogLine
 {
   private string $date = '';
