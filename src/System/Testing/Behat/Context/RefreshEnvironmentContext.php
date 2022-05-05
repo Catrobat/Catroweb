@@ -5,24 +5,25 @@ namespace App\System\Testing\Behat\Context;
 use App\Kernel;
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
-use App\System\Testing\Behat\SymfonySupport;
+use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
 use App\System\Testing\DataFixtures\UserDataFixtures;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
+use Behat\Behat\Context\Context;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\ToolsException;
+use Exception;
 
-class RefreshEnvironmentContext implements KernelAwareContext
+class RefreshEnvironmentContext implements Context
 {
-  use SymfonySupport;
+  use ContextTrait;
 
   /**
    * This hook is used to prepare the test database and generate all files.
    *
    * @BeforeSuite
    *              -> Since we don't need to recreate the whole database for every scenario we do it only once per suite.
-   *                 Suites can be defined in behat.yml.
+   *                 Suites can be defined in behat.yaml.
    *
    * @throws ToolsException
    */
@@ -70,14 +71,16 @@ class RefreshEnvironmentContext implements KernelAwareContext
    * Clear all files.
    *
    * @BeforeScenario
+   *
+   * @throws Exception
    */
   public function emptyStorage(): void
   {
-    FileHelper::emptyDirectory($this->getSymfonyParameter('catrobat.file.extract.dir'));
-    FileHelper::emptyDirectory($this->getSymfonyParameter('catrobat.file.storage.dir'));
-    FileHelper::emptyDirectory($this->getSymfonyParameter('catrobat.screenshot.dir'));
-    FileHelper::emptyDirectory($this->getSymfonyParameter('catrobat.thumbnail.dir'));
-    FileHelper::emptyDirectory($this->getSymfonyParameter('catrobat.featuredimage.dir'));
-    FileHelper::emptyDirectory($this->getSymfonyParameter('catrobat.apk.dir'));
+    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.file.extract.dir'));
+    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.file.storage.dir'));
+    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.screenshot.dir'));
+    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.thumbnail.dir'));
+    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.featuredimage.dir'));
+    FileHelper::emptyDirectory($this->getSymfonyParameterAsString('catrobat.apk.dir'));
   }
 }

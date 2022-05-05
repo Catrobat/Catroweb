@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -105,7 +104,7 @@ class SecurityController extends AbstractController
    */
   public function loginNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
                                   TranslatorInterface $translator,
-                                  ValidatorInterface $validator, EncoderFactoryInterface $factory): JsonResponse
+                                  ValidatorInterface $validator): JsonResponse
   {
     $retArray = [];
 
@@ -138,8 +137,7 @@ class SecurityController extends AbstractController
       $retArray['statusCode'] = 803;
       $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
     } else {
-      $encoder = $factory->getEncoder($user);
-      $correct_pass = $user_manager->isPasswordValid($user, $password, $encoder);
+      $correct_pass = $user_manager->isPasswordValid($user, $password);
       if ($correct_pass) {
         $retArray['statusCode'] = Response::HTTP_OK;
         $user->setUploadToken($token_generator->generateToken());

@@ -70,9 +70,9 @@ RUN sh docker/app/init-jwt-config.sh
 COPY / ./
 
 # Overwrite behat config:
-COPY behat.yml.dist ./behat.yml
-RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yml && \
-    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yml
+COPY behat.yaml.dist ./behat.yaml
+RUN sed -i -r "s|(base_url:)(\s+.+)|base_url: http://app.catroweb/index_test.php/|g" behat.yaml && \
+    sed -i -r "s|(api_url:)(\s+.+)|api_url: chrome.catroweb:9222|g" behat.yaml
 
 # Overwrite project config:
 ARG APP_ENVIRONMENT

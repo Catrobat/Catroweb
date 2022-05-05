@@ -51,7 +51,7 @@ jobs:
   #
   # Eslint:
   #  - Statically analyzes javascript code (depends on on node and npm)
-  #  - Config defined in .eslintrc.yml
+  #  - Config defined in .eslintrc.yaml
   #  - Automatic fix support
   #  - npm "test" script must be defined in package.json
   #  - More information at: (https://eslint.org/)
@@ -205,7 +205,7 @@ jobs:
       - uses: actions/checkout@v3
       - name: "Setup PHP and composer packages"
         uses: ./.github/actions/setup-php-composer
-      - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yml.dist .eslintrc.yml
+      - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yaml.dist .eslintrc.yaml
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Container**

@@ -4,8 +4,7 @@ web_profiler:
 
 framework:
     test: ~
-    session:
-        storage_id: session.storage.mock_file
+    session: ~
     profiler:
         enabled: true
         collect: true

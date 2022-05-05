@@ -54,6 +54,7 @@ Feature: Featured Projects
     Then the response status code should be "400"
 
   Scenario: Get featured projects without application/json content type should return 406
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     And I request "GET" "/api/projects/featured/?limit=10"
     Then the response status code should be "406"
 
