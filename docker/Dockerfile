@@ -44,6 +44,8 @@ RUN apt-get update && \
     libgconf-2-4 \
     npm
 RUN npm install -g sass
+RUN npm install -g n
+RUN n stable
 
 # Overwrite default apache config
 RUN a2enmod rewrite
