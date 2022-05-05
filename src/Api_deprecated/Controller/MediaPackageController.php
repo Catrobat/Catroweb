@@ -44,7 +44,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
       ->findOneBy(['name' => $package])
     ;
     if (null === $media_package) {
-      return JsonResponse::create(
+      return new JsonResponse(
         ['statusCode' => 523,
           'message' => $package.' not found', ]
       );
@@ -52,7 +52,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
-      return JsonResponse::create(
+      return new JsonResponse(
         $json_response_array
       );
     }
@@ -67,7 +67,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
       }
     }
 
-    return JsonResponse::create(
+    return new JsonResponse(
       $json_response_array
     );
   }
@@ -91,7 +91,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
       ->findOneBy(['nameUrl' => $package])
     ;
     if (null === $media_package) {
-      return JsonResponse::create(
+      return new JsonResponse(
         ['statusCode' => 523,
           'message' => $package.' not found', ]
       );
@@ -99,7 +99,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
-      return JsonResponse::create(
+      return new JsonResponse(
         $json_response_array
       );
     }
@@ -113,7 +113,7 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
       }
     }
 
-    return JsonResponse::create(
+    return new JsonResponse(
       $json_response_array
     );
   }

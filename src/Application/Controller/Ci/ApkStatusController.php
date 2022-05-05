@@ -35,7 +35,7 @@ class ApkStatusController extends AbstractController
     /** @var Program|null $program */
     $program = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $program) {
-      return JsonResponse::create(null, 404);
+      return new JsonResponse(null, 404);
     }
 
     $result = [];
@@ -55,6 +55,6 @@ class ApkStatusController extends AbstractController
         $result['status'] = 'none';
     }
 
-    return JsonResponse::create($result);
+    return new JsonResponse($result);
   }
 }

@@ -3,21 +3,21 @@
 namespace App\Admin\Tools\SendMailToUser;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class SendMailToUserAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_mail';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'mail';
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);
     $collection->add('send');

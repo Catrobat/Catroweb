@@ -7,4 +7,4 @@ twig:
         app_version: '%env(APP_VERSION)%'
         app_env: '%env(APP_ENV)%'
     form_themes:
-        - '@SonataCore/Form/datepicker.html.twig'
+        - '@SonataForm/Form/datepicker.html.twig'

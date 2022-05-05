@@ -50,7 +50,7 @@ class DefaultController extends AbstractController
       $user_id = $user->getId();
     }
 
-    return JsonResponse::create([
+    return new JsonResponse([
       'first_login' => $user_first_login,
       'user_id' => $user_id,
     ]);

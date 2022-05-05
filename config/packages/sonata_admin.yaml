@@ -39,7 +39,7 @@ sonata_admin:
                 type:     sonata.admin.block.stats
                 settings:
                     code: admin.block.projects.overview
-                    icon: fa-cubes
+                    icon: fas fa-cubes
                     text: All projects
                     color: bg-blue
 
@@ -49,7 +49,7 @@ sonata_admin:
                 type:     sonata.admin.block.stats
                 settings:
                     code: admin.block.users.overview
-                    icon: fa-users
+                    icon: fas fa-users
                     text: User
                     color: bg-green
 
@@ -172,10 +172,6 @@ sonata_doctrine_orm_admin:
     entity_manager: ~
 
     templates:
-        form:
-            - '@SonataDoctrineORMAdmin/Form/form_admin_fields.html.twig'
-        filter:
-            - '@SonataDoctrineORMAdmin/Form/filter_admin_fields.html.twig'
         types:
             list:
                 array:     '@SonataAdmin/CRUD/list_array.html.twig'
@@ -209,12 +205,12 @@ sonata_doctrine_orm_admin:
 sonata_user:
     security_acl:  true
     manager_type:  orm
-    mailer: 'fos_user.mailer.noop'
+    mailer: sonata.user.mailer.default
     class:
         user:   App\DB\Entity\User\User
-        group:  App\DB\Entity\User\Group
 
-    admin:                  # Admin Classes
-        user:
-            class:          App\Admin\Users\UserAdmin
-            translation:    SonataUserBundle
+    resetting: # Reset password configuration (must be configured)
+        email:
+            template: '@SonataUser/Admin/Security/Resetting/email.html.twig'
+            address: 'support@catrob.at'
+            sender_name: 'Catrobat Team'

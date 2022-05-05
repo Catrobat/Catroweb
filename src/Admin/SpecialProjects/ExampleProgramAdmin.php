@@ -34,21 +34,17 @@ class ExampleProgramAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'example_program';
 
   private ImageRepository $example_image_repository;
-
   private ProgramManager $program_manager;
-
   private FlavorRepository $flavor_repository;
 
-  /**
-   * ExampleProgramAdmin constructor.
-   *
-   * @param mixed $code
-   * @param mixed $class
-   * @param mixed $baseControllerName
-   */
-  public function __construct($code, $class, $baseControllerName, ImageRepository $example_image_repository,
-                              ProgramManager $program_manager, FlavorRepository $flavor_repository)
-  {
+  public function __construct(
+      ?string $code,
+      ?string $class,
+      ?string $baseControllerName,
+      ImageRepository $example_image_repository,
+      ProgramManager $program_manager,
+      FlavorRepository $flavor_repository
+  ) {
     parent::__construct($code, $class, $baseControllerName);
     $this->example_image_repository = $example_image_repository;
     $this->program_manager = $program_manager;
@@ -78,7 +74,7 @@ class ExampleProgramAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    */
-  public function preUpdate($object): void
+  public function preUpdate(object $object): void
   {
     /** @var ExampleProgram $example_program */
     $example_program = $object;
@@ -110,7 +106,7 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -141,7 +137,7 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -153,23 +149,26 @@ class ExampleProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
   protected function configureListFields(ListMapper $list): void
   {
-    unset($this->listModes['mosaic']);
+    unset($this->getListModes()['mosaic']);
 
     $list
       ->addIdentifier('id')
-      ->add('Example Image', 'string', ['template' => 'Admin/example_image.html.twig'])
+      ->add('Example Image', null, [
+        'accessor' => function ($subject): string { return $this->getExampleImageUrl($subject); },
+        'template' => 'Admin/example_image.html.twig',
+      ])
       ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])
       ->add('flavor', 'string')
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
       ->add('active')
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'edit' => [],
           'delete' => [],

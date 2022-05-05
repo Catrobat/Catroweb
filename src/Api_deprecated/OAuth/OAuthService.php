@@ -38,7 +38,7 @@ class OAuthService
    */
   public function checkEMailAvailable(Request $request): JsonResponse
   {
-    $email = $request->request->get('email');
+    $email = (string) $request->request->get('email');
 
     $retArray = [];
 
@@ -52,7 +52,7 @@ class OAuthService
     }
     $retArray['statusCode'] = Response::HTTP_OK;
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   /**
@@ -71,7 +71,7 @@ class OAuthService
     $retArray['username_available'] = (bool) $user;
     $retArray['statusCode'] = Response::HTTP_OK;
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   /**
@@ -84,7 +84,7 @@ class OAuthService
 
     /** @var User|null $google_user */
     $google_user = $this->user_manager->findOneBy([
-      'gplusUid' => $google_id,
+      'googleId' => $google_id,
     ]);
     if (null !== $google_user) {
       $retArray['token_available'] = true;
@@ -95,7 +95,7 @@ class OAuthService
     }
     $retArray['statusCode'] = Response::HTTP_OK;
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   /**
@@ -106,8 +106,8 @@ class OAuthService
     $retArray = [];
 
     $client_id = getenv('GOOGLE_CLIENT_ID');
-    $id_token = $request->request->get('id_token');
-    $username = $request->request->get('username');
+    $id_token = (string) $request->request->get('id_token');
+    $username = (string) $request->request->get('username');
 
     try {
       $client = new Client(['client_id' => $client_id]);  // Specify the CLIENT_ID of the app that accesses the backend
@@ -127,8 +127,8 @@ class OAuthService
         $user = null;
       }
       /** @var User|null $google_user */
-      $google_user = $this->user_manager->findUserBy([
-        'gplusUid' => $gPlusId,
+      $google_user = $this->user_manager->findOneBy([
+        'googleId' => $gPlusId,
       ]);
     } catch (Exception $exception) {
       return new JsonResponse('Token invalid', 777);
@@ -144,7 +144,7 @@ class OAuthService
       $retArray['statusCode'] = 201;
     }
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   /**
@@ -154,23 +154,23 @@ class OAuthService
   {
     $retArray = [];
 
-    $google_username = $request->request->get('username');
-    $google_id = $request->request->get('id');
-    $google_mail = $request->request->get('email');
-    $locale = $request->request->get('locale');
+    $google_username = (string) $request->request->get('username');
+    $google_id = (string) $request->request->get('id');
+    $google_mail = (string) $request->request->get('email');
+    $locale = (string) $request->request->get('locale');
 
     /** @var User|null $google_user */
     $google_user = $this->user_manager->findOneBy([
-      'gplusUid' => $google_id,
+      'googleId' => $google_id,
     ]);
 
-    if (null !== $google_user && null !== $google_id && '' !== $google_id) {
+    if (null !== $google_user && '' !== $google_id) {
       $google_user->setUploadToken($this->token_generator->generateToken());
       $this->user_manager->updateUser($google_user);
       $retArray['token'] = $google_user->getUploadToken();
       $retArray['username'] = $google_user->getUsername();
       $retArray['statusCode'] = Response::HTTP_OK;
-    } elseif (null !== $google_mail && '' !== $google_mail && null !== $google_username && '' !== $google_username) {
+    } elseif ('' !== $google_mail && '' !== $google_username) {
       /** @var User|null $user */
       $user = $this->user_manager->findUserByEmail($google_mail);
 
@@ -184,7 +184,7 @@ class OAuthService
       }
     }
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   private function setGoogleTokens(User $user, ?string $access_token, ?string $refresh_token, ?string $id_token): void
@@ -226,7 +226,7 @@ class OAuthService
         $locale = substr($locale, 0, 5);
       }
 
-      $user->setGplusUid($googleId);
+      $user->setGoogleId($googleId);
 
       $user->setEnabled(true);
       $this->user_manager->updateUser($user);
@@ -251,8 +251,8 @@ class OAuthService
     $retArray['violations'] = count($violations);
     if (0 == count($violations)) {
       /** @var User $user */
-      $user = $this->user_manager->createUser();
-      $user->setGplusUid($googleId);
+      $user = $this->user_manager->create();
+      $user->setGoogleId($googleId);
       $user->setUsername($username);
       $user->setEmail($googleEmail);
       $user->setPlainPassword(PasswordGenerator::generateRandomPassword());

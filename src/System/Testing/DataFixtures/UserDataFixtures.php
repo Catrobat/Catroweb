@@ -40,7 +40,7 @@ class UserDataFixtures
     ++UserDataFixtures::$number_of_users;
 
     /** @var User $user */
-    $user = $this->user_manager->createUser();
+    $user = $this->user_manager->create();
     $user->setUsername($config['name'] ?? 'User'.UserDataFixtures::$number_of_users);
     $user->setEmail($config['email'] ?? $user->getUsername().'@catrobat.at');
     $user->setPlainPassword($config['password'] ?? '123456');
@@ -74,12 +74,6 @@ class UserDataFixtures
     }
     if (isset($config['enabled'])) {
       Assert::assertEquals($user->isEnabled(), 'true' === $config['enabled'], 'Token Invalid');
-    }
-    if (isset($config['google_uid'])) {
-      Assert::assertEquals($user->getGplusUid(), $config['google_uid'], 'Google UID wrong');
-    }
-    if (isset($config['google_name'])) {
-      Assert::assertEquals($user->getGplusName(), $config['google_name'], 'Google name wrong');
     }
   }
 

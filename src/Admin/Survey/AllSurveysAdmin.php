@@ -9,24 +9,24 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ChoiceFieldMaskType;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
 class AllSurveysAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_allsurveysadmin';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'all_surveys';
 
   protected EntityManagerInterface $entity_manager;
 
-  public function __construct($code, $class, $baseControllerName, EntityManagerInterface $entity_manager)
+  public function __construct(?string $code, ?string $class, ?string $baseControllerName, EntityManagerInterface $entity_manager)
   {
     parent::__construct($code, $class, $baseControllerName);
 
@@ -34,7 +34,7 @@ class AllSurveysAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -60,7 +60,7 @@ class AllSurveysAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -79,7 +79,7 @@ class AllSurveysAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -97,7 +97,7 @@ class AllSurveysAdmin extends AbstractAdmin
         'sortable' => true,
         'editable' => true,
       ])
-      ->add('_action', null, [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'label' => 'Action',
         'actions' => [
           'delete' => [],
@@ -106,7 +106,7 @@ class AllSurveysAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('export')->remove('acl');
   }

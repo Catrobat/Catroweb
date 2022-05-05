@@ -4,31 +4,31 @@ namespace App\Admin\Statistics\Translation;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class CommentMachineTranslationAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_comment_machine_translation';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'comment_machine_translation';
 
   /**
    * {@inheritDoc}
    */
-  public function getExportFields()
+  protected function configureExportFields(): array
   {
     return ['id', 'comment.id', 'source_language', 'target_language', 'provider', 'usage_count',
       'usage_per_month', 'last_modified_at', 'created_at', ];
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -47,7 +47,7 @@ class CommentMachineTranslationAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
       ->remove('acl')

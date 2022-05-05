@@ -99,8 +99,8 @@ Feature: Media Package Files
     Then I select flavor "pocketcode" for media package file
     Then I select flavor "luna" for media package file
     Then I click ".btn-success"
+    And I go to "/admin/media_package_file/list"
     And I wait for the page to be loaded
-    And I am on "/admin/media_package_file/list"
     Then I should see the media package files table:
       | Id | Name     | Category   | Author   | Flavors           | Downloads | Active |
       | 1  | File 1   | category 1 | Adminius | pocketcode , luna | 1         | 1      |

@@ -14,44 +14,36 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Object\Metadata;
 use Sonata\AdminBundle\Object\MetadataInterface;
-use Sonata\AdminBundle\Route\RouteCollection;
-use Sonata\Form\Validator\ErrorElement;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
+use Symfony\Component\Form\FormError;
 
 class FeaturedProgramAdmin extends AbstractAdmin
 {
   /**
-   * @override
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'adminfeatured_program';
 
   /**
-   * @override
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'featured_program';
 
   private ImageRepository $featured_image_repository;
-
   private ProgramManager $program_manager;
 
-  /**
-   * FeaturedProgramAdmin constructor.
-   *
-   * @param mixed $code
-   * @param mixed $class
-   * @param mixed $baseControllerName
-   */
-  public function __construct($code, $class, $baseControllerName, ImageRepository $featured_image_repository,
-                              ProgramManager $program_manager)
-  {
+  public function __construct(
+      ?string $code,
+      ?string $class,
+      ?string $baseControllerName,
+      ImageRepository $featured_image_repository,
+      ProgramManager $program_manager
+  ) {
     parent::__construct($code, $class, $baseControllerName);
     $this->featured_image_repository = $featured_image_repository;
     $this->program_manager = $program_manager;
@@ -82,7 +74,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    */
-  public function preUpdate($object): void
+  public function preUpdate(object $object): void
   {
     /** @var FeaturedProgram $featured_program */
     $featured_program = $object;
@@ -90,7 +82,10 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $featured_program->old_image_type = $featured_program->getImageType();
   }
 
-  public function validate(ErrorElement $errorElement, $object): void
+  /**
+   * {@inheritdoc}
+   */
+  public function preValidate(object $object): void
   {
     $id = $this->getForm()->get('Program_Id_or_Url')->getData();
 
@@ -101,7 +96,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
           $object->setProgram(null);
         }
       } else {
-        $errorElement->with('ID')->addViolation('Please enter a valid URL.')->end();
+        $this->getForm()->addError(new FormError('Please enter a valid URL.'));
       }
     } else {
       if (null !== $id) {
@@ -116,13 +111,13 @@ class FeaturedProgramAdmin extends AbstractAdmin
           $object->setURL(null);
         }
       } else {
-        $errorElement->with('ID')->addViolation('Unable to find program with given ID.')->end();
+        $this->getForm()->addError(new FormError('Unable to find program with given ID.'));
       }
     }
   }
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -145,14 +140,15 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
       $id_value = $this->getSubject()->getUrl();
       $use_url = true;
-      if (null == $id_value) {
+      if (null == $id_value && !is_null($this->getSubject()->getProgram())) {
         $id_value = $this->getSubject()->getProgram()->getId();
         $use_url = false;
       }
+    } else {
+      $file_options = ['help' => 'The featured image must be of size 1024 x 400'];
     }
     $form
-      ->add('file', FileType::class, $file_options,
-        ['help' => 'The featured image must be of size 1024 x 400'])
+      ->add('file', FileType::class, $file_options)
       ->add('Use_Url', CheckboxType::class, ['mapped' => false, 'required' => false,
         'help' => 'Toggle to save URL instead of Program ID.', 'data' => $use_url, ])
       ->add('Program_Id_or_Url', TextType::class, ['mapped' => false, 'data' => $id_value])
@@ -165,7 +161,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -181,18 +177,21 @@ class FeaturedProgramAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
   protected function configureListFields(ListMapper $list): void
   {
-    unset($this->listModes['mosaic']);
+    unset($this->getListModes()['mosaic']);
     $list
       ->addIdentifier('id', null, [
         'sortable' => false,
       ])
-      ->add('Featured Image', 'string', ['template' => 'Admin/featured_image.html.twig'])
+      ->add('Featured Image', null, [
+        'accessor' => function ($subject): string { return $this->getFeaturedImageUrl($subject); },
+        'template' => 'Admin/featured_image.html.twig',
+      ])
       ->add('program', EntityType::class, [
         'class' => Program::class,
         'editable' => false,
@@ -204,7 +203,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
       ->add('priority', 'integer')
       ->add('for_ios', null, ['label' => 'iOS only'])
       ->add('active')
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'edit' => [],
           'delete' => [],
@@ -213,7 +212,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('acl');
   }

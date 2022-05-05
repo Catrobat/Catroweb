@@ -109,8 +109,8 @@ Feature: Media Package Categories
     Then I select package "Objects" for media package category
     Then I write "2" in textarea with label "Priority"
     Then I click ".btn-success"
+    And I go to "/admin/media_package_category/list"
     And I wait for the page to be loaded
-    And I am on "/admin/media_package_category/list"
     Then I should see the media package categories table:
       | Id | Name         | Package        | Priority |
       | 1  | Category 1   | Looks          | 0        |

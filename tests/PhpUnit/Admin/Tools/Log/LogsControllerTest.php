@@ -2,8 +2,8 @@
 
 namespace Tests\PhpUnit\Admin\Tools\Log;
 
+use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogLine;
-use App\Admin\Tools\Logs\LogsController;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -12,7 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
- * @covers \App\Admin\Tools\Logs\LogsController
+ * @covers \App\Admin\Tools\Logs\Controller\LogsController
  */
 class LogsControllerTest extends DefaultTestCase
 {

@@ -3,21 +3,21 @@
 namespace App\Admin\DB_Updater;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class SpecialUpdaterAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_specialupdateradmin';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'special_updater';
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
       ->remove('export')

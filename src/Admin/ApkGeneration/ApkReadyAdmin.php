@@ -5,43 +5,42 @@ namespace App\Admin\ApkGeneration;
 use App\DB\Entity\Project\Program;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class ApkReadyAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_apk_ready';
 
   /**
-   * @var string
+   * {@inheritdoc string}.
    */
   protected $baseRoutePattern = 'apk_ready';
 
   /**
-   * @var array
+   * {@inheritDoc}
    */
-  protected $datagridValues = [
-    '_sort_by' => 'apk_request_time',
-    '_sort_order' => 'DESC',
-  ];
+  protected function configureDefaultSortValues(array &$sortValues): void
+  {
+    $sortValues[DatagridInterface::SORT_BY] = 'apk_request_time';
+    $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
+  }
 
   private ScreenshotRepository $screenshot_repository;
 
-  /**
-   * ApkReadyAdmin constructor.
-   *
-   * @param mixed $code
-   * @param mixed $class
-   * @param mixed $baseControllerName
-   */
-  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository)
-  {
+  public function __construct(
+        ?string $code,
+        ?string $class,
+        ?string $baseControllerName,
+                              ScreenshotRepository $screenshot_repository
+    ) {
     parent::__construct($code, $class, $baseControllerName);
     $this->screenshot_repository = $screenshot_repository;
   }
@@ -67,7 +66,7 @@ class ApkReadyAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -82,7 +81,7 @@ class ApkReadyAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -97,8 +96,11 @@ class ApkReadyAdmin extends AbstractAdmin
       ])
       ->add('name')
       ->add('apk_request_time')
-      ->add('thumbnail', 'string', ['template' => 'Admin/program_thumbnail_image_list.html.twig'])
-      ->add('_action', 'actions', [
+      ->add('thumbnail', 'string', [
+        'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
+        'template' => 'Admin/program_thumbnail_image_list.html.twig',
+      ])
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'Reset' => [
             'template' => 'Admin/CRUD/list__action_reset_status.html.twig',
@@ -111,7 +113,7 @@ class ApkReadyAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);
     $collection->add('requestApkRebuild', $this->getRouterIdParameter().'/requestApkRebuild');

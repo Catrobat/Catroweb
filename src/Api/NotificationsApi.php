@@ -17,6 +17,9 @@ final class NotificationsApi extends AbstractApiController implements Notificati
     $this->facade = $facade;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function notificationIdReadPut(int $id, ?string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
@@ -34,6 +37,9 @@ final class NotificationsApi extends AbstractApiController implements Notificati
     return null;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function notificationsCountGet(&$responseCode = null, array &$responseHeaders = null)
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -52,6 +58,9 @@ final class NotificationsApi extends AbstractApiController implements Notificati
     return $response;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function notificationsGet(?string $accept_language = null, ?int $limit = 20, ?int $offset = 0, NotificationsType $type = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
@@ -65,6 +74,9 @@ final class NotificationsApi extends AbstractApiController implements Notificati
     return null;
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public function notificationsReadPut(&$responseCode = null, array &$responseHeaders = null)
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();

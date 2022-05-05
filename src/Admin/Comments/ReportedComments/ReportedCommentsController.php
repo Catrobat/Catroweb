@@ -31,9 +31,6 @@ class ReportedCommentsController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException();
-    }
     $object->setIsReported(false);
     $this->admin->update($object);
     $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' is no longer reported');
@@ -45,9 +42,6 @@ class ReportedCommentsController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException();
-    }
     $em = $this->getDoctrine()->getManager();
     $comment = $em->getRepository(UserComment::class)->find($object->getId());
     if (null === $comment) {

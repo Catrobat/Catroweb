@@ -5,22 +5,22 @@ namespace App\Admin\Users\UserDataReport;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class UserDataReportAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_userdata';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'stored_userdata';
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -29,7 +29,7 @@ class UserDataReportAdmin extends AbstractAdmin
     $list
       ->addIdentifier('username')
       ->add('email')
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'retrieve' => [
             'template' => 'Admin/CRUD/list__action_retrieve_stored_user_data.html.twig',
@@ -40,7 +40,7 @@ class UserDataReportAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -53,7 +53,7 @@ class UserDataReportAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->clearExcept(['list']);
     $collection->add('retrieve', $this->getRouterIdParameter().'/retrieveUserData');
