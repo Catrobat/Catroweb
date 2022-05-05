@@ -5,9 +5,10 @@ namespace App\Admin\Projects\ReportedProjects;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\DoctrineORMAdminBundle\Filter\NumberFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
@@ -17,22 +18,25 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 class ReportedProjectsAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_reported_projects';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'reported_projects';
 
   /**
-   * @var array
+   * {@inheritDoc}
    */
-  protected $datagridValues = ['_sort_order' => 'DESC'];
+  protected function configureDefaultSortValues(array &$sortValues): void
+  {
+    $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
+  }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -56,7 +60,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -79,14 +83,14 @@ class ReportedProjectsAdmin extends AbstractAdmin
         ])
       ->add('program.visible')
       ->add('program.approved', null, ['sortable' => false])
-      ->add('_action', 'actions', ['actions' => [
+      ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProgram.html.twig'],
         'acceptProgramReport' => ['template' => 'Admin/CRUD/list__action_accept_program_report.html.twig'],
       ]])
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->add('unreportProgram');
     $collection->add('acceptProgramReport');

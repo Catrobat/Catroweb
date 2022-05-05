@@ -3,31 +3,33 @@
 namespace App\Admin\Comments;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class CommentsAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_commentsadmin';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'comments';
 
   /**
-   * @var array
+   * {@inheritDoc}
    */
-  protected $datagridValues = [
-    '_sort_by' => 'uploaded_at',
-    '_sort_order' => 'DESC',
-  ];
+  protected function configureDefaultSortValues(array &$sortValues): void
+  {
+    $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';
+    $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
+  }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -40,7 +42,7 @@ class CommentsAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete')->remove('export');
   }

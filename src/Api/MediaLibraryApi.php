@@ -40,7 +40,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
+  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null): ?array
   {
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
@@ -67,7 +67,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFileIdGet(int $id, &$responseCode = null, array &$responseHeaders = null)
+  public function mediaFileIdGet(int $id, &$responseCode = null, array &$responseHeaders = null): ?\OpenAPI\Server\Model\MediaFileResponse
   {
     $media_package_file = $this->facade->getLoader()->getMediaPackageFileByID($id);
 

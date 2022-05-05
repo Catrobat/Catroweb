@@ -140,21 +140,21 @@ class MaintainController extends CRUDController
 
     $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the programs accordingly";
     $rm = new RemovableMemory('Compressed Catrobatfiles', $description);
-    $this->setSizeOfObject($rm, $this->getParameter('catrobat.file.storage.dir'));
+    $this->setSizeOfObject($rm, strval($this->getParameter('catrobat.file.storage.dir')));
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
     $RemovableObjects[] = $rm;
 
     $description = "This will remove all generated apk-files in the 'apk'-directory and flag the programs accordingly";
     $rm = new RemovableMemory('Generated APKs', $description);
-    $this->setSizeOfObject($rm, $this->getParameter('catrobat.apk.dir'), ['apk']);
+    $this->setSizeOfObject($rm, strval($this->getParameter('catrobat.apk.dir')), ['apk']);
     $rm->setCommandName('Delete APKs');
     $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
 
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);
-    $this->setSizeOfObject($rm, $this->getParameter('catrobat.logs.dir'));
+    $this->setSizeOfObject($rm, strval($this->getParameter('catrobat.logs.dir')));
     $rm->setCommandName('Delete log files');
     $rm->setCommandLink($this->admin->generateUrl('delete_logs'));
     $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
@@ -170,7 +170,7 @@ class MaintainController extends CRUDController
       $usedSpaceRaw -= $obj->size_raw;
     }
 
-    $programsSize = $this->get_dir_size($this->getParameter('catrobat.file.storage.dir'));
+    $programsSize = $this->get_dir_size(strval($this->getParameter('catrobat.file.storage.dir')));
     $usedSpaceRaw -= $programsSize;
 
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;

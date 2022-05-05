@@ -38,7 +38,7 @@ final class SearchResponseManager extends AbstractResponseManager
     ]);
   }
 
-  public function getUsersSearchResponse(array $users, $total): array
+  public function getUsersSearchResponse(array $users, int $total): array
   {
     $users_data_response = [];
     $users_data_response['users'] = [];

@@ -301,7 +301,6 @@ class DataFixturesContext implements KernelAwareContext
   public function thereArePrograms(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      /** @var Program $program */
       $program = $this->insertProject($config, false);
       $this->programs[] = $program;
     }

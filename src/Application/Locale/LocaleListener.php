@@ -9,7 +9,7 @@ class LocaleListener
   public function onKernelRequest(RequestEvent $event): void
   {
     $event->getRequest()->setLocale(
-        $event->getRequest()->cookies->get('hl') ?? $event->getRequest()->getPreferredLanguage() ?? 'en'
+        (string) ($event->getRequest()->cookies->get('hl') ?? $event->getRequest()->getPreferredLanguage() ?? 'en')
     );
   }
 }

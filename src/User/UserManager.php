@@ -3,51 +3,59 @@
 namespace App\User;
 
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\User\UserRepository;
 use App\Project\ProgramManager;
 use App\Security\PasswordGenerator;
+use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\TimeUtils;
 use DateTime;
+use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Query\Expr\Join;
-use Doctrine\Persistence\ObjectManager;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
 use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use FOS\UserBundle\Model\UserInterface;
-use FOS\UserBundle\Util\CanonicalFieldsUpdater;
-use FOS\UserBundle\Util\PasswordUpdaterInterface;
+use Sonata\UserBundle\Model\UserInterface;
+use Sonata\UserBundle\Model\UserManagerInterface;
 use Symfony\Component\HttpFoundation\UrlHelper;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
- * ToDo: fix extend.
- *
  * @psalm-suppress InvalidExtendClass
  */
-class UserManager extends \Sonata\UserBundle\Entity\UserManager
+class UserManager implements UserManagerInterface
 {
+  protected CanonicalFieldsUpdater $canonicalFieldsUpdater;
   protected ProgramManager $program_manager;
   protected EntityManagerInterface $entity_manager;
   protected TransformedFinder $user_finder;
   protected UrlHelper $url_helper;
+  protected UserRepository $user_repository;
 
-  public function __construct(PasswordUpdaterInterface $passwordUpdater,
-                              CanonicalFieldsUpdater $canonicalFieldsUpdater,
+  /**
+   * TODO: Adapt once support for Symfony 4.4 is dropped -> UserPasswordHasherInterface.
+   */
+  protected UserPasswordEncoderInterface $userPasswordHasher;
+
+  public function __construct(CanonicalFieldsUpdater $canonicalFieldsUpdater,
+                              UserPasswordEncoderInterface $userPasswordHasher,
                               EntityManagerInterface $entity_manager,
                               TransformedFinder $user_finder,
                               ProgramManager $program_manager,
-                              UrlHelper $url_helper)
-  {
+                              UrlHelper $url_helper,
+                              UserRepository $user_repository
+  ) {
+    $this->canonicalFieldsUpdater = $canonicalFieldsUpdater;
+    $this->userPasswordHasher = $userPasswordHasher;
     $this->user_finder = $user_finder;
     $this->url_helper = $url_helper;
     $this->program_manager = $program_manager;
     $this->entity_manager = $entity_manager;
-
-    /** @var ObjectManager $om */
-    $om = $entity_manager;
-    parent::__construct($passwordUpdater, $canonicalFieldsUpdater, $om, User::class);
+    $this->user_repository = $user_repository;
   }
 
   public function decodeToken(string $token): array
@@ -89,11 +97,23 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     return $response_data;
   }
 
+  public function updateUser(UserInterface $user, bool $andFlush = true): void
+  {
+    $this->updatePassword($user);
+    $this->entity_manager->persist($user);
+    if ($andFlush) {
+      $this->entity_manager->flush();
+    }
+  }
+
+  /**
+   * @throws Exception
+   */
   public function createUserFromScratch(array $userdata): ?User
   {
     $scratch_user_id = intval($userdata['id']);
     /** @var User|null $user */
-    $user = $this->findUserBy(['scratch_user_id' => $scratch_user_id]);
+    $user = $this->findOneBy(['scratch_user_id' => $scratch_user_id]);
 
     if (null === $user) {
       $username = $userdata['username'];
@@ -109,9 +129,8 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
       if ($joined) {
         $user->changeCreatedAt($joined);
       }
-      $this->objectManager->persist($user);
-      $this->objectManager->flush();
-      $this->objectManager->refresh($user);
+      $this->save($user);
+      $this->entity_manager->refresh($user);
     }
 
     return $user;
@@ -183,5 +202,128 @@ class UserManager extends \Sonata\UserBundle\Entity\UserManager
     $bool_query->addMust($query_string);
 
     return $bool_query;
+  }
+
+  // Sonata ->
+
+  public function updatePassword(UserInterface $user): void
+  {
+    $plainPassword = $user->getPlainPassword();
+
+    if (null === $plainPassword) {
+      return;
+    }
+
+    // TODO: Adapt once support for Symfony 4.4 is dropped -> UserPasswordHasherInterface
+    // $password = $this->userPasswordHasher->hashPassword($user, $plainPassword);
+    $password = $this->userPasswordHasher->encodePassword($user, $plainPassword);
+
+    $user->setPassword($password);
+    $user->eraseCredentials();
+  }
+
+  public function findUserByUsername(string $username): ?UserInterface
+  {
+    return $this->findOneBy([
+      'usernameCanonical' => $this->canonicalFieldsUpdater->canonicalizeUsername($username),
+    ]);
+  }
+
+  public function findUserByEmail(string $email): ?UserInterface
+  {
+    return $this->findOneBy([
+      'emailCanonical' => $this->canonicalFieldsUpdater->canonicalizeEmail($email),
+    ]);
+  }
+
+  public function findUserByUsernameOrEmail(string $usernameOrEmail): ?UserInterface
+  {
+    if (1 === preg_match('/^.+@\S+\.\S+$/', $usernameOrEmail)) {
+      $user = $this->findUserByEmail($usernameOrEmail);
+      if (null !== $user) {
+        return $user;
+      }
+    }
+
+    return $this->findUserByUsername($usernameOrEmail);
+  }
+
+  public function findUserByConfirmationToken(string $token): ?UserInterface
+  {
+    return $this->findOneBy(['confirmation_token' => $token]);
+  }
+
+  public function getClass(): string
+  {
+    return User::class;
+  }
+
+  public function getTableName()
+  {
+    @trigger_error(sprintf(
+          'The "%s()" method is deprecated since sonata-project/sonata-doctrine-extensions 1.15'
+          .' and will be removed in version 2.0.',
+          __METHOD__
+      ), \E_USER_DEPRECATED);
+
+    $metadata = $this->entity_manager->getClassMetadata($this->getClass());
+    assert($metadata instanceof ClassMetadataInfo);
+
+    return $metadata->table['name'];
+  }
+
+  /**
+   * @return array<User>
+   */
+  public function findAll(): array
+  {
+    return $this->user_repository->findAll();
+  }
+
+  /**
+   * @param mixed|null $limit
+   * @param mixed|null $offset
+   *
+   * @return User[]|array<User>
+   */
+  public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+  {
+    return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
+  }
+
+  public function findOneBy(array $criteria, ?array $orderBy = null): ?User
+  {
+    return $this->user_repository->findOneBy($criteria, $orderBy);
+  }
+
+  public function find($id): ?User
+  {
+    return $this->user_repository->find($id);
+  }
+
+  public function create(): User
+  {
+    return new User();
+  }
+
+  public function save($entity, $andFlush = true): void
+  {
+    $this->entity_manager->persist($entity);
+    if ($andFlush) {
+      $this->entity_manager->flush();
+    }
+  }
+
+  public function delete($entity, $andFlush = true): void
+  {
+    $this->entity_manager->remove($entity);
+    if ($andFlush) {
+      $this->entity_manager->flush();
+    }
+  }
+
+  public function getConnection(): Connection
+  {
+    return $this->entity_manager->getConnection();
   }
 }

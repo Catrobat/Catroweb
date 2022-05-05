@@ -16,6 +16,8 @@ import { ProjectEditorNavigation } from './components/ProjectEditorNavigation'
 import { ProjectEditor } from './components/ProjectEditor'
 import { ProjectEditorTextField } from './components/ProjectEditorTextField'
 import { ProgramName } from './custom/ProgramName'
+import { ProjectEditorTextFieldModel } from './components/ProjectEditorTextFieldModel'
+import { ProjectEditorModel } from './components/ProjectEditorModel'
 
 require('../styles/custom/profile.scss')
 require('../styles/custom/program.scss')
@@ -32,31 +34,41 @@ let editorNavigation = null
 if ($project.data('my-program')) {
   new MDCTextField(document.querySelector('.comment-message'))
 
-  const nameEditorTextField = new ProjectEditorTextField(
+  const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
     'name',
-    true
+    true,
+    $('#name').text().trim()
   )
+  new ProjectEditorTextField(nameEditorTextFieldModel)
 
-  const descriptionEditorTextField = new ProjectEditorTextField(
+  const descriptionEditorTextFieldModel = new ProjectEditorTextFieldModel(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
     'description',
-    $projectDescriptionCredits.data('has-description')
+    $projectDescriptionCredits.data('has-description'),
+    $('#description').text().trim()
   )
+  new ProjectEditorTextField(descriptionEditorTextFieldModel)
 
-  const creditsEditorTextField = new ProjectEditorTextField(
+  const creditsEditorTextFieldModel = new ProjectEditorTextFieldModel(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
     'credits',
-    $projectDescriptionCredits.data('has-credits')
+    $projectDescriptionCredits.data('has-credits'),
+    $('#credits').text().trim()
   )
+  new ProjectEditorTextField(creditsEditorTextFieldModel)
 
+  const projectEditorModel = new ProjectEditorModel(
+    $projectDescriptionCredits.data('project-id'),
+    [nameEditorTextFieldModel, descriptionEditorTextFieldModel, creditsEditorTextFieldModel]
+  )
   const projectEditor = new ProjectEditor(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
-    [nameEditorTextField, descriptionEditorTextField, creditsEditorTextField]
+    projectEditorModel
   )
 
   editorNavigation = new ProjectEditorNavigation(

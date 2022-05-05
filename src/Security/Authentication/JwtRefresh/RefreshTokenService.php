@@ -84,24 +84,24 @@ class RefreshTokenService
     return null !== $refresh_token && $refresh_token->isValid() && !empty($refresh_token->getUsername());
   }
 
-  public function isBearerCookieSet(KernelEvent $event): bool
+  public function isBearerCookieSet(KernelEvent $event): string
   {
-    return $event->getRequest()->cookies->has('BEARER');
+    return strval($event->getRequest()->cookies->has('BEARER'));
   }
 
-  public function isRefreshTokenCookieSet(KernelEvent $event): bool
+  public function isRefreshTokenCookieSet(KernelEvent $event): string
   {
-    return $event->getRequest()->cookies->has('REFRESH_TOKEN');
+    return strval($event->getRequest()->cookies->has('REFRESH_TOKEN'));
   }
 
   protected function getBearerCookieValue(KernelEvent $event): string
   {
-    return $event->getRequest()->cookies->get('BEARER');
+    return strval($event->getRequest()->cookies->get('BEARER'));
   }
 
   protected function getRefreshCookieValue(KernelEvent $event): string
   {
-    return $event->getRequest()->cookies->get('REFRESH_TOKEN');
+    return strval($event->getRequest()->cookies->get('REFRESH_TOKEN'));
   }
 
   protected function setAuthorizationHeader(KernelEvent $event, string $bearer_token): void

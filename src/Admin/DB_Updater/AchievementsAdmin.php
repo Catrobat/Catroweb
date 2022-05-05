@@ -5,30 +5,30 @@ namespace App\Admin\DB_Updater;
 use App\User\Achievements\AchievementManager;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class AchievementsAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_achievementsadmin';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'achievements';
 
   protected AchievementManager $achievement_manager;
 
-  public function __construct($code, $class, $baseControllerName, AchievementManager $achievement_manager)
+  public function __construct(?string $code, ?string $class, ?string $baseControllerName, AchievementManager $achievement_manager)
   {
     parent::__construct($code, $class, $baseControllerName);
 
     $this->achievement_manager = $achievement_manager;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
       ->remove('export')
@@ -50,7 +50,7 @@ class AchievementsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -60,11 +60,13 @@ class AchievementsAdmin extends AbstractAdmin
       ->add('priority')
       ->add('internal_title')
       ->add('internal_description')
-      ->add('badge', null, ['template' => 'Admin/achievement_badge_image.html.twig'])
-      ->add('badge_locked', null, ['template' => 'Admin/achievement_badge_locked_image.html.twig'])
+      ->add('badge_svg_path', null, ['template' => 'Admin/achievement_badge_image.html.twig'])
+      ->add('badge_locked_svg_path', null, ['template' => 'Admin/achievement_badge_locked_image.html.twig'])
       ->add('banner_color')
       ->add('enabled')
-      ->add('unlocked_by', 'string', ['template' => 'Admin/achievement_unlocked_by.html.twig'])
+      ->add('unlocked_by', 'string', [
+        'accessor' => function ($subject): string { return $this->getUnlockedByCount($subject).' users'; },
+      ])
     ;
   }
 }

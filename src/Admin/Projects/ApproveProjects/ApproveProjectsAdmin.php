@@ -14,50 +14,53 @@ use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Form\FormMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 class ApproveProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_approve_programs';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'approve';
 
   private ?ExtractedCatrobatFile $extractedProgram = null;
-
   private ScreenshotRepository $screenshot_repository;
-
   private ProgramManager $program_manager;
-
   private ExtractedFileRepository $extracted_file_repository;
+  protected TokenStorageInterface $security_token_storage;
+  protected ParameterBagInterface $parameter_bag;
 
-  /**
-   * ApproveProjectsAdmin constructor.
-   *
-   * @param mixed $code
-   * @param mixed $class
-   * @param mixed $baseControllerName
-   */
-  public function __construct($code, $class, $baseControllerName, ScreenshotRepository $screenshot_repository,
-                              ProgramManager $program_manager, ExtractedFileRepository $extracted_file_repository)
-  {
+  public function __construct(
+      ?string $code,
+      ?string $class,
+      ?string $baseControllerName,
+      ScreenshotRepository $screenshot_repository,
+      ProgramManager $program_manager,
+      ExtractedFileRepository $extracted_file_repository,
+      TokenStorageInterface $security_token_storage,
+      ParameterBagInterface $parameter_bag
+  ) {
     parent::__construct($code, $class, $baseControllerName);
     $this->screenshot_repository = $screenshot_repository;
     $this->program_manager = $program_manager;
     $this->extracted_file_repository = $extracted_file_repository;
+    $this->security_token_storage = $security_token_storage;
+    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -173,7 +176,10 @@ class ApproveProjectsAdmin extends AbstractAdmin
       /*
        * The default option is to just display the value as text (for boolean this will be 1 or 0)
        */
-      ->add('Thumbnail', null, ['template' => 'Admin/program_thumbnail_image.html.twig'])
+      ->add('thumbnail', null, [
+        'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
+        'template' => 'Admin/program_thumbnail_image.html.twig',
+      ])
       ->add('id')
       ->add('Name')
       ->add('Description')
@@ -181,16 +187,31 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('user', EntityType::class, ['class' => User::class])
       ->add('upload_ip')
       ->add('visible', 'boolean')
-      ->add('Images', null, ['template' => 'Admin/program_containing_image.html.twig'])
-      ->add('Sounds', null, ['template' => 'Admin/program_containing_sound.html.twig'])
-      ->add('Strings', null, ['template' => 'Admin/program_containing_strings.html.twig'])
-      ->add('Objects', null, ['template' => 'Admin/program_containing_code_objects.html.twig'])
-      ->add('', null, ['template' => 'Admin/program_approve_action.html.twig'])
+      ->add('Images', null, [
+        'accessor' => function ($subject): array { return $this->getContainingImageUrls($subject); },
+        'template' => 'Admin/program_containing_image.html.twig',
+      ])
+      ->add('Sounds', null, [
+        'accessor' => function ($subject): array { return $this->getContainingSoundUrls($subject); },
+        'template' => 'Admin/program_containing_sound.html.twig',
+      ])
+      ->add('Strings', null, [
+        'accessor' => function ($subject): array { return $this->getContainingStrings($subject); },
+        'template' => 'Admin/program_containing_strings.html.twig',
+      ])
+      ->add('Objects', null, [
+        'accessor' => function ($subject): array { return $this->getContainingCodeObjects($subject); },
+        'template' => 'Admin/program_containing_code_objects.html.twig',
+      ])
+      ->add('Actions', null, [
+        'accessor' => function ($subject): void { }, // Just some buttons, nothing to "access"!
+        'template' => 'Admin/program_approve_action.html.twig',
+      ])
     ;
   }
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -203,7 +224,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param DatagridMapper $filter
+   * {@inheritdoc}
    *
    * Fields to be shown on filter forms
    */
@@ -219,7 +240,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -232,11 +253,11 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->addIdentifier('name')
       ->add('visible', 'boolean', ['editable' => true, 'sortable' => false])
       ->add('approved', 'boolean', ['editable' => true, 'sortable' => false])
-      ->add('_action', 'actions', ['actions' => ['show' => []]])
+      ->add(ListMapper::NAME_ACTIONS, null, ['actions' => ['show' => []]])
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection->remove('create')->remove('delete');
     $collection

@@ -401,11 +401,6 @@ input[type="number"] {
   float: right;
 }
 
-.sonata-admin-thumbnail-image {
-  width: 96px;
-  height: 96px;
-}
-
 .user-profile-icon {
   font-size: 1.6em;
   color: var(--primary);
@@ -631,15 +626,17 @@ input[type="number"] {
 }
 
 .edit-defined-translation {
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1rem 1rem;
   border-bottom: solid;
   border-color: grey;
   cursor: pointer;
 }
 
 .language-code {
-  width: 3rem;
+  width: 4rem;
   color: grey;
+  padding-right: 1rem;
+  text-align: center;
 }
 
 .language-name {

@@ -11,71 +11,6 @@ Feature: Projects should have credits where a custom translation can be defined
       | 2  | project 2 | Catrobat |            |
     And I wait 1000 milliseconds
 
-  Scenario: Adding a custom credits translation, then changing the language and keeping the unsaved changes
-    Given I log in as "Catrobat"
-    And I go to "/app/project/1"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-program-button"
-    And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
-    When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then I fill in "edit-credits-text" with "This is a credit translation"
-    Then I choose "Russian" from selector "#edit-language-selector"
-    And I should see "Would you like to keep your current changes?"
-    When I click ".swal2-confirm"
-    Then the "edit-credits-text" field should contain "This is a credit translation"
-    And the "#edit-selected-language" element should contain "Russian"
-    And the element "#edit-submit-button" should not be disabled
-    And the element "#edit-cancel-button" should not be disabled
-
-  Scenario: Adding a custom credits translation, then changing the language while discarding changes
-    Given I log in as "Catrobat"
-    And I go to "/app/project/1"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-program-button"
-    And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
-    When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then I fill in "edit-credits-text" with "This is a credit translation"
-    Then I choose "Russian" from selector "#edit-language-selector"
-    And I should see "Would you like to keep your current changes?"
-    When I click ".swal2-deny"
-    And I wait for AJAX to finish
-    Then the "edit-credits-text" field should contain ""
-    And the "#edit-selected-language" element should contain "Russian"
-    And the element "#edit-submit-button" should be disabled
-    And the element "#edit-cancel-button" should be disabled
-
-  Scenario: Adding a custom credits translation, then changing the language but going back to unsaved changes
-    Given I log in as "Catrobat"
-    And I go to "/app/project/1"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-program-button"
-    And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
-    When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then I fill in "edit-credits-text" with "This is a credit translation"
-    Then I choose "Russian" from selector "#edit-language-selector"
-    And I should see "Would you like to keep your current changes?"
-    When I click ".swal2-close"
-    And I wait for AJAX to finish
-    Then the "edit-credits-text" field should contain "This is a credit translation"
-    And the "#edit-selected-language" element should contain "French"
-    And the element "#edit-submit-button" should not be disabled
-    And the element "#edit-cancel-button" should not be disabled
-  
   Scenario: Credit text field should be disabled if there is not a default credit defined
     Given I log in as "Catrobat"
     And I go to "/app/project/2"
@@ -83,31 +18,7 @@ Feature: Projects should have credits where a custom translation can be defined
     And I wait 10000 milliseconds
     When I click "#edit-program-button"
     And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
     When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then the element "#edit-credits-text" should not be disabled
-    Then I choose "French" from selector "#edit-language-selector"
-    And I wait for AJAX to finish
-    Then the element "#edit-credits-text" should be disabled
-    And I should see "No notes and credits available."
-    And the element "#edit-submit-button" should be disabled
-    And the element "#edit-cancel-button" should be disabled
-
-  Scenario: Adding a default credit, then changing the language without saving and keeping the unsaved changes
-    Given I log in as "Catrobat"
-    And I go to "/app/project/2"
-    And I wait for the page to be loaded
-    And I wait 10000 milliseconds
-    When I click "#edit-program-button"
-    And I wait for AJAX to finish
-    Then the element "#add-translation-button" should be visible
-    When I click "#add-translation-button"
-    And I wait for AJAX to finish
-    Then I fill in "edit-credits-text" with "This is a default credit"
-    When I choose "French" from selector "#edit-language-selector"
-    Then I should see "Would you like to keep your current changes?"
-    When I click ".swal2-confirm"
     And I wait for AJAX to finish
     Then the element "#edit-credits-text" should be disabled
     And I should see "No notes and credits available."

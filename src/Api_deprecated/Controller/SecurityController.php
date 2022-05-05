@@ -38,7 +38,7 @@ class SecurityController extends AbstractController
    */
   public function checkTokenAction(TranslatorInterface $translator): JsonResponse
   {
-    return JsonResponse::create([
+    return new JsonResponse([
       'statusCode' => Response::HTTP_OK,
       'answer' => $translator->trans('success.token', [], 'catroweb'),
       'preHeaderMessages' => "  \n",
@@ -78,7 +78,7 @@ class SecurityController extends AbstractController
         $retArray['answer'] = $translator->trans('errors.username.exists', [], 'catroweb');
       } else {
         /** @var User $user */
-        $user = $user_manager->createUser();
+        $user = $user_manager->create();
         $user->setUsername($create_request->username);
         $user->setEmail($create_request->mail);
         $user->setPlainPassword($create_request->password);
@@ -94,7 +94,7 @@ class SecurityController extends AbstractController
     }
     $retArray['preHeaderMessages'] = '';
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   /**
@@ -125,11 +125,11 @@ class SecurityController extends AbstractController
     if (count($violations) > 0) {
       $retArray['preHeaderMessages'] = '';
 
-      return JsonResponse::create($retArray);
+      return new JsonResponse($retArray);
     }
 
-    $username = $request->request->get('registrationUsername');
-    $password = $request->request->get('registrationPassword');
+    $username = (string) $request->request->get('registrationUsername');
+    $password = (string) $request->request->get('registrationPassword');
 
     /** @var User|null $user */
     $user = $user_manager->findUserByUsername($username);
@@ -154,7 +154,7 @@ class SecurityController extends AbstractController
 
     $retArray['preHeaderMessages'] = '';
 
-    return JsonResponse::create($retArray);
+    return new JsonResponse($retArray);
   }
 
   /**

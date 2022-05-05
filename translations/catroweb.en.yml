@@ -183,8 +183,6 @@ programs:
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Do you want to save your changes?
-  saveOnLanguageChange: Would you like to keep your current changes?
-  btnKeep: Keep Changes
   btnDiscard: Discard
   addComment: Write a comment
   thumbsUp: Thumbs up!
@@ -199,10 +197,7 @@ programs:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  translationUpdated: Changes for the translation to %language% updated
   googleTranslate: Google Translate
-  translationDeleted: Custom translation to %language% deleted
-  cannotDelete: Cannot delete default name, description, or credits
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
   save: Save

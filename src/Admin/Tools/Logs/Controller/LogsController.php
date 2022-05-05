@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Admin\Tools\Logs;
+namespace App\Admin\Tools\Logs\Controller;
 
+use App\Admin\Tools\Logs\LogLine;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
@@ -38,7 +39,7 @@ class LogsController extends CRUDController
         $greater_equal_than_level = $request->query->getBoolean('greaterThan');
       }
       if ($request->query->get('file')) {
-        $file = $request->query->get('file');
+        $file = (string) $request->query->get('file');
       }
     }
     $searchParam = [];
@@ -46,7 +47,7 @@ class LogsController extends CRUDController
     $searchParam['greater_equal_than_level'] = $greater_equal_than_level;
     $searchParam['line_count'] = $line_count;
     $allFiles = $this->getAllFilesInDirByPattern(self::LOG_DIR, self::LOG_PATTERN);
-    if (!strlen(trim($file)) || is_null($file)) {
+    if (empty($file)) {
       $file = $allFiles[0];
     }
 

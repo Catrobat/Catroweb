@@ -76,18 +76,18 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
       url: '../comment',
       type: 'post',
       data: { Message: msg, ProgramId: programId },
-      success: function (data) {
-        if (parseInt(data) === 401) {
+      success: function () {
+        $('#comments-wrapper').load(' #comments-wrapper')
+        $('#comment-message').val('')
+        sessionStorage.setItem('temp_program_comment', '')
+        location.reload()
+      },
+      error: function (data) {
+        if (data.status === 401) {
           redirectToLogin()
         } else {
-          $('#comments-wrapper').load(' #comments-wrapper')
-          $('#comment-message').val('')
-          sessionStorage.setItem('temp_program_comment', '')
-          location.reload()
+          showErrorPopUp(defaultErrorMessage)
         }
-      },
-      error: function () {
-        showErrorPopUp(defaultErrorMessage)
       }
     })
   }
@@ -97,18 +97,18 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
       url: '../deleteComment',
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
-      success: function (data) {
-        if (parseInt(data) === 401) {
+      success: function () {
+        $('#comment-' + commentId).remove()
+        showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
+      },
+      error: function (data) {
+        if (data.status === 401) {
           redirectToLogin()
-        } else if (parseInt(data) === 403) {
+        } else if (data.status === 403) {
           showErrorPopUp(noAdminRightsMessage)
         } else {
-          $('#comment-' + commentId).remove()
-          showSuccessPopUp(popUpDeletedTitle, popUpDeletedText)
+          showErrorPopUp(defaultErrorMessage)
         }
-      },
-      error: function () {
-        showErrorPopUp(defaultErrorMessage)
       }
     })
   }
@@ -118,15 +118,15 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
       url: '../reportComment',
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
-      success: function (data) {
-        if (parseInt(data) === 401) {
+      success: function () {
+        showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
+      },
+      error: function (data) {
+        if (data.status === 401) {
           redirectToLogin()
         } else {
-          showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
+          showErrorPopUp(defaultErrorMessage)
         }
-      },
-      error: function () {
-        showErrorPopUp(defaultErrorMessage)
       }
     })
   }

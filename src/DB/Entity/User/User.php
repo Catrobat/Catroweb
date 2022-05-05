@@ -11,6 +11,7 @@ use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
+use App\DB\EntityRepository\User\UserRepository;
 use App\DB\Generator\MyUuidGenerator;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser as BaseUser;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
@@ -60,6 +61,19 @@ class User extends BaseUser
    * )
    */
   protected Collection $programs;
+
+  /**
+   * Requests to change the password issued by this user.
+   * When this user is deleted, all the reset-password requests issued by him should be deleted too.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity=ResetPasswordRequest::class,
+   *     mappedBy="user",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   * )
+   */
+  protected Collection $reset_password_requests;
 
   /**
    * Notifications which are available for this user (shown upon login).
@@ -245,7 +259,6 @@ class User extends BaseUser
 
   public function __construct()
   {
-    parent::__construct();
     $this->programs = new ArrayCollection();
     $this->notifications = new ArrayCollection();
     $this->comments = new ArrayCollection();

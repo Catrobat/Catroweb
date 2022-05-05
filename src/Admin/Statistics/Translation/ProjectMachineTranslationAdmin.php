@@ -4,31 +4,31 @@ namespace App\Admin\Statistics\Translation;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class ProjectMachineTranslationAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_machine_translation';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'project_machine_translation';
 
   /**
    * {@inheritDoc}
    */
-  public function getExportFields()
+  protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'project.name', 'source_language', 'target_language', 'provider', 'usage_count',
       'usage_per_month', 'last_modified_at', 'created_at', 'cached_name', 'cached_description', 'cached_credits', ];
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -50,7 +50,7 @@ class ProjectMachineTranslationAdmin extends AbstractAdmin
     ;
   }
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
     $collection
       ->remove('acl')

@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
-import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
+import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../layout/top_bar'
 
 export function ProjectEditorNavigation (projectDescriptionCredits, programId, programEditor) {
   const self = this
@@ -105,9 +105,8 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
 
   this.getTranslations = () => {
     this.customTranslationApi.getCustomTranslationLanguages(
-      this.programId,
-      this.showTranslations
-    )
+      this.programId
+    ).then(this.showTranslations)
   }
 
   this.showTranslations = (translationLanguages) => {

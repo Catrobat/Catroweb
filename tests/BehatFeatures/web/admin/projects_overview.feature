@@ -210,8 +210,8 @@ Feature: Admin all projects
     And I wait for the page to be loaded
     And I click on the program name "program 5"
     And I wait for the page to be loaded
-    Then I should be on "/admin/projects/5/edit"
-    And I should see "Description"
+    Then I should be on "/admin/projects/5/show"
+    And I should see "Projects Overview"
     And I should see "program 5"
     And I should see "User"
     And I should see "Karim"

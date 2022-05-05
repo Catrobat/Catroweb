@@ -11,7 +11,6 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -19,30 +18,22 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 class MediaPackageFileAdmin extends AbstractAdmin
 {
   /**
-   * @override
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'adminmedia_package_file';
 
   /**
-   * @override
-   *
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'media_package_file';
 
   private MediaPackageFileRepository $media_package_file_repository;
 
-  private ParameterBagInterface $parameter_bag;
-
-  public function __construct($code, $class, $baseControllerName,
-                              MediaPackageFileRepository $media_package_file_repository,
-                              ParameterBagInterface $parameter_bag)
+  public function __construct(?string $code, ?string $class, ?string $baseControllerName,
+                              MediaPackageFileRepository $media_package_file_repository)
   {
     parent::__construct($code, $class, $baseControllerName);
     $this->media_package_file_repository = $media_package_file_repository;
-    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -78,7 +69,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    */
-  public function preUpdate($object): void
+  public function preUpdate(object $object): void
   {
     /* @var MediaPackageFile $object */
     $object->old_extension = $object->getExtension();
@@ -127,7 +118,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FormMapper $form
+   * {@inheritdoc}
    *
    * Fields to be shown on create/edit forms
    */
@@ -150,7 +141,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * @param ListMapper $list
+   * {@inheritdoc}
    *
    * Fields to be shown on lists
    */
@@ -165,7 +156,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
       ->add('flavors', null, ['multiple' => true])
       ->add('downloads')
       ->add('active', null, ['editable' => true])
-      ->add('_action', 'actions', [
+      ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [
           'edit' => [],
           'delete' => [],

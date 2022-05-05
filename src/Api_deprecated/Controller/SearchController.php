@@ -36,7 +36,7 @@ class SearchController extends AbstractController
    */
   public function searchProgramsAction(Request $request, ProgramManager $program_manager, LoggerInterface $searchLogger): ProgramListResponse
   {
-    $query = $request->query->get('q');
+    $query = (string) $request->query->get('q', '');
 
     $username = $this->getUser() ? $this->getUser()->getUsername() : '-';
     $searchLogger->debug("User: {$username}, Query: {$query}");
@@ -48,7 +48,7 @@ class SearchController extends AbstractController
 
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
-    $max_version = $request->query->get('max_version', '');
+    $max_version = (string) $request->query->get('max_version', '');
 
     if ('' === $query || ctype_space($query)) {
       return new ProgramListResponse([], 0);
@@ -99,7 +99,7 @@ class SearchController extends AbstractController
    */
   public function extensionSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
   {
-    $query = $request->query->get('q');
+    $query = (string) $request->query->get('q');
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
     $offset = (int) $request->query->get('offset', $this->DEFAULT_OFFSET);
     $programs = $program_manager->getProjectsByExtensionInternalTitle($query, $limit, $offset);
