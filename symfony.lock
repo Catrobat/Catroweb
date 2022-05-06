@@ -1044,9 +1044,6 @@
     "vimeo/psalm": {
         "version": "3.12.2"
     },
-    "vipsoft/doctrine-data-fixtures-extension": {
-        "version": "3.0.x-dev"
-    },
     "wapmorgan/php-deprecation-detector": {
         "version": "2.0.24"
     },

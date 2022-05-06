@@ -17,6 +17,7 @@
         "catrobat/capi": "1.0.74",
         "codercat/jwk-to-pem": "^1.1",
         "doctrine/annotations": "^1.13",
+        "doctrine/dbal": "^3.3",
         "doctrine/doctrine-bundle": "^2.5",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.12",
@@ -86,7 +87,6 @@
         "symfony/stopwatch": "4.4.*",
         "symfony/web-profiler-bundle": "5.0.*",
         "vimeo/psalm": "^4.22",
-        "vipsoft/doctrine-data-fixtures-extension": "3.0.*@dev",
         "wapmorgan/php-deprecation-detector": "^2.0"
     },
     "config": {
