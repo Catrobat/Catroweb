@@ -71,7 +71,7 @@ class CreateFeatureProgramCommand extends Command
     $feature->setProgram($program);
     $feature->setActive(true);
     $feature->setFlavor($this->flavor_repository->getFlavorByName('pocketcode'));
-    $feature->setImageType('jpeg'); //todo picture?
+    $feature->setImageType('jpeg'); // todo picture?
     $feature->setUrl(null);
 
     $source_img = 'public/resources/screenshots/screen_'.$program->getId().'.png';

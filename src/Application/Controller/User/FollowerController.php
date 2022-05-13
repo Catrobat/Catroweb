@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class FollowerController extends AbstractController
 {
@@ -38,10 +37,9 @@ class FollowerController extends AbstractController
     $page = $request->request->getInt('page');
     $pageSize = $request->request->getInt('pageSize');
 
-    /* @var User|null */
-    if (('0' === $id) || ($this->getUser() && $this->getUser()->getId() === $id)) {
-      $user = $this->getUser();
-    } else {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (!(('0' === $id) || ($user && $user->getId() === $id))) {
       $user = $this->user_manager->find($id);
     }
 
@@ -84,18 +82,6 @@ class FollowerController extends AbstractController
    */
   public function unfollowUser(Request $request, string $id): JsonResponse
   {
-    $csrf_token = (string) $request->query->get('token');
-    if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => 706,
-          'message' => 'Invalid CSRF token.',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw new InvalidCsrfTokenException();
-    }
-
     /** @var User|null $user */
     $user = $this->getUser();
 
@@ -132,18 +118,6 @@ class FollowerController extends AbstractController
    */
   public function followUser(Request $request, string $id): JsonResponse
   {
-    $csrf_token = (string) $request->query->get('token');
-    if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => 706,
-          'message' => 'Invalid CSRF token.',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw new InvalidCsrfTokenException();
-    }
-
     /** @var User|null $user */
     $user = $this->getUser();
 

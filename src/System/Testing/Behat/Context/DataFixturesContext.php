@@ -31,10 +31,10 @@ use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
 use App\System\Commands\DBUpdater\UpdateAchievementsCommand;
 use App\System\Commands\Helpers\CommandHelper;
-use App\System\Testing\Behat\SymfonySupport;
+use App\System\Testing\Behat\ContextTrait;
 use App\Utils\TimeUtils;
+use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use DateTime;
 use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -44,9 +44,9 @@ use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
 
-class DataFixturesContext implements KernelAwareContext
+class DataFixturesContext implements Context
 {
-  use SymfonySupport;
+  use ContextTrait;
 
   private array $programs = [];
   private array $featured_programs = [];

@@ -25,6 +25,7 @@ Feature: To ease the upgrade process a deprecated upload token can be upgraded t
       }
     """
     And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "invalid"
     And I request "POST" "/api/authentication/upgrade"
     Then the response status code should be "406"
 

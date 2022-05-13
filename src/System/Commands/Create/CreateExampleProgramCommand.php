@@ -76,7 +76,7 @@ class CreateExampleProgramCommand extends Command
     $example->setProgram($program);
     $example->setActive(true);
     $example->setFlavor(random_int(0, 1) ? $this->flavor_repository->getFlavorByName('arduino') : $this->flavor_repository->getFlavorByName('embroidery'));
-    $example->setImageType('jpeg'); //todo picture?
+    $example->setImageType('jpeg'); // todo picture?
     $example->setForIos(false);
 
     $source_img = 'public/resources/screenshots/screen_'.$program->getId().'.png';

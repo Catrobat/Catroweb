@@ -10,15 +10,15 @@ use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
-use App\System\Testing\Behat\SymfonySupport;
-use Behat\Behat\Context\Environment\InitializedContextEnvironment;
+use App\System\Testing\Behat\ContextTrait;
+use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Exception;
+use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtensionEnvironment;
 use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -54,9 +54,9 @@ use Symfony\Component\Intl\Locales;
  *
  * 3) Retrieve the response by using $this->getKernelBrowser()->getResponse().
  */
-class ApiContext implements KernelAwareContext
+class ApiContext implements Context
 {
-  use SymfonySupport;
+  use ContextTrait;
 
   /**
    * Name of the user which is used for the next requests.
@@ -122,10 +122,17 @@ class ApiContext implements KernelAwareContext
 
   private array $new_uploaded_projects = [];
 
+  /**
+   * @throws Exception
+   */
   public function getKernelBrowser(): KernelBrowser
   {
     if (null === $this->kernel_browser) {
       $this->kernel_browser = $this->getSymfonyService('test.client');
+    }
+
+    if (null === $this->kernel_browser) {
+      throw new Exception("Can't get KernelBrowser");
     }
 
     return $this->kernel_browser;
@@ -172,10 +179,14 @@ class ApiContext implements KernelAwareContext
     $this->request_content = null;
   }
 
-  /** @BeforeScenario */
+  /**
+   * @BeforeScenario
+   *
+   * @throws Exception
+   */
   public function gatherContexts(BeforeScenarioScope $scope): void
   {
-    /** @var InitializedContextEnvironment $environment */
+    /** @var InitializedSymfonyExtensionEnvironment $environment */
     $environment = $scope->getEnvironment();
     $this->dataFixturesContext = $this->getDataFixturesContext($environment);
   }
@@ -183,7 +194,7 @@ class ApiContext implements KernelAwareContext
   /**
    * @throws Exception
    */
-  protected function getDataFixturesContext(InitializedContextEnvironment $environment): DataFixturesContext
+  protected function getDataFixturesContext(InitializedSymfonyExtensionEnvironment $environment): DataFixturesContext
   {
     $context = $environment->getContext(DataFixturesContext::class);
     if ($context instanceof DataFixturesContext) {
@@ -532,7 +543,7 @@ class ApiContext implements KernelAwareContext
   public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
     // Trying to find the id of the last uploaded project in the database
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $em = $this->getKernel()->getContainer()->get('doctrine')->getManager();
     $uploaded_program = $em->getRepository('App\DB\Entity\Project\Program')->findOneBy([
       'id' => $this->getIDOfLastUploadedProject($api_version),
     ]);
@@ -1144,7 +1155,7 @@ class ApiContext implements KernelAwareContext
    */
   public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
   {
-    $em = $this->kernel->getContainer()->get('doctrine')->getManager();
+    $em = $this->getKernel()->getContainer()->get('doctrine')->getManager();
     $uploaded_program = $em->getRepository('App\DB\Entity\Project\Program')->findOneBy([
       'name' => 'test',
     ]);
@@ -2752,9 +2763,9 @@ class ApiContext implements KernelAwareContext
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Error Logging
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @AfterStep
@@ -3187,9 +3198,9 @@ class ApiContext implements KernelAwareContext
     return true;
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Upload Request process
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * Uploads a Catrobat Project.

@@ -15,8 +15,8 @@ Feature:
     And I fill in "username__input" with "CatrobatNew"
     And I fill in "email__input" with "CatrobatNew@gmail.com"
     And I fill in "password__input" with "123456"
-    Then I press "Create account"
-    And I wait for the page to be loaded
+    Then I click "#register-btn"
+    And I wait for AJAX to finish
     Then I should be on "/app/"
 
   Scenario: Trying to register with a too short password should fail

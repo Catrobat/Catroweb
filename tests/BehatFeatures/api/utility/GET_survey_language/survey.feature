@@ -8,6 +8,7 @@ Feature: There must be a simple way to check the status/health of the catroweb A
       | de            | www.catrosurvey.at  |
 
   Scenario: The request header must be set
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     When I request "GET" "/api/survey/unknown"
     Then the response status code should be "406"
     And the response content must be empty

@@ -6,7 +6,6 @@ import './components/tab_bar'
 require('../styles/custom/profile.scss')
 
 const $followerOverview = $('.js-follower-overview')
-const csrfToken = $followerOverview.data('csrf-token')
 let numberOfFollow = $followerOverview.data('number-of-following')
 const emptyContainerMessage = $('#no-followers')
 
@@ -49,7 +48,7 @@ function unfollow (id, username) {
   }).then((result) => {
     if (result.value) {
       $.ajax({
-        url: $followerOverview.data('unfollow-url') + '/' + id + '?token=' + encodeURIComponent(csrfToken),
+        url: $followerOverview.data('unfollow-url') + '/' + id,
         type: 'delete',
         success: function () {
           $buttons.attr('disabled', false)
@@ -76,7 +75,7 @@ function follow (id) {
   const url = $followerOverview.data('follow-url')
 
   $.ajax({
-    url: url + '/' + id + '?token=' + encodeURIComponent(csrfToken),
+    url: url + '/' + id,
     type: 'post',
     success: function () {
       $buttons.attr('disabled', false)
