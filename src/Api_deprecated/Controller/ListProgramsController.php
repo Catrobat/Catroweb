@@ -3,6 +3,7 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
+use App\DB\Entity\User\User;
 use App\Project\ProgramManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -98,7 +99,9 @@ class ListProgramsController extends AbstractController
         $flavor, $limit, $offset, $max_version
       );
     } elseif ('user' === $sortBy) {
-      if (null !== $this->getUser() && $this->getUser()->getId() === $user_id) {
+      /** @var User|null $user */
+      $user = $this->getUser();
+      if (null !== $user && $user->getId() === $user_id) {
         $programs = $this->program_manager->getUserProjects($user_id, null, null, null, $max_version);
       } else {
         $programs = $this->program_manager->getPublicUserProjects($user_id, null, null, null, $max_version);

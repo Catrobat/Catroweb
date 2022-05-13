@@ -35,7 +35,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProgramController extends AbstractController
@@ -143,18 +142,6 @@ class ProgramController extends AbstractController
    */
   public function projectLikeAction(Request $request, string $id): Response
   {
-    $csrf_token = (string) $request->query->get('token');
-    if (!$this->isCsrfTokenValid('project', $csrf_token)) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => 706,
-          'message' => 'Invalid CSRF token.',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw new InvalidCsrfTokenException();
-    }
-
     $type = $request->query->getInt('type');
     $action = (string) $request->query->get('action');
 
@@ -190,7 +177,7 @@ class ProgramController extends AbstractController
 
       $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
           'project_like',
-          ['id' => $id, 'type' => $type, 'action' => $action, 'token' => $csrf_token],
+          ['id' => $id, 'type' => $type, 'action' => $action],
           UrlGeneratorInterface::ABSOLUTE_URL
         ));
 

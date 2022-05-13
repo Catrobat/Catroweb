@@ -172,7 +172,7 @@ Feature: Reactions to projects "likes"
     And I wait for AJAX to finish
     And I click "#project-like-detail-small .btn[data-like-type=1]"
     And I wait for AJAX to finish
-    Then the ".like-counter" element should contain "3"
+    Then the "#project-like-counter-small" element should contain "3"
     And I should see 3 "#project-like-buttons-small > *"
     And the element "#project-like-buttons-small .thumbs-up" should be visible
     And the element "#project-like-buttons-small .smile" should be visible

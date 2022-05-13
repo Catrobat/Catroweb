@@ -2,6 +2,7 @@
 
 namespace App\Admin\Tools\Logs\Controller;
 
+use App\DB\Entity\User\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -20,6 +21,7 @@ class DownloadLogController extends AbstractController
    */
   public function downloadLogAction(Request $request = null): Response
   {
+    /** @var User|null $user */
     $user = $this->getUser();
     if (is_null($user) || !$user->hasRole('ROLE_SUPER_ADMIN')) {
       throw new AuthenticationException();

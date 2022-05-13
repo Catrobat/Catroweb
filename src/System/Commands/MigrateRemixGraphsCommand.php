@@ -156,22 +156,22 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar_format_verbose = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | '.
       'ETA: %estimated:-6s% | Status: %message%';
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (1) lock
-    //==============================================================================================================
+    // ==============================================================================================================
     $this->migration_file_lock->lock();
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (2) remove all existing remix relations
-    //==============================================================================================================
+    // ==============================================================================================================
     $this->remix_manager->removeAllRelations();
     $this->entity_manager->clear();
     $this->program_manager->markAllProgramsAsNotYetMigrated();
     $this->entity_manager->clear();
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (3) create remix relations with parents that have already been visited by previous loop iterations!!
-    //==============================================================================================================
+    // ==============================================================================================================
     $total_number_of_existing_programs = count($this->program_manager->findAll());
     $progress_bar = new ProgressBar($output, $total_number_of_existing_programs);
     $progress_bar->setFormat($progress_bar_format_verbose);
@@ -211,10 +211,10 @@ class MigrateRemixGraphsCommand extends Command
     $output->writeln('<info>Migrated only forward remixes of '.count($remix_data_map).
       ' programs (Skipped '.$skipped.') Duration: '.$duration.'</info>');
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (4) now, all programs have been visited by the foreach-loop above:
     //     -> perform update with full remix data -> automatically creates remix relations with missing parents!!
-    //==============================================================================================================
+    // ==============================================================================================================
     $progress_bar = new ProgressBar($output, count($remix_data_map));
     $progress_bar->setFormat($progress_bar_format_verbose);
     $progress_bar->start();
@@ -242,9 +242,9 @@ class MigrateRemixGraphsCommand extends Command
     $output->writeln('<info>Migrated remaining remixes of '.count($remix_data_map).
       ' programs (Skipped '.$skipped.') Duration: '.$duration.'</info>');
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (5) migrate remix data of all programs that have been uploaded by users during migration!
-    //==============================================================================================================
+    // ==============================================================================================================
     $progress_bar = new ProgressBar($output);
     $progress_bar->setFormat($progress_bar_format_simple);
     $progress_bar->start();
@@ -279,14 +279,14 @@ class MigrateRemixGraphsCommand extends Command
     $output->writeln('<info>Migrated remixes of '.$intermediate_uploads.' programs uploaded '.
       'during migration (Skipped '.$skipped.') Duration: '.$duration.'</info>');
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (6) unlock
-    //==============================================================================================================
+    // ==============================================================================================================
     $this->migration_file_lock->unlock();
 
-    //==============================================================================================================
+    // ==============================================================================================================
     // (7) finally mark all relations as seen, so the users will not get bothered with many remix user notifications
-    //==============================================================================================================
+    // ==============================================================================================================
     $seen_at = TimeUtils::getDateTime();
     $seen_at->setTimestamp(0); // 1970-01-01 in order to indicate that this was not seen by the user
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
@@ -305,7 +305,7 @@ class MigrateRemixGraphsCommand extends Command
 
     try {
       $program_file = new File($program_file_path);
-      //$extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
+      // $extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
       $extracted_file = $this->file_extractor->extract($program_file);
     } catch (Exception $ex) {
       $progress_bar->clear();
@@ -318,15 +318,15 @@ class MigrateRemixGraphsCommand extends Command
     $result = $empty_result;
 
     if (null != $extracted_file) {
-      //----------------------------------------------------------------------------------------------------------
+      // ----------------------------------------------------------------------------------------------------------
       // NOTE: this is a workaround only needed for migration purposes in order to stay backward compatible
       //       with older XML files -> do not change order here
-      //----------------------------------------------------------------------------------------------------------
+      // ----------------------------------------------------------------------------------------------------------
       $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->program_repository, false);
       assert(1 == count($url_data), 'WTH! This program has multiple urls with different program IDs?!!');
       assert($url_data[0]->getProgramId() == $program_id);
 
-      //$remix_of_string = $extracted_file->getRemixMigrationUrlsString();
+      // $remix_of_string = $extracted_file->getRemixMigrationUrlsString();
       $remix_data_only_forward_parents = $extracted_file->getRemixesData($program_id, true, $this->program_repository, true);
       $full_remix_data = $extracted_file->getRemixesData($program_id, false, $this->program_repository, true);
       $language_version = $extracted_file->getLanguageVersion();

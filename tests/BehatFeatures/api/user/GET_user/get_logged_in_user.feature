@@ -41,6 +41,7 @@ Feature: Get logged in user
     Then the response status code should be "401"
 
   Scenario: Get user without setting accept header should return 406 status code
-    Given I use a valid JWT Bearer token for "Catrobat"
-    And I request "GET" "/api/user"
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
+    And I use a valid JWT Bearer token for "Catrobat"
+    When I request "GET" "/api/user"
     Then the response status code should be "406"

@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
 class ProfileController extends AbstractController
 {
@@ -53,13 +52,11 @@ class ProfileController extends AbstractController
    * Overwrite for FosUser Profile Route (We don't use it!)
    * @Route("/user/}")
    */
-  public function profileAction(Request $request, string $id): Response
+  public function profileAction(string $id): Response
   {
     /** @var User|null $user */
-    $user = null;
-
-    if ('0' === $id || ($this->getUser() && $this->getUser()->getId() === $id)) {
-      $user = $this->getUser();
+    $user = $this->getUser();
+    if ('0' === $id || ($user && $user->getId() === $id)) {
       if (is_null($user)) {
         return $this->redirectToRoute('login');
       }
@@ -90,7 +87,7 @@ class ProfileController extends AbstractController
   /**
    * @Route("/passwordSave", name="password_save", methods={"POST"})
    */
-  public function passwordSaveAction(Request $request, UserManager $user_manager, EncoderFactoryInterface $factory): Response
+  public function passwordSaveAction(Request $request, UserManager $user_manager): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -100,10 +97,9 @@ class ProfileController extends AbstractController
 
     $old_password = (string) $request->request->get('oldPassword');
 
-    $encoder = $factory->getEncoder($user);
     $bool = true;
     if ('' !== $old_password) {
-      $bool = $encoder->isPasswordValid($user->getPassword(), $old_password, $user->getSalt());
+      $bool = $user_manager->isPasswordValid($user, $old_password);
     }
 
     if (!$bool && ($user->isOauthPasswordCreated() || !$user->isOauthUser())) {
@@ -364,9 +360,9 @@ class ProfileController extends AbstractController
     return new JsonResponse(['profiles' => $data, 'maximum' => $length]);
   }
 
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  //// private functions
-  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // // private functions
+  // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   /**
    * @throws Exception

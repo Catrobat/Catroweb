@@ -19,7 +19,6 @@
             apiPath: path('open_api_server_user_userresetpasswordpost'),
             checkYourMailsUrl: path('app_check_email')
           }) }}>
-        <input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token|default('') }}"/>
 
         {% include 'components/text_field.html.twig' with {
           'text_field':

@@ -2,15 +2,15 @@
 
 namespace App\System\Testing\Behat\Context;
 
-use App\System\Testing\Behat\SymfonySupport;
+use App\System\Testing\Behat\ContextTrait;
 use App\Utils\TimeUtils;
+use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Element\NodeElement;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
 use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Exception;
 use PHPUnit\Framework\Assert;
 
@@ -19,13 +19,13 @@ use PHPUnit\Framework\Assert;
  *
  * Configures the Mink WebBrowser and provides basic utilities to check and interact with an web page.
  */
-class BrowserContext extends MinkContext implements KernelAwareContext
+class BrowserContext extends MinkContext implements Context
 {
-  use SymfonySupport;
+  use ContextTrait;
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Session Handling
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @BeforeScenario
@@ -44,9 +44,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     $this->getSession()->restart();
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Assert Page Content
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @Given /^the element "([^"]*)" should not exist$/
@@ -212,9 +212,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     Assert::assertTrue($element->isVisible());
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Interacting with the web page
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @When /^I click "([^"]*)"$/
@@ -327,7 +327,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
   public function iShouldHaveDownloadedAFileNamed(string $name): void
   {
     $received = false;
-    $file_path = $this->getSymfonyParameter('catrobat.tests.upld-dwnld-dir').'/'.$name;
+    $file_path = $this->getSymfonyParameterAsString('catrobat.tests.upld-dwnld-dir').'/'.$name;
 
     $end_time = TimeUtils::getTimestamp() + 5; // Waiting for files to be downloaded times out after 5 seconds
     while (TimeUtils::getTimestamp() < $end_time) {
@@ -416,9 +416,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     Assert::assertTrue($selected, "Item '".$text."' for '".$selector."' has not been selected");
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  WAIT - Sometimes it is necessary to wait to prevent timing issues
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * Try to use this function only if it is not possible to define a waiting condition.
@@ -450,10 +450,7 @@ class BrowserContext extends MinkContext implements KernelAwareContext
    */
   public function iWaitForAjaxToFinish(): void
   {
-    $this->getSession()->wait(5_000,
-      '(typeof(jQuery)=="undefined" || (0 === jQuery.active && 0 === jQuery(\':animated\').length))'
-    );
-    $this->getSession()->wait(500);
+    $this->getSession()->wait(1000);
   }
 
   /**
@@ -505,9 +502,9 @@ class BrowserContext extends MinkContext implements KernelAwareContext
     throw new ResponseTextException($message, $this->getSession());
   }
 
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
   //  Error Logging
-  //--------------------------------------------------------------------------------------------------------------------
+  // --------------------------------------------------------------------------------------------------------------------
 
   /**
    * @AfterStep
