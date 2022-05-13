@@ -1,6 +1,6 @@
 security:
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
-    encoders:
+    password_hashers:
         Sonata\UserBundle\Model\UserInterface: auto
 
     providers:
@@ -205,26 +205,26 @@ security:
 
     access_control:
         # JWTRefreshTokenBundle
-        - { path: ^/api/authentication/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/api/authentication/refresh, roles: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # The WDT has to be allowed to anonymous users to avoid requiring the login with the AJAX request
-        - { path: ^/wdt/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-        - { path: ^/profiler/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/wdt/, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/profiler/, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # AsseticBundle paths used when using the controller for assets
-        - { path: ^/js/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-        - { path: ^/css/, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/js/, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/css/, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # URL of FOSUserBundle which need to be available to anonymous users
-        - { path: ^/login$, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-        - { path: ^/register, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
-        - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/login$, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/register, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/resetting, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # Secured part of the site
         # This config requires being logged for the whole site and having the admin role for the admin part.
         # Change these rules to adapt them to your needs
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN], requires_channel: '%env(SECURE_SCHEME)%' }
-        - { path: ^/.*, role: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: '%env(SECURE_SCHEME)%' }
+        - { path: ^/.*, role: PUBLIC_ACCESS, requires_channel: '%env(SECURE_SCHEME)%' }
 
         # Only specific admin rights
         - { path: ^/admin/, role: [ROLE_ADMIN, ROLE_SONATA_ADMIN], requires_channel: '%env(SECURE_SCHEME)%' }

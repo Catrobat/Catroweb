@@ -67,7 +67,9 @@ class StudioController extends AbstractController
     if (is_null($studio)) {
       throw $this->createNotFoundException('Unable to find this studio');
     }
-    $user_role = $this->studio_manager->getStudioUserRole($this->getUser(), $studio);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $user_role = $this->studio_manager->getStudioUserRole($user, $studio);
     $members_count = $this->studio_manager->countStudioUsers($studio);
     $activities_count = $this->studio_manager->countStudioActivities($studio);
     $projects = $this->studio_manager->findAllStudioProjects($studio);
@@ -210,7 +212,9 @@ class StudioController extends AbstractController
     if (is_null($project) || is_null($studio)) {
       return new JsonResponse(Response::HTTP_NOT_FOUND);
     }
-    $this->studio_manager->deleteProjectFromStudio($this->getUser(), $studio, $project);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->deleteProjectFromStudio($user, $studio, $project);
     $projects_count = ' ('.$this->studio_manager->countStudioProjects($studio).')';
     $activities_count = $this->studio_manager->countStudioActivities($studio);
     if (is_null($this->studio_manager->findStudioProject($studio, $project))) {
@@ -235,7 +239,9 @@ class StudioController extends AbstractController
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
     $replies_count = null;
-    $this->studio_manager->deleteCommentFromStudio($this->getUser(), $comment_id);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
     if ('true' === $isReply && $parent_id > 0) {
       $replies_count = $this->studio_manager->countCommentReplies($parent_id).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
     }
@@ -264,11 +270,13 @@ class StudioController extends AbstractController
     }
     $replies_count = null;
     $comments_count = null;
+    /** @var User|null $user */
+    $user = $this->getUser();
     if ($isReply) {
-      $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text, $request->request->getInt('parentID'));
+      $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text, $request->request->getInt('parentID'));
       $replies_count = $this->studio_manager->countCommentReplies($request->request->getInt('parentID')).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
     } else {
-      $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text);
+      $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text);
       $comments_count = ' ('.$this->studio_manager->countStudioComments($studio).')';
     }
     $activities_count = $this->studio_manager->countStudioActivities($studio);
@@ -319,7 +327,9 @@ class StudioController extends AbstractController
     foreach ($replies as $reply) {
       $rs .= $this->getCommentsAndRepliesForAjax($reply, true);
     }
-    if (!is_null($this->getUser()) && $this->studio_manager->isUserInStudio($this->getUser(), $comment->getStudio())) {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (!is_null($user) && $this->studio_manager->isUserInStudio($user, $comment->getStudio())) {
       $rs .= '<div id="add-reply" class="add-comment-section">';
       $rs .= '<input type="text" placeholder="'.$this->translator->trans('studio.details.type_something', [], 'catroweb').'">';
       $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).postComment(true)">';
@@ -352,7 +362,9 @@ class StudioController extends AbstractController
     $headerImg->move($coverPath, $coverName);
     $pathToSave = '/'.$newPath.$coverName;
     $studio->setCoverPath('resources'.$pathToSave);
-    $this->studio_manager->changeStudio($this->getUser(), $studio);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->changeStudio($user, $studio);
 
     return new JsonResponse(['new_cover' => $pathToSave], Response::HTTP_OK);
   }
@@ -386,7 +398,9 @@ class StudioController extends AbstractController
       $studio->setIsPublic(!is_null($is_public) && true === filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
 
       $studio->setUpdatedOn(new \DateTime('now'));
-      $this->studio_manager->changeStudio($this->getUser(), $studio);
+      /** @var User|null $user */
+      $user = $this->getUser();
+      $this->studio_manager->changeStudio($user, $studio);
     }
 
     return $this->redirect($request->headers->get('referer'));
@@ -435,7 +449,9 @@ class StudioController extends AbstractController
     $rs .= '<img class="comment-avatar" src="'.$avatarSrc.'" alt="Card image">';
     $rs .= '<div class="comment-content">';
     $rs .= '<a href="/app/user/'.$comment->getUser()->getId().'">'.$comment->getUsername().'</a>';
-    if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($this->getUser(), $comment->getStudio())
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $comment->getStudio())
         || (!is_null($this->getUser()) && $this->getUser()->getUsername() === $comment->getUsername())) && $isReply) {
       $rs .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="(new Studio()).removeComment($(this),'.$comment->getId().', true, '.$comment->getParentId().')"';
       $rs .= ' title="'.$this->translator->trans('studio.details.remove_comment', [], 'catroweb').'">';

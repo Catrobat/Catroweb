@@ -11,6 +11,7 @@ Feature: Get more projects from an user as recommendation
       | 1  | project 1 |
 
   Scenario: Invalid Request Header
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     When I request "GET" "/api/project/1/recommendations?category=more_from_user"
     Then the response status code should be "406"
 

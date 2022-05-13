@@ -13,7 +13,7 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\UrlHelper;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @internal
@@ -26,7 +26,7 @@ class UserManagerTest extends TestCase
   protected function setUp(): void
   {
     $canonicalFieldsUpdater = $this->createMock(CanonicalFieldsUpdater::class);
-    $userPasswordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
+    $userPasswordHasher = $this->createMock(UserPasswordHasherInterface::class);
     $object_manager = $this->createMock(EntityManagerInterface::class);
     $meta = $this->createMock(ClassMetadata::class);
     $repository = $this->createMock(EntityRepository::class);
@@ -38,7 +38,7 @@ class UserManagerTest extends TestCase
     $url_helper = new UrlHelper(new RequestStack());
     $this->user_manager = new UserManager(
         $canonicalFieldsUpdater,
-        $userPasswordEncoder,
+        $userPasswordHasher,
         $object_manager,
         $user_finder,
         $program_manager,

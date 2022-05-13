@@ -135,7 +135,7 @@ class MaintainController extends CRUDController
       throw new AccessDeniedException();
     }
 
-    //... use any methods or services to get statistics data
+    // ... use any methods or services to get statistics data
     $RemovableObjects = [];
 
     $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the programs accordingly";
@@ -211,7 +211,7 @@ class MaintainController extends CRUDController
   {
     $count_size = 0;
     $count = 0;
-    $dir_array = preg_grep('#^([^.])#', scandir($directory)); //no hidden files
+    $dir_array = preg_grep('#^([^.])#', scandir($directory)); // no hidden files
     foreach ($dir_array as $filename) {
       if (null !== $extension && !in_array(pathinfo($filename, PATHINFO_EXTENSION), $extension, true)) {
         continue;

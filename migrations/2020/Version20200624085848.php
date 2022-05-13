@@ -28,7 +28,7 @@ final class Version20200624085848 extends AbstractMigration
     $this->addSql('ALTER TABLE mediapackagefile_flavor ADD CONSTRAINT FK_F139CC7DFDDA6450 FOREIGN KEY (flavor_id) REFERENCES flavor (id) ON DELETE CASCADE');
 
     $this->addSql('INSERT IGNORE INTO flavor(name) VALUES(\'pocketcode\'), (\'pocketalice\'), (\'pocketgalaxy\'), (\'phirocode\'), (\'luna\'), (\'create@school\'), (\'embroidery\'), (\'arduino\')');
-    //Converts the old string flavors into the many_to_many relation. The first SELECT is for files with a valid flavor, the second SELECT adds the 'pocketcode' flavor to all files with invalid flavors(NULL, 'app')
+    // Converts the old string flavors into the many_to_many relation. The first SELECT is for files with a valid flavor, the second SELECT adds the 'pocketcode' flavor to all files with invalid flavors(NULL, 'app')
     $this->addSql('INSERT IGNORE INTO mediapackagefile_flavor(mediapackagefile_id, flavor_id)
             SELECT f.id, flavor.id FROM flavor INNER JOIN media_package_file AS f ON f.flavor = flavor.name
             UNION

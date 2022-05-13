@@ -254,7 +254,8 @@ Feature: Registering a new user.
 
 
   Scenario: Trying to send an invalid request, without HTTP_ACCEPT, should return json as response
-    Given I have the following JSON request body:
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
+    And I have the following JSON request body:
     """
       {
         "dry-run": false,

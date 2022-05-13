@@ -18,6 +18,7 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Project\Event\ProgramAfterInsertEvent;
 use App\Project\Event\ProgramBeforeInsertEvent;
+use App\Project\Event\ProgramBeforePersistEvent;
 use App\Project\ProgramManager;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
@@ -288,8 +289,10 @@ class ProgramManagerTest extends TestCase
       ->with($this->isInstanceOf(Program::class))
     ;
 
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->will($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->programAfterInsertEvent))
+      ->willReturn($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->createMock(ProgramBeforePersistEvent::class), $this->programAfterInsertEvent))
     ;
 
     $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));

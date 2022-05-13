@@ -11,6 +11,7 @@ Feature: Get recommended project based on a specific project
       | 1  | project 1 |
 
   Scenario: Invalid Request Header
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     When I request "GET" "/api/project/1/recommendations?category=similar"
     Then the response status code should be "406"
 

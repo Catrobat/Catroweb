@@ -413,7 +413,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.1]
 ### Fixed
-- Fixes a problem in db connection with `server_version` in `doctrine.yml`([DoctrineSource])
+- Fixes a problem in db connection with `server_version` in `doctrine.yaml`([DoctrineSource])
 ## [2.1.0]
 ### Added
 - Program Owner now visible on small devices too.

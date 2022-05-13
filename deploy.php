@@ -200,7 +200,7 @@ after('deploy:failed', 'deploy:unlock');
 
 // Migrate database before symlink new release.
 // should maybe not be done automatically. we can do that no problem but that is not that nice.
-//before('deploy:symlink', 'database:migrate');
+// before('deploy:symlink', 'database:migrate');
 
 before('deploy:prepare', 'slack:notify');
 after('deploy:failed', 'slack:notify:failure');

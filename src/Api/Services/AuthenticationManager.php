@@ -27,7 +27,7 @@ class AuthenticationManager
     RefreshTokenGeneratorInterface $refresh_token_generator,
     RefreshTokenManagerInterface $refresh_manager,
     RequestHelper $request_helper,
-    int $refresh_token_ttl // bind in services.yml
+    int $refresh_token_ttl // bind in services.yaml
   ) {
     $this->token_storage = $token_storage;
     $this->jwt_manager = $jwt_manager;

@@ -5,7 +5,7 @@ import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
 import { getCookie } from '../security/CookieHelper'
 
-export const Program = function (projectId, projectName, csrfToken, userRole, myProgram, statusUrl, createUrl, likeUrl,
+export const Program = function (projectId, projectName, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
   btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText, downloadStartedText) {
   createLinks()
@@ -292,7 +292,7 @@ export const Program = function (projectId, projectName, csrfToken, userRole, my
     $counter.on('click', { small: false }, counterClickAction)
     $counterSmall.on('click', { small: true }, counterClickAction)
     $detail.find('.btn').on('click', detailsAction)
-    $detailSmall.find('.btn').on('click', detailsAction)
+    $detailSmall.find('.btn').on('click', detailsActionSmall)
   }
 
   function counterClickAction (event) {
@@ -397,17 +397,33 @@ export const Program = function (projectId, projectName, csrfToken, userRole, my
   function detailsAction (event) {
     event.preventDefault()
     const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
-    sendProjectLike($(this).data('like-type'), action, $projectLikeButtonsSmall,
-      $projectLikeCounterSmall, $projectLikeDetailSmall, true)
-    sendProjectLike($(this).data('like-type'), action, $projectLikeButtons,
-      $projectLikeCounter, $projectLikeDetail, false)
+    sendProjectLike(
+      $(this).data('like-type'),
+      action,
+      $projectLikeButtons,
+      $projectLikeCounter,
+      $projectLikeDetail,
+      false
+    )
+  }
+
+  function detailsActionSmall (event) {
+    event.preventDefault()
+    const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
+    sendProjectLike(
+      $(this).data('like-type'),
+      action,
+      $projectLikeButtonsSmall,
+      $projectLikeCounterSmall,
+      $projectLikeDetailSmall,
+      true
+    )
   }
 
   function sendProjectLike (likeType, likeAction, likeButtons, likeCounter, likeDetail, smallScreen) {
     const url = likeUrl +
       '?type=' + encodeURIComponent(likeType) +
-      '&action=' + encodeURIComponent(likeAction) +
-      '&token=' + encodeURIComponent(csrfToken)
+      '&action=' + encodeURIComponent(likeAction)
 
     if (userRole === 'guest') {
       window.location.href = url

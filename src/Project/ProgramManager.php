@@ -302,7 +302,7 @@ class ProgramManager
       $program->setScratchId($program_data['id']);
       $program->setDebugBuild(false);
     } else {
-      //throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
+      // throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
       if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
         return $program;
       }

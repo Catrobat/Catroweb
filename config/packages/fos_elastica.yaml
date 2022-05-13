@@ -1,5 +1,5 @@
 # Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/doc/setup.md
-# Base config: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/tests/Functional/app/Basic/config.yml
+# Base config: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/tests/Functional/app/Basic/config.yaml
 fos_elastica:
     clients:
         default:

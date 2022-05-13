@@ -39,7 +39,7 @@ jobs:
       - name: Build catroweb app image
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yml build app.catroweb
+          docker-compose -f docker-compose.test.yaml build app.catroweb
           docker save app.catroweb > catroweb-image.tar
 
       - name: Upload app.catroweb image
@@ -69,7 +69,7 @@ jobs:
       - name: Pull the latest images to build (Faster than caching)
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yml pull
+          docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
         uses: actions/download-artifact@v3
@@ -82,7 +82,7 @@ jobs:
         run: |
           cd docker
           docker load < catroweb-image.tar
-          docker-compose -f docker-compose.test.yml up -d
+          docker-compose -f docker-compose.test.yaml up -d
           sleep 60
 
       - name: Enable BypassFinals
@@ -127,7 +127,7 @@ jobs:
   #  - To ease the debugging, besides a log file, screenshots of failing tests are uploaded as artifacts.
   #
   #  Notes:
-  #    - Check the behat.yml when changing / creating new suites
+  #    - Check the behat.yaml when changing / creating new suites
   #    - suites will finish their work even if another suite fails (fail-fast: false)
   #
   tests_behat:
@@ -182,7 +182,7 @@ jobs:
       - name: Pull the latest images to build (Faster than caching)
         run: |
           cd docker
-          docker-compose -f docker-compose.test.yml pull
+          docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
         uses: actions/download-artifact@v3
@@ -194,7 +194,7 @@ jobs:
         run: |
           cd docker
           docker load < catroweb-image.tar
-          docker-compose -f docker-compose.test.yml up -d
+          docker-compose -f docker-compose.test.yaml up -d
           sleep 30
 
       # Test Run

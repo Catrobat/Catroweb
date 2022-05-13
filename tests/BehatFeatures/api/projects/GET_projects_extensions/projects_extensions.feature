@@ -2,6 +2,7 @@
 Feature: Get project extensions
 
   Scenario: Get project extensions without accept header
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     And I request "GET" "/api/projects/extensions"
     Then the response status code should be "406"
 
