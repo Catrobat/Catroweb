@@ -39,7 +39,7 @@ privacyPolicy: Política de Privacidade
 imprint: Imprimir
 programDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'O recurso solicitado não existe.'
 pleaseTryAgain: 'Por favor, tente de novo!'
 oldVersionError: 'Por favor, atualize para a versão mais recente do Pocket Code!'
 more: 'mais'
@@ -158,7 +158,7 @@ programs:
   reportOwnProgram: Você não pode sinalizar o seu próprio projeto.
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
-  updateAppHeaderDownload: Não é possível baixar
+  updateAppHeaderDownload: Não foi possível baixar
   updateAppTextDownload: Por favor, atualize seu aplicativo para a versão mais recente. Esteja ciente de que nem todos os recursos do Android já estão disponíveis no IOS.
   updateAppTextDownloadApk: O download de APK está disponível apenas no Android e não no IOS.
   updateAppHeader: Atualizar aplicativo
@@ -175,8 +175,8 @@ programs:
   deleted_popup: Comentário apagado com sucesso.
   deleted_popup_header: Apagado
   noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: Editar o projeto
+  closeProjectEditor: Fechar editor de projeto
   closeEditorPrompt: Deseja salvar as alterações?
   btnDiscard: Descartar
   addComment: Escrever comentário
@@ -192,15 +192,15 @@ programs:
   showTranslation: Mostrar tradução
   hideTranslation: Ocultar tradução
   translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: Google Tradutor
+  confrimDelete: Você tem certeza que deseja excluir a tradução?
   default: Padrão
   save: Salvar
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: 'Tradução de %language% '
+  editDefault: Editar padrão
+  editTranslation: Editar tradução de %language%
+  translations: Traduções
+  createTranslation: Criar tradução
 remixGraph:
   title: Remixes
   showRemixGraph: 'Mostrar gráfico de remistura'
@@ -224,12 +224,11 @@ accountConfirmation:
     <p>
     Caro(a) %username%.<br>
     <br>
-    Para finalizar a ativação da sua conta - por favor, clique <a href=%confirmationUrl%>aqui.</a><br>
+    Para concluir a ativação de sua conta - clique <a href="%confirmationUrl%">aqui.</a><br>
+    Este link só pode ser usado uma vez para validar sua conta.<br>
     <br>
-    Este link só pode ser usado uma única vez para validar sua conta.<br>
-    <br>
-    Uma boa sorte,<br>
-    A Equipe Catrobat.
+    Atenciosamente,<br>
+    Your Catrobat Team.
     </p>
 passwordRecovery:
   subject: Sua recuperação de senha Catrobat
@@ -245,19 +244,19 @@ passwordRecovery:
     Sua equipe Catrobat.
   messageHtml: |
     <p>
-    Para %username%.<br>
+    Caro(a) %username%.<br>
     <br>
     Você solicitou redefinir sua senha no <a href=%appplication_url%>Pocket Code</a> por tê-la esquecido.
     Se você não fez esta solicitação, por favor, ignore-a. Ela expirará e se tornará inutilizável em 24 horas.<br>
     <br>
     Para redefinir sua senha e criar uma nova, por favor clique <a href=%confirmationUrl%>aqui.</a><br>
     <br>
-    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a <a href=%appplication_url%>comunidade</a> do Pocket Code.<br>
+    Você pode usar seu nome de usuário e senha a qualquer momento para acessar a <a href=%appplication_url%>comunidade</a> Pocket Code.<br>
     Para isso, siga para a página: <a href=%loginPage%>Página de Login</a><br>
     Para alterar os detalhes do seu perfil, siga para esta <a href=%profilePage%>página</a>.<br>
     <br>
     Sinceros cumprimentos,<br>
-    O time do Catrobat.
+    Seu Time Your Catrobat.
     </p>
 profile:
   edit: Editar seu perfil
@@ -364,13 +363,13 @@ termsOfUse:
   version: Versão 1.3, 4 de março de 2014
 search:
   dotdotdot: Pesquisar...
-  search: Buscar
+  search: Procurar
   inMediaLib: Pesquisar na biblioteca de mídia
   results: Resultados da Busca
   resultcount: Sua busca retornou %count% resultados
   fail: Por favor, insira ao menos um termo de busca
   noUsers: Nenhum usuário encontrado
-  noProjects: No projects found
+  noProjects: Nenhum projeto encontrado
 menu:
   profile: Meu Perfil
   login: Login
@@ -680,7 +679,7 @@ catro-notifications:
     message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
 clipboard:
   success_project: Link para o projeto copiado para área de transferência!
-  success_user: Link to user copied to clipboard!
+  success_user: Link para usuário copiado para área de transferência!
   fail: Falha ao copiar link para área de transferência! :(
 next: Próximo
 previous: Anterior
@@ -716,7 +715,7 @@ share:
   success: 'Compartilhado com sucesso'
 copy: 'Copiar link'
 checkOutProject: 'Confira este projeto:'
-checkOutUser: 'Check out this user:'
+checkOutUser: 'Confira este usuário:'
 community: 'Comunidade Catrobat'
 back_to_app: 'Sair da comunidade'
 category:
@@ -773,14 +772,14 @@ achievements:
         title: "Coding Jam '21"
         description: "Participante da programação Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Bilingue"
+        description: "Traduza seus projetos para 2 idiomas"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Trilíngue"
+        description: "Traduza seus projetos para 3 idiomas"
       linguist:
-        title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        title: "Linguista"
+        description: "Traduza seus projetos para 5 idiomas"
 tags:
   title: 'Etiquetas'
   tag:
