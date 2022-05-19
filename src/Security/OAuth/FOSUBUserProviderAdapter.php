@@ -3,10 +3,9 @@
 namespace App\Security\OAuth;
 
 use App\DB\Entity\User\User;
+use App\User\UserManager;
 use Exception;
-use FOS\UserBundle\Model\UserManagerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\User\FOSUBUserProvider;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use RuntimeException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -14,13 +13,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
 {
-  protected FOSUBUserProvider $provider;
-  protected UserManagerInterface $user_manager;
+  protected UserManager $user_manager;
   protected array $properties = ['identifier' => 'id'];
 
-  public function __construct(UserManagerInterface $userManager, array $properties)
+  public function __construct(UserManager $userManager, array $properties)
   {
-    $this->provider = new FOSUBUserProvider($userManager, $properties);
     $this->properties = array_merge($this->properties, $properties);
     $this->user_manager = $userManager;
   }
@@ -33,7 +30,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
     if (!$user instanceof User) {
       throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', get_class($user)));
     }
-    //retrieve access token and the ID
+    // retrieve access token and the ID
     $property = $this->getProperty($response);
     $username = $response->getUsername();
     $service = $response->getResourceOwner()->getName();
@@ -43,13 +40,13 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
     $setter_access_token = $setter_name.'AccessToken';
     $access_token = $response->getAccessToken();
 
-    //Disconnect previous user
-    if (null !== $previousUser = $this->user_manager->findUserBy([$property => $username])) {
+    // Disconnect previous user
+    if (null !== $previousUser = $this->user_manager->findOneBy([$property => $username])) {
       $previousUser->{$setter_id}(null);
       $previousUser->{$setter_access_token}(null);
       $this->user_manager->updateUser($user);
     }
-    //username is a unique integer
+    // username is a unique integer
     $user->{$setter_id}($username);
     $user->{$setter_access_token}($access_token);
     $this->user_manager->updateUser($user);
@@ -62,21 +59,21 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
   {
     $username = $response->getUsername();
 
-    $user = $this->user_manager->findUserBy([$this->getProperty($response) => $username]);
+    $user = $this->user_manager->findOneBy([$this->getProperty($response) => $username]);
     $service = $response->getResourceOwner()->getName();
-    //make setter and getter names dynamic so we can use it for more services (Facebook, Google, Github)
+    // make setter and getter names dynamic so we can use it for more services (Facebook, Google, Github)
     $setter_name = 'set'.ucfirst($service);
     $setter_id = $setter_name.'Id';
     $setter_access_token = $setter_name.'AccessToken';
     $access_token = $response->getAccessToken();
-    //register new user
+    // register new user
     if (null === $user) {
       $user = $this->user_manager->findUserByEmail($response->getEmail());
-      //if user with the given email doesnt exists create a new user
+      // if user with the given email doesnt exists create a new user
       if (null === $user) {
         /** @var User $user */
-        $user = $this->user_manager->createUser();
-        //generate random username for example user12345678, needs to be discussed
+        $user = $this->user_manager->create();
+        // generate random username for example user12345678, needs to be discussed
         $user->setUsername($this->createRandomUsername($response));
         $user->setEmail($response->getEmail());
         $user->setEnabled(true);
@@ -90,10 +87,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
       return $user;
     }
 
-    //if user exists just proceed with hwioauthentication
-    $user = $this->provider->loadUserByOAuthUserResponse($response);
-
-    //update access token
+    // update access token
     $user->{$setter_access_token}($access_token);
 
     return $user;
@@ -136,8 +130,6 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
   }
 
   /**
-   * Copied from provider since protected access + final!
-   *
    * @throws RuntimeException
    */
   protected function getProperty(UserResponseInterface $response): string

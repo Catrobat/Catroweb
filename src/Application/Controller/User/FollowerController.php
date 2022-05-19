@@ -14,7 +14,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Exception\InvalidCsrfTokenException;
 
 class FollowerController extends AbstractController
 {
@@ -35,12 +34,12 @@ class FollowerController extends AbstractController
    */
   public function followerAction(Request $request, string $id = '0'): Response
   {
-    /** @var User|null */
-    $user = null;
+    $page = $request->request->getInt('page');
+    $pageSize = $request->request->getInt('pageSize');
 
-    if (('0' === $id) || ($this->getUser() && $this->getUser()->getId() === $id)) {
-      $user = $this->getUser();
-    } else {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (!(('0' === $id) || ($user && $user->getId() === $id))) {
       $user = $this->user_manager->find($id);
     }
 
@@ -50,8 +49,8 @@ class FollowerController extends AbstractController
 
     $criteria = Criteria::create()
       ->orderBy(['username' => Criteria::ASC])
-      ->setFirstResult($request->get('page') * $request->get('pageSize'))
-      ->setMaxResults($request->get('pageSize'))
+      ->setFirstResult($page * $pageSize)
+      ->setMaxResults($pageSize)
     ;
 
     /** @var ArrayCollection $followersCollection */
@@ -83,18 +82,6 @@ class FollowerController extends AbstractController
    */
   public function unfollowUser(Request $request, string $id): JsonResponse
   {
-    $csrf_token = $request->query->get('token');
-    if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
-      if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
-          'statusCode' => 706,
-          'message' => 'Invalid CSRF token.',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw new InvalidCsrfTokenException();
-    }
-
     /** @var User|null $user */
     $user = $this->getUser();
 
@@ -131,18 +118,6 @@ class FollowerController extends AbstractController
    */
   public function followUser(Request $request, string $id): JsonResponse
   {
-    $csrf_token = $request->query->get('token');
-    if (!$this->isCsrfTokenValid('follower', $csrf_token)) {
-      if ($request->isXmlHttpRequest()) {
-        return JsonResponse::create([
-          'statusCode' => 706,
-          'message' => 'Invalid CSRF token.',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw new InvalidCsrfTokenException();
-    }
-
     /** @var User|null $user */
     $user = $this->getUser();
 

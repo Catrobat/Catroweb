@@ -66,12 +66,12 @@ services:
     #
     #   Here one can bind variable names to specific parameters or services. This allows dependency injection
     #   of specific strings or classes. E.g $kernel_root_dir used as parameter in an constructor signals the
-    #   dependency service that the "kernel.root_dir" parameter string must be injected.
+    #   dependency service that the "kernel.project_dir" parameter string must be injected.
     #
     #   It is also possible to inject the ParameterBagInterface with which one has easy access to all defined parameters
     #
     bind:
-      $kernel_root_dir: "%kernel.root_dir%"
+      $kernel_root_dir: "%kernel.project_dir%"
       $catrobat_translation_dir: "%catrobat.translations.dir%"
       $catrobat_file_storage_dir: "%catrobat.file.storage.dir%"
       $catrobat_file_extract_dir: "%catrobat.file.extract.dir%"
@@ -99,6 +99,9 @@ services:
   App\User\UserManager:
     class: App\User\UserManager
     public: true
+
+  Sonata\UserBundle\Entity\UserManager:
+    alias: sonata.user.manager.user
 
   App\Project\ProgramManager:
     class: App\Project\ProgramManager
@@ -129,12 +132,32 @@ services:
     resource: '../src/Api_deprecated/Controller'
     public: true
 
-  App\Admin\Users\UserDataReport\UserDataReportController:
-    class: App\Admin\Users\UserDataReport\UserDataReportController
-    public: true
-
   App\Admin\ApkGeneration\ApkController:
     class: App\Admin\ApkGeneration\ApkController
+    public: true
+
+  App\Admin\Comments\ReportedComments\ReportedCommentsController:
+    class: App\Admin\Comments\ReportedComments\ReportedCommentsController
+    public: true
+
+  App\Admin\MediaPackage\MediaPackageCategoryController:
+    class: App\Admin\MediaPackage\MediaPackageCategoryController
+    public: true
+
+  App\Admin\Projects\ApproveProjects\ApproveProjectsController:
+    class: App\Admin\Projects\ApproveProjects\ApproveProjectsController
+    public: true
+
+  App\Admin\Projects\ReportedProjects\ReportedProjectsController:
+    class: App\Admin\Projects\ReportedProjects\ReportedProjectsController
+    public: true
+
+  App\Admin\Tools\BroadcastNotification\BroadcastNotificationController:
+    class: App\Admin\Tools\BroadcastNotification\BroadcastNotificationController
+    public: true
+
+  App\Admin\Tools\Logs\Controller\:
+    resource: '../src/Admin/Tools/Logs/Controller'
     public: true
 
   App\Admin\Tools\Maintenance\MaintainController:
@@ -145,8 +168,12 @@ services:
     class: App\Admin\Tools\SendMailToUser\SendMailToUserController
     public: true
 
-  App\Admin\Tools\BroadcastNotification\BroadcastNotificationController:
-    class: App\Admin\Tools\BroadcastNotification\BroadcastNotificationController
+  App\Admin\Users\ReportedUsers\ReportedUsersController:
+    class: App\Admin\Users\ReportedUsers\ReportedUsersController
+    public: true
+
+  App\Admin\Users\UserDataReport\UserDataReportController:
+    class: App\Admin\Users\UserDataReport\UserDataReportController
     public: true
 
   App\Admin\DB_Updater\Controller\:
@@ -230,6 +257,10 @@ services:
 
   App\Project\CatrobatCode\Parser\CatrobatCodeParser:
     class: App\Project\CatrobatCode\Parser\CatrobatCodeParser
+    public: true
+
+  App\Utils\CanonicalFieldsUpdater:
+    class: App\Utils\CanonicalFieldsUpdater
     public: true
 
   App\Utils\RequestHelper:
@@ -649,10 +680,15 @@ services:
   admin.block.users.overview:
     class: App\Admin\Users\UserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: 'User Overview', show_mosaic_button: false }
+        -
+          name: sonata.admin
+          manager_type: orm
+          model_class:  App\DB\Entity\User\User
+          label: 'User Overview'
+          show_mosaic_button: false
     arguments:
+      - '@App\User\UserManager'
       - ~
-      - App\DB\Entity\User\User
       - ~
 
   admin.block.users.data_report:
@@ -697,7 +733,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Special Updater", icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
-      - ~
+      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
       - App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController
     public: true
 
@@ -751,7 +787,7 @@ services:
           icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
-      - ~
+      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
       - App\Admin\Tools\Maintenance\MaintainController
     public: true
 
@@ -762,8 +798,8 @@ services:
           icon: '<i class="fa fa-cogs"></i>' }
     arguments:
       - ~
-      - ~
-      - App\Admin\Tools\Logs\LogsController
+      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
+      - App\Admin\Tools\Logs\Controller\LogsController
     public: true
 
   admin.block.tools.broadcast:
@@ -782,7 +818,7 @@ services:
       - { name: sonata.admin, manager_type: orm, label: "Send Mail to User" }
     arguments:
       - ~
-      - ~
+      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
       - App\Admin\Tools\SendMailToUser\SendMailToUserController
     public: true
 

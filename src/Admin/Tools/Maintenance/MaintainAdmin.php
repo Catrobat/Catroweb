@@ -3,23 +3,23 @@
 namespace App\Admin\Tools\Maintenance;
 
 use Sonata\AdminBundle\Admin\AbstractAdmin;
-use Sonata\AdminBundle\Route\RouteCollection;
+use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class MaintainAdmin extends AbstractAdmin
 {
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRoutePattern = 'maintain';
 
   /**
-   * @var string
+   * {@inheritdoc}
    */
   protected $baseRouteName = 'maintain';
 
-  protected function configureRoutes(RouteCollection $collection): void
+  protected function configureRoutes(RouteCollectionInterface $collection): void
   {
-    //Find the implementation in the Controller-Folder
+    // Find the implementation in the Controller-Folder
     $collection->clearExcept(['list']);
     $collection->add('apk')
       ->add('compressed')

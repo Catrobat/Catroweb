@@ -63,11 +63,13 @@ class StudioController extends AbstractController
    */
   public function studioDetails(Request $request): Response
   {
-    $studio = $this->studio_manager->findStudioById(trim($request->attributes->get('id')));
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->attributes->get('id')));
     if (is_null($studio)) {
       throw $this->createNotFoundException('Unable to find this studio');
     }
-    $user_role = $this->studio_manager->getStudioUserRole($this->getUser(), $studio);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $user_role = $this->studio_manager->getStudioUserRole($user, $studio);
     $members_count = $this->studio_manager->countStudioUsers($studio);
     $activities_count = $this->studio_manager->countStudioActivities($studio);
     $projects = $this->studio_manager->findAllStudioProjects($studio);
@@ -93,7 +95,7 @@ class StudioController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    $studio = $this->studio_manager->findStudioById(trim($request->query->get('studio_id')));
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->query->get('studio_id')));
     if (!is_null($studio)) {
       $this->redirectToRoute('index');
     }
@@ -124,7 +126,7 @@ class StudioController extends AbstractController
     $payload = json_decode($request->getContent(), true);
     $studio = $this->studio_manager->findStudioById($payload['studio_id']);
     /** @var User|null $user */
-    $user = $this->user_manager->findUserBy(['id' => $payload['user_id']]);
+    $user = $this->user_manager->findOneBy(['id' => $payload['user_id']]);
     if (is_null($studio) || is_null($user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
@@ -157,7 +159,7 @@ class StudioController extends AbstractController
     $payload = json_decode($request->getContent(), true);
     $studio = $this->studio_manager->findStudioById($payload['studio_id']);
     /** @var User|null $user */
-    $user = $this->user_manager->findUserBy(['id' => $payload['user_id']]);
+    $user = $this->user_manager->findOneBy(['id' => $payload['user_id']]);
     if (is_null($studio) || is_null($user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
@@ -184,7 +186,7 @@ class StudioController extends AbstractController
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    $studio = $this->studio_manager->findStudioById(trim($request->query->get('studio_id')));
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->query->get('studio_id')));
     if (is_null($studio)) {
       $this->redirectToRoute('index');
     }
@@ -205,12 +207,14 @@ class StudioController extends AbstractController
    */
   public function removeProjectFromStudio(Request $request): JsonResponse
   {
-    $project = $this->program_manager->find(trim($request->request->get('projectID')));
-    $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+    $project = $this->program_manager->find(trim((string) $request->request->get('projectID')));
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('studioID')));
     if (is_null($project) || is_null($studio)) {
       return new JsonResponse(Response::HTTP_NOT_FOUND);
     }
-    $this->studio_manager->deleteProjectFromStudio($this->getUser(), $studio, $project);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->deleteProjectFromStudio($user, $studio, $project);
     $projects_count = ' ('.$this->studio_manager->countStudioProjects($studio).')';
     $activities_count = $this->studio_manager->countStudioActivities($studio);
     if (is_null($this->studio_manager->findStudioProject($studio, $project))) {
@@ -227,15 +231,17 @@ class StudioController extends AbstractController
    */
   public function removeCommentFromStudio(Request $request): JsonResponse
   {
-    $comment_id = intval($request->request->get('commentID'));
-    $isReply = trim($request->request->get('isReply'));
-    $parent_id = intval($request->request->get('parentID'));
-    $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
+    $comment_id = $request->request->getInt('commentID');
+    $isReply = trim((string) $request->request->get('isReply'));
+    $parent_id = $request->request->getInt('parentID');
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('studioID')));
     if (!$comment_id || is_null($studio)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
     }
     $replies_count = null;
-    $this->studio_manager->deleteCommentFromStudio($this->getUser(), $comment_id);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->deleteCommentFromStudio($user, $comment_id);
     if ('true' === $isReply && $parent_id > 0) {
       $replies_count = $this->studio_manager->countCommentReplies($parent_id).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
     }
@@ -256,19 +262,21 @@ class StudioController extends AbstractController
    */
   public function postComment(Request $request): JsonResponse
   {
-    $isReply = 'true' == $request->request->get('isReply') && intval($request->request->get('parentID')) > 0;
-    $studio = $this->studio_manager->findStudioById(trim($request->request->get('studioID')));
-    $comment_text = trim($request->request->get('comment'));
+    $isReply = 'true' == $request->request->get('isReply') && $request->request->getInt('parentID') > 0;
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('studioID')));
+    $comment_text = trim((string) $request->request->get('comment'));
     if ('' === $comment_text) {
       return new JsonResponse('', Response::HTTP_NOT_FOUND);
     }
     $replies_count = null;
     $comments_count = null;
+    /** @var User|null $user */
+    $user = $this->getUser();
     if ($isReply) {
-      $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text, intval($request->request->get('parentID')));
-      $replies_count = $this->studio_manager->countCommentReplies(intval($request->request->get('parentID'))).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
+      $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text, $request->request->getInt('parentID'));
+      $replies_count = $this->studio_manager->countCommentReplies($request->request->getInt('parentID')).' '.$this->translator->trans('studio.details.replies', [], 'catroweb');
     } else {
-      $comment = $this->studio_manager->addCommentToStudio($this->getUser(), $studio, $comment_text);
+      $comment = $this->studio_manager->addCommentToStudio($user, $studio, $comment_text);
       $comments_count = ' ('.$this->studio_manager->countStudioComments($studio).')';
     }
     $activities_count = $this->studio_manager->countStudioActivities($studio);
@@ -309,7 +317,7 @@ class StudioController extends AbstractController
   public function loadCommentReplies(Request $request): Response
   {
     $rs = '';
-    $comment_id = intval($request->query->get('commentID'));
+    $comment_id = $request->query->getInt('commentID');
     $comment = $this->studio_manager->findStudioCommentById($comment_id);
     if (is_null($comment)) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
@@ -319,7 +327,9 @@ class StudioController extends AbstractController
     foreach ($replies as $reply) {
       $rs .= $this->getCommentsAndRepliesForAjax($reply, true);
     }
-    if (!is_null($this->getUser()) && $this->studio_manager->isUserInStudio($this->getUser(), $comment->getStudio())) {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (!is_null($user) && $this->studio_manager->isUserInStudio($user, $comment->getStudio())) {
       $rs .= '<div id="add-reply" class="add-comment-section">';
       $rs .= '<input type="text" placeholder="'.$this->translator->trans('studio.details.type_something', [], 'catroweb').'">';
       $rs .= '<a href="javascript:void(0)" onclick="(new Studio()).postComment(true)">';
@@ -337,7 +347,7 @@ class StudioController extends AbstractController
    */
   public function uploadStudioCover(Request $request): Response
   {
-    $studio = $this->studio_manager->findStudioById(trim($request->request->get('std-id')));
+    $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('std-id')));
     $headerImg = $request->files->get('header-img');
     if (is_null($headerImg) || is_null($studio) || is_null($this->getUser())) {
       return new JsonResponse([], Response::HTTP_NOT_FOUND);
@@ -352,7 +362,9 @@ class StudioController extends AbstractController
     $headerImg->move($coverPath, $coverName);
     $pathToSave = '/'.$newPath.$coverName;
     $studio->setCoverPath('resources'.$pathToSave);
-    $this->studio_manager->changeStudio($this->getUser(), $studio);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->changeStudio($user, $studio);
 
     return new JsonResponse(['new_cover' => $pathToSave], Response::HTTP_OK);
   }
@@ -386,7 +398,9 @@ class StudioController extends AbstractController
       $studio->setIsPublic(!is_null($is_public) && true === filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
 
       $studio->setUpdatedOn(new \DateTime('now'));
-      $this->studio_manager->changeStudio($this->getUser(), $studio);
+      /** @var User|null $user */
+      $user = $this->getUser();
+      $this->studio_manager->changeStudio($user, $studio);
     }
 
     return $this->redirect($request->headers->get('referer'));
@@ -435,7 +449,9 @@ class StudioController extends AbstractController
     $rs .= '<img class="comment-avatar" src="'.$avatarSrc.'" alt="Card image">';
     $rs .= '<div class="comment-content">';
     $rs .= '<a href="/app/user/'.$comment->getUser()->getId().'">'.$comment->getUsername().'</a>';
-    if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($this->getUser(), $comment->getStudio())
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $comment->getStudio())
         || (!is_null($this->getUser()) && $this->getUser()->getUsername() === $comment->getUsername())) && $isReply) {
       $rs .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="(new Studio()).removeComment($(this),'.$comment->getId().', true, '.$comment->getParentId().')"';
       $rs .= ' title="'.$this->translator->trans('studio.details.remove_comment', [], 'catroweb').'">';

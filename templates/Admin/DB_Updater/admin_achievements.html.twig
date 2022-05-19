@@ -4,14 +4,14 @@
   <div class="col-xs-12 col-md-12 mb-5">
       <link rel="stylesheet" href="{{ asset('build/css/achievements.css') }}"/>
       <h1 class="h1" style="margin-top: 0;">Achievements</h1>
-      {% include '@SonataCore/FlashMessage/render.html.twig' %}
+      {% include '@SonataTwig/FlashMessage/render.html.twig' %}
       <p style="padding: 0.5em;">
           Achievements are tightly coupled to events that usually require complex logic in the background.
           Therefore, achievements can not simply be added here through the Admin interface.
           Instead, they have to be added directly through the source code first.
           Then, to insert/update those static achievements into the database, the update button must be
           triggered or the command executed in the command line.
-          Typically this is done automatically during the deployment.
+          Typically, this is done automatically during the deployment.
       </p>
       <h4>Step by step guide on how to add new achievements</h4>
       <ol>

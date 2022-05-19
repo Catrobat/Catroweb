@@ -157,8 +157,8 @@ Feature: Admin approve programs
     And I wait for the page to be loaded
     And I click on the program name "program 5"
     And I wait for the page to be loaded
-    Then I should be on "/admin/approve/5/edit"
-    And I should see "Program name"
+    Then I should be on "/admin/approve/5/show"
+    And I should see "Approve Projects"
     And I should see "program 5"
     And I should see "User"
     And I should see "User1"

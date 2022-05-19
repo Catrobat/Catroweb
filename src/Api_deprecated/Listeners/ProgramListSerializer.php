@@ -107,7 +107,7 @@ class ProgramListSerializer
       'ProjectsExtension' => '.catrobat',
     ];
 
-    $event->setResponse(JsonResponse::create($retArray));
+    $event->setResponse(new JsonResponse($retArray));
   }
 
   public function generateUrl(string $route, array $parameters = []): string

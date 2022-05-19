@@ -49,32 +49,35 @@ class ReportController extends AbstractController
     $entity_manager = $this->getDoctrine()->getManager();
 
     $response = [];
-    if (!$request->get('program') || !$request->get('category') || !$request->get('note')) {
+    if (!$request->request->get('program') || !$request->request->get('category') || !$request->request->get('note')) {
       $response['statusCode'] = 501; // should be a bad request!
       $response['answer'] = $this->translator->trans('errors.post-data', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 
-      return JsonResponse::create($response);
+      return new JsonResponse($response);
     }
 
-    $program = $this->program_manager->find($request->get('program'));
+    $category = strval($request->request->get('category'));
+    $note = strval($request->request->get('note'));
+    $projectId = strval($request->request->get('program'));
+
+    $program = $this->program_manager->find($projectId);
     if (null == $program) {
       $response['statusCode'] = 506; // should be 404!
       $response['answer'] = $this->translator->trans('errors.program.invalid', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 
-      return JsonResponse::create($response);
+      return new JsonResponse($response);
     }
 
     $report = new ProgramInappropriateReport();
     $approved_project = $program->getApproved();
     $featured_project = $this->program_manager->getFeaturedRepository()->isFeatured($program);
     if ($approved_project || $featured_project) {
-      $response = [];
       $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
       $response['statusCode'] = Response::HTTP_OK;
 
-      return JsonResponse::create($response);
+      return new JsonResponse($response);
     }
 
     $token = $request->headers->get('authorization');
@@ -95,31 +98,28 @@ class ReportController extends AbstractController
         $token = preg_split('#\s+#', $token)[1]; // strip "bearer"
         $jwt_payload = $this->user_manager->decodeToken($token);
         if (!array_key_exists('username', $jwt_payload)) {
-          return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+          return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
         }
         $report->setReportingUser($jwt_payload['username']);
       }
     } else {
-      return JsonResponse::create([], Response::HTTP_UNAUTHORIZED);
+      return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
 
     $program->setVisible(false);
-    $report->setCategory($request->get('category'));
-    $report->setNote($request->get('note'));
+    $report->setCategory($category);
+    $report->setNote($note);
     $report->setProgram($program);
     $report->setReportedUser($program->getUser());
 
     $entity_manager->persist($report);
     $entity_manager->flush();
 
-    $this->event_dispatcher->dispatch(
-      new ReportInsertEvent($request->get('category'), $request->get('note'), $report)
-    );
+    $this->event_dispatcher->dispatch(new ReportInsertEvent($category, $note, $report));
 
-    $response = [];
     $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
     $response['statusCode'] = Response::HTTP_OK;
 
-    return JsonResponse::create($response);
+    return new JsonResponse($response);
   }
 }

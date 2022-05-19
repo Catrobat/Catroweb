@@ -1,7 +1,7 @@
 ### Catroweb ###
 .idea/
 composer.phar
-phpspec.yml
+phpspec.yaml
 phpunit.xml
 *.local
 phploc.phar
@@ -67,7 +67,7 @@ vendor/
 ###< symfony/framework-bundle ###
 
 ###> behat/symfony2-extension ###
-behat.yml
+behat.yaml
 ###< behat/symfony2-extension ###
 
 ###> phpunit/phpunit ###
@@ -101,3 +101,7 @@ yarn-error.log
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> friends-of-behat/symfony-extension ###
+/behat.yaml
+###< friends-of-behat/symfony-extension ###

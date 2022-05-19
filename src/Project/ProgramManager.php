@@ -37,9 +37,9 @@ use Elastica\Query\Terms;
 use Elastica\Util;
 use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use FOS\UserBundle\Model\UserInterface;
 use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
+use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Filesystem\Exception\IOException;
 use Symfony\Component\Filesystem\Filesystem;
@@ -302,7 +302,7 @@ class ProgramManager
       $program->setScratchId($program_data['id']);
       $program->setDebugBuild(false);
     } else {
-      //throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
+      // throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
       if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
         return $program;
       }

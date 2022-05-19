@@ -2,8 +2,8 @@
 
 namespace Tests\PhpUnit\Admin\Tools\Log;
 
+use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogLine;
-use App\Admin\Tools\Logs\LogsController;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 use ReflectionException;

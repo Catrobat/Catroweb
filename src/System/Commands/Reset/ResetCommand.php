@@ -133,7 +133,7 @@ class ResetCommand extends Command
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
 
-    //https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
+    // https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
     // Creating sample MediaPackages
     CommandHelper::executeShellCommand(
@@ -173,13 +173,13 @@ class ResetCommand extends Command
     $password = 'catroweb';
 
     CommandHelper::executeShellCommand(
-      ['bin/console', 'fos:user:create', 'catroweb', 'catroweb@localhost.at', $password, '--super-admin'],
+      ['bin/console', 'sonata:user:create', 'catroweb', 'catroweb@localhost.at', $password, '--super-admin'],
       ['timeout' => 300], 'Create default admin user named catroweb with password catroweb', $output
     );
 
-    for ($i = 1; $i < sizeof($user_array); ++$i) { //starting at one because of admin user
+    for ($i = 1; $i < sizeof($user_array); ++$i) { // starting at one because of admin user
       CommandHelper::executeShellCommand(
-        ['bin/console', 'fos:user:create', $user_array[$i], $user_array[$i].'@localhost.at', $password],
+        ['bin/console', 'sonata:user:create', $user_array[$i], $user_array[$i].'@localhost.at', $password],
         ['timeout' => 300], 'Create default user named '.$user_array[$i].' with password catroweb', $output
       );
     }

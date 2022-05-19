@@ -13,9 +13,6 @@ class ApproveProjectsController extends CRUDController
   {
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException(sprintf('unable to find the object'));
-    }
     $object->setApproved(true);
     $object->setVisible(true);
     $this->admin->update($object);
@@ -27,9 +24,6 @@ class ApproveProjectsController extends CRUDController
   public function skipAction(): RedirectResponse
   {
     $object = $this->admin->getSubject();
-    if (null === $object) {
-      throw new NotFoundHttpException(sprintf('unable to find the object'));
-    }
     $this->addFlash('sonata_flash_warning', $object->getName().' skipped');
 
     return new RedirectResponse($this->getRedirectionUrl());

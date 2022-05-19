@@ -2,6 +2,7 @@
 Feature: Get project tags
 
   Scenario: Get project tags without accept header
+    Given I have a request header "HTTP_ACCEPT" with value "invalid"
     And I request "GET" "/api/projects/tags"
     Then the response status code should be "406"
 
