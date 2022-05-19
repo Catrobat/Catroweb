@@ -27,8 +27,8 @@ reportIt: Так, повідомте про це!
 areYouSure: Ти впевнений?
 noWayOfReturn: Немає можливості відновити свої дії!
 download: Download
-name: Name
-description: Description
+name: Ім'я
+description: Опис
 noDescription: Опис відсутній.
 credits: Credits
 noCredits: No credits available.
