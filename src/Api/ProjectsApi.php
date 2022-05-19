@@ -259,7 +259,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
+  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, ?string $attributes = null, &$responseCode = null, array &$responseHeaders = null): ?array
   {
     $max_version = $this->getDefaultMaxVersionOnNull($max_version);
     $limit = $this->getDefaultLimitOnNull($limit);

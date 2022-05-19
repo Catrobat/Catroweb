@@ -40,15 +40,30 @@
     {% endfor %}
   </div>
 
+  {%
+    set data = {
+      'elementsSingular': "element"|trans({}, "catroweb"),
+      'elementsPlural': "elements"|trans({}, "catroweb"),
+      'size': "media_library.file.size"|trans({}, "catroweb"),
+      'type': {
+        'catrobat': "media_library.file.type_description.image"|trans({}, "catroweb"),
+        'image': "media_library.file.type_description.image"|trans({}, "catroweb"),
+        'sound': "media_library.file.type_description.sound"|trans({}, "catroweb"),
+        'video': "media_library.file.type_description.movie"|trans({}, "catroweb"),
+        'project': "media_library.file.type_description.project"|trans({}, "catroweb"),
+        'unknown': "media_library.file.type_description.default"|trans({}, "catroweb"),
+      },
+    }
+  %}
+
   <div class="js-media-library"
        data-package="{{ package }}"
        data-path-media-search="{{ mediaSearchPath|default('')|raw }}"
        data-flavor="{{ flavor }}"
        data-media-dir="{{ mediaDir }}"
-       data-trans-element="{{ "element"|trans({}, "catroweb") }}"
-       data-trans-elements="{{ "elements"|trans({}, "catroweb") }}"
+       data-translations="{{ data|json_encode() }}"
        data-is-webview="{{ isWebview() }}"
-       data-path-medialibpackagebynameurl="{{ path("api_media_lib_package_bynameurl") }}"
+       data-path-medialibpackagebynameurl="{{ path("open_api_server_mediaLibrary_mediapackagenameget", { 'name': package }) }}"
   ></div>
 {% endblock %}
 

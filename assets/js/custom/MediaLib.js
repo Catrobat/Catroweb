@@ -3,7 +3,7 @@ import $ from 'jquery'
 import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
 export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
-  elementsTranslationSingular, elementsTranslationPlural, isWebView, mediaLibPackageByNameUrlApi) {
+  translations, isWebView, mediaLibPackageByNameUrlApi) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
@@ -45,15 +45,14 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
 
     // url
     let url
+    const attributes = 'id,name,flavors,packages,category,extension,file_type,size,download_url'
     if (mediaSearchPath !== '') {
-      url = mediaSearchPath
+      url = mediaSearchPath + '&attributes=' + attributes
     } else {
-      url = mediaLibPackageByNameUrlApi + '?package=' + packageName
+      url = mediaLibPackageByNameUrlApi + '?package=' + packageName + '&attributes=' + attributes
     }
 
     $.get(url, {}, pkgFiles => {
-      console.log(pkgFiles.length)
-
       pkgFiles.forEach(file => {
         // flavors
         let fileFlavorArray = []
@@ -93,9 +92,9 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
             // Dispense support for languages where the count would be right.
             // This way there is no need to dynamically load the translation. (No delay - Less requests)
             if (downloadList.length === 1) {
-              elementsText += elementsTranslationSingular
+              elementsText += translations.elementsSingular
             } else {
-              elementsText += elementsTranslationPlural
+              elementsText += translations.elementsPlural
             }
 
             document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
@@ -119,14 +118,14 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           mediafileContainer.append(
             '<div class="text-container">' +
             '  <a class="name name--link" href="' + file.project_url + '">' + getFileName(file) + '</a>' +
-            '  <div class="description">' + file.description + '</div>' +
+            '  <div class="description">' + getFileDescription(file) + '</div>' +
             '</div>'
           )
         } else {
           mediafileContainer.append(
             '<div class="text-container">' +
             '  <div class="name">' + getFileName(file) + '</div>' +
-            '  <div class="description">' + file.description + '</div>' +
+            '  <div class="description">' + getFileDescription(file) + '</div>' +
             '</div>'
           )
         }
@@ -170,14 +169,25 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
   }
 
+  function getFileDescription (file) {
+    let type
+    if (file.file_type in translations.type) {
+      type = translations.type[file.file_type]
+    } else {
+      type = translations.type['unknown']
+    }
+    const size = (file.size/(1024*1024)).toFixed(2) + 'MB'
+    return type + '<br>' + translations.size.replace('%size%', size)
+  }
+
   function buildImageContainer (file) {
     const imageContainer = $('<div class="img-container"></div>')
     let audio, previewBtn
 
-    if (isFileExtAnImageFile(file.extension) || file.extension === 'catrobat') {
+    if (file.file_type === 'image' || file.extension === 'catrobat') {
       imageContainer.attr('data-filetype', 'image')
       imageContainer.append(buildImageFromFile(file))
-    } else if (isFileExtASoundFile(file.extension)) {
+    } else if (file.file_type === 'sound') {
       imageContainer.attr('data-filetype', 'audio')
       // eslint-disable-next-line no-undef
       audio = new Audio(file.download_url)
@@ -196,7 +206,7 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
         previewBtn.text('play_arrow')
       }
       imageContainer.append(previewBtn)
-    } else if (isFileExtAVideoFile(file.extension)) {
+    } else if (file.file_type === 'video') {
       imageContainer.append($('<i class="media-file-icon material-icons">videocam</i>'))
     } else {
       imageContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
@@ -309,34 +319,4 @@ function medialibOnDownload (link) {
     window.location = downloadHref
   }
   return false
-}
-
-/**
- * file type checks
- */
-function isFileExtASoundFile (ext) {
-  const fileTypes = [
-    'adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva', 'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya',
-    'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip', 'weba', 'aac', 'aif', 'caf', 'flac', 'mka', 'm3u', 'wax', 'wma',
-    'ram', 'rmp', 'wav', 'xm'
-  ]
-  return fileTypes.includes(ext)
-}
-
-function isFileExtAnImageFile (ext) {
-  const fileTypes = [
-    'bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu',
-    'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx',
-    'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd'
-  ]
-  return fileTypes.includes(ext)
-}
-
-function isFileExtAVideoFile (ext) {
-  const fileTypes = [
-    '3gp', '3g2', 'h261', 'h263', 'h264', 'jpgv', 'jpm', 'mj2', 'mp4', 'mpeg', 'ogv', 'qt', 'uvh', 'uvm', 'uvp',
-    'uvs', 'uvv', 'dvb', 'fvt', 'mxu', 'pyv', 'uvu', 'viv', 'webm', 'f4v', 'fli', 'flv', 'm4v', 'mkv', 'mng', 'asf',
-    'vob', 'wm', 'wmv', 'wmx', 'wvx', 'avi', 'movie', 'smv'
-  ]
-  return fileTypes.includes(ext)
 }

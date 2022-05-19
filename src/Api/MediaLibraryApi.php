@@ -20,7 +20,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $package_name = null, &$responseCode = null, array &$responseHeaders = null)
+  public function mediaFilesSearchGet(string $query, ?string $flavor = null, ?int $limit = 20, ?int $offset = 0, ?string $attributes = null, ?string $package_name = null, &$responseCode, array &$responseHeaders)
   {
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
@@ -30,7 +30,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $found_media_files = $this->facade->getLoader()->searchMediaLibraryFiles($query, $flavor, $package_name, $limit, $offset);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($found_media_files);
+    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($found_media_files, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -40,7 +40,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null): ?array
+  public function mediaPackageNameGet(string $name, ?int $limit = 20, ?int $offset = 0, ?string $attributes = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
@@ -56,7 +56,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $responseCode = Response::HTTP_OK;
     /** @var MediaPackage $media_package */
     $response = $this->facade->getResponseManager()->createMediaPackageCategoriesResponse(
-      $media_package->getCategories()->toArray(), $limit, $offset
+      $media_package->getCategories()->toArray(), $limit, $offset, $attributes
     );
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
@@ -67,7 +67,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFileIdGet(int $id, &$responseCode = null, array &$responseHeaders = null): ?\OpenAPI\Server\Model\MediaFileResponse
+  public function mediaFileIdGet(int $id, ?string $attributes = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $media_package_file = $this->facade->getLoader()->getMediaPackageFileByID($id);
 
@@ -78,7 +78,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     }
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file);
+    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -88,7 +88,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function mediaFilesGet(?int $limit = 20, ?int $offset = 0, string $flavor = null, ?string $attributes = null, &$responseCode = null, array &$responseHeaders = null)
   {
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
@@ -97,7 +97,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $media_package_files = $this->facade->getLoader()->getMediaPackageFiles($limit, $offset, $flavor);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($media_package_files);
+    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($media_package_files, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

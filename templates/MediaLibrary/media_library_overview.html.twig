@@ -11,7 +11,7 @@
         <div class="card">
           <a class="card-body"
              href="{{ path('media_library', {'package_name': item.nameUrl}) }}">
-            {{ item.name }}
+            {{ ("codeview."~item.name)|lower|trans({}, "catroweb") }}
           </a>
         </div>
     </div>
