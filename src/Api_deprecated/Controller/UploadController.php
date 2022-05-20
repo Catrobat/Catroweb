@@ -88,6 +88,9 @@ class UploadController
     }
 
     $file = array_values($request->files->all())[0];
+    if (empty($file) || empty($file->getPathname())) {
+      throw new InvalidCatrobatFileException('errors.checksum.invalid', 501);
+    }
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum')) {
       $this->logger->error('UploadError checksum', [
         'checksum_symfony' => md5($file->getPathname()),

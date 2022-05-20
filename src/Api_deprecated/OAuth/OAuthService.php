@@ -84,7 +84,7 @@ class OAuthService
 
     /** @var User|null $google_user */
     $google_user = $this->user_manager->findOneBy([
-      'googleId' => $google_id,
+      'google_id' => $google_id,
     ]);
     if (null !== $google_user) {
       $retArray['token_available'] = true;
@@ -128,7 +128,7 @@ class OAuthService
       }
       /** @var User|null $google_user */
       $google_user = $this->user_manager->findOneBy([
-        'googleId' => $gPlusId,
+        'google_id' => $gPlusId,
       ]);
     } catch (Exception $exception) {
       return new JsonResponse('Token invalid', 777);
@@ -161,7 +161,7 @@ class OAuthService
 
     /** @var User|null $google_user */
     $google_user = $this->user_manager->findOneBy([
-      'googleId' => $google_id,
+      'google_id' => $google_id,
     ]);
 
     if (null !== $google_user && '' !== $google_id) {
