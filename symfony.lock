@@ -47,9 +47,6 @@
     "deployer/deployer": {
         "version": "v6.7.3"
     },
-    "deployer/phar-update": {
-        "version": "v2.2.0"
-    },
     "deployer/recipes": {
         "version": "6.2.2"
     },
@@ -492,9 +489,6 @@
             "tests/bootstrap.php"
         ]
     },
-    "pimple/pimple": {
-        "version": "v3.3.0"
-    },
     "psr/cache": {
         "version": "1.0.1"
     },
@@ -546,8 +540,17 @@
     "rosell-dk/exec-with-fallback": {
         "version": "1.2.0"
     },
+    "rosell-dk/file-util": {
+        "version": "0.1.1"
+    },
     "rosell-dk/image-mime-type-guesser": {
         "version": "0.3"
+    },
+    "rosell-dk/image-mime-type-sniffer": {
+        "version": "1.1.1"
+    },
+    "rosell-dk/locate-binaries": {
+        "version": "1.0"
     },
     "rosell-dk/webp-convert": {
         "version": "2.3.2"
@@ -649,6 +652,9 @@
     },
     "sonata-project/user-bundle": {
         "version": "4.5.0"
+    },
+    "stella-maris/clock": {
+        "version": "0.1.4"
     },
     "symfony/acl-bundle": {
         "version": "v2.0.0"

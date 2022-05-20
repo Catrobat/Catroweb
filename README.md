@@ -5,7 +5,7 @@
 [![Dependabot Status](https://img.shields.io/badge/Dependabot-active-green.svg)](https://dependabot.com)
 [![codecov](https://codecov.io/gh/Catrobat/Catroweb/branch/develop/graph/badge.svg)](https://codecov.io/gh/Catrobat/Catroweb)
 
-[![Php 7.4](https://img.shields.io/badge/PHP-7.4-informational.svg)](https://www.php.net/)
+[![Php 8.1](https://img.shields.io/badge/PHP-8.1-informational.svg)](https://www.php.net/)
 [![Symfony](https://img.shields.io/badge/Symfony-5.4-informational.svg)](https://symfony.com/)
 
 **Catroweb** is the name of the **Pocket Code share community platform** for the associated [Catrobat](https://github.com/Catrobat/) project. 
