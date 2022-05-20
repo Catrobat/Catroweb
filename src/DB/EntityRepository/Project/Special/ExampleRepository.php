@@ -56,7 +56,7 @@ class ExampleRepository extends ServiceEntityRepository
 
     try {
       $projects_count = $qb->getQuery()->getSingleScalarResult();
-    } catch (NoResultException|NonUniqueResultException $e) {
+    } catch (NoResultException|NonUniqueResultException) {
       $projects_count = 0;
     }
 
@@ -142,7 +142,7 @@ class ExampleRepository extends ServiceEntityRepository
       $count = $qb->getQuery()->getSingleScalarResult();
 
       return $count > 0;
-    } catch (NonUniqueResultException $nonUniqueResultException) {
+    } catch (NonUniqueResultException) {
       return false;
     }
   }

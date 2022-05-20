@@ -7,24 +7,10 @@ use SimpleXMLElement;
 
 class Statement
 {
-  protected ?SimpleXMLElement $xmlTree = null;
-
   protected array $statements = [];
 
-  protected int $spaces;
-
-  private string $beginString;
-
-  private string $endString;
-
-  public function __construct(StatementFactory $statementFactory, ?SimpleXMLElement $xmlTree, int $spaces, string $beginString, string $endString)
+  public function __construct(StatementFactory $statementFactory, protected ?SimpleXMLElement $xmlTree, protected int $spaces, private readonly string $beginString, private readonly string $endString)
   {
-    $this->statements = [];
-    $this->xmlTree = $xmlTree;
-    $this->beginString = $beginString;
-    $this->endString = $endString;
-    $this->spaces = $spaces;
-
     $this->createChildren($statementFactory);
   }
 
@@ -93,12 +79,7 @@ class Statement
 
   protected function addSpaces(int $offset = 0): string
   {
-    $stringSpaces = '';
-    for ($i = 0; $i < ($this->spaces + $offset) * 4; ++$i) {
-      $stringSpaces .= '&nbsp;';
-    }
-
-    return $stringSpaces;
+    return str_repeat('&nbsp;', max(($this->spaces + $offset) * 4, 0));
   }
 
   protected function getLastChildStatement(): Statement

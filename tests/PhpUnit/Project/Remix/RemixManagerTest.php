@@ -30,10 +30,7 @@ class RemixManagerTest extends TestCase
 {
   private RemixManager $remix_manager;
 
-  /**
-   * @var EntityManager|MockObject
-   */
-  private $entity_manager;
+  private EntityManager|MockObject $entity_manager;
 
   /**
    * @var MockObject|ProgramRepository

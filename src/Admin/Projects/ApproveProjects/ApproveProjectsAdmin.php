@@ -39,28 +39,18 @@ class ApproveProjectsAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'approve';
 
   private ?ExtractedCatrobatFile $extractedProgram = null;
-  private ScreenshotRepository $screenshot_repository;
-  private ProgramManager $program_manager;
-  private ExtractedFileRepository $extracted_file_repository;
-  protected TokenStorageInterface $security_token_storage;
-  protected ParameterBagInterface $parameter_bag;
 
   public function __construct(
       ?string $code,
       ?string $class,
       ?string $baseControllerName,
-      ScreenshotRepository $screenshot_repository,
-      ProgramManager $program_manager,
-      ExtractedFileRepository $extracted_file_repository,
-      TokenStorageInterface $security_token_storage,
-      ParameterBagInterface $parameter_bag
+      private readonly ScreenshotRepository $screenshot_repository,
+      private readonly ProgramManager $program_manager,
+      private readonly ExtractedFileRepository $extracted_file_repository,
+      protected TokenStorageInterface $security_token_storage,
+      protected ParameterBagInterface $parameter_bag
   ) {
     parent::__construct($code, $class, $baseControllerName);
-    $this->screenshot_repository = $screenshot_repository;
-    $this->program_manager = $program_manager;
-    $this->extracted_file_repository = $extracted_file_repository;
-    $this->security_token_storage = $security_token_storage;
-    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -177,7 +167,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
        * The default option is to just display the value as text (for boolean this will be 1 or 0)
        */
       ->add('thumbnail', null, [
-        'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
+        'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
         'template' => 'Admin/program_thumbnail_image.html.twig',
       ])
       ->add('id')
@@ -188,19 +178,19 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('upload_ip')
       ->add('visible', 'boolean')
       ->add('Images', null, [
-        'accessor' => function ($subject): array { return $this->getContainingImageUrls($subject); },
+        'accessor' => fn ($subject): array => $this->getContainingImageUrls($subject),
         'template' => 'Admin/program_containing_image.html.twig',
       ])
       ->add('Sounds', null, [
-        'accessor' => function ($subject): array { return $this->getContainingSoundUrls($subject); },
+        'accessor' => fn ($subject): array => $this->getContainingSoundUrls($subject),
         'template' => 'Admin/program_containing_sound.html.twig',
       ])
       ->add('Strings', null, [
-        'accessor' => function ($subject): array { return $this->getContainingStrings($subject); },
+        'accessor' => fn ($subject): array => $this->getContainingStrings($subject),
         'template' => 'Admin/program_containing_strings.html.twig',
       ])
       ->add('Objects', null, [
-        'accessor' => function ($subject): array { return $this->getContainingCodeObjects($subject); },
+        'accessor' => fn ($subject): array => $this->getContainingCodeObjects($subject),
         'template' => 'Admin/program_containing_code_objects.html.twig',
       ])
       ->add('Actions', null, [
@@ -274,7 +264,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   {
     $encoded_paths = [];
     foreach ($paths as $path) {
-      $pieces = explode('/', $path);
+      $pieces = explode('/', (string) $path);
       $filename = array_pop($pieces);
       $pieces[] = rawurlencode($filename);
       $encoded_paths[] = implode('/', $pieces);

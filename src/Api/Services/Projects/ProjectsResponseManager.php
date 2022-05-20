@@ -30,28 +30,17 @@ final class ProjectsResponseManager extends AbstractResponseManager
 {
   use TranslatorAwareTrait;
 
-  private ElapsedTimeStringFormatter $time_formatter;
-  private UrlGeneratorInterface $url_generator;
-  private ImageRepository $image_repository;
-  private ParameterBagInterface $parameter_bag;
-  private ProgramManager $project_manager;
-
   public function __construct(
-    ElapsedTimeStringFormatter $time_formatter,
-    ImageRepository $image_repository,
-    UrlGeneratorInterface $url_generator,
-    ParameterBagInterface $parameter_bag,
+    private readonly ElapsedTimeStringFormatter $time_formatter,
+    private readonly ImageRepository $image_repository,
+    private readonly UrlGeneratorInterface $url_generator,
+    private readonly ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    ProgramManager $project_manager,
+    private readonly ProgramManager $project_manager,
     ResponseCacheManager $response_cache_manager
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
-    $this->time_formatter = $time_formatter;
-    $this->image_repository = $image_repository;
-    $this->url_generator = $url_generator;
-    $this->parameter_bag = $parameter_bag;
-    $this->project_manager = $project_manager;
   }
 
   /**

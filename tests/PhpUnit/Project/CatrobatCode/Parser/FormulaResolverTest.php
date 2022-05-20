@@ -24,7 +24,6 @@ class FormulaResolverTest extends TestCase
   public function mustResolveAllFormulas($formula_list_xml_properties, $categories, $expected): void
   {
     $actual = FormulaResolver::resolve($formula_list_xml_properties);
-
     foreach ($categories as $category) {
       $this->assertEquals($expected[$category], $actual[$category]);
     }

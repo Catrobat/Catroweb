@@ -25,13 +25,9 @@ final class UserRequestValidator extends AbstractRequestValidator
   public const MODE_RESET_PASSWORD = 'reset_password_mode';
   public const MODE_UPDATE = 'update_mode';
 
-  private UserManager $user_manager;
-
-  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, UserManager $user_manager)
+  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager)
   {
     parent::__construct($validator, $translator);
-
-    $this->user_manager = $user_manager;
   }
 
   public function validateRegistration(RegisterRequest $request, string $locale): ValidationWrapper
@@ -90,9 +86,9 @@ final class UserRequestValidator extends AbstractRequestValidator
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameMissing', [], $locale), $KEY);
     } elseif (self::MODE_UPDATE === $mode && '' === trim($username)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameEmpty', [], $locale), $KEY);
-    } elseif (strlen($username) < self::MIN_USERNAME_LENGTH) {
+    } elseif (strlen((string) $username) < self::MIN_USERNAME_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameTooShort', [], $locale), $KEY);
-    } elseif (strlen($username) > self::MAX_USERNAME_LENGTH) {
+    } elseif (strlen((string) $username) > self::MAX_USERNAME_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameTooLong', [], $locale), $KEY);
     } elseif (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameContainsEmail', [], $locale), $KEY);
@@ -111,9 +107,9 @@ final class UserRequestValidator extends AbstractRequestValidator
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordMissing', [], $locale), $KEY);
     } elseif (self::MODE_UPDATE === $mode && '' === trim($password)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordEmpty', [], $locale), $KEY);
-    } elseif (strlen($password) < self::MIN_PASSWORD_LENGTH) {
+    } elseif (strlen((string) $password) < self::MIN_PASSWORD_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordTooShort', [], $locale), $KEY);
-    } elseif (strlen($password) > self::MAX_PASSWORD_LENGTH) {
+    } elseif (strlen((string) $password) > self::MAX_PASSWORD_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordTooLong', [], $locale), $KEY);
     } elseif (!mb_detect_encoding($password, 'ASCII', true)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordInvalidChars', [], $locale), $KEY);

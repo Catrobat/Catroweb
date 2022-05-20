@@ -14,16 +14,16 @@ use Exception;
  * @ORM\Table(name="program_like")
  * @ORM\Entity(repositoryClass=ProgramLikeRepository::class)
  */
-class ProgramLike
+class ProgramLike implements \Stringable
 {
-  public const TYPE_NONE = 0;
-  public const TYPE_THUMBS_UP = 1;
-  public const TYPE_SMILE = 2;
-  public const TYPE_LOVE = 3;
-  public const TYPE_WOW = 4;
+  final public const TYPE_NONE = 0;
+  final public const TYPE_THUMBS_UP = 1;
+  final public const TYPE_SMILE = 2;
+  final public const TYPE_LOVE = 3;
+  final public const TYPE_WOW = 4;
 
-  public const ACTION_ADD = 'add';
-  public const ACTION_REMOVE = 'remove';
+  final public const ACTION_ADD = 'add';
+  final public const ACTION_REMOVE = 'remove';
   // -> new types go here...
 
   public static array $VALID_TYPES = [
@@ -90,7 +90,6 @@ class ProgramLike
     $this->setProgram($program);
     $this->setUser($user);
     $this->setType($type);
-    $this->created_at = null;
   }
 
   public function __toString(): string
@@ -165,11 +164,7 @@ class ProgramLike
 
   public function getTypeAsString(): ?string
   {
-    try {
-      return self::$TYPE_NAMES[$this->type];
-    } catch (Exception $exception) {
-      return null;
-    }
+    return self::$TYPE_NAMES[$this->type];
   }
 
   public function getCreatedAt(): ?DateTime

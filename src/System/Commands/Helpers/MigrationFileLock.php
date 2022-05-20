@@ -7,20 +7,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrationFileLock
 {
-  private string $lock_file_path;
+  private readonly string $lock_file_path;
 
   /**
    * @var mixed
    */
   private $lock_file;
 
-  private OutputInterface $output;
-
-  public function __construct(string $app_root_dir, OutputInterface $output)
+  public function __construct(string $app_root_dir, private readonly OutputInterface $output)
   {
     $this->lock_file_path = $app_root_dir.'/'.RemixUpdater::MIGRATION_LOCK_FILE_NAME;
-    $this->lock_file = null;
-    $this->output = $output;
   }
 
   public function lock(): void

@@ -14,22 +14,13 @@ class RemixUpdater
   /**
    * @var string
    */
-  public const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
+  final public const MIGRATION_LOCK_FILE_NAME = 'CatrobatRemixMigration.lock';
 
-  private RemixManager $remix_manager;
+  private readonly string $migration_lock_file_path;
 
-  private AsyncHttpClient $async_http_client;
-
-  private RouterInterface $router;
-
-  private string $migration_lock_file_path;
-
-  public function __construct(RemixManager $remix_manager, AsyncHttpClient $async_http_client, RouterInterface $router,
+  public function __construct(private readonly RemixManager $remix_manager, private readonly AsyncHttpClient $async_http_client, private readonly RouterInterface $router,
                               string $kernel_root_dir)
   {
-    $this->remix_manager = $remix_manager;
-    $this->async_http_client = $async_http_client;
-    $this->router = $router;
     $app_root_dir = $kernel_root_dir;
     $this->migration_lock_file_path = $app_root_dir.'/'.self::MIGRATION_LOCK_FILE_NAME;
   }

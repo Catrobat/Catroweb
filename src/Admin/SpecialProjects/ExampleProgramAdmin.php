@@ -33,22 +33,15 @@ class ExampleProgramAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'example_program';
 
-  private ImageRepository $example_image_repository;
-  private ProgramManager $program_manager;
-  private FlavorRepository $flavor_repository;
-
   public function __construct(
       ?string $code,
       ?string $class,
       ?string $baseControllerName,
-      ImageRepository $example_image_repository,
-      ProgramManager $program_manager,
-      FlavorRepository $flavor_repository
+      private readonly ImageRepository $example_image_repository,
+      private readonly ProgramManager $program_manager,
+      private readonly FlavorRepository $flavor_repository
   ) {
     parent::__construct($code, $class, $baseControllerName);
-    $this->example_image_repository = $example_image_repository;
-    $this->program_manager = $program_manager;
-    $this->flavor_repository = $flavor_repository;
   }
 
   /**
@@ -160,7 +153,7 @@ class ExampleProgramAdmin extends AbstractAdmin
     $list
       ->addIdentifier('id')
       ->add('Example Image', null, [
-        'accessor' => function ($subject): string { return $this->getExampleImageUrl($subject); },
+        'accessor' => fn ($subject): string => $this->getExampleImageUrl($subject),
         'template' => 'Admin/example_image.html.twig',
       ])
       ->add('program', EntityType::class, ['class' => Program::class, 'editable' => false])

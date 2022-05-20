@@ -4,11 +4,8 @@ namespace App\Translation;
 
 class TranslationApiHelper
 {
-  private array $long_language_code;
-
-  public function __construct(array $long_language_code)
+  public function __construct(private readonly array $long_language_code)
   {
-    $this->long_language_code = $long_language_code;
   }
 
   public function transformLanguageCode(?string $language): ?string

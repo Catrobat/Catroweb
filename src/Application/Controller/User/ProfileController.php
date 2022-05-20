@@ -25,25 +25,11 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ProfileController extends AbstractController
 {
-  public const MIN_PASSWORD_LENGTH = 6;
-  public const MAX_PASSWORD_LENGTH = 4096;
-  protected ProgramManager $program_manager;
-  protected UserManager $user_manager;
-  protected AchievementManager $achievement_manager;
-  private JWTTokenManagerInterface $jwt_manager;
-  private CookieService $cookie_service;
-  private RefreshTokenService $token_manager;
+  final public const MIN_PASSWORD_LENGTH = 6;
+  final public const MAX_PASSWORD_LENGTH = 4096;
 
-  public function __construct(ProgramManager $program_manager, UserManager $user_manager,
-                              AchievementManager $achievement_manager, JWTTokenManagerInterface $jwt_manager,
-                              CookieService $cookie_service, RefreshTokenService $token_manager)
+  public function __construct(protected ProgramManager $program_manager, protected UserManager $user_manager, protected AchievementManager $achievement_manager, private readonly JWTTokenManagerInterface $jwt_manager, private readonly CookieService $cookie_service, private readonly RefreshTokenService $token_manager)
   {
-    $this->program_manager = $program_manager;
-    $this->user_manager = $user_manager;
-    $this->achievement_manager = $achievement_manager;
-    $this->jwt_manager = $jwt_manager;
-    $this->cookie_service = $cookie_service;
-    $this->token_manager = $token_manager;
   }
 
   /**
@@ -190,7 +176,7 @@ class ProfileController extends AbstractController
 
     try {
       $this->validateUsername($username);
-    } catch (Exception $exception) {
+    } catch (Exception) {
       return new JsonResponse(['statusCode' => 804]);
     }
 

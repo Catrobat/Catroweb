@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="scratch_program_remix_relation")
  * @ORM\Entity(repositoryClass=ScratchProgramRemixRepository::class)
  */
-class ScratchProgramRemixRelation implements ProgramRemixRelationInterface
+class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Stringable
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------

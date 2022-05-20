@@ -14,11 +14,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SpecialUpdaterAdminController extends CRUDController
 {
-  protected KernelInterface $kernel;
-
-  public function __construct(KernelInterface $kernel)
+  public function __construct(protected KernelInterface $kernel)
   {
-    $this->kernel = $kernel;
   }
 
   public function listAction(Request $request = null): Response

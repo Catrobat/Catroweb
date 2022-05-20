@@ -8,21 +8,16 @@ use SimpleXMLElement;
 
 abstract class Script
 {
-  protected SimpleXMLElement $script_xml_properties;
-
   protected string $type;
 
   protected string $caption;
 
   private string $img_file;
 
-  private array $bricks;
+  private array $bricks = [];
 
-  public function __construct(SimpleXMLElement $script_xml_properties)
+  public function __construct(protected SimpleXMLElement $script_xml_properties)
   {
-    $this->script_xml_properties = $script_xml_properties;
-    $this->bricks = [];
-
     $this->create();
 
     $this->parseBricks();

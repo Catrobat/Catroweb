@@ -16,16 +16,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SearchResponseManager extends AbstractResponseManager
 {
-  protected ProjectsResponseManager $projectsResponseManager;
-
   public function __construct(
         TranslatorInterface $translator,
         SerializerInterface $serializer,
         ResponseCacheManager $response_cache_manager,
-        ProjectsResponseManager $projectsResponseManager
+        protected ProjectsResponseManager $projectsResponseManager
     ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
-    $this->projectsResponseManager = $projectsResponseManager;
   }
 
   public function getSearchResponse(array $projects_response, array $users_response): SearchResponse

@@ -51,20 +51,17 @@ class UserRemixSimilarityRelation
   protected User $second_user;
 
   /**
-   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default": 0.0})
-   */
-  protected float $similarity;
-
-  /**
    * @ORM\Column(type="datetime")
    */
   protected ?DateTime $created_at = null;
 
-  public function __construct(User $first_user, User $second_user, float $similarity)
+  public function __construct(User $first_user, User $second_user, /**
+   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default": 0.0})
+   */
+  protected float $similarity)
   {
     $this->setFirstUser($first_user);
     $this->setSecondUser($second_user);
-    $this->similarity = $similarity;
   }
 
   /**

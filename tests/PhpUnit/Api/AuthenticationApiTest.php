@@ -26,15 +26,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class AuthenticationApiTest extends DefaultTestCase
 {
-  /**
-   * @var AuthenticationApi|MockObject
-   */
-  protected $object;
+  protected AuthenticationApi|MockObject $object;
 
-  /**
-   * @var AuthenticationApiFacade|MockObject
-   */
-  protected $facade;
+  protected AuthenticationApiFacade|MockObject $facade;
 
   /**
    * @throws ReflectionException

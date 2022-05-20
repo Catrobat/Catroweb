@@ -6,12 +6,7 @@ use App\Project\Event\ProgramBeforeInsertEvent;
 
 class NotesAndCreditsValidator
 {
-  private int $max_notes_and_credits_size;
-
-  public function __construct()
-  {
-    $this->max_notes_and_credits_size = 3_000;
-  }
+  private int $max_notes_and_credits_size = 3_000;
 
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {

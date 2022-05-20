@@ -10,15 +10,12 @@ use ZipArchive;
 
 class CatrobatFileExtractor
 {
-  private string $extract_dir;
+  private readonly string $extract_dir;
 
-  private string $extract_path;
-
-  public function __construct(string $extract_dir, string $extract_path)
+  public function __construct(string $extract_dir, private string $extract_path)
   {
     FileHelper::verifyDirectoryExists($extract_dir);
     $this->extract_dir = $extract_dir;
-    $this->extract_path = $extract_path;
   }
 
   /**

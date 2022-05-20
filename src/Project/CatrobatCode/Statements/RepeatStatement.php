@@ -9,11 +9,11 @@ class RepeatStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'repeat ';
+  final public const BEGIN_STRING = 'repeat ';
   /**
    * @var string
    */
-  public const END_STRING = ')<br/>';
+  final public const END_STRING = ')<br/>';
 
   /**
    * RepeatStatement constructor.

@@ -12,10 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class AbstractApiLoaderTest extends DefaultTestCase
 {
-  /**
-   * @var AbstractApiLoader|MockObject
-   */
-  protected $object;
+  protected AbstractApiLoader|MockObject $object;
 
   protected function setUp(): void
   {

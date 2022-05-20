@@ -15,26 +15,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExceptionListener
 {
-  protected LoggerInterface $logger;
-  protected LoggerInterface $softLogger;
-  protected TranslatorInterface $translator;
-  protected ParameterBagInterface $parameter_bag;
-  protected UrlGeneratorInterface $url_generator;
-
-  public function __construct(LoggerInterface $logger, LoggerInterface $softLogger, TranslatorInterface $translator, ParameterBagInterface $parameter_bag, UrlGeneratorInterface $url_generator)
+  public function __construct(protected LoggerInterface $logger, protected LoggerInterface $softLogger, protected TranslatorInterface $translator, protected ParameterBagInterface $parameter_bag, protected UrlGeneratorInterface $url_generator)
   {
-    $this->logger = $logger;
-    $this->softLogger = $softLogger;
-    $this->translator = $translator;
-    $this->parameter_bag = $parameter_bag;
-    $this->url_generator = $url_generator;
   }
 
   public function onKernelException(ExceptionEvent $event): ?Response
   {
     $exception = $event->getThrowable();
 
-    $themes = explode('|', strval($this->parameter_bag->get('themeRoutes')));
+    $themes = explode('|', (string) $this->parameter_bag->get('themeRoutes'));
     $request = $event->getRequest();
     $theme = 'app';
     $applicationRequest = false;

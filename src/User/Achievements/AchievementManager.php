@@ -18,23 +18,8 @@ use Exception;
 
 class AchievementManager
 {
-  protected EntityManagerInterface $entity_manager;
-  protected AchievementRepository $achievement_repository;
-  protected UserAchievementRepository $user_achievement_repository;
-  private ProgramManager $program_manager;
-  private ProjectCustomTranslationRepository $project_custom_translation_repository;
-
-  public function __construct(EntityManagerInterface $entity_manager,
-                              AchievementRepository $achievement_repository,
-                              UserAchievementRepository $user_achievement_repository,
-                              ProgramManager $program_manager,
-                              ProjectCustomTranslationRepository $project_custom_translation_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository, protected UserAchievementRepository $user_achievement_repository, private readonly ProgramManager $program_manager, private readonly ProjectCustomTranslationRepository $project_custom_translation_repository)
   {
-    $this->entity_manager = $entity_manager;
-    $this->achievement_repository = $achievement_repository;
-    $this->user_achievement_repository = $user_achievement_repository;
-    $this->program_manager = $program_manager;
-    $this->project_custom_translation_repository = $project_custom_translation_repository;
   }
 
   public function findAchievementByInternalTitle(string $internal_title): ?Achievement
@@ -128,13 +113,9 @@ class AchievementManager
   {
     $achievements = $this->findAllEnabledAchievements();
     $unlocked_achievements = $this->findUnlockedAchievements($user);
-    $achievements_unlocked_id_list = array_map(function (Achievement $achievement) {
-      return $achievement->getId();
-    }, $unlocked_achievements);
+    $achievements_unlocked_id_list = array_map(fn (Achievement $achievement) => $achievement->getId(), $unlocked_achievements);
 
-    return array_filter($achievements, function (Achievement $achievement) use ($achievements_unlocked_id_list) {
-      return !in_array($achievement->getId(), $achievements_unlocked_id_list, true);
-    });
+    return array_filter($achievements, fn (Achievement $achievement) => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
   }
 
   public function findMostRecentUserAchievement(User $user): ?UserAchievement
@@ -165,7 +146,7 @@ class AchievementManager
   public static function isCodingJam092021EventActive(): bool
   {
     // is open from 00:00 UTC+12 of 25th September 2021 till 23:59 UTC-12 of 26th September 2021.
-    return TimeUtils::getTimestamp() >= 1632484800 && TimeUtils::getTimestamp() <= 1632744000;
+    return TimeUtils::getTimestamp() >= 1_632_484_800 && TimeUtils::getTimestamp() <= 1_632_744_000;
   }
 
   /**
@@ -313,8 +294,6 @@ class AchievementManager
    */
   protected function mapUserAchievementsToAchievements(array $user_achievements): array
   {
-    return array_map(function (UserAchievement $achievement) {
-      return $achievement->getAchievement();
-    }, $user_achievements);
+    return array_map(fn (UserAchievement $achievement) => $achievement->getAchievement(), $user_achievements);
   }
 }

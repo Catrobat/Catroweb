@@ -16,14 +16,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class SearchController extends AbstractController
 {
-  protected RequestHelper $app_request;
   private int $DEFAULT_LIMIT = 20;
 
   private int $DEFAULT_OFFSET = 0;
 
-  public function __construct(RequestHelper $app_request)
+  public function __construct(protected RequestHelper $app_request)
   {
-    $this->app_request = $app_request;
   }
 
   /**
@@ -65,7 +63,7 @@ class SearchController extends AbstractController
       $numbOfTotalProjects = $program_manager->searchCount(
         $query, $max_version, null, $this->app_request->isDebugBuildRequest()
       );
-    } catch (Exception $e) {
+    } catch (Exception) {
       $programs = [];
       $numbOfTotalProjects = 0;
     }

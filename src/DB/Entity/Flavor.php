@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="flavor")
  */
-class Flavor
+class Flavor implements \Stringable
 {
   /**
    * @ORM\Id

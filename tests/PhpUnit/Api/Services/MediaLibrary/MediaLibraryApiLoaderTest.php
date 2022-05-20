@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class MediaLibraryApiLoaderTest extends DefaultTestCase
 {
-  /**
-   * @var MediaLibraryApiLoader|MockObject
-   */
-  protected $object;
+  protected MediaLibraryApiLoader|MockObject $object;
 
   protected function setUp(): void
   {

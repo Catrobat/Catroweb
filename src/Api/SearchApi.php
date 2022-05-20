@@ -9,11 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class SearchApi extends AbstractApiController implements SearchApiInterface
 {
-  private SearchApiFacade $facade;
-
-  public function __construct(SearchApiFacade $facade)
+  public function __construct(private readonly SearchApiFacade $facade)
   {
-    $this->facade = $facade;
   }
 
   /**
@@ -21,7 +18,7 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
    */
   public function searchGet(string $query, ?string $type = 'all', ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
   {
-    $type = $type ?? 'all';
+    $type ??= 'all';
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
 
@@ -55,7 +52,7 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
               break;
       }
 
-    $responseHeaders['X-Response-Hash'] = md5(json_encode($result));
+    $responseHeaders['X-Response-Hash'] = md5(json_encode($result, JSON_THROW_ON_ERROR));
 
     $responseCode = Response::HTTP_OK;
 

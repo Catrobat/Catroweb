@@ -15,10 +15,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class UpdateAchievementsCommandTest extends KernelTestCase
 {
-  /**
-   * @var UpdateAchievementsCommand|MockObject
-   */
-  protected $object;
+  protected UpdateAchievementsCommand|MockObject $object;
 
   protected function setUp(): void
   {

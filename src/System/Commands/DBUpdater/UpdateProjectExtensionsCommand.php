@@ -13,16 +13,11 @@ class UpdateProjectExtensionsCommand extends Command
 {
   protected static $defaultName = 'catrobat:update:extensions';
 
-  private EntityManagerInterface $entity_manager;
-  private ExtensionRepository $extension_repository;
+  final public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
 
-  public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
-
-  public function __construct(EntityManagerInterface $entity_manager, ExtensionRepository $extension_repository)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ExtensionRepository $extension_repository)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->extension_repository = $extension_repository;
   }
 
   protected function configure(): void

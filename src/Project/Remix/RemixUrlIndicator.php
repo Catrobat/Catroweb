@@ -7,13 +7,13 @@ class RemixUrlIndicator
   /**
    * @var string
    */
-  public const PREFIX_INDICATOR = '[';
+  final public const PREFIX_INDICATOR = '[';
   /**
    * @var string
    */
-  public const SUFFIX_INDICATOR = ']';
+  final public const SUFFIX_INDICATOR = ']';
   /**
    * @var string
    */
-  public const SEPARATOR = ',';
+  final public const SEPARATOR = ',';
 }

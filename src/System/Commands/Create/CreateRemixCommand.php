@@ -7,7 +7,6 @@ use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixManager;
 use App\System\Commands\Helpers\RemixManipulationProgramManager;
 use App\User\Notification\NotificationManager;
-use App\User\UserManager;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -18,24 +17,11 @@ class CreateRemixCommand extends Command
 {
   protected static $defaultName = 'catrobat:remix';
 
-  private UserManager $user_manager;
-
-  private RemixManipulationProgramManager $remix_manipulation_program_manager;
-
-  private RemixManager $remix_manager;
-
-  private NotificationManager $notification_service;
-
-  public function __construct(UserManager $user_manager,
-                              RemixManipulationProgramManager $program_manager,
-                              RemixManager $remix_manager,
-                              NotificationManager $notification_service)
+  public function __construct(private readonly RemixManipulationProgramManager $remix_manipulation_program_manager,
+                              private readonly RemixManager $remix_manager,
+                              private readonly NotificationManager $notification_service)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
-    $this->remix_manager = $remix_manager;
-    $this->notification_service = $notification_service;
   }
 
   protected function configure(): void
@@ -52,6 +38,7 @@ class CreateRemixCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
+    $program_remixes_of_original = [];
     $original_program_name = $input->getArgument('program_original');
     $remix_program_name = $input->getArgument('program_remix');
 
@@ -70,13 +57,10 @@ class CreateRemixCommand extends Command
     $program_remixes_of_original[0] = $remix_data_of_original;
     $notification = new RemixNotification($program_original->getUser(), $program_remix->getUser(), $program_original, $program_remix);
     $this->notification_service->addNotification($notification);
-    if (0 == sizeof($program_remixes_of_original)) {
-      return 3;
-    }
 
     try {
       $this->remix_manager->addRemixes($program_remix, $program_remixes_of_original);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return 4;
     }
     $output->writeln('Remixing '.$program_original->getName().' with '.$remix_program_name);

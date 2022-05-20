@@ -12,10 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class AchievementsAdminControllerTest extends DefaultTestCase
 {
-  /**
-   * @var AchievementsAdminController|MockObject
-   */
-  protected $object;
+  protected AchievementsAdminController|MockObject $object;
 
   protected function setUp(): void
   {

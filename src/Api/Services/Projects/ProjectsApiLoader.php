@@ -17,30 +17,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProjectsApiLoader extends AbstractApiLoader
 {
-  private ProgramManager $project_manager;
-  private FeaturedRepository $featured_repository;
-  private TagRepository $tag_repository;
-  private ExtensionRepository $extension_repository;
-  private RequestStack $request_stack;
-  protected ProgramFileRepository $file_repository;
-  protected ExtractedFileRepository $extracted_file_repository;
-
-  public function __construct(
-    ProgramManager $project_manager,
-    FeaturedRepository $featured_repository,
-    TagRepository $tag_repository,
-    ExtensionRepository $extension_repository,
-    RequestStack $request_stack,
-    ProgramFileRepository $file_repository,
-    ExtractedFileRepository $extracted_file_repository
-  ) {
-    $this->project_manager = $project_manager;
-    $this->featured_repository = $featured_repository;
-    $this->tag_repository = $tag_repository;
-    $this->extension_repository = $extension_repository;
-    $this->request_stack = $request_stack;
-    $this->file_repository = $file_repository;
-    $this->extracted_file_repository = $extracted_file_repository;
+  public function __construct(private readonly ProgramManager $project_manager, private readonly FeaturedRepository $featured_repository, private readonly TagRepository $tag_repository, private readonly ExtensionRepository $extension_repository, private readonly RequestStack $request_stack, protected ProgramFileRepository $file_repository, protected ExtractedFileRepository $extracted_file_repository)
+  {
   }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
@@ -133,7 +111,7 @@ final class ProjectsApiLoader extends AbstractApiLoader
       if (!$zipFile->isFile()) {
         return null;
       }
-    } catch (FileNotFoundException $fileNotFoundException) {
+    } catch (FileNotFoundException) {
       return null;
     }
 

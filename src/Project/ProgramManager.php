@@ -48,72 +48,8 @@ use Symfony\Component\Security\Core\Security;
 
 class ProgramManager
 {
-  protected CatrobatFileExtractor $file_extractor;
-
-  protected CatrobatFileSanitizer $file_sanitizer;
-
-  protected ProgramFileRepository $file_repository;
-
-  protected ScreenshotRepository $screenshot_repository;
-
-  protected EventDispatcherInterface $event_dispatcher;
-
-  protected EntityManagerInterface $entity_manager;
-
-  protected ProgramRepository $program_repository;
-
-  protected TagRepository $tag_repository;
-
-  protected ProgramLikeRepository $program_like_repository;
-
-  protected FeaturedRepository $featured_repository;
-
-  protected ExampleRepository $example_repository;
-
-  protected RequestHelper $request_helper;
-
-  protected NotificationManager $notification_service;
-
-  protected ExtensionRepository $extension_repository;
-
-  private LoggerInterface $logger;
-
-  private ?UrlHelper $urlHelper;
-
-  private TransformedFinder $program_finder;
-
-  protected Security $security;
-
-  public function __construct(CatrobatFileExtractor $file_extractor, ProgramFileRepository $file_repository,
-                              ScreenshotRepository $screenshot_repository, EntityManagerInterface $entity_manager,
-                              ProgramRepository $program_repository, TagRepository $tag_repository,
-                              ProgramLikeRepository $program_like_repository,
-                              FeaturedRepository $featured_repository,
-                              ExampleRepository $example_repository,
-                              EventDispatcherInterface $event_dispatcher,
-                              LoggerInterface $logger, RequestHelper $request_helper,
-                              ExtensionRepository $extension_repository, CatrobatFileSanitizer $file_sanitizer,
-                              NotificationManager $notification_service, TransformedFinder $program_finder,
-                              UrlHelper $url_helper, Security $security)
+  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProgramFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected TagRepository $tag_repository, protected ProgramLikeRepository $program_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $program_finder, private readonly ?UrlHelper $urlHelper, protected Security $security)
   {
-    $this->file_extractor = $file_extractor;
-    $this->event_dispatcher = $event_dispatcher;
-    $this->file_repository = $file_repository;
-    $this->screenshot_repository = $screenshot_repository;
-    $this->entity_manager = $entity_manager;
-    $this->program_repository = $program_repository;
-    $this->tag_repository = $tag_repository;
-    $this->program_like_repository = $program_like_repository;
-    $this->featured_repository = $featured_repository;
-    $this->example_repository = $example_repository;
-    $this->logger = $logger;
-    $this->request_helper = $request_helper;
-    $this->file_sanitizer = $file_sanitizer;
-    $this->extension_repository = $extension_repository;
-    $this->notification_service = $notification_service;
-    $this->program_finder = $program_finder;
-    $this->urlHelper = $url_helper;
-    $this->security = $security;
   }
 
   public function getFeaturedRepository(): FeaturedRepository
@@ -366,7 +302,7 @@ class ProgramManager
   }
 
   /**
-   * @throws NoResultException
+   * @throws NoResultException|InvalidArgumentException
    */
   public function changeLike(Program $project, User $user, int $type, string $action): void
   {
@@ -386,7 +322,7 @@ class ProgramManager
   {
     try {
       return $this->program_like_repository->areThereOtherLikeTypes($project, $user, $type);
-    } catch (NonUniqueResultException $exception) {
+    } catch (NonUniqueResultException) {
       return false;
     }
   }
@@ -731,45 +667,31 @@ class ProgramManager
     $tokenParts = explode('.', $token);
     $tokenPayload = base64_decode($tokenParts[1], true);
 
-    return json_decode($tokenPayload, true);
+    return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
   }
 
   public function getProjects(string $category, string $max_version = '',
                               int $limit = 20, int $offset = 0, string $flavor = null): array
   {
-    switch ($category) {
-      case 'recent':
-        return $this->getRecentPrograms($flavor, $limit, $offset, $max_version);
-      case 'random':
-        return $this->getRandomPrograms($flavor, $limit, $offset, $max_version);
-      case 'most_viewed':
-        return $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
-      case 'most_downloaded':
-        return $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
-      case 'example':
-        return $this->getExamplePrograms($flavor, $limit, $offset, $max_version);
-      case 'scratch':
-        return $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version);
-      default:
-        return [];
-    }
+    return match ($category) {
+      'recent' => $this->getRecentPrograms($flavor, $limit, $offset, $max_version),
+        'random' => $this->getRandomPrograms($flavor, $limit, $offset, $max_version),
+        'most_viewed' => $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version),
+        'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
+        'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
+        'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
+        default => [],
+    };
   }
 
   public function getProjectsCount(string $category, string $max_version = '', string $flavor = null): int
   {
-    switch ($category) {
-      case 'recent':
-      case 'random':
-      case 'most_viewed':
-      case 'most_downloaded':
-        return $this->countProjects($flavor, $max_version);
-      case 'example':
-        return $this->getExampleProgramsCount($flavor, $max_version);
-      case 'scratch':
-        return $this->getScratchRemixesProgramsCount($flavor, $max_version);
-      default:
-        return 0;
-    }
+    return match ($category) {
+      'recent', 'random', 'most_viewed', 'most_downloaded' => $this->countProjects($flavor, $max_version),
+        'example' => $this->getExampleProgramsCount($flavor, $max_version),
+        'scratch' => $this->getScratchRemixesProgramsCount($flavor, $max_version),
+        default => 0,
+    };
   }
 
   private function programSearchQuery(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): BoolQuery

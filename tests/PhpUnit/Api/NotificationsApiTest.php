@@ -21,15 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class NotificationsApiTest extends DefaultTestCase
 {
-  /**
-   * @var NotificationsApi|MockObject
-   */
-  protected $object;
+  protected NotificationsApi|MockObject $object;
 
-  /**
-   * @var NotificationsApiFacade|MockObject
-   */
-  protected $facade;
+  protected NotificationsApiFacade|MockObject $facade;
 
   protected function setUp(): void
   {

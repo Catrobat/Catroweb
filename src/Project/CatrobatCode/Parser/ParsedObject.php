@@ -7,23 +7,17 @@ use SimpleXMLElement;
 
 class ParsedObject
 {
-  protected SimpleXMLElement $object_xml_properties;
-
   protected SimpleXMLElement $name;
 
-  protected array $looks;
+  protected array $looks = [];
 
-  protected array $sounds;
+  protected array $sounds = [];
 
-  protected array $scripts;
+  protected array $scripts = [];
 
-  public function __construct(SimpleXMLElement $object_xml_properties)
+  public function __construct(protected SimpleXMLElement $object_xml_properties)
   {
-    $this->object_xml_properties = $object_xml_properties;
     $this->name = $this->resolveName();
-    $this->looks = [];
-    $this->sounds = [];
-    $this->scripts = [];
 
     $this->parseLooks();
     $this->parseSounds();

@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 {
-  private int $current_program_id;
-
-  private $remix_graph_mapping;
+  private int $current_program_id = 1;
 
   /**
    * RemixManipulationCatrobatFileExtractor constructor.
@@ -20,10 +18,8 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
    * @param mixed $extract_dir
    * @param mixed $extract_path
    */
-  public function __construct($remix_graph_mapping, $extract_dir, $extract_path)
+  public function __construct(private $remix_graph_mapping, $extract_dir, $extract_path)
   {
-    $this->current_program_id = 1;
-    $this->remix_graph_mapping = $remix_graph_mapping;
     parent::__construct($extract_dir, $extract_path);
   }
 
@@ -34,7 +30,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     $all_parent_program_ids = [];
     foreach ($this->remix_graph_mapping as $parent_program_data => $child_program_ids) {
       if (in_array($this->current_program_id, $child_program_ids, true)) {
-        $all_parent_program_ids[] = explode(',', $parent_program_data);
+        $all_parent_program_ids[] = explode(',', (string) $parent_program_data);
       }
     }
 

@@ -6,15 +6,12 @@ use SimpleXMLElement;
 
 class ParsedObjectAsset
 {
-  protected SimpleXMLElement $asset_xml_properties;
-
   protected ?string $name = null;
 
   protected ?string $file_name = null;
 
-  public function __construct(SimpleXMLElement $asset_xml_properties)
+  public function __construct(protected SimpleXMLElement $asset_xml_properties)
   {
-    $this->asset_xml_properties = $asset_xml_properties;
     $this->name = $asset_xml_properties[Constants::NAME_ATTRIBUTE];
     $this->file_name = $this->extractFileName($asset_xml_properties);
   }
@@ -37,6 +34,6 @@ class ParsedObjectAsset
       $file_name = $asset_xml_properties->fileName;
     }
 
-    return rawurlencode($file_name);
+    return rawurlencode($file_name ?? '');
   }
 }

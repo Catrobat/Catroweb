@@ -21,23 +21,12 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
    */
   protected static $defaultName = 'catrobat:workflow:project:refresh_extensions';
 
-  protected ProgramManager $program_manager;
-  protected ProgramRepository $program_repository;
-  protected ProgramExtensionListener $program_extension_listener;
-  protected ExtractedFileRepository $extracted_file_repo;
-  protected EntityManagerInterface $entity_manager;
-
-  public function __construct(ProgramManager $program_manager, ProgramRepository $program_repository,
-                              ProgramExtensionListener $program_extension_listener,
-                              ExtractedFileRepository $extracted_file_repo,
-                              EntityManagerInterface $entity_manager)
+  public function __construct(protected ProgramManager $program_manager, protected ProgramRepository $program_repository,
+                              protected ProgramExtensionListener $program_extension_listener,
+                              protected ExtractedFileRepository $extracted_file_repo,
+                              protected EntityManagerInterface $entity_manager)
   {
     parent::__construct();
-    $this->program_manager = $program_manager;
-    $this->program_repository = $program_repository;
-    $this->program_extension_listener = $program_extension_listener;
-    $this->extracted_file_repo = $extracted_file_repo;
-    $this->entity_manager = $entity_manager;
   }
 
   protected function configure(): void

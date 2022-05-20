@@ -15,25 +15,10 @@ class RemixSubgraphManipulator
   /**
    * @var string
    */
-  public const COMMON_TIMESTAMP = 'common_timestamp';
+  final public const COMMON_TIMESTAMP = 'common_timestamp';
 
-  private EntityManagerInterface $entity_manager;
-
-  private ProgramRepository $program_repository;
-
-  private ProgramRemixRepository $program_remix_repository;
-
-  private ProgramRemixBackwardRepository $program_remix_backward_repository;
-
-  public function __construct(EntityManagerInterface $entity_manager,
-                              ProgramRepository $program_repository,
-                              ProgramRemixRepository $program_remix_repository,
-                              ProgramRemixBackwardRepository $program_remix_backward_repository)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramRepository $program_repository, private readonly ProgramRemixRepository $program_remix_repository, private readonly ProgramRemixBackwardRepository $program_remix_backward_repository)
   {
-    $this->entity_manager = $entity_manager;
-    $this->program_repository = $program_repository;
-    $this->program_remix_repository = $program_remix_repository;
-    $this->program_remix_backward_repository = $program_remix_backward_repository;
   }
 
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,

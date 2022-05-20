@@ -26,20 +26,12 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DownloadApkController extends AbstractController
 {
-  protected EventDispatcherInterface $event_dispatcher;
-  private ProgramManager $program_manager;
-  protected LoggerInterface $logger;
-  private ApkRepository $apk_repository;
-
-  public function __construct(EventDispatcherInterface $event_dispatcher,
-                              ProgramManager $program_manager,
-                              ApkRepository $apk_repository,
-                              LoggerInterface $downloadLogger)
+  public function __construct(protected EventDispatcherInterface $event_dispatcher,
+                              private readonly ProgramManager $program_manager,
+                              private readonly ApkRepository $apk_repository,
+                              protected LoggerInterface $logger)
   {
-    $this->event_dispatcher = $event_dispatcher;
-    $this->program_manager = $program_manager;
-    $this->apk_repository = $apk_repository;
-    $this->logger = $downloadLogger; // Automatically injects the download logger here thx to this syntax. (camelCase)
+    // Automatically injects the download logger here thx to this syntax. (camelCase)
   }
 
   /**

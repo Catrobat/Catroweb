@@ -6,11 +6,8 @@ use App\Project\CatrobatCode\StatementFactory;
 
 class ObjectStatement extends Statement
 {
-  private string $name;
-
-  public function __construct(StatementFactory $statementFactory, int $spaces, string $name)
+  public function __construct(StatementFactory $statementFactory, int $spaces, private readonly string $name)
   {
-    $this->name = $name;
     parent::__construct($statementFactory, null, $spaces, '', '');
   }
 

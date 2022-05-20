@@ -18,15 +18,10 @@ class CatrobatFileSanitizer
 
   private ?array $sound_paths;
 
-  private ?string $screenshot_path;
+  private ?string $extracted_file_root_path = null;
 
-  private ?string $extracted_file_root_path;
-
-  private CatrobatCodeParser $catrobat_code_parser;
-
-  public function __construct(CatrobatCodeParser $catrobat_code_parser)
+  public function __construct(private readonly CatrobatCodeParser $catrobat_code_parser)
   {
-    $this->catrobat_code_parser = $catrobat_code_parser;
   }
 
   public function sanitize(ExtractedCatrobatFile $extracted_file): void
@@ -34,7 +29,6 @@ class CatrobatFileSanitizer
     $this->extracted_file_root_path = $extracted_file->getPath();
     $this->sound_paths = $extracted_file->getContainingSoundPaths();
     $this->image_paths = $extracted_file->getContainingImagePaths();
-    $this->screenshot_path = $extracted_file->getScreenshotPath();
     $this->scenes = $this->getScenes($extracted_file);
 
     $files = new RecursiveIteratorIterator(
@@ -155,7 +149,7 @@ class CatrobatFileSanitizer
 
     $limit = -1;
     $pattern = '@/@';
-    $array = preg_split($pattern, $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
+    $array = preg_split($pattern, (string) $this->extracted_file_root_path, $limit, PREG_SPLIT_NO_EMPTY);
     $needle = @end($array);
     $relative_filepath = strstr($filepath, (string) $needle);
 

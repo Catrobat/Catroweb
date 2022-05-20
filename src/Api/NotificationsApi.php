@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
-  private NotificationsApiFacade $facade;
-
-  public function __construct(NotificationsApiFacade $facade)
+  public function __construct(private readonly NotificationsApiFacade $facade)
   {
-    $this->facade = $facade;
   }
 
   /**

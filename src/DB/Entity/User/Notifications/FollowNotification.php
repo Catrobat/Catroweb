@@ -11,6 +11,17 @@ use Doctrine\ORM\Mapping as ORM;
 class FollowNotification extends CatroNotification
 {
   /**
+   *  You have to set this parameter otherwise the wrong template will be rendered.
+   */
+  private string $twig_template = '/Notifications/NotificationTypes/follow_notification.html.twig';
+
+  /**
+   * FollowNotification constructor.
+   *
+   * @param User $user     the User to which this FollowNotification should be shown
+   * @param User $follower the User which "follow action" to another user triggered this FollowNotification
+   */
+  public function __construct(User $user, /**
    * The User which "follow action" to another user triggered this FollowNotification.
    * If this user gets deleted, this FollowNotification gets deleted as well.
    *
@@ -24,23 +35,9 @@ class FollowNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private User $follower;
-
-  /**
-   *  You have to set this parameter otherwise the wrong template will be rendered.
-   */
-  private string $twig_template = '/Notifications/NotificationTypes/follow_notification.html.twig';
-
-  /**
-   * FollowNotification constructor.
-   *
-   * @param User $user    the User to which this FollowNotification should be shown
-   * @param User $profile the User which "follow action" to another user triggered this FollowNotification
-   */
-  public function __construct(User $user, User $profile)
+  private User $follower)
   {
     parent::__construct($user, '', '', 'follow');
-    $this->follower = $profile;
   }
 
   /**

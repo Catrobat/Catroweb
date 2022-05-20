@@ -4,12 +4,6 @@ namespace App\Project\CatrobatCode\Statements;
 
 class BaseUserListStatement extends Statement
 {
-  private $start;
-
-  private $middle;
-
-  private $end;
-
   private string $listName;
 
   /**
@@ -22,11 +16,8 @@ class BaseUserListStatement extends Statement
    * @param mixed $middle
    * @param mixed $end
    */
-  public function __construct($statementFactory, $xmlTree, $spaces, $start, $middle, $end)
+  public function __construct($statementFactory, $xmlTree, $spaces, private $start, private $middle, private $end)
   {
-    $this->start = $start;
-    $this->middle = $middle;
-    $this->end = $end;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $start,
       $end);

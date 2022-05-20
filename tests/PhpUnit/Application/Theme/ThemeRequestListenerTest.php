@@ -24,15 +24,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ThemeRequestListenerTest extends DefaultTestCase
 {
-  /**
-   * @var ThemeRequestListener|MockObject
-   */
-  protected $object;
+  protected ThemeRequestListener|MockObject $object;
 
-  /**
-   * @var ParameterBagInterface|MockObject
-   */
-  protected $parameter_bag;
+  protected ParameterBagInterface|MockObject $parameter_bag;
 
   protected function setUp(): void
   {

@@ -24,9 +24,9 @@ runs:
           bin/php-cs-fixer
           bin/phpdd
           bin/psalm
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        key: ${{ runner.os }}-php--${{ hashFiles('**/composer.lock') }}
         restore-keys: |
-          ${{ runner.os }}-php-
+          ${{ runner.os }}-php--
 
     - name: "Only install packages if there is no cache hit"
       # "If" not yet supported: https://github.com/actions/runner/issues/834 -> shell workaround

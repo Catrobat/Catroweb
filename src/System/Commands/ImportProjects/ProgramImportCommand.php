@@ -20,19 +20,13 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ProgramImportCommand extends Command
 {
-  public const REMIX_GRAPH_NO_LAYOUT = '0';
+  final public const REMIX_GRAPH_NO_LAYOUT = '0';
 
   protected static $defaultName = 'catrobat:import';
 
-  private UserManager $user_manager;
-
-  private RemixManipulationProgramManager $remix_manipulation_program_manager;
-
-  public function __construct(UserManager $user_manager, RemixManipulationProgramManager $program_manager)
+  public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProgramManager $remix_manipulation_program_manager)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
   }
 
   protected function configure(): void

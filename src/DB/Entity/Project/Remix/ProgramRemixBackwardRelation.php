@@ -14,7 +14,7 @@ use Exception;
  * @ORM\Table(name="program_remix_backward_relation")
  * @ORM\Entity(repositoryClass=ProgramRemixBackwardRepository::class)
  */
-class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface
+class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface, \Stringable
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------

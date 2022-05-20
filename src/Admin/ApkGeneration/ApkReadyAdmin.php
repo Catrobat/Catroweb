@@ -33,16 +33,13 @@ class ApkReadyAdmin extends AbstractAdmin
     $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
   }
 
-  private ScreenshotRepository $screenshot_repository;
-
   public function __construct(
         ?string $code,
         ?string $class,
         ?string $baseControllerName,
-                              ScreenshotRepository $screenshot_repository
+                              private readonly ScreenshotRepository $screenshot_repository
     ) {
     parent::__construct($code, $class, $baseControllerName);
-    $this->screenshot_repository = $screenshot_repository;
   }
 
   public function getThumbnailImageUrl(Program $object): string
@@ -97,7 +94,7 @@ class ApkReadyAdmin extends AbstractAdmin
       ->add('name')
       ->add('apk_request_time')
       ->add('thumbnail', 'string', [
-        'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
+        'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
         'template' => 'Admin/program_thumbnail_image_list.html.twig',
       ])
       ->add(ListMapper::NAME_ACTIONS, null, [

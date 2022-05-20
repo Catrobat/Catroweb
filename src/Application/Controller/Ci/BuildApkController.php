@@ -22,18 +22,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class BuildApkController extends AbstractController
 {
-  private ProgramManager $program_manager;
-
-  private JenkinsDispatcher $dispatcher;
-
-  private ApkRepository $apk_repository;
-
-  public function __construct(ProgramManager $program_manager, JenkinsDispatcher $dispatcher,
-                              ApkRepository $apk_repository)
+  public function __construct(private readonly ProgramManager $program_manager, private readonly JenkinsDispatcher $dispatcher, private readonly ApkRepository $apk_repository)
   {
-    $this->program_manager = $program_manager;
-    $this->dispatcher = $dispatcher;
-    $this->apk_repository = $apk_repository;
   }
 
   /**

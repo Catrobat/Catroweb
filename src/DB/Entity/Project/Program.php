@@ -31,15 +31,15 @@ use Exception;
  * )
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
  */
-class Program
+class Program implements \Stringable
 {
-  public const APK_NONE = 0;
+  final public const APK_NONE = 0;
 
-  public const APK_PENDING = 1;
+  final public const APK_PENDING = 1;
 
-  public const APK_READY = 2;
+  final public const APK_READY = 2;
 
-  public const INITIAL_VERSION = 1;
+  final public const INITIAL_VERSION = 1;
 
   /**
    * @ORM\Id
@@ -322,7 +322,7 @@ class Program
    * @ORM\ManyToOne(targetEntity=User::class)
    * @ORM\JoinColumn(name="approved_by_user", referencedColumnName="id", nullable=true)
    */
-  protected ?User $approved_by_user;
+  protected ?User $approved_by_user = null;
 
   /**
    * @ORM\Column(type="smallint", options={"default": 0})
@@ -805,9 +805,7 @@ class Program
   {
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(function (ProgramRemixRelation $ra) {
-      return $ra->getDescendantId();
-    }, $relations));
+    return array_unique(array_map(fn (ProgramRemixRelation $ra) => $ra->getDescendantId(), $relations));
   }
 
   public function getScratchRemixParentRelations(): Collection

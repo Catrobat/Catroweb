@@ -22,20 +22,14 @@ class CronJobCommand extends Command
    */
   protected static $defaultName = 'catrobat:cronjob';
 
-  protected EntityManagerInterface $entity_manager;
-
-  protected CronJobRepository $cron_job_repository;
-
   protected const ONE_MINUTE_IN_SECONDS = 60;
   protected const ONE_HOUR_IN_SECONDS = self::ONE_MINUTE_IN_SECONDS * 60;
   protected const ONE_DAY_IN_SECONDS = self::ONE_HOUR_IN_SECONDS * 24;
   protected const ONE_WEEK_IN_SECONDS = self::ONE_DAY_IN_SECONDS * 7;
 
-  public function __construct(EntityManagerInterface $entity_manager, CronJobRepository $cron_job_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected CronJobRepository $cron_job_repository)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->cron_job_repository = $cron_job_repository;
   }
 
   protected function configure(): void
@@ -176,7 +170,7 @@ class CronJobCommand extends Command
 
     try {
       $result_code = CommandHelper::executeShellCommand($command, $config, '', $output);
-    } catch (RuntimeException $exception) {
+    } catch (RuntimeException) {
       $cron_job->setResultCode(-1);
       $cron_job->setState('timeout');
       $this->entity_manager->persist($cron_job);

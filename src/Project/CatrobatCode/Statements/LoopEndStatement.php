@@ -9,11 +9,11 @@ class LoopEndStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'end of loop';
+  final public const BEGIN_STRING = 'end of loop';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * LoopEndStatement constructor.

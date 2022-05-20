@@ -17,14 +17,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ApkStatusController extends AbstractController
 {
-  private ProgramManager $program_manager;
-
-  private TranslatorInterface $translator;
-
-  public function __construct(ProgramManager $program_manager, TranslatorInterface $translator)
+  public function __construct(private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator)
   {
-    $this->program_manager = $program_manager;
-    $this->translator = $translator;
   }
 
   /**

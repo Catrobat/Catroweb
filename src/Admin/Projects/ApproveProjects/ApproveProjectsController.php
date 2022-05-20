@@ -60,7 +60,7 @@ class ApproveProjectsController extends CRUDController
     $data_grid = $this->admin->getDatagrid();
 
     $objects = [...$data_grid->getResults()];
-    if (0 == count($objects)) {
+    if (empty($objects[0])) {
       return null;
     }
     $object_key = array_rand($objects);

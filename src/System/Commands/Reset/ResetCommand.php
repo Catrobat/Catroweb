@@ -15,21 +15,15 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ResetCommand extends Command
 {
-  public const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
+  final public const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
   protected static $defaultName = 'catrobat:reset';
 
   private array $reported = [];
 
-  private ParameterBagInterface $parameter_bag;
-
-  private ProgramRepository $program_manager;
-
-  public function __construct(ProgramRepository $program_manager, ParameterBagInterface $parameter_bag)
+  public function __construct(private readonly ProgramRepository $program_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->parameter_bag = $parameter_bag;
-    $this->program_manager = $program_manager;
   }
 
   protected function configure(): void
@@ -285,7 +279,7 @@ class ResetCommand extends Command
 
         $ret = CommandHelper::executeSymfonyCommand('catrobat:comment', $this->getApplication(), $parameters, $output);
         if (0 !== $ret) {
-          $output->writeln('Comment creation failed for '.json_encode($parameters).' error code: '.$ret);
+          $output->writeln('Comment creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
         }
       }
       ++$i;
@@ -310,7 +304,7 @@ class ResetCommand extends Command
       $ret = CommandHelper::executeSymfonyCommand('catrobat:report', $this->getApplication(), $parameters, $output);
 
       if (0 !== $ret) {
-        $output->writeln('Report project creation failed for '.json_encode($parameters).' error code: '.$ret);
+        $output->writeln('Report project creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
     }
   }
@@ -330,7 +324,7 @@ class ResetCommand extends Command
         $ret = CommandHelper::executeSymfonyCommand('catrobat:like', $this->getApplication(), $parameters, $output);
 
         if (0 !== $ret) {
-          $output->writeln('Project like creation failed for '.json_encode($parameters).' error code: '.$ret);
+          $output->writeln('Project like creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
         }
       }
     }
@@ -351,7 +345,7 @@ class ResetCommand extends Command
         $ret = CommandHelper::executeSymfonyCommand('catrobat:download', $this->getApplication(), $parameters, $output);
 
         if (0 !== $ret) {
-          $output->writeln('Project Download creation failed for '.json_encode($parameters).' error code: '.$ret);
+          $output->writeln('Project Download creation failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
         }
       }
     }
@@ -373,7 +367,7 @@ class ResetCommand extends Command
 
       if (0 !== $ret) {
         // Might fail because of missing screenshots!
-        $output->writeln('Setting project to featured failed for '.json_encode($parameters).' error code: '.$ret);
+        $output->writeln('Setting project to featured failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
     }
   }
@@ -394,7 +388,7 @@ class ResetCommand extends Command
       $ret = CommandHelper::executeSymfonyCommand('catrobat:follow', $this->getApplication(), $parameters, $output);
 
       if (0 !== $ret) {
-        $output->writeln('Follow Action failed for '.json_encode($parameters).' error code: '.$ret);
+        $output->writeln('Follow Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
     }
   }
@@ -423,7 +417,7 @@ class ResetCommand extends Command
       $ret = CommandHelper::executeSymfonyCommand('catrobat:remix', $this->getApplication(), $parameters, $output);
 
       if (0 !== $ret) {
-        $output->writeln('Remix Action failed for '.json_encode($parameters).' error code: '.$ret);
+        $output->writeln('Remix Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
     }
   }
@@ -441,7 +435,7 @@ class ResetCommand extends Command
 
       if (0 !== $ret) {
         // Might fail because of missing screenshots!
-        $output->writeln('Setting project to example failed for '.json_encode($parameters).' error code: '.$ret);
+        $output->writeln('Setting project to example failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
       }
     }
   }

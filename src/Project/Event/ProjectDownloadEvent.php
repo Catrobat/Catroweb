@@ -9,16 +9,10 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ProjectDownloadEvent extends Event
 {
-  protected ?User $user;
-  protected Program $project;
   protected Request $request;
-  protected string $download_type;
 
-  public function __construct(?User $user, Program $project, string $download_type)
+  public function __construct(protected ?User $user, protected Program $project, protected string $download_type)
   {
-    $this->user = $user;
-    $this->project = $project;
-    $this->download_type = $download_type;
   }
 
   public function getUser(): ?User

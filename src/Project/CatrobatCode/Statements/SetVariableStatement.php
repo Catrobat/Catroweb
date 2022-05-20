@@ -7,11 +7,11 @@ class SetVariableStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'set ';
+  final public const BEGIN_STRING = 'set ';
   /**
    * @var string
    */
-  public const END_STRING = ')<br/>';
+  final public const END_STRING = ')<br/>';
 
   /**
    * SetVariableStatement constructor.

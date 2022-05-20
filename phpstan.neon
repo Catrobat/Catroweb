@@ -1,4 +1,6 @@
 parameters:
+  bootstrapFiles:
+    - config/bootstrap_test.php
   level: 6  # 0 is the loosest lvl and 8 is the strictest
   paths:
       - src

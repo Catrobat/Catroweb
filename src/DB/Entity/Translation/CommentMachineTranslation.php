@@ -13,16 +13,13 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
  */
 class CommentMachineTranslation extends MachineTranslation
 {
-  /**
+  public function __construct(/**
    * @ORM\ManyToOne(targetEntity=UserComment::class)
    * @ORM\JoinColumn(name="comment_id", referencedColumnName="id", onDelete="CASCADE")
    */
-  protected UserComment $comment;
-
-  public function __construct(UserComment $comment, string $source_language, string $target_language, string $provider, int $usage_count = 1)
+  protected UserComment $comment, string $source_language, string $target_language, string $provider, int $usage_count = 1)
   {
     parent::__construct($source_language, $target_language, $provider, $usage_count);
-    $this->comment = $comment;
   }
 
   public function getComment(): UserComment

@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="media_package")
  */
-class MediaPackage
+class MediaPackage implements \Stringable
 {
   /**
    * @ORM\Id
@@ -50,7 +50,7 @@ class MediaPackage
     $this->categories = new ArrayCollection();
   }
 
-  public function __toString()
+  public function __toString(): string
   {
     return (string) $this->name;
   }

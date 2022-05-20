@@ -65,7 +65,7 @@ use Symfony\Component\Routing\Router;
  */
 trait ContextTrait
 {
-  private KernelInterface $kernel;
+  private readonly KernelInterface $kernel;
 
   public string $ERROR_DIR;
   public string $FIXTURES_DIR;
@@ -405,6 +405,7 @@ trait ContextTrait
 
   public function insertFeaturedProject(array $config, bool $andFlush = true): FeaturedProgram
   {
+    $new_flavor = [];
     $featured_program = new FeaturedProgram();
 
     /* @var Program $program */
@@ -439,6 +440,7 @@ trait ContextTrait
 
   public function insertExampleProject(array $config, bool $andFlush = true): ExampleProgram
   {
+    $new_flavor = [];
     $example_program = new ExampleProgram();
 
     /* @var Program $program */
@@ -611,8 +613,8 @@ trait ContextTrait
     // allows to compare strings using a regex wildcard (.*?)
     $pattern = json_encode(json_decode($pattern, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR); // reformat string
 
-    if (is_countable(json_decode($pattern))) {
-      Assert::assertEquals(count(json_decode($pattern)), count(json_decode($json)));
+    if (is_countable(json_decode($pattern, null, 512, JSON_THROW_ON_ERROR))) {
+      Assert::assertEquals(count(json_decode($pattern, null, 512, JSON_THROW_ON_ERROR)), count(json_decode($json, null, 512, JSON_THROW_ON_ERROR)));
     }
 
     // escape chars that should not be used as regex
@@ -633,7 +635,7 @@ trait ContextTrait
     try {
       $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
       Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
-    } catch (Exception $exception) {
+    } catch (Exception) {
       $delimiter = '~';
       $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
       Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
@@ -655,10 +657,8 @@ trait ContextTrait
 
   /**
    * @param mixed $path
-   *
-   * @return bool|string
    */
-  public function getTempCopy($path)
+  public function getTempCopy($path): bool|string
   {
     $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
     copy($path, $temp_path);

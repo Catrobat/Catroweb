@@ -20,38 +20,34 @@ class ProjectCustomTranslation
   private ?int $id = null;
 
   /**
-   * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
-   *     inversedBy="custom_translations"
-   * )
-   * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
-   */
-  private Program $project;
-
-  /**
-   * @ORM\Column(type="string", length=5)
-   */
-  private string $language;
-
-  /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
-  private ?string $name;
+  private ?string $name = null;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  private ?string $description;
+  private ?string $description = null;
 
   /**
    * @ORM\Column(type="text", nullable=true)
    */
-  private ?string $credits;
+  private ?string $credits = null;
 
-  public function __construct(Program $project, string $language)
-  {
-    $this->project = $project;
-    $this->language = $language;
+  public function __construct(
+      /**
+       * @ORM\ManyToOne(
+       *     targetEntity=Program::class,
+       *     inversedBy="custom_translations"
+       * )
+       * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
+       */
+      private Program $project,
+      /**
+       * @ORM\Column(type="string", length=5)
+       */
+      private string $language
+  ) {
   }
 
   public function getId(): ?int

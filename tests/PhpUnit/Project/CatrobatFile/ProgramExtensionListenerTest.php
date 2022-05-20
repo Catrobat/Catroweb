@@ -19,10 +19,7 @@ class ProgramExtensionListenerTest extends DefaultTestCase
   protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
   protected ExtractedCatrobatFile $extracted_catrobat_file_without_extensions;
 
-  /**
-   * @var ProgramExtensionListener|MockObject
-   */
-  protected $object;
+  protected ProgramExtensionListener|MockObject $object;
 
   protected function setUp(): void
   {

@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class AbstractRequestValidatorTest extends DefaultTestCase
 {
-  /**
-   * @var AbstractRequestValidator|MockObject
-   */
-  protected $object;
+  protected AbstractRequestValidator|MockObject $object;
 
   protected function setUp(): void
   {

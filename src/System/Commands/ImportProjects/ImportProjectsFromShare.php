@@ -58,13 +58,10 @@ class ImportProjectsFromShare extends Command
 
   private function getDownloadUrl(string $category): string
   {
-    switch ($category) {
-      case 'random':
-          return 'https://share.catrob.at/app/api/projects/randomProjects.json';
-      case 'recent':
-      default:
-        return 'https://share.catrob.at/app/api/projects/recent.json';
-    }
+    return match ($category) {
+      'random' => 'https://share.catrob.at/app/api/projects/randomProjects.json',
+        default => 'https://share.catrob.at/app/api/projects/recent.json',
+    };
   }
 
   private function downloadProjects(string $dir, int $limit, string $url, OutputInterface $output): void
@@ -76,7 +73,7 @@ class ImportProjectsFromShare extends Command
         --$downloads_left;
         continue;
       }
-      $server_json = json_decode($projects, true);
+      $server_json = json_decode($projects, true, 512, JSON_THROW_ON_ERROR);
 
       $base_url = $server_json['CatrobatInformation']['BaseUrl'];
       foreach ($server_json['CatrobatProjects'] as $program) {

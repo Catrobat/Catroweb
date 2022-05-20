@@ -24,15 +24,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class MediaLibraryApiTest extends DefaultTestCase
 {
-  /**
-   * @var MediaLibraryApi|MockObject
-   */
-  protected $object;
+  protected MediaLibraryApi|MockObject $object;
 
-  /**
-   * @var MediaLibraryApiFacade|MockObject
-   */
-  protected $facade;
+  protected MediaLibraryApiFacade|MockObject $facade;
 
   /**
    * @throws ReflectionException

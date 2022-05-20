@@ -3,22 +3,11 @@
 namespace App\Project\CatrobatFile;
 
 use App\Project\Event\ProgramBeforeInsertEvent;
-use Doctrine\ORM\NonUniqueResultException;
-use Doctrine\ORM\NoResultException;
 
 class DescriptionValidator
 {
-  private int $max_description_size;
+  private int $max_description_size = 10_000;
 
-  public function __construct()
-  {
-    $this->max_description_size = 10_000;
-  }
-
-  /**
-   * @throws NoResultException
-   * @throws NonUniqueResultException
-   */
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());

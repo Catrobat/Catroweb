@@ -19,28 +19,8 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ProgramListSerializer
 {
-  private RequestStack $request_stack;
-
-  private RouterInterface $router;
-
-  private ScreenshotRepository $screenshot_repository;
-
-  private ElapsedTimeStringFormatter $time_formatter;
-
-  private ImageRepository $example_image_repository;
-
-  private ParameterBagInterface $parameter_bag;
-
-  public function __construct(ScreenshotRepository $screenshot_repository, RequestStack $request_stack,
-                              RouterInterface $router, ElapsedTimeStringFormatter $time_formatter,
-                              ImageRepository $example_image_repository, ParameterBagInterface $parameter_bag)
+  public function __construct(private readonly ScreenshotRepository $screenshot_repository, private readonly RequestStack $request_stack, private readonly RouterInterface $router, private readonly ElapsedTimeStringFormatter $time_formatter, private readonly ImageRepository $example_image_repository, private readonly ParameterBagInterface $parameter_bag)
   {
-    $this->request_stack = $request_stack;
-    $this->router = $router;
-    $this->screenshot_repository = $screenshot_repository;
-    $this->time_formatter = $time_formatter;
-    $this->example_image_repository = $example_image_repository;
-    $this->parameter_bag = $parameter_bag;
   }
 
   public function onKernelView(ViewEvent $event): void

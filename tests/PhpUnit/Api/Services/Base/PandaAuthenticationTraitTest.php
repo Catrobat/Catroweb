@@ -14,10 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class PandaAuthenticationTraitTest extends DefaultTestCase
 {
-  /**
-   * @var PandaAuthenticationTraitTestClass|MockObject
-   */
-  protected $object;
+  protected PandaAuthenticationTraitTestClass|MockObject $object;
 
   protected function setUp(): void
   {

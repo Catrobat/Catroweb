@@ -7,63 +7,24 @@ use SimpleXMLElement;
 
 class ScriptFactory
 {
-  /**
-   * @return BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript|UserDefinedScript
-   */
-  public static function generate(SimpleXMLElement $script_xml_properties)
+  public static function generate(SimpleXMLElement $script_xml_properties): BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript|UserDefinedScript
   {
-    $generated_script = null;
-
-    switch ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE]) {
-      case Constants::START_SCRIPT:
-        $generated_script = new StartScript($script_xml_properties);
-        break;
-      case Constants::WHEN_SCRIPT:
-        $generated_script = new WhenScript($script_xml_properties);
-        break;
-      case Constants::WHEN_TOUCH_SCRIPT:
-        $generated_script = new WhenTouchScript($script_xml_properties);
-        break;
-      case Constants::BROADCAST_SCRIPT:
-        $generated_script = new BroadcastScript($script_xml_properties);
-        break;
-      case Constants::WHEN_CONDITION_SCRIPT:
-        $generated_script = new WhenConditionScript($script_xml_properties);
-        break;
-      case Constants::WHEN_BG_CHANGE_SCRIPT:
-        $generated_script = new WhenBGChangeScript($script_xml_properties);
-        break;
-      case Constants::WHEN_CLONED_SCRIPT:
-        $generated_script = new WhenClonedScript($script_xml_properties);
-        break;
-      case Constants::WHEN_GAME_PAD_BUTTON_SCRIPT:
-        $generated_script = new WhenGamepadButtonScript($script_xml_properties);
-        break;
-      case Constants::WHEN_RASPI_PIN_CHANGED_SCRIPT:
-        $generated_script = new WhenRaspiPinChangedScript($script_xml_properties);
-        break;
-      case Constants::WHEN_NFC_SCRIPT:
-        $generated_script = new WhenNfcScript($script_xml_properties);
-        break;
-      case Constants::WHEN_BOUNCE_OFF_SCRIPT:
-        $generated_script = new WhenBounceOffScript($script_xml_properties);
-        break;
-
-      // deprecated scripts
-      case Constants::COLLISION_SCRIPT:
-        $generated_script = new CollisionScript($script_xml_properties);
-        break;
-
-     // your scripts
-      case Constants::USER_DEFINED_SCRIPT:
-        $generated_script = new UserDefinedScript($script_xml_properties);
-        break;
-
-        // other scripts
-        default:
-            $generated_script = new UnknownScript($script_xml_properties);
-            break;
-    }
+    $generated_script = match ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE]) {
+      Constants::START_SCRIPT => new StartScript($script_xml_properties),
+        Constants::WHEN_SCRIPT => new WhenScript($script_xml_properties),
+        Constants::WHEN_TOUCH_SCRIPT => new WhenTouchScript($script_xml_properties),
+        Constants::BROADCAST_SCRIPT => new BroadcastScript($script_xml_properties),
+        Constants::WHEN_CONDITION_SCRIPT => new WhenConditionScript($script_xml_properties),
+        Constants::WHEN_BG_CHANGE_SCRIPT => new WhenBGChangeScript($script_xml_properties),
+        Constants::WHEN_CLONED_SCRIPT => new WhenClonedScript($script_xml_properties),
+        Constants::WHEN_GAME_PAD_BUTTON_SCRIPT => new WhenGamepadButtonScript($script_xml_properties),
+        Constants::WHEN_RASPI_PIN_CHANGED_SCRIPT => new WhenRaspiPinChangedScript($script_xml_properties),
+        Constants::WHEN_NFC_SCRIPT => new WhenNfcScript($script_xml_properties),
+        Constants::WHEN_BOUNCE_OFF_SCRIPT => new WhenBounceOffScript($script_xml_properties),
+        Constants::COLLISION_SCRIPT => new CollisionScript($script_xml_properties),
+        Constants::USER_DEFINED_SCRIPT => new UserDefinedScript($script_xml_properties),
+        default => new UnknownScript($script_xml_properties),
+    };
 
     return $generated_script;
   }

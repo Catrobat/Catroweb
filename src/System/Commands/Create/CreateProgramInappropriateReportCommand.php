@@ -18,20 +18,11 @@ class CreateProgramInappropriateReportCommand extends Command
 {
   protected static $defaultName = 'catrobat:report';
 
-  private UserManager $user_manager;
-
-  private ProgramManager $program_manager;
-
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(UserManager $user_manager,
-                              ProgramManager $program_manager,
-                              EntityManagerInterface $entity_manager)
+  public function __construct(private readonly UserManager $user_manager,
+                              private readonly ProgramManager $program_manager,
+                              private readonly EntityManagerInterface $entity_manager)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
   }
 
   protected function configure(): void
@@ -67,7 +58,7 @@ class CreateProgramInappropriateReportCommand extends Command
 
     try {
       $this->reportProgram($program, $user, $note);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return 3;
     }
     $output->writeln('Reporting '.$program->getName());

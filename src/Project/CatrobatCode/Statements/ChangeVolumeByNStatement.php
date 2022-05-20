@@ -7,11 +7,11 @@ class ChangeVolumeByNStatement extends BaseChangeByNStatement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'volume';
+  final public const BEGIN_STRING = 'volume';
   /**
    * @var string
    */
-  public const END_STRING = ')%<br/>';
+  final public const END_STRING = ')%<br/>';
 
   /**
    * ChangeVolumeByNStatement constructor.

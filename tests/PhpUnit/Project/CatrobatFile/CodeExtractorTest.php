@@ -92,7 +92,6 @@ class CodeExtractorTest extends TestCase
   {
     $code = '';
 
-    /** @var CodeObject $object */
     foreach ($objects as $object) {
       $code .= $object->getCode();
       $code .= $this->generateCode($object->getCodeObjects());

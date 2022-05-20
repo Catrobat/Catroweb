@@ -17,16 +17,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FollowerController extends AbstractController
 {
-  private UserManager $user_manager;
-  private NotificationManager $notification_service;
-  private NotificationRepository $notification_repo;
-
-  public function __construct(UserManager $user_manager, NotificationManager $notification_service,
-                              NotificationRepository $notification_repo)
+  public function __construct(private readonly UserManager $user_manager, private readonly NotificationManager $notification_service, private readonly NotificationRepository $notification_repo)
   {
-    $this->user_manager = $user_manager;
-    $this->notification_service = $notification_service;
-    $this->notification_repo = $notification_repo;
   }
 
   /**

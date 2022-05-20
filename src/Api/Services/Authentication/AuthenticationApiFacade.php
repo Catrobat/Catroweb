@@ -7,23 +7,14 @@ use App\Api\Services\Base\AbstractApiFacade;
 
 final class AuthenticationApiFacade extends AbstractApiFacade
 {
-  private AuthenticationResponseManager $response_manager;
-  private AuthenticationApiLoader $loader;
-  private AuthenticationApiProcessor $processor;
-  private AuthenticationRequestValidator $request_validator;
-
   public function __construct(
     AuthenticationManager $authentication_manager,
-    AuthenticationResponseManager $response_manager,
-    AuthenticationApiLoader $loader,
-    AuthenticationApiProcessor $processor,
-    AuthenticationRequestValidator $request_validator
+    private readonly AuthenticationResponseManager $response_manager,
+    private readonly AuthenticationApiLoader $loader,
+    private readonly AuthenticationApiProcessor $processor,
+    private readonly AuthenticationRequestValidator $request_validator
   ) {
     parent::__construct($authentication_manager);
-    $this->response_manager = $response_manager;
-    $this->loader = $loader;
-    $this->processor = $processor;
-    $this->request_validator = $request_validator;
   }
 
   public function getResponseManager(): AuthenticationResponseManager

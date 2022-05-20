@@ -6,16 +6,12 @@ use SimpleXMLElement;
 
 abstract class ParsedObjectsContainer
 {
-  protected SimpleXMLElement $xml_properties;
-
   protected ?ParsedObject $background = null;
 
   protected array $objects = [];
 
-  public function __construct(SimpleXMLElement $xml_properties)
+  public function __construct(protected SimpleXMLElement $xml_properties)
   {
-    $this->xml_properties = $xml_properties;
-
     $this->parseObjects();
   }
 

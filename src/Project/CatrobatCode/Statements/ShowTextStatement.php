@@ -10,11 +10,11 @@ class ShowTextStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'show variable ';
+  final public const BEGIN_STRING = 'show variable ';
   /**
    * @var string
    */
-  public const END_STRING = ')<br/>';
+  final public const END_STRING = ')<br/>';
 
   public function __construct(StatementFactory $statementFactory, ?SimpleXMLElement $xmlTree, int $spaces)
   {

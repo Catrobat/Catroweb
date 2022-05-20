@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class SearchResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var SearchResponseManager|MockObject
-   */
-  protected $object;
+  protected SearchResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

@@ -14,11 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
 {
-  private AuthenticationApiFacade $facade;
-
-  public function __construct(AuthenticationApiFacade $facade)
+  public function __construct(private readonly AuthenticationApiFacade $facade)
   {
-    $this->facade = $facade;
   }
 
   /**

@@ -10,15 +10,8 @@ use Exception;
 
 final class NotificationsApiProcessor extends AbstractApiProcessor
 {
-  private NotificationRepository $notification_repository;
-  private NotificationManager $notification_manager;
-
-  public function __construct(
-        NotificationRepository $notification_repository,
-        NotificationManager $notification_manager
-    ) {
-    $this->notification_repository = $notification_repository;
-    $this->notification_manager = $notification_manager;
+  public function __construct(private readonly NotificationRepository $notification_repository, private readonly NotificationManager $notification_manager)
+  {
   }
 
   public function markNotificationAsSeen(int $notification_id, User $user): bool

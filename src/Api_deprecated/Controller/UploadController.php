@@ -24,29 +24,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UploadController
 {
-  private UserManager $user_manager;
-
-  private TokenStorageInterface $token_storage;
-
-  private ProgramManager $program_manager;
-
-  private TranslatorInterface $translator;
-
-  private LoggerInterface $logger;
-
-  private EntityManagerInterface $em;
-
-  public function __construct(UserManager $user_manager, TokenStorageInterface $token_storage,
-                              ProgramManager $program_manager,
-                              TranslatorInterface $translator, LoggerInterface $logger,
-                              EntityManagerInterface $em)
+  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
   {
-    $this->user_manager = $user_manager;
-    $this->token_storage = $token_storage;
-    $this->program_manager = $program_manager;
-    $this->translator = $translator;
-    $this->logger = $logger;
-    $this->em = $em;
   }
 
   /**
@@ -88,6 +67,9 @@ class UploadController
     }
 
     $file = array_values($request->files->all())[0];
+    if (empty($file) || empty($file->getPathname())) {
+      throw new InvalidCatrobatFileException('errors.checksum.invalid', 501);
+    }
     if (md5_file($file->getPathname()) !== $request->request->get('fileChecksum')) {
       $this->logger->error('UploadError checksum', [
         'checksum_symfony' => md5($file->getPathname()),

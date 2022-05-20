@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ProjectsApiProcessorTest extends DefaultTestCase
 {
-  /**
-   * @var ProjectsApiProcessor|MockObject
-   */
-  protected $object;
+  protected ProjectsApiProcessor|MockObject $object;
 
   protected function setUp(): void
   {

@@ -12,15 +12,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SendMailToUserController extends CRUDController
 {
-  protected MailerAdapter $mailer;
-  protected UserManager $user_manager;
-  protected LoggerInterface $logger;
-
-  public function __construct(MailerAdapter $mailer, UserManager $user_manager, LoggerInterface $logger)
+  public function __construct(protected MailerAdapter $mailer, protected UserManager $user_manager, protected LoggerInterface $logger)
   {
-    $this->user_manager = $user_manager;
-    $this->mailer = $mailer;
-    $this->logger = $logger;
   }
 
   public function listAction(Request $request = null): Response

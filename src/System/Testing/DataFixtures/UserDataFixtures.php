@@ -17,17 +17,14 @@ use PHPUnit\Framework\Assert;
  */
 class UserDataFixtures
 {
-  private UserManager $user_manager;
-
   private static ?User $default_user = null;
 
   private static ?User $current_user = null;
 
   private static int $number_of_users = 0;
 
-  public function __construct(UserManager $user_manager)
+  public function __construct(private readonly UserManager $user_manager)
   {
-    $this->user_manager = $user_manager;
   }
 
   public function insertUser(array $config = [], bool $andFlush = true): User

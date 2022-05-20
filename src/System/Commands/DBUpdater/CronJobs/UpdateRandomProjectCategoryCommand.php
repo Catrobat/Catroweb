@@ -15,14 +15,10 @@ class UpdateRandomProjectCategoryCommand extends Command
   protected static $defaultName = 'catrobat:workflow:update_random_project_category';
 
   protected const LIMIT = 100;
-  protected EntityManagerInterface $entity_manager;
-  protected ProgramManager $program_manager;
 
-  public function __construct(EntityManagerInterface $entity_manager, ProgramManager $program_manager)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramManager $program_manager)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->program_manager = $program_manager;
   }
 
   protected function configure(): void

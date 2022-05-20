@@ -9,15 +9,12 @@ use Psr\Http\Message\ResponseInterface;
 
 class AsyncHttpClient
 {
-  private array $config;
-
-  private Client $async_http_client;
+  private readonly Client $async_http_client;
 
   private ?array $scratch_info_data = null;
 
-  public function __construct(array $config = [])
+  public function __construct(private readonly array $config = [])
   {
-    $this->config = $config;
     $this->async_http_client = new Client($config);
   }
 

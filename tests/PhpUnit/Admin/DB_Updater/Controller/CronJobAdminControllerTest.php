@@ -12,10 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class CronJobAdminControllerTest extends DefaultTestCase
 {
-  /**
-   * @var CronJobsAdminController|MockObject
-   */
-  protected $object;
+  protected CronJobsAdminController|MockObject $object;
 
   protected function setUp(): void
   {

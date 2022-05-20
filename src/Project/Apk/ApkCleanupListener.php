@@ -7,11 +7,8 @@ use App\Project\Event\ProgramBeforePersistEvent;
 
 class ApkCleanupListener
 {
-  protected ApkRepository $repository;
-
-  public function __construct(ApkRepository $repository)
+  public function __construct(protected ApkRepository $repository)
   {
-    $this->repository = $repository;
   }
 
   public function handleEvent(ProgramBeforePersistEvent $event): void

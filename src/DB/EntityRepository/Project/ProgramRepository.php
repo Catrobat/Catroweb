@@ -15,12 +15,9 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class ProgramRepository extends ServiceEntityRepository
 {
-  protected RequestHelper $app_request;
-
-  public function __construct(ManagerRegistry $managerRegistry, RequestHelper $app_request)
+  public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request)
   {
     parent::__construct($managerRegistry, Program::class);
-    $this->app_request = $app_request;
   }
 
   public function getProjectByID(string $program_id, bool $include_private = false): array
@@ -361,7 +358,7 @@ class ProgramRepository extends ServiceEntityRepository
   {
     try {
       return intval($query_builder->getQuery()->getSingleScalarResult());
-    } catch (NoResultException|NonUniqueResultException $e) {
+    } catch (NoResultException|NonUniqueResultException) {
       return 0;
     }
   }

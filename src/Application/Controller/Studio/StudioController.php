@@ -20,23 +20,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StudioController extends AbstractController
 {
-  protected StudioManager $studio_manager;
-  protected UserManager $user_manager;
-  protected ProgramManager $program_manager;
-  protected ScreenshotRepository $screenshot_repository;
-  protected TranslatorInterface $translator;
-  protected ParameterBagInterface $parameter_bag;
-
-  public function __construct(StudioManager $studio_manager, UserManager $user_manager,
-                              ProgramManager $program_manager, ScreenshotRepository $screenshot_repository,
-                              TranslatorInterface $translator, ParameterBagInterface $parameter_bag)
+  public function __construct(protected StudioManager $studio_manager, protected UserManager $user_manager, protected ProgramManager $program_manager, protected ScreenshotRepository $screenshot_repository, protected TranslatorInterface $translator, protected ParameterBagInterface $parameter_bag)
   {
-    $this->studio_manager = $studio_manager;
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->screenshot_repository = $screenshot_repository;
-    $this->translator = $translator;
-    $this->parameter_bag = $parameter_bag;
   }
 
   /**
@@ -123,7 +108,7 @@ class StudioController extends AbstractController
    */
   public function promoteMemberToAdmin(Request $request): Response
   {
-    $payload = json_decode($request->getContent(), true);
+    $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
     $studio = $this->studio_manager->findStudioById($payload['studio_id']);
     /** @var User|null $user */
     $user = $this->user_manager->findOneBy(['id' => $payload['user_id']]);
@@ -156,7 +141,7 @@ class StudioController extends AbstractController
     /** @var User|null $logged_in_user */
     $logged_in_user = $this->getUser();
 
-    $payload = json_decode($request->getContent(), true);
+    $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
     $studio = $this->studio_manager->findStudioById($payload['studio_id']);
     /** @var User|null $user */
     $user = $this->user_manager->findOneBy(['id' => $payload['user_id']]);

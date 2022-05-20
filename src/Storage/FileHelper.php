@@ -113,7 +113,7 @@ class FileHelper
   protected static function verifyDirectoryCanBeCleared(string $directory_path): void
   {
     foreach (self::getRemovableDirAllowList() as $allowedDir) {
-      if (str_contains($directory_path, $allowedDir)) {
+      if (str_contains($directory_path, (string) $allowedDir)) {
         return;
       }
     }

@@ -15,10 +15,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class AchievementWorkflow_VerifiedDeveloper_CommandTest extends KernelTestCase
 {
-  /**
-   * @var AchievementWorkflow_VerifiedDeveloper_Command|MockObject
-   */
-  protected $object;
+  protected AchievementWorkflow_VerifiedDeveloper_Command|MockObject $object;
 
   protected function setUp(): void
   {

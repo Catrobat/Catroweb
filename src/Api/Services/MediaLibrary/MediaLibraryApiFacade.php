@@ -7,23 +7,14 @@ use App\Api\Services\Base\AbstractApiFacade;
 
 final class MediaLibraryApiFacade extends AbstractApiFacade
 {
-  private MediaLibraryResponseManager $response_manager;
-  private MediaLibraryApiLoader $loader;
-  private MediaLibraryApiProcessor $processor;
-  private MediaLibraryRequestValidator $request_validator;
-
   public function __construct(
     AuthenticationManager $authentication_manager,
-    MediaLibraryResponseManager $response_manager,
-    MediaLibraryApiLoader $loader,
-    MediaLibraryApiProcessor $processor,
-    MediaLibraryRequestValidator $request_validator)
+    private readonly MediaLibraryResponseManager $response_manager,
+    private readonly MediaLibraryApiLoader $loader,
+    private readonly MediaLibraryApiProcessor $processor,
+    private readonly MediaLibraryRequestValidator $request_validator)
   {
     parent::__construct($authentication_manager);
-    $this->response_manager = $response_manager;
-    $this->loader = $loader;
-    $this->processor = $processor;
-    $this->request_validator = $request_validator;
   }
 
   public function getResponseManager(): MediaLibraryResponseManager

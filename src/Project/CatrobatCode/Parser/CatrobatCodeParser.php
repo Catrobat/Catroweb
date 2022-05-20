@@ -14,17 +14,14 @@ class CatrobatCodeParser
   {
     try {
       $parsed_program = $this->parseProgram($extracted_catrobat_program);
-    } catch (Exception $exception) {
+    } catch (Exception) {
       $parsed_program = null;
     }
 
     return $parsed_program;
   }
 
-  /**
-   * @return ParsedSceneProgram|ParsedSimpleProgram
-   */
-  private function parseProgram(ExtractedCatrobatFile $extracted_program)
+  private function parseProgram(ExtractedCatrobatFile $extracted_program): ParsedSceneProgram|ParsedSimpleProgram
   {
     $program_xml_properties = $extracted_program->getProgramXmlProperties();
 

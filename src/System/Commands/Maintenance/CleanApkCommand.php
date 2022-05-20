@@ -17,15 +17,9 @@ class CleanApkCommand extends Command
   protected static $defaultName = 'catrobat:clean:apk';
   private OutputInterface $output;
 
-  private EntityManagerInterface $entity_manager;
-
-  private ParameterBagInterface $parameter_bag;
-
-  public function __construct(EntityManagerInterface $entity_manager, ParameterBagInterface $parameter_bag)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->parameter_bag = $parameter_bag;
-    $this->entity_manager = $entity_manager;
   }
 
   protected function configure(): void
