@@ -7,15 +7,12 @@ use SimpleXMLElement;
 
 class SoundStatement extends Statement
 {
-  private string $value;
-
   private ?FileNameStatement $fileName = null;
 
   private ?ValueStatement $name = null;
 
-  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, string $value)
+  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, private readonly string $value)
   {
-    $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
       '');

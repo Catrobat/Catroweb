@@ -18,17 +18,12 @@ class UpdateAchievementsCommand extends Command
    */
   protected static $defaultName = 'catrobat:update:achievements';
 
-  protected EntityManagerInterface $entity_manager;
-  protected AchievementRepository $achievement_repository;
+  final public const ACHIEVEMENT_IMAGE_ASSETS_PATH = 'images/achievements/';
+  final public const ACHIEVEMENT_LTM_PREFIX = 'achievements.achievement.type.';
 
-  public const ACHIEVEMENT_IMAGE_ASSETS_PATH = 'images/achievements/';
-  public const ACHIEVEMENT_LTM_PREFIX = 'achievements.achievement.type.';
-
-  public function __construct(EntityManagerInterface $entity_manager, AchievementRepository $achievement_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->achievement_repository = $achievement_repository;
   }
 
   protected function configure(): void

@@ -13,23 +13,8 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class UserPostPersistNotifier
 {
-  protected AchievementManager $achievement_manager;
-  protected VerifyEmailHelperInterface $verify_email_helper;
-  protected MailerAdapter $mailer;
-  protected LoggerInterface $logger;
-  protected TranslatorInterface $translator;
-
-  public function __construct(AchievementManager $achievement_manager,
-                                VerifyEmailHelperInterface $verify_email_helper,
-                                MailerAdapter $mailer,
-                              LoggerInterface $logger,
-                                TranslatorInterface $translator)
+  public function __construct(protected AchievementManager $achievement_manager, protected VerifyEmailHelperInterface $verify_email_helper, protected MailerAdapter $mailer, protected LoggerInterface $logger, protected TranslatorInterface $translator)
   {
-    $this->translator = $translator;
-    $this->achievement_manager = $achievement_manager;
-    $this->verify_email_helper = $verify_email_helper;
-    $this->mailer = $mailer;
-    $this->logger = $logger;
   }
 
   public function postPersist(User $user, LifecycleEventArgs $event): void

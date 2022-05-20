@@ -16,14 +16,14 @@ class Tag
   /**
    * Static Tags - added/updated with UpdateTagsCommand.
    */
-  public const GAME = 'game';
-  public const ANIMATION = 'animation';
-  public const STORY = 'story';
-  public const MUSIC = 'music';
-  public const ART = 'art';
-  public const EXPERIMENTAL = 'experimental';
-  public const TUTORIAL = 'tutorial';
-  public const CODING_JAM_09_2021 = 'catrobatfestival2021';
+  final public const GAME = 'game';
+  final public const ANIMATION = 'animation';
+  final public const STORY = 'story';
+  final public const MUSIC = 'music';
+  final public const ART = 'art';
+  final public const EXPERIMENTAL = 'experimental';
+  final public const TUTORIAL = 'tutorial';
+  final public const CODING_JAM_09_2021 = 'catrobatfestival2021';
 
   /**
    * @ORM\Id

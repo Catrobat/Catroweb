@@ -7,11 +7,11 @@ class GoNStepsBackStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'go back (';
+  final public const BEGIN_STRING = 'go back (';
   /**
    * @var string
    */
-  public const END_STRING = ') layers<br/>';
+  final public const END_STRING = ') layers<br/>';
 
   /**
    * GoNStepsBackStatement constructor.

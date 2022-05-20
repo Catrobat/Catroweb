@@ -27,21 +27,15 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    *
    * @var string
    */
-  public const TOKEN = 'authenticate';
+  final public const TOKEN = 'authenticate';
 
   /**
    * @deprecated
    */
-  public const OLD_TOKEN = 'token';
+  final public const OLD_TOKEN = 'token';
 
-  protected TranslatorInterface $translator;
-
-  private EntityManagerInterface $em;
-
-  public function __construct(EntityManagerInterface $em, TranslatorInterface $translator)
+  public function __construct(private readonly EntityManagerInterface $em, protected TranslatorInterface $translator)
   {
-    $this->em = $em;
-    $this->translator = $translator;
   }
 
   /**
@@ -130,10 +124,8 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
 
   /**
    * Called when authentication is needed, but it's not sent.
-   *
-   * @return JsonResponse|Response
    */
-  public function start(Request $request, AuthenticationException $authException = null)
+  public function start(Request $request, AuthenticationException $authException = null): JsonResponse|Response
   {
     $data = [
       'Authentication Required',

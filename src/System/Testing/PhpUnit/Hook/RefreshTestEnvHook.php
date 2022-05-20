@@ -32,7 +32,7 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
   {
     try {
       FileHelper::emptyDirectory(self::$CACHE_DIR);
-    } catch (InvalidArgumentException $e) {
+    } catch (InvalidArgumentException) {
     }
   }
 

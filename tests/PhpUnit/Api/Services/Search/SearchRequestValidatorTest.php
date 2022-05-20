@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class SearchRequestValidatorTest extends DefaultTestCase
 {
-  /**
-   * @var SearchRequestValidator|MockObject
-   */
-  protected $object;
+  protected SearchRequestValidator|MockObject $object;
 
   protected function setUp(): void
   {

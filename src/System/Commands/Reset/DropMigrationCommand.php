@@ -12,15 +12,12 @@ class DropMigrationCommand extends Command
 {
   protected static $defaultName = 'catrobat:drop:migration';
 
-  protected EntityManagerInterface $entity_manager;
-
   protected Connection $connection;
   private OutputInterface $output;
 
-  public function __construct(EntityManagerInterface $entity_manager)
+  public function __construct(protected EntityManagerInterface $entity_manager)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
     $this->connection = $this->entity_manager->getConnection();
   }
 
@@ -52,15 +49,6 @@ class DropMigrationCommand extends Command
   private function dropMigrationVersions(): bool
   {
     $schema_manager = $this->connection->createSchemaManager();
-    if ($schema_manager->tablesExist(['doctrine_migration_versions'])) {
-      $sql = 'DROP TABLE doctrine_migration_versions;';
-      $connection = $this->entity_manager->getConnection();
-      $stmt = $connection->prepare($sql);
-      $stmt->executeStatement();
-
-      return true;
-    }
-
     if ($schema_manager->tablesExist(['doctrine_migration_versions'])) {
       $sql = 'DROP TABLE doctrine_migration_versions;';
       $connection = $this->entity_manager->getConnection();

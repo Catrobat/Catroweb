@@ -24,13 +24,9 @@ class AllSurveysAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'all_surveys';
 
-  protected EntityManagerInterface $entity_manager;
-
-  public function __construct(?string $code, ?string $class, ?string $baseControllerName, EntityManagerInterface $entity_manager)
+  public function __construct(?string $code, ?string $class, ?string $baseControllerName, protected EntityManagerInterface $entity_manager)
   {
     parent::__construct($code, $class, $baseControllerName);
-
-    $this->entity_manager = $entity_manager;
   }
 
   /**

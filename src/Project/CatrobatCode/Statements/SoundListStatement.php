@@ -7,7 +7,7 @@ class SoundListStatement extends BaseListStatement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'used sounds: <br/>';
+  final public const BEGIN_STRING = 'used sounds: <br/>';
 
   /**
    * SoundListStatement constructor.

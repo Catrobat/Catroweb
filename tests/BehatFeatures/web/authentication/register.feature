@@ -17,6 +17,7 @@ Feature:
     And I fill in "password__input" with "123456"
     Then I click "#register-btn"
     And I wait for AJAX to finish
+    And I wait 2000 milliseconds
     Then I should be on "/app/"
 
   Scenario: Trying to register with a too short password should fail
@@ -80,6 +81,7 @@ Feature:
     And I fill in "password__input" with "123456"
     Then I press "Create account"
     And I wait for the page to be loaded
+    And I wait 2000 milliseconds
     Then I should be on "/app/"
     When I am on "app/user"
     Then I should see "My projects"

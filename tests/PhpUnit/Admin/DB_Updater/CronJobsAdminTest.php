@@ -13,10 +13,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
  */
 class CronJobsAdminTest extends DefaultTestCase
 {
-  /**
-   * @var CronJobsAdmin|MockObject
-   */
-  protected $object;
+  protected CronJobsAdmin|MockObject $object;
 
   protected function setUp(): void
   {

@@ -7,11 +7,11 @@ class TurnLeftStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'turn left (';
+  final public const BEGIN_STRING = 'turn left (';
   /**
    * @var string
    */
-  public const END_STRING = ') degrees<br/>';
+  final public const END_STRING = ') degrees<br/>';
 
   /**
    * TurnLeftStatement constructor.

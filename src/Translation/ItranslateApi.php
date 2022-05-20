@@ -73,16 +73,11 @@ class ItranslateApi implements TranslationApiInterface
     'zh-CN',
     'zh-TW',
   ];
+  private readonly string $api_key;
+  private readonly TranslationApiHelper $helper;
 
-  private Client $client;
-  private string $api_key;
-  private LoggerInterface $logger;
-  private TranslationApiHelper $helper;
-
-  public function __construct(Client $client, LoggerInterface $logger)
+  public function __construct(private readonly Client $client, private readonly LoggerInterface $logger)
   {
-    $this->client = $client;
-    $this->logger = $logger;
     $this->api_key = $_ENV['ITRANSLATE_API_KEY'];
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
@@ -124,7 +119,7 @@ class ItranslateApi implements TranslationApiInterface
     }
 
     $body = $response->getBody()->getContents();
-    $result = json_decode($body, true);
+    $result = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
 
     $translation_result = new TranslationResult();
     $translation_result->provider = 'itranslate';

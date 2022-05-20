@@ -10,12 +10,6 @@ class CodeObject
 
   private array $codeObjects = [];
 
-  public function __construct()
-  {
-    $this->scripts = [];
-    $this->codeObjects = [];
-  }
-
   public function getName(): ?string
   {
     return $this->name;

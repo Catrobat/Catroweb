@@ -110,7 +110,7 @@ class DataFixturesContext implements Context
       /** @var User|null $user */
       $user = $this->getUserManager()->findOneBy(['username' => $config['name']]);
 
-      $followings = explode(', ', $config['following']);
+      $followings = explode(', ', (string) $config['following']);
       foreach ($followings as $follow) {
         /** @var User|null $follow_user */
         $follow_user = $this->getUserManager()->findOneBy(['username' => $follow]);
@@ -226,7 +226,7 @@ class DataFixturesContext implements Context
     /** @var User|null $user */
     $user = $this->getUserManager()->find($user_id);
 
-    $ids = explode(',', $follow_ids);
+    $ids = explode(',', (string) $follow_ids);
     foreach ($ids as $id) {
       /** @var User|null $followUser */
       $followUser = $this->getUserManager()->find($id);
@@ -475,8 +475,8 @@ class DataFixturesContext implements Context
   public function theProgramShouldBeTaggedWithInTheDatabase($arg1): void
   {
     $program_tags = $this->getProgramManager()->findAll()[0]->getTags() ?? [];
-    $tags = explode(',', $arg1);
-    Assert::assertEquals(count($tags), count($program_tags), 'Too much or too less tags found!');
+    $tags = explode(',', (string) $arg1);
+    Assert::assertEquals(count($tags), is_countable($program_tags) ? count($program_tags) : 0, 'Too much or too less tags found!');
 
     foreach ($program_tags as $program_tag) {
       /* @var Tag $program_tag */
@@ -736,7 +736,7 @@ class DataFixturesContext implements Context
       $old_files->add($new_file);
       $category->setFiles($old_files);
       if (!empty($file['flavors'])) {
-        foreach (explode(',', $file['flavors']) as $flavor) {
+        foreach (explode(',', (string) $file['flavors']) as $flavor) {
           $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));
         }
       }
@@ -1466,17 +1466,14 @@ class DataFixturesContext implements Context
       $cached_credits = $translation->getCachedCredits();
 
       $matching_row = array_filter($table_rows,
-        function ($row) use ($project_id, $source_language, $target_language, $provider, $usage_count, $cached_name,
-          $cached_description, $cached_credits) {
-          return $project_id == $row['project_id']
-            && $source_language == $row['source_language']
-            && $target_language == $row['target_language']
-            && $provider == $row['provider']
-            && $usage_count == $row['usage_count']
-            && $cached_name == ($row['cached_name'] ?? null)
-            && $cached_description == ($row['cached_description'] ?? null)
-            && $cached_credits == ($row['cached_credits'] ?? null);
-        });
+        fn ($row) => $project_id == $row['project_id']
+          && $source_language == $row['source_language']
+          && $target_language == $row['target_language']
+          && $provider == $row['provider']
+          && $usage_count == $row['usage_count']
+          && $cached_name == ($row['cached_name'] ?? null)
+          && $cached_description == ($row['cached_description'] ?? null)
+          && $cached_credits == ($row['cached_credits'] ?? null));
 
       Assert::assertEquals(1, count($matching_row), "row not found: {$project_id}");
     }
@@ -1525,13 +1522,11 @@ class DataFixturesContext implements Context
       $usage_count = $translation->getUsageCount();
 
       $matching_row = array_filter($table_rows,
-        function ($row) use ($comment_id, $source_language, $target_language, $provider, $usage_count) {
-          return $comment_id == $row['comment_id']
-            && $source_language == $row['source_language']
-            && $target_language == $row['target_language']
-            && $provider == $row['provider']
-            && $usage_count == $row['usage_count'];
-        });
+        fn ($row) => $comment_id == $row['comment_id']
+          && $source_language == $row['source_language']
+          && $target_language == $row['target_language']
+          && $provider == $row['provider']
+          && $usage_count == $row['usage_count']);
 
       Assert::assertEquals(1, count($matching_row), "row not found: {$comment_id}");
     }
@@ -1582,13 +1577,11 @@ class DataFixturesContext implements Context
       $credit = $translation->getCredits();
 
       $matching_row = array_filter($table_rows,
-        function ($row) use ($project_id, $language, $name, $description, $credit) {
-          return $project_id == $row['project_id']
-            && $language == $row['language']
-            && $name == $row['name']
-            && $description == $row['description']
-            && $credit == $row['credit'];
-        });
+        fn ($row) => $project_id == $row['project_id']
+          && $language == $row['language']
+          && $name == $row['name']
+          && $description == $row['description']
+          && $credit == $row['credit']);
 
       Assert::assertEquals(1, count($matching_row), "row not found: {$project_id}");
     }

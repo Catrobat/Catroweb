@@ -11,27 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class RemixGraphManipulator
 {
-  private EntityManagerInterface $entity_manager;
-
-  private RemixSubgraphManipulator $remix_subgraph_manipulator;
-
-  private ProgramRemixRepository $program_remix_repository;
-
-  private ProgramRemixBackwardRepository $program_remix_backward_repository;
-
-  private ScratchProgramRemixRepository $scratch_program_remix_repository;
-
-  public function __construct(EntityManagerInterface $entity_manager,
-                              RemixSubgraphManipulator $remix_subgraph_manipulator,
-                              ProgramRemixRepository $program_remix_repository,
-                              ProgramRemixBackwardRepository $program_remix_backward_repository,
-                              ScratchProgramRemixRepository $scratch_program_remix_repository)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly RemixSubgraphManipulator $remix_subgraph_manipulator, private readonly ProgramRemixRepository $program_remix_repository, private readonly ProgramRemixBackwardRepository $program_remix_backward_repository, private readonly ScratchProgramRemixRepository $scratch_program_remix_repository)
   {
-    $this->entity_manager = $entity_manager;
-    $this->remix_subgraph_manipulator = $remix_subgraph_manipulator;
-    $this->program_remix_repository = $program_remix_repository;
-    $this->program_remix_backward_repository = $program_remix_backward_repository;
-    $this->scratch_program_remix_repository = $scratch_program_remix_repository;
   }
 
   public function convertBackwardParentsHavingNoForwardAncestor(Program $program, array $removed_forward_parent_ids): void

@@ -20,24 +20,12 @@ class CreateLikeCommand extends Command
 {
   protected static $defaultName = 'catrobat:like';
 
-  private UserManager $user_manager;
-
-  private ProgramManager $remix_manipulation_program_manager;
-
-  private NotificationManager $notification_service;
-
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(UserManager $user_manager,
-                              ProgramManager $program_manager,
-                              EntityManagerInterface $entity_manager,
-                              NotificationManager $notification_service)
+  public function __construct(private readonly UserManager $user_manager,
+                              private readonly ProgramManager $remix_manipulation_program_manager,
+                              private readonly EntityManagerInterface $entity_manager,
+                              private readonly NotificationManager $notification_service)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->remix_manipulation_program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
-    $this->notification_service = $notification_service;
   }
 
   protected function configure(): void
@@ -74,7 +62,7 @@ class CreateLikeCommand extends Command
         $notification->setSeen(boolval(random_int(0, 3)));
         $this->notification_service->addNotification($notification);
       }
-    } catch (Exception $e) {
+    } catch (Exception) {
       $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
 
       return 2;

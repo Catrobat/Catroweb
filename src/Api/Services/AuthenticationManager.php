@@ -12,30 +12,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class AuthenticationManager
 {
-  private TokenStorageInterface $token_storage;
-  private JWTTokenManagerInterface $jwt_manager;
-  private UserManager $user_manager;
-  private RefreshTokenManagerInterface $refresh_manager;
-  private RefreshTokenGeneratorInterface $refresh_token_generator;
-  protected int $refresh_token_ttl;
-  protected RequestHelper $request_helper;
-
-  public function __construct(
-    TokenStorageInterface $token_storage,
-    JWTTokenManagerInterface $jwt_manager,
-    UserManager $user_manager,
-    RefreshTokenGeneratorInterface $refresh_token_generator,
-    RefreshTokenManagerInterface $refresh_manager,
-    RequestHelper $request_helper,
-    int $refresh_token_ttl // bind in services.yaml
-  ) {
-    $this->token_storage = $token_storage;
-    $this->jwt_manager = $jwt_manager;
-    $this->user_manager = $user_manager;
-    $this->refresh_manager = $refresh_manager;
-    $this->refresh_token_generator = $refresh_token_generator;
-    $this->refresh_token_ttl = $refresh_token_ttl;
-    $this->request_helper = $request_helper;
+  public function __construct(private readonly TokenStorageInterface $token_storage, private readonly JWTTokenManagerInterface $jwt_manager, private readonly UserManager $user_manager, private readonly RefreshTokenGeneratorInterface $refresh_token_generator, private readonly RefreshTokenManagerInterface $refresh_manager, protected RequestHelper $request_helper, protected int $refresh_token_ttl)
+  {
   }
 
   public function getAuthenticatedUser(): ?User
@@ -105,7 +83,7 @@ class AuthenticationManager
 
     $authorizationHeader = $request->headers->get('Authorization');
 
-    $headerParts = explode(' ', $authorizationHeader);
+    $headerParts = explode(' ', (string) $authorizationHeader);
     if (!(2 === count($headerParts) && 0 === strcasecmp($headerParts[0], 'Bearer'))) {
       return null;
     }

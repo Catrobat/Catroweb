@@ -13,13 +13,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DownloadProgramController extends AbstractController
 {
-  protected LoggerInterface $logger;
-  protected ProjectsApi $projectsApi;
-
-  public function __construct(ProjectsApi $projectsApi, LoggerInterface $logger)
+  public function __construct(protected ProjectsApi $projectsApi, protected LoggerInterface $logger)
   {
-    $this->logger = $logger;
-    $this->projectsApi = $projectsApi;
   }
 
   /**

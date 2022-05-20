@@ -14,11 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListProgramsController extends AbstractController
 {
-  private ProgramManager $program_manager;
-
-  public function __construct(ProgramManager $program_manager)
+  public function __construct(private readonly ProgramManager $program_manager)
   {
-    $this->program_manager = $program_manager;
   }
 
   /**

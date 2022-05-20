@@ -20,14 +20,9 @@ class AchievementWorkflow_DiamondUser_Command extends Command
    */
   protected static $defaultName = 'catrobat:workflow:achievement:diamond_user';
 
-  protected UserManager $user_manager;
-  protected AchievementManager $achievement_manager;
-
-  public function __construct(UserManager $user_manager, AchievementManager $achievement_manager)
+  public function __construct(protected UserManager $user_manager, protected AchievementManager $achievement_manager)
   {
     parent::__construct();
-    $this->achievement_manager = $achievement_manager;
-    $this->user_manager = $user_manager;
   }
 
   protected function configure(): void
@@ -47,7 +42,7 @@ class AchievementWorkflow_DiamondUser_Command extends Command
   protected function addDiamondUserAchievementToEveryUser(OutputInterface $output): void
   {
     $user_achievements = $this->achievement_manager->findUserAchievementsOfAchievement(Achievement::DIAMOND_USER);
-    $excluded_user_id_list = array_map(function ($user_achievement) { return $user_achievement->getUser()->getId(); }, $user_achievements);
+    $excluded_user_id_list = array_map(fn ($user_achievement) => $user_achievement->getUser()->getId(), $user_achievements);
     $active_user_ID_list = $this->user_manager->getActiveUserIDList(7);
     $user_id_list = array_values(array_diff($active_user_ID_list, $excluded_user_id_list));
 

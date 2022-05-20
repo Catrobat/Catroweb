@@ -15,10 +15,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class CronJobCommandTest extends KernelTestCase
 {
-  /**
-   * @var CronJobCommand|MockObject
-   */
-  protected $object;
+  protected CronJobCommand|MockObject $object;
 
   protected function setUp(): void
   {

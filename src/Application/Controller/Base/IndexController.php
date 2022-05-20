@@ -12,13 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-  protected ImageRepository $image_repository;
-  protected FeaturedRepository $featured_repository;
-
-  public function __construct(ImageRepository $image_repository, FeaturedRepository $featured_repository)
+  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository)
   {
-    $this->image_repository = $image_repository;
-    $this->featured_repository = $featured_repository;
   }
 
   /**

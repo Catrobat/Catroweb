@@ -20,23 +20,11 @@ class CreateCommentCommand extends Command
 {
   protected static $defaultName = 'catrobat:comment';
 
-  private UserManager $user_manager;
-
-  private ProgramManager $program_manager;
-
-  private NotificationManager $notification_service;
-
-  private EntityManagerInterface $em;
-
-  public function __construct(UserManager $user_manager, EntityManagerInterface $em,
-                              ProgramManager $program_manager,
-                              NotificationManager $notification_service)
+  public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $em,
+                              private readonly ProgramManager $program_manager,
+                              private readonly NotificationManager $notification_service)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->em = $em;
-    $this->program_manager = $program_manager;
-    $this->notification_service = $notification_service;
   }
 
   protected function configure(): void
@@ -74,7 +62,7 @@ class CreateCommentCommand extends Command
 
     try {
       $this->postComment($user, $program, $message, $reported);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return 2;
     }
     $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
@@ -102,7 +90,7 @@ class CreateCommentCommand extends Command
     $this->em->persist($temp_comment);
     try {
       $notification->setSeen(boolval(random_int(0, 2)));
-    } catch (Exception $e) {
+    } catch (Exception) {
       $notification->setSeen(false);
     }
     $this->em->persist($notification);

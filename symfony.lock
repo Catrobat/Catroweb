@@ -534,6 +534,9 @@
     "react/promise": {
         "version": "v2.8.0"
     },
+    "rector/rector": {
+        "version": "0.12.23"
+    },
     "rize/uri-template": {
         "version": "0.3.4"
     },

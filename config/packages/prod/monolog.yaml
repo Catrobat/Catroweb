@@ -39,6 +39,7 @@ monolog:
       path: "%kernel.logs_dir%/%kernel.environment%/%kernel.environment%.log"
       level: error
       max_files: 14
+      include_stacktraces: true
 
     ##-------------------------------------------------------------------------------------------
     ## Still log everything just to be sure.... Unfortunately there is no only_http_codes

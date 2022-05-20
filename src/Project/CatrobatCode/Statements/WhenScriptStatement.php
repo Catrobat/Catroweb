@@ -7,7 +7,7 @@ class WhenScriptStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'when program started <br/>';
+  final public const BEGIN_STRING = 'when program started <br/>';
 
   /**
    * WhenScriptStatement constructor.

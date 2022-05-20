@@ -14,18 +14,8 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
-  protected VerifyEmailHelperInterface $verify_email_helper;
-  protected EntityManagerInterface $entity_manager;
-  protected LoggerInterface $logger;
-
-  public function __construct(
-      VerifyEmailHelperInterface $verify_email_helper,
-      EntityManagerInterface $entity_manager,
-      LoggerInterface $logger
-  ) {
-    $this->verify_email_helper = $verify_email_helper;
-    $this->entity_manager = $entity_manager;
-    $this->logger = $logger;
+  public function __construct(protected VerifyEmailHelperInterface $verify_email_helper, protected EntityManagerInterface $entity_manager, protected LoggerInterface $logger)
+  {
   }
 
   /**

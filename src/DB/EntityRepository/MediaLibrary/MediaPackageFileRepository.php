@@ -24,17 +24,14 @@ use ZipArchive;
  */
 class MediaPackageFileRepository extends ServiceEntityRepository
 {
-  private string $dir;
-  private string $path;
-  private Filesystem $filesystem;
-  private string $thumb_dir;
-  private ParameterBagInterface $parameter_bag;
+  private readonly string $dir;
+  private readonly string $path;
+  private readonly Filesystem $filesystem;
+  private readonly string $thumb_dir;
 
-  public function __construct(ParameterBagInterface $parameter_bag, ManagerRegistry $manager_registry)
+  public function __construct(private readonly ParameterBagInterface $parameter_bag, ManagerRegistry $manager_registry)
   {
     parent::__construct($manager_registry, MediaPackageFile::class);
-
-    $this->parameter_bag = $parameter_bag;
 
     /** Directory where media package files are stored */
     $dir = (string) $parameter_bag->get('catrobat.mediapackage.dir');
@@ -253,8 +250,8 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     $this->addFileFlavorsCondition($qb, $flavor, 'f', true);
 
     if (null !== $package_name && '' !== trim($package_name)) {
-      $qb->join('App\DB\Entity\MediaLibrary\MediaPackageCategory', 'c')
-        ->join('App\DB\Entity\MediaLibrary\MediaPackage', 'p')
+      $qb->join(\App\DB\Entity\MediaLibrary\MediaPackageCategory::class, 'c')
+        ->join(\App\DB\Entity\MediaLibrary\MediaPackage::class, 'p')
         ->andWhere('f.category = c')
         ->andWhere('c MEMBER OF p.categories')
         ->andWhere('p.name = :package_name')
@@ -290,7 +287,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
         $screenshot_path_inside_archive = null;
         for ($i = 0; $i < $catrobat_archive->numFiles; ++$i) {
           $filename = $catrobat_archive->getNameIndex($i);
-          if (str_contains($filename, 'screenshot.png')) {
+          if (str_contains((string) $filename, 'screenshot.png')) {
             $screenshot_path_inside_archive = $filename;
             break;
           }

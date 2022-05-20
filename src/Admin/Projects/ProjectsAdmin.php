@@ -43,23 +43,15 @@ class ProjectsAdmin extends AbstractAdmin
     $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';
   }
 
-  private ParameterBagInterface $parameter_bag;
-  private ScreenshotRepository $screenshot_repository;
-  protected TokenStorageInterface $security_token_storage;
-
   public function __construct(
         ?string $code,
         ?string $class,
         ?string $baseControllerName,
-        ScreenshotRepository $screenshot_repository,
-        TokenStorageInterface $security_token_storage,
-        ParameterBagInterface $parameter_bag
+        private readonly ScreenshotRepository $screenshot_repository,
+        protected TokenStorageInterface $security_token_storage,
+        private readonly ParameterBagInterface $parameter_bag
   ) {
     parent::__construct($code, $class, $baseControllerName);
-
-    $this->screenshot_repository = $screenshot_repository;
-    $this->parameter_bag = $parameter_bag;
-    $this->security_token_storage = $security_token_storage;
   }
 
   /**
@@ -142,7 +134,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
-          'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
+          'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
           'template' => 'Admin/program_thumbnail_image_list.html.twig',
         ]
       )
@@ -181,7 +173,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('downloads')
       ->add('thumbnail', 'string',
         [
-          'accessor' => function ($subject): string { return $this->getThumbnailImageUrl($subject); },
+          'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
           'template' => 'Admin/program_thumbnail_image_list.html.twig',
         ]
       )

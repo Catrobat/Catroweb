@@ -17,11 +17,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
-  private ProjectsApiFacade $facade;
-
-  public function __construct(ProjectsApiFacade $facade)
+  public function __construct(private readonly ProjectsApiFacade $facade)
   {
-    $this->facade = $facade;
   }
 
   /**
@@ -150,7 +147,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
-    $private = $private ?? false;
+    $private ??= false;
 
     $validation_wrapper = $this->facade->getRequestValidator()->validateUploadFile($checksum, $file, $accept_language);
     if ($validation_wrapper->hasError()) {
@@ -171,7 +168,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
-    } catch (Exception $e) {
+    } catch (Exception) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);

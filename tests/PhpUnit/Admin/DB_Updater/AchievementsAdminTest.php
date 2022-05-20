@@ -13,10 +13,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
  */
 class AchievementsAdminTest extends DefaultTestCase
 {
-  /**
-   * @var AchievementsAdmin|MockObject
-   */
-  protected $object;
+  protected AchievementsAdmin|MockObject $object;
 
   protected function setUp(): void
   {

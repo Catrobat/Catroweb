@@ -7,11 +7,11 @@ class StopAllSoundsStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'stop all sounds';
+  final public const BEGIN_STRING = 'stop all sounds';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * StopAllSoundsStatement constructor.

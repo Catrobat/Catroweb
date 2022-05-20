@@ -85,10 +85,6 @@ jobs:
           docker-compose -f docker-compose.test.yaml up -d
           sleep 60
 
-      - name: Enable BypassFinals
-        run:
-          docker exec app.catroweb bin/phpunit --filter testNothingButEnableBypassFinals src/System/Testing/PhpUnit/BypassFinals.php
-
       - name: PhpUnit tests
         run:
           docker exec app.catroweb bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml

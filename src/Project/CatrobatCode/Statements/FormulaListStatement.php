@@ -4,15 +4,8 @@ namespace App\Project\CatrobatCode\Statements;
 
 class FormulaListStatement extends Statement
 {
-  /**
-   * @var string
-   */
-  public const X_POSITION = 'X_POSITION';
-
-  /**
-   * @var string
-   */
-  public const Y_POSITION = 'Y_POSITION';
+  final public const X_POSITION = 'X_POSITION';
+  final public const Y_POSITION = 'Y_POSITION';
 
   private ?FormulaStatement $x_position = null;
 

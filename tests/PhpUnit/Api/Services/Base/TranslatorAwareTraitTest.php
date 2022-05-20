@@ -14,10 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class TranslatorAwareTraitTest extends DefaultTestCase
 {
-  /**
-   * @var TranslatorAwareTraitTestClass|MockObject
-   */
-  protected $object;
+  protected TranslatorAwareTraitTestClass|MockObject $object;
 
   protected function setUp(): void
   {

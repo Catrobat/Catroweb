@@ -7,24 +7,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class AddProgramRequest
 {
-  private User $user;
-
-  private File $program_file;
-
-  private ?string $ip;
-
-  private ?string $language;
-
-  private ?string $flavor;
-
-  public function __construct(User $user, File $program_file, ?string $ip = '127.0.0.1',
-                              ?string $language = null, ?string $flavor = 'pocketcode')
+  public function __construct(private User $user, private File $program_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = 'pocketcode')
   {
-    $this->user = $user;
-    $this->program_file = $program_file;
-    $this->ip = $ip;
-    $this->language = $language;
-    $this->flavor = $flavor;
   }
 
   public function getUser(): User

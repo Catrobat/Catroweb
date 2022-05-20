@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class MediaLibraryRequestValidatorTest extends DefaultTestCase
 {
-  /**
-   * @var MediaLibraryRequestValidator|MockObject
-   */
-  protected $object;
+  protected MediaLibraryRequestValidator|MockObject $object;
 
   protected function setUp(): void
   {

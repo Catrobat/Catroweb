@@ -12,16 +12,8 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationSuccessHandlerI
 
 class OAuthSuccessListener implements AuthenticationSuccessHandlerInterface
 {
-  private CookieService $cookie_service;
-  private JWTTokenManagerInterface $jwt_manager;
-  private RefreshTokenService $refresh_token_service;
-
-  public function __construct(CookieService $cookie_service, JWTTokenManagerInterface $jwt_manager,
-                              RefreshTokenService $refresh_token_service)
+  public function __construct(private readonly CookieService $cookie_service, private readonly JWTTokenManagerInterface $jwt_manager, private readonly RefreshTokenService $refresh_token_service)
   {
-    $this->cookie_service = $cookie_service;
-    $this->jwt_manager = $jwt_manager;
-    $this->refresh_token_service = $refresh_token_service;
   }
 
   public function onAuthenticationSuccess(Request $request, TokenInterface $token): RedirectResponse

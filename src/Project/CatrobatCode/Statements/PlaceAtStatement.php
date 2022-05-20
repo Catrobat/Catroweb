@@ -7,11 +7,11 @@ class PlaceAtStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'place at ';
+  final public const BEGIN_STRING = 'place at ';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * PlaceAtStatement constructor.

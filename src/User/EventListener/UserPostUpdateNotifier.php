@@ -10,11 +10,8 @@ use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 
 class UserPostUpdateNotifier
 {
-  protected AchievementManager $achievement_manager;
-
-  public function __construct(AchievementManager $achievement_manager)
+  public function __construct(protected AchievementManager $achievement_manager)
   {
-    $this->achievement_manager = $achievement_manager;
   }
 
   /**

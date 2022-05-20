@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=UserCommentRepository::class)
  * @ORM\Table(name="user_comment")
  */
-class UserComment
+class UserComment implements \Stringable
 {
   /**
    * @ORM\Id
@@ -101,13 +101,13 @@ class UserComment
    * @ORM\ManyToOne(targetEntity=Studio::class, inversedBy="comments", cascade={"persist"})
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
-  protected ?Studio $studio;
+  protected ?Studio $studio = null;
 
   /**
    * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
    * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
-  protected ?StudioActivity $activity;
+  protected ?StudioActivity $activity = null;
 
   public function __toString(): string
   {

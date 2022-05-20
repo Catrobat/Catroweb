@@ -185,9 +185,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     ;
 
     return array_map(
-      function ($e) {
-        return $e['language'];
-      }, $result
+      fn ($e) => $e['language'], $result
     );
   }
 

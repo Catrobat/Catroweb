@@ -6,8 +6,6 @@ use App\Project\CatrobatCode\SyntaxHighlightingConstants;
 
 class FileNameStatement extends Statement
 {
-  private $value;
-
   /**
    * FileNameStatement constructor.
    *
@@ -16,9 +14,8 @@ class FileNameStatement extends Statement
    * @param mixed $spaces
    * @param mixed $value
    */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value)
+  public function __construct($statementFactory, $xmlTree, $spaces, private $value)
   {
-    $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
       '');

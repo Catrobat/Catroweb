@@ -28,9 +28,9 @@ class MediaPackageFile
 {
   public ?File $file = null;
 
-  public ?int $removed_id;
+  public ?int $removed_id = null;
 
-  public ?string $old_extension;
+  public ?string $old_extension = null;
 
   /**
    * @ORM\Id

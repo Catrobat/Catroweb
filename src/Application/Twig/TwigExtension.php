@@ -18,25 +18,13 @@ use Twig\TwigFunction;
 
 class TwigExtension extends AbstractExtension
 {
-  private RequestStack $request_stack;
-
-  private MediaPackageFileRepository $media_package_file_repository;
-
-  private string $translation_path;
-
-  private ParameterBagInterface $parameter_bag;
-
-  private TranslatorInterface $translator;
-
-  public function __construct(RequestStack $request_stack, MediaPackageFileRepository $media_package_file_repo,
-                              ParameterBagInterface $parameter_bag, string $catrobat_translation_dir,
-                              TranslatorInterface $translator)
-  {
-    $this->translation_path = $catrobat_translation_dir;
-    $this->parameter_bag = $parameter_bag;
-    $this->request_stack = $request_stack;
-    $this->media_package_file_repository = $media_package_file_repo;
-    $this->translator = $translator;
+  public function __construct(
+    private readonly RequestStack $request_stack,
+    private readonly MediaPackageFileRepository $media_package_file_repository,
+    private readonly ParameterBagInterface $parameter_bag,
+    private readonly string $catrobat_translation_dir,
+    private readonly TranslatorInterface $translator
+  ) {
   }
 
   public function getFilters(): array
@@ -63,10 +51,8 @@ class TwigExtension extends AbstractExtension
 
   /**
    * @param mixed $input
-   *
-   * @return bool|string
    */
-  public function humanFriendlyNumberFilter($input)
+  public function humanFriendlyNumberFilter($input): bool|string
   {
     $user_locale = $this->request_stack->getCurrentRequest()->getLocale();
 
@@ -76,10 +62,8 @@ class TwigExtension extends AbstractExtension
   /**
    * @param mixed $input
    * @param mixed $user_locale
-   *
-   * @return bool|false|string
    */
-  public static function humanFriendlyNumber($input, TranslatorInterface $translator, $user_locale)
+  public static function humanFriendlyNumber($input, TranslatorInterface $translator, $user_locale): bool|string
   {
     if (!is_numeric($input)) {
       return $input;
@@ -148,7 +132,7 @@ class TwigExtension extends AbstractExtension
   public function getLanguageOptions(): array
   {
     $hl_locale_code = null;
-    $path = $this->translation_path;
+    $path = $this->catrobat_translation_dir;
     $current_language = $this->request_stack->getCurrentRequest()->getLocale();
 
     $list = [];
@@ -195,34 +179,21 @@ class TwigExtension extends AbstractExtension
 
   public function handleSpecialShortNames(string $shortName): string
   {
-    switch ($shortName) {
-          case 'fa_AF':
-          case 'fa_IR':
-          case 'pt_BR':
-          case 'pt_PT':
-          case 'zh_CN':
-          case 'zh_TW':
-          case 'en_GB':
-              return $shortName;
-          case 'en':
-              return 'en_US';
-          default:
-              return explode('_', $shortName)[0];
-      }
+    return match ($shortName) {
+      'fa_AF', 'fa_IR', 'pt_BR', 'pt_PT', 'zh_CN', 'zh_TW', 'en_GB' => $shortName,
+        'en' => 'en_US',
+        default => explode('_', $shortName)[0],
+    };
   }
 
   public function handleSpecialLocales(string $locale, string $shortName): string
   {
-    switch ($shortName) {
-            case 'en_GB':
-                return 'English (British)';
-            case 'zh_CN':
-                return '中文 (简化字)';
-            case 'zh_TW':
-                return '中文 (繁體字)';
-            default:
-                return $locale;
-        }
+    return match ($shortName) {
+      'en_GB' => 'English (British)',
+        'zh_CN' => '中文 (简化字)',
+        'zh_TW' => '中文 (繁體字)',
+        default => $locale,
+    };
   }
 
   public function isMobile(): bool
@@ -286,25 +257,14 @@ class TwigExtension extends AbstractExtension
 
   public function getThemeDisplayName(): string
   {
-    switch ($this->getFlavor()) {
-      case 'luna':
-        return 'Luna & Cat';
-
-      case 'phirocode':
-        return 'Phirocode';
-
-      case 'create@school':
-        return 'Create@School';
-
-      case 'embroidery':
-        return 'Embroidery Designer';
-
-      case 'arduino':
-        return 'Arduino Code';
-
-      default:
-        return 'Pocket Code';
-    }
+    return match ($this->getFlavor()) {
+      'luna' => 'Luna & Cat',
+        'phirocode' => 'Phirocode',
+        'create@school' => 'Create@School',
+        'embroidery' => 'Embroidery Designer',
+        'arduino' => 'Arduino Code',
+        default => 'Pocket Code',
+    };
   }
 
   /**
@@ -315,30 +275,19 @@ class TwigExtension extends AbstractExtension
    */
   public function getMediaPackageImageUrl(MediaPackageFile $object): ?string
   {
-    switch ($object->getExtension()) {
-      case 'jpg':
-      case 'jpeg':
-      case 'png':
-      case 'gif':
-        return $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension());
-      case 'catrobat':
-        return $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension());
-      default:
-        return null;
-    }
+    return match ($object->getExtension()) {
+      'jpg', 'jpeg', 'png', 'gif' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
+        'catrobat' => $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension()),
+        default => null,
+    };
   }
 
   public function getMediaPackageSoundUrl(MediaPackageFile $object): ?string
   {
-    switch ($object->getExtension()) {
-      case 'mp3':
-      case 'mpga':
-      case 'wav':
-      case 'ogg':
-        return $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension());
-      default:
-        return null;
-    }
+    return match ($object->getExtension()) {
+      'mp3', 'mpga', 'wav', 'ogg' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
+        default => null,
+    };
   }
 
   public function assetExists(string $filename): bool
@@ -367,7 +316,7 @@ class TwigExtension extends AbstractExtension
   {
     $list = [];
     foreach ($languages as $language) {
-      if (false !== strpos($currentLanguage, $language[0])) {
+      if (str_contains($currentLanguage, (string) $language[0])) {
         $language = [
           $language[0],
           $language[1],

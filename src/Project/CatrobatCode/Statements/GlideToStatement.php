@@ -7,11 +7,11 @@ class GlideToStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'glide (';
+  final public const BEGIN_STRING = 'glide (';
   /**
    * @var string
    */
-  public const END_STRING = ')<br/>';
+  final public const END_STRING = ')<br/>';
 
   /**
    * GlideToStatement constructor.

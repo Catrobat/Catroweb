@@ -9,11 +9,11 @@ class LoopEndlessStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'endless loop';
+  final public const BEGIN_STRING = 'endless loop';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * LoopEndlessStatement constructor.

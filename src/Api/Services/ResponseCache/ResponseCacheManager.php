@@ -7,17 +7,14 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ResponseCacheManager
 {
-  protected EntityManagerInterface $entity_manager;
-  protected ResponseCacheRepository $response_cache_repository;
-
-  public function __construct(EntityManagerInterface $entity_manager, ResponseCacheRepository $response_cache_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected ResponseCacheRepository $response_cache_repository)
   {
-    $this->entity_manager = $entity_manager;
-    $this->response_cache_repository = $response_cache_repository;
   }
 
   /**
    * @param mixed $response
+   *
+   * @throws \JsonException
    */
   public function addCacheEntry(string $cache_id, int $response_code, array $response_headers, $response): ResponseCache
   {
@@ -27,7 +24,7 @@ class ResponseCacheManager
       $cache_entry
         ->setResponseCode($response_code)
         ->setResponse(serialize($response))
-        ->setResponseHeaders(json_encode($response_headers))
+        ->setResponseHeaders(json_encode($response_headers, JSON_THROW_ON_ERROR))
         ->updateTimestamps()
       ;
     } else {
@@ -35,7 +32,7 @@ class ResponseCacheManager
         ->setId($cache_id)
         ->setResponseCode($response_code)
         ->setResponse(serialize($response))
-        ->setResponseHeaders(json_encode($response_headers))
+        ->setResponseHeaders(json_encode($response_headers, JSON_THROW_ON_ERROR))
         ->updateTimestamps()
       ;
     }

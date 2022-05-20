@@ -18,15 +18,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class NotificationsResponseManager extends AbstractResponseManager
 {
-  private NotificationRepository $notification_repository;
-
   public function __construct(TranslatorInterface $translator,
                                 SerializerInterface $serializer,
                                 ResponseCacheManager $response_cache_manager,
-                                NotificationRepository $notification_repository)
+                                private readonly NotificationRepository $notification_repository)
   {
     parent::__construct($translator, $serializer, $response_cache_manager);
-    $this->notification_repository = $notification_repository;
   }
 
   public function createNotificationsCountResponse(User $user): NotificationsCountResponse

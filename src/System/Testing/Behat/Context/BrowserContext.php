@@ -350,7 +350,7 @@ class BrowserContext extends MinkContext implements Context
     $contains = false;
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
     foreach ($elements as $element) {
-      if (false !== strpos($element->getText(), $value)) {
+      if (str_contains($element->getText(), $value)) {
         $contains = true;
         break;
       }
@@ -366,7 +366,7 @@ class BrowserContext extends MinkContext implements Context
     $contains = false;
     $elements = $this->getSession()->getPage()->findAll('css', $selector);
     foreach ($elements as $element) {
-      if (false !== strpos($element->getText(), $value)) {
+      if (str_contains($element->getText(), $value)) {
         $contains = true;
         break;
       }
@@ -515,14 +515,14 @@ class BrowserContext extends MinkContext implements Context
       if (!$scope->getTestResult()->isPassed()) {
         $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
       }
-    } catch (Exception $exception) {
+    } catch (Exception) {
     }
   }
 
   /**
    * @When /^I get page content$/
    */
-  public function iGetPageContent(): void
+  public function iGetPageContent(): never
   {
     var_dump($this->getSession()->getPage()->getContent());
     exit;

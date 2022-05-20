@@ -15,12 +15,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateMissingMediaPackageThumbnailsCommand extends Command
 {
   protected static $defaultName = 'catrobat:create:media-package-thumbnails';
-  private MediaPackageFileRepository $media_package_file_repository;
 
-  public function __construct(MediaPackageFileRepository $media_package_file_repository)
+  public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository)
   {
     parent::__construct();
-    $this->media_package_file_repository = $media_package_file_repository;
   }
 
   protected function configure(): void

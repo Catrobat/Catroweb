@@ -6,13 +6,8 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class PasswordResetRequestedEvent extends Event
 {
-  protected string $email;
-  protected string $locale;
-
-  public function __construct(string $email, string $locale)
+  public function __construct(protected string $email, protected string $locale)
   {
-    $this->email = $email;
-    $this->locale = $locale;
   }
 
   public function getEmail(): string

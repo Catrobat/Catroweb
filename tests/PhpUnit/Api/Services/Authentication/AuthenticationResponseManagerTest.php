@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class AuthenticationResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var AuthenticationResponseManager|MockObject
-   */
-  protected $object;
+  protected AuthenticationResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

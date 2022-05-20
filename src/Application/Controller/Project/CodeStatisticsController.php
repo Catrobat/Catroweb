@@ -13,20 +13,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeStatisticsController extends AbstractController
 {
-  private ProgramManager $program_manager;
-  private ExtractedFileRepository $extracted_file_repository;
-  private CatrobatCodeParser $code_parser;
-  private TranslatorInterface $translator;
-
-  public function __construct(ProgramManager $program_manager,
-                              ExtractedFileRepository $extracted_file_repository,
-                              CatrobatCodeParser $code_parser,
-                              TranslatorInterface $translator)
+  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator)
   {
-    $this->program_manager = $program_manager;
-    $this->extracted_file_repository = $extracted_file_repository;
-    $this->code_parser = $code_parser;
-    $this->translator = $translator;
   }
 
   /**

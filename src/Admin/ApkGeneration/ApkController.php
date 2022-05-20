@@ -13,18 +13,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ApkController extends CRUDController
 {
-  protected ProgramManager $program_manager;
-  protected JenkinsDispatcher $jenkins_dispatcher;
-  protected EntityManagerInterface $entity_manager;
-
-  public function __construct(
-        ProgramManager $program_manager,
-        JenkinsDispatcher $jenkins_dispatcher,
-        EntityManagerInterface $entity_manager
-    ) {
-    $this->program_manager = $program_manager;
-    $this->jenkins_dispatcher = $jenkins_dispatcher;
-    $this->entity_manager = $entity_manager;
+  public function __construct(protected ProgramManager $program_manager, protected JenkinsDispatcher $jenkins_dispatcher, protected EntityManagerInterface $entity_manager)
+  {
   }
 
   public function resetApkBuildStatusAction(): RedirectResponse

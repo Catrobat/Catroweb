@@ -16,10 +16,7 @@ use ReflectionException;
  */
 final class AbstractResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var AbstractResponseManager|MockObject
-   */
-  protected $object;
+  protected AbstractResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

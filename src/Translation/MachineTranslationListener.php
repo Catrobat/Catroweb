@@ -15,15 +15,10 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
 class MachineTranslationListener
 {
   private const CACHED_PROVIDER = 'etag';
+  private readonly int $project_caching_threshold;
 
-  private EntityManagerInterface $entity_manager;
-  private ProgramManager $program_manager;
-  private int $project_caching_threshold;
-
-  public function __construct(EntityManagerInterface $entity_manager, ProgramManager $program_manager, ParameterBagInterface $parameters)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramManager $program_manager, ParameterBagInterface $parameters)
   {
-    $this->entity_manager = $entity_manager;
-    $this->program_manager = $program_manager;
     $this->project_caching_threshold = (int) $parameters->get('catrobat.translations.project_cache_threshold');
   }
 
@@ -125,7 +120,7 @@ class MachineTranslationListener
   {
     $json_response = $event->getResponse()->getContent();
 
-    return json_decode($json_response, true);
+    return json_decode($json_response, true, 512, JSON_THROW_ON_ERROR);
   }
 
   private function findCommentAndIncrement(int $comment_id, string $source_language, string $target_language, string $provider): void

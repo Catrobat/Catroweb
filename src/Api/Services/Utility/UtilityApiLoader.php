@@ -8,11 +8,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class UtilityApiLoader extends AbstractApiLoader
 {
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(EntityManagerInterface $entity_manager)
+  public function __construct(private readonly EntityManagerInterface $entity_manager)
   {
-    $this->entity_manager = $entity_manager;
   }
 
   public function getActiveSurvey(string $lang_code): ?Survey

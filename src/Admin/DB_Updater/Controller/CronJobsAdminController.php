@@ -16,15 +16,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class CronJobsAdminController extends CRUDController
 {
-  protected CronJobRepository $cron_job_repository;
-  protected EntityManagerInterface $entity_manager;
-  protected KernelInterface $kernel;
-
-  public function __construct(CronJobRepository $cron_job_repository, EntityManagerInterface $entity_manager, KernelInterface $kernel)
+  public function __construct(protected CronJobRepository $cron_job_repository, protected EntityManagerInterface $entity_manager, protected KernelInterface $kernel)
   {
-    $this->cron_job_repository = $cron_job_repository;
-    $this->entity_manager = $entity_manager;
-    $this->kernel = $kernel;
   }
 
   public function listAction(Request $request = null): Response

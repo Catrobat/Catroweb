@@ -7,11 +7,11 @@ class UnknownStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'Unknown Statement';
+  final public const BEGIN_STRING = 'Unknown Statement';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * UnknownStatement constructor.

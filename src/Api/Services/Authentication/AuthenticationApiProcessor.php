@@ -15,14 +15,8 @@ use GuzzleHttp\Client;
 
 final class AuthenticationApiProcessor extends AbstractApiProcessor
 {
-  private AuthenticationManager $authentication_manager;
-  private UserManager $user_manager;
-
-  public function __construct(UserManager $user_manager,
-                              AuthenticationManager $authentication_manager
-  ) {
-    $this->user_manager = $user_manager;
-    $this->authentication_manager = $authentication_manager;
+  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager)
+  {
   }
 
   public function createJWTByUser(User $user): string
@@ -84,7 +78,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
     $client = new Client();
     $res = $client->request('GET', 'https://appleid.apple.com/auth/keys');
     $body = $res->getBody()->getContents();
-    $keys_raw = json_decode($body, true);
+    $keys_raw = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     $keys = $keys_raw['keys'];
     $public_key = [];
     foreach ($keys as $key) {

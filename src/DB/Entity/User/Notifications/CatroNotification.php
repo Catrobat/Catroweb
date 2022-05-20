@@ -33,46 +33,38 @@ class CatroNotification
   private ?int $id = null;
 
   /**
-   *  The user to which this CatroNotification will be shown.
-   *  If the user gets deleted, this CatroNotification gets deleted as well.
-   *
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
-   * @ORM\JoinColumn(
-   *     name="user",
-   *     referencedColumnName="id",
-   *     nullable=false
-   * )
-   */
-  private User $user;
-
-  /**
-   * @ORM\Column(name="title", type="string")
-   */
-  private string $title;
-
-  /**
-   * @ORM\Column(name="message", type="text")
-   */
-  private string $message;
-
-  /**
    * @ORM\Column(name="seen", type="boolean", options={"default": false})
    */
   private bool $seen = false;
 
-  /**
-   * @ORM\Column(name="type", type="string")
-   */
-  private string $type;
-
   private string $twig_template = 'Notifications/NotificationTypes/catro_notification.html.twig';
 
-  public function __construct(User $user, string $title = '', string $message = '', string $type = '')
-  {
-    $this->user = $user;
-    $this->title = $title;
-    $this->message = $message;
-    $this->type = $type;
+  public function __construct(
+      /**
+       *  The user to which this CatroNotification will be shown.
+       *  If the user gets deleted, this CatroNotification gets deleted as well.
+       *
+       * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
+       * @ORM\JoinColumn(
+       *     name="user",
+       *     referencedColumnName="id",
+       *     nullable=false
+       * )
+       */
+      private User $user,
+      /**
+       * @ORM\Column(name="title", type="string")
+       */
+      private string $title = '',
+      /**
+       * @ORM\Column(name="message", type="text")
+       */
+      private string $message = '',
+      /**
+       * @ORM\Column(name="type", type="string")
+       */
+      private string $type = ''
+  ) {
   }
 
   public function getId(): ?int

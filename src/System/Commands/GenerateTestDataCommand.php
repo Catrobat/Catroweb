@@ -18,27 +18,19 @@ use Symfony\Component\HttpFoundation\File\File;
 class GenerateTestDataCommand extends Command
 {
   protected static $defaultName = 'catrobat:test:generate';
-  protected Filesystem $filesystem;
 
   protected string $source;
 
   protected string $target_directory;
 
-  protected CatrobatFileExtractor $extractor;
-
   protected string $extracted_source_program_directory;
 
-  protected CatrobatFileCompressor $compressor;
-
-  public function __construct(Filesystem $filesystem, CatrobatFileExtractor $extractor,
-                              CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
+  public function __construct(protected Filesystem $filesystem, protected CatrobatFileExtractor $extractor,
+                              protected CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->filesystem = $filesystem;
     $this->source = (string) $parameter_bag->get('catrobat.test.directory.source');
     $this->target_directory = (string) $parameter_bag->get('catrobat.test.directory.target');
-    $this->extractor = $extractor;
-    $this->compressor = $compressor;
   }
 
   protected function configure(): void

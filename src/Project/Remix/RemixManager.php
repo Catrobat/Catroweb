@@ -24,47 +24,15 @@ use Exception;
 
 class RemixManager
 {
-  private EntityManagerInterface $entity_manager;
-
-  private ProgramRepository  $program_repository;
-
-  private ScratchProgramRepository $scratch_program_repository;
-
-  private ProgramRemixRepository $program_remix_repository;
-
-  private ProgramRemixBackwardRepository $program_remix_backward_repository;
-
-  private ScratchProgramRemixRepository  $scratch_program_remix_repository;
-
-  private RemixGraphManipulator $remix_graph_manipulator;
-
-  private NotificationManager $catro_notification_service;
-
-  public function __construct(EntityManagerInterface $entity_manager, ProgramRepository $program_repository,
-                              ScratchProgramRepository $scratch_program_repository,
-                              ProgramRemixRepository $program_remix_repository,
-                              ProgramRemixBackwardRepository $program_remix_backward_repository,
-                              ScratchProgramRemixRepository $scratch_program_remix_repository,
-                              RemixGraphManipulator $remix_graph_manipulator,
-                              NotificationManager $catro_notification_service)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramRepository $program_repository, private readonly ScratchProgramRepository $scratch_program_repository, private readonly ProgramRemixRepository $program_remix_repository, private readonly ProgramRemixBackwardRepository $program_remix_backward_repository, private readonly ScratchProgramRemixRepository $scratch_program_remix_repository, private readonly RemixGraphManipulator $remix_graph_manipulator, private readonly NotificationManager $catro_notification_service)
   {
-    $this->entity_manager = $entity_manager;
-    $this->program_repository = $program_repository;
-    $this->scratch_program_repository = $scratch_program_repository;
-    $this->program_remix_repository = $program_remix_repository;
-    $this->program_remix_backward_repository = $program_remix_backward_repository;
-    $this->scratch_program_remix_repository = $scratch_program_remix_repository;
-    $this->remix_graph_manipulator = $remix_graph_manipulator;
-    $this->catro_notification_service = $catro_notification_service;
   }
 
   public function filterExistingScratchProgramIds(array $scratch_ids): array
   {
     $scratch_program_data = $this->scratch_program_repository->getProgramDataByIds($scratch_ids);
 
-    return array_map(function ($data) {
-      return $data['id'];
-    }, $scratch_program_data);
+    return array_map(fn ($data) => $data['id'], $scratch_program_data);
   }
 
   /**
@@ -118,9 +86,7 @@ class RemixManager
     } else {
       // case: new program
       $all_program_remix_relations = $this->createNewRemixRelations($program, $remixes_data);
-      $catrobat_remix_relations = array_filter($all_program_remix_relations, function ($relation) {
-        return !($relation instanceof ScratchProgramRemixRelation);
-      });
+      $catrobat_remix_relations = array_filter($all_program_remix_relations, fn ($relation) => !($relation instanceof ScratchProgramRemixRelation));
 
       $contains_only_catrobat_self_relation = (1 === count($catrobat_remix_relations));
       $program->setRemixRoot($contains_only_catrobat_self_relation);
@@ -169,47 +135,37 @@ class RemixManager
       ->getDescendantRelations($catrobat_ids_of_whole_graph)
     ;
 
-    $catrobat_forward_edge_data = array_map(function (ProgramRemixRelation $relation) {
-      return [
-        'ancestor_id' => $relation->getAncestorId(),
-        'descendant_id' => $relation->getDescendantId(),
-        'depth' => $relation->getDepth(),
-      ];
-    }, $catrobat_forward_edge_relations);
+    $catrobat_forward_edge_data = array_map(fn (ProgramRemixRelation $relation) => [
+      'ancestor_id' => $relation->getAncestorId(),
+      'descendant_id' => $relation->getDescendantId(),
+      'depth' => $relation->getDepth(),
+    ], $catrobat_forward_edge_relations);
 
-    $catrobat_forward_data = array_map(function (ProgramRemixRelation $relation) {
-      return [
-        'ancestor_id' => $relation->getAncestorId(),
-        'descendant_id' => $relation->getDescendantId(),
-        'depth' => $relation->getDepth(),
-      ];
-    }, $catrobat_forward_relations);
+    $catrobat_forward_data = array_map(fn (ProgramRemixRelation $relation) => [
+      'ancestor_id' => $relation->getAncestorId(),
+      'descendant_id' => $relation->getDescendantId(),
+      'depth' => $relation->getDepth(),
+    ], $catrobat_forward_relations);
 
     $scratch_edge_relations =
       $this->scratch_program_remix_repository->getDirectEdgeRelationsOfProgramIds($catrobat_ids_of_whole_graph);
-    $scratch_node_ids = array_values(array_unique(array_map(function (ScratchProgramRemixRelation $relation) {
-      return $relation->getScratchParentId();
-    }, $scratch_edge_relations)));
+    $scratch_node_ids = array_values(array_unique(array_map(fn (ScratchProgramRemixRelation $relation) => $relation->getScratchParentId(), $scratch_edge_relations)));
     sort($scratch_node_ids);
 
-    $scratch_edge_data = array_map(function (ScratchProgramRemixRelation $relation) {
-      return [
-        'ancestor_id' => $relation->getScratchParentId(),
-        'descendant_id' => $relation->getCatrobatChildId(),
-      ];
-    }, $scratch_edge_relations);
+    $scratch_edge_data = array_map(fn (ScratchProgramRemixRelation $relation) => [
+      'ancestor_id' => $relation->getScratchParentId(),
+      'descendant_id' => $relation->getCatrobatChildId(),
+    ], $scratch_edge_relations);
 
     $catrobat_backward_edge_relations = $this
       ->program_remix_backward_repository
       ->getDirectEdgeRelations($catrobat_ids_of_whole_graph, $catrobat_ids_of_whole_graph)
     ;
 
-    $catrobat_backward_edge_data = array_map(function (ProgramRemixBackwardRelation $relation) {
-      return [
-        'ancestor_id' => $relation->getParentId(),
-        'descendant_id' => $relation->getChildId(),
-      ];
-    }, $catrobat_backward_edge_relations);
+    $catrobat_backward_edge_data = array_map(fn (ProgramRemixBackwardRelation $relation) => [
+      'ancestor_id' => $relation->getParentId(),
+      'descendant_id' => $relation->getChildId(),
+    ], $catrobat_backward_edge_relations);
 
     $catrobat_nodes_data = [];
     $programs_data = $this->program_repository->getProjectDataByIds($catrobat_ids_of_whole_graph);
@@ -325,11 +281,11 @@ class RemixManager
       return 0;
     }
 
-    if (null === $result['catrobatNodes'] || 0 === count($result['catrobatNodes'])) {
+    if (null === $result['catrobatNodes'] || 0 === (is_countable($result['catrobatNodes']) ? count($result['catrobatNodes']) : 0)) {
       return 0;
     }
 
-    return count($result['catrobatNodes']) - 1;
+    return (is_countable($result['catrobatNodes']) ? count($result['catrobatNodes']) : 0) - 1;
   }
 
   public function getProgramRepository(): ProgramRepository
@@ -424,22 +380,14 @@ class RemixManager
     $graph_manipulator = $this->remix_graph_manipulator;
 
     // catrobat parents:
-    $catrobat_remixes_data = array_filter($remixes_data, function (RemixData $remix_data) {
-      return !$remix_data->isScratchProgram();
-    });
-    $new_unfiltered_catrobat_parent_ids = array_map(function (RemixData $remix_data) {
-      return $remix_data->getProgramId();
-    }, $catrobat_remixes_data);
+    $catrobat_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data) => !$remix_data->isScratchProgram());
+    $new_unfiltered_catrobat_parent_ids = array_map(fn (RemixData $remix_data) => $remix_data->getProgramId(), $catrobat_remixes_data);
     $new_catrobat_parent_ids =
       $this->program_repository->filterExistingProgramIds($new_unfiltered_catrobat_parent_ids);
 
     $old_forward_ancestor_relations = $program->getCatrobatRemixAncestorRelations()->getValues();
-    $old_forward_parent_relations = array_filter($old_forward_ancestor_relations, function (ProgramRemixRelation $relation) {
-      return 1 === $relation->getDepth();
-    });
-    $old_forward_parent_ids = array_map(function (ProgramRemixRelation $relation) {
-      return $relation->getAncestorId();
-    }, $old_forward_parent_relations);
+    $old_forward_parent_relations = array_filter($old_forward_ancestor_relations, fn (ProgramRemixRelation $relation) => 1 === $relation->getDepth());
+    $old_forward_parent_ids = array_map(fn (ProgramRemixRelation $relation) => $relation->getAncestorId(), $old_forward_parent_relations);
 
     $preserved_creation_date_mapping = [];
     $preserved_seen_date_mapping = [];
@@ -451,12 +399,8 @@ class RemixManager
     }
 
     $old_backward_ancestor_relations = $program->getCatrobatRemixBackwardParentRelations()->getValues();
-    $old_backward_parent_relations = array_filter($old_backward_ancestor_relations, function (ProgramRemixBackwardRelation $relation) {
-      return 1 === $relation->getDepth();
-    });
-    $old_backward_parent_ids = array_map(function (ProgramRemixBackwardRelation $relation) {
-      return $relation->getParentId();
-    }, $old_backward_parent_relations);
+    $old_backward_parent_relations = array_filter($old_backward_ancestor_relations, fn (ProgramRemixBackwardRelation $relation) => 1 === $relation->getDepth());
+    $old_backward_parent_ids = array_map(fn (ProgramRemixBackwardRelation $relation) => $relation->getParentId(), $old_backward_parent_relations);
     $old_catrobat_parent_ids = array_unique(array_merge($old_forward_parent_ids, $old_backward_parent_ids));
 
     $parent_ids_to_be_added = array_values(array_diff($new_catrobat_parent_ids, $old_catrobat_parent_ids));
@@ -473,7 +417,7 @@ class RemixManager
         array_diff($old_forward_parent_ids, $forward_parent_ids_to_be_removed)
       );
       $parent_ids_to_be_added = array_unique(
-        array_merge($parent_ids_to_be_added, $accidentally_removed_forward_parent_ids)
+        [...$parent_ids_to_be_added, ...$accidentally_removed_forward_parent_ids]
       );
     }
 
@@ -484,16 +428,10 @@ class RemixManager
 
     // scratch parents:
     $old_scratch_parent_relations = $program->getScratchRemixParentRelations()->getValues();
-    $old_immediate_scratch_parent_ids = array_map(function (ScratchProgramRemixRelation $relation) {
-      return $relation->getScratchParentId();
-    }, $old_scratch_parent_relations);
+    $old_immediate_scratch_parent_ids = array_map(fn (ScratchProgramRemixRelation $relation) => $relation->getScratchParentId(), $old_scratch_parent_relations);
 
-    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data) {
-      return $remix_data->isScratchProgram();
-    });
-    $new_scratch_parent_ids = array_map(function (RemixData $remix_data) {
-      return $remix_data->getProgramId();
-    }, $scratch_remixes_data);
+    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data) => $remix_data->isScratchProgram());
+    $new_scratch_parent_ids = array_map(fn (RemixData $remix_data) => $remix_data->getProgramId(), $scratch_remixes_data);
 
     $scratch_parent_ids_to_be_added = array_values(
       array_diff($new_scratch_parent_ids, $old_immediate_scratch_parent_ids)

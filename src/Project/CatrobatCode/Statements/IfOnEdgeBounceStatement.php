@@ -7,11 +7,11 @@ class IfOnEdgeBounceStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'if on edge, bounce';
+  final public const BEGIN_STRING = 'if on edge, bounce';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * IfOnEdgeBounceStatement constructor.

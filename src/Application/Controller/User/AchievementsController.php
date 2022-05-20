@@ -12,11 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AchievementsController extends AbstractController
 {
-  protected AchievementManager $achievement_manager;
-
-  public function __construct(AchievementManager $achievement_manager)
+  public function __construct(protected AchievementManager $achievement_manager)
   {
-    $this->achievement_manager = $achievement_manager;
   }
 
   /**
@@ -82,7 +79,7 @@ class AchievementsController extends AbstractController
 
     try {
       $this->achievement_manager->readAllUnseenAchievements($user);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return new JsonResponse(null, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 

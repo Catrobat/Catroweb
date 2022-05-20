@@ -4,7 +4,6 @@ namespace App\System\Commands\Create;
 
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,24 +17,11 @@ class CreateFollowersCommand extends Command
 {
   protected static $defaultName = 'catrobat:follow';
 
-  private UserManager $user_manager;
-
-  private ProgramManager $program_manager;
-
-  private NotificationManager $notification_service;
-
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(UserManager $user_manager,
-                              ProgramManager $program_manager,
-                              EntityManagerInterface $entity_manager,
-                              NotificationManager $notification_service)
+  public function __construct(private readonly UserManager $user_manager,
+                              private readonly EntityManagerInterface $entity_manager,
+                              private readonly NotificationManager $notification_service)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
-    $this->notification_service = $notification_service;
   }
 
   protected function configure(): void
@@ -75,7 +61,7 @@ class CreateFollowersCommand extends Command
         $this->followUser($user, $follower);
         $this->notification_service->addNotification($notification);
       }
-    } catch (Exception $e) {
+    } catch (Exception) {
       return 3;
     }
     $output->writeln($follower_name.' follows '.$user_name);

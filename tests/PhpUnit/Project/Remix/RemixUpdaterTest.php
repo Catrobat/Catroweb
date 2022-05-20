@@ -31,10 +31,7 @@ class RemixUpdaterTest extends TestCase
    */
   private $remix_manager;
 
-  /**
-   * @var AsyncHttpClient|MockObject
-   */
-  private $async_http_client;
+  private AsyncHttpClient|MockObject $async_http_client;
 
   /**
    * @var MockObject|Program

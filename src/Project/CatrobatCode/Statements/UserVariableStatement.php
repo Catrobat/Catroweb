@@ -9,16 +9,16 @@ class UserVariableStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = '';
+  final public const BEGIN_STRING = '';
 
   /**
    * @var string
    */
-  public const AT_END_STRING = ' at (';
+  final public const AT_END_STRING = ' at (';
   /**
    * @var string
    */
-  public const TO_END_STRING = ' to (';
+  final public const TO_END_STRING = ' to (';
 
   /**
    * UserVariableStatement constructor.

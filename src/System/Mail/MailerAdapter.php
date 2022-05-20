@@ -15,21 +15,8 @@ use Twig\Environment;
 
 class MailerAdapter
 {
-  protected MailerInterface $mailer;
-  protected LoggerInterface $logger;
-  protected Environment $templateWrapper;
-  protected string $dkim_private_key_path;
-
-  public function __construct(
-    MailerInterface $mailer,
-    LoggerInterface $logger,
-    Environment $templateWrapper,
-    string $dkim_private_key_path // bind in services!
-  ) {
-    $this->mailer = $mailer;
-    $this->logger = $logger;
-    $this->templateWrapper = $templateWrapper;
-    $this->dkim_private_key_path = $dkim_private_key_path;
+  public function __construct(protected MailerInterface $mailer, protected LoggerInterface $logger, protected Environment $templateWrapper, protected string $dkim_private_key_path)
+  {
   }
 
   public function send(string $to, string $subject, string $template, array $context = []): void

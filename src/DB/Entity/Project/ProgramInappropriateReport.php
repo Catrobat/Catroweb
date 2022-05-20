@@ -19,9 +19,9 @@ use InvalidArgumentException;
  */
 class ProgramInappropriateReport
 {
-  public const STATUS_NEW = 1;
-  public const STATUS_REJECTED = 2;
-  public const STATUS_ACCEPTED = 3;
+  final public const STATUS_NEW = 1;
+  final public const STATUS_REJECTED = 2;
+  final public const STATUS_ACCEPTED = 3;
 
   /**
    * @ORM\Column(name="id", type="integer")
@@ -71,7 +71,7 @@ class ProgramInappropriateReport
    * @ORM\ManyToOne(targetEntity=User::class, inversedBy="program_inappropriate_reports")
    * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  private ?User $reportedUser;
+  private ?User $reportedUser = null;
 
   /**
    * @ORM\PrePersist

@@ -14,35 +14,25 @@ use Symfony\Component\Finder\Finder;
 
 class ExtractedCatrobatFile
 {
-  protected string $path;
-
-  protected string $web_path;
-
-  protected ?string $dir_hash;
-
   protected SimpleXMLElement $program_xml_properties;
 
   private array $xml_filenames;
 
-  public function __construct(string $base_dir, string $base_path, ?string $dir_hash)
+  public function __construct(protected string $path, protected string $web_path, protected ?string $dir_hash)
   {
-    $this->path = $base_dir;
-    $this->dir_hash = $dir_hash;
-    $this->web_path = $base_path;
-
-    if (!file_exists($base_dir.'code.xml')) {
-      throw new InvalidCatrobatFileException('errors.xml.missing', 507);
+    if (!file_exists($path.'code.xml')) {
+        throw new InvalidCatrobatFileException('errors.xml.missing', 507);
     }
 
-    $content = file_get_contents($base_dir.'code.xml');
-    if (!$content) {
-      throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
+      $content = file_get_contents($path.'code.xml');
+      if (!$content) {
+          throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }
     $content = str_replace('&#x0;', '', $content, $count);
 
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
-    for ($i = 0; $i < count($this->xml_filenames); ++$i) {
+    for ($i = 0; $i < (is_countable($this->xml_filenames) ? count($this->xml_filenames) : 0); ++$i) {
       $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
     }
 
@@ -122,7 +112,7 @@ class ExtractedCatrobatFile
       $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/images');
       $finder->files()->in($dir_regex);
       foreach ($finder as $file) {
-        $parts = explode($this->dir_hash.'/', $file->getRealPath());
+        $parts = explode($this->dir_hash.'/', (string) $file->getRealPath());
         $file_paths[] = '/'.$this->web_path.$parts[1];
       }
     } else {
@@ -152,7 +142,7 @@ class ExtractedCatrobatFile
       $this->createDirectoryInSceneIfNotExist($this->path, $dir_regex, '/sounds');
       $finder->files()->in($dir_regex);
       foreach ($finder as $file) {
-        $parts = explode($this->dir_hash.'/', $file->getRealPath());
+        $parts = explode($this->dir_hash.'/', (string) $file->getRealPath());
         $file_paths[] = '/'.$this->web_path.$parts[1];
       }
     } else {
@@ -171,7 +161,7 @@ class ExtractedCatrobatFile
   {
     $xml = file_get_contents($this->path.'code.xml');
     $matches = [];
-    preg_match_all('#>(.*[a-zA-Z].*)<#', $xml, $matches);
+    preg_match_all('#>(.*[a-zA-Z].*)<#', (string) $xml, $matches);
 
     return array_unique($matches[1]);
   }
@@ -274,7 +264,7 @@ class ExtractedCatrobatFile
       } elseif (RemixUrlIndicator::SUFFIX_INDICATOR == $current_character) {
         if (RemixUrlParsingState::TOKEN == $state) {
           $extracted_url = trim($temp);
-          if (false === strpos($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0) {
+          if (!str_contains($extracted_url, RemixUrlIndicator::SEPARATOR) && strlen($extracted_url) > 0) {
             $extracted_remixes[] = new RemixData($extracted_url);
           }
           $temp = '';
@@ -287,7 +277,7 @@ class ExtractedCatrobatFile
     }
 
     if (0 == count($extracted_remixes) && strlen($remixes_string) > 0
-      && false === strpos($remixes_string, RemixUrlIndicator::SEPARATOR)) {
+      && !str_contains($remixes_string, RemixUrlIndicator::SEPARATOR)) {
       $extracted_remixes[] = new RemixData($remixes_string);
     }
 

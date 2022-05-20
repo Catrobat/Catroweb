@@ -30,15 +30,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class ProjectsApiTest extends DefaultTestCase
 {
-  /**
-   * @var ProjectsApi|MockObject
-   */
-  protected $object;
+  protected ProjectsApi|MockObject $object;
 
-  /**
-   * @var ProjectsApiFacade|MockObject
-   */
-  protected $facade;
+  protected ProjectsApiFacade|MockObject $facade;
 
   protected function setUp(): void
   {

@@ -19,13 +19,9 @@ class AchievementsAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'achievements';
 
-  protected AchievementManager $achievement_manager;
-
-  public function __construct(?string $code, ?string $class, ?string $baseControllerName, AchievementManager $achievement_manager)
+  public function __construct(?string $code, ?string $class, ?string $baseControllerName, protected AchievementManager $achievement_manager)
   {
     parent::__construct($code, $class, $baseControllerName);
-
-    $this->achievement_manager = $achievement_manager;
   }
 
   protected function configureRoutes(RouteCollectionInterface $collection): void
@@ -65,7 +61,7 @@ class AchievementsAdmin extends AbstractAdmin
       ->add('banner_color')
       ->add('enabled')
       ->add('unlocked_by', 'string', [
-        'accessor' => function ($subject): string { return $this->getUnlockedByCount($subject).' users'; },
+        'accessor' => fn ($subject): string => $this->getUnlockedByCount($subject).' users',
       ])
     ;
   }

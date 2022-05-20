@@ -14,16 +14,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemixController extends AbstractController
 {
-  private RouterInterface $router;
-  private ScreenshotRepository $screenshot_repository;
-  private RemixManager $remix_manager;
-
-  public function __construct(RouterInterface $router, ScreenshotRepository $screenshot_repository,
-                              RemixManager $remix_manager)
+  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager)
   {
-    $this->router = $router;
-    $this->screenshot_repository = $screenshot_repository;
-    $this->remix_manager = $remix_manager;
   }
 
   /**

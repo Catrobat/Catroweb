@@ -7,11 +7,11 @@ class SpeakStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'speak ';
+  final public const BEGIN_STRING = 'speak ';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * SpeakStatement constructor.

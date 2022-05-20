@@ -13,13 +13,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class BroadcastNotificationController extends CRUDController
 {
-  protected NotificationManager $notification_manager;
-  protected UserManager $user_manager;
-
-  public function __construct(NotificationManager $notification_service, UserManager $user_manager)
+  public function __construct(protected NotificationManager $notification_manager, protected UserManager $user_manager)
   {
-    $this->notification_manager = $notification_service;
-    $this->user_manager = $user_manager;
   }
 
   public function listAction(Request $request): Response

@@ -11,7 +11,18 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class CommentNotification extends CatroNotification
 {
+  /*
+   *  You have to set this parameter otherwise the wrong template will be rendered.
+   */
+  private string $twig_template = 'Notifications/NotificationTypes/comment_notification.html.twig';
+
   /**
+   * CommentNotification constructor.
+   *
+   * @param User        $user    the user to which this CommentNotification should be shown
+   * @param UserComment $comment the UserComment which triggered this CommentNotification
+   */
+  public function __construct(User $user, /**
    * The UserComment which triggered this CommentNotification. If the UserComment gets deleted,
    * this CommentNotification gets deleted as well.
    *
@@ -26,23 +37,9 @@ class CommentNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?UserComment $comment;
-
-  /*
-   *  You have to set this parameter otherwise the wrong template will be rendered.
-   */
-  private string $twig_template = 'Notifications/NotificationTypes/comment_notification.html.twig';
-
-  /**
-   * CommentNotification constructor.
-   *
-   * @param User        $user    the user to which this CommentNotification should be shown
-   * @param UserComment $comment the UserComment which triggered this CommentNotification
-   */
-  public function __construct(User $user, UserComment $comment)
+  private ?UserComment $comment)
   {
     parent::__construct($user, '', '', 'comment');
-    $this->comment = $comment;
   }
 
   /**

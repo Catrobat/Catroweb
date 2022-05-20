@@ -16,29 +16,18 @@ class FormulaResolver
     return $formulas;
   }
 
-  /**
-   * @param mixed $formula
-   */
-  private static function resolveFormula($formula): ?string
+  private static function resolveFormula(?SimpleXMLElement $formula): ?string
   {
     $resolved_formula = null;
-    if (null != $formula) {
-      switch ($formula->type) {
-        case Constants::OPERATOR_FORMULA_TYPE:
-          $resolved_formula = FormulaResolver::resolveFormula($formula->leftChild)
-            .' '.FormulaResolver::resolveOperator($formula->value)
-            .' '.FormulaResolver::resolveFormula($formula->rightChild);
-          break;
-        case Constants::FUNCTION_FORMULA_TYPE:
-          $resolved_formula = FormulaResolver::resolveFunction($formula);
-          break;
-        case Constants::BRACKET_FORMULA_TYPE:
-          $resolved_formula = '('.FormulaResolver::resolveFormula($formula->rightChild).')';
-          break;
-        default:
-          $resolved_formula = (string) $formula->value;
-          break;
-      }
+    if (null !== $formula) {
+      $resolved_formula = match ((string) $formula->type) {
+        Constants::OPERATOR_FORMULA_TYPE => FormulaResolver::resolveFormula($formula->leftChild)
+          .' '.FormulaResolver::resolveOperator($formula->value)
+          .' '.FormulaResolver::resolveFormula($formula->rightChild),
+        Constants::FUNCTION_FORMULA_TYPE => FormulaResolver::resolveFunction($formula),
+        Constants::BRACKET_FORMULA_TYPE => '('.FormulaResolver::resolveFormula($formula->rightChild).')',
+        default => (string) $formula->value,
+      };
     }
 
     return $resolved_formula;
@@ -49,8 +38,6 @@ class FormulaResolver
    */
   private static function resolveFunction($formula): string
   {
-    $resolved_function = null;
-
     if ('TRUE' == $formula->value) {
       $resolved_function = 'true';
     } elseif ('FALSE' == $formula->value) {
@@ -68,57 +55,23 @@ class FormulaResolver
     return $resolved_function;
   }
 
-  /**
-   * @param mixed $operator
-   */
-  private static function resolveOperator($operator): ?string
+  private static function resolveOperator(SimpleXMLElement $operator): ?string
   {
-    $resolved_operator = null;
-    switch ($operator) {
-      case Constants::PLUS_OPERATOR:
-        $resolved_operator = '+';
-        break;
-      case Constants::MINUS_OPERATOR:
-        $resolved_operator = '-';
-        break;
-      case Constants::MULT_OPERATOR:
-        $resolved_operator = '*';
-        break;
-      case Constants::DIVIDE_OPERATOR:
-        $resolved_operator = '/';
-        break;
-      case Constants::EQUAL_OPERATOR:
-        $resolved_operator = '=';
-        break;
-      case Constants::NOT_EQUAL_OPERATOR:
-        $resolved_operator = '!=';
-        break;
-      case Constants::GREATER_OPERATOR:
-        $resolved_operator = '>';
-        break;
-      case Constants::GREATER_EQUAL_OPERATOR:
-        $resolved_operator = '>=';
-        break;
-      case Constants::SMALLER_OPERATOR:
-        $resolved_operator = '<';
-        break;
-      case Constants::SMALLER_EQUAL_OPERATOR:
-        $resolved_operator = '<=';
-        break;
-      case Constants::NOT_OPERATOR:
-        $resolved_operator = 'NOT';
-        break;
-      case Constants::OR_OPERATOR:
-        $resolved_operator = 'OR';
-        break;
-      case Constants::AND_OPERATOR:
-        $resolved_operator = 'AND';
-        break;
-      default:
-        $resolved_operator = null;
-        break;
-    }
-
-    return $resolved_operator;
+    return match ((string) $operator) {
+      Constants::PLUS_OPERATOR => '+',
+      Constants::MINUS_OPERATOR => '-',
+      Constants::MULT_OPERATOR => '*',
+      Constants::DIVIDE_OPERATOR => '/',
+      Constants::EQUAL_OPERATOR => '=',
+      Constants::NOT_EQUAL_OPERATOR => '!=',
+      Constants::GREATER_OPERATOR => '>',
+      Constants::GREATER_EQUAL_OPERATOR => '>=',
+      Constants::SMALLER_OPERATOR => '<',
+      Constants::SMALLER_EQUAL_OPERATOR => '<=',
+      Constants::NOT_OPERATOR => 'NOT',
+      Constants::OR_OPERATOR => 'OR',
+      Constants::AND_OPERATOR => 'AND',
+      default => null,
+    };
   }
 }

@@ -10,11 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
 {
-  private MediaLibraryApiFacade $facade;
-
-  public function __construct(MediaLibraryApiFacade $facade)
+  public function __construct(private readonly MediaLibraryApiFacade $facade)
   {
-    $this->facade = $facade;
   }
 
   /**
@@ -25,7 +22,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     $limit = $this->getDefaultLimitOnNull($limit);
     $offset = $this->getDefaultOffsetOnNull($offset);
     $flavor = $this->getDefaultFlavorOnNull($flavor);
-    $package_name = $package_name ?? '';
+    $package_name ??= '';
 
     $found_media_files = $this->facade->getLoader()->searchMediaLibraryFiles($query, $flavor, $package_name, $limit, $offset);
 

@@ -16,11 +16,8 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DownloadMediaPackageController extends AbstractController
 {
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(EntityManagerInterface $entity_manager)
+  public function __construct(private readonly EntityManagerInterface $entity_manager)
   {
-    $this->entity_manager = $entity_manager;
   }
 
   /**

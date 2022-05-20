@@ -7,11 +7,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class RequestHelper
 {
-  protected RequestStack $request_stack;
-
-  public function __construct(RequestStack $request_stack)
+  public function __construct(protected RequestStack $request_stack)
   {
-    $this->request_stack = $request_stack;
   }
 
   public function getRequestStack(): RequestStack
@@ -60,7 +57,7 @@ class RequestHelper
     $user_agent_attributes = explode(' ', strtolower($user_agent));
 
     foreach ($user_agent_attributes as $attribute) {
-      if (false !== strpos($attribute, 'theme/')) {
+      if (str_contains($attribute, 'theme/')) {
         return str_replace('theme/', '', $attribute);
       }
     }

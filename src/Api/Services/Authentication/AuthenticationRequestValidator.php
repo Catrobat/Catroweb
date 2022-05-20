@@ -8,6 +8,7 @@ use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
+use JsonException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -26,7 +27,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
       $payload = $client->verifyIdToken($id_token);
 
       return boolval($payload);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return false;
     }
   }
@@ -36,7 +37,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
     try {
       $public_key = getenv('FB_OAUTH_PUBLIC_KEY');
       $decoded = JWT::decode($id_token, new Key($public_key, 'RS256'));
-    } catch (Exception $e) {
+    } catch (Exception) {
       return false;
     }
 
@@ -51,7 +52,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
 
   public function validateAppleIdToken(string $id_token): bool
   {
-    $jwt = $this->jwt_decode($id_token);
+    $jwt = self::jwt_decode($id_token);
     if (!$jwt || !isset($jwt['header']['kid'])) {
       return false;
     }
@@ -60,7 +61,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
     $client = new Client();
     $res = $client->request('GET', 'https://appleid.apple.com/auth/keys');
     $body = $res->getBody()->getContents();
-    $keys_raw = json_decode($body, true);
+    $keys_raw = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
     $keys = $keys_raw['keys'];
     $public_key = [];
     foreach ($keys as $key) {
@@ -70,7 +71,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
       }
     }
 
-    if (count($public_key) < 1) {
+    if ((is_countable($public_key) ? count($public_key) : 0) < 1) {
       return false;
     }
 
@@ -79,7 +80,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
     try {
       $PEM = $jwkConverter->toPEM($public_key);
       $decoded = JWT::decode($id_token, new Key($PEM, 'RS256'));
-    } catch (Exception $e) {
+    } catch (Exception) {
       return false;
     }
 
@@ -91,14 +92,21 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
     return true;
   }
 
+  /**
+   * @throws JsonException
+   */
   public static function jwt_decode(string $id_token): ?array
   {
     try {
       [$header, $payload] = explode('.', $id_token, 3);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return null;
     }
-    $header = json_decode(base64_decode($header, true), true);
+    try {
+      $header = json_decode(base64_decode($header, true), true, 512, JSON_THROW_ON_ERROR);
+    } catch (JsonException) {
+      return null;
+    }
     // if the token was urlencoded, do some fixes to ensure that it is valid base64 encoded
     $payload = str_replace(['-', '_'], ['+', '/'], $payload);
     // complete token if needed
@@ -113,7 +121,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
       default:
         return null;
     }
-    $payload = json_decode(base64_decode($payload, true), true);
+    $payload = json_decode(base64_decode($payload, true), true, 512, JSON_THROW_ON_ERROR);
 
     return ['header' => $header, 'payload' => $payload];
   }

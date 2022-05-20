@@ -7,15 +7,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CookieService
 {
-  private int $jwtTokenLifetime;
-  private int $refreshTokenLifetime;
-  private RouterInterface $router;
-
-  public function __construct(int $jwtTokenLifetime, int $refreshTokenLifetime, RouterInterface $router)
+  public function __construct(private readonly int $jwtTokenLifetime, private readonly int $refreshTokenLifetime, private readonly RouterInterface $router)
   {
-    $this->jwtTokenLifetime = $jwtTokenLifetime;
-    $this->refreshTokenLifetime = $refreshTokenLifetime;
-    $this->router = $router;
   }
 
   /**
@@ -57,7 +50,7 @@ class CookieService
   public static function clearCookie(string $cookie): void
   {
     if (isset($_COOKIE[$cookie])) {
-      setcookie($cookie, '', time() - 3600, '/');
+      setcookie($cookie, '', ['expires' => time() - 3600, 'path' => '/']);
       unset($_COOKIE[$cookie]);
     }
   }

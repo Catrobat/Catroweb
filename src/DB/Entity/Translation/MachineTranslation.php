@@ -17,26 +17,6 @@ abstract class MachineTranslation
   protected ?int $id = null;
 
   /**
-   * @ORM\Column(type="string", length=5)
-   */
-  protected string $source_language;
-
-  /**
-   * @ORM\Column(type="string", length=5)
-   */
-  protected string $target_language;
-
-  /**
-   * @ORM\Column(type="string")
-   */
-  protected string $provider;
-
-  /**
-   * @ORM\Column(type="integer")
-   */
-  protected int $usage_count;
-
-  /**
    * @ORM\Column(type="float")
    */
   protected float $usage_per_month;
@@ -51,12 +31,20 @@ abstract class MachineTranslation
    */
   protected DateTime $created_at;
 
-  public function __construct(string $source_language, string $target_language, string $provider, int $usage_count = 1)
+  public function __construct(/**
+   * @ORM\Column(type="string", length=5)
+   */
+  protected string $source_language, /**
+   * @ORM\Column(type="string", length=5)
+   */
+  protected string $target_language, /**
+   * @ORM\Column(type="string")
+   */
+  protected string $provider, /**
+   * @ORM\Column(type="integer")
+   */
+  protected int $usage_count = 1)
   {
-    $this->source_language = $source_language;
-    $this->target_language = $target_language;
-    $this->provider = $provider;
-    $this->usage_count = $usage_count;
     $this->usage_per_month = $usage_count;
   }
 

@@ -4,7 +4,6 @@ namespace App\Application\Controller\Project;
 
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\LikeNotification;
@@ -20,7 +19,6 @@ use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\NoResultException;
 use Exception;
@@ -39,41 +37,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProgramController extends AbstractController
 {
-  private ScreenshotRepository $screenshot_repository;
-  private ProgramManager $program_manager;
-  private ElapsedTimeStringFormatter $elapsed_time;
-  private ExtractedFileRepository $extracted_file_repository;
-  private NotificationRepository $notification_repo;
-  private NotificationManager $notification_service;
-  private TranslatorInterface $translator;
-  private ParameterBagInterface $parameter_bag;
-  private EventDispatcherInterface $event_dispatcher;
-  private ProgramFileRepository $file_repository;
-  private TranslationDelegate $translation_delegate;
-
-  public function __construct(ScreenshotRepository $screenshot_repository,
-                              ProgramManager $program_manager,
-                              ElapsedTimeStringFormatter $elapsed_time,
-                              ExtractedFileRepository $extracted_file_repository,
-                              NotificationRepository $notification_repo,
-                              NotificationManager $notification_service,
-                              TranslatorInterface $translator,
-                              ParameterBagInterface $parameter_bag,
-                              EventDispatcherInterface $event_dispatcher,
-                              ProgramFileRepository $file_repository,
-                              TranslationDelegate $translation_delegate)
-  {
-    $this->screenshot_repository = $screenshot_repository;
-    $this->program_manager = $program_manager;
-    $this->elapsed_time = $elapsed_time;
-    $this->extracted_file_repository = $extracted_file_repository;
-    $this->notification_repo = $notification_repo;
-    $this->notification_service = $notification_service;
-    $this->translator = $translator;
-    $this->parameter_bag = $parameter_bag;
-    $this->event_dispatcher = $event_dispatcher;
-    $this->file_repository = $file_repository;
-    $this->translation_delegate = $translation_delegate;
+  public function __construct(
+    private readonly ScreenshotRepository $screenshot_repository,
+    private readonly ProgramManager $program_manager,
+    private readonly ElapsedTimeStringFormatter $elapsed_time,
+    private readonly ExtractedFileRepository $extracted_file_repository,
+    private readonly NotificationRepository $notification_repo,
+    private readonly NotificationManager $notification_service,
+    private readonly TranslatorInterface $translator,
+    private readonly ParameterBagInterface $parameter_bag,
+    private readonly EventDispatcherInterface $event_dispatcher,
+    private readonly ProgramFileRepository $file_repository,
+    private readonly TranslationDelegate $translation_delegate
+  ) {
   }
 
   /**
@@ -186,7 +162,7 @@ class ProgramController extends AbstractController
 
     try {
       $this->program_manager->changeLike($project, $user, $type, $action);
-    } catch (InvalidArgumentException $exception) {
+    } catch (InvalidArgumentException) {
       if ($request->isXmlHttpRequest()) {
         return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
@@ -223,9 +199,7 @@ class ProgramController extends AbstractController
 
     $user_locale = $request->getLocale();
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(function ($type_id) {
-      return ProgramLike::$TYPE_NAMES[$type_id];
-    }, $this->program_manager->findProgramLikeTypes($project->getId()));
+    $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->program_manager->findProgramLikeTypes($project->getId()));
 
     return new JsonResponse([
       'totalLikeCount' => [
@@ -512,16 +486,12 @@ class ProgramController extends AbstractController
    */
   public function projectCustomTranslationAction(Request $request, string $id): Response
   {
-    switch ($request->getMethod()) {
-      case 'PUT':
-        return $this->projectCustomTranslationPutAction($request, $id);
-      case 'GET':
-        return $this->projectCustomTranslationGetAction($request, $id);
-      case 'DELETE':
-        return $this->projectCustomTranslationDeleteAction($request, $id);
-      default:
-        return new Response(null, Response::HTTP_BAD_REQUEST);
-    }
+    return match ($request->getMethod()) {
+      'PUT' => $this->projectCustomTranslationPutAction($request, $id),
+        'GET' => $this->projectCustomTranslationGetAction($request, $id),
+        'DELETE' => $this->projectCustomTranslationDeleteAction($request, $id),
+        default => new Response(null, Response::HTTP_BAD_REQUEST),
+    };
   }
 
   /**
@@ -576,7 +546,7 @@ class ProgramController extends AbstractController
       'languageVersion' => $program->getLanguageVersion(),
       'downloads' => $program->getDownloads() + $program->getApkDownloads(),
       'views' => $program->getViews(),
-      'filesize' => sprintf('%.2f', $program->getFilesize() / 1048576),
+      'filesize' => sprintf('%.2f', $program->getFilesize() / 1_048_576),
       'age' => $this->elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
       'referrer' => $referrer,
       'id' => $program->getId(),
@@ -602,37 +572,6 @@ class ProgramController extends AbstractController
         ['id' => 'DESC']
       )
       ;
-  }
-
-  private function findUserPrograms(?User $user, Program $program): ?Collection
-  {
-    $user_programs = null;
-    if (null !== $user) {
-      /** @var ArrayCollection $programs */
-      $programs = $user->getPrograms();
-      $user_programs = $programs->matching(Criteria::create()
-        ->where(Criteria::expr()->eq('id', $program->getId())));
-    }
-
-    return $user_programs;
-  }
-
-  private function checkReportedByUser(Program $program, ?User $user): bool
-  {
-    $isReportedByUser = false;
-    if (null === $user) {
-      return $isReportedByUser;
-    }
-    $em = $this->getDoctrine()->getManager();
-    $reported_program = $em->getRepository(ProgramInappropriateReport::class)
-      ->findOneBy(['program' => $program->getId()])
-    ;
-
-    if ($reported_program) {
-      $isReportedByUser = ($user === $reported_program->getReportingUser());
-    }
-
-    return $isReportedByUser;
   }
 
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response

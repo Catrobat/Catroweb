@@ -54,35 +54,17 @@ class ProgramManagerTest extends TestCase
    */
   private $screenshot_repository;
 
-  /**
-   * @var EntityManager|MockObject
-   */
-  private $entity_manager;
+  private EntityManager|MockObject $entity_manager;
 
-  /**
-   * @var EventDispatcherInterface|MockObject
-   */
-  private $event_dispatcher;
+  private EventDispatcherInterface|MockObject $event_dispatcher;
 
-  /**
-   * @var AddProgramRequest|MockObject
-   */
-  private $request;
+  private AddProgramRequest|MockObject $request;
 
-  /**
-   * @var ExtractedCatrobatFile|MockObject
-   */
-  private $extracted_file;
+  private ExtractedCatrobatFile|MockObject $extracted_file;
 
-  /**
-   * @var ProgramBeforeInsertEvent|MockObject
-   */
-  private $programBeforeInsertEvent;
+  private ProgramBeforeInsertEvent|MockObject $programBeforeInsertEvent;
 
-  /**
-   * @var ProgramAfterInsertEvent|MockObject
-   */
-  private $programAfterInsertEvent;
+  private ProgramAfterInsertEvent|MockObject $programAfterInsertEvent;
 
   /**
    * @throws Exception

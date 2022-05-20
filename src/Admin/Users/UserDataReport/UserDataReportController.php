@@ -10,18 +10,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserDataReportController extends CRUDController
 {
-  protected UserManager $user_manager;
-  protected NotificationRepository $notification_repository;
-  protected EntityManagerInterface $entity_manager;
-
-  public function __construct(
-      UserManager $user_manager,
-      NotificationRepository $notification_repo,
-      EntityManagerInterface $entity_manager)
+  public function __construct(protected UserManager $user_manager, protected NotificationRepository $notification_repository, protected EntityManagerInterface $entity_manager)
   {
-    $this->entity_manager = $entity_manager;
-    $this->notification_repository = $notification_repo;
-    $this->user_manager = $user_manager;
   }
 
   /**

@@ -7,11 +7,11 @@ class SetLookStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'switch to look ';
+  final public const BEGIN_STRING = 'switch to look ';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * SetLookStatement constructor.
