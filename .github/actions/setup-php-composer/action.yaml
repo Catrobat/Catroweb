@@ -3,17 +3,10 @@ description: 'Install php and composer vendor libraries. Caching is enabled for 
 runs:
   using: "composite"
   steps:
-    - name: "Setup PHP 7.4"
+    - name: "Setup PHP 8.1"
       uses: shivammathur/setup-php@v2
       with:
-        php-version: 7.4
-
-    - name: "Install dependencies (php-imagick)"
-      shell: bash
-      run: |
-        sudo apt-get update
-        sudo apt-get upgrade
-        sudo apt-get install php-imagick
+        php-version: 8.1
 
     - name: "Ensure composer configuration is valid"
       shell: bash

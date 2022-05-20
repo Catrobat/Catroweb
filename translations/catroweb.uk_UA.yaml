@@ -27,8 +27,8 @@ reportIt: Так, повідомте про це!
 areYouSure: Ти впевнений?
 noWayOfReturn: Немає можливості відновити свої дії!
 download: Download
-name: Name
-description: Description
+name: Ім'я
+description: Опис
 noDescription: Опис відсутній.
 credits: Credits
 noCredits: No credits available.
@@ -853,7 +853,7 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_description: 'Опис'
       toggle_allow_comments: 'Коментарі'
       toggle_privacy: 'Public'
 media_library:

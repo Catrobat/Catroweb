@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
 pleaseWait: "Vänligen vänta..."
 projects: "Program"
-users: "Users"
+users: "Användare"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "här"
@@ -381,7 +381,7 @@ menu:
 login:
   login: Logga in
   button:
-    loginNow: Login now
+    loginNow: Logga in nu
     createAccount: Skapa konto
     forgetPassword: Forget password?
   oauth:
@@ -425,9 +425,9 @@ resetPassword:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
     description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    tryAgain: "försök igen"
   email:
-    title: "Hi!"
+    title: "Hej!"
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
@@ -601,7 +601,7 @@ pmd:
   failed:
     text: Project upload failed.
 codeview:
-  title: 'Code view'
+  title: 'Kodvy'
   showCode: 'Visa kod'
   hideCode: 'Dölj kod'
   showStatistics: 'Visa kodstatistik'
@@ -729,17 +729,17 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'ny'
   overview:
     header: 'Achievements'
     most_recent_achievement:
       title: 'Newest Achievement'
       x_out_of_y: '%unlocked% out of %total% unlocked'
     tab_unlocked:
-      title: 'Unlocked'
+      title: 'Olåst'
       empty: "You haven't unlocked any achievements yet."
     tab_locked:
-      title: 'Locked'
+      title: 'Låst'
       empty: "You have already unlocked all achievements."
   popup:
     new:
@@ -766,7 +766,7 @@ achievements:
         title: 'Initiative'
         description: 'Add your first profile picture'
       verified_developer:
-        title: 'Novice'
+        title: 'Nybörjare'
         description: 'Create a user account'
       coding_jam_09_2021:
         title: "Coding Jam '21"
@@ -778,21 +778,21 @@ achievements:
         title: "Trilingual"
         description: "Translate your projects to 3 languages"
       linguist:
-        title: "Linguist"
+        title: "Lingvist"
         description: "Translate your projects to 5 languages"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
-      title: Game
+      title: Spel
     animation:
       title: Animation
     story:
       title: Story
     music:
-      title: Music
+      title: Musik
     art:
-      title: Art
+      title: Konst
     experimental:
       title: Experimental
     tutorial:
@@ -817,23 +817,23 @@ extensions:
 studio:
   details:
     public: 'public'
-    private: 'private'
+    private: 'privat'
     join: 'Join'
-    leave: 'Leave'
-    showMore: 'show more'
-    showLess: 'show less'
+    leave: 'Lämna'
+    showMore: 'visa mer'
+    showLess: 'visa mindre'
     remove_project: 'Remove from studio'
     remove_project_error: 'Failed to remove project from studio!'
     remove_project_success: 'project removed successfully from studio!'
     no_projects: 'Studio does not contain any projects yet'
     updateCoverError: 'Something went wrong while updating the studio cover!'
     projects:
-      title: 'projects'
+      title: 'projekt'
     comments:
       title: 'Kommentarer'
       type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
+      replies: 'svar'
+      send: 'skicka'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
       post_error: 'Something went wrong while posting your comment. Try again later.'

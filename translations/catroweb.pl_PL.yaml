@@ -496,7 +496,7 @@ success:
   token: OK
   upload: Projekt został wysłany pomyślnie!
   imgUpload: Twoje zdjęcie zostało pomyślnie przesłane!
-  report: Twoje zgłoszenie zostało pomyślnie wysłane!
+  report: Twoje zgłoszenie zostało wysłane!
 time:
   minutes.ago: '{0} < 1 minuta temu |{1}1 minuta temu |]1,Inf] %count% minut(y) temu'
   hours.ago: '{1}1 godzina temu |]1,Inf] %count%  godzin(y) temu'

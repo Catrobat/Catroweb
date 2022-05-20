@@ -21,7 +21,7 @@ discordChat: Чат Discord
 passwordsNoMatch: Пароли не совпадают.
 error: Ошибка
 cancel: Отменить
-report: Сообщить о проблеме
+report: Пожаловаться
 deleteIt: Да, удалить!
 reportIt: Да, сообщить об этом!
 areYouSure: Вы уверены?
@@ -169,7 +169,7 @@ programs:
   comments: Комментарии
   send: Отправить
   delete: Удалить
-  report: Сообщить о проблеме
+  report: Пожаловаться
   report_popup: Жалоба на комментарий принята.
   report_popup_header: Жалоба была отправлена
   deleted_popup: Комментарий был успешно удален.
