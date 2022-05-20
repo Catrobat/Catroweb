@@ -43,7 +43,7 @@ Feature: Get featured ios programs (deprecated)
         "CatrobatInformation":
         {
           "BaseUrl":"http://pocketcode.org/",
-          "TotalProjects":"1",
+          "TotalProjects":1,
           "ProjectsExtension":".catrobat"
         }
       }

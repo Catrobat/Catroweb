@@ -21,19 +21,19 @@ RUN apt-get update && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php7.4-cli \
-    php7.4-common \
-    php7.4-curl \
-    php7.4-dom \
-    php7.4-gd \
-    php7.4-imagick \
-    php7.4-intl \
-    php7.4-mbstring \
-    php7.4-mysql \
-    php7.4-xdebug \
-    php7.4-xml \
-    php7.4-zip \
-    libapache2-mod-php7.4 \
+    php8.1-cli \
+    php8.1-common \
+    php8.1-curl \
+    php8.1-dom \
+    php8.1-gd \
+    php8.1-imagick \
+    php8.1-intl \
+    php8.1-mbstring \
+    php8.1-mysql \
+    php8.1-xdebug \
+    php8.1-xml \
+    php8.1-zip \
+    libapache2-mod-php8.1 \
     zlibc \
     acl \
     make \
@@ -54,8 +54,8 @@ RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
 # Overwrite php config:
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/apache2/php.ini
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/7.4/cli/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.1/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.1/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb
