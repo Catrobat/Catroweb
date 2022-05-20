@@ -13,7 +13,7 @@ education: Istruzione
 chat: Chat e forum
 others: Altri
 tutorials: Guida
-googlePlay: Google Play
+googlePlay: Google Play Store
 iosAppStore: IOS App store
 huaweiAppGallery: AppGallery di Huawei
 instagram: Instagram
@@ -21,7 +21,7 @@ discordChat: Chat su Discord
 passwordsNoMatch: Le due password non coincidono.
 error: Errore
 cancel: Annulla
-report: Report
+report: Rapporto
 deleteIt: Sì, cancellalo!
 reportIt: Sì, segnalalo!
 areYouSure: Sei sicuro?
@@ -30,7 +30,7 @@ download: Scarica
 name: Nome
 description: Descrizione
 noDescription: Nessuna descrizione disponibile.
-credits: Riconoscimenti
+credits: Note e crediti
 noCredits: Nessun riconoscimento disponibile.
 notesAndCreditsDescription: Come hai creato questo progetto? Hai usato idee, script o opere altrui? Ringraziali qui.
 country: Paese
@@ -169,7 +169,7 @@ programs:
   comments: Commenti
   send: Invia
   delete: Eliminare
-  report: Report
+  report: Rapporto
   report_popup: Il commento è stato segnalato correttamente.
   report_popup_header: Segnalato
   deleted_popup: Il commento è stato eliminato.

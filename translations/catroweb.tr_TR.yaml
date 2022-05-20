@@ -494,7 +494,7 @@ success:
   token: Tamam
   upload: Proje başarıyla yüklendi!
   imgUpload: Resminiz başarıyla yüklendi!
-  report: Geri bildiriminiz başarıyla gönderildi!
+  report: Raporunuz başarıyla gönderildi!
 time:
   minutes.ago: '{0} < 1 dakika önce |{1}1 dakika önce |]1,Inf] %count% dakika önce'
   hours.ago: '{1}1 saat önce |]1,Inf] %count% saat önce'

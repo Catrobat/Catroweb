@@ -853,7 +853,7 @@ studio:
     admin_settings:
       title: 'General Settings'
       studio_name: 'Studio Name'
-      studio_description: 'Description'
+      studio_description: 'Опис'
       toggle_allow_comments: 'Коментарі'
       toggle_privacy: 'Public'
 media_library:

@@ -13,7 +13,7 @@ education: शिक्षा
 chat: चैट और फ़ोरम
 others: अन्य
 tutorials: मदद
-googlePlay: गूगल प्ले
+googlePlay: गूगल प्ले स्टोर
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: इंस्टाग्राम
@@ -21,7 +21,7 @@ discordChat: डिस्कॉर्ड चैट
 passwordsNoMatch: पासवर्ड मेल नहीं खाते।
 error: त्रुटि
 cancel: रद्द करें
-report: रिपोर्ट
+report: विवरण
 deleteIt: हाँ, इसे हटा दें!
 reportIt: हाँ, रिपोर्ट करें!
 areYouSure: वाकई में?
@@ -169,7 +169,7 @@ programs:
   comments: टिप्पणियाँ
   send: भेजें
   delete: मिटायें
-  report: रिपोर्ट
+  report: विवरण
   report_popup: टिप्पणी को सफलतापूर्वक रिपोर्ट किया गया
   report_popup_header: रिपोर्ट कर दिया
   deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया था।
