@@ -11,17 +11,17 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="extension")
  * @ORM\Entity(repositoryClass=ExtensionRepository::class)
  */
-class Extension
+class Extension implements \Stringable
 {
   /**
    * Static Tags - added/updated with UpdateTagsCommand.
    */
-  public const ARDUINO = 'arduino';
-  public const DRONE = 'drone';
-  public const PHIRO = 'phiro';
-  public const RASPBERRY_PI = 'raspberry_pi';
-  public const EMBROIDERY = 'embroidery';
-  public const MINDSTORMS = 'mindstorms';
+  final public const ARDUINO = 'arduino';
+  final public const DRONE = 'drone';
+  final public const PHIRO = 'phiro';
+  final public const RASPBERRY_PI = 'raspberry_pi';
+  final public const EMBROIDERY = 'embroidery';
+  final public const MINDSTORMS = 'mindstorms';
 
   /**
    * @ORM\Id
@@ -55,7 +55,7 @@ class Extension
     $this->programs = new ArrayCollection();
   }
 
-  public function __toString()
+  public function __toString(): string
   {
     return $this->internal_title;
   }

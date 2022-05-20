@@ -12,13 +12,8 @@ use Exception;
 
 final class ProjectsApiProcessor extends AbstractApiProcessor
 {
-  private ProgramManager $project_manager;
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(ProgramManager $project_manager, EntityManagerInterface $entity_manager)
+  public function __construct(private readonly ProgramManager $project_manager, private readonly EntityManagerInterface $entity_manager)
   {
-    $this->project_manager = $project_manager;
-    $this->entity_manager = $entity_manager;
   }
 
   /**

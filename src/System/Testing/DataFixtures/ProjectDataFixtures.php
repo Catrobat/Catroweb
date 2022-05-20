@@ -25,34 +25,19 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class ProjectDataFixtures
 {
-  private string $FIXTURE_DIR;
+  private readonly string $FIXTURE_DIR;
 
-  private string $GENERATED_FIXTURE_DIR;
+  private readonly string $GENERATED_FIXTURE_DIR;
 
-  private string $EXTRACT_DIR;
-
-  private EntityManagerInterface $entity_manager;
-
-  private UserManager $user_manager;
-
-  private ApkRepository $apk_repository;
-
-  private ProgramFileRepository $project_file_repository;
+  private readonly string $EXTRACT_DIR;
 
   private static int $number_of_projects = 0;
 
-  private UserDataFixtures $user_data_fixtures;
-
-  public function __construct(UserManager $user_manager,
-                              EntityManagerInterface $entity_manager, ProgramFileRepository $project_file_repository,
-                              ApkRepository $apk_repository, UserDataFixtures $user_data_fixtures,
+  public function __construct(private readonly UserManager $user_manager,
+                              private readonly EntityManagerInterface $entity_manager, private readonly ProgramFileRepository $project_file_repository,
+                              private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
                               ParameterBagInterface $parameter_bag)
   {
-    $this->user_manager = $user_manager;
-    $this->entity_manager = $entity_manager;
-    $this->project_file_repository = $project_file_repository;
-    $this->apk_repository = $apk_repository;
-    $this->user_data_fixtures = $user_data_fixtures;
     $this->FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.source');
     $this->GENERATED_FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.target');
     $this->EXTRACT_DIR = (string) $parameter_bag->get('catrobat.file.extract.dir');
@@ -121,7 +106,7 @@ class ProjectDataFixtures
 
     if (!empty($config['tags'])) {
       $tag_repo = $this->entity_manager->getRepository(Tag::class);
-      $arr_tag_internal_title = explode(',', $config['tags']);
+      $arr_tag_internal_title = explode(',', (string) $config['tags']);
       foreach ($arr_tag_internal_title as $internal_title) {
         /** @var Tag $tag */
         $tag = $tag_repo->findOneBy(['internal_title' => trim($internal_title)]);
@@ -131,7 +116,7 @@ class ProjectDataFixtures
 
     if (isset($config['extensions']) && '' !== $config['extensions']) {
       $extension_repo = $this->entity_manager->getRepository(Extension::class);
-      $arr_extension_internal_title = explode(',', $config['extensions']);
+      $arr_extension_internal_title = explode(',', (string) $config['extensions']);
       foreach ($arr_extension_internal_title as $internal_title) {
         /** @var Extension $extension */
         $extension = $extension_repo->findOneBy(['internal_title' => $internal_title]);

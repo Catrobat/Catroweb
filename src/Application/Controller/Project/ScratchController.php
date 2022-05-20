@@ -11,12 +11,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ScratchController extends AbstractController
 {
-  protected ScratchManager $scratch_manager;
   protected AsyncHttpClient $async_http_client;
 
-  public function __construct(ScratchManager $scratch_manager)
+  public function __construct(protected ScratchManager $scratch_manager)
   {
-    $this->scratch_manager = $scratch_manager;
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
   }
 

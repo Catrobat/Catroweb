@@ -18,16 +18,9 @@ class SpecialUpdateCommand extends Command
    */
   protected static $defaultName = 'catrobat:update:special';
 
-  protected EntityManagerInterface $entity_manager;
-  protected AchievementManager $achievement_manager;
-  protected UserManager $user_manager;
-
-  public function __construct(EntityManagerInterface $entity_manager, AchievementManager $achievement_manager, UserManager $user_manager)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementManager $achievement_manager, protected UserManager $user_manager)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->achievement_manager = $achievement_manager;
-    $this->user_manager = $user_manager;
   }
 
   protected function configure(): void

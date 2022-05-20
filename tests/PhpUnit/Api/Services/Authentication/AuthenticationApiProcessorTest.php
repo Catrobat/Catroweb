@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class AuthenticationApiProcessorTest extends DefaultTestCase
 {
-  /**
-   * @var AuthenticationApiProcessor|MockObject
-   */
-  protected $object;
+  protected AuthenticationApiProcessor|MockObject $object;
 
   protected function setUp(): void
   {

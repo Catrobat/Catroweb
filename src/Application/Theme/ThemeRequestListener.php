@@ -11,21 +11,12 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ThemeRequestListener
 {
-  private ParameterBagInterface $parameter_bag;
-
-  private RouterInterface $router;
-
-  private RequestHelper $app_request;
-
   private string $routing_theme;
 
   private string $flavor;
 
-  public function __construct(ParameterBagInterface $parameter_bag, RouterInterface $router, RequestHelper $app_request)
+  public function __construct(private readonly ParameterBagInterface $parameter_bag, private readonly RouterInterface $router, private readonly RequestHelper $app_request)
   {
-    $this->parameter_bag = $parameter_bag;
-    $this->router = $router;
-    $this->app_request = $app_request;
     $this->routing_theme = (string) $parameter_bag->get('umbrellaTheme');
     $this->flavor = (string) $parameter_bag->get('defaultFlavor');
   }

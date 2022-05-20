@@ -6,11 +6,8 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class RefreshBearerCookieOnKernelResponse
 {
-  protected RefreshTokenService $refresh_token_service;
-
-  public function __construct(RefreshTokenService $refresh_token_service)
+  public function __construct(protected RefreshTokenService $refresh_token_service)
   {
-    $this->refresh_token_service = $refresh_token_service;
   }
 
   public function onKernelResponse(ResponseEvent $event): void

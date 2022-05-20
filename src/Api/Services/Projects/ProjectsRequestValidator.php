@@ -11,13 +11,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ProjectsRequestValidator extends AbstractRequestValidator
 {
-  private UserManager $user_manager;
-
-  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, UserManager $user_manager)
+  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager)
   {
     parent::__construct($validator, $translator);
-
-    $this->user_manager = $user_manager;
   }
 
   public function validateUserExists(string $user_id): bool

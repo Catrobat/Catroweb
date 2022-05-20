@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ApkRepository
 {
-  private ?string $dir;
+  private readonly ?string $dir;
 
   public function __construct(ParameterBagInterface $parameter_bag)
   {

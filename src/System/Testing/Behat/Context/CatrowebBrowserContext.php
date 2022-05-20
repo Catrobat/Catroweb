@@ -35,13 +35,13 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class CatrowebBrowserContext extends BrowserContext
 {
-  public const AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
+  final public const AVATAR_DIR = './tests/TestData/DataFixtures/AvatarImages/';
 
-  public const ALREADY_IN_DB_USER = 'AlreadyinDB';
+  final public const ALREADY_IN_DB_USER = 'AlreadyinDB';
 
   protected bool $use_real_oauth_javascript_code = false;
 
-  protected ?Program $my_program;
+  protected ?Program $my_program = null;
 
   // -------------------------------------------------------------------------------------------------------------------
   //  Initialization
@@ -429,7 +429,7 @@ class CatrowebBrowserContext extends BrowserContext
             ->click()
           ;
           break;
-      case 'Locale':
+      case \Locale::class:
           $page
             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
             ->click()
@@ -1041,7 +1041,7 @@ class CatrowebBrowserContext extends BrowserContext
     $page = $this->getSession()->getPage();
     $video = $page->find('css', '.video-container > iframe');
     Assert::assertNotNull($video, 'Video not found!');
-    Assert::assertTrue(false !== strpos($video->getAttribute('src'), (string) $url));
+    Assert::assertTrue(str_contains((string) $video->getAttribute('src'), (string) $url));
   }
 
   /**
@@ -1051,14 +1051,14 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldSeeTheSliderWithTheValues($values): void
   {
-    $slider_items = explode(',', $values);
+    $slider_items = explode(',', (string) $values);
     $owl_items = $this->getSession()->getPage()->findAll('css', '.carousel-item');
     $owl_items_count = count($owl_items);
     Assert::assertEquals($owl_items_count, count($slider_items));
 
     for ($index = 0; $index < $owl_items_count; ++$index) {
       $url = $slider_items[$index];
-      if (0 !== strpos($url, 'http://')) {
+      if (!str_starts_with($url, 'http://')) {
         $program = $this->getProgramManager()->findOneByName($url);
         Assert::assertNotNull($program);
         Assert::assertNotNull($program->getId());
@@ -1797,7 +1797,7 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws Exception
    */
-  public function weCantTestAnythingHere(): void
+  public function weCantTestAnythingHere(): never
   {
     throw new Exception(':(');
   }

@@ -14,23 +14,15 @@ use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 class PasswordResetRequestedSubscriber implements EventSubscriberInterface
 {
   use TranslatorAwareTrait;
-  protected MailerAdapter $mailer;
-  protected UserManager $user_manager;
-  protected LoggerInterface $logger;
-  protected ResetPasswordHelperInterface $reset_password_helper;
 
   public function __construct(
-    UserManager $user_manager,
-    MailerAdapter $mailer,
-    LoggerInterface $logger,
-    ResetPasswordHelperInterface $reset_password_helper,
+    protected UserManager $user_manager,
+    protected MailerAdapter $mailer,
+    protected LoggerInterface $logger,
+    protected ResetPasswordHelperInterface $reset_password_helper,
     TranslatorInterface $translator)
   {
     $this->initTranslator($translator);
-    $this->user_manager = $user_manager;
-    $this->mailer = $mailer;
-    $this->logger = $logger;
-    $this->reset_password_helper = $reset_password_helper;
   }
 
   public function onPasswordResetRequested(PasswordResetRequestedEvent $event): void

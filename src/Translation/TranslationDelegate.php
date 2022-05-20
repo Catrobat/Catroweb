@@ -11,16 +11,12 @@ use Symfony\Component\Intl\Languages;
 
 class TranslationDelegate
 {
-  private ProjectCustomTranslationRepository $project_custom_translation_repository;
-  private array $apis;
-  private ProjectMachineTranslationRepository $project_machine_translation_repository;
+  private readonly array $apis;
 
-  public function __construct(ProjectCustomTranslationRepository $project_custom_translation_repository,
-                              ProjectMachineTranslationRepository $project_machine_translation_repository,
+  public function __construct(private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
+                              private readonly ProjectMachineTranslationRepository $project_machine_translation_repository,
                               TranslationApiInterface ...$apis)
   {
-    $this->project_custom_translation_repository = $project_custom_translation_repository;
-    $this->project_machine_translation_repository = $project_machine_translation_repository;
     $this->apis = $apis;
   }
 
@@ -180,17 +176,15 @@ class TranslationDelegate
   {
     $apis = $this->apis;
 
-    usort($apis, function (TranslationApiInterface $api_1, TranslationApiInterface $api_2) use ($text, $source_language, $target_language) {
-      return -($api_1->getPreference($text, $source_language, $target_language) <=>
-        $api_2->getPreference($text, $source_language, $target_language));
-    });
+    usort($apis, fn (TranslationApiInterface $api_1, TranslationApiInterface $api_2) => -($api_1->getPreference($text, $source_language, $target_language) <=>
+      $api_2->getPreference($text, $source_language, $target_language)));
 
     return $apis;
   }
 
   private function validateLanguage(?string $language): void
   {
-    if (2 == strlen($language)) {
+    if (2 == strlen((string) $language)) {
       if (strtolower($language) != $language) {
         throw new InvalidArgumentException('2-character language code has to be lower case');
       }
@@ -198,7 +192,7 @@ class TranslationDelegate
       if (!Languages::exists($language)) {
         throw new InvalidArgumentException('2-character language code is invalid');
       }
-    } elseif (5 == strlen($language)) {
+    } elseif (5 == strlen((string) $language)) {
       if ('-' != $language[2]) {
         throw new InvalidArgumentException('Invalid 5-character language code format');
       }

@@ -17,12 +17,12 @@ class StudioUser
   /**
    * adding new constant requires adding it to the enum in the annotation of the column.
    */
-  public const ROLE_ADMIN = 'admin';
-  public const ROLE_MEMBER = 'member';
+  final public const ROLE_ADMIN = 'admin';
+  final public const ROLE_MEMBER = 'member';
 
-  public const STATUS_ACTIVE = 'active';
-  public const STATUS_BANNED = 'banned';
-  public const STATUS_PENDING_REQUEST = 'pending_request';
+  final public const STATUS_ACTIVE = 'active';
+  final public const STATUS_BANNED = 'banned';
+  final public const STATUS_PENDING_REQUEST = 'pending_request';
 
   private array $roles = [self::ROLE_ADMIN, self::ROLE_MEMBER];
   private array $statuses = [self::STATUS_ACTIVE, self::STATUS_BANNED, self::STATUS_PENDING_REQUEST];
@@ -32,7 +32,7 @@ class StudioUser
    * @ORM\Column(name="id", type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected ?int $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
@@ -65,7 +65,7 @@ class StudioUser
   /**
    * @ORM\Column(name="updated_on", type="datetime", length=300, nullable=true)
    */
-  protected ?DateTime $updated_on;
+  protected ?DateTime $updated_on = null;
 
   /**
    * @ORM\Column(name="created_on", type="datetime", length=300, nullable=false)

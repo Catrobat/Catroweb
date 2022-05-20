@@ -4,10 +4,6 @@ namespace App\Admin\Tools\Maintenance;
 
 class RemovableMemory
 {
-  public string $name;
-
-  public string $description;
-
   public ?string $size = null;
 
   public ?int $size_raw = null;
@@ -24,10 +20,8 @@ class RemovableMemory
 
   public ?string $archive_command_name = null;
 
-  public function __construct(string $name = '', string $description = '')
+  public function __construct(public string $name = '', public string $description = '')
   {
-    $this->name = $name;
-    $this->description = $description;
   }
 
   public function setSize(string $size): void

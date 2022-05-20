@@ -7,11 +7,11 @@ class ClearGraphicEffectStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'clear graphic effects';
+  final public const BEGIN_STRING = 'clear graphic effects';
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * ClearGraphicEffectStatement constructor.

@@ -7,15 +7,12 @@ class RemixData
   /**
    * @var string
    */
-  public const SCRATCH_DOMAIN = 'scratch.mit.edu';
-
-  private string $remix_url;
+  final public const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
   private $remix_url_data;
 
-  public function __construct(string $remix_url)
+  public function __construct(private readonly string $remix_url)
   {
-    $this->remix_url = $remix_url;
     $this->remix_url_data = parse_url($this->remix_url);
   }
 
@@ -33,14 +30,14 @@ class RemixData
     $remix_url_path = $this->remix_url_data['path'];
 
     $uuid_pattern = '@[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}@';
-    preg_match($uuid_pattern, $remix_url_path, $id_matches);
+    preg_match($uuid_pattern, (string) $remix_url_path, $id_matches);
 
     if (count($id_matches) > 0) {
       return $id_matches[0];
     }
 
     // legacy id filtering for old projects where ids where numbers
-    preg_match('#(\/\d+(\/)?)$#', $remix_url_path, $id_matches);
+    preg_match('#(\/\d+(\/)?)$#', (string) $remix_url_path, $id_matches);
     if (count($id_matches) > 0) {
       return str_replace('/', '', $id_matches[0]);
     }
@@ -54,7 +51,7 @@ class RemixData
       return false;
     }
 
-    return false !== strpos($this->remix_url_data['host'], self::SCRATCH_DOMAIN);
+    return str_contains((string) $this->remix_url_data['host'], self::SCRATCH_DOMAIN);
   }
 
   public function isAbsoluteUrl(): bool

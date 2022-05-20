@@ -16,12 +16,6 @@ use Exception;
 class ScratchProgram
 {
   /**
-   * @ORM\Id
-   * @ORM\Column(type="guid", nullable=false)
-   */
-  protected string $id;
-
-  /**
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected ?string $name = null;
@@ -46,9 +40,12 @@ class ScratchProgram
    *
    * @throws Exception
    */
-  public function __construct(string $id)
+  public function __construct(/**
+   * @ORM\Id
+   * @ORM\Column(type="guid", nullable=false)
+   */
+  protected string $id)
   {
-    $this->id = $id;
     $this->updateLastModifiedTimestamp();
   }
 

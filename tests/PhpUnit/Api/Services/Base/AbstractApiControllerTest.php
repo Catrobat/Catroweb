@@ -15,10 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
  */
 final class AbstractApiControllerTest extends DefaultTestCase
 {
-  /**
-   * @var AbstractApiFacade|MockObject
-   */
-  protected $object;
+  protected AbstractApiFacade|MockObject $object;
 
   protected function setUp(): void
   {

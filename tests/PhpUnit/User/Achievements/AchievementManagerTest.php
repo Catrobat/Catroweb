@@ -14,10 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class AchievementManagerTest extends DefaultTestCase
 {
-  /**
-   * @var AchievementManager|MockObject
-   */
-  protected $object;
+  protected AchievementManager|MockObject $object;
 
   protected function setUp(): void
   {

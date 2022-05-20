@@ -2,9 +2,6 @@
 
 namespace App\System\Commands\Maintenance;
 
-use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\ProgramManager;
-use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -18,23 +15,11 @@ class CleanCompressedProjectsCommand extends Command
 {
   protected static $defaultName = 'catrobat:clean:compressed';
 
-  private ProgramManager $program_manager;
+  private readonly ?string $compressed_path;
 
-  private ExtractedFileRepository $extracted_file_repository;
-
-  private EntityManagerInterface $entity_manager;
-
-  private ?string $compressed_path;
-
-  public function __construct(ProgramManager $program_manager,
-                              ExtractedFileRepository $extracted_file_repository,
-                              EntityManagerInterface $entity_manager,
-                              ParameterBagInterface $parameter_bag)
+  public function __construct(ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->extracted_file_repository = $extracted_file_repository;
-    $this->program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
     $this->compressed_path = (string) $parameter_bag->get('catrobat.file.storage.dir');
     if (!$this->compressed_path) {
       throw new Exception('Invalid extract path given');

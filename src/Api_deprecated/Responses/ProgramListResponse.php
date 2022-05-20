@@ -7,13 +7,10 @@ namespace App\Api_deprecated\Responses;
  */
 class ProgramListResponse
 {
-  private array $programs;
-  private int $total_programs;
-
-  public function __construct($programs, $total_programs)
-  {
-    $this->programs = $programs;
-    $this->total_programs = $total_programs;
+  public function __construct(
+    private array $programs,
+    private int $total_programs
+  ) {
   }
 
   public function getPrograms(): array

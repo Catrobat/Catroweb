@@ -7,11 +7,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ElapsedTimeStringFormatter
 {
-  private TranslatorInterface $translator;
-
-  public function __construct(TranslatorInterface $translator)
+  public function __construct(private readonly TranslatorInterface $translator)
   {
-    $this->translator = $translator;
   }
 
   /**

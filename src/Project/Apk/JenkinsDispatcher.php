@@ -7,8 +7,6 @@ use Symfony\Component\Routing\RouterInterface;
 
 class JenkinsDispatcher
 {
-  protected RouterInterface $router;
-
   protected array $config;
 
   /**
@@ -16,13 +14,12 @@ class JenkinsDispatcher
    *
    * @throws Exception
    */
-  public function __construct(array $config, RouterInterface $router)
+  public function __construct(array $config, protected RouterInterface $router)
   {
     if (!isset($config['url'])) {
       throw new Exception();
     }
     $this->config = $config;
-    $this->router = $router;
   }
 
   public function sendBuildRequest(string $id): string
@@ -45,7 +42,7 @@ class JenkinsDispatcher
   protected function dispatch($params): string
   {
     $url = $this->config['url'].'?'.http_build_query($params);
-    file_get_contents($url);
+    $r = file_get_contents($url);
 
     return $url;
   }

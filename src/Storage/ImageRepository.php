@@ -10,19 +10,17 @@ use Symfony\Component\HttpFoundation\UrlHelper;
 
 class ImageRepository
 {
-  private ?string $example_dir;
+  private readonly ?string $example_dir;
 
-  private ?string $featured_dir;
+  private readonly ?string $featured_dir;
 
-  private ?string $example_path;
+  private readonly ?string $example_path;
 
-  private ?string $featured_path;
-
-  private ?UrlHelper $urlHelper;
+  private readonly ?string $featured_path;
 
   private ?Imagick $imagick = null;
 
-  public function __construct(ParameterBagInterface $parameter_bag, ?UrlHelper $urlHelper = null)
+  public function __construct(ParameterBagInterface $parameter_bag, private readonly ?UrlHelper $urlHelper = null)
   {
     $example_dir = (string) $parameter_bag->get('catrobat.exampleimage.dir');
     $example_path = (string) $parameter_bag->get('catrobat.exampleimage.path');
@@ -37,7 +35,6 @@ class ImageRepository
     $this->example_path = $example_path;
     $this->featured_dir = $featured_dir;
     $this->featured_path = $featured_path;
-    $this->urlHelper = $urlHelper;
   }
 
   /**

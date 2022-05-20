@@ -14,10 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ValidationWrapperTest extends DefaultTestCase
 {
-  /**
-   * @var ValidationWrapper|MockObject
-   */
-  protected $object;
+  protected ValidationWrapper|MockObject $object;
 
   protected function setUp(): void
   {

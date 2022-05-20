@@ -6,11 +6,8 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class VersionStrategy implements VersionStrategyInterface
 {
-  protected string $app_version;
-
-  public function __construct(string $app_version)
+  public function __construct(protected string $app_version)
   {
-    $this->app_version = $app_version;
   }
 
   public function getVersion(string $path): string
@@ -18,7 +15,7 @@ class VersionStrategy implements VersionStrategyInterface
     $hash = '';
     $app_env = $_ENV['APP_ENV'];
     if ('dev' === $app_env) {
-      $hash = '--'.md5(strval(rand(0, 999999)));
+      $hash = '--'.md5(strval(random_int(0, 999999)));
     }
 
     if (preg_match('/\?/', $path)) {

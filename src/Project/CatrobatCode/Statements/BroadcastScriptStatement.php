@@ -7,7 +7,7 @@ class BroadcastScriptStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'when receive message ';
+  final public const BEGIN_STRING = 'when receive message ';
 
   /**
    * @var mixed

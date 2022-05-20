@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ProjectsResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var ProjectsResponseManager|MockObject
-   */
-  protected $object;
+  protected ProjectsResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

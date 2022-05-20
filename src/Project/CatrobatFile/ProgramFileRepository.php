@@ -12,13 +12,13 @@ class ProgramFileRepository
 
   protected string $extract_dir;
 
-  private Filesystem $filesystem;
+  private readonly Filesystem $filesystem;
 
-  private CatrobatFileCompressor $file_compressor;
-
-  public function __construct(string $catrobat_file_storage_dir, string $catrobat_file_extract_dir,
-                              CatrobatFileCompressor $file_compressor)
-  {
+  public function __construct(
+    string $catrobat_file_storage_dir,
+    string $catrobat_file_extract_dir,
+    private CatrobatFileCompressor $file_compressor
+  ) {
     FileHelper::verifyDirectoryExists($catrobat_file_storage_dir);
     FileHelper::verifyDirectoryExists($catrobat_file_extract_dir);
 
@@ -26,7 +26,6 @@ class ProgramFileRepository
     $this->extract_dir = $catrobat_file_extract_dir;
 
     $this->filesystem = new Filesystem();
-    $this->file_compressor = $file_compressor;
   }
 
   public function zipProject(string $path, string $id): void

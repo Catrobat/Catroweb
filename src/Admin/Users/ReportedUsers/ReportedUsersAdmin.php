@@ -34,27 +34,27 @@ class ReportedUsersAdmin extends AbstractAdmin
 
     if (isset($parameters['_sort_by']) && 'getReportedCommentsCount' === $parameters['_sort_by']) {
       $qb
-        ->leftJoin('App\DB\Entity\User\Comment\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
-        ->leftJoin('App\DB\Entity\Project\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
-        ->leftJoin('App\DB\Entity\Project\ProgramInappropriateReport', 'repProg', Join::WITH, 'p.id = repProg.program')
+        ->leftJoin(\App\DB\Entity\User\Comment\UserComment::class, 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
+        ->leftJoin(\App\DB\Entity\Project\Program::class, 'p', Join::WITH, $rootAlias.'.id = p.user')
+        ->leftJoin(\App\DB\Entity\Project\ProgramInappropriateReport::class, 'repProg', Join::WITH, 'p.id = repProg.program')
         ->where($qb->expr()->eq('user_comment.isReported', '1'))
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(user_comment.user )', $parameters['_sort_order'])
           ;
     } elseif (isset($parameters['_sort_by']) && 'getProgramInappropriateReportsCount' === $parameters['_sort_by']) {
       $qb
-        ->leftJoin('App\DB\Entity\User\Comment\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
-        ->leftJoin('App\DB\Entity\Project\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
-        ->leftJoin('App\DB\Entity\Project\ProgramInappropriateReport', 'repProg', Join::WITH, 'p.id = repProg.program')
+        ->leftJoin(\App\DB\Entity\User\Comment\UserComment::class, 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
+        ->leftJoin(\App\DB\Entity\Project\Program::class, 'p', Join::WITH, $rootAlias.'.id = p.user')
+        ->leftJoin(\App\DB\Entity\Project\ProgramInappropriateReport::class, 'repProg', Join::WITH, 'p.id = repProg.program')
         ->where($qb->expr()->isNotNull('repProg.program'))
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(repProg.program)', $parameters['_sort_order'])
       ;
     } else {
       $qb
-        ->leftJoin('App\DB\Entity\User\Comment\UserComment', 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
-        ->leftJoin('App\DB\Entity\Project\Program', 'p', Join::WITH, $rootAlias.'.id = p.user')
-        ->leftJoin('App\DB\Entity\Project\ProgramInappropriateReport', 'repProg', Join::WITH, 'p.id = repProg.program')
+        ->leftJoin(\App\DB\Entity\User\Comment\UserComment::class, 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
+        ->leftJoin(\App\DB\Entity\Project\Program::class, 'p', Join::WITH, $rootAlias.'.id = p.user')
+        ->leftJoin(\App\DB\Entity\Project\ProgramInappropriateReport::class, 'repProg', Join::WITH, 'p.id = repProg.program')
         ->where($qb->expr()->eq('user_comment.isReported', '1'))->orWhere($qb->expr()->isNotNull('repProg.program'))
      ;
     }

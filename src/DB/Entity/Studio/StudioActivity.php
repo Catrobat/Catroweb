@@ -17,9 +17,9 @@ class StudioActivity
   /**
    * adding new constant requires adding it to the enum in the annotation of the column.
    */
-  public const TYPE_COMMENT = 'comment';
-  public const TYPE_PROJECT = 'project';
-  public const TYPE_USER = 'user';
+  final public const TYPE_COMMENT = 'comment';
+  final public const TYPE_PROJECT = 'project';
+  final public const TYPE_USER = 'user';
 
   private array $activity_types = [self::TYPE_COMMENT, self::TYPE_PROJECT, self::TYPE_USER];
 
@@ -28,7 +28,7 @@ class StudioActivity
    * @ORM\Column(name="id", type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected ?int $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})

@@ -11,15 +11,8 @@ use Symfony\Component\HttpKernel\Event\TerminateEvent;
 
 class CustomTranslationAchievementListener
 {
-  private AchievementManager $achievement_manager;
-  private ProgramManager $program_manager;
-  private LoggerInterface $logger;
-
-  public function __construct(AchievementManager $achievement_manager, ProgramManager $program_manager, LoggerInterface $logger)
+  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProgramManager $program_manager, private readonly LoggerInterface $logger)
   {
-    $this->achievement_manager = $achievement_manager;
-    $this->program_manager = $program_manager;
-    $this->logger = $logger;
   }
 
   public function onTerminateEvent(TerminateEvent $event): void

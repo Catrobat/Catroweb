@@ -8,11 +8,8 @@ use App\User\UserManager;
 
 final class UserApiLoader extends AbstractApiLoader
 {
-  private UserManager $user_manager;
-
-  public function __construct(UserManager $user_manager)
+  public function __construct(private readonly UserManager $user_manager)
   {
-    $this->user_manager = $user_manager;
   }
 
   public function findUserByID(string $id): ?User

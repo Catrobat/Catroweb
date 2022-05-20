@@ -21,15 +21,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UtilityApiTest extends DefaultTestCase
 {
-  /**
-   * @var UtilityApi|MockObject
-   */
-  protected $object;
+  protected UtilityApi|MockObject $object;
 
-  /**
-   * @var UtilityApiFacade|MockObject
-   */
-  protected $facade;
+  protected UtilityApiFacade|MockObject $facade;
 
   protected function setUp(): void
   {

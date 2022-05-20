@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class UserResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var UserResponseManager|MockObject
-   */
-  protected $object;
+  protected UserResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

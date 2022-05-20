@@ -13,13 +13,11 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
 {
-  protected UserManager $user_manager;
   protected array $properties = ['identifier' => 'id'];
 
-  public function __construct(UserManager $userManager, array $properties)
+  public function __construct(protected UserManager $user_manager, array $properties)
   {
     $this->properties = array_merge($this->properties, $properties);
-    $this->user_manager = $userManager;
   }
 
   /**
@@ -28,7 +26,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
   public function connect(UserInterface $user, UserResponseInterface $response): void
   {
     if (!$user instanceof User) {
-      throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', get_class($user)));
+      throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', $user::class));
     }
     // retrieve access token and the ID
     $property = $this->getProperty($response);

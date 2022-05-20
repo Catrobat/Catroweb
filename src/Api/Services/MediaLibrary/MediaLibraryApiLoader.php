@@ -11,17 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 final class MediaLibraryApiLoader extends AbstractApiLoader
 {
-  private MediaPackageFileRepository $media_package_file_repository;
-  private MediaPackageRepository $media_package_repository;
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(MediaPackageFileRepository $media_package_file_repository,
-                              MediaPackageRepository $media_package_repository,
-                              EntityManagerInterface $entity_manager
-  ) {
-    $this->media_package_file_repository = $media_package_file_repository;
-    $this->media_package_repository = $media_package_repository;
-    $this->entity_manager = $entity_manager;
+  public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository, private readonly MediaPackageRepository $media_package_repository, private readonly EntityManagerInterface $entity_manager)
+  {
   }
 
   public function searchMediaLibraryFiles(string $query, string $flavor, string $package_name, int $limit, int $offset): ?array
@@ -43,7 +34,7 @@ final class MediaLibraryApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder()
       ->select('f')
-      ->from('App\DB\Entity\MediaLibrary\MediaPackageFile', 'f')
+      ->from(\App\DB\Entity\MediaLibrary\MediaPackageFile::class, 'f')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;

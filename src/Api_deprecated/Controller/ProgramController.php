@@ -24,10 +24,8 @@ class ProgramController extends AbstractController
    * @deprecated
    *
    * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"}, methods={"GET"})
-   *
-   * @return JsonResponse|ProgramListResponse
    */
-  public function showProgramAction(Request $request, ProgramManager $program_manager)
+  public function showProgramAction(Request $request, ProgramManager $program_manager): JsonResponse|ProgramListResponse
   {
     /** @var ProgramManager $program_manager */
     $id = (string) $request->query->get('id', '0');

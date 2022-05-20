@@ -17,20 +17,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OAuthService
 {
-  private UserManager $user_manager;
-
-  private ValidatorInterface $validator;
-
-  private TranslatorInterface $translator;
-
-  private TokenGenerator $token_generator;
-
-  public function __construct(UserManager $user_manager, ValidatorInterface $validator, TranslatorInterface $translator, TokenGenerator $token_generator)
+  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator)
   {
-    $this->user_manager = $user_manager;
-    $this->validator = $validator;
-    $this->translator = $translator;
-    $this->token_generator = $token_generator;
   }
 
   /**
@@ -130,7 +118,7 @@ class OAuthService
       $google_user = $this->user_manager->findOneBy([
         'google_id' => $gPlusId,
       ]);
-    } catch (Exception $exception) {
+    } catch (Exception) {
       return new JsonResponse('Token invalid', 777);
     }
 

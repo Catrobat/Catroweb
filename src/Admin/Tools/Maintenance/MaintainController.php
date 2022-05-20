@@ -16,11 +16,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class MaintainController extends CRUDController
 {
-  protected KernelInterface $kernel;
-
-  public function __construct(KernelInterface $kernel)
+  public function __construct(protected KernelInterface $kernel)
   {
-    $this->kernel = $kernel;
   }
 
   /**

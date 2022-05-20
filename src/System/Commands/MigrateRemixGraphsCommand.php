@@ -34,42 +34,22 @@ class MigrateRemixGraphsCommand extends Command
 {
   protected static $defaultName = 'catrobat:remixgraph:migrate';
 
-  private AsyncHttpClient $async_http_client;
+  private readonly AsyncHttpClient $async_http_client;
 
-  private UserManager $user_manager;
+  private readonly string $app_root_dir;
 
-  private ProgramManager $program_manager;
+  private ?OutputInterface $output = null;
 
-  private RemixManager $remix_manager;
+  private ?MigrationFileLock $migration_file_lock = null;
 
-  private EntityManagerInterface $entity_manager;
-
-  private string $app_root_dir;
-
-  private ?OutputInterface $output;
-
-  private ?MigrationFileLock $migration_file_lock;
-
-  private CatrobatFileExtractor $file_extractor;
-
-  private ProgramRepository $program_repository;
-
-  public function __construct(UserManager $user_manager,
-                              ProgramManager $program_manager, RemixManager $remix_manager,
-                              EntityManagerInterface $entity_manager, CatrobatFileExtractor $file_extractor,
-                              ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
+  public function __construct(private readonly UserManager $user_manager,
+                              private readonly ProgramManager $program_manager, private readonly RemixManager $remix_manager,
+                              private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
+                              private readonly ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->remix_manager = $remix_manager;
-    $this->entity_manager = $entity_manager;
     $this->app_root_dir = (string) $parameter_bag->get('kernel.project_dir');
-    $this->output = null;
-    $this->migration_file_lock = null;
-    $this->file_extractor = $file_extractor;
-    $this->program_repository = $program_repository;
   }
 
   public function signalHandler(int $signal_number): void
@@ -307,7 +287,7 @@ class MigrateRemixGraphsCommand extends Command
       $program_file = new File($program_file_path);
       // $extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
       $extracted_file = $this->file_extractor->extract($program_file);
-    } catch (Exception $ex) {
+    } catch (Exception) {
       $progress_bar->clear();
       $output->writeln('<error>Cannot find Catrobat file of Program #'.$program_id.
         ', path of Catrobat file: '.$program_file_path.'</error>');
@@ -356,15 +336,11 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function addRemixData(Program $program, array $remixes_data, bool $is_update = false): void
   {
-    $scratch_remixes_data = array_filter($remixes_data, function (RemixData $remix_data): bool {
-      return $remix_data->isScratchProgram();
-    });
+    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProgram());
     $scratch_info_data = [];
 
     if (count($scratch_remixes_data) > 0) {
-      $scratch_ids = array_map(function (RemixData $data): string {
-        return $data->getProgramId();
-      }, $scratch_remixes_data);
+      $scratch_ids = array_map(fn (RemixData $data): string => $data->getProgramId(), $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
       $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);
@@ -411,7 +387,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->start();
     $number_imported_programs = 0;
 
-    $metadata = $this->entity_manager->getClassMetaData('App\\DB\\Entity\\Project\\Program');
+    $metadata = $this->entity_manager->getClassMetaData(\App\DB\Entity\Project\Program::class);
     $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     $batch_size = 300;

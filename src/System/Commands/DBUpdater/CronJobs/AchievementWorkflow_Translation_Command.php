@@ -16,14 +16,9 @@ class AchievementWorkflow_Translation_Command extends Command
 {
   protected static $defaultName = 'catrobat:workflow:achievement:translation';
 
-  private EntityManagerInterface $entity_manager;
-  private AchievementManager $achievement_manager;
-
-  public function __construct(EntityManagerInterface $entity_manager, AchievementManager $achievement_manager)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly AchievementManager $achievement_manager)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->achievement_manager = $achievement_manager;
   }
 
   protected function configure(): void

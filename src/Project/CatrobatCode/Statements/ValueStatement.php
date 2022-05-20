@@ -6,10 +6,6 @@ use App\Project\CatrobatCode\SyntaxHighlightingConstants;
 
 class ValueStatement extends Statement
 {
-  private $value;
-
-  private $type;
-
   /**
    * ValueStatement constructor.
    *
@@ -19,32 +15,20 @@ class ValueStatement extends Statement
    * @param mixed $value
    * @param mixed $type
    */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value, $type)
+  public function __construct($statementFactory, $xmlTree, $spaces, private $value, private $type)
   {
-    $this->value = $value;
-    $this->type = $type;
-    parent::__construct($statementFactory, $xmlTree, $spaces,
-      $value,
-      '');
+    parent::__construct($statementFactory, $xmlTree, $spaces, $value, '');
   }
 
   public function execute(): string
   {
-    $color = SyntaxHighlightingConstants::VARIABLES;
-    switch ($this->type) {
-      case 'FUNCTION':
-        $color = SyntaxHighlightingConstants::FUNCTIONS;
-        break;
-      case 'OPERATOR':
-        $color = SyntaxHighlightingConstants::FUNCTIONS;
-        break;
-      case 'STRING':
-        $color = SyntaxHighlightingConstants::VALUE;
-        break;
-      case 'NUMBER':
-        $color = SyntaxHighlightingConstants::VALUE;
-        break;
-    }
+    $color = match ((string) $this->type) {
+      'FUNCTION' => SyntaxHighlightingConstants::FUNCTIONS,
+      'OPERATOR' => SyntaxHighlightingConstants::FUNCTIONS,
+      'STRING' => SyntaxHighlightingConstants::VALUE,
+      'NUMBER' => SyntaxHighlightingConstants::VALUE,
+      default => SyntaxHighlightingConstants::VARIABLES,
+    };
 
     return $color.$this->value.SyntaxHighlightingConstants::END.$this->executeChildren();
   }

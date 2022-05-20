@@ -32,26 +32,15 @@ use Symfony\Component\HttpFoundation\File\File;
 class CreateMediaPackageSamplesCommand extends Command
 {
   protected static $defaultName = 'catrobat:create:media-packages-samples';
-  private MediaPackageRepository $media_package_repo;
-  private MediaPackageCategoryRepository $media_package_category_repo;
-  private MediaPackageFileRepository $media_package_file_repo;
-  private ParameterBagInterface $parameter_bag;
-  private FlavorRepository $flavor_repo;
 
   /**
    * CreateMediaPackageSamplesCommand constructor.
    */
-  public function __construct(MediaPackageRepository $media_package_repo, MediaPackageCategoryRepository $media_package_category_repo,
-                              MediaPackageFileRepository $media_package_file_repo, ParameterBagInterface $parameter_bag,
-                              FlavorRepository $flavor_repo)
+  public function __construct(private readonly MediaPackageRepository $media_package_repo, private readonly MediaPackageCategoryRepository $media_package_category_repo,
+                              private readonly MediaPackageFileRepository $media_package_file_repo, private readonly ParameterBagInterface $parameter_bag,
+                              private readonly FlavorRepository $flavor_repo)
   {
     parent::__construct();
-
-    $this->media_package_repo = $media_package_repo;
-    $this->media_package_category_repo = $media_package_category_repo;
-    $this->media_package_file_repo = $media_package_file_repo;
-    $this->parameter_bag = $parameter_bag;
-    $this->flavor_repo = $flavor_repo;
   }
 
   protected function configure(): void

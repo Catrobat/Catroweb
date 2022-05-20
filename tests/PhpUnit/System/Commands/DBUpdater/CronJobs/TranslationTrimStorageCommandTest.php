@@ -13,10 +13,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class TranslationTrimStorageCommandTest extends TestCase
 {
-  /**
-   * @var TranslationTrimStorageCommand|MockObject
-   */
-  protected $object;
+  protected TranslationTrimStorageCommand|MockObject $object;
 
   protected function setUp(): void
   {

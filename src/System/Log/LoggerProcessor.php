@@ -9,13 +9,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class LoggerProcessor
 {
-  private RequestStack $request_stack;
-  private TokenStorageInterface $security_token_storage;
-
-  public function __construct(RequestStack $request_stack, TokenStorageInterface $security_token_storage)
+  public function __construct(private readonly RequestStack $request_stack, private readonly TokenStorageInterface $security_token_storage)
   {
-    $this->request_stack = $request_stack;
-    $this->security_token_storage = $security_token_storage;
   }
 
   public function __invoke(array $record): array
@@ -53,7 +48,7 @@ class LoggerProcessor
   {
     $ip = $request->getClientIp();
 
-    if (false !== strpos($ip, ',')) {
+    if (str_contains((string) $ip, ',')) {
       $ip = substr($ip, 0, strpos($ip, ','));
     }
 

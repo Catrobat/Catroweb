@@ -15,13 +15,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class AchievementsAdminController extends CRUDController
 {
-  protected AchievementManager $achievement_manager;
-  protected KernelInterface $kernel;
-
-  public function __construct(AchievementManager $achievement_manager, KernelInterface $kernel)
+  public function __construct(protected AchievementManager $achievement_manager, protected KernelInterface $kernel)
   {
-    $this->achievement_manager = $achievement_manager;
-    $this->kernel = $kernel;
   }
 
   public function listAction(Request $request = null): Response

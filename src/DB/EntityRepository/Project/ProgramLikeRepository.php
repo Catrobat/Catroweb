@@ -138,7 +138,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
     try {
       $count = $qb->getQuery()->getSingleScalarResult();
-    } catch (NonUniqueResultException $nonUniqueResultException) {
+    } catch (NonUniqueResultException) {
       return false;
     }
 

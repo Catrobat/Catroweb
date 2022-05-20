@@ -13,16 +13,8 @@ use Exception;
 
 class ProjectPostUpdateNotifier
 {
-  protected AchievementManager $achievement_manager;
-  protected TagRepository $tag_repository;
-  private ProjectMachineTranslationRepository $machine_translation_repository;
-
-  public function __construct(AchievementManager $achievement_manager, TagRepository $tag_repository,
-                              ProjectMachineTranslationRepository $machine_translation_repository)
+  public function __construct(protected AchievementManager $achievement_manager, protected TagRepository $tag_repository, private readonly ProjectMachineTranslationRepository $machine_translation_repository)
   {
-    $this->achievement_manager = $achievement_manager;
-    $this->tag_repository = $tag_repository;
-    $this->machine_translation_repository = $machine_translation_repository;
   }
 
   public function postUpdate(Program $project, LifecycleEventArgs $event): void

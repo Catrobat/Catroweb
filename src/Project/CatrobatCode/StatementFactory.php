@@ -79,346 +79,91 @@ use SimpleXMLElement;
 
 class StatementFactory
 {
-  /**
-   * @var string
-   */
-  public const WAIT_STMT = 'WaitBrick';
-  /**
-   * @var string
-   */
-  public const PLAY_SOUND_STMT = 'PlaySoundBrick';
-  /**
-   * @var string
-   */
-  public const STOP_ALL_STMT = 'StopAllSoundsBrick';
-  /**
-   * @var string
-   */
-  public const SET_VOLUME_TO_STMT = 'SetVolumeToBrick';
-  /**
-   * @var string
-   */
-  public const SPEAK_STMT = 'SpeakBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_VOLUME_BY_N_STMT = 'ChangeVolumeByNBrick';
-  /**
-   * @var string
-   */
-  public const BROADCAST_WAIT_STMT = 'BroadcastWaitBrick';
-  /**
-   * @var string
-   */
-  public const REPEAT_STMT = 'RepeatBrick';
-  /**
-   * @var string
-   */
-  public const NOTE_STMT = 'NoteBrick';
-  /**
-   * @var string
-   */
-  public const LOOP_END_STMT = 'LoopEndBrick';
-  /**
-   * @var string
-   */
-  public const FOREVER_STMT = 'ForeverBrick';
-  /**
-   * @var string
-   */
-  public const LOOP_ENDLESS_STMT = 'LoopEndlessBrick';
-  /**
-   * @var string
-   */
-  public const BROADCAST_STMT = 'BroadcastBrick';
-  /**
-   * @var string
-   */
-  public const SET_Y_STMT = 'SetYBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_Y_BY_N_STMT = 'ChangeYByNBrick';
-  /**
-   * @var string
-   */
-  public const TURN_LEFT_STMT = 'TurnLeftBrick';
-  /**
-   * @var string
-   */
-  public const TURN_RIGHT_STMT = 'TurnRightBrick';
-  /**
-   * @var string
-   */
-  public const MOVE_N_STEPS_STMT = 'MoveNStepsBrick';
-  /**
-   * @var string
-   */
-  public const POINT_TO_STMT = 'PointToBrick';
-  /**
-   * @var string
-   */
-  public const IF_LOGIC_BEGIN_STMT = 'IfLogicBeginBrick';
-  /**
-   * @var string
-   */
-  public const IF_LOGIC_ELSE_STMT = 'IfLogicElseBrick';
-  /**
-   * @var string
-   */
-  public const IF_LOGIC_END_STMT = 'IfLogicEndBrick';
-  /**
-   * @var string
-   */
-  public const SET_VARIABLE_STMT = 'SetVariableBrick';
-  /**
-   * @var string
-   */
-  public const REPLACE_ITEM_IN_USER_LIST_STMT = 'ReplaceItemInUserListBrick';
-  /**
-   * @var string
-   */
-  public const INSERT_ITEM_IN_INTO_USER_LIST_STMT = 'InsertItemIntoUserListBrick';
-  /**
-   * @var string
-   */
-  public const DELETE_ITEM_OF_USER_LIST_STMT = 'DeleteItemOfUserListBrick';
-  /**
-   * @var string
-   */
-  public const ADD_ITEM_TO_USER_LIST_STMT = 'AddItemToUserListBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_VARIABLE_STMT = 'ChangeVariableBrick';
-  /**
-   * @var string
-   */
-  public const SET_LOOK_STMT = 'SetLookBrick';
-  /**
-   * @var string
-   */
-  public const HIDE_STMT = 'HideBrick';
-  /**
-   * @var string
-   */
-  public const LED_ON_STMT = 'LedOnBrick';
-  /**
-   * @var string
-   */
-  public const LED_OFF_STMT = 'LedOffBrick';
-  /**
-   * @var string
-   */
-  public const CLEAR_GRAPHICS_EFFECT_STMT = 'ClearGraphicEffectBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_BRIGHTNESS_BY_N_STMT = 'ChangeBrightnessByNBrick';
-  /**
-   * @var string
-   */
-  public const SET_BRIGHTNESS_STMT = 'SetBrightnessBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_TRANSPARENCY_BY_N_STMT = 'ChangeTransparencyByNBrick';
-  /**
-   * @var string
-   */
-  public const SET_TRANSPARENCY_STMT = 'SetTransparencyBrick';
-  /**
-   * @var string
-   */
-  public const SHOW_STMT = 'ShowBrick';
-  /**
-   * @var string
-   */
-  public const NEXT_LOOK_STMT = 'NextLookBrick';
-  /**
-   * @var string
-   */
-  public const SET_SIZE_TO_STMT = 'SetSizeToBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_SIZE_BY_N_STMT = 'ChangeSizeByNBrick';
-  /**
-   * @var string
-   */
-  public const POINT_IN_DIRECTION_STMT = 'PointInDirectionBrick';
-  /**
-   * @var string
-   */
-  public const VIBRATION_STMT = 'VibrationBrick';
-  /**
-   * @var string
-   */
-  public const COME_TO_FRONT_STMT = 'ComeToFrontBrick';
-  /**
-   * @var string
-   */
-  public const GO_N_STEPS_BACK_STMT = 'GoNStepsBackBrick';
-  /**
-   * @var string
-   */
-  public const GLIDE_TO_STMT = 'GlideToBrick';
-  /**
-   * @var string
-   */
-  public const IF_ON_EDGE_BOUNCE_STMT = 'IfOnEdgeBounceBrick';
-  /**
-   * @var string
-   */
-  public const CHANGE_X_BY_N_STMT = 'ChangeXByNBrick';
-  /**
-   * @var string
-   */
-  public const PLACE_AT_STMT = 'PlaceAtBrick';
-  /**
-   * @var string
-   */
-  public const SET_X_STMT = 'SetXBrick';
-  /**
-   * @var string
-   */
-  public const SCRIPT_STMT = 'script';
-  /**
-   * @var string
-   */
-  public const BRICK_STMT = 'brick';
-  /**
-   * @var string
-   */
-  public const SCRIPT_LIST = 'scriptList';
-  /**
-   * @var string
-   */
-  public const BRICK_LIST = 'brickList';
-  /**
-   * @var string
-   */
-  public const LOOK_LIST = 'lookList';
-  /**
-   * @var string
-   */
-  public const SOUND_LIST = 'soundList';
-  /**
-   * @var string
-   */
-  public const START_SCRIPT = 'StartScript';
-  /**
-   * @var string
-   */
-  public const BROADCAST_SCRIPT = 'BroadcastScript';
-  /**
-   * @var string
-   */
-  public const WHEN_SCRIPT = 'WhenScript';
-  /**
-   * @var string
-   */
-  public const NAME_ATTRIBUTE = 'name';
-  /**
-   * @var string
-   */
-  public const TYPE_ATTRIBUTE = 'type';
-  /**
-   * @var string
-   */
-  public const CATEGORY_ATTRIBUTE = 'category';
-  /**
-   * @var string
-   */
-  public const REFERENCE_ATTRIBUTE = 'reference';
-  /**
-   * @var string
-   */
-  public const USER_VARIABLE_STMT = 'userVariable';
-  /**
-   * @var string
-   */
-  public const RIGHT_CHILD_STMT = 'rightChild';
-  /**
-   * @var string
-   */
-  public const LEFT_CHILD_STMT = 'leftChild';
-  /**
-   * @var string
-   */
-  public const USER_LIST_STMT = 'userList';
-  /**
-   * @var string
-   */
-  public const VALUE_STMT = 'value';
-  /**
-   * @var string
-   */
-  public const LOOK_STMT = 'look';
-  /**
-   * @var string
-   */
-  public const SOUND_STMT = 'sound';
-  /**
-   * @var string
-   */
-  public const POINTED_OBJECT_STMT = 'pointedObject';
-  /**
-   * @var string
-   */
-  public const FILE_NAME_STMT = 'fileName';
-  /**
-   * @var string
-   */
-  public const RECEIVED_MESSAGE_STMT = 'receivedMessage';
-  /**
-   * @var string
-   */
-  public const BROADCAST_MESSAGE_STMT = 'broadcastMessage';
-  /**
-   * @var string
-   */
-  public const FORMULA = 'formula';
-  /**
-   * @var string
-   */
-  public const FORMULA_LIST = 'formulaList';
-  /**
-   * @var string
-   */
-  public const SHOW_TEXT_STMT = 'ShowTextBrick';
-  /**
-   * @var string
-   */
-  public const SHOW_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.ShowTextBrick';
-  /**
-   * @var string
-   */
-  public const HIDE_TEXT_STMT = 'HideTextBrick';
-  /**
-   * @var string
-   */
-  public const HIDE_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.HideTextBrick';
-  /**
-   * @var string
-   */
-  public const USER_BRICKS = 'userBricks';
-  /**
-   * @var string
-   */
-  public const IS_USER_BRICK = 'inUserBrick';
-  /**
-   * @var string
-   */
-  public const IS_USER_SCRIPT = 'isUserScript';
-  /**
-   * @var string
-   */
-  public const ACTION = 'action';
-  /**
-   * @var string
-   */
-  public const USER_VARIABLE_NAME = 'userVariableName';
+  final public const WAIT_STMT = 'WaitBrick';
+  final public const PLAY_SOUND_STMT = 'PlaySoundBrick';
+  final public const STOP_ALL_STMT = 'StopAllSoundsBrick';
+  final public const SET_VOLUME_TO_STMT = 'SetVolumeToBrick';
+  final public const SPEAK_STMT = 'SpeakBrick';
+  final public const CHANGE_VOLUME_BY_N_STMT = 'ChangeVolumeByNBrick';
+  final public const BROADCAST_WAIT_STMT = 'BroadcastWaitBrick';
+  final public const REPEAT_STMT = 'RepeatBrick';
+  final public const NOTE_STMT = 'NoteBrick';
+  final public const LOOP_END_STMT = 'LoopEndBrick';
+  final public const FOREVER_STMT = 'ForeverBrick';
+  final public const LOOP_ENDLESS_STMT = 'LoopEndlessBrick';
+  final public const BROADCAST_STMT = 'BroadcastBrick';
+  final public const SET_Y_STMT = 'SetYBrick';
+  final public const CHANGE_Y_BY_N_STMT = 'ChangeYByNBrick';
+  final public const TURN_LEFT_STMT = 'TurnLeftBrick';
+  final public const TURN_RIGHT_STMT = 'TurnRightBrick';
+  final public const MOVE_N_STEPS_STMT = 'MoveNStepsBrick';
+  final public const POINT_TO_STMT = 'PointToBrick';
+  final public const IF_LOGIC_BEGIN_STMT = 'IfLogicBeginBrick';
+  final public const IF_LOGIC_ELSE_STMT = 'IfLogicElseBrick';
+  final public const IF_LOGIC_END_STMT = 'IfLogicEndBrick';
+  final public const SET_VARIABLE_STMT = 'SetVariableBrick';
+  final public const REPLACE_ITEM_IN_USER_LIST_STMT = 'ReplaceItemInUserListBrick';
+  final public const INSERT_ITEM_IN_INTO_USER_LIST_STMT = 'InsertItemIntoUserListBrick';
+  final public const DELETE_ITEM_OF_USER_LIST_STMT = 'DeleteItemOfUserListBrick';
+  final public const ADD_ITEM_TO_USER_LIST_STMT = 'AddItemToUserListBrick';
+  final public const CHANGE_VARIABLE_STMT = 'ChangeVariableBrick';
+  final public const SET_LOOK_STMT = 'SetLookBrick';
+  final public const HIDE_STMT = 'HideBrick';
+  final public const LED_ON_STMT = 'LedOnBrick';
+  final public const LED_OFF_STMT = 'LedOffBrick';
+  final public const CLEAR_GRAPHICS_EFFECT_STMT = 'ClearGraphicEffectBrick';
+  final public const CHANGE_BRIGHTNESS_BY_N_STMT = 'ChangeBrightnessByNBrick';
+  final public const SET_BRIGHTNESS_STMT = 'SetBrightnessBrick';
+  final public const CHANGE_TRANSPARENCY_BY_N_STMT = 'ChangeTransparencyByNBrick';
+  final public const SET_TRANSPARENCY_STMT = 'SetTransparencyBrick';
+  final public const SHOW_STMT = 'ShowBrick';
+  final public const NEXT_LOOK_STMT = 'NextLookBrick';
+  final public const SET_SIZE_TO_STMT = 'SetSizeToBrick';
+  final public const CHANGE_SIZE_BY_N_STMT = 'ChangeSizeByNBrick';
+  final public const POINT_IN_DIRECTION_STMT = 'PointInDirectionBrick';
+  final public const VIBRATION_STMT = 'VibrationBrick';
+  final public const COME_TO_FRONT_STMT = 'ComeToFrontBrick';
+  final public const GO_N_STEPS_BACK_STMT = 'GoNStepsBackBrick';
+  final public const GLIDE_TO_STMT = 'GlideToBrick';
+  final public const IF_ON_EDGE_BOUNCE_STMT = 'IfOnEdgeBounceBrick';
+  final public const CHANGE_X_BY_N_STMT = 'ChangeXByNBrick';
+  final public const PLACE_AT_STMT = 'PlaceAtBrick';
+  final public const SET_X_STMT = 'SetXBrick';
+  final public const SCRIPT_STMT = 'script';
+  final public const BRICK_STMT = 'brick';
+  final public const SCRIPT_LIST = 'scriptList';
+  final public const BRICK_LIST = 'brickList';
+  final public const LOOK_LIST = 'lookList';
+  final public const SOUND_LIST = 'soundList';
+  final public const START_SCRIPT = 'StartScript';
+  final public const BROADCAST_SCRIPT = 'BroadcastScript';
+  final public const WHEN_SCRIPT = 'WhenScript';
+  final public const NAME_ATTRIBUTE = 'name';
+  final public const TYPE_ATTRIBUTE = 'type';
+  final public const CATEGORY_ATTRIBUTE = 'category';
+  final public const REFERENCE_ATTRIBUTE = 'reference';
+  final public const USER_VARIABLE_STMT = 'userVariable';
+  final public const RIGHT_CHILD_STMT = 'rightChild';
+  final public const LEFT_CHILD_STMT = 'leftChild';
+  final public const USER_LIST_STMT = 'userList';
+  final public const VALUE_STMT = 'value';
+  final public const LOOK_STMT = 'look';
+  final public const SOUND_STMT = 'sound';
+  final public const POINTED_OBJECT_STMT = 'pointedObject';
+  final public const FILE_NAME_STMT = 'fileName';
+  final public const RECEIVED_MESSAGE_STMT = 'receivedMessage';
+  final public const BROADCAST_MESSAGE_STMT = 'broadcastMessage';
+  final public const FORMULA = 'formula';
+  final public const FORMULA_LIST = 'formulaList';
+  final public const SHOW_TEXT_STMT = 'ShowTextBrick';
+  final public const SHOW_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.ShowTextBrick';
+  final public const HIDE_TEXT_STMT = 'HideTextBrick';
+  final public const HIDE_TEXT_WITHOUT_ALIAS_STMT = 'org.catrobat.catroid.content.bricks.HideTextBrick';
+  final public const USER_BRICKS = 'userBricks';
+  final public const IS_USER_BRICK = 'inUserBrick';
+  final public const IS_USER_SCRIPT = 'isUserScript';
+  final public const ACTION = 'action';
+  final public const USER_VARIABLE_NAME = 'userVariableName';
 
   private ?CodeObject $currentObject = null;
 
@@ -447,17 +192,17 @@ class StatementFactory
       $tmpStatement = null;
 
       switch ($statement->getName()) {
+        case self::BRICK_LIST:
         case self::SCRIPT_LIST:
           $tmpStatement = new ScriptListStatement($this, $statement, $spaces);
           break;
         case self::SCRIPT_STMT:
           $tmpStatement = $this->generateScriptStatement($statement, $spaces);
           break;
+        case self::SHOW_TEXT_WITHOUT_ALIAS_STMT:
+        case self::HIDE_TEXT_WITHOUT_ALIAS_STMT:
         case self::BRICK_STMT:
           $tmpStatement = $this->generateBrickStatement($statement, $spaces);
-          break;
-        case self::BRICK_LIST:
-          $tmpStatement = new ScriptListStatement($this, $statement, $spaces);
           break;
         case self::SOUND_LIST:
           $tmpStatement = new SoundListStatement($this, $statement, $spaces);
@@ -477,6 +222,7 @@ class StatementFactory
         case self::LEFT_CHILD_STMT:
           $tmpStatement = new LeftChildStatement($this, $statement, 0);
           break;
+        case self::NAME_ATTRIBUTE:
         case self::VALUE_STMT:
           $tmpStatement = $this->generateValueStatement($statement, 0);
           break;
@@ -492,20 +238,11 @@ class StatementFactory
         case self::BROADCAST_MESSAGE_STMT:
           $tmpStatement = $this->generateBroadcastMessageStatement($statement, 0);
           break;
-        case self::SHOW_TEXT_WITHOUT_ALIAS_STMT:
-          $tmpStatement = $this->generateBrickStatement($statement, $spaces);
-          break;
-        case self::HIDE_TEXT_WITHOUT_ALIAS_STMT:
-          $tmpStatement = $this->generateBrickStatement($statement, $spaces);
-          break;
         case self::LOOK_STMT:
           $tmpStatement = $this->generateLookStatement($statement, $spaces);
           break;
         case self::USER_LIST_STMT:
           $tmpStatement = $this->generateUserListStatement($statement, $spaces);
-          break;
-        case self::NAME_ATTRIBUTE:
-          $tmpStatement = $this->generateValueStatement($statement, 0);
           break;
         case self::SOUND_STMT:
           $tmpStatement = $this->generateSoundStatement($statement, $spaces);
@@ -513,15 +250,11 @@ class StatementFactory
         case self::FILE_NAME_STMT:
           $tmpStatement = $this->generateFileNameStatement($statement, $spaces);
           break;
-        case self::USER_BRICKS:
-          break;
         case self::IS_USER_BRICK:
-          break;
         case self::IS_USER_SCRIPT:
-          break;
         case self::ACTION:
-          break;
         case self::USER_VARIABLE_NAME:
+        case self::USER_BRICKS:
           break;
         default:
           $tmpStatement = new UnknownStatement($this, $statement, $spaces);
@@ -718,16 +451,13 @@ class StatementFactory
   private function generateScriptStatement(SimpleXMLElement $statement, int $spaces): Statement
   {
     $children = $statement;
-    switch ((string) $statement[self::TYPE_ATTRIBUTE]) {
-      case self::WHEN_SCRIPT:
-        return new TappedScriptStatement($this, $children, $spaces);
-      case self::START_SCRIPT:
-        return new WhenScriptStatement($this, $children, $spaces);
-      case self::BROADCAST_SCRIPT:
-        return new BroadcastScriptStatement($this, $children, $spaces);
-      default:
-        return new UnknownStatement($this, $statement, $spaces);
-    }
+
+    return match ((string) $statement[self::TYPE_ATTRIBUTE]) {
+      self::WHEN_SCRIPT => new TappedScriptStatement($this, $children, $spaces),
+        self::START_SCRIPT => new WhenScriptStatement($this, $children, $spaces),
+        self::BROADCAST_SCRIPT => new BroadcastScriptStatement($this, $children, $spaces),
+        default => new UnknownStatement($this, $statement, $spaces),
+    };
   }
 
   private function generateValueStatement(SimpleXMLElement $statement, int $spaces): ValueStatement

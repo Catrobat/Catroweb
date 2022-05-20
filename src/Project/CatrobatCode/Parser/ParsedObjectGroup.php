@@ -6,17 +6,13 @@ use SimpleXMLElement;
 
 class ParsedObjectGroup
 {
-  protected SimpleXMLElement$object_group_xml_properties;
-
   protected SimpleXMLElement $name;
 
-  protected array $objects;
+  protected array $objects = [];
 
-  public function __construct(SimpleXMLElement $object_group_xml_properties)
+  public function __construct(protected SimpleXMLElement $object_group_xml_properties)
   {
-    $this->object_group_xml_properties = $object_group_xml_properties;
     $this->name = $this->resolveName();
-    $this->objects = [];
   }
 
   /**

@@ -8,11 +8,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProgramFlavorListener
 {
-  private RequestStack $request_stack;
-
-  public function __construct(RequestStack $stack)
+  public function __construct(private readonly RequestStack $request_stack)
   {
-    $this->request_stack = $stack;
   }
 
   public function onEvent(ProgramBeforePersistEvent $event): void

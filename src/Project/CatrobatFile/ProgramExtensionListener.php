@@ -12,15 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ProgramExtensionListener
 {
-  protected ExtensionRepository $extension_repository;
-  protected LoggerInterface $logger;
-  protected EntityManagerInterface $entity_manager;
-
-  public function __construct(ExtensionRepository $repo, LoggerInterface $logger, EntityManagerInterface $entityManager)
+  public function __construct(protected ExtensionRepository $extension_repository, protected LoggerInterface $logger, protected EntityManagerInterface $entity_manager)
   {
-    $this->extension_repository = $repo;
-    $this->logger = $logger;
-    $this->entity_manager = $entityManager;
   }
 
   public function onEvent(ProgramBeforePersistEvent $event): void
@@ -85,12 +78,12 @@ class ProgramExtensionListener
 
   protected function isAnArduinoProject(string $code_xml): bool
   {
-    return false !== strpos($code_xml, '<brick type="Arduino');
+    return str_contains($code_xml, '<brick type="Arduino');
   }
 
   protected function isAnEmbroideryProject(string $code_xml): bool
   {
-    return false !== strpos($code_xml, '<brick type="StitchBrick">');
+    return str_contains($code_xml, '<brick type="StitchBrick">');
   }
 
   protected function isAMindstormsProject(string $code_xml): bool
@@ -100,7 +93,7 @@ class ProgramExtensionListener
 
   protected function isAPhiroProject(string $code_xml): bool
   {
-    return false !== strpos($code_xml, '<brick type="Phiro');
+    return str_contains($code_xml, '<brick type="Phiro');
   }
 
   /**

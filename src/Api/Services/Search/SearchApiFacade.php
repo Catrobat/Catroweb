@@ -15,49 +15,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class SearchApiFacade extends AbstractApiFacade
 {
-  private SearchResponseManager $response_manager;
-  private SearchApiLoader $loader;
-  private SearchApiProcessor $processor;
-  private SearchRequestValidator $request_validator;
-
-  private UserManager $user_manager;
-  private ProgramManager $program_manager;
-  private TranslatorInterface $translator;
-  private TokenStorageInterface $token_storage;
-  private JWTTokenManagerInterface $jwt_manager;
-  private ImageRepository $image_repository;
-  private ElapsedTimeStringFormatter $time_formatter;
-  private ParameterBagInterface $parameter_bag;
-
   public function __construct(
     AuthenticationManager $authentication_manager,
-    SearchResponseManager $response_manager,
-    SearchApiLoader $loader,
-    SearchApiProcessor $processor,
-    SearchRequestValidator $request_validator,
-    ProgramManager $program_manager,
-    UserManager $user_manager,
-    TranslatorInterface $translator,
-    ElapsedTimeStringFormatter $time_formatter,
-    TokenStorageInterface $token_storage,
-    JWTTokenManagerInterface $jwt_manager,
-    ParameterBagInterface $parameter_bag,
-    ImageRepository $image_repository
+    private readonly SearchResponseManager $response_manager,
+    private readonly SearchApiLoader $loader,
+    private readonly SearchApiProcessor $processor,
+    private readonly SearchRequestValidator $request_validator,
+    private readonly ProgramManager $program_manager,
+    private readonly UserManager $user_manager,
+    private readonly TranslatorInterface $translator,
+    private readonly ElapsedTimeStringFormatter $time_formatter,
+    private readonly TokenStorageInterface $token_storage,
+    private readonly JWTTokenManagerInterface $jwt_manager,
+    private readonly ParameterBagInterface $parameter_bag,
+    private readonly ImageRepository $image_repository
   ) {
     parent::__construct($authentication_manager);
-    $this->response_manager = $response_manager;
-    $this->loader = $loader;
-    $this->processor = $processor;
-    $this->request_validator = $request_validator;
-
-    $this->program_manager = $program_manager;
-    $this->user_manager = $user_manager;
-    $this->translator = $translator;
-    $this->time_formatter = $time_formatter;
-    $this->token_storage = $token_storage;
-    $this->jwt_manager = $jwt_manager;
-    $this->parameter_bag = $parameter_bag;
-    $this->image_repository = $image_repository;
   }
 
   public function getResponseManager(): SearchResponseManager

@@ -21,12 +21,9 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
 {
   use TranslatorAwareTrait;
 
-  protected MediaPackageFileRepository $media_package_file_repository;
-
-  public function __construct(TranslatorInterface $translator, MediaPackageFileRepository $media_package_file_repository)
+  public function __construct(TranslatorInterface $translator, protected MediaPackageFileRepository $media_package_file_repository)
   {
     $this->initTranslator($translator);
-    $this->media_package_file_repository = $media_package_file_repository;
   }
 
   /**
@@ -217,6 +214,6 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
 
   protected function humanFileSize(int $size): string
   {
-    return sprintf('%.2f', $size / 1048576).'MB';
+    return sprintf('%.2f', $size / 1_048_576).'MB';
   }
 }

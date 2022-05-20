@@ -19,7 +19,7 @@ class StudioProgram
    * @ORM\Column(name="id", type="integer")
    * @ORM\GeneratedValue(strategy="AUTO")
    */
-  protected ?int $id;
+  protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
@@ -48,7 +48,7 @@ class StudioProgram
   /**
    * @ORM\Column(name="updated_on", type="datetime", nullable=true)
    */
-  protected ?DateTime $updated_on;
+  protected ?DateTime $updated_on = null;
 
   /**
    * @ORM\Column(name="created_on", type="datetime", nullable=false)

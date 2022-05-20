@@ -13,10 +13,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
  */
 class SpecialUpdaterAdminTest extends DefaultTestCase
 {
-  /**
-   * @var SpecialUpdaterAdmin|MockObject
-   */
-  protected $object;
+  protected SpecialUpdaterAdmin|MockObject $object;
 
   protected function setUp(): void
   {

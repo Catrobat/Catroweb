@@ -54,12 +54,12 @@ class Studio
   /**
    * @ORM\Column(name="updated_on", type="datetime", nullable=true)
    */
-  protected ?DateTime $updated_on;
+  protected ?DateTime $updated_on = null;
 
   /**
    * @ORM\Column(name="created_on", type="datetime", nullable=false)
    */
-  protected ?DateTime $created_on;
+  protected ?DateTime $created_on = null;
 
   public function getId(): ?string
   {

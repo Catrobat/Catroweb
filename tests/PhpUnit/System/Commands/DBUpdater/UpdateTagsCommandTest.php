@@ -15,10 +15,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class UpdateTagsCommandTest extends KernelTestCase
 {
-  /**
-   * @var UpdateTagsCommand|MockObject
-   */
-  protected $object;
+  protected UpdateTagsCommand|MockObject $object;
 
   protected function setUp(): void
   {

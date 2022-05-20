@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="media_package_category")
  */
-class MediaPackageCategory
+class MediaPackageCategory implements \Stringable
 {
   /**
    * @ORM\Id

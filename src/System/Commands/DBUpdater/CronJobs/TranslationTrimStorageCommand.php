@@ -20,12 +20,9 @@ class TranslationTrimStorageCommand extends Command
   private const ONLY_COMMENT = 'only-comment';
   protected static $defaultName = 'catrobat:translation:trim-storage';
 
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(EntityManagerInterface $entity_manager)
+  public function __construct(private readonly EntityManagerInterface $entity_manager)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
   }
 
   protected function configure(): void

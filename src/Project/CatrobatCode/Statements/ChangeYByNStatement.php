@@ -7,11 +7,11 @@ class ChangeYByNStatement extends BaseChangeByNStatement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'Y';
+  final public const BEGIN_STRING = 'Y';
   /**
    * @var string
    */
-  public const END_STRING = ')<br/>';
+  final public const END_STRING = ')<br/>';
 
   /**
    * ChangeYByNStatement constructor.

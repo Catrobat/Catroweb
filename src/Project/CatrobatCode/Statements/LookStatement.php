@@ -8,13 +8,10 @@ use SimpleXMLElement;
 
 class LookStatement extends Statement
 {
-  private ?string $value = null;
-
   private ?Statement $fileName = null;
 
-  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, string $value)
+  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, private readonly ?string $value)
   {
-    $this->value = $value;
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,
       '');

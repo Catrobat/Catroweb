@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class UserRequestValidatorTest extends DefaultTestCase
 {
-  /**
-   * @var UserRequestValidator|MockObject
-   */
-  protected $object;
+  protected UserRequestValidator|MockObject $object;
 
   protected function setUp(): void
   {

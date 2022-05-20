@@ -9,12 +9,12 @@ class IfLogicEndStatement extends Statement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'end if';
+  final public const BEGIN_STRING = 'end if';
 
   /**
    * @var string
    */
-  public const END_STRING = '<br/>';
+  final public const END_STRING = '<br/>';
 
   /**
    * IfLogicEndStatement constructor.

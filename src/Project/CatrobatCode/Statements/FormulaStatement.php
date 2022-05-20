@@ -11,11 +11,6 @@ class FormulaStatement extends Statement
   private ?ValueStatement $type = null;
 
   /**
-   * @var mixed
-   */
-  private $category;
-
-  /**
    * FormulaStatement constructor.
    *
    * @param mixed $statementFactory
@@ -23,11 +18,9 @@ class FormulaStatement extends Statement
    * @param mixed $spaces
    * @param mixed $category
    */
-  public function __construct($statementFactory, $xmlTree, $spaces, $category)
+  public function __construct($statementFactory, $xmlTree, $spaces, private $category)
   {
-    parent::__construct($statementFactory, $xmlTree, $spaces,
-      '', '');
-    $this->category = $category;
+    parent::__construct($statementFactory, $xmlTree, $spaces, '', '');
   }
 
   public function execute(): string

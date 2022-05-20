@@ -15,10 +15,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class SpecialUpdateCommandTest extends KernelTestCase
 {
-  /**
-   * @var SpecialUpdateCommand|MockObject
-   */
-  protected $object;
+  protected SpecialUpdateCommand|MockObject $object;
 
   protected function setUp(): void
   {

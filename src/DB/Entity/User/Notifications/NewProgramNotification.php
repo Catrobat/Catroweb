@@ -12,6 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 class NewProgramNotification extends CatroNotification
 {
   /**
+   *  You have to set this parameter otherwise the wrong template will be rendered.
+   */
+  private string $twig_template = 'Notifications/NotificationTypes/new_program_notification.html.twig';
+
+  public function __construct(User $user, /**
    * The new Program which triggered this NewProgramNotification. If this Program gets deleted,
    * this NewProgramNotification gets deleted as well.
    *
@@ -25,17 +30,9 @@ class NewProgramNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?Program $program;
-
-  /**
-   *  You have to set this parameter otherwise the wrong template will be rendered.
-   */
-  private string $twig_template = 'Notifications/NotificationTypes/new_program_notification.html.twig';
-
-  public function __construct(User $user, ?Program $program)
+  private ?Program $program)
   {
     parent::__construct($user, '', '', 'follow');
-    $this->program = $program;
   }
 
   /**

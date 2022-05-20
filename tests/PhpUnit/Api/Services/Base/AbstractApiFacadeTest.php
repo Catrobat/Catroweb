@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class AbstractApiFacadeTest extends DefaultTestCase
 {
-  /**
-   * @var AbstractApiFacade|MockObject
-   */
-  protected $object;
+  protected AbstractApiFacade|MockObject $object;
 
   protected function setUp(): void
   {

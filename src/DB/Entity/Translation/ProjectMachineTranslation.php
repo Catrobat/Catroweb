@@ -14,30 +14,27 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 class ProjectMachineTranslation extends MachineTranslation
 {
   /**
+   * @ORM\Column(type="string", length=300, nullable=true)
+   */
+  private ?string $cached_name = null;
+
+  /**
+   * @ORM\Column(type="text", nullable=true)
+   */
+  private ?string $cached_description = null;
+
+  /**
+   * @ORM\Column(type="text", nullable=true)
+   */
+  private ?string $cached_credits = null;
+
+  public function __construct(/**
    * @ORM\ManyToOne(targetEntity=Program::class)
    * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
    */
-  protected Program $project;
-
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
-  private ?string $cached_name;
-
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
-  private ?string $cached_description;
-
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
-  private ?string $cached_credits;
-
-  public function __construct(Program $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)
+  protected Program $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)
   {
     parent::__construct($source_language, $target_language, $provider, $usage_count);
-    $this->project = $project;
   }
 
   public function getProject(): Program

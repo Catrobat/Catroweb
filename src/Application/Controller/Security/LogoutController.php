@@ -11,11 +11,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class LogoutController extends AbstractController
 {
-  protected TokenStorageInterface $token_storage;
-
-  public function __construct(TokenStorageInterface $token_storage)
+  public function __construct(protected TokenStorageInterface $token_storage)
   {
-    $this->token_storage = $token_storage;
   }
 
   /**

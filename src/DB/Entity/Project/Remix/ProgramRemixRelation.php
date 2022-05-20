@@ -14,7 +14,7 @@ use Exception;
  * @ORM\Table(name="program_remix_relation")
  * @ORM\Entity(repositoryClass=ProgramRemixRepository::class)
  */
-class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface
+class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface, \Stringable
 {
   /**
    * -----------------------------------------------------------------------------------------------------------------

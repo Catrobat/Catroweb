@@ -14,12 +14,9 @@ class CleanLogsCommand extends Command
   protected static $defaultName = 'catrobat:clean:logs';
   private OutputInterface $output;
 
-  private ParameterBagInterface $parameter_bag;
-
-  public function __construct(ParameterBagInterface $parameter_bag)
+  public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
-    $this->parameter_bag = $parameter_bag;
   }
 
   protected function configure(): void

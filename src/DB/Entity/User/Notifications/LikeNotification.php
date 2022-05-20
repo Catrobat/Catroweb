@@ -11,7 +11,19 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class LikeNotification extends CatroNotification
 {
+  /*
+   *  You have to set this parameter otherwise the wrong template will be rendered.
+   */
+  private string $twig_template = '/Notifications/NotificationTypes/like_notification.html.twig';
+
   /**
+   * LikeNotification constructor.
+   *
+   * @param User    $user      the User to which this LikeNotification will be shown
+   * @param User    $like_from the User which "like action" to another user triggered this LikeNotification
+   * @param Program $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
+   */
+  public function __construct(User $user, /**
    * The User which "like action" to another user triggered this LikeNotification.
    * If this user gets deleted, this LikeNotification gets deleted as well.
    *
@@ -25,9 +37,7 @@ class LikeNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?User $like_from;
-
-  /**
+  private ?User $like_from, /**
    * the Program about which this LikeNotification is notifying, belongs to.
    *
    * @ORM\ManyToOne(
@@ -40,25 +50,9 @@ class LikeNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?Program $program;
-
-  /*
-   *  You have to set this parameter otherwise the wrong template will be rendered.
-   */
-  private string $twig_template = '/Notifications/NotificationTypes/like_notification.html.twig';
-
-  /**
-   * LikeNotification constructor.
-   *
-   * @param User    $user      the User to which this LikeNotification will be shown
-   * @param User    $like_from the User which "like action" to another user triggered this LikeNotification
-   * @param Program $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
-   */
-  public function __construct(User $user, User $like_from, Program $program)
+  private ?Program $program)
   {
     parent::__construct($user, '', '', 'reaction');
-    $this->like_from = $like_from;
-    $this->program = $program;
   }
 
   /**

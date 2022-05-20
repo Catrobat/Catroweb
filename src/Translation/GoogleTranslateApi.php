@@ -122,17 +122,10 @@ class GoogleTranslateApi implements TranslationApiInterface
     'zh-TW',
     'zu',
   ];
+  private readonly TranslationApiHelper $helper;
 
-  private TranslateClient $client;
-  private LoggerInterface $logger;
-  private TranslationApiHelper $helper;
-  private int $short_text_length;
-
-  public function __construct(TranslateClient $client, LoggerInterface $logger, int $short_text_length)
+  public function __construct(private readonly TranslateClient $client, private readonly LoggerInterface $logger, private readonly int $short_text_length)
   {
-    $this->client = $client;
-    $this->logger = $logger;
-    $this->short_text_length = $short_text_length;
     $this->helper = new TranslationApiHelper(self::LONG_LANGUAGE_CODE);
   }
 

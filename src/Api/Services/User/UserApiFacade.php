@@ -8,26 +8,15 @@ use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
 final class UserApiFacade extends AbstractApiFacade
 {
-  private UserResponseManager $response_manager;
-  private UserApiLoader $loader;
-  private UserApiProcessor $processor;
-  private UserRequestValidator $request_validator;
-  private EventDispatcherInterface $event_dispatcher;
-
   public function __construct(
     AuthenticationManager $authentication_manager,
-    UserResponseManager $response_manager,
-    UserApiLoader $loader,
-    UserApiProcessor $processor,
-    UserRequestValidator $request_validator,
-    EventDispatcherInterface $event_dispatcher
+    private readonly UserResponseManager $response_manager,
+    private readonly UserApiLoader $loader,
+    private readonly UserApiProcessor $processor,
+    private readonly UserRequestValidator $request_validator,
+    private readonly EventDispatcherInterface $event_dispatcher
   ) {
     parent::__construct($authentication_manager);
-    $this->response_manager = $response_manager;
-    $this->loader = $loader;
-    $this->processor = $processor;
-    $this->request_validator = $request_validator;
-    $this->event_dispatcher = $event_dispatcher;
   }
 
   public function getResponseManager(): UserResponseManager

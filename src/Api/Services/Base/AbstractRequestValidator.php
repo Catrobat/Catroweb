@@ -14,13 +14,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 abstract class AbstractRequestValidator implements TranslatorAwareInterface
 {
   use TranslatorAwareTrait;
-
-  private ValidatorInterface $validator;
   private ?ValidationWrapper $validationWrapper = null;
 
-  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator)
+  public function __construct(private readonly ValidatorInterface $validator, TranslatorInterface $translator)
   {
-    $this->validator = $validator;
     $this->initTranslator($translator);
   }
 

@@ -6,7 +6,6 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProgramManager;
-use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
 use Symfony\Component\Console\Command\Command;
@@ -19,22 +18,12 @@ class CreateExampleProgramCommand extends Command
 {
   protected static $defaultName = 'catrobat:example';
 
-  private UserManager $user_manager;
-
-  private ProgramManager $program_manager;
-
-  private EntityManagerInterface $entity_manager;
-
-  private FlavorRepository $flavor_repository;
-
-  public function __construct(UserManager $user_manager, ProgramManager $program_manager,
-                              EntityManagerInterface $entity_manager, FlavorRepository $flavor_repository)
-  {
+  public function __construct(
+    private readonly ProgramManager $program_manager,
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly FlavorRepository $flavor_repository
+  ) {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
-    $this->flavor_repository = $flavor_repository;
   }
 
   protected function configure(): void

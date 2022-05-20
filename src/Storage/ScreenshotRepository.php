@@ -14,27 +14,27 @@ class ScreenshotRepository
   /**
    * @var string
    */
-  public const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
+  final public const DEFAULT_SCREENSHOT = 'images/default/screenshot.png';
   /**
    * @var string
    */
-  public const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
+  final public const DEFAULT_THUMBNAIL = 'images/default/thumbnail.png';
 
-  private string $thumbnail_dir;
+  private readonly string $thumbnail_dir;
 
-  private string $thumbnail_path;
+  private readonly string $thumbnail_path;
 
-  private string $screenshot_dir;
+  private readonly string $screenshot_dir;
 
-  private string $screenshot_path;
+  private readonly string $screenshot_path;
 
   private ?Imagick $imagick = null;
 
-  private string $tmp_dir;
+  private readonly string $tmp_dir;
 
-  private string $extracted_project_dir;
+  private readonly string $extracted_project_dir;
 
-  private string $project_zip_dir;
+  private readonly string $project_zip_dir;
 
   public function __construct(ParameterBagInterface $parameter_bag)
   {
@@ -123,10 +123,7 @@ class ScreenshotRepository
     return self::DEFAULT_SCREENSHOT;
   }
 
-  /**
-   * @param string|int $id
-   */
-  public function getThumbnailWebPath($id): string
+  public function getThumbnailWebPath(string|int $id): string
   {
     $filename = $this->thumbnail_dir.$this->generateFileNameFromId((string) $id);
     if (file_exists($filename)) {
@@ -264,7 +261,7 @@ class ScreenshotRepository
     try {
       $file = new File($directory.$this->generateFileNameFromId($id));
       unlink($file->getPathname());
-    } catch (FileNotFoundException $fileNotFoundException) {
+    } catch (FileNotFoundException) {
     }
   }
 

@@ -8,11 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class OverwriteController extends AbstractController
 {
-  protected ProjectsApi $projectsApi;
-
-  public function __construct(ProjectsApi $projectsApi)
+  public function __construct(protected ProjectsApi $projectsApi)
   {
-    $this->projectsApi = $projectsApi;
   }
 
   public function projectIdCatrobatGetAction(string $id): ?Response

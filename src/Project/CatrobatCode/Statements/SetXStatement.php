@@ -7,11 +7,11 @@ class SetXStatement extends BaseSetToStatement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'X';
+  final public const BEGIN_STRING = 'X';
   /**
    * @var string
    */
-  public const END_STRING = ')<br/>';
+  final public const END_STRING = ')<br/>';
 
   /**
    * SetXStatement constructor.

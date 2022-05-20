@@ -28,29 +28,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  protected CanonicalFieldsUpdater $canonicalFieldsUpdater;
-  protected ProgramManager $program_manager;
-  protected EntityManagerInterface $entity_manager;
-  protected TransformedFinder $user_finder;
-  protected UrlHelper $url_helper;
-  protected UserRepository $user_repository;
-  protected UserPasswordHasherInterface $userPasswordHasher;
-
-  public function __construct(CanonicalFieldsUpdater $canonicalFieldsUpdater,
-                              UserPasswordHasherInterface $userPasswordHasher,
-                              EntityManagerInterface $entity_manager,
-                              TransformedFinder $user_finder,
-                              ProgramManager $program_manager,
-                              UrlHelper $url_helper,
-                              UserRepository $user_repository
-  ) {
-    $this->canonicalFieldsUpdater = $canonicalFieldsUpdater;
-    $this->userPasswordHasher = $userPasswordHasher;
-    $this->user_finder = $user_finder;
-    $this->url_helper = $url_helper;
-    $this->program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
-    $this->user_repository = $user_repository;
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
+  {
   }
 
   public function decodeToken(string $token): array
@@ -59,13 +38,13 @@ class UserManager implements UserManagerInterface
       $tokenParts = explode('.', $token);
       $tokenPayload = base64_decode($tokenParts[1], true);
 
-      $payload = json_decode($tokenPayload, true);
+      $payload = json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
       if (!is_array($payload)) {
         return [];
       }
 
-      return json_decode($tokenPayload, true);
-    } catch (Exception $e) {
+      return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
+    } catch (Exception) {
       return [];
     }
   }
@@ -151,20 +130,20 @@ class UserManager implements UserManagerInterface
   {
     $associative_array = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
-      ->from('App\DB\Entity\User\User', 'user')
+      ->from(\App\DB\Entity\User\User::class, 'user')
       ->getQuery()
       ->execute()
     ;
 
-    return array_map(function ($value) { return $value['id']; }, $associative_array);
+    return array_map(fn ($value) => $value['id'], $associative_array);
   }
 
   public function getActiveUserIDList(int $years): array
   {
     $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
-      ->from('App\DB\Entity\User\User', 'user')
-      ->leftjoin('App\DB\Entity\Project\Program', 'project', Join::WITH, 'user.id = project.user')
+      ->from(\App\DB\Entity\User\User::class, 'user')
+      ->leftjoin(\App\DB\Entity\Project\Program::class, 'project', Join::WITH, 'user.id = project.user')
       ->where('user.createdAt <= :date')
       ->setParameter('date', new DateTime("-{$years} years"))
       ->groupBy('user.id')
@@ -173,7 +152,7 @@ class UserManager implements UserManagerInterface
       ->execute()
       ;
 
-    return array_map(function ($value) { return $value['id']; }, $result);
+    return array_map(fn ($value) => $value['id'], $result);
   }
 
   protected function userSearchQuery(string $query): BoolQuery

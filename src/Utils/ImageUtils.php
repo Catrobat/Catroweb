@@ -20,22 +20,12 @@ class ImageUtils
     }
 
     $image_type = preg_replace('#data:(.+)#', '\\1', $image_data[0]);
-    $image = null;
-
-    switch ($image_type) {
-      case 'image/jpg':
-      case 'image/jpeg':
-        $image = imagecreatefromjpeg($image_base64);
-        break;
-      case 'image/png':
-        $image = imagecreatefrompng($image_base64);
-        break;
-      case 'image/gif':
-        $image = imagecreatefromgif($image_base64);
-        break;
-      default:
-        throw new Exception('UPLOAD_UNSUPPORTED_MIME_TYPE', Response::HTTP_UNSUPPORTED_MEDIA_TYPE);
-    }
+    $image = match ($image_type) {
+      'image/jpg', 'image/jpeg' => imagecreatefromjpeg($image_base64),
+        'image/png' => imagecreatefrompng($image_base64),
+        'image/gif' => imagecreatefromgif($image_base64),
+        default => throw new Exception('UPLOAD_UNSUPPORTED_MIME_TYPE', Response::HTTP_UNSUPPORTED_MEDIA_TYPE),
+    };
 
     if (!$image) {
       throw new Exception('UPLOAD_UNSUPPORTED_FILE_TYPE', Response::HTTP_UNSUPPORTED_MEDIA_TYPE);

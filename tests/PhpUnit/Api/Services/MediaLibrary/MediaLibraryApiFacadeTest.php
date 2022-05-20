@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class MediaLibraryApiFacadeTest extends DefaultTestCase
 {
-  /**
-   * @var MediaLibraryApiFacade|MockObject
-   */
-  protected $object;
+  protected MediaLibraryApiFacade|MockObject $object;
 
   protected function setUp(): void
   {

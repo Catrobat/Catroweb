@@ -7,11 +7,11 @@ class ChangeBrightnessByNStatement extends BaseChangeByNStatement
   /**
    * @var string
    */
-  public const BEGIN_STRING = 'brightness';
+  final public const BEGIN_STRING = 'brightness';
   /**
    * @var string
    */
-  public const END_STRING = ')%<br/>';
+  final public const END_STRING = ')%<br/>';
 
   /**
    * ChangeBrightnessByNStatement constructor.

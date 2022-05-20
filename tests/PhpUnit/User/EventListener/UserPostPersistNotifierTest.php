@@ -12,10 +12,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class UserPostPersistNotifierTest extends DefaultTestCase
 {
-  /**
-   * @var UserPostPersistNotifier|MockObject
-   */
-  protected $object;
+  protected UserPostPersistNotifier|MockObject $object;
 
   protected function setUp(): void
   {

@@ -5,7 +5,7 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          backupGlobals="false"
          colors="true"
-         bootstrap="tests/bootstrap.php"
+         bootstrap="config/bootstrap_test.php"
          failOnWarning="true"
          convertDeprecationsToExceptions="false"
 >
@@ -32,7 +32,6 @@
     </coverage>
 
     <extensions>
-        <extension class="App\System\Testing\PhpUnit\Hook\BypassFinalHook"/>
         <extension class="App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook"/>
         <!-- Run `composer require symfony/panther` before enabling this extension -->
         <!-- <extension class="Symfony\Component\Panther\ServerExtension" /> -->

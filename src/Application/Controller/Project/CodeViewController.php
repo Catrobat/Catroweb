@@ -15,23 +15,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeViewController extends AbstractController
 {
-  private ProgramManager $program_manager;
-  private ExtractedFileRepository $extracted_file_repository;
-  private CatrobatCodeParser $code_parser;
-  private ParameterBagInterface $parameter_bag;
-  private TranslatorInterface $translator;
-
-  public function __construct(ProgramManager $program_manager,
-                              ExtractedFileRepository $extracted_file_repository,
-                              CatrobatCodeParser $code_parser,
-                              ParameterBagInterface $parameter_bag,
-                              TranslatorInterface $translator)
+  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator)
   {
-    $this->program_manager = $program_manager;
-    $this->extracted_file_repository = $extracted_file_repository;
-    $this->code_parser = $code_parser;
-    $this->parameter_bag = $parameter_bag;
-    $this->translator = $translator;
   }
 
   /**
@@ -68,7 +53,7 @@ class CodeViewController extends AbstractController
       $parsed_program = $this->code_parser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
-    } catch (Exception $exception) {
+    } catch (Exception) {
       $parsed_program = null;
       $web_path = null;
     }

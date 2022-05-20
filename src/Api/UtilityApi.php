@@ -9,11 +9,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 final class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
-  private UtilityApiFacade $facade;
-
-  public function __construct(UtilityApiFacade $facade)
+  public function __construct(private readonly UtilityApiFacade $facade)
   {
-    $this->facade = $facade;
   }
 
   /**

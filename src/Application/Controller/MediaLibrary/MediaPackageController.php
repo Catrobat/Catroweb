@@ -148,7 +148,7 @@ class MediaPackageController extends AbstractController
 
     /** @var MediaPackageCategory $category */
     foreach ($unsorted_categories as $category) {
-      if (0 === strpos($category->getName(), 'ThemeSpecial')) {
+      if (str_starts_with($category->getName(), 'ThemeSpecial')) {
         continue;
       }
 
@@ -159,13 +159,7 @@ class MediaPackageController extends AbstractController
       ];
     }
 
-    usort($categories, function ($category_a, $category_b) {
-      if ($category_a['priority'] === $category_b['priority']) {
-        return 0;
-      }
-
-      return ($category_a['priority'] > $category_b['priority']) ? -1 : 1;
-    });
+    usort($categories, fn ($category_a, $category_b) => $category_b['priority'] <=> $category_a['priority']);
 
     return $categories;
   }

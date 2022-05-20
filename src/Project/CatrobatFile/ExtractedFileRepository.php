@@ -11,23 +11,13 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ExtractedFileRepository
 {
-  private string $local_path;
+  private readonly string $local_path;
 
-  private string $web_path;
+  private readonly string $web_path;
 
-  private string $local_storage_path;
-
-  private CatrobatFileExtractor $file_extractor;
-
-  private ProgramManager $program_manager;
-
-  private ProgramFileRepository $program_file_repo;
-
-  private LoggerInterface $logger;
-
-  public function __construct(ParameterBagInterface $parameter_bag, CatrobatFileExtractor $file_extractor,
-                              ProgramManager $program_manager, ProgramFileRepository $program_file_repo,
-                              LoggerInterface $logger)
+  public function __construct(ParameterBagInterface $parameter_bag,
+                              private readonly ProgramManager $program_manager,
+                              private readonly LoggerInterface $logger)
   {
     $local_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.dir');
     $web_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.path');
@@ -36,13 +26,8 @@ class ExtractedFileRepository
     FileHelper::verifyDirectoryExists($local_extracted_path);
     FileHelper::verifyDirectoryExists($local_storage_path);
 
-    $this->local_storage_path = $local_storage_path;
     $this->local_path = $local_extracted_path;
     $this->web_path = $web_extracted_path;
-    $this->file_extractor = $file_extractor;
-    $this->program_manager = $program_manager;
-    $this->program_file_repo = $program_file_repo;
-    $this->logger = $logger;
   }
 
   public function getBaseDir(string $id): string
@@ -56,7 +41,7 @@ class ExtractedFileRepository
       $program_id = $program->getId();
 
       return new ExtractedCatrobatFile($this->getBaseDir($program_id), $this->web_path.$program_id.'/', $program_id);
-    } catch (InvalidCatrobatFileException $e) {
+    } catch (InvalidCatrobatFileException) {
       return null;
     }
   }

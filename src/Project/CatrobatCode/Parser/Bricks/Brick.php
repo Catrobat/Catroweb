@@ -7,17 +7,14 @@ use SimpleXMLElement;
 
 abstract class Brick
 {
-  protected SimpleXMLElement $brick_xml_properties;
-
   protected string $type;
 
   protected string $caption;
 
   private string $img_file;
 
-  public function __construct(SimpleXMLElement $brick_xml_properties)
+  public function __construct(protected SimpleXMLElement $brick_xml_properties)
   {
-    $this->brick_xml_properties = $brick_xml_properties;
     $this->create();
   }
 

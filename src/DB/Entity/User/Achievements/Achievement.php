@@ -14,16 +14,16 @@ class Achievement
   /**
    * Static Achievements - added/updated with UpdateAchievementsCommand.
    */
-  public const BRONZE_USER = 'bronze_user';
-  public const SILVER_USER = 'silver_user';
-  public const GOLD_USER = 'gold_user';
-  public const DIAMOND_USER = 'diamond_user';
-  public const PERFECT_PROFILE = 'perfect_profile';
-  public const VERIFIED_DEVELOPER = 'verified_developer';
-  public const CODING_JAM_09_2021 = 'coding_jam_09_2021';
-  public const BILINGUAL = 'bilingual';
-  public const TRILINGUAL = 'trilingual';
-  public const LINGUIST = 'linguist';
+  final public const BRONZE_USER = 'bronze_user';
+  final public const SILVER_USER = 'silver_user';
+  final public const GOLD_USER = 'gold_user';
+  final public const DIAMOND_USER = 'diamond_user';
+  final public const PERFECT_PROFILE = 'perfect_profile';
+  final public const VERIFIED_DEVELOPER = 'verified_developer';
+  final public const CODING_JAM_09_2021 = 'coding_jam_09_2021';
+  final public const BILINGUAL = 'bilingual';
+  final public const TRILINGUAL = 'trilingual';
+  final public const LINGUIST = 'linguist';
 
   /**
    * @ORM\Column(name="id", type="integer")
@@ -147,9 +147,6 @@ class Achievement
     return $this->badge_locked_svg_path;
   }
 
-  /**
-   * @return $this
-   */
   public function setBadgeLockedSvgPath(string $badge_locked_svg_path): Achievement
   {
     $this->badge_locked_svg_path = $badge_locked_svg_path;
@@ -162,9 +159,6 @@ class Achievement
     return $this->badge_svg_path;
   }
 
-  /**
-   * @return $this
-   */
   public function setBadgeSvgPath(string $badge_svg_path): Achievement
   {
     $this->badge_svg_path = $badge_svg_path;

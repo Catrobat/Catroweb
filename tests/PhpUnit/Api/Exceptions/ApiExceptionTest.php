@@ -15,10 +15,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ApiExceptionTest extends DefaultTestCase
 {
-  /**
-   * @var ApiException|MockObject
-   */
-  protected $object;
+  protected ApiException|MockObject $object;
 
   protected function setUp(): void
   {

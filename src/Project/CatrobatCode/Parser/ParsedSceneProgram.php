@@ -6,17 +6,12 @@ use SimpleXMLElement;
 
 class ParsedSceneProgram
 {
-  protected SimpleXMLElement $program_xml_properties;
-
-  protected array $scenes;
+  protected array $scenes = [];
 
   protected CodeStatistic $code_statistic;
 
-  public function __construct(SimpleXMLElement $program_xml_properties)
+  public function __construct(protected SimpleXMLElement $program_xml_properties)
   {
-    $this->program_xml_properties = $program_xml_properties;
-    $this->scenes = [];
-
     $this->parseScenes();
 
     $this->code_statistic = new CodeStatistic();

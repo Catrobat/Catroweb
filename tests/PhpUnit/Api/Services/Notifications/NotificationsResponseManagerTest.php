@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class NotificationsResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var NotificationsResponseManager|MockObject
-   */
-  protected $object;
+  protected NotificationsResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

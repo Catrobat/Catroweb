@@ -13,10 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class MediaLibraryResponseManagerTest extends DefaultTestCase
 {
-  /**
-   * @var MediaLibraryResponseManager|MockObject
-   */
-  protected $object;
+  protected MediaLibraryResponseManager|MockObject $object;
 
   protected function setUp(): void
   {

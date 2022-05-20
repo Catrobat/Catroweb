@@ -9,15 +9,11 @@ use Exception;
 
 class ScratchManager
 {
-  protected ProgramManager $program_manager;
-  protected UserManager $user_manager;
   protected AsyncHttpClient $async_http_client;
 
-  public function __construct(ProgramManager $program_manager,
-                              UserManager $user_manager)
+  public function __construct(protected ProgramManager $program_manager,
+                              protected UserManager $user_manager)
   {
-    $this->program_manager = $program_manager;
-    $this->user_manager = $user_manager;
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
   }
 

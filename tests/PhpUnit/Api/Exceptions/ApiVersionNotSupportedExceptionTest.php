@@ -15,10 +15,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ApiVersionNotSupportedExceptionTest extends DefaultTestCase
 {
-  /**
-   * @var ApiVersionNotSupportedException|MockObject
-   */
-  protected $object;
+  protected ApiVersionNotSupportedException|MockObject $object;
 
   protected function setUp(): void
   {

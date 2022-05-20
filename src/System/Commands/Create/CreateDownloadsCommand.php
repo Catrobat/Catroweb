@@ -18,19 +18,10 @@ class CreateDownloadsCommand extends Command
 {
   protected static $defaultName = 'catrobat:download';
 
-  private UserManager $user_manager;
-
-  private ProgramManager $program_manager;
-
-  private EntityManagerInterface $entity_manager;
-
-  public function __construct(UserManager $user_manager, EntityManagerInterface $entity_manager,
-                              ProgramManager $program_manager)
+  public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $entity_manager,
+                              private readonly ProgramManager $program_manager)
   {
     parent::__construct();
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->entity_manager = $entity_manager;
   }
 
   protected function configure(): void
@@ -58,7 +49,7 @@ class CreateDownloadsCommand extends Command
 
     try {
       $this->downloadProgram($program, $user);
-    } catch (Exception $e) {
+    } catch (Exception) {
       return 2;
     }
     $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());

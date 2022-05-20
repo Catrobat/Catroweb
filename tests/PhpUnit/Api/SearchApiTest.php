@@ -19,15 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class SearchApiTest extends DefaultTestCase
 {
-  /**
-   * @var SearchApi|MockObject
-   */
-  protected $object;
+  protected SearchApi|MockObject $object;
 
-  /**
-   * @var SearchApiFacade|MockObject
-   */
-  protected $facade;
+  protected SearchApiFacade|MockObject $facade;
 
   protected function setUp(): void
   {

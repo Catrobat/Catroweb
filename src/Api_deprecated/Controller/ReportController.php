@@ -21,18 +21,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ReportController extends AbstractController
 {
-  private UserManager $user_manager;
-  private ProgramManager $program_manager;
-  private TranslatorInterface $translator;
-  private EventDispatcherInterface $event_dispatcher;
-
-  public function __construct(UserManager $user_manager, ProgramManager $program_manager,
-                              TranslatorInterface $translator, EventDispatcherInterface $event_dispatcher)
+  public function __construct(private readonly UserManager $user_manager, private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator, private readonly EventDispatcherInterface $event_dispatcher)
   {
-    $this->user_manager = $user_manager;
-    $this->program_manager = $program_manager;
-    $this->translator = $translator;
-    $this->event_dispatcher = $event_dispatcher;
   }
 
   /**

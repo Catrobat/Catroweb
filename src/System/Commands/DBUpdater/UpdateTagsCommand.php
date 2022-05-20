@@ -18,16 +18,11 @@ class UpdateTagsCommand extends Command
    */
   protected static $defaultName = 'catrobat:update:tags';
 
-  private TagRepository $tag_repository;
-  private EntityManagerInterface $entity_manager;
+  final public const TAG_LTM_PREFIX = 'tags.tag.';
 
-  public const TAG_LTM_PREFIX = 'tags.tag.';
-
-  public function __construct(EntityManagerInterface $entity_manager, TagRepository $tag_repository)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly TagRepository $tag_repository)
   {
     parent::__construct();
-    $this->entity_manager = $entity_manager;
-    $this->tag_repository = $tag_repository;
   }
 
   protected function configure(): void

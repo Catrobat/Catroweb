@@ -12,8 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ProgramDownloads
 {
-  public const TYPE_PROJECT = 'project';
-  public const TYPE_APK = 'apk';
+  final public const TYPE_PROJECT = 'project';
+  final public const TYPE_APK = 'apk';
 
   /**
    * @ORM\Column(name="id", type="integer")

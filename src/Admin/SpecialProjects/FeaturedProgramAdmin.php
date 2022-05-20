@@ -34,19 +34,14 @@ class FeaturedProgramAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'featured_program';
 
-  private ImageRepository $featured_image_repository;
-  private ProgramManager $program_manager;
-
   public function __construct(
       ?string $code,
       ?string $class,
       ?string $baseControllerName,
-      ImageRepository $featured_image_repository,
-      ProgramManager $program_manager
+      private readonly ImageRepository $featured_image_repository,
+      private readonly ProgramManager $program_manager
   ) {
     parent::__construct($code, $class, $baseControllerName);
-    $this->featured_image_repository = $featured_image_repository;
-    $this->program_manager = $program_manager;
   }
 
   /**
@@ -189,7 +184,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
         'sortable' => false,
       ])
       ->add('Featured Image', null, [
-        'accessor' => function ($subject): string { return $this->getFeaturedImageUrl($subject); },
+        'accessor' => fn ($subject): string => $this->getFeaturedImageUrl($subject),
         'template' => 'Admin/featured_image.html.twig',
       ])
       ->add('program', EntityType::class, [

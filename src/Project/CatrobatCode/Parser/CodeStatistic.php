@@ -9,115 +9,99 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CodeStatistic
 {
-  private int $total_num_scenes;
+  private int $total_num_scenes = 0;
 
-  private int $total_num_scripts;
+  private int $total_num_scripts = 0;
 
-  private int $total_num_bricks;
+  private int $total_num_bricks = 0;
 
-  private int $total_num_objects;
+  private int $total_num_objects = 0;
 
-  private int $total_num_looks;
+  private int $total_num_looks = 0;
 
-  private ?int $total_num_sounds;
+  private ?int $total_num_sounds = 0;
 
-  private ?int $total_num_global_vars;
+  private ?int $total_num_global_vars = 0;
 
-  private ?int $total_num_local_vars;
+  private ?int $total_num_local_vars = 0;
 
-  private array $brick_type_statistic;
-
-  private array $brick_type_register;
-
-  public function __construct()
-  {
-    $this->total_num_scenes = 0;
-    $this->total_num_scripts = 0;
-    $this->total_num_bricks = 0;
-    $this->total_num_objects = 0;
-    $this->total_num_looks = 0;
-    $this->total_num_sounds = 0;
-    $this->total_num_global_vars = 0;
-    $this->total_num_local_vars = 0;
-
-    $this->brick_type_statistic = [
-      'eventBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+  private array $brick_type_statistic = [
+    'eventBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'controlBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'controlBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'motionBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'motionBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'soundBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'soundBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'looksBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'looksBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'penBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'penBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'dataBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'dataBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'deviceBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'deviceBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-      'specialBricks' => [
-        'numTotal' => 0,
-        'different' => [
-          'numDifferent' => 0,
-          'listDifferent' => [],
-        ],
+    ],
+    'specialBricks' => [
+      'numTotal' => 0,
+      'different' => [
+        'numDifferent' => 0,
+        'listDifferent' => [],
       ],
-    ];
+    ],
+  ];
 
-    $this->brick_type_register = [
-      'eventBricks' => [],
-      'controlBricks' => [],
-      'motionBricks' => [],
-      'soundBricks' => [],
-      'looksBricks' => [],
-      'penBricks' => [],
-      'dataBricks' => [],
-      'deviceBricks' => [],
-      'specialBricks' => [],
-    ];
-  }
+  private array $brick_type_register = [
+    'eventBricks' => [],
+    'controlBricks' => [],
+    'motionBricks' => [],
+    'soundBricks' => [],
+    'looksBricks' => [],
+    'penBricks' => [],
+    'dataBricks' => [],
+    'deviceBricks' => [],
+    'specialBricks' => [],
+  ];
 
   public function update(ParsedObjectsContainer $object_list_container): void
   {
@@ -228,10 +212,7 @@ class CodeStatistic
     }
   }
 
-  /**
-   * @param Script|Brick $brick
-   */
-  protected function updateBrickStatistic($brick): void
+  protected function updateBrickStatistic(Script|Brick $brick): void
   {
     ++$this->total_num_bricks;
     switch ($brick->getImgFile()) {
@@ -309,7 +290,7 @@ class CodeStatistic
       $this->total_num_global_vars =
         count($program_xml_properties->xpath('//programVariableList//userVariable')) +
         count($program_xml_properties->xpath('//programListOfLists//userVariable'));
-    } catch (Exception $exception) {
+    } catch (Exception) {
       $this->total_num_global_vars = null;
     }
   }
@@ -326,7 +307,7 @@ class CodeStatistic
           count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
           count($program_xml_properties->xpath('//objectVariableList//userVariable'));
       }
-    } catch (Exception $exception) {
+    } catch (Exception) {
       $this->total_num_local_vars = null;
     }
   }

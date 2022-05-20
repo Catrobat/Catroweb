@@ -14,24 +14,8 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class RefreshTokenService
 {
-  protected RefreshTokenManagerInterface $refresh_manager;
-  protected JWTTokenManagerInterface $jwt_manager;
-  protected UserManager $user_manager;
-  protected int $refreshTokenLifetime;
-  protected CookieService $cookie_service;
-
-  public function __construct(
-    int $refreshTokenLifetime,
-    RefreshTokenManagerInterface $refresh_manager,
-    UserManager $user_manager,
-    JWTTokenManagerInterface $jwt_manager,
-    CookieService $cookie_service
-  ) {
-    $this->refreshTokenLifetime = $refreshTokenLifetime;
-    $this->refresh_manager = $refresh_manager;
-    $this->user_manager = $user_manager;
-    $this->jwt_manager = $jwt_manager;
-    $this->cookie_service = $cookie_service;
+  public function __construct(protected int $refreshTokenLifetime, protected RefreshTokenManagerInterface $refresh_manager, protected UserManager $user_manager, protected JWTTokenManagerInterface $jwt_manager, protected CookieService $cookie_service)
+  {
   }
 
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface

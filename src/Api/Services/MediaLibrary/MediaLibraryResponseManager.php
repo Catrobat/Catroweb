@@ -15,19 +15,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class MediaLibraryResponseManager extends AbstractResponseManager
 {
-  private UrlGeneratorInterface $url_generator;
-  private ParameterBagInterface $parameter_bag;
-
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     ResponseCacheManager $response_cache_manager,
-    UrlGeneratorInterface $url_generator,
-    ParameterBagInterface $parameter_bag
+    private readonly UrlGeneratorInterface $url_generator,
+    private readonly ParameterBagInterface $parameter_bag
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
-    $this->url_generator = $url_generator;
-    $this->parameter_bag = $parameter_bag;
   }
 
   public function createMediaFilesDataResponse(array $media_package_files): array

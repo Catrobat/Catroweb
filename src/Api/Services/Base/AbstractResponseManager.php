@@ -15,17 +15,12 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
 {
   use TranslatorAwareTrait;
 
-  protected SerializerInterface $serializer;
-  protected ResponseCacheManager $response_cache_manager;
-
   public function __construct(
       TranslatorInterface $translator,
-      SerializerInterface $serializer,
-      ResponseCacheManager $response_cache_manager
+      protected SerializerInterface $serializer,
+      protected ResponseCacheManager $response_cache_manager
   ) {
     $this->initTranslator($translator);
-    $this->serializer = $serializer;
-    $this->response_cache_manager = $response_cache_manager;
   }
 
   /**
@@ -78,6 +73,6 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
 
   public function extractResponseHeader(ResponseCache $cache_entry): array
   {
-    return json_decode($cache_entry->getResponseHeaders(), true) ?? [];
+    return json_decode($cache_entry->getResponseHeaders(), true, 512, JSON_THROW_ON_ERROR) ?? [];
   }
 }
