@@ -13,7 +13,7 @@ education: Educação
 chat: Bate-papo e fóruns
 others: Outros
 tutorials: Ajuda
-googlePlay: Google Play
+googlePlay: Google Play Store
 iosAppStore: Loja de Aplicativos IOS
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
@@ -21,7 +21,7 @@ discordChat: Bate-papo do Discord
 passwordsNoMatch: As senhas não coincidem.
 error: Erro
 cancel: Cancelar
-report: Denunciar
+report: Reportar
 deleteIt: Sim, delete isso!
 reportIt: Sim, denunciar!
 areYouSure: Você tem certeza?
@@ -169,7 +169,7 @@ programs:
   comments: Comentários
   send: Enviar
   delete: Apagar
-  report: Denunciar
+  report: Reportar
   report_popup: Este comentário foi denunciado com sucesso.
   report_popup_header: Denunciado
   deleted_popup: Comentário apagado com sucesso.

@@ -13,7 +13,7 @@ education: Education
 chat: Chat and forums
 others: Others
 tutorials: עזרה
-googlePlay: Google play
+googlePlay: חנות Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
@@ -30,7 +30,7 @@ download: הורד
 name: Name
 description: תאור
 noDescription: אין תיאור זמין.
-credits: Credits
+credits: הערות ותודות
 noCredits: No credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 country: מדינה
