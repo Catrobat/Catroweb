@@ -4,7 +4,7 @@ namespace Deployer;
 
 use Symfony\Component\Dotenv\Dotenv;
 
-require 'recipe/symfony3.php';
+require 'recipe/symfony.php';
 require 'contrib/slack.php';
 
 // Load .env file
@@ -29,31 +29,31 @@ set('symfony_env', 'prod');
 
 // Symfony shared dirs
 set('shared_dirs',
-  [
-    'var/log',
-    'var/sessions',
-    'public/resources',
-    '.jwt',
-  ]);
+    [
+      'var/log',
+      'var/sessions',
+      'public/resources',
+      '.jwt',
+    ]);
 
 // Shared files between deploys
 add('shared_files',
-  [
-    '.env.local',
-    '.env.prod.local',
-    '.env.dev.local',
-    'google_cloud_key.json',
-    '.dkim/private.key',
-  ]);
+    [
+      '.env.local',
+      '.env.prod.local',
+      '.env.dev.local',
+      'google_cloud_key.json',
+      '.dkim/private.key',
+    ]);
 
 // Symfony writable dirs
 set('writable_dirs',
-  [
-    'var/cache',
-    'var/log',
-    'var/sessions',
-    'public/resources',
-  ]);
+    [
+      'var/cache',
+      'var/log',
+      'var/sessions',
+      'public/resources',
+    ]);
 
 // Symfony executable and variable directories
 set('bin_dir', 'bin');
@@ -65,7 +65,7 @@ set('allow_anonymous_stats', false);
 
 // Hosts
 host(getenv('DEPLOY_SHARE'))
-  ->stage('share')
+  ->set('labels', ['stage' => 'share'])
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
   ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
@@ -73,34 +73,10 @@ host(getenv('DEPLOY_SHARE'))
 ;
 
 host(getenv('DEPLOY_WEBTEST'))
-  ->stage('web-test')
-  ->set('symfony_env', 'dev')
+  ->set('labels', ['stage' => 'web-test'])
+  ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_WEBTEST_BRANCH'))
   ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/')
-;
-
-host(getenv('DEPLOY_POREVIEW'))
-  ->stage('po-review')
-  ->set('symfony_env', 'dev')
-  ->set('branch', getenv('DEPLOY_POREVIEW_BRANCH'))
-  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/')
-;
-
-host(getenv('DEPLOY_CATBLOCKS'))
-  ->stage('catblocks')
-  ->set('symfony_env', 'dev')
-  ->set('branch', getenv('DEPLOY_CATBLOCKS_BRANCH'))
-  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/')
-;
-
-host(getenv('DEPLOY_ANDROID'))
-  ->stage('android')
-  ->set('symfony_env', 'prod')
-  ->set('branch', getenv('DEPLOY_ANDROID_BRANCH'))
-  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader --no-dev')
   ->set('deploy_path', '/var/www/share/')
 ;
 
@@ -169,14 +145,10 @@ task('deploy', [
   'deploy:release',
   'deploy:update_code',
   'deploy:clear_paths',
-  'deploy:create_cache_dir',
   'deploy:shared',
-  'deploy:assets',
   'deploy:vendors',
-  'deploy:assetic:dump',
   'install:assets',
   'deploy:cache:clear',
-  'deploy:cache:warmup',
   'deploy:writable',
   'deploy:symlink',
   'database:migrate',
@@ -192,7 +164,6 @@ task('deploy', [
   'update:special',
   'deploy:unlock',
   'slack:notify:success',
-  'cleanup',
 ])->desc('Deploy Catroweb!');
 
 // [Optional] if deploy fails automatically unlock.
