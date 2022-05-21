@@ -56,31 +56,3 @@ jobs:
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
           dep: deploy
-
-#      - name: Build Container
-#        run: |
-#          cd docker
-#          docker-compose -f docker-compose.test.yaml build
-#          docker-compose -f docker-compose.test.yaml up -d
-#
-#      - name: Install SSH in container
-#        run: |
-#          docker exec app.catroweb apt-get --yes --force-yes install ssh
-#
-#      - name: Install SSH key in container (Public key must be registered on server)
-#        run: |
-#          docker exec app.catroweb mkdir /root/.ssh
-#          docker exec app.catroweb chmod 700 /root/.ssh
-#          mkdir ssh_tmp
-#          echo "${{ secrets.DEPLOY_SHARE_SSH_KEY }}" > ssh_tmp/id_rsa
-#          docker cp ssh_tmp/id_rsa app.catroweb:/root/.ssh/id_rsa
-#          docker exec app.catroweb chmod 600 /root/.ssh/id_rsa
-#          docker cp app.catroweb:/etc/ssh/ssh_config ssh_tmp
-#          echo "    StrictHostKeyChecking no" >> ssh_tmp/ssh_config
-#          docker cp ssh_tmp/ssh_config app.catroweb:/etc/ssh/ssh_config
-#          rm -rf ssh_tmp
-#
-#      - name: Deploy
-#        run:
-#          docker exec app.catroweb bin/dep deploy share
-
