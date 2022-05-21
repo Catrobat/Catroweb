@@ -21,12 +21,12 @@ class ExtractedCatrobatFile
   public function __construct(protected string $path, protected string $web_path, protected ?string $dir_hash)
   {
     if (!file_exists($path.'code.xml')) {
-        throw new InvalidCatrobatFileException('errors.xml.missing', 507);
+      throw new InvalidCatrobatFileException('errors.xml.missing', 507);
     }
 
-      $content = file_get_contents($path.'code.xml');
-      if (!$content) {
-          throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
+    $content = file_get_contents($path.'code.xml');
+    if (!$content) {
+      throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }
     $content = str_replace('&#x0;', '', $content, $count);
 

@@ -5,7 +5,7 @@ namespace Deployer;
 use Symfony\Component\Dotenv\Dotenv;
 
 require 'recipe/symfony3.php';
-require 'recipe/slack.php';
+require 'contrib/slack.php';
 
 // Load .env file
 (new Dotenv())->usePutenv(true)->load('.env');
