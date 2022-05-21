@@ -69,7 +69,7 @@ host(getenv('DEPLOY_SHARE'))
   ->set('labels', ['stage' => 'share'])
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
-  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
+  ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/')
 ;
 
@@ -77,7 +77,7 @@ host(getenv('DEPLOY_WEBTEST'))
   ->set('labels', ['stage' => 'web-test'])
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_WEBTEST_BRANCH'))
-  ->set('composer_options', 'install --verbose --prefer-dist --optimize-autoloader')
+  ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/')
 ;
 
@@ -86,7 +86,7 @@ host(getenv('DEPLOY_WEBTEST'))
 // Manually define this task because deployer uses the old symfony structure with web instead of
 // public. Change this when deployer gets updated.
 task('install:assets', function () {
-  run('{{bin/php}} {{bin/console}} assets:install --symlink --relative public');
+  run('{{bin/console}} assets:install --symlink --relative public');
 });
 
 // For such sudo commands to work, the server must allow those commands without a password
@@ -139,10 +139,9 @@ task('sonata:admin:setup:acl', function () {
 /*
  * Main task
  */
-task('deploy', [
-  'deploy:info',
+desc('Start the deployment process');
+task('deploy2', [
   'deploy:prepare',
-  'deploy:lock',
   'deploy:release',
   'deploy:update_code',
   'deploy:clear_paths',
