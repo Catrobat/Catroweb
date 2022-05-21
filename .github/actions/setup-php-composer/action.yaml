@@ -24,6 +24,7 @@ runs:
           bin/php-cs-fixer
           bin/phpdd
           bin/psalm
+          bin/dep
         key: ${{ runner.os }}-php--${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php--
