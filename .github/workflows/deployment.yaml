@@ -39,7 +39,7 @@ jobs:
       - name: Connect to TUG via VPN
         run: |
           sudo apt-get --yes --force-yes install openconnect
-          printf '${{ secrets.VPN_PASSWD }}' | sudo openconnect vpn.tugraz.at --user=${{ secrets.VPN_USER }} & disown
+          printf 'TUGraz-Angehoerige\n${{ secrets.VPN_PASSWD }}' | sudo openconnect vpn.tugraz.at --user=${{ secrets.VPN_USER }} & disown
 
       - name: Set deployment script secrets (.env.local)
         run: |
