@@ -19,9 +19,6 @@ name: "Docker Container tests"
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
 # For example, this happens with dependabot.
 on:
-  push:
-    branches:
-      - master
   pull_request:
     branches:
       - '**'        # all branches
