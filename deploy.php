@@ -55,6 +55,7 @@ set('writable_dirs',
       'public/resources',
     ]);
 
+
 // Symfony executable and variable directories
 set('bin_dir', 'bin');
 set('var_dir', 'var');
