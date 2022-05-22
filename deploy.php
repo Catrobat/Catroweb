@@ -140,12 +140,9 @@ task('sonata:admin:setup:acl', function () {
  * Main task
  */
 desc('Start the deployment process');
-task('deploy2', [
+task('deploy', [
   'deploy:prepare',
-  'deploy:release',
-  'deploy:update_code',
   'deploy:clear_paths',
-  'deploy:shared',
   'deploy:vendors',
   'install:assets',
   'deploy:cache:clear',
