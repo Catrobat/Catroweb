@@ -53,7 +53,7 @@
         "symfony/polyfill-iconv": "^1.23",
         "symfony/process": "5.4.*",
         "symfony/routing": "5.4.*",
-        "symfony/translation": "5.4.*",
+        "symfony/translation": "6.0.*",
         "symfony/twig-bundle": "5.4.*",
         "symfony/validator": "5.4.*",
         "symfony/webpack-encore-bundle": "^1.14",
