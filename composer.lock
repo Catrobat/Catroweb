@@ -3269,26 +3269,26 @@
         },
         {
             "name": "incenteev/composer-parameter-handler",
-            "version": "v2.1.4",
+            "version": "v2.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Incenteev/ParameterHandler.git",
-                "reference": "084befb11ec21faeadcddefb88b66132775ff59b"
+                "reference": "e1dd118763503f7fd766f907013e1d76d525fcc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/084befb11ec21faeadcddefb88b66132775ff59b",
-                "reference": "084befb11ec21faeadcddefb88b66132775ff59b",
+                "url": "https://api.github.com/repos/Incenteev/ParameterHandler/zipball/e1dd118763503f7fd766f907013e1d76d525fcc4",
+                "reference": "e1dd118763503f7fd766f907013e1d76d525fcc4",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.3",
-                "symfony/yaml": "^2.3 || ^3.0 || ^4.0 || ^5.0"
+                "symfony/yaml": "^2.3 || ^3.0 || ^4.0 || ^5.0 || ^6.0"
             },
             "require-dev": {
                 "composer/composer": "^1.0@dev",
-                "symfony/filesystem": "^2.3 || ^3 || ^4 || ^5",
-                "symfony/phpunit-bridge": "^4.0 || ^5.0"
+                "symfony/filesystem": "^2.3 || ^3 || ^4 || ^5 || ^6.0",
+                "symfony/phpunit-bridge": "^3.4.47 || ^4.4.41 || ^5.4.8 || ^6.0"
             },
             "type": "library",
             "extra": {
@@ -3318,9 +3318,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Incenteev/ParameterHandler/issues",
-                "source": "https://github.com/Incenteev/ParameterHandler/tree/v2.1.4"
+                "source": "https://github.com/Incenteev/ParameterHandler/tree/v2.1.5"
             },
-            "time": "2020-03-17T21:10:00+00:00"
+            "time": "2022-05-25T10:57:22+00:00"
         },
         {
             "name": "jms/metadata",
@@ -19159,5 +19159,5 @@
         "ext-posix": "8.1",
         "ext-zip": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
