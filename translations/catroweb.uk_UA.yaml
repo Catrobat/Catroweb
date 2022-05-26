@@ -1,13 +1,13 @@
 ---
 #homepage translation
-title: Catrobat community
+title: Спільнота Catrobat
 localLanguage: Англійська
-username: Username
-password: Password
+username: Ім'я користувача
+password: Пароль
 createNewPassword: Створити новий пароль
 accountSettings: Account Settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
+email: Ел.Пошта
+aboutPocketCode: Про Pocket Code
 about: Про застосунок
 education: Навчання
 chat: Чат та форуми
@@ -17,16 +17,16 @@ googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Чат в Discord
 passwordsNoMatch: Паролі не збігаються.
-error: Error
+error: Помилка
 cancel: Скасувати
 report: Звіт
 deleteIt: Так, видаліть його!
 reportIt: Так, повідомте про це!
 areYouSure: Ти впевнений?
 noWayOfReturn: Немає можливості відновити свої дії!
-download: Download
+download: Завантажити
 name: Ім'я
 description: Опис
 noDescription: Опис відсутній.
@@ -39,7 +39,7 @@ privacyPolicy: Політика конфіденційності
 imprint: Відомості
 programDetails: Подробиці
 somethingWentWrong: 'Упс, ось щось пішло не так.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'Наведеного ресурсу не існує.'
 pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
 oldVersionError: 'Будь ласка, оновіться до найновішої версії Pocket Code!'
 more: 'більше'
@@ -52,7 +52,7 @@ ok: Гаразд
 clickToDownloadProgram: 'Щоб завантажити приклад проекту, натисніть %link_start% тут %link_end%.'
 registrationError: 'Ім''я користувача або електронна адреса вже використовуються.'
 notifications: 'Сповіщення'
-allNotifications: 'All'
+allNotifications: 'Усі'
 FollowersNotifications: 'Підписники'
 LikeNotifications: 'Реакції'
 CommentNotifications: 'Коментарі'
@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "Не вдалося авторизувати к
 notificationsClearError: "Не вдалося відзначити сповіщення як прочитані!"
 pleaseWait: "Зачекайте, будь ласка..."
 projects: "Проєкти"
-users: "Users"
+users: "Користувачі"
 oauthPopUpTitle: "Інформація про вхід через зовнішній обліковий запис"
 oauthInfo: 'Ви щойно використали зовнішній обліковий запис для входу. Ми створили для вас випадкове ім''я користувача. Якщо ви хочете змінити своє ім''я користувача або створити новий пароль для свого облікового запису, будь ласка, перейдіть на сторінку "Мій профіль". Натисніть %link_start% тут %link_end% , щоб перейти до сторінки вашого профілю'
 oauthHere: "тут"
@@ -112,13 +112,13 @@ programs:
     Так, видалити це!
     Скасувати
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    Ти впевнений?
+    Якщо встановити "%programName%" для приватного, його не побачать і не знайдуть інші користувачі.
+    Ви все ще можете поділитися посиланням на свій проект зі своїми друзями. Ви можете перемикати видимість, торкнувшись піктограми замка.
+    Якщо встановити "%programName%" загальнодоступним, його можуть побачити та знайти інші користувачі.
+    Так, встановити публічно
+    Так, встановити приватно
+    Ні 
   reportCommentConfirmation: Ви впевнені, що хочете повідомити про цей коментар?
   deleteCommentConfirmation: Ви впевнені, що хочете видалити цей коментар?
   deleteAccountConfirmation: |+
@@ -131,220 +131,220 @@ programs:
   tooLongDescription: Опис проєкту задовгий!
   tooLongCredits: The project credits are too long!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
+    viewed: Найбільше переглянуто
+    downloaded: Найбільше завантажені
   random: Випадкові проєкти
   related: Пов'язані проєкти
   downloads: '%downloads% завантажень'
   sample: Приклад проєктів
-  views: '%views% views'
+  views: '%views% переглядів'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+    likersTitle: "Люди, які відреагували на цей проект"
+    all: "Усі"
+  remixes: '{0}0 реміксів |{1}1 реміксів |]1,Inf]%remixes% реміксів'
+  newRemixesNotificationTitle: '{1}"%programName%" має 1 новий ремікс: |] 1,Inf] "%programName%" має %remixes% нових реміксів: '
   submitted: Submitted Projects
   uploaded: Uploaded Projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
+  reportAsInappropriate: Поскаржитись як недоречно
+  reportProgram: Поскаржитись на проєкт
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  reportLoginText: Будь ласка, увійдіть в обліковий запис %login%, щоб поскаржитись на це проєкт.
+  reportDialogHeader: Чому ви хочете поскаржитись на це проєкт?
+  reportDialogReason: Введіть причину
+  reportRadioButtonInappropriate: Це недоречно
+  reportRadioButtonCopyright: Порушення авторських прав
+  reportRadioButtonSpam: Це Спам
+  reportRadioButtonDislike: Мені це не сподобалось
+  reportOwnProgram: Ви не можете поскаржитись на свій власний проєкт. 
+  reportAlready: Ви вже поскаржились на це проєкт.
+  reportDone: Ви поскаржились на це проєкт!
+  updateAppHeaderDownload: Завантажити неможливо
+  updateAppTextDownload: Будь ласка, оновіть додаток до найновішої версії. Майте на увазі, що не всі функції Android вже доступні на IOS.
+  updateAppTextDownloadApk: Завантаження APK наразі доступне лише на Android, а не на IOS.
   updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version.
+  updateAppText: Будь ласка, оновіть додаток до найновішої версії.
   btnClosePopup: Гаразд
-  checkout_this_program: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_program: Оцініть цей Catrobat проєкт
+  show_more: Показати більше
   comments: Коментарі
-  send: Send
-  delete: Delete
+  send: Надіслати
+  delete: Видалити
   report: Звіт
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  report_popup: На коментар успішно поскаржилися.
+  report_popup_header: Скарга була відправлена
+  deleted_popup: Коментар успішно видалено.
+  deleted_popup_header: Видалено
+  noAdminRights: Ви не мажте прав Адміністратора.Будь ласка, увійдіть як Адміністратор
+  editProject: Редагувати проєкт
+  closeProjectEditor: Закрити редактор
   closeEditorPrompt: Бажаєте зберегти свої зміни?
   btnDiscard: Відкинути
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: Напишіть коментар
+  thumbsUp: Палець вверх!
+  smile: Усмішка!
+  love: Люблю!
+  wow: Вааау!
+  linkTitle: Посилання
+  link: Скопіювати посилання проєкту у буфер обміну
   reactionsText: Реакції
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
-  default: Default
+  downloadErrorText: Під час завантаження проєкт сталася помилка. Повторіть спробу пізніше.
+  downloadStartText: Завантаження розпочалось... 
+  showTranslation: Показати переклад
+  hideTranslation: Приховати переклад
+  translatedByLine: Перекладано %provider% з %sourceLanguage% для %targetLanguage%
+  googleTranslate: Перекладач Google
+  confrimDelete: Ви справді хочете видалити цей переклад?
+  default: За замовчування
   save: Зберегти
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: '%language% Переклад'
+  editDefault: Редагувати за замовчуванням
+  editTranslation: Редагувати %language% переклад
+  translations: Переклади
+  createTranslation: Створити переклад
 remixGraph:
   title: Ремікси
-  showRemixGraph: 'Remix graph'
-  by: 'by'
-  open: 'Open'
-  showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
+  showRemixGraph: 'Графік реміксів'
+  by: 'від'
+  open: 'Відкрито'
+  showPaths: 'Показати контури'
+  programNotAvailableErrorTitle: 'Вибачте...'
+  programNotAvailableErrorDescription: 'Проєкт більше не доступний!'
+  programNotAvailable: 'Недоступно'
   programUnknownUser: 'Unknown User'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply: Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Шановний %username%.
+    Щоб завершити активацію облікового запису - відвідайте %confirmationUrl%
+    Це посилання можна використовувати лише один раз для перевірки вашого облікового запису.
+    З найщирішими побажаннями
+    Команда Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Шановний %username%. <br>
     <br>
-    To finish activating your account - please click <a href="%confirmationUrl%">here.</a><br>
-    This link can only be used once to validate your account.<br>
+    Щоб завершити активацію облікового запису - натисніть <a href="%%confirmationUrl%">here.</a> <br>
+    Це посилання можна використовувати лише один раз для перевірки вашого облікового запису. <br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    З найщирішими побажаннями,<br>
+    Команда Catrobat.
     </p>
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
-    Dear %username%.
-    You have requested to reset your password on %appplication_url% because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.
-    To reset your password and create a new one, please visit the following page: %confirmationUrl%
-    You can use your username and your password at any time to access the %appplication_url% community.
-    To do so, just visit the following page: %loginPage%
-    To edit your profile details, go to this page: %profilePage%
-    Best regards,
-    Your Catrobat Team.
+    Шановний %username%.
+    Ви попросили скинути пароль на %appplication_url%, оскільки забули пароль.
+    Якщо ви цього не просили, будь ласка, проігноруйте це. Він закінчиться і стане марним через 24 години.
+    Щоб скинути пароль і створити новий, відвідайте наступну сторінку: %confirmationUrl%
+    Ви можете будь-коли використовувати своє ім'я користувача та пароль для доступу до спільноти %appplication_url%.
+    Для цього просто відвідайте наступну сторінку: %loginPage%
+    Щоб змінити відомості про профіль, перейдіть на цю сторінку: %profilePage%
+    З найщирішими побажаннями
+    Команда Catrobat.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Шановний %username%. <br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Ви попросили скинути пароль на <a href="%appplication_url%">Pocket Code</a>, оскільки забули пароль.
+    Якщо ви цього не просили, будь ласка, проігноруйте це. Він закінчиться і стане марним через 24 години. <br>
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Щоб скинути пароль і створити новий, натисніть на <a href="%confirmationUrl%">це.</a> <br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
+    Ви можете використовувати своє ім'я користувача та пароль у будь-який час для доступу до спільноти <a href="%appplication_url%">Pocket Code</a>. <br>
+    Для цього просто відвідайте наступну сторінку: <a href="%%loginPage%">Логін сторінка</a><br>
+    Щоб змінити відомості профілю, перейдіть на цю <a href="%profilePage%">сторінку</a>. <br>
     <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    З найщирішими побажаннями<br>
+    Команда Catrobat.
     </p>
 profile:
-  edit: Edit your profile
-  saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
-  firstEmail: My first email
-  secondEmail: My second email
-  myPrograms: My projects
-  follows: Follows
-  follower: Follower
-  unfollowUser: Unfollow this user!
-  followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  edit: Редагувати свій профіль
+  saveChanges: Зберегти зміни
+  newPass: Новий пароль
+  repeatPass: Повторіть пароль
+  oldPass: Старий пароль
+  firstEmail: Моя перша електронна пошта
+  secondEmail: Моя друга електронна пошта
+  myPrograms: Мої проєкти
+  follows: Підписки
+  follower: Підписник
+  unfollowUser: Відписатися від користувача!
+  followUser: Підписатися на користувача!
+  amountOfPrograms: Кількість проєктів
   form:
-    passwordTooShort: The new password must have at least %length% characters.
-    passwordTooLong: The new password can have a maximum of %length% characters.
-    passwordIsUsername: The password must differ from the username.
-    passwordWrong: Wrong password
-    emailNotValid: This email address is not valid.
-    emailMissing: Error while updating this e-mail address. You must have at least one validated e-mail address.
-    emailExists: This email address already exists.
-    usernameNotValid: This username is not valid.
-    usernameMissing: You must have a username.
-    usernameExists: This username already exists.
-    usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
-  reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  changePicture: Change picture
+    passwordTooShort: Новий пароль повинен містити не менше %length% символів
+    passwordTooLong: Новий пароль має містити не менше %length% символів
+    passwordIsUsername: Пароль повинен відрізнятися від імені користувача.
+    passwordWrong: Некоректний пароль
+    emailNotValid: Ця електронна адреса некоректна.
+    emailMissing: Помилка під час оновлення цієї адреси електронної пошти. Потрібно мати принаймні одну перевірену адресу електронної пошти.
+    emailExists: Ця адреса електронної пошти вже існує.
+    usernameNotValid: Некоректне ім'я користувача.
+    usernameMissing: Ви повинні мати ім'я користувача.
+    usernameExists: Цей ім'я користувача вже існує.
+    usernameContainsEmail: Ім'я користувача не повинно містити адресу електронної пошти.
+    submitSuccess: Збережено!
+  reallyDeleteProgram: Ви справді бажаєте видалити свій проєкт?
+  programsOf: Проєкти
+  changePicture: Змінити зображення
   avatar:
     noImage: No Image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
-  goToScratchProfile: Profile on Scratch
+    pictureTooLarge: Вибране зображення занадто велике, будь ласка, не використовуйте зображення розміром понад 5 Мб.
+    uploadError: На жаль, під час завантаження виникла проблема!
+    noSupport: Цей тип зображення не підтримується, спробуйте інше зображення.
+  goToScratchProfile: Профіль у Scratch
 myprofile:
-  editProfile: Edit profile
-  edit: Edit
+  editProfile: Редагувати профіль
+  edit: Редагувати
   done: Готово
-  checkMail: An email was sent to your email address. Please check your inbox.
-  passwordUpdated: Your password was successfully updated.
-  avatar: Avatar
-  email: Email
-  editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
+  checkMail: На вашу електронну адресу було надіслано електронний лист. Будь ласка, перевірте свою поштову скриньку.
+  passwordUpdated: Ваш пароль було успішно оновлено.
+  avatar: Аватар
+  email: Електронна пошта
+  editAvatar: Змінити фото профілю
+  editUsername: Редагувати ім'я користувача
+  editPassword: Редагувати пароль
+  editCountry: Змінити країну
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  deleteAccountText: Ви дійсно бажаєте видалити свій обліковий запис? Це видалить ваші завантажені проєкти та коментарі!
+  editAccountSettings: Редагувати налаштування облікового запису
+  notChangeVisibility: Не можна змінити видимість
+  notChangeVisibilityReason: Мовна версія вашого проєкту занадто висока і, отже, її не можна встановити на видиму.
 licenseToPlay:
-  link: 'License to play'
-  title: 'License to play - Give credit and share'
-  text1: Imagine that each Catrobat project is a cake, a very special cake that comes with its recipe (programming blocks). All members of the Catrobat community share their cakes along with their recipes. This means that you can enjoy the cakes and learn how to make them yourself!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  link: 'Ліцензія для гри'
+  title: 'Ліцензія для гри - Отримайте кредит і поширте'
+  text1: Уявіть собі, що кожен проєкт Catrobat - це торт, дуже особливий торт, який поставляється зі своїм рецептом (блоками програмування). Всі члени спільноти Catrobat діляться своїми тортами разом зі своїми рецептами. Це означає, що ви можете насолоджуватися тортами й навчитися робити їх самостійно!
+  text2: 'Немає ніяких секретних рецептів: інструкція про те, як зробити ці торти, відкрита для будь-кого, щоб використовувати, повторно використовувати, модифікувати та служити натхненням для нових ідей ... Я маю на увазі торти.'
+  text3: "Ви можете їсти торти, а також копіювати чужі рецепти, щоб зробити свій власний, можливо, з різними інгредієнтами. Ця свобода має дві прості вимоги:"
+  text4: "Створюючи спільноту Catrobat, ми вирішили прийняти цей підхід, оскільки вважаємо, що він підтримує навчання та творчість у спільноті. Ділячись рецептами та інгредієнтами (сценаріями та ілюстраціями), люди можуть спиратися на ідеї один одного, і кожен виграє."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: 'Дізнайтеся більше про умови використання онлайн-спільноти Catrobat на %link-termsOfUse%.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
-  version: Version 1.1, 2 April 2013
+    item1: Поділіться своїми тортами разом з рецептом
+    item2: Віддайте належне тим, хто надихнув вас
+  version: Версія 1.1, 2 квітня 2013 р.
 termsOfUse:
-  title: Terms of Use
+  title: Умови використання
   headline: Welcome to the Catrobat Community!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
-  text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
-  text4: 'Our gift to you:'
-  text5: 'Our Terms of Use and Service:'
+  text1: 'Як частина спільноти Catrobat, ви ділитеся проєктами та ідеями з людьми:'
+  text2: "Нам потрібна ваша допомога, щоб зробити цю спільноту сприятливим місцем для кожного члена. Ось як ви можете допомогти:"
+  text3: "Завдяки проєкту Catrobat ми хочемо сприяти співпраці та дозволити творчості кожного об'єднатися на благо всього людства. Ви також можете стати активним членом спільноти Catrobat, віддаючи свої проєкти назад до спільноти у якості подарунка, так само як інші активні учасники дають вам свої проєкти:"
+  text4: 'Наш подарунок Вам:'
+  text5: 'Наші Умови використання та обслуговування:'
   list1:
-    item1: from many different countries and cultures
-    item2: of all ages (from young children to teens and grandparents)
-    item3: with all levels of experience
+    item1: З різних країн і культур
+    item2: Будь-якого віку (від маленьких дітей до підлітків і бабусь і дідусів)
+    item3: З усіма рівнями досвіду
   list2:
-    item1: Be respectful. When sharing projects, please remember that people of many different ages and backgrounds will see your contributions.
+    item1: Будьте шанобливі. При обміні проєктами, будь ласка, пам'ятайте, що люди різного віку та походження побачать ваш внесок.
     item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
-    item3: "Be honest. Don't pretend to be someone other than who you are or try to trick the community."
-    item4: "Keep personal information private. Don't share your email address, phone number, or other personal contact information."
-    item5: "Help keep the site friendly. If you feel others would find a project or comment mean, insulting, too violent, or otherwise inappropriate, just click the 'report as inappropriate' button and leave a short explanation. The Catrobat team will review your report and may remove any project, comment, or post."
+    item3: "Будьте чесними. Не прикидайтеся кимось іншим, крім того, хто ви є, або не намагайтеся обдурити спільноту."
+    item4: "Зберігайте особисту інформацію приватною. Не діліться своєю адресою електронної пошти, номером телефону або іншою особистою контактною інформацією."
+    item5: "Допоможіть зберегти сайт дружнім. Якщо ви відчуваєте, що інші вважають, що проект або коментар підлий, образливий, занадто жорстокий або іншим чином недоречний, просто натисніть кнопку «звіт як недоречний» і залиште коротке пояснення. Команда Catrobat перегляне ваш звіт і може видалити будь-який проект, коментар або публікацію."
   list3:
-    item1: "By uploading a project to our websites, you accept and agree to put this work under certain free licenses of uploaded Catrobat projects. Similar to the free licenses under which the Catrobat system itself is available to you, these free licenses of uploaded Catrobat projects give everyone the right to learn from work previously uploaded by others and to adapt and remix that work to build their own new fascinating games, animations, and other projects. This allows everyone to 'stand on the shoulders of one's peers', one of them being you! Your work will thus benefit the whole world and remain free for everyone to use, a bit similar to text and pictures freely contributed to Wikipedia by volunteers from all over the world. Think of it as your present to humanity: you give to everyone, and all others that upload their work to our websites give to you. Thus an uploaded project is a gift of great value which its owner is giving to you for free, with the condition that you participate in the community on the same terms."
+    item1: "Завантажуючи проєкт на наші веб-сайти, ви приймаєте та погоджуєтеся розмістити цю роботу під певними безкоштовними ліцензіями завантажених проєктів Catrobat. Подібно до безкоштовних ліцензій, за якими вам доступна сама система Catrobat, ці безкоштовні ліцензії на завантажені проєкти Catrobat дають кожному право вчитися на роботі, раніше завантаженій іншими, а також адаптуватися та реміксувати, які працюють над створенням власних нових захоплюючих ігор, анімацій та інших проєктів.Це дозволяє кожному «стояти на плечах своїх однолітків», одним з них є ви! Таким чином, ваша робота принесе користь всьому світу і залишиться вільною для всіх, трохи схожою на текст і фотографії, вільно внесені до Вікіпедії волонтерами з усього світу. Подумайте про це як про свій подарунок людству: ви даєте всім, і всі інші, які завантажують свою роботу на наші веб-сайти, дають вам. Таким чином, завантажений проєкт - це подарунок великої цінності, який його власник дарує вам безкоштовного,з умовою, що ви берете участь у спільноті на тих же умовах."
     item2: You do not have to accept the gift; if you do, certain rules apply. The benefits of these rules are that you can learn from the work and build upon it to make even cooler stuff yourself, which you can then, e.g., again upload to our websites as your own. Another benefit is that these licenses make sure that you cannot be held liable for any problems arising to others through their use of your project.
     item3: "One important additional condition is that you clearly give attribution to the authors on whose works you based your own work. At the same time, we will work hard so that your work will be clearly appreciated by others to having been contributed by you, by giving attribution to the unique name you have freely chosen to represent you in Catrobat's community, and by giving others the opportunity to express their gratitude to you in public ways for having given your work to everyone, and in particular to them."
     item4: 'Please consult %link-licenseUploaded% for the precise legal terms and conditions.'
@@ -372,24 +372,24 @@ search:
   noProjects: No projects found
 menu:
   profile: My Profile
-  login: Login
-  logout: Logout
+  login: Увійти
+  logout: Вийти
   admin: Admin
   home: Home
   helpAndTutorials: Help & tutorials
-  followersAndFollowing: Follower
+  followersAndFollowing: Підписник
 login:
-  login: Login
+  login: Увійти
   button:
     loginNow: Login now
-    createAccount: Create account
+    createAccount: Створити обліковий запис
     forgetPassword: Forget password?
   oauth:
     title: Or you can join with
   passOrUser: Your password or username was incorrect.
   noUsername: Your username or email address was not found.
   forgotPass: Forgot password or username?
-  recoverPassSend: An email was sent to your email address. Please check your inbox.
+  recoverPassSend: На вашу електронну адресу було надіслано електронний лист. Будь ласка, перевірте свою поштову скриньку.
   alreadyReset: The password for this user has already been requested within the last 24 hours.
   confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
   userOrEmail: Username or Email
@@ -399,7 +399,7 @@ login:
   alreadyAccount: Already having an account?
   or: OR
   username: Username
-  email: Email
+  email: Ел. пошта
   passwordFirst: Password
   passwordSecond: Password Confirm
 register:
@@ -407,34 +407,34 @@ register:
   subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
   button:
     cancel: Скасувати
-    createAccount: Create account
+    createAccount: Створити обліковий запис
 accountRecovery:
   title: Account recovery
   description: If you remember the email or username of your account we can send you a link to reset your password.
   button:
     cancel: Скасувати
-    submit: Recover password
+    submit: Відновити пароль
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Скинути свій пароль"
+    description: "Якщо ви пам'ятаєте електронну пошту свого облікового запису, ми можемо надіслати вам посилання для скидання пароля."
     button:
-      submit: "Send reset email"
+      submit: "Надіслати скидання електронної пошти "
       cancel: "Скасувати"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "Перевірте свої електронні листи"
+    description: "Якщо обліковий запис, який відповідає вашій електронній пошті, існує, то щойно було надіслано електронний лист, який містить посилання, яке можна використовувати для скидання пароля. Термін дії цього посилання минає через %time%."
+    description2: "Якщо ви не отримали електронного листа, будь ласка, перевірте теку спаму або %tryAgainLink%"
+    tryAgain: "Спробуйте ще раз"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Привіт!"
+    visitLink: "Щоб скинути пароль, відвідайте наступне посилання"
+    expire: "Термін дії цього посилання минає через %time%."
+    cheers: "Бувай!"
   reset:
-    title: "Reset your password"
+    title: "Скинути свій пароль"
     button:
-      submit: "Reset password"
+      submit: "Скинути пароль"
 apk:
   download: Download as app
   prepare: 'Get as app'
@@ -447,7 +447,7 @@ errors:
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
-    exists: This username already exists.
+    exists: Цей ім'я користувача вже існує.
     not_exists: This username does not exist.
     not_email: The username must not be an email address.
     size: The username must have at least 3 character and not more than 180
@@ -460,7 +460,7 @@ errors:
   email:
     blank: email must not be blank
     invalid: Your email seems to be invalid
-    exists: This email address already exists.
+    exists: Ця адреса електронної пошти вже існує.
   id:
     blank: Open Authentication ID must not be blank
   login: The password or username was incorrect.
@@ -485,7 +485,7 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Помилка автентифікації
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
@@ -611,10 +611,10 @@ codeview:
   totalNumberOf: 'Total number of'
   scenes: 'Scenes'
   scripts: 'Scripts'
-  bricks: 'Bricks'
-  objects: 'Actors and objects'
-  looks: 'Looks'
-  sounds: 'Sounds'
+  bricks: 'Цегли'
+  objects: 'Актори та об''єкти'
+  looks: 'Вигляди'
+  sounds: 'Звуки'
   globals: 'Globals'
   locals: 'Locals'
   globalVariables: 'Global Variables'
@@ -631,18 +631,18 @@ codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
   general: 'General'
-  bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
-  looksBricks: 'Looks'
-  penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
+  bricks: 'Цегли'
+  eventBricks: 'Події'
+  controlBricks: 'Управління'
+  motionBricks: 'Переміщення'
+  soundBricks: 'Звуки'
+  looksBricks: 'Вигляди'
+  penBricks: 'Ручка'
+  dataBricks: 'Дані'
+  deviceBricks: 'Пристрій'
   specialBricks: 'Special'
 footer:
-  language: Language
+  language: Мова
   usefulLinks: Useful Links
   legalities: Legalities
   communityStats: Community Stats
@@ -703,8 +703,8 @@ flavor:
   luna: Luna & Cat
   create@school: Create@School
 copyright: 'Copyright &copy; %year% <a href="http://www.catrobat.org">Catrobat</a>. All rights reserved.'
-agree: Agree
-disagree: Disagree
+agree: Згоден
+disagree: Не згоден
 profileLoader:
   noProfiles: There are currently no profiles.
 element: 'Element'
@@ -716,20 +716,20 @@ share:
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 checkOutUser: 'Check out this user:'
-community: 'Catrobat community'
+community: 'Спільнота Catrobat'
 back_to_app: 'Exit community'
 category:
   recent: Найновіші проєкти
   random: Випадкові проєкти
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
+  most_viewed: Найбільше переглянуті
+  most_downloaded: Найбільш завантажувані
   example: Example
   scratch: Scratch ремікси
   recommended: Рекомендовані проєкти
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'буде'
+    badge: 'новий'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -811,7 +811,7 @@ extensions:
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: Вишивання
     mindstorms:
       title: Mindstorms
 studio:
