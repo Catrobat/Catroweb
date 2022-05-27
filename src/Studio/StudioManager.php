@@ -187,7 +187,7 @@ class StudioManager
   public function editStudioComment(User $user, int $comment_id, string $comment_text): ?UserComment
   {
     $studioComment = $this->findStudioCommentById($comment_id);
-    if ($this->isUserInStudio($user, $studioComment->getStudio()) && $user->getUsername() === $studioComment->getUser()->getUsername()) {
+    if ($this->isUserInStudio($user, $studioComment->getStudio()) && $user->getUsername() === $studioComment->getUser()->getUserIdentifier()) {
       $studioComment->setText($comment_text);
       $this->entity_manager->persist($studioComment);
       $this->entity_manager->flush();
@@ -210,7 +210,7 @@ class StudioManager
   public function deleteCommentFromStudio(User $user, int $comment_id): void
   {
     $comment = $this->findStudioCommentById($comment_id);
-    if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getUsername() === $comment->getUser()->getUsername() || $this->isUserAStudioAdmin($user, $comment->getStudio()))) {
+    if ($this->isUserInStudio($user, $comment->getStudio()) && ($user->getUsername() === $comment->getUser()->getUserIdentifier() || $this->isUserAStudioAdmin($user, $comment->getStudio()))) {
       $replies = $this->user_comment_repository->findCommentReplies($comment_id);
       foreach ($replies as $reply) {
         $this->entity_manager->remove($reply);

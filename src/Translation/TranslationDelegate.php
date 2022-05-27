@@ -185,7 +185,7 @@ class TranslationDelegate
   private function validateLanguage(?string $language): void
   {
     if (2 == strlen((string) $language)) {
-      if (strtolower($language) != $language) {
+      if (strtolower((string) $language) != $language) {
         throw new InvalidArgumentException('2-character language code has to be lower case');
       }
 
@@ -197,8 +197,8 @@ class TranslationDelegate
         throw new InvalidArgumentException('Invalid 5-character language code format');
       }
 
-      $language_code = substr($language, 0, 2);
-      $country_code = substr($language, 3, 2);
+      $language_code = substr((string) $language, 0, 2);
+      $country_code = substr((string) $language, 3, 2);
 
       if (strtolower($language_code) != $language_code) {
         throw new InvalidArgumentException('5-character language code has to contain lower case language code');

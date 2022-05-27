@@ -28,9 +28,8 @@ class StudioController extends AbstractController
    * move to capi as POST /studio.
    *
    * @internal only - just for testing!
-   *
-   * @Route("/studio/create/{name}", name="studio_create", methods={"GET"})
    */
+  #[Route(path: '/studio/create/{name}', name: 'studio_create', methods: ['GET'])]
   public function createStudio(string $name): Response
   {
     /** @var User|null $user */
@@ -43,9 +42,7 @@ class StudioController extends AbstractController
     return $this->redirectToRoute('studio_details', ['id' => $studio->getId()]);
   }
 
-  /**
-   * @Route("/studio/{id}", name="studio_details", methods={"GET"})
-   */
+  #[Route(path: '/studio/{id}', name: 'studio_details', methods: ['GET'])]
   public function studioDetails(Request $request): Response
   {
     $studio = $this->studio_manager->findStudioById(trim((string) $request->attributes->get('id')));
@@ -63,19 +60,18 @@ class StudioController extends AbstractController
     $comments = $this->studio_manager->findAllStudioComments($studio);
 
     return $this->render('Studio/studio_details.html.twig',
-      ['studio' => $studio, 'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUsername() : '',
-        'user_role' => $user_role, 'members_count' => $members_count,
-        'activities_count' => $activities_count,
-        'projects_count' => $projects_count, 'projects' => $this->getStudioProjectsListWithImg($projects),
-        'comments_count' => $comments_count, 'comments' => $this->getStudioCommentsListWithAvatar($comments),
-      ]);
+        ['studio' => $studio, 'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
+          'user_role' => $user_role, 'members_count' => $members_count,
+          'activities_count' => $activities_count,
+          'projects_count' => $projects_count, 'projects' => $this->getStudioProjectsListWithImg($projects),
+          'comments_count' => $comments_count, 'comments' => $this->getStudioCommentsListWithAvatar($comments),
+        ]);
   }
 
   /**
    * Internal Route only.
-   *
-   * @Route("/studio/members/list", name="studio_members_list", methods={"GET"})
    */
+  #[Route(path: '/studio/members/list', name: 'studio_members_list', methods: ['GET'])]
   public function loadStudioMembersList(Request $request): Response
   {
     /** @var User|null $user */
@@ -84,11 +80,9 @@ class StudioController extends AbstractController
     if (!is_null($studio)) {
       $this->redirectToRoute('index');
     }
-
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
     $members = $this->studio_manager->findAllStudioUsers($studio);
     $projects_per_member = [];
-
     /** @var StudioUser $member */
     foreach ($members as $member) {
       $projects_per_member[$member->getID()] = $this->studio_manager->countStudioUserProjects($member->getStudio(), $member->getUser());
@@ -103,9 +97,8 @@ class StudioController extends AbstractController
 
   /**
    * Internal Route only.
-   *
-   * @Route("/studio/member/promote", name="studio_promote_member", methods={"PUT"})
    */
+  #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
   public function promoteMemberToAdmin(Request $request): Response
   {
     $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -115,12 +108,10 @@ class StudioController extends AbstractController
     if (is_null($studio) || is_null($user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
-
     $studio_user = $this->studio_manager->findStudioUser($user, $studio);
     if (is_null($studio_user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
-
     /** @var User|null $logged_in_user */
     $logged_in_user = $this->getUser();
     $studio_user = $this->studio_manager->changeStudioUserRole($logged_in_user, $studio, $user, StudioUser::ROLE_ADMIN);
@@ -133,14 +124,12 @@ class StudioController extends AbstractController
 
   /**
    * Internal Route only.
-   *
-   * @Route("/studio/member/ban", name="studio_ban_user", methods={"PUT"})
    */
+  #[Route(path: '/studio/member/ban', name: 'studio_ban_user', methods: ['PUT'])]
   public function banUserFromStudio(Request $request): Response
   {
     /** @var User|null $logged_in_user */
     $logged_in_user = $this->getUser();
-
     $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
     $studio = $this->studio_manager->findStudioById($payload['studio_id']);
     /** @var User|null $user */
@@ -148,12 +137,10 @@ class StudioController extends AbstractController
     if (is_null($studio) || is_null($user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
-
     $studio_user = $this->studio_manager->findStudioUser($user, $studio);
     if (is_null($studio_user)) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
-
     $studio_user = $this->studio_manager->changeStudioUserStatus($logged_in_user, $studio, $user, StudioUser::STATUS_BANNED);
     if (!is_null($studio_user) && StudioUser::STATUS_BANNED === $studio_user->getStatus()) {
       return new JsonResponse(null, Response::HTTP_NO_CONTENT);
@@ -164,9 +151,8 @@ class StudioController extends AbstractController
 
   /**
    * Internal Route only.
-   *
-   * @Route("/studio/activities/list", name="studio_activities_list", methods={"GET"})
    */
+  #[Route(path: '/studio/activities/list', name: 'studio_activities_list', methods: ['GET'])]
   public function loadStudioActivitiesList(Request $request): Response
   {
     /** @var User|null $user */
@@ -175,7 +161,6 @@ class StudioController extends AbstractController
     if (is_null($studio)) {
       $this->redirectToRoute('index');
     }
-
     $is_studio_admin = StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $studio);
     $activities = $this->studio_manager->findAllStudioActivitiesCombined($studio);
 
@@ -187,9 +172,8 @@ class StudioController extends AbstractController
 
   /**
    * ToDo: move to capi.
-   *
-   * @Route("/removeStudioProject/", name="remove_studio_project", methods={"POST"})
    */
+  #[Route(path: '/removeStudioProject/', name: 'remove_studio_project', methods: ['POST'])]
   public function removeProjectFromStudio(Request $request): JsonResponse
   {
     $project = $this->program_manager->find(trim((string) $request->request->get('projectID')));
@@ -211,9 +195,8 @@ class StudioController extends AbstractController
 
   /**
    * ToDo: move to capi.
-   *
-   * @Route("/removeStudioComment/", name="remove_studio_comment", methods={"POST"})
    */
+  #[Route(path: '/removeStudioComment/', name: 'remove_studio_comment', methods: ['POST'])]
   public function removeCommentFromStudio(Request $request): JsonResponse
   {
     $comment_id = $request->request->getInt('commentID');
@@ -242,9 +225,8 @@ class StudioController extends AbstractController
 
   /**
    * ToDo: move to capi.
-   *
-   * @Route("/postCommentToStudio/", name="post_studio_comment", methods={"POST"})
    */
+  #[Route(path: '/postCommentToStudio/', name: 'post_studio_comment', methods: ['POST'])]
   public function postComment(Request $request): JsonResponse
   {
     $isReply = 'true' == $request->request->get('isReply') && $request->request->getInt('parentID') > 0;
@@ -285,7 +267,6 @@ class StudioController extends AbstractController
       $result .= '</div></div></div><hr class="comment-hr">';
     }
     $result .= '</div></div></div>';
-
     if ($comment->getText() === $comment_text) {
       return new JsonResponse(['comment' => $result, 'replies_count' => $replies_count,
         'comments_count' => $comments_count, 'activities_count' => $activities_count, ], Response::HTTP_OK);
@@ -296,9 +277,8 @@ class StudioController extends AbstractController
 
   /**
    * ToDo: move to capi.
-   *
-   * @Route("/loadCommentReplies/", name="load_comment_replies", methods={"GET"})
    */
+  #[Route(path: '/loadCommentReplies/', name: 'load_comment_replies', methods: ['GET'])]
   public function loadCommentReplies(Request $request): Response
   {
     $rs = '';
@@ -327,9 +307,8 @@ class StudioController extends AbstractController
 
   /**
    * ToDo: move to capi.
-   *
-   * @Route("/uploadStudioCover/", name="upload_studio_cover", methods={"POST"})
    */
+  #[Route(path: '/uploadStudioCover/', name: 'upload_studio_cover', methods: ['POST'])]
   public function uploadStudioCover(Request $request): Response
   {
     $studio = $this->studio_manager->findStudioById(trim((string) $request->request->get('std-id')));
@@ -356,9 +335,8 @@ class StudioController extends AbstractController
 
   /**
    * ToDo: move to capi.
-   *
-   * @Route("/updateStudioDetails/", name="update_studio_details", methods={"POST"})
    */
+  #[Route(path: '/updateStudioDetails/', name: 'update_studio_details', methods: ['POST'])]
   public function editStudioDetails(Request $request): Response
   {
     if ($request->isMethod('POST')) {
@@ -437,7 +415,7 @@ class StudioController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if ((StudioUser::ROLE_ADMIN === $this->studio_manager->getStudioUserRole($user, $comment->getStudio())
-        || (!is_null($this->getUser()) && $this->getUser()->getUsername() === $comment->getUsername())) && $isReply) {
+        || (!is_null($this->getUser()) && $this->getUser()->getUserIdentifier() === $comment->getUsername())) && $isReply) {
       $rs .= '<a class="comment-delete-button" data-bs-toggle="tooltip" onclick="(new Studio()).removeComment($(this),'.$comment->getId().', true, '.$comment->getParentId().')"';
       $rs .= ' title="'.$this->translator->trans('studio.details.remove_comment', [], 'catroweb').'">';
       $rs .= '<i class="ms-2 material-icons text-danger">delete</i>';

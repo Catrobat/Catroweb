@@ -32,20 +32,11 @@ class RemixManagerTest extends TestCase
 
   private EntityManager|MockObject $entity_manager;
 
-  /**
-   * @var MockObject|ProgramRepository
-   */
-  private $program_repository;
+  private ProgramRepository|MockObject $program_repository;
 
-  /**
-   * @var MockObject|ScratchProgramRepository
-   */
-  private $scratch_program_repository;
+  private ScratchProgramRepository|MockObject $scratch_program_repository;
 
-  /**
-   * @var MockObject|ProgramRemixRepository
-   */
-  private $program_remix_repository;
+  private ProgramRemixRepository|MockObject $program_remix_repository;
 
   protected function setUp(): void
   {

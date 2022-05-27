@@ -1035,7 +1035,7 @@ class DataFixturesContext implements Context
       switch ($type) {
         case 'comment':
           $temp_comment = new UserComment();
-          $temp_comment->setUsername($user->getUsername());
+          $temp_comment->setUsername($user->getUserIdentifier());
           $temp_comment->setUser($user);
           $temp_comment->setText('This is a comment');
           $temp_comment->setProgram($program);

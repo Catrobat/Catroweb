@@ -9,6 +9,7 @@ Feature: Upload a program with tag
       | 3  | mindstorms     |
       | 4  | phiro          |
       | 5  | raspberry_pi   |
+      | 6  | embroidery     |
 
   Scenario: uploading a embroidery program should add the embroidery extension to the program
     Given I have an embroidery project
