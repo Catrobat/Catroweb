@@ -35,13 +35,9 @@ class FeaturedProgramAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'featured_program';
 
   public function __construct(
-      ?string $code,
-      ?string $class,
-      ?string $baseControllerName,
       private readonly ImageRepository $featured_image_repository,
       private readonly ProgramManager $program_manager
   ) {
-    parent::__construct($code, $class, $baseControllerName);
   }
 
   /**

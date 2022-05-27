@@ -16,16 +16,22 @@ class CookieService
    */
   public function createBearerTokenCookie(string $bearer_token): Cookie
   {
-    return new Cookie(
-      'BEARER',
-      $bearer_token,
-      time() + $this->jwtTokenLifetime, // expiration
-      $this->router->getContext()->getBaseUrl().'/', // path
-      null, // domain, null means that Symfony will generate it on its own.
-      'prod' === $_ENV['APP_ENV'], // secure (HTTPS only)
-      false, // httpOnly
-      false, // raw
-      'lax' // same-site parameter, can be 'lax' or 'strict'.
+    return \Symfony\Component\HttpFoundation\Cookie::create(
+        'BEARER',
+        $bearer_token,
+        time() + $this->jwtTokenLifetime,
+        // expiration
+        $this->router->getContext()->getBaseUrl().'/',
+        // path
+        null,
+        // domain, null means that Symfony will generate it on its own.
+        'prod' === $_ENV['APP_ENV'],
+        // secure (HTTPS only)
+        false,
+        // httpOnly
+        false,
+        // raw
+        'lax'
     );
   }
 
@@ -34,22 +40,29 @@ class CookieService
    */
   public function createRefreshTokenCookie(string $refresh_token): Cookie
   {
-    return new Cookie(
-      'REFRESH_TOKEN',
-      $refresh_token,
-      time() + $this->refreshTokenLifetime, // expiration
-      $this->router->getContext()->getBaseUrl().'/', // path - optional /api/authentication
-      null, // domain, null means that Symfony will generate it on its own.
-      'prod' === $_ENV['APP_ENV'], // secure (HTTPS only)
-      true, // httpOnly
-      false, // raw
-      'strict' // same-site parameter, can be 'lax' or 'strict'.
+    return \Symfony\Component\HttpFoundation\Cookie::create(
+        'REFRESH_TOKEN',
+        $refresh_token,
+        time() + $this->refreshTokenLifetime,
+        // expiration
+        $this->router->getContext()->getBaseUrl().'/',
+        // path - optional /api/authentication
+        null,
+        // domain, null means that Symfony will generate it on its own.
+        'prod' === $_ENV['APP_ENV'],
+        // secure (HTTPS only)
+        true,
+        // httpOnly
+        false,
+        // raw
+        'strict'
     );
   }
 
-  public static function clearCookie(string $cookie): void
+  public function clearCookie(string $cookie): void
   {
     if (isset($_COOKIE[$cookie])) {
+      setcookie($cookie, '', ['expires' => time() - 3600, 'path' => $this->router->getContext()->getBaseUrl().'/']);
       setcookie($cookie, '', ['expires' => time() - 3600, 'path' => '/']);
       unset($_COOKIE[$cookie]);
     }

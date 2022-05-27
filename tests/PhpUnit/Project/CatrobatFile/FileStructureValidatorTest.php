@@ -3,26 +3,26 @@
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
-use App\Project\CatrobatFile\FileStructureValidator;
+use App\Project\CatrobatFile\FileStructureValidatorEventSubscriber;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
 use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
- * @covers \App\Project\CatrobatFile\FileStructureValidator
+ * @covers \App\Project\CatrobatFile\FileStructureValidatorEventSubscriber
  */
 class FileStructureValidatorTest extends TestCase
 {
-  private FileStructureValidator $file_structure_validator;
+  private FileStructureValidatorEventSubscriber $file_structure_validator;
 
   protected function setUp(): void
   {
-    $this->file_structure_validator = new FileStructureValidator();
+    $this->file_structure_validator = new FileStructureValidatorEventSubscriber();
   }
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(FileStructureValidator::class, $this->file_structure_validator);
+    $this->assertInstanceOf(FileStructureValidatorEventSubscriber::class, $this->file_structure_validator);
   }
 
   public function testMakesSureTheProgramHasAValidFileStructure(): void

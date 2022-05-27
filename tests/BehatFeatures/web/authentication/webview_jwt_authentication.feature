@@ -17,7 +17,7 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "BEARER" to "invalid"
     When I go to "/app/user"
     And I wait for the page to be loaded
-    Then I should be on "app/login"
+    Then I should be on "app/"
 
   Scenario: Log in using Catrobat user and show profile
     Given I use a valid JWT token for "WebViewUser"
@@ -27,12 +27,11 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Then I should see "dev1@catrob.at"
 
   Scenario: Log in using Catrobat user with wrong token
-    Given I use an invalid JWT token for "WebViewUser"
+    Given I use an invalid JWT authorization header for "WebViewUser"
     And I am on "/app/user"
     And I wait for the page to be loaded
     Then I should not see "dev1@catrob.at"
     Then I should not see "My Profile"
-    And I should be on "app/login"
 
   Scenario: Log in using empty token should be ignored
     Given I use an empty JWT token for "WebViewUser"

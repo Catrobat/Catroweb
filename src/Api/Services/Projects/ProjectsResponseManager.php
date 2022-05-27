@@ -63,7 +63,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
     return new ProjectResponse([
       'id' => $project->getId(),
       'name' => $project->getName(),
-      'author' => $project->getUser()->getUserName(),
+      'author' => $project->getUser()->getUserIdentifier(),
       'description' => $project->getDescription(),
       'version' => $project->getCatrobatVersionName(),
       'views' => $project->getViews(),
@@ -130,7 +130,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       'project_url' => $project_url,
       'url' => $url,
       'name' => $featured_project->getProgram()->getName(),
-      'author' => $featured_project->getProgram()->getUser()->getUsername(),
+      'author' => $featured_project->getProgram()->getUser()->getUserIdentifier(),
       'featured_image' => $this->image_repository->getAbsoluteWebPath($featured_project->getId(), $featured_project->getImageType(), true),
     ]);
   }

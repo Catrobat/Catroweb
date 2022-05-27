@@ -49,7 +49,7 @@ class LoggerProcessor
     $ip = $request->getClientIp();
 
     if (str_contains((string) $ip, ',')) {
-      $ip = substr($ip, 0, strpos($ip, ','));
+      $ip = substr((string) $ip, 0, strpos((string) $ip, ','));
     }
 
     return $ip;

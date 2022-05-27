@@ -269,16 +269,14 @@ class TwigExtension extends AbstractExtension
 
   /**
    * @deprecated
-   *
-   * @Route("/api/twig/getMediaPackageImageUrl", name="catrobat_twig_getMediaPackageImageUrl",
-   * methods={"POST"})
    */
+  #[Route(path: '/api/twig/getMediaPackageImageUrl', name: 'catrobat_twig_getMediaPackageImageUrl', methods: ['POST'])]
   public function getMediaPackageImageUrl(MediaPackageFile $object): ?string
   {
     return match ($object->getExtension()) {
       'jpg', 'jpeg', 'png', 'gif' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
-        'catrobat' => $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension()),
-        default => null,
+          'catrobat' => $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension()),
+          default => null,
     };
   }
 

@@ -258,7 +258,7 @@ class RemixManager
       $original_program = $relation->getAncestor();
       $remixed_program = $relation->getDescendant();
       $remixed_program_user = $remixed_program->getUser();
-      $remixed_program_username = $remixed_program_user->getUsername();
+      $remixed_program_username = $remixed_program_user->getUserIdentifier();
 
       $unseen_remix_programs_data[] = [
         'originalProgramId' => $original_program->getId(),

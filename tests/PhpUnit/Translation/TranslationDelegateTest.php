@@ -18,15 +18,9 @@ use PHPUnit\Framework\TestCase;
  */
 class TranslationDelegateTest extends TestCase
 {
-  /**
-   * @var MockObject|ProjectCustomTranslationRepository
-   */
-  private $project_custom_translation_repository;
+  private ProjectCustomTranslationRepository|MockObject $project_custom_translation_repository;
 
-  /**
-   * @var MockObject|ProjectMachineTranslationRepository
-   */
-  private $project_machine_translation_repository;
+  private ProjectMachineTranslationRepository|MockObject $project_machine_translation_repository;
 
   protected function setUp(): void
   {

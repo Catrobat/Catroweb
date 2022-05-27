@@ -61,7 +61,7 @@ class AchievementManager
     $achievement = $this->findAchievementByInternalTitle($internal_title);
 
     return $this->user_achievement_repository->findBy([
-      'achievement' => $achievement->getId(),
+      'achievement' => $achievement?->getId(),
     ]);
   }
 

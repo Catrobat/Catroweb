@@ -44,14 +44,10 @@ class ProjectsAdmin extends AbstractAdmin
   }
 
   public function __construct(
-        ?string $code,
-        ?string $class,
-        ?string $baseControllerName,
         private readonly ScreenshotRepository $screenshot_repository,
         protected TokenStorageInterface $security_token_storage,
         private readonly ParameterBagInterface $parameter_bag
   ) {
-    parent::__construct($code, $class, $baseControllerName);
   }
 
   /**

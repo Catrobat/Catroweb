@@ -107,6 +107,11 @@ services:
     class: App\Project\ProgramManager
     public: true
 
+  App\Project\Extension\ProjectExtensionManager:
+    class: App\Project\Extension\ProjectExtensionManager
+    public: true
+
+
   App\System\Commands\Helpers\RemixManipulationProgramManager:
     class: App\System\Commands\Helpers\RemixManipulationProgramManager
     public: true
@@ -163,6 +168,11 @@ services:
   App\Admin\Tools\Maintenance\MaintainController:
     class: App\Admin\Tools\Maintenance\MaintainController
     public: true
+    arguments:
+      $file_storage_dir: '%catrobat.file.storage.dir%'
+      $apk_dir: '%catrobat.apk.dir%'
+      $log_dir: '%catrobat.logs.dir%'
+
 
   App\Admin\Tools\SendMailToUser\SendMailToUserController:
     class: App\Admin\Tools\SendMailToUser\SendMailToUserController
@@ -278,11 +288,6 @@ services:
     public: true
 
   # ======== Views ========
-  catrobat.view.uploadexception:
-    class: App\Api_deprecated\Listeners\UploadExceptionListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
-
   App\Api_deprecated\Security\ApiTokenAuthenticator:
     class: App\Api_deprecated\Security\ApiTokenAuthenticator
     public: true
@@ -365,122 +370,96 @@ services:
     tags:
       - { name: kernel.event_subscriber }
 
+  App\Application\Framework\ExceptionEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Security\Authentication\JwtRefresh\RefreshBearerCookieOnKernelResponseEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Application\Locale\LocaleEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Application\Theme\ThemeRequestEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\NameValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\DescriptionValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\NotesAndCreditsValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\OnlyDefinedImagesValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\FileStructureValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\VersionValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\ProgramXmlHeaderValidatorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\LicenseUpdaterEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\Remix\RemixUpdaterEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\CatrobatFile\ProgramFlavorEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\Apk\ApkCleanupEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\Extension\ProjectExtensionEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Translation\CustomTranslationAchievementEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Translation\MachineTranslationEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Api_deprecated\Listeners\ProgramListSerializerEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Api_deprecated\Listeners\UploadExceptionEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
+  App\Project\Scratch\ScratchProjectUpdaterEventSubscriber:
+    tags:
+      - { name: kernel.event_subscriber }
+
   # ====================================================================================================================
-  #   Listeners:
+  #   Success Handler:
   #
-  catroweb.oauth_success_listener:
-    class: App\Security\OAuth\OAuthSuccessListener
+  catroweb.oauth_success_handler:
+    class: App\Security\OAuth\OAuthSuccessHandler
 
-  App\Application\Framework\ExceptionListener:
-    tags:
-      - { name: kernel.event_listener, event: kernel.exception }
-
-  App\Security\Authentication\JwtRefresh\RefreshBearerCookieOnKernelResponse:
-    tags:
-      - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse, priority: 200 }
-
-  App\Application\Locale\LocaleListener:
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 100 }
-
-  App\Application\Theme\ThemeRequestListener:
-    tags:
-      - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 10  }
-
-  # ======== Upload CatrobatFile ========
-
-  App\Project\CatrobatFile\NameValidator:
-    class: App\Project\CatrobatFile\NameValidator
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforeInsertEvent,
-        method: onProgramBeforeInsert
-      }
-
-  App\Project\CatrobatFile\DescriptionValidator:
-    class: App\Project\CatrobatFile\DescriptionValidator
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforeInsertEvent ,
-        method: onProgramBeforeInsert
-      }
-
-  App\Project\CatrobatFile\NotesAndCreditsValidator:
-    class: App\Project\CatrobatFile\NotesAndCreditsValidator
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforeInsertEvent ,
-        method: onProgramBeforeInsert
-      }
-
-  App\Project\CatrobatFile\VersionValidator:
-    class: App\Project\CatrobatFile\VersionValidator
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforeInsertEvent ,
-        method: onProgramBeforeInsert
-      }
-
-  App\Project\CatrobatFile\ProgramXmlHeaderValidator:
-    class: App\Project\CatrobatFile\ProgramXmlHeaderValidator
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforeInsertEvent ,
-        method: onProgramBeforeInsert
-      }
-
-  # ======== Upload Modification ========
-
-  App\Project\CatrobatFile\LicenseUpdater:
-    class: App\Project\CatrobatFile\LicenseUpdater
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforeInsertEvent,
-        method: onProgramBeforeInsert,
-        priority: -1
-      }
-
-  App\Project\Remix\RemixUpdater:
-    class: App\Project\Remix\RemixUpdater
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramAfterInsertEvent,
-        method: onProgramAfterInsert
-      }
-
-  App\Project\CatrobatFile\ProgramFlavorListener:
-    class: App\Project\CatrobatFile\ProgramFlavorListener
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforePersistEvent,
-        method: onEvent
-      }
-
-  App\Project\Apk\ApkCleanupListener:
-    class: App\Project\Apk\ApkCleanupListener
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforePersistEvent,
-        method: handleEvent
-      }
-
-  App\Project\CatrobatFile\ProgramExtensionListener:
-    class: App\Project\CatrobatFile\ProgramExtensionListener
-    tags:
-      - {
-        name: kernel.event_listener,
-        event: App\Project\Event\ProgramBeforePersistEvent,
-        method: onEvent
-      }
 
   # ======== Logging ========
 
@@ -502,12 +481,6 @@ services:
     class: App\System\Mail\MailerAdapter
     public: true
 
-  # ======== Scratch ========
-  App\Project\Scratch\ScratchProgramUpdater:
-    class: App\Project\Scratch\ScratchProgramUpdater
-    tags:
-      - { name: kernel.event_listener, event: App\Project\Event\CheckScratchProgramEvent, method: onCheckScratchProgram }
-
   # ======== Entity ========
 
   App\Project\EventListener\FeaturedProgramImageListener:
@@ -524,18 +497,29 @@ services:
     class: Ramsey\Uuid\Doctrine\UuidGenerator
     public: true
 
-  # ======== Views ========
-  catrobat.view.programlist:
-    class: App\Api_deprecated\Listeners\ProgramListSerializer
-    tags:
-      - { name: kernel.event_listener, event: kernel.view, method: onKernelView }
-
   # ======== Versioning ========
 
   App\Application\Framework\VersionStrategy:
     class: App\Application\Framework\VersionStrategy
     arguments:
       - '%env(string:APP_VERSION)%'
+
+
+  # ======== Inject parameter ========
+
+  App\Application\Controller\Ci\BuildApkController:
+    arguments:
+      $arr_jenkins_config: '%jenkins%'
+
+  App\Application\Controller\MediaLibrary\MediaPackageController:
+    arguments:
+      $catrobat_mediapackage_path: '%catrobat.mediapackage.path%'
+
+  App\Application\Controller\Project\ProgramController:
+    arguments:
+      $max_name_upload_size: '%catrobat.max_name_upload_size%'
+      $max_description_upload_size: '%catrobat.max_description_upload_size%'
+      $max_notes_and_credits_upload_size: '%catrobat.max_notes_and_credits_upload_size%'
 
   # ====================================================================================================================
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -550,31 +534,36 @@ services:
   admin.block.projects.overview:
     class: App\Admin\Projects\ProjectsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Projects Overview", show_mosaic_button: false, default: true}
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Program
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Projects Overview"
+        show_mosaic_button: false
+        default: true
+        code: ~
+        model_class: App\DB\Entity\Project\Program
+        controller: ~
     public: true
 
   admin.block.projects.approve:
     class: App\Admin\Projects\ApproveProjects\ApproveProjectsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Approve Projects" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Program
-      - App\Admin\Projects\ApproveProjects\ApproveProjectsController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Approve Projects"
+        code: ~
+        model_class: App\DB\Entity\Project\Program
+        controller: App\Admin\Projects\ApproveProjects\ApproveProjectsController
     public: true
 
   admin.block.projects.reported:
     class: App\Admin\Projects\ReportedProjects\ReportedProjectsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Reported Projects" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\ProgramInappropriateReport
-      - App\Admin\Projects\ReportedProjects\ReportedProjectsController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Reported Projects"
+        code: ~
+        model_class: App\DB\Entity\Project\ProgramInappropriateReport
+        controller: App\Admin\Projects\ReportedProjects\ReportedProjectsController
     public: true
 
   # ===== Comments
@@ -582,21 +571,24 @@ services:
   admin.block.comments.overview:
     class: App\Admin\Comments\CommentsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Comments Overview", show_mosaic_button: false}
-    arguments:
-      - ~
-      - App\DB\Entity\User\Comment\UserComment
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Comments Overview"
+        show_mosaic_button: false
+        code: ~
+        model_class: App\DB\Entity\User\Comment\UserComment
+        controller: ~
     public: true
 
   admin.block.comments.reported:
     class: App\Admin\Comments\ReportedComments\ReportedCommentsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Reported Comments" }
-    arguments:
-      - ~
-      - App\DB\Entity\User\Comment\UserComment
-      - App\Admin\Comments\ReportedComments\ReportedCommentsController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Reported Comments"
+        code: ~
+        model_class: App\DB\Entity\User\Comment\UserComment
+        controller: App\Admin\Comments\ReportedComments\ReportedCommentsController
     public: true
 
   # ===== Special Projects
@@ -604,21 +596,23 @@ services:
   admin.block.featured.program:
     class: App\Admin\SpecialProjects\FeaturedProgramAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Featured Projects" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Special\FeaturedProgram
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Featured Projects"
+        code: ~
+        model_class: App\DB\Entity\Project\Special\FeaturedProgram
+        controller: ~
     public: true
 
   admin.block.example.program:
     class: App\Admin\SpecialProjects\ExampleProgramAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Example Projects" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Special\ExampleProgram
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Example Projects"
+        code: ~
+        model_class: App\DB\Entity\Project\Special\ExampleProgram
+        controller: ~
     public: true
 
   # ===== Media Package
@@ -626,31 +620,34 @@ services:
   admin.block.mediapackage.package:
     class: App\Admin\MediaPackage\MediaPackageAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Packages" }
-    arguments:
-      - ~
-      - App\DB\Entity\MediaLibrary\MediaPackage
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Packages"
+        code: ~
+        model_class: App\DB\Entity\MediaLibrary\MediaPackage
+        controller: ~
     public: true
 
   admin.block.mediapackage.category:
     class: App\Admin\MediaPackage\MediaPackageCategoriesAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Categories" }
-    arguments:
-      - ~
-      - App\DB\Entity\MediaLibrary\MediaPackageCategory
-      - App\Admin\MediaPackage\MediaPackageCategoryController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Categories"
+        code: ~
+        model_class: App\DB\Entity\MediaLibrary\MediaPackageCategory
+        controller: App\Admin\MediaPackage\MediaPackageCategoryController
     public: true
 
   admin.block.mediapackage.file:
     class: App\Admin\MediaPackage\MediaPackageFileAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Files" }
-    arguments:
-      - ~
-      - App\DB\Entity\MediaLibrary\MediaPackageFile
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Files"
+        code: ~
+        model_class: App\DB\Entity\MediaLibrary\MediaPackageFile
+        controller: ~
     public: true
 
   # ===== Apk Generation
@@ -658,21 +655,23 @@ services:
   admin.block.apk.pending:
     class: App\Admin\ApkGeneration\ApkPendingAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Pending" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Program
-      - App\Admin\ApkGeneration\ApkController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Pending"
+        code: ~
+        model_class: App\DB\Entity\Project\Program
+        controller: App\Admin\ApkGeneration\ApkController
     public: true
 
   admin.block.apk.list:
     class: App\Admin\ApkGeneration\ApkReadyAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Ready" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Program
-      - App\Admin\ApkGeneration\ApkController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Ready"
+        code: ~
+        model_class: App\DB\Entity\Project\Program
+        controller: App\Admin\ApkGeneration\ApkController
     public: true
 
   # ===== Users
@@ -694,21 +693,24 @@ services:
   admin.block.users.data_report:
     class: App\Admin\Users\UserDataReport\UserDataReportAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "User Data Report" }
-    arguments:
-      - ~
-      - App\DB\Entity\User\User
-      - App\Admin\Users\UserDataReport\UserDataReportController
+      - name: sonata.admin
+        manager_type: orm
+        label: "User Data Report"
+        code: ~
+        model_class: App\DB\Entity\User\User
+        controller: App\Admin\Users\UserDataReport\UserDataReportController
     public: true
 
   admin.block.users.reported:
     class: App\Admin\Users\ReportedUsers\ReportedUsersAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Reported Users", pager_type: "simple" }
-    arguments:
-      - ~
-      - App\DB\Entity\User\User
-      - App\Admin\Users\ReportedUsers\ReportedUsersController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Reported Users"
+        pager_type: "simple"
+        code: ~
+        model_class: App\DB\Entity\User\User
+        controller: App\Admin\Users\ReportedUsers\ReportedUsersController
     public: true
 
 
@@ -717,12 +719,14 @@ services:
   admin.block.survey:
     class: App\Admin\Survey\AllSurveysAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "All Surveys", pager_type: "simple",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\DB\Entity\Survey
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "All Surveys"
+        pager_type: "simple"
+        icon: '<i class="fa fa-cogs"></i>'
+        code: ~
+        model_class: App\DB\Entity\Survey
+        controller: ~
     public: true
 
   # ===== DB Updater
@@ -730,52 +734,59 @@ services:
   admin.block.special_updater:
     class: App\Admin\DB_Updater\SpecialUpdaterAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Special Updater", icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
-      - App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Special Updater"
+        icon: '<i class="fa fa-cogs"></i>'
+        code: ~
+        model_class: App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
+        controller: App\Admin\DB_Updater\Controller\SpecialUpdaterAdminController
     public: true
 
   admin.block.cron_jobs:
     class: App\Admin\DB_Updater\CronJobsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Cron Jobs", icon: '<i class="fa fa-hourglass"></i>' }
-    arguments:
-      - ~
-      - App\DB\Entity\System\CronJob
-      - App\Admin\DB_Updater\Controller\CronJobsAdminController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Cron Jobs"
+        icon: '<i class="fa fa-hourglass"></i>'
+        code: ~
+        model_class: App\DB\Entity\System\CronJob
+        controller: App\Admin\DB_Updater\Controller\CronJobsAdminController
     public: true
 
   admin.block.achievements:
     class: App\Admin\DB_Updater\AchievementsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Achievements" }
-    arguments:
-      - ~
-      - App\DB\Entity\User\Achievements\Achievement
-      - App\Admin\DB_Updater\Controller\AchievementsAdminController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Achievements"
+        code: ~
+        model_class: App\DB\Entity\User\Achievements\Achievement
+        controller: App\Admin\DB_Updater\Controller\AchievementsAdminController
     public: true
 
 
   admin.block.extensions:
     class: App\Admin\DB_Updater\ExtensionsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Extensions" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Extension
-      - App\Admin\DB_Updater\Controller\ExtensionsAdminController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Extensions"
+        code: ~
+        model_class: App\DB\Entity\Project\Extension
+        controller: App\Admin\DB_Updater\Controller\ExtensionsAdminController
     public: true
 
   admin.block.tags:
     class: App\Admin\DB_Updater\TagsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Tags" }
-    arguments:
-      - ~
-      - App\DB\Entity\Project\Tag
-      - App\Admin\DB_Updater\Controller\TagsAdminController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Tags"
+        code: ~
+        model_class: App\DB\Entity\Project\Tag
+        controller: App\Admin\DB_Updater\Controller\TagsAdminController
     public: true
 
   # ===== Tools
@@ -783,43 +794,47 @@ services:
   admin.block.tools.maintain:
     class: App\Admin\Tools\Maintenance\MaintainAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Maintain",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
-      - App\Admin\Tools\Maintenance\MaintainController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Maintain"
+        icon: '<i class="fa fa-cogs"></i>'
+        code: ~
+        model_class: App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
+        controller: App\Admin\Tools\Maintenance\MaintainController
     public: true
 
   admin.block.tools.logs:
     class: App\Admin\Tools\Logs\LogsAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Logs",
-          icon: '<i class="fa fa-cogs"></i>' }
-    arguments:
-      - ~
-      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
-      - App\Admin\Tools\Logs\Controller\LogsController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Logs"
+        icon: '<i class="fa fa-cogs"></i>'
+        code: ~
+        model_class: App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
+        controller: App\Admin\Tools\Logs\Controller\LogsController
     public: true
 
   admin.block.tools.broadcast:
     class: App\Admin\Tools\BroadcastNotification\BroadcastNotificationAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Broadcast Notification" }
-    arguments:
-      - ~
-      - App\DB\Entity\User\Notifications\BroadcastNotification
-      - App\Admin\Tools\BroadcastNotification\BroadcastNotificationController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Broadcast Notification"
+        code: ~
+        model_class: App\DB\Entity\User\Notifications\BroadcastNotification
+        controller: App\Admin\Tools\BroadcastNotification\BroadcastNotificationController
     public: true
 
   admin.block.tools.mail:
     class: App\Admin\Tools\SendMailToUser\SendMailToUserAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Send Mail to User" }
-    arguments:
-      - ~
-      - App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
-      - App\Admin\Tools\SendMailToUser\SendMailToUserController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Send Mail to User"
+        code: ~
+        model_class: App\DB\Entity\System\CronJob # Just a Hack -> ToDo: change to a custom route extending the sonata admin layout -> https://github.com/sonata-project/SonataAdminBundle/issues/6189
+        controller: App\Admin\Tools\SendMailToUser\SendMailToUserController
     public: true
 
   # ====================================================================================================================
@@ -902,42 +917,35 @@ services:
         - '@App\Translation\ItranslateApi'
         - '@App\Translation\GoogleTranslateApi'
 
-  App\Translation\MachineTranslationListener:
-    class: App\Translation\MachineTranslationListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
-
-  App\Translation\CustomTranslationAchievementListener:
-    class: App\Translation\CustomTranslationAchievementListener
-    tags:
-      - { name: kernel.event_listener, event: kernel.terminate, method: onTerminateEvent }
-
   admin.block.statistics.project_machine_translation:
     class: App\Admin\Statistics\Translation\ProjectMachineTranslationAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Project Machine Translation" }
-    arguments:
-      - ~
-      - App\DB\Entity\Translation\ProjectMachineTranslation
-      - App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController
+      - name: sonata.admin
+        code: ~
+        model_class: App\DB\Entity\Translation\ProjectMachineTranslation
+        controller: App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController
+        manager_type: orm
+        label: "Project Machine Translation"
     public: true
 
   admin.block.statistics.project_custom_translation:
     class: App\Admin\Statistics\Translation\ProjectCustomTranslationAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Project Custom Translation" }
-    arguments:
-      - ~
-      - App\DB\Entity\Translation\ProjectCustomTranslation
-      - ~
+      - name: sonata.admin
+        manager_type: orm
+        label: "Project Custom Translation"
+        code: ~
+        model_class: App\DB\Entity\Translation\ProjectCustomTranslation
+        controller: ~
     public: true
 
   admin.block.statistics.comment_machine_translation:
     class: App\Admin\Statistics\Translation\CommentMachineTranslationAdmin
     tags:
-      - { name: sonata.admin, manager_type: orm, label: "Comment Machine Translation" }
-    arguments:
-      - ~
-      - App\DB\Entity\Translation\CommentMachineTranslation
-      - App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController
+      - name: sonata.admin
+        manager_type: orm
+        label: "Comment Machine Translation"
+        code: ~
+        model_class: App\DB\Entity\Translation\CommentMachineTranslation
+        controller: App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController
     public: true

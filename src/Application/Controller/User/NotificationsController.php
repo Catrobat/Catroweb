@@ -23,9 +23,7 @@ class NotificationsController extends AbstractController
   final public const load_limit = 20;
   final public const load_offset = 0;
 
-  /**
-   * @Route("/user_notifications", name="notifications", methods={"GET"})
-   */
+  #[Route(path: '/user_notifications', name: 'notifications', methods: ['GET'])]
   public function NotificationsAction(NotificationRepository $notification_repository, Request $request): Response
   {
     /** @var User|null $user */
@@ -33,7 +31,6 @@ class NotificationsController extends AbstractController
     if (!$user) {
       return $this->redirectToRoute('login');
     }
-
     $notifications = $notification_repository->findBy(['user' => $user], ['id' => 'DESC'], self::load_limit, self::load_offset);
     $avatars = [];
     $all_notifications = [];
@@ -103,7 +100,6 @@ class NotificationsController extends AbstractController
         }
       }
     }
-
     $all_notifications_count = sizeof($all_notifications);
     $follower_count = sizeof($follower_notifications);
     $reaction_count = sizeof($reaction_notifications);
@@ -130,10 +126,7 @@ class NotificationsController extends AbstractController
     return $response;
   }
 
-  /**
-   * @Route("/notifications/count", name="sidebar_notifications_count", methods={"GET"})
-   * Todo -> move to CAPI
-   */
+  #[Route(path: '/notifications/count', name: 'sidebar_notifications_count', methods: ['GET'])]
   public function countNotifications(NotificationRepository $notification_repo): JsonResponse
   {
     /** @var User|null $user */
@@ -147,14 +140,8 @@ class NotificationsController extends AbstractController
     ]);
   }
 
-  /**
-   * @Route("/user_notifications/fetch/{limit}/{offset}/{type}", name="notifications_fetch",
-   * defaults={"limit": null, "offset": null, "type": null}, methods={"GET"})
-   */
-  public function fetchMoreNotifications(NotificationRepository $notification_repo,
-                                         NotificationManager $notification_service,
-                                         RemixManager $remix_manager, TranslatorInterface $translator,
-                                         int $limit, int $offset, string $type): JsonResponse
+  #[Route(path: '/user_notifications/fetch/{limit}/{offset}/{type}', name: 'notifications_fetch', defaults: ['limit' => null, 'offset' => null, 'type' => null], methods: ['GET'])]
+  public function fetchMoreNotifications(NotificationRepository $notification_repo, NotificationManager $notification_service, RemixManager $remix_manager, TranslatorInterface $translator, int $limit, int $offset, string $type): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -167,60 +154,56 @@ class NotificationsController extends AbstractController
     } else {
       $notifications = $notification_repo->findBy(['user' => $user, 'type' => $type], ['id' => 'DESC'], $limit, $offset);
     }
-
     $fetched_notifications = [];
     foreach ($notifications as $notification) {
       if ($notification instanceof LikeNotification && ('reaction' === $type || 'all' === $type)) {
         if (($notification->getLikeFrom() === $this->getUser())) {
           continue;
         }
-        array_push($fetched_notifications,
-          ['id' => $notification->getId(),
-            'from' => $notification->getLikeFrom()->getId(),
-            'from_name' => $notification->getLikeFrom()->getUsername(),
-            'program' => $notification->getProgram()->getId(),
-            'program_name' => $notification->getProgram()->getName(),
-            'avatar' => $notification->getLikeFrom()->getAvatar(),
-            'remixed_program' => null,
-            'remixed_program_name' => null,
-            'type' => 'reaction',
-            'message' => $translator->trans('catro-notifications.like.message', [], 'catroweb'),
-            'seen' => $notification->getSeen(), ]);
+        $fetched_notifications[] = ['id' => $notification->getId(),
+          'from' => $notification->getLikeFrom()->getId(),
+          'from_name' => $notification->getLikeFrom()->getUserIdentifier(),
+          'program' => $notification->getProgram()->getId(),
+          'program_name' => $notification->getProgram()->getName(),
+          'avatar' => $notification->getLikeFrom()->getAvatar(),
+          'remixed_program' => null,
+          'remixed_program_name' => null,
+          'type' => 'reaction',
+          'message' => $translator->trans('catro-notifications.like.message', [], 'catroweb'),
+          'seen' => $notification->getSeen(), ];
 
         continue;
       }
       if (($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
-        && ('follow' === $type || 'all' === $type)) {
+          && ('follow' === $type || 'all' === $type)) {
         if (($notification instanceof FollowNotification && $notification->getFollower() === $this->getUser())
-          || ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser())) {
+            || ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser())) {
           continue;
         }
         if ($notification instanceof FollowNotification) {
-          array_push($fetched_notifications,
-            ['id' => $notification->getId(),
-              'from' => $notification->getFollower()->getId(),
-              'from_name' => $notification->getFollower()->getUsername(),
-              'program' => null,
-              'program_name' => null,
-              'avatar' => $notification->getFollower()->getAvatar(),
-              'remixed_program' => null,
-              'remixed_program_name' => null,
-              'type' => 'follow',
-              'message' => $translator->trans('catro-notifications.follow.message', [], 'catroweb'),
-              'seen' => $notification->getSeen(), ]);
+          $fetched_notifications[] = ['id' => $notification->getId(),
+            'from' => $notification->getFollower()->getId(),
+            'from_name' => $notification->getFollower()->getUsername(),
+            'program' => null,
+            'program_name' => null,
+            'avatar' => $notification->getFollower()->getAvatar(),
+            'remixed_program' => null,
+            'remixed_program_name' => null,
+            'type' => 'follow',
+            'message' => $translator->trans('catro-notifications.follow.message', [], 'catroweb'),
+            'seen' => $notification->getSeen(), ];
         } else {
-          array_push($fetched_notifications,
-            ['id' => $notification->getId(),
-              'from' => $notification->getProgram()->getUser()->getId(),
-              'from_name' => $notification->getProgram()->getUser()->getUsername(),
-              'program' => $notification->getProgram()->getId(),
-              'program_name' => $notification->getProgram()->getName(),
-              'avatar' => $notification->getProgram()->getUser()->getAvatar(),
-              'remixed_program' => null,
-              'remixed_program_name' => null,
-              'type' => 'program',
-              'message' => $translator->trans('catro-notifications.program-upload.message', [], 'catroweb'),
-              'seen' => $notification->getSeen(), ]);
+          $fetched_notifications[] = ['id' => $notification->getId(),
+            'from' => $notification->getProgram()->getUser()->getId(),
+            'from_name' => $notification->getProgram()->getUser()->getUserIdentifier(),
+            'program' => $notification->getProgram()->getId(),
+            'program_name' => $notification->getProgram()->getName(),
+            'avatar' => $notification->getProgram()->getUser()->getAvatar(),
+            'remixed_program' => null,
+            'remixed_program_name' => null,
+            'type' => 'program',
+            'message' => $translator->trans('catro-notifications.program-upload.message', [], 'catroweb'),
+            'seen' => $notification->getSeen(), ];
         }
         continue;
       }
@@ -228,18 +211,17 @@ class NotificationsController extends AbstractController
         if ($notification->getComment()->getUser() === $this->getUser()) {
           continue;
         }
-        array_push($fetched_notifications,
-          ['id' => $notification->getId(),
-            'from' => $notification->getComment()->getUser()->getId(),
-            'from_name' => $notification->getComment()->getUser()->getUsername(),
-            'program' => $notification->getComment()->getProgram()->getId(),
-            'program_name' => $notification->getComment()->getProgram()->getName(),
-            'avatar' => $notification->getComment()->getUser()->getAvatar(),
-            'remixed_program' => null,
-            'remixed_program_name' => null,
-            'type' => 'comment',
-            'message' => $translator->trans('catro-notifications.comment.message', [], 'catroweb'),
-            'seen' => $notification->getSeen(), ]);
+        $fetched_notifications[] = ['id' => $notification->getId(),
+          'from' => $notification->getComment()->getUser()->getId(),
+          'from_name' => $notification->getComment()->getUser()->getUserIdentifier(),
+          'program' => $notification->getComment()->getProgram()->getId(),
+          'program_name' => $notification->getComment()->getProgram()->getName(),
+          'avatar' => $notification->getComment()->getUser()->getAvatar(),
+          'remixed_program' => null,
+          'remixed_program_name' => null,
+          'type' => 'comment',
+          'message' => $translator->trans('catro-notifications.comment.message', [], 'catroweb'),
+          'seen' => $notification->getSeen(), ];
         continue;
       }
       if ($notification instanceof RemixNotification && ('remix' === $type || 'all' === $type)) {
@@ -247,33 +229,31 @@ class NotificationsController extends AbstractController
           continue;
         }
 
-        array_push($fetched_notifications,
-          ['id' => $notification->getId(),
-            'from' => $notification->getRemixFrom()->getId(),
-            'from_name' => $notification->getRemixFrom()->getUsername(),
-            'program' => $notification->getRemixProgram()->getId(),
-            'program_name' => $notification->getRemixProgram()->getName(),
-            'avatar' => $notification->getRemixFrom()->getAvatar(),
-            'remixed_program' => $notification->getProgram()->getId(),
-            'remixed_program_name' => $notification->getProgram()->getName(),
-            'type' => 'remix',
-            'message' => $translator->trans('catro-notifications.remix.message', [], 'catroweb'),
-            'seen' => $notification->getSeen(), ]);
+        $fetched_notifications[] = ['id' => $notification->getId(),
+          'from' => $notification->getRemixFrom()->getId(),
+          'from_name' => $notification->getRemixFrom()->getUserIdentifier(),
+          'program' => $notification->getRemixProgram()->getId(),
+          'program_name' => $notification->getRemixProgram()->getName(),
+          'avatar' => $notification->getRemixFrom()->getAvatar(),
+          'remixed_program' => $notification->getProgram()->getId(),
+          'remixed_program_name' => $notification->getProgram()->getName(),
+          'type' => 'remix',
+          'message' => $translator->trans('catro-notifications.remix.message', [], 'catroweb'),
+          'seen' => $notification->getSeen(), ];
         continue;
       }
       if ('all' === $type) {
-        array_push($fetched_notifications,
-          ['id' => $notification->getId(),
-            'from' => null,
-            'from_name' => null,
-            'program' => 'other',
-            'program_name' => null,
-            'avatar' => null,
-            'remixed_program' => null,
-            'remixed_program_name' => null,
-            'type' => 'other',
-            'message' => $notification->getMessage(),
-            'seen' => $notification->getSeen(), ]);
+        $fetched_notifications[] = ['id' => $notification->getId(),
+          'from' => null,
+          'from_name' => null,
+          'program' => 'other',
+          'program_name' => null,
+          'avatar' => null,
+          'remixed_program' => null,
+          'remixed_program_name' => null,
+          'type' => 'other',
+          'message' => $notification->getMessage(),
+          'seen' => $notification->getSeen(), ];
       }
     }
 

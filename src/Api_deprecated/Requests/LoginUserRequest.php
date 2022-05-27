@@ -10,16 +10,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class LoginUserRequest
 {
-  /**
-   * @Assert\NotBlank(message="errors.username.blank")
-   * @Assert\Regex(pattern="/^[\w@_\-\.]+$/")
-   */
+  #[Assert\NotBlank(message: 'errors.username.blank')]
+  #[Assert\Regex(pattern: '/^[\w@_\-\.]+$/')]
   public string $username;
 
-  /**
-   * @Assert\NotBlank(message="errors.password.blank")
-   * @Assert\Length(min="6", minMessage="errors.password.short")
-   */
+  #[Assert\NotBlank(message: 'errors.password.blank')]
+  #[Assert\Length(min: 6, minMessage: 'errors.password.short')]
   public string $password;
 
   public function __construct(Request $request)

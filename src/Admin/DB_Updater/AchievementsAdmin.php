@@ -19,9 +19,9 @@ class AchievementsAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'achievements';
 
-  public function __construct(?string $code, ?string $class, ?string $baseControllerName, protected AchievementManager $achievement_manager)
-  {
-    parent::__construct($code, $class, $baseControllerName);
+  public function __construct(
+      protected AchievementManager $achievement_manager
+  ) {
   }
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

@@ -19,9 +19,7 @@ class CodeViewController extends AbstractController
   {
   }
 
-  /**
-   * @Route("/project/{id}/code_view", name="code_view", methods={"GET"})
-   */
+  #[Route(path: '/project/{id}/code_view', name: 'code_view', methods: ['GET'])]
   public function view(string $id): Response
   {
     /** @var Program|null $project */
@@ -29,9 +27,8 @@ class CodeViewController extends AbstractController
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
-      return $this->redirect($this->generateUrl('index'));
+      return $this->redirectToRoute('index');
     }
-
     $this->parameter_bag->get('catrobat.file.extract.path');
 
     return $this->render('Program/code_view.html.twig', [

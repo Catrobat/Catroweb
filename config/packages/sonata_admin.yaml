@@ -1,5 +1,6 @@
 # Sonata Configuration
 sonata_block:
+    http_cache: false
     default_contexts: [cms]
     blocks:
         sonata.admin.block.stats:
@@ -58,7 +59,7 @@ sonata_admin:
 
             sonata.admin.group.programs:
                 label:           Projects
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-cubes"></i>'
                 items:
                     - admin.block.projects.overview
@@ -67,7 +68,7 @@ sonata_admin:
 
             sonata.admin.group.users:
                 label:           Users
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-users"></i>'
                 items:
                     - admin.block.users.overview
@@ -76,7 +77,7 @@ sonata_admin:
 
             sonata.admin.group.comments:
                 label: Comments
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon: '<i class="fa fa-comments"></i>'
                 items:
                     - admin.block.comments.overview
@@ -84,7 +85,7 @@ sonata_admin:
 
             sonata.admin.group.featured:
                 label:           Special Projects
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-bullhorn"></i>'
                 items:
                     - admin.block.featured.program
@@ -93,7 +94,7 @@ sonata_admin:
 
             sonata.admin.group.mediapackage:
                 label:           Media Package
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-newspaper-o"></i>'
                 items:
                     - admin.block.mediapackage.package
@@ -102,7 +103,7 @@ sonata_admin:
 
             sonata.admin.group.apk:
                 label:           Apk Generation
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-android"></i>'
                 items:
                     - admin.block.apk.pending
@@ -110,14 +111,14 @@ sonata_admin:
 
             sonata.admin.group.survey:
                 label: Survey
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon: '<i class="fa fa-bar-chart"></i>'
                 items:
                     - admin.block.survey
 
             sonata.admin.group.db_updater:
                 label: DB Updater
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon: '<i class="fa fa-cogs"></i>'
                 items:
                     - admin.block.cron_jobs
@@ -128,7 +129,7 @@ sonata_admin:
 
             sonata.admin.group.tools:
                 label:           Tools
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-cogs"></i>'
                 items:
                     - admin.block.tools.maintain
@@ -138,7 +139,7 @@ sonata_admin:
 
             sonata.admin.group.statistics:
                 label:           Statistics
-                label_catalogue: Catrobat
+                translation_domain: catroweb
                 icon:            '<i class="fa fa-bar-chart"></i>'
                 items:
                     - admin.block.statistics.project_machine_translation
@@ -146,7 +147,6 @@ sonata_admin:
                     - admin.block.statistics.comment_machine_translation
 
     security:
-
         handler: sonata.admin.security.handler.acl
 
         role_admin: ROLE_ADMIN

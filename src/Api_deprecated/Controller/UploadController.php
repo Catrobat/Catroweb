@@ -31,10 +31,9 @@ class UploadController
   /**
    * @deprecated
    *
-   * @Route("/api/upload/upload.json", name="catrobat_api_upload", defaults={"_format": "json"}, methods={"POST"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/upload/upload.json', name: 'catrobat_api_upload', defaults: ['_format' => 'json'], methods: ['POST'])]
   public function uploadAction(Request $request): JsonResponse
   {
     $this->logger->warning('Deprecated upload route is used!');

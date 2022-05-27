@@ -389,7 +389,7 @@ class ApiContext implements Context
    */
   public function iUploadAValidCatrobatProject(string $api_version): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', null, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $api_version);
   }
 
   /**
@@ -404,7 +404,7 @@ class ApiContext implements Context
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
-    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $user, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'test.catrobat', $api_version, $user);
   }
 
   /**
@@ -541,8 +541,7 @@ class ApiContext implements Context
   public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
     // Trying to find the id of the last uploaded project in the database
-    $em = $this->getKernel()->getContainer()->get('doctrine')->getManager();
-    $uploaded_program = $em->getRepository(\App\DB\Entity\Project\Program::class)->findOneBy([
+    $uploaded_program = $this->getManager()->getRepository(Program::class)->findOneBy([
       'id' => $this->getIDOfLastUploadedProject($api_version),
     ]);
 
@@ -712,7 +711,7 @@ class ApiContext implements Context
         'tags' => 'program_with_tags.catrobat',
         default => throw new PendingException('No case defined for "'.$program_attribute.'"'),
     };
-    $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, null, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, $api_version);
   }
 
   /**
@@ -724,7 +723,7 @@ class ApiContext implements Context
    */
   public function iUploadAnInvalidProgramFile(string $api_version): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'/invalid_archive.catrobat', null, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'/invalid_archive.catrobat', $api_version);
   }
 
   /**
@@ -737,7 +736,7 @@ class ApiContext implements Context
    */
   public function iUploadThisGeneratedProgramWithId(string $id, string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
   }
 
   /**
@@ -754,7 +753,7 @@ class ApiContext implements Context
     $this->generateProgramFileWith([
       'name' => $name,
     ]);
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version);
   }
 
   /**
@@ -1138,8 +1137,7 @@ class ApiContext implements Context
    */
   public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
   {
-    $em = $this->getKernel()->getContainer()->get('doctrine')->getManager();
-    $uploaded_program = $em->getRepository(\App\DB\Entity\Project\Program::class)->findOneBy([
+    $uploaded_program = $this->getManager()->getRepository(Program::class)->findOneBy([
       'name' => 'test',
     ]);
 
@@ -1173,7 +1171,7 @@ class ApiContext implements Context
     $file = $this->generateProgramFileWith([
       'name' => $program->getName(),
     ]);
-    $this->uploadProject($file, $program->getUser(), '2');
+    $this->uploadProject($file, '2', $program->getUser());
   }
 
   /**
@@ -1961,7 +1959,7 @@ class ApiContext implements Context
    */
   public function iTryToUploadAProjectWithUnnecessaryFiles(string $api_version): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFiles.catrobat', null, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFiles.catrobat', $api_version);
   }
 
   /**
@@ -1973,7 +1971,7 @@ class ApiContext implements Context
    */
   public function iTryToUploadAProjectWithScenesAndUnnecessaryFiles(string $api_version): void
   {
-    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat', null, $api_version);
+    $this->uploadProject($this->FIXTURES_DIR.'unnecessaryFilesInScenes.catrobat', $api_version);
   }
 
   /**
@@ -1988,17 +1986,17 @@ class ApiContext implements Context
   {
     if ('1' == $api_version) {
       if (array_key_exists('deviceLanguage', $this->request_parameters)) {
-        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null,
-          $api_version, $id, 'pocketcode');
+        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat',
+          $api_version, null, $id);
       } else {
-        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
       }
 
       $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
       $resp_array['projectId'] = $id;
       $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array, JSON_THROW_ON_ERROR));
     } elseif ('2' == $api_version) {
-      $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+      $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
     } else {
       throw new ApiVersionNotSupportedException($api_version);
     }
@@ -2014,7 +2012,7 @@ class ApiContext implements Context
    */
   public function iUploadThisGeneratedProject(string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version);
   }
 
   /**
@@ -2044,7 +2042,7 @@ class ApiContext implements Context
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
     Assert::assertNotNull($user);
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $user, $api_version, $id);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, $user, $id);
   }
 
   /**
@@ -2057,7 +2055,7 @@ class ApiContext implements Context
    */
   public function iUploadAProgramWithId($id, string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
   }
 
   /**
@@ -2071,7 +2069,7 @@ class ApiContext implements Context
    */
   public function iUploadTheGeneratedProgramWithIdAndName($id, $name, string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', null, $api_version, $id);
+    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
 
     /** @var Program $project */
     $project = $this->getProgramManager()->find($id);
@@ -2141,7 +2139,7 @@ class ApiContext implements Context
       'tags' => $tags,
     ]);
     $file = sys_get_temp_dir().'/program_generated.catrobat';
-    $this->uploadProject($file, null, $api_version, '', 'pocketcode');
+    $this->uploadProject($file, $api_version);
   }
 
   /**
@@ -2722,7 +2720,7 @@ class ApiContext implements Context
   {
     $user = $this->insertUser();
     $uploadedFile = $this->getStandardProgramFile();
-    $this->uploadProject(strval($uploadedFile), $user, '1', '1', 'phirocode');
+    $this->uploadProject(strval($uploadedFile), '1', $user, '1', 'phirocode');
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
@@ -2761,7 +2759,7 @@ class ApiContext implements Context
   {
     $user = $this->insertUser();
     $uploadedFile = $this->getStandardProgramFile();
-    $this->uploadProject(strval($uploadedFile), $user, '1', '1');
+    $this->uploadProject(strval($uploadedFile), '1', $user, '1');
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
@@ -2890,7 +2888,7 @@ class ApiContext implements Context
       $result = [
         'id' => $program->getId(),
         'name' => $program->getName(),
-        'author' => $program->getUser()->getUserName(),
+        'author' => $program->getUser()->getUserIdentifier(),
         'description' => $program->getDescription(),
         'version' => $program->getCatrobatVersionName(),
         'views' => $program->getViews(),
@@ -2926,7 +2924,7 @@ class ApiContext implements Context
       $result = [
         'id' => $featured_program->getId(),
         'name' => $featured_program->getProgram()->getName(),
-        'author' => $featured_program->getProgram()->getUser()->getUserName(),
+        'author' => $featured_program->getProgram()->getUser()->getUserIdentifier(),
         'project_id' => $featured_program->getProgram()->getId(),
         'project_url' => $project_url,
         'url' => $url,
@@ -3178,7 +3176,7 @@ class ApiContext implements Context
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws Exception                       when an error while uploading occurs
    */
-  private function uploadProject(string $file, User $user = null, string $api_version, string $desired_id = '',
+  private function uploadProject(string $file, string $api_version, User $user = null, string $desired_id = '',
                                  string $flavor = 'pocketcode'): void
   {
     if (null == $user) {

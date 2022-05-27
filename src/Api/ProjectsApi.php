@@ -10,6 +10,7 @@ use App\Project\Event\ProjectDownloadEvent;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
+use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -26,7 +27,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders): ?\OpenAPI\Server\Model\ProjectResponse
+  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders): ?ProjectResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {

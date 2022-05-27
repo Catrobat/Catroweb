@@ -90,7 +90,7 @@ final class UserRequestValidator extends AbstractRequestValidator
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameTooShort', [], $locale), $KEY);
     } elseif (strlen((string) $username) > self::MAX_USERNAME_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameTooLong', [], $locale), $KEY);
-    } elseif (filter_var(str_replace(' ', '', $username), FILTER_VALIDATE_EMAIL)) {
+    } elseif (filter_var(str_replace(' ', '', (string) $username), FILTER_VALIDATE_EMAIL)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameContainsEmail', [], $locale), $KEY);
     } elseif (null != $this->user_manager->findUserByUsername($username)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameAlreadyInUse', [], $locale), $KEY);
