@@ -35,6 +35,6 @@ Feature: Delete logged in user
     Then the response status code should be "401"
 
   Scenario: Delete user with expired JWT Bearer token should return 401 status code
-    Given I use an invalid JWT token for "Catroweb"
+    Given I use an invalid JWT authorization header for "Catroweb"
     And I request "DELETE" "/api/user"
     Then the response status code should be "401"

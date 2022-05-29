@@ -10,6 +10,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ArchiveLogsCommand extends Command
 {
+  protected static $defaultName = 'catrobat:logs:archive';
   private OutputInterface $output;
 
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
@@ -19,8 +20,7 @@ class ArchiveLogsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:logs:archive')
-      ->setDescription('Archive the log files')
+    $this->setDescription('Archive the log files')
     ;
   }
 

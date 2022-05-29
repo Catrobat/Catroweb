@@ -6,8 +6,8 @@ use App\DB\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -34,8 +34,13 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   final public const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
-  public function __construct(private readonly EntityManagerInterface $em, protected TranslatorInterface $translator, protected SessionInterface $session, protected LoggerInterface $logger, protected UrlGeneratorInterface $url_generator)
-  {
+  public function __construct(
+      private readonly EntityManagerInterface $em,
+      protected TranslatorInterface $translator,
+      protected RequestStack $request_stack,
+      protected LoggerInterface $logger,
+      protected UrlGeneratorInterface $url_generator
+  ) {
   }
 
   /**
@@ -47,7 +52,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    */
   public function supports(Request $request)
   {
-    $this->session->set('webview-auth', false);
+    $this->request_stack->getSession()->set('webview-auth', false);
 
     return $this->hasValidTokenCookieSet($request);
   }
@@ -61,7 +66,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
   public function getCredentials(Request $request)
   {
     return [
-      self::COOKIE_TOKEN_KEY => $request->cookies->get(self::COOKIE_TOKEN_KEY, null),
+      self::COOKIE_TOKEN_KEY => $request->cookies->get(self::COOKIE_TOKEN_KEY),
     ];
   }
 
@@ -110,9 +115,9 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *
    * {@inheritdoc}
    */
-  public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+  public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $providerKey)
   {
-    $this->session->set('webview-auth', true);
+    $this->request_stack->getSession()->set('webview-auth', true);
 
     // on success, let the request continue
     return null;
@@ -133,7 +138,7 @@ class WebviewAuthenticator extends AbstractGuardAuthenticator
    *
    * {@inheritDoc}
    */
-  public function start(Request $request, AuthenticationException $authException = null)
+  public function start(Request $request, AuthenticationException $authException = null): Response
   {
     throw new AuthenticationException($authException->getMessage());
   }

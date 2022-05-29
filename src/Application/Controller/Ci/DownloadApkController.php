@@ -34,28 +34,24 @@ class DownloadApkController extends AbstractController
     // Automatically injects the download logger here thx to this syntax. (camelCase)
   }
 
-  /**
-   * @Route("/ci/download/{id}", name="ci_download", methods={"GET"})
-   */
+  #[Route(path: '/ci/download/{id}', name: 'ci_download', methods: ['GET'])]
   public function downloadApkAction(string $id, Request $request): BinaryFileResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
-
     $project = $this->findProject($id);
     $file = $this->getApkFile($id);
     $response = $this->createDownloadApkFileResponse($id, $file);
-
     $this->event_dispatcher->dispatch(
-      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK)
-    );
+        new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK)
+      );
 
     return $response;
   }
 
   protected function createDownloadApkFileResponse(string $id, File $file): BinaryFileResponse
   {
-    $username = $this->getUser() ? $this->getUser()->getUsername() : '-';
+    $username = $this->getUser() ? $this->getUser()->getUserIdentifier() : '-';
     $this->logger->debug("User \"{$username}\" downloaded project apk with ID \"{$id}\" successfully");
 
     $response = new BinaryFileResponse($file);

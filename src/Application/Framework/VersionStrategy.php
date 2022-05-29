@@ -2,14 +2,19 @@
 
 namespace App\Application\Framework;
 
+use Exception;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class VersionStrategy implements VersionStrategyInterface
 {
-  public function __construct(protected string $app_version)
-  {
+  public function __construct(
+      protected string $app_version
+  ) {
   }
 
+  /**
+   * @throws Exception
+   */
   public function getVersion(string $path): string
   {
     $hash = '';
@@ -25,6 +30,9 @@ class VersionStrategy implements VersionStrategyInterface
     return '?v='.$this->app_version.$hash;
   }
 
+  /**
+   * @throws Exception
+   */
   public function applyVersion(string $path): string
   {
     return $path.$this->getVersion($path);

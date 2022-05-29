@@ -19,17 +19,14 @@ class DownloadProgramController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/download/{id}.catrobat", name="legacy_download_route_deprecated", methods={"GET"})
    */
+  #[Route(path: '/download/{id}.catrobat', name: 'legacy_download_route_deprecated', methods: ['GET'])]
   public function downloadProgramAction(string $id): ?Response
   {
     $this->logger->warning("Deprecated 'download catrobat project file' route was used!");
-
     $responseCode = 200;
     $responseHeaders = [];
     $result = $this->projectsApi->customProjectIdCatrobatGet($id, $responseCode, $responseHeaders);
-
     if (200 !== $responseCode) {
       return new Response(null, $responseCode, $responseHeaders);
     }

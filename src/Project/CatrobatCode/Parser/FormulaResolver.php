@@ -49,7 +49,7 @@ class FormulaResolver
       } else {
         $function_input_formula = FormulaResolver::resolveFormula($formula->leftChild);
       }
-      $resolved_function = strtolower($formula->value).'( '.$function_input_formula.' )';
+      $resolved_function = strtolower((string) $formula->value).'( '.$function_input_formula.' )';
     }
 
     return $resolved_function;

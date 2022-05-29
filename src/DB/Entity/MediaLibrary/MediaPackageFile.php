@@ -71,8 +71,8 @@ class MediaPackageFile
 
   /**
    * @ORM\ManyToMany(targetEntity=Flavor::class, inversedBy="media_package_files", fetch="EXTRA_LAZY")
-   * @Assert\Count(min="1")
    */
+  #[Assert\Count(min: 1)]
   protected Collection $flavors;
 
   /**

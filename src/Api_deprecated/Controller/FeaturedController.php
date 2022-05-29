@@ -19,13 +19,10 @@ class FeaturedController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/projects/ios-featured.json", name="api_ios_featured_programs",
-   * defaults={"_format": "json"}, methods={"GET"})
-   *
    * @throws NonUniqueResultException
    */
-  public function getFeaturedIOSProgramsAction(Request $request, ImageRepository $image_repository,
-                                               FeaturedRepository $repository): JsonResponse
+  #[Route(path: '/api/projects/ios-featured.json', name: 'api_ios_featured_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
+  public function getFeaturedIOSProgramsAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): JsonResponse
   {
     return $this->getFeaturedPrograms($request, true, $image_repository, $repository);
   }
@@ -72,7 +69,7 @@ class FeaturedController extends AbstractController
     $new_program['ProjectName'] = $featured_program->getProgram()->getName();
     $new_program['Author'] = $featured_program->getProgram()
       ->getUser()
-      ->getUserName()
+      ->getUserIdentifier()
     ;
 
     $new_program['FeaturedImage'] = $image_repository->getWebPath(

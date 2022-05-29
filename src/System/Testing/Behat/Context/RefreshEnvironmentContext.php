@@ -2,15 +2,10 @@
 
 namespace App\System\Testing\Behat\Context;
 
-use App\Kernel;
 use App\Storage\FileHelper;
-use App\System\Commands\Helpers\CommandHelper;
 use App\System\Testing\Behat\ContextTrait;
-use App\System\Testing\DataFixtures\ProjectDataFixtures;
-use App\System\Testing\DataFixtures\UserDataFixtures;
+use App\System\Testing\DataFixtures\DataBaseUtils;
 use Behat\Behat\Context\Context;
-use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\ORM\Tools\ToolsException;
 use Exception;
 
@@ -29,19 +24,7 @@ class RefreshEnvironmentContext implements Context
    */
   public static function prepare(): void
   {
-    $kernel = new Kernel($_SERVER['APP_ENV'], (bool) $_SERVER['APP_DEBUG']);
-    $kernel->boot();
-
-    /* @var EntityManagerInterface $em */
-    $em = $kernel->getContainer()->get('doctrine')->getManager();
-    $metaData = $em->getMetadataFactory()->getAllMetadata();
-    $tool = new SchemaTool($em);
-    $tool->dropSchema($metaData);
-    $tool->createSchema($metaData);
-
-    CommandHelper::executeShellCommand(
-      ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [], 'Generating test data'
-    );
+    DataBaseUtils::recreateTestEnvironment();
   }
 
   /**
@@ -54,17 +37,7 @@ class RefreshEnvironmentContext implements Context
    */
   public function databaseRollback(): void
   {
-    $em = $this->getManager();
-
-    $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=0');
-    foreach ($em->getConnection()->createSchemaManager()->listTableNames() as $tableName) {
-      $q = $em->getConnection()->getDatabasePlatform()->getTruncateTableSql($tableName);
-      $em->getConnection()->executeUpdate($q);
-    }
-    $em->getConnection()->query('SET FOREIGN_KEY_CHECKS=1');
-
-    ProjectDataFixtures::clear();
-    UserDataFixtures::clear();
+    DataBaseUtils::databaseRollback();
   }
 
   /**

@@ -20,10 +20,7 @@ class ElapsedTimeStringFormatterTest extends TestCase
 
   private ElapsedTimeStringFormatter $elapsed_time_string_formatter;
 
-  /**
-   * @var MockObject|TranslatorInterface
-   */
-  private $translator;
+  private TranslatorInterface|MockObject $translator;
 
   private array $translation_map;
 

@@ -20,9 +20,8 @@ class ListProgramsController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/projects/recent.json", name="api_recent_programs", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/projects/recent.json', name: 'api_recent_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function listProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'recent');
@@ -30,9 +29,8 @@ class ListProgramsController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/projects/mostDownloaded.json", name="api_most_downloaded_programs", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/projects/mostDownloaded.json', name: 'api_most_downloaded_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function listMostDownloadedProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'downloads');
@@ -40,9 +38,8 @@ class ListProgramsController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/projects/mostViewed.json", name="api_most_viewed_programs", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/projects/mostViewed.json', name: 'api_most_viewed_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function listMostViewedProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'views');
@@ -50,9 +47,8 @@ class ListProgramsController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/projects/randomProjects.json", name="api_random_programs", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/projects/randomProjects.json', name: 'api_random_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function listRandomProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'random');
@@ -60,9 +56,8 @@ class ListProgramsController extends AbstractController
 
   /**
    * @deprecated   ToDo still used by profile!!
-   *
-   * @Route("/api/projects/userProjects.json", name="api_user_programs", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/projects/userProjects.json', name: 'api_user_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function listUserProgramsAction(Request $request): ProgramListResponse
   {
     return $this->listSortedPrograms($request, 'user');

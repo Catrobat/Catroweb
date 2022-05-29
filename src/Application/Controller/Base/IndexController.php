@@ -16,9 +16,7 @@ class IndexController extends AbstractController
   {
   }
 
-  /**
-   * @Route("/", name="index", methods={"GET"})
-   */
+  #[Route(path: '/', name: 'index', methods: ['GET'])]
   public function indexAction(Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');

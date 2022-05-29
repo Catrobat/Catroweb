@@ -18,10 +18,7 @@ class AddProgramRequestTest extends TestCase
 
   private AddProgramRequest $add_program_request;
 
-  /**
-   * @var MockObject|User
-   */
-  private $user;
+  private User|MockObject $user;
 
   protected function setUp(): void
   {

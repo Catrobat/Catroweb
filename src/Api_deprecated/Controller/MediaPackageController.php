@@ -8,6 +8,7 @@ use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,37 +22,36 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
 {
   use TranslatorAwareTrait;
 
-  public function __construct(TranslatorInterface $translator, protected MediaPackageFileRepository $media_package_file_repository)
-  {
+  public function __construct(
+      TranslatorInterface $translator,
+      private readonly EntityManagerInterface $entity_manager,
+      protected MediaPackageFileRepository $media_package_file_repository
+  ) {
     $this->initTranslator($translator);
   }
 
   /**
    * @deprecated
-   *
-   * @Route("/api/media/package/{package}/json", name="api_media_lib_package",
-   * requirements={"package": "\w+"}, defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/media/package/{package}/json', name: 'api_media_lib_package', requirements: ['package' => '\w+'], defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getMediaFilesForPackage(string $package): JsonResponse
   {
-    $em = $this->getDoctrine()->getManager();
-
     /** @var MediaPackage|null $media_package */
-    $media_package = $em->getRepository(MediaPackage::class)
+    $media_package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy(['name' => $package])
-    ;
+      ;
     if (null === $media_package) {
       return new JsonResponse(
-        ['statusCode' => 523,
-          'message' => $package.' not found', ]
-      );
+          ['statusCode' => 523,
+            'message' => $package.' not found', ]
+        );
     }
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
       return new JsonResponse(
-        $json_response_array
-      );
+          $json_response_array
+        );
     }
     /** @var MediaPackageCategory $media_package_category */
     foreach ($media_package_categories as $media_package_category) {
@@ -65,40 +65,36 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     }
 
     return new JsonResponse(
-      $json_response_array
-    );
+        $json_response_array
+      );
   }
 
   /**
    * @deprecated
-   *
-   * @Route("/api/media/packageByNameUrl/package", name="api_media_lib_package_bynameurl")
-   * @Route("/api/media/packageByNameUrl/{package}/json", name="api_media_lib_package_bynameurl_old",
-   * requirements={"package": "\w+"}, defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/media/packageByNameUrl/package', name: 'api_media_lib_package_bynameurl')]
+  #[Route(path: '/api/media/packageByNameUrl/{package}/json', name: 'api_media_lib_package_bynameurl_old', requirements: ['package' => '\w+'], defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getMediaFilesForPackageByNameUrl(Request $request, string $package = ''): JsonResponse
   {
     if (!$package) {
       $package = strval($request->query->get('package'));
     }
-    $em = $this->getDoctrine()->getManager();
-
     /** @var MediaPackage|null $media_package */
-    $media_package = $em->getRepository(MediaPackage::class)
+    $media_package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy(['nameUrl' => $package])
-    ;
+      ;
     if (null === $media_package) {
       return new JsonResponse(
-        ['statusCode' => 523,
-          'message' => $package.' not found', ]
-      );
+          ['statusCode' => 523,
+            'message' => $package.' not found', ]
+        );
     }
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
       return new JsonResponse(
-        $json_response_array
-      );
+          $json_response_array
+        );
     }
     foreach ($media_package_categories as $media_package_category) {
       /** @var array|MediaPackageFile $media_package_files */
@@ -111,8 +107,8 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     }
 
     return new JsonResponse(
-      $json_response_array
-    );
+        $json_response_array
+      );
   }
 
   protected function createArrayOfMediaData(MediaPackageFile $media_package_file): array

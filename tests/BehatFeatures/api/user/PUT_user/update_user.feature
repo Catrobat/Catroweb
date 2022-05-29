@@ -184,7 +184,7 @@ Feature: Update user
     Then the response code should be "401"
 
   Scenario: Update user with expired JWT Bearer token should return 401 status code
-    Given I use an invalid JWT token for "Catrobat"
+    Given I use an invalid JWT authorization header for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I have the following JSON request body:

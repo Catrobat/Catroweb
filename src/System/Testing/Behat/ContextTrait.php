@@ -491,7 +491,7 @@ trait ContextTrait
     );
     $new_comment->setProgram($project);
     $new_comment->setUser($user);
-    $new_comment->setUsername($user->getUsername());
+    $new_comment->setUsername($user->getUserIdentifier());
     $new_comment->setIsReported($config['reported'] ?? false);
     $new_comment->setText($config['text']);
 

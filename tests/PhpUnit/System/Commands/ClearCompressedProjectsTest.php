@@ -3,7 +3,7 @@
 namespace Tests\PhpUnit\System\Commands;
 
 use App\Storage\FileHelper;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\DataFixtures\DataBaseUtils;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -66,7 +66,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
     $this->assertEmpty(array_diff(scandir($this->compressed_projects_dir), ['.', '..', '.gitignore']),
       'Not all files in log directory got deleted.');
 
-    RefreshTestEnvHook::databaseRollback();
+    DataBaseUtils::databaseRollback();
   }
 
   private function clearCompressedProjectsDir(): void

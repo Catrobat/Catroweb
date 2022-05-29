@@ -8,8 +8,8 @@ namespace App\Api_deprecated\Responses;
 class ProgramListResponse
 {
   public function __construct(
-    private array $programs,
-    private int $total_programs
+    private readonly array $programs,
+    private readonly int $total_programs
   ) {
   }
 

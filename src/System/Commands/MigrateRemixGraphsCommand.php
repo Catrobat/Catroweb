@@ -111,7 +111,7 @@ class MigrateRemixGraphsCommand extends Command
       return 2;
     }
 
-    $directory = ('/' != substr($directory, -1)) ? $directory.'/' : $directory;
+    $directory = ('/' != substr((string) $directory, -1)) ? $directory.'/' : $directory;
 
     if ($is_debug_import_missing_programs) {
       $username = $input->getArgument('user');

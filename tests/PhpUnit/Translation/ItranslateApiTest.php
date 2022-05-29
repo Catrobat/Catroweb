@@ -19,10 +19,7 @@ class ItranslateApiTest extends TestCase
 {
   private ItranslateApi $api;
 
-  /**
-   * @var MockObject|Client
-   */
-  private $httpClient;
+  private Client|MockObject $httpClient;
 
   protected function setUp(): void
   {

@@ -18,9 +18,7 @@ class ScratchController extends AbstractController
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
   }
 
-  /**
-   * @Route("/scratch/project/{id}", name="scratch_program", methods={"GET", "POST"})
-   */
+  #[Route(path: '/scratch/project/{id}', name: 'scratch_program', methods: ['GET', 'POST'])]
   public function scratchProjectAction(Request $request, int $id): Response
   {
     $program = $this->scratch_manager->createScratchProgramFromId($id);
@@ -28,7 +26,6 @@ class ScratchController extends AbstractController
       throw $this->createNotFoundException('Error creating Scratch program');
     }
     $url = $this->generateUrl('program', ['id' => $program->getId()]);
-
     if ($request->isMethod('GET')) {
       return $this->redirect($url);
     }

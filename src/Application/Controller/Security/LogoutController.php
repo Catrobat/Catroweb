@@ -11,20 +11,20 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class LogoutController extends AbstractController
 {
-  public function __construct(protected TokenStorageInterface $token_storage)
-  {
+  public function __construct(
+      protected TokenStorageInterface $token_storage,
+      protected CookieService $cookie_service
+  ) {
   }
 
-  /**
-   * @Route("/logout", name="logout")
-   */
+  #[Route(path: '/logout', name: 'logout')]
   public function logoutAction(Request $request): RedirectResponse
   {
-    CookieService::clearCookie('BEARER');
-    CookieService::clearCookie('REFRESH_TOKEN');
+    $this->cookie_service->clearCookie('BEARER');
+    $this->cookie_service->clearCookie('REFRESH_TOKEN');
     $this->token_storage->setToken();
     $request->getSession()->invalidate();
 
-    return $this->redirect($this->generateUrl('index'));
+    return $this->redirectToRoute('index');
   }
 }
