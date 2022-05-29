@@ -59,8 +59,8 @@ class UserDataFixtures
     Assert::assertNotNull($user);
 
     if (isset($config['name'])) {
-      Assert::assertEquals($user->getUsername(), $config['name'],
-        'Name wrong'.$config['name'].'expected, but '.$user->getUsername().' found.');
+      Assert::assertEquals($user->getUserIdentifier(), $config['name'],
+        'Name wrong'.$config['name'].'expected, but '.$user->getUserIdentifier().' found.');
     }
     if (isset($config['email'])) {
       Assert::assertEquals($user->getEmail(), $config['email'],

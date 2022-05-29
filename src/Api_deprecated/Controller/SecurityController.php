@@ -28,10 +28,8 @@ class SecurityController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/checkToken/check.json", name="catrobat_api_check_token",
-   * defaults={"_format": "json"}, methods={"POST"})
    */
+  #[Route(path: '/api/checkToken/check.json', name: 'catrobat_api_check_token', defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkTokenAction(TranslatorInterface $translator): JsonResponse
   {
     return new JsonResponse([
@@ -43,15 +41,11 @@ class SecurityController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/register/Register.json", name="catrobat_api_register", options={"expose": true},
-   * defaults={"_format": "json"}, methods={"POST"})
    */
-  public function registerNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
-                                     TranslatorInterface $translator, ValidatorInterface $validator): JsonResponse
+  #[Route(path: '/api/register/Register.json', name: 'catrobat_api_register', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
+  public function registerNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator, TranslatorInterface $translator, ValidatorInterface $validator): JsonResponse
   {
     $retArray = [];
-
     $create_request = new CreateUserRequest($request);
     $violations = $validator->validate($create_request);
     foreach ($violations as $violation) {
@@ -64,7 +58,6 @@ class SecurityController extends AbstractController
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
     }
-
     if (0 == count($violations)) {
       if (null != $user_manager->findUserByEmail($create_request->mail)) {
         $retArray['statusCode'] = 757;
@@ -95,16 +88,11 @@ class SecurityController extends AbstractController
 
   /**
    * @deprecated
-   *
-   * @Route("/api/login/Login.json", name="catrobat_api_login", options={"expose": true}, defaults={"_format": "json"},
-   * methods={"POST"})
    */
-  public function loginNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator,
-                                  TranslatorInterface $translator,
-                                  ValidatorInterface $validator): JsonResponse
+  #[Route(path: '/api/login/Login.json', name: 'catrobat_api_login', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
+  public function loginNativeUser(Request $request, UserManager $user_manager, TokenGenerator $token_generator, TranslatorInterface $translator, ValidatorInterface $validator): JsonResponse
   {
     $retArray = [];
-
     $login_request = new LoginUserRequest($request);
     $violations = $validator->validate($login_request);
     foreach ($violations as $violation) {
@@ -117,19 +105,15 @@ class SecurityController extends AbstractController
       $retArray['answer'] = $translator->trans($violation->getMessageTemplate(), $violation->getParameters(), 'catroweb');
       break;
     }
-
     if (count($violations) > 0) {
       $retArray['preHeaderMessages'] = '';
 
       return new JsonResponse($retArray);
     }
-
     $username = (string) $request->request->get('registrationUsername');
     $password = (string) $request->request->get('registrationPassword');
-
     /** @var User|null $user */
     $user = $user_manager->findUserByUsername($username);
-
     if (null === $user) {
       $retArray['statusCode'] = 803;
       $retArray['answer'] = $translator->trans('errors.username.not_exists', [], 'catroweb');
@@ -146,7 +130,6 @@ class SecurityController extends AbstractController
         $retArray['answer'] = $translator->trans('errors.login', [], 'catroweb');
       }
     }
-
     $retArray['preHeaderMessages'] = '';
 
     return new JsonResponse($retArray);
@@ -155,11 +138,9 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/EMailAvailable/EMailAvailable.json", name="catrobat_oauth_login_email_available",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/EMailAvailable/EMailAvailable.json', name: 'catrobat_oauth_login_email_available', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkEMailAvailable(Request $request): JsonResponse
   {
     return $this->getOAuthService()->checkEMailAvailable($request);
@@ -168,11 +149,9 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/UsernameAvailable/UsernameAvailable.json", name="catrobat_oauth_login_username_available",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/UsernameAvailable/UsernameAvailable.json', name: 'catrobat_oauth_login_username_available', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkUserNameAvailable(Request $request): JsonResponse
   {
     return $this->getOAuthService()->checkUserNameAvailable($request);
@@ -181,12 +160,9 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/GoogleServerTokenAvailable/GoogleServerTokenAvailable.json",
-   *     name="catrobat_oauth_login_google_servertoken_available", options={"expose": true},
-   * defaults={"_format": "json"}, methods={"POST"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/GoogleServerTokenAvailable/GoogleServerTokenAvailable.json', name: 'catrobat_oauth_login_google_servertoken_available', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkGoogleServerTokenAvailable(Request $request): JsonResponse
   {
     return $this->getOAuthService()->checkGoogleServerTokenAvailable($request);
@@ -195,11 +171,9 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/exchangeGoogleCode/exchangeGoogleCode.json", name="catrobat_oauth_login_google_code",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/exchangeGoogleCode/exchangeGoogleCode.json', name: 'catrobat_oauth_login_google_code', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function exchangeGoogleCodeAction(Request $request): JsonResponse
   {
     return $this->getOAuthService()->exchangeGoogleCodeAction($request);
@@ -208,11 +182,9 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/loginWithGoogle/loginWithGoogle.json", name="catrobat_oauth_login_google",
-   * options={"expose": true}, defaults={"_format": "json"}, methods={"POST"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/loginWithGoogle/loginWithGoogle.json', name: 'catrobat_oauth_login_google', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function loginWithGoogleAction(Request $request): JsonResponse
   {
     return $this->getOAuthService()->loginWithGoogleAction($request);

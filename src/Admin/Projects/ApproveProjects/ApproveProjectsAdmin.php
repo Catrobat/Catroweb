@@ -41,16 +41,12 @@ class ApproveProjectsAdmin extends AbstractAdmin
   private ?ExtractedCatrobatFile $extractedProgram = null;
 
   public function __construct(
-      ?string $code,
-      ?string $class,
-      ?string $baseControllerName,
       private readonly ScreenshotRepository $screenshot_repository,
       private readonly ProgramManager $program_manager,
       private readonly ExtractedFileRepository $extracted_file_repository,
       protected TokenStorageInterface $security_token_storage,
       protected ParameterBagInterface $parameter_bag
   ) {
-    parent::__construct($code, $class, $baseControllerName);
   }
 
   /**

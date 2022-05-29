@@ -580,7 +580,7 @@ class Program implements \Stringable
 
   public function getUsernameString(): string
   {
-    return $this->user->getUsername();
+    return $this->user->getUserIdentifier();
   }
 
   public function getComments(): Collection

@@ -21,43 +21,33 @@ class FollowerController extends AbstractController
   {
   }
 
-  /**
-   * @Route("/follower", name="catrobat_follower", methods={"GET"})
-   */
+  #[Route(path: '/follower', name: 'catrobat_follower', methods: ['GET'])]
   public function followerAction(Request $request, string $id = '0'): Response
   {
     $page = $request->request->getInt('page');
     $pageSize = $request->request->getInt('pageSize');
-
     /** @var User|null $user */
     $user = $this->getUser();
     if (!(('0' === $id) || ($user && $user->getId() === $id))) {
       $user = $this->user_manager->find($id);
     }
-
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
-
     $criteria = Criteria::create()
       ->orderBy(['username' => Criteria::ASC])
       ->setFirstResult($page * $pageSize)
       ->setMaxResults($pageSize)
-    ;
-
+      ;
     /** @var ArrayCollection $followersCollection */
     $followersCollection = $user->getFollowers();
-
     /** @var ArrayCollection $followingCollection */
     $followingCollection = $user->getFollowing();
-
     $followersCollection->first();
     $followingCollection->first();
     $followers = $followersCollection->matching($criteria)->toArray();
     $following = $followingCollection->matching($criteria)->toArray();
-
     \Locale::setDefault(substr($request->getLocale(), 0, 2));
-
     $data_followers = $this->user_manager->getMappedUserData($followers);
     $data_following = $this->user_manager->getMappedUserData($following);
 
@@ -68,34 +58,27 @@ class FollowerController extends AbstractController
   }
 
   /**
-   * @Route("/follower/unfollow/{id}", name="unfollow", methods={"DELETE"}, defaults={"id": 0})
-   *
-   * Todo -> move to CAPI
+   * Todo -> move to CAPI.
    */
+  #[Route(path: '/follower/unfollow/{id}', name: 'unfollow', methods: ['DELETE'], defaults: ['id' => 0])]
   public function unfollowUser(Request $request, string $id): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
-
     if (null === $user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
-
     if ($user->getId() === $id) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
     /** @var User|null $user_to_unfollow */
     $user_to_unfollow = $this->user_manager->find($id);
     if (null === $user_to_unfollow) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
     $user->removeFollowing($user_to_unfollow);
     $this->user_manager->updateUser($user);
-
     $existing_notifications = $this->notification_repo->getFollowNotificationForUser($user_to_unfollow, $user);
-
     foreach ($existing_notifications as $notification) {
       $this->notification_service->removeNotification($notification);
     }
@@ -104,34 +87,28 @@ class FollowerController extends AbstractController
   }
 
   /**
-   * @Route("/follower/follow/{id}", name="follow", methods={"POST"}, defaults={"id": 0})
-   *
-   * Todo -> move to CAPI
+   * Todo -> move to CAPI.
    */
+  #[Route(path: '/follower/follow/{id}', name: 'follow', methods: ['POST'], defaults: ['id' => 0])]
   public function followUser(Request $request, string $id): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
-
     if (null === $user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
-
     if ($user->getId() === $id) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
     /** @var User|null $user_to_follow */
     $user_to_follow = $this->user_manager->find($id);
     if (null === $user_to_follow) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
     $followings = $user->getFollowing();
     if ($followings->contains($user_to_follow)) {
       return new JsonResponse([], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
     $user->addFollowing($user_to_follow);
     $this->user_manager->updateUser($user);
     $this->addFollowNotificationIfNotExists($user, $user_to_follow);

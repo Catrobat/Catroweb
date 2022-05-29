@@ -16,9 +16,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class DownloadLogController extends AbstractController
 {
-  /**
-   * @Route("/downloadLogs/", name="log_download")
-   */
+  #[Route(path: '/downloadLogs/', name: 'log_download')]
   public function downloadLogAction(Request $request = null): Response
   {
     /** @var User|null $user */
@@ -34,16 +32,15 @@ class DownloadLogController extends AbstractController
       if ($file->isFile()) {
         $response = new BinaryFileResponse($file);
         $d = $response->headers->makeDisposition(
-          ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-          $file->getFilename()
-        );
+            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+            $file->getFilename()
+          );
         $response->headers->set('Content-Disposition', $d);
         $response->headers->set('Content-type', 'text/plain');
 
         return $response;
       }
     }
-
     throw new NotFoundHttpException();
   }
 }

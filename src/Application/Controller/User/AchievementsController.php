@@ -16,9 +16,7 @@ class AchievementsController extends AbstractController
   {
   }
 
-  /**
-   * @Route("/achievements", name="achievements_overview", methods={"GET"})
-   */
+  #[Route(path: '/achievements', name: 'achievements_overview', methods: ['GET'])]
   public function AchievementsOverview(): Response
   {
     /** @var User|null $user */
@@ -26,12 +24,10 @@ class AchievementsController extends AbstractController
     if (is_null($user)) {
       return $this->redirectToRoute('login');
     }
-
     $most_recent_user_achievement = $this->achievement_manager->findMostRecentUserAchievement($user);
     $most_recent_achievement = is_null($most_recent_user_achievement) ? null : $most_recent_user_achievement->getAchievement();
     $most_recent_achievement_unlocked_at = is_null($most_recent_user_achievement) ? null : $most_recent_user_achievement->getUnlockedAt()->format('Y-m-d');
     $most_recent_achievement_seen_at = is_null($most_recent_user_achievement) ? null : $most_recent_user_achievement->getSeenAt();
-
     $achievements_unlocked = $this->achievement_manager->findUnlockedAchievements($user);
     $achievements_locked = $this->achievement_manager->findLockedAchievements($user);
     $total_number_of_achievements = $this->achievement_manager->countAllEnabledAchievements();
@@ -48,10 +44,7 @@ class AchievementsController extends AbstractController
     ]);
   }
 
-  /**
-   * @Route("/achievements/count", name="sidebar_achievements_count", methods={"GET"})
-   * Todo -> move to CAPI
-   */
+  #[Route(path: '/achievements/count', name: 'sidebar_achievements_count', methods: ['GET'])]
   public function countUnseenAchievements(): JsonResponse
   {
     /** @var User|null $user */
@@ -65,10 +58,7 @@ class AchievementsController extends AbstractController
     ]);
   }
 
-  /**
-   * @Route("/achievements", name="achievements_read", methods={"PUT"})
-   * Todo -> move to CAPI
-   */
+  #[Route(path: '/achievements', name: 'achievements_read', methods: ['PUT'])]
   public function readUnseenAchievements(): JsonResponse
   {
     /** @var User|null $user */
@@ -76,7 +66,6 @@ class AchievementsController extends AbstractController
     if (is_null($user)) {
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
-
     try {
       $this->achievement_manager->readAllUnseenAchievements($user);
     } catch (Exception) {

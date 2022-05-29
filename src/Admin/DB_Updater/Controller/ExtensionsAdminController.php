@@ -14,8 +14,9 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ExtensionsAdminController extends CRUDController
 {
-  public function __construct(protected KernelInterface $kernel)
-  {
+  public function __construct(
+      protected KernelInterface $kernel
+  ) {
   }
 
   public function listAction(Request $request = null): Response

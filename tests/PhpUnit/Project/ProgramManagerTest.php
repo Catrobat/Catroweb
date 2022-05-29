@@ -44,15 +44,9 @@ class ProgramManagerTest extends TestCase
 {
   private ProgramManager $program_manager;
 
-  /**
-   * @var MockObject|ProgramFileRepository
-   */
-  private $file_repository;
+  private ProgramFileRepository|MockObject $file_repository;
 
-  /**
-   * @var MockObject|ScreenshotRepository
-   */
-  private $screenshot_repository;
+  private ScreenshotRepository|MockObject $screenshot_repository;
 
   private EntityManager|MockObject $entity_manager;
 

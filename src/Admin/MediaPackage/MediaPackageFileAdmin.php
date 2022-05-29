@@ -27,10 +27,9 @@ class MediaPackageFileAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'media_package_file';
 
-  public function __construct(?string $code, ?string $class, ?string $baseControllerName,
-                              private readonly MediaPackageFileRepository $media_package_file_repository)
-  {
-    parent::__construct($code, $class, $baseControllerName);
+  public function __construct(
+      private readonly MediaPackageFileRepository $media_package_file_repository
+  ) {
   }
 
   /**

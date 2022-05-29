@@ -412,7 +412,7 @@ class ProgramRepository extends ServiceEntityRepository
       // Can be used when we explicitly want projects of other flavors (E.g to fill empty categories of a new flavor)
       return $query_builder
         ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
-        ->setParameter('flavor', substr($flavor, 1))
+        ->setParameter('flavor', substr((string) $flavor, 1))
         ;
     }
 
@@ -422,8 +422,8 @@ class ProgramRepository extends ServiceEntityRepository
         $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
         $query_builder->expr()->like('lower(ext.internal_title)', ':extension'),
       ]))
-      ->setParameter('flavor', strtolower($flavor))
-      ->setParameter('extension', strtolower($flavor))
+      ->setParameter('flavor', strtolower((string) $flavor))
+      ->setParameter('extension', strtolower((string) $flavor))
       ;
   }
 

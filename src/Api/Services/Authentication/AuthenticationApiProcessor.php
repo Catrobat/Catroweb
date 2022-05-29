@@ -156,7 +156,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   {
     $username_base = 'user';
     if (!empty($name)) {
-      $username_base = str_replace(' ', '', $name);
+      $username_base = str_replace(' ', '', (string) $name);
     }
     $username = $username_base;
     $user_number = 0;

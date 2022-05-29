@@ -34,7 +34,7 @@ final class ProjectsRequestValidator extends AbstractRequestValidator
     }
 
     $calculated_checksum = md5_file($file->getPathname());
-    if (strtolower($calculated_checksum) != strtolower($checksum)) {
+    if (strtolower((string) $calculated_checksum) != strtolower($checksum)) {
       return $this->getValidationWrapper()->addError(
         $this->__('api.projectsPost.invalid_checksum', [], $locale), $KEY
       );
