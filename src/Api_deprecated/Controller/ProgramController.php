@@ -22,20 +22,17 @@ class ProgramController extends AbstractController
 {
   /**
    * @deprecated
-   *
-   * @Route("/api/projects/getInfoById.json", name="api_info_by_id", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/projects/getInfoById.json', name: 'api_info_by_id', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function showProgramAction(Request $request, ProgramManager $program_manager): JsonResponse|ProgramListResponse
   {
     /** @var ProgramManager $program_manager */
     $id = (string) $request->query->get('id', '0');
-
     $programs = [];
     $program = $program_manager->find($id);
     if (null === $program) {
       return new JsonResponse(['Error' => 'Project not found (uploaded)', 'preHeaderMessages' => '']);
     }
-
     $numbOfTotalProjects = 1;
     $programs[] = $program;
 
@@ -45,21 +42,17 @@ class ProgramController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/project/{id}/likes", name="api_project_likes", methods={"GET"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/api/project/{id}/likes', name: 'api_project_likes', methods: ['GET'])]
   public function projectLikesAction(string $id, ProgramManager $program_manager): JsonResponse
   {
     $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $program) {
       throw $this->createNotFoundException("Can't like a project that's not visible to you!; Id: ``{$id}");
     }
-
     $data = [];
-
     $user_objects = [];
-
     /** @var ProgramLike $like */
     foreach ($program->getLikes()->getIterator() as $like) {
       if (array_key_exists($like->getUser()->getId(), $user_objects)) {
@@ -82,34 +75,29 @@ class ProgramController extends AbstractController
   /**
    * @deprecated
    *
-   * @Route("/api/project/{id}/likes/count", name="api_project_likes_count", methods={"GET"})
-   *
    * @throws NotFoundHttpException
    */
-  public function projectLikesCountAction(Request $request, string $id, ProgramManager $program_manager,
-                                          TranslatorInterface $translator): JsonResponse
+  #[Route(path: '/api/project/{id}/likes/count', name: 'api_project_likes_count', methods: ['GET'])]
+  public function projectLikesCountAction(Request $request, string $id, ProgramManager $program_manager, TranslatorInterface $translator): JsonResponse
   {
     $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $program) {
       throw $this->createNotFoundException("Can't count likes of a project that's not visible to you!; Id: `{$id}`");
     }
-
     $user_locale = $request->getLocale();
-
     $data = new stdClass();
     $data->total = new stdClass();
     $data->total->value = $program_manager->totalLikeCount($id);
     $data->total->stringValue = TwigExtension::humanFriendlyNumber(
-      $data->total->value, $translator, $user_locale
-    );
-
+        $data->total->value, $translator, $user_locale
+      );
     foreach (ProgramLike::$VALID_TYPES as $type_id) {
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
       $data->{$type_name} = new stdClass();
       $data->{$type_name}->value = $program_manager->likeTypeCount($id, $type_id);
       $data->{$type_name}->stringValue = TwigExtension::humanFriendlyNumber(
-        $data->{$type_name}->value, $translator, $user_locale
-      );
+          $data->{$type_name}->value, $translator, $user_locale
+        );
     }
 
     return new JsonResponse($data);

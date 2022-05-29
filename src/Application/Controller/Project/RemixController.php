@@ -18,9 +18,7 @@ class RemixController extends AbstractController
   {
   }
 
-  /**
-   * @Route("/project/{id}/remix_graph", name="remix_graph", methods={"GET"})
-   */
+  #[Route(path: '/project/{id}/remix_graph', name: 'remix_graph', methods: ['GET'])]
   public function view(string $id): Response
   {
     return $this->render('Program/remix_graph.html.twig', [
@@ -29,9 +27,7 @@ class RemixController extends AbstractController
     ]);
   }
 
-  /**
-   * @Route("/project/{id}/remix_graph_count", name="remix_graph_count", methods={"GET"})
-   */
+  #[Route(path: '/project/{id}/remix_graph_count', name: 'remix_graph_count', methods: ['GET'])]
   public function getRemixCount(string $id): Response
   {
     // very computation intensive!
@@ -39,14 +35,12 @@ class RemixController extends AbstractController
   }
 
   /**
-   * @Route("/project/{id}/remix_graph_data", name="remix_graph_data", methods={"GET"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/project/{id}/remix_graph_data', name: 'remix_graph_data', methods: ['GET'])]
   public function getRemixGraphData(Request $request, string $id): JsonResponse
   {
     $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
-
     $catrobat_program_thumbnails = [];
     foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
       if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData'])) {
@@ -55,7 +49,7 @@ class RemixController extends AbstractController
       }
       $catrobat_program_thumbnails[$node_id] = '/'.$this->screenshot_repository
         ->getThumbnailWebPath($node_id)
-      ;
+        ;
     }
 
     return new JsonResponse([

@@ -17,33 +17,26 @@ class CodeStatisticsController extends AbstractController
   {
   }
 
-  /**
-   * @Route("/project/{id}/code_statistics", name="code_statistics", methods={"GET"})
-   */
+  #[Route(path: '/project/{id}/code_statistics', name: 'code_statistics', methods: ['GET'])]
   public function view(string $id): Response
   {
     // Todo: create useful data structures in CodeStatistic.php
     // Todo: add more statistic
     // Todo: better display of statistics -> E.g. Dr.Scratch
-
     $parsed_program = null;
-
     /** @var Program|null $program */
     $program = $this->program_manager->find($id);
-
     if (null !== $program) {
       $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
       if (null !== $extracted_file) {
         $parsed_program = $this->code_parser->parse($extracted_file);
       }
     }
-
     if (null === $parsed_program) {
       return $this->render('Program/code_statistics.html.twig', [
         'id' => $id,
       ]);
     }
-
     $stats = $parsed_program->getCodeStatistic();
     $brick_stats = $stats->getBrickTypeStatistic();
 

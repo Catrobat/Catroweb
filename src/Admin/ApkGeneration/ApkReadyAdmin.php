@@ -34,12 +34,8 @@ class ApkReadyAdmin extends AbstractAdmin
   }
 
   public function __construct(
-        ?string $code,
-        ?string $class,
-        ?string $baseControllerName,
                               private readonly ScreenshotRepository $screenshot_repository
     ) {
-    parent::__construct($code, $class, $baseControllerName);
   }
 
   public function getThumbnailImageUrl(Program $object): string

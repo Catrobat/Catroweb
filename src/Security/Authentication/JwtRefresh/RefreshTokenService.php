@@ -14,8 +14,13 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 
 class RefreshTokenService
 {
-  public function __construct(protected int $refreshTokenLifetime, protected RefreshTokenManagerInterface $refresh_manager, protected UserManager $user_manager, protected JWTTokenManagerInterface $jwt_manager, protected CookieService $cookie_service)
-  {
+  public function __construct(
+      protected int $refreshTokenLifetime,
+      protected RefreshTokenManagerInterface $refresh_manager,
+      protected UserManager $user_manager,
+      protected JWTTokenManagerInterface $jwt_manager,
+      protected CookieService $cookie_service,
+  ) {
   }
 
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface
@@ -55,7 +60,7 @@ class RefreshTokenService
       }
       $this->refresh_manager->delete($refresh_token);
     }
-    CookieService::clearCookie('REFRESH_TOKEN');
+    $this->cookie_service->clearCookie('REFRESH_TOKEN');
   }
 
   protected function getRefreshTokenFromEvent(KernelEvent $event): ?RefreshTokenInterface
@@ -68,14 +73,14 @@ class RefreshTokenService
     return null !== $refresh_token && $refresh_token->isValid() && !empty($refresh_token->getUsername());
   }
 
-  public function isBearerCookieSet(KernelEvent $event): string
+  public function isBearerCookieSet(): bool
   {
-    return strval($event->getRequest()->cookies->has('BEARER'));
+    return isset($_COOKIE['BEARER']);
   }
 
-  public function isRefreshTokenCookieSet(KernelEvent $event): string
+  public function isRefreshTokenCookieSet(KernelEvent $event): bool
   {
-    return strval($event->getRequest()->cookies->has('REFRESH_TOKEN'));
+    return $event->getRequest()->cookies->has('REFRESH_TOKEN');
   }
 
   protected function getBearerCookieValue(KernelEvent $event): string

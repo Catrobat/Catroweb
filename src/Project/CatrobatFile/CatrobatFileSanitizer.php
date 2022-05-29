@@ -153,7 +153,7 @@ class CatrobatFileSanitizer
     $needle = @end($array);
     $relative_filepath = strstr($filepath, (string) $needle);
 
-    return str_replace($needle, '', $relative_filepath);
+    return str_replace($needle, '', (string) $relative_filepath);
   }
 
   private function deleteDirectory(string $dir): bool

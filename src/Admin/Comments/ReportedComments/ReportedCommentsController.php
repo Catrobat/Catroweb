@@ -4,12 +4,18 @@ namespace App\Admin\Comments\ReportedComments;
 
 use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\User\Comment\UserComment;
+use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ReportedCommentsController extends CRUDController
 {
+  public function __construct(
+        private readonly EntityManagerInterface $entity_manager
+    ) {
+  }
+
   public function unreportProgramAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
@@ -42,13 +48,12 @@ class ReportedCommentsController extends CRUDController
   {
     /* @var $object UserComment */
     $object = $this->admin->getSubject();
-    $em = $this->getDoctrine()->getManager();
-    $comment = $em->getRepository(UserComment::class)->find($object->getId());
+    $comment = $this->entity_manager->getRepository(UserComment::class)->find($object->getId());
     if (null === $comment) {
       throw $this->createNotFoundException('No comment found for this id '.$object->getId());
     }
-    $em->remove($comment);
-    $em->flush();
+    $this->entity_manager->remove($comment);
+    $this->entity_manager->flush();
     $this->addFlash('sonata_flash_success', 'Comment '.$object->getId().' deleted');
 
     return new RedirectResponse($this->admin->generateUrl('list'));

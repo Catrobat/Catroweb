@@ -20,6 +20,7 @@ use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
 use Exception;
 use ImagickException;
@@ -48,42 +49,41 @@ class ProgramController extends AbstractController
     private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly ProgramFileRepository $file_repository,
-    private readonly TranslationDelegate $translation_delegate
+    private readonly TranslationDelegate $translation_delegate,
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly string $max_name_upload_size,
+    private readonly string $max_description_upload_size,
+    private readonly string $max_notes_and_credits_upload_size
   ) {
   }
 
   /**
-   * @Route("/project/{id}", name="program", defaults={"id": "0"})
-   *
-   * Legacy routes:
-   * @Route("/program/{id}", name="program_depricated")
+   * Legacy routes:.
    *
    * Legacy routes
-   * @Route("/details/{id}", name="catrobat_web_detail", methods={"GET"})
    */
+  #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
+  #[Route(path: '/program/{id}', name: 'program_depricated')]
+  #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
   public function projectAction(Request $request, string $id): Response
   {
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
-      return $this->redirect($this->generateUrl('index'));
+      return $this->redirectToRoute('index');
     }
-
     if ($project->isScratchProgram()) {
       $this->event_dispatcher->dispatch(new CheckScratchProgramEvent($project->getScratchId()));
     }
-
     $viewed = $request->getSession()->get('viewed', []);
     $this->checkAndAddViewed($request, $project, $viewed);
     $referrer = $request->headers->get('referer');
     $request->getSession()->set('referer', $referrer);
-
     /** @var User|null $user */
     $user = $this->getUser();
     $logged_in = null !== $user;
     $my_program = $logged_in && $project->getUser() === $user;
-
     $active_user_like_types = [];
     if ($logged_in) {
       $likes = $this->program_manager->findUserLikes($project->getId(), $user->getId());
@@ -92,35 +92,32 @@ class ProgramController extends AbstractController
       }
     }
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
-
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $program_comments = $this->findCommentsById($project);
     $program_details = $this->createProgramDetailsArray(
-      $project, $active_like_types, $active_user_like_types, $total_like_count,
-      $referrer, $program_comments
-    );
+        $project, $active_like_types, $active_user_like_types, $total_like_count,
+        $referrer, $program_comments
+      );
 
     return $this->render('Program/program.html.twig', [
       'program' => $project,
       'program_details' => $program_details,
       'my_program' => $my_program,
       'logged_in' => $logged_in,
-      'max_name_size' => $this->getParameter('catrobat.max_name_upload_size'),
-      'max_description_size' => $this->getParameter('catrobat.max_description_upload_size'),
+      'max_name_size' => $this->max_name_upload_size,
+      'max_description_size' => $this->max_description_upload_size,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
     ]);
   }
 
   /**
-   * @Route("/project/like/{id}", name="project_like", methods={"GET"})
-   *
    * @throws NoResultException
    */
+  #[Route(path: '/project/like/{id}', name: 'project_like', methods: ['GET'])]
   public function projectLikeAction(Request $request, string $id): Response
   {
     $type = $request->query->getInt('type');
     $action = (string) $request->query->get('action');
-
     if (!ProgramLike::isValidType($type)) {
       if ($request->isXmlHttpRequest()) {
         return new JsonResponse([
@@ -131,7 +128,6 @@ class ProgramController extends AbstractController
 
       throw $this->createAccessDeniedException('Invalid like-type for project given!');
     }
-
     $project = $this->program_manager->find($id);
     if (null === $project) {
       if ($request->isXmlHttpRequest()) {
@@ -143,7 +139,6 @@ class ProgramController extends AbstractController
 
       throw $this->createNotFoundException('Project with given ID does not exist!');
     }
-
     /** @var User|null $user */
     $user = $this->getUser();
     if (!$user) {
@@ -152,14 +147,13 @@ class ProgramController extends AbstractController
       }
 
       $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
-          'project_like',
-          ['id' => $id, 'type' => $type, 'action' => $action],
-          UrlGeneratorInterface::ABSOLUTE_URL
-        ));
+            'project_like',
+            ['id' => $id, 'type' => $type, 'action' => $action],
+            UrlGeneratorInterface::ABSOLUTE_URL
+          ));
 
       return $this->redirectToRoute('login');
     }
-
     try {
       $this->program_manager->changeLike($project, $user, $type, $action);
     } catch (InvalidArgumentException) {
@@ -172,11 +166,10 @@ class ProgramController extends AbstractController
 
       throw $this->createAccessDeniedException('Invalid action given!');
     }
-
     if ($project->getUser() !== $user) {
       $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
-        $project, $project->getUser(), $user
-      );
+          $project, $project->getUser(), $user
+        );
 
       if (ProgramLike::ACTION_ADD === $action) {
         if (0 === count($existing_notifications)) {
@@ -192,11 +185,9 @@ class ProgramController extends AbstractController
         }
       }
     }
-
     if (!$request->isXmlHttpRequest()) {
       return $this->redirectToRoute('program', ['id' => $id]);
     }
-
     $user_locale = $request->getLocale();
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->program_manager->findProgramLikeTypes($project->getId()));
@@ -210,30 +201,24 @@ class ProgramController extends AbstractController
     ]);
   }
 
-  /**
-   * @Route("/search/{q}", name="search", requirements={"q": ".+"}, methods={"GET"})
-   * @Route("/search/", name="empty_search", defaults={"q": null}, methods={"GET"})
-   */
+  #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
+  #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
   public function searchAction(?string $q = null): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
 
-  /**
-   * @Route("/search_old/{q}", name="search_old", requirements={"q": ".+"}, methods={"GET"})
-   * @Route("/search_old/", name="empty_search_old", defaults={"q": null}, methods={"GET"})
-   */
+  #[Route(path: '/search_old/{q}', name: 'search_old', requirements: ['q' => '.+'], methods: ['GET'])]
+  #[Route(path: '/search_old/', name: 'empty_search_old', defaults: ['q' => null], methods: ['GET'])]
   public function searchActionOld(string $q): Response
   {
     return $this->render('Search/searchOld.html.twig', ['q' => $q]);
   }
 
   /**
-   * @Route("/userToggleProjectVisibility/{id}", name="profile_toggle_program_visibility",
-   * defaults={"id": 0}, methods={"GET"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/userToggleProjectVisibility/{id}', name: 'profile_toggle_program_visibility', defaults: ['id' => 0], methods: ['GET'])]
   public function toggleProgramVisibilityAction(string $id): Response
   {
     /** @var User|null $user */
@@ -241,66 +226,51 @@ class ProgramController extends AbstractController
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
-
     /** @var ArrayCollection $user_programs */
     $user_programs = $user->getPrograms();
-
     $programs = $user_programs->matching(
-      Criteria::create()->where(Criteria::expr()->eq('id', $id))
-    );
-
+        Criteria::create()->where(Criteria::expr()->eq('id', $id))
+      );
     if ($programs->isEmpty()) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-
     /** @var Program $program */
     $program = $programs[0];
     $program->setPrivate(!$program->getPrivate());
-
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($program);
-    $em->flush();
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
 
     return new Response('true');
   }
 
   /**
-   * @Route("/editProjectName/{id}", name="edit_program_name", methods={"PUT"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/editProjectName/{id}', name: 'edit_program_name', methods: ['PUT'])]
   public function editProgramName(Request $request, string $id): Response
   {
-    $max_name_size = (int) $this->getParameter('catrobat.max_name_upload_size');
+    $max_name_size = (int) $this->max_name_upload_size;
     $value = (string) $request->request->get('value');
-
     if (strlen($value) > $max_name_size) {
       return new Response(
-        $this->translator->trans('programs.tooLongName', [], 'catroweb'),
-        Response::HTTP_UNPROCESSABLE_ENTITY
-      );
+          $this->translator->trans('programs.tooLongName', [], 'catroweb'),
+          Response::HTTP_UNPROCESSABLE_ENTITY
+        );
     }
-
     $user = $this->getUser();
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
-
     $program = $this->program_manager->find($id);
     if (!$program) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-
     if ($program->getUser() !== $user) {
       throw $this->createAccessDeniedException('Not your program!');
     }
-
     $program->setName($value);
-
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($program);
-    $em->flush();
-
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
     $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
     if ($extracted_file) {
       $extracted_file->setName($value);
@@ -312,41 +282,32 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/editProjectDescription/{id}", name="edit_program_description", methods={"PUT"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/editProjectDescription/{id}', name: 'edit_program_description', methods: ['PUT'])]
   public function editProgramDescription(Request $request, string $id): Response
   {
-    $max_description_size = (int) $this->getParameter('catrobat.max_description_upload_size');
+    $max_description_size = (int) $this->max_description_upload_size;
     $value = (string) $request->request->get('value');
-
     if (strlen($value) > $max_description_size) {
       return new JsonResponse(['statusCode' => 527,
         'message' => $this->translator
           ->trans('programs.tooLongDescription', [], 'catroweb'), ]);
     }
-
     $user = $this->getUser();
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
-
     $program = $this->program_manager->find($id);
     if (!$program) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-
     if ($program->getUser() !== $user) {
       throw $this->createAccessDeniedException('Not your program!');
     }
-
     $program->setDescription($value);
-
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($program);
-    $em->flush();
-
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
     $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
     if ($extracted_file) {
       $extracted_file->setDescription($value);
@@ -358,41 +319,32 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/editProjectCredits/{id}", name="edit_program_credits", methods={"PUT"})
-   *
    * @throws Exception
    */
+  #[Route(path: '/editProjectCredits/{id}', name: 'edit_program_credits', methods: ['PUT'])]
   public function editProgramCredits(Request $request, string $id): Response
   {
-    $max_credits_size = (int) $this->getParameter('catrobat.max_notes_and_credits_upload_size');
+    $max_credits_size = (int) $this->max_notes_and_credits_upload_size;
     $value = (string) $request->request->get('value');
-
     if (strlen($value) > $max_credits_size) {
       return new JsonResponse(['statusCode' => 707,
         'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);
     }
-
     $user = $this->getUser();
     if (null === $user) {
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
-
     $program = $this->program_manager->find($id);
     if (null === $program) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-
     if ($program->getUser() !== $user) {
       throw $this->createAccessDeniedException('Not your program!');
     }
-
     $program->setCredits($value);
-
-    $em = $this->getDoctrine()->getManager();
-    $em->persist($program);
-    $em->flush();
-
+    $this->entity_manager->persist($program);
+    $this->entity_manager->flush();
     $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
     if ($extracted_file) {
       $extracted_file->setNotesAndCredits($value);
@@ -404,67 +356,53 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @Route("/project/{id}/image", name="upload_project_thumbnail", methods={"POST"})
-   *
    * @throws ImagickException
    */
+  #[Route(path: '/project/{id}/image', name: 'upload_project_thumbnail', methods: ['POST'])]
   public function uploadProjectImage(Request $request, string $id): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
-
     /** @var Program|null $project */
     $project = $this->program_manager->find($id);
-
     if (null === $project) {
       throw new NotFoundHttpException();
     }
-
     if (null === $user || $project->getUser() !== $user) {
       return $this->redirectToRoute('login');
     }
-
     $image = (string) $request->request->get('image');
-
     $this->screenshot_repository->updateProgramAssets($image, $id);
 
     return new JsonResponse();
   }
 
   /**
-   * @Route("/translate/project/{id}", name="translate_project", methods={"GET"})
-   *
    * @throws NoResultException
    */
+  #[Route(path: '/translate/project/{id}', name: 'translate_project', methods: ['GET'])]
   public function translateProjectAction(Request $request, string $id): Response
   {
     if (!$request->query->has('target_language')) {
       return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
     }
-
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       return new Response('No project found for this id', Response::HTTP_NOT_FOUND);
     }
-
     $source_language = $request->query->get('source_language');
     $source_language = is_null($source_language) ? $source_language : (string) $source_language;
     $target_language = (string) $request->query->get('target_language');
-
     if ($source_language === $target_language) {
       return new Response('Source and target languages are the same', Response::HTTP_UNPROCESSABLE_ENTITY);
     }
-
     $response = new JsonResponse();
     $response->setEtag(md5($project->getName().$project->getDescription().$project->getCredits()).$target_language);
     $response->setPublic();
-
     if ($response->isNotModified($request)) {
       return $response;
     }
-
     $translation_result = $this->translation_delegate->translateProject($project, $source_language, $target_language);
-
     if (null === $translation_result) {
       return new Response('Translation unavailable', Response::HTTP_SERVICE_UNAVAILABLE);
     }
@@ -481,22 +419,18 @@ class ProgramController extends AbstractController
     ]);
   }
 
-  /**
-   * @Route("/translate/custom/project/{id}", name="project_custom_translation", methods={"PUT", "GET", "DELETE"})
-   */
+  #[Route(path: '/translate/custom/project/{id}', name: 'project_custom_translation', methods: ['PUT', 'GET', 'DELETE'])]
   public function projectCustomTranslationAction(Request $request, string $id): Response
   {
     return match ($request->getMethod()) {
       'PUT' => $this->projectCustomTranslationPutAction($request, $id),
-        'GET' => $this->projectCustomTranslationGetAction($request, $id),
-        'DELETE' => $this->projectCustomTranslationDeleteAction($request, $id),
-        default => new Response(null, Response::HTTP_BAD_REQUEST),
+          'GET' => $this->projectCustomTranslationGetAction($request, $id),
+          'DELETE' => $this->projectCustomTranslationDeleteAction($request, $id),
+          default => new Response(null, Response::HTTP_BAD_REQUEST),
     };
   }
 
-  /**
-   * @Route("/translate/custom/project/{id}/list", name="project_custom_translation_language_list", methods={"GET"})
-   */
+  #[Route(path: '/translate/custom/project/{id}/list', name: 'project_custom_translation_language_list', methods: ['GET'])]
   public function projectCustomTranslationLanguageListAction(string $id, ProjectCustomTranslationRepository $repository): Response
   {
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
@@ -528,8 +462,7 @@ class ProgramController extends AbstractController
     $comments_avatars = [];
     /** @var UserComment $comment */
     foreach ($program_comments as $comment) {
-      $em = $this->getDoctrine()->getManager();
-      $user = $em->getRepository(User::class)->findOneBy([
+      $user = $this->entity_manager->getRepository(User::class)->findOneBy([
         'id' => $comment->getUser()->getId(),
       ]);
       if (null !== $user) {
@@ -565,7 +498,7 @@ class ProgramController extends AbstractController
    */
   private function findCommentsById(Program $program): array
   {
-    return $this->getDoctrine()
+    return $this->entity_manager
       ->getRepository(UserComment::class)
       ->findBy(
         ['program' => $program->getId()],

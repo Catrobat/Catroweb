@@ -26,18 +26,15 @@ class TaggingController extends AbstractController implements TranslatorAwareInt
 
   /**
    * @deprecated
-   *
-   * @Route("/api/tags/getTags.json", name="api_get_tags", defaults={"_format": "json"}, methods={"GET"})
    */
+  #[Route(path: '/api/tags/getTags.json', name: 'api_get_tags', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function taggingAction(Request $request, TagRepository $tags_repo): JsonResponse
   {
     $tags = [];
     $tags['statusCode'] = 200;
     $tags['constantTags'] = [];
-
     // $language = $request->query->get('language');
     $results = $tags_repo->getActiveTags();
-
     /** @var Tag $tag */
     foreach ($results as $tag) {
       $tags['constantTags'][] = $tag->getInternalTitle();

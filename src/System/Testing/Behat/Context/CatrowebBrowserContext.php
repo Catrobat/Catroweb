@@ -1149,7 +1149,7 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given I use an invalid JWT token for :username
+   * @Given I use an invalid JWT authorization header for :username
    */
   public function iUseAnInvalidJwtTokenFor(): void
   {

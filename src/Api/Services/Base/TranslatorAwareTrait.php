@@ -68,7 +68,7 @@ trait TranslatorAwareTrait
 
   private function removeTrailingNoiseOfLocale(?string $locale): string
   {
-    return explode(' ', trim($locale))[0];
+    return explode(' ', trim($locale ?? ''))[0];
   }
 
   public function isLocaleAValidLocaleWithUnderscore(string $locale): bool

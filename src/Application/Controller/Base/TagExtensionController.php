@@ -8,17 +8,13 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TagExtensionController extends AbstractController
 {
-  /**
-   * @Route("/tag/search/{q}", name="tag_search", methods={"GET"})
-   */
+  #[Route(path: '/tag/search/{q}', name: 'tag_search', methods: ['GET'])]
   public function tagSearchAction(string $q): Response
   {
     return $this->render('Search/tagSearch.html.twig', ['q' => $q]);
   }
 
-  /**
-   * @Route("/extension/search/{q}", name="extension_search", methods={"GET"})
-   */
+  #[Route(path: '/extension/search/{q}', name: 'extension_search', methods: ['GET'])]
   public function extensionSearchAction(string $q): Response
   {
     return $this->render('Search/extensionSearch.html.twig', ['q' => $q]);

@@ -5,7 +5,7 @@ namespace App\System\Commands\DBUpdater\CronJobs;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramExtensionListener;
+use App\Project\Extension\ProjectExtensionManager;
 use App\Project\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -21,8 +21,9 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
    */
   protected static $defaultName = 'catrobat:workflow:project:refresh_extensions';
 
-  public function __construct(protected ProgramManager $program_manager, protected ProgramRepository $program_repository,
-                              protected ProgramExtensionListener $program_extension_listener,
+  public function __construct(protected ProgramManager $program_manager,
+                              protected ProgramRepository $program_repository,
+                              protected ProjectExtensionManager $extension_manager,
                               protected ExtractedFileRepository $extracted_file_repo,
                               protected EntityManagerInterface $entity_manager)
   {
@@ -59,7 +60,7 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
       $project = $projects[0];
       $extracted_file = $this->extracted_file_repo->loadProgramExtractedFile($project);
       if (!is_null($extracted_file)) {
-        $this->program_extension_listener->addExtensions($extracted_file, $project, false);
+        $this->extension_manager->addExtensions($extracted_file, $project, false);
       }
       ++$i;
       if (($i % $batchSize) === 0) {

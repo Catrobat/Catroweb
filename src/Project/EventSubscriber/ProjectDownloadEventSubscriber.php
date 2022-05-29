@@ -17,6 +17,9 @@ class ProjectDownloadEventSubscriber implements EventSubscriberInterface
     $this->program_manager->increaseDownloads($event->getProject(), $event->getUser());
   }
 
+  /**
+   * {@inheritdoc}
+   */
   public static function getSubscribedEvents(): array
   {
     return [
