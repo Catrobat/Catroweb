@@ -95,7 +95,7 @@ task('restart:nginx', function () {
   run('sudo /usr/sbin/service nginx restart');
 });
 task('restart:php-fpm', function () {
-  run('sudo /usr/sbin/service php7.4-fpm restart');
+  run('sudo /usr/sbin/service php8.1-fpm restart');
 });
 task('install:npm', function () {
   cd('{{release_path}}');
