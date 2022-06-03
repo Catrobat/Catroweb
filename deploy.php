@@ -71,14 +71,7 @@ host(getenv('DEPLOY_SHARE'))
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
   ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/')
-;
-
-host(getenv('DEPLOY_WEBTEST'))
-  ->set('labels', ['stage' => 'web-test'])
-  ->set('symfony_env', 'prod')
-  ->set('branch', getenv('DEPLOY_WEBTEST_BRANCH'))
-  ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/')
+  ->set('remote_user', 'unpriv')
 ;
 
 // Tasks
