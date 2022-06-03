@@ -51,16 +51,9 @@ jobs:
           printf 'DEPLOY_SHARE=${{ secrets.DEPLOY_SHARE }}\n' >> .env.local
           printf 'DEPLOY_SHARE_BRANCH="master"\n' >> .env.local
 
-      - name: Deploy
+      - name: Deploy Share
         uses: deployphp/action@v1
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
           dep: deploy stage=share
-          deployer-binary: "bin/dep"
-
-      - name: Deploy
-        uses: deployphp/action@v1
-        with:
-          private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
-          dep: deploy stage=web-test
           deployer-binary: "bin/dep"
