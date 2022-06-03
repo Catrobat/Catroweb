@@ -18,7 +18,7 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
 
   protected function setUp(): void
   {
-    $this->object = $this->getMockForTrait(PandaAuthenticationTrait::class);
+    $this->object = $this->getMockForAbstractClass(PandaAuthenticationTraitTestClass::class);
   }
 
   /**
@@ -36,11 +36,9 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
    * @covers \App\Api\Services\Base\PandaAuthenticationTrait::setPandaAuth
    * @dataProvider dataProviderPandaAuth
    *
-   * @param mixed $value
-   *
    * @throws Exception
    */
-  public function testSetPandaAuth($value, bool $expect_exception, string $expected = ''): void
+  public function testSetPandaAuth(?string $value, bool $expect_exception, string $expected = ''): void
   {
     if ($expect_exception) {
       $this->expectException(ApiException::class);

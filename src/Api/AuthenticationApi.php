@@ -21,7 +21,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationGet(&$responseCode, array &$responseHeaders)
+  public function authenticationGet(int &$responseCode, array &$responseHeaders): void
   {
     // Check Token is handled by LexikJWTAuthenticationBundle
     // Successful requests are passed to this method.
@@ -31,7 +31,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationPost(LoginRequest $login_request, &$responseCode, array &$responseHeaders)
+  public function authenticationPost(LoginRequest $login_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Login Process & token creation is handled by LexikJWTAuthenticationBundle
     // Successful requests are NOT passed to this method. This method will never be called.
@@ -44,7 +44,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationDelete(string $x_refresh, &$responseCode, array &$responseHeaders)
+  public function authenticationDelete(string $x_refresh, int &$responseCode, array &$responseHeaders): void
   {
     if ($this->facade->getProcessor()->deleteRefreshToken($x_refresh)) {
       $responseCode = Response::HTTP_OK;
@@ -57,7 +57,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationRefreshPost(RefreshRequest $refresh_request, &$responseCode, array &$responseHeaders)
+  public function authenticationRefreshPost(RefreshRequest $refresh_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Refresh token process is handled by JWTRefreshTokenBundle
     // Successful requests are NOT passed to this method. This method will never be called.
@@ -69,7 +69,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, &$responseCode, array &$responseHeaders): ?JWTResponse
+  public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $resource_owner = $o_auth_login_request->getResourceOwner() ?? '';
     $id_token = $o_auth_login_request->getIdToken() ?? '';
@@ -100,9 +100,9 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, &$responseCode, array &$responseHeaders): ?JWTResponse
+  public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $deprecated_token = $upgrade_token_request->getUploadToken() ?? '';
+    $deprecated_token = $upgrade_token_request->getUploadToken();
     if (empty($deprecated_token)) {
       $responseCode = Response::HTTP_BAD_REQUEST;
 

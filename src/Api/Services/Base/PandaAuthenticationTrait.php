@@ -13,12 +13,7 @@ trait PandaAuthenticationTrait
 {
   private string $token;
 
-  /**
-   * @param mixed $value
-   *
-   * @throws Exception
-   */
-  public function setPandaAuth($value): void
+  public function setPandaAuth(?string $value): void
   {
     $this->token = $this->extractAuthenticationToken($value ?? '');
   }

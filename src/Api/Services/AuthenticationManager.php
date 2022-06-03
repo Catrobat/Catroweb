@@ -5,6 +5,7 @@ namespace App\Api\Services;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
 use App\Utils\RequestHelper;
+use Exception;
 use Gesdinet\JWTRefreshTokenBundle\Generator\RefreshTokenGeneratorInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -52,7 +53,12 @@ class AuthenticationManager
       return null;
     }
 
-    return $this->user_manager->findUserByUsername($payload[$idClaim]);
+    $user = $this->user_manager->findUserByUsername($payload[$idClaim]);
+    if (null === $user || $user instanceof User) {
+      return $user;
+    }
+
+    throw new Exception("Can't get user from auth token");
   }
 
   public function deleteRefreshToken(string $x_refresh): bool

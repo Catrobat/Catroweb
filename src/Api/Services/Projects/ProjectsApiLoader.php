@@ -51,7 +51,7 @@ final class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->getProjects($category, $max_version, $limit, $offset, $flavor);
   }
 
-  public function getFeaturedProjects(?string $flavor, int $limit, int $offset, string $platform, string $max_version)
+  public function getFeaturedProjects(?string $flavor, int $limit, int $offset, string $platform, string $max_version): mixed
   {
     return $this->featured_repository->getFeaturedPrograms($flavor, $limit, $offset, $platform, $max_version);
   }

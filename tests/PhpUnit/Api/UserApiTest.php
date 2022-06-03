@@ -93,7 +93,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserPostDryRun(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $request_validator = $this->createMock(UserRequestValidator::class);
@@ -120,7 +120,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserPostValidationError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $request_validator = $this->createMock(UserRequestValidator::class);
@@ -147,7 +147,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserPost(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $request_validator = $this->createMock(UserRequestValidator::class);
@@ -175,17 +175,16 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserDelete(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->userDelete($response_code, $response_headers);
+    $this->object->userDelete($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
-    $this->assertNull($response);
   }
 
   /**
@@ -197,7 +196,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
@@ -220,7 +219,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserIdGetNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(UserApiLoader::class);
@@ -242,7 +241,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserIdGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(UserApiLoader::class);
@@ -265,14 +264,14 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUsersSearchGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(UserApiLoader::class);
     $loader->method('searchUsers')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->usersSearchGet('query', null, null, $response_code, $response_headers);
+    $response = $this->object->usersSearchGet('query', 20, 0, '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
 
@@ -288,7 +287,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserPutDryRun(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
@@ -318,7 +317,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserPutValidationError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
@@ -348,7 +347,7 @@ final class UserApiTest extends DefaultTestCase
    */
   public function testUserPut(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $request_validator = $this->createMock(UserRequestValidator::class);

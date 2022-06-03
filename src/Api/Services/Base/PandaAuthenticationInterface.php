@@ -4,7 +4,7 @@ namespace App\Api\Services\Base;
 
 interface PandaAuthenticationInterface
 {
-  public function setPandaAuth($value);
+  public function setPandaAuth(?string $value): void;
 
-  public function getAuthenticationToken();
+  public function getAuthenticationToken(): string;
 }

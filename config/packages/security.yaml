@@ -44,16 +44,13 @@ security:
       provider: chain_provider
       pattern: ^.*?/api/checkToken/check.json
       stateless: true
-      guard:
-        authenticators:
-          - App\Api_deprecated\Security\ApiTokenAuthenticator
+      custom_authenticators:
+        - App\Api_deprecated\Security\ApiTokenAuthenticator
     api_upload:
       provider: chain_provider
       pattern: ^.*?/api/upload/upload.json
-      stateless: true
-      guard:
-        authenticators:
-          - App\Api_deprecated\Security\ApiTokenAuthenticator
+      custom_authenticators:
+        - App\Api_deprecated\Security\ApiTokenAuthenticator
     
     debug:
       provider: chain_provider
@@ -66,11 +63,11 @@ security:
       stateless: true
       form_login:
         default_target_path: /
-      guard:
-        authenticators:
-          - App\Security\Authentication\WebView\WebviewAuthenticator     # @deprecated v1
-          - App\Security\Authentication\WebView\WebviewJWTAuthenticator
+      custom_authenticators:
+        - App\Security\Authentication\WebView\WebviewAuthenticator     # @deprecated v1
+        - App\Security\Authentication\WebView\WebviewJWTAuthenticator
       entry_point: App\Security\Authentication\WebView\WebviewJWTAuthenticator
+
       oauth:
         remember_me: true
         resource_owners:
@@ -81,9 +78,9 @@ security:
         use_forward: false
         failure_path: /app/login
         success_handler: catroweb.oauth_success_handler
-        
         oauth_user_provider:
           service: my.oauth_aware.user_provider.service
+#        provider: my.oauth_aware.user_provider.service
     
     # disables authentication for assets and the profiler, adapt it according to your needs
     dev:

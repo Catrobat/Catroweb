@@ -24,7 +24,7 @@ class ArchiveLogsTest extends KernelTestCase
     $application = new Application($kernel);
     $command = $application->find('catrobat:logs:archive');
 
-    $log_dir = $kernel->getContainer()->getParameter('catrobat.logs.dir');
+    $log_dir = (string) $kernel->getContainer()->getParameter('catrobat.logs.dir');
 
     // create test log folder under TestData -> we don't want to remove our real logs
     if (!file_exists($log_dir)) {

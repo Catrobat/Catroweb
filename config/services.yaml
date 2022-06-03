@@ -103,6 +103,9 @@ services:
   Sonata\UserBundle\Entity\UserManager:
     alias: sonata.user.manager.user
 
+  Symfony\Component\Security\Core\User\UserProviderInterface:
+    alias: sonata.user.security.user_provider
+
   App\Project\ProgramManager:
     class: App\Project\ProgramManager
     public: true

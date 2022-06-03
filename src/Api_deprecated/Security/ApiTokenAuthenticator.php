@@ -9,33 +9,30 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
+use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
+use Symfony\Component\Security\Http\Authenticator\Passport\SelfValidatingPassport;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @deprecated
  */
-class ApiTokenAuthenticator extends AbstractGuardAuthenticator
+class ApiTokenAuthenticator extends AbstractAuthenticator
 {
   /**
    * @required request parameter TOKEN
    *
    *  Must be sent in the request HEADER containing the user token
    *  Must not be empty
-   *
-   * @var string
    */
-  final public const TOKEN = 'authenticate';
+  private const TOKEN = 'authenticate';
+  private const OLD_TOKEN = 'token';
 
-  /**
-   * @deprecated
-   */
-  final public const OLD_TOKEN = 'token';
-
-  public function __construct(private readonly EntityManagerInterface $em, protected TranslatorInterface $translator)
-  {
+  public function __construct(
+      private readonly EntityManagerInterface $em,
+      protected TranslatorInterface $translator
+) {
   }
 
   /**
@@ -43,77 +40,50 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
    * used for the request. Returning false will cause this authenticator
    * to be skipped.
    *
-   * @return bool
+   * {@inheritdoc}
    */
-  public function supports(Request $request)
+  public function supports(Request $request): ?bool
   {
     return $this->requestHasValidAuthTokenInHeader($request)
       || $this->requestHasValidTokenInBody__supportAPIv1($request);
   }
 
   /**
-   * Called on every request. Return whatever credentials you want to
-   * be passed to getUser() as $credentials.
-   *
-   * @return array|mixed
+   * {@inheritdoc}
    */
-  public function getCredentials(Request $request)
+  public function authenticate(Request $request): Passport
   {
-    return [
-      self::TOKEN => $request->headers->has(self::TOKEN) ?
-        $request->headers->get(self::TOKEN) : $request->request->get(self::OLD_TOKEN),
-    ];
-  }
-
-  /**
-   * @param mixed $credentials
-   *
-   * @return User|null
-   */
-  public function getUser($credentials, UserProviderInterface $userProvider)
-  {
-    $token = $credentials[self::TOKEN];
+    $token = $request->headers->has(self::TOKEN) ? $request->headers->get(self::TOKEN) : $request->request->get(self::OLD_TOKEN);
 
     if (null === $token || '' === $token) {
-      return null;
+      throw new AuthenticationException('Empty token!');
     }
 
-    // if a User object, checkCredentials() is called
-    return $this->em->getRepository(User::class)
+    /** @var User|null $user */
+    $user = $this->em->getRepository(User::class)
       ->findOneBy(['upload_token' => $token])
-    ;
+        ;
+
+    if (null === $user) {
+      throw new AuthenticationException('User not found!');
+    }
+
+    return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()));
   }
 
   /**
-   *  Called to make sure the credentials are valid
-   *    - E.g mail, username, or password
-   *    - no additional checks would also be valid.
-   *
-   * @param mixed $credentials
-   *
-   * @return bool
+   * {@inheritdoc}
    */
-  public function checkCredentials($credentials, UserInterface $user)
-  {
-    // return true to cause authentication success
-    return true;
-  }
-
-  /**
-   * @param string $providerKey
-   *
-   * @return Response|null
-   */
-  public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
+  public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
   {
     // on success, let the request continue
     return null;
   }
 
   /**
-   * @return JsonResponse|Response|null
+   * {@inheritdoc}
    */
-  public function onAuthenticationFailure(Request $request, AuthenticationException $exception)
+  public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
     $data = [
       $this->translator->trans($exception->getMessageKey(), $exception->getMessageData()),
@@ -122,34 +92,11 @@ class ApiTokenAuthenticator extends AbstractGuardAuthenticator
     return new JsonResponse($data, Response::HTTP_FORBIDDEN);
   }
 
-  /**
-   * Called when authentication is needed, but it's not sent.
-   */
-  public function start(Request $request, AuthenticationException $authException = null): Response
-  {
-    $data = [
-      'Authentication Required',
-    ];
-
-    return new JsonResponse($data, Response::HTTP_UNAUTHORIZED);
-  }
-
-  /**
-   * @return bool
-   */
-  public function supportsRememberMe()
-  {
-    return false;
-  }
-
   private function requestHasValidAuthTokenInHeader(Request $request): bool
   {
     return $request->headers->has(self::TOKEN) && '' !== $request->headers->get(self::TOKEN);
   }
 
-  /**
-   * @deprecated
-   */
   private function requestHasValidTokenInBody__supportAPIv1(Request $request): bool
   {
     return $request->request->has(self::OLD_TOKEN) && '' !== $request->request->get(self::OLD_TOKEN);

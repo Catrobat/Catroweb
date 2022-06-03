@@ -24,18 +24,16 @@ class ProgramFileRepositoryTest extends TestCase
 
   private string $extract_dir;
 
-  private Filesystem $filesystem;
-
   private ProgramFileRepository $program_file_repository;
 
   protected function setUp(): void
   {
     $this->storage_dir = RefreshTestEnvHook::$CACHE_DIR.'zip/';
     $this->extract_dir = RefreshTestEnvHook::$CACHE_DIR.'extract/';
-    $this->filesystem = new Filesystem();
-    $this->filesystem->mkdir($this->storage_dir);
-    $this->filesystem->mkdir($this->extract_dir);
-    $this->filesystem->mkdir($this->storage_dir.'tmp/');
+    $filesystem = new Filesystem();
+    $filesystem->mkdir($this->storage_dir);
+    $filesystem->mkdir($this->extract_dir);
+    $filesystem->mkdir($this->storage_dir.'tmp/');
     $this->program_file_repository = new ProgramFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
   }
 
@@ -94,9 +92,9 @@ class ProgramFileRepositoryTest extends TestCase
 
     $this->program_file_repository->saveProjectZipFile($file, $id);
 
-    $original_md5_sum = md5_file($file);
+    $original_md5_sum = md5_file($file->getRealPath());
     $returned_file = $this->program_file_repository->getProjectZipFile($id);
-    $returned_file_md5_sum = md5_file($returned_file);
+    $returned_file_md5_sum = md5_file($returned_file->getRealPath());
 
     Assert::assertEquals($returned_file_md5_sum, $original_md5_sum);
   }

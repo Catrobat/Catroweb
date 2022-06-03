@@ -15,13 +15,11 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
 
   /**
    * {@inheritDoc}
+   *
+   * @throws \Exception
    */
-  public function searchGet(string $query, ?string $type = 'all', ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null)
+  public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $type ??= 'all';
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-
     if ('' === $query || ctype_space($query)) {
       return [];
     }
