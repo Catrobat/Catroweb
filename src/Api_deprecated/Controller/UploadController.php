@@ -108,16 +108,6 @@ class UploadController
     return $this->translator->trans($message, $parameters, 'catroweb');
   }
 
-  private function getLanguageCode(Request $request): string
-  {
-    $languageCode = strtoupper(substr($request->getLocale(), 0, 2));
-    if ('DE' !== $languageCode) {
-      $languageCode = 'EN';
-    }
-
-    return $languageCode;
-  }
-
   private function createUploadResponse(Request $request, User $user, Program $program): array
   {
     $response = [];

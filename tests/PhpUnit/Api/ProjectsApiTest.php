@@ -93,7 +93,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdGetNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(ProjectsApiLoader::class);
@@ -115,7 +115,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(ProjectsApiLoader::class);
@@ -137,14 +137,14 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsFeaturedGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(ProjectsApiLoader::class);
     $loader->method('getFeaturedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectsFeaturedGet(null, null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsFeaturedGet('', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -159,10 +159,10 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsGet('category', null, null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsGet('category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -177,13 +177,12 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdRecommendationsGetNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectIdRecommendationsGet('id', 'category', null, null, null, null, null, $response_code, $response_headers);
+    $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
-    $this->assertNull($response);
   }
 
   /**
@@ -195,7 +194,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdRecommendationsGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(ProjectsApiLoader::class);
@@ -203,7 +202,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $loader->method('getRecommendedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->projectIdRecommendationsGet('id', 'category', null, null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectIdRecommendationsGet('id', 'category', 'en', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -218,10 +217,10 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsSearchGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsSearchGet('query', null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsSearchGet('query', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -236,10 +235,10 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsCategoriesGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectsCategoriesGet(null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsCategoriesGet('', '', 'en', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -254,14 +253,14 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsUserGetForbidden(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn(null);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->projectsUserGet(null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsUserGet('', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_FORBIDDEN, $response_code);
     $this->assertNull($response);
@@ -276,7 +275,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsUserGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
@@ -285,7 +284,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->projectsUserGet(null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsUserGet('', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -300,14 +299,14 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsUserIdGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $request_validator = $this->createMock(ProjectsRequestValidator::class);
     $request_validator->method('validateUserExists')->willReturn(true);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
-    $response = $this->object->projectsUserIdGet('id', null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsUserIdGet('id', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
     $this->assertIsArray($response);
@@ -322,14 +321,14 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsUserIdGetNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $request_validator = $this->createMock(ProjectsRequestValidator::class);
     $request_validator->method('validateUserExists')->willReturn(false);
     $this->facade->method('getRequestValidator')->willReturn($request_validator);
 
-    $response = $this->object->projectsUserIdGet('id', null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsUserIdGet('id', '', 20, 0, '', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -344,15 +343,14 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdReportPost(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $project_report_request = $this->createMock(ProjectReportRequest::class);
 
-    $response = $this->object->projectIdReportPost('id', $project_report_request, $response_code, $response_headers);
+    $this->object->projectIdReportPost('id', $project_report_request, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
-    $this->assertNull($response);
   }
 
   /**
@@ -364,7 +362,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsPost(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $user = $this->createMock(User::class);
@@ -377,7 +375,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $file = $this->createMock(UploadedFile::class);
-    $response = $this->object->projectsPost('checksum', $file, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_CREATED, $response_code);
     $this->assertArrayHasKey('Location', $response_headers);
@@ -393,7 +391,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsPostValidationError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $validator = $this->createMock(ProjectsRequestValidator::class);
@@ -411,7 +409,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->facade->method('getRequestValidator')->willReturn($validator);
 
     $file = $this->createMock(UploadedFile::class);
-    $response = $this->object->projectsPost('checksum', $file, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(UploadErrorResponse::class, $response);
@@ -426,7 +424,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsPostAddException(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $processor = $this->createMock(ProjectsApiProcessor::class);
@@ -439,7 +437,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->facade->method('getProcessor')->willReturn($processor);
 
     $file = $this->createMock(UploadedFile::class);
-    $response = $this->object->projectsPost('checksum', $file, null, null, null, $response_code, $response_headers);
+    $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(UploadErrorResponse::class, $response);
@@ -454,7 +452,7 @@ final class ProjectsApiTest extends DefaultTestCase
 //   */
 //  public function testProjectsPostAddExceptionForbidden(): void
 //  {
-//    $response_code = null;
+//    $response_code = 200;
 //    $response_headers = [];
 //
 //    $processor = $this->createMock(ProjectsApiProcessor::class);
@@ -481,13 +479,12 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdDelete(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->projectIdDelete('id', $response_code, $response_headers);
+    $this->object->projectIdDelete('id', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response_code);
-    $this->assertNull($response);
   }
 
   /**
@@ -499,7 +496,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsExtensionsGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $response = $this->object->projectsExtensionsGet('en', $response_code, $response_headers);
@@ -517,7 +514,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectsTagsGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $response = $this->object->projectsTagsGet('', $response_code, $response_headers);

@@ -82,13 +82,12 @@ class NotificationsApiTest extends DefaultTestCase
    */
   public function testNotificationIdReadPut(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->notificationIdReadPut(1, null, $response_code, $response_headers);
+    $this->object->notificationIdReadPut(1, 'en', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_UNAUTHORIZED, $response_code);
-    $this->assertNull($response);
   }
 
   /**
@@ -98,7 +97,7 @@ class NotificationsApiTest extends DefaultTestCase
    */
   public function testNotificationsCountGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
@@ -120,10 +119,10 @@ class NotificationsApiTest extends DefaultTestCase
    */
   public function testNotificationsGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->notificationsGet(null, null, null, null, $response_code, $response_headers);
+    $response = $this->object->notificationsGet('en', 20, 0, '', 'all', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_IMPLEMENTED, $response_code);
     $this->assertNull($response);
@@ -136,16 +135,15 @@ class NotificationsApiTest extends DefaultTestCase
    */
   public function testNotificationsReadPut(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($this->createMock(User::class));
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
 
-    $response = $this->object->notificationsReadPut($response_code, $response_headers);
+    $this->object->notificationsReadPut($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
-    $this->assertNull($response);
   }
 }

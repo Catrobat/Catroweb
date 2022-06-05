@@ -14,6 +14,7 @@ use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use SimpleXMLElement;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -463,7 +464,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   /**
    * @throws Exception
    */
-  private function getBaseXmlWithUrl(string $url): string
+  private function getBaseXmlWithUrl(string $url): SimpleXMLElement|false
   {
     $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
     $xml->header->url = $url;

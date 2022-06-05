@@ -81,13 +81,12 @@ class UtilityApiTest extends DefaultTestCase
    */
   public function testHealthCheck(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
-    $response = $this->object->healthGet($response_code, $response_headers);
+    $this->object->healthGet($response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NO_CONTENT, $response_code);
-    $this->assertNull($response);
   }
 
   /**
@@ -97,14 +96,14 @@ class UtilityApiTest extends DefaultTestCase
    */
   public function testSurveyLangCodeGetNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(UtilityApiLoader::class);
     $loader->method('getActiveSurvey')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->surveyLangCodeGet('de', null, $response_code, $response_headers);
+    $response = $this->object->surveyLangCodeGet('de', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_NOT_FOUND, $response_code);
     $this->assertNull($response);
@@ -117,14 +116,14 @@ class UtilityApiTest extends DefaultTestCase
    */
   public function testSurveyLangCodeGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $loader = $this->createMock(UtilityApiLoader::class);
     $loader->method('getActiveSurvey')->willReturn($this->createMock(Survey::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
-    $response = $this->object->surveyLangCodeGet('de', null, $response_code, $response_headers);
+    $response = $this->object->surveyLangCodeGet('de', '', $response_code, $response_headers);
 
     $this->assertEquals(Response::HTTP_OK, $response_code);
 

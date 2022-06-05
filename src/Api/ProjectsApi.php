@@ -10,7 +10,7 @@ use App\Project\Event\ProjectDownloadEvent;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
-use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\UpdateProjectRequest;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -27,7 +27,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectIdGet(string $id, &$responseCode, array &$responseHeaders): ?ProjectResponse
+  public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -47,14 +47,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): array
+  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
-    $platform = $this->getDefaultPlatformOnNull($platform);
-
     $featured_projects = $this->facade->getLoader()->getFeaturedProjects($flavor, $limit, $offset, $platform, $max_version);
 
     $responseCode = Response::HTTP_OK;
@@ -70,13 +64,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsGet(string $category, ?string $accept_language = null, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): array
+  public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
     $cache_id = "projectsGet_{$category}_{$locale}_{$flavor}_{$max_version}_{$limit}_{$offset}";
@@ -105,14 +94,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectIdRecommendationsGet(string $id, string $category, ?string $accept_language = null, string $max_version = null, ?int $limit = 20, ?int $offset = 0, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
+  public function projectIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
-
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -135,7 +118,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsPost(string $checksum, UploadedFile $file, ?string $accept_language = null, ?string $flavor = null, ?bool $private = false, &$responseCode = null, array &$responseHeaders = null): ?UploadErrorResponse
+  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -145,10 +128,6 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 //
 //      return null;
 //    }
-
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
-    $private ??= false;
 
     $validation_wrapper = $this->facade->getRequestValidator()->validateUploadFile($checksum, $file, $accept_language);
     if ($validation_wrapper->hasError()) {
@@ -194,13 +173,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsSearchGet(string $query, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
-
     $programs = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
 
     $responseCode = Response::HTTP_OK;
@@ -216,13 +190,10 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsCategoriesGet(?string $max_version = null, ?string $flavor = null, ?string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): array
+  public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
-    $limit = $this->getDefaultLimitOnNull(null);
-    $offset = $this->getDefaultOffsetOnNull(null);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
+    $limit = 20;
+    $offset = 0;
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
     $cache_id = "projectsCategoriesGet_{$flavor}_{$locale}_{$max_version}";
@@ -257,13 +228,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsUserGet(?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
+  public function projectsUserGet(string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
-
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_FORBIDDEN;
@@ -286,13 +252,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
    *
    * @throws Exception
    */
-  public function projectsUserIdGet(string $id, ?string $max_version = null, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?array
+  public function projectsUserIdGet(string $id, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $max_version = $this->getDefaultMaxVersionOnNull($max_version);
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-    $flavor = $this->getDefaultFlavorOnNull($flavor);
-
     if (!$this->facade->getRequestValidator()->validateUserExists($id)) {
       $responseCode = Response::HTTP_NOT_FOUND;
 
@@ -312,40 +273,35 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, &$responseCode, array &$responseHeaders)
+  public function projectIdReportPost(string $id, ProjectReportRequest $project_report_request, int &$responseCode, array &$responseHeaders): void
   {
     // TODO: Implement projectIdReportPost() method.
 
     $responseCode = Response::HTTP_NOT_IMPLEMENTED;
-
-    return null;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function projectIdDelete(string $id, &$responseCode, array &$responseHeaders)
+  public function projectIdDelete(string $id, int &$responseCode, array &$responseHeaders): void
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
       $responseCode = Response::HTTP_UNAUTHORIZED;
 
-      return null;
+      return;
     }
 
     $success = $this->facade->getProcessor()->deleteProjectById($id, $user);
 
     $responseCode = $success ? Response::HTTP_NO_CONTENT : Response::HTTP_NOT_FOUND;
-
-    return null;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function projectsExtensionsGet(string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsExtensionsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
     $extensions = $this->facade->getLoader()->getProjectExtensions();
@@ -361,9 +317,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsTagsGet(string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  public function projectsTagsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
     $tags = $this->facade->getLoader()->getProjectTags();
@@ -376,7 +331,10 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     return $response;
   }
 
-  public function projectIdCatrobatGet(string $id, &$responseCode = null, array &$responseHeaders = null)
+  /**
+   * {@inheritdoc}
+   */
+  public function projectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Currently not used due to an issue with the serializer and accept encoding in the generated code
     // The route is overwritten by the OverwriteController which uses the method: customProjectIdCatrobatGet
@@ -411,5 +369,14 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     );
 
     return $response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  {
+    // TODO: Implement projectIdPut() method.
+    return null;
   }
 }
