@@ -1,210 +1,211 @@
 ---
 #homepage translation
 title: Catrobat қауымдастығы
-localLanguage: English
-username: Username
-password: Password
-createNewPassword: Create new password
-accountSettings: Account Settings
-email: E-Mail
-aboutPocketCode: About Pocket Code
-about: About
-education: Education
-chat: Chat and forums
-others: Others
+localLanguage: Ағылшын
+username: Пайдаланушы аты
+password: Құпиясөз
+createNewPassword: Жаңа құпиясөзді құру
+accountSettings: Аккаунт баптаулары
+email: Эл. пошта
+aboutPocketCode: Pocket Code туралы
+about: Туралы
+education: Білім
+chat: Чаттар мен форумдар
+others: Басқалар
 tutorials: Қөмек
-googlePlay: Google Play
+googlePlay: Google Play Store
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
-discordChat: Discord chat
-passwordsNoMatch: The passwords didn't match.
-error: Error
-cancel: Cancel
-report: Report
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
-download: Download
-name: Name
-description: Description
-noDescription: No description available.
-credits: Credits
-noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
-country: Country
-loginText: login
+discordChat: Discord чат
+passwordsNoMatch: Құпия сөздер сәйкес келмеді.
+error: Қате
+cancel: Болдырмау
+report: Есеп беру
+deleteIt: Иә, жойыңыз!
+reportIt: Иә, хабарлаңыз!
+areYouSure: Сіз сенімдісіз бе?
+noWayOfReturn: Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
+download: Жүктеп алу
+name: Аты
+description: Сипаттама
+noDescription: Сипаттама жоқ.
+credits: 'Ескертулер мен несиелер:'
+noCredits: Жазбалар мен кредиттер жоқ.
+notesAndCreditsDescription: Бұл жобаны қалай жасадыңыз? Сіз басқа адамдардың идеяларын, сценарийлерін немесе өнер туындыларын қолдандыңыз ба? Мұнда оларға рахмет.
+country: Ел
+loginText: кіру
 privacyPolicy: Құпиялық саясаты
-imprint: Imprint
-programDetails: Details
-somethingWentWrong: 'Ooooops something went wrong.'
-doesNotExist: 'The requested resource does not exist.'
-pleaseTryAgain: 'Please try again!'
-oldVersionError: 'Please update to the newest Pocket Code version!'
-more: 'more'
-less: 'less'
-show-more: 'More information'
-show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
-clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
-allNotifications: 'All'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
+imprint: Басып шығару
+programDetails: Детальдар
+somethingWentWrong: 'Бірдеңе дұрыс болмады.'
+doesNotExist: 'Сұралған ресурс жоқ.'
+pleaseTryAgain: 'Қайталап көріңіз!'
+oldVersionError: 'Pocket Code ең жаңа нұсқасына жаңартыңыз!'
+more: 'Көбірек'
+less: 'Аздау'
+show-more: 'Көбірек көрсет'
+show-less: 'Азырақ көрсету'
+more-information: 'Көбірек ақпарат'
+less-information: 'Аз ақпарат'
+ok: Ок
+clickToDownloadProgram: 'Мысал жобаны жүктеп алу үшін басыңыз %link_start% мұнда %link_end%.'
+registrationError: 'Пайдаланушы аты немесе эл. пошта мекенжайы бұрыннан қолданыста.'
+notifications: 'Хабарландырулар'
+allNotifications: 'Барлық'
+FollowersNotifications: 'Жазылушылар'
+LikeNotifications: 'Реакциялар'
+CommentNotifications: 'Пікірлер'
 RemixNotifications: 'Ремикстер'
-wellDone: "Well done!"
-done: "Done!"
-notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
-cancelMessage: "Cancel"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+wellDone: "Жарайсың!"
+done: "Дайын!"
+notificationsReadMessage: "Сізде ешқандай хабарландырулар жоқ сияқты."
+confirmMessage: "Иә, жойыңыз"
+cancelMessage: "Болдырмау"
+notificationsUnauthorizedError: "Пайдаланушыны авторизациялау мүмкін емес"
+notificationsClearError: "Хабарландыруларды оқылған деп белгілеу мүмкін емес!"
+pleaseWait: "Өтінемін күте тұрыңыз..."
 projects: "Жобалар"
-users: "Users"
-oauthPopUpTitle: "External account sign in information"
-oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
+users: "Пайдаланушылар"
+oauthPopUpTitle: "Сыртқы тіркелгіге кіру ақпараты"
+oauthInfo: 'Жүйеге кіру үшін жаңа ғана сыртқы тіркелгіні пайдаландыңыз. Біз сіз үшін кездейсоқ пайдаланушы атын жасадық. Пайдаланушы атыңызды өзгерткіңіз немесе тіркелгіңізге жаңа құпия сөз жасағыңыз келсе, профиль бетіне өтіңіз.'
+oauthHere: "мұнда"
+statistics: "Статисткалар"
 indexPage:
   recommendedSection:
     info:
-      title: 'What projects are recommended here?'
-      description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
+      title: 'Мұнда қандай жобалар ұсынылады?'
+      description: 'Сіздің жобаңыз неғұрлым көп реакциялар (Бас бармақ, күлімсіреу ...) алса, ол осы тізімде соғұрлым жоғарырақ көрінеді.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  follows: Бақылау
+  followers: Жазылушылар
+  follow: Бақылаңыз
+  username: Пайдаланушы
+  followsMe: Артымнан ереді
+  noFollowing: Сіз қазір ешкімді бақыламайсыз.
+  noFollowers: Қазіргі уақытта сіздің жазылушыларыңыз жоқ.
+  noOtherFollowing: Қазіргі уақытта келесі пайдаланушылар жоқ.
+  noOtherFollowers: Қазіргі уақытта жазылушы пайдаланушылар жоқ.
+  followError: "Қажетті пайдаланушыға жазылу мүмкін емес!"
+  unfollowError: "Қажетті пайдаланушыға жазылудан бас тарту мүмкін емес!"
+  unfollowQuestion: "Осы пайдаланушыға жазылудан бас тартқыңыз келетініне сенімдісіз бе?"
+  unfollowButton: "Жазылудан бас тарту %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
+    title: Catrobat's %theme% сайтына қош келдіңіз 
+    title_mindstorms: Mindstorms EV3 және NXT үшін Catrobat сайтына қош келдіңіз
+    subtitle: Әңгімелер, ойындар және т.б. жасау...
+    subtitle_embroidery: Өзіңіздің үлгілеріңізді футболкаларыңызға, сөмкелеріңізге, шалбарларыңызға немесе смартфондарыңызға тігіңіз!
+    subtitle_mindstorms: Lego Mindstorms EV3 және NXT роботтарымен жеке жобаларыңызды жасаңыз
+    download: Қолданбаны жүктеп алыңыз
     statistics: More Statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  featured: Таңдаулы
+  example: Мысалдар
+  newest: Ең жаңа жобалар
+  recommended: Ұсынылған жобалар
+  scratchremixes: Scratch ремикстері
+  noPrograms: Қазіргі уақытта жобалар жоқ.
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Сіз сенімдісіз бе?
+    Жойғыңыз келетініне сенімдісіз бе "%programName%"?
+    Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
+    Иә, жойыңыз!
+    Болдырмау
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+    Сіз сенімдісіз бе?
+    Егер сіз %programName% жеке болуға орнатсаңыз, оны басқа пайдаланушылар көрмейді немесе таппайды.
+    Жобаның сілтемесін әлі де достарыңызбен бөлісе аласыз. Құлып белгішесін түрту арқылы көрінуді ауыстыра аласыз.
+    Егер сіз %programName% жалпыға ортақ орнатсаңыз, оны басқа пайдаланушылар көре алады және таба алады.
+    Иә, жалпыға орнату
+    Иә, жеке
+    Жоқ күйіне орнату
+
+  reportCommentConfirmation: Осы пікірді шынымен хабарлау керек пе?
+  deleteCommentConfirmation: Осы пікірді шынымен жойғыңыз келе ме?
   deleteAccountConfirmation: |+
     Account Deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
+  tooLongName: Жоба атауы тым ұзын!
+  tooLongDescription: Жобаның сипаттамасы тым ұзақ!
   tooLongCredits: The project credits are too long!
   most:
-    viewed: Most viewed
-    downloaded: Most downloaded
-  random: Random projects
-  related: Related projects
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+    viewed: Ең көп қаралды
+    downloaded: Ең көп жүктелген
+  random: Кездейсоқ жобалар
+  related: Қатысты жобалар
+  downloads: '%downloads% жүктеп алулар'
+  sample: Мысал жобалар
+  views: '%views% көріністер'
   likes:
-    likersTitle: "People who reacted to that project"
-    all: "All"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+    likersTitle: "Сол жобаға реакция жасаған адамдар"
+    all: "Барлық"
+  remixes: '{0} 0 ремикс |{1}1 ремикс |]1,Inf]%remixes%ремикстер'
+  newRemixesNotificationTitle: '|{1}"%programName%" 1 ремикс бар : |]1,Inf] "%programName%" %remixes% жаңа ремикстер бар:'
   submitted: Submitted Projects
   uploaded: Uploaded Projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
+  reportAsInappropriate: Орынсыз деп хабарлау
+  reportProgram: Есеп жобасы
   languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  reportLoginText: Өтінем %login% осы жобаны хабарлау үшін.
+  reportDialogHeader: Неліктен бұл жоба туралы хабарлағыңыз келеді?
+  reportDialogReason: Себебін енгізіңіз
+  reportRadioButtonInappropriate: Бұл орынсыз
+  reportRadioButtonCopyright: Авторлық құқықты бұзу
+  reportRadioButtonSpam: Бұл спам
+  reportRadioButtonDislike: Осыны ұнатпаймын
+  reportOwnProgram: Сіз өзіңіздің жобаңызды белгілей алмайсыз.
+  reportAlready: Сіз бұл жобаны әлдеқашан белгілеп қойдыңыз.
+  reportDone: Сіз бұл жоба туралы хабарладыңыз!
+  updateAppHeaderDownload: Жүктеп алу мүмкін емес
+  updateAppTextDownload: Қолданбаңызды ең жаңа нұсқаға жаңартыңыз. Барлық Android мүмкіндіктері IOS жүйесінде бұрыннан қол жетімді емес екенін ескеріңіз.
+  updateAppTextDownloadApk: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
   updateAppHeader: Update App
-  updateAppText: Please update your app to the newest version.
-  btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
-  show_more: Show More
-  comments: Comments
-  send: Send
-  delete: Delete
-  report: Report
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
-  reactionsText: Reactions
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  updateAppText: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
+  btnClosePopup: Ок
+  checkout_this_program: Осы Catrobat жобасын тексеріңіз
+  show_more: Көбірек көрсету
+  comments: Пікірлер
+  send: Жіберу
+  delete: Жою
+  report: Есеп беру
+  report_popup: Пікір сәтті хабарланды.
+  report_popup_header: Хабарланды
+  deleted_popup: Пікір сәтті жойылды.
+  deleted_popup_header: Жойылды
+  noAdminRights: Әкімші құқықтарыңыз жоқ. Әкімші ретінде жүйеге кіріңіз.
+  editProject: Жобаны өзгеру
+  closeProjectEditor: Жоба редакторын жабу
+  closeEditorPrompt: Өзгерістерді сақтағыңыз келе ме?
+  btnDiscard: Жою
+  addComment: Пікір жазыңыз
+  thumbsUp: Бәрекелді!
+  smile: Күлімсіре!
+  love: Махаббат!
+  wow: Уау!
+  linkTitle: Сілтеме
+  link: Жоба сілтемесін алмасу буферіне көшіріңіз
+  reactionsText: Реакциялар
+  downloadErrorText: Жобаны жүктеп алу кезінде қате орын алды. Тағы жасауды сәл кейінірек көріңізді өтінеміз.
+  downloadStartText: Жүктеп алу басталды...
+  showTranslation: Аударманы көрсету
+  hideTranslation: Аударманы жасыру
+  translatedByLine: Аударған %provider% %sourceLanguage%-нан %targetLanguage% дейін
+  googleTranslate: Google аудармашы
+  confrimDelete: Аударманы шынымен жойғыңыз келе ме?
   default: Бастапқы
-  save: Save
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  save: Сақтау
+  translationTitle: '%language% аударма'
+  editDefault: Әдепкіді өңдеу
+  editTranslation: '%language% аударманы өзгеру'
+  translations: Аудармалар
+  createTranslation: Аудамарын құру
 remixGraph:
   title: Ремикстер
-  showRemixGraph: 'Remix graph'
-  by: 'by'
+  showRemixGraph: 'Ремикс графигі'
+  by: 'арқылы'
   open: 'Open'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Sorry...'
@@ -303,14 +304,14 @@ myprofile:
   avatar: Avatar
   email: Email
   editAvatar: Edit avatar
-  editUsername: Edit username
-  editPassword: Edit password
-  editCountry: Edit country
+  editUsername: Пайдаланушы атын өңдеу
+  editPassword: Құпиясөз өңдеу
+  editCountry: Елді өңдеу
   editEmail: Edit E-Mail
   deleteAccount: Delete Account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
-  editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
+  deleteAccountText: Есептік жазбаңызды жойғыңыз келетініне сенімдісіз бе? Бұл жүктеп салынған жобаларыңыз бен пікірлеріңізді жояды!
+  editAccountSettings: Есептік жазба параметрлерін өңдеу
+  notChangeVisibility: Көрінуді өзгерту мүмкін емес
   notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
 licenseToPlay:
   link: 'License to play'
@@ -434,7 +435,7 @@ resetPassword:
   reset:
     title: "Reset your password"
     button:
-      submit: "Reset password"
+      submit: "Құпиясөзді қалпына келтіру"
 apk:
   download: Download as app
   prepare: 'Get as app'
@@ -688,13 +689,13 @@ media-packages:
   description: In the following categories you can find additional actors and objects to add to you PocketCode projects.
   thumb-size:
     description: Preview size
-    sm: small
-    md: medium
-    lg: large
+    sm: құттай
+    md: орташа
+    lg: үлкен
   theme-special: "%flavor% Theme Special"
   search-results: Media library search results
   no-results: Your search returned 0 results. Please use only English search terms.
-  download_these_files: save
+  download_these_files: сақтау
 flavor:
   pocketcode: Pocket Code
   pocketalice: Pocket Alice
@@ -707,29 +708,29 @@ agree: Келісу
 disagree: Келіспеу
 profileLoader:
   noProfiles: There are currently no profiles.
-element: 'Element'
-elements: 'Elements'
+element: 'Элемент'
+elements: 'Элементтер'
 share:
-  text: 'Share'
+  text: 'Бөлісу'
   error: 'Share failed'
   success: 'Share successful'
 copy: 'Copy link'
 checkOutProject: 'Check out this project:'
 checkOutUser: 'Check out this user:'
 community: 'Catrobat қауымдастығы'
-back_to_app: 'Exit community'
+back_to_app: 'Қауымдастықтан шығу'
 category:
-  recent: Newest projects
-  random: Random projects
-  most_viewed: Most viewed
-  most_downloaded: Most downloaded
-  example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  recent: Ең жаңа жобалар
+  random: Кездейсоқ жобалар
+  most_viewed: Ең көп қаралды
+  most_downloaded: Ең көп жүктелген
+  example: Мысал
+  scratch: Scratch ремикстері
+  recommended: Ұсынылған жобалар
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'жаңа'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -745,7 +746,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "Ок"
   profile:
     title: 'Achievements'
   achievement:
@@ -784,19 +785,19 @@ tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
-      title: Game
+      title: Ойын
     animation:
-      title: Animation
+      title: Анимация
     story:
-      title: Story
+      title: Тарих
     music:
-      title: Music
+      title: Музыка
     art:
-      title: Art
+      title: Өнер
     experimental:
-      title: Experimental
+      title: Эксперименттік
     tutorial:
-      title: Tutorial
+      title: Оқулық
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
@@ -818,8 +819,8 @@ studio:
   details:
     public: 'public'
     private: 'private'
-    join: 'Join'
-    leave: 'Leave'
+    join: 'Кіру'
+    leave: 'Шығу'
     showMore: 'show more'
     showLess: 'show less'
     remove_project: 'Remove from studio'
@@ -830,7 +831,7 @@ studio:
     projects:
       title: 'projects'
     comments:
-      title: 'Comments'
+      title: 'Пікірлер'
       type_something: 'Type something'
       replies: 'replies'
       send: 'send'
@@ -854,7 +855,7 @@ studio:
       title: 'General Settings'
       studio_name: 'Studio Name'
       studio_description: 'Description'
-      toggle_allow_comments: 'Comments'
+      toggle_allow_comments: 'Пікірлер'
       toggle_privacy: 'Public'
 media_library:
   file:
