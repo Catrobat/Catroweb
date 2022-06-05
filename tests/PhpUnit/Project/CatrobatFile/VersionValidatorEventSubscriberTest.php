@@ -32,7 +32,7 @@ class VersionValidatorEventSubscriberTest extends TestCase
   public function testChecksIfTheLanguageVersionIsUpToDate(): void
   {
     $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
-    Assert::assertNotNull($xml);
+    Assert::assertNotFalse($xml);
     $xml->header->catrobatLanguageVersion = '0.92';
     $this->version_validator->validate($xml);
   }

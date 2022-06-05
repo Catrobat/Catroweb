@@ -89,7 +89,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationGet(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->object->authenticationGet($response_code, $response_headers);
@@ -104,7 +104,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationPost(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $login_request = $this->createMock(LoginRequest::class);
@@ -121,7 +121,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationDelete(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $processor = $this->createMock(AuthenticationApiProcessor::class);
@@ -140,7 +140,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationRefreshPost(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $refresh_request = $this->createMock(RefreshRequest::class);
@@ -157,7 +157,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationUpgradePost400(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $upgrade_token_request = $this->createMock(UpgradeTokenRequest::class);
@@ -175,7 +175,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationUpgradePost401(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $upgrade_token_request = $this->createMock(UpgradeTokenRequest::class);
@@ -193,7 +193,7 @@ final class AuthenticationApiTest extends DefaultTestCase
    */
   public function testAuthenticationUpgradePost200(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $upgrade_token_request = $this->createMock(UpgradeTokenRequest::class);

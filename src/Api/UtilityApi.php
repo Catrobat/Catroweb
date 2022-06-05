@@ -16,17 +16,15 @@ final class UtilityApi extends AbstractApiController implements UtilityApiInterf
   /**
    * {@inheritdoc}
    */
-  public function healthGet(&$responseCode, array &$responseHeaders)
+  public function healthGet(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
-
-    return null;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function surveyLangCodeGet(string $lang_code, string $flavor = null, &$responseCode = null, array &$responseHeaders = null): ?\OpenAPI\Server\Model\SurveyResponse
+  public function surveyLangCodeGet(string $lang_code, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $survey = $this->facade->getLoader()->getActiveSurvey($lang_code);
 

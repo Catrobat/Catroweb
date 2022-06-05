@@ -101,7 +101,7 @@ class ApiContext implements Context
   private array $checked_catrobat_remix_backward_relations;
 
   private array $program_structure = ['id', 'name', 'author', 'description',
-    'version', 'views', 'download', 'private', 'flavor', 'tags',
+    'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags',
     'uploaded', 'uploaded_string', 'screenshot_large',
     'screenshot_small', 'project_url', 'download_url', 'filesize', ];
 
@@ -142,6 +142,8 @@ class ApiContext implements Context
 
   /**
    * @BeforeScenario
+   *
+   * @throws Exception
    */
   public function followRedirects(): void
   {
@@ -150,6 +152,8 @@ class ApiContext implements Context
 
   /**
    * @BeforeScenario
+   *
+   * @throws Exception
    */
   public function generateSessionCookie(): void
   {
@@ -157,7 +161,8 @@ class ApiContext implements Context
 
     $session = $this->getKernelBrowser()
       ->getContainer()
-      ->get('session')
+      ->get('session.factory')
+      ->createSession()
     ;
 
     $cookie = new Cookie($session->getName(), $session->getId());
@@ -2993,8 +2998,14 @@ class ApiContext implements Context
       'views' => function ($views): void {
         Assert::assertIsInt($views);
       },
-      'download' => function ($download): void {
-        Assert::assertIsInt($download);
+      'downloads' => function ($downloads): void {
+        Assert::assertIsInt($downloads);
+      },
+      'reactions' => function ($reactions): void {
+        Assert::assertIsInt($reactions);
+      },
+      'comments' => function ($comments): void {
+        Assert::assertIsInt($comments);
       },
       'private' => function ($private): void {
         Assert::assertIsBool($private);

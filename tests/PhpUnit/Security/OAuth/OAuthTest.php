@@ -6,12 +6,12 @@ use App\DB\Entity\User\User;
 use App\Security\OAuth\FOSUBUserProviderAdapter;
 use App\User\UserManager;
 use Http\Client\Common\HttpMethodsClient;
-use Http\Client\HttpClient;
 use Http\Message\MessageFactory\GuzzleMessageFactory;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GoogleResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Http\HttpUtils;
 
@@ -70,7 +70,7 @@ json;
 
   public function testLoadUserByOauthResponse(): void
   {
-    $httpClient = $this->createMock(HttpClient::class);
+    $httpClient = $this->createMock(ClientInterface::class);
 
     $storage = $this->createMock(RequestDataStorageInterface::class);
 

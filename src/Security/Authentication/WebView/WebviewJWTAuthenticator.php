@@ -3,28 +3,37 @@
 namespace App\Security\Authentication\WebView;
 
 use App\Security\Authentication\CookieService;
-use Lexik\Bundle\JWTAuthenticationBundle\Security\Guard\JWTTokenAuthenticator;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Authenticator\JWTAuthenticator;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\TokenExtractor\TokenExtractorInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class WebviewJWTAuthenticator extends JWTTokenAuthenticator
+class WebviewJWTAuthenticator extends JWTAuthenticator
 {
   public function __construct(
         private readonly CookieService $cookie_service,
         JWTTokenManagerInterface $jwtManager,
         EventDispatcherInterface $dispatcher,
         TokenExtractorInterface $tokenExtractor,
-        TokenStorageInterface $preAuthenticationTokenStorage,
+        UserProviderInterface $userProvider,
         TranslatorInterface $translator = null)
   {
-    parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $preAuthenticationTokenStorage, $translator);
+    parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $userProvider, $translator);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function authenticate(Request $request): Passport
+  {
+    return parent::doAuthenticate($request);
   }
 
   /**
@@ -32,9 +41,9 @@ class WebviewJWTAuthenticator extends JWTTokenAuthenticator
    *
    * {@inheritDoc}
    */
-  public function onAuthenticationFailure(Request $request, AuthenticationException $authException)
+  public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
-    $response = parent::onAuthenticationFailure($request, $authException);
+    $response = parent::onAuthenticationFailure($request, $exception);
 
     if (Response::HTTP_UNAUTHORIZED === $response->getStatusCode() && !$request->headers->get('Authorization')) {
       $this->cookie_service->clearCookie('BEARER');
