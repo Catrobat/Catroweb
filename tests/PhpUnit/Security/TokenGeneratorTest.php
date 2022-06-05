@@ -24,12 +24,6 @@ class TokenGeneratorTest extends TestCase
     $this->assertInstanceOf(TokenGenerator::class, $this->token_generator);
   }
 
-  public function testGeneratesAString(): void
-  {
-    $generated_token = $this->token_generator->generateToken();
-    $this->assertIsString($generated_token);
-  }
-
   public function testGeneratesADifferentTokenEachTime(): void
   {
     $generated_tokens = [];

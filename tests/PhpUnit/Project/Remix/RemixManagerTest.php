@@ -224,13 +224,13 @@ class RemixManagerTest extends TestCase
     ;
 
     $parent_data = [
-      $first_parent_entity->getId() => [
+      $first_parent_entity->getId() ?? 'first' => [
         'isScratch' => false,
         'entity' => $first_parent_entity,
         'exists' => false,
         'existingRelations' => [],
       ],
-      $second_parent_entity->getId() => [
+      $second_parent_entity->getId() ?? 'second' => [
         'isScratch' => false,
         'entity' => $second_parent_entity,
         'exists' => false,
@@ -319,13 +319,13 @@ class RemixManagerTest extends TestCase
     $second_parent_entity = $program_entities[2];
 
     $parent_data = [
-      $first_parent_entity->getId() => [
+      $first_parent_entity->getId() ?? '' => [
         'isScratch' => false,
         'entity' => $first_parent_entity,
         'exists' => false,
         'existingRelations' => [],
       ],
-      $second_parent_entity->getId() => [
+      $second_parent_entity->getId() ?? '' => [
         'isScratch' => false,
         'entity' => $second_parent_entity,
         'exists' => true,
@@ -497,7 +497,7 @@ class RemixManagerTest extends TestCase
       ->willReturn($this->createMock(User::class))
     ;
     $parent_data = [
-      $first_parent_entity->getId() => [
+      $first_parent_entity->getId() ?? 'first' => [
         'isScratch' => false,
         'entity' => $first_parent_entity,
         'exists' => true,
@@ -506,7 +506,7 @@ class RemixManagerTest extends TestCase
           new ProgramRemixRelation($parent_entity_of_first_parent, $first_parent_entity, 1),
         ],
       ],
-      $second_parent_entity->getId() => [
+      $second_parent_entity->getId() ?? 'second' => [
         'isScratch' => false,
         'entity' => $second_parent_entity,
         'exists' => true,
@@ -1130,19 +1130,19 @@ class RemixManagerTest extends TestCase
     ];
 
     $parent_data = [
-      $first_program_entity->getId() => [
+      $first_program_entity->getId() ?? 'first' => [
         'isScratch' => false,
         'entity' => $first_program_entity,
         'exists' => true,
         'existingRelations' => $existingRelationsFirstProgramEntity,
       ],
-      $third_program_entity->getId() => [
+      $third_program_entity->getId() ?? 'third' => [
         'isScratch' => false,
         'entity' => $third_program_entity,
         'exists' => true,
         'existingRelations' => $existingRelationsThirdProgramEntity,
       ],
-      $fourth_program_entity->getId() => [
+      $fourth_program_entity->getId() ?? 'fourth' => [
         'isScratch' => false,
         'entity' => $fourth_program_entity,
         'exists' => true,

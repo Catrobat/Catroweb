@@ -10,7 +10,6 @@ use App\Utils\ElapsedTimeStringFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -81,8 +80,6 @@ class ProgramListSerializerEventSubscriber implements EventSubscriberInterface
     $retArray['completeTerm'] = '';
     $retArray['preHeaderMessages'] = '';
 
-    Request::setTrustedProxies([$request->server->get('REMOTE_ADDR')],
-      Request::HEADER_X_FORWARDED_ALL ^ Request::HEADER_X_FORWARDED_HOST);
     $retArray['CatrobatInformation'] = [
       'BaseUrl' => $request->getSchemeAndHttpHost().'/',
       'TotalProjects' => $result->getTotalPrograms(),

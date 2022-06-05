@@ -27,7 +27,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
     $command = $application->find('catrobat:clean:compressed');
     $this->command_tester = new CommandTester($command);
 
-    $this->compressed_projects_dir = $kernel->getContainer()->getParameter('catrobat.file.storage.dir');
+    $this->compressed_projects_dir = (string) $kernel->getContainer()->getParameter('catrobat.file.storage.dir');
 
     // create dir if not exists
     if (!file_exists($this->compressed_projects_dir)) {

@@ -28,14 +28,12 @@ class AsyncHttpClientTest extends TestCase
   {
     $invalid_scratch_program_id = 0;
     $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$invalid_scratch_program_id]);
-    $this->assertIsIterable($scratch_info_data);
     $this->assertCount(0, $scratch_info_data);
   }
 
   public function testReturnsEmptyArrayWhenNoIdsAreGiven(): void
   {
     $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([]);
-    $this->assertIsIterable($scratch_info_data);
     $this->assertCount(0, $scratch_info_data);
   }
 
@@ -43,7 +41,6 @@ class AsyncHttpClientTest extends TestCase
   {
     $expected_id_of_first_program = 117_697_631;
     $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program]);
-    $this->assertIsIterable($scratch_info_data);
     $this->assertCount(1, $scratch_info_data);
     Assert::assertArrayHasKey($expected_id_of_first_program, $scratch_info_data);
     $first_program_data = $scratch_info_data[$expected_id_of_first_program];
@@ -61,7 +58,6 @@ class AsyncHttpClientTest extends TestCase
 
     $expected_id_of_first_program = 117_697_631;
     $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program]);
-    $this->assertIsIterable($scratch_info_data);
     $this->assertCount(0, $scratch_info_data);
   }
 
@@ -91,7 +87,6 @@ class AsyncHttpClientTest extends TestCase
 
   private function assertTheTwoFetchedPrograms(array $scratch_info_data, int $expected_id_of_first_program, int $expected_id_of_second_program): void
   {
-    $this->assertIsIterable($scratch_info_data);
     $this->assertCount(2, $scratch_info_data);
     Assert::assertArrayHasKey($expected_id_of_first_program, $scratch_info_data);
     Assert::assertArrayHasKey($expected_id_of_second_program, $scratch_info_data);

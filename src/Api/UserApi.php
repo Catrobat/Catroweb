@@ -7,7 +7,6 @@ use App\Api\Services\User\UserApiFacade;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
 use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
-use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\RegisterErrorResponse;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
@@ -26,10 +25,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
    *
    * @throws Exception
    */
-  public function userPost(RegisterRequest $register_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null)
+  public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
-
     $validation_wrapper = $this->facade->getRequestValidator()->validateRegistration($register_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {
@@ -62,19 +59,17 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userDelete(&$responseCode, array &$responseHeaders)
+  public function userDelete(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
 
     $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
-
-    return null;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
+  public function userGet(int &$responseCode, array &$responseHeaders): array|object|null
   {
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createExtendedUserDataResponse(
@@ -89,7 +84,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userIdGet(string $id, &$responseCode, array &$responseHeaders): ?\OpenAPI\Server\Model\BasicUserDataResponse
+  public function userIdGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getLoader()->findUserByID($id);
 
@@ -110,10 +105,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): ?UpdateUserErrorResponse
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
-
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($user, $update_user_request, $accept_language);
 
@@ -140,11 +133,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function usersSearchGet(string $query, ?int $limit = 20, ?int $offset = 0, &$responseCode = null, array &$responseHeaders = null): array
+  public function usersSearchGet(string $query, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $limit = $this->getDefaultLimitOnNull($limit);
-    $offset = $this->getDefaultOffsetOnNull($offset);
-
     $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
 
     $responseCode = Response::HTTP_OK;
@@ -158,9 +148,8 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    */
-  public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): ?RegisterErrorResponse
+  public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
-    $accept_language = $this->getDefaultAcceptLanguageOnNull($accept_language);
     $validation_wrapper = $this->facade->getRequestValidator()->validateResetPasswordRequest($reset_password_request, $accept_language);
 
     if ($validation_wrapper->hasError()) {

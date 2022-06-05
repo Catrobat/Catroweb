@@ -19,11 +19,12 @@ class ItranslateApiTest extends TestCase
 {
   private ItranslateApi $api;
 
-  private Client|MockObject $httpClient;
+  protected MockObject $httpClient;
 
   protected function setUp(): void
   {
-    $this->httpClient = $this->createMock(Client::class);
+    $this->httpClient = $this->getMockBuilder(Client::class)->getMock();
+
     $this->api = new ItranslateApi($this->httpClient, $this->createMock(LoggerInterface::class));
   }
 

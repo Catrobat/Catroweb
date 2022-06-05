@@ -76,9 +76,7 @@ class CatrowebBrowserContext extends BrowserContext
     $application->setAutoExit(false);
 
     $input = new ArrayInput(['command' => 'sonata:admin:setup-acl']);
-
-    $return = $application->run($input, new NullOutput());
-    Assert::assertNotNull($return, 'Oh no!');
+    $application->run($input, new NullOutput());
   }
 
   // --------------------------------------------------------------------------------------------------------------------

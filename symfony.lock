@@ -957,7 +957,7 @@
         "version": "v5.4.3"
     },
     "symfony/security-guard": {
-        "version": "v5.4.3"
+        "version": "v5.4.9"
     },
     "symfony/security-http": {
         "version": "v5.4.8"
