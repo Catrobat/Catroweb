@@ -633,14 +633,14 @@ codeStatistics:
   error: "Code Statistics can't be displayed."
   general: 'General'
   bricks: 'Bricks'
-  eventBricks: 'Event'
-  controlBricks: 'Control'
-  motionBricks: 'Motion'
-  soundBricks: 'Sound'
+  eventBricks: 'Оқиға'
+  controlBricks: 'Бақылау'
+  motionBricks: 'Қозғалыс'
+  soundBricks: 'Дыбыс'
   looksBricks: 'Looks'
-  penBricks: 'Pen'
-  dataBricks: 'Data'
-  deviceBricks: 'Device'
+  penBricks: 'Қалам'
+  dataBricks: 'Деректер'
+  deviceBricks: 'Құрылғы'
   specialBricks: 'Special'
 footer:
   language: Тіл
@@ -812,7 +812,7 @@ extensions:
     raspberry_pi:
       title: Raspberry PI
     embroidery:
-      title: Embroidery
+      title: Кесте тігу
     mindstorms:
       title: Mindstorms
 studio:
