@@ -1,5 +1,5 @@
 import $ from 'jquery'
-import { getCookie } from '../security/CookieHelper'
+import { ApiFetch } from '../api/ApiHelper'
 
 require('../../styles/layout/sidebar.scss')
 
@@ -35,11 +35,7 @@ function updateBadge (url, badgeID, apiToCall = 'old', badgeText = null, maxAmou
   if (!badge) {
     return
   }
-  fetch(url, {
-    headers: new Headers({
-      Authorization: 'Bearer ' + getCookie('BEARER')
-    })
-  })
+  new ApiFetch(url).generateAuthenticatedFetch()
     .then(response => response.json())
     .then(data => {
       const count = apiToCall === 'new' ? data.total : data.count

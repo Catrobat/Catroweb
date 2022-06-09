@@ -28,8 +28,6 @@ final class NotificationsResponseManager extends AbstractResponseManager
 
   public function createNotificationsCountResponse(User $user): NotificationsCountResponse
   {
-    $user->getFollowNotificationMentions();
-
     $notifications_all = $this->notification_repository->findBy(['user' => $user]);
     $likes = 0;
     $followers = 0;

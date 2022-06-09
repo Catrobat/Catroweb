@@ -403,6 +403,11 @@ trait ContextTrait
     return $this->getProjectDataFixtures()->insertProject($config, $andFlush);
   }
 
+  public function assertProject(array $config = []): void
+  {
+    $this->getProjectDataFixtures()->assertProject($config);
+  }
+
   public function insertFeaturedProject(array $config, bool $andFlush = true): FeaturedProgram
   {
     $new_flavor = [];

@@ -54,7 +54,7 @@ Feature: Get recommended programs on homepage
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name    |
       | Game    |
@@ -68,7 +68,7 @@ Feature: Get recommended programs on homepage
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&limit=2"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name    |
       | Game    |
@@ -79,7 +79,7 @@ Feature: Get recommended programs on homepage
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&offset=2"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name   |
       | Other2 |
@@ -91,7 +91,7 @@ Feature: Get recommended programs on homepage
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&limit=2&offset=2"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name   |
       | Other2 |
@@ -102,7 +102,7 @@ Feature: Get recommended programs on homepage
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&flavor=luna"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name   |
       | Other4 |
@@ -111,7 +111,7 @@ Feature: Get recommended programs on homepage
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=recommended&max_version=0.985"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name    |
       | Game    |

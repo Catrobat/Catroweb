@@ -14,9 +14,6 @@ parameters:
   catrobat.file.storage.dir:            "%kernel.project_dir%/public/resources/programs/"
   catrobat.file.storage.path:           "resources/programs/"
   catrobat.logs.dir:                    "%kernel.project_dir%/var/log/"
-  catrobat.max_name_upload_size: 50
-  catrobat.max_description_upload_size: 10000 # also change in src/Catrobat/Listeners/DescriptionValidator.php
-  catrobat.max_notes_and_credits_upload_size:     3000
   catrobat.mediapackage.dir:            "%catrobat.pubdir%resources/mediapackage/"
   catrobat.mediapackage.path:           "resources/mediapackage/"
   catrobat.mediapackage.sample.dir:     "%catrobat.pubdir%tests/TestData/DataFixtures/MediaPackage/SampleMediaPackage/"
@@ -509,12 +506,6 @@ services:
   App\Application\Controller\MediaLibrary\MediaPackageController:
     arguments:
       $catrobat_mediapackage_path: '%catrobat.mediapackage.path%'
-
-  App\Application\Controller\Project\ProgramController:
-    arguments:
-      $max_name_upload_size: '%catrobat.max_name_upload_size%'
-      $max_description_upload_size: '%catrobat.max_description_upload_size%'
-      $max_notes_and_credits_upload_size: '%catrobat.max_notes_and_credits_upload_size%'
 
   # ====================================================================================================================
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

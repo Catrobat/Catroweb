@@ -100,21 +100,16 @@ class ApiContext implements Context
 
   private array $checked_catrobat_remix_backward_relations;
 
-  private array $program_structure = ['id', 'name', 'author', 'description',
-    'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags',
-    'uploaded', 'uploaded_string', 'screenshot_large',
-    'screenshot_small', 'project_url', 'download_url', 'filesize', ];
+  private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
+    'screenshot_large', 'screenshot_small', 'project_url', ];
 
-  private array $user_structure = ['id', 'username',
-    'projects', 'followers', 'following', ];
+  private array $default_user_structure = ['id', 'username'];
 
-  private array $user_structure_extended = ['id', 'username', 'email', 'projects', 'followers', 'following'];
+  private array $default_user_structure_extended = ['id', 'username', 'email'];
 
-  private array $featured_program_structure = ['id', 'name', 'author', 'project_id', 'project_url', 'url',
-    'featured_image', ];
+  private array $default_featured_project_structure = ['project_id', 'name'];
 
-  private array $media_file_structure = ['id', 'name', 'flavor', 'package', 'category',
-    'author', 'extension', 'download_url', ];
+  private array $default_media_file_structure = ['id', 'name'];
 
   private array $survey_structure = ['url'];
 
@@ -1517,7 +1512,7 @@ class ApiContext implements Context
 
     foreach ($returned_programs as $returned_program) {
       $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
-      foreach ($this->featured_program_structure as $key) {
+      foreach ($this->default_featured_project_structure as $key) {
         Assert::assertNotEmpty($stored_program);
         Assert::assertEquals($returned_program[$key], $stored_program[$key]);
       }
@@ -1525,17 +1520,17 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should have the projects model structure$/
+   * @Then /^the response should have the default projects model structure$/
    */
-  public function responseShouldHaveProjectsModelStructure(): void
+  public function responseShouldHaveDefaultProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($responseArray as $program) {
-      Assert::assertEquals(count($this->program_structure), is_countable($program) ? count($program) : 0,
-        'Number of program fields should be '.count($this->program_structure));
-      foreach ($this->program_structure as $key) {
+      Assert::assertEquals(count($this->default_project_structure), is_countable($program) ? count($program) : 0,
+        'Number of program fields should be '.count($this->default_project_structure));
+      foreach ($this->default_project_structure as $key) {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
       }
@@ -1578,17 +1573,17 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should have the users model structure$/
+   * @Then /^the response should have the default users model structure$/
    */
-  public function responseShouldHaveUsersModelStructure(): void
+  public function responseShouldHaveDefaultUsersModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $returned_users = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_users as $user) {
-      Assert::assertEquals(count($this->user_structure), is_countable($user) ? count($user) : 0,
-        'Number of user fields should be '.count($this->user_structure));
-      foreach ($this->user_structure as $key) {
+      Assert::assertEquals(count($this->default_user_structure), is_countable($user) ? count($user) : 0,
+        'Number of user fields should be '.count($this->default_user_structure));
+      foreach ($this->default_user_structure as $key) {
         Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
         Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
       }
@@ -1603,9 +1598,9 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->user_structure), is_countable($user) ? count($user) : 0,
-      'Number of user fields should be '.count($this->user_structure));
-    foreach ($this->user_structure as $key) {
+    Assert::assertEquals(count($this->default_user_structure), is_countable($user) ? count($user) : 0,
+      'Number of user fields should be '.count($this->default_user_structure));
+    foreach ($this->default_user_structure as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
@@ -1635,26 +1630,26 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $program = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->program_structure),
-      'Number of program fields should be '.count($this->program_structure));
-    foreach ($this->program_structure as $key) {
+    Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->default_project_structure),
+      'Number of program fields should be '.count($this->default_project_structure));
+    foreach ($this->default_project_structure as $key) {
       Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
       Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
     }
   }
 
   /**
-   * @Then /^the response should have the featured projects model structure$/
+   * @Then /^the response should have the default featured projects model structure$/
    */
-  public function responseShouldHaveFeaturedProjectsModelStructure(): void
+  public function responseShouldHaveDefaultFeaturedProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_programs as $program) {
-      Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->featured_program_structure),
-        'Number of program fields should be '.count($this->featured_program_structure));
-      foreach ($this->featured_program_structure as $key) {
+      Assert::assertEquals(count($this->default_featured_project_structure), is_countable($program) ? count($program) : 0,
+        'Number of program fields should be '.count($this->default_featured_project_structure));
+      foreach ($this->default_featured_project_structure as $key) {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkFeaturedProjectFieldsValue($program, $key), true);
       }
@@ -1662,17 +1657,17 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should have the media files model structure$/
+   * @Then /^the response should have the default media files model structure$/
    */
-  public function responseShouldHaveMediaFilesModelStructure(): void
+  public function responseShouldHaveDefaultMediaFilesModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $returned_media_files = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
     foreach ($returned_media_files as $program) {
-      Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->media_file_structure),
-        'Number of program fields should be '.count($this->media_file_structure));
-      foreach ($this->media_file_structure as $key) {
+      Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->default_media_file_structure),
+        'Number of program fields should be '.count($this->default_media_file_structure));
+      foreach ($this->default_media_file_structure as $key) {
         Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
         Assert::assertEquals($this->checkMediaFileFieldsValue($program, $key), true);
       }
@@ -1757,7 +1752,7 @@ class ApiContext implements Context
       'Number of returned programs should be '.count($expected_files));
     foreach ($returned_files as $returned_file) {
       $stored_file = $this->findProgram($stored_files, $returned_file['name']);
-      foreach ($this->media_file_structure as $key) {
+      foreach ($this->default_media_file_structure as $key) {
         Assert::assertNotEmpty($stored_file);
         Assert::assertEquals($returned_file[$key], $stored_file[$key]);
       }
@@ -2793,9 +2788,9 @@ class ApiContext implements Context
       Assert::assertIsString($category['name']);
       Assert::assertIsArray($category['projectsList']);
       foreach ($category['projectsList'] as $project) {
-        Assert::assertEquals(count($this->program_structure), is_countable($project) ? count($project) : 0,
-          'Number of program fields should be '.count($this->program_structure));
-        foreach ($this->program_structure as $key) {
+        Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
+          'Number of program fields should be '.count($this->default_project_structure));
+        foreach ($this->default_project_structure as $key) {
           Assert::assertArrayHasKey($key, $project, 'Program should contain '.$key);
           Assert::assertEquals($this->checkProjectFieldsValue($project, $key), true);
         }
@@ -2823,16 +2818,16 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should have the extended user model structure$/
+   * @Then /^the response should have the default extended user model structure$/
    */
   public function theResponseShouldHaveTheExtendedUserModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->user_structure_extended), is_countable($user) ? count($user) : 0,
-      'Number of user fields should be '.count($this->user_structure_extended));
-    foreach ($this->user_structure_extended as $key) {
+    Assert::assertEquals(count($this->default_user_structure_extended), is_countable($user) ? count($user) : 0,
+      'Number of user fields should be '.count($this->default_user_structure_extended));
+    foreach ($this->default_user_structure_extended as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
@@ -3102,8 +3097,8 @@ class ApiContext implements Context
       'flavor' => function ($flavor): void {
         Assert::assertIsString($flavor);
       },
-      'package' => function ($package): void {
-        Assert::assertIsString($package);
+      'packages' => function ($package): void {
+        Assert::assertIsArray($package);
       },
       'category' => function ($category): void {
         Assert::assertIsString($category);
@@ -3118,6 +3113,13 @@ class ApiContext implements Context
         Assert::assertIsString($download_url);
         Assert::assertMatchesRegularExpression('/http:\/\/localhost\/app\/download-media\/[a-zA-Z0-9-]+/',
           $download_url, 'download_url');
+      },
+      'size' => function ($size): void {
+        Assert::assertIsInt($size);
+      },
+      'file_type' => function ($file_type): void {
+        Assert::assertIsString($file_type);
+        Assert::assertTrue(in_array($file_type, ['project', 'image', 'sound', 'other'], true));
       },
     ];
 
@@ -3139,6 +3141,16 @@ class ApiContext implements Context
       },
       'email' => function ($email): void {
         Assert::assertIsString($email);
+      },
+      'picture' => function ($picture): void {
+        Assert::assertIsString($picture);
+        Assert::assertMatchesRegularExpression('/^data:image\/([^;]+);base64,([A-Za-z0-9\/+=]+)$/', $picture, 'Invalid user picture data-URL');
+      },
+      'about' => function ($about): void {
+        Assert::assertIsString($about);
+      },
+      'currentlyWorkingOn' => function ($currentlyWorkingOn): void {
+        Assert::assertIsString($currentlyWorkingOn);
       },
       'projects' => function ($projects): void {
         Assert::assertIsInt($projects);
@@ -3278,7 +3290,7 @@ class ApiContext implements Context
   {
     Assert::assertNotEmpty($stored_program);
     Assert::assertNotEmpty($returned_program);
-    foreach ($this->program_structure as $key) {
+    foreach ($this->default_project_structure as $key) {
       if (array_key_exists($key, $stored_program)) {
         Assert::assertEquals($stored_program[$key], $returned_program[$key]);
       } elseif ('screenshot_large' === $key) {
@@ -3299,7 +3311,7 @@ class ApiContext implements Context
   {
     Assert::assertNotEmpty($stored_user);
     Assert::assertNotEmpty($returned_user);
-    foreach ($this->user_structure as $key) {
+    foreach ($this->default_user_structure as $key) {
       Assert::assertEquals($stored_user[$key], $returned_user[$key]);
     }
   }
@@ -3308,7 +3320,7 @@ class ApiContext implements Context
   {
     Assert::assertNotEmpty($stored_program);
     Assert::assertNotEmpty($example_project);
-    foreach ($this->program_structure as $key) {
+    foreach ($this->default_project_structure as $key) {
       if (array_key_exists($key, $stored_program)) {
         Assert::assertEquals($stored_program[$key], $example_project[$key]);
       } elseif ('screenshot_large' === $key) {

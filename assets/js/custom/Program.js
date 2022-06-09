@@ -3,7 +3,7 @@ import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
-import { getCookie } from '../security/CookieHelper'
+import { ApiFetch } from '../api/ApiHelper'
 
 export const Program = function (projectId, projectName, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
@@ -88,13 +88,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       return
     }
 
-    // eslint-disable-next-line no-undef
-    fetch(downloadUrl, {
-      // eslint-disable-next-line no-undef
-      headers: new Headers({
-        Authorization: 'Bearer ' + getCookie('BEARER')
-      })
-    })
+    new ApiFetch(downloadUrl).generateAuthenticatedFetch()
       .then(function (response) {
         // fetching the data in the background; this allows us to detect when the download is finished!
         if (response.ok) {

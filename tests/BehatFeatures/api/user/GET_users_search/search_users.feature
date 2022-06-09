@@ -28,7 +28,7 @@ Feature: Search users
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/users/search"
     Then the response status code should be "200"
-    Then the response should have the users model structure
+    Then the response should have the default users model structure
     Then the response should contain users in the following order:
       | Name     |
       | Catrobat |
@@ -40,7 +40,7 @@ Feature: Search users
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/users/search"
     Then the response status code should be "200"
-    Then the response should have the users model structure
+    Then the response should have the default users model structure
     Then the response should contain users in the following order:
       | Name    |
       | NewUser |
@@ -51,7 +51,7 @@ Feature: Search users
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/users/search"
     Then the response status code should be "200"
-    Then the response should have the users model structure
+    Then the response should have the default users model structure
     Then the response should contain users in the following order:
       | Name         |
       | пользователь |
@@ -62,7 +62,7 @@ Feature: Search users
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/users/search"
     Then the response status code should be "200"
-    Then the response should have the users model structure
+    Then the response should have the default users model structure
     Then the response should contain users in the following order:
       | Name  |
       | User1 |
@@ -73,9 +73,25 @@ Feature: Search users
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/users/search"
     Then the response status code should be "200"
-    Then the response should have the users model structure
+    Then the response should have the default users model structure
     Then the response should contain users in the following order:
       | Name     |
       | Catroweb |
 
+  Scenario: Search for users with specific word should only return users; specified attributes
 
+    Given I have a parameter "query" with value "Catroweb"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "attributes" with value "id,username,following"
+    And I request "GET" "/api/users/search"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+    [
+      {
+        "id": "4",
+        "username": "Catroweb",
+        "following": 2
+      }
+    ]
+    """

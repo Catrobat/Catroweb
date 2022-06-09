@@ -43,7 +43,7 @@ class NameValidatorEventSubscriberTest extends TestCase
   public function testThrowsAnExceptionIfTheNameIsTooLong(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $name = str_pad('a', 201, 'a');
+    $name = str_pad('a', 256, 'a');
     $file->expects($this->atLeastOnce())->method('getName')->willReturn($name);
     $this->expectException(InvalidCatrobatFileException::class);
     $this->name_validator->validate($file);

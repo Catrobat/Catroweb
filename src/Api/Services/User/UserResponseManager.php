@@ -3,41 +3,92 @@
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractResponseManager;
+use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\User\User;
+use App\Security\Authentication\CookieService;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
 use OpenAPI\Server\Model\JWTResponse;
+use OpenAPI\Server\Service\SerializerInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class UserResponseManager extends AbstractResponseManager
 {
-  public function createBasicUserDataResponse(User $user): BasicUserDataResponse
-  {
-    return new BasicUserDataResponse([
-      'id' => $user->getId(),
-      'username' => $user->getUsername(),
-      'projects' => $user->getPrograms()->count(),
-      'followers' => $user->getFollowers()->count(),
-      'following' => $user->getFollowing()->count(),
-    ]);
+  private CookieService $cookie_service;
+
+  public function __construct(
+      TranslatorInterface $translator,
+      SerializerInterface $serializer,
+      ResponseCacheManager $response_cache_manager,
+      CookieService $cookie_service
+  ) {
+    parent::__construct($translator, $serializer, $response_cache_manager);
+    $this->cookie_service = $cookie_service;
   }
 
-  public function createExtendedUserDataResponse(User $user): ExtendedUserDataResponse
+  public function createBasicUserDataResponse(User $user, ?string $attributes = null): BasicUserDataResponse
   {
-    return new ExtendedUserDataResponse([
-      'id' => $user->getId(),
-      'username' => $user->getUsername(),
-      'email' => $user->getEmail(),
-      'projects' => $user->getPrograms()->count(),
-      'followers' => $user->getFollowers()->count(),
-      'following' => $user->getFollowing()->count(),
-    ]);
+    if (empty($attributes)) {
+      $attributes_list = ['id', 'username'];
+    } else {
+      $attributes_list = explode(',', $attributes);
+    }
+
+    return new BasicUserDataResponse($this->createBasicUserDataArray($user, $attributes_list));
   }
 
-  public function createUsersDataResponse(array $users): array
+  public function createExtendedUserDataResponse(User $user, ?string $attributes = null): ExtendedUserDataResponse
+  {
+    if (empty($attributes)) {
+      $attributes_list = ['id', 'username', 'email'];
+    } else {
+      $attributes_list = explode(',', $attributes);
+    }
+
+    $data = $this->createBasicUserDataArray($user, $attributes_list);
+    if (in_array('email', $attributes_list, true)) {
+      $data['email'] = $user->getEmail();
+    }
+
+    return new ExtendedUserDataResponse($data);
+  }
+
+  private function createBasicUserDataArray(User $user, array $attributes_list): array
+  {
+    $data = [];
+    if (in_array('id', $attributes_list, true)) {
+      $data['id'] = $user->getId();
+    }
+    if (in_array('username', $attributes_list, true)) {
+      $data['username'] = $user->getUsername();
+    }
+    if (in_array('picture', $attributes_list, true)) {
+      $data['picture'] = $user->getAvatar();
+    }
+    if (in_array('about', $attributes_list, true)) {
+      // TODO: implement User:about field
+    }
+    if (in_array('currentlyWorkingOn', $attributes_list, true)) {
+      // TODO: implement User:currentlyWorkingOn field
+    }
+    if (in_array('projects', $attributes_list, true)) {
+      $data['projects'] = $user->getPrograms()->count();
+    }
+    if (in_array('followers', $attributes_list, true)) {
+      $data['followers'] = $user->getFollowers()->count();
+    }
+    if (in_array('following', $attributes_list, true)) {
+      $data['following'] = $user->getFollowing()->count();
+    }
+
+    return $data;
+  }
+
+  public function createUsersDataResponse(array $users, ?string $attributes = null): array
   {
     $users_data_response = [];
     foreach ($users as $user) {
-      $user_data = $this->createBasicUserDataResponse($user);
+      $user_data = $this->createBasicUserDataResponse($user, $attributes);
       $users_data_response[] = $user_data;
     }
 
@@ -52,5 +103,13 @@ final class UserResponseManager extends AbstractResponseManager
         'refresh_token' => $refresh_token,
       ]
     );
+  }
+
+  public function addAuthenticationCookiesToHeader(string $token, string $refresh_token, array &$responseHeaders): void
+  {
+    $responseHeaders['Set-Cookie'] = [
+      $this->cookie_service->createBearerTokenCookie($token),
+      $this->cookie_service->createRefreshTokenCookie($refresh_token),
+    ];
   }
 }

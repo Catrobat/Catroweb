@@ -6,13 +6,24 @@ use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\AddProgramRequest;
+use App\Project\CatrobatFile\ExtractedFileRepository;
+use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Project\ProgramManager;
+use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use OpenAPI\Server\Model\UpdateProjectRequest;
 
 final class ProjectsApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly ProgramManager $project_manager, private readonly EntityManagerInterface $entity_manager)
+  final public const SERVER_ERROR_SAVE_XML = 1;
+  final public const SERVER_ERROR_SCREENSHOT = 2;
+
+  public function __construct(private readonly ProgramManager $project_manager,
+                              private readonly EntityManagerInterface $entity_manager,
+                              private readonly ExtractedFileRepository $extracted_file_repository,
+                              private readonly ProgramFileRepository $file_repository,
+                              private readonly ScreenshotRepository $screenshot_repository)
   {
   }
 
@@ -29,6 +40,95 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
     $this->project_manager->save($project);
   }
 
+  public function updateProject(Program $project, UpdateProjectRequest $request): bool|int
+  {
+    $project_touched = false;
+    $extracted_file = null;
+    $extracted_file_properties_before_update = [];
+
+    if (!is_null($request->getName()) || !is_null($request->getDescription()) || !is_null($request->getCredits())) {
+      $name = $request->getName();
+      $description = $request->getDescription();
+      $credits = $request->getCredits();
+
+      $project_touched = true;
+
+      if (!is_null($name)) {
+        $project->setName($name);
+      }
+      if (!is_null($description)) {
+        $project->setDescription($description);
+      }
+      if (!is_null($credits)) {
+        $project->setCredits($credits);
+      }
+
+      $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($project);
+      if ($extracted_file) {
+        if (!is_null($name)) {
+          $extracted_file_properties_before_update['name'] = $extracted_file->getName();
+          $extracted_file->setName($name);
+        }
+        if (!is_null($description)) {
+          $extracted_file_properties_before_update['description'] = $extracted_file->getDescription();
+          $extracted_file->setDescription($description);
+        }
+        if (!is_null($credits)) {
+          $extracted_file_properties_before_update['credits'] = $extracted_file->getNotesAndCredits();
+          $extracted_file->setNotesAndCredits($credits);
+        }
+
+        try {
+          $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+        } catch (Exception) {
+          return self::SERVER_ERROR_SAVE_XML;
+        }
+        $this->file_repository->deleteProjectZipFileIfExists($project->getId());
+      }
+    }
+
+    if (!is_null($request->isPrivate())) {
+      $project->setPrivate($request->isPrivate());
+      $project_touched = true;
+    }
+
+    if (!is_null($request->getScreenshot())) {
+      try {
+        $this->screenshot_repository->updateProgramAssets($request->getScreenshot(), $project->getId());
+      } catch (Exception) {
+        if ($extracted_file) {
+          // restore old values
+          foreach ($extracted_file_properties_before_update as $key => $value) {
+            switch ($key) {
+              case 'name':
+                $extracted_file->setName($value);
+                break;
+              case 'description':
+                $extracted_file->setDescription($value);
+                break;
+              case 'credits':
+                $extracted_file->setNotesAndCredits($value);
+                break;
+            }
+          }
+          try {
+            $extracted_file->saveProgramXmlProperties();
+          } catch (Exception) {
+            // ignore
+          }
+        }
+
+        return self::SERVER_ERROR_SCREENSHOT;
+      }
+    }
+
+    if ($project_touched) {
+      $this->project_manager->save($project);
+    }
+
+    return true;
+  }
+
   public function refreshUser(User $user): void
   {
     $this->entity_manager->refresh($user);
@@ -40,7 +140,7 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
       return false;
     }
 
-    $program = $this->project_manager->getProjectByID($id);
+    $program = $this->project_manager->getProjectByID($id, true);
 
     if (!$program || $program[0]->getUser() != $user) {
       return false;

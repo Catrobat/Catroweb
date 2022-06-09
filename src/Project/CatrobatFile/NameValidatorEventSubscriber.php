@@ -2,9 +2,9 @@
 
 namespace App\Project\CatrobatFile;
 
+use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Project\Event\ProgramBeforeInsertEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class NameValidatorEventSubscriber implements EventSubscriberInterface
 {
@@ -18,7 +18,7 @@ class NameValidatorEventSubscriber implements EventSubscriberInterface
     if ('' == $file->getName()) {
       throw new InvalidCatrobatFileException('errors.name.missing', 509);
     }
-    if (strlen($file->getName()) > Response::HTTP_OK) {
+    if (strlen($file->getName()) > ProjectsRequestValidator::MAX_NAME_LENGTH) {
       throw new InvalidCatrobatFileException('errors.name.toolong', 526);
     }
   }

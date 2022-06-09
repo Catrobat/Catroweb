@@ -35,7 +35,7 @@ Feature: Get remixed program from Scratch
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name      |
       | program 9 |
@@ -72,7 +72,7 @@ Feature: Get remixed program from Scratch
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
       | program 9  |
@@ -110,7 +110,7 @@ Feature: Get remixed program from Scratch
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
       | program 10 |

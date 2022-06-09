@@ -9,6 +9,7 @@ use App\Utils\TimeUtils;
 use DateTime;
 use Exception;
 use PHPUnit\Framework\Assert;
+use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
 /**
  * Class UserDataFixtures.
@@ -23,8 +24,10 @@ class UserDataFixtures
 
   private static int $number_of_users = 0;
 
-  public function __construct(private readonly UserManager $user_manager)
-  {
+  public function __construct(
+      private readonly UserManager $user_manager,
+      private readonly PasswordHasherFactoryInterface $password_hasher_factory
+  ) {
   }
 
   public function insertUser(array $config = [], bool $andFlush = true): User
@@ -70,7 +73,11 @@ class UserDataFixtures
       Assert::assertEquals($user->getUploadToken(), $config['token'], 'Token Invalid');
     }
     if (isset($config['enabled'])) {
-      Assert::assertEquals($user->isEnabled(), 'true' === $config['enabled'], 'Token Invalid');
+      Assert::assertEquals($user->isEnabled(), 'true' === $config['enabled'], 'Enabled wrong.');
+    }
+    if (isset($config['password'])) {
+      $hasher = $this->password_hasher_factory->getPasswordHasher($user);
+      Assert::assertTrue($hasher->verify($user->getPassword(), $config['password']), 'Password invalid');
     }
   }
 

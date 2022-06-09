@@ -40,54 +40,49 @@ class ImageRepository
   /**
    * @throws ImagickException
    */
-  public function save(File $file, int $id, string $extension, bool $featured): void
+  public function save(File $file, string|int $id, string $extension, bool $featured): void
   {
     $thumb = $this->getImagick();
     $thumb->readImage($file->__toString());
     if ($featured) {
-      $filename = $this->featured_dir.$this->generateFileNameFromId($id, $extension, $featured);
-      if (file_exists($filename)) {
-        unlink($filename);
-      }
-      $thumb->writeImage($filename);
-      chmod($filename, 0777);
-      $thumb->destroy();
+      $filename = $this->featured_dir.$this->generateFileNameFromId($id, $extension, true);
     } else {
       $thumb->cropThumbnailImage(80, 80);
-      $filename = $this->example_dir.$this->generateFileNameFromId($id, $extension, $featured);
-      if (file_exists($filename)) {
-        unlink($filename);
-      }
-      $thumb->writeImage($filename);
-      chmod($filename, 0777);
-      $thumb->destroy();
+      $filename = $this->example_dir.$this->generateFileNameFromId($id, $extension, false);
     }
+
+    if (file_exists($filename)) {
+      unlink($filename);
+    }
+    $thumb->writeImage($filename);
+    chmod($filename, 0777);
+    $thumb->destroy();
   }
 
-  public function remove(int $id, string $extension, bool $featured): void
+  public function remove(string|int $id, string $extension, bool $featured): void
   {
     if ($featured) {
-      $path = $this->featured_dir.$this->generateFileNameFromId($id, $extension, $featured);
+      $path = $this->featured_dir.$this->generateFileNameFromId($id, $extension, true);
     } else {
-      $path = $this->example_dir.$this->generateFileNameFromId($id, $extension, $featured);
+      $path = $this->example_dir.$this->generateFileNameFromId($id, $extension, false);
     }
     if (is_file($path)) {
       unlink($path);
     }
   }
 
-  public function getWebPath(int $id, string $extension, bool $featured): string
+  public function getWebPath(string|int $id, string $extension, bool $featured): string
   {
     if ($featured) {
-      $path = $this->featured_path.$this->generateFileNameFromId($id, $extension, $featured);
+      $path = $this->featured_path.$this->generateFileNameFromId($id, $extension, true);
     } else {
-      $path = $this->example_path.$this->generateFileNameFromId($id, $extension, $featured);
+      $path = $this->example_path.$this->generateFileNameFromId($id, $extension, false);
     }
 
     return $path.FileHelper::getTimestampParameter($this->example_dir.$this->generateFileNameFromId($id, $extension, $featured));
   }
 
-  public function getAbsoluteWebPath(int $id, string $extension, bool $featured): string
+  public function getAbsoluteWebPath(string|int $id, string $extension, bool $featured): string
   {
     return $this->urlHelper->getAbsoluteUrl('/').$this->getWebPath($id, $extension, $featured);
   }
@@ -104,7 +99,7 @@ class ImageRepository
     return $this->imagick;
   }
 
-  private function generateFileNameFromId(int $id, string $extension, bool $featured): string
+  private function generateFileNameFromId(string|int $id, string $extension, bool $featured): string
   {
     if ($featured) {
       if ('' === $extension) {
