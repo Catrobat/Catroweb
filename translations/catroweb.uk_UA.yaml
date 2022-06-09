@@ -5,7 +5,7 @@ localLanguage: Англійська
 username: Ім'я користувача
 password: Пароль
 createNewPassword: Створити новий пароль
-accountSettings: Налаштування аккаунту користувача
+accountSettings: Налаштування облікового запису
 email: Ел.Пошта
 aboutPocketCode: Про Pocket Code
 about: Про застосунок
@@ -13,26 +13,26 @@ education: Навчання
 chat: Чат та форуми
 others: Інші
 tutorials: Довідка
-googlePlay: Гугл плей магазин
+googlePlay: Google Play Store
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
-instagram: Інстаграм
+instagram: Instagram
 discordChat: Чат в Discord
 passwordsNoMatch: Паролі не збігаються.
 error: Помилка
 cancel: Скасувати
 report: Скарга
 deleteIt: Так, видалити це!
-reportIt: Так, повідомити про це!
+reportIt: Так, поскаржитись про це!
 areYouSure: Ти впевнений?
 noWayOfReturn: Немає можливості відновити свої дії!
 download: Завантажити
 name: Ім'я
 description: Опис
 noDescription: Опис відсутній.
-credits: Credits
+credits: Примітки та автори
 noCredits: No credits available.
-notesAndCreditsDescription: Як ви створили цей проект? Чи використовували ідеї, скрипти чи витвори інших людей? Скажіть їм спасибі тут.
+notesAndCreditsDescription: Як ви створили цей проєкт? Чи використовували ідеї, скрипти чи витвори інших людей? Скажіть їм спасибі тут.
 country: Країна
 loginText: Увійти
 privacyPolicy: Політика конфіденційності
@@ -46,10 +46,10 @@ more: 'більше'
 less: 'менше'
 show-more: 'Показати більше'
 show-less: 'Згорнути інформацію'
-more-information: 'Додаткова інформація'
+more-information: 'Більше інформації'
 less-information: 'Менше інформації'
 ok: Гаразд
-clickToDownloadProgram: 'Щоб завантажити приклад проекту, натисніть %link_start% тут %link_end%.'
+clickToDownloadProgram: 'Щоб завантажити приклад проєкту, натисніть %link_start% тут %link_end%.'
 registrationError: 'Ім''я користувача або електронна адреса вже використовуються.'
 notifications: 'Сповіщення'
 allNotifications: 'Усі'
@@ -59,7 +59,7 @@ CommentNotifications: 'Коментарі'
 RemixNotifications: 'Ремікси'
 wellDone: "Чудово!"
 done: "Готово!"
-notificationsReadMessage: "It looks like you dont have any notifications."
+notificationsReadMessage: "Схоже, у вас немає сповіщень."
 confirmMessage: "Так, видалити це"
 cancelMessage: "Скасувати"
 notificationsUnauthorizedError: "Не вдалося авторизувати користувача"
@@ -74,10 +74,10 @@ statistics: "Статистика"
 indexPage:
   recommendedSection:
     info:
-      title: 'Які проекти тут рекомендовано?'
+      title: 'Які проєкти тут рекомендовано?'
       description: 'Чим більше реакцій (Палець вгору, Посмішка...) отримує ваш проєкт, тим вище він з''явиться в цьому списку.'
 follower:
-  follows: Ваші підписки
+  follows: Підписки
   followers: Підписники
   follow: Підписатись
   username: Користувач
@@ -122,12 +122,13 @@ programs:
   reportCommentConfirmation: Ви впевнені, що хочете поскаржитися на цей коментар?
   deleteCommentConfirmation: Ви впевнені, що хочете видалити цей коментар?
   deleteAccountConfirmation: |+
-    Account Deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: Занадто довга назва проекту!
+    Видалення облікового запису? 
+    Ви впевнені, що хочете видалити свій обліковий запис? 
+    Це також видалить ваші завантажені проєкти та коментарі! 
+    Відновити свої дії неможливо! 
+    Так, видаліть! 
+    Скасувати
+  tooLongName: Занадто довга назва проєкту!
   tooLongDescription: Опис проєкту задовгий!
   tooLongCredits: The project credits are too long!
   most:
@@ -139,29 +140,29 @@ programs:
   sample: Приклад проєктів
   views: '%views% переглядів'
   likes:
-    likersTitle: "Люди, які відреагували на цей проект"
+    likersTitle: "Люди, які відреагували на цей проєкт"
     all: "Усі"
   remixes: '{0}0 реміксів |{1}1 реміксів |]1,Inf]%remixes% реміксів'
   newRemixesNotificationTitle: '{1}"%programName%" має 1 новий ремікс: |] 1,Inf] "%programName%" має %remixes% нових реміксів: '
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  submitted: Подані проєкти
+  uploaded: Завантажені проєкти
   reportAsInappropriate: Поскаржитись як недоречно
   reportProgram: Поскаржитись на проєкт
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Будь ласка, увійдіть в обліковий запис %login%, щоб поскаржитись на це проєкт.
+  languageVersion: 'Версія мови Catrobat: %languageVersion%'
+  reportLoginText: Будь ласка, увійдіть в %login%, щоб поскаржитись на цей проєкт.
   reportDialogHeader: Чому ви хочете поскаржитись на це проєкт?
   reportDialogReason: Введіть причину
   reportRadioButtonInappropriate: Це недоречно
   reportRadioButtonCopyright: Порушення авторських прав
-  reportRadioButtonSpam: Це Спам
+  reportRadioButtonSpam: Це спам
   reportRadioButtonDislike: Мені це не сподобалось
   reportOwnProgram: Ви не можете поскаржитись на свій власний проєкт. 
   reportAlready: Ви вже поскаржились на це проєкт.
-  reportDone: Ви поскаржились на це проєкт!
+  reportDone: Ви поскаржились на цей проєкт!
   updateAppHeaderDownload: Завантажити неможливо
   updateAppTextDownload: Будь ласка, оновіть додаток до найновішої версії. Майте на увазі, що не всі функції Android вже доступні на IOS.
   updateAppTextDownloadApk: Завантаження APK наразі доступне лише на Android, а не на IOS.
-  updateAppHeader: Update App
+  updateAppHeader: Оновити додаток
   updateAppText: Будь ласка, оновіть додаток до найновішої версії.
   btnClosePopup: Гаразд
   checkout_this_program: Оцініть цей Catrobat проєкт
@@ -169,12 +170,12 @@ programs:
   comments: Коментарі
   send: Надіслати
   delete: Видалити
-  report: Звіт
+  report: Скарга
   report_popup: На коментар успішно поскаржилися.
   report_popup_header: Скарга була відправлена
   deleted_popup: Коментар успішно видалено.
   deleted_popup_header: Видалено
-  noAdminRights: Ви не мажте прав Адміністратора.Будь ласка, увійдіть як Адміністратор
+  noAdminRights: Ви не маєте прав Адміністратора.Будь ласка, увійдіть як Адміністратор
   editProject: Редагувати проєкт
   closeProjectEditor: Закрити редактор
   closeEditorPrompt: Бажаєте зберегти свої зміни?
@@ -187,7 +188,7 @@ programs:
   linkTitle: Посилання
   link: Скопіювати посилання проєкту у буфер обміну
   reactionsText: Реакції
-  downloadErrorText: Під час завантаження проєкт сталася помилка. Повторіть спробу пізніше.
+  downloadErrorText: Під час завантаження проєкту сталася помилка. Повторіть спробу пізніше.
   downloadStartText: Завантаження розпочалось... 
   showTranslation: Показати переклад
   hideTranslation: Приховати переклад
@@ -196,7 +197,7 @@ programs:
   confrimDelete: Ви справді хочете видалити цей переклад?
   default: За замовчування
   save: Зберегти
-  translationTitle: '%language% Переклад'
+  translationTitle: '%language% переклад'
   editDefault: Редагувати за замовчуванням
   editTranslation: Редагувати %language% переклад
   translations: Переклади
@@ -210,10 +211,10 @@ remixGraph:
   programNotAvailableErrorTitle: 'Вибачте...'
   programNotAvailableErrorDescription: 'Проєкт більше не доступний!'
   programNotAvailable: 'Недоступно'
-  programUnknownUser: 'Unknown User'
+  programUnknownUser: 'Невідомий користувач'
 noReply: Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Підтвердження облікового запису Catrobat
   message: |
     Шановний %username%.
     Щоб завершити активацію облікового запису - відвідайте %confirmationUrl%
@@ -231,7 +232,7 @@ accountConfirmation:
     Команда Catrobat.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Відновлення пароля Catrobat
   message: |
     Шановний %username%.
     Ви попросили скинути пароль на %appplication_url%, оскільки забули пароль.
@@ -282,14 +283,14 @@ profile:
     emailExists: Ця адреса електронної пошти вже існує.
     usernameNotValid: Некоректне ім'я користувача.
     usernameMissing: Ви повинні мати ім'я користувача.
-    usernameExists: Цей ім'я користувача вже існує.
+    usernameExists: Це ім'я користувача вже існує.
     usernameContainsEmail: Ім'я користувача не повинно містити адресу електронної пошти.
     submitSuccess: Збережено!
   reallyDeleteProgram: Ви справді бажаєте видалити свій проєкт?
   programsOf: Проєкти
   changePicture: Змінити зображення
   avatar:
-    noImage: No Image!
+    noImage: Немає зображення!
     pictureTooLarge: Вибране зображення занадто велике, будь ласка, не використовуйте зображення розміром понад 5 Мб.
     uploadError: На жаль, під час завантаження виникла проблема!
     noSupport: Цей тип зображення не підтримується, спробуйте інше зображення.
@@ -306,15 +307,15 @@ myprofile:
   editUsername: Редагувати ім'я користувача
   editPassword: Редагувати пароль
   editCountry: Змінити країну
-  editEmail: Edit E-Mail
-  deleteAccount: Delete Account
+  editEmail: Редагувати електронну пошту
+  deleteAccount: Видалити обліковий запис
   deleteAccountText: Ви дійсно бажаєте видалити свій обліковий запис? Це видалить ваші завантажені проєкти та коментарі!
   editAccountSettings: Редагувати налаштування облікового запису
   notChangeVisibility: Не можна змінити видимість
   notChangeVisibilityReason: Мовна версія вашого проєкту занадто висока і, отже, її не можна встановити на видиму.
 licenseToPlay:
-  link: 'Ліцензія для гри'
-  title: 'Ліцензія для гри - Отримайте кредит і поширте'
+  link: 'Ліцензія на гру'
+  title: 'Ліцензія на гру - Вказуйте джерело і поділіться'
   text1: Уявіть собі, що кожен проєкт Catrobat - це торт, дуже особливий торт, який поставляється зі своїм рецептом (блоками програмування). Всі члени спільноти Catrobat діляться своїми тортами разом зі своїми рецептами. Це означає, що ви можете насолоджуватися тортами й навчитися робити їх самостійно!
   text2: 'Немає ніяких секретних рецептів: інструкція про те, як зробити ці торти, відкрита для будь-кого, щоб використовувати, повторно використовувати, модифікувати та служити натхненням для нових ідей ... Я маю на увазі торти.'
   text3: "Ви можете їсти торти, а також копіювати чужі рецепти, щоб зробити свій власний, можливо, з різними інгредієнтами. Ця свобода має дві прості вимоги:"
@@ -327,22 +328,22 @@ licenseToPlay:
   version: Версія 1.1, 2 квітня 2013 р.
 termsOfUse:
   title: Умови використання
-  headline: Welcome to the Catrobat Community!
+  headline: Ласкаво просимо до спільноти Catrobat
   text1: 'Як частина спільноти Catrobat, ви ділитеся проєктами та ідеями з людьми:'
   text2: "Нам потрібна ваша допомога, щоб зробити цю спільноту сприятливим місцем для кожного члена. Ось як ви можете допомогти:"
   text3: "Завдяки проєкту Catrobat ми хочемо сприяти співпраці та дозволити творчості кожного об'єднатися на благо всього людства. Ви також можете стати активним членом спільноти Catrobat, віддаючи свої проєкти назад до спільноти у якості подарунка, так само як інші активні учасники дають вам свої проєкти:"
-  text4: 'Наш подарунок Вам:'
-  text5: 'Наші Умови використання та обслуговування:'
+  text4: 'Наш подарунок вам:'
+  text5: 'Наші Умови використання та Обслуговування:'
   list1:
     item1: З різних країн і культур
     item2: Будь-якого віку (від маленьких дітей до підлітків і бабусь і дідусів)
     item3: З усіма рівнями досвіду
   list2:
     item1: Будьте шанобливі. При обміні проєктами, будь ласка, пам'ятайте, що люди різного віку та походження побачать ваш внесок.
-    item2: "Give credit. Feel free to make modified versions of other people's projects - just make sure to give them credit. One place to give credit is in your project's credits section. Please see the paragraph below this dotted list for details about modifying projects of other users."
+    item2: "Надавайте джерело. Не соромтеся створювати модифіковані версії проєктів інших людей - просто не забудьте віддати їм належне. Одне місце, де можна віддати належне, — у розділі приміток та авторів вашого проєкту. Будь ласка, дивіться параграф під цим пунктирним списком, щоб дізнатися більше про зміни проєктів інших користувачів."
     item3: "Будьте чесними. Не прикидайтеся кимось іншим, крім того, хто ви є, або не намагайтеся обдурити спільноту."
     item4: "Зберігайте особисту інформацію приватною. Не діліться своєю адресою електронної пошти, номером телефону або іншою особистою контактною інформацією."
-    item5: "Допоможіть зберегти сайт дружнім. Якщо ви відчуваєте, що інші вважають, що проект або коментар підлий, образливий, занадто жорстокий або іншим чином недоречний, просто натисніть кнопку «звіт як недоречний» і залиште коротке пояснення. Команда Catrobat перегляне ваш звіт і може видалити будь-який проект, коментар або публікацію."
+    item5: "Допоможіть зберегти сайт дружнім. Якщо ви відчуваєте, що інші вважають, що проєкт або коментар підлий, образливий, занадто жорстокий або іншим чином недоречний, просто натисніть кнопку «поскаржитись як недоречний» і залиште коротке пояснення. Команда Catrobat перегляне вашу скаргу і зможе видалити будь-який проєкт, коментар або публікацію."
   list3:
     item1: "Завантажуючи проєкт на наші веб-сайти, ви приймаєте та погоджуєтеся розмістити цю роботу під певними безкоштовними ліцензіями завантажених проєктів Catrobat. Подібно до безкоштовних ліцензій, за якими вам доступна сама система Catrobat, ці безкоштовні ліцензії на завантажені проєкти Catrobat дають кожному право вчитися на роботі, раніше завантаженій іншими, а також адаптуватися та реміксувати, які працюють над створенням власних нових захоплюючих ігор, анімацій та інших проєктів.Це дозволяє кожному «стояти на плечах своїх однолітків», одним з них є ви! Таким чином, ваша робота принесе користь всьому світу і залишиться вільною для всіх, трохи схожою на текст і фотографії, вільно внесені до Вікіпедії волонтерами з усього світу. Подумайте про це як про свій подарунок людству: ви даєте всім, і всі інші, які завантажують свою роботу на наші веб-сайти, дають вам. Таким чином, завантажений проєкт - це подарунок великої цінності, який його власник дарує вам безкоштовного,з умовою, що ви берете участь у спільноті на тих же умовах."
     item2: Вам не потрібно приймати подарунок; якщо ви це зробите, застосовуються певні правила. Переваги цих правил полягають у тому, що ви можете вчитися на роботі і спиратися на неї, щоб зробити ще більш круті речі самостійно, які ви можете потім, наприклад, знову завантажити на наші веб-сайти як свої власні. Ще одна перевага полягає в тому, що ці ліцензії гарантують, що ви не можете нести відповідальність за будь-які проблеми, що виникають перед іншими через використання вашого проєкту.
@@ -362,21 +363,21 @@ termsOfUse:
   bottom2: 'Будь ласка, надішліть будь-які пропозиції щодо цих Умов використання на %email-webmaster%.'
   version: Версія 1.3, 4 березня 2014
 search:
-  dotdotdot: Шукати...
-  search: Шукати
+  dotdotdot: Пошук...
+  search: Пошук
   inMediaLib: Пошук у медіатеці
-  results: Search Results
+  results: Результати пошуку
   resultcount: Пошук повернув %count% результатів
   fail: Введіть принаймні один пошуковий термін
   noUsers: Користувачів не знайдено
-  noProjects: Не знайдено проєктів
+  noProjects: Проєктів не знайдено
 menu:
   profile: Мій Профіль
   login: Увійти
   logout: Вийти
   admin: Адмін
   home: Головна
-  helpAndTutorials: Допомога & керівництво
+  helpAndTutorials: Допомога & посібник
   followersAndFollowing: Підписник
 login:
   login: Увійти
@@ -399,12 +400,12 @@ login:
   alreadyAccount: Вже маєте обліковий запис?
   or: АБО
   username: Ім'я користувача
-  email: Ел. пошта
+  email: Електронна пошта
   passwordFirst: Пароль
-  passwordSecond: Password Confirm
+  passwordSecond: Підтвердьте пароль
 register:
   title: Зареєструватися
-  subText: "Продовжуючи, ви налаштовуєте обліковий запис спільноти Catrobat і погоджуєтеся з нашими %var1% і %var2%."
+  subText: "Продовжуючи, ви налаштовуєте обліковий запис спільноти Catrobat та погоджуєтеся з нашими %var1% та %var2%."
   button:
     cancel: Скасувати
     createAccount: Створити обліковий запис
@@ -447,7 +448,7 @@ errors:
   username:
     blank: Ім'я користувача не повинно бути порожнім
     invalid: Ваше ім'я користувача некоректне
-    exists: Цей ім'я користувача вже існує.
+    exists: Це ім'я користувача вже існує.
     not_exists: Це ім'я користувача не існує.
     not_email: Ім'я користувача не повинно бути адресою електронної пошти.
     size: Ім'я користувача повинно мати не менше 3 символів і не більше 180
@@ -462,20 +463,20 @@ errors:
     invalid: Ваша електронна пошта здається недійсною
     exists: Ця адреса електронної пошти вже існує.
   id:
-    blank: Open Authentication ID must not be blank
+    blank: Ідентифікатор відкритої автентифікації не повинен бути пустим
   login: Неправильний пароль або ім'я користувача.
-  post-data: POST-Data not correct or missing!
+  post-data: "POST-дані неправильні або відсутні!\n"
   checksum:
-    missing: Клієнт не надіслав файл контрольної сумми! Ви використовуєте застарілу версію Pocket Code?
-    invalid: неприпустима контрольна сума
+    missing: Клієнт не надіслав файл контрольної суми! Ви використовуєте застарілу версію Pocket Code?
+    invalid: Неприпустима контрольна сума
   xml:
-    invalid: неприпустимий xml-код
+    invalid: Неприпустимий xml-код
     missing: 'Невідома помилка: project_xml_not_found!'
   file:
-    unexpected: знайдено неочікуваний файл
-    invalid: неприпустимий файл
+    unexpected: Знайдено неочікуваний файл
+    invalid: Неприпустимий файл
   image.missing: Xml-код проєкту нагадує про файл, якого немає в теці проєкту
-  unknown: невідома помилка
+  unknown: Невідома помилка
   token: 'Не вдалося виконати автентифікацію пристрою: неприпустимий auth-token!'
   uploadTokenAuthFailed: 'Не вдалося завантажити auth маркера.'
   program:
@@ -495,7 +496,7 @@ success:
   token: ок
   upload: Ваш проєкт успішно завантажено!
   imgUpload: Ваше зображення було успішно завантажено!
-  report: Вашу скаргу успішно надіслано!
+  report: Вашу скаргу було успішно надіслано!
 time:
   minutes.ago: '{0} < 1 хвилину тому | {1}1 хвилину тому |] 1,Inf] %count% хвилин тому '
   hours.ago: '{1}1 годину тому |] 1,Inf] %count% годин тому'
@@ -506,21 +507,21 @@ failure:
   upload: Під час завантаження додатка сталася помилка.
 user:
   verification:
-    email: 'Перевірка електронної пошти'
+    email: 'Підтвердьте свою електронну пошту'
 api:
   registerUser:
     emailMissing: 'Електронна пошта відсутня'
     emailEmpty: 'Електронна пошта не може бути порожньою'
-    emailInvalid: 'Неприпустима електронна пошта'
-    emailAlreadyInUse: 'Така електронна пошта вже використовується'
+    emailInvalid: 'Недійсна електронна пошта'
+    emailAlreadyInUse: 'Електронна пошта вже використовується'
     usernameMissing: 'Відсутнє ім''я користувача'
     usernameTooShort: 'Ім''я користувача занадто коротке'
     usernameTooLong: 'Ім''я користувача занадто довге'
     usernameEmpty: 'Ім''я користувача не може бути порожнім'
-    usernameAlreadyInUse: 'Таке ім''я користувача вже використовується'
-    usernameInvalid: 'Неприпустиме ім''я користувача'
+    usernameAlreadyInUse: 'Ім''я користувача вже використовується'
+    usernameInvalid: 'Ім''я користувача неприпустиме'
     passwordMissing: 'Пароль відсутній'
-    passwordEmpty: 'Пароль не може бути пустим'
+    passwordEmpty: 'Пароль не може бути порожнім'
     passwordTooShort: 'Пароль занадто короткий'
     passwordTooLong: 'Пароль занадто довгий'
     passwordInvalidChars: 'Пароль містить неприпустимі символи'
@@ -529,7 +530,7 @@ api:
   projectsPost:
     invalid_checksum: 'Неприпустима контрольна сума. Спробуйте завантажити ще раз!'
     upload_error: 'Помилка під час завантаження. Спробуйте завантажити ще раз!'
-    creating_error: 'Error while creating Program Entity. Try uploading again!'
+    creating_error: 'Помилка під час створення сутності проєкту. Спробуйте завантажити ще раз!'
 #languages and countries
 language:
   arabic: Арабська
@@ -577,18 +578,18 @@ language:
   ukrainian: Українська
   vietnamese: В'єтнамська
 ci:
-  generate: Generate Apk
-  pending: Generating Apk
-  download: Download Apk
+  generate: Створити Apk
+  pending: Створення Apk
+  download: Завантажити Apk
 admin:
   maintain:
     diskMaintenance: Обслуговування диска
     ramMaintenance: Обслуговування оперативної пам'яті
-    noRemovableObjects: Немає знімних об'єктів.
+    noRemovableObjects: Немає доступних знімних об'єктів.
     removableObjects: Знімні об'єкти
 recommender:
   similarPrograms: Подібні проєкти
-  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
+  mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Користувачі, які завантажили цей проєкт, також завантажили
   moreFromThisUser: Більше від %username%
 pmd:
   submitBtn: Надішліть свій проєкт
@@ -601,7 +602,7 @@ pmd:
   failed:
     text: Не вдалося завантажити проєкт.
 codeview:
-  title: 'Code View'
+  title: 'Перегляд коду'
   showCode: 'Показати код'
   hideCode: 'Приховати код'
   showStatistics: 'Показати статистику коду'
@@ -617,19 +618,19 @@ codeview:
   sounds: 'Звуки'
   globals: 'Глобальні'
   locals: 'Локальні'
-  globalVariables: 'Global Variables'
-  localVariables: 'Local Variables'
-  eventBricks: 'Event Bricks'
-  controlBricks: 'Control Bricks'
-  motionBricks: 'Motion Bricks'
-  soundBricks: 'Sound Bricks'
-  looksBricks: 'Looks Bricks'
-  penBricks: 'Pen Bricks'
-  dataBricks: 'Data Bricks'
-  specialBricks: 'Special Bricks'
+  globalVariables: 'Глобальні змінні'
+  localVariables: 'Локальні змінні'
+  eventBricks: 'Цегли подій'
+  controlBricks: 'Цегли управління'
+  motionBricks: 'Цегли переміщення'
+  soundBricks: 'Цегли звуків'
+  looksBricks: 'Цегли виглядів'
+  penBricks: 'Цегли пера'
+  dataBricks: 'Цегли даних'
+  specialBricks: 'Цегли спеціальні'
 codeStatistics:
-  title: "Code Statistics"
-  error: "Code Statistics can't be displayed."
+  title: "Статистика коду"
+  error: "Неможливо показати статистику коду."
   general: 'Основні'
   bricks: 'Цегли'
   eventBricks: 'Події'
@@ -637,18 +638,18 @@ codeStatistics:
   motionBricks: 'Переміщення'
   soundBricks: 'Звуки'
   looksBricks: 'Вигляди'
-  penBricks: 'Ручка'
+  penBricks: 'Перо'
   dataBricks: 'Дані'
   deviceBricks: 'Пристрій'
   specialBricks: 'Спеціальні'
 footer:
   language: Мова
-  usefulLinks: Useful Links
+  usefulLinks: Корисні посилання
   legalities: Юридичні вподобання
-  communityStats: Community Stats
+  communityStats: Статистика Спільноти
   download: Отримати додаток
 privacy-policy:
-  header: Privacy Policy
+  header: Політика конфіденційності
   version: Версія 2.2 від 17 жовтня 2019 року
   text1: Щоб запропонувати вам всі переваги наших послуг і пов'язаного з ним облікового запису, необхідно зібрати від вас певні дані. 
   text2: Для підтримки та вдосконалення наших послуг (додатків та веб-сайтів) та наукових досліджень з ІКТ та STEM/STEAM освіти ми використовуємо Google Analytics, Crashlytics та Firebase, все це від Google LLC (США), а також Dynatrace від Dynatrace LLC (США), щоб отримати метадані про використання наших послуг, наприклад, інформацію про збій, позначки часу, відвідані сторінки / екрани,  використання наших додатків і послуг, використовуваної операційної системи та інформації про постачальника мережі. Цей аналіз і зібрані дані не пов'язані з вашим профілем і не містять ніякої особистої інформації (останні біти IP-адреси анонімізуються). Однак зібрані дані будуть передані постачальникам послуг (Google LLC, США і Dynatrace LLC, США). Обробка даних ґрунтується на договорах з ТОВ «Гугл» і ТОВ «Дінатраче». Ці відносини з постачальниками послуг відповідають Загальному регламенту Європейського Союзу про захист даних (GDPR ЄС) та угоді «Щит конфіденційності» між ЄС та США.
@@ -668,15 +669,15 @@ catro-notifications:
   noReactions: "Схоже, у вас немає сповіщень про реакцію."
   noRemixes: "Схоже, у вас немає сповіщень про ремікс."
   comment:
-    message: 'User %user_link% commented on your project %program_link%.'
+    message: '%user_link% прокоментував %program_link%.'
   like:
-    message: 'User %user_link% reacted to your project %program_link%.'
+    message: '%user_link% відреагував на %program_link%.'
   follow:
-    message: 'User %user_link% follows you now.'
+    message: '%user_link% підписався на вас.'
   program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+    message: '%user_link% створив нову гру %program_link%.'
   remix:
-    message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
+    message: '%user_link% створив ремікс %program_link% вашої гри %remix_program_link%.'
 clipboard:
   success_project: Посилання на проєкт, скопійовано до буфера обміну!
   success_user: Посилання на користувача, скопійовано до буфера обміну!
@@ -697,7 +698,7 @@ media-packages:
   download_these_files: зберегти
 flavor:
   pocketcode: Pocket Code
-  pocketalice: Pocket Аліса
+  pocketalice: Pocket Alice
   pocketgalaxy: Galaxy Jam
   phirocode: PhiroCode
   luna: Luna & Cat
@@ -706,7 +707,7 @@ copyright: 'Авторське право &copy; %year% <a href="http://www.catr
 agree: Згоден
 disagree: Не згоден
 profileLoader:
-  noProfiles: На даний момент немає профілів.
+  noProfiles: На цей час немає профілів.
 element: 'Елемент'
 elements: 'Елементи'
 share:
@@ -784,7 +785,7 @@ tags:
   title: '{0} |{1} Мітка |] 1,INF] Мітки'
   tag:
     game:
-      title: Ігра
+      title: Гра
     animation:
       title: Анімація
     story:
@@ -796,7 +797,7 @@ tags:
     experimental:
       title: Експериментальний
     tutorial:
-      title: Підручник
+      title: Посібник
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
@@ -820,11 +821,11 @@ studio:
     private: 'приватний'
     join: 'Приєднатися'
     leave: 'Покинути'
-    showMore: 'показати більше'
-    showLess: 'показати менше'
+    showMore: 'Показати більше'
+    showLess: 'Показати менше'
     remove_project: 'Видалити зі студії'
     remove_project_error: 'Не вдалося видалити проєкт зі студії!'
-    remove_project_success: 'проєкт успішно видалено зі студії!'
+    remove_project_success: 'Проєкт успішно видалено зі студії!'
     no_projects: 'Студія ще не містить жодних проєктів'
     updateCoverError: 'Щось пішло не так під час оновлення обкладинки студії!'
     projects:
@@ -839,7 +840,7 @@ studio:
       post_error: 'Щось пішло не так, коли ви публікували свій коментар. Повторіть спробу пізніше.'
       delete_error: 'Щось пішло не так при видаленні коментаря. Повторіть спробу пізніше.'
     activity_list:
-      title: 'Дії'
+      title: 'Діяльність'
       join_studio: '%user% приєднався до студії.'
       add_project: '%user% залишив коментар.'
       add_comment: '%user% додав проєкт.'
@@ -848,7 +849,7 @@ studio:
       project_count: '{0} Немає студійних проєктів |{1} 1 студійний проєкт |] 1,Inf] %count% студійних проєктів'
       promote_member: 'Підвищити учасника до адміністратора'
       promotion_failed: 'Щось пішло не так під час підвищування цього учасника. Повторіть спробу пізніше.'
-      ban_member: 'Заборонити учаснику студії'
+      ban_member: 'Заблокувати учасника в студії'
       ban_failed: 'Щось пішло не так, при спробі заблокувати цього учасника. Повторіть спробу пізніше.'
     admin_settings:
       title: 'Загальні параметри'
@@ -866,4 +867,4 @@ media_library:
       movie: 'Тип: відео'
       default: 'Тип: невідомо'
 snackbar:
-  project_not_found: 'Запитаний проєкт недоступний'
+  project_not_found: 'Потрібний проєкт недоступний'
