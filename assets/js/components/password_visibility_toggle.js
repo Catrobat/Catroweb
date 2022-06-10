@@ -2,8 +2,15 @@ import $ from 'jquery'
 
 export class PasswordVisibilityToggle {
   constructor (selector = '.password-toggle') {
-    this.$toggleButton = $(selector)
-    this.initListeners()
+    for (const element of document.querySelectorAll(selector)) {
+      new SinglePasswordVisibilityToggle(element).initListeners()
+    }
+  }
+}
+
+class SinglePasswordVisibilityToggle {
+  constructor (ref) {
+    this.$toggleButton = $(ref)
   }
 
   initListeners () {

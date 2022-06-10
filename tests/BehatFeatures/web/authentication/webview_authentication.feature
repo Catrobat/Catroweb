@@ -13,14 +13,14 @@ Feature: Users should be logged in automatically when they are logged in in the 
     Given I set the cookie "CATRO_LOGIN_TOKEN" to "cafe000000deadbeef1111affe227357"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should see "My Profile"
-    Then I should see "dev1@catrob.at"
+    Then the "#top-app-bar__title" element should contain "My Profile"
+    And the ".profile__basic-info__text__name" element should contain "Catrobat"
+    And the "profile-email__input" field should contain "dev1@catrob.at"
 
   Scenario: Log in using Catrobat user with wrong token
     Given I set the cookie "CATRO_LOGIN_TOKEN" to "deadbeef"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should not see "dev1@catrob.at"
     Then I should not see "My Profile"
     And I should be on "/app/login"
 
@@ -60,4 +60,4 @@ Feature: Users should be logged in automatically when they are logged in in the 
     And I go to "/app/user"
     And I wait for the page to be loaded
     Then I should see "My Profile"
-    Then I should see "dev2@catrob.at"
+    And the "profile-email__input" field should contain "dev2@catrob.at"

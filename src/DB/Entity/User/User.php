@@ -257,6 +257,16 @@ class User extends BaseUser
    */
   protected Collection $program_inappropriate_reports;
 
+  /**
+   * @ORM\Column(type="text", length=65535, nullable=true)
+   */
+  protected ?string $about = null;
+
+  /**
+   * @ORM\Column(type="string", length=255, nullable=true)
+   */
+  protected ?string $currentlyWorkingOn = null;
+
   public function __construct()
   {
     $this->programs = new ArrayCollection();
@@ -573,5 +583,25 @@ class User extends BaseUser
     $app_env = $_ENV['APP_ENV'];
 
     return 'prod' !== $app_env || $this->verified;
+  }
+
+  public function getAbout(): ?string
+  {
+    return $this->about;
+  }
+
+  public function setAbout(?string $about): void
+  {
+    $this->about = $about;
+  }
+
+  public function getCurrentlyWorkingOn(): ?string
+  {
+    return $this->currentlyWorkingOn;
+  }
+
+  public function setCurrentlyWorkingOn(?string $currentlyWorkingOn): void
+  {
+    $this->currentlyWorkingOn = $currentlyWorkingOn;
   }
 }

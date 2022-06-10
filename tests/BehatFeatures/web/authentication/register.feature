@@ -84,7 +84,7 @@ Feature:
     And I wait 2000 milliseconds
     Then I should be on "/app/"
     When I am on "app/user"
-    Then I should see "My projects"
+    Then the "#top-app-bar__title" element should contain "My Profile"
 
   Scenario: The password should be hidden as default behaviour
     Given I am on "/app/register"

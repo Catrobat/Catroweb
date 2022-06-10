@@ -36,6 +36,12 @@
 
         </div>
     </div>
+{% elseif app.request.pathinfo ends with '/user' %}
+    <button id="top-app-bar__btn-settings" data-bs-toggle="modal" data-bs-target="#user-settings-modal"
+            class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+            aria-label="{{ 'myprofile.userSettings'|trans({}, 'catroweb') }}">
+        settings
+    </button>
 {% endif %}
 
 

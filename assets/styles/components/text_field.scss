@@ -32,3 +32,15 @@ input:-webkit-autofill:active {
 .mdc-text-field-helper-text--validation-msg {
   color: var(--mdc-theme-error, #b00020) !important;
 }
+
+.mdc-text-field--textarea.mdc-text-field--with-leading-icon {
+  .mdc-text-field__icon {
+    position: absolute;
+    left: 0;
+    top: 13px;
+  }
+
+  .mdc-text-field__input {
+    padding-left: 48px;
+  }
+}
