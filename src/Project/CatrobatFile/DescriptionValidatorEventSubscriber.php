@@ -2,13 +2,12 @@
 
 namespace App\Project\CatrobatFile;
 
+use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Project\Event\ProgramBeforeInsertEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DescriptionValidatorEventSubscriber implements EventSubscriberInterface
 {
-  private int $max_description_size = 10_000;
-
   public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
@@ -16,7 +15,7 @@ class DescriptionValidatorEventSubscriber implements EventSubscriberInterface
 
   public function validate(ExtractedCatrobatFile $file): void
   {
-    if (strlen($file->getDescription()) > $this->max_description_size) {
+    if (strlen($file->getDescription()) > ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH) {
       throw new InvalidCatrobatFileException('errors.description.toolong', 527);
     }
   }

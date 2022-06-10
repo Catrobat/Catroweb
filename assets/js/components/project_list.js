@@ -8,7 +8,7 @@ export class ProjectList {
     this.container = container
     this.projectsContainer = $('.projects-container', container)
     this.category = category
-    this.apiUrl = apiUrl
+    this.apiUrl = apiUrl.includes('?') ? apiUrl + '&' : apiUrl + '?'
     this.propertyToShow = propertyToShow
     this.projectsLoaded = 0
     this.projectFetchCount = fetchCount
@@ -27,6 +27,10 @@ export class ProjectList {
       self.closeFullView()
     }
 
+    let attributes = 'id,name,project_url,screenshot_small,screenshot_large,'
+    attributes += this.propertyToShow === 'uploaded' ? 'uploaded_string' : this.propertyToShow
+    this.apiUrl += 'attributes=' + attributes + '&'
+
     this.fetchMore(true)
     this._initListeners()
   }
@@ -39,11 +43,7 @@ export class ProjectList {
     this.fetchActive = true
     const self = this
 
-    if (!this.apiUrl.includes('?')) {
-      this.apiUrl += '?'
-    }
-
-    $.getJSON(this.apiUrl + '&limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded,
+    $.getJSON(this.apiUrl + 'limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded,
       function (data) {
         if (!Array.isArray(data)) {
           console.error('Data received for ' + self.category + ' is no array!')
@@ -119,7 +119,7 @@ export class ProjectList {
       author: 'person'
     }
 
-    const propertyValue = this.propertyToShow === 'downloads' ? data.download : this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
+    const propertyValue = this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
     $('<i/>', { class: 'material-icons' }).text(icons[this.propertyToShow]).appendTo($prop)
     $('<span/>', { class: 'project-list__project__property__value' }).text(propertyValue).appendTo($prop)
     return $p

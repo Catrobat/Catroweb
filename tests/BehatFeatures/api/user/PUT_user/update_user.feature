@@ -89,11 +89,34 @@ Feature: Update user
     And I have the following JSON request body:
     """
       {
+        "currentPassword": "12345",
         "password": "123456"
       }
     """
     And I request "PUT" "/api/user"
     Then the response code should be "204"
+    And the following users exist in the database:
+      | name     | password |
+      | Catrobat | 123456   |
+
+  Scenario: Update user password without current password
+    Given I use a valid JWT Bearer token for "Catrobat"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "password": "123456"
+      }
+    """
+    And I request "PUT" "/api/user"
+    Then the response code should be "422"
+    And I should get the json object:
+    """
+      {
+        "currentPassword": "Current password is missing"
+      }
+    """
 
   Scenario: Update user password with invalid password
     Given I use a valid JWT Bearer token for "Catrobat"
@@ -103,6 +126,7 @@ Feature: Update user
     """
       {
         "dry-run": false,
+        "currentPassword": "12345",
         "password": ""
       }
     """

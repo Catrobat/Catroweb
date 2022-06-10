@@ -10,6 +10,9 @@ use App\Project\Event\ProjectDownloadEvent;
 use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
+use OpenAPI\Server\Model\ProjectResponse;
+use OpenAPI\Server\Model\UpdateProjectErrorResponse;
+use OpenAPI\Server\Model\UpdateProjectFailureResponse;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
@@ -24,10 +27,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
   /**
    * {@inheritdoc}
-   *
-   * @throws Exception
    */
-  public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -37,7 +38,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     }
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectDataResponse($project);
+    $response = $this->facade->getResponseManager()->createProjectDataResponse($project, null);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -47,12 +48,63 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): UpdateProjectFailureResponse|UpdateProjectErrorResponse|null
+  {
+    $project = $this->facade->getLoader()->findProjectByID($id, true);
+    if (is_null($project)) {
+      $responseCode = Response::HTTP_NOT_FOUND;
+
+      return null;
+    }
+
+    $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
+    if (is_null($user)) {
+      $responseCode = Response::HTTP_UNAUTHORIZED;
+
+      return null;
+    }
+
+    if (!is_null($project->getUser()) && $project->getUser() !== $user) {
+      // project needs to be owned by the logged-in user
+      $responseCode = Response::HTTP_FORBIDDEN;
+
+      return null;
+    }
+
+    $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($update_project_request, $accept_language);
+
+    if ($validation_wrapper->hasError()) {
+      $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
+      $error_response = new UpdateProjectErrorResponse($validation_wrapper->getErrors());
+      $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+      $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+      return $error_response;
+    }
+
+    $result = $this->facade->getProcessor()->updateProject($project, $update_project_request);
+    if (true === $result) {
+      $responseCode = Response::HTTP_NO_CONTENT;
+
+      return null;
+    }
+    $responseCode = Response::HTTP_INTERNAL_SERVER_ERROR;
+    $error_response = $this->facade->getResponseManager()->createUpdateFailureResponse($result, $accept_language);
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $error_response;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function projectsFeaturedGet(string $platform, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $featured_projects = $this->facade->getLoader()->getFeaturedProjects($flavor, $limit, $offset, $platform, $max_version);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createFeaturedProjectsResponse($featured_projects);
+    $response = $this->facade->getResponseManager()->createFeaturedProjectsResponse($featured_projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -62,9 +114,9 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    *
-   * @throws Exception
+   * @throws \JsonException
    */
-  public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsGet(string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
@@ -83,7 +135,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $projects = $this->facade->getLoader()->getProjectsFromCategory($category, $max_version, $limit, $offset, $flavor, $user);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
     $this->facade->getResponseManager()->cacheResponse($cache_id, $responseCode, $responseHeaders, $response);
@@ -94,7 +146,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectIdRecommendationsGet(string $id, string $category, string $accept_language, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -108,7 +160,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     );
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($recommended_projects);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($recommended_projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -170,15 +222,13 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
   /**
    * {@inheritdoc}
-   *
-   * @throws Exception
    */
-  public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $programs = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($programs);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($programs, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -188,9 +238,9 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    *
-   * @throws Exception
+   * @throws \JsonException
    */
-  public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsCategoriesGet(string $max_version, string $flavor, string $accept_language, int &$responseCode, array &$responseHeaders): array
   {
     $limit = 20;
     $offset = 0;
@@ -225,10 +275,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
   /**
    * {@inheritdoc}
-   *
-   * @throws Exception
    */
-  public function projectsUserGet(string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsUserGet(string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {
@@ -240,7 +288,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $user_projects = $this->facade->getLoader()->getUserProjects($user->getId(), $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($user_projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -249,10 +297,8 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
   /**
    * {@inheritdoc}
-   *
-   * @throws Exception
    */
-  public function projectsUserIdGet(string $id, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsUserIdGet(string $id, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): ?array
   {
     if (!$this->facade->getRequestValidator()->validateUserExists($id)) {
       $responseCode = Response::HTTP_NOT_FOUND;
@@ -263,7 +309,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $projects = $this->facade->getLoader()->getUserPublicPrograms($id, $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -300,7 +346,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsExtensionsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsExtensionsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array
   {
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
@@ -317,7 +363,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
   /**
    * {@inheritdoc}
    */
-  public function projectsTagsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsTagsGet(string $accept_language, int &$responseCode, array &$responseHeaders): array
   {
     $locale = $this->facade->getResponseManager()->sanitizeLocale($accept_language);
 
@@ -369,14 +415,5 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     );
 
     return $response;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
-  {
-    // TODO: Implement projectIdPut() method.
-    return null;
   }
 }

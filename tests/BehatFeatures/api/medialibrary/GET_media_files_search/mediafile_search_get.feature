@@ -61,23 +61,11 @@ Feature: Get data from the media library in json format
     [
       {
         "id": 1,
-        "name": "Dog 1",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "Bob Schmidt",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/1"
+        "name": "Dog 1"
       },
       {
         "id": 2,
-        "name": "Dog 2",
-        "flavors": ["pocketcode"],
-        "packages": ["Sounds"],
-        "category": "Fantasy",
-        "author": "",
-        "extension": "mpga",
-        "download_url": "http:\/\/localhost\/app\/download-media\/2"
+        "name": "Dog 2"
       }
     ]
     """
@@ -94,23 +82,11 @@ Feature: Get data from the media library in json format
     [
         {
           "id": 2,
-          "name": "Dog 2",
-          "flavors": ["pocketcode"],
-          "packages": ["Sounds"],
-          "category": "Fantasy",
-          "author": "",
-          "extension": "mpga",
-          "download_url": "http:\/\/localhost\/app\/download-media\/2"
+          "name": "Dog 2"
         },
         {
           "id": 6,
-          "name": "Metroid",
-          "flavors": ["pocketcode"],
-          "packages": ["Looks"],
-          "category": "Space",
-          "author": "Jennifer Shawn",
-          "extension": "png",
-          "download_url": "http:\/\/localhost\/app\/download-media\/6"
+          "name": "Metroid"
         }
     ]
     """
@@ -125,13 +101,27 @@ Feature: Get data from the media library in json format
     [
       {
         "id": 5,
+        "name": "Ape"
+      }
+    ]
+    """
+
+  Scenario: Searching files in the media library for "Ape" with specific attributes
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "query" with value "Ape"
+    And I have a parameter "attributes" with value "id,name,flavors,extension,size,file_type"
+    And I request "GET" "/api/media/files/search"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+    [
+      {
+        "id": 5,
         "name": "Ape",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
         "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+        "size": 67843,
+        "file_type": "image"
       }
     ]
     """
@@ -161,6 +151,7 @@ Feature: Get data from the media library in json format
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "query" with value "Cat"
     And I have a parameter "flavor" with value "luna"
+    And I have a parameter "attributes" with value "id,name,flavors,category"
     And I request "GET" "/api/media/files/search"
     Then the response status code should be "200"
     And I should get the json object:
@@ -170,11 +161,7 @@ Feature: Get data from the media library in json format
         "id": 4,
         "name": "Cat",
         "flavors": ["luna"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "category": "Animals"
       }
     ]
     """

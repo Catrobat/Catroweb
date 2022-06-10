@@ -2,6 +2,7 @@
 
 namespace App\Application\Controller\Project;
 
+use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
@@ -50,10 +51,7 @@ class ProgramController extends AbstractController
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly ProgramFileRepository $file_repository,
     private readonly TranslationDelegate $translation_delegate,
-    private readonly EntityManagerInterface $entity_manager,
-    private readonly string $max_name_upload_size,
-    private readonly string $max_description_upload_size,
-    private readonly string $max_notes_and_credits_upload_size
+    private readonly EntityManagerInterface $entity_manager
   ) {
   }
 
@@ -104,8 +102,8 @@ class ProgramController extends AbstractController
       'program_details' => $program_details,
       'my_program' => $my_program,
       'logged_in' => $logged_in,
-      'max_name_size' => $this->max_name_upload_size,
-      'max_description_size' => $this->max_description_upload_size,
+      'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
+      'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
     ]);
   }
@@ -249,9 +247,8 @@ class ProgramController extends AbstractController
   #[Route(path: '/editProjectName/{id}', name: 'edit_program_name', methods: ['PUT'])]
   public function editProgramName(Request $request, string $id): Response
   {
-    $max_name_size = (int) $this->max_name_upload_size;
     $value = (string) $request->request->get('value');
-    if (strlen($value) > $max_name_size) {
+    if (strlen($value) > ProjectsRequestValidator::MAX_NAME_LENGTH) {
       return new Response(
           $this->translator->trans('programs.tooLongName', [], 'catroweb'),
           Response::HTTP_UNPROCESSABLE_ENTITY
@@ -282,14 +279,16 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @deprecated Use new API
+   * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
+   *
    * @throws Exception
    */
   #[Route(path: '/editProjectDescription/{id}', name: 'edit_program_description', methods: ['PUT'])]
   public function editProgramDescription(Request $request, string $id): Response
   {
-    $max_description_size = (int) $this->max_description_upload_size;
     $value = (string) $request->request->get('value');
-    if (strlen($value) > $max_description_size) {
+    if (strlen($value) > ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH) {
       return new JsonResponse(['statusCode' => 527,
         'message' => $this->translator
           ->trans('programs.tooLongDescription', [], 'catroweb'), ]);
@@ -319,14 +318,16 @@ class ProgramController extends AbstractController
   }
 
   /**
+   * @deprecated Use new API
+   * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
+   *
    * @throws Exception
    */
   #[Route(path: '/editProjectCredits/{id}', name: 'edit_program_credits', methods: ['PUT'])]
   public function editProgramCredits(Request $request, string $id): Response
   {
-    $max_credits_size = (int) $this->max_notes_and_credits_upload_size;
     $value = (string) $request->request->get('value');
-    if (strlen($value) > $max_credits_size) {
+    if (strlen($value) > ProjectsRequestValidator::MAX_CREDITS_LENGTH) {
       return new JsonResponse(['statusCode' => 707,
         'message' => $this->translator
           ->trans('programs.tooLongCredits', [], 'catroweb'), ]);

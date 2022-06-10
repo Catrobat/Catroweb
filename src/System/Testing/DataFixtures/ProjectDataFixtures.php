@@ -9,12 +9,14 @@ use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
 use App\Project\Apk\ApkRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\ProgramManager;
 use App\Storage\FileHelper;
 use App\User\UserManager;
 use DateTime;
 use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
+use PHPUnit\Framework\Assert;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -33,7 +35,7 @@ class ProjectDataFixtures
 
   private static int $number_of_projects = 0;
 
-  public function __construct(private readonly UserManager $user_manager,
+  public function __construct(private readonly UserManager $user_manager, private readonly ProgramManager $program_manager,
                               private readonly EntityManagerInterface $entity_manager, private readonly ProgramFileRepository $project_file_repository,
                               private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
                               ParameterBagInterface $parameter_bag)
@@ -142,6 +144,53 @@ class ProjectDataFixtures
     FileHelper::setDirectoryPermissionsRecursive($this->EXTRACT_DIR.$project->getId(), 0777);
 
     return $project;
+  }
+
+  public function assertProject(array $config = []): void
+  {
+    Assert::assertNotNull($config['id'], 'Project ID needs to be specified.');
+    $project = $this->program_manager->find($config['id']);
+    Assert::assertNotNull($project, 'Project with id '.$config['id'].' not found.');
+
+    if (isset($config['name'])) {
+      Assert::assertEquals($config['name'], $project->getName(), 'Project name wrong.');
+    }
+    if (isset($config['author'])) {
+      $author = $project->getUser() ? $project->getUser()->getUserIdentifier() : 'null';
+      Assert::assertEquals($config['author'], $author, 'Project author wrong.');
+    }
+    if (isset($config['description'])) {
+      Assert::assertEquals($config['description'], $project->getDescription(), 'Project description wrong.');
+    }
+    if (isset($config['credits'])) {
+      Assert::assertEquals($config['credits'], $project->getCredits(), 'Project credits wrong.');
+    }
+    if (isset($config['version'])) {
+      Assert::assertEquals($config['version'], $project->getCatrobatVersionName(), 'Project version wrong.');
+    }
+    if (isset($config['views'])) {
+      Assert::assertEquals($config['views'], $project->getViews(), 'Project view count wrong.');
+    }
+    if (isset($config['downloads'])) {
+      Assert::assertEquals($config['downloads'], $project->getDownloads(), 'Project download count wrong.');
+    }
+    if (isset($config['reactions'])) {
+      Assert::assertEquals($config['reactions'], $project->getLikes()->count(), 'Project reaction count wrong.');
+    }
+    if (isset($config['comments'])) {
+      Assert::assertEquals($config['comments'], $project->getComments()->count(), 'Project comment count wrong.');
+    }
+    if (isset($config['private'])) {
+      $private = 'true' === strtolower($config['private']);
+      Assert::assertEquals($private, $project->getPrivate(), 'Project private flag wrong.');
+    }
+    if (isset($config['visible'])) {
+      $visible = 'true' === strtolower($config['visible']);
+      Assert::assertEquals($visible, $project->getVisible(), 'Project visible flag wrong.');
+    }
+    if (isset($config['flavor'])) {
+      Assert::assertEquals($config['flavor'], $project->getFlavor(), 'Project flavor wrong.');
+    }
   }
 
   public static function clear(): void

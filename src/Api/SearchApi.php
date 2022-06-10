@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Search\SearchApiFacade;
 use OpenAPI\Server\Api\SearchApiInterface;
+use OpenAPI\Server\Model\SearchResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class SearchApi extends AbstractApiController implements SearchApiInterface
@@ -16,9 +17,9 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
   /**
    * {@inheritDoc}
    *
-   * @throws \Exception
+   * @throws \JsonException
    */
-  public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|object|null
+  public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|SearchResponse
   {
     if ('' === $query || ctype_space($query)) {
       return [];

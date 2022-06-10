@@ -6,7 +6,6 @@ use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\User\Notification\NotificationManager;
-use Exception;
 
 final class NotificationsApiProcessor extends AbstractApiProcessor
 {
@@ -25,9 +24,6 @@ final class NotificationsApiProcessor extends AbstractApiProcessor
     return true;
   }
 
-  /**
-   * @throws Exception
-   */
   public function markAllAsSeen(User $user): void
   {
     $this->notification_repository->markAllNotificationsFromUserAsSeen($user);

@@ -31,7 +31,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationPost(LoginRequest $login_request, int &$responseCode, array &$responseHeaders): array|object|null
+  public function authenticationPost(LoginRequest $login_request, int &$responseCode, array &$responseHeaders): JWTResponse
   {
     // Login Process & token creation is handled by LexikJWTAuthenticationBundle
     // Successful requests are NOT passed to this method. This method will never be called.
@@ -57,7 +57,7 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   /**
    * {@inheritdoc}
    */
-  public function authenticationRefreshPost(RefreshRequest $refresh_request, int &$responseCode, array &$responseHeaders): array|object|null
+  public function authenticationRefreshPost(RefreshRequest $refresh_request, int &$responseCode, array &$responseHeaders): JWTResponse
   {
     // Refresh token process is handled by JWTRefreshTokenBundle
     // Successful requests are NOT passed to this method. This method will never be called.

@@ -2,7 +2,7 @@ import $ from 'jquery'
 import { showSnackbar } from './components/snackbar'
 
 import { MDCChipSet } from '@material/chips'
-import { getCookie } from './security/CookieHelper'
+import { ApiFetch } from './api/ApiHelper'
 const chipset = new MDCChipSet(document.querySelector('.mdc-chip-set'))
 const tabPaneElements = document.querySelectorAll('.tab-pane')
 
@@ -310,12 +310,7 @@ class UserNotifications {
   markAllRead () {
     const self = this
 
-    fetch(self.markAllSeen, {
-      method: 'PUT',
-      headers: new Headers({
-        Authorization: 'Bearer ' + getCookie('BEARER')
-      })
-    })
+    new ApiFetch(self.markAllSeen, 'PUT').generateAuthenticatedFetch()
       .then(() => self.hideBadge())
       .catch((error) => {
         self.handleError(error)

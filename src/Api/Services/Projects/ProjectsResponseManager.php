@@ -12,17 +12,18 @@ use App\DB\Entity\Project\Tag;
 use App\Project\ProgramManager;
 use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
+use DateTimeInterface;
 use Exception;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\ProjectsCategory;
 use OpenAPI\Server\Model\TagResponse;
+use OpenAPI\Server\Model\UpdateProjectFailureResponse;
 use OpenAPI\Server\Model\UploadErrorResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -44,115 +45,183 @@ final class ProjectsResponseManager extends AbstractResponseManager
   }
 
   /**
-   * @param mixed $program
-   *
-   * @throws Exception
+   * @param ?string $attributes Comma-separated list of attributes to include into response
    */
-  public function createProjectDataResponse($program): ProjectResponse
+  public function createProjectDataResponse(Program $program, ?string $attributes): ProjectResponse
   {
+    if (empty($attributes)) {
+      $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
+    } else {
+      $attributes_list = explode(',', $attributes);
+    }
+
     /** @var Program $project */
     $project = $program->isExample() ? $program->getProgram() : $program;
 
-    $tags = [];
-    $project_tags = $project->getTags();
-    /** @var Tag $tag */
-    foreach ($project_tags as $tag) {
-      $tags[$tag->getId()] = $tag->getInternalTitle();
-    }
+    $data = [];
 
-    return new ProjectResponse([
-      'id' => $project->getId(),
-      'name' => $project->getName(),
-      'author' => $project->getUser()->getUserIdentifier(),
-      'description' => $project->getDescription(),
-      'version' => $project->getCatrobatVersionName(),
-      'views' => $project->getViews(),
-      'downloads' => $project->getDownloads(),
-      'reactions' => 0,
-      'comments' => 0,
-      'private' => $project->getPrivate(),
-      'flavor' => $project->getFlavor(),
-      'tags' => $tags,
-      'uploaded' => $project->getUploadedAt()->getTimestamp(),
-      'uploaded_string' => $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp()),
-      'screenshot_large' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotLarge($project->getId()),
-      'screenshot_small' => $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotSmall($project->getId()),
-      'project_url' => ltrim($this->url_generator->generate(
+    if (in_array('id', $attributes_list, true)) {
+      $data['id'] = $project->getId();
+    }
+    if (in_array('name', $attributes_list, true)) {
+      $data['name'] = $project->getName();
+    }
+    if (in_array('author', $attributes_list, true)) {
+      $data['author'] = $project->getUser()->getUserIdentifier();
+    }
+    if (in_array('description', $attributes_list, true)) {
+      $data['description'] = $project->getDescription();
+    }
+    if (in_array('credits', $attributes_list, true)) {
+      $data['credits'] = $project->getCredits();
+    }
+    if (in_array('version', $attributes_list, true)) {
+      $data['version'] = $project->getCatrobatVersionName();
+    }
+    if (in_array('views', $attributes_list, true)) {
+      $data['views'] = $project->getViews();
+    }
+    if (in_array('downloads', $attributes_list, true)) {
+      $data['downloads'] = $project->getDownloads();
+    }
+    if (in_array('reactions', $attributes_list, true)) {
+      $data['reactions'] = $project->getLikes()->count();
+    }
+    if (in_array('comments', $attributes_list, true)) {
+      $data['comments'] = $project->getComments()->count();
+    }
+    if (in_array('private', $attributes_list, true)) {
+      $data['private'] = $project->getPrivate();
+    }
+    if (in_array('flavor', $attributes_list, true)) {
+      $data['flavor'] = $project->getFlavor();
+    }
+    if (in_array('tags', $attributes_list, true)) {
+      $tags = [];
+      $project_tags = $project->getTags();
+      /** @var Tag $tag */
+      foreach ($project_tags as $tag) {
+        $tags[$tag->getId()] = $tag->getInternalTitle();
+      }
+      $data['tags'] = $tags;
+    }
+    if (in_array('uploaded', $attributes_list, true)) {
+      $data['uploaded'] = $project->getUploadedAt()->getTimestamp();
+    }
+    if (in_array('uploaded_string', $attributes_list, true)) {
+      try {
+        $data['uploaded_string'] = $this->time_formatter->getElapsedTime($project->getUploadedAt()->getTimestamp());
+      } catch (Exception) {
+        $data['uploaded_string'] = $project->getUploadedAt()->format(DateTimeInterface::RFC2822);
+      }
+    }
+    if (in_array('screenshot_large', $attributes_list, true)) {
+      $data['screenshot_large'] = $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotLarge($project->getId());
+    }
+    if (in_array('screenshot_small', $attributes_list, true)) {
+      $data['screenshot_small'] = $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotSmall($project->getId());
+    }
+    if (in_array('project_url', $attributes_list, true)) {
+      $data['project_url'] = ltrim($this->url_generator->generate(
         'program',
         [
           'theme' => $this->parameter_bag->get('umbrellaTheme'),
           'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'
-      ),
-      'download_url' => ltrim($this->url_generator->generate(
+    );
+    }
+    if (in_array('download_url', $attributes_list, true)) {
+      $data['download_url'] = ltrim($this->url_generator->generate(
         'open_api_server_projects_projectidcatrobatget',
         [
           'id' => $project->getId(),
         ],
-        UrlGeneratorInterface::ABSOLUTE_URL), '/'),
-      'filesize' => ($project->getFilesize() / 1_048_576),
-    ]);
+        UrlGeneratorInterface::ABSOLUTE_URL), '/');
+    }
+    if (in_array('filesize', $attributes_list, true)) {
+      $data['filesize'] = ($project->getFilesize() / 1_048_576);
+    }
+
+    return new ProjectResponse($data);
   }
 
-  /**
-   * @throws Exception
-   */
-  public function createProjectsDataResponse(array $projects): array
+  public function createProjectsDataResponse(array $projects, ?string $attributes = null): array
   {
     $response = [];
     foreach ($projects as $project) {
-      $response[] = $this->createProjectDataResponse($project);
+      $response[] = $this->createProjectDataResponse($project, $attributes);
     }
 
     return $response;
   }
 
-  public function createFeaturedProjectResponse(FeaturedProgram $featured_project): FeaturedProjectResponse
+  public function createFeaturedProjectResponse(FeaturedProgram $featured_project, ?string $attributes = null): FeaturedProjectResponse
   {
-    $url = $featured_project->getUrl();
-    $project_url = ltrim($this->url_generator->generate(
-        'program',
-        [
-          'theme' => $this->parameter_bag->get('umbrellaTheme'),
-          'id' => $featured_project->getProgram()->getId(),
-        ],
-        UrlGeneratorInterface::ABSOLUTE_URL), '/'
-      );
-
-    if (empty($url)) {
-      $url = $project_url;
+    if (empty($attributes)) {
+      $attributes_list = ['project_id', 'name'];
     } else {
-      $project_url = null;
+      $attributes_list = explode(',', $attributes);
     }
 
-    return new FeaturedProjectResponse([
-      'id' => $featured_project->getId(),
-      'project_id' => $featured_project->getProgram()->getId(),
-      'project_url' => $project_url,
-      'url' => $url,
-      'name' => $featured_project->getProgram()->getName(),
-      'author' => $featured_project->getProgram()->getUser()->getUserIdentifier(),
-      'featured_image' => $this->image_repository->getAbsoluteWebPath($featured_project->getId(), $featured_project->getImageType(), true),
-    ]);
+    $data = [];
+    if (in_array('id', $attributes_list, true)) {
+      $data['id'] = $featured_project->getId();
+    }
+    if (in_array('project_id', $attributes_list, true)) {
+      $data['project_id'] = $featured_project->getProgram()->getId();
+    }
+    if (in_array('name', $attributes_list, true)) {
+      $data['name'] = $featured_project->getProgram()->getName();
+    }
+    if (in_array('author', $attributes_list, true)) {
+      $data['author'] = $featured_project->getProgram()->getUser()->getUserIdentifier();
+    }
+    if (in_array('featured_image', $attributes_list, true)) {
+      $data['featured_image'] = $this->image_repository->getAbsoluteWebPath($featured_project->getId(), $featured_project->getImageType(), true);
+    }
+
+    if (in_array('url', $attributes_list, true) || in_array('project_url', $attributes_list, true)) {
+      $url = $featured_project->getUrl();
+      $project_url = null;
+      if (empty($url)) {
+        $url = $project_url = ltrim($this->url_generator->generate(
+            'program',
+            [
+              'theme' => $this->parameter_bag->get('umbrellaTheme'),
+              'id' => $featured_project->getProgram()->getId(),
+            ],
+            UrlGeneratorInterface::ABSOLUTE_URL), '/'
+        );
+      }
+
+      if (in_array('project_url', $attributes_list, true)) {
+        $data['project_url'] = $project_url;
+      }
+      if (in_array('url', $attributes_list, true)) {
+        $data['url'] = $url;
+      }
+    }
+
+    return new FeaturedProjectResponse($data);
   }
 
-  public function createFeaturedProjectsResponse(array $featured_projects): array
+  public function createFeaturedProjectsResponse(array $featured_projects, ?string $attributes = null): array
   {
     $response = [];
 
     /** @var FeaturedProgram $featured_project */
     foreach ($featured_projects as $featured_project) {
-      $response[] = $this->createFeaturedProjectResponse($featured_project);
+      $response[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
     }
 
     return $response;
   }
 
-  public function createProjectCategoryResponse(array $projects, string $category, string $locale): ProjectsCategory
+  public function createProjectCategoryResponse(array $projects, string $category, string $locale, ?string $attributes = null): ProjectsCategory
   {
     return new ProjectsCategory([
-      'projects_list' => $this->createProjectsDataResponse($projects),
+      'projects_list' => $this->createProjectsDataResponse($projects, $attributes),
       'type' => $category,
       'name' => $this->__('category.'.$category, [], $locale),
     ]);
@@ -166,7 +235,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
         'theme' => $this->parameter_bag->get('umbrellaTheme'),
         'id' => $project->getId(),
       ],
-      UrlGenerator::ABSOLUTE_URL);
+      UrlGeneratorInterface::ABSOLUTE_URL);
   }
 
   public function createUploadErrorResponse(string $locale): UploadErrorResponse
@@ -224,5 +293,21 @@ final class ProjectsResponseManager extends AbstractResponseManager
     );
 
     return $response;
+  }
+
+  public function createUpdateFailureResponse(int $failure, string $locale): UpdateProjectFailureResponse
+  {
+    if (ProjectsApiProcessor::SERVER_ERROR_SAVE_XML === $failure) {
+      return new UpdateProjectFailureResponse([
+        'error' => $this->__('api.updateProject.xmlError', [], $locale),
+      ]);
+    }
+    if (ProjectsApiProcessor::SERVER_ERROR_SCREENSHOT === $failure) {
+      return new UpdateProjectFailureResponse([
+        'error' => $this->__('api.updateProject.screenshotError', [], $locale),
+      ]);
+    }
+
+    return new UpdateProjectFailureResponse();
   }
 }

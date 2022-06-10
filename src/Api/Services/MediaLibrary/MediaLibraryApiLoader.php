@@ -34,7 +34,7 @@ final class MediaLibraryApiLoader extends AbstractApiLoader
   {
     $qb = $this->entity_manager->createQueryBuilder()
       ->select('f')
-      ->from(\App\DB\Entity\MediaLibrary\MediaPackageFile::class, 'f')
+      ->from(MediaPackageFile::class, 'f')
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;

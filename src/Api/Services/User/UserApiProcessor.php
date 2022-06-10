@@ -21,7 +21,6 @@ final class UserApiProcessor extends AbstractApiProcessor
    */
   public function registerUser(RegisterRequest $request): User
   {
-    /** @var User $user */
     $user = $this->user_manager->create();
     $user->setUsername($request->getUsername());
     $user->setEmail($request->getEmail());
@@ -30,6 +29,17 @@ final class UserApiProcessor extends AbstractApiProcessor
     $user->setVerified(false);
     $user->setUploadToken($this->token_generator->generateToken());
     $this->user_manager->updateUser($user);
+
+    if (!empty($request->getPicture())) {
+      // Resize happens in UserRequestValidator::validateAndResizePicture
+      $user->setAvatar($request->getPicture());
+    }
+    if (!empty($request->getAbout())) {
+      // TODO: implement User:about field
+    }
+    if (!empty($request->getCurrentlyWorkingOn())) {
+      // TODO: implement User: get currently working on field
+    }
 
     return $user;
   }
@@ -48,7 +58,21 @@ final class UserApiProcessor extends AbstractApiProcessor
       $user->setUsername($request->getUsername());
     }
     if (!empty($request->getPassword())) {
-      $user->setPassword($request->getPassword());
+      $user->setPlainPassword($request->getPassword());
+    }
+    if (!is_null($request->getPicture())) {
+      if (empty($request->getPicture())) {
+        $user->setAvatar(null);
+      } else {
+        // Resize happens in UserRequestValidator::validateAndResizePicture
+        $user->setAvatar($request->getPicture());
+      }
+    }
+    if (!is_null($request->getAbout())) {
+      // TODO: implement User:about field
+    }
+    if (!is_null($request->getCurrentlyWorkingOn())) {
+      // TODO: implement User: get currently working on field
     }
 
     $this->user_manager->updateUser($user, true);

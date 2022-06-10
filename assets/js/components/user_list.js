@@ -7,7 +7,7 @@ export class UserList {
   constructor (container, baseUrl, apiUrl, theme, projectString, fetchCount = 30, emptyMessage = '') {
     this.container = container
     this.usersContainer = $('.users-container', container)
-    this.apiUrl = apiUrl
+    this.apiUrl = (apiUrl.includes('?') ? apiUrl + '&' : apiUrl + '?') + 'attributes=id,username,picture,projects&'
     this.baseUrl = baseUrl
     this.usersLoaded = 0
     this.userFetchCount = fetchCount
@@ -39,11 +39,7 @@ export class UserList {
     this.fetchActive = true
     const self = this
 
-    if (!this.apiUrl.includes('?')) {
-      this.apiUrl += '?'
-    }
-
-    $.getJSON(this.apiUrl + '&limit=' + this.userFetchCount + '&offset=' + this.usersLoaded,
+    $.getJSON(this.apiUrl + 'limit=' + this.userFetchCount + '&offset=' + this.usersLoaded,
       function (data) {
         if (!Array.isArray(data)) {
           console.error('Data received for users is no array!')
@@ -99,13 +95,17 @@ export class UserList {
 
     const $p = $('<a />', { class: 'user-list__user', href: userUrl })
     $p.data('id', data.id)
-    $('<img/>', {
-      // TODO: use real images
-      'data-src': '/images/default/avatar_default.png?v=3.7.1',
-      'data-srcset': '/images/default/avatar_default.png?v=3.7.1' + ' 80w, ' + '/images/default/avatar_default.png?v=3.7.1' + ' 480w',
-      'data-sizes': '(min-width: 768px) 10vw, 25vw',
-      class: 'lazyload user-list__user__image'
-    }).appendTo($p)
+    if (typeof data.picture === 'string' && data.picture.length > 0) {
+      $('<img />', {
+        src: data.picture,
+        class: 'user-list__user__image'
+      }).appendTo($p)
+    } else {
+      $('<img/>', {
+        'data-src': '/images/default/avatar_default.png?v=3.7.1',
+        class: 'lazyload user-list__user__image'
+      }).appendTo($p)
+    }
     $('<span/>', { class: 'user-list__user__name' }).text(data.username).appendTo($p)
     const $prop = $('<div />', { class: 'lazyload user-list__user__property' })
     $prop.appendTo($p)

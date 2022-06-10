@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Notifications\NotificationsApiFacade;
 use OpenAPI\Server\Api\NotificationsApiInterface;
+use OpenAPI\Server\Model\NotificationsCountResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
@@ -32,7 +33,7 @@ final class NotificationsApi extends AbstractApiController implements Notificati
   /**
    * {@inheritdoc}
    */
-  public function notificationsCountGet(int &$responseCode, array &$responseHeaders): array|object|null
+  public function notificationsCountGet(int &$responseCode, array &$responseHeaders): ?NotificationsCountResponse
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     if (is_null($user)) {

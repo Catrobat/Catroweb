@@ -7,7 +7,6 @@ use App\Api\Services\Projects\ProjectsResponseManager;
 use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
-use Exception;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Model\SearchResponse;
@@ -60,9 +59,6 @@ final class SearchResponseManager extends AbstractResponseManager
     ]);
   }
 
-  /**
-   * @throws Exception
-   */
   public function getProjectsSearchResponse(array $projects, int $total): array
   {
     $projects_data_response = [];
@@ -78,11 +74,8 @@ final class SearchResponseManager extends AbstractResponseManager
     return $projects_data_response;
   }
 
-  /**
-   * @throws Exception
-   */
   public function getProjectDataResponse(Program $program): ProjectResponse
   {
-    return $this->projectsResponseManager->createProjectDataResponse($program);
+    return $this->projectsResponseManager->createProjectDataResponse($program, null);
   }
 }

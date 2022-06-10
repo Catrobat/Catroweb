@@ -49,13 +49,7 @@ Feature: Get data from the media library in json format
     """
     {
       "id": 5,
-      "name": "Ape",
-      "flavors": ["pocketcode"],
-      "packages": ["Looks"],
-      "category": "Animals",
-      "author": "",
-      "extension": "png",
-      "download_url": "http:\/\/localhost\/app\/download-media\/5"
+      "name": "Ape"
     }
     """
 
@@ -67,12 +61,24 @@ Feature: Get data from the media library in json format
     """
     {
       "id": 1,
+      "name": "Dog 1"
+    }
+    """
+
+  Scenario: Getting file with id should return one media file with that exact id with specified attributes
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "attributes" with value "name,id,flavors,file_type,author,size,download_url"
+    And I request "GET" "/api/media/file/1"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+    {
+      "id": 1,
       "name": "Dog 1",
       "flavors": ["pocketcode"],
-      "packages": ["Looks"],
-      "category": "Animals",
       "author": "Bob Schmidt",
-      "extension": "png",
-      "download_url": "http:\/\/localhost\/app\/download-media\/1"
+      "download_url": "http:\/\/localhost\/app\/download-media\/1",
+      "size": 67843,
+      "file_type": "image"
     }
     """
