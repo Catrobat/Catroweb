@@ -527,10 +527,25 @@ api:
     passwordInvalidChars: 'Hasło zawiera nieprawidłowe znaki'
     usernameContainsEmail: "Nazwa użytkownika nie może zawierać adresu e-mail"
     countryCodeInvalid: "Nieprawidłowy kod kraju"
+    pictureInvalid: "Zdjęcie profilowe jest nieprawidłowe lub nie jest obsługiwane"
+  updateUser:
+    currentPasswordMissing: "Brakuje obecnego hasła"
+    currentPasswordWrong: "Bieżące hasło jest nieprawidłowe"
+  project:
+    nameEmpty: 'Nazwa nie może być pusta'
+    nameTooLong: 'Zbyt długa nazwa'
+    descriptionTooLong: 'Zbyt długi opis'
+    creditsTooLong: 'Zbyt długie notatki i kredyty'
+    screenshotInvalid: 'Zrzut ekranu projektu jest nieprawidłowy lub nie jest obsługiwany'
   projectsPost:
     invalid_checksum: 'Nieprawidłowa suma kontrolna. Spróbuj ponownie przesłać!'
     upload_error: 'Błąd podczas wysyłania. Spróbuj ponownie przesłać!'
     creating_error: 'Błąd podczas tworzenia projektu. Spróbuj ponownie przesłać!'
+  updateProject:
+    xmlError: 'Nie udało się zapisać szczegółów projektu.'
+    screenshotError: 'Nie udało się odczytać, zkonwertować lub przechować zrzutu ekranu. Sprawdź wprowadzone dane.'
+    notFound: 'Nie znaleziono projektu do zmiany.'
+    forbidden: 'Zmiana projektu jest niedozwolona. Czy nadal jesteś zalogowany?'
 #languages and countries
 language:
   arabic: Arabski

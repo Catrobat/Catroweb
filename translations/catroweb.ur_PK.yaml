@@ -521,10 +521,25 @@ api:
     passwordInvalidChars: 'پاس ورڈ غلط حروف پر مشتمل ہے'
     usernameContainsEmail: "صارف کا نام ای میل ایڈریس پر مشتمل نہیں ہونا چاہئے."
     countryCodeInvalid: "ملک کا کوڈ غلط"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'غلط چیکس. دوبارہ اپ لوڈ کرنے کی کوشش کریں!'
     upload_error: 'اپ لوڈ کرنے میں خرابی دوبارہ اپ لوڈ کرنے کی کوشش کریں!'
     creating_error: 'پراجیکٹ ادارے بنانے کے دوران خرابی. دوبارہ اپ لوڈ کرنے کی کوشش کریں!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: عربی

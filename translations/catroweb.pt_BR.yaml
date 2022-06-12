@@ -526,10 +526,25 @@ api:
     passwordInvalidChars: 'A senha contém caracteres inválidos'
     usernameContainsEmail: "O nome de usuário não pode conter um endereço de e-mail"
     countryCodeInvalid: "Código do país inválido"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'Checksum inválido. Tente fazer upload novamente!'
     upload_error: 'Erro ao enviar. Tente enviar novamente!'
     creating_error: 'Erro em criar a entidade do projeto. Tente fazer o upload novamente!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: Árabe
