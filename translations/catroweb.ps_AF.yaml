@@ -528,10 +528,25 @@ api:
     passwordInvalidChars: 'پټنوم غلط تورونه لري'
     usernameContainsEmail: "کارن نوم باید د بریښنالیک پته ونه لري"
     countryCodeInvalid: "د هیواد کوډ ناسم دی"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'ناسم چکسم. بیا د پورته کولو هڅه وکړئ!'
     upload_error: 'د پورته کولو په وخت کې تېروتنه. بیا د پورته کولو هڅه وکړئ!'
     creating_error: 'د پروژې بنسټ جوړولو په وخت کې تېروتنه. بیا د پورته کولو هڅه وکړئ!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: عربي

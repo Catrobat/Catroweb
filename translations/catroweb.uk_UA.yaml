@@ -374,7 +374,7 @@ search:
 menu:
   profile: Мій Профіль
   login: Увійти
-  logout: Вийти
+  logout: Вийти з облікового запису
   admin: Адмін
   home: Головна
   helpAndTutorials: Допомога & посібник
@@ -527,10 +527,25 @@ api:
     passwordInvalidChars: 'Пароль містить неприпустимі символи'
     usernameContainsEmail: "Ім'я користувача не повинно містити адресу електронної пошти"
     countryCodeInvalid: "Неприпустимий код країни"
+    pictureInvalid: "Неприпустиме зображення профілю або не підтримується"
+  updateUser:
+    currentPasswordMissing: "Поточний пароль відсутній"
+    currentPasswordWrong: "Поточний пароль неправильний"
+  project:
+    nameEmpty: 'Ім''я не може бути порожнім'
+    nameTooLong: 'Ім''я занадто довге'
+    descriptionTooLong: 'Опис занадто довгий'
+    creditsTooLong: 'Примітка та автори занадто довгі'
+    screenshotInvalid: 'Знімок екрана проєкту неприпустимий або не підтримується'
   projectsPost:
     invalid_checksum: 'Неприпустима контрольна сума. Спробуйте завантажити ще раз!'
     upload_error: 'Помилка під час завантаження. Спробуйте завантажити ще раз!'
     creating_error: 'Помилка під час створення сутності проєкту. Спробуйте завантажити ще раз!'
+  updateProject:
+    xmlError: 'Не вдалося зберегти відомості про проєкт.'
+    screenshotError: 'Не вдалося прочитати, перетворити або зберегти знімок екрана. Будь ласка, перевірте свій внесок.'
+    notFound: 'Не вдалося знайти проєкт, який потрібно змінити.'
+    forbidden: 'Зміна проєкту не дозволяється. Ви все ще ввійшли в систему?'
 #languages and countries
 language:
   arabic: Арабська

@@ -527,10 +527,25 @@ api:
     passwordInvalidChars: 'كلمة المرور تحتوي على أحرف غير صالحة'
     usernameContainsEmail: "اسم المستخدم يجب أن لا يحتوي على عنوان بريد إلكتروني"
     countryCodeInvalid: "رمز البلد غير صالح"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'المجموع الاختباري غير صالح. حاول التحميل مرة أخرى!'
     upload_error: 'حدث خطأ أثناء التحميل. حاول التحميل مرة أخرى!'
     creating_error: 'حدث خطأ أثناء إنشاء كيان المشروع. حاول التحميل مرة أخرى!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: العربية

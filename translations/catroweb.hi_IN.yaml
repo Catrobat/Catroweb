@@ -527,10 +527,25 @@ api:
     passwordInvalidChars: 'पासवर्ड में अमान्य वर्ण हैं'
     usernameContainsEmail: "उपयोगकर्ता नाम में ईमेल पता नहीं होना चाहिए"
     countryCodeInvalid: "देश कोड अमान्य है"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'अमान्य चेकसम। फिर से अपलोड करने का प्रयास करें!'
     upload_error: 'अपलोड करते समय त्रुटि। फिर से अपलोड करने का प्रयास करें!'
     creating_error: 'प्रोजेक्ट एंटिटी बनाते समय त्रुटि। फिर से अपलोड करने का प्रयास करें!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: अरबी

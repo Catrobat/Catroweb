@@ -524,10 +524,25 @@ api:
     passwordInvalidChars: '비밀번호에 사용할 수 없는 문자가 있습니다'
     usernameContainsEmail: "사용자이름에 이메일을 사용할 수 없습니다"
     countryCodeInvalid: "국가번호가 잘못됨"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: '점검결과 무효. 다시 업로드하세요!'
     upload_error: '업로드 에러. 다시 업로드하세요!'
     creating_error: '프로젝트 독립체를 생성하는 중 에러가 발생했습니다. 업로드를 다시 시도해 보세요!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: 아랍어
