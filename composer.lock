@@ -7263,16 +7263,16 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "2.12.0",
+            "version": "2.13.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "0a2550ef3a2ff93e34d09f4eaa860de2186065de"
+                "reference": "abbadcd8b821867a2b3c1bb89701bf234443456b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/0a2550ef3a2ff93e34d09f4eaa860de2186065de",
-                "reference": "0a2550ef3a2ff93e34d09f4eaa860de2186065de",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/abbadcd8b821867a2b3c1bb89701bf234443456b",
+                "reference": "abbadcd8b821867a2b3c1bb89701bf234443456b",
                 "shasum": ""
             },
             "require": {
@@ -7301,13 +7301,13 @@
                 "psalm/plugin-phpunit": "^0.16",
                 "psalm/plugin-symfony": "^3.0",
                 "rector/rector": "^0.12",
-                "symfony/config": "^4.4 || ^5.3 || ^6.0",
-                "symfony/dependency-injection": "^4.4 || ^5.3 || ^6.0",
-                "symfony/http-foundation": "^4.4 || ^5.3 || ^6.0",
-                "symfony/http-kernel": "^4.4 || ^5.3 || ^6.0",
-                "symfony/phpunit-bridge": "^6.0",
-                "symfony/property-access": "^4.4 || ^5.3 || ^6.0",
-                "symfony/routing": "^4.4 || ^5.3 || ^6.0",
+                "symfony/config": "^4.4 || ^5.4 || ^6.0",
+                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.0",
+                "symfony/phpunit-bridge": "^6.1",
+                "symfony/property-access": "^4.4 || ^5.4 || ^6.0",
+                "symfony/routing": "^4.4 || ^5.4 || ^6.0",
                 "vimeo/psalm": "^4.9.2"
             },
             "suggest": {
@@ -7353,7 +7353,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/exporter/issues",
-                "source": "https://github.com/sonata-project/exporter/tree/2.12.0"
+                "source": "https://github.com/sonata-project/exporter/tree/2.13.0"
             },
             "funding": [
                 {
@@ -7373,7 +7373,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-05-25T06:46:31+00:00"
+            "time": "2022-06-10T06:46:47+00:00"
         },
         {
             "name": "sonata-project/form-extensions",
@@ -19203,5 +19203,5 @@
         "ext-posix": "8.1",
         "ext-zip": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
