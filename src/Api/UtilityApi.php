@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
 use OpenAPI\Server\Api\UtilityApiInterface;
+use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class UtilityApi extends AbstractApiController implements UtilityApiInterface
@@ -24,7 +25,7 @@ final class UtilityApi extends AbstractApiController implements UtilityApiInterf
   /**
    * {@inheritdoc}
    */
-  public function surveyLangCodeGet(string $lang_code, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function surveyLangCodeGet(string $lang_code, string $flavor, int &$responseCode, array &$responseHeaders): ?SurveyResponse
   {
     $survey = $this->facade->getLoader()->getActiveSurvey($lang_code);
 

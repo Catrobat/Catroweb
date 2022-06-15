@@ -21,7 +21,7 @@ Feature: Get random projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=random"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain the following projects:
       | Name      |
       | project 1 |
@@ -35,7 +35,7 @@ Feature: Get random projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=random&limit=1"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain the following projects:
       | Name      |
       | project 3 |
@@ -44,7 +44,7 @@ Feature: Get random projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/?category=random&flavor=luna"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain the following projects:
       | Name      |
       | project 2 |

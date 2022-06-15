@@ -76,7 +76,7 @@ class ScreenshotRepository
     $filesystem = new Filesystem();
     $tmp_file_path = $this->tmp_dir.$this->generateFileNameFromId($id);
     if ($filesystem->exists($tmp_file_path)) {
-      FileHelper::removeDirectory($tmp_file_path);
+      unlink($tmp_file_path);
     }
     $filesystem->copy($image, $tmp_file_path);
   }

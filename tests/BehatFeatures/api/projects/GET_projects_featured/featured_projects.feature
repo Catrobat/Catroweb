@@ -62,7 +62,7 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -77,7 +77,7 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured/?limit=2&offset=0"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -87,7 +87,7 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured/?limit=2&offset=2"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
@@ -97,7 +97,7 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured/?platform=android"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -109,7 +109,7 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured/?platform=ios"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
@@ -120,7 +120,7 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured/?flavor=luna"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 12 |
@@ -130,10 +130,35 @@ Feature: Featured Projects
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/featured/?max_version=0.985"
     Then the response status code should be "200"
-    Then the response should have the featured projects model structure
+    Then the response should have the default featured projects model structure
     Then the response should contain featured projects in the following order:
       | Name       |
       | project 5  |
       | project 15 |
       | project 2  |
       | project 6  |
+
+  Scenario: Get featured projects with limit 2, offset 0 and some attributes specified
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "limit" with value "2"
+    And I have a parameter "offset" with value "0"
+    And I have a parameter "attributes" with value "project_id,name,author,url"
+    And I request "GET" "/api/projects/featured"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+    [
+      {
+        "project_id": "12",
+        "url": "http:\/\/localhost\/app\/project\/12",
+        "name": "project 12",
+        "author": "Catrobat"
+      },
+      {
+        "project_id": "10",
+        "url": "http:\/\/localhost\/app\/project\/10",
+        "name": "project 10",
+        "author": "Catrobat"
+      }
+    ]
+    """

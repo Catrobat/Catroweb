@@ -24,7 +24,7 @@ Feature: Get logged in user
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/user"
     Then the response status code should be "200"
-    Then the response should have the extended user model structure
+    Then the response should have the default extended user model structure
     Then the response should contain the following user:
       | Name     |
       | Catrobat |

@@ -5,6 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\MediaLibrary\MediaLibraryApiFacade;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
+use OpenAPI\Server\Model\MediaFileResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 final class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
@@ -16,12 +17,12 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesSearchGet(string $query, int $limit, int $offset, string $attributes, string $flavor, string $package_name, int &$responseCode, array &$responseHeaders): array|object|null
+  public function mediaFilesSearchGet(string $query, int $limit, int $offset, string $attributes, string $flavor, string $package_name, int &$responseCode, array &$responseHeaders): array
   {
     $found_media_files = $this->facade->getLoader()->searchMediaLibraryFiles($query, $flavor, $package_name, $limit, $offset);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($found_media_files);
+    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($found_media_files, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -43,7 +44,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createMediaPackageCategoriesResponse(
-      $media_package->getCategories()->toArray(), $limit, $offset
+      $media_package->getCategories()->toArray(), $limit, $offset, $attributes
     );
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
@@ -54,7 +55,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFileIdGet(int $id, string $attributes, int &$responseCode, array &$responseHeaders): array|object|null
+  public function mediaFileIdGet(int $id, string $attributes, int &$responseCode, array &$responseHeaders): ?MediaFileResponse
   {
     $media_package_file = $this->facade->getLoader()->getMediaPackageFileByID($id);
 
@@ -65,7 +66,7 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
     }
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file);
+    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -75,12 +76,12 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
   /**
    * {@inheritdoc}
    */
-  public function mediaFilesGet(int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array|object|null
+  public function mediaFilesGet(int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
     $media_package_files = $this->facade->getLoader()->getMediaPackageFiles($limit, $offset, $flavor);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($media_package_files);
+    $response = $this->facade->getResponseManager()->createMediaFilesDataResponse($media_package_files, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 

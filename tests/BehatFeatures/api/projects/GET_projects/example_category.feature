@@ -1,5 +1,5 @@
-@api @projects
-Feature: Get most downloaded projects
+@api @projects @disabled
+Feature: Get example projects
 
   Background:
     Given there are users:

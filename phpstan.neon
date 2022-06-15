@@ -14,6 +14,7 @@ parameters:
       # ByPasFinal and phpstan seems to be having a problem currently
       - '#Return type of call to method PHPUnit\\Framework\\MockObject\\MockBuilder<[a-zA-Z0-9\\_]+>::getMock(ForAbstractClass)?\(\) contains unresolvable type\.#'
       - '#Return type of call to method PHPUnit\\Framework\\TestCase::createMock\(\) contains unresolvable type\.#'
+      - '#Return type of call to method PHPUnit\\Framework\\TestCase::createTestProxy\(\) contains unresolvable type\.#'
 
   # Would be nice, but not worth the amount of work needed to fix this. Maybe in the future ;)
   checkMissingIterableValueType: false

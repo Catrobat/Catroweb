@@ -34,6 +34,7 @@ Feature: Get data from the media library in json format
 
   Scenario: Get all files from a media lib package
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "attributes" with value "id,name,flavors,category,author,extension"
     And I request "GET" "/api/media/package/looks"
     Then the response status code should be "200"
     And I should get the json object:
@@ -43,58 +44,65 @@ Feature: Get data from the media library in json format
         "id": 1,
         "name": "Dog",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
         "category": "Animals",
         "author": "Bob Schmidt",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/1"
+        "extension": "png"
       },
         {
         "id": 4,
         "name": "Cat",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
         "category": "Animals",
         "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "extension": "png"
       },
       {
         "id": 5,
         "name": "Ape",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
         "category": "Animals",
         "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+        "extension": "png"
       },
             {
         "id": 3,
         "name": "Spaceship",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
         "category": "Space",
         "author": "Micheal John",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+        "extension": "png"
       },
       {
         "id": 6,
         "name": "Metroid",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
         "category": "Space",
         "author": "Jennifer Shawn",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/6"
+        "extension": "png"
       }
     ]
     """
 
-  Scenario: Get all files from a media lib package with limit = 1
+  Scenario: Get all files from a media lib package with limit = 1 and default attributes
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/media/package/looks?limit=1"
+    And I have a parameter "limit" with value "1"
+    And I request "GET" "/api/media/package/looks"
+    Then the response status code should be "200"
+    And I should get the json object:
+    """
+    [
+      {
+        "id": 1,
+        "name": "Dog"
+      }
+    ]
+    """
+
+  Scenario: Get all files from a media lib package with limit = 1 and specific attributes
+    Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "limit" with value "1"
+    And I have a parameter "attributes" with value "id,name,flavors,packages,category,author,extension,download_url"
+    And I request "GET" "/api/media/package/looks"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -114,7 +122,10 @@ Feature: Get data from the media library in json format
 
   Scenario: Get all files from a media lib package with limit = 1 and offset = 3
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
-    And I request "GET" "/api/media/package/looks?limit=1&offset=3"
+    And I have a parameter "limit" with value "1"
+    And I have a parameter "offset" with value "3"
+    And I have a parameter "attributes" with value "id,name,flavors,packages,category,author,extension,download_url"
+    And I request "GET" "/api/media/package/looks"
     Then the response status code should be "200"
     And I should get the json object:
     """
@@ -132,11 +143,11 @@ Feature: Get data from the media library in json format
     ]
     """
 
-  Scenario: Get all files from a media lib package with limit = 1 and offset = 3
+  Scenario: Get all files from a media lib package with offset = 5
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/media/package/looks?offset=5"
     Then the response status code should be "200"
-    Then the response should have the media files model structure
+    Then the response should have the default media files model structure
     Then I should get the json object:
       """
       []

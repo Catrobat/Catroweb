@@ -36,7 +36,7 @@ Feature: Search projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
       | Galaxy War |
@@ -47,7 +47,7 @@ Feature: Search projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then I should get the json object:
       """
       []
@@ -59,7 +59,7 @@ Feature: Search projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then I should get the json object:
       """
       []
@@ -71,7 +71,7 @@ Feature: Search projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
       | Galaxy War |
@@ -94,7 +94,7 @@ Feature: Search projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
       | ponny      |
@@ -107,9 +107,34 @@ Feature: Search projects
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "GET" "/api/projects/search/?max_version=0.984"
     Then the response status code should be "200"
-    Then the response should have the projects model structure
+    Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
       | Galaxy War |
       | Webteam    |
+
+  Scenario: Search for project with specific extension with max_version = 0.984 and with specified attributes
+    Given I have a parameter "query" with value "arduino"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "max_version" with value "0.984"
+    And I have a parameter "attributes" with value "id,name,description,author"
+    And I request "GET" "/api/projects/search/"
+    Then the response status code should be "200"
+    And I should get the json object:
+      """
+      [
+        {
+          "id": "qysm-rhwt",
+          "name": "Galaxy War",
+          "author": "User1",
+          "description": "description1"
+        },
+        {
+          "id": "isxs-adkt",
+          "name": "Webteam",
+          "author": "NewUser",
+          "description": ""
+        }
+      ]
+      """
 

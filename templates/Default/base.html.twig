@@ -18,6 +18,16 @@
     {{ encore_entry_link_tags(themeAssets()) }}
   {% endblock stylesheets %}
 
+  <script>const globalConfiguration = {
+      messages: {
+        errorTitle: '{{ 'error'|trans({}, 'catroweb')|escape('js')|raw }}',
+        successTitle: '{{ 'success.text'|trans({}, 'catroweb')|escape('js')|raw }}',
+        okayButtonText: '{{ 'ok'|trans({}, 'catroweb')|escape('js')|raw }}',
+        authenticationErrorText: '{{ 'errors.authentication.webview'|trans({}, 'catroweb')|replace({'\r': '', '\n': ' '})|trim|escape('js')|raw }}',
+        unspecifiedErrorText: '{{ 'errors.unspecified'|trans({}, 'catroweb')|escape('js')|raw }}',
+      },
+      environment: '{{ app.environment }}',
+    }</script>
   {{ encore_entry_script_tags('base') }}
   {% block javascript %}{% endblock %}
 

@@ -54,63 +54,27 @@ Feature: Get data from the media library in json format
     [
       {
         "id": 1,
-        "name": "Dog 1",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "Bob Schmidt",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/1"
+        "name": "Dog 1"
       },
       {
         "id": 2,
-        "name": "Dog 2",
-        "flavors": ["pocketcode"],
-        "packages": ["Sounds"],
-        "category": "Fantasy",
-        "author": "",
-        "extension": "mpga",
-        "download_url": "http:\/\/localhost\/app\/download-media\/2"
+        "name": "Dog 2"
       },
       {
         "id": 3,
-        "name": "Spaceship",
-        "flavors": ["pocketcode", "arduino"],
-        "packages": ["Looks"],
-        "category": "Space",
-        "author": "Micheal John",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+        "name": "Spaceship"
       },
       {
         "id": 4,
-        "name": "Cat",
-        "flavors": ["luna", "arduino"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "name": "Cat"
       },
       {
         "id": 5,
-        "name": "Ape",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+        "name": "Ape"
       },
       {
         "id": 6,
-        "name": "Metroid",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Space",
-        "author": "Jennifer Shawn",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/6"
+        "name": "Metroid"
       }
     ]
     """
@@ -125,59 +89,30 @@ Feature: Get data from the media library in json format
     [
       {
         "id": 1,
-        "name": "Dog 1",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "Bob Schmidt",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/1"
+        "name": "Dog 1"
       },
       {
         "id": 2,
-        "name": "Dog 2",
-        "flavors": ["pocketcode"],
-        "packages": ["Sounds"],
-        "category": "Fantasy",
-        "author": "",
-        "extension": "mpga",
-        "download_url": "http:\/\/localhost\/app\/download-media\/2"
+        "name": "Dog 2"
       },
       {
         "id": 3,
-        "name": "Spaceship",
-        "flavors": ["pocketcode", "arduino"],
-        "packages": ["Looks"],
-        "category": "Space",
-        "author": "Micheal John",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+        "name": "Spaceship"
       },
       {
         "id": 4,
-        "name": "Cat",
-        "flavors": ["luna", "arduino"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "name": "Cat"
       },
       {
         "id": 5,
-        "name": "Ape",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+        "name": "Ape"
       }
     ]
     """
 
-  Scenario: Getting files with flavor "luna" should return 1 media file
+  Scenario: Getting files with flavor "luna" should return 1 media file with specified attributes
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a parameter "attributes" with value "id,name,flavors,packages,category,author,extension,download_url,file_type"
     And I have a parameter "flavor" with value "luna"
     And I request "GET" "/api/media/files"
     Then the response status code should be "200"
@@ -192,7 +127,8 @@ Feature: Get data from the media library in json format
         "category": "Animals",
         "author": "",
         "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "download_url": "http:\/\/localhost\/app\/download-media\/4",
+        "file_type": "image"
       }
     ]
     """
@@ -207,30 +143,19 @@ Feature: Get data from the media library in json format
     [
       {
         "id": 3,
-        "name": "Spaceship",
-        "flavors": ["pocketcode", "arduino"],
-        "packages": ["Looks"],
-        "category": "Space",
-        "author": "Micheal John",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/3"
+        "name": "Spaceship"
       },
         {
         "id": 4,
-        "name": "Cat",
-        "flavors": ["luna", "arduino"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "name": "Cat"
       }
     ]
     """
 
-  Scenario: Getting all files with offset "3" should ignore 3 media files
+  Scenario: Getting all files with offset "3" should ignore 3 media files and use specified attributes
     Given I have a request header "HTTP_ACCEPT" with value "application/json"
     And I have a parameter "offset" with value "3"
+    And I have a parameter "attributes" with value "id,name,flavors,packages"
     And I request "GET" "/api/media/files"
     Then the response status code should be "200"
     And I should get the json object:
@@ -240,31 +165,19 @@ Feature: Get data from the media library in json format
         "id": 4,
         "name": "Cat",
         "flavors": ["luna", "arduino"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/4"
+        "packages": ["Looks"]
       },
         {
         "id": 5,
         "name": "Ape",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+        "packages": ["Looks"]
       },
         {
         "id": 6,
         "name": "Metroid",
         "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Space",
-        "author": "Jennifer Shawn",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/6"
+        "packages": ["Looks"]
       }
     ]
     """
@@ -280,23 +193,11 @@ Feature: Get data from the media library in json format
     [
      {
         "id": 5,
-        "name": "Ape",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Animals",
-        "author": "",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/5"
+        "name": "Ape"
       },
         {
         "id": 6,
-        "name": "Metroid",
-        "flavors": ["pocketcode"],
-        "packages": ["Looks"],
-        "category": "Space",
-        "author": "Jennifer Shawn",
-        "extension": "png",
-        "download_url": "http:\/\/localhost\/app\/download-media\/6"
+        "name": "Metroid"
       }
     ]
     """
