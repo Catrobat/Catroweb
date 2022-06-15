@@ -526,25 +526,25 @@ api:
     passwordInvalidChars: 'A senha contém caracteres inválidos'
     usernameContainsEmail: "O nome de usuário não pode conter um endereço de e-mail"
     countryCodeInvalid: "Código do país inválido"
-    pictureInvalid: "Profile picture invalid or not supported"
+    pictureInvalid: "Imagem de perfil inválida ou não suportada"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "A senha atual é obrigatória"
+    currentPasswordWrong: "A senha atual está incorreta"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'O nome não pode estar vazio'
+    nameTooLong: 'Nome muito longo'
+    descriptionTooLong: 'Descrição muito longa '
+    creditsTooLong: 'Notas e créditos muito longos'
+    screenshotInvalid: 'O projeto em captura de tela é inválida ou não suportada'
   projectsPost:
     invalid_checksum: 'Checksum inválido. Tente fazer upload novamente!'
     upload_error: 'Erro ao enviar. Tente enviar novamente!'
     creating_error: 'Erro em criar a entidade do projeto. Tente fazer o upload novamente!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Falha ao salvar detalhes do projeto.'
+    screenshotError: 'Falha ao ler, converter ou armazenar a captura de tela. Por favor, verifique sua entrada.'
+    notFound: 'O projeto a ser alterado não foi encontrado.'
+    forbidden: 'Alterações no projeto não permitido. Você ainda está logado(a)?'
 #languages and countries
 language:
   arabic: Árabe
