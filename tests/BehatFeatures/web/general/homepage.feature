@@ -118,6 +118,7 @@ Feature: Pocketcode homepage
     Then I should see the featured slider
     And I should see the slider with the values "http://www.google.at/,project 2,project 3"
 
+  @disabled
   Scenario: Example Programs
     Given I am on homepage
     And I wait for the page to be loaded

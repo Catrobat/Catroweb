@@ -57,6 +57,7 @@ Feature: Get recent projects
         "id": "5",
         "name": "project 5",
         "author": "User1",
+        "credits": "",
         "version": "0.8.5",
         "views": 40,
         "private": false,
