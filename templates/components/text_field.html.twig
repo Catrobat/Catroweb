@@ -18,7 +18,7 @@
         'trailing_icon': 'close',
         'tab_index': '0',
         'type': 'text',
-        'required: 'required',
+        'required: true,
         'input': '',
       }
   }%}
@@ -49,7 +49,7 @@
          aria-labelledby="{{ text_field.id }}__label"
          tabindex="{{ text_field.tab_index|default('0') }}"
          {% if text_field.type|default('') %}autocomplete="{{ text_field.type }}"{% endif %}
-         required="{{ text_field.required|default('required') }}"
+         {% if text_field.required ?? true %}required="required"{% endif %}
          value="{{ text_field.value|default() }}">
 
   {#  Trailing Icon (Optional) #}

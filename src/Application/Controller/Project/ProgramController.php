@@ -19,12 +19,9 @@ use App\Storage\ScreenshotRepository;
 use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
 use Exception;
-use ImagickException;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -32,7 +29,6 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -214,34 +210,9 @@ class ProgramController extends AbstractController
   }
 
   /**
-   * @throws Exception
-   */
-  #[Route(path: '/userToggleProjectVisibility/{id}', name: 'profile_toggle_program_visibility', defaults: ['id' => 0], methods: ['GET'])]
-  public function toggleProgramVisibilityAction(string $id): Response
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (null === $user) {
-      return $this->redirectToRoute('login');
-    }
-    /** @var ArrayCollection $user_programs */
-    $user_programs = $user->getPrograms();
-    $programs = $user_programs->matching(
-        Criteria::create()->where(Criteria::expr()->eq('id', $id))
-      );
-    if ($programs->isEmpty()) {
-      throw $this->createNotFoundException('Unable to find Project entity.');
-    }
-    /** @var Program $program */
-    $program = $programs[0];
-    $program->setPrivate(!$program->getPrivate());
-    $this->entity_manager->persist($program);
-    $this->entity_manager->flush();
-
-    return new Response('true');
-  }
-
-  /**
+   * @deprecated Use new API
+   * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
+   *
    * @throws Exception
    */
   #[Route(path: '/editProjectName/{id}', name: 'edit_program_name', methods: ['PUT'])]
@@ -354,28 +325,6 @@ class ProgramController extends AbstractController
     }
 
     return new JsonResponse(['statusCode' => Response::HTTP_OK]);
-  }
-
-  /**
-   * @throws ImagickException
-   */
-  #[Route(path: '/project/{id}/image', name: 'upload_project_thumbnail', methods: ['POST'])]
-  public function uploadProjectImage(Request $request, string $id): Response
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-    /** @var Program|null $project */
-    $project = $this->program_manager->find($id);
-    if (null === $project) {
-      throw new NotFoundHttpException();
-    }
-    if (null === $user || $project->getUser() !== $user) {
-      return $this->redirectToRoute('login');
-    }
-    $image = (string) $request->request->get('image');
-    $this->screenshot_repository->updateProgramAssets($image, $id);
-
-    return new JsonResponse();
   }
 
   /**

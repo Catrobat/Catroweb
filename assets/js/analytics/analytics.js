@@ -1475,42 +1475,6 @@ if (isTrackingAllowed()) {
       // libraryDownloadList.push(libraryDownload);
       window.AnalyticsTracker.registerElementsForClickTracking(libraryDownload)
     }
-
-    if (/.*\/user.*/.test(window.location.pathname)) {
-      const profileCategory = 'profile page'
-      const profileElements = [
-        {
-          /**
-             * Tracks the click on the delete button
-             */
-          BaseSelector: '#myprofile-programs',
-          SubSelector: '.img-delete',
-          Category: profileCategory,
-          Action: 'click - delete own program'
-        },
-        {
-          /**
-             * Tracks the click on the make invisible button
-             */
-          BaseSelector: '#myprofile-programs',
-          SubSelector: '.img-lock-open',
-          Category: profileCategory,
-          Action: 'click - set invisible own program'
-        },
-        {
-          /**
-             * Tracks the click on the make visible button
-             */
-          BaseSelector: '#myprofile-programs',
-          SubSelector: '.img-lock',
-          Category: profileCategory,
-          Action: 'click - set visible own program'
-        }
-      ]
-
-      const profileObjectList = window.TrackingObjectFactory.createArray(profileElements)
-      window.AnalyticsTracker.registerElementsForClickTracking(profileObjectList)
-    }
     // end of tracked events
   })
 }

@@ -38,13 +38,13 @@ Feature:
     When I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "project 1"
-    When I click "#change-project-thumbnail-button"
+    When I attach the avatar "logo.png" to "project-screenshot-upload-field"
     And I wait for AJAX to finish
-    When I attach the avatar "logo.png" to "file"
     And I wait for the element ".text-img-upload-success" to be visible
     Then I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"
-    When I click "#change-project-thumbnail-button"
+    And I wait 3100 milliseconds
+    Then the element ".text-img-upload-success" should not be visible
+    When I attach the avatar "galaxy.jpg" to "project-screenshot-upload-field"
     And I wait for AJAX to finish
-    When I attach the avatar "galaxy.jpg" to "file"
     And I wait for the element ".text-img-upload-success" to be visible
     Then I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"
