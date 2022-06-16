@@ -7,9 +7,11 @@ use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Mink\Element\NodeElement;
+use Behat\Mink\Exception\DriverException;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
+use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
 use Exception;
 use PHPUnit\Framework\Assert;
@@ -260,6 +262,31 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
+   * Checks validity of HTML5 form field
+   * Example: Then the field "username" should be valid
+   * Example: Then the field "username" should not be valid.
+   *
+   * @Then /^the field "(?P<field>(?:[^"]|\\")*)" should (?P<not>(?:|not ))be valid$/
+   *
+   * @param mixed $field
+   * @param mixed $not
+   *
+   * @throws DriverException
+   * @throws UnsupportedDriverActionException
+   */
+  public function fieldValidationState($field, $not): void
+  {
+    $field = $this->fixStepArgument($field);
+    $field = $this->getSession()->getPage()->findField($field);
+    $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\\"', $field->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
+    if ('not' === trim($not)) {
+      Assert::assertFalse($valid, 'Field needs to be invalid but was valid');
+    } else {
+      Assert::assertTrue($valid, 'Field needs to be valid but was invalid');
+    }
+  }
+
+  /**
    * @Then /^I select package "([^"]*)" for media package category$/
    *
    * @param mixed $arg1
@@ -462,12 +489,86 @@ class BrowserContext extends MinkContext implements Context
    */
   public function iWaitForTheElementToBeVisible($locator): void
   {
-    /** @var NodeElement $element */
+    $tries = 100;
+    $delay = 100000; // every 1/10 second
+    $element = null;
+    for ($timer = 0; $timer < $tries; ++$timer) {
+      if (null === $element) {
+        $element = $this->getSession()->getPage()->find('css', $locator);
+        if (null === $element) {
+          continue;
+        }
+      }
+      if ($element->isVisible()) {
+        return;
+      }
+      usleep($delay);
+    }
+
+    $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, ($delay * $tries));
+    throw new ResponseTextException($message, $this->getSession());
+  }
+
+  /**
+   * @Then I wait for the element :selector to be not visible
+   *
+   * @param mixed $locator
+   *
+   * @throws ResponseTextException
+   */
+  public function iWaitForTheElementToBeNotVisible($locator): void
+  {
     $element = $this->getSession()->getPage()->find('css', $locator);
+    if (null === $element) {
+      return; // element does not exist, so not visible
+    }
     $tries = 100;
     $delay = 100000; // every 1/10 second
     for ($timer = 0; $timer < $tries; ++$timer) {
-      if ($element->isVisible()) {
+      if (!$element->isValid() || !$element->isVisible()) {
+        return;
+      }
+      usleep($delay);
+    }
+
+    $message = sprintf("The element '%s' was still visible after a %s micro seconds timeout", $locator, ($delay * $tries));
+    throw new ResponseTextException($message, $this->getSession());
+  }
+
+  /**
+   * If an element is visible within a timeout, it needs to hide/be removed in the same timeout again.
+   * Can be used for loading spinners, for example.
+   *
+   * @Then I wait for the element :selector to appear and if so to disappear again
+   *
+   * @param mixed $locator
+   *
+   * @throws ResponseTextException
+   */
+  public function iWaitForTheElementToAppearAndDisappear($locator): void
+  {
+    $tries = 100;
+    $delay = 100_000; // every 1/10 second
+    $element = null;
+    for ($timer = 0; $timer < $tries; ++$timer) {
+      if (null === $element) {
+        $element = $this->getSession()->getPage()->find('css', $locator);
+        if (null === $element) {
+          continue;
+        }
+      }
+      if ($element->isValid() && $element->isVisible()) {
+        break;
+      }
+      usleep($delay);
+    }
+
+    if (null === $element) {
+      return; // element never appeared
+    }
+
+    for ($timer = 0; $timer < $tries; ++$timer) {
+      if (!$element->isValid() || !$element->isVisible()) {
         return;
       }
       usleep($delay);

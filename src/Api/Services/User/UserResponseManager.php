@@ -66,10 +66,10 @@ final class UserResponseManager extends AbstractResponseManager
       $data['picture'] = $user->getAvatar();
     }
     if (in_array('about', $attributes_list, true)) {
-      // TODO: implement User:about field
+      $data['about'] = $user->getAbout();
     }
     if (in_array('currentlyWorkingOn', $attributes_list, true)) {
-      // TODO: implement User:currentlyWorkingOn field
+      $data['currentlyWorkingOn'] = $user->getCurrentlyWorkingOn();
     }
     if (in_array('projects', $attributes_list, true)) {
       $data['projects'] = $user->getPrograms()->count();

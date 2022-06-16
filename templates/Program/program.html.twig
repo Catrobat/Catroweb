@@ -206,7 +206,6 @@
        data-theme="{{ theme() }}"
        data-flavor="{{ flavor() }}"
        data-base-url="{{ app.request.getBaseURL() }}"
-       data-path-change-image="{{ path('upload_project_thumbnail', { 'id': program.id }) }}"
        data-project-name="{{ program.name }}"
        data-user-role="{% if app.user %}user{% else %}guest{% endif %}"
        data-my-program="{% if my_program %}true{% else %}false{% endif %}"
@@ -239,6 +238,7 @@
        data-trans-clipboard-success="{{ "clipboard.success_project"|trans({}, "catroweb") }}"
        data-trans-clipboard-fail="{{ "clipboard.fail"|trans({}, "catroweb") }}"
   ></div>
+  {# TODO: Disable Report Program for now. Needs a separate flag in database - a new concept!
   <div class="js-project-report"
        data-project-id="{{ program.id }}"
        data-path-report="{{ path('catrobat_api_report_program') }}"
@@ -258,6 +258,7 @@
        data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
        data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
   ></div>
+  #}
   <div class="js-project-description-credits"
        data-project-id="{{ program.id }}"
        data-has-description={% if program.description %} true {% else %} false {% endif %}
@@ -300,5 +301,15 @@
 {% endblock %}
 
 {% block javascript %}
+<script>
+  const projectConfiguration = {
+    id: '{{ program_details.id }}',
+    messages: {
+      forbidden: '{{ 'api.updateProject.forbidden'|trans({}, 'catroweb') }}',
+      notFound: '{{ 'api.updateProject.notFound'|trans({}, 'catroweb') }}',
+      screenshotInvalid: '{{ 'api.project.screenshotInvalid'|trans({}, 'catroweb') }}',
+    }
+  }
+</script>
   {{ encore_entry_script_tags('project') }}
 {% endblock %}

@@ -1,15 +1,8 @@
-/* global toggleVisibilityUrl */
-/* global programCanNotChangeVisibilityTitle */
-/* global programCanNotChangeVisibilityText */
 /* global noProgramsText */
-/* global programDeleteConfirmation */
-/* global programChangeVisibility */
 /* global sessionStorage */
 
 import $ from 'jquery'
-import Swal from 'sweetalert2'
 import { showTopBarSearch, controlTopBarSearchClearButton } from '../layout/top_bar'
-import { getCookie } from '../security/CookieHelper'
 
 require('../../styles/components/project_list.scss')
 
@@ -207,10 +200,6 @@ export const ProjectLoader = function (container, url) {
 
       $(self.container).find('.programs').append(htmlProject)
       $(self.container).show()
-
-      if (isMyProject()) {
-        await addMyProfileProgramButtons(htmlProject, projects[i], data)
-      }
     }
     self.numberOfLoadedProjects += projects.length
   }
@@ -464,116 +453,6 @@ export const ProjectLoader = function (container, url) {
 
   async function getProjectLink (project, data) {
     return data.CatrobatInformation.BaseUrl + project.ProjectUrl
-  }
-
-  function isMyProject () {
-    return self.container === '#myprofile-programs'
-  }
-
-  async function addMyProfileProgramButtons (htmlProject, project, data) {
-    $(htmlProject).prepend('<div id="delete-' + project.ProjectId + '" class="my-project-delete-btn img-delete" ' +
-      ' data-project-id="' + project.ProjectId + '">' +
-      '<span class="mdc-icon-button material-icons">close</span></div>')
-
-    $(htmlProject).prepend('<div id="visibility-lock-open-' + project.ProjectId + '" class="my-project-visibility-toggle img-lock-open" ' +
-      (project.Private ? 'style="display: none;"' : '') +
-      ' data-project-id="' + project.ProjectId + '">' +
-      '<span class="mdc-icon-button material-icons">lock_open</span></i></div>')
-
-    $(htmlProject).prepend('<div id="visibility-lock-' + project.ProjectId + '" class="my-project-visibility-toggle img-lock" ' +
-      (project.Private ? '' : 'style="display: none;"') +
-      ' data-project-id="' + project.ProjectId + '">' +
-      '<span class="mdc-icon-button material-icons">lock</span></div>')
-
-    $('.my-project-delete-btn').on('click', (e) => {
-      deleteProgram($(e.currentTarget).data('project-id'), data)
-    })
-
-    $('.my-project-visibility-toggle').on('click', (e) => {
-      toggleVisibility($(e.currentTarget).data('project-id'))
-    })
-  }
-
-  function deleteProgram (id, data) {
-    const programName = $('#program-' + id).find('.program-name').text()
-    const split = programDeleteConfirmation.replace('%programName%', '"' + programName + '"').split('\n')
-    Swal.fire({
-      title: split[0],
-      html: split[1] + '<br><br>' + split[2],
-      icon: 'warning',
-      showCancelButton: true,
-      allowOutsideClick: false,
-      customClass: {
-        confirmButton: 'btn btn-danger',
-        cancelButton: 'btn btn-outline-primary'
-      },
-      buttonsStyling: false,
-      confirmButtonText: split[3],
-      cancelButtonText: split[4]
-    }).then((result) => {
-      if (result.value) {
-        url = data.CatrobatInformation.BaseUrl + 'api/project/' + id
-        fetch(url, {
-          method: 'DELETE',
-          headers: new Headers({
-            Authorization: 'Bearer ' + getCookie('BEARER')
-          })
-        })
-          .then(() => {
-            window.location.reload()
-          })
-          .catch((error) => {
-            console.error(error)
-          })
-      }
-    })
-  }
-
-  function toggleVisibility (id) {
-    const visibilityLockId = $('#visibility-lock-' + id)
-    const visibilityLockOpenId = $('#visibility-lock-open-' + id)
-    const programName = $('#program-' + id).find('.program-name').text()
-    const isPrivate = visibilityLockId.is(':visible')
-    const split = programChangeVisibility.replaceAll('%programName%', programName).split('\n')
-    Swal.fire({
-      title: split[0],
-      html: (isPrivate) ? split[3] : split[1] + '<br><br>' + split[2],
-      icon: 'warning',
-      showCancelButton: true,
-      allowOutsideClick: false,
-      customClass: {
-        confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-outline-primary'
-      },
-      buttonsStyling: false,
-      confirmButtonText: (isPrivate) ? split[4] : split[5],
-      cancelButtonText: split[6]
-    }).then((result) => {
-      if (result.value) {
-        $.get(toggleVisibilityUrl + '/' + id, {}, function (data) {
-          if (data === 'true') {
-            if (isPrivate) {
-              visibilityLockId.hide()
-              visibilityLockOpenId.show()
-            } else {
-              visibilityLockId.show()
-              visibilityLockOpenId.hide()
-            }
-          } else {
-            Swal.fire({
-              title: programCanNotChangeVisibilityTitle,
-              text: programCanNotChangeVisibilityText,
-              icon: 'error',
-              customClass: {
-                confirmButton: 'btn btn-primary'
-              },
-              buttonsStyling: false,
-              allowOutsideClick: false
-            })
-          }
-        })
-      }
-    })
   }
 
   // -------------------------------------------------------------------------------------------------------------------

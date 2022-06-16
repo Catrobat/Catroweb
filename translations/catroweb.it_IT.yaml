@@ -531,10 +531,25 @@ api:
     passwordInvalidChars: 'La password contiene caratteri non validi'
     usernameContainsEmail: "Il nome utente non deve contenere indirizzi email"
     countryCodeInvalid: "Codice nazione non valido"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'Checksum non valido. Riprova a caricare!'
     upload_error: 'Errore durante il caricamento. Riprova a caricare!'
     creating_error: 'Errore durante la creazione dell''entità del progetto. Riprova a caricare!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: Arabo

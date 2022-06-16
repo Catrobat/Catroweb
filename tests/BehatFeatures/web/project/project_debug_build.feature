@@ -63,7 +63,8 @@ Feature: Using a release app I should not see debug projects
     And I wait for the page to be loaded
     Then I should see "program 1"
     And I should see "program 2"
-    And I should see "debug program"
+    # In new API, debug projects are only visible using debug app
+    And I should not see "debug program"
     And I should see "program 4"
 
   Scenario: Viewing program marked as debug using debug app

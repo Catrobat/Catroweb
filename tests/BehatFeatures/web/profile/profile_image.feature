@@ -14,21 +14,15 @@ Feature:
     Then I should see "My Profile"
 
   Scenario: uploading avatar should work
-    When I click "#avatar-upload"
-    When I attach the avatar "logo.png" to "file"
-    And I wait for the element ".text-img-upload-success" to be visible
-    And I wait for the element ".text-img-upload-success" to contain "Your image was uploaded successfully!"
-    Then the avatar img tag should have the "logo.png" data url
+    When I attach the avatar "logo.png" to "own-profile-picture-upload-field"
+    And I wait for the page to be loaded
+    And I wait for the element "#alert-profile-picture-change-success" to be visible
+    And I wait for the element "#alert-profile-picture-change-success" to contain "Your image was uploaded successfully!"
+    Then the avatar img tag should not have the "default" data url
 
-  Scenario: only jpg, png or gif allowed for avatar
-    When I click "#avatar-upload"
-    And I attach the avatar "fail.tif" to "file"
-    And I wait for the element ".text-mime-type-not-supported" to be visible
-    And I wait for the element ".text-mime-type-not-supported" to contain "This image type is not supported, please try another image."
-    Then the avatar img tag should not have the "fail.tif" data url
-
-  Scenario: max. 5MB for avatar image
-    When I click "#avatar-upload"
-    And I attach the avatar "galaxy_big.png" to "file"
-    Then I wait for the element ".text-img-upload-too-large" to be visible
-    Then I wait for the element ".text-img-upload-too-large" to contain "Your chosen picture is too large, please do not use images larger than 5mb."
+  Scenario: upload corrupt image as profile picture
+    When I attach the avatar "corrupt.jpg" to "own-profile-picture-upload-field"
+    And I wait for the page to be loaded
+    Then I wait for the element ".swal2-modal" to be visible
+    And I wait for the element ".swal2-html-container" to contain "Profile picture invalid or not supported"
+    Then the avatar img tag should have the "default" data url

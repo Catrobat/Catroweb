@@ -41,7 +41,7 @@ class ReportedUsersAdmin extends AbstractAdmin
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(user_comment.user )', $parameters['_sort_order'])
           ;
-    } elseif (isset($parameters['_sort_by']) && 'getProgramInappropriateReportsCount' === $parameters['_sort_by']) {
+    } elseif (isset($parameters['_sort_by']) && 'getReportsOfThisUserCount' === $parameters['_sort_by']) {
       $qb
         ->leftJoin(\App\DB\Entity\User\Comment\UserComment::class, 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
         ->leftJoin(\App\DB\Entity\Project\Program::class, 'p', Join::WITH, $rootAlias.'.id = p.user')
@@ -82,7 +82,7 @@ class ReportedUsersAdmin extends AbstractAdmin
             'sort_parent_association_mappings' => [],
           ])
       ->add(
-          'getProgramInappropriateReportsCount',
+          'getReportsOfThisUserCount',
           null,
           [
             'label' => '#Reported Programs',

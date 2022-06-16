@@ -253,9 +253,24 @@ class User extends BaseUser
   protected bool $verified = true;
 
   /**
-   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reportingUser", fetch="EXTRA_LAZY")
+   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reporting_user", fetch="EXTRA_LAZY")
    */
-  protected Collection $program_inappropriate_reports;
+  protected Collection $reports_triggered_by_this_user;
+
+  /**
+   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reported_user", fetch="EXTRA_LAZY")
+   */
+  protected Collection $reports_of_this_user;
+
+  /**
+   * @ORM\Column(type="text", length=65535, nullable=true)
+   */
+  protected ?string $about = null;
+
+  /**
+   * @ORM\Column(type="string", length=255, nullable=true)
+   */
+  protected ?string $currentlyWorkingOn = null;
 
   public function __construct()
   {
@@ -271,7 +286,8 @@ class User extends BaseUser
     $this->reverse_relations_of_similar_users_based_on_likes = new ArrayCollection();
     $this->relations_of_similar_users_based_on_remixes = new ArrayCollection();
     $this->reverse_relations_of_similar_users_based_on_remixes = new ArrayCollection();
-    $this->program_inappropriate_reports = new ArrayCollection();
+    $this->reports_triggered_by_this_user = new ArrayCollection();
+    $this->reports_of_this_user = new ArrayCollection();
   }
 
   public function getAppleId(): ?string
@@ -424,21 +440,19 @@ class User extends BaseUser
     $this->follow_notification_mentions = $follow_notification_mentions;
   }
 
-  public function getProgramInappropriateReports(): Collection
+  public function getReportsTriggeredByThisUser(): Collection
   {
-    return $this->program_inappropriate_reports;
+    return $this->reports_triggered_by_this_user;
   }
 
-  public function getProgramInappropriateReportsCount(): int
+  public function getReportsOfThisUser(): Collection
   {
-    $programs_collection = $this->getPrograms();
-    $programs = $programs_collection->getValues();
-    $count = 0;
-    foreach ($programs as $program) {
-      $count += $program->getReportsCount();
-    }
+    return $this->reports_of_this_user;
+  }
 
-    return $count;
+  public function getReportsOfThisUserCount(): int
+  {
+    return count($this->getReportsOfThisUser());
   }
 
   public function getComments(): Collection
@@ -573,5 +587,25 @@ class User extends BaseUser
     $app_env = $_ENV['APP_ENV'];
 
     return 'prod' !== $app_env || $this->verified;
+  }
+
+  public function getAbout(): ?string
+  {
+    return $this->about;
+  }
+
+  public function setAbout(?string $about): void
+  {
+    $this->about = $about;
+  }
+
+  public function getCurrentlyWorkingOn(): ?string
+  {
+    return $this->currentlyWorkingOn;
+  }
+
+  public function setCurrentlyWorkingOn(?string $currentlyWorkingOn): void
+  {
+    $this->currentlyWorkingOn = $currentlyWorkingOn;
   }
 }

@@ -526,10 +526,25 @@ api:
     passwordInvalidChars: 'Lösenord innehåller ogiltiga tecken'
     usernameContainsEmail: "Användarnamnet får inte innehålla någon e-postadress"
     countryCodeInvalid: "Landskod ogiltig"
+    pictureInvalid: "Profile picture invalid or not supported"
+  updateUser:
+    currentPasswordMissing: "Current password is missing"
+    currentPasswordWrong: "Current password is wrong"
+  project:
+    nameEmpty: 'Name cannot be empty'
+    nameTooLong: 'Name too long'
+    descriptionTooLong: 'Description too long'
+    creditsTooLong: 'Notes and credits too long'
+    screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
     invalid_checksum: 'Ogiltig kontrollsumma. Försök ladda upp igen!'
     upload_error: 'Fel vid uppladdning. Försök ladda upp igen!'
     creating_error: 'Error while creating project entity. Try uploading again!'
+  updateProject:
+    xmlError: 'Failed saving details of the project.'
+    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
+    notFound: 'The project to change could not be found.'
+    forbidden: 'Changing the project not allowed. Are you still logged in?'
 #languages and countries
 language:
   arabic: Arabiska

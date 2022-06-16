@@ -939,12 +939,12 @@ class CatrowebBrowserContext extends BrowserContext
     $name = trim($name);
     $not = trim($not);
 
-    $pre_source = $this->getSession()->getPage()->find('css', '#avatar-img');
+    $pre_source = $this->getSession()->getPage()->find('css', '.profile__basic-info__avatar__img');
     $source = '';
     if (!is_null($pre_source)) {
       $source = $pre_source->getAttribute('src') ?? '';
     } else {
-      Assert::assertTrue(false, "Couldn't find avatar in #avatar-img");
+      Assert::assertTrue(false, "Couldn't find avatar in .profile__basic-info__avatar__img");
     }
     $source = trim($source, '"');
 
@@ -959,6 +959,11 @@ class CatrowebBrowserContext extends BrowserContext
         $failUrl = 'data:image/tiff;base64,'.base64_encode(file_get_contents(self::AVATAR_DIR.'fail.tif'));
         $isSame = ($source === $failUrl);
         'not' === $not ? Assert::assertFalse($isSame) : Assert::assertTrue($isSame);
+        break;
+
+      case 'default':
+        $defaultSource = 'images/default/avatar_default.png';
+        'not' === $not ? Assert::assertStringNotContainsString($defaultSource, $source) : Assert::assertStringContainsString($defaultSource, $source);
         break;
 
       default:

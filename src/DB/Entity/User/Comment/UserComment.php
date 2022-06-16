@@ -98,7 +98,7 @@ class UserComment implements \Stringable
   protected ?int $parent_id = null;
 
   /**
-   * @ORM\ManyToOne(targetEntity=Studio::class, inversedBy="comments", cascade={"persist"})
+   * @ORM\ManyToOne(targetEntity=Studio::class, inversedBy="user_comments", cascade={"persist"})
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
   protected ?Studio $studio = null;

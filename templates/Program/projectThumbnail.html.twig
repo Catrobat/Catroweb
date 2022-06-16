@@ -7,27 +7,14 @@
     {% if my_program %}
       <div class="position-relative">
         <div id="change-project-thumbnail-button" class="upload-project-image align-items-center justify-content-center d-flex">
-          <div>
-            <input type="file" name="file">
-            <i class="material-icons md-light">camera_alt</i>
-            <div class="button-show-ajax"></div>
-          </div>
+            <span class="material-icons md-light">camera_alt</span>
         </div>
       </div>
       <div class="text-center">
         <i class="material-icons text-start d-none" id="upload-image-spinner">
           {% include 'components/loading_spinner.html.twig' with {'spinner_id': 'upload-image-pb', 'size': 'small'} only %}</i>
       </div>
-      <div class="d-none error-message text-img-upload-too-large alert alert-danger">
-        {{ 'profile.avatar.pictureTooLarge'|trans({}, 'catroweb') }}
-      </div>
-      <div class="d-none error-message text-img-upload-error alert alert-danger">
-        {{ 'profile.avatar.uploadError'|trans({}, 'catroweb') }}
-      </div>
-      <div class="d-none error-message text-mime-type-not-supported alert alert-danger">
-        {{ 'profile.avatar.noSupport'|trans({}, 'catroweb') }}
-      </div>
-      <div class="d-none error-message text-img-upload-success alert alert-success">
+      <div class="d-none mt-2 error-message text-img-upload-success alert alert-success">
         {{ 'success.imgUpload'|trans({}, 'catroweb') }}
       </div>
     {% endif %}

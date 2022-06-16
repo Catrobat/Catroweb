@@ -89,8 +89,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setPagination($qb, $limit, $offset);
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
-      ->leftJoin('e.user', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('e.user', ':user_id'))
       ->setParameter('user_id', $user_id)
     ;
 
@@ -102,8 +101,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
-      ->leftJoin('e.user', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('e.user', ':user_id'))
       ->setParameter('user_id', $user_id)
     ;
 
@@ -113,13 +111,11 @@ class ProgramRepository extends ServiceEntityRepository
   public function getUserProjectsIncludingPrivateOnes(string $user_id, ?string $flavor, string $max_version, ?int $limit, ?int $offset): array
   {
     $qb = $this->createQueryAllBuilder();
-    $qb = $this->setFlavorConstraint($qb, $flavor);
-    $qb = $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version);
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
     $qb = $this->setPagination($qb, $limit, $offset);
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
-      ->leftJoin('e.user', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('e.user', ':user_id'))
       ->setParameter('user_id', $user_id)
     ;
 
@@ -131,8 +127,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
     $qb
-      ->leftJoin('e.user', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('e.user', ':user_id'))
       ->setParameter('user_id', $user_id)
     ;
 
@@ -202,8 +197,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setPagination($qb, $limit, $offset);
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
-      ->leftJoin('e.user', 'f')
-      ->andWhere($qb->expr()->eq('f.id', ':user_id'))
+      ->andWhere($qb->expr()->eq('e.user', ':user_id'))
       ->setParameter('user_id', $user_id)
       ->andWhere($qb->expr()->neq('e.id', ':project_id'))
       ->setParameter('project_id', $project_id)

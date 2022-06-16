@@ -13,9 +13,9 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     When I am on "/app/user"
     And I wait for AJAX to finish
     Then I should see "My Profile"
-    And I click "#avatar-upload"
-    When I attach the avatar "logo.png" to "file"
-    And I wait for the element ".text-img-upload-success" to be visible
+    When I attach the avatar "logo.png" to "own-profile-picture-upload-field"
+    And I wait for the page to be loaded
+    And I wait for the element "#alert-profile-picture-change-success" to be visible
     When I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should contain "Initiative"
@@ -28,9 +28,9 @@ Feature: Every user that changed his profile picture must have the perfect_profi
     When I am on "/app/user"
     And I wait for AJAX to finish
     Then I should see "My Profile"
-    And I click "#avatar-upload"
-    When I attach the avatar "logo.png" to "file"
-    And I wait for the element ".text-img-upload-success" to be visible
+    When I attach the avatar "logo.png" to "own-profile-picture-upload-field"
+    And I wait for the page to be loaded
+    And I wait for the element "#alert-profile-picture-change-success" to be visible
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Initiative"

@@ -23,15 +23,15 @@ error: Помилка
 cancel: Скасувати
 report: Скарга
 deleteIt: Так, видалити це!
-reportIt: Так, поскаржитись про це!
-areYouSure: Ти впевнений?
-noWayOfReturn: Немає можливості відновити свої дії!
+reportIt: Так, поскаржитись на це!
+areYouSure: Ви впевнені?
+noWayOfReturn: Відновити свої дії буде неможливо!
 download: Завантажити
 name: Ім'я
 description: Опис
 noDescription: Опис відсутній.
 credits: Примітки та автори
-noCredits: No credits available.
+noCredits: Немає доступних приміток та авторів.
 notesAndCreditsDescription: Як ви створили цей проєкт? Чи використовували ідеї, скрипти чи витвори інших людей? Скажіть їм спасибі тут.
 country: Країна
 loginText: Увійти
@@ -41,11 +41,11 @@ programDetails: Подробиці
 somethingWentWrong: 'Упс, щось пішло не так.'
 doesNotExist: 'Наведеного ресурсу не існує.'
 pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
-oldVersionError: 'Будь ласка, оновіться до найновішої версії Pocket Code!'
+oldVersionError: 'Будь ласка, оновіть до останньої версії Pocket Code!'
 more: 'більше'
 less: 'менше'
 show-more: 'Показати більше'
-show-less: 'Згорнути інформацію'
+show-less: 'Показати менше'
 more-information: 'Більше інформації'
 less-information: 'Менше інформації'
 ok: Гаразд
@@ -63,8 +63,8 @@ notificationsReadMessage: "Схоже, у вас немає сповіщень."
 confirmMessage: "Так, видалити це"
 cancelMessage: "Скасувати"
 notificationsUnauthorizedError: "Не вдалося авторизувати користувача"
-notificationsClearError: "Не вдалося відзначити сповіщення як прочитані!"
-pleaseWait: "Зачекайте будь ласка..."
+notificationsClearError: "Не вдалося позначити сповіщення як прочитане!"
+pleaseWait: "Будь ласка, зачекайте..."
 projects: "Проєкти"
 users: "Користувачі"
 oauthPopUpTitle: "Інформація про вхід через зовнішній обліковий запис"
@@ -75,7 +75,7 @@ indexPage:
   recommendedSection:
     info:
       title: 'Які проєкти тут рекомендовано?'
-      description: 'Чим більше реакцій (Палець вгору, Посмішка...) отримує ваш проєкт, тим вище він з''явиться в цьому списку.'
+      description: 'Чим більше реакцій (Палець вгору, Посмішка...) отримує ваш проєкт, тим вище він буде в цьому списку.'
 follower:
   follows: Підписки
   followers: Підписники
@@ -320,7 +320,7 @@ licenseToPlay:
   text2: 'Немає ніяких секретних рецептів: інструкція про те, як зробити ці торти, відкрита для будь-кого, щоб використовувати, повторно використовувати, модифікувати та служити натхненням для нових ідей ... Я маю на увазі торти.'
   text3: "Ви можете їсти торти, а також копіювати чужі рецепти, щоб зробити свій власний, можливо, з різними інгредієнтами. Ця свобода має дві прості вимоги:"
   text4: "Створюючи спільноту Catrobat, ми вирішили прийняти цей підхід, оскільки вважаємо, що він підтримує навчання та творчість у спільноті. Ділячись рецептами та інгредієнтами (сценаріями та ілюстраціями), люди можуть спиратися на ідеї один одного, і кожен виграє."
-  text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
+  text5: При розробці веб-сайту Catrobat ми включили функції, які заохочують людей ділитися та віддавати належне іншим. На кожній сторінці проєкту ви завжди можете завантажити оригінальні скрипти для проєкту. Якщо ви робите ремікс проєкту (змінюєте скрипти чи ілюстрації та ділитеся результатом), ми рекомендуємо вам відзначати в примітках проєкту, згадуючи людей та проєкт, які вас надихнули.
   text6: 'Дізнайтеся більше про умови використання онлайн-спільноти Catrobat на %link-termsOfUse%.'
   list1:
     item1: Поділіться своїми тортами разом з рецептом
@@ -374,7 +374,7 @@ search:
 menu:
   profile: Мій Профіль
   login: Увійти
-  logout: Вийти
+  logout: Вийти з облікового запису
   admin: Адмін
   home: Головна
   helpAndTutorials: Допомога & посібник
@@ -463,9 +463,9 @@ errors:
     invalid: Ваша електронна пошта здається недійсною
     exists: Ця адреса електронної пошти вже існує.
   id:
-    blank: Ідентифікатор відкритої автентифікації не повинен бути пустим
+    blank: Ідентифікатор відкритої автентифікації не повинен бути порожнім
   login: Неправильний пароль або ім'я користувача.
-  post-data: "POST-дані неправильні або відсутні!\n"
+  post-data: POST-дані неправильні або відсутні!
   checksum:
     missing: Клієнт не надіслав файл контрольної суми! Ви використовуєте застарілу версію Pocket Code?
     invalid: Неприпустима контрольна сума
@@ -527,10 +527,25 @@ api:
     passwordInvalidChars: 'Пароль містить неприпустимі символи'
     usernameContainsEmail: "Ім'я користувача не повинно містити адресу електронної пошти"
     countryCodeInvalid: "Неприпустимий код країни"
+    pictureInvalid: "Неприпустиме зображення профілю або не підтримується"
+  updateUser:
+    currentPasswordMissing: "Поточний пароль відсутній"
+    currentPasswordWrong: "Поточний пароль неправильний"
+  project:
+    nameEmpty: 'Ім''я не може бути порожнім'
+    nameTooLong: 'Ім''я занадто довге'
+    descriptionTooLong: 'Опис занадто довгий'
+    creditsTooLong: 'Примітка та автори занадто довгі'
+    screenshotInvalid: 'Знімок екрана проєкту неприпустимий або не підтримується'
   projectsPost:
     invalid_checksum: 'Неприпустима контрольна сума. Спробуйте завантажити ще раз!'
     upload_error: 'Помилка під час завантаження. Спробуйте завантажити ще раз!'
     creating_error: 'Помилка під час створення сутності проєкту. Спробуйте завантажити ще раз!'
+  updateProject:
+    xmlError: 'Не вдалося зберегти відомості про проєкт.'
+    screenshotError: 'Не вдалося прочитати, перетворити або зберегти знімок екрана. Будь ласка, перевірте свій внесок.'
+    notFound: 'Не вдалося знайти проєкт, який потрібно змінити.'
+    forbidden: 'Зміна проєкту не дозволяється. Ви все ще ввійшли в систему?'
 #languages and countries
 language:
   arabic: Арабська
@@ -612,7 +627,7 @@ codeview:
   totalNumberOf: 'Загальна кількість'
   scenes: 'Сцени'
   scripts: 'Скрипти'
-  bricks: 'Цегли'
+  bricks: 'Цеглини'
   objects: 'Актори та об''єкти'
   looks: 'Вигляди'
   sounds: 'Звуки'
@@ -620,19 +635,19 @@ codeview:
   locals: 'Локальні'
   globalVariables: 'Глобальні змінні'
   localVariables: 'Локальні змінні'
-  eventBricks: 'Цегли подій'
-  controlBricks: 'Цегли управління'
-  motionBricks: 'Цегли переміщення'
-  soundBricks: 'Цегли звуків'
-  looksBricks: 'Цегли виглядів'
-  penBricks: 'Цегли пера'
-  dataBricks: 'Цегли даних'
-  specialBricks: 'Цегли спеціальні'
+  eventBricks: 'Цеглини подій'
+  controlBricks: 'Цеглини управління'
+  motionBricks: 'Цеглини переміщення'
+  soundBricks: 'Цеглини звуків'
+  looksBricks: 'Цеглини виглядів'
+  penBricks: 'Цеглини пера'
+  dataBricks: 'Цеглини даних'
+  specialBricks: 'Цеглини спеціальні'
 codeStatistics:
   title: "Статистика коду"
   error: "Неможливо показати статистику коду."
   general: 'Основні'
-  bricks: 'Цегли'
+  bricks: 'Цеглини'
   eventBricks: 'Події'
   controlBricks: 'Управління'
   motionBricks: 'Переміщення'
