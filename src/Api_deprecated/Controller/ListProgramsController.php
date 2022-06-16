@@ -55,7 +55,7 @@ class ListProgramsController extends AbstractController
   }
 
   /**
-   * @deprecated   ToDo still used by profile!!
+   * @deprecated
    */
   #[Route(path: '/api/projects/userProjects.json', name: 'api_user_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function listUserProgramsAction(Request $request): ProgramListResponse

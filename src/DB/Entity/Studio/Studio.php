@@ -2,9 +2,11 @@
 
 namespace App\DB\Entity\Studio;
 
+use App\DB\Entity\User\Comment\UserComment;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\Generator\MyUuidGenerator;
 use DateTime;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,6 +62,18 @@ class Studio
    * @ORM\Column(name="created_on", type="datetime", nullable=false)
    */
   protected ?DateTime $created_on = null;
+
+  /**
+   * When this studio is deleted, all its comments should be removed too.
+   *
+   * @ORM\OneToMany(
+   *     targetEntity=UserComment::class,
+   *     mappedBy="studio",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"remove"}
+   * )
+   */
+  protected Collection $user_comments;
 
   public function getId(): ?string
   {

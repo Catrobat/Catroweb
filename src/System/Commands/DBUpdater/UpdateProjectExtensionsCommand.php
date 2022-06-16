@@ -31,42 +31,42 @@ class UpdateProjectExtensionsCommand extends Command
   {
     $count = 0;
 
-    $extension = $this->getOrCreateExtension(Extension::ARDUINO, 1)
+    $extension = $this->getOrCreateExtension(Extension::ARDUINO)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'arduino.title')
       ->setEnabled(true)
         ;
     ++$count;
     $this->entity_manager->persist($extension);
 
-    $extension = $this->getOrCreateExtension(Extension::DRONE, 2)
+    $extension = $this->getOrCreateExtension(Extension::DRONE)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'drone.title')
       ->setEnabled(true)
       ;
     ++$count;
     $this->entity_manager->persist($extension);
 
-    $extension = $this->getOrCreateExtension(Extension::PHIRO, 4)
+    $extension = $this->getOrCreateExtension(Extension::PHIRO)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'phiro.title')
       ->setEnabled(true)
       ;
     ++$count;
     $this->entity_manager->persist($extension);
 
-    $extension = $this->getOrCreateExtension(Extension::RASPBERRY_PI, 5)
+    $extension = $this->getOrCreateExtension(Extension::RASPBERRY_PI)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'raspberry_pi.title')
       ->setEnabled(true)
       ;
     ++$count;
     $this->entity_manager->persist($extension);
 
-    $extension = $this->getOrCreateExtension(Extension::EMBROIDERY, 6)
+    $extension = $this->getOrCreateExtension(Extension::EMBROIDERY)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'embroidery.title')
       ->setEnabled(true)
       ;
     ++$count;
     $this->entity_manager->persist($extension);
 
-    $extension = $this->getOrCreateExtension(Extension::MINDSTORMS, 7)
+    $extension = $this->getOrCreateExtension(Extension::MINDSTORMS)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'mindstorms.title')
       ->setEnabled(true)
       ;
@@ -79,16 +79,10 @@ class UpdateProjectExtensionsCommand extends Command
     return 0;
   }
 
-  /**
-   * ToDo: id is deprecated -- remove once transition was made.
-   */
-  protected function getOrCreateExtension(string $internal_title, int $id = 0): Extension
+  protected function getOrCreateExtension(string $internal_title): Extension
   {
-    $tag = $this->extension_repository->findOneBy(['internal_title' => $internal_title]);
-    if (is_null($tag)) {
-      $tag = $this->extension_repository->findOneBy(['id' => $id]) ?? new Extension();
-    }
+    $extension = $this->extension_repository->findOneBy(['internal_title' => $internal_title]) ?? new Extension();
 
-    return $tag->setInternalTitle($internal_title);
+    return $extension->setInternalTitle($internal_title);
   }
 }

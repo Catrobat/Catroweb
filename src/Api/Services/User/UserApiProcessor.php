@@ -35,10 +35,10 @@ final class UserApiProcessor extends AbstractApiProcessor
       $user->setAvatar($request->getPicture());
     }
     if (!empty($request->getAbout())) {
-      // TODO: implement User:about field
+      $user->setAbout($request->getAbout());
     }
     if (!empty($request->getCurrentlyWorkingOn())) {
-      // TODO: implement User: get currently working on field
+      $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
     }
 
     return $user;
@@ -69,10 +69,10 @@ final class UserApiProcessor extends AbstractApiProcessor
       }
     }
     if (!is_null($request->getAbout())) {
-      // TODO: implement User:about field
+      $user->setAbout($request->getAbout());
     }
     if (!is_null($request->getCurrentlyWorkingOn())) {
-      // TODO: implement User: get currently working on field
+      $user->setCurrentlyWorkingOn($request->getCurrentlyWorkingOn());
     }
 
     $this->user_manager->updateUser($user, true);

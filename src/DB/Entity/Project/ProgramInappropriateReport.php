@@ -31,10 +31,16 @@ class ProgramInappropriateReport
   private ?int $id = null;
 
   /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="program_inappropriate_reports")
+   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_triggered_by_this_user")
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
-  private ?User $reportingUser = null;
+  private ?User $reporting_user = null;
+
+  /**
+   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_of_this_user")
+   * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+   */
+  private ?User $reported_user = null;
 
   /**
    * @ORM\Column(name="category", type="text", length=256)
@@ -66,12 +72,6 @@ class ProgramInappropriateReport
    * @ORM\Column(name="projectVersion", type="integer")
    */
   private int $projectVersion;
-
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="program_inappropriate_reports")
-   * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   */
-  private ?User $reportedUser = null;
 
   /**
    * @ORM\PrePersist
@@ -108,28 +108,28 @@ class ProgramInappropriateReport
     return $this->id;
   }
 
-  public function setReportingUser(?User $reportingUser): ProgramInappropriateReport
+  public function setReportingUser(?User $reporting_user): ProgramInappropriateReport
   {
-    $this->reportingUser = $reportingUser;
+    $this->reporting_user = $reporting_user;
 
     return $this;
   }
 
   public function getReportingUser(): ?User
   {
-    return $this->reportingUser;
+    return $this->reporting_user;
   }
 
-  public function setReportedUser(?User $reportedUser): ProgramInappropriateReport
+  public function setReportedUser(?User $reported_user): ProgramInappropriateReport
   {
-    $this->reportedUser = $reportedUser;
+    $this->reported_user = $reported_user;
 
     return $this;
   }
 
   public function getReportedUser(): ?User
   {
-    return $this->reportedUser;
+    return $this->reported_user;
   }
 
   public function setCategory(string $category): ProgramInappropriateReport
