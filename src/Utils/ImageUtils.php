@@ -55,13 +55,11 @@ class ImageUtils
       imagefill($new_image, 0, 0, imagecolorallocatealpha($new_image, 0, 0, 0, 127));
 
       if (!imagecopyresized($new_image, $image, 0, 0, 0, 0, $MAX_IMAGE_SIZE, $MAX_IMAGE_SIZE, $width, $height)) {
-        imagedestroy($new_image);
         throw new Exception('USER_AVATAR_UPLOAD_ERROR', 814);
       }
 
       ob_start();
       if (!imagepng($new_image)) {
-        imagedestroy($new_image);
         throw new Exception('USER_AVATAR_UPLOAD_ERROR', 814);
       }
 
