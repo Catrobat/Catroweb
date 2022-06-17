@@ -3,7 +3,7 @@ import $ from 'jquery'
 import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
 export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
-  elementsTranslationSingular, elementsTranslationPlural, isWebView, mediaLibPackageByNameUrlApi) {
+  translations, isWebView, mediaLibPackageByNameUrlApi) {
   $(function () {
     // Removing the project navigation items and showing just the category menu items
     const element = document.getElementById('project-navigation')
@@ -35,19 +35,39 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       showTopBarDefault()
     }
 
+    // accepted flavors
+    const acceptedFlavors = [
+      'pocketcode'
+    ]
+    if ($.inArray(flavor, acceptedFlavors) === -1) {
+      acceptedFlavors.push(flavor)
+    }
+
+    // url
     let url
+    const attributes = 'id,name,flavors,packages,category,extension,file_type,size,download_url'
     if (mediaSearchPath !== '') {
-      url = mediaSearchPath
+      url = mediaSearchPath + '&attributes=' + attributes
     } else {
-      url = mediaLibPackageByNameUrlApi + '?package=' + packageName
+      url = mediaLibPackageByNameUrlApi + '?package=' + packageName + '&attributes=' + attributes
     }
 
     $.get(url, {}, pkgFiles => {
       pkgFiles.forEach(file => {
-        if (file.flavor !== 'pocketcode' && file.flavor !== flavor) {
-          return // don't display files of other flavors
+        // flavors
+        let fileFlavorArray = []
+        if ('flavors' in file && Array.isArray(file.flavors)) {
+          fileFlavorArray = file.flavors
+        } else if ('flavor' in file) {
+          fileFlavorArray.push(file.flavor)
         }
 
+        const flavorFound = fileFlavorArray.some(ai => acceptedFlavors.includes(ai))
+        if (!flavorFound) {
+          return
+        }
+
+        // media container
         const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>')
         mediafileContainer.click(function () {
           // !!! Due to missing android web view support the download multiple files feature was "disabled" !!!!!
@@ -72,9 +92,9 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
             // Dispense support for languages where the count would be right.
             // This way there is no need to dynamically load the translation. (No delay - Less requests)
             if (downloadList.length === 1) {
-              elementsText += elementsTranslationSingular
+              elementsText += translations.elementsSingular
             } else {
-              elementsText += elementsTranslationPlural
+              elementsText += translations.elementsPlural
             }
 
             document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
@@ -87,24 +107,25 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           }
         })
 
-        if (flavor !== 'pocketcode' && file.flavor === flavor) {
+        const fileIsFlavored = !fileFlavorArray.includes('pocketcode')
+        if (fileIsFlavored) {
           mediafileContainer.addClass('flavored')
         }
 
         mediafileContainer.append($('<i class="checkbox material-icons">check_circle</i>'))
         mediafileContainer.append(buildImageContainer(file))
-        if (file.project_url) {
+        if ('project_url' in file && file.project_url) {
           mediafileContainer.append(
             '<div class="text-container">' +
             '  <a class="name name--link" href="' + file.project_url + '">' + getFileName(file) + '</a>' +
-            '  <div class="description">' + file.description + '</div>' +
+            '  <div class="description">' + getFileDescription(file) + '</div>' +
             '</div>'
           )
         } else {
           mediafileContainer.append(
             '<div class="text-container">' +
             '  <div class="name">' + getFileName(file) + '</div>' +
-            '  <div class="description">' + file.description + '</div>' +
+            '  <div class="description">' + getFileDescription(file) + '</div>' +
             '</div>'
           )
         }
@@ -114,7 +135,7 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
         }
 
         if (file.category.startsWith('ThemeSpecial')) {
-          if (file.flavor === flavor) {
+          if (flavorFound) {
             $('#content #category-theme-special .files').prepend(mediafileContainer)
           } // else ignore
         } else {
@@ -148,40 +169,47 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
   }
 
+  function getFileDescription (file) {
+    let type
+    if (file.file_type in translations.type) {
+      type = translations.type[file.file_type]
+    } else {
+      type = translations.type.unknown
+    }
+    const size = (file.size / (1024 * 1024)).toFixed(2) + 'MB'
+    return type + '<br>' + translations.size.replace('%size%', size)
+  }
+
   function buildImageContainer (file) {
     const imageContainer = $('<div class="img-container"></div>')
     let audio, previewBtn
 
-    switch (file.type) {
-      case 'image':
-      case 'catrobat':
-        imageContainer.attr('data-filetype', 'image')
-        imageContainer.append(buildImageFromFile(file))
-        break
-      case 'sound':
-        imageContainer.attr('data-filetype', 'audio')
-        audio = new Audio(file.download_url)
-        previewBtn = $('<i class="audio-control material-icons">play_arrow</i>')
-        previewBtn.click(function () {
-          if (audio.paused) {
-            previewBtn.text('pause')
-            audio.play()
-          } else {
-            previewBtn.text('play_arrow')
-            audio.pause()
-          }
-          return false
-        })
-        audio.onended = function () {
+    if (file.file_type === 'image' || file.extension === 'catrobat') {
+      imageContainer.attr('data-filetype', 'image')
+      imageContainer.append(buildImageFromFile(file))
+    } else if (file.file_type === 'sound') {
+      imageContainer.attr('data-filetype', 'audio')
+      // eslint-disable-next-line no-undef
+      audio = new Audio(file.download_url)
+      previewBtn = $('<i class="audio-control material-icons">play_arrow</i>')
+      previewBtn.click(function () {
+        if (audio.paused) {
+          previewBtn.text('pause')
+          audio.play()
+        } else {
           previewBtn.text('play_arrow')
+          audio.pause()
         }
-        imageContainer.append(previewBtn)
-        break
-      case 'video':
-        imageContainer.append($('<i class="media-file-icon material-icons">videocam</i>'))
-        break
-      default:
-        imageContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+        return false
+      })
+      audio.onended = function () {
+        previewBtn.text('play_arrow')
+      }
+      imageContainer.append(previewBtn)
+    } else if (file.file_type === 'video') {
+      imageContainer.append($('<i class="media-file-icon material-icons">videocam</i>'))
+    } else {
+      imageContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
     }
 
     return imageContainer
