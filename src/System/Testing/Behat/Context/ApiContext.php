@@ -107,7 +107,7 @@ class ApiContext implements Context
 
   private array $default_user_structure_extended = ['id', 'username', 'email'];
 
-  private array $default_featured_project_structure = ['project_id', 'name'];
+  private array $default_featured_project_structure = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
 
   private array $default_media_file_structure = ['id', 'name'];
 

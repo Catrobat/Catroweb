@@ -105,12 +105,18 @@ programs:
   recommended: سفارش کردہ منصوبے
   scratchremixes: سکریچ ریمکس
   noPrograms: فی الحال کوئی منصوبے نہیں ہیں.
+  deleteAction: پروجیکٹ کو حذف کریں۔
   deleteConfirmation: |+
     کیا تمہیں یقین ہے؟
     کیا آپ کو یقین ہے کہ آپ %programName% کو حذف کرنا چاہتے ہیں؟
     آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
     جی ہاں، اسے حذف کریں!
     منسوخ
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: ذاتی
+  public: عوامی
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     کیا تمہیں یقین ہے؟
     اگر آپ نجی طور پر '%programName%' مقرر کرتے ہیں، تو یہ دوسرے صارفین کی طرف سے دیکھا یا نہیں مل جائے گا.
@@ -255,6 +261,8 @@ passwordRecovery:
     آپ کی کیٹروبیٹ ٹیم۔
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: اپنی پروفائل میں ترمیم کریں
   saveChanges: تبدیلیاں محفوظ کریں
   newPass: نیا خفیہ کوڈ
@@ -283,14 +291,15 @@ profile:
     submitSuccess: محفوظ ہوچکا!
   reallyDeleteProgram: کیا آپ واقعی آپ کے منصوبے کو حذف کرنا چاہتے ہیں؟
   programsOf: کی منصوبے
+  picture: Profile picture
   changePicture: تصویر تبدیل کریں
-  avatar:
-    noImage: کوئی تصویرنہیں!
-    pictureTooLarge: آپکی منتخب کردہ تصویر بہت بڑی ہے، برائے مہربانی 5mb سے بڑے تصاویر استعمال نہ کریں۔
-    uploadError: ہم معذرت خواہ ہیں، اپ لوڈنگ کے دوران کچھ مسئلہ پیش آیا!
-    noSupport: اس قسم کی تصویر موزوں نہیں ہے، دوسری تصویر آزمائیے۔
   goToScratchProfile: Scratch پر پروفائل
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: پروفائل میں ترمیم کریں
   edit: تدوین کریں
   done: مکمل ہوا
@@ -298,16 +307,14 @@ myprofile:
   passwordUpdated: آپ کا پاس ورڈ کامیابی سے بدل دیا گیا۔
   avatar: اوتار
   email: ای میل
-  editAvatar: اوتار مین تبدیلی کریں
-  editUsername: صارف کے نام مین تبدیلی کریں
-  editPassword: پاس ورڈ مین تبدیلی کریں
-  editCountry: ملک تبدیل کریں
-  editEmail: ای میل تدوین کریں
   deleteAccount: اکاؤنٹ ختم کریں
-  deleteAccountText: کیا آپ کو یقین ہے کہ آپ اپنا اکاؤنٹ حذف کرنا چاہتے ہیں؟ یہ آپ کے اپ لوڈ کردہ منصوبوں اور تبصرے کو حذف کرے گا!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: اکاؤنٹ کی ترتیبات میں ترمیم کریں
-  notChangeVisibility: نمائش تبدیل نہیں کر سکتے ہیں
-  notChangeVisibilityReason: آپ کے منصوبے کا زبان ورژن بہت زیادہ ہے اور اس طرح یہ نظر انداز کرنے کے لئے مقرر نہیں کیا جا سکتا.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'کھیلنے کے لئے لائسنس'
   title: 'کھیلنے کا لائسنس - اعزاز دیں اور دوسروں کیساتھ شریک کریں۔'
@@ -440,6 +447,7 @@ format:
   million_abbreviation: مئی
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: صارف کا نام خالی نہیں ہونا چاہیئے
     invalid: آپکا صارف نام غلط ہے

@@ -105,12 +105,18 @@ programs:
   recommended: Preporučeni projekti
   scratchremixes: Scratch remixi
   noPrograms: Trenutno nema projekata.
+  deleteAction: Izbriši projekat
   deleteConfirmation: |+
     Da li ste sigurni?
     Da li ste sigurni da želite izbrisati "%programName%"?
     Nema načina da obnovite svoje postupke.
     Da, obriši.
     Otkaži
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: private
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Ako postavite '%programName%'na privatno, drugi korisnici neće ga videti i naći.
     I dalje možete da delite vezu vašeg projekta sa svojim prijateljima. Možete da prebacite vidljivost dodirom na ikonu katanca.
@@ -263,6 +269,8 @@ passwordRecovery:
     Vaš Catrobat Tim.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Izmenite svoj profil
   saveChanges: sačuvaj izmene
   newPass: nova lozinka
@@ -291,14 +299,15 @@ profile:
     submitSuccess: sačuvano!
   reallyDeleteProgram: Želiš li zaista izbrisati svoj projekat
   programsOf: Projekti od
+  picture: Profile picture
   changePicture: Promeni sliku
-  avatar:
-    noImage: Nema slike!
-    pictureTooLarge: Izabrana slika je prevelika, molimo da ne koristiš slike veće od 5mb.
-    uploadError: Izvinite, došlo je do problema tokom otpremanja!
-    noSupport: Ova vrsta slike nije podržana. Pokušajte s drugom slikom.
   goToScratchProfile: Profile on Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Urеdi profil
   edit: Izmeni
   done: Gotovo
@@ -306,16 +315,14 @@ myprofile:
   passwordUpdated: Vaša lozinka je uspešno ažurirana.
   avatar: Avatar
   email: Email
-  editAvatar: Izmeni avatar
-  editUsername: Izmeni korisničko ime
-  editPassword: Izmeni lozinku
-  editCountry: Izmeni državu
-  editEmail: Izmeni E-Mail
   deleteAccount: Obriši nalog
-  deleteAccountText: Da li ste sigurni da želite da obrišete Vaš nalog? Time brišete vaše projekte kao i komentare!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Izmeni podešavanja naloga
-  notChangeVisibility: Ne mogu da promenim vidljivost
-  notChangeVisibilityReason: Jezička verzija vašeg projekta je previsoka, pa se ne može postaviti na vidljivu.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Licenca za reproduciranje'
   title: 'Licenca za reproduciranje - Daj kredit i podeli'
@@ -448,6 +455,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Korisničko ime ne sme da bude prazno
     invalid: Korisničko ime nije ispravno

@@ -34,7 +34,7 @@ credits: Примітки та автори
 noCredits: Немає доступних приміток та авторів.
 notesAndCreditsDescription: Як ви створили цей проєкт? Чи використовували ідеї, скрипти чи витвори інших людей? Скажіть їм спасибі тут.
 country: Країна
-loginText: Увійти
+loginText: Логін
 privacyPolicy: Політика конфіденційності
 imprint: Відомості
 programDetails: Подробиці
@@ -105,12 +105,18 @@ programs:
   recommended: Рекомендовані проєкти
   scratchremixes: Scratch ремікси
   noPrograms: Наразі немає проєктів.
+  deleteAction: Видалити проєкт
   deleteConfirmation: |+
     Ви впевнені?
     Ви впевнені, що хочете видалити "%programName%"?
     Відновити ваші дії буде неможливо!
     Так, видалити це!
     Скасувати
+  deleteNotFoundError: Проєкт який ви хочете видалити не був знайдений у вашому профілі.
+  private: приватний
+  public: публічний
+  setPrivateAction: Зробити приватним
+  setPublicAction: Зробити публічним
   changeVisibility: |+
     Ти впевнений?
     Якщо встановити "%programName%" для приватного, його не побачать і не знайдуть інші користувачі.
@@ -260,6 +266,8 @@ passwordRecovery:
     Команда Catrobat.
     </p>
 profile:
+  aboutMe: Про мене
+  currentlyWorkingOn: В даний час працює над
   edit: Редагувати свій профіль
   saveChanges: Зберегти зміни
   newPass: Новий пароль
@@ -288,14 +296,15 @@ profile:
     submitSuccess: Збережено!
   reallyDeleteProgram: Ви справді бажаєте видалити свій проєкт?
   programsOf: Проєкти
+  picture: Зображення профілю
   changePicture: Змінити зображення
-  avatar:
-    noImage: Немає зображення!
-    pictureTooLarge: Вибране зображення занадто велике, будь ласка, не використовуйте зображення розміром понад 5 Мб.
-    uploadError: На жаль, під час завантаження виникла проблема!
-    noSupport: Цей тип зображення не підтримується, спробуйте інше зображення.
   goToScratchProfile: Профіль у Scratch
 myprofile:
+  userSettings: Налаштування користувача
+  profileSettings: Налаштування профілю
+  securitySettings: Налаштування безпеки
+  accountSettings: Налаштування облікового запису
+  account: Обліковий запис
   editProfile: Редагувати профіль
   edit: Редагувати
   done: Готово
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: Ваш пароль було успішно оновлено.
   avatar: Аватар
   email: Електронна пошта
-  editAvatar: Змінити фото профілю
-  editUsername: Редагувати ім'я користувача
-  editPassword: Редагувати пароль
-  editCountry: Змінити країну
-  editEmail: Редагувати електронну пошту
   deleteAccount: Видалити обліковий запис
-  deleteAccountText: Ви дійсно бажаєте видалити свій обліковий запис? Це видалить ваші завантажені проєкти та коментарі!
+  deleteAccountWarning: |
+    Пам'ятай:
+    Ви створили %num_projects% проєкт(ів) і маєте %num_followers% підписник(ів). Усі ваші проєкти будуть видалені. Ви більше не зможете ввійти, і ваші проєкт зникнуть з усіх списків. Видалення профілю неможливо скасувати!
+    Ви впевнений, що хочеш покинути нас?
   editAccountSettings: Редагувати налаштування облікового запису
-  notChangeVisibility: Не можна змінити видимість
-  notChangeVisibilityReason: Мовна версія вашого проєкту занадто висока і, отже, її не можна встановити на видиму.
+  profileChangeSuccess: Ваш профіль успішно змінено.
+  unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжіться з нами.
 licenseToPlay:
   link: 'Ліцензія на гру'
   title: 'Ліцензія на гру - Вказуйте джерело і поділіться'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: М
 #api
 errors:
+  unspecified: Сталася невідома помилка. Будь ласка, зв'яжіться з нами.
   username:
     blank: Ім'я користувача не повинно бути порожнім
     invalid: Ваше ім'я користувача некоректне
@@ -797,7 +805,7 @@ achievements:
         title: "Лінгвіст"
         description: "Перекладайте свої проєкти на 5 мов"
 tags:
-  title: '{0} |{1} Мітка |] 1,INF] Мітки'
+  title: '{0} |{1} Мітка |]1,Inf] Мітки'
   tag:
     game:
       title: Гра

@@ -105,12 +105,18 @@ programs:
   recommended: Proyek yang direkomendasikan
   scratchremixes: Gores remix
   noPrograms: Saat ini tidak ada proyek.
+  deleteAction: Hapus proyek
   deleteConfirmation: |+
     Apakah kamu yakin
     Anda yakin ingin menghapus "%programName%"?
     Tidak ada cara untuk memulihkan tindakan Anda!
     Ya, hapus!
     Membatalkan
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: pribadi
+  public: publik
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Apakah kamu yakin
     Jika Anda menyetel '%programName%' menjadi pribadi, ini tidak akan terlihat atau ditemukan oleh pengguna lain.
@@ -260,6 +266,8 @@ passwordRecovery:
     Tim Catrobat Anda.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Sunting profil Anda
   saveChanges: simpan perubahan
   newPass: kata sandi baru
@@ -288,14 +296,15 @@ profile:
     submitSuccess: tersimpan!
   reallyDeleteProgram: Apakah Anda benar-benar ingin menghapus proyek Anda
   programsOf: Proyek dari
+  picture: Profile picture
   changePicture: Ubah foto
-  avatar:
-    noImage: Tidak ada gambar!
-    pictureTooLarge: Gambar pilihan Anda terlalu besar, jangan gunakan gambar yang lebih besar dari 5mb.
-    uploadError: Maaf, ada masalah selama mengunggah!
-    noSupport: Jenis gambar ini tidak didukung, silakan coba gambar lain.
   goToScratchProfile: Profil di Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Edit profil
   edit: Edit
   done: Selesai
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: Kata sandi Anda berhasil diperbarui.
   avatar: Avatar
   email: Surel
-  editAvatar: Ubah Avatar
-  editUsername: Ubah nama pengguna
-  editPassword: Ubah Kata sandi
-  editCountry: Ubah Negara
-  editEmail: Ubah Email
   deleteAccount: Hapus akun
-  deleteAccountText: Anda yakin ingin menghapus akun Anda? Ini akan menghapus proyek dan komentar yang Anda unggah!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Edit pengaturan akun
-  notChangeVisibility: Tidak dapat mengubah visibilitas
-  notChangeVisibilityReason: Versi bahasa proyek Anda terlalu tinggi sehingga tidak dapat disetel ke terlihat.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Lisensi untuk bermain'
   title: 'Lisensi untuk bermain - memberikan kredit dan berbagi'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Nama pengguna tidak boleh kosong
     invalid: Nama pengguna tidak sah

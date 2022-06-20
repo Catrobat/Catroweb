@@ -105,12 +105,18 @@ programs:
   recommended: खासकर आपके लिए
   scratchremixes: स्क्रैच रिमिक्स
   noPrograms: अभी कोई प्रोजेक्ट नहीं है।
+  deleteAction: प्रोजेक्ट हटाएं
   deleteConfirmation: |+
     वाकई में?
     क्या आप वाकई "%programName%" को हटाना चाहते हैं?
     इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
     रद्द करें 
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: निजी
+  public: जनता
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     वाकई में?
     यदि आप '%programName%' को निजी बनाते हैं, तो इसे अन्य उपभोक्ता नहीं देख पाएंगे।
@@ -260,6 +266,8 @@ passwordRecovery:
     आपकी कैटोबैट टीम।
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: अपने प्रोफ़ाइल संपादित करें
   saveChanges: परिवर्तन सहेजें
   newPass: नया पासवर्ड
@@ -288,14 +296,15 @@ profile:
     submitSuccess: सहेज दिया गया !
   reallyDeleteProgram: क्या आप वास्तव में अपने प्रोजेक्ट को हटाना चाहते हैं
   programsOf: की परियोजनाएँ
+  picture: Profile picture
   changePicture: चित्र बदले
-  avatar:
-    noImage: चित्र उपलब्द नहीं है!
-    pictureTooLarge: आपकी चुना हुआ चित्र बहुत बड़ा है, कृपया 5 mb से बड़े चित्रों का उपयोग नहीं करे।
-    uploadError: क्षमा करें, अपलोड के दौरान एक समस्या थी!
-    noSupport: यह छवि प्रकार समर्थित नहीं है, कृपया किसी अंय छवि द्वारा प्रयास करें ।
   goToScratchProfile: स्क्रैच पर प्रोफाइल
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: अर्द्ध मुख संपादित करें
   edit: बदलें
   done: हो गया
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: आपका पासवर्ड सफलतापूर्वक अपडेट किया गया था।
   avatar: अवतार
   email: ईमेल
-  editAvatar: अवतार संपादित करें
-  editUsername: उपयोगकर्ता नाम संपादित करें
-  editPassword: अपना पासवर्ड बदलें
-  editCountry: अपना देश बदलें
-  editEmail: अपना ई-मेल बदलें
   deleteAccount: खाता नष्ट करें
-  deleteAccountText: क्या आप वाकई अपने accout को हटाना चाहते हैं? यह आपकी अपलोड की गई परियोजनाओं और टिप्पणियों को हटा देगा!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: खाता सेटिंग संपादित करें
-  notChangeVisibility: दृश्यता नहीं बदल सकते
-  notChangeVisibilityReason: आपकी परियोजना का भाषा संस्करण बहुत अधिक है और इस प्रकार यह दृश्य पर सेट नहीं किया जा सकता है।
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'चलाने के लिए लाइसेंस'
   title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: म
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: यूजरनेम रिक्त नहीं होना चाहिए.
     invalid: आपका उपयोगकर्ता नाम अमान्य है

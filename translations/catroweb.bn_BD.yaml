@@ -105,12 +105,18 @@ programs:
   recommended: প্রস্তাবিত প্রকল্পগুলি
   scratchremixes: স্ক্র্যাচ রিমিক্সস
   noPrograms: বর্তমানে কোন প্রকল্প নেই।
+  deleteAction: প্রকল্প মুছুন
   deleteConfirmation: |+
     আপনি কি নিশ্চিত?
     আপনি কি  "%programName%" মুছতে চান?
     আপনার কার্যটি  পুনরুদ্ধার করার কোনও উপায় নেই!
     হ্যাঁ, এটি মুছুন!
     বাতিল
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: ব্যক্তিগত
+  public: জনসাধারণ
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     তুমি কি নিশ্চিত?
     আপনি যদি  '%programName%' বেসরকারীতে সেট করেন তবে এটি অন্য ব্যবহারকারীদের দ্বারা দেখা বা পাওয়া যাবে না।
@@ -266,6 +272,8 @@ passwordRecovery:
     আপনার ক্যাট্রোব্যাট দল।
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: আপনার প্রোফাইল সম্পাদনা করুন
   saveChanges: পরিবর্তনগুলো সংরক্ষণ করুন
   newPass: নতুন পাসওয়ার্ড
@@ -294,14 +302,15 @@ profile:
     submitSuccess: সংরক্ষিত
   reallyDeleteProgram: আপনি কি সত্যিই আপনার প্রকল্পটি মুছতে চান?
   programsOf: প্রকল্প
+  picture: Profile picture
   changePicture: ছবি পরিবর্তন করুন
-  avatar:
-    noImage: চিত্রবিহীন
-    pictureTooLarge: আপনার নির্বাচিত ছবিটি অনেক বড়, দয়া করে ৫ম্যাগা বাইটের চেয়ে বড় ছবিগুলি ব্যবহার করবেন না।
-    uploadError: দুঃখিত, ইমেজ/ ছবি আপলোড হতে সমস্যা হচ্ছিল।
-    noSupport: এই ধরণের ছবি সমর্থিত নয়, দয়া করে অন্য একটি ছবি চেষ্টা করুন।
   goToScratchProfile: স্ক্র্যাচ-এ প্রোফাইল
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: প্রোফাইল সম্পাদন করুন
   edit: সম্পাদনা করুন
   done: করা হয়েছে
@@ -309,16 +318,14 @@ myprofile:
   passwordUpdated: আপনার পাসওয়ার্ডটি সফলভাবে পরিবর্তন করা হয়েছে।
   avatar: অ্যাভাটার
   email: ই-মেইল
-  editAvatar: অ্যাভাটারটি সম্পাদনা করুন
-  editUsername: ব্যবহারকারীর নাম সম্পাদনা করুন
-  editPassword: পাসওয়ার্ড সম্পাদনা করুন
-  editCountry: দেশ সম্পাদনা করুন
-  editEmail: ই-মেইল সম্পাদনা করুন
   deleteAccount: অ্যাকাউন্ট মুছে ফেলুন
-  deleteAccountText: আপনি কি নিশ্চিত যে আপনি নিজের খাতা মুছতে চান? এটি আপনার আপলোডকৃত প্রকল্প এবং মন্তব্যগুলি মুছবে!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: অ্যাকাউন্ট সেটিংস সম্পাদনা করুন
-  notChangeVisibility: দৃশ্যটি পরিবর্তন করতে পারবেন না
-  notChangeVisibilityReason: আপনার প্রকল্পের ভাষার সংস্করণটি খুব বেশি এবং সুতরাং এটি দৃশ্যমানতে সেট করা যাবে না।
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'খেলার জন্য লাইসেন্স'
   title: 'খেলার জন্য লাইসেন্স - কৃতিত্ব এবং শেয়ার দিন'
@@ -451,6 +458,7 @@ format:
   million_abbreviation: এম
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: ব্যবহারকারীর নাম শূন্য থাকবে না ।
     invalid: আপনার ব্যবহারকারীর নামটি অবৈধ

@@ -105,12 +105,18 @@ programs:
   recommended: Projetos recomendados
   scratchremixes: Remixes do Scratch
   noPrograms: Atualmente, não há nenhum projeto.
+  deleteAction: Excluir projeto
   deleteConfirmation: |+
     Tem certeza?
     Você tem certeza que deseja excluir o programa: "%programName%"?
     Não há como restaurar suas ações!
     Sim, excluir!
     Cancelar
+  deleteNotFoundError: O projeto a ser excluído não pôde ser encontrado em seu usuário.
+  private: privado
+  public: público
+  setPrivateAction: Definir como privado
+  setPublicAction: Definir como público
   changeVisibility: |+
     Você tem certeza?
     Se você definir '%programName%' como privado, ele não será visto ou encontrado por outros usuários.
@@ -259,6 +265,8 @@ passwordRecovery:
     Seu Time Your Catrobat.
     </p>
 profile:
+  aboutMe: Sobre mim
+  currentlyWorkingOn: Atualmente trabalhando em
   edit: Editar seu perfil
   saveChanges: salvar alterações
   newPass: nova senha
@@ -287,14 +295,15 @@ profile:
     submitSuccess: salvo!
   reallyDeleteProgram: Você realmente quer excluir o seu projeto
   programsOf: Projetos de
+  picture: Foto de perfil
   changePicture: Alterar Imagem
-  avatar:
-    noImage: Nenhuma imagem!
-    pictureTooLarge: A imagem selecionada é muito grande. Por favor, não use imagens maiores que 5mb.
-    uploadError: Desculpe! Houve um problema durante o upload!
-    noSupport: Tipo de imagem não suportado. Por favor, tente uma outra imagem.
   goToScratchProfile: Perfil no Scratch
 myprofile:
+  userSettings: Configurações de usuário
+  profileSettings: Configurações de perfil
+  securitySettings: Configurações de segurança
+  accountSettings: Configurações da conta
+  account: Conta
   editProfile: Editar perfil
   edit: Editar
   done: Concluído
@@ -302,16 +311,14 @@ myprofile:
   passwordUpdated: Sua senha foi atualizada com sucesso.
   avatar: Avatar
   email: E-Mail
-  editAvatar: Alterar avatar
-  editUsername: Alterar nome de usuário
-  editPassword: Alterar senha
-  editCountry: Alterar país
-  editEmail: Alterar E-Mail
   deleteAccount: Excluir conta
-  deleteAccountText: Você tem certeza que deseja excluir sua conta? Isto vai excluir seus projetos postados e comentários!
+  deleteAccountWarning: |
+    Esteja ciente:
+    Você criou %num_projects% projeto(s) e tem %num_followers% seguidor(es). Todos os seus projetos serão removidos. Você não poderá mais fazer o login e seus projetos desaparecerão de todas as listas. Apagar seu perfil não pode ser desfeito!
+    Tem certeza de que quer nos deixar?
   editAccountSettings: Editar configurações da conta
-  notChangeVisibility: Não é possível alterar a visibilidade
-  notChangeVisibilityReason: A versão do idioma do seu projeto é muito alta, portanto, ele não pode ser definido como visível.
+  profileChangeSuccess: O seu perfil foi atualizado com sucesso.
+  unspecifiedError: Ocorreu um erro não especificado ao alterar seu perfil. Entre em contato conosco.
 licenseToPlay:
   link: 'Licença para jogar'
   title: 'Licença para jogar - Dê crédito e compartilhe'
@@ -444,6 +451,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: Ocorreu um erro não especificado. Por favor, entre em contato conosco.
   username:
     blank: O nome de usuário não pode estar em branco
     invalid: Seu nome de usuário é inválido
