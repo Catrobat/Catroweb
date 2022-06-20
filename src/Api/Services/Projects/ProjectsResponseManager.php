@@ -159,7 +159,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
   public function createFeaturedProjectResponse(FeaturedProgram $featured_project, ?string $attributes = null): FeaturedProjectResponse
   {
     if (empty($attributes)) {
-      $attributes_list = ['project_id', 'name'];
+      $attributes_list = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
