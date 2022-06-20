@@ -105,12 +105,18 @@ programs:
   recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
   scratchremixes: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
   noPrograms: ਇਸ ਵੇਲੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਨਹੀਂ ਹਨ.
+  deleteAction: ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਮਿਟਾਓ
   deleteConfirmation: |+
     ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
     ਕੀ ਤੁਸੀਂ ਪੱਕਾ "%programName%" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
     ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
     ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
     ਰੱਦ ਕਰੋ
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: ਨਿਜੀ
+  public: ਜਨਤਕ
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
     ਜੇ ਤੁਸੀਂ '%programName%' ਨੂੰ ਪ੍ਰਾਈਵੇਟ ਤੇ ਸੈਟ ਕਰਦੇ ਹੋ, ਤਾਂ ਇਹ ਦੂਜੇ ਉਪਭੋਗਤਾਵਾਂ ਦੁਆਰਾ ਵੇਖਿਆ ਜਾਂ ਲੱਭਿਆ ਨਹੀਂ ਜਾਏਗਾ.
@@ -260,6 +266,8 @@ passwordRecovery:
     ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਟੀਮ.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: ਆਪਣਾ ਪ੍ਰੋਫਾਈਲ ਸੋਧੋ
   saveChanges: ਤਬਦੀਲੀਆਂ ਨੂੰ ਬਚਾਓ
   newPass: ਨਵਾਂ ਪਾਸਵਰਡ
@@ -288,14 +296,15 @@ profile:
     submitSuccess: ਸੰਭਾਲੀ ਗਈ!
   reallyDeleteProgram: ਕੀ ਤੁਸੀਂ ਸੱਚਮੁੱਚ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ
   programsOf: ਦੇ ਪ੍ਰੋਜੈਕਟ
+  picture: Profile picture
   changePicture: ਤਸਵੀਰ ਬਦਲੋ
-  avatar:
-    noImage: ਕੋਈ ਚਿੱਤਰ ਨਹੀਂ!
-    pictureTooLarge: ਤੁਹਾਡੀ ਚੁਣੀ ਗਈ ਤਸਵੀਰ ਬਹੁਤ ਵੱਡੀ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ 5mb ਬੀ ਤੋਂ ਵੱਡੇ ਚਿੱਤਰਾਂ ਦੀ ਵਰਤੋਂ ਨਾ ਕਰੋ.
-    uploadError: ਮੁਆਫ ਕਰਨਾ, ਅਪਲੋਡ ਕਰਨ ਦੌਰਾਨ ਕੋਈ ਸਮੱਸਿਆ ਹੋਈ ਸੀ!
-    noSupport: ਇਹ ਚਿੱਤਰ ਕਿਸਮ ਸਹਿਯੋਗੀ ਨਹੀਂ ਹੈ, ਕਿਰਪਾ ਕਰਕੇ ਹੋਰ ਚਿੱਤਰ ਦੀ ਕੋਸ਼ਿਸ਼ ਕਰੋ.
   goToScratchProfile: ਸਕ੍ਰੈਚ 'ਤੇ ਪ੍ਰੋਫਾਈਲ
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: ਸੋਧ ਪ੍ਰੋਫ਼ਾਈਲ
   edit: ਸੋਧ
   done: ਹੋ ਗਿਆ
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: ਤੁਹਾਡਾ ਪਾਸਵਰਡ ਸਫਲਤਾਪੂਰਵਕ ਅਪਡੇਟ ਕੀਤਾ ਗਿਆ ਸੀ.
   avatar: ਅਵਤਾਰ
   email: ਈ - ਮੇਲ
-  editAvatar: ਅਵਤਾਰ ਸੋਧੋ
-  editUsername: ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਸੋਧੋ
-  editPassword: ਪਾਸਵਰਡ ਸੋਧੋ
-  editCountry: ਦੇਸ਼ ਨੂੰ ਸੋਧੋ
-  editEmail: ਈਮੇਲ ਸੋਧੋ
   deleteAccount: ਖਾਤਾ ਮਿਟਾਓ
-  deleteAccountText: ਕੀ ਤੁਹਾਨੂੰ ਪੱਕਾ ਯਕੀਨ ਹੈ ਕਿ ਤੁਸੀਂ ਆਪਣਾ ਖਾਕਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਹ ਤੁਹਾਡੇ ਅਪਲੋਡ ਕੀਤੇ ਪ੍ਰੋਜੈਕਟਾਂ ਅਤੇ ਟਿੱਪਣੀਆਂ ਨੂੰ ਮਿਟਾ ਦੇਵੇਗਾ!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: ਖਾਤੇ ਦੀ ਸੈਟਿੰਗ ਨੂੰ ਸੋਧੋ
-  notChangeVisibility: ਖਾਤੇ ਦੀ ਸੈਟਿੰਗ ਨੂੰ ਸੋਧੋ
-  notChangeVisibilityReason: ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਦਾ ਭਾਸ਼ਾ ਸੰਸਕਰਣ ਬਹੁਤ ਉੱਚਾ ਹੈ ਅਤੇ ਇਸ ਤਰ੍ਹਾਂ ਇਹ ਵੇਖਣ ਲਈ ਸੈਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'ਖੇਡਣ ਲਈ ਲਾਇਸੈਂਸ'
   title: 'ਖੇਡਣ ਲਈ ਲਾਇਸੈਂਸ - ਕ੍ਰੈਡਿਟ ਦਿਓ ਅਤੇ ਸਾਂਝਾ ਕਰੋ'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: ਐਮ
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਖਾਲੀ ਨਹੀਂ ਹੋਣਾ ਚਾਹੀਦਾ
     invalid: ਤੁਹਾਡਾ ਉਪਯੋਗਕਰਤਾ ਨਾਮ ਅਵੈਧ ਹੈ

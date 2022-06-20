@@ -105,6 +105,7 @@ programs:
   recommended: โครงการแนะนำ
   scratchremixes: เกาผสม
   noPrograms: ขณะนี้ไม่มีโครงการ
+  deleteAction: ลบโปรเจค
   deleteConfirmation: |+
     คุณแน่ใจไหม?
     คุณแน่ใจหรือไม่ว่าต้องการลบ
@@ -112,6 +113,11 @@ programs:
     ไม่มีวิธีใดที่จะคืนค่าการกระทำของคุณ!
     ใช่ลบทิ้ง!
     ยกเลิก
+  deleteNotFoundError: ไม่พบโปรเจ็กต์ที่จะลบภายใต้ผู้ใช้ของคุณ
+  private: ส่วนตัว
+  public: สาธารณะ
+  setPrivateAction: ตั้งเป็นส่วนตัว
+  setPublicAction: ตั้งเป็นสาธารณะ
   changeVisibility: |+
     คุณแน่ใจไหม?
     หากคุณตั้งค่า '%programName%' เป็นส่วนตัวผู้ใช้รายอื่นจะไม่เห็นหรือไม่เห็นมัน
@@ -266,6 +272,8 @@ passwordRecovery:
     ทีม Catrobat ของคุณ
     </p>
 profile:
+  aboutMe: เกี่ยวกับฉัน
+  currentlyWorkingOn: กำลังดำเนินการ
   edit: แก้ไขประวัติของคุณ
   saveChanges: บันทึกการเปลี่ยนแปลง
   newPass: รหัสผ่านใหม่
@@ -294,14 +302,15 @@ profile:
     submitSuccess: บันทึกเรียบร้อย!
   reallyDeleteProgram: คุณต้องการลบโครงการของคุณจริงๆ
   programsOf: โครงการของ
+  picture: รูปโปรไฟล์
   changePicture: เปลี่ยนรูปภาพ
-  avatar:
-    noImage: ไม่มีรูปภาพ
-    pictureTooLarge: รูปภาพของท่านมีขนาดใหญ่เกินไป กรุณาใช้ภาพที่มีขนาดเล็กกว่า 5 เมกะไบต์
-    uploadError: ขออภัย มีปัญหาในการอัพโหลด
-    noSupport: ไม่สนับสนุนนประเภทไฟล์ของรูปนี้ กรุณาลองใช้รูปอื่น
   goToScratchProfile: โปรไฟล์บน Scratch
 myprofile:
+  userSettings: การตั้งค่าของผู้ใช้
+  profileSettings: การตั้งค่าโปรไฟล์
+  securitySettings: ตั้งค่าความปลอดภัย
+  accountSettings: การตั้งค่าบัญชี
+  account: บัญชี
   editProfile: แก้ไขโปรไฟล์
   edit: แก้ไข
   done: เสร็จสิ้น
@@ -309,16 +318,14 @@ myprofile:
   passwordUpdated: อัปเดตรหัสผ่านของคุณสำเร็จแล้ว
   avatar: รูปโปรไฟล์
   email: อีเมล
-  editAvatar: แก้ไขรูปโปรไฟล์
-  editUsername: แก้ไขชื่อผู้ใช้
-  editPassword: แก้ไขรหัสผ่าน
-  editCountry: แก้ไขประเทศ
-  editEmail: แก้ไขอีเมล์
   deleteAccount: ลบบัญชี
-  deleteAccountText: คุณแน่ใจหรือว่าต้องการลบบัญชีของคุณ? นี่จะเป็นการลบโครงการและความคิดเห็นที่คุณอัปโหลด!
+  deleteAccountWarning: |
+    ระวัง:
+    คุณสร้างโครงการ %num_projects% และมีผู้ติดตาม %num_followers% โครงการทั้งหมดของคุณจะถูกลบออก คุณจะไม่สามารถเข้าสู่ระบบได้อีกต่อไปและโครงการของคุณจะหายไปจากรายการทั้งหมด การลบโปรไฟล์ของคุณไม่สามารถยกเลิกได้!
+    คุณแน่ใจหรือว่าต้องการทิ้งเรา
   editAccountSettings: แก้ไขการตั้งค่าบัญชี
-  notChangeVisibility: ไม่สามารถเปลี่ยนการมองเห็น
-  notChangeVisibilityReason: เวอร์ชันภาษาของโครงการของคุณสูงเกินไปและไม่สามารถตั้งให้มองเห็นได้
+  profileChangeSuccess: เปลี่ยนโปรไฟล์ของคุณสำเร็จแล้ว
+  unspecifiedError: เกิดข้อผิดพลาดที่ไม่ระบุขณะเปลี่ยนโปรไฟล์ของคุณ กรุณาติดต่อเรา.
 licenseToPlay:
   link: 'ใบอนุญาตให้เล่น'
   title: 'กฏการเล่น - ให้เครดิต และ ร่วมแบ่งปัน'
@@ -451,6 +458,7 @@ format:
   million_abbreviation: ม
 #api
 errors:
+  unspecified: เกิดข้อผิดพลาดที่ไม่ระบุ กรุณาติดต่อเรา.
   username:
     blank: ชื่อผู้ใช้ต้องไม่ว่างเปล่า
     invalid: ชื่อผู้ใช้ไม่ถูกต้อง
@@ -532,25 +540,25 @@ api:
     passwordInvalidChars: 'รหัสผ่านมีตัวอักษรที่ไม่รับรอง'
     usernameContainsEmail: "ไม่สามารถใช้อีเมลเป็นชื่อผู้ใช้"
     countryCodeInvalid: "ประเทศไม่ถูกต้อง"
-    pictureInvalid: "Profile picture invalid or not supported"
+    pictureInvalid: "รูปโปรไฟล์ไม่ถูกต้องหรือไม่รองรับ"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "ใส่รหัสผ่านปัจจุบัน"
+    currentPasswordWrong: "รหัสผ่านปัจจุบันไม่ถูกต้อง"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'ต้องใส่ชื่อ'
+    nameTooLong: 'ชื่อยาวเกินไป'
+    descriptionTooLong: 'คำอธิบายยาวเกินไป'
+    creditsTooLong: 'หมายเหตุและเครดิตยาวเกินไป'
+    screenshotInvalid: 'ภาพหน้าจอของโปรเจ็กต์ไม่ถูกต้องหรือไม่ได้รับการสนับสนุน'
   projectsPost:
     invalid_checksum: 'การตรวจสอบไม่ถูกต้อง ลองอัปโหลดอีกครั้ง!'
     upload_error: 'เกิดข้อผิดพลาดระหว่างทำการอัปโหลด กรุณาลองใหม่อีกครั้ง'
     creating_error: 'เกิดข้อผิดพลาดระหว่างทำการสร้างโปรเจค กรุณาลองใหม่อีกครั้ง'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'บันทึกรายละเอียดของโครงการไม่สำเร็จ'
+    screenshotError: 'ไม่สามารถอ่าน แปลง หรือจัดเก็บภาพหน้าจอได้ โปรดตรวจสอบข้อมูลของคุณ'
+    notFound: 'ไม่พบโครงการที่จะเปลี่ยนแปลง'
+    forbidden: 'ไม่อนุญาตให้เปลี่ยนแปลงโครงการ คุณยังคงเข้าสู่ระบบ'
 #languages and countries
 language:
   arabic: ภาษาอาหรับ

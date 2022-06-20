@@ -105,12 +105,18 @@ programs:
   recommended: Rekommenderade projekt
   scratchremixes: Scratch remixes
   noPrograms: Det finns för närvarande inga projekt.
+  deleteAction: Ta bort projekt
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: privat
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -259,6 +265,8 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Redigera din profil
   saveChanges: Spara ändringar
   newPass: nytt lösenord
@@ -287,14 +295,15 @@ profile:
     submitSuccess: sparat!
   reallyDeleteProgram: Vill du verkligen ta bort ditt projekt
   programsOf: Projekt av
+  picture: Profile picture
   changePicture: Ändra bild
-  avatar:
-    noImage: Ingen bild!
-    pictureTooLarge: Din valda bild är för stor, Använd inte bilder större än 5mb.
-    uploadError: Tyvärr, var det ett problem under uppladdningen!
-    noSupport: Den här bildtypen stöds inte, försök med en annan bild.
   goToScratchProfile: Profil på Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Redigera profil
   edit: Redigera
   done: Färdigt
@@ -302,16 +311,14 @@ myprofile:
   passwordUpdated: Ditt lösenord har uppdaterats.
   avatar: Avatar
   email: E-post
-  editAvatar: Redigera avatar
-  editUsername: Redigera användarnamn
-  editPassword: Redigera lösenord
-  editCountry: Redigera land
-  editEmail: Redigera e-post
   deleteAccount: Ta bort konto
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Redigera kontoinställningar
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Licens för att spela'
   title: 'Licens för att spela - ge kredit och dela'
@@ -444,6 +451,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Användarnamn får inte vara tomt
     invalid: Ditt användarnamn är ogiltig

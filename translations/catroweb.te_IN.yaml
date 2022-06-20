@@ -105,12 +105,18 @@ programs:
   recommended: సిఫార్సు చేసిన ప్రాజెక్టులు
   scratchremixes: స్క్రాచ్ రీమిక్స్‌లు
   noPrograms: ప్రస్తుతం ప్రాజెక్టులు లేవు.
+  deleteAction: Delete project
   deleteConfirmation: |+
     మీరు చెప్పేది నిజమా?
     మీరు తొలగించాలనుకుంటున్నారా ఖచ్చితంగా"%programName%"?
     మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
     అవును, తొలగించండి!
     రద్దు చేయండి
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: ప్రైవేట్
+  public: ప్రజా
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     మీరు చెప్పేది నిజమా?
     మీరు సెట్ చేస్తే '%programName%ప్రైవేట్‌గా, ఇది ఇతర వినియోగదారులకు కనిపించదు లేదా కనుగొనబడదు.
@@ -263,6 +269,8 @@ passwordRecovery:
     మీ కాట్రోబాట్ బృందం.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: మీ ప్రొఫైల్ సవరించండి
   saveChanges: మార్పులను ఊంచు
   newPass: కొత్త పాసువర్డ్
@@ -291,14 +299,15 @@ profile:
     submitSuccess: రక్షించబడింది!
   reallyDeleteProgram: మీరు నిజంగా మీ ప్రాజెక్ట్‌ను తొలగించాలనుకుంటున్నారా
   programsOf: యొక్క ప్రాజెక్టులు
+  picture: Profile picture
   changePicture: బొమ్మ మార్చండి
-  avatar:
-    noImage: చిత్రం లేదు!
-    pictureTooLarge: మీరు ఎంచుకున్న చిత్రం చాలా పెద్దది, దయచేసి 5mb కంటే పెద్ద చిత్రాలను ఉపయోగించవద్దు.
-    uploadError: క్షమించండి, అప్‌లోడ్ సమయంలో సమస్య ఉంది!
-    noSupport: ఈ చిత్ర రకానికి మద్దతు లేదు, దయచేసి మరొక చిత్రాన్ని ప్రయత్నించండి.
   goToScratchProfile: స్క్రాచ్‌పై ప్రొఫైల్
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: అర్ధముఖము సవరించండి
   edit: సవరించు
   done: Done
@@ -306,16 +315,14 @@ myprofile:
   passwordUpdated: మీ పాస్‌వర్డ్ విజయవంతంగా అప్‌డేట్ చేయబడింది.
   avatar: అవతార్
   email: ఇమెయిల్
-  editAvatar: అవతార్‌ని సవరించండి
-  editUsername: వినియోగదారు పేరును సవరించండి
-  editPassword: పాస్‌వర్డ్‌ను సవరించండి
-  editCountry: దేశాన్ని సవరించండి
-  editEmail: ఇమెయిల్ సవరించండి
   deleteAccount: ఖాతాను తొలగించండి
-  deleteAccountText: మీరు మీ అకౌట్‌ను ఖచ్చితంగా తొలగించాలనుకుంటున్నారా? ఇది మీ అప్‌లోడ్ ప్రాజెక్ట్‌లు మరియు వ్యాఖ్యలను తొలగిస్తుంది!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: ఖాతా సెట్టింగ్‌లను సవరించండి
-  notChangeVisibility: దృశ్యమానతను మార్చలేరు
-  notChangeVisibilityReason: మీ ప్రాజెక్ట్ యొక్క భాష వెర్షన్ చాలా ఎక్కువగా ఉంది మరియు కనుక ఇది కనిపించే విధంగా సెట్ చేయబడదు.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'ఆడటానికి లైసెన్స్'
   title: 'ఆడటానికి లైసెన్స్ - క్రెడిట్ మరియు షేర్ ఇవ్వండి'
@@ -448,6 +455,7 @@ format:
   million_abbreviation: ఎమ్
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: వినియోగదారు పేరు ఖాళీగా ఉండకూడదు
     invalid: మీ వినియోగదారు పేరు చెల్లదు

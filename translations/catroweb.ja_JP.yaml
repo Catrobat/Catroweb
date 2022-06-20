@@ -105,12 +105,18 @@ programs:
   recommended: おすすめのプロジェクト
   scratchremixes: スクラッチのリミックス
   noPrograms: 現在プロジェクトはありません。
+  deleteAction: プロジェクトを削除
   deleteConfirmation: |+
     本当にいいの？
     本当に"%programName%"を削除するのですか？
     あなたの行動を元に戻すことはできません!
     はい、削除してください!
     キャンセル
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: プライベート
+  public: 公開
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     本当にいいの？
     %programName%」をプライベートに設定すると、他のユーザーが見たり見つけたりすることはありません。
@@ -260,6 +266,8 @@ passwordRecovery:
     Your Catrobat Teamです。
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: プロフィールを編集
   saveChanges: 変更を保存します。
   newPass: 新しいパスワード
@@ -288,14 +296,15 @@ profile:
     submitSuccess: 保存しました！
   reallyDeleteProgram: 本当にプロジェクトを削除しますか？
   programsOf: プロジェクト
+  picture: Profile picture
   changePicture: 写真を変更
-  avatar:
-    noImage: イメージがない！？
-    pictureTooLarge: 選択した写真が大きすぎる、5 mb より大きいイメージを使用しないでください。
-    uploadError: 申し訳ありませんが、アップロード中に問題があった ！
-    noSupport: このタイプのイメージはサポートされていません、別の画像を試してください。
   goToScratchProfile: スクラッチのプロフィール
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: プロファイルを編集
   edit: 編集
   done: 完了
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: パスワードが正常に更新されました。
   avatar: アバター
   email: Eメールアドレス
-  editAvatar: アバターを編集
-  editUsername: ユーザー名を編集
-  editPassword: パスワードを編集
-  editCountry: 国を編集
-  editEmail: メールを編集
   deleteAccount: アカウントを削除
-  deleteAccountText: このアカウントを削除してもよろしいですか？アップロードしたプロジェクトとコメントが削除されます！
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: アカウント設定を編集
-  notChangeVisibility: 表示を変更できません
-  notChangeVisibilityReason: プロジェクトの言語バージョンが高すぎるため、表示に設定することはできません。
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: '再生するライセンス'
   title: 'プレーするライセンス - クレジットと共有を与えます'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: ユーザー名を空白にできません
     invalid: あなたのユーザー名は有効ではありません

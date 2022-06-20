@@ -105,12 +105,18 @@ programs:
   recommended: پروژه های توصیه شده
   scratchremixes: ریمیکس دوخت
   noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
+  deleteAction: حذف پروژه
   deleteConfirmation: |+
     مطمئنی؟
     آیا مطمئنید که میخواهید %programName% را حذف کنید؟
     هیچ راهی برای بازگرداندن این عمل شما وجود ندارد!
     بله، آن را حذف کنید!
     لغو کنید
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: خصوصی
+  public: عمومی
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     مطمئنی؟
     اگر شما %programName% را به خصوصی تنظیم کنید، این از طرف کاربران دیگر دیده نمی شود و یا یافت نمی شود.
@@ -260,6 +266,8 @@ passwordRecovery:
     گروه کاتروبات شما. 
     </p> 
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: پروفایل خودت را تنظیم کن
   saveChanges: تغیرات را زخیره کن
   newPass: رمز عبور جدید
@@ -288,14 +296,15 @@ profile:
     submitSuccess: ذخیره شد!
   reallyDeleteProgram: آیا واقعا میخواهید پروژه خود را حذف کنید
   programsOf: پروژه های
+  picture: Profile picture
   changePicture: تغییر تصویر
-  avatar:
-    noImage: No Image!
-    pictureTooLarge: تصویر انتخابی شما خیلی بزرگ است، لطفا از تصاویر بزرگتر از ۵ مگابایت استفاده نکنید.
-    uploadError: با متاسف، در طول آپلود یک مشکل رخ داد!
-    noSupport: این نوع تصویر پشتیبانی نمی شود، لطفا یک تصویر دیگر را امتحان کنید.
   goToScratchProfile: پروفیل بر روی اسکریج (Scratch)
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: تنظیم پروفایل
   edit: ویرایش کردن
   done: انجام شد
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: رمز عبور شما با موفقیت به روز شد.
   avatar: آواتار 
   email: پست الکترونیک
-  editAvatar: تغیر آواتار
-  editUsername: تغیر نام کاربری
-  editPassword: تغیر رمز
-  editCountry: تغیر کشور
-  editEmail: Edit E-Mail
   deleteAccount: Delete Account
-  deleteAccountText: آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: تنظیمات حساب
-  notChangeVisibility: نمی تواند دید را تغییر دهد
-  notChangeVisibilityReason: نسخه زبان پروژه شما خیلی زیاد است و بنابراین نمی توان آن را قابل مشاهده کرد.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'مجوز برای بازی'
   title: 'مجوز بازی - اعتبار  دهید و به اشتراک گذارید'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: م
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: نام کاربری نباید خالی باشد
     invalid: نام کاربری شما نامعتبر است

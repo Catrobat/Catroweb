@@ -105,12 +105,18 @@ programs:
   recommended: Recommended projects
   scratchremixes: Scratch remixes
   noPrograms: There are currently no projects.
+  deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: private
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -259,6 +265,8 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Edit your profile
   saveChanges: تبديليون سانڍيو
   newPass: نئون ڳجھو لفظ
@@ -287,14 +295,15 @@ profile:
     submitSuccess: سانڍجي ويو!
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
+  picture: Profile picture
   changePicture: تصوير بدلايو
-  avatar:
-    noImage: No image!
-    pictureTooLarge: توهان جي چونڊيل تصوير هيڪاندي وڏي آهي، مهرباني ڪري 5 ميگا ٻاٽڻ کان وڏا عڪس نہ استعمال ڪريو.
-    uploadError: معاف ڪندا، فائيل چاڙهيندي ڪو مسئلو درپيش اچي ويو!
-    noSupport: عڪس جو اهو فارميٽ ڪار نہ آهي، مهرباني ڪري ڪو ٻيو عڪس آزمايو.
   goToScratchProfile: Profile on Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: پروفائل تصحيح ڪريو
   edit: تصحيح
   done: ٺيڪ آهي
@@ -302,16 +311,14 @@ myprofile:
   passwordUpdated: Your password was successfully updated.
   avatar: اوتار
   email: Email
-  editAvatar: اوتار تصحيح ڪريو
-  editUsername: يوزر نالو تصحيح ڪريو
-  editPassword: پاسورڊ تصحيح ڪريو
-  editCountry: ملڪ تصحيح ڪريو
-  editEmail: اي ميل تصحيح ڪريو
   deleteAccount: Delete account
-  deleteAccountText: Are you sure that you want to delete your accout? This will delete your uploaded projects and comments!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Edit account settings
-  notChangeVisibility: Can not change visibility
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'کيڏڻ جو اجازت نامو'
   title: 'کيڏڻ جو اجازت نامو - شاباش ڏيو ۽ ونڊيو'
@@ -444,6 +451,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Username must not be blank
     invalid: Your username is invalid

@@ -105,12 +105,18 @@ programs:
   recommended: 추천 프로그램
   scratchremixes: 스크래치 리믹스
   noPrograms: 프로젝트가 없습니다.
+  deleteAction: 프로젝트 삭제
   deleteConfirmation: |+
     맞습니까?
     "%programName%"을 삭제할 예정이세요?
     되돌릴 수 없습니다.
     예, 삭제!
     취소
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: 사적인
+  public: 공공의
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     확실한가요?
     '%programName%'을 비공개로 설정한다면 다른 사용자들이 보거나 찾을 수 없을 것입니다. 그래도 당신은 당신의 친구들과 당신의 프로젝트의 링크를 공유할 수 있습니다. 자물쇠 아이콘을 눌러 공개 여부를 전환할 수 있습니다.
@@ -257,6 +263,8 @@ passwordRecovery:
     Catrobat 팀.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: 프로필 수정
   saveChanges: 변경내용을 저장
   newPass: 새로운 비밀번호
@@ -285,14 +293,15 @@ profile:
     submitSuccess: 저장 완료
   reallyDeleteProgram: 프로그램을 삭제 하시겠습니까?
   programsOf: 프로젝트
+  picture: Profile picture
   changePicture: 사진 변경
-  avatar:
-    noImage: 이미지 없음
-    pictureTooLarge: 선택한 그림이 너무 큽니다, 5mb 보다 큰 이미지를 사용 하지 마십시오.
-    uploadError: 죄송합니다, 업로드하는 동안 문제가 발생했습니다!
-    noSupport: 이 이미지 형식은 지원되지 않습니다, 그리고 다른 이미지를 시도하십시오.
   goToScratchProfile: 스크래치용 프로파일
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: 프로필 수정
   edit: 편집
   done: 완료
@@ -300,16 +309,14 @@ myprofile:
   passwordUpdated: 비밀번호가 성공적으로 변경되었습니다.
   avatar: 아바타
   email: 이메일 주소
-  editAvatar: 아바타 편집
-  editUsername: 사용자 이름 편집
-  editPassword: 비밀번호 변경
-  editCountry: 국가 수정
-  editEmail: 전자 메일 편집
   deleteAccount: 계정 삭제
-  deleteAccountText: 당신의 계정을 삭제하는 것에 동의하시나요? 당신이 올린 프로그램과 댓글이 삭제될 것입니다.
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: 계정 설정 수정
-  notChangeVisibility: 가시성을 바꿀 수 없음
-  notChangeVisibilityReason: 프로그램 버전이 너무 높아 볼 수 없습니다.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: '게임 라이센스'
   title: '신용 및 공유 라이센스'
@@ -442,6 +449,7 @@ format:
   million_abbreviation: 월
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: 파일 이름을 반드시 입력해야 합니다.
     invalid: 사용자 이름이 올바르지 않습니다.
