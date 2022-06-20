@@ -105,12 +105,18 @@ programs:
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
   scratchremixes: Scratch மறுகலவைகள்
   noPrograms: தற்போது திட்டங்கள் எதுவும் இல்லை.
+  deleteAction: செயல்திட்டத்தை நீக்கு
   deleteConfirmation: |+
     நீ சொல்வது உறுதியா?
     %programName% ஐ நீக்க விரும்புகிறீர்களா?
     உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
     ஆம், அதை நீக்கு!
     ரத்து
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: தனியார்
+  public: பொது
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     நீங்கள் உறுதியாக இருக்கிரீர்களா?
     நீங்கள் '%programName%' ஐ தனிப்பட்டதாக அமைத்தால், அது பிற பயனர்களால் பார்க்கப்படாது அல்லது கண்டறியப்படாது.
@@ -264,6 +270,8 @@ passwordRecovery:
      உங்கள் கேட்ரோபாட் குழு.
      </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: உங்கள் சுயவிவ திருத்தம்
   saveChanges: திருத்தங்களை சேமியுங்கள்
   newPass: புதிய கடவுச்சொல்
@@ -292,14 +300,15 @@ profile:
     submitSuccess: சேமிக்கப்பட்டது!
   reallyDeleteProgram: உங்கள் திட்டத்தை நீக்க விரும்புகிறீர்களா
   programsOf: திட்டங்கள்
+  picture: Profile picture
   changePicture: படத்தை மாற்றுக
-  avatar:
-    noImage: எந்த படமும் இல்லை!
-    pictureTooLarge: நீங்கள் தேர்ந்தெடுத்த படம் மிகப் பெரியது, தயவுசெய்து 5mb ஐ விட பெரிய படங்களை பயன்படுத்த வேண்டாம்.
-    uploadError: மன்னிக்கவும், பதிவேற்றத்தின் போது சிக்கல் ஏற்பட்டது!
-    noSupport: இந்த பட வகை ஆதரிக்கப்படவில்லை, தயவுசெய்து மற்றொரு படத்தை முயற்சிக்கவும்.
   goToScratchProfile: Scratch-இல்‌ உள்ள சுயவிவரம்
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: சுயவிவர திருத்தம்
   edit: திருத்து
   done: முடிந்தது
@@ -307,16 +316,14 @@ myprofile:
   passwordUpdated: உங்கள் கடவுச்சொல் வெற்றிகரமாக புதுப்பிக்கப்பட்டது.
   avatar: அவத்தார்
   email: மின்னஞ்சல்
-  editAvatar: சின்னத்தை தொகுத்தமை
-  editUsername: பயனப்பெயர் திருத்தம்
-  editPassword: கடவிச்சொல் திருத்தம்
-  editCountry: நட்டைத் திருத்து
-  editEmail: மின்னஞ்சல் திருத்து
   deleteAccount: கணக்கை நீக்கு
-  deleteAccountText: உங்கள் குற்றச்சாட்டை நீக்க விரும்புகிறீர்களா? இது உங்கள் பதிவேற்றிய திட்டங்கள் மற்றும் கருத்துகளை நீக்கும்!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: கணக்கு அமைப்புகளைத் திருத்தவும்
-  notChangeVisibility: தெரிவுநிலையை மாற்ற முடியாது
-  notChangeVisibilityReason: உங்கள் திட்டத்தின் மொழி பதிப்பு மிக அதிகமாக உள்ளது, எனவே இது புலப்படும் வகையில் அமைக்க முடியாது.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'விளையாட உரிமம்'
   title: 'விளையாட உரிமம் - கடன் மற்றும் பங்கு கொடுங்கள்'
@@ -449,6 +456,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: பயனர்பெயர் காலியாக இருக்கக்கூடாது
     invalid: உங்கள் பயனர்பெயர் தவறானது

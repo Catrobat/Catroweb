@@ -105,12 +105,18 @@ programs:
   recommended: Programet e rekomanduara
   scratchremixes: Scratch ripërzierje
   noPrograms: Për momentin nuk ka projekte.
+  deleteAction: Delete project
   deleteConfirmation: |+
     A je i sigurt?
     Je i sigurt që dëshiron të fshish "%programName%"?
     Nuk ka asnjë mënyrë për të rikthyer veprimet tuaja!
     Po, fshije!
     Anulo
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: Private
+  public: Publik
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     A je i sigurt?
     Nëse e vendosni '%programName%' në privat, nuk do të vëzhgohet ose gjendet nga përdoruesit e tjerë.
@@ -261,6 +267,8 @@ passwordRecovery:
     Ekipi juaj Catrobat.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Ndryshoni profilin tuaj
   saveChanges: ruaj ndryshimet
   newPass: fjalëkalimi i ri
@@ -289,14 +297,15 @@ profile:
     submitSuccess: suajtur!
   reallyDeleteProgram: Do you really want to delete your program
   programsOf: Programs of
+  picture: Profile picture
   changePicture: Ndrysho foton
-  avatar:
-    noImage: Asnjë imazh! 
-    pictureTooLarge: Foto e zgjedhur është shumë e madhe, ju lutem mos përdorni foto më të mëdha se 5mb.
-    uploadError: Më vjen keq, kishte një problem gjatë ngarkimit!
-    noSupport: Ky tip i imazhit nuk është i mbështetur, provoni një tjetër imazh.
   goToScratchProfile: Profili në Scratch 
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Modifiko profilin
   edit: Modifiko
   done: i përfunduar
@@ -304,16 +313,14 @@ myprofile:
   passwordUpdated: Fjalëkalimi juaj u ndryshua me sukses.
   avatar: Fotografia
   email: Email
-  editAvatar: Modifiko foton
-  editUsername: Modifiko përdoruesin
-  editPassword: Modifiko fjalëkalimin
-  editCountry: Modifiko shtetin
-  editEmail: Modifiko E-Mail
   deleteAccount: Fshi llogarinë
-  deleteAccountText: A jeni i sigurt se doni të fshini llogarinë tuaj? Kjo do të fshijë projektet dhe komentet tuaja! 
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Redakto çdo cilësim te llogarisë
-  notChangeVisibility: Nuk mund të ndryshojë dukshmërinë 
-  notChangeVisibilityReason: Versioni gjuhësor i projektit tuaj është shumë i lartë dhe kështu nuk mund të vendoset në të dukshëm.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Licencë për të luajtur'
   title: 'Licencë për të luajtur - Jepni kredi dhe ndajeni'
@@ -446,6 +453,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Emri i përdoruesit nuk duhet të jetë i zbrazur
     invalid: Emri përdoruesit nuk është valid

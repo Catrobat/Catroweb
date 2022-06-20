@@ -105,12 +105,18 @@ programs:
   recommended: Ұсынылған жобалар
   scratchremixes: Scratch ремикстері
   noPrograms: Қазіргі уақытта жобалар жоқ.
+  deleteAction: Жобаны жою
   deleteConfirmation: |+
     Сіз сенімдісіз бе?
     Жойғыңыз келетініне сенімдісіз бе "%programName%"?
     Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
     Иә, жойыңыз!
     Болдырмау
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: private
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Сіз сенімдісіз бе?
     Егер сіз %programName% жеке болуға орнатсаңыз, оны басқа пайдаланушылар көрмейді немесе таппайды.
@@ -208,9 +214,9 @@ remixGraph:
   by: 'арқылы'
   open: 'Open'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
+  programNotAvailableErrorTitle: 'Кешір...'
   programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
+  programNotAvailable: 'Қолжетімсіз'
   programUnknownUser: 'Unknown User'
 noReply: This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -260,11 +266,13 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Edit your profile
   saveChanges: save changes
-  newPass: new password
-  repeatPass: repeat password
-  oldPass: old password
+  newPass: Жаңа құпиясөз
+  repeatPass: Құпиясөзді қайталаңыз
+  oldPass: Ескі құпиясөз
   firstEmail: My first email
   secondEmail: My second email
   myPrograms: My projects
@@ -285,17 +293,18 @@ profile:
     usernameMissing: You must have a username.
     usernameExists: This username already exists.
     usernameContainsEmail: Username shouldn't contain an email address.
-    submitSuccess: saved!
+    submitSuccess: сақталды!
   reallyDeleteProgram: Do you really want to delete your project
   programsOf: Projects of
+  picture: Profile picture
   changePicture: Change picture
-  avatar:
-    noImage: No Image!
-    pictureTooLarge: Your chosen picture is too large, please do not use images larger than 5mb.
-    uploadError: Sorry, there was a problem during the upload!
-    noSupport: This image type is not supported, please try another image.
   goToScratchProfile: Profile on Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Edit profile
   edit: Edit
   done: Дайын
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: Email
-  editAvatar: Edit avatar
-  editUsername: Пайдаланушы атын өңдеу
-  editPassword: Құпиясөз өңдеу
-  editCountry: Елді өңдеу
-  editEmail: Edit E-Mail
   deleteAccount: Delete Account
-  deleteAccountText: Есептік жазбаңызды жойғыңыз келетініне сенімдісіз бе? Бұл жүктеп салынған жобаларыңыз бен пікірлеріңізді жояды!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Есептік жазба параметрлерін өңдеу
-  notChangeVisibility: Көрінуді өзгерту мүмкін емес
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'License to play'
   title: 'License to play - Give credit and share'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Username must not be blank
     invalid: Your username is invalid

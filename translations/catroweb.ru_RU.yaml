@@ -105,12 +105,18 @@ programs:
   recommended: Рекомендуемые проекты
   scratchremixes: Scratch ремиксы
   noPrograms: На данный момент проекты отсутствуют.
+  deleteAction: Удалить проект
   deleteConfirmation: |+
     Вы уверены?
     Вы уверены, что хотите удалить "%programName%"?
     Это безвозвратное действие!
     Да, удалить!
     Отмена
+  deleteNotFoundError: Проект который вы хотите удалить не был найден в вашем аккаунте. 
+  private: приватный
+  public: публичный
+  setPrivateAction: Сделать приватным
+  setPublicAction: Сделать публичным
   changeVisibility: |+
     Вы уверены?
     Если вы установите для "%programName%" значение private, другие пользователи не увидят и не найдут его.
@@ -262,6 +268,8 @@ passwordRecovery:
     Команда Catrobat.
     </p>
 profile:
+  aboutMe: Обо мне
+  currentlyWorkingOn: В настоящее время работаю над
   edit: Редактировать свой профиль
   saveChanges: Сохранить изменения
   newPass: новый пароль
@@ -290,14 +298,15 @@ profile:
     submitSuccess: Сохранено!
   reallyDeleteProgram: Вы действительно хотите удалить свой проект?
   programsOf: Проекты
+  picture: Аватарка профиля
   changePicture: Изменить картинку
-  avatar:
-    noImage: Нет изображения!
-    pictureTooLarge: Выбранное изображение слишком велико, пожалуйста, не используйте изображения размером более 5 мб.
-    uploadError: Сожалеем, во время загрузки возникла проблема!
-    noSupport: Этот тип изображения не поддерживается, попробуйте другое изображение.
   goToScratchProfile: Профиль на Scratch
 myprofile:
+  userSettings: Настройки пользователя
+  profileSettings: Настройки профиля
+  securitySettings: Настройки безопасности
+  accountSettings: Настройки аккаунта
+  account: Аккаунт
   editProfile: Редактировать профиль
   edit: Редактировать
   done: Готово
@@ -305,16 +314,14 @@ myprofile:
   passwordUpdated: Ваш пароль был успешно обновлён.
   avatar: Аватар
   email: Почта
-  editAvatar: Изменить аватар
-  editUsername: Изменить имя пользователя
-  editPassword: Изменить пароль
-  editCountry: Изменить страну
-  editEmail: Изменить электронный адрес
   deleteAccount: Удалить аккаунт
-  deleteAccountText: Вы уверены, что хотите удалить свой аккаунт? Это удалит выложенные вами проекты и комментарии!
+  deleteAccountWarning: |
+    Будьте осторожны:
+    Вы создали %num_projects% проект(ов) и вы имеете %num_followers% подписчика(ов). Все ваши проекты будут удалены. Вы больше не сможете войти в аккаунт и ваши проекты исчезнут из всех списков. Удаление профиля не может быть отменено!
+    Вы уверены, что хотите покинуть нас?
   editAccountSettings: Изменить настройки аккаунта
-  notChangeVisibility: Не удается изменить видимость
-  notChangeVisibilityReason: Версия языка вашего проекта слишком высока и поэтому она не показывается.
+  profileChangeSuccess: Ваш профиль был успешно изменен.
+  unspecifiedError: Произошла неизвестная ошибка во время изменения вашего профиля. Пожалуйста свяжитесь с нами.
 licenseToPlay:
   link: 'Лицензия на игру'
   title: 'Лицензия на игру - Указывайте источник и делитесь'
@@ -447,6 +454,7 @@ format:
   million_abbreviation: М
 #api
 errors:
+  unspecified: Произошла неизвестная ошибка. Пожалуйста свяжитесь с нами.
   username:
     blank: Имя пользователя не должно быть пустым
     invalid: Ваше имя пользователя недействительно

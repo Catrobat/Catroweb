@@ -105,12 +105,18 @@ programs:
   recommended: المشاريع الموصى بها
   scratchremixes: ريميكسات سكراتش
   noPrograms: لا يوجد حالياً أية مشاريع.
+  deleteAction: حذف المشروع
   deleteConfirmation: |+
     هل أنت متأكد؟
     هل أنت متأكد من أنك تريد حذف "%programName%"؟
     لا توجد طريقة لاستعادة إجراءاتك!
     نعم، قم بحذفها!
     إلغاء
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: نشر
+  public: عامة
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     هل أنت متأكد؟
     إذا قمت بتعيين '%programName%' إلى الخاص, لن يتم رؤيته أو العثور عليه من قبل مستخدمين آخرين.
@@ -260,6 +266,8 @@ passwordRecovery:
     فريق كاتروبات الخاص بك.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: تعديل ملفك الشخصي
   saveChanges: حفظ التغييرات؟
   newPass: كلمة المرور الجديدة
@@ -288,14 +296,15 @@ profile:
     submitSuccess: حفظ!
   reallyDeleteProgram: هل تريد حقاً حذف مشروعك
   programsOf: مشاريع
+  picture: Profile picture
   changePicture: تغيير الصورة
-  avatar:
-    noImage: لا توجد صورة!
-    pictureTooLarge: الصورة التي تم اختيارها كبيرة جداً، ويرجى عدم استخدام الصور أكبر من 5 ميغا بايت.
-    uploadError: عذراً، هناك مشكلة أثناء التحميل!
-    noSupport: هذا النوع من الصور غير معتمد، الرجاء محاولة صورة أخرى.
   goToScratchProfile: الملف الشخصي على Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: تحرير الملف الشخصي
   edit: تحرير
   done: موافق
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: تم تحديث كلمة السر بنجاح!
   avatar: الصورة الرمزية
   email: البريد الألكتروني
-  editAvatar: تحرير الصورة الرمزية
-  editUsername: تعديل اسم المستخدم
-  editPassword: تغيير كلمة المرور
-  editCountry: تحرير البلد
-  editEmail: تعديل البريد الالكتروني
   deleteAccount: حذف الحساب
-  deleteAccountText: هل أنت متأكد من أنك تريد حذف حسابك؟ سيؤدي هذا إلى حذف المشاريع المرفوعة والتعليقات الخاصة بك!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: تعديل إعدادات الحساب
-  notChangeVisibility: لا يمكن تغيير الرؤية
-  notChangeVisibilityReason: النسخة اللغوية لمشروعك عالية جداً، وبالتالي لا يمكن تعيينها إلى الوضع المرئي.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'ترخيص لتشغيل'
   title: 'ترخيص للتشغيل--منح الائتمان والمشاركة'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: م
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: يجب أن لا يكون اسم المستخدم فارغ
     invalid: اسم المستخدم غير صالح

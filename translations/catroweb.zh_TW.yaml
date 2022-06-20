@@ -105,12 +105,18 @@ programs:
   recommended: 推薦項目
   scratchremixes: 從頭開始混音
   noPrograms: 當前沒有項目。
+  deleteAction: 刪除項目
   deleteConfirmation: |+
     你確定嗎？
     您確定要刪除“%programName%”嗎？
     無法恢復您的操作！
     是的，刪除它！
     取消
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: 私人的
+  public: 民眾
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     你確定嗎？
     如果將“%programName%”設置為private，其他用戶將不會看到或找到它。
@@ -260,6 +266,8 @@ passwordRecovery:
     您的 Catrobat 團隊。
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: 編輯您的個人資料
   saveChanges: 保存更改
   newPass: 新密碼
@@ -288,14 +296,15 @@ profile:
     submitSuccess: 得救了！
   reallyDeleteProgram: 你真的要刪除你的項目嗎
   programsOf: 項目
+  picture: Profile picture
   changePicture: 更改圖片
-  avatar:
-    noImage: No Image!
-    pictureTooLarge: 您選擇的圖片太大，請不要使用大於 5mb 的圖片。
-    uploadError: 抱歉，上傳過程中出現問題！
-    noSupport: 不支援這種圖檔格式,請改用其他圖片。
   goToScratchProfile: 從頭開始的個人資料
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: 編輯個人資料
   edit: 編輯
   done: 完成
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: 您的密碼已成功更新。
   avatar: 頭像
   email: 電子郵件
-  editAvatar: 編輯頭像
-  editUsername: 編輯用戶名
-  editPassword: 修改密碼
-  editCountry: 編輯國家
-  editEmail: Edit E-Mail
   deleteAccount: Delete Account
-  deleteAccountText: 您確定要刪除您的帳戶嗎？這將刪除您上傳的項目和評論！
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: 編輯帳戶設置
-  notChangeVisibility: 無法改變可見性
-  notChangeVisibilityReason: 您項目的語言版本太高，因此無法將其設置為可見。
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: '玩牌'
   title: '授權撥放或執行-同意授權並分享'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: 米
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: 用戶名不能為空
     invalid: 您的用戶名無效

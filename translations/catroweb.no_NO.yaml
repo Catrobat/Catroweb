@@ -105,12 +105,18 @@ programs:
   recommended: Anbefalte prosjekter
   scratchremixes: Scratch remixes
   noPrograms: Det finnes ingen prosjekter for tiden.
+  deleteAction: Delete project
   deleteConfirmation: |+
     Er du sikker?
     Er du sikker på at du vil slette "%programName%"?
     Det er ingen måte å gjenopprette dine handlinger!
     Ja, slett det!
     Avbryt
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: private
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Er du sikker?
     Hvis du angir "%programName%" til privat, vil den ikke bli sett eller funnet av andre brukere.
@@ -261,6 +267,8 @@ passwordRecovery:
     Ditt Catrobat lag.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Rediger din profil
   saveChanges: lagre endringer
   newPass: nytt passord
@@ -289,14 +297,15 @@ profile:
     submitSuccess: lagret!
   reallyDeleteProgram: Vil du virkelig slette prosjektet ditt
   programsOf: Prosjekter av
+  picture: Profile picture
   changePicture: Endre bilde
-  avatar:
-    noImage: Ingen bilde!
-    pictureTooLarge: Valgte bildet er for stort, du kan ikke bruke bilder som er større enn 5mb.
-    uploadError: Beklager, det oppstod et problem under opplasting!
-    noSupport: Denne bildetypen støttes ikke, prøv et annet bilde.
   goToScratchProfile: Profil på Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Rediger profil
   edit: Rediger
   done: Ferdig
@@ -304,16 +313,14 @@ myprofile:
   passwordUpdated: Passordet ditt ble vellykket oppdatert.
   avatar: Avatar
   email: E-post
-  editAvatar: Redigere avatar
-  editUsername: Rediger brukernavn
-  editPassword: Redigere passord
-  editCountry: Redigere land
-  editEmail: Redigere e-post
   deleteAccount: Slett konto
-  deleteAccountText: Er du sikker på at du vil slette kontoen din? Dette vil slette dine opplastede prosjekter og kommentarer!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Rediger kontoinnstillinger
-  notChangeVisibility: Kan ikke endre synlighet
-  notChangeVisibilityReason: Språkversjonen av prosjektet ditt er for høy og derfor kan det ikke bli satt til synlig.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Lisens til å spille'
   title: 'Lisens til å spille - gi anerkjennelse og del'
@@ -446,6 +453,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Brukernavn må ikke være tomt
     invalid: Brukernavnet ditt er ugyldig

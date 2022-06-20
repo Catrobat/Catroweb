@@ -105,12 +105,18 @@ programs:
   recommended: Önerilen projeler
   scratchremixes: Scratch remixleri
   noPrograms: Şu anda proje yok.
+  deleteAction: Projeyi sil
   deleteConfirmation: |+
     Emin misiniz?
     "%programName%" öğesini silmek istediğinizden emin misiniz?
     Eylemlerinizi geri getirmenin bir yolu yok!
     Evet, silin!
     İptal et
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: gizli
+  public: herkese açık
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Emin misiniz?
     %programName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
@@ -259,6 +265,8 @@ passwordRecovery:
     Catrobat Takımı.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Profilini düzenle
   saveChanges: Değişiklikleri kaydet
   newPass: yeni şifre
@@ -287,14 +295,15 @@ profile:
     submitSuccess: Kaydedildi!
   reallyDeleteProgram: Projeni gerçekten silmek istiyor musun?
   programsOf: Projeleri
+  picture: Profile picture
   changePicture: Resmi değistir
-  avatar:
-    noImage: Resim yok!
-    pictureTooLarge: Seçilen resim çok büyük, 5 mb'den büyük görüntüleri  lütfen kullanmayın.
-    uploadError: Üzgünüz, yükleme sırasında bir sorun oluştu!
-    noSupport: Bu resim türü desteklenmiyor, lütfen başka bir görüntü deneyin.
   goToScratchProfile: Schart profili
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Profili düzenle
   edit: Düzenle
   done: Tamam
@@ -302,16 +311,14 @@ myprofile:
   passwordUpdated: Şifreniz başarıyla güncellendi.
   avatar: Avatar
   email: E-posta
-  editAvatar: Avatarı düzenle
-  editUsername: Kullanıcı adını düzenle
-  editPassword: Şifreyi düzenle
-  editCountry: Ülke düzenle
-  editEmail: E-Postayı düzenle
   deleteAccount: Hesabı Sil
-  deleteAccountText: Hesabınızı silmek istediğinizden emin misiniz? Bu, yüklediğiniz projeleri ve yorumları siler!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Hesap ayarlarını düzenle
-  notChangeVisibility: Görünürlüğü değiştiremezsiniz
-  notChangeVisibilityReason: Projenizin dil versiyonu çok yüksek ve bu nedenle görünür olarak ayarlanamıyor.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Oynamak için lisansınız'
   title: 'Oynamak için lisans- prim ver ve paylaş'
@@ -444,6 +451,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Kullanıcı adı boş olmamalıdır
     invalid: Kullanıcı adınız geçersiz
@@ -525,25 +533,25 @@ api:
     passwordInvalidChars: 'Şifre geçersiz karakterler içeriyor'
     usernameContainsEmail: "Kullanıcı adı bir e-posta adresi içermemelidir"
     countryCodeInvalid: "Ülke kodu geçersiz"
-    pictureInvalid: "Profile picture invalid or not supported"
+    pictureInvalid: "Profil resmi geçersiz veya desteklenmiyor"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Mevcut şifre eksik"
+    currentPasswordWrong: "Mevcut şifre yanlış"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'İsim boş olamaz'
+    nameTooLong: 'İsim çok uzun'
+    descriptionTooLong: 'Açıklama çok uzun'
+    creditsTooLong: 'Notlar ve krediler çok uzun'
+    screenshotInvalid: 'Proje ekran görüntüsü geçersiz veya desteklenmiyor'
   projectsPost:
     invalid_checksum: 'Geçersiz sağlama toplamı. Tekrar yüklemeyi deneyin!'
     upload_error: 'Yüklenirken hata oluştu. Tekrar yüklemeyi deneyin!'
     creating_error: 'Proje varlığı oluşturulurken hata meydana geldi. Tekrar yüklemeyi deneyin!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Projenin ayrıntıları kaydedilemedi.'
+    screenshotError: 'Ekran görüntüsü okunamadı, dönüştürülemedi veya saklanamadı. Lütfen girişinizi kontrol edin.'
+    notFound: 'Değiştirilecek proje bulunamadı.'
+    forbidden: 'Proje değişikliğine izin verilmiyor. Hala giriş yaptın mı?'
 #languages and countries
 language:
   arabic: Arapça

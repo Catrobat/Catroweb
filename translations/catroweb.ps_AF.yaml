@@ -105,12 +105,18 @@ programs:
   recommended: وړاندیز شوې پروژې
   scratchremixes: سکریچ ریمکسونه
   noPrograms: اوس مهال کومه پروژه نشته.
+  deleteAction: پروژه ړنګه کړئ
   deleteConfirmation: |+
     تاسو ډاډه یاست؟
     ایا تاسو ډاډه یاست چې %programName% حذف کول غواړئ؟
     ستاسو د عملونو د بیرته راګرځولو لپاره هیڅ لاره نشته!
     هو، دا حذف کړئ!
     لغوه کړئ
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: خصوصي
+  public: عامه
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     تاسو ډاډه یاست؟
     که تاسو %programName% خصوصي ته وټاکئ، دا به د نورو کاروونکو لخوا نه لیدل کیږي یا موندل کیږي.
@@ -261,6 +267,8 @@ passwordRecovery:
     ستاسو د Catrobat ټیم.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: خپل پروفایل سم کړئ
   saveChanges: بدلونونه خوندي کړئ
   newPass: نوئ پټ نوم
@@ -289,14 +297,15 @@ profile:
     submitSuccess: خوندي شوی!
   reallyDeleteProgram: ایا تاسو واقعیا غواړئ خپله پروژه حذف کړئ
   programsOf: پروژې
+  picture: Profile picture
   changePicture: انځور بدل کړئ
-  avatar:
-    noImage: هیڅ عکس نشته!
-    pictureTooLarge: ستاسو غوره شوی انځور ډیر لوی دی، مهرباني وکړئ د 5mb څخه لوی انځورونه مه کاروئ.
-    uploadError: بخښنه غواړم، د اپلوډ په وخت کې ستونزه وه!
-    noSupport: د دې انځور ډول ملاتړ نه کوي، مهرباني وکړئ د بل انځور هڅه وکړئ.
   goToScratchProfile: په سکریچ کې پروفایل
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: پروفایل ایډیټ کړئ
   edit: سمون
   done: ترسره شو
@@ -304,16 +313,14 @@ myprofile:
   passwordUpdated: ستاسو پټنوم په بریالیتوب سره تازه شو.
   avatar: اوتار
   email: ایمیل
-  editAvatar: اوتار ایډیټ کړئ
-  editUsername: د کارن نوم سمول
-  editPassword: پاسورډ ایډیټ کړئ
-  editCountry: هیواد ترمیم کړئ
-  editEmail: ایمیل ایډیټ کړئ
   deleteAccount: حساب ړنګ کړئ
-  deleteAccountText: ایا تاسو ډاډه یاست چې تاسو غواړئ خپل حساب حذف کړئ؟ دا به ستاسو اپلوډ شوي پروژې او نظرونه حذف کړي!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: د حساب ترتیبات سم کړئ
-  notChangeVisibility: لید بدل نشي
-  notChangeVisibilityReason: ستاسو د پروژې د ژبې نسخه ډیره لوړه ده او په دې توګه دا د لیدلو لپاره نشي ټاکل کیدی.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'د لوبې کولو جواز'
   title: 'د لوبې کولو جواز - کریډیټ ورکړئ او شریک کړئ'
@@ -446,6 +453,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: کارن نوم باید خالي نه وي
     invalid: ستاسو کارن نوم ناسم دی

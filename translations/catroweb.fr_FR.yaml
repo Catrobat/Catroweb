@@ -105,12 +105,18 @@ programs:
   recommended: Projets recommandés
   scratchremixes: Remixes de Scratch
   noPrograms: Il n'y a actuellement aucun projet.
+  deleteAction: Supprimer le projet
   deleteConfirmation: |+
     Vous êtes sûr?
     Êtes-vous sûr de vouloir supprimer "%programName%" ?
     Il n'y a aucun moyen de restaurer vos actions !
     Oui, supprimez-le !
     Annuler
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: privé
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Êtes-vous sûr ?
     Si vous définissez '%programName%' en privé, il ne sera pas vu ou trouvé par d'autres utilisateurs.
@@ -260,6 +266,8 @@ passwordRecovery:
     Votre équipe Catrobat.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Modifier votre profil
   saveChanges: enregistrer les changements
   newPass: nouveau mot de passe
@@ -288,14 +296,15 @@ profile:
     submitSuccess: enregistré!
   reallyDeleteProgram: Voulez-vous vraiment supprimer votre projet
   programsOf: Projets de
+  picture: Profile picture
   changePicture: Changer l'image
-  avatar:
-    noImage: Pas d'image !
-    pictureTooLarge: L'image choisie est trop lourde, n'utilisez pas d'images de plus de 5 Mo.
-    uploadError: Désolé, il y a eu un problème pendant le téléchargement !
-    noSupport: Ce type d'image n'est pas pris en charge, veuillez essayer une autre image.
   goToScratchProfile: Profil sur Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Éditer le profil
   edit: Éditer
   done: Terminé
@@ -303,16 +312,14 @@ myprofile:
   passwordUpdated: Votre mot de passe a été mis à jour avec succès.
   avatar: Avatar
   email: Courriel
-  editAvatar: Modifier l'avatar
-  editUsername: Modifier le nom d’utilisateur
-  editPassword: Modifier le mot de passe
-  editCountry: Modifier le pays
-  editEmail: Modifier l'adresse mail
   deleteAccount: Supprimer mon compte
-  deleteAccountText: Êtes-vous sûr de vouloir supprimer votre accès ? Cela supprimera vos projets et commentaires téléchargés !
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Modifier les paramètres du compte
-  notChangeVisibility: Impossible de modifier la visibilité
-  notChangeVisibilityReason: La version de langue de votre projet est trop élevée et ne peut donc pas être définie comme visible.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'Licence pour jouer'
   title: 'Licence de jeu - Partagez et créditez'
@@ -445,6 +452,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Le pseudo ne doit pas être vide
     invalid: Ce nom d'utilisateur est invalide

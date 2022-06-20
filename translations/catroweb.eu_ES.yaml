@@ -105,12 +105,18 @@ programs:
   recommended: Gomendatutako proiektuak
   scratchremixes: Scratch remixes
   noPrograms: Oraingoz ez dago proiekturik.
+  deleteAction: Delete project
   deleteConfirmation: |+
     Ziur al  zaude?
     Ziur zaude %programName% programa ezabatu nahi duzula?
     Ez dago atzera itzulirik!
     Bai, ezabatu!
     Ezeztatu
+  deleteNotFoundError: The project to be deleted could not be found under your user.
+  private: private
+  public: public
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
     Ziur al zaude?
     "%programName%" pribatua bihurtzen baduzu, ezingo du beste inork aurkitu.
@@ -259,6 +265,8 @@ passwordRecovery:
     Your Catrobat Team.
     </p>
 profile:
+  aboutMe: About me
+  currentlyWorkingOn: Currently working on
   edit: Zure profila editatu
   saveChanges: aldaketak gorde
   newPass: pasahitz berria
@@ -287,14 +295,15 @@ profile:
     submitSuccess: Gordeta!
   reallyDeleteProgram: Ziur zaude zure proiektua ezabatu nahi duzula
   programsOf: Projects of
+  picture: Profile picture
   changePicture: Argazkia aldatu
-  avatar:
-    noImage: Irudirik ez!
-    pictureTooLarge: Aukeratu duzun irudia handiegia da, 5MB baina txikiagoak diren irudiak aukeratu mesedez.
-    uploadError: Barkatu, arazo bat egon da igoeran!
-    noSupport: Irudi formatu hau ez dabil, saiatu beste batekin mesedez.
   goToScratchProfile: Profile on Scratch
 myprofile:
+  userSettings: User Settings
+  profileSettings: Profile Settings
+  securitySettings: Security Settings
+  accountSettings: Account Settings
+  account: Account
   editProfile: Profila editatu
   edit: Edit
   done: Eginda
@@ -302,16 +311,14 @@ myprofile:
   passwordUpdated: Zure pasahitza ongi eguneratu da.
   avatar: Avatar
   email: Email
-  editAvatar: Edit avatar
-  editUsername: Erabiltzaile izena aldatu
-  editPassword: Pasahitza aldatu
-  editCountry: Herrialdea aldatu
-  editEmail: Emaila aldatu
   deleteAccount: Kontua ezabatu
-  deleteAccountText: Ziur zure kontua ezabatu nahi duzula? Honek igotako proiektuak eta zure iruzkinak ezabatuko ditu!
+  deleteAccountWarning: |
+    Be aware:
+    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
+    Are you sure you want to leave us?
   editAccountSettings: Kontuaren ezarpenak aldatu
-  notChangeVisibility: Ezin da ikusgarritasuna aldatu
-  notChangeVisibilityReason: The language version of your project is too high and thus it can not be set to visible.
+  profileChangeSuccess: Your profile has been successfully changed.
+  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 licenseToPlay:
   link: 'License to play'
   title: 'License to play - Give credit and share'
@@ -444,6 +451,7 @@ format:
   million_abbreviation: M
 #api
 errors:
+  unspecified: An unspecified error occurred. Please contact us.
   username:
     blank: Username must not be blank
     invalid: Your username is invalid
