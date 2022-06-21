@@ -185,7 +185,7 @@ programs:
   editProject: Редагувати проєкт
   closeProjectEditor: Закрити редактор
   closeEditorPrompt: Бажаєте зберегти свої зміни?
-  btnDiscard: Відкинути
+  btnDiscard: Відхилити
   addComment: Напишіть коментар
   thumbsUp: Палець вверх!
   smile: Усмішка!
