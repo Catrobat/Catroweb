@@ -42,6 +42,8 @@ final class MediaLibraryResponseManager extends AbstractResponseManager
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name'];
+    } elseif ('ALL' === $attributes) {
+      $attributes_list = ['id', 'name', 'flavors', 'packages', 'category', 'author', 'extension', 'download_url', 'size', 'file_type'];
     } else {
       $attributes_list = explode(',', $attributes);
     }

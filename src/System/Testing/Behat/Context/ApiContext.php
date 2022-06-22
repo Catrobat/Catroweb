@@ -103,7 +103,14 @@ class ApiContext implements Context
   private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
     'screenshot_large', 'screenshot_small', 'project_url', ];
 
+  private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
+    'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
+    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', ];
+
   private array $default_user_structure = ['id', 'username'];
+
+  private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects',
+    'followers', 'following', ];
 
   private array $default_user_structure_extended = ['id', 'username', 'email'];
 
@@ -1591,16 +1598,18 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should have the user model structure$/
+   * @Then /^the response should have the user model structure(?: excluding "(?P<excluded>([^"]+))")?$/
    */
-  public function responseShouldHaveUserModelStructure(): void
+  public function responseShouldHaveUserModelStructure(string $excluded = ''): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(count($this->default_user_structure), is_countable($user) ? count($user) : 0,
-      'Number of user fields should be '.count($this->default_user_structure));
-    foreach ($this->default_user_structure as $key) {
+    $structure = array_diff($this->full_user_structure, empty($excluded) ? [] : explode(',', $excluded));
+
+    Assert::assertEquals(count($structure), is_countable($user) ? count($user) : 0,
+      'Number of user fields should be '.count($structure));
+    foreach ($structure as $key) {
       Assert::assertArrayHasKey($key, $user, 'User should contain '.$key);
       Assert::assertEquals($this->checkUserFieldsValue($user, $key), true);
     }
@@ -1630,9 +1639,9 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $program = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->default_project_structure),
-      'Number of program fields should be '.count($this->default_project_structure));
-    foreach ($this->default_project_structure as $key) {
+    Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->full_project_structure),
+      'Number of program fields should be '.count($this->full_project_structure));
+    foreach ($this->full_project_structure as $key) {
       Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
       Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
     }
@@ -2984,6 +2993,9 @@ class ApiContext implements Context
         Assert::assertIsString($author);
       },
       'description' => function ($description): void {
+        Assert::assertIsString($description);
+      },
+      'credits' => function ($description): void {
         Assert::assertIsString($description);
       },
       'version' => function ($version): void {
