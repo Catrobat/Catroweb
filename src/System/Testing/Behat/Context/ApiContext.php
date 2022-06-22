@@ -101,7 +101,8 @@ class ApiContext implements Context
   private array $checked_catrobat_remix_backward_relations;
 
   private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', ];
+    'screenshot_large', 'screenshot_small', 'project_url',
+    'tags', ]; // TODO: hotfix for Catty. Remove 'tags' after Catty uses attributes-parameter.
 
   private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
