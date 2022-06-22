@@ -30,6 +30,8 @@ final class UserResponseManager extends AbstractResponseManager
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'username'];
+    } elseif ('ALL' === $attributes) {
+      $attributes_list = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects', 'followers', 'following'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -41,13 +43,15 @@ final class UserResponseManager extends AbstractResponseManager
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'username', 'email'];
+    } elseif ('ALL' === $attributes) {
+      $attributes_list = ['id', 'username', 'email', 'picture', 'about', 'currentlyWorkingOn', 'projects', 'followers', 'following'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
 
     $data = $this->createBasicUserDataArray($user, $attributes_list);
     if (in_array('email', $attributes_list, true)) {
-      $data['email'] = $user->getEmail();
+      $data['email'] = $user->getEmail() ?? '';
     }
 
     return new ExtendedUserDataResponse($data);
@@ -66,10 +70,10 @@ final class UserResponseManager extends AbstractResponseManager
       $data['picture'] = $user->getAvatar();
     }
     if (in_array('about', $attributes_list, true)) {
-      $data['about'] = $user->getAbout();
+      $data['about'] = $user->getAbout() ?? '';
     }
     if (in_array('currentlyWorkingOn', $attributes_list, true)) {
-      $data['currentlyWorkingOn'] = $user->getCurrentlyWorkingOn();
+      $data['currently_working_on'] = $user->getCurrentlyWorkingOn() ?? '';
     }
     if (in_array('projects', $attributes_list, true)) {
       $data['projects'] = $user->getPrograms()->count();

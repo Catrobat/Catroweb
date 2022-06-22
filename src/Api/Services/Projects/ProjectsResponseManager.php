@@ -51,6 +51,9 @@ final class ProjectsResponseManager extends AbstractResponseManager
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
+      $attributes_list[] = 'tags'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
+    } elseif ('ALL' === $attributes) {
+      $attributes_list = ['id', 'name', 'author', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -70,10 +73,10 @@ final class ProjectsResponseManager extends AbstractResponseManager
       $data['author'] = $project->getUser()->getUserIdentifier();
     }
     if (in_array('description', $attributes_list, true)) {
-      $data['description'] = $project->getDescription();
+      $data['description'] = $project->getDescription() ?? '';
     }
     if (in_array('credits', $attributes_list, true)) {
-      $data['credits'] = $project->getCredits();
+      $data['credits'] = $project->getCredits() ?? '';
     }
     if (in_array('version', $attributes_list, true)) {
       $data['version'] = $project->getCatrobatVersionName();
@@ -94,7 +97,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       $data['private'] = $project->getPrivate();
     }
     if (in_array('flavor', $attributes_list, true)) {
-      $data['flavor'] = $project->getFlavor();
+      $data['flavor'] = $project->getFlavor() ?? '';
     }
     if (in_array('tags', $attributes_list, true)) {
       $tags = [];
@@ -158,7 +161,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
 
   public function createFeaturedProjectResponse(FeaturedProgram $featured_project, ?string $attributes = null): FeaturedProjectResponse
   {
-    if (empty($attributes)) {
+    if (empty($attributes) || 'ALL' === $attributes) {
       $attributes_list = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
     } else {
       $attributes_list = explode(',', $attributes);
@@ -166,10 +169,10 @@ final class ProjectsResponseManager extends AbstractResponseManager
 
     $data = [];
     if (in_array('id', $attributes_list, true)) {
-      $data['id'] = $featured_project->getId();
+      $data['id'] = $featured_project->getId() ?? -1;
     }
     if (in_array('project_id', $attributes_list, true)) {
-      $data['project_id'] = $featured_project->getProgram()->getId();
+      $data['project_id'] = $featured_project->getProgram()->getId() ?? '';
     }
     if (in_array('name', $attributes_list, true)) {
       $data['name'] = $featured_project->getProgram()->getName();

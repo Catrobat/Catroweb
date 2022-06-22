@@ -65,8 +65,10 @@ final class MediaLibraryApi extends AbstractApiController implements MediaLibrar
       return null;
     }
 
+    // TODO: create new API version and remove unused attributes parameter
+
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file, $attributes);
+    $response = $this->facade->getResponseManager()->createMediaFileResponse($media_package_file, 'ALL');
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
