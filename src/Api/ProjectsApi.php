@@ -38,7 +38,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     }
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectDataResponse($project, null);
+    $response = $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
