@@ -50,7 +50,28 @@ final class ProjectsResponseManager extends AbstractResponseManager
   public function createProjectDataResponse(Program $program, ?string $attributes): ProjectResponse
   {
     if (empty($attributes)) {
-      $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
+      $attributes_list = [
+        'id',
+        'name',
+        'author',
+        'description',
+        'credits',
+        'version',
+        'views',
+        'downloads',
+        'reactions',
+        'comments',
+        'private',
+        'flavor',
+        'tags',
+        'uploaded',
+        'uploaded_string',
+        'screenshot_large',
+        'screenshot_small',
+        'project_url',
+        'download_url',
+        'filesize'
+      ];
     } else {
       $attributes_list = explode(',', $attributes);
     }

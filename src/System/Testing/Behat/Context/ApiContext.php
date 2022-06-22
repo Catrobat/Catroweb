@@ -100,8 +100,28 @@ class ApiContext implements Context
 
   private array $checked_catrobat_remix_backward_relations;
 
-  private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', ];
+  private array $default_project_structure = [
+    'id',
+    'name',
+    'author',
+    'description',
+    'credits',
+    'version',
+    'views',
+    'downloads',
+    'reactions',
+    'comments',
+    'private',
+    'flavor',
+    'tags',
+    'uploaded',
+    'uploaded_string',
+    'screenshot_large',
+    'screenshot_small',
+    'project_url',
+    'download_url',
+    'filesize'
+  ];
 
   private array $default_user_structure = ['id', 'username'];
 
