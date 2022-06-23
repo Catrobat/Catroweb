@@ -102,11 +102,11 @@ class ApiContext implements Context
 
   private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
     'screenshot_large', 'screenshot_small', 'project_url',
-    'tags', ]; // TODO: hotfix for Catty. Remove 'tags' after Catty uses attributes-parameter.
+    'tags', 'download', ]; // TODO: hotfix for Catty. Remove 'tags' after Catty uses attributes-parameter.
 
   private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
-    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', ];
+    'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', ];
 
   private array $default_user_structure = ['id', 'username'];
 
@@ -3005,6 +3005,9 @@ class ApiContext implements Context
       },
       'views' => function ($views): void {
         Assert::assertIsInt($views);
+      },
+      'download' => function ($downloads): void {
+        Assert::assertIsInt($downloads); // deprecated
       },
       'downloads' => function ($downloads): void {
         Assert::assertIsInt($downloads);
