@@ -52,7 +52,7 @@
         "symfony/monolog-bundle": "^3.8",
         "symfony/polyfill-iconv": "^1.23",
         "symfony/process": "6.0.*",
-        "symfony/routing": "6.0.*",
+        "symfony/routing": "6.1.*",
         "symfony/translation": "6.1.*",
         "symfony/twig-bundle": "6.0.*",
         "symfony/validator": "6.0.*",
