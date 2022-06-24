@@ -11,13 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateAchievementsCommand extends Command
 {
-  /**
-   * @var string|null
-   *
-   * @override from Command
-   */
-  protected static $defaultName = 'catrobat:update:achievements';
-
   final public const ACHIEVEMENT_IMAGE_ASSETS_PATH = 'images/achievements/';
   final public const ACHIEVEMENT_LTM_PREFIX = 'achievements.achievement.type.';
 
@@ -28,7 +21,7 @@ class UpdateAchievementsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName(self::$defaultName)
+    $this->setName('catrobat:update:achievements')
       ->setDescription('Inserting our static achievements into the Database')
     ;
   }

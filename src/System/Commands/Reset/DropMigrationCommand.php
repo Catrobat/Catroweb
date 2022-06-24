@@ -10,8 +10,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DropMigrationCommand extends Command
 {
-  protected static $defaultName = 'catrobat:drop:migration';
-
   protected Connection $connection;
   private OutputInterface $output;
 

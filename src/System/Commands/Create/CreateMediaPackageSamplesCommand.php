@@ -31,8 +31,6 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class CreateMediaPackageSamplesCommand extends Command
 {
-  protected static $defaultName = 'catrobat:create:media-packages-samples';
-
   /**
    * CreateMediaPackageSamplesCommand constructor.
    */
@@ -45,7 +43,7 @@ class CreateMediaPackageSamplesCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName($this::$defaultName)
+    $this->setName('catrobat:create:media-packages-samples')
       ->setDescription('create sample Media Packages')
     ;
   }

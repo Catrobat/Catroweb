@@ -11,9 +11,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CleanLogsCommand extends Command
 {
-  protected static $defaultName = 'catrobat:clean:logs';
-  private OutputInterface $output;
-
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -28,8 +25,8 @@ class CleanLogsCommand extends Command
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $this->output = $output;
-    $this->output->writeln('Deleting log files');
+    $output1 = $output;
+    $output1->writeln('Deleting log files');
     $log_dir = strval($this->parameter_bag->get('catrobat.logs.dir'));
     try {
       FileHelper::emptyDirectory($log_dir);

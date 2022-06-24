@@ -18,8 +18,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateLikeCommand extends Command
 {
-  protected static $defaultName = 'catrobat:like';
-
   public function __construct(private readonly UserManager $user_manager,
                               private readonly ProgramManager $remix_manipulation_program_manager,
                               private readonly EntityManagerInterface $entity_manager,

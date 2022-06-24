@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class GenerateTestDataCommand extends Command
 {
-  protected static $defaultName = 'catrobat:test:generate';
-
   protected string $source;
 
   protected string $target_directory;
