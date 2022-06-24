@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3dc5920a5e0a11ca0bedbec5c57c7d4a",
+    "content-hash": "cd254a67cadec43bd17c54ce996bd4fb",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -125,16 +125,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.1.13",
+            "version": "v1.1.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "f526ac912d124164c38300d22d8701d24cd3e896"
+                "reference": "76382067b2a93d31bfccd678ff5eb5713498bec4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/f526ac912d124164c38300d22d8701d24cd3e896",
-                "reference": "f526ac912d124164c38300d22d8701d24cd3e896",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/76382067b2a93d31bfccd678ff5eb5713498bec4",
+                "reference": "76382067b2a93d31bfccd678ff5eb5713498bec4",
                 "shasum": ""
             },
             "require": {
@@ -142,17 +142,17 @@
                 "ext-json": "*",
                 "ext-mbstring": "*",
                 "jms/serializer-bundle": "^4.0",
-                "php": ">=7.4.0|>=8.0.2",
-                "symfony/framework-bundle": "^5.0|^6.0",
-                "symfony/validator": "^5.0|^6.0"
+                "php": ">=8.0.2",
+                "symfony/framework-bundle": "^6.0",
+                "symfony/validator": "^6.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "*",
                 "hoa/regex": "~1.0",
                 "phpstan/phpstan": "*",
                 "phpunit/phpunit": "^9.5",
-                "symfony/browser-kit": "^5.0|^6.0",
-                "symfony/yaml": "^5.0|^6.0"
+                "symfony/browser-kit": "^6.0",
+                "symfony/yaml": "^6.0"
             },
             "type": "library",
             "autoload": {
@@ -177,10 +177,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.1.13",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.1.16",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2022-06-10T08:25:06+00:00"
+            "time": "2022-06-24T09:20:13+00:00"
         },
         {
             "name": "clue/stream-filter",
