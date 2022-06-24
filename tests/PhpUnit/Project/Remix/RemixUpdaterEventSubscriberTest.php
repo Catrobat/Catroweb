@@ -49,7 +49,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $router
       ->expects($this->any())
       ->method('generate')
-      ->willReturn($this->returnValueMap($route_map))
+      ->will($this->returnValueMap($route_map))
     ;
 
     $this->program_entity = $this->createMock(Program::class);

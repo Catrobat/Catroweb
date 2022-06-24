@@ -154,14 +154,14 @@ jobs:
   #  - to search issues with deprecated functionality in newer interpreter versions..
   #  - More information at: https://github.com/wapmorgan/PhpDeprecationDetector
   #
-  phpdd:
-    name: PHP Static Analysis [Phpdd]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
-        uses: ./.github/actions/setup-php-composer
-      - run: bin/phpdd src tests
+#  phpdd:
+#    name: PHP Static Analysis [Phpdd]
+#    runs-on: ubuntu-latest
+#    steps:
+#      - uses: actions/checkout@v3
+#      - name: "Setup PHP and composer packages"
+#        uses: ./.github/actions/setup-php-composer
+#      - run: bin/phpdd src tests                                                   # Currently disabled: https://github.com/wapmorgan/PhpDeprecationDetector/issues
   #
   # PhpLoc:
   #

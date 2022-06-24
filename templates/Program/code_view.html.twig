@@ -22,9 +22,9 @@
 
     <div id='catblocks-code-container'></div>
     {# As long as catblocks is not stable we need to also load the old view as backup #}
-    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController:oldView', {'id' : id, 'visible' : false })) }}
+    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {'id' : id, 'visible' : false })) }}
   {% else %}
-    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController:oldView', {'id' : id })) }}
+    {{ render(controller('App\\Application\\Controller\\Project\\CodeViewController::oldView', {'id' : id })) }}
   {% endif %}
 
   <div class="js-code-view"
