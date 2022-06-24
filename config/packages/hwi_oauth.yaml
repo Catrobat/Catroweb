@@ -1,13 +1,17 @@
 hwi_oauth:
-    # list of names of the firewalls in which this bundle is active, this setting MUST be set
-    firewall_names: [main]
 
-    fosub:
-      username_iterations: 30
-      properties:
-        google: google_id
-        facebook: facebook_id
-        apple: apple_id
+    connect:
+        confirmation: true
+        account_connector: App\Security\OAuth\HwiOauthAccountConnector
+        registration_form_handler: App\Security\OAuth\HwiOauthRegistrationFormHandler # Not really used
+        registration_form:  App\Security\OAuth\HwiOauthRegistrationFormType # Not really used
+
+#    fosub:
+#      username_iterations: 30
+#      properties:
+#        google: google_id
+#        facebook: facebook_id
+#        apple: apple_id
 
     # https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/2-configuring_resource_owners.md
     resource_owners:
@@ -36,3 +40,4 @@ hwi_oauth:
             options:
                 display: popup #dialog is optimized for popup window
                 csrf: true
+

@@ -57,7 +57,7 @@ class ProgramListSerializerEventSubscriber implements EventSubscriberInterface
       $new_program['Downloads'] = $program->getDownloads();
       $new_program['Private'] = $program->getPrivate();
       $new_program['Uploaded'] = $program->getUploadedAt()->getTimestamp();
-      $new_program['UploadedString'] = $this->time_formatter->getElapsedTime($program->getUploadedAt()
+      $new_program['UploadedString'] = $this->time_formatter->format($program->getUploadedAt()
         ->getTimestamp());
       if ($example) {
         $new_program['ScreenshotBig'] = $this->example_image_repository->getWebPath(intval($new_program['ExampleId']), $new_program['Extension'], false);

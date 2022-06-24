@@ -877,11 +877,25 @@ services:
   #=====================================================================================================================
   # HWIOAUTH
   #=====================================================================================================================
-  my.oauth_aware.user_provider.service:
-    class: App\Security\OAuth\FOSUBUserProviderAdapter
+  App\Security\OAuth\HwiOauthUserProvider:
+    class: App\Security\OAuth\HwiOauthUserProvider
     arguments:
       - '@App\User\UserManager'
       - {google: google_id, facebook: facebook_id, apple: apple_id}
+
+  App\Security\OAuth\HwiOauthAccountConnector:
+    class: App\Security\OAuth\HwiOauthAccountConnector
+    arguments:
+      - '@App\User\UserManager'
+      - { google: google_id, facebook: facebook_id, apple: apple_id }
+
+  App\Security\OAuth\HwiOauthRegistrationFormHandler:
+    class: App\Security\OAuth\HwiOauthRegistrationFormHandler
+
+  App\Security\OAuth\HwiOauthRegistrationFormType:
+    class: App\Security\OAuth\HwiOauthRegistrationFormType
+
+   # ======
 
   App\Translation\ItranslateApi:
     class: App\Translation\ItranslateApi
