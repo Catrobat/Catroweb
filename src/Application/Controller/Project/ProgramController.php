@@ -430,7 +430,7 @@ class ProgramController extends AbstractController
       'downloads' => $program->getDownloads() + $program->getApkDownloads(),
       'views' => $program->getViews(),
       'filesize' => sprintf('%.2f', $program->getFilesize() / 1_048_576),
-      'age' => $this->elapsed_time->getElapsedTime($program->getUploadedAt()->getTimestamp()),
+      'age' => $this->elapsed_time->format($program->getUploadedAt()->getTimestamp()),
       'referrer' => $referrer,
       'id' => $program->getId(),
       'comments' => $program_comments,

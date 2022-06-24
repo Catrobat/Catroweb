@@ -3,23 +3,21 @@
 namespace Tests\PhpUnit\Security\OAuth;
 
 use App\DB\Entity\User\User;
-use App\Security\OAuth\FOSUBUserProviderAdapter;
+use App\Security\OAuth\HwiOauthUserProvider;
 use App\User\UserManager;
-use Http\Client\Common\HttpMethodsClient;
-use Http\Message\MessageFactory\GuzzleMessageFactory;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GoogleResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
-use Psr\Http\Client\ClientInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @internal
  * @coversNothing
  */
-class OAuthTest extends WebTestCase
+class HwiOauthUserProviderTest extends WebTestCase
 {
   protected array $options = [
     'client_id' => 'clientid',
@@ -54,23 +52,25 @@ json;
     'google' => 'id',
   ];
   protected array $tokenData = ['access_token' => 'token'];
-  private FOSUBUserProviderAdapter $fosub_user_provider;
+  private HwiOauthUserProvider $object;
 
   protected function setUp(): void
   {
     static::createClient();
-    $user_manager = static::$container->get(UserManager::class);
-    $this->fosub_user_provider = new FOSUBUserProviderAdapter($user_manager, $this->properties);
+    $kernel = self::bootKernel();
+    /** @var UserManager $user_manager */
+    $user_manager = $kernel->getContainer()->get(UserManager::class);
+    $this->object = new HwiOauthUserProvider($user_manager, $this->properties);
   }
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(FOSUBUserProviderAdapter::class, $this->fosub_user_provider);
+    $this->assertInstanceOf(HwiOauthUserProvider::class, $this->object);
   }
 
   public function testLoadUserByOauthResponse(): void
   {
-    $httpClient = $this->createMock(ClientInterface::class);
+    $httpClient = $this->createMock(HttpClientInterface::class);
 
     $storage = $this->createMock(RequestDataStorageInterface::class);
 
@@ -78,8 +78,13 @@ json;
 
     /** @var HttpUtils $httpUtils */
     $httpUtils = $this->createMock(HttpUtils::class);
-    $resourceOwner = new GoogleResourceOwner(new HttpMethodsClient($httpClient, new GuzzleMessageFactory()),
-      $httpUtils, $this->options, 'google', $storage);
+    $resourceOwner = new GoogleResourceOwner(
+      $httpClient,
+      $httpUtils,
+      $this->options,
+      'google',
+      $storage
+    );
     $resourceOwner->addPaths(array_merge($this->paths, []));
     $response_test->setResourceOwner($resourceOwner);
     $response_test->setPaths($this->paths);
@@ -88,7 +93,7 @@ json;
     /**
      * @var User $response
      */
-    $response = $this->fosub_user_provider->loadUserByOAuthUserResponse($response_test);
+    $response = $this->object->loadUserByOAuthUserResponse($response_test);
     $this->assertInstanceOf(User::class, $response);
     $this->assertEquals('testuser', $response->getUsername());
     $this->assertEquals('test@localhost.org', $response->getEmail());
