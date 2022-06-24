@@ -13,8 +13,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  */
 class CleanCompressedProjectsCommand extends Command
 {
-  protected static $defaultName = 'catrobat:clean:compressed';
-
   private readonly ?string $compressed_path;
 
   public function __construct(ParameterBagInterface $parameter_bag)

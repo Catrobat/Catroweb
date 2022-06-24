@@ -14,8 +14,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class PurgeCommand extends Command
 {
-  protected static $defaultName = 'catrobat:purge';
-
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();

@@ -15,8 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateFollowersCommand extends Command
 {
-  protected static $defaultName = 'catrobat:follow';
-
   public function __construct(private readonly UserManager $user_manager,
                               private readonly EntityManagerInterface $entity_manager,
                               private readonly NotificationManager $notification_service)

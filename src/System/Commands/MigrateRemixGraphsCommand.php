@@ -32,8 +32,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class MigrateRemixGraphsCommand extends Command
 {
-  protected static $defaultName = 'catrobat:remixgraph:migrate';
-
   private readonly AsyncHttpClient $async_http_client;
 
   private readonly string $app_root_dir;

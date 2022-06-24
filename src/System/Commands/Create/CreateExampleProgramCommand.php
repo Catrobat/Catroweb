@@ -16,8 +16,6 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CreateExampleProgramCommand extends Command
 {
-  protected static $defaultName = 'catrobat:example';
-
   public function __construct(
     private readonly ProgramManager $program_manager,
     private readonly EntityManagerInterface $entity_manager,

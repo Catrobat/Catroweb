@@ -14,9 +14,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CleanApkCommand extends Command
 {
-  protected static $defaultName = 'catrobat:clean:apk';
-  private OutputInterface $output;
-
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -35,9 +32,9 @@ class CleanApkCommand extends Command
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $this->output = $output;
+    $output1 = $output;
 
-    $this->output->writeln('Deleting APKs');
+    $output1->writeln('Deleting APKs');
     $apk_dir = (string) $this->parameter_bag->get('catrobat.apk.dir');
     FileHelper::emptyDirectory($apk_dir);
 
@@ -46,7 +43,7 @@ class CleanApkCommand extends Command
     ;
     $query->setParameter('status', Program::APK_NONE);
     $result = $query->getSingleScalarResult();
-    $this->output->writeln('Reset the apk status of '.$result.' projects');
+    $output1->writeln('Reset the apk status of '.$result.' projects');
 
     return 0;
   }

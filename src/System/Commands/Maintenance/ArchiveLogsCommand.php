@@ -10,9 +10,6 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ArchiveLogsCommand extends Command
 {
-  protected static $defaultName = 'catrobat:logs:archive';
-  private OutputInterface $output;
-
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -20,15 +17,17 @@ class ArchiveLogsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setDescription('Archive the log files')
+    $this
+      ->setName('catrobat:logs:archive')
+      ->setDescription('Archive the log files')
     ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $this->output = $output;
+    $output1 = $output;
 
-    $this->output->writeln('Archiving log files');
+    $output1->writeln('Archiving log files');
     $log_dir = $this->parameter_bag->get('catrobat.logs.dir');
     $old_log_dir = $log_dir.'old_logs';
     $compression_command = 'tar -zcvf '.$old_log_dir.'/log_backup_'.date('Y-m-d_His').'.tar.gz -C '.$log_dir;
@@ -41,7 +40,7 @@ class ArchiveLogsCommand extends Command
       ],
       ['timeout' => 7200], 'Executing command: '.$compression_command.$log_dir, $output
     );
-    $this->output->writeln('Successfully archived log files');
+    $output1->writeln('Successfully archived log files');
 
     return 0;
   }

@@ -11,13 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateTagsCommand extends Command
 {
-  /**
-   * @var string|null
-   *
-   * @override from Command
-   */
-  protected static $defaultName = 'catrobat:update:tags';
-
   final public const TAG_LTM_PREFIX = 'tags.tag.';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly TagRepository $tag_repository)

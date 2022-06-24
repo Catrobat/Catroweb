@@ -16,8 +16,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateDownloadsCommand extends Command
 {
-  protected static $defaultName = 'catrobat:download';
-
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $entity_manager,
                               private readonly ProgramManager $program_manager)
   {

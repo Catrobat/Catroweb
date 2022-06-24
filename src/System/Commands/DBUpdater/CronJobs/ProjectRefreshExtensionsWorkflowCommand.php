@@ -14,13 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProjectRefreshExtensionsWorkflowCommand extends Command
 {
-  /**
-   * @var string|null
-   *
-   * @override from Command
-   */
-  protected static $defaultName = 'catrobat:workflow:project:refresh_extensions';
-
   public function __construct(protected ProgramManager $program_manager,
                               protected ProgramRepository $program_repository,
                               protected ProjectExtensionManager $extension_manager,
@@ -32,7 +25,7 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName(self::$defaultName)
+    $this->setName('catrobat:workflow:project:refresh_extensions')
       ->setDescription('Removes all extensions from a project an re-adds them again')
     ;
   }
