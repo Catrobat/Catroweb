@@ -14,7 +14,7 @@ class HwiOauthRegistrationFormHandler implements RegistrationFormHandlerInterfac
   /**
    * {@inheritdoc}
    */
-  public function process(Request $request, FormInterface $form, UserResponseInterface $userInformation)
+  public function process(Request $request, FormInterface $form, UserResponseInterface $userInformation): bool
   {
     return true;
   }

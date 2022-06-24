@@ -15,8 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateRemixCommand extends Command
 {
-  protected static $defaultName = 'catrobat:remix';
-
   public function __construct(private readonly RemixManipulationProgramManager $remix_manipulation_program_manager,
                               private readonly RemixManager $remix_manager,
                               private readonly NotificationManager $notification_service)

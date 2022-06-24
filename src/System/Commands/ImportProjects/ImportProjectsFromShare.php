@@ -14,11 +14,9 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImportProjectsFromShare extends Command
 {
-  protected static $defaultName = 'catrobat:import:share';
-
   protected function configure(): void
   {
-    $this->setName('catrobat:import:webshare')
+    $this->setName('catrobat:import:share')
       ->setDescription('Imports the specified amount of recent programs from share.catrob.at')
       ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
         'The limit of projects that should be downloaded and imported',

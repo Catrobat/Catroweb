@@ -6,7 +6,7 @@
 [![codecov](https://codecov.io/gh/Catrobat/Catroweb/branch/develop/graph/badge.svg)](https://codecov.io/gh/Catrobat/Catroweb)
 
 [![Php 8.1](https://img.shields.io/badge/PHP-8.1-informational.svg)](https://www.php.net/)
-[![Symfony](https://img.shields.io/badge/Symfony-6.0-informational.svg)](https://symfony.com/)
+[![Symfony](https://img.shields.io/badge/Symfony-6.1-informational.svg)](https://symfony.com/)
 
 **Catroweb** is the name of the **Pocket Code share community platform** for the associated [Catrobat](https://github.com/Catrobat/) project. 
 

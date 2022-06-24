@@ -15,13 +15,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CronJobCommand extends Command
 {
-  /**
-   * @var string|null
-   *
-   * @override from Command
-   */
-  protected static $defaultName = 'catrobat:cronjob';
-
   protected const ONE_MINUTE_IN_SECONDS = 60;
   protected const ONE_HOUR_IN_SECONDS = self::ONE_MINUTE_IN_SECONDS * 60;
   protected const ONE_DAY_IN_SECONDS = self::ONE_HOUR_IN_SECONDS * 24;
@@ -34,7 +27,7 @@ class CronJobCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName(self::$defaultName)
+    $this->setName('catrobat:cronjob')
       ->setDescription('Executing Cron Jobs')
     ;
   }

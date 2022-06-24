@@ -18,7 +18,6 @@ class TranslationTrimStorageCommand extends Command
   private const OLDER_THAN = 'older-than';
   private const ONLY_PROJECT = 'only-project';
   private const ONLY_COMMENT = 'only-comment';
-  protected static $defaultName = 'catrobat:translation:trim-storage';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager)
   {
@@ -27,7 +26,7 @@ class TranslationTrimStorageCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName(self::$defaultName)
+    $this->setName('catrobat:translation:trim-storage')
       ->setDescription('Clean up old db entries in machine translation schema')
       ->addOption(self::OLDER_THAN, null, InputOption::VALUE_REQUIRED,
       'delete entries older than the specified days',

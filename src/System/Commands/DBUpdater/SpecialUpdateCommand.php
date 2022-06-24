@@ -11,13 +11,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SpecialUpdateCommand extends Command
 {
-  /**
-   * @var string|null
-   *
-   * @override from Command
-   */
-  protected static $defaultName = 'catrobat:update:special';
-
   public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementManager $achievement_manager, protected UserManager $user_manager)
   {
     parent::__construct();
@@ -25,7 +18,7 @@ class SpecialUpdateCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName(self::$defaultName)
+    $this->setName('catrobat:update:special')
       ->setDescription('Adding/Updating/Deleting data in the Database')
     ;
   }

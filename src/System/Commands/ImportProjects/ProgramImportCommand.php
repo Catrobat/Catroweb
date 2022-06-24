@@ -22,8 +22,6 @@ class ProgramImportCommand extends Command
 {
   final public const REMIX_GRAPH_NO_LAYOUT = '0';
 
-  protected static $defaultName = 'catrobat:import';
-
   public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProgramManager $remix_manipulation_program_manager)
   {
     parent::__construct();

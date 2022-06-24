@@ -13,13 +13,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AchievementWorkflow_GoldUser_Command extends Command
 {
-  /**
-   * @var string|null
-   *
-   * @override from Command
-   */
-  protected static $defaultName = 'catrobat:workflow:achievement:gold_user';
-
   public function __construct(protected UserManager $user_manager, protected AchievementManager $achievement_manager)
   {
     parent::__construct();
@@ -27,7 +20,7 @@ class AchievementWorkflow_GoldUser_Command extends Command
 
   protected function configure(): void
   {
-    $this->setName(self::$defaultName)
+    $this->setName('catrobat:workflow:achievement:gold_user')
       ->setDescription('Unlocking gold_user user achievements')
     ;
   }

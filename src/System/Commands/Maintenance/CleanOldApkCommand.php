@@ -22,8 +22,6 @@ define('SECONDS', 60);
 
 class CleanOldApkCommand extends Command
 {
-  protected static $defaultName = 'catrobat:clean:old-apk';
-
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();

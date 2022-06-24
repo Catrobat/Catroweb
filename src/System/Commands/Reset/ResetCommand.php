@@ -17,8 +17,6 @@ class ResetCommand extends Command
 {
   final public const DOWNLOAD_PROGRAMS_DEFAULT_AMOUNT = '30';
 
-  protected static $defaultName = 'catrobat:reset';
-
   private array $reported = [];
 
   public function __construct(private readonly ProgramRepository $program_manager, private readonly ParameterBagInterface $parameter_bag)
