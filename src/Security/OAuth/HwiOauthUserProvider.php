@@ -3,15 +3,14 @@
 namespace App\Security\OAuth;
 
 use App\DB\Entity\User\User;
+use App\Security\PasswordGenerator;
 use App\User\UserManager;
-use Exception;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use RuntimeException;
-use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
+class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
 {
   protected array $properties = ['identifier' => 'id'];
 
@@ -21,37 +20,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
   }
 
   /**
-   * Overwrite the provider!
-   */
-  public function connect(UserInterface $user, UserResponseInterface $response): void
-  {
-    if (!$user instanceof User) {
-      throw new UnsupportedUserException(sprintf('Expected an instance of FOS\UserBundle\Model\User, but got "%s".', $user::class));
-    }
-    // retrieve access token and the ID
-    $property = $this->getProperty($response);
-    $username = $response->getUsername();
-    $service = $response->getResourceOwner()->getName();
-
-    $setter_name = 'set'.ucfirst($service);
-    $setter_id = $setter_name.'Id';
-    $setter_access_token = $setter_name.'AccessToken';
-    $access_token = $response->getAccessToken();
-
-    // Disconnect previous user
-    if (null !== $previousUser = $this->user_manager->findOneBy([$property => $username])) {
-      $previousUser->{$setter_id}(null);
-      $previousUser->{$setter_access_token}(null);
-      $this->user_manager->updateUser($user);
-    }
-    // username is a unique integer
-    $user->{$setter_id}($username);
-    $user->{$setter_access_token}($access_token);
-    $this->user_manager->updateUser($user);
-  }
-
-  /**
-   * Overwrite the provider!
+   * {@inheritDoc}
    */
   public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
   {
@@ -75,7 +44,7 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
         $user->setUsername($this->createRandomUsername($response));
         $user->setEmail($response->getEmail());
         $user->setEnabled(true);
-        $user->setPassword($this->generateRandomPassword());
+        $user->setPassword(PasswordGenerator::generateRandomPassword());
         $user->setOauthUser(true);
       }
       $user->{$setter_id}($username);
@@ -89,24 +58,6 @@ class FOSUBUserProviderAdapter implements OAuthAwareUserProviderInterface
     $user->{$setter_access_token}($access_token);
 
     return $user;
-  }
-
-  /**
-   * @throws Exception
-   */
-  private function generateRandomPassword(int $length = 32): string
-  {
-    $chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.
-      '0123456789-=~!@#$%&*()_+,.<>?;:[]{}|';
-
-    $pass = '';
-    $max = strlen($chars) - 1;
-
-    for ($i = 0; $i < $length; ++$i) {
-      $pass .= $chars[random_int(0, $max)];
-    }
-
-    return $pass;
   }
 
   private function createRandomUsername(UserResponseInterface $response): string

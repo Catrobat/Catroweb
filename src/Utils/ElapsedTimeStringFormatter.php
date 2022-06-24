@@ -7,8 +7,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ElapsedTimeStringFormatter
 {
-  public function __construct(private readonly TranslatorInterface $translator)
-  {
+  public function __construct(
+    private readonly TranslatorInterface $translator
+  ) {
   }
 
   /**
@@ -16,36 +17,48 @@ class ElapsedTimeStringFormatter
    *
    * @throws Exception
    */
-  public function getElapsedTime($timestamp): string
+  public function format($timestamp): string
   {
-    $elapsed = TimeUtils::getTimestamp() - $timestamp;
+    $elapsed = max(0, TimeUtils::getTimestamp() - $timestamp);
 
-    if ($elapsed < 0) {
-      $elapsed = 0;
-    }
     if ($elapsed <= 3_540) {
-      $minutes = (int) round($elapsed / 60);
-
-      return $this->translator->trans('time.minutes.ago', ['%count%' => $minutes], 'catroweb');
+      return $this->getFormattedInMinutes((int) round($elapsed / 60));
     }
     if ($elapsed <= 82_800) {
-      $hours = (int) round($elapsed / 3_600);
-
-      return $this->translator->trans('time.hours.ago', ['%count%' => $hours], 'catroweb');
+      return $this->getFormattedInHours((int) round($elapsed / 3_600));
     }
     if ($elapsed <= 2_505_600) {
-      $days = (int) round($elapsed / 86_400);
-
-      return $this->translator->trans('time.days.ago', ['%count%' => $days], 'catroweb');
+      return $this->getFormattedInDays((int) round($elapsed / 86_400));
     }
     if ($elapsed <= 28_927_800) {
-      $months = (int) round($elapsed / 2_629_800);
-
-      return $this->translator->trans('time.months.ago', ['%count%' => $months], 'catroweb');
+      return $this->getFormattedInMonths((int) round($elapsed / 2_629_800));
     }
 
-    $years = (int) round($elapsed / 31_557_600);
+    return $this->getFormattedInYears((int) round($elapsed / 31_557_600));
+  }
 
+  protected function getFormattedInMinutes(int $minutes): string
+  {
+    return $this->translator->trans('time.minutes.ago', ['%count%' => $minutes], 'catroweb');
+  }
+
+  protected function getFormattedInHours(int $hours): string
+  {
+    return $this->translator->trans('time.hours.ago', ['%count%' => $hours], 'catroweb');
+  }
+
+  protected function getFormattedInDays(int $days): string
+  {
+    return $this->translator->trans('time.days.ago', ['%count%' => $days], 'catroweb');
+  }
+
+  protected function getFormattedInMonths(int $months): string
+  {
+    return $this->translator->trans('time.months.ago', ['%count%' => $months], 'catroweb');
+  }
+
+  protected function getFormattedInYears(int $years): string
+  {
     return $this->translator->trans('time.years.ago', ['%count%' => $years], 'catroweb');
   }
 }
