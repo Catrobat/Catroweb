@@ -51,9 +51,11 @@ final class ProjectsResponseManager extends AbstractResponseManager
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
+      $attributes_list[] = 'download'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
       $attributes_list[] = 'tags'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
     } elseif ('ALL' === $attributes) {
       $attributes_list = ['id', 'name', 'author', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize'];
+      $attributes_list[] = 'download'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -83,6 +85,9 @@ final class ProjectsResponseManager extends AbstractResponseManager
     }
     if (in_array('views', $attributes_list, true)) {
       $data['views'] = $project->getViews();
+    }
+    if (in_array('download', $attributes_list, true)) {
+      $data['download'] = $project->getDownloads(); // deprecated and will be removed
     }
     if (in_array('downloads', $attributes_list, true)) {
       $data['downloads'] = $project->getDownloads();
