@@ -10,10 +10,12 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
     element.parentNode.removeChild(element)
 
     getPackageFiles(packageName, mediaSearchPath, flavor, assetsDir)
+
     const content = $('#content')
     content.find('#thumbsize-control input[type=radio]').change(function () {
       content.attr('size', this.value)
     })
+
     initTilePinchToZoom()
   })
 
@@ -36,10 +38,8 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
     }
 
     // accepted flavors
-    const acceptedFlavors = [
-      'pocketcode'
-    ]
-    if ($.inArray(flavor, acceptedFlavors) === -1) {
+    const acceptedFlavors = ['pocketcode']
+    if (acceptedFlavors.indexOf(flavor) === -1) {
       acceptedFlavors.push(flavor)
     }
 

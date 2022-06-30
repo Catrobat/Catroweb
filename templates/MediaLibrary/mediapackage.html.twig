@@ -18,19 +18,16 @@
     <div id="search-results" class="mb-4">
       <h1>{{ "media-packages.search-results"|trans({}, "catroweb") }}</h1>
       <div id="search-results-text">
-        {% if foundResults is empty %}
-          {{ "media-packages.no-results"|trans({}, "catroweb") }}
+        {% if foundResults %}
+          {{ "search.resultcount"|trans({'%count%': resultsCount}, "catroweb") }}.
         {% else %}
-          {{ "search.resultcount"|trans({'%count%': foundResults|length}, "catroweb") }}.
+          {{ "media-packages.no-results"|trans({}, "catroweb") }}
         {% endif %}
       </div>
     </div>
   {% endif %}
 
   <div id="content" class="medialib-content">
-    {% if foundResults is not defined %}
-      <h1>{{ package }}</h1>
-    {% endif %}
     {% for category in categories %}
       <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"
            style="display: none;" class="category">
@@ -41,7 +38,7 @@
   </div>
 
   {%
-    set data = {
+    set translations = {
       'elementsSingular': "element"|trans({}, "catroweb"),
       'elementsPlural': "elements"|trans({}, "catroweb"),
       'size': "media_library.file.size"|trans({}, "catroweb"),
@@ -61,7 +58,7 @@
        data-path-media-search="{{ mediaSearchPath|default('')|raw }}"
        data-flavor="{{ flavor }}"
        data-media-dir="{{ mediaDir }}"
-       data-translations="{{ data|json_encode() }}"
+       data-translations="{{ translations|json_encode() }}"
        data-is-webview="{{ isWebview() }}"
        data-path-medialibpackagebynameurl="{{ path("open_api_server_mediaLibrary_mediapackagenameget", { 'name': package }) }}"
   ></div>
