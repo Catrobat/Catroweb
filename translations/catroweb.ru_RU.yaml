@@ -755,7 +755,7 @@ category:
 achievements:
   sidebar:
     title: 'Достижения'
-    badge: 'новый'
+    badge: 'новое'
   overview:
     header: 'Достижения'
     most_recent_achievement:
