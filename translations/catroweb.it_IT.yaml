@@ -112,11 +112,11 @@ programs:
     Non esiste alcun modo per ripristinare questa azione!
     Sì, eliminalo!
     Annulla
-  deleteNotFoundError: The project to be deleted could not be found under your user.
+  deleteNotFoundError: Il progetto da eliminare non può essere trovato usando il tuo utente.
   private: privato
   public: pubblico
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: Imposta privato
+  setPublicAction: Imposta pubblico
   changeVisibility: |+
     Sei sicuro?
     Se si imposta %programName%' a privato, non potrà essere trovato e visto da altri utenti.
@@ -270,8 +270,8 @@ passwordRecovery:
     Il Team di Catrobat.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: Informazioni su di me
+  currentlyWorkingOn: Attualmente in lavorazione
   edit: Modifica il tuo profilo
   saveChanges: salva le modifiche
   newPass: nuova password
@@ -300,14 +300,14 @@ profile:
     submitSuccess: salvato!
   reallyDeleteProgram: Vuoi davvero eliminare il progetto
   programsOf: Progetti di
-  picture: Profile picture
+  picture: Immagine del profilo
   changePicture: Cambia foto
   goToScratchProfile: Profilo su Scratch
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: Impostazioni Utente
+  profileSettings: Impostazioni del profilo
+  securitySettings: Impostazioni di Sicurezza
+  accountSettings: Impostazioni Account
   account: Account
   editProfile: Modifica il profilo
   edit: Modifica
@@ -318,12 +318,12 @@ myprofile:
   email: E-mail
   deleteAccount: Elimina Account
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
+    Attenzione:
+    Hai creato %num_projects% progetti e hai %num_followers% follower. Tutti i tuoi progetti saranno rimossi. Non sarai più in grado di effettuare il login e i tuoi progetti scompariranno da tutte le liste. Eliminare il tuo profilo non può essere annullato!
+    Sei sicuro di lasciarci?
   editAccountSettings: Modificare le impostazioni dell'account
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  profileChangeSuccess: Il tuo profilo è stato modificato con successo.
+  unspecifiedError: Si è verificato un errore non specificato durante la modifica del tuo profilo. Contattaci.
 licenseToPlay:
   link: 'Licenza per giocare'
   title: 'Licenza per il gioco - Dare credito e condividere'
@@ -456,7 +456,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: An unspecified error occurred. Please contact us.
+  unspecified: Si è verificato un errore non specificato. Contattaci.
   username:
     blank: Il nome utente non può essere vuoto
     invalid: Il nome utente non è valido
@@ -539,25 +539,25 @@ api:
     passwordInvalidChars: 'La password contiene caratteri non validi'
     usernameContainsEmail: "Il nome utente non deve contenere indirizzi email"
     countryCodeInvalid: "Codice nazione non valido"
-    pictureInvalid: "Profile picture invalid or not supported"
+    pictureInvalid: "Immagine del profilo non valida o non supportata"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Password mancante"
+    currentPasswordWrong: "La password attuale è errata"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Il nome non può essere vuoto'
+    nameTooLong: 'Nome troppo lungo'
+    descriptionTooLong: 'Descrizione troppo lunga'
+    creditsTooLong: 'Note e crediti troppo lunghi'
+    screenshotInvalid: 'Screenshot del progetto non valido o non supportato'
   projectsPost:
     invalid_checksum: 'Checksum non valido. Riprova a caricare!'
     upload_error: 'Errore durante il caricamento. Riprova a caricare!'
     creating_error: 'Errore durante la creazione dell''entità del progetto. Riprova a caricare!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Impossibile salvare i dettagli del progetto.'
+    screenshotError: 'Lettura, conversione o archiviazione dello screenshot non riuscita. Controlla il tuo dispositivo.'
+    notFound: 'Il progetto da cambiare non è stato trovato.'
+    forbidden: 'Cambi sul progetto non autorizzati. Sei ancora connesso?'
 #languages and countries
 language:
   arabic: Arabo
