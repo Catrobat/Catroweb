@@ -44,7 +44,7 @@
     "stylelint": "^14.9.1",
     "stylelint-config-standard-scss": "^4.0.0",
     "webpack-notifier": "^1.15.0",
-    "postcss-loader": "^7.0.0",
+    "postcss-loader": "^7.0.1",
     "purgecss-webpack-plugin": "^4.1.3",
     "n": "^8.2.0",
     "npm": "^8.13.2",
