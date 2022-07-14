@@ -47,10 +47,7 @@ Below you can find an outline of the technologies we currently use at Catroweb. 
 
 
 ## Start Contribution
-If you feel confident that your tech stack matches our requirements, then we invite you to [start contributing](https://github.com/Catrobat/Catroweb/blob/develop/.github/onboarding.md)!
-```diff
-👷 TODO: Change link to Onboarding.md in Catroweb's .github repository when added!
-```
+If you feel confident that your tech stack matches our requirements, then we invite you to [start contributing](https://github.com/schrpa/Catroweb/blob/develop/.github/onboarding.md)!
 
 ## Issues
 You found a bug? 
