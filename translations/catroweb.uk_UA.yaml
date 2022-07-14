@@ -315,8 +315,8 @@ myprofile:
   deleteAccount: Видалити обліковий запис
   deleteAccountWarning: |
     Пам'ятай:
-    Ви створили %num_projects% проєкт(ів) і маєте %num_followers% підписник(ів). Усі ваші проєкти будуть видалені. Ви більше не зможете ввійти, і ваші проєкт зникнуть з усіх списків. Видалення профілю неможливо скасувати!
-    Ви впевнений, що хочеш покинути нас?
+    Ви створили %num_projects% проєкт(-ів) і маєте %num_followers% підписника(-ів). Усі ваші проєкти будуть видалені. Ви більше не зможете увійти, і ваші проєкти зникнуть з усіх списків. Видалення профілю неможливо скасувати!
+    Ви впевнений(-ні), що хочеш покинути нас?
   editAccountSettings: Редагувати налаштування облікового запису
   profileChangeSuccess: Ваш профіль успішно змінено.
   unspecifiedError: Під час змінень профілю сталася невідома помилка. Будь ласка, зв'яжіться з нами.
@@ -380,14 +380,14 @@ search:
   noProjects: Проєктів не знайдено
 menu:
   profile: Мій Профіль
-  login: Увійти
+  login: Увійти в обліковий запис
   logout: Вийти з облікового запису
   admin: Адмін
   home: Головна
   helpAndTutorials: Допомога & посібник
   followersAndFollowing: Підписник
 login:
-  login: Увійти
+  login: Увійти в обліковий запис
   button:
     loginNow: Увійти зараз
     createAccount: Створити обліковий запис
@@ -657,7 +657,7 @@ codeStatistics:
   general: 'Основні'
   bricks: 'Цеглини'
   eventBricks: 'Події'
-  controlBricks: 'Управління'
+  controlBricks: 'Керування'
   motionBricks: 'Переміщення'
   soundBricks: 'Звуки'
   looksBricks: 'Вигляди'
@@ -746,7 +746,7 @@ category:
   recent: Найновіші проєкти
   random: Випадкові проєкти
   most_viewed: Найбільше переглянуті
-  most_downloaded: Найбільш завантажувані
+  most_downloaded: Найбільше завантажені
   example: Приклад
   scratch: Scratch ремікси
   recommended: Рекомендовані проєкти
