@@ -6649,16 +6649,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.13.1",
+            "version": "4.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "39d33bc75ebb76b2ca54f3fef891cc269e0b7d95"
+                "reference": "a75ecaf9f980e95f47c072a70227a0eaa5467926"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/39d33bc75ebb76b2ca54f3fef891cc269e0b7d95",
-                "reference": "39d33bc75ebb76b2ca54f3fef891cc269e0b7d95",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/a75ecaf9f980e95f47c072a70227a0eaa5467926",
+                "reference": "a75ecaf9f980e95f47c072a70227a0eaa5467926",
                 "shasum": ""
             },
             "require": {
@@ -6718,7 +6718,7 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "phpstan/phpstan-symfony": "^1.0",
                 "phpunit/phpunit": "^9.5",
-                "psalm/plugin-phpunit": "^0.16",
+                "psalm/plugin-phpunit": "^0.17",
                 "psalm/plugin-symfony": "^3.0",
                 "psr/event-dispatcher": "^1.0",
                 "rector/rector": "^0.12",
@@ -6767,7 +6767,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.13.1"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.14.0"
             },
             "funding": [
                 {
@@ -6787,7 +6787,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-05T13:16:28+00:00"
+            "time": "2022-07-12T13:11:36+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
