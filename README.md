@@ -26,14 +26,14 @@ Below you can find an outline of the technologies we currently use at Catroweb. 
 
 ### Languages
 [![HTML](http://img.shields.io/badge/HTML-darkblue)](https://www.w3schools.com/html/)
-[![CSS](https://img.shields.io/badge/CSS-darkblue)](https://www.w3schools.com/css/)
-[![PHP](https://img.shields.io/badge/PHP-with_Symfony_and_Laravel-green?labelColor=darkblue)](https://www.php.net/)
-[![Symfony](https://img.shields.io/badge/Symfony-darkblue)](https://symfony.com/)
-[![Laravel](https://img.shields.io/badge/Laravel-darkblue)](https://laravel.com/)
+[![Sass](https://img.shields.io/badge/Sass-darkblue)](https://sass-lang.com/)
+[![PHP](https://img.shields.io/badge/PHP-with_Symfony-green?labelColor=darkblue)](https://www.php.net/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-darkblue)](https://www.w3schools.com/js/)
+[![SQL](https://img.shields.io/badge/SQL-darkblue)](https://www.w3schools.com/sql/)
 
 ### Infrastructure (IDE, Version Control, Issue Tracking, ...)
 [![PhpStorm](https://img.shields.io/badge/PhpStorm-recommended-green?labelColor=purple)](https://www.jetbrains.com/phpstorm/)
+[![Symfony](https://img.shields.io/badge/Symfony-darkblue)](https://symfony.com/)
 [![Git](https://img.shields.io/badge/Git-purple)](https://git-scm.com/)
 [![Jira](https://img.shields.io/badge/Jira-purple)](https://jira.catrob.at/secure/Dashboard.jspa)
 [![Docker](https://img.shields.io/badge/Docker-purple)](https://www.docker.com/)
