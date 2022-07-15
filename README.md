@@ -33,7 +33,7 @@ Below you can find an outline of the technologies we currently use at Catroweb. 
 
 ### Infrastructure (IDE, Version Control, Issue Tracking, ...)
 [![PhpStorm](https://img.shields.io/badge/PhpStorm-recommended-green?labelColor=purple)](https://www.jetbrains.com/phpstorm/)
-[![Symfony](https://img.shields.io/badge/Symfony-darkblue)](https://symfony.com/)
+[![Symfony](https://img.shields.io/badge/Symfony-purple)](https://symfony.com/)
 [![Git](https://img.shields.io/badge/Git-purple)](https://git-scm.com/)
 [![Jira](https://img.shields.io/badge/Jira-purple)](https://jira.catrob.at/secure/Dashboard.jspa)
 [![Docker](https://img.shields.io/badge/Docker-purple)](https://www.docker.com/)
