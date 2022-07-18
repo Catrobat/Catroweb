@@ -42,7 +42,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
           ? '//app/project/'.$parent_id
           : 'https://scratch.mit.edu/projects/'.$parent_id.'/';
       $previous_parent_string = $this->generateRemixUrlsStringForMergedProgram($previous_parent_string,
-          $current_parent_url);
+        $current_parent_url);
     }
 
     $remix_url_string = $previous_parent_string;

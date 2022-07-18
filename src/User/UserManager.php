@@ -150,7 +150,7 @@ class UserManager implements UserManagerInterface
       ->having("COUNT(user.id) >= {$years}")
       ->getQuery()
       ->execute()
-      ;
+    ;
 
     return array_map(fn ($value) => $value['id'], $result);
   }
@@ -236,10 +236,10 @@ class UserManager implements UserManagerInterface
   public function getTableName()
   {
     @trigger_error(sprintf(
-          'The "%s()" method is deprecated since sonata-project/sonata-doctrine-extensions 1.15'
-          .' and will be removed in version 2.0.',
-          __METHOD__
-      ), \E_USER_DEPRECATED);
+      'The "%s()" method is deprecated since sonata-project/sonata-doctrine-extensions 1.15'
+      .' and will be removed in version 2.0.',
+      __METHOD__
+    ), \E_USER_DEPRECATED);
 
     $metadata = $this->entity_manager->getClassMetadata($this->getClass());
     assert($metadata instanceof ClassMetadataInfo);

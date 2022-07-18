@@ -23,9 +23,9 @@ class ProfileController extends AbstractController
   final public const MAX_PASSWORD_LENGTH = 4096;
 
   public function __construct(
-      protected ProgramManager $program_manager,
-      protected UserManager $user_manager,
-      protected AchievementManager $achievement_manager,
+    protected ProgramManager $program_manager,
+    protected UserManager $user_manager,
+    protected AchievementManager $achievement_manager,
   ) {
   }
 
@@ -116,19 +116,19 @@ class ProfileController extends AbstractController
       ->orderBy(['username' => Criteria::ASC])
       ->setFirstResult($page * $pageSize)
       ->setMaxResults($pageSize)
-      ;
+    ;
     /** @var User|null $user */
     $user = $user_manager->find($request->request->get('id'));
     switch ($type) {
-        case 'follower':
-          /** @var ArrayCollection $followCollection */
-          $followCollection = $user->getFollowers();
-          break;
-        case 'follows':
-          /** @var ArrayCollection $followCollection */
-          $followCollection = $user->getFollowing();
-          break;
-      }
+      case 'follower':
+        /** @var ArrayCollection $followCollection */
+        $followCollection = $user->getFollowers();
+        break;
+      case 'follows':
+        /** @var ArrayCollection $followCollection */
+        $followCollection = $user->getFollowing();
+        break;
+    }
     $length = $followCollection->count();
     $followCollection->first();
     $users = $followCollection->matching($criteria)->toArray();

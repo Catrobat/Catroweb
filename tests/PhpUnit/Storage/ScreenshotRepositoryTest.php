@@ -84,15 +84,15 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $this->expectException(Exception::class);
     $this->screenshot_repository->__construct(
-        new ParameterBag([
-          'catrobat.screenshot.dir' => __DIR__.'/invalid_directory/',
-          'catrobat.screenshot.path' => $this->screenshot_base_url,
-          'catrobat.thumbnail.dir' => $this->thumbnail_dir,
-          'catrobat.thumbnail.path' => $this->thumbnail_base_url,
-          'catrobat.upload.temp.dir' => $this->tmp_dir,
-          'catrobat.file.extract.dir' => $this->tmp_extract_dir,
-          'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-        ])
+      new ParameterBag([
+        'catrobat.screenshot.dir' => __DIR__.'/invalid_directory/',
+        'catrobat.screenshot.path' => $this->screenshot_base_url,
+        'catrobat.thumbnail.dir' => $this->thumbnail_dir,
+        'catrobat.thumbnail.path' => $this->thumbnail_base_url,
+        'catrobat.upload.temp.dir' => $this->tmp_dir,
+        'catrobat.file.extract.dir' => $this->tmp_extract_dir,
+        'catrobat.file.storage.dir' => $this->tmp_zip_dir,
+      ])
     );
   }
 
@@ -100,15 +100,15 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $this->expectException(Exception::class);
     $this->screenshot_repository->__construct(
-        new ParameterBag([
-          'catrobat.screenshot.dir' => $this->screenshot_dir,
-          'catrobat.screenshot.path' => $this->screenshot_base_url,
-          'catrobat.thumbnail.dir' => __DIR__.'/invalid_directory/',
-          'catrobat.thumbnail.path' => $this->thumbnail_base_url,
-          'catrobat.upload.temp.dir' => $this->tmp_dir,
-          'catrobat.file.extract.dir' => $this->tmp_extract_dir,
-          'catrobat.file.storage.dir' => $this->tmp_zip_dir,
-        ])
+      new ParameterBag([
+        'catrobat.screenshot.dir' => $this->screenshot_dir,
+        'catrobat.screenshot.path' => $this->screenshot_base_url,
+        'catrobat.thumbnail.dir' => __DIR__.'/invalid_directory/',
+        'catrobat.thumbnail.path' => $this->thumbnail_base_url,
+        'catrobat.upload.temp.dir' => $this->tmp_dir,
+        'catrobat.file.extract.dir' => $this->tmp_extract_dir,
+        'catrobat.file.storage.dir' => $this->tmp_zip_dir,
+      ])
     );
   }
 

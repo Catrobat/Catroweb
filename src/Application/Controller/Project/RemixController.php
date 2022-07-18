@@ -49,7 +49,7 @@ class RemixController extends AbstractController
       }
       $catrobat_program_thumbnails[$node_id] = '/'.$this->screenshot_repository
         ->getThumbnailWebPath($node_id)
-        ;
+      ;
     }
 
     return new JsonResponse([

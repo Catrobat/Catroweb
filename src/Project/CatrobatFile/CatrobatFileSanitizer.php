@@ -99,7 +99,7 @@ class CatrobatFileSanitizer
   }
 
   private function isAValidFile(string $dir_name, array $paths_array, string $filename,
-                                string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
+    string $relative_filepath, ExtractedCatrobatFile $extracted_file): bool
   {
     // Here we must accept:
     //   - image and sound directories in the root directory.

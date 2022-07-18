@@ -19,9 +19,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 final class NotificationsResponseManager extends AbstractResponseManager
 {
   public function __construct(TranslatorInterface $translator,
-                                SerializerInterface $serializer,
-                                ResponseCacheManager $response_cache_manager,
-                                private readonly NotificationRepository $notification_repository)
+    SerializerInterface $serializer,
+    ResponseCacheManager $response_cache_manager,
+    private readonly NotificationRepository $notification_repository)
   {
     parent::__construct($translator, $serializer, $response_cache_manager);
   }

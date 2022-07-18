@@ -1224,7 +1224,7 @@ class DataFixturesContext implements Context
         ->setBannerColor($config['banner_color'] ?? '#00ff00')
         ->setEnabled($config['enabled'] ?? true)
         ->setPriority($config['priority'] ?? 0)
-            ;
+      ;
       $this->getManager()->persist($achievement);
     }
     $this->getManager()->flush();
@@ -1246,7 +1246,7 @@ class DataFixturesContext implements Context
         ->setAchievement($achievement)
         ->setSeenAt(!empty($config['seen_at']) ? new DateTime($config['seen_at']) : null)
         ->setUnlockedAt(!empty($config['unlocked_at']) ? new DateTime($config['unlocked_at']) : new DateTime('now'))
-            ;
+      ;
       $this->getManager()->persist($user_achievement);
     }
     $this->getManager()->flush();
@@ -1303,8 +1303,8 @@ class DataFixturesContext implements Context
   public function iRunTheUpdateAchievementsCommand(): void
   {
     CommandHelper::executeShellCommand(
-            ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
-        );
+      ['bin/console', 'catrobat:update:achievements'], [], 'Creating Achievements'
+    );
   }
 
   /**
@@ -1323,8 +1323,8 @@ class DataFixturesContext implements Context
   public function iRunTheUpdateExtensionsCommand(): void
   {
     CommandHelper::executeShellCommand(
-            ['bin/console', 'catrobat:update:extensions'], [], 'Creating Extensions'
-        );
+      ['bin/console', 'catrobat:update:extensions'], [], 'Creating Extensions'
+    );
   }
 
   /**

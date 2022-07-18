@@ -19,8 +19,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCommentCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $em,
-                              private readonly ProgramManager $program_manager,
-                              private readonly NotificationManager $notification_service)
+    private readonly ProgramManager $program_manager,
+    private readonly NotificationManager $notification_service)
   {
     parent::__construct();
   }

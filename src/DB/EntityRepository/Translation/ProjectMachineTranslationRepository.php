@@ -22,7 +22,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
       ->where(Criteria::expr()->eq('project', $project))
       ->andWhere(Criteria::expr()->eq('target_language', $target_language))
       ->andWhere(Criteria::expr()->neq('cached_name', null))
-      ;
+    ;
     if (null !== $source_language) {
       $criteria->andWhere(Criteria::expr()->eq('source_language', $source_language));
     }

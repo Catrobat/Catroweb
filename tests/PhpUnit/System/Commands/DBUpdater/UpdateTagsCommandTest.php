@@ -22,7 +22,7 @@ class UpdateTagsCommandTest extends KernelTestCase
     $this->object = $this->getMockBuilder(UpdateTagsCommand::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
-        ;
+    ;
   }
 
   /**

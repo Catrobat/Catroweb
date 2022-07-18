@@ -41,7 +41,7 @@ class AchievementWorkflow_Translation_Command extends Command
       ->distinct()
       ->getQuery()
       ->getResult()
-      ;
+    ;
 
     foreach ($users as $user) {
       $this->achievement_manager->unlockAchievementCustomTranslation($user);

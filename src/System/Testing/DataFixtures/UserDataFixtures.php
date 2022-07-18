@@ -25,8 +25,8 @@ class UserDataFixtures
   private static int $number_of_users = 0;
 
   public function __construct(
-      private readonly UserManager $user_manager,
-      private readonly PasswordHasherFactoryInterface $password_hasher_factory
+    private readonly UserManager $user_manager,
+    private readonly PasswordHasherFactoryInterface $password_hasher_factory
   ) {
   }
 

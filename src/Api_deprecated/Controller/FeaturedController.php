@@ -31,7 +31,7 @@ class FeaturedController extends AbstractController
    * @throws NonUniqueResultException
    */
   private function getFeaturedPrograms(Request $request, bool $ios_only, ImageRepository $image_repository,
-                                       FeaturedRepository $repository): JsonResponse
+    FeaturedRepository $repository): JsonResponse
   {
     $flavor = $request->attributes->get('flavor');
 

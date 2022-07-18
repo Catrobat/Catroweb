@@ -20,7 +20,7 @@ class ImportProjectsFromShare extends Command
       ->setDescription('Imports the specified amount of recent programs from share.catrob.at')
       ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
         'The limit of projects that should be downloaded and imported',
-      '20')
+        '20')
       ->addOption('category', 'c', InputOption::VALUE_REQUIRED,
         'Downloading projects of a specific category (random, recent)',
         'recent')
@@ -58,7 +58,7 @@ class ImportProjectsFromShare extends Command
   {
     return match ($category) {
       'random' => 'https://share.catrob.at/app/api/projects/randomProjects.json',
-        default => 'https://share.catrob.at/app/api/projects/recent.json',
+      default => 'https://share.catrob.at/app/api/projects/recent.json',
     };
   }
 

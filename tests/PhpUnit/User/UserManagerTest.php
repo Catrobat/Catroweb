@@ -37,13 +37,13 @@ class UserManagerTest extends TestCase
     $user_repository = $this->createMock(UserRepository::class);
     $url_helper = new UrlHelper(new RequestStack());
     $this->user_manager = new UserManager(
-        $canonicalFieldsUpdater,
-        $userPasswordHasher,
-        $object_manager,
-        $user_finder,
-        $program_manager,
-        $url_helper,
-        $user_repository
+      $canonicalFieldsUpdater,
+      $userPasswordHasher,
+      $object_manager,
+      $user_finder,
+      $program_manager,
+      $url_helper,
+      $user_repository
     );
   }
 

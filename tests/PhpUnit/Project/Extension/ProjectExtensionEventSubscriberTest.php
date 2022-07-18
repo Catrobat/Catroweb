@@ -20,7 +20,7 @@ class ProjectExtensionEventSubscriberTest extends DefaultTestCase
     $this->object = $this->getMockBuilder(ProjectExtensionEventSubscriber::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
-        ;
+    ;
   }
 
   /**

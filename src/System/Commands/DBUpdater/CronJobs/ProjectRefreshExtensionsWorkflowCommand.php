@@ -15,10 +15,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ProjectRefreshExtensionsWorkflowCommand extends Command
 {
   public function __construct(protected ProgramManager $program_manager,
-                              protected ProgramRepository $program_repository,
-                              protected ProjectExtensionManager $extension_manager,
-                              protected ExtractedFileRepository $extracted_file_repo,
-                              protected EntityManagerInterface $entity_manager)
+    protected ProgramRepository $program_repository,
+    protected ProjectExtensionManager $extension_manager,
+    protected ExtractedFileRepository $extracted_file_repo,
+    protected EntityManagerInterface $entity_manager)
   {
     parent::__construct();
   }

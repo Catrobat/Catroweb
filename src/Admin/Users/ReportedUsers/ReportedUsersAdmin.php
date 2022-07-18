@@ -40,7 +40,7 @@ class ReportedUsersAdmin extends AbstractAdmin
         ->where($qb->expr()->eq('user_comment.isReported', '1'))
         ->groupBy($rootAlias.'.id')
         ->orderBy('COUNT(user_comment.user )', $parameters['_sort_order'])
-          ;
+      ;
     } elseif (isset($parameters['_sort_by']) && 'getReportsOfThisUserCount' === $parameters['_sort_by']) {
       $qb
         ->leftJoin(\App\DB\Entity\User\Comment\UserComment::class, 'user_comment', Join::WITH, $rootAlias.'.id=user_comment.user')
@@ -56,7 +56,7 @@ class ReportedUsersAdmin extends AbstractAdmin
         ->leftJoin(\App\DB\Entity\Project\Program::class, 'p', Join::WITH, $rootAlias.'.id = p.user')
         ->leftJoin(\App\DB\Entity\Project\ProgramInappropriateReport::class, 'repProg', Join::WITH, 'p.id = repProg.program')
         ->where($qb->expr()->eq('user_comment.isReported', '1'))->orWhere($qb->expr()->isNotNull('repProg.program'))
-     ;
+      ;
     }
 
     return $query;
@@ -73,23 +73,23 @@ class ReportedUsersAdmin extends AbstractAdmin
         'createUrlPrograms' => ['template' => 'Admin/CRUD/list__action_create_url_programs.html.twig'],
       ]])
       ->add(
-          'getReportedCommentsCount',
-          null,
-          [
-            'label' => '#Reported Comments',
-            'sortable' => true,
-            'sort_field_mapping' => ['fieldName' => 'id'],
-            'sort_parent_association_mappings' => [],
-          ])
+        'getReportedCommentsCount',
+        null,
+        [
+          'label' => '#Reported Comments',
+          'sortable' => true,
+          'sort_field_mapping' => ['fieldName' => 'id'],
+          'sort_parent_association_mappings' => [],
+        ])
       ->add(
-          'getReportsOfThisUserCount',
-          null,
-          [
-            'label' => '#Reported Programs',
-            'sortable' => true,
-            'sort_field_mapping' => ['fieldName' => 'id'],
-            'sort_parent_association_mappings' => [],
-          ])
+        'getReportsOfThisUserCount',
+        null,
+        [
+          'label' => '#Reported Programs',
+          'sortable' => true,
+          'sort_field_mapping' => ['fieldName' => 'id'],
+          'sort_parent_association_mappings' => [],
+        ])
     ;
   }
 
@@ -104,7 +104,7 @@ class ReportedUsersAdmin extends AbstractAdmin
       'show_filter' => true,
     ])
       ->add('email')
-      ;
+    ;
   }
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

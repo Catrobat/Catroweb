@@ -20,7 +20,7 @@ class AchievementsAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'achievements';
 
   public function __construct(
-      protected AchievementManager $achievement_manager
+    protected AchievementManager $achievement_manager
   ) {
   }
 

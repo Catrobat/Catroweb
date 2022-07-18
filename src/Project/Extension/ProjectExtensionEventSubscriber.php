@@ -8,7 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 class ProjectExtensionEventSubscriber implements EventSubscriberInterface
 {
   public function __construct(
-      protected ProjectExtensionManager $extension_manager,
+    protected ProjectExtensionManager $extension_manager,
   ) {
   }
 

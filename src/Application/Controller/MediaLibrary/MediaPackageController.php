@@ -18,8 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class MediaPackageController extends AbstractController
 {
   public function __construct(
-      private readonly string $catrobat_mediapackage_path,
-      private readonly EntityManagerInterface $entity_manager
+    private readonly string $catrobat_mediapackage_path,
+    private readonly EntityManagerInterface $entity_manager
   ) {
   }
 
@@ -34,10 +34,10 @@ class MediaPackageController extends AbstractController
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
 
     return $this->render('MediaLibrary/media_library_overview.html.twig',
-        [
-          'packages' => $packages,
-        ]
-      );
+      [
+        'packages' => $packages,
+      ]
+    );
   }
 
   /**
@@ -55,7 +55,7 @@ class MediaPackageController extends AbstractController
       ->findOneBy([
         'nameUrl' => $package_name,
       ])
-      ;
+    ;
     if (null === $package) {
       throw $this->createNotFoundException('Unable to find Package entity.');
     }

@@ -38,7 +38,7 @@ class FollowerController extends AbstractController
       ->orderBy(['username' => Criteria::ASC])
       ->setFirstResult($page * $pageSize)
       ->setMaxResults($pageSize)
-      ;
+    ;
     /** @var ArrayCollection $followersCollection */
     $followersCollection = $user->getFollowers();
     /** @var ArrayCollection $followingCollection */

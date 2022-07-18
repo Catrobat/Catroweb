@@ -25,8 +25,8 @@ class DataBaseUtils
     $tool->createSchema($metaData);
 
     CommandHelper::executeShellCommand(
-            ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [], 'Generating test data'
-        );
+      ['bin/console', 'catrobat:test:generate', '--env=test', '--no-interaction'], [], 'Generating test data'
+    );
   }
 
   /**

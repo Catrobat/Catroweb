@@ -505,7 +505,7 @@ class BrowserContext extends MinkContext implements Context
       usleep($delay);
     }
 
-    $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, ($delay * $tries));
+    $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, $delay * $tries);
     throw new ResponseTextException($message, $this->getSession());
   }
 
@@ -531,7 +531,7 @@ class BrowserContext extends MinkContext implements Context
       usleep($delay);
     }
 
-    $message = sprintf("The element '%s' was still visible after a %s micro seconds timeout", $locator, ($delay * $tries));
+    $message = sprintf("The element '%s' was still visible after a %s micro seconds timeout", $locator, $delay * $tries);
     throw new ResponseTextException($message, $this->getSession());
   }
 
@@ -574,7 +574,7 @@ class BrowserContext extends MinkContext implements Context
       usleep($delay);
     }
 
-    $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, ($delay * $tries));
+    $message = sprintf("The element '%s' was not visible after a %s micro seconds timeout", $locator, $delay * $tries);
     throw new ResponseTextException($message, $this->getSession());
   }
 
@@ -599,7 +599,7 @@ class BrowserContext extends MinkContext implements Context
       usleep($delay);
     }
 
-    $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, ($delay * $tries));
+    $message = sprintf("The text '%s' was not found after a %s seconds timeout", $text, $delay * $tries);
     throw new ResponseTextException($message, $this->getSession());
   }
 

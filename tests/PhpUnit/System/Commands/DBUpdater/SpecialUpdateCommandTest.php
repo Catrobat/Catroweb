@@ -22,7 +22,7 @@ class SpecialUpdateCommandTest extends KernelTestCase
     $this->object = $this->getMockBuilder(SpecialUpdateCommand::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
-        ;
+    ;
   }
 
   /**

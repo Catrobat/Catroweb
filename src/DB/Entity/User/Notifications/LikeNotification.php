@@ -37,7 +37,7 @@ class LikeNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?User $like_from, /**
+    private ?User $like_from, /**
    * the Program about which this LikeNotification is notifying, belongs to.
    *
    * @ORM\ManyToOne(
@@ -50,7 +50,7 @@ class LikeNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?Program $program)
+    private ?Program $program)
   {
     parent::__construct($user, '', '', 'reaction');
   }
