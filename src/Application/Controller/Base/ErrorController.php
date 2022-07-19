@@ -2,7 +2,6 @@
 
 namespace App\Application\Controller\Base;
 
-use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\Storage\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
