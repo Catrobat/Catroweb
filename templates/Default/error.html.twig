@@ -1,0 +1,32 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('error') }}
+{% endblock %}
+
+{% block body %}
+  <div class="error-wrapper">
+    <div class="error-container {{ "error-"~status_code }}">
+      {% if status_code == 404 %}
+        <img class="error-img" src="{{ asset('images/default/404-white.png') }}" alt="Error 404">
+      {% else %}
+        <div class="error-img-placeholder">
+          <span>{{ "error"|trans({}, "catroweb") }} {{ status_code }}</span>
+        </div>
+      {% endif %}
+      <div class="error-message">
+        <h1>{{ "somethingWentWrong"|trans({}, "catroweb") }}</h1>
+        {% if status_code == 404 %}
+          <p>{{ "doesNotExist"|trans({}, "catroweb") }}</p>
+        {% else %}
+          <p>{{ "errors.unspecified"|trans({}, "catroweb") }}</p>
+        {% endif %}
+      </div>
+      <div class="error-link">
+        <a href="/app/">
+          <button class="btn btn-primary">Home</button>
+        </a>
+      </div>
+    </div>
+  </div>
+{% endblock %}

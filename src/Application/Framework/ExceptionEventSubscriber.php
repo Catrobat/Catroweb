@@ -53,7 +53,8 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
       $session = $event->getRequest()->getSession();
       $session->getFlashBag()->add('snackbar', $this->translator->trans('doesNotExist', [], 'catroweb'));
 
-      $event->setResponse(new RedirectResponse($this->url_generator->generate('index', ['theme' => $theme])));
+      //$event->setResponse(new RedirectResponse($this->url_generator->generate('index', ['theme' => $theme])));
+      $event->setResponse(new RedirectResponse($this->url_generator->generate('error', ['status_code' => 404, 'theme' => $theme])));
     }
 
     if (Response::HTTP_UNAUTHORIZED === $exception->getCode()) {
