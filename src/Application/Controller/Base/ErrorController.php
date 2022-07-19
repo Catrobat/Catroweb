@@ -23,8 +23,8 @@ class ErrorController extends AbstractController
     $flavor = $request->attributes->get('flavor');
 
     return $this->render('Default/error.html.twig', [
-        'status_code' => $status_code,
-        'flavor' => $flavor,
+      'status_code' => $status_code,
+      'flavor' => $flavor,
     ]);
   }
 }
