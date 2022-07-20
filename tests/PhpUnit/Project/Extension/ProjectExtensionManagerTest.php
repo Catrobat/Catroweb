@@ -69,9 +69,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   public function testIsAnEmbroideryProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
-          $expected,
-          $this->invokeMethod($this->object, 'isAnEmbroideryProject', [$code_xml])
-      );
+      $expected,
+      $this->invokeMethod($this->object, 'isAnEmbroideryProject', [$code_xml])
+    );
   }
 
   public function dataProviderIsAnEmbroideryProject(): array
@@ -91,9 +91,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   public function testIsAMindstormsProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
-          $expected,
-          $this->invokeMethod($this->object, 'isAMindstormsProject', [$code_xml])
-      );
+      $expected,
+      $this->invokeMethod($this->object, 'isAMindstormsProject', [$code_xml])
+    );
   }
 
   public function dataProviderIsAMindstormsProject(): array
@@ -114,9 +114,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   public function testIsAPhiroProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
-          $expected,
-          $this->invokeMethod($this->object, 'isAPhiroProject', [$code_xml])
-      );
+      $expected,
+      $this->invokeMethod($this->object, 'isAPhiroProject', [$code_xml])
+    );
   }
 
   public function dataProviderIsAPhiroProject(): array

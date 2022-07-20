@@ -89,9 +89,9 @@ class ProgramController extends AbstractController
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $program_comments = $this->findCommentsById($project);
     $program_details = $this->createProgramDetailsArray(
-        $project, $active_like_types, $active_user_like_types, $total_like_count,
-        $referrer, $program_comments
-      );
+      $project, $active_like_types, $active_user_like_types, $total_like_count,
+      $referrer, $program_comments
+    );
 
     return $this->render('Program/program.html.twig', [
       'program' => $project,
@@ -141,10 +141,10 @@ class ProgramController extends AbstractController
       }
 
       $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
-            'project_like',
-            ['id' => $id, 'type' => $type, 'action' => $action],
-            UrlGeneratorInterface::ABSOLUTE_URL
-          ));
+        'project_like',
+        ['id' => $id, 'type' => $type, 'action' => $action],
+        UrlGeneratorInterface::ABSOLUTE_URL
+      ));
 
       return $this->redirectToRoute('login');
     }
@@ -162,8 +162,8 @@ class ProgramController extends AbstractController
     }
     if ($project->getUser() !== $user) {
       $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
-          $project, $project->getUser(), $user
-        );
+        $project, $project->getUser(), $user
+      );
 
       if (ProgramLike::ACTION_ADD === $action) {
         if (0 === count($existing_notifications)) {
@@ -221,9 +221,9 @@ class ProgramController extends AbstractController
     $value = (string) $request->request->get('value');
     if (strlen($value) > ProjectsRequestValidator::MAX_NAME_LENGTH) {
       return new Response(
-          $this->translator->trans('programs.tooLongName', [], 'catroweb'),
-          Response::HTTP_UNPROCESSABLE_ENTITY
-        );
+        $this->translator->trans('programs.tooLongName', [], 'catroweb'),
+        Response::HTTP_UNPROCESSABLE_ENTITY
+      );
     }
     $user = $this->getUser();
     if (null === $user) {
@@ -374,9 +374,9 @@ class ProgramController extends AbstractController
   {
     return match ($request->getMethod()) {
       'PUT' => $this->projectCustomTranslationPutAction($request, $id),
-          'GET' => $this->projectCustomTranslationGetAction($request, $id),
-          'DELETE' => $this->projectCustomTranslationDeleteAction($request, $id),
-          default => new Response(null, Response::HTTP_BAD_REQUEST),
+      'GET' => $this->projectCustomTranslationGetAction($request, $id),
+      'DELETE' => $this->projectCustomTranslationDeleteAction($request, $id),
+      default => new Response(null, Response::HTTP_BAD_REQUEST),
     };
   }
 
@@ -401,11 +401,11 @@ class ProgramController extends AbstractController
   }
 
   private function createProgramDetailsArray(Program $program,
-                                             array $active_like_types,
-                                             array $active_user_like_types,
-                                             int $total_like_count,
-                                             ?string $referrer,
-                                             array $program_comments): array
+    array $active_like_types,
+    array $active_user_like_types,
+    int $total_like_count,
+    ?string $referrer,
+    array $program_comments): array
   {
     $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
 
@@ -454,7 +454,7 @@ class ProgramController extends AbstractController
         ['program' => $program->getId()],
         ['id' => 'DESC']
       )
-      ;
+    ;
   }
 
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response

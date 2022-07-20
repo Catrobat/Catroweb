@@ -345,7 +345,7 @@ class RemixManager
    * @param ProgramRemixRelationInterface[] $all_program_remix_relations
    */
   private function createNewCatrobatRemixRelations(Program $program, Program $parent_program,
-                                                   array &$all_program_remix_relations): void
+    array &$all_program_remix_relations): void
   {
     $program_remix_relation_to_immediate_parent = new ProgramRemixRelation($parent_program, $program, 1);
     $unique_key = $program_remix_relation_to_immediate_parent->getUniqueKey();

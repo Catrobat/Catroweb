@@ -36,14 +36,14 @@ final class ProjectsRequestValidator extends AbstractRequestValidator
 
     if (!$file->isValid()) {
       return $this->getValidationWrapper()->addError(
-          $this->__('api.projectsPost.upload_error', [], $locale), $KEY
+        $this->__('api.projectsPost.upload_error', [], $locale), $KEY
       );
     }
 
     $calculated_checksum = md5_file($file->getPathname());
     if (strtolower((string) $calculated_checksum) != strtolower($checksum)) {
       return $this->getValidationWrapper()->addError(
-          $this->__('api.projectsPost.invalid_checksum', [], $locale), $KEY
+        $this->__('api.projectsPost.invalid_checksum', [], $locale), $KEY
       );
     }
 

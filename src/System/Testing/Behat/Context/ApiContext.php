@@ -711,13 +711,13 @@ class ApiContext implements Context
   {
     $filename = match ($program_attribute) {
       'a missing code.xml' => 'program_with_missing_code_xml.catrobat',
-        'an invalid code.xml' => 'program_with_invalid_code_xml.catrobat',
-        'a missing image' => 'program_with_missing_image.catrobat',
-        'an additional image' => 'program_with_extra_image.catrobat',
-        'an extra file' => 'program_with_too_many_files.catrobat',
-        'valid parameters' => 'base.catrobat',
-        'tags' => 'program_with_tags.catrobat',
-        default => throw new PendingException('No case defined for "'.$program_attribute.'"'),
+      'an invalid code.xml' => 'program_with_invalid_code_xml.catrobat',
+      'a missing image' => 'program_with_missing_image.catrobat',
+      'an additional image' => 'program_with_extra_image.catrobat',
+      'an extra file' => 'program_with_too_many_files.catrobat',
+      'valid parameters' => 'base.catrobat',
+      'tags' => 'program_with_tags.catrobat',
+      default => throw new PendingException('No case defined for "'.$program_attribute.'"'),
     };
     $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, $api_version);
   }
@@ -2213,8 +2213,8 @@ class ApiContext implements Context
   {
     $deviceLanguage = match ($language) {
       'english' => 'en',
-        'german' => 'de',
-        default => 'NotExisting',
+      'german' => 'de',
+      default => 'NotExisting',
     };
 
     if ('1' == $api_version) {
@@ -3216,7 +3216,7 @@ class ApiContext implements Context
    * @throws Exception                       when an error while uploading occurs
    */
   private function uploadProject(string $file, string $api_version, User $user = null, string $desired_id = '',
-                                 string $flavor = 'pocketcode'): void
+    string $flavor = 'pocketcode'): void
   {
     if (null == $user) {
       if (isset($this->username)) {
@@ -3288,7 +3288,7 @@ class ApiContext implements Context
   }
 
   private function iUseTheUserAgentParameterized(string $lang_version, string $flavor, string $app_version,
-                                                 string $build_type, string $theme = 'pocketcode'): void
+    string $build_type, string $theme = 'pocketcode'): void
   {
     // see org.catrobat.catroid.ui.WebViewActivity
     $platform = 'Android';

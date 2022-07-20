@@ -20,8 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class CommentsController extends AbstractController
 {
   public function __construct(
-        private readonly EntityManagerInterface $entity_manager
-    ) {
+    private readonly EntityManagerInterface $entity_manager
+  ) {
   }
 
   /**

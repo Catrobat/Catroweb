@@ -25,13 +25,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ReportController extends AbstractController
 {
   public function __construct(
-      private readonly UserManager $user_manager,
-      private readonly ProgramManager $program_manager,
-      private readonly TranslatorInterface $translator,
-      private readonly EventDispatcherInterface $event_dispatcher,
-      private readonly AuthorizationCheckerInterface $authorization_checker,
-      private readonly TokenStorageInterface $usage_tracking_token_storage,
-      private readonly EntityManagerInterface $entity_manager,
+    private readonly UserManager $user_manager,
+    private readonly ProgramManager $program_manager,
+    private readonly TranslatorInterface $translator,
+    private readonly EventDispatcherInterface $event_dispatcher,
+    private readonly AuthorizationCheckerInterface $authorization_checker,
+    private readonly TokenStorageInterface $usage_tracking_token_storage,
+    private readonly EntityManagerInterface $entity_manager,
   ) {
   }
 
@@ -79,15 +79,15 @@ class ReportController extends AbstractController
     } elseif (null !== $token) {
       $user = $this->entity_manager->getRepository(User::class)
         ->findOneBy(['upload_token' => $token])
-        ;
+      ;
 
       if (null !== $user) {
         // old deprecated upload_token Auth
         $report->setReportingUser($user);
       } else {
         // JWT Auth. (new)
-          $token = preg_split('#\s+#', $token)[1]; // strip "bearer"
-          $jwt_payload = $this->user_manager->decodeToken($token);
+        $token = preg_split('#\s+#', $token)[1]; // strip "bearer"
+        $jwt_payload = $this->user_manager->decodeToken($token);
         if (!array_key_exists('username', $jwt_payload)) {
           return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
         }

@@ -12,8 +12,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ReportedCommentsController extends CRUDController
 {
   public function __construct(
-        private readonly EntityManagerInterface $entity_manager
-    ) {
+    private readonly EntityManagerInterface $entity_manager
+  ) {
   }
 
   public function unreportProgramAction(): RedirectResponse

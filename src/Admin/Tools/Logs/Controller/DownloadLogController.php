@@ -27,14 +27,14 @@ class DownloadLogController extends AbstractController
     $fileName = (string) $request->request->get('file');
     $path = LogsController::LOG_DIR;
     $finder = new Finder();
-    if (($finder->files()->in($path)->depth('>= 1')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults())) {
+    if ($finder->files()->in($path)->depth('>= 1')->name(substr($fileName, strrpos($fileName, '/') + 1))->hasResults()) {
       $file = new File($path.$fileName);
       if ($file->isFile()) {
         $response = new BinaryFileResponse($file);
         $d = $response->headers->makeDisposition(
-            ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-            $file->getFilename()
-          );
+          ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+          $file->getFilename()
+        );
         $response->headers->set('Content-Disposition', $d);
         $response->headers->set('Content-type', 'text/plain');
 

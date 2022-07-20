@@ -35,18 +35,18 @@ class ProjectCustomTranslation
   private ?string $credits = null;
 
   public function __construct(
-      /**
-       * @ORM\ManyToOne(
-       *     targetEntity=Program::class,
-       *     inversedBy="custom_translations"
-       * )
-       * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
-       */
-      private Program $project,
-      /**
-       * @ORM\Column(type="string", length=5)
-       */
-      private string $language
+    /**
+     * @ORM\ManyToOne(
+     *     targetEntity=Program::class,
+     *     inversedBy="custom_translations"
+     * )
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private Program $project,
+    /**
+     * @ORM\Column(type="string", length=5)
+     */
+    private string $language
   ) {
   }
 

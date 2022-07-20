@@ -97,10 +97,10 @@ class CatrobatCodeParserTest extends TestCase
   {
     $programs = [];
     $programs[] = [new ExtractedCatrobatFile(
-        RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
+      RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
     ];
     $programs[] = [new ExtractedCatrobatFile(
-        RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
+      RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
     ];
 
     return $programs;

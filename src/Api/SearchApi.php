@@ -26,30 +26,30 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
     }
 
     switch ($type) {
-          case 'projects':
-              $projects = $this->facade->getProgramManager()->search($query, $limit, $offset);
-              $projects_total = $this->facade->getProgramManager()->searchCount($query);
+      case 'projects':
+        $projects = $this->facade->getProgramManager()->search($query, $limit, $offset);
+        $projects_total = $this->facade->getProgramManager()->searchCount($query);
 
-              $result = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
-              break;
-          case 'users':
-              $users = $this->facade->getUserManager()->search($query, $limit, $offset);
-              $users_total = $this->facade->getUserManager()->searchCount($query);
-              $result = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
-              break;
-          case 'all':
-          default:
-              $projects = $this->facade->getProgramManager()->search($query, $limit, $offset);
-              $projects_total = $this->facade->getProgramManager()->searchCount($query);
-              $projects_response = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+        $result = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
+        break;
+      case 'users':
+        $users = $this->facade->getUserManager()->search($query, $limit, $offset);
+        $users_total = $this->facade->getUserManager()->searchCount($query);
+        $result = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
+        break;
+      case 'all':
+      default:
+        $projects = $this->facade->getProgramManager()->search($query, $limit, $offset);
+        $projects_total = $this->facade->getProgramManager()->searchCount($query);
+        $projects_response = $this->facade->getResponseManager()->getProjectsSearchResponse($projects, $projects_total);
 
-              $users = $this->facade->getUserManager()->search($query, $limit, $offset);
-              $users_total = $this->facade->getUserManager()->searchCount($query);
-              $users_response = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
+        $users = $this->facade->getUserManager()->search($query, $limit, $offset);
+        $users_total = $this->facade->getUserManager()->searchCount($query);
+        $users_response = $this->facade->getResponseManager()->getUsersSearchResponse($users, $users_total);
 
-              $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response);
-              break;
-      }
+        $result = $this->facade->getResponseManager()->getSearchResponse($projects_response, $users_response);
+        break;
+    }
 
     $responseHeaders['X-Response-Hash'] = md5(json_encode($result, JSON_THROW_ON_ERROR));
 

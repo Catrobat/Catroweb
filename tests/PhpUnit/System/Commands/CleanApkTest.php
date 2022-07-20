@@ -37,10 +37,10 @@ class CleanApkTest extends KernelTestCase
   public function clearApkData(): void
   {
     $this->assertNotEmpty(array_diff(scandir($this->apk_dir), ['.', '..', '.gitignore']),
-            'Apk directory empty.');
+      'Apk directory empty.');
     $return = $this->command_tester->execute([]);
     $this->assertEquals(0, $return);
     $this->assertEmpty(array_diff(scandir($this->apk_dir), ['.', '..', '.gitignore']),
-            'Not all files in apk directory got deleted.');
+      'Not all files in apk directory got deleted.');
   }
 }

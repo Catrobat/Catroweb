@@ -36,7 +36,7 @@ class RemixNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?User $remix_from, /**
+    private ?User $remix_from, /**
    *  the parent Program.
    *
    * @ORM\ManyToOne(
@@ -49,7 +49,7 @@ class RemixNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?Program $program, /**
+    private ?Program $program, /**
    * the newly remixed child Program.
    *
    * @ORM\ManyToOne(
@@ -62,7 +62,7 @@ class RemixNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private ?Program $remix_program)
+    private ?Program $remix_program)
   {
     parent::__construct($user, '', '', 'remix');
   }

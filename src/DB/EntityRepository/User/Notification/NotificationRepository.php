@@ -87,7 +87,7 @@ class NotificationRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->eq('n.user', ':user_id'))
       ->setParameter(':user_id', $user->getId())
       ->andWhere($qb->expr()->eq('n.seen', 0))
-        ;
+    ;
 
     $unseen_notifications = $qb->getQuery()->getResult();
 

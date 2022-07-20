@@ -137,7 +137,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
           'id' => $project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/'
-    );
+      );
     }
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = ltrim($this->url_generator->generate(
@@ -194,12 +194,12 @@ final class ProjectsResponseManager extends AbstractResponseManager
       $project_url = null;
       if (empty($url)) {
         $url = $project_url = ltrim($this->url_generator->generate(
-            'program',
-            [
-              'theme' => $this->parameter_bag->get('umbrellaTheme'),
-              'id' => $featured_project->getProgram()->getId(),
-            ],
-            UrlGeneratorInterface::ABSOLUTE_URL), '/'
+          'program',
+          [
+            'theme' => $this->parameter_bag->get('umbrellaTheme'),
+            'id' => $featured_project->getProgram()->getId(),
+          ],
+          UrlGeneratorInterface::ABSOLUTE_URL), '/'
         );
       }
 

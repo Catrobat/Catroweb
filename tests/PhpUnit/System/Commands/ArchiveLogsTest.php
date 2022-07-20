@@ -38,6 +38,6 @@ class ArchiveLogsTest extends KernelTestCase
 
     // check if directory is not empty
     $this->assertNotEmpty(array_diff(scandir($log_dir), ['.', '..', '.gitignore']),
-            'No file in log directory got archived.');
+      'No file in log directory got archived.');
   }
 }

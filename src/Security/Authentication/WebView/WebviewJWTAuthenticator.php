@@ -18,12 +18,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class WebviewJWTAuthenticator extends JWTAuthenticator
 {
   public function __construct(
-        private readonly CookieService $cookie_service,
-        JWTTokenManagerInterface $jwtManager,
-        EventDispatcherInterface $dispatcher,
-        TokenExtractorInterface $tokenExtractor,
-        UserProviderInterface $userProvider,
-        TranslatorInterface $translator = null)
+    private readonly CookieService $cookie_service,
+    JWTTokenManagerInterface $jwtManager,
+    EventDispatcherInterface $dispatcher,
+    TokenExtractorInterface $tokenExtractor,
+    UserProviderInterface $userProvider,
+    TranslatorInterface $translator = null)
   {
     parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $userProvider, $translator);
   }

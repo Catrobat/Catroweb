@@ -32,42 +32,42 @@ class UpdateProjectExtensionsCommand extends Command
     $extension = $this->getOrCreateExtension(Extension::ARDUINO)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'arduino.title')
       ->setEnabled(true)
-        ;
+    ;
     ++$count;
     $this->entity_manager->persist($extension);
 
     $extension = $this->getOrCreateExtension(Extension::DRONE)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'drone.title')
       ->setEnabled(true)
-      ;
+    ;
     ++$count;
     $this->entity_manager->persist($extension);
 
     $extension = $this->getOrCreateExtension(Extension::PHIRO)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'phiro.title')
       ->setEnabled(true)
-      ;
+    ;
     ++$count;
     $this->entity_manager->persist($extension);
 
     $extension = $this->getOrCreateExtension(Extension::RASPBERRY_PI)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'raspberry_pi.title')
       ->setEnabled(true)
-      ;
+    ;
     ++$count;
     $this->entity_manager->persist($extension);
 
     $extension = $this->getOrCreateExtension(Extension::EMBROIDERY)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'embroidery.title')
       ->setEnabled(true)
-      ;
+    ;
     ++$count;
     $this->entity_manager->persist($extension);
 
     $extension = $this->getOrCreateExtension(Extension::MINDSTORMS)
       ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'mindstorms.title')
       ->setEnabled(true)
-      ;
+    ;
     ++$count;
     $this->entity_manager->persist($extension);
 

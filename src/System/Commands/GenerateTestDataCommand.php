@@ -24,7 +24,7 @@ class GenerateTestDataCommand extends Command
   protected string $extracted_source_program_directory;
 
   public function __construct(protected Filesystem $filesystem, protected CatrobatFileExtractor $extractor,
-                              protected CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
+    protected CatrobatFileCompressor $compressor, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->source = (string) $parameter_bag->get('catrobat.test.directory.source');

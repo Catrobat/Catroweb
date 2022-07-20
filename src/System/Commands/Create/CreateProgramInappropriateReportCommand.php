@@ -17,8 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateProgramInappropriateReportCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager,
-                              private readonly ProgramManager $program_manager,
-                              private readonly EntityManagerInterface $entity_manager)
+    private readonly ProgramManager $program_manager,
+    private readonly EntityManagerInterface $entity_manager)
   {
     parent::__construct();
   }

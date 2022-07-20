@@ -13,8 +13,8 @@ class CatrobatFileExtractor
   private readonly string $extract_dir;
 
   public function __construct(
-      string $extract_dir,
-      private string $extract_path
+    string $extract_dir,
+    private string $extract_path
   ) {
     FileHelper::verifyDirectoryExists($extract_dir);
     $this->extract_dir = $extract_dir;

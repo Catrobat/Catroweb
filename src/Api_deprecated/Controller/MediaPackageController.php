@@ -23,9 +23,9 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
   use TranslatorAwareTrait;
 
   public function __construct(
-      TranslatorInterface $translator,
-      private readonly EntityManagerInterface $entity_manager,
-      protected MediaPackageFileRepository $media_package_file_repository
+    TranslatorInterface $translator,
+    private readonly EntityManagerInterface $entity_manager,
+    protected MediaPackageFileRepository $media_package_file_repository
   ) {
     $this->initTranslator($translator);
   }
@@ -39,19 +39,19 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     /** @var MediaPackage|null $media_package */
     $media_package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy(['name' => $package])
-      ;
+    ;
     if (null === $media_package) {
       return new JsonResponse(
-          ['statusCode' => 523,
-            'message' => $package.' not found', ]
-        );
+        ['statusCode' => 523,
+          'message' => $package.' not found', ]
+      );
     }
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
       return new JsonResponse(
-          $json_response_array
-        );
+        $json_response_array
+      );
     }
     /** @var MediaPackageCategory $media_package_category */
     foreach ($media_package_categories as $media_package_category) {
@@ -65,8 +65,8 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     }
 
     return new JsonResponse(
-        $json_response_array
-      );
+      $json_response_array
+    );
   }
 
   /**
@@ -82,19 +82,19 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     /** @var MediaPackage|null $media_package */
     $media_package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy(['nameUrl' => $package])
-      ;
+    ;
     if (null === $media_package) {
       return new JsonResponse(
-          ['statusCode' => 523,
-            'message' => $package.' not found', ]
-        );
+        ['statusCode' => 523,
+          'message' => $package.' not found', ]
+      );
     }
     $json_response_array = [];
     $media_package_categories = $media_package->getCategories();
     if ($media_package_categories->isEmpty()) {
       return new JsonResponse(
-          $json_response_array
-        );
+        $json_response_array
+      );
     }
     foreach ($media_package_categories as $media_package_category) {
       /** @var array|MediaPackageFile $media_package_files */
@@ -107,8 +107,8 @@ class MediaPackageController extends AbstractController implements TranslatorAwa
     }
 
     return new JsonResponse(
-        $json_response_array
-      );
+      $json_response_array
+    );
   }
 
   protected function createArrayOfMediaData(MediaPackageFile $media_package_file): array

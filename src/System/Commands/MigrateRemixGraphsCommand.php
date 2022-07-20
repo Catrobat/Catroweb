@@ -41,9 +41,9 @@ class MigrateRemixGraphsCommand extends Command
   private ?MigrationFileLock $migration_file_lock = null;
 
   public function __construct(private readonly UserManager $user_manager,
-                              private readonly ProgramManager $program_manager, private readonly RemixManager $remix_manager,
-                              private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
-                              private readonly ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
+    private readonly ProgramManager $program_manager, private readonly RemixManager $remix_manager,
+    private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
+    private readonly ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);

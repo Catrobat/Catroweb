@@ -65,6 +65,6 @@ class UpdateRandomProjectCategoryCommand extends Command
       ->set("p.{$index}", 0)
       ->getQuery()
       ->execute()
-      ;
+    ;
   }
 }

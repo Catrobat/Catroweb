@@ -40,7 +40,7 @@ class ItranslateApiTest extends TestCase
 
           return true;
         }
-      ))
+        ))
       ->willReturn($this->mockGenericResponse())
     ;
 
