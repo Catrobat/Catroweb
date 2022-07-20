@@ -51,11 +51,18 @@ final class ProjectsResponseManager extends AbstractResponseManager
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
-      $attributes_list[] = 'download'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
-      $attributes_list[] = 'tags'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
+
+      $attributes_list[] = 'download'; // TODO: hotfix for Catty + Catroid. Remove after Catty + Catroid uses attributes-parameter.
+      $attributes_list[] = 'tags'; // TODO: hotfix for Catty + Catroid. Remove after Catty + Catroid uses attributes-parameter.
+
+      $attributes_list[] = 'description'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
+      $attributes_list[] = 'version'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
+      $attributes_list[] = 'uploaded'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
+      $attributes_list[] = 'download_url'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
+      $attributes_list[] = 'filesize'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
     } elseif ('ALL' === $attributes) {
       $attributes_list = ['id', 'name', 'author', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize'];
-      $attributes_list[] = 'download'; // TODO: hotfix for Catty. Remove after Catty uses attributes-parameter.
+      $attributes_list[] = 'download'; // TODO: hotfix for Catty + Catroid. Remove after Catty + Catroid uses attributes-parameter.
     } else {
       $attributes_list = explode(',', $attributes);
     }
