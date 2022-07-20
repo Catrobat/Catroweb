@@ -17,7 +17,7 @@ export function shareLink (
       navigator.share({
         title: themeDisplayName,
         text: checkOutTranslation,
-        url: url
+        url
       })
         .then(() => {
           showSnackbar('#share-snackbar', shareSuccess)

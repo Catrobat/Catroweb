@@ -52,7 +52,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
 
       return new Promise((resolve, reject) => {
         $.ajax({
-          url: url,
+          url,
           type: 'put',
           data: { value: this.text },
           success: function (data) {

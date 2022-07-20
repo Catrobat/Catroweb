@@ -21,10 +21,10 @@ function loadFileContent (file, filter, count, greaterThan) {
   $.ajax({
     type: 'get',
     data: {
-      file: file,
-      filter: filter,
-      count: count,
-      greaterThan: greaterThan
+      file,
+      filter,
+      count,
+      greaterThan
     },
     success: function (data) {
       $('#loading-spinner').hide()

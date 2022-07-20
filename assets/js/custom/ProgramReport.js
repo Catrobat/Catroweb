@@ -90,7 +90,7 @@ export function ProgramReport (programId, reportUrl, loginUrl, reportSentText, e
   function reportProgram (reason, category) {
     $.post(reportUrl, {
       program: programId,
-      category: category,
+      category,
       note: reason
     }, function (data) {
       if (data.statusCode === statusCodeOk) {

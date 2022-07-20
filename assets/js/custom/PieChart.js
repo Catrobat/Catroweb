@@ -8,7 +8,7 @@ function PieChart (google) {
     google.setOnLoadCallback(() => {
       const dataSpace = google.visualization.arrayToDataTable(dataArray)
       const optionsSpace = {
-        title: title,
+        title,
         is3D: true
       }
       const chart = new google.visualization.PieChart(document.getElementById(elementId))

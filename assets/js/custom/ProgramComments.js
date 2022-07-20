@@ -163,8 +163,8 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   function showPopUp (type, title, text, refresh = false) {
     Swal.fire(
       {
-        title: title,
-        text: text,
+        title,
+        text,
         icon: type,
         customClass: {
           confirmButton: 'btn btn-primary'

@@ -425,7 +425,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     }
 
     $.ajax({
-      url: url,
+      url,
       type: 'get',
       success: function (data) {
         // update .active of button

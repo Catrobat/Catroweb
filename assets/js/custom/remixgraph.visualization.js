@@ -220,7 +220,7 @@ const _InternalRemixGraph = function () {
           opt.$menu.css({
             top: '50%',
             left: '50%',
-            width: width,
+            width,
             maxWidth: width,
             marginTop: -height / 2,
             marginLeft: -width / 2
