@@ -9,8 +9,7 @@ MediaLib(
   $mediaLibrary.data('path-media-search'),
   $mediaLibrary.data('flavor'),
   $mediaLibrary.data('media-dir'),
-  $mediaLibrary.data('trans-element'),
-  $mediaLibrary.data('trans-elements'),
+  $mediaLibrary.data('translations'),
   $mediaLibrary.data('is-webview'),
   $mediaLibrary.data('path-medialibpackagebynameurl')
 )

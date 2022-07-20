@@ -65,27 +65,27 @@ class CodeStatisticsController extends AbstractController
           $brick_stats['controlBricks']['different']['numDifferent']
         ),
         'motion-brick' => $this->getMappedBricksStatistic(
-        'codeStatistics.motionBricks',
+          'codeStatistics.motionBricks',
           $brick_stats['motionBricks']['numTotal'],
           $brick_stats['motionBricks']['different']['numDifferent']
         ),
         'sound-brick' => $this->getMappedBricksStatistic(
-        'codeStatistics.soundBricks',
+          'codeStatistics.soundBricks',
           $brick_stats['soundBricks']['numTotal'],
           $brick_stats['soundBricks']['different']['numDifferent']
         ),
         'look-brick' => $this->getMappedBricksStatistic(
-        'codeStatistics.looksBricks',
+          'codeStatistics.looksBricks',
           $brick_stats['looksBricks']['numTotal'],
           $brick_stats['looksBricks']['different']['numDifferent']
         ),
         'pen-brick' => $this->getMappedBricksStatistic(
-        'codeStatistics.penBricks',
+          'codeStatistics.penBricks',
           $brick_stats['penBricks']['numTotal'],
           $brick_stats['penBricks']['different']['numDifferent']
         ),
         'data-brick' => $this->getMappedBricksStatistic(
-        'codeStatistics.dataBricks',
+          'codeStatistics.dataBricks',
           $brick_stats['dataBricks']['numTotal'],
           $brick_stats['dataBricks']['different']['numDifferent']
         ),
@@ -95,7 +95,7 @@ class CodeStatisticsController extends AbstractController
           $brick_stats['deviceBricks']['different']['numDifferent']
         ),
         'special-brick' => $this->getMappedBricksStatistic(
-        'codeStatistics.specialBricks',
+          'codeStatistics.specialBricks',
           $brick_stats['specialBricks']['numTotal'],
           $brick_stats['specialBricks']['different']['numDifferent']
         ),

@@ -115,8 +115,8 @@ class RemixGraphManipulator
   }
 
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
-                                                       array $preserved_creation_date_mapping,
-                                                       array $preserved_seen_date_mapping): void
+    array $preserved_creation_date_mapping,
+    array $preserved_seen_date_mapping): void
   {
     $this
       ->remix_subgraph_manipulator

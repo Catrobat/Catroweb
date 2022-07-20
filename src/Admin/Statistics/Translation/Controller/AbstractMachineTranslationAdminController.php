@@ -21,8 +21,8 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
   protected string $type;
 
   public function __construct(
-      private readonly EntityManagerInterface $entity_manager,
-      private readonly KernelInterface $kernel
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly KernelInterface $kernel
   ) {
   }
 

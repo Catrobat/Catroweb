@@ -72,12 +72,12 @@ final class MediaLibraryResponseManager extends AbstractResponseManager
     }
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = $this->url_generator->generate(
-          'download_media',
-          [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $media_package_file->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL);
+        'download_media',
+        [
+          'theme' => $this->parameter_bag->get('umbrellaTheme'),
+          'id' => $media_package_file->getId(),
+        ],
+        UrlGeneratorInterface::ABSOLUTE_URL);
     }
 
     if (in_array('size', $attributes_list, true)) {

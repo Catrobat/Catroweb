@@ -17,10 +17,10 @@ final class UserResponseManager extends AbstractResponseManager
   private CookieService $cookie_service;
 
   public function __construct(
-      TranslatorInterface $translator,
-      SerializerInterface $serializer,
-      ResponseCacheManager $response_cache_manager,
-      CookieService $cookie_service
+    TranslatorInterface $translator,
+    SerializerInterface $serializer,
+    ResponseCacheManager $response_cache_manager,
+    CookieService $cookie_service
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
     $this->cookie_service = $cookie_service;

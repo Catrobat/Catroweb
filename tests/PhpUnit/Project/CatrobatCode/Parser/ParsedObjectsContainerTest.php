@@ -90,7 +90,7 @@ class ParsedObjectsContainerTest extends TestCase
     $this->expectExceptionMessage(Exception::class);
 
     $xml_properties = simplexml_load_file(
-        RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
+      RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
     );
     Assert::assertNotFalse($xml_properties);
 

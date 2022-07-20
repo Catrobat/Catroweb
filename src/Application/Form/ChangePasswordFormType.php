@@ -41,7 +41,7 @@ class ChangePasswordFormType extends AbstractType
         // this is read and encoded in the controller
         'mapped' => false,
       ])
-        ;
+    ;
   }
 
   public function configureOptions(OptionsResolver $resolver): void

@@ -46,7 +46,7 @@ class ReportedCommentsAdmin extends AbstractAdmin
   {
     $filter
       ->add('user')
-          ;
+    ;
   }
 
   /**

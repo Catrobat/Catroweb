@@ -181,8 +181,8 @@ class TwigExtension extends AbstractExtension
   {
     return match ($shortName) {
       'fa_AF', 'fa_IR', 'pt_BR', 'pt_PT', 'zh_CN', 'zh_TW', 'en_GB' => $shortName,
-        'en' => 'en_US',
-        default => explode('_', $shortName)[0],
+      'en' => 'en_US',
+      default => explode('_', $shortName)[0],
     };
   }
 
@@ -190,9 +190,9 @@ class TwigExtension extends AbstractExtension
   {
     return match ($shortName) {
       'en_GB' => 'English (British)',
-        'zh_CN' => '中文 (简化字)',
-        'zh_TW' => '中文 (繁體字)',
-        default => $locale,
+      'zh_CN' => '中文 (简化字)',
+      'zh_TW' => '中文 (繁體字)',
+      default => $locale,
     };
   }
 
@@ -259,11 +259,11 @@ class TwigExtension extends AbstractExtension
   {
     return match ($this->getFlavor()) {
       'luna' => 'Luna & Cat',
-        'phirocode' => 'Phirocode',
-        'create@school' => 'Create@School',
-        'embroidery' => 'Embroidery Designer',
-        'arduino' => 'Arduino Code',
-        default => 'Pocket Code',
+      'phirocode' => 'Phirocode',
+      'create@school' => 'Create@School',
+      'embroidery' => 'Embroidery Designer',
+      'arduino' => 'Arduino Code',
+      default => 'Pocket Code',
     };
   }
 
@@ -275,8 +275,8 @@ class TwigExtension extends AbstractExtension
   {
     return match ($object->getExtension()) {
       'jpg', 'jpeg', 'png', 'gif' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
-          'catrobat' => $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension()),
-          default => null,
+      'catrobat' => $this->media_package_file_repository->getThumbnailWebPath($object->getId(), $object->getExtension()),
+      default => null,
     };
   }
 
@@ -284,7 +284,7 @@ class TwigExtension extends AbstractExtension
   {
     return match ($object->getExtension()) {
       'mp3', 'mpga', 'wav', 'ogg' => $this->media_package_file_repository->getWebPath($object->getId(), $object->getExtension()),
-        default => null,
+      default => null,
     };
   }
 

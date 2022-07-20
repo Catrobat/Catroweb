@@ -22,8 +22,8 @@ class RemixSubgraphManipulator
   }
 
   public function appendRemixSubgraphToCatrobatParents(Program $program, array $ids_of_new_parents,
-                                                       array $preserved_creation_date_mapping,
-                                                       array $preserved_seen_date_mapping): void
+    array $preserved_creation_date_mapping,
+    array $preserved_seen_date_mapping): void
   {
     $program_descendant_relations = $this->program_remix_repository->getDescendantRelations([$program->getId()]);
 
@@ -63,7 +63,7 @@ class RemixSubgraphManipulator
         $program_remix_relation = new ProgramRemixRelation(
           $parent_catrobat_relation->getAncestor(),
           $descendant_relation->getDescendant(),
-          ($parent_catrobat_relation->getDepth() + $descendant_relation->getDepth() + 1)
+          $parent_catrobat_relation->getDepth() + $descendant_relation->getDepth() + 1
         );
 
         $unique_key = $program_remix_relation->getUniqueKey();
@@ -94,7 +94,7 @@ class RemixSubgraphManipulator
   }
 
   private function splitNewParentIdsByRelationDirection(array $existing_descendant_relations_of_program,
-                                                        array $ids_of_new_parents): array
+    array $ids_of_new_parents): array
   {
     // check if any new parent is already an existing child of this program
     // (i.e. has a forward descendant connection to the program)!

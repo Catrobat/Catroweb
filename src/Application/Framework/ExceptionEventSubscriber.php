@@ -18,12 +18,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ExceptionEventSubscriber implements EventSubscriberInterface
 {
   public function __construct(
-      protected LoggerInterface $logger,
-      protected LoggerInterface $softLogger,
-      protected TranslatorInterface $translator,
-      protected ParameterBagInterface $parameter_bag,
-      protected UrlGeneratorInterface $url_generator,
-      protected CookieService $cookie_service
+    protected LoggerInterface $logger,
+    protected LoggerInterface $softLogger,
+    protected TranslatorInterface $translator,
+    protected ParameterBagInterface $parameter_bag,
+    protected UrlGeneratorInterface $url_generator,
+    protected CookieService $cookie_service
   ) {
   }
 

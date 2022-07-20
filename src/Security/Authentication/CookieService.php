@@ -17,21 +17,21 @@ class CookieService
   public function createBearerTokenCookie(string $bearer_token): Cookie
   {
     return \Symfony\Component\HttpFoundation\Cookie::create(
-        'BEARER',
-        $bearer_token,
-        time() + $this->jwtTokenLifetime,
-        // expiration
-        $this->router->getContext()->getBaseUrl().'/',
-        // path
-        null,
-        // domain, null means that Symfony will generate it on its own.
-        'prod' === $_ENV['APP_ENV'],
-        // secure (HTTPS only)
-        false,
-        // httpOnly
-        false,
-        // raw
-        'lax'
+      'BEARER',
+      $bearer_token,
+      time() + $this->jwtTokenLifetime,
+      // expiration
+      $this->router->getContext()->getBaseUrl().'/',
+      // path
+      null,
+      // domain, null means that Symfony will generate it on its own.
+      'prod' === $_ENV['APP_ENV'],
+      // secure (HTTPS only)
+      false,
+      // httpOnly
+      false,
+      // raw
+      'lax'
     );
   }
 
@@ -41,21 +41,21 @@ class CookieService
   public function createRefreshTokenCookie(string $refresh_token): Cookie
   {
     return \Symfony\Component\HttpFoundation\Cookie::create(
-        'REFRESH_TOKEN',
-        $refresh_token,
-        time() + $this->refreshTokenLifetime,
-        // expiration
-        $this->router->getContext()->getBaseUrl().'/',
-        // path - optional /api/authentication
-        null,
-        // domain, null means that Symfony will generate it on its own.
-        'prod' === $_ENV['APP_ENV'],
-        // secure (HTTPS only)
-        true,
-        // httpOnly
-        false,
-        // raw
-        'strict'
+      'REFRESH_TOKEN',
+      $refresh_token,
+      time() + $this->refreshTokenLifetime,
+      // expiration
+      $this->router->getContext()->getBaseUrl().'/',
+      // path - optional /api/authentication
+      null,
+      // domain, null means that Symfony will generate it on its own.
+      'prod' === $_ENV['APP_ENV'],
+      // secure (HTTPS only)
+      true,
+      // httpOnly
+      false,
+      // raw
+      'strict'
     );
   }
 

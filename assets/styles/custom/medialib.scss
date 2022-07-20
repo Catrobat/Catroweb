@@ -2,15 +2,14 @@
 @import "../base/variables";
 @import "../base/mixins";
 
-$tile-size-xs: 64px;
 $tile-size-sm: 92px;
 $tile-size-md: 104px;
-$tile-size-lg: 192px;
+$tile-size-lg: 128px;
 $tile-padding-y: 8px;
 $tile-padding-overflow-x: 1.5rem;
 $img-border-strength: 2px;
 
-#content.medialib-content {
+.medialib-content {
   .category {
     margin-top: 1.5rem;
 
@@ -24,14 +23,14 @@ $img-border-strength: 2px;
 
       .mediafile {
         position: relative;
-        display: flex;
-        align-items: center;
         height: $tile-size-sm;
         width: calc(100% + (2 * #{$tile-padding-overflow-x})); // sass interpolation
         margin: 0 (-$tile-padding-overflow-x);
         padding: $tile-padding-y $tile-padding-overflow-x;
         font-size: 1rem;
         text-decoration: none;
+        display: flex;
+        align-items: center;
         transition: border 0.5s;
 
         &:hover,
@@ -51,19 +50,20 @@ $img-border-strength: 2px;
           background-color: #e5e5e5;
 
           .checkbox {
-            font-size: 1.25rem;
             color: $white;
+            font-size: 1.25rem;
             visibility: visible;
           }
         }
 
         .img-container {
+          flex: 0 0 auto;
+          width: $tile-size-sm - 2 * $tile-padding-y;
+          height: $tile-size-sm - 2 * $tile-padding-y;
+          border: $img-border-strength solid var(--primary);
           display: flex;
           align-items: center;
           justify-content: center;
-          min-width: $tile-size-sm - 2 * $tile-padding-y;
-          height: $tile-size-sm - 2 * $tile-padding-y;
-          border: $img-border-strength solid var(--primary);
 
           img {
             max-width: $tile-size-sm - 2 * $tile-padding-y - 2 * $img-border-strength;
@@ -82,12 +82,12 @@ $img-border-strength: 2px;
         }
 
         .text-container {
-          display: flex;
-          flex-flow: column nowrap;
-          justify-content: center;
           width: 100%;
           height: $tile-size-sm - 2 * $tile-padding-y;
           margin-left: 0.75rem;
+          display: flex;
+          flex-flow: column nowrap;
+          justify-content: center;
         }
 
         .name {
@@ -120,12 +120,12 @@ $img-border-strength: 2px;
         }
 
         .button-container {
-          display: flex;
-          align-items: center;
-          justify-content: center;
           min-width: $tile-size-sm - 2 * $tile-padding-y;
           height: $tile-size-sm - 2 * $tile-padding-y;
           margin-left: auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
 
           i {
             font-size: 2.5rem;
@@ -151,11 +151,11 @@ $img-border-strength: 2px;
 /* media breakpoints */
 
 @include media-breakpoint-up(sm) {
-  #content.medialib-content .category .files .mediafile {
+  .medialib-content .category .files .mediafile {
     height: $tile-size-md;
 
     .img-container {
-      min-width: $tile-size-md - 2 * $tile-padding-y;
+      width: $tile-size-md - 2 * $tile-padding-y;
       height: $tile-size-md - 2 * $tile-padding-y;
 
       img {
@@ -175,6 +175,32 @@ $img-border-strength: 2px;
   }
 }
 
+@include media-breakpoint-up(lg) {
+  .medialib-content .category .files .mediafile {
+    height: $tile-size-lg;
+    font-size: 1.25rem;
+
+    .img-container {
+      width: $tile-size-lg - 4 * $tile-padding-y;
+      height: $tile-size-lg - 4 * $tile-padding-y;
+
+      img {
+        max-width: $tile-size-lg - 4 * $tile-padding-y - 2 * $img-border-strength;
+        max-height: $tile-size-lg - 4 * $tile-padding-y - 2 * $img-border-strength;
+      }
+    }
+
+    .text-container {
+      height: $tile-size-lg - 4 * $tile-padding-y;
+    }
+
+    .button-container {
+      min-width: $tile-size-lg - 4 * $tile-padding-y;
+      height: $tile-size-lg - 4 * $tile-padding-y;
+    }
+  }
+}
+
 /* thumbsize breakpoints */
 
 #thumbsize-control {
@@ -184,53 +210,5 @@ $img-border-strength: 2px;
 
   span {
     margin-right: 0.5rem;
-  }
-}
-
-#content[size="sm"].medialib-content .category .files .mediafile {
-  height: $tile-size-xs;
-  font-size: 0.75rem;
-
-  .img-container {
-    min-width: $tile-size-xs - 2 * $tile-padding-y;
-    height: $tile-size-xs - 2 * $tile-padding-y;
-
-    img {
-      max-width: $tile-size-xs - 2 * $tile-padding-y - 2 * $img-border-strength;
-      max-height: $tile-size-xs - 2 * $tile-padding-y - 2 * $img-border-strength;
-    }
-  }
-
-  .text-container {
-    height: $tile-size-xs - 2 * $tile-padding-y;
-  }
-
-  .button-container {
-    min-width: $tile-size-xs - 2 * $tile-padding-y;
-    height: $tile-size-xs - 2 * $tile-padding-y;
-  }
-}
-
-#content[size="lg"].medialib-content .category .files .mediafile {
-  height: $tile-size-lg;
-  font-size: 1.25rem;
-
-  .img-container {
-    min-width: $tile-size-lg - 4 * $tile-padding-y;
-    height: $tile-size-lg - 4 * $tile-padding-y;
-
-    img {
-      max-width: $tile-size-lg - 4 * $tile-padding-y - 2 * $img-border-strength;
-      max-height: $tile-size-lg - 4 * $tile-padding-y - 2 * $img-border-strength;
-    }
-  }
-
-  .text-container {
-    height: $tile-size-lg - 4 * $tile-padding-y;
-  }
-
-  .button-container {
-    min-width: $tile-size-lg - 4 * $tile-padding-y;
-    height: $tile-size-lg - 4 * $tile-padding-y;
   }
 }

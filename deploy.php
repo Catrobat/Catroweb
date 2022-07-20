@@ -19,7 +19,7 @@ set('repository', getenv('DEPLOY_GIT'));
 set('git_tty', false);
 
 // Slack Data
-set('slack_webhook', getenv(('SLACK_WEBHOOK')));
+set('slack_webhook', getenv('SLACK_WEBHOOK'));
 set('slack_text', 'Web-Team deploying `{{branch}}` to *{{target}}*');
 set('slack_success_text', 'Deploy to *{{target}}* successful');
 set('slack_success_color', '#4BB543');
@@ -29,31 +29,31 @@ set('symfony_env', 'prod');
 
 // Symfony shared dirs
 set('shared_dirs',
-    [
-      'var/log',
-      'var/sessions',
-      'public/resources',
-      '.jwt',
-    ]);
+  [
+    'var/log',
+    'var/sessions',
+    'public/resources',
+    '.jwt',
+  ]);
 
 // Shared files between deploys
 add('shared_files',
-    [
-      '.env.local',
-      '.env.prod.local',
-      '.env.dev.local',
-      'google_cloud_key.json',
-      '.dkim/private.key',
-    ]);
+  [
+    '.env.local',
+    '.env.prod.local',
+    '.env.dev.local',
+    'google_cloud_key.json',
+    '.dkim/private.key',
+  ]);
 
 // Symfony writable dirs
 set('writable_dirs',
-    [
-      'var/cache',
-      'var/log',
-      'var/sessions',
-      'public/resources',
-    ]);
+  [
+    'var/cache',
+    'var/log',
+    'var/sessions',
+    'public/resources',
+  ]);
 
 
 // Symfony executable and variable directories

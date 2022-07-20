@@ -19,9 +19,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateLikeCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager,
-                              private readonly ProgramManager $remix_manipulation_program_manager,
-                              private readonly EntityManagerInterface $entity_manager,
-                              private readonly NotificationManager $notification_service)
+    private readonly ProgramManager $remix_manipulation_program_manager,
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly NotificationManager $notification_service)
   {
     parent::__construct();
   }

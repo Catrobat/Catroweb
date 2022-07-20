@@ -14,7 +14,7 @@ class RestoreBackupCommand extends Command
     $this
       ->setName('catrobat:backup:restore')
       ->setDescription('Restores a borg backup')
-        ;
+    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -22,13 +22,13 @@ class RestoreBackupCommand extends Command
     $output->writeln('Restore backup on localhost');
 
     CommandHelper::executeShellCommand(
-            ['bin/console', 'catrobat:purge', '--force'], [], 'Purging database', $output
-        );
+      ['bin/console', 'catrobat:purge', '--force'], [], 'Purging database', $output
+    );
 
     CommandHelper::executeShellCommand(
-            ['sh', 'bin/borg_restore_share.sh'], [86400],
-            'Executing borg restore script [timeout = 24h]', $output
-        );
+      ['sh', 'bin/borg_restore_share.sh'], [86400],
+      'Executing borg restore script [timeout = 24h]', $output
+    );
 
     $output->writeln('Import finished!');
 

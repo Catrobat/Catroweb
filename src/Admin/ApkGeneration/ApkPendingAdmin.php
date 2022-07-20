@@ -37,8 +37,8 @@ class ApkPendingAdmin extends AbstractAdmin
   }
 
   public function __construct(
-        private readonly ScreenshotRepository $screenshot_repository
-    ) {
+    private readonly ScreenshotRepository $screenshot_repository
+  ) {
   }
 
   /**
@@ -79,7 +79,7 @@ class ApkPendingAdmin extends AbstractAdmin
         [
           'field_type' => DateTimeRangePickerType::class,
         ])
-      ->add('apk_status',null,
+      ->add('apk_status', null,
         [
           'field_type' => SymfonyChoiceType::class,
           'field_options' => ['choices' => ['None' => Program::APK_NONE, 'Pending' => Program::APK_PENDING, 'Ready' => Program::APK_READY]],

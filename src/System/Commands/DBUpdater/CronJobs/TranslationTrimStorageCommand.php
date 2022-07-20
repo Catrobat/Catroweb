@@ -29,12 +29,12 @@ class TranslationTrimStorageCommand extends Command
     $this->setName('catrobat:translation:trim-storage')
       ->setDescription('Clean up old db entries in machine translation schema')
       ->addOption(self::OLDER_THAN, null, InputOption::VALUE_REQUIRED,
-      'delete entries older than the specified days',
-      '30')
+        'delete entries older than the specified days',
+        '30')
       ->addOption(self::ONLY_PROJECT, null, InputOption::VALUE_NONE,
-      'only trim project entries')
+        'only trim project entries')
       ->addOption(self::ONLY_COMMENT, null, InputOption::VALUE_NONE,
-      'only trim comment entries')
+        'only trim comment entries')
     ;
   }
 

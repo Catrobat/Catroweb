@@ -22,7 +22,7 @@ class UpdateProjectExtensionsCommandTest extends KernelTestCase
     $this->object = $this->getMockBuilder(UpdateProjectExtensionsCommand::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
-        ;
+    ;
   }
 
   /**

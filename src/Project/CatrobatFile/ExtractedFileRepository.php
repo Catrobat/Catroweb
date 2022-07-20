@@ -16,8 +16,8 @@ class ExtractedFileRepository
   private readonly string $web_path;
 
   public function __construct(ParameterBagInterface $parameter_bag,
-                              private readonly ProgramManager $program_manager,
-                              private readonly LoggerInterface $logger)
+    private readonly ProgramManager $program_manager,
+    private readonly LoggerInterface $logger)
   {
     $local_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.dir');
     $web_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.path');

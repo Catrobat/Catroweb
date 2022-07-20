@@ -36,11 +36,11 @@ class WebviewAuthenticator extends AbstractAuthenticator
   private const COOKIE_TOKEN_KEY = 'CATRO_LOGIN_TOKEN';
 
   public function __construct(
-      private readonly EntityManagerInterface $em,
-      protected TranslatorInterface $translator,
-      protected RequestStack $request_stack,
-      protected LoggerInterface $logger,
-      protected UrlGeneratorInterface $url_generator
+    private readonly EntityManagerInterface $em,
+    protected TranslatorInterface $translator,
+    protected RequestStack $request_stack,
+    protected LoggerInterface $logger,
+    protected UrlGeneratorInterface $url_generator
   ) {
   }
 
@@ -72,7 +72,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
     /** @var User|null $user */
     $user = $this->em->getRepository(User::class)
       ->findOneBy(['upload_token' => $token])
-        ;
+    ;
 
     if (null === $user) {
       throw new AuthenticationException('User not found!');

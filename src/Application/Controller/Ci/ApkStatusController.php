@@ -32,20 +32,20 @@ class ApkStatusController extends AbstractController
     }
     $result = [];
     switch ($program->getApkStatus()) {
-        case Program::APK_READY:
-          $result['status'] = 'ready';
-          $result['url'] = $this->generateUrl('ci_download',
-            ['id' => $program->getId(), 'fname' => $program->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
-          $result['label'] = $this->translator->trans('ci.download', [], 'catroweb');
-          break;
-        case Program::APK_PENDING:
-          $result['status'] = 'pending';
-          $result['label'] = $this->translator->trans('ci.pending', [], 'catroweb');
-          break;
-        default:
-          $result['label'] = $this->translator->trans('ci.generate', [], 'catroweb');
-          $result['status'] = 'none';
-      }
+      case Program::APK_READY:
+        $result['status'] = 'ready';
+        $result['url'] = $this->generateUrl('ci_download',
+          ['id' => $program->getId(), 'fname' => $program->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
+        $result['label'] = $this->translator->trans('ci.download', [], 'catroweb');
+        break;
+      case Program::APK_PENDING:
+        $result['status'] = 'pending';
+        $result['label'] = $this->translator->trans('ci.pending', [], 'catroweb');
+        break;
+      default:
+        $result['label'] = $this->translator->trans('ci.generate', [], 'catroweb');
+        $result['status'] = 'none';
+    }
 
     return new JsonResponse($result);
   }

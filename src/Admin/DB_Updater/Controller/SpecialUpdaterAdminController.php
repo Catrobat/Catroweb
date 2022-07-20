@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class SpecialUpdaterAdminController extends CRUDController
 {
   public function __construct(
-      protected KernelInterface $kernel
+    protected KernelInterface $kernel
   ) {
   }
 

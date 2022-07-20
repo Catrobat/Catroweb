@@ -15,7 +15,7 @@ class CommandHelper
    * @throws Exception
    */
   public static function executeSymfonyCommand(string $command, Application $application, array $args,
-                                               OutputInterface $output): int
+    OutputInterface $output): int
   {
     $command = $application->find($command);
     $args['command'] = $command;
@@ -25,7 +25,7 @@ class CommandHelper
   }
 
   public static function executeShellCommand(array $command, array $config, string $description = '',
-                                             OutputInterface $output = null, KernelInterface $kernel = null): ?int
+    OutputInterface $output = null, KernelInterface $kernel = null): ?int
   {
     if (null !== $output) {
       $output->write($description." ('".implode(' ', $command)."') ... ");

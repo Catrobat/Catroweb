@@ -60,12 +60,12 @@ class StudioController extends AbstractController
     $comments = $this->studio_manager->findAllStudioComments($studio);
 
     return $this->render('Studio/studio_details.html.twig',
-        ['studio' => $studio, 'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
-          'user_role' => $user_role, 'members_count' => $members_count,
-          'activities_count' => $activities_count,
-          'projects_count' => $projects_count, 'projects' => $this->getStudioProjectsListWithImg($projects),
-          'comments_count' => $comments_count, 'comments' => $this->getStudioCommentsListWithAvatar($comments),
-        ]);
+      ['studio' => $studio, 'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
+        'user_role' => $user_role, 'members_count' => $members_count,
+        'activities_count' => $activities_count,
+        'projects_count' => $projects_count, 'projects' => $this->getStudioProjectsListWithImg($projects),
+        'comments_count' => $comments_count, 'comments' => $this->getStudioCommentsListWithAvatar($comments),
+      ]);
   }
 
   /**

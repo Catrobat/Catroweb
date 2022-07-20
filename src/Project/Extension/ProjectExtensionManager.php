@@ -13,9 +13,9 @@ use Psr\Log\LoggerInterface;
 class ProjectExtensionManager
 {
   public function __construct(
-      protected ExtensionRepository $extension_repository,
-      protected LoggerInterface $logger,
-      protected EntityManagerInterface $entity_manager
+    protected ExtensionRepository $extension_repository,
+    protected LoggerInterface $logger,
+    protected EntityManagerInterface $entity_manager
   ) {
   }
 

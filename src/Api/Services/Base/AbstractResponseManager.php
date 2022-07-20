@@ -16,9 +16,9 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
   use TranslatorAwareTrait;
 
   public function __construct(
-      TranslatorInterface $translator,
-      protected SerializerInterface $serializer,
-      protected ResponseCacheManager $response_cache_manager
+    TranslatorInterface $translator,
+    protected SerializerInterface $serializer,
+    protected ResponseCacheManager $response_cache_manager
   ) {
     $this->initTranslator($translator);
   }

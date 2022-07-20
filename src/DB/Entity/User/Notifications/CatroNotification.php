@@ -40,30 +40,30 @@ class CatroNotification
   private string $twig_template = 'Notifications/NotificationTypes/catro_notification.html.twig';
 
   public function __construct(
-      /**
-       *  The user to which this CatroNotification will be shown.
-       *  If the user gets deleted, this CatroNotification gets deleted as well.
-       *
-       * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
-       * @ORM\JoinColumn(
-       *     name="user",
-       *     referencedColumnName="id",
-       *     nullable=false
-       * )
-       */
-      private User $user,
-      /**
-       * @ORM\Column(name="title", type="string")
-       */
-      private string $title = '',
-      /**
-       * @ORM\Column(name="message", type="text")
-       */
-      private string $message = '',
-      /**
-       * @ORM\Column(name="type", type="string")
-       */
-      private string $type = ''
+    /**
+     *  The user to which this CatroNotification will be shown.
+     *  If the user gets deleted, this CatroNotification gets deleted as well.
+     *
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
+     * @ORM\JoinColumn(
+     *     name="user",
+     *     referencedColumnName="id",
+     *     nullable=false
+     * )
+     */
+    private User $user,
+    /**
+     * @ORM\Column(name="title", type="string")
+     */
+    private string $title = '',
+    /**
+     * @ORM\Column(name="message", type="text")
+     */
+    private string $message = '',
+    /**
+     * @ORM\Column(name="type", type="string")
+     */
+    private string $type = ''
   ) {
   }
 

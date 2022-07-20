@@ -264,7 +264,7 @@ class CodeStatistic
       case Constants::PHIRO_BRICK_IMG:
       case Constants::TESTING_BRICK_IMG:
       case Constants::YOUR_BRICK_IMG:
-        case Constants::YOUR_SCRIPT_IMG:
+      case Constants::YOUR_SCRIPT_IMG:
         $this->updateBrickTypeStatistic($brick->getType(), 'specialBricks');
         break;
     }

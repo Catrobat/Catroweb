@@ -34,9 +34,9 @@ class ExampleProgramAdmin extends AbstractAdmin
   protected $baseRoutePattern = 'example_program';
 
   public function __construct(
-      private readonly ImageRepository $example_image_repository,
-      private readonly ProgramManager $program_manager,
-      private readonly FlavorRepository $flavor_repository
+    private readonly ImageRepository $example_image_repository,
+    private readonly ProgramManager $program_manager,
+    private readonly FlavorRepository $flavor_repository
   ) {
   }
 

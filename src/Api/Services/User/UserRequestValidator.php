@@ -30,8 +30,8 @@ final class UserRequestValidator extends AbstractRequestValidator
   public const MODE_UPDATE = 'update_mode';
 
   public function __construct(
-      ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager,
-      private readonly PasswordHasherFactoryInterface $password_hasher_factory
+    ValidatorInterface $validator, TranslatorInterface $translator, private readonly UserManager $user_manager,
+    private readonly PasswordHasherFactoryInterface $password_hasher_factory
   ) {
     parent::__construct($validator, $translator);
   }
@@ -53,15 +53,15 @@ final class UserRequestValidator extends AbstractRequestValidator
 
   public function validateUpdateRequest(User $user, UpdateUserRequest $request, string $locale): ValidationWrapper
   {
-    if (!is_null(($request->getEmail())) && $user->getEmail() !== $request->getEmail()) {
+    if (!is_null($request->getEmail()) && $user->getEmail() !== $request->getEmail()) {
       $this->validateEmail($request->getEmail(), $locale, self::MODE_UPDATE);
     }
 
-    if (!is_null(($request->getUsername())) && $user->getUsername() !== $request->getUsername()) {
+    if (!is_null($request->getUsername()) && $user->getUsername() !== $request->getUsername()) {
       $this->validateUsername($request->getUsername(), $locale, self::MODE_UPDATE);
     }
 
-    if (!is_null(($request->getPassword()))) {
+    if (!is_null($request->getPassword())) {
       $this->validateCurrentPassword($user, $request->getCurrentPassword(), $locale, self::MODE_UPDATE);
       $this->validatePassword($request->getPassword(), $locale, self::MODE_UPDATE);
     }

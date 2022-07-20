@@ -11,7 +11,7 @@ class LocaleEventSubscriber implements EventSubscriberInterface
   public function onKernelRequest(RequestEvent $event): void
   {
     $event->getRequest()->setLocale(
-        (string) ($event->getRequest()->cookies->get('hl') ?? $event->getRequest()->getPreferredLanguage() ?? 'en')
+      (string) ($event->getRequest()->cookies->get('hl') ?? $event->getRequest()->getPreferredLanguage() ?? 'en')
     );
   }
 

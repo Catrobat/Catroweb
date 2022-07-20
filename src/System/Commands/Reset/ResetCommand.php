@@ -53,7 +53,7 @@ class ResetCommand extends Command
 
     // Setting up the project permissions
     CommandHelper::executeShellCommand(
-        ['sh', 'docker/app/set-permissions.sh'], ['timeout' => 320], 'Setting up permissions', $output
+      ['sh', 'docker/app/set-permissions.sh'], ['timeout' => 320], 'Setting up permissions', $output
     );
 
     // Delete data and recreate clean DB
@@ -63,17 +63,17 @@ class ResetCommand extends Command
 
     // Create static tags
     CommandHelper::executeShellCommand(
-        ['bin/console', 'catrobat:update:tags'], [], 'Creating constant tags', $output
+      ['bin/console', 'catrobat:update:tags'], [], 'Creating constant tags', $output
     );
 
     // Create static extensions
     CommandHelper::executeShellCommand(
-          ['bin/console', 'catrobat:update:extensions'], [], 'Creating constant tags', $output
-      );
+      ['bin/console', 'catrobat:update:extensions'], [], 'Creating constant tags', $output
+    );
 
     // SetUp Acl
     CommandHelper::executeShellCommand(
-        ['bin/console', 'sonata:admin:setup-acl'], [], 'Set up Sonata admin ACL', $output
+      ['bin/console', 'sonata:admin:setup-acl'], [], 'Set up Sonata admin ACL', $output
     );
 
     $this->clearCache($output);
@@ -192,12 +192,12 @@ class ResetCommand extends Command
       $username = $user_array[random_int(0, sizeof($user_array) - 1)];
 
       CommandHelper::executeSymfonyCommand('catrobat:import', $this->getApplication(),
-                                          [
-                                            'directory' => $local_projects_dir,
-                                            'user' => $username,
-                                            '--remix-layout' => $remix_layout,
-                                          ],
-                                          $output
+        [
+          'directory' => $local_projects_dir,
+          'user' => $username,
+          '--remix-layout' => $remix_layout,
+        ],
+        $output
       );
       $projects_to_download -= $amount;
     }

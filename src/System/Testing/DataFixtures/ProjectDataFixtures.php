@@ -36,9 +36,9 @@ class ProjectDataFixtures
   private static int $number_of_projects = 0;
 
   public function __construct(private readonly UserManager $user_manager, private readonly ProgramManager $program_manager,
-                              private readonly EntityManagerInterface $entity_manager, private readonly ProgramFileRepository $project_file_repository,
-                              private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
-                              ParameterBagInterface $parameter_bag)
+    private readonly EntityManagerInterface $entity_manager, private readonly ProgramFileRepository $project_file_repository,
+    private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
+    ParameterBagInterface $parameter_bag)
   {
     $this->FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.source');
     $this->GENERATED_FIXTURE_DIR = (string) $parameter_bag->get('catrobat.test.directory.target');
