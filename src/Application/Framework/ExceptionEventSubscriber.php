@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
@@ -60,7 +59,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     }
 
     if ($exception instanceof NotFoundHttpException) {
-      $this->softLogger->error('Http ' . $exception->getStatusCode() . ': ' . $exception->getMessage());
+      $this->softLogger->error('Http '.$exception->getStatusCode().': '.$exception->getMessage());
       /** @var Session $session */
       $session = $event->getRequest()->getSession();
       $session->getFlashBag()->add('snackbar', $this->translator->trans('doesNotExist', [], 'catroweb'));
