@@ -49,7 +49,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
       return $event->getResponse();
     }
 
-    if ($exception instanceof UnauthorizedHttpException) {
+    if ($exception instanceof HttpException && Response::HTTP_UNAUTHORIZED === $exception->getStatusCode()) {
       $this->cookie_service->clearCookie('CATRO_LOGIN_TOKEN');
       $this->cookie_service->clearCookie('BEARER');
       /** @var Session $session */
@@ -60,7 +60,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     }
 
     if ($exception instanceof NotFoundHttpException) {
-      $this->softLogger->error('Http ' . $exception->getStatusCode() . ': ' . $exception->getMessage());
+      $this->softLogger->error('Http '.$exception->getStatusCode().': '.$exception->getMessage());
       /** @var Session $session */
       $session = $event->getRequest()->getSession();
       $session->getFlashBag()->add('snackbar', $this->translator->trans('doesNotExist', [], 'catroweb'));

@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -99,7 +100,7 @@ class WebviewAuthenticator extends AbstractAuthenticator
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
-    throw new HttpException(Response::HTTP_UNAUTHORIZED, $exception->getMessage(), null, [], Response::HTTP_UNAUTHORIZED);
+    throw new UnauthorizedHttpException('catro-auth', $exception->getMessage());
   }
 
   private function hasValidTokenCookieSet(Request $request): bool
