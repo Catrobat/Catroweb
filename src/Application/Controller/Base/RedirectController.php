@@ -49,6 +49,7 @@ class RedirectController extends AbstractController
    * Users coming from hour of code -> https://hourofcode.com/us/de/beyond.
    */
   #[Route(path: '/hourOfCode', methods: ['GET'])]
+  #[Route(path: '/certificate/check', methods: ['GET'])]
   public function hourOfCodeAction(Request $request): Response
   {
     return $this->redirect('/');
