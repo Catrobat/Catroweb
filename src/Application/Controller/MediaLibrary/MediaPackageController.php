@@ -108,8 +108,8 @@ class MediaPackageController extends AbstractController
         'open_api_server_mediaLibrary_mediafilessearchget',
         [
           'query' => $q,
-          'theme' => $flavor,
-          'package' => $package_name,
+          'flavor' => $flavor,
+          'package_name' => $package_name,
         ],
         UrlGenerator::ABSOLUTE_URL),
     ]);
