@@ -2732,16 +2732,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.21.2",
+            "version": "v3.21.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "374edda06747bb1d6899d11af646ccab38646e65"
+                "reference": "e2497c2576556469963852216d886050e0606d8b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/374edda06747bb1d6899d11af646ccab38646e65",
-                "reference": "374edda06747bb1d6899d11af646ccab38646e65",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/e2497c2576556469963852216d886050e0606d8b",
+                "reference": "e2497c2576556469963852216d886050e0606d8b",
                 "shasum": ""
             },
             "require": {
@@ -2771,9 +2771,9 @@
             ],
             "support": {
                 "issues": "https://github.com/protocolbuffers/protobuf-php/issues",
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.21.2"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.21.3"
             },
-            "time": "2022-06-24T21:52:31+00:00"
+            "time": "2022-07-21T19:11:32+00:00"
         },
         {
             "name": "grpc/grpc",
@@ -3134,22 +3134,23 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hwi/HWIOAuthBundle.git",
-                "reference": "5b618ae9abeeb5412d7de4d5bd0a9c787ac41e5e"
+                "reference": "e9648bacab8f5a3ce5ff8e37e2ed3e0782ff9ffb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/5b618ae9abeeb5412d7de4d5bd0a9c787ac41e5e",
-                "reference": "5b618ae9abeeb5412d7de4d5bd0a9c787ac41e5e",
+                "url": "https://api.github.com/repos/hwi/HWIOAuthBundle/zipball/e9648bacab8f5a3ce5ff8e37e2ed3e0782ff9ffb",
+                "reference": "e9648bacab8f5a3ce5ff8e37e2ed3e0782ff9ffb",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.4 || ^8.0",
-                "symfony/form": "^4.4 || ^5.4 || ^6.0",
-                "symfony/framework-bundle": "^4.4.20 || ^5.4 || ^6.0",
-                "symfony/http-client": "^4.4 || ^5.4 || ^6.0",
-                "symfony/options-resolver": "^4.4 || ^5.4 || ^6.0",
-                "symfony/security-bundle": "^4.4 || ^5.4 || ^6.0",
-                "symfony/templating": "^4.4 || ^5.4 || ^6.0"
+                "symfony/deprecation-contracts": "^2.5 || ^3.0",
+                "symfony/form": "^4.4 || ^5.4 || ^6.1",
+                "symfony/framework-bundle": "^4.4.20 || ^5.4 || ^6.1",
+                "symfony/http-client": "^4.4 || ^5.4 || ^6.1",
+                "symfony/options-resolver": "^4.4 || ^5.4 || ^6.1",
+                "symfony/security-bundle": "^4.4 || ^5.4 || ^6.1",
+                "symfony/templating": "^4.4 || ^5.4 || ^6.1"
             },
             "conflict": {
                 "twig/twig": "<1.43|>=2.0,<2.13"
@@ -3163,16 +3164,16 @@
                 "phpstan/phpstan": "^1.2",
                 "phpstan/phpstan-symfony": "^1.0",
                 "phpunit/phpunit": "^9.5.12",
-                "symfony/browser-kit": "^4.4.20 || ^5.4 || ^6.0",
-                "symfony/css-selector": "^4.4 || ^5.4 || ^6.0",
+                "symfony/browser-kit": "^4.4.20 || ^5.4 || ^6.1",
+                "symfony/css-selector": "^4.4 || ^5.4 || ^6.1",
                 "symfony/monolog-bundle": "^3.4",
-                "symfony/phpunit-bridge": "^5.4 || ^6.0",
-                "symfony/property-access": "^4.4 || ^5.4 || ^6.0",
-                "symfony/stopwatch": "^5.4 || ^6.0",
-                "symfony/translation": "^4.4 || ^5.4 || ^6.0",
-                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
-                "symfony/validator": "^4.4 || ^5.4 || ^6.0",
-                "symfony/yaml": "^4.4 || ^5.4 || ^6.0"
+                "symfony/phpunit-bridge": "^5.4 || ^6.1",
+                "symfony/property-access": "^4.4 || ^5.4 || ^6.1",
+                "symfony/stopwatch": "^5.4 || ^6.1",
+                "symfony/translation": "^4.4 || ^5.4 || ^6.1",
+                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.1",
+                "symfony/validator": "^4.4 || ^5.4 || ^6.1",
+                "symfony/yaml": "^4.4 || ^5.4 || ^6.1"
             },
             "suggest": {
                 "doctrine/doctrine-bundle": "to use Doctrine user provider",
@@ -3287,7 +3288,13 @@
                 "issues": "https://github.com/hwi/HWIOAuthBundle/issues",
                 "source": "https://github.com/hwi/HWIOAuthBundle/tree/master"
             },
-            "time": "2022-02-11T14:02:37+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/stloyd",
+                    "type": "github"
+                }
+            ],
+            "time": "2022-07-22T11:44:45+00:00"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -4280,16 +4287,16 @@
         },
         {
             "name": "pagerfanta/pagerfanta",
-            "version": "v3.6.1",
+            "version": "v3.6.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/BabDev/Pagerfanta.git",
-                "reference": "845c7e820c057b24abd0f17822d4c78ed06261f1"
+                "reference": "0486e63edb74e55f85485c16c31decbf65f6e432"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/845c7e820c057b24abd0f17822d4c78ed06261f1",
-                "reference": "845c7e820c057b24abd0f17822d4c78ed06261f1",
+                "url": "https://api.github.com/repos/BabDev/Pagerfanta/zipball/0486e63edb74e55f85485c16c31decbf65f6e432",
+                "reference": "0486e63edb74e55f85485c16c31decbf65f6e432",
                 "shasum": ""
             },
             "require": {
@@ -4327,12 +4334,12 @@
                 "doctrine/mongodb-odm": "^2.2.2",
                 "doctrine/orm": "^2.8",
                 "doctrine/phpcr-odm": "^1.5",
-                "friendsofphp/php-cs-fixer": "3.4.0",
+                "friendsofphp/php-cs-fixer": "^3.8",
                 "jackalope/jackalope-doctrine-dbal": "^1.6",
                 "phpstan/extension-installer": "^1.1",
-                "phpstan/phpstan": "1.4.10",
-                "phpstan/phpstan-phpunit": "1.0.0",
-                "phpunit/phpunit": "^9.5",
+                "phpstan/phpstan": "1.8.0",
+                "phpstan/phpstan-phpunit": "1.1.1",
+                "phpunit/phpunit": "9.5.21",
                 "ruflin/elastica": "^6.0 || ^7.0",
                 "solarium/solarium": "^5.0 || ^6.0",
                 "symfony/cache": "^4.4 || ^5.4 || ^6.0",
@@ -4372,7 +4379,7 @@
             ],
             "support": {
                 "issues": "https://github.com/BabDev/Pagerfanta/issues",
-                "source": "https://github.com/BabDev/Pagerfanta/tree/v3.6.1"
+                "source": "https://github.com/BabDev/Pagerfanta/tree/v3.6.2"
             },
             "funding": [
                 {
@@ -4380,7 +4387,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-03-16T22:28:15+00:00"
+            "time": "2022-07-21T23:35:12+00:00"
         },
         {
             "name": "paragonie/constant_time_encoding",
@@ -7119,16 +7126,16 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "4.3.2",
+            "version": "4.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "3cad1b2a1fecc6c816bcc4a2fa6f5fc61350658a"
+                "reference": "f5093f0ea49643c472f0a5cfe034cc1d5e48344f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/3cad1b2a1fecc6c816bcc4a2fa6f5fc61350658a",
-                "reference": "3cad1b2a1fecc6c816bcc4a2fa6f5fc61350658a",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/f5093f0ea49643c472f0a5cfe034cc1d5e48344f",
+                "reference": "f5093f0ea49643c472f0a5cfe034cc1d5e48344f",
                 "shasum": ""
             },
             "require": {
@@ -7225,7 +7232,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.3.2"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.3.3"
             },
             "funding": [
                 {
@@ -7245,7 +7252,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-21T18:30:27+00:00"
+            "time": "2022-07-22T07:19:29+00:00"
         },
         {
             "name": "sonata-project/exporter",
@@ -14989,16 +14996,16 @@
         },
         {
             "name": "friendsofphp/php-cs-fixer",
-            "version": "v3.9.4",
+            "version": "v3.9.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "093466b1c3ff3e3b469bdbc9827bb2362de6b2fa"
+                "reference": "4465d70ba776806857a1ac2a6f877e582445ff36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/093466b1c3ff3e3b469bdbc9827bb2362de6b2fa",
-                "reference": "093466b1c3ff3e3b469bdbc9827bb2362de6b2fa",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/4465d70ba776806857a1ac2a6f877e582445ff36",
+                "reference": "4465d70ba776806857a1ac2a6f877e582445ff36",
                 "shasum": ""
             },
             "require": {
@@ -15066,7 +15073,7 @@
             "description": "A tool to automatically fix PHP code style",
             "support": {
                 "issues": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/issues",
-                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.9.4"
+                "source": "https://github.com/FriendsOfPHP/PHP-CS-Fixer/tree/v3.9.5"
             },
             "funding": [
                 {
@@ -15074,7 +15081,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-15T21:04:49+00:00"
+            "time": "2022-07-22T08:43:51+00:00"
         },
         {
             "name": "justinrainbow/json-schema",
@@ -19174,5 +19181,5 @@
         "ext-posix": "8.1",
         "ext-zip": "8.1"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.2.0"
 }
