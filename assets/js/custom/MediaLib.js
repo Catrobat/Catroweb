@@ -43,13 +43,14 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       acceptedFlavors.push(flavor)
     }
 
-    // url
+    // api url
     let url
     const attributes = 'id,name,flavors,packages,category,extension,file_type,size,download_url'
+    const limit = 1000
     if (mediaSearchPath !== '') {
-      url = mediaSearchPath + '&attributes=' + attributes
+      url = mediaSearchPath + '&attributes=' + attributes + '&limit=' + limit
     } else {
-      url = mediaLibPackageByNameUrlApi + '?package=' + packageName + '&attributes=' + attributes
+      url = mediaLibPackageByNameUrlApi + '?attributes=' + attributes + '&limit=' + limit
     }
 
     $.get(url, {}, pkgFiles => {
@@ -154,9 +155,7 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
         $(this).show()
         $('#sidebar #menu-mediacat-' + catId).show()
       })
-    }
-
-    )
+    })
       .fail(function () {
         console.error('Error loading media lib package ' + packageName)
       })
