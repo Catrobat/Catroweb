@@ -4779,16 +4779,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.26.2",
+            "version": "1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "323dbecf259e9696deee504804dc7fa44eeb802f"
+                "reference": "dda96d44338b68a1db4ee0b06fa596583a0e75c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/323dbecf259e9696deee504804dc7fa44eeb802f",
-                "reference": "323dbecf259e9696deee504804dc7fa44eeb802f",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/dda96d44338b68a1db4ee0b06fa596583a0e75c4",
+                "reference": "dda96d44338b68a1db4ee0b06fa596583a0e75c4",
                 "shasum": ""
             },
             "require": {
@@ -4878,9 +4878,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.26.2"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.27.0"
             },
-            "time": "2022-06-01T08:26:06+00:00"
+            "time": "2022-07-25T14:18:05+00:00"
         },
         {
             "name": "php-http/logger-plugin",
