@@ -972,34 +972,31 @@
         },
         {
             "name": "doctrine/event-manager",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/event-manager.git",
-                "reference": "41370af6a30faa9dc0368c4a6814d596e81aba7f"
+                "reference": "eb2ecf80e3093e8f3c2769ac838e27d8ede8e683"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/41370af6a30faa9dc0368c4a6814d596e81aba7f",
-                "reference": "41370af6a30faa9dc0368c4a6814d596e81aba7f",
+                "url": "https://api.github.com/repos/doctrine/event-manager/zipball/eb2ecf80e3093e8f3c2769ac838e27d8ede8e683",
+                "reference": "eb2ecf80e3093e8f3c2769ac838e27d8ede8e683",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.1 || ^8.0"
             },
             "conflict": {
-                "doctrine/common": "<2.9@dev"
+                "doctrine/common": "<2.9"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^6.0",
-                "phpunit/phpunit": "^7.0"
+                "doctrine/coding-standard": "^9",
+                "phpstan/phpstan": "~1.4.10 || ^1.5.4",
+                "phpunit/phpunit": "^7.5 || ^8.5 || ^9.5",
+                "vimeo/psalm": "^4.22"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Doctrine\\Common\\": "lib/Doctrine/Common"
@@ -1046,7 +1043,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/event-manager/issues",
-                "source": "https://github.com/doctrine/event-manager/tree/1.1.x"
+                "source": "https://github.com/doctrine/event-manager/tree/1.1.2"
             },
             "funding": [
                 {
@@ -1062,7 +1059,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-05-29T18:28:51+00:00"
+            "time": "2022-07-27T22:18:11+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -7487,24 +7484,23 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "1.10.0",
+            "version": "1.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "377e03357d2476d3d8fd4c795c8658ae749e11ad"
+                "reference": "1565342811e2c0adea2f5ce36ba98cac2f40ab57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/377e03357d2476d3d8fd4c795c8658ae749e11ad",
-                "reference": "377e03357d2476d3d8fd4c795c8658ae749e11ad",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/1565342811e2c0adea2f5ce36ba98cac2f40ab57",
+                "reference": "1565342811e2c0adea2f5ce36ba98cac2f40ab57",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.3 || ^8.0",
-                "sonata-project/doctrine-extensions": "^1.9.1",
-                "symfony/config": "^4.4 || ^5.3 || ^6.0",
-                "symfony/translation": "^4.4 || ^5.3 || ^6.0",
-                "symfony/twig-bridge": "^4.4 || ^5.3 || ^6.0",
+                "php": "^7.4 || ^8.0",
+                "sonata-project/doctrine-extensions": "^1.9.1 || ^2.0",
+                "symfony/config": "^4.4 || ^5.4 || ^6.0",
+                "symfony/twig-bridge": "^4.4 || ^5.4 || ^6.0",
                 "twig/twig": "^2.6 || ^3.0"
             },
             "conflict": {
@@ -7522,13 +7518,15 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.16",
                 "psalm/plugin-symfony": "^3.0",
-                "symfony/browser-kit": "^4.4 || ^5.3 || ^6.0",
-                "symfony/dependency-injection": "^4.4 || ^5.3 || ^6.0",
-                "symfony/framework-bundle": "^4.4 || ^5.3 || ^6.0",
-                "symfony/http-foundation": "^4.4 || ^5.3 || ^6.0",
-                "symfony/http-kernel": "^4.4.13 || ^5.3 || ^6.0",
-                "symfony/phpunit-bridge": "^6.0",
-                "symfony/twig-bundle": "^4.4 || ^5.3 || ^6.0",
+                "rector/rector": "^0.13",
+                "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
+                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
+                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
+                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
+                "symfony/http-kernel": "^4.4.13 || ^5.4 || ^6.0",
+                "symfony/phpunit-bridge": "^6.1",
+                "symfony/translation": "^4.4 || ^5.4 || ^6.0",
+                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
                 "vimeo/psalm": "^4.7.2"
             },
             "type": "library",
@@ -7567,13 +7565,9 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/1.10.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/1.12.0"
             },
             "funding": [
-                {
-                    "url": "https://github.com/OskarStark",
-                    "type": "github"
-                },
                 {
                     "url": "https://github.com/VincentLanglet",
                     "type": "github"
@@ -7585,9 +7579,13 @@
                 {
                     "url": "https://github.com/greg0ire",
                     "type": "github"
+                },
+                {
+                    "url": "https://github.com/jordisala1991",
+                    "type": "github"
                 }
             ],
-            "time": "2022-05-21T21:48:39+00:00"
+            "time": "2022-07-28T14:22:46+00:00"
         },
         {
             "name": "sonata-project/user-bundle",
