@@ -86,7 +86,7 @@
     "js-yaml": "^4.1.0",
     "jwt-decode": "^3.1.2",
     "lazysizes": "^5.3.2",
-    "material-icons": "^1.11.5",
+    "material-icons": "^1.11.8",
     "path": "^0.12.7",
     "sweetalert2": "^11.4.24",
     "textfilljs": "^1.0.3-a",
