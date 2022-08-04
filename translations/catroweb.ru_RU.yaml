@@ -311,7 +311,7 @@ myprofile:
   edit: Редактировать
   done: Готово
   checkMail: На ваш электронный адрес было отправлено письмо. Пожалуйста, проверьте входящие сообщения.
-  passwordUpdated: Ваш пароль был успешно обновлён.
+  passwordUpdated: Ваш пароль был успешно обновлен.
   avatar: Аватар
   email: Почта
   deleteAccount: Удалить аккаунт
@@ -404,9 +404,9 @@ login:
   confirmationSend: Письмо для подтверждения регистрации было отправлено на ваш адрес электронной почты. Пожалуйста, проверьте ваш почтовый ящик и активируйте свой аккаунт.
   userOrEmail: Имя пользователя или адрес электронной почты
   changePass: Изменить пароль
-  createAccount: Создать учётную запись
+  createAccount: Создать учетную запись
   noAccount: Нет учетной записи!
-  alreadyAccount: Уже есть учётная запись?
+  alreadyAccount: Уже имеете учетную запись?
   or: ИЛИ
   username: Имя пользователя
   email: Почта
@@ -419,7 +419,7 @@ register:
     cancel: Отменить
     createAccount: Зарегистрироваться
 accountRecovery:
-  title: Восстановление учётной записи
+  title: Восстановление учетной записи
   description: Если вы помните электронную почту, которую вы использовали для создания учетной записи или ваше имя пользователя, то мы можем отправить вам ссылку для сброса пароля.
   button:
     cancel: Отменить
@@ -615,7 +615,7 @@ admin:
 recommender:
   similarPrograms: Похожие проекты
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Пользователи, которые скачали этот проект также скачали
-  moreFromThisUser: Ещё от %username%
+  moreFromThisUser: Больше от %username%
 pmd:
   submitBtn: Отправьте ваш проект
   submitBox:
