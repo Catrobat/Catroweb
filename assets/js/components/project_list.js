@@ -165,11 +165,11 @@ export class ProjectList {
       if (self.isFullView) {
         window.history.back() // to remove pushed state
       } else {
+        self.openFullView()
         window.history.pushState(
           { type: 'ProjectList', id: self.container.id, full: true },
           $(this).text(), '#' + self.container.id
         )
-        self.openFullView()
       }
     })
 

@@ -7,7 +7,7 @@ require('../../styles/layout/top_bar.scss')
  * Define elements
  */
 const topAppBarElement = document.querySelector('.mdc-top-app-bar')
-new MDCTopAppBar(topAppBarElement)
+const mdcObject = new MDCTopAppBar(topAppBarElement)
 
 const $title = $('#top-app-bar__title')
 const $toggleSidebarButton = $('#top-app-bar__btn-sidebar-toggle')
@@ -69,6 +69,7 @@ export function showCustomTopBarTitle (title, onBack) {
   $backButton.hide()
 
   $('.mdc-top-app-bar').css('top', 0)
+  mdcObject.setScrollTarget(document.createElement('div'))
   if (typeof onBack === 'function') {
     $backButton = $('<button/>', {
       id: 'top-app-bar__back__btn-back',
@@ -87,6 +88,7 @@ export function showDefaultTopBarTitle () {
   $title.attr('href', defaultAppBarHref)
   $toggleSidebarButton.show()
   if ($backButton) $backButton.hide()
+  mdcObject.setScrollTarget(window) // reset to default
 }
 
 function submitSearchForm (event) {
