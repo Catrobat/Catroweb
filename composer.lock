@@ -1508,20 +1508,19 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.0.2",
+            "version": "3.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "25ec98a8cbd1f850e60fdb62c0ef77c162da8704"
+                "reference": "ac6fce61f037d7e54dbb2435f5b5648d86548e23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/25ec98a8cbd1f850e60fdb62c0ef77c162da8704",
-                "reference": "25ec98a8cbd1f850e60fdb62c0ef77c162da8704",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/ac6fce61f037d7e54dbb2435f5b5648d86548e23",
+                "reference": "ac6fce61f037d7e54dbb2435f5b5648d86548e23",
                 "shasum": ""
             },
             "require": {
-                "doctrine/collections": "^1.0",
                 "doctrine/event-manager": "^1.0",
                 "php": "^7.2 || ^8.0",
                 "psr/cache": "^1.0 || ^2.0 || ^3.0"
@@ -1589,7 +1588,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.0.2"
+                "source": "https://github.com/doctrine/persistence/tree/3.0.3"
             },
             "funding": [
                 {
@@ -1605,7 +1604,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-05-06T06:10:05+00:00"
+            "time": "2022-08-04T21:14:21+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -7581,16 +7580,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.3.1",
+            "version": "5.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "e254ffab96aedd44b021a73f3d0a1f7f59474867"
+                "reference": "8bcc0d04755b89b06e0c83938fcccf337cf79496"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/e254ffab96aedd44b021a73f3d0a1f7f59474867",
-                "reference": "e254ffab96aedd44b021a73f3d0a1f7f59474867",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/8bcc0d04755b89b06e0c83938fcccf337cf79496",
+                "reference": "8bcc0d04755b89b06e0c83938fcccf337cf79496",
                 "shasum": ""
             },
             "require": {
@@ -7687,7 +7686,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.3.1"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.3.2"
             },
             "funding": [
                 {
@@ -7707,7 +7706,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-20T08:20:26+00:00"
+            "time": "2022-07-28T15:16:37+00:00"
         },
         {
             "name": "stella-maris/clock",
