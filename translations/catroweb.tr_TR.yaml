@@ -112,11 +112,11 @@ programs:
     Eylemlerinizi geri getirmenin bir yolu yok!
     Evet, silin!
     İptal et
-  deleteNotFoundError: The project to be deleted could not be found under your user.
+  deleteNotFoundError: Silinecek proje, kullanıcınızın altında bulunamadı.
   private: gizli
   public: herkese açık
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: Projeyi Herkesden Gizle
+  setPublicAction: Projeyi herkese açık yap
   changeVisibility: |+
     Emin misiniz?
     %programName%' öğesini özel olarak ayarlarsanız, diğer kullanıcılar tarafından görülmeyecek veya bulunmayacaktır.
@@ -265,8 +265,8 @@ passwordRecovery:
     Catrobat Takımı.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: Benim hakkımda
+  currentlyWorkingOn: Mevcut olarak sunun üzerinde çalışıyor
   edit: Profilini düzenle
   saveChanges: Değişiklikleri kaydet
   newPass: yeni şifre
@@ -295,15 +295,15 @@ profile:
     submitSuccess: Kaydedildi!
   reallyDeleteProgram: Projeni gerçekten silmek istiyor musun?
   programsOf: Projeleri
-  picture: Profile picture
+  picture: Profil Resmi
   changePicture: Resmi değistir
   goToScratchProfile: Schart profili
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
-  account: Account
+  userSettings: Kullanıcı Ayarları
+  profileSettings: Profil Ayarları
+  securitySettings: Güvenlik ayarları
+  accountSettings: Hesap Ayarları
+  account: Hesap
   editProfile: Profili düzenle
   edit: Düzenle
   done: Tamam
@@ -313,12 +313,12 @@ myprofile:
   email: E-posta
   deleteAccount: Hesabı Sil
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
+    FARKINDA OL!
+    %num_projects% proje oluşturdunuz ve %num_followers% takipçiniz var. Tüm projeleriniz kaldırılacak ve Takipcileriniz sizin hesabınızı bulamayacak. Artık giriş yapamayacaksınız ve projeleriniz tüm listelerden kaybolacak. Profilinizi silme işlemi geri alınamaz!
+    Bizden ayrılmak istediğinden emin misin :( ?
   editAccountSettings: Hesap ayarlarını düzenle
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  profileChangeSuccess: Profiliniz başarıyla güncellendi.
+  unspecifiedError: Profiliniz değiştirilirken belirtilmemiş bir hata oluştu. Lütfen bizimle iletişime geçin.
 licenseToPlay:
   link: 'Oynamak için lisansınız'
   title: 'Oynamak için lisans- prim ver ve paylaş'
@@ -451,7 +451,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: An unspecified error occurred. Please contact us.
+  unspecified: Belirlenemeyen bir hata meydana geldi. Yardım almak için lütfen bizimle iletişime geçin.
   username:
     blank: Kullanıcı adı boş olmamalıdır
     invalid: Kullanıcı adınız geçersiz
