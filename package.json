@@ -72,7 +72,7 @@
     "@material/tab-scroller": "^14.0",
     "@material/textfield": "^14.0",
     "@material/top-app-bar": "^14.0",
-    "@popperjs/core": "^2.11.5",
+    "@popperjs/core": "^2.11.6",
     "@symfony/stimulus-bridge": "^3.2.1",
     "ajv": "^8.11.0",
     "animate.css": "^4.1.1",
