@@ -8,13 +8,13 @@ createNewPassword: Створити новий пароль
 accountSettings: Налаштування облікового запису
 email: Ел.Пошта
 aboutPocketCode: Про Pocket Code
-about: Про застосунок
+about: Про Сайт
 education: Навчання
 chat: Чат та форуми
 others: Інші
 tutorials: Довідка
 googlePlay: Google Play Store
-iosAppStore: IOS App store
+iosAppStore: iOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: Instagram
 discordChat: Чат в Discord
@@ -27,7 +27,7 @@ reportIt: Так, поскаржитись на це!
 areYouSure: Ви впевнені?
 noWayOfReturn: Відновити свої дії буде неможливо!
 download: Завантажити
-name: Ім'я
+name: Назва
 description: Опис
 noDescription: Опис відсутній.
 credits: Примітки та автори
@@ -101,7 +101,7 @@ programs:
     statistics: Більше статистики
   featured: Рекомендовані
   example: Приклади
-  newest: Найновіші проєкти
+  newest: Нещодавні проєкти
   recommended: Рекомендовані проєкти
   scratchremixes: Scratch ремікси
   noPrograms: Наразі немає проєктів.
@@ -668,7 +668,7 @@ codeStatistics:
 footer:
   language: Мова
   usefulLinks: Корисні посилання
-  legalities: Юридичні вподобання
+  legalities: Юридичні дані
   communityStats: Статистика Спільноти
   download: Отримати додаток
 privacy-policy:
@@ -743,7 +743,7 @@ checkOutUser: 'Ознайомтеся з цим користувачем:'
 community: 'Спільнота Catrobat'
 back_to_app: 'Вийти із спільноти'
 category:
-  recent: Найновіші проєкти
+  recent: Нещодавні проєкти
   random: Випадкові проєкти
   most_viewed: Найбільше переглянуті
   most_downloaded: Найбільше завантажені
