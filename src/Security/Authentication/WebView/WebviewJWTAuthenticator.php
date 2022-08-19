@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -29,14 +28,6 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
   }
 
   /**
-   * {@inheritdoc}
-   */
-  public function authenticate(Request $request): Passport
-  {
-    return parent::doAuthenticate($request);
-  }
-
-  /**
    * @psalm-suppress ParamNameMismatch
    *
    * {@inheritDoc}
@@ -49,7 +40,7 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
       $this->cookie_service->clearCookie('BEARER');
       // RefreshBearerCookieOnKernelResponse will try to create a new Bearer or is going to remove the refresh token!
 
-      return new RedirectResponse($request->getBaseUrl());
+      return new RedirectResponse(empty($request->getBaseUrl()) ? $request->getUri() : $request->getBaseUrl());
     }
 
     return $response;

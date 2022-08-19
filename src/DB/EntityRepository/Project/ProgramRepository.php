@@ -252,10 +252,10 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NonUniqueResultException
    * @throws NoResultException
-   *
-   * @return mixed
    *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)

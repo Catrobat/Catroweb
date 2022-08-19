@@ -252,9 +252,9 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   /**
    * @param ParameterBag|MockObject|null $attributes
    *
-   * @throws ReflectionException
-   *
    * @return MockObject|RequestEvent
+   *
+   * @throws ReflectionException
    */
   private function mockRequestEvent(int $request_type, $attributes = null, string $uri = null)
   {

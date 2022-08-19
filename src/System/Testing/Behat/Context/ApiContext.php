@@ -3264,9 +3264,9 @@ class ApiContext implements Context
    *
    * @param string $api_version The API version to be used
    *
-   * @throws ApiVersionNotSupportedException when the specified API version is not supported
-   *
    * @return string the ID of the last uploaded project or null if not available
+   *
+   * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
   private function getIDOfLastUploadedProject(string $api_version)
   {

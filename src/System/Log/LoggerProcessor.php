@@ -36,7 +36,9 @@ class LoggerProcessor
       $session_user = $this->security_token_storage->getToken()->getUser();
     }
 
-    return ($session_user instanceof User) ? $session_user->getUsername() : 'anonymous';
+    $anon = 'anonymous';
+
+    return ($session_user instanceof User) ? ($session_user->getUsername() ?? $anon) : $anon;
   }
 
   private function getUserAgent(Request $request): ?string

@@ -24,9 +24,9 @@ class MyUuidGenerator extends AbstractIdGenerator
   /**
    * @param mixed $entity
    *
-   * @throws Exception
-   *
    * @return string
+   *
+   * @throws Exception
    */
   public function generate(EntityManager $em, $entity)
   {

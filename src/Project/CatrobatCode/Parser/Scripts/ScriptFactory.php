@@ -9,7 +9,7 @@ class ScriptFactory
 {
   public static function generate(SimpleXMLElement $script_xml_properties): BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript|UserDefinedScript
   {
-    $generated_script = match ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE]) {
+    return match ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       Constants::START_SCRIPT => new StartScript($script_xml_properties),
       Constants::WHEN_SCRIPT => new WhenScript($script_xml_properties),
       Constants::WHEN_TOUCH_SCRIPT => new WhenTouchScript($script_xml_properties),
@@ -25,7 +25,5 @@ class ScriptFactory
       Constants::USER_DEFINED_SCRIPT => new UserDefinedScript($script_xml_properties),
       default => new UnknownScript($script_xml_properties),
     };
-
-    return $generated_script;
   }
 }
