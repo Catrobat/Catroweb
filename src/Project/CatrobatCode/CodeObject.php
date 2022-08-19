@@ -20,10 +20,7 @@ class CodeObject
     $this->name = $name;
   }
 
-  /**
-   * @param mixed $scriptsToAdd
-   */
-  public function addAllScripts($scriptsToAdd): void
+  public function addAllScripts(mixed $scriptsToAdd): void
   {
     $this->scripts = $scriptsToAdd;
   }
@@ -33,10 +30,7 @@ class CodeObject
     return $this->codeObjects;
   }
 
-  /**
-   * @param mixed $codeObjects
-   */
-  public function setCodeObjects($codeObjects): void
+  public function setCodeObjects(mixed $codeObjects): void
   {
     $this->codeObjects = $codeObjects;
   }
@@ -54,10 +48,7 @@ class CodeObject
     return $objects;
   }
 
-  /**
-   * @param mixed $codeObject
-   */
-  public function addCodeObject($codeObject): void
+  public function addCodeObject(mixed $codeObject): void
   {
     $this->codeObjects[] = $codeObject;
   }
@@ -77,11 +68,7 @@ class CodeObject
     return $this->scripts;
   }
 
-  /**
-   * @param mixed $objects
-   * @param mixed $objectsToAdd
-   */
-  private function addObjectsToArray($objects, $objectsToAdd): array
+  private function addObjectsToArray(mixed $objects, mixed $objectsToAdd): array
   {
     foreach ($objectsToAdd as $object) {
       $objects[] = $object;

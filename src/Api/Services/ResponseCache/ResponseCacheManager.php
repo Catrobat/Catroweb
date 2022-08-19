@@ -12,11 +12,9 @@ class ResponseCacheManager
   }
 
   /**
-   * @param mixed $response
-   *
    * @throws \JsonException
    */
-  public function addCacheEntry(string $cache_id, int $response_code, array $response_headers, $response): ResponseCache
+  public function addCacheEntry(string $cache_id, int $response_code, array $response_headers, mixed $response): ResponseCache
   {
     /** @var ResponseCache|null $cache_entry */
     $cache_entry = $this->getResponseCacheRepository()->findOneBy(['id' => $cache_id]);

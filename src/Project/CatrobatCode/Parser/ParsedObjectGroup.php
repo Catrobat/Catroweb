@@ -15,10 +15,7 @@ class ParsedObjectGroup
     $this->name = $this->resolveName();
   }
 
-  /**
-   * @param mixed $object
-   */
-  public function addObject($object): void
+  public function addObject(mixed $object): void
   {
     $this->objects[] = $object;
   }

@@ -181,11 +181,11 @@ class ProjectDataFixtures
       Assert::assertEquals($config['comments'], $project->getComments()->count(), 'Project comment count wrong.');
     }
     if (isset($config['private'])) {
-      $private = 'true' === strtolower($config['private']);
+      $private = 'true' === strtolower((string) $config['private']);
       Assert::assertEquals($private, $project->getPrivate(), 'Project private flag wrong.');
     }
     if (isset($config['visible'])) {
-      $visible = 'true' === strtolower($config['visible']);
+      $visible = 'true' === strtolower((string) $config['visible']);
       Assert::assertEquals($visible, $project->getVisible(), 'Project visible flag wrong.');
     }
     if (isset($config['flavor'])) {

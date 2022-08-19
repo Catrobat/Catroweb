@@ -33,10 +33,7 @@ class FormulaResolver
     return $resolved_formula;
   }
 
-  /**
-   * @param mixed $formula
-   */
-  private static function resolveFunction($formula): string
+  private static function resolveFunction(mixed $formula): string
   {
     if ('TRUE' == $formula->value) {
       $resolved_function = 'true';

@@ -64,10 +64,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given the next Uuid Value will be :id
-   *
-   * @param mixed $id
    */
-  public function theNextUuidValueWillBe($id): void
+  public function theNextUuidValueWillBe(mixed $id): void
   {
     MyUuidGenerator::setNextValue($id);
   }
@@ -75,11 +73,9 @@ class DataFixturesContext implements Context
   /**
    * @Given /^the current time is "([^"]*)"$/
    *
-   * @param mixed $time
-   *
    * @throws Exception
    */
-  public function theCurrentTimeIs($time): void
+  public function theCurrentTimeIs(mixed $time): void
   {
     $date = new DateTime($time, new DateTimeZone('UTC'));
     TimeUtils::freezeTime($date);
@@ -143,10 +139,8 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are (\d+) additional users$/
    * @Given /^there are (\d+) users$/
-   *
-   * @param mixed $user_count
    */
-  public function thereAreManyUsers($user_count): void
+  public function thereAreManyUsers(mixed $user_count): void
   {
     $list = ['name'];
     $base = 10 ** strlen(strval((int) $user_count - 1));
@@ -169,10 +163,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then /^the user "([^"]*)" should not exist$/
-   *
-   * @param mixed $arg1
    */
-  public function theUserShouldNotExist($arg1): void
+  public function theUserShouldNotExist(mixed $arg1): void
   {
     $user = $this->getUserManager()->findUserByUsername($arg1);
     Assert::assertNull($user);
@@ -180,11 +172,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then /^the user "([^"]*)" with email "([^"]*)" should exist and be enabled$/
-   *
-   * @param mixed $arg2
-   * @param mixed $arg1
    */
-  public function theUserWithUsernameAndEmailShouldExistAndBeEnabled($arg1, $arg2): void
+  public function theUserWithUsernameAndEmailShouldExistAndBeEnabled(mixed $arg1, mixed $arg2): void
   {
     $em = $this->getManager();
     $user = $em->getRepository(User::class)->findOneBy([
@@ -198,10 +187,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given :number_of_users users follow:
-   *
-   * @param mixed $number_of_users
    */
-  public function thereAreNUsersThatFollow($number_of_users, TableNode $table): void
+  public function thereAreNUsersThatFollow(mixed $number_of_users, TableNode $table): void
   {
     $user = $table->getHash()[0];
     $followedUser = $this->insertUser($user, false);
@@ -217,11 +204,8 @@ class DataFixturesContext implements Context
 
   /**
    * @When /^User "([^"]*)" is followed by "([^"]*)"$/
-   *
-   * @param mixed $user_id
-   * @param mixed $follow_ids
    */
-  public function userIsFollowed($user_id, $follow_ids): void
+  public function userIsFollowed(mixed $user_id, mixed $follow_ids): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->find($user_id);
@@ -237,11 +221,8 @@ class DataFixturesContext implements Context
 
   /**
    * @When /^User "([^"]*)" is followed by user "([^"]*)"$/
-   *
-   * @param mixed $user_id
-   * @param mixed $follow_id
    */
-  public function userIsFollowedByUser($user_id, $follow_id): void
+  public function userIsFollowedByUser(mixed $user_id, mixed $follow_id): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->find($user_id);
@@ -320,11 +301,9 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are "([^"]*)" similar projects$/
    *
-   * @param mixed $num_of_projects
-   *
    * @throws Exception
    */
-  public function thereAreNumberOfSimilarProjects($num_of_projects): void
+  public function thereAreNumberOfSimilarProjects(mixed $num_of_projects): void
   {
     for ($project = 1; $project <= $num_of_projects; ++$project) {
       $program_info = ['name' => 'basic '.$project];
@@ -426,12 +405,9 @@ class DataFixturesContext implements Context
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)"$/
    *
-   * @param mixed $name
-   * @param mixed $id
-   *
    * @throws Exception
    */
-  public function iHaveAProgramWithId($name, $id): void
+  public function iHaveAProgramWithId(mixed $name, mixed $id): void
   {
     $config = [
       'id' => $id,
@@ -445,10 +421,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^program "([^"]*)" is not visible$/
-   *
-   * @param mixed $program_name
    */
-  public function programIsNotVisible($program_name): void
+  public function programIsNotVisible(mixed $program_name): void
   {
     $program = $this->getProgramManager()->findOneByName($program_name);
     Assert::assertNotNull($program, 'There is no program named '.$program_name);
@@ -459,10 +433,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then /^there should be "([^"]*)" programs in the database$/
-   *
-   * @param mixed $number_of_projects
    */
-  public function thereShouldBeProgramsInTheDatabase($number_of_projects): void
+  public function thereShouldBeProgramsInTheDatabase(mixed $number_of_projects): void
   {
     $programs = $this->getProgramManager()->findAll();
     Assert::assertCount($number_of_projects, $programs);
@@ -479,10 +451,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then /^the program should be tagged with "([^"]*)" in the database$/
-   *
-   * @param mixed $arg1
    */
-  public function theProgramShouldBeTaggedWithInTheDatabase($arg1): void
+  public function theProgramShouldBeTaggedWithInTheDatabase(mixed $arg1): void
   {
     $program_tags = $this->getProgramManager()->findAll()[0]->getTags() ?? [];
     $tags = explode(',', (string) $arg1);
@@ -508,11 +478,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the project :id should have :downloads downloads
-   *
-   * @param mixed $id
-   * @param mixed $downloads
    */
-  public function theProjectShouldHaveDownloads($id, $downloads): void
+  public function theProjectShouldHaveDownloads(mixed $id, mixed $downloads): void
   {
     /** @var Program $program */
     $program = $this->getProgramManager()->find($id);
@@ -540,10 +507,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the embroidery program should have the :extension extension
-   *
-   * @param mixed $extension
    */
-  public function theEmbroideryProgramShouldHaveTheExtension($extension): void
+  public function theEmbroideryProgramShouldHaveTheExtension(mixed $extension): void
   {
     $program_extensions = $this->getProgramManager()->findOneByName('ZigZag Stich')->getExtensions();
 
@@ -557,11 +522,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then the program with id :arg1 should be marked with :arg2 extensions in the database
-   *
-   * @param mixed $id
-   * @param mixed $count
    */
-  public function theProgramShouldBeMarkedWithExtensionsInTheDatabase($id, $count): void
+  public function theProgramShouldBeMarkedWithExtensionsInTheDatabase(mixed $id, mixed $count): void
   {
     $project = $this->getProgramManager()->find($id);
     $this->getManager()->refresh($project);
@@ -595,12 +557,9 @@ class DataFixturesContext implements Context
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)" and a vibrator brick$/
    *
-   * @param mixed $name
-   * @param mixed $id
-   *
    * @throws Exception
    */
-  public function iHaveAProgramWithIdAndAVibratorBrick($name, $id): void
+  public function iHaveAProgramWithIdAndAVibratorBrick(mixed $name, mixed $id): void
   {
     MyUuidGenerator::setNextValue($id);
     $config = [
@@ -650,14 +609,10 @@ class DataFixturesContext implements Context
   // -------------------------------------------------------------------------------------------------------------------
   //  Notifications
   // -------------------------------------------------------------------------------------------------------------------
-
   /**
    * @Given /^there is a notification that "([^"]*)" follows "([^"]*)"$/
-   *
-   * @param mixed $user
-   * @param mixed $user_to_follow
    */
-  public function thereAreFollowNotifications($user, $user_to_follow): void
+  public function thereAreFollowNotifications(mixed $user, mixed $user_to_follow): void
   {
     /** @var User $user_to_follow */
     $user_to_follow = $this->getUserManager()->findUserByUsername($user_to_follow);
@@ -911,7 +866,7 @@ class DataFixturesContext implements Context
 
       $like = new ProgramLike($project, $user, $type);
 
-      if (array_key_exists('created at', $data) && !empty(trim($data['created at']))) {
+      if (array_key_exists('created at', $data) && !empty(trim((string) $data['created at']))) {
         $like->setCreatedAt(new DateTime($data['created at'], new DateTimeZone('UTC')));
       }
 
@@ -1003,11 +958,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^there are "([^"]*)"\+ notifications for "([^"]*)"$/
-   *
-   * @param mixed $arg1
-   * @param mixed $username
    */
-  public function thereAreNotificationsFor($arg1, $username): void
+  public function thereAreNotificationsFor(mixed $arg1, mixed $username): void
   {
     $em = $this->getManager();
 
@@ -1024,13 +976,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Given /^there are "([^"]*)" "([^"]*)" notifications for program "([^"]*)" from "([^"]*)"$/
-   *
-   * @param mixed $amount
-   * @param mixed $type
-   * @param mixed $program_name
-   * @param mixed $user
    */
-  public function thereAreSpecificNotificationsFor($amount, $type, $program_name, $user): void
+  public function thereAreSpecificNotificationsFor(mixed $amount, mixed $type, mixed $program_name, mixed $user): void
   {
     $em = $this->getManager();
 
@@ -1088,10 +1035,8 @@ class DataFixturesContext implements Context
 
   /**
    * @Then /^there should be "([^"]*)" users in the database$/
-   *
-   * @param mixed $number_of_users
    */
-  public function thereShouldBeUsersInTheDatabase($number_of_users): void
+  public function thereShouldBeUsersInTheDatabase(mixed $number_of_users): void
   {
     $users = $this->getUserManager()->findAll();
     Assert::assertCount($number_of_users, $users);
