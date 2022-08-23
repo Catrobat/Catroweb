@@ -85,7 +85,7 @@ class FileHelper
     $files = scandir($directory_path);
     foreach ($files as $file) {
       if ('.' != $file && '..' != $file) {
-        if (('.gitignore' == $file && !$force)) {
+        if ('.gitignore' == $file && !$force) {
           continue; // Keep .gitignores if not forced!
         }
         if ('dir' == filetype($directory_path.DIRECTORY_SEPARATOR.$file)) {

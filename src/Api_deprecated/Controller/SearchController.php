@@ -50,11 +50,11 @@ class SearchController extends AbstractController
     // limit and offset to get the number of results.
     try {
       $programs = $program_manager->search(
-          $query, $limit, $offset, $max_version, null, $this->app_request->isDebugBuildRequest()
-        );
+        $query, $limit, $offset, $max_version, null, $this->app_request->isDebugBuildRequest()
+      );
       $numbOfTotalProjects = $program_manager->searchCount(
-          $query, $max_version, null, $this->app_request->isDebugBuildRequest()
-        );
+        $query, $max_version, null, $this->app_request->isDebugBuildRequest()
+      );
     } catch (Exception) {
       $programs = [];
       $numbOfTotalProjects = 0;

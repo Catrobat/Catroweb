@@ -42,9 +42,9 @@ class DownloadMediaPackageController extends AbstractController
       $filename = preg_replace('#-+#', '-', $filename);
 
       $d = $response->headers->makeDisposition(
-          ResponseHeaderBag::DISPOSITION_ATTACHMENT,
-          $filename.'.'.$media_file->getExtension()
-        );
+        ResponseHeaderBag::DISPOSITION_ATTACHMENT,
+        $filename.'.'.$media_file->getExtension()
+      );
       $response->headers->set('Content-Disposition', $d);
 
       return $response;

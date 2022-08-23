@@ -30,9 +30,9 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
   private const OLD_TOKEN = 'token';
 
   public function __construct(
-      private readonly EntityManagerInterface $em,
-      protected TranslatorInterface $translator
-) {
+    private readonly EntityManagerInterface $em,
+    protected TranslatorInterface $translator
+  ) {
   }
 
   /**
@@ -62,7 +62,7 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
     /** @var User|null $user */
     $user = $this->em->getRepository(User::class)
       ->findOneBy(['upload_token' => $token])
-        ;
+    ;
 
     if (null === $user) {
       throw new AuthenticationException('User not found!');

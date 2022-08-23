@@ -89,15 +89,15 @@ class ProgramController extends AbstractController
     $data->total = new stdClass();
     $data->total->value = $program_manager->totalLikeCount($id);
     $data->total->stringValue = TwigExtension::humanFriendlyNumber(
-        $data->total->value, $translator, $user_locale
-      );
+      $data->total->value, $translator, $user_locale
+    );
     foreach (ProgramLike::$VALID_TYPES as $type_id) {
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
       $data->{$type_name} = new stdClass();
       $data->{$type_name}->value = $program_manager->likeTypeCount($id, $type_id);
       $data->{$type_name}->stringValue = TwigExtension::humanFriendlyNumber(
-          $data->{$type_name}->value, $translator, $user_locale
-        );
+        $data->{$type_name}->value, $translator, $user_locale
+      );
     }
 
     return new JsonResponse($data);

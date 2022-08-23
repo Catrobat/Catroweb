@@ -157,7 +157,7 @@ class NotificationsController extends AbstractController
     $fetched_notifications = [];
     foreach ($notifications as $notification) {
       if ($notification instanceof LikeNotification && ('reaction' === $type || 'all' === $type)) {
-        if (($notification->getLikeFrom() === $this->getUser())) {
+        if ($notification->getLikeFrom() === $this->getUser()) {
           continue;
         }
         $fetched_notifications[] = ['id' => $notification->getId(),

@@ -18,9 +18,9 @@ class ThemeRequestEventSubscriber implements EventSubscriberInterface
   private string $flavor;
 
   public function __construct(
-      private readonly ParameterBagInterface $parameter_bag,
-      private readonly RouterInterface $router,
-      private readonly RequestHelper $app_request
+    private readonly ParameterBagInterface $parameter_bag,
+    private readonly RouterInterface $router,
+    private readonly RequestHelper $app_request
   ) {
     $this->routing_theme = (string) $parameter_bag->get('umbrellaTheme');
     $this->flavor = (string) $parameter_bag->get('defaultFlavor');

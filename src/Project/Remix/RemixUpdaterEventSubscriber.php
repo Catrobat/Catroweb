@@ -20,7 +20,7 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
   private readonly string $migration_lock_file_path;
 
   public function __construct(private readonly RemixManager $remix_manager, private readonly AsyncHttpClient $async_http_client, private readonly RouterInterface $router,
-                              string $kernel_root_dir)
+    string $kernel_root_dir)
   {
     $app_root_dir = $kernel_root_dir;
     $this->migration_lock_file_path = $app_root_dir.'/'.self::MIGRATION_LOCK_FILE_NAME;

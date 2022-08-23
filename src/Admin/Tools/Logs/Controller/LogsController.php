@@ -82,7 +82,7 @@ class LogsController extends CRUDController
 
       if (($searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() >= $searchParam['filter'])
         || (!$searchParam['greater_equal_than_level'] && $log_line->getDebugLevel() == $searchParam['filter'])
-       ) {
+      ) {
         $content[$index] = $log_line;
 
         ++$index;

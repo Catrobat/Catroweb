@@ -34,16 +34,16 @@ abstract class MachineTranslation
   public function __construct(/**
    * @ORM\Column(type="string", length=5)
    */
-  protected string $source_language, /**
+    protected string $source_language, /**
    * @ORM\Column(type="string", length=5)
    */
-  protected string $target_language, /**
+    protected string $target_language, /**
    * @ORM\Column(type="string")
    */
-  protected string $provider, /**
+    protected string $provider, /**
    * @ORM\Column(type="integer")
    */
-  protected int $usage_count = 1)
+    protected int $usage_count = 1)
   {
     $this->usage_per_month = $usage_count;
   }

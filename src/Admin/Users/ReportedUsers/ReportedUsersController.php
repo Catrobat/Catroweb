@@ -16,8 +16,8 @@ class ReportedUsersController extends CRUDController
     ];
 
     return new RedirectResponse($this->container->get('router')->generate(
-            'admin_reported_projects_list', ['filter' => $filter])
-        );
+      'admin_reported_projects_list', ['filter' => $filter])
+    );
   }
 
   public function createUrlCommentsAction(): RedirectResponse
@@ -29,7 +29,7 @@ class ReportedUsersController extends CRUDController
     ];
 
     return new RedirectResponse($this->container->get('router')->generate(
-            'admin_report_list', ['filter' => $filter])
-        );
+      'admin_report_list', ['filter' => $filter])
+    );
   }
 }

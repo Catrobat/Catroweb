@@ -212,7 +212,7 @@ remixGraph:
   title: Ремикстер
   showRemixGraph: 'Ремикс графигі'
   by: 'арқылы'
-  open: 'Open'
+  open: 'Ашу'
   showPaths: 'Show Paths'
   programNotAvailableErrorTitle: 'Кешір...'
   programNotAvailableErrorDescription: 'The project is not available any more!'

@@ -95,9 +95,7 @@ Feature: Admin featured programs
 
   Scenario: Disable user
     Given I log in as "Edmin" with the password "123456"
-    And I am on "/admin/app/db/user-user/2/edit?_tab=tab_s5ebe49e9bfdfd_282749955_2"
-    And I wait for the page to be loaded
-    Then I click ".iCheck-helper"
+    And I am on "/admin/app/db/user-user/2/edit"
     And I wait for the page to be loaded
     And I click on the button named "btn_update_and_list"
     Then I should see the user table:

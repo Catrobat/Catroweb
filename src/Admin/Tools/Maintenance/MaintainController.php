@@ -17,10 +17,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 class MaintainController extends CRUDController
 {
   public function __construct(
-      protected KernelInterface $kernel,
-      private readonly string $file_storage_dir,
-      private readonly string $apk_dir,
-      private readonly string $log_dir
+    protected KernelInterface $kernel,
+    private readonly string $file_storage_dir,
+    private readonly string $apk_dir,
+    private readonly string $log_dir
   ) {
   }
 
@@ -245,6 +245,6 @@ class MaintainController extends CRUDController
     $symbol = ['B', 'KiB', 'MiB', 'GiB', 'TiB', 'PiB', 'EiB', 'ZiB', 'YiB'];
     $exp = floor(log($bytes) / log(1_024)) > 0 ? intval(floor(log($bytes) / log(1_024))) : 0;
 
-    return sprintf('%.2f '.$symbol[$exp], ($bytes / 1_024 ** $exp));
+    return sprintf('%.2f '.$symbol[$exp], $bytes / 1_024 ** $exp);
   }
 }

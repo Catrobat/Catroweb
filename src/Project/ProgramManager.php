@@ -671,16 +671,16 @@ class ProgramManager
   }
 
   public function getProjects(string $category, string $max_version = '',
-                              int $limit = 20, int $offset = 0, string $flavor = null): array
+    int $limit = 20, int $offset = 0, string $flavor = null): array
   {
     return match ($category) {
       'recent' => $this->getRecentPrograms($flavor, $limit, $offset, $max_version),
-        'random' => $this->getRandomPrograms($flavor, $limit, $offset, $max_version),
-        'most_viewed' => $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version),
-        'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
-        'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
-        'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
-        default => [],
+      'random' => $this->getRandomPrograms($flavor, $limit, $offset, $max_version),
+      'most_viewed' => $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version),
+      'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
+      'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
+      'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
+      default => [],
     };
   }
 
@@ -688,9 +688,9 @@ class ProgramManager
   {
     return match ($category) {
       'recent', 'random', 'most_viewed', 'most_downloaded' => $this->countProjects($flavor, $max_version),
-        'example' => $this->getExampleProgramsCount($flavor, $max_version),
-        'scratch' => $this->getScratchRemixesProgramsCount($flavor, $max_version),
-        default => 0,
+      'example' => $this->getExampleProgramsCount($flavor, $max_version),
+      'scratch' => $this->getScratchRemixesProgramsCount($flavor, $max_version),
+      default => 0,
     };
   }
 

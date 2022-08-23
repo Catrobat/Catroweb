@@ -22,7 +22,7 @@ class UpdateAchievementsCommandTest extends KernelTestCase
     $this->object = $this->getMockBuilder(UpdateAchievementsCommand::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
-        ;
+    ;
   }
 
   /**

@@ -11,8 +11,8 @@ export default function (container) {
   $(container).append($span)
 
   TextFill(container, {
-    maxFontPixels: maxFontPixels,
-    minFontPixels: minFontPixels,
+    maxFontPixels,
+    minFontPixels,
     widthOnly: true,
     innerTag: 'span',
     fail: function () {

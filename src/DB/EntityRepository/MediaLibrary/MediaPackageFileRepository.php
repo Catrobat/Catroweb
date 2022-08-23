@@ -114,7 +114,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @throws ImagickException
    */
   public function saveFile(File $file, int $id, string $extension,
-                           bool $create_thumbnail = true): void
+    bool $create_thumbnail = true): void
   {
     $target = $this->dir.$this->generateFileNameFromId((string) $id, $extension);
     $this->filesystem->copy($file->getPathname(), $target);

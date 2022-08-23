@@ -271,7 +271,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->distinct()
       ->getQuery()
       ->getSingleScalarResult()
-      ;
+    ;
   }
 
   public function getProjectDataByIds(array $program_ids): array
@@ -362,7 +362,7 @@ class ProgramRepository extends ServiceEntityRepository
     if ('' !== trim($order_by)) {
       $query_builder = $query_builder
         ->orderBy($alias.'.'.$order_by, $order)
-        ;
+      ;
     }
 
     return $query_builder;
@@ -407,7 +407,7 @@ class ProgramRepository extends ServiceEntityRepository
       return $query_builder
         ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
         ->setParameter('flavor', substr((string) $flavor, 1))
-        ;
+      ;
     }
 
     // Extensions are very similar to Flavors. (E.g. it does not care if a project has embroidery flavor or extension)
@@ -418,7 +418,7 @@ class ProgramRepository extends ServiceEntityRepository
       ]))
       ->setParameter('flavor', strtolower((string) $flavor))
       ->setParameter('extension', strtolower((string) $flavor))
-      ;
+    ;
   }
 
   private function excludeProjectsWithTooHighLanguageVersion(QueryBuilder $query_builder, string $max_version = '', string $alias = 'e'): QueryBuilder

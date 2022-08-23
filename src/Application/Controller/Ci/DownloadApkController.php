@@ -27,9 +27,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class DownloadApkController extends AbstractController
 {
   public function __construct(protected EventDispatcherInterface $event_dispatcher,
-                              private readonly ProgramManager $program_manager,
-                              private readonly ApkRepository $apk_repository,
-                              protected LoggerInterface $logger)
+    private readonly ProgramManager $program_manager,
+    private readonly ApkRepository $apk_repository,
+    protected LoggerInterface $logger)
   {
     // Automatically injects the download logger here thx to this syntax. (camelCase)
   }
@@ -43,8 +43,8 @@ class DownloadApkController extends AbstractController
     $file = $this->getApkFile($id);
     $response = $this->createDownloadApkFileResponse($id, $file);
     $this->event_dispatcher->dispatch(
-        new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK)
-      );
+      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK)
+    );
 
     return $response;
   }

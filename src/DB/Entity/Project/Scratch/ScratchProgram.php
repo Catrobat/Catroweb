@@ -44,7 +44,7 @@ class ScratchProgram
    * @ORM\Id
    * @ORM\Column(type="guid", nullable=false)
    */
-  protected string $id)
+    protected string $id)
   {
     $this->updateLastModifiedTimestamp();
   }

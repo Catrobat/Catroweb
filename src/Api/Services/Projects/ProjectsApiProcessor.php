@@ -20,10 +20,10 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
   final public const SERVER_ERROR_SCREENSHOT = 2;
 
   public function __construct(private readonly ProgramManager $project_manager,
-                              private readonly EntityManagerInterface $entity_manager,
-                              private readonly ExtractedFileRepository $extracted_file_repository,
-                              private readonly ProgramFileRepository $file_repository,
-                              private readonly ScreenshotRepository $screenshot_repository)
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly ExtractedFileRepository $extracted_file_repository,
+    private readonly ProgramFileRepository $file_repository,
+    private readonly ScreenshotRepository $screenshot_repository)
   {
   }
 

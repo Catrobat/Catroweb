@@ -35,7 +35,7 @@ class FollowNotification extends CatroNotification
    *     nullable=true
    * )
    */
-  private User $follower)
+    private User $follower)
   {
     parent::__construct($user, '', '', 'follow');
   }

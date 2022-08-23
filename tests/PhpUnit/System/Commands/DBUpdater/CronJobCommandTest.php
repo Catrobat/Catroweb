@@ -22,7 +22,7 @@ class CronJobCommandTest extends KernelTestCase
     $this->object = $this->getMockBuilder(CronJobCommand::class)
       ->disableOriginalConstructor()
       ->getMockForAbstractClass()
-        ;
+    ;
   }
 
   /**

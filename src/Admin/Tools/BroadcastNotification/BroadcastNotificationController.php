@@ -14,8 +14,8 @@ use Symfony\Component\HttpFoundation\Response;
 class BroadcastNotificationController extends CRUDController
 {
   public function __construct(
-      protected NotificationManager $notification_manager,
-      protected UserManager $user_manager
+    protected NotificationManager $notification_manager,
+    protected UserManager $user_manager
   ) {
   }
 

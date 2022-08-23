@@ -454,9 +454,9 @@ class StatementFactory
 
     return match ((string) $statement[self::TYPE_ATTRIBUTE]) {
       self::WHEN_SCRIPT => new TappedScriptStatement($this, $children, $spaces),
-        self::START_SCRIPT => new WhenScriptStatement($this, $children, $spaces),
-        self::BROADCAST_SCRIPT => new BroadcastScriptStatement($this, $children, $spaces),
-        default => new UnknownStatement($this, $statement, $spaces),
+      self::START_SCRIPT => new WhenScriptStatement($this, $children, $spaces),
+      self::BROADCAST_SCRIPT => new BroadcastScriptStatement($this, $children, $spaces),
+      default => new UnknownStatement($this, $statement, $spaces),
     };
   }
 
@@ -485,7 +485,7 @@ class StatementFactory
     $variableName = (string) $statement;
     if (null == $variableName) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
-      $variableName = (string) ($statement->xpath($reference)[0]);
+      $variableName = (string) $statement->xpath($reference)[0];
     }
 
     $parent = 'parent::*';

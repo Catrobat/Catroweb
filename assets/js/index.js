@@ -58,7 +58,7 @@ function showOauthPopup (firstOauthLoginUrl, informationText, title, okTranslati
       if (shown == null) {
         localStorage.setItem('oauthSignIn', '1')
         Swal.fire({
-          title: title,
+          title,
           html: informationText,
           showCancelButton: false,
           allowOutsideClick: false,

@@ -17,7 +17,7 @@ class ProgramXmlHeaderValidatorEventSubscriber implements EventSubscriberInterfa
     $program_xml_properties = $file->getProgramXmlProperties();
     if (isset($program_xml_properties->header)) {
       if (!(isset($program_xml_properties->header->applicationName, $program_xml_properties->header->applicationVersion, $program_xml_properties->header->catrobatLanguageVersion, $program_xml_properties->header->description, $program_xml_properties->header->mediaLicense, $program_xml_properties->header->platform, $program_xml_properties->header->platformVersion, $program_xml_properties->header->programLicense, $program_xml_properties->header->programName, $program_xml_properties->header->remixOf, $program_xml_properties->header->url, $program_xml_properties->header->userHandle)
-        )) {
+      )) {
         throw new InvalidCatrobatFileException('errors.xml.invalid', 508, 'Program XML header information missing');
       }
     } else {

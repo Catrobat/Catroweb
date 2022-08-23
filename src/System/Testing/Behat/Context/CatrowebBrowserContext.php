@@ -422,43 +422,43 @@ class CatrowebBrowserContext extends BrowserContext
         ;
         break;
       case 'Clicked At':
-          $page
-            ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[9]/a')
-            ->click()
-          ;
-          break;
+        $page
+          ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[9]/a')
+          ->click()
+        ;
+        break;
       case \Locale::class:
-          $page
-            ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
-            ->click()
-          ;
-          break;
+        $page
+          ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
+          ->click()
+        ;
+        break;
       case 'Type':
-           $page
-             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[2]/a')
-             ->click()
-           ;
-           break;
+        $page
+          ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[2]/a')
+          ->click()
+        ;
+        break;
       case 'Tag':
-           $page
-             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[7]/a')
-             ->click()
-           ;
-           break;
+        $page
+          ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[7]/a')
+          ->click()
+        ;
+        break;
       case 'User Agent':
-           $page
-             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[11]/a')
-             ->click()
-           ;
-           break;
+        $page
+          ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[11]/a')
+          ->click()
+        ;
+        break;
       case 'Referrer':
-           $page
-             ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[12]/a')
-             ->click()
-           ;
-           break;
+        $page
+          ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[12]/a')
+          ->click()
+        ;
+        break;
 
-        default:
+      default:
         throw new Exception('Wrong Option');
     }
   }
@@ -1935,24 +1935,24 @@ class CatrowebBrowserContext extends BrowserContext
     $page
       ->find('css', '.editable-input')
       ->click()
-  ;
+    ;
 
     // click yes or no option
     if ('yes' == $option) {
       $page
         ->find('css', 'select.form-control > option:nth-child(2)')
         ->click()
-    ;
+      ;
     } else {
       $page
         ->find('css', 'select.form-control > option:nth-child(1)')
         ->click()
-    ;
+      ;
     }
     // click button to confirm the selection
     $page
       ->find('css', 'button.btn-sm:nth-child(1)')
       ->click()
-  ;
+    ;
   }
 }

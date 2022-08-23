@@ -14,8 +14,8 @@ class TranslationDelegate
   private readonly array $apis;
 
   public function __construct(private readonly ProjectCustomTranslationRepository $project_custom_translation_repository,
-                              private readonly ProjectMachineTranslationRepository $project_machine_translation_repository,
-                              TranslationApiInterface ...$apis)
+    private readonly ProjectMachineTranslationRepository $project_machine_translation_repository,
+    TranslationApiInterface ...$apis)
   {
     $this->apis = $apis;
   }

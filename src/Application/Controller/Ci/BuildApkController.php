@@ -23,10 +23,10 @@ use Symfony\Component\Routing\Annotation\Route;
 class BuildApkController extends AbstractController
 {
   public function __construct(
-      private readonly ProgramManager $program_manager,
-      private readonly JenkinsDispatcher $dispatcher,
-      private readonly ApkRepository $apk_repository,
-      private readonly array $arr_jenkins_config)
+    private readonly ProgramManager $program_manager,
+    private readonly JenkinsDispatcher $dispatcher,
+    private readonly ApkRepository $apk_repository,
+    private readonly array $arr_jenkins_config)
   {
   }
 

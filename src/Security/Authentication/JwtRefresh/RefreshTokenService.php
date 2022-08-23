@@ -15,11 +15,11 @@ use Symfony\Component\HttpKernel\Event\ResponseEvent;
 class RefreshTokenService
 {
   public function __construct(
-      protected int $refreshTokenLifetime,
-      protected RefreshTokenManagerInterface $refresh_manager,
-      protected UserManager $user_manager,
-      protected JWTTokenManagerInterface $jwt_manager,
-      protected CookieService $cookie_service,
+    protected int $refreshTokenLifetime,
+    protected RefreshTokenManagerInterface $refresh_manager,
+    protected UserManager $user_manager,
+    protected JWTTokenManagerInterface $jwt_manager,
+    protected CookieService $cookie_service,
   ) {
   }
 
