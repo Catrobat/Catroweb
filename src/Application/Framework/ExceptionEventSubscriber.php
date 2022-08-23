@@ -31,9 +31,10 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
   public function onKernelException(ExceptionEvent $event): ?Response
   {
     $exception = $event->getThrowable();
-
-    $themes = explode('|', (string) $this->parameter_bag->get('themeRoutes'));
     $request = $event->getRequest();
+
+    // check request
+    $themes = explode('|', (string) $this->parameter_bag->get('themeRoutes'));
     $theme = 'app';
     $applicationRequest = false;
     $requestUri = str_replace('/index_test.php', '', $request->getRequestUri());
@@ -48,7 +49,9 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
       return $event->getResponse();
     }
 
-    if ($exception instanceof HttpException && Response::HTTP_UNAUTHORIZED === $exception->getStatusCode()) {
+    // 401, 403 - redirect to login page
+    if (($exception instanceof HttpException && Response::HTTP_UNAUTHORIZED === $exception->getStatusCode())
+        || $exception instanceof ForbiddenHttpException) {
       $this->cookie_service->clearCookie('CATRO_LOGIN_TOKEN');
       $this->cookie_service->clearCookie('BEARER');
       /** @var Session $session */
@@ -58,6 +61,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
       $event->setResponse(new RedirectResponse($this->url_generator->generate('login', ['theme' => $theme])));
     }
 
+    // 404 - redirect to index page
     if ($exception instanceof NotFoundHttpException) {
       $this->softLogger->error('Http '.$exception->getStatusCode().': '.$exception->getMessage());
       /** @var Session $session */
