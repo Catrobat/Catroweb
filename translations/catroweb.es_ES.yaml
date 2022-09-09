@@ -13,11 +13,11 @@ education: Educación
 chat: Chat y foros
 others: Otros
 tutorials: Ayuda
-googlePlay: Google Play
+googlePlay: Tienda de Google Play
 iosAppStore: iOS App store
-huaweiAppGallery: Galería de AppGallery Huawei
+huaweiAppGallery: Galería de APPs Huawei
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Chat de Discord
 passwordsNoMatch: Las contraseñas no coinciden.
 error: Error
 cancel: Cancelar
@@ -39,7 +39,7 @@ privacyPolicy: Política de privacidad
 imprint: Grabado
 programDetails: Detalles
 somethingWentWrong: 'Ooooops algo está mal.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'La cosa que usted busca no existe.'
 pleaseTryAgain: 'Por favor inténtalo de nuevo!'
 oldVersionError: 'Por favor actualice a la versión de Pocket Code más nueva!'
 more: 'más'
@@ -66,7 +66,7 @@ notificationsUnauthorizedError: "No se puede autorizar al usuario"
 notificationsClearError: "¡No se puede marcar las notificaciónes como leído!"
 pleaseWait: "Espera..."
 projects: "Programas"
-users: "Users"
+users: "Usuarios"
 oauthPopUpTitle: "Información de inicio de sesión de cuenta externa"
 oauthInfo: 'Acabas de usar una cuenta externa para iniciar sesión. Creamos un nombre de usuario aleatorio para ti. Si quieres cambiar tu nombre de usuario o crear una nueva contraseña para tu cuenta, por favor ve a mi página de perfil. Haz clic %link_start% aquí %link_end% para ir a tu página de perfil'
 oauthHere: "aqui"
@@ -112,11 +112,11 @@ programs:
     ¡No hay forma de restaurar sus acciones!
     Sí, eliminarlo!
     Cancelar
-  deleteNotFoundError: The project to be deleted could not be found under your user.
+  deleteNotFoundError: El proyecto a ser eliminado no se ha encontrado bajo tu usuario
   private: privado
   public: público
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: Hacer privado
+  setPublicAction: Hacer público
   changeVisibility: |+
     ¿Estás seguro?
     Si estableces '%programName%' en privado, no será visto o encontrado por otros usuarios.
@@ -133,7 +133,7 @@ programs:
     ¡No hay forma de restaurar tus acciones!
     Sí, eliminarla!
     Cancelar
-  tooLongName: The project name is too long!
+  tooLongName: '¡El nombre del proyecto es demasiado largo!'
   tooLongDescription: '¡La descripción del proyecto es demasiado larga!'
   tooLongCredits: The project credits are too long!
   most:
@@ -164,9 +164,9 @@ programs:
   reportOwnProgram: No puedes marcar tu propio proyecto.
   reportAlready: Ya has marcado este proyecto.
   reportDone: '¡Has reportado este proyecto!'
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeaderDownload: No se ha podido descargar 
+  updateAppTextDownload: Por favor, actualiza tu app a la versión más reciente. Sé consciente que no todas las funciones de la versión de Android no están disponibles en la de iOS.
+  updateAppTextDownloadApk: La conversión de .catrobat a app independiente solo está disponible en Android y no en iOS.
   updateAppHeader: Actualizar la aplicación
   updateAppText: Por favor, actualiza tu aplicación a la versión más reciente para poder descargar este proyecto.
   btnClosePopup: Ok
@@ -181,8 +181,8 @@ programs:
   deleted_popup: El comentario se ha eliminado correctamente.
   deleted_popup_header: Eliminado
   noAdminRights: No tiene derechos de administrador. Por favor, inicie sesión como administrador.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: Editar proyecto
+  closeProjectEditor: Cerrar el editor de proyectos
   closeEditorPrompt: '¿Quieres guardar los cambios?'
   btnDiscard: Ignorar
   addComment: Escribir un comentario
@@ -194,19 +194,19 @@ programs:
   link: Copiar enlace del proyecto al portapapeles
   reactionsText: Reacciones
   downloadErrorText: Error al descargar el proyecto. Inténtalo de nuevo más tarde.
-  downloadStartText: Download has started...
+  downloadStartText: La descarga ha comenzado...
   showTranslation: Mostrar traducción
   hideTranslation: Ocultar la traducción
   translatedByLine: Traducido por %provider% del %sourceLanguage% al %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: Google Traductor
+  confrimDelete: '¿Estás segur@ que quieres eliminar esta traducción?'
   default: Por defecto
   save: Guardar
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: 'Traducción de %language%'
+  editDefault: Editar default
+  editTranslation: Editar traducción de %language%
+  translations: Traducciones
+  createTranslation: Crear traducción 
 remixGraph:
   title: Remezclar
   showRemixGraph: 'Mostrar gráfico de remixes'
@@ -266,8 +266,8 @@ passwordRecovery:
     Tu equipo de Catrobat.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: Acerca de mi
+  currentlyWorkingOn: Actualmente trabajando en
   edit: Editar tu perfil
   saveChanges: '¿Desea guardar los cambios?'
   newPass: nueva contraseña
@@ -296,15 +296,15 @@ profile:
     submitSuccess: Guardado!
   reallyDeleteProgram: Realmente desea eliminar su proyecto
   programsOf: Proyectos de
-  picture: Profile picture
+  picture: Foto de perfil
   changePicture: Cambiar la imagen
   goToScratchProfile: Perfil en Scratch
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
-  account: Account
+  userSettings: Configuraciones de usuario
+  profileSettings: Configuración de perfil
+  securitySettings: Opciones de seguridad
+  accountSettings: Opciones de cuenta
+  account: Cuenta
   editProfile: Editar Perfil
   edit: Editar
   done: Listo
@@ -314,12 +314,12 @@ myprofile:
   email: Correo electrónico
   deleteAccount: Eliminar Cuenta
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
+    Tenga en cuenta:
+    Ha creado %num_projects% proyecto(s) y tiene %num_followers% seguidor(es). Todos sus proyectos serán eliminados. Ya no podrás iniciar sesión y tus proyectos desaparecerán de todas las listas. Eliminar tu perfil no se puede deshacer!
+    ¿Estás seguro de que quieres dejarnos?
   editAccountSettings: Editar configuración de la cuenta
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  profileChangeSuccess: Tu perfil ha cambiado correctamente.
+  unspecifiedError: Se ha producido un error no especificado al cambiar su perfil. Por favor, póngase en contacto con nosotros.
 licenseToPlay:
   link: 'Licencia para jugar'
   title: 'Licencia para jugar - reconoce y comparte'
@@ -376,8 +376,8 @@ search:
   results: Resultados de la búsqueda
   resultcount: La búsqueda tiene %count% resultados
   fail: Por favor, introduzca al menos un término de búsqueda
-  noUsers: No users found
-  noProjects: No projects found
+  noUsers: No se han encontrado usuarios
+  noProjects: No se han encontrado proyectos
 menu:
   profile: Mi Perfil
   login: Login
@@ -391,9 +391,9 @@ login:
   button:
     loginNow: Iniciar sesión
     createAccount: Crear una cuenta
-    forgetPassword: Forget password?
+    forgetPassword: '¿Olvidaste tu contraseña?'
   oauth:
-    title: Or you can join with
+    title: O puede unirse con
   passOrUser: Su contraseña o nombre de usuario era incorrecto.
   noUsername: Su nombre de usuario o correo electrónico no han podido ser encontrados.
   forgotPass: '¿Ha olvidado su contraseña o usuario?'
@@ -411,36 +411,36 @@ login:
   passwordFirst: Contraseña
   passwordSecond: Confirmar contraseña
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  title: Registrarse
+  subText: "Al continuar, estás creando una cuenta de la comunidad Catrobat y aceptas nuestros %var1% y %var2%."
   button:
     cancel: Cancelar
     createAccount: Crear una cuenta
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Recuperación de la cuenta
+  description: Si recuerdas el correo electrónico o el nombre de usuario de tu cuenta, podemos enviarte un enlace para restablecer tu contraseña.
   button:
     cancel: Cancelar
-    submit: Recover password
+    submit: Recuperar contraseña
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Reiniciar contraseña"
+    description: "Si recuerdas el email de tu cuenta te podemos enviar un enlace para reiniciar tu contraseña."
     button:
-      submit: "Send reset email"
+      submit: "Enviar correo para restablecer contraseña "
       cancel: "Cancelar"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    title: "Checa tus emails"
+    description: "Si existe una cuenta que coincida con tu correo electrónico, se acaba de enviar un correo electrónico que contiene un enlace que puedes usar para restablecer tu contraseña. Este enlace caducará en %time%."
+    description2: "Si no recibes un email por favor revisa tu carpeta de spam o %tryAgainLink%"
+    tryAgain: "Intenta denuevo"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
+    title: "¡Hola! :)"
+    visitLink: "Para reiniciar tu contraseña, por favor entra al siguiente enlace"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
   reset:
-    title: "Reset your password"
+    title: "Reiniciar contraseña"
     button:
       submit: "Restablecer contraseña"
 apk:

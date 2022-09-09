@@ -238,7 +238,7 @@ accountConfirmation:
     Your Catrobat Team.
     </p>
 passwordRecovery:
-  subject: Your Catrobat Password Recovery
+  subject: Catrobat құпия сөзін қалпына келтіру
   message: |
     Dear %username%.
     You have requested to reset your password on %appplication_url% because you have forgotten your password.
@@ -270,7 +270,7 @@ profile:
   currentlyWorkingOn: Currently working on
   edit: Edit your profile
   saveChanges: save changes
-  newPass: Жаңа құпиясөз
+  newPass: жаңа құпиясөз
   repeatPass: Құпиясөзді қайталаңыз
   oldPass: Ескі құпиясөз
   firstEmail: My first email
@@ -335,7 +335,7 @@ licenseToPlay:
   version: Version 1.1, 2 April 2013
 termsOfUse:
   title: Terms of Use
-  headline: Welcome to the Catrobat Community!
+  headline: Catrobat қауымдастығына қош келдіңіз!
   text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
   text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
@@ -371,7 +371,7 @@ termsOfUse:
   version: Version 1.3, 4 March 2014
 search:
   dotdotdot: Search...
-  search: Іздеу…
+  search: Іздеу
   inMediaLib: Search in media library
   results: Search Results
   resultcount: Your search returned %count% results
