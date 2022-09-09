@@ -75,19 +75,19 @@ class ListProgramsController extends AbstractController
     if ('downloads' === $sortBy) {
       $programs = $this->program_manager->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
-        $programs, [$this->program_manager, 'getMostDownloadedPrograms'],
+        $programs, $this->program_manager->getMostDownloadedPrograms(...),
         $flavor, $limit, $offset, $max_version
       );
     } elseif ('views' === $sortBy) {
       $programs = $this->program_manager->getMostViewedPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
-        $programs, [$this->program_manager, 'getMostViewedPrograms'],
+        $programs, $this->program_manager->getMostViewedPrograms(...),
         $flavor, $limit, $offset, $max_version
       );
     } elseif ('random' === $sortBy) {
       $programs = $this->program_manager->getRandomPrograms($flavor, $limit, $offset, $max_version);
       $programs = $this->fillIncompleteFlavoredCategoryProjectsWithDifferentFlavors(
-        $programs, [$this->program_manager, 'getRandomPrograms'],
+        $programs, $this->program_manager->getRandomPrograms(...),
         $flavor, $limit, $offset, $max_version
       );
     } elseif ('user' === $sortBy) {

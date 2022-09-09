@@ -53,10 +53,7 @@ abstract class ParsedObjectsContainer
     $this->addCurrentGroup($current_group);
   }
 
-  /**
-   * @param mixed $current_group
-   */
-  private function addCurrentGroup(&$current_group): void
+  private function addCurrentGroup(mixed &$current_group): void
   {
     if ($current_group) {
       $this->objects[] = $current_group;

@@ -214,7 +214,7 @@ class MaintainController extends CRUDController
     $count = 0;
     $dir_array = preg_grep('#^([^.])#', scandir($directory)); // no hidden files
     foreach ($dir_array as $filename) {
-      if (null !== $extension && !in_array(pathinfo($filename, PATHINFO_EXTENSION), $extension, true)) {
+      if (null !== $extension && !in_array(pathinfo((string) $filename, PATHINFO_EXTENSION), $extension, true)) {
         continue;
       }
       if ('..' != $filename && '.' != $filename) {

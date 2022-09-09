@@ -17,7 +17,7 @@ class ProgramFileRepository
   public function __construct(
     string $catrobat_file_storage_dir,
     string $catrobat_file_extract_dir,
-    private CatrobatFileCompressor $file_compressor
+    private readonly CatrobatFileCompressor $file_compressor
   ) {
     FileHelper::verifyDirectoryExists($catrobat_file_storage_dir);
     FileHelper::verifyDirectoryExists($catrobat_file_extract_dir);

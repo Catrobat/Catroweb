@@ -364,10 +364,7 @@ class ExtractedCatrobatFile
     return $factory->createObject($objectTree);
   }
 
-  /**
-   * @param mixed $objectsToAdd
-   */
-  private function addObjectsToArray(array $objects, $objectsToAdd): array
+  private function addObjectsToArray(array $objects, mixed $objectsToAdd): array
   {
     foreach ($objectsToAdd as $object) {
       $objects[] = $object;

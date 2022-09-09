@@ -270,11 +270,7 @@ class CodeStatistic
     }
   }
 
-  /**
-   * @param mixed $brick_type
-   * @param mixed $brick_category
-   */
-  protected function updateBrickTypeStatistic($brick_type, $brick_category): void
+  protected function updateBrickTypeStatistic(mixed $brick_type, mixed $brick_category): void
   {
     ++$this->brick_type_statistic[$brick_category]['numTotal'];
     if (!in_array($brick_type, $this->brick_type_register[$brick_category], true)) {

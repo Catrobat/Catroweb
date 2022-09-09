@@ -8,10 +8,8 @@ class FixedTokenGenerator extends TokenGenerator
 {
   /**
    * FixedTokenGenerator constructor.
-   *
-   * @param mixed $token
    */
-  public function __construct(private $token)
+  public function __construct(private readonly mixed $token)
   {
   }
 

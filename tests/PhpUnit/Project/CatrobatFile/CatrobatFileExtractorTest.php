@@ -32,7 +32,7 @@ class CatrobatFileExtractorTest extends TestCase
   public function testThrowsAnExceptionIfGivenAnValidExtractionDirectory(): void
   {
     $this->expectException(Exception::class);
-    $this->catrobat_file_extractor->__construct(__DIR__.'invalid_directory/', '');
+    $this->catrobat_file_extractor = new CatrobatFileExtractor(__DIR__.'invalid_directory/', '');
   }
 
   /**

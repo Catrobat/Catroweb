@@ -6,10 +6,7 @@ use App\Project\ProgramManager;
 
 class RemixManipulationProgramManager extends ProgramManager
 {
-  /**
-   * @param mixed $remix_graph_mapping
-   */
-  public function useRemixManipulationFileExtractor($remix_graph_mapping): void
+  public function useRemixManipulationFileExtractor(mixed $remix_graph_mapping): void
   {
     $old_file_extractor = $this->file_extractor;
     $this->file_extractor = new RemixManipulationCatrobatFileExtractor(

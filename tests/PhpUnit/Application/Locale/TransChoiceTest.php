@@ -60,7 +60,7 @@ class TransChoiceTest extends TestCase
 
     $catalogue = $translator->getCatalogue('en');
     $messages = $catalogue->all();
-    $message_ids = array_keys($messages['catroweb']);
+    $message_ids = array_keys($messages['catroweb'] ?? []);
 
     $data = [];
     foreach ($language_codes as $language_code) {

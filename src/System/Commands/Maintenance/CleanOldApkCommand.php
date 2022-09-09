@@ -81,10 +81,7 @@ class CleanOldApkCommand extends Command
     return 0;
   }
 
-  /**
-   * @param mixed $removed_apk_ids
-   */
-  private function createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids): Query
+  private function createQueryToUpdateTheStatusOfRemovedApks(mixed $removed_apk_ids): Query
   {
     $id_query_part = '';
     $i = 0;
