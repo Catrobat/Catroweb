@@ -64,10 +64,10 @@ class ExampleRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return mixed
    */
   public function getExampleProgramCount(string $flavor, bool $for_ios = false)
   {
@@ -108,10 +108,10 @@ class ExampleRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return mixed
    */
   public function getExampleItemCount(string $flavor)
   {

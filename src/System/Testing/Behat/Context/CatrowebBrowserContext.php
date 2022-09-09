@@ -304,6 +304,7 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Then /^the selected language should be "([^"]*)"$/
+   *
    * @Given /^the selected language is "([^"]*)"$/
    *
    * @param mixed $arg1

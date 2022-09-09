@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\SearchApi
  */
 final class SearchApiTest extends DefaultTestCase
@@ -36,6 +37,7 @@ final class SearchApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -46,6 +48,7 @@ final class SearchApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -55,6 +58,7 @@ final class SearchApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -64,6 +68,7 @@ final class SearchApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -74,7 +79,9 @@ final class SearchApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\SearchApi::searchGet
    */
   public function testSearchGet(): void

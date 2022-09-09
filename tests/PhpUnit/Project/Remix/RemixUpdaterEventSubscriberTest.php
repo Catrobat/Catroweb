@@ -21,6 +21,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\Remix\RemixUpdaterEventSubscriber
  */
 class RemixUpdaterEventSubscriberTest extends TestCase

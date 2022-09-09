@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * Class UpdateProjectExtensionsCommand.
  *
  * @internal
+ *
  * @covers \App\System\Commands\DBUpdater\UpdateProjectExtensionsCommand
  */
 class UpdateProjectExtensionsCommandTest extends KernelTestCase
@@ -27,6 +28,7 @@ class UpdateProjectExtensionsCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ class UpdateProjectExtensionsCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedObject
  */
 class ParsedObjectTest extends TestCase
@@ -28,6 +29,7 @@ class ParsedObjectTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -50,6 +52,7 @@ class ParsedObjectTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function isGroupMustReturnFalse(): void
@@ -59,6 +62,7 @@ class ParsedObjectTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getLooksMustReturnArrayOfParsedObjectAsset(): void
@@ -72,6 +76,7 @@ class ParsedObjectTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getSoundsMustReturnEmptyArrayOfParsedObjectAsset(): void
@@ -81,6 +86,7 @@ class ParsedObjectTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getScriptsMustReturnArrayOfScript(): void
@@ -94,6 +100,7 @@ class ParsedObjectTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getNameMustReturnCertainString(): void

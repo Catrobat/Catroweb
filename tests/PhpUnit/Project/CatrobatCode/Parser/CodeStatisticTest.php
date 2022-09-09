@@ -10,6 +10,7 @@ use SimpleXMLElement;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\CodeStatistic
  */
 class CodeStatisticTest extends TestCase
@@ -25,6 +26,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -56,6 +58,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function mustComputeCorrectScriptStatistic(): CodeStatistic
@@ -73,6 +76,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustComputeCorrectScriptStatistic
    *
    * @param mixed $code_statistic
@@ -87,6 +91,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustComputeCorrectScriptStatistic
    *
    * @param mixed $code_statistic
@@ -101,6 +106,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustComputeCorrectScriptStatistic
    *
    * @param mixed $code_statistic
@@ -115,6 +121,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustComputeCorrectScriptStatistic
    *
    * @param mixed $code_statistic
@@ -129,6 +136,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function mustComputeCorrectGlobalVariableStatistic(): CodeStatistic
@@ -146,6 +154,7 @@ class CodeStatisticTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustComputeCorrectGlobalVariableStatistic
    *
    * @param mixed $code_statistic

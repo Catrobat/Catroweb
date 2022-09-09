@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * Class ProjectRefreshExtensionsWorkflowCommand.
  *
  * @internal
+ *
  * @covers \App\System\Commands\DBUpdater\CronJobs\ProjectRefreshExtensionsWorkflowCommand
  */
 class ProjectRefreshExtensionsWorkflowCommandTest extends KernelTestCase
@@ -27,6 +28,7 @@ class ProjectRefreshExtensionsWorkflowCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ class ProjectRefreshExtensionsWorkflowCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

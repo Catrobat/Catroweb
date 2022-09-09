@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * Class UpdateTagsCommand.
  *
  * @internal
+ *
  * @covers \App\System\Commands\DBUpdater\UpdateTagsCommand
  */
 class UpdateTagsCommandTest extends KernelTestCase
@@ -27,6 +28,7 @@ class UpdateTagsCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ class UpdateTagsCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

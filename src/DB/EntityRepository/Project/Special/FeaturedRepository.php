@@ -66,10 +66,10 @@ class FeaturedRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return mixed
    */
   public function getFeaturedProgramCount(string $flavor, bool $for_ios = false)
   {
@@ -110,10 +110,10 @@ class FeaturedRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return mixed
    */
   public function getFeaturedItemCount(string $flavor)
   {

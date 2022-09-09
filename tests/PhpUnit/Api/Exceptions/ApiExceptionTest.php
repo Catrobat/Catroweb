@@ -11,6 +11,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 final class ApiExceptionTest extends DefaultTestCase
@@ -27,6 +28,7 @@ final class ApiExceptionTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ final class ApiExceptionTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

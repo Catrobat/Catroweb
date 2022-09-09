@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers  \App\Utils\ElapsedTimeStringFormatter
  */
 class ElapsedTimeStringFormatterTest extends TestCase
@@ -45,8 +46,11 @@ class ElapsedTimeStringFormatterTest extends TestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Utils\ElapsedTimeStringFormatter::format
+   *
    * @dataProvider dataProviderElapsedTimeStringFormatter
    *
    * @throws Exception

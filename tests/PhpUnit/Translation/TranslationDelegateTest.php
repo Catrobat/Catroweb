@@ -14,6 +14,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Translation\TranslationDelegate
  */
 class TranslationDelegateTest extends TestCase

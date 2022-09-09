@@ -22,6 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\AuthenticationApi
  */
 final class AuthenticationApiTest extends DefaultTestCase
@@ -46,6 +47,7 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -56,6 +58,7 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -65,6 +68,7 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -74,6 +78,7 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -84,7 +89,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationGet
    */
   public function testAuthenticationGet(): void
@@ -99,7 +106,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationPost
    */
   public function testAuthenticationPost(): void
@@ -116,7 +125,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationDelete
    */
   public function testAuthenticationDelete(): void
@@ -135,7 +146,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationRefreshPost
    */
   public function testAuthenticationRefreshPost(): void
@@ -152,7 +165,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationUpgradePost
    */
   public function testAuthenticationUpgradePost400(): void
@@ -170,7 +185,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationUpgradePost
    */
   public function testAuthenticationUpgradePost401(): void
@@ -188,7 +205,9 @@ final class AuthenticationApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\AuthenticationApi::authenticationUpgradePost
    */
   public function testAuthenticationUpgradePost200(): void

@@ -9,6 +9,7 @@ use Symfony\Component\Console\Command\Command;
 
 /**
  * @internal
+ *
  * @covers \App\System\Commands\DBUpdater\CronJobs\TranslationTrimStorageCommand
  */
 class TranslationTrimStorageCommandTest extends TestCase
@@ -25,6 +26,7 @@ class TranslationTrimStorageCommandTest extends TestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -35,6 +37,7 @@ class TranslationTrimStorageCommandTest extends TestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

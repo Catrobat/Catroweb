@@ -36,6 +36,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\ProjectsApi
  */
 final class ProjectsApiTest extends DefaultTestCase
@@ -65,6 +66,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -75,6 +77,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -84,6 +87,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -93,6 +97,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -103,7 +108,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdGet
    *
    * @throws Exception
@@ -125,7 +132,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdGet
    *
    * @throws Exception
@@ -176,6 +185,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @covers \App\Api\ProjectsApi::projectIdPut
    */
   public function testProjectIdPut(): void
@@ -230,7 +240,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdPut
    */
   public function testProjectIdPutNotFound(): void
@@ -250,7 +262,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdPut
    */
   public function testProjectIdPutUnauthorized(): void
@@ -271,7 +285,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdPut
    */
   public function testProjectIdPutForbidden(): void
@@ -298,6 +314,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @covers \App\Api\ProjectsApi::projectIdPut
    */
   public function testProjectIdPutValidationError(): void
@@ -333,6 +350,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @covers \App\Api\ProjectsApi::projectIdPut
    */
   public function testProjectIdPutSaveXMLError(): void
@@ -378,7 +396,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsFeaturedGet
    *
    * @throws Exception
@@ -400,7 +420,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsGet
    *
    * @throws Exception
@@ -418,7 +440,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdRecommendationsGet
    *
    * @throws Exception
@@ -435,7 +459,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdRecommendationsGet
    *
    * @throws Exception
@@ -458,7 +484,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsSearchGet
    *
    * @throws Exception
@@ -476,7 +504,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsCategoriesGet
    *
    * @throws Exception
@@ -494,7 +524,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsUserGet
    *
    * @throws Exception
@@ -516,7 +548,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsUserGet
    *
    * @throws Exception
@@ -540,7 +574,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsUserIdGet
    *
    * @throws Exception
@@ -562,7 +598,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsUserIdGet
    *
    * @throws Exception
@@ -584,7 +622,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdReportPost
    *
    * @throws Exception
@@ -603,7 +643,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsPost
    *
    * @throws Exception
@@ -632,7 +674,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsPost
    *
    * @throws Exception
@@ -665,7 +709,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsPost
    *
    * @throws Exception
@@ -720,7 +766,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectIdDelete
    *
    * @throws Exception
@@ -737,7 +785,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsExtensionsGet
    *
    * @throws Exception
@@ -755,7 +805,9 @@ final class ProjectsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\ProjectsApi::projectsTagsGet
    *
    * @throws Exception

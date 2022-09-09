@@ -13,6 +13,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * @internal
+ *
  * @covers \App\Translation\ItranslateApi
  */
 class ItranslateApiTest extends TestCase

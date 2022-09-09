@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class UserPostUpdateNotifierTest extends DefaultTestCase
@@ -24,6 +25,7 @@ class UserPostUpdateNotifierTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void

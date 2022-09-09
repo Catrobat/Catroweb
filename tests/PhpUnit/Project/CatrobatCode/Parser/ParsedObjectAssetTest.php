@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedObjectAsset
  */
 class ParsedObjectAssetTest extends TestCase
@@ -26,6 +27,7 @@ class ParsedObjectAssetTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -49,6 +51,7 @@ class ParsedObjectAssetTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getFileNameMustReturnCertainString(): void
@@ -68,6 +71,7 @@ class ParsedObjectAssetTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getNameMustReturnCertainString(): void

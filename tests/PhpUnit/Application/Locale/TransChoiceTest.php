@@ -12,6 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class TransChoiceTest extends TestCase
@@ -23,6 +24,7 @@ class TransChoiceTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider language_provider
    */
   public function allTransChoiceEntriesShouldHaveACorrectSyntax(TranslatorInterface $translator, string $language_code, array $message_ids): void

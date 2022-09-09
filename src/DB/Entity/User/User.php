@@ -191,6 +191,7 @@ class User extends BaseUser
 
   /**
    * @deprecated
+   *
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected ?string $gplus_access_token = null;
@@ -222,12 +223,14 @@ class User extends BaseUser
   protected ?string $apple_access_token = null;
   /**
    * @deprecated
+   *
    * @ORM\Column(type="string", length=5000, nullable=true)
    */
   protected ?string $gplus_id_token = null;
 
   /**
    * @deprecated
+   *
    * @ORM\Column(type="string", length=300, nullable=true)
    */
   protected ?string $gplus_refresh_token = null;

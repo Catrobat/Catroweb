@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\NotificationsApi
  */
 class NotificationsApiTest extends DefaultTestCase
@@ -39,6 +40,7 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -49,6 +51,7 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -58,6 +61,7 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -67,6 +71,7 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -77,7 +82,9 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\NotificationsApi::notificationIdReadPut
    */
   public function testNotificationIdReadPut(): void
@@ -92,7 +99,9 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\NotificationsApi::notificationsCountGet
    */
   public function testNotificationsCountGet(): void
@@ -114,7 +123,9 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\NotificationsApi::notificationsGet
    */
   public function testNotificationsGet(): void
@@ -130,7 +141,9 @@ class NotificationsApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\NotificationsApi::notificationsReadPut
    */
   public function testNotificationsReadPut(): void

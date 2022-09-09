@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\ProgramFlavorEventSubscriber
  */
 class ProgramFlavorEventSubscriberTest extends TestCase

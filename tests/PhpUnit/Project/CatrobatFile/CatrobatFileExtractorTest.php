@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\CatrobatFileExtractor
  */
 class CatrobatFileExtractorTest extends TestCase

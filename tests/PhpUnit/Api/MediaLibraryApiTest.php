@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\MediaLibraryApi
  */
 final class MediaLibraryApiTest extends DefaultTestCase
@@ -44,6 +45,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -54,6 +56,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -63,6 +66,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -72,6 +76,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -82,7 +87,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\MediaLibraryApi::mediaFilesSearchGet
    */
   public function testMediaFilesSearchGet(): void
@@ -103,7 +110,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\MediaLibraryApi::mediaPackageNameGet
    */
   public function testMediaPackageNameGetNotFound(): void
@@ -123,7 +132,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\MediaLibraryApi::mediaPackageNameGet
    */
   public function testMediaPackageNameGet(): void
@@ -146,7 +157,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\MediaLibraryApi::mediaFileIdGet
    */
   public function testMediaFileIdGetNotFound(): void
@@ -166,7 +179,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\MediaLibraryApi::mediaFileIdGet
    */
   public function testMediaFileIdGet(): void
@@ -187,7 +202,9 @@ final class MediaLibraryApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\MediaLibraryApi::mediaFilesGet
    */
   public function testMediaFilesGet(): void

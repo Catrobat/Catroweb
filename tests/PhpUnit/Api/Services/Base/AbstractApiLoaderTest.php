@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\Base\AbstractApiLoader
  */
 final class AbstractApiLoaderTest extends DefaultTestCase
@@ -24,6 +25,7 @@ final class AbstractApiLoaderTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void

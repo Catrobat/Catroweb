@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\CatrobatCodeParser
  */
 class CatrobatCodeParserTest extends TestCase
@@ -24,6 +25,7 @@ class CatrobatCodeParserTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider validProgramProvider
    *
    * @param mixed $extracted_catrobat_program
@@ -68,6 +70,7 @@ class CatrobatCodeParserTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider faultyProgramProvider
    *
    * @param mixed $faulty_program

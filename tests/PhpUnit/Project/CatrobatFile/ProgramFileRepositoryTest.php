@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\ProgramFileRepository
  */
 class ProgramFileRepositoryTest extends TestCase

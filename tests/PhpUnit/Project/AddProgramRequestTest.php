@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\AddProgramRequest
  */
 class AddProgramRequestTest extends TestCase

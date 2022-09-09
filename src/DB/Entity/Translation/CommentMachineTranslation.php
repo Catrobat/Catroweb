@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 /**
  * @ORM\Entity
  * @ORM\Table(name="user_comment_machine_translation")
+ *
  * @HasLifecycleCallbacks
  */
 class CommentMachineTranslation extends MachineTranslation

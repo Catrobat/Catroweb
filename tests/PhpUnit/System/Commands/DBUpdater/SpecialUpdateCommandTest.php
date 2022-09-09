@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * Class SpecialUpdateCommand.
  *
  * @internal
+ *
  * @covers \App\System\Commands\DBUpdater\SpecialUpdateCommand
  */
 class SpecialUpdateCommandTest extends KernelTestCase
@@ -27,6 +28,7 @@ class SpecialUpdateCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ class SpecialUpdateCommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

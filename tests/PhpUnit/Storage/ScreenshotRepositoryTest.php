@@ -15,6 +15,7 @@ use Symfony\Component\Finder\Finder;
 
 /**
  * @internal
+ *
  * @covers  \App\Storage\ScreenshotRepository
  */
 class ScreenshotRepositoryTest extends TestCase
