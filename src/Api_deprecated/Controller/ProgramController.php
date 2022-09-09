@@ -26,7 +26,6 @@ class ProgramController extends AbstractController
   #[Route(path: '/api/projects/getInfoById.json', name: 'api_info_by_id', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function showProgramAction(Request $request, ProgramManager $program_manager): JsonResponse|ProgramListResponse
   {
-    /** @var ProgramManager $program_manager */
     $id = (string) $request->query->get('id', '0');
     $programs = [];
     $program = $program_manager->find($id);

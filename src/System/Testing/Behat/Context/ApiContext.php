@@ -1491,7 +1491,6 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
 
     $returned_user = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $expected_user = $table->getHash();
     $stored_users = $this->getStoredUsers();
 
     $stored_user = $this->findUser($stored_users, $returned_user['username']);
@@ -1898,12 +1897,8 @@ class ApiContext implements Context
   public function iUploadThisProgramWithId(string $id, string $api_version): void
   {
     if ('1' == $api_version) {
-      if (array_key_exists('deviceLanguage', $this->request_parameters)) {
-        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat',
-          $api_version, null, $id);
-      } else {
-        $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
-      }
+      $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat',
+        $api_version, null, $id);
 
       $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
       $resp_array['projectId'] = $id;
@@ -2132,8 +2127,7 @@ class ApiContext implements Context
    */
   public function iUseThePostParameters(TableNode $table): void
   {
-    $values = $table->getRowsHash();
-    $this->request_parameters = $values;
+    $this->request_parameters = $table->getRowsHash();
   }
 
   /**
@@ -2142,8 +2136,7 @@ class ApiContext implements Context
    */
   public function iUseTheGetParameters(TableNode $table): void
   {
-    $values = $table->getRowsHash();
-    $this->request_parameters = $values;
+    $this->request_parameters = $table->getRowsHash();
   }
 
   /**
@@ -2715,7 +2708,7 @@ class ApiContext implements Context
     $programs = array_merge($this->dataFixturesContext->getPrograms(), $this->new_uploaded_projects);
     $projects = [];
     /** @var Program $program */
-    foreach ($programs as $program_index => $program) {
+    foreach ($programs as $program) {
       if (!$this->expectProgram($expected_programs, $program->getName())) {
         continue;
       }
@@ -2744,7 +2737,7 @@ class ApiContext implements Context
     $programs = $this->dataFixturesContext->getFeaturedPrograms();
     $projects = [];
     /** @var FeaturedProgram $featured_program */
-    foreach ($programs as $program_index => $featured_program) {
+    foreach ($programs as $featured_program) {
       if (!$this->expectProgram($expected_programs, $featured_program->getProgram()->getName())) {
         continue;
       }
@@ -2774,7 +2767,7 @@ class ApiContext implements Context
   {
     $programs = $this->dataFixturesContext->getMediaFiles();
     $projects = [];
-    foreach ($programs as $program_index => $program) {
+    foreach ($programs as $program) {
       if (!$this->expectProgram($expected_programs, $program['name'])) {
         continue;
       }

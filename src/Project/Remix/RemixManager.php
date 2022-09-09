@@ -93,7 +93,7 @@ class RemixManager
       $program->setRemixMigratedAt(TimeUtils::getDateTime());
       $this->entity_manager->persist($program);
 
-      foreach ($all_program_remix_relations as $uniqueKey => $program_remix_relation) {
+      foreach ($all_program_remix_relations as $program_remix_relation) {
         $this->entity_manager->persist($program_remix_relation);
       }
 
