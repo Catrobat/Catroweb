@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7761e5f6a7afa93a4601e4e3b4931698",
+    "content-hash": "62ec1340a2eb4986abf063b6bc3d2b7a",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7520,27 +7520,23 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "1.12.0",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "1565342811e2c0adea2f5ce36ba98cac2f40ab57"
+                "reference": "9d8eb86fe28868744f2664ac452f26e5b0a1bb7e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/1565342811e2c0adea2f5ce36ba98cac2f40ab57",
-                "reference": "1565342811e2c0adea2f5ce36ba98cac2f40ab57",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/9d8eb86fe28868744f2664ac452f26e5b0a1bb7e",
+                "reference": "9d8eb86fe28868744f2664ac452f26e5b0a1bb7e",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.4 || ^8.0",
-                "sonata-project/doctrine-extensions": "^1.9.1 || ^2.0",
-                "symfony/config": "^4.4 || ^5.4 || ^6.0",
-                "symfony/twig-bridge": "^4.4 || ^5.4 || ^6.0",
-                "twig/twig": "^2.6 || ^3.0"
-            },
-            "conflict": {
-                "sonata-project/core-bundle": ">=3.13"
+                "php": "^8.0",
+                "symfony/config": "^5.4 || ^6.0",
+                "symfony/twig-bridge": "^5.4 || ^6.0",
+                "twig/twig": "^3.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.4",
@@ -7555,22 +7551,17 @@
                 "psalm/plugin-phpunit": "^0.16",
                 "psalm/plugin-symfony": "^3.0",
                 "rector/rector": "^0.13",
-                "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
-                "symfony/dependency-injection": "^4.4 || ^5.4 || ^6.0",
-                "symfony/framework-bundle": "^4.4 || ^5.4 || ^6.0",
-                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.0",
-                "symfony/http-kernel": "^4.4.13 || ^5.4 || ^6.0",
+                "symfony/browser-kit": "^5.4 || ^6.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0",
+                "symfony/framework-bundle": "^5.4 || ^6.0",
+                "symfony/http-foundation": "^5.4 || ^6.0",
+                "symfony/http-kernel": "^5.4 || ^6.0",
                 "symfony/phpunit-bridge": "^6.1",
-                "symfony/translation": "^4.4 || ^5.4 || ^6.0",
-                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.0",
+                "symfony/translation": "^5.4 || ^6.0",
+                "symfony/twig-bundle": "^5.4 || ^6.0",
                 "vimeo/psalm": "^4.7.2"
             },
             "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.x-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
                     "Sonata\\Twig\\": "src/",
@@ -7601,7 +7592,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/1.12.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/2.0.0"
             },
             "funding": [
                 {
@@ -7621,7 +7612,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-07-28T14:22:46+00:00"
+            "time": "2022-08-01T05:24:29+00:00"
         },
         {
             "name": "sonata-project/user-bundle",
@@ -19088,5 +19079,5 @@
         "ext-posix": "8.1",
         "ext-zip": "8.1"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
