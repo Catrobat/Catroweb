@@ -66,10 +66,10 @@ class FeaturedRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return mixed
    */
   public function getFeaturedProgramCount(string $flavor, bool $for_ios = false)
   {
@@ -110,10 +110,10 @@ class FeaturedRepository extends ServiceEntityRepository
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
-   *
-   * @return mixed
    */
   public function getFeaturedItemCount(string $flavor)
   {
@@ -182,7 +182,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null, string $alias = 'e'): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null): QueryBuilder
   {
     if (null === $max_version || '' === $max_version) {
       return $query_builder;

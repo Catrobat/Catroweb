@@ -15,9 +15,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class DefaultTestCase extends KernelTestCase
 {
   /**
-   * @throws ReflectionException
-   *
    * @return mixed
+   *
+   * @throws ReflectionException
    */
   public function invokeMethod(MockObject &$object, string $methodName, array $parameters = [])
   {
@@ -29,14 +29,9 @@ class DefaultTestCase extends KernelTestCase
   }
 
   /**
-   * @param mixed $class
-   * @param mixed $instance
-   * @param mixed $property
-   * @param mixed $value
-   *
    * @throws ReflectionException
    */
-  public static function mockProperty($class, $instance, $property, $value): void
+  public static function mockProperty(mixed $class, mixed $instance, mixed $property, mixed $value): void
   {
     $reflection = new ReflectionClass($class);
     $property = $reflection->getProperty($property);

@@ -190,11 +190,9 @@ class OAuthService
   }
 
   /**
-   * @param mixed $googleId
-   *
    * @throws Exception
    */
-  private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, $googleId, string $googleUsername, string $locale): void
+  private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, mixed $googleId, string $googleUsername, string $locale): void
   {
     $violations = $this->validateOAuthUser($request, $retArray);
     if (0 === count($violations)) {

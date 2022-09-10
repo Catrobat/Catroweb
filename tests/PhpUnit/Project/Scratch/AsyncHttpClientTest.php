@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\Scratch\AsyncHttpClient
  */
 class AsyncHttpClientTest extends TestCase

@@ -11,6 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\Base\AbstractApiController
  */
 final class AbstractApiControllerTest extends DefaultTestCase
@@ -27,6 +28,7 @@ final class AbstractApiControllerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ final class AbstractApiControllerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -46,6 +49,7 @@ final class AbstractApiControllerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void

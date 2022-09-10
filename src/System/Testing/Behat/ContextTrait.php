@@ -542,12 +542,9 @@ trait ContextTrait
   }
 
   /**
-   * @param mixed $parameters
-   * @param mixed $is_embroidery
-   *
    * @throws Exception
    */
-  public function generateProgramFileWith($parameters, $is_embroidery = false): string
+  public function generateProgramFileWith(mixed $parameters, mixed $is_embroidery = false): string
   {
     $filesystem = new Filesystem();
     FileHelper::emptyDirectory(sys_get_temp_dir().'/program_generated/');
@@ -660,10 +657,7 @@ trait ContextTrait
     return $flavor;
   }
 
-  /**
-   * @param mixed $path
-   */
-  public function getTempCopy($path): bool|string
+  public function getTempCopy(mixed $path): bool|string
   {
     $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
     copy($path, $temp_path);

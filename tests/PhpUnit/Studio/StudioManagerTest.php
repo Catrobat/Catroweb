@@ -19,6 +19,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class StudioManagerTest extends DefaultTestCase
@@ -78,6 +79,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -88,6 +90,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCreateDeleteStudio(): void
@@ -105,6 +108,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testEditStudio(): void
@@ -118,6 +122,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testAddAndRemoveStudioUsers(): void
@@ -135,6 +140,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testChangeStudioUserRole(): void
@@ -153,6 +159,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testChangeStudioUserStatus(): void
@@ -170,6 +177,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testAddEditRemoveStudioComment(): void
@@ -211,6 +219,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    *
    * @throws Exception
@@ -242,6 +251,7 @@ class StudioManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testAddRemoveStudioCommentReplies(): void

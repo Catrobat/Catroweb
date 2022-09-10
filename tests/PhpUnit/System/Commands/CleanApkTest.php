@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * Class ClearExtractedProjectsTest.
  *
  * @internal
+ *
  * @covers \App\System\Commands\Maintenance\CleanApkCommand
  */
 class CleanApkTest extends KernelTestCase

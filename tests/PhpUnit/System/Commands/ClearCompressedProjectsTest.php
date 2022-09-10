@@ -12,6 +12,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * Class ClearCompressedProjectsTest.
  *
  * @internal
+ *
  * @covers \App\System\Commands\Maintenance\CleanCompressedProjectsCommand
  */
 class ClearCompressedProjectsTest extends KernelTestCase

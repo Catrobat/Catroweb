@@ -12,6 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
  * @covers \App\Admin\Tools\Logs\Controller\LogsController
  */
 class LogsControllerTest extends DefaultTestCase
@@ -86,6 +87,7 @@ class LogsControllerTest extends DefaultTestCase
 
   /**
    * @throws ReflectionException
+   *
    * @dataProvider getLogFileContentDataProvider
    */
   public function testGetLogFileContent(array $actualFileLines, array $searchFilters, array $expectedLines): void

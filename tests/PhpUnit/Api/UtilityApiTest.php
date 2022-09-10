@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\UtilityApi
  */
 class UtilityApiTest extends DefaultTestCase
@@ -38,6 +39,7 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -48,6 +50,7 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -57,6 +60,7 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -66,6 +70,7 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -76,7 +81,9 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UtilityApi::healthGet
    */
   public function testHealthCheck(): void
@@ -91,7 +98,9 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UtilityApi::surveyLangCodeGet
    */
   public function testSurveyLangCodeGetNotFound(): void
@@ -111,7 +120,9 @@ class UtilityApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UtilityApi::surveyLangCodeGet
    */
   public function testSurveyLangCodeGet(): void

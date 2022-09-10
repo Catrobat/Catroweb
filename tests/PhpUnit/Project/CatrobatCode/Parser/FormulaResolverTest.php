@@ -9,12 +9,14 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\FormulaResolver
  */
 class FormulaResolverTest extends TestCase
 {
   /**
    * @test
+   *
    * @dataProvider formulaDataProvider
    *
    * @param mixed $formula_list_xml_properties

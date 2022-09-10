@@ -57,10 +57,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
 
-  /**
-   * @param mixed $object
-   */
-  public function getContainingImageUrls($object): array
+  public function getContainingImageUrls(mixed $object): array
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
@@ -82,10 +79,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     return $this->encodeFileNameOfPathsArray($image_paths);
   }
 
-  /**
-   * @param mixed $object
-   */
-  public function getContainingSoundUrls($object): array
+  public function getContainingSoundUrls(mixed $object): array
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
@@ -253,10 +247,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     ;
   }
 
-  /**
-   * @param mixed $paths
-   */
-  private function encodeFileNameOfPathsArray($paths): array
+  private function encodeFileNameOfPathsArray(mixed $paths): array
   {
     $encoded_paths = [];
     foreach ($paths as $path) {

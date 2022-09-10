@@ -45,9 +45,6 @@ class RemixSubgraphManipulator
 
     // case backward relation:
     foreach ($backward_parent_ids as $backward_parent_id) {
-      /**
-       * @var Program
-       */
       $parent_program = $this->program_repository->find($backward_parent_id);
       $program_remix_backward_relation = new ProgramRemixBackwardRelation($parent_program, $program);
       $unique_key = $program_remix_backward_relation->getUniqueKey();
@@ -86,7 +83,7 @@ class RemixSubgraphManipulator
       }
     }
 
-    foreach ($all_program_remix_relations as $uniqueKey => $program_remix_relation) {
+    foreach ($all_program_remix_relations as $program_remix_relation) {
       $this->entity_manager->detach($program_remix_relation);
       $this->entity_manager->persist($program_remix_relation);
       $this->entity_manager->flush();

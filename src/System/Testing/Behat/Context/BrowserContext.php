@@ -49,15 +49,12 @@ class BrowserContext extends MinkContext implements Context
   // --------------------------------------------------------------------------------------------------------------------
   //  Assert Page Content
   // --------------------------------------------------------------------------------------------------------------------
-
   /**
    * @Given /^the element "([^"]*)" should not exist$/
    *
-   * @param mixed $locator
-   *
    * @throws ExpectationException
    */
-  public function theElementShouldNotExist($locator): void
+  public function theElementShouldNotExist(mixed $locator): void
   {
     $this->assertSession()->elementNotExists('css', $locator);
   }
@@ -65,21 +62,17 @@ class BrowserContext extends MinkContext implements Context
   /**
    * @Given /^the element "([^"]*)" should exist$/
    *
-   * @param mixed $locator
-   *
    * @throws ElementNotFoundException
    */
-  public function theElementShouldExist($locator): void
+  public function theElementShouldExist(mixed $locator): void
   {
     $this->assertSession()->elementExists('css', $locator);
   }
 
   /**
    * @Given /^the element "([^"]*)" should not be visible$/
-   *
-   * @param mixed $locator
    */
-  public function theElementShouldNotBeVisible($locator): void
+  public function theElementShouldNotBeVisible(mixed $locator): void
   {
     $element = $this->getSession()->getPage()->find('css', $locator);
     Assert::assertNotNull($element);
@@ -88,13 +81,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^the element "([^"]*)" should have (a|no) attribute "([^"]*)" with value "([^"]*)"$/
-   *
-   * @param mixed $locator
-   * @param mixed $should_have
-   * @param mixed $attribute
-   * @param mixed $value
    */
-  public function theElementShouldHaveAttributeWith($locator, $should_have, $attribute, $value): void
+  public function theElementShouldHaveAttributeWith(mixed $locator, mixed $should_have, mixed $attribute, mixed $value): void
   {
     $element = $this->getSession()->getPage()->find('css', $locator);
 
@@ -112,10 +100,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^at least one "([^"]*)" element should be visible$/
-   *
-   * @param mixed $locator
    */
-  public function atLeastOneElementShouldBeVisible($locator): void
+  public function atLeastOneElementShouldBeVisible(mixed $locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $e) {
@@ -129,10 +115,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then project :id is missing its files
-   *
-   * @param mixed $id
    */
-  public function projectIsMissingItsFiles($id): void
+  public function projectIsMissingItsFiles(mixed $id): void
   {
     $this->getFileRepository()->deleteProjectExtractFiles($id);
     $this->getFileRepository()->deleteProjectZipFile($id);
@@ -140,10 +124,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^no "([^"]*)" element should be visible$/
-   *
-   * @param mixed $locator
    */
-  public function noElementShouldBeVisible($locator): void
+  public function noElementShouldBeVisible(mixed $locator): void
   {
     $elements = $this->getSession()->getPage()->findAll('css', $locator);
     foreach ($elements as $element) {
@@ -154,11 +136,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^the element "([^"]*)" should have type "([^"]*)"$/
-   *
-   * @param mixed $locator
-   * @param mixed $expected_type
    */
-  public function theElementShouldHaveType($locator, $expected_type): void
+  public function theElementShouldHaveType(mixed $locator, mixed $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
     $type = $page->find('css', $locator)->getAttribute('type');
@@ -167,11 +146,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^the element "([^"]*)" should not have type "([^"]*)"$/
-   *
-   * @param mixed $element
-   * @param mixed $expected_type
    */
-  public function theElementShouldNotHaveType($element, $expected_type): void
+  public function theElementShouldNotHaveType(mixed $element, mixed $expected_type): void
   {
     $page = $this->getMink()->getSession()->getPage();
     $type = $page->find('css', $element)->getAttribute('type');
@@ -180,10 +156,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^the element "([^"]*)" should not be disabled$/
-   *
-   * @param mixed $element
    */
-  public function theElementShouldNotBeDisabled($element): void
+  public function theElementShouldNotBeDisabled(mixed $element): void
   {
     $page = $this->getMink()->getSession()->getPage();
     $disabled = $page->find('css', $element)->getAttribute('disabled');
@@ -192,10 +166,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^the element "([^"]*)" should be disabled$/
-   *
-   * @param mixed $element
    */
-  public function theElementShouldBeDisabled($element): void
+  public function theElementShouldBeDisabled(mixed $element): void
   {
     $page = $this->getMink()->getSession()->getPage();
     $disabled = $page->find('css', $element)->getAttribute('disabled');
@@ -204,10 +176,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Given /^the element "([^"]*)" should be visible$/
-   *
-   * @param mixed $element
    */
-  public function theElementShouldBeVisible($element): void
+  public function theElementShouldBeVisible(mixed $element): void
   {
     $element = $this->getSession()->getPage()->find('css', $element);
     Assert::assertNotNull($element);
@@ -217,17 +187,14 @@ class BrowserContext extends MinkContext implements Context
   // --------------------------------------------------------------------------------------------------------------------
   //  Interacting with the web page
   // --------------------------------------------------------------------------------------------------------------------
-
   /**
    * @When /^I click "([^"]*)"$/
    *
-   * @param mixed $arg1
-   *
    * @throws ElementNotFoundException
    */
-  public function iClick($arg1): void
+  public function iClick(mixed $arg1): void
   {
-    $arg1 = trim($arg1);
+    $arg1 = trim((string) $arg1);
     $this->assertSession()->elementExists('css', $arg1);
     $this->getSession()->getPage()->find('css', $arg1)->click();
   }
@@ -242,11 +209,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^I enter "([^"]*)" into visible "([^"]*)"$/
-   *
-   * @param mixed $text
-   * @param mixed $locator
    */
-  public function iEnterIntoVisibleField($text, $locator): void
+  public function iEnterIntoVisibleField(mixed $text, mixed $locator): void
   {
     $fields = $this->getSession()->getPage()->findAll('css', $locator);
     Assert::assertLessThanOrEqual(1, count($fields), sprintf("No field with selector '%s' found", $locator));
@@ -268,18 +232,15 @@ class BrowserContext extends MinkContext implements Context
    *
    * @Then /^the field "(?P<field>(?:[^"]|\\")*)" should (?P<not>(?:|not ))be valid$/
    *
-   * @param mixed $field
-   * @param mixed $not
-   *
    * @throws DriverException
    * @throws UnsupportedDriverActionException
    */
-  public function fieldValidationState($field, $not): void
+  public function fieldValidationState(mixed $field, mixed $not): void
   {
     $field = $this->fixStepArgument($field);
     $field = $this->getSession()->getPage()->findField($field);
     $valid = $this->getSession()->getDriver()->evaluateScript('return document.evaluate("'.str_replace('"', '\\"', $field->getXpath()).'", document, null, XPathResult.ANY_TYPE, null).iterateNext().checkValidity();');
-    if ('not' === trim($not)) {
+    if ('not' === trim((string) $not)) {
       Assert::assertFalse($valid, 'Field needs to be invalid but was valid');
     } else {
       Assert::assertTrue($valid, 'Field needs to be valid but was invalid');
@@ -288,10 +249,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^I select package "([^"]*)" for media package category$/
-   *
-   * @param mixed $arg1
    */
-  public function iSelectPackageForMediaPackageCategory($arg1): void
+  public function iSelectPackageForMediaPackageCategory(mixed $arg1): void
   {
     $this->getSession()->getPage()->find('css', '.select2-selection__rendered')->click();
 
@@ -306,10 +265,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^I select flavor "([^"]*)" for media package file$/
-   *
-   * @param mixed $arg1
    */
-  public function iSelectFlavorForMediaPackageFile($arg1): void
+  public function iSelectFlavorForMediaPackageFile(mixed $arg1): void
   {
     $this->getSession()->getPage()->findAll('css', '.select2-selection__rendered')[1]->click();
 
@@ -325,10 +282,8 @@ class BrowserContext extends MinkContext implements Context
   /**
    * @Then /^I select flavor "([^"]*)" for example program/
    * @Then /^I select flavor "([^"]*)" for example project/
-   *
-   * @param mixed $arg1
    */
-  public function iSelectFlavorForExampleProgram($arg1): void
+  public function iSelectFlavorForExampleProgram(mixed $arg1): void
   {
     $this->getSession()->getPage()->find('css', '.select2-container')->click();
 
@@ -423,11 +378,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^I choose "([^"]*)" from selector "([^"]*)"$/
-   *
-   * @param mixed $text
-   * @param mixed $selector
    */
-  public function iChooseItemFromSelector($text, $selector): void
+  public function iChooseItemFromSelector(mixed $text, mixed $selector): void
   {
     $this->getSession()->getPage()->find('css', $selector)->click();
 
@@ -446,15 +398,12 @@ class BrowserContext extends MinkContext implements Context
   // --------------------------------------------------------------------------------------------------------------------
   //  WAIT - Sometimes it is necessary to wait to prevent timing issues
   // --------------------------------------------------------------------------------------------------------------------
-
   /**
    * Try to use this function only if it is not possible to define a waiting condition.
    *
    * @When /^I wait (\d+) milliseconds$/
-   *
-   * @param mixed $milliseconds
    */
-  public function iWaitMilliseconds($milliseconds): void
+  public function iWaitMilliseconds(mixed $milliseconds): void
   {
     $this->getSession()->wait($milliseconds);
   }
@@ -483,11 +432,9 @@ class BrowserContext extends MinkContext implements Context
   /**
    * @Then I wait for the element :selector to be visible
    *
-   * @param mixed $locator
-   *
    * @throws ResponseTextException
    */
-  public function iWaitForTheElementToBeVisible($locator): void
+  public function iWaitForTheElementToBeVisible(mixed $locator): void
   {
     $tries = 100;
     $delay = 100000; // every 1/10 second
@@ -512,11 +459,9 @@ class BrowserContext extends MinkContext implements Context
   /**
    * @Then I wait for the element :selector to be not visible
    *
-   * @param mixed $locator
-   *
    * @throws ResponseTextException
    */
-  public function iWaitForTheElementToBeNotVisible($locator): void
+  public function iWaitForTheElementToBeNotVisible(mixed $locator): void
   {
     $element = $this->getSession()->getPage()->find('css', $locator);
     if (null === $element) {
@@ -541,11 +486,9 @@ class BrowserContext extends MinkContext implements Context
    *
    * @Then I wait for the element :selector to appear and if so to disappear again
    *
-   * @param mixed $locator
-   *
    * @throws ResponseTextException
    */
-  public function iWaitForTheElementToAppearAndDisappear($locator): void
+  public function iWaitForTheElementToAppearAndDisappear(mixed $locator): void
   {
     $tries = 100;
     $delay = 100_000; // every 1/10 second
@@ -581,12 +524,9 @@ class BrowserContext extends MinkContext implements Context
   /**
    * @Then I wait for the element :selector to contain :text
    *
-   * @param mixed $locator
-   * @param mixed $text
-   *
    * @throws ResponseTextException
    */
-  public function iWaitForTheElementToContain($locator, $text): void
+  public function iWaitForTheElementToContain(mixed $locator, mixed $text): void
   {
     /** @var NodeElement $element */
     $element = $this->getSession()->getPage()->find('css', $locator);
@@ -631,10 +571,8 @@ class BrowserContext extends MinkContext implements Context
 
   /**
    * @Then /^I click on xpath "([^"]*)"$/
-   *
-   * @param mixed $arg1
    */
-  public function iClickOnXpath($arg1): void
+  public function iClickOnXpath(mixed $arg1): void
   {
     $this->assertSession()->elementExists('xpath', $arg1);
     $this->getSession()->getPage()->find('xpath', $arg1)->click();

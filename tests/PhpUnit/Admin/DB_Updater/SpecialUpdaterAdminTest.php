@@ -9,6 +9,7 @@ use Sonata\AdminBundle\Admin\AbstractAdmin;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class SpecialUpdaterAdminTest extends DefaultTestCase
@@ -25,6 +26,7 @@ class SpecialUpdaterAdminTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -35,6 +37,7 @@ class SpecialUpdaterAdminTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

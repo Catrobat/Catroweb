@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedScene
  */
 class ParsedSceneTest extends TestCase
@@ -26,6 +27,7 @@ class ParsedSceneTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -47,6 +49,7 @@ class ParsedSceneTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getNameMustReturnCertainString(): void

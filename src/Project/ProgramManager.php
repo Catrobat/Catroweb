@@ -433,12 +433,12 @@ class ProgramManager
   }
 
   /**
+   * @return mixed
+   *
    * @throws NoResultException
    * @throws NonUniqueResultException
    *
    * ATTENTION! Internal use only! (no visible/private/debug check)
-   *
-   * @return mixed
    */
   public function findNext(string $previous_program_id)
   {

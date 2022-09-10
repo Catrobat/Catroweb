@@ -35,7 +35,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     }
 
     $previous_parent_string = '';
-    foreach ($all_parent_program_ids as $parent_program_index => $all_parent_program_id) {
+    foreach ($all_parent_program_ids as $all_parent_program_id) {
       $parent_program_data = $all_parent_program_id;
       $parent_id = $parent_program_data[0];
       $current_parent_url = '' === $parent_program_data[1]
@@ -62,11 +62,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     return $extracted_catrobat_file;
   }
 
-  /**
-   * @param mixed $previous_parent_string
-   * @param mixed $current_parent_url
-   */
-  public function generateRemixUrlsStringForMergedProgram($previous_parent_string, $current_parent_url): string
+  public function generateRemixUrlsStringForMergedProgram(mixed $previous_parent_string, mixed $current_parent_url): string
   {
     if ('' == $previous_parent_string) {
       return $current_parent_url;

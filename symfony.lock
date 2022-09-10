@@ -448,9 +448,6 @@
     "phpseclib/phpseclib": {
         "version": "2.0.25"
     },
-    "phpspec/prophecy": {
-        "version": "v1.10.3"
-    },
     "phpstan/phpdoc-parser": {
         "version": "1.2.0"
     },

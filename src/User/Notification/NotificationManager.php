@@ -10,19 +10,13 @@ class NotificationManager
   {
   }
 
-  /**
-   * @param mixed $notification
-   */
-  public function addNotification($notification): void
+  public function addNotification(mixed $notification): void
   {
     $this->em->persist($notification);
     $this->em->flush();
   }
 
-  /**
-   * @param mixed $notifications
-   */
-  public function addNotifications($notifications): void
+  public function addNotifications(mixed $notifications): void
   {
     foreach ($notifications as $notification) {
       $this->em->persist($notification);
@@ -30,19 +24,13 @@ class NotificationManager
     $this->em->flush();
   }
 
-  /**
-   * @param mixed $notification
-   */
-  public function removeNotification($notification): void
+  public function removeNotification(mixed $notification): void
   {
     $this->em->remove($notification);
     $this->em->flush();
   }
 
-  /**
-   * @param mixed $notifications
-   */
-  public function markSeen($notifications): void
+  public function markSeen(mixed $notifications): void
   {
     foreach ($notifications as $notification) {
       $notification->setSeen(true);
@@ -51,10 +39,7 @@ class NotificationManager
     $this->em->flush();
   }
 
-  /**
-   * @param mixed $notifications
-   */
-  public function deleteNotifications($notifications): void
+  public function deleteNotifications(mixed $notifications): void
   {
     foreach ($notifications as $notification) {
       $this->em->remove($notification);

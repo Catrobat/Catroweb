@@ -12,6 +12,7 @@ use ReflectionException;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\Base\AbstractResponseManager
  */
 final class AbstractResponseManagerTest extends DefaultTestCase
@@ -28,6 +29,7 @@ final class AbstractResponseManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -38,6 +40,7 @@ final class AbstractResponseManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -47,6 +50,7 @@ final class AbstractResponseManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -56,6 +60,7 @@ final class AbstractResponseManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    *
    * @throws ReflectionException

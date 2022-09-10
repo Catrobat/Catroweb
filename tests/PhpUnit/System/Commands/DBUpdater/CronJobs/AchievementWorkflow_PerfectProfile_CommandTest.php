@@ -11,6 +11,7 @@ use Symfony\Component\Console\Command\Command;
  * Class AchievementWorkflow_PerfectProfile_Command.
  *
  * @internal
+ *
  * @covers \App\System\Commands\DBUpdater\CronJobs\AchievementWorkflow_PerfectProfile_Command
  */
 class AchievementWorkflow_PerfectProfile_CommandTest extends KernelTestCase
@@ -27,6 +28,7 @@ class AchievementWorkflow_PerfectProfile_CommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -37,6 +39,7 @@ class AchievementWorkflow_PerfectProfile_CommandTest extends KernelTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
