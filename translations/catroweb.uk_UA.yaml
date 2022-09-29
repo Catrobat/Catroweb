@@ -8,10 +8,10 @@ createNewPassword: Створити новий пароль
 accountSettings: Налаштування облікового запису
 email: Ел.Пошта
 aboutPocketCode: Про Pocket Code
-about: Про Сайт
+about: Про нас
 education: Навчання
 chat: Чат та форуми
-others: Інші
+others: Інше
 tutorials: Довідка
 googlePlay: Google Play Store
 iosAppStore: iOS App store
@@ -636,7 +636,7 @@ codeview:
   scenes: 'Сцени'
   scripts: 'Скрипти'
   bricks: 'Цеглини'
-  objects: 'Актори та об''єкти'
+  objects: 'Персонажі та об''єкти'
   looks: 'Вигляди'
   sounds: 'Звуки'
   globals: 'Глобальні'
@@ -776,7 +776,7 @@ achievements:
     type:
       bronze_user:
         title: 'Учень'
-        description: 'Підпишіться на когось і завантажте проєкт'
+        description: 'Підписатися на когось і завантажити проєкт'
       silver_user:
         title: 'Ремісник'
         description: 'Активний учасник протягом > 1 рік'
@@ -788,22 +788,22 @@ achievements:
         description: 'Активний учасник протягом > 7 років'
       perfect_profile:
         title: 'Ініціатива'
-        description: 'Додавання першого зображення профілю'
+        description: 'Додати зображення профілю'
       verified_developer:
         title: 'Початківець'
-        description: 'Створення облікового запису користувача'
+        description: 'Створити обліковий запис'
       coding_jam_09_2021:
         title: "Кодування Jam '21"
         description: "Учасник кодування Jam 2021"
       bilingual:
-        title: "Двомовні"
-        description: "Перекладайте свої проєкти на 2 мови"
+        title: "Двомовний"
+        description: "Перекласти свої проєкти на 2 мови"
       trilingual:
         title: "Тримовний"
-        description: "Перекладайте свої проєкти на 3 мови"
+        description: "Перекласти свої проєкти на 3 мови"
       linguist:
         title: "Лінгвіст"
-        description: "Перекладайте свої проєкти на 5 мов"
+        description: "Перекласти свої проєкти на 5 мов"
 tags:
   title: '{0} |{1} Мітка |]1,Inf] Мітки'
   tag:
