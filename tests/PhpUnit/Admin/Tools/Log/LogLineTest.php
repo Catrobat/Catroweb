@@ -10,6 +10,7 @@ use ReflectionException;
 
 /**
  * @internal
+ *
  * @covers \App\Admin\Tools\Logs\LogLine
  */
 class LogLineTest extends DefaultTestCase

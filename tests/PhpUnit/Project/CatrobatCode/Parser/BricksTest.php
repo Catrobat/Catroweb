@@ -11,6 +11,7 @@ use SimpleXMLElement;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class BricksTest extends TestCase
@@ -41,6 +42,7 @@ class BricksTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -67,7 +69,9 @@ class BricksTest extends TestCase
 
   /**
    * @test
+   *
    * @depends      mustHaveMethod
+   *
    * @dataProvider provideBrickXMLProperties
    *
    * @param mixed $brick_xml_properties
@@ -116,6 +120,7 @@ class BricksTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function factoryMustGenerateUnknownBrickOtherwise(): ?Brick

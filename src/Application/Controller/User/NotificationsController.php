@@ -148,7 +148,6 @@ class NotificationsController extends AbstractController
     if (!$user) {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
-    $notifications = null;
     if ('all' === $type) {
       $notifications = $notification_repo->findBy(['user' => $user], ['id' => 'DESC'], $limit, $offset);
     } else {

@@ -14,16 +14,13 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class UserResponseManager extends AbstractResponseManager
 {
-  private CookieService $cookie_service;
-
   public function __construct(
     TranslatorInterface $translator,
     SerializerInterface $serializer,
     ResponseCacheManager $response_cache_manager,
-    CookieService $cookie_service
+    private readonly CookieService $cookie_service
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
-    $this->cookie_service = $cookie_service;
   }
 
   public function createBasicUserDataResponse(User $user, ?string $attributes = null): BasicUserDataResponse

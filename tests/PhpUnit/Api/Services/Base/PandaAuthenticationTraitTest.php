@@ -10,6 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @covers \Tests\PhpUnit\Api\Services\Base\PandaAuthenticationTraitTestClass
  */
 final class PandaAuthenticationTraitTest extends DefaultTestCase
@@ -23,6 +24,7 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestTraitExists(): void
@@ -32,8 +34,11 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Base\PandaAuthenticationTrait::setPandaAuth
+   *
    * @dataProvider dataProviderPandaAuth
    *
    * @throws Exception

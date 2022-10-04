@@ -12,6 +12,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\Projects\ProjectsRequestValidator
  */
 final class ProjectsRequestValidatorTest extends DefaultTestCase
@@ -28,6 +29,7 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -38,6 +40,7 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -47,7 +50,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateName
    *
    * @throws \ReflectionException
@@ -68,7 +73,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateName
    *
    * @throws \ReflectionException
@@ -88,7 +95,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateName
    *
    * @throws \ReflectionException
@@ -108,7 +117,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateDescription
    *
    * @throws \ReflectionException
@@ -129,7 +140,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateDescription
    *
    * @throws \ReflectionException
@@ -149,7 +162,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateCredits
    *
    * @throws \ReflectionException
@@ -170,7 +185,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateCredits
    *
    * @throws \ReflectionException
@@ -190,7 +207,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateScreenshot
    *
    * @throws \ReflectionException
@@ -209,7 +228,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateCredits
    *
    * @throws \ReflectionException
@@ -239,7 +260,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateUpdateRequest
    */
   public function testValidateUpdateRequest(): void
@@ -263,7 +286,9 @@ final class ProjectsRequestValidatorTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\Projects\ProjectsRequestValidator::validateUpdateRequest
    */
   public function testValidateUpdateRequestInvalid(): void

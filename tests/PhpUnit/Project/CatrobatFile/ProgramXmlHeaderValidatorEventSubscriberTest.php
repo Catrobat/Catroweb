@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\ProgramXmlHeaderValidatorEventSubscriber
  */
 class ProgramXmlHeaderValidatorEventSubscriberTest extends TestCase

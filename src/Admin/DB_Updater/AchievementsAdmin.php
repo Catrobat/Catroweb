@@ -35,10 +35,7 @@ class AchievementsAdmin extends AbstractAdmin
     ;
   }
 
-  /**
-   * @param mixed $object
-   */
-  public function getUnlockedByCount($object): int
+  public function getUnlockedByCount(mixed $object): int
   {
     $id = $object->getId();
 

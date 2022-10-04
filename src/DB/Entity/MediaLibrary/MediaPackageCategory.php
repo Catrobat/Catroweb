@@ -68,9 +68,8 @@ class MediaPackageCategory implements \Stringable
           $string .= ', ';
         }
       }
-      $string .= ')';
 
-      return $string;
+      return $string.')';
     }
 
     return $this->name ?? '';

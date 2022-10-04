@@ -9,6 +9,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Project\Extension\ProjectExtensionEventSubscriber
  */
 class ProjectExtensionEventSubscriberTest extends DefaultTestCase
@@ -25,6 +26,7 @@ class ProjectExtensionEventSubscriberTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -35,6 +37,7 @@ class ProjectExtensionEventSubscriberTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void

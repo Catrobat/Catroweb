@@ -10,6 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\AuthenticationManager
  */
 final class AuthenticationManagerTest extends DefaultTestCase
@@ -26,6 +27,7 @@ final class AuthenticationManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void

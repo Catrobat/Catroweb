@@ -11,7 +11,6 @@ use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
-use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
@@ -225,26 +224,12 @@ class UserManager implements UserManagerInterface
     return $this->findOneBy(['confirmation_token' => $token]);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function getClass(): string
   {
     return User::class;
-  }
-
-  /**
-   * @deprecated without replacement
-   */
-  public function getTableName()
-  {
-    @trigger_error(sprintf(
-      'The "%s()" method is deprecated since sonata-project/sonata-doctrine-extensions 1.15'
-      .' and will be removed in version 2.0.',
-      __METHOD__
-    ), \E_USER_DEPRECATED);
-
-    $metadata = $this->entity_manager->getClassMetadata($this->getClass());
-    assert($metadata instanceof ClassMetadataInfo);
-
-    return $metadata->table['name'];
   }
 
   /**
@@ -256,31 +241,40 @@ class UserManager implements UserManagerInterface
   }
 
   /**
-   * @param mixed|null $limit
-   * @param mixed|null $offset
-   *
-   * @return User[]|array<User>
+   * {@inheritDoc}
    */
-  public function findBy(array $criteria, ?array $orderBy = null, $limit = null, $offset = null)
+  public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function findOneBy(array $criteria, ?array $orderBy = null): ?User
   {
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function find($id): ?User
   {
     return $this->user_repository->find($id);
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function create(): User
   {
     return new User();
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function save($entity, $andFlush = true): void
   {
     $this->entity_manager->persist($entity);
@@ -289,6 +283,9 @@ class UserManager implements UserManagerInterface
     }
   }
 
+  /**
+   * {@inheritDoc}
+   */
   public function delete($entity, $andFlush = true): void
   {
     $this->entity_manager->remove($entity);

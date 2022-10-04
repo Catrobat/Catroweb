@@ -11,6 +11,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\CatrobatFileCompressor
  */
 class CatrobatFileCompressorTest extends TestCase

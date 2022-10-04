@@ -16,6 +16,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\ProgramFileRepository
  */
 class ProgramFileRepositoryTest extends TestCase
@@ -51,14 +52,14 @@ class ProgramFileRepositoryTest extends TestCase
   {
     $this->expectException(Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
-    $this->program_file_repository->__construct(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
+    $this->program_file_repository = new ProgramFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
   }
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound2(): void
   {
     $this->expectException(Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
-    $this->program_file_repository->__construct($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
+    $this->program_file_repository = new ProgramFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
   }
 
   public function testStoresAFileToTheGivenDirectory(): void

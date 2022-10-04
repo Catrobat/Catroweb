@@ -9,6 +9,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\User\UserResponseManager
  */
 final class UserResponseManagerTest extends DefaultTestCase
@@ -25,6 +26,7 @@ final class UserResponseManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -35,6 +37,7 @@ final class UserResponseManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void

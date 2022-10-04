@@ -15,6 +15,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class HwiOauthUserProviderTest extends WebTestCase

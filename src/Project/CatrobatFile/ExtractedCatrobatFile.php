@@ -301,11 +301,8 @@ class ExtractedCatrobatFile
 
         $parent = null;
         $child = null;
-
-        if (null !== $program_repository) {
-          $parent = $program_repository->find($remix_data->getProgramId());
-          $child = $program_repository->find($program_id);
-        }
+        $parent = $program_repository->find($remix_data->getProgramId());
+        $child = $program_repository->find($program_id);
 
         if (null !== $parent && null !== $child) {
           $parent_upload_time = $parent->getUploadedAt();
@@ -364,10 +361,7 @@ class ExtractedCatrobatFile
     return $factory->createObject($objectTree);
   }
 
-  /**
-   * @param mixed $objectsToAdd
-   */
-  private function addObjectsToArray(array $objects, $objectsToAdd): array
+  private function addObjectsToArray(array $objects, mixed $objectsToAdd): array
   {
     foreach ($objectsToAdd as $object) {
       $objects[] = $object;

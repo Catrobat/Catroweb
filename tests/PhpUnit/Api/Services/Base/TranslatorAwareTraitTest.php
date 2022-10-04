@@ -10,6 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @covers \Tests\PhpUnit\Api\Services\Base\TranslatorAwareTraitTestClass
  */
 final class TranslatorAwareTraitTest extends DefaultTestCase
@@ -23,6 +24,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestTraitExists(): void
@@ -32,7 +34,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::__
    */
   public function test(): void
@@ -49,7 +53,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::trans
    */
   public function testTransSuccess(): void
@@ -68,7 +74,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::trans
    */
   public function testTransFailureHandling(): void
@@ -93,7 +101,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::sanitizeLocale
    *
    * @dataProvider dataProviderSanitizeLocale
@@ -125,7 +135,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::isLocaleAValidLocaleWithUnderscore
    *
    * @dataProvider dataProviderIsLocaleAValidLocaleWithUnderscore
@@ -154,7 +166,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::isLocaleAValidTwoLetterLocale
    *
    * @dataProvider dataProviderIsLocaleAValidTwoLetterLocale
@@ -182,7 +196,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::normalizeLocaleFormatToLocaleWithUnderscore
    *
    * @dataProvider dataProviderMapLocaleToLocaleWithUnderscore
@@ -205,7 +221,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapLocaleWithUnderscoreToTwoLetterCode
    *
    * @dataProvider dataProviderMapLocaleWithUnderscoreToTwoLetterCode
@@ -228,7 +246,9 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapTwoLetterCodeToLocaleWithUnderscore
    *
    * @dataProvider dataProviderMapTwoLetterCodeToLocaleWithUnderscore

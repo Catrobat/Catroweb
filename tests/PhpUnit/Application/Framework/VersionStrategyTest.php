@@ -10,6 +10,7 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Application\Framework\VersionStrategy
  */
 class VersionStrategyTest extends DefaultTestCase
@@ -26,6 +27,7 @@ class VersionStrategyTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -36,6 +38,7 @@ class VersionStrategyTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -45,6 +48,7 @@ class VersionStrategyTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -55,8 +59,11 @@ class VersionStrategyTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Application\Framework\VersionStrategy::getVersion
+   *
    * @dataProvider dataProviderGetVersion
    *
    * @throws ReflectionException
@@ -83,7 +90,9 @@ class VersionStrategyTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers       \App\Application\Framework\VersionStrategy::getVersion
    */
   public function testApplyVersion(): void

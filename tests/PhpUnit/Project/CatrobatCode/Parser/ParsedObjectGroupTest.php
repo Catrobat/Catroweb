@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedObjectGroup
  */
 class ParsedObjectGroupTest extends TestCase
@@ -27,6 +28,7 @@ class ParsedObjectGroupTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -48,6 +50,7 @@ class ParsedObjectGroupTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function isGroupMustReturnTrue(): void
@@ -57,6 +60,7 @@ class ParsedObjectGroupTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getObjectsMustReturnEmptyArrayOfParsedObject(): void
@@ -66,6 +70,7 @@ class ParsedObjectGroupTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function addObjectMustAddObjectToObjects(): void
@@ -80,6 +85,7 @@ class ParsedObjectGroupTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getNameMustReturnCertainString(): void

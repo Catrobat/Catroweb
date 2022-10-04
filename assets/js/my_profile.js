@@ -82,14 +82,17 @@ class OwnProfile {
   addProfilePictureChangeListenerToInput (input) {
     const self = this
     input.onchange = () => {
-      const loadingSpinner = document.getElementById('profile-loading-spinner-template').content.cloneNode(true)
+      let loadingSpinner
       if (this.avatarElement) {
-        this.avatarElement.appendChild(loadingSpinner)
+        const loadingSpinnerTemplate = document.getElementById('profile-loading-spinner-template').content
+        this.avatarElement.appendChild(loadingSpinnerTemplate.cloneNode(true))
+        loadingSpinner = this.avatarElement.getElementsByClassName(loadingSpinnerTemplate.children[0].className)[0]
       }
       const reader = new window.FileReader()
       reader.onerror = () => {
         if (loadingSpinner && self.avatarElement && loadingSpinner.parentElement === this.avatarElement) {
           this.avatarElement.removeChild(loadingSpinner)
+          loadingSpinner = null
         }
         MessageDialogs.showErrorMessage(myProfileConfiguration.messages.profilePictureInvalid)
       }
@@ -100,6 +103,7 @@ class OwnProfile {
         }, function () {
           if (loadingSpinner && self.avatarElement && loadingSpinner.parentElement === self.avatarElement) {
             self.avatarElement.removeChild(loadingSpinner)
+            loadingSpinner = null
           }
         })
       }

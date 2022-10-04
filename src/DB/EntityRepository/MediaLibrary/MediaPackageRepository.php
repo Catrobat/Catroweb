@@ -24,9 +24,9 @@ class MediaPackageRepository extends ServiceEntityRepository
    * @param string $url  The url under which it can be addressed. Only the last part of the url must be specified. E.g.
    *                     for a MediaPackage with name "Animals" use url "animals".
    *
-   * @throws Exception when an error occurs during creating
-   *
    * @return MediaPackage the created MediaPackage
+   *
+   * @throws Exception when an error occurs during creating
    */
   public function createMediaPackage(string $name, string $url): MediaPackage
   {

@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class AchievementsAdminControllerTest extends DefaultTestCase
@@ -24,6 +25,7 @@ class AchievementsAdminControllerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void

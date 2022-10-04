@@ -58,10 +58,7 @@ class ProjectsAdmin extends AbstractAdmin
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
   }
 
-  /**
-   * @param mixed $object
-   */
-  public function getThumbnailImageUrl($object): string
+  public function getThumbnailImageUrl(mixed $object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }

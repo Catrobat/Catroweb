@@ -8,6 +8,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers  \App\Security\TokenGenerator
  */
 class TokenGeneratorTest extends TestCase

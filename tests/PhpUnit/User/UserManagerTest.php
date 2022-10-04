@@ -17,6 +17,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @internal
+ *
  * @covers \App\User\UserManager
  */
 class UserManagerTest extends TestCase

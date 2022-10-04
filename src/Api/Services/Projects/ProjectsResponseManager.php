@@ -306,6 +306,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       'Content-Disposition',
       'attachment; filename="'.$id.'.catrobat"'
     );
+    $response->headers->set('Content-Type', 'application/zip');
 
     return $response;
   }

@@ -11,6 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedSceneProgram
  */
 class ParsedSceneProgramTest extends TestCase
@@ -26,6 +27,7 @@ class ParsedSceneProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -49,6 +51,7 @@ class ParsedSceneProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function hasScenesMustReturnTrue(): void
@@ -58,6 +61,7 @@ class ParsedSceneProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getCodeStatisticMustReturnCodeStatistic(): void
@@ -70,6 +74,7 @@ class ParsedSceneProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getScenesMustReturnArrayOfScenes(): void

@@ -10,6 +10,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  * Class CleanupTest.
  *
  * @internal
+ *
  * @covers \App\System\Commands\Maintenance\ArchiveLogsCommand
  */
 class ArchiveLogsTest extends KernelTestCase
