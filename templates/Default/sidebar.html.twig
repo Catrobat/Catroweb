@@ -111,6 +111,14 @@
     {% endif %}
 
     {# Always visible #}
+
+    <li class="nav-item">
+      <a class="nav-link" href="{{ url('media_library_overview') }}">
+        <span class="sidebar-link-icon material-icons">collections</span>
+        <span class="sidebar-link-text">{{ 'menu.mediaLibrary'|trans({}, "catroweb") }}</span>
+      </a>
+    </li>
+
     <li class="nav-item">
       <a class="nav-link" href="{{url('help')}}" id="btn-tutorials">
         <span class="sidebar-link-icon material-icons">help_outline</span>

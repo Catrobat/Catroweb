@@ -49,7 +49,7 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
       $this->cookie_service->clearCookie('BEARER');
       // RefreshBearerCookieOnKernelResponse will try to create a new Bearer or is going to remove the refresh token!
 
-      return new RedirectResponse($request->getBaseUrl());
+      return new RedirectResponse(empty($request->getBaseUrl()) ? '/' : $request->getBaseUrl());
     }
 
     return $response;
