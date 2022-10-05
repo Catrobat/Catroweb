@@ -87,6 +87,11 @@ class ProgramController extends AbstractController
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $program_comments = $this->findCommentsById($project);
+
+    foreach ($program_comments as $program_comment) {
+      $program_comment->nr_replies = $this->countByParentId($program_comment->getId());
+    }
+
     $program_details = $this->createProgramDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
       $referrer, $program_comments
@@ -390,6 +395,31 @@ class ProgramController extends AbstractController
     return new JsonResponse($repository->listDefinedLanguages($project));
   }
 
+  #[Route(path: 'program/comment/{id}', name: 'program_comment', methods: ['GET'])]
+  public function programCommentAction(Request $request, string $id): Response
+  {
+    $comment = $this->findCommentById($id);
+    if (null === $comment) {
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
+
+      return $this->redirectToRoute('index');
+    }
+
+    $replies = $this->findCommentRepliesById($id);
+    array_unshift($replies, $comment);
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($comment->getProgram()->getId());
+    $comments_avatars = $this->getCommentAvatars($replies);
+
+    return $this->render('Program/program_comment.html.twig', [
+      'comment' => $comment,
+      'replies' => $replies,
+      'commentAvatars' => $comments_avatars,
+      'isAdmin' => $this->isGranted('ROLE_ADMIN'),
+      'program' => $project,
+      'are_replies' => true,
+    ]);
+  }
+
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
   {
     if (!in_array($program->getId(), $viewed, true)) {
@@ -399,15 +429,8 @@ class ProgramController extends AbstractController
     }
   }
 
-  private function createProgramDetailsArray(Program $program,
-    array $active_like_types,
-    array $active_user_like_types,
-    int $total_like_count,
-    ?string $referrer,
-    array $program_comments): array
+  private function getCommentAvatars(array $program_comments): array
   {
-    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
-
     $comments_avatars = [];
     /** @var UserComment $comment */
     foreach ($program_comments as $comment) {
@@ -422,6 +445,20 @@ class ProgramController extends AbstractController
       }
     }
 
+    return $comments_avatars;
+  }
+
+  private function createProgramDetailsArray(Program $program,
+                                             array $active_like_types,
+                                             array $active_user_like_types,
+                                             int $total_like_count,
+                                             ?string $referrer,
+                                             array $program_comments): array
+  {
+    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
+
+    $comments_avatars = $this->getCommentAvatars($program_comments);
+
     return [
       'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($program->getId()),
       'downloadUrl' => $url,
@@ -434,7 +471,7 @@ class ProgramController extends AbstractController
       'id' => $program->getId(),
       'comments' => $program_comments,
       'commentsLength' => count($program_comments),
-      'commentsAvatars' => $comments_avatars,
+      'commentAvatars' => $comments_avatars,
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,
@@ -449,10 +486,39 @@ class ProgramController extends AbstractController
   {
     return $this->entity_manager
       ->getRepository(UserComment::class)
-      ->findBy(
-        ['program' => $program->getId()],
-        ['id' => 'DESC']
+      ->findCommentsByProgramId($program->getId())
+    ;
+  }
+
+  private function countByParentId(int $comment_id): int
+  {
+    return $this->entity_manager
+      ->getRepository(UserComment::class)
+      ->countCommentReplies($comment_id)
+    ;
+  }
+
+  /**
+   * @return UserComment
+   */
+  private function findCommentById(string $id)
+  {
+    return $this->entity_manager
+      ->getRepository(UserComment::class)
+      ->findOneBy(
+        ['id' => $id]
       )
+    ;
+  }
+
+  /**
+   * @return array|UserComment[]
+   */
+  private function findCommentRepliesById(string $id): array
+  {
+    return $this->entity_manager
+      ->getRepository(UserComment::class)
+      ->findCommentRepliesByParentId($id)
     ;
   }
 

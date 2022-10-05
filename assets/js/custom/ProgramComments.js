@@ -9,6 +9,12 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   noAdminRightsMessage, defaultErrorMessage) {
   let amountOfVisibleComments
 
+  const commentUploadDates = document.getElementsByClassName('comment-upload-date')
+  for (let i = 0; i < commentUploadDates.length; i++) {
+    const commentUploadDate = new Date(commentUploadDates[i].innerHTML)
+    commentUploadDates[i].innerHTML = commentUploadDate.toLocaleString('en-GB')
+  }
+
   $(function () {
     amountOfVisibleComments = visibleComments
     restoreAmountOfVisibleCommentsFromSession()
@@ -20,14 +26,23 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     postComment()
   })
 
-  $(document).on('click', '.comment-delete-button', function () {
-    const commentId = $(this).attr('id').substring('comment-delete-button-'.length)
-    askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
+  $('.single-comment').on('click', function () {
+    const path = $(this).data('path-program-comment')
+    if (path == null) return
+
+    location.href = path != null ? path : location.href
   })
 
-  $(document).on('click', '.comment-report-button', function () {
-    const commentId = $(this).attr('id').substring('comment-delete-button-'.length)
+  $('.comment-report-button').on('click', function (event) {
+    event.stopPropagation()
+    const commentId = $(this).attr('id').substring('comment-report-button-'.length)
     askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
+  })
+
+  $('.comment-delete-button').on('click', function (event) {
+    event.stopPropagation()
+    const commentId = $(this).attr('id').substring('comment-delete-button-'.length)
+    askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
   })
 
   $(document).on('change', '#comment-message', function () {
@@ -50,11 +65,13 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   })
 
   $(document).on('click', '#show-more-comments-button', function () {
-    showMore(showStep)
+    const commentsClassSelector = $(this).data('comments-class-selector')
+    showMore(showStep, commentsClassSelector)
   })
 
   $(document).on('click', '#show-less-comments-button', function () {
-    showLess(showStep)
+    const commentsClassSelector = $(this).data('comments-class-selector')
+    showLess(showStep, commentsClassSelector)
   })
 
   if ((sessionStorage.getItem('temp_program_comment') != null) && (sessionStorage.getItem('temp_program_comment') !== '')) {
@@ -72,10 +89,13 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     if (msg.length === 0) {
       return
     }
+
+    const postCommentUrl = $('.js-project-comments').data('path-post-comment-url')
+    const parentCommentId = $('.js-project-parentComment').data('parent-comment-id')
     $.ajax({
-      url: '../comment',
+      url: postCommentUrl,
       type: 'post',
-      data: { Message: msg, ProgramId: programId },
+      data: { Message: msg, ProgramId: programId, ParentCommentId: parentCommentId },
       success: function () {
         $('#comments-wrapper').load(' #comments-wrapper')
         $('#comment-message').val('')
@@ -93,8 +113,10 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   }
 
   function deleteComment (commentId) {
+    const $projectComments = $('.js-project-comments')
+    const deleteCommentUrl = $projectComments.data('path-delete-comment-url')
     $.ajax({
-      url: '../deleteComment',
+      url: deleteCommentUrl,
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
       success: function () {
@@ -114,11 +136,13 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   }
 
   function reportComment (commentId) {
+    const $projectComments = $('.js-project-comments')
+    const reportCommentPath = $projectComments.data('path-report-comment-url')
     $.ajax({
-      url: '../reportComment',
+      url: reportCommentPath,
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
-      success: function () {
+      success: function (data) {
         showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
       },
       error: function (data) {
@@ -179,12 +203,26 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     })
   }
 
+  $(document).on('click', '.add-reply-button', function () {
+    const commentWrapper = $('#user-comment-wrapper')
+    const showCommentWrapperButton = $('#show-add-reply-button')
+    const hideCommentWrapperButton = $('#hide-add-reply-button')
+    if (!commentWrapper.is(':visible')) {
+      commentWrapper.slideDown()
+      showCommentWrapperButton.hide()
+      hideCommentWrapperButton.show()
+    }
+    window.location = '#user-comment-wrapper'
+  })
+
   function redirectToLogin () {
-    window.location.href = '../login'
+    const $projectComments = $('.js-project-comments')
+    const loginUrl = $projectComments.data('path-login-url')
+    window.location.href = loginUrl
   }
 
   function restoreAmountOfVisibleCommentsFromSession () {
-    const lastSessionAmount = JSON.parse(window.sessionStorage.getItem('visibleComments'))
+    const lastSessionAmount = getVisibleCommentsSessionVar()
     if (lastSessionAmount !== null) {
       amountOfVisibleComments = lastSessionAmount
     }
@@ -194,7 +232,9 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   }
 
   function updateCommentsVisibility () {
-    $('.single-comment').each(function (index, comment) {
+    const $commentsClassSelector = $('.comments-class-selector').data('comments-class-selector')
+
+    $($commentsClassSelector).each(function (index, comment) {
       if (index < amountOfVisibleComments) {
         $(comment).show()
       } else {
@@ -219,15 +259,31 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
 
   function showMore (step) {
     amountOfVisibleComments = Math.min(amountOfVisibleComments + step, totalAmountOfComments)
-    window.sessionStorage.setItem('visibleComments', JSON.stringify(amountOfVisibleComments))
-    updateCommentsVisibility()
+    const $commentsClassSelector = $('.comments-class-selector').data('comments-class-selector')
+    setVissibleCommentsSessionVar()
+    updateCommentsVisibility($commentsClassSelector)
     updateButtonVisibility()
   }
 
   function showLess (step) {
     amountOfVisibleComments = Math.max(amountOfVisibleComments - step, minAmountOfVisibleComments)
-    window.sessionStorage.setItem('visibleComments', JSON.stringify(amountOfVisibleComments))
-    updateCommentsVisibility()
+    const $commentsClassSelector = $('.comments-class-selector').data('comments-class-selector')
+    setVissibleCommentsSessionVar()
+    updateCommentsVisibility($commentsClassSelector)
     updateButtonVisibility()
+  }
+
+  function getVisibleCommentsSessionVarName () {
+    return $('.session-vars-names').data('visible-comments-session-var')
+  }
+
+  function setVissibleCommentsSessionVar () {
+    const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
+    window.sessionStorage.setItem(visibleCommentSessionVarName, JSON.stringify(amountOfVisibleComments))
+  }
+
+  function getVisibleCommentsSessionVar () {
+    const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
+    return JSON.parse(window.sessionStorage.getItem(visibleCommentSessionVarName, JSON.stringify(amountOfVisibleComments)))
   }
 }

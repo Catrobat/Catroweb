@@ -86,6 +86,7 @@ Encore
   .addEntry('my_profile', './assets/js/my_profile.js')
   .addEntry('profile', './assets/js/profile.js')
   .addEntry('project', './assets/js/project.js')
+  .addEntry('program_comments', './assets/js/custom/program_comments.js')
   .addEntry('search_old', './assets/js/search_old.js')
   .addEntry('search', './assets/js/search.js')
   .addEntry('media_library', './assets/js/media_library.js')

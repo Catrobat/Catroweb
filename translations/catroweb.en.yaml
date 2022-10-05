@@ -212,6 +212,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: Reply
+  repliesLabel: Replies
 
 remixGraph:
   title: Remixes

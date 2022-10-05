@@ -57,7 +57,7 @@ class UserComment implements \Stringable
   protected ?CommentNotification $notification = null;
 
   /**
-   * @ORM\Column(type="date")
+   * @ORM\Column(type="datetime")
    */
   protected ?\DateTime $uploadDate = null;
 
@@ -101,6 +101,11 @@ class UserComment implements \Stringable
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
   protected ?Studio $studio = null;
+
+  /**
+   * @ORM\Column(type="boolean", nullable=false, options={"default": 0})
+   */
+  protected ?bool $is_deleted = null;
 
   /**
    * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
@@ -161,9 +166,9 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getUploadDate(): ?\DateTime
+  public function getUploadDate(): ?string
   {
-    return $this->uploadDate;
+    return date('Y-m-d\TH:i:s\Z', $this->uploadDate->getTimestamp());
   }
 
   public function setUploadDate(\DateTime $uploadDate): UserComment
@@ -259,6 +264,18 @@ class UserComment implements \Stringable
   public function setParentId(?int $parent_id): UserComment
   {
     $this->parent_id = $parent_id;
+
+    return $this;
+  }
+
+  public function getIsDeleted(): ?bool
+  {
+    return $this->is_deleted;
+  }
+
+  public function setIsDeleted(?bool $is_deleted): UserComment
+  {
+    $this->is_deleted = $is_deleted;
 
     return $this;
   }
