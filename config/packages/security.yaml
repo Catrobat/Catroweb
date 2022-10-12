@@ -29,7 +29,8 @@ security:
         check_path: /api/authentication
         success_handler: lexik_jwt_authentication.handler.authentication_success
         failure_handler: lexik_jwt_authentication.handler.authentication_failure
-    
+      refresh_jwt:
+        check_path: /api/authentication/refresh    
     api:
       pattern: ^/api
       provider: chain_provider
