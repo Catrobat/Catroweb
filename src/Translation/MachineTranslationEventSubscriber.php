@@ -21,7 +21,8 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramManager $program_manager, ParameterBagInterface $parameters)
   {
-    $this->project_caching_threshold = (int) $parameters->get('catrobat.translations.project_cache_threshold');
+    $pct = $parameters->get('project_caching_threshold');
+    $this->project_caching_threshold = is_numeric($pct) ? (int) $pct : 0;
   }
 
   public function onTerminateEvent(TerminateEvent $event): void
