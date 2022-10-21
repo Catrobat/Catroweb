@@ -25,7 +25,7 @@ final class UtilityApi extends AbstractApiController implements UtilityApiInterf
   /**
    * {@inheritdoc}
    */
-  public function surveyLangCodeGet(string $lang_code, string $flavor, int &$responseCode, array &$responseHeaders): ?SurveyResponse
+  public function surveyLangCodeGet(string $lang_code, string $flavor, string $platform, int &$responseCode, array &$responseHeaders): ?SurveyResponse
   {
     $survey = $this->facade->getLoader()->getActiveSurvey($lang_code);
 

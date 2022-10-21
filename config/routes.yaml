@@ -19,7 +19,7 @@ gesdinet_jwt_refresh_token:
 # ===== Api =====
 open_api_server:
   prefix: /api
-  resource: "@OpenAPIServerBundle/Resources/config/routing.yml"
+  resource: "@OpenAPIServerBundle/Resources/config/routing.yaml"
   defaults:
     _format: json
 
