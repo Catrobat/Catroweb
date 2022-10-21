@@ -1,7 +1,7 @@
 {
   "name": "catroweb",
   "version": "3.20.34",
-  "description": "Catroweb =========",
+  "description": "Catroweb - The share communication platform for the Catrobat community",
   "scripts": {
     "test": "npx eslint assets/js/*.js assets/js/**/*.js webpack.config.js",
     "fix": "npx eslint assets/js/*.js assets/js/**/*.js webpack.config.js --fix",
@@ -16,16 +16,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Catrobat/Catroweb-Symfony.git"
+    "url": "git+https://github.com/Catrobat/Catroweb.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Catrobat/Catroweb-Symfony/issues"
+    "url": "https://github.com/Catrobat/Catroweb/issues"
   },
-  "homepage": "https://github.com/Catrobat/Catroweb-Symfony#readme",
+  "homepage": "https://github.com/Catrobat/Catroweb#readme",
   "devDependencies": {
-    "@fortawesome/fontawesome-free": "^6.1.1",
+    "@fortawesome/fontawesome-free": "^6.2.0",
     "@symfony/webpack-encore": "^4.1.1",
     "autoprefixer": "^10.4.12",
     "core-js": "^3.25.5",
