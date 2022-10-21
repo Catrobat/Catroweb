@@ -661,7 +661,7 @@ class ApiContext implements Context
   {
     $profile = $this->getKernelBrowser()->getProfile();
     if (!$profile) {
-      throw new RuntimeException('The profiler is disabled. Activate it by setting '.'framework.profiler.only_exceptions to false in '.'your config');
+      throw new RuntimeException('The profiler is disabled. Activate it by setting framework.profiler.only_exceptions to false in your config');
     }
 
     return $profile;

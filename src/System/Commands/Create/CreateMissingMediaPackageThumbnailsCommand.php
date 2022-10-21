@@ -39,7 +39,7 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
       !$input->getOption('force')
       && !in_array($username, ['www-data', 'apache', 'httpd', '_www', 'nginx'], true)
     ) {
-      throw new Exception('Please run this command as web server user '.'(e.g. sudo -u www-data bin/console ...) or run with --force.');
+      throw new Exception('Please run this command as web server user (e.g. sudo -u www-data bin/console ...) or run with --force.');
     }
 
     $this->media_package_file_repository->createMissingThumbnails();
