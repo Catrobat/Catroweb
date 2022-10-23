@@ -29,8 +29,19 @@ class ProjectExtensionManager
     $this->addPhiroExtensions($program, $code_xml);
     $this->addEmbroideryExtensions($program, $code_xml);
     $this->addMindstormsExtensions($program, $code_xml);
+    $this->addMultiplayerExtensions($program, $code_xml);
 
     $this->saveProject($program, $flush);
+  }
+
+  public function addMultiplayerExtensions(Program $program, string $code_xml): void
+  {
+    if ($this->isMultiplayerProject($code_xml, $program->getId())) {
+      $extension = $this->getExtension(Extension::MULTIPLAYER);
+      if (!is_null($extension)) {
+        $program->addExtension($extension);
+      }
+    }
   }
 
   public function addArduinoExtensions(Program $program, string $code_xml): void
@@ -76,6 +87,11 @@ class ProjectExtensionManager
   protected function isAnArduinoProject(string $code_xml): bool
   {
     return str_contains($code_xml, '<brick type="Arduino');
+  }
+
+  protected function isMultiplayerProject(string $code_xml, string $id): bool
+  {
+    return str_contains($code_xml, '<programMultiplayerVariableList>') && str_contains($code_xml, '</programMultiplayerVariableList>');
   }
 
   protected function isAnEmbroideryProject(string $code_xml): bool
