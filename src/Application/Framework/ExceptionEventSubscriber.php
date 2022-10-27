@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -50,8 +49,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     }
 
     // 401, 403 - redirect to login page
-    if (($exception instanceof HttpException && Response::HTTP_UNAUTHORIZED === $exception->getStatusCode())
-        || $exception instanceof ForbiddenHttpException) {
+    if ($exception instanceof HttpException && (Response::HTTP_UNAUTHORIZED === $exception->getStatusCode() || Response::HTTP_FORBIDDEN === $exception->getStatusCode())) {
       $this->cookie_service->clearCookie('CATRO_LOGIN_TOKEN');
       $this->cookie_service->clearCookie('BEARER');
       /** @var Session $session */
@@ -62,7 +60,7 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     }
 
     // 404 - redirect to index page
-    if ($exception instanceof NotFoundHttpException) {
+    if ($exception instanceof HttpException && Response::HTTP_NOT_FOUND === $exception->getStatusCode()) {
       $this->softLogger->error('Http '.$exception->getStatusCode().': '.$exception->getMessage());
       /** @var Session $session */
       $session = $event->getRequest()->getSession();
