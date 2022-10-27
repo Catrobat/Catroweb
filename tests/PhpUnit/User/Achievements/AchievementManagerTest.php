@@ -10,6 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\User\Achievements\AchievementManager
  */
 final class AchievementManagerTest extends DefaultTestCase
@@ -26,6 +27,7 @@ final class AchievementManagerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void

@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 /**
  * @ORM\Entity(repositoryClass="App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository")
  * @ORM\Table(name="project_machine_translation")
+ *
  * @HasLifecycleCallbacks
  */
 class ProjectMachineTranslation extends MachineTranslation

@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\Base\AbstractApiProcessor
  */
 final class AbstractApiProcessorTest extends DefaultTestCase
@@ -24,6 +25,7 @@ final class AbstractApiProcessorTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void

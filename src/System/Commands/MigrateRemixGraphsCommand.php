@@ -53,22 +53,13 @@ class MigrateRemixGraphsCommand extends Command
   public function signalHandler(int $signal_number): void
   {
     $this->output->writeln('[SignalHandler] Called Signal Handler');
-    switch ($signal_number) {
-      case SIGTERM:
-        $this->output->writeln('[SignalHandler] User aborted the process');
-        break;
-      case SIGHUP:
-        $this->output->writeln('[SignalHandler] SigHup detected');
-        break;
-      case SIGINT:
-        $this->output->writeln('[SignalHandler] SigInt detected');
-        break;
-      case SIGUSR1:
-        $this->output->writeln('[SignalHandler] SigUsr1 detected');
-        break;
-      default:
-        $this->output->writeln('[SignalHandler] Signal '.$signal_number.' detected');
-    }
+    match ($signal_number) {
+      SIGTERM => $this->output->writeln('[SignalHandler] User aborted the process'),
+      SIGHUP => $this->output->writeln('[SignalHandler] SigHup detected'),
+      SIGINT => $this->output->writeln('[SignalHandler] SigInt detected'),
+      SIGUSR1 => $this->output->writeln('[SignalHandler] SigUsr1 detected'),
+      default => $this->output->writeln('[SignalHandler] Signal '.$signal_number.' detected'),
+    };
 
     $this->migration_file_lock->unlock();
     exit(-1);
@@ -95,10 +86,10 @@ class MigrateRemixGraphsCommand extends Command
     declare(ticks=1);
     $this->migration_file_lock = new MigrationFileLock($this->app_root_dir, $output);
     $this->output = $output;
-    pcntl_signal(SIGTERM, [$this, 'signalHandler']);
-    pcntl_signal(SIGHUP, [$this, 'signalHandler']);
-    pcntl_signal(SIGINT, [$this, 'signalHandler']);
-    pcntl_signal(SIGUSR1, [$this, 'signalHandler']);
+    pcntl_signal(SIGTERM, $this->signalHandler(...));
+    pcntl_signal(SIGHUP, $this->signalHandler(...));
+    pcntl_signal(SIGINT, $this->signalHandler(...));
+    pcntl_signal(SIGUSR1, $this->signalHandler(...));
 
     $directory = $input->getArgument('directory');
     $is_debug_import_missing_programs = $input->getOption('debug-import-missing-programs');
@@ -164,7 +155,7 @@ class MigrateRemixGraphsCommand extends Command
 
       $program = $this->program_manager->find($program_id);
       assert(null != $program);
-      $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, '...');
+      $truncated_program_name = mb_strimwidth((string) $program->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($program_file_path, $program_id, $truncated_program_name, $output, $progress_bar);
       if ('0.0' == $result['languageVersion']) {
@@ -202,7 +193,7 @@ class MigrateRemixGraphsCommand extends Command
 
     foreach ($all_program_ids as $program_id) {
       $program = $this->program_manager->find($program_id);
-      $truncated_program_name = mb_strimwidth($program->getName(), 0, 12, '...');
+      $truncated_program_name = mb_strimwidth((string) $program->getName(), 0, 12, '...');
 
       $progress_bar->setMessage('Migrating remaining remixes of "'.$truncated_program_name.'" (#'.$program_id.')');
       $this->addRemixData($program, $remix_data_map[$program_id], true);
@@ -232,7 +223,7 @@ class MigrateRemixGraphsCommand extends Command
     while (null != ($unmigrated_program = $this->program_manager->findOneByRemixMigratedAt(null))) {
       $program_file_path = $directory.$program_id.'/';
       $program_id = $unmigrated_program->getId();
-      $truncated_program_name = mb_strimwidth($unmigrated_program->getName(), 0, 12, '...');
+      $truncated_program_name = mb_strimwidth((string) $unmigrated_program->getName(), 0, 12, '...');
 
       $result = $this->extractRemixData($program_file_path, $program_id, $unmigrated_program->getName(), $output, $progress_bar);
       if ('0.0' == $result['languageVersion']) {
@@ -270,12 +261,7 @@ class MigrateRemixGraphsCommand extends Command
     $this->remix_manager->markAllUnseenRemixRelationsAsSeen($seen_at);
   }
 
-  /**
-   * @param mixed $program_file_path
-   * @param mixed $program_id
-   * @param mixed $program_name
-   */
-  private function extractRemixData($program_file_path, $program_id, $program_name, OutputInterface $output, ProgressBar $progress_bar): array
+  private function extractRemixData(mixed $program_file_path, mixed $program_id, mixed $program_name, OutputInterface $output, ProgressBar $progress_bar): array
   {
     $extracted_file = null;
 

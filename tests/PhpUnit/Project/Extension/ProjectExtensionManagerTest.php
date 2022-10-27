@@ -12,6 +12,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Project\Extension\ProjectExtensionManager
  */
 class ProjectExtensionManagerTest extends DefaultTestCase
@@ -33,7 +34,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers ::addExtensions
    */
   public function testAddExtensions(): void
@@ -62,8 +65,11 @@ class ProjectExtensionManagerTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers ::isAnEmbroideryProject
+   *
    * @dataProvider dataProviderIsAnEmbroideryProject
    */
   public function testIsAnEmbroideryProject(string $code_xml, bool $expected): void
@@ -84,8 +90,11 @@ class ProjectExtensionManagerTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers ::isAMindstormsProject
+   *
    * @dataProvider dataProviderIsAMindstormsProject
    */
   public function testIsAMindstormsProject(string $code_xml, bool $expected): void
@@ -107,8 +116,11 @@ class ProjectExtensionManagerTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers ::isAPhiroProject
+   *
    * @dataProvider dataProviderIsAPhiroProject
    */
   public function testIsAPhiroProject(string $code_xml, bool $expected): void

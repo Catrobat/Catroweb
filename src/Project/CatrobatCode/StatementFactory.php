@@ -498,11 +498,7 @@ class StatementFactory
     return new UserVariableStatement($this, $statement, $spaces, $variableName);
   }
 
-  /**
-   * @param mixed $reference
-   * @param mixed $type
-   */
-  private function isTypeExisting(SimpleXMLElement $statement, $reference, $type): bool
+  private function isTypeExisting(SimpleXMLElement $statement, mixed $reference, mixed $type): bool
   {
     $elements = $statement->xpath($reference);
     foreach ($elements as $element) {

@@ -10,6 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedSimpleProgram
  */
 class ParsedSimpleProgramTest extends TestCase
@@ -25,6 +26,7 @@ class ParsedSimpleProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -47,6 +49,7 @@ class ParsedSimpleProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function hasScenesMustReturnFalse(): void
@@ -56,6 +59,7 @@ class ParsedSimpleProgramTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getCodeStatisticMustReturnCodeStatistic(): void

@@ -61,9 +61,9 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param iterable             $flavors  The flavors of this MediaPackageFile (e.g. Luna, embroidery)
    * @param string               $author   The author of this MediaPackageFile
    *
-   * @throws Exception when an error occurs during creating
-   *
    * @return MediaPackageFile the created MediaPackageFile
+   *
+   * @throws Exception when an error occurs during creating
    */
   public function createMediaPackageFile(string $name, File $file, MediaPackageCategory $category, iterable $flavors, string $author): MediaPackageFile
   {

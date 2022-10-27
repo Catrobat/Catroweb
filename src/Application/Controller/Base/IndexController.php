@@ -35,8 +35,8 @@ class IndexController extends AbstractController
     }
 
     $featuredData = [];
+    /** @var FeaturedProgram $item */
     foreach ($featured_items as $item) {
-      /** @var FeaturedProgram $item */
       $info = [];
       if (null !== $item->getProgram()) {
         if ($flavor) {

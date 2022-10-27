@@ -9,16 +9,9 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 use JsonException;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class AuthenticationRequestValidator extends AbstractRequestValidator
 {
-  public function __construct(ValidatorInterface $validator, TranslatorInterface $translator)
-  {
-    parent::__construct($validator, $translator);
-  }
-
   public function validateGoogleIdToken(string $id_token): bool
   {
     try {

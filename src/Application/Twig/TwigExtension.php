@@ -30,17 +30,15 @@ class TwigExtension extends AbstractExtension
   public function getFilters(): array
   {
     return [
-      new TwigFilter('decamelize', [$this, 'decamelizeFilter']),
-      new TwigFilter('humanFriendlyNumber', [$this, 'humanFriendlyNumberFilter']),
+      new TwigFilter('decamelize', $this->decamelizeFilter(...)),
+      new TwigFilter('humanFriendlyNumber', $this->humanFriendlyNumberFilter(...)),
     ];
   }
 
   /**
-   * @param mixed $input
-   *
    * @return string|string[]|null
    */
-  public function decamelizeFilter($input)
+  public function decamelizeFilter(mixed $input)
   {
     if (!is_string($input)) {
       return $input;
@@ -49,21 +47,14 @@ class TwigExtension extends AbstractExtension
     return preg_replace('#(?<!^)[A-Z]#', ' $0', $input);
   }
 
-  /**
-   * @param mixed $input
-   */
-  public function humanFriendlyNumberFilter($input): bool|string
+  public function humanFriendlyNumberFilter(mixed $input): bool|string
   {
     $user_locale = $this->request_stack->getCurrentRequest()->getLocale();
 
     return TwigExtension::humanFriendlyNumber($input, $this->translator, $user_locale);
   }
 
-  /**
-   * @param mixed $input
-   * @param mixed $user_locale
-   */
-  public static function humanFriendlyNumber($input, TranslatorInterface $translator, $user_locale): bool|string
+  public static function humanFriendlyNumber(mixed $input, TranslatorInterface $translator, mixed $user_locale): bool|string
   {
     if (!is_numeric($input)) {
       return $input;
@@ -89,22 +80,22 @@ class TwigExtension extends AbstractExtension
   public function getFunctions(): array
   {
     return [
-      new TwigFunction('countriesList', [$this, 'getCountriesList']),
-      new TwigFunction('isMobile', [$this, 'isMobile']),
-      new TwigFunction('isWebview', [$this, 'isWebview']),
-      new TwigFunction('isAndroid', [$this, 'isAndroid']),
-      new TwigFunction('isIOS', [$this, 'isIOS']),
-      new TwigFunction('checkCatrobatLanguage', [$this, 'checkCatrobatLanguage']),
-      new TwigFunction('getLanguageOptions', [$this, 'getLanguageOptions']),
-      new TwigFunction('getMediaPackageImageUrl', [$this, 'getMediaPackageImageUrl']),
-      new TwigFunction('getMediaPackageSoundUrl', [$this, 'getMediaPackageSoundUrl']),
-      new TwigFunction('flavor', [$this, 'getFlavor']),
-      new TwigFunction('theme', [$this, 'getTheme']),
-      new TwigFunction('themeAssets', [$this, 'getFlavor']),
-      new TwigFunction('getThemeDisplayName', [$this, 'getThemeDisplayName']),
-      new TwigFunction('assetExists', [$this, 'assetExists']),
-      new TwigFunction('assetFileExists', [$this, 'assetFileExists']),
-      new TwigFunction('isVersionSupportedByCatBlocks', [$this, 'isVersionSupportedByCatBlocks']),
+      new TwigFunction('countriesList', $this->getCountriesList(...)),
+      new TwigFunction('isMobile', $this->isMobile(...)),
+      new TwigFunction('isWebview', $this->isWebview(...)),
+      new TwigFunction('isAndroid', $this->isAndroid(...)),
+      new TwigFunction('isIOS', $this->isIOS(...)),
+      new TwigFunction('checkCatrobatLanguage', $this->checkCatrobatLanguage(...)),
+      new TwigFunction('getLanguageOptions', $this->getLanguageOptions(...)),
+      new TwigFunction('getMediaPackageImageUrl', $this->getMediaPackageImageUrl(...)),
+      new TwigFunction('getMediaPackageSoundUrl', $this->getMediaPackageSoundUrl(...)),
+      new TwigFunction('flavor', $this->getFlavor(...)),
+      new TwigFunction('theme', $this->getTheme(...)),
+      new TwigFunction('themeAssets', $this->getFlavor(...)),
+      new TwigFunction('getThemeDisplayName', $this->getThemeDisplayName(...)),
+      new TwigFunction('assetExists', $this->assetExists(...)),
+      new TwigFunction('assetFileExists', $this->assetFileExists(...)),
+      new TwigFunction('isVersionSupportedByCatBlocks', $this->isVersionSupportedByCatBlocks(...)),
     ];
   }
 
@@ -217,10 +208,7 @@ class TwigExtension extends AbstractExtension
     return boolval(preg_match('/(iPad|iPhone)/', $this->getUserAgent()));
   }
 
-  /**
-   * @param mixed $program_catrobat_language
-   */
-  public function checkCatrobatLanguage($program_catrobat_language): bool
+  public function checkCatrobatLanguage(mixed $program_catrobat_language): bool
   {
     $user_agent = $this->getUserAgent();
 

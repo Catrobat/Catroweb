@@ -9,6 +9,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class LoggerProcessor
 {
+  private const ANON_USER = 'anonymous';
+
   public function __construct(private readonly RequestStack $request_stack, private readonly TokenStorageInterface $security_token_storage)
   {
   }
@@ -36,7 +38,7 @@ class LoggerProcessor
       $session_user = $this->security_token_storage->getToken()->getUser();
     }
 
-    return ($session_user instanceof User) ? $session_user->getUsername() : 'anonymous';
+    return ($session_user instanceof User) ? ($session_user->getUsername() ?? self::ANON_USER) : self::ANON_USER;
   }
 
   private function getUserAgent(Request $request): ?string

@@ -15,6 +15,7 @@ use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\ExtractedCatrobatFile
  */
 class ExtractedCatrobatFileTest extends TestCase

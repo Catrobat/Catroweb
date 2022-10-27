@@ -13,11 +13,9 @@ class ElapsedTimeStringFormatter
   }
 
   /**
-   * @param mixed $timestamp
-   *
    * @throws Exception
    */
-  public function format($timestamp): string
+  public function format(mixed $timestamp): string
   {
     $elapsed = max(0, TimeUtils::getTimestamp() - $timestamp);
 

@@ -9,6 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers  \App\Project\CatrobatFile\NameValidatorEventSubscriber
  */
 class NameValidatorEventSubscriberTest extends TestCase

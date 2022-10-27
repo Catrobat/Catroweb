@@ -12,6 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 /**
  * @internal
+ *
  * @covers \App\Project\CatrobatCode\Parser\ParsedObjectsContainer
  */
 class ParsedObjectsContainerTest extends TestCase
@@ -29,6 +30,7 @@ class ParsedObjectsContainerTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -51,6 +53,7 @@ class ParsedObjectsContainerTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getBackgroundMustReturnParsedObject(): void
@@ -63,6 +66,7 @@ class ParsedObjectsContainerTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function getObjectsMustReturnArrayOfParsedObjectOrParsedObjectGroup(): void

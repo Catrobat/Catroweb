@@ -12,6 +12,7 @@ use SimpleXMLElement;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class ScriptsTest extends TestCase
@@ -45,6 +46,7 @@ class ScriptsTest extends TestCase
 
   /**
    * @test
+   *
    * @dataProvider provideMethodNames
    *
    * @param mixed $method_name
@@ -69,7 +71,9 @@ class ScriptsTest extends TestCase
 
   /**
    * @test
+   *
    * @depends      mustHaveMethod
+   *
    * @dataProvider provideScriptXMLProperties
    *
    * @param mixed $script_xml_properties
@@ -125,6 +129,7 @@ class ScriptsTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function factoryMustGenerateUnknownScriptOtherwise(): ?Script
@@ -149,6 +154,7 @@ class ScriptsTest extends TestCase
 
   /**
    * @test
+   *
    * @depends mustHaveMethod
    */
   public function outCommentedScriptsMustContainOnlyGrayBricks(): void

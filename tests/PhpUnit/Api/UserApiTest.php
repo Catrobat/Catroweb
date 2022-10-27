@@ -27,6 +27,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\UserApi
  */
 final class UserApiTest extends DefaultTestCase
@@ -48,6 +49,7 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -58,6 +60,7 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExtends(): void
@@ -67,6 +70,7 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassImplements(): void
@@ -76,6 +80,7 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testCtor(): void
@@ -86,7 +91,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userPost
    *
    * @throws Exception
@@ -113,7 +120,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userPost
    *
    * @throws Exception
@@ -140,7 +149,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userPost
    *
    * @throws Exception
@@ -168,7 +179,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userDelete
    *
    * @throws Exception
@@ -189,7 +202,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userGet
    *
    * @throws Exception
@@ -212,7 +227,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userIdGet
    *
    * @throws Exception
@@ -234,7 +251,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userIdGet
    *
    * @throws Exception
@@ -257,7 +276,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::usersSearchGet
    *
    * @throws Exception
@@ -280,7 +301,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userPut
    *
    * @throws Exception
@@ -310,7 +333,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userPut
    *
    * @throws Exception
@@ -340,7 +365,9 @@ final class UserApiTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\UserApi::userPut
    *
    * @throws Exception

@@ -38,6 +38,7 @@ use Symfony\Component\Security\Core\Security;
 
 /**
  * @internal
+ *
  * @covers \App\Project\ProgramManager
  */
 class ProgramManagerTest extends TestCase

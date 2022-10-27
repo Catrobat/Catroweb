@@ -28,10 +28,8 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
    * and then loaded. For example, to update a project category shown on a landing page. If the hash between the new
    * and old requests did not change, there is no need to request/load the new response body. This workflow can lead
    * to a significant performance boost.
-   *
-   * @param mixed $response
    */
-  public function addResponseHashToHeaders(array &$responseHeaders, $response): void
+  public function addResponseHashToHeaders(array &$responseHeaders, mixed $response): void
   {
     $responseHeaders['X-Response-Hash'] = md5($this->getSerializer()->serialize($response, 'application/json'));
   }
@@ -53,10 +51,7 @@ abstract class AbstractResponseManager implements TranslatorAwareInterface
     return null;
   }
 
-  /**
-   * @param mixed $response
-   */
-  public function cacheResponse(string $cache_id, int $response_code, array $responseHeaders, $response): void
+  public function cacheResponse(string $cache_id, int $response_code, array $responseHeaders, mixed $response): void
   {
     $this->response_cache_manager->addCacheEntry($cache_id, $response_code, $responseHeaders, $response);
   }

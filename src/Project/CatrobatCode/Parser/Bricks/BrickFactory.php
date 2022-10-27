@@ -12,7 +12,7 @@ class BrickFactory
    */
   public static function generate(SimpleXMLElement $brick_xml_properties)
   {
-    $generated_brick = match ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE]) {
+    return match ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       Constants::BROADCAST_BRICK => new BroadcastBrick($brick_xml_properties),
       Constants::BROADCAST_WAIT_BRICK => new BroadcastWaitBrick($brick_xml_properties),
       Constants::WHEN_BRICK => new WhenBrick($brick_xml_properties),
@@ -214,7 +214,5 @@ class BrickFactory
       Constants::LOOP_ENDLESS_BRICK => new LoopEndlessBrick($brick_xml_properties),
       default => new UnknownBrick($brick_xml_properties),
     };
-
-    return $generated_brick;
   }
 }

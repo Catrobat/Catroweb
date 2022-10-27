@@ -29,7 +29,7 @@ class StudioRepository extends ServiceEntityRepository
     ;
     $qb = $this->getEntityManager()->createQueryBuilder();
     $qb->select('s.id, s.name, s.description, s.is_public, s.is_enabled, s.allow_comments, s.cover_path , 
-    ('.$qb_su->getDQL().')  AS studio_users'.', ('.$qb_sp->getDQL().') AS studio_projects')
+    ('.$qb_su->getDQL().')  AS studio_users, ('.$qb_sp->getDQL().') AS studio_projects')
       ->from(Studio::class, 's')
     ;
 

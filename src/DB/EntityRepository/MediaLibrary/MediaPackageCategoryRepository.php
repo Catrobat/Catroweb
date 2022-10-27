@@ -24,9 +24,9 @@ class MediaPackageCategoryRepository extends ServiceEntityRepository
    * @param string          $name           The name
    * @param ArrayCollection $media_packages an ArrayCollection containing the MediaPackages this MediaPackageCategory belongs to
    *
-   * @throws Exception when an error occurs during creating
-   *
    * @return MediaPackageCategory the created MediaPackageCategory
+   *
+   * @throws Exception when an error occurs during creating
    */
   public function createMediaPackageCategory(string $name, ArrayCollection $media_packages): MediaPackageCategory
   {

@@ -10,6 +10,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversDefaultClass \App\Api\Services\ValidationWrapper
  */
 final class ValidationWrapperTest extends DefaultTestCase
@@ -26,6 +27,7 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
@@ -36,7 +38,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::addError
    */
   public function testAddError(): void
@@ -49,7 +53,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::addError
    */
   public function testAddErrorWithKey(): void
@@ -62,7 +68,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::hasError
    */
   public function testHasError(): void
@@ -74,7 +82,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::clear
    *
    * @dataProvider
@@ -89,7 +99,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::getError
    */
   public function testGetErrorEmpty(): void
@@ -99,7 +111,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::getError
    */
   public function testGetErrorNoKey(): void
@@ -111,7 +125,9 @@ final class ValidationWrapperTest extends DefaultTestCase
 
   /**
    * @group unit
+   *
    * @small
+   *
    * @covers \App\Api\Services\ValidationWrapper::getError
    */
   public function testGetErrorKey(): void

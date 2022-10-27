@@ -31,10 +31,8 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
 
   /**
    * used in connectUserToAccount!
-   *
-   * @param mixed $id_token
    */
-  protected function getPayloadFromGoogleIdToken($id_token): array
+  protected function getPayloadFromGoogleIdToken(mixed $id_token): array
   {
     $client = new \Google\Client(['client_id' => getenv('GOOGLE_ID')]);
 
@@ -49,10 +47,8 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
 
   /**
    * used in connectUserToAccount!
-   *
-   * @param mixed $id_token
    */
-  protected function getPayloadFromFacebookIdToken($id_token): array
+  protected function getPayloadFromFacebookIdToken(mixed $id_token): array
   {
     $payload = JWT::decode($id_token, new Key(getenv('FB_OAUTH_PUBLIC_KEY'), 'RS256'));
 

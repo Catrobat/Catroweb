@@ -8,6 +8,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 
 /**
  * @internal
+ *
  * @coversNothing
  */
 class SpecialUpdaterAdminControllerTest extends DefaultTestCase
@@ -24,6 +25,7 @@ class SpecialUpdaterAdminControllerTest extends DefaultTestCase
 
   /**
    * @group integration
+   *
    * @small
    */
   public function testTestClassExists(): void
