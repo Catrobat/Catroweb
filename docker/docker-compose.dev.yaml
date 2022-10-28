@@ -97,7 +97,7 @@ services:
 #      - ./../package-lock.json:/var/www/catroweb/package-lock.json
 
   db.catroweb.dev:
-    image: mariadb:10.3.11
+    image: mariadb:10.9
     container_name: db.catroweb.dev
     ports:
       - 3306
@@ -110,7 +110,7 @@ services:
   # --- Tests:
 
   chrome.catroweb:
-    image: zenika/alpine-chrome:89
+    image: zenika/alpine-chrome:100
     container_name: chrome.catroweb
     restart: on-failure
     volumes:
@@ -121,7 +121,7 @@ services:
       - 9222
 
   db.catroweb.test:
-    image: mariadb:10.3.11
+    image: mariadb:10.9
     container_name: db.catroweb.test
     ports:
       - 3306
@@ -134,7 +134,7 @@ services:
   # --- Tools:
 
   phpmyadmin.catroweb.dev:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:latest
     container_name: phpmyadmin.catroweb.dev
     environment:
       - PMA_ARBITRARY=1
@@ -152,7 +152,7 @@ services:
 
 
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.15.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
     container_name: elasticsearch
     environment:
       - cluster.name=docker-cluster
