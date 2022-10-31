@@ -95,6 +95,7 @@ Encore
   .addEntry('reset', './assets/js/reset.js')
   .addEntry('check_email', './assets/js/check_email.js')
   .addEntry('studio_detail', './assets/js/studio_detail.js')
+  .addEntry('studios_overview', './assets/js/studios_overview.js')
   .addEntry('code_view', './assets/js/code_view.js')
 
   // SCSS to CSS

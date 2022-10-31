@@ -201,7 +201,7 @@ class StudioManager
   public function deleteUserFromStudio(User $admin, Studio $studio, User $user_to_remove): void
   {
     $studio_user = $this->findStudioUser($user_to_remove, $studio);
-    if ($this->isUserAStudioAdmin($admin, $studio) && !is_null($studio_user)) {
+    if (($this->isUserAStudioAdmin($admin, $studio) || $admin === $user_to_remove) && !is_null($studio_user)) {
       $this->entity_manager->remove($studio_user);
       $this->entity_manager->flush();
     }
@@ -247,6 +247,11 @@ class StudioManager
   public function findStudioById(string $studio_id): ?Studio
   {
     return $this->studio_repository->findStudioById($studio_id);
+  }
+
+  public function findStudioByName(string $studio_name): ?Studio
+  {
+    return $this->studio_repository->findStudioByName($studio_name);
   }
 
   public function findAllStudiosWithUsersAndProjectsCount(): array

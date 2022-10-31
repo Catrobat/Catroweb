@@ -3,7 +3,7 @@
   <div class="studio-detail__header__details">
 
     <div class="col-3">
-      {{ studio.isPublic ? "studio.details.public" |trans({}, 'catroweb') : "studio.details.private" |trans({}, 'catroweb') }}
+      {{ studio.isPublic ? "studio.public" |trans({}, 'catroweb') : "studio.private" |trans({}, 'catroweb') }}
     </div>
 
     <div class="col-3">
@@ -76,7 +76,7 @@
     <div class="col-3">
       {% if user_role == null %}
         <button class="studio-detail__header__details__join-button btn btn-primary btn-block">
-          {{ "studio.details.join" |trans({}, 'catroweb') }}
+          {{ "studio.join" |trans({}, 'catroweb') }}
         </button>
       {% elseif user_role == 'admin' %}
           {# <div class="position-relative"> #}
@@ -103,7 +103,7 @@
           {# </form> #}
       {% else %}
         <button id="studio-join-leave-btn" class="btn btn-outline-primary btn-block">
-          {{ "studio.details.leave" |trans({}, 'catroweb') }}
+          {{ "studio.leave" |trans({}, 'catroweb') }}
         </button>
       {% endif %}
     </div>
