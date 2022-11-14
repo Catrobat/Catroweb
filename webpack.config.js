@@ -1,5 +1,5 @@
 const Encore = require('@symfony/webpack-encore')
-const PurgeCssPlugin = require('purgecss-webpack-plugin')
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const path = require('path')
 
@@ -161,7 +161,7 @@ Encore
   /*
    * Plugins
    */
-  .addPlugin(new PurgeCssPlugin({
+  .addPlugin(new PurgeCSSPlugin({
     paths: glob.sync([
       path.join(__dirname, 'templates/**/*.html.twig'),
       path.join(__dirname, 'assets/**/*.js'),
