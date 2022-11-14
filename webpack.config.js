@@ -107,6 +107,7 @@ Encore
   .addStyleEntry('user_list', './assets/styles/components/user_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
+  .addStyleEntry('error', './assets/styles/error.scss')
 
   // Themes
   .addStyleEntry('pocketcode', './assets/styles/themes/pocketcode.scss')
