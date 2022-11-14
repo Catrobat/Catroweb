@@ -49,7 +49,15 @@ class ProjectExtensionManagerTest extends DefaultTestCase
 
     $this->object = $this->getMockBuilder(ProjectExtensionManager::class)
       ->disableOriginalConstructor()
-      ->onlyMethods(['addArduinoExtensions', 'addPhiroExtensions', 'addEmbroideryExtensions', 'addMindstormsExtensions', 'getExtension', 'saveProject'])
+      ->onlyMethods([
+        'addArduinoExtensions',
+        'addPhiroExtensions',
+        'addEmbroideryExtensions',
+        'addMindstormsExtensions',
+        'addMultiplayerExtensions',
+        'getExtension',
+        'saveProject'
+      ])
       ->getMockForAbstractClass()
     ;
 
@@ -58,6 +66,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     $this->object->expects($this->once())->method('addPhiroExtensions');
     $this->object->expects($this->once())->method('addEmbroideryExtensions');
     $this->object->expects($this->once())->method('addMindstormsExtensions');
+    $this->object->expects($this->once())->method('addMultiplayerExtensions');
     $this->object->expects($this->once())->method('saveProject');
 
     $this->object->addExtensions($this->extracted_catrobat_file_with_extensions, $program);

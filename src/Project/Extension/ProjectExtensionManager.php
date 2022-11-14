@@ -36,7 +36,7 @@ class ProjectExtensionManager
 
   public function addMultiplayerExtensions(Program $program, string $code_xml): void
   {
-    if ($this->isMultiplayerProject($code_xml, $program->getId())) {
+    if ($this->isMultiplayerProject($code_xml)) {
       $extension = $this->getExtension(Extension::MULTIPLAYER);
       if (!is_null($extension)) {
         $program->addExtension($extension);
@@ -89,7 +89,7 @@ class ProjectExtensionManager
     return str_contains($code_xml, '<brick type="Arduino');
   }
 
-  protected function isMultiplayerProject(string $code_xml, string $id): bool
+  protected function isMultiplayerProject(string $code_xml): bool
   {
     return str_contains($code_xml, '<programMultiplayerVariableList>') && str_contains($code_xml, '</programMultiplayerVariableList>');
   }
