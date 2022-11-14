@@ -26,6 +26,8 @@ Feature: Surveys can be added, removed, and updated in the Admin interface
     Then I should see "Url"
     Then I should see "Active"
     Then I should see "Create"
+    Then I should see "Flavor"
+    Then I should see "Platform"
 
   Scenario: I can delete entries
     Given I log in as "Admin" with the password "123456"

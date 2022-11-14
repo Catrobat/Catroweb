@@ -5,7 +5,6 @@ namespace App\Api\Services\Utility;
 use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Survey;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityManagerInterface;
 
 final class UtilityApiLoader extends AbstractApiLoader
@@ -17,7 +16,7 @@ final class UtilityApiLoader extends AbstractApiLoader
   public function getSurvey(array $criteria): ?Survey
   {
     $survey_repo = $this->entity_manager->getRepository(Survey::class);
-    
+
     return $survey_repo->findOneBy($criteria);
   }
 
@@ -25,6 +24,7 @@ final class UtilityApiLoader extends AbstractApiLoader
   {
     $flavor_repo = $this->entity_manager->getRepository(Flavor::class);
     $criteria = ['name' => $flavor];
+
     return $flavor_repo->findOneBy($criteria);
   }
 }

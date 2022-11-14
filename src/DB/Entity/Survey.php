@@ -46,7 +46,6 @@ class Survey
    */
   protected ?Flavor $flavor = null;
 
-
   /**
    * @ORM\Column(type="string", nullable=true)
    */
@@ -114,11 +113,13 @@ class Survey
 
   public static function getAvailablePlatforms(): array
   {
-    return [''        => '',
-            'ios'     => 'iOS',
-            'android' => 'Android'];
+    return [
+      '' => '',
+      'ios' => 'iOS',
+      'android' => 'Android',
+    ];
   }
-  
+
   public static function getISO_639_1_Codes(): array
   {
     return [

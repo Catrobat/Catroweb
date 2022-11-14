@@ -259,6 +259,8 @@ class DataFixturesContext implements Context
       $survey = new Survey();
       $survey->setLanguageCode($survey_config['language code']);
       $survey->setUrl($survey_config['url']);
+      $survey->setFlavor($this->getFlavorRepository()->getFlavorByName($survey_config['flavor'] ?? ''));
+      $survey->setPlatform($survey_config['platform'] ?? '');
       $em->persist($survey);
     }
     $em->flush();

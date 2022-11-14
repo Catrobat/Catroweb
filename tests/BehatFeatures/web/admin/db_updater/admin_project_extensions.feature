@@ -36,7 +36,7 @@ Feature: The admin extensions view provides a detailed list about all extensions
     When I click "#btn-update-extensions"
     And I wait for the page to be loaded
     Then I should see "Extensions have been successfully updated"
-    Then there should be "6" extensions in the database
+    Then there should be "7" extensions in the database
     Then I should see "Extensions"
     And I should see the extensions table:
       | Internal Title | Enabled | Projects with extension |

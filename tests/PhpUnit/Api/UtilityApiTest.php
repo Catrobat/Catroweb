@@ -8,6 +8,7 @@ use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Utility\UtilityApiFacade;
 use App\Api\Services\Utility\UtilityApiLoader;
 use App\Api\UtilityApi;
+use App\DB\Entity\Flavor;
 use App\DB\Entity\Survey;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Api\UtilityApiInterface;
@@ -109,7 +110,7 @@ class UtilityApiTest extends DefaultTestCase
     $response_headers = [];
 
     $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getActiveSurvey')->willReturn(null);
+    $loader->method('getSurvey')->willReturn(null);
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->object->surveyLangCodeGet('de', '', '', $response_code, $response_headers);
@@ -131,7 +132,7 @@ class UtilityApiTest extends DefaultTestCase
     $response_headers = [];
 
     $loader = $this->createMock(UtilityApiLoader::class);
-    $loader->method('getActiveSurvey')->willReturn($this->createMock(Survey::class));
+    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->object->surveyLangCodeGet('de', '', '', $response_code, $response_headers);
@@ -139,5 +140,127 @@ class UtilityApiTest extends DefaultTestCase
     $this->assertEquals(Response::HTTP_OK, $response_code);
 
     $this->assertInstanceOf(SurveyResponse::class, $response);
+  }
+
+  /**
+   * @group unit
+   *
+   * @small
+   *
+   * @covers \App\Api\UtilityApi::surveyLangCodeGet
+   */
+  public function testSurveyLangCodeGetFlavorPlatform(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $loader = $this->createMock(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $flavor = new Flavor();
+    $flavor->setName('embroidery');
+    $loader->method('getSurveyFlavor')->willReturn($flavor);
+    $this->facade->method('getLoader')->willReturn($loader);
+
+    $response = $this->object->surveyLangCodeGet('de', 'embroidery', 'android', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+
+    $this->assertInstanceOf(SurveyResponse::class, $response);
+  }
+
+  /**
+   * @group unit
+   *
+   * @small
+   *
+   * @covers \App\Api\UtilityApi::surveyLangCodeGet
+   */
+  public function testSurveyLangCodeGetFlavor(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $loader = $this->createMock(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $flavor = new Flavor();
+    $flavor->setName('pocketcode');
+    $loader->method('getSurveyFlavor')->willReturn($flavor);
+    $this->facade->method('getLoader')->willReturn($loader);
+
+    $response = $this->object->surveyLangCodeGet('de', 'pocketcode', '', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+
+    $this->assertInstanceOf(SurveyResponse::class, $response);
+  }
+
+  /**
+   * @group unit
+   *
+   * @small
+   *
+   * @covers \App\Api\UtilityApi::surveyLangCodeGet
+   */
+  public function testSurveyLangCodeGetFlavorError(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $loader = $this->createMock(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $loader->method('getSurveyFlavor')->willReturn(null);
+    $this->facade->method('getLoader')->willReturn($loader);
+
+    $response = $this->object->surveyLangCodeGet('de', 'invalid', '', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_BAD_REQUEST, $response_code);
+
+    $this->assertNull($response);
+  }
+
+  /**
+   * @group unit
+   *
+   * @small
+   *
+   * @covers \App\Api\UtilityApi::surveyLangCodeGet
+   */
+  public function testSurveyLangCodeGetPlatform(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $loader = $this->createMock(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $this->facade->method('getLoader')->willReturn($loader);
+
+    $response = $this->object->surveyLangCodeGet('de', '', 'ios', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_OK, $response_code);
+
+    $this->assertInstanceOf(SurveyResponse::class, $response);
+  }
+
+  /**
+   * @group unit
+   *
+   * @small
+   *
+   * @covers \App\Api\UtilityApi::surveyLangCodeGet
+   */
+  public function testSurveyLangCodeGetPlatformError(): void
+  {
+    $response_code = 200;
+    $response_headers = [];
+
+    $loader = $this->createMock(UtilityApiLoader::class);
+    $loader->method('getSurvey')->willReturn($this->createMock(Survey::class));
+    $this->facade->method('getLoader')->willReturn($loader);
+
+    $response = $this->object->surveyLangCodeGet('de', '', 'windows', $response_code, $response_headers);
+
+    $this->assertEquals(Response::HTTP_BAD_REQUEST, $response_code);
+
+    $this->assertNull($response);
   }
 }
