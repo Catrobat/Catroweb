@@ -8,7 +8,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="App\DB\EntityRepository\FlavorRepository")
  * @ORM\Table(name="flavor")
  */
 class Flavor implements \Stringable
