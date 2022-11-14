@@ -22,6 +22,7 @@ class Extension implements \Stringable
   final public const RASPBERRY_PI = 'raspberry_pi';
   final public const EMBROIDERY = 'embroidery';
   final public const MINDSTORMS = 'mindstorms';
+  final public const MULTIPLAYER = 'multiplayer';
 
   /**
    * @ORM\Id

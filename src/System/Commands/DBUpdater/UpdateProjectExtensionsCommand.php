@@ -71,6 +71,13 @@ class UpdateProjectExtensionsCommand extends Command
     ++$count;
     $this->entity_manager->persist($extension);
 
+    $extension = $this->getOrCreateExtension(Extension::MULTIPLAYER)
+      ->setTitleLtmCode(self::EXTENSION_LTM_PREFIX.'multiplayer.title')
+      ->setEnabled(true)
+    ;
+    ++$count;
+    $this->entity_manager->persist($extension);
+
     $this->entity_manager->flush();
     $output->writeln("{$count} Extensions in the Database have been inserted/updated");
 
