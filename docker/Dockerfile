@@ -4,7 +4,7 @@ COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
 # Use node image for better caching
-FROM node:18 AS node-build
+FROM node:19 AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install -g @symfony/webpack-encore
