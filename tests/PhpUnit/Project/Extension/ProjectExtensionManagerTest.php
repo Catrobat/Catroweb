@@ -56,7 +56,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
         'addMindstormsExtensions',
         'addMultiplayerExtensions',
         'getExtension',
-        'saveProject'
+        'saveProject',
       ])
       ->getMockForAbstractClass()
     ;
