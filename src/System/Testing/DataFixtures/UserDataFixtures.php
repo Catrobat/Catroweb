@@ -6,8 +6,6 @@ use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
 use App\User\UserManager;
 use App\Utils\TimeUtils;
-use DateTime;
-use Exception;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\PasswordHasher\Hasher\PasswordHasherFactoryInterface;
 
@@ -115,13 +113,13 @@ class UserDataFixtures
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function overwriteCreatedAt(array $config = []): void
   {
     /** @var User $user */
     $user = $this->user_manager->findUserByUsername($config['name']);
-    $date = isset($config['created_at']) ? new DateTime($config['created_at']) : TimeUtils::getDateTime();
+    $date = isset($config['created_at']) ? new \DateTime($config['created_at']) : TimeUtils::getDateTime();
     $user->changeCreatedAt($date);
     $this->user_manager->updateUser($user, true);
   }

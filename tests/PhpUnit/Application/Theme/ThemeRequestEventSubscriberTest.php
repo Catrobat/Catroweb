@@ -6,7 +6,6 @@ use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\Utils\RequestHelper;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,7 +47,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
    *
    * @dataProvider kernelRequestDataProvider
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testOnKernelRequestThemeInRequest(
     string $request_theme, string $request_uri, string $expected_routing_theme, string $expected_flavor
@@ -143,7 +142,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   /**
    * @group integration
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testOnKernelRequestSubRequest(): void
   {
@@ -254,7 +253,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
    *
    * @return MockObject|RequestEvent
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   private function mockRequestEvent(int $request_type, $attributes = null, string $uri = null)
   {

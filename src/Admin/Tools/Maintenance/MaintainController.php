@@ -2,7 +2,6 @@
 
 namespace App\Admin\Tools\Maintenance;
 
-use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
@@ -25,7 +24,7 @@ class MaintainController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function compressedAction(): RedirectResponse
   {
@@ -49,7 +48,7 @@ class MaintainController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function archiveLogsAction(): RedirectResponse
   {
@@ -73,7 +72,7 @@ class MaintainController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function deleteLogsAction(): RedirectResponse
   {
@@ -104,7 +103,7 @@ class MaintainController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function apkAction(): RedirectResponse
   {

@@ -4,7 +4,6 @@ namespace App\DB\EntityRepository\Project;
 
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
 use App\DB\Entity\User\User;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\Persistence\ManagerRegistry;
@@ -103,7 +102,7 @@ class ProgramRemixBackwardRepository extends ServiceEntityRepository
     ;
   }
 
-  public function markAllUnseenRelationsAsSeen(DateTime $seen_at): void
+  public function markAllUnseenRelationsAsSeen(\DateTime $seen_at): void
   {
     $qb = $this->createQueryBuilder('b');
 

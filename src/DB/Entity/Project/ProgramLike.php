@@ -7,7 +7,6 @@ use App\DB\EntityRepository\Project\ProgramLikeRepository;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 
 /**
  * @ORM\HasLifecycleCallbacks
@@ -83,7 +82,7 @@ class ProgramLike implements \Stringable
   /**
    * @ORM\Column(type="datetime")
    */
-  protected ?DateTime $created_at = null;
+  protected ?\DateTime $created_at = null;
 
   public function __construct(Program $program, User $user, int $type)
   {
@@ -105,7 +104,7 @@ class ProgramLike implements \Stringable
   /**
    * @ORM\PrePersist
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateTimestamps(): void
   {
@@ -167,12 +166,12 @@ class ProgramLike implements \Stringable
     return self::$TYPE_NAMES[$this->type];
   }
 
-  public function getCreatedAt(): ?DateTime
+  public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
-  public function setCreatedAt(DateTime $created_at): ProgramLike
+  public function setCreatedAt(\DateTime $created_at): ProgramLike
   {
     $this->created_at = $created_at;
 

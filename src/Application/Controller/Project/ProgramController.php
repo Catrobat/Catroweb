@@ -21,7 +21,6 @@ use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
-use Exception;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -213,7 +212,7 @@ class ProgramController extends AbstractController
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/editProjectName/{id}', name: 'edit_program_name', methods: ['PUT'])]
   public function editProgramName(Request $request, string $id): Response
@@ -253,7 +252,7 @@ class ProgramController extends AbstractController
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/editProjectDescription/{id}', name: 'edit_program_description', methods: ['PUT'])]
   public function editProgramDescription(Request $request, string $id): Response
@@ -292,7 +291,7 @@ class ProgramController extends AbstractController
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/editProjectCredits/{id}', name: 'edit_program_credits', methods: ['PUT'])]
   public function editProgramCredits(Request $request, string $id): Response
@@ -491,7 +490,7 @@ class ProgramController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
@@ -527,7 +526,7 @@ class ProgramController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
@@ -574,7 +573,7 @@ class ProgramController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 

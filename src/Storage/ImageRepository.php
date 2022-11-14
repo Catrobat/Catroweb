@@ -2,8 +2,6 @@
 
 namespace App\Storage;
 
-use Imagick;
-use ImagickException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\UrlHelper;
@@ -18,7 +16,7 @@ class ImageRepository
 
   private readonly ?string $featured_path;
 
-  private ?Imagick $imagick = null;
+  private ?\Imagick $imagick = null;
 
   public function __construct(ParameterBagInterface $parameter_bag, private readonly ?UrlHelper $urlHelper = null)
   {
@@ -38,7 +36,7 @@ class ImageRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function save(File $file, string|int $id, string $extension, bool $featured): void
   {
@@ -88,12 +86,12 @@ class ImageRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
-  public function getImagick(): Imagick
+  public function getImagick(): \Imagick
   {
     if (null == $this->imagick) {
-      $this->imagick = new Imagick();
+      $this->imagick = new \Imagick();
     }
 
     return $this->imagick;

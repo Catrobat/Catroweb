@@ -12,7 +12,6 @@ use App\DB\Entity\Project\Tag;
 use App\Project\ProgramManager;
 use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
-use DateTimeInterface;
 use Exception;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -127,7 +126,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       try {
         $data['uploaded_string'] = $this->time_formatter->format($project->getUploadedAt()->getTimestamp());
       } catch (Exception) {
-        $data['uploaded_string'] = $project->getUploadedAt()->format(DateTimeInterface::RFC2822);
+        $data['uploaded_string'] = $project->getUploadedAt()->format(\DateTimeInterface::RFC2822);
       }
     }
     if (in_array('screenshot_large', $attributes_list, true)) {

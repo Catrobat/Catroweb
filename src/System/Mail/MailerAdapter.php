@@ -2,7 +2,6 @@
 
 namespace App\System\Mail;
 
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -31,7 +30,7 @@ class MailerAdapter
     $html = '';
     try {
       $html = $this->templateWrapper->render($template, $context);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->logger->error("Can't render mail template: {$template}".$e->getMessage());
     }
 

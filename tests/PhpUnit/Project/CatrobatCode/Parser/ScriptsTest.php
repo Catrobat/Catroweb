@@ -8,7 +8,6 @@ use App\Project\CatrobatCode\Parser\Scripts\ScriptFactory;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use SimpleXMLElement;
 
 /**
  * @internal
@@ -31,7 +30,7 @@ class ScriptsTest extends TestCase
   public const IMG_FILE = 'img_file';
 
   /**
-   * @var SimpleXMLElement[]
+   * @var \SimpleXMLElement[]
    */
   protected array $script_xml_properties_list;
 

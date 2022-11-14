@@ -7,7 +7,6 @@ use App\Api\Services\GeneralValidator;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
-use Imagick;
 use ImagickException;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
@@ -159,7 +158,7 @@ final class UserRequestValidator extends AbstractRequestValidator
     $image_size = 300;
 
     $result = GeneralValidator::validateImageDataUrl($picture_in, true);
-    if ($result instanceof Imagick) {
+    if ($result instanceof \Imagick) {
       try {
         $result->cropThumbnailImage($image_size, $image_size);
         $picture_out = 'data:'.$result->getImageMimeType().';base64,'.base64_encode($result->getImageBlob());

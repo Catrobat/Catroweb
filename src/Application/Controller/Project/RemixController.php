@@ -4,7 +4,6 @@ namespace App\Application\Controller\Project;
 
 use App\Project\Remix\RemixManager;
 use App\Storage\ScreenshotRepository;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -35,7 +34,7 @@ class RemixController extends AbstractController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/project/{id}/remix_graph_data', name: 'remix_graph_data', methods: ['GET'])]
   public function getRemixGraphData(Request $request, string $id): JsonResponse

@@ -4,7 +4,6 @@ namespace Tests\PhpUnit\Utils;
 
 use App\Utils\TimeUtils;
 use DateTime;
-use Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,11 +18,11 @@ class TimeUtilsTest extends TestCase
    *
    * @test
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function theCurrentTimestampShouldBeReturned(): void
   {
-    $current_timestamp = (new DateTime())->getTimestamp();
+    $current_timestamp = (new \DateTime())->getTimestamp();
 
     TimeUtils::unfreezeTime();
 
@@ -37,11 +36,11 @@ class TimeUtilsTest extends TestCase
    *
    * @test
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function theCurrentDatetimeShouldBeReturned(): void
   {
-    $current_datetime = new DateTime();
+    $current_datetime = new \DateTime();
 
     $datetime_from_time_utils = TimeUtils::getDateTime();
 
@@ -53,11 +52,11 @@ class TimeUtilsTest extends TestCase
    *
    * @test
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function freezingTimeShouldWork(): void
   {
-    $freeze_time_to = new DateTime('2012-03-24 17:45:1');
+    $freeze_time_to = new \DateTime('2012-03-24 17:45:1');
 
     TimeUtils::freezeTime($freeze_time_to);
 
@@ -70,7 +69,7 @@ class TimeUtilsTest extends TestCase
    *
    * @test
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function unfreezingTimeShouldWork(): void
   {

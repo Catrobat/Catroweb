@@ -6,7 +6,6 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use InvalidArgumentException;
 
 /**
  * @ORM\Entity(repositoryClass=StudioUserRepository::class)
@@ -65,12 +64,12 @@ class StudioUser
   /**
    * @ORM\Column(name="updated_on", type="datetime", length=300, nullable=true)
    */
-  protected ?DateTime $updated_on = null;
+  protected ?\DateTime $updated_on = null;
 
   /**
    * @ORM\Column(name="created_on", type="datetime", length=300, nullable=false)
    */
-  protected DateTime $created_on;
+  protected \DateTime $created_on;
 
   public function getId(): ?int
   {
@@ -128,7 +127,7 @@ class StudioUser
   public function setRole(string $role): StudioUser
   {
     if (!in_array($role, $this->roles, true)) {
-      throw new InvalidArgumentException('invalid user role given');
+      throw new \InvalidArgumentException('invalid user role given');
     }
     $this->role = $role;
 
@@ -143,31 +142,31 @@ class StudioUser
   public function setStatus(string $status): StudioUser
   {
     if (!in_array($status, $this->statuses, true)) {
-      throw new InvalidArgumentException('invalid user status given');
+      throw new \InvalidArgumentException('invalid user status given');
     }
     $this->status = $status;
 
     return $this;
   }
 
-  public function getUpdatedOn(): ?DateTime
+  public function getUpdatedOn(): ?\DateTime
   {
     return $this->updated_on;
   }
 
-  public function setUpdatedOn(?DateTime $updated_on): StudioUser
+  public function setUpdatedOn(?\DateTime $updated_on): StudioUser
   {
     $this->updated_on = $updated_on;
 
     return $this;
   }
 
-  public function getCreatedOn(): DateTime
+  public function getCreatedOn(): \DateTime
   {
     return $this->created_on;
   }
 
-  public function setCreatedOn(DateTime $created_on): StudioUser
+  public function setCreatedOn(\DateTime $created_on): StudioUser
   {
     $this->created_on = $created_on;
 

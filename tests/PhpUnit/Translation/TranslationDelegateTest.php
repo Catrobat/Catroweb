@@ -8,7 +8,6 @@ use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\Translation\TranslationApiInterface;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
-use InvalidArgumentException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -119,7 +118,7 @@ class TranslationDelegateTest extends TestCase
    */
   public function testInvalidLanguageCode(string $invalid_code): void
   {
-    $this->expectException(InvalidArgumentException::class);
+    $this->expectException(\InvalidArgumentException::class);
     $translation_delegate = new TranslationDelegate($this->project_custom_translation_repository, $this->project_machine_translation_repository);
 
     $translation_delegate->translate('test', $invalid_code, $invalid_code);

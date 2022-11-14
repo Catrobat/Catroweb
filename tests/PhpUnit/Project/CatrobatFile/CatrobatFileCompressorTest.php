@@ -4,7 +4,6 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -30,7 +29,7 @@ class CatrobatFileCompressorTest extends TestCase
 
   public function testThrowsAnExceptionIfGivenAnInvalidCompressDirectory(): void
   {
-    $this->expectException(Exception::class);
+    $this->expectException(\Exception::class);
     $this->catrobat_file_compressor->compress(__DIR__.'/invalid_directory/', RefreshTestEnvHook::$CACHE_DIR.'base/', 'archivename');
   }
 

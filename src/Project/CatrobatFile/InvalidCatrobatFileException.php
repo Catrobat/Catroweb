@@ -2,9 +2,7 @@
 
 namespace App\Project\CatrobatFile;
 
-use RuntimeException;
-
-class InvalidCatrobatFileException extends RuntimeException
+class InvalidCatrobatFileException extends \RuntimeException
 {
   public function __construct(string $message, int $code, private readonly string $debug_message = '')
   {

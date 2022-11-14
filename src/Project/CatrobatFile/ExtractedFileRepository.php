@@ -5,7 +5,6 @@ namespace App\Project\CatrobatFile;
 use App\DB\Entity\Project\Program;
 use App\Project\ProgramManager;
 use App\Storage\FileHelper;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
@@ -58,7 +57,7 @@ class ExtractedFileRepository
       $extract_dir = $this->local_path.$program_id.'/';
       FileHelper::removeDirectory($extract_dir);
       $this->program_manager->save($program);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->logger->error(
         "Removing extracted project files failed with code '".$e->getCode().
         "' and message: '".$e->getMessage()."'"
@@ -67,13 +66,13 @@ class ExtractedFileRepository
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function saveProgramExtractedFile(ExtractedCatrobatFile $extracted_file): void
   {
     $file_overwritten = $extracted_file->getProgramXmlProperties()->asXML($extracted_file->getPath().'code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
   }
 }

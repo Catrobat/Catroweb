@@ -7,7 +7,6 @@ use App\DB\Entity\User\User;
 use App\Utils\TimeUtils;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 {
@@ -48,7 +47,7 @@ class UserRemixSimilarityRelationRepository extends ServiceEntityRepository
 
   /**
    * @throws \Doctrine\DBAL\Exception
-   * @throws Exception
+   * @throws \Exception
    */
   public function insertRelation(string $first_user_id, string $second_user_id, float $similarity): void
   {

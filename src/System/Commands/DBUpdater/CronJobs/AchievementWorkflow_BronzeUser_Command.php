@@ -6,7 +6,6 @@ use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -45,7 +44,7 @@ class AchievementWorkflow_BronzeUser_Command extends Command
       if (!is_null($user)) {
         try {
           $this->achievement_manager->unlockAchievementBronzeUser($user);
-        } catch (Exception $exception) {
+        } catch (\Exception $exception) {
           $output->writeln($exception->getMessage());
         }
       }

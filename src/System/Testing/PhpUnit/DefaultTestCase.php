@@ -3,8 +3,6 @@
 namespace App\System\Testing\PhpUnit;
 
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionClass;
-use ReflectionException;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 /**
@@ -17,11 +15,11 @@ class DefaultTestCase extends KernelTestCase
   /**
    * @return mixed
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function invokeMethod(MockObject &$object, string $methodName, array $parameters = [])
   {
-    $reflection = new ReflectionClass($object::class);
+    $reflection = new \ReflectionClass($object::class);
     $method = $reflection->getMethod($methodName);
     $method->setAccessible(true);
 
@@ -29,11 +27,11 @@ class DefaultTestCase extends KernelTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public static function mockProperty(mixed $class, mixed $instance, mixed $property, mixed $value): void
   {
-    $reflection = new ReflectionClass($class);
+    $reflection = new \ReflectionClass($class);
     $property = $reflection->getProperty($property);
     $property->setAccessible(true);
     $property->setValue($instance, $value);

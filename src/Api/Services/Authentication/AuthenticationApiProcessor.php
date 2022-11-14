@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\Security\PasswordGenerator;
 use App\User\UserManager;
 use CoderCat\JWKToPEM\JWKConverter;
-use Exception;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
@@ -95,7 +94,7 @@ final class AuthenticationApiProcessor extends AbstractApiProcessor
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function connectUserToAccount(string $id_token, string $resource_owner): User
   {

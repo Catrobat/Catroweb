@@ -7,7 +7,6 @@ use App\Admin\Tools\Logs\LogLine;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -86,7 +85,7 @@ class LogsControllerTest extends DefaultTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    *
    * @dataProvider getLogFileContentDataProvider
    */
@@ -124,7 +123,7 @@ class LogsControllerTest extends DefaultTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testGetAllLogFiles(): void
   {

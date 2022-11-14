@@ -8,7 +8,9 @@ $config = new PhpCsFixer\Config();
 $config
   ->setRiskyAllowed(true)
   ->setRules([
+    '@PSR1' => true,
     '@PSR2' => true,
+    '@PSR12' => true,
     '@PhpCsFixer' => true,
     '@Symfony' => true,
     '@DoctrineAnnotation' => true,

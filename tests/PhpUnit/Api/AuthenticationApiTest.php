@@ -17,7 +17,6 @@ use OpenAPI\Server\Model\LoginRequest;
 use OpenAPI\Server\Model\RefreshRequest;
 use OpenAPI\Server\Model\UpgradeTokenRequest;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -32,7 +31,7 @@ final class AuthenticationApiTest extends DefaultTestCase
   protected AuthenticationApiFacade|MockObject $facade;
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   protected function setUp(): void
   {

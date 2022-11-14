@@ -4,7 +4,6 @@ namespace App\Translation;
 
 use App\Project\ProgramManager;
 use App\User\Achievements\AchievementManager;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,7 +45,7 @@ class CustomTranslationAchievementEventSubscriber implements EventSubscriberInte
 
       try {
         $this->achievement_manager->unlockAchievementCustomTranslation($user);
-      } catch (Exception $e) {
+      } catch (\Exception $e) {
         $this->logger->warning('CustomTranslationAchievementListener: Exception unlocking achievement, user: '
           .$user->getId().', exception: '.$e->getMessage());
       }

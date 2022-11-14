@@ -6,7 +6,6 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use InvalidArgumentException;
 
 /**
  * @ORM\Entity(repositoryClass=StudioActivityRepository::class)
@@ -50,7 +49,7 @@ class StudioActivity
   /**
    * @ORM\Column(name="created_on", type="datetime", nullable=false)
    */
-  protected DateTime $created_on;
+  protected \DateTime $created_on;
 
   public function getId(): ?int
   {
@@ -84,7 +83,7 @@ class StudioActivity
   public function setType(string $type): StudioActivity
   {
     if (!in_array($type, $this->activity_types, true)) {
-      throw new InvalidArgumentException('invalid activity type given');
+      throw new \InvalidArgumentException('invalid activity type given');
     }
     $this->type = $type;
 
@@ -103,12 +102,12 @@ class StudioActivity
     return $this;
   }
 
-  public function getCreatedOn(): DateTime
+  public function getCreatedOn(): \DateTime
   {
     return $this->created_on;
   }
 
-  public function setCreatedOn(DateTime $created_on): StudioActivity
+  public function setCreatedOn(\DateTime $created_on): StudioActivity
   {
     $this->created_on = $created_on;
 

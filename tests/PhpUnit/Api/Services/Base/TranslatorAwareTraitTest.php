@@ -5,7 +5,6 @@ namespace Tests\PhpUnit\Api\Services\Base;
 use App\Api\Services\Base\TranslatorAwareTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use Behat\Behat\Definition\Translator\Translator;
-use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -84,7 +83,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     $translator = $this->createMock(Translator::class);
     $translator->expects($this->exactly(2))->method('trans')->will(
       $this->onConsecutiveCalls(
-        $this->throwException(new Exception()),
+        $this->throwException(new \Exception()),
         'en',
       )
     );

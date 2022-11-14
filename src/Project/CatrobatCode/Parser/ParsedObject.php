@@ -3,11 +3,10 @@
 namespace App\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\Scripts\ScriptFactory;
-use SimpleXMLElement;
 
 class ParsedObject
 {
-  protected SimpleXMLElement $name;
+  protected \SimpleXMLElement $name;
 
   protected array $looks = [];
 
@@ -15,7 +14,7 @@ class ParsedObject
 
   protected array $scripts = [];
 
-  public function __construct(protected SimpleXMLElement $object_xml_properties)
+  public function __construct(protected \SimpleXMLElement $object_xml_properties)
   {
     $this->name = $this->resolveName();
 
@@ -24,7 +23,7 @@ class ParsedObject
     $this->parseScripts();
   }
 
-  public function getName(): SimpleXMLElement
+  public function getName(): \SimpleXMLElement
   {
     return $this->name;
   }
@@ -49,7 +48,7 @@ class ParsedObject
     return false;
   }
 
-  private function resolveName(): SimpleXMLElement
+  private function resolveName(): \SimpleXMLElement
   {
     if (null != $this->object_xml_properties[Constants::NAME_ATTRIBUTE]) {
       return $this->object_xml_properties[Constants::NAME_ATTRIBUTE];
@@ -79,7 +78,7 @@ class ParsedObject
     }
   }
 
-  private function dereference(SimpleXMLElement $xml_properties): SimpleXMLElement
+  private function dereference(\SimpleXMLElement $xml_properties): \SimpleXMLElement
   {
     if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
       return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE])[0];

@@ -13,7 +13,6 @@ use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
 use App\DB\Entity\User\RecommenderSystem\UserRemixSimilarityRelation;
 use App\DB\EntityRepository\User\UserRepository;
 use App\DB\Generator\MyUuidGenerator;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\Common\Collections\Criteria;
@@ -492,7 +491,7 @@ class User extends BaseUser
     return $this->google_access_token;
   }
 
-  public function changeCreatedAt(DateTime $createdAt): void
+  public function changeCreatedAt(\DateTime $createdAt): void
   {
     $this->createdAt = $createdAt;
   }

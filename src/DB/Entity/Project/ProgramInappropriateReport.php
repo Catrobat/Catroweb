@@ -7,8 +7,6 @@ use App\DB\EntityRepository\Project\ProgramInappropriateReportRepository;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
-use InvalidArgumentException;
 
 /**
  * ProgramInappropriateReport.
@@ -55,7 +53,7 @@ class ProgramInappropriateReport
   /**
    * @ORM\Column(name="time", type="datetime")
    */
-  private ?DateTime $time = null;
+  private ?\DateTime $time = null;
 
   /**
    * @ORM\Column(type="integer")
@@ -76,7 +74,7 @@ class ProgramInappropriateReport
   /**
    * @ORM\PrePersist
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateTimestamps(): void
   {
@@ -156,25 +154,25 @@ class ProgramInappropriateReport
     return $this->note;
   }
 
-  public function setTime(DateTime $time): ProgramInappropriateReport
+  public function setTime(\DateTime $time): ProgramInappropriateReport
   {
     $this->time = $time;
 
     return $this;
   }
 
-  public function getTime(): ?DateTime
+  public function getTime(): ?\DateTime
   {
     return $this->time;
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function setState(int $state): ProgramInappropriateReport
   {
     if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true)) {
-      throw new InvalidArgumentException('Invalid state');
+      throw new \InvalidArgumentException('Invalid state');
     }
     $this->state = $state;
 

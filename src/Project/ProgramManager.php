@@ -26,7 +26,6 @@ use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -37,7 +36,6 @@ use Elastica\Query\Terms;
 use Elastica\Util;
 use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
-use InvalidArgumentException;
 use Psr\Log\LoggerInterface;
 use Sonata\UserBundle\Model\UserInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -164,7 +162,7 @@ class ProgramManager
       if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
       }
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->logger->error('UploadError -> saveProgramAssetsTemp failed!', ['exception' => $e->getMessage()]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
@@ -183,7 +181,7 @@ class ProgramManager
       if (null !== $extracted_file->getScreenshotPath()) {
         $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
       }
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $this->logger->error('UploadError -> makeTempProgramPerm failed!', ['exception' => $e]);
       $program_id = $program->getId();
       $this->entity_manager->remove($program);
@@ -227,7 +225,7 @@ class ProgramManager
   /**
    * Adds a new program from a scratch_program. Doesn't add the Project file.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
   {
@@ -302,7 +300,7 @@ class ProgramManager
   }
 
   /**
-   * @throws NoResultException|InvalidArgumentException
+   * @throws NoResultException|\InvalidArgumentException
    */
   public function changeLike(Program $project, User $user, int $type, string $action): void
   {
@@ -311,7 +309,7 @@ class ProgramManager
     } elseif (ProgramLike::ACTION_REMOVE === $action) {
       $this->program_like_repository->removeLike($project, $user, $type);
     } else {
-      throw new InvalidArgumentException("Invalid action: {$action}");
+      throw new \InvalidArgumentException("Invalid action: {$action}");
     }
   }
 
@@ -476,7 +474,7 @@ class ProgramManager
    *
    * @return Program|object|null
    */
-  public function findOneByRemixMigratedAt(?DateTime $remix_migrated_at)
+  public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at)
   {
     return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
@@ -611,7 +609,7 @@ class ProgramManager
     $download->setUser($user);
     $download->setProgram($program);
     $download->setType($download_type);
-    $download->setDownloadedAt(new DateTime('now'));
+    $download->setDownloadedAt(new \DateTime('now'));
     $this->entity_manager->persist($download);
     $this->entity_manager->flush();
   }

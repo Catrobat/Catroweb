@@ -14,7 +14,6 @@ use App\System\Testing\DataFixtures\UserDataFixtures;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -222,7 +221,7 @@ class StudioManagerTest extends DefaultTestCase
    *
    * @small
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemoveStudioProject(): void
   {

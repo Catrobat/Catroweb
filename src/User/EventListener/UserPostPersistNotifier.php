@@ -6,7 +6,6 @@ use App\DB\Entity\User\User;
 use App\System\Mail\MailerAdapter;
 use App\User\Achievements\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
@@ -24,7 +23,7 @@ class UserPostPersistNotifier
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function addVerifiedDeveloperAchievement(User $user): void
   {

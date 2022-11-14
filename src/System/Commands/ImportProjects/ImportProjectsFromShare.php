@@ -4,7 +4,6 @@ namespace App\System\Commands\ImportProjects;
 
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -34,7 +33,7 @@ class ImportProjectsFromShare extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -86,7 +85,7 @@ class ImportProjectsFromShare extends Command
             continue;
           }
           --$downloads_left;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
           $output->writeln('File <'.$project_url.'> download failed');
           $output->writeln('Error code: '.$e->getCode());
           $output->writeln('Error message: '.$e->getMessage());
@@ -97,7 +96,7 @@ class ImportProjectsFromShare extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function importProjects(string $import_dir, string $username, int $remix_layout, OutputInterface $output): void
   {

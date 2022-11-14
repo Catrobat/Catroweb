@@ -13,7 +13,6 @@ use App\Api\Services\ValidationWrapper;
 use App\Api\UserApi;
 use App\DB\Entity\User\User;
 use App\System\Testing\PhpUnit\DefaultTestCase;
-use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
@@ -96,7 +95,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserPostDryRun(): void
   {
@@ -125,7 +124,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserPostValidationError(): void
   {
@@ -154,7 +153,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserPost(): void
   {
@@ -184,7 +183,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userDelete
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserDelete(): void
   {
@@ -207,7 +206,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserGet(): void
   {
@@ -232,7 +231,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userIdGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserIdGetNotFound(): void
   {
@@ -256,7 +255,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userIdGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserIdGet(): void
   {
@@ -281,7 +280,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::usersSearchGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUsersSearchGet(): void
   {
@@ -306,7 +305,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userPut
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserPutDryRun(): void
   {
@@ -338,7 +337,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userPut
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserPutValidationError(): void
   {
@@ -370,7 +369,7 @@ final class UserApiTest extends DefaultTestCase
    *
    * @covers \App\Api\UserApi::userPut
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUserPut(): void
   {

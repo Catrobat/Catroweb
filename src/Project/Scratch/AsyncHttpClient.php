@@ -2,7 +2,6 @@
 
 namespace App\Project\Scratch;
 
-use Generator;
 use GuzzleHttp\Client;
 use GuzzleHttp\Promise\EachPromise;
 use Psr\Http\Message\ResponseInterface;
@@ -30,7 +29,7 @@ class AsyncHttpClient
       $scratch_program_ids = array_slice($scratch_program_ids, 0, $max_number_of_total_requests);
     }
 
-    $promises = function () use ($scratch_program_ids): Generator {
+    $promises = function () use ($scratch_program_ids): \Generator {
       /** @var string $scratch_program_id */
       foreach ($scratch_program_ids as $scratch_program_id) {
         $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_program_id.'/?format=json';

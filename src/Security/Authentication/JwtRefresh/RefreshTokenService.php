@@ -5,7 +5,6 @@ namespace App\Security\Authentication\JwtRefresh;
 use App\DB\Entity\User\User;
 use App\Security\Authentication\CookieService;
 use App\User\UserManager;
-use DateTime;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenInterface;
 use Gesdinet\JWTRefreshTokenBundle\Model\RefreshTokenManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
@@ -25,7 +24,7 @@ class RefreshTokenService
 
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface
   {
-    $datetime = new DateTime('now');
+    $datetime = new \DateTime('now');
     $datetime->modify('+'.$this->refreshTokenLifetime.' seconds');
 
     $refreshToken = $this->refresh_manager->create();

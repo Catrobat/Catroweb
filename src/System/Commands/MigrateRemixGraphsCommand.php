@@ -13,8 +13,6 @@ use App\Project\Scratch\AsyncHttpClient;
 use App\System\Commands\Helpers\MigrationFileLock;
 use App\User\UserManager;
 use App\Utils\TimeUtils;
-use DateTime;
-use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\NonUniqueResultException;
@@ -79,7 +77,7 @@ class MigrateRemixGraphsCommand extends Command
   /**
    * @throws NoResultException
    * @throws NonUniqueResultException
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -316,7 +314,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function addRemixData(Program $program, array $remixes_data, bool $is_update = false): void
   {
@@ -343,7 +341,7 @@ class MigrateRemixGraphsCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function debugImportMissingPrograms(OutputInterface $output, string $directory, string $username): void
   {
@@ -414,7 +412,7 @@ class MigrateRemixGraphsCommand extends Command
       $program->setVisible(true);
       $program->setUser($user);
       $program->setUploadLanguage('en');
-      $program->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
+      $program->setUploadedAt(new \DateTime('now', new \DateTimeZone('UTC')));
       $program->setRemixMigratedAt(null);
       $program->setFilesize($program_file->getSize());
       $program->setCatrobatVersionName($extracted_file->getApplicationVersion());

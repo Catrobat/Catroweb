@@ -17,7 +17,6 @@ use App\Project\Remix\RemixGraphManipulator;
 use App\Project\Remix\RemixManager;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -58,7 +57,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddSingleScratchProgram(): void
   {
@@ -98,7 +97,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddSingleScratchProgramWithMissingData(): void
   {
@@ -128,7 +127,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddMultipleScratchPrograms(): void
   {
@@ -184,7 +183,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsWhenNoParentsAreGiven(): void
   {
@@ -202,7 +201,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetProgramAsRootAndDontAddRemixRelationsForNonExistingParents(): void
   {
@@ -247,7 +246,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetProgramAsRootIfOnlyHasScratchParents(): void
   {
@@ -296,7 +295,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForOnlyOneExistingParent(): void
   {
@@ -342,7 +341,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForExistingParents(): void
   {
@@ -385,7 +384,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForExistingParentsSharingSameParent(): void
   {
@@ -448,7 +447,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForExistingParentsHavingDifferentParent(): void
   {
@@ -534,7 +533,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForScratchParent(): void
   {
@@ -604,7 +603,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph1(): void
   {
@@ -667,7 +666,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph2(): void
   {
@@ -742,7 +741,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph3(): void
   {
@@ -815,7 +814,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph4(): void
   {
@@ -903,7 +902,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph5(): void
   {
@@ -995,7 +994,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph6(): void
   {
@@ -1082,7 +1081,7 @@ class RemixManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testAddRemixRelationsForMoreComplexGraph7(): void
   {
@@ -1185,7 +1184,7 @@ class RemixManagerTest extends TestCase
   /**
    * @param Program|MockObject $program_entity
    *
-   * @throws Exception
+   * @throws \Exception
    */
   private function checkRemixRelations($program_entity, array $parent_data, array $expected_relations): void
   {

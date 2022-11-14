@@ -27,7 +27,7 @@ class SearchController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/projects/search.json', name: 'api_search_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function searchProgramsAction(Request $request, ProgramManager $program_manager, LoggerInterface $searchLogger): ProgramListResponse

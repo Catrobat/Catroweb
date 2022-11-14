@@ -8,7 +8,6 @@ use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -60,7 +59,7 @@ class UserComment implements \Stringable
   /**
    * @ORM\Column(type="date")
    */
-  protected ?DateTime $uploadDate = null;
+  protected ?\DateTime $uploadDate = null;
 
   /**
    * @ORM\Column(type="text")
@@ -162,12 +161,12 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getUploadDate(): ?DateTime
+  public function getUploadDate(): ?\DateTime
   {
     return $this->uploadDate;
   }
 
-  public function setUploadDate(DateTime $uploadDate): UserComment
+  public function setUploadDate(\DateTime $uploadDate): UserComment
   {
     $this->uploadDate = $uploadDate;
 

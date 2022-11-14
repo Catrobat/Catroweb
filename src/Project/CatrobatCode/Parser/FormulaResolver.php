@@ -2,11 +2,9 @@
 
 namespace App\Project\CatrobatCode\Parser;
 
-use SimpleXMLElement;
-
 class FormulaResolver
 {
-  public static function resolve(SimpleXMLElement $formula_list): array
+  public static function resolve(\SimpleXMLElement $formula_list): array
   {
     $formulas = [];
     foreach ($formula_list->children() as $formula) {
@@ -16,7 +14,7 @@ class FormulaResolver
     return $formulas;
   }
 
-  private static function resolveFormula(?SimpleXMLElement $formula): ?string
+  private static function resolveFormula(?\SimpleXMLElement $formula): ?string
   {
     $resolved_formula = null;
     if (null !== $formula) {
@@ -52,7 +50,7 @@ class FormulaResolver
     return $resolved_function;
   }
 
-  private static function resolveOperator(SimpleXMLElement $operator): ?string
+  private static function resolveOperator(\SimpleXMLElement $operator): ?string
   {
     return match ((string) $operator) {
       Constants::PLUS_OPERATOR => '+',

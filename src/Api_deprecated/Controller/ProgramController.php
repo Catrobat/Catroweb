@@ -6,8 +6,6 @@ use App\Api_deprecated\Responses\ProgramListResponse;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\Project\ProgramLike;
 use App\Project\ProgramManager;
-use Exception;
-use stdClass;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -41,7 +39,7 @@ class ProgramController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/project/{id}/likes', name: 'api_project_likes', methods: ['GET'])]
   public function projectLikesAction(string $id, ProgramManager $program_manager): JsonResponse
@@ -58,8 +56,8 @@ class ProgramController extends AbstractController
         $obj = $user_objects[$like->getUser()->getId()];
         $obj->types[] = $like->getTypeAsString();
       } else {
-        $obj = new stdClass();
-        $obj->user = new stdClass();
+        $obj = new \stdClass();
+        $obj->user = new \stdClass();
         $obj->user->id = $like->getUser()->getId();
         $obj->user->name = $like->getUser()->getUsername();
         $obj->types = [$like->getTypeAsString()];
@@ -84,15 +82,15 @@ class ProgramController extends AbstractController
       throw $this->createNotFoundException("Can't count likes of a project that's not visible to you!; Id: `{$id}`");
     }
     $user_locale = $request->getLocale();
-    $data = new stdClass();
-    $data->total = new stdClass();
+    $data = new \stdClass();
+    $data->total = new \stdClass();
     $data->total->value = $program_manager->totalLikeCount($id);
     $data->total->stringValue = TwigExtension::humanFriendlyNumber(
       $data->total->value, $translator, $user_locale
     );
     foreach (ProgramLike::$VALID_TYPES as $type_id) {
       $type_name = ProgramLike::$TYPE_NAMES[$type_id];
-      $data->{$type_name} = new stdClass();
+      $data->{$type_name} = new \stdClass();
       $data->{$type_name}->value = $program_manager->likeTypeCount($id, $type_id);
       $data->{$type_name}->stringValue = TwigExtension::humanFriendlyNumber(
         $data->{$type_name}->value, $translator, $user_locale

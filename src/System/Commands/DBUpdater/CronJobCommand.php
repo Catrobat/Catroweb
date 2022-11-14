@@ -5,9 +5,7 @@ namespace App\System\Commands\DBUpdater;
 use App\DB\Entity\System\CronJob;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\System\Commands\Helpers\CommandHelper;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -33,7 +31,7 @@ class CronJobCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -132,7 +130,7 @@ class CronJobCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function runCronJob(string $name, array $command, array $config, string $interval, OutputInterface $output): bool
   {
@@ -149,7 +147,7 @@ class CronJobCommand extends Command
 
     if (!is_null($cron_job->getStartAt()) && !is_null($cron_job->getEndAt())) {
       $next_run_at = $cron_job->getStartAt()->modify('+'.$cron_job->getCroninterval());
-      if ($next_run_at > new DateTime('now') && 0 === $cron_job->getResultCode()) {
+      if ($next_run_at > new \DateTime('now') && 0 === $cron_job->getResultCode()) {
         $output->writeln('Job skipped.');
 
         return false;
@@ -157,7 +155,7 @@ class CronJobCommand extends Command
     }
 
     $cron_job->setState('run');
-    $cron_job->setStartAt(new DateTime('now'));
+    $cron_job->setStartAt(new \DateTime('now'));
     $this->entity_manager->persist($cron_job);
     $this->entity_manager->flush();
 
@@ -174,7 +172,7 @@ class CronJobCommand extends Command
     }
 
     $cron_job->setResultCode($result_code);
-    $cron_job->setEndAt(new DateTime('now'));
+    $cron_job->setEndAt(new \DateTime('now'));
     $cron_job->setState('idle');
     $this->entity_manager->persist($cron_job);
     $this->entity_manager->flush();

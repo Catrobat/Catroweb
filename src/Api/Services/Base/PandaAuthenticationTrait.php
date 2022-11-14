@@ -3,7 +3,6 @@
 namespace App\Api\Services\Base;
 
 use App\Api\Exceptions\ApiException;
-use Exception;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -24,7 +23,7 @@ trait PandaAuthenticationTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function extractAuthenticationToken(string $value): string
   {

@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\Project\Apk\ApkRepository;
 use App\Project\Event\ProjectDownloadEvent;
 use App\Project\ProgramManager;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -71,7 +70,7 @@ class DownloadApkController extends AbstractController
       if (!$file->isFile()) {
         throw new NotFoundHttpException();
       }
-    } catch (Exception $exception) {
+    } catch (\Exception $exception) {
       $project = $this->program_manager->find($id);
       if (null !== $project) {
         $project->setApkStatus(Program::APK_NONE);

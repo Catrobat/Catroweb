@@ -3,8 +3,6 @@
 namespace App\System\Commands\Create;
 
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
-use Exception;
-use ImagickException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -28,8 +26,8 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
   }
 
   /**
-   * @throws ImagickException
-   * @throws Exception
+   * @throws \ImagickException
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -39,7 +37,7 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
       !$input->getOption('force')
       && !in_array($username, ['www-data', 'apache', 'httpd', '_www', 'nginx'], true)
     ) {
-      throw new Exception('Please run this command as web server user (e.g. sudo -u www-data bin/console ...) or run with --force.');
+      throw new \Exception('Please run this command as web server user (e.g. sudo -u www-data bin/console ...) or run with --force.');
     }
 
     $this->media_package_file_repository->createMissingThumbnails();

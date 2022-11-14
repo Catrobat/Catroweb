@@ -45,7 +45,7 @@ class CodeViewController extends AbstractController
       $program = $this->program_manager->find($id);
       $extracted_program = $this->extracted_file_repository->loadProgramExtractedFile($program);
       if (null === $extracted_program) {
-        throw new Exception();
+        throw new \Exception();
       }
       $parsed_program = $this->code_parser->parse($extracted_program);
 

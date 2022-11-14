@@ -5,7 +5,6 @@ namespace App\DB\EntityRepository\MediaLibrary;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 /**
  * Class MediaPackageRepository used for interacting with the database when handling MediaPackages.
@@ -26,7 +25,7 @@ class MediaPackageRepository extends ServiceEntityRepository
    *
    * @return MediaPackage the created MediaPackage
    *
-   * @throws Exception when an error occurs during creating
+   * @throws \Exception when an error occurs during creating
    */
   public function createMediaPackage(string $name, string $url): MediaPackage
   {

@@ -7,7 +7,6 @@ use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Psr\Log\LoggerInterface;
 
 class ProjectExtensionManager
@@ -95,7 +94,7 @@ class ProjectExtensionManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function getExtension(string $internal_title): ?Extension
   {

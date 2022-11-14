@@ -2,15 +2,13 @@
 
 namespace App\Project\CatrobatCode\Parser;
 
-use SimpleXMLElement;
-
 class ParsedObjectAsset
 {
   protected ?string $name = null;
 
   protected ?string $file_name = null;
 
-  public function __construct(protected SimpleXMLElement $asset_xml_properties)
+  public function __construct(protected \SimpleXMLElement $asset_xml_properties)
   {
     $this->name = $asset_xml_properties[Constants::NAME_ATTRIBUTE];
     $this->file_name = $this->extractFileName($asset_xml_properties);
@@ -26,7 +24,7 @@ class ParsedObjectAsset
     return $this->file_name;
   }
 
-  private function extractFileName(SimpleXMLElement $asset_xml_properties): string
+  private function extractFileName(\SimpleXMLElement $asset_xml_properties): string
   {
     // different catrobat versions: fileName is either in the attributes (old) or a separate member (new)
     $file_name = $asset_xml_properties['fileName'];
