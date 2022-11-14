@@ -8,7 +8,6 @@ use App\Project\ProgramManager;
 use App\Security\PasswordGenerator;
 use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
@@ -80,7 +79,7 @@ class UserManager implements UserManagerInterface
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function createUserFromScratch(array $userdata): ?User
   {
@@ -144,7 +143,7 @@ class UserManager implements UserManagerInterface
       ->from(\App\DB\Entity\User\User::class, 'user')
       ->leftjoin(\App\DB\Entity\Project\Program::class, 'project', Join::WITH, 'user.id = project.user')
       ->where('user.createdAt <= :date')
-      ->setParameter('date', new DateTime("-{$years} years"))
+      ->setParameter('date', new \DateTime("-{$years} years"))
       ->groupBy('user.id')
       ->having("COUNT(user.id) >= {$years}")
       ->getQuery()

@@ -5,7 +5,6 @@ namespace App\Project\Scratch;
 use App\DB\Entity\Project\Program;
 use App\Project\ProgramManager;
 use App\User\UserManager;
-use Exception;
 
 class ScratchManager
 {
@@ -18,7 +17,7 @@ class ScratchManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function createScratchProgramFromId(int $id): ?Program
   {

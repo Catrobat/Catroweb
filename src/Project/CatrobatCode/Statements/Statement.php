@@ -3,13 +3,12 @@
 namespace App\Project\CatrobatCode\Statements;
 
 use App\Project\CatrobatCode\StatementFactory;
-use SimpleXMLElement;
 
 class Statement
 {
   protected array $statements = [];
 
-  public function __construct(StatementFactory $statementFactory, protected ?SimpleXMLElement $xmlTree, protected int $spaces, private readonly string $beginString, private readonly string $endString)
+  public function __construct(StatementFactory $statementFactory, protected ?\SimpleXMLElement $xmlTree, protected int $spaces, private readonly string $beginString, private readonly string $endString)
   {
     $this->createChildren($statementFactory);
   }
@@ -50,7 +49,7 @@ class Statement
     return $this->endString;
   }
 
-  public function getXmlTree(): ?SimpleXMLElement
+  public function getXmlTree(): ?\SimpleXMLElement
   {
     return $this->xmlTree;
   }

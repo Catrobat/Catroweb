@@ -4,7 +4,6 @@ namespace App\Application\Twig;
 
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
-use NumberFormatter;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -60,16 +59,16 @@ class TwigExtension extends AbstractExtension
       return $input;
     }
 
-    $number_formatter = new NumberFormatter($user_locale, NumberFormatter::DECIMAL);
+    $number_formatter = new \NumberFormatter($user_locale, \NumberFormatter::DECIMAL);
 
     if ($input >= 1_000_000) {
-      $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 1);
+      $number_formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, 1);
 
       return $number_formatter->format($input / 1_000_000).' '.
         $translator->trans('format.million_abbreviation', [], 'catroweb');
     }
 
-    $number_formatter->setAttribute(NumberFormatter::FRACTION_DIGITS, 0);
+    $number_formatter->setAttribute(\NumberFormatter::FRACTION_DIGITS, 0);
 
     return $number_formatter->format($input);
   }

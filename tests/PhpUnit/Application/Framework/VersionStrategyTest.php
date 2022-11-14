@@ -5,7 +5,6 @@ namespace Tests\PhpUnit\Application\Framework;
 use App\Application\Framework\VersionStrategy;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 /**
@@ -66,7 +65,7 @@ class VersionStrategyTest extends DefaultTestCase
    *
    * @dataProvider dataProviderGetVersion
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testGetVersion(string $path, string $expected): void
   {

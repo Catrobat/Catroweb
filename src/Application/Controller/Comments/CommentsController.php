@@ -9,8 +9,6 @@ use App\Project\ProgramManager;
 use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
-use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +23,7 @@ class CommentsController extends AbstractController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/reportComment', name: 'report', methods: ['GET'])]
   public function reportCommentAction(): Response
@@ -45,7 +43,7 @@ class CommentsController extends AbstractController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/deleteComment', name: 'delete', methods: ['GET'])]
   public function deleteCommentAction(): Response
@@ -131,7 +129,7 @@ class CommentsController extends AbstractController
     }
     try {
       $translation_result = $translation_delegate->translate($comment->getText(), $source_language, $target_language);
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
     if (null === $translation_result) {

@@ -4,9 +4,7 @@ namespace App\Project\CatrobatFile;
 
 use App\Storage\FileHelper;
 use App\Utils\TimeUtils;
-use Exception;
 use Symfony\Component\HttpFoundation\File\File;
-use ZipArchive;
 
 class CatrobatFileExtractor
 {
@@ -21,7 +19,7 @@ class CatrobatFileExtractor
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function extract(File $file): ExtractedCatrobatFile
   {
@@ -29,7 +27,7 @@ class CatrobatFileExtractor
     $full_extract_dir = $this->extract_dir.$temp_path.'/';
     $full_extract_path = $this->extract_path.$temp_path.'/';
 
-    $zip = new ZipArchive();
+    $zip = new \ZipArchive();
     $res = $zip->open($file->getPathname());
 
     if (true === $res) {

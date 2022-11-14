@@ -113,7 +113,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectIdGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectIdGetNotFound(): void
   {
@@ -137,7 +137,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectIdGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectIdGet(): void
   {
@@ -363,7 +363,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
     $extracted_file = $this->createMock(ExtractedCatrobatFile::class);
     $extracted_file_repository->method('loadProgramExtractedFile')->willReturn($extracted_file);
-    $extracted_file_repository->method('saveProgramExtractedFile')->willThrowException(new Exception(''));
+    $extracted_file_repository->method('saveProgramExtractedFile')->willThrowException(new \Exception(''));
 
     $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
       'project_manager' => $this->createMock(ProgramManager::class),
@@ -401,7 +401,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsFeaturedGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsFeaturedGet(): void
   {
@@ -425,7 +425,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsGet(): void
   {
@@ -445,7 +445,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectIdRecommendationsGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectIdRecommendationsGetNotFound(): void
   {
@@ -464,7 +464,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectIdRecommendationsGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectIdRecommendationsGet(): void
   {
@@ -489,7 +489,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsSearchGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsSearchGet(): void
   {
@@ -509,7 +509,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsCategoriesGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsCategoriesGet(): void
   {
@@ -529,7 +529,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsUserGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsUserGetForbidden(): void
   {
@@ -553,7 +553,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsUserGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsUserGet(): void
   {
@@ -579,7 +579,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsUserIdGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsUserIdGet(): void
   {
@@ -603,7 +603,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsUserIdGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsUserIdGetNotFound(): void
   {
@@ -627,7 +627,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectIdReportPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectIdReportPost(): void
   {
@@ -648,7 +648,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsPost(): void
   {
@@ -679,7 +679,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsPostValidationError(): void
   {
@@ -714,7 +714,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsPost
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsPostAddException(): void
   {
@@ -722,7 +722,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_headers = [];
 
     $processor = $this->createMock(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willThrowException(new Exception());
+    $processor->method('addProject')->willThrowException(new \Exception());
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $user = $this->createMock(User::class);
     $user->method('isVerified')->willReturn(true);
@@ -771,7 +771,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectIdDelete
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectIdDelete(): void
   {
@@ -790,7 +790,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsExtensionsGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsExtensionsGet(): void
   {
@@ -810,7 +810,7 @@ final class ProjectsApiTest extends DefaultTestCase
    *
    * @covers \App\Api\ProjectsApi::projectsTagsGet
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testProjectsTagsGet(): void
   {

@@ -3,7 +3,6 @@
 namespace App\Project\CatrobatFile;
 
 use App\Project\Event\ProgramBeforeInsertEvent;
-use SimpleXMLElement;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -31,7 +30,7 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
     $this->validate($event->getExtractedFile()->getProgramXmlProperties());
   }
 
-  public function validate(SimpleXMLElement $xml): void
+  public function validate(\SimpleXMLElement $xml): void
   {
     if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<')) {
       throw new InvalidCatrobatFileException('errors.languageversion.tooold', 518);

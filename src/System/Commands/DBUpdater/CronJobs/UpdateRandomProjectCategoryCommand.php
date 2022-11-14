@@ -5,7 +5,6 @@ namespace App\System\Commands\DBUpdater\CronJobs;
 use App\DB\Entity\Project\Program;
 use App\Project\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,7 +26,7 @@ class UpdateRandomProjectCategoryCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

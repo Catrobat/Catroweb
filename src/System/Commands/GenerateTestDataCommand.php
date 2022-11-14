@@ -5,7 +5,6 @@ namespace App\System\Commands;
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Storage\FileHelper;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -80,7 +79,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function extractBaseTestProgram(string $directory): void
   {
@@ -91,7 +90,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function extractEmbroideryTestProgram(string $directory): void
   {
@@ -102,7 +101,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function extractExtensionTestProgram(string $directory): void
   {
@@ -162,7 +161,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function generateProgramWithTags(string $directory): void
   {
@@ -171,7 +170,7 @@ class GenerateTestDataCommand extends Command
     $properties->header->tags = 'Games,Story';
     $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
   }
 

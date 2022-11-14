@@ -40,11 +40,8 @@ use App\System\Testing\DataFixtures\UserDataFixtures;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use Behat\Behat\Tester\Exception\PendingException;
-use DateTime;
-use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
-use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
@@ -222,7 +219,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function getSymfonyService(string $service_class): ?object
   {
@@ -288,7 +285,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function insertProgramLike(array $config = [], bool $andFlush = true): ProgramLike
   {
@@ -301,7 +298,7 @@ trait ContextTrait
     $program = $program_manager->find($config['program_id']);
 
     $program_like = new ProgramLike($program, $user, $config['type']);
-    $program_like->setCreatedAt(new DateTime($config['created at'], new DateTimeZone('UTC')));
+    $program_like->setCreatedAt(new \DateTime($config['created at'], new \DateTimeZone('UTC')));
 
     $this->getManager()->persist($program_like);
     if ($andFlush) {
@@ -396,7 +393,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function insertProject(array $config, bool $andFlush = true): Program
   {
@@ -479,7 +476,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function insertUserComment(array $config, bool $andFlush = true): UserComment
   {
@@ -491,8 +488,8 @@ trait ContextTrait
 
     $new_comment = new UserComment();
     $new_comment->setUploadDate(isset($config['upload_date']) ?
-      new DateTime($config['upload_date'], new DateTimeZone('UTC')) :
-      new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+      new \DateTime($config['upload_date'], new \DateTimeZone('UTC')) :
+      new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
     );
     $new_comment->setProgram($project);
     $new_comment->setUser($user);
@@ -516,7 +513,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function insertProjectReport(array $config, bool $andFlush = true): ProgramInappropriateReport
   {
@@ -530,7 +527,7 @@ trait ContextTrait
     $new_report->setCategory($config['category']);
     $new_report->setProgram($project);
     $new_report->setReportingUser($user);
-    $new_report->setTime(new DateTime($config['time'], new DateTimeZone('UTC')));
+    $new_report->setTime(new \DateTime($config['time'], new \DateTimeZone('UTC')));
     $new_report->setNote($config['note']);
     $this->getManager()->persist($new_report);
 
@@ -542,7 +539,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function generateProgramFileWith(mixed $parameters, mixed $is_embroidery = false): string
   {
@@ -591,7 +588,7 @@ trait ContextTrait
 
     $file_overwritten = $properties->asXML($new_program_dir.'/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $compressor = new CatrobatFileCompressor();
@@ -608,7 +605,7 @@ trait ContextTrait
   }
 
   /**
-   * @throws JsonException
+   * @throws \JsonException
    */
   public function assertJsonRegex(string $pattern, string $json): void
   {

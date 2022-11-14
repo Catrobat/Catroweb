@@ -4,7 +4,6 @@ namespace App\Admin\DB_Updater\Controller;
 
 use App\System\Commands\Helpers\CommandHelper;
 use App\User\Achievements\AchievementManager;
-use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,7 +38,7 @@ class AchievementsAdminController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateAchievementsAction(): RedirectResponse
   {

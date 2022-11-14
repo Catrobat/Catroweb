@@ -2,7 +2,6 @@
 
 namespace App\Utils;
 
-use Exception;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ElapsedTimeStringFormatter
@@ -13,7 +12,7 @@ class ElapsedTimeStringFormatter
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function format(mixed $timestamp): string
   {

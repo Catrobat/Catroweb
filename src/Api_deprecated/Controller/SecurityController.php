@@ -8,7 +8,6 @@ use App\Api_deprecated\Requests\LoginUserRequest;
 use App\DB\Entity\User\User;
 use App\Security\TokenGenerator;
 use App\User\UserManager;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -138,7 +137,7 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/EMailAvailable/EMailAvailable.json', name: 'catrobat_oauth_login_email_available', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkEMailAvailable(Request $request): JsonResponse
@@ -149,7 +148,7 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/UsernameAvailable/UsernameAvailable.json', name: 'catrobat_oauth_login_username_available', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkUserNameAvailable(Request $request): JsonResponse
@@ -160,7 +159,7 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/GoogleServerTokenAvailable/GoogleServerTokenAvailable.json', name: 'catrobat_oauth_login_google_servertoken_available', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function checkGoogleServerTokenAvailable(Request $request): JsonResponse
@@ -171,7 +170,7 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/exchangeGoogleCode/exchangeGoogleCode.json', name: 'catrobat_oauth_login_google_code', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function exchangeGoogleCodeAction(Request $request): JsonResponse
@@ -182,7 +181,7 @@ class SecurityController extends AbstractController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/loginWithGoogle/loginWithGoogle.json', name: 'catrobat_oauth_login_google', options: ['expose' => true], defaults: ['_format' => 'json'], methods: ['POST'])]
   public function loginWithGoogleAction(Request $request): JsonResponse

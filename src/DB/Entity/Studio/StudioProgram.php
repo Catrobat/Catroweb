@@ -48,12 +48,12 @@ class StudioProgram
   /**
    * @ORM\Column(name="updated_on", type="datetime", nullable=true)
    */
-  protected ?DateTime $updated_on = null;
+  protected ?\DateTime $updated_on = null;
 
   /**
    * @ORM\Column(name="created_on", type="datetime", nullable=false)
    */
-  protected DateTime $created_on;
+  protected \DateTime $created_on;
 
   public function getId(): ?int
   {
@@ -115,24 +115,24 @@ class StudioProgram
     return $this;
   }
 
-  public function getUpdatedOn(): ?DateTime
+  public function getUpdatedOn(): ?\DateTime
   {
     return $this->updated_on;
   }
 
-  public function setUpdatedOn(?DateTime $updated_on): StudioProgram
+  public function setUpdatedOn(?\DateTime $updated_on): StudioProgram
   {
     $this->updated_on = $updated_on;
 
     return $this;
   }
 
-  public function getCreatedOn(): DateTime
+  public function getCreatedOn(): \DateTime
   {
     return $this->created_on;
   }
 
-  public function setCreatedOn(DateTime $created_on): StudioProgram
+  public function setCreatedOn(\DateTime $created_on): StudioProgram
   {
     $this->created_on = $created_on;
 

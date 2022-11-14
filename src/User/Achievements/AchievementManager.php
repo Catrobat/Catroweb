@@ -11,10 +11,7 @@ use App\DB\EntityRepository\User\Achievements\AchievementRepository;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
 use App\Project\ProgramManager;
 use App\Utils\TimeUtils;
-use DateTime;
-use DateTimeInterface;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 
 class AchievementManager
 {
@@ -124,7 +121,7 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementVerifiedDeveloper(User $user): ?UserAchievement
   {
@@ -132,7 +129,7 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementCodingJam092021(User $user): ?UserAchievement
   {
@@ -150,7 +147,7 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementPerfectProfile(User $user): ?UserAchievement
   {
@@ -162,7 +159,7 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementBronzeUser(User $user): ?UserAchievement
   {
@@ -178,11 +175,11 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementSilverUser(User $user): ?UserAchievement
   {
-    if ($user->getCreatedAt() > new DateTime('-1 years')) {
+    if ($user->getCreatedAt() > new \DateTime('-1 years')) {
       return null;
     }
     $years_with_project_uploads = [];
@@ -199,11 +196,11 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementGoldUser(User $user): ?UserAchievement
   {
-    if ($user->getCreatedAt() > new DateTime('-4 years')) {
+    if ($user->getCreatedAt() > new \DateTime('-4 years')) {
       return null;
     }
     $years_with_project_uploads = [];
@@ -220,11 +217,11 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementDiamondUser(User $user): ?UserAchievement
   {
-    if ($user->getCreatedAt() > new DateTime('-7 years')) {
+    if ($user->getCreatedAt() > new \DateTime('-7 years')) {
       return null;
     }
 
@@ -242,7 +239,7 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function unlockAchievementCustomTranslation(User $user): void
   {
@@ -263,9 +260,9 @@ class AchievementManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
-  protected function unlockAchievement(User $user, string $internal_title, ?DateTimeInterface $unlocked_at = null): ?UserAchievement
+  protected function unlockAchievement(User $user, string $internal_title, ?\DateTimeInterface $unlocked_at = null): ?UserAchievement
   {
     $achievement = $this->findAchievementByInternalTitle($internal_title);
     if (is_null($achievement)) {

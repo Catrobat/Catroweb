@@ -16,10 +16,7 @@ use Behat\Gherkin\Node\TableNode;
 use Behat\Mink\Exception\ElementNotFoundException;
 use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
-use Exception;
 use PHPUnit\Framework\Assert;
-use RecursiveDirectoryIterator;
-use RecursiveIteratorIterator;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
@@ -68,7 +65,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @BeforeScenario
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function initACL(): void
   {
@@ -347,7 +344,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I click on the column with the name "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iClickOnTheColumnName(mixed $arg1): void
   {
@@ -422,14 +419,14 @@ class CatrowebBrowserContext extends BrowserContext
         break;
 
       default:
-        throw new Exception('Wrong Option');
+        throw new \Exception('Wrong Option');
     }
   }
 
   /**
    * @Then /^I change the visibility of the project number "([^"]*)" in the list to "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeTheVisibilityOfTheProgram(mixed $program_number, mixed $visibility): void
   {
@@ -452,7 +449,7 @@ class CatrowebBrowserContext extends BrowserContext
    * @param string $program_number
    * @param string $visibility
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeTheVisibilityOfTheProgramInTheApproveList($program_number, $visibility): void
   {
@@ -472,7 +469,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the approval of the project number "([^"]*)" in the list to "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeTheApprovalOfTheProject(mixed $program_number, mixed $approved): void
   {
@@ -494,7 +491,7 @@ class CatrowebBrowserContext extends BrowserContext
    * @param string $program_number
    * @param string $approved
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeTheApprovalOfTheProjectInApproveList($program_number, $approved): void
   {
@@ -513,7 +510,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the flavor of the project number "([^"]*)" in the list to "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeTheFlavorOfTheProject(mixed $program_number, mixed $flavor): void
   {
@@ -556,7 +553,7 @@ class CatrowebBrowserContext extends BrowserContext
       'arduino' => $page
         ->find('css', 'select.form-control > option:nth-child(8)')
         ->click(),
-      default => throw new Exception('Wrong flavor'),
+      default => throw new \Exception('Wrong flavor'),
     };
 
     // click button to confirm the selection
@@ -569,7 +566,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change upload of the entry number "([^"]*)" in the list to "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeUploadOfTheEntry(mixed $program_number, mixed $approved): void
   {
@@ -586,7 +583,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change report of the entry number "([^"]*)" in the list to "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iChangeReportOfTheEntry(mixed $program_number, mixed $approved): void
   {
@@ -603,7 +600,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I click action button "([^"]*)" of the entry number "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iClickActionButtonOfEntry(mixed $action_button, mixed $entry_number): void
   {
@@ -627,7 +624,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I check the batch action box of entry "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iCheckBatchActionBoxOfEntry(mixed $entry_number): void
   {
@@ -1541,9 +1538,9 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function theResourcesShouldNotContainTheUnnecessaryFiles(): void
   {
-    $files = new RecursiveIteratorIterator(
-      new RecursiveDirectoryIterator($this->EXTRACT_RESOURCES_DIR, RecursiveDirectoryIterator::SKIP_DOTS),
-      RecursiveIteratorIterator::CHILD_FIRST
+    $files = new \RecursiveIteratorIterator(
+      new \RecursiveDirectoryIterator($this->EXTRACT_RESOURCES_DIR, \RecursiveDirectoryIterator::SKIP_DOTS),
+      \RecursiveIteratorIterator::CHILD_FIRST
     );
 
     foreach ($files as $file) {
@@ -1645,11 +1642,11 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^We can\'t test anything here$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function weCantTestAnythingHere(): never
   {
-    throw new Exception(':(');
+    throw new \Exception(':(');
   }
 
   /**
@@ -1762,7 +1759,7 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function iSelectTheOptionInThePopup(mixed $option): void
   {

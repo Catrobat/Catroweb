@@ -7,7 +7,6 @@ use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
 use App\Project\ProgramManager;
 use App\Utils\TimeUtils;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -31,7 +30,7 @@ class BuildApkController extends AbstractController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/ci/build/{id}', name: 'ci_build', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function createApkAction(string $id): JsonResponse

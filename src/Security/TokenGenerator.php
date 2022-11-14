@@ -2,15 +2,13 @@
 
 namespace App\Security;
 
-use Exception;
-
 /**
  * Must only be used for internal usage; Use JWT token when possible.
  */
 class TokenGenerator
 {
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function generateToken(): string
   {

@@ -4,10 +4,7 @@ namespace App\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
-use DateInterval;
-use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -39,7 +36,7 @@ class TranslationTrimStorageCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -51,8 +48,8 @@ class TranslationTrimStorageCommand extends Command
       return 1;
     }
 
-    $today = new DateTimeImmutable();
-    $date = $today->sub(new DateInterval("P{$days}D"));
+    $today = new \DateTimeImmutable();
+    $date = $today->sub(new \DateInterval("P{$days}D"));
 
     if ($input->getOption(self::ONLY_PROJECT) && $input->getOption(self::ONLY_COMMENT)) {
       $output->writeln('invalid combination of options');
@@ -71,7 +68,7 @@ class TranslationTrimStorageCommand extends Command
     return 0;
   }
 
-  private function deleteEntries(string $entity, DateTimeImmutable $older_than_date): void
+  private function deleteEntries(string $entity, \DateTimeImmutable $older_than_date): void
   {
     $qb = $this->entity_manager->createQueryBuilder();
 

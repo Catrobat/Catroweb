@@ -2,12 +2,10 @@
 
 namespace App\Security;
 
-use Exception;
-
 class PasswordGenerator
 {
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public static function generateRandomPassword(int $length = 32): string
   {

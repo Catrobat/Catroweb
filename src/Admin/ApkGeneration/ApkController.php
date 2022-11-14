@@ -7,7 +7,6 @@ use App\Project\Apk\JenkinsDispatcher;
 use App\Project\ProgramManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -38,7 +37,7 @@ class ApkController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function requestApkRebuildAction(): RedirectResponse
   {
@@ -78,7 +77,7 @@ class ApkController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function rebuildAllApkAction(): RedirectResponse
   {

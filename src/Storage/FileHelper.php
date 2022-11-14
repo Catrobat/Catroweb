@@ -2,20 +2,17 @@
 
 namespace App\Storage;
 
-use DirectoryIterator;
-use Exception;
-use FilesystemIterator;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 
 class FileHelper
 {
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public static function verifyDirectoryExists(?string $dir): void
   {
     if (null === $dir || !is_dir($dir)) {
-      throw new Exception($dir.' is not a valid directory');
+      throw new \Exception($dir.' is not a valid directory');
     }
   }
 
@@ -38,7 +35,7 @@ class FileHelper
 
   public static function setDirectoryPermissionsRecursive(string $dir, int $mode): void
   {
-    $dir = new DirectoryIterator($dir);
+    $dir = new \DirectoryIterator($dir);
     foreach ($dir as $file) {
       chmod($file->getPathname(), $mode);
       if ($file->isDir() && !$file->isDot()) {
@@ -49,13 +46,13 @@ class FileHelper
 
   public static function isDirectoryEmpty(string $directory_path): bool
   {
-    $di = new RecursiveDirectoryIterator($directory_path, FilesystemIterator::SKIP_DOTS);
+    $di = new RecursiveDirectoryIterator($directory_path, \FilesystemIterator::SKIP_DOTS);
 
     return 0 === iterator_count($di);
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public static function removeDirectory(string $directory_path, bool $force = false): void
   {
@@ -72,7 +69,7 @@ class FileHelper
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public static function emptyDirectory(string $directory_path, bool $force = false): void
   {
@@ -108,7 +105,7 @@ class FileHelper
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected static function verifyDirectoryCanBeCleared(string $directory_path): void
   {
@@ -121,7 +118,7 @@ class FileHelper
       return;
     }
 
-    throw new Exception('Pretty sure you should not delete this!'.$directory_path);
+    throw new \Exception('Pretty sure you should not delete this!'.$directory_path);
   }
 
   protected static function getRemovableDirAllowList(): array

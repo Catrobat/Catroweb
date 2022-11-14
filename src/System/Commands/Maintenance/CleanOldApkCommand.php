@@ -4,7 +4,6 @@ namespace App\System\Commands\Maintenance;
 
 use App\DB\Entity\Project\Program;
 use App\Utils\TimeUtils;
-use ArrayObject;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -55,7 +54,7 @@ class CleanOldApkCommand extends Command
     $directory = $this->parameter_bag->get('catrobat.apk.dir');
     $finder = new Finder();
     $finder->in($directory)->depth(0);
-    $removed_apk_ids = new ArrayObject();
+    $removed_apk_ids = new \ArrayObject();
     $amount_of_files = sizeof($finder);
 
     /** @var SplFileInfo $file */

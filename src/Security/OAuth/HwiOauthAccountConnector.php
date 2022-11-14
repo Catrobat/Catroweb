@@ -6,7 +6,6 @@ use App\DB\Entity\User\User;
 use App\User\UserManager;
 use HWI\Bundle\OAuthBundle\Connect\AccountConnectorInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
-use RuntimeException;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -50,14 +49,14 @@ class HwiOauthAccountConnector implements AccountConnectorInterface
   }
 
   /**
-   * @throws RuntimeException
+   * @throws \RuntimeException
    */
   protected function getProperty(UserResponseInterface $response): string
   {
     $resourceOwnerName = $response->getResourceOwner()->getName();
 
     if (!isset($this->properties[$resourceOwnerName])) {
-      throw new RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
+      throw new \RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
     }
 
     return $this->properties[$resourceOwnerName];

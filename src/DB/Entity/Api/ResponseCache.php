@@ -36,7 +36,7 @@ class ResponseCache
   /**
    * @ORM\Column(type="datetime")
    */
-  protected DateTime $cached_at;
+  protected \DateTime $cached_at;
 
   public function setId(string $cache_id): self
   {
@@ -86,7 +86,7 @@ class ResponseCache
     return $this;
   }
 
-  public function getCachedAt(): DateTime
+  public function getCachedAt(): \DateTime
   {
     return $this->cached_at;
   }
@@ -97,7 +97,7 @@ class ResponseCache
    */
   public function updateTimestamps(): self
   {
-    $this->cached_at = new DateTime('now');
+    $this->cached_at = new \DateTime('now');
 
     return $this;
   }

@@ -4,13 +4,12 @@ namespace App\Project\CatrobatCode\Statements;
 
 use App\Project\CatrobatCode\StatementFactory;
 use App\Project\CatrobatCode\SyntaxHighlightingConstants;
-use SimpleXMLElement;
 
 class LookStatement extends Statement
 {
   private ?Statement $fileName = null;
 
-  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, private readonly ?string $value)
+  public function __construct(StatementFactory $statementFactory, \SimpleXMLElement $xmlTree, int $spaces, private readonly ?string $value)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,

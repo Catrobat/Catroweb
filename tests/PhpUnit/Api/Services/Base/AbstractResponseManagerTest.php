@@ -8,7 +8,6 @@ use App\System\Testing\PhpUnit\DefaultTestCase;
 use OpenAPI\Server\Model\ProjectResponse;
 use OpenAPI\Server\Service\JmsSerializer;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 
 /**
  * @internal
@@ -63,7 +62,7 @@ final class AbstractResponseManagerTest extends DefaultTestCase
    *
    * @small
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testAddResponseHashToHeaders(): void
   {

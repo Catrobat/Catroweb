@@ -18,9 +18,7 @@ use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
 use App\DB\EntityRepository\Project\ScratchProgramRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 
 class RemixManager
 {
@@ -36,7 +34,7 @@ class RemixManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function addScratchPrograms(array $scratch_info_data): void
   {
@@ -72,7 +70,7 @@ class RemixManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function addRemixes(Program $program, array $remixes_data): void
   {
@@ -219,7 +217,7 @@ class RemixManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function markAllUnseenRemixRelationsOfUserAsSeen(User $user): void
   {
@@ -232,14 +230,14 @@ class RemixManager
     $this->entity_manager->flush();
   }
 
-  public function markAllUnseenRemixRelationsAsSeen(DateTime $seen_at): void
+  public function markAllUnseenRemixRelationsAsSeen(\DateTime $seen_at): void
   {
     $this->program_remix_repository->markAllUnseenRelationsAsSeen($seen_at);
     $this->program_remix_backward_repository->markAllUnseenRelationsAsSeen($seen_at);
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function markRemixRelationAsSeen(ProgramCatrobatRemixRelationInterface $remix_relation): void
   {
@@ -373,7 +371,7 @@ class RemixManager
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function updateProgramRemixRelations(Program $program, array $remixes_data): void
   {

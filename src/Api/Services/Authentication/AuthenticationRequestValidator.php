@@ -86,7 +86,7 @@ final class AuthenticationRequestValidator extends AbstractRequestValidator
   }
 
   /**
-   * @throws JsonException
+   * @throws \JsonException
    */
   public static function jwt_decode(string $id_token): ?array
   {

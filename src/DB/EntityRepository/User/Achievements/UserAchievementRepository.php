@@ -4,7 +4,6 @@ namespace App\DB\EntityRepository\User\Achievements;
 
 use App\DB\Entity\User\Achievements\UserAchievement;
 use App\DB\Entity\User\User;
-use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -43,7 +42,7 @@ class UserAchievementRepository extends ServiceEntityRepository
     $user_achievements = $this->findUserAchievements($user);
     foreach ($user_achievements as $user_achievement) {
       if (is_null($user_achievement->getSeenAt())) {
-        $user_achievement->setSeenAt(new DateTime('now'));
+        $user_achievement->setSeenAt(new \DateTime('now'));
         $this->getEntityManager()->persist($user_achievement);
       }
     }

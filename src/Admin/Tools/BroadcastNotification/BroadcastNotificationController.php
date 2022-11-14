@@ -6,7 +6,6 @@ use App\DB\Entity\User\Notifications\BroadcastNotification;
 use App\DB\Entity\User\User;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
-use Generator;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -34,7 +33,7 @@ class BroadcastNotificationController extends CRUDController
     return new Response('OK');
   }
 
-  private function getNotifications(string $message, string $title, UserManager $user_manager): Generator
+  private function getNotifications(string $message, string $title, UserManager $user_manager): \Generator
   {
     /** @var User $user */
     foreach ($user_manager->findAll() as $user) {

@@ -5,7 +5,6 @@ namespace Tests\PhpUnit\Api\Services\Base;
 use App\Api\Exceptions\ApiException;
 use App\Api\Services\Base\PandaAuthenticationTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
-use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -41,7 +40,7 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
    *
    * @dataProvider dataProviderPandaAuth
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetPandaAuth(?string $value, bool $expect_exception, string $expected = ''): void
   {

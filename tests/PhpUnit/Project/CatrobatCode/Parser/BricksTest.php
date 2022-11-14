@@ -7,7 +7,6 @@ use App\Project\CatrobatCode\Parser\Bricks\BrickFactory;
 use App\Project\CatrobatCode\Parser\Constants;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
 use PHPUnit\Framework\TestCase;
-use SimpleXMLElement;
 
 /**
  * @internal
@@ -30,7 +29,7 @@ class BricksTest extends TestCase
   public const IMG_FILE = 'img_file';
 
   /**
-   * @var SimpleXMLElement[]|bool
+   * @var \SimpleXMLElement[]|bool
    */
   protected $brick_xml_properties_list;
 

@@ -3,7 +3,6 @@
 namespace App\Utils;
 
 use DateTime;
-use Exception;
 
 /**
  * Class TimeUtils.
@@ -13,12 +12,12 @@ use Exception;
  */
 class TimeUtils
 {
-  public static ?DateTime $freeze_time = null;
+  public static ?\DateTime $freeze_time = null;
 
   /**
    * Returns the current timestamp or the timestamp of the frozen time if it has been set before.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public static function getTimestamp(): int
   {
@@ -28,20 +27,20 @@ class TimeUtils
   /**
    * Returns the current DateTime or the DateTime of the frozen time if it has been set before.
    *
-   * @throws Exception
+   * @throws \Exception
    */
-  public static function getDateTime(): DateTime
+  public static function getDateTime(): \DateTime
   {
     if (null !== self::$freeze_time) {
       return self::$freeze_time;
     }
 
-    return new DateTime();
+    return new \DateTime();
   }
 
-  public static function dateTimeFromScratch(string $time): ?DateTime
+  public static function dateTimeFromScratch(string $time): ?\DateTime
   {
-    $dateTime = DateTime::createFromFormat('Y-m-d\\TG\\:i\\:s\\.ve', $time);
+    $dateTime = \DateTime::createFromFormat('Y-m-d\\TG\\:i\\:s\\.ve', $time);
     if ($dateTime) {
       return $dateTime;
     }
@@ -52,9 +51,9 @@ class TimeUtils
   /**
    * Freezes the time.
    *
-   * @param DateTime $freeze_time the desired freeze time
+   * @param \DateTime $freeze_time the desired freeze time
    */
-  public static function freezeTime(DateTime $freeze_time): void
+  public static function freezeTime(\DateTime $freeze_time): void
   {
     self::$freeze_time = $freeze_time;
   }

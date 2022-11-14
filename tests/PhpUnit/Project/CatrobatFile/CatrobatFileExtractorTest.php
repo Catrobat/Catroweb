@@ -6,7 +6,6 @@ use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -31,12 +30,12 @@ class CatrobatFileExtractorTest extends TestCase
 
   public function testThrowsAnExceptionIfGivenAnValidExtractionDirectory(): void
   {
-    $this->expectException(Exception::class);
+    $this->expectException(\Exception::class);
     $this->catrobat_file_extractor = new CatrobatFileExtractor(__DIR__.'invalid_directory/', '');
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testExtractsAValidFile(): void
   {
@@ -46,7 +45,7 @@ class CatrobatFileExtractorTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testThrowsAnExceptionWhileExtractingAnInvalidFile(): void
   {

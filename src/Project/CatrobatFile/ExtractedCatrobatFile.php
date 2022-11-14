@@ -8,13 +8,11 @@ use App\Project\CatrobatCode\StatementFactory;
 use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixUrlIndicator;
 use App\Project\Remix\RemixUrlParsingState;
-use Exception;
-use SimpleXMLElement;
 use Symfony\Component\Finder\Finder;
 
 class ExtractedCatrobatFile
 {
-  protected SimpleXMLElement $program_xml_properties;
+  protected \SimpleXMLElement $program_xml_properties;
 
   private array $xml_filenames;
 
@@ -213,19 +211,19 @@ class ExtractedCatrobatFile
     return $this->web_path;
   }
 
-  public function getProgramXmlProperties(): SimpleXMLElement
+  public function getProgramXmlProperties(): \SimpleXMLElement
   {
     return $this->program_xml_properties;
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function saveProgramXmlProperties(): void
   {
     $file_overwritten = $this->program_xml_properties->asXML($this->path.'code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $xml_string = file_get_contents($this->path.'code.xml');
@@ -354,7 +352,7 @@ class ExtractedCatrobatFile
     return 0 !== count($this->program_xml_properties->xpath('//scenes'));
   }
 
-  private function getObject(SimpleXMLElement $objectTree): ?CodeObject
+  private function getObject(\SimpleXMLElement $objectTree): ?CodeObject
   {
     $factory = new StatementFactory();
 

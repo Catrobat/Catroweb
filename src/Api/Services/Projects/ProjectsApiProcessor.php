@@ -28,7 +28,7 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function addProject(AddProgramRequest $add_program_request): ?Program
   {

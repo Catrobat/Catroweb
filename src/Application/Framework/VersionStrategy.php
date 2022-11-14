@@ -2,7 +2,6 @@
 
 namespace App\Application\Framework;
 
-use Exception;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
 class VersionStrategy implements VersionStrategyInterface
@@ -13,7 +12,7 @@ class VersionStrategy implements VersionStrategyInterface
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function getVersion(string $path): string
   {
@@ -31,7 +30,7 @@ class VersionStrategy implements VersionStrategyInterface
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function applyVersion(string $path): string
   {

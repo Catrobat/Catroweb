@@ -5,8 +5,6 @@ namespace Tests\PhpUnit\Storage;
 use App\Storage\FileHelper;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
-use ImagickException;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -83,7 +81,7 @@ class ScreenshotRepositoryTest extends TestCase
 
   public function testThrowsAnExceptionIfGivenAnInvalidScreenshotDirectory(): void
   {
-    $this->expectException(Exception::class);
+    $this->expectException(\Exception::class);
     $this->screenshot_repository->__construct(
       new ParameterBag([
         'catrobat.screenshot.dir' => __DIR__.'/invalid_directory/',
@@ -99,7 +97,7 @@ class ScreenshotRepositoryTest extends TestCase
 
   public function testThrowsAnExceptionIfGivenAnInvalidThumbnailDirectory(): void
   {
-    $this->expectException(Exception::class);
+    $this->expectException(\Exception::class);
     $this->screenshot_repository->__construct(
       new ParameterBag([
         'catrobat.screenshot.dir' => $this->screenshot_dir,
@@ -114,7 +112,7 @@ class ScreenshotRepositoryTest extends TestCase
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function testStoresAScreenshot(): void
   {
@@ -125,7 +123,7 @@ class ScreenshotRepositoryTest extends TestCase
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function testOverwriteScreenshot(): void
   {
@@ -136,7 +134,7 @@ class ScreenshotRepositoryTest extends TestCase
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function testGeneratesAThumbnail(): void
   {
@@ -147,7 +145,7 @@ class ScreenshotRepositoryTest extends TestCase
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function testReturnsTheUrlOfAScreenshot(): void
   {
@@ -159,7 +157,7 @@ class ScreenshotRepositoryTest extends TestCase
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function testReturnsTheUrlOfAThumbnail(): void
   {

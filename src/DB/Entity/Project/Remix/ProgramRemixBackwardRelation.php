@@ -7,7 +7,6 @@ use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 
 /**
  * @ORM\HasLifecycleCallbacks
@@ -52,12 +51,12 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   /**
    * @ORM\Column(type="datetime")
    */
-  protected ?DateTime $created_at = null;
+  protected ?\DateTime $created_at = null;
 
   /**
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected ?DateTime $seen_at = null;
+  protected ?\DateTime $seen_at = null;
 
   public function __construct(Program $parent, Program $child)
   {
@@ -73,7 +72,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   /**
    * @ORM\PrePersist
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateTimestamps(): void
   {
@@ -123,22 +122,22 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
     return 1;
   }
 
-  public function getCreatedAt(): ?DateTime
+  public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
-  public function setCreatedAt(DateTime $created_at): void
+  public function setCreatedAt(\DateTime $created_at): void
   {
     $this->created_at = $created_at;
   }
 
-  public function getSeenAt(): ?DateTime
+  public function getSeenAt(): ?\DateTime
   {
     return $this->seen_at;
   }
 
-  public function setSeenAt(?DateTime $seen_at): void
+  public function setSeenAt(?\DateTime $seen_at): void
   {
     $this->seen_at = $seen_at;
   }
