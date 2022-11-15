@@ -838,6 +838,8 @@ extensions:
       title: Pagbuburda
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

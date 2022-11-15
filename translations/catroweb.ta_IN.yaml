@@ -843,6 +843,8 @@ extensions:
       title: எம்பிராய்டரி
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'பொது'

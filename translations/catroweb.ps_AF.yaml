@@ -840,6 +840,8 @@ extensions:
       title: ګنډل
     mindstorms:
       title: د ذهن طوفانونه
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عامه'

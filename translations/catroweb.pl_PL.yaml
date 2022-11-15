@@ -839,6 +839,8 @@ extensions:
       title: Haft
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'Publiczne'

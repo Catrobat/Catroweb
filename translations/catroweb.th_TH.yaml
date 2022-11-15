@@ -844,6 +844,8 @@ extensions:
       title: การตกแต่ง
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'สาธารณะ'

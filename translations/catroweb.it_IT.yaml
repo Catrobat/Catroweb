@@ -843,6 +843,8 @@ extensions:
       title: Ricamo
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'pubblico'

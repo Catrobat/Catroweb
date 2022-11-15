@@ -833,6 +833,8 @@ extensions:
       title: کشیدہ کاری
     mindstorms:
       title: مائنڈسٹروم
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عوامی'

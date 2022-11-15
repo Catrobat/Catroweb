@@ -837,6 +837,8 @@ extensions:
       title: Nakış
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'herkese açık'

@@ -839,6 +839,8 @@ extensions:
       title: कढ़ाई
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'जनता'

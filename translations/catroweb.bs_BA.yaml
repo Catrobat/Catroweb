@@ -838,6 +838,8 @@ extensions:
       title: Vez
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'
