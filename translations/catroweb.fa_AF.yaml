@@ -839,6 +839,8 @@ extensions:
       title: گلدوزی
     mindstorms:
       title: طوفان های ذهنی
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عمومی'

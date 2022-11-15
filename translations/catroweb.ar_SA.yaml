@@ -839,6 +839,8 @@ extensions:
       title: التطريز
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عامة'

@@ -839,6 +839,8 @@ extensions:
       title: 刺繍（刺繍）
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: '公開'

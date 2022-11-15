@@ -839,6 +839,8 @@ extensions:
       title: 刺繡
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: '民眾'

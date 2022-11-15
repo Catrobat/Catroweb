@@ -844,6 +844,8 @@ extensions:
       title: 刺绣
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: '公开的'

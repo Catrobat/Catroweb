@@ -842,6 +842,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: మనస్సు తుఫానులు
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'ప్రజా'

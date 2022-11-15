@@ -839,6 +839,8 @@ extensions:
       title: Вишивка
     mindstorms:
       title: Мозкові бурі
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'публічний'

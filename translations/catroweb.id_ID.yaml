@@ -839,6 +839,8 @@ extensions:
       title: Sulaman
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'publik'

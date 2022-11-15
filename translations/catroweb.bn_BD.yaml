@@ -845,6 +845,8 @@ extensions:
       title: সূচিকর্ম
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'জনসাধারণ'

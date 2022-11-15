@@ -839,6 +839,8 @@ extensions:
       title: ਕਢਾਈ
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'ਜਨਤਕ'

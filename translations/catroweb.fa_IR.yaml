@@ -843,6 +843,8 @@ extensions:
       title: گلدوزی
     mindstorms:
       title: طوفان های فکری
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عمومی'

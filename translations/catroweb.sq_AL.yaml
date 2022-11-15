@@ -840,6 +840,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'Publik'

@@ -836,6 +836,8 @@ extensions:
       title: 자수
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: '공공의'

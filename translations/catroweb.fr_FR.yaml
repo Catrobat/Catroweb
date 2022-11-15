@@ -839,6 +839,8 @@ extensions:
       title: Broderie
     mindstorms:
       title: Tempêtes mentales
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'
