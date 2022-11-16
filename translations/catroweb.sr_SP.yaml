@@ -183,7 +183,7 @@ programs:
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
+  closeEditorPrompt: Да ли желите да сачувате своје измене?
   btnDiscard: Одбаци
   addComment: Напиши коментар
   thumbsUp: Thumbs up!

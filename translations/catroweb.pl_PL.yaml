@@ -840,7 +840,7 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Tryb wieloosobowy
 studio:
   details:
     public: 'Publiczne'
