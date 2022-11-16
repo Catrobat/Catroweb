@@ -840,7 +840,7 @@ extensions:
     mindstorms:
       title: Мозкові бурі
     multiplayer:
-      title: Multiplayer
+      title: Мережева гра
 studio:
   details:
     public: 'публічний'
