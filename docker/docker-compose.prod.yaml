@@ -21,13 +21,25 @@ services:
       - ELASTICSEARCH_URL=http://catroweb.elasticsearch:9200/
       - ES_HOST=catroweb.elasticsearch
       - ES_PORT=9200
-      - DATABASE_URL=pdo-mysql://root:root@172.17.0.1:3306/catroweb_dev
+      - DATABASE_URL=pdo-mysql://root:root@db.catroweb.dev:3306/catroweb_dev
+    networks:
+      - catroweb-network
+
+  db.catroweb.dev:
+    image: mariadb:10.9
+    container_name: db.catroweb.dev
+    ports:
+      - 3306
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=catroweb_dev
     networks:
       - catroweb-network
 
   catroweb.elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:6.8.9
-    container_name: catroweb.elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.17.6
+    container_name: elasticsearch
     environment:
       - cluster.name=docker-cluster
       - transport.host=localhost

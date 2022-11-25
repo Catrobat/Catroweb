@@ -1,5 +1,5 @@
 # ---------------------------------------------- Build Time Arguments --------------------------------------------------
-ARG PHP_VERSION="7.4"
+ARG PHP_VERSION="8.1"
 ARG DEBIAN_VERSION="buster"
 ARG NODE_VERSION="19"
 ARG COMPOSER_VERSION="2.4.4"
@@ -20,28 +20,30 @@ RUN npm install && npm install -g @symfony/webpack-encore
 # ------------------------------------------------- Dev Image Build ----------------------------------------------------
 FROM debian:${DEBIAN_VERSION} AS dev-build
 ARG DEBIAN_FRONTEND=noninteractive
+ARG DEBIAN_VERSION
+ARG PHP_VERSION
 
 # Install dependencies
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends wget apt-transport-https lsb-release ca-certificates && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb https://packages.sury.org/php/ buster main" >> /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ $DEBIAN_VERSION main" >> /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php8.1-cli \
-    php8.1-common \
-    php8.1-curl \
-    php8.1-dom \
-    php8.1-gd \
-    php8.1-imagick \
-    php8.1-intl \
-    php8.1-mbstring \
-    php8.1-mysql \
-    php8.1-xdebug \
-    php8.1-xml \
-    php8.1-zip \
-    libapache2-mod-php8.1 \
+    php$PHP_VERSION-cli \
+    php$PHP_VERSION-common \
+    php$PHP_VERSION-curl \
+    php$PHP_VERSION-dom \
+    php$PHP_VERSION-gd \
+    php$PHP_VERSION-imagick \
+    php$PHP_VERSION-intl \
+    php$PHP_VERSION-mbstring \
+    php$PHP_VERSION-mysql \
+    php$PHP_VERSION-xdebug \
+    php$PHP_VERSION-xml \
+    php$PHP_VERSION-zip \
+    libapache2-mod-php$PHP_VERSION \
     zlibc \
     acl \
     make \
