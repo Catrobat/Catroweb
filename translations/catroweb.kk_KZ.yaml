@@ -830,7 +830,7 @@ extensions:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: Дрон
     phiro:
       title: Phiro
     raspberry_pi:
@@ -840,7 +840,7 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Көп-ойыншы
 studio:
   details:
     public: 'public'

@@ -230,8 +230,7 @@ accountConfirmation:
     <p>
     I dashur %username%.<br>
     <br>
-    Për të përfunduar aktivizimin e llogarisë tuaj - ju lutemi klikoni <a href=%confirmationUrl%>këtu.</a><br>
-    <br>
+    Për të përfunduar aktivizimin e llogarisë tuaj - ju lutemi klikoni <a href="%confirmationUrl%">këtu.</a><br>
     Ky link mund të përdoret vetëm një herë për të vërtetuar llogarinë tuaj.<br>
     <br>
     Pershendetje të përzemërta,<br>
