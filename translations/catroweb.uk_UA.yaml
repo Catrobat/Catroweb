@@ -197,14 +197,14 @@ programs:
   downloadErrorText: Під час завантаження проєкту сталася помилка. Повторіть спробу пізніше.
   downloadStartText: Завантаження розпочалось... 
   showTranslation: Показати переклад
-  hideTranslation: Приховати переклад
+  hideTranslation: Сховати переклад
   translatedByLine: 'Перекладано %provider% з мови: %sourceLanguage%, на мову: %targetLanguage%'
   googleTranslate: Перекладач Google
   confrimDelete: Ви справді хочете видалити цей переклад?
-  default: За замовчування
+  default: Стандартний
   save: Зберегти
-  translationTitle: '%language% переклад'
-  editDefault: Редагувати за замовчуванням
+  translationTitle: 'Переклад: %language%'
+  editDefault: Редагувати стандартний
   editTranslation: Редагувати %language% переклад
   translations: Переклади
   createTranslation: Створити переклад
