@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f9e4168ba3bc7b9c2740f6a02988bfc1",
+    "content-hash": "7ab9af591e924729e6ee8665ab122b7d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -9728,23 +9728,24 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v6.1.7",
+            "version": "v6.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "8025e5b651512b21d3e768321d45a2e5e32e8c66"
+                "reference": "04726ae6cec43582f7dfbfc67a313d1ecdd81c0f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/8025e5b651512b21d3e768321d45a2e5e32e8c66",
-                "reference": "8025e5b651512b21d3e768321d45a2e5e32e8c66",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/04726ae6cec43582f7dfbfc67a313d1ecdd81c0f",
+                "reference": "04726ae6cec43582f7dfbfc67a313d1ecdd81c0f",
                 "shasum": ""
             },
             "require": {
                 "php": ">=8.1"
             },
             "require-dev": {
-                "symfony/filesystem": "^5.4|^6.0"
+                "symfony/filesystem": "^5.4|^6.0",
+                "symfony/finder": "^5.4|^6.0"
             },
             "type": "library",
             "autoload": {
@@ -9788,7 +9789,7 @@
                 "localization"
             ],
             "support": {
-                "source": "https://github.com/symfony/intl/tree/v6.1.7"
+                "source": "https://github.com/symfony/intl/tree/v6.2.0"
             },
             "funding": [
                 {
@@ -9804,7 +9805,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-10-23T10:33:34+00:00"
+            "time": "2022-11-02T09:08:04+00:00"
         },
         {
             "name": "symfony/mailer",
