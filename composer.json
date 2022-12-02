@@ -55,7 +55,7 @@
         "symfony/routing": "6.1.*",
         "symfony/translation": "6.1.*",
         "symfony/twig-bundle": "6.1.*",
-        "symfony/validator": "6.1.*",
+        "symfony/validator": "6.2.*",
         "symfony/webpack-encore-bundle": "^1.14",
         "symfony/yaml": "6.1.*",
         "symfonycasts/reset-password-bundle": "^1.13",
