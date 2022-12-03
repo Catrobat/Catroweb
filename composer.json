@@ -41,7 +41,7 @@
         "sonata-project/twig-extensions": "^2.0",
         "sonata-project/user-bundle": "^5.1.0",
         "symfony/acl-bundle": "^2.3",
-        "symfony/asset": "6.1.*",
+        "symfony/asset": "6.2.*",
         "symfony/cache": "6.2.*",
         "symfony/console": "6.1.*",
         "symfony/dotenv": "6.2.*",
