@@ -43,7 +43,7 @@
         "symfony/acl-bundle": "^2.3",
         "symfony/asset": "6.2.*",
         "symfony/cache": "6.2.*",
-        "symfony/console": "6.1.*",
+        "symfony/console": "6.2.*",
         "symfony/dotenv": "6.2.*",
         "symfony/flex": "^2.1",
         "symfony/framework-bundle": "6.1.*",
