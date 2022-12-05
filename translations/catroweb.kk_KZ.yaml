@@ -383,29 +383,29 @@ menu:
   login: Кіру
   logout: Шығу
   admin: Админ
-  home: Home
+  home: Басты мәзір
   helpAndTutorials: Анықтама және туториалдар
   followersAndFollowing: Бақылау
-  mediaLibrary: Media library
+  mediaLibrary: Медиатека
 login:
   login: Кіру
   button:
     loginNow: Қазір кіру
-    createAccount: Create account
+    createAccount: Аккаунт ашу
     forgetPassword: Құпия сөзді ұмыттыңыз ба?
   oauth:
-    title: Or you can join with
-  passOrUser: Your password or username was incorrect.
-  noUsername: Your username or email address was not found.
-  forgotPass: Forgot password or username?
+    title: Немесе бұлар арқылы кіре аласыз
+  passOrUser: Құпиясөз немесе пайдаланушы аты дұрыс емес.
+  noUsername: Сіздің атыңыз немесе электрондық поштаңыз табылмады.
+  forgotPass: Құпиясөз немесе пайдаланушы атыңызды ұмыттыңыз ба?
   recoverPassSend: Сіздің эл. пошта мекенжайына хат жіберілді. Кіріс жәшігіңізді тексеріңіз.
-  alreadyReset: The password for this user has already been requested within the last 24 hours.
-  confirmationSend: An email to confirm your registration was sent to your mail address. Please check your inbox and activate your account.
-  userOrEmail: Username or Email
-  changePass: Change password
-  createAccount: Create an account
-  noAccount: Don't have an account!
-  alreadyAccount: Already having an account?
+  alreadyReset: Бұл пайдаланушының құпиясөзі соңғы 24 сағат ішінде сұралған.
+  confirmationSend: Тіркеуіңізді растау үшін электрондық поштаңызға хат жіберілді. Кіріс жәшігіңізді тексеріп, аккаунтты тіркеңіз.
+  userOrEmail: Пайдаланушы аты немесе электрондық пошта
+  changePass: Құпиясөзді өзгерту
+  createAccount: Аккаунт ашу
+  noAccount: Аккаунт жоқ!
+  alreadyAccount: Сізде аккаунт барма?
   or: НЕМЕСЕ
   username: Пайдаланушы аты
   email: Эл. пошта
@@ -416,24 +416,24 @@ register:
   subText: "Жалғастыру арқылы сіз Catrobat қауымдастығы аккаунтын орнатып жатырсыз және %var1% және %var2% шарттарымен келісесіз."
   button:
     cancel: Болдырмау
-    createAccount: Create account
+    createAccount: Аккаунт ашу
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Аккаунтты қалпына келтіру
+  description: Аккаунттың электрондық поштасы немесе пайдаланушы аты есіңізде болса, біз сізге құпиясөзді қалпына келтіруге сілтеме жібере аламыз.
   button:
     cancel: Болдырмау
-    submit: Recover password
+    submit: Құпиясөзді қалпына келтіру
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Құпиясөзді қалпына келтіру"
+    description: "Аккаунттың электрондық поштасы есіңізде болса, біз сізге құпиясөзді қалпына келтіруге сілтеме жібере аламыз."
     button:
-      submit: "Send reset email"
+      submit: "Құпиясөзді қалпына келтіру хатын поштаға жіберу"
       cancel: "Болдырмау"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
+    title: "Электрондық поштаңызды тексеріңіз"
+    description: "Электрондық поштаңызға сәйкес аккаунт бар болса, құпия сөзді қалпына келтіру үшін пайдалануға болатын сілтемесі бар электрондық пошта жаңа ғана жіберілді. Бұл сілтеменің мерзімі %time% де аяқталады."
+    description2: "Электрондық поштаңызға хат келмесе, онда спам бумасын немесе %tryAgainLink% тексеріңіз."
     tryAgain: "қайтадан қайталаңыз"
   email:
     title: "Сәлем!"
@@ -441,7 +441,7 @@ resetPassword:
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
   reset:
-    title: "Reset your password"
+    title: "Құпиясөзді қалпына келтіру"
     button:
       submit: "Құпиясөзді қалпына келтіру"
 apk:
@@ -592,39 +592,39 @@ language:
   romanian: Romanian
   russian: Russian
   serbian: Serbian
-  slovak: Slovak
-  slovenian: Slovenian
-  spanish_latin_america: Spanish (Latin America)
-  spanish_spain: Spanish (Spain)
-  swedish: Swedish
-  thai: Thai
-  turkish: Turkish
-  ukrainian: Ukrainian
-  vietnamese: Vietnamese
+  slovak: Словак
+  slovenian: Словен
+  spanish_latin_america: Испан (Латын Америкасы)
+  spanish_spain: Испан (Испания)
+  swedish: Швед тілі
+  thai: Тай тілі
+  turkish: Түрік тілі
+  ukrainian: Украин
+  vietnamese: Вьетнам
 ci:
   generate: Generate Apk
   pending: Generating Apk
   download: Download Apk
 admin:
   maintain:
-    diskMaintenance: Disk maintenance
-    ramMaintenance: RAM maintenance
-    noRemovableObjects: No removable objects available.
-    removableObjects: Removable objects
+    diskMaintenance: Дискіге техникалық қызмет көрсету
+    ramMaintenance: ЖЖҚ техникалық қызмет көрсету
+    noRemovableObjects: Кетіруге обьект табылмады.
+    removableObjects: Кетірілетін обьекттер
 recommender:
-  similarPrograms: Similar projects
+  similarPrograms: Ұқсас жобалар
   mostDownloadedProgramsOfUsersThatAlsoDownloadedOtherPrograms: Users Who Downloaded This Project Also Downloaded
-  moreFromThisUser: More from %username%
+  moreFromThisUser: '%username% басқа жобалары'
 pmd:
-  submitBtn: Submit your project
+  submitBtn: Жобаңызды жіберіңіз
   submitBox:
-    header: Submission
-    text: You are about to submit your project. Please enter the project code and click send.
-    btnText: Submit
+    header: Жіберу
+    text: Сіз жобаңызды жібергелі жатырсыз. Жоба кодын енгізіп, жіберу батырмасын басыңыз.
+    btnText: Жіберу
   successful:
-    text: Your project upload was successful.
+    text: Жобаны жүктеу сәтті аяқталды.
   failed:
-    text: Project upload failed.
+    text: Жобаны жүктеу сәтсіз аяқталды.
 codeview:
   title: 'Code View'
   showCode: 'Show code'
