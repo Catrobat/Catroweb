@@ -48,7 +48,7 @@
         "symfony/flex": "^2.1",
         "symfony/framework-bundle": "6.1.*",
         "symfony/intl": "6.2.*",
-        "symfony/mailer": "6.1.*",
+        "symfony/mailer": "6.2.*",
         "symfony/monolog-bundle": "^3.8",
         "symfony/polyfill-iconv": "^1.23",
         "symfony/process": "6.2.*",
