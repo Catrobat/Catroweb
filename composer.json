@@ -54,7 +54,7 @@
         "symfony/process": "6.2.*",
         "symfony/routing": "6.2.*",
         "symfony/translation": "6.2.*",
-        "symfony/twig-bundle": "6.1.*",
+        "symfony/twig-bundle": "6.2.*",
         "symfony/validator": "6.2.*",
         "symfony/webpack-encore-bundle": "^1.14",
         "symfony/yaml": "6.2.*",
