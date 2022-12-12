@@ -839,7 +839,7 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Multijogador
 studio:
   details:
     public: 'público'
