@@ -845,7 +845,7 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: 多人游戏
 studio:
   details:
     public: '公开的'
