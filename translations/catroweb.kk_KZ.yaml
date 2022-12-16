@@ -251,19 +251,18 @@ passwordRecovery:
     Сіздің Катробат командаңыз.
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    Құрметті %username%.<br>
     <br>
-    You have requested to reset your password on <a href="%appplication_url%">Pocket Code</a> because you have forgotten your password.
-    If you did not request this, please ignore it. It will expire and become useless in 24 hours time.<br>
+    Құпия сөзіңізді ұмытып қалғандықтан, <a href="%appplication_url%">Pocket Code</a> паролін қалпына келтіруді сұрадыңыз.
     <br>
-    To reset your password and create a new one, please click <a href="%confirmationUrl%">here.</a><br>
+    Егер сіз мұны сұрамаған болсаңыз, онда бұл хатты жабыңыз. Ол 24 сағат ішінде жарамдылық мерзімі бітеді және жарамсыз болады.<br>
+    Құпия сөзді қалпына келтіру және жаңасын жасау үшін мына сілтемені басыңыз: <a href="%confirmationUrl%">
+    <a href="%appplication_url%">Pocket Code</a> қауымдастығына кіру үшін пайдаланушы атыңызды және құпия сөзіңізді кез келген уақытта пайдалана аласыз.<br>
+    Ол үшін келесі бетке өтіңіз: <a href="%loginPage%">Логин парақшасы</a>
+    Профиль мәліметтерін өңдеу үшін мына бетке өтіңіз: <a href="%profilePage%">парақша</a><br>
     <br>
-    You can use your username and your password at any time to access the <a href="%appplication_url%">Pocket Code</a> community.<br>
-    To do so, just visit the following page: <a href="%loginPage%">Login Page</a><br>
-    To edit your profile details, go to this <a href="%profilePage%">page</a>.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    Ең жақсы тілектермен,<br>
+    Сіздің Катробат командаңыз.
     </p>
 profile:
   aboutMe: Мен туралы
@@ -324,9 +323,9 @@ licenseToPlay:
   link: 'Ойынға лицензия'
   title: 'Ойынға лицензия - авторларды белгілеп, бөлісіңіз'
   text1: Әрбір Catrobat жобасы - бұл торт, оның рецептімен (бағдарламалау блоктары) келетін өте ерекше торт екенін елестетіп көріңіз. Катробат қауымдастығының барлық мүшелері рецепттерімен бірге торттарын бөліседі. Бұл торттардан ләззат алуға және оларды өзіңіз жасауды үйренуге болатынын білдіреді!
-  text2: 'There are no secret recipes: the instructions on how to make these cakes are open for anyone to use, reuse, modify, and serve as inspiration for new ideas... I mean cakes.'
-  text3: "You can eat the cakes as well as copy other people's recipes to make your own, maybe with different ingredients. This freedom comes with two simple requirements:"
-  text4: "In setting up the Catrobat community, we decided to adopt this approach since we believe that it supports learning and creativity within the community. By sharing recipes and ingredients (scripts and artwork), people can build upon one another's ideas and everyone will benefit."
+  text2: 'Ешқандай құпия рецепттер жоқ: бұл бәліштерді жасау туралы нұсқаулар кез келген адам үшін ашық, қолдануға, қайта пайдалануға, өзгертуге және жаңа идеяларға шабыт ретінде қызмет етеді... Бәліштерді айтамын.'
+  text3: "Бәліштерді жеуге болады, сондай-ақ басқа адамдардың рецепттерін көшіріп, өзіңіз дайындауға болады, мүмкін әртүрлі ингредиенттермен. Бұл еркіндік екі қарапайым нәрсе талап етеді:"
+  text4: "Catrobat қауымдастығын құру кезінде біз бұл әдісті қолдануды шештік, өйткені ол қауымдастықтағы оқу мен шығармашылықты қолдайды деп есептейміз. Рецепттер мен ингредиенттерді (скрипттер мен өнер туындылары) бөлісу арқылы адамдар бір-бірінің идеяларына сүйене алады және барлығына пайда көреді."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
   text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
   list1:
@@ -368,14 +367,14 @@ termsOfUse:
     item5: 'Please consult our %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service for precise formulations of above points and some additional legal terms and conditions.'
   bottom1: Check back here from time-to-time, because we are always trying to improve our Terms of Use.
   bottom2: 'Please mail any suggestions regarding these Terms of Use to %email-webmaster%.'
-  version: Version 1.3, 4 March 2014
+  version: 1.3 нұсқасы, 4 наурыз 2014 ж
 search:
   dotdotdot: Іздеу...
   search: Іздеу
-  inMediaLib: Search in media library
+  inMediaLib: Медиаханадан іздеу
   results: Search Results
-  resultcount: Your search returned %count% results
-  fail: Please enter at least a single search term
+  resultcount: Іздеуіңіз %count% нәтиже берді
+  fail: Кем дегенде бір іздеу сөзін енгізіңіз
   noUsers: Ешқандай қолданылушылар табылмады
   noProjects: Ешқандай жоба табылмады
 menu:
@@ -437,39 +436,39 @@ resetPassword:
     tryAgain: "қайтадан қайталаңыз"
   email:
     title: "Сәлем!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    visitLink: "Құпия сөзді қалпына келтіру үшін мына сілтемеге өтіңіз"
+    expire: "Бұл сілтеменің мерзімі %time% аяқталады."
+    cheers: "Ура!"
   reset:
     title: "Құпиясөзді қалпына келтіру"
     button:
       submit: "Құпиясөзді қалпына келтіру"
 apk:
-  download: Download as app
-  prepare: 'Get as app'
-  preparing: 'Preparing app'
-  text: 'The process may take a while'
+  download: Қолданбаны жүктеу
+  prepare: 'Қолдаңба ретінде алу'
+  preparing: 'Қолдаңбаны дайындау'
+  text: 'Бұл процесс біраз уақыт алуы мүмкін'
 format:
   million_abbreviation: М
 #api
 errors:
-  unspecified: An unspecified error occurred. Please contact us.
+  unspecified: Белгісіз қате орын алды. Өтінеміз, бізге хабарласыңыз.
   username:
-    blank: Username must not be blank
-    invalid: Your username is invalid
+    blank: Пайдаланушы атыңыз бос болмауы керек.
+    invalid: Пайдаланушы атыңыз жарамсыз
     exists: Мынау ат бұрыннан бар.
-    not_exists: This username does not exist.
-    not_email: The username must not be an email address.
-    size: The username must have at least 3 character and not more than 180
+    not_exists: Мұндай пайдаланушы аты жоқ.
+    not_email: Пайдаланушы аты электрондық пошта болмауы керек.
+    size: Пайдаланушы аты кемінде 3 әріптен және 180-нен аспауы керек
   password:
-    blank: The password is missing.
-    short: 'Your password must have at least {{ limit }} characters.'
+    blank: Мұнда құпия сөз жоқ.
+    short: 'Жаңа құпия сөзде кемінде {{ limit }} таңба болуы қажет.'
   country:
-    blank: The country is missing.
-    invalid: Invalid country
+    blank: Бұл ел мұнда жоқ.
+    invalid: Қате ел
   email:
-    blank: email must not be blank
-    invalid: Your email seems to be invalid
+    blank: email поштаңыз бос болмауы керек.
+    invalid: Электрондық поштаңыз жарамсыз сияқты
     exists: Мынау эл. пошта мекенжайы бұрыннан бар.
   id:
     blank: Open Authentication ID must not be blank
@@ -507,23 +506,23 @@ success:
   imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
-  minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
-  hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
-  days.ago: '{1}1 day ago |]1,Inf] %count% days ago'
-  months.ago: '{1}1 month ago |]1,Inf] %count% months ago'
-  years.ago: '{1}1 year ago |]1,Inf] more than one year ago'
+  minutes.ago: '{0} < 1 минут бұрын |{1}1 минут бұрын |]1,Inf] %count% минут бұрын'
+  hours.ago: '{1}1 сағат бұрын |]1,Inf] %count% сағат бұрын'
+  days.ago: '{1}1 күн бұрын |]1,Inf] %count% күн бұрын'
+  months.ago: '{1}1 ай бұрын |]1,Inf] %count% ай бұрын'
+  years.ago: '{1}1 жыл бұрын |]1,Inf] бір жылдан астам бұрын'
 failure:
-  upload: There was an error during the upload of your app.
+  upload: Қолданбаңызды жүктеу кезінде қате орын алды.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Электрондық поштаңызды растаңыз'
 api:
   registerUser:
-    emailMissing: 'Email missing'
-    emailEmpty: 'Email cannot be empty'
-    emailInvalid: 'Email invalid'
-    emailAlreadyInUse: 'Email already in use'
-    usernameMissing: 'Username missing'
+    emailMissing: 'Электрондық пошта жоқ'
+    emailEmpty: 'Электрондық пошта бос болмауы керек'
+    emailInvalid: 'Электрондық пошта жарамсыз'
+    emailAlreadyInUse: 'Электрондық пошта бұрыннан қолданыста'
+    usernameMissing: 'Пайдаланушы аты жоқ'
     usernameTooShort: 'Пайдаланушы аты өте қысқа'
     usernameTooLong: 'Пайдаланушы аты өте ұзақ'
     usernameEmpty: 'Пайдаланушы аты бос бола алмайды.'
@@ -538,8 +537,8 @@ api:
     countryCodeInvalid: "Ел коды жарамсыз"
     pictureInvalid: "Профиль суреті жарамсыз"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Қазіргі құпия сөз жоқ."
+    currentPasswordWrong: "Қазіргі құпиясөз қате"
   project:
     nameEmpty: 'Name cannot be empty'
     nameTooLong: 'Name too long'
@@ -565,7 +564,7 @@ language:
   croatian: Хорватша
   czech: Чехша
   danish: Дат
-  dutch: Dutch
+  dutch: Голланд
   english_united_kingdom: Ағылшын (Ұлыбритания)
   english_united_states: Ағылшын (АҚШ)
   estonian: Эстонша
@@ -581,17 +580,17 @@ language:
   italian: Италиянша
   japanese: Жапон тілі
   korean: Корей тілі
-  latvian: Latvian
-  lithuanian: Lithuanian
-  malay: Malay
-  norwegian: Norwegian
-  persian: Persian
-  polish: Polish
-  portuguese_brazil: Portuguese (Brazil)
-  portuguese_portugal: Portuguese (Portugal)
-  romanian: Romanian
-  russian: Russian
-  serbian: Serbian
+  latvian: Латыш
+  lithuanian: Литва
+  malay: Малай тілі
+  norwegian: Норвег
+  persian: Парсы тілі
+  polish: Полякша
+  portuguese_brazil: Португал (Бразилия)
+  portuguese_portugal: Португал (Португалия)
+  romanian: Румын тілі
+  russian: Орыс тілі
+  serbian: Cерб
   slovak: Словак
   slovenian: Словен
   spanish_latin_america: Испан (Латын Америкасы)
@@ -627,21 +626,21 @@ pmd:
     text: Жобаны жүктеу сәтсіз аяқталды.
 codeview:
   title: 'Code View'
-  showCode: 'Show code'
-  hideCode: 'Hide code'
-  showStatistics: 'Show code statistics'
-  hideStatistics: 'Hide code statistics'
-  cantDisplayCode: "Code can't be displayed"
-  cantDisplayStatistics: "Code can't be displayed"
-  totalNumberOf: 'Total number of'
+  showCode: 'Кодты көрсету'
+  hideCode: 'Кодты жасыру'
+  showStatistics: 'Код статистикасын көрсету'
+  hideStatistics: 'Код статистикасын жасыру'
+  cantDisplayCode: "Кодты көрсету мүмкін емес"
+  cantDisplayStatistics: "Кодты көрсету мүмкін емес"
+  totalNumberOf: 'Жалпы саны'
   scenes: 'Сахналар'
   scripts: 'Скрипттер'
-  bricks: 'Bricks'
+  bricks: 'Блоктар'
   objects: 'Актерлер мен объектілер'
   looks: 'Көрініс'
   sounds: 'Дыбыстар'
-  globals: 'Globals'
-  locals: 'Locals'
+  globals: 'Ғаламдық'
+  locals: 'Жергілікті'
   globalVariables: 'Global Variables'
   localVariables: 'Local Variables'
   eventBricks: 'Event Bricks'
@@ -655,8 +654,8 @@ codeview:
 codeStatistics:
   title: "Code Statistics"
   error: "Code Statistics can't be displayed."
-  general: 'General'
-  bricks: 'Bricks'
+  general: 'Басты'
+  bricks: 'Блоктар'
   eventBricks: 'Оқиға'
   controlBricks: 'Бақылау'
   motionBricks: 'Қозғалыс'
@@ -669,9 +668,9 @@ codeStatistics:
 footer:
   language: Тіл
   usefulLinks: Useful Links
-  legalities: Legalities
+  legalities: Заңдылықтар
   communityStats: Community Stats
-  download: Get the App
+  download: Қолданбаны жүктеу
 privacy-policy:
   header: Privacy Policy
   version: Version 2.2, 17 October 2019
@@ -685,13 +684,13 @@ privacy-policy:
   text8: All Services are provided by the free open source Catrobat project under the umbrella of the International Catrobat Association – Verein zur Förderung freier Software, a non-profit NGO incorporated in Graz, Austria (European Union). Our policies pay respect to EU and Austrian data protection law (GDPR). To get in touch with us, please send an e-mail to contact@catrobat.org or mail us to Catrobat, c/o Institute of Software Technology, Graz University of Technology, Inffeldgasse 16b, A-8010 Graz, Austria (European Union).
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
-  disagree-text: Without approval, we can't create an account but the core features are still accessible.
+  disagree-text: Мақұлдаусыз біз аккаунтты жасай алмаймыз, бірақ негізгі мүмкіндіктер әлі де қолжетімді.
 catro-notifications:
   markAsRead: "Оқылған ретінде белгілеу"
-  noFollowers: "It looks like you don't have any follower notifications."
-  noComments: "It looks like you don't have any comment notifications."
-  noReactions: "It looks like you don't have any reaction notifications."
-  noRemixes: "It looks like you don't have any remix notifications."
+  noFollowers: "Сізде ешқандай жазылушы хабарландырулары жоқ сияқты."
+  noComments: "Сізде ешқандай пікір хабарландырулар жоқ сияқты."
+  noReactions: "Сізде реакция туралы хабарландырулар жоқ сияқты."
+  noRemixes: "Сізде ремикс хабарландырулары жоқ сияқты."
   comment:
     message: 'User %user_link% commented on your project %program_link%.'
   like:
@@ -736,8 +735,8 @@ element: 'Элемент'
 elements: 'Элементтер'
 share:
   text: 'Бөлісу'
-  error: 'Share failed'
-  success: 'Share successful'
+  error: 'Бөлісу сәтсіз аяқталды'
+  success: 'Бөліскеніңіз үшін рахмет!'
 copy: 'Сілтемені көшіру'
 checkOutProject: 'Мына жобаны қарап кетіңіз:'
 checkOutUser: 'Мына пайдаланушыны қарап кетіңіз:'
@@ -759,7 +758,7 @@ achievements:
     header: 'Жетістіктер:'
     most_recent_achievement:
       title: 'Соңғы жетістігі'
-      x_out_of_y: '%unlocked% out of %total% unlocked'
+      x_out_of_y: '%unlocked% ішінен %total% ашылған'
     tab_unlocked:
       title: 'Ашылған'
       empty: "Сіз ешқандай жетістіктерге жеткен жоқсыз."
@@ -769,14 +768,14 @@ achievements:
   popup:
     new:
       title: 'Құттықтаймыз!'
-      subtitle: "You've earned a badge"
+      subtitle: "Сіз белгішені алдыңыз"
       confirm: "Ок"
   profile:
     title: 'Жетістіктер:'
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
+        title: 'Шәкірт'
         description: 'Follow someone and upload a project'
       silver_user:
         title: 'Қолөнерші'
@@ -864,19 +863,19 @@ studio:
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      delete_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
     activity_list:
-      title: 'Activities'
+      title: 'Іс-шаралар'
       join_studio: '%user% студияға қосылды'
       add_project: '%user% пікір қалдырды'
       add_comment: '%user% жоба қосты'
     members_list:
       title: 'Студияның мүшелері'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
+      project_count: '{0} Студиялық жобалар жоқ |{1} 1 студиялық жоба |]1,Inf] %count% студиялық жобалар'
+      promote_member: 'Мүшені админге көтеріңіз'
+      promotion_failed: 'Бұл мүшені көтеру кезінде бірдеңе дұрыс болмады. Әрекетті кейінірек қайталаңыз.'
       ban_member: 'Мүшеге студиядан тыйым салу'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      ban_failed: 'Бұл мүшені кілттеу кезінде бірдеңе дұрыс болмады. Әрекетті кейінірек қайталаңыз.'
     admin_settings:
       title: 'Басты баптаулар'
       studio_name: 'Студияның аты'
