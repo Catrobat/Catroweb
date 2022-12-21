@@ -213,8 +213,8 @@ programs:
   translations: Translations
   createTranslation: Create translation
   deletedComment: '**Deleted**'
-  replyLabel: Reply
-  repliesLabel: Replies
+  replyLabel: reply
+  repliesLabel: replies
 
 remixGraph:
   title: Remixes

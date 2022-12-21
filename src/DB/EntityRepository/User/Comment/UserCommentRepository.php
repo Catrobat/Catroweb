@@ -63,7 +63,10 @@ class UserCommentRepository extends ServiceEntityRepository
     return $qb->select('uc')
       ->where('uc.program = :program_id')
       ->setParameter('program_id', $program_id)
-      ->andWhere($qb->expr()->isNull('uc.parent_id'))
+      ->andWhere($qb->expr()->orX()->addMultiple([
+        $qb->expr()->isNull('uc.parent_id'),
+        $qb->expr()->eq('uc.parent_id', 0),
+      ]))
       ->orderBy('uc.uploadDate', 'DESC')
       ->getQuery()->getResult();
   }

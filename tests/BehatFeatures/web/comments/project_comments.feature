@@ -116,37 +116,47 @@ Feature: As a visitor I want to write, see and report comments.
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "c1"
-    And I should see "0 programs.repliesLabel"
+    And I should see "0 replies"
     But I should not see "c2"
 
   Scenario: I should be able to see the number of replies that belong to a comment - comment with more than one reply
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then I should see "c8"
-    And I should see "c7"
-    And I should see "c6"
-    And I should see "c5"
+    Then I should see "c2"
+    And I should see "c3"
     And I should see "c4"
+    And I should see "c5"
+    And I should see "c6"
 
-    And I should see "3 programs.repliesLabel"
-    But I should not see "c9"
-    But I should not see "c10"
-    But I should not see "c11"
+    And I should not see "3 replies"
+    But I should not see "c7"
+    And I should not see "c8"
+    And I should not see "c9"
+    And I should not see "c10"
+    And I should not see "c11"
 
     And the element "#show-more-comments-button" should be visible
     But the element "#show-less-comments-button" should not be visible
+
+    When I click "#show-more-comments-button"
+    Then I should see "c7"
+    And I should see "c8"
+    And I should see "3 replies"
+    But I should not see "c9"
+    But I should not see "c10"
+    But I should not see "c11"
 
   Scenario: I should be able to see the number of replies that belong to a comment - comment with one reply
     Given I am on "/app/project/4"
     And I wait for the page to be loaded
     Then I should see "c12"
-    And I should see "1 programs.replyLabel"
+    And I should see "1 reply"
 
   Scenario: I should be able to see the deleted comments, however, not their text.
     Given I am on "/app/project/5"
     And I wait for the page to be loaded
-    Then I should see "programs.deletedComment"
-    And I should see "1 programs.replyLabel"
+    Then I should see "**Deleted**"
+    And I should see "1 reply"
 
     And the element ".comment-translation-button" should not exist
     And the element ".comment-report-button" should not exist
@@ -166,27 +176,27 @@ Feature: As a visitor I want to write, see and report comments.
   Scenario: I should be able to see only the first 5 existing comments (order newest first)
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    Then I should see "c8"
-    And I should see "c7"
-    And I should see "c6"
-    And I should see "c5"
+    Then I should see "c2"
+    And I should see "c3"
     And I should see "c4"
-    But I should not see "c3"
+    And I should see "c5"
+    And I should see "c6"
+    But I should not see "c7"
     And the element "#show-more-comments-button" should be visible
     But the element "#show-less-comments-button" should not be visible
 
   Scenario: Pressing the show more/less button should result in more/less displayed comments
     Given I am on "/app/project/2"
     And I wait for the page to be loaded
-    And I should not see "c3"
+    And I should not see "c7"
     When I click "#show-more-comments-button"
     And I wait for AJAX to finish
-    Then I should see "c3"
+    Then I should see "c7"
     And the element "#show-less-comments-button" should be visible
     But the element "#show-more-comments-button" should not be visible
     When I click "#show-less-comments-button"
     And I wait for AJAX to finish
-    Then I should not see "c3"
+    Then I should not see "c7"
     And the element "#show-less-comments-button" should not be visible
     But the element "#show-more-comments-button" should be visible
 
