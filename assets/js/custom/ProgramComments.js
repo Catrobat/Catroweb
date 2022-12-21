@@ -10,9 +10,9 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   let amountOfVisibleComments
 
   const commentUploadDates = document.getElementsByClassName('comment-upload-date')
-  for (let i = 0; i < commentUploadDates.length; i++) {
-    const commentUploadDate = new Date(commentUploadDates[i].innerHTML)
-    commentUploadDates[i].innerHTML = commentUploadDate.toLocaleString('en-GB')
+  for (const element of commentUploadDates) {
+    const commentUploadDate = new Date(element.innerHTML)
+    element.innerHTML = commentUploadDate.toLocaleString('en-GB')
   }
 
   $(function () {
@@ -30,7 +30,7 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     const path = $(this).data('path-program-comment')
     if (path == null) return
 
-    location.href = path != null ? path : location.href
+    location.href = path
   })
 
   $('.comment-report-button').on('click', function (event) {
@@ -65,13 +65,11 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
   })
 
   $(document).on('click', '#show-more-comments-button', function () {
-    const commentsClassSelector = $(this).data('comments-class-selector')
-    showMore(showStep, commentsClassSelector)
+    showMore(showStep)
   })
 
   $(document).on('click', '#show-less-comments-button', function () {
-    const commentsClassSelector = $(this).data('comments-class-selector')
-    showLess(showStep, commentsClassSelector)
+    showLess(showStep)
   })
 
   if ((sessionStorage.getItem('temp_program_comment') != null) && (sessionStorage.getItem('temp_program_comment') !== '')) {
@@ -142,7 +140,7 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
       url: reportCommentPath,
       type: 'get',
       data: { ProgramId: programId, CommentId: commentId },
-      success: function (data) {
+      success: function () {
         showSuccessPopUp(popUpCommentReportedTitle, popUpCommentReportedText)
       },
       error: function (data) {
@@ -217,8 +215,7 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
 
   function redirectToLogin () {
     const $projectComments = $('.js-project-comments')
-    const loginUrl = $projectComments.data('path-login-url')
-    window.location.href = loginUrl
+    window.location.href = $projectComments.data('path-login-url')
   }
 
   function restoreAmountOfVisibleCommentsFromSession () {
@@ -259,17 +256,15 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
 
   function showMore (step) {
     amountOfVisibleComments = Math.min(amountOfVisibleComments + step, totalAmountOfComments)
-    const $commentsClassSelector = $('.comments-class-selector').data('comments-class-selector')
-    setVissibleCommentsSessionVar()
-    updateCommentsVisibility($commentsClassSelector)
+    setVisibleCommentsSessionVar()
+    updateCommentsVisibility()
     updateButtonVisibility()
   }
 
   function showLess (step) {
     amountOfVisibleComments = Math.max(amountOfVisibleComments - step, minAmountOfVisibleComments)
-    const $commentsClassSelector = $('.comments-class-selector').data('comments-class-selector')
-    setVissibleCommentsSessionVar()
-    updateCommentsVisibility($commentsClassSelector)
+    setVisibleCommentsSessionVar()
+    updateCommentsVisibility()
     updateButtonVisibility()
   }
 
@@ -277,7 +272,7 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     return $('.session-vars-names').data('visible-comments-session-var')
   }
 
-  function setVissibleCommentsSessionVar () {
+  function setVisibleCommentsSessionVar () {
     const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
     window.sessionStorage.setItem(visibleCommentSessionVarName, JSON.stringify(amountOfVisibleComments))
   }

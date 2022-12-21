@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\Project\ProgramManager;
 use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
-use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -100,12 +99,12 @@ class CommentsController extends AbstractController
     $temp_comment->setUser($user);
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgram($program);
-    $date_time_zone = new DateTimeZone('UTC');
+    $date_time_zone = new \DateTimeZone('UTC');
     $temp_comment->setUploadDate(date_create('now', $date_time_zone));
     $temp_comment->setIsReported(false);
     $temp_comment->setIsDeleted(false);
     if (isset($_POST['ParentCommentId'])) {
-      $parent_comment_id = $_POST['ParentCommentId'];
+      $parent_comment_id = intval($_POST['ParentCommentId']);
       $temp_comment->setParentId($parent_comment_id);
     }
     $this->entity_manager->persist($temp_comment);

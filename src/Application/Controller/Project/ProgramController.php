@@ -10,6 +10,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
+use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
@@ -46,7 +47,8 @@ class ProgramController extends AbstractController
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly ProgramFileRepository $file_repository,
     private readonly TranslationDelegate $translation_delegate,
-    private readonly EntityManagerInterface $entity_manager
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly UserCommentRepository $comment_repository
   ) {
   }
 
@@ -86,10 +88,10 @@ class ProgramController extends AbstractController
     }
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
-    $program_comments = $this->findCommentsById($project);
+    $program_comments = $this->findCommentsById($project->getId());
 
     foreach ($program_comments as $program_comment) {
-      $program_comment->nr_replies = $this->countByParentId($program_comment->getId());
+      $program_comment->setNumberOfReplies($this->countByParentId($program_comment->getId()));
     }
 
     $program_details = $this->createProgramDetailsArray(
@@ -482,33 +484,19 @@ class ProgramController extends AbstractController
   /**
    * @return array|UserComment[]
    */
-  private function findCommentsById(Program $program): array
+  private function findCommentsById(string $project_id): array
   {
-    return $this->entity_manager
-      ->getRepository(UserComment::class)
-      ->findCommentsByProgramId($program->getId())
-    ;
+    return $this->comment_repository->findCommentsByProgramId($project_id);
   }
 
   private function countByParentId(int $comment_id): int
   {
-    return $this->entity_manager
-      ->getRepository(UserComment::class)
-      ->countCommentReplies($comment_id)
-    ;
+    return $this->comment_repository->countCommentReplies($comment_id);
   }
 
-  /**
-   * @return UserComment
-   */
-  private function findCommentById(string $id)
+  private function findCommentById(string $id): ?UserComment
   {
-    return $this->entity_manager
-      ->getRepository(UserComment::class)
-      ->findOneBy(
-        ['id' => $id]
-      )
-    ;
+    return $this->comment_repository->findOneBy(['id' => $id]);
   }
 
   /**
@@ -516,10 +504,7 @@ class ProgramController extends AbstractController
    */
   private function findCommentRepliesById(string $id): array
   {
-    return $this->entity_manager
-      ->getRepository(UserComment::class)
-      ->findCommentRepliesByParentId($id)
-    ;
+    return $this->comment_repository->findCommentRepliesByParentId($id);
   }
 
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response

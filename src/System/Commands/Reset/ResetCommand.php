@@ -110,7 +110,7 @@ class ResetCommand extends Command
     $program_names = [];
     /** @var Program $program */
     foreach ($programs as $program) {
-      array_push($program_names, $program->getName());
+      $program_names[] = $program->getName();
     }
 
     $this->reportProjects($program_names, $user_array, $output);

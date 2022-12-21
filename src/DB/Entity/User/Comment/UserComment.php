@@ -103,15 +103,20 @@ class UserComment implements \Stringable
   protected ?Studio $studio = null;
 
   /**
-   * @ORM\Column(type="boolean", nullable=false, options={"default": 0})
+   * @ORM\Column(type="boolean", nullable=false, options={"default": false})
    */
-  protected ?bool $is_deleted = null;
+  protected bool $is_deleted = false;
 
   /**
    * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
    * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
   protected ?StudioActivity $activity = null;
+
+  /**
+   * Only on demand, not in database. (currently).
+   */
+  public ?int $number_of_replies = null;
 
   public function __toString(): string
   {
@@ -166,7 +171,12 @@ class UserComment implements \Stringable
     return $this;
   }
 
-  public function getUploadDate(): ?string
+  public function getUploadDate(): ?\DateTime
+  {
+    return $this->uploadDate;
+  }
+
+  public function getUploadDateAsString(): string
   {
     return date('Y-m-d\TH:i:s\Z', $this->uploadDate->getTimestamp());
   }
@@ -276,6 +286,21 @@ class UserComment implements \Stringable
   public function setIsDeleted(?bool $is_deleted): UserComment
   {
     $this->is_deleted = $is_deleted;
+
+    return $this;
+  }
+
+  public function getNumberOfReplies(): ?int
+  {
+    return $this->number_of_replies;
+  }
+
+  /**
+   * @return $this
+   */
+  public function setNumberOfReplies(?int $number_of_replies): self
+  {
+    $this->number_of_replies = $number_of_replies;
 
     return $this;
   }
