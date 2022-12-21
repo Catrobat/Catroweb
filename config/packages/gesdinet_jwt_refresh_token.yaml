@@ -1,4 +1,0 @@
-gesdinet_jwt_refresh_token:
-  ttl: '%env(int:REFRESH_TOKEN_TTL)%'
-  token_parameter_name: refresh_token
-  single_use: true

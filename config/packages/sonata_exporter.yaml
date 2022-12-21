@@ -1,5 +1,0 @@
-sonata_exporter:
-    exporter:
-        default_writers:
-            - csv
-            - json
