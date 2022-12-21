@@ -238,27 +238,6 @@
        data-trans-clipboard-success="{{ "clipboard.success_project"|trans({}, "catroweb") }}"
        data-trans-clipboard-fail="{{ "clipboard.fail"|trans({}, "catroweb") }}"
   ></div>
-  {# TODO: Disable Report Program for now. Needs a separate flag in database - a new concept!
-  <div class="js-project-report"
-       data-project-id="{{ program.id }}"
-       data-path-report="{{ path('catrobat_api_report_program') }}"
-       data-path-login="{{ url('login') }}"
-       data-trans-success="{{ 'success.report'                          |trans({}, 'catroweb') }}"
-       data-trans-error="{{ "error"                                   |trans({}, "catroweb") }}"
-       data-trans-report="{{ "programs.report"                         |trans({}, "catroweb") }}"
-       data-trans-cancel="{{ "cancel"                                  |trans({}, "catroweb") }}"
-       data-trans-header="{{ "programs.reportDialogHeader"             |trans({}, "catroweb") }}"
-       data-trans-reason="{{ "programs.reportDialogReason"             |trans({}, "catroweb") }}"
-       data-trans-inappropriate="{{ "programs.reportRadioButtonInappropriate" |trans({}, "catroweb") }}"
-       data-trans-copyright="{{ "programs.reportRadioButtonCopyright"     |trans({}, "catroweb") }}"
-       data-trans-spam="{{ "programs.reportRadioButtonSpam"          |trans({}, "catroweb") }}"
-       data-trans-dislike="{{ "programs.reportRadioButtonDislike"       |trans({}, "catroweb") }}"
-       data-const-ok="{{ constant('Symfony\\Component\\HttpFoundation\\Response::HTTP_OK') }}"
-       data-logged-in="{{ logged_in }}"
-       data-trans-more-info="{{ "more-information"|trans({}, "catroweb") }}"
-       data-trans-less-info="{{ "less-information"|trans({}, "catroweb") }}"
-  ></div>
-  #}
   <div class="js-project-description-credits"
        data-project-id="{{ program.id }}"
        data-has-description={% if program.description %} true {% else %} false {% endif %}

@@ -26,7 +26,7 @@ class CommentsController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/reportComment', name: 'report', methods: ['GET'])]
-  public function reportCommentAction(): Response
+  public function reportAction(): Response
   {
     $user = $this->getUser();
     if (null === $user) {
@@ -34,8 +34,13 @@ class CommentsController extends AbstractController
     }
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($_GET['CommentId']);
     if (null === $comment) {
-      throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
+      return new Response('No comment found for this id '.$_GET['CommentId'], Response::HTTP_NOT_FOUND);
     }
+
+    if ($comment->getIsDeleted()) {
+      return new Response('A deleted comment cannot be reported', Response::HTTP_BAD_REQUEST);
+    }
+
     $comment->setIsReported(true);
     $this->entity_manager->flush();
 
@@ -55,8 +60,13 @@ class CommentsController extends AbstractController
     }
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($_GET['CommentId']);
     if (null === $comment) {
-      throw $this->createNotFoundException('No comment found for this id '.$_GET['CommentId']);
+      return new Response('No comment found for this id '.$_GET['CommentId'], Response::HTTP_NOT_FOUND);
     }
+
+    if ($comment->getIsDeleted()) {
+      return new Response('An already deleted comment cannot be deleted', Response::HTTP_BAD_REQUEST);
+    }
+
     $comment_user_id = 0;
     if ($comment->getUser()) {
       $comment_user_id = $comment->getUser()->getId();
@@ -64,7 +74,10 @@ class CommentsController extends AbstractController
     if ($user->getId() !== $comment_user_id && !$this->isGranted('ROLE_ADMIN')) {
       return new Response('', Response::HTTP_FORBIDDEN);
     }
-    $this->entity_manager->remove($comment);
+
+    $comment->setIsDeleted(true);
+
+    $this->entity_manager->persist($comment);
     $this->entity_manager->flush();
 
     return new Response('', Response::HTTP_OK);
@@ -86,8 +99,14 @@ class CommentsController extends AbstractController
     $temp_comment->setUser($user);
     $temp_comment->setText($_POST['Message']);
     $temp_comment->setProgram($program);
-    $temp_comment->setUploadDate(date_create());
+    $date_time_zone = new \DateTimeZone('UTC');
+    $temp_comment->setUploadDate(date_create('now', $date_time_zone));
     $temp_comment->setIsReported(false);
+    $temp_comment->setIsDeleted(false);
+    if (isset($_POST['ParentCommentId'])) {
+      $parent_comment_id = intval($_POST['ParentCommentId']);
+      $temp_comment->setParentId($parent_comment_id);
+    }
     $this->entity_manager->persist($temp_comment);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($temp_comment);
@@ -112,9 +131,15 @@ class CommentsController extends AbstractController
       return new Response('Target language is required', Response::HTTP_BAD_REQUEST);
     }
     $comment = $this->entity_manager->getRepository(UserComment::class)->find($id);
+
     if (null === $comment) {
       return new Response('No comment found for this id', Response::HTTP_NOT_FOUND);
     }
+
+    if ($comment->getIsDeleted()) {
+      return new Response('A deleted comment cannot be translated', Response::HTTP_BAD_REQUEST);
+    }
+
     $source_language = $request->query->get('source_language');
     $source_language = is_null($source_language) ? $source_language : (string) $source_language;
     $target_language = (string) $request->query->get('target_language');

@@ -486,6 +486,10 @@ trait ContextTrait
     /** @var User|null $user */
     $user = $this->getUserManager()->find($config['user_id']);
 
+    $parent_id = $config['parent_id'] ?? null;
+    $parent_id = ('NULL' === $parent_id || is_null($parent_id)) ? null : intval($parent_id);
+    $is_deleted = $config['is_deleted'] ?? false;
+    $is_deleted = 'true' === $is_deleted;
     $new_comment = new UserComment();
     $new_comment->setUploadDate(isset($config['upload_date']) ?
       new \DateTime($config['upload_date'], new \DateTimeZone('UTC')) :
@@ -493,6 +497,8 @@ trait ContextTrait
     );
     $new_comment->setProgram($project);
     $new_comment->setUser($user);
+    $new_comment->setParentId($parent_id);
+    $new_comment->setIsDeleted($is_deleted);
     $new_comment->setUsername($user->getUserIdentifier());
     $new_comment->setIsReported($config['reported'] ?? false);
     $new_comment->setText($config['text']);

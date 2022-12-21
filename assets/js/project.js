@@ -237,6 +237,8 @@ function initProjects () {
   })
 }
 
+new TranslateComments($project.data('translated-by-line'), $project.data('google-translate-display-name'))
+
 ProgramComments(
   $projectComments.data('project-id'), 5, 5, 5,
   $projectComments.data('total-number-of-comments'),
@@ -262,5 +264,3 @@ new TranslateProgram(
   $project.data('has-description'),
   $project.data('has-credits')
 )
-
-new TranslateComments($project.data('translated-by-line'), $project.data('google-translate-display-name'))

@@ -22,21 +22,23 @@ class CommentNotification extends CatroNotification
    * @param User        $user    the user to which this CommentNotification should be shown
    * @param UserComment $comment the UserComment which triggered this CommentNotification
    */
-  public function __construct(User $user, /**
-   * The UserComment which triggered this CommentNotification. If the UserComment gets deleted,
-   * this CommentNotification gets deleted as well.
-   *
-   * @ORM\OneToOne(
-   *     targetEntity=UserComment::class,
-   *     inversedBy="notification"
-   * )
-   * @ORM\JoinColumn(
-   *     name="comment_id",
-   *     referencedColumnName="id",
-   *     onDelete="SET NULL",
-   *     nullable=true
-   * )
-   */
+  public function __construct(
+    User $user,
+    /**
+     * The UserComment which triggered this CommentNotification. If the UserComment gets deleted,
+     * this CommentNotification gets deleted as well.
+     *
+     * @ORM\OneToOne(
+     *     targetEntity=UserComment::class,
+     *     inversedBy="notification"
+     * )
+     * @ORM\JoinColumn(
+     *     name="comment_id",
+     *     referencedColumnName="id",
+     *     onDelete="SET NULL",
+     *     nullable=true
+     * )
+     */
     private ?UserComment $comment)
   {
     parent::__construct($user, '', '', 'comment');

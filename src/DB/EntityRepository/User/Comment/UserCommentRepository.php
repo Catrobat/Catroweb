@@ -51,6 +51,34 @@ class UserCommentRepository extends ServiceEntityRepository
 
   public function countCommentReplies(int $comment_id): int
   {
+    $qb = $this->createQueryBuilder('uc');
+
     return $this->count(['parent_id' => $comment_id]);
+  }
+
+  public function findCommentsByProgramId(string $program_id): array
+  {
+    $qb = $this->createQueryBuilder('uc');
+
+    return $qb->select('uc')
+      ->where('uc.program = :program_id')
+      ->setParameter('program_id', $program_id)
+      ->andWhere($qb->expr()->orX()->addMultiple([
+        $qb->expr()->isNull('uc.parent_id'),
+        $qb->expr()->eq('uc.parent_id', 0),
+      ]))
+      ->orderBy('uc.uploadDate', 'DESC')
+      ->getQuery()->getResult();
+  }
+
+  public function findCommentRepliesByParentId(string $parent_id): array
+  {
+    $qb = $this->createQueryBuilder('uc');
+
+    return $qb->select('uc')
+      ->where('uc.parent_id = :parent_id')
+      ->setParameter('parent_id', $parent_id)
+      ->orderBy('uc.uploadDate', 'DESC')
+      ->getQuery()->getResult();
   }
 }
