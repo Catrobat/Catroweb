@@ -49,9 +49,11 @@
     "stimulus": "^3.2.1",
     "stylelint": "^14.16.0",
     "stylelint-config-standard-scss": "^6.1.0",
+    "webpack-cli": "^5.0.1",
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
+    "@babel/core": "^7.20.5",
     "@material/checkbox": "^14.0",
     "@material/chips": "^14.0",
     "@material/circular-progress": "^14.0",
