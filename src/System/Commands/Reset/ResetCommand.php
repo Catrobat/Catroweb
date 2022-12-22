@@ -114,9 +114,9 @@ class ResetCommand extends Command
     }
 
     $this->reportProjects($program_names, $user_array, $output);
-    if ($input->hasOption('with-remixes')) {
-      $this->remixGen($program_names, $output);
-    }
+    // if ($input->hasOption('with-remixes')) {
+    // $this->remixGen($program_names, $output);  // Currently not working
+    // }
     $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);
@@ -390,34 +390,34 @@ class ResetCommand extends Command
     }
   }
 
-  /**
-   * @throws \Exception
-   */
-  private function remixGen(array $program_array, OutputInterface $output): void
-  {
-    $rand_start = random_int(2, 3);
-    $rand_interval = random_int(3, 6);
-
-    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_interval) {
-      $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
-      if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true)) {
-        $i -= $rand_interval;
-        ++$i;
-        continue;
-      }
-
-      $parameters = [
-        'program_original' => $program_array[$i],
-        'program_remix' => $program_array[$report_index],
-      ];
-
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:remix', $this->getApplication(), $parameters, $output);
-
-      if (0 !== $ret) {
-        $output->writeln('Remix Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
-      }
-    }
-  }
+//  /**
+//   * @throws \Exception
+//   */
+//  private function remixGen(array $program_array, OutputInterface $output): void
+//  {
+//    $rand_start = random_int(2, 3);
+//    $rand_interval = random_int(3, 6);
+//
+//    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_interval) {
+//      $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
+//      if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true)) {
+//        $i -= $rand_interval;
+//        ++$i;
+//        continue;
+//      }
+//
+//      $parameters = [
+//        'program_original' => $program_array[$i],
+//        'program_remix' => $program_array[$report_index],
+//      ];
+//
+//      $ret = CommandHelper::executeSymfonyCommand('catrobat:remix', $this->getApplication(), $parameters, $output);
+//
+//      if (0 !== $ret) {
+//        $output->writeln('Remix Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
+//      }
+//    }
+//  }
 
   private function exampleProject(array $program_names, OutputInterface $output): void
   {

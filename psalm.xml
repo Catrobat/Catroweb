@@ -9,11 +9,14 @@
 >
     <projectFiles>
         <directory name="src" />
+        <directory name="config" />
         <directory name="tests" />
         <ignoreFiles>
             <directory name="vendor" />
             <!-- Legacy code that will be removed in the future -->
             <directory name="src/Project/CatrobatCode"/>
+            <file name="config/bootstrap.php" />
+            <file name="config/preload.php" />
         </ignoreFiles>
     </projectFiles>
 
