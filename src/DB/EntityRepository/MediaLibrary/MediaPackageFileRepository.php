@@ -9,15 +9,10 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Exception;
-use Imagick;
-use ImagickDraw;
-use ImagickException;
-use SplFileInfo;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
-use ZipArchive;
 
 /**
  * Class MediaPackageFileRepository used for interacting with the database when handling MediaPackageFiles.
@@ -63,7 +58,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @return MediaPackageFile the created MediaPackageFile
    *
-   * @throws Exception when an error occurs during creating
+   * @throws \Exception when an error occurs during creating
    */
   public function createMediaPackageFile(string $name, File $file, MediaPackageCategory $category, iterable $flavors, string $author): MediaPackageFile
   {
@@ -92,7 +87,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $extension        File extension
    * @param bool   $create_thumbnail Whether a thumbnail should be created or not. Default is true.
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function moveFile(File $file, int $id, string $extension, bool $create_thumbnail = true): void
   {
@@ -111,7 +106,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $extension        file extension
    * @param bool   $create_thumbnail Whether a thumbnail should be created or not. Default is true.
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function saveFile(File $file, int $id, string $extension,
     bool $create_thumbnail = true): void
@@ -147,14 +142,14 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * Creates missing thumbnails.
    * It checks for files that exist in the base directory but not in the thumbs directory.
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function createMissingThumbnails(): void
   {
     $finder = new Finder();
     $finder->files()->in($this->dir)->depth(0);
 
-    /** @var SplFileInfo $file */
+    /** @var \SplFileInfo $file */
     foreach ($finder as $file) {
       $ext = 'catrobat' == $file->getExtension() ? 'png' : $file->getExtension();
       $basename = $file->getBasename('.'.$ext);
@@ -269,19 +264,19 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $id             the id/name of the file
    * @param string $file_extension File extension
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   private function createThumbnail(string $id, string $file_extension): void
   {
     try {
       $path = $this->dir.$this->generateFileNameFromId($id, $file_extension);
-      $imagick = new Imagick();
+      $imagick = new \Imagick();
 
       if ('catrobat' == $file_extension) {
         // We are dealing with an media library "object" here. An "object" is basically a .catrobat file containing scenes, characters etc.
 
         // Searching screenshot in .catrobat file
-        $catrobat_archive = new ZipArchive();
+        $catrobat_archive = new \ZipArchive();
         $catrobat_archive->open($path);
 
         $screenshot_path_inside_archive = null;
@@ -308,10 +303,10 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
       $meanImg = clone $imagick;
       $meanImg->setBackgroundColor('#ffffff');
-      $meanImg->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+      $meanImg->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
       $meanImg->setImageFormat($thumbnail_extension);
-      $meanImg->setColorspace(Imagick::COLORSPACE_GRAY);
-      $mean = $meanImg->getImageChannelMean(Imagick::CHANNEL_GRAY);
+      $meanImg->setColorspace(\Imagick::COLORSPACE_GRAY);
+      $mean = $meanImg->getImageChannelMean(\Imagick::CHANNEL_GRAY);
 
       $background = '#ffffff';
       if ($mean['mean'] > 0xD000 && $mean['standardDeviation'] < 2_000) {
@@ -319,7 +314,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       }
 
       $imagick->setImageBackgroundColor($background);
-      $imagick->mergeImageLayers(Imagick::LAYERMETHOD_FLATTEN);
+      $imagick->mergeImageLayers(\Imagick::LAYERMETHOD_FLATTEN);
       $imagick->setImageFormat($thumbnail_extension);
       $imagick->thumbnailImage(200, 0);
 
@@ -328,7 +323,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
         // media library "object"
 
         /** @var mixed $draw */
-        $draw = new ImagickDraw();
+        $draw = new \ImagickDraw();
 
         // Black text
         $draw->setFillColor('gray');
@@ -343,7 +338,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
       }
 
       $imagick->writeImage($this->thumb_dir.$id.'.'.$thumbnail_extension);
-    } catch (ImagickException $imagickException) {
+    } catch (\ImagickException $imagickException) {
       $code = $imagickException->getCode() % 100;
       // for error codes see: https://www.imagemagick.org/script/exception.php
       // allowed: 20 non-images/unknown type; 5 font unavailable (svg etc.)

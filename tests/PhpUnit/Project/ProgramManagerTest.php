@@ -24,12 +24,10 @@ use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
 use Doctrine\ORM\EntityManager;
-use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Log\LoggerInterface;
-use SimpleXMLElement;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -62,7 +60,7 @@ class ProgramManagerTest extends TestCase
   private ProgramAfterInsertEvent|MockObject $programAfterInsertEvent;
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function setUp(): void
   {
@@ -101,7 +99,7 @@ class ProgramManagerTest extends TestCase
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
     $this->extracted_file->expects($this->any())->method('getApplicationVersion')->willReturn('0.999');
     $this->extracted_file->expects($this->any())->method('getProgramXmlProperties')
-      ->willReturn(new SimpleXMLElement('<empty></empty>')
+      ->willReturn(new \SimpleXMLElement('<empty></empty>')
       )
     ;
     $this->extracted_file->expects($this->any())->method('getDirHash')->willReturn('451f778e4bf3');
@@ -125,7 +123,7 @@ class ProgramManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
   {
@@ -150,7 +148,7 @@ class ProgramManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
   {
@@ -173,7 +171,7 @@ class ProgramManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSavesTheScreenshotsToTheScreenshotRepository(): void
   {
@@ -204,7 +202,7 @@ class ProgramManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testFiresAnEventBeforeInsertingAProgram(): void
   {
@@ -231,7 +229,7 @@ class ProgramManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testFiresAnEventWhenTheProgramIsInvalid(): void
   {
@@ -249,7 +247,7 @@ class ProgramManagerTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testFiresAnEventWhenTheProgramIsStored(): void
   {

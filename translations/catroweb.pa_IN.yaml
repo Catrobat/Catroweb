@@ -386,6 +386,7 @@ menu:
   home: ਘਰ
   helpAndTutorials: ਮਦਦ ਅਤੇ ਟਿਊਟੋਰਿਯਲ
   followersAndFollowing: ਚੇਲਾ
+  mediaLibrary: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ
 login:
   login: ਲਾਗਿਨ
   button:
@@ -838,6 +839,8 @@ extensions:
       title: ਕਢਾਈ
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'ਜਨਤਕ'

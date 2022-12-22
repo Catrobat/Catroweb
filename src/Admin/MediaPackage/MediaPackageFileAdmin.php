@@ -6,7 +6,6 @@ use App\DB\Entity\Flavor;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
-use ImagickException;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
@@ -50,7 +49,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function postPersist($object): void
   {
@@ -83,7 +82,7 @@ class MediaPackageFileAdmin extends AbstractAdmin
   /**
    * {@inheritdoc}
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function postUpdate($object): void
   {

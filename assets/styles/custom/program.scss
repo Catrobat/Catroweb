@@ -6,6 +6,7 @@
 @import "~@material/textfield/mdc-text-field";
 @import "~@material/radio/mdc-radio";
 @import "~@material/form-field/mdc-form-field";
+@import "~@material/fab/mdc-fab";
 
 #project-thumbnail-big {
   border-radius: 10%;
@@ -242,11 +243,6 @@ table td:nth-child(1) {
   }
 }
 
-#comments-wrapper {
-  display: block;
-  clear: both;
-}
-
 .name-date-wrapper {
   display: block;
 }
@@ -258,7 +254,15 @@ table td:nth-child(1) {
 
 .date {
   display: inline-block;
-  float: left;
+}
+
+.space-left {
+  margin-left: 15px;
+}
+
+.deleted-comment {
+  background-color: #9b9696;
+  border-radius: 5%;
 }
 
 .usr-name {
@@ -297,13 +301,33 @@ table td:nth-child(1) {
   display: block;
 }
 
-.single-comment {
+.reply-button--fab {
+  position: sticky;
+  bottom: 40%;
+  left: 100%;
+  z-index: 999;
+  text-align: center;
+  display: inline-block;
+}
+
+.single-reply:nth-of-type(1) {
+  border-bottom: 0.5px solid rgb(8 8 8);
+}
+
+.single-comment,
+.single-reply {
   min-height: 80px;
   padding-top: 10px;
   padding-bottom: 10px;
+  border-bottom: 0.5px solid rgb(109 102 102 / 19%);
 
   &.hidden {
     display: none;
+  }
+
+  &:hover,
+  &:active {
+    background-color: rgba(0 0 0 / 8%);
   }
 }
 

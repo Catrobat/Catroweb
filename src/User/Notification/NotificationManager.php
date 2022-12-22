@@ -10,10 +10,12 @@ class NotificationManager
   {
   }
 
-  public function addNotification(mixed $notification): void
+  public function addNotification(mixed $notification, bool $flush = true): void
   {
     $this->em->persist($notification);
-    $this->em->flush();
+    if ($flush) {
+      $this->em->flush();
+    }
   }
 
   public function addNotifications(mixed $notifications): void

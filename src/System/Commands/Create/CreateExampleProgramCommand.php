@@ -7,7 +7,6 @@ use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,7 +43,7 @@ class CreateExampleProgramCommand extends Command
 
     try {
       $this->exampleProgram($program);
-    } catch (Exception $e) {
+    } catch (\Exception $e) {
       $output->writeln('Failed to example: '.$program->getName().' '.$e->getMessage());
 
       return 2;
@@ -55,7 +54,7 @@ class CreateExampleProgramCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function exampleProgram(Program $program): void
   {

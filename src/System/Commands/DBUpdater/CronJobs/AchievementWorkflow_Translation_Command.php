@@ -7,7 +7,6 @@ use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -27,7 +26,7 @@ class AchievementWorkflow_Translation_Command extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

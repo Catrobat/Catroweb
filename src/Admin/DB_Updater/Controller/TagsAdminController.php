@@ -3,7 +3,6 @@
 namespace App\Admin\DB_Updater\Controller;
 
 use App\System\Commands\Helpers\CommandHelper;
-use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -28,7 +27,7 @@ class TagsAdminController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateTagsAction(): RedirectResponse
   {

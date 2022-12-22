@@ -5,8 +5,8 @@ namespace App\System\Commands;
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Storage\FileHelper;
-use Exception;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ConfirmationQuestion;
@@ -42,10 +42,11 @@ class GenerateTestDataCommand extends Command
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
-    $dialog = $this->getHelper('question');
+    /** @var QuestionHelper $question_helper */
+    $question_helper = $this->getHelper('question');
     $question = new ConfirmationQuestion('<question>Generate test data in '.$this->target_directory.' (Y/n)?</question>', true);
 
-    if ($input->getOption('force') || $dialog->ask($input, $output, $question)) {
+    if ($input->getOption('force') || $question_helper->ask($input, $output, $question)) {
       $output->writeln('<info>Deleting old test data in '.$this->target_directory.'</info>');
 
       $finder = new Finder();
@@ -80,7 +81,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function extractBaseTestProgram(string $directory): void
   {
@@ -91,7 +92,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function extractEmbroideryTestProgram(string $directory): void
   {
@@ -102,7 +103,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function extractExtensionTestProgram(string $directory): void
   {
@@ -162,7 +163,7 @@ class GenerateTestDataCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function generateProgramWithTags(string $directory): void
   {
@@ -171,7 +172,7 @@ class GenerateTestDataCommand extends Command
     $properties->header->tags = 'Games,Story';
     $file_overwritten = $properties->asXML($this->target_directory.$directory.'/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
   }
 

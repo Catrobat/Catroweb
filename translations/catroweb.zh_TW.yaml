@@ -386,6 +386,7 @@ menu:
   home: 家
   helpAndTutorials: 幫助和教程
   followersAndFollowing: 追隨者
+  mediaLibrary: 媒體庫
 login:
   login: 登入
   button:
@@ -838,6 +839,8 @@ extensions:
       title: 刺繡
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: '民眾'

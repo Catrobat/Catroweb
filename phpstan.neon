@@ -4,6 +4,7 @@ parameters:
   level: 6  # 0 is the loosest lvl and 8 is the strictest
   paths:
       - src
+      - config
       - tests
   inferPrivatePropertyTypeFromConstructor: true
   reportUnmatchedIgnoredErrors: false

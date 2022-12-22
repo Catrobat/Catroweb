@@ -3,7 +3,6 @@
 namespace App\Project\CatrobatCode\Statements;
 
 use App\Project\CatrobatCode\StatementFactory;
-use SimpleXMLElement;
 
 class SoundStatement extends Statement
 {
@@ -11,7 +10,7 @@ class SoundStatement extends Statement
 
   private ?ValueStatement $name = null;
 
-  public function __construct(StatementFactory $statementFactory, SimpleXMLElement $xmlTree, int $spaces, private readonly string $value)
+  public function __construct(StatementFactory $statementFactory, \SimpleXMLElement $xmlTree, int $spaces, private readonly string $value)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $value,

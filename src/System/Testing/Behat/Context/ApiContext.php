@@ -19,11 +19,9 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use Exception;
 use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtensionEnvironment;
-use JsonException;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
-use RuntimeException;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -127,7 +125,7 @@ class ApiContext implements Context
   private array $new_uploaded_projects = [];
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function getKernelBrowser(): KernelBrowser
   {
@@ -136,7 +134,7 @@ class ApiContext implements Context
     }
 
     if (null === $this->kernel_browser) {
-      throw new Exception("Can't get KernelBrowser");
+      throw new \Exception("Can't get KernelBrowser");
     }
 
     return $this->kernel_browser;
@@ -149,7 +147,7 @@ class ApiContext implements Context
   /**
    * @BeforeScenario
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function followRedirects(): void
   {
@@ -159,7 +157,7 @@ class ApiContext implements Context
   /**
    * @BeforeScenario
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function generateSessionCookie(): void
   {
@@ -191,7 +189,7 @@ class ApiContext implements Context
   /**
    * @BeforeScenario
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function gatherContexts(BeforeScenarioScope $scope): void
   {
@@ -201,7 +199,7 @@ class ApiContext implements Context
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function getDataFixturesContext(InitializedSymfonyExtensionEnvironment $environment): DataFixturesContext
   {
@@ -210,7 +208,7 @@ class ApiContext implements Context
       return $context;
     }
 
-    throw new Exception("Can't get DataFixturesContext");
+    throw new \Exception("Can't get DataFixturesContext");
   }
 
   /**
@@ -237,7 +235,7 @@ class ApiContext implements Context
    * @param string $method The desired HTTP method
    * @param string $uri    The requested URI
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iRequestWith($method, $uri): void
   {
@@ -341,7 +339,7 @@ class ApiContext implements Context
   /**
    * @When /^I want to download the apk file of "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iWantToDownloadTheApkFileOf(mixed $arg1): void
   {
@@ -349,7 +347,7 @@ class ApiContext implements Context
 
     $program = $program_manager->findOneByName($arg1);
     if (null === $program) {
-      throw new Exception('Program not found: '.$arg1);
+      throw new \Exception('Program not found: '.$arg1);
     }
     $router = $this->getRouter();
     $url = $router->generate('ci_download', ['id' => $program->getId(), 'theme' => 'pocketcode']);
@@ -407,7 +405,7 @@ class ApiContext implements Context
   /**
    * @When /^I upload another program using token "([^"]*)"$/
    *
-   * @throws Exception when an error occurs during uploading
+   * @throws \Exception when an error occurs during uploading
    */
   public function iUploadAnotherProgramUsingToken(mixed $arg1): void
   {
@@ -581,7 +579,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should get the json object:$/
    *
-   * @throws JsonException
+   * @throws \JsonException
    */
   public function iShouldGetTheJsonObject(PyStringNode $string): void
   {
@@ -661,7 +659,7 @@ class ApiContext implements Context
   {
     $profile = $this->getKernelBrowser()->getProfile();
     if (!$profile) {
-      throw new RuntimeException('The profiler is disabled. Activate it by setting '.'framework.profiler.only_exceptions to false in '.'your config');
+      throw new \RuntimeException('The profiler is disabled. Activate it by setting framework.profiler.only_exceptions to false in your config');
     }
 
     return $profile;
@@ -1123,7 +1121,7 @@ class ApiContext implements Context
     $pm = $this->getProgramManager();
     $program = $pm->find('1');
     if (null === $program) {
-      throw new Exception('last program not found');
+      throw new \Exception('last program not found');
     }
     $file = $this->generateProgramFileWith([
       'name' => $program->getName(),
@@ -3030,7 +3028,7 @@ class ApiContext implements Context
    * @param string    $flavor      The flavor of the project
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
-   * @throws Exception                       when an error while uploading occurs
+   * @throws \Exception                      when an error while uploading occurs
    */
   private function uploadProject(string $file, string $api_version, User $user = null, string $desired_id = '',
     string $flavor = 'pocketcode'): void
@@ -3051,8 +3049,8 @@ class ApiContext implements Context
 
     try {
       $file = new UploadedFile($file, basename($file));
-    } catch (Exception $e) {
-      throw new Exception('File to upload does not exist'.$e);
+    } catch (\Exception $e) {
+      throw new \Exception('File to upload does not exist'.$e);
     }
 
     if ('1' == $api_version) {

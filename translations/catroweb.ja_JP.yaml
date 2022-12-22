@@ -386,6 +386,7 @@ menu:
   home: ホーム
   helpAndTutorials: ヘルプとチュートリアル
   followersAndFollowing: フォロワー
+  mediaLibrary: メディア ライブラリー
 login:
   login: ログイン
   button:
@@ -838,6 +839,8 @@ extensions:
       title: 刺繍（刺繍）
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: '公開'

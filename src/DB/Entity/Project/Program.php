@@ -15,11 +15,9 @@ use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\Generator\MyUuidGenerator;
 use App\Utils\TimeUtils;
 use DateTime;
-use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 
 /**
  * @ORM\HasLifecycleCallbacks
@@ -194,12 +192,12 @@ class Program implements \Stringable
   /**
    * @ORM\Column(type="datetime")
    */
-  protected DateTime $uploaded_at;
+  protected \DateTime $uploaded_at;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected DateTime $last_modified_at;
+  protected \DateTime $last_modified_at;
 
   /**
    * @ORM\Column(type="string", options={"default": "0"})
@@ -251,7 +249,7 @@ class Program implements \Stringable
   /**
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected ?DateTime $remix_migrated_at = null;
+  protected ?\DateTime $remix_migrated_at = null;
 
   /**
    * @ORM\OneToMany(
@@ -332,7 +330,7 @@ class Program implements \Stringable
   /**
    * @ORM\Column(type="datetime", nullable=true)
    */
-  protected ?DateTime $apk_request_time = null;
+  protected ?\DateTime $apk_request_time = null;
 
   /**
    * @ORM\Column(type="integer", options={"default": 0})
@@ -404,7 +402,7 @@ class Program implements \Stringable
   /**
    * @ORM\PreUpdate
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateLastModifiedTimestamp(): void
   {
@@ -414,13 +412,13 @@ class Program implements \Stringable
   /**
    * @ORM\PrePersist
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateTimestamps(): void
   {
     $this->updateLastModifiedTimestamp();
     if (null == $this->getUploadedAt()) {
-      $this->setUploadedAt(new DateTime('now', new DateTimeZone('UTC')));
+      $this->setUploadedAt(new \DateTime('now', new \DateTimeZone('UTC')));
     }
   }
 
@@ -524,38 +522,38 @@ class Program implements \Stringable
     return $this->downloads;
   }
 
-  public function setUploadedAt(DateTime $uploadedAt): Program
+  public function setUploadedAt(\DateTime $uploadedAt): Program
   {
     $this->uploaded_at = $uploadedAt;
 
     return $this;
   }
 
-  public function getUploadedAt(): DateTime
+  public function getUploadedAt(): \DateTime
   {
     return $this->uploaded_at;
   }
 
-  public function setLastModifiedAt(DateTime $lastModifiedAt): Program
+  public function setLastModifiedAt(\DateTime $lastModifiedAt): Program
   {
     $this->last_modified_at = $lastModifiedAt;
 
     return $this;
   }
 
-  public function getLastModifiedAt(): DateTime
+  public function getLastModifiedAt(): \DateTime
   {
     return $this->last_modified_at;
   }
 
-  public function setRemixMigratedAt(?DateTime $remix_migrated_at): Program
+  public function setRemixMigratedAt(?\DateTime $remix_migrated_at): Program
   {
     $this->remix_migrated_at = $remix_migrated_at;
 
     return $this;
   }
 
-  public function getRemixMigratedAt(): ?DateTime
+  public function getRemixMigratedAt(): ?\DateTime
   {
     return $this->remix_migrated_at;
   }
@@ -719,14 +717,14 @@ class Program implements \Stringable
     return $this;
   }
 
-  public function setApkRequestTime(?DateTime $apkRequestTime): Program
+  public function setApkRequestTime(?\DateTime $apkRequestTime): Program
   {
     $this->apk_request_time = $apkRequestTime;
 
     return $this;
   }
 
-  public function getApkRequestTime(): ?DateTime
+  public function getApkRequestTime(): ?\DateTime
   {
     return $this->apk_request_time;
   }

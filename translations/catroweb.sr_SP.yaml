@@ -8,11 +8,11 @@ createNewPassword: Create new password
 accountSettings: Подешавања налога
 email: E-Мail
 aboutPocketCode: О Pocket Code
-about: About
+about: O
 education: Education
 chat: Chat and forums
 others: Others
-tutorials: Help
+tutorials: Помоћ
 googlePlay: Гугл продавница
 iosAppStore: IOS продавница апликација
 huaweiAppGallery: Huawei AppGallery
@@ -183,8 +183,8 @@ programs:
   noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
-  closeEditorPrompt: Do you want to save your changes?
-  btnDiscard: Discard
+  closeEditorPrompt: Да ли желите да сачувате своје измене?
+  btnDiscard: Одбаци
   addComment: Напиши коментар
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -201,7 +201,7 @@ programs:
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
-  save: Save
+  save: Сачувај
   translationTitle: '%language% translation'
   editDefault: Edit default
   editTranslation: Edit %language% translation
@@ -307,7 +307,7 @@ myprofile:
   account: Account
   editProfile: Уреди профил
   edit: Измени
-  done: Done
+  done: Готово
   checkMail: На вашу адресу е-поште послата је е-пошта. Проверите своје сандуче.
   passwordUpdated: Ваша лозинка је успешно ажурирана.
   avatar: Avatar
@@ -386,6 +386,7 @@ menu:
   home: Почетна
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
+  mediaLibrary: Media library
 login:
   login: Login
   button:
@@ -753,7 +754,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'ново'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -838,6 +839,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

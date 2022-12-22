@@ -6,7 +6,6 @@ use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 
 /**
  * Class MediaPackageCategoryRepository used for interacting with the database when handling MediaPackageCategories.
@@ -26,7 +25,7 @@ class MediaPackageCategoryRepository extends ServiceEntityRepository
    *
    * @return MediaPackageCategory the created MediaPackageCategory
    *
-   * @throws Exception when an error occurs during creating
+   * @throws \Exception when an error occurs during creating
    */
   public function createMediaPackageCategory(string $name, ArrayCollection $media_packages): MediaPackageCategory
   {

@@ -3,7 +3,6 @@
 namespace App\Project\CatrobatCode\Statements;
 
 use App\Project\CatrobatCode\StatementFactory;
-use SimpleXMLElement;
 
 class ShowTextStatement extends Statement
 {
@@ -16,7 +15,7 @@ class ShowTextStatement extends Statement
    */
   final public const END_STRING = ')<br/>';
 
-  public function __construct(StatementFactory $statementFactory, ?SimpleXMLElement $xmlTree, int $spaces)
+  public function __construct(StatementFactory $statementFactory, ?\SimpleXMLElement $xmlTree, int $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,

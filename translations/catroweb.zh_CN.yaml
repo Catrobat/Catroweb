@@ -391,6 +391,7 @@ menu:
   home: 首页
   helpAndTutorials: 帮助和教程
   followersAndFollowing: 关注者
+  mediaLibrary: 媒体库
 login:
   login: 登录
   button:
@@ -843,6 +844,8 @@ extensions:
       title: 刺绣
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: 多人游戏
 studio:
   details:
     public: '公开的'

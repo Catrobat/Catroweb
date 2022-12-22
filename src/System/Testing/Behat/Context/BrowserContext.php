@@ -304,7 +304,7 @@ class BrowserContext extends MinkContext implements Context
    *
    * @param string $name The name of the file that should have been downloaded
    *
-   * @throws Exception when an error occurs during checking if the file has been downloaded
+   * @throws \Exception when an error occurs during checking if the file has been downloaded
    */
   public function iShouldHaveDownloadedAFileNamed(string $name): void
   {

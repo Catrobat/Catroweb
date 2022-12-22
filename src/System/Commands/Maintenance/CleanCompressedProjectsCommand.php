@@ -2,7 +2,6 @@
 
 namespace App\System\Commands\Maintenance;
 
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -20,7 +19,7 @@ class CleanCompressedProjectsCommand extends Command
     parent::__construct();
     $this->compressed_path = (string) $parameter_bag->get('catrobat.file.storage.dir');
     if (!$this->compressed_path) {
-      throw new Exception('Invalid extract path given');
+      throw new \Exception('Invalid extract path given');
     }
   }
 
@@ -32,7 +31,7 @@ class CleanCompressedProjectsCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

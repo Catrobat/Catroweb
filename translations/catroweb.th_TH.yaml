@@ -392,6 +392,7 @@ menu:
   home: บ้าน
   helpAndTutorials: ความช่วยเหลือและแบบฝึกหัด
   followersAndFollowing: ผู้ติดตาม
+  mediaLibrary: ไลบรารีสื่อ
 login:
   login: เข้าสู่ระบบ
   button:
@@ -843,6 +844,8 @@ extensions:
       title: การตกแต่ง
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'สาธารณะ'

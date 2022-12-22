@@ -6,7 +6,6 @@ namespace Tests\PhpUnit\Api\Exceptions;
 
 use App\Api\Exceptions\ApiException;
 use App\System\Testing\PhpUnit\DefaultTestCase;
-use Exception;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -44,6 +43,6 @@ final class ApiExceptionTest extends DefaultTestCase
    */
   public function testTestClassExtends(): void
   {
-    $this->assertInstanceOf(Exception::class, $this->object);
+    $this->assertInstanceOf(\Exception::class, $this->object);
   }
 }

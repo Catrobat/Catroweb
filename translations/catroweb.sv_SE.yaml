@@ -385,6 +385,7 @@ menu:
   home: Hem
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Följare
+  mediaLibrary: Mediabibliotek
 login:
   login: Logga in
   button:
@@ -837,6 +838,8 @@ extensions:
       title: Broderi
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

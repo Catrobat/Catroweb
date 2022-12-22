@@ -1,5 +1,5 @@
 const Encore = require('@symfony/webpack-encore')
-const PurgeCssPlugin = require('purgecss-webpack-plugin')
+const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
 const glob = require('glob-all')
 const path = require('path')
 
@@ -86,6 +86,7 @@ Encore
   .addEntry('my_profile', './assets/js/my_profile.js')
   .addEntry('profile', './assets/js/profile.js')
   .addEntry('project', './assets/js/project.js')
+  .addEntry('program_comments', './assets/js/custom/program_comments.js')
   .addEntry('search_old', './assets/js/search_old.js')
   .addEntry('search', './assets/js/search.js')
   .addEntry('media_library', './assets/js/media_library.js')
@@ -107,6 +108,7 @@ Encore
   .addStyleEntry('user_list', './assets/styles/components/user_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
+  .addStyleEntry('error', './assets/styles/error.scss')
 
   // Themes
   .addStyleEntry('pocketcode', './assets/styles/themes/pocketcode.scss')
@@ -160,7 +162,7 @@ Encore
   /*
    * Plugins
    */
-  .addPlugin(new PurgeCssPlugin({
+  .addPlugin(new PurgeCSSPlugin({
     paths: glob.sync([
       path.join(__dirname, 'templates/**/*.html.twig'),
       path.join(__dirname, 'assets/**/*.js'),

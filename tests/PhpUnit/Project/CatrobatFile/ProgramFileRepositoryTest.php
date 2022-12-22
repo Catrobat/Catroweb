@@ -7,7 +7,6 @@ use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -50,14 +49,14 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound(): void
   {
-    $this->expectException(Exception::class);
+    $this->expectException(\Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
     $this->program_file_repository = new ProgramFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
   }
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound2(): void
   {
-    $this->expectException(Exception::class);
+    $this->expectException(\Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
     $this->program_file_repository = new ProgramFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
   }

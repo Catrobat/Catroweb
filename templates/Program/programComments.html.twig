@@ -5,20 +5,21 @@
   </div>
   <div class="col-2 col-sm-1">
     <i id="show-add-comment-button" class="add-comment-button material-icons catro-round-icon-button"
-       data-bs-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">add</i>
+      data-bs-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">add</i>
     <i id="hide-add-comment-button" style="display:none;"
-       class="add-comment-button material-icons catro-round-icon-button"
-       data-bs-toggle="tooltip" title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">remove</i>
+       class="add-comment-button material-icons catro-round-icon-button" data-bs-toggle="tooltip"
+      title="{{ 'programs.addComment'|trans({}, 'catroweb') }}">remove</i>
   </div>
 
 
-  <div id="user-comment-wrapper" class="col-12" style="display: none">
-    <label class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label comment-message">
+  <div id="user-comment-wrapper" class="col-12 col-sm-8 col-md-8 col-lg-5" style="display: none">
+    <label
+      class="mdc-text-field mdc-text-field--filled mdc-text-field--textarea mdc-text-field--no-label comment-message">
       <span class="mdc-text-field__ripple"></span>
       <span class="mdc-text-field__resizer">
         <textarea class="mdc-text-field__input" title="{{ 'programs.comments'|trans({}, 'catroweb') }}"
-                  id="comment-message" class="msg" style="width: 100%; height: 100px" cols="100"></textarea>
-          </span>
+          id="comment-message" class="msg" style="width: 100%; height: 100px" cols="100"></textarea>
+      </span>
       <span class="mdc-line-ripple"></span>
     </label>
     <button id="comment-post-button" class="btn btn-primary">
@@ -26,97 +27,23 @@
     </button>
   </div>
 
-  <div id="comments-wrapper" class="col-12">
-    {% for comment in program_details.comments %}
-      <div id="comment-{{ comment.id }}" class="single-comment"
-              {% if loop.index > 5 %} style="display: none" {% endif %}>
-
-        <div class="comment-avatar">
-          <img class="comment-avatar-img"
-               src="{% if program_details.commentsAvatars[comment.id] is defined %}
-                    {{ program_details.commentsAvatars[comment.id] }}
-                  {% else %}
-                    {{ asset('images/default/avatar_default.png') }}
-                  {% endif %}"
-               alt="Card image">
-        </div>
-
-        <div class="comment-payload-wrapper">
-          <div class="name-date-wrapper">
-            <a href="{{ url('profile', { id : comment.user.id }) }}">
-              <div id="profile-comment-user-id-{{ comment.user.id }}" class="usr-name">
-                {{ comment.username }}
-              </div>
-            </a>
-            <div class="date">
-              {{ comment.uploadDate.format('Y-m-d') }}
-            </div>
-
-            {% if not app.user or comment.username != app.user.username %}
-              <span class="translate-comment-button-wrapper">
-                <span id="comment-translation-button-{{ comment.id }}" class="comment-translation-button catro-icon-button"
-                    data-bs-toggle="tooltip" title="{{ 'programs.showTranslation'|trans({}, 'catroweb') }}">
-                  <i class="ms-3 material-icons">
-                    translate
-                  </i>
-                </span>
-                <span id="comment-translation-loading-spinner-{{ comment.id }}" class="comment-translation-loading-spinner" style="display: none;">
-                  <i class="material-icons">
-                    {% include 'components/loading_spinner.html.twig' with {'size': 'small'} %}
-                  </i>
-                </span>
-                <span id="remove-comment-translation-button-{{ comment.id }}" class="remove-comment-translation-button catro-icon-button" style="display: none"
-                    data-bs-toggle="tooltip" title="Hide Translation">
-                    <i class="ms-3 material-icons" data-bs-toggle="tooltip" title="{{ 'programs.hideTranslation'|trans({}, 'catroweb') }}">
-                      close
-                    </i>
-                </span>
-              </span>
-            {% endif %}
-
-            {% if not app.user or comment.username != app.user.username %}
-              {#  Everybody, but the comment owner must be able to report a comment  #}
-              <a id="comment-report-button-{{ comment.id }}" class="comment-report-button"
-                 data-bs-toggle="tooltip" title="{{ 'programs.report'|trans({}, 'catroweb') }}">
-                <i class="ms-3 material-icons text-danger">not_interested</i>
-              </a>
-            {% endif %}
-            {% if program_details.isAdmin or (app.user and comment.username == app.user.username) %}
-              {#  Only Admins and comment owner can delete the comment  #}
-              <a id="comment-delete-button-{{ comment.id }}" class="comment-delete-button"
-                 data-bs-toggle="tooltip" title="{{ 'programs.delete'|trans({}, 'catroweb') }}">
-                <i class="ms-2 material-icons text-danger">delete</i>
-              </a>
-            {% endif %}
-          </div>
-          <div id="comment-text-wrapper-{{ comment.id }}" class="comment-text">
-            <p id="comment-text-{{ comment.id }}">{{ comment.text }}</p>
-          </div>
-          <div id="comment-translation-wrapper-{{ comment.id }}" class="comment-translation-wrapper" style="display: none">
-            <div id="comment-translation-credit-wrapper-{{ comment.id }}">
-              <span id="comment-translation-before-languages-{{ comment.id }}" class="translation-credit"></span>
-              <span id="comment-translation-first-language-{{ comment.id }}" class="translation-credit"></span>
-              <span id="comment-translation-between-languages-{{ comment.id }}" class="translation-credit"></span>
-              <span id="comment-translation-second-language-{{ comment.id }}" class="translation-credit"></span>
-              <span id="comment-translation-after-languages-{{ comment.id }}" class="translation-credit"></span>
-            </div>
-            <p id="comment-text-translation-{{ comment.id }}" class="comment-text-translation" lang=""></p>
-          </div>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
+  {% set vars = { 'comments': program_details.comments, 'isAdmin': program_details.isAdmin, 'commentAvatars': program_details.commentAvatars } %}
+  {% include 'Program/comments_section.html.twig' with vars %}
 
   <div class="center col-12">
-    <div id="show-more-comments-button" class="button-show-more">
+    <div id="show-more-comments-button" class="button-show-more" data-comments-class-selector=".single-comment">
       <a data-bs-toggle="tooltip" title="{{ 'show-more'|trans({}, 'catroweb') }}">
         <i class="material-icons catro-round-icon-button">expand_more</i>
       </a>
     </div>
-    <div id="show-less-comments-button" class="button-show-less">
+    <div id="show-less-comments-button" class="button-show-less" data-comments-class-selector=".single-comment">
       <a data-bs-toggle="tooltip" title="{{ 'show-less'|trans({}, 'catroweb') }}">
         <i class="material-icons catro-round-icon-button">expand_less</i>
       </a>
     </div>
   </div>
 </div>
+{% set vars = { 'program': program, 'comments': program_details.comments } %}
+{% include 'components/program_comment_js_data.html.twig' with vars %}
+<div class="session-vars-names" data-visible-comments-session-var="visibleComments"></div>
+<div class="comments-class-selector" data-comments-class-selector=".single-comment"></div>

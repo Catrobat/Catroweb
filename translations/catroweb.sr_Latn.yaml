@@ -389,6 +389,7 @@ menu:
   home: Početna
   helpAndTutorials: Pomoć i tutorijali
   followersAndFollowing: Pratilac
+  mediaLibrary: Medijska biblioteka
 login:
   login: Prijava
   button:
@@ -756,7 +757,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'novo'
   overview:
     header: 'Achievements'
     most_recent_achievement:
@@ -841,6 +842,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

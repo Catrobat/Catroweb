@@ -7,10 +7,8 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
 use App\Project\ProgramManager;
-use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -20,8 +18,7 @@ class CreateCommentCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $em,
     private readonly ProgramManager $program_manager,
-    private readonly NotificationManager $notification_service)
-  {
+  ) {
     parent::__construct();
   }
 
@@ -37,7 +34,7 @@ class CreateCommentCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -60,7 +57,7 @@ class CreateCommentCommand extends Command
 
     try {
       $this->postComment($user, $program, $message, $reported);
-    } catch (Exception) {
+    } catch (\Exception) {
       return 2;
     }
     $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
@@ -70,29 +67,23 @@ class CreateCommentCommand extends Command
 
   private function postComment(User $user, Program $program, string $message, bool $reported): void
   {
-    $temp_comment = new UserComment();
-    $temp_comment->setUsername($user->getUsername());
-    $temp_comment->setUser($user);
-    $temp_comment->setText($message);
-    $temp_comment->setProgram($program);
-    $temp_comment->setUploadDate(date_create());
-    $temp_comment->setIsReported($reported);
+    $comment = new UserComment();
+    $comment->setUsername($user->getUsername());
+    $comment->setUser($user);
+    $comment->setText($message);
+    $comment->setProgram($program);
+    $comment->setUploadDate(date_create());
+    $comment->setIsReported($reported);
 
-    $this->em->persist($temp_comment);
-    $notification = new CommentNotification($program->getUser(), $temp_comment);
-    $notification->setComment($temp_comment);
-    $this->notification_service->addNotification($notification);
+    $this->em->persist($comment);
 
-    $temp_comment->setNotification($notification);
-
-    $this->em->persist($temp_comment);
-    try {
-      $notification->setSeen(boolval(random_int(0, 2)));
-    } catch (Exception) {
-      $notification->setSeen(false);
-    }
+    $notification = new CommentNotification($program->getUser(), $comment);
+    $notification->setComment($comment);
+    $notification->setSeen(random_int(0, 2) > 1);
     $this->em->persist($notification);
+
+    $comment->setNotification($notification);
+    $this->em->persist($comment);
     $this->em->flush();
-    $this->em->refresh($temp_comment);
   }
 }

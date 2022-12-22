@@ -36,12 +36,12 @@ class CronJob
   /**
    * @ORM\Column(name="start_at", type="datetime", nullable=true)
    */
-  protected ?DateTime $start_at = null;
+  protected ?\DateTime $start_at = null;
 
   /**
    * @ORM\Column(name="end_at", type="datetime", nullable=true)
    */
-  protected ?DateTime $end_at = null;
+  protected ?\DateTime $end_at = null;
 
   /**
    * @ORM\Column(name="result_code", type="integer", nullable=true)
@@ -96,24 +96,24 @@ class CronJob
     return $this;
   }
 
-  public function getStartAt(): ?DateTime
+  public function getStartAt(): ?\DateTime
   {
     return $this->start_at;
   }
 
-  public function setStartAt(?DateTime $start_at): CronJob
+  public function setStartAt(?\DateTime $start_at): CronJob
   {
     $this->start_at = $start_at;
 
     return $this;
   }
 
-  public function getEndAt(): ?DateTime
+  public function getEndAt(): ?\DateTime
   {
     return $this->end_at;
   }
 
-  public function setEndAt(?DateTime $end_at): CronJob
+  public function setEndAt(?\DateTime $end_at): CronJob
   {
     $this->end_at = $end_at;
 

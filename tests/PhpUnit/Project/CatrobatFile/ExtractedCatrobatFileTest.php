@@ -7,10 +7,8 @@ use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixData;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use SimpleXMLElement;
 use Symfony\Component\Filesystem\Filesystem;
 
 /**
@@ -48,7 +46,7 @@ class ExtractedCatrobatFileTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetsTheProgramName(): void
   {
@@ -68,7 +66,7 @@ class ExtractedCatrobatFileTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetsTheProgramDescription(): void
   {
@@ -88,7 +86,7 @@ class ExtractedCatrobatFileTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSetsTheProgramCredits(): void
   {
@@ -557,7 +555,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
   public function testReturnsTheXmlProperties(): void
   {
-    $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
+    $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
   }
 
   public function testReturnsThePathOfTheAutomaticScreenshot(): void
@@ -592,7 +590,7 @@ class ExtractedCatrobatFileTest extends TestCase
   public function testIgnoresAnInvalid0XmlChar(): void
   {
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
-    $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
+    $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
   }
 
   public function testPreservesInvalid0XmlCharFromCollisionsWithOtherActors(): void
@@ -605,7 +603,7 @@ class ExtractedCatrobatFileTest extends TestCase
     Assert::assertEquals($count, 1);
 
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
-    $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
+    $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
     $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
@@ -623,7 +621,7 @@ class ExtractedCatrobatFileTest extends TestCase
     Assert::assertEquals($count, 1);
 
     $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
-    $this->assertInstanceOf(SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
+    $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
     $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');

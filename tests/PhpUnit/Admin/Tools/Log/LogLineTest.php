@@ -6,7 +6,6 @@ use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogLine;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 
 /**
  * @internal
@@ -43,7 +42,7 @@ class LogLineTest extends DefaultTestCase
   /**
    * @dataProvider getDebugLevelDataProvider
    *
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testGetDebugLevelByLine(string $string, int $output): void
   {
@@ -51,7 +50,7 @@ class LogLineTest extends DefaultTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testDate(): void
   {
@@ -61,7 +60,7 @@ class LogLineTest extends DefaultTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testDebugCode(): void
   {
@@ -71,7 +70,7 @@ class LogLineTest extends DefaultTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testDebugLevel(): void
   {
@@ -81,7 +80,7 @@ class LogLineTest extends DefaultTestCase
   }
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   public function testMsg(): void
   {

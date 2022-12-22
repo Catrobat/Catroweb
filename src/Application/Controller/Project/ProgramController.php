@@ -10,6 +10,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
+use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
@@ -21,7 +22,6 @@ use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NoResultException;
-use Exception;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -47,7 +47,8 @@ class ProgramController extends AbstractController
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly ProgramFileRepository $file_repository,
     private readonly TranslationDelegate $translation_delegate,
-    private readonly EntityManagerInterface $entity_manager
+    private readonly EntityManagerInterface $entity_manager,
+    private readonly UserCommentRepository $comment_repository
   ) {
   }
 
@@ -87,7 +88,12 @@ class ProgramController extends AbstractController
     }
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
-    $program_comments = $this->findCommentsById($project);
+    $program_comments = $this->findCommentsById($project->getId());
+
+    foreach ($program_comments as $program_comment) {
+      $program_comment->setNumberOfReplies($this->countByParentId($program_comment->getId()));
+    }
+
     $program_details = $this->createProgramDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
       $referrer, $program_comments
@@ -213,7 +219,7 @@ class ProgramController extends AbstractController
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/editProjectName/{id}', name: 'edit_program_name', methods: ['PUT'])]
   public function editProgramName(Request $request, string $id): Response
@@ -253,7 +259,7 @@ class ProgramController extends AbstractController
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/editProjectDescription/{id}', name: 'edit_program_description', methods: ['PUT'])]
   public function editProgramDescription(Request $request, string $id): Response
@@ -292,7 +298,7 @@ class ProgramController extends AbstractController
    * @deprecated Use new API
    * @see \App\Api\ProjectsApi::projectIdPut() Use this method instead.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/editProjectCredits/{id}', name: 'edit_program_credits', methods: ['PUT'])]
   public function editProgramCredits(Request $request, string $id): Response
@@ -391,6 +397,31 @@ class ProgramController extends AbstractController
     return new JsonResponse($repository->listDefinedLanguages($project));
   }
 
+  #[Route(path: 'program/comment/{id}', name: 'program_comment', methods: ['GET'])]
+  public function programCommentAction(Request $request, string $id): Response
+  {
+    $comment = $this->findCommentById($id);
+    if (null === $comment) {
+      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
+
+      return $this->redirectToRoute('index');
+    }
+
+    $replies = $this->findCommentRepliesById($id);
+    array_unshift($replies, $comment);
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($comment->getProgram()->getId());
+    $comments_avatars = $this->getCommentAvatars($replies);
+
+    return $this->render('Program/program_comment.html.twig', [
+      'comment' => $comment,
+      'replies' => $replies,
+      'commentAvatars' => $comments_avatars,
+      'isAdmin' => $this->isGranted('ROLE_ADMIN'),
+      'program' => $project,
+      'are_replies' => true,
+    ]);
+  }
+
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
   {
     if (!in_array($program->getId(), $viewed, true)) {
@@ -400,15 +431,8 @@ class ProgramController extends AbstractController
     }
   }
 
-  private function createProgramDetailsArray(Program $program,
-    array $active_like_types,
-    array $active_user_like_types,
-    int $total_like_count,
-    ?string $referrer,
-    array $program_comments): array
+  private function getCommentAvatars(array $program_comments): array
   {
-    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
-
     $comments_avatars = [];
     /** @var UserComment $comment */
     foreach ($program_comments as $comment) {
@@ -423,6 +447,20 @@ class ProgramController extends AbstractController
       }
     }
 
+    return $comments_avatars;
+  }
+
+  private function createProgramDetailsArray(Program $program,
+                                             array $active_like_types,
+                                             array $active_user_like_types,
+                                             int $total_like_count,
+                                             ?string $referrer,
+                                             array $program_comments): array
+  {
+    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
+
+    $comments_avatars = $this->getCommentAvatars($program_comments);
+
     return [
       'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($program->getId()),
       'downloadUrl' => $url,
@@ -435,7 +473,7 @@ class ProgramController extends AbstractController
       'id' => $program->getId(),
       'comments' => $program_comments,
       'commentsLength' => count($program_comments),
-      'commentsAvatars' => $comments_avatars,
+      'commentAvatars' => $comments_avatars,
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,
@@ -446,15 +484,27 @@ class ProgramController extends AbstractController
   /**
    * @return array|UserComment[]
    */
-  private function findCommentsById(Program $program): array
+  private function findCommentsById(string $project_id): array
   {
-    return $this->entity_manager
-      ->getRepository(UserComment::class)
-      ->findBy(
-        ['program' => $program->getId()],
-        ['id' => 'DESC']
-      )
-    ;
+    return $this->comment_repository->findCommentsByProgramId($project_id);
+  }
+
+  private function countByParentId(int $comment_id): int
+  {
+    return $this->comment_repository->countCommentReplies($comment_id);
+  }
+
+  private function findCommentById(string $id): ?UserComment
+  {
+    return $this->comment_repository->findOneBy(['id' => $id]);
+  }
+
+  /**
+   * @return array|UserComment[]
+   */
+  private function findCommentRepliesById(string $id): array
+  {
+    return $this->comment_repository->findCommentRepliesByParentId($id);
   }
 
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response
@@ -491,7 +541,7 @@ class ProgramController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
@@ -527,7 +577,7 @@ class ProgramController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 
@@ -574,7 +624,7 @@ class ProgramController extends AbstractController
         default:
           return new Response(null, Response::HTTP_BAD_REQUEST);
       }
-    } catch (InvalidArgumentException $exception) {
+    } catch (\InvalidArgumentException $exception) {
       return new Response($exception->getMessage(), Response::HTTP_BAD_REQUEST);
     }
 

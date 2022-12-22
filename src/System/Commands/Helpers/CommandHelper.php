@@ -2,7 +2,6 @@
 
 namespace App\System\Commands\Helpers;
 
-use Exception;
 use Symfony\Component\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -12,7 +11,7 @@ use Symfony\Component\Process\Process;
 class CommandHelper
 {
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public static function executeSymfonyCommand(string $command, Application $application, array $args,
     OutputInterface $output): int

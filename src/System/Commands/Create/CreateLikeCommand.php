@@ -10,7 +10,6 @@ use App\Project\ProgramManager;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -36,7 +35,7 @@ class CreateLikeCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -55,12 +54,12 @@ class CreateLikeCommand extends Command
     }
     try {
       if ($program->getUser() !== $user) {
-        $notification = new LikeNotification($program->getUser(), $user, $program);
         $this->likeProgram($program, $user);
+        $notification = new LikeNotification($program->getUser(), $user, $program);
         $notification->setSeen(boolval(random_int(0, 3)));
         $this->notification_service->addNotification($notification);
       }
-    } catch (Exception) {
+    } catch (\Exception) {
       $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
 
       return 2;
@@ -72,10 +71,11 @@ class CreateLikeCommand extends Command
 
   private function likeProgram(Program $program, User $user): void
   {
-    $like = new ProgramLike($program, $user, array_rand(ProgramLike::$TYPE_NAMES));
-    $like->setCreatedAt(date_create());
-
-    $this->entity_manager->persist($like);
-    $this->entity_manager->flush();
+    $program_like = $this->entity_manager->getRepository(ProgramLike::class)->findOneBy(['program' => $program, 'user' => $user]);
+    if (null === $program_like) {
+      $like = new ProgramLike($program, $user, array_rand(ProgramLike::$TYPE_NAMES));
+      $this->entity_manager->persist($like);
+      $this->entity_manager->flush();
+    }
   }
 }

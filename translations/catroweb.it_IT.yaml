@@ -390,6 +390,7 @@ menu:
   home: Home
   helpAndTutorials: Tutorial e aiuto
   followersAndFollowing: Seguace
+  mediaLibrary: Libreria multimediale
 login:
   login: Login
   button:
@@ -842,6 +843,8 @@ extensions:
       title: Ricamo
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'pubblico'

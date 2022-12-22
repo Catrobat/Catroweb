@@ -4,6 +4,57 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [3.37.0]
+- Migrate yaml config to php
+- Fix refresh token (@dermaku-dardan)
+- Redesign of comment section (@dermaku-dardan)
+- Extend survey with platform and flavor (@dermaku-dardan)
+- Add "Multiplayer" tag (@dermaku-dardan)
+- Add translations
+- Bump a lot of dependencies
+
+## [3.36.0]
+- Changelog missing
+
+## [3.35.0]
+- Changelog missing
+
+## [3.34.0]
+- Changelog missing
+
+## [3.33.0]
+- Changelog missing
+
+## [3.32.0]
+- Changelog missing
+
+## [3.31.0]
+- Changelog missing
+
+## [3.30.0]
+- Changelog missing
+
+## [3.29.0]
+- Changelog missing
+
+## [3.28.0]
+- Changelog missing
+
+## [3.27.0]
+- Changelog missing
+
+## [3.26.0]
+- Changelog missing
+
+## [3.25.0]
+- Changelog missing
+
+## [3.24.0]
+- Changelog missing
+
+## [3.23.0]
+  - Changelog missing
+
 ## [3.22.6]
   - Add DKIM mail signing
   - update dependencies
@@ -445,7 +496,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Color of text in search field is adjusted for "Luna & Cat"
 
 [DoctrineSource]: https://github.com/doctrine/DoctrineBundle/issues/351
-[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.23.0...HEAD
+[Unreleased]: https://github.com/Catrobat/Catroweb/compare/v3.37.0...HEAD
+[3.23.0]: https://github.com/Catrobat/Catroweb/compare/v3.23.0...v3.37.0
 [3.22.6]: https://github.com/Catrobat/Catroweb/compare/v3.22.6...v3.23.0
 [3.21.1]: https://github.com/Catrobat/Catroweb/compare/v3.21.1...v3.22.6
 [3.20.34]: https://github.com/Catrobat/Catroweb/compare/v3.20.34...v3.21.1

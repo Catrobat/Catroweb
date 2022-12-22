@@ -214,16 +214,16 @@
 // --- Animation Keyframes ---
 
 @keyframes alternate-color-animation {
-  from {
+  0% {
     fill: rgb(255 255 255);
   }
 
   50% {
     fill: var(--primary);
-    fill-opacity: 30%;
+    fill-opacity: 0.3;
   }
 
-  to {
+  100% {
     fill: rgb(255 255 255);
   }
 }
@@ -240,7 +240,7 @@
 }
 
 @keyframes rotate-animation {
-  from {
+  0% {
     transform: rotate(0deg);
   }
 
@@ -248,7 +248,7 @@
     transform: rotate(1.5deg);
   }
 
-  to {
+  100% {
     transform: rotate(0deg);
   }
 }

@@ -386,6 +386,7 @@ menu:
   home: خانه
   helpAndTutorials: کمک و آموزش
   followersAndFollowing: دنبال کننده
+  mediaLibrary: کتابخانه ی رسانه
 login:
   login: وارد شدن
   button:
@@ -838,6 +839,8 @@ extensions:
       title: گلدوزی
     mindstorms:
       title: طوفان های ذهنی
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عمومی'

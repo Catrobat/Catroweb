@@ -35,11 +35,7 @@ use App\System\Testing\Behat\ContextTrait;
 use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use DateTime;
-use DateTimeZone;
 use Doctrine\Common\Collections\ArrayCollection;
-use Exception;
-use ImagickException;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Process\Process;
@@ -73,11 +69,11 @@ class DataFixturesContext implements Context
   /**
    * @Given /^the current time is "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function theCurrentTimeIs(mixed $time): void
   {
-    $date = new DateTime($time, new DateTimeZone('UTC'));
+    $date = new \DateTime($time, new \DateTimeZone('UTC'));
     TimeUtils::freezeTime($date);
   }
 
@@ -263,6 +259,8 @@ class DataFixturesContext implements Context
       $survey = new Survey();
       $survey->setLanguageCode($survey_config['language code']);
       $survey->setUrl($survey_config['url']);
+      $survey->setFlavor($this->getFlavorRepository()->getFlavorByName($survey_config['flavor'] ?? ''));
+      $survey->setPlatform($survey_config['platform'] ?? '');
       $em->persist($survey);
     }
     $em->flush();
@@ -277,7 +275,7 @@ class DataFixturesContext implements Context
    * @Given /^there are programs:$/
    * @Given /^there are projects:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereArePrograms(TableNode $table): void
   {
@@ -301,7 +299,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are "([^"]*)" similar projects$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreNumberOfSimilarProjects(mixed $num_of_projects): void
   {
@@ -345,7 +343,7 @@ class DataFixturesContext implements Context
    * @Given /^there are downloadable programs:$/
    * @Given /^there are downloadable projects:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreDownloadablePrograms(TableNode $table): void
   {
@@ -391,7 +389,7 @@ class DataFixturesContext implements Context
    * @Given /^there are programs with a large description:$/
    * @Given /^there are projects with a large description:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreProgramsWithALargeDescription(TableNode $table): void
   {
@@ -405,7 +403,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)"$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iHaveAProgramWithId(mixed $name, mixed $id): void
   {
@@ -557,7 +555,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^I have a program "([^"]*)" with id "([^"]*)" and a vibrator brick$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function iHaveAProgramWithIdAndAVibratorBrick(mixed $name, mixed $id): void
   {
@@ -579,7 +577,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are comments:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreComments(TableNode $table): void
   {
@@ -596,7 +594,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are inappropriate reports:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreInappropriateReports(TableNode $table): void
   {
@@ -678,7 +676,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are media package files:$/
    *
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function thereAreMediaPackageFiles(TableNode $table): void
   {
@@ -765,7 +763,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are likes:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreLikes(TableNode $table): void
   {
@@ -833,7 +831,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are project reactions:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreProjectReactions(TableNode $table): void
   {
@@ -842,13 +840,13 @@ class DataFixturesContext implements Context
     foreach ($table->getHash() as $data) {
       $project = $this->getProgramManager()->find($data['project']);
       if (null === $project) {
-        throw new Exception('Project with id '.$data['project'].' does not exist.');
+        throw new \Exception('Project with id '.$data['project'].' does not exist.');
       }
 
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($data['user']);
       if (null === $user) {
-        throw new Exception('User with username '.$data['user'].' does not exist.');
+        throw new \Exception('User with username '.$data['user'].' does not exist.');
       }
 
       $type = $data['type'];
@@ -857,17 +855,17 @@ class DataFixturesContext implements Context
       } else {
         $type = array_search($type, ProgramLike::$TYPE_NAMES, true);
         if (false === $type) {
-          throw new Exception('Unknown type "'.$data['type'].'" given.');
+          throw new \Exception('Unknown type "'.$data['type'].'" given.');
         }
       }
       if (!ProgramLike::isValidType($type)) {
-        throw new Exception('Unknown type "'.$data['type'].'" given.');
+        throw new \Exception('Unknown type "'.$data['type'].'" given.');
       }
 
       $like = new ProgramLike($project, $user, $type);
 
       if (array_key_exists('created at', $data) && !empty(trim((string) $data['created at']))) {
-        $like->setCreatedAt(new DateTime($data['created at'], new DateTimeZone('UTC')));
+        $like->setCreatedAt(new \DateTime($data['created at'], new \DateTimeZone('UTC')));
       }
 
       $em->persist($like);
@@ -1059,8 +1057,8 @@ class DataFixturesContext implements Context
         ->setIsPublic($config['is_public'] ?? true)
         ->setIsEnabled($config['is_enabled'] ?? true)
         ->setCreatedOn(isset($config['created_on']) ?
-          new DateTime($config['created_on'], new DateTimeZone('UTC')) :
-          new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+          new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
+          new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
       ;
       $this->getManager()->persist($studio);
@@ -1087,8 +1085,8 @@ class DataFixturesContext implements Context
         ->setStudio($studio)
         ->setType('user')
         ->setCreatedOn(isset($config['created_on']) ?
-          new DateTime($config['created_on'], new DateTimeZone('UTC')) :
-          new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+          new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
+          new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
       ;
 
@@ -1101,8 +1099,8 @@ class DataFixturesContext implements Context
         ->setActivity($activity)
         ->setStatus($config['status'] ?? 'active')
         ->setCreatedOn(isset($config['created_on']) ?
-          new DateTime($config['created_on'], new DateTimeZone('UTC')) :
-          new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+          new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
+          new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
       ;
 
@@ -1178,7 +1176,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are user achievements:$/
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function thereAreUserAchievements(TableNode $table): void
   {
@@ -1189,8 +1187,8 @@ class DataFixturesContext implements Context
       $user_achievement = (new UserAchievement())
         ->setUser($user)
         ->setAchievement($achievement)
-        ->setSeenAt(!empty($config['seen_at']) ? new DateTime($config['seen_at']) : null)
-        ->setUnlockedAt(!empty($config['unlocked_at']) ? new DateTime($config['unlocked_at']) : new DateTime('now'))
+        ->setSeenAt(!empty($config['seen_at']) ? new \DateTime($config['seen_at']) : null)
+        ->setUnlockedAt(!empty($config['unlocked_at']) ? new \DateTime($config['unlocked_at']) : new \DateTime('now'))
       ;
       $this->getManager()->persist($user_achievement);
     }

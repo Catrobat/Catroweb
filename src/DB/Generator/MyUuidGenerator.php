@@ -4,7 +4,6 @@ namespace App\DB\Generator;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Id\AbstractIdGenerator;
-use Exception;
 use Ramsey\Uuid\Doctrine\UuidGenerator;
 
 /**
@@ -26,7 +25,7 @@ class MyUuidGenerator extends AbstractIdGenerator
    *
    * @return string
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function generate(EntityManager $em, $entity)
   {

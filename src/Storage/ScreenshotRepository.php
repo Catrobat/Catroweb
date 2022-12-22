@@ -2,8 +2,6 @@
 
 namespace App\Storage;
 
-use Imagick;
-use ImagickException;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -28,7 +26,7 @@ class ScreenshotRepository
 
   private readonly string $screenshot_path;
 
-  private ?Imagick $imagick = null;
+  private ?\Imagick $imagick = null;
 
   private readonly string $tmp_dir;
 
@@ -63,7 +61,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function saveProgramAssets(string $screenshot_filepath, string $id): void
   {
@@ -82,7 +80,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function updateProgramAssets(string $image, string $id): void
   {
@@ -93,7 +91,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function saveScreenshot(string $filepath, string $id): void
   {
@@ -141,12 +139,12 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
-  public function getImagick(): Imagick
+  public function getImagick(): \Imagick
   {
     if (null == $this->imagick) {
-      $this->imagick = new Imagick();
+      $this->imagick = new \Imagick();
     }
 
     return $this->imagick;
@@ -163,7 +161,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function saveProgramAssetsTemp(string $screenshot_filepath, string $id): void
   {
@@ -192,7 +190,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   public function saveScreenshotTemp(string $filepath, string $id): void
   {
@@ -234,7 +232,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   private function saveThumbnail(string $filepath, string $id): void
   {
@@ -266,7 +264,7 @@ class ScreenshotRepository
   }
 
   /**
-   * @throws ImagickException
+   * @throws \ImagickException
    */
   private function saveThumbnailTemp(string $filepath, string $id): void
   {
@@ -283,7 +281,7 @@ class ScreenshotRepository
     $thumb->destroy();
   }
 
-  private function saveImagickScreenshot(Imagick $screen, string $id): void
+  private function saveImagickScreenshot(\Imagick $screen, string $id): void
   {
     $screen->cropThumbnailImage(480, 480);
 
@@ -295,7 +293,7 @@ class ScreenshotRepository
     chmod($filename, 0777);
   }
 
-  private function overwriteOriginalScreenshot(Imagick $screen, string $id): void
+  private function overwriteOriginalScreenshot(\Imagick $screen, string $id): void
   {
     $screen->cropThumbnailImage(480, 480);
 

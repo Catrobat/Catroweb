@@ -391,6 +391,7 @@ menu:
   home: Početna
   helpAndTutorials: Pomoc i Tutorijali
   followersAndFollowing: Sljedbenik
+  mediaLibrary: Biblioteka medijskih sadržaja
 login:
   login: prijava
   button:
@@ -843,6 +844,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

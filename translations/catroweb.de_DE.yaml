@@ -390,6 +390,7 @@ menu:
   home: Start
   helpAndTutorials: Hilfe & Tutorials
   followersAndFollowing: Abonnenten
+  mediaLibrary: Medienbibliothek
 login:
   login: Einloggen
   button:
@@ -842,6 +843,8 @@ extensions:
       title: Sticken
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'öffentlich'

@@ -3,14 +3,13 @@
 namespace App\Project\CatrobatCode\Parser\Bricks;
 
 use App\Project\CatrobatCode\Parser\Constants;
-use SimpleXMLElement;
 
 class BrickFactory
 {
   /**
    * @return mixed
    */
-  public static function generate(SimpleXMLElement $brick_xml_properties)
+  public static function generate(\SimpleXMLElement $brick_xml_properties)
   {
     return match ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       Constants::BROADCAST_BRICK => new BroadcastBrick($brick_xml_properties),

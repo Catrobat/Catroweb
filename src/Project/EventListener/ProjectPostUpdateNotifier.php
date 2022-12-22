@@ -9,7 +9,6 @@ use App\DB\EntityRepository\Project\TagRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\User\Achievements\AchievementManager;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
-use Exception;
 
 class ProjectPostUpdateNotifier
 {
@@ -25,7 +24,7 @@ class ProjectPostUpdateNotifier
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function addCodingJam092021Achievement(Program $program, User $user): void
   {

@@ -3,14 +3,12 @@
 namespace App\Project\CatrobatFile;
 
 use App\Storage\FileHelper;
-use Exception;
 use Symfony\Component\Finder\Finder;
-use ZipArchive;
 
 class CatrobatFileCompressor
 {
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function compress(string $source, string $destination, string $archive_name): string
   {
@@ -19,10 +17,10 @@ class CatrobatFileCompressor
       mkdir($destination, 0777, true);
     }
 
-    $archive = new ZipArchive();
+    $archive = new \ZipArchive();
     $filename = $archive_name.'.catrobat';
 
-    $archive->open($destination.'/'.$filename, ZipArchive::OVERWRITE | ZipArchive::CREATE);
+    $archive->open($destination.'/'.$filename, \ZipArchive::OVERWRITE | \ZipArchive::CREATE);
 
     $finder = new Finder();
     $finder->in($source);

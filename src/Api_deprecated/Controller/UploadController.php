@@ -31,7 +31,7 @@ class UploadController
   /**
    * @deprecated
    *
-   * @throws Exception
+   * @throws \Exception
    */
   #[Route(path: '/api/upload/upload.json', name: 'catrobat_api_upload', defaults: ['_format' => 'json'], methods: ['POST'])]
   public function uploadAction(Request $request): JsonResponse
@@ -42,7 +42,7 @@ class UploadController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function processUpload(Request $request): JsonResponse
   {

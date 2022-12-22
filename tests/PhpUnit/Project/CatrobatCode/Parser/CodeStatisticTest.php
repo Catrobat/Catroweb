@@ -6,7 +6,6 @@ use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedScene;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
 use PHPUnit\Framework\TestCase;
-use SimpleXMLElement;
 
 /**
  * @internal
@@ -15,7 +14,7 @@ use SimpleXMLElement;
  */
 class CodeStatisticTest extends TestCase
 {
-  protected SimpleXMLElement $xml_properties;
+  protected \SimpleXMLElement $xml_properties;
 
   protected function setUp(): void
   {

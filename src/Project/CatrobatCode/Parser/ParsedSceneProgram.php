@@ -2,15 +2,13 @@
 
 namespace App\Project\CatrobatCode\Parser;
 
-use SimpleXMLElement;
-
 class ParsedSceneProgram
 {
   protected array $scenes = [];
 
   protected CodeStatistic $code_statistic;
 
-  public function __construct(protected SimpleXMLElement $program_xml_properties)
+  public function __construct(protected \SimpleXMLElement $program_xml_properties)
   {
     $this->parseScenes();
 

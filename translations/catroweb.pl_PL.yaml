@@ -386,6 +386,7 @@ menu:
   home: Strona główna
   helpAndTutorials: Pomoc i samouczki
   followersAndFollowing: Obserwujący
+  mediaLibrary: Biblioteka
 login:
   login: Logowanie
   button:
@@ -838,6 +839,8 @@ extensions:
       title: Haft
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Tryb wieloosobowy
 studio:
   details:
     public: 'Publiczne'

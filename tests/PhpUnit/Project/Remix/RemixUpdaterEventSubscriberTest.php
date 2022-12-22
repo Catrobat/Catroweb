@@ -10,11 +10,9 @@ use App\Project\Remix\RemixManager;
 use App\Project\Remix\RemixUpdaterEventSubscriber;
 use App\Project\Scratch\AsyncHttpClient;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use SimpleXMLElement;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
@@ -81,7 +79,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSavesTheNewUrlToXml(): void
   {
@@ -133,7 +131,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testCallFetchesScratchProgramDetailsAndAddScratchProgramMethodIfCatrobatLanguageVersionIs0993(): void
   {
@@ -150,7 +148,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
@@ -192,7 +190,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testIgnoresMultipleRemixParentsIfCatrobatLanguageVersionIs0992OrLower(): void
   {
@@ -208,7 +206,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '/webpath', 'hash');
@@ -232,7 +230,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testCallFetchesOnlyDetailsOfNotYetExistingScratchPrograms(): void
   {
@@ -250,7 +248,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
@@ -283,7 +281,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testCallAddRemixesMethodOfRemixManagerWithCorrectRemixesData(): void
   {
@@ -303,7 +301,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/base/', '/webpath', 'hash');
@@ -356,7 +354,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSavesTheOldUrlToRemixOf(): void
   {
@@ -375,7 +373,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSavesTheScratchUrlToRemixOf(): void
   {
@@ -404,7 +402,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testSavesRemixOfMultipleScratchUrlsToRemixOf(): void
   {
@@ -420,7 +418,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     $this->async_http_client
@@ -447,7 +445,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function testUpdateTheRemixOfOfTheEntity(): void
   {
@@ -463,9 +461,9 @@ class RemixUpdaterEventSubscriberTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
-  private function getBaseXmlWithUrl(string $url): SimpleXMLElement|false
+  private function getBaseXmlWithUrl(string $url): \SimpleXMLElement|false
   {
     $xml = simplexml_load_file(RefreshTestEnvHook::$CACHE_DIR.'/base/code.xml');
     $xml->header->url = $url;
@@ -473,7 +471,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $file_overwritten = $xml->asXML(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
     if (!$file_overwritten) {
-      throw new Exception("Can't overwrite code.xml file");
+      throw new \Exception("Can't overwrite code.xml file");
     }
 
     return $xml;

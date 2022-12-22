@@ -4,7 +4,6 @@ namespace App\System\Commands\Reset;
 
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -28,7 +27,7 @@ class PurgeCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {

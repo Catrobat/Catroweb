@@ -2,13 +2,11 @@
 
 namespace App\Project\CatrobatCode\Parser;
 
-use SimpleXMLElement;
-
 class ParsedSimpleProgram extends ParsedObjectsContainer
 {
   protected CodeStatistic $code_statistic;
 
-  public function __construct(SimpleXMLElement $program_xml_properties)
+  public function __construct(\SimpleXMLElement $program_xml_properties)
   {
     parent::__construct($program_xml_properties);
 

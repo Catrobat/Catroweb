@@ -387,6 +387,7 @@ menu:
   home: کور
   helpAndTutorials: مرسته او درسونه
   followersAndFollowing: پیروونکی
+  mediaLibrary: د رسنیو کتابتون
 login:
   login: د ننه کیدل
   button:
@@ -839,6 +840,8 @@ extensions:
       title: ګنډل
     mindstorms:
       title: د ذهن طوفانونه
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عامه'

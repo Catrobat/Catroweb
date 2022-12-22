@@ -6,7 +6,6 @@ use App\Project\CatrobatCode\Parser\ParsedObject;
 use App\Project\CatrobatCode\Parser\ParsedObjectGroup;
 use App\Project\CatrobatCode\Parser\ParsedScene;
 use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
-use Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -87,11 +86,11 @@ class ParsedObjectsContainerTest extends TestCase
   /**
    * @test
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function mustThrowExceptionIfCorruptedGroup(): void
   {
-    $this->expectExceptionMessage(Exception::class);
+    $this->expectExceptionMessage(\Exception::class);
 
     $xml_properties = simplexml_load_file(
       RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
@@ -104,7 +103,7 @@ class ParsedObjectsContainerTest extends TestCase
     if (!array_key_exists(0, $xml_scene)) {
       new ParsedScene($xml_scene[0]);
     } else {
-      throw new Exception(Exception::class);
+      throw new \Exception(\Exception::class);
     }
   }
 }

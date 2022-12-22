@@ -22,7 +22,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function checkEMailAvailable(Request $request): JsonResponse
   {
@@ -44,7 +44,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function checkUserNameAvailable(Request $request): JsonResponse
   {
@@ -63,7 +63,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function checkGoogleServerTokenAvailable(Request $request): JsonResponse
   {
@@ -87,7 +87,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function exchangeGoogleCodeAction(Request $request): JsonResponse
   {
@@ -136,7 +136,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function loginWithGoogleAction(Request $request): JsonResponse
   {
@@ -190,7 +190,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, mixed $googleId, string $googleUsername, string $locale): void
   {
@@ -222,7 +222,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function registerGoogleUser(Request $request, array &$retArray, string $googleId,
     string $googleUsername, string $googleEmail, ?string $id_token = null): void
@@ -255,7 +255,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function validateOAuthUser(Request $request, array &$retArray): ConstraintViolationListInterface
   {
@@ -271,7 +271,7 @@ class OAuthService
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function trans(string $message, array $parameters = []): string
   {

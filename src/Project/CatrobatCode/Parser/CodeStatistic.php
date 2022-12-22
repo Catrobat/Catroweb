@@ -4,7 +4,6 @@ namespace App\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\Bricks\Brick;
 use App\Project\CatrobatCode\Parser\Scripts\Script;
-use SimpleXMLElement;
 use Symfony\Component\Config\Definition\Exception\Exception;
 
 class CodeStatistic
@@ -123,7 +122,7 @@ class CodeStatistic
     }
   }
 
-  public function computeVariableStatistic(SimpleXMLElement $program_xml_properties): void
+  public function computeVariableStatistic(\SimpleXMLElement $program_xml_properties): void
   {
     $this->countGlobalVariables($program_xml_properties);
     $this->countLocalVariables($program_xml_properties);
@@ -280,7 +279,7 @@ class CodeStatistic
     }
   }
 
-  protected function countGlobalVariables(SimpleXMLElement $program_xml_properties): void
+  protected function countGlobalVariables(\SimpleXMLElement $program_xml_properties): void
   {
     try {
       $this->total_num_global_vars =
@@ -291,7 +290,7 @@ class CodeStatistic
     }
   }
 
-  protected function countLocalVariables(SimpleXMLElement $program_xml_properties): void
+  protected function countLocalVariables(\SimpleXMLElement $program_xml_properties): void
   {
     try {
       $this->total_num_local_vars =

@@ -386,6 +386,7 @@ menu:
   home: Rumah
   helpAndTutorials: Bantuan & tutorial
   followersAndFollowing: Pengikut
+  mediaLibrary: Perpustakaan media
 login:
   login: Gabung
   button:
@@ -838,6 +839,8 @@ extensions:
       title: Sulaman
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'publik'

@@ -9,20 +9,23 @@ export class TranslateComments extends Translation {
 
   _initListeners () {
     const translateComments = this
-    $(document).on('click', '.comment-translation-button', function () {
+    $('.comment-translation-button').on('click', function (event) {
+      event.stopPropagation()
       const commentId = $(this).attr('id').substring('comment-translation-button-'.length)
+      const translateCommentUrl = $('.comment-translation').data('path-translate-comment')
 
       $(this).hide()
 
       if (translateComments.isTranslationNotAvailable('#comment-text-translation-' + commentId)) {
         $('#comment-translation-loading-spinner-' + commentId).show()
-        translateComments.translateComment(commentId)
+        translateComments.translateComment(translateCommentUrl, commentId)
       } else {
         translateComments.openTranslatedComment(commentId)
       }
     })
 
-    $(document).on('click', '.remove-comment-translation-button', function () {
+    $('.remove-comment-translation-button').on('click', function (event) {
+      event.stopPropagation()
       const commentId = $(this).attr('id').substring('remove-comment-translation-button-'.length)
       $(this).hide()
       $('#comment-translation-button-' + commentId).show()
@@ -59,10 +62,10 @@ export class TranslateComments extends Translation {
     this.openGoogleTranslatePage(document.getElementById('comment-text-' + commentId).innerText)
   }
 
-  translateComment (commentId) {
+  translateComment (translateCommentUrl, commentId) {
     const self = this
     $.ajax({
-      url: '../translate/comment/' + commentId,
+      url: translateCommentUrl,
       type: 'get',
       data: { target_language: self.targetLanguage },
       success: function (data) {

@@ -386,6 +386,7 @@ menu:
   home: Əsas səhifə
   helpAndTutorials: Kömək və təlimatlar
   followersAndFollowing: İzləyici
+  mediaLibrary: Media library
 login:
   login: Giriş
   button:
@@ -838,6 +839,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

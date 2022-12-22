@@ -6,7 +6,6 @@ use App\DB\EntityRepository\Project\ScratchProgramRepository;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 
 /**
  * @ORM\HasLifecycleCallbacks
@@ -33,12 +32,12 @@ class ScratchProgram
   /**
    * @ORM\Column(type="datetime")
    */
-  protected ?DateTime $last_modified_at = null;
+  protected ?\DateTime $last_modified_at = null;
 
   /**
    * ScratchProgram constructor.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function __construct(/**
    * @ORM\Id
@@ -73,7 +72,7 @@ class ScratchProgram
   /**
    * @ORM\PreUpdate
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateLastModifiedTimestamp(): void
   {
@@ -100,14 +99,14 @@ class ScratchProgram
     return $this->username;
   }
 
-  public function setLastModifiedAt(DateTime $last_modified_at): ScratchProgram
+  public function setLastModifiedAt(\DateTime $last_modified_at): ScratchProgram
   {
     $this->last_modified_at = $last_modified_at;
 
     return $this;
   }
 
-  public function getLastModifiedAt(): ?DateTime
+  public function getLastModifiedAt(): ?\DateTime
   {
     return $this->last_modified_at;
   }

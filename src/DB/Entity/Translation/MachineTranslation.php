@@ -5,7 +5,6 @@ namespace App\DB\Entity\Translation;
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 
 abstract class MachineTranslation
 {
@@ -24,12 +23,12 @@ abstract class MachineTranslation
   /**
    * @ORM\Column(type="datetime")
    */
-  protected DateTime $last_modified_at;
+  protected \DateTime $last_modified_at;
 
   /**
    * @ORM\Column(type="datetime")
    */
-  protected DateTime $created_at;
+  protected \DateTime $created_at;
 
   public function __construct(/**
    * @ORM\Column(type="string", length=5)
@@ -83,12 +82,12 @@ abstract class MachineTranslation
     return $this->usage_per_month;
   }
 
-  public function getLastModifiedAt(): DateTime
+  public function getLastModifiedAt(): \DateTime
   {
     return $this->last_modified_at;
   }
 
-  public function getCreatedAt(): DateTime
+  public function getCreatedAt(): \DateTime
   {
     return $this->created_at;
   }
@@ -96,7 +95,7 @@ abstract class MachineTranslation
   /**
    * @ORM\PrePersist
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function initTimestamps(): void
   {
@@ -107,7 +106,7 @@ abstract class MachineTranslation
   /**
    * @ORM\PreUpdate
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function preUpdate(): void
   {

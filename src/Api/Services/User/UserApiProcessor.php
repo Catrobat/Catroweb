@@ -6,7 +6,6 @@ use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\User\User;
 use App\Security\TokenGenerator;
 use App\User\UserManager;
-use Exception;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 
@@ -17,7 +16,7 @@ final class UserApiProcessor extends AbstractApiProcessor
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function registerUser(RegisterRequest $request): User
   {

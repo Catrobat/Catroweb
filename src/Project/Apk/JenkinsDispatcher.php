@@ -2,7 +2,6 @@
 
 namespace App\Project\Apk;
 
-use Exception;
 use Symfony\Component\Routing\RouterInterface;
 
 class JenkinsDispatcher
@@ -12,12 +11,12 @@ class JenkinsDispatcher
   /**
    * JenkinsDispatcher constructor.
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function __construct(array $config, protected RouterInterface $router)
   {
     if (!isset($config['url'])) {
-      throw new Exception();
+      throw new \Exception();
     }
     $this->config = $config;
   }

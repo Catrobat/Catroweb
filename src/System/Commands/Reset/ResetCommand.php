@@ -6,7 +6,6 @@ use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Commands\ImportProjects\ProgramImportCommand;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -41,7 +40,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
@@ -103,7 +102,7 @@ class ResetCommand extends Command
       );
 
       if (!$local_projects_import) {
-        throw new Exception('Projects could neither be loaded from the share nor from '.$local_projects_dir);
+        throw new \Exception('Projects could neither be loaded from the share nor from '.$local_projects_dir);
       }
     }
 
@@ -111,13 +110,13 @@ class ResetCommand extends Command
     $program_names = [];
     /** @var Program $program */
     foreach ($programs as $program) {
-      array_push($program_names, $program->getName());
+      $program_names[] = $program->getName();
     }
 
     $this->reportProjects($program_names, $user_array, $output);
-    if ($input->hasOption('with-remixes')) {
-      $this->remixGen($program_names, $output);
-    }
+    // if ($input->hasOption('with-remixes')) {
+    // $this->remixGen($program_names, $output);  // Currently not working
+    // }
     $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);
@@ -178,7 +177,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function importLocalProjects(string $local_projects_dir, int $limit, array $user_array, int $remix_layout, OutputInterface $output): bool
   {
@@ -208,7 +207,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function importProjectsFromShare(int $limit, array $user_array, int $remix_layout, OutputInterface $output): bool
   {
@@ -228,7 +227,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function userUploadProjects(int $limit, string $username, int $remix_layout, OutputInterface $output): int
   {
@@ -255,7 +254,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function commentOnProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -285,7 +284,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function reportProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -308,7 +307,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function likeProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -329,7 +328,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function downloadProjects(array $program_names, array $user_array, OutputInterface $output): void
   {
@@ -350,7 +349,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function featureProjects(array $program_names, OutputInterface $output): void
   {
@@ -371,7 +370,7 @@ class ResetCommand extends Command
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   private function followUsers(array $user_array, OutputInterface $output): void
   {
@@ -391,34 +390,34 @@ class ResetCommand extends Command
     }
   }
 
-  /**
-   * @throws Exception
-   */
-  private function remixGen(array $program_array, OutputInterface $output): void
-  {
-    $rand_start = random_int(2, 3);
-    $rand_interval = random_int(3, 6);
-
-    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_interval) {
-      $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
-      if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true)) {
-        $i -= $rand_interval;
-        ++$i;
-        continue;
-      }
-
-      $parameters = [
-        'program_original' => $program_array[$i],
-        'program_remix' => $program_array[$report_index],
-      ];
-
-      $ret = CommandHelper::executeSymfonyCommand('catrobat:remix', $this->getApplication(), $parameters, $output);
-
-      if (0 !== $ret) {
-        $output->writeln('Remix Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
-      }
-    }
-  }
+//  /**
+//   * @throws \Exception
+//   */
+//  private function remixGen(array $program_array, OutputInterface $output): void
+//  {
+//    $rand_start = random_int(2, 3);
+//    $rand_interval = random_int(3, 6);
+//
+//    for ($i = $rand_start; $i < sizeof($program_array); $i += $rand_interval) {
+//      $report_index = ($i + random_int(1, sizeof($program_array))) % sizeof($program_array);
+//      if (in_array($i, $this->reported, true) || in_array($report_index, $this->reported, true)) {
+//        $i -= $rand_interval;
+//        ++$i;
+//        continue;
+//      }
+//
+//      $parameters = [
+//        'program_original' => $program_array[$i],
+//        'program_remix' => $program_array[$report_index],
+//      ];
+//
+//      $ret = CommandHelper::executeSymfonyCommand('catrobat:remix', $this->getApplication(), $parameters, $output);
+//
+//      if (0 !== $ret) {
+//        $output->writeln('Remix Action failed for '.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
+//      }
+//    }
+//  }
 
   private function exampleProject(array $program_names, OutputInterface $output): void
   {

@@ -5,7 +5,6 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\User\UserApiFacade;
 use App\User\ResetPassword\PasswordResetRequestedEvent;
-use Exception;
 use OpenAPI\Server\Api\UserApiInterface;
 use OpenAPI\Server\Model\BasicUserDataResponse;
 use OpenAPI\Server\Model\ExtendedUserDataResponse;
@@ -26,7 +25,7 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * {@inheritdoc}
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
   {

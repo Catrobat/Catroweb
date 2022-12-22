@@ -14,7 +14,6 @@ use App\DB\EntityRepository\Studios\StudioProgramRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
-use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 
 class StudioManager
@@ -32,7 +31,7 @@ class StudioManager
       ->setIsEnabled($is_enabled)
       ->setAllowComments($allow_comments)
       ->setCoverPath($cover_path)
-      ->setCreatedOn(new DateTime())
+      ->setCreatedOn(new \DateTime())
     ;
 
     $this->saveStudio($studio);
@@ -47,7 +46,7 @@ class StudioManager
       ->setStudio($studio)
       ->setType($type)
       ->setUser($user)
-      ->setCreatedOn(new DateTime())
+      ->setCreatedOn(new \DateTime())
     ;
 
     $this->entity_manager->persist($activity);
@@ -64,7 +63,7 @@ class StudioManager
       ->setUser($user)
       ->setRole($role)
       ->setStatus($status)
-      ->setCreatedOn(new DateTime())
+      ->setCreatedOn(new \DateTime())
     ;
 
     $this->entity_manager->persist($studioUser);
@@ -80,7 +79,7 @@ class StudioManager
       ->setActivity($activity)
       ->setText($text)
       ->setUser($user)
-      ->setUploadDate(new DateTime())
+      ->setUploadDate(new \DateTime())
       ->setUsername($user->getUsername())
       ->setParentId($parent_id)
     ;
@@ -98,7 +97,7 @@ class StudioManager
       ->setActivity($activity)
       ->setUser($user)
       ->setProgram($project)
-      ->setCreatedOn(new DateTime())
+      ->setCreatedOn(new \DateTime())
     ;
 
     $this->entity_manager->persist($studioProject);
@@ -159,7 +158,7 @@ class StudioManager
     if (is_null($studioUser)) {
       return null;
     }
-    $studioUser->setUpdatedOn(new DateTime('now'));
+    $studioUser->setUpdatedOn(new \DateTime('now'));
     $studioUser->setStatus($status);
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();
@@ -176,7 +175,7 @@ class StudioManager
     if (is_null($studioUser)) {
       return null;
     }
-    $studioUser->setUpdatedOn(new DateTime('now'));
+    $studioUser->setUpdatedOn(new \DateTime('now'));
     $studioUser->setRole($role);
     $this->entity_manager->persist($studioUser);
     $this->entity_manager->flush();

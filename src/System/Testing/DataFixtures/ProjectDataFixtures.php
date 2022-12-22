@@ -12,10 +12,7 @@ use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Project\ProgramManager;
 use App\Storage\FileHelper;
 use App\User\UserManager;
-use DateTime;
-use DateTimeZone;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\File\File;
@@ -48,7 +45,7 @@ class ProjectDataFixtures
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function insertProject(array $config, bool $andFlush = true): Program
   {
@@ -83,8 +80,8 @@ class ProjectDataFixtures
     }
     $project->setUploadedAt(
       isset($config['upload time']) ?
-        new DateTime($config['upload time'], new DateTimeZone('UTC')) :
-        new DateTime('01.01.2013 12:00', new DateTimeZone('UTC'))
+        new \DateTime($config['upload time'], new \DateTimeZone('UTC')) :
+        new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
     );
     $project->setRemixMigratedAt(null);
     $project->setCatrobatVersionName($config['version'] ?? '0.8.5');
@@ -101,7 +98,7 @@ class ProjectDataFixtures
     $project->setRand($config['rand'] ?? 0);
 
     if (isset($config['apk request time'])) {
-      $project->setApkRequestTime(new DateTime($config['apk request time'], new DateTimeZone('UTC')));
+      $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));
     }
 
     $this->entity_manager->persist($project);

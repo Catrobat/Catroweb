@@ -18,7 +18,7 @@ class Survey
   protected ?int $id = null;
 
   /**
-   * @ORM\Column(type="string", length=255, unique=true)
+   * @ORM\Column(type="string", length=255)
    */
   protected ?string $language_code = null;
 
@@ -31,6 +31,25 @@ class Survey
    * @ORM\Column(type="boolean", options={"default": true}, nullable=false)
    */
   protected bool $active = true;
+
+  /**
+   * The flavor for this Survey. If this Flavor gets deleted, this Survey gets deleted as well.
+   *
+   * @ORM\ManyToOne(
+   *     targetEntity=Flavor::class
+   * )
+   * @ORM\JoinColumn(
+   *     name="flavor_id",
+   *     referencedColumnName="id",
+   *     nullable=true
+   * )
+   */
+  protected ?Flavor $flavor = null;
+
+  /**
+   * @ORM\Column(type="string", nullable=true)
+   */
+  protected ?string $platform = null;
 
   public function getId(): ?int
   {
@@ -70,6 +89,35 @@ class Survey
   public function setActive(bool $active): void
   {
     $this->active = $active;
+  }
+
+  public function getFlavor(): ?Flavor
+  {
+    return $this->flavor;
+  }
+
+  public function setFlavor(?Flavor $flavor): void
+  {
+    $this->flavor = $flavor;
+  }
+
+  public function getPlatform(): ?string
+  {
+    return $this->platform;
+  }
+
+  public function setPlatform(?string $platform): void
+  {
+    $this->platform = $platform;
+  }
+
+  public static function getAvailablePlatforms(): array
+  {
+    return [
+      '' => '',
+      'ios' => 'iOS',
+      'android' => 'Android',
+    ];
   }
 
   public static function getISO_639_1_Codes(): array

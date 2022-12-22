@@ -6,7 +6,6 @@ use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedScene;
 use App\Project\CatrobatCode\Parser\ParsedSceneProgram;
 use App\Project\CatrobatCode\Parser\ParsedSimpleProgram;
-use RecursiveIteratorIterator;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -31,9 +30,9 @@ class CatrobatFileSanitizer
     $this->image_paths = $extracted_file->getContainingImagePaths();
     $this->scenes = $this->getScenes($extracted_file);
 
-    $files = new RecursiveIteratorIterator(
+    $files = new \RecursiveIteratorIterator(
       new RecursiveDirectoryIterator($this->extracted_file_root_path, RecursiveDirectoryIterator::SKIP_DOTS),
-      RecursiveIteratorIterator::CHILD_FIRST
+      \RecursiveIteratorIterator::CHILD_FIRST
     );
 
     foreach ($files as $file) {

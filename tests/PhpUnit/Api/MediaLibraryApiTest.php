@@ -15,7 +15,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use OpenAPI\Server\Api\MediaLibraryApiInterface;
 use OpenAPI\Server\Model\MediaFileResponse;
 use PHPUnit\Framework\MockObject\MockObject;
-use ReflectionException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
@@ -30,7 +29,7 @@ final class MediaLibraryApiTest extends DefaultTestCase
   protected MediaLibraryApiFacade|MockObject $facade;
 
   /**
-   * @throws ReflectionException
+   * @throws \ReflectionException
    */
   protected function setUp(): void
   {

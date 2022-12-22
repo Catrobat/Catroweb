@@ -3,7 +3,6 @@
 namespace App\Project\CatrobatCode\Parser\Bricks;
 
 use App\Project\CatrobatCode\Parser\Constants;
-use SimpleXMLElement;
 
 abstract class Brick
 {
@@ -13,7 +12,7 @@ abstract class Brick
 
   private string $img_file;
 
-  public function __construct(protected SimpleXMLElement $brick_xml_properties)
+  public function __construct(protected \SimpleXMLElement $brick_xml_properties)
   {
     $this->create();
   }

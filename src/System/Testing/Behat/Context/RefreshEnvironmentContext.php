@@ -7,7 +7,6 @@ use App\System\Testing\Behat\ContextTrait;
 use App\System\Testing\DataFixtures\DataBaseUtils;
 use Behat\Behat\Context\Context;
 use Doctrine\ORM\Tools\ToolsException;
-use Exception;
 
 class RefreshEnvironmentContext implements Context
 {
@@ -45,7 +44,7 @@ class RefreshEnvironmentContext implements Context
    *
    * @BeforeScenario
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function emptyStorage(): void
   {

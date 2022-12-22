@@ -7,7 +7,6 @@ use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRe
 use App\Utils\TimeUtils;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
-use Exception;
 
 /**
  * @ORM\HasLifecycleCallbacks
@@ -53,7 +52,7 @@ class UserRemixSimilarityRelation
   /**
    * @ORM\Column(type="datetime")
    */
-  protected ?DateTime $created_at = null;
+  protected ?\DateTime $created_at = null;
 
   public function __construct(User $first_user, User $second_user, /**
    * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default": 0.0})
@@ -67,7 +66,7 @@ class UserRemixSimilarityRelation
   /**
    * @ORM\PrePersist
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function updateTimestamps(): void
   {
@@ -124,12 +123,12 @@ class UserRemixSimilarityRelation
     return $this->similarity;
   }
 
-  public function getCreatedAt(): ?DateTime
+  public function getCreatedAt(): ?\DateTime
   {
     return $this->created_at;
   }
 
-  public function setCreatedAt(DateTime $created_at): UserRemixSimilarityRelation
+  public function setCreatedAt(\DateTime $created_at): UserRemixSimilarityRelation
   {
     $this->created_at = $created_at;
 

@@ -1,49 +1,55 @@
+⚠️ **__If you have not heard about who Catrobat is, what we are doing and in what ways you can contribute, then you might want to take a step back and check out the start of our [step-by-step guide](https://github.com/Catrobat/Catroid/blob/develop/README.md).__**
+```diff
+👷 TODO: Change link to README in Catrobat's .github repository when added!
+```
+💡 *If any step in the following process is unclear, misleading, or incorrect, you can directly contribute by issuing a pull request with the updated information!*
+
+
+
 # Catroweb
+Catroweb is the name of the "Pocket Code" [sharing platform](https://share.catrob.at/app/), where our community can upload their projects. If you uploaded your game in the previous step, it should already be visible to all other users. They can now download and remix your masterpiece. Additionally, the platform provides users with features typical for a social network.
 
-[![Tests](https://github.com/Catrobat/Catroweb/actions/workflows/tests.yaml/badge.svg)](https://github.com/Catrobat/Catroweb/actions/workflows/tests.yaml)
-![Code Quality Checks](https://github.com/Catrobat/Catroweb-Symfony/workflows/Code%20Quality%20Checks/badge.svg)
-[![Dependabot Status](https://img.shields.io/badge/Dependabot-active-green.svg)](https://dependabot.com)
-[![codecov](https://codecov.io/gh/Catrobat/Catroweb/branch/develop/graph/badge.svg)](https://codecov.io/gh/Catrobat/Catroweb)
 
-[![Php 8.1](https://img.shields.io/badge/PHP-8.1-informational.svg)](https://www.php.net/)
-[![Symfony](https://img.shields.io/badge/Symfony-6.1-informational.svg)](https://symfony.com/)
+## Team Culture
+We work as a team and expect everyone to follow the rules. In our daily work, we use the methods listed below to create high-quality code. We support each other but also anticipate newcomers to learn about our coding principles proactively:
 
-**Catroweb** is the name of the **Pocket Code share community platform** for the associated [Catrobat](https://github.com/Catrobat/) project. 
+- [Test-Driven Development](http://wiki.c2.com/?TestDrivenDevelopment)
+- [Clean Code](https://www.planetgeek.ch/wp-content/uploads/2013/06/Clean-Code-V2.2.pdf)
+- Jira Workflow
+- Style Guide
+- Code Reviews
+- Pair Programming
+- Biweekly Meetings (remote)
 
-The website features Catrobat projects (also called Catrobat programs) created with Pocket Code. 
-Uploaded projects can be shared and downloaded. Additionally, the platform provides users with features typical for a social network.
+## Technologies
+Below you can find an outline of the technologies we currently use at Catroweb. If you want to contribute to our team, your tech stack should cover most of the technologies. But don't worry! If you are uncertain about a specific technology, you can learn it along the way. Google is your friend ;)
 
-The Community website with projects from users all around the world can be found at [https://share.catrob.at](https://share.catrob.at/).
-The official Swagger API documentation can be found at [GitHub](https://github.com/Catrobat/Catroweb-API/blob/develop/catroweb.yaml).
+### Languages
+[![HTML](http://img.shields.io/badge/HTML-darkblue)](https://www.w3schools.com/html/)
+[![Sass](https://img.shields.io/badge/Sass-darkblue)](https://sass-lang.com/)
+[![PHP](https://img.shields.io/badge/PHP-with_Symfony-green?labelColor=darkblue)](https://www.php.net/)
+[![JavaScript](https://img.shields.io/badge/JavaScript-darkblue)](https://www.w3schools.com/js/)
+[![SQL](https://img.shields.io/badge/SQL-darkblue)](https://www.w3schools.com/sql/)
 
-**Please create a new [issue](https://github.com/Catrobat/Catroweb/issues/new) for every bug you find.*
+### Infrastructure (IDE, Version Control, Issue Tracking, ...)
+[![PhpStorm](https://img.shields.io/badge/PhpStorm-recommended-green?labelColor=purple)](https://www.jetbrains.com/phpstorm/)
+[![Symfony](https://img.shields.io/badge/Symfony-purple)](https://symfony.com/)
+[![Git](https://img.shields.io/badge/Git-purple)](https://git-scm.com/)
+[![Jira](https://img.shields.io/badge/Jira-purple)](https://jira.catrob.at/secure/Dashboard.jspa)
+[![Docker](https://img.shields.io/badge/Docker-purple)](https://www.docker.com/)
 
-## API
+### Knowledge Repository
+[![Confluence](https://img.shields.io/badge/Confluence-orange)](https://confluence.catrob.at/)
 
-- specification: http://developer.catrobat.org/Catroweb-API
-- repository: https://github.com/Catrobat/Catroweb-API
+### Communication
+[![Slack](https://img.shields.io/badge/Slack-green)](https://slack.com/)
+[![Discord](https://img.shields.io/badge/Discord-green)](https://discord.com/)
 
-## How to get started: 
 
-You can find all important HowTo's in our [wiki](https://github.com/Catrobat/Catroweb-Symfony/wiki) and our [contribution guidelines](https://github.com/Catrobat/Catroweb/blob/develop/.github/contributing.md).
-Make sure all tests are passing when creating a pull request,
+## Start Contribution
+If you feel confident that your tech stack matches our requirements, then we invite you to [start contributing](https://github.com/Catrobat/Catroweb/blob/develop/.github/onboarding.md)!
 
-[![Docker](https://img.shields.io/badge/Docker-supported-brightgreen.svg)](https://github.com/Catrobat/Catroweb/wiki/Docker)
-
-##### Tools integrated in the project:
-
-[![Symfony](https://img.shields.io/badge/Framework-Symfony-0379B8.svg)](https://symfony.com/)
-[![Openapi-generator](https://img.shields.io/badge/API-openapi_generator-0379B8.svg)](https://github.com/OpenAPITools/openapi-generator)
-[![Elastic](https://img.shields.io/badge/Search-Elastic-FF6940.svg)](https://www.elastic.co/)
-[![Php-cs-fixer](https://img.shields.io/badge/Php_Code_Style-Php_CS_Fixer-informational.svg)](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
-[![PhpStan](https://img.shields.io/badge/Php_Code_Quality-PhpStan,_Psalm,_PhpDD,_PhpCPD_-informational.svg)](https://github.com/phpstan/phpstan)
-[![Webpack Encore](https://img.shields.io/badge/Asset_Bundler-Webpack_Encore-75AFCC.svg)](https://github.com/symfony/webpack-encore)
-[![Npm standard](https://img.shields.io/badge/JS_Code_Style-standard-green.svg)](https://standardjs.com)
-[![ESLint](https://img.shields.io/badge/JS_Code_Quality-ESLint-green.svg)](https://eslint.org/)
-[![Sass](https://img.shields.io/badge/CSS_Preprocessor-Dart_Sass-ff69b4.svg)](https://sass-lang.com/)
-[![StyleLint](https://img.shields.io/badge/CSS_Code_Style-StyleLint-ff69b4.svg)](https://stylelint.io/)
-
-**Have fun!**
-
-# License #
-[License](https://catrob.at/licenses) of our project (mainly AGPL v3).
+## Issues
+You found a bug? 
+1. Perfect, please check the [open issues on Jira](https://jira.catrob.at/projects/SHARE/issues/?filter=allopenissues) first to avoid duplicate tickets!
+2. If the bug has not been reported yet, please report it using the [issue template on Jira](https://jira.catrob.at/secure/CreateIssue.jspa?pid=12002&issuetype=1).

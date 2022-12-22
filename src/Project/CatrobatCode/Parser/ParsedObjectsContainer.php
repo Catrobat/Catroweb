@@ -2,15 +2,13 @@
 
 namespace App\Project\CatrobatCode\Parser;
 
-use SimpleXMLElement;
-
 abstract class ParsedObjectsContainer
 {
   protected ?ParsedObject $background = null;
 
   protected array $objects = [];
 
-  public function __construct(protected SimpleXMLElement $xml_properties)
+  public function __construct(protected \SimpleXMLElement $xml_properties)
   {
     $this->parseObjects();
   }
@@ -76,7 +74,7 @@ abstract class ParsedObjectsContainer
     return $all_object_xmls;
   }
 
-  private function getPointedObjectXMLProperties(SimpleXMLElement $object_xml): array
+  private function getPointedObjectXMLProperties(\SimpleXMLElement $object_xml): array
   {
     $all_pointed_object_xmls = [];
     foreach ($object_xml->xpath('scriptList//'.Constants::POINTED_OBJECT_TAG) as $pointed_object_xml_properties) {
@@ -90,7 +88,7 @@ abstract class ParsedObjectsContainer
     return $all_pointed_object_xmls;
   }
 
-  private function dereference(SimpleXMLElement $object_xml_properties): SimpleXMLElement
+  private function dereference(\SimpleXMLElement $object_xml_properties): \SimpleXMLElement
   {
     if (null != $object_xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
       return $this->dereference($object_xml_properties
@@ -100,7 +98,7 @@ abstract class ParsedObjectsContainer
     return $object_xml_properties;
   }
 
-  private function hasName(SimpleXMLElement $object_xml_properties): bool
+  private function hasName(\SimpleXMLElement $object_xml_properties): bool
   {
     return null != $object_xml_properties[Constants::NAME_ATTRIBUTE] || 0 != count($object_xml_properties->name);
   }

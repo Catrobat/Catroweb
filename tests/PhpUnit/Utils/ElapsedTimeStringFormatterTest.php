@@ -4,9 +4,6 @@ namespace Tests\PhpUnit\Utils;
 
 use App\Utils\ElapsedTimeStringFormatter;
 use App\Utils\TimeUtils;
-use DateTime;
-use Exception;
-use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -22,7 +19,7 @@ class ElapsedTimeStringFormatterTest extends TestCase
   private ElapsedTimeStringFormatter|MockObject $object;
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   protected function setUp(): void
   {
@@ -53,7 +50,7 @@ class ElapsedTimeStringFormatterTest extends TestCase
    *
    * @dataProvider dataProviderElapsedTimeStringFormatter
    *
-   * @throws Exception
+   * @throws \Exception
    */
   public function testElapsedTimeStringFormatter(string $expected, int $timestamp): void
   {
@@ -74,11 +71,11 @@ class ElapsedTimeStringFormatterTest extends TestCase
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
-  public function dataProviderElapsedTimeStringFormatter(): Generator
+  public function dataProviderElapsedTimeStringFormatter(): \Generator
   {
-    TimeUtils::freezeTime(new DateTime('2015-10-26 13:33:37'));
+    TimeUtils::freezeTime(new \DateTime('2015-10-26 13:33:37'));
     $this->test_time = TimeUtils::getTimestamp();
     yield ['minutes', $this->test_time + 1];
     yield ['minutes', $this->test_time];

@@ -5,7 +5,6 @@ namespace App\Admin\DB_Updater\Controller;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Console\Output\BufferedOutput;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -32,7 +31,7 @@ class CronJobsAdminController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function resetCronJobAction(Request $request): RedirectResponse
   {
@@ -53,7 +52,7 @@ class CronJobsAdminController extends CRUDController
   }
 
   /**
-   * @throws Exception
+   * @throws \Exception
    */
   public function triggerCronJobsAction(): RedirectResponse
   {

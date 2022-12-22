@@ -385,6 +385,7 @@ menu:
   home: Home
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
+  mediaLibrary: Media library
 login:
   login: Iniciar sesión
   button:
@@ -837,6 +838,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

@@ -387,6 +387,7 @@ menu:
   home: Hjem
   helpAndTutorials: Hjelp & opplæringer
   followersAndFollowing: Følger
+  mediaLibrary: Mediebibliotek
 login:
   login: Logg på
   button:
@@ -839,6 +840,8 @@ extensions:
       title: Embroidery
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

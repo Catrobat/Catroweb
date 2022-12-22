@@ -385,6 +385,7 @@ menu:
   home: Home
   helpAndTutorials: Pomoć i tutorijali
   followersAndFollowing: Follower
+  mediaLibrary: Biblioteka medija
 login:
   login: Prijava
   button:
@@ -837,6 +838,8 @@ extensions:
       title: Vez
     mindstorms:
       title: Mindstorms
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'public'

@@ -37,7 +37,7 @@ class ProgramDownloads
   /**
    * @ORM\Column(type="datetime")
    */
-  protected ?DateTime $downloaded_at = null;
+  protected ?\DateTime $downloaded_at = null;
 
   /**
    * @ORM\Column(type="string", options={"default": "project"})
@@ -80,12 +80,12 @@ class ProgramDownloads
     return $this;
   }
 
-  public function getDownloadedAt(): ?DateTime
+  public function getDownloadedAt(): ?\DateTime
   {
     return $this->downloaded_at;
   }
 
-  public function setDownloadedAt(?DateTime $downloaded_at): ProgramDownloads
+  public function setDownloadedAt(?\DateTime $downloaded_at): ProgramDownloads
   {
     $this->downloaded_at = $downloaded_at;
 

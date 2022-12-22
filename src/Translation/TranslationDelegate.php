@@ -5,7 +5,6 @@ namespace App\Translation;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
-use InvalidArgumentException;
 use Symfony\Component\Intl\Countries;
 use Symfony\Component\Intl\Languages;
 
@@ -21,7 +20,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function addProjectNameCustomTranslation(Program $project, string $target_language, string $name_translation): bool
   {
@@ -31,7 +30,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function getProjectNameCustomTranslation(Program $project, string $target_language): ?string
   {
@@ -41,7 +40,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function deleteProjectNameCustomTranslation(Program $project, string $target_language): bool
   {
@@ -51,7 +50,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function addProjectDescriptionCustomTranslation(Program $project, string $target_language, string $description_translation): bool
   {
@@ -61,7 +60,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function getProjectDescriptionCustomTranslation(Program $project, string $target_language): ?string
   {
@@ -71,7 +70,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function deleteProjectDescriptionCustomTranslation(Program $project, string $target_language): bool
   {
@@ -81,7 +80,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function addProjectCreditCustomTranslation(Program $project, string $target_language, string $credit_translation): bool
   {
@@ -91,7 +90,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function getProjectCreditCustomTranslation(Program $project, string $target_language): ?string
   {
@@ -101,7 +100,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function deleteProjectCreditCustomTranslation(Program $project, string $target_language): bool
   {
@@ -111,7 +110,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    *
    * @psalm-return array<array-key, TranslationResult|null>|null
    */
@@ -147,7 +146,7 @@ class TranslationDelegate
   }
 
   /**
-   * @throws InvalidArgumentException
+   * @throws \InvalidArgumentException
    */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
@@ -186,37 +185,37 @@ class TranslationDelegate
   {
     if (2 == strlen((string) $language)) {
       if (strtolower((string) $language) != $language) {
-        throw new InvalidArgumentException('2-character language code has to be lower case');
+        throw new \InvalidArgumentException('2-character language code has to be lower case');
       }
 
       if (!Languages::exists($language)) {
-        throw new InvalidArgumentException('2-character language code is invalid');
+        throw new \InvalidArgumentException('2-character language code is invalid');
       }
     } elseif (5 == strlen((string) $language)) {
       if ('-' != $language[2]) {
-        throw new InvalidArgumentException('Invalid 5-character language code format');
+        throw new \InvalidArgumentException('Invalid 5-character language code format');
       }
 
       $language_code = substr((string) $language, 0, 2);
       $country_code = substr((string) $language, 3, 2);
 
       if (strtolower($language_code) != $language_code) {
-        throw new InvalidArgumentException('5-character language code has to contain lower case language code');
+        throw new \InvalidArgumentException('5-character language code has to contain lower case language code');
       }
 
       if (!Languages::exists($language_code)) {
-        throw new InvalidArgumentException('language code in 5-character language code is invalid');
+        throw new \InvalidArgumentException('language code in 5-character language code is invalid');
       }
 
       if (strtoupper($country_code) != $country_code) {
-        throw new InvalidArgumentException('5-character language code has to contain upper case country code');
+        throw new \InvalidArgumentException('5-character language code has to contain upper case country code');
       }
 
       if (!Countries::exists($country_code)) {
-        throw new InvalidArgumentException('country code in 5-character language code is invalid');
+        throw new \InvalidArgumentException('country code in 5-character language code is invalid');
       }
     } elseif (null !== $language) {
-      throw new InvalidArgumentException('language has to be null, 2-character or 5-character language code');
+      throw new \InvalidArgumentException('language has to be null, 2-character or 5-character language code');
     }
   }
 

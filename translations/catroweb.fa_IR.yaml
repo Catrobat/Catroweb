@@ -390,6 +390,7 @@ menu:
   home: صفحهٔ اصلی
   helpAndTutorials: کمک و آموزش
   followersAndFollowing: پی‌گیر
+  mediaLibrary: کتابخانه ی رسانه
 login:
   login: ورود به سیستم
   button:
@@ -842,6 +843,8 @@ extensions:
       title: گلدوزی
     mindstorms:
       title: طوفان های فکری
+    multiplayer:
+      title: Multiplayer
 studio:
   details:
     public: 'عمومی'

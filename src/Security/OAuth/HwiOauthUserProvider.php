@@ -7,7 +7,6 @@ use App\Security\PasswordGenerator;
 use App\User\UserManager;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
-use RuntimeException;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
@@ -79,14 +78,14 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
   }
 
   /**
-   * @throws RuntimeException
+   * @throws \RuntimeException
    */
   protected function getProperty(UserResponseInterface $response): string
   {
     $resourceOwnerName = $response->getResourceOwner()->getName();
 
     if (!isset($this->properties[$resourceOwnerName])) {
-      throw new RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
+      throw new \RuntimeException(sprintf("No property defined for entity for resource owner '%s'.", $resourceOwnerName));
     }
 
     return $this->properties[$resourceOwnerName];
