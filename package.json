@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb#readme",
   "devDependencies": {
+    "@babel/preset-env": "^7.20.2",
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@symfony/webpack-encore": "^4.2.0",
     "autoprefixer": "^10.4.13",
@@ -53,7 +54,7 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
-    "@babel/core": "^7.20.5",
+    "@babel/core": "^7.20.7",
     "@material/checkbox": "^14.0",
     "@material/chips": "^14.0",
     "@material/circular-progress": "^14.0",
