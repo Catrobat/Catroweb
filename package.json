@@ -30,7 +30,7 @@
     "@symfony/webpack-encore": "^4.2.0",
     "autoprefixer": "^10.4.13",
     "browserslist": "^4.21.4",
-    "core-js": "^3.26.1",
+    "core-js": "^3.27.0",
     "eslint": "^8.30.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
