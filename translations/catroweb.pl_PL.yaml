@@ -207,6 +207,9 @@ programs:
   editTranslation: Edytuj tłumaczenie %language%
   translations: Tłumaczenia
   createTranslation: Utwórz tłumaczenie
+  deletedComment: '**Usunięty**'
+  replyLabel: odpowiedź
+  repliesLabel: odpowiedzi
 remixGraph:
   title: Remiksy
   showRemixGraph: 'Pokaż Drzewo Remiksów'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
   programNotAvailable: 'Niedostępny'
   programUnknownUser: 'Nieznany użytkownik'
-noReply: To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
+noReply:
+  - To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
 accountConfirmation:
   subject: Potwierdzenie konta Catrobat
   message: |

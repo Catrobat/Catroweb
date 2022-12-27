@@ -207,6 +207,9 @@ programs:
   editTranslation: Изменить %language% перевод
   translations: Переводы
   createTranslation: Создать перевод
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: oтветы
 remixGraph:
   title: Ремиксы
   showRemixGraph: 'Графа ремиксов'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Этот проект больше недоступен!'
   programNotAvailable: 'Недоступно'
   programUnknownUser: 'Неизвестный пользователь'
-noReply: Это системное сообщение - Пожалуйста, не отвечайте на это письмо.
+noReply:
+  - Это системное сообщение - Пожалуйста, не отвечайте на это письмо.
 accountConfirmation:
   subject: Подтверждение вашего аккаунта Catrobat
   message: |

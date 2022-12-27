@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: ردود
 remixGraph:
   title: رِمكسات(خليط مُعدل)
   showRemixGraph: 'إظهار مخطط الدمج المُعدل'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'المشروع غير متوفر بعد الآن!'
   programNotAvailable: 'غير متوفر'
   programUnknownUser: 'مستخدم غير معروف'
-noReply: هذه رسالة تلقائية - الرجاء عدم الرد مباشرة على هذا البريد الإلكتروني.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: تأكيد حسابك في كاتروبات
   message: |

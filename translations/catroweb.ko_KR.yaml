@@ -206,6 +206,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: 변환
   showRemixGraph: '리믹스 그래프 표시'
@@ -216,7 +219,8 @@ remixGraph:
   programNotAvailableErrorDescription: '프로그램을 더 이상 사용할 수 없습니다!'
   programNotAvailable: '사용할수 없음'
   programUnknownUser: '알 수 없는 사용자'
-noReply: 자동 메시지입니다 - 이 메일에 회신하지 마세요.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Catrobat 계정 확인
   message: |

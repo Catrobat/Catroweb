@@ -207,6 +207,9 @@ programs:
   editTranslation: '%language% çevirisini düzenle'
   translations: Çeviriler
   createTranslation: Çeviri oluştur
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: yanıtlar
 remixGraph:
   title: Remixler
   showRemixGraph: 'Remixleri'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Proje artık kullanılabilir değil!'
   programNotAvailable: 'Kullanılabilir değil'
   programUnknownUser: 'Bilinmeyen kullanıcı'
-noReply: Bu otomatik bir mesajdır - Lütfen bu e-postayı doğrudan yanıtlamayın.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Catrobat hesap onayınız
   message: |
@@ -838,7 +842,7 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Çok Oyunculu
 studio:
   details:
     public: 'herkese açık'

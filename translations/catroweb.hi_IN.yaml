@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: जवाब
 remixGraph:
   title: रीमिक्स
   showRemixGraph: 'रीमिक्स ग्राफ'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'परियोजना कोई और उपलब्ध नहीं है!'
   programNotAvailable: 'अनुपलब्ध'
   programUnknownUser: 'अज्ञात उपयोगकर्ता'
-noReply: यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे उत्तर न दें।
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: आपका Catrobat खाता पुष्टिकरण
   message: |

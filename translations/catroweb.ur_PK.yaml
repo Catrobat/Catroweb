@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: جوابات
 remixGraph:
   title: ریمکسس
   showRemixGraph: 'ریمکس گراف'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'اس منصوبہ مزید دستیاب نہیں ہے!'
   programNotAvailable: 'دستیاب نہیں ہے'
   programUnknownUser: 'نامعلوم صارف'
-noReply: یہ ایک خودکار پیغام ہے ۔ براہ مہربانی اس ای میل پر براہ راست جواب نہ دیں.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: آپ کی catrobat اکاؤنٹ کی توثیق
   message: |

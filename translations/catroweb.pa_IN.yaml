@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: ਰੀਮਿਕਸ
   showRemixGraph: 'ਰੀਮਿਕਸ ਗ੍ਰਾਫ'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'ਪ੍ਰੋਜੈਕਟ ਹੋਰ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!'
   programNotAvailable: 'ਉਪਲਭਦ ਨਹੀ'
   programUnknownUser: 'ਅਣਜਾਣ ਯੂਜ਼ਰ'
-noReply: ਇਹ ਇੱਕ ਸਵੈਚਾਲਤ ਸੰਦੇਸ਼ ਹੈ - ਕਿਰਪਾ ਕਰਕੇ ਇਸ ਈਮੇਲ ਦਾ ਸਿੱਧਾ ਜਵਾਬ ਨਾ ਦਿਓ.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਖਾਤੇ ਦੀ ਪੁਸ਼ਟੀ
   message: |

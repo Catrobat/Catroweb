@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: svar
 remixGraph:
   title: Remixar
   showRemixGraph: 'Remix graph'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Projektet är inte längre tillgängligt!'
   programNotAvailable: 'Inte tillgänglig'
   programUnknownUser: 'Okänd användare'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat account confirmation
   message: |

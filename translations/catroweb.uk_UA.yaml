@@ -208,6 +208,9 @@ programs:
   editTranslation: Редагувати %language% переклад
   translations: Переклади
   createTranslation: Створити переклад
+  deletedComment: '**Видалено**'
+  replyLabel: відповісти
+  repliesLabel: відповіді
 remixGraph:
   title: Ремікси
   showRemixGraph: 'Графік реміксів'
@@ -219,7 +222,7 @@ remixGraph:
   programNotAvailable: 'Недоступно'
   programUnknownUser: 'Невідомий користувач'
 noReply:
-  - 
+  - Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
 accountConfirmation:
   subject: Підтвердження облікового запису Catrobat
   message: |

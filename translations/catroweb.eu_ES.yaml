@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Nahaste borrasteak
   showRemixGraph: 'Remix graph'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Proiektu hau jada ez dago eskuragarri!'
   programNotAvailable: 'Ez dago eskuragarri'
   programUnknownUser: 'Erabiltzaile ezezaguna'
-noReply: Hau automatikoki sortutako mezu bat da - Ez erantzun email honi zuzenean.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Zure Catrobat kontuaren berrespena 
   message: |

@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: 調製
   showRemixGraph: '混音圖'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: '該項目不再可用！'
   programNotAvailable: '無法使用'
   programUnknownUser: 'Unknown User'
-noReply: 這是一條自動消息 - 請不要直接回复此電子郵件。
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
   message: |
