@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: రీమిక్స్‌లు
   showRemixGraph: 'రీమిక్స్ గ్రాఫ్'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'ప్రాజెక్ట్ ఇకపై అందుబాటులో లేదు!'
   programNotAvailable: 'అందుబాటులో లేదు'
   programUnknownUser: 'తెలియని యూజర్'
-noReply: ఇది స్వయంచాలక సందేశం - దయచేసి ఈ ఇమెయిల్‌కు నేరుగా ప్రత్యుత్తరం ఇవ్వవద్దు.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: మీ కాట్రోబాట్ ఖాతా నిర్ధారణ
   message: |

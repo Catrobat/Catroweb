@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remisturas
   showRemixGraph: 'Mostrar Grafo de Remistura'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'Indisponível'
   programUnknownUser: 'Utilizador Desconhecido'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat account confirmation
   message: |

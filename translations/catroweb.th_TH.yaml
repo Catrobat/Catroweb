@@ -209,6 +209,9 @@ programs:
   editTranslation: แก้ไข %language% การแปล
   translations: คำแปล
   createTranslation: สร้างการแปล
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: ตอบกลับ
 remixGraph:
   title: ผสม
   showRemixGraph: 'แสดงกราฟรีมิกซ์'
@@ -219,7 +222,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'โครงการไม่สามารถใช้งานได้อีกต่อไป!'
   programNotAvailable: 'ไม่พร้อมใช้งาน'
   programUnknownUser: 'ผู้ใช้ที่ไม่รู้จัก'
-noReply: นี่เป็นข้อความอัตโนมัติ - โปรดอย่าตอบกลับอีเมลนี้โดยตรง
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: การยืนยันบัญชี Catrobat ของคุณ
   message: |

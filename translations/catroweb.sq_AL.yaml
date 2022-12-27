@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: përgjigjet
 remixGraph:
   title: Remixes
   showRemixGraph: 'Ripërziej grafikun'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Projekti nuk është më i disponueshëm!'
   programNotAvailable: 'Jo i disponueshëm'
   programUnknownUser: 'Perdorues i paidentifikuar'
-noReply: Ky është një mesazh i automatizuar - Ju lutemi mos iu përgjigjni drejtpërdrejt këtij emaili.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Konfirmimi i llogarisë tuaj Catrobat
   message: |

@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remikser
   showRemixGraph: 'Vis Remiks graf'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Prosjektet er ikke tilgjengelig lenger!'
   programNotAvailable: 'Ikke tilgjengelig'
   programUnknownUser: 'Ukjent bruker'
-noReply: Dette er en automatisk melding - Vennligst ikke svar direkte på denne e-posten.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Din Catrobat konto bekreftelse
   message: |

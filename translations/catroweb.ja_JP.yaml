@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: リミックス
   showRemixGraph: 'リミックスのグラフを表示'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'このプロジェクトはもう利用できません！'
   programNotAvailable: '利用できません'
   programUnknownUser: '不明なユーザー'
-noReply: これは自動化されたメッセージです。このメールに直接返信しないでください。
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Catrobat アカウントの確認
   message: |

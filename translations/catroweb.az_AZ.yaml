@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remixlər
   showRemixGraph: 'Remiks qrafiki'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Bu layihə artıq əlçatan deyil!'
   programNotAvailable: 'Əlçatan deyil'
   programUnknownUser: 'Bilinməyən istifadəçi'
-noReply: Bu avto-mesajdır - Zəhmət olmasa bu e-poçta birbaşa cavab verməyin
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Catrobat hesab təsdiqiniz
   message: |

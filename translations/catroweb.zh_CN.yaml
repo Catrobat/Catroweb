@@ -207,6 +207,9 @@ programs:
   editTranslation: 编辑 %language% 翻译
   translations: 翻译
   createTranslation: 创建翻译
+  deletedComment: '**已删除**'
+  replyLabel: 回复
+  repliesLabel: 回复
 remixGraph:
   title: 调制
   showRemixGraph: '显示调制关系图'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: '该项目不再可用！'
   programNotAvailable: '暂不可用'
   programUnknownUser: '未知用户'
-noReply: 这是一条自动消息 - 请不要直接回复此邮件。
+noReply:
+  - 这是自动发送的消息 - 请不要直接回复此邮件。
 accountConfirmation:
   subject: 您的 Catrobat 帐户确认
   message: |

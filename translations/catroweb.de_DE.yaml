@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Das Projekt ist nicht mehr verfügbar!'
   programNotAvailable: 'Nicht verfügbar'
   programUnknownUser: 'Unbekannter Benutzer'
-noReply: Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail
+noReply:
+  - Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail
 accountConfirmation:
   subject: Deine Catrobat Account Bestätigung
   message: |
