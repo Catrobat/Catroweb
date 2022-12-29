@@ -12619,16 +12619,16 @@
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v6.2.1",
+            "version": "v6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "91ba64ff72df1f210af4f9206e185580030e4984"
+                "reference": "f3b60bbbe23308fd7b5f99ad480a1852acfd4d65"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/91ba64ff72df1f210af4f9206e185580030e4984",
-                "reference": "91ba64ff72df1f210af4f9206e185580030e4984",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/f3b60bbbe23308fd7b5f99ad480a1852acfd4d65",
+                "reference": "f3b60bbbe23308fd7b5f99ad480a1852acfd4d65",
                 "shasum": ""
             },
             "require": {
@@ -12648,7 +12648,7 @@
                 "symfony/workflow": "<5.4"
             },
             "require-dev": {
-                "doctrine/annotations": "^1.12",
+                "doctrine/annotations": "^1.12|^2",
                 "egulias/email-validator": "^2.1.10|^3",
                 "league/html-to-markdown": "^5.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
@@ -12723,7 +12723,7 @@
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bridge/tree/v6.2.1"
+                "source": "https://github.com/symfony/twig-bridge/tree/v6.2.3"
             },
             "funding": [
                 {
@@ -12739,20 +12739,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-06T17:01:47+00:00"
+            "time": "2022-12-20T16:41:15+00:00"
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v6.2.2",
+            "version": "v6.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "51521952488403342e558521d03a649b5fb387c8"
+                "reference": "6d32d5f8f36a543663e9db6aa4aefd184f492883"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/51521952488403342e558521d03a649b5fb387c8",
-                "reference": "51521952488403342e558521d03a649b5fb387c8",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/6d32d5f8f36a543663e9db6aa4aefd184f492883",
+                "reference": "6d32d5f8f36a543663e9db6aa4aefd184f492883",
                 "shasum": ""
             },
             "require": {
@@ -12770,7 +12770,7 @@
                 "symfony/translation": "<5.4"
             },
             "require-dev": {
-                "doctrine/annotations": "^1.10.4",
+                "doctrine/annotations": "^1.10.4|^2",
                 "symfony/asset": "^5.4|^6.0",
                 "symfony/expression-language": "^5.4|^6.0",
                 "symfony/finder": "^5.4|^6.0",
@@ -12808,7 +12808,7 @@
             "description": "Provides a tight integration of Twig into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bundle/tree/v6.2.2"
+                "source": "https://github.com/symfony/twig-bundle/tree/v6.2.3"
             },
             "funding": [
                 {
@@ -12824,7 +12824,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-12-09T22:27:19+00:00"
+            "time": "2022-12-20T16:41:15+00:00"
         },
         {
             "name": "symfony/validator",
