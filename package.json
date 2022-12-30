@@ -48,7 +48,7 @@
     "sass-loader": "^13.2.0",
     "standard": "^17.0.0",
     "stimulus": "^3.2.1",
-    "stylelint": "^14.16.0",
+    "stylelint": "^14.16.1",
     "stylelint-config-standard-scss": "^6.1.0",
     "webpack-cli": "^5.0.1",
     "webpack-notifier": "^1.15.0"
