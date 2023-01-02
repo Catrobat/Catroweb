@@ -1090,7 +1090,7 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the response should contain a location header with URL of the uploaded project$/
+   * @Then /^the response should contain the URL of the uploaded project$/
    */
   public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
   {
@@ -1098,11 +1098,13 @@ class ApiContext implements Context
       'name' => 'test',
     ]);
 
-    $location_header = $this->getKernelBrowser()->getResponse()->headers->get('Location');
+    $response = $this->getKernelBrowser()->getResponse();
+    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $location = $responseArray['project_url'];
 
-    Assert::assertNotNull($location_header);
+    Assert::assertNotNull($location);
     Assert::assertNotNull($uploaded_program);
-    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $location_header);
+    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $location);
   }
 
   /**
@@ -1822,8 +1824,11 @@ class ApiContext implements Context
         $this->getKernelBrowser()->getResponse()->getContent()
       );
     } elseif ('2' == $api_version) {
-      Assert::assertEquals($this->getKernelBrowser()->getResponse()->headers->get('Location'),
-        $this->getKernelBrowser()->getResponse()->headers->get('Location'));
+      $response = $this->getKernelBrowser()->getResponse();
+      $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+      $location = $responseArray['project_url'];
+
+      Assert::assertNotNull($location);
     } else {
       throw new ApiVersionNotSupportedException($api_version);
     }
@@ -3083,13 +3088,12 @@ class ApiContext implements Context
   private function getIDOfLastUploadedProject(string $api_version)
   {
     $last_uploaded_project_id = null;
+    $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
     if ('1' == $api_version) {
-      $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
       $last_uploaded_project_id = $json['projectId'];
     } elseif ('2' == $api_version) {
-      $splitted_project_uri = explode('/', (string) $this->getKernelBrowser()->getResponse()->headers->get('Location'));
-      $last_uploaded_project_id = $splitted_project_uri[sizeof($splitted_project_uri) - 1];
+      $last_uploaded_project_id = $json['id'];
     } else {
       throw new ApiVersionNotSupportedException($api_version);
     }

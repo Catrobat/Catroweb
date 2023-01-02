@@ -668,8 +668,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response = $this->object->projectsPost('checksum', $file, 'en', '', false, $response_code, $response_headers);
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
-    $this->assertArrayHasKey('Location', $response_headers);
-    $this->assertNull($response);
+    $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
   /**

@@ -106,7 +106,7 @@ Feature: Uploading a project
     And I request "POST" "/api/projects"
     Then the response status code should be "201"
     And the uploaded project should exist in the database, API version 2
-    And the response should contain a location header with URL of the uploaded project
+    And the response should contain the URL of the uploaded project
 
   Scenario: uploading the same project again should result in an update
     Given I am "Catrobat"
