@@ -8,7 +8,7 @@ createNewPassword: Create new password
 accountSettings: Postavke računa
 email: E-mail
 aboutPocketCode: O Pocket Code-u
-about: About
+about: O nama
 education: Education
 chat: Chat and forums
 others: Others
@@ -757,7 +757,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'novi'
   overview:
     header: 'Achievements'
     most_recent_achievement:
