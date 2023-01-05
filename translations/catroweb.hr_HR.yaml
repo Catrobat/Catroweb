@@ -763,7 +763,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'novo'
   overview:
     header: 'Achievements'
     most_recent_achievement:
