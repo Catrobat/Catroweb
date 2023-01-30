@@ -3,6 +3,7 @@
 namespace App\System\Log;
 
 use App\DB\Entity\User\User;
+use Monolog\LogRecord;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -15,7 +16,7 @@ class LoggerProcessor
   {
   }
 
-  public function __invoke(array $record): array
+  public function __invoke(LogRecord $record): LogRecord
   {
     if (!$this->request_stack->getCurrentRequest()) {
       return $record;
@@ -23,9 +24,9 @@ class LoggerProcessor
 
     $request = $this->request_stack->getCurrentRequest();
 
-    $record['extra']['client_ip'] = $this->getOriginalClientIp($request);
-    $record['extra']['user_agent'] = $this->getUserAgent($request);
-    $record['extra']['session_user'] = $this->getSessionUser();
+    $record->extra['client_ip'] = $this->getOriginalClientIp($request);
+    $record->extra['user_agent'] = $this->getUserAgent($request);
+    $record->extra['session_user'] = $this->getSessionUser();
 
     return $record;
   }
