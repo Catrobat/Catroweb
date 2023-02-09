@@ -14711,31 +14711,32 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.2.2",
+            "version": "v5.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "249d72e95722230559330ca9f4132c5a354d67e8"
+                "reference": "a9d84c2e60afae1f5be6d93d2dac0f8db497ad5a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/249d72e95722230559330ca9f4132c5a354d67e8",
-                "reference": "249d72e95722230559330ca9f4132c5a354d67e8",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/a9d84c2e60afae1f5be6d93d2dac0f8db497ad5a",
+                "reference": "a9d84c2e60afae1f5be6d93d2dac0f8db497ad5a",
                 "shasum": ""
             },
             "require": {
-                "behat/behat": "^3.8.1",
+                "behat/behat": "^3.10",
                 "composer-runtime-api": "^2.0",
+                "composer/semver": "^3.0",
                 "php": "^7.3 || ^8.0",
-                "phpunit/php-code-coverage": "^9.2",
+                "phpunit/php-code-coverage": "^9.2.16||^10.0",
                 "symfony/config": "^4.4.30||^5.1.4||^6.0",
-                "symfony/console": "^4.4||^5.0||^6.0",
+                "symfony/console": "^4.4.30||^5.3.7||^6.0.9",
                 "symfony/dependency-injection": "^4.4.12||^5.1.4||^6.0",
                 "symfony/event-dispatcher": "^4.4||^5.0||^6.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.1",
-                "phpunit/phpunit": "^9.5.5",
+                "friendsofphp/php-cs-fixer": "^3.9.2",
+                "phpunit/phpunit": "^9.5.5||^10.0",
                 "symfony/filesystem": "^4.4||^5.0||^6.0"
             },
             "suggest": {
@@ -14776,7 +14777,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.2.2"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.3.0"
             },
             "funding": [
                 {
@@ -14784,7 +14785,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-11-30T20:45:20+00:00"
+            "time": "2023-02-04T16:34:34+00:00"
         },
         {
             "name": "evenement/evenement",
