@@ -1516,16 +1516,16 @@
         },
         {
             "name": "doctrine/persistence",
-            "version": "3.1.3",
+            "version": "3.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/persistence.git",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f"
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/persistence/zipball/920da294b4bb0bb527f2a91ed60c18213435880f",
-                "reference": "920da294b4bb0bb527f2a91ed60c18213435880f",
+                "url": "https://api.github.com/repos/doctrine/persistence/zipball/8bf8ab15960787f1a49d405f6eb8c787b4841119",
+                "reference": "8bf8ab15960787f1a49d405f6eb8c787b4841119",
                 "shasum": ""
             },
             "require": {
@@ -1594,7 +1594,7 @@
             ],
             "support": {
                 "issues": "https://github.com/doctrine/persistence/issues",
-                "source": "https://github.com/doctrine/persistence/tree/3.1.3"
+                "source": "https://github.com/doctrine/persistence/tree/3.1.4"
             },
             "funding": [
                 {
@@ -1610,7 +1610,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-19T13:39:42+00:00"
+            "time": "2023-02-03T11:13:07+00:00"
         },
         {
             "name": "doctrine/sql-formatter",
@@ -3480,16 +3480,16 @@
         },
         {
             "name": "jms/serializer",
-            "version": "3.21.0",
+            "version": "3.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/schmittjoh/serializer.git",
-                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd"
+                "reference": "576d226178697534e214531dbf80058637a10ebc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/cc49ca6cd97baa173166c1f4fc54521964cf28bd",
-                "reference": "cc49ca6cd97baa173166c1f4fc54521964cf28bd",
+                "url": "https://api.github.com/repos/schmittjoh/serializer/zipball/576d226178697534e214531dbf80058637a10ebc",
+                "reference": "576d226178697534e214531dbf80058637a10ebc",
                 "shasum": ""
             },
             "require": {
@@ -3564,7 +3564,7 @@
             ],
             "support": {
                 "issues": "https://github.com/schmittjoh/serializer/issues",
-                "source": "https://github.com/schmittjoh/serializer/tree/3.21.0"
+                "source": "https://github.com/schmittjoh/serializer/tree/3.22.0"
             },
             "funding": [
                 {
@@ -3572,7 +3572,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-01-10T13:08:17+00:00"
+            "time": "2023-02-03T04:58:11+00:00"
         },
         {
             "name": "jms/serializer-bundle",
@@ -5361,16 +5361,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.15.3",
+            "version": "1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "61800f71a5526081d1b5633766aa88341f1ade76"
+                "reference": "57090cfccbfaa639e703c007486d605a6e80f56d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/61800f71a5526081d1b5633766aa88341f1ade76",
-                "reference": "61800f71a5526081d1b5633766aa88341f1ade76",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/57090cfccbfaa639e703c007486d605a6e80f56d",
+                "reference": "57090cfccbfaa639e703c007486d605a6e80f56d",
                 "shasum": ""
             },
             "require": {
@@ -5400,9 +5400,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.15.3"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.16.0"
             },
-            "time": "2022-12-20T20:56:55+00:00"
+            "time": "2023-01-29T14:41:23+00:00"
         },
         {
             "name": "psr/cache",
@@ -7718,16 +7718,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.4.0",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "da37806c8b76cb11087455a023921036d54846fe"
+                "reference": "6e0ee4773ab40ad9f5fe5d645ea61ce18cfadc3a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/da37806c8b76cb11087455a023921036d54846fe",
-                "reference": "da37806c8b76cb11087455a023921036d54846fe",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/6e0ee4773ab40ad9f5fe5d645ea61ce18cfadc3a",
+                "reference": "6e0ee4773ab40ad9f5fe5d645ea61ce18cfadc3a",
                 "shasum": ""
             },
             "require": {
@@ -7759,7 +7759,7 @@
                 "twig/twig": "^2.14 || ^3.0"
             },
             "conflict": {
-                "sonata-project/admin-bundle": "<4.9",
+                "sonata-project/admin-bundle": "<4.20",
                 "sonata-project/block-bundle": "<4.11",
                 "sonata-project/doctrine-orm-admin-bundle": "<4.0"
             },
@@ -7781,8 +7781,8 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.17",
                 "psalm/plugin-symfony": "^3.0",
-                "rector/rector": "^0.14",
-                "sonata-project/admin-bundle": "^4.9",
+                "rector/rector": "^0.15",
+                "sonata-project/admin-bundle": "^4.20",
                 "sonata-project/block-bundle": "^4.11",
                 "sonata-project/doctrine-orm-admin-bundle": "^4.0",
                 "symfony/browser-kit": "^4.4 || ^5.4 || ^6.0",
@@ -7825,7 +7825,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.4.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.5.0"
             },
             "funding": [
                 {
@@ -7845,7 +7845,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-10-09T20:29:43+00:00"
+            "time": "2023-02-06T10:35:41+00:00"
         },
         {
             "name": "symfony/acl-bundle",
