@@ -9,9 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserAchievementRepository::class)
+ *
  * @ORM\Table(
  *     name="user_achievement",
  *     uniqueConstraints={
+ *
  *         @ORM\UniqueConstraint(
  *             name="user_achievement_unique",
  *             columns={"user", "achievement"}
@@ -23,19 +25,23 @@ class UserAchievement
 {
   /**
    * @ORM\Column(name="id", type="integer")
+   *
    * @ORM\Id
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class)
+   *
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
    */
   protected User $user;
 
   /**
    * @ORM\ManyToOne(targetEntity=Achievement::class)
+   *
    * @ORM\JoinColumn(name="achievement", referencedColumnName="id", nullable=false, onDelete="CASCADE")
    */
   protected Achievement $achievement;

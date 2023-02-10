@@ -8,12 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CronJobRepository::class)
+ *
  * @ORM\Table(name="cronjob")
  */
 class CronJob
 {
   /**
    * @ORM\Column(name="name", type="string", nullable=false, unique=true)
+   *
    * @ORM\Id
    */
   protected string $name = '';

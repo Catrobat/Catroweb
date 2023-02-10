@@ -8,12 +8,14 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ResponseCacheRepository::class)
+ *
  * @ORM\Table(name="response_cache")
  */
 class ResponseCache
 {
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="string")
    */
   private ?string $id = null;
@@ -93,6 +95,7 @@ class ResponseCache
 
   /**
    * @ORM\PrePersist
+   *
    * @ORM\PreUpdate
    */
   public function updateTimestamps(): self

@@ -29,6 +29,7 @@ class FollowNotification extends CatroNotification
    *     targetEntity=User::class,
    *     inversedBy="follow_notification_mentions"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="follower_id",
    *     referencedColumnName="id",

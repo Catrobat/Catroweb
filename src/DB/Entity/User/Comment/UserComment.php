@@ -12,13 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=UserCommentRepository::class)
+ *
  * @ORM\Table(name="user_comment")
  */
 class UserComment implements \Stringable
 {
   /**
    * @ORM\Id
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
+   *
    * @ORM\Column(type="integer")
    */
   protected ?int $id = null;
@@ -30,6 +33,7 @@ class UserComment implements \Stringable
    *     targetEntity=User::class,
    *     inversedBy="comments"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="user_id",
    *     referencedColumnName="id",
@@ -47,6 +51,7 @@ class UserComment implements \Stringable
    *     mappedBy="comment",
    *     cascade={"remove"}
    * )
+   *
    * @ORM\JoinColumn(
    *     name="notification_id",
    *     referencedColumnName="id",
@@ -83,6 +88,7 @@ class UserComment implements \Stringable
    *     targetEntity=Program::class,
    *     inversedBy="comments"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="programId",
    *     referencedColumnName="id",
@@ -98,6 +104,7 @@ class UserComment implements \Stringable
 
   /**
    * @ORM\ManyToOne(targetEntity=Studio::class, inversedBy="user_comments", cascade={"persist"})
+   *
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
   protected ?Studio $studio = null;
@@ -109,6 +116,7 @@ class UserComment implements \Stringable
 
   /**
    * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
+   *
    * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=true, onDelete="CASCADE")
    */
   protected ?StudioActivity $activity = null;

@@ -10,7 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Table(name="user_like_similarity_relation")
+ *
  * @ORM\Entity(repositoryClass=UserLikeSimilarityRelationRepository::class)
  */
 class UserLikeSimilarityRelation
@@ -25,6 +27,7 @@ class UserLikeSimilarityRelation
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid")
    */
   protected string $first_user_id;
@@ -32,12 +35,14 @@ class UserLikeSimilarityRelation
   /**
    * @ORM\ManyToOne(targetEntity=User::class, inversedBy="relations_of_similar_users_based_on_likes",
    * fetch="LAZY")
+   *
    * @ORM\JoinColumn(name="first_user_id", referencedColumnName="id")
    */
   protected User $first_user;
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid")
    */
   protected string $second_user_id;
@@ -45,6 +50,7 @@ class UserLikeSimilarityRelation
   /**
    * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reverse_relations_of_similar_users_based_on_likes",
    * fetch="LAZY")
+   *
    * @ORM\JoinColumn(name="second_user_id", referencedColumnName="id")
    */
   protected User $second_user;

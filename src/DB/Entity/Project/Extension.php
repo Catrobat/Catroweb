@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="extension")
+ *
  * @ORM\Entity(repositoryClass=ExtensionRepository::class)
  */
 class Extension implements \Stringable
@@ -26,7 +27,9 @@ class Extension implements \Stringable
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;

@@ -21,12 +21,15 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Table(
  *     name="program",
  *     indexes={
+ *
  *         @ORM\Index(name="rand_idx", columns={"rand"})
  *     }
  * )
+ *
  * @ORM\Entity(repositoryClass=ProgramRepository::class)
  */
 class Program implements \Stringable
@@ -41,8 +44,11 @@ class Program implements \Stringable
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(name="id", type="guid")
+   *
    * @ORM\GeneratedValue(strategy="CUSTOM")
+   *
    * @ORM\CustomIdGenerator(class=MyUuidGenerator::class)
    */
   protected ?string $id = null;
@@ -79,6 +85,7 @@ class Program implements \Stringable
    *     targetEntity=User::class,
    *     inversedBy="programs"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="user_id",
    *     referencedColumnName="id",
@@ -153,9 +160,11 @@ class Program implements \Stringable
 
   /**
    * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="programs")
+   *
    * @ORM\JoinTable(
    *     name="program_tag",
    *     joinColumns={
+   *
    *         @ORM\JoinColumn(name="program_id", referencedColumnName="id")
    *     },
    *     inverseJoinColumns={
@@ -167,9 +176,11 @@ class Program implements \Stringable
 
   /**
    * @ORM\ManyToMany(targetEntity=Extension::class, inversedBy="programs")
+   *
    * @ORM\JoinTable(
    *     name="program_extension",
    *     joinColumns={
+   *
    *         @ORM\JoinColumn(name="program_id", referencedColumnName="id")
    *     },
    *     inverseJoinColumns={
@@ -318,6 +329,7 @@ class Program implements \Stringable
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class)
+   *
    * @ORM\JoinColumn(name="approved_by_user", referencedColumnName="id", nullable=true)
    */
   protected ?User $approved_by_user = null;

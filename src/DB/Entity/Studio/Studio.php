@@ -11,14 +11,18 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StudioRepository::class)
+ *
  * @ORM\Table(name="studio")
  */
 class Studio
 {
   /**
    * @ORM\Id
+   *
    * @ORM\Column(name="id", type="guid")
+   *
    * @ORM\GeneratedValue(strategy="CUSTOM")
+   *
    * @ORM\CustomIdGenerator(class=MyUuidGenerator::class)
    */
   protected ?string $id = null;
