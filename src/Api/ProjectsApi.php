@@ -215,6 +215,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     // Since we have come this far, the project upload is completed
     $responseCode = Response::HTTP_CREATED;
+    $responseHeaders['Location'] = $this->facade->getResponseManager()->createProjectLocation($project);
 
     return $this->facade->getResponseManager()->createProjectDataResponse($project, 'ALL');
   }

@@ -1098,13 +1098,15 @@ class ApiContext implements Context
       'name' => 'test',
     ]);
 
+    Assert::assertNotNull($uploaded_program);
+
+    $location_header = $this->getKernelBrowser()->getResponse()->headers->get('Location');
+    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $location_header);
+
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $location = $responseArray['project_url'];
 
-    Assert::assertNotNull($location);
-    Assert::assertNotNull($uploaded_program);
-    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $location);
+    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $responseArray['project_url']);
   }
 
   /**
