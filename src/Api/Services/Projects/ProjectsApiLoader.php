@@ -11,14 +11,23 @@ use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Project\ProgramManager;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\RequestStack;
 
 final class ProjectsApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly ProgramManager $project_manager, private readonly FeaturedRepository $featured_repository, private readonly TagRepository $tag_repository, private readonly ExtensionRepository $extension_repository, private readonly RequestStack $request_stack, protected ProgramFileRepository $file_repository, protected ExtractedFileRepository $extracted_file_repository)
-  {
+  public function __construct(
+    private readonly ProgramManager $project_manager,
+    private readonly FeaturedRepository $featured_repository,
+    private readonly TagRepository $tag_repository,
+    private readonly ExtensionRepository $extension_repository,
+    private readonly RequestStack $request_stack,
+    protected ProgramFileRepository $file_repository,
+    protected ExtractedFileRepository $extracted_file_repository,
+    protected LoggerInterface $logger
+  ) {
   }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
@@ -112,6 +121,10 @@ final class ProjectsApiLoader extends AbstractApiLoader
         return null;
       }
     } catch (FileNotFoundException) {
+      return null;
+    } catch (\Throwable $e) {
+      $this->logger->error("Can't get project zip for \"{$id}\"; error: ".$e->getMessage());
+
       return null;
     }
 
