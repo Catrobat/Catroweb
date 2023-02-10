@@ -8,8 +8,16 @@ import { TokenExpirationHandler } from './security/TokenExpirationHandler'
 import { showSnackbar } from './components/snackbar'
 import { LogoutTokenHandler } from './security/LogoutTokenHandler'
 
+import Bugsnag from '@bugsnag/js'
+
 // Start the stimulus app
 import './bootstrap'
+
+const appVersion = $('#app-version').data('app-version')
+const bugsnagApiKey = $('#bugsnag').data('api-key')
+if (bugsnagApiKey) {
+  Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
+}
 
 require('../styles/base.scss')
 
