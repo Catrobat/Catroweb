@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="scratch_program_remix_relation")
+ *
  * @ORM\Entity(repositoryClass=ScratchProgramRemixRepository::class)
  */
 class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Stringable
@@ -23,12 +24,14 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid")
    */
   protected string $scratch_parent_id;
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid")
    */
   protected string $catrobat_child_id;
@@ -39,6 +42,7 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
    *     inversedBy="scratch_remix_parent_relations",
    *     fetch="LAZY"
    * )
+   *
    * @ORM\JoinColumn(name="catrobat_child_id", referencedColumnName="id")
    */
   protected Program $catrobat_child;

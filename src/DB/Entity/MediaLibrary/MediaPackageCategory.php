@@ -18,13 +18,16 @@ use Doctrine\ORM\Mapping as ORM;
  *         File 1  File 2  File 3      File 4    File 5                  File 6
  *
  * @ORM\Entity
+ *
  * @ORM\Table(name="media_package_category")
  */
 class MediaPackageCategory implements \Stringable
 {
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;

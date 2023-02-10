@@ -8,13 +8,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=ProjectCustomTranslationRepository::class)
+ *
  * @ORM\Table(name="project_custom_translation")
  */
 class ProjectCustomTranslation
 {
   /**
    * @ORM\Id
+   *
    * @ORM\GeneratedValue
+   *
    * @ORM\Column(type="integer")
    */
   private ?int $id = null;
@@ -40,6 +43,7 @@ class ProjectCustomTranslation
      *     targetEntity=Program::class,
      *     inversedBy="custom_translations"
      * )
+     *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Program $project,

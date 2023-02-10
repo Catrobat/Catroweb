@@ -12,7 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  * ProgramInappropriateReport.
  *
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Table
+ *
  * @ORM\Entity(repositoryClass=ProgramInappropriateReportRepository::class)
  */
 class ProgramInappropriateReport
@@ -23,19 +25,23 @@ class ProgramInappropriateReport
 
   /**
    * @ORM\Column(name="id", type="integer")
+   *
    * @ORM\Id
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   private ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_triggered_by_this_user")
+   *
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   private ?User $reporting_user = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_of_this_user")
+   *
    * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   private ?User $reported_user = null;
@@ -62,6 +68,7 @@ class ProgramInappropriateReport
 
   /**
    * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="reports")
+   *
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", onDelete="SET NULL")
    */
   private ?Program $program = null;

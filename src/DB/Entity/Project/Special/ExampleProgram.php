@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=ExampleRepository::class)
+ *
  * @ORM\EntityListeners({ExampleProgramImageListener::class})
+ *
  * @ORM\Table(name="example")
  */
 class ExampleProgram extends SpecialProgram

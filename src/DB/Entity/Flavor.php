@@ -9,13 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="App\DB\EntityRepository\FlavorRepository")
+ *
  * @ORM\Table(name="flavor")
  */
 class Flavor implements \Stringable
 {
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;

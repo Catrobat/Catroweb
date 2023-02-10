@@ -798,28 +798,28 @@ if (isTrackingAllowed()) {
 
       player.PlayerState = event.data
 
-      if (event.data === YT.PlayerState.UNSTARTED) {
+      if (YT && event.data === YT.PlayerState.UNSTARTED) {
         player.lastPlayerState = YT.PlayerState.UNSTARTED
       }
       // track when user clicks Play
-      if (event.data === YT.PlayerState.PLAYING && player.lastPlayerState !== YT.PlayerState.PLAYING) {
+      if (YT && event.data === YT.PlayerState.PLAYING && player.lastPlayerState !== YT.PlayerState.PLAYING) {
         player.lastPlayerState = YT.PlayerState.PLAYING
         this.trackEvent(player, id, 'play', '')
         this.startChecking(player)
       }
       // track when user clicks Pause
-      if (event.data === YT.PlayerState.PAUSED) {
+      if (YT && event.data === YT.PlayerState.PAUSED) {
         player.lastPlayerState = YT.PlayerState.PAUSED
         this.trackEvent(player, id, 'pause', '')
       }
       // track when video ends
-      if (event.data === YT.PlayerState.ENDED) {
+      if (YT && event.data === YT.PlayerState.ENDED) {
         player.lastPlayerState = YT.PlayerState.ENDED
         this.setPercentage(id, 0)
         this.trackEvent(player, id, 'ended', '')
       }
       // track buffering
-      if (event.data === YT.PlayerState.BUFFERING) {
+      if (YT && event.data === YT.PlayerState.BUFFERING) {
         player.lastPlayerState = YT.PlayerState.BUFFERING
         this.trackEvent(player, id, 'buffering', '')
       }
@@ -875,7 +875,7 @@ if (isTrackingAllowed()) {
       Object.keys(this.players).forEach(function (key, _) {
         const player = _this.players[key]
 
-        if (player.PlayerState === YT.PlayerState.PLAYING) {
+        if (YT && player.PlayerState === YT.PlayerState.PLAYING) {
           anyPlaying = true
           const trackedPercentage = _this.getPercentage(key)
 
@@ -913,7 +913,7 @@ if (isTrackingAllowed()) {
        * @param {string} id - id of the video
        */
     onYouTubeIframeAPIReady: function (element, id) {
-      if (this.playerArray[id] === undefined) {
+      if (YT && this.playerArray[id] === undefined) {
         this.playerArray[id] = new YT.Player(element, {
           events: {
             onReady: this.onPlayerReady,

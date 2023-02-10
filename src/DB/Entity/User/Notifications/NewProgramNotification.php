@@ -24,6 +24,7 @@ class NewProgramNotification extends CatroNotification
    *     targetEntity=Program::class,
    *     inversedBy="new_program_notification_mentions"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="program_id",
    *     referencedColumnName="id",

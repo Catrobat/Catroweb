@@ -30,6 +30,7 @@ class RemixNotification extends CatroNotification
    * @ORM\ManyToOne(
    *     targetEntity=User::class
    * )
+   *
    * @ORM\JoinColumn(
    *     name="remix_root",
    *     referencedColumnName="id",
@@ -43,6 +44,7 @@ class RemixNotification extends CatroNotification
    *     targetEntity=Program::class,
    *     inversedBy="remix_notification_mentions_as_parent"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="program_id",
    *     referencedColumnName="id",
@@ -56,6 +58,7 @@ class RemixNotification extends CatroNotification
    *     targetEntity=Program::class,
    *     inversedBy="remix_notification_mentions_as_child"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="remix_program_id",
    *     referencedColumnName="id",

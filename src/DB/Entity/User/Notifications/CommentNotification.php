@@ -32,6 +32,7 @@ class CommentNotification extends CatroNotification
      *     targetEntity=UserComment::class,
      *     inversedBy="notification"
      * )
+     *
      * @ORM\JoinColumn(
      *     name="comment_id",
      *     referencedColumnName="id",

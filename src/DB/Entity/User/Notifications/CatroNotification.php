@@ -10,9 +10,13 @@ use Doctrine\ORM\Mapping as ORM;
  * Generic Notification.
  *
  * @ORM\Entity(repositoryClass=NotificationRepository::class)
+ *
  * @ORM\Table
+ *
  * @ORM\InheritanceType("SINGLE_TABLE")
+ *
  * @ORM\DiscriminatorColumn(name="notification_type", type="string")
+ *
  * @ORM\DiscriminatorMap({
  *     "default": "CatroNotification",
  *     "comment": "CommentNotification",
@@ -27,7 +31,9 @@ class CatroNotification
 {
   /**
    * @ORM\Column(name="id", type="integer")
+   *
    * @ORM\Id
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   private ?int $id = null;
@@ -45,6 +51,7 @@ class CatroNotification
      *  If the user gets deleted, this CatroNotification gets deleted as well.
      *
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="notifications")
+     *
      * @ORM\JoinColumn(
      *     name="user",
      *     referencedColumnName="id",

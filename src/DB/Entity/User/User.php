@@ -21,6 +21,7 @@ use Sonata\UserBundle\Entity\BaseUser;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ *
  * @ORM\Table(name="fos_user")
  */
 class User extends BaseUser
@@ -28,8 +29,11 @@ class User extends BaseUser
   public static string $SCRATCH_PREFIX = 'Scratch:';
   /**
    * @ORM\Id
+   *
    * @ORM\Column(name="id", type="guid")
+   *
    * @ORM\GeneratedValue(strategy="CUSTOM")
+   *
    * @ORM\CustomIdGenerator(class=MyUuidGenerator::class)
    *
    * @var string
