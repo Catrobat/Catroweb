@@ -1,7 +1,11 @@
 const Encore = require('@symfony/webpack-encore')
 const { PurgeCSSPlugin } = require('purgecss-webpack-plugin')
+const { BugsnagSourceMapUploaderPlugin } = require('webpack-bugsnag-plugins')
+const dotenv = require('dotenv')
 const glob = require('glob-all')
 const path = require('path')
+const webpack = require('webpack')
+const noop = require('noop-webpack-plugin')
 
 // Manually configure the runtime environment if not already configured yet by the "encore" command.
 // It's useful when you use tools that rely on webpack.config.js file.
@@ -133,7 +137,7 @@ Encore
    */
   .cleanupOutputBeforeBuild()
   .enableBuildNotifications()
-  .enableSourceMaps(!Encore.isProduction())
+  .enableSourceMaps()
   // enables hashed filenames (e.g. app.abc123.css)
   .enableVersioning(Encore.isProduction())
 
@@ -176,5 +180,34 @@ Encore
       return content.match(/[\w-/:]+(?<!:)/g) || []
     }
   }))
+
+  .addPlugin((() => {
+    const log = (result) => {
+      console.log('Loaded .env vars', result)
+      return result
+    }
+
+    return new webpack.DefinePlugin(
+      log(
+        Encore.isProduction()
+          ? [
+              dotenv.config({ path: '.env', override: true }),
+              dotenv.config({ path: '.env.prod', override: true })
+            ]
+          : [
+              dotenv.config({ path: '.env', override: true }),
+              dotenv.config({ path: '.env.dev', override: true })
+            ]
+      )
+    )
+  })())
+
+  .addPlugin(process.env.BUGSNAG_API_KEY
+    ? new BugsnagSourceMapUploaderPlugin({
+      apiKey: process.env.BUGSNAG_API_KEY,
+      appVersion: process.env.APP_VERSION,
+      overwrite: true
+    })
+    : noop())
 
 module.exports = Encore.getWebpackConfig()
