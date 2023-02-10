@@ -206,6 +206,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remiksi
   showRemixGraph: 'Pokaži Remix Graph'
@@ -216,7 +219,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Ovaj projekat nije više dostupan!'
   programNotAvailable: 'Nije dostupno'
   programUnknownUser: 'Nepoznat korisnik'
-noReply: Ovo je automatska poruka - Molimo Vas da ne odgovarate na ovaj email.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Potvrda Vašeg Catrobat naloga
   message: |

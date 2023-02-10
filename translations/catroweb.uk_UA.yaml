@@ -9,7 +9,7 @@ accountSettings: Налаштування облікового запису
 email: Ел.Пошта
 aboutPocketCode: Про Pocket Code
 about: Про нас
-education: Навчання
+education: Освіта
 chat: Чат та форуми
 others: Інше
 tutorials: Довідка
@@ -208,6 +208,9 @@ programs:
   editTranslation: Редагувати %language% переклад
   translations: Переклади
   createTranslation: Створити переклад
+  deletedComment: '**Видалено**'
+  replyLabel: відповісти
+  repliesLabel: відповіді
 remixGraph:
   title: Ремікси
   showRemixGraph: 'Графік реміксів'
@@ -219,7 +222,7 @@ remixGraph:
   programNotAvailable: 'Недоступно'
   programUnknownUser: 'Невідомий користувач'
 noReply:
-  - 
+  - Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
 accountConfirmation:
   subject: Підтвердження облікового запису Catrobat
   message: |
@@ -385,7 +388,7 @@ menu:
   logout: Вийти з облікового запису
   admin: Адмін
   home: Головна
-  helpAndTutorials: Допомога та посібник
+  helpAndTutorials: Довідка та посібники
   followersAndFollowing: Підписник
   mediaLibrary: Медіатека
 login:
@@ -488,7 +491,7 @@ errors:
   image.missing: Xml-код проєкту нагадує про файл, якого немає в теці проєкту
   unknown: Невідома помилка
   token: 'Не вдалося виконати автентифікацію пристрою: неприпустимий auth-token!'
-  uploadTokenAuthFailed: 'Не вдалося вивантажити auth маркера.'
+  uploadTokenAuthFailed: 'Помилка автентифікації токена завантаження.'
   program:
     invalid: Неприпустимий проєкт.
   languageversion:
@@ -672,7 +675,7 @@ footer:
   usefulLinks: Корисні посилання
   legalities: Юридичні дані
   communityStats: Статистика Спільноти
-  download: Завантажити програму
+  download: Завантажити додаток
 privacy-policy:
   header: Політика конфіденційності
   version: Версія 2.2 від 17 жовтня 2019 року

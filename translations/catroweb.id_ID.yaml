@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remix
   showRemixGraph: 'Tampilkan Grafik Remix'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Proyek tidak tersedia lagi!'
   programNotAvailable: 'Tidak tersedia'
   programUnknownUser: 'Pengguna tidak dikenal'
-noReply: Ini adalah pesan otomatis - Mohon jangan balas langsung ke email ini.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Konfirmasi akun Catrobat Anda
   message: |

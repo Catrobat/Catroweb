@@ -15,6 +15,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
       'globals' => [
         'app_version' => '%env(APP_VERSION)%',
         'app_env' => '%env(APP_ENV)%',
+        'bugsnag_api_key' => '%env(BUGSNAG_API_KEY)%',
       ],
       'form_themes' => [
         '@SonataForm/Form/datepicker.html.twig',

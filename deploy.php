@@ -71,7 +71,7 @@ host(getenv('DEPLOY_SHARE'))
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
   ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share/')
-  ->set('remote_user', 'unpriv')
+  ->set('remote_user', 'root')
 ;
 
 // Tasks
@@ -85,10 +85,10 @@ task('install:assets', function () {
 // For such sudo commands to work, the server must allow those commands without a password
 // change the sudoers file if needed!
 task('restart:nginx', function () {
-  run('sudo /usr/sbin/service nginx restart');
+  run('/usr/sbin/service nginx restart');
 });
 task('restart:php-fpm', function () {
-  run('sudo /usr/sbin/service php8.1-fpm restart');
+  run('/usr/sbin/service php8.2-fpm restart');
 });
 task('install:npm', function () {
   cd('{{release_path}}');

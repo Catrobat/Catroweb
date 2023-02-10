@@ -1,5 +1,5 @@
 # Use composer image for better caching
-FROM composer:2.5.0 AS composer-build
+FROM composer:2.5.2 AS composer-build
 COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
@@ -10,31 +10,30 @@ COPY package.json package-lock.json ./
 RUN npm install && npm install -g @symfony/webpack-encore
 
 # Run on:
-FROM debian:buster
+FROM debian:bullseye
 ARG DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies
 RUN apt-get update && \
     apt-get install -yq --no-install-recommends wget apt-transport-https lsb-release ca-certificates && \
     wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg && \
-    echo "deb https://packages.sury.org/php/ buster main" >> /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ bullseye main" >> /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -yq --no-install-recommends software-properties-common && \
     apt-get install -yq --no-install-recommends \
-    php8.1-cli \
-    php8.1-common \
-    php8.1-curl \
-    php8.1-dom \
-    php8.1-gd \
-    php8.1-imagick \
-    php8.1-intl \
-    php8.1-mbstring \
-    php8.1-mysql \
-    php8.1-xdebug \
-    php8.1-xml \
-    php8.1-zip \
-    libapache2-mod-php8.1 \
-    zlibc \
+    php8.2-cli \
+    php8.2-common \
+    php8.2-curl \
+    php8.2-dom \
+    php8.2-gd \
+    php8.2-imagick \
+    php8.2-intl \
+    php8.2-mbstring \
+    php8.2-mysql \
+    php8.2-xdebug \
+    php8.2-xml \
+    php8.2-zip \
+    libapache2-mod-php8.2 \
     acl \
     make \
     libtool \
@@ -54,8 +53,8 @@ RUN a2dissite 000-default.conf && \
     a2ensite catroweb.conf
 
 # Overwrite php config:
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.1/apache2/php.ini
-RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.1/cli/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.2/apache2/php.ini
+RUN printf "\n%s\n" xdebug.mode=coverage >> /etc/php/8.2/cli/php.ini
 
 # Setting working directory
 WORKDIR /var/www/catroweb

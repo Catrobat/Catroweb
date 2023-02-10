@@ -8,7 +8,7 @@ createNewPassword: Create new password
 accountSettings: Postavke računa
 email: E-mail
 aboutPocketCode: O Pocket Code-u
-about: About
+about: O nama
 education: Education
 chat: Chat and forums
 others: Others
@@ -207,6 +207,9 @@ programs:
   editTranslation: Edit %language% translation
   translations: Translations
   createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: replies
 remixGraph:
   title: Remiksi
   showRemixGraph: 'Remix graph'
@@ -217,7 +220,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'The project is not available any more!'
   programNotAvailable: 'Not available'
   programUnknownUser: 'Unknown user'
-noReply: This is an automated message - Please do not reply directly to this email.
+noReply:
+  - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
   subject: Your Catrobat account confirmation
   message: |
@@ -753,7 +757,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'novi'
   overview:
     header: 'Achievements'
     most_recent_achievement:

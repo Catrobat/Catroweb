@@ -208,6 +208,9 @@ programs:
   editTranslation: '%language% аударманы өзгеру'
   translations: Аудармалар
   createTranslation: Аудамарын құру
+  deletedComment: '**Deleted**'
+  replyLabel: reply
+  repliesLabel: жауаптар
 remixGraph:
   title: Ремикстер
   showRemixGraph: 'Ремикс графигі'
@@ -218,7 +221,8 @@ remixGraph:
   programNotAvailableErrorDescription: 'Жоба енді қолжетімді емес!'
   programNotAvailable: 'Қолжетімсіз'
   programUnknownUser: 'Unknown User'
-noReply: Бұл автоматтандырылған хабарлама - бұл эл. поштаға тікелей жауап бермеңіз
+noReply:
+  - Бұл автоматтандырылған хабарлама - бұл эл. поштаға тікелей жауап бермеңіз
 accountConfirmation:
   subject: Your Catrobat Account Confirmation
   message: |
