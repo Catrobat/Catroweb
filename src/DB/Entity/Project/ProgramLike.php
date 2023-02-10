@@ -10,7 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Table(name="program_like")
+ *
  * @ORM\Entity(repositoryClass=ProgramLikeRepository::class)
  */
 class ProgramLike implements \Stringable
@@ -51,30 +53,35 @@ class ProgramLike implements \Stringable
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid", nullable=false)
    */
   protected string $program_id;
 
   /**
    * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="likes", fetch="LAZY")
+   *
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
    */
   protected Program $program;
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid", nullable=false)
    */
   protected string $user_id;
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes", fetch="LAZY")
+   *
    * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
    */
   protected User $user;
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer", nullable=false, options={"default": 0})
    */
   protected int $type = self::TYPE_THUMBS_UP;

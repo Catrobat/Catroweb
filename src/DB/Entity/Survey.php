@@ -6,13 +6,16 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="survey")
  */
 class Survey
 {
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;
@@ -38,6 +41,7 @@ class Survey
    * @ORM\ManyToOne(
    *     targetEntity=Flavor::class
    * )
+   *
    * @ORM\JoinColumn(
    *     name="flavor_id",
    *     referencedColumnName="id",

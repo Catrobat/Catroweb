@@ -22,6 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         File 1  File 2  File 3      File 4    File 5                  File 6
  *
  * @ORM\Table(name="media_package_file")
+ *
  * @ORM\Entity(repositoryClass=MediaPackageFileRepository::class)
  */
 class MediaPackageFile
@@ -34,7 +35,9 @@ class MediaPackageFile
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;

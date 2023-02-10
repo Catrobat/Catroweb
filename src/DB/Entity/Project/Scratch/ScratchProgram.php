@@ -9,7 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Table(name="scratch_program")
+ *
  * @ORM\Entity(repositoryClass=ScratchProgramRepository::class)
  */
 class ScratchProgram
@@ -41,6 +43,7 @@ class ScratchProgram
    */
   public function __construct(/**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid", nullable=false)
    */
     protected string $id)

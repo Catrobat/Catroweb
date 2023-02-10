@@ -31,6 +31,7 @@ class LikeNotification extends CatroNotification
    *     targetEntity=User::class,
    *     inversedBy="like_notification_mentions"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="like_from",
    *     referencedColumnName="id",
@@ -44,6 +45,7 @@ class LikeNotification extends CatroNotification
    *     targetEntity=Program::class,
    *     inversedBy="like_notification_mentions"
    * )
+   *
    * @ORM\JoinColumn(
    *     name="program_id",
    *     referencedColumnName="id",

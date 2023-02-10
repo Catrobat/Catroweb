@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
 /**
  * @ORM\Entity(repositoryClass="App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository")
+ *
  * @ORM\Table(name="project_machine_translation")
  *
  * @HasLifecycleCallbacks
@@ -31,6 +32,7 @@ class ProjectMachineTranslation extends MachineTranslation
 
   public function __construct(/**
    * @ORM\ManyToOne(targetEntity=Program::class)
+   *
    * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
    */
     protected Program $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)

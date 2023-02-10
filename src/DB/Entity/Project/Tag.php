@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="tags")
+ *
  * @ORM\Entity(repositoryClass=TagRepository::class)
  */
 class Tag
@@ -27,7 +28,9 @@ class Tag
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;

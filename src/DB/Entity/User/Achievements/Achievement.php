@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=AchievementRepository::class)
+ *
  * @ORM\Table(name="achievement")
  */
 class Achievement
@@ -27,7 +28,9 @@ class Achievement
 
   /**
    * @ORM\Column(name="id", type="integer")
+   *
    * @ORM\Id
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
+ *
  * @ORM\Table(name="program_downloads")
  */
 class ProgramDownloads
@@ -17,19 +18,23 @@ class ProgramDownloads
 
   /**
    * @ORM\Column(name="id", type="integer")
+   *
    * @ORM\Id
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="program_downloads")
+   *
    * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   protected Program $program;
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class)
+   *
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
    */
   protected ?User $user = null;

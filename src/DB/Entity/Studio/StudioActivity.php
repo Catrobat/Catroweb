@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=StudioActivityRepository::class)
+ *
  * @ORM\Table(name="studio_activity")
  */
 class StudioActivity
@@ -24,13 +25,16 @@ class StudioActivity
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(name="id", type="integer")
+   *
    * @ORM\GeneratedValue(strategy="AUTO")
    */
   protected ?int $id = null;
 
   /**
    * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
+   *
    * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=false, onDelete="CASCADE")
    */
   protected Studio $studio;
@@ -42,6 +46,7 @@ class StudioActivity
 
   /**
    * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
+   *
    * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
    */
   protected User $user;

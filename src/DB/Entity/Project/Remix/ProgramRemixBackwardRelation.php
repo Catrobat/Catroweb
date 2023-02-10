@@ -10,7 +10,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\HasLifecycleCallbacks
+ *
  * @ORM\Table(name="program_remix_backward_relation")
+ *
  * @ORM\Entity(repositoryClass=ProgramRemixBackwardRepository::class)
  */
 class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface, \Stringable
@@ -25,18 +27,21 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid")
    */
   protected string $parent_id;
 
   /**
    * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="catrobat_remix_backward_child_relations", fetch="LAZY")
+   *
    * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
    */
   protected Program $parent;
 
   /**
    * @ORM\Id
+   *
    * @ORM\Column(type="guid")
    */
   protected string $child_id;
@@ -44,6 +49,7 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   /**
    * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="catrobat_remix_backward_parent_relations",
    * fetch="LAZY")
+   *
    * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
    */
   protected Program $child;
