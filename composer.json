@@ -70,7 +70,7 @@
         "deployer/deployer": "^v7.1",
         "dg/bypass-finals": "^1.4",
         "dmore/behat-chrome-extension": "^1.4",
-        "dmore/chrome-mink-driver": "2.8.*",
+        "dmore/chrome-mink-driver": "2.9.*",
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "dvdoug/behat-code-coverage": "^5.3",
         "friends-of-behat/symfony-extension": "^2.4",
