@@ -62,6 +62,9 @@ class ProgramController extends AbstractController
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
   public function projectAction(Request $request, string $id): Response
   {
+    $steal_route = $this->generateUrl(
+      'project_steal',
+      ['id' => $id]);
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
@@ -102,12 +105,51 @@ class ProgramController extends AbstractController
     return $this->render('Program/program.html.twig', [
       'program' => $project,
       'program_details' => $program_details,
+      'stealing' => $steal_route,
       'my_program' => $my_program,
       'logged_in' => $logged_in,
       'max_name_size' => ProjectsRequestValidator::MAX_NAME_LENGTH,
       'max_description_size' => ProjectsRequestValidator::MAX_DESCRIPTION_LENGTH,
       'extracted_path' => $this->parameter_bag->get('catrobat.file.extract.path'),
     ]);
+  }
+
+  /**
+   * @throws \Exception
+   */
+  #[Route(path: '/project/{id}/own', name: 'project_steal', methods: ['GET'])]
+  public function projectTakeOwnership(Request $request, string $id): Response 
+  {
+    $project = $this->program_manager->find($id);
+    if (null === $project) {
+      if ($request->isXmlHttpRequest()) {
+        return new JsonResponse([
+          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+          'message' => 'Project with given ID does not exist!',
+        ], Response::HTTP_NOT_FOUND);
+      }
+      throw $this->createNotFoundException('Project with given ID does not exist!');
+    }
+
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (!$user) {
+      if ($request->isXmlHttpRequest()) {
+        return new JsonResponse(['statusCode' => 401], Response::HTTP_UNAUTHORIZED);
+      }
+      $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
+        'project_like',
+        ['id' => $id, 'type' => $type, 'action' => $action],
+        UrlGeneratorInterface::ABSOLUTE_URL
+      ));
+
+      return $this->redirectToRoute('login');
+    }
+
+    //dd($project->setUser($user));
+    
+    $this->program_manager->changeOwner($user, $project);
+    return new JsonResponse(['statusCode' => Response::HTTP_OK]);
   }
 
   /**
@@ -143,7 +185,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (!$user) {
       if ($request->isXmlHttpRequest()) {
-        return new JsonResponse(['statusCode' => 601], Response::HTTP_UNAUTHORIZED);
+        return new JsonResponse(['statusCode' => 401], Response::HTTP_UNAUTHORIZED);
       }
 
       $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
@@ -547,6 +589,8 @@ class ProgramController extends AbstractController
 
     return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
+
+
 
   private function projectCustomTranslationGetAction(Request $request, string $id): Response
   {

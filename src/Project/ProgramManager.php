@@ -313,6 +313,11 @@ class ProgramManager
     }
   }
 
+  public function changeOwner(User $user, Program $project): void
+  {
+    $this->program_repository->setOwnership($user->getId(), $project->getId());
+  }
+
   /**
    * @throws NoResultException
    */

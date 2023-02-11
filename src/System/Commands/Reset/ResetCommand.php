@@ -152,10 +152,10 @@ class ResetCommand extends Command
   private function clearCache(OutputInterface $output): void
   {
     CommandHelper::executeShellCommand(
-      ['bin/console', 'cache:clear', '--env=dev'], [], 'Clearing dev cache', $output
+      ['bin/console', 'cache:clear', '--env=dev'], ['timeout' => 240], 'Clearing dev cache', $output
     );
     CommandHelper::executeShellCommand(
-      ['bin/console', 'cache:clear', '--env=test'], ['timeout' => 120], 'Clearing test cache', $output
+      ['bin/console', 'cache:clear', '--env=test'], ['timeout' => 240], 'Clearing test cache', $output
     );
   }
 

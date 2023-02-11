@@ -19,6 +19,17 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     })
   }
 
+  // -------------------------- Steal Button
+  $('.js-btn-project-steal').on('click', (e) => {
+    steal(
+      $(e.currentTarget).data('steal-url'),
+      $(e.currentTarget).data('button-id'),
+      $(e.currentTarget).data('spinner-id'),
+      $(e.currentTarget).data('icon-id'),
+      $(e.currentTarget).data('is-webview')
+    )
+  })
+
   // -------------------------- Redirect Buttons
   $('.js-redirect-button').on('click', (e) => {
     redirect(
@@ -59,6 +70,36 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     )
   })
 
+  function steal (url, buttonId, spinnerId, iconId, isWebView = false) {
+    const button = document.getElementById(buttonId)
+    const loadingSpinner = document.getElementById(spinnerId)
+    const icon = document.getElementById(iconId)
+
+    button.disabled = true
+    icon.classList.add('d-none')
+    loadingSpinner.classList.remove('d-none')
+    loadingSpinner.classList.add('d-inline-block')
+    showSnackbar('#share-snackbar', 'Stealing Project...')
+    new ApiFetch(url).generateAuthenticatedFetch()
+      .then(function (response) {
+        if (response.ok) {
+          showSnackbar('#share-snackbar', 'The project has been stolen')
+          return response.blob()
+        }
+      })
+      .catch(() => {
+        // UX: Tell the use that something went wrong
+        showSnackbar('#share-snackbar', 'Error while stealing the project')
+      })
+      .finally(() => {
+        // UX: Reset the button to further indicate the successful download
+        resetDownloadButtonIcon(icon, loadingSpinner)
+        // Performance: Keep the button disabled to prevent spamming the download button
+        setTimeout(() => {
+          button.disabled = false
+        }, 15000)
+      })
+  }
   function download (downloadUrl, filename, buttonId, spinnerId, iconId, isWebView = false,
     supported = true, isNotSupportedTitle = '', isNotSupportedText = '') {
     const button = document.getElementById(buttonId)

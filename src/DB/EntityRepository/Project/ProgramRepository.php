@@ -251,6 +251,21 @@ class ProgramRepository extends ServiceEntityRepository
     ;
   }
 
+  public function setOwnership(string $user_id, string $program_id): void
+  {
+    $query_builder = $this->createQueryBuilder('p');
+    $query_builder
+      ->update()
+      ->set('p.private', ':private')
+      ->setParameter(':private', 1)
+      ->set('p.user', ':user_id')
+      ->setParameter(':user_id', $user_id)
+      ->where('p.id = :program_id')
+      ->setParameter(':program_id', $program_id)
+      ->getQuery()
+      ->execute();
+  }
+
   /**
    * @return mixed
    *
