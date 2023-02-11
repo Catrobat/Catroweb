@@ -136,14 +136,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       $data['screenshot_small'] = $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotSmall($project->getId());
     }
     if (in_array('project_url', $attributes_list, true)) {
-      $data['project_url'] = ltrim($this->url_generator->generate(
-        'program',
-        [
-          'theme' => $this->parameter_bag->get('umbrellaTheme'),
-          'id' => $project->getId(),
-        ],
-        UrlGeneratorInterface::ABSOLUTE_URL), '/'
-      );
+      $data['project_url'] = ltrim($this->createProjectLocation($program->getProgram()), '/');
     }
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = ltrim($this->url_generator->generate(
@@ -199,14 +192,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
       $url = $featured_project->getUrl();
       $project_url = null;
       if (empty($url)) {
-        $url = $project_url = ltrim($this->url_generator->generate(
-          'program',
-          [
-            'theme' => $this->parameter_bag->get('umbrellaTheme'),
-            'id' => $featured_project->getProgram()->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL), '/'
-        );
+        $url = $project_url = ltrim($this->createProjectLocation($featured_project->getProgram()), '/');
       }
 
       if (in_array('project_url', $attributes_list, true)) {

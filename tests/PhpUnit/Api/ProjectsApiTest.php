@@ -669,7 +669,7 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $this->assertSame(Response::HTTP_CREATED, $response_code);
     $this->assertArrayHasKey('Location', $response_headers);
-    $this->assertNull($response);
+    $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
   /**

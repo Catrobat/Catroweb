@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "347a2c002d780b9021ab88fc0b7d38f0",
+    "content-hash": "e956737f11156bc97242ffecbfc30375",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -121,16 +121,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.1.17",
+            "version": "v1.1.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "60fe0d108d03a7cf107f225834c11651bd32d7b2"
+                "reference": "f636d55c5e7742e5af098dafc8b3337f0f527e68"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/60fe0d108d03a7cf107f225834c11651bd32d7b2",
-                "reference": "60fe0d108d03a7cf107f225834c11651bd32d7b2",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/f636d55c5e7742e5af098dafc8b3337f0f527e68",
+                "reference": "f636d55c5e7742e5af098dafc8b3337f0f527e68",
                 "shasum": ""
             },
             "require": {
@@ -173,10 +173,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.1.17",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.1.19",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2022-10-21T15:14:41+00:00"
+            "time": "2023-02-11T22:30:43+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -2467,16 +2467,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.49.0",
+            "version": "v1.49.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "5db0d164b61440312e99e4af9b43a59823098a8d"
+                "reference": "aaa1a8d22ff38d0f0ae882ef14377b4c14a65a8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/5db0d164b61440312e99e4af9b43a59823098a8d",
-                "reference": "5db0d164b61440312e99e4af9b43a59823098a8d",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/aaa1a8d22ff38d0f0ae882ef14377b4c14a65a8f",
+                "reference": "aaa1a8d22ff38d0f0ae882ef14377b4c14a65a8f",
                 "shasum": ""
             },
             "require": {
@@ -2527,22 +2527,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.0"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.1"
             },
-            "time": "2023-01-27T18:26:22+00:00"
+            "time": "2023-02-10T16:10:50+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.12.11",
+            "version": "v1.12.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "1629f7db6e1b24672ea044d461dec1b2d1a7ba55"
+                "reference": "f8924b750be9637671ef42b4f26536742ca6eb0a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/1629f7db6e1b24672ea044d461dec1b2d1a7ba55",
-                "reference": "1629f7db6e1b24672ea044d461dec1b2d1a7ba55",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/f8924b750be9637671ef42b4f26536742ca6eb0a",
+                "reference": "f8924b750be9637671ef42b4f26536742ca6eb0a",
                 "shasum": ""
             },
             "require": {
@@ -2582,9 +2582,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.12.11"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.12.12"
             },
-            "time": "2023-01-27T18:26:22+00:00"
+            "time": "2023-02-10T16:10:50+00:00"
         },
         {
             "name": "google/common-protos",
@@ -2741,16 +2741,16 @@
         },
         {
             "name": "google/longrunning",
-            "version": "v0.2.3",
+            "version": "v0.2.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "df52ba57bc6c0fceeeb344c62924eeaa7829b3ac"
+                "reference": "651cbb7065bd77ae7395196695da391f641f739c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/df52ba57bc6c0fceeeb344c62924eeaa7829b3ac",
-                "reference": "df52ba57bc6c0fceeeb344c62924eeaa7829b3ac",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/651cbb7065bd77ae7395196695da391f641f739c",
+                "reference": "651cbb7065bd77ae7395196695da391f641f739c",
                 "shasum": ""
             },
             "require-dev": {
@@ -2779,9 +2779,9 @@
             ],
             "description": "Google LongRunning Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-longrunning/tree/v0.2.3"
+                "source": "https://github.com/googleapis/php-longrunning/tree/v0.2.4"
             },
-            "time": "2023-01-27T18:26:22+00:00"
+            "time": "2023-02-10T16:10:50+00:00"
         },
         {
             "name": "google/protobuf",

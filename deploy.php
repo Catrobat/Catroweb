@@ -2,14 +2,23 @@
 
 namespace Deployer;
 
-use Symfony\Component\Dotenv\Dotenv;
-
 require 'recipe/symfony.php';
 require 'contrib/slack.php';
 
-// Load .env file
-(new Dotenv())->usePutenv(true)->load('.env');
-(new Dotenv())->usePutenv(true)->load('.env.local');
+foreach (['.env', '.env.local'] as $filename) {
+  loadEnvVariables($filename);
+}
+
+function loadEnvVariables(string $filename): void
+{
+  $file = file_get_contents($filename);
+  $lines = explode("\n", $file);
+  foreach ($lines as $line) {
+    if (!str_starts_with(trim($line), '#') && str_contains($line, '=')) {
+      putenv($line);
+    }
+  }
+}
 
 set('default_timeout', 6000);
 
@@ -87,13 +96,16 @@ task('install:assets', function () {
 task('restart:nginx', function () {
   run('/usr/sbin/service nginx restart');
 });
+
 task('restart:php-fpm', function () {
   run('/usr/sbin/service php8.2-fpm restart');
 });
+
 task('install:npm', function () {
   cd('{{release_path}}');
   run('npm install');
 });
+
 task('deploy:encore', function () {
   cd('{{release_path}}');
   run('npm run prod');
