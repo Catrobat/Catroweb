@@ -78,7 +78,7 @@ host(getenv('DEPLOY_SHARE'))
   ->set('symfony_env', 'prod')
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
   ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
-  ->set('deploy_path', '/var/www/share/')
+  ->set('deploy_path', '/var/www/share')
   ->set('remote_user', 'root')
 ;
 
