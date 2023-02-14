@@ -45,6 +45,13 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     )
   })
 
+  $($('.js-btn-project-download-disabled').on('click', (e) => {
+    downloadDisabled(
+      $(e.currentTarget).data('redirect-url')
+      // $(e.currentTarget).data('alert-text')
+    )
+  }))
+
   $('.js-btn-project-apk-download').on('click', (e) => {
     download(
       $(e.currentTarget).data('path-url'),
@@ -118,6 +125,25 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
           button.disabled = false
         }, 15000)
       })
+  }
+
+  function downloadDisabled (redirectUrl) {
+    /* Swal.fire({
+      icon: 'error',
+      title: 'Login',
+      text: text,
+      customClass: {
+        confirmButton: 'btn btn-primary'
+      },
+      buttonsStyling: false,
+      allowOutsideClick: false,
+      timer: 5000,
+    }).then((result) => {
+      if (result.value) {
+        window.location.replace(redirectUrl)
+      }
+    }); */
+    window.location.replace(redirectUrl)
   }
 
   function resetDownloadButtonIcon (icon, spinner) {

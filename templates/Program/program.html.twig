@@ -83,7 +83,11 @@
     </div>
 
     <div class="d-none d-lg-block col-lg-4 mt-4 ">
-      {% include 'Program/program_download_button.html.twig' %}
+      {% if logged_in %}
+        {% include 'Program/program_download_button.html.twig' %}
+      {% else %}
+        {% include 'Program/program_download_disabled_button.html.twig' %}
+      {% endif %}
       {% if not isIOS() %}
         <div class="mt-3">
           {% include 'Program/program_apk_generation_buttons.html.twig' %}
@@ -110,7 +114,11 @@
       </div>
     </div>
     <div class="col-7 col-sm-8 mt-3" style="padding-left: 0;">
-      {% include 'Program/program_download_button.html.twig' with {'suffix': '-small'} %}
+      {% if logged_in %}
+        {% include 'Program/program_download_button.html.twig' with {'suffix': '-small'} %}
+      {% else %}
+        {% include 'Program/program_download_disabled_button.html.twig' with {'suffix': '-small'} %}
+      {% endif %}
     </div>
   </div>
 

@@ -89,6 +89,7 @@ class ProgramController extends AbstractController
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $program_comments = $this->findCommentsById($project->getId());
+    $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
     foreach ($program_comments as $program_comment) {
       $program_comment->setNumberOfReplies($this->countByParentId($program_comment->getId()));
@@ -101,6 +102,7 @@ class ProgramController extends AbstractController
 
     return $this->render('Program/program.html.twig', [
       'program' => $project,
+      'login_redirect' => $login_redirect,
       'program_details' => $program_details,
       'my_program' => $my_program,
       'logged_in' => $logged_in,
@@ -143,7 +145,7 @@ class ProgramController extends AbstractController
     $user = $this->getUser();
     if (!$user) {
       if ($request->isXmlHttpRequest()) {
-        return new JsonResponse(['statusCode' => 601], Response::HTTP_UNAUTHORIZED);
+        return new JsonResponse(['statusCode' => 401], Response::HTTP_UNAUTHORIZED);
       }
 
       $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(

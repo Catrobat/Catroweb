@@ -5,13 +5,15 @@ Feature: As a visitor I want to be able to download projects
     Given there are users:
       | id | name     |
       | 1  | Catrobat |
+      | 2  | User     |
     And there are projects:
       | id | name      | downloads | owned by | apk_ready |
       | 1  | project 1 | 5         | Catrobat | true      |
       | 2  | project 2 | 5         | Catrobat | true      |
 
   Scenario: I want to download a project via the button
-    When I am on "/app/project/1"
+    Given I log in as "Catrobat"
+    And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#projectDownloadButton-small" should be visible
     And I click "#projectDownloadButton-small"
