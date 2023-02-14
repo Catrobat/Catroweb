@@ -2,7 +2,7 @@
     "name": "catrobat/catroweb",
     "type": "project",
     "license": "MIT",
-    "description": "Catrobats' Share Community Platform",
+    "description": "Catrobat's Share Community Platform",
     "require": {
         "php": ">=8.2",
         "ext-SimpleXML": "*",
