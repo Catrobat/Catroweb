@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e956737f11156bc97242ffecbfc30375",
+    "content-hash": "3b97990daee4a72f7bde3f33ff23ac2d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -14432,16 +14432,16 @@
         },
         {
             "name": "dmore/chrome-mink-driver",
-            "version": "2.8.1",
+            "version": "2.9.1",
             "source": {
                 "type": "git",
-                "url": "https://gitlab.com/behat-chrome/chrome-mink-driver.git",
-                "reference": "177b206fde46e645bc07639156ff0623b12c4224"
+                "url": "git@gitlab.com:behat-chrome/chrome-mink-driver.git",
+                "reference": "e338a4287759bba4c12a246fa74a6c765a514a5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fchrome-mink-driver/repository/archive.zip?sha=177b206fde46e645bc07639156ff0623b12c4224",
-                "reference": "177b206fde46e645bc07639156ff0623b12c4224",
+                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fchrome-mink-driver/repository/archive.zip?sha=e338a4287759bba4c12a246fa74a6c765a514a5b",
+                "reference": "e338a4287759bba4c12a246fa74a6c765a514a5b",
                 "shasum": ""
             },
             "require": {
@@ -14475,10 +14475,9 @@
             "description": "Mink driver for controlling chrome without selenium",
             "homepage": "https://gitlab.com/behat-chrome/chrome-mink-driver",
             "support": {
-                "issues": "https://gitlab.com/behat-chrome/chrome-mink-driver/-/issues",
-                "source": "https://gitlab.com/behat-chrome/chrome-mink-driver/-/tree/2.8.1"
+                "issues": "https://gitlab.com/behat-chrome/chrome-mink-driver/-/issues"
             },
-            "time": "2022-04-10T07:02:24+00:00"
+            "time": "2023-01-10T01:37:49+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
