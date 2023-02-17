@@ -4,6 +4,7 @@ namespace App\Security\Authentication\WebView;
 
 use App\DB\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -61,6 +62,8 @@ class WebviewAuthenticator extends AbstractAuthenticator
 
   /**
    * {@inheritdoc}
+   *
+   * @throws NonUniqueResultException
    */
   public function authenticate(Request $request): Passport
   {
@@ -70,16 +73,19 @@ class WebviewAuthenticator extends AbstractAuthenticator
       throw new AuthenticationException('Empty token!');
     }
 
-    /** @var User|null $user */
-    $user = $this->em->getRepository(User::class)
-      ->findOneBy(['upload_token' => $token])
+    $qb = $this->em->createQueryBuilder();
+    $qb->select('u.username')
+      ->from(User::class, 'u')
+      ->where('u.upload_token = :token')
+      ->setParameter('token', $token)
     ;
+    $user = $qb->getQuery()->getOneOrNullResult();
 
-    if (null === $user) {
+    if (!$user) {
       throw new AuthenticationException('User not found!');
     }
 
-    return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()));
+    return new SelfValidatingPassport(new UserBadge($user['username']));
   }
 
   /**
