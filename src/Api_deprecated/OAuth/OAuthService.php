@@ -48,13 +48,11 @@ class OAuthService
    */
   public function checkUserNameAvailable(Request $request): JsonResponse
   {
-    $username = $request->request->get('username');
+    $username = (string) $request->request->get('username');
     $retArray = [];
 
     /** @var User|null $user */
-    $user = $this->user_manager->findOneBy([
-      'username' => $username,
-    ]);
+    $user = $this->user_manager->findUserByUsername($username);
 
     $retArray['username_available'] = (bool) $user;
     $retArray['statusCode'] = Response::HTTP_OK;
