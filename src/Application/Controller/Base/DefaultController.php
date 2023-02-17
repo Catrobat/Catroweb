@@ -2,7 +2,6 @@
 
 namespace App\Application\Controller\Base;
 
-use App\DB\Entity\User\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,24 +27,6 @@ class DefaultController extends AbstractController
   public function licenseToPlayAction(): Response
   {
     return $this->render('PrivacyAndTerms/licenseToPlay.html.twig');
-  }
-
-  #[Route(path: '/checkFirstOauthLogin', name: 'oauth_first_login', methods: ['GET'])]
-  public function checkOauthFirstLogin(): Response
-  {
-    /** @var User|null $user */
-    $user = $this->getUser();
-    $user_first_login = false;
-    $user_id = null;
-    if (null !== $user && true == $user->isOauthUser() && !$user->isOauthPasswordCreated()) {
-      $user_first_login = true;
-      $user_id = $user->getId();
-    }
-
-    return new JsonResponse([
-      'first_login' => $user_first_login,
-      'user_id' => $user_id,
-    ]);
   }
 
   #[Route(path: '/languages', name: 'languages', methods: ['GET'])]
