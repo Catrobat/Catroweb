@@ -86,7 +86,7 @@
   <div class="js-trans-ok" data-trans-ok="'{{ "ok"|trans({}, "catroweb") }}"></div>
 
   <div class="js-oauth-greeting"
-       data-path-oauth-first-login="{{ path('oauth_first_login') }}"
+       data-is-first-oauth-login="{{ is_first_oauth_login }}"
        data-trans-title="{{ 'oauthPopUpTitle' | trans({}, 'catroweb') }}"
        data-trans-info="{{ 'oauthInfo' | trans({}, 'catroweb') }}"
        data-trans-ok="{{ 'ok' | trans({}, 'catroweb') }}"
