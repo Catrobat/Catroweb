@@ -22,7 +22,20 @@ use Sonata\UserBundle\Entity\BaseUser;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  *
- * @ORM\Table(name="fos_user")
+ * @ORM\Table(
+ *     name="fos_user",
+ *     indexes={
+ *
+ *         @ORM\Index(name="upload_token_idx", columns={"upload_token"}),
+ *         @ORM\Index(name="confirmation_token_isx", columns={"confirmation_token"}),
+ *         @ORM\Index(name="username_canonical_idx", columns={"username_canonical"}),
+ *         @ORM\Index(name="email_canonical_idx", columns={"email_canonical"}),
+ *         @ORM\Index(name="scratch_user_id_idx", columns={"scratch_user_id"}),
+ *         @ORM\Index(name="google_id_idx", columns={"google_id"}),
+ *         @ORM\Index(name="facebook_id_idx", columns={"google_id"}),
+ *         @ORM\Index(name="apple_id_idx", columns={"google_id"})
+ *     }
+ * )
  */
 class User extends BaseUser
 {

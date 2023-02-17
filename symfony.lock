@@ -920,6 +920,15 @@
     "symfony/security-http": {
         "version": "v5.4.8"
     },
+    "symfony/sendinblue-mailer": {
+        "version": "6.2",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "5.2",
+            "ref": "ae1cf494ce06b9a4578a8445c610402a1676ee8d"
+        }
+    },
     "symfony/service-contracts": {
         "version": "v2.0.1"
     },

@@ -26,7 +26,17 @@ use Doctrine\ORM\Mapping as ORM;
  *     name="program",
  *     indexes={
  *
- *         @ORM\Index(name="rand_idx", columns={"rand"})
+ *         @ORM\Index(name="rand_idx", columns={"rand"}),
+ *         @ORM\Index(name="uploaded_at_idx", columns={"uploaded_at"}),
+ *         @ORM\Index(name="views_idx", columns={"views"}),
+ *         @ORM\Index(name="downloads_idx", columns={"downloads"}),
+ *         @ORM\Index(name="name_idx", columns={"name"}),
+ *         @ORM\Index(name="user_idx", columns={"user_id"}),
+ *         @ORM\Index(name="language_version_idx", columns={"language_version"}),
+ *         @ORM\Index(name="visible_idx", columns={"visible"}),
+ *         @ORM\Index(name="private_idx", columns={"private"}),
+ *         @ORM\Index(name="debug_build_idx", columns={"debug_build"}),
+ *         @ORM\Index(name="flavor_idx", columns={"flavor"}),
  *     }
  * )
  *

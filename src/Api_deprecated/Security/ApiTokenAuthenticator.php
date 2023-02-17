@@ -4,6 +4,7 @@ namespace App\Api_deprecated\Security;
 
 use App\DB\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,6 +51,8 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
 
   /**
    * {@inheritdoc}
+   *
+   * @throws NonUniqueResultException
    */
   public function authenticate(Request $request): Passport
   {
@@ -59,16 +62,19 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
       throw new AuthenticationException('Empty token!');
     }
 
-    /** @var User|null $user */
-    $user = $this->em->getRepository(User::class)
-      ->findOneBy(['upload_token' => $token])
+    $qb = $this->em->createQueryBuilder();
+    $qb->select('u.username')
+      ->from(User::class, 'u')
+      ->where('u.upload_token = :token')
+      ->setParameter('token', $token)
     ;
+    $user = $qb->getQuery()->getOneOrNullResult();
 
-    if (null === $user) {
+    if (!$user) {
       throw new AuthenticationException('User not found!');
     }
 
-    return new SelfValidatingPassport(new UserBadge($user->getUserIdentifier()));
+    return new SelfValidatingPassport(new UserBadge($user['username']));
   }
 
   /**
