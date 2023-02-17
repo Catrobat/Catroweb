@@ -89,7 +89,7 @@
         "symfony/phpunit-bridge": "6.2.*",
         "symfony/stopwatch": "6.2.*",
         "symfony/web-profiler-bundle": "6.2.*",
-        "vimeo/psalm": "^4.30.0",
+        "vimeo/psalm": "^5.6.0",
         "wapmorgan/php-deprecation-detector": "^2.0",
         "textalk/websocket": "1.5.8"
     },
