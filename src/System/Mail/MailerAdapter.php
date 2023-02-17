@@ -21,8 +21,8 @@ class MailerAdapter
   public function send(string $to, string $subject, string $template, array $context = []): void
   {
     $email = $this->buildEmail($to, $subject, $template, $context);
-    $signedEmail = $this->signEmail($email);
-    $this->sendEmail($signedEmail, $to);
+    // $email = $this->signEmail($email); // Signing is currently disabled due to sendinblue
+    $this->sendEmail($email, $to);
   }
 
   protected function buildEmail(string $to, string $subject, string $template, array $context): Message

@@ -25,7 +25,7 @@ services:
       # Which means changes to those files are synced between the host and container. No rebuild needed!
       #
       # Make sure the content of the following dirs/files is not changed in the Dockerfile, else the changes will just
-      # be discarded. Otherwise feel free to add every file that is modified regularly.
+      # be discarded. Otherwise, feel free to add every file that is modified regularly.
       #
       - ./../assets:/var/www/catroweb/assets:cached
       #
