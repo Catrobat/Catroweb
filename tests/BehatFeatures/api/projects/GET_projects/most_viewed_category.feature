@@ -11,7 +11,7 @@ Feature: Get most viewed projects
     And there are programs:
       | id | name      | owned by | views | upload time      | FileSize | version | language version | flavor     | upload_language |
       | 1  | project 1 | Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.999            | pocketcode | en              |
-      | 2  | project 2 | User1    | 50    | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.982            | luna       | fr              |
+      | 2  | project 2 | User1    | 60    | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.982            | luna       | fr              |
       | 3  | project 3 | Catrobat | 5     | 03.08.2014 12:00 | 1048576  | 0.8.5   | 0.123            | pocketcode | de              |
       | 4  | project 4 | User2    | 50    | 04.08.2014 12:00 | 1048576  | 0.8.5   | 0.984            | luna       | en              |
       | 5  | project 5 | User1    | 40    | 05.08.2014 12:00 | 1048576  | 0.8.5   | 0.985            | pocketcode | de              |

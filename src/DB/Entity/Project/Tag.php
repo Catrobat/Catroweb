@@ -8,7 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="tags")
+ * @ORM\Table(
+ *     name="tags",
+ *     indexes={
+ *
+ *         @ORM\Index(name="internal_title_idx", columns={"internal_title"}),
+ *     }
+ * )
  *
  * @ORM\Entity(repositoryClass=TagRepository::class)
  */

@@ -3,6 +3,7 @@
 namespace App\Application\Controller\Base;
 
 use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\Storage\ImageRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -20,9 +21,12 @@ class IndexController extends AbstractController
   public function indexAction(Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');
+    /** @var User|null $user */
+    $user = $this->getUser();
 
     return $this->render('Index/index.html.twig', [
       'featured' => $this->getFeaturedSliderData($flavor),
+      'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
     ]);
   }
 

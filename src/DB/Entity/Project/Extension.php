@@ -8,7 +8,13 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="extension")
+ * @ORM\Table(
+ *     name="extension",
+ *     indexes={
+ *
+ *         @ORM\Index(name="internal_title_idx", columns={"internal_title"}),
+ *     }
+ * )
  *
  * @ORM\Entity(repositoryClass=ExtensionRepository::class)
  */
