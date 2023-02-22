@@ -56,7 +56,7 @@
     "webpack-notifier": "^1.15.0"
   },
   "dependencies": {
-    "@babel/core": "^7.20.12",
+    "@babel/core": "^7.21.0",
     "@bugsnag/js": "^7.18.0",
     "@material/checkbox": "^14.0",
     "@material/chips": "^14.0",
