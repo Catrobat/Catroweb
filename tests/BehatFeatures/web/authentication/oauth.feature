@@ -12,6 +12,7 @@ Feature:
     Given I log in as "Catrobat"
     And I wait for the page to be loaded
     Then I should see "External account sign in information"
+    And I click ".swal2-confirm"
     And I logout
     And  I log in as "Catrobat"
     Then I should not see "External account sign in information"
