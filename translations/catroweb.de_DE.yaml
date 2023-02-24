@@ -27,6 +27,7 @@ reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Herunterladen
+downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.

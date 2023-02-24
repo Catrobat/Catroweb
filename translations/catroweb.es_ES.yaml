@@ -27,6 +27,7 @@ reportIt: Sí, ¡avísalo!
 areYouSure: '¿Estás seguro?'
 noWayOfReturn: '¡No hay forma de restaurar sus acciones!'
 download: Descargar
+downloadDisabledAlert: You must be logged in to download this project
 name: Nombre
 description: Descripción
 noDescription: No hay descripción disponible

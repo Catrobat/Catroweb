@@ -27,6 +27,7 @@ reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
 download: Pobieranie
+downloadDisabledAlert: You must be logged in to download this project
 name: Nazwa
 description: Opis
 noDescription: Brak opisu.

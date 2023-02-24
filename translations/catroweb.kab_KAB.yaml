@@ -27,6 +27,7 @@ reportIt: Ih, azen-it!
 areYouSure: Tetḥeqqeḍ ?
 noWayOfReturn: Ulac ţawil iwakken ad d-tessuɣaleḍ tigawin-ik!
 download: Download
+downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Description
 noDescription: Ulac aglam.

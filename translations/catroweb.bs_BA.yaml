@@ -27,6 +27,7 @@ reportIt: Da, prijavi!
 areYouSure: Jeste li sigurni?
 noWayOfReturn: There is no way to restore your actions!
 download: Preuzmi
+downloadDisabledAlert: You must be logged in to download this project
 name: Naziv
 description: Opis
 noDescription: Opis nije dostupan.
