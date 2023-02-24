@@ -27,6 +27,7 @@ reportIt: Иә, хабарлаңыз!
 areYouSure: Сіз сенімдісіз бе?
 noWayOfReturn: Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
 download: Жүктеп алу
+downloadDisabledAlert: Жобаларды жүктеу үшін сіз аккаунтыңызға кіріуіңіз керексіз
 name: Аты
 description: Сипаттама
 noDescription: Сипаттама жоқ.
@@ -208,8 +209,8 @@ programs:
   editTranslation: '%language% аударманы өзгеру'
   translations: Аудармалар
   createTranslation: Аудамарын құру
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  deletedComment: '**Кетірілген**'
+  replyLabel: жауап беру
   repliesLabel: жауаптар
 remixGraph:
   title: Ремикстер
@@ -331,16 +332,16 @@ licenseToPlay:
   text3: "Бәліштерді жеуге болады, сондай-ақ басқа адамдардың рецепттерін көшіріп, өзіңіз дайындауға болады, мүмкін әртүрлі ингредиенттермен. Бұл еркіндік екі қарапайым нәрсе талап етеді:"
   text4: "Catrobat қауымдастығын құру кезінде біз бұл әдісті қолдануды шештік, өйткені ол қауымдастықтағы оқу мен шығармашылықты қолдайды деп есептейміз. Рецепттер мен ингредиенттерді (скрипттер мен өнер туындылары) бөлісу арқылы адамдар бір-бірінің идеяларына сүйене алады және барлығына пайда көреді."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: '%link-termsOfUse% сайтында Catrobat желілік қауымдастығының пайдалану шарттары туралы көбірек біліңіз.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
+    item1: бәлішіңіздің рецептімен бірге бөлісіңіз
+    item2: сізді шабыттандырған адамды белгілеңіз
   version: Версия 1.1, 2 Сәуір 2013
 termsOfUse:
   title: Қолдану ережелері
   headline: Catrobat қауымдастығына қош келдіңіз!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
+  text1: 'Catrobat қауымдастығында сіз жобаларыңызбен идеяларыңызды адамдарға бөлісесіз'
+  text2: "Бұл қауымдастықтың әрбір мүшесіне қолдау көрсететін орынға айналдыру үшін бізге сіздің көмегіңіз қажет.  Сіздің бізге қалай көмектесу керектігі:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: 'Сізге сыйлығымыз:'
   text5: 'Біздің пайдалану және қызмет көрсету шарттары:'

@@ -27,6 +27,7 @@ reportIt: Ya, laporkan!
 areYouSure: Apakah kamu yakin?
 noWayOfReturn: Tidak ada cara untuk memulihkan tindakan Anda!
 download: Unduh
+downloadDisabledAlert: You must be logged in to download this project
 name: Nama
 description: Keterangan
 noDescription: Deskripsi tidak tersedia.

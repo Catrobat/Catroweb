@@ -571,8 +571,11 @@ class ProgramManager
 
   public function increaseViews(Program $program): void
   {
-    $program->setViews($program->getViews() + 1);
-    $this->save($program);
+    $this->entity_manager
+      ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.views = p.views + 1 WHERE p.id = :pid')
+      ->setParameter('pid', $program->getId())
+      ->execute()
+    ;
   }
 
   public function increaseDownloads(Program $program, ?User $user): void
@@ -594,9 +597,17 @@ class ProgramManager
       // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
       if (is_null($download)) {
         if (ProgramDownloads::TYPE_PROJECT === $download_type) {
-          $this->entity_manager->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.downloads = p.downloads + 1')->execute();
+          $this->entity_manager
+            ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.downloads = p.downloads + 1 WHERE p.id = :pid')
+            ->setParameter('pid', $program->getId())
+            ->execute()
+          ;
         } elseif (ProgramDownloads::TYPE_APK === $download_type) {
-          $this->entity_manager->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_downloads = p.apk_downloads + 1')->execute();
+          $this->entity_manager
+            ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_downloads = p.apk_downloads + 1 WHERE p.id = :pid')
+            ->setParameter('pid', $program->getId())
+            ->execute()
+          ;
         }
         $this->addDownloadEntry($program, $user, $download_type);
       }

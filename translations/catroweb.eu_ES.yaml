@@ -27,6 +27,7 @@ reportIt: Bai, salatu!
 areYouSure: Ziur zaude?
 noWayOfReturn: Zure ekintzak ezingo dira inolaz desegin!
 download: Download
+downloadDisabledAlert: You must be logged in to download this project
 name: Izena
 description: Description
 noDescription: Ez dago deskribapenik eskuragarri.

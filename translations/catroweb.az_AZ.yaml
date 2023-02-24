@@ -27,6 +27,7 @@ reportIt: Bəli, şikayət et!
 areYouSure: Əminsiniz?
 noWayOfReturn: Əməliyyatları geri qaytarmağın heç bir yolu yoxdur!
 download: Download
+downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Description
 noDescription: Açıqlama yoxdur.

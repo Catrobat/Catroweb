@@ -27,6 +27,7 @@ reportIt: Da, prijavi!
 areYouSure: Jeste li sigurni?
 noWayOfReturn: Ne postoji nacin da ponistite vase radnje!
 download: Preuzmi
+downloadDisabledAlert: You must be logged in to download this project
 name: Ime
 description: Opis
 noDescription: Opis nije dostupan.
