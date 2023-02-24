@@ -27,6 +27,7 @@ reportIt: Sì, segnalalo!
 areYouSure: Sei sicuro?
 noWayOfReturn: Non è possibile ripristinare queste azioni!
 download: Scarica
+downloadDisabledAlert: Devi fare il login per scaricare questo progetto
 name: Nome
 description: Descrizione
 noDescription: Nessuna descrizione disponibile.
@@ -207,8 +208,8 @@ programs:
   editTranslation: Modifica traduzione %language%
   translations: Traduzioni
   createTranslation: Crea traduzione
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  deletedComment: '**Eliminato**'
+  replyLabel: rispondi
   repliesLabel: risposte
 remixGraph:
   title: Remix
@@ -221,7 +222,7 @@ remixGraph:
   programNotAvailable: 'Non disponibile'
   programUnknownUser: 'Utente sconosciuto'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  - Questo è un messaggio automatico - Si prega di non rispondere a questa email.
 accountConfirmation:
   subject: Conferma creazione account Catrobat
   message: |

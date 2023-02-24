@@ -27,6 +27,7 @@ reportIt: はい、報告してください！
 areYouSure: よろしいですか？
 noWayOfReturn: アクションを復元する方法はありません！
 download: ダウンロード
+downloadDisabledAlert: You must be logged in to download this project
 name: 名前
 description: 説明
 noDescription: 説明はありません。

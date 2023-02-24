@@ -27,6 +27,7 @@ reportIt: हाँ, रिपोर्ट करें!
 areYouSure: वाकई में?
 noWayOfReturn: इसे दोबारा नहीं बदला जाएगा!
 download: डाउन्लोड
+downloadDisabledAlert: You must be logged in to download this project
 name: नाम
 description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।

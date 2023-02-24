@@ -27,6 +27,7 @@ reportIt: ใช่ รายงานเลย!
 areYouSure: คุณแน่ใจหรือไม่?
 noWayOfReturn: ไม่มีทางที่จะกู้คืนการกระทำของคุณ!
 download: ดาวน์โหลด
+downloadDisabledAlert: You must be logged in to download this project
 name: ชื่อ
 description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย

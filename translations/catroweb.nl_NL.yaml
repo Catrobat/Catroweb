@@ -27,6 +27,7 @@ reportIt: Yes, report it!
 areYouSure: Ben je zeker?
 noWayOfReturn: There is no way to restore your actions!
 download: Downloaden
+downloadDisabledAlert: You must be logged in to download this project
 name: Name
 description: Beschrijving
 noDescription: Geen beschrijving beschikbaar.

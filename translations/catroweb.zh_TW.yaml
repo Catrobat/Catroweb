@@ -27,6 +27,7 @@ reportIt: 是的，舉報！
 areYouSure: 你確定嗎？
 noWayOfReturn: 無法恢復您的操作！
 download: '&#x8209;&#x5831;'
+downloadDisabledAlert: You must be logged in to download this project
 name: 名稱
 description: 描述
 noDescription: 沒有可用的描述。
