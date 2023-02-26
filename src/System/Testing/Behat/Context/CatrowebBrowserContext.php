@@ -269,6 +269,9 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given I enter :value into the :fieldName field
+   *
+   * @param mixed $value
+   * @param mixed $fieldName
    */
   public function iEnterValueIntoNamedField($value, $fieldName)
   {
@@ -276,36 +279,36 @@ class CatrowebBrowserContext extends BrowserContext
     if (!$field) {
       throw new Exception(sprintf('The field with name "%s" was not found on the page', $fieldName));
     }
-  $field->setValue($value);
+    $field->setValue($value);
   }
-  
 
-  
   /**
-  * @When /^I select option (\d+) from the dropdown "([^"]*)"$/
-  */
+   * @When /^I select option (\d+) from the dropdown "([^"]*)"$/
+   *
+   * @param mixed $index
+   * @param mixed $dropdownId
+   */
   public function selectOptionFromDropdown($index, $dropdownId)
   {
     $session = $this->getSession();
-    $element = $session->getPage()->find('css', '#' . $dropdownId);
+    $element = $session->getPage()->find('css', '#'.$dropdownId);
 
     if (!$element) {
-        throw new \Exception("Dropdown element not found");
+      throw new \Exception('Dropdown element not found');
     }
 
     // Get the options and select the specified one
     $options = $element->findAll('css', 'option');
     if (count($options) < $index) {
-      throw new \Exception("Dropdown does not have at least $index options");
+      throw new \Exception("Dropdown does not have at least {$index} options");
     }
 
-    $options[$index-1]->click();
-    }
-
+    $options[$index - 1]->click();
+  }
 
   /**
-  * @When /^I switch to the new tab$/
-  */
+   * @When /^I switch to the new tab$/
+   */
   public function iSwitchToNewTab()
   {
     $windowNames = $this->getSession()->getWindowNames();
@@ -320,7 +323,7 @@ class CatrowebBrowserContext extends BrowserContext
     }
 
     if (empty($newWindowName)) {
-      throw new \Exception("Could not switch to new tab: no new window found.");
+      throw new \Exception('Could not switch to new tab: no new window found.');
     }
 
     // Switch to the new window/tab

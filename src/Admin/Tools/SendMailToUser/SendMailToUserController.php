@@ -58,7 +58,7 @@ class SendMailToUserController extends CRUDController
   {
     $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
 
-    $signature = "https:://example.url";
+    $signature = 'https:://example.url';
 
     $template = (string) $request->query->get('template');
 
@@ -68,14 +68,14 @@ class SendMailToUserController extends CRUDController
     }
 
     $subject = (string) $request->query->get('subject');
-    if ('' === $subject && $template === '2') {
+    if ('' === $subject && '2' === $template) {
       return new Response('Empty subject!');
     }
-  
+
     $titel = (string) $request->query->get('titel');
 
     $messageText = (string) $request->query->get('message');
-    if ('' === $messageText && $template === '2') {
+    if ('' === $messageText && '2' === $template) {
       return new Response('Empty message!');
     }
 
@@ -87,17 +87,17 @@ class SendMailToUserController extends CRUDController
           'signedUrl' => $signature,
           'user' => $user,
         ]);
-          break;
+        break;
       case 1:
         return $this->render('security/reset_password/email.html.twig', [
           'resetToken' => $resetToken,
         ]);
-          break;
+        break;
       case 2:
         return $this->render('Admin/Tools/Email/simple_message.html.twig', [
           'message' => $htmlText,
         ]);
-          break;
+        break;
     }
   }
 }
