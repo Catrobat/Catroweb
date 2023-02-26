@@ -13,6 +13,11 @@
       margin-left: 20px;
     }
 
+    label 
+    {
+    font-weight: normal;
+    }
+
     .mtable
     {
       display: table;
@@ -78,6 +83,16 @@
     {
       color: green;
     }
+
+    .drop-down 
+    {
+      display: table-row;
+      float: left;
+      width: 100%;
+      max-width: 500px;
+      padding: 0 0 10px 0;
+    }
+
   </style>
 
 
@@ -90,6 +105,16 @@
         <p>This tool allows you to send Emails to Users.</p>
 
         <div class="mtable">
+          <div class="row-title">
+            <label for="template-select">Template:</label>
+          </div>
+          <div class="drop-down">
+            <select id="template-select" name="template" class="drop-down-select">
+              <option value="0">Confirmation Email</option>
+              <option value="1">Reset Email</option>
+              <option value="2">Simple Message</option>
+            </select>
+          </div>
           <div class="row-title">
             User Name:
           </div>
@@ -107,6 +132,14 @@
           </div>
 
           <div class="row-title">
+            Titel:
+          </div>
+          <div class="row-button-mt">
+            <label for="titel"></label>
+            <input id="titel" class="row-button-mt-input"/>
+          </div>
+
+          <div class="row-title">
             Content:
           </div>
           <div class="row-button-mt">
@@ -118,14 +151,13 @@
             Submit:
           </div>
           <div class="row-button">
-            <input type="button" class="btn" value="Send notification"/>
+            <input type="button" class="btn btn-send" value="Send"/>
+            <input id="preview-button"  type="button" class="btn btn-preview" value="Preview"/>
           </div>
-
           <div class="row-title">
             Result:
           </div>
           <div class="row-result resultBox error">
-
           </div>
         </div>
 
