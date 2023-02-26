@@ -268,6 +268,66 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Given I enter :value into the :fieldName field
+   */
+  public function iEnterValueIntoNamedField($value, $fieldName)
+  {
+    $field = $this->getSession()->getPage()->findField($fieldName);
+    if (!$field) {
+      throw new Exception(sprintf('The field with name "%s" was not found on the page', $fieldName));
+    }
+  $field->setValue($value);
+  }
+  
+
+  
+  /**
+  * @When /^I select option (\d+) from the dropdown "([^"]*)"$/
+  */
+  public function selectOptionFromDropdown($index, $dropdownId)
+  {
+    $session = $this->getSession();
+    $element = $session->getPage()->find('css', '#' . $dropdownId);
+
+    if (!$element) {
+        throw new \Exception("Dropdown element not found");
+    }
+
+    // Get the options and select the specified one
+    $options = $element->findAll('css', 'option');
+    if (count($options) < $index) {
+      throw new \Exception("Dropdown does not have at least $index options");
+    }
+
+    $options[$index-1]->click();
+    }
+
+
+  /**
+  * @When /^I switch to the new tab$/
+  */
+  public function iSwitchToNewTab()
+  {
+    $windowNames = $this->getSession()->getWindowNames();
+    $currentWindowName = $this->getSession()->getWindowName();
+
+    // Find the name of the new window/tab
+    $newWindowName = '';
+    foreach ($windowNames as $windowName) {
+      if ($windowName !== $currentWindowName) {
+        $newWindowName = $windowName;
+      }
+    }
+
+    if (empty($newWindowName)) {
+      throw new \Exception("Could not switch to new tab: no new window found.");
+    }
+
+    // Switch to the new window/tab
+    $this->getSession()->switchToWindow($newWindowName);
+  }
+
+  /**
    * @Then /^I should see the featured slider$/
    *
    * @throws ExpectationException

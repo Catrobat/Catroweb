@@ -21,5 +21,6 @@ class SendMailToUserAdmin extends AbstractAdmin
   {
     $collection->clearExcept(['list']);
     $collection->add('send');
+    $collection->add('preview');
   }
 }

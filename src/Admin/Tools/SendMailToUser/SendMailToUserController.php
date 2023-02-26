@@ -9,13 +9,15 @@ use Psr\Log\LoggerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
 
 class SendMailToUserController extends CRUDController
 {
   public function __construct(
     protected MailerAdapter $mailer,
     protected UserManager $user_manager,
-    protected LoggerInterface $logger
+    protected LoggerInterface $logger,
+    private readonly ResetPasswordHelperInterface $resetPasswordHelper
   ) {
   }
 
@@ -50,5 +52,52 @@ class SendMailToUserController extends CRUDController
     );
 
     return new Response('OK - message sent');
+  }
+
+  public function previewAction(Request $request): Response
+  {
+    $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
+
+    $signature = "https:://example.url";
+
+    $template = (string) $request->query->get('template');
+
+    $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
+    if (!$user) {
+      return new Response('User does not exist');
+    }
+
+    $subject = (string) $request->query->get('subject');
+    if ('' === $subject && $template === '2') {
+      return new Response('Empty subject!');
+    }
+  
+    $titel = (string) $request->query->get('titel');
+
+    $messageText = (string) $request->query->get('message');
+    if ('' === $messageText && $template === '2') {
+      return new Response('Empty message!');
+    }
+
+    $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
+
+    switch ($template) {
+      case 0:
+        return $this->render('security/registration/confirmation_email.html.twig', [
+          'signedUrl' => $signature,
+          'user' => $user,
+        ]);
+          break;
+      case 1:
+        return $this->render('security/reset_password/email.html.twig', [
+          'resetToken' => $resetToken,
+        ]);
+          break;
+      case 2:
+        return $this->render('Admin/Tools/Email/simple_message.html.twig', [
+          'message' => $htmlText,
+        ]);
+          break;
+    }
   }
 }
