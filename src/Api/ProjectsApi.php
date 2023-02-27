@@ -18,6 +18,7 @@ use OpenAPI\Server\Model\UploadErrorResponse;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
@@ -395,8 +396,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (null === $project) {
       $responseCode = Response::HTTP_NOT_FOUND;
-
-      return null;
+      throw new NotFoundHttpException();
     }
 
     $zipFile = $this->facade->getLoader()->getProjectCatrobatZipFile($id);
