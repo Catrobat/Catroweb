@@ -87,17 +87,14 @@ class SendMailToUserController extends CRUDController
           'signedUrl' => $signature,
           'user' => $user,
         ]);
-        break;
       case '1':
         return $this->render('security/reset_password/email.html.twig', [
           'resetToken' => $resetToken,
         ]);
-        break;
       case '2':
         return $this->render('Admin/Tools/Email/simple_message.html.twig', [
           'message' => $htmlText,
         ]);
-        break;
     }
 
     return new Response('404');
