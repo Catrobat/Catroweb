@@ -82,18 +82,18 @@ class SendMailToUserController extends CRUDController
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
 
     switch ($template) {
-      case 0:
+      case "0":
         return $this->render('security/registration/confirmation_email.html.twig', [
           'signedUrl' => $signature,
           'user' => $user,
         ]);
         break;
-      case 1:
+      case "1":
         return $this->render('security/reset_password/email.html.twig', [
           'resetToken' => $resetToken,
         ]);
         break;
-      case 2:
+      case "2":
         return $this->render('Admin/Tools/Email/simple_message.html.twig', [
           'message' => $htmlText,
         ]);
