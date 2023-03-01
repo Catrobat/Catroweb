@@ -27,7 +27,7 @@ reportIt: Да, сообщить об этом!
 areYouSure: Вы уверены?
 noWayOfReturn: Это безвозвратное действие!
 download: Скачать
-downloadDisabledAlert: You must be logged in to download this project
+downloadDisabledAlert: Вы должны войти в аккаунт, чтобы скачать этот проект
 name: Название
 description: Описание
 noDescription: Описание отсутствует.
