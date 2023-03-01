@@ -12803,16 +12803,16 @@
         },
         {
             "name": "symfony/twig-bundle",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bundle.git",
-                "reference": "6f3b623ca55c52862b387e1aaf1f0378e54a7a73"
+                "reference": "8bb562655c6ae4b8fae9cf72077591f38b961566"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/6f3b623ca55c52862b387e1aaf1f0378e54a7a73",
-                "reference": "6f3b623ca55c52862b387e1aaf1f0378e54a7a73",
+                "url": "https://api.github.com/repos/symfony/twig-bundle/zipball/8bb562655c6ae4b8fae9cf72077591f38b961566",
+                "reference": "8bb562655c6ae4b8fae9cf72077591f38b961566",
                 "shasum": ""
             },
             "require": {
@@ -12868,7 +12868,7 @@
             "description": "Provides a tight integration of Twig into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bundle/tree/v6.2.5"
+                "source": "https://github.com/symfony/twig-bundle/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -12884,7 +12884,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:38:09+00:00"
+            "time": "2023-02-14T08:44:56+00:00"
         },
         {
             "name": "symfony/validator",
@@ -17986,16 +17986,16 @@
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "8d4b1a806ae185a735f789edfdc346c8b43d914b"
+                "reference": "0d183e0a69652e348007e97ffff8d3ded9cc6d2d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/8d4b1a806ae185a735f789edfdc346c8b43d914b",
-                "reference": "8d4b1a806ae185a735f789edfdc346c8b43d914b",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/0d183e0a69652e348007e97ffff8d3ded9cc6d2d",
+                "reference": "0d183e0a69652e348007e97ffff8d3ded9cc6d2d",
                 "shasum": ""
             },
             "require": {
@@ -18044,7 +18044,7 @@
             "description": "Provides a development tool that gives detailed information about the execution of any request",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/web-profiler-bundle/tree/v6.2.5"
+                "source": "https://github.com/symfony/web-profiler-bundle/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -18060,7 +18060,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:38:09+00:00"
+            "time": "2023-02-21T16:32:03+00:00"
         },
         {
             "name": "textalk/websocket",
