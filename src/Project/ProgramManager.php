@@ -454,8 +454,12 @@ class ProgramManager
     return $this->program_repository->find($id);
   }
 
-  public function findProjectIfVisibleToCurrentUser(string $id): ?Program
+  public function findProjectIfVisibleToCurrentUser(?string $id): ?Program
   {
+    if (null === $id) {
+      return null;
+    }
+
     /** @var Program|null $project */
     $project = $this->find($id);
 

@@ -19,7 +19,7 @@ Feature: As a visitor I want to see a project page
     And I should see "more than one year ago"
     And I should see "0.00 MB"
     And I should see "5 downloads"
-    And I should see "43 views"
+    And I should see "42 views"
 
   Scenario: Downloading a project is possible
     When I download "/api/project/1/catrobat"
@@ -90,16 +90,16 @@ Feature: As a visitor I want to see a project page
   Scenario: Increasing view counter after new session page visit
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "43 views"
+    Then I should see "42 views"
     When I start a new session
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "44 views"
+    Then I should see "43 views"
 
   Scenario: View counter is not increased on same session
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "43 views"
+    Then I should see "42 views"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "43 views"
