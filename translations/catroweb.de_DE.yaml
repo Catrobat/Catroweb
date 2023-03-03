@@ -442,8 +442,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    description2: "Wenn du keine E-Mail erhältst, überprüfe bitte deinen Spam-Ordner oder %tryAgainLink%"
+    tryAgain: "versuche es noch einmal"
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
