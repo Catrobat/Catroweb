@@ -14351,16 +14351,16 @@
         },
         {
             "name": "deployer/deployer",
-            "version": "v7.2.0",
+            "version": "v7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/deployphp/deployer.git",
-                "reference": "06f77fb6c37fde3ddcc850582ee94e35bb28f17e"
+                "reference": "61314b16a776da3ba332ee0390e999a361431e52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/deployphp/deployer/zipball/06f77fb6c37fde3ddcc850582ee94e35bb28f17e",
-                "reference": "06f77fb6c37fde3ddcc850582ee94e35bb28f17e",
+                "url": "https://api.github.com/repos/deployphp/deployer/zipball/61314b16a776da3ba332ee0390e999a361431e52",
+                "reference": "61314b16a776da3ba332ee0390e999a361431e52",
                 "shasum": ""
             },
             "bin": [
@@ -14390,7 +14390,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-22T19:31:56+00:00"
+            "time": "2023-03-01T20:16:58+00:00"
         },
         {
             "name": "dg/bypass-finals",
