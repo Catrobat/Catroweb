@@ -56,47 +56,64 @@ class SendMailToUserController extends CRUDController
 
   public function previewAction(Request $request): Response
   {
-    $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
-
-    $signature = 'https:://example.url';
-
     $template = (string) $request->query->get('template');
 
+    switch ($template) {
+      case 'confirmation':
+        return $this->renderConfirmation($request);
+      case 'reset':
+        return $this->renderReset($request);
+      case 'basic':
+        return $this->renderBasic($request);
+    }
+
+    return new Response('404');
+  }
+
+  function renderConfirmation(Request $request): Response
+  {
+    $signature = 'https:://example.url';
+    $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
+    if (!$user) {
+      $user['username'] = 'User';
+    }
+
+    return $this->render('security/registration/confirmation_email.html.twig', [
+      'signedUrl' => $signature,
+      'user' => $user,
+    ]);
+  }
+
+  function renderReset(Request $request): Response
+  {
+    $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
+
+    return $this->render('security/reset_password/email.html.twig', [
+      'resetToken' => $resetToken,
+    ]);
+  }
+
+  function renderBasic(Request $request): Response
+  {
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
     if (!$user) {
       return new Response('User does not exist');
     }
 
     $subject = (string) $request->query->get('subject');
-    if ('' === $subject && '2' === $template) {
+    if ('' === $subject) {
       return new Response('Empty subject!');
     }
 
-    $titel = (string) $request->query->get('titel');
-
     $messageText = (string) $request->query->get('message');
-    if ('' === $messageText && '2' === $template) {
+    if ('' === $messageText) {
       return new Response('Empty message!');
     }
 
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
 
-    switch ($template) {
-      case '0':
-        return $this->render('security/registration/confirmation_email.html.twig', [
-          'signedUrl' => $signature,
-          'user' => $user,
-        ]);
-      case '1':
-        return $this->render('security/reset_password/email.html.twig', [
-          'resetToken' => $resetToken,
-        ]);
-      case '2':
-        return $this->render('Admin/Tools/Email/simple_message.html.twig', [
-          'message' => $htmlText,
-        ]);
-    }
-
-    return new Response('404');
+    return $this->render('Admin/Tools/Email/simple_message.html.twig', [
+      'message' => $htmlText,
+    ]);
   }
 }
