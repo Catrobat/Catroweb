@@ -6,6 +6,8 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
+
 
 class ApiExceptionSubscriber implements EventSubscriberInterface
 {
@@ -15,7 +17,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
       return;
     }
     $exception = $event->getThrowable();
-    $statusCode = $exception->getStatusCode() ?: Response::HTTP_INTERNAL_SERVER_ERROR;
+    $statusCode = $exception instanceof HttpExceptionInterface ? $exception->getStatusCode() : Response::HTTP_INTERNAL_SERVER_ERROR;
     $response = new Response(null, $statusCode);
     $event->setResponse($response);
   }
