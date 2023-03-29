@@ -46,7 +46,7 @@
     "postcss-loader": "^7.1.0",
     "purgecss-webpack-plugin": "^5.0.0",
     "sass": "^1.60.0",
-    "sass-loader": "^13.2.1",
+    "sass-loader": "^13.2.2",
     "standard": "^17.0.0",
     "stimulus": "^3.2.1",
     "stylelint": "^14.16.1",
