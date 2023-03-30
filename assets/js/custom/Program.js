@@ -3,8 +3,7 @@ import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
-import { ApiDeleteFetch, ApiFetch, ApiPutFetch } from '../api/ApiHelper'
-import { deleteCookie } from '../security/CookieHelper'
+import { ApiFetch } from '../api/ApiHelper'
 
 export const Program = function (projectId, projectName, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,

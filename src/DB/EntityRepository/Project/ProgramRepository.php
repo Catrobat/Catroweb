@@ -25,8 +25,7 @@ class ProgramRepository extends ServiceEntityRepository
         $query_builder = $this->createQueryBuilder('e');
 
         $query_builder
-            ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)))
-        ;
+            ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)));
 
         $query_builder = $this->excludeInvisibleProjects($query_builder);
         $query_builder = $this->excludeDebugProjects($query_builder);
@@ -64,8 +63,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb = $this->setOrderBy($qb, 'views');
         $qb
             ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
-            ->andWhere($qb->expr()->eq('e.id', 'rp.catrobat_child'))
-        ;
+            ->andWhere($qb->expr()->eq('e.id', 'rp.catrobat_child'));
 
         return $qb->getQuery()->getResult();
     }
@@ -76,8 +74,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
         $qb
             ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
-            ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'))
-        ;
+            ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'));
 
         return $this->getQueryCount($qb);
     }
@@ -90,8 +87,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb = $this->setOrderBy($qb, 'uploaded_at');
         $qb
             ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-            ->setParameter('user_id', $user_id)
-        ;
+            ->setParameter('user_id', $user_id);
 
         return $qb->getQuery()->getResult();
     }
@@ -102,8 +98,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
         $qb
             ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-            ->setParameter('user_id', $user_id)
-        ;
+            ->setParameter('user_id', $user_id);
 
         return $this->getQueryCount($qb);
     }
@@ -116,8 +111,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb = $this->setOrderBy($qb, 'uploaded_at');
         $qb
             ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-            ->setParameter('user_id', $user_id)
-        ;
+            ->setParameter('user_id', $user_id);
 
         return $qb->getQuery()->getResult();
     }
@@ -128,8 +122,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
         $qb
             ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-            ->setParameter('user_id', $user_id)
-        ;
+            ->setParameter('user_id', $user_id);
 
         return $this->getQueryCount($qb);
     }
@@ -143,8 +136,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb
             ->leftJoin('e.tags', 'f')
             ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-            ->setParameter('internal_title', $internal_title)
-        ;
+            ->setParameter('internal_title', $internal_title);
 
         return $qb->getQuery()->getResult();
     }
@@ -158,8 +150,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb
             ->leftJoin('e.extensions', 'f')
             ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-            ->setParameter('internal_title', $internal_title)
-        ;
+            ->setParameter('internal_title', $internal_title);
 
         return $qb->getQuery()->getResult();
     }
@@ -171,8 +162,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb
             ->leftJoin('e.tags', 'f')
             ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-            ->setParameter('internal_title', $tag_name)
-        ;
+            ->setParameter('internal_title', $tag_name);
 
         return $this->getQueryCount($qb);
     }
@@ -184,8 +174,7 @@ class ProgramRepository extends ServiceEntityRepository
         $qb
             ->leftJoin('e.extensions', 'f')
             ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-            ->setParameter('internal_title', $extension_internal_title)
-        ;
+            ->setParameter('internal_title', $extension_internal_title);
 
         return $this->getQueryCount($qb);
     }
@@ -200,8 +189,7 @@ class ProgramRepository extends ServiceEntityRepository
             ->andWhere($qb->expr()->eq('e.user', ':user_id'))
             ->setParameter('user_id', $user_id)
             ->andWhere($qb->expr()->neq('e.id', ':project_id'))
-            ->setParameter('project_id', $project_id)
-        ;
+            ->setParameter('project_id', $project_id);
 
         return $qb->getQuery()->getResult();
     }
@@ -217,8 +205,7 @@ class ProgramRepository extends ServiceEntityRepository
             ->setParameter(':user_id', $user_id)
             ->setParameter(':id', $project_id)
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
     // -------------------------------------------------------------------------------------------------------------------
@@ -243,10 +230,9 @@ class ProgramRepository extends ServiceEntityRepository
             ->setParameter('program_ids', $program_ids)
             ->distinct()
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
 
-        return array_map(fn ($data) => $data['id'], $result);
+        return array_map(fn($data) => $data['id'], $result);
     }
 
     /**
@@ -262,8 +248,7 @@ class ProgramRepository extends ServiceEntityRepository
             ->set('p.remix_migrated_at', ':remix_migrated_at')
             ->setParameter(':remix_migrated_at', null)
             ->getQuery()
-            ->execute()
-        ;
+            ->execute();
     }
 
     /**
@@ -285,8 +270,7 @@ class ProgramRepository extends ServiceEntityRepository
             ->setParameter('previous_program_id', $previous_program_id)
             ->distinct()
             ->getQuery()
-            ->getSingleScalarResult()
-            ;
+            ->getSingleScalarResult();
     }
 
     public function getProjectDataByIds(array $program_ids): array
@@ -298,8 +282,7 @@ class ProgramRepository extends ServiceEntityRepository
             ->innerJoin('e.user', 'u')
             ->andWhere('e.id IN (:program_ids)')
             ->setParameter('program_ids', $program_ids)
-            ->distinct()
-        ;
+            ->distinct();
 
         return $query_builder->getQuery()->getResult();
     }
@@ -317,12 +300,11 @@ class ProgramRepository extends ServiceEntityRepository
             ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
             ->groupBy('e.id')
             ->orderBy('like_count', 'DESC')
-            ->distinct()
-        ;
+            ->distinct();
 
         $results = $query_builder->getQuery()->getResult();
 
-        return array_map(fn ($result) => $result['program'], $results);
+        return array_map(fn($result) => $result['program'], $results);
     }
 
     public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
@@ -376,8 +358,7 @@ class ProgramRepository extends ServiceEntityRepository
     {
         if ('' !== trim($order_by)) {
             $query_builder = $query_builder
-                ->orderBy($alias.'.'.$order_by, $order)
-            ;
+                ->orderBy($alias . '.' . $order_by, $order);
         }
 
         return $query_builder;
@@ -420,29 +401,26 @@ class ProgramRepository extends ServiceEntityRepository
         if ('!' === $flavor[0]) {
             // Can be used when we explicitly want projects of other flavors (E.g to fill empty categories of a new flavor)
             return $query_builder
-                ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
-                ->setParameter('flavor', substr((string) $flavor, 1))
-                ;
+                ->andWhere($query_builder->expr()->neq($alias . '.flavor', ':flavor'))
+                ->setParameter('flavor', substr((string)$flavor, 1));
         }
 
         // Extensions are very similar to Flavors. (E.g. it does not care if a project has embroidery flavor or extension)
-        return $query_builder->leftJoin($alias.'.extensions', 'ext')
+        return $query_builder->leftJoin($alias . '.extensions', 'ext')
             ->andWhere($query_builder->expr()->orX()->addMultiple([
-                $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
+                $query_builder->expr()->like('lower(' . $alias . '.flavor)', ':flavor'),
                 $query_builder->expr()->like('lower(ext.internal_title)', ':extension'),
             ]))
-            ->setParameter('flavor', strtolower((string) $flavor))
-            ->setParameter('extension', strtolower((string) $flavor))
-            ;
+            ->setParameter('flavor', strtolower((string)$flavor))
+            ->setParameter('extension', strtolower((string)$flavor));
     }
 
     private function excludeProjectsWithTooHighLanguageVersion(QueryBuilder $query_builder, string $max_version = '', string $alias = 'e'): QueryBuilder
     {
         if ('' !== $max_version) {
             $query_builder
-                ->andWhere($query_builder->expr()->lte($alias.'.language_version', ':max_version'))
-                ->setParameter('max_version', $max_version)
-            ;
+                ->andWhere($query_builder->expr()->lte($alias . '.language_version', ':max_version'))
+                ->setParameter('max_version', $max_version);
         }
 
         return $query_builder;
@@ -452,7 +430,7 @@ class ProgramRepository extends ServiceEntityRepository
     {
         if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
             $query_builder->andWhere(
-                $query_builder->expr()->eq($alias.'.debug_build', $query_builder->expr()->literal(false))
+                $query_builder->expr()->eq($alias . '.debug_build', $query_builder->expr()->literal(false))
             );
         }
 
@@ -462,14 +440,14 @@ class ProgramRepository extends ServiceEntityRepository
     private function excludeInvisibleProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
     {
         return $query_builder->andwhere(
-            $query_builder->expr()->eq($alias.'.visible', $query_builder->expr()->literal(true))
+            $query_builder->expr()->eq($alias . '.visible', $query_builder->expr()->literal(true))
         );
     }
 
     private function excludePrivateProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
     {
         return $query_builder->andWhere(
-            $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
+            $query_builder->expr()->eq($alias . '.private', $query_builder->expr()->literal(false))
         );
     }
 }

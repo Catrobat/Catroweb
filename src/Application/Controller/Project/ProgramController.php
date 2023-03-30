@@ -120,6 +120,7 @@ class ProgramController extends AbstractController
             ], Response::HTTP_NOT_FOUND);
         }
 
+        /** @var User|null $user */
         $user = $this->getUser();
         $this->program_manager->changeOwnerOfProject($id, $user->getId());
 
