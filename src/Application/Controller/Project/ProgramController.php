@@ -112,22 +112,22 @@ class ProgramController extends AbstractController
     #[Route(path: '/project/claim/{id}', name: 'claim_project', methods: ['POST'])]
     public function projectClaimAction(Request $request, string $id): Response
     {
-        $project = $this->program_manager->find($id);
-        if (null === $project) {
-            return new JsonResponse([
-                'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-                'message' => 'Project with given ID does not exist!',
-            ], Response::HTTP_NOT_FOUND);
-        }
-
-        /** @var User|null $user */
-        $user = $this->getUser();
-        $this->program_manager->changeOwnerOfProject($id, $user->getId());
-
+      $project = $this->program_manager->find($id);
+      if (null === $project) {
         return new JsonResponse([
-            'statusCode' => Response::HTTP_OK,
-            'message' => 'Project was successfully claimed!',
-        ], Response::HTTP_OK);
+          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+          'message' => 'Project with given ID does not exist!',
+        ], Response::HTTP_NOT_FOUND);
+      }
+
+      /** @var User|null $user */
+      $user = $this->getUser();
+      $this->program_manager->changeOwnerOfProject($id, $user->getId());
+
+      return new JsonResponse([
+        'statusCode' => Response::HTTP_OK,
+        'message' => 'Project was successfully claimed!',
+      ], Response::HTTP_OK);
     }
 
     /**
@@ -136,90 +136,90 @@ class ProgramController extends AbstractController
     #[Route(path: '/project/like/{id}', name: 'project_like', methods: ['GET'])]
     public function projectLikeAction(Request $request, string $id): Response
     {
-        $type = $request->query->getInt('type');
-        $action = (string) $request->query->get('action');
-        if (!ProgramLike::isValidType($type)) {
-            if ($request->isXmlHttpRequest()) {
-                return new JsonResponse([
-                    'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-                    'message' => 'Invalid like type given!',
-                ], Response::HTTP_BAD_REQUEST);
-            }
-
-      throw $this->createAccessDeniedException('Invalid like-type for project given!');
-    }
-    $project = $this->program_manager->find($id);
-    if (null === $project) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'message' => 'Project with given ID does not exist!',
-        ], Response::HTTP_NOT_FOUND);
-      }
-
-      throw $this->createNotFoundException('Project with given ID does not exist!');
-    }
-    /** @var User|null $user */
-    $user = $this->getUser();
-    if (!$user) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse(['statusCode' => 401], Response::HTTP_UNAUTHORIZED);
-      }
-
-      $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
-        'project_like',
-        ['id' => $id, 'type' => $type, 'action' => $action],
-        UrlGeneratorInterface::ABSOLUTE_URL
-      ));
-
-      return $this->redirectToRoute('login');
-    }
-    try {
-      $this->program_manager->changeLike($project, $user, $type, $action);
-    } catch (InvalidArgumentException) {
-      if ($request->isXmlHttpRequest()) {
-        return new JsonResponse([
-          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'message' => 'Invalid action given!',
-        ], Response::HTTP_BAD_REQUEST);
-      }
-
-      throw $this->createAccessDeniedException('Invalid action given!');
-    }
-    if ($project->getUser() !== $user) {
-      $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
-        $project, $project->getUser(), $user
-      );
-
-      if (ProgramLike::ACTION_ADD === $action) {
-        if (0 === count($existing_notifications)) {
-          $notification = new LikeNotification($project->getUser(), $user, $project);
-          $this->notification_service->addNotification($notification);
+      $type = $request->query->getInt('type');
+      $action = (string) $request->query->get('action');
+      if (!ProgramLike::isValidType($type)) {
+        if ($request->isXmlHttpRequest()) {
+          return new JsonResponse([
+            'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+            'message' => 'Invalid like type given!',
+          ], Response::HTTP_BAD_REQUEST);
         }
-      } elseif (ProgramLike::ACTION_REMOVE === $action) {
-        // check if there is no other reaction
-        if (!$this->program_manager->areThereOtherLikeTypes($project, $user, $type)) {
-          foreach ($existing_notifications as $notification) {
-            $this->notification_service->removeNotification($notification);
+
+        throw $this->createAccessDeniedException('Invalid like-type for project given!');
+      }
+      $project = $this->program_manager->find($id);
+      if (null === $project) {
+        if ($request->isXmlHttpRequest()) {
+          return new JsonResponse([
+            'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+            'message' => 'Project with given ID does not exist!',
+          ], Response::HTTP_NOT_FOUND);
+        }
+
+        throw $this->createNotFoundException('Project with given ID does not exist!');
+      }
+      /** @var User|null $user */
+      $user = $this->getUser();
+      if (!$user) {
+        if ($request->isXmlHttpRequest()) {
+          return new JsonResponse(['statusCode' => 401], Response::HTTP_UNAUTHORIZED);
+        }
+
+        $request->getSession()->set('catroweb_login_redirect', $this->generateUrl(
+          'project_like',
+          ['id' => $id, 'type' => $type, 'action' => $action],
+          UrlGeneratorInterface::ABSOLUTE_URL
+        ));
+
+        return $this->redirectToRoute('login');
+      }
+      try {
+        $this->program_manager->changeLike($project, $user, $type, $action);
+      } catch (InvalidArgumentException) {
+        if ($request->isXmlHttpRequest()) {
+          return new JsonResponse([
+            'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+            'message' => 'Invalid action given!',
+          ], Response::HTTP_BAD_REQUEST);
+        }
+
+        throw $this->createAccessDeniedException('Invalid action given!');
+      }
+      if ($project->getUser() !== $user) {
+        $existing_notifications = $this->notification_repo->getLikeNotificationsForProject(
+          $project, $project->getUser(), $user
+        );
+
+        if (ProgramLike::ACTION_ADD === $action) {
+          if (0 === count($existing_notifications)) {
+            $notification = new LikeNotification($project->getUser(), $user, $project);
+            $this->notification_service->addNotification($notification);
+          }
+        } elseif (ProgramLike::ACTION_REMOVE === $action) {
+          // check if there is no other reaction
+          if (!$this->program_manager->areThereOtherLikeTypes($project, $user, $type)) {
+            foreach ($existing_notifications as $notification) {
+              $this->notification_service->removeNotification($notification);
+            }
           }
         }
       }
-    }
-    if (!$request->isXmlHttpRequest()) {
-      return $this->redirectToRoute('program', ['id' => $id]);
-    }
-    $user_locale = $request->getLocale();
-    $total_like_count = $this->program_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->program_manager->findProgramLikeTypes($project->getId()));
+      if (!$request->isXmlHttpRequest()) {
+        return $this->redirectToRoute('program', ['id' => $id]);
+      }
+      $user_locale = $request->getLocale();
+      $total_like_count = $this->program_manager->totalLikeCount($project->getId());
+      $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->program_manager->findProgramLikeTypes($project->getId()));
 
-    return new JsonResponse([
-      'totalLikeCount' => [
-        'value' => $total_like_count,
-        'stringValue' => TwigExtension::humanFriendlyNumber($total_like_count, $this->translator, $user_locale),
-      ],
-      'activeLikeTypes' => $active_like_types,
-    ]);
-  }
+      return new JsonResponse([
+        'totalLikeCount' => [
+          'value' => $total_like_count,
+          'stringValue' => TwigExtension::humanFriendlyNumber($total_like_count, $this->translator, $user_locale),
+        ],
+        'activeLikeTypes' => $active_like_types,
+      ]);
+    }
 
   #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
   #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]

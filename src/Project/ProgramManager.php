@@ -301,20 +301,21 @@ class ProgramManager
 
     public function changeOwnerOfProject(string $project_id, string $user_id): void
     {
-        $this->program_repository->updateUserOnProject($project_id, $user_id);
+      $this->program_repository->updateUserOnProject($project_id, $user_id);
     }
+
     /**
      * @throws NoResultException|\InvalidArgumentException
      */
     public function changeLike(Program $project, User $user, int $type, string $action): void
     {
-        if (ProgramLike::ACTION_ADD === $action) {
-            $this->program_like_repository->addLike($project, $user, $type);
-        } elseif (ProgramLike::ACTION_REMOVE === $action) {
-            $this->program_like_repository->removeLike($project, $user, $type);
-        } else {
-            throw new \InvalidArgumentException("Invalid action: {$action}");
-        }
+      if (ProgramLike::ACTION_ADD === $action) {
+        $this->program_like_repository->addLike($project, $user, $type);
+      } elseif (ProgramLike::ACTION_REMOVE === $action) {
+        $this->program_like_repository->removeLike($project, $user, $type);
+      } else {
+        throw new \InvalidArgumentException("Invalid action: {$action}");
+      }
     }
 
   /**
