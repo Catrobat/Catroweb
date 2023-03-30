@@ -1,0 +1,12 @@
+<button id="projectClaimProjectButton" class="btn btn-primary btn-block js-btn-claim-project"
+        data-alert-text="{{ 'You successfully claimed this project!'|trans({}, 'catroweb')}}"
+        data-claim-project-url='{{ path('claim_project', {id: program.id}) }}'
+
+>
+    {# Icon #}
+    <i id="projectClaimProjectButton__icon{{ suffix|default('') }}" class="material-icons align-bottom">highlight_alt</i>
+
+    {# Text #}
+    <span>{{ "claim project"|trans({}, "catroweb") }}</span>
+
+</button>

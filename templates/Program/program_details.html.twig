@@ -23,44 +23,53 @@
     </div>
   </div>
 
+  <div class="row" style="margin-top:20px;">
+    <div class="d-none d-lg-block col-lg-4">
+      {% if logged_in and not my_program %}
+        {% include 'Program/program_claim_program_button.html.twig' with {'suffix': '-small'} %}
+      {% endif %}
+    </div>
+  </div>
+
   <div class="row">
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
-      <i class="material-icons">description</i>
-      <span class="icon-text ms-2">{{ program_details.filesize }} MB</span>
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
+        <i class="material-icons">description</i>
+        <span class="icon-text ms-2">{{ program_details.filesize }} MB</span>
+      </div>
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
+        <i class="material-icons ">get_app</i>
+        <span class="icon-text ms-2">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
+      </div>
+      <div class="d-none d-lg-block col-lg-4 mt-2">
+        {% include 'components/redirect_button.twig' with {
+          'id': 'projectCodeViewButton',
+          'url': path('code_view', {'id': program.id }),
+          'icon': 'extension',
+          'text': "codeview.title"|trans({}, "catroweb")
+        } %}
+      </div>
     </div>
-    <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3">
-      <i class="material-icons ">get_app</i>
-      <span class="icon-text ms-2">{{ "programs.downloads"|trans({ '%downloads%' : program_details.downloads }, "catroweb") }}</span>
-    </div>
-    <div class="d-none d-lg-block col-lg-4 mt-2">
-      {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeViewButton',
-        'url': path('code_view', {'id': program.id }),
-        'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
-      } %}
-    </div>
-  </div>
 
-  <div class="row mb-4">
-    <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeStatsButton',
-        'suffix': '-small',
-        'url': path('code_statistics', {'id': program.id }),
-        'icon': 'show_chart',
-        'text': "statistics"|trans({}, "catroweb")
-      } %}
+    <div class="row mb-4">
+      <div class="col-6 mb-3 d-lg-none mt-3">
+        {% include 'components/redirect_button.twig' with {
+          'id': 'projectCodeStatsButton',
+          'suffix': '-small',
+          'url': path('code_statistics', {'id': program.id }),
+          'icon': 'show_chart',
+          'text': "statistics"|trans({}, "catroweb")
+        } %}
+      </div>
+      <div class="col-6 mb-3 d-lg-none mt-3">
+        {% include 'components/redirect_button.twig' with {
+          'id': 'projectCodeViewButton',
+          'suffix': '-small',
+          'url': path('code_view', {'id': program.id }),
+          'icon': 'extension',
+          'text': "codeview.title"|trans({}, "catroweb")
+        } %}
+      </div>
     </div>
-    <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeViewButton',
-        'suffix': '-small',
-        'url': path('code_view', {'id': program.id }),
-        'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
-      } %}
-    </div>
-  </div>
 
-</div>
+  </div>

@@ -109,21 +109,41 @@ class ProgramController extends AbstractController
     ]);
   }
 
-  /**
-   * @throws NoResultException
-   */
-  #[Route(path: '/project/like/{id}', name: 'project_like', methods: ['GET'])]
-  public function projectLikeAction(Request $request, string $id): Response
-  {
-    $type = $request->query->getInt('type');
-    $action = (string) $request->query->get('action');
-    if (!ProgramLike::isValidType($type)) {
-      if ($request->isXmlHttpRequest()) {
+    #[Route(path: '/project/claim/{id}', name: 'claim_project', methods: ['POST'])]
+    public function projectClaimAction(Request $request, string $id): Response
+    {
+        $project = $this->program_manager->find($id);
+        if (null === $project) {
+            return new JsonResponse([
+                'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                'message' => 'Project with given ID does not exist!',
+            ], Response::HTTP_NOT_FOUND);
+        }
+
+        $user = $this->getUser();
+        $this->program_manager->changeOwnerOfProject($id, $user->getId());
+
         return new JsonResponse([
-          'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
-          'message' => 'Invalid like type given!',
-        ], Response::HTTP_BAD_REQUEST);
-      }
+            'statusCode' => Response::HTTP_OK,
+            'message' => 'Project was successfully claimed!',
+        ], Response::HTTP_OK);
+    }
+
+    /**
+     * @throws NoResultException
+     */
+    #[Route(path: '/project/like/{id}', name: 'project_like', methods: ['GET'])]
+    public function projectLikeAction(Request $request, string $id): Response
+    {
+        $type = $request->query->getInt('type');
+        $action = (string) $request->query->get('action');
+        if (!ProgramLike::isValidType($type)) {
+            if ($request->isXmlHttpRequest()) {
+                return new JsonResponse([
+                    'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
+                    'message' => 'Invalid like type given!',
+                ], Response::HTTP_BAD_REQUEST);
+            }
 
       throw $this->createAccessDeniedException('Invalid like-type for project given!');
     }

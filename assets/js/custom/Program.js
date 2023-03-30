@@ -3,7 +3,8 @@ import { Modal, Tab } from 'bootstrap'
 import Swal from 'sweetalert2'
 import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
-import { ApiFetch } from '../api/ApiHelper'
+import { ApiDeleteFetch, ApiFetch, ApiPutFetch } from '../api/ApiHelper'
+import { deleteCookie } from '../security/CookieHelper'
 
 export const Program = function (projectId, projectName, userRole, myProgram, statusUrl, createUrl, likeUrl,
   likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
@@ -65,6 +66,27 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       $(e.currentTarget).data('is-not-supported-text')
     )
   })
+
+  // -------------------------- Claim Project
+  $('.js-btn-claim-project').on('click', (e) => {
+    claimProject(
+      $(e.currentTarget).data('alert-text'),
+      $(e.currentTarget).data('claim-project-url')
+    )
+  })
+
+  function claimProject (alertText, claimProjectUrl) {
+    $.ajax({
+      url: claimProjectUrl,
+      type: 'post',
+      success: function () {
+        showSnackbar('#share-snackbar', alertText)
+      },
+      error: function (data) {
+        showSnackbar('#share-snackbar', data.message)
+      }
+    })
+  }
 
   function download (downloadUrl, filename, buttonId, spinnerId, iconId, isWebView = false,
     supported = true, isNotSupportedTitle = '', isNotSupportedText = '') {
