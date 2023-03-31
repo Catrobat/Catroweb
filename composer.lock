@@ -7782,16 +7782,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.6.0",
+            "version": "5.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "49c03173177ffc64176c016b1f857872869add80"
+                "reference": "1ceae024b6a273cfd8f5ebeb4e79d23d19b4ecbb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/49c03173177ffc64176c016b1f857872869add80",
-                "reference": "49c03173177ffc64176c016b1f857872869add80",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/1ceae024b6a273cfd8f5ebeb4e79d23d19b4ecbb",
+                "reference": "1ceae024b6a273cfd8f5ebeb4e79d23d19b4ecbb",
                 "shasum": ""
             },
             "require": {
@@ -7828,7 +7828,7 @@
                 "sonata-project/doctrine-orm-admin-bundle": "<4.0"
             },
             "require-dev": {
-                "dama/doctrine-test-bundle": "^6.7 || ^7.0",
+                "dama/doctrine-test-bundle": "^7.0",
                 "doctrine/doctrine-bundle": "^2.7",
                 "doctrine/mongodb-odm": "^2.3",
                 "doctrine/orm": "^2.14",
@@ -7888,7 +7888,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.6.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.6.1"
             },
             "funding": [
                 {
@@ -7908,7 +7908,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-22T13:02:38+00:00"
+            "time": "2023-03-30T21:05:43+00:00"
         },
         {
             "name": "symfony/acl-bundle",
