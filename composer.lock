@@ -14513,16 +14513,16 @@
         },
         {
             "name": "dmore/chrome-mink-driver",
-            "version": "2.9.1",
+            "version": "2.9.2",
             "source": {
                 "type": "git",
                 "url": "git@gitlab.com:behat-chrome/chrome-mink-driver.git",
-                "reference": "e338a4287759bba4c12a246fa74a6c765a514a5b"
+                "reference": "a91b61c809c2e834c5f94f6df3af4d4117735e70"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fchrome-mink-driver/repository/archive.zip?sha=e338a4287759bba4c12a246fa74a6c765a514a5b",
-                "reference": "e338a4287759bba4c12a246fa74a6c765a514a5b",
+                "url": "https://gitlab.com/api/v4/projects/behat-chrome%2Fchrome-mink-driver/repository/archive.zip?sha=a91b61c809c2e834c5f94f6df3af4d4117735e70",
+                "reference": "a91b61c809c2e834c5f94f6df3af4d4117735e70",
                 "shasum": ""
             },
             "require": {
@@ -14558,7 +14558,7 @@
             "support": {
                 "issues": "https://gitlab.com/behat-chrome/chrome-mink-driver/-/issues"
             },
-            "time": "2023-01-10T01:37:49+00:00"
+            "time": "2023-04-03T10:37:34+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -17509,16 +17509,16 @@
         },
         {
             "name": "symfony/css-selector",
-            "version": "v6.2.5",
+            "version": "v6.2.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/css-selector.git",
-                "reference": "bf1b9d4ad8b1cf0dbde8b08e0135a2f6259b9ba1"
+                "reference": "aedf3cb0f5b929ec255d96bbb4909e9932c769e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/css-selector/zipball/bf1b9d4ad8b1cf0dbde8b08e0135a2f6259b9ba1",
-                "reference": "bf1b9d4ad8b1cf0dbde8b08e0135a2f6259b9ba1",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/aedf3cb0f5b929ec255d96bbb4909e9932c769e0",
+                "reference": "aedf3cb0f5b929ec255d96bbb4909e9932c769e0",
                 "shasum": ""
             },
             "require": {
@@ -17554,7 +17554,7 @@
             "description": "Converts CSS selectors to XPath expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/css-selector/tree/v6.2.5"
+                "source": "https://github.com/symfony/css-selector/tree/v6.2.7"
             },
             "funding": [
                 {
@@ -17570,7 +17570,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-01T08:38:09+00:00"
+            "time": "2023-02-14T08:44:56+00:00"
         },
         {
             "name": "symfony/dom-crawler",
