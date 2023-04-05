@@ -546,8 +546,8 @@ api:
     currentPasswordWrong: "Қазіргі құпиясөз қате"
   project:
     nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
+    nameTooLong: 'Аты тым ұзын'
+    descriptionTooLong: 'Сипаттамасы өте ұзақ'
     creditsTooLong: 'Notes and credits too long'
     screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
