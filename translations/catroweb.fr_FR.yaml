@@ -114,7 +114,7 @@ programs:
     Oui, supprimez-le !
     Annuler
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: privé
+  private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
@@ -847,11 +847,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Signaler'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'public'
-    private: 'privé'
-    join: 'Rejoignez'
-    leave: 'Quitter'
     showMore: 'afficher plus'
     showLess: 'montrer moins'
     remove_project: 'Retirer du studio'
@@ -860,7 +869,7 @@ studio:
     no_projects: 'Studio ne contient pas encore de projets'
     updateCoverError: 'Un problème est survenu lors de la mise à jour de la couverture du studio !'
     projects:
-      title: 'projects'
+      title: 'Programmes'
     comments:
       title: 'Commentaires'
       type_something: 'Type something'
@@ -868,13 +877,14 @@ studio:
       send: 'send'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Activities'
       join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      add_project: '%user% added a project.'
+      add_comment: '%user% left a comment.'
     members_list:
       title: 'Studio members'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'

@@ -114,8 +114,8 @@ programs:
     Evet, silin!
     İptal et
   deleteNotFoundError: Silinecek proje, kullanıcınızın altında bulunamadı.
-  private: gizli
-  public: herkese açık
+  private: private
+  public: public
   setPrivateAction: Projeyi Herkesden Gizle
   setPublicAction: Projeyi herkese açık yap
   changeVisibility: |+
@@ -845,11 +845,20 @@ extensions:
     multiplayer:
       title: Çok Oyunculu
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Bildir'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'herkese açık'
-    private: 'gizli'
-    join: 'Katıl'
-    leave: 'Ayrıl'
     showMore: 'daha fazla göster'
     showLess: 'daha az göster'
     remove_project: 'Stüdyodan kaldır'
@@ -866,8 +875,9 @@ studio:
       send: 'gönder'
       no_comments: 'Bu stüdyoda henüz yorum yok.'
       disabled_comments: 'Bu stüdyo için yorumlar devre dışı bırakıldı.'
+      remove_comment: 'Remove comment'
       post_error: 'Yorumunuz gönderilirken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
-      delete_error: 'Yorum kaldırılırken bir şeyler ters gitti. Daha sonra tekrar deneyin.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Aktiviteler'
       join_studio: '%user% stüdyoya katıldı.'

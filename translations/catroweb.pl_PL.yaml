@@ -114,8 +114,8 @@ programs:
     Tak, usuń!
     Anuluj
   deleteNotFoundError: Nie można znaleźć projektu do usunięcia pod Twoim użytkownikiem.
-  private: Prywatne
-  public: Publiczne
+  private: private
+  public: public
   setPrivateAction: Ustaw jako prywatny
   setPublicAction: Ustaw jako publiczny
   changeVisibility: |+
@@ -847,11 +847,20 @@ extensions:
     multiplayer:
       title: Tryb wieloosobowy
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Zgłoś'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'Publiczne'
-    private: 'Prywatne'
-    join: 'Dołącz'
-    leave: 'Opuść'
     showMore: 'pokaż więcej'
     showLess: 'pokaż mniej'
     remove_project: 'Usuń z studia'
@@ -868,8 +877,9 @@ studio:
       send: 'wyślij'
       no_comments: 'To studio nie ma jeszcze komentarzy.'
       disabled_comments: 'Komentarze zostały wyłączone dla tego studia.'
+      remove_comment: 'Remove comment'
       post_error: 'Coś poszło nie tak podczas wysyłania komentarza. Spróbuj ponownie później.'
-      delete_error: 'Coś poszło nie tak podczas usuwania komentarza. Spróbuj ponownie później.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Aktywności'
       join_studio: '%user% dołączył do studia.'

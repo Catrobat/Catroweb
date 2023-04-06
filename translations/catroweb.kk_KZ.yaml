@@ -846,18 +846,27 @@ extensions:
     multiplayer:
       title: Көп-ойыншы
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Есеп беру'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'қоғамдық'
-    private: 'жеке'
-    join: 'Кіру'
-    leave: 'Шығу'
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
     remove_project: 'Студиядан жою'
     remove_project_error: 'Жобаны студиядан жою мүмкін болмады!'
     remove_project_success: 'жоба студиядан сәттілік жойылды!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    no_projects: 'Studio does not contain any projects yet.'
+    updateCoverError: 'Something went wrong while updating the studio cover.'
     projects:
       title: 'жобалар'
     comments:
@@ -867,8 +876,9 @@ studio:
       send: 'жіберу'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Іс-шаралар'
       join_studio: '%user% студияға қосылды'

@@ -114,8 +114,8 @@ programs:
     Sì, eliminalo!
     Annulla
   deleteNotFoundError: Il progetto da eliminare non può essere trovato usando il tuo utente.
-  private: privato
-  public: pubblico
+  private: private
+  public: public
   setPrivateAction: Imposta privato
   setPublicAction: Imposta pubblico
   changeVisibility: |+
@@ -851,11 +851,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Rapporto'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'pubblico'
-    private: 'privato'
-    join: 'Entra'
-    leave: 'Lascia'
     showMore: 'mostra di più'
     showLess: 'mostra meno'
     remove_project: 'Rimuovi dallo studio'
@@ -872,8 +881,9 @@ studio:
       send: 'invia'
       no_comments: 'Questo studio non ha ancora commenti.'
       disabled_comments: 'I commenti sono stati disabilitati per questo studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Qualcosa è andato storto durante la pubblicazione del tuo commento. Riprova più tardi.'
-      delete_error: 'Qualcosa è andato storto durante la rimozione del commento. Riprova più tardi.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Attività'
       join_studio: '%user% è entrato nello studio.'

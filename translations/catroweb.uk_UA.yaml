@@ -114,8 +114,8 @@ programs:
     Так, видалити це!
     Скасувати
   deleteNotFoundError: Проєкт, який ви хочете видалити не було знайдено у вашому профілі.
-  private: приватний
-  public: публічний
+  private: private
+  public: public
   setPrivateAction: Зробити приватним
   setPublicAction: Зробити публічним
   changeVisibility: |+
@@ -847,11 +847,20 @@ extensions:
     multiplayer:
       title: Мережева гра
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Скарга'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'публічний'
-    private: 'приватний'
-    join: 'Приєднатися'
-    leave: 'Покинути'
     showMore: 'Показати більше'
     showLess: 'Показати менше'
     remove_project: 'Видалити зі студії'
@@ -868,8 +877,9 @@ studio:
       send: 'надіслати'
       no_comments: 'У студії поки немає коментарів.'
       disabled_comments: 'Коментарі для цієї студії вимкнуто.'
+      remove_comment: 'Remove comment'
       post_error: 'Під час публікації вашого коментаря сталася помилка. Спробуйте ще раз пізніше.'
-      delete_error: 'Під час видалення коментаря сталася помилка. Спробуйте ще раз пізніше.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Діяльність'
       join_studio: '%user% приєднався до студії.'
