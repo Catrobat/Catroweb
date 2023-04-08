@@ -50,7 +50,7 @@ class ResetPasswordController extends AbstractController
 
       return $this->render('security/reset_password/check_email.html.twig', [
         'resetToken' => $resetToken,
-        'throttleLimit' => floor((float) $this->parameter_bag->get('reset_password.throttle_limit') / 3600),
+        'throttleLimit' => $this->parameter_bag->get('reset_password.throttle_limit') / 3600,
       ]);
     }
 
