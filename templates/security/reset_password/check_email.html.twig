@@ -7,9 +7,13 @@
             "%time%": resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')
         }, "catroweb") }}
     </p>
+     <p>
+        {{ "resetPassword.check.descriptionTwo"|trans({
+            "%throttleLimit%": throttleLimit}, "catroweb") }}
+    </p>
     <p>
-        {{ "resetPassword.check.description2"|trans({
-            "%tryAgainLink%": '<a href="'~path("app_forgot_password_request")~'">'~"resetPassword.check.tryAgain"|trans({}, "catroweb")~'</a>'
+        {{ "resetPassword.check.descriptionThree"|trans({
+            '%email-webmaster%': '<a href="mailto:webmaster@catrobat.org">webmaster@catrobat.org</a>'
         }, "catroweb")|raw }}
     </p>
 {% endblock %}
