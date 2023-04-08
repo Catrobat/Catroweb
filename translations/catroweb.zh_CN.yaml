@@ -115,7 +115,7 @@ programs:
     取消
   deleteNotFoundError: 在您的账户下找不到要删除的项目。
   private: 私有的
-  public: 公开的
+  public: public
   setPrivateAction: 设为私有
   setPublicAction: 设为公开
   changeVisibility: |+
@@ -852,11 +852,20 @@ extensions:
     multiplayer:
       title: 多人游戏
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: '报告'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: '公开的'
-    private: '私人的'
-    join: '加入'
-    leave: '退出'
     showMore: '显示更多'
     showLess: '显示更多'
     remove_project: '从工作室移除'
@@ -873,8 +882,9 @@ studio:
       send: '发送'
       no_comments: '工作室还没有评论。'
       disabled_comments: '此工作室的评论已被禁用。'
+      remove_comment: 'Remove comment'
       post_error: '发表评论出错。请稍后再试。'
-      delete_error: '删除评论出错。请稍后再试。'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: '活动'
       join_studio: '%user% 加入了工作室。'

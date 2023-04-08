@@ -40,4 +40,9 @@ class StudioRepository extends ServiceEntityRepository
   {
     return $this->findOneBy(['id' => $id]);
   }
+
+  public function findStudioByName(string $name): ?Studio
+  {
+    return $this->findOneBy(['name' => $name]);
+  }
 }

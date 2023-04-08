@@ -1,0 +1,22 @@
+{% extends 'Default/base.html.twig' %}
+
+{% block head %}
+  {{ encore_entry_link_tags('studios_overview') }}
+{% endblock %}
+
+{% block body %}
+
+    <h1>{{ 'studio.title'|trans({}, 'catroweb') }}</h1>
+    {% if user_name %}
+        <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
+        {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': false, 'user_name': user_name } %}
+    {% endif %}
+
+    <h2>{{ 'studio.overview.public_studios'|trans({}, 'catroweb') }}</h2>
+    {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': true, 'user_name': user_name } %}
+
+{% endblock %}
+
+{% block javascript %}
+    {{ encore_entry_script_tags('studios_overview') }}
+{% endblock %}

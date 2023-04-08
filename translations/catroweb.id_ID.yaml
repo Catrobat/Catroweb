@@ -114,8 +114,8 @@ programs:
     Ya, hapus!
     Membatalkan
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: pribadi
-  public: publik
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -847,11 +847,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Laporkan'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'publik'
-    private: 'pribadi'
-    join: 'Bergabung'
-    leave: 'Meninggalkan'
     showMore: 'menampilkan lebih banyak'
     showLess: 'tampilkan lebih sedikit'
     remove_project: 'Hapus dari studio'
@@ -860,7 +869,7 @@ studio:
     no_projects: 'Studio belum memiliki proyek apa pun'
     updateCoverError: 'Terjadi masalah saat memperbarui sampul studio!'
     projects:
-      title: 'projects'
+      title: 'Program'
     comments:
       title: 'Komentar'
       type_something: 'Type something'
@@ -868,13 +877,14 @@ studio:
       send: 'send'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Activities'
       join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      add_project: '%user% added a project.'
+      add_comment: '%user% left a comment.'
     members_list:
       title: 'Studio members'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'

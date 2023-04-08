@@ -114,8 +114,8 @@ programs:
     Да, удалить!
     Отмена
   deleteNotFoundError: Проект который вы хотите удалить не был найден в вашем аккаунте. 
-  private: приватный
-  public: публичный
+  private: private
+  public: public
   setPrivateAction: Сделать приватным
   setPublicAction: Сделать публичным
   changeVisibility: |+
@@ -848,11 +848,20 @@ extensions:
     multiplayer:
       title: Мультиплеер
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Отчет'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'публичный'
-    private: 'приватный'
-    join: 'Присоединиться'
-    leave: 'Покинуть'
     showMore: 'показать больше'
     showLess: 'свернуть'
     remove_project: 'Удалить из студии'
@@ -869,8 +878,9 @@ studio:
       send: 'отправить'
       no_comments: 'У этой студии пока нет комментариев.'
       disabled_comments: 'Комментарии к этой публикации отключены.'
+      remove_comment: 'Remove comment'
       post_error: 'Что-то пошло не так во время публикации вашего комментария. Повторите попытку позже.'
-      delete_error: 'Что-то пошло не так при удалении комментария. Повторите попытку позже.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Активности'
       join_studio: '%user% присоединился к студии.'

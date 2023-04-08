@@ -114,8 +114,8 @@ programs:
     جی ہاں، اسے حذف کریں!
     منسوخ
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: ذاتی
-  public: عوامی
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -841,11 +841,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'رپورٹ'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'عوامی'
-    private: 'ذاتی'
-    join: 'شامل ہونا'
-    leave: 'چھوڑو'
     showMore: 'مزید دکھائیں'
     showLess: 'کم دکھائیں'
     remove_project: 'اسٹوڈیو سے ہٹا دیں۔'
@@ -862,8 +871,9 @@ studio:
       send: 'بھیجیں'
       no_comments: 'اس سٹوڈیو میں ابھی تک کوئی تبصرہ نہیں ہے۔'
       disabled_comments: 'اس اسٹوڈیو کے لیے تبصرے غیر فعال کر دیے گئے ہیں۔'
+      remove_comment: 'Remove comment'
       post_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
-      delete_error: 'دوبارہ کوشش کریں. آپ کا تبصرہ پوسٹ کرتے وقت کچھ غلط ہو گیا۔'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'سرگرمیاں'
       join_studio: '%user% نے اسٹوڈیو میں شمولیت اختیار کی۔'

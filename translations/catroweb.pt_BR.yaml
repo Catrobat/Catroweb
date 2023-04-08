@@ -114,8 +114,8 @@ programs:
     Sim, excluir!
     Cancelar
   deleteNotFoundError: O projeto a ser excluído não pôde ser encontrado em seu usuário.
-  private: privado
-  public: público
+  private: private
+  public: public
   setPrivateAction: Definir como privado
   setPublicAction: Definir como público
   changeVisibility: |+
@@ -846,11 +846,20 @@ extensions:
     multiplayer:
       title: Multijogador
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Reportar'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'público'
-    private: 'privado'
-    join: 'Entrar'
-    leave: 'Sair'
     showMore: 'mostrar mais'
     showLess: 'mostrar menos'
     remove_project: 'Remover do estúdio'
@@ -867,8 +876,9 @@ studio:
       send: 'enviar'
       no_comments: 'Este estúdio ainda não tem comentários.'
       disabled_comments: 'Os comentários foram desativados para este estúdio.'
+      remove_comment: 'Remove comment'
       post_error: 'Algo deu errado ao postar seu comentário. Tente novamente mais tarde.'
-      delete_error: 'Algo deu errado ao remover o comentário. Tente novamente mais tarde.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Atividades'
       join_studio: '%user% entrou no estúdio.'
