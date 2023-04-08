@@ -174,7 +174,7 @@ final class UserRequestValidator extends AbstractRequestValidator
     }
   }
 
-  private function getValidTLDs()
+  private function getValidTLDs(): array
   {
     $validTLDs = [];
     $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
