@@ -84,12 +84,16 @@ final class UserRequestValidator extends AbstractRequestValidator
   private function validateEmail(?string $email, string $locale, string $mode): void
   {
     $KEY = 'email';
+    $emailParts = explode('.', $email);
+    $tld = strtolower(end($emailParts));
 
     if (self::MODE_UPDATE !== $mode && (is_null($email) || '' === trim($email))) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailMissing', [], $locale), $KEY);
     } elseif (self::MODE_UPDATE === $mode && '' === trim($email)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailEmpty', [], $locale), $KEY);
     } elseif (0 !== count($this->validate($email, new Email()))) {
+      $this->getValidationWrapper()->addError($this->__('api.registerUser.emailInvalid', [], $locale), $KEY);
+    } elseif (!$this->isValidTLD($tld)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailInvalid', [], $locale), $KEY);
     } elseif (self::MODE_RESET_PASSWORD !== $mode && null != $this->user_manager->findUserByEmail($email)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailAlreadyInUse', [], $locale), $KEY);
@@ -168,5 +172,33 @@ final class UserRequestValidator extends AbstractRequestValidator
     } else {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.pictureInvalid', [], $locale), $KEY);
     }
+  }
+
+  private function getValidTLDs()
+  {
+    $validTLDs = [];
+    $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
+    $pslLines = explode("\n", $pslFile);
+
+    foreach ($pslLines as $line) {
+      $line = trim($line);
+      if ('' == $line || '/' == $line[0] || '!' == $line[0]) {
+        continue;
+      }
+
+      $tld = ltrim($line, '*.');
+      if (!in_array($tld, $validTLDs, true)) {
+        $validTLDs[] = $tld;
+      }
+    }
+
+    return $validTLDs;
+  }
+
+  private function isValidTLD(string $tld): bool
+  {
+    $validTLDs = $this->getValidTLDs();
+
+    return in_array($tld, $validTLDs, true);
   }
 }

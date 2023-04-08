@@ -175,4 +175,25 @@ final class UserApi extends AbstractApiController implements UserApiInterface
 
     return null;
   }
+
+  private function getValidTLDs()
+  {
+    $validTLDs = [];
+    $pslFile = file_get_contents('https://publicsuffix.org/list/public_suffix_list.dat');
+    $pslLines = explode("\n", $pslFile);
+
+    foreach ($pslLines as $line) {
+      $line = trim($line);
+      if ('' == $line || '/' == $line[0] || '!' == $line[0]) {
+        continue;
+      }
+
+      $tld = ltrim($line, '*.');
+      if (!in_array($tld, $validTLDs, true)) {
+        $validTLDs[] = $tld;
+      }
+    }
+
+    return $validTLDs;
+  }
 }

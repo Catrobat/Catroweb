@@ -266,3 +266,25 @@ Feature: Registering a new user.
     And I have a request header "CONTENT_TYPE" with value "application/json"
     And I request "POST" "/api/user"
     Then the response status code should be "406"
+
+  Scenario: Invalid TLD in email
+
+  Given I have the following JSON request body:
+    """
+      {
+        "dry-run": true,
+        "email": "testqtest.invalid",
+        "username": "invalidTLD",
+        "password": "1234asdf"
+      }
+    """
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I request "POST" "/api/user"
+    Then the response status code should be "422"
+    And I should get the json object:
+    """
+      {
+        "email": "Email invalid"
+      }
+    """
