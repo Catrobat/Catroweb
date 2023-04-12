@@ -114,8 +114,8 @@ programs:
     Sim, excluir!
     Cancelar
   deleteNotFoundError: O projeto a ser excluído não pôde ser encontrado em seu usuário.
-  private: private
-  public: public
+  private: privado
+  public: público
   setPrivateAction: Definir como privado
   setPublicAction: Definir como público
   changeVisibility: |+
@@ -851,11 +851,11 @@ studio:
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
   studio_name: 'Studio name'
-  join: 'Join'
-  leave: 'Leave'
+  join: 'Entrar'
+  leave: 'Sair'
   report: 'Reportar'
-  public: 'public'
-  private: 'private'
+  public: 'público'
+  private: 'privado'
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'

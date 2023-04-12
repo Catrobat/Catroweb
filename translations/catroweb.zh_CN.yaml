@@ -115,7 +115,7 @@ programs:
     取消
   deleteNotFoundError: 在您的账户下找不到要删除的项目。
   private: 私有的
-  public: public
+  public: 公开的
   setPrivateAction: 设为私有
   setPublicAction: 设为公开
   changeVisibility: |+
@@ -852,19 +852,19 @@ extensions:
     multiplayer:
       title: 多人游戏
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  studio_name: 'Studio name'
-  join: 'Join'
-  leave: 'Leave'
+  title: '工作室'
+  singular: '工作室'
+  create_studio: '创建工作室'
+  delete_studio: '删除工作室'
+  studio_name: '工作室名称'
+  join: '加入'
+  leave: '退出'
   report: '报告'
-  public: 'public'
-  private: 'private'
+  public: '公开的'
+  private: '私有的'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
+    joined_studios: '加入的工作室'
+    public_studios: '公开的工作室'
   details:
     showMore: '显示更多'
     showLess: '显示更多'

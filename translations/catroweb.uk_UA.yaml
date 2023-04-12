@@ -114,8 +114,8 @@ programs:
     Так, видалити це!
     Скасувати
   deleteNotFoundError: Проєкт, який ви хочете видалити не було знайдено у вашому профілі.
-  private: private
-  public: public
+  private: приватний
+  public: публічний
   setPrivateAction: Зробити приватним
   setPublicAction: Зробити публічним
   changeVisibility: |+
@@ -129,7 +129,7 @@ programs:
   reportCommentConfirmation: Ви впевнені, що хочете поскаржитися на цей коментар?
   deleteCommentConfirmation: Ви впевнені, що хочете видалити цей коментар?
   deleteAccountConfirmation: |+
-    Видалити облікового запису? 
+    Видалення облікового запису? 
     Ви впевнені, що хочете видалити свій обліковий запис? 
     Це також видалить ваші завантажені проєкти та коментарі! 
     Відновити свої дії неможливо! 
@@ -142,7 +142,7 @@ programs:
     viewed: Найбільше переглянуто
     downloaded: Найбільше завантажені
   random: Випадкові проєкти
-  related: Пов'язані проєкти
+  related: Пов’язані проєкти
   downloads: '%downloads% завантажень'
   sample: Приклад проєктів
   views: '%views% перегляд(-ів)'
@@ -715,7 +715,7 @@ next: Далі
 previous: Попередній
 media-packages:
   title: Медіа пакети
-  description: У наступних категоріях ви можете знайти додаткових акторів і об'єктів, щоб додати у свої проєкти PocketCode.
+  description: У наступних категоріях ви можете знайти додаткових персонажів й об’єктів, щоб додати у свої проєкти Pocket Code.
   thumb-size:
     description: Розмір попереднього перегляду
     sm: малий
@@ -847,19 +847,19 @@ extensions:
     multiplayer:
       title: Мережева гра
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  studio_name: 'Studio name'
-  join: 'Join'
-  leave: 'Leave'
+  title: 'Студії'
+  singular: 'Студія'
+  create_studio: 'Створити студію'
+  delete_studio: 'Видалити студію'
+  studio_name: 'Назва студії'
+  join: 'Приєднатися'
+  leave: 'Покинути'
   report: 'Скарга'
-  public: 'public'
-  private: 'private'
+  public: 'публічний'
+  private: 'приватний'
   overview:
     joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
+    public_studios: 'Публічні студії'
   details:
     showMore: 'Показати більше'
     showLess: 'Показати менше'
@@ -877,9 +877,9 @@ studio:
       send: 'надіслати'
       no_comments: 'У студії поки немає коментарів.'
       disabled_comments: 'Коментарі для цієї студії вимкнуто.'
-      remove_comment: 'Remove comment'
+      remove_comment: 'Видалити коментар'
       post_error: 'Під час публікації вашого коментаря сталася помилка. Спробуйте ще раз пізніше.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Під час видалення коментаря сталася помилка. Спробуйте ще раз пізніше.'
     activity_list:
       title: 'Діяльність'
       join_studio: '%user% приєднався до студії.'
