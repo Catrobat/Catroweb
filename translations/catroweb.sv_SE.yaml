@@ -114,7 +114,7 @@ programs:
     Yes, delete it!
     Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
+  private: privat
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
@@ -852,10 +852,10 @@ studio:
   delete_studio: 'Delete studio'
   studio_name: 'Studio name'
   join: 'Join'
-  leave: 'Leave'
+  leave: 'Lämna'
   report: 'Rapportera'
   public: 'public'
-  private: 'private'
+  private: 'privat'
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
