@@ -104,7 +104,8 @@ class ExampleRepository extends ServiceEntityRepository
       ->setFirstResult($offset)
       ->setMaxResults($limit)
       ->orderBy('e.priority', 'DESC')
-      ->getQuery()->getResult();
+      ->getQuery()->getResult()
+    ;
   }
 
   /**
@@ -124,7 +125,8 @@ class ExampleRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
       ->andWhere($qb->expr()->eq('e.for_ios', 'false'))
       ->setParameter('flavor', $flavor)
-      ->getQuery()->getSingleScalarResult();
+      ->getQuery()->getSingleScalarResult()
+    ;
   }
 
   /**
