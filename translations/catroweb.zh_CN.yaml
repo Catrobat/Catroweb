@@ -443,8 +443,8 @@ resetPassword:
   check:
     title: "请检查您的邮箱。"
     description: "如果存在一个与您的电子邮件匹配的帐户，刚刚发送的一封电子邮件中会有帮您重置密码的链接。 此链接将在 %time% 后过期。"
-    description2: "如果您没有收到电子邮件，请检查您的垃圾邮件文件夹或 %tryAgainLink%"
-    tryAgain: "重试"
+    descriptionTwo: "您可以每隔 %throttleLimit% 小时请求重置新密码。"
+    descriptionThree: "如果您没有收到电子邮件，请检查您的垃圾邮件文件夹或发送电子邮件到 %email-webmaster% 给我们的支持团队。"
   email:
     title: "您好！"
     visitLink: "要重置您的密码，请访问以下链接"

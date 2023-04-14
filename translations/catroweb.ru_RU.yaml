@@ -439,8 +439,8 @@ resetPassword:
   check:
     title: "Проверьте вашу электронную почту"
     description: "Если существует аккаунт к которому привязана ваша электронная почта, то вам будет отправлено письмо в котором есть ссылка для сброса вашего пароля. Эта ссылка станет недействительной через %time%."
-    description2: "Если вы не получили письмо о сбросе пароля, проверьте папку спама или %tryAgainLink%"
-    tryAgain: "попробуйте снова"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Привет!"
     visitLink: "Чтобы сбросить пароль от аккаунта, пожалуйста перейдите по ссылке"

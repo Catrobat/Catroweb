@@ -438,8 +438,8 @@ resetPassword:
   check:
     title: "Sprawdź swoje e-maile"
     description: "Jeśli konto pasujące do Twojego adresu e-mail istnieje, wysłano wiadomość e-mail zawierającą link, który możesz użyć do zresetowania hasła. Ten link wygaśnie za %time%."
-    description2: "Jeśli nie otrzymasz wiadomości e-mail, sprawdź folder spamu lub %tryAgainLink%"
-    tryAgain: "spróbuj ponownie"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Cześć!"
     visitLink: "Aby zresetować hasło, odwiedź poniższy link"
