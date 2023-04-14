@@ -437,8 +437,8 @@ resetPassword:
   check:
     title: "E-postalarınızı kontrol edin"
     description: "E-postanızla eşleşen bir hesap varsa, şifrenizi sıfırlamak için kullanabileceğiniz bir bağlantı içeren bir e-posta gönderildi. Bu bağlantı %time% içinde sona erecek."
-    description2: "E-posta almazsanız, lütfen spam klasörünüzü kontrol edin veya %tryAgainLink%"
-    tryAgain: "Tekrar deneyin"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Merhaba!"
     visitLink: "Şifrenizi sıfırlamak için lütfen aşağıdaki bağlantıyı ziyaret edin"

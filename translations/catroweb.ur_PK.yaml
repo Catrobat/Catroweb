@@ -433,8 +433,8 @@ resetPassword:
   check:
     title: "اپنا ای میل چیک کریں"
     description: "اگر آپ کے ای میل سے مماثل اکاؤنٹ موجود ہے، تو ابھی ابھی ایک ای میل بھیجا گیا ہے جس میں ایک لنک ہے جسے آپ اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے استعمال کر سکتے ہیں۔ یہ لنک %time% میں ختم ہو جائے گا۔"
-    description2: "اگر آپ کو ای میل موصول نہیں ہوتی ہے تو براہ کرم اپنا سپیم فولڈر چیک کریں یا %tryAgainLink%"
-    tryAgain: "دوبارہ کوشش کریں"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "السلام علیکم"
     visitLink: "اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے، براہ کرم درج ذیل لنک پر جائیں۔"

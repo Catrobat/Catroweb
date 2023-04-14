@@ -438,8 +438,8 @@ resetPassword:
   check:
     title: "Kontrolloni email-in tuaj"
     description: "Nëse ekziston një llogari që përputhet me emailin tuaj, atëherë sapo është dërguar një email që përmban një link që mund ta përdorni për të rivendosur fjalëkalimin tuaj. Ky link do të skadojë për %time%."
-    description2: "Nëse nuk merrni një email, ju lutemi kontrolloni dosjen tuaj të postës elektronike ose %tryAgainLink%"
-    tryAgain: "Provo përsëri"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Përshëndetje!"
     visitLink: "Për të rivendosur fjalëkalimin tuaj, ju lutemi vizitoni linkun e mëposhtme"

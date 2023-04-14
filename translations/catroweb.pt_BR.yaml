@@ -437,8 +437,8 @@ resetPassword:
   check:
     title: "Verifique seus e-mails"
     description: "Caso exista uma conta correspondente ao seu endereço de e-mail, você receberá uma mensagem contendo um link que pode ser usado para redefinir sua senha. Este link expirará em %time%."
-    description2: "Se você não receber o e-mail, verifique a sua pasta de spam ou %tryAgainLink%"
-    tryAgain: "tente novamente"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Oi!"
     visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"

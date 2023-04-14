@@ -439,8 +439,8 @@ resetPassword:
   check:
     title: "خپل بریښنالیکونه چیک کړئ"
     description: "که ستاسو د بریښنالیک سره یو حساب شتون ولري، نو بیا یوازې یو بریښنالیک لیږل شوی چې یو لینک لري چې تاسو یې د خپل پټنوم بیا تنظیمولو لپاره کارولی شئ. دا لینک به په%time% کې پای ته ورسیږي."
-    description2: "که تاسو بریښنالیک ترلاسه نکړئ مهرباني وکړئ خپل سپیم فولډر وګورئ یا %tryAgainLink%"
-    tryAgain: "بیا هڅه وکړه"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "سلام!"
     visitLink: "د خپل پټنوم بیا تنظیمولو لپاره، مهرباني وکړئ لاندې لینک ته لاړ شئ"

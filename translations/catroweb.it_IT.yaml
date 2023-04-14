@@ -442,8 +442,8 @@ resetPassword:
   check:
     title: "Controlla la tua casella di posta"
     description: "Se esiste un account associato alla tua email, è appena  stata inviata una email che contiene un link che puoi usare per reimpostare la password. Questo link scadrà in %time%."
-    description2: "Se non ricevi un'email controlla la tua cartella spam; altrimenti %tryAgainLink%"
-    tryAgain: "riprova"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Ciao!"
     visitLink: "Per reimpostare la password, segui il seguente link"
