@@ -24,7 +24,7 @@ class ResetPasswordController extends AbstractController
     private readonly ResetPasswordHelperInterface $resetPasswordHelper,
     private readonly EntityManagerInterface $entityManager,
     private readonly ParameterBagInterface $parameter_bag,
-    ) {
+  ) {
   }
 
   /**
