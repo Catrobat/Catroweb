@@ -487,9 +487,9 @@ errors:
     missing: 'unknown error: project_xml_not_found!'
   file:
     unexpected: unexpected file found
-    invalid: invalid file
+    invalid: жарамсыз файл
   image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+  unknown: белгісіз қате
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   program:
@@ -499,15 +499,15 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Аутентификация орындамалды
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      Пайдаланушы тіркелгі деректеріңіз дұрыс емес.
+      Қолданбаға қайта кіріп көріңіз.
 success:
   text: Сәтті
-  registration: Registration successful!
+  registration: Тіркелу сәтті өтті!
   token: жарайды
-  upload: Your project was uploaded successfully!
+  upload: Жобаңыз сәтті салынды!
   imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:

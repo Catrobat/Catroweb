@@ -882,9 +882,9 @@ studio:
       send: '发送'
       no_comments: '工作室还没有评论。'
       disabled_comments: '此工作室的评论已被禁用。'
-      remove_comment: 'Remove comment'
+      remove_comment: '删除注释'
       post_error: '发表评论出错。请稍后再试。'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: '删除注释时出错。请稍后再试。'
     activity_list:
       title: '活动'
       join_studio: '%user% 加入了工作室。'
