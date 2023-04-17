@@ -8,7 +8,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class FeatureFlagManager
 {
-  private $defaultFlags;
+  private array $defaultFlags;
 
   public function __construct(
         protected RequestStack $requestStack,
@@ -41,7 +41,7 @@ class FeatureFlagManager
   {
     $flagValue = $this->getFlagValue($flagName);
 
-    return null !== $flagValue && (bool) $flagValue;
+    return null !== $flagValue && $flagValue;
   }
 
   public function setFlagValue(string $flagName, bool $value): void
@@ -58,7 +58,7 @@ class FeatureFlagManager
     $this->entityManager->flush();
   }
 
-  public function getFlagValue(string $flagName): ?bool
+  public function getFlagValue(string $flagName): ?string
   {
     $request = $this->requestStack->getCurrentRequest();
 

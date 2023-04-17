@@ -5,7 +5,6 @@ namespace App\Admin\Tools\FeatureFlag;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
-use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class FeatureFlagAdmin extends AbstractAdmin
@@ -19,19 +18,6 @@ class FeatureFlagAdmin extends AbstractAdmin
    * {@inheritdoc}
    */
   protected $baseRoutePattern = 'featureflag';
-
-  /**
-   * {@inheritdoc}
-   *
-   * Fields to be shown on create/edit forms
-   */
-  protected function configureFormFields(FormMapper $form): void
-  {
-    $form
-      ->add('name', 'text')
-      ->add('value', 'checkbox')
-    ;
-  }
 
   /**
    * {@inheritdoc}

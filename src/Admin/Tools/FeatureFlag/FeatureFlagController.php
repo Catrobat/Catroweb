@@ -28,13 +28,4 @@ class FeatureFlagController extends CRUDController
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
-
-  public function deleteFlagAction(): RedirectResponse
-  {
-    /* @var $object FeatureFlag */
-    $object = $this->admin->getSubject();
-    $this->manager->deleteFlag($object->getName());
-
-    return new RedirectResponse($this->admin->generateUrl('list'));
-  }
 }

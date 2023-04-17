@@ -15,6 +15,8 @@ class FeatureFlag
    * @ORM\GeneratedValue
    *
    * @ORM\Column(type="integer")
+   *
+   * @ORM\property-read int $id
    */
   private $id;
 

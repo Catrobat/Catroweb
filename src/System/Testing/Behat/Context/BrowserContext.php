@@ -436,7 +436,7 @@ class BrowserContext extends MinkContext implements Context
      * @param mixed $header
      * @param mixed $value
      */
-    public function iAmOnThePageWithHeaderEqualTo($page, $header, $value)
+    public function iAmOnThePageWithHeaderEqualTo($page, $header, $value): void
     {
       $this->getSession()->setRequestHeader($header, $value);
       $this->visit($page);
