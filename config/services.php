@@ -37,6 +37,9 @@ use App\Admin\Statistics\Translation\ProjectMachineTranslationAdmin;
 use App\Admin\Survey\AllSurveysAdmin;
 use App\Admin\Tools\BroadcastNotification\BroadcastNotificationAdmin;
 use App\Admin\Tools\BroadcastNotification\BroadcastNotificationController;
+use App\Admin\Tools\FeatureFlag\FeatureFlagAdmin;
+use App\Admin\Tools\FeatureFlag\FeatureFlagController;
+use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
 use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogsAdmin;
 use App\Admin\Tools\Maintenance\MaintainAdmin;
@@ -68,6 +71,7 @@ use App\Application\Framework\VersionStrategy;
 use App\Application\Locale\LocaleEventSubscriber;
 use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\Application\Twig\TwigExtension;
+use App\DB\Entity\FeatureFlag;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -299,6 +303,14 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set(SendMailToUserController::class, SendMailToUserController::class)
+    ->public()
+  ;
+
+  $services->set(FeatureFlagManager::class, FeatureFlagManager::class)
+    ->public()
+  ;
+
+  $services->set(FeatureFlagController::class, FeatureFlagController::class)
     ->public()
   ;
 
@@ -701,6 +713,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->set('admin.block.tools.mail', SendMailToUserAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Send Mail to User', 'code' => null, 'model_class' => CronJob::class, 'controller' => SendMailToUserController::class])
+    ->public()
+  ;
+
+  $services->set('admin.block.tools.feature_flag', FeatureFlagAdmin::class)
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Feature Flag', 'code' => null, 'model_class' => FeatureFlag::class, 'controller' => FeatureFlagController::class])
     ->public()
   ;
 

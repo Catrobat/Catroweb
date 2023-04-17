@@ -429,6 +429,19 @@ class BrowserContext extends MinkContext implements Context
     $this->getSession()->wait(1000);
   }
 
+    /**
+     * @Given I am on the page :page with header :header equal to :value
+     *
+     * @param mixed $page
+     * @param mixed $header
+     * @param mixed $value
+     */
+    public function iAmOnThePageWithHeaderEqualTo($page, $header, $value)
+    {
+      $this->getSession()->setRequestHeader($header, $value);
+      $this->visit($page);
+    }
+
   /**
    * @Then I wait for the element :selector to be visible
    *
