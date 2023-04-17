@@ -11,8 +11,8 @@ class FeatureFlagManager
   private array $defaultFlags;
 
   public function __construct(
-        protected RequestStack $requestStack,
-        protected EntityManagerInterface $entityManager
+    protected RequestStack $requestStack,
+    protected EntityManagerInterface $entityManager
     ) {
     $this->defaultFlags = include __DIR__.'/../../../../config/features.php';
 
@@ -58,7 +58,7 @@ class FeatureFlagManager
     $this->entityManager->flush();
   }
 
-  public function getFlagValue(string $flagName): ?string
+  public function getFlagValue(string $flagName): ?bool
   {
     $request = $this->requestStack->getCurrentRequest();
 
