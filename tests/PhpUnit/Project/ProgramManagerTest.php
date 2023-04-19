@@ -189,12 +189,15 @@ class ProgramManagerTest extends TestCase
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())
-      ->method('refresh')->with($this->isInstanceOf(Program::class));
+      ->method('refresh')->with($this->isInstanceOf(Program::class))
+    ;
 
     $this->screenshot_repository->expects($this->atLeastOnce())
-      ->method('saveProgramAssetsTemp')->with('./path/to/screenshot', 1);
+      ->method('saveProgramAssetsTemp')->with('./path/to/screenshot', 1)
+    ;
     $this->screenshot_repository->expects($this->atLeastOnce())
-      ->method('makeTempProgramAssetsPerm')->with(1);
+      ->method('makeTempProgramAssetsPerm')->with(1)
+    ;
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 

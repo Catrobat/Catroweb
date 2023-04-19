@@ -40,6 +40,7 @@
           <span class="sidebar-link-text">{{ 'menu.profile'|trans({}, "catroweb") }}</span>
         </a>
       </li>
+
       {% if is_granted('ROLE_ADMIN') %}
         <li class="nav-item">
           <a class="nav-link" href="{{ url('sonata_admin_dashboard') }}" id="btn-admin">

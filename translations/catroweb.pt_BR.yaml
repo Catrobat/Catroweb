@@ -437,8 +437,8 @@ resetPassword:
   check:
     title: "Verifique seus e-mails"
     description: "Caso exista uma conta correspondente ao seu endereço de e-mail, você receberá uma mensagem contendo um link que pode ser usado para redefinir sua senha. Este link expirará em %time%."
-    description2: "Se você não receber o e-mail, verifique a sua pasta de spam ou %tryAgainLink%"
-    tryAgain: "tente novamente"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Oi!"
     visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"
@@ -846,11 +846,20 @@ extensions:
     multiplayer:
       title: Multijogador
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Entrar'
+  leave: 'Sair'
+  report: 'Reportar'
+  public: 'público'
+  private: 'privado'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'público'
-    private: 'privado'
-    join: 'Entrar'
-    leave: 'Sair'
     showMore: 'mostrar mais'
     showLess: 'mostrar menos'
     remove_project: 'Remover do estúdio'
@@ -867,8 +876,9 @@ studio:
       send: 'enviar'
       no_comments: 'Este estúdio ainda não tem comentários.'
       disabled_comments: 'Os comentários foram desativados para este estúdio.'
+      remove_comment: 'Remove comment'
       post_error: 'Algo deu errado ao postar seu comentário. Tente novamente mais tarde.'
-      delete_error: 'Algo deu errado ao remover o comentário. Tente novamente mais tarde.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Atividades'
       join_studio: '%user% entrou no estúdio.'

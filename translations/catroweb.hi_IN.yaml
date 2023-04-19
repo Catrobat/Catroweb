@@ -114,8 +114,8 @@ programs:
     हाँ, इसे हटा दें!
     रद्द करें 
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: निजी
-  public: जनता
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -438,8 +438,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -847,11 +847,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'विवरण'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'जनता'
-    private: 'निजी'
-    join: 'शामिल हों'
-    leave: 'छोड़'
     showMore: 'और दिखाओ'
     showLess: 'कम दिखाएं'
     remove_project: 'स्टूडियो से निकालें'
@@ -868,8 +877,9 @@ studio:
       send: 'भेजें'
       no_comments: 'इस स्टूडियो में अभी तक कोई टिप्पणी नहीं है।'
       disabled_comments: 'इस स्टूडियो के लिए टिप्पणियां बंद कर दी गई हैं।'
+      remove_comment: 'Remove comment'
       post_error: 'आपकी टिप्पणी डालते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
-      delete_error: 'आपकी टिप्पणी हटाते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'गतिविधियां'
       join_studio: '%user% स्टूडियो में शामिल हुए।'

@@ -16,7 +16,7 @@ export class OwnProjectList {
     this.apiUrl = apiUrl.includes('?') ? (apiUrl + '&' + attributes) : (apiUrl + '?' + attributes)
     this.projectsLoaded = 0
     this.projectsData = {}
-    this.projectFetchCount = 99999
+    this.projectFetchCount = 20
     this.empty = false
     this.fetchActive = false
     this.theme = theme
@@ -29,6 +29,7 @@ export class OwnProjectList {
   initialize () {
     this.fetchMore(true)
     this._initActionMenu()
+    this.initScrollFetchMoreHandler()
 
     // remove loading spinners when loading from cache (e.g. browser back button)
     window.addEventListener('pageshow', ev => {
@@ -36,6 +37,19 @@ export class OwnProjectList {
         this.projectsContainer.querySelectorAll('.loading-spinner-backdrop').forEach(elem => elem.remove())
       }
     })
+  }
+
+  initScrollFetchMoreHandler () {
+    window.addEventListener('scroll', () => this.isScrolledToBottom())
+  }
+
+  isScrolledToBottom () {
+    const docHeight = document.body.scrollHeight
+    const scrollHeight = window.scrollY + window.innerHeight
+
+    if (scrollHeight >= docHeight) {
+      this.fetchMore()
+    }
   }
 
   _initActionMenu () {

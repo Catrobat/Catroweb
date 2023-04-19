@@ -30,7 +30,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'settings' => [
             'analysis' => [
               'analyzer' => [
-                'my_analyzer' => [
+                'default' => [
                   'type' => 'custom',
                   'tokenizer' => 'standard',
                   'filter' => [
@@ -77,7 +77,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
           'settings' => [
             'analysis' => [
               'analyzer' => [
-                'my_analyzer' => [
+                'default' => [
                   'type' => 'custom',
                   'tokenizer' => 'standard',
                   'filter' => [

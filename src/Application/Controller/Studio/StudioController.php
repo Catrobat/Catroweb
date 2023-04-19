@@ -24,22 +24,36 @@ class StudioController extends AbstractController
   {
   }
 
+  #[Route(path: '/studios', name: 'studios_overview', methods: ['GET'])]
+  public function studiosOverview(Request $request): Response
+  {
+    $studios = $this->studio_manager->findAllStudiosWithUsersAndProjectsCount();
+
+    /** @var User|null $user */
+    $user = $this->getUser();
+    for ($i = 0; $i < count($studios); ++$i) {
+      $studio = $this->studio_manager->findStudioById($studios[$i]['id']);
+      $studios[$i]['is_joined'] = !is_null($user) && $this->studio_manager->isUserInStudio($user, $studio);
+    }
+
+    return $this->render('Studio/studios_overview.html.twig', [
+      'studios' => $studios,
+      'user_name' => !is_null($user) ? $user->getUserIdentifier() : '',
+    ]);
+  }
+
   /**
-   * move to capi as POST /studio.
-   *
-   * @internal only - just for testing!
+   * @internal route for now
    */
-  #[Route(path: '/studio/create/{name}', name: 'studio_create', methods: ['GET'])]
-  public function createStudio(string $name): Response
+  #[Route(path: '/studio/new', name: 'studio_new', methods: ['GET'])]
+  public function studioNew(Request $request): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
-    if (is_null($user)) {
-      throw $this->createAccessDeniedException();
-    }
-    $studio = $this->studio_manager->createStudio($user, $name, '');
 
-    return $this->redirectToRoute('studio_details', ['id' => $studio->getId()]);
+    return $this->render('Studio/studio_new.html.twig', [
+      'user_name' => !is_null($user) ? $user->getUserIdentifier() : '',
+    ]);
   }
 
   #[Route(path: '/studio/{id}', name: 'studio_details', methods: ['GET'])]
@@ -59,17 +73,94 @@ class StudioController extends AbstractController
     $comments_count = $this->studio_manager->countStudioComments($studio);
     $comments = $this->studio_manager->findAllStudioComments($studio);
 
-    return $this->render('Studio/studio_details.html.twig',
-      ['studio' => $studio, 'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
-        'user_role' => $user_role, 'members_count' => $members_count,
-        'activities_count' => $activities_count,
-        'projects_count' => $projects_count, 'projects' => $this->getStudioProjectsListWithImg($projects),
-        'comments_count' => $comments_count, 'comments' => $this->getStudioCommentsListWithAvatar($comments),
-      ]);
+    return $this->render('Studio/studio_details.html.twig', [
+      'studio' => $studio,
+      'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
+      'user_role' => $user_role,
+      'members_count' => $members_count,
+      'activities_count' => $activities_count,
+      'projects_count' => $projects_count,
+      'projects' => $this->getStudioProjectsListWithImg($projects),
+      'comments_count' => $comments_count,
+      'comments' => $this->getStudioCommentsListWithAvatar($comments),
+    ]);
   }
 
   /**
-   * Internal Route only.
+   * ToDo: move to capi.
+   */
+  #[Route(path: '/studio', name: 'studio_create', methods: ['POST'])]
+  public function createStudio(Request $request): JsonResponse
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (is_null($user)) {
+      throw $this->createAccessDeniedException();
+    }
+
+    $name = trim((string) $request->request->get('name', ''));
+    $description = trim((string) $request->request->get('description', ''));
+    if ('' === $name) {
+      return new JsonResponse(['message' => 'arguments invalid'], Response::HTTP_BAD_REQUEST);
+    }
+
+    $existingStudio = $this->studio_manager->findStudioByName($name);
+    if ($existingStudio) {
+      return new JsonResponse(['message' => 'studio name is already taken'], Response::HTTP_CONFLICT);
+    }
+
+    $studio = $this->studio_manager->createStudio($user, $name, $description);
+
+    return new JsonResponse(['studio' => $studio], Response::HTTP_OK);
+  }
+
+  /**
+   * @internal route only
+   */
+  #[Route(path: '/studio/{id}/join', name: 'studio_join', methods: ['POST'])]
+  public function joinStudio(Request $request, string $id): JsonResponse
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (is_null($user)) {
+      throw $this->createAccessDeniedException();
+    }
+
+    $studio = $this->studio_manager->findStudioById($id);
+    if (!$studio) {
+      return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
+    }
+
+    /* add to join list so admin can accept/decline or so? */
+
+    return new JsonResponse(null, Response::HTTP_OK);
+  }
+
+  /**
+   * @internal route only
+   */
+  #[Route(path: '/studio/{id}/leave', name: 'studio_leave', methods: ['POST'])]
+  public function leaveStudio(Request $request, string $id): JsonResponse
+  {
+    /** @var User|null $user */
+    $user = $this->getUser();
+    if (is_null($user)) {
+      throw $this->createAccessDeniedException();
+    }
+
+    $studio = $this->studio_manager->findStudioById($id);
+    if (!$studio) {
+      return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
+    }
+
+    $this->studio_manager->isUserAStudioAdmin($user, $studio);
+    $this->studio_manager->deleteUserFromStudio($user, $studio, $user);
+
+    return new JsonResponse(null, Response::HTTP_OK);
+  }
+
+  /**
+   * @internal route only
    */
   #[Route(path: '/studio/members/list', name: 'studio_members_list', methods: ['GET'])]
   public function loadStudioMembersList(Request $request): Response
@@ -96,7 +187,7 @@ class StudioController extends AbstractController
   }
 
   /**
-   * Internal Route only.
+   * @internal route only
    */
   #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
   public function promoteMemberToAdmin(Request $request): Response
@@ -123,7 +214,7 @@ class StudioController extends AbstractController
   }
 
   /**
-   * Internal Route only.
+   * @internal route only
    */
   #[Route(path: '/studio/member/ban', name: 'studio_ban_user', methods: ['PUT'])]
   public function banUserFromStudio(Request $request): Response
@@ -150,7 +241,7 @@ class StudioController extends AbstractController
   }
 
   /**
-   * Internal Route only.
+   * @internal route only
    */
   #[Route(path: '/studio/activities/list', name: 'studio_activities_list', methods: ['GET'])]
   public function loadStudioActivitiesList(Request $request): Response
@@ -369,6 +460,9 @@ class StudioController extends AbstractController
     return $this->redirect($request->headers->get('referer'));
   }
 
+  /**
+   * HELPER FUNCTIONS.
+   */
   protected function getStudioProjectsListWithImg(array $studioProjects): array
   {
     $rs = [];

@@ -97,13 +97,14 @@ Feature: There should be all projects of a user presented on a profile page
     And I should see "project 27"
     And I should see "project 28"
 
-  Scenario: at my profile page there should always all programs be visible
-    Given I log in as "User1"
+  Scenario: at my profile page there should always all programs be visible up to 20 until i scroll to the end of the screen
+    Given I log in as "User3"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should see 2 ".own-project-list__project"
-    But the element ".button-show-more" should not exist
-    And the element ".button-show-less" should not exist
+    Then I should see 20 ".own-project-list__project"
+    When I scroll vertical on "own-projects" using a value of "30"
+    And I wait for AJAX to finish
+    Then I should see 5 ".own-project-list__project"
 
   Scenario: at a profile page there should always all programs be visible
     Given I am on "/app/user/1"
@@ -116,7 +117,7 @@ Feature: There should be all projects of a user presented on a profile page
     Given I log in as "User3"
     And I am on "/app/user"
     And I wait for the page to be loaded
-    Then I should see 25 ".own-project-list__project"
+    Then I should see 20 ".own-project-list__project"
     But the element ".button-show-more" should not exist
     And the element ".button-show-less" should not exist
 

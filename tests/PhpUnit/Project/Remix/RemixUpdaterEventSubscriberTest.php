@@ -118,7 +118,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class));
+      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+    ;
 
     $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
 
@@ -184,7 +185,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class));
+      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+    ;
 
     $this->remix_updater->update($file, $this->program_entity);
   }
@@ -224,7 +226,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchPrograms')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class));
+      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+    ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
     $this->remix_updater->update($file, $this->program_entity);
   }
@@ -275,7 +278,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class));
+      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+    ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
     $this->remix_updater->update($file, $this->program_entity);
   }

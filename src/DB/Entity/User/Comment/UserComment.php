@@ -13,7 +13,17 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=UserCommentRepository::class)
  *
- * @ORM\Table(name="user_comment")
+ * @ORM\Table(
+ *     name="user_comment",
+ *     indexes={
+ *
+ *         @ORM\Index(name="parent_id_idx", columns={"parent_id"}),
+ *         @ORM\Index(name="user_id_idx", columns={"user_id"}),
+ *         @ORM\Index(name="program_id_idx", columns={"programId"}),
+ *         @ORM\Index(name="studio_idx", columns={"studio"}),
+ *         @ORM\Index(name="upload_date_idx", columns={"uploadDate"})
+ *     }
+ * )
  */
 class UserComment implements \Stringable
 {
@@ -182,11 +192,6 @@ class UserComment implements \Stringable
   public function getUploadDate(): ?\DateTime
   {
     return $this->uploadDate;
-  }
-
-  public function getUploadDateAsString(): string
-  {
-    return date('Y-m-d\TH:i:s\Z', $this->uploadDate->getTimestamp());
   }
 
   public function setUploadDate(\DateTime $uploadDate): UserComment

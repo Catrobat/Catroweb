@@ -114,8 +114,8 @@ programs:
     అవును, తొలగించండి!
     రద్దు చేయండి
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: ప్రైవేట్
-  public: ప్రజా
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -441,8 +441,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -850,11 +850,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'రిపొర్ట్'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'ప్రజా'
-    private: 'ప్రైవేట్'
-    join: 'చేరండి'
-    leave: 'వదిలేయండి'
     showMore: 'ఇంకా చూపించు'
     showLess: 'తక్కువ చూపించు'
     remove_project: 'స్టూడియో నుండి తీసివేయండి'
@@ -863,7 +872,7 @@ studio:
     no_projects: 'స్టూడియోలో ఇంకా ఏ ప్రాజెక్ట్‌లు లేవు'
     updateCoverError: 'స్టూడియో కవర్‌ని అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
     projects:
-      title: 'projects'
+      title: 'ప్రాజెక్టులు'
     comments:
       title: 'వ్యాఖ్యలు'
       type_something: 'Type something'
@@ -871,13 +880,14 @@ studio:
       send: 'send'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Activities'
       join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      add_project: '%user% added a project.'
+      add_comment: '%user% left a comment.'
     members_list:
       title: 'Studio members'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'

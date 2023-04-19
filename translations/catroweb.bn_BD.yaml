@@ -114,8 +114,8 @@ programs:
     হ্যাঁ, এটি মুছুন!
     বাতিল
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: ব্যক্তিগত
-  public: জনসাধারণ
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -444,8 +444,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -853,11 +853,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'প্রতিবেদন করুন'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'জনসাধারণ'
-    private: 'ব্যক্তিগত'
-    join: "\nযোগদান করুন"
-    leave: 'ছেড়ে দাও'
     showMore: 'আরো দেখুন'
     showLess: 'প্রদর্শন কম'
     remove_project: 'স্টুডিও থেকে সরান'
@@ -874,8 +883,9 @@ studio:
       send: 'পাঠান'
       no_comments: 'এই স্টুডিও মন্তব্য নেই'
       disabled_comments: 'এই স্টুডিওর জন্য মন্তব্য নিষ্ক্রিয় করা হয়েছে.'
+      remove_comment: 'Remove comment'
       post_error: 'কোনো একটা সমস্যা হলো ভোট করার সময়, দয়া করে পরে আবার চেষ্টা করো'
-      delete_error: 'মন্তব্যটি সরানোর সময় কিছু ভুল হয়েছে৷ পরে আবার চেষ্টা করুন.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'কার্যক্রম'
       join_studio: '% ব্যবহারকারী% স্টুডিওতে যোগদান করেছে৷'

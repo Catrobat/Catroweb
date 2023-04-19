@@ -114,8 +114,8 @@ programs:
     예, 삭제!
     취소
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: 사적인
-  public: 공공의
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -435,8 +435,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -844,11 +844,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: '보고서'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: '공공의'
-    private: '사적인'
-    join: '가입하다'
-    leave: '떠나다'
     showMore: '자세히보기'
     showLess: '덜 보여'
     remove_project: '스튜디오에서 제거'
@@ -857,7 +866,7 @@ studio:
     no_projects: 'Studio에는 아직 프로젝트가 없습니다.'
     updateCoverError: '스튜디오 표지를 업데이트하는 동안 문제가 발생했습니다!'
     projects:
-      title: 'projects'
+      title: '프로그램'
     comments:
       title: '코멘트'
       type_something: 'Type something'
@@ -865,13 +874,14 @@ studio:
       send: 'send'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Activities'
       join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      add_project: '%user% added a project.'
+      add_comment: '%user% left a comment.'
     members_list:
       title: 'Studio members'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'

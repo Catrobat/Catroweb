@@ -27,7 +27,7 @@ reportIt: Да, сообщить об этом!
 areYouSure: Вы уверены?
 noWayOfReturn: Это безвозвратное действие!
 download: Скачать
-downloadDisabledAlert: You must be logged in to download this project
+downloadDisabledAlert: Вы должны войти в аккаунт, чтобы скачать этот проект
 name: Название
 description: Описание
 noDescription: Описание отсутствует.
@@ -439,8 +439,8 @@ resetPassword:
   check:
     title: "Проверьте вашу электронную почту"
     description: "Если существует аккаунт к которому привязана ваша электронная почта, то вам будет отправлено письмо в котором есть ссылка для сброса вашего пароля. Эта ссылка станет недействительной через %time%."
-    description2: "Если вы не получили письмо о сбросе пароля, проверьте папку спама или %tryAgainLink%"
-    tryAgain: "попробуйте снова"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Привет!"
     visitLink: "Чтобы сбросить пароль от аккаунта, пожалуйста перейдите по ссылке"
@@ -716,7 +716,7 @@ next: Далее
 previous: Назад
 media-packages:
   title: Медиа-пакеты
-  description: В следующих категориях вы можете найти дополнительных актеров и объекты, которые вы можете добавить в проекты Pocket Code.
+  description: В этих категориях, вы можете найти дополнительных актеров и объекты, которых вы можете добавить в ваши проекты Pocket Code.
   thumb-size:
     description: Размер превью
     sm: маленький
@@ -848,20 +848,29 @@ extensions:
     multiplayer:
       title: Мультиплеер
 studio:
+  title: 'Студии'
+  singular: 'Студия'
+  create_studio: 'Создать студию'
+  delete_studio: 'Удалить студию'
+  studio_name: 'Название студии'
+  join: 'Присоединиться'
+  leave: 'Покинуть'
+  report: 'Отчет'
+  public: 'публичный'
+  private: 'приватный'
+  overview:
+    joined_studios: 'Участие в студиях'
+    public_studios: 'Публичные студии'
   details:
-    public: 'публичный'
-    private: 'приватный'
-    join: 'Присоединиться'
-    leave: 'Покинуть'
     showMore: 'показать больше'
     showLess: 'свернуть'
     remove_project: 'Удалить из студии'
-    remove_project_error: 'Не удалось удалить проект из студии!'
-    remove_project_success: 'проект успешно удален из студии!'
-    no_projects: 'Студия пока не содержит проектов'
-    updateCoverError: 'Что-то пошло не так при обновлении обложки студии!'
+    remove_project_error: 'Не удалось удалить проект из студии.'
+    remove_project_success: 'Проект был успешно удален из студии.'
+    no_projects: 'В студии пока нет никаких проектов.'
+    updateCoverError: 'Что-то пошло не так при обновлении обложки студии.'
     projects:
-      title: 'проекта(ов)'
+      title: 'Проекты'
     comments:
       title: 'Комментарии'
       type_something: 'Введите что-нибудь'
@@ -869,13 +878,14 @@ studio:
       send: 'отправить'
       no_comments: 'У этой студии пока нет комментариев.'
       disabled_comments: 'Комментарии к этой публикации отключены.'
+      remove_comment: 'Удалить комментарий'
       post_error: 'Что-то пошло не так во время публикации вашего комментария. Повторите попытку позже.'
-      delete_error: 'Что-то пошло не так при удалении комментария. Повторите попытку позже.'
+      remove_error: 'Что-то пошло не так при удалении комментария. Повторите попытку позже.'
     activity_list:
       title: 'Активности'
       join_studio: '%user% присоединился к студии.'
-      add_project: '%user% оставил комментарий.'
-      add_comment: '%user% добавил проект.'
+      add_project: '%user% добавил проект.'
+      add_comment: '%user% оставил комментарий.'
     members_list:
       title: 'Участники студии'
       project_count: '{0} Нет студийных проектов |{1} 1 проект |]1,Inf] %count% студийных проектов'

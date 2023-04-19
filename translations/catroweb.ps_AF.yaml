@@ -114,8 +114,8 @@ programs:
     هو، دا حذف کړئ!
     لغوه کړئ
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: خصوصي
-  public: عامه
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -439,8 +439,8 @@ resetPassword:
   check:
     title: "خپل بریښنالیکونه چیک کړئ"
     description: "که ستاسو د بریښنالیک سره یو حساب شتون ولري، نو بیا یوازې یو بریښنالیک لیږل شوی چې یو لینک لري چې تاسو یې د خپل پټنوم بیا تنظیمولو لپاره کارولی شئ. دا لینک به په%time% کې پای ته ورسیږي."
-    description2: "که تاسو بریښنالیک ترلاسه نکړئ مهرباني وکړئ خپل سپیم فولډر وګورئ یا %tryAgainLink%"
-    tryAgain: "بیا هڅه وکړه"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "سلام!"
     visitLink: "د خپل پټنوم بیا تنظیمولو لپاره، مهرباني وکړئ لاندې لینک ته لاړ شئ"
@@ -848,11 +848,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'راپور'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'عامه'
-    private: 'خصوصي'
-    join: 'ګډون وکړئ'
-    leave: 'پریږده'
     showMore: 'نور ښکاره کړئ'
     showLess: 'لږ ښودل'
     remove_project: 'له سټوډیو څخه لرې کړئ'
@@ -869,8 +878,9 @@ studio:
       send: 'لیږل'
       no_comments: 'دا سټوډیو تراوسه هیڅ تبصره نه ده کړې.'
       disabled_comments: 'د دې سټوډیو لپاره نظرونه غیر فعال شوي دي.'
+      remove_comment: 'Remove comment'
       post_error: 'ستاسو د نظر پوسټ کولو پرمهال یو څه غلط شو. وروسته بیا هڅه وکړئ.'
-      delete_error: 'د تبصرې د لرې کولو په وخت کې یو څه غلط شو. وروسته بیا هڅه وکړئ.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'فعالیتونه'
       join_studio: '%user% په سټوډیو کې شامل شو.'
