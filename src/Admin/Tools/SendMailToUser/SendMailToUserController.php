@@ -70,7 +70,7 @@ class SendMailToUserController extends CRUDController
     return new Response('404');
   }
 
-  function renderConfirmation(Request $request): Response
+  public function renderConfirmation(Request $request): Response
   {
     $signature = 'https:://example.url';
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
@@ -84,7 +84,7 @@ class SendMailToUserController extends CRUDController
     ]);
   }
 
-  function renderReset(Request $request): Response
+  public function renderReset(Request $request): Response
   {
     $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
 
@@ -93,7 +93,7 @@ class SendMailToUserController extends CRUDController
     ]);
   }
 
-  function renderBasic(Request $request): Response
+  public function renderBasic(Request $request): Response
   {
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
     if (!$user) {

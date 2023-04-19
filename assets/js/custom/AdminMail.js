@@ -1,3 +1,6 @@
+/* eslint-env jquery */
+
+// eslint-disable-next-line no-unused-vars
 function AdminMail () {
   const sendBtn = document.querySelector('.btn-send')
   const previewBtn = document.querySelector('.btn-preview')
