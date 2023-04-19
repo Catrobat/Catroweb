@@ -13,7 +13,7 @@ class FeatureFlagManager
   public function __construct(
     protected RequestStack $requestStack,
     protected EntityManagerInterface $entityManager
-    ) {
+  ) {
     $this->defaultFlags = include __DIR__.'/../../../../config/features.php';
 
     $flagMap = [];
@@ -63,7 +63,7 @@ class FeatureFlagManager
     $request = $this->requestStack->getCurrentRequest();
 
     if ($request && $request->headers->has('X-Feature-Flag-'.$flagName)) {
-      return $request->headers->get('X-Feature-Flag-'.$flagName);
+      return (bool) $request->headers->get('X-Feature-Flag-'.$flagName);
     }
 
     $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $flagName]);
