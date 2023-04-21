@@ -31,16 +31,16 @@ class SendMailToUserController extends CRUDController
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
     if (!$user) {
-      return new Response('User does not exist');
+      return new Response('User does not exist', Response::HTTP_BAD_REQUEST);
     }
     $subject = (string) $request->query->get('subject');
     if ('' === $subject) {
-      return new Response('Empty subject!');
+      return new Response('Empty subject!', Response::HTTP_BAD_REQUEST);
     }
 
     $messageText = (string) $request->query->get('message');
     if ('' === $messageText) {
-      return new Response('Empty message!');
+      return new Response('Empty message!', Response::HTTP_BAD_REQUEST);
     }
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
     $mailTo = $user->getEmail();
@@ -51,7 +51,7 @@ class SendMailToUserController extends CRUDController
       ['message' => $htmlText]
     );
 
-    return new Response('OK - message sent');
+    return new Response('OK - message sent', Response::HTTP_OK);
   }
 
   public function previewAction(Request $request): Response
@@ -67,7 +67,7 @@ class SendMailToUserController extends CRUDController
         return $this->renderBasic($request);
     }
 
-    return new Response('404');
+    return new Response(Response::HTTP_NOT_FOUND);
   }
 
   public function renderConfirmation(Request $request): Response
@@ -97,17 +97,17 @@ class SendMailToUserController extends CRUDController
   {
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
     if (!$user) {
-      return new Response('User does not exist');
+      return new Response('User does not exist', Response::HTTP_NOT_FOUND);
     }
 
     $subject = (string) $request->query->get('subject');
     if ('' === $subject) {
-      return new Response('Empty subject!');
+      return new Response('Empty subject!', Response::HTTP_BAD_REQUEST);
     }
 
     $messageText = (string) $request->query->get('message');
     if ('' === $messageText) {
-      return new Response('Empty message!');
+      return new Response('Empty message!', Response::HTTP_BAD_REQUEST);
     }
 
     $htmlText = str_replace(PHP_EOL, '<br>', $messageText);

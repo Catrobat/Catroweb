@@ -20,7 +20,7 @@ function AdminMail () {
 
     fetch(url)
       .then(response => {
-        if (response.ok) {
+        if (response.ok || response.status === 404 || response.status === 400) {
           return response.text()
         } else {
           throw new Error(`Error sending mail: ${response.statusText}`)
