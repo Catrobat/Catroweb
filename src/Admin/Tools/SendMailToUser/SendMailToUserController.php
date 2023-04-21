@@ -67,7 +67,7 @@ class SendMailToUserController extends CRUDController
         return $this->renderBasic($request);
     }
 
-    return new Response(Response::HTTP_NOT_FOUND);
+    return new Response('Not Found', Response::HTTP_NOT_FOUND);
   }
 
   public function renderConfirmation(Request $request): Response
