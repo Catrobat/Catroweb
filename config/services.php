@@ -205,6 +205,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('es_port', '%env(ES_PORT)%');
   $parameters->set('dkim.private.key', '%kernel.project_dir%/.dkim/private.key');
   $parameters->set('container.dumper.inline_class_loader', true);
+  $parameters->set('features', '%kernel.project_dir%/config/features.php');
 
   $services = $containerConfigurator->services();
 

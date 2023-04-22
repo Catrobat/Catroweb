@@ -5,6 +5,8 @@ namespace App\Admin\Tools\FeatureFlag;
 use App\DB\Entity\FeatureFlag;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+
 
 class FeatureFlagManager
 {
@@ -12,9 +14,10 @@ class FeatureFlagManager
 
   public function __construct(
     protected RequestStack $requestStack,
-    protected EntityManagerInterface $entityManager
+    protected EntityManagerInterface $entityManager,
+    protected ParameterBagInterface $parameter_bag
   ) {
-    $this->defaultFlags = include __DIR__.'/../../../../config/features.php';
+    $this->defaultFlags = include $parameter_bag->get('features');
 
     $flagMap = [];
     foreach ($this->defaultFlags as $name => $value) {
