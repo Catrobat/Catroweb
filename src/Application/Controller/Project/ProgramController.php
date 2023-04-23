@@ -6,7 +6,6 @@ use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
@@ -21,12 +20,14 @@ use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
 use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -88,16 +89,12 @@ class ProgramController extends AbstractController
     }
     $active_like_types = $this->program_manager->findProgramLikeTypes($project->getId());
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
-    $program_comments = $this->findCommentsById($project->getId());
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-    foreach ($program_comments as $program_comment) {
-      $program_comment->setNumberOfReplies($this->countByParentId($program_comment->getId()));
-    }
-
+    $program_comment_list = $this->comment_repository->getProjectCommentOverviewListData($project);
     $program_details = $this->createProgramDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
-      $referrer, $program_comments
+      $referrer, $program_comment_list
     );
 
     return $this->render('Program/program.html.twig', [
@@ -399,29 +396,34 @@ class ProgramController extends AbstractController
     return new JsonResponse($repository->listDefinedLanguages($project));
   }
 
+  /**
+   * @throws NonUniqueResultException
+   */
   #[Route(path: 'program/comment/{id}', name: 'program_comment', methods: ['GET'])]
-  public function programCommentAction(Request $request, string $id): Response
+  public function projectCommentDetail(string $id): Response
   {
-    $comment = $this->findCommentById($id);
-    if (null === $comment) {
-      $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
-
-      return $this->redirectToRoute('index');
+    $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);
+    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($arr_comment['program_id'] ?? null);
+    if (null === $project) {
+      return $this->redirectToIndexOnError();
     }
+    $comment_list = $this->comment_repository->getProjectCommentDetailViewCommentListData($id);
+    array_unshift($comment_list, $arr_comment);
 
-    $replies = $this->findCommentRepliesById($id);
-    array_unshift($replies, $comment);
-    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($comment->getProgram()->getId());
-    $comments_avatars = $this->getCommentAvatars($replies);
-
-    return $this->render('Program/program_comment.html.twig', [
-      'comment' => $comment,
-      'replies' => $replies,
-      'commentAvatars' => $comments_avatars,
+    return $this->render('Program/Comment/comment_detail.html.twig', [
+      'comment' => $arr_comment,
+      'replies' => $comment_list,
       'isAdmin' => $this->isGranted('ROLE_ADMIN'),
       'program' => $project,
       'are_replies' => true,
     ]);
+  }
+
+  protected function redirectToIndexOnError(): RedirectResponse
+  {
+    $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
+
+    return $this->redirectToRoute('index');
   }
 
   private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
@@ -433,35 +435,14 @@ class ProgramController extends AbstractController
     }
   }
 
-  private function getCommentAvatars(array $program_comments): array
-  {
-    $comments_avatars = [];
-    /** @var UserComment $comment */
-    foreach ($program_comments as $comment) {
-      $user = $this->entity_manager->getRepository(User::class)->findOneBy([
-        'id' => $comment->getUser()->getId(),
-      ]);
-      if (null !== $user) {
-        $avatar = $user->getAvatar();
-        if ($avatar) {
-          $comments_avatars[$comment->getId()] = $avatar;
-        }
-      }
-    }
-
-    return $comments_avatars;
-  }
-
   private function createProgramDetailsArray(Program $program,
-                                             array $active_like_types,
-                                             array $active_user_like_types,
-                                             int $total_like_count,
-                                             ?string $referrer,
-                                             array $program_comments): array
+    array $active_like_types,
+    array $active_user_like_types,
+    int $total_like_count,
+    ?string $referrer,
+    array $program_comments): array
   {
     $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
-
-    $comments_avatars = $this->getCommentAvatars($program_comments);
 
     return [
       'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($program->getId()),
@@ -474,39 +455,11 @@ class ProgramController extends AbstractController
       'referrer' => $referrer,
       'id' => $program->getId(),
       'comments' => $program_comments,
-      'commentsLength' => count($program_comments),
-      'commentAvatars' => $comments_avatars,
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,
       'isAdmin' => $this->isGranted('ROLE_ADMIN'),
     ];
-  }
-
-  /**
-   * @return array|UserComment[]
-   */
-  private function findCommentsById(string $project_id): array
-  {
-    return $this->comment_repository->findCommentsByProgramId($project_id);
-  }
-
-  private function countByParentId(int $comment_id): int
-  {
-    return $this->comment_repository->countCommentReplies($comment_id);
-  }
-
-  private function findCommentById(string $id): ?UserComment
-  {
-    return $this->comment_repository->findOneBy(['id' => $id]);
-  }
-
-  /**
-   * @return array|UserComment[]
-   */
-  private function findCommentRepliesById(string $id): array
-  {
-    return $this->comment_repository->findCommentRepliesByParentId($id);
   }
 
   private function projectCustomTranslationDeleteAction(Request $request, string $id): Response

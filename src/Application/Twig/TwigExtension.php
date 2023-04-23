@@ -81,6 +81,7 @@ class TwigExtension extends AbstractExtension
     return [
       new TwigFunction('countriesList', $this->getCountriesList(...)),
       new TwigFunction('isMobile', $this->isMobile(...)),
+      new TwigFunction('getDatetimeAsString', $this->getDatetimeAsString(...)),
       new TwigFunction('isWebview', $this->isWebview(...)),
       new TwigFunction('isAndroid', $this->isAndroid(...)),
       new TwigFunction('isIOS', $this->isIOS(...)),
@@ -189,6 +190,11 @@ class TwigExtension extends AbstractExtension
   public function isMobile(): bool
   {
     return boolval(preg_match('/(Catrobat|Android|Windows Phone|iPad|iPhone)/', $this->getUserAgent()));
+  }
+
+  public function getDatetimeAsString(\DateTime $dateTime): string
+  {
+    return date('Y-m-d\TH:i:s\Z', $dateTime->getTimestamp());
   }
 
   public function isWebview(): bool

@@ -233,3 +233,22 @@ Feature: Update user
     """
     And I request "PUT" "/api/user"
     Then the response code should be "415"
+
+  Scenario: Update email with invalid TLD
+    Given I use a valid JWT Bearer token for "Catroweb"
+    And I have a request header "HTTP_ACCEPT" with value "application/json"
+    And I have a request header "CONTENT_TYPE" with value "application/json"
+    And I have the following JSON request body:
+    """
+      {
+        "email": "user@catrobat.invalid"
+      }
+    """
+    And I request "PUT" "/api/user"
+    Then the response code should be "422"
+    And I should get the json object:
+    """
+      {
+        "email": "Email invalid"
+      }
+    """

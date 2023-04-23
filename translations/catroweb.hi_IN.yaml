@@ -27,6 +27,7 @@ reportIt: हाँ, रिपोर्ट करें!
 areYouSure: वाकई में?
 noWayOfReturn: इसे दोबारा नहीं बदला जाएगा!
 download: डाउन्लोड
+downloadDisabledAlert: इस प्रोजैक्ट के पृष्ठ का उपयोग करने के लिए आपको लोग इन करना जरुरी है।
 name: नाम
 description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
@@ -39,7 +40,7 @@ privacyPolicy: गोपनीयता नीति
 imprint: मोहर
 programDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'अनुरोधित संसाधन मौजूद नहीं है।'
 pleaseTryAgain: 'कृपया फिर से कोशिश करें!'
 oldVersionError: 'कृपया पॉकेट कोड को सबसे नए वर्जन में अपडेट करें!'
 more: 'अधिक'
@@ -66,7 +67,7 @@ notificationsUnauthorizedError: "उपयोगकर्ता को अधि
 notificationsClearError: "सूचना को पढ़कर मार्क करने में असमर्थ!"
 pleaseWait: "कृपया प्रतीक्षा करें..."
 projects: "प्रोग्राम्स"
-users: "Users"
+users: "उपयोगकर्ता"
 oauthPopUpTitle: "बाहरी अकाउंट में प्रवेश की जानकारी"
 oauthInfo: "\nआपने अभी प्रवेश करने के लिए किसी बाहरी अकाउंट का उपयोग किया है। हमने आपके लिए नया उपभोक्ता नाम बनाया है। अगर आप अपना उपभोक्ता नाम बदलना चाहते हैं या नया पासवर्ड बनाना चाहते हैं तो अपने प्रोफाइल पेज पर जाएं।"
 oauthHere: "यहां"
@@ -112,11 +113,11 @@ programs:
     इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
     रद्द करें 
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: निजी
-  public: जनता
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  deleteNotFoundError: हटाया जाने वाला प्रोजेक्ट आपके उपयोगकर्ता के अंतर्गत नहीं पाया जा सका।
+  private: "\nनिजी"
+  public: सार्वजनिक
+  setPrivateAction: "\nनिजी सेट करें"
+  setPublicAction: सार्वजनिक सेट करें
   changeVisibility: |+
     वाकई में?
     यदि आप '%programName%' को निजी बनाते हैं, तो इसे अन्य उपभोक्ता नहीं देख पाएंगे।
@@ -133,7 +134,7 @@ programs:
     इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
     रद्द करें
-  tooLongName: The project name is too long!
+  tooLongName: प्रोजेक्ट का नाम बहुत बड़ा है!
   tooLongDescription: प्रोजेक्ट का वर्णन बहुत लंबा है!
   tooLongCredits: प्रोजेक्ट का श्रेय बहुत लंबा हैं!
   most:
@@ -164,8 +165,8 @@ programs:
   reportOwnProgram: आप खुद के प्रोजेक्ट को चिह्नित नहीं कर सकते।
   reportAlready: आपने पहले ही इस प्रोजेक्ट को चिन्हित कर दिया है।
   reportDone: आपने इस प्रोजेक्ट को रिपोर्ट कर दिया!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppHeaderDownload: डाउनलोड संभव नहीं है
+  updateAppTextDownload: कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें। सावधान रहें कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: एप्लिकेशन को अपडेट करें
   updateAppText: इस प्रोजेक्ट को डाउनलोड करने के लिए कृपया अपने ऐप को सबसे नए वर्जन में अपडेट करें।
@@ -437,8 +438,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -846,11 +847,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'विवरण'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'जनता'
-    private: 'निजी'
-    join: 'शामिल हों'
-    leave: 'छोड़'
     showMore: 'और दिखाओ'
     showLess: 'कम दिखाएं'
     remove_project: 'स्टूडियो से निकालें'
@@ -867,8 +877,9 @@ studio:
       send: 'भेजें'
       no_comments: 'इस स्टूडियो में अभी तक कोई टिप्पणी नहीं है।'
       disabled_comments: 'इस स्टूडियो के लिए टिप्पणियां बंद कर दी गई हैं।'
+      remove_comment: 'Remove comment'
       post_error: 'आपकी टिप्पणी डालते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
-      delete_error: 'आपकी टिप्पणी हटाते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'गतिविधियां'
       join_studio: '%user% स्टूडियो में शामिल हुए।'

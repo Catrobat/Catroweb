@@ -27,6 +27,7 @@ reportIt: ใช่ รายงานเลย!
 areYouSure: คุณแน่ใจหรือไม่?
 noWayOfReturn: ไม่มีทางที่จะกู้คืนการกระทำของคุณ!
 download: ดาวน์โหลด
+downloadDisabledAlert: You must be logged in to download this project
 name: ชื่อ
 description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
@@ -114,8 +115,8 @@ programs:
     ใช่ลบทิ้ง!
     ยกเลิก
   deleteNotFoundError: ไม่พบโปรเจ็กต์ที่จะลบภายใต้ผู้ใช้ของคุณ
-  private: ส่วนตัว
-  public: สาธารณะ
+  private: private
+  public: public
   setPrivateAction: ตั้งเป็นส่วนตัว
   setPublicAction: ตั้งเป็นสาธารณะ
   changeVisibility: |+
@@ -443,8 +444,8 @@ resetPassword:
   check:
     title: "ตรวจสอบอีเมลของคุณ"
     description: "หากมีบัญชีที่ตรงกับอีเมลของคุณ แสดงว่าระบบเพิ่งส่งอีเมลที่มีลิงก์ซึ่งคุณสามารถใช้รีเซ็ตรหัสผ่านได้ ลิงก์นี้จะหมดอายุใน %time%"
-    description2: "หากคุณไม่ได้รับอีเมล โปรดตรวจสอบโฟลเดอร์สแปมของคุณหรือ %tryAgainLink%"
-    tryAgain: "ลองอีกครั้ง"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "สวัสดี!"
     visitLink: "หากต้องการรีเซ็ตรหัสผ่าน โปรดไปที่ลิงก์ต่อไปนี้"
@@ -851,11 +852,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'รายงาน'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'สาธารณะ'
-    private: 'ส่วนตัว'
-    join: 'เข้าร่วม'
-    leave: 'ทิ้ง'
     showMore: 'แสดงมากขึ้น'
     showLess: 'แสดงน้อยลง'
     remove_project: 'นำออกจากสตูดิโอ'
@@ -872,8 +882,9 @@ studio:
       send: 'ส่ง'
       no_comments: 'สตูดิโอนี้ยังไม่มีความคิดเห็น'
       disabled_comments: 'ความคิดเห็นถูกปิดการใช้งานสำหรับสตูดิโอนี้'
+      remove_comment: 'Remove comment'
       post_error: 'เกิดข้อผิดพลาดขณะโพสต์ความคิดเห็นของคุณ ลองอีกครั้งในภายหลัง'
-      delete_error: 'เกิดข้อผิดพลาดขณะนำความคิดเห็นออก ลองอีกครั้งในภายหลัง'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'กิจกรรม'
       join_studio: '%user% เข้าร่วมสตูดิโอ'

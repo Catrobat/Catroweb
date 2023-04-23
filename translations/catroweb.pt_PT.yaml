@@ -8,7 +8,7 @@ createNewPassword: Create new password
 accountSettings: Account settings
 email: Endereço de Correio Electrónico
 aboutPocketCode: Acerca do Pocket Code
-about: About
+about: Sobre
 education: Education
 chat: Chat and forums
 others: Others
@@ -27,6 +27,7 @@ reportIt: Yes, report it!
 areYouSure: Are you sure?
 noWayOfReturn: There is no way to restore your actions!
 download: Descarregar
+downloadDisabledAlert: You must be logged in to download this project
 name: Nome
 description: Descrição
 noDescription: Nenhuma descrição disponível.
@@ -184,7 +185,7 @@ programs:
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Deseja salvar as alterações?
-  btnDiscard: Descartar
+  btnDiscard: Eliminar
   addComment: Write a comment
   thumbsUp: Thumbs up!
   smile: Smile!
@@ -201,7 +202,7 @@ programs:
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
-  save: Salvar
+  save: Guardar
   translationTitle: '%language% translation'
   editDefault: Edit default
   editTranslation: Edit %language% translation
@@ -436,8 +437,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -845,20 +846,29 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Reportar'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
     showMore: 'show more'
     showLess: 'show less'
     remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    remove_project_error: 'Failed to remove project from studio.'
+    remove_project_success: 'Project removed successfully from studio.'
+    no_projects: 'Studio does not contain any projects yet.'
+    updateCoverError: 'Something went wrong while updating the studio cover.'
     projects:
-      title: 'projects'
+      title: 'Programas'
     comments:
       title: 'Comentários'
       type_something: 'Type something'
@@ -866,13 +876,14 @@ studio:
       send: 'send'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'Activities'
       join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      add_project: '%user% added a project.'
+      add_comment: '%user% left a comment.'
     members_list:
       title: 'Studio members'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'

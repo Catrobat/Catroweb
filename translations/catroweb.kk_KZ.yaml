@@ -27,6 +27,7 @@ reportIt: Иә, хабарлаңыз!
 areYouSure: Сіз сенімдісіз бе?
 noWayOfReturn: Сіздің әрекеттеріңізді қалпына келтіруге ешқандай мүмкіндік жоқ!
 download: Жүктеп алу
+downloadDisabledAlert: Жобаларды жүктеу үшін сіз аккаунтыңызға кіріуіңіз керексіз
 name: Аты
 description: Сипаттама
 noDescription: Сипаттама жоқ.
@@ -208,8 +209,8 @@ programs:
   editTranslation: '%language% аударманы өзгеру'
   translations: Аудармалар
   createTranslation: Аудамарын құру
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  deletedComment: '**Кетірілген**'
+  replyLabel: жауап беру
   repliesLabel: жауаптар
 remixGraph:
   title: Ремикстер
@@ -331,16 +332,16 @@ licenseToPlay:
   text3: "Бәліштерді жеуге болады, сондай-ақ басқа адамдардың рецепттерін көшіріп, өзіңіз дайындауға болады, мүмкін әртүрлі ингредиенттермен. Бұл еркіндік екі қарапайым нәрсе талап етеді:"
   text4: "Catrobat қауымдастығын құру кезінде біз бұл әдісті қолдануды шештік, өйткені ол қауымдастықтағы оқу мен шығармашылықты қолдайды деп есептейміз. Рецепттер мен ингредиенттерді (скрипттер мен өнер туындылары) бөлісу арқылы адамдар бір-бірінің идеяларына сүйене алады және барлығына пайда көреді."
   text5: In designing the Catrobat website, we included features to encourage people to share and to give credit to others. On each project page, you can always download the original scripts for the project. If you remix a project (modifying the scripts or artwork, and sharing the result), we encourage you to give credit in the Project Notes, mentioning the people and project that inspired you.
-  text6: 'Learn more about the terms of use of the Catrobat online community on %link-termsOfUse%.'
+  text6: '%link-termsOfUse% сайтында Catrobat желілік қауымдастығының пайдалану шарттары туралы көбірек біліңіз.'
   list1:
-    item1: share your cakes along with the recipe
-    item2: give credit to those who inspired you
+    item1: бәлішіңіздің рецептімен бірге бөлісіңіз
+    item2: сізді шабыттандырған адамды белгілеңіз
   version: Версия 1.1, 2 Сәуір 2013
 termsOfUse:
   title: Қолдану ережелері
   headline: Catrobat қауымдастығына қош келдіңіз!
-  text1: 'As part of the Catrobat community, you are sharing projects and ideas with people:'
-  text2: "We need your help to make this community a supportive place for every member. Here's how you can help:"
+  text1: 'Catrobat қауымдастығында сіз жобаларыңызбен идеяларыңызды адамдарға бөлісесіз'
+  text2: "Бұл қауымдастықтың әрбір мүшесіне қолдау көрсететін орынға айналдыру үшін бізге сіздің көмегіңіз қажет.  Сіздің бізге қалай көмектесу керектігі:"
   text3: "Through the Catrobat project we want to foster cooperation and allow everyone's creativity to combine for the benefit of all of humanity. You also can become an active member of the Catrobat community by giving your projects back to the community as a gift, in the same way as other active members are giving their projects to you:"
   text4: 'Сізге сыйлығымыз:'
   text5: 'Біздің пайдалану және қызмет көрсету шарттары:'
@@ -436,8 +437,8 @@ resetPassword:
   check:
     title: "Электрондық поштаңызды тексеріңіз"
     description: "Электрондық поштаңызға сәйкес аккаунт бар болса, құпия сөзді қалпына келтіру үшін пайдалануға болатын сілтемесі бар электрондық пошта жаңа ғана жіберілді. Бұл сілтеменің мерзімі %time% де аяқталады."
-    description2: "Электрондық поштаңызға хат келмесе, онда спам бумасын немесе %tryAgainLink% тексеріңіз."
-    tryAgain: "қайтадан қайталаңыз"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Сәлем!"
     visitLink: "Құпия сөзді қалпына келтіру үшін мына сілтемеге өтіңіз"
@@ -486,9 +487,9 @@ errors:
     missing: 'unknown error: project_xml_not_found!'
   file:
     unexpected: unexpected file found
-    invalid: invalid file
+    invalid: жарамсыз файл
   image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+  unknown: белгісіз қате
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   program:
@@ -498,15 +499,15 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Аутентификация орындамалды
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      Пайдаланушы тіркелгі деректеріңіз дұрыс емес.
+      Қолданбаға қайта кіріп көріңіз.
 success:
   text: Сәтті
-  registration: Registration successful!
+  registration: Тіркелу сәтті өтті!
   token: жарайды
-  upload: Your project was uploaded successfully!
+  upload: Жобаңыз сәтті салынды!
   imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
@@ -545,8 +546,8 @@ api:
     currentPasswordWrong: "Қазіргі құпиясөз қате"
   project:
     nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
+    nameTooLong: 'Аты тым ұзын'
+    descriptionTooLong: 'Сипаттамасы өте ұзақ'
     creditsTooLong: 'Notes and credits too long'
     screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
@@ -845,18 +846,27 @@ extensions:
     multiplayer:
       title: Көп-ойыншы
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Кіру'
+  leave: 'Шығу'
+  report: 'Есеп беру'
+  public: 'қоғамдық'
+  private: 'жеке'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'қоғамдық'
-    private: 'жеке'
-    join: 'Кіру'
-    leave: 'Шығу'
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
     remove_project: 'Студиядан жою'
     remove_project_error: 'Жобаны студиядан жою мүмкін болмады!'
     remove_project_success: 'жоба студиядан сәттілік жойылды!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    no_projects: 'Studio does not contain any projects yet.'
+    updateCoverError: 'Something went wrong while updating the studio cover.'
     projects:
       title: 'жобалар'
     comments:
@@ -866,8 +876,9 @@ studio:
       send: 'жіберу'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
+      remove_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
     activity_list:
       title: 'Іс-шаралар'
       join_studio: '%user% студияға қосылды'

@@ -10,7 +10,7 @@
         {% if user_role == 'admin' or comment.username == user_name %}
           <a class="comment-delete-button" data-bs-toggle="tooltip"
              onclick="(new Studio()).removeComment($(this),'{{ comment.id }}', false, 0)"
-             title="{{ 'studio.details.remove_comment'|trans({}, 'catroweb') }}">
+             title="{{ 'studio.details.comments.remove_comment'|trans({}, 'catroweb') }}">
             <i class="ms-2 material-icons text-danger">delete</i>
           </a>
         {% endif %}
@@ -23,7 +23,7 @@
              data-bs-target="#comment-reply-modal">
             <span class="material-icons comment-info-icons">forum</span>
             <span
-                id="info-{{ comment.id }}">{{ comment.repliesCount }} {{ 'studio.details.replies'|trans({}, 'catroweb') }}</span>
+                id="info-{{ comment.id }}">{{ comment.repliesCount }} {{ 'studio.details.comments.replies'|trans({}, 'catroweb') }}</span>
           </a>
         </div>
       </div>

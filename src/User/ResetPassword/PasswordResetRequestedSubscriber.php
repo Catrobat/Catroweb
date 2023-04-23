@@ -51,7 +51,7 @@ class PasswordResetRequestedSubscriber implements EventSubscriberInterface
         ['resetToken' => $this->reset_password_helper->generateResetToken($user)]
       );
     } catch (ResetPasswordExceptionInterface $e) {
-      $this->logger->error("Can't create reset token for {$email}; Reason ".$e);
+      $this->logger->info("Can't create reset token for {$email}; Reason ".$e);
     }
   }
 }

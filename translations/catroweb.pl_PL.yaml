@@ -27,6 +27,7 @@ reportIt: Tak, zgłoś to!
 areYouSure: Jesteś pewien?
 noWayOfReturn: To działanie jest nieodwracalne!
 download: Pobieranie
+downloadDisabledAlert: Musisz być zalogowany, aby pobrać ten projekt
 name: Nazwa
 description: Opis
 noDescription: Brak opisu.
@@ -437,8 +438,8 @@ resetPassword:
   check:
     title: "Sprawdź swoje e-maile"
     description: "Jeśli konto pasujące do Twojego adresu e-mail istnieje, wysłano wiadomość e-mail zawierającą link, który możesz użyć do zresetowania hasła. Ten link wygaśnie za %time%."
-    description2: "Jeśli nie otrzymasz wiadomości e-mail, sprawdź folder spamu lub %tryAgainLink%"
-    tryAgain: "spróbuj ponownie"
+    descriptionTwo: "Możesz poprosić o zresetowanie nowego hasła co %throttleLimit% godzin."
+    descriptionThree: "Jeśli nie otrzymałeś wiadomości e-mail, sprawdź folder ze spamem lub napisz e-mail do naszego wsparcia pod adresem %email-webmaster%."
   email:
     title: "Cześć!"
     visitLink: "Aby zresetować hasło, odwiedź poniższy link"
@@ -846,20 +847,29 @@ extensions:
     multiplayer:
       title: Tryb wieloosobowy
 studio:
+  title: 'Studia'
+  singular: 'Studio'
+  create_studio: 'Utwórz studio'
+  delete_studio: 'Usuń studio'
+  studio_name: 'Nazwa Studia'
+  join: 'Dołącz'
+  leave: 'Opuść'
+  report: 'Zgłoś'
+  public: 'Publiczne'
+  private: 'Prywatne'
+  overview:
+    joined_studios: 'Członkostwo w Studiach'
+    public_studios: 'Studia publiczne'
   details:
-    public: 'Publiczne'
-    private: 'Prywatne'
-    join: 'Dołącz'
-    leave: 'Opuść'
     showMore: 'pokaż więcej'
     showLess: 'pokaż mniej'
     remove_project: 'Usuń z studia'
     remove_project_error: 'Nie udało się usunąć projektu ze studia!'
-    remove_project_success: 'projekt został pomyślnie usunięty ze studia!'
+    remove_project_success: 'Projekt został pomyślnie usunięty ze studia!'
     no_projects: 'Studio nie zawiera jeszcze żadnych projektów'
     updateCoverError: 'Coś poszło nie tak podczas aktualizacji okładki studia!'
     projects:
-      title: 'projekty'
+      title: 'Projekty'
     comments:
       title: 'Komentarze'
       type_something: 'Wpisz coś'
@@ -867,13 +877,14 @@ studio:
       send: 'wyślij'
       no_comments: 'To studio nie ma jeszcze komentarzy.'
       disabled_comments: 'Komentarze zostały wyłączone dla tego studia.'
+      remove_comment: 'Usuń komentarz'
       post_error: 'Coś poszło nie tak podczas wysyłania komentarza. Spróbuj ponownie później.'
-      delete_error: 'Coś poszło nie tak podczas usuwania komentarza. Spróbuj ponownie później.'
+      remove_error: 'Coś poszło nie tak podczas usuwania komentarza. Spróbuj ponownie później.'
     activity_list:
       title: 'Aktywności'
       join_studio: '%user% dołączył do studia.'
-      add_project: '%user% zostawił komentarz.'
-      add_comment: '%user% dodał projekt.'
+      add_project: '%user% dodał projekt.'
+      add_comment: '%user% napisał komentarz.'
     members_list:
       title: 'Członkowie Studia'
       project_count: '{0} Brak projektów studia |{1} 1 projekt studia |]1,Inf] %count% projektów studia'
