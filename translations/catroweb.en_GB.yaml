@@ -223,24 +223,27 @@ remixGraph:
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
-  subject: Your Catrobat Account Confirmation
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
   message: |
-    Dear %username%.
-    To finish activating your account - please visit %confirmationUrl%
-    This link can only be used once to validate your account.
-    Best regards,
-    Your Catrobat Team.
+    Welcome to Catrobat Community
+    With just one click on the button below 
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be 
+    used only once to confirm your email address.
+
   messageHtml: |
     <p>
-    Dear %username%.<br>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
     <br>
-    To finish activating your account - please click <a href=%confirmationUrl%>here.</a><br>
     <br>
-    This link can only be used once to validate your account.<br>
-    <br>
-    Best regards,<br>
-    Your Catrobat Team.
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
     </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -440,10 +443,14 @@ resetPassword:
     description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
     tryAgain: "try again"
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Reset your password"
+    contentFirst: "You are receiving this email because you " 
+    contentSecond: "recently requested a password reset for "
+    contentThird: "your Catrobat account. Follow the link " 
+    contentFourth: "below to change the password."
+    didNotRequestFirst: "If you have not requested a password change, "
+    didNotRequestSecond: "you can ignore this email."
+    expire: "This link is valid for %time% - only one time use!"
   reset:
     title: "Reset your password"
     button:

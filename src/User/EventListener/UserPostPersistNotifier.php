@@ -19,7 +19,7 @@ class UserPostPersistNotifier
   public function postPersist(User $user, LifecycleEventArgs $event): void
   {
     $this->addVerifiedDeveloperAchievement($user);
-    // $this->sendVerifyEmail($user); Disabled until mail issues are resolved
+    $this->sendVerifyEmail($user); 
   }
 
   /**
@@ -38,11 +38,14 @@ class UserPostPersistNotifier
       $user->getEmail()
     );
 
+    $expirationTime = $signatureComponents->getExpiresAt();
+
     $this->mailer->send(
       $user->getEmail(),
       $this->translator->trans('user.verification.email', [], 'catroweb'),
       'security/registration/confirmation_email.html.twig',
       [
+        'expire' => $expirationTime->format('H:i'), // Y-m-d H:i:s for a full date
         'signedUrl' => $signatureComponents->getSignedUrl(),
         'user' => $user,
       ]

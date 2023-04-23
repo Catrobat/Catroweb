@@ -36,17 +36,24 @@ class SendMailToUserController extends CRUDController
       return new Response('Empty subject!');
     }
 
+    $titel = (string) $request->query->get('titel');
+
     $messageText = (string) $request->query->get('message');
     if ('' === $messageText) {
       return new Response('Empty message!');
     }
-    $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
+    $text = str_replace(PHP_EOL, ' ', $messageText);
+    $htmlText = wordwrap($text, 60, "<br>\n");
     $mailTo = $user->getEmail();
     $this->mailer->send(
       $mailTo,
       $subject,
       'Admin/Tools/Email/simple_message.html.twig',
-      ['message' => $htmlText]
+      [
+        'message' => $htmlText,
+        'subject' => $subject,
+        'titel' => $titel
+      ]
     );
 
     return new Response('OK - message sent');

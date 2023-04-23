@@ -1,18 +1,47 @@
 {% extends "Default/email.html.twig" %}
 
+{% block head_title %}
+  {% autoescape false %}
+    {{ 'accountConfirmation.subject'|trans({}, 'catroweb')}} 
+  {% endautoescape %}
+{% endblock %}
+
 {% block body_title %}
   {% autoescape false %}
-    {{ 'accountConfirmation.subject'|trans({}, 'catroweb')}}
+  <div align="center">
+    {{ 'accountConfirmation.welcome'|trans({}, 'catroweb')}}
+  </div>
   {% endautoescape %}
 {% endblock %}
 
 
 {% block body_content %}
-
   {% autoescape false %}
-    {{ 'accountConfirmation.messageHtml'|trans({'%username%': user.username,
-      '%confirmationUrl%': signedUrl
-    }, 'catroweb') }}
+  <style>
+
+  .btn-confirm {
+    padding: 20px 65px 0 65px;
+  }
+
+  .container {
+    padding: 50px 0 20px 0;
+  }
+
+  </style>
+
+  <div align="center">
+    {{ 'accountConfirmation.messageHtml'|trans({'%time%': expire}, "catroweb") }}
+    <div align="center" class="container">
+      <a href="{{ signedUrl }}">
+        <button id="confirm-account-button" class="btn btn-primary btn-confirm" >
+          <p><strong><big>{{ "accountConfirmation.button"|trans({}, "catroweb") }}</big></strong></p>
+        </button>
+      </a>
+    </div>  
+    <small>
+      {{ 'accountConfirmation.deleteHtml'|trans({'%deleteUrl%': deleteUrl}, "catroweb")}}
+    </small>
+  </div>
   {% endautoescape %}
 
 {% endblock %}

@@ -13,13 +13,14 @@ use Symfony\Component\Routing\Annotation\Route;
 use SymfonyCasts\Bundle\ResetPassword\Controller\ResetPasswordControllerTrait;
 use SymfonyCasts\Bundle\ResetPassword\Exception\ResetPasswordExceptionInterface;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 #[Route(path: '/reset-password')]
 class ResetPasswordController extends AbstractController
 {
   use ResetPasswordControllerTrait;
 
-  public function __construct(private readonly ResetPasswordHelperInterface $resetPasswordHelper, private readonly EntityManagerInterface $entityManager)
+  public function __construct(protected VerifyEmailHelperInterface $verify_email_helper, private readonly ResetPasswordHelperInterface $resetPasswordHelper, private readonly EntityManagerInterface $entityManager)
   {
   }
 
@@ -31,6 +32,48 @@ class ResetPasswordController extends AbstractController
     {
       return $this->render('security/reset_password/request.html.twig', []);
     }
+
+  #[Route(path: '/email', name: 'app_email')]
+    public function testEmail(): Response 
+    {
+      
+      // Generate a fake token if the user does not exist or someone hit this page directly.
+      // This prevents exposing whether a user was found with the given email address or not
+      if (null === ($resetToken = $this->getTokenObjectFromSession())) {
+        $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
+      }
+
+      $signature = $this->verify_email_helper->generateSignature(
+        'registration_confirmation_route',
+        'user_id',
+        'user@email.com'
+      );
+
+      $expirationTime = $signature->getExpiresAt();
+
+      $confirm = "this is the url";
+
+      $user = array(
+        'username' => 'unprepared'
+      );
+
+      $message = "Hello you need to come to the catrobat building as fast as possible. there is something wrong with your project please come as fast as u can";
+      $titel = "Der titel";
+      $subject = "Das subject";
+      $wrapped_message = wordwrap($message, 60, "<br>\n");
+
+      return $this->render('security/reset_password/email.html.twig', [
+        'resetToken' => $resetToken,
+        'user' => $user,
+        'signedUrl' => $confirm,
+        'deleteUrl' => $confirm,
+        'message' => $wrapped_message,
+        'titel' => $titel,
+        'head' => $subject,
+        'expire' => $expirationTime->format('H:i')
+      ]);
+    }
+
 
   /**
    * Confirmation page after a user has requested a password reset.
