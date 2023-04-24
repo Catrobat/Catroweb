@@ -2483,16 +2483,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.49.2",
+            "version": "v1.50.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "18d37b0b9fa761eaff909f360f96efa9ca2d6ca7"
+                "reference": "2cb01dbf61e5818cc4a19f1289839223d074018e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/18d37b0b9fa761eaff909f360f96efa9ca2d6ca7",
-                "reference": "18d37b0b9fa761eaff909f360f96efa9ca2d6ca7",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/2cb01dbf61e5818cc4a19f1289839223d074018e",
+                "reference": "2cb01dbf61e5818cc4a19f1289839223d074018e",
                 "shasum": ""
             },
             "require": {
@@ -2501,20 +2501,19 @@
                 "guzzlehttp/promises": "^1.3",
                 "guzzlehttp/psr7": "^1.7|^2.0",
                 "monolog/monolog": "^1.1|^2.0|^3.0",
-                "php": ">=5.6",
-                "psr/http-message": "1.0.*",
+                "php": ">=7.4",
+                "psr/http-message": "^1.0",
                 "rize/uri-template": "~0.3"
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "google/cloud-common-protos": "^0.3",
+                "google/cloud-common-protos": "^0.4",
                 "google/gax": "^1.9",
                 "opis/closure": "^3",
-                "phpdocumentor/reflection": "^3.0||^4.0||^5.3",
-                "phpspec/prophecy": "^1.10.3",
-                "phpunit/phpunit": "^4.8|^5.0|^8.0",
-                "squizlabs/php_codesniffer": "2.*",
-                "yoast/phpunit-polyfills": "^1.0"
+                "phpdocumentor/reflection": "^5.0",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "2.*"
             },
             "suggest": {
                 "opis/closure": "May be used to serialize closures to process jobs in the batch daemon. Please require version ^3.",
@@ -2543,35 +2542,35 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.49.2"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.50.0"
             },
-            "time": "2023-03-10T20:22:17+00:00"
+            "time": "2023-04-21T22:21:40+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.13.1",
+            "version": "v1.13.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "1d238b00ddaa388113fa8ea996974864788ee66b"
+                "reference": "ee6cab6187b08de549fd6c77af30fa4c75074ddd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/1d238b00ddaa388113fa8ea996974864788ee66b",
-                "reference": "1d238b00ddaa388113fa8ea996974864788ee66b",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/ee6cab6187b08de549fd6c77af30fa4c75074ddd",
+                "reference": "ee6cab6187b08de549fd6c77af30fa4c75074ddd",
                 "shasum": ""
             },
             "require": {
                 "google/cloud-core": "^1.39",
-                "google/gax": "^1.1"
+                "google/gax": "^1.1",
+                "php": ">=7.4"
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "phpdocumentor/reflection": "^3.0||^4.0",
-                "phpspec/prophecy": "^1.10.3",
-                "phpunit/phpunit": "^4.8|^5.0|^8.0",
-                "squizlabs/php_codesniffer": "2.*",
-                "yoast/phpunit-polyfills": "^1.0"
+                "phpdocumentor/reflection": "^5.0",
+                "phpspec/prophecy-phpunit": "^2.0",
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "2.*"
             },
             "suggest": {
                 "ext-grpc": "The gRPC extension enables use of the performant gRPC transport",
@@ -2598,9 +2597,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.13.1"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.13.2"
             },
-            "time": "2023-03-10T20:22:17+00:00"
+            "time": "2023-04-21T14:12:59+00:00"
         },
         {
             "name": "google/common-protos",
@@ -2656,16 +2655,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.19.0",
+            "version": "v1.19.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "d537fd00dcdb1b5599386c1253ccb79e69d5d9f2"
+                "reference": "30f6b307faa9858bf58d967664467098dbbc354f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/d537fd00dcdb1b5599386c1253ccb79e69d5d9f2",
-                "reference": "d537fd00dcdb1b5599386c1253ccb79e69d5d9f2",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/30f6b307faa9858bf58d967664467098dbbc354f",
+                "reference": "30f6b307faa9858bf58d967664467098dbbc354f",
                 "shasum": ""
             },
             "require": {
@@ -2706,9 +2705,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.19.0"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.19.1"
             },
-            "time": "2023-01-27T00:30:03+00:00"
+            "time": "2023-03-16T19:58:19+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -2757,21 +2756,21 @@
         },
         {
             "name": "google/longrunning",
-            "version": "v0.2.4",
+            "version": "v0.2.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "651cbb7065bd77ae7395196695da391f641f739c"
+                "reference": "9689b4db54cf4cf8186118d9d59aa9ba35bb5842"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/651cbb7065bd77ae7395196695da391f641f739c",
-                "reference": "651cbb7065bd77ae7395196695da391f641f739c",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/9689b4db54cf4cf8186118d9d59aa9ba35bb5842",
+                "reference": "9689b4db54cf4cf8186118d9d59aa9ba35bb5842",
                 "shasum": ""
             },
             "require-dev": {
                 "google/gax": "^1.13.0",
-                "phpunit/phpunit": "^4.8|^5.0|^8.0"
+                "phpunit/phpunit": "^9.0"
             },
             "type": "library",
             "extra": {
@@ -2795,22 +2794,22 @@
             ],
             "description": "Google LongRunning Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/php-longrunning/tree/v0.2.4"
+                "source": "https://github.com/googleapis/php-longrunning/tree/v0.2.6"
             },
-            "time": "2023-02-10T16:10:50+00:00"
+            "time": "2023-04-21T14:12:59+00:00"
         },
         {
             "name": "google/protobuf",
-            "version": "v3.22.2",
+            "version": "v3.22.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "ff28a64946708e13f2be627b5e5561f247ecf95c"
+                "reference": "0edeee0cc2e2991706e16ab60c7d224e5c0241ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/ff28a64946708e13f2be627b5e5561f247ecf95c",
-                "reference": "ff28a64946708e13f2be627b5e5561f247ecf95c",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/0edeee0cc2e2991706e16ab60c7d224e5c0241ba",
+                "reference": "0edeee0cc2e2991706e16ab60c7d224e5c0241ba",
                 "shasum": ""
             },
             "require": {
@@ -2839,9 +2838,9 @@
                 "proto"
             ],
             "support": {
-                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.22.2"
+                "source": "https://github.com/protocolbuffers/protobuf-php/tree/v3.22.3"
             },
-            "time": "2023-03-10T17:52:03+00:00"
+            "time": "2023-04-12T23:38:34+00:00"
         },
         {
             "name": "grpc/grpc",
@@ -5658,21 +5657,21 @@
         },
         {
             "name": "psr/http-client",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-client.git",
-                "reference": "2dfb5f6c5eff0e91e20e913f8c5452ed95b86621"
+                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-client/zipball/2dfb5f6c5eff0e91e20e913f8c5452ed95b86621",
-                "reference": "2dfb5f6c5eff0e91e20e913f8c5452ed95b86621",
+                "url": "https://api.github.com/repos/php-fig/http-client/zipball/0955afe48220520692d2d09f7ab7e0f93ffd6a31",
+                "reference": "0955afe48220520692d2d09f7ab7e0f93ffd6a31",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.0 || ^8.0",
-                "psr/http-message": "^1.0"
+                "psr/http-message": "^1.0 || ^2.0"
             },
             "type": "library",
             "extra": {
@@ -5692,7 +5691,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "http://www.php-fig.org/"
+                    "homepage": "https://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP clients",
@@ -5704,9 +5703,9 @@
                 "psr-18"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-client/tree/master"
+                "source": "https://github.com/php-fig/http-client/tree/1.0.2"
             },
-            "time": "2020-06-29T06:28:15+00:00"
+            "time": "2023-04-10T20:12:12+00:00"
         },
         {
             "name": "psr/http-factory",
@@ -5765,25 +5764,25 @@
         },
         {
             "name": "psr/http-message",
-            "version": "1.0.1",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363"
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/f6561bf28d520154e4b0ec72be95418abe6d9363",
-                "reference": "f6561bf28d520154e4b0ec72be95418abe6d9363",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.3.0"
+                "php": "^7.2 || ^8.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -5812,9 +5811,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/master"
+                "source": "https://github.com/php-fig/http-message/tree/1.1"
             },
-            "time": "2016-08-06T14:39:51+00:00"
+            "time": "2023-04-04T09:50:52+00:00"
         },
         {
             "name": "psr/log",
