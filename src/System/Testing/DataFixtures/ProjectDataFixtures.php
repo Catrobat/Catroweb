@@ -67,7 +67,7 @@ class ProjectDataFixtures
     $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);
     $project->setDescription($config['description'] ?? '');
     $project->setCredits($config['credit'] ?? '');
-    $project->setScratchId((isset($config['scratch_id']) && (int) $config['scratch_id'] != 0) ? (int) $config['scratch_id'] : null);
+    $project->setScratchId((isset($config['scratch_id']) && 0 != (int) $config['scratch_id']) ? (int) $config['scratch_id'] : null);
     $project->setViews(isset($config['views']) ? (int) $config['views'] : 0);
     $project->setDownloads(isset($config['downloads']) ? (int) $config['downloads'] : 0);
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
