@@ -5413,16 +5413,16 @@
         },
         {
             "name": "phpstan/phpdoc-parser",
-            "version": "1.18.1",
+            "version": "1.20.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpdoc-parser.git",
-                "reference": "22dcdfd725ddf99583bfe398fc624ad6c5004a0f"
+                "reference": "6c04009f6cae6eda2f040745b6b846080ef069c2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/22dcdfd725ddf99583bfe398fc624ad6c5004a0f",
-                "reference": "22dcdfd725ddf99583bfe398fc624ad6c5004a0f",
+                "url": "https://api.github.com/repos/phpstan/phpdoc-parser/zipball/6c04009f6cae6eda2f040745b6b846080ef069c2",
+                "reference": "6c04009f6cae6eda2f040745b6b846080ef069c2",
                 "shasum": ""
             },
             "require": {
@@ -5452,9 +5452,9 @@
             "description": "PHPDoc parser with support for nullable, intersection and generic types",
             "support": {
                 "issues": "https://github.com/phpstan/phpdoc-parser/issues",
-                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.18.1"
+                "source": "https://github.com/phpstan/phpdoc-parser/tree/1.20.3"
             },
-            "time": "2023-04-07T11:51:11+00:00"
+            "time": "2023-04-25T09:01:03+00:00"
         },
         {
             "name": "psr/cache",
@@ -6855,16 +6855,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.22.6",
+            "version": "4.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "0884daf762803fc39ab4046aec71817811c88c3a"
+                "reference": "d796f517d89e63eadb52026909b8df1ae99a837f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/0884daf762803fc39ab4046aec71817811c88c3a",
-                "reference": "0884daf762803fc39ab4046aec71817811c88c3a",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/d796f517d89e63eadb52026909b8df1ae99a837f",
+                "reference": "d796f517d89e63eadb52026909b8df1ae99a837f",
                 "shasum": ""
             },
             "require": {
@@ -6875,40 +6875,40 @@
                 "knplabs/knp-menu-bundle": "^3.0",
                 "php": "^8.0",
                 "psr/container": "^1.0 || ^2.0",
-                "psr/log": "^1.1 || ^2.0 || ^3.0",
+                "psr/log": "^2.0 || ^3.0",
                 "sonata-project/block-bundle": "^4.11",
                 "sonata-project/doctrine-extensions": "^1.8 || ^2.0",
                 "sonata-project/exporter": "^2.14 || ^3.1.1",
                 "sonata-project/form-extensions": "^1.15",
                 "sonata-project/twig-extensions": "^1.4.1 || ^2.0",
-                "symfony/asset": "^4.4 || ^5.4 || ^6.2",
-                "symfony/config": "^4.4 || ^5.4 || ^6.2",
-                "symfony/console": "^4.4 || ^5.4 || ^6.2",
-                "symfony/dependency-injection": "^4.4.8 || ^5.4 || ^6.2",
-                "symfony/doctrine-bridge": "^4.4 || ^5.4 || ^6.2",
-                "symfony/event-dispatcher": "^4.4 || ^5.4 || ^6.2",
-                "symfony/event-dispatcher-contracts": "^1.1 || ^2.0 || ^3.0",
-                "symfony/expression-language": "^4.4 || ^5.4 || ^6.2",
-                "symfony/form": "^4.4.12 || ^5.4 || ^6.2",
-                "symfony/framework-bundle": "^4.4.6 || ^5.4 || ^6.2",
-                "symfony/http-foundation": "^4.4 || ^5.4 || ^6.2",
-                "symfony/http-kernel": "^4.4 || ^5.4 || ^6.2",
-                "symfony/options-resolver": "^4.4 || ^5.4 || ^6.2",
-                "symfony/property-access": "^4.4 || ^5.4 || ^6.2",
-                "symfony/routing": "^4.4 || ^5.4 || ^6.2",
+                "symfony/asset": "^5.4 || ^6.2",
+                "symfony/config": "^5.4 || ^6.2",
+                "symfony/console": "^5.4 || ^6.2",
+                "symfony/dependency-injection": "^5.4 || ^6.2",
+                "symfony/doctrine-bridge": "^5.4 || ^6.2",
+                "symfony/event-dispatcher": "^5.4 || ^6.2",
+                "symfony/event-dispatcher-contracts": "^2.0 || ^3.0",
+                "symfony/expression-language": "^5.4 || ^6.2",
+                "symfony/form": "^5.4 || ^6.2",
+                "symfony/framework-bundle": "^5.4 || ^6.2",
+                "symfony/http-foundation": "^5.4 || ^6.2",
+                "symfony/http-kernel": "^5.4 || ^6.2",
+                "symfony/options-resolver": "^5.4 || ^6.2",
+                "symfony/property-access": "^5.4 || ^6.2",
+                "symfony/routing": "^5.4 || ^6.2",
                 "symfony/security-acl": "^3.1",
-                "symfony/security-bundle": "^4.4 || ^5.4 || ^6.2",
-                "symfony/security-core": "^4.4.24 || ^5.4 || ^6.2",
-                "symfony/security-csrf": "^4.4 || ^5.4 || ^6.2",
-                "symfony/serializer": "^4.4 || ^5.4 || ^6.2",
+                "symfony/security-bundle": "^5.4 || ^6.2",
+                "symfony/security-core": "^5.4 || ^6.2",
+                "symfony/security-csrf": "^5.4 || ^6.2",
+                "symfony/serializer": "^5.4 || ^6.2",
                 "symfony/string": "^5.4 || ^6.2",
-                "symfony/translation": "^4.4 || ^5.4 || ^6.2",
-                "symfony/translation-contracts": "^1.1.10 || ^2.3 || ^3.0",
-                "symfony/twig-bridge": "^4.4 || ^5.4 || ^6.2",
-                "symfony/twig-bundle": "^4.4 || ^5.4 || ^6.2",
-                "symfony/validator": "^4.4 || ^5.4 || ^6.2",
+                "symfony/translation": "^5.4 || ^6.2",
+                "symfony/translation-contracts": "^2.3 || ^3.0",
+                "symfony/twig-bridge": "^5.4 || ^6.2",
+                "symfony/twig-bundle": "^5.4 || ^6.2",
+                "symfony/validator": "^5.4 || ^6.2",
                 "twig/string-extra": "^3.0",
-                "twig/twig": "^2.12.1 || ^3.0"
+                "twig/twig": "^3.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.4",
@@ -6921,16 +6921,16 @@
                 "phpstan/phpstan-symfony": "^1.0",
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
-                "psalm/plugin-symfony": "^4.0 || ^5.0",
+                "psalm/plugin-symfony": "^5.0",
                 "psr/event-dispatcher": "^1.0",
                 "rector/rector": "^0.15",
-                "symfony/browser-kit": "^4.4 || ^5.4 || ^6.2",
-                "symfony/css-selector": "^4.4 || ^5.4 || ^6.2",
-                "symfony/filesystem": "^4.4 || ^5.4 || ^6.2",
+                "symfony/browser-kit": "^5.4 || ^6.2",
+                "symfony/css-selector": "^5.4 || ^6.2",
+                "symfony/filesystem": "^5.4 || ^6.2",
                 "symfony/maker-bundle": "^1.25",
                 "symfony/phpunit-bridge": "^6.2",
-                "symfony/yaml": "^4.4 || ^5.4 || ^6.2",
-                "vimeo/psalm": "^4.9.2 || ^5.8.0"
+                "symfony/yaml": "^5.4 || ^6.2",
+                "vimeo/psalm": "^5.8.0"
             },
             "suggest": {
                 "twig/extra-bundle": "Auto configures the Twig Intl extension"
@@ -6968,7 +6968,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.22.6"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.23.0"
             },
             "funding": [
                 {
@@ -6988,7 +6988,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-12T10:06:04+00:00"
+            "time": "2023-04-25T05:01:35+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
