@@ -16,8 +16,16 @@
         <span class="h2">{{ "credits"|trans({}, "catroweb") }}</span>
       </div>
       <div id="credits" class="text-break">
-        {% if program.credits %}
-          {{ program.credits|nl2br }}
+        {% if (program.credits or program.isScratchProgram()) %}
+          {% if program.credits %}
+            {{ program.credits|nl2br }}
+          {% endif %}
+          {% if program.isScratchProgram() %}
+            {{ "projectImportedFromScratch"|trans({}, "catroweb") }}
+            <a href={{ 'https://scratch.mit.edu/projects/' ~ program.getScratchId() }}>
+              {{ "scratchImportedProjectLinkHere"|trans({}, "catroweb") }}
+            </a>
+          {% endif %}
         {% else %}
           {{ "noCredits"|trans({}, "catroweb") }}
         {% endif %}
