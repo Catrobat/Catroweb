@@ -167,7 +167,7 @@ programs:
   reportDone: आपने इस प्रोजेक्ट को रिपोर्ट कर दिया!
   updateAppHeaderDownload: डाउनलोड संभव नहीं है
   updateAppTextDownload: कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें। सावधान रहें कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppTextDownloadApk: एपीके डाउनलोड वर्तमान में केवल एंड्रॉइड पर उपलब्ध है, आईओएस पर नहीं।
   updateAppHeader: एप्लिकेशन को अपडेट करें
   updateAppText: इस प्रोजेक्ट को डाउनलोड करने के लिए कृपया अपने ऐप को सबसे नए वर्जन में अपडेट करें।
   btnClosePopup: ठीक है
@@ -182,8 +182,8 @@ programs:
   deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया था।
   deleted_popup_header: हटा दिया
   noAdminRights: आपके पास व्यवस्थापक का अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: प्रोजेक्ट संपादित करें
+  closeProjectEditor: "\nप्रोजेक्ट एडिटर बंद करें"
   closeEditorPrompt: क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?
   btnDiscard: रद्द करें
   addComment: टिप्पणी दें
@@ -199,17 +199,17 @@ programs:
   showTranslation: अनुवाद दिखाएं
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: गूगल ट्रांसलेट
+  confrimDelete: क्या आप वाकई अनुवाद हटाना चाहते हैं?
   default: पूर्व निर्धारित
   save: सहेजें
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: '%language% अनुवाद'
+  editDefault: "\nडिफ़ॉल्ट संपादित करें"
+  editTranslation: '%language% अनुवाद संपादित करें '
+  translations: "\nअनुवाद"
+  createTranslation: "\nअनुवाद करें"
   deletedComment: '**Deleted**'
-  replyLabel: reply
+  replyLabel: "\nजवाब"
   repliesLabel: जवाब
 remixGraph:
   title: रीमिक्स
@@ -222,7 +222,7 @@ remixGraph:
   programNotAvailable: 'अनुपलब्ध'
   programUnknownUser: 'अज्ञात उपयोगकर्ता'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  - यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे उत्तर न दें।
 accountConfirmation:
   subject: आपका Catrobat खाता पुष्टिकरण
   message: |
@@ -271,7 +271,7 @@ passwordRecovery:
     आपकी कैटोबैट टीम।
     </p>
 profile:
-  aboutMe: About me
+  aboutMe: मेरे बारे मेँ
   currentlyWorkingOn: Currently working on
   edit: अपने प्रोफ़ाइल संपादित करें
   saveChanges: परिवर्तन सहेजें
@@ -301,15 +301,15 @@ profile:
     submitSuccess: सहेज दिया गया !
   reallyDeleteProgram: क्या आप वास्तव में अपने प्रोजेक्ट को हटाना चाहते हैं
   programsOf: की परियोजनाएँ
-  picture: Profile picture
+  picture: प्रोफ़ाइल फोटो
   changePicture: चित्र बदले
   goToScratchProfile: स्क्रैच पर प्रोफाइल
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
-  account: Account
+  userSettings: "\nउपयोगकर्ता सेटिंग"
+  profileSettings: "\nपार्श्वचित्र समायोजन"
+  securitySettings: "\nसुरक्षा सेटिंग्स"
+  accountSettings: अकाउंट सेटिंग
+  account: "\nअकाउंट"
   editProfile: अर्द्ध मुख संपादित करें
   edit: बदलें
   done: हो गया
@@ -319,12 +319,12 @@ myprofile:
   email: ईमेल
   deleteAccount: खाता नष्ट करें
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
+    चेतावनी:
+    आपने %num_projects% प्रोजेक्ट बनाया और आपके %num_followers% फ़ॉलोअर हैं। आपके सभी प्रोजेक्ट हटा दिए जाएंगे. अब आप लॉगिन नहीं कर पाएंगे और आपके प्रोजेक्ट सभी सूचियों से गायब हो जाएंगे। आपकी प्रोफ़ाइल को हटाना पूर्ववत नहीं किया जा सकता!
+    क्या आप वाकई हमें छोड़ना चाहते हैं?
   editAccountSettings: खाता सेटिंग संपादित करें
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  profileChangeSuccess: आपकी प्रोफ़ाइल सफलतापूर्वक बदल दी गई है।
+  unspecifiedError: आपकी प्रोफ़ाइल बदलते समय एक अज्ञात त्रुटि हुई। कृपया हमसे संपर्क करें।
 licenseToPlay:
   link: 'चलाने के लिए लाइसेंस'
   title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
@@ -381,7 +381,7 @@ search:
   results: खोज परिणाम
   resultcount: आपकी खोज ने %count% परिणाम लौटा दिए
   fail: कृपया कम से कम एक खोज शब्द दर्ज करें
-  noUsers: No users found
+  noUsers: कोई उपयोग्कर्ता नहीं मिले।
   noProjects: No projects found
 menu:
   profile: मेरी पार्श्वचित्र
