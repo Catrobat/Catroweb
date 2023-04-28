@@ -49,6 +49,7 @@ use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
 use App\Api\AuthenticationApi;
+use App\Api\Exceptions\ApiExceptionSubscriber;
 use App\Api\MediaLibraryApi;
 use App\Api\NotificationsApi;
 use App\Api\ProjectsApi;
@@ -539,6 +540,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set(ScratchProjectUpdaterEventSubscriber::class)
+    ->tag('kernel.event_subscriber')
+  ;
+
+  $services
+    ->set(ApiExceptionSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 
