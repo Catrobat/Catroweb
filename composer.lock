@@ -7675,22 +7675,22 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "2.0.0",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "9d8eb86fe28868744f2664ac452f26e5b0a1bb7e"
+                "reference": "1aa4ca22622cef029ba3191f1dbb7504d77e3f6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/9d8eb86fe28868744f2664ac452f26e5b0a1bb7e",
-                "reference": "9d8eb86fe28868744f2664ac452f26e5b0a1bb7e",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/1aa4ca22622cef029ba3191f1dbb7504d77e3f6e",
+                "reference": "1aa4ca22622cef029ba3191f1dbb7504d77e3f6e",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
-                "symfony/config": "^5.4 || ^6.0",
-                "symfony/twig-bridge": "^5.4 || ^6.0",
+                "symfony/config": "^5.4 || ^6.2",
+                "symfony/twig-bridge": "^5.4 || ^6.2",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
@@ -7703,18 +7703,18 @@
                 "phpstan/phpstan-strict-rules": "^1.0",
                 "phpstan/phpstan-symfony": "^1.0",
                 "phpunit/phpunit": "^9.5",
-                "psalm/plugin-phpunit": "^0.16",
-                "psalm/plugin-symfony": "^3.0",
-                "rector/rector": "^0.13",
-                "symfony/browser-kit": "^5.4 || ^6.0",
-                "symfony/dependency-injection": "^5.4 || ^6.0",
-                "symfony/framework-bundle": "^5.4 || ^6.0",
-                "symfony/http-foundation": "^5.4 || ^6.0",
-                "symfony/http-kernel": "^5.4 || ^6.0",
-                "symfony/phpunit-bridge": "^6.1",
-                "symfony/translation": "^5.4 || ^6.0",
-                "symfony/twig-bundle": "^5.4 || ^6.0",
-                "vimeo/psalm": "^4.7.2"
+                "psalm/plugin-phpunit": "^0.18",
+                "psalm/plugin-symfony": "^5.0",
+                "rector/rector": "^0.15",
+                "symfony/browser-kit": "^5.4 || ^6.2",
+                "symfony/dependency-injection": "^5.4 || ^6.2",
+                "symfony/framework-bundle": "^5.4 || ^6.2",
+                "symfony/http-foundation": "^5.4 || ^6.2",
+                "symfony/http-kernel": "^5.4 || ^6.2",
+                "symfony/phpunit-bridge": "^6.2",
+                "symfony/translation": "^5.4 || ^6.2",
+                "symfony/twig-bundle": "^5.4 || ^6.2",
+                "vimeo/psalm": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -7747,7 +7747,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/2.0.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/2.1.0"
             },
             "funding": [
                 {
@@ -7767,7 +7767,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2022-08-01T05:24:29+00:00"
+            "time": "2023-04-25T05:24:50+00:00"
         },
         {
             "name": "sonata-project/user-bundle",
