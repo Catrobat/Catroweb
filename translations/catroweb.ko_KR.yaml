@@ -34,6 +34,8 @@ noDescription: 설명 없음
 credits: 만든이
 noCredits: 만든이 없음
 notesAndCreditsDescription: 어떻게 이 프로젝트를 만드셨나요? 다른 사람의 아이디어나 작품을 이용했나요? 여기에 감사를 써보세요.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: 국가
 loginText: 로그인
 privacyPolicy: 개인 정보 보호 정책

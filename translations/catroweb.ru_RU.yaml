@@ -34,6 +34,8 @@ noDescription: Описание отсутствует.
 credits: Примечания и авторы
 noCredits: Нет примечаний и упоминаний об авторах
 notesAndCreditsDescription: Как вы создали этот проект? Вы использовали идеи, скрипты или работы других людей? Поблагодарите их здесь.
+projectImportedFromScratch: Этот проект был импортирован из MIT Scratch. Вы можете посмотреть оригинальный проект
+scratchImportedProjectLinkHere: здесь.
 country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности

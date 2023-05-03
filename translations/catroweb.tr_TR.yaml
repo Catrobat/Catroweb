@@ -34,6 +34,8 @@ noDescription: Açıklama mevcut değil.
 credits: Yapanlar
 noCredits: Her hangi bir yapanlar yok. 
 notesAndCreditsDescription: Bu projeyi nasıl yarattınız? Başkalarının fikirlerini, senaryolarını veya sanat eserlerini kullandınız mı? Onlara burada teşekkür edin.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Ülke
 loginText: oturum aç
 privacyPolicy: Gizlilik politikası

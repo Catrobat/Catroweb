@@ -8,7 +8,7 @@ createNewPassword: Create new password
 accountSettings: Account settings
 email: E-Mail
 aboutPocketCode: O Pocket Code
-about: About
+about: O programu
 education: Education
 chat: Chat and forums
 others: Others
@@ -34,6 +34,8 @@ noDescription: Opisa ni na voljo.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Država
 loginText: prijava
 privacyPolicy: Pravilnik o zasebnosti
@@ -710,7 +712,7 @@ clipboard:
   success_project: Link to project copied to clipboard!
   success_user: Link to user copied to clipboard!
   fail: Failed to copy link to clipboard! :(
-next: Next
+next: Naprej
 previous: Previous
 media-packages:
   title: Media-Packages
@@ -758,7 +760,7 @@ category:
 achievements:
   sidebar:
     title: 'Achievements'
-    badge: 'new'
+    badge: 'Novo'
   overview:
     header: 'Achievements'
     most_recent_achievement:

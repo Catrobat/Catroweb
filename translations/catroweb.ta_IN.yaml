@@ -34,6 +34,8 @@ noDescription: விளக்கவுரை ஏதும் கிடைக்
 credits: குறிப்புகளும் பொதுவொப்புதல்களும்
 noCredits: எந்த குறிப்புகளும் பொதுவொப்புதல்களும் கிடைக்கவில்லை
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: சுய செயலிட கொள்கை

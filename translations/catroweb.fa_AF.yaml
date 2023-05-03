@@ -34,6 +34,8 @@ noDescription: هیچ توضیحی در دسترس نیست.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از اندیشه های، اسکریپت ها یا آثار هنری از دیگران استفاده کرده اید؟ اینجا از آنها تشکری کن. 
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: کشور
 loginText: وارد شدن
 privacyPolicy: سیاست حفظ حریم خصوصی

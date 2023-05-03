@@ -34,6 +34,8 @@ noDescription: Keine Beschreibung verfügbar.
 credits: Notizen und Credits
 noCredits: Keine Notizen und Credits verfügbar.
 notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, Skripte oder Kunstwerke von anderen Leuten verwendet? Danke ihnen hier.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
@@ -719,7 +721,7 @@ next: Weiter
 previous: Vorheriges
 media-packages:
   title: Medien-Pakete
-  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Obekte zu deinem PocketCode Programm hinzufügen.
+  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Objekte zu deinem PocketCode Programm hinzufügen.
   thumb-size:
     description: Vorschaugröße
     sm: klein
