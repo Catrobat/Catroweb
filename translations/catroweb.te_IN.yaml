@@ -34,6 +34,8 @@ noDescription: డిస్క్రిప్షన్ అంధుబాటు�
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: మీరు ఈ ప్రాజెక్ట్‌ను ఎలా సృష్టించారు? మీరు ఇతర వ్యక్తుల నుండి ఆలోచనలు, స్క్రిప్ట్‌లు లేదా కళాకృతులను ఉపయోగించారా? వారికి ఇక్కడ ధన్యవాదాలు.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: దేశం
 loginText: లాగిన్
 privacyPolicy: ప్రయివసి పాలిసి

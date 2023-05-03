@@ -34,6 +34,8 @@ noDescription: 説明はありません。
 credits: ノートとクレジット
 noCredits: 利用可能なメモとクレジットはありません。
 notesAndCreditsDescription: どのようにしてこのプロジェクトを作ったのですか? アイデア、スクリプト、または他の人々のアートワークを使ったのですか?
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: 国
 loginText: ログイン
 privacyPolicy: プライバシーポリシー

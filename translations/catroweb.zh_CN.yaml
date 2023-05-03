@@ -34,6 +34,8 @@ noDescription: 没有可用的描述
 credits: 说明和版权信息
 noCredits: 没有说明和版权信息
 notesAndCreditsDescription: 您是如何创建这个项目的？是否使用了其他人的想法、脚本或艺术作品？您可以在此对他们表示感谢。
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: 国家
 loginText: 登录
 privacyPolicy: Chính sách bảo mật

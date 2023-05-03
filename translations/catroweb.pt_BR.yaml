@@ -34,6 +34,8 @@ noDescription: Sem descrição disponível.
 credits: Créditos
 noCredits: Créditos não disponíveis.
 notesAndCreditsDescription: Como você criou este projeto? Você usou ideias, scripts ou artes de outras pessoas? Agradeça elas aqui.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: País
 loginText: login
 privacyPolicy: Política de Privacidade

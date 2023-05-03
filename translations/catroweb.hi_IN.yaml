@@ -34,6 +34,8 @@ noDescription: कोई वर्णन उपलब्ध नहीं है�
 credits: इसका श्रेय
 noCredits: कोई श्रेय उपलब्ध नहीं है।
 notesAndCreditsDescription: आपने यह प्रोजेक्ट कैसे बनाया? क्या आपने अन्य लोगों से विचारों, लिपियों या कलाकृति का उपयोग किया था? उन्हें यहाँ धन्यवाद।
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: देश
 loginText: प्रवेश करे
 privacyPolicy: गोपनीयता नीति
@@ -855,8 +857,8 @@ studio:
   join: 'Join'
   leave: 'Leave'
   report: 'विवरण'
-  public: 'public'
-  private: 'private'
+  public: 'सार्वजनिक'
+  private: "\nनिजी"
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
