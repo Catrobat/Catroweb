@@ -4,9 +4,8 @@ namespace App\Admin\Tools\FeatureFlag;
 
 use App\DB\Entity\FeatureFlag;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
-
+use Symfony\Component\HttpFoundation\RequestStack;
 
 class FeatureFlagManager
 {
