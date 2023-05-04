@@ -34,6 +34,8 @@ noDescription: বর্ণনা পাওয়া যায় নি.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: আপনি এই প্রকল্পটি কীভাবে তৈরি করলেন? আপনি অন্যান্য ব্যক্তিদের কাছ থেকে ধারণা, স্ক্রিপ্ট বা শিল্পকর্ম ব্যবহার করেছেন? তাদের এখানে ধন্যবাদ।
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: দেশ
 loginText: প্রবেশ করুন
 privacyPolicy: গোপনীয়তার নীতি
@@ -444,8 +446,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"

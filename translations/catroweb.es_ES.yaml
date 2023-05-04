@@ -34,6 +34,8 @@ noDescription: No hay descripción disponible
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: '¿Cómo ha creado este proyecto? ¿Ha utilizado ideas, guiones o ilustraciones de otras personas? Dales las gracias aquí.'
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: País
 loginText: Inicio de sesión
 privacyPolicy: Política de privacidad
@@ -438,8 +440,8 @@ resetPassword:
   check:
     title: "Checa tus emails"
     description: "Si existe una cuenta que coincida con tu correo electrónico, se acaba de enviar un correo electrónico que contiene un enlace que puedes usar para restablecer tu contraseña. Este enlace caducará en %time%."
-    description2: "Si no recibes un email por favor revisa tu carpeta de spam o %tryAgainLink%"
-    tryAgain: "Intenta denuevo"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "¡Hola! :)"
     visitLink: "Para reiniciar tu contraseña, por favor entra al siguiente enlace"

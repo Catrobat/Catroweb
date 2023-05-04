@@ -52,6 +52,7 @@ use App\Admin\Users\UserAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportAdmin;
 use App\Admin\Users\UserDataReport\UserDataReportController;
 use App\Api\AuthenticationApi;
+use App\Api\Exceptions\ApiExceptionSubscriber;
 use App\Api\MediaLibraryApi;
 use App\Api\NotificationsApi;
 use App\Api\ProjectsApi;
@@ -206,6 +207,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $parameters->set('dkim.private.key', '%kernel.project_dir%/.dkim/private.key');
   $parameters->set('container.dumper.inline_class_loader', true);
   $parameters->set('features', '%kernel.project_dir%/config/features.php');
+  $parameters->set('reset_password.throttle_limit', 86400);
 
   $services = $containerConfigurator->services();
 
@@ -551,6 +553,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set(ScratchProjectUpdaterEventSubscriber::class)
+    ->tag('kernel.event_subscriber')
+  ;
+
+  $services
+    ->set(ApiExceptionSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 

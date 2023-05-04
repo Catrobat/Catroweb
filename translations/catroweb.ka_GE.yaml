@@ -34,6 +34,8 @@ noDescription: No description available.
 credits: Notes and credits
 noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Country
 loginText: login
 privacyPolicy: Privacy Policy
@@ -437,8 +439,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"

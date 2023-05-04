@@ -68,7 +68,8 @@ class UserCommentRepository extends ServiceEntityRepository
         $qb->expr()->eq('uc.parent_id', 0),
       ]))
       ->orderBy('uc.uploadDate', 'DESC')
-      ->getQuery()->getResult();
+      ->getQuery()->getResult()
+    ;
   }
 
   public function findCommentRepliesByParentId(string $parent_id): array
@@ -79,7 +80,8 @@ class UserCommentRepository extends ServiceEntityRepository
       ->where('uc.parent_id = :parent_id')
       ->setParameter('parent_id', $parent_id)
       ->orderBy('uc.uploadDate', 'DESC')
-      ->getQuery()->getResult();
+      ->getQuery()->getResult()
+    ;
   }
 
   public function getProjectCommentOverviewListData(Program $project): array

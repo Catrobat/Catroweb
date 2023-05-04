@@ -79,8 +79,7 @@ host(getenv('DEPLOY_SHARE'))
   ->set('branch', getenv('DEPLOY_SHARE_BRANCH'))
   ->set('composer_options', '--verbose --prefer-dist --optimize-autoloader')
   ->set('deploy_path', '/var/www/share')
-  ->set('remote_user', 'root')
-;
+  ->set('remote_user', 'root');
 
 // Tasks
 

@@ -34,6 +34,8 @@ noDescription: 沒有可用的描述。
 credits: 筆記和信用
 noCredits: No credits available.
 notesAndCreditsDescription: 你是如何創建這個項目的？您是否使用了其他人的想法、腳本或藝術作品？在此感謝他們。
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: 國家
 loginText: 登入
 privacyPolicy: 隱私權政策
@@ -438,8 +440,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"

@@ -34,6 +34,8 @@ noDescription: Описание отсутствует.
 credits: Примечания и авторы
 noCredits: Нет примечаний и упоминаний об авторах
 notesAndCreditsDescription: Как вы создали этот проект? Вы использовали идеи, скрипты или работы других людей? Поблагодарите их здесь.
+projectImportedFromScratch: Этот проект был импортирован из MIT Scratch. Вы можете посмотреть оригинальный проект
+scratchImportedProjectLinkHere: здесь.
 country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
@@ -114,8 +116,8 @@ programs:
     Да, удалить!
     Отмена
   deleteNotFoundError: Проект который вы хотите удалить не был найден в вашем аккаунте. 
-  private: private
-  public: public
+  private: приватный
+  public: публичный
   setPrivateAction: Сделать приватным
   setPublicAction: Сделать публичным
   changeVisibility: |+
@@ -439,8 +441,8 @@ resetPassword:
   check:
     title: "Проверьте вашу электронную почту"
     description: "Если существует аккаунт к которому привязана ваша электронная почта, то вам будет отправлено письмо в котором есть ссылка для сброса вашего пароля. Эта ссылка станет недействительной через %time%."
-    description2: "Если вы не получили письмо о сбросе пароля, проверьте папку спама или %tryAgainLink%"
-    tryAgain: "попробуйте снова"
+    descriptionTwo: "Вы можете запрашивать сброс пароля каждые %throttleLimit% часов."
+    descriptionThree: "Если вы не получили письмо, пожалуйста, проверьте папку со спамом или отправьте письмо в нашу службу поддержки на %email-webmaster%."
   email:
     title: "Привет!"
     visitLink: "Чтобы сбросить пароль от аккаунта, пожалуйста перейдите по ссылке"
@@ -848,29 +850,29 @@ extensions:
     multiplayer:
       title: Мультиплеер
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  studio_name: 'Studio name'
-  join: 'Join'
-  leave: 'Leave'
+  title: 'Студии'
+  singular: 'Студия'
+  create_studio: 'Создать студию'
+  delete_studio: 'Удалить студию'
+  studio_name: 'Название студии'
+  join: 'Присоединиться'
+  leave: 'Покинуть'
   report: 'Отчет'
-  public: 'public'
-  private: 'private'
+  public: 'публичный'
+  private: 'приватный'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
+    joined_studios: 'Участие в студиях'
+    public_studios: 'Публичные студии'
   details:
     showMore: 'показать больше'
     showLess: 'свернуть'
     remove_project: 'Удалить из студии'
-    remove_project_error: 'Не удалось удалить проект из студии!'
-    remove_project_success: 'проект успешно удален из студии!'
-    no_projects: 'Студия пока не содержит проектов'
-    updateCoverError: 'Что-то пошло не так при обновлении обложки студии!'
+    remove_project_error: 'Не удалось удалить проект из студии.'
+    remove_project_success: 'Проект был успешно удален из студии.'
+    no_projects: 'В студии пока нет никаких проектов.'
+    updateCoverError: 'Что-то пошло не так при обновлении обложки студии.'
     projects:
-      title: 'проекта(ов)'
+      title: 'Проекты'
     comments:
       title: 'Комментарии'
       type_something: 'Введите что-нибудь'
@@ -878,14 +880,14 @@ studio:
       send: 'отправить'
       no_comments: 'У этой студии пока нет комментариев.'
       disabled_comments: 'Комментарии к этой публикации отключены.'
-      remove_comment: 'Remove comment'
+      remove_comment: 'Удалить комментарий'
       post_error: 'Что-то пошло не так во время публикации вашего комментария. Повторите попытку позже.'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'Что-то пошло не так при удалении комментария. Повторите попытку позже.'
     activity_list:
       title: 'Активности'
       join_studio: '%user% присоединился к студии.'
-      add_project: '%user% оставил комментарий.'
-      add_comment: '%user% добавил проект.'
+      add_project: '%user% добавил проект.'
+      add_comment: '%user% оставил комментарий.'
     members_list:
       title: 'Участники студии'
       project_count: '{0} Нет студийных проектов |{1} 1 проект |]1,Inf] %count% студийных проектов'

@@ -34,6 +34,8 @@ noDescription: Keine Beschreibung verfügbar.
 credits: Notizen und Credits
 noCredits: Keine Notizen und Credits verfügbar.
 notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, Skripte oder Kunstwerke von anderen Leuten verwendet? Danke ihnen hier.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
@@ -442,8 +444,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "Wenn du keine E-Mail erhältst, überprüfe bitte deinen Spam-Ordner oder %tryAgainLink%"
-    tryAgain: "versuche es noch einmal"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -719,7 +721,7 @@ next: Weiter
 previous: Vorheriges
 media-packages:
   title: Medien-Pakete
-  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Obekte zu deinem PocketCode Programm hinzufügen.
+  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Objekte zu deinem PocketCode Programm hinzufügen.
   thumb-size:
     description: Vorschaugröße
     sm: klein

@@ -34,6 +34,8 @@ noDescription: 설명 없음
 credits: 만든이
 noCredits: 만든이 없음
 notesAndCreditsDescription: 어떻게 이 프로젝트를 만드셨나요? 다른 사람의 아이디어나 작품을 이용했나요? 여기에 감사를 써보세요.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: 국가
 loginText: 로그인
 privacyPolicy: 개인 정보 보호 정책
@@ -435,8 +437,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
