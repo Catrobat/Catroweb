@@ -1,31 +1,31 @@
 ---
 #homepage translation
-title: Catrobat community
+title: Catrobat skupnost
 localLanguage: Angleščina
 username: Uporabniško ime
 password: Geslo
-createNewPassword: Create new password
-accountSettings: Account settings
-email: E-Mail
+createNewPassword: Ustvari novo geslo
+accountSettings: Nastavitve računa
+email: E-pošta
 aboutPocketCode: O Pocket Code
 about: O programu
-education: Education
-chat: Chat and forums
-others: Others
-tutorials: pomoč
+education: Izobrazba
+chat: Klepet in forumi
+others: Drugi
+tutorials: Pomoč
 googlePlay: Google Play
 iosAppStore: IOS App store
-huaweiAppGallery: Huawei AppGallery
+huaweiAppGallery: Galerija aplikacij Huawei
 instagram: Instagram
-discordChat: Discord chat
+discordChat: Klepetalnica Discord
 passwordsNoMatch: Gesli se ne ujemata.
 error: Napaka
 cancel: Prekliči
 report: Prijavi
-deleteIt: Yes, delete it!
-reportIt: Yes, report it!
-areYouSure: Are you sure?
-noWayOfReturn: There is no way to restore your actions!
+deleteIt: Da, izbriši!
+reportIt: Da, prijavi!
+areYouSure: Ali si prepričan/a?
+noWayOfReturn: Tvojih dejanj ni mogoče obnoviti!
 download: Prenesi
 downloadDisabledAlert: You must be logged in to download this project
 name: Ime
@@ -35,7 +35,7 @@ credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
 projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+scratchImportedProjectLinkHere: tukaj.
 country: Država
 loginText: prijava
 privacyPolicy: Pravilnik o zasebnosti
@@ -49,42 +49,42 @@ more: 'več'
 less: 'manj'
 show-more: 'More information'
 show-less: 'Less information'
-more-information: 'More information'
-less-information: 'Less information'
-ok: Ok
+more-information: 'Več informacij'
+less-information: 'Manj informacij'
+ok: V redu
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
 registrationError: 'Username or email address already in use.'
-notifications: 'Notifications'
+notifications: 'Obvestila'
 allNotifications: 'Vse'
-FollowersNotifications: 'Followers'
-LikeNotifications: 'Reactions'
-CommentNotifications: 'Comments'
-RemixNotifications: 'Remixes'
-wellDone: "Well done!"
-done: "Done!"
+FollowersNotifications: 'Sledilci'
+LikeNotifications: 'Odzivi'
+CommentNotifications: 'Komentarji'
+RemixNotifications: 'Predelave'
+wellDone: "Dobro opravljeno!"
+done: "Opravljeno!"
 notificationsReadMessage: "It looks like you dont have any notifications."
-confirmMessage: "Yes, delete it"
+confirmMessage: "Da, izbriši"
 cancelMessage: "Prekliči"
 notificationsUnauthorizedError: "Unable to authorize user"
 notificationsClearError: "Unable to mark notifications as read!"
-pleaseWait: "Please wait..."
+pleaseWait: "Prosimo počakaj..."
 projects: "Programi"
-users: "Users"
+users: "Uporabniki"
 oauthPopUpTitle: "External account sign in information"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
-oauthHere: "here"
-statistics: "Statistics"
+oauthHere: "tukaj"
+statistics: "Statistike"
 indexPage:
   recommendedSection:
     info:
       title: 'What projects are recommended here?'
       description: 'The more reactions (Thumbs up, Smile ...) your project receives, the higher it appears in this list.'
 follower:
-  follows: Following
-  followers: Followers
-  follow: Follow
-  username: User
-  followsMe: Follows me
+  follows: Sledenje
+  followers: Sledilci
+  follow: Sledi
+  username: Uporabnik
+  followsMe: Sledi mi
   noFollowing: You are not following anybody currently.
   noFollowers: You have no followers currently.
   noOtherFollowing: There are no following users currently.
@@ -100,15 +100,15 @@ programs:
     subtitle: Create stories, games and more...
     subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
+    download: Prenesi aplikacijo
+    statistics: Več statistik
   featured: Na ogled
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
-  deleteAction: Delete project
+  example: Primeri
+  newest: Najnovejši projekti
+  recommended: Predlagani projekti
+  scratchremixes: Zavrzi predelave
+  noPrograms: Trenutno ni nobenih projektov.
+  deleteAction: Izbriši projekt
   deleteConfirmation: |+
     Are you sure?
     Are you sure you want to delete "%programName%"?
@@ -116,10 +116,10 @@ programs:
     Yes, delete it!
     Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: private
-  public: public
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  private: zasebno
+  public: javno
+  setPrivateAction: Nastavi kot zasebno
+  setPublicAction: ' Nastavi kot javno'
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -136,16 +136,16 @@ programs:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: The project name is too long!
+  tooLongName: Ime projekta je predolgo
   tooLongDescription: The project description is too long!
   tooLongCredits: The project credits are too long!
   most:
     viewed: Najbolj ogledano
     downloaded: Največkrat prenešeni
-  random: Random projects
-  related: Related projects
+  random: Naključni projekti
+  related: Sorodni projekti
   downloads: '%downloads% prenosov'
-  sample: Example projects
+  sample: Primeri projektov
   views: '%views% ogledov'
   likes:
     likersTitle: "People who reacted to that project"
@@ -172,10 +172,10 @@ programs:
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update App
   updateAppText: Please update your app to the newest version.
-  btnClosePopup: Ok
+  btnClosePopup: V redu
   checkout_this_program: Checkout this Catrobat project
   show_more: Show More
-  comments: Comments
+  comments: Komentarji
   send: Send
   delete: izbriši
   report: Prijavi
@@ -195,7 +195,7 @@ programs:
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
-  reactionsText: Reactions
+  reactionsText: Odzivi
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
   showTranslation: Show translation
@@ -750,13 +750,13 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: Najnovejši projekti
+  random: Naključni projekti
   most_viewed: Najbolj ogledano
   most_downloaded: Največkrat prenešeni
   example: Example
-  scratch: Scratch remixes
-  recommended: Recommended projects
+  scratch: Zavrzi predelave
+  recommended: Predlagani projekti
 achievements:
   sidebar:
     title: 'Achievements'
@@ -776,7 +776,7 @@ achievements:
     new:
       title: 'Congratulations!'
       subtitle: "You've earned a badge"
-      confirm: "Ok"
+      confirm: "V redu"
   profile:
     title: 'Achievements'
   achievement:
@@ -872,7 +872,7 @@ studio:
     projects:
       title: 'Programi'
     comments:
-      title: 'Comments'
+      title: 'Komentarji'
       type_something: 'Type something'
       replies: 'replies'
       send: 'send'
@@ -897,7 +897,7 @@ studio:
       title: 'General Settings'
       studio_name: 'Studio Name'
       studio_description: 'Opis'
-      toggle_allow_comments: 'Comments'
+      toggle_allow_comments: 'Komentarji'
       toggle_privacy: 'Public'
 media_library:
   file:
