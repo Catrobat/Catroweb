@@ -14742,16 +14742,16 @@
         },
         {
             "name": "dvdoug/behat-code-coverage",
-            "version": "v5.3.0",
+            "version": "v5.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dvdoug/behat-code-coverage.git",
-                "reference": "a9d84c2e60afae1f5be6d93d2dac0f8db497ad5a"
+                "reference": "b06c8101f92fad6748d1a7e47fb095a8a129a9db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/a9d84c2e60afae1f5be6d93d2dac0f8db497ad5a",
-                "reference": "a9d84c2e60afae1f5be6d93d2dac0f8db497ad5a",
+                "url": "https://api.github.com/repos/dvdoug/behat-code-coverage/zipball/b06c8101f92fad6748d1a7e47fb095a8a129a9db",
+                "reference": "b06c8101f92fad6748d1a7e47fb095a8a129a9db",
                 "shasum": ""
             },
             "require": {
@@ -14808,7 +14808,7 @@
             ],
             "support": {
                 "issues": "https://github.com/dvdoug/behat-code-coverage/issues",
-                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.3.0"
+                "source": "https://github.com/dvdoug/behat-code-coverage/tree/v5.3.1"
             },
             "funding": [
                 {
@@ -14816,7 +14816,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-02-04T16:34:34+00:00"
+            "time": "2023-05-08T18:26:06+00:00"
         },
         {
             "name": "felixfbecker/advanced-json-rpc",
