@@ -7762,16 +7762,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.7.0",
+            "version": "5.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "7d8cd17573fe5cc6f295403396c15c09344f2e43"
+                "reference": "7451e1a8a79f624a296511c8c24358c487005ca6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/7d8cd17573fe5cc6f295403396c15c09344f2e43",
-                "reference": "7d8cd17573fe5cc6f295403396c15c09344f2e43",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/7451e1a8a79f624a296511c8c24358c487005ca6",
+                "reference": "7451e1a8a79f624a296511c8c24358c487005ca6",
                 "shasum": ""
             },
             "require": {
@@ -7780,7 +7780,7 @@
                 "doctrine/persistence": "^3.0.2",
                 "php": "^8.0",
                 "sonata-project/doctrine-extensions": "^1.13 || ^2.0",
-                "sonata-project/form-extensions": "^1.4",
+                "sonata-project/form-extensions": "^1.4 || ^2.0",
                 "sonata-project/twig-extensions": "^1.3 || ^2.0",
                 "symfony/config": "^5.4 || ^6.2",
                 "symfony/console": "^5.4 || ^6.2",
@@ -7824,7 +7824,7 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.15",
+                "rector/rector": "^0.16",
                 "sonata-project/admin-bundle": "^4.20",
                 "sonata-project/block-bundle": "^4.11",
                 "sonata-project/doctrine-orm-admin-bundle": "^4.0",
@@ -7868,7 +7868,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.7.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.8.0"
             },
             "funding": [
                 {
@@ -7888,7 +7888,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-25T04:49:41+00:00"
+            "time": "2023-05-13T16:20:27+00:00"
         },
         {
             "name": "symfony/acl-bundle",
