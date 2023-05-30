@@ -61,7 +61,7 @@ services:
       #  Shared volumes are attached after the build process, which will result in else invalid overwritten
       #  libraries in the container.
       #
-      #  If you need access to them (for example fohear IntelliSense):
+      #  If you need access to them (for example for IntelliSense):
       #
       #    - Option 1: Copy those directories from the container to the host. E.g with
       #                docker cp app.catroweb:/var/www/catroweb/vendor vendor`
@@ -85,6 +85,7 @@ services:
       - ./../.env.dev:/var/www/catroweb/.env.dev
       - ./../.env.test:/var/www/catroweb/.env.test
       - ./../.env.prod:/var/www/catroweb/.env.prod
+      # - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying
       - ./../deploy.php:/var/www/catroweb/deploy.php
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
@@ -93,8 +94,8 @@ services:
       - ./../.stylelintrc.json:/var/www/catroweb/.stylelintrc.json
 
       # Sharing npm package files is not working (at least on windows) - feel free to try it out on any other OS
-#      - ./../package.json:/var/www/catroweb/package.json
-#      - ./../package-lock.json:/var/www/catroweb/package-lock.json
+      # - ./../package.json:/var/www/catroweb/package.json
+      # - ./../package-lock.json:/var/www/catroweb/package-lock.json
 
   db.catroweb.dev:
     image: mariadb:10.9

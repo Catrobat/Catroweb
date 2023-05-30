@@ -1,25 +1,14 @@
-import $ from 'jquery'
-
 import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
 export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
   translations, isWebView, mediaLibPackageByNameUrlApi) {
-  $(function () {
-    // Removing the project navigation items and showing just the category menu items
-    const element = document.getElementById('project-navigation')
-    element.parentNode.removeChild(element)
+  // Removing the project navigation items and showing just the category menu items
+  const element = document.getElementById('project-navigation')
+  element.parentNode.removeChild(element)
 
-    getPackageFiles(packageName, mediaSearchPath, flavor, assetsDir)
+  getPackageFiles(packageName, mediaSearchPath, flavor)
 
-    const content = $('#content')
-    content.find('#thumbsize-control input[type=radio]').change(function () {
-      content.attr('size', this.value)
-    })
-
-    initTilePinchToZoom()
-  })
-
-  function getPackageFiles (packageName, mediaSearchPath, flavor, assetsDir) {
+  function getPackageFiles (packageName, mediaSearchPath, flavor) {
     let downloadList = []
 
     document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
@@ -53,110 +42,144 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       url = mediaLibPackageByNameUrlApi + '?attributes=' + attributes + '&limit=' + limit
     }
 
-    $.get(url, {}, pkgFiles => {
-      pkgFiles.forEach(file => {
-        // flavors
-        let fileFlavorArray = []
-        if ('flavors' in file && Array.isArray(file.flavors)) {
-          fileFlavorArray = file.flavors
-        } else if ('flavor' in file) {
-          fileFlavorArray.push(file.flavor)
-        }
+    fetch(url)
+      .then(response => response.json())
+      .then(data => {
+        data.forEach(file => {
+          let fileFlavorArray = []
+          if ('flavors' in file && Array.isArray(file.flavors)) {
+            fileFlavorArray = file.flavors
+          } else if ('flavor' in file) {
+            fileFlavorArray.push(file.flavor)
+          }
 
-        const flavorFound = fileFlavorArray.some(ai => acceptedFlavors.includes(ai))
-        if (!flavorFound) {
-          return
-        }
+          const isFlavored = !fileFlavorArray.includes('pocketcode')
+          const flavorFound = fileFlavorArray.some(item => acceptedFlavors.includes(item))
+          if (!flavorFound) {
+            return
+          }
 
-        // media container
-        const mediafileContainer = $('<a class="mediafile" id="mediafile-' + file.id + '"/>')
-        mediafileContainer.click(function () {
-          // !!! Due to missing android web view support the download multiple files feature was "disabled" !!!!!
-          // For now it is only possible to select one element! ToDo: send zip files if multiple files are downloaded.
+          // media container
+          const mediafileContainer = document.createElement('a')
+          mediafileContainer.classList.add('mediafile')
+          mediafileContainer.id = 'mediafile-' + file.id
+          mediafileContainer.addEventListener('click', function () {
+            // !!! Due to missing android web view support the download multiple files feature was "disabled" !!!!!
+            // For now it is only possible to select one element!
+            if (isWebView) {
+              mediafileContainer.href = file.download_url
+              mediafileContainer.dataset.extension = file.extension
+              mediafileContainer.addEventListener('click', function () {
+                medialibOnDownload(mediafileContainer)
+              })
+            } else { // -- end of disable
+              mediafileContainer.classList.toggle('selected')
+              const indexInDownloadList = downloadList.indexOf(file)
+
+              if (indexInDownloadList === -1) {
+                downloadList.push(file)
+              } else {
+                downloadList.splice(indexInDownloadList, 1)
+              }
+
+              let elementsText = downloadList.length + ' '
+              // Dispense support for languages where the count would be right.
+              // This way there is no need to dynamically load the translation. (No delay - Less requests)
+              if (downloadList.length === 1) {
+                elementsText += translations.elementsSingular
+              } else {
+                elementsText += translations.elementsPlural
+              }
+
+              document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
+
+              if (downloadList.length > 0) {
+                showTopBarDownload()
+              } else {
+                showTopBarDefault()
+              }
+            }
+          })
+
+          if (isFlavored) {
+            mediafileContainer.classList.add('flavored')
+          }
+
+          // check circle
+          const checkCircle = document.createElement('i')
+          checkCircle.classList.add('checkbox')
+          checkCircle.classList.add('material-icons')
+          checkCircle.textContent = 'check_circle'
+          mediafileContainer.appendChild(checkCircle)
+
+          // build image
+          mediafileContainer.appendChild(buildImageContainer(file))
+
+          // list item
+          const listItemElement = document.createElement('div')
+          listItemElement.classList.add('text-container')
+
+          let listItemNameElement
+          if ('project_url' in file && file.project_url) {
+            listItemNameElement = document.createElement('a')
+            listItemNameElement.classList.add('name')
+            listItemNameElement.classList.add('name--link')
+            listItemNameElement.href = file.project_url
+            listItemNameElement.textContent = getFileName(file)
+          } else {
+            listItemNameElement = document.createElement('div')
+            listItemNameElement.classList.add('name')
+            listItemNameElement.textContent = getFileName(file)
+          }
+
+          const listItemDescriptionElement = document.createElement('div')
+          listItemDescriptionElement.classList.add('description')
+          listItemDescriptionElement.innerHTML = getFileDescription(file)
+
+          listItemElement.appendChild(listItemNameElement)
+          listItemElement.appendChild(listItemDescriptionElement)
+
+          mediafileContainer.appendChild(listItemElement)
+
+          // download button
           if (isWebView) {
-            mediafileContainer.attr('href', file.download_url)
-            mediafileContainer.attr('data-extension', file.extension)
-            mediafileContainer.click(function () {
-              medialibOnDownload(this)
-            })
-          } else { // -- end of disable
-            mediafileContainer.toggleClass('selected')
-            const indexInDownloadList = downloadList.indexOf(file)
+            const listItemDownloadButton = document.createElement('div')
+            listItemDownloadButton.classList.add('button-container')
 
-            if (indexInDownloadList === -1) {
-              downloadList.push(file)
-            } else {
-              downloadList.splice(indexInDownloadList, 1)
-            }
+            const listItemDownloadIcon = document.createElement('i')
+            listItemDownloadIcon.classList.add('material-icons')
+            listItemDownloadIcon.textContent = 'get_app'
 
-            let elementsText = downloadList.length + ' '
-            // Dispense support for languages where the count would be right.
-            // This way there is no need to dynamically load the translation. (No delay - Less requests)
-            if (downloadList.length === 1) {
-              elementsText += translations.elementsSingular
-            } else {
-              elementsText += translations.elementsPlural
-            }
+            listItemDownloadButton.appendChild(listItemDownloadIcon)
 
-            document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
+            mediafileContainer.appendChild(listItemDownloadButton)
+          }
 
-            if (downloadList.length > 0) {
-              showTopBarDownload()
-            } else {
-              showTopBarDefault()
-            }
+          // flavor
+          if (file.category.startsWith('ThemeSpecial')) {
+            if (flavorFound) {
+              document.querySelector('#content #category-theme-special .files').prepend(mediafileContainer)
+            } // else ignore
+          } else {
+            const catEscaped = file.category.replace(/"/g, '\\"')
+            document.querySelector('#content .category[data-name="' + catEscaped + '"] .files').prepend(mediafileContainer)
           }
         })
 
-        const fileIsFlavored = !fileFlavorArray.includes('pocketcode')
-        if (fileIsFlavored) {
-          mediafileContainer.addClass('flavored')
-        }
+        document.querySelectorAll('#content .category').forEach((item) => {
+          if (item.children.length === 0) {
+            return
+          }
 
-        mediafileContainer.append($('<i class="checkbox material-icons">check_circle</i>'))
-        mediafileContainer.append(buildImageContainer(file))
-        if ('project_url' in file && file.project_url) {
-          mediafileContainer.append(
-            '<div class="text-container">' +
-            '  <a class="name name--link" href="' + file.project_url + '">' + getFileName(file) + '</a>' +
-            '  <div class="description">' + getFileDescription(file) + '</div>' +
-            '</div>'
-          )
-        } else {
-          mediafileContainer.append(
-            '<div class="text-container">' +
-            '  <div class="name">' + getFileName(file) + '</div>' +
-            '  <div class="description">' + getFileDescription(file) + '</div>' +
-            '</div>'
-          )
-        }
+          const catId = /^category-(.+)$/.exec(item.id)[1]
 
-        if (isWebView) {
-          mediafileContainer.append('<div class="button-container">' + '<i class="material-icons">get_app</i>' + '</div>')
-        }
+          item.style.display = 'block'
+          document.querySelector('#sidebar #menu-mediacat-' + catId).style.display = 'block'
+        })
 
-        if (file.category.startsWith('ThemeSpecial')) {
-          if (flavorFound) {
-            $('#content #category-theme-special .files').prepend(mediafileContainer)
-          } // else ignore
-        } else {
-          const catEscaped = file.category.replace(/"/g, '\\"')
-          $('#content .category[data-name="' + catEscaped + '"] .files').prepend(mediafileContainer)
-        }
+        document.getElementById('loading-spinner').style.display = 'none'
       })
-
-      $('#content .category').each(function () {
-        if ($(this).find('.files').children().length === 0) {
-          return
-        }
-
-        const catId = /^category-(.+)$/.exec(this.id)[1]
-
-        $(this).show()
-        $('#sidebar #menu-mediacat-' + catId).show()
-      })
-    })
-      .fail(function () {
+      .catch(() => {
         console.error('Error loading media lib package ' + packageName)
       })
   }
@@ -180,35 +203,49 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
   }
 
   function buildImageContainer (file) {
-    const imageContainer = $('<div class="img-container"></div>')
+    const imageContainer = document.createElement('div')
+    imageContainer.classList.add('img-container')
     let audio, previewBtn
 
     if (file.file_type === 'image' || file.extension === 'catrobat') {
-      imageContainer.attr('data-filetype', 'image')
-      imageContainer.append(buildImageFromFile(file))
+      imageContainer.setAttribute('data-filetype', 'image')
+      imageContainer.appendChild(buildImageFromFile(file))
     } else if (file.file_type === 'sound') {
-      imageContainer.attr('data-filetype', 'audio')
-      // eslint-disable-next-line no-undef
+      imageContainer.setAttribute('data-filetype', 'audio')
       audio = new Audio(file.download_url)
-      previewBtn = $('<i class="audio-control material-icons">play_arrow</i>')
-      previewBtn.click(function () {
+
+      previewBtn = document.createElement('i')
+      previewBtn.classList.add('audio-control', 'material-icons')
+      previewBtn.textContent = 'play_arrow'
+
+      previewBtn.addEventListener('click', function () {
         if (audio.paused) {
-          previewBtn.text('pause')
+          previewBtn.textContent = 'pause'
           audio.play()
         } else {
-          previewBtn.text('play_arrow')
+          previewBtn.textContent = 'play_arrow'
           audio.pause()
         }
         return false
       })
+
       audio.onended = function () {
-        previewBtn.text('play_arrow')
+        previewBtn.textContent = 'play_arrow'
       }
-      imageContainer.append(previewBtn)
+
+      imageContainer.appendChild(previewBtn)
     } else if (file.file_type === 'video') {
-      imageContainer.append($('<i class="media-file-icon material-icons">videocam</i>'))
+      const videoIcon = document.createElement('i')
+      videoIcon.classList.add('media-file-icon', 'material-icons')
+      videoIcon.textContent = 'videocam'
+
+      imageContainer.appendChild(videoIcon)
     } else {
-      imageContainer.append($('<i class="media-file-icon material-icons">insert_drive_file</i>'))
+      const fileIcon = document.createElement('i')
+      fileIcon.classList.add('media-file-icon', 'material-icons')
+      fileIcon.textContent = 'insert_drive_file'
+
+      imageContainer.appendChild(fileIcon)
     }
 
     return imageContainer
@@ -216,83 +253,14 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
 
   function buildImageFromFile (file) {
     const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
-    const image = $('<img alt="' + file.id + '" src="' + assetsDir + 'thumbs/' + file.id + '.' + imgExtension + '"/>')
-    image.attr('title', file.name)
-    image.attr('alt', file.name)
-    image.on('error', function () {
+    const image = document.createElement('img')
+    image.setAttribute('alt', file.id)
+    image.setAttribute('src', assetsDir + 'thumbs/' + file.id + '.' + imgExtension)
+    image.setAttribute('title', file.name)
+    image.addEventListener('error', function () {
       image.remove()
     })
-
     return image
-  }
-
-  function initTilePinchToZoom () {
-    let mediaFiles = null
-
-    let active = false
-    let startDistance = null
-    let currentSize = null
-
-    const borderSpacing = 8
-
-    function refreshStyle () {
-      mediaFiles.css('width', currentSize).css('height', currentSize)
-      const innerSize = currentSize - borderSpacing
-      mediaFiles.find('> img').attr('style', 'max-width:' + innerSize + 'px !important; max-height:' + innerSize + 'px;')
-      mediaFiles.find('.fas, .far').css('font-size', currentSize - 15)
-    }
-
-    document.addEventListener('touchstart', function (e) {
-      reset()
-
-      if (e.touches.length === 2) {
-        const touch1 = e.touches[0]
-        const touch2 = e.touches[1]
-
-        const xDiff = touch2.clientX - touch1.clientX
-        const yDiff = touch2.clientY - touch1.clientY
-
-        startDistance = Math.sqrt((xDiff * xDiff) + (yDiff * yDiff))
-        active = true
-        $('#thumbsize-control').hide()
-
-        if (mediaFiles == null || currentSize == null) {
-          mediaFiles = $('.category > .files .mediafile')
-          currentSize = mediaFiles.outerWidth()
-        }
-      }
-    })
-
-    document.addEventListener('touchmove', function (e) {
-      if (active && !!startDistance && e.touches.length === 2) {
-        const touch1 = e.touches[0]
-        const touch2 = e.touches[1]
-
-        const xDiff = touch2.clientX - touch1.clientX
-        const yDiff = touch2.clientY - touch1.clientY
-
-        const distance = Math.sqrt((xDiff * xDiff) + (yDiff * yDiff))
-        const scale = distance / startDistance
-
-        currentSize *= scale
-
-        if (currentSize < 40) {
-          currentSize = 40
-        } else if (currentSize > 200) {
-          currentSize = 200
-        }
-        refreshStyle()
-      }
-    })
-
-    document.addEventListener('touchend', function () {
-      reset()
-    })
-
-    function reset () {
-      active = false
-      startDistance = null
-    }
   }
 }
 
