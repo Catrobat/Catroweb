@@ -17939,16 +17939,16 @@
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v6.2.10",
+            "version": "v6.2.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "24b6f4370f1cd59aacfc5e799c8614b40776e9c8"
+                "reference": "1338ad6486f7ce22401a1c0d799ccb5f499b7f8f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/24b6f4370f1cd59aacfc5e799c8614b40776e9c8",
-                "reference": "24b6f4370f1cd59aacfc5e799c8614b40776e9c8",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/1338ad6486f7ce22401a1c0d799ccb5f499b7f8f",
+                "reference": "1338ad6486f7ce22401a1c0d799ccb5f499b7f8f",
                 "shasum": ""
             },
             "require": {
@@ -17997,7 +17997,7 @@
             "description": "Provides a development tool that gives detailed information about the execution of any request",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/web-profiler-bundle/tree/v6.2.10"
+                "source": "https://github.com/symfony/web-profiler-bundle/tree/v6.2.11"
             },
             "funding": [
                 {
@@ -18013,7 +18013,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-04-24T13:41:17+00:00"
+            "time": "2023-05-05T15:52:57+00:00"
         },
         {
             "name": "textalk/websocket",
