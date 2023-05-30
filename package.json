@@ -89,7 +89,7 @@
     "dotenv": "^16.0.3",
     "external-svg-loader": "^1.6.7",
     "glob-all": "^3.3.1",
-    "jquery": "^3.6.4",
+    "jquery": "^3.7.0",
     "jquery-contextmenu": "^2.9.2",
     "jquery-ui-dist": "^1.13.2",
     "js-yaml": "^4.1.0",
