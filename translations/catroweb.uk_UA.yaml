@@ -141,8 +141,8 @@ programs:
   tooLongDescription: Опис проэкту надто довге!
   tooLongCredits: Примітки та автори проєкту надто довгі!
   most:
-    viewed: Найбільше переглянуто
-    downloaded: Найбільше завантажені
+    viewed: Найчастіше переглянуті
+    downloaded: Найчастіше завантажувані
   random: Випадкові проєкти
   related: Пов’язані проєкти
   downloads: '%downloads% завантажень'
@@ -745,7 +745,7 @@ share:
   text: 'Поділитися'
   error: 'Не вдалося поділитися'
   success: 'Успішно передано'
-copy: 'Скопіювати силку'
+copy: 'Копіювати посилання'
 checkOutProject: 'Ознайомтеся з цим проєктом:'
 checkOutUser: 'Ознайомтеся з цим користувачем:'
 community: 'Спільнота Catrobat'
@@ -753,7 +753,7 @@ back_to_app: 'Вийти із спільноти'
 category:
   recent: Нещодавні проєкти
   random: Випадкові проєкти
-  most_viewed: Найбільше переглянуті
+  most_viewed: Найчастіше переглянуті
   most_downloaded: Найбільше завантажені
   example: Приклад
   scratch: Scratch ремікси
@@ -860,7 +860,7 @@ studio:
   public: 'публічний'
   private: 'приватний'
   overview:
-    joined_studios: 'Joined studios'
+    joined_studios: 'Приєднані студії'
     public_studios: 'Публічні студії'
   details:
     showMore: 'Показати більше'

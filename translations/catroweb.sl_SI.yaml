@@ -27,13 +27,13 @@ reportIt: Da, prijavi!
 areYouSure: Ali si prepričan/a?
 noWayOfReturn: Tvojih dejanj ni mogoče obnoviti!
 download: Prenesi
-downloadDisabledAlert: You must be logged in to download this project
+downloadDisabledAlert: Za prenos tega projekta moraš biti prijavljen
 name: Ime
 description: Opis
 noDescription: Opisa ni na voljo.
 credits: Credits
 noCredits: No credits available.
-notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+notesAndCreditsDescription: Kako si ustvaril ta projekt? Si uporabil/a zamisli, scenarije ali umetnine drugih ljudi? Zahvali se jim tukaj.
 projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
 scratchImportedProjectLinkHere: tukaj.
 country: Država
@@ -42,7 +42,7 @@ privacyPolicy: Pravilnik o zasebnosti
 imprint: Imprint
 programDetails: Podrobnosti
 somethingWentWrong: 'Ojej, nekaj ni šlo prav.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'Zahtevani vir ne obstaja.'
 pleaseTryAgain: 'Prosimo, poskusite znova!'
 oldVersionError: 'Prosimo, posodobite na najnovejšo različico Pocket Code!'
 more: 'več'
@@ -53,7 +53,7 @@ more-information: 'Več informacij'
 less-information: 'Manj informacij'
 ok: V redu
 clickToDownloadProgram: 'To download the example project click %link_start% here %link_end%.'
-registrationError: 'Username or email address already in use.'
+registrationError: 'Uporabniško ime ali e-poštni naslov je že uporabljen.'
 notifications: 'Obvestila'
 allNotifications: 'Vse'
 FollowersNotifications: 'Sledilci'
@@ -65,12 +65,12 @@ done: "Opravljeno!"
 notificationsReadMessage: "It looks like you dont have any notifications."
 confirmMessage: "Da, izbriši"
 cancelMessage: "Prekliči"
-notificationsUnauthorizedError: "Unable to authorize user"
-notificationsClearError: "Unable to mark notifications as read!"
+notificationsUnauthorizedError: "Uporabnika ni mogoče avtorizirati"
+notificationsClearError: "Obvestil ni mogoče označiti kot prebrana!"
 pleaseWait: "Prosimo počakaj..."
 projects: "Programi"
 users: "Uporabniki"
-oauthPopUpTitle: "External account sign in information"
+oauthPopUpTitle: "Podatki za prijavo v zunanji račun"
 oauthInfo: 'You have just used an external account to log in. We created a random username for you. If you want to change your username or create a new password for your account please go to your profile page.'
 oauthHere: "tukaj"
 statistics: "Statistike"
@@ -85,19 +85,19 @@ follower:
   follow: Sledi
   username: Uporabnik
   followsMe: Sledi mi
-  noFollowing: You are not following anybody currently.
-  noFollowers: You have no followers currently.
-  noOtherFollowing: There are no following users currently.
-  noOtherFollowers: There are no follower users currently.
-  followError: "Unable to follow the desired user!"
-  unfollowError: "Unable to unfollow the desired user!"
-  unfollowQuestion: "Are you sure you want to unfollow this user?"
-  unfollowButton: "Unfollow %username%"
+  noFollowing: Trenutno ne slediš nikomur.
+  noFollowers: Trenutno nimaš sledilcev.
+  noOtherFollowing: Trenutno ni sledilnih uporabnikov.
+  noOtherFollowers: Trenutno ni sledilcev.
+  followError: "Ni mogoče slediti želenemu uporabniku!"
+  unfollowError: "Ni mogoče odstraniti želenega uporabnika!"
+  unfollowQuestion: "Ali si prepričan/a, da želiš odstraniti tega uporabnika?"
+  unfollowButton: "Odstrani %username%"
 programs:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: Dobrodošel v Catrobatovem %theme%
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
+    subtitle: Ustvarjaj zgodbe, igre in še več...
     subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Prenesi aplikacijo
@@ -137,7 +137,7 @@ programs:
     Yes, delete it!
     Cancel
   tooLongName: Ime projekta je predolgo
-  tooLongDescription: The project description is too long!
+  tooLongDescription: Opis projekta je predolg!
   tooLongCredits: The project credits are too long!
   most:
     viewed: Najbolj ogledano
@@ -148,26 +148,26 @@ programs:
   sample: Primeri projektov
   views: '%views% ogledov'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Ljudje, ki so se odzvali na ta projekt"
     all: "Vse"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: Predloženi projekti
+  uploaded: Naloženi projekti
   reportAsInappropriate: Prijavi neprimerno vsebino
-  reportProgram: Report project
+  reportProgram: Prijavi projekt
   languageVersion: 'Catrobat jezikovna verzija: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Vnesite razlog
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
+  reportRadioButtonInappropriate: To je neprimerno
+  reportRadioButtonCopyright: Kršitev avtorskih pravic
+  reportRadioButtonSpam: To je neželena vsebina
+  reportRadioButtonDislike: Ni mi všeč
+  reportOwnProgram: Lastnega projekta ne moreš označiti.
+  reportAlready: Ta projekt si že označil.
+  reportDone: Ta projekt si prijavil!
+  updateAppHeaderDownload: Prenos ni možen
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Update App
@@ -286,30 +286,30 @@ profile:
   follower: Follower
   unfollowUser: Unfollow this user!
   followUser: Follow this user!
-  amountOfPrograms: Amount of projects
+  amountOfPrograms: Število projektov
   form:
     passwordTooShort: Novo geslo mora imeti najmanj %length% znakov.
     passwordTooLong: Novo geslo lahko ima največ %length% znakov.
     passwordIsUsername: Geslo se mora razlikovati od uporabniškega imena.
-    passwordWrong: Wrong password
+    passwordWrong: Napačno geslo
     emailNotValid: Ta e-poštni naslov ni veljaven.
     emailMissing: Napaka pri posodabljanju e-poštnega naslova. Imeti morate vsaj en veljaven e-poštni naslov.
     emailExists: Ta e-poštni naslov že obstaja.
-    usernameNotValid: This username is not valid.
+    usernameNotValid: Uporabniško ime ni veljavno
     usernameMissing: You must have a username.
     usernameExists: To uporabniško ime že obstaja.
     usernameContainsEmail: Username shouldn't contain an email address.
     submitSuccess: shranjeno!
   reallyDeleteProgram: Do you really want to delete your project
-  programsOf: Projects of
-  picture: Profile picture
+  programsOf: Projekti od
+  picture: Profilna slika
   changePicture: Spremeni sliko
-  goToScratchProfile: Profile on Scratch
+  goToScratchProfile: Profile na Scratch
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
+  userSettings: Uporabniške nastavitve
+  profileSettings: Nastavitve profila
+  securitySettings: Varnostne nastavitve
+  accountSettings: Nastavitve računa
   account: Account
   editProfile: Edit profile
   edit: Uredi
@@ -782,23 +782,23 @@ achievements:
   achievement:
     type:
       bronze_user:
-        title: 'Apprentice'
-        description: 'Follow someone and upload a project'
+        title: 'Vajenec'
+        description: 'Sledi nekomu in naloži projekt'
       silver_user:
-        title: 'Artisan'
+        title: 'Obrtnik'
         description: 'Active member for > 1 year'
       gold_user:
-        title: 'Master'
+        title: 'Mojster'
         description: 'Active member for > 4 years'
       diamond_user:
         title: 'Grand master'
         description: 'Active member for > 7 years'
       perfect_profile:
-        title: 'Initiative'
-        description: 'Add your first profile picture'
+        title: 'Pobuda'
+        description: 'Dodaj prvo sliko profila'
       verified_developer:
-        title: 'Novice'
-        description: 'Create a user account'
+        title: 'Novinec'
+        description: 'Ustvari uporabniški račun'
       coding_jam_09_2021:
         title: "Coding Jam '21"
         description: "Participant of Coding Jam 2021"
@@ -807,7 +807,7 @@ achievements:
         description: "Translate your projects to 2 languages"
       trilingual:
         title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        description: "Prevedi svoje projekte v 3 jezike"
       linguist:
         title: "Linguist"
         description: "Translate your projects to 5 languages"
@@ -815,19 +815,19 @@ tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
     game:
-      title: Game
+      title: Igra
     animation:
-      title: Animation
+      title: Animacija
     story:
-      title: Story
+      title: Zgodba
     music:
-      title: Music
+      title: Glasba
     art:
-      title: Art
+      title: Umetnost
     experimental:
       title: Experimental
     tutorial:
-      title: Tutorial
+      title: Vaja
     coding_jam_09_2021:
       title: "#catrobatfestival2021"
 extensions:
@@ -836,34 +836,34 @@ extensions:
     arduino:
       title: Arduino
     drone:
-      title: Drone
+      title: Dron
     phiro:
       title: Phiro
     raspberry_pi:
-      title: Raspberry PI
+      title: Raspberry Pi
     embroidery:
-      title: Embroidery
+      title: Vezenine
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: Večigralski način
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  studio_name: 'Studio name'
-  join: 'Join'
-  leave: 'Leave'
+  title: 'Studiji'
+  singular: 'Studijo'
+  create_studio: 'UstvarI studijo'
+  delete_studio: 'Izbriši studijo'
+  studio_name: 'Ime Studija'
+  join: 'Pridruži se'
+  leave: 'Zapusti'
   report: 'Prijavi'
-  public: 'public'
-  private: 'private'
+  public: 'javno'
+  private: 'zasebno'
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
   details:
-    showMore: 'show more'
-    showLess: 'show less'
+    showMore: 'prikaži več'
+    showLess: 'prikaži manj'
     remove_project: 'Remove from studio'
     remove_project_error: 'Failed to remove project from studio.'
     remove_project_success: 'Project removed successfully from studio.'
@@ -873,32 +873,32 @@ studio:
       title: 'Programi'
     comments:
       title: 'Komentarji'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
+      type_something: 'Napiši nekaj'
+      replies: 'odgovori'
+      send: 'pošlji'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
       remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
       remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
-      title: 'Activities'
+      title: 'Aktivnosti'
       join_studio: '%user% joined the studio.'
       add_project: '%user% added a project.'
       add_comment: '%user% left a comment.'
     members_list:
-      title: 'Studio members'
+      title: 'Člani studija'
       project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
       promote_member: 'Promote member to admin'
       promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
+      ban_member: 'Prepoved vstopa člana v studio'
       ban_failed: 'Something went wrong while banning this member. Try again later.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Splošne Nastavitve'
+      studio_name: 'Ime Studija'
       studio_description: 'Opis'
       toggle_allow_comments: 'Komentarji'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Javno'
 media_library:
   file:
     size: 'Size: %size%'
