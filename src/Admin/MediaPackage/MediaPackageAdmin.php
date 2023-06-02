@@ -10,14 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MediaPackageAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'adminmedia_package_package';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'media_package';
 
   /**

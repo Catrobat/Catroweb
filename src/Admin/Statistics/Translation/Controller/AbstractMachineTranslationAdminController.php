@@ -26,9 +26,6 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
   ) {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function listAction(Request $request): Response
   {
     if (self::TYPE_PROJECT === $this->type) {

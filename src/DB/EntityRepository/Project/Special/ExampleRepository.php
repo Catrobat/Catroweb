@@ -21,7 +21,7 @@ class ExampleRepository extends ServiceEntityRepository
   /**
    * @return Program[]
    */
-  public function getExamplePrograms(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null): array
+  public function getExamplePrograms(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): array
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -40,7 +40,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getExampleProgramsCount(bool $debug_build, ?string $flavor, ?string $max_version = null): int
+  public function getExampleProgramsCount(bool $debug_build, ?string $flavor, string $max_version = null): int
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -64,12 +64,10 @@ class ExampleRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return mixed
-   *
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
-  public function getExampleProgramCount(string $flavor, bool $for_ios = false)
+  public function getExampleProgramCount(string $flavor, bool $for_ios = false): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -87,10 +85,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $qb->getQuery()->getSingleScalarResult();
   }
 
-  /**
-   * @return mixed
-   */
-  public function getExampleItems(string $flavor, ?int $limit = 20, int $offset = 0)
+  public function getExampleItems(string $flavor, ?int $limit = 20, int $offset = 0): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -109,12 +104,10 @@ class ExampleRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return mixed
-   *
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
-  public function getExampleItemCount(string $flavor)
+  public function getExampleItemCount(string $flavor): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -149,7 +142,7 @@ class ExampleRepository extends ServiceEntityRepository
     }
   }
 
-  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
@@ -166,7 +159,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null, string $alias = 'e'): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = null, string $alias = 'e'): QueryBuilder
   {
     if (null !== $max_version && '' !== $max_version) {
       $query_builder

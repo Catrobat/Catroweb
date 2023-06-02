@@ -47,10 +47,8 @@ class ScriptsTest extends TestCase
    * @test
    *
    * @dataProvider provideMethodNames
-   *
-   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name): void
+  public function mustHaveMethod(mixed $method_name): void
   {
     foreach ($this->script_xml_properties_list as $script_xml_properties) {
       $script = ScriptFactory::generate($script_xml_properties);
@@ -74,11 +72,8 @@ class ScriptsTest extends TestCase
    * @depends      mustHaveMethod
    *
    * @dataProvider provideScriptXMLProperties
-   *
-   * @param mixed $script_xml_properties
-   * @param mixed $expected
    */
-  public function factoryMustGenerateValidScript($script_xml_properties, $expected): void
+  public function factoryMustGenerateValidScript(mixed $script_xml_properties, mixed $expected): void
   {
     $actual = ScriptFactory::generate($script_xml_properties);
 

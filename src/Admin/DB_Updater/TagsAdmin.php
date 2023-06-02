@@ -8,14 +8,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class TagsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_tagssadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'tags';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

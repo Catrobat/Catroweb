@@ -11,9 +11,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class HwiOauthRegistrationFormHandler implements RegistrationFormHandlerInterface
 {
-  /**
-   * {@inheritdoc}
-   */
   public function process(Request $request, FormInterface $form, UserResponseInterface $userInformation): bool
   {
     return true;

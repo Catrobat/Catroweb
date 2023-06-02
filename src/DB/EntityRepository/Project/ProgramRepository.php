@@ -38,7 +38,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder->getQuery()->getResult();
   }
 
-  public function getProjects(?string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
+  public function getProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
@@ -48,7 +48,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder->getQuery()->getResult();
   }
 
-  public function countProjects(?string $flavor = null, string $max_version = ''): int
+  public function countProjects(string $flavor = null, string $max_version = ''): int
   {
     $query_builder = $this->createQueryCountBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
@@ -56,7 +56,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($query_builder);
   }
 
-  public function getScratchRemixProjects(?string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0): array
+  public function getScratchRemixProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -70,7 +70,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function countScratchRemixProjects(?string $flavor = null, string $max_version = ''): int
+  public function countScratchRemixProjects(string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -96,7 +96,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function countPublicUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
+  public function countPublicUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -122,7 +122,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function countUserProjectsIncludingPrivateOnes(string $user_id, ?string $flavor = null, string $max_version = ''): int
+  public function countUserProjectsIncludingPrivateOnes(string $user_id, string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
@@ -134,7 +134,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($qb);
   }
 
-  public function getProjectsByTagInternalTitle(string $internal_title, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  public function getProjectsByTagInternalTitle(string $internal_title, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -164,7 +164,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function searchTagCount(string $tag_name, ?string $flavor = null, string $max_version = ''): int
+  public function searchTagCount(string $tag_name, string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -177,7 +177,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($qb);
   }
 
-  public function searchExtensionCount(string $extension_internal_title, ?string $flavor = null, string $max_version = ''): int
+  public function searchExtensionCount(string $extension_internal_title, string $flavor = null, string $max_version = ''): int
   {
     $qb = $this->createQueryCountBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -190,7 +190,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($qb);
   }
 
-  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?string $flavor = null, string $max_version = '', ?int $limit = 20, ?int $offset = 0): array
+  public function getMoreProjectsFromUser(string $user_id, string $project_id, string $flavor = null, string $max_version = '', ?int $limit = 20, ?int $offset = 0): array
   {
     $qb = $this->createQueryAllBuilder();
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
@@ -252,15 +252,13 @@ class ProgramRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return mixed
-   *
    * @throws NonUniqueResultException
    * @throws NoResultException
    *
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findNext(string $previous_program_id)
+  public function findNext(string $previous_program_id): mixed
   {
     $query_builder = $this->createQueryBuilder('p');
 
@@ -380,14 +378,14 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
+  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, $alias);
 
     return $this->excludePrivateProjects($qb, $alias);
   }
 
-  private function excludeUnavailableProjects(QueryBuilder $qb, ?string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
+  private function excludeUnavailableProjects(QueryBuilder $qb, string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
     $qb = $this->excludeInvisibleProjects($qb, $alias);
     $qb = $this->excludeDebugProjects($qb, $alias);
@@ -396,7 +394,7 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version, $alias);
   }
 
-  private function setFlavorConstraint(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e'): QueryBuilder
+  private function setFlavorConstraint(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e'): QueryBuilder
   {
     if ('' === trim($flavor)) {
       return $query_builder;

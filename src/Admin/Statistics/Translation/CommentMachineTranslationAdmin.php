@@ -8,19 +8,10 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class CommentMachineTranslationAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_comment_machine_translation';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'comment_machine_translation';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureExportFields(): array
   {
     return ['id', 'comment.id', 'source_language', 'target_language', 'provider', 'usage_count',

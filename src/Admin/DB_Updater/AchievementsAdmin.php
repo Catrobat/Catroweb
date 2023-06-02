@@ -9,14 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class AchievementsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_achievementsadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'achievements';
 
   public function __construct(

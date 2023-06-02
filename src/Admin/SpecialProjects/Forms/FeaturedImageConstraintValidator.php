@@ -7,9 +7,6 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class FeaturedImageConstraintValidator extends ConstraintValidator
 {
-  /**
-   * {@inheritdoc}
-   */
   public function validate(mixed $value, Constraint $constraint): void
   {
     if (null === $value || !$constraint instanceof FeaturedImageConstraint) {

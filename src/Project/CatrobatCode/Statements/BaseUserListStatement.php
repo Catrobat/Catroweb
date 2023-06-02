@@ -6,17 +6,7 @@ class BaseUserListStatement extends Statement
 {
   private string $listName;
 
-  /**
-   * BaseUserListStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   * @param mixed $start
-   * @param mixed $middle
-   * @param mixed $end
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, private $start, private $middle, private $end)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, private mixed $start, private mixed $middle, private mixed $end)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $start,

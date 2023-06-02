@@ -223,9 +223,6 @@ class UserManager implements UserManagerInterface
     return $this->findOneBy(['confirmation_token' => $token]);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function getClass(): string
   {
     return User::class;
@@ -239,41 +236,26 @@ class UserManager implements UserManagerInterface
     return $this->user_repository->findAll();
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
+  public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
   {
     return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
-  /**
-   * {@inheritDoc}
-   */
-  public function findOneBy(array $criteria, ?array $orderBy = null): ?User
+  public function findOneBy(array $criteria, array $orderBy = null): ?User
   {
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function find($id): ?User
   {
     return $this->user_repository->find($id);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function create(): User
   {
     return new User();
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function save($entity, $andFlush = true): void
   {
     $this->entity_manager->persist($entity);
@@ -282,9 +264,6 @@ class UserManager implements UserManagerInterface
     }
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function delete($entity, $andFlush = true): void
   {
     $this->entity_manager->remove($entity);

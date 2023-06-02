@@ -23,14 +23,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ExampleProgramAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'adminexample_program';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'example_program';
 
   public function __construct(
@@ -48,9 +42,6 @@ class ExampleProgramAdmin extends AbstractAdmin
     return '../../'.$this->example_image_repository->getWebPath($object->getId(), $object->getImageType(), false);
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function getObjectMetadata($object): MetadataInterface
   {
     /** @var ExampleProgram $example_program */
@@ -60,9 +51,6 @@ class ExampleProgramAdmin extends AbstractAdmin
       $this->getExampleImageUrl($example_program));
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function preUpdate(object $object): void
   {
     /** @var ExampleProgram $example_program */
@@ -72,9 +60,6 @@ class ExampleProgramAdmin extends AbstractAdmin
     $this->checkProgramID($example_program);
   }
 
-  /**
-   * @param mixed $object
-   */
   public function prePersist($object): void
   {
     $this->checkProgramID($object);

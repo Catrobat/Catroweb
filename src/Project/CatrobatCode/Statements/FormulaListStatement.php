@@ -11,14 +11,7 @@ class FormulaListStatement extends Statement
 
   private ?FormulaStatement $y_position = null;
 
-  /**
-   * FormulaListStatement constructor.
-   *
-   * @param mixed $statement_factory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   */
-  public function __construct($statement_factory, $xmlTree, $spaces)
+  public function __construct(mixed $statement_factory, mixed $xmlTree, mixed $spaces)
   {
     parent::__construct($statement_factory, $xmlTree, $spaces - 1,
       '', '');

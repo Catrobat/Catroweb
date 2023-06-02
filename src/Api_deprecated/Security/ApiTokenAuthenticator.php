@@ -50,8 +50,6 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @throws NonUniqueResultException
    */
   public function authenticate(Request $request): Passport
@@ -77,18 +75,12 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
     return new SelfValidatingPassport(new UserBadge($user['username']));
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
   {
     // on success, let the request continue
     return null;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
     $data = [

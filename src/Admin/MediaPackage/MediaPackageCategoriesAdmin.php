@@ -11,14 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class MediaPackageCategoriesAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'adminmedia_package_category';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'media_package_category';
 
   /**

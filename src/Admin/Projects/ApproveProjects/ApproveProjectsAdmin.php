@@ -28,14 +28,8 @@ class ApproveProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_approve_programs';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'approve';
 
   private ?ExtractedCatrobatFile $extractedProgram = null;

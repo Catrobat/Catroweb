@@ -384,9 +384,6 @@ class Program implements \Stringable
    */
   private bool $should_invalidate_translation_cache = false;
 
-  /**
-   * Program constructor.
-   */
   public function __construct()
   {
     $this->comments = new ArrayCollection();
@@ -583,7 +580,7 @@ class Program implements \Stringable
   /**
    * Sets the user owning this Program.
    */
-  public function setUser(?User $user = null): Program
+  public function setUser(User $user = null): Program
   {
     $this->user = $user;
 

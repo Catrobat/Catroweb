@@ -16,14 +16,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaPackageFileAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'adminmedia_package_file';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'media_package_file';
 
   public function __construct(
@@ -31,9 +25,6 @@ class MediaPackageFileAdmin extends AbstractAdmin
   ) {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function prePersist($object): void
   {
     /* @var MediaPackageFile $object */
@@ -47,8 +38,6 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @throws \ImagickException
    */
   public function postPersist($object): void
@@ -61,9 +50,6 @@ class MediaPackageFileAdmin extends AbstractAdmin
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function preUpdate(object $object): void
   {
     /* @var MediaPackageFile $object */
@@ -80,8 +66,6 @@ class MediaPackageFileAdmin extends AbstractAdmin
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @throws \ImagickException
    */
   public function postUpdate($object): void
@@ -94,18 +78,12 @@ class MediaPackageFileAdmin extends AbstractAdmin
     $this->media_package_file_repository->moveFile($file, $object->getId(), $object->getExtension());
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function preRemove($object): void
   {
     /* @var MediaPackageFile $object */
     $object->removed_id = $object->getId();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function postRemove($object): void
   {
     /* @var MediaPackageFile $object */

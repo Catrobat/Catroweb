@@ -20,9 +20,6 @@ class RefreshBearerCookieOnKernelResponseEventSubscriber implements EventSubscri
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::RESPONSE => ['onKernelResponse', 200]];

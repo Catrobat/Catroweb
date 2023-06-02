@@ -14,17 +14,11 @@ final class UtilityApi extends AbstractApiController implements UtilityApiInterf
   {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function healthGet(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function surveyLangCodeGet(string $lang_code, string $flavor, string $platform, int &$responseCode, array &$responseHeaders): ?SurveyResponse
   {
     $criteria = [];

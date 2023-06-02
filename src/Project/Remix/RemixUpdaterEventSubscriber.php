@@ -74,9 +74,6 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
     $file->saveProgramXmlProperties();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [ProgramAfterInsertEvent::class => 'onProgramAfterInsert'];

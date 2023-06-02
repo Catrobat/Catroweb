@@ -153,7 +153,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
     return new ProjectResponse($data);
   }
 
-  public function createProjectsDataResponse(array $projects, ?string $attributes = null): array
+  public function createProjectsDataResponse(array $projects, string $attributes = null): array
   {
     $response = [];
     foreach ($projects as $project) {
@@ -163,7 +163,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
     return $response;
   }
 
-  public function createFeaturedProjectResponse(FeaturedProgram $featured_project, ?string $attributes = null): FeaturedProjectResponse
+  public function createFeaturedProjectResponse(FeaturedProgram $featured_project, string $attributes = null): FeaturedProjectResponse
   {
     if (empty($attributes) || 'ALL' === $attributes) {
       $attributes_list = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
@@ -206,7 +206,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
     return new FeaturedProjectResponse($data);
   }
 
-  public function createFeaturedProjectsResponse(array $featured_projects, ?string $attributes = null): array
+  public function createFeaturedProjectsResponse(array $featured_projects, string $attributes = null): array
   {
     $response = [];
 
@@ -218,7 +218,7 @@ final class ProjectsResponseManager extends AbstractResponseManager
     return $response;
   }
 
-  public function createProjectCategoryResponse(array $projects, string $category, string $locale, ?string $attributes = null): ProjectsCategory
+  public function createProjectCategoryResponse(array $projects, string $category, string $locale, string $attributes = null): ProjectsCategory
   {
     return new ProjectsCategory([
       'projects_list' => $this->createProjectsDataResponse($projects, $attributes),

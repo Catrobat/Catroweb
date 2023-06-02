@@ -9,19 +9,9 @@ class BroadcastScriptStatement extends Statement
    */
   final public const BEGIN_STRING = 'when receive message ';
 
-  /**
-   * @var mixed
-   */
-  private $message;
+  private mixed $message;
 
-  /**
-   * BroadcastScriptStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       self::BEGIN_STRING,
@@ -53,10 +43,7 @@ class BroadcastScriptStatement extends Statement
     return $code;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getMessage()
+  public function getMessage(): mixed
   {
     if (null == $this->message) {
       $this->message = $this->xmlTree->receivedMessage;

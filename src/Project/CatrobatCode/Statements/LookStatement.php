@@ -32,18 +32,12 @@ class LookStatement extends Statement
     return $code;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getValue()
+  public function getValue(): ?string
   {
     return $this->value;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFileName()
+  public function getFileName(): ?Statement
   {
     return $this->fileName;
   }

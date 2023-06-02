@@ -24,19 +24,10 @@ class ProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_projectsadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'projects';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';
@@ -50,9 +41,6 @@ class ProjectsAdmin extends AbstractAdmin
   ) {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function getObjectMetadata($object): MetadataInterface
   {
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
@@ -140,9 +128,6 @@ class ProjectsAdmin extends AbstractAdmin
     ;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   protected function configureShowFields(ShowMapper $show): void
   {
     $flavor_options = $this->parameter_bag->get('flavors');

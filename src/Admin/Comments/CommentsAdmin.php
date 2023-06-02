@@ -9,19 +9,10 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class CommentsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_commentsadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'comments';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';

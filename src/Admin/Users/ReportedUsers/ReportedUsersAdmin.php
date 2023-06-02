@@ -12,14 +12,8 @@ use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 class ReportedUsersAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_reported_users';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'reported_users';
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface

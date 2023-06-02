@@ -31,9 +31,6 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class CreateMediaPackageSamplesCommand extends Command
 {
-  /**
-   * CreateMediaPackageSamplesCommand constructor.
-   */
   public function __construct(private readonly MediaPackageRepository $media_package_repo, private readonly MediaPackageCategoryRepository $media_package_category_repo,
     private readonly MediaPackageFileRepository $media_package_file_repo, private readonly ParameterBagInterface $parameter_bag,
     private readonly FlavorRepository $flavor_repo)

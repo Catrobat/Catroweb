@@ -8,9 +8,6 @@ use App\Translation\TranslationResult;
 
 class FakeTranslationDelegate extends TranslationDelegate
 {
-  /**
-   * {@inheritDoc}
-   */
   public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
   {
     $cached_result = $this->getCachedProjectTranslation($project, $source_language, $target_language);
@@ -40,9 +37,6 @@ class FakeTranslationDelegate extends TranslationDelegate
     return $translation_result;
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function translate(string $text, ?string $source_language, string $target_language): ?TranslationResult
   {
     $translation_result = new TranslationResult();

@@ -10,8 +10,6 @@ use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 trait ProjectPreUpdateTrait
 {
   /**
-   * {@inheritdoc}
-   *
    * @throws ModelManagerThrowable
    */
   public function preUpdate(object $object): void

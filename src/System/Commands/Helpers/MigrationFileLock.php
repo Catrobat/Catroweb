@@ -9,10 +9,7 @@ class MigrationFileLock
 {
   private readonly string $lock_file_path;
 
-  /**
-   * @var mixed
-   */
-  private $lock_file;
+  private mixed $lock_file;
 
   public function __construct(string $app_root_dir, private readonly OutputInterface $output)
   {

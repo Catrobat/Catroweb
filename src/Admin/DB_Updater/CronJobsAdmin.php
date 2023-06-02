@@ -8,14 +8,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class CronJobsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_cronjobsadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'cronjobs';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

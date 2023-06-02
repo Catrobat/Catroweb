@@ -73,9 +73,6 @@ class TwigExtension extends AbstractExtension
     return $number_formatter->format($input);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function getFunctions(): array
   {
     return [

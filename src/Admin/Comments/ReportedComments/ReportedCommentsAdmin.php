@@ -13,14 +13,8 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ReportedCommentsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_report';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'report';
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface

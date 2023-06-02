@@ -8,19 +8,10 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class ProjectMachineTranslationAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_machine_translation';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'project_machine_translation';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'project.name', 'source_language', 'target_language', 'provider', 'usage_count',

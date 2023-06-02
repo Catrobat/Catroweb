@@ -29,9 +29,6 @@ class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
     $file->saveProgramXmlProperties();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [ProgramBeforeInsertEvent::class => ['onProgramBeforeInsert', -1]];
