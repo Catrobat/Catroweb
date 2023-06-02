@@ -2,10 +2,14 @@
 
 namespace App\Admin\Statistics\Translation;
 
+use App\DB\Entity\Translation\ProjectMachineTranslation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<ProjectMachineTranslation>
+ */
 class ProjectMachineTranslationAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_machine_translation';

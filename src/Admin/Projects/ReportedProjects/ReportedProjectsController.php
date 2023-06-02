@@ -7,6 +7,9 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @phpstan-extends CRUDController<ProgramInappropriateReport>
+ */
 class ReportedProjectsController extends CRUDController
 {
   public function unreportProgramAction(): RedirectResponse

@@ -22,6 +22,9 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormError;
 
+/**
+ * @phpstan-extends AbstractAdmin<FeaturedProgram>
+ */
 class FeaturedProgramAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'adminfeatured_program';

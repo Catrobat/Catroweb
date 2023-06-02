@@ -697,7 +697,7 @@ class DataFixturesContext implements Context
       $new_file->setCategory($category);
       $old_files = $category->getFiles();
       $old_files->add($new_file);
-      $category->setFiles($old_files);
+      $category->setFiles(new ArrayCollection($old_files->toArray()));
       if (!empty($file['flavors'])) {
         foreach (explode(',', (string) $file['flavors']) as $flavor) {
           $new_file->addFlavor($flavor_repo->getFlavorByName(trim($flavor)));

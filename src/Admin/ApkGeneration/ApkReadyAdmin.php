@@ -12,6 +12,9 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ApkReadyAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_apk_ready';

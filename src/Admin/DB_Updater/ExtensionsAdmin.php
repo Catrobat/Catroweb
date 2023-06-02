@@ -2,10 +2,14 @@
 
 namespace App\Admin\DB_Updater;
 
+use App\DB\Entity\Project\Extension;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<Extension>
+ */
 class ExtensionsAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_adminbundle_extensionssadmin';

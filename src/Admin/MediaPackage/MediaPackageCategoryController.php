@@ -8,6 +8,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @phpstan-extends CRUDController<MediaPackageCategory>
+ */
 class MediaPackageCategoryController extends CRUDController
 {
   protected function preDelete(Request $request, object $object): ?Response

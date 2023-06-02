@@ -2,6 +2,7 @@
 
 namespace App\Admin\DB_Updater\Controller;
 
+use App\DB\Entity\System\CronJob;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
@@ -13,6 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @phpstan-extends CRUDController<CronJob>
+ */
 class CronJobsAdminController extends CRUDController
 {
   public function __construct(

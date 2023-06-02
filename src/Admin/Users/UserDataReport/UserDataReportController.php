@@ -2,12 +2,16 @@
 
 namespace App\Admin\Users\UserDataReport;
 
+use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @phpstan-extends CRUDController<User>
+ */
 class UserDataReportController extends CRUDController
 {
   public function __construct(

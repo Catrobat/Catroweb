@@ -7,6 +7,9 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @phpstan-extends CRUDController<Program>
+ */
 class ApproveProjectsController extends CRUDController
 {
   public function approveAction(): RedirectResponse
@@ -58,15 +61,19 @@ class ApproveProjectsController extends CRUDController
   private function getNextRandomApproveProgramId(): ?string
   {
     $data_grid = $this->admin->getDatagrid();
+    $objects = $data_grid->getResults();
+    $objectsArray = $this->getObjectsArrayByObjects($objects);
 
-    $objects = [...$data_grid->getResults()];
-    if (empty($objects[0])) {
+    if (empty($objectsArray)) {
       return null;
     }
-    $object_key = array_rand($objects);
 
-    /** @var Program $object */
-    $object = $objects[$object_key];
+    $object_key = array_rand($objectsArray);
+    $object = $objectsArray[$object_key];
+
+    if (!$object instanceof Program) {
+      return null;
+    }
 
     return $object->getId();
   }
@@ -75,7 +82,20 @@ class ApproveProjectsController extends CRUDController
   {
     $datagrid = $this->admin->getDatagrid();
     $objects = $datagrid->getResults();
+    $objectsArray = $this->getObjectsArrayByObjects($objects);
 
-    return count([...$objects]);
+    return count($objectsArray);
+  }
+
+  private function getObjectsArrayByObjects(iterable $objects): array
+  {
+    $objectsArray = [];
+    if (!is_countable($objects)) {
+      foreach ($objects as $object) {
+        $objectsArray[] = $object;
+      }
+    }
+
+    return $objectsArray;
   }
 }

@@ -10,6 +10,9 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @phpstan-extends CRUDController<\stdClass>
+ */
 class SendMailToUserController extends CRUDController
 {
   public function __construct(

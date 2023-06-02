@@ -2,6 +2,7 @@
 
 namespace App\Admin\Projects;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -20,6 +21,9 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;

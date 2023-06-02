@@ -2,6 +2,7 @@
 
 namespace App\Admin\DB_Updater\Controller;
 
+use App\DB\Entity\User\Achievements\Achievement;
 use App\System\Commands\Helpers\CommandHelper;
 use App\User\Achievements\AchievementManager;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -12,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @phpstan-extends CRUDController<Achievement>
+ */
 class AchievementsAdminController extends CRUDController
 {
   public function __construct(

@@ -5,6 +5,9 @@ namespace App\Admin\Tools\SendMailToUser;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<\stdClass>
+ */
 class SendMailToUserAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_mail';

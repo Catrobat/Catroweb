@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ * @phpstan-extends CRUDController<ProjectMachineTranslation|CommentMachineTranslation>
+ */
 abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
   protected const TYPE_PROJECT = 'TYPE_PROJECT';
