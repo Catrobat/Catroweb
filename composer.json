@@ -52,7 +52,7 @@
         "symfony/mailer": "6.2.*",
         "symfony/monolog-bundle": "^3.8",
         "symfony/polyfill-iconv": "^1.27",
-        "symfony/process": "6.2.*",
+        "symfony/process": "6.3.*",
         "symfony/routing": "6.2.*",
         "symfony/sendinblue-mailer": "6.2.*",
         "symfony/translation": "6.2.*",
