@@ -6,7 +6,7 @@ use App\Project\Apk\JenkinsDispatcher;
 
 class FakeJenkinsDispatcher extends JenkinsDispatcher
 {
-  protected mixed $last_params;
+  protected mixed $last_params = null;
 
   public function getLastParameters(): mixed
   {
