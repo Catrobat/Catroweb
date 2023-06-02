@@ -11,14 +11,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 {
   private int $current_program_id = 1;
 
-  /**
-   * RemixManipulationCatrobatFileExtractor constructor.
-   *
-   * @param mixed $remix_graph_mapping
-   * @param mixed $extract_dir
-   * @param mixed $extract_path
-   */
-  public function __construct(private $remix_graph_mapping, $extract_dir, $extract_path)
+  public function __construct(private mixed $remix_graph_mapping, mixed $extract_dir, mixed $extract_path)
   {
     parent::__construct($extract_dir, $extract_path);
   }

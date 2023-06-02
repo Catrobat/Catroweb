@@ -29,10 +29,8 @@ class ParsedObjectAssetTest extends TestCase
    * @test
    *
    * @dataProvider provideMethodNames
-   *
-   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name): void
+  public function mustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->assets[0], $method_name));
     $this->assertTrue(method_exists($this->assets[1], $method_name));

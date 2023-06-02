@@ -20,9 +20,6 @@ class NotesAndCreditsValidatorEventSubscriber implements EventSubscriberInterfac
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [ProgramBeforeInsertEvent::class => 'onProgramBeforeInsert'];

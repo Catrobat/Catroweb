@@ -18,12 +18,8 @@ class FormulaResolverTest extends TestCase
    * @test
    *
    * @dataProvider formulaDataProvider
-   *
-   * @param mixed $formula_list_xml_properties
-   * @param mixed $categories
-   * @param mixed $expected
    */
-  public function mustResolveAllFormulas($formula_list_xml_properties, $categories, $expected): void
+  public function mustResolveAllFormulas(mixed $formula_list_xml_properties, mixed $categories, mixed $expected): void
   {
     $actual = FormulaResolver::resolve($formula_list_xml_properties);
     foreach ($categories as $category) {

@@ -18,10 +18,7 @@ class FeaturedRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, FeaturedProgram::class);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null)
+  public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -41,7 +38,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getFeaturedProgramsCount(?string $flavor, ?string $platform = null, ?string $max_version = null): int
+  public function getFeaturedProgramsCount(?string $flavor, string $platform = null, string $max_version = null): int
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -66,12 +63,10 @@ class FeaturedRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return mixed
-   *
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
-  public function getFeaturedProgramCount(string $flavor, bool $for_ios = false)
+  public function getFeaturedProgramCount(string $flavor, bool $for_ios = false): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -89,10 +84,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getSingleScalarResult();
   }
 
-  /**
-   * @return mixed
-   */
-  public function getFeaturedItems(string $flavor, ?int $limit = 20, int $offset = 0)
+  public function getFeaturedItems(string $flavor, ?int $limit = 20, int $offset = 0): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -111,12 +103,10 @@ class FeaturedRepository extends ServiceEntityRepository
   }
 
   /**
-   * @return mixed
-   *
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
-  public function getFeaturedItemCount(string $flavor)
+  public function getFeaturedItemCount(string $flavor): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -148,7 +138,7 @@ class FeaturedRepository extends ServiceEntityRepository
     }
   }
 
-  private function addPlatformCondition(QueryBuilder $query_builder, ?string $platform = null): QueryBuilder
+  private function addPlatformCondition(QueryBuilder $query_builder, string $platform = null): QueryBuilder
   {
     if (null !== $platform && '' !== trim($platform)) {
       if ('android' === $platform) {
@@ -167,7 +157,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
@@ -184,7 +174,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = null): QueryBuilder
   {
     if (null === $max_version || '' === $max_version) {
       return $query_builder;

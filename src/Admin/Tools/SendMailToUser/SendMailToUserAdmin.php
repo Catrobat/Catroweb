@@ -7,14 +7,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class SendMailToUserAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_mail';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'mail';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

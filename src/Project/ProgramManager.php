@@ -416,7 +416,7 @@ class ProgramManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findBy(array $criteria, array $orderBy = null, ?int $limit = null, ?int $offset = null): array
+  public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
   {
     return $this->program_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
@@ -431,14 +431,12 @@ class ProgramManager
   }
 
   /**
-   * @return mixed
-   *
    * @throws NoResultException
    * @throws NonUniqueResultException
    *
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findNext(string $previous_program_id)
+  public function findNext(string $previous_program_id): mixed
   {
     return $this->program_repository->findNext($previous_program_id);
   }
@@ -483,27 +481,27 @@ class ProgramManager
     return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
 
-  public function getUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  public function getUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
     return $this->program_repository->getUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function countUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
+  public function countUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
   {
     return $this->program_repository->countUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version);
   }
 
-  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
     return $this->program_repository->getMoreProjectsFromUser($user_id, $project_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function getPublicUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
+  public function getPublicUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
     return $this->program_repository->getPublicUserProjects($user_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function countPublicUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
+  public function countPublicUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
   {
     return $this->program_repository->countPublicUserProjects($user_id, $flavor, $max_version);
   }
@@ -518,14 +516,14 @@ class ProgramManager
     return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'views');
   }
 
-  public function getExamplePrograms(?string $flavor = null, ?int $limit = null, int $offset = 0, string $max_version = ''): array
+  public function getExamplePrograms(string $flavor = null, int $limit = null, int $offset = 0, string $max_version = ''): array
   {
     return $this->example_repository->getExamplePrograms(
       $this->request_helper->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  public function getExampleProgramsCount(?string $flavor = null, string $max_version = ''): int
+  public function getExampleProgramsCount(string $flavor = null, string $max_version = ''): int
   {
     return $this->example_repository->getExampleProgramsCount(
       $this->request_helper->isDebugBuildRequest(), $flavor, $max_version
@@ -557,14 +555,14 @@ class ProgramManager
     return $this->program_repository->countProjects($flavor, $max_version);
   }
 
-  public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): array
+  public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', string $flavor = null, bool $is_debug_request = false): array
   {
     $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
     return $this->program_finder->find($program_query, $limit, ['from' => $offset]);
   }
 
-  public function searchCount(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): int
+  public function searchCount(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): int
   {
     $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
@@ -707,7 +705,7 @@ class ProgramManager
     };
   }
 
-  private function programSearchQuery(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): BoolQuery
+  private function programSearchQuery(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): BoolQuery
   {
     $query = Util::escapeTerm($query);
 

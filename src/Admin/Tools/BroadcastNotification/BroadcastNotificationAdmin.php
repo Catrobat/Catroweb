@@ -7,14 +7,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class BroadcastNotificationAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_broadcast';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'broadcast';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

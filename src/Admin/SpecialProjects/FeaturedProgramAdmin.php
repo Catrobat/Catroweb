@@ -24,14 +24,8 @@ use Symfony\Component\Form\FormError;
 
 class FeaturedProgramAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'adminfeatured_program';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'featured_program';
 
   public function __construct(
@@ -50,9 +44,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
     return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function getObjectMetadata($object): MetadataInterface
   {
     /** @var FeaturedProgram $featured_program */
@@ -62,9 +53,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
       $this->getFeaturedImageUrl($featured_program));
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function preUpdate(object $object): void
   {
     /** @var FeaturedProgram $featured_program */
@@ -73,9 +61,6 @@ class FeaturedProgramAdmin extends AbstractAdmin
     $featured_program->old_image_type = $featured_program->getImageType();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function preValidate(object $object): void
   {
     $id = $this->getForm()->get('Program_Id_or_Url')->getData();

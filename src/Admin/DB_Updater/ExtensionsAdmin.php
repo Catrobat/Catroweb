@@ -8,14 +8,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class ExtensionsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_extensionssadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'extensions';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

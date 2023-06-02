@@ -156,8 +156,8 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
   }
 
   private function findProjectAndIncrement(string $project_id, string $source_language, string $target_language,
-    string $provider, ?string $cache = null,
-    ?string $translated_name = null, ?string $translated_description = null, ?string $translated_credits = null): void
+    string $provider, string $cache = null,
+    string $translated_name = null, string $translated_description = null, string $translated_credits = null): void
   {
     /** @var Program|null $project */
     $project = $this->program_manager->find($project_id);
@@ -198,9 +198,6 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     return null === $cache;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::TERMINATE => 'onTerminateEvent'];

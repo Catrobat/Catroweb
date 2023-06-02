@@ -11,19 +11,10 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class ProjectCustomTranslationAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_custom_translation';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'project_custom_translation';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'language', 'name', 'description', 'credits'];

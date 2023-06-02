@@ -10,15 +10,7 @@ class FormulaStatement extends Statement
 
   private ?ValueStatement $type = null;
 
-  /**
-   * FormulaStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   * @param mixed $category
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, private $category)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, private readonly mixed $category)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces, '', '');
   }
@@ -58,10 +50,7 @@ class FormulaStatement extends Statement
     return $code.$endCode;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getCategory()
+  public function getCategory(): mixed
   {
     return $this->category;
   }

@@ -15,8 +15,6 @@ final class SearchApi extends AbstractApiController implements SearchApiInterfac
   }
 
   /**
-   * {@inheritDoc}
-   *
    * @throws \JsonException
    */
   public function searchGet(string $query, string $type, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|SearchResponse

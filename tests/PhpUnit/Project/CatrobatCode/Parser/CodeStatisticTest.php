@@ -27,10 +27,8 @@ class CodeStatisticTest extends TestCase
    * @test
    *
    * @dataProvider provideMethodNames
-   *
-   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name): void
+  public function mustHaveMethod(mixed $method_name): void
   {
     $code_statistic = new CodeStatistic();
     $this->assertTrue(method_exists($code_statistic, $method_name));
@@ -77,10 +75,8 @@ class CodeStatisticTest extends TestCase
    * @test
    *
    * @depends mustComputeCorrectScriptStatistic
-   *
-   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectBrickStatistic($code_statistic): void
+  public function mustComputeCorrectBrickStatistic(mixed $code_statistic): void
   {
     $expected = 170;
     $actual = $code_statistic->getBrickStatistic();
@@ -92,10 +88,8 @@ class CodeStatisticTest extends TestCase
    * @test
    *
    * @depends mustComputeCorrectScriptStatistic
-   *
-   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectObjectStatistic($code_statistic): void
+  public function mustComputeCorrectObjectStatistic(mixed $code_statistic): void
   {
     $expected = 16;
     $actual = $code_statistic->getObjectStatistic();
@@ -107,10 +101,8 @@ class CodeStatisticTest extends TestCase
    * @test
    *
    * @depends mustComputeCorrectScriptStatistic
-   *
-   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectLookStatistic($code_statistic): void
+  public function mustComputeCorrectLookStatistic(mixed $code_statistic): void
   {
     $expected = 19;
     $actual = $code_statistic->getLookStatistic();
@@ -122,10 +114,8 @@ class CodeStatisticTest extends TestCase
    * @test
    *
    * @depends mustComputeCorrectScriptStatistic
-   *
-   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectSoundStatistic($code_statistic): void
+  public function mustComputeCorrectSoundStatistic(mixed $code_statistic): void
   {
     $expected = 4;
     $actual = $code_statistic->getSoundStatistic();
@@ -155,10 +145,8 @@ class CodeStatisticTest extends TestCase
    * @test
    *
    * @depends mustComputeCorrectGlobalVariableStatistic
-   *
-   * @param mixed $code_statistic
    */
-  public function mustComputeCorrectLocalVariableStatistic($code_statistic): void
+  public function mustComputeCorrectLocalVariableStatistic(mixed $code_statistic): void
   {
     $expected = 0;
     $actual = $code_statistic->getLocalVarStatistic();

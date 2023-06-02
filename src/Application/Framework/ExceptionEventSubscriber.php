@@ -77,9 +77,6 @@ class ExceptionEventSubscriber implements EventSubscriberInterface
     return !str_starts_with($requestUri, '/'.$theme.'/api/') && !str_starts_with($requestUri, '/'.$theme.'/ci/') && !str_starts_with($requestUri, '/'.$theme.'/download/');
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::EXCEPTION => 'onKernelException'];

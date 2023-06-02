@@ -9,14 +9,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class UserDataReportAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_userdata';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'stored_userdata';
 
   /**

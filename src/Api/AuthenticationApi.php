@@ -18,9 +18,6 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
   {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticationGet(int &$responseCode, array &$responseHeaders): void
   {
     // Check Token is handled by LexikJWTAuthenticationBundle
@@ -28,9 +25,6 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     $responseCode = Response::HTTP_OK;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticationPost(LoginRequest $login_request, int &$responseCode, array &$responseHeaders): JWTResponse
   {
     // Login Process & token creation is handled by LexikJWTAuthenticationBundle
@@ -41,9 +35,6 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     return new JWTResponse();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticationDelete(string $x_refresh, int &$responseCode, array &$responseHeaders): void
   {
     if ($this->facade->getProcessor()->deleteRefreshToken($x_refresh)) {
@@ -54,9 +45,6 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     $responseCode = Response::HTTP_UNAUTHORIZED;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticationRefreshPost(RefreshRequest $refresh_request, int &$responseCode, array &$responseHeaders): JWTResponse
   {
     // Refresh token process is handled by JWTRefreshTokenBundle
@@ -66,9 +54,6 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     return new JWTResponse();
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $resource_owner = $o_auth_login_request->getResourceOwner() ?? '';
@@ -97,9 +82,6 @@ final class AuthenticationApi extends AbstractApiController implements Authentic
     return $this->facade->getResponseManager()->createOAuthPostResponse($token, $refresh_token);
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $deprecated_token = $upgrade_token_request->getUploadToken();

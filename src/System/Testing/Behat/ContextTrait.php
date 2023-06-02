@@ -205,10 +205,7 @@ trait ContextTrait
     return $this->kernel->getContainer()->get(StudioManager::class);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getSymfonyParameter(string $param)
+  public function getSymfonyParameter(string $param): mixed
   {
     return $this->kernel->getContainer()->getParameter($param);
   }

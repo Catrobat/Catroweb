@@ -13,10 +13,7 @@ class ExtensionRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, Extension::class);
   }
 
-  /**
-   * @return mixed
-   */
-  public function getExtensionByInternalTitle(string $internal_title)
+  public function getExtensionByInternalTitle(string $internal_title): mixed
   {
     $qb = $this->createQueryBuilder('e');
 

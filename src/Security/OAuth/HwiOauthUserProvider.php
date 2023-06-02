@@ -18,9 +18,6 @@ class HwiOauthUserProvider implements OAuthAwareUserProviderInterface
     $this->properties = array_merge($this->properties, $properties);
   }
 
-  /**
-   * {@inheritDoc}
-   */
   public function loadUserByOAuthUserResponse(UserResponseInterface $response): UserInterface
   {
     $username = $response->getUsername();

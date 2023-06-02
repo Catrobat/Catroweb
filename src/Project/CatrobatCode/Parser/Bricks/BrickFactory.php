@@ -6,10 +6,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class BrickFactory
 {
-  /**
-   * @return mixed
-   */
-  public static function generate(\SimpleXMLElement $brick_xml_properties)
+  public static function generate(\SimpleXMLElement $brick_xml_properties): mixed
   {
     return match ((string) $brick_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       Constants::BROADCAST_BRICK => new BroadcastBrick($brick_xml_properties),

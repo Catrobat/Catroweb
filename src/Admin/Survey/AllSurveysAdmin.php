@@ -17,14 +17,8 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
 class AllSurveysAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_allsurveysadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'all_surveys';
 
   public function __construct(

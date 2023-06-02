@@ -7,14 +7,8 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
 class SpecialUpdaterAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_specialupdateradmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'special_updater';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

@@ -28,9 +28,6 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
     parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $userProvider, $translator);
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function authenticate(Request $request): Passport
   {
     return parent::doAuthenticate($request);
@@ -38,8 +35,6 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
 
   /**
    * @psalm-suppress ParamNameMismatch
-   *
-   * {@inheritDoc}
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {
