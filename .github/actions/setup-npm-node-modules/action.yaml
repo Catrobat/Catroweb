@@ -4,9 +4,9 @@ runs:
   using: "composite"
   steps:
     - name: "Download and set up node (caching is enabled)"
-      uses: actions/setup-node@v2.4.0
+      uses: actions/setup-node@v3
       with:
-        node-version: '14.x'  # optional
+        node-version: '18.x'  # optional
 
     - name: "Use caching action to improve performance"
       id: npm-cache
