@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4edb2c3547de5bc0de46060eb3c2799d",
+    "content-hash": "623a47d17734ab2d333618541c85381c",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -16428,21 +16428,21 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.15.25",
+            "version": "0.17.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "015935c7ed9e48a4f5895ba974f337e20a263841"
+                "reference": "d8da002b107c9b64d464bb48101290d4d078df4b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/015935c7ed9e48a4f5895ba974f337e20a263841",
-                "reference": "015935c7ed9e48a4f5895ba974f337e20a263841",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/d8da002b107c9b64d464bb48101290d4d078df4b",
+                "reference": "d8da002b107c9b64d464bb48101290d4d078df4b",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.2|^8.0",
-                "phpstan/phpstan": "^1.10.14"
+                "phpstan/phpstan": "^1.10.15"
             },
             "conflict": {
                 "rector/rector-doctrine": "*",
@@ -16477,7 +16477,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.15.25"
+                "source": "https://github.com/rectorphp/rector/tree/0.17.0"
             },
             "funding": [
                 {
@@ -16485,7 +16485,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-20T16:07:39+00:00"
+            "time": "2023-06-01T09:42:59+00:00"
         },
         {
             "name": "sebastian/cli-parser",
