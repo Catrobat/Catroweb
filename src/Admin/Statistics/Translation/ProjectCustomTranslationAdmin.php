@@ -3,12 +3,16 @@
 namespace App\Admin\Statistics\Translation;
 
 use App\DB\Entity\Project\Program;
+use App\DB\Entity\Translation\ProjectCustomTranslation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
+/**
+ * @phpstan-extends AbstractAdmin<ProjectCustomTranslation>
+ */
 class ProjectCustomTranslationAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_custom_translation';

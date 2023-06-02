@@ -29,6 +29,7 @@ class FollowerController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     if (!(('0' === $id) || ($user && $user->getId() === $id))) {
+      /** @var User|null $user */
       $user = $this->user_manager->find($id);
     }
     if (null === $user) {

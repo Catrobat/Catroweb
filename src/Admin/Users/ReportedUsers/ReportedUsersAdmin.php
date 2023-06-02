@@ -2,6 +2,7 @@
 
 namespace App\Admin\Users\ReportedUsers;
 
+use App\DB\Entity\User\User;
 use Doctrine\ORM\Query\Expr\Join;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -10,6 +11,9 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
+/**
+ * @phpstan-extends AbstractAdmin<User>
+ */
 class ReportedUsersAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_reported_users';

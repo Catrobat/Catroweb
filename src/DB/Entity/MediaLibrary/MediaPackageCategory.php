@@ -103,7 +103,10 @@ class MediaPackageCategory implements \Stringable
     return $this->package;
   }
 
-  public function setPackage(Collection $package): void
+  /**
+   * @param ArrayCollection<array-key, MediaPackage> $package
+   */
+  public function setPackage(ArrayCollection $package): void
   {
     $this->package = $package;
   }
@@ -124,7 +127,7 @@ class MediaPackageCategory implements \Stringable
     return $this->files;
   }
 
-  public function setFiles(Collection $files): void
+  public function setFiles(ArrayCollection $files): void
   {
     $this->files = $files;
   }

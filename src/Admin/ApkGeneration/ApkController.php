@@ -10,6 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * @phpstan-extends CRUDController<Program>
+ */
 class ApkController extends CRUDController
 {
   public function __construct(

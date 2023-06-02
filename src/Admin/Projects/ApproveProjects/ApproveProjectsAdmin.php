@@ -24,6 +24,9 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ApproveProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;

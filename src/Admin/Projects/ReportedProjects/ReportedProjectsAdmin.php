@@ -15,6 +15,9 @@ use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ReportedProjectsAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_reported_projects';

@@ -265,6 +265,9 @@ class StudioManagerTest extends DefaultTestCase
       $this->assertInstanceOf(UserComment::class, $reply);
       $this->assertEquals($replies[$i], $reply->getText());
       ++$i;
+      if ($i >= count($replies)) {
+        break;
+      }
     }
     $this->object->deleteCommentFromStudio($this->user, $studioComment->getId());
 

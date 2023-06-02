@@ -8,6 +8,9 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @phpstan-extends CRUDController<LogLine>
+ */
 class LogsController extends CRUDController
 {
   final public const LOG_DIR = '../var/log/';

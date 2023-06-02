@@ -2,6 +2,7 @@
 
 namespace App\DB\EntityRepository\MediaLibrary;
 
+use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,8 +21,8 @@ class MediaPackageCategoryRepository extends ServiceEntityRepository
   /**
    * Creates a new MediaPackageCategory.
    *
-   * @param string          $name           The name
-   * @param ArrayCollection $media_packages an ArrayCollection containing the MediaPackages this MediaPackageCategory belongs to
+   * @param string                                   $name           The name
+   * @param ArrayCollection<array-key, MediaPackage> $media_packages an ArrayCollection containing the MediaPackages this MediaPackageCategory belongs to
    *
    * @return MediaPackageCategory the created MediaPackageCategory
    *

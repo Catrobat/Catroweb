@@ -5,6 +5,9 @@ namespace App\Admin\DB_Updater;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<\stdClass>
+ */
 class SpecialUpdaterAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_adminbundle_specialupdateradmin';

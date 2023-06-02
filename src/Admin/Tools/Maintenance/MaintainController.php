@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @phpstan-extends CRUDController<object>
+ */
 class MaintainController extends CRUDController
 {
   public function __construct(

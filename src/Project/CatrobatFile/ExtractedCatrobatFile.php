@@ -30,7 +30,7 @@ class ExtractedCatrobatFile
 
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
-    for ($i = 0; $i < (is_countable($this->xml_filenames) ? count($this->xml_filenames) : 0); ++$i) {
+    for ($i = 0; $i < count($this->xml_filenames); ++$i) {
       $this->xml_filenames[$i] = $this->decodeXmlEntities($this->xml_filenames[$i]);
     }
 

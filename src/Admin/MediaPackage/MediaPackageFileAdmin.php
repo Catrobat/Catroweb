@@ -14,6 +14,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
+/**
+ * @phpstan-extends AbstractAdmin<MediaPackageFile>
+ */
 class MediaPackageFileAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'adminmedia_package_file';

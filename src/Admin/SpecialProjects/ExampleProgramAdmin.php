@@ -21,6 +21,9 @@ use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @phpstan-extends AbstractAdmin<ExampleProgram>
+ */
 class ExampleProgramAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'adminexample_program';

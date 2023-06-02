@@ -15,6 +15,9 @@ use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ApkPendingAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_apk_pending';

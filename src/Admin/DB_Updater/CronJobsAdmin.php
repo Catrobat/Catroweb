@@ -2,10 +2,14 @@
 
 namespace App\Admin\DB_Updater;
 
+use App\DB\Entity\System\CronJob;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<CronJob>
+ */
 class CronJobsAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'admin_catrobat_adminbundle_cronjobsadmin';
