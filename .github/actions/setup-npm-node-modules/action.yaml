@@ -6,11 +6,11 @@ runs:
     - name: "Download and set up node (caching is enabled)"
       uses: actions/setup-node@v3
       with:
-        node-version: '18.x'  # optional
+        node-version: '20.x'
 
     - name: "Use caching action to improve performance"
       id: npm-cache
-      uses: actions/cache@v2.1.6
+      uses: actions/cache@v3
       with:
         path: node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
