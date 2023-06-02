@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "623a47d17734ab2d333618541c85381c",
+    "content-hash": "8084c145e4e01c948939b11bbb9f1415",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -12089,7 +12089,7 @@
         },
         {
             "name": "symfony/sendinblue-mailer",
-            "version": "v6.2.10",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/sendinblue-mailer.git",
@@ -12137,7 +12137,7 @@
             "description": "Symfony Sendinblue Mailer Bridge",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/sendinblue-mailer/tree/v6.2.10"
+                "source": "https://github.com/symfony/sendinblue-mailer/tree/v6.3.0"
             },
             "funding": [
                 {
