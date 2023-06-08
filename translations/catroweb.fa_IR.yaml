@@ -34,6 +34,8 @@ noDescription: هیچ توضیحی در دسترس نمی باشد.
 credits: Credits
 noCredits: No credits available.
 notesAndCreditsDescription: چگونه این پروژه را ایجاد کردید؟ آیا از ایده ها، اسکریپت ها یا آثار هنری از دیگران استفاده می کنید؟ از انها اینجا تشکری کنید. 
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: کشور
 loginText: ورود به سیستم
 privacyPolicy: حریم خصوصی
@@ -114,8 +116,8 @@ programs:
     بله، آن را حذف کنید!
     لغو
   deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: شخصی
-  public: عمومی
+  private: private
+  public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
@@ -442,8 +444,8 @@ resetPassword:
   check:
     title: "ایمیل های خود را بررسی کنید"
     description: "اگر حسابی مطابق با ایمیل شما وجود داشته باشد، ایمیلی ارسال شده است که حاوی پیوندی است که می توانید از آن برای بازنشانی رمز عبور خود استفاده کنید. این پیوند در %time% منقضی می‌شود."
-    description2: "اگر ایمیلی دریافت نکردید، لطفاً پوشه هرزنامه یا %tryAgainLink% خود را بررسی کنید"
-    tryAgain: "دوباره امتحان کنید"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "سلام!"
     visitLink: "برای بازنشانی رمز عبور خود به لینک زیر مراجعه کنید"
@@ -851,11 +853,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'گزارش'
+  public: 'public'
+  private: 'private'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'عمومی'
-    private: 'شخصی'
-    join: 'بپیوست'
-    leave: 'ترک کن'
     showMore: 'نمایش بیشتر'
     showLess: 'نمایش کمتر'
     remove_project: 'حذف از استودیو'
@@ -872,8 +883,9 @@ studio:
       send: 'ارسال'
       no_comments: 'این استودیو هنوز نظری نداده است'
       disabled_comments: 'نظرات این استودیو غیرفعال شده است.'
+      remove_comment: 'Remove comment'
       post_error: 'هنگام ارسال نظر شما مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
-      delete_error: 'هنگام حذف نظر مشکلی پیش آمد. بعدا دوباره تلاش کنید.'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'فعالیت ها'
       join_studio: '%user% به استودیو پیوست.'

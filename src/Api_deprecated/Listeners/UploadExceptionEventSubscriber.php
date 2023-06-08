@@ -33,9 +33,6 @@ class UploadExceptionEventSubscriber implements EventSubscriberInterface
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::EXCEPTION => 'onKernelException'];

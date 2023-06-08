@@ -5,16 +5,13 @@ namespace App\Admin\Tools\Logs;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<\stdClass>
+ */
 class LogsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'logs';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'logs';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

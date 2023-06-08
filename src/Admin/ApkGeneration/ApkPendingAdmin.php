@@ -15,21 +15,15 @@ use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ApkPendingAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_apk_pending';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'apk_pending';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'apk_request_time';

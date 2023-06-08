@@ -75,7 +75,8 @@ class AuthenticationManager
   {
     return $this->refresh_token_generator
       ->createForUserWithTtl($user, $this->refresh_token_ttl)
-      ->getRefreshToken() ?? '';
+      ->getRefreshToken() ?? ''
+    ;
   }
 
   protected function extractTokenFromRequest(): ?string

@@ -2,21 +2,19 @@
 
 namespace App\Admin\Users\UserDataReport;
 
+use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<User>
+ */
 class UserDataReportAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_userdata';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'stored_userdata';
 
   /**

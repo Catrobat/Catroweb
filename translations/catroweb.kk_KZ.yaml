@@ -34,6 +34,8 @@ noDescription: Сипаттама жоқ.
 credits: 'Ескертулер мен несиелер:'
 noCredits: Жазбалар мен кредиттер жоқ.
 notesAndCreditsDescription: Бұл жобаны қалай жасадыңыз? Сіз басқа адамдардың идеяларын, сценарийлерін немесе өнер туындыларын қолдандыңыз ба? Мұнда оларға рахмет.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Ел
 loginText: кіру
 privacyPolicy: Құпиялық саясаты
@@ -437,8 +439,8 @@ resetPassword:
   check:
     title: "Электрондық поштаңызды тексеріңіз"
     description: "Электрондық поштаңызға сәйкес аккаунт бар болса, құпия сөзді қалпына келтіру үшін пайдалануға болатын сілтемесі бар электрондық пошта жаңа ғана жіберілді. Бұл сілтеменің мерзімі %time% де аяқталады."
-    description2: "Электрондық поштаңызға хат келмесе, онда спам бумасын немесе %tryAgainLink% тексеріңіз."
-    tryAgain: "қайтадан қайталаңыз"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Сәлем!"
     visitLink: "Құпия сөзді қалпына келтіру үшін мына сілтемеге өтіңіз"
@@ -487,9 +489,9 @@ errors:
     missing: 'unknown error: project_xml_not_found!'
   file:
     unexpected: unexpected file found
-    invalid: invalid file
+    invalid: жарамсыз файл
   image.missing: Project XML mentions a file which does not exist in project-folder
-  unknown: unknown error
+  unknown: белгісіз қате
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
   program:
@@ -499,15 +501,15 @@ errors:
   programversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
-    title: Authentication failed
+    title: Аутентификация орындамалды
     webview: |
-      Your user credentials are wrong.
-      Please try to log in again in the app.
+      Пайдаланушы тіркелгі деректеріңіз дұрыс емес.
+      Қолданбаға қайта кіріп көріңіз.
 success:
   text: Сәтті
-  registration: Registration successful!
+  registration: Тіркелу сәтті өтті!
   token: жарайды
-  upload: Your project was uploaded successfully!
+  upload: Жобаңыз сәтті салынды!
   imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
 time:
@@ -546,8 +548,8 @@ api:
     currentPasswordWrong: "Қазіргі құпиясөз қате"
   project:
     nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
+    nameTooLong: 'Аты тым ұзын'
+    descriptionTooLong: 'Сипаттамасы өте ұзақ'
     creditsTooLong: 'Notes and credits too long'
     screenshotInvalid: 'Project screenshot invalid or not supported'
   projectsPost:
@@ -846,18 +848,27 @@ extensions:
     multiplayer:
       title: Көп-ойыншы
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Кіру'
+  leave: 'Шығу'
+  report: 'Есеп беру'
+  public: 'қоғамдық'
+  private: 'жеке'
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'қоғамдық'
-    private: 'жеке'
-    join: 'Кіру'
-    leave: 'Шығу'
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
     remove_project: 'Студиядан жою'
     remove_project_error: 'Жобаны студиядан жою мүмкін болмады!'
     remove_project_success: 'жоба студиядан сәттілік жойылды!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    no_projects: 'Studio does not contain any projects yet.'
+    updateCoverError: 'Something went wrong while updating the studio cover.'
     projects:
       title: 'жобалар'
     comments:
@@ -867,8 +878,9 @@ studio:
       send: 'жіберу'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
+      remove_error: 'Пікір қалдыру кезінде бір нәрсе қате кетті. Кейінірек қайталап көріңіз.'
     activity_list:
       title: 'Іс-шаралар'
       join_studio: '%user% студияға қосылды'

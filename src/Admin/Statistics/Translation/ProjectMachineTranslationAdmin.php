@@ -2,25 +2,20 @@
 
 namespace App\Admin\Statistics\Translation;
 
+use App\DB\Entity\Translation\ProjectMachineTranslation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<ProjectMachineTranslation>
+ */
 class ProjectMachineTranslationAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_project_machine_translation';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'project_machine_translation';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureExportFields(): array
   {
     return ['id', 'project.id', 'project.name', 'source_language', 'target_language', 'provider', 'usage_count',

@@ -16,12 +16,12 @@ trait TranslatorAwareTrait
     $this->translator = $translator;
   }
 
-  public function __(string $id, array $parameter = [], ?string $locale = null): string
+  public function __(string $id, array $parameter = [], string $locale = null): string
   {
     return $this->trans($id, $parameter, $locale);
   }
 
-  public function trans(string $id, array $parameter = [], ?string $locale = null): string
+  public function trans(string $id, array $parameter = [], string $locale = null): string
   {
     $domain = 'catroweb';
     $locale_with_underscore = $this->sanitizeLocale($locale);
@@ -36,7 +36,7 @@ trait TranslatorAwareTrait
     }
   }
 
-  public function sanitizeLocale(?string $locale = null): string
+  public function sanitizeLocale(string $locale = null): string
   {
     $locale = $this->removeTrailingNoiseOfLocale($locale);
     if ('' === $locale) {

@@ -2,9 +2,13 @@
 
 namespace App\Admin\Users\ReportedUsers;
 
+use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * @phpstan-extends CRUDController<User>
+ */
 class ReportedUsersController extends CRUDController
 {
   public function createUrlProgramsAction(): RedirectResponse

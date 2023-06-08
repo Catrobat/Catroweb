@@ -27,20 +27,22 @@ reportIt: Ja, melden!
 areYouSure: Bist du sicher?
 noWayOfReturn: Das kann nicht mehr Rückgängig gemacht werden!
 download: Herunterladen
-downloadDisabledAlert: You must be logged in to download this project
+downloadDisabledAlert: Du musst eingeloggt sein, um dieses Projekt herunterzuladen
 name: Name
 description: Beschreibung
 noDescription: Keine Beschreibung verfügbar.
 credits: Notizen und Credits
 noCredits: Keine Notizen und Credits verfügbar.
 notesAndCreditsDescription: Wie hast du dieses Projekt erstellt? Hast du Ideen, Skripte oder Kunstwerke von anderen Leuten verwendet? Danke ihnen hier.
+projectImportedFromScratch: Dieses Projekt wurde von MIT Scratch importiert. Du kannst sich das ursprüngliche Projekt ansehen
+scratchImportedProjectLinkHere: hier.
 country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
 programDetails: Einzelheiten
 somethingWentWrong: 'Ooooops etwas ging schief.'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'Die angefragte Ressource existiert nicht.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
 oldVersionError: 'Bitte aktualisiere auf die neueste Version von Pocket-Code!'
 more: 'mehr'
@@ -67,7 +69,7 @@ notificationsUnauthorizedError: "Benutzer kann nicht autorisiert werden"
 notificationsClearError: "Nicht in der Lage, Benachrichtigungen als gelesen zu markieren!"
 pleaseWait: "Bitte warten..."
 projects: "Projekte"
-users: "Users"
+users: "Benutzer"
 oauthPopUpTitle: "Externe Logininformationen"
 oauthInfo: 'Du hast einen externen Account zum Einloggen benutzt. Wir haben für dich einen zufälligen Benutzernamen erstellt. Wenn du den Benutzernamen ändern willst oder ein neues Passwort setzen willst, geh auf deine Profilseite. Klicke %link_start% hier %link_end% um zu deiner Profilseite zu gelangen.'
 oauthHere: "hier"
@@ -113,11 +115,11 @@ programs:
     Es gibt keine Möglichkeit das Projekt wiederherzustellen!
     Ja, löschen!
     Abbrechen
-  deleteNotFoundError: The project to be deleted could not be found under your user.
+  deleteNotFoundError: Das zu löschende Projekt konnte unter deinem Benutzer nicht gefunden werden.
   private: privat
   public: öffentlich
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: Auf privat setzen
+  setPublicAction: Auf öffentlich setzen
   changeVisibility: |+
     Bist du dir sicher?
     Wenn du '%programName%' auf privat setzt, wird es von anderen Benutzern nicht gesehen oder gefunden.
@@ -182,8 +184,8 @@ programs:
   deleted_popup: Der Kommentar wurde erfolgreich gelöscht.
   deleted_popup_header: Gelöscht
   noAdminRights: Du hast keine Administratorenrechte. Bitte melde dich als Administrator an.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: Projekt bearbeiten
+  closeProjectEditor: Projekteditor schließen
   closeEditorPrompt: Möchtest du deine Änderungen speichern?
   btnDiscard: Verwerfen
   addComment: Kommentar schreiben
@@ -199,18 +201,18 @@ programs:
   showTranslation: Übersetzung anzeigen
   hideTranslation: Übersetzung ausblenden
   translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: Google Übersetzer
+  confrimDelete: Bist du sicher, dass du die Übersetzung löschen willst?
   default: Standard
   save: Speichern
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
-  repliesLabel: replies
+  translationTitle: 'Übersetzung auf %language% '
+  editDefault: Standard bearbeiten
+  editTranslation: '%language% Übersetzung bearbeiten'
+  translations: Übersetzungen
+  createTranslation: Übersetzung erstellen
+  deletedComment: '**Gelöscht**'
+  replyLabel: antworten
+  repliesLabel: antwortete
 remixGraph:
   title: Remixe
   showRemixGraph: 'Remix Graph'
@@ -275,8 +277,8 @@ passwordRecovery:
     Dein Catrobat Team.
     </p>
 profile:
-  aboutMe: About me
-  currentlyWorkingOn: Currently working on
+  aboutMe: Über mich
+  currentlyWorkingOn: Derzeit arbeitet an
   edit: Profil bearbeiten
   saveChanges: Änderungen speichern
   newPass: Neues Passwort
@@ -305,15 +307,15 @@ profile:
     submitSuccess: gespeichert!
   reallyDeleteProgram: Willst du wirklich dein Projekt löschen
   programsOf: Projekte von
-  picture: Profile picture
+  picture: Profilbild
   changePicture: Bild ändern
   goToScratchProfile: Scratch Profil
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
-  account: Account
+  userSettings: Benutzer Einstellungen
+  profileSettings: Profil Einstellungen
+  securitySettings: Sicherheit Einstellungen
+  accountSettings: Konto Einstellungen
+  account: Konto
   editProfile: Profil bearbeiten
   edit: Bearbeiten
   done: Fertig
@@ -323,12 +325,12 @@ myprofile:
   email: Email
   deleteAccount: Account löschen
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
+    Bitte beachte:
+    Du hast %num_projects% Projekt(e) erstellt und hast %num_followers% Follower. Alle deine Projekte werden entfernt. Du wirst dich nicht mehr einloggen können und deine Projekte werden aus allen Listen verschwinden. Die Löschung deines Profils kann nicht rückgängig gemacht werden!
+    Bist du sicher, dass du uns verlassen willst?
   editAccountSettings: Kontoeinstellungen bearbeiten
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  profileChangeSuccess: Dein Profil wurde erfolgreich geändert.
+  unspecifiedError: Beim Ändern deines Profils ist ein unspezifizierter Fehler aufgetreten. Bitte kontaktiere uns.
 licenseToPlay:
   link: 'Lizenzbedingungen'
   title: 'Lizenz zum Spielen - Sag "Danke" und teile deine Programme'
@@ -385,8 +387,8 @@ search:
   results: Suchergebnisse
   resultcount: Ihre Suche brachte %count% Ergebnisse
   fail: Bitte gib zumindest ein Wort ein
-  noUsers: No users found
-  noProjects: No projects found
+  noUsers: Keine Benutzer gefunden
+  noProjects: Keine Projekte gefunden
 menu:
   profile: Mein Profil
   login: Einloggen
@@ -399,11 +401,11 @@ menu:
 login:
   login: Einloggen
   button:
-    loginNow: Login now
+    loginNow: Jetzt einloggen
     createAccount: Konto erstellen
-    forgetPassword: Forget password?
+    forgetPassword: Passwort vergessen?
   oauth:
-    title: Or you can join with
+    title: Oder beitreten mit
   passOrUser: Das Passwort oder der Username ist falsch.
   noUsername: Der Nickname oder die E-Mail Adresse konnte nicht gefunden werden.
   forgotPass: Passwort oder Usernamen vergessen?
@@ -421,36 +423,36 @@ login:
   passwordFirst: Passwort
   passwordSecond: Passwort bestätigen
 register:
-  title: Sign up
-  subText: "By continuing, you are setting up a Catrobat community account and agree to our %var1% and %var2%."
+  title: Anmelden
+  subText: "Wenn du fortfährst, richtest du ein Catrobat-Community-Konto ein und stimmst unseren %var1% und %var2% zu."
   button:
     cancel: Abbrechen
     createAccount: Konto erstellen
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: Kontowiederherstellung
+  description: Wenn du dich an die E-Mail oder den Benutzernamen deines Kontos erinnerst, können wir dir einen Link schicken, um dein Passwort zurückzusetzen.
   button:
     cancel: Abbrechen
-    submit: Recover password
+    submit: Passwort wiederherstellen
 resetPassword:
   request:
-    title: "Reset your password"
-    description: "If you remember the email of your account we can send you a link to reset your password."
+    title: "Passwort zurücksetzen"
+    description: "Wenn du dich an die E-Mail-Adresse deines Kontos erinnerst, können wir dir einen Link schicken, um dein Passwort zurückzusetzen."
     button:
-      submit: "Send reset email"
+      submit: "Rücksetzung-E-Mail senden"
       cancel: "Abbrechen"
   check:
-    title: "Check your emails"
-    description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "Wenn du keine E-Mail erhältst, überprüfe bitte deinen Spam-Ordner oder %tryAgainLink%"
-    tryAgain: "versuche es noch einmal"
+    title: "Überprüfe deine E-Mails"
+    description: "Wenn ein Konto existiert, das mit deiner E-Mail-Adresse übereinstimmt, wurde soeben ein E-Mail verschickt, das einen Link enthält, mit dem du dein Passwort zurücksetzen kannst. Dieser Link wird in %time% ablaufen."
+    descriptionTwo: "Du kannst alle %throttleLimit% Stunden ein neues Passwort anfordern."
+    descriptionThree: "Wenn du kein E-Mail erhalten hast, überprüfe bitte deinen Spam-Ordner oder schreibe ein E-Mail an unseren Support unter %email-webmaster%."
   email:
-    title: "Hi!"
-    visitLink: "To reset your password, please visit the following link"
-    expire: "This link will expire in %time%."
-    cheers: "Cheers!"
+    title: "Hallo!"
+    visitLink: "Um dein Passwort zurückzusetzen, besuche bitte folgenden Link"
+    expire: "Dieser Link wird in %time% ablaufen."
+    cheers: "Glückwunsch!"
   reset:
-    title: "Reset your password"
+    title: "Passwort zurücksetzen"
     button:
       submit: "Passwort zurücksetzen"
 apk:
@@ -462,7 +464,7 @@ format:
   million_abbreviation: M
 #api
 errors:
-  unspecified: An unspecified error occurred. Please contact us.
+  unspecified: Es ist ein unspezifizierter Fehler aufgetreten. Bitte kontaktiere uns.
   username:
     blank: Benutzername darf nicht leer sein
     invalid: Dein Benutzername ist ungültig
@@ -525,7 +527,7 @@ failure:
   upload: Während dem Upload deiner App ist ein Fehler passiert.
 user:
   verification:
-    email: 'Verify your email'
+    email: 'Bestätige deine E-Mail-Adresse'
 api:
   registerUser:
     emailMissing: 'E-Mail fehlt'
@@ -545,25 +547,25 @@ api:
     passwordInvalidChars: 'Password enthält ungültige Zeichen'
     usernameContainsEmail: "Username darf keine Email Adresse beinhalten"
     countryCodeInvalid: "Ungültige Landesvorwahl"
-    pictureInvalid: "Profile picture invalid or not supported"
+    pictureInvalid: "Profilbild ungültig oder nicht unterstützt"
   updateUser:
-    currentPasswordMissing: "Current password is missing"
-    currentPasswordWrong: "Current password is wrong"
+    currentPasswordMissing: "Das aktuelle Passwort fehlt"
+    currentPasswordWrong: "Das aktuelle Passwort ist falsch"
   project:
-    nameEmpty: 'Name cannot be empty'
-    nameTooLong: 'Name too long'
-    descriptionTooLong: 'Description too long'
-    creditsTooLong: 'Notes and credits too long'
-    screenshotInvalid: 'Project screenshot invalid or not supported'
+    nameEmpty: 'Name darf nicht leer sein'
+    nameTooLong: 'Name ist zu lang'
+    descriptionTooLong: 'Die Beschreibung ist zu lang'
+    creditsTooLong: 'Notizen und Danksagungen sind zu lang'
+    screenshotInvalid: 'Projekt-Screenshot ungültig oder nicht unterstützt'
   projectsPost:
     invalid_checksum: 'Checksum ungültig. Bitte versuche es erneut!'
     upload_error: 'Fehler während dem Upload. Bitte versuche es erneut!'
     creating_error: 'Fehler während dem Erstellen der Program Entity. Bitte versuche es erneut!'
   updateProject:
-    xmlError: 'Failed saving details of the project.'
-    screenshotError: 'Failed reading, converting or storing the screenshot. Please check your input.'
-    notFound: 'The project to change could not be found.'
-    forbidden: 'Changing the project not allowed. Are you still logged in?'
+    xmlError: 'Das Speichern der Projektdetails ist fehlgeschlagen.'
+    screenshotError: 'Fehler beim Lesen, Konvertieren oder Speichern des Screenshots. Bitte überprüfe deine Eingabe.'
+    notFound: 'Das zu ändernde Projekt konnte nicht gefunden werden.'
+    forbidden: 'Ändern des Projekts nicht erlaubt. Bist du noch angemeldet?'
 #languages and countries
 language:
   arabic: Arabisch
@@ -712,14 +714,14 @@ catro-notifications:
   remix:
     message: 'Benutzer %user_link% hat einen Remix deines Programms %program_link% erstellt. Du kannst diesen unter folgendem Link sehen: %remix_program_link%.'
 clipboard:
-  success_project: Link to project copied to clipboard!
-  success_user: Link to user copied to clipboard!
+  success_project: Link zum Projekt in die Zwischenablage kopiert!
+  success_user: Link zum Benutzer in die Zwischenablage kopiert!
   fail: Fehler beim Kopieren! :(
 next: Weiter
 previous: Vorheriges
 media-packages:
   title: Medien-Pakete
-  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Obekte zu deinem PocketCode Programm hinzufügen.
+  description: In den folgenden Kategorien kannst du zusätzliche Figuren und Objekte zu deinem PocketCode Programm hinzufügen.
   thumb-size:
     description: Vorschaugröße
     sm: klein
@@ -749,7 +751,7 @@ share:
   success: 'Teilen erfolgreich'
 copy: 'Link kopieren'
 checkOutProject: 'Sieh dir dieses Projekt an:'
-checkOutUser: 'Check out this user:'
+checkOutUser: 'Sieh dir diese Benutzer an:'
 community: 'Catrobat Community'
 back_to_app: 'Community verlassen'
 category:
@@ -804,16 +806,16 @@ achievements:
         description: 'Benutzerkonto erstellen'
       coding_jam_09_2021:
         title: "Coding Jam '21"
-        description: "Participant of Coding Jam 2021"
+        description: "Teilnehmer des Coding Jam 2021"
       bilingual:
-        title: "Bilingual"
-        description: "Translate your projects to 2 languages"
+        title: "Zweisprachig"
+        description: "Übersetze deine Projekte in 2 Sprachen"
       trilingual:
-        title: "Trilingual"
-        description: "Translate your projects to 3 languages"
+        title: "Dreisprachig"
+        description: "Übersetze deine Projekte in 3 Sprachen"
       linguist:
         title: "Linguist"
-        description: "Translate your projects to 5 languages"
+        description: "Übersetze deine Projekte in 5 Sprachen"
 tags:
   title: '{0} |{1} Tag |]1,Inf] Tags'
   tag:
@@ -851,11 +853,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Studio erstellen'
+  delete_studio: 'Studio löschen'
+  studio_name: 'Studio-Name'
+  join: 'Beitreten'
+  leave: 'Verlassen'
+  report: 'Melden'
+  public: 'öffentlich'
+  private: 'privat'
+  overview:
+    joined_studios: 'Beigetretene Studios'
+    public_studios: 'Öffentliche Studios'
   details:
-    public: 'öffentlich'
-    private: 'privat'
-    join: 'Beitreten'
-    leave: 'Verlassen'
     showMore: 'mehr anzeigen'
     showLess: 'weniger zeigen'
     remove_project: 'Aus Studio entfernen'
@@ -864,34 +875,35 @@ studio:
     no_projects: 'Studio enthält noch keine Projekte'
     updateCoverError: 'Beim Aktualisieren des Studio-Covers ist etwas schiefgelaufen!'
     projects:
-      title: 'projects'
+      title: 'Projekte'
     comments:
       title: 'Kommentare'
-      type_something: 'Type something'
-      replies: 'replies'
-      send: 'send'
-      no_comments: 'This studio has no comments yet.'
-      disabled_comments: 'Comments have been disabled for this studio.'
-      post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error: 'Something went wrong while removing the comment. Try again later.'
+      type_something: 'Gebe etwas ein'
+      replies: 'antwortete'
+      send: 'senden'
+      no_comments: 'Dieses Studio hat noch keine Kommentare.'
+      disabled_comments: 'Kommentare wurden für dieses Studio deaktiviert.'
+      remove_comment: 'Kommentar entfernen'
+      post_error: 'Beim Posten deines Kommentars ist etwas schiefgelaufen. Versuche es später noch einmal.'
+      remove_error: 'Beim Entfernen deines Kommentars ist etwas schiefgelaufen. Versuche es später noch einmal.'
     activity_list:
-      title: 'Activities'
-      join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      title: 'Aktivitäten'
+      join_studio: '%user% ist dem Studio beigetreten.'
+      add_project: '%user% hat ein Projekt hinzugefügt.'
+      add_comment: '%user% hat ein Kommentar hinterlassen.'
     members_list:
-      title: 'Studio members'
-      project_count: '{0} No studio projects |{1} 1 studio project |]1,Inf] %count% studio projects'
-      promote_member: 'Promote member to admin'
-      promotion_failed: 'Something went wrong during the promotion of this member. Try again later.'
-      ban_member: 'Ban member from studio'
-      ban_failed: 'Something went wrong while banning this member. Try again later.'
+      title: 'Studio-Mitglieder'
+      project_count: '{0} Keine Studio Projekte |{1} 1 Studio Projekt |]1,Inf] %count% Studio Projekte'
+      promote_member: 'Mitglied zum Admin befördern'
+      promotion_failed: 'Bei der Beförderung dieses Mitglieds ist ein Fehler aufgetreten. Versuche es später noch einmal.'
+      ban_member: 'Mitglied aus dem Studio verbannen'
+      ban_failed: 'Beim Bannen dieses Mitglieds ist etwas schiefgelaufen. Versuche es später noch einmal.'
     admin_settings:
-      title: 'General Settings'
-      studio_name: 'Studio Name'
+      title: 'Allgemeine Einstellungen'
+      studio_name: 'Studio-Name'
       studio_description: 'Beschreibung'
       toggle_allow_comments: 'Kommentare'
-      toggle_privacy: 'Public'
+      toggle_privacy: 'Öffentlich'
 media_library:
   file:
     size: 'Größe: %size%'
@@ -902,4 +914,4 @@ media_library:
       movie: 'Typ: Video'
       default: 'Typ: unbekannt'
 snackbar:
-  project_not_found: 'The requested project is not available'
+  project_not_found: 'Das angeforderte Projekt ist nicht verfügbar'

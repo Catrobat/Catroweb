@@ -4,16 +4,7 @@ namespace App\Project\CatrobatCode\Statements;
 
 class BaseListStatement extends Statement
 {
-  /**
-   * BaseListStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   * @param mixed $start
-   * @param mixed $end
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, $start, $end)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, mixed $start, mixed $end)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $start,

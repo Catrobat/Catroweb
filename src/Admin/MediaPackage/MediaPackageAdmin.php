@@ -2,22 +2,20 @@
 
 namespace App\Admin\MediaPackage;
 
+use App\DB\Entity\MediaLibrary\MediaPackage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 
+/**
+ * @phpstan-extends AbstractAdmin<MediaPackage>
+ */
 class MediaPackageAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'adminmedia_package_package';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'media_package';
 
   /**

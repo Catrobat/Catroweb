@@ -10,8 +10,6 @@ use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
 trait ProjectPreUpdateTrait
 {
   /**
-   * {@inheritdoc}
-   *
    * @throws ModelManagerThrowable
    */
   public function preUpdate(object $object): void
@@ -20,7 +18,8 @@ trait ProjectPreUpdateTrait
     /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
     $old_program = $model_manager->getEntityManager($this->getClass())
-      ->getUnitOfWork()->getOriginalEntityData($object);
+      ->getUnitOfWork()->getOriginalEntityData($object)
+    ;
 
     if (false == $old_program['approved'] && true == $object->getApproved()) {
       /** @var User $user */

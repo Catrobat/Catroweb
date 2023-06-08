@@ -57,9 +57,6 @@ class CustomTranslationAchievementEventSubscriber implements EventSubscriberInte
     return 'PUT' === $request->getMethod() && str_contains($request->getPathInfo(), '/translate/custom/project/');
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::TERMINATE => 'onTerminateEvent'];

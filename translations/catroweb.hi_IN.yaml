@@ -27,20 +27,22 @@ reportIt: हाँ, रिपोर्ट करें!
 areYouSure: वाकई में?
 noWayOfReturn: इसे दोबारा नहीं बदला जाएगा!
 download: डाउन्लोड
-downloadDisabledAlert: You must be logged in to download this project
+downloadDisabledAlert: इस प्रोजैक्ट के पृष्ठ का उपयोग करने के लिए आपको लोग इन करना जरुरी है।
 name: नाम
 description: वर्णन
 noDescription: कोई वर्णन उपलब्ध नहीं हैं।
 credits: इसका श्रेय
 noCredits: कोई श्रेय उपलब्ध नहीं है।
 notesAndCreditsDescription: आपने यह प्रोजेक्ट कैसे बनाया? क्या आपने अन्य लोगों से विचारों, लिपियों या कलाकृति का उपयोग किया था? उन्हें यहाँ धन्यवाद।
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: देश
 loginText: प्रवेश करे
 privacyPolicy: गोपनीयता नीति
 imprint: मोहर
 programDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
-doesNotExist: 'The requested resource does not exist.'
+doesNotExist: 'अनुरोधित संसाधन मौजूद नहीं है।'
 pleaseTryAgain: 'कृपया फिर से कोशिश करें!'
 oldVersionError: 'कृपया पॉकेट कोड को सबसे नए वर्जन में अपडेट करें!'
 more: 'अधिक'
@@ -67,7 +69,7 @@ notificationsUnauthorizedError: "उपयोगकर्ता को अधि
 notificationsClearError: "सूचना को पढ़कर मार्क करने में असमर्थ!"
 pleaseWait: "कृपया प्रतीक्षा करें..."
 projects: "प्रोग्राम्स"
-users: "Users"
+users: "उपयोगकर्ता"
 oauthPopUpTitle: "बाहरी अकाउंट में प्रवेश की जानकारी"
 oauthInfo: "\nआपने अभी प्रवेश करने के लिए किसी बाहरी अकाउंट का उपयोग किया है। हमने आपके लिए नया उपभोक्ता नाम बनाया है। अगर आप अपना उपभोक्ता नाम बदलना चाहते हैं या नया पासवर्ड बनाना चाहते हैं तो अपने प्रोफाइल पेज पर जाएं।"
 oauthHere: "यहां"
@@ -113,11 +115,11 @@ programs:
     इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
     रद्द करें 
-  deleteNotFoundError: The project to be deleted could not be found under your user.
-  private: निजी
-  public: जनता
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  deleteNotFoundError: हटाया जाने वाला प्रोजेक्ट आपके उपयोगकर्ता के अंतर्गत नहीं पाया जा सका।
+  private: "\nनिजी"
+  public: सार्वजनिक
+  setPrivateAction: "\nनिजी सेट करें"
+  setPublicAction: सार्वजनिक सेट करें
   changeVisibility: |+
     वाकई में?
     यदि आप '%programName%' को निजी बनाते हैं, तो इसे अन्य उपभोक्ता नहीं देख पाएंगे।
@@ -134,7 +136,7 @@ programs:
     इसे दोबारा नहीं बदला जाएगा!
     हाँ, इसे हटा दें!
     रद्द करें
-  tooLongName: The project name is too long!
+  tooLongName: प्रोजेक्ट का नाम बहुत बड़ा है!
   tooLongDescription: प्रोजेक्ट का वर्णन बहुत लंबा है!
   tooLongCredits: प्रोजेक्ट का श्रेय बहुत लंबा हैं!
   most:
@@ -165,9 +167,9 @@ programs:
   reportOwnProgram: आप खुद के प्रोजेक्ट को चिह्नित नहीं कर सकते।
   reportAlready: आपने पहले ही इस प्रोजेक्ट को चिन्हित कर दिया है।
   reportDone: आपने इस प्रोजेक्ट को रिपोर्ट कर दिया!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeaderDownload: डाउनलोड संभव नहीं है
+  updateAppTextDownload: कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें। सावधान रहें कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।
+  updateAppTextDownloadApk: एपीके डाउनलोड वर्तमान में केवल एंड्रॉइड पर उपलब्ध है, आईओएस पर नहीं।
   updateAppHeader: एप्लिकेशन को अपडेट करें
   updateAppText: इस प्रोजेक्ट को डाउनलोड करने के लिए कृपया अपने ऐप को सबसे नए वर्जन में अपडेट करें।
   btnClosePopup: ठीक है
@@ -182,8 +184,8 @@ programs:
   deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया था।
   deleted_popup_header: हटा दिया
   noAdminRights: आपके पास व्यवस्थापक का अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: प्रोजेक्ट संपादित करें
+  closeProjectEditor: "\nप्रोजेक्ट एडिटर बंद करें"
   closeEditorPrompt: क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?
   btnDiscard: रद्द करें
   addComment: टिप्पणी दें
@@ -199,17 +201,17 @@ programs:
   showTranslation: अनुवाद दिखाएं
   hideTranslation: अनुवाद छुपाएं
   translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: गूगल ट्रांसलेट
+  confrimDelete: क्या आप वाकई अनुवाद हटाना चाहते हैं?
   default: पूर्व निर्धारित
   save: सहेजें
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: '%language% अनुवाद'
+  editDefault: "\nडिफ़ॉल्ट संपादित करें"
+  editTranslation: '%language% अनुवाद संपादित करें '
+  translations: "\nअनुवाद"
+  createTranslation: "\nअनुवाद करें"
   deletedComment: '**Deleted**'
-  replyLabel: reply
+  replyLabel: "\nजवाब"
   repliesLabel: जवाब
 remixGraph:
   title: रीमिक्स
@@ -222,7 +224,7 @@ remixGraph:
   programNotAvailable: 'अनुपलब्ध'
   programUnknownUser: 'अज्ञात उपयोगकर्ता'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  - यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे उत्तर न दें।
 accountConfirmation:
   subject: आपका Catrobat खाता पुष्टिकरण
   message: |
@@ -271,7 +273,7 @@ passwordRecovery:
     आपकी कैटोबैट टीम।
     </p>
 profile:
-  aboutMe: About me
+  aboutMe: मेरे बारे मेँ
   currentlyWorkingOn: Currently working on
   edit: अपने प्रोफ़ाइल संपादित करें
   saveChanges: परिवर्तन सहेजें
@@ -301,15 +303,15 @@ profile:
     submitSuccess: सहेज दिया गया !
   reallyDeleteProgram: क्या आप वास्तव में अपने प्रोजेक्ट को हटाना चाहते हैं
   programsOf: की परियोजनाएँ
-  picture: Profile picture
+  picture: प्रोफ़ाइल फोटो
   changePicture: चित्र बदले
   goToScratchProfile: स्क्रैच पर प्रोफाइल
 myprofile:
-  userSettings: User Settings
-  profileSettings: Profile Settings
-  securitySettings: Security Settings
-  accountSettings: Account Settings
-  account: Account
+  userSettings: "\nउपयोगकर्ता सेटिंग"
+  profileSettings: "\nपार्श्वचित्र समायोजन"
+  securitySettings: "\nसुरक्षा सेटिंग्स"
+  accountSettings: अकाउंट सेटिंग
+  account: "\nअकाउंट"
   editProfile: अर्द्ध मुख संपादित करें
   edit: बदलें
   done: हो गया
@@ -319,12 +321,12 @@ myprofile:
   email: ईमेल
   deleteAccount: खाता नष्ट करें
   deleteAccountWarning: |
-    Be aware:
-    You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!
-    Are you sure you want to leave us?
+    चेतावनी:
+    आपने %num_projects% प्रोजेक्ट बनाया और आपके %num_followers% फ़ॉलोअर हैं। आपके सभी प्रोजेक्ट हटा दिए जाएंगे. अब आप लॉगिन नहीं कर पाएंगे और आपके प्रोजेक्ट सभी सूचियों से गायब हो जाएंगे। आपकी प्रोफ़ाइल को हटाना पूर्ववत नहीं किया जा सकता!
+    क्या आप वाकई हमें छोड़ना चाहते हैं?
   editAccountSettings: खाता सेटिंग संपादित करें
-  profileChangeSuccess: Your profile has been successfully changed.
-  unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
+  profileChangeSuccess: आपकी प्रोफ़ाइल सफलतापूर्वक बदल दी गई है।
+  unspecifiedError: आपकी प्रोफ़ाइल बदलते समय एक अज्ञात त्रुटि हुई। कृपया हमसे संपर्क करें।
 licenseToPlay:
   link: 'चलाने के लिए लाइसेंस'
   title: 'खेलने के लिए लाइसेंस - श्रेय दे और साझा करें'
@@ -381,7 +383,7 @@ search:
   results: खोज परिणाम
   resultcount: आपकी खोज ने %count% परिणाम लौटा दिए
   fail: कृपया कम से कम एक खोज शब्द दर्ज करें
-  noUsers: No users found
+  noUsers: कोई उपयोग्कर्ता नहीं मिले।
   noProjects: No projects found
 menu:
   profile: मेरी पार्श्वचित्र
@@ -438,8 +440,8 @@ resetPassword:
   check:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password. This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -847,11 +849,20 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'विवरण'
+  public: 'सार्वजनिक'
+  private: "\nनिजी"
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
   details:
-    public: 'जनता'
-    private: 'निजी'
-    join: 'शामिल हों'
-    leave: 'छोड़'
     showMore: 'और दिखाओ'
     showLess: 'कम दिखाएं'
     remove_project: 'स्टूडियो से निकालें'
@@ -868,8 +879,9 @@ studio:
       send: 'भेजें'
       no_comments: 'इस स्टूडियो में अभी तक कोई टिप्पणी नहीं है।'
       disabled_comments: 'इस स्टूडियो के लिए टिप्पणियां बंद कर दी गई हैं।'
+      remove_comment: 'Remove comment'
       post_error: 'आपकी टिप्पणी डालते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
-      delete_error: 'आपकी टिप्पणी हटाते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।'
+      remove_error: 'Something went wrong while removing the comment. Try again later.'
     activity_list:
       title: 'गतिविधियां'
       join_studio: '%user% स्टूडियो में शामिल हुए।'

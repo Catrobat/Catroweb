@@ -18,7 +18,7 @@ class OverwriteController extends AbstractController
     $responseHeaders = [];
     $result = $this->projectsApi->customProjectIdCatrobatGet($id, $responseCode, $responseHeaders);
 
-    if (200 !== $responseCode) {
+    if (null === $result) {
       return new Response(null, $responseCode, $responseHeaders);
     }
 

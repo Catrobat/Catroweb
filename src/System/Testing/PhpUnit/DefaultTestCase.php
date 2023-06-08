@@ -13,11 +13,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class DefaultTestCase extends KernelTestCase
 {
   /**
-   * @return mixed
-   *
    * @throws \ReflectionException
    */
-  public function invokeMethod(MockObject &$object, string $methodName, array $parameters = [])
+  public function invokeMethod(MockObject $object, string $methodName, array $parameters = []): mixed
   {
     $reflection = new \ReflectionClass($object::class);
     $method = $reflection->getMethod($methodName);

@@ -6,19 +6,9 @@ use App\Project\CatrobatCode\SyntaxHighlightingConstants;
 
 class FileNameStatement extends Statement
 {
-  /**
-   * FileNameStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   * @param mixed $value
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, private $value)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, private mixed $value)
   {
-    parent::__construct($statementFactory, $xmlTree, $spaces,
-      $value,
-      '');
+    parent::__construct($statementFactory, $xmlTree, $spaces, $value, '');
   }
 
   public function execute(): string
@@ -26,10 +16,7 @@ class FileNameStatement extends Statement
     return SyntaxHighlightingConstants::VALUE.$this->value.$this->executeChildren().SyntaxHighlightingConstants::END;
   }
 
-  /**
-   * @return mixed
-   */
-  public function getValue()
+  public function getValue(): mixed
   {
     return $this->value;
   }

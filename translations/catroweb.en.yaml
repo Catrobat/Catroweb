@@ -34,6 +34,8 @@ noDescription: No description available.
 credits: Notes and credits
 noCredits: No notes and credits available.
 notesAndCreditsDescription: How did you create this project? Did you use ideas, scripts or artwork from other people? Thank them here.
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: Country
 loginText: login
 privacyPolicy: Privacy Policy
@@ -228,7 +230,6 @@ remixGraph:
   programNotAvailable: 'Not available'
   programUnknownUser: 'Unknown user'
 
-
 noReply:
   This is an automated message - Please do not reply directly to this email.
 
@@ -250,6 +251,7 @@ accountConfirmation:
     Best regards,<br>
     Your Catrobat Team.
     </p>
+
 passwordRecovery:
   subject: Your Catrobat password recovery
   message: |
@@ -278,6 +280,7 @@ passwordRecovery:
     Best regards,<br>
     Your Catrobat Team.
     </p>
+
 profile:
   aboutMe: About me
   currentlyWorkingOn: Currently working on
@@ -335,7 +338,6 @@ myprofile:
   profileChangeSuccess: Your profile has been successfully changed.
   unspecifiedError: An unspecified error occurred while changing your profile. Please contact us.
 
-
 licenseToPlay:
   link: 'License to play'
   title: 'License to play - Give credit and share'
@@ -349,8 +351,6 @@ licenseToPlay:
     item1: share your cakes along with the recipe
     item2: give credit to those who inspired you
   version: Version 1.1, 2 April 2013
-
-
 
 termsOfUse:
   title: Terms of Use
@@ -460,8 +460,8 @@ resetPassword:
     title: "Check your emails"
     description: "If an account matching your email exists, then an email was just sent that contains a link that you can use to reset your password.
         This link will expire in %time%."
-    description2: "If you don't receive an email please check your spam folder or %tryAgainLink%"
-    tryAgain: "try again"
+    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
+    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
   email:
     title: "Hi!"
     visitLink: "To reset your password, please visit the following link"
@@ -471,7 +471,6 @@ resetPassword:
     title: "Reset your password"
     button:
       submit: "Reset password"
-
 
 apk:
   download: Download as app
@@ -530,6 +529,7 @@ errors:
     webview: |
       Your user credentials are wrong.
       Please try to log in again in the app.
+
 success:
   text: Success
   registration: Registration successful!
@@ -537,6 +537,7 @@ success:
   upload: Your project was uploaded successfully!
   imgUpload: Your image was uploaded successfully!
   report: Your report was successfully sent!
+
 time:
   minutes.ago: '{0} < 1 minute ago |{1}1 minute ago |]1,Inf] %count% minutes ago'
   hours.ago: '{1}1 hour ago |]1,Inf] %count% hours ago'
@@ -732,6 +733,7 @@ privacy-policy:
   text9: In case you are below the age of 14, this policy must be accepted by a legal guardian (usually a parent).
   text10: Catrobat's official English language privacy policy is available on the web under %privacy_policy%.
   disagree-text: Without approval, we can't create an account but the core features are still accessible.
+
 catro-notifications:
   markAsRead: "Mark as read"
   noFollowers: "It looks like you don't have any follower notifications."
@@ -753,6 +755,7 @@ clipboard:
   success_project: Link to project copied to clipboard!
   success_user: Link to user copied to clipboard!
   fail: Failed to copy link to clipboard! :(
+
 next: Next
 previous: Previous
 
@@ -901,21 +904,32 @@ extensions:
       title: Multiplayer
 
 studio:
+  title: 'Studios'
+  singular: 'Studio'
+  create_studio: 'Create studio'
+  delete_studio: 'Delete studio'
+  studio_name: 'Studio name'
+  join: 'Join'
+  leave: 'Leave'
+  report: 'Report'
+  public: 'public'
+  private: 'private'
+
+  overview:
+    joined_studios: 'Joined studios'
+    public_studios: 'Public studios'
+
   details:
-    public: 'public'
-    private: 'private'
-    join: 'Join'
-    leave: 'Leave'
     showMore: 'show more'
     showLess: 'show less'
     remove_project: 'Remove from studio'
-    remove_project_error: 'Failed to remove project from studio!'
-    remove_project_success: 'project removed successfully from studio!'
-    no_projects: 'Studio does not contain any projects yet'
-    updateCoverError: 'Something went wrong while updating the studio cover!'
+    remove_project_error: 'Failed to remove project from studio.'
+    remove_project_success: 'Project removed successfully from studio.'
+    no_projects: 'Studio does not contain any projects yet.'
+    updateCoverError: 'Something went wrong while updating the studio cover.'
 
     projects:
-      title: 'projects'
+      title: 'Projects'
 
     comments:
       title: 'Comments'
@@ -924,14 +938,15 @@ studio:
       send: 'send'
       no_comments: 'This studio has no comments yet.'
       disabled_comments: 'Comments have been disabled for this studio.'
+      remove_comment: 'Remove comment'
       post_error: 'Something went wrong while posting your comment. Try again later.'
-      delete_error:  'Something went wrong while removing the comment. Try again later.'
+      remove_error:  'Something went wrong while removing the comment. Try again later.'
 
     activity_list:
       title: 'Activities'
       join_studio: '%user% joined the studio.'
-      add_project: '%user% left a comment.'
-      add_comment: '%user% added a project.'
+      add_project: '%user% added a project.'
+      add_comment: '%user% left a comment.'
 
     members_list:
       title: 'Studio members'

@@ -15,21 +15,15 @@ use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ReportedProjectsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_reported_projects';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'reported_projects';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_ORDER] = 'DESC';

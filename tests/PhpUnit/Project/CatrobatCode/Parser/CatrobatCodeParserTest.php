@@ -27,10 +27,8 @@ class CatrobatCodeParserTest extends TestCase
    * @test
    *
    * @dataProvider validProgramProvider
-   *
-   * @param mixed $extracted_catrobat_program
    */
-  public function mustReturnParsedProgram($extracted_catrobat_program): void
+  public function mustReturnParsedProgram(mixed $extracted_catrobat_program): void
   {
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = [
@@ -72,10 +70,8 @@ class CatrobatCodeParserTest extends TestCase
    * @test
    *
    * @dataProvider faultyProgramProvider
-   *
-   * @param mixed $faulty_program
    */
-  public function mustReturnNullOnError($faulty_program): void
+  public function mustReturnNullOnError(mixed $faulty_program): void
   {
     $this->assertNull($this->parser->parse($faulty_program));
   }

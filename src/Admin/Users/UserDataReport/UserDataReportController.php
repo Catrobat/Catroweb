@@ -2,12 +2,16 @@
 
 namespace App\Admin\Users\UserDataReport;
 
+use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Response;
 
+/**
+ * @phpstan-extends CRUDController<User>
+ */
 class UserDataReportController extends CRUDController
 {
   public function __construct(
@@ -43,10 +47,7 @@ class UserDataReportController extends CRUDController
     return $this->notification_repository->findBy(['user' => $user_id], ['id' => 'DESC']);
   }
 
-  /**
-   * @return mixed
-   */
-  protected function getReportedProjects(string $user_id)
+  protected function getReportedProjects(string $user_id): mixed
   {
     return $this->entity_manager
       ->createQuery(sprintf('SELECT pir FROM App\DB\Entity\Project\ProgramInappropriateReport pir WHERE pir.reportingUser=\'%s\'', $user_id))
@@ -54,10 +55,7 @@ class UserDataReportController extends CRUDController
     ;
   }
 
-  /**
-   * @return mixed
-   */
-  protected function getUserComments(string $user_id)
+  protected function getUserComments(string $user_id): mixed
   {
     return $this->entity_manager
       ->createQuery(sprintf('SELECT uc FROM App\DB\Entity\User\Comment\UserComment uc WHERE uc.user=\'%s\'', $user_id))
@@ -65,10 +63,7 @@ class UserDataReportController extends CRUDController
     ;
   }
 
-  /**
-   * @return mixed
-   */
-  protected function getUserProjects(string $user_id)
+  protected function getUserProjects(string $user_id): mixed
   {
     return $this->entity_manager
       ->createQuery(sprintf('SELECT up FROM App\DB\Entity\Project\Program up WHERE up.user=\'%s\'', $user_id))

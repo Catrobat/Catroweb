@@ -2,6 +2,7 @@
 
 namespace App\Admin\Projects;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -20,23 +21,17 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ProjectsAdmin extends AbstractAdmin
 {
   use ProjectPreUpdateTrait;
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_projectsadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'projects';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';
@@ -50,9 +45,6 @@ class ProjectsAdmin extends AbstractAdmin
   ) {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function getObjectMetadata($object): MetadataInterface
   {
     return new Metadata($object->getName(), $object->getDescription(), $this->getThumbnailImageUrl($object));
@@ -140,9 +132,6 @@ class ProjectsAdmin extends AbstractAdmin
     ;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   protected function configureShowFields(ShowMapper $show): void
   {
     $flavor_options = $this->parameter_bag->get('flavors');

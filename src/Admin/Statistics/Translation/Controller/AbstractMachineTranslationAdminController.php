@@ -13,6 +13,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 
+/**
+ * @phpstan-extends CRUDController<ProjectMachineTranslation|CommentMachineTranslation>
+ */
 abstract class AbstractMachineTranslationAdminController extends CRUDController
 {
   protected const TYPE_PROJECT = 'TYPE_PROJECT';
@@ -26,9 +29,6 @@ abstract class AbstractMachineTranslationAdminController extends CRUDController
   ) {
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function listAction(Request $request): Response
   {
     if (self::TYPE_PROJECT === $this->type) {

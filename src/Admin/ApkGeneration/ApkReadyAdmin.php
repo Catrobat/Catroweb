@@ -12,11 +12,11 @@ use Sonata\AdminBundle\Datagrid\ProxyQueryInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
+/**
+ * @phpstan-extends AbstractAdmin<Program>
+ */
 class ApkReadyAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_apk_ready';
 
   /**
@@ -24,9 +24,6 @@ class ApkReadyAdmin extends AbstractAdmin
    */
   protected $baseRoutePattern = 'apk_ready';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'apk_request_time';

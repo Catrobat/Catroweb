@@ -51,17 +51,20 @@ class MediaPackageController extends AbstractController
     if ('' === $flavor) {
       $flavor = 'pocketcode';
     }
+
     $package = $this->entity_manager->getRepository(MediaPackage::class)
       ->findOneBy([
         'nameUrl' => $package_name,
       ])
     ;
+
     if (null === $package) {
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
+
     $categories = $this->sortCategoriesFlavoredFirst($package->getCategories()->toArray(), $flavor, $translator);
 
-    return $this->render('MediaLibrary/mediapackage.html.twig', [
+    return $this->render('MediaLibrary/media_library_package.html.twig', [
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories,
@@ -96,7 +99,7 @@ class MediaPackageController extends AbstractController
     }
     $categories = $this->sortCategoriesFlavoredFirst($categories_of_found_files, $flavor, $translator);
 
-    return $this->render('MediaLibrary/mediapackage.html.twig', [
+    return $this->render('MediaLibrary/media_library_package.html.twig', [
       'mediasearch' => true,
       'flavor' => $flavor,
       'package' => $package_name,

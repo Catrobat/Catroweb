@@ -21,8 +21,6 @@ class MyUuidGenerator extends AbstractIdGenerator
   private static string $next_value = '';
 
   /**
-   * @param mixed $entity
-   *
    * @return string
    *
    * @throws \Exception

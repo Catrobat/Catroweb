@@ -34,6 +34,8 @@ noDescription: 没有可用的描述
 credits: 说明和版权信息
 noCredits: 没有说明和版权信息
 notesAndCreditsDescription: 您是如何创建这个项目的？是否使用了其他人的想法、脚本或艺术作品？您可以在此对他们表示感谢。
+projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
+scratchImportedProjectLinkHere: here.
 country: 国家
 loginText: 登录
 privacyPolicy: Chính sách bảo mật
@@ -443,8 +445,8 @@ resetPassword:
   check:
     title: "请检查您的邮箱。"
     description: "如果存在一个与您的电子邮件匹配的帐户，刚刚发送的一封电子邮件中会有帮您重置密码的链接。 此链接将在 %time% 后过期。"
-    description2: "如果您没有收到电子邮件，请检查您的垃圾邮件文件夹或 %tryAgainLink%"
-    tryAgain: "重试"
+    descriptionTwo: "您可以每隔 %throttleLimit% 小时请求重置新密码。"
+    descriptionThree: "如果您没有收到电子邮件，请检查您的垃圾邮件文件夹或发送电子邮件到 %email-webmaster% 给我们的支持团队。"
   email:
     title: "您好！"
     visitLink: "要重置您的密码，请访问以下链接"
@@ -852,11 +854,20 @@ extensions:
     multiplayer:
       title: 多人游戏
 studio:
+  title: '工作室'
+  singular: '工作室'
+  create_studio: '创建工作室'
+  delete_studio: '删除工作室'
+  studio_name: '工作室名称'
+  join: '加入'
+  leave: '退出'
+  report: '报告'
+  public: '公开的'
+  private: '私有的'
+  overview:
+    joined_studios: '加入的工作室'
+    public_studios: '公开的工作室'
   details:
-    public: '公开的'
-    private: '私人的'
-    join: '加入'
-    leave: '退出'
     showMore: '显示更多'
     showLess: '显示更多'
     remove_project: '从工作室移除'
@@ -873,8 +884,9 @@ studio:
       send: '发送'
       no_comments: '工作室还没有评论。'
       disabled_comments: '此工作室的评论已被禁用。'
+      remove_comment: '删除注释'
       post_error: '发表评论出错。请稍后再试。'
-      delete_error: '删除评论出错。请稍后再试。'
+      remove_error: '删除注释时出错。请稍后再试。'
     activity_list:
       title: '活动'
       join_studio: '%user% 加入了工作室。'

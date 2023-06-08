@@ -23,8 +23,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @throws \Exception
    */
   public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
@@ -58,9 +56,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function userDelete(int &$responseCode, array &$responseHeaders): void
   {
     $responseCode = Response::HTTP_NO_CONTENT;
@@ -68,9 +63,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     $this->facade->getProcessor()->deleteUser($this->facade->getAuthenticationManager()->getAuthenticatedUser());
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function userGet(&$responseCode, array &$responseHeaders): ExtendedUserDataResponse
   {
     $responseCode = Response::HTTP_OK;
@@ -83,9 +75,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function userIdGet(string $id, int &$responseCode, array &$responseHeaders): ?BasicUserDataResponse
   {
     $user = $this->facade->getLoader()->findUserByID($id);
@@ -104,9 +93,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -138,9 +124,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     return null;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function usersSearchGet(string $query, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array
   {
     $users = $this->facade->getLoader()->searchUsers($query, $limit, $offset);
@@ -153,9 +136,6 @@ final class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function userResetPasswordPost(ResetPasswordRequest $reset_password_request, string $accept_language, int &$responseCode, array &$responseHeaders): ?RegisterErrorResponse
   {
     $validation_wrapper = $this->facade->getRequestValidator()->validateResetPasswordRequest($reset_password_request, $accept_language);

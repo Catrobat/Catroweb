@@ -61,8 +61,6 @@ class WebviewAuthenticator extends AbstractAuthenticator
   }
 
   /**
-   * {@inheritdoc}
-   *
    * @throws NonUniqueResultException
    */
   public function authenticate(Request $request): Passport
@@ -88,9 +86,6 @@ class WebviewAuthenticator extends AbstractAuthenticator
     return new SelfValidatingPassport(new UserBadge($user['username']));
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
   {
     $this->request_stack->getSession()->set('webview-auth', true);
@@ -101,8 +96,6 @@ class WebviewAuthenticator extends AbstractAuthenticator
 
   /**
    * @throws HttpException
-   *
-   * {@inheritdoc}
    */
   public function onAuthenticationFailure(Request $request, AuthenticationException $exception): ?Response
   {

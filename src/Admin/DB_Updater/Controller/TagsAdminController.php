@@ -2,6 +2,7 @@
 
 namespace App\Admin\DB_Updater\Controller;
 
+use App\DB\Entity\Project\Tag;
 use App\System\Commands\Helpers\CommandHelper;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -11,6 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
+/**
+ * @phpstan-extends CRUDController<Tag>
+ */
 class TagsAdminController extends CRUDController
 {
   public function __construct(

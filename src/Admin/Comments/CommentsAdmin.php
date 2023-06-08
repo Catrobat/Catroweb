@@ -2,26 +2,21 @@
 
 namespace App\Admin\Comments;
 
+use App\DB\Entity\User\Comment\UserComment;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<UserComment>
+ */
 class CommentsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_commentsadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'comments';
 
-  /**
-   * {@inheritDoc}
-   */
   protected function configureDefaultSortValues(array &$sortValues): void
   {
     $sortValues[DatagridInterface::SORT_BY] = 'uploaded_at';

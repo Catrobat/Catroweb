@@ -15,14 +15,7 @@ class IfLogicElseStatement extends Statement
    */
   final public const END_STRING = '<br/>';
 
-  /**
-   * IfLogicElseStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces)
   {
     $stmt = SyntaxHighlightingConstants::LOOP.self::BEGIN_STRING.SyntaxHighlightingConstants::END;
 

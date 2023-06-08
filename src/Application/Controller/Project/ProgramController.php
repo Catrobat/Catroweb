@@ -202,7 +202,7 @@ class ProgramController extends AbstractController
 
   #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
   #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
-  public function searchAction(?string $q = null): Response
+  public function searchAction(string $q = null): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }
@@ -436,11 +436,11 @@ class ProgramController extends AbstractController
   }
 
   private function createProgramDetailsArray(Program $program,
-                                             array $active_like_types,
-                                             array $active_user_like_types,
-                                             int $total_like_count,
-                                             ?string $referrer,
-                                             array $program_comments): array
+    array $active_like_types,
+    array $active_user_like_types,
+    int $total_like_count,
+    ?string $referrer,
+    array $program_comments): array
   {
     $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
 

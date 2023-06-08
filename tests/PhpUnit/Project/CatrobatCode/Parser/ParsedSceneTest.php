@@ -29,10 +29,8 @@ class ParsedSceneTest extends TestCase
    * @test
    *
    * @dataProvider provideMethodNames
-   *
-   * @param mixed $method_name
    */
-  public function mustHaveMethod($method_name): void
+  public function mustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->scene, $method_name));
   }

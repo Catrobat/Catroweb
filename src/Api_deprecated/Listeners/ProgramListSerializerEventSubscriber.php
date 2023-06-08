@@ -94,9 +94,6 @@ class ProgramListSerializerEventSubscriber implements EventSubscriberInterface
     return $this->router->generate($route, $parameters);
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [KernelEvents::VIEW => 'onKernelView'];

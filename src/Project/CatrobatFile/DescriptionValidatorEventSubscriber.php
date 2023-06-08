@@ -20,9 +20,6 @@ class DescriptionValidatorEventSubscriber implements EventSubscriberInterface
     }
   }
 
-  /**
-   * {@inheritdoc}
-   */
   public static function getSubscribedEvents(): array
   {
     return [ProgramBeforeInsertEvent::class => 'onProgramBeforeInsert'];

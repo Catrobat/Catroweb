@@ -34,6 +34,8 @@ noDescription: Sem descrição disponível.
 credits: Créditos
 noCredits: Créditos não disponíveis.
 notesAndCreditsDescription: Como você criou este projeto? Você usou ideias, scripts ou artes de outras pessoas? Agradeça elas aqui.
+projectImportedFromScratch: Este projeto foi importado do MIT Scratch. Você poderá conferir o projeto original
+scratchImportedProjectLinkHere: aqui.
 country: País
 loginText: login
 privacyPolicy: Política de Privacidade
@@ -437,8 +439,8 @@ resetPassword:
   check:
     title: "Verifique seus e-mails"
     description: "Caso exista uma conta correspondente ao seu endereço de e-mail, você receberá uma mensagem contendo um link que pode ser usado para redefinir sua senha. Este link expirará em %time%."
-    description2: "Se você não receber o e-mail, verifique a sua pasta de spam ou %tryAgainLink%"
-    tryAgain: "tente novamente"
+    descriptionTwo: "Você pode solicitar uma nova senha a cada %throttleLimit% horas."
+    descriptionThree: "Se você não recebeu um e-mail, por favor, verifique a sua caixa de spam ou envie um e-mail para o nosso suporte em %email-webmaster%."
   email:
     title: "Oi!"
     visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"
@@ -846,11 +848,20 @@ extensions:
     multiplayer:
       title: Multijogador
 studio:
+  title: 'Estúdios'
+  singular: 'Estúdio'
+  create_studio: 'Criar estúdio'
+  delete_studio: 'Excluir estúdio'
+  studio_name: 'Nome do estúdio'
+  join: 'Entrar'
+  leave: 'Sair'
+  report: 'Reportar'
+  public: 'público'
+  private: 'privado'
+  overview:
+    joined_studios: 'Entrou em estúdios'
+    public_studios: 'Estúdios públicos'
   details:
-    public: 'público'
-    private: 'privado'
-    join: 'Entrar'
-    leave: 'Sair'
     showMore: 'mostrar mais'
     showLess: 'mostrar menos'
     remove_project: 'Remover do estúdio'
@@ -867,8 +878,9 @@ studio:
       send: 'enviar'
       no_comments: 'Este estúdio ainda não tem comentários.'
       disabled_comments: 'Os comentários foram desativados para este estúdio.'
+      remove_comment: 'Remover comentário'
       post_error: 'Algo deu errado ao postar seu comentário. Tente novamente mais tarde.'
-      delete_error: 'Algo deu errado ao remover o comentário. Tente novamente mais tarde.'
+      remove_error: 'Algo deu errado ao remover o comentário. Tente novamente mais tarde.'
     activity_list:
       title: 'Atividades'
       join_studio: '%user% entrou no estúdio.'

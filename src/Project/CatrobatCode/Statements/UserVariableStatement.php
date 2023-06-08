@@ -20,15 +20,7 @@ class UserVariableStatement extends Statement
    */
   final public const TO_END_STRING = ' to (';
 
-  /**
-   * UserVariableStatement constructor.
-   *
-   * @param mixed $statementFactory
-   * @param mixed $xmlTree
-   * @param mixed $spaces
-   * @param mixed $value
-   */
-  public function __construct($statementFactory, $xmlTree, $spaces, $value, bool $useAt = false)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, mixed $value, bool $useAt = false)
   {
     $end = self::TO_END_STRING;
     if ($useAt) {

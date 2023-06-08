@@ -27,6 +27,10 @@
     </div>
   {% endif %}
 
+  <div id="loading-spinner" class="medialib-spinner">
+    {{ include('components/loading_spinner.html.twig') }}
+  </div>
+
   <div id="content" class="medialib-content">
     {% for category in categories %}
       <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"

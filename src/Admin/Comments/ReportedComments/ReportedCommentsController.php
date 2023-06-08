@@ -9,6 +9,9 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
+/**
+ * @phpstan-extends CRUDController<ProgramInappropriateReport|UserComment>
+ */
 class ReportedCommentsController extends CRUDController
 {
   public function __construct(

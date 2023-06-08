@@ -6,6 +6,7 @@ use App\Application\Form\ChangePasswordFormType;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -19,8 +20,11 @@ class ResetPasswordController extends AbstractController
 {
   use ResetPasswordControllerTrait;
 
-  public function __construct(private readonly ResetPasswordHelperInterface $resetPasswordHelper, private readonly EntityManagerInterface $entityManager)
-  {
+  public function __construct(
+    private readonly ResetPasswordHelperInterface $resetPasswordHelper,
+    private readonly EntityManagerInterface $entityManager,
+    private readonly ParameterBagInterface $parameter_bag,
+  ) {
   }
 
   /**
@@ -46,6 +50,7 @@ class ResetPasswordController extends AbstractController
 
       return $this->render('security/reset_password/check_email.html.twig', [
         'resetToken' => $resetToken,
+        'throttleLimit' => $this->parameter_bag->get('reset_password.throttle_limit') / 3600,
       ]);
     }
 

@@ -189,10 +189,7 @@ class RemixManager
     ];
   }
 
-  /**
-   * @return mixed
-   */
-  public function findCatrobatRelation(string $ancestor_id, string $descendant_id)
+  public function findCatrobatRelation(string $ancestor_id, string $descendant_id): mixed
   {
     $remix_relation = $this
       ->program_remix_repository

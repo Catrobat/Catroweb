@@ -2,20 +2,18 @@
 
 namespace App\Admin\DB_Updater;
 
+use App\DB\Entity\Project\Tag;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<Tag>
+ */
 class TagsAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_tagssadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'tags';
 
   protected function configureRoutes(RouteCollectionInterface $collection): void

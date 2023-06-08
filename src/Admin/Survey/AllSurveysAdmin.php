@@ -15,16 +15,13 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
+/**
+ * @phpstan-extends AbstractAdmin<Survey>
+ */
 class AllSurveysAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_catrobat_adminbundle_allsurveysadmin';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'all_surveys';
 
   public function __construct(
