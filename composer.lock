@@ -2465,16 +2465,16 @@
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.13.3",
+            "version": "v1.14.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "26270d0b8c32623a66a7ce10fed44084f8cac3e6"
+                "reference": "f8e07aa5def686458b31ad355f232d25cbba4cd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/26270d0b8c32623a66a7ce10fed44084f8cac3e6",
-                "reference": "26270d0b8c32623a66a7ce10fed44084f8cac3e6",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/f8e07aa5def686458b31ad355f232d25cbba4cd1",
+                "reference": "f8e07aa5def686458b31ad355f232d25cbba4cd1",
                 "shasum": ""
             },
             "require": {
@@ -2514,9 +2514,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.13.3"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.14.0"
             },
-            "time": "2023-05-05T23:01:42+00:00"
+            "time": "2023-06-02T23:56:27+00:00"
         },
         {
             "name": "google/common-protos",
