@@ -7618,16 +7618,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.8.0",
+            "version": "5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "7451e1a8a79f624a296511c8c24358c487005ca6"
+                "reference": "46760b83de8b13c31782bb91062b39927ddab570"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/7451e1a8a79f624a296511c8c24358c487005ca6",
-                "reference": "7451e1a8a79f624a296511c8c24358c487005ca6",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/46760b83de8b13c31782bb91062b39927ddab570",
+                "reference": "46760b83de8b13c31782bb91062b39927ddab570",
                 "shasum": ""
             },
             "require": {
@@ -7682,7 +7682,7 @@
                 "psalm/plugin-symfony": "^5.0",
                 "rector/rector": "^0.16",
                 "sonata-project/admin-bundle": "^4.20",
-                "sonata-project/block-bundle": "^4.11",
+                "sonata-project/block-bundle": "^4.11 || ^5.0",
                 "sonata-project/doctrine-orm-admin-bundle": "^4.0",
                 "symfony/browser-kit": "^5.4 || ^6.2",
                 "symfony/console": "^5.4 || ^6.2",
@@ -7724,7 +7724,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.8.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.9.0"
             },
             "funding": [
                 {
@@ -7744,7 +7744,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-13T16:20:27+00:00"
+            "time": "2023-06-03T15:03:42+00:00"
         },
         {
             "name": "symfony/acl-bundle",
