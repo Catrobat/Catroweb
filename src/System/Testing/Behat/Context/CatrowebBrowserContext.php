@@ -268,6 +268,58 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Given I enter :value into the :fieldName field
+   *
+   * @param mixed $value
+   * @param mixed $fieldName
+   */
+  public function iEnterValueIntoNamedField($value, $fieldName): void
+  {
+    $field = $this->getSession()->getPage()->findField($fieldName);
+    $field->setValue($value);
+  }
+
+  /**
+   * @When /^I select option (\d+) from the dropdown "([^"]*)"$/
+   *
+   * @param mixed $index
+   * @param mixed $dropdownId
+   */
+  public function selectOptionFromDropdown($index, $dropdownId): void
+  {
+    $session = $this->getSession();
+    $element = $session->getPage()->find('css', '#'.$dropdownId);
+
+    if (!$element) {
+      throw new \Exception('Dropdown element not found');
+    }
+
+    $options = $element->findAll('css', 'option');
+
+    $options[$index - 1]->click();
+  }
+
+  /**
+   * @When /^I switch to the new tab$/
+   */
+  public function iSwitchToNewTab(): void
+  {
+    $windowNames = $this->getSession()->getWindowNames();
+    $currentWindowName = $this->getSession()->getWindowName();
+
+    // Find the name of the new window/tab
+    $newWindowName = '';
+    foreach ($windowNames as $windowName) {
+      if ($windowName !== $currentWindowName) {
+        $newWindowName = $windowName;
+      }
+    }
+
+    // Switch to the new window/tab
+    $this->getSession()->switchToWindow($newWindowName);
+  }
+
+  /**
    * @Then /^I should see the featured slider$/
    *
    * @throws ExpectationException
