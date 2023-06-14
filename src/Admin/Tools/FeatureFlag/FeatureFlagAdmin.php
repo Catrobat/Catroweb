@@ -2,21 +2,19 @@
 
 namespace App\Admin\Tools\FeatureFlag;
 
+use App\DB\Entity\FeatureFlag;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 
+/**
+ * @phpstan-extends AbstractAdmin<FeatureFlag>
+ */
 class FeatureFlagAdmin extends AbstractAdmin
 {
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRouteName = 'admin_flag';
 
-  /**
-   * {@inheritdoc}
-   */
   protected $baseRoutePattern = 'featureflag';
 
   /**

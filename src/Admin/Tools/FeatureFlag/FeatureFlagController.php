@@ -2,9 +2,13 @@
 
 namespace App\Admin\Tools\FeatureFlag;
 
+use App\DB\Entity\FeatureFlag;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
+/**
+ * @phpstan-extends CRUDController<FeatureFlag>
+ */
 class FeatureFlagController extends CRUDController
 {
   public function __construct(protected FeatureFlagManager $manager)
