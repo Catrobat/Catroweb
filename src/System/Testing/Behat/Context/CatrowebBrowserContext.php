@@ -269,11 +269,8 @@ class CatrowebBrowserContext extends BrowserContext
 
   /**
    * @Given I enter :value into the :fieldName field
-   *
-   * @param mixed $value
-   * @param mixed $fieldName
    */
-  public function iEnterValueIntoNamedField($value, $fieldName): void
+  public function iEnterValueIntoNamedField(string $value, string $fieldName): void
   {
     $field = $this->getSession()->getPage()->findField($fieldName);
     $field->setValue($value);
@@ -282,10 +279,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @When /^I select option (\d+) from the dropdown "([^"]*)"$/
    *
-   * @param mixed $index
-   * @param mixed $dropdownId
+   * @throws \Exception
    */
-  public function selectOptionFromDropdown($index, $dropdownId): void
+  public function selectOptionFromDropdown(int $index, string $dropdownId): void
   {
     $session = $this->getSession();
     $element = $session->getPage()->find('css', '#'.$dropdownId);
