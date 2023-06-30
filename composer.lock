@@ -18026,16 +18026,16 @@
         },
         {
             "name": "symfony/web-profiler-bundle",
-            "version": "v6.3.0",
+            "version": "v6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/web-profiler-bundle.git",
-                "reference": "bab614e12218a95a924685a1fbf662bd7ca2d746"
+                "reference": "4a6cf8cb093e720c7ae4d55b1af848ce7e9abd36"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/bab614e12218a95a924685a1fbf662bd7ca2d746",
-                "reference": "bab614e12218a95a924685a1fbf662bd7ca2d746",
+                "url": "https://api.github.com/repos/symfony/web-profiler-bundle/zipball/4a6cf8cb093e720c7ae4d55b1af848ce7e9abd36",
+                "reference": "4a6cf8cb093e720c7ae4d55b1af848ce7e9abd36",
                 "shasum": ""
             },
             "require": {
@@ -18087,7 +18087,7 @@
                 "dev"
             ],
             "support": {
-                "source": "https://github.com/symfony/web-profiler-bundle/tree/v6.3.0"
+                "source": "https://github.com/symfony/web-profiler-bundle/tree/v6.3.1"
             },
             "funding": [
                 {
@@ -18103,7 +18103,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-22T17:08:58+00:00"
+            "time": "2023-06-24T11:51:27+00:00"
         },
         {
             "name": "textalk/websocket",
