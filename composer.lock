@@ -2152,20 +2152,21 @@
         },
         {
             "name": "gesdinet/jwt-refresh-token-bundle",
-            "version": "v1.1.1",
+            "version": "v1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
-                "reference": "8970ae1a602fb74e434964d03c969d883cfed376"
+                "reference": "a74722e5bb57b57bb4f5c4f431e5a3139cd88a94"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/8970ae1a602fb74e434964d03c969d883cfed376",
-                "reference": "8970ae1a602fb74e434964d03c969d883cfed376",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/a74722e5bb57b57bb4f5c4f431e5a3139cd88a94",
+                "reference": "a74722e5bb57b57bb4f5c4f431e5a3139cd88a94",
                 "shasum": ""
             },
             "require": {
-                "lexik/jwt-authentication-bundle": "^2.0",
+                "doctrine/persistence": "^1.3.3|^2.0|^3.0",
+                "lexik/jwt-authentication-bundle": "^2.0|^3.0",
                 "php": ">=7.4",
                 "symfony/config": "^4.4|^5.4|^6.0",
                 "symfony/console": "^4.4|^5.4|^6.0",
@@ -2181,15 +2182,13 @@
                 "symfony/security-http": "^4.4|^5.4|^6.0"
             },
             "conflict": {
-                "doctrine/mongodb-odm": "<2.0",
-                "doctrine/orm": "<2.7",
-                "doctrine/persistence": "<1.3.3"
+                "doctrine/mongodb-odm": "<2.2",
+                "doctrine/orm": "<2.7"
             },
             "require-dev": {
                 "doctrine/cache": "^1.11|^2.0",
-                "doctrine/mongodb-odm": "^2.0",
+                "doctrine/mongodb-odm": "^2.2",
                 "doctrine/orm": "^2.7",
-                "doctrine/persistence": "^1.3.3|^2.0",
                 "matthiasnoback/symfony-config-test": "^4.2",
                 "matthiasnoback/symfony-dependency-injection-test": "^4.2",
                 "phpunit/phpunit": "^9.5",
@@ -2226,9 +2225,9 @@
             ],
             "support": {
                 "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
-                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.1.1"
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.1.2"
             },
-            "time": "2022-04-11T14:46:00+00:00"
+            "time": "2023-06-28T12:59:16+00:00"
         },
         {
             "name": "google/apiclient",
@@ -8073,16 +8072,16 @@
         },
         {
             "name": "symfony/clock",
-            "version": "v6.3.0",
+            "version": "v6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/clock.git",
-                "reference": "ccae3a2f1eb48a2515c84b8d456679fe3d79c9ea"
+                "reference": "2c72817f85cbdd0ae4e49643514a889004934296"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/clock/zipball/ccae3a2f1eb48a2515c84b8d456679fe3d79c9ea",
-                "reference": "ccae3a2f1eb48a2515c84b8d456679fe3d79c9ea",
+                "url": "https://api.github.com/repos/symfony/clock/zipball/2c72817f85cbdd0ae4e49643514a889004934296",
+                "reference": "2c72817f85cbdd0ae4e49643514a889004934296",
                 "shasum": ""
             },
             "require": {
@@ -8126,7 +8125,7 @@
                 "time"
             ],
             "support": {
-                "source": "https://github.com/symfony/clock/tree/v6.3.0"
+                "source": "https://github.com/symfony/clock/tree/v6.3.1"
             },
             "funding": [
                 {
@@ -8142,7 +8141,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-21T10:58:00+00:00"
+            "time": "2023-06-08T23:46:55+00:00"
         },
         {
             "name": "symfony/config",
@@ -11627,16 +11626,16 @@
         },
         {
             "name": "symfony/security-bundle",
-            "version": "v6.3.0",
+            "version": "v6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-bundle.git",
-                "reference": "4d18f4cdb71e6f6ec1cf2c6b0349642e762b812f"
+                "reference": "f4fe79d7ebafd406e1a6f646839bfbbed641d8b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/4d18f4cdb71e6f6ec1cf2c6b0349642e762b812f",
-                "reference": "4d18f4cdb71e6f6ec1cf2c6b0349642e762b812f",
+                "url": "https://api.github.com/repos/symfony/security-bundle/zipball/f4fe79d7ebafd406e1a6f646839bfbbed641d8b2",
+                "reference": "f4fe79d7ebafd406e1a6f646839bfbbed641d8b2",
                 "shasum": ""
             },
             "require": {
@@ -11672,6 +11671,7 @@
                 "symfony/expression-language": "^5.4|^6.0",
                 "symfony/form": "^5.4|^6.0",
                 "symfony/framework-bundle": "^6.3",
+                "symfony/http-client": "^5.4|^6.0",
                 "symfony/ldap": "^5.4|^6.0",
                 "symfony/process": "^5.4|^6.0",
                 "symfony/rate-limiter": "^5.4|^6.0",
@@ -11715,7 +11715,7 @@
             "description": "Provides a tight integration of the Security component into the Symfony full-stack framework",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-bundle/tree/v6.3.0"
+                "source": "https://github.com/symfony/security-bundle/tree/v6.3.1"
             },
             "funding": [
                 {
@@ -11731,7 +11731,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-30T19:01:06+00:00"
+            "time": "2023-06-21T12:08:28+00:00"
         },
         {
             "name": "symfony/security-core",
@@ -11887,16 +11887,16 @@
         },
         {
             "name": "symfony/security-http",
-            "version": "v6.3.0",
+            "version": "v6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/security-http.git",
-                "reference": "7f35dd7df8336fd55bdb0a950e52632c7e5fa43f"
+                "reference": "36d2bdd09c33f63014dc65f164a77ff099d256c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/security-http/zipball/7f35dd7df8336fd55bdb0a950e52632c7e5fa43f",
-                "reference": "7f35dd7df8336fd55bdb0a950e52632c7e5fa43f",
+                "url": "https://api.github.com/repos/symfony/security-http/zipball/36d2bdd09c33f63014dc65f164a77ff099d256c6",
+                "reference": "36d2bdd09c33f63014dc65f164a77ff099d256c6",
                 "shasum": ""
             },
             "require": {
@@ -11954,7 +11954,7 @@
             "description": "Symfony Security Component - HTTP Integration",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/security-http/tree/v6.3.0"
+                "source": "https://github.com/symfony/security-http/tree/v6.3.1"
             },
             "funding": [
                 {
@@ -11970,7 +11970,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-30T19:01:06+00:00"
+            "time": "2023-06-18T15:50:12+00:00"
         },
         {
             "name": "symfony/sendinblue-mailer",
