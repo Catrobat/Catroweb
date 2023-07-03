@@ -36,7 +36,7 @@
     "autoprefixer": "^10.4.14",
     "browserslist": "^4.21.9",
     "core-js": "^3.31.0",
-    "eslint": "^8.43.0",
+    "eslint": "^8.44.0",
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-node": "^11.1.0",
