@@ -32,7 +32,7 @@
     "@babel/preset-env": "^7.22.5",
     "@fortawesome/fontawesome-free": "^6.2.1",
     "@hotwired/stimulus": "^3.0.0",
-    "@symfony/webpack-encore": "^4.3.0",
+    "@symfony/webpack-encore": "^4.4.0",
     "autoprefixer": "^10.4.14",
     "browserslist": "^4.21.9",
     "core-js": "^3.31.0",
