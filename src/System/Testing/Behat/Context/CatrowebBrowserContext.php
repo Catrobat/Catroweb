@@ -402,68 +402,68 @@ class CatrowebBrowserContext extends BrowserContext
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[3]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Views':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[5]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Downloads':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[6]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Upload Time':
       case 'Id':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[1]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Word':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div[1]/table/thead/tr/th[3]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Clicked At':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[9]/a')
           ->click()
-      ;
+        ;
         break;
       case \Locale::class:
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Type':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[2]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Tag':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[7]/a')
           ->click()
-      ;
+        ;
         break;
       case 'User Agent':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[11]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Referrer':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[12]/a')
           ->click()
-      ;
+        ;
         break;
 
       default:
@@ -658,13 +658,13 @@ class CatrowebBrowserContext extends BrowserContext
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[1]')
           ->click()
-      ;
+        ;
         break;
       case 'delete':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[2]')
           ->click()
-      ;
+        ;
         break;
     }
   }
