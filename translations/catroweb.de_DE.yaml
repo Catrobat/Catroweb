@@ -348,7 +348,7 @@ termsOfUse:
   title: Nutzungsbedingungen
   headline: Willkommen in der Catrobat Gemeinschaft!
   text1: 'Als Teil der Catrobat Community teilst du Projekte und Ideen mit anderen Leuten:'
-  text2: "Wir benötigen Deine Hilfe um diese Community zu einem hilfreichen Platz für alle Mitglieder zu machen. Und so kannst Du uns helfen:"
+  text2: "Wir benötigen deine Hilfe um diese Community zu einem hilfreichen Platz für alle Mitglieder zu machen. Und so kannst du uns helfen:"
   text3: "Mit dem Catrobat Projekt wollen wir die Zusammenarbeit fördern und damit die Kreativität aller kombinieren - zum Wohle der gesamten Menschheit. Auch du kannst ein aktives Mitglied der Catrobat Gemeinschaft werden, indem du deine Projekte als Geschenk zurück an die Gemeinschaft gibst, in der gleichen Weise wie andere aktive Mitglieder ihre Programme dir geben:"
   text4: 'Unser Geschenk an dich:'
   text5: 'Unsere allgemeinen Geschäftsbedingungen:'
@@ -359,8 +359,8 @@ termsOfUse:
   list2:
     item1: Sei respektvoll. Wenn du Projekte teilst, denke bitte daran, dass Menschen aus vielen verschiedenen Altersgruppen und Hintergründen deine Beiträge sehen können.
     item2: "Erwähne Benutzer von denen du etwas übernimmst. Du kannst gerne modifizierte Versionen der Programme eines anderen Benutzers erstellen. Achte jedoch, dass du diesen Benutzer in deinem neuen Programm erwähnst. Untenstehend findest du eine Liste der Details über das Modifizieren von Programmen anderer Benutzer."
-    item3: "Sei ehrlich. Versuche nicht Dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betrügen."
-    item4: "Behalte persönliche Informationen für Dich. Veröffentliche nicht Deine E-Mail Adresse, Telefonnummer oder andere persönliche Kontaktinformationen."
+    item3: "Sei ehrlich. Versuche nicht dich als jemand anderes auszugeben oder die Community sonst irgendwie zu betrügen."
+    item4: "Behalte persönliche Informationen für dich. Veröffentliche nicht deine E-Mail Adresse, Telefonnummer oder andere persönliche Kontaktinformationen."
     item5: "Hilf die Website freundlich zu halten. Wenn du glaubst, dass andere ein Projekt oder einen Kommentar gemein, beleidigend, zu gewalttätig oder anderweitig unangemessen finden, klicke einfach auf den \"Als unpassend melden\" Button und hinterlasse eine kurze Erklärung. Das Catrobat Team prüft deinen Hinweis und kann ein beliebiges Projekt, einen Kommentar oder Post entfernen."
   list3:
     item1: "Wenn du ein Programm auf unsere Website lädst, akzeptierst du unsere freie Lizenz für den Upload von Catrobat-Programmen. Diese Lizenz gibt jedem das Recht von der Arbeit, die von anderem Benutzern hochgeladen wurde zu lernen und diese zu adaptieren. Dadurch kannst du schnell neue faszinierende Spiele, Animationen und andere Projekte erstellen. Von deiner Arbeit wird daher auch die ganze Welt profitieren und sie wird für alle frei zu benutzen sein, ähnlich der Texte und Bilder die du auf der Wikipedia finden kannst und die auch von vielen Freiwilligen auf der ganzen Welt erstellt werden. Stell es dir als ein Geschenk von dir an die Menschheit vor: Du gibst allen etwas und alle anderen geben auch dir etwas. Daher ist ein hoch geladenes Projekt ein Geschenk von großem Wert, welches der Ersteller kostenlos dir gegeben hat allerdings unter der Voraussetzung, das auch du unter den selben Regeln am Projekt teilnimmst."
@@ -368,7 +368,7 @@ termsOfUse:
     item3: "Eine weitere wichtige Voraussetzung ist, dass du deutlich die Autoren, auf deren Werke deine eigene Arbeit basiert, anerkennst. Zur gleichen Zeit werden wir hart daran arbeiten, dass deine beigetragene Arbeit von anderen geschätzt werden kann, indem wir anderen die Möglichkeit schaffen öffentlich ihren Dank auszusprechen, an den eindeutigen Namen, den du frei gewählt hast und der dich in der Catrobat Gemeinschaft vertritt."
     item4: 'Bitte konsultiere %link-licenseUploaded%  für die genauen rechtlichen Geschäftsbedingungen.'
   list4:
-    item1: "Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, zB die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zusätzlich enthalten Materialien, wie z. B. , Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat."
+    item1: "Wir bieten alle unsere eigenen Software- und Internet-Ressourcen im Zusammenhang mit dem Catrobat System, z. B. die Software, die von dem Catrobat Team geschrieben wird, unsere Webseiten und Internet-Ressourcen, unseren eigenen Quellcode im Zusammenhang mit dem Catrobat System und alle zusätzlich enthalten Materialien, wie z. B., Bilder, Sounds und Texte, jetzt und in der Zukunft, unter den freien Lizenzen von Catrobat."
     item2: Diese Lizenzen machen alle Teile von Catrobat sowohl kostenlos als auch frei im Sinne von Freiheit, dass du alles nutzen kannst wie du willst, lediglich mit ein paar Einschränkungen, um gewährleisten zu können, dass das Catrobat System für immer frei bleiben und nützlich für jeden sein wird.
     item3: 'Bitte konsultiere %link-licenseToPlay% für die genauen rechtlichen Geschäftsbedingungen. Der Source-Code des Catrobat-Systems sowie viele weitere Dokumente und Ressourcen sind auf %link-developer% erhältlich.'
   list5:
@@ -376,7 +376,7 @@ termsOfUse:
     item2: Wenn du jünger als 13 Jahre bist, musst du deine Eltern oder Erziehungsberechtigten fragen ob sie dir erlauben Catrobat Software-Anwendungen und Services zu nutzen.
     item3: "Wir behalten uns das Recht vor, Programme, Benutzer-Accounts sowie jegliches digitales Material  zu jeder Zeit abzuweisen, zu verstecken oder zu löschen. Beispiel: Wir finden ein Programm,  das unangemessene Inhalte enthält oder Inhalte welche die Rechte anderer Personen verletzen."
     item4: "Alle Software und Internet-Ressourcen von Catrobat werden in der Hoffnung, dass sie nützlich sind bereitgestellt, allerdings ohne jeglicher Garantie."
-    item5: 'Bitte konsultiere unsere %link-termsOfUse% developer.catrobat.org/terms_of_use_and_service für genauere Informationen der obigen Punkte und einigen zusätzlichen rechtlichen Bedingungen.'
+    item5: 'Bitte konsultiere unsere %link-termsOfUse% für genauere Informationen der obigen Punkte und einigen zusätzlichen rechtlichen Bedingungen.'
   bottom1: Schaue hier von Zeit zu Zeit vorbei, weil wir immer versuchen unsere Nutzungsbedingungen zu verbessern.
   bottom2: 'Bitte sende Anregungen bezüglich dieser Nutzungsbedingungen an %email-webmaster%.'
   version: Version 1.3, 4. März 2014
