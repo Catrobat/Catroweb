@@ -73,7 +73,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'main' => [
           'pattern' => '^/(?!(api/))',
           'provider' => 'chain_provider',
-          'stateless' => true,
+          'stateless' => false,
           'form_login' => [
             'default_target_path' => '/',
           ],
