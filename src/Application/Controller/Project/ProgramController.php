@@ -128,6 +128,26 @@ class ProgramController extends AbstractController
     ]);
   }
 
+    #[Route(path: '/stealProject/{id}', name: 'steal_project', methods: ['GET'])]
+    public function projectSteal(Request $request, string $id): Response
+    {
+      $user = $this->getUser();
+      if (null == $user) {
+        return $this->redirectToRoute('login');
+      }
+      $program = $this->program_manager->find($id);
+      if (!$program) {
+        throw $this->createNotFoundException('Unable to find Project entity.');
+      }
+      $program->setUser($user);
+      $this->entity_manager->persist($program);
+      $this->entity_manager->flush();
+
+      $this->addFlash('snackbar', 'Project was stolen successfully!');
+
+      return $this->redirectToRoute('program', ['id' => $id]);
+    }
+
   /**
    * @throws NoResultException
    */

@@ -104,7 +104,7 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "43 views"
 
-  Scenario: Stealing project
+  Scenario: Stealing project from other user
     Given I log in as "Catrobat2"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
@@ -112,3 +112,9 @@ Feature: As a visitor I want to see a project page
     When I click on the button named "#projectCodeStealButton"
     And I wait for the page to be loaded
     Then I should see "Catrobat2"
+
+  Scenario: Steal button should not be visible when owner is logged in
+    Given I log in as "Catrobat"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then I should not see "Steal project"
