@@ -61,6 +61,7 @@ class ProgramController extends AbstractController
   #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
   #[Route(path: '/program/{id}', name: 'program_deprecated')]
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
+  #[Route(path: '/stealProject/{id}', name: 'steal_project', methods: ['GET'])]
   public function projectAction(Request $request, string $id): Response
   {
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
@@ -91,7 +92,25 @@ class ProgramController extends AbstractController
     $total_like_count = $this->program_manager->totalLikeCount($project->getId());
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-    $program_comment_list = $this->comment_repository->getProjectCommentOverviewListData($project);
+    if($request->get('_route') == 'steal_project' && !$my_program)
+    {
+        if($user == null)
+        {
+            return $this->redirectToRoute('login');
+        }
+        $program = $this->program_manager->find($id);
+        if (!$program) {
+            throw $this->createNotFoundException('Unable to find Project entity.');
+        }
+        $program->setUser($user);
+        $this->entity_manager->persist($program);
+        $this->entity_manager->flush();
+
+        $this->addFlash('snackbar', 'Project was stolen successfully!');
+
+        return $this->redirectToRoute('program', ['id' => $id]);
+    }
+      $program_comment_list = $this->comment_repository->getProjectCommentOverviewListData($project);
     $program_details = $this->createProgramDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
       $referrer, $program_comment_list
@@ -586,3 +605,5 @@ class ProgramController extends AbstractController
     return new Response(null, $result ? Response::HTTP_OK : Response::HTTP_INTERNAL_SERVER_ERROR);
   }
 }
+
+

@@ -42,6 +42,22 @@
     </div>
   </div>
 
+  {% if app.user and not my_program %}
+
+    <div class="row">
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3"></div>
+      <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow mt-lg-3"></div>
+      <div class="d-none d-lg-block col-lg-4 mt-2">
+        {% include 'components/redirect_button.twig' with {
+          'id': 'projectCodeStealButton',
+          'url': path('steal_project', {'id': program.id }),
+          'icon': 'shopping_cart_checkout',
+          'text': "Steal project"|trans({}, "catroweb")
+        } %}
+      </div>
+    </div>
+  {% endif %}
+
   <div class="row mb-4">
     <div class="col-6 mb-3 d-lg-none mt-3">
       {% include 'components/redirect_button.twig' with {
