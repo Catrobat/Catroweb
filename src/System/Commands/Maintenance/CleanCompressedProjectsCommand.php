@@ -12,6 +12,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
  */
 class CleanCompressedProjectsCommand extends Command
 {
+  protected static $defaultDescription = 'Removes all compressed project data.';
   private readonly ?string $compressed_path;
 
   public function __construct(ParameterBagInterface $parameter_bag)
@@ -25,9 +26,7 @@ class CleanCompressedProjectsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:clean:compressed')
-      ->setDescription('Removes all compressed project data.')
-    ;
+    $this->setName('catrobat:clean:compressed');
   }
 
   /**
@@ -42,6 +41,6 @@ class CleanCompressedProjectsCommand extends Command
       }
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

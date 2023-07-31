@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class ArchiveLogsCommand extends Command
 {
+  protected static $defaultDescription = 'Archive the log files';
+
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -19,7 +21,6 @@ class ArchiveLogsCommand extends Command
   {
     $this
       ->setName('catrobat:logs:archive')
-      ->setDescription('Archive the log files')
     ;
   }
 
@@ -42,6 +43,6 @@ class ArchiveLogsCommand extends Command
     );
     $output1->writeln('Successfully archived log files');
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

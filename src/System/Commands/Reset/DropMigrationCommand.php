@@ -10,6 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class DropMigrationCommand extends Command
 {
+  protected static $defaultDescription = 'Dropping the doctrine_migration_versions table';
   protected Connection $connection;
   private OutputInterface $output;
 
@@ -21,9 +22,7 @@ class DropMigrationCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:drop:migration')
-      ->setDescription('Dropping the doctrine_migration_versions table')
-    ;
+    $this->setName('catrobat:drop:migration');
   }
 
   /**
@@ -38,7 +37,7 @@ class DropMigrationCommand extends Command
       $this->output->writeln('Table doctrine_migration_versions doesn\'t exist!');
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   /**

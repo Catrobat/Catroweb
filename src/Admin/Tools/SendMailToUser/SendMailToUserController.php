@@ -61,16 +61,12 @@ class SendMailToUserController extends CRUDController
   {
     $template = (string) $request->query->get('template');
 
-    switch ($template) {
-      case 'confirmation':
-        return $this->renderConfirmation($request);
-      case 'reset':
-        return $this->renderReset($request);
-      case 'basic':
-        return $this->renderBasic($request);
-    }
-
-    return new Response('Not Found', Response::HTTP_NOT_FOUND);
+    return match ($template) {
+      'confirmation' => $this->renderConfirmation($request),
+      'reset' => $this->renderReset($request),
+      'basic' => $this->renderBasic($request),
+      default => new Response('Not Found', Response::HTTP_NOT_FOUND),
+    };
   }
 
   public function renderConfirmation(Request $request): Response

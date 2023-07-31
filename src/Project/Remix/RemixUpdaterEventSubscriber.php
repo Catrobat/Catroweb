@@ -70,7 +70,7 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
 
     $program_xml_properties->header->remixOf = $remix_url_string;
     $program_xml_properties->header->url = $this->router->generate('program', ['id' => $program->getId(), 'theme' => 'pocketcode']);
-    $program_xml_properties->header->userHandle = $program->getUser()->getUsername();
+    $program_xml_properties->header->userHandle = $program->getUser()->getUserIdentifier();
     $file->saveProgramXmlProperties();
   }
 

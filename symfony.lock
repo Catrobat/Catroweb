@@ -620,9 +620,6 @@
     "sonata-project/block-bundle": {
         "version": "3.18.4"
     },
-    "sonata-project/cache": {
-        "version": "2.0.1"
-    },
     "sonata-project/doctrine-extensions": {
         "version": "1.5.1"
     },

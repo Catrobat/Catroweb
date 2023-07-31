@@ -16,6 +16,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateDownloadsCommand extends Command
 {
+  protected static $defaultDescription = 'download a project';
+
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $entity_manager,
     private readonly ProgramManager $program_manager)
   {
@@ -25,7 +27,6 @@ class CreateDownloadsCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:download')
-      ->setDescription('download a project')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program which gets downloaded')
       ->addArgument('user_name', InputArgument::REQUIRED, 'User who download program')
     ;
@@ -42,17 +43,17 @@ class CreateDownloadsCommand extends Command
     $user = $this->user_manager->findUserByUsername($user_name);
 
     if (null === $program || null === $user) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     try {
       $this->downloadProgram($program, $user);
     } catch (Exception) {
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
     $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function downloadProgram(Program $program, User $user): void

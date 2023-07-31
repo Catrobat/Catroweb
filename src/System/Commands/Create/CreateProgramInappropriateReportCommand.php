@@ -16,6 +16,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateProgramInappropriateReportCommand extends Command
 {
+  protected static $defaultDescription = 'Report a project';
+
   public function __construct(private readonly UserManager $user_manager,
     private readonly ProgramManager $program_manager,
     private readonly EntityManagerInterface $entity_manager)
@@ -26,7 +28,6 @@ class CreateProgramInappropriateReportCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:report')
-      ->setDescription('Report a project')
       ->addArgument('user', InputArgument::REQUIRED, 'User who reports on program')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets reported')
       ->addArgument('note', InputArgument::REQUIRED, 'Report message')
@@ -47,11 +48,11 @@ class CreateProgramInappropriateReportCommand extends Command
     $program = $this->program_manager->findOneByName($program_name);
 
     if (null === $user || null === $program) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     if ($program->getUser() === $user) {
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
 
     try {
@@ -62,7 +63,7 @@ class CreateProgramInappropriateReportCommand extends Command
     $output->writeln('Reporting '.$program->getName());
     $output->writeln('ReportedUser = '.$program->getUser());
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function reportProgram(Program $program, User $user, string $note): void

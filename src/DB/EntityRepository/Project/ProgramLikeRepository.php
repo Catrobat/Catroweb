@@ -142,7 +142,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
       return false;
     }
 
-    return ctype_digit($count) && $count > 0;
+    return ctype_digit((string) $count) && $count > 0;
   }
 
   /**
@@ -163,6 +163,6 @@ class ProgramLikeRepository extends ServiceEntityRepository
 
     $count = $qb->getQuery()->getSingleScalarResult();
 
-    return ctype_digit($count) && $count > 0;
+    return ctype_digit((string) $count) && $count > 0;
   }
 }

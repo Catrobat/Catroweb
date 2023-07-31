@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class CreateMissingMediaPackageThumbnailsCommand extends Command
 {
+  protected static $defaultDescription = 'Creates missing thumbnails for images in media package.';
+
   public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository)
   {
     parent::__construct();
@@ -20,7 +22,6 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:create:media-package-thumbnails')
-      ->setDescription('Creates missing thumbnails for images in media package.')
       ->addOption('force')
     ;
   }
@@ -42,6 +43,6 @@ class CreateMissingMediaPackageThumbnailsCommand extends Command
 
     $this->media_package_file_repository->createMissingThumbnails();
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

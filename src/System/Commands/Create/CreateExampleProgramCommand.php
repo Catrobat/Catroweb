@@ -15,6 +15,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CreateExampleProgramCommand extends Command
 {
+  protected static $defaultDescription = 'make a example project';
+
   public function __construct(
     private readonly ProgramManager $program_manager,
     private readonly EntityManagerInterface $entity_manager,
@@ -26,7 +28,6 @@ class CreateExampleProgramCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:example')
-      ->setDescription('make a example project')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program which gets a example')
     ;
   }
@@ -38,7 +39,7 @@ class CreateExampleProgramCommand extends Command
     $program = $this->program_manager->findOneByName($program_name);
 
     if (null === $program) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     try {
@@ -46,11 +47,11 @@ class CreateExampleProgramCommand extends Command
     } catch (\Exception $e) {
       $output->writeln('Failed to example: '.$program->getName().' '.$e->getMessage());
 
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
     $output->writeln('Example: '.$program->getName());
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   /**

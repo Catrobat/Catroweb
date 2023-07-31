@@ -15,6 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateRemixCommand extends Command
 {
+  protected static $defaultDescription = 'add remixes to projects';
+
   public function __construct(private readonly RemixManipulationProgramManager $remix_manipulation_program_manager,
     private readonly RemixManager $remix_manager,
     private readonly NotificationManager $notification_service)
@@ -25,7 +27,6 @@ class CreateRemixCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:remix')
-      ->setDescription('add remixes to projects')
       ->addArgument('program_original', InputArgument::REQUIRED, 'Name of program which gets remixed')
       ->addArgument('program_remix', InputArgument::REQUIRED, 'Names of program which is the remix')
     ;
@@ -41,14 +42,14 @@ class CreateRemixCommand extends Command
     $remix_program_name = $input->getArgument('program_remix');
 
     if ($original_program_name === $remix_program_name) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     $program_original = $this->remix_manipulation_program_manager->findOneByName($original_program_name);
     $program_remix = $this->remix_manipulation_program_manager->findOneByName($remix_program_name);
 
     if (null == $program_original || null == $program_remix) {
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
 
     $remix_data_of_original = new RemixData($program_original->getId());
@@ -63,6 +64,6 @@ class CreateRemixCommand extends Command
     }
     $output->writeln('Remixing '.$program_original->getName().' with '.$remix_program_name);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

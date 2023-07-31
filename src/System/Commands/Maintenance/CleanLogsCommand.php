@@ -10,6 +10,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CleanLogsCommand extends Command
 {
+  protected static $defaultDescription = 'Delete the log files';
+
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -17,9 +19,7 @@ class CleanLogsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:clean:logs')
-      ->setDescription('Delete the log files')
-    ;
+    $this->setName('catrobat:clean:logs');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -33,6 +33,6 @@ class CleanLogsCommand extends Command
       $output->writeln('Clearing log files failed with code '.$e->getCode());
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

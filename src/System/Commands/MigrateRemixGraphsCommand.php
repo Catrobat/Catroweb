@@ -30,6 +30,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class MigrateRemixGraphsCommand extends Command
 {
+  protected static $defaultDescription = 'Imports remix graphs from all XML files of uploaded programs to database';
   private readonly AsyncHttpClient $async_http_client;
 
   private readonly string $app_root_dir;
@@ -66,7 +67,6 @@ class MigrateRemixGraphsCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:remixgraph:migrate')
-      ->setDescription('Imports remix graphs from all XML files of uploaded programs to database')
       ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these programs '.
         '(only required if --debug-import-missing-programs is set)')
@@ -95,10 +95,10 @@ class MigrateRemixGraphsCommand extends Command
     if (!is_dir($directory)) {
       $output->writeln('Given directory does not exist!');
 
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
 
-    $directory = ('/' != substr((string) $directory, -1)) ? $directory.'/' : $directory;
+    $directory = (!str_ends_with((string) $directory, '/')) ? $directory.'/' : $directory;
 
     if ($is_debug_import_missing_programs) {
       $username = $input->getArgument('user');
@@ -107,7 +107,7 @@ class MigrateRemixGraphsCommand extends Command
 
     $this->migrateRemixDataOfExistingPrograms($output, $directory);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   /**

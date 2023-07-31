@@ -16,6 +16,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateCommentCommand extends Command
 {
+  protected static $defaultDescription = 'Add comment to a project';
+
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $em,
     private readonly ProgramManager $program_manager,
   ) {
@@ -25,7 +27,6 @@ class CreateCommentCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:comment')
-      ->setDescription('Add comment to a project')
       ->addArgument('user', InputArgument::REQUIRED, 'User who comments on program')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Program name of program to comment on')
       ->addArgument('message', InputArgument::REQUIRED, 'Comment message')
@@ -52,17 +53,17 @@ class CreateCommentCommand extends Command
     $program = $this->program_manager->findOneByName($program_name);
 
     if (null === $user || null === $program) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     try {
       $this->postComment($user, $program, $message, $reported);
     } catch (\Exception) {
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
     $output->writeln('Commenting '.$program->getName().' with user '.$user->getUsername());
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function postComment(User $user, Program $program, string $message, bool $reported): void

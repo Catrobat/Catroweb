@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateTagsCommand extends Command
 {
+  protected static $defaultDescription = 'Inserting our static project tags into the Database';
   final public const TAG_LTM_PREFIX = 'tags.tag.';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly TagRepository $tag_repository)
@@ -20,9 +21,7 @@ class UpdateTagsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:update:tags')
-      ->setDescription('Inserting our static project tags into the Database')
-    ;
+    $this->setName('catrobat:update:tags');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -88,7 +87,7 @@ class UpdateTagsCommand extends Command
     $this->entity_manager->flush();
     $output->writeln("{$count} Tags in the Database have been inserted/updated");
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function getOrCreateTag(string $internal_title): Tag

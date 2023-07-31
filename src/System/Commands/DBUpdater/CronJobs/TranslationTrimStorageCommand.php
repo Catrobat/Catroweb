@@ -12,6 +12,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class TranslationTrimStorageCommand extends Command
 {
+  protected static $defaultDescription = 'Clean up old db entries in machine translation schema';
   private const OLDER_THAN = 'older-than';
   private const ONLY_PROJECT = 'only-project';
   private const ONLY_COMMENT = 'only-comment';
@@ -24,7 +25,6 @@ class TranslationTrimStorageCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:translation:trim-storage')
-      ->setDescription('Clean up old db entries in machine translation schema')
       ->addOption(self::OLDER_THAN, null, InputOption::VALUE_REQUIRED,
         'delete entries older than the specified days',
         '30')
@@ -45,7 +45,7 @@ class TranslationTrimStorageCommand extends Command
     if ($days < 1) {
       $output->writeln('Specified number of days must be greater than 0');
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     $today = new \DateTimeImmutable();
@@ -54,7 +54,7 @@ class TranslationTrimStorageCommand extends Command
     if ($input->getOption(self::ONLY_PROJECT) && $input->getOption(self::ONLY_COMMENT)) {
       $output->writeln('invalid combination of options');
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
     if ($input->getOption(self::ONLY_PROJECT)) {
       $this->deleteEntries(ProjectMachineTranslation::class, $date);
@@ -65,7 +65,7 @@ class TranslationTrimStorageCommand extends Command
       $this->deleteEntries(CommentMachineTranslation::class, $date);
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function deleteEntries(string $entity, \DateTimeImmutable $older_than_date): void

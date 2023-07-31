@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CreateFeatureProgramCommand extends Command
 {
+  protected static $defaultDescription = 'feature a project';
+
   public function __construct(
     private readonly ProgramManager $program_manager,
     private readonly EntityManagerInterface $entity_manager,
@@ -27,7 +29,6 @@ class CreateFeatureProgramCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:feature')
-      ->setDescription('feature a project')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets featured')
     ;
   }
@@ -39,17 +40,17 @@ class CreateFeatureProgramCommand extends Command
     $program = $this->program_manager->findOneByName($program_name);
 
     if (null === $program) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     try {
       $this->featureProgram($program);
     } catch (Exception) {
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
     $output->writeln('Featuring '.$program->getName());
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function featureProgram(Program $program): void

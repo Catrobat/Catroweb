@@ -1584,7 +1584,7 @@ class CatrowebBrowserContext extends BrowserContext
   public function theResourcesShouldNotContainTheUnnecessaryFiles(): void
   {
     $files = new \RecursiveIteratorIterator(
-      new \RecursiveDirectoryIterator($this->EXTRACT_RESOURCES_DIR, \RecursiveDirectoryIterator::SKIP_DOTS),
+      new \RecursiveDirectoryIterator($this->EXTRACT_RESOURCES_DIR, \RecursiveDirectoryIterator::SKIP_DOTS | \FilesystemIterator::SKIP_DOTS),
       \RecursiveIteratorIterator::CHILD_FIRST
     );
 

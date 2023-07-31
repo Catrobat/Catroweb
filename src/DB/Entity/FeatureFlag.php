@@ -4,34 +4,18 @@ namespace App\DB\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class FeatureFlag
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue
-   *
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column(type: 'integer')]
   private int $id;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
-  private $name;
-
-  /**
-   * @ORM\Column(type="boolean")
-   */
-  private $value;
-
-  public function __construct(string $name, bool $value)
+  public function __construct(#[ORM\Column(type: 'string', length: 255)]
+    private string $name, #[ORM\Column(type: 'boolean')]
+    private bool $value)
   {
-    $this->name = $name;
-    $this->value = $value;
   }
 
   public function getId(): ?int

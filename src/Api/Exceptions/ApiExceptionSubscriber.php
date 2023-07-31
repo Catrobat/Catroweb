@@ -12,7 +12,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
 {
   public function onKernelException(ExceptionEvent $event): void
   {
-    if (0 !== strpos($event->getRequest()->getPathInfo(), '/api')) {
+    if (!str_starts_with($event->getRequest()->getPathInfo(), '/api')) {
       return;
     }
     $exception = $event->getThrowable();

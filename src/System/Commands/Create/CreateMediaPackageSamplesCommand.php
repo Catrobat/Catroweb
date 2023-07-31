@@ -31,6 +31,8 @@ use Symfony\Component\HttpFoundation\File\File;
  */
 class CreateMediaPackageSamplesCommand extends Command
 {
+  protected static $defaultDescription = 'create sample Media Packages';
+
   public function __construct(private readonly MediaPackageRepository $media_package_repo, private readonly MediaPackageCategoryRepository $media_package_category_repo,
     private readonly MediaPackageFileRepository $media_package_file_repo, private readonly ParameterBagInterface $parameter_bag,
     private readonly FlavorRepository $flavor_repo)
@@ -40,9 +42,7 @@ class CreateMediaPackageSamplesCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:create:media-packages-samples')
-      ->setDescription('create sample Media Packages')
-    ;
+    $this->setName('catrobat:create:media-packages-samples');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -99,6 +99,6 @@ class CreateMediaPackageSamplesCommand extends Command
 
     // Creating MediaPackageCategory Miscellaneous
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

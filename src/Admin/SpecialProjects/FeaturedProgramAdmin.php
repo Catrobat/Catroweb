@@ -79,7 +79,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
       }
     } else {
       if (null !== $id) {
-        $id = preg_replace('$(.*)/project/$', '', $id);
+        $id = preg_replace('$(.*)/project/$', '', (string) $id);
       }
 
       $program = $this->program_manager->find($id);

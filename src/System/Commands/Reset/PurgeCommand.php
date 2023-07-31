@@ -13,6 +13,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class PurgeCommand extends Command
 {
+  protected static $defaultDescription = 'Purge all database and file data';
+
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -21,7 +23,6 @@ class PurgeCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:purge')
-      ->setDescription('Purge all database and file data')
       ->addOption('force', 'f', InputOption::VALUE_NONE)
     ;
   }
@@ -34,7 +35,7 @@ class PurgeCommand extends Command
     if (!$input->getOption('force')) {
       $output->writeln("This command will delete everything, use with caution! Use '--force' option if you are sure.");
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     $output->writeln('Deleting all catrobat data');
@@ -95,6 +96,6 @@ class PurgeCommand extends Command
     $progress->finish();
     $output->writeln('');
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

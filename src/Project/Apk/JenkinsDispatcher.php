@@ -37,9 +37,6 @@ class JenkinsDispatcher
 
   protected function dispatch(mixed $params): string
   {
-    $url = $this->config['url'].'?'.http_build_query($params);
-    $r = file_get_contents($url);
-
-    return $url;
+    return $this->config['url'].'?'.http_build_query($params);
   }
 }

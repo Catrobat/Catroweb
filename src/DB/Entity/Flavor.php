@@ -7,30 +7,19 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass="App\DB\EntityRepository\FlavorRepository")
- *
- * @ORM\Table(name="flavor")
- */
+#[ORM\Entity(repositoryClass: \App\DB\EntityRepository\FlavorRepository::class)]
+#[ORM\Table(name: 'flavor')]
 class Flavor implements \Stringable
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\Column(type="string", length=255, unique=true)
-   */
+  #[ORM\Column(type: 'string', length: 255, unique: true)]
   protected ?string $name = null;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=MediaPackageFile::class, mappedBy="flavors", fetch="EXTRA_LAZY")
-   */
+  #[ORM\ManyToMany(targetEntity: MediaPackageFile::class, mappedBy: 'flavors', fetch: 'EXTRA_LAZY')]
   protected Collection $media_package_files;
 
   public function __construct()

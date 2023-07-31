@@ -9,7 +9,7 @@ class RemixData
    */
   final public const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
-  private $remix_url_data;
+  private array|bool $remix_url_data;
 
   public function __construct(private readonly string $remix_url)
   {

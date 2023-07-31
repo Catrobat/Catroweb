@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AchievementWorkflow_VerifiedDeveloper_Command extends Command
 {
+  protected static $defaultDescription = 'Unlocking verified_developer user achievements';
+
   public function __construct(protected UserManager $user_manager, protected AchievementManager $achievement_manager)
   {
     parent::__construct();
@@ -19,16 +21,14 @@ class AchievementWorkflow_VerifiedDeveloper_Command extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:workflow:achievement:verified_developer')
-      ->setDescription('Unlocking verified_developer user achievements')
-    ;
+    $this->setName('catrobat:workflow:achievement:verified_developer');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->addVerifiedDeveloperAchievementToEveryUser($output);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function addVerifiedDeveloperAchievementToEveryUser(OutputInterface $output): void

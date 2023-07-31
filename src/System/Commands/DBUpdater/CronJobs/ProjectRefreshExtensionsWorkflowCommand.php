@@ -14,6 +14,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProjectRefreshExtensionsWorkflowCommand extends Command
 {
+  protected static $defaultDescription = 'Removes all extensions from a project an re-adds them again';
+
   public function __construct(protected ProgramManager $program_manager,
     protected ProgramRepository $program_repository,
     protected ProjectExtensionManager $extension_manager,
@@ -25,16 +27,14 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:workflow:project:refresh_extensions')
-      ->setDescription('Removes all extensions from a project an re-adds them again')
-    ;
+    $this->setName('catrobat:workflow:project:refresh_extensions');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->refreshProjectExtensions();
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function refreshProjectExtensions(): void

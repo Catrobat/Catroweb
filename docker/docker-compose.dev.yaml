@@ -86,6 +86,7 @@ services:
       - ./../.env.prod:/var/www/catroweb/.env.prod
       # - ./../.env.local:/var/www/catroweb/.env.local # useful for deploying
       - ./../deploy.php:/var/www/catroweb/deploy.php
+      - ./../rector.php:/var/www/catroweb/rector.php
       - ./../composer.json:/var/www/catroweb/composer.json
       - ./../composer.lock:/var/www/catroweb/composer.lock
       - ./../symfony.lock:/var/www/catroweb/symfony.lock

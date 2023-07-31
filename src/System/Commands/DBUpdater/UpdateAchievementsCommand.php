@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateAchievementsCommand extends Command
 {
+  protected static $defaultDescription = 'Inserting our static achievements into the Database';
   final public const ACHIEVEMENT_IMAGE_ASSETS_PATH = 'images/achievements/';
   final public const ACHIEVEMENT_LTM_PREFIX = 'achievements.achievement.type.';
 
@@ -21,9 +22,7 @@ class UpdateAchievementsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:update:achievements')
-      ->setDescription('Inserting our static achievements into the Database')
-    ;
+    $this->setName('catrobat:update:achievements');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -167,7 +166,7 @@ class UpdateAchievementsCommand extends Command
 
     $output->writeln("{$priority} Achievements in the Database have been inserted/updated");
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function getOrCreateAchievement(string $internal_title): Achievement

@@ -42,9 +42,7 @@ class ReplaceItemInUserListStatement extends BaseUserListStatement
     }
 
     $formula_str_index_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
-    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_index);
     $formula_str_value_no_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
-    $formula_string_without_markup = preg_replace('#<[^>]*>#', '', $formula_string_value);
 
     return 'Replace item in list '.$list_variable_name.' at position '.$formula_str_index_no_markup.' with '.$formula_str_value_no_markup;
   }

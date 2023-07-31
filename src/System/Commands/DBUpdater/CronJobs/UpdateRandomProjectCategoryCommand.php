@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateRandomProjectCategoryCommand extends Command
 {
+  protected static $defaultDescription = 'Update random projects\' category.';
   protected const LIMIT = 100;
 
   public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramManager $program_manager)
@@ -20,9 +21,7 @@ class UpdateRandomProjectCategoryCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:workflow:update_random_project_category')
-      ->setDescription('Update random projects\' category.')
-    ;
+    $this->setName('catrobat:workflow:update_random_project_category');
   }
 
   /**
@@ -52,7 +51,7 @@ class UpdateRandomProjectCategoryCommand extends Command
     }
     $this->entity_manager->flush();
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function resetCategoryOfIndex(string $index): void

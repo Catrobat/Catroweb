@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class GenerateTestDataCommand extends Command
 {
+  protected static $defaultDescription = 'Generates test data';
   protected string $source;
 
   protected string $target_directory;
@@ -35,7 +36,6 @@ class GenerateTestDataCommand extends Command
   {
     $this
       ->setName('catrobat:test:generate')
-      ->setDescription('Generates test data')
       ->addOption('force')
     ;
   }
@@ -77,7 +77,7 @@ class GenerateTestDataCommand extends Command
       $output->writeln('<info>Test data generated</info>');
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   /**

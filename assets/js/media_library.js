@@ -1,10 +1,10 @@
 import $ from 'jquery'
-import { MediaLib } from './custom/MediaLib'
+import { MediaLibrary } from './custom/MediaLibrary'
 
 require('../styles/custom/medialib.scss')
 
 const $mediaLibrary = $('.js-media-library')
-MediaLib(
+MediaLibrary(
   $mediaLibrary.data('package'),
   $mediaLibrary.data('path-media-search'),
   $mediaLibrary.data('flavor'),

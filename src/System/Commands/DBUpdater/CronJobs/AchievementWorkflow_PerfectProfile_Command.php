@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AchievementWorkflow_PerfectProfile_Command extends Command
 {
+  protected static $defaultDescription = 'Unlocking perfect_profile user achievements';
+
   public function __construct(protected UserManager $user_manager, protected AchievementManager $achievement_manager)
   {
     parent::__construct();
@@ -19,16 +21,14 @@ class AchievementWorkflow_PerfectProfile_Command extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:workflow:achievement:perfect_profile')
-      ->setDescription('Unlocking perfect_profile user achievements')
-    ;
+    $this->setName('catrobat:workflow:achievement:perfect_profile');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->addPerfectProfileAchievementToEveryUser($output);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function addPerfectProfileAchievementToEveryUser(OutputInterface $output): void

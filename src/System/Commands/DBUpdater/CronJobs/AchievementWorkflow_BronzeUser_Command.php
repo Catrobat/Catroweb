@@ -12,6 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AchievementWorkflow_BronzeUser_Command extends Command
 {
+  protected static $defaultDescription = 'Unlocking bronze_user user achievements';
+
   public function __construct(protected UserManager $user_manager, protected AchievementManager $achievement_manager)
   {
     parent::__construct();
@@ -19,16 +21,14 @@ class AchievementWorkflow_BronzeUser_Command extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:workflow:achievement:bronze_user')
-      ->setDescription('Unlocking bronze_user user achievements')
-    ;
+    $this->setName('catrobat:workflow:achievement:bronze_user');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $this->addBronzeUserAchievementToEveryUser($output);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function addBronzeUserAchievementToEveryUser(OutputInterface $output): void

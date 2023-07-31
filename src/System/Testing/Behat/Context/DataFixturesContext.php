@@ -850,7 +850,7 @@ class DataFixturesContext implements Context
       }
 
       $type = $data['type'];
-      if (ctype_digit($type)) {
+      if (ctype_digit((string) $type)) {
         $type = (int) $type;
       } else {
         $type = array_search($type, ProgramLike::$TYPE_NAMES, true);

@@ -14,6 +14,8 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class CleanApkCommand extends Command
 {
+  protected static $defaultDescription = 'Delete the APKs and resets the status to NONE';
+
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -21,9 +23,7 @@ class CleanApkCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:clean:apk')
-      ->setDescription('Delete the APKs and resets the status to NONE')
-    ;
+    $this->setName('catrobat:clean:apk');
   }
 
   /**
@@ -45,6 +45,6 @@ class CleanApkCommand extends Command
     $result = $query->getSingleScalarResult();
     $output1->writeln('Reset the apk status of '.$result.' projects');
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

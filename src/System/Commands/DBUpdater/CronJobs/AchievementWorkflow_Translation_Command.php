@@ -13,6 +13,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class AchievementWorkflow_Translation_Command extends Command
 {
+  protected static $defaultDescription = 'Retroactively unlock bilingual, trilingual, linguist achievements';
+
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly AchievementManager $achievement_manager)
   {
     parent::__construct();
@@ -20,9 +22,7 @@ class AchievementWorkflow_Translation_Command extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:workflow:achievement:translation')
-      ->setDescription('Retroactively unlock bilingual, trilingual, linguist achievements')
-    ;
+    $this->setName('catrobat:workflow:achievement:translation');
   }
 
   /**
@@ -46,6 +46,6 @@ class AchievementWorkflow_Translation_Command extends Command
       $this->achievement_manager->unlockAchievementCustomTranslation($user);
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

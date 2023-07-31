@@ -15,6 +15,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateFollowersCommand extends Command
 {
+  protected static $defaultDescription = 'follow an user';
+
   public function __construct(private readonly UserManager $user_manager,
     private readonly EntityManagerInterface $entity_manager,
     private readonly NotificationManager $notification_service)
@@ -25,7 +27,6 @@ class CreateFollowersCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:follow')
-      ->setDescription('follow an user')
       ->addArgument('user_name', InputArgument::REQUIRED, 'Name of user who gets followed')
       ->addArgument('follower', InputArgument::REQUIRED, 'User who follows')
     ;
@@ -40,7 +41,7 @@ class CreateFollowersCommand extends Command
     $follower_name = $input->getArgument('follower');
 
     if ($user_name == $follower_name) {
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     /** @var User|null $user */
@@ -50,7 +51,7 @@ class CreateFollowersCommand extends Command
     $follower = $this->user_manager->findUserByUsername($follower_name);
 
     if (null === $user || null === $follower) {
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
 
     try {
@@ -64,7 +65,7 @@ class CreateFollowersCommand extends Command
     }
     $output->writeln($follower_name.' follows '.$user_name);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function followUser(User $user, User $follower): void

@@ -19,6 +19,7 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class ProgramImportCommand extends Command
 {
+  protected static $defaultDescription = 'Import programs from a given directory to the application';
   final public const REMIX_GRAPH_NO_LAYOUT = '0';
 
   public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProgramManager $remix_manipulation_program_manager)
@@ -29,7 +30,6 @@ class ProgramImportCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:import')
-      ->setDescription('Import programs from a given directory to the application')
       ->addArgument('directory', InputArgument::REQUIRED,
         'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::REQUIRED,
@@ -61,7 +61,7 @@ class ProgramImportCommand extends Command
     if (0 == $finder->count()) {
       $output->writeln('No catrobat files found');
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     /** @var User|null $user */
@@ -69,7 +69,7 @@ class ProgramImportCommand extends Command
     if (null == $user) {
       $output->writeln('User '.$username.' was not found!');
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     /** @var SplFileInfo $file */
@@ -86,6 +86,6 @@ class ProgramImportCommand extends Command
       }
     }
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

@@ -21,6 +21,8 @@ define('SECONDS', 60);
 
 class CleanOldApkCommand extends Command
 {
+  protected static $defaultDescription = 'Delete all APKs older than X days and resets the status to NONE';
+
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -29,7 +31,6 @@ class CleanOldApkCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:clean:old-apk')
-      ->setDescription('Delete all APKs older than X days and resets the status to NONE')
       ->addArgument('days')
     ;
   }
@@ -45,7 +46,7 @@ class CleanOldApkCommand extends Command
     if (!is_numeric($days)) {
       $output->writeln('To delete all APKs older than X days you have to enter a numeric value as parameter!');
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
 
     $output->writeln('Deleting all APKs older than '.$days.' days.');
@@ -71,13 +72,13 @@ class CleanOldApkCommand extends Command
     if (!sizeof($removed_apk_ids)) {
       $output->writeln('No projects have been reset.');
 
-      return 0;
+      return \Symfony\Component\Console\Command\Command::SUCCESS;
     }
     $query = $this->createQueryToUpdateTheStatusOfRemovedApks($removed_apk_ids);
     $result = $query->getSingleScalarResult();
     $output->writeln('Reset the apk status of '.$result.' projects');
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function createQueryToUpdateTheStatusOfRemovedApks(mixed $removed_apk_ids): Query

@@ -11,6 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateProjectExtensionsCommand extends Command
 {
+  protected static $defaultDescription = 'Inserting our static project extension into the Database';
   final public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
 
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ExtensionRepository $extension_repository)
@@ -20,9 +21,7 @@ class UpdateProjectExtensionsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:update:extensions')
-      ->setDescription('Inserting our static project extension into the Database')
-    ;
+    $this->setName('catrobat:update:extensions');
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int
@@ -81,7 +80,7 @@ class UpdateProjectExtensionsCommand extends Command
     $this->entity_manager->flush();
     $output->writeln("{$count} Extensions in the Database have been inserted/updated");
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   protected function getOrCreateExtension(string $internal_title): Extension

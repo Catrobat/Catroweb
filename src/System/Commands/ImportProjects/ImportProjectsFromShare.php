@@ -13,10 +13,11 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class ImportProjectsFromShare extends Command
 {
+  protected static $defaultDescription = 'Imports the specified amount of recent programs from share.catrob.at';
+
   protected function configure(): void
   {
     $this->setName('catrobat:import:share')
-      ->setDescription('Imports the specified amount of recent programs from share.catrob.at')
       ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
         'The limit of projects that should be downloaded and imported',
         '20')
@@ -50,7 +51,7 @@ class ImportProjectsFromShare extends Command
     $this->downloadProjects($temp_dir, $number_of_projects_to_download, $download_url, $output);
     $this->importProjects($temp_dir, $project_owner, $remix_layout, $output);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function getDownloadUrl(string $category): string

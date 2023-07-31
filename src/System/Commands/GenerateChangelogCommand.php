@@ -11,11 +11,12 @@ use Symfony\Component\Process\Process;
 
 class GenerateChangelogCommand extends Command
 {
+  protected static $defaultDescription = 'Runs auto-changelog to create a new changelog file';
+
   protected function configure(): void
   {
     $this
       ->setName('changelog')
-      ->setDescription('Runs auto-changelog to create a new changelog file')
       ->addArgument('file', InputArgument::REQUIRED, 'The file with additional helper functions, for default use setup.js')
     ;
   }
@@ -36,6 +37,6 @@ class GenerateChangelogCommand extends Command
     echo $process->getOutput();
     $output->writeln('Changelog file created!');
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 }

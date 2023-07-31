@@ -10,125 +10,66 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=UserCommentRepository::class)
- *
- * @ORM\Table(
- *     name="user_comment",
- *     indexes={
- *
- *         @ORM\Index(name="parent_id_idx", columns={"parent_id"}),
- *         @ORM\Index(name="user_id_idx", columns={"user_id"}),
- *         @ORM\Index(name="program_id_idx", columns={"programId"}),
- *         @ORM\Index(name="studio_idx", columns={"studio"}),
- *         @ORM\Index(name="upload_date_idx", columns={"uploadDate"})
- *     }
- * )
- */
+#[ORM\Entity(repositoryClass: UserCommentRepository::class)]
+#[ORM\Table(name: 'user_comment')]
+#[ORM\Index(name: 'parent_id_idx', columns: ['parent_id'])]
+#[ORM\Index(name: 'user_id_idx', columns: ['user_id'])]
+#[ORM\Index(name: 'program_id_idx', columns: ['programId'])]
+#[ORM\Index(name: 'studio_idx', columns: ['studio'])]
+#[ORM\Index(name: 'upload_date_idx', columns: ['uploadDate'])]
 class UserComment implements \Stringable
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   *
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Id]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
+  #[ORM\Column(type: 'integer')]
   protected ?int $id = null;
 
   /**
    * The User who wrote this UserComment. If this User gets deleted, this UserComment gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=User::class,
-   *     inversedBy="comments"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="user_id",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
    */
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'comments')]
+  #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true)]
   protected ?User $user = null;
 
   /**
    * The CommentNotification triggered by creating this UserComment.
    * If this UserComment gets deleted, this CommentNotification gets deleted as well.
-   *
-   * @ORM\OneToOne(
-   *     targetEntity=CommentNotification::class,
-   *     mappedBy="comment",
-   *     cascade={"remove"}
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="notification_id",
-   *     referencedColumnName="id",
-   *     onDelete="SET NULL",
-   *     nullable=true
-   * )
    */
+  #[ORM\OneToOne(targetEntity: CommentNotification::class, mappedBy: 'comment', cascade: ['remove'])]
+  #[ORM\JoinColumn(name: 'notification_id', referencedColumnName: 'id', onDelete: 'SET NULL', nullable: true)]
   protected ?CommentNotification $notification = null;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $uploadDate = null;
 
-  /**
-   * @ORM\Column(type="text")
-   */
+  #[ORM\Column(type: 'text')]
   protected ?string $text = null;
 
-  /**
-   * @ORM\Column(type="string")
-   */
+  #[ORM\Column(type: 'string')]
   protected ?string $username = null;
 
-  /**
-   * @ORM\Column(type="boolean")
-   */
+  #[ORM\Column(type: 'boolean')]
   protected bool $isReported = false;
 
   /**
    * The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
-   *     inversedBy="comments"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="programId",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
    */
+  #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'comments')]
+  #[ORM\JoinColumn(name: 'programId', referencedColumnName: 'id', nullable: true)]
   private ?Program $program = null;
 
-  /**
-   * @ORM\Column(type="integer", nullable=true)
-   */
+  #[ORM\Column(type: 'integer', nullable: true)]
   protected ?int $parent_id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Studio::class, inversedBy="user_comments", cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-   */
+  #[ORM\ManyToOne(targetEntity: Studio::class, inversedBy: 'user_comments', cascade: ['persist'])]
+  #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   protected ?Studio $studio = null;
 
-  /**
-   * @ORM\Column(type="boolean", nullable=false, options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => false])]
   protected bool $is_deleted = false;
 
-  /**
-   * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=true, onDelete="CASCADE")
-   */
+  #[ORM\OneToOne(targetEntity: StudioActivity::class, cascade: ['persist'])]
+  #[ORM\JoinColumn(name: 'activity', referencedColumnName: 'id', nullable: true, onDelete: 'CASCADE')]
   protected ?StudioActivity $activity = null;
 
   /**

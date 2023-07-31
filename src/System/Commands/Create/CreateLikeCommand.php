@@ -17,6 +17,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateLikeCommand extends Command
 {
+  protected static $defaultDescription = 'like a project';
+
   public function __construct(private readonly UserManager $user_manager,
     private readonly ProgramManager $remix_manipulation_program_manager,
     private readonly EntityManagerInterface $entity_manager,
@@ -28,7 +30,6 @@ class CreateLikeCommand extends Command
   protected function configure(): void
   {
     $this->setName('catrobat:like')
-      ->setDescription('like a project')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets liked')
       ->addArgument('user_name', InputArgument::REQUIRED, 'User who likes program')
     ;
@@ -50,7 +51,7 @@ class CreateLikeCommand extends Command
     if (null === $program || null === $user) {
       $output->writeln('Liking '.$program_name.' with user '.$user_name.' failed');
 
-      return 1;
+      return \Symfony\Component\Console\Command\Command::FAILURE;
     }
     try {
       if ($program->getUser() !== $user) {
@@ -62,11 +63,11 @@ class CreateLikeCommand extends Command
     } catch (\Exception) {
       $output->writeln('Liking '.$program->getName().' with user '.$user_name.'failed');
 
-      return 2;
+      return \Symfony\Component\Console\Command\Command::INVALID;
     }
     $output->writeln('Liking '.$program->getName().' with user '.$user_name);
 
-    return 0;
+    return \Symfony\Component\Console\Command\Command::SUCCESS;
   }
 
   private function likeProgram(Program $program, User $user): void
