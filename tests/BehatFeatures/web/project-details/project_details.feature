@@ -104,17 +104,21 @@ Feature: As a visitor I want to see a project page
     And I wait for the page to be loaded
     Then I should see "43 views"
 
+  Scenario: I do not want to see the steal button when I am the owner of the project
+    Given I log in as "Catrobat"
+    And I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#projectCodeStealButton" should not exist
+
+  Scenario: I do not want to see the steal button when I am not logged in
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#projectCodeStealButton" should not exist
+
   Scenario: Stealing project from other user
     Given I log in as "Catrobat2"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then I should see "Steal project"
-    When I click on the button named "#projectCodeStealButton"
+    When I click "#projectCodeStealButton"
     And I wait for the page to be loaded
     Then I should see "Catrobat2"
-
-  Scenario: Steal button should not be visible when owner is logged in
-    Given I log in as "Catrobat"
-    And I am on "/app/project/1"
-    And I wait for the page to be loaded
-    Then I should not see "Steal project"
