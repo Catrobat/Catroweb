@@ -19,6 +19,22 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     })
   }
 
+  // -------------------------- Steal Button
+  $('.js-steal-button').on('click', (e) => {
+    stealProject(
+      $(e.currentTarget).data('url')
+    )
+  })
+
+  function stealProject (url) {
+    const form = document.createElement('form')
+    form.setAttribute('method', 'post')
+    form.setAttribute('action', url)
+    form.style.display = 'hidden'
+    document.body.appendChild(form)
+    form.submit()
+  }
+
   // -------------------------- Redirect Buttons
   $('.js-redirect-button').on('click', (e) => {
     redirect(

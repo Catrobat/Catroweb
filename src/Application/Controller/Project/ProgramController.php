@@ -109,7 +109,7 @@ class ProgramController extends AbstractController
     ]);
   }
 
-    #[Route(path: '/stealProject/{id}', name: 'steal_project', methods: ['GET'])]
+    #[Route(path: '/stealProject/{id}', name: 'steal_project', methods: ['POST'])]
     public function projectSteal(Request $request, string $id): Response
     {
       $user = $this->getUser();

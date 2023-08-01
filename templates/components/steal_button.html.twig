@@ -1,0 +1,12 @@
+<button id="{{ id }}{{ suffix|default('') }}"
+        class="btn btn-outline-primary btn-block js-steal-button"
+        data-url='{{ url }}'
+>
+
+    {# Icon #}
+    <i id="{{ id }}__icon{{ suffix|default('') }}" class="material-icons align-bottom" >{{ icon }}</i>
+
+    {# Text #}
+    <span>{{ text }}</span>
+
+</button>
