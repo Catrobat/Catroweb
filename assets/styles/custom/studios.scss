@@ -1,8 +1,8 @@
-@use "sass:math";
-@use "@material/list/mdc-list";
-@use "@material/menu-surface/mdc-menu-surface";
-@use "@material/menu/mdc-menu";
-@import "../base/variables";
+@use 'sass:math';
+@use '@material/list/mdc-list';
+@use '@material/menu-surface/mdc-menu-surface';
+@use '@material/menu/mdc-menu';
+@import '../base/variables';
 
 $list-item-padding-overflow-x: 1.5rem;
 
@@ -12,7 +12,9 @@ $list-item-padding-overflow-x: 1.5rem;
 }
 
 .studios-list-item {
-  width: calc(100% + (2 * #{$list-item-padding-overflow-x})); // sass interpolation
+  width: calc(
+    100% + (2 * #{$list-item-padding-overflow-x})
+  ); // sass interpolation
   margin: 0 (-$list-item-padding-overflow-x);
   padding: 0.75rem $list-item-padding-overflow-x;
   display: flex;
@@ -154,10 +156,7 @@ $list-item-padding-overflow-x: 1.5rem;
 
   input {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     cursor: pointer;
     opacity: 0.001;
   }
@@ -209,7 +208,7 @@ $list-item-padding-overflow-x: 1.5rem;
 }
 
 .studio-project-list-admin {
-  grid-template-areas: "image name remove" "image property remove" !important;
+  grid-template-areas: 'image name remove' 'image property remove' !important;
 }
 
 .project-delete-button {
@@ -327,7 +326,7 @@ $list-item-padding-overflow-x: 1.5rem;
   padding-bottom: 20%;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
   #add-reply {
     width: calc(100% - 250px);
   }

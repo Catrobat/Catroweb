@@ -1,5 +1,5 @@
-@use "sass:math";
-@import "../base/variables";
+@use 'sass:math';
+@import '../base/variables';
 
 .studio-detail__header {
   padding-top: 2.25rem;
@@ -55,10 +55,7 @@
 
   input {
     position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
+    inset: 0;
     cursor: pointer;
     opacity: 0.001;
   }
@@ -110,7 +107,7 @@
 }
 
 .studio-project-list-admin {
-  grid-template-areas: "image name remove" "image property remove" !important;
+  grid-template-areas: 'image name remove' 'image property remove' !important;
 }
 
 .project-delete-button {
@@ -228,7 +225,7 @@
   padding-bottom: 20%;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (width >= 768px) {
   #add-reply {
     width: calc(100% - 250px);
   }

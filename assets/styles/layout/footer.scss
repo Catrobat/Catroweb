@@ -1,11 +1,11 @@
-@use "~@material/select";
-@use "~@material/select/mdc-select";
-@use "~@material/list/mdc-list";
-@use "~@material/menu-surface/mdc-menu-surface";
-@use "~@material/menu/mdc-menu";
-@use "~@material/select/styles";
-@import "../base/variables";
-@import "../base/mixins";
+@use '~@material/select';
+@use '~@material/select/mdc-select';
+@use '~@material/list/mdc-list';
+@use '~@material/menu-surface/mdc-menu-surface';
+@use '~@material/menu/mdc-menu';
+@use '~@material/select/styles';
+@import '../base/variables';
+@import '../base/mixins';
 
 // Keep the footer at the bottom at all time.
 

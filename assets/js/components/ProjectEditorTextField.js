@@ -1,13 +1,17 @@
 import $ from 'jquery'
 import { MDCTextField } from '@material/textfield'
 
-export function ProjectEditorTextField (model) {
+export function ProjectEditorTextField(model) {
   this.editText = $('#edit-' + model.programSection + '-text')
   this.editTextError = $('#edit-' + model.programSection + '-text-error')
-  this.textLoadingSpinner = $('#edit-' + model.programSection + '-loading-spinner')
+  this.textLoadingSpinner = $(
+    '#edit-' + model.programSection + '-loading-spinner',
+  )
   this.selectedLanguage = $('#edit-selected-language')
 
-  new MDCTextField(document.querySelector('#edit-' + model.programSection + '-mdc-text-field'))
+  new MDCTextField(
+    document.querySelector('#edit-' + model.programSection + '-mdc-text-field'),
+  )
 
   this.editText.on('input', () => {
     model.setText(this.editText.val().trim())

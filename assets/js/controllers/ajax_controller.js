@@ -9,7 +9,7 @@ export class AjaxController extends Controller {
    * @param {URLSearchParams} params
    * @returns {Promise<void>}
    */
-  async fetchData (url, elementId, params) {
+  async fetchData(url, elementId, params) {
     const listElement = document.getElementById(elementId)
     listElement.innerHTML = ''
 
@@ -25,16 +25,16 @@ export class AjaxController extends Controller {
    * @param {object} data
    * @returns {Promise<Response>}
    */
-  fetchPut (url, data) {
+  fetchPut(url, data) {
     // eslint-disable-next-line no-undef
     return fetch(url, {
       method: 'PUT',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'Accept-Language': this.getAcceptLanguage()
+        'Accept-Language': this.getAcceptLanguage(),
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
   }
 
@@ -45,20 +45,20 @@ export class AjaxController extends Controller {
    * @param {object} data
    * @returns {Promise<Response>}
    */
-  fetchPost (url, data) {
+  fetchPost(url, data) {
     // eslint-disable-next-line no-undef
     return fetch(url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        'Accept-Language': this.getAcceptLanguage()
+        'Accept-Language': this.getAcceptLanguage(),
       },
-      body: JSON.stringify(data)
+      body: JSON.stringify(data),
     })
   }
 
-  getAcceptLanguage () {
+  getAcceptLanguage() {
     try {
       return document.getElementById('app-language').dataset.appLanguage
     } catch (e) {

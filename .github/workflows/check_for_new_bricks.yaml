@@ -18,11 +18,10 @@ name: Check for new bricks
 #
 on:
   schedule:
-    - cron:  '0 0 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch:
 
 jobs:
-
   #
   # The `check-bricks` script is written in Php, hence, we have to ensure Php is installed.
   # However, it would be possible to write the script in any language.

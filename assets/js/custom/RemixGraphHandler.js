@@ -4,9 +4,21 @@
 /* global NetworkBuilder */
 
 // eslint-disable-next-line no-unused-vars
-function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, remixNotAvailableTitle,
-  remixNotAvailableDescription, remixNotAvailable, remixUnknownUser, pleaseWait,
-  detailsUrlTemplate, programRemixGraphUrl, remixGraphCountUrl) {
+function RemixGraphHandler(
+  programId,
+  remixOk,
+  remixBy,
+  remixOpen,
+  remixPath,
+  remixNotAvailableTitle,
+  remixNotAvailableDescription,
+  remixNotAvailable,
+  remixUnknownUser,
+  pleaseWait,
+  detailsUrlTemplate,
+  programRemixGraphUrl,
+  remixGraphCountUrl,
+) {
   const self = this
   self.programId = programId
   self.remixOk = remixOk
@@ -23,7 +35,7 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
   self.remixGraphCountUrl = remixGraphCountUrl
 
   self.init = function () {
-    function blockEventListener (event) {
+    function blockEventListener(event) {
       event.preventDefault()
     }
 
@@ -37,7 +49,7 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
       programNotAvailableErrorTitle: self.remixNotAvailableTitle,
       programNotAvailableErrorDescription: self.remixNotAvailableDescription,
       programNotAvailable: self.remixNotAvailable,
-      programUnknownUser: self.remixUnknownUser
+      programUnknownUser: self.remixUnknownUser,
     }
 
     $(document).ready(function () {
@@ -47,7 +59,7 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
         success: function (data) {
           const numberOfRemixes = data.count
           $('#top-app-bar__title').append('(' + numberOfRemixes + ')')
-        }
+        },
       })
 
       const loadingAnimation = $('#remix-graph-spinner')
@@ -59,14 +71,19 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
         'remix-graph-container',
         'remix-graph-layer',
         self.detailsUrlTemplate,
-        remixGraphTranslations
+        remixGraphTranslations,
       )
 
       remixGraph.destroy()
       if (cachedRemixData != null) {
         document.addEventListener('gesturestart', blockEventListener)
         document.ontouchmove = blockEventListener
-        const networkBuilder = new NetworkBuilder(self.programId, 'remix-graph-layer', remixGraphTranslations, cachedRemixData)
+        const networkBuilder = new NetworkBuilder(
+          self.programId,
+          'remix-graph-layer',
+          remixGraphTranslations,
+          cachedRemixData,
+        )
         const networkDescription = networkDirector.construct(networkBuilder)
         remixGraph.render(loadingAnimation, networkDescription)
       } else {
@@ -77,14 +94,19 @@ function RemixGraphHandler (programId, remixOk, remixBy, remixOpen, remixPath, r
             cachedRemixData = remixData
             document.addEventListener('gesturestart', blockEventListener)
             document.ontouchmove = blockEventListener
-            const networkBuilder = new NetworkBuilder(self.programId, 'remix-graph-layer', remixGraphTranslations, remixData)
+            const networkBuilder = new NetworkBuilder(
+              self.programId,
+              'remix-graph-layer',
+              remixGraphTranslations,
+              remixData,
+            )
             const networkDescription = networkDirector.construct(networkBuilder)
             remixGraph.render(loadingAnimation, networkDescription)
           },
           error: function () {
             $('#remix-graph-spinner').hide()
             alert('Unable to fetch remix-graph!')
-          }
+          },
         })
       }
     })

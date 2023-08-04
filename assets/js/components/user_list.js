@@ -1,13 +1,26 @@
 import $ from 'jquery'
-import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
+import {
+  showDefaultTopBarTitle,
+  showCustomTopBarTitle,
+} from '../layout/top_bar'
 
 require('../../styles/components/user_list.scss')
 
 export class UserList {
-  constructor (container, baseUrl, apiUrl, theme, projectString, fetchCount = 30, emptyMessage = '') {
+  constructor(
+    container,
+    baseUrl,
+    apiUrl,
+    theme,
+    projectString,
+    fetchCount = 30,
+    emptyMessage = '',
+  ) {
     this.container = container
     this.usersContainer = $('.users-container', container)
-    this.apiUrl = (apiUrl.includes('?') ? apiUrl + '&' : apiUrl + '?') + 'attributes=id,username,picture,projects&'
+    this.apiUrl =
+      (apiUrl.includes('?') ? apiUrl + '&' : apiUrl + '?') +
+      'attributes=id,username,picture,projects&'
     this.baseUrl = baseUrl
     this.usersLoaded = 0
     this.userFetchCount = fetchCount
@@ -31,7 +44,7 @@ export class UserList {
     this._initListeners()
   }
 
-  fetchMore (clear = false) {
+  fetchMore(clear = false) {
     if (this.empty === true || this.fetchActive === true) {
       return
     }
@@ -39,7 +52,12 @@ export class UserList {
     this.fetchActive = true
     const self = this
 
-    $.getJSON(this.apiUrl + 'limit=' + this.userFetchCount + '&offset=' + this.usersLoaded,
+    $.getJSON(
+      this.apiUrl +
+        'limit=' +
+        this.userFetchCount +
+        '&offset=' +
+        this.usersLoaded,
       function (data) {
         if (!Array.isArray(data)) {
           console.error('Data received for users is no array!')
@@ -80,17 +98,23 @@ export class UserList {
         }
 
         self.fetchActive = false
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-      console.error('Failed loading users', JSON.stringify(jqXHR), textStatus, errorThrown)
+      },
+    ).fail(function (jqXHR, textStatus, errorThrown) {
+      console.error(
+        'Failed loading users',
+        JSON.stringify(jqXHR),
+        textStatus,
+        errorThrown,
+      )
       self.container.classList.remove('loading')
     })
   }
 
-  _generate (data) {
+  _generate(data) {
     /*
-        * Necessary to support legacy flavoring with URL:
-        *   Absolute url always uses new 'app' routing flavor. We have to replace it!
-        */
+     * Necessary to support legacy flavoring with URL:
+     *   Absolute url always uses new 'app' routing flavor. We have to replace it!
+     */
     const userUrl = this.baseUrl + '/app/user/' + data.id
 
     const $p = $('<a />', { class: 'user-list__user', href: userUrl })
@@ -98,36 +122,43 @@ export class UserList {
     if (typeof data.picture === 'string' && data.picture.length > 0) {
       $('<img />', {
         src: data.picture,
-        class: 'user-list__user__image'
+        class: 'user-list__user__image',
       }).appendTo($p)
     } else {
       $('<img/>', {
         'data-src': '/images/default/avatar_default.png?v=3.7.1',
-        class: 'lazyload user-list__user__image'
+        class: 'lazyload user-list__user__image',
       }).appendTo($p)
     }
-    $('<span/>', { class: 'user-list__user__name' }).text(data.username).appendTo($p)
+    $('<span/>', { class: 'user-list__user__name' })
+      .text(data.username)
+      .appendTo($p)
     const $prop = $('<div />', { class: 'lazyload user-list__user__property' })
     $prop.appendTo($p)
-    $('<span/>', { class: 'user-list__user__property__value' }).text(data.projects + ' ' + this.projectString).appendTo($prop)
+    $('<span/>', { class: 'user-list__user__property__value' })
+      .text(data.projects + ' ' + this.projectString)
+      .appendTo($prop)
 
     return $p
   }
 
-  _initListeners () {
+  _initListeners() {
     const self = this
 
     // ---- History State
     window.addEventListener('popstate', function (event) {
       if (event.state != null) {
         if (event.state.type === 'UserList' && event.state.full === true) {
-          $('#' + event.state.id).data('list').openFullView()
+          $('#' + event.state.id)
+            .data('list')
+            .openFullView()
         }
       }
     })
 
     this.usersContainer.on('scroll', function () {
-      const pctHorizontal = this.scrollLeft / (this.scrollWidth - this.clientWidth)
+      const pctHorizontal =
+        this.scrollLeft / (this.scrollWidth - this.clientWidth)
       if (pctHorizontal >= 0.8) {
         self.fetchMore()
       }
@@ -144,7 +175,8 @@ export class UserList {
       }
     })
     $(this.container).on('scroll', function () {
-      const pctVertical = this.scrollTop / (this.scrollHeight - this.clientHeight)
+      const pctVertical =
+        this.scrollTop / (this.scrollHeight - this.clientHeight)
       if (pctVertical >= 0.8) {
         self.fetchMore()
       }
@@ -156,23 +188,32 @@ export class UserList {
       } else {
         window.history.pushState(
           { type: 'UserList', id: self.container.id, full: true },
-          $(this).text(), '#' + self.container.id
+          $(this).text(),
+          '#' + self.container.id,
         )
         self.openFullView()
       }
     })
 
     this.$chevronLeft.on('click', function () {
-      const width = self.usersContainer.find('.user-list__project').outerWidth(true)
-      self.usersContainer.scrollLeft(self.usersContainer.scrollLeft() - 2 * width)
+      const width = self.usersContainer
+        .find('.user-list__project')
+        .outerWidth(true)
+      self.usersContainer.scrollLeft(
+        self.usersContainer.scrollLeft() - 2 * width,
+      )
     })
     this.$chevronRight.on('click', function () {
-      const width = self.usersContainer.find('.user-list__project').outerWidth(true)
-      self.usersContainer.scrollLeft(self.usersContainer.scrollLeft() + 2 * width)
+      const width = self.usersContainer
+        .find('.user-list__project')
+        .outerWidth(true)
+      self.usersContainer.scrollLeft(
+        self.usersContainer.scrollLeft() + 2 * width,
+      )
     })
   }
 
-  openFullView () {
+  openFullView() {
     $(window).on('popstate', this.popStateHandler)
     showCustomTopBarTitle(this.$title.find('h2').text(), function () {
       window.history.back()
@@ -182,12 +223,17 @@ export class UserList {
     this.container.classList.add('vertical')
     this.container.classList.remove('horizontal')
     this.$body.addClass('overflow-hidden')
-    if (this.container.clientHeight === this.container.scrollHeight || this.container.scrollTop / (this.container.scrollHeight - this.container.clientHeight) >= 0.8) {
+    if (
+      this.container.clientHeight === this.container.scrollHeight ||
+      this.container.scrollTop /
+        (this.container.scrollHeight - this.container.clientHeight) >=
+        0.8
+    ) {
       this.fetchMore()
     }
   }
 
-  closeFullView () {
+  closeFullView() {
     $(window).off('popstate', this.popStateHandler)
     showDefaultTopBarTitle()
     this.$title.show()

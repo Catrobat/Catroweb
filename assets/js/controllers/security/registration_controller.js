@@ -4,7 +4,6 @@ import { AjaxController } from '../ajax_controller'
 import { LoginTokenHandler } from '../../security/LoginTokenHandler'
 
 export default class extends AjaxController {
-
   static values = {
     baseUrl: String,
     apiPath: String,
@@ -17,14 +16,14 @@ export default class extends AjaxController {
    *
    * @returns {Promise<void>}
    */
-  async register () {
+  async register() {
     this.initRegistrationButton()
     this.spinRegistrationButton()
 
     const data = {
       username: document.getElementById('username__input').value,
       email: document.getElementById('email__input').value,
-      password: document.getElementById('password__input').value
+      password: document.getElementById('password__input').value,
     }
 
     const response = await this.fetchPost(this.apiPathValue, data)
@@ -45,11 +44,10 @@ export default class extends AjaxController {
     }
 
     response.text().then(function (text) {
-      console.error("Registration error: " + response.status +  text)
+      console.error('Registration error: ' + response.status + text)
     })
-    showSnackbar('#share-snackbar', "Unexpected Error. Try again later.")
+    showSnackbar('#share-snackbar', 'Unexpected Error. Try again later.')
   }
-
 
   registrationButton = null
   registrationButtonSpinner = null
@@ -59,7 +57,9 @@ export default class extends AjaxController {
       this.registrationButton = document.getElementById('register-btn')
     }
     if (null === this.registrationButtonSpinner) {
-      this.registrationButtonSpinner = document.getElementById('register-btn__spinner')
+      this.registrationButtonSpinner = document.getElementById(
+        'register-btn__spinner',
+      )
     }
   }
 

@@ -8,7 +8,10 @@ require('../../styles/custom/program.scss')
 const $projectComments = $('.js-project-comments')
 
 ProgramComments(
-  $projectComments.data('project-id'), 5, 5, 5,
+  $projectComments.data('project-id'),
+  5,
+  5,
+  5,
   $projectComments.data('total-number-of-comments'),
   $projectComments.data('trans-cancel'),
   $projectComments.data('trans-delete-it'),
@@ -22,7 +25,10 @@ ProgramComments(
   $projectComments.data('trans-pop-up-deleted-title'),
   $projectComments.data('trans-pop-up-deleted-text'),
   $projectComments.data('trans-no-admin-rights-message'),
-  $projectComments.data('trans-default-error-message')
+  $projectComments.data('trans-default-error-message'),
 )
 
-new TranslateComments($project.data('translated-by-line'), $project.data('google-translate-display-name'))
+new TranslateComments(
+  $project.data('translated-by-line'),
+  $project.data('google-translate-display-name'),
+)

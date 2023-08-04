@@ -11,16 +11,16 @@ document.addEventListener('DOMContentLoaded', () => {
   oAuthHandler.showOAuthFirstLoginInformationIfNecessary()
 })
 
-function initFeatureSlider () {
+function initFeatureSlider() {
   const featureSlider = document.getElementById('feature-slider')
   if (featureSlider) {
     new Carousel(featureSlider)
   } else {
-    console.warn('#feature-slider can\'t be found in the dom.')
+    console.warn("#feature-slider can't be found in the dom.")
   }
 }
 
-function initHomeProjects () {
+function initHomeProjects() {
   const homeProjects = document.getElementById('home-projects')
   const projectLists = homeProjects.querySelectorAll('.project-list')
 
@@ -42,7 +42,7 @@ function initHomeProjects () {
       category,
       url,
       property,
-      theme
+      theme,
     ).toString()
   })
 }

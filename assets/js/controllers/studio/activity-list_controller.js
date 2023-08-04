@@ -1,7 +1,6 @@
 import { AjaxController } from '../ajax_controller'
 
 export default class extends AjaxController {
-
   static values = {
     url: String,
     studioId: String,
@@ -15,9 +14,11 @@ export default class extends AjaxController {
    *
    * @returns {Promise<void>}
    */
-  async loadActivities () {
+  async loadActivities() {
     await this.fetchData(
-      this.urlValue, this.listElementIdValue, new URLSearchParams({ studio_id: this.studioIdValue })
+      this.urlValue,
+      this.listElementIdValue,
+      new URLSearchParams({ studio_id: this.studioIdValue }),
     )
   }
 }

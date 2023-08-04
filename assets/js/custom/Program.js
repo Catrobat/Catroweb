@@ -5,17 +5,44 @@ import { showSnackbar } from '../components/snackbar'
 import { redirect } from '../components/redirect_button'
 import { ApiFetch } from '../api/ApiHelper'
 
-export const Program = function (projectId, projectName, userRole, myProgram, statusUrl, createUrl, likeUrl,
-  likeDetailUrl, apkPreparing, apkText, updateAppHeader, updateAppText,
-  btnClosePopup, likeActionAdd, likeActionRemove, profileUrl, wowWhite, wowBlack, reactionsText, downloadErrorText, downloadStartedText) {
+export const Program = function (
+  projectId,
+  projectName,
+  userRole,
+  myProgram,
+  statusUrl,
+  createUrl,
+  likeUrl,
+  likeDetailUrl,
+  apkPreparing,
+  apkText,
+  updateAppHeader,
+  updateAppText,
+  btnClosePopup,
+  likeActionAdd,
+  likeActionRemove,
+  profileUrl,
+  wowWhite,
+  wowBlack,
+  reactionsText,
+  downloadErrorText,
+  downloadStartedText,
+) {
   createLinks()
   getApkStatus()
 
   // -------------------------- FileHelper
 
-  function createLinks () {
+  function createLinks() {
     $('#description').each(function () {
-      $(this).html($(this).html().replace(/((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g, '<a href="$1" target="_blank">$1</a> '))
+      $(this).html(
+        $(this)
+          .html()
+          .replace(
+            /((http|https|ftp):\/\/[\w?=&./+-;#~%-]+(?![\w\s?&./;#~%"=-]*>))/g,
+            '<a href="$1" target="_blank">$1</a> ',
+          ),
+      )
     })
   }
 
@@ -25,7 +52,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       $(e.currentTarget).data('url'),
       $(e.currentTarget).data('button-id'),
       $(e.currentTarget).data('spinner-id'),
-      $(e.currentTarget).data('icon-id')
+      $(e.currentTarget).data('icon-id'),
     )
   })
 
@@ -41,16 +68,18 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       $(e.currentTarget).data('is-webview'),
       $(e.currentTarget).data('is-supported'),
       $(e.currentTarget).data('is-not-supported-title'),
-      $(e.currentTarget).data('is-not-supported-text')
+      $(e.currentTarget).data('is-not-supported-text'),
     )
   })
 
-  $($('.js-btn-project-download-disabled').on('click', (e) => {
-    downloadDisabled(
-      $(e.currentTarget).data('redirect-url')
-      // $(e.currentTarget).data('alert-text')
-    )
-  }))
+  $(
+    $('.js-btn-project-download-disabled').on('click', (e) => {
+      downloadDisabled(
+        $(e.currentTarget).data('redirect-url'),
+        // $(e.currentTarget).data('alert-text')
+      )
+    }),
+  )
 
   $('.js-btn-project-apk-download').on('click', (e) => {
     download(
@@ -62,12 +91,21 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       $(e.currentTarget).data('is-webview'),
       $(e.currentTarget).data('is-supported'),
       $(e.currentTarget).data('is-not-supported-title'),
-      $(e.currentTarget).data('is-not-supported-text')
+      $(e.currentTarget).data('is-not-supported-text'),
     )
   })
 
-  function download (downloadUrl, filename, buttonId, spinnerId, iconId, isWebView = false,
-    supported = true, isNotSupportedTitle = '', isNotSupportedText = '') {
+  function download(
+    downloadUrl,
+    filename,
+    buttonId,
+    spinnerId,
+    iconId,
+    isWebView = false,
+    supported = true,
+    isNotSupportedTitle = '',
+    isNotSupportedText = '',
+  ) {
     const button = document.getElementById(buttonId)
     const loadingSpinner = document.getElementById(spinnerId)
     const icon = document.getElementById(iconId)
@@ -95,14 +133,15 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       return
     }
 
-    new ApiFetch(downloadUrl).generateAuthenticatedFetch()
+    new ApiFetch(downloadUrl)
+      .generateAuthenticatedFetch()
       .then(function (response) {
         // fetching the data in the background; this allows us to detect when the download is finished!
         if (response.ok) {
           return response.blob()
         }
       })
-      .then(blob => {
+      .then((blob) => {
         // once the data was fetched the downloaded data can be saved
         const url = window.URL.createObjectURL(blob)
         const a = document.createElement('a')
@@ -127,7 +166,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       })
   }
 
-  function downloadDisabled (redirectUrl) {
+  function downloadDisabled(redirectUrl) {
     /* Swal.fire({
       icon: 'error',
       title: 'Login',
@@ -146,28 +185,31 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     window.location.replace(redirectUrl)
   }
 
-  function resetDownloadButtonIcon (icon, spinner) {
+  function resetDownloadButtonIcon(icon, spinner) {
     icon.classList.remove('d-none')
     icon.classList.add('d-inline-block')
     spinner.classList.remove('d-inline-block')
     spinner.classList.add('d-none')
   }
 
-  function showDownloadFailedSnackbar (downloadErrorText, filename) {
+  function showDownloadFailedSnackbar(downloadErrorText, filename) {
     showSnackbar('#share-snackbar', downloadErrorText)
     console.error('Downloading ' + filename + ' failed')
   }
 
-  function showProjectIsNotSupportedMessage (isNotSupportedTitle, isNotSupportedText) {
+  function showProjectIsNotSupportedMessage(
+    isNotSupportedTitle,
+    isNotSupportedText,
+  ) {
     Swal.fire({
       icon: 'error',
       title: isNotSupportedTitle,
       text: isNotSupportedText,
       customClass: {
-        confirmButton: 'btn btn-primary'
+        confirmButton: 'btn btn-primary',
       },
       buttonsStyling: false,
-      allowOutsideClick: false
+      allowOutsideClick: false,
     }).then()
   }
 
@@ -175,20 +217,22 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
   // Refactoring would be nice!
   //
 
-  function getApkStatus () {
+  function getApkStatus() {
     $.get(statusUrl, null, onResult)
   }
 
-  function createApk () {
+  function createApk() {
     $('#apk-generate, #apk-generate-small').addClass('d-none')
     $('#apk-pending, #apk-pending-small').removeClass('d-none')
     $.get(createUrl, null, onResult)
     showPreparingApkPopup()
   }
 
-  function onResult (data) {
+  function onResult(data) {
     const apkPending = $('#apk-pending, #apk-pending-small')
-    const apkDownload = $('#projectApkDownloadButton, #projectApkDownloadButton-small')
+    const apkDownload = $(
+      '#projectApkDownloadButton, #projectApkDownloadButton-small',
+    )
     const apkGenerate = $('#apk-generate, #apk-generate-small')
     apkGenerate.addClass('d-none')
     apkDownload.addClass('d-none')
@@ -211,7 +255,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     }
   }
 
-  function showPreparingApkPopup () {
+  function showPreparingApkPopup() {
     const popupBackground = createPopupBackgroundDiv()
     const popupDiv = createPopupDiv()
     const body = $('body')
@@ -222,7 +266,10 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     popupDiv.append(apkSpinner)
     popupDiv.append('<p>' + apkText + '</p>')
 
-    const closePopupButton = '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' + btnClosePopup + '</button>'
+    const closePopupButton =
+      '<button id="btn-close-popup" class="btn btn-primary btn-close-popup">' +
+      btnClosePopup +
+      '</button>'
     popupDiv.append(closePopupButton)
 
     body.append(popupBackground)
@@ -235,11 +282,11 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     })
   }
 
-  function createPopupDiv () {
+  function createPopupDiv() {
     return $('<div id="popup-info" class="popup-div"></div>')
   }
 
-  function createPopupBackgroundDiv () {
+  function createPopupBackgroundDiv() {
     return $('<div id="popup-background" class="popup-bg"></div>')
   }
 
@@ -247,7 +294,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
   // Refactoring would be nice!
   //
 
-  function showErrorAlert (message) {
+  function showErrorAlert(message) {
     if (typeof message !== 'string' || message === '') {
       message = 'Something went wrong! Please try again later.'
     }
@@ -257,17 +304,19 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
       title: 'Oops...',
       text: message,
       customClass: {
-        confirmButton: 'btn btn-primary'
+        confirmButton: 'btn btn-primary',
       },
       buttonsStyling: false,
-      allowOutsideClick: false
+      allowOutsideClick: false,
     })
   }
 
   let $projectLikeCounter, $projectLikeButtons, $projectLikeDetail
-  let $projectLikeCounterSmall, $projectLikeButtonsSmall, $projectLikeDetailSmall
+  let $projectLikeCounterSmall,
+    $projectLikeButtonsSmall,
+    $projectLikeDetailSmall
 
-  function initProjectLike () {
+  function initProjectLike() {
     let detailOpened = false
 
     const $container = $('#project-like')
@@ -315,13 +364,14 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     $detailSmall.find('.btn').on('click', detailsActionSmall)
   }
 
-  function counterClickAction (event) {
+  function counterClickAction(event) {
     if (event.data.small) {
       $('#project-reactions-spinner-small').removeClass('d-none')
     } else {
       $('#project-reactions-spinner').removeClass('d-none')
     }
-    $.getJSON(likeDetailUrl,
+    $.getJSON(
+      likeDetailUrl,
       /** @param {{user: {id: string, name: string}, types: string[]}[]} data */
       function (data) {
         if (!Array.isArray(data)) {
@@ -332,21 +382,27 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
 
         const $modal = $('#project-like-modal')
         const bootstrapModal = new Modal('#project-like-modal')
-        const firstTabEl = document.querySelector('#reaction-modal-tab li:first-child button')
+        const firstTabEl = document.querySelector(
+          '#reaction-modal-tab li:first-child button',
+        )
         const firstTab = new Tab(firstTabEl)
         firstTab.show()
 
-        const thumbsUpData = data.filter(x => x.types.indexOf('thumbs_up') !== -1)
-        const smileData = data.filter(x => x.types.indexOf('smile') !== -1)
-        const loveData = data.filter(x => x.types.indexOf('love') !== -1)
-        const wowData = data.filter(x => x.types.indexOf('wow') !== -1)
+        const thumbsUpData = data.filter(
+          (x) => x.types.indexOf('thumbs_up') !== -1,
+        )
+        const smileData = data.filter((x) => x.types.indexOf('smile') !== -1)
+        const loveData = data.filter((x) => x.types.indexOf('love') !== -1)
+        const wowData = data.filter((x) => x.types.indexOf('wow') !== -1)
 
         /**
          * @param type string
          * @param data {{user: {id: string, name: string}, types: string[]}[]}
          */
         const fnUpdateContent = (type, data) => {
-          const $tab = /** @type jQuery */ $modal.find('button#' + type + '-tab')
+          const $tab = /** @type jQuery */ $modal.find(
+            'button#' + type + '-tab',
+          )
           const $content = $modal.find('#' + type + '-tab-content')
           $content.empty()
 
@@ -363,7 +419,11 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
           // tab content
           data.forEach(function (like) {
             const $like = $('<div/>').addClass('reaction')
-            $like.append($('<a/>').attr('href', profileUrl.replace('USERID', like.user.id)).text(like.user.name))
+            $like.append(
+              $('<a/>')
+                .attr('href', profileUrl.replace('USERID', like.user.id))
+                .text(like.user.name),
+            )
             const $likeTypes = $('<div/>').addClass('types')
             $like.append($likeTypes)
 
@@ -371,18 +431,24 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
               thumbs_up: 'thumb_up',
               smile: 'sentiment_very_satisfied',
               love: 'favorite',
-              wow: 'wow'
+              wow: 'wow',
             }
             const iconMappingClasses = {
               thumbs_up: 'thumbs-up',
               smile: 'smile',
               love: 'love',
-              wow: 'wow'
+              wow: 'wow',
             }
 
             like.types.forEach((type) => {
               if (type !== 'wow') {
-                $likeTypes.append($('<i/>').addClass('material-icons md-18 ' + iconMappingClasses[type]).append(iconMapping[type]))
+                $likeTypes.append(
+                  $('<i/>')
+                    .addClass(
+                      'material-icons md-18 ' + iconMappingClasses[type],
+                    )
+                    .append(iconMapping[type]),
+                )
               } else {
                 const img = document.createElement('IMG')
                 img.src = wowBlack
@@ -406,7 +472,8 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
         $('#project-reactions-spinner-small').addClass('d-none')
 
         bootstrapModal.show()
-      }).fail(function (jqXHR, textStatus, errorThrown) {
+      },
+    ).fail(function (jqXHR, textStatus, errorThrown) {
       $('#project-reactions-spinner').hide()
       $('#project-reactions-spinner-small').hide()
       showErrorAlert()
@@ -414,36 +481,50 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
     })
   }
 
-  function detailsAction (event) {
+  function detailsAction(event) {
     event.preventDefault()
-    const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
+    const action = this.classList.contains('active')
+      ? likeActionRemove
+      : likeActionAdd
     sendProjectLike(
       $(this).data('like-type'),
       action,
       $projectLikeButtons,
       $projectLikeCounter,
       $projectLikeDetail,
-      false
+      false,
     )
   }
 
-  function detailsActionSmall (event) {
+  function detailsActionSmall(event) {
     event.preventDefault()
-    const action = this.classList.contains('active') ? likeActionRemove : likeActionAdd
+    const action = this.classList.contains('active')
+      ? likeActionRemove
+      : likeActionAdd
     sendProjectLike(
       $(this).data('like-type'),
       action,
       $projectLikeButtonsSmall,
       $projectLikeCounterSmall,
       $projectLikeDetailSmall,
-      true
+      true,
     )
   }
 
-  function sendProjectLike (likeType, likeAction, likeButtons, likeCounter, likeDetail, smallScreen) {
-    const url = likeUrl +
-      '?type=' + encodeURIComponent(likeType) +
-      '&action=' + encodeURIComponent(likeAction)
+  function sendProjectLike(
+    likeType,
+    likeAction,
+    likeButtons,
+    likeCounter,
+    likeDetail,
+    smallScreen,
+  ) {
+    const url =
+      likeUrl +
+      '?type=' +
+      encodeURIComponent(likeType) +
+      '&action=' +
+      encodeURIComponent(likeAction)
 
     if (userRole === 'guest') {
       window.location.href = url
@@ -475,31 +556,48 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
         }
 
         // update like buttons (behavior like in program.html.twig)
-        if (!Array.isArray(data.activeLikeTypes) || data.activeLikeTypes.length === 0) {
-          likeButtons.html('<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-            '<i class="material-icons thumbs-up ' + iconSize + '">thumb_up</i></div>')
+        if (
+          !Array.isArray(data.activeLikeTypes) ||
+          data.activeLikeTypes.length === 0
+        ) {
+          likeButtons.html(
+            '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
+              '<i class="material-icons thumbs-up ' +
+              iconSize +
+              '">thumb_up</i></div>',
+          )
         } else {
           let html = ''
 
           if (data.activeLikeTypes.indexOf('thumbs_up') !== -1) {
-            html += '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons thumbs-up ' + iconSize + '">thumb_up</i></div>'
+            html +=
+              '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
+              '<i class="material-icons thumbs-up ' +
+              iconSize +
+              '">thumb_up</i></div>'
           }
 
           if (data.activeLikeTypes.indexOf('smile') !== -1) {
-            html += '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons smile ' + iconSize + '">sentiment_very_satisfied</i></div>'
+            html +=
+              '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
+              '<i class="material-icons smile ' +
+              iconSize +
+              '">sentiment_very_satisfied</i></div>'
           }
 
           if (data.activeLikeTypes.indexOf('love') !== -1) {
-            html += '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
-              '<i class="material-icons love ' + iconSize + '">favorite</i></div>'
+            html +=
+              '<div class="btn btn-primary btn-round d-inline-flex justify-content-center">' +
+              '<i class="material-icons love ' +
+              iconSize +
+              '">favorite</i></div>'
           }
 
           if (data.activeLikeTypes.indexOf('wow') !== -1) {
             const img = document.createElement('IMG')
             const div = document.createElement('DIV')
-            div.className = 'btn btn-primary btn-round d-inline-flex justify-content-center align-items-center'
+            div.className =
+              'btn btn-primary btn-round d-inline-flex justify-content-center align-items-center'
             div.id = 'wow-reaction'
             img.src = wowWhite
             img.id = 'wow-reaction-img'
@@ -512,7 +610,7 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
           }
           likeButtons.html(html)
         }
-      }
+      },
     }).fail(function (jqXHR, textStatus, errorThrown) {
       // on 401 redirect to url to log in
       if (jqXHR.status === 401) {
@@ -535,7 +633,9 @@ export const Program = function (projectId, projectName, userRole, myProgram, st
 
 $(document).on('click', function (e) {
   const ellipsisContainer = $('#sign-app-ellipsis-container')
-  if (!(ellipsisContainer.is(e.target) || $('#sign-app-ellipsis').is(e.target))) {
+  if (
+    !(ellipsisContainer.is(e.target) || $('#sign-app-ellipsis').is(e.target))
+  ) {
     ellipsisContainer.hide()
   }
 })

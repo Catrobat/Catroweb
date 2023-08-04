@@ -26,6 +26,6 @@ export default function (container) {
       if (parseFloat(newFontSize) < maxFontPixels) {
         $(container).css('font-size', newFontSize)
       }
-    }
+    },
   })
 }

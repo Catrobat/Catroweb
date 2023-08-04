@@ -1,6 +1,12 @@
 import $ from 'jquery'
 
-export function ProgramName (programId, usersLanguage, myProgram, customTranslationApi, editorNavigation) {
+export function ProgramName(
+  programId,
+  usersLanguage,
+  myProgram,
+  customTranslationApi,
+  editorNavigation,
+) {
   const name = $('#name')
   const editProgramButton = $('#edit-program-button')
 
@@ -8,10 +14,10 @@ export function ProgramName (programId, usersLanguage, myProgram, customTranslat
     customTranslationApi.getCustomTranslation(
       programId,
       usersLanguage.substring(0, 2),
-      setName
+      setName,
     )
 
-    function setName (value) {
+    function setName(value) {
       name.text(value)
     }
   }

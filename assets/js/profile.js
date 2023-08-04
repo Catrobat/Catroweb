@@ -20,12 +20,12 @@ shareLink(
   $userShare.data('trans-share-error'),
   $userShare.data('trans-copy'),
   $userShare.data('trans-clipboard-success'),
-  $userShare.data('trans-clipboard-fail')
+  $userShare.data('trans-clipboard-fail'),
 )
 
 initUserProjects()
 
-function initUserProjects () {
+function initUserProjects() {
   const $userProjects = $('#projects-section')
   $('.project-list', $userProjects).each(function () {
     const property = $(this).data('property')
@@ -36,7 +36,15 @@ function initUserProjects () {
 
     const url = baseUrl + '/api/projects/user/' + userId
 
-    const list = new ProjectList(this, 'user-projects', url, property, theme, 999, emptyMessage)
+    const list = new ProjectList(
+      this,
+      'user-projects',
+      url,
+      property,
+      theme,
+      999,
+      emptyMessage,
+    )
     $(this).data('list', list)
   })
 }

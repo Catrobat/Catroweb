@@ -1,6 +1,6 @@
-@use "~@material/chips/deprecated/mdc-chips";
-@import "./base/variables";
-@import "./base/mixins";
+@use '~@material/chips/deprecated/mdc-chips';
+@import './base/variables';
+@import './base/mixins';
 
 .dot {
   position: relative;
@@ -12,12 +12,12 @@
 }
 
 .mark-as-read {
-  @media screen and (max-width: 991px) {
+  @media screen and (width <= 991px) {
     margin-right: 0;
     margin-left: auto;
   }
 
-  @media screen and (max-width: 250px) {
+  @media screen and (width <= 250px) {
     padding-left: 20px;
   }
 }
@@ -44,55 +44,55 @@
 .broadcast-icon {
   font-size: 2vw;
 
-  @media screen and (max-width: 2500px) {
+  @media screen and (width <= 2500px) {
     font-size: 3vw;
   }
 
-  @media screen and (max-width: 1600px) {
+  @media screen and (width <= 1600px) {
     font-size: 4.7vw;
   }
 
-  @media screen and (max-width: 1400px) {
+  @media screen and (width <= 1400px) {
     font-size: 5vw;
   }
 
-  @media screen and (max-width: 1300px) {
+  @media screen and (width <= 1300px) {
     font-size: 5.3vw;
   }
 
-  @media screen and (max-width: 1198px) {
+  @media screen and (width <= 1198px) {
     font-size: 4.5vw;
   }
 
-  @media screen and (max-width: 1100px) {
+  @media screen and (width <= 1100px) {
     font-size: 5.7vw;
   }
 
-  @media screen and (max-width: 991px) {
+  @media screen and (width <= 991px) {
     font-size: 4vw;
   }
 
-  @media screen and (max-width: 836px) {
+  @media screen and (width <= 836px) {
     font-size: 4.5vw;
   }
 
-  @media screen and (max-width: 767px) {
+  @media screen and (width <= 767px) {
     font-size: 5.5vw;
   }
 
-  @media screen and (max-width: 680px) {
+  @media screen and (width <= 680px) {
     font-size: 6vw;
   }
 
-  @media screen and (max-width: 575px) {
+  @media screen and (width <= 575px) {
     font-size: 15vw;
   }
 
-  @media screen and (max-width: 450px) {
+  @media screen and (width <= 450px) {
     font-size: 13.5vw;
   }
 
-  @media screen and (max-width: 350px) {
+  @media screen and (width <= 350px) {
     font-size: 12vw;
   }
 }

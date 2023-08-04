@@ -2,7 +2,13 @@ import $ from 'jquery'
 import { ByLineElementContainer, Translation } from './Translation'
 
 export class TranslateProgram extends Translation {
-  constructor (translatedByLine, googleTranslateDisplayName, programId, hasDescription, hasCredit) {
+  constructor(
+    translatedByLine,
+    googleTranslateDisplayName,
+    programId,
+    hasDescription,
+    hasCredit,
+  ) {
     super(translatedByLine, googleTranslateDisplayName)
     this.programId = programId
     this.hasDescription = hasDescription
@@ -11,7 +17,7 @@ export class TranslateProgram extends Translation {
     this._initListeners()
   }
 
-  _initListeners () {
+  _initListeners() {
     const translateProgram = this
 
     if (document.getElementById('program-translation-button') == null) {
@@ -36,13 +42,21 @@ export class TranslateProgram extends Translation {
       const $name = $('#name')
       const $nameTranslation = $('#name-translation')
       $name.removeClass('program-name').addClass('program-name-animation')
-      $nameTranslation.removeClass('program-name').addClass('program-name-animation')
+      $nameTranslation
+        .removeClass('program-name')
+        .addClass('program-name-animation')
       $nameTranslation.animate({ width: 'toggle' })
-      $name.animate({ width: 'toggle' }, translateProgram.ANIMATION_TIME,
+      $name.animate(
+        { width: 'toggle' },
+        translateProgram.ANIMATION_TIME,
         function () {
-          $('#name').removeClass('program-name-animation').addClass('program-name')
-          $('#name-translation').removeClass('program-name-animation').addClass('program-name')
-        }
+          $('#name')
+            .removeClass('program-name-animation')
+            .addClass('program-name')
+          $('#name-translation')
+            .removeClass('program-name-animation')
+            .addClass('program-name')
+        },
       )
 
       if (translateProgram.hasDescription) {
@@ -57,7 +71,7 @@ export class TranslateProgram extends Translation {
     })
   }
 
-  setTranslatedProgramData (data) {
+  setTranslatedProgramData(data) {
     const $nameTranslation = $('#name-translation')
     $nameTranslation.attr('lang', data.target_language)
     $nameTranslation.text(data.translated_title)
@@ -75,26 +89,34 @@ export class TranslateProgram extends Translation {
       '#program-translation-between-languages',
       '#program-translation-after-languages',
       '#program-translation-first-language',
-      '#program-translation-second-language'
+      '#program-translation-second-language',
     )
 
     this.setTranslationCredit(data, byLineElements)
   }
 
-  openTranslatedProgram () {
+  openTranslatedProgram() {
     $('#program-translation-loading-spinner').hide()
     $('#remove-program-translation-button').show()
 
     const $name = $('#name')
     const $nameTranslation = $('#name-translation')
     $name.removeClass('program-name').addClass('program-name-animation')
-    $nameTranslation.removeClass('program-name').addClass('program-name-animation')
+    $nameTranslation
+      .removeClass('program-name')
+      .addClass('program-name-animation')
     $name.animate({ width: 'toggle' })
-    $nameTranslation.animate({ width: 'toggle' }, this.ANIMATION_TIME,
+    $nameTranslation.animate(
+      { width: 'toggle' },
+      this.ANIMATION_TIME,
       function () {
-        $('#name').removeClass('program-name-animation').addClass('program-name')
-        $('#name-translation').removeClass('program-name-animation').addClass('program-name')
-      }
+        $('#name')
+          .removeClass('program-name-animation')
+          .addClass('program-name')
+        $('#name-translation')
+          .removeClass('program-name-animation')
+          .addClass('program-name')
+      },
     )
 
     if (this.hasDescription) {
@@ -108,7 +130,7 @@ export class TranslateProgram extends Translation {
     }
   }
 
-  programNotTranslated () {
+  programNotTranslated() {
     $('#program-translation-loading-spinner').hide()
     $('#program-translation-button').show()
 
@@ -125,7 +147,7 @@ export class TranslateProgram extends Translation {
     this.openGoogleTranslatePage(text)
   }
 
-  translateProgram () {
+  translateProgram() {
     const self = this
     $.ajax({
       url: '../translate/project/' + self.programId,
@@ -137,7 +159,7 @@ export class TranslateProgram extends Translation {
       },
       error: function () {
         self.programNotTranslated()
-      }
+      },
     })
   }
 }

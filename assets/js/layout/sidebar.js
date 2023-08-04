@@ -13,35 +13,46 @@ $(() => {
   setClickListener()
   initSidebarSwipe()
 })
-function initSidebarBadges () {
+function initSidebarBadges() {
   if ($('.js-user-state').data('is-user-logged-in')) {
     updateBadge(
       sidebarJs.data('base-url') + '/api/notifications/count',
       'sidebar_badge--unseen-notifications',
-      'new'
+      'new',
     )
 
     updateBadge(
       sidebarJs.data('path-achievements-count'),
       'sidebar_badge--unseen-achievements',
       'old',
-      sidebarJs.data('trans-achievements-bade-text')
+      sidebarJs.data('trans-achievements-bade-text'),
     )
   }
 }
 
-function updateBadge (url, badgeID, apiToCall = 'old', badgeText = null, maxAmountToFetch = 99, refreshRate = 10000) {
+function updateBadge(
+  url,
+  badgeID,
+  apiToCall = 'old',
+  badgeText = null,
+  maxAmountToFetch = 99,
+  refreshRate = 10000,
+) {
   const badge = document.getElementById(badgeID)
   if (!badge) {
     return
   }
-  new ApiFetch(url).generateAuthenticatedFetch()
-    .then(response => response.json())
-    .then(data => {
+  new ApiFetch(url)
+    .generateAuthenticatedFetch()
+    .then((response) => response.json())
+    .then((data) => {
       const count = apiToCall === 'new' ? data.total : data.count
       if (count > 0) {
         if (badgeText === null) {
-          badge.innerHTML = (count <= maxAmountToFetch) ? count.toString() : (maxAmountToFetch + '+')
+          badge.innerHTML =
+            count <= maxAmountToFetch
+              ? count.toString()
+              : maxAmountToFetch + '+'
         } else {
           badge.innerHTML = badgeText
         }
@@ -50,7 +61,16 @@ function updateBadge (url, badgeID, apiToCall = 'old', badgeText = null, maxAmou
         badge.innerHTML = ''
         badge.style.display = 'none'
       }
-      setTimeout(updateBadge, refreshRate, url, badgeID, apiToCall, badgeText, maxAmountToFetch, refreshRate)
+      setTimeout(
+        updateBadge,
+        refreshRate,
+        url,
+        badgeID,
+        apiToCall,
+        badgeText,
+        maxAmountToFetch,
+        refreshRate,
+      )
     })
     .catch((error) => {
       console.error('Unable to update sidebar badge! Error: ', error)
@@ -82,7 +102,7 @@ const fnOpenSidebarDesktop = function () {
   sidebarToggleBtn.attr('aria-expanded', true)
 }
 
-function setClickListener () {
+function setClickListener() {
   if ($(window).width() >= 768) {
     sidebarToggleBtn.attr('aria-expanded', true)
   }
@@ -108,7 +128,7 @@ function setClickListener () {
   $('#sidebar-overlay').on('click', fnCloseSidebar)
 }
 
-function initSidebarSwipe () {
+function initSidebarSwipe() {
   const sidebarWidth = sidebar.width()
   const sidebarOverlay = $('#sidebar-overlay')
 
@@ -124,12 +144,15 @@ function initSidebarSwipe () {
 
   const touchThreshold = 25 // area where touch is possible
 
-  function refreshSidebar () {
-    const left = (curX >= sidebarWidth) ? 0 : curX - sidebarWidth
+  function refreshSidebar() {
+    const left = curX >= sidebarWidth ? 0 : curX - sidebarWidth
     sidebar.css('transition', 'none').css('left', left)
     if (!desktop) {
-      const opacity = (curX >= sidebarWidth) ? 1 : curX / sidebarWidth
-      sidebarOverlay.css('transition', 'all 10ms ease-in-out').css('display', 'block').css('opacity', opacity)
+      const opacity = curX >= sidebarWidth ? 1 : curX / sidebarWidth
+      sidebarOverlay
+        .css('transition', 'all 10ms ease-in-out')
+        .css('display', 'block')
+        .css('opacity', opacity)
     }
   }
 
@@ -143,7 +166,9 @@ function initSidebarSwipe () {
 
       desktop = $(window).width() >= 768
 
-      const sidebarOpened = (desktop && !sidebar.hasClass('inactive')) || (!desktop && sidebar.hasClass('active'))
+      const sidebarOpened =
+        (desktop && !sidebar.hasClass('inactive')) ||
+        (!desktop && sidebar.hasClass('active'))
       if (sidebarOpened) {
         curX = touch.pageX
         startX = touch.pageX
@@ -184,7 +209,12 @@ function initSidebarSwipe () {
   })
 
   document.addEventListener('touchend', function (e) {
-    if (e.changedTouches.length === 1 && (closing || opening) && !!curX && startTime) {
+    if (
+      e.changedTouches.length === 1 &&
+      (closing || opening) &&
+      !!curX &&
+      startTime
+    ) {
       const touchX = e.changedTouches[0].pageX
       const touchY = e.changedTouches[0].pageY
       const timeDiff = Date.now() - startTime
@@ -193,7 +223,10 @@ function initSidebarSwipe () {
       if (closing) {
         if (
           (slow && touchX < sidebarWidth / 2) ||
-          (!slow && touchX < sidebarWidth && touchX < startX && Math.abs(startX - touchX) > Math.abs(startY - touchY))
+          (!slow &&
+            touchX < sidebarWidth &&
+            touchX < startX &&
+            Math.abs(startX - touchX) > Math.abs(startY - touchY))
         ) {
           if (desktop) {
             fnCloseSidebarDesktop()
@@ -204,7 +237,10 @@ function initSidebarSwipe () {
       } else if (opening) {
         if (
           (slow && touchX > sidebarWidth / 2) ||
-          (!slow && touchX > touchThreshold && touchX > startX && Math.abs(startX - touchX) > Math.abs(startY - touchY))
+          (!slow &&
+            touchX > touchThreshold &&
+            touchX > startX &&
+            Math.abs(startX - touchX) > Math.abs(startY - touchY))
         ) {
           if (desktop) {
             fnOpenSidebarDesktop()
@@ -218,7 +254,7 @@ function initSidebarSwipe () {
     reset()
   })
 
-  function reset () {
+  function reset() {
     sidebar.css('left', '').css('transition', '')
     sidebarOverlay.css('display', '').css('opacity', '').css('transition', '')
     curX = null

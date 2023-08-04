@@ -7,8 +7,10 @@ $(() => {
   initLocaleSelection()
 })
 
-function initLocaleSelection () {
-  const select = new MDCSelect(document.querySelector('#footer-language-selector'))
+function initLocaleSelection() {
+  const select = new MDCSelect(
+    document.querySelector('#footer-language-selector'),
+  )
 
   select.listen('MDCSelect:change', () => {
     document.cookie = `hl= ${select.value}; path=/`

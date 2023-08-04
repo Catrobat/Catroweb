@@ -1,14 +1,18 @@
-@use "sass:math";
-@import "../base/variables";
-@import "../base/mixins";
-@import "~bootstrap/scss/mixins";
+@use 'sass:math';
+@import '../base/variables';
+@import '../base/mixins';
+@import '~bootstrap/scss/mixins';
 
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;
 
 @keyframes spinner {
-  from { opacity: 1; }
-  to { opacity: 0.3; }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.3;
+  }
 }
 
 .project-list {
@@ -176,7 +180,7 @@ $container-padding: 1rem;
     overflow-y: auto;
     background: #fff;
 
-    @media (max-width: 599px) {
+    @media (width <= 599px) {
       top: 56px;
       height: calc(100vh - 56px);
     }
@@ -195,7 +199,7 @@ $container-padding: 1rem;
         grid-template-rows: 1fr;
         gap: math.div($grid-gutter-width, 2) math.div($grid-gutter-width, 2);
         // stylelint-disable-next-line
-        grid-template-areas: ". .";
+        grid-template-areas: '. .';
       }
     }
 
@@ -207,7 +211,7 @@ $container-padding: 1rem;
       grid-template-rows: max-content auto;
       gap: 0.3rem 1rem;
       // stylelint-disable-next-line
-      grid-template-areas: "image name" "image property";
+      grid-template-areas: 'image name' 'image property';
       text-decoration: none;
 
       &__image {

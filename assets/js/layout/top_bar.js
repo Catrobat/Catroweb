@@ -28,12 +28,24 @@ const defaultTitle = $title.html()
 /**
  * Register eventListener
  */
-$searchButton.on('click', () => { showTopBarSearch() })
-$searchBackButton.on('click', () => { handleSearchBackButton() })
-$searchClearButton.on('click', () => { clearTopBarSearch() })
-$searchInput.on('input change', () => { controlTopBarSearchClearButton() })
-$searchForm.on('submit', (event) => { submitSearchForm(event) })
-$optionsButton.on('click', () => { showTopBarOptions() })
+$searchButton.on('click', () => {
+  showTopBarSearch()
+})
+$searchBackButton.on('click', () => {
+  handleSearchBackButton()
+})
+$searchClearButton.on('click', () => {
+  clearTopBarSearch()
+})
+$searchInput.on('input change', () => {
+  controlTopBarSearchClearButton()
+})
+$searchForm.on('submit', (event) => {
+  submitSearchForm(event)
+})
+$optionsButton.on('click', () => {
+  showTopBarOptions()
+})
 $(document).on('click', (event) => {
   if (!$optionsButton.is(event.target)) {
     $optionsContainer.hide() // hide options container when user clicks
@@ -53,17 +65,17 @@ const searchUrl = $('.js-header').data('path-search-url')
 /**
  * public
  */
-export function showTopBarDownload () {
+export function showTopBarDownload() {
   hideTopBars()
   $('#top-app-bar__media-library-download').show()
 }
 
-export function showTopBarDefault () {
+export function showTopBarDefault() {
   hideTopBars()
   $('#top-app-bar__default').show()
 }
 
-export function showCustomTopBarTitle (title, onBack) {
+export function showCustomTopBarTitle(title, onBack) {
   $title.text(title)
   $title.removeAttr('href')
   $backButton.hide()
@@ -75,7 +87,7 @@ export function showCustomTopBarTitle (title, onBack) {
       id: 'top-app-bar__back__btn-back',
       class: 'material-icons mdc-top-app-bar__action-item mdc-icon-button',
       'aria-label': 'Back to previous page',
-      text: 'arrow_back'
+      text: 'arrow_back',
     }).insertAfter($toggleSidebarButton)
     $toggleSidebarButton.hide()
     $backButton.show()
@@ -83,7 +95,7 @@ export function showCustomTopBarTitle (title, onBack) {
   }
 }
 
-export function showDefaultTopBarTitle () {
+export function showDefaultTopBarTitle() {
   $title.html(defaultTitle)
   $title.attr('href', defaultAppBarHref)
   $toggleSidebarButton.show()
@@ -91,7 +103,7 @@ export function showDefaultTopBarTitle () {
   mdcObject.setScrollTarget(window) // reset to default
 }
 
-function submitSearchForm (event) {
+function submitSearchForm(event) {
   event.preventDefault()
   const query = $searchInput.val()
   if (!window.location.pathname.includes('/search/')) {
@@ -101,13 +113,16 @@ function submitSearchForm (event) {
   window.location.href = searchUrl + encodeURIComponent(query.trim())
 }
 
-function hideTopBars () {
+function hideTopBars() {
   $('.mdc-top-app-bar__row').hide()
 }
 
-function handleSearchBackButton () {
+function handleSearchBackButton() {
   const beforeSearchUrl = window.sessionStorage.getItem(PREVIOUS_SEARCH_URL_KEY)
-  if (window.location.pathname.includes('/search/') && beforeSearchUrl !== null) {
+  if (
+    window.location.pathname.includes('/search/') &&
+    beforeSearchUrl !== null
+  ) {
     window.sessionStorage.removeItem(PREVIOUS_SEARCH_URL_KEY)
     window.location.href = beforeSearchUrl
   } else {
@@ -115,19 +130,19 @@ function handleSearchBackButton () {
   }
 }
 
-function showTopBarOptions () {
+function showTopBarOptions() {
   const container = $optionsContainer
   container.show()
   container.trigger('focus')
 }
 
-export function showTopBarSearch () {
+export function showTopBarSearch() {
   hideTopBars()
   $('#top-app-bar__search').show()
   $searchInput.trigger('focus')
 }
 
-export function controlTopBarSearchClearButton () {
+export function controlTopBarSearchClearButton() {
   if ($searchInput.val()) {
     $searchClearButton.show()
   } else {
@@ -135,7 +150,7 @@ export function controlTopBarSearchClearButton () {
   }
 }
 
-function clearTopBarSearch () {
+function clearTopBarSearch() {
   const inputField = $searchInput
   inputField.val('')
   $searchClearButton.hide()

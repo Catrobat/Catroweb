@@ -20,7 +20,7 @@
   border: none;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (width >= 768px) {
   .modal-full {
     left: 250px;
     width: calc(100% - 250px);

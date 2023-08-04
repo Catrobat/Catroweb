@@ -2,21 +2,21 @@
 import Swal from 'sweetalert2'
 
 export default class MessageDialogs {
-  static showErrorMessage (message) {
+  static showErrorMessage(message) {
     return Swal.fire({
       title: globalConfiguration.messages.errorTitle,
       text: message,
       icon: 'error',
       customClass: {
-        confirmButton: 'btn btn-primary'
+        confirmButton: 'btn btn-primary',
       },
       buttonsStyling: false,
       allowOutsideClick: false,
-      confirmButtonText: globalConfiguration.messages.okayButtonText
+      confirmButtonText: globalConfiguration.messages.okayButtonText,
     })
   }
 
-  static showErrorList (errors) {
+  static showErrorList(errors) {
     if (errors == null) return
     if (!Array.isArray(errors)) {
       errors = Object.values(errors)
@@ -24,28 +24,29 @@ export default class MessageDialogs {
 
     return Swal.fire({
       title: globalConfiguration.messages.errorTitle,
-      html: '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
+      html:
+        '<ul class="text-start"><li>' + errors.join('</li><li>') + '</li></ul>',
       icon: 'error',
       customClass: {
-        confirmButton: 'btn btn-primary'
+        confirmButton: 'btn btn-primary',
       },
       buttonsStyling: false,
       allowOutsideClick: false,
-      confirmButtonText: globalConfiguration.messages.okayButtonText
+      confirmButtonText: globalConfiguration.messages.okayButtonText,
     })
   }
 
-  static showSuccessMessage (message) {
+  static showSuccessMessage(message) {
     return Swal.fire({
       title: globalConfiguration.messages.successTitle,
       text: message,
       icon: 'success',
       customClass: {
-        confirmButton: 'btn btn-primary'
+        confirmButton: 'btn btn-primary',
       },
       buttonsStyling: false,
       allowOutsideClick: false,
-      confirmButtonText: globalConfiguration.messages.okayButtonText
+      confirmButtonText: globalConfiguration.messages.okayButtonText,
     })
   }
 }

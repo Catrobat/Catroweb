@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 export class OAuthHandler {
-  constructor () {
+  constructor() {
     const oAuthGreeting = document.querySelector('.js-oauth-greeting')
     this.show = oAuthGreeting.dataset.isFirstOauthLogin
     this.infoText = oAuthGreeting.dataset.transInfo
@@ -9,7 +9,7 @@ export class OAuthHandler {
     this.infoConfirm = oAuthGreeting.dataset.transOk
   }
 
-  showOAuthFirstLoginInformationIfNecessary () {
+  showOAuthFirstLoginInformationIfNecessary() {
     if (this.show === '1' && localStorage.getItem('oauthSignIn') !== '1') {
       Swal.fire({
         title: this.infoTitle,
@@ -19,9 +19,9 @@ export class OAuthHandler {
         confirmButtonText: this.infoConfirm,
         icon: 'info',
         customClass: {
-          confirmButton: 'btn btn-primary'
+          confirmButton: 'btn btn-primary',
         },
-        buttonsStyling: false
+        buttonsStyling: false,
       }).then(() => {
         localStorage.setItem('oauthSignIn', '1')
       })

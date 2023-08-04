@@ -1,8 +1,8 @@
-@use "~@material/floating-label/mdc-floating-label";
-@use "~@material/line-ripple/mdc-line-ripple";
-@use "~@material/notched-outline/mdc-notched-outline";
-@use "~@material/textfield";
-@import "../base/variables";
+@use '~@material/floating-label/mdc-floating-label';
+@use '~@material/line-ripple/mdc-line-ripple';
+@use '~@material/notched-outline/mdc-notched-outline';
+@use '~@material/textfield';
+@import '../base/variables';
 @include textfield.core-styles;
 
 // Prevent chrome autofill background color

@@ -27,7 +27,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   #
   # - Two-way synchronization:
   #     -- In case of new strings in the repo, they are uploaded to Crowdin

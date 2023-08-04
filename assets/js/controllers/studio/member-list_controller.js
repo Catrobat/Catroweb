@@ -3,7 +3,6 @@ import { showSnackbar } from '../../components/snackbar'
 import { MDCMenu } from '@material/menu'
 
 export default class extends AjaxController {
-
   static values = {
     url: String,
     studioId: String,
@@ -17,9 +16,11 @@ export default class extends AjaxController {
    *
    * @returns {Promise<void>}
    */
-  async loadMembers () {
+  async loadMembers() {
     await this.fetchData(
-      this.urlValue, this.listElementIdValue, new URLSearchParams({ studio_id: this.studioIdValue })
+      this.urlValue,
+      this.listElementIdValue,
+      new URLSearchParams({ studio_id: this.studioIdValue }),
     )
 
     for (const el of document.querySelectorAll('.mdc-menu')) {
@@ -35,8 +36,10 @@ export default class extends AjaxController {
    *
    * @param event
    */
-  openAdminMenu (event) {
-    const menu = new MDCMenu(event.currentTarget.parentElement.getElementsByClassName('mdc-menu')[0])
+  openAdminMenu(event) {
+    const menu = new MDCMenu(
+      event.currentTarget.parentElement.getElementsByClassName('mdc-menu')[0],
+    )
     menu.open = true
   }
 
@@ -51,8 +54,7 @@ export default class extends AjaxController {
    * @param event
    * @returns {Promise<void>}
    */
-  async promoteMemberToAdmin (event) {
-
+  async promoteMemberToAdmin(event) {
     const studioId = this.studioIdValue
     const userId = event.currentTarget.dataset.userId
     const errorMessage = event.currentTarget.dataset.errorMessage
@@ -81,8 +83,7 @@ export default class extends AjaxController {
    * @param event
    * @returns {Promise<void>}
    */
-  async banUserFromStudio (event) {
-
+  async banUserFromStudio(event) {
     const studioId = this.studioIdValue
     const userId = event.currentTarget.dataset.userId
     const errorMessage = event.currentTarget.dataset.errorMessage

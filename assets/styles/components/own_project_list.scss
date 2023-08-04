@@ -1,12 +1,12 @@
-@use "sass:math";
+@use 'sass:math';
 
 // Material Menu
-@use "~@material/list/mdc-list";
-@use "~@material/menu-surface/mdc-menu-surface";
-@use "~@material/menu/mdc-menu";
-@import "../base/variables";
-@import "../base/mixins";
-@import "~bootstrap/scss/mixins";
+@use '~@material/list/mdc-list';
+@use '~@material/menu-surface/mdc-menu-surface';
+@use '~@material/menu/mdc-menu';
+@import '../base/variables';
+@import '../base/mixins';
+@import '~bootstrap/scss/mixins';
 
 $max-project-thumb-size: 160px;
 $container-padding: 1rem;
@@ -87,8 +87,8 @@ $container-padding: 1rem;
       &__properties {
         display: grid;
         grid-template:
-          ". ." max-content
-          ". ." max-content
+          '. .' max-content
+          '. .' max-content
           / max-content max-content;
         gap: 0.25rem 0.25rem;
         padding-bottom: 0.4rem;

@@ -1,26 +1,40 @@
 import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
-export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
-  translations, isWebView, mediaLibPackageByNameUrlApi) {
+export function MediaLib(
+  packageName,
+  mediaSearchPath,
+  flavor,
+  assetsDir,
+  translations,
+  isWebView,
+  mediaLibPackageByNameUrlApi,
+) {
   // Removing the project navigation items and showing just the category menu items
   const element = document.getElementById('project-navigation')
   element.parentNode.removeChild(element)
 
   getPackageFiles(packageName, mediaSearchPath, flavor)
 
-  function getPackageFiles (packageName, mediaSearchPath, flavor) {
+  function getPackageFiles(packageName, mediaSearchPath, flavor) {
     let downloadList = []
 
-    document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
-      for (let i = 0; i < downloadList.length; i++) {
-        medialibDownloadSelectedFile(downloadList[i])
+    document.getElementById('top-app-bar__btn-download-selection').onclick =
+      function () {
+        for (let i = 0; i < downloadList.length; i++) {
+          medialibDownloadSelectedFile(downloadList[i])
+        }
+        document
+          .getElementById('top-app-bar__btn-cancel-download-selection')
+          .click()
       }
-      document.getElementById('top-app-bar__btn-cancel-download-selection').click()
-    }
 
-    document.getElementById('top-app-bar__btn-cancel-download-selection').onclick = function () {
+    document.getElementById(
+      'top-app-bar__btn-cancel-download-selection',
+    ).onclick = function () {
       for (let i = 0; i < downloadList.length; i++) {
-        document.getElementById('mediafile-' + downloadList[i].id).classList.remove('selected')
+        document
+          .getElementById('mediafile-' + downloadList[i].id)
+          .classList.remove('selected')
       }
       downloadList = []
       showTopBarDefault()
@@ -34,18 +48,24 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
 
     // api url
     let url
-    const attributes = 'id,name,flavors,packages,category,extension,file_type,size,download_url'
+    const attributes =
+      'id,name,flavors,packages,category,extension,file_type,size,download_url'
     const limit = 1000
     if (mediaSearchPath !== '') {
       url = mediaSearchPath + '&attributes=' + attributes + '&limit=' + limit
     } else {
-      url = mediaLibPackageByNameUrlApi + '?attributes=' + attributes + '&limit=' + limit
+      url =
+        mediaLibPackageByNameUrlApi +
+        '?attributes=' +
+        attributes +
+        '&limit=' +
+        limit
     }
 
     fetch(url)
-      .then(response => response.json())
-      .then(data => {
-        data.forEach(file => {
+      .then((response) => response.json())
+      .then((data) => {
+        data.forEach((file) => {
           let fileFlavorArray = []
           if ('flavors' in file && Array.isArray(file.flavors)) {
             fileFlavorArray = file.flavors
@@ -54,7 +74,9 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           }
 
           const isFlavored = !fileFlavorArray.includes('pocketcode')
-          const flavorFound = fileFlavorArray.some(item => acceptedFlavors.includes(item))
+          const flavorFound = fileFlavorArray.some((item) =>
+            acceptedFlavors.includes(item),
+          )
           if (!flavorFound) {
             return
           }
@@ -72,7 +94,8 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
               mediafileContainer.addEventListener('click', function () {
                 medialibOnDownload(mediafileContainer)
               })
-            } else { // -- end of disable
+            } else {
+              // -- end of disable
               mediafileContainer.classList.toggle('selected')
               const indexInDownloadList = downloadList.indexOf(file)
 
@@ -91,7 +114,9 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
                 elementsText += translations.elementsPlural
               }
 
-              document.getElementById('top-app-bar__download-nr-selected').innerText = elementsText
+              document.getElementById(
+                'top-app-bar__download-nr-selected',
+              ).innerText = elementsText
 
               if (downloadList.length > 0) {
                 showTopBarDownload()
@@ -158,11 +183,17 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           // flavor
           if (file.category.startsWith('ThemeSpecial')) {
             if (flavorFound) {
-              document.querySelector('#content #category-theme-special .files').prepend(mediafileContainer)
+              document
+                .querySelector('#content #category-theme-special .files')
+                .prepend(mediafileContainer)
             } // else ignore
           } else {
             const catEscaped = file.category.replace(/"/g, '\\"')
-            document.querySelector('#content .category[data-name="' + catEscaped + '"] .files').prepend(mediafileContainer)
+            document
+              .querySelector(
+                '#content .category[data-name="' + catEscaped + '"] .files',
+              )
+              .prepend(mediafileContainer)
           }
         })
 
@@ -174,7 +205,9 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
           const catId = /^category-(.+)$/.exec(item.id)[1]
 
           item.style.display = 'block'
-          document.querySelector('#sidebar #menu-mediacat-' + catId).style.display = 'block'
+          document.querySelector(
+            '#sidebar #menu-mediacat-' + catId,
+          ).style.display = 'block'
         })
 
         document.getElementById('loading-spinner').style.display = 'none'
@@ -184,14 +217,14 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
       })
   }
 
-  function getFileName (file) {
+  function getFileName(file) {
     return file.name // make word breaks easier:
       .replace(/([a-z])([A-Z])/g, '$1​$2') // insert zero-width space between CamelCase
       .replace(/([A-Za-z])([0-9])/g, '$1​$2') // insert zero-width space between letters and numbers
       .replace(/_([A-Za-z0-9])/g, '_​$1') // insert zero-width space between underline and letters
   }
 
-  function getFileDescription (file) {
+  function getFileDescription(file) {
     let type
     if (file.file_type in translations.type) {
       type = translations.type[file.file_type]
@@ -202,7 +235,7 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
     return type + '<br>' + translations.size.replace('%size%', size)
   }
 
-  function buildImageContainer (file) {
+  function buildImageContainer(file) {
     const imageContainer = document.createElement('div')
     imageContainer.classList.add('img-container')
     let audio, previewBtn
@@ -251,11 +284,14 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
     return imageContainer
   }
 
-  function buildImageFromFile (file) {
+  function buildImageFromFile(file) {
     const imgExtension = file.extension === 'catrobat' ? 'png' : file.extension
     const image = document.createElement('img')
     image.setAttribute('alt', file.id)
-    image.setAttribute('src', assetsDir + 'thumbs/' + file.id + '.' + imgExtension)
+    image.setAttribute(
+      'src',
+      assetsDir + 'thumbs/' + file.id + '.' + imgExtension,
+    )
     image.setAttribute('title', file.name)
     image.addEventListener('error', function () {
       image.remove()
@@ -264,7 +300,7 @@ export function MediaLib (packageName, mediaSearchPath, flavor, assetsDir,
   }
 }
 
-function medialibDownloadSelectedFile (file) {
+function medialibDownloadSelectedFile(file) {
   const link = document.createElement('a')
   link.href = file.download_url
   link.download = file.name
@@ -274,7 +310,7 @@ function medialibDownloadSelectedFile (file) {
   return false
 }
 
-function medialibOnDownload (link) {
+function medialibOnDownload(link) {
   if (link.href !== 'javascript:void(0)') {
     const downloadHref = link.href
     link.href = 'javascript:void(0)'
