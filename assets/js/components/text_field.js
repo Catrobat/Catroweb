@@ -11,7 +11,7 @@ for (const el of document.querySelectorAll('.mdc-floating-label')) {
   new MDCFloatingLabel(el)
 }
 
-export function showValidationMessage (msg, textFieldId) {
+export function showValidationMessage(msg, textFieldId) {
   const element = document.getElementById(textFieldId)
   const errorElement = document.getElementById(textFieldId + '__helper')
   if (msg) {

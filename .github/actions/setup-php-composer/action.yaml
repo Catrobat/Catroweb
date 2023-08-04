@@ -1,18 +1,18 @@
 name: 'Install php and composer vendor libraries'
 description: 'Install php and composer vendor libraries. Caching is enabled for enhanced performance.'
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
-    - name: "Setup PHP 8.2"
+    - name: 'Setup PHP 8.2'
       uses: shivammathur/setup-php@v2
       with:
         php-version: 8.2
 
-    - name: "Ensure composer configuration is valid"
+    - name: 'Ensure composer configuration is valid'
       shell: bash
       run: composer validate
 
-    - name: "Use caching action to improve performance"
+    - name: 'Use caching action to improve performance'
       id: composer-cache
       uses: actions/cache@v3
       with:
@@ -29,7 +29,7 @@ runs:
         restore-keys: |
           ${{ runner.os }}-php--
 
-    - name: "Only install packages if there is no cache hit"
+    - name: 'Only install packages if there is no cache hit'
       # "If" not yet supported: https://github.com/actions/runner/issues/834 -> shell workaround
       #      - if: steps.composer-cache.outputs.cache-hit != 'true'
       #        run: composer install --prefer-dist --no-progress

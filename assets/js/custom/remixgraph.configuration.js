@@ -5,7 +5,8 @@
  */
 /* eslint-disable no-unused-vars */
 const SCRATCH_PROJECT_BASE_URL = 'https://scratch.mit.edu/projects/'
-const SCRATCH_BASE_IMAGE_URL_TEMPLATE = 'https://cdn2.scratch.mit.edu/get_image/project/{}_140x140.png'
+const SCRATCH_BASE_IMAGE_URL_TEMPLATE =
+  'https://cdn2.scratch.mit.edu/get_image/project/{}_140x140.png'
 const IMAGE_NOT_AVAILABLE_URL = '/images/default/not_available.png'
 const CATROBAT_NODE_PREFIX = 'catrobat'
 const SCRATCH_NODE_PREFIX = 'scratch'
@@ -19,16 +20,16 @@ const NETWORK_OPTIONS = {
       border: '#CCCCCC',
       background: '#000000',
       highlight: {
-        border: '#00acc1'
-      }
+        border: '#00acc1',
+      },
     },
     font: {
       size: 10,
-      color: '#000000'
+      color: '#000000',
     },
     shapeProperties: {
-      useBorderWithImage: true
-    }
+      useBorderWithImage: true,
+    },
   },
   layout: { improvedLayout: true },
   edges: {
@@ -37,16 +38,16 @@ const NETWORK_OPTIONS = {
       color: '#000000',
       highlight: '#000000',
       hover: '#000000',
-      opacity: 1.0
+      opacity: 1.0,
     },
     smooth: {
-      type: 'dynamic'
+      type: 'dynamic',
     },
-    arrows: { to: true }
+    arrows: { to: true },
   },
   physics: {
     adaptiveTimestep: false,
-    stabilization: true
+    stabilization: true,
   },
   interaction: {
     dragNodes: false,
@@ -58,12 +59,12 @@ const NETWORK_OPTIONS = {
     keyboard: {
       enabled: true,
       speed: { x: 20, y: 20, zoom: 0.1 },
-      bindToWindow: true
+      bindToWindow: true,
     },
     multiselect: false,
     navigationButtons: true,
     selectable: true,
     selectConnectedEdges: false,
-    zoomView: true
-  }
+    zoomView: true,
+  },
 }

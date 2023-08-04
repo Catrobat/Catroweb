@@ -1,7 +1,13 @@
 import $ from 'jquery'
 
-export function ProgramDescription (programId, usersLanguage, showMoreButtonText, showLessButtonText,
-  myProgram, customTranslationApi) {
+export function ProgramDescription(
+  programId,
+  usersLanguage,
+  showMoreButtonText,
+  showLessButtonText,
+  myProgram,
+  customTranslationApi,
+) {
   const description = $('#description')
   const descriptionCreditsContainer = $('#description-credits-container')
   const showMoreToggle = $('#descriptionShowMoreToggle')
@@ -9,7 +15,7 @@ export function ProgramDescription (programId, usersLanguage, showMoreButtonText
 
   initShowMore()
 
-  function initShowMore () {
+  function initShowMore() {
     if (descriptionCreditsContainer.height() > 300) {
       showMoreToggle.removeClass('d-none')
       descriptionCreditsContainer.css({ height: '200px' })
@@ -20,10 +26,10 @@ export function ProgramDescription (programId, usersLanguage, showMoreButtonText
     customTranslationApi.getCustomTranslation(
       programId,
       usersLanguage.substring(0, 2),
-      setDescription
+      setDescription,
     )
 
-    function setDescription (value) {
+    function setDescription(value) {
       description.text(value)
     }
   }

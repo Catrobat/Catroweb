@@ -6,6 +6,6 @@ require('../styles/custom/search.scss')
 const $search = $('.js-search')
 const projectLoader = new ProjectLoader(
   $search.data('result-container'),
-  $search.data('path-search')
+  $search.data('path-search'),
 )
 projectLoader.searchResult($search.data('query'))

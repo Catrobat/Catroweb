@@ -1,7 +1,7 @@
 /* eslint-env jquery */
 
 // eslint-disable-next-line no-unused-vars
-function AdminMail () {
+function AdminMail() {
   const sendBtn = document.querySelector('.btn-send')
   const previewBtn = document.querySelector('.btn-preview')
   const usernameInput = document.querySelector('#username')
@@ -11,7 +11,7 @@ function AdminMail () {
   const templateSelect = document.querySelector('#template-select')
   const resultBox = document.querySelector('.resultBox')
 
-  function sendMail () {
+  function sendMail() {
     const username = usernameInput.value
     const subject = subjectInput.value
     const titel = titelInput.value
@@ -19,14 +19,14 @@ function AdminMail () {
     const url = `send?username=${username}&subject=${subject}&titel=${titel}&message=${message}`
 
     fetch(url)
-      .then(response => {
+      .then((response) => {
         if (response.ok || response.status === 404 || response.status === 400) {
           return response.text()
         } else {
           throw new Error(`Error sending mail: ${response.statusText}`)
         }
       })
-      .then(data => {
+      .then((data) => {
         if (data && data.length >= 2 && data.substring(0, 2) === 'OK') {
           resultBox.classList.remove('error')
           resultBox.classList.add('success')
@@ -36,12 +36,12 @@ function AdminMail () {
         }
         resultBox.innerHTML = data
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error)
       })
   }
 
-  function previewMail () {
+  function previewMail() {
     const username = usernameInput.value
     const subject = subjectInput.value
     const titel = titelInput.value

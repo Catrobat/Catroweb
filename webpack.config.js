@@ -22,7 +22,7 @@ Encore
   // overwriting the css versioning until the transition to webpack is full done
   .configureFilenames({
     css: 'css/[name].css', // -[contenthash] to be used once styles are only imported!
-    js: 'js/[name]-[chunkhash].js'
+    js: 'js/[name]-[chunkhash].js',
   })
 
   // When enabled, Webpack "splits" your files into smaller pieces for greater optimization.
@@ -42,9 +42,18 @@ Encore
 
     // Fonts (deprecated!)
     { from: './assets/fonts', to: '/fonts/[path][name].[ext]' },
-    { from: './node_modules/@fortawesome/', to: '../@fortawesome/[path][name].[ext]' },
-    { from: './node_modules/@fortawesome/fontawesome-free/webfonts', to: '../webfonts/[path][name].[ext]' },
-    { from: './node_modules/material-icons/', to: '../material-icons/[path][name].[ext]' },
+    {
+      from: './node_modules/@fortawesome/',
+      to: '../@fortawesome/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/@fortawesome/fontawesome-free/webfonts',
+      to: '../webfonts/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/material-icons/',
+      to: '../material-icons/[path][name].[ext]',
+    },
 
     // Images
     { from: './assets/images', to: '../images/[path][name].[ext]' },
@@ -57,20 +66,68 @@ Encore
 
     // JS (deprecated!)
     { from: './assets/js/custom', to: '../js/[path][name].[ext]' },
-    { from: './node_modules/clipboard/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/bootstrap/dist/js', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/sweetalert2/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/jquery/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/textfilljs/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/jquery-ui-dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/jquery-contextmenu/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/jquery-contextmenu/dist/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/lazysizes/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
-    { from: './node_modules/jwt-decode/build/', pattern: /\.js$/, to: '../js/modules/[path][name].[ext]' },
+    {
+      from: './node_modules/clipboard/dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/bootstrap/dist/js',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/sweetalert2/dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/jquery/dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/textfilljs/dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/jquery-ui-dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/jquery-contextmenu/dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/jquery-contextmenu/dist/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/lazysizes/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/jwt-decode/build/',
+      pattern: /\.js$/,
+      to: '../js/modules/[path][name].[ext]',
+    },
 
     // CSS (deprecated!)
-    { from: './node_modules/jquery-contextmenu/dist/', pattern: /\.css$/, to: '../css/modules/[path][name].[ext]' },
-    { from: './node_modules/animate.css/', pattern: /\.css$/, to: '../css/modules/[path][name].[ext]' }
+    {
+      from: './node_modules/jquery-contextmenu/dist/',
+      pattern: /\.css$/,
+      to: '../css/modules/[path][name].[ext]',
+    },
+    {
+      from: './node_modules/animate.css/',
+      pattern: /\.css$/,
+      to: '../css/modules/[path][name].[ext]',
+    },
   ])
 
   /*
@@ -106,9 +163,15 @@ Encore
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
   .addStyleEntry('program', './assets/styles/custom/program.scss')
-  .addStyleEntry('multi_column_article', './assets/styles/custom/multi_column_article.scss')
+  .addStyleEntry(
+    'multi_column_article',
+    './assets/styles/custom/multi_column_article.scss',
+  )
   .addStyleEntry('old_code_view', './assets/styles/custom/old_code_view.scss')
-  .addStyleEntry('code_statistics', './assets/styles/components/code_statistics.scss')
+  .addStyleEntry(
+    'code_statistics',
+    './assets/styles/components/code_statistics.scss',
+  )
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
   .addStyleEntry('user_list', './assets/styles/components/user_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
@@ -155,8 +218,8 @@ Encore
   // enables Sass/SCSS support
   .enableSassLoader()
 
-// integrity="..." attributes on your script & link tags
-// .enableIntegrityHashes(Encore.isProduction())
+  // integrity="..." attributes on your script & link tags
+  // .enableIntegrityHashes(Encore.isProduction())
 
   // uncomment if you're having problems with a jQuery plugin
   .autoProvidejQuery()
@@ -167,48 +230,54 @@ Encore
   /*
    * Plugins
    */
-  .addPlugin(new PurgeCSSPlugin({
-    paths: glob.sync([
-      path.join(__dirname, 'templates/**/*.html.twig'),
-      path.join(__dirname, 'assets/**/*.js'),
-      path.join(__dirname, 'assets/**/*.svg')
-    ]),
-    content: ['**/*.twig', '**/*.js'],
-    safelist: {
-      standard: [/^swal2/, /^modal/, /^mdc/]
-    },
-    defaultExtractor: (content) => {
-      return content.match(/[\w-/:]+(?<!:)/g) || []
-    }
-  }))
+  .addPlugin(
+    new PurgeCSSPlugin({
+      paths: glob.sync([
+        path.join(__dirname, 'templates/**/*.html.twig'),
+        path.join(__dirname, 'assets/**/*.js'),
+        path.join(__dirname, 'assets/**/*.svg'),
+      ]),
+      content: ['**/*.twig', '**/*.js'],
+      safelist: {
+        standard: [/^swal2/, /^modal/, /^mdc/],
+      },
+      defaultExtractor: (content) => {
+        return content.match(/[\w-/:]+(?<!:)/g) || []
+      },
+    }),
+  )
 
-  .addPlugin((() => {
-    const log = (result) => {
-      console.log('Loaded .env vars', result)
-      return result
-    }
+  .addPlugin(
+    (() => {
+      const log = (result) => {
+        console.log('Loaded .env vars', result)
+        return result
+      }
 
-    return new webpack.DefinePlugin(
-      log(
-        Encore.isProduction()
-          ? [
-              dotenv.config({ path: '.env', override: true }),
-              dotenv.config({ path: '.env.prod', override: true })
-            ]
-          : [
-              dotenv.config({ path: '.env', override: true }),
-              dotenv.config({ path: '.env.dev', override: true })
-            ]
+      return new webpack.DefinePlugin(
+        log(
+          Encore.isProduction()
+            ? [
+                dotenv.config({ path: '.env', override: true }),
+                dotenv.config({ path: '.env.prod', override: true }),
+              ]
+            : [
+                dotenv.config({ path: '.env', override: true }),
+                dotenv.config({ path: '.env.dev', override: true }),
+              ],
+        ),
       )
-    )
-  })())
+    })(),
+  )
 
-  .addPlugin(process.env.BUGSNAG_API_KEY
-    ? new BugsnagSourceMapUploaderPlugin({
-      apiKey: process.env.BUGSNAG_API_KEY,
-      appVersion: process.env.APP_VERSION,
-      overwrite: true
-    })
-    : noop())
+  .addPlugin(
+    process.env.BUGSNAG_API_KEY
+      ? new BugsnagSourceMapUploaderPlugin({
+          apiKey: process.env.BUGSNAG_API_KEY,
+          appVersion: process.env.APP_VERSION,
+          overwrite: true,
+        })
+      : noop(),
+  )
 
 module.exports = Encore.getWebpackConfig()

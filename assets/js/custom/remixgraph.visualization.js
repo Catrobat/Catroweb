@@ -15,7 +15,7 @@ const RemixGraph = (function () {
         instance = new _InternalRemixGraph()
       }
       return instance
-    }
+    },
   }
 })()
 
@@ -35,17 +35,29 @@ const _InternalRemixGraph = function () {
   self.programDetailsUrlTemplate = null
   self.remixGraphTranslations = null
 
-  self.init = function (programID, modalLayerId, remixGraphLayerId, programDetailsUrlTemplate, remixGraphTranslations) {
+  self.init = function (
+    programID,
+    modalLayerId,
+    remixGraphLayerId,
+    programDetailsUrlTemplate,
+    remixGraphTranslations,
+  ) {
     self.reset()
     self.programID = programID
     self.remixGraphLayerId = remixGraphLayerId
     self.remixGraphTranslations = remixGraphTranslations
     self.programDetailsUrlTemplate = programDetailsUrlTemplate
-    $('<div id="context-menu" class="context-menu-trigger" style="display:none;"></div>').appendTo('#' + modalLayerId)
+    $(
+      '<div id="context-menu" class="context-menu-trigger" style="display:none;"></div>',
+    ).appendTo('#' + modalLayerId)
   }
 
-  self.getNodes = function () { return self.nodes } // accessed by behat tests
-  self.getEdges = function () { return self.edges } // accessed by behat tests
+  self.getNodes = function () {
+    return self.nodes
+  } // accessed by behat tests
+  self.getEdges = function () {
+    return self.edges
+  } // accessed by behat tests
 
   self.reset = function () {
     self.network = null
@@ -74,21 +86,30 @@ const _InternalRemixGraph = function () {
     self.relationAncestorMap = networkDescription.relationAncestorMap
     self.backwardEdgeMap = networkDescription.backwardEdgeMap
     self.backwardReverseEdgeMap = networkDescription.backwardReverseEdgeMap
-    self.nodes.update([{ id: CATROBAT_NODE_PREFIX + '_' + self.programID, color: { border: '#00acc1' } }])
+    self.nodes.update([
+      {
+        id: CATROBAT_NODE_PREFIX + '_' + self.programID,
+        color: { border: '#00acc1' },
+      },
+    ])
     self.network.on('click', self.onClick)
     self.network.on('afterDrawing', function () {
       loadingAnimation.hide()
-      setTimeout(function () { loadingAnimation.hide() }, 1000)
+      setTimeout(function () {
+        loadingAnimation.hide()
+      }, 1000)
     })
     self.network.fit({ animation: false })
   }
 
   self.onClick = function (params) {
     // prevent multiple simultaneous clicks (needed for Google Chrome on Android)
-    const overlayDiv = $('<div></div>').attr('id', 'overlay').addClass('overlay')
+    const overlayDiv = $('<div></div>')
+      .attr('id', 'overlay')
+      .addClass('overlay')
     overlayDiv.appendTo('body')
     // eslint-disable-next-line no-implied-eval
-    setTimeout('$(\'#overlay\').remove();', 300)
+    setTimeout("$('#overlay').remove();", 300)
 
     // lastTouchTime = params.event.timeStamp;
     const selectedNodes = params.nodes
@@ -98,8 +119,8 @@ const _InternalRemixGraph = function () {
           id: edgeData.from,
           borderWidth: NETWORK_OPTIONS.nodes.borderWidth,
           color: NETWORK_OPTIONS.nodes.color,
-          size: 20
-        }
+          size: 20,
+        },
       ])
       const id = edgeData.to.split('_')[1]
       self.nodes.update([
@@ -107,10 +128,12 @@ const _InternalRemixGraph = function () {
           id: edgeData.to,
           borderWidth: NETWORK_OPTIONS.nodes.borderWidth,
           color: NETWORK_OPTIONS.nodes.color,
-          size: (id === self.programID) ? 40 : 20
-        }
+          size: id === self.programID ? 40 : 20,
+        },
       ])
-      self.edges.update([{ id: edgeData.id, width: 1, color: NETWORK_OPTIONS.edges.color }])
+      self.edges.update([
+        { id: edgeData.id, width: 1, color: NETWORK_OPTIONS.edges.color },
+      ])
     })
 
     if (selectedNodes.length === 0) {
@@ -122,29 +145,31 @@ const _InternalRemixGraph = function () {
     const nodeId = idParts[1]
 
     if ($.inArray(nodeId, self.unavailableNodes) !== -1) {
-      Swal.fire({
-        title: self.remixGraphTranslations.programNotAvailableErrorTitle,
-        text: self.remixGraphTranslations.programNotAvailableErrorDescription,
-        icon: 'error',
-        showCancelButton: false,
-        allowOutsideClick: false,
-        confirmButtonText: self.remixGraphTranslations.ok,
-        closeOnConfirm: true,
-        customClass: {
-          confirmButton: 'btn btn-primary'
+      Swal.fire(
+        {
+          title: self.remixGraphTranslations.programNotAvailableErrorTitle,
+          text: self.remixGraphTranslations.programNotAvailableErrorDescription,
+          icon: 'error',
+          showCancelButton: false,
+          allowOutsideClick: false,
+          confirmButtonText: self.remixGraphTranslations.ok,
+          closeOnConfirm: true,
+          customClass: {
+            confirmButton: 'btn btn-primary',
+          },
+          buttonsStyling: false,
         },
-        buttonsStyling: false
-      },
-      function () {
-        self.network.selectNodes([])
-        $('#overlay').remove()
-      })
+        function () {
+          self.network.selectNodes([])
+          $('#overlay').remove()
+        },
+      )
       return
     }
 
     const domPosition = params.pointer.DOM
     const menuWidth = 220
-    const offsetX = (-menuWidth) / 2
+    const offsetX = -menuWidth / 2
     const selectedNodeData = self.nodes.get(selectedNodeId)
 
     $.contextMenu('destroy')
@@ -152,13 +177,13 @@ const _InternalRemixGraph = function () {
       title: {
         name: '<b>' + selectedNodeData.name + '</b>',
         isHtmlName: true,
-        className: 'context-menu-item-title context-menu-not-selectable'
+        className: 'context-menu-item-title context-menu-not-selectable',
       },
       subtitle: {
         name: self.remixGraphTranslations.by + ' ' + selectedNodeData.username,
         isHtmlName: true,
-        className: 'context-menu-item-subtitle context-menu-not-selectable'
-      }
+        className: 'context-menu-item-subtitle context-menu-not-selectable',
+      },
     }
 
     if (self.edges.length > 0) {
@@ -169,15 +194,20 @@ const _InternalRemixGraph = function () {
       contextMenuItems.open = {
         name: self.remixGraphTranslations.open,
         icon: function (opt, $itemElement, itemKey, item) {
-          $itemElement.html('<span class="material-icons">open_in_new</span><span class="text">' + item.name + '</span>')
+          $itemElement.html(
+            '<span class="material-icons">open_in_new</span><span class="text">' +
+              item.name +
+              '</span>',
+          )
           return 'context-menu-icon-material'
         },
         callback: function () {
-          const newUrlPrefix = (idParts[0] === CATROBAT_NODE_PREFIX)
-            ? self.programDetailsUrlTemplate.replace('0', '')
-            : SCRATCH_PROJECT_BASE_URL
+          const newUrlPrefix =
+            idParts[0] === CATROBAT_NODE_PREFIX
+              ? self.programDetailsUrlTemplate.replace('0', '')
+              : SCRATCH_PROJECT_BASE_URL
           window.location = newUrlPrefix + '/' + nodeId
-        }
+        },
       }
     }
 
@@ -185,10 +215,16 @@ const _InternalRemixGraph = function () {
       contextMenuItems.edges = {
         name: self.remixGraphTranslations.showPaths,
         icon: function (opt, $itemElement, itemKey, item) {
-          $itemElement.html('<span class="material-icons">repeat</span><span class="text">' + item.name + '</span>')
+          $itemElement.html(
+            '<span class="material-icons">repeat</span><span class="text">' +
+              item.name +
+              '</span>',
+          )
           return 'context-menu-icon-material'
         },
-        callback: function () { self.highlightPathEdgesOfSelectedNode(nodeId) }
+        callback: function () {
+          self.highlightPathEdgesOfSelectedNode(nodeId)
+        },
       }
     }
 
@@ -197,23 +233,34 @@ const _InternalRemixGraph = function () {
       trigger: 'left',
       className: 'data-title',
       events: {
-        show: function (opt) {
-        },
+        show: function (opt) {},
         hide: function () {
           self.network.selectNodes([])
-        }
+        },
       },
       callback: function (key) {
         const m = 'clicked: ' + key
         // eslint-disable-next-line no-mixed-operators
-        window.console && console.log(m) || alert(m)
+        ;(window.console && console.log(m)) || alert(m)
       },
       position: function (opt) {
         const windowWidth = $(window).width()
         if (windowWidth > 767) {
-          const menuWidth = 260; const minMarginLeft = 10; const minMarginRight = 10
-          const menuOffsetX = Math.max(Math.min((offsetX + domPosition.x), (windowWidth - menuWidth - minMarginRight)), minMarginLeft)
-          opt.$menu.css({ top: domPosition.y, left: menuOffsetX, width: menuWidth })
+          const menuWidth = 260
+          const minMarginLeft = 10
+          const minMarginRight = 10
+          const menuOffsetX = Math.max(
+            Math.min(
+              offsetX + domPosition.x,
+              windowWidth - menuWidth - minMarginRight,
+            ),
+            minMarginLeft,
+          )
+          opt.$menu.css({
+            top: domPosition.y,
+            left: menuOffsetX,
+            width: menuWidth,
+          })
         } else {
           const width = Math.max(windowWidth - 40, 320)
           const height = opt.$menu.css('height').replace('px', '')
@@ -223,11 +270,11 @@ const _InternalRemixGraph = function () {
             width,
             maxWidth: width,
             marginTop: -height / 2,
-            marginLeft: -width / 2
+            marginLeft: -width / 2,
           })
         }
       },
-      items: contextMenuItems
+      items: contextMenuItems,
     })
     $('#context-menu').click()
   }
@@ -255,16 +302,24 @@ const _InternalRemixGraph = function () {
   self.dimEdges = function () {
     const edgeIds = self.edges.getIds()
     for (let i = 0; i < edgeIds.length; i++) {
-      self.edges.update([{ id: edgeIds[i], color: { border: '#000000', opacity: 0.5 } }])
+      self.edges.update([
+        { id: edgeIds[i], color: { border: '#000000', opacity: 0.5 } },
+      ])
     }
-    self.nodes.update([{ id: CATROBAT_NODE_PREFIX + '_' + self.programID, size: 20 }])
+    self.nodes.update([
+      { id: CATROBAT_NODE_PREFIX + '_' + self.programID, size: 20 },
+    ])
   }
 
   self.highlightNode = function (nodeId) {
-    self.nodes.update([{ id: nodeId, borderWidth: 7, size: 30, color: { border: '#00acc1' } }])
+    self.nodes.update([
+      { id: nodeId, borderWidth: 7, size: 30, color: { border: '#00acc1' } },
+    ])
   }
 
   self.highlightEdge = function (edgeId) {
-    self.edges.update([{ id: edgeId, width: 3, color: { color: '#00acc1', opacity: 1.0 } }])
+    self.edges.update([
+      { id: edgeId, width: 3, color: { color: '#00acc1', opacity: 1.0 } },
+    ])
   }
 }

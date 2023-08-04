@@ -30,7 +30,7 @@
 #
 #      By using composites to build the jobs, a lot of duplicated code can be prevent.
 #
-name: "Static analysis"
+name: 'Static analysis'
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
@@ -38,16 +38,15 @@ name: "Static analysis"
 on:
   pull_request:
     branches:
-      - '**'        # all branches
-      - '!master'   # excludes master to prevent double test runs during release prep.
+      - '**' # all branches
+      - '!master' # excludes master to prevent double test runs during release prep.
 
 jobs:
-
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** Javascript **
   #
   # Eslint:
-  #  - Statically analyzes javascript code (depends on on node and npm)
+  #  - Statically analyzes javascript code (depends on node and npm)
   #  - Config defined in .eslintrc.yaml
   #  - Automatic fix support
   #  - npm "test" script must be defined in package.json
@@ -58,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup Node and npm modules"
+      - name: 'Setup Node and npm modules'
         uses: ./.github/actions/setup-npm-node-modules
       - run: npm run test-js
 
@@ -66,7 +65,7 @@ jobs:
   # ** Sass,CSS **
   #
   # StyleLint:
-  #  - Statically analyzes Sass and css files (depends on on node and npm)
+  #  - Statically analyzes Sass and css files (depends on node and npm)
   #  - Config defined in .stylelintrc.json
   #  - Automatic fix support
   #  - More information at: https://stylelint.io/
@@ -77,9 +76,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup Node and npm modules"
+      - name: 'Setup Node and npm modules'
         uses: ./.github/actions/setup-npm-node-modules
       - run: npm run test-css
+
+  # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  # ** Sass,CSS,MD,YAML **
+  #
+  # Prettier:
+  #  - Check formatting style (depends on node and npm)
+  #  - Config defined in .prettierrc.json and .prettierignore
+  #  - Automatic fix support npx prettier . --check
+  #  - More information at: https://prettier.io/
+  #
+  prettier:
+    name: Sass,CSS,MD,YAML formatting [Prettier]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: 'Setup Node and npm modules'
+        uses: ./.github/actions/setup-npm-node-modules
+      - run: npm run test-asset
 
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # ** PHP **
@@ -96,7 +113,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: PHP_CS_FIXER_IGNORE_ENV=1 php bin/php-cs-fixer fix --diff --dry-run --allow-risky=yes --verbose --format=txt
   #
@@ -113,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/phpstan analyze
   #
@@ -130,7 +147,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: vendor/vimeo/psalm/psalm
   #
@@ -148,20 +165,21 @@ jobs:
         uses: StephaneBour/actions-php-cpd@8.2
         with:
           args: src tests
+
   #
   # phpdd (Php Code Fixer):
   #
   #  - to search issues with deprecated functionality in newer interpreter versions..
   #  - More information at: https://github.com/wapmorgan/PhpDeprecationDetector
   #
-#  phpdd:
-#    name: PHP Static Analysis [Phpdd]
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v3
-#      - name: "Setup PHP and composer packages"
-#        uses: ./.github/actions/setup-php-composer
-#      - run: bin/phpdd src tests                                                   # Currently disabled: https://github.com/wapmorgan/PhpDeprecationDetector/issues
+  #  phpdd:
+  #    name: PHP Static Analysis [Phpdd]
+  #    runs-on: ubuntu-latest
+  #    steps:
+  #      - uses: actions/checkout@v3
+  #      - name: "Setup PHP and composer packages"
+  #        uses: ./.github/actions/setup-php-composer
+  #      - run: bin/phpdd src tests                                                   # Currently disabled: https://github.com/wapmorgan/PhpDeprecationDetector/issues
   #
   # PhpLoc:
   #
@@ -186,7 +204,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:twig templates/
 
@@ -200,7 +218,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:yaml translations/ config/ .github/ docker/ behat.yaml.dist .eslintrc.yaml
 
@@ -215,6 +233,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
       - run: bin/console lint:container

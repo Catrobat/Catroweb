@@ -1,5 +1,5 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import '~bootstrap/scss/functions';
+@import '~bootstrap/scss/variables';
 
 $default-font-size: 1rem;
 
@@ -56,25 +56,30 @@ $text-color: $gray-900;
 }
 
 @function custom-lighten($color-variable, $value) {
-  $color-variable-h: var(#{$color-variable + "-h"});
-  $color-variable-s: var(#{$color-variable + "-s"});
-  $color-variable-l: calc(var(#{$color-variable + "-l"}) + #{$value + "%"});
+  $color-variable-h: var(#{$color-variable + '-h'});
+  $color-variable-s: var(#{$color-variable + '-s'});
+  $color-variable-l: calc(var(#{$color-variable + '-l'}) + #{$value + '%'});
 
   @return hsl($color-variable-h, $color-variable-s, $color-variable-l);
 }
 
 @function custom-darken($color-variable, $value) {
-  $color-variable-h: var(#{$color-variable + "-h"});
-  $color-variable-s: var(#{$color-variable + "-s"});
-  $color-variable-l: calc(var(#{$color-variable + "-l"}) - #{$value + "%"});
+  $color-variable-h: var(#{$color-variable + '-h'});
+  $color-variable-s: var(#{$color-variable + '-s'});
+  $color-variable-l: calc(var(#{$color-variable + '-l'}) - #{$value + '%'});
 
   @return hsl($color-variable-h, $color-variable-s, $color-variable-l);
 }
 
 @function custom-alpha($color-variable, $opacity) {
-  $color-variable-h: var(#{$color-variable + "-h"});
-  $color-variable-s: var(#{$color-variable + "-s"});
-  $color-variable-l: var(#{$color-variable + "-l"});
+  $color-variable-h: var(#{$color-variable + '-h'});
+  $color-variable-s: var(#{$color-variable + '-s'});
+  $color-variable-l: var(#{$color-variable + '-l'});
 
-  @return hsla($color-variable-h, $color-variable-s, $color-variable-l, $opacity);
+  @return hsla(
+    $color-variable-h,
+    $color-variable-s,
+    $color-variable-l,
+    $opacity
+  );
 }

@@ -11,5 +11,5 @@ MediaLib(
   $mediaLibrary.data('media-dir'),
   $mediaLibrary.data('translations'),
   $mediaLibrary.data('is-webview'),
-  $mediaLibrary.data('path-medialibpackagebynameurl')
+  $mediaLibrary.data('path-medialibpackagebynameurl'),
 )

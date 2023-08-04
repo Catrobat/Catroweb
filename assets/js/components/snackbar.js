@@ -2,10 +2,10 @@ import $ from 'jquery'
 
 const SnackbarDuration = {
   short: 4500,
-  long: 7500
+  long: 7500,
 }
 
-export function showSnackbar (id, text = '', duration = SnackbarDuration.short) {
+export function showSnackbar(id, text = '', duration = SnackbarDuration.short) {
   const snackbar = $(id)
   const snackbarLabel = $(id + '-label')
 

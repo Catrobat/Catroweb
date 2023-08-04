@@ -18,7 +18,6 @@ on:
 concurrency: production_environment
 
 jobs:
-
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Deployment:
   #
@@ -33,7 +32,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: "Setup PHP and composer packages"
+      - name: 'Setup PHP and composer packages'
         uses: ./.github/actions/setup-php-composer
 
       # Kept in case the VPN config switches again...
@@ -56,4 +55,4 @@ jobs:
         with:
           private-key: ${{ secrets.DEPLOY_SHARE_SSH_KEY }}
           dep: deploy stage=share
-          deployer-binary: "bin/dep"
+          deployer-binary: 'bin/dep'

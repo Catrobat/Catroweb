@@ -40,7 +40,7 @@ if ($project.data('my-program')) {
     $projectDescriptionCredits.data('project-id'),
     'name',
     true,
-    $('#name').text().trim()
+    $('#name').text().trim(),
   )
   new ProjectEditorTextField(nameEditorTextFieldModel)
 
@@ -49,7 +49,7 @@ if ($project.data('my-program')) {
     $projectDescriptionCredits.data('project-id'),
     'description',
     $projectDescriptionCredits.data('has-description'),
-    $('#description').text().trim()
+    $('#description').text().trim(),
   )
   new ProjectEditorTextField(descriptionEditorTextFieldModel)
 
@@ -58,24 +58,28 @@ if ($project.data('my-program')) {
     $projectDescriptionCredits.data('project-id'),
     'credits',
     $projectDescriptionCredits.data('has-credits'),
-    $('#credits').text().trim()
+    $('#credits').text().trim(),
   )
   new ProjectEditorTextField(creditsEditorTextFieldModel)
 
   const projectEditorModel = new ProjectEditorModel(
     $projectDescriptionCredits.data('project-id'),
-    [nameEditorTextFieldModel, descriptionEditorTextFieldModel, creditsEditorTextFieldModel]
+    [
+      nameEditorTextFieldModel,
+      descriptionEditorTextFieldModel,
+      creditsEditorTextFieldModel,
+    ],
   )
   const projectEditor = new ProjectEditor(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
-    projectEditorModel
+    projectEditorModel,
   )
 
   editorNavigation = new ProjectEditorNavigation(
     $projectDescriptionCredits,
     $projectDescriptionCredits.data('project-id'),
-    projectEditor
+    projectEditor,
   )
 }
 
@@ -87,7 +91,7 @@ shareLink(
   $projectShare.data('trans-share-error'),
   $projectShare.data('trans-copy'),
   $projectShare.data('trans-clipboard-success'),
-  $projectShare.data('trans-clipboard-fail')
+  $projectShare.data('trans-clipboard-fail'),
 )
 
 /* TODO: Disable Report Program for now. Needs a separate flag in database - a new concept!
@@ -131,7 +135,7 @@ Program(
   $project.data('asset-wow-black'),
   $project.data('trans-reaction'),
   $project.data('trans-download-error'),
-  $project.data('trans-download-start')
+  $project.data('trans-download-start'),
 )
 
 ProgramName(
@@ -139,7 +143,7 @@ ProgramName(
   $appLanguage.data('app-language'),
   $project.data('my-program'),
   new CustomTranslationApi('name'),
-  editorNavigation
+  editorNavigation,
 )
 
 ProgramDescription(
@@ -148,19 +152,19 @@ ProgramDescription(
   $projectDescriptionCredits.data('trans-more-info'),
   $projectDescriptionCredits.data('trans-less-info'),
   $project.data('my-program'),
-  new CustomTranslationApi('description')
+  new CustomTranslationApi('description'),
 )
 
 ProgramCredits(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
   $project.data('my-program'),
-  new CustomTranslationApi('credit')
+  new CustomTranslationApi('credit'),
 )
 
 initProjectScreenshotUpload()
 
-function initProjectScreenshotUpload () {
+function initProjectScreenshotUpload() {
   const addChangeListenerToFileInput = function (input) {
     input.onchange = () => {
       document.getElementById('upload-image-spinner').classList.remove('d-none')
@@ -168,30 +172,48 @@ function initProjectScreenshotUpload () {
       const reader = new window.FileReader()
       reader.onerror = () => {
         document.getElementById('upload-image-spinner').classList.add('d-none')
-        MessageDialogs.showErrorMessage(projectConfiguration.messages.screenshotInvalid)
+        MessageDialogs.showErrorMessage(
+          projectConfiguration.messages.screenshotInvalid,
+        )
       }
-      reader.onload = event => {
+      reader.onload = (event) => {
         const image = event.currentTarget.result // base64 data url
-        ProjectApi.update($project.data('project-id'), { screenshot: image }, function () {
-          const imageElement = document.getElementById('project-thumbnail-big')
-          if (imageElement.src.includes('?')) {
-            imageElement.src += '&x=' + new Date().getTime()
-          } else {
-            imageElement.src += '?x=' + new Date().getTime()
-          }
-          document.querySelector('.text-img-upload-success').classList.remove('d-none')
-          setTimeout(function () {
-            document.querySelector('.text-img-upload-success').classList.add('d-none')
-          }, 3000)
-        }, function () {
-          document.getElementById('upload-image-spinner').classList.add('d-none')
-        })
+        ProjectApi.update(
+          $project.data('project-id'),
+          { screenshot: image },
+          function () {
+            const imageElement = document.getElementById(
+              'project-thumbnail-big',
+            )
+            if (imageElement.src.includes('?')) {
+              imageElement.src += '&x=' + new Date().getTime()
+            } else {
+              imageElement.src += '?x=' + new Date().getTime()
+            }
+            document
+              .querySelector('.text-img-upload-success')
+              .classList.remove('d-none')
+            setTimeout(function () {
+              document
+                .querySelector('.text-img-upload-success')
+                .classList.add('d-none')
+            }, 3000)
+          },
+          function () {
+            document
+              .getElementById('upload-image-spinner')
+              .classList.add('d-none')
+          },
+        )
       }
       reader.readAsDataURL(input.files[0])
     }
   }
-  const changeButton = document.getElementById('change-project-thumbnail-button')
-  if (changeButton) { // otherwise user is not allowed to change screenshot (e.g., not owner of project)
+  const changeButton = document.getElementById(
+    'change-project-thumbnail-button',
+  )
+  if (changeButton) {
+    // otherwise user is not allowed to change screenshot (e.g., not owner of project)
     changeButton.addEventListener('click', function () {
       const input = document.createElement('input')
       input.type = 'file'
@@ -214,7 +236,7 @@ function initProjectScreenshotUpload () {
 
 initProjects()
 
-function initProjects () {
+function initProjects() {
   const $recommendedProjects = $('#recommended-projects')
   $('.project-list', $recommendedProjects).each(function () {
     const id = $(this).data('project-id')
@@ -224,7 +246,8 @@ function initProjects () {
     const flavor = $(this).data('flavor')
     const baseUrl = $(this).data('base-url')
 
-    let url = baseUrl + '/api/project/' + id + '/recommendations?category=' + category
+    let url =
+      baseUrl + '/api/project/' + id + '/recommendations?category=' + category
 
     if (flavor !== 'pocketcode' || category === 'example') {
       // Only the pocketcode flavor shows projects from all flavors!
@@ -237,10 +260,16 @@ function initProjects () {
   })
 }
 
-new TranslateComments($project.data('translated-by-line'), $project.data('google-translate-display-name'))
+new TranslateComments(
+  $project.data('translated-by-line'),
+  $project.data('google-translate-display-name'),
+)
 
 ProgramComments(
-  $projectComments.data('project-id'), 5, 5, 5,
+  $projectComments.data('project-id'),
+  5,
+  5,
+  5,
   $projectComments.data('total-number-of-comments'),
   $projectComments.data('trans-cancel'),
   $projectComments.data('trans-delete-it'),
@@ -254,7 +283,7 @@ ProgramComments(
   $projectComments.data('trans-pop-up-deleted-title'),
   $projectComments.data('trans-pop-up-deleted-text'),
   $projectComments.data('trans-no-admin-rights-message'),
-  $projectComments.data('trans-default-error-message')
+  $projectComments.data('trans-default-error-message'),
 )
 
 new TranslateProgram(
@@ -262,5 +291,5 @@ new TranslateProgram(
   $project.data('google-translate-display-name'),
   $project.data('project-id'),
   $project.data('has-description'),
-  $project.data('has-credits')
+  $project.data('has-credits'),
 )

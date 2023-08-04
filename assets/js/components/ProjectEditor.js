@@ -4,7 +4,7 @@ import { ProgramEditorDialog } from '../custom/ProgramEditorDialog'
 import { showCustomTopBarTitle } from '../layout/top_bar'
 import { DIALOG } from './ProjectEditorModel'
 
-export function ProjectEditor (projectDescriptionCredits, programId, model) {
+export function ProjectEditor(projectDescriptionCredits, programId, model) {
   this.body = $('body')
   this.editTextUI = $('#edit-text-ui')
   this.languageSelectorList = $('#edit-language-selector-list')
@@ -12,18 +12,20 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
   this.textLoadingSpinner = $('#edit-loading-spinner')
   this.saveButton = $('#edit-submit-button')
 
-  this.languageSelect = new MDCSelect(document.querySelector('#edit-language-selector'))
+  this.languageSelect = new MDCSelect(
+    document.querySelector('#edit-language-selector'),
+  )
 
   this.closeEditorDialog = new ProgramEditorDialog(
     projectDescriptionCredits.data('trans-close-editor-prompt'),
     projectDescriptionCredits.data('trans-save'),
-    projectDescriptionCredits.data('trans-discard')
+    projectDescriptionCredits.data('trans-discard'),
   )
 
   this.confirmDeleteDialog = new ProgramEditorDialog(
     projectDescriptionCredits.data('trans-confirm-delete'),
     projectDescriptionCredits.data('trans-cancel'),
-    projectDescriptionCredits.data('trans-delete')
+    projectDescriptionCredits.data('trans-delete'),
   )
 
   this.saveButton.on('click', model.save)
@@ -40,7 +42,13 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
 
   $('.mdc-text-field__input').on('input', model.onInput)
 
-  this.show = (navigationCallback, language, showLanguageSelect, showDeleteButton, headerText) => {
+  this.show = (
+    navigationCallback,
+    language,
+    showLanguageSelect,
+    showDeleteButton,
+    headerText,
+  ) => {
     this.navigationCallback = navigationCallback
     this.showLanguageSelect = showLanguageSelect
     this.showDeleteButton = showDeleteButton
@@ -64,7 +72,7 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
     window.history.pushState(
       { type: 'ProjectEditor', id: programId, full: true },
       $(this).text(),
-      '#editor'
+      '#editor',
     )
 
     $(window).on('popstate', model.popStateHandler)
@@ -89,7 +97,8 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
     this.languageSelectorList.empty()
 
     for (const language in languages) {
-      this.languageSelectorList.append(`<li class="mdc-list-item" data-value="${language}" role="option" tabindex="-1">\
+      this.languageSelectorList
+        .append(`<li class="mdc-list-item" data-value="${language}" role="option" tabindex="-1">\
         <span class="mdc-list-item__ripple"></span>\
         <span class="mdc-list-item__text">${languages[language]}</span>\
         </li>`)
@@ -109,7 +118,9 @@ export function ProjectEditor (projectDescriptionCredits, programId, model) {
     }
   })
 
-  model.setOnButtonEnabled((enabled) => this.saveButton.attr('disabled', !enabled))
+  model.setOnButtonEnabled((enabled) =>
+    this.saveButton.attr('disabled', !enabled),
+  )
 
   model.setOnLanguageSelected((languageIndex) => {
     this.languageSelect.selectedIndex = languageIndex

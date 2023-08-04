@@ -9,43 +9,42 @@
 #
 version: 2
 updates:
+  - package-ecosystem: 'docker'
+    directory: '/docker'
+    schedule:
+      interval: daily
+      time: '04:00'
+      timezone: 'Europe/Vienna'
+    reviewers:
+      - 'dmetzner'
+    open-pull-requests-limit: 99
 
-- package-ecosystem: "docker"
-  directory: "/docker"
-  schedule:
-    interval: daily
-    time: "04:00"
-    timezone: "Europe/Vienna"
-  reviewers:
-    - "dmetzner"
-  open-pull-requests-limit: 99
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '04:00'
+      timezone: 'Europe/Vienna'
+    reviewers:
+      - 'dmetzner'
+    open-pull-requests-limit: 99
 
-- package-ecosystem: "npm"
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-    timezone: "Europe/Vienna"
-  reviewers:
-    - "dmetzner"
-  open-pull-requests-limit: 99
+  - package-ecosystem: 'composer'
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '04:00'
+      timezone: 'Europe/Vienna'
+    reviewers:
+      - 'dmetzner'
+    open-pull-requests-limit: 99
 
-- package-ecosystem: "composer"
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-    timezone: "Europe/Vienna"
-  reviewers:
-    - "dmetzner"
-  open-pull-requests-limit: 99
-
-- package-ecosystem: "github-actions"
-  directory: "/"
-  schedule:
-    interval: daily
-    time: "04:00"
-    timezone: "Europe/Vienna"
-  reviewers:
-    - "dmetzner"
-  open-pull-requests-limit: 99
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: daily
+      time: '04:00'
+      timezone: 'Europe/Vienna'
+    reviewers:
+      - 'dmetzner'
+    open-pull-requests-limit: 99

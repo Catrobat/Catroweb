@@ -29,22 +29,26 @@ $(() => {
 /**
  *
  */
-function unfollow (id, username) {
+function unfollow(id, username) {
   const $followerItems = $('.follower-item-' + id)
-  const $buttons = $followerItems.find('.btn-follow button').attr('disabled', true)
+  const $buttons = $followerItems
+    .find('.btn-follow button')
+    .attr('disabled', true)
 
   Swal.fire({
     title: $followerOverview.data('unfollow-question'),
     icon: 'question',
     showCancelButton: true,
     allowOutsideClick: false,
-    confirmButtonText: $followerOverview.data('unfollow-button').replace('%username%', username),
+    confirmButtonText: $followerOverview
+      .data('unfollow-button')
+      .replace('%username%', username),
     cancelButtonText: $followerOverview.data('cancel-button'),
     customClass: {
       confirmButton: 'btn btn-primary',
-      cancelButton: 'btn btn-outline-primary'
+      cancelButton: 'btn btn-outline-primary',
     },
-    buttonsStyling: false
+    buttonsStyling: false,
   }).then((result) => {
     if (result.value) {
       $.ajax({
@@ -60,7 +64,7 @@ function unfollow (id, username) {
         },
         error: function (xhr) {
           handleError(xhr, $buttons)
-        }
+        },
       })
     } else {
       $buttons.attr('disabled', false)
@@ -68,7 +72,7 @@ function unfollow (id, username) {
   })
 }
 
-function follow (id) {
+function follow(id) {
   const $followerItems = $('.follower-item-' + id)
   const $buttons = $followerItems.find('.btn-follow button')
   $buttons.attr('disabled', true)
@@ -85,11 +89,11 @@ function follow (id) {
     },
     error: function (xhr) {
       handleError(xhr, $buttons)
-    }
+    },
   })
 }
 
-function handleError (xhr, $buttons) {
+function handleError(xhr, $buttons) {
   if (xhr.status === 401) {
     // a user must be logged in to (un)follow someone
     window.location.href = $followerOverview.data('login-url')
@@ -100,15 +104,15 @@ function handleError (xhr, $buttons) {
   fireSomeThingWentWrongPopUp()
 }
 
-function fireSomeThingWentWrongPopUp () {
+function fireSomeThingWentWrongPopUp() {
   Swal.fire({
     title: $followerOverview.data('something-went-wrong-error'),
     text: $followerOverview.data('follow-error'),
     icon: 'error',
     customClass: {
-      confirmButton: 'btn btn-primary'
+      confirmButton: 'btn btn-primary',
     },
     buttonsStyling: false,
-    allowOutsideClick: false
+    allowOutsideClick: false,
   })
 }

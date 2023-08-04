@@ -2,7 +2,7 @@ import $ from 'jquery'
 import Clipboard from 'clipboard'
 import { showSnackbar } from '../components/snackbar'
 
-export function shareLink (
+export function shareLink(
   themeDisplayName,
   checkOutTranslation,
   url,
@@ -10,15 +10,16 @@ export function shareLink (
   shareError,
   copy,
   clipboardSuccess,
-  clipboardFail
+  clipboardFail,
 ) {
   if (navigator.share) {
     $('#top-app-bar__btn-share').on('click', function () {
-      navigator.share({
-        title: themeDisplayName,
-        text: checkOutTranslation,
-        url
-      })
+      navigator
+        .share({
+          title: themeDisplayName,
+          text: checkOutTranslation,
+          url,
+        })
         .then(() => {
           showSnackbar('#share-snackbar', shareSuccess)
         })
