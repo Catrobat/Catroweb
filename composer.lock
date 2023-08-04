@@ -7396,16 +7396,16 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "2.2.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "9ba0eba8980ef5806abdeb0ad62599f5594ae3a4"
+                "reference": "c81c17f49a76af6a0d1e4f37469315aea01eaa00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/9ba0eba8980ef5806abdeb0ad62599f5594ae3a4",
-                "reference": "9ba0eba8980ef5806abdeb0ad62599f5594ae3a4",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/c81c17f49a76af6a0d1e4f37469315aea01eaa00",
+                "reference": "c81c17f49a76af6a0d1e4f37469315aea01eaa00",
                 "shasum": ""
             },
             "require": {
@@ -7468,7 +7468,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/2.2.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/2.3.0"
             },
             "funding": [
                 {
@@ -7488,7 +7488,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-31T13:07:55+00:00"
+            "time": "2023-08-01T23:11:06+00:00"
         },
         {
             "name": "sonata-project/user-bundle",
