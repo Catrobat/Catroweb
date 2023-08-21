@@ -1,7 +1,6 @@
 import { ProgramComments } from './ProgramComments'
 import { TranslateComments } from './TranslateComments'
 import $ from 'jquery'
-const $project = $('.js-project')
 
 require('../../styles/custom/program.scss')
 
@@ -29,6 +28,6 @@ ProgramComments(
 )
 
 new TranslateComments(
-  $project.data('translated-by-line'),
-  $project.data('google-translate-display-name'),
+  $projectComments.data('translated-by-line'),
+  $projectComments.data('google-translate-display-name'),
 )
