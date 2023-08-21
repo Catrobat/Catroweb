@@ -14,9 +14,8 @@ export class TranslateComments extends Translation {
       const commentId = $(this)
         .attr('id')
         .substring('comment-translation-button-'.length)
-      const translateCommentUrl = $('.comment-translation').data(
-        'path-translate-comment',
-      )
+      const matchingContainer = $('.comment-translation[data-translate-comment-id="translate-comment-' + commentId + '"]')
+      const translateCommentUrl = $(matchingContainer).data('path-translate-comment')
 
       $(this).hide()
 
