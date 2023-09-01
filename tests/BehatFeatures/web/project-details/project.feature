@@ -5,9 +5,12 @@ Feature: As a visitor I want to see a project page
     Given there are users:
       | id | name     |
       | 1  | Catrobat |
+      | 2  | Catrobat2 |
     And there are projects:
       | id | name      | description    | owned by | apk_ready |
       | 1  | project 1 | my description | Catrobat | true      |
+      | 2  | project 2 | my description | Catrobat2 | true      |
+
 
   Scenario: Viewing project page
     Given I am on "/app/project/1"
@@ -49,3 +52,22 @@ Feature: As a visitor I want to see a project page
     And I should not see "Download as app"
     And I should see "Statistics"
     And I should see "Code View"
+
+  Scenario: Steal Project should work when logged in
+    Given I log in as "Catrobat"
+    And I am on "/app/project/2"
+    And I wait for the page to be loaded
+    When I click "#stealProjectButton"
+    And I wait for the page to be loaded
+    Then the element "#stealProjectButton" should not exist
+
+  Scenario: Steal Project should not work when not logged in
+    Given I am on "/app/project/1"
+    And I wait for the page to be loaded
+    Then the element "#stealProjectButton" should not exist
+
+  Scenario: Steal Project should not work when you are the Project Owner
+    Given I log in as "Catrobat2"
+    And I am on "/app/project/2"
+    And I wait for the page to be loaded
+    Then the element "#stealProjectButton" should not exist

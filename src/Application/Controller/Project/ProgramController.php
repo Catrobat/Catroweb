@@ -109,6 +109,27 @@ class ProgramController extends AbstractController
     ]);
   }
 
+    #[Route(path: '/project/steal/{id}', name: 'app_project_steal')]
+    public function stealProject(Request $request, string $id): Response
+    {
+        $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+        if (null === $project) {
+            $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
+            return $this->redirectToRoute('index');
+        }
+        $user = $this->getUser();
+        $logged_in = null !== $user;
+        $this->addFlash('snackbar', 'This project has been successfully stolen');
+        $project->setUser($this->getUser());
+        $this->entity_manager->persist($project);
+        $this->entity_manager->flush();
+        $my_program = $logged_in && $project->getUser() === $user;
+
+        $currentUrl = $request->getUri();
+        $currentUrl =   str_replace('/steal', '', $currentUrl);
+        return $this->redirect($currentUrl);
+
+    }
   /**
    * @throws NoResultException
    */

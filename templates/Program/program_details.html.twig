@@ -43,24 +43,16 @@
   </div>
 
   <div class="row mb-4">
-    <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeStatsButton',
-        'suffix': '-small',
-        'url': path('code_statistics', {'id': program.id }),
-        'icon': 'show_chart',
-        'text': "statistics"|trans({}, "catroweb")
-      } %}
-    </div>
-    <div class="col-6 mb-3 d-lg-none mt-3">
-      {% include 'components/redirect_button.twig' with {
-        'id': 'projectCodeViewButton',
-        'suffix': '-small',
-        'url': path('code_view', {'id': program.id }),
-        'icon': 'extension',
-        'text': "codeview.title"|trans({}, "catroweb")
-      } %}
-    </div>
+
+    {% if app.user and not my_program%}
+      <div class="row mb-4 text-center">
+        <div class="col-12 mb-3 d-lg-block mt-3" id="stealProjectButton">
+          <a href="{{ path('app_project_steal', {'id': program.id }) }}" class="btn btn-primary" >
+            {{ "Steal Project"|trans({}, "catroweb") }}
+          </a>
+        </div>
+      </div>
+    {% endif %}
   </div>
 
 </div>
