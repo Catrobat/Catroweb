@@ -120,7 +120,10 @@ class ProgramController extends AbstractController
     }
     /** @var User|null $user */
     $user = $this->getUser();
+<<<<<<< HEAD
     $user = $this->getUser();
+=======
+>>>>>>> 318d87dd2 (SHARE-557 Introduction Task)
     $logged_in = null !== $user;
     $this->addFlash('snackbar', 'This project has been successfully stolen');
     $project->setUser($user);
