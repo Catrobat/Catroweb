@@ -2,7 +2,6 @@
 
 namespace App\Api\Services\Base;
 
-use Exception;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 trait TranslatorAwareTrait
@@ -29,7 +28,7 @@ trait TranslatorAwareTrait
 
     try {
       return $this->translator->trans($id, $parameter, $domain, $locale_with_underscore);
-    } catch (Exception) {
+    } catch (\Exception) {
       $this->locale = $this->getLocaleFallback();
 
       return $this->translator->trans($id, $parameter, $domain, $this->locale);

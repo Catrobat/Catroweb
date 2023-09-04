@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\Project\ProgramManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -56,7 +55,7 @@ class CreateProgramInappropriateReportCommand extends Command
 
     try {
       $this->reportProgram($program, $user, $note);
-    } catch (Exception) {
+    } catch (\Exception) {
       return 3;
     }
     $output->writeln('Reporting '.$program->getName());

@@ -17,7 +17,6 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Behat\Tester\Exception\PendingException;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Exception;
 use FriendsOfBehat\SymfonyExtension\Context\Environment\InitializedSymfonyExtensionEnvironment;
 use Lexik\Bundle\JWTAuthenticationBundle\Exception\JWTEncodeFailureException;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
@@ -2577,7 +2576,7 @@ class ApiContext implements Context
           file_put_contents($this->ERROR_DIR.'errors.json', $response->getContent());
         }
       }
-    } catch (Exception) {
+    } catch (\Exception) {
       file_put_contents($this->ERROR_DIR.'errors.json', '');
     }
   }

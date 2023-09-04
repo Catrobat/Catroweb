@@ -5,7 +5,6 @@ namespace App\System\Testing\PhpUnit\Hook;
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Testing\DataFixtures\DataBaseUtils;
-use InvalidArgumentException;
 use PHPUnit\Runner\BeforeFirstTestHook;
 use PHPUnit\Runner\BeforeTestHook;
 
@@ -31,7 +30,7 @@ class RefreshTestEnvHook implements BeforeTestHook, BeforeFirstTestHook
   {
     try {
       FileHelper::emptyDirectory(self::$CACHE_DIR);
-    } catch (InvalidArgumentException) {
+    } catch (\InvalidArgumentException) {
     }
   }
 

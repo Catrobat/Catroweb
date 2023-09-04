@@ -22,7 +22,6 @@ use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -155,7 +154,7 @@ class ProgramController extends AbstractController
     }
     try {
       $this->program_manager->changeLike($project, $user, $type, $action);
-    } catch (InvalidArgumentException) {
+    } catch (\InvalidArgumentException) {
       if ($request->isXmlHttpRequest()) {
         return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
