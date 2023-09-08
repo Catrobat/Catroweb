@@ -13,7 +13,7 @@ use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 
-final class ProjectsApiProcessor extends AbstractApiProcessor
+class ProjectsApiProcessor extends AbstractApiProcessor
 {
   final public const SERVER_ERROR_SAVE_XML = 1;
   final public const SERVER_ERROR_SCREENSHOT = 2;
@@ -22,9 +22,7 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
     private readonly EntityManagerInterface $entity_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly ProgramFileRepository $file_repository,
-    private readonly ScreenshotRepository $screenshot_repository)
-  {
-  }
+    private readonly ScreenshotRepository $screenshot_repository) {}
 
   /**
    * @throws \Exception

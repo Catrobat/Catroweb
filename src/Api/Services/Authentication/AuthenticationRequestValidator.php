@@ -8,7 +8,7 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 
-final class AuthenticationRequestValidator extends AbstractRequestValidator
+class AuthenticationRequestValidator extends AbstractRequestValidator
 {
   public function validateGoogleIdToken(string $id_token): bool
   {

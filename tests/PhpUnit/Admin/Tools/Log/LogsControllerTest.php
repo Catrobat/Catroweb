@@ -6,6 +6,7 @@ use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogLine;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\DefaultTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -23,12 +24,7 @@ class LogsControllerTest extends DefaultTestCase
     $this->object = $this->getMockForAbstractClass(LogsController::class);
   }
 
-  protected function tearDown(): void
-  {
-    parent::tearDown();
-  }
-
-  public function getLogFileContentDataProvider(): \Generator
+  public static function provideLogFileContentData(): \Generator
   {
     yield 'case 1' => [
       ['[2020-10-20T19:20:55.523679+02:00] php.INFO: User Deprecated'],
@@ -86,9 +82,8 @@ class LogsControllerTest extends DefaultTestCase
 
   /**
    * @throws \ReflectionException
-   *
-   * @dataProvider getLogFileContentDataProvider
    */
+  #[DataProvider('provideLogFileContentData')]
   public function testGetLogFileContent(array $actualFileLines, array $searchFilters, array $expectedLines): void
   {
     $logDir = 'var/log/LogFilesTest/';

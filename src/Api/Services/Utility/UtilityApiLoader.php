@@ -7,11 +7,9 @@ use App\DB\Entity\Flavor;
 use App\DB\Entity\Survey;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class UtilityApiLoader extends AbstractApiLoader
+class UtilityApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly EntityManagerInterface $entity_manager)
-  {
-  }
+  public function __construct(private readonly EntityManagerInterface $entity_manager) {}
 
   public function getSurvey(array $criteria): ?Survey
   {

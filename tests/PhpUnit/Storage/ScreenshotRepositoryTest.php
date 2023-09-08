@@ -4,7 +4,7 @@ namespace Tests\PhpUnit\Storage;
 
 use App\Storage\FileHelper;
 use App\Storage\ScreenshotRepository;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBag;
@@ -40,11 +40,11 @@ class ScreenshotRepositoryTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->screenshot_dir = RefreshTestEnvHook::$CACHE_DIR.'screenshot_repository/';
-    $this->thumbnail_dir = RefreshTestEnvHook::$CACHE_DIR.'thumbnail_repository/';
-    $this->tmp_dir = RefreshTestEnvHook::$CACHE_DIR.'tmp/';
-    $this->tmp_extract_dir = RefreshTestEnvHook::$CACHE_DIR.'extract/';
-    $this->tmp_zip_dir = RefreshTestEnvHook::$CACHE_DIR.'zips/';
+    $this->screenshot_dir = BootstrapExtension::$CACHE_DIR.'screenshot_repository/';
+    $this->thumbnail_dir = BootstrapExtension::$CACHE_DIR.'thumbnail_repository/';
+    $this->tmp_dir = BootstrapExtension::$CACHE_DIR.'tmp/';
+    $this->tmp_extract_dir = BootstrapExtension::$CACHE_DIR.'extract/';
+    $this->tmp_zip_dir = BootstrapExtension::$CACHE_DIR.'zips/';
     $this->screenshot_base_url = 'screenshots/';
     $this->thumbnail_base_url = 'thumbnails/';
     $this->filesystem = new Filesystem();
@@ -55,7 +55,11 @@ class ScreenshotRepositoryTest extends TestCase
     $this->filesystem->mkdir($this->tmp_zip_dir);
 
     $this->project_id = 'test_id';
+    $this->filesystem->mkdir($this->screenshot_dir.$this->project_id);
+    $this->filesystem->mkdir($this->thumbnail_dir.$this->project_id);
+    $this->filesystem->mkdir($this->tmp_dir.$this->project_id);
     $this->filesystem->mkdir($this->tmp_extract_dir.$this->project_id);
+    $this->filesystem->mkdir($this->tmp_zip_dir.$this->project_id);
 
     $this->screenshot_repository = new ScreenshotRepository(new ParameterBag([
       'catrobat.screenshot.dir' => $this->screenshot_dir,
@@ -72,6 +76,9 @@ class ScreenshotRepositoryTest extends TestCase
   {
     FileHelper::removeDirectory($this->screenshot_dir);
     FileHelper::removeDirectory($this->thumbnail_dir);
+    FileHelper::removeDirectory($this->tmp_dir);
+    FileHelper::removeDirectory($this->tmp_extract_dir);
+    FileHelper::removeDirectory($this->tmp_zip_dir);
   }
 
   public function testInitialization(): void
@@ -116,7 +123,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testStoresAScreenshot(): void
   {
-    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     Assert::assertFileDoesNotExist($this->screenshot_dir.'screen_'.$this->project_id.'.png');
     $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
     Assert::assertFileExists($this->screenshot_dir.'screen_'.$this->project_id.'.png');
@@ -127,7 +134,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testOverwriteScreenshot(): void
   {
-    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     Assert::assertFileDoesNotExist($this->tmp_extract_dir.'/'.$this->project_id.'/manual_screenshot.png');
     $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
     Assert::assertFileExists($this->tmp_extract_dir.'/'.$this->project_id.'/manual_screenshot.png');
@@ -138,7 +145,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testGeneratesAThumbnail(): void
   {
-    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     Assert::assertFileDoesNotExist($this->thumbnail_dir.'screen_'.$this->project_id.'.png');
     $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
     Assert::assertFileExists($this->thumbnail_dir.'screen_'.$this->project_id.'.png');
@@ -149,7 +156,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testReturnsTheUrlOfAScreenshot(): void
   {
-    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
     $web_path = $this->screenshot_repository->getScreenshotWebPath($this->project_id);
     $this->assertStringStartsWith($this->screenshot_base_url.'screen_'.$this->project_id.'.png', $web_path);
@@ -161,7 +168,7 @@ class ScreenshotRepositoryTest extends TestCase
    */
   public function testReturnsTheUrlOfAThumbnail(): void
   {
-    $filepath = RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
+    $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
     $web_path = $this->screenshot_repository->getThumbnailWebPath($this->project_id);
     $this->assertStringStartsWith($this->thumbnail_base_url.'screen_'.$this->project_id.'.png', $web_path);

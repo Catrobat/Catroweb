@@ -4,7 +4,7 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -14,14 +14,9 @@ use PHPUnit\Framework\TestCase;
  */
 class CategoriesTest extends TestCase
 {
-  protected function setUp(): void
-  {
-  }
+  protected function setUp(): void {}
 
-  /**
-   * @test
-   */
-  public function mustDetectAllControlBricks(): void
+  public function testMustDetectAllControlBricks(): void
   {
     $category = 'control';
     $stats = $this->loadStatistics($category);
@@ -29,10 +24,7 @@ class CategoriesTest extends TestCase
     $this->assertBrickCount($category, 19, 15, $stats);
   }
 
-  /**
-   * @test
-   */
-  public function mustDetectAllDataBricks(): void
+  public function testMustDetectAllDataBricks(): void
   {
     $category = 'data';
     $stats = $this->loadStatistics($category);
@@ -40,10 +32,7 @@ class CategoriesTest extends TestCase
     $this->assertBrickCount($category, 16, 16, $stats);
   }
 
-  /**
-   * @test
-   */
-  public function mustDetectAllLookBricks(): void
+  public function testMustDetectAllLookBricks(): void
   {
     $category = 'looks';
     $stats = $this->loadStatistics($category);
@@ -53,8 +42,8 @@ class CategoriesTest extends TestCase
 
   private function loadStatistics(string $category): CodeStatistic
   {
-    $xml = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/CategoryPrograms/'.$category.'.xml');
-    self::assertNotFalse($xml);
+    $xml = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/CategoryPrograms/'.$category.'.xml');
+    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     $code_statistic = new CodeStatistic();
     $code_statistic->update(new ParsedScene($xml->xpath('//scene')[0]));
 

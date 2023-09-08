@@ -16,11 +16,9 @@ use OpenAPI\Server\Model\UpdateUserErrorResponse;
 use OpenAPI\Server\Model\UpdateUserRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-final class UserApi extends AbstractApiController implements UserApiInterface
+class UserApi extends AbstractApiController implements UserApiInterface
 {
-  public function __construct(private readonly UserApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly UserApiFacade $facade) {}
 
   /**
    * @throws \Exception

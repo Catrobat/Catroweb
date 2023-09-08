@@ -23,8 +23,7 @@ class TwigExtension extends AbstractExtension
     private readonly ParameterBagInterface $parameter_bag,
     private readonly string $catrobat_translation_dir,
     private readonly TranslatorInterface $translator
-  ) {
-  }
+  ) {}
 
   public function getFilters(): array
   {

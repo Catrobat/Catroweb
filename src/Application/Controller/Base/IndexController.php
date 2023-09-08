@@ -13,9 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository)
-  {
-  }
+  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository) {}
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
   public function indexAction(Request $request): Response

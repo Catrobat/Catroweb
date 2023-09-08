@@ -15,9 +15,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UploadExceptionEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly TranslatorInterface $translator)
-  {
-  }
+  public function __construct(private readonly TranslatorInterface $translator) {}
 
   public function onKernelException(ExceptionEvent $event): void
   {

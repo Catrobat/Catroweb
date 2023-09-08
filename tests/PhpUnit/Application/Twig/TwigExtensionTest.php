@@ -46,10 +46,7 @@ class TwigExtensionTest extends TestCase
     $this->assertTrue($this->isSelected($short, $language_options));
   }
 
-  /**
-   * @test
-   */
-  public function englishMustBeSelected(): void
+  public function testEnglishMustBeSelected(): void
   {
     $short = 'en_GB';
     $notShort = 'de';
@@ -61,10 +58,7 @@ class TwigExtensionTest extends TestCase
     $this->assertFalse($this->isSelected($notShort, $list));
   }
 
-  /**
-   * @test
-   */
-  public function germanMustBeSelected(): void
+  public function testGermanMustBeSelected(): void
   {
     $short = 'de_DE';
     $notShort = 'en_GB';

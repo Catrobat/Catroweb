@@ -8,6 +8,7 @@ use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use App\Translation\TranslationApiInterface;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
@@ -113,9 +114,7 @@ class TranslationDelegateTest extends TestCase
     $this->assertNull($result);
   }
 
-  /**
-   * @dataProvider provideInvalidLanguageCode
-   */
+  #[DataProvider('provideInvalidLanguageCode')]
   public function testInvalidLanguageCode(string $invalid_code): void
   {
     $this->expectException(\InvalidArgumentException::class);
@@ -230,7 +229,7 @@ class TranslationDelegateTest extends TestCase
     $this->assertEquals($cached_translation, $actual_result);
   }
 
-  public function provideInvalidLanguageCode(): array
+  public static function provideInvalidLanguageCode(): array
   {
     return [
       [''],

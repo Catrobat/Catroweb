@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class ProjectsRequestValidator extends AbstractRequestValidator
+class ProjectsRequestValidator extends AbstractRequestValidator
 {
   final public const MIN_NAME_LENGTH = 1;
   final public const MAX_NAME_LENGTH = 255;

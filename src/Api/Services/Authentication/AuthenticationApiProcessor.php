@@ -12,11 +12,9 @@ use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use GuzzleHttp\Client;
 
-final class AuthenticationApiProcessor extends AbstractApiProcessor
+class AuthenticationApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager)
-  {
-  }
+  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager) {}
 
   public function createJWTByUser(User $user): string
   {

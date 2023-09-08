@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class MediaLibraryResponseManager extends AbstractResponseManager
+class MediaLibraryResponseManager extends AbstractResponseManager
 {
   public function __construct(
     TranslatorInterface $translator,

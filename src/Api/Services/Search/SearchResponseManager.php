@@ -13,7 +13,7 @@ use OpenAPI\Server\Model\SearchResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class SearchResponseManager extends AbstractResponseManager
+class SearchResponseManager extends AbstractResponseManager
 {
   public function __construct(
     TranslatorInterface $translator,

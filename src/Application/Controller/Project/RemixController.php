@@ -13,9 +13,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemixController extends AbstractController
 {
-  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager)
-  {
-  }
+  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager) {}
 
   #[Route(path: '/project/{id}/remix_graph', name: 'remix_graph', methods: ['GET'])]
   public function view(string $id): Response

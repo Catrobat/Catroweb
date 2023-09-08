@@ -14,9 +14,7 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
  */
 class MyUuidGenerator extends AbstractIdGenerator
 {
-  public function __construct(protected UuidGenerator $uuid_generator)
-  {
-  }
+  public function __construct(protected UuidGenerator $uuid_generator) {}
 
   private static string $next_value = '';
 

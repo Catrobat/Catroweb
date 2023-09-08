@@ -5,7 +5,7 @@ namespace App\Api\Services;
 /**
  * Class ValidationWrapper.
  */
-final class ValidationWrapper
+class ValidationWrapper
 {
   private array $errors = [];
 

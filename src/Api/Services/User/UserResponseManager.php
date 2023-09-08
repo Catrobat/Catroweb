@@ -12,7 +12,7 @@ use OpenAPI\Server\Model\JWTResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class UserResponseManager extends AbstractResponseManager
+class UserResponseManager extends AbstractResponseManager
 {
   public function __construct(
     TranslatorInterface $translator,

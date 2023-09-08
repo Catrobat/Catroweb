@@ -4,8 +4,9 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedSimpleProgram;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,17 +20,13 @@ class ParsedSimpleProgramTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $this->program = new ParsedSimpleProgram($xml_properties);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->program, $method_name));
   }
@@ -37,7 +34,7 @@ class ParsedSimpleProgramTest extends TestCase
   /**
    * @return string[][]
    */
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['hasScenes'],
@@ -46,21 +43,17 @@ class ParsedSimpleProgramTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function hasScenesMustReturnFalse(): void
+  public function testHasScenesMustReturnFalse(): void
   {
     $this->assertFalse($this->program->hasScenes());
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getCodeStatisticMustReturnCodeStatistic(): void
+  public function testGetCodeStatisticMustReturnCodeStatistic(): void
   {
     $actual = $this->program->getCodeStatistic();
     $expected = CodeStatistic::class;

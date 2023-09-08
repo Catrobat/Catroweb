@@ -13,7 +13,7 @@ class CatrobatCodeParser
   {
     try {
       $parsed_program = $this->parseProgram($extracted_catrobat_program);
-    } catch (\Exception) {
+    } catch (\Throwable) {
       $parsed_program = null;
     }
 

@@ -35,6 +35,8 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress UndefinedPropertyAssignment
    */
   public function update(ExtractedCatrobatFile $file, Program $program): void
   {
@@ -67,7 +69,6 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
       $this->remix_manager->addScratchPrograms($scratch_info_data);
       $this->remix_manager->addRemixes($program, $remixes_data);
     }
-
     $program_xml_properties->header->remixOf = $remix_url_string;
     $program_xml_properties->header->url = $this->router->generate('program', ['id' => $program->getId(), 'theme' => 'pocketcode']);
     $program_xml_properties->header->userHandle = $program->getUser()->getUsername();

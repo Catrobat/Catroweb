@@ -5,6 +5,7 @@ namespace Tests\PhpUnit\Api\Services\Base;
 use App\Api\Exceptions\ApiException;
 use App\Api\Services\Base\PandaAuthenticationTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -38,10 +39,9 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
    *
    * @covers \App\Api\Services\Base\PandaAuthenticationTrait::setPandaAuth
    *
-   * @dataProvider dataProviderPandaAuth
-   *
    * @throws \Exception
    */
+  #[DataProvider('providePandaAuthData')]
   public function testSetPandaAuth(?string $value, bool $expect_exception, string $expected = ''): void
   {
     if ($expect_exception) {
@@ -53,7 +53,7 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
     $this->assertEquals($expected, $this->object->getAuthenticationToken());
   }
 
-  public function dataProviderPandaAuth(): array
+  public static function providePandaAuthData(): array
   {
     return [
       'Empty' => [

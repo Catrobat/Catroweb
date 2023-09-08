@@ -43,8 +43,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
     private readonly ExtractedFileRepository $extracted_file_repository,
     protected TokenStorageInterface $security_token_storage,
     protected ParameterBagInterface $parameter_bag
-  ) {
-  }
+  ) {}
 
   /**
    * @param mixed|Program $object
@@ -181,7 +180,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
         'template' => 'Admin/program_containing_code_objects.html.twig',
       ])
       ->add('Actions', null, [
-        'accessor' => function ($subject): void { }, // Just some buttons, nothing to "access"!
+        'accessor' => function ($subject): void {}, // Just some buttons, nothing to "access"!
         'template' => 'Admin/program_approve_action.html.twig',
       ])
     ;

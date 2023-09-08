@@ -15,10 +15,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class CleanLogsTest extends KernelTestCase
 {
-  /**
-   * @test
-   */
-  public function cleanLogs(): void
+  public function testCleanLogs(): void
   {
     // setup app
     $kernel = static::createKernel();

@@ -6,11 +6,9 @@ use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
 
-final class AuthenticationApiLoader extends AbstractApiLoader
+class AuthenticationApiLoader extends AbstractApiLoader
 {
-  public function __construct(protected UserManager $user_manager)
-  {
-  }
+  public function __construct(protected UserManager $user_manager) {}
 
   public function findUserByUploadToken(string $upload_token): ?User
   {

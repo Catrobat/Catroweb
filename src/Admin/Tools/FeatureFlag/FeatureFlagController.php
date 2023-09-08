@@ -11,9 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class FeatureFlagController extends CRUDController
 {
-  public function __construct(protected FeatureFlagManager $manager)
-  {
-  }
+  public function __construct(protected FeatureFlagManager $manager) {}
 
   public function setFlagAction(): RedirectResponse
   {

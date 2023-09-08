@@ -18,11 +18,9 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
+class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
-  public function __construct(private readonly ProjectsApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly ProjectsApiFacade $facade) {}
 
   public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
   {

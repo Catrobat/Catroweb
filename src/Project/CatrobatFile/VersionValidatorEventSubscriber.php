@@ -32,13 +32,14 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
 
   public function validate(\SimpleXMLElement $xml): void
   {
-    if (version_compare($xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<')) {
+    /* @psalm-suppress InvalidPropertyFetch */
+    if (version_compare((string) $xml->header->catrobatLanguageVersion, self::MIN_LANGUAGE_VERSION, '<')) {
       throw new InvalidCatrobatFileException('errors.languageversion.tooold', 518);
     }
 
     $version = ltrim((string) $xml->header->applicationVersion, 'v');
 
-    switch ($xml->header->platform) {
+    switch ((string) $xml->header->platform) {
       case 'Android':
         if (version_compare($version, self::MIN_ANDROID_PROGRAM_VERSION, '<')) {
           throw new InvalidCatrobatFileException('errors.programversion.tooold', 519, 'android catrobat version too old');
@@ -46,13 +47,13 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
         break;
 
       case 'Windows':
-        if (version_compare($xml->header->applicationVersion, self::MIN_WINDOWS_PROGRAM_VERSION, '<')) {
+        if (version_compare((string) $xml->header->applicationVersion, self::MIN_WINDOWS_PROGRAM_VERSION, '<')) {
           throw new InvalidCatrobatFileException('errors.programversion.tooold', 519, 'windows catrobat version too old');
         }
         break;
 
       case 'iOS':
-        if (version_compare($xml->header->applicationVersion, self::MIN_IOS_PROGRAM_VERSION, '<')) {
+        if (version_compare((string) $xml->header->applicationVersion, self::MIN_IOS_PROGRAM_VERSION, '<')) {
           throw new InvalidCatrobatFileException('errors.programversion.tooold', 519, 'ios catrobat version too old');
         }
         break;

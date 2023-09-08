@@ -542,6 +542,8 @@ trait ContextTrait
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress UndefinedPropertyAssignment
    */
   public function generateProgramFileWith(mixed $parameters, mixed $is_embroidery = false): string
   {
@@ -555,6 +557,9 @@ trait ContextTrait
       $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/base', $new_program_dir);
     }
     $properties = simplexml_load_file($new_program_dir.'/code.xml');
+    if (!$properties) {
+      throw new \Exception("Can't load code.xml file");
+    }
 
     foreach ($parameters as $name => $value) {
       switch ($name) {
