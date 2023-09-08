@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class UserRequestValidator extends AbstractRequestValidator
+class UserRequestValidator extends AbstractRequestValidator
 {
   public const MIN_PASSWORD_LENGTH = 6;
   public const MAX_PASSWORD_LENGTH = 4096;

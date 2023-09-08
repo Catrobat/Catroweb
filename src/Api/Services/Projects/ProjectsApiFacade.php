@@ -6,7 +6,7 @@ use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 
-final class ProjectsApiFacade extends AbstractApiFacade
+class ProjectsApiFacade extends AbstractApiFacade
 {
   public function __construct(
     AuthenticationManager $authentication_manager,

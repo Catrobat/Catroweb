@@ -5,7 +5,7 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -20,7 +20,7 @@ class CatrobatFileExtractorTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->catrobat_file_extractor = new CatrobatFileExtractor(RefreshTestEnvHook::$CACHE_DIR, '/webpath');
+    $this->catrobat_file_extractor = new CatrobatFileExtractor(BootstrapExtension::$CACHE_DIR, '/webpath');
   }
 
   public function testInitialization(): void
@@ -39,7 +39,7 @@ class CatrobatFileExtractorTest extends TestCase
    */
   public function testExtractsAValidFile(): void
   {
-    $valid_catrobat_file = new File(RefreshTestEnvHook::$FIXTURES_DIR.'/test.catrobat');
+    $valid_catrobat_file = new File(BootstrapExtension::$FIXTURES_DIR.'/test.catrobat');
     $extracted_file = $this->catrobat_file_extractor->extract($valid_catrobat_file);
     $this->assertInstanceOf(ExtractedCatrobatFile::class, $extracted_file);
   }
@@ -49,7 +49,7 @@ class CatrobatFileExtractorTest extends TestCase
    */
   public function testThrowsAnExceptionWhileExtractingAnInvalidFile(): void
   {
-    $invalid_catrobat_file = new File(RefreshTestEnvHook::$FIXTURES_DIR.'/invalid_archive.catrobat');
+    $invalid_catrobat_file = new File(BootstrapExtension::$FIXTURES_DIR.'/invalid_archive.catrobat');
     $this->expectException(InvalidCatrobatFileException::class);
     $this->catrobat_file_extractor->extract($invalid_catrobat_file);
   }

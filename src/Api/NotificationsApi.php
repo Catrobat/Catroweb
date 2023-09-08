@@ -8,11 +8,9 @@ use OpenAPI\Server\Api\NotificationsApiInterface;
 use OpenAPI\Server\Model\NotificationsCountResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
+class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
-  public function __construct(private readonly NotificationsApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly NotificationsApiFacade $facade) {}
 
   public function notificationIdReadPut(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {

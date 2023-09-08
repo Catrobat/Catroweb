@@ -8,11 +8,9 @@ use OpenAPI\Server\Api\SearchApiInterface;
 use OpenAPI\Server\Model\SearchResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class SearchApi extends AbstractApiController implements SearchApiInterface
+class SearchApi extends AbstractApiController implements SearchApiInterface
 {
-  public function __construct(private readonly SearchApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly SearchApiFacade $facade) {}
 
   /**
    * @throws \JsonException

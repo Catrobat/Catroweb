@@ -5,8 +5,9 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\Constants;
 use App\Project\CatrobatCode\Parser\Scripts\Script;
 use App\Project\CatrobatCode\Parser\Scripts\ScriptFactory;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -36,19 +37,15 @@ class ScriptsTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_script = $xml_properties->xpath('//script');
     Assert::assertNotFalse($xml_script);
     $this->script_xml_properties_list = $xml_script;
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     foreach ($this->script_xml_properties_list as $script_xml_properties) {
       $script = ScriptFactory::generate($script_xml_properties);
@@ -56,7 +53,7 @@ class ScriptsTest extends TestCase
     }
   }
 
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getType'],
@@ -67,13 +64,10 @@ class ScriptsTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends      mustHaveMethod
-   *
-   * @dataProvider provideScriptXMLProperties
+   * @depends testMustHaveMethod
    */
-  public function factoryMustGenerateValidScript(mixed $script_xml_properties, mixed $expected): void
+  #[DataProvider('provideScriptXMLProperties')]
+  public function testFactoryMustGenerateValidScript(mixed $script_xml_properties, mixed $expected): void
   {
     $actual = ScriptFactory::generate($script_xml_properties);
 
@@ -87,17 +81,17 @@ class ScriptsTest extends TestCase
   /**
    * @return mixed[][]
    */
-  public function provideScriptXMLProperties(): array
+  public static function provideScriptXMLProperties(): array
   {
     $data = [];
 
     $reference_output =
-      file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
+      file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/script_reference.output', FILE_IGNORE_NEW_LINES);
     Assert::assertNotFalse($reference_output);
 
     $reference_output_index = 0;
 
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
 
     $xml_script = $xml_properties->xpath('//script');
@@ -122,11 +116,9 @@ class ScriptsTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function factoryMustGenerateUnknownScriptOtherwise(): ?Script
+  public function testFactoryMustGenerateUnknownScriptOtherwise(): ?Script
   {
     $script_xml_properties = $this->script_xml_properties_list[0];
     // @phpstan-ignore-next-line
@@ -147,11 +139,11 @@ class ScriptsTest extends TestCase
   }
 
   /**
-   * @test
+   * @depends testMustHaveMethod
    *
-   * @depends mustHaveMethod
+   * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function outCommentedScriptsMustContainOnlyGrayBricks(): void
+  public function testOutCommentedScriptsMustContainOnlyGrayBricks(): void
   {
     $script_xml_properties = $this->script_xml_properties_list[0];
     $script_xml_properties->commentedOut = 'true'; // Fake out-commented script

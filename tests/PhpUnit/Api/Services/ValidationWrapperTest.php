@@ -86,8 +86,6 @@ final class ValidationWrapperTest extends DefaultTestCase
    * @small
    *
    * @covers \App\Api\Services\ValidationWrapper::clear
-   *
-   * @dataProvider
    */
   public function testClear(): void
   {

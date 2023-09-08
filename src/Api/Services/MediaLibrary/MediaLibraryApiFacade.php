@@ -5,7 +5,7 @@ namespace App\Api\Services\MediaLibrary;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
 
-final class MediaLibraryApiFacade extends AbstractApiFacade
+class MediaLibraryApiFacade extends AbstractApiFacade
 {
   public function __construct(
     AuthenticationManager $authentication_manager,

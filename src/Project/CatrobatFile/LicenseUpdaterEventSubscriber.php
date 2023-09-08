@@ -21,6 +21,9 @@ class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
     $this->update($event->getExtractedFile());
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function update(ExtractedCatrobatFile $file): void
   {
     $program_xml_properties = $file->getProgramXmlProperties();

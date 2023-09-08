@@ -20,8 +20,7 @@ class MediaPackageController extends AbstractController
   public function __construct(
     private readonly string $catrobat_mediapackage_path,
     private readonly EntityManagerInterface $entity_manager
-  ) {
-  }
+  ) {}
 
   /**
    * Legacy route:.

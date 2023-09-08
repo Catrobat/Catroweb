@@ -25,7 +25,7 @@ use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class ProjectsResponseManager extends AbstractResponseManager
+class ProjectsResponseManager extends AbstractResponseManager
 {
   use TranslatorAwareTrait;
 

@@ -9,9 +9,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProgramFlavorEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly RequestStack $request_stack)
-  {
-  }
+  public function __construct(private readonly RequestStack $request_stack) {}
 
   public function onEvent(ProgramBeforePersistEvent $event): void
   {

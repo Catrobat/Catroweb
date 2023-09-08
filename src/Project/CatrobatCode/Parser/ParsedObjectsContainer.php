@@ -91,8 +91,12 @@ abstract class ParsedObjectsContainer
   private function dereference(\SimpleXMLElement $object_xml_properties): \SimpleXMLElement
   {
     if (null != $object_xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
-      return $this->dereference($object_xml_properties
-        ->xpath($object_xml_properties[Constants::REFERENCE_ATTRIBUTE])[0]);
+      $attribute = $object_xml_properties->xpath($object_xml_properties[Constants::REFERENCE_ATTRIBUTE]);
+      if (!isset($attribute[0])) {
+        throw new \Exception('Invalid reference: '.$object_xml_properties[Constants::REFERENCE_ATTRIBUTE]);
+      }
+
+      return $this->dereference($attribute[0]);
     }
 
     return $object_xml_properties;

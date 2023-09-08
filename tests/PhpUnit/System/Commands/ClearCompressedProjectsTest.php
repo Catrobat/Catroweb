@@ -38,10 +38,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
     $this->clearCompressedProjectsDir();
   }
 
-  /**
-   * @test
-   */
-  public function clearExtractedProjectsShouldRemoveAllUnusedData(): void
+  public function testClearExtractedProjectsShouldRemoveAllUnusedData(): void
   {
     $this->generateUnusedData();
 
@@ -53,10 +50,7 @@ class ClearCompressedProjectsTest extends KernelTestCase
       'Not all files in log directory got deleted.');
   }
 
-  /**
-   * @test
-   */
-  public function clearExtractedProjectsShouldRemoveAllData(): void
+  public function testClearExtractedProjectsShouldRemoveAllData(): void
   {
     $this->generateUnusedData();
 

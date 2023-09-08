@@ -5,7 +5,8 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\Bricks\Brick;
 use App\Project\CatrobatCode\Parser\Bricks\BrickFactory;
 use App\Project\CatrobatCode\Parser\Constants;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -35,16 +36,12 @@ class BricksTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     $this->brick_xml_properties_list = $xml_properties->xpath('//brick');
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     foreach ($this->brick_xml_properties_list as $brick_xml_properties) {
       $script = BrickFactory::generate($brick_xml_properties);
@@ -55,7 +52,7 @@ class BricksTest extends TestCase
   /**
    * @return string[][]
    */
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getType'],
@@ -65,13 +62,10 @@ class BricksTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends      mustHaveMethod
-   *
-   * @dataProvider provideBrickXMLProperties
+   * @depends testMustHaveMethod
    */
-  public function factoryMustGenerateValidBrick(mixed $brick_xml_properties, mixed $expected): void
+  #[DataProvider('provideBrickXMLProperties')]
+  public function testFactoryMustGenerateValidBrick(mixed $brick_xml_properties, mixed $expected): void
   {
     $actual = BrickFactory::generate($brick_xml_properties);
 
@@ -85,15 +79,15 @@ class BricksTest extends TestCase
   /**
    * @return mixed[][]
    */
-  public function provideBrickXMLProperties(): array
+  public static function provideBrickXMLProperties(): array
   {
     $data = [];
 
     $reference_output =
-      file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/brick_reference.output', FILE_IGNORE_NEW_LINES);
+      file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/brick_reference.output', FILE_IGNORE_NEW_LINES);
     $reference_output_index = 0;
 
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     foreach ($xml_properties->xpath('//brick') as $brick_xml_properties) {
       $expected = [
         self::TYPE => $reference_output[$reference_output_index++],
@@ -113,11 +107,9 @@ class BricksTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function factoryMustGenerateUnknownBrickOtherwise(): ?Brick
+  public function testFactoryMustGenerateUnknownBrickOtherwise(): ?Brick
   {
     $brick_xml_properties = $this->brick_xml_properties_list[0];
     // @phpstan-ignore-next-line

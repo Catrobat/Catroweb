@@ -25,9 +25,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
-  {
-  }
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository) {}
 
   public function decodeToken(string $token): array
   {

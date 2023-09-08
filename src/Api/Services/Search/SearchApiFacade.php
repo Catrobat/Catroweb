@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class SearchApiFacade extends AbstractApiFacade
+class SearchApiFacade extends AbstractApiFacade
 {
   public function __construct(
     AuthenticationManager $authentication_manager,

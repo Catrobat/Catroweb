@@ -16,9 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DownloadMediaPackageController extends AbstractController
 {
-  public function __construct(private readonly EntityManagerInterface $entity_manager)
-  {
-  }
+  public function __construct(private readonly EntityManagerInterface $entity_manager) {}
 
   #[Route(path: '/download-media/{id}', name: 'download_media', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function downloadMediaPackageAction(int $id, MediaPackageFileRepository $file_repository): BinaryFileResponse

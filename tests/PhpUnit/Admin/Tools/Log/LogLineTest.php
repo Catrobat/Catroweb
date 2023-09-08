@@ -5,6 +5,7 @@ namespace Tests\PhpUnit\Admin\Tools\Log;
 use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogLine;
 use App\System\Testing\PhpUnit\DefaultTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -21,12 +22,7 @@ class LogLineTest extends DefaultTestCase
     $this->object = $this->getMockForAbstractClass(LogLine::class);
   }
 
-  protected function tearDown(): void
-  {
-    parent::tearDown();
-  }
-
-  public function getDebugLevelDataProvider(): \Generator
+  public static function provideDebugLevelDataProvider(): \Generator
   {
     yield 'case 1' => ['php.INFO', LogsController::FILTER_LEVEL_INFO];
     yield 'case 2' => ['console.WARNING', LogsController::FILTER_LEVEL_WARNING];
@@ -40,10 +36,9 @@ class LogLineTest extends DefaultTestCase
   }
 
   /**
-   * @dataProvider getDebugLevelDataProvider
-   *
    * @throws \ReflectionException
    */
+  #[DataProvider('provideDebugLevelDataProvider')]
   public function testGetDebugLevelByLine(string $string, int $output): void
   {
     $this->assertEquals($this->invokeMethod($this->object, 'getDebugLevelByString', [$string]), $output);

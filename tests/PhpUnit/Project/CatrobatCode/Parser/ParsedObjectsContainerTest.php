@@ -5,8 +5,9 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\ParsedObject;
 use App\Project\CatrobatCode\Parser\ParsedObjectGroup;
 use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,19 +21,15 @@ class ParsedObjectsContainerTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_scene = $xml_properties->xpath('//scene');
     Assert::assertNotFalse($xml_scene);
     $this->container = new ParsedScene($xml_scene[0]);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->container, $method_name));
   }
@@ -40,7 +37,7 @@ class ParsedObjectsContainerTest extends TestCase
   /**
    * @return string[][]
    */
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getObjects'],
@@ -49,11 +46,9 @@ class ParsedObjectsContainerTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getBackgroundMustReturnParsedObject(): void
+  public function testGetBackgroundMustReturnParsedObject(): void
   {
     $actual = $this->container->getBackground();
     $expected = ParsedObject::class;
@@ -62,11 +57,9 @@ class ParsedObjectsContainerTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getObjectsMustReturnArrayOfParsedObjectOrParsedObjectGroup(): void
+  public function testGetObjectsMustReturnArrayOfParsedObjectOrParsedObjectGroup(): void
   {
     $expected = [
       ParsedObject::class,
@@ -82,16 +75,14 @@ class ParsedObjectsContainerTest extends TestCase
   }
 
   /**
-   * @test
-   *
    * @throws \Exception
    */
-  public function mustThrowExceptionIfCorruptedGroup(): void
+  public function testMustThrowExceptionIfCorruptedGroup(): void
   {
     $this->expectExceptionMessage(\Exception::class);
 
     $xml_properties = simplexml_load_file(
-      RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
+      BootstrapExtension::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/code.xml'
     );
     Assert::assertNotFalse($xml_properties);
 

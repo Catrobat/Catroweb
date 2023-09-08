@@ -97,28 +97,47 @@ class ApiContext implements Context
 
   private array $checked_catrobat_remix_backward_relations;
 
+  /**
+   * @var string[]
+   */
   private array $default_project_structure = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string',
     'screenshot_large', 'screenshot_small', 'project_url',
     // TODO: hotfix for Catty + Catroid . Remove 'tags' after Catty uses attributes-parameter.
     'tags', 'download',
     'description', 'version', 'uploaded', 'download_url', 'filesize',
   ];
-
+  /**
+   * @var string[]
+   */
   private array $full_project_structure = ['id', 'name', 'author', 'description', 'credits', 'version', 'views',
     'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string',
     'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'download', ];
-
+  /**
+   * @var string[]
+   */
   private array $default_user_structure = ['id', 'username'];
-
+  /**
+   * @var string[]
+   */
   private array $full_user_structure = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects',
     'followers', 'following', ];
 
+  /**
+   * @var string[]
+   */
   private array $default_user_structure_extended = ['id', 'username', 'email'];
-
+  /**
+   * @var string[]
+   */
   private array $default_featured_project_structure = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
 
+  /**
+   * @var string[]
+   */
   private array $default_media_file_structure = ['id', 'name'];
-
+  /**
+   * @var string[]
+   */
   private array $survey_structure = ['url'];
 
   private array $new_uploaded_projects = [];
@@ -925,16 +944,12 @@ class ApiContext implements Context
   /**
    * @Given /^I want to upload a program$/
    */
-  public function iWantToUploadAProgram(): void
-  {
-  }
+  public function iWantToUploadAProgram(): void {}
 
   /**
    * @Given /^I have no parameters$/
    */
-  public function iHaveNoParameters(): void
-  {
-  }
+  public function iHaveNoParameters(): void {}
 
   /**
    * @Then /^I should get no programs$/

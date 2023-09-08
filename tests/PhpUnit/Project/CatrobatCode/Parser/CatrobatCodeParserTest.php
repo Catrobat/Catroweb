@@ -6,7 +6,9 @@ use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedSceneProgram;
 use App\Project\CatrobatCode\Parser\ParsedSimpleProgram;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\Storage\FileHelper;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -23,12 +25,13 @@ class CatrobatCodeParserTest extends TestCase
     $this->parser = new CatrobatCodeParser();
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider validProgramProvider
-   */
-  public function mustReturnParsedProgram(mixed $extracted_catrobat_program): void
+  public function tearDown(): void
+  {
+    FileHelper::emptyDirectory(BootstrapExtension::$CACHE_DIR);
+  }
+
+  #[DataProvider('provideValidProgramData')]
+  public function testMustReturnParsedProgram(mixed $extracted_catrobat_program): void
   {
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = [
@@ -42,36 +45,26 @@ class CatrobatCodeParserTest extends TestCase
     ));
   }
 
-  /**
-   * @test
-   */
-  public function mustReturnParsedSimpleProgramIfNoScenes(): void
+  public function testMustReturnParsedSimpleProgramIfNoScenes(): void
   {
-    $extracted_catrobat_program = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '');
+    $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = ParsedSimpleProgram::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
 
-  /**
-   * @test
-   */
-  public function mustReturnParsedSceneProgramIfScenes(): void
+  public function testMustReturnParsedSceneProgramIfScenes(): void
   {
-    $extracted_catrobat_program = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '');
+    $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = ParsedSceneProgram::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider faultyProgramProvider
-   */
-  public function mustReturnNullOnError(mixed $faulty_program): void
+  #[DataProvider('provideFaultyProgramData')]
+  public function testMustReturnNullOnError(ExtractedCatrobatFile $faulty_program): void
   {
     $this->assertNull($this->parser->parse($faulty_program));
   }
@@ -79,29 +72,25 @@ class CatrobatCodeParserTest extends TestCase
   /**
    * @return \App\Project\CatrobatFile\ExtractedCatrobatFile[][]
    */
-  public function validProgramProvider(): array
+  public static function provideValidProgramData(): array
   {
     $programs = [];
-    $programs[] = [new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')];
+    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')];
+    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')];
+    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')];
 
     return $programs;
   }
 
-  /**
-   * @return \App\Project\CatrobatFile\ExtractedCatrobatFile[][]
-   */
-  public function faultyProgramProvider(): array
+  public static function provideFaultyProgramData(): \Generator
   {
-    $programs = [];
-    $programs[] = [new ExtractedCatrobatFile(
-      RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
+    yield [
+      new ExtractedCatrobatFile(
+        BootstrapExtension::$FIXTURES_DIR.'FaultyPrograms/CorruptedGroupFaultyProgram/', '', ''),
     ];
-    $programs[] = [new ExtractedCatrobatFile(
-      RefreshTestEnvHook::$FIXTURES_DIR.'FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
+    yield [
+      new ExtractedCatrobatFile(
+        BootstrapExtension::$FIXTURES_DIR.'FaultyPrograms/ScenesWithoutNamesFaultyProgram/', '', ''),
     ];
-
-    return $programs;
   }
 }

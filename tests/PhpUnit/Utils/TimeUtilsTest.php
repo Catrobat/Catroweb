@@ -3,7 +3,6 @@
 namespace Tests\PhpUnit\Utils;
 
 use App\Utils\TimeUtils;
-use DateTime;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -16,11 +15,9 @@ class TimeUtilsTest extends TestCase
   /**
    * Test whether the TimeUtils returns the current timestamp.
    *
-   * @test
-   *
    * @throws \Exception
    */
-  public function theCurrentTimestampShouldBeReturned(): void
+  public function testTheCurrentTimestampShouldBeReturned(): void
   {
     $current_timestamp = (new \DateTime())->getTimestamp();
 
@@ -34,11 +31,9 @@ class TimeUtilsTest extends TestCase
   /**
    * Test wheter the TimeUtils returns the current DateTime.
    *
-   * @test
-   *
    * @throws \Exception
    */
-  public function theCurrentDatetimeShouldBeReturned(): void
+  public function testTheCurrentDatetimeShouldBeReturned(): void
   {
     $current_datetime = new \DateTime();
 
@@ -50,11 +45,9 @@ class TimeUtilsTest extends TestCase
   /**
    * Freezing the time to a specific value should work.
    *
-   * @test
-   *
    * @throws \Exception
    */
-  public function freezingTimeShouldWork(): void
+  public function testFreezingTimeShouldWork(): void
   {
     $freeze_time_to = new \DateTime('2012-03-24 17:45:1');
 
@@ -67,15 +60,13 @@ class TimeUtilsTest extends TestCase
   /**
    * Unfreezing the time should work.
    *
-   * @test
-   *
    * @throws \Exception
    */
-  public function unfreezingTimeShouldWork(): void
+  public function testUnfreezingTimeShouldWork(): void
   {
     TimeUtils::unfreezeTime();
 
-    $this->theCurrentTimestampShouldBeReturned();
-    $this->theCurrentDatetimeShouldBeReturned();
+    $this->testTheCurrentDatetimeShouldBeReturned();
+    $this->testTheCurrentDatetimeShouldBeReturned();
   }
 }

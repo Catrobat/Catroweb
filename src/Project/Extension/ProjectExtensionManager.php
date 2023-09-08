@@ -15,8 +15,7 @@ class ProjectExtensionManager
     protected ExtensionRepository $extension_repository,
     protected LoggerInterface $logger,
     protected EntityManagerInterface $entity_manager
-  ) {
-  }
+  ) {}
 
   public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $program, bool $flush = true): void
   {
