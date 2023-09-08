@@ -7,7 +7,6 @@ use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixManager;
 use App\System\Commands\Helpers\RemixManipulationProgramManager;
 use App\User\Notification\NotificationManager;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -58,7 +57,7 @@ class CreateRemixCommand extends Command
 
     try {
       $this->remix_manager->addRemixes($program_remix, $program_remixes_of_original);
-    } catch (Exception) {
+    } catch (\Exception) {
       return 4;
     }
     $output->writeln('Remixing '.$program_original->getName().' with '.$remix_program_name);

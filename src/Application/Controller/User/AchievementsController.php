@@ -4,7 +4,6 @@ namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -68,7 +67,7 @@ class AchievementsController extends AbstractController
     }
     try {
       $this->achievement_manager->readAllUnseenAchievements($user);
-    } catch (Exception) {
+    } catch (\Exception) {
       return new JsonResponse(null, Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 

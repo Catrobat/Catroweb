@@ -11,7 +11,6 @@ use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Project\ProgramManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use OpenAPI\Server\Model\UpdateProjectRequest;
 
 final class ProjectsApiProcessor extends AbstractApiProcessor
@@ -80,7 +79,7 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
 
         try {
           $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
-        } catch (Exception) {
+        } catch (\Exception) {
           return self::SERVER_ERROR_SAVE_XML;
         }
         $this->file_repository->deleteProjectZipFileIfExists($project->getId());
@@ -95,7 +94,7 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
     if (!is_null($request->getScreenshot())) {
       try {
         $this->screenshot_repository->updateProgramAssets($request->getScreenshot(), $project->getId());
-      } catch (Exception) {
+      } catch (\Exception) {
         if ($extracted_file) {
           // restore old values
           foreach ($extracted_file_properties_before_update as $key => $value) {
@@ -113,7 +112,7 @@ final class ProjectsApiProcessor extends AbstractApiProcessor
           }
           try {
             $extracted_file->saveProgramXmlProperties();
-          } catch (Exception) {
+          } catch (\Exception) {
             // ignore
           }
         }

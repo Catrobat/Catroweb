@@ -6,7 +6,6 @@ use App\DB\Entity\Project\Program;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\ProgramManager;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -50,7 +49,7 @@ class CodeViewController extends AbstractController
       $parsed_program = $this->code_parser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
-    } catch (Exception) {
+    } catch (\Exception) {
       $parsed_program = null;
       $web_path = null;
     }

@@ -41,7 +41,6 @@ use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
 use Behat\Behat\Tester\Exception\PendingException;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Lexik\Bundle\JWTAuthenticationBundle\Encoder\JWTEncoderInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTManager;
 use PHPUnit\Framework\Assert;
@@ -637,7 +636,7 @@ trait ContextTrait
     try {
       $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
       Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);
-    } catch (Exception) {
+    } catch (\Exception) {
       $delimiter = '~';
       $json = json_encode(json_decode($json, false, 512, JSON_THROW_ON_ERROR), JSON_THROW_ON_ERROR);
       Assert::assertMatchesRegularExpression($delimiter.$pattern.$delimiter, $json);

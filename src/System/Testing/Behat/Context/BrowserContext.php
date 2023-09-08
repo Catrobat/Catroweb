@@ -13,7 +13,6 @@ use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
-use Exception;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -565,7 +564,7 @@ class BrowserContext extends MinkContext implements Context
       if (!$scope->getTestResult()->isPassed()) {
         $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
       }
-    } catch (Exception) {
+    } catch (\Exception) {
     }
   }
 

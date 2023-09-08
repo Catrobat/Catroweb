@@ -14,7 +14,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
-use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Sonata\UserBundle\Model\UserInterface;
 use Sonata\UserBundle\Model\UserManagerInterface;
@@ -42,7 +41,7 @@ class UserManager implements UserManagerInterface
       }
 
       return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
-    } catch (Exception) {
+    } catch (\Exception) {
       return [];
     }
   }
