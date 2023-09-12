@@ -56,6 +56,22 @@ class ProgramRepository extends ServiceEntityRepository
     return $this->getQueryCount($query_builder);
   }
 
+  public function getTrendingProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
+  {
+    $now = new \DateTime();
+    $interval = new \DateInterval('P7D');
+    $query_builder = $this->createQueryAllBuilder();
+    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+    $query_builder = $this->setPagination($query_builder, $limit, $offset);
+    $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
+    $date_time_delta_7_days = $query_builder->expr()->literal($now->sub($interval)->format('Y-m-d H:i:s'));
+    $left_or = $query_builder->expr()->gte('e.uploaded_at', $date_time_delta_7_days);
+    $right_or = $query_builder->expr()->gte('e.last_modified_at', $date_time_delta_7_days);
+    $query_builder->andWhere($query_builder->expr()->orX($left_or, $right_or));
+
+    return $query_builder->getQuery()->getResult();
+  }
+
   public function getScratchRemixProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0): array
   {
     $qb = $this->createQueryAllBuilder();

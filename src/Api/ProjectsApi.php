@@ -235,7 +235,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
 
     $response = [];
 
-    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch'];
+    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     foreach ($categories as $category) {

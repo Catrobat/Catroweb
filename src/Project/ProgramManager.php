@@ -545,6 +545,11 @@ class ProgramManager
     return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
 
+  private function getTrendingPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  {
+    return $this->program_repository->getTrendingProjects($flavor, $max_version, $limit, $offset, 'downloads');
+  }
+
   public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'rand');
@@ -691,6 +696,7 @@ class ProgramManager
       'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
       'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
       'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
+      'trending' => $this->getTrendingPrograms($flavor, $limit, $offset, $max_version),
       default => [],
     };
   }
@@ -698,7 +704,7 @@ class ProgramManager
   public function getProjectsCount(string $category, string $max_version = '', string $flavor = null): int
   {
     return match ($category) {
-      'recent', 'random', 'most_viewed', 'most_downloaded' => $this->countProjects($flavor, $max_version),
+      'recent', 'random', 'most_viewed', 'most_downloaded', 'trending' => $this->countProjects($flavor, $max_version),
       'example' => $this->getExampleProgramsCount($flavor, $max_version),
       'scratch' => $this->getScratchRemixesProgramsCount($flavor, $max_version),
       default => 0,
