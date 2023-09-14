@@ -688,7 +688,6 @@ $(document).ready(function () {
   })
 })
 
-
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('stealProjectButton').addEventListener('click', function () {
     const url = this.getAttribute('data-url')
