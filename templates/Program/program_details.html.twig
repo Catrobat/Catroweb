@@ -63,10 +63,13 @@
     </div>
     {% if app.user and not my_program%}
       <div class="row mb-4 text-center">
-        <div class="col-12 mb-3 d-lg-block mt-3" id="stealProjectButton">
-          <a href="{{ path('app_project_steal', {'id': program.id }) }}" class="btn btn-primary" >
+        <div class="col-12 mb-3 d-lg-block mt-3" >
+          <button class="btn btn-primary" id="stealProjectButton"
+                  data-url="{{ path('app_project_steal', {'id': program.id }) }}"
+                  data-programm-id= {{ program.id}}
+          >
             {{ "Steal Project"|trans({}, "catroweb") }}
-          </a>
+          </button>
         </div>
       </div>
     {% endif %}
