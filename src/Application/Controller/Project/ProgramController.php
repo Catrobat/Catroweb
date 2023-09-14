@@ -22,7 +22,6 @@ use App\Utils\ElapsedTimeStringFormatter;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -110,8 +109,11 @@ class ProgramController extends AbstractController
   }
 
   #[Route(path: '/project/steal/{id}', name: 'app_project_steal')]
-  public function stealProject(Request $request, string $id): Response
+  public function stealProject(Request $request): Response
   {
+    $id = $request->attributes->get('id');
+    $currentUrl = $request->getUri();
+    $currentUrl = str_replace('/steal', '', $currentUrl);
     $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
@@ -121,13 +123,13 @@ class ProgramController extends AbstractController
     /** @var User|null $user */
     $user = $this->getUser();
     $logged_in = null !== $user;
+    $my_program = $logged_in && $project->getUser() === $user;
+    if (!$logged_in) {
+      return $this->redirectToRoute('index');
+    }
     $project->setUser($user);
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $my_program = $logged_in && $project->getUser() === $user;
-
-    $currentUrl = $request->getUri();
-    $currentUrl = str_replace('/steal', '', $currentUrl);
 
     return $this->redirect($currentUrl);
   }
@@ -178,7 +180,7 @@ class ProgramController extends AbstractController
     }
     try {
       $this->program_manager->changeLike($project, $user, $type, $action);
-    } catch (InvalidArgumentException) {
+    } catch (\InvalidArgumentException) {
       if ($request->isXmlHttpRequest()) {
         return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
