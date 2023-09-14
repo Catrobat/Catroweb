@@ -689,27 +689,30 @@ $(document).ready(function () {
 })
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('stealProjectButton').addEventListener('click', function () {
-    const url = this.getAttribute('data-url')
-    const programId = this.getAttribute('data-program-id')
-    const formData = new FormData()
-    formData.append('programId', programId)
-    fetch(url, {
-      method: 'POST',
-      body: formData
+  document
+    .getElementById('stealProjectButton')
+    .addEventListener('click', function () {
+      const url = this.getAttribute('data-url')
+      const programId = this.getAttribute('data-program-id')
+      const formData = new FormData()
+      formData.append('programId', programId)
+      fetch(url, {
+        method: 'POST',
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) {
+            showSnackbar(
+              '#share-snackbar',
+              'This project has been successfully stolen',
+            )
+            window.location.reload()
+          } else {
+            console.error('POST request failed with status', response.status)
+          }
+        })
+        .catch((error) => {
+          console.error('POST request error', error)
+        })
     })
-      .then(response => {
-        if (response.ok) {
-          showSnackbar('#share-snackbar', 'This project has been successfully stolen')
-          window.location.reload()
-        } else {
-          console.error('POST request failed with status', response.status)
-        }
-      })
-      .catch(error => {
-        // Handle any errors that occurred during the request
-
-        console.error('POST request error', error)
-      })
-  })
 })
