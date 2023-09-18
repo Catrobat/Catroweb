@@ -2404,16 +2404,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.52.3",
+            "version": "v1.52.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "2ae714abfbf979cb52de26227a87e42bfdfb6347"
+                "reference": "21c004745a32c71e03ab62effd7fbee0cf3ae7c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/2ae714abfbf979cb52de26227a87e42bfdfb6347",
-                "reference": "2ae714abfbf979cb52de26227a87e42bfdfb6347",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/21c004745a32c71e03ab62effd7fbee0cf3ae7c6",
+                "reference": "21c004745a32c71e03ab62effd7fbee0cf3ae7c6",
                 "shasum": ""
             },
             "require": {
@@ -2463,22 +2463,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.52.3"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.52.4"
             },
-            "time": "2023-08-25T20:04:15+00:00"
+            "time": "2023-09-15T20:50:36+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.15.0",
+            "version": "v1.15.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "15c03ce490efe482ffbc214d29a646e86be9d51c"
+                "reference": "ae9f93672e8dd12d49fa75b4fdba838d622f58c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/15c03ce490efe482ffbc214d29a646e86be9d51c",
-                "reference": "15c03ce490efe482ffbc214d29a646e86be9d51c",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/ae9f93672e8dd12d49fa75b4fdba838d622f58c8",
+                "reference": "ae9f93672e8dd12d49fa75b4fdba838d622f58c8",
                 "shasum": ""
             },
             "require": {
@@ -2518,9 +2518,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.15.0"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.15.1"
             },
-            "time": "2023-08-17T19:37:27+00:00"
+            "time": "2023-09-15T20:50:36+00:00"
         },
         {
             "name": "google/common-protos",
@@ -2576,16 +2576,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.22.1",
+            "version": "v1.23.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "2566bce7081f17e4f4c35a215864c6d4a62f010f"
+                "reference": "e5de66d5cec6e5d5a3ee6b629c7717e43a817b9a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/2566bce7081f17e4f4c35a215864c6d4a62f010f",
-                "reference": "2566bce7081f17e4f4c35a215864c6d4a62f010f",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/e5de66d5cec6e5d5a3ee6b629c7717e43a817b9a",
+                "reference": "e5de66d5cec6e5d5a3ee6b629c7717e43a817b9a",
                 "shasum": ""
             },
             "require": {
@@ -2625,9 +2625,9 @@
             ],
             "support": {
                 "issues": "https://github.com/googleapis/gax-php/issues",
-                "source": "https://github.com/googleapis/gax-php/tree/v1.22.1"
+                "source": "https://github.com/googleapis/gax-php/tree/v1.23.0"
             },
-            "time": "2023-08-04T14:32:15+00:00"
+            "time": "2023-09-14T18:30:51+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -18204,5 +18204,5 @@
         "ext-posix": "8.2",
         "ext-zip": "8.2"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
