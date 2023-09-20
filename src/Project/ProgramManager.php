@@ -46,7 +46,9 @@ use Symfony\Component\Security\Core\Security;
 
 class ProgramManager
 {
-  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProgramFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected TagRepository $tag_repository, protected ProgramLikeRepository $program_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $program_finder, private readonly ?UrlHelper $urlHelper, protected Security $security) {}
+  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProgramFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected TagRepository $tag_repository, protected ProgramLikeRepository $program_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $program_finder, private readonly ?UrlHelper $urlHelper, protected Security $security)
+  {
+  }
 
   public function getFeaturedRepository(): FeaturedRepository
   {
@@ -689,6 +691,7 @@ class ProgramManager
       'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
       'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
       'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
+      'popular' => $this->getPopularPrograms($flavor, $limit, $offset, $max_version),
       default => [],
     };
   }
@@ -756,5 +759,10 @@ class ProgramManager
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
+  }
+
+  private function getPopularPrograms(?string $flavor, int $limit, int $offset, string $max_version): array
+  {
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'popularity');
   }
 }
