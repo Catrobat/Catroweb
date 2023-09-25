@@ -29,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build catroweb app image
         run: |
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -90,7 +90,7 @@ jobs:
           name: PhpUnitTestReport
           path: tests/TestReports/CoverageReports/PhpUnit
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4-beta
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
@@ -167,7 +167,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -236,7 +236,7 @@ jobs:
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
 
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4-beta
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/TestReports/CoverageReports/Behat/coverage.xml
