@@ -10,11 +10,11 @@
       <div class="col-6 col-md-4 col-lg-3 col-xl-2 mb-4">
         <div class="card">
           <a class="card-body"
-             href="{{ path('media_library', {'package_name': item.nameUrl}) }}">
+             href="{{ path('media_library_package', {'package_name': item.nameUrl}) }}">
             {{ item.name }}
           </a>
         </div>
-    </div>
+      </div>
     {% endfor %}
   </div>
 {% endblock %}

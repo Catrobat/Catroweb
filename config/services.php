@@ -66,7 +66,7 @@ use App\Api_deprecated\Listeners\UploadExceptionEventSubscriber;
 use App\Api_deprecated\OAuth\OAuthService;
 use App\Api_deprecated\Security\ApiTokenAuthenticator;
 use App\Application\Controller\Ci\BuildApkController;
-use App\Application\Controller\MediaLibrary\MediaPackageController;
+use App\Application\Controller\MediaLibrary\MediaLibraryController;
 use App\Application\Framework\ExceptionEventSubscriber;
 use App\Application\Framework\VersionStrategy;
 use App\Application\Locale\LocaleEventSubscriber;
@@ -595,7 +595,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->arg('$arr_jenkins_config', '%jenkins%')
   ;
 
-  $services->set(MediaPackageController::class)
+  $services->set(MediaLibraryController::class)
     ->arg('$catrobat_mediapackage_path', '%catrobat.mediapackage.path%')
   ;
 

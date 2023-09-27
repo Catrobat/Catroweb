@@ -1,6 +1,6 @@
 import { showTopBarDownload, showTopBarDefault } from '../layout/top_bar'
 
-export function MediaLib(
+export function MediaLibrary(
   packageName,
   mediaSearchPath,
   flavor,

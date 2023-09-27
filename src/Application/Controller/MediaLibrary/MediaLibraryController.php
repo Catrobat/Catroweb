@@ -15,19 +15,15 @@ use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-class MediaPackageController extends AbstractController
+class MediaLibraryController extends AbstractController
 {
   public function __construct(
     private readonly string $catrobat_mediapackage_path,
     private readonly EntityManagerInterface $entity_manager
   ) {}
 
-  /**
-   * Legacy route:.
-   */
   #[Route(path: '/media-library/', name: 'media_library_overview', methods: ['GET'])]
-  #[Route(path: '/pocket-library/', name: 'pocket_library_overview', methods: ['GET'])]
-  public function indexAction(): Response
+  public function mediaLibraryIndex(): Response
   {
     /** @var MediaPackage $packages */
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
@@ -39,12 +35,8 @@ class MediaPackageController extends AbstractController
     );
   }
 
-  /**
-   * Legacy route:.
-   */
-  #[Route(path: '/media-library/{package_name}', name: 'media_library', methods: ['GET'])]
-  #[Route(path: '/pocket-library/{package_name}', name: 'pocket_library', methods: ['GET'])]
-  public function mediaPackageAction(Request $request, string $package_name, TranslatorInterface $translator): Response
+  #[Route(path: '/media-library/{package_name}', name: 'media_library_package', methods: ['GET'])]
+  public function mediaLibraryPackage(Request $request, string $package_name, TranslatorInterface $translator): Response
   {
     $flavor = $request->attributes->get('flavor');
     if ('' === $flavor) {
@@ -62,6 +54,8 @@ class MediaPackageController extends AbstractController
     }
 
     $categories = $this->sortCategoriesFlavoredFirst($package->getCategories()->toArray(), $flavor, $translator);
+
+    // $files = $this->entity_manager->getRepository(MediaPackageFile::class)->findAll();
 
     return $this->render('MediaLibrary/media_library_package.html.twig', [
       'flavor' => $flavor,
@@ -83,8 +77,6 @@ class MediaPackageController extends AbstractController
    */
   #[Route(path: '/media-library/{package_name}/search/{q}', name: 'medialibrary_search', requirements: ['q' => '.+'], methods: ['GET'])]
   #[Route(path: '/media-library/{package_name}/search/', name: 'medialibrary_empty_search', defaults: ['q' => null], methods: ['GET'])]
-  #[Route(path: '/pocket-library/{package_name}/search/{q}', name: 'pocketlibrary_search', requirements: ['q' => '.+'], methods: ['GET'])]
-  #[Route(path: '/pocket-library/{package_name}/search/', name: 'pocketlibrary_empty_search', defaults: ['q' => null], methods: ['GET'])]
   public function mediaPackageSearchAction(?string $q, string $package_name, TranslatorInterface $translator, MediaPackageFileRepository $media_file_repository, UrlGeneratorInterface $url_generator, Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');
@@ -104,7 +96,7 @@ class MediaPackageController extends AbstractController
       'package' => $package_name,
       'categories' => $categories,
       'mediaDir' => '/'.$this->catrobat_mediapackage_path,
-      'foundResults' => (count($found_media_files) ? true : false),
+      'foundResults' => ((is_countable($found_media_files) ? count($found_media_files) : 0) ? true : false),
       'resultsCount' => is_countable($found_media_files) ? count($found_media_files) : 0,
       'mediaSearchPath' => $url_generator->generate(
         'open_api_server_mediaLibrary_mediafilessearchget',
