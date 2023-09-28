@@ -89,7 +89,6 @@ jobs:
         with:
           name: PhpUnitTestReport
           path: tests/TestReports/CoverageReports/PhpUnit
-
       - uses: codecov/codecov-action@v3
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
@@ -235,7 +234,6 @@ jobs:
             cat tests/TestReports/Behat/${{ matrix.testSuite }}.log;
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
-
       - uses: codecov/codecov-action@v3
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
