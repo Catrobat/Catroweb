@@ -5,6 +5,7 @@ namespace Tests\PhpUnit\Api\Services\Base;
 use App\Api\Services\Base\TranslatorAwareTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use Behat\Behat\Definition\Translator\Translator;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 
 /**
@@ -104,9 +105,8 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
    * @small
    *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::sanitizeLocale
-   *
-   * @dataProvider dataProviderSanitizeLocale
    */
+  #[DataProvider('provideSanitizeLocaleData')]
   public function testSanitizeLocale(?string $input, string $expected): void
   {
     $this->assertSame(
@@ -115,7 +115,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderSanitizeLocale(): array
+  public static function provideSanitizeLocaleData(): array
   {
     return [
       [null, 'en'],
@@ -138,9 +138,8 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
    * @small
    *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::isLocaleAValidLocaleWithUnderscore
-   *
-   * @dataProvider dataProviderIsLocaleAValidLocaleWithUnderscore
    */
+  #[DataProvider('provideIsLocaleAValidLocaleWithUnderscoreData')]
   public function testIsLocaleAValidLocaleWithUnderscore(string $input, bool $expected): void
   {
     $this->assertSame(
@@ -149,7 +148,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderIsLocaleAValidLocaleWithUnderscore(): array
+  public static function provideIsLocaleAValidLocaleWithUnderscoreData(): array
   {
     return [
       ['de_DE', true],
@@ -169,9 +168,8 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
    * @small
    *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::isLocaleAValidTwoLetterLocale
-   *
-   * @dataProvider dataProviderIsLocaleAValidTwoLetterLocale
    */
+  #[DataProvider('provideIsLocaleAValidTwoLetterLocaleData')]
   public function testIsLocaleAValidTwoLetterLocale(string $input, bool $expected): void
   {
     $this->assertSame(
@@ -180,7 +178,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderIsLocaleAValidTwoLetterLocale(): array
+  public static function provideIsLocaleAValidTwoLetterLocaleData(): array
   {
     return [
       ['en-UK', false],
@@ -199,9 +197,8 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
    * @small
    *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::normalizeLocaleFormatToLocaleWithUnderscore
-   *
-   * @dataProvider dataProviderMapLocaleToLocaleWithUnderscore
    */
+  #[DataProvider('provideMapLocaleToLocaleWithUnderscoreData')]
   public function testMapLocaleToLocaleWithUnderscore(string $input, string $expected): void
   {
     $this->assertSame(
@@ -210,7 +207,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderMapLocaleToLocaleWithUnderscore(): array
+  public static function provideMapLocaleToLocaleWithUnderscoreData(): array
   {
     return [
       'simple' => ['en-UK', 'en_UK'],
@@ -224,9 +221,8 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
    * @small
    *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapLocaleWithUnderscoreToTwoLetterCode
-   *
-   * @dataProvider dataProviderMapLocaleWithUnderscoreToTwoLetterCode
    */
+  #[DataProvider('provideMapLocaleWithUnderscoreToTwoLetterCodeData')]
   public function testMapLocaleWithUnderscoreToTwoLetterCode(string $input, string $expected): void
   {
     $this->assertSame(
@@ -235,7 +231,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderMapLocaleWithUnderscoreToTwoLetterCode(): array
+  public static function provideMapLocaleWithUnderscoreToTwoLetterCodeData(): array
   {
     return [
       'simple' => ['en_UK', 'en'],
@@ -249,9 +245,8 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
    * @small
    *
    * @covers       \App\Api\Services\Base\TranslatorAwareTrait::mapTwoLetterCodeToLocaleWithUnderscore
-   *
-   * @dataProvider dataProviderMapTwoLetterCodeToLocaleWithUnderscore
    */
+  #[DataProvider('provideMapTwoLetterCodeToLocaleWithUnderscoreData')]
   public function testMapTwoLetterCodeToLocaleWithUnderscore(string $input, string $expected): void
   {
     $this->assertSame(
@@ -260,7 +255,7 @@ final class TranslatorAwareTraitTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderMapTwoLetterCodeToLocaleWithUnderscore(): array
+  public static function provideMapTwoLetterCodeToLocaleWithUnderscoreData(): array
   {
     return [
       'empty' => ['', 'en'],

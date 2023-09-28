@@ -5,8 +5,9 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\ParsedObject;
 use App\Project\CatrobatCode\Parser\ParsedObjectAsset;
 use App\Project\CatrobatCode\Parser\Scripts\Script;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,24 +21,20 @@ class ParsedObjectTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_object = $xml_properties->xpath('//object');
     Assert::assertNotFalse($xml_object);
     $this->object = new ParsedObject($xml_object[0]);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->object, $method_name));
   }
 
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getName'],
@@ -49,21 +46,17 @@ class ParsedObjectTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function isGroupMustReturnFalse(): void
+  public function testIsGroupMustReturnFalse(): void
   {
     $this->assertFalse($this->object->isGroup());
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getLooksMustReturnArrayOfParsedObjectAsset(): void
+  public function testGetLooksMustReturnArrayOfParsedObjectAsset(): void
   {
     $expected = ParsedObjectAsset::class;
 
@@ -73,21 +66,17 @@ class ParsedObjectTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getSoundsMustReturnEmptyArrayOfParsedObjectAsset(): void
+  public function testGetSoundsMustReturnEmptyArrayOfParsedObjectAsset(): void
   {
     $this->assertTrue([] === $this->object->getSounds());
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getScriptsMustReturnArrayOfScript(): void
+  public function testGetScriptsMustReturnArrayOfScript(): void
   {
     $expected = Script::class;
 
@@ -97,11 +86,9 @@ class ParsedObjectTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getNameMustReturnCertainString(): void
+  public function testGetNameMustReturnCertainString(): void
   {
     $expected = 'Background';
     $actual = $this->object->getName();

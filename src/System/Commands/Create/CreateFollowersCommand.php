@@ -7,7 +7,6 @@ use App\DB\Entity\User\User;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -59,7 +58,7 @@ class CreateFollowersCommand extends Command
         $this->followUser($user, $follower);
         $this->notification_service->addNotification($notification);
       }
-    } catch (Exception) {
+    } catch (\Exception) {
       return 3;
     }
     $output->writeln($follower_name.' follows '.$user_name);

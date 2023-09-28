@@ -5,7 +5,7 @@ namespace App\Api\Services\Authentication;
 use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
 
-final class AuthenticationApiFacade extends AbstractApiFacade
+class AuthenticationApiFacade extends AbstractApiFacade
 {
   public function __construct(
     AuthenticationManager $authentication_manager,

@@ -26,8 +26,7 @@ class AllSurveysAdmin extends AbstractAdmin
 
   public function __construct(
     protected EntityManagerInterface $entity_manager
-  ) {
-  }
+  ) {}
 
   /**
    * {@inheritdoc}

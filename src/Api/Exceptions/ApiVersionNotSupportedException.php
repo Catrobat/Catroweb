@@ -4,7 +4,7 @@ namespace App\Api\Exceptions;
 
 use Exception;
 
-final class ApiVersionNotSupportedException extends ApiException
+class ApiVersionNotSupportedException extends ApiException
 {
   /**
    * ApiVersionNotSupportedException constructor.

@@ -6,7 +6,6 @@ use App\DB\Entity\User\User;
 use App\Security\PasswordGenerator;
 use App\Security\TokenGenerator;
 use App\User\UserManager;
-use Exception;
 use Google\Client;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,9 +16,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OAuthService
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator)
-  {
-  }
+  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator) {}
 
   /**
    * @throws \Exception
@@ -116,7 +113,7 @@ class OAuthService
       $google_user = $this->user_manager->findOneBy([
         'google_id' => $gPlusId,
       ]);
-    } catch (Exception) {
+    } catch (\Exception) {
       return new JsonResponse('Token invalid', 777);
     }
 

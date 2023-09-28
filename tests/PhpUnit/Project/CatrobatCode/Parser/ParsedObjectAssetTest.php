@@ -3,7 +3,8 @@
 namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\ParsedObjectAsset;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,17 +21,13 @@ class ParsedObjectAssetTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//look')[0]);
     $this->assets[] = new ParsedObjectAsset($xml_properties->xpath('//sound')[0]);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->assets[0], $method_name));
     $this->assertTrue(method_exists($this->assets[1], $method_name));
@@ -39,7 +36,7 @@ class ParsedObjectAssetTest extends TestCase
   /**
    * @return string[][]
    */
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getFileName'],
@@ -48,11 +45,9 @@ class ParsedObjectAssetTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getFileNameMustReturnCertainString(): void
+  public function testGetFileNameMustReturnCertainString(): void
   {
     $expected = [
       'e3b880f6b5eb89981ddb0cf18c545e4d_Mars%20%28Landscape%29.png',
@@ -68,11 +63,9 @@ class ParsedObjectAssetTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getNameMustReturnCertainString(): void
+  public function testGetNameMustReturnCertainString(): void
   {
     $expected = [
       'Mars (Landscape)',

@@ -9,11 +9,9 @@ use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-final class MediaLibraryApiLoader extends AbstractApiLoader
+class MediaLibraryApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository, private readonly MediaPackageRepository $media_package_repository, private readonly EntityManagerInterface $entity_manager)
-  {
-  }
+  public function __construct(private readonly MediaPackageFileRepository $media_package_file_repository, private readonly MediaPackageRepository $media_package_repository, private readonly EntityManagerInterface $entity_manager) {}
 
   public function searchMediaLibraryFiles(string $query, string $flavor, string $package_name, int $limit, int $offset): ?array
   {

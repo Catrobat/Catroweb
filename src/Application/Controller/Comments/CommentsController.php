@@ -19,8 +19,7 @@ class CommentsController extends AbstractController
 {
   public function __construct(
     private readonly EntityManagerInterface $entity_manager
-  ) {
-  }
+  ) {}
 
   /**
    * @throws \Exception

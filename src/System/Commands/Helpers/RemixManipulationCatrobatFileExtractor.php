@@ -16,6 +16,11 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     parent::__construct($extract_dir, $extract_path);
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   *
+   * @throws \Exception
+   */
   public function extract(File $file): ExtractedCatrobatFile
   {
     $extracted_catrobat_file = parent::extract($file);

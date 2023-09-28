@@ -6,9 +6,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class NotificationManager
 {
-  public function __construct(private readonly EntityManagerInterface $em)
-  {
-  }
+  public function __construct(private readonly EntityManagerInterface $em) {}
 
   public function addNotification(mixed $notification, bool $flush = true): void
   {

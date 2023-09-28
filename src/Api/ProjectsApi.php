@@ -7,7 +7,6 @@ use App\Api\Services\Projects\ProjectsApiFacade;
 use App\DB\Entity\Project\ProgramDownloads;
 use App\Project\AddProgramRequest;
 use App\Project\Event\ProjectDownloadEvent;
-use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -19,11 +18,9 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Response;
 
-final class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
+class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
-  public function __construct(private readonly ProjectsApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly ProjectsApiFacade $facade) {}
 
   public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
   {
@@ -183,7 +180,7 @@ final class ProjectsApi extends AbstractApiController implements ProjectsApiInte
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
-    } catch (Exception) {
+    } catch (\Exception) {
       $responseCode = Response::HTTP_UNPROCESSABLE_ENTITY;
       $error_response = $this->facade->getResponseManager()->createUploadErrorResponse($accept_language);
       $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $error_response);

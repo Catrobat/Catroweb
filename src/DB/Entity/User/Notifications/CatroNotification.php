@@ -71,8 +71,7 @@ class CatroNotification
      * @ORM\Column(name="type", type="string")
      */
     private string $type = ''
-  ) {
-  }
+  ) {}
 
   public function getId(): ?int
   {

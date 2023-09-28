@@ -6,6 +6,4 @@ namespace App\Security\OAuth;
 
 use Symfony\Component\Form\AbstractType;
 
-final class HwiOauthRegistrationFormType extends AbstractType
-{
-}
+class HwiOauthRegistrationFormType extends AbstractType {}

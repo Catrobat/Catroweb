@@ -2,6 +2,7 @@
 
 namespace Tests\PhpUnit\Application\Locale;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\HttpFoundation\File\File;
@@ -22,12 +23,8 @@ class TransChoiceTest extends TestCase
    */
   public const LANGUAGE_DIR = 'tests/TestData/DataFixtures/translations/';
 
-  /**
-   * @test
-   *
-   * @dataProvider language_provider
-   */
-  public function allTransChoiceEntriesShouldHaveACorrectSyntax(TranslatorInterface $translator, string $language_code, array $message_ids): void
+  #[DataProvider('provideLanguageData')]
+  public function testAllTransChoiceEntriesShouldHaveACorrectSyntax(TranslatorInterface $translator, string $language_code, array $message_ids): void
   {
     foreach ($message_ids as $message_id) {
       $translator->trans($message_id, ['%count%' => 1], 'catroweb', $language_code);
@@ -37,7 +34,7 @@ class TransChoiceTest extends TestCase
     $this->assertTrue(true);
   }
 
-  public function language_provider(): array
+  public static function provideLanguageData(): array
   {
     $directory = self::LANGUAGE_DIR;
 

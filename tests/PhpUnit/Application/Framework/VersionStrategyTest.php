@@ -4,6 +4,7 @@ namespace Tests\PhpUnit\Application\Framework;
 
 use App\Application\Framework\VersionStrategy;
 use App\System\Testing\PhpUnit\DefaultTestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
 
@@ -63,17 +64,16 @@ class VersionStrategyTest extends DefaultTestCase
    *
    * @covers       \App\Application\Framework\VersionStrategy::getVersion
    *
-   * @dataProvider dataProviderGetVersion
-   *
    * @throws \ReflectionException
    */
+  #[DataProvider('provideVersionData')]
   public function testGetVersion(string $path, string $expected): void
   {
     $this->mockProperty(VersionStrategy::class, $this->object, 'app_version', '1.2.3');
     $this->assertEquals($expected, $this->object->getVersion($path));
   }
 
-  public function dataProviderGetVersion(): array
+  public static function provideVersionData(): array
   {
     return [
       'no parameters in path' => [

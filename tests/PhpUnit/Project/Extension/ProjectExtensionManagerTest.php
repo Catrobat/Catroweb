@@ -6,7 +6,8 @@ use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Extension\ProjectExtensionManager;
 use App\System\Testing\PhpUnit\DefaultTestCase;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\Filesystem\Filesystem;
 
@@ -78,9 +79,8 @@ class ProjectExtensionManagerTest extends DefaultTestCase
    * @small
    *
    * @covers ::isAnEmbroideryProject
-   *
-   * @dataProvider dataProviderIsAnEmbroideryProject
    */
+  #[DataProvider('provideIsAnEmbroideryProjectData')]
   public function testIsAnEmbroideryProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
@@ -89,7 +89,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderIsAnEmbroideryProject(): array
+  public static function provideIsAnEmbroideryProjectData(): array
   {
     return [
       'invalid' => ['bla bla <brick type="NoStitchBrick" bla bla', false],
@@ -103,9 +103,8 @@ class ProjectExtensionManagerTest extends DefaultTestCase
    * @small
    *
    * @covers ::isAMindstormsProject
-   *
-   * @dataProvider dataProviderIsAMindstormsProject
    */
+  #[DataProvider('provideIsAMindstormsProjectData')]
   public function testIsAMindstormsProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
@@ -114,7 +113,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderIsAMindstormsProject(): array
+  public static function provideIsAMindstormsProjectData(): array
   {
     return [
       'invalid' => ['bla bla bla bla', false],
@@ -129,9 +128,8 @@ class ProjectExtensionManagerTest extends DefaultTestCase
    * @small
    *
    * @covers ::isAPhiroProject
-   *
-   * @dataProvider dataProviderIsAPhiroProject
    */
+  #[DataProvider('provideIsAPhiroProjectData')]
   public function testIsAPhiroProject(string $code_xml, bool $expected): void
   {
     $this->assertEquals(
@@ -140,7 +138,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     );
   }
 
-  public function dataProviderIsAPhiroProject(): array
+  public static function provideIsAPhiroProjectData(): array
   {
     return [
       'invalid' => ['bla bla Phiro im titel bla bla', false],
@@ -151,9 +149,9 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   protected function setUpCatrobatTestFiles(): void
   {
     $filesystem = new Filesystem();
-    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_extensions/', RefreshTestEnvHook::$CACHE_DIR.'program_with_extensions/');
-    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', RefreshTestEnvHook::$CACHE_DIR.'base/');
-    $this->extracted_catrobat_file_without_extensions = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'base/', '', '');
-    $this->extracted_catrobat_file_with_extensions = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'program_with_extensions/', '', '');
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_extensions/', BootstrapExtension::$CACHE_DIR.'program_with_extensions/');
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', BootstrapExtension::$CACHE_DIR.'base/');
+    $this->extracted_catrobat_file_without_extensions = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '', '');
+    $this->extracted_catrobat_file_with_extensions = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_extensions/', '', '');
   }
 }

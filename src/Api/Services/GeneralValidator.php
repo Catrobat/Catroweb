@@ -2,8 +2,6 @@
 
 namespace App\Api\Services;
 
-use ImagickException;
-
 class GeneralValidator
 {
   final public const VALID_PICTURE_MIME_TYPES = ['jpeg', 'png', 'gif', 'webp', 'bmp'];
@@ -29,7 +27,7 @@ class GeneralValidator
         }
 
         return $imagick;
-      } catch (ImagickException) {
+      } catch (\ImagickException) {
         return false;
       }
     } else {

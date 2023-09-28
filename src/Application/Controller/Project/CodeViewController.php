@@ -6,7 +6,6 @@ use App\DB\Entity\Project\Program;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\ProgramManager;
-use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +14,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeViewController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator)
-  {
-  }
+  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator) {}
 
   #[Route(path: '/project/{id}/code_view', name: 'code_view', methods: ['GET'])]
   public function view(string $id): Response
@@ -50,7 +47,7 @@ class CodeViewController extends AbstractController
       $parsed_program = $this->code_parser->parse($extracted_program);
 
       $web_path = $extracted_program->getWebPath();
-    } catch (Exception) {
+    } catch (\Exception) {
       $parsed_program = null;
       $web_path = null;
     }

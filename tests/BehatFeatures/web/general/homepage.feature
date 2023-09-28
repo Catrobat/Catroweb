@@ -148,3 +148,4 @@ Feature: Pocketcode homepage
     And I should see "Huawei AppGallery"
     And I should see "Others"
     And I should see "Chat and forums"
+    And I should see "Privacy Awareness Guide"

@@ -9,11 +9,9 @@ use App\User\UserManager;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
 
-final class UserApiProcessor extends AbstractApiProcessor
+class UserApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenGenerator $token_generator)
-  {
-  }
+  public function __construct(private readonly UserManager $user_manager, private readonly TokenGenerator $token_generator) {}
 
   /**
    * @throws \Exception

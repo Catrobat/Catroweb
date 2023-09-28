@@ -10,8 +10,7 @@ class ProgramListResponse
   public function __construct(
     private readonly array $programs,
     private readonly int $total_programs
-  ) {
-  }
+  ) {}
 
   public function getPrograms(): array
   {

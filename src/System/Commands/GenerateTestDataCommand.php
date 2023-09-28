@@ -164,6 +164,9 @@ class GenerateTestDataCommand extends Command
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress UndefinedPropertyAssignment
+   * @psalm-suppress InvalidPropertyFetch
    */
   protected function generateProgramWithTags(string $directory): void
   {

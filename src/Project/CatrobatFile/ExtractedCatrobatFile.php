@@ -46,6 +46,9 @@ class ExtractedCatrobatFile
     return (string) $this->program_xml_properties->header->programName;
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function setName(string $name): void
   {
     $this->program_xml_properties->header->programName = $name;
@@ -70,6 +73,9 @@ class ExtractedCatrobatFile
     return (string) $this->program_xml_properties->header->description;
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function setDescription(string $description): void
   {
     $this->program_xml_properties->header->description = $description;
@@ -80,6 +86,9 @@ class ExtractedCatrobatFile
     return (string) $this->program_xml_properties->header->notesAndCredits;
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function setNotesAndCredits(string $notesAndCredits): void
   {
     $this->program_xml_properties->header->notesAndCredits = $notesAndCredits;

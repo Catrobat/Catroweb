@@ -11,6 +11,7 @@ aboutPocketCode: O Pocket Code
 about: O programu
 education: Izobrazba
 chat: Klepet in forumi
+privacyGuide: Privacy Awareness Guide
 others: Drugi
 tutorials: Pomoč
 googlePlay: Google Play
@@ -283,7 +284,7 @@ profile:
   secondEmail: Moj drugi email
   myPrograms: My projects
   follows: Follows
-  follower: Follower
+  follower: Sledilec
   unfollowUser: Unfollow this user!
   followUser: Follow this user!
   amountOfPrograms: Število projektov
@@ -318,7 +319,7 @@ myprofile:
   passwordUpdated: Your password was successfully updated.
   avatar: Avatar
   email: E-naslov
-  deleteAccount: Delete account
+  deleteAccount: Izbriši račun
   deleteAccountWarning: |
     Be aware:
     You created %num_projects% project(s) and have %num_followers% follower(s). All of your projects will be removed. You won’t be able to login anymore and your projects will disappear from all lists. Deleting your profile cannot be undone!

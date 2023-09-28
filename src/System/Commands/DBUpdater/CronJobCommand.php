@@ -6,7 +6,6 @@ use App\DB\Entity\System\CronJob;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use Doctrine\ORM\EntityManagerInterface;
-use RuntimeException;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -161,7 +160,7 @@ class CronJobCommand extends Command
 
     try {
       $result_code = CommandHelper::executeShellCommand($command, $config, '', $output);
-    } catch (RuntimeException) {
+    } catch (\RuntimeException) {
       $cron_job->setResultCode(-1);
       $cron_job->setState('timeout');
       $this->entity_manager->persist($cron_job);

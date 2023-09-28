@@ -6,7 +6,7 @@ use App\DB\EntityRepository\Project\ProgramRepository;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixData;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -22,7 +22,7 @@ class ExtractedCatrobatFileTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
   }
 
   public function testInitialization(): void
@@ -47,12 +47,14 @@ class ExtractedCatrobatFileTest extends TestCase
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress InvalidPropertyFetch
    */
   public function testSetsTheProgramName(): void
   {
-    $target_dir = RefreshTestEnvHook::$CACHE_DIR.'base/';
+    $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
     $filesystem = new Filesystem();
-    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
 
     $new_name = 'new_name';
 
@@ -60,19 +62,21 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->setName($new_name);
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $content = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     $xml = @simplexml_load_string($content);
     $this->assertSame($new_name, (string) $xml->header->programName);
   }
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress InvalidPropertyFetch
    */
   public function testSetsTheProgramDescription(): void
   {
-    $target_dir = RefreshTestEnvHook::$CACHE_DIR.'base/';
+    $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
     $filesystem = new Filesystem();
-    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
 
     $new_description = 'new_description';
 
@@ -80,19 +84,21 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->setDescription($new_description);
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $content = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     $xml = @simplexml_load_string($content);
     $this->assertSame($new_description, (string) $xml->header->description);
   }
 
   /**
    * @throws \Exception
+   *
+   * @psalm-suppress InvalidPropertyFetch
    */
   public function testSetsTheProgramCredits(): void
   {
-    $target_dir = RefreshTestEnvHook::$CACHE_DIR.'base/';
+    $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
     $filesystem = new Filesystem();
-    $filesystem->mirror(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
+    $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', $target_dir);
 
     $new_credits = 'new_credits';
 
@@ -100,7 +106,7 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->extracted_catrobat_file->setNotesAndCredits($new_credits);
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $content = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'base/code.xml');
+    $content = file_get_contents(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     $xml = @simplexml_load_string($content);
     $this->assertSame($new_credits, (string) $xml->header->notesAndCredits);
   }
@@ -150,6 +156,9 @@ class ExtractedCatrobatFileTest extends TestCase
      */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testCanExtractSimpleCatrobatAbsoluteRemixUrl(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -159,17 +168,11 @@ class ExtractedCatrobatFileTest extends TestCase
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$first_expected_url], ['1234'], [false], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('1234', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testNotExtractNumberFromNormalText(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -180,6 +183,9 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->assertCount(0, $urls);
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testCanExtractSimpleScratchAbsoluteRemixUrl(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -189,17 +195,11 @@ class ExtractedCatrobatFileTest extends TestCase
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$first_expected_url], ['117697631'], [true], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('117697631', $urls[0]->getProgramId());
-    $this->assertTrue($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testCanExtractSimpleRelativeCatrobatRemixUrl(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -209,17 +209,11 @@ class ExtractedCatrobatFileTest extends TestCase
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$first_expected_url], ['3570'], [false], [false]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('3570', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertFalse($urls[0]->isAbsoluteUrl());
-     */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testCanExtractMergedProgramRemixUrls(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -227,27 +221,16 @@ class ExtractedCatrobatFileTest extends TestCase
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $new_program_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
+    /* @psalm-suppress UndefinedPropertyAssignment */
     $this->extracted_catrobat_file->getProgramXmlProperties()->header->url = $remixes_string;
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url], ['1234', '3570'], [false, false], [true, true]);
-
-    /*
-    $this->assertCount(2, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('1234', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     *
-    $this->assertInstanceOf(RemixData::class, $urls[1]);
-    $this->assertSame($second_expected_url, $urls[1]->getUrl());
-    $this->assertSame('3570', $urls[1]->getProgramId());
-    $this->assertFalse($urls[1]->isScratchProgram());
-    $this->assertTrue($urls[1]->isAbsoluteUrl());
-     */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testExtractUniqueProgramRemixUrls(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -259,17 +242,11 @@ class ExtractedCatrobatFileTest extends TestCase
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$first_expected_url, $second_expected_url], ['1234'], [false], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('1234', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentProgram(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -281,17 +258,11 @@ class ExtractedCatrobatFileTest extends TestCase
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($second_expected_url, $urls[0]->getUrl());
-    $this->assertSame('790', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testExtractOnlyOlderProgramRemixUrls(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -303,17 +274,11 @@ class ExtractedCatrobatFileTest extends TestCase
     $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
 
     $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($second_expected_url, $urls[0]->getUrl());
-    $this->assertSame('790', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testCanExtractDoubleMergedProgramRemixUrls(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -329,29 +294,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(3, $urls, [$first_expected_url, $second_expected_url, $third_expected_url],
       ['1234', '3570', '121648946'], [false, false, true], [true, true, true]);
-
-    /*
-    $this->assertCount(3, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('1234', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[1]);
-    $this->assertSame($second_expected_url, $urls[1]->getUrl());
-    $this->assertSame('3570', $urls[1]->getProgramId());
-    $this->assertFalse($urls[1]->isScratchProgram());
-    $this->assertTrue($urls[1]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[2]);
-    $this->assertSame($third_expected_url, $urls[2]->getUrl());
-    $this->assertSame('121648946', $urls[2]->getProgramId());
-    $this->assertTrue($urls[2]->isScratchProgram());
-    $this->assertTrue($urls[2]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testExtractUniqueProgramRemixUrlsOfDoubleMergedProgram(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -367,23 +314,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url],
       ['1234', '121648946'], [false, true], [true, true]);
-
-    /*
-    $this->assertCount(2, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('1234', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[1]);
-    $this->assertSame($second_expected_url, $urls[1]->getUrl());
-    $this->assertSame('121648946', $urls[1]->getProgramId());
-    $this->assertTrue($urls[1]->isScratchProgram());
-    $this->assertTrue($urls[1]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testDontExtractProgramRemixUrlsReferencingToCurrentDoubleMergedProgram(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -399,17 +334,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(1, $urls, [$first_expected_url],
       ['1234'], [false], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('1234', $urls[0]->getProgramId());
-    $this->assertFalse($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testCanExtractMultipleMergedRemixUrls(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -426,35 +355,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(4, $urls, [$first_expected_url, $second_expected_url, $third_expected_url, $fourth_expected_url],
       ['117697631', '3570', '121648946', '16267'], [true, false, true, false], [true, false, true, true]);
-
-    /*
-    $this->assertCount(4, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('117697631', $urls[0]->getProgramId());
-    $this->assertTrue($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[1]);
-    $this->assertSame($second_expected_url, $urls[1]->getUrl());
-    $this->assertSame('3570', $urls[1]->getProgramId());
-    $this->assertFalse($urls[1]->isScratchProgram());
-    $this->assertFalse($urls[1]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[2]);
-    $this->assertSame($third_expected_url, $urls[2]->getUrl());
-    $this->assertSame('121648946', $urls[2]->getProgramId());
-    $this->assertTrue($urls[2]->isScratchProgram());
-    $this->assertTrue($urls[2]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[3]);
-    $this->assertSame($fourth_expected_url, $urls[3]->getUrl());
-    $this->assertSame('16267', $urls[3]->getProgramId());
-    $this->assertFalse($urls[3]->isScratchProgram());
-    $this->assertTrue($urls[3]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testExtractUniqueProgramRemixUrlsOfMultipleMergedProgram(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -471,23 +376,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url],
       ['117697631', '16267'], [true, false], [true, false]);
-
-    /*
-    $this->assertCount(2, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('117697631', $urls[0]->getProgramId());
-    $this->assertTrue($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[1]);
-    $this->assertSame($second_expected_url, $urls[1]->getUrl());
-    $this->assertSame('16267', $urls[1]->getProgramId());
-    $this->assertFalse($urls[1]->isScratchProgram());
-    $this->assertFalse($urls[1]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testExtractOnlyOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsAnInitialVersion(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -504,17 +397,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(1, $urls, [$first_expected_url],
       ['117697631'], [true], [true]);
-
-    /*
-    $this->assertCount(1, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('117697631', $urls[0]->getProgramId());
-    $this->assertTrue($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-     * */
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   public function testExtractOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsNotAnInitialVersion(): void
   {
     $program_repository = $this->createMock(ProgramRepository::class);
@@ -531,26 +418,11 @@ class ExtractedCatrobatFileTest extends TestCase
 
     $this->assertions(2, $urls, [$first_expected_url, $fourth_expected_url],
       ['117697631', '16268'], [true, false], [true, true]);
-
-    /*
-    $this->assertCount(2, $urls);
-    $this->assertInstanceOf(RemixData::class, $urls[0]);
-    $this->assertSame($first_expected_url, $urls[0]->getUrl());
-    $this->assertSame('117697631', $urls[0]->getProgramId());
-    $this->assertTrue($urls[0]->isScratchProgram());
-    $this->assertTrue($urls[0]->isAbsoluteUrl());
-
-    $this->assertInstanceOf(RemixData::class, $urls[1]);
-    $this->assertSame($fourth_expected_url, $urls[1]->getUrl());
-    $this->assertSame('16268', $urls[1]->getProgramId());
-    $this->assertFalse($urls[1]->isScratchProgram());
-    $this->assertTrue($urls[1]->isAbsoluteUrl());
-    */
   }
 
   public function testReturnsThePathOfTheBaseDirectory(): void
   {
-    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', $this->extracted_catrobat_file->getPath());
+    $this->assertSame(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', $this->extracted_catrobat_file->getPath());
   }
 
   public function testReturnsTheXmlProperties(): void
@@ -560,53 +432,53 @@ class ExtractedCatrobatFileTest extends TestCase
 
   public function testReturnsThePathOfTheAutomaticScreenshot(): void
   {
-    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
+    $this->assertSame(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
   public function testReturnsThePathOfTheManualScreenshot(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/', '/webpath', 'hash');
-    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/manual_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/', '/webpath', 'hash');
+    $this->assertSame(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_manual_screenshot/manual_screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
   public function testReturnsThePathOfTheScreenshot(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_screenshot/', '/webpath', 'hash');
-    $this->assertSame(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_screenshot/screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_screenshot/', '/webpath', 'hash');
+    $this->assertSame(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_screenshot/screenshot.png', $this->extracted_catrobat_file->getScreenshotPath());
   }
 
   public function testThrowsAnExceptionWhenCodeXmlIsMissing(): void
   {
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->extracted_catrobat_file->__construct(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_missing_code_xml/', '', '');
+    $this->extracted_catrobat_file->__construct(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_missing_code_xml/', '', '');
   }
 
   public function testThrowsAnExceptionWhenCodeXmlIsInvalid(): void
   {
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->extracted_catrobat_file->__construct(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'program_with_invalid_code_xml/', '', '');
+    $this->extracted_catrobat_file->__construct(BootstrapExtension::$GENERATED_FIXTURES_DIR.'program_with_invalid_code_xml/', '', '');
   }
 
   public function testIgnoresAnInvalid0XmlChar(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
   }
 
   public function testPreservesInvalid0XmlCharFromCollisionsWithOtherActors(): void
   {
     $filesystem = new Filesystem();
-    $filesystem->mirror(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_0_xmlchar/', RefreshTestEnvHook::$CACHE_DIR.'program_with_0_xmlchar/');
+    $filesystem->mirror(BootstrapExtension::$FIXTURES_DIR.'program_with_0_xmlchar/', BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/');
 
-    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals($count, 1);
 
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake2&lt;&#x0;-&#x0;&gt;cupcake4</receivedMessage>');
     Assert::assertEquals($count, 1);
   }
@@ -614,30 +486,33 @@ class ExtractedCatrobatFileTest extends TestCase
   public function testPreservesInvalid0XmlCharFromCollisionsWithAnything(): void
   {
     $filesystem = new Filesystem();
-    $filesystem->mirror(RefreshTestEnvHook::$FIXTURES_DIR.'/program_with_0_xmlchar/', RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/');
+    $filesystem->mirror(BootstrapExtension::$FIXTURES_DIR.'/program_with_0_xmlchar/', BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/');
 
-    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals($count, 1);
 
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/', '/webpath', 'hash');
     $this->assertInstanceOf(\SimpleXMLElement::class, $this->extracted_catrobat_file->getProgramXmlProperties());
     $this->extracted_catrobat_file->saveProgramXmlProperties();
 
-    $base_xml_string = file_get_contents(RefreshTestEnvHook::$CACHE_DIR.'/program_with_0_xmlchar/code.xml');
+    $base_xml_string = file_get_contents(BootstrapExtension::$CACHE_DIR.'program_with_0_xmlchar/code.xml');
     $count = substr_count($base_xml_string, '<receivedMessage>cupcake4&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>');
     Assert::assertEquals($count, 1);
   }
 
   public function testIOSXMLVersionWorksWithCurrentRegex(): void
   {
-    $this->extracted_catrobat_file = new ExtractedCatrobatFile(RefreshTestEnvHook::$FIXTURES_DIR.'program_with_old_XML/', '/webpath', 'hash');
+    $this->extracted_catrobat_file = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'program_with_old_XML/', '/webpath', 'hash');
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('1f363a1435a9497852285dbfa82b74e4_Background.png'));
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('4728a2ce6b682ac056b8f8185353108d_Moving Mole.png'));
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('1fb4ecf442b988ad20279d95acaf608e_Whacked Mole.png'));
     Assert::assertTrue($this->extracted_catrobat_file->isFileMentionedInXml('0370b09e8cd2cd025397a47e24b129d5_Hit2.m4a'));
   }
 
+  /**
+   * @psalm-suppress UndefinedPropertyAssignment
+   */
   private function assertions(int $expectedCount, array $urls, array $expectedURLs, array $expectedProgramIds, array $scratch, array $absolutePaths): void
   {
     $this->assertCount($expectedCount, $urls);

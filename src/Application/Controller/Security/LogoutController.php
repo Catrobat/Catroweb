@@ -14,8 +14,7 @@ class LogoutController extends AbstractController
   public function __construct(
     protected TokenStorageInterface $token_storage,
     protected CookieService $cookie_service
-  ) {
-  }
+  ) {}
 
   #[Route(path: '/logout', name: 'logout')]
   public function logoutAction(Request $request): RedirectResponse

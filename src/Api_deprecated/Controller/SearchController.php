@@ -5,7 +5,6 @@ namespace App\Api_deprecated\Controller;
 use App\Api_deprecated\Responses\ProgramListResponse;
 use App\Project\ProgramManager;
 use App\Utils\RequestHelper;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,9 +19,7 @@ class SearchController extends AbstractController
 
   private int $DEFAULT_OFFSET = 0;
 
-  public function __construct(protected RequestHelper $app_request)
-  {
-  }
+  public function __construct(protected RequestHelper $app_request) {}
 
   /**
    * @deprecated
@@ -55,7 +52,7 @@ class SearchController extends AbstractController
       $numbOfTotalProjects = $program_manager->searchCount(
         $query, $max_version, null, $this->app_request->isDebugBuildRequest()
       );
-    } catch (Exception) {
+    } catch (\Exception) {
       $programs = [];
       $numbOfTotalProjects = 0;
     }

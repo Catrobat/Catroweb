@@ -16,8 +16,7 @@ class OAuthSuccessHandler implements AuthenticationSuccessHandlerInterface
     private readonly CookieService $cookie_service,
     private readonly JWTTokenManagerInterface $jwt_manager,
     private readonly RefreshTokenService $refresh_token_service
-  ) {
-  }
+  ) {}
 
   public function onAuthenticationSuccess(Request $request, TokenInterface $token): RedirectResponse
   {

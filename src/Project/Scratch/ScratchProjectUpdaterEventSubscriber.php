@@ -7,9 +7,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ScratchProjectUpdaterEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(protected ScratchManager $scratch_manager)
-  {
-  }
+  public function __construct(protected ScratchManager $scratch_manager) {}
 
   public function onCheckScratchProgram(CheckScratchProgramEvent $event): void
   {
