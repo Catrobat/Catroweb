@@ -51,7 +51,7 @@
     "symfony/intl": "6.3.*",
     "symfony/mailer": "6.3.*",
     "symfony/monolog-bundle": "3.8.*",
-    "symfony/polyfill-iconv": "1.27.*",
+    "symfony/polyfill-iconv": "1.28.*",
     "symfony/process": "6.3.*",
     "symfony/routing": "6.3.*",
     "symfony/sendinblue-mailer": "6.3.*",
