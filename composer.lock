@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c6cb3b3e533763f41dc00c42fc95d847",
+    "content-hash": "f022adb361f3a8d6d7640ca4a01184a7",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -4773,16 +4773,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.29.1",
+            "version": "1.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "7c638710c3d4d4fe14de9e28e9a98c073a289cea"
+                "reference": "57284fb032bcafc3e978a1d7e4a2b591045f7e15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/7c638710c3d4d4fe14de9e28e9a98c073a289cea",
-                "reference": "7c638710c3d4d4fe14de9e28e9a98c073a289cea",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/57284fb032bcafc3e978a1d7e4a2b591045f7e15",
+                "reference": "57284fb032bcafc3e978a1d7e4a2b591045f7e15",
                 "shasum": ""
             },
             "require": {
@@ -4868,9 +4868,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.29.1"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.30.1"
             },
-            "time": "2023-06-01T08:55:47+00:00"
+            "time": "2023-09-07T08:04:12+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -18312,5 +18312,5 @@
         "ext-posix": "8.2",
         "ext-zip": "8.2"
     },
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
