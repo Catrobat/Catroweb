@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f022adb361f3a8d6d7640ca4a01184a7",
+    "content-hash": "f6da20f903853f82622e197106352c28",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7525,16 +7525,16 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "2.1.0",
+            "version": "2.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "1aa4ca22622cef029ba3191f1dbb7504d77e3f6e"
+                "reference": "c81c17f49a76af6a0d1e4f37469315aea01eaa00"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/1aa4ca22622cef029ba3191f1dbb7504d77e3f6e",
-                "reference": "1aa4ca22622cef029ba3191f1dbb7504d77e3f6e",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/c81c17f49a76af6a0d1e4f37469315aea01eaa00",
+                "reference": "c81c17f49a76af6a0d1e4f37469315aea01eaa00",
                 "shasum": ""
             },
             "require": {
@@ -7555,7 +7555,7 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.15",
+                "rector/rector": "^0.17",
                 "symfony/browser-kit": "^5.4 || ^6.2",
                 "symfony/dependency-injection": "^5.4 || ^6.2",
                 "symfony/framework-bundle": "^5.4 || ^6.2",
@@ -7597,7 +7597,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/2.1.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/2.3.0"
             },
             "funding": [
                 {
@@ -7617,7 +7617,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-04-25T05:24:50+00:00"
+            "time": "2023-08-01T23:11:06+00:00"
         },
         {
             "name": "sonata-project/user-bundle",
