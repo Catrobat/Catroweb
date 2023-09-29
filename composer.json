@@ -24,7 +24,7 @@
     "eightpoints/guzzle-bundle": "8.4.*",
     "friendsofsymfony/elastica-bundle": "6.3.*",
     "gesdinet/jwt-refresh-token-bundle": "1.1.*",
-    "google/apiclient": "2.14.*",
+    "google/apiclient": "2.15.*",
     "google/cloud-translate": "1.13.*",
     "http-interop/http-factory-guzzle": "*",
     "hwi/oauth-bundle": "dev-master",
