@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f022adb361f3a8d6d7640ca4a01184a7",
+    "content-hash": "9f9587b7a71073ae45b9fad9757a4bfd",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7621,16 +7621,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.8.0",
+            "version": "5.10.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "7451e1a8a79f624a296511c8c24358c487005ca6"
+                "reference": "18423c0db3baa99b7b30611a00e7f9b19b47da39"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/7451e1a8a79f624a296511c8c24358c487005ca6",
-                "reference": "7451e1a8a79f624a296511c8c24358c487005ca6",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/18423c0db3baa99b7b30611a00e7f9b19b47da39",
+                "reference": "18423c0db3baa99b7b30611a00e7f9b19b47da39",
                 "shasum": ""
             },
             "require": {
@@ -7683,9 +7683,9 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.16",
+                "rector/rector": "^0.17",
                 "sonata-project/admin-bundle": "^4.20",
-                "sonata-project/block-bundle": "^4.11",
+                "sonata-project/block-bundle": "^4.11 || ^5.0",
                 "sonata-project/doctrine-orm-admin-bundle": "^4.0",
                 "symfony/browser-kit": "^5.4 || ^6.2",
                 "symfony/console": "^5.4 || ^6.2",
@@ -7727,7 +7727,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.8.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.10.0"
             },
             "funding": [
                 {
@@ -7747,7 +7747,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-05-13T16:20:27+00:00"
+            "time": "2023-07-22T14:32:48+00:00"
         },
         {
             "name": "symfony/acl-bundle",
