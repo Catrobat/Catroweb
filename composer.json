@@ -36,7 +36,7 @@
     "ramsey/uuid": "4.7.*",
     "ramsey/uuid-doctrine": "2.0.*",
     "rosell-dk/webp-convert": "2.9.*",
-    "sonata-project/admin-bundle": "4.24.*",
+    "sonata-project/admin-bundle": "4.27.*",
     "sonata-project/doctrine-orm-admin-bundle": "4.13.*",
     "sonata-project/exporter": "3.1.*",
     "sonata-project/twig-extensions": "2.1.*",
