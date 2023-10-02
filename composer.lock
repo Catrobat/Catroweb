@@ -2404,16 +2404,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.52.4",
+            "version": "v1.52.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "21c004745a32c71e03ab62effd7fbee0cf3ae7c6"
+                "reference": "28765cf75bd028ed063b0422b9c85bb9a54c41ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/21c004745a32c71e03ab62effd7fbee0cf3ae7c6",
-                "reference": "21c004745a32c71e03ab62effd7fbee0cf3ae7c6",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/28765cf75bd028ed063b0422b9c85bb9a54c41ca",
+                "reference": "28765cf75bd028ed063b0422b9c85bb9a54c41ca",
                 "shasum": ""
             },
             "require": {
@@ -2463,22 +2463,22 @@
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.52.4"
+                "source": "https://github.com/googleapis/google-cloud-php-core/tree/v1.52.5"
             },
-            "time": "2023-09-15T20:50:36+00:00"
+            "time": "2023-09-30T16:50:41+00:00"
         },
         {
             "name": "google/cloud-translate",
-            "version": "v1.15.1",
+            "version": "v1.15.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-translate.git",
-                "reference": "ae9f93672e8dd12d49fa75b4fdba838d622f58c8"
+                "reference": "9a4f46b5499bec993308aeb6ed5d8b32baf67489"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/ae9f93672e8dd12d49fa75b4fdba838d622f58c8",
-                "reference": "ae9f93672e8dd12d49fa75b4fdba838d622f58c8",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-translate/zipball/9a4f46b5499bec993308aeb6ed5d8b32baf67489",
+                "reference": "9a4f46b5499bec993308aeb6ed5d8b32baf67489",
                 "shasum": ""
             },
             "require": {
@@ -2518,9 +2518,9 @@
             ],
             "description": "Cloud Translation Client for PHP",
             "support": {
-                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.15.1"
+                "source": "https://github.com/googleapis/google-cloud-php-translate/tree/v1.15.2"
             },
-            "time": "2023-09-15T20:50:36+00:00"
+            "time": "2023-09-30T16:50:41+00:00"
         },
         {
             "name": "google/common-protos",
