@@ -11,6 +11,7 @@ aboutPocketCode: درباره کد جیبی Pocket Code
 about: در باره
 education: تحصیل
 chat: چت و انجمن ها
+privacyGuide: Privacy Awareness Guide
 others: دیگران
 tutorials: کمک
 googlePlay: فروشگاه گوگل پلی (Google Play)
@@ -394,6 +395,7 @@ menu:
   helpAndTutorials: کمک و آموزش
   followersAndFollowing: دنبال کننده
   mediaLibrary: کتابخانه ی رسانه
+  studio: Studios
 login:
   login: وارد شدن
   button:

@@ -11,6 +11,7 @@ aboutPocketCode: О Pocket Code
 about: O
 education: Education
 chat: Chat and forums
+privacyGuide: Privacy Awareness Guide
 others: Others
 tutorials: Помоћ
 googlePlay: Гугл продавница
@@ -394,6 +395,7 @@ menu:
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: Login
   button:

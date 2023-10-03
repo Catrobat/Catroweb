@@ -11,6 +11,7 @@ aboutPocketCode: 關於 Pocket Code
 about: 關於
 education: 教育
 chat: 聊天和論壇
+privacyGuide: Privacy Awareness Guide
 others: 其他
 tutorials: 說明
 googlePlay: Google Play商店
@@ -394,6 +395,7 @@ menu:
   helpAndTutorials: 幫助和教程
   followersAndFollowing: 追隨者
   mediaLibrary: 媒體庫
+  studio: Studios
 login:
   login: 登入
   button:

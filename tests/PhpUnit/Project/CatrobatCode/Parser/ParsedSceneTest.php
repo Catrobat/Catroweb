@@ -3,8 +3,9 @@
 namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -18,19 +19,15 @@ class ParsedSceneTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_scene = $xml_properties->xpath('//scene');
     Assert::assertNotFalse($xml_scene);
     $this->scene = new ParsedScene($xml_scene[0]);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->scene, $method_name));
   }
@@ -38,7 +35,7 @@ class ParsedSceneTest extends TestCase
   /**
    * @return string[][]
    */
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getName'],
@@ -46,11 +43,9 @@ class ParsedSceneTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getNameMustReturnCertainString(): void
+  public function testGetNameMustReturnCertainString(): void
   {
     $expected = 'Scene 1';
     $actual = $this->scene->getName();

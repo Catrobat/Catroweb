@@ -1,7 +1,13 @@
 import $ from 'jquery'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
-export function ProjectEditorTextFieldModel (projectDescriptionCredits, programId, programSection, hasDefaultLanguage, initialText) {
+export function ProjectEditorTextFieldModel(
+  projectDescriptionCredits,
+  programId,
+  programSection,
+  hasDefaultLanguage,
+  initialText,
+) {
   const self = this
   this.text = ''
   this.lastSavedText = ''
@@ -16,8 +22,12 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
   this.customTranslationApi = new CustomTranslationApi(programSection)
 
   this.pathEditName = projectDescriptionCredits.data('path-edit-program-name')
-  this.pathEditDescription = projectDescriptionCredits.data('path-edit-program-description')
-  this.pathEditCredits = projectDescriptionCredits.data('path-edit-program-credits')
+  this.pathEditDescription = projectDescriptionCredits.data(
+    'path-edit-program-description',
+  )
+  this.pathEditCredits = projectDescriptionCredits.data(
+    'path-edit-program-credits',
+  )
 
   this.setOnTextChanged = (onTextChanged) => {
     this.onTextChanged = onTextChanged
@@ -71,7 +81,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
             } else if (error.status === 401) {
               reject(error.status)
             }
-          }
+          },
         })
       })
     } else if (this.text === '') {
@@ -82,7 +92,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
         this.text,
         language,
         this.clearError,
-        this.setError
+        this.setError,
       )
     }
   }
@@ -94,7 +104,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
       this.programId,
       language,
       this.clearError,
-      this.setError
+      this.setError,
     )
   }
 
@@ -120,7 +130,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
       this.onTextChanged('')
       this.setLoading(true)
 
-      function getCustomTranslationSuccess (data) {
+      function getCustomTranslationSuccess(data) {
         self.setLoading(false)
         self.setText(data)
         self.onTextChanged(data)
@@ -128,7 +138,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
         self.setEnabled(true)
       }
 
-      function getCustomTranslationError () {
+      function getCustomTranslationError() {
         self.setLoading(false)
         self.setText('')
         self.onTextChanged('')
@@ -140,7 +150,7 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
         this.programId,
         language,
         getCustomTranslationSuccess,
-        getCustomTranslationError
+        getCustomTranslationError,
       )
     }
   }
@@ -171,7 +181,11 @@ export function ProjectEditorTextFieldModel (projectDescriptionCredits, programI
 
   this.shouldDisable = (languageSelected) => {
     // User should not be able to define custom translation if field is not defined in default language
-    return !this.hasDefaultLanguage && languageSelected !== '' && languageSelected !== 'default'
+    return (
+      !this.hasDefaultLanguage &&
+      languageSelected !== '' &&
+      languageSelected !== 'default'
+    )
   }
   // end region
 }

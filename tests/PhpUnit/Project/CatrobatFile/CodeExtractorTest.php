@@ -14,58 +14,37 @@ use PHPUnit\Framework\TestCase;
  */
 class CodeExtractorTest extends TestCase
 {
-  /**
-   * @test
-   */
-  public function xmlWithIfAndCondition(): void
+  public function testXmlWithIfAndCondition(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/ifWithCondition/');
   }
 
-  /**
-   * @test
-   */
-  public function xmlWithFormula(): void
+  public function testXmlWithFormula(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/formula/');
   }
 
-  /**
-   * @test
-   */
-  public function xmlWithIf(): void
+  public function testXmlWithIf(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/if/');
   }
 
-  /**
-   * @test
-   */
-  public function xmlWithLoop(): void
+  public function testXmlWithLoop(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/loop/');
   }
 
-  /**
-   * @test
-   */
-  public function xmlWithAllBricks(): void
+  public function testXmlWithAllBricks(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/allBricks/');
   }
 
-  /**
-   * @test
-   */
-  public function xmlWithNestedFormula(): void
+  public function testXmlWithNestedFormula(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/nestedFormula/');
   }
 
-  /**
-   * @test
-   */
-  public function xmlWithNestedObjects(): void
+  public function testXmlWithNestedObjects(): void
   {
     $this->checkFiles('tests/TestData/DataFixtures/CodeXmls/nestedObjects/');
   }

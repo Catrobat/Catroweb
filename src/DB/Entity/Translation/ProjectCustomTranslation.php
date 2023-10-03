@@ -51,8 +51,7 @@ class ProjectCustomTranslation
      * @ORM\Column(type="string", length=5)
      */
     private string $language
-  ) {
-  }
+  ) {}
 
   public function getId(): ?int
   {

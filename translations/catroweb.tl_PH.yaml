@@ -11,6 +11,7 @@ aboutPocketCode: Tungkol sa Pocket Code
 about: Tungkol sa
 education: Edukasyon
 chat: Mga usapan at forums
+privacyGuide: Privacy Awareness Guide
 others: Iba pa
 tutorials: Tulong
 googlePlay: Google Play
@@ -393,6 +394,7 @@ menu:
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: Mag-Login
   button:

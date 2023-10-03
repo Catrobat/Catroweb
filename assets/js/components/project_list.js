@@ -1,10 +1,21 @@
 import $ from 'jquery'
-import { showDefaultTopBarTitle, showCustomTopBarTitle } from '../layout/top_bar'
+import {
+  showDefaultTopBarTitle,
+  showCustomTopBarTitle,
+} from '../layout/top_bar'
 
 require('../../styles/components/project_list.scss')
 
 export class ProjectList {
-  constructor (container, category, apiUrl, propertyToShow, theme, fetchCount = 30, emptyMessage = '') {
+  constructor(
+    container,
+    category,
+    apiUrl,
+    propertyToShow,
+    theme,
+    fetchCount = 30,
+    emptyMessage = '',
+  ) {
     this.container = container
     this.projectsContainer = $('.projects-container', container)
     this.category = category
@@ -28,14 +39,17 @@ export class ProjectList {
     }
 
     let attributes = 'id,name,project_url,screenshot_small,screenshot_large,'
-    attributes += this.propertyToShow === 'uploaded' ? 'uploaded_string' : this.propertyToShow
+    attributes +=
+      this.propertyToShow === 'uploaded'
+        ? 'uploaded_string'
+        : this.propertyToShow
     this.apiUrl += 'attributes=' + attributes + '&'
 
     this.fetchMore(true)
     this._initListeners()
   }
 
-  fetchMore (clear = false) {
+  fetchMore(clear = false) {
     if (this.empty === true || this.fetchActive === true) {
       return
     }
@@ -43,7 +57,12 @@ export class ProjectList {
     this.fetchActive = true
     const self = this
 
-    $.getJSON(this.apiUrl + 'limit=' + this.projectFetchCount + '&offset=' + this.projectsLoaded,
+    $.getJSON(
+      this.apiUrl +
+        'limit=' +
+        this.projectFetchCount +
+        '&offset=' +
+        this.projectsLoaded,
       function (data) {
         if (!Array.isArray(data)) {
           console.error('Data received for ' + self.category + ' is no array!')
@@ -84,17 +103,23 @@ export class ProjectList {
         }
 
         self.fetchActive = false
-      }).fail(function (jqXHR, textStatus, errorThrown) {
-      console.error('Failed loading projects in category ' + self.category, JSON.stringify(jqXHR), textStatus, errorThrown)
+      },
+    ).fail(function (jqXHR, textStatus, errorThrown) {
+      console.error(
+        'Failed loading projects in category ' + self.category,
+        JSON.stringify(jqXHR),
+        textStatus,
+        errorThrown,
+      )
       self.container.classList.remove('loading')
     })
   }
 
-  _generate (data) {
+  _generate(data) {
     /*
-    * Necessary to support legacy flavoring with URL:
-    *   Absolute url always uses new 'app' routing flavor. We have to replace it!
-    */
+     * Necessary to support legacy flavoring with URL:
+     *   Absolute url always uses new 'app' routing flavor. We have to replace it!
+     */
     let projectUrl = data.project_url
     projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
     //
@@ -104,41 +129,58 @@ export class ProjectList {
     $('<img/>', {
       'data-src': data.screenshot_small,
       // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
-      'data-srcset': data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
+      'data-srcset':
+        data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
       'data-sizes': '(min-width: 768px) 10vw, 25vw',
-      class: 'lazyload project-list__project__image'
+      class: 'lazyload project-list__project__image',
     }).appendTo($p)
-    $('<span/>', { class: 'project-list__project__name' }).text(data.name).appendTo($p)
-    const $prop = $('<div />', { class: 'lazyload project-list__project__property project-list__project__property-' + this.propertyToShow })
+    $('<span/>', { class: 'project-list__project__name' })
+      .text(data.name)
+      .appendTo($p)
+    const $prop = $('<div />', {
+      class:
+        'lazyload project-list__project__property project-list__project__property-' +
+        this.propertyToShow,
+    })
     $prop.appendTo($p)
 
     const icons = {
       views: 'visibility',
       downloads: 'get_app',
       uploaded: 'schedule',
-      author: 'person'
+      author: 'person',
     }
 
-    const propertyValue = this.propertyToShow === 'uploaded' ? data.uploaded_string : data[this.propertyToShow]
-    $('<i/>', { class: 'material-icons' }).text(icons[this.propertyToShow]).appendTo($prop)
-    $('<span/>', { class: 'project-list__project__property__value' }).text(propertyValue).appendTo($prop)
+    const propertyValue =
+      this.propertyToShow === 'uploaded'
+        ? data.uploaded_string
+        : data[this.propertyToShow]
+    $('<i/>', { class: 'material-icons' })
+      .text(icons[this.propertyToShow])
+      .appendTo($prop)
+    $('<span/>', { class: 'project-list__project__property__value' })
+      .text(propertyValue)
+      .appendTo($prop)
     return $p
   }
 
-  _initListeners () {
+  _initListeners() {
     const self = this
 
     // ---- History State
     window.addEventListener('popstate', function (event) {
       if (event.state != null) {
         if (event.state.type === 'ProjectList' && event.state.full === true) {
-          $('#' + event.state.id).data('list').openFullView()
+          $('#' + event.state.id)
+            .data('list')
+            .openFullView()
         }
       }
     })
 
     this.projectsContainer.on('scroll', function () {
-      const pctHorizontal = this.scrollLeft / (this.scrollWidth - this.clientWidth)
+      const pctHorizontal =
+        this.scrollLeft / (this.scrollWidth - this.clientWidth)
       if (pctHorizontal >= 0.8) {
         self.fetchMore()
       }
@@ -155,7 +197,8 @@ export class ProjectList {
       }
     })
     $(this.container).on('scroll', function () {
-      const pctVertical = this.scrollTop / (this.scrollHeight - this.clientHeight)
+      const pctVertical =
+        this.scrollTop / (this.scrollHeight - this.clientHeight)
       if (pctVertical >= 0.8) {
         self.fetchMore()
       }
@@ -168,22 +211,31 @@ export class ProjectList {
         self.openFullView()
         window.history.pushState(
           { type: 'ProjectList', id: self.container.id, full: true },
-          $(this).text(), '#' + self.container.id
+          $(this).text(),
+          '#' + self.container.id,
         )
       }
     })
 
     this.$chevronLeft.on('click', function () {
-      const width = self.projectsContainer.find('.project-list__project').outerWidth(true)
-      self.projectsContainer.scrollLeft(self.projectsContainer.scrollLeft() - 2 * width)
+      const width = self.projectsContainer
+        .find('.project-list__project')
+        .outerWidth(true)
+      self.projectsContainer.scrollLeft(
+        self.projectsContainer.scrollLeft() - 2 * width,
+      )
     })
     this.$chevronRight.on('click', function () {
-      const width = self.projectsContainer.find('.project-list__project').outerWidth(true)
-      self.projectsContainer.scrollLeft(self.projectsContainer.scrollLeft() + 2 * width)
+      const width = self.projectsContainer
+        .find('.project-list__project')
+        .outerWidth(true)
+      self.projectsContainer.scrollLeft(
+        self.projectsContainer.scrollLeft() + 2 * width,
+      )
     })
   }
 
-  openFullView () {
+  openFullView() {
     $(window).on('popstate', this.popStateHandler)
     showCustomTopBarTitle(this.$title.find('h2').text(), function () {
       window.history.back()
@@ -193,12 +245,17 @@ export class ProjectList {
     this.container.classList.add('vertical')
     this.container.classList.remove('horizontal')
     this.$body.addClass('overflow-hidden')
-    if (this.container.clientHeight === this.container.scrollHeight || this.container.scrollTop / (this.container.scrollHeight - this.container.clientHeight) >= 0.8) {
+    if (
+      this.container.clientHeight === this.container.scrollHeight ||
+      this.container.scrollTop /
+        (this.container.scrollHeight - this.container.clientHeight) >=
+        0.8
+    ) {
       this.fetchMore()
     }
   }
 
-  closeFullView () {
+  closeFullView() {
     $(window).off('popstate', this.popStateHandler)
     showDefaultTopBarTitle()
     this.$title.show()

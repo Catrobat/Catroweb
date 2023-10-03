@@ -1,14 +1,14 @@
 import { deleteCookie } from './CookieHelper'
 
 export class LogoutTokenHandler {
-  constructor () {
+  constructor() {
     const routingDataset = document.getElementById('js-api-routing').dataset
     this.baseUrl = routingDataset.baseUrl
     this.authenticationPath = routingDataset.authentication
     this.initListeners()
   }
 
-  initListeners () {
+  initListeners() {
     const self = this
     const logoutButton = document.getElementById('btn-logout')
     if (!logoutButton) {

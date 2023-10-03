@@ -1,4 +1,4 @@
-export function redirect (url, buttonId, spinnerId, iconId = null) {
+export function redirect(url, buttonId, spinnerId, iconId = null) {
   const button = document.getElementById(buttonId)
   button.disabled = true
 

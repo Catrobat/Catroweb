@@ -11,6 +11,7 @@ aboutPocketCode: পকেট কোড সম্পর্কে
 about: সম্পর্কে
 education: শিক্ষা
 chat: চ্যাট এবং ফোরাম
+privacyGuide: Privacy Awareness Guide
 others: অন্যান্য
 tutorials: সাহায্য
 googlePlay: গুগল প্লে
@@ -400,6 +401,7 @@ menu:
   helpAndTutorials: সহায়তা ও টিউটোরিয়াল
   followersAndFollowing: অনুসরণকারী
   mediaLibrary: মিডিয়া লাইব্রেরি
+  studio: Studios
 login:
   login: প্রবেশ করুন
   button:

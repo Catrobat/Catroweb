@@ -1,5 +1,8 @@
 import $ from 'jquery'
-import { controlTopBarSearchClearButton, showTopBarSearch } from './layout/top_bar'
+import {
+  controlTopBarSearchClearButton,
+  showTopBarSearch,
+} from './layout/top_bar'
 import { ProjectList } from './components/project_list'
 import { UserList } from './components/user_list'
 
@@ -16,7 +19,7 @@ $(() => {
 
   initProjects()
 })
-function initProjects () {
+function initProjects() {
   const $search = $('.js-search')
 
   const $searchProjects = $('#search-projects')
@@ -33,9 +36,25 @@ function initProjects () {
   const projectUrl = baseUrl + '/api/projects/search?query=' + query
   const userUrl = baseUrl + '/api/users/search?query=' + query
 
-  const list = new ProjectList($searchProjects[0], category, projectUrl, property, theme, 30, noProjects)
+  const list = new ProjectList(
+    $searchProjects[0],
+    category,
+    projectUrl,
+    property,
+    theme,
+    30,
+    noProjects,
+  )
   $(this).data('list', list)
 
-  const userList = new UserList($searchUsers[0], baseUrl, userUrl, theme, projectString, 30, noUsers)
+  const userList = new UserList(
+    $searchUsers[0],
+    baseUrl,
+    userUrl,
+    theme,
+    projectString,
+    30,
+    noUsers,
+  )
   $(this).data('list', userList)
 }

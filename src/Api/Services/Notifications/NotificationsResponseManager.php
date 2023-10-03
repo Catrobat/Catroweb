@@ -16,7 +16,7 @@ use OpenAPI\Server\Model\NotificationsCountResponse;
 use OpenAPI\Server\Service\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class NotificationsResponseManager extends AbstractResponseManager
+class NotificationsResponseManager extends AbstractResponseManager
 {
   public function __construct(TranslatorInterface $translator,
     SerializerInterface $serializer,

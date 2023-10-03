@@ -11,6 +11,7 @@ aboutPocketCode: Për Pocket Code
 about: Për rreth
 education: Edukimi
 chat: Biseda dhe Forume
+privacyGuide: Privacy Awareness Guide
 others: Të Tjera
 tutorials: Ndihmë
 googlePlay: Google Play
@@ -394,6 +395,7 @@ menu:
   helpAndTutorials: Ndihmë & tutoriale
   followersAndFollowing: Ndjekës
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: Kyçuni
   button:

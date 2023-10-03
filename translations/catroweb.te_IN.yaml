@@ -11,6 +11,7 @@ aboutPocketCode: పాకెట్ కొడ్ గురించి
 about: About
 education: చదువు
 chat: చాట్ మరియు ఫోరమ్‌లు
+privacyGuide: Privacy Awareness Guide
 others: ఇతరులు
 tutorials: Help
 googlePlay: గూగ్లె ప్లే
@@ -397,6 +398,7 @@ menu:
   helpAndTutorials: సహాయం & ట్యుటోరియల్స్
   followersAndFollowing: అనుచరుడు
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: ప్రవేశించండి
   button:

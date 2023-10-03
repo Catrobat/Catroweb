@@ -11,6 +11,7 @@ aboutPocketCode: 포켓 코드에 대하여
 about: 정보
 education: 교육
 chat: 채팅과 포럼
+privacyGuide: Privacy Awareness Guide
 others: 기타
 tutorials: 도움말
 googlePlay: 구글 플레이
@@ -391,6 +392,7 @@ menu:
   helpAndTutorials: 도움말 & 튜터리얼
   followersAndFollowing: 팔로워
   mediaLibrary: 미디어 라이브러리
+  studio: Studios
 login:
   login: 로그인
   button:

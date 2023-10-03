@@ -8,7 +8,6 @@ use App\DB\Entity\User\User;
 use App\Project\ProgramManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,7 +46,7 @@ class CreateDownloadsCommand extends Command
 
     try {
       $this->downloadProgram($program, $user);
-    } catch (Exception) {
+    } catch (\Exception) {
       return 2;
     }
     $output->writeln('Downloading '.$program->getName().' with user '.$user->getUsername());

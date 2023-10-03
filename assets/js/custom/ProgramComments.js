@@ -1,15 +1,31 @@
 import $ from 'jquery'
 import Swal from 'sweetalert2'
 
-export function ProgramComments (programId, visibleComments, showStep, minAmountOfVisibleComments,
-  totalAmountOfComments, cancel, deleteIt, reportIt, areYouSure,
-  noWayOfReturn, deleteConfirmation, reportConfirmation,
-  popUpCommentReportedTitle, popUpCommentReportedText,
-  popUpDeletedTitle, popUpDeletedText,
-  noAdminRightsMessage, defaultErrorMessage) {
+export function ProgramComments(
+  programId,
+  visibleComments,
+  showStep,
+  minAmountOfVisibleComments,
+  totalAmountOfComments,
+  cancel,
+  deleteIt,
+  reportIt,
+  areYouSure,
+  noWayOfReturn,
+  deleteConfirmation,
+  reportConfirmation,
+  popUpCommentReportedTitle,
+  popUpCommentReportedText,
+  popUpDeletedTitle,
+  popUpDeletedText,
+  noAdminRightsMessage,
+  defaultErrorMessage,
+) {
   let amountOfVisibleComments
 
-  const commentUploadDates = document.getElementsByClassName('comment-upload-date')
+  const commentUploadDates = document.getElementsByClassName(
+    'comment-upload-date',
+  )
   for (const element of commentUploadDates) {
     const commentUploadDate = new Date(element.innerHTML)
     element.innerHTML = commentUploadDate.toLocaleString('en-GB')
@@ -35,13 +51,17 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
 
   $('.comment-report-button').on('click', function (event) {
     event.stopPropagation()
-    const commentId = $(this).attr('id').substring('comment-report-button-'.length)
+    const commentId = $(this)
+      .attr('id')
+      .substring('comment-report-button-'.length)
     askForConfirmation(reportComment, commentId, reportConfirmation, reportIt)
   })
 
   $('.comment-delete-button').on('click', function (event) {
     event.stopPropagation()
-    const commentId = $(this).attr('id').substring('comment-delete-button-'.length)
+    const commentId = $(this)
+      .attr('id')
+      .substring('comment-delete-button-'.length)
     askForConfirmation(deleteComment, commentId, deleteConfirmation, deleteIt)
   })
 
@@ -72,8 +92,13 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     showLess(showStep)
   })
 
-  if ((sessionStorage.getItem('temp_program_comment') != null) && (sessionStorage.getItem('temp_program_comment') !== '')) {
-    document.getElementById('comment-message').value = sessionStorage.getItem('temp_program_comment')
+  if (
+    sessionStorage.getItem('temp_program_comment') != null &&
+    sessionStorage.getItem('temp_program_comment') !== ''
+  ) {
+    document.getElementById('comment-message').value = sessionStorage.getItem(
+      'temp_program_comment',
+    )
     const commentWrapper = $('#user-comment-wrapper')
     const showCommentWrapperButton = $('#show-add-comment-button')
     const hideCommentWrapperButton = $('#hide-add-comment-button')
@@ -82,18 +107,26 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     hideCommentWrapperButton.show()
   }
 
-  function postComment () {
+  function postComment() {
     const msg = $('#comment-message').val()
     if (msg.length === 0) {
       return
     }
 
-    const postCommentUrl = $('.js-project-comments').data('path-post-comment-url')
-    const parentCommentId = $('.js-project-parentComment').data('parent-comment-id')
+    const postCommentUrl = $('.js-project-comments').data(
+      'path-post-comment-url',
+    )
+    const parentCommentId = $('.js-project-parentComment').data(
+      'parent-comment-id',
+    )
     $.ajax({
       url: postCommentUrl,
       type: 'post',
-      data: { Message: msg, ProgramId: programId, ParentCommentId: parentCommentId },
+      data: {
+        Message: msg,
+        ProgramId: programId,
+        ParentCommentId: parentCommentId,
+      },
       success: function () {
         $('#comments-wrapper').load(' #comments-wrapper')
         $('#comment-message').val('')
@@ -106,11 +139,11 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
         } else {
           showErrorPopUp(defaultErrorMessage)
         }
-      }
+      },
     })
   }
 
-  function deleteComment (commentId) {
+  function deleteComment(commentId) {
     const $projectComments = $('.js-project-comments')
     const deleteCommentUrl = $projectComments.data('path-delete-comment-url')
     $.ajax({
@@ -129,11 +162,11 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
         } else {
           showErrorPopUp(defaultErrorMessage)
         }
-      }
+      },
     })
   }
 
-  function reportComment (commentId) {
+  function reportComment(commentId) {
     const $projectComments = $('.js-project-comments')
     const reportCommentPath = $projectComments.data('path-report-comment-url')
     $.ajax({
@@ -149,11 +182,11 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
         } else {
           showErrorPopUp(defaultErrorMessage)
         }
-      }
+      },
     })
   }
 
-  function askForConfirmation (continueWithAction, commentId, text, okayText) {
+  function askForConfirmation(continueWithAction, commentId, text, okayText) {
     Swal.fire({
       title: areYouSure,
       html: text + '<br><br>' + noWayOfReturn,
@@ -162,11 +195,11 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
       allowOutsideClick: false,
       customClass: {
         confirmButton: 'btn btn-primary',
-        cancelButton: 'btn btn-outline-primary'
+        cancelButton: 'btn btn-outline-primary',
       },
       buttonsStyling: false,
       confirmButtonText: okayText,
-      cancelButtonText: cancel
+      cancelButtonText: cancel,
     }).then((result) => {
       if (result.value) {
         continueWithAction(commentId)
@@ -174,27 +207,25 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     })
   }
 
-  function showSuccessPopUp (title, text) {
+  function showSuccessPopUp(title, text) {
     showPopUp('success', title, text, true)
   }
 
-  function showErrorPopUp (title, text) {
+  function showErrorPopUp(title, text) {
     showPopUp('error', title, text)
   }
 
-  function showPopUp (type, title, text, refresh = false) {
-    Swal.fire(
-      {
-        title,
-        text,
-        icon: type,
-        customClass: {
-          confirmButton: 'btn btn-primary'
-        },
-        buttonsStyling: false,
-        allowOutsideClick: false
-      }
-    ).then(() => {
+  function showPopUp(type, title, text, refresh = false) {
+    Swal.fire({
+      title,
+      text,
+      icon: type,
+      customClass: {
+        confirmButton: 'btn btn-primary',
+      },
+      buttonsStyling: false,
+      allowOutsideClick: false,
+    }).then(() => {
       if (refresh) {
         location.reload()
       }
@@ -213,12 +244,12 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     window.location = '#user-comment-wrapper'
   })
 
-  function redirectToLogin () {
+  function redirectToLogin() {
     const $projectComments = $('.js-project-comments')
     window.location.href = $projectComments.data('path-login-url')
   }
 
-  function restoreAmountOfVisibleCommentsFromSession () {
+  function restoreAmountOfVisibleCommentsFromSession() {
     const lastSessionAmount = getVisibleCommentsSessionVar()
     if (lastSessionAmount !== null) {
       amountOfVisibleComments = lastSessionAmount
@@ -228,8 +259,10 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     }
   }
 
-  function updateCommentsVisibility () {
-    const $commentsClassSelector = $('.comments-class-selector').data('comments-class-selector')
+  function updateCommentsVisibility() {
+    const $commentsClassSelector = $('.comments-class-selector').data(
+      'comments-class-selector',
+    )
 
     $($commentsClassSelector).each(function (index, comment) {
       if (index < amountOfVisibleComments) {
@@ -240,7 +273,7 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     })
   }
 
-  function updateButtonVisibility () {
+  function updateButtonVisibility() {
     if (amountOfVisibleComments > minAmountOfVisibleComments) {
       $('#show-less-comments-button').show()
     } else {
@@ -254,31 +287,45 @@ export function ProgramComments (programId, visibleComments, showStep, minAmount
     }
   }
 
-  function showMore (step) {
-    amountOfVisibleComments = Math.min(amountOfVisibleComments + step, totalAmountOfComments)
+  function showMore(step) {
+    amountOfVisibleComments = Math.min(
+      amountOfVisibleComments + step,
+      totalAmountOfComments,
+    )
     setVisibleCommentsSessionVar()
     updateCommentsVisibility()
     updateButtonVisibility()
   }
 
-  function showLess (step) {
-    amountOfVisibleComments = Math.max(amountOfVisibleComments - step, minAmountOfVisibleComments)
+  function showLess(step) {
+    amountOfVisibleComments = Math.max(
+      amountOfVisibleComments - step,
+      minAmountOfVisibleComments,
+    )
     setVisibleCommentsSessionVar()
     updateCommentsVisibility()
     updateButtonVisibility()
   }
 
-  function getVisibleCommentsSessionVarName () {
+  function getVisibleCommentsSessionVarName() {
     return $('.session-vars-names').data('visible-comments-session-var')
   }
 
-  function setVisibleCommentsSessionVar () {
+  function setVisibleCommentsSessionVar() {
     const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
-    window.sessionStorage.setItem(visibleCommentSessionVarName, JSON.stringify(amountOfVisibleComments))
+    window.sessionStorage.setItem(
+      visibleCommentSessionVarName,
+      JSON.stringify(amountOfVisibleComments),
+    )
   }
 
-  function getVisibleCommentsSessionVar () {
+  function getVisibleCommentsSessionVar() {
     const visibleCommentSessionVarName = getVisibleCommentsSessionVarName()
-    return JSON.parse(window.sessionStorage.getItem(visibleCommentSessionVarName, JSON.stringify(amountOfVisibleComments)))
+    return JSON.parse(
+      window.sessionStorage.getItem(
+        visibleCommentSessionVarName,
+        JSON.stringify(amountOfVisibleComments),
+      ),
+    )
   }
 }

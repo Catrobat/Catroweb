@@ -37,7 +37,7 @@ class ApproveProjectsController extends CRUDController
     /** @var Program|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
-      throw new NotFoundHttpException(sprintf('unable to find the object'));
+      throw new NotFoundHttpException('Unable to find project');
     }
     $object->setApproved(true);
     $object->setVisible(false);

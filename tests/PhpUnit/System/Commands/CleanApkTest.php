@@ -32,10 +32,7 @@ class CleanApkTest extends KernelTestCase
     $file->move($this->apk_dir, 'test');
   }
 
-  /**
-   * @test
-   */
-  public function clearApkData(): void
+  public function testClearApkData(): void
   {
     $this->assertNotEmpty(array_diff(scandir($this->apk_dir), ['.', '..', '.gitignore']),
       'Apk directory empty.');

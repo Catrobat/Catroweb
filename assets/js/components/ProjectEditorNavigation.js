@@ -1,8 +1,15 @@
 import $ from 'jquery'
 import { CustomTranslationApi } from '../api/CustomTranslationApi'
-import { showCustomTopBarTitle, showDefaultTopBarTitle } from '../layout/top_bar'
+import {
+  showCustomTopBarTitle,
+  showDefaultTopBarTitle,
+} from '../layout/top_bar'
 
-export function ProjectEditorNavigation (projectDescriptionCredits, programId, programEditor) {
+export function ProjectEditorNavigation(
+  projectDescriptionCredits,
+  programId,
+  programEditor,
+) {
   const self = this
 
   this.programId = programId
@@ -18,12 +25,20 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
 
   this.translationsText = projectDescriptionCredits.data('trans-translations')
   this.defaultText = projectDescriptionCredits.data('trans-default')
-  this.translationTitleText = projectDescriptionCredits.data('trans-translation-title')
+  this.translationTitleText = projectDescriptionCredits.data(
+    'trans-translation-title',
+  )
   this.editDefaultText = projectDescriptionCredits.data('trans-edit-default')
-  this.editTranslationText = projectDescriptionCredits.data('trans-edit-translation')
-  this.createTranslationText = projectDescriptionCredits.data('trans-create-translation')
+  this.editTranslationText = projectDescriptionCredits.data(
+    'trans-edit-translation',
+  )
+  this.createTranslationText = projectDescriptionCredits.data(
+    'trans-create-translation',
+  )
 
-  $('#add-translation-button').on('click', () => { this.openEditor(null, true, false, this.createTranslationText) })
+  $('#add-translation-button').on('click', () => {
+    this.openEditor(null, true, false, this.createTranslationText)
+  })
 
   $(document).ready(getLanguages)
 
@@ -34,7 +49,12 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
     if (language === 'default') {
       self.openEditor(language, false, false, self.editDefaultText)
     } else {
-      self.openEditor(language, false, true, self.translationTitleText.replace('%language%', languageName))
+      self.openEditor(
+        language,
+        false,
+        true,
+        self.translationTitleText.replace('%language%', languageName),
+      )
     }
   })
 
@@ -42,7 +62,7 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
     window.history.pushState(
       { type: 'ProjectEditorNavigation', id: programId, full: true },
       $(this).text(),
-      '#navigation'
+      '#navigation',
     )
 
     $(window).on('popstate', this.popStateHandler)
@@ -68,7 +88,12 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
     this.editTextNavigation.addClass('d-none')
   }
 
-  this.openEditor = (language, showLanguageSelect, showDeleteButton, headerText) => {
+  this.openEditor = (
+    language,
+    showLanguageSelect,
+    showDeleteButton,
+    headerText,
+  ) => {
     $(window).off('popstate', this.popStateHandler)
 
     this.programEditor.show(
@@ -76,7 +101,7 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
       language,
       showLanguageSelect,
       showDeleteButton,
-      headerText
+      headerText,
     )
   }
 
@@ -92,21 +117,21 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
     this.getTranslations()
   }
 
-  function getLanguages () {
+  function getLanguages() {
     $.ajax({
       url: '../languages',
       type: 'get',
       success: function (data) {
         self.languages = data
         self.getTranslations()
-      }
+      },
     })
   }
 
   this.getTranslations = () => {
-    this.customTranslationApi.getCustomTranslationLanguages(
-      this.programId
-    ).then(this.showTranslations)
+    this.customTranslationApi
+      .getCustomTranslationLanguages(this.programId)
+      .then(this.showTranslations)
   }
 
   this.showTranslations = (translationLanguages) => {
@@ -114,22 +139,32 @@ export function ProjectEditorNavigation (projectDescriptionCredits, programId, p
     this.navigationLanguageList.append(
       '<li>' +
         '<div id="edit-default-button" class="text-icon-aligned edit-defined-translation" data-value="default">' +
-          '<span class="language-code"></span>' +
-          '<span class="language-name">' + this.defaultText + '</span>' +
-          '<span data-bs-toggle="tooltip" title="' + this.editDefaultText + '" class="catro-icon-button material-icons trailing-icon " style="font-size: 1.75rem;">edit</span>' +
+        '<span class="language-code"></span>' +
+        '<span class="language-name">' +
+        this.defaultText +
+        '</span>' +
+        '<span data-bs-toggle="tooltip" title="' +
+        this.editDefaultText +
+        '" class="catro-icon-button material-icons trailing-icon " style="font-size: 1.75rem;">edit</span>' +
         '</div>' +
-      '</li>'
+        '</li>',
     )
 
     for (const language of translationLanguages) {
       this.navigationLanguageList.append(
         `<li>\
-          <div id="edit-${language}-button" class="text-icon-aligned edit-defined-translation" data-value="${language}" data-language="${this.languages[language]}">\
+          <div id="edit-${language}-button" class="text-icon-aligned edit-defined-translation" data-value="${language}" data-language="${
+            this.languages[language]
+          }">\
             <span class="language-code">${language}</span>\
             <span class="language-name">${this.languages[language]}</span>\
-            <span data-bs-toggle="tooltip" title="${this.editTranslationText.replace('%language%', this.languages[language])}" class="catro-icon-button material-icons trailing-icon " style="font-size: 1.75rem;">edit</span>\
+            <span data-bs-toggle="tooltip" title="${this.editTranslationText.replace(
+              '%language%',
+              this.languages[language],
+            )}" class="catro-icon-button material-icons trailing-icon " style="font-size: 1.75rem;">edit</span>\
           </div>\
-        </li>`)
+        </li>`,
+      )
     }
   }
 

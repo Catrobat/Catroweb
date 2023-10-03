@@ -7,7 +7,6 @@ use App\Api\Services\GeneralValidator;
 use App\Api\Services\ValidationWrapper;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
-use ImagickException;
 use OpenAPI\Server\Model\RegisterRequest;
 use OpenAPI\Server\Model\ResetPasswordRequest;
 use OpenAPI\Server\Model\UpdateUserRequest;
@@ -16,7 +15,7 @@ use Symfony\Component\Validator\Constraints\Email;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
-final class UserRequestValidator extends AbstractRequestValidator
+class UserRequestValidator extends AbstractRequestValidator
 {
   public const MIN_PASSWORD_LENGTH = 6;
   public const MAX_PASSWORD_LENGTH = 4096;
@@ -166,7 +165,7 @@ final class UserRequestValidator extends AbstractRequestValidator
       try {
         $result->cropThumbnailImage($image_size, $image_size);
         $picture_out = 'data:'.$result->getImageMimeType().';base64,'.base64_encode($result->getImageBlob());
-      } catch (ImagickException) {
+      } catch (\ImagickException) {
         $this->getValidationWrapper()->addError($this->__('api.registerUser.pictureInvalid', [], $locale), $KEY);
       }
     } else {

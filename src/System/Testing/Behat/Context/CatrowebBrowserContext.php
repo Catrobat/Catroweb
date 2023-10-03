@@ -268,6 +268,54 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
+   * @Given I enter :value into the :fieldName field
+   */
+  public function iEnterValueIntoNamedField(string $value, string $fieldName): void
+  {
+    $field = $this->getSession()->getPage()->findField($fieldName);
+    $field->setValue($value);
+  }
+
+  /**
+   * @When /^I select option (\d+) from the dropdown "([^"]*)"$/
+   *
+   * @throws \Exception
+   */
+  public function selectOptionFromDropdown(int $index, string $dropdownId): void
+  {
+    $session = $this->getSession();
+    $element = $session->getPage()->find('css', '#'.$dropdownId);
+
+    if (!$element) {
+      throw new \Exception('Dropdown element not found');
+    }
+
+    $options = $element->findAll('css', 'option');
+
+    $options[$index - 1]->click();
+  }
+
+  /**
+   * @When /^I switch to the new tab$/
+   */
+  public function iSwitchToNewTab(): void
+  {
+    $windowNames = $this->getSession()->getWindowNames();
+    $currentWindowName = $this->getSession()->getWindowName();
+
+    // Find the name of the new window/tab
+    $newWindowName = '';
+    foreach ($windowNames as $windowName) {
+      if ($windowName !== $currentWindowName) {
+        $newWindowName = $windowName;
+      }
+    }
+
+    // Switch to the new window/tab
+    $this->getSession()->switchToWindow($newWindowName);
+  }
+
+  /**
    * @Then /^I should see the featured slider$/
    *
    * @throws ExpectationException
@@ -354,68 +402,68 @@ class CatrowebBrowserContext extends BrowserContext
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[3]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Views':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[5]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Downloads':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[6]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Upload Time':
       case 'Id':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[1]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Word':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div[1]/table/thead/tr/th[3]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Clicked At':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[9]/a')
           ->click()
-      ;
+        ;
         break;
       case \Locale::class:
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[10]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Type':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[2]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Tag':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[7]/a')
           ->click()
-      ;
+        ;
         break;
       case 'User Agent':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[11]/a')
           ->click()
-      ;
+        ;
         break;
       case 'Referrer':
         $page
           ->find('xpath', '//div/div/section[2]/div[2]/div/div/div[1]/table/thead/tr/th[12]/a')
           ->click()
-      ;
+        ;
         break;
 
       default:
@@ -610,13 +658,13 @@ class CatrowebBrowserContext extends BrowserContext
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[1]')
           ->click()
-      ;
+        ;
         break;
       case 'delete':
         $page
           ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$entry_number.']/td[6]/div/a[2]')
           ->click()
-      ;
+        ;
         break;
     }
   }
@@ -1148,9 +1196,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Given /^I requested jenkins to build it$/
    */
-  public function iRequestedJenkinsToBuildIt(): void
-  {
-  }
+  public function iRequestedJenkinsToBuildIt(): void {}
 
   /**
    * @Then /^it will be stored on the server$/

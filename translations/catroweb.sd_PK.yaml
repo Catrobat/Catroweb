@@ -11,6 +11,7 @@ aboutPocketCode: پاڪيٽ ڪوڊ جي باري ۾
 about: About
 education: Education
 chat: Chat and forums
+privacyGuide: Privacy Awareness Guide
 others: Others
 tutorials: مدد
 googlePlay: گوگل پلي
@@ -393,6 +394,7 @@ menu:
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: لاگ ان
   button:

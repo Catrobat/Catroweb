@@ -13,7 +13,6 @@ use Behat\Mink\Exception\ExpectationException;
 use Behat\Mink\Exception\ResponseTextException;
 use Behat\Mink\Exception\UnsupportedDriverActionException;
 use Behat\MinkExtension\Context\MinkContext;
-use Exception;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -430,6 +429,15 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
+   * @Given I am on the page :page with header :header equal to :value
+   */
+  public function iAmOnThePageWithHeaderEqualTo(string $page, string $header, string $value): void
+  {
+    $this->getSession()->setRequestHeader($header, $value);
+    $this->visit($page);
+  }
+
+  /**
    * @Then I wait for the element :selector to be visible
    *
    * @throws ResponseTextException
@@ -556,7 +564,7 @@ class BrowserContext extends MinkContext implements Context
       if (!$scope->getTestResult()->isPassed()) {
         $this->saveScreenshot(time().'.png', $this->SCREENSHOT_DIR);
       }
-    } catch (Exception) {
+    } catch (\Exception) {
     }
   }
 

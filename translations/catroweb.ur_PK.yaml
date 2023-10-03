@@ -11,6 +11,7 @@ aboutPocketCode: پاکٹ کوڈ کے بارے میں
 about: ' اِس سافٹ وٖیر کے بارے میں'
 education: تعلیم
 chat: چیٹ اور فورم
+privacyGuide: Privacy Awareness Guide
 others: دیگر
 tutorials: مدد
 googlePlay: گوگل پلے
@@ -389,6 +390,7 @@ menu:
   helpAndTutorials: مدد اور سبق
   followersAndFollowing: پیروکاروں
   mediaLibrary: میڈیا لائبریری
+  studio: Studios
 login:
   login: لاگ اِن
   button:

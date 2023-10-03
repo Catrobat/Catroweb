@@ -7,7 +7,6 @@ use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProgramManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -44,7 +43,7 @@ class CreateFeatureProgramCommand extends Command
 
     try {
       $this->featureProgram($program);
-    } catch (Exception) {
+    } catch (\Exception) {
       return 2;
     }
     $output->writeln('Featuring '.$program->getName());

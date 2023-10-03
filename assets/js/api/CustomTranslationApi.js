@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 export class CustomTranslationApi {
-  constructor (programSection) {
+  constructor(programSection) {
     if (programSection === 'credits') {
       this.programSection = 'credit'
     } else {
@@ -9,20 +9,37 @@ export class CustomTranslationApi {
     }
   }
 
-  getCustomTranslation (programId, language, successCallback, errorCallback = () => {}) {
+  getCustomTranslation(
+    programId,
+    language,
+    successCallback,
+    errorCallback = () => {},
+  ) {
     $.ajax({
-      url: '../translate/custom/project/' + programId + '?field=' + this.programSection + '&language=' + language,
+      url:
+        '../translate/custom/project/' +
+        programId +
+        '?field=' +
+        this.programSection +
+        '&language=' +
+        language,
       type: 'get',
       success: successCallback,
-      error: errorCallback
+      error: errorCallback,
     })
   }
 
-  deleteCustomTranslation (programId, language, successCallback, errorCallback) {
+  deleteCustomTranslation(programId, language, successCallback, errorCallback) {
     const self = this
     return new Promise(function (resolve, reject) {
       $.ajax({
-        url: '../translate/custom/project/' + programId + '?field=' + self.programSection + '&language=' + language,
+        url:
+          '../translate/custom/project/' +
+          programId +
+          '?field=' +
+          self.programSection +
+          '&language=' +
+          language,
         type: 'delete',
         success: function (data) {
           successCallback(language)
@@ -31,16 +48,30 @@ export class CustomTranslationApi {
         error: function (error) {
           errorCallback(error)
           reject(error.status)
-        }
+        },
       })
     })
   }
 
-  saveCustomTranslation (programId, text, language, successCallback, errorCallback) {
+  saveCustomTranslation(
+    programId,
+    text,
+    language,
+    successCallback,
+    errorCallback,
+  ) {
     const self = this
     return new Promise(function (resolve, reject) {
       $.ajax({
-        url: '../translate/custom/project/' + programId + '?field=' + self.programSection + '&text=' + text + '&language=' + language,
+        url:
+          '../translate/custom/project/' +
+          programId +
+          '?field=' +
+          self.programSection +
+          '&text=' +
+          text +
+          '&language=' +
+          language,
         type: 'put',
         success: function (data) {
           successCallback(language)
@@ -49,15 +80,15 @@ export class CustomTranslationApi {
         error: function (error) {
           errorCallback(error)
           reject(error.status)
-        }
+        },
       })
     })
   }
 
-  getCustomTranslationLanguages (programId) {
+  getCustomTranslationLanguages(programId) {
     return $.ajax({
       url: '../translate/custom/project/' + programId + '/list',
-      type: 'get'
+      type: 'get',
     })
   }
 }

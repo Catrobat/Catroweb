@@ -1,13 +1,13 @@
 import Swal from 'sweetalert2'
 
 export class ProgramEditorDialog {
-  constructor (titleText, confirmText, denyText) {
+  constructor(titleText, confirmText, denyText) {
     this.titleText = titleText
     this.confirmText = confirmText
     this.denyText = denyText
   }
 
-  show (callback) {
+  show(callback) {
     Swal.fire({
       title: this.titleText,
       icon: 'question',
@@ -16,7 +16,7 @@ export class ProgramEditorDialog {
       allowOutsideClick: true,
       backdrop: true,
       confirmButtonText: this.confirmText,
-      denyButtonText: this.denyText
+      denyButtonText: this.denyText,
     }).then(callback)
   }
 }

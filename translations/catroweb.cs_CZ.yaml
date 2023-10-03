@@ -11,6 +11,7 @@ aboutPocketCode: O Pocket Code
 about: O aplikaci
 education: Education
 chat: Chat and forums
+privacyGuide: Privacy Awareness Guide
 others: Others
 tutorials: Nápověda
 googlePlay: Google Play
@@ -393,6 +394,7 @@ menu:
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
   mediaLibrary: Knihovna médií
+  studio: Studios
 login:
   login: Přihlásit se
   button:

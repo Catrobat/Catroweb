@@ -30,23 +30,24 @@ $(() => {
   initScrollToHash()
 })
 
-function showFlashSnackbar () {
-  const snackbarFlashMessages = document.getElementsByClassName('js-flash-snackbar')
+function showFlashSnackbar() {
+  const snackbarFlashMessages =
+    document.getElementsByClassName('js-flash-snackbar')
   Array.from(snackbarFlashMessages).forEach((jsMsgObj) => {
     showSnackbar('#share-snackbar', jsMsgObj.dataset.msg)
   })
 }
 
-function fitHeadingFontSizeToAvailableWidth () {
+function fitHeadingFontSizeToAvailableWidth() {
   // Adjust heading font size or break word
-  ['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function (element) {
+  ;['h1', '.h1', 'h2', '.h2', 'h3', '.h3'].forEach(function (element) {
     $(element + ':not(.no-textfill)').each(function () {
       textFillDefault(this)
     })
   })
 }
 
-function initScrollToHash () {
+function initScrollToHash() {
   $(window).on('load', function () {
     let hash
     let timeout = 0
@@ -56,7 +57,8 @@ function initScrollToHash () {
       if (hash.length) {
         $('html, body').animate({ scrollTop: hash.offset().top })
         window.clearInterval(poll)
-      } else if (timeout++ > 100) { // cancel the interval after 100 attempts (== 10s)
+      } else if (timeout++ > 100) {
+        // cancel the interval after 100 attempts (== 10s)
         window.clearInterval(poll)
       }
     }, 100)

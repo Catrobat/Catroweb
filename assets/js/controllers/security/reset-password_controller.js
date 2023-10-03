@@ -3,7 +3,6 @@ import { showValidationMessage } from '../../components/text_field'
 import { AjaxController } from '../ajax_controller'
 
 export default class extends AjaxController {
-
   static values = {
     apiPath: String,
     checkYourMailsUrl: String,
@@ -16,7 +15,7 @@ export default class extends AjaxController {
    *
    * @returns {Promise<void>}
    */
-  async requestPasswordResetEmail () {
+  async requestPasswordResetEmail() {
     const data = {
       email: document.getElementById('email__input').value,
     }
@@ -36,9 +35,9 @@ export default class extends AjaxController {
     }
 
     response.text().then(function (text) {
-      console.error("Registration error: " + response.status +  text)
+      console.error('Registration error: ' + response.status + text)
     })
-    showSnackbar('#share-snackbar', "Unexpected Error. Try again later.")
+    showSnackbar('#share-snackbar', 'Unexpected Error. Try again later.')
   }
 
   handleValidationError(responseText) {

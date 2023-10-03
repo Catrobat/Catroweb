@@ -4,8 +4,9 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\ParsedObject;
 use App\Project\CatrobatCode\Parser\ParsedObjectGroup;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -19,24 +20,20 @@ class ParsedObjectGroupTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_object = $xml_properties->xpath('//object[@type="GroupSprite"]');
     Assert::assertNotFalse($xml_object);
     $this->group = new ParsedObjectGroup($xml_object[0]);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->group, $method_name));
   }
 
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['getName'],
@@ -47,33 +44,27 @@ class ParsedObjectGroupTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function isGroupMustReturnTrue(): void
+  public function testIsGroupMustReturnTrue(): void
   {
     $this->assertTrue($this->group->isGroup());
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getObjectsMustReturnEmptyArrayOfParsedObject(): void
+  public function testGetObjectsMustReturnEmptyArrayOfParsedObject(): void
   {
     $this->assertTrue([] === $this->group->getObjects());
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function addObjectMustAddObjectToObjects(): void
+  public function testAddObjectMustAddObjectToObjects(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $xml_object = $xml_properties->xpath('//object');
     Assert::assertNotFalse($xml_object);
@@ -82,11 +73,9 @@ class ParsedObjectGroupTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getNameMustReturnCertainString(): void
+  public function testGetNameMustReturnCertainString(): void
   {
     $expected = 'TestGroup';
     $actual = $this->group->getName();

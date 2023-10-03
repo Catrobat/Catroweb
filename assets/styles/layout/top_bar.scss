@@ -1,12 +1,12 @@
-@use "~@material/form-field";
-@use "~@material/icon-button";
-@use "~@material/icon-button/styles";
-@use "~@material/top-app-bar/mdc-top-app-bar";
-@use "~@material/textfield";
-@use "~@material/menu/mdc-menu";
-@use "~@material/menu-surface/mdc-menu-surface";
-@import "../base/variables";
-@import "../base/mixins";
+@use '~@material/form-field';
+@use '~@material/icon-button';
+@use '~@material/icon-button/styles';
+@use '~@material/top-app-bar/mdc-top-app-bar';
+@use '~@material/textfield';
+@use '~@material/menu/mdc-menu';
+@use '~@material/menu-surface/mdc-menu-surface';
+@import '../base/variables';
+@import '../base/mixins';
 @include textfield.core-styles;
 @include form-field.core-styles;
 
@@ -54,7 +54,7 @@
     outline: none;
   }
 
-  input[type="search"]::-webkit-search-cancel-button {
+  input[type='search']::-webkit-search-cancel-button {
     // provide same experience on all browsers
     display: none;
   }
@@ -99,7 +99,7 @@
 // Keep the body below the top-bar
 
 .page-content {
-  @media (max-width: 599px) {
+  @media (width <= 599px) {
     margin-top: 56px; // mdc-top-app-bar__row
   }
 

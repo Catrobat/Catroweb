@@ -19,8 +19,7 @@ class AchievementsAdmin extends AbstractAdmin
 
   public function __construct(
     protected AchievementManager $achievement_manager
-  ) {
-  }
+  ) {}
 
   protected function configureRoutes(RouteCollectionInterface $collection): void
   {

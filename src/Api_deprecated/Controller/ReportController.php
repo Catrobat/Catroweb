@@ -32,8 +32,7 @@ class ReportController extends AbstractController
     private readonly AuthorizationCheckerInterface $authorization_checker,
     private readonly TokenStorageInterface $usage_tracking_token_storage,
     private readonly EntityManagerInterface $entity_manager,
-  ) {
-  }
+  ) {}
 
   /**
    * @deprecated

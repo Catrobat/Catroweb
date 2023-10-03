@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 export class PasswordVisibilityToggle {
-  constructor (selector = '.password-toggle') {
+  constructor(selector = '.password-toggle') {
     for (const element of document.querySelectorAll(selector)) {
       new SinglePasswordVisibilityToggle(element).initListeners()
     }
@@ -9,11 +9,11 @@ export class PasswordVisibilityToggle {
 }
 
 class SinglePasswordVisibilityToggle {
-  constructor (ref) {
+  constructor(ref) {
     this.$toggleButton = $(ref)
   }
 
-  initListeners () {
+  initListeners() {
     const thisInstance = this
     this.$toggleButton.on('click', function (event) {
       event.preventDefault()
@@ -21,7 +21,7 @@ class SinglePasswordVisibilityToggle {
     })
   }
 
-  toggleVisibility () {
+  toggleVisibility() {
     const passwordField = this.$toggleButton.parent().find('input')
     if (passwordField.attr('type') === 'text') {
       passwordField.attr('type', 'password')

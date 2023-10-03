@@ -11,6 +11,7 @@ aboutPocketCode: Pocket Code haqqında
 about: Haqqında
 education: Təhsil
 chat: Söhbət və forumlar
+privacyGuide: Privacy Awareness Guide
 others: Digərləri
 tutorials: Kömək
 googlePlay: Google Play
@@ -394,6 +395,7 @@ menu:
   helpAndTutorials: Kömək və təlimatlar
   followersAndFollowing: İzləyici
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: Giriş
   button:

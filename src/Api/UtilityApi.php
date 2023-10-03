@@ -8,11 +8,9 @@ use OpenAPI\Server\Api\UtilityApiInterface;
 use OpenAPI\Server\Model\SurveyResponse;
 use Symfony\Component\HttpFoundation\Response;
 
-final class UtilityApi extends AbstractApiController implements UtilityApiInterface
+class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
-  public function __construct(private readonly UtilityApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly UtilityApiFacade $facade) {}
 
   public function healthGet(int &$responseCode, array &$responseHeaders): void
   {

@@ -6,7 +6,7 @@ use App\Api\Services\Base\AbstractResponseManager;
 use App\DB\Entity\Survey;
 use OpenAPI\Server\Model\SurveyResponse;
 
-final class UtilityResponseManager extends AbstractResponseManager
+class UtilityResponseManager extends AbstractResponseManager
 {
   public function createSurveyResponse(Survey $survey): SurveyResponse
   {

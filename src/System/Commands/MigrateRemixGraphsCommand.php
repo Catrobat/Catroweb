@@ -17,7 +17,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
-use Exception;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -269,7 +268,7 @@ class MigrateRemixGraphsCommand extends Command
       $program_file = new File($program_file_path);
       // $extracted_file = new ExtractedCatrobatFile($program_file_path, $program_file_path, null);
       $extracted_file = $this->file_extractor->extract($program_file);
-    } catch (Exception) {
+    } catch (\Exception) {
       $progress_bar->clear();
       $output->writeln('<error>Cannot find Catrobat file of Program #'.$program_id.
         ', path of Catrobat file: '.$program_file_path.'</error>');

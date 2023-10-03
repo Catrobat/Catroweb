@@ -11,6 +11,7 @@ aboutPocketCode: درباره پاکت کد
 about: درباره
 education: تحصیلات
 chat: چت و انجمن ها
+privacyGuide: Privacy Awareness Guide
 others: دیگر
 tutorials: راهنما
 googlePlay: گوگل پلی
@@ -398,6 +399,7 @@ menu:
   helpAndTutorials: کمک و آموزش
   followersAndFollowing: پی‌گیر
   mediaLibrary: کتابخانه ی رسانه
+  studio: Studios
 login:
   login: ورود به سیستم
   button:

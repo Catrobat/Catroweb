@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class LoginController extends AbstractController
 {
   #[Route(path: '/login', name: 'login', methods: ['GET'])]
-  public function logoutAction(): Response
+  public function loginAction(): Response
   {
     return $this->render('security/login.html.twig');
   }

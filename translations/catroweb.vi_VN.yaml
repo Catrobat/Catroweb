@@ -11,6 +11,7 @@ aboutPocketCode: Về Pocket Code
 about: About
 education: Education
 chat: Chat and forums
+privacyGuide: Privacy Awareness Guide
 others: Others
 tutorials: Trợ giúp
 googlePlay: googlePlay
@@ -393,6 +394,7 @@ menu:
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
   mediaLibrary: Media library
+  studio: Studios
 login:
   login: Đăng nhập
   button:

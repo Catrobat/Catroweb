@@ -18,8 +18,7 @@ class BroadcastNotificationController extends CRUDController
   public function __construct(
     protected NotificationManager $notification_manager,
     protected UserManager $user_manager
-  ) {
-  }
+  ) {}
 
   public function listAction(Request $request): Response
   {

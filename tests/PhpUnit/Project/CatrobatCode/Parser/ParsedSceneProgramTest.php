@@ -5,8 +5,9 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedScene;
 use App\Project\CatrobatCode\Parser\ParsedSceneProgram;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -20,17 +21,13 @@ class ParsedSceneProgramTest extends TestCase
 
   protected function setUp(): void
   {
-    $xml_properties = simplexml_load_file(RefreshTestEnvHook::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
     $this->program = new ParsedSceneProgram($xml_properties);
   }
 
-  /**
-   * @test
-   *
-   * @dataProvider provideMethodNames
-   */
-  public function mustHaveMethod(mixed $method_name): void
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
   {
     $this->assertTrue(method_exists($this->program, $method_name));
   }
@@ -38,7 +35,7 @@ class ParsedSceneProgramTest extends TestCase
   /**
    * @return string[][]
    */
-  public function provideMethodNames(): array
+  public static function provideMethodNames(): array
   {
     return [
       ['hasScenes'],
@@ -48,21 +45,17 @@ class ParsedSceneProgramTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function hasScenesMustReturnTrue(): void
+  public function testHasScenesMustReturnTrue(): void
   {
     $this->assertTrue($this->program->hasScenes());
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getCodeStatisticMustReturnCodeStatistic(): void
+  public function testGetCodeStatisticMustReturnCodeStatistic(): void
   {
     $actual = $this->program->getCodeStatistic();
     $expected = CodeStatistic::class;
@@ -71,11 +64,9 @@ class ParsedSceneProgramTest extends TestCase
   }
 
   /**
-   * @test
-   *
-   * @depends mustHaveMethod
+   * @depends testMustHaveMethod
    */
-  public function getScenesMustReturnArrayOfScenes(): void
+  public function testGetScenesMustReturnArrayOfScenes(): void
   {
     $expected = ParsedScene::class;
 

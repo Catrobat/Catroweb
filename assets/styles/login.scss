@@ -1,4 +1,4 @@
-@import "./base/variables";
+@import './base/variables';
 
 .content-card {
   .login-container {
@@ -6,7 +6,7 @@
     max-width: 500px;
   }
 
-  @media screen and (min-width: 555px) {
+  @media screen and (width >= 555px) {
     padding: 1.5rem;
     border-radius: 0.5rem;
     max-width: 500px;

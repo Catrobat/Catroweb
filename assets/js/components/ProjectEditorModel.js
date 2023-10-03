@@ -3,10 +3,10 @@ import { CustomTranslationApi } from '../api/CustomTranslationApi'
 
 export const DIALOG = {
   CLOSE_EDITOR: 'close_editor',
-  CONFIRM_DELETE: 'confirm_delete'
+  CONFIRM_DELETE: 'confirm_delete',
 }
 
-export function ProjectEditorModel (programId, textFieldModels) {
+export function ProjectEditorModel(programId, textFieldModels) {
   const self = this
 
   this.programId = programId
@@ -83,37 +83,48 @@ export function ProjectEditorModel (programId, textFieldModels) {
   this.deleteTranslationResult = (result) => {
     if (result.isDenied) {
       Promise.all(
-        self.textFieldModels.map((textField) => textField.delete(this.selectedLanguage))
-      ).then((results) => {
-        if (results.length === self.textFieldModels.length) {
+        self.textFieldModels.map((textField) =>
+          textField.delete(this.selectedLanguage),
+        ),
+      )
+        .then((results) => {
+          if (results.length === self.textFieldModels.length) {
+            this.onClose()
+          }
+        })
+        .catch((reason) => {
+          for (const error of reason) {
+            if (error === 401) {
+              this.onUnauthorized()
+            }
+          }
+        })
+    }
+  }
+
+  this.save = () => {
+    Promise.all(
+      this.textFieldModels.map((textField) =>
+        textField.save(this.selectedLanguage),
+      ),
+    )
+      .then((results) => {
+        if (
+          this.selectedLanguage === '' ||
+          this.selectedLanguage === 'default'
+        ) {
+          this.onReload()
+        } else if (results.length === this.textFieldModels.length) {
           this.onClose()
         }
-      }).catch((reason) => {
+      })
+      .catch((reason) => {
         for (const error of reason) {
           if (error === 401) {
             this.onUnauthorized()
           }
         }
       })
-    }
-  }
-
-  this.save = () => {
-    Promise.all(
-      this.textFieldModels.map((textField) => textField.save(this.selectedLanguage))
-    ).then((results) => {
-      if (this.selectedLanguage === '' || this.selectedLanguage === 'default') {
-        this.onReload()
-      } else if (results.length === this.textFieldModels.length) {
-        this.onClose()
-      }
-    }).catch((reason) => {
-      for (const error of reason) {
-        if (error === 401) {
-          this.onUnauthorized()
-        }
-      }
-    })
   }
 
   this.deleteTranslation = () => {
@@ -127,35 +138,34 @@ export function ProjectEditorModel (programId, textFieldModels) {
 
   this.getLanguages = () => {
     const languagesPromise = $.get('../languages')
-    const definedLanguagesPromise = this.customTranslationApi.getCustomTranslationLanguages(this.programId)
+    const definedLanguagesPromise =
+      this.customTranslationApi.getCustomTranslationLanguages(this.programId)
 
-    Promise.all([languagesPromise, definedLanguagesPromise])
-      .then((results) => {
-        this.languages = results[0]
-        this.definedLanguages = results[1]
-        this.filterLanguages()
-        this.onLanguageList(this.languages)
-      })
+    Promise.all([languagesPromise, definedLanguagesPromise]).then((results) => {
+      this.languages = results[0]
+      this.definedLanguages = results[1]
+      this.filterLanguages()
+      this.onLanguageList(this.languages)
+    })
   }
 
   this.filterLanguages = () => {
-    const specialLanguages = [
-      'zh-CN',
-      'zh-TW',
-      'pt-BR',
-      'pt-PT'
-    ]
+    const specialLanguages = ['zh-CN', 'zh-TW', 'pt-BR', 'pt-PT']
 
     for (const language in this.languages) {
-      if (this.definedLanguages.includes(language) ||
-        (language.length !== 2 && !specialLanguages.includes(language))) {
+      if (
+        this.definedLanguages.includes(language) ||
+        (language.length !== 2 && !specialLanguages.includes(language))
+      ) {
         delete this.languages[language]
       }
     }
   }
 
   this.areChangesSaved = () => {
-    return this.textFieldModels.every(textField => textField.areChangesSaved())
+    return this.textFieldModels.every((textField) =>
+      textField.areChangesSaved(),
+    )
   }
 
   self.fetchText = () => {

@@ -1,7 +1,7 @@
 /* eslint-env jquery */
 
 // eslint-disable-next-line no-unused-vars
-function AdminBroadcastNotification () {
+function AdminBroadcastNotification() {
   $('.btn').click(function () {
     const resultBox = $('.resultBox')
     resultBox.html('')
@@ -21,7 +21,7 @@ function AdminBroadcastNotification () {
         }
         $('.resultBox').html(data)
         // Do Something
-      }
+      },
     })
   })
 }

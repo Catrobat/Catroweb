@@ -5,7 +5,7 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\CatrobatFile\ProgramXmlHeaderValidatorEventSubscriber;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -30,7 +30,8 @@ class ProgramXmlHeaderValidatorEventSubscriberTest extends TestCase
   public function testChecksIfTheProgramXmlHeaderIsValid(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $xml = simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/code.xml');
+    $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
+    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')->willReturn($xml);
     $this->program_xml_header_validator->validate($file);
   }
@@ -38,7 +39,8 @@ class ProgramXmlHeaderValidatorEventSubscriberTest extends TestCase
   public function testThrowsAnExceptionIfHeaderIsMissing(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $xml = simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/code.xml');
+    $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
+    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     unset($xml->header);
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
@@ -48,7 +50,8 @@ class ProgramXmlHeaderValidatorEventSubscriberTest extends TestCase
   public function testThrowsAnExceptionIfHeaderInformationIsMissing(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $xml = simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/code.xml');
+    $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
+    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     unset($xml->header->applicationName);
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
@@ -58,7 +61,8 @@ class ProgramXmlHeaderValidatorEventSubscriberTest extends TestCase
   public function testChecksIfProgramNameIsSet(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $xml = simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'/base/code.xml');
+    $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'/base/code.xml');
+    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     unset($xml->header->programName);
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
@@ -68,7 +72,8 @@ class ProgramXmlHeaderValidatorEventSubscriberTest extends TestCase
   public function testChecksIfDescriptionIsSet(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
-    $xml = simplexml_load_file(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'/base/code.xml');
+    $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'/base/code.xml');
+    $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     unset($xml->header->description);
     $file->expects($this->atLeastOnce())->method('getProgramXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);

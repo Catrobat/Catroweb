@@ -6,7 +6,7 @@ use App\Api\Services\AuthenticationManager;
 use App\Api\Services\Base\AbstractApiFacade;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 
-final class NotificationsApiFacade extends AbstractApiFacade
+class NotificationsApiFacade extends AbstractApiFacade
 {
   public function __construct(
     AuthenticationManager $authentication_manager,

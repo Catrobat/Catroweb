@@ -11,6 +11,7 @@ aboutPocketCode: Acerca do Pocket Code
 about: Sobre
 education: Education
 chat: Chat and forums
+privacyGuide: Privacy Awareness Guide
 others: Others
 tutorials: Ajuda
 googlePlay: Google Play
@@ -393,6 +394,7 @@ menu:
   helpAndTutorials: Help & tutorials
   followersAndFollowing: Follower
   mediaLibrary: Biblioteca Multimédia
+  studio: Studios
 login:
   login: Entrar
   button:

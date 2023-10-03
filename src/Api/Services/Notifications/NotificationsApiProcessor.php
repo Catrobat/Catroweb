@@ -7,11 +7,9 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\User\Notification\NotificationManager;
 
-final class NotificationsApiProcessor extends AbstractApiProcessor
+class NotificationsApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly NotificationRepository $notification_repository, private readonly NotificationManager $notification_manager)
-  {
-  }
+  public function __construct(private readonly NotificationRepository $notification_repository, private readonly NotificationManager $notification_manager) {}
 
   public function markNotificationAsSeen(int $notification_id, User $user): bool
   {

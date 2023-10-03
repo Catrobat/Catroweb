@@ -13,7 +13,7 @@
 #      the development
 #
 #
-name: "Docker Container tests"
+name: 'Docker Container tests'
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request origins from a branch on the official repository.
@@ -21,11 +21,10 @@ name: "Docker Container tests"
 on:
   pull_request:
     branches:
-      - '**'        # all branches
-      - '!master'   # excludes master to prevent double test runs during release prep.
+      - '**' # all branches
+      - '!master' # excludes master to prevent double test runs during release prep.
 
 jobs:
-
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Developer Container:
   #
@@ -43,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build and start all containers (Docker Compose)
         run: |
@@ -53,7 +52,7 @@ jobs:
 
       - name: Check Symfony application (info)
         run: |
-            docker exec app.catroweb bin/console about
+          docker exec app.catroweb bin/console about
 
       - name: Create a livid environment with dummy data
         run: |

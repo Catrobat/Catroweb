@@ -1,10 +1,14 @@
-export function deleteCookie (cname, path) {
-  document.cookie = cname + '=;' +
+export function deleteCookie(cname, path) {
+  document.cookie =
+    cname +
+    '=;' +
     'expires=Thu, 01 Jan 1970 00:00:01 GMT;' +
-    'path=' + ((path && path !== '') ? path : '/') + ';'
+    'path=' +
+    (path && path !== '' ? path : '/') +
+    ';'
 }
 
-export function getCookie (cname) {
+export function getCookie(cname) {
   const name = cname + '='
   const decodedCookie = decodeURIComponent(document.cookie)
   const ca = decodedCookie.split(';')
@@ -20,11 +24,11 @@ export function getCookie (cname) {
   return null
 }
 
-export function setCookie (name, value, expires, path) {
+export function setCookie(name, value, expires, path) {
   let cookie = name + '=' + value
   if (expires) {
     cookie += ';expires=' + expires
   }
-  cookie += ';path=' + ((path && path !== '') ? path : '/')
+  cookie += ';path=' + (path && path !== '' ? path : '/')
   document.cookie = cookie
 }

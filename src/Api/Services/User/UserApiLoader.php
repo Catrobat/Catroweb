@@ -6,11 +6,9 @@ use App\Api\Services\Base\AbstractApiLoader;
 use App\DB\Entity\User\User;
 use App\User\UserManager;
 
-final class UserApiLoader extends AbstractApiLoader
+class UserApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly UserManager $user_manager)
-  {
-  }
+  public function __construct(private readonly UserManager $user_manager) {}
 
   public function findUserByID(string $id): ?User
   {

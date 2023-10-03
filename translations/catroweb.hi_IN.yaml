@@ -11,6 +11,7 @@ aboutPocketCode: पॉकेट कोड के बारे में
 about: के बारे में
 education: शिक्षा
 chat: चैट और फ़ोरम
+privacyGuide: Privacy Awareness Guide
 others: अन्य
 tutorials: मदद
 googlePlay: गूगल प्ले स्टोर
@@ -394,6 +395,7 @@ menu:
   helpAndTutorials: सहायता और ट्यूटोरियल
   followersAndFollowing: अनुगामी
   mediaLibrary: मीडिया लाइब्रेरी
+  studio: Studios
 login:
   login: प्रवेश करे
   button:

@@ -5,19 +5,17 @@
 # are mainly UI-tests and a few unit tests. Hence, the tests take multiple hours. To reduce the run time, the tests
 # are executed in multiple independent jobs. However, all jobs use the same Catroweb Docker image to reduce build time.
 #
-name: "Dynamic analysis"
+name: 'Dynamic analysis'
 
 # Run-on every creation, update and merge of a pull request.
 # However, prevent checks to be initiated twice if the pull request is a branch on the same repository. (E.g dependabot)
 on:
   pull_request:
     branches:
-      - '**'        # all branches
-      - '!master'   # excludes master to prevent double test runs during release prep.
-
+      - '**' # all branches
+      - '!master' # excludes master to prevent double test runs during release prep.
 
 jobs:
-
   # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   # Build:
   #
@@ -31,7 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Build catroweb app image
         run: |
@@ -61,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -83,8 +81,7 @@ jobs:
           sleep 60
 
       - name: PhpUnit tests
-        run:
-          docker exec app.catroweb bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
+        run: docker exec app.catroweb bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 
       - name: Upload code coverage report
         uses: actions/upload-artifact@v3
@@ -92,7 +89,6 @@ jobs:
         with:
           name: PhpUnitTestReport
           path: tests/TestReports/CoverageReports/PhpUnit
-
       - uses: codecov/codecov-action@v3
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
@@ -170,7 +166,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Pull the latest images to build (Faster than caching)
         run: |
@@ -238,7 +234,6 @@ jobs:
             cat tests/TestReports/Behat/${{ matrix.testSuite }}.log;
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
-
       - uses: codecov/codecov-action@v3
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
@@ -297,4 +292,3 @@ jobs:
         with:
           name: logs_${{ matrix.testSuite }}
           path: var/log/test
-

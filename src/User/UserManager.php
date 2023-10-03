@@ -14,7 +14,6 @@ use Doctrine\ORM\Query\Expr\Join;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\QueryString;
 use Elastica\Util;
-use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Sonata\UserBundle\Model\UserInterface;
 use Sonata\UserBundle\Model\UserManagerInterface;
@@ -26,9 +25,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
-  {
-  }
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository) {}
 
   public function decodeToken(string $token): array
   {
@@ -42,7 +39,7 @@ class UserManager implements UserManagerInterface
       }
 
       return json_decode($tokenPayload, true, 512, JSON_THROW_ON_ERROR);
-    } catch (Exception) {
+    } catch (\Exception) {
       return [];
     }
   }
@@ -159,7 +156,7 @@ class UserManager implements UserManagerInterface
 
     $words = explode(' ', $query);
     foreach ($words as &$word) {
-      $word = $word.'*';
+      $word .= '*';
     }
     unset($word);
     $query = implode(' ', $words);

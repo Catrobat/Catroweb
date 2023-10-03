@@ -12,11 +12,9 @@ use OpenAPI\Server\Model\RefreshRequest;
 use OpenAPI\Server\Model\UpgradeTokenRequest;
 use Symfony\Component\HttpFoundation\Response;
 
-final class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
+class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
 {
-  public function __construct(private readonly AuthenticationApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly AuthenticationApiFacade $facade) {}
 
   public function authenticationGet(int &$responseCode, array &$responseHeaders): void
   {

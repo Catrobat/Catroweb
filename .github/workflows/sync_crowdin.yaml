@@ -27,7 +27,6 @@ on:
   workflow_dispatch:
 
 jobs:
-
   #
   # - Two-way synchronization:
   #     -- In case of new strings in the repo, they are uploaded to Crowdin
@@ -45,9 +44,9 @@ jobs:
     name: Synchronize Crowdin Translations
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
-      - uses: crowdin/github-action@v1.9.0
+      - uses: crowdin/github-action@v1.13.1
         with:
           upload_sources: true
           upload_translations: false

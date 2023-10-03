@@ -6,7 +6,7 @@ use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ProgramFileRepository;
 use App\Storage\FileHelper;
-use App\System\Testing\PhpUnit\Hook\RefreshTestEnvHook;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Filesystem\Filesystem;
@@ -28,8 +28,8 @@ class ProgramFileRepositoryTest extends TestCase
 
   protected function setUp(): void
   {
-    $this->storage_dir = RefreshTestEnvHook::$CACHE_DIR.'zip/';
-    $this->extract_dir = RefreshTestEnvHook::$CACHE_DIR.'extract/';
+    $this->storage_dir = BootstrapExtension::$CACHE_DIR.'zip/';
+    $this->extract_dir = BootstrapExtension::$CACHE_DIR.'extract/';
     $filesystem = new Filesystem();
     $filesystem->mkdir($this->storage_dir);
     $filesystem->mkdir($this->extract_dir);
@@ -63,7 +63,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testStoresAFileToTheGivenDirectory(): void
   {
-    $file_name = RefreshTestEnvHook::$FIXTURES_DIR.'test.catrobat';
+    $file_name = BootstrapExtension::$FIXTURES_DIR.'test.catrobat';
     $id = 'test';
     $file = new File($file_name);
 
@@ -75,7 +75,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testSavesAGivenProgramDirectory(): void
   {
-    $extracted_program = new ExtractedCatrobatFile(RefreshTestEnvHook::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
+    $extracted_program = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
     $id = 'test';
 
     $this->program_file_repository->zipProject($extracted_program->getPath(), $id);
@@ -86,7 +86,7 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testReturnsTheFile(): void
   {
-    $file_name = RefreshTestEnvHook::$FIXTURES_DIR.'test.catrobat';
+    $file_name = BootstrapExtension::$FIXTURES_DIR.'test.catrobat';
     $id = 'test';
     $file = new File($file_name);
 

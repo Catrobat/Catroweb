@@ -22,7 +22,6 @@ use App\Project\ProgramManager;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
 use OpenAPI\Server\Model\ProjectResponse;
@@ -736,33 +735,6 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertSame(Response::HTTP_UNPROCESSABLE_ENTITY, $response_code);
     $this->assertInstanceOf(UploadErrorResponse::class, $response);
   }
-
-//  /**
-//   * @group unit
-//   * @small
-//   * @covers \App\Api\ProjectsApi::projectsPost
-//   *
-//   * @throws Exception
-//   */
-//  public function testProjectsPostAddExceptionForbidden(): void
-//  {
-//    $response_code = 200;
-//    $response_headers = [];
-//
-//    $processor = $this->createMock(ProjectsApiProcessor::class);
-//    $processor->method('addProject')->willThrowException(new Exception());
-//    $authentication_manager = $this->createMock(AuthenticationManager::class);
-//    $user = $this->createMock(User::class);
-//    $user->method('isVerified')->willReturn(false);
-//    $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
-//    $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
-//    $this->facade->method('getProcessor')->willReturn($processor);
-//
-//    $file = $this->createMock(UploadedFile::class);
-//    $this->object->projectsPost('checksum', $file, null, null, null, $response_code, $response_headers);
-//
-//    $this->assertSame(Response::HTTP_FORBIDDEN, $response_code);
-//  }
 
   /**
    * @group unit

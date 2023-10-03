@@ -5,6 +5,7 @@ namespace Tests\PhpUnit\Application\Theme;
 use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use App\Utils\RequestHelper;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -45,10 +46,9 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   /**
    * @group integration
    *
-   * @dataProvider kernelRequestDataProvider
-   *
    * @throws \ReflectionException
    */
+  #[DataProvider('provideKernelRequestData')]
   public function testOnKernelRequestThemeInRequest(
     string $request_theme, string $request_uri, string $expected_routing_theme, string $expected_flavor
   ): void {
@@ -67,7 +67,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
     $this->object->onKernelRequest($event);
   }
 
-  public function kernelRequestDataProvider(): array
+  public static function provideKernelRequestData(): array
   {
     return [
       'Using a valid request theme' => [
@@ -181,9 +181,17 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   {
     $request_attributes->expects($this->exactly(2))
       ->method('set')
-      ->withConsecutive(
-        ['theme', $theme],
-        ['flavor', $flavor]
+      ->willReturnCallback(
+        function ($key, $value) use ($theme, $flavor) {
+          switch ($key) {
+            case 'theme':
+              $this->assertEquals($theme, $value);
+              break;
+            case 'flavor':
+              $this->assertEquals($flavor, $value);
+              break;
+          }
+        }
       )
     ;
   }

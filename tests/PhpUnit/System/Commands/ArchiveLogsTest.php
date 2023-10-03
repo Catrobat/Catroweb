@@ -15,10 +15,7 @@ use Symfony\Component\Console\Tester\CommandTester;
  */
 class ArchiveLogsTest extends KernelTestCase
 {
-  /**
-   * @test
-   */
-  public function archiveLogs(): void
+  public function testArchiveLogs(): void
   {
     // setup app
     $kernel = static::createKernel();

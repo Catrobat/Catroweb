@@ -42,8 +42,7 @@ class ProjectsAdmin extends AbstractAdmin
     private readonly ScreenshotRepository $screenshot_repository,
     protected TokenStorageInterface $security_token_storage,
     private readonly ParameterBagInterface $parameter_bag
-  ) {
-  }
+  ) {}
 
   public function getObjectMetadata($object): MetadataInterface
   {
