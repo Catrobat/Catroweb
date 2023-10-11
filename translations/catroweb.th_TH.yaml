@@ -11,7 +11,7 @@ aboutPocketCode: เกี่ยวกับ Pocket Code
 about: เกี่ยวกับ
 education: การศึกษา
 chat: แชทและฟอรัม
-privacyGuide: Privacy Awareness Guide
+privacyGuide: คู่มือควรรู้เกี่ยวกับความเป็นส่วนตัว
 others: อื่นๆ
 tutorials: ช่วยเหลือ
 googlePlay: Google Play
@@ -28,15 +28,15 @@ reportIt: ใช่ รายงานเลย!
 areYouSure: คุณแน่ใจหรือไม่?
 noWayOfReturn: ไม่มีทางที่จะกู้คืนการกระทำของคุณ!
 download: ดาวน์โหลด
-downloadDisabledAlert: You must be logged in to download this project
+downloadDisabledAlert: คุณต้องเข้าสู่ระบบเพื่อดาวน์โหลดโครงการนี้
 name: ชื่อ
 description: คำอธิบาย
 noDescription: ไม่มีคำอธิบาย
 credits: เครดิต
 noCredits: ไม่มีเครดิต
 notesAndCreditsDescription: คุณสร้างโครงการนี้ได้อย่างไร คุณใช้ไอเดียสคริปต์หรืออาร์ตเวิร์คจากคนอื่นหรือไม่? ขอบคุณพวกเขาที่นี่
-projectImportedFromScratch: This project was imported from MIT Scratch. You can check out the original project
-scratchImportedProjectLinkHere: here.
+projectImportedFromScratch: โปรเจ็กต์นี้นำเข้าจาก MIT Scratch สามารถตรวจสอบโครงการเดิมได้
+scratchImportedProjectLinkHere: ที่นี่
 country: ประเทศ
 loginText: login
 privacyPolicy: นโยบายความเป็นส่วนตัว
@@ -118,8 +118,8 @@ programs:
     ใช่ลบทิ้ง!
     ยกเลิก
   deleteNotFoundError: ไม่พบโปรเจ็กต์ที่จะลบภายใต้ผู้ใช้ของคุณ
-  private: private
-  public: public
+  private: ส่วนตัว
+  public: สาธารณะ
   setPrivateAction: ตั้งเป็นส่วนตัว
   setPublicAction: ตั้งเป็นสาธารณะ
   changeVisibility: |+
@@ -213,8 +213,8 @@ programs:
   editTranslation: แก้ไข %language% การแปล
   translations: คำแปล
   createTranslation: สร้างการแปล
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  deletedComment: '**ลบแล้ว**'
+  replyLabel: ตอบกลับ
   repliesLabel: ตอบกลับ
 remixGraph:
   title: ผสม
@@ -227,7 +227,7 @@ remixGraph:
   programNotAvailable: 'ไม่พร้อมใช้งาน'
   programUnknownUser: 'ผู้ใช้ที่ไม่รู้จัก'
 noReply:
-  - This is an automated message - Please do not reply directly to this email.
+  - นี่เป็นข้อความอัตโนมัติ - โปรดอย่าตอบกลับอีเมลนี้โดยตรง
 accountConfirmation:
   subject: การยืนยันบัญชี Catrobat ของคุณ
   message: |
@@ -401,15 +401,15 @@ menu:
   helpAndTutorials: ความช่วยเหลือและแบบฝึกหัด
   followersAndFollowing: ผู้ติดตาม
   mediaLibrary: ไลบรารีสื่อ
-  studio: Studios
+  studio: สตูดิโอ
 login:
   login: เข้าสู่ระบบ
   button:
-    loginNow: Login now
+    loginNow: ล็อกอินตอนนี้
     createAccount: สร้างบัญชี
-    forgetPassword: Forget password?
+    forgetPassword: ลืมรหัสผ่าน?
   oauth:
-    title: Or you can join with
+    title: หรือจะร่วมด้วยก็ได้
   passOrUser: รหัสผ่านหรือชื่อผู้ใช้ของคุณไม่ถูกต้อง
   noUsername: ไม่พบชื่อผู้ใช้หรืออีเมล์คุณ
   forgotPass: ลืมรหัสผ่านหรือชื่อผู้ใช้?
@@ -427,17 +427,17 @@ login:
   passwordFirst: รหัสผ่าน
   passwordSecond: ยืนยันรหัสผ่าน
 register:
-  title: Sign up
+  title: ลงทะเบียน
   subText: "การดำเนินการต่อแสดงว่าคุณกำลังตั้งค่าบัญชีชุมชน Catrobat และยอมรับ %var1% และ %var2% ของเรา"
   button:
     cancel: ยกเลิก
     createAccount: สร้างบัญชี
 accountRecovery:
-  title: Account recovery
-  description: If you remember the email or username of your account we can send you a link to reset your password.
+  title: กู้คืนบัญชี
+  description: หากคุณจำอีเมลหรือชื่อผู้ใช้บัญชีของคุณได้ เราสามารถส่งลิงก์เพื่อรีเซ็ตรหัสผ่านให้คุณได้
   button:
     cancel: ยกเลิก
-    submit: Recover password
+    submit: กู้คืนรหัสผ่าน
 resetPassword:
   request:
     title: "รีเซ็ตรหัสผ่านของคุณ"
@@ -448,8 +448,8 @@ resetPassword:
   check:
     title: "ตรวจสอบอีเมลของคุณ"
     description: "หากมีบัญชีที่ตรงกับอีเมลของคุณ แสดงว่าระบบเพิ่งส่งอีเมลที่มีลิงก์ซึ่งคุณสามารถใช้รีเซ็ตรหัสผ่านได้ ลิงก์นี้จะหมดอายุใน %time%"
-    descriptionTwo: "You can request a new password reset every %throttleLimit% hours."
-    descriptionThree: "If you did not receive an email please check your spam folder or write an email to our support at %email-webmaster%."
+    descriptionTwo: "คุณสามารถขอรีเซ็ตรหัสผ่านใหม่ได้ทุก %throttleLimit% ชั่วโมง"
+    descriptionThree: "หากคุณไม่ได้รับอีเมล โปรดตรวจสอบโฟลเดอร์สแปมของคุณหรือเขียนอีเมลถึงฝ่ายสนับสนุนของเราที่ %email-webmaster%"
   email:
     title: "สวัสดี!"
     visitLink: "หากต้องการรีเซ็ตรหัสผ่าน โปรดไปที่ลิงก์ต่อไปนี้"
@@ -820,7 +820,7 @@ achievements:
         title: "นักภาษาศาสตร์"
         description: "แปลโครงการของคุณเป็น 5 ภาษา"
 tags:
-  title: '{0} |{1} Tag |]1,Inf] Tags'
+  title: '{0} |{1} แท็ก |]1,Inf] แท็ก'
   tag:
     game:
       title: เกม
@@ -854,21 +854,21 @@ extensions:
     mindstorms:
       title: Mindstorms
     multiplayer:
-      title: Multiplayer
+      title: เล่นหลายคน
 studio:
-  title: 'Studios'
-  singular: 'Studio'
-  create_studio: 'Create studio'
-  delete_studio: 'Delete studio'
-  studio_name: 'Studio name'
-  join: 'Join'
-  leave: 'Leave'
+  title: 'สตูดิโอ'
+  singular: 'สตูดิโอ'
+  create_studio: 'สร้างสตูดิโอ'
+  delete_studio: 'ลบสตูดิโอ'
+  studio_name: 'ชื่อสตูดิโอ'
+  join: 'เข้าร่วม'
+  leave: 'ออกจากระบบ'
   report: 'รายงาน'
-  public: 'public'
-  private: 'private'
+  public: 'สาธารณะ'
+  private: 'ส่วนตัว'
   overview:
-    joined_studios: 'Joined studios'
-    public_studios: 'Public studios'
+    joined_studios: 'เข้าร่วมสตูดิโอ'
+    public_studios: 'สตูดิโอสาธารณะ'
   details:
     showMore: 'แสดงมากขึ้น'
     showLess: 'แสดงน้อยลง'
@@ -886,9 +886,9 @@ studio:
       send: 'ส่ง'
       no_comments: 'สตูดิโอนี้ยังไม่มีความคิดเห็น'
       disabled_comments: 'ความคิดเห็นถูกปิดการใช้งานสำหรับสตูดิโอนี้'
-      remove_comment: 'Remove comment'
+      remove_comment: 'ลบความคิดเห็น'
       post_error: 'เกิดข้อผิดพลาดขณะโพสต์ความคิดเห็นของคุณ ลองอีกครั้งในภายหลัง'
-      remove_error: 'Something went wrong while removing the comment. Try again later.'
+      remove_error: 'เกิดข้อผิดพลาดขณะลบความคิดเห็น ลองอีกครั้งในภายหลัง'
     activity_list:
       title: 'กิจกรรม'
       join_studio: '%user% เข้าร่วมสตูดิโอ'
