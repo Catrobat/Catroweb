@@ -57,7 +57,7 @@
     "sass-loader": "^13.3.2",
     "standard": "^17.1.0",
     "stimulus": "^3.2.2",
-    "stylelint": "^15.10.3",
+    "stylelint": "^15.11.0",
     "stylelint-config-standard-scss": "^11.0.0",
     "webpack-bugsnag-plugins": "^1.8.0",
     "webpack-cli": "^5.1.4",
