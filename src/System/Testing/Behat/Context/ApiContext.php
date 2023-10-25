@@ -221,12 +221,7 @@ class ApiContext implements Context
    */
   protected function getDataFixturesContext(InitializedSymfonyExtensionEnvironment $environment): DataFixturesContext
   {
-    $context = $environment->getContext(DataFixturesContext::class);
-    if ($context instanceof DataFixturesContext) {
-      return $context;
-    }
-
-    throw new \Exception("Can't get DataFixturesContext");
+    return $environment->getContext(DataFixturesContext::class);
   }
 
   /**

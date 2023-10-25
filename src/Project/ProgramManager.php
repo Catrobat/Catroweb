@@ -709,7 +709,7 @@ class ProgramManager
 
     $words = explode(' ', $query);
     foreach ($words as &$word) {
-      $word = $word.'*';
+      $word .= '*';
     }
     unset($word);
     $query = implode(' ', $words);
