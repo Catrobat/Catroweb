@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "9b781a5d80e39ce7b5a72e0707c81a21",
+    "content-hash": "a5c6764a2bfb37ce41381b4e40f216b0",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7204,16 +7204,16 @@
         },
         {
             "name": "sonata-project/exporter",
-            "version": "3.2.0",
+            "version": "3.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/exporter.git",
-                "reference": "2a8f10f6dcc302075969d21bf838e3e21628c00c"
+                "reference": "4ee51253ae536e50ba0985505387614a8af0fed1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/2a8f10f6dcc302075969d21bf838e3e21628c00c",
-                "reference": "2a8f10f6dcc302075969d21bf838e3e21628c00c",
+                "url": "https://api.github.com/repos/sonata-project/exporter/zipball/4ee51253ae536e50ba0985505387614a8af0fed1",
+                "reference": "4ee51253ae536e50ba0985505387614a8af0fed1",
                 "shasum": ""
             },
             "require": {
@@ -7241,7 +7241,7 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.17",
+                "rector/rector": "^0.18",
                 "symfony/config": "^5.4 || ^6.2",
                 "symfony/dependency-injection": "^5.4 || ^6.2",
                 "symfony/http-foundation": "^5.4 || ^6.2",
@@ -7288,7 +7288,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/exporter/issues",
-                "source": "https://github.com/sonata-project/exporter/tree/3.2.0"
+                "source": "https://github.com/sonata-project/exporter/tree/3.3.0"
             },
             "funding": [
                 {
@@ -7308,7 +7308,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-07-22T13:34:14+00:00"
+            "time": "2023-10-23T16:27:25+00:00"
         },
         {
             "name": "sonata-project/form-extensions",

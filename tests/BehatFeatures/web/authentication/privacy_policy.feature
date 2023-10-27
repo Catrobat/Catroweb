@@ -15,4 +15,4 @@ Feature: Privacy policy feature
     Given I am on "/app/register"
     And I wait for the page to be loaded
     When I click "#privacyPolicy"
-    Given I should be on "https://developer.catrobat.org//pages/legal/policies/privacy/"
+    Given I should be on "https://developer.catrobat.org/pages/legal/policies/privacy/"
