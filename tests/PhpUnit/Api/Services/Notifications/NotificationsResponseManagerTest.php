@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class NotificationsResponseManagerTest extends DefaultTestCase
 {
-  protected NotificationsResponseManager|MockObject $object;
+  protected MockObject|NotificationsResponseManager $object;
 
   protected function setUp(): void
   {

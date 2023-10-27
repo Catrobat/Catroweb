@@ -211,7 +211,7 @@ class CodeStatistic
     }
   }
 
-  protected function updateBrickStatistic(Script|Brick $brick): void
+  protected function updateBrickStatistic(Brick|Script $brick): void
   {
     ++$this->total_num_bricks;
     switch ($brick->getImgFile()) {

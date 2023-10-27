@@ -121,7 +121,7 @@ class ScreenshotRepository
     return self::DEFAULT_SCREENSHOT;
   }
 
-  public function getThumbnailWebPath(string|int $id): string
+  public function getThumbnailWebPath(int|string $id): string
   {
     $filename = $this->thumbnail_dir.$this->generateFileNameFromId((string) $id);
     if (file_exists($filename)) {
