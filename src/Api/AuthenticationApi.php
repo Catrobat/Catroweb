@@ -52,7 +52,7 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
     return new JWTResponse();
   }
 
-  public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): array|object|null
+  public function authenticationOauthPost(OAuthLoginRequest $o_auth_login_request, int &$responseCode, array &$responseHeaders): null|array|object
   {
     $resource_owner = $o_auth_login_request->getResourceOwner() ?? '';
     $id_token = $o_auth_login_request->getIdToken() ?? '';
@@ -80,7 +80,7 @@ class AuthenticationApi extends AbstractApiController implements AuthenticationA
     return $this->facade->getResponseManager()->createOAuthPostResponse($token, $refresh_token);
   }
 
-  public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, int &$responseCode, array &$responseHeaders): array|object|null
+  public function authenticationUpgradePost(UpgradeTokenRequest $upgrade_token_request, int &$responseCode, array &$responseHeaders): null|array|object
   {
     $deprecated_token = $upgrade_token_request->getUploadToken();
     if (empty($deprecated_token)) {

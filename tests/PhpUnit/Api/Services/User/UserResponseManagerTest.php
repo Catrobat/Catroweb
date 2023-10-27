@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class UserResponseManagerTest extends DefaultTestCase
 {
-  protected UserResponseManager|MockObject $object;
+  protected MockObject|UserResponseManager $object;
 
   protected function setUp(): void
   {
