@@ -78,7 +78,7 @@ class UpdateProjectPopularityCommand extends Command
   // Currently just min max scaling
   protected function scale(int $x, int $min, int $max): float
   {
-    if ($max - $min == 0) {
+    if (0 == $max - $min) {
       return 0;
     }
 
@@ -130,7 +130,8 @@ class UpdateProjectPopularityCommand extends Command
       ->from(Program::class, 'p')
       ->leftJoin(ProgramRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
       ->groupBy('r.ancestor_id')
-      ->orderBy('count', 'DESC');
+      ->orderBy('count', 'DESC')
+    ;
     $max = $query_builder->getQuery()->getResult()[0]['count'];
     $query_builder->orderBy('count', 'ASC');
     $min = $query_builder->getQuery()->getResult()[0]['count'];
@@ -152,7 +153,8 @@ class UpdateProjectPopularityCommand extends Command
       ->leftJoin(ProgramLike::class, 'e', Join::WITH, 'p.id = e.program_id')
       ->groupBy('e.program_id')
       ->orderBy('count', 'DESC')
-      ->setMaxResults(1);
+      ->setMaxResults(1)
+    ;
 
     $max = $query_builder->getQuery()->getResult()[0]['count'];
     $query_builder->orderBy('count', 'ASC');
