@@ -148,7 +148,7 @@ export class ProjectList {
       views: 'visibility',
       downloads: 'get_app',
       uploaded: 'schedule',
-      author: 'person'
+      author: 'person',
     }
 
     const propertyValue =
