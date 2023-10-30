@@ -14,7 +14,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class TranslationTrimStorageCommandTest extends TestCase
 {
-  protected TranslationTrimStorageCommand|MockObject $object;
+  protected MockObject|TranslationTrimStorageCommand $object;
 
   protected function setUp(): void
   {

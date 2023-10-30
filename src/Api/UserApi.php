@@ -23,7 +23,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * @throws \Exception
    */
-  public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
+  public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): null|JWTResponse|RegisterErrorResponse
   {
     $validation_wrapper = $this->facade->getRequestValidator()->validateRegistration($register_request, $accept_language);
 
@@ -91,7 +91,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): null|array|object
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($user, $update_user_request, $accept_language);

@@ -23,9 +23,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class UtilityApiTest extends DefaultTestCase
 {
-  protected UtilityApi|MockObject $object;
+  protected MockObject|UtilityApi $object;
 
-  protected UtilityApiFacade|MockObject $facade;
+  protected MockObject|UtilityApiFacade $facade;
 
   protected function setUp(): void
   {

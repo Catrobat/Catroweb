@@ -40,9 +40,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class ProjectsApiTest extends DefaultTestCase
 {
-  protected ProjectsApi|MockObject $object;
+  protected MockObject|ProjectsApi $object;
 
-  protected ProjectsApiFacade|MockObject $facade;
+  protected MockObject|ProjectsApiFacade $facade;
 
   protected mixed $full_validator;
   protected mixed $full_response_manager;
@@ -153,7 +153,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
-  private function projectIdPut_setLoaderAndAuthManager(Program|MockObject $project = null, User|MockObject $user = null): void
+  private function projectIdPut_setLoaderAndAuthManager(MockObject|Program $project = null, MockObject|User $user = null): void
   {
     if (is_null($user)) {
       $user = $this->createMock(User::class);
@@ -168,14 +168,14 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setAuthManager($user);
   }
 
-  private function projectIdPut_setLoader(Program|MockObject|null $project): void
+  private function projectIdPut_setLoader(null|MockObject|Program $project): void
   {
     $loader = $this->createMock(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
     $this->facade->method('getLoader')->willReturn($loader);
   }
 
-  private function projectIdPut_setAuthManager(User|MockObject|null $user): void
+  private function projectIdPut_setAuthManager(null|MockObject|User $user): void
   {
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
@@ -189,7 +189,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPut(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $project = new Program();
@@ -246,7 +246,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoader(null);
@@ -268,7 +268,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutUnauthorized(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoader($this->createMock(Program::class));
@@ -291,7 +291,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutForbidden(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $project = new Program();
@@ -318,7 +318,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutValidationError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoaderAndAuthManager();
@@ -354,7 +354,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutSaveXMLError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoaderAndAuthManager();
