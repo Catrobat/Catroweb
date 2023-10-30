@@ -2,8 +2,6 @@
 
 namespace App\Application\Controller\MediaLibrary;
 
-use App\Api\MediaLibraryApi;
-use App\Api\Services\MediaLibrary\MediaLibraryApiFacade;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -54,31 +52,12 @@ class MediaLibraryController extends AbstractController
     if (null === $package) {
       throw $this->createNotFoundException('Unable to find Package entity.');
     }
-    // dd($package);
-    // dd($package->getCategories());
 
-    $categories = $package->getCategories();
     $categories_sorted = $this->sortCategoriesFlavoredFirst($package->getCategories()->toArray(), $flavor, $translator);
-    // dd($categories);
 
     $files = [];
-
-    // $apiFacade = new MediaLibraryApiFacade();
-    // $api = new MediaLibraryApi($apiFacade);
-
-    /*
-    foreach ($categories_sorted as $category) {
-      //dd($category);
-      //$api->mediaPackageNameGet($category['name']);
-      dd($this->entity_manager->getRepository(MediaPackageFile::class)->findAll());
-      $file = $this->entity_manager->getRepository(MediaPackageFile::class)->findBy(['category' => $category]);
-      $this->entity_manager->getRepository(MediaPackageFile::class)->
-      dd($file);
-    }
-    */
-
     $files_array = $this->entity_manager->getRepository(MediaPackageFile::class)->findAll();
-    // dd($files_array);
+
     foreach ($files_array as $file) {
       if (!$file->getActive()) {
         continue;
@@ -95,38 +74,23 @@ class MediaLibraryController extends AbstractController
       }
 
       if ($package_found) {
-        $download_url = $this->generateUrl('download_media',
-          [
-            'theme' => $flavor,
-            'id' => $file->getId(),
-          ],
-          UrlGeneratorInterface::ABSOLUTE_URL);
-
-        $url = getFileUrl($file, $this->catrobat_mediapackage_path) ?? $download_url;
-
-        $file_raw = [
-          'id' => $file->getId(),
-          'name' => $file->getName(),
-          'extension' => $file->getExtension(),
-          'type' => getFileType($file->getExtension()),
-          'category' => $file->getCategory(),
-          'flavors' => $file->getFlavors(),
-          'url' => $url,
-          'download_url' => $download_url,
-        ];
-
-        $files[] = $file_raw;
+        $files[] = $this->formatFile($file, $flavor, $translator);
       }
     }
 
+    // dd($package);
+    // dd($package->getCategories());
+    // dd($package->getCategories()->toArray());
+    // dd($categories_sorted);
     // dd($files);
+    // dd($files_array);
 
     return $this->render('MediaLibrary/media_library_package.html.twig', [
       'flavor' => $flavor,
       'package' => $package_name,
       'categories' => $categories_sorted,
-      'mediaDir' => '/'.$this->catrobat_mediapackage_path,
       'files' => $files,
+      'mediaDir' => '/'.$this->catrobat_mediapackage_path,
     ]);
   }
 
@@ -182,79 +146,118 @@ class MediaLibraryController extends AbstractController
    *
    * @return array the sorted array
    */
-  private function sortCategoriesFlavoredFirst(array $unsorted_categories, string $flavor, TranslatorInterface $translator)
+  private function sortCategoriesFlavoredFirst(array $unsorted_categories, string $flavor, TranslatorInterface $translator): array
   {
     $categories = [];
 
     if ('pocketcode' !== $flavor) {
-      $flavor_name = $translator->trans('flavor.'.$flavor, [], 'catroweb');
-      $theme_special_name = $translator->trans('media-packages.theme-special',
-        ['%flavor%' => $flavor_name], 'catroweb');
+      $main_flavor = $this->formatFlavor($flavor, $translator);
 
       $categories[] = [
         'id' => -1,
         'displayID' => 'theme-special',
-        'name' => $theme_special_name,
-        // 'package' => '',
+        'name' => $main_flavor['name'],
+        'flavor' => $main_flavor,
         'priority' => PHP_INT_MAX,
+        'themeSpecial' => true,
       ];
     }
 
     /** @var MediaPackageCategory $category */
     foreach ($unsorted_categories as $category) {
       if (str_starts_with((string) $category->getName(), 'ThemeSpecial')) {
+        if ('pocketcode' !== $flavor && count($categories) > 0) {
+          $category_name = trim(str_replace('ThemeSpecial', '', (string) $category->getName()));
+
+          if ($categories[0]['flavor']['name'] === $category_name) {
+            $category_temp = $this->formatCategory($category);
+            $categories[0]['id'] = $category_temp['id'];
+            $categories[0]['displayID'] = $category_temp['displayID'];
+            $categories[0]['name'] = $category_temp['name'];
+          }
+        }
+
         continue;
       }
 
-      $categories[] = [
-        'id' => $category->getId(),
-        'displayID' => preg_replace('#[^A-Za-z0-9-_:.]#', '', $category->getName()),
-        'name' => $category->getName(),
-        // 'package' => $category->getPackage(),
-        'priority' => $category->getPriority(),
-      ];
+      $categories[] = $this->formatCategory($category);
     }
 
     usort($categories, fn ($category_a, $category_b) => $category_b['priority'] <=> $category_a['priority']);
 
     return $categories;
   }
+
+  public function formatCategory(MediaPackageCategory $category): array
+  {
+    return [
+      'id' => $category->getId(),
+      'displayID' => preg_replace('#[^A-Za-z0-9-_:.]#', '', $category->getName()),
+      'name' => $category->getName(),
+      'flavor' => '',
+      'priority' => $category->getPriority(),
+      'themeSpecial' => false,
+    ];
+  }
+
+  public function formatFile(MediaPackageFile $file, string $flavor, TranslatorInterface $translator): array
+  {
+    // flavors
+    $flavors = $file->getFlavors()->toArray();
+    $main_flavor = 'pocketcode';
+    foreach ($flavors as $f) {
+      $flavor_name = $f->getName();
+      if ('pocketcode' !== $flavor_name) {
+        $main_flavor = $flavor_name;
+        break;
+      }
+    }
+
+    // urls
+    $download_url = $this->generateUrl('download_media',
+      [
+        'theme' => $flavor,
+        'id' => $file->getId(),
+      ],
+      UrlGeneratorInterface::ABSOLUTE_URL);
+    $url = getFileUrl($file, $this->catrobat_mediapackage_path) ?? $download_url;
+
+    return [
+      'id' => $file->getId(),
+      'name' => $file->getName(),
+      'extension' => $file->getExtension(),
+      'type' => getFileType($file->getExtension()),
+      'category' => $this->formatCategory($file->getCategory()),
+      // 'flavors' => $flavors,
+      'flavor' => $this->formatFlavor($main_flavor, $translator),
+      'url' => $url,
+      'download_url' => $download_url,
+    ];
+  }
+
+  public function formatFlavor(string $flavor, TranslatorInterface $translator): array
+  {
+    $flavor_name = $translator->trans('flavor.'.$flavor, [], 'catroweb');
+
+    return [
+      'code' => $flavor,
+      'name' => $flavor_name,
+    ];
+  }
 }
 
 function getFileType(string $extension): string
 {
-  $imageExtensions = [
-    'bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu',
-    'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx',
-    'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd',
-  ];
-  $soundExtensions = [
-    'adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva', 'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya',
-    'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip', 'weba', 'aac', 'aif', 'caf', 'flac', 'mka', 'm3u', 'wax', 'wma',
-    'ram', 'rmp', 'wav', 'xm',
-  ];
-  $videoExtensions = [
-    '3gp', '3g2', 'h261', 'h263', 'h264', 'jpgv', 'jpm', 'mj2', 'mp4', 'mpeg', 'ogv', 'qt', 'uvh', 'uvm', 'uvp',
-    'uvs', 'uvv', 'dvb', 'fvt', 'mxu', 'pyv', 'uvu', 'viv', 'webm', 'f4v', 'fli', 'flv', 'm4v', 'mkv', 'mng', 'asf',
-    'vob', 'wm', 'wmv', 'wmx', 'wvx', 'avi', 'movie', 'smv',
-  ];
-
-  $type = 'other';
-
-  if ('catrobat' === $extension) {
-    $type = 'project';
-  } elseif (in_array($extension, $imageExtensions, true)) {
-    $type = 'image';
-  } elseif (in_array($extension, $soundExtensions, true)) {
-    $type = 'sound';
-  } elseif (in_array($extension, $videoExtensions, true)) {
-    $type = 'video';
-  }
-
-  return $type;
+  return match ($extension) {
+    'catrobat' => 'project',
+    'bmp', 'cgm', 'g3', 'gif', 'ief', 'jpeg', 'ktx', 'png', 'btif', 'sgi', 'svg', 'tiff', 'psd', 'uvi', 'sub', 'djvu', 'dwg', 'dxf', 'fbs', 'fpx', 'fst', 'mmr', 'rlc', 'mdi', 'wdp', 'npx', 'wbmp', 'xif', 'webp', '3ds', 'ras', 'cmx', 'fh', 'ico', 'sid', 'pcx', 'pic', 'pnm', 'pbm', 'pgm', 'ppm', 'rgb', 'tga', 'xbm', 'xpm', 'xwd' => 'image',
+    'adp', 'au', 'mid', 'mp4a', 'mpga', 'oga', 's3m', 'sil', 'uva', 'eol', 'dra', 'dts', 'dtshd', 'lvp', 'pya', 'ecelp4800', 'ecelp7470', 'ecelp9600', 'rip', 'weba', 'aac', 'aif', 'caf', 'flac', 'mka', 'm3u', 'wax', 'wma', 'ram', 'rmp', 'wav', 'xm' => 'sound',
+    '3gp', '3g2', 'h261', 'h263', 'h264', 'jpgv', 'jpm', 'mj2', 'mp4', 'mpeg', 'ogv', 'qt', 'uvh', 'uvm', 'uvp', 'uvs', 'uvv', 'dvb', 'fvt', 'mxu', 'pyv', 'uvu', 'viv', 'webm', 'f4v', 'fli', 'flv', 'm4v', 'mkv', 'mng', 'asf', 'vob', 'wm', 'wmv', 'wmx', 'wvx', 'avi', 'movie', 'smv' => 'video',
+    default => 'unknown',
+  };
 }
 
-function getFileUrl($file, $assets_dir)
+function getFileUrl(MediaPackageFile $file, string $assets_dir): ?string
 {
   if ('project' === getFileType($file->getExtension())) {
     return '/'.$assets_dir.'thumbs/'.$file->getId().'.png';

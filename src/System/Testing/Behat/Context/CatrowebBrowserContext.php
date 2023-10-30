@@ -926,7 +926,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldSeeMediaFileWithId(mixed $id): void
   {
-    $link = $this->getSession()->getPage()->find('css', '#mediafile-'.$id);
+    $link = $this->getSession()->getPage()->find('css', '#media-library-file-'.$id);
     Assert::assertNotNull($link);
   }
 
@@ -935,7 +935,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iShouldNotSeeMediaFileWithId(mixed $id): void
   {
-    $link = $this->getSession()->getPage()->find('css', '#mediafile-'.$id);
+    $link = $this->getSession()->getPage()->find('css', '#media-library-file-'.$id);
     Assert::assertNull($link);
   }
 
@@ -946,7 +946,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $link = $this->getSession()->getPage()
       ->find('css', '[data-name="'.$category.'"]')
-      ->find('css', '#mediafile-'.$id)
+      ->find('css', '#media-library-file-'.$id)
     ;
     Assert::assertNotNull($link);
   }
@@ -958,7 +958,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $elements = $this->getSession()->getPage()
       ->find('css', '[data-name="'.$category.'"]')
-      ->findAll('css', '.mediafile')
+      ->findAll('css', '.media-library-file')
     ;
     Assert::assertEquals($count, count($elements));
   }

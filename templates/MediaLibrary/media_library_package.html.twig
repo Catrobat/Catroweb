@@ -31,11 +31,15 @@
   {% if search is not defined %}
   <div id="content" class="media-library-content">
     {% for category in categories %}
-      <div class="media-library-category" id="category-{{ category.displayID }}" data-category="{{ category.displayID }}">
-        <h2>{{ category.name }}</h2>
+      <div id="category-{{ category.displayID }}" class="media-library-category{% if category.themeSpecial %} category-theme-special{% endif %}" data-name="{{ category.name }}" data-category-id="{{ category.displayID }}">
+        {% if category.themeSpecial %}
+          <h2>{{ "media-packages.theme-special"|trans({'%flavor%': category.flavor.name}, "catroweb") }}</h2>
+        {% else %}
+          <h2>{{ category.name }}</h2>
+        {% endif %}
         <div class="media-library-files">
           {% for file in files %}
-            {% if file.category.name == category.name %}
+            {% if file.category.displayID == category.displayID %}
               {% include 'MediaLibrary/media_library_file.html.twig' with { 'file': file } %}
             {% endif %}
           {% endfor %}

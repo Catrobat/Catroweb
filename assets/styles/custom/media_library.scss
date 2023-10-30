@@ -74,9 +74,9 @@ $img-border-strength: 2px;
 
             img {
               max-width: $tile-size-sm - 2 * $tile-padding-y - 2 *
-              $img-border-strength;
+                $img-border-strength;
               max-height: $tile-size-sm - 2 * $tile-padding-y - 2 *
-              $img-border-strength;
+                $img-border-strength;
             }
 
             .audio-control {
@@ -164,7 +164,10 @@ $img-border-strength: 2px;
 /* media breakpoints */
 
 @include media-breakpoint-up(sm) {
-  .media-library-content .media-library-category .media-library-files .media-library-file {
+  .media-library-content
+    .media-library-category
+    .media-library-files
+    .media-library-file {
     height: $tile-size-md;
 
     .file-container {
@@ -193,7 +196,10 @@ $img-border-strength: 2px;
 }
 
 @include media-breakpoint-up(lg) {
-  .media-library-content .media-library-category .media-library-files .media-library-file {
+  .media-library-content
+    .media-library-category
+    .media-library-files
+    .media-library-file {
     height: $tile-size-lg;
     font-size: 1.25rem;
 

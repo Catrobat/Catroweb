@@ -50,7 +50,10 @@ export function MediaLibrary(
           } else {
             elementsText += translations.elementsPlural
           }
-          document.getElementById('top-app-bar__download-nr-selected',).innerText = elementsText
+
+          document.getElementById(
+            'top-app-bar__download-nr-selected',
+          ).innerText = elementsText
 
           if (downloadList.length > 0) {
             showTopBarDownload()
@@ -92,20 +95,26 @@ export function MediaLibrary(
     }
 
     // topbar
-    document.getElementById('top-app-bar__btn-download-selection').onclick = function () {
-      for (let i = 0; i < downloadList.length; i++) {
-        const fileContainer = document.getElementById(downloadList[i])
+    document.getElementById('top-app-bar__btn-download-selection').onclick =
+      function () {
+        for (let i = 0; i < downloadList.length; i++) {
+          const fileContainer = document.getElementById(downloadList[i])
 
-        const file = {
-          name: fileContainer.dataset.fileName,
-          download_url: fileContainer.dataset.downloadUrl,
+          const file = {
+            name: fileContainer.dataset.fileName,
+            download_url: fileContainer.dataset.downloadUrl,
+          }
+          medialibDownloadSelectedFile(file)
         }
-        medialibDownloadSelectedFile(file)
-      }
-      document.getElementById('top-app-bar__btn-cancel-download-selection').click()
-    }
 
-    document.getElementById('top-app-bar__btn-cancel-download-selection').onclick = function () {
+        document
+          .getElementById('top-app-bar__btn-cancel-download-selection')
+          .click()
+      }
+
+    document.getElementById(
+      'top-app-bar__btn-cancel-download-selection',
+    ).onclick = function () {
       for (let i = 0; i < downloadList.length; i++) {
         document.getElementById(downloadList[i]).classList.remove('selected')
       }
@@ -114,15 +123,20 @@ export function MediaLibrary(
     }
 
     // navbar
-    document.querySelectorAll('#content .media-library-category').forEach((item) => {
-      if (item.children.length === 0) {
-        return
-      }
-      item.style.display = 'block'
+    document
+      .querySelectorAll('#content .media-library-category')
+      .forEach((item) => {
+        if (item.children.length === 0) {
+          return
+        }
 
-      const catId = item.dataset.category
-      document.querySelector('#sidebar #menu-media-library-category-' + catId).style.display = 'block'
-    })
+        item.style.display = 'block'
+
+        const catId = item.dataset.categoryId
+        document.querySelector(
+          '#sidebar #menu-media-library-category-' + catId,
+        ).style.display = 'block'
+      })
   }
 }
 
