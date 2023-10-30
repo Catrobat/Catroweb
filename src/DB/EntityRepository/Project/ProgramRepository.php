@@ -58,7 +58,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   public function getTrendingProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
-    $now = new \DateTime();
+    $now = new \DateTime('now', new \DateTimeZone('UTC'));
     $interval = new \DateInterval('P7D');
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
