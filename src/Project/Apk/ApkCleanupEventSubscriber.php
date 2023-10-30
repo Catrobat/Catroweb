@@ -8,7 +8,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApkCleanupEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(protected ApkRepository $repository) {}
+  public function __construct(protected ApkRepository $repository)
+  {
+  }
 
   public function handleEvent(ProgramBeforePersistEvent $event): void
   {

@@ -19,7 +19,9 @@ class CatrobatFileSanitizer
 
   private ?string $extracted_file_root_path = null;
 
-  public function __construct(private readonly CatrobatCodeParser $catrobat_code_parser) {}
+  public function __construct(private readonly CatrobatCodeParser $catrobat_code_parser)
+  {
+  }
 
   public function sanitize(ExtractedCatrobatFile $extracted_file): void
   {

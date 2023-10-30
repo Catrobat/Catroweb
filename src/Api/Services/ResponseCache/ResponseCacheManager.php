@@ -7,7 +7,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ResponseCacheManager
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected ResponseCacheRepository $response_cache_repository) {}
+  public function __construct(protected EntityManagerInterface $entity_manager, protected ResponseCacheRepository $response_cache_repository)
+  {
+  }
 
   /**
    * @throws \JsonException

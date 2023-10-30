@@ -25,7 +25,8 @@ class UserDataFixtures
   public function __construct(
     private readonly UserManager $user_manager,
     private readonly PasswordHasherFactoryInterface $password_hasher_factory
-  ) {}
+  ) {
+  }
 
   public function insertUser(array $config = [], bool $andFlush = true): User
   {

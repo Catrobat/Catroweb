@@ -8,7 +8,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ProgramBeforePersistEvent extends Event
 {
-  public function __construct(protected ExtractedCatrobatFile $extracted_file, protected Program $program) {}
+  public function __construct(protected ExtractedCatrobatFile $extracted_file, protected Program $program)
+  {
+  }
 
   public function getExtractedFile(): ExtractedCatrobatFile
   {

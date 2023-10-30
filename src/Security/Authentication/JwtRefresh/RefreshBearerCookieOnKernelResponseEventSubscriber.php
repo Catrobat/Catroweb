@@ -8,7 +8,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class RefreshBearerCookieOnKernelResponseEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(protected RefreshTokenService $refresh_token_service) {}
+  public function __construct(protected RefreshTokenService $refresh_token_service)
+  {
+  }
 
   public function onKernelResponse(ResponseEvent $event): void
   {

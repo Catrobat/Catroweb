@@ -8,7 +8,9 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class FeaturedProgramImageListener
 {
-  public function __construct(private readonly ImageRepository $repository) {}
+  public function __construct(private readonly ImageRepository $repository)
+  {
+  }
 
   public function prePersist(FeaturedProgram $featured, LifecycleEventArgs $event): void
   {

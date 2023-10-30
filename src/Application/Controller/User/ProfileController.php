@@ -26,7 +26,8 @@ class ProfileController extends AbstractController
     protected ProgramManager $program_manager,
     protected UserManager $user_manager,
     protected AchievementManager $achievement_manager,
-  ) {}
+  ) {
+  }
 
   /**
    * Overwrite for FosUser Profile Route (We don't use it!).

@@ -19,7 +19,8 @@ class RefreshTokenService
     protected UserManager $user_manager,
     protected JWTTokenManagerInterface $jwt_manager,
     protected CookieService $cookie_service,
-  ) {}
+  ) {
+  }
 
   public function createRefreshTokenForUsername(string $username): RefreshTokenInterface
   {

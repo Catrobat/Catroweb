@@ -19,7 +19,9 @@ class SearchController extends AbstractController
 
   private int $DEFAULT_OFFSET = 0;
 
-  public function __construct(protected RequestHelper $app_request) {}
+  public function __construct(protected RequestHelper $app_request)
+  {
+  }
 
   /**
    * @deprecated

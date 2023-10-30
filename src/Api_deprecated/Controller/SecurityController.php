@@ -21,7 +21,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class SecurityController extends AbstractController
 {
-  public function __construct(private readonly OAuthService $oauth_service) {}
+  public function __construct(private readonly OAuthService $oauth_service)
+  {
+  }
 
   /**
    * @deprecated

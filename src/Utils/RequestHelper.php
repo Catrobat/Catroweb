@@ -7,7 +7,9 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class RequestHelper
 {
-  public function __construct(protected RequestStack $request_stack) {}
+  public function __construct(protected RequestStack $request_stack)
+  {
+  }
 
   public function getRequestStack(): RequestStack
   {

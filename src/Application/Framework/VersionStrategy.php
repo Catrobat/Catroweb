@@ -8,7 +8,8 @@ class VersionStrategy implements VersionStrategyInterface
 {
   public function __construct(
     protected string $app_version
-  ) {}
+  ) {
+  }
 
   /**
    * @throws \Exception

@@ -8,7 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class JWTTokenRefreshService
 {
-  public function __construct(private readonly RefreshToken $refreshToken) {}
+  public function __construct(private readonly RefreshToken $refreshToken)
+  {
+  }
 
   public function refresh(Request $request): Response
   {

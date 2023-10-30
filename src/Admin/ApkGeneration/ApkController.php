@@ -19,7 +19,8 @@ class ApkController extends CRUDController
     protected ProgramManager $program_manager,
     protected JenkinsDispatcher $jenkins_dispatcher,
     protected EntityManagerInterface $entity_manager
-  ) {}
+  ) {
+  }
 
   public function resetApkBuildStatusAction(): RedirectResponse
   {

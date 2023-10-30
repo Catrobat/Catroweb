@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class NotificationsApi extends AbstractApiController implements NotificationsApiInterface
 {
-  public function __construct(private readonly NotificationsApiFacade $facade) {}
+  public function __construct(private readonly NotificationsApiFacade $facade)
+  {
+  }
 
   public function notificationIdReadPut(int $id, string $accept_language, int &$responseCode, array &$responseHeaders): void
   {

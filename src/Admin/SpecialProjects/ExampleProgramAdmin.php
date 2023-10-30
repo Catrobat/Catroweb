@@ -34,7 +34,8 @@ class ExampleProgramAdmin extends AbstractAdmin
     private readonly ImageRepository $example_image_repository,
     private readonly ProgramManager $program_manager,
     private readonly FlavorRepository $flavor_repository
-  ) {}
+  ) {
+  }
 
   /**
    * @param ExampleProgram $object

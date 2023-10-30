@@ -43,7 +43,8 @@ class WebviewAuthenticator extends AbstractAuthenticator
     protected RequestStack $request_stack,
     protected LoggerInterface $logger,
     protected UrlGeneratorInterface $url_generator
-  ) {}
+  ) {
+  }
 
   /**
    * Called on every request to decide if this authenticator should be

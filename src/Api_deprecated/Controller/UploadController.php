@@ -24,7 +24,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UploadController
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
+  {
+  }
 
   /**
    * @deprecated

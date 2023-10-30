@@ -8,7 +8,8 @@ class ElapsedTimeStringFormatter
 {
   public function __construct(
     private readonly TranslatorInterface $translator
-  ) {}
+  ) {
+  }
 
   /**
    * @throws \Exception

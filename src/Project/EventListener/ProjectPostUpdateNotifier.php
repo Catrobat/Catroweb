@@ -12,7 +12,9 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class ProjectPostUpdateNotifier
 {
-  public function __construct(protected AchievementManager $achievement_manager, protected TagRepository $tag_repository, private readonly ProjectMachineTranslationRepository $machine_translation_repository) {}
+  public function __construct(protected AchievementManager $achievement_manager, protected TagRepository $tag_repository, private readonly ProjectMachineTranslationRepository $machine_translation_repository)
+  {
+  }
 
   public function postUpdate(Program $project, LifecycleEventArgs $event): void
   {

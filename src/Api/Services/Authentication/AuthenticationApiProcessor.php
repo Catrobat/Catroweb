@@ -14,7 +14,9 @@ use GuzzleHttp\Client;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager)
+  {
+  }
 
   public function createJWTByUser(User $user): string
   {

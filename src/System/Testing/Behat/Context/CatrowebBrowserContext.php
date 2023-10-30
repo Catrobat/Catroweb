@@ -1196,7 +1196,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Given /^I requested jenkins to build it$/
    */
-  public function iRequestedJenkinsToBuildIt(): void {}
+  public function iRequestedJenkinsToBuildIt(): void
+  {
+  }
 
   /**
    * @Then /^it will be stored on the server$/

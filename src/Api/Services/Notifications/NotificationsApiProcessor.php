@@ -9,7 +9,9 @@ use App\User\Notification\NotificationManager;
 
 class NotificationsApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly NotificationRepository $notification_repository, private readonly NotificationManager $notification_manager) {}
+  public function __construct(private readonly NotificationRepository $notification_repository, private readonly NotificationManager $notification_manager)
+  {
+  }
 
   public function markNotificationAsSeen(int $notification_id, User $user): bool
   {

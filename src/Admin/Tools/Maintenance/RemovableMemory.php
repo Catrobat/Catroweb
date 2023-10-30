@@ -20,7 +20,9 @@ class RemovableMemory
 
   public ?string $archive_command_name = null;
 
-  public function __construct(public string $name = '', public string $description = '') {}
+  public function __construct(public string $name = '', public string $description = '')
+  {
+  }
 
   public function setSize(string $size): void
   {

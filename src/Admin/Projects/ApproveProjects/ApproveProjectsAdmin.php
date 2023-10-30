@@ -43,7 +43,8 @@ class ApproveProjectsAdmin extends AbstractAdmin
     private readonly ExtractedFileRepository $extracted_file_repository,
     protected TokenStorageInterface $security_token_storage,
     protected ParameterBagInterface $parameter_bag
-  ) {}
+  ) {
+  }
 
   /**
    * @param mixed|Program $object

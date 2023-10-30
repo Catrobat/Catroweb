@@ -17,7 +17,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FollowerController extends AbstractController
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly NotificationManager $notification_service, private readonly NotificationRepository $notification_repo) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly NotificationManager $notification_service, private readonly NotificationRepository $notification_repo)
+  {
+  }
 
   #[Route(path: '/follower', name: 'catrobat_follower', methods: ['GET'])]
   public function followerAction(Request $request, string $id = '0'): Response

@@ -9,7 +9,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TestFeatureFlagController extends AbstractController
 {
-  public function __construct(protected FeatureFlagManager $manager) {}
+  public function __construct(protected FeatureFlagManager $manager)
+  {
+  }
 
   #[Route(path: '/featureflag/test', name: 'test_flag', methods: ['GET'])]
   public function testFlagAction(): Response

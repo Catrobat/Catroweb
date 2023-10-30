@@ -7,7 +7,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CookieService
 {
-  public function __construct(private readonly int $jwtTokenLifetime, private readonly int $refreshTokenLifetime, private readonly RouterInterface $router) {}
+  public function __construct(private readonly int $jwtTokenLifetime, private readonly int $refreshTokenLifetime, private readonly RouterInterface $router)
+  {
+  }
 
   /**
    * Create bearer token cookie.

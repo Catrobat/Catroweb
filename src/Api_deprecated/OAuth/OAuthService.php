@@ -16,7 +16,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OAuthService
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator)
+  {
+  }
 
   /**
    * @throws \Exception
