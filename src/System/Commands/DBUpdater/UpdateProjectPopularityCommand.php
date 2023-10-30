@@ -128,6 +128,12 @@ class UpdateProjectPopularityCommand extends Command
   // Get minimum and maximum values of project remixes
   protected function getMinMaxRemixes(): array
   {
+//    SELECT p.id, COUNT(r.ancestor_id) as count
+//    FROM program p
+//    LEFT JOIN program_remix_relation r ON p.id = r.ancestor_id
+//    GROUP BY r.ancestor_id
+//    ORDER BY `count` ASC
+
     $query_builder = $this->entity_manager->createQueryBuilder();
     $query_builder
       ->select('COUNT(r.ancestor_id) as count')
@@ -150,6 +156,8 @@ class UpdateProjectPopularityCommand extends Command
   protected function getMinMaxReactions(): array
   {
     $query_builder = $this->entity_manager->createQueryBuilder();
+    //$query_builder_sub = $this->entity_manager->createQueryBuilder();
+
     $query_builder
       ->select('COUNT(e.program_id) as count')
       ->from(Program::class, 'p')
@@ -158,6 +166,26 @@ class UpdateProjectPopularityCommand extends Command
       ->orderBy('count', 'DESC')
       ->setMaxResults(1)
     ;
+
+
+//    SELECT MAX(count) AS max_count, MIN(count) AS min_count
+//    FROM (
+//    SELECT COUNT(e.program_id) AS count
+//    FROM program p
+//    LEFT JOIN program_like e ON p.id = e.program_id
+//    GROUP BY p.id
+//    ) AS counts;
+
+//    $query_builder_sub
+//      ->select('COUNT(e.program_id) as count')
+//      ->from(Program::class, 'p')
+//      ->leftJoin(ProgramLike::class, 'e', Join::WITH, 'p.id = e.program_id')
+//      ->groupBy('p.id');
+//    $query_builder
+//      ->select('MAX(e.count) as max_count', 'MIN(e.count) as min_count')
+//      ->from( '(' . $query_builder_sub->getQuery()->getDQL() . ')', 'e');
+//    dd($query_builder->getQuery()->getResult());
+
 
     $max = $query_builder->getQuery()->getResult()[0]['count'];
     $query_builder->orderBy('count', 'ASC');
