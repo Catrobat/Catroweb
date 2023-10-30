@@ -11875,16 +11875,16 @@
         },
         {
             "name": "symfony/sendinblue-mailer",
-            "version": "v6.3.6",
+            "version": "v6.3.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/sendinblue-mailer.git",
-                "reference": "668150fe48c5d111bb6f38ca92f249c88fa7055b"
+                "reference": "dc29905e9da6c69ccdbe699d51dc1bcd1b3e9fda"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/sendinblue-mailer/zipball/668150fe48c5d111bb6f38ca92f249c88fa7055b",
-                "reference": "668150fe48c5d111bb6f38ca92f249c88fa7055b",
+                "url": "https://api.github.com/repos/symfony/sendinblue-mailer/zipball/dc29905e9da6c69ccdbe699d51dc1bcd1b3e9fda",
+                "reference": "dc29905e9da6c69ccdbe699d51dc1bcd1b3e9fda",
                 "shasum": ""
             },
             "require": {
@@ -11923,7 +11923,7 @@
             "description": "Symfony Sendinblue Mailer Bridge",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/sendinblue-mailer/tree/v6.3.6"
+                "source": "https://github.com/symfony/sendinblue-mailer/tree/v6.3.7"
             },
             "funding": [
                 {
@@ -11939,7 +11939,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-17T11:32:53+00:00"
+            "time": "2023-10-25T14:30:30+00:00"
         },
         {
             "name": "symfony/serializer",
