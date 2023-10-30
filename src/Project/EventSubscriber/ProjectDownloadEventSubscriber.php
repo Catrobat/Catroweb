@@ -8,9 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProjectDownloadEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(protected ProgramManager $program_manager)
-  {
-  }
+  public function __construct(protected ProgramManager $program_manager) {}
 
   public function onProjectDownload(ProjectDownloadEvent $event): void
   {

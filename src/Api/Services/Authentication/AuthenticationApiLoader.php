@@ -8,9 +8,7 @@ use App\User\UserManager;
 
 class AuthenticationApiLoader extends AbstractApiLoader
 {
-  public function __construct(protected UserManager $user_manager)
-  {
-  }
+  public function __construct(protected UserManager $user_manager) {}
 
   public function findUserByUploadToken(string $upload_token): ?User
   {

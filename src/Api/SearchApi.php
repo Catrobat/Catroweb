@@ -10,9 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class SearchApi extends AbstractApiController implements SearchApiInterface
 {
-  public function __construct(private readonly SearchApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly SearchApiFacade $facade) {}
 
   /**
    * @throws \JsonException

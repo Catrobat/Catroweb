@@ -9,9 +9,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class UtilityApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly EntityManagerInterface $entity_manager)
-  {
-  }
+  public function __construct(private readonly EntityManagerInterface $entity_manager) {}
 
   public function getSurvey(array $criteria): ?Survey
   {

@@ -45,7 +45,8 @@ class UpdateProjectPopularityCommand extends Command
     while ($offset < $program_count) {
       $programs = $this->program_repository->getProjects(limit: self::BATCH_SIZE, offset: $offset);
       foreach ($programs as $program) {
-        if ('b0338a91-5b92-11ee-a4ed-0242ac120003' == $program->getID()) {
+        if($program->getID() == 'b0338a91-5b92-11ee-a4ed-0242ac120003')
+        {
           $popularity = $this->computePopularity($program, $min_max_values);
           $program->setPopularity($popularity);
           $this->entity_manager->persist($program);
@@ -53,7 +54,7 @@ class UpdateProjectPopularityCommand extends Command
         }
       }
       $offset += self::BATCH_SIZE;
-      echo $offset."\n";
+      echo $offset . "\n";
     }
     $this->entity_manager->flush();
     $output->writeln('Popularity scores have been updated');
@@ -65,11 +66,13 @@ class UpdateProjectPopularityCommand extends Command
   {
     $normalized_data = $this->getNormalizedData($program, $min_max_values);
 
+
     return number_format($normalized_data['views'] * self::VIEWS_W + $normalized_data['downloads'] * self::DOWNLOADS_W + $normalized_data['remixes'] * self::REMIXES_W + $normalized_data['reactions'] * self::REACTIONS_W, 2);
   }
 
   protected function getNormalizedData(Program $program, array $min_max_values): array
   {
+
     return [
       'views' => $this->scale($program->getViews(), $min_max_values['views_min'], $min_max_values['views_max']),
       'downloads' => $this->scale($program->getDownloads(), $min_max_values['downloads_min'], $min_max_values['downloads_max']),
@@ -82,7 +85,7 @@ class UpdateProjectPopularityCommand extends Command
   // Currently just min max scaling
   protected function scale(int $x, int $min, int $max): float
   {
-    if (0 == $max - $min) {
+    if ($max - $min == 0) {
       return 0;
     }
 
@@ -140,8 +143,7 @@ class UpdateProjectPopularityCommand extends Command
       ->from(Program::class, 'p')
       ->leftJoin(ProgramRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
       ->groupBy('r.ancestor_id')
-      ->orderBy('count', 'DESC')
-    ;
+      ->orderBy('count', 'DESC');
     $max = $query_builder->getQuery()->getResult()[0]['count'];
     $query_builder->orderBy('count', 'ASC');
     $min = $query_builder->getQuery()->getResult()[0]['count'];
@@ -164,8 +166,7 @@ class UpdateProjectPopularityCommand extends Command
       ->leftJoin(ProgramLike::class, 'e', Join::WITH, 'p.id = e.program_id')
       ->groupBy('e.program_id')
       ->orderBy('count', 'DESC')
-      ->setMaxResults(1)
-    ;
+      ->setMaxResults(1);
 
 
 //    SELECT MAX(count) AS max_count, MIN(count) AS min_count

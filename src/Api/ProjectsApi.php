@@ -20,9 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
-  public function __construct(private readonly ProjectsApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly ProjectsApiFacade $facade) {}
 
   public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
   {

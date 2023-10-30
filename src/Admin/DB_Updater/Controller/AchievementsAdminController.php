@@ -21,8 +21,7 @@ class AchievementsAdminController extends CRUDController
   public function __construct(
     protected AchievementManager $achievement_manager,
     protected KernelInterface $kernel
-  ) {
-  }
+  ) {}
 
   public function listAction(Request $request = null): Response
   {

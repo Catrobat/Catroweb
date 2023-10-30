@@ -14,9 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AuthenticationApi extends AbstractApiController implements AuthenticationApiInterface
 {
-  public function __construct(private readonly AuthenticationApiFacade $facade)
-  {
-  }
+  public function __construct(private readonly AuthenticationApiFacade $facade) {}
 
   public function authenticationGet(int &$responseCode, array &$responseHeaders): void
   {

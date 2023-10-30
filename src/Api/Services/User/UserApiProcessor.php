@@ -11,9 +11,7 @@ use OpenAPI\Server\Model\UpdateUserRequest;
 
 class UserApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenGenerator $token_generator)
-  {
-  }
+  public function __construct(private readonly UserManager $user_manager, private readonly TokenGenerator $token_generator) {}
 
   /**
    * @throws \Exception

@@ -27,8 +27,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     protected ProgramFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger
-  ) {
-  }
+  ) {}
 
   public function findProjectsByID(string $id, bool $include_private = false): array
   {
