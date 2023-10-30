@@ -1,15 +1,12 @@
-import $ from 'jquery'
 import { MediaLibrary } from './custom/MediaLibrary'
 
-require('../styles/custom/medialib.scss')
+require('../styles/custom/media_library.scss')
 
-const $mediaLibrary = $('.js-media-library')
+const mediaLibrary = document.getElementById('js-media-library')
+
 MediaLibrary(
-  $mediaLibrary.data('package'),
-  $mediaLibrary.data('path-media-search'),
-  $mediaLibrary.data('flavor'),
-  $mediaLibrary.data('media-dir'),
-  $mediaLibrary.data('translations'),
-  $mediaLibrary.data('is-webview'),
-  $mediaLibrary.data('path-medialibpackagebynameurl'),
+  mediaLibrary.dataset.package,
+  mediaLibrary.dataset.pathMediaSearch,
+  mediaLibrary.dataset.translations,
+  mediaLibrary.dataset.isWebview,
 )

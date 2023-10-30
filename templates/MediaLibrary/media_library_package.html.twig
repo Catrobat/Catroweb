@@ -7,7 +7,7 @@
 {% block sidebar_ul %}
   <hr>
   {% for category in categories %}
-    <li class="nav-item" id="menu-mediacat-{{ category.displayID }}" style="display: none;">
+    <li class="nav-item" id="menu-media-library-category-{{ category.displayID }}" style="display: none;">
       <a class="nav-link" href="#category-{{ category.displayID }}">{{ category.name }}</a>
     </li>
   {% endfor %}
@@ -27,19 +27,23 @@
     </div>
   {% endif %}
 
-  <div id="loading-spinner" class="medialib-spinner">
-    {{ include('components/loading_spinner.html.twig') }}
-  </div>
 
-  <div id="content" class="medialib-content">
+  {% if search is not defined %}
+  <div id="content" class="media-library-content">
     {% for category in categories %}
-      <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"
-           style="display: none;" class="category">
+      <div class="media-library-category" id="category-{{ category.displayID }}" data-category="{{ category.displayID }}">
         <h2>{{ category.name }}</h2>
-        <div class="files"></div>
+        <div class="media-library-files">
+          {% for file in files %}
+            {% if file.category.name == category.name %}
+              {% include 'MediaLibrary/media_library_file.html.twig' with { 'file': file } %}
+            {% endif %}
+          {% endfor %}
+        </div>
       </div>
     {% endfor %}
   </div>
+  {% endif %}
 
   {%
     set translations = {
@@ -57,14 +61,11 @@
     }
   %}
 
-  <div class="js-media-library"
+  <div id="js-media-library"
        data-package="{{ package }}"
        data-path-media-search="{{ mediaSearchPath|default('')|raw }}"
-       data-flavor="{{ flavor }}"
-       data-media-dir="{{ mediaDir }}"
        data-translations="{{ translations|json_encode() }}"
        data-is-webview="{{ isWebview() }}"
-       data-path-medialibpackagebynameurl="{{ path("open_api_server_mediaLibrary_mediapackagenameget", { 'name': package }) }}"
   ></div>
 {% endblock %}
 

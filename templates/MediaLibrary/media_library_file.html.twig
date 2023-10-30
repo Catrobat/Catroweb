@@ -1,9 +1,29 @@
-<a class="mediafile" id="mediafile-{{ file.id }}">
+<a class="media-library-file" id="media-library-file-{{ file.id }}" data-file-type="{{ file.type }}" data-file-name="{{ file.name }}" data-download-url="{{ file.download_url }}">
     <i class="checkbox material-icons">check_circle</i>
-    <div class="file-container {{ file.container_class }}" data-filetype="{{ file.type }}">
-        <img alt="{{ file.id }}" src="{{ file.link }}" title="{{ file.title }}"></div>
+    <div class="file-container file-type-{{ file.type }}" data-file-type="{{ file.type }}">
+        {% if file.type == 'image' or file.type == 'project' %}
+            <div class="img-container">
+                <img alt="{{ file.name }}" src="{{ file.url }}" title="{{ file.name }}">
+            </div>
+        {% elseif file.type == 'sound' %}
+            <div class="img-container">
+                <i class="material-icons audio-control" data-url="{{ file.url }}">play_arrow</i>
+            </div>
+        {% elseif file.type == 'video' %}
+            <div class="img-container">
+                <i class="material-icons media-file-icon">videocam</i>
+            </div>
+        {% else %}
+            <div class="img-container">
+                <i class="material-icons media-file-icon">insert_drive_file</i>
+            </div>
+        {% endif %}
+    </div>
     <div class="text-container">
-        <div class="name">{{ file.title }}</div>
-        <div class="description">{{ file.description }}</div>
+        <div class="name">{{ file.name }}</div>
+        <div class="description">Type: {{ file.type }}</div>
+    </div>
+    <div class="button-container">
+        <i class="material-icons">get_app</i>
     </div>
 </a>
