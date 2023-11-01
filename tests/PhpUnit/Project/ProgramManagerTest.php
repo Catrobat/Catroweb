@@ -43,9 +43,9 @@ class ProgramManagerTest extends TestCase
 {
   private ProgramManager $program_manager;
 
-  private ProgramFileRepository|MockObject $file_repository;
+  private MockObject|ProgramFileRepository $file_repository;
 
-  private ScreenshotRepository|MockObject $screenshot_repository;
+  private MockObject|ScreenshotRepository $screenshot_repository;
 
   private EntityManager|MockObject $entity_manager;
 
@@ -55,9 +55,9 @@ class ProgramManagerTest extends TestCase
 
   private ExtractedCatrobatFile|MockObject $extracted_file;
 
-  private ProgramBeforeInsertEvent|MockObject $programBeforeInsertEvent;
+  private MockObject|ProgramBeforeInsertEvent $programBeforeInsertEvent;
 
-  private ProgramAfterInsertEvent|MockObject $programAfterInsertEvent;
+  private MockObject|ProgramAfterInsertEvent $programAfterInsertEvent;
 
   /**
    * @throws \Exception

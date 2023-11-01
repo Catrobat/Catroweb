@@ -221,12 +221,7 @@ class ApiContext implements Context
    */
   protected function getDataFixturesContext(InitializedSymfonyExtensionEnvironment $environment): DataFixturesContext
   {
-    $context = $environment->getContext(DataFixturesContext::class);
-    if ($context instanceof DataFixturesContext) {
-      return $context;
-    }
-
-    throw new \Exception("Can't get DataFixturesContext");
+    return $environment->getContext(DataFixturesContext::class);
   }
 
   /**
@@ -2625,7 +2620,7 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch'];
+    $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch', 'trending'];
     $categories = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     Assert::assertEquals(count($expected_categories), is_countable($categories) ? count($categories) : 0, 'Number of returned programs should be '.count($expected_categories));
 

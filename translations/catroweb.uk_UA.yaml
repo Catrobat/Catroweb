@@ -209,7 +209,7 @@ programs:
   save: Зберегти
   translationTitle: 'Переклад: %language%'
   editDefault: Редагувати стандартний
-  editTranslation: Редагувати %language% переклад
+  editTranslation: 'Редагувати переклад мовою: %language%'
   translations: Переклади
   createTranslation: Створити переклад
   deletedComment: '**Видалено**'
@@ -395,6 +395,7 @@ menu:
   helpAndTutorials: Довідка та посібники
   followersAndFollowing: Підписник
   mediaLibrary: Медіатека
+  studio: Студії
 login:
   login: Увійти в обліковий запис
   button:
@@ -568,8 +569,8 @@ language:
   arabic: Арабська
   bulgarian: Болгарська
   catalan: Каталанська
-  chinese_simplified_han: Китайська (спрощене письмо)
-  chinese_traditional_han: Китайська (Традиційне письмо)
+  chinese_simplified_han: Китайська (Спрощена)
+  chinese_traditional_han: Китайська (Традиційна)
   croatian: Хорватська
   czech: Чеська
   danish: Датська
@@ -599,7 +600,7 @@ language:
   portuguese_portugal: Португальська (Португалія)
   romanian: Румунська
   russian: Російська
-  serbian: Сербський
+  serbian: Сербська
   slovak: Словацька
   slovenian: Словенська
   spanish_latin_america: Іспанська (Латинська Америка)
@@ -846,7 +847,7 @@ extensions:
     embroidery:
       title: Вишивка
     mindstorms:
-      title: Мозкові бурі
+      title: Mindstorms
     multiplayer:
       title: Мережева гра
 studio:

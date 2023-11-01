@@ -15,7 +15,7 @@ use Symfony\Component\Asset\VersionStrategy\VersionStrategyInterface;
  */
 class VersionStrategyTest extends DefaultTestCase
 {
-  protected VersionStrategy|MockObject $object;
+  protected MockObject|VersionStrategy $object;
 
   protected function setUp(): void
   {

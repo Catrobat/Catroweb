@@ -23,7 +23,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class StudioManagerTest extends DefaultTestCase
 {
-  protected StudioManager|MockObject $object;
+  protected MockObject|StudioManager $object;
   /**
    * @var UserDataFixtures|null
    */

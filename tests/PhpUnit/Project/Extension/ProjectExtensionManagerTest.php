@@ -21,7 +21,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
   protected ExtractedCatrobatFile $extracted_catrobat_file_with_extensions;
   protected ExtractedCatrobatFile $extracted_catrobat_file_without_extensions;
 
-  protected ProjectExtensionManager|MockObject $object;
+  protected MockObject|ProjectExtensionManager $object;
 
   protected function setUp(): void
   {

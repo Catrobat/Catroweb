@@ -14,7 +14,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
  */
 class ProjectExtensionEventSubscriberTest extends DefaultTestCase
 {
-  protected ProjectExtensionEventSubscriber|MockObject $object;
+  protected MockObject|ProjectExtensionEventSubscriber $object;
 
   protected function setUp(): void
   {

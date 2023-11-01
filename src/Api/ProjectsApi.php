@@ -39,7 +39,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): UpdateProjectFailureResponse|UpdateProjectErrorResponse|null
+  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): null|UpdateProjectErrorResponse|UpdateProjectFailureResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -150,7 +150,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, int &$responseCode, array &$responseHeaders): null|array|object
   {
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -232,7 +232,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $response = [];
 
-    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch'];
+    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     foreach ($categories as $category) {
@@ -334,7 +334,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
+  public function projectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): null|array|object
   {
     // Currently not used due to an issue with the serializer and accept encoding in the generated code
     // The route is overwritten by the OverwriteController which uses the method: customProjectIdCatrobatGet

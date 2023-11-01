@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class SearchResponseManagerTest extends DefaultTestCase
 {
-  protected SearchResponseManager|MockObject $object;
+  protected MockObject|SearchResponseManager $object;
 
   protected function setUp(): void
   {
