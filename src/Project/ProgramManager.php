@@ -694,6 +694,7 @@ class ProgramManager
       'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
       'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
       'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
+      'popular' => $this->getPopularPrograms($flavor, $limit, $offset, $max_version),
       'trending' => $this->getTrendingPrograms($flavor, $limit, $offset, $max_version),
       default => [],
     };
@@ -762,5 +763,10 @@ class ProgramManager
     $this->entity_manager->persist($program);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($program);
+  }
+
+  private function getPopularPrograms(?string $flavor, int $limit, int $offset, string $max_version): array
+  {
+    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'popularity');
   }
 }

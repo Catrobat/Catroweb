@@ -375,6 +375,11 @@ class Program implements \Stringable
   protected int $rand = 0;
 
   /**
+   * @ORM\Column(type="float", options={"default": 0.0})
+   */
+  protected float $popularity = 0.0;
+
+  /**
    * @ORM\OneToMany(targetEntity=ProjectCustomTranslation::class, mappedBy="project", cascade={"remove"})
    */
   private Collection $custom_translations;
@@ -1008,5 +1013,17 @@ class Program implements \Stringable
   public function shouldInvalidateTranslationCache(): bool
   {
     return $this->should_invalidate_translation_cache;
+  }
+
+  public function getPopularity(): float
+  {
+    return $this->popularity;
+  }
+
+  public function setPopularity(float $popularity): Program
+  {
+    $this->popularity = $popularity;
+
+    return $this;
   }
 }
