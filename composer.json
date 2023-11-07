@@ -50,7 +50,7 @@
     "symfony/framework-bundle": "6.3.*",
     "symfony/intl": "6.3.*",
     "symfony/mailer": "6.3.*",
-    "symfony/monolog-bundle": "3.8.*",
+    "symfony/monolog-bundle": "3.10.*",
     "symfony/polyfill-iconv": "1.28.*",
     "symfony/process": "6.3.*",
     "symfony/routing": "6.3.*",
