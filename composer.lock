@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8ecea851defd4d58ad4c859b7ab9633",
+    "content-hash": "cc3027c9037c294466f19889a266695e",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -4772,16 +4772,16 @@
         },
         {
             "name": "php-http/httplug-bundle",
-            "version": "1.30.1",
+            "version": "1.31.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-http/HttplugBundle.git",
-                "reference": "57284fb032bcafc3e978a1d7e4a2b591045f7e15"
+                "reference": "7ab6206f5dd90e05e566aeba5dd2b798485020c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/57284fb032bcafc3e978a1d7e4a2b591045f7e15",
-                "reference": "57284fb032bcafc3e978a1d7e4a2b591045f7e15",
+                "url": "https://api.github.com/repos/php-http/HttplugBundle/zipball/7ab6206f5dd90e05e566aeba5dd2b798485020c8",
+                "reference": "7ab6206f5dd90e05e566aeba5dd2b798485020c8",
                 "shasum": ""
             },
             "require": {
@@ -4791,7 +4791,7 @@
                 "php-http/discovery": "^1.14",
                 "php-http/httplug": "^2.0",
                 "php-http/logger-plugin": "^1.1",
-                "php-http/message": "^1.4",
+                "php-http/message": "^1.9",
                 "php-http/message-factory": "^1.0.2",
                 "php-http/stopwatch-plugin": "^1.2",
                 "psr/http-message": "^1.0 || ^2.0",
@@ -4867,9 +4867,9 @@
             ],
             "support": {
                 "issues": "https://github.com/php-http/HttplugBundle/issues",
-                "source": "https://github.com/php-http/HttplugBundle/tree/1.30.1"
+                "source": "https://github.com/php-http/HttplugBundle/tree/1.31.0"
             },
-            "time": "2023-09-07T08:04:12+00:00"
+            "time": "2023-11-06T11:10:42+00:00"
         },
         {
             "name": "php-http/logger-plugin",
@@ -18199,5 +18199,5 @@
         "ext-posix": "8.2",
         "ext-zip": "8.2"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
