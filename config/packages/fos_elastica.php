@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
+use App\DB\Entity\Project\Extension;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -67,6 +68,18 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'getUsernameString' => null,
             'getTagsString' => null,
             'getExtensionsString' => null,
+            'downloads' => [
+              'type' => 'integer',
+            ],
+            'rand' => [
+              'type' => 'integer',
+            ],
+            'popularity' => [
+              'type' => 'float',
+            ],
+            'uploaded_at' => [
+              'type' => 'date',
+            ],
           ],
           'persistence' => [
             'driver' => 'orm',
