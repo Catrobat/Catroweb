@@ -56,6 +56,15 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'description' => null,
             'flavor' => null,
             'id' => null,
+            'user' => [
+              'type' => 'nested',
+              'properties' => [
+                'id' => ['type' => 'text'],
+                'username' => [
+                  'boost' => 3,
+                ],
+              ],
+            ],
             'language_version' => [
               'type' => 'float',
             ],
@@ -65,7 +74,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'private' => null,
             'visible' => null,
             'debug_build' => null,
-            'getUsernameString' => null,
             'getTagsString' => null,
             'getExtensionsString' => null,
             'downloads' => [
@@ -79,6 +87,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ],
             'uploaded_at' => [
               'type' => 'date',
+              "format" => "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
+            ],
+            'last_modified_at' => [
+              'type' => 'date',
+              "format" => "yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis"
             ],
           ],
           'persistence' => [

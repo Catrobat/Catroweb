@@ -2,6 +2,8 @@
 
 namespace App\DB\EntityRepository\Project;
 
+use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
+use App\DB\Entity\FeatureFlag;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
@@ -15,26 +17,29 @@ use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elasticsearch\Client;
-use Elasticsearch\ClientBuilder;
+use Elastica\Query\MatchQuery;
+use Elastica\Client;
 use Google\Type\DateTime;
 
 class ProgramRepository extends ServiceEntityRepository
 {
   private ?Client $elasticsearch_client = null;
-  public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request)
+  private FeatureFlagManager $feature_flag_manager;
+
+  public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request, FeatureFlagManager $feature_flag_manager)
   {
     parent::__construct($managerRegistry, Program::class);
-    $this->elasticsearch_client = ClientBuilder::create()->setHosts(['elasticsearch:9200'])->build();
+    $this->elasticsearch_client = new Client([
+      'host' => 'elasticsearch',
+      'port' => 9200]);
+    $this->feature_flag_manager = $feature_flag_manager;
   }
 
   public function getProjectByID(string $program_id, bool $include_private = false): array
   {
     $query_builder = $this->createQueryBuilder('e');
-
     $query_builder
-      ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)))
-    ;
+      ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)));
 
     $query_builder = $this->excludeInvisibleProjects($query_builder);
     $query_builder = $this->excludeDebugProjects($query_builder);
@@ -48,39 +53,27 @@ class ProgramRepository extends ServiceEntityRepository
 
   public function getProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
-    $query_builder = new BoolQuery();
-    //$query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, 'embroidery', '0.982');
-    $this->excludePrivateProjects($query_builder);
-
-    $fields = $this->excludeUnavailableAndPrivateProjects();
-    $params = [
-      'index' => 'app_program',
-      'body' => [
-        'from' => $this->getOffset($offset),
-        'size' => $this->getLimit($limit),
-        'query' => $this->buildQuery($fields),
-        'sort' => $this->setOrderBy($order_by, $order),
-      ],
-    ];
-    $response = $this->elasticsearch_client->search($params);
-
-    $hits = $response['hits']['hits'];
-    $programs = [];
-    foreach($hits as $hit)
+    if($this->feature_flag_manager->isEnabled('GET_projects_elastica'))
     {
-      $program_data = $hit['_source'];
-      $program = new Program();
-      $program->setId($program_data['id']);
-      $program->setName($program_data['name']);
-      $program->setUploadedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $program_data['uploaded_at']));
-      $program->setDownloads($program_data['downloads']);
-      $user = new User();
-      $user->setUsername($program_data['getUsernameString']);
-      $program->setUser($user);
-      $programs[] = $program;
-    }
+      $bool_query = new BoolQuery();
+      $this->excludeUnavailableAndPrivateProjectsElastica($bool_query, $flavor, $max_version);
+      $query = $this->buildElasticaQuery($offset, $limit, $bool_query, $order_by, $order);
+      $search = new \Elastica\Search($this->elasticsearch_client);
+      $search->addIndex($this->elasticsearch_client->getIndex('app_program'));
+      $response = $search->search($query);
+      $hits = $response->getResults();
 
-    return $programs;
+      return $this->getProgramsFromJSON($hits);
+    }
+    else
+    {
+      $query_builder = $this->createQueryAllBuilder();
+      $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+      $query_builder = $this->setPagination($query_builder, $limit, $offset);
+      $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
+
+      return $query_builder->getQuery()->getResult();
+    }
   }
 
   public function countProjects(string $flavor = null, string $max_version = ''): int
@@ -94,17 +87,34 @@ class ProgramRepository extends ServiceEntityRepository
   public function getTrendingProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
     $now = new \DateTime('now', new \DateTimeZone('UTC'));
-    $interval = new \DateInterval('P7D');
-    $query_builder = $this->createQueryAllBuilder();
-    $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
-    $query_builder = $this->setPagination($query_builder, $limit, $offset);
-    $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
-    $date_time_delta_7_days = $query_builder->expr()->literal($now->sub($interval)->format('Y-m-d H:i:s'));
-    $left_or = $query_builder->expr()->gte('e.uploaded_at', $date_time_delta_7_days);
-    $right_or = $query_builder->expr()->gte('e.last_modified_at', $date_time_delta_7_days);
-    $query_builder->andWhere($query_builder->expr()->orX($left_or, $right_or));
+    $time_for_check = $now->sub(new \DateInterval('P7D'))->format('Y-m-d H:i:s');
+    if($this->feature_flag_manager->isEnabled('GET_projects_elastica'))
+    {
+      $bool_query = new BoolQuery();
+      $this->excludeUnavailableAndPrivateProjectsElastica($bool_query, $flavor, $max_version);
+      $should_query = new BoolQuery();
+      $should_query->addShould(new Query\Range('uploaded_at', ['gte' => $time_for_check]));
+      $should_query->addShould(new Query\Range('last_modified_at', ['gte' => $time_for_check]));
+      $bool_query->addMust($should_query);
+      $query = $this->buildElasticaQuery($offset, $limit, $bool_query, $order_by, $order);
+      $search = new \Elastica\Search($this->elasticsearch_client);
+      $search->addIndex($this->elasticsearch_client->getIndex('app_program'));
 
-    return $query_builder->getQuery()->getResult();
+      return $this->getProgramsFromJSON($search->search($query)->getResults());
+    }
+    else
+    {
+      $query_builder = $this->createQueryAllBuilder();
+      $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
+      $query_builder = $this->setPagination($query_builder, $limit, $offset);
+      $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
+      $date_time_delta_7_days = $query_builder->expr()->literal($time_for_check);
+      $left_or = $query_builder->expr()->gte('e.uploaded_at', $date_time_delta_7_days);
+      $right_or = $query_builder->expr()->gte('e.last_modified_at', $date_time_delta_7_days);
+      $query_builder->andWhere($query_builder->expr()->orX($left_or, $right_or));
+
+      return $query_builder->getQuery()->getResult();
+    }
   }
 
   public function getScratchRemixProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0): array
@@ -115,8 +125,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setOrderBy($qb, 'views');
     $qb
       ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
-      ->andWhere($qb->expr()->eq('e.id', 'rp.catrobat_child'))
-    ;
+      ->andWhere($qb->expr()->eq('e.id', 'rp.catrobat_child'));
 
     return $qb->getQuery()->getResult();
   }
@@ -127,8 +136,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
       ->innerJoin(ScratchProgramRemixRelation::class, 'rp')
-      ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'))
-    ;
+      ->where($qb->expr()->eq('e.id', 'rp.catrobat_child'));
 
     return $this->getQueryCount($qb);
   }
@@ -141,8 +149,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
       ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-      ->setParameter('user_id', $user_id)
-    ;
+      ->setParameter('user_id', $user_id);
 
     return $qb->getQuery()->getResult();
   }
@@ -153,8 +160,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->excludeUnavailableAndPrivateProjects($qb, $flavor, $max_version);
     $qb
       ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-      ->setParameter('user_id', $user_id)
-    ;
+      ->setParameter('user_id', $user_id);
 
     return $this->getQueryCount($qb);
   }
@@ -167,8 +173,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->setOrderBy($qb, 'uploaded_at');
     $qb
       ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-      ->setParameter('user_id', $user_id)
-    ;
+      ->setParameter('user_id', $user_id);
 
     return $qb->getQuery()->getResult();
   }
@@ -179,8 +184,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version);
     $qb
       ->andWhere($qb->expr()->eq('e.user', ':user_id'))
-      ->setParameter('user_id', $user_id)
-    ;
+      ->setParameter('user_id', $user_id);
 
     return $this->getQueryCount($qb);
   }
@@ -194,8 +198,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb
       ->leftJoin('e.tags', 'f')
       ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-      ->setParameter('internal_title', $internal_title)
-    ;
+      ->setParameter('internal_title', $internal_title);
 
     return $qb->getQuery()->getResult();
   }
@@ -209,8 +212,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb
       ->leftJoin('e.extensions', 'f')
       ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-      ->setParameter('internal_title', $internal_title)
-    ;
+      ->setParameter('internal_title', $internal_title);
 
     return $qb->getQuery()->getResult();
   }
@@ -222,8 +224,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb
       ->leftJoin('e.tags', 'f')
       ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-      ->setParameter('internal_title', $tag_name)
-    ;
+      ->setParameter('internal_title', $tag_name);
 
     return $this->getQueryCount($qb);
   }
@@ -235,8 +236,7 @@ class ProgramRepository extends ServiceEntityRepository
     $qb
       ->leftJoin('e.extensions', 'f')
       ->andWhere($qb->expr()->eq('f.internal_title', ':internal_title'))
-      ->setParameter('internal_title', $extension_internal_title)
-    ;
+      ->setParameter('internal_title', $extension_internal_title);
 
     return $this->getQueryCount($qb);
   }
@@ -251,8 +251,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->andWhere($qb->expr()->eq('e.user', ':user_id'))
       ->setParameter('user_id', $user_id)
       ->andWhere($qb->expr()->neq('e.id', ':project_id'))
-      ->setParameter('project_id', $project_id)
-    ;
+      ->setParameter('project_id', $project_id);
 
     return $qb->getQuery()->getResult();
   }
@@ -279,10 +278,9 @@ class ProgramRepository extends ServiceEntityRepository
       ->setParameter('program_ids', $program_ids)
       ->distinct()
       ->getQuery()
-      ->getResult()
-    ;
+      ->getResult();
 
-    return array_map(fn ($data) => $data['id'], $result);
+    return array_map(fn($data) => $data['id'], $result);
   }
 
   /**
@@ -298,8 +296,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->set('p.remix_migrated_at', ':remix_migrated_at')
       ->setParameter(':remix_migrated_at', null)
       ->getQuery()
-      ->execute()
-    ;
+      ->execute();
   }
 
   /**
@@ -319,8 +316,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->setParameter('previous_program_id', $previous_program_id)
       ->distinct()
       ->getQuery()
-      ->getSingleScalarResult()
-    ;
+      ->getSingleScalarResult();
   }
 
   public function getProjectDataByIds(array $program_ids): array
@@ -332,8 +328,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->innerJoin('e.user', 'u')
       ->andWhere('e.id IN (:program_ids)')
       ->setParameter('program_ids', $program_ids)
-      ->distinct()
-    ;
+      ->distinct();
 
     return $query_builder->getQuery()->getResult();
   }
@@ -351,12 +346,11 @@ class ProgramRepository extends ServiceEntityRepository
       ->having($query_builder->expr()->gt('like_count', $query_builder->expr()->literal(1)))
       ->groupBy('e.id')
       ->orderBy('like_count', 'DESC')
-      ->distinct()
-    ;
+      ->distinct();
 
     $results = $query_builder->getQuery()->getResult();
 
-    return array_map(fn ($result) => $result['program'], $results);
+    return array_map(fn($result) => $result['program'], $results);
   }
 
   public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
@@ -406,168 +400,217 @@ class ProgramRepository extends ServiceEntityRepository
     }
   }
 
-  private function setOrderBy(string $order_by = '', string $order = 'DESC'): array
+  private function setOrderBy(QueryBuilder $query_builder, string $order_by = '', string $order = 'DESC', string $alias = 'e'): QueryBuilder
   {
     if ('' !== trim($order_by)) {
-      return [$order_by => ['order' => $order]];
-//      $query_builder = $query_builder
-//        ->orderBy($alias.'.'.$order_by, $order)
-//      ;
+      $query_builder = $query_builder
+        ->orderBy($alias.'.'.$order_by, $order)
+      ;
     }
 
-    return [];
+    return $query_builder;
   }
 
-  private function setPagination(?int $limit, ?int $offset): array
+  private function setPagination(QueryBuilder $query_builder, ?int $limit, ?int $offset): QueryBuilder
   {
-    $return_val_offset = '';
-    $return_val_limit = '';
-    $offset = 2;
-    if (null !== $offset && $offset >= 0) {
-      $return_val_offset = ['from' => [$offset]];
-      //$query_builder->setFirstResult($offset);
+    if (null !== $offset && $offset > 0) {
+      $query_builder->setFirstResult($offset);
     }
     if (null !== $limit && $limit > 0) {
-      $return_val_limit = ['size' => [$limit]];
-      //$query_builder->setMaxResults($limit);
+      $query_builder->setMaxResults($limit);
     }
 
-    return $return_val_offset + $return_val_limit;//$query_builder;
+    return $query_builder;
   }
 
-
-  private function excludeUnavailableAndPrivateProjects(BoolQuery $qb, string $flavor = null, string $max_version = ''): array
+  private function excludeUnavailableAndPrivateProjects(QueryBuilder $qb, string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
-    return $this->excludePrivateProjects($qb);
-    //return $this->excludeUnavailableProjects($flavor, $max_version) + $this->excludePrivateProjects();
-    //$qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, $alias);
+    $qb = $this->excludeUnavailableProjects($qb, $flavor, $max_version, $alias);
+
+    return $this->excludePrivateProjects($qb, $alias);
   }
 
-  private function excludeUnavailableProjects(string $flavor = null, string $max_version = ''): array
+  private function excludeUnavailableProjects(QueryBuilder $qb, string $flavor = null, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
-    $return_value = array();
-    $return_value[] = $this->excludeInvisibleProjects();
-    if(($temp = $this->excludeDebugProjects()) != [])
-      $return_value[] = $temp;
-    if(($temp = $this->setFlavorConstraint($flavor)) != [])
-      $return_value[] = $temp;
-    if(($temp = $this->excludeProjectsWithTooHighLanguageVersion($max_version)) != [])
-      $return_value[] = $temp;
-    return $return_value;
-//    $qb = $this->excludeInvisibleProjects($qb, $alias);
-//    $qb = $this->excludeDebugProjects($qb, $alias);
-//    $qb = $this->setFlavorConstraint($qb, $flavor, $alias);
+    $qb = $this->excludeInvisibleProjects($qb, $alias);
+    $qb = $this->excludeDebugProjects($qb, $alias);
+    $qb = $this->setFlavorConstraint($qb, $flavor, $alias);
 
-    //return $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version, $alias);
+    return $this->excludeProjectsWithTooHighLanguageVersion($qb, $max_version, $alias);
   }
 
-  private function setFlavorConstraint(string $flavor = null): array
+  private function setFlavorConstraint(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e'): QueryBuilder
   {
     if ('' === trim($flavor)) {
-      return [];
-      //return $query_builder;
+      return $query_builder;
     }
 
     if ('!' === $flavor[0]) {
-      return ['term' => ['flavor' => substr($flavor,1)]];
       // Can be used when we explicitly want projects of other flavors (E.g to fill empty categories of a new flavor)
-//      return $query_builder
-//        ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
-//        ->setParameter('flavor', substr((string) $flavor, 1))
-//      ;
+      return $query_builder
+        ->andWhere($query_builder->expr()->neq($alias.'.flavor', ':flavor'))
+        ->setParameter('flavor', substr((string) $flavor, 1))
+        ;
     }
-
-
-    return['bool' => [
-          'should' => [
-            [
-              'match' => [
-                'flavor' => strtolower($flavor),
-              ],
-            ],
-            [
-              'match' => [
-                'getExtensionsString' => strtolower($flavor),
-              ],
-            ],
-          ],
-        ],
-      ];
 
     // Extensions are very similar to Flavors. (E.g. it does not care if a project has embroidery flavor or extension)
-//    return $query_builder->leftJoin($alias.'.extensions', 'ext')
-//      ->andWhere($query_builder->expr()->orX()->addMultiple([
-//        $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
-//        $query_builder->expr()->like('lower(ext.internal_title)', ':extension'),
-//      ]))
-//      ->setParameter('flavor', strtolower((string) $flavor))
-//      ->setParameter('extension', strtolower((string) $flavor))
-//    ;
+    return $query_builder->leftJoin($alias.'.extensions', 'ext')
+      ->andWhere($query_builder->expr()->orX()->addMultiple([
+        $query_builder->expr()->like('lower('.$alias.'.flavor)', ':flavor'),
+        $query_builder->expr()->like('lower(ext.internal_title)', ':extension'),
+      ]))
+      ->setParameter('flavor', strtolower((string) $flavor))
+      ->setParameter('extension', strtolower((string) $flavor))
+      ;
   }
 
-  private function excludeProjectsWithTooHighLanguageVersion(string $max_version = ''): array
+  private function excludeProjectsWithTooHighLanguageVersion(QueryBuilder $query_builder, string $max_version = '', string $alias = 'e'): QueryBuilder
   {
     if ('' !== $max_version) {
-      return ['term' => ['language_version' => $max_version]];
-//      $query_builder
-//        ->andWhere($query_builder->expr()->lte($alias.'.language_version', ':max_version'))
-//        ->setParameter('max_version', $max_version)
-//      ;
+      $query_builder
+        ->andWhere($query_builder->expr()->lte($alias.'.language_version', ':max_version'))
+        ->setParameter('max_version', $max_version)
+      ;
     }
-    return [];
-    //return $query_builder;
+
+    return $query_builder;
   }
 
-  private function excludeDebugProjects(): array
+  private function excludeDebugProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
   {
     if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
-      return ['term' => ['debug_build' => false]];
+      $query_builder->andWhere(
+        $query_builder->expr()->eq($alias.'.debug_build', $query_builder->expr()->literal(false))
+      );
     }
-      return [];
+
+    return $query_builder;
   }
 
-  private function excludeInvisibleProjects(BoolQuery $qb): void
+  private function excludeInvisibleProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    return $query_builder->andwhere(
+      $query_builder->expr()->eq($alias.'.visible', $query_builder->expr()->literal(true))
+    );
+  }
+
+  private function excludePrivateProjects(QueryBuilder $query_builder, string $alias = 'e'): QueryBuilder
+  {
+    return $query_builder->andWhere(
+      $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
+    );
+  }
+
+  private function setOrderByElastica(string $order_by = '', string $order = 'DESC'): array
+  {
+    if ('' !== trim($order_by)) {
+      return [$order_by => ['order' => $order]];
+    }
+
+    return [];
+  }
+
+  private function excludeUnavailableAndPrivateProjectsElastica(BoolQuery $qb, string $flavor = null, string $max_version = ''): void
+  {
+    $this->excludePrivateProjectsElastica($qb);
+    $this->excludeUnavailableProjectsElastica($qb, $flavor, $max_version);
+  }
+
+  private function excludeUnavailableProjectsElastica(BoolQuery $qb, string $flavor = null, string $max_version = ''): void
+  {
+    $this->excludeInvisibleProjectsElastica($qb);
+    $this->excludeDebugProjectsElastica($qb);
+    $this->setFlavorConstraintElastica($qb, $flavor);
+    $this->excludeProjectsWithTooHighLanguageVersionElastica($qb, $max_version);
+  }
+
+  private function setFlavorConstraintElastica(BoolQuery $qb, string $flavor = null): void
+  {
+    if ('' === trim($flavor)) {
+      return;
+    }
+    if ('!' === $flavor[0]) {
+      $must_not = new BoolQuery();
+      $must_not->addMustNot(new MatchQuery('flavor', strtolower(substr($flavor, 1))));
+      $qb->addMust($must_not);
+    }
+    $should = new BoolQuery();
+    $should->addShould(new Query\Wildcard('flavor', strtolower($flavor)));
+    $should->addShould(new Query\Wildcard('getExtensionsString', strtolower($flavor)));
+    $qb->addMust($should);
+  }
+
+
+  private function excludeProjectsWithTooHighLanguageVersionElastica(BoolQuery $qb, string $max_version = ''): void
+  {
+    if ('' !== $max_version) {
+      $qb->addMust(new Query\Range('language_version', ['lte' => $max_version]));
+    }
+  }
+
+  private function excludeDebugProjectsElastica(BoolQuery $qb): void
+  {
+    if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
+      $qb->addMust(new Query\Term(['debug_build' => false]));
+    }
+  }
+
+  private function excludeInvisibleProjectsElastica(BoolQuery $qb): void
   {
     $qb->addMust(new Query\Term(['visible' => true]));
   }
 
-  private function excludePrivateProjects(BoolQuery $qb): void
+  private function excludePrivateProjectsElastica(BoolQuery $qb): void
   {
-      $qb->addMust(new Query\Term(['private' => false]));
-//    return [['term' => ['private' => false]]];
-//    return $query_builder->andWhere(
-//      $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
-//    );
+    $qb->addMust(new Query\Term(['private' => false]));
   }
 
   private function getOffset(int $offset): int
   {
-    return (null != $offset && $offset > 0) ? $offset: 0;
+    return (null != $offset && $offset > 0) ? $offset : 0;
   }
 
   private function getLimit(int $limit): int
   {
-    return (null != $limit && $limit > 0) ? $limit: 20;
+    return (null != $limit && $limit > 0) ? $limit : 0;
   }
 
-  private function buildQuery( ?array $filterFields): array
+  private function buildElasticaQuery(int $offset, int $limit, BoolQuery $bool_query, string $order_by, string $order): Query
   {
-//    return [
-//      'bool' => [
-//        'must' => $this->excludeUnavailableAndPrivateProjects($flavor, $max_version),
-//      ],
-//    ];
+    $query = new Query();
+    $query->setFrom($this->getOffset($offset));
+    if(($limit = $this->getLimit($limit)) != 0)
+    {
+      $query->setSize($limit);
+    }
+    $query->setQuery($bool_query);
+    if($order_by != '')
+    {
+      $query->addSort([$order_by => $order]);
+    }
+    return $query;
+  }
 
-    $query = ['bool' => ['must' => []]];
+  private function getProgramsFromJSON(array $hits): array
+  {
+    // this currently only works for the landing page project categories
+    // if every call is to be changed to elasticsearch the indexes and this function have to be adjusted / expanded
 
-    if ($filterFields) {
-      foreach ($filterFields as $key => $field) {
-        if (isset($filterValues[$key])) {
-          $query['bool']['must'][] = ['term' => [$field => $filterValues[$key]]];
-        }
-      }
+    $programs = [];
+    foreach ($hits as $hit) {
+      $program_data = $hit->getHit()['_source'];
+      $program = new Program();
+      $program->setId($program_data['id']);
+      $program->setName($program_data['name']);
+      $program->setUploadedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $program_data['uploaded_at']));
+      $program->setDownloads($program_data['downloads']);
+      $user = new User();
+      $user->setId($program_data['user']['id']);
+      $user->setUsername($program_data['user']['username']);
+      $program->setUser($user);
+      $programs[] = $program;
     }
 
-    return $query;
+    return $programs;
   }
 }
