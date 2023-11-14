@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
-use App\DB\Entity\Project\Extension;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -65,9 +64,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'private' => null,
             'visible' => null,
             'debug_build' => null,
-            'getUsernameString' => null,
             'getTagsString' => null,
             'getExtensionsString' => null,
+            'getUsernameString' => null,
             'downloads' => [
               'type' => 'integer',
             ],
@@ -79,6 +78,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             ],
             'uploaded_at' => [
               'type' => 'date',
+              'format' => 'yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis',
+            ],
+            'last_modified_at' => [
+              'type' => 'date',
+              'format' => 'yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis',
             ],
           ],
           'persistence' => [
