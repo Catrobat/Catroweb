@@ -20,7 +20,7 @@
     "doctrine/dbal": "3.7.*",
     "doctrine/doctrine-bundle": "2.10.*",
     "doctrine/doctrine-migrations-bundle": "3.2.*",
-    "doctrine/orm": "2.16.*",
+    "doctrine/orm": "2.17.*",
     "eightpoints/guzzle-bundle": "8.4.*",
     "friendsofsymfony/elastica-bundle": "6.3.*",
     "gesdinet/jwt-refresh-token-bundle": "1.1.*",
