@@ -979,3 +979,16 @@ media_library:
 
 snackbar:
   project_not_found: 'The requested project is not available'
+
+
+
+
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_33: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_34: 'The Feature'
+    feature_35: 'The Feature'
+
+
+

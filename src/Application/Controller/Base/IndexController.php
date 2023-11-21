@@ -2,6 +2,7 @@
 
 namespace App\Application\Controller\Base;
 
+use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationController;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository) {}
+  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository,protected MaintenanceInformationController $maintenanceinformation) {}
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
   public function indexAction(Request $request): Response
@@ -21,10 +22,11 @@ class IndexController extends AbstractController
     $flavor = $request->attributes->get('flavor');
     /** @var User|null $user */
     $user = $this->getUser();
-
+      $snackbarMessages = $this->maintenanceinformation->sendSnackbarMaintenanceInformation();
     return $this->render('Index/index.html.twig', [
       'featured' => $this->getFeaturedSliderData($flavor),
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
+       'snackbarMessages' => $snackbarMessages,
     ]);
   }
 

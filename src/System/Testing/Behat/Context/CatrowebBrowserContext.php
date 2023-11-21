@@ -1333,7 +1333,8 @@ class CatrowebBrowserContext extends BrowserContext
     $td = $this->getSession()->getPage()->findAll('css', '.table tbody tr');
 
     $actual_values = [];
-    foreach ($td as $value) {
+    foreach ($td as $value)
+    {
       $actual_values[] = $value->getText();
     }
 
