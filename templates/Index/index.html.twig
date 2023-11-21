@@ -6,6 +6,50 @@
 
 {% block body %}
 
+  {# Display the snackbar messages #}
+  <div id="maintenance-container">
+    {% for maintenanceMessage in snackbarMessages %}
+
+        {{ maintenanceMessage | raw }} {# Use the `raw` filter to render HTML content #}
+
+    {% endfor %}
+  </div>
+  <script>
+    const closeButtons = document.querySelectorAll('.close-button');
+    closeButtons.forEach(closeButton => {
+      if (closeButton) {
+        closeButton.addEventListener('click', () => {
+          // Handle the close button click event
+          const parentElement = closeButton.parentElement;
+          if (parentElement) {
+            parentElement.style.display = 'none';
+          }
+        });
+      }
+    });
+
+    const expandButtons = document.querySelectorAll('.expand-button');
+
+    // Add a click event listener to each expand button
+    expandButtons.forEach(expandButton => {
+      expandButton.addEventListener('click', () => {
+
+        const dataId = expandButton.getAttribute('data-id');
+        const additionalInfoSection = document.getElementById(`additional-info-${dataId}`);
+
+
+        // Toggle the visibility of the additional information section
+        if (additionalInfoSection.style.display === 'none' || additionalInfoSection.style.display === '') {
+          additionalInfoSection.style.display = 'block';
+          expandButton.classList.toggle('expanded');
+        } else {
+          additionalInfoSection.style.display = 'none';
+          expandButton.classList.toggle('expanded');
+        }
+      });
+    });
+
+  </script>
   {% if not app.user and not isWebview() %}
     {{ include('Index/welcome-section.html.twig') }}
   {% endif %}

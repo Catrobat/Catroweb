@@ -2,6 +2,7 @@
 
 namespace App\System\Testing\Behat\Context;
 
+use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -267,6 +268,28 @@ class DataFixturesContext implements Context
     $this->getManager()->flush();
   }
 
+  // -------------------------------------------------------------------------------------------------------------------
+  //  MaintenanceInformation
+  // -------------------------------------------------------------------------------------------------------------------
+
+    /**
+   * @Given /^there are maintenance information:$/
+   */
+  public function thereAreMaintenanceInformation(TableNode $table): void
+  {
+      foreach ($table->getHash() as $maintenanceinformation_config) {
+          $maintenanceInformation=new MaintenanceInformation();
+          $maintenanceInformation->setLtmMaintenanceStart($maintenanceinformation_config['Maintenance Start']);
+          $maintenanceInformation->setLtmMaintenanceEnd($maintenanceinformation_config['Maintenance End']);
+          $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
+          $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_' . $maintenanceinformation_config['Id']);
+          $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
+          $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
+          $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
+
+      }
+
+  }
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
   // -------------------------------------------------------------------------------------------------------------------

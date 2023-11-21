@@ -44,6 +44,8 @@ use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogsAdmin;
 use App\Admin\Tools\Maintenance\MaintainAdmin;
 use App\Admin\Tools\Maintenance\MaintainController;
+use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationAdmin;
+use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationController;
 use App\Admin\Tools\SendMailToUser\SendMailToUserAdmin;
 use App\Admin\Tools\SendMailToUser\SendMailToUserController;
 use App\Admin\Users\ReportedUsers\ReportedUsersAdmin;
@@ -73,6 +75,7 @@ use App\Application\Locale\LocaleEventSubscriber;
 use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -160,7 +163,6 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
 use Sonata\AdminBundle\Security\Acl\Permission\AdminPermissionMap;
 use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-
 use function Symfony\Component\DependencyInjection\Loader\Configurator\service;
 
 return static function (ContainerConfigurator $containerConfigurator): void {
@@ -317,7 +319,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set(ReportedUsersController::class, ReportedUsersController::class)
+  $services->set(MaintenanceInformationController::class, MaintenanceInformationController::class)
+    ->public()
+  ;
+
+    $services->set(ReportedUsersController::class, ReportedUsersController::class)
     ->public()
   ;
 
@@ -728,7 +734,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Feature Flag', 'code' => null, 'model_class' => FeatureFlag::class, 'controller' => FeatureFlagController::class])
     ->public()
   ;
-
+  $services->set('admin.block.tools.maintenance_information', MaintenanceInformationAdmin::class)
+      ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Maintenance Information', 'code' => null, 'model_class' =>  MaintenanceInformation::class, 'controller' => MaintenanceInformationController::class])
+      ->public()
+  ;
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
   $services->set('api.media-library', MediaLibraryApi::class)

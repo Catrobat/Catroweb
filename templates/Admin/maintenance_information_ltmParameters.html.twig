@@ -1,0 +1,80 @@
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <style>
+
+        .horizontal-list-container {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+
+        .horizontal-list {
+            list-style: none;
+            padding: 0;
+            white-space: nowrap;
+
+        }
+
+        .horizontal-list li {
+            display: inline-block;
+            margin: 25px;
+            text-align: center;
+            transition: transform 0.2s;
+        }
+
+        .horizontal-list li:hover {
+            transform: scale(1.6);
+        }
+
+        .material-icons {
+            cursor: pointer;
+            font-size: 35px;
+            transition: transform 0.2s;
+        }
+
+        .material-icons:hover {
+            cursor: pointer;
+
+        }
+    </style>
+
+<div class="horizontal-list-container">
+    <ul class="horizontal-list" id="iconList"></ul>
+</div>
+
+<script>
+  const iconData = [
+    { id: 1, icon: 'error', caption: 'Error' },
+    { id: 2, icon: 'warning', caption: 'Warning' },
+    { id: 3, icon: 'notifications', caption: 'Notifications' },
+    { id: 4, icon: 'error_outline', caption: 'Outlined Error' },
+    { id: 5, icon: 'error_outline', caption: 'Outlined Error' },
+    { id: 6, icon: 'build', caption: 'Construction and Maintenance' },
+    { id: 7, icon: 'settings', caption: 'Adjusting Settings' },
+    { id: 8, icon: 'tune', caption: 'Fine-Tuning Equipment' },
+    { id: 9, icon: 'autorenew', caption: 'Renewal and Updating' },
+    { id: 10, icon: 'cached', caption: 'Data Caching' },
+    { id: 11, icon: 'bug_report', caption: 'Bug Reporting and Fixing' },
+    { id: 12, icon: 'track_changes', caption: 'Tracking Changes' },
+    { id: 13, icon: 'vpn_key', caption: 'Security Key Management' },
+    { id: 14, icon: 'timeline', caption: 'Maintenance Schedule' },
+    { id: 15, icon: 'info', caption: 'Information' },
+    { id: 16, icon: 'info_outline', caption: 'Outlined Information' },
+    { id: 17, icon: 'announcement', caption: 'Announcement' },
+  ];
+
+  const iconList = document.getElementById('iconList');
+  iconData.forEach(data => {
+    const li = document.createElement('li');
+    li.innerHTML = `
+                <label>
+                    <i class="material-icons">${data.icon}</i>
+                    <p>${data.caption}</p>
+                </label>
+            `;
+    iconList.appendChild(li);
+  });
+</script>
+
+
