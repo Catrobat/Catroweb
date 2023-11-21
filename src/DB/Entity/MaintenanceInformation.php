@@ -9,7 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="maintanance_information")
  *
- * @ORM\HasLifecycleCallbacks
  */
 class MaintenanceInformation
 {
@@ -48,7 +47,7 @@ class MaintenanceInformation
   protected ?\DateTime $ltm_maintenanceEnd;
 
   /**
-   * @ORM\Column(type="string", length=255, nullable=true)
+   * @ORM\Column(type="text", nullable=true)
    */
   protected ?string $ltm_additionalInformation;
 
@@ -57,7 +56,13 @@ class MaintenanceInformation
    */
   protected bool $active;
 
-  // Getters and setters
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected bool $closed = false;
+
+
+    // Getters and setters
   public function getId(): ?int
   {
     return $this->id;
@@ -145,5 +150,18 @@ class MaintenanceInformation
     $this->active = $active;
 
     return $this;
+  }
+
+
+  public function isClosed(): bool
+  {
+        return $this->closed;
+  }
+
+  public function setClosed(bool $closed): self
+  {
+        $this->closed = $closed;
+
+        return $this;
   }
 }

@@ -1,7 +1,7 @@
 import { Carousel } from 'bootstrap'
 import { ProjectList } from './components/project_list'
 import { OAuthHandler } from './security/OAuthHandler'
-
+import './components/maintaince_information'
 require('../styles/index.scss')
 
 document.addEventListener('DOMContentLoaded', () => {

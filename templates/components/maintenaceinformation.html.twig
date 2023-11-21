@@ -1,92 +1,7 @@
-<style>
-    .maintenance {
-        border: 1px solid #333;
-        border-radius: 10px;
-        padding: 10px;
-        background-color: #f0f0f0;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: 10px;
-        transition: box-shadow 0.9s;
-    }
 
-    .maintenance:hover {
-        transform: scale(1.03);
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    }
-
-    .maintenance-content {
-        display: flex;
-        flex-direction: column; /* Stack content vertically */
-
-    }
-
-    .maintenance-text {
-        display: flex;
-        align-items: center;
-        margin-right: 10px;
-    }
-
-    .bold-text {
-        font-weight: bold;
-    }
-
-    .additional-info {
-        font-size: 14px;
-        color: #333;
-    }
-
-    .maintenance-icon {
-        font-size: 24px;
-        color: #0097a7; /* Change icon color */
-        margin-right: 10px;
-    }
-
-    .material-icons {
-        font-family: 'Material Icons', sans-serif;
-    }
-
-    .close-button {
-        background: none;
-        border: none;
-        padding: 0;
-        font: inherit;
-        cursor: pointer;
-        outline: inherit;
-    }
-
-    .close-button:hover {
-        font-weight: bold;
-    }
-
-    .material-icons.md-48 {
-        font-size: 26px;
-        color: #0097a7;
-    }
-
-
-    .expand-button {
-        font-size: 24px;
-        cursor: pointer;
-        transition: transform 0.3s;
-        top: 50%;
-        right: 10px;
-    }
-
-    .expanded {
-        transform: rotate(180deg); /* Rotate the arrow when expanded */
-    }
-
-    /* Style for the additional information section (initially hidden) */
-    .additional-info-section {
-        display: none;
-        background-color: #f0f0f0; /* Use the same background color */
-        margin-top: 10px;
-        padding: 10px;
-        transition: display 0.3s;
-    }
-</style>
+{% block stylesheets %}
+    {{ encore_entry_link_tags('maintenance') }}
+{% endblock %}
 
 <div class="maintenance">
     <div class="maintenance-content">
@@ -131,9 +46,11 @@
             </div>
         {% endif %}
     </div>
-    <button class="close-button">
-        <i class="material-icons md-48">close</i> <!-- Use the close icon here -->
+    <button class="close-button" data-maintenance-id="{{id}}">
+
+        <i class="material-icons md-48">close</i>
     </button>
+
 </div>
 
 

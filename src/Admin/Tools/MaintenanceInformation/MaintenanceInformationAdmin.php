@@ -12,7 +12,9 @@ use Sonata\AdminBundle\Form\Type\TemplateType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-
+/**
+ * @phpstan-extends AbstractAdmin<\stdClass>
+ */
 class MaintenanceInformationAdmin extends AbstractAdmin
 {
   protected $baseRoutePattern = 'maintenanceinformation';
@@ -51,7 +53,6 @@ class MaintenanceInformationAdmin extends AbstractAdmin
           'Warning' => 'warning',
           'Notifications' => 'notifications',
           'Outlined Error' => 'error_outline',
-          'Outlined Error 2' => 'error_outline_2',
           'Construction and Maintenance' => 'build',
           'Adjusting Settings' => 'settings',
           'Fine-Tuning Equipment' => 'tune',

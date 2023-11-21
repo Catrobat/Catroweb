@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class IndexController extends AbstractController
 {
-  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository, protected MaintenanceInformationController $maintenanceinformation) {}
+  public function __construct(protected ImageRepository $image_repository, protected FeaturedRepository $featured_repository, protected MaintenanceInformationController $maintenanceInformation) {}
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
   public function indexAction(Request $request): Response
@@ -22,12 +22,12 @@ class IndexController extends AbstractController
     $flavor = $request->attributes->get('flavor');
     /** @var User|null $user */
     $user = $this->getUser();
-    $snackbarMessages = $this->maintenanceinformation->sendSnackbarMaintenanceInformation();
+    $maintenanceInformation = $this->maintenanceInformation->sendMaintenanceInformation();
 
     return $this->render('Index/index.html.twig', [
       'featured' => $this->getFeaturedSliderData($flavor),
       'is_first_oauth_login' => null !== $user && $user->isOauthUser() && !$user->isOauthPasswordCreated(),
-      'snackbarMessages' => $snackbarMessages,
+      'maintenanceInformation' => $maintenanceInformation,
     ]);
   }
 
