@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class NotificationsApiFacadeTest extends DefaultTestCase
 {
-  protected NotificationsApiFacade|MockObject $object;
+  protected MockObject|NotificationsApiFacade $object;
 
   protected function setUp(): void
   {

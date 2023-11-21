@@ -27,11 +27,11 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 {
   private RemixUpdaterEventSubscriber $remix_updater;
 
-  private RemixManager|MockObject $remix_manager;
+  private MockObject|RemixManager $remix_manager;
 
   private AsyncHttpClient|MockObject $async_http_client;
 
-  private Program|MockObject $program_entity;
+  private MockObject|Program $program_entity;
 
   protected function setUp(): void
   {

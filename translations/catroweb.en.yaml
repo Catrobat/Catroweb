@@ -145,6 +145,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -811,6 +812,7 @@ category:
   example: Example
   scratch: Scratch remixes
   recommended: Recommended projects
+  popular: Most popular
 
 achievements:
   sidebar:

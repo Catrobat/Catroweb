@@ -97,6 +97,7 @@ class ProjectDataFixtures
     $project->setDebugBuild(isset($config['debug']) && 'true' === $config['debug']);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
     $project->setRand($config['rand'] ?? 0);
+    $project->setPopularity($config['popularity'] ?? 0);
 
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));

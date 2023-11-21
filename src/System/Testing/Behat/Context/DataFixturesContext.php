@@ -272,23 +272,21 @@ class DataFixturesContext implements Context
   //  MaintenanceInformation
   // -------------------------------------------------------------------------------------------------------------------
 
-    /**
+  /**
    * @Given /^there are maintenance information:$/
    */
   public function thereAreMaintenanceInformation(TableNode $table): void
   {
-      foreach ($table->getHash() as $maintenanceinformation_config) {
-          $maintenanceInformation=new MaintenanceInformation();
-          $maintenanceInformation->setLtmMaintenanceStart($maintenanceinformation_config['Maintenance Start']);
-          $maintenanceInformation->setLtmMaintenanceEnd($maintenanceinformation_config['Maintenance End']);
-          $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
-          $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_' . $maintenanceinformation_config['Id']);
-          $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
-          $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
-          $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
-
-      }
-
+    foreach ($table->getHash() as $maintenanceinformation_config) {
+      $maintenanceInformation = new MaintenanceInformation();
+      $maintenanceInformation->setLtmMaintenanceStart($maintenanceinformation_config['Maintenance Start']);
+      $maintenanceInformation->setLtmMaintenanceEnd($maintenanceinformation_config['Maintenance End']);
+      $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
+      $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
+      $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
+      $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
+      $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
+    }
   }
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects

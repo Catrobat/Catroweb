@@ -24,9 +24,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ThemeRequestEventSubscriberTest extends DefaultTestCase
 {
-  protected ThemeRequestEventSubscriber|MockObject $object;
+  protected MockObject|ThemeRequestEventSubscriber $object;
 
-  protected ParameterBagInterface|MockObject $parameter_bag;
+  protected MockObject|ParameterBagInterface $parameter_bag;
 
   protected function setUp(): void
   {
