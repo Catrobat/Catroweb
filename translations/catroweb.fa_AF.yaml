@@ -140,6 +140,7 @@ programs:
   tooLongName: نام پروژه خیلی طولانی است!
   tooLongDescription: توضیح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: پربیننده ترین
     downloaded: بیشتر دانلود شده
@@ -760,6 +761,7 @@ category:
   example: مثال
   scratch: ریمیکس دوخت
   recommended: پروژه های توصیه شده
+  popular: Most popular
 achievements:
   sidebar:
     title: 'دستاوردها'

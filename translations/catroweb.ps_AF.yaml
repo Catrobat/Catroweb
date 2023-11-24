@@ -139,6 +139,7 @@ programs:
   tooLongName: د پروژې نوم ډیر اوږد دی!
   tooLongDescription: د پروژې تفصیل ډیر اوږد دی!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: ډیری لیدل شوي
     downloaded: ډیری ډاونلوډ شوی
@@ -761,6 +762,7 @@ category:
   example: بېلګه
   scratch: سکریچ ریمکسونه
   recommended: وړاندیز شوې پروژې
+  popular: Most popular
 achievements:
   sidebar:
     title: 'لاسته راوړنې'

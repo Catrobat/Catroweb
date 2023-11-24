@@ -140,6 +140,7 @@ programs:
   tooLongName: Emri i skedarit është shumë i gjatë.
   tooLongDescription: Përshkrimi i projektit është shumë i gjatë!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: Më të shikuarat
     downloaded: Më të shkarkuarat
@@ -760,6 +761,7 @@ category:
   example: Shëmbull 
   scratch: Scratch ripërzierje
   recommended: Programet e rekomanduara
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Arritjet'

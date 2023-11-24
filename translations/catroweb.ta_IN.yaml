@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: திட்ட விளக்கம் மிக நீளமாக உள்ளது!
   tooLongCredits: திட்ட நன் மதிப்ப மிக நீளமாக உள்ளது!
+  trending: Trending projects
   most:
     viewed: அதிகமாக பார்க்கபட்டது
     downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
@@ -764,6 +765,7 @@ category:
   example: உதாரணம்
   scratch: Scratch மறுகலவைகள்
   recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
+  popular: Most popular
 achievements:
   sidebar:
     title: 'சாதனைகள்'

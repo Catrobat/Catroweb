@@ -141,6 +141,7 @@ programs:
   tooLongName: Жоба атауы тым ұзын!
   tooLongDescription: Жобаның сипаттамасы тым ұзақ!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: Ең көп қаралды
     downloaded: Ең көп жүктелген
@@ -759,6 +760,7 @@ category:
   example: Мысал
   scratch: Scratch ремикстері
   recommended: Ұсынылған жобалар
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Жетістіктер:'

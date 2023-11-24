@@ -140,6 +140,7 @@ programs:
   tooLongName: پروجیکٹ کا نام بہت لمبا ہے!
   tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
   tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
+  trending: Trending projects
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -754,6 +755,7 @@ category:
   example: مثال
   scratch: سکریچ ریمکس
   recommended: سفارش کردہ منصوبے
+  popular: Most popular
 achievements:
   sidebar:
     title: 'کامیابیاں'
