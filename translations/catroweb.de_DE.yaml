@@ -140,6 +140,7 @@ programs:
   tooLongName: Der Projektname ist zu lang!
   tooLongDescription: Die Projektbeschreibung ist zu lang!
   tooLongCredits: Die Anerkennung ist zu lang!
+  trending: Trending projects
   most:
     viewed: Am meisten angesehen
     downloaded: Meist heruntergeladen
@@ -764,6 +765,7 @@ category:
   example: Beispiel
   scratch: Scratch Remixes
   recommended: Empfohlene Projekte
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Erreichte Ziele'

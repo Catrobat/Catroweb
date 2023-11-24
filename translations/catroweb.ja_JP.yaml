@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: プロジェクトの説明が長すぎます！
   tooLongCredits: プロジェクトノートとクレジットが長すぎます！
+  trending: Trending projects
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
@@ -760,6 +761,7 @@ category:
   example: 例
   scratch: スクラッチのリミックス
   recommended: おすすめのプロジェクト
+  popular: Most popular
 achievements:
   sidebar:
     title: '実績'

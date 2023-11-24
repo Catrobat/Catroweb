@@ -140,6 +140,7 @@ programs:
   tooLongName: Слишком длинное название проекта!
   tooLongDescription: Описание проекта слишком длинное!
   tooLongCredits: Примечания и упоминания об авторах слишком длинные!
+  trending: Популярные проекты
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
@@ -761,6 +762,7 @@ category:
   example: Пример
   scratch: Scratch ремиксы
   recommended: Рекомендуемые проекты
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Достижения'
