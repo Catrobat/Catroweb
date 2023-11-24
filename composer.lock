@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f8ecea851defd4d58ad4c859b7ab9633",
+    "content-hash": "39cdf8b0497568a045b4e637781d455d",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7412,28 +7412,28 @@
         },
         {
             "name": "sonata-project/twig-extensions",
-            "version": "2.3.0",
+            "version": "2.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/twig-extensions.git",
-                "reference": "c81c17f49a76af6a0d1e4f37469315aea01eaa00"
+                "reference": "9a3b3c8bcd350d9733fedf5958ae53baac64d9c8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/c81c17f49a76af6a0d1e4f37469315aea01eaa00",
-                "reference": "c81c17f49a76af6a0d1e4f37469315aea01eaa00",
+                "url": "https://api.github.com/repos/sonata-project/twig-extensions/zipball/9a3b3c8bcd350d9733fedf5958ae53baac64d9c8",
+                "reference": "9a3b3c8bcd350d9733fedf5958ae53baac64d9c8",
                 "shasum": ""
             },
             "require": {
                 "php": "^8.0",
-                "symfony/config": "^5.4 || ^6.2",
-                "symfony/twig-bridge": "^5.4 || ^6.2",
+                "symfony/config": "^5.4 || ^6.2 || ^7.0",
+                "symfony/twig-bridge": "^5.4 || ^6.2 || ^7.0",
                 "twig/twig": "^3.0"
             },
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^3.4",
-                "matthiasnoback/symfony-config-test": "^4.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.0",
+                "matthiasnoback/symfony-config-test": "^4.2 || ^5.1",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.0 || ^5.0",
                 "phpstan/extension-installer": "^1.0",
                 "phpstan/phpstan": "^1.0",
                 "phpstan/phpstan-phpunit": "^1.0",
@@ -7442,15 +7442,15 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.17",
-                "symfony/browser-kit": "^5.4 || ^6.2",
-                "symfony/dependency-injection": "^5.4 || ^6.2",
-                "symfony/framework-bundle": "^5.4 || ^6.2",
-                "symfony/http-foundation": "^5.4 || ^6.2",
-                "symfony/http-kernel": "^5.4 || ^6.2",
-                "symfony/phpunit-bridge": "^6.2",
-                "symfony/translation": "^5.4 || ^6.2",
-                "symfony/twig-bundle": "^5.4 || ^6.2",
+                "rector/rector": "^0.18",
+                "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.2 || ^7.0",
+                "symfony/framework-bundle": "^5.4 || ^6.2 || ^7.0",
+                "symfony/http-foundation": "^5.4 || ^6.2 || ^7.0",
+                "symfony/http-kernel": "^5.4 || ^6.2 || ^7.0",
+                "symfony/phpunit-bridge": "^6.2 || ^7.0",
+                "symfony/translation": "^5.4 || ^6.2 || ^7.0",
+                "symfony/twig-bundle": "^5.4 || ^6.2 || ^7.0",
                 "vimeo/psalm": "^5.0"
             },
             "type": "library",
@@ -7484,7 +7484,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/twig-extensions/issues",
-                "source": "https://github.com/sonata-project/twig-extensions/tree/2.3.0"
+                "source": "https://github.com/sonata-project/twig-extensions/tree/2.4.0"
             },
             "funding": [
                 {
@@ -7504,7 +7504,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-08-01T23:11:06+00:00"
+            "time": "2023-11-23T20:39:43+00:00"
         },
         {
             "name": "sonata-project/user-bundle",
@@ -8036,16 +8036,16 @@
         },
         {
             "name": "symfony/config",
-            "version": "v6.3.2",
+            "version": "v6.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/config.git",
-                "reference": "b47ca238b03e7b0d7880ffd1cf06e8d637ca1467"
+                "reference": "b7a63887960359e5b59b15826fa9f9be10acbe88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/config/zipball/b47ca238b03e7b0d7880ffd1cf06e8d637ca1467",
-                "reference": "b47ca238b03e7b0d7880ffd1cf06e8d637ca1467",
+                "url": "https://api.github.com/repos/symfony/config/zipball/b7a63887960359e5b59b15826fa9f9be10acbe88",
+                "reference": "b7a63887960359e5b59b15826fa9f9be10acbe88",
                 "shasum": ""
             },
             "require": {
@@ -8091,7 +8091,7 @@
             "description": "Helps you find, load, combine, autofill and validate configuration values of any kind",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/config/tree/v6.3.2"
+                "source": "https://github.com/symfony/config/tree/v6.3.8"
             },
             "funding": [
                 {
@@ -8107,7 +8107,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-19T20:22:16+00:00"
+            "time": "2023-11-09T08:28:21+00:00"
         },
         {
             "name": "symfony/console",
@@ -8282,7 +8282,7 @@
         },
         {
             "name": "symfony/deprecation-contracts",
-            "version": "v3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/deprecation-contracts.git",
@@ -8329,7 +8329,7 @@
             "description": "A generic function and convention to trigger deprecation notices",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.3.0"
+                "source": "https://github.com/symfony/deprecation-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
@@ -12430,16 +12430,16 @@
         },
         {
             "name": "symfony/translation-contracts",
-            "version": "v3.3.0",
+            "version": "v3.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation-contracts.git",
-                "reference": "02c24deb352fb0d79db5486c0c79905a85e37e86"
+                "reference": "dee0c6e5b4c07ce851b462530088e64b255ac9c5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/02c24deb352fb0d79db5486c0c79905a85e37e86",
-                "reference": "02c24deb352fb0d79db5486c0c79905a85e37e86",
+                "url": "https://api.github.com/repos/symfony/translation-contracts/zipball/dee0c6e5b4c07ce851b462530088e64b255ac9c5",
+                "reference": "dee0c6e5b4c07ce851b462530088e64b255ac9c5",
                 "shasum": ""
             },
             "require": {
@@ -12488,7 +12488,7 @@
                 "standards"
             ],
             "support": {
-                "source": "https://github.com/symfony/translation-contracts/tree/v3.3.0"
+                "source": "https://github.com/symfony/translation-contracts/tree/v3.4.0"
             },
             "funding": [
                 {
@@ -12504,20 +12504,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-05-30T17:17:10+00:00"
+            "time": "2023-07-25T15:08:44+00:00"
         },
         {
             "name": "symfony/twig-bridge",
-            "version": "v6.3.5",
+            "version": "v6.3.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/twig-bridge.git",
-                "reference": "18f2cbe1d46ad43c4d3bd45e5e6279172068e064"
+                "reference": "c51407623959a626784ff302419026f56dc4e1ba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/18f2cbe1d46ad43c4d3bd45e5e6279172068e064",
-                "reference": "18f2cbe1d46ad43c4d3bd45e5e6279172068e064",
+                "url": "https://api.github.com/repos/symfony/twig-bridge/zipball/c51407623959a626784ff302419026f56dc4e1ba",
+                "reference": "c51407623959a626784ff302419026f56dc4e1ba",
                 "shasum": ""
             },
             "require": {
@@ -12596,7 +12596,7 @@
             "description": "Provides integration for Twig with various Symfony components",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/twig-bridge/tree/v6.3.5"
+                "source": "https://github.com/symfony/twig-bridge/tree/v6.3.8"
             },
             "funding": [
                 {
@@ -12612,7 +12612,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-09-12T06:57:20+00:00"
+            "time": "2023-11-09T21:20:12+00:00"
         },
         {
             "name": "symfony/twig-bundle",
@@ -18199,5 +18199,5 @@
         "ext-posix": "8.2",
         "ext-zip": "8.2"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
