@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: প্রকল্পের বিবরণটি অনেক দীর্ঘ!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: সর্বোচ্চ  পরিদর্শন
     downloaded: সর্বোচ্চ ডাউনলোডকৃত
@@ -766,6 +767,7 @@ category:
   example: উদাহরণ
   scratch: স্ক্র্যাচ রিমিক্সস
   recommended: প্রস্তাবিত প্রকল্পগুলি
+  popular: Most popular
 achievements:
   sidebar:
     title: 'অর্জনসমূহ'
