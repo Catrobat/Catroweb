@@ -140,6 +140,7 @@ programs:
   tooLongName: Proje adı çok uzun!
   tooLongDescription: Projenin açıklaması çok uzun!
   tooLongCredits: Projenin yapanlar kısmı çok uzun!
+  trending: Trending projects
   most:
     viewed: En çok İzlenenler
     downloaded: En çok indirilen
@@ -758,6 +759,7 @@ category:
   example: Örnek
   scratch: Scratch remixleri
   recommended: Önerilen projeler
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Başarılar'

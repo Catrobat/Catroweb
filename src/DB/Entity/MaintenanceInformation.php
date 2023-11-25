@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  *
  * @ORM\Table(name="maintanance_information")
- *
  */
 class MaintenanceInformation
 {
@@ -56,13 +55,7 @@ class MaintenanceInformation
    */
   protected bool $active;
 
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    protected bool $closed = false;
-
-
-    // Getters and setters
+  // Getters and setters
   public function getId(): ?int
   {
     return $this->id;
@@ -150,18 +143,5 @@ class MaintenanceInformation
     $this->active = $active;
 
     return $this;
-  }
-
-
-  public function isClosed(): bool
-  {
-        return $this->closed;
-  }
-
-  public function setClosed(bool $closed): self
-  {
-        $this->closed = $closed;
-
-        return $this;
   }
 }

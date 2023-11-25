@@ -323,7 +323,6 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(MaintenanceInformationController::class, MaintenanceInformationController::class)
     ->public()
   ;
-
   $services->set(ReportedUsersController::class, ReportedUsersController::class)
     ->public()
   ;

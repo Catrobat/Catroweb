@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -759,6 +760,7 @@ category:
   example: Example
   scratch: Scratch remixes
   recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'
@@ -914,10 +916,5 @@ snackbar:
   project_not_found: 'The requested project is not available'
 
 
-maintenanceinformations:
-  maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_33: 'The feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_34: 'The feature'
-    feature_35: 'The feature'
+
 

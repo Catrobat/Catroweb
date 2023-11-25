@@ -140,6 +140,7 @@ programs:
   tooLongName: Ime projekta je predolgo
   tooLongDescription: Opis projekta je predolg!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: Najbolj ogledano
     downloaded: Največkrat prenešeni
@@ -759,6 +760,7 @@ category:
   example: Example
   scratch: Zavrzi predelave
   recommended: Predlagani projekti
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'

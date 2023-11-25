@@ -142,6 +142,7 @@ programs:
   tooLongName: ชื่อโครงการยาวเกินไป!
   tooLongDescription: คำอธิบายโครงการยาวเกินไป!
   tooLongCredits: เครดิตโครงการยาวเกินไป!
+  trending: Trending projects
   most:
     viewed: เข้าดูมากที่สุด
     downloaded: ดาวน์โหลดมากที่สุด
@@ -765,6 +766,7 @@ category:
   example: ตัวอย่าง
   scratch: เกาผสม
   recommended: โครงการแนะนำ
+  popular: Most popular
 achievements:
   sidebar:
     title: 'ความสำเร็จ'

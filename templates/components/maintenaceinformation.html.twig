@@ -4,7 +4,7 @@
 {% endblock %}
 
 <div class="maintenance">
-    <div class="maintenance-content">
+    <div class="maintenance-content" id="viewID_{{ id }}">
         <div class="maintenance-text">
             <div class="maintenance-icon">
                 <i class="material-icons md-48">{{ icon }}</i>
@@ -46,8 +46,10 @@
             </div>
         {% endif %}
     </div>
-    <button class="close-button" data-maintenance-id="{{id}}">
+    <button class="close-button"
+            data-url="{{ path('close_maintenance_view',{'viewId':id })}}"
 
+            data-maintenance-id= {{id}}>
         <i class="material-icons md-48">close</i>
     </button>
 

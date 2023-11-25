@@ -12,13 +12,14 @@ use Sonata\AdminBundle\Form\Type\TemplateType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+
 /**
  * @phpstan-extends AbstractAdmin<\stdClass>
  */
 class MaintenanceInformationAdmin extends AbstractAdmin
 {
-  protected $baseRoutePattern = 'maintenanceinformation';
-  protected $baseRouteName = 'maintenanceinformation';
+  protected $baseRoutePattern = 'maintenance information';
+  protected $baseRouteName = 'maintenance information';
 
   public function __construct(
     private readonly EntityManagerInterface $entityManager,
@@ -38,9 +39,9 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     $this->entityManager->flush();
   }
 
-  protected function configureFormFields(FormMapper $formMapper): void
+  protected function configureFormFields(FormMapper $form): void
   {
-    $formMapper
+    $form
       ->add('internalTitle', null, ['label' => 'Feature Name'])
       ->add('AvailableIcons', TemplateType::class, [
         'template' => 'Admin/maintenance_information_ltmParameters.html.twig',
@@ -93,17 +94,17 @@ class MaintenanceInformationAdmin extends AbstractAdmin
     $this->updateLtmCodes();
   }
 
-  protected function configureDatagridFilters(DatagridMapper $datagridMapper): void
+  protected function configureDatagridFilters(DatagridMapper $filter): void
   {
-    $datagridMapper
+    $filter
       ->add('id')
       ->add('internalTitle')
     ;
   }
 
-  protected function configureListFields(ListMapper $listMapper): void
+  protected function configureListFields(ListMapper $list): void
   {
-    $listMapper
+    $list
       ->add('internalTitle', null, ['label' => 'Feature Name'])
       ->add('active', 'boolean', ['label' => 'Active'])
       ->add('ltm_code', null, ['label' => 'LTM Code'])

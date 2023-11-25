@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: Opis programa je predug!
   tooLongCredits: Zasluge programa su preduge!
+  trending: Trending projects
   most:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
@@ -765,6 +766,7 @@ category:
   example: Example
   scratch: Scratch remixes
   recommended: Preporuceni programi
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'

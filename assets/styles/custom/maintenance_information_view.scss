@@ -1,14 +1,14 @@
-﻿$color_1: #333;
-$color_2: #0097a7;
-$font-family_1: 'Material Icons', sans-serif;
-$background-color_1: #f0f0f0;
+$color1: #333;
+$color2: #0097a7;
+$font-family1: 'Material Icons', sans-serif;
+$background-color1: #f0f0f0;
 
 /* Style for the additional information section (initially hidden) */
 .maintenance {
   border: 1px solid #333;
   border-radius: 10px;
   padding: 10px;
-  background-color: $background-color_1;
+  background-color: $background-color1;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@ $background-color_1: #f0f0f0;
   transition: box-shadow 0.9s;
   &:hover {
     transform: scale(1.03);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 10px rgb(0 0 0 / 30%);
   }
 }
 .maintenance-content {
@@ -33,15 +33,15 @@ $background-color_1: #f0f0f0;
 }
 .additional-info {
   font-size: 14px;
-  color: $color_1;
+  color: $color1;
 }
 .maintenance-icon {
   font-size: 24px;
-  color: $color_2;
+  color: $color2;
   margin-right: 10px;
 }
 .material-icons {
-  font-family: $font-family_1;
+  font-family: $font-family1;
 }
 .close-button {
   background: none;
@@ -56,7 +56,7 @@ $background-color_1: #f0f0f0;
 }
 .material-icons.md-48 {
   font-size: 26px;
-  color: $color_2;
+  color: $color2;
 }
 .expand-button {
   font-size: 24px;
@@ -70,7 +70,7 @@ $background-color_1: #f0f0f0;
 }
 .additional-info-section {
   display: none;
-  background-color: $background-color_1;
+  background-color: $background-color1;
   margin-top: 10px;
   padding: 10px;
   transition: display 0.3s;

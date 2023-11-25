@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: Proiektuaren deskribapena luzeegia da!
   tooLongCredits: Proiektuaren ohar eta aipamenak luzeegiak dira!
+  trending: Trending projects
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -759,6 +760,7 @@ category:
   example: Example
   scratch: Scratch remixes
   recommended: Gomendatutako proiektuak
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'

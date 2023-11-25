@@ -36,7 +36,6 @@ use App\System\Testing\Behat\ContextTrait;
 use App\Utils\TimeUtils;
 use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpFoundation\File\File;
@@ -278,15 +277,15 @@ class DataFixturesContext implements Context
    */
   public function thereAreMaintenanceInformation(TableNode $table): void
   {
-      $em = $this->getManager();
+    $em = $this->getManager();
     foreach ($table->getHash() as $maintenanceinformation_config) {
       $maintenanceInformation = new MaintenanceInformation();
       $maintenance_start = $maintenanceinformation_config['Maintenance Start'];
-      $format = "Y-m-d";
-      $date = DateTime::createFromFormat($format, $maintenance_start);
+      $format = 'Y-m-d';
+      $date = \DateTime::createFromFormat($format, $maintenance_start);
       $maintenanceInformation->setLtmMaintenanceStart($date);
       $maintenance_end = $maintenanceinformation_config['Maintenance End'];
-      $date = DateTime::createFromFormat($format, $maintenance_end);
+      $date = \DateTime::createFromFormat($format, $maintenance_end);
       $maintenanceInformation->setLtmMaintenanceEnd($date);
       $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
       $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
@@ -295,8 +294,8 @@ class DataFixturesContext implements Context
       $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
       $em->persist($maintenanceInformation);
     }
-      $em->flush();
-      $this->getManager()->flush();
+    $em->flush();
+    $this->getManager()->flush();
   }
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
