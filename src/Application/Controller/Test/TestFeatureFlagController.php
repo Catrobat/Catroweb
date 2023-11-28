@@ -21,4 +21,9 @@ class TestFeatureFlagController extends AbstractController
   {
     return $this->render('Admin/Tools/feature_flag_sidebar_studio_link.html.twig', ['enabled' => $this->manager->isEnabled('Sidebar-Studio-Link-Feature')]);
   }
+  #[Route(path: '/featureflag/GETProjectsElastica', name: 'GET_projects_elastica', methods: ['GET'])]
+  public function testFlagGetProjectsElastica(): Response
+  {
+    return $this->json(['enabled' => $this->manager->isEnabled('GET_projects_elastica')]);
+  }
 }
