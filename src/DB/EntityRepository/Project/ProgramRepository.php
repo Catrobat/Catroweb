@@ -22,14 +22,10 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 
 class ProgramRepository extends ServiceEntityRepository
 {
-  private ?Client $elasticsearch_client = null;
 
   public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request, protected FeatureFlagManager $feature_flag_manager, private readonly TransformedFinder $program_finder)
   {
     parent::__construct($managerRegistry, Program::class);
-    $this->elasticsearch_client = new Client([
-      'host' => 'elasticsearch',
-      'port' => 9200]);
   }
 
   public function getProjectByID(string $program_id, bool $include_private = false): array
@@ -54,14 +50,9 @@ class ProgramRepository extends ServiceEntityRepository
     if ($this->feature_flag_manager->isEnabled('GET_projects_elastica')) {
       $bool_query = new BoolQuery();
       $this->excludeUnavailableAndPrivateProjectsElastica($bool_query, $flavor, $max_version);
-      $query = $this->buildElasticaQuery($offset, $limit, $bool_query, $order_by, $order);
-      $search = new \Elastica\Search($this->elasticsearch_client);
-      $search->addIndex($this->elasticsearch_client->getIndex('app_program'));
-      $response = $search->search($query);
-      $hits = $response->getResults();
+      $query = $this->buildElasticaQuery($bool_query, $order_by, $order);
 
       return $this->program_finder->find($query, $limit, ['from' => $offset]);
-      //return $this->getProgramsFromJSON($hits);
     }
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
@@ -90,11 +81,9 @@ class ProgramRepository extends ServiceEntityRepository
       $should_query->addShould(new Query\Range('uploaded_at', ['gte' => $time_for_check]));
       $should_query->addShould(new Query\Range('last_modified_at', ['gte' => $time_for_check]));
       $bool_query->addMust($should_query);
-      $query = $this->buildElasticaQuery($offset, $limit, $bool_query, $order_by, $order);
-      $search = new \Elastica\Search($this->elasticsearch_client);
-      $search->addIndex($this->elasticsearch_client->getIndex('app_program'));
+      $query = $this->buildElasticaQuery($bool_query, $order_by, $order);
 
-      return $this->getProgramsFromJSON($search->search($query)->getResults());
+      return $this->program_finder->find($query, $limit, ['from' => $offset]);
     }
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
@@ -563,50 +552,13 @@ class ProgramRepository extends ServiceEntityRepository
     $qb->addMust(new Query\Term(['private' => false]));
   }
 
-  private function getOffset(int $offset): int
-  {
-    return (null != $offset && $offset > 0) ? $offset : 0;
-  }
-
-  private function getLimit(int $limit): int
-  {
-    return (null != $limit && $limit > 0) ? $limit : 0;
-  }
-
-  private function buildElasticaQuery(int $offset, int $limit, BoolQuery $bool_query, string $order_by, string $order): Query
+  private function buildElasticaQuery(BoolQuery $bool_query, string $order_by, string $order): Query
   {
     $query = new Query();
-//    $query->setFrom($this->getOffset($offset));
-//    if (($limit = $this->getLimit($limit)) != 0) {
-//      $query->setSize($limit);
-//    }
     $query->setQuery($bool_query);
     if ('' != $order_by) {
       $query->addSort([$order_by => $order]);
     }
     return $query;
-  }
-
-  private function getProgramsFromJSON(array $hits): array
-  {
-    // this currently only works for the landing page project categories
-    // if every call is to be changed to elasticsearch the indexes and this function have to be adjusted / expanded
-
-    $programs = [];
-    foreach ($hits as $hit) {
-      $program_data = $hit->getHit()['_source'];
-      $program = new Program();
-      $program->setId($program_data['id']);
-      $program->setName($program_data['name']);
-      $program->setUploadedAt(\DateTime::createFromFormat('Y-m-d\TH:i:sP', $program_data['uploaded_at']));
-      $program->setDownloads($program_data['downloads']);
-      $user = new User();
-      $user->setId($program_data['user']['id']);
-      $user->setUsername($program_data['user']['username']);
-      $program->setUser($user);
-      $programs[] = $program;
-    }
-
-    return $programs;
   }
 }
