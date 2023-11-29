@@ -220,6 +220,7 @@ programs:
   deletedComment: '**Deleted**'
   replyLabel: reply
   repliesLabel: replies
+  steal: 'Steal project'
 
 remixGraph:
   title: Remixes
@@ -979,3 +980,5 @@ media_library:
 
 snackbar:
   project_not_found: 'The requested project is not available'
+  steal_project_success: 'You stole the project successfully'
+  steal_not_possible: 'Cannot steal your own project'

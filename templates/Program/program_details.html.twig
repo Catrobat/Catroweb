@@ -41,7 +41,15 @@
       } %}
     </div>
   </div>
-
+  {% if app.user and not my_program %}
+    <div class="row justify-content-end">
+      <div class="d-none d-lg-block col-lg-4 mt-3" style="margin-left: auto">
+        <button class="btn btn-outline-primary btn-block js-redirect-button" id="stealProgramButton" data-url="{{ path('steal_program', {'id': program.id}) }}" data-id="{{ program.id }}" formmethod="post">
+          {{ "programs.steal"|trans({}, "catroweb") }}
+        </button>
+      </div>
+    </div>
+  {% endif %}
   <div class="row mb-4">
     <div class="col-6 mb-3 d-lg-none mt-3">
       {% include 'components/redirect_button.twig' with {

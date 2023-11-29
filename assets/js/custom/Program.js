@@ -627,6 +627,33 @@ export const Program = function (
   })
 }
 
+document.addEventListener('DOMContentLoaded', function () {
+  const stealButton = document.getElementById('stealProgramButton')
+  if (stealButton) {
+    stealButton.addEventListener('click', function () {
+      const url = stealButton.getAttribute('data-url')
+      const id = stealButton.getAttribute('data-id')
+      const formData = new FormData()
+      formData.append('id', id)
+      fetch(url, {
+        method: 'POST',
+        body: formData,
+      })
+          .then(function (response) {
+            if (response.ok) {
+              showSnackbar('#share-snackbar', 'Stole program successfully')
+              window.location.reload()
+            } else {
+              console.error('Steal request failed')
+            }
+          })
+          .catch(function (error) {
+            console.error('Steal POST request error', error)
+          })
+    })
+  }
+})
+
 // -------------------------- APK Logic
 // Implementation not even finished
 //
