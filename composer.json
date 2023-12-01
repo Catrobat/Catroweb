@@ -86,7 +86,7 @@
     "symfony/browser-kit": "6.3.*",
     "symfony/http-client": "6.3.*",
     "symfony/maker-bundle": "1.51.*",
-    "symfony/phpunit-bridge": "6.3.*",
+    "symfony/phpunit-bridge": "7.0.*",
     "symfony/stopwatch": "6.3.*",
     "symfony/web-profiler-bundle": "6.3.*",
     "vimeo/psalm": "5.16.*",
