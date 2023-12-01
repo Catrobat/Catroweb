@@ -95,7 +95,9 @@ class StudioController extends AbstractController
     if (is_null($user)) {
       throw $this->createAccessDeniedException();
     }
-
+    $is_enabled = (bool)$request->request->get('is_enabled', false);
+    $is_public = (bool)$request->request->get('is_public', false);
+    $allow_comments = (bool)$request->request->get('allow_comments', false);
     $name = trim((string) $request->request->get('name', ''));
     $description = trim((string) $request->request->get('description', ''));
     if ('' === $name) {
@@ -106,8 +108,8 @@ class StudioController extends AbstractController
     if ($existingStudio) {
       return new JsonResponse(['message' => 'studio name is already taken'], Response::HTTP_CONFLICT);
     }
-
-    $studio = $this->studio_manager->createStudio($user, $name, $description);
+ 
+    $studio = $this->studio_manager->createStudio($user, $name, $description,$is_public,$allow_comments);
 
     return new JsonResponse(['studio' => $studio], Response::HTTP_OK);
   }

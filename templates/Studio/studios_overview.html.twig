@@ -6,7 +6,20 @@
 
 {% block body %}
 
-    <h1>{{ 'studio.title'|trans({}, 'catroweb') }}</h1>
+    <div class="row">
+        <div class="col text-start">
+            <h1 >{{ 'studio.title'|trans({}, 'catroweb') }}</h1>
+        </div>
+        {% if user_name %}
+            <div class="col text-end">
+                <a href="{{ path('studio_new') }}" class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
+            </div>
+        {% else %}
+            <div class="col text-end">
+                <a href="{{ path('login') }}" class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
+            </div>
+        {% endif %}
+    </div>
     {% if user_name %}
         <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
         {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': false, 'user_name': user_name } %}
@@ -20,3 +33,5 @@
 {% block javascript %}
     {{ encore_entry_script_tags('studios_overview') }}
 {% endblock %}
+
+

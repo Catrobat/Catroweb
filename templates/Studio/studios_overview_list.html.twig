@@ -1,3 +1,4 @@
+
 <div class="studios-list">
     {% for studio in studios %}
         {% if not public and studio.is_joined or public and not studio.is_joined and studio.is_public and studio.is_enabled %}
