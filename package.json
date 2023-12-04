@@ -36,7 +36,7 @@
     "@hotwired/stimulus": "^3.2.2",
     "@symfony/webpack-encore": "^4.5.0",
     "autoprefixer": "^10.4.16",
-    "browserslist": "^4.22.1",
+    "browserslist": "^4.22.2",
     "core-js": "^3.33.3",
     "eslint": "^8.54.0",
     "eslint-config-standard": "^17.1.0",
