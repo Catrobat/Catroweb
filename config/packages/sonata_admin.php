@@ -165,6 +165,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
               'admin.block.tools.broadcast',
               'admin.block.tools.mail',
               'admin.block.tools.feature_flag',
+              'admin.block.tools.maintenance_information',
             ],
           ],
           'sonata.admin.group.statistics' => [

@@ -6,6 +6,13 @@
 
 {% block body %}
 
+
+  <div id="maintenance-container">
+    {% for maintenanceMessage in maintenanceInformation %}
+        {{ maintenanceMessage | raw }}
+    {% endfor %}
+  </div>
+
   {% if not app.user and not isWebview() %}
     {{ include('Index/welcome-section.html.twig') }}
   {% endif %}
