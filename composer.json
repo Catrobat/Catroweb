@@ -21,7 +21,7 @@
     "doctrine/doctrine-bundle": "2.11.*",
     "doctrine/doctrine-migrations-bundle": "3.3.*",
     "doctrine/orm": "2.17.*",
-    "eightpoints/guzzle-bundle": "8.4.*",
+    "eightpoints/guzzle-bundle": "8.5.*",
     "friendsofsymfony/elastica-bundle": "6.3.*",
     "gesdinet/jwt-refresh-token-bundle": "1.2.*",
     "google/apiclient": "2.15.*",

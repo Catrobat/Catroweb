@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "681a8ee56a87c1120b35a8ba8f3851d7",
+    "content-hash": "14d5cec0f50d9894e8f4093de8b4e2a8",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -1755,33 +1755,33 @@
         },
         {
             "name": "eightpoints/guzzle-bundle",
-            "version": "v8.4.0",
+            "version": "v8.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/8p/EightPointsGuzzleBundle.git",
-                "reference": "b890cc8d30cd5e1fb405f6a676c60efd5f4a230b"
+                "reference": "71efd775a4c0767ba8bda2af615787520a96aa29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/b890cc8d30cd5e1fb405f6a676c60efd5f4a230b",
-                "reference": "b890cc8d30cd5e1fb405f6a676c60efd5f4a230b",
+                "url": "https://api.github.com/repos/8p/EightPointsGuzzleBundle/zipball/71efd775a4c0767ba8bda2af615787520a96aa29",
+                "reference": "71efd775a4c0767ba8bda2af615787520a96aa29",
                 "shasum": ""
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.5.8|^7.4.5",
                 "guzzlehttp/promises": "^1.5.3|^2.0",
                 "guzzlehttp/psr7": "^1.9.1|^2.5",
-                "php": ">=7.1",
+                "php": ">=7.2",
                 "psr/log": "~1.0|~2.0|~3.0",
-                "symfony/expression-language": "~4.0|~5.0|~6.0",
-                "symfony/framework-bundle": "~4.0|~5.0|~6.0",
-                "symfony/stopwatch": "~4.0|~5.0|~6.0"
+                "symfony/expression-language": "~5.0|~6.0|~7.0",
+                "symfony/framework-bundle": "~5.0|~6.0|~7.0",
+                "symfony/stopwatch": "~5.0|~6.0|~7.0"
             },
             "require-dev": {
-                "symfony/phpunit-bridge": "~4.0|~5.0|~6.0",
-                "symfony/twig-bundle": "~4.0|~5.0|~6.0",
-                "symfony/var-dumper": "~4.0|~5.0|~6.0",
-                "symfony/yaml": "~4.0|~5.0|~6.0"
+                "symfony/phpunit-bridge": "~5.0|~6.0|~7.0",
+                "symfony/twig-bundle": "~5.0|~6.0|~7.0",
+                "symfony/var-dumper": "~5.0|~6.0|~7.0",
+                "symfony/yaml": "~5.0|~6.0|~7.0"
             },
             "suggest": {
                 "namshi/cuzzle": "Outputs Curl command on profiler's page for debugging purposes"
@@ -1807,7 +1807,7 @@
                     "homepage": "https://github.com/8p/GuzzleBundle/contributors"
                 }
             ],
-            "description": "Integrates Guzzle 6.x, a PHP HTTP Client, into Symfony 2/3/4. Comes with easy and powerful configuration options and optional plugins.",
+            "description": "Integrates Guzzle 6.x, a PHP HTTP Client, into Symfony. Comes with easy and powerful configuration options and optional plugins.",
             "homepage": "https://github.com/8p/GuzzleBundle",
             "keywords": [
                 "Guzzle",
@@ -1821,9 +1821,9 @@
             ],
             "support": {
                 "issues": "https://github.com/8p/EightPointsGuzzleBundle/issues",
-                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.4.0"
+                "source": "https://github.com/8p/EightPointsGuzzleBundle/tree/v8.5.0"
             },
-            "time": "2023-05-23T18:50:35+00:00"
+            "time": "2023-12-04T14:40:56+00:00"
         },
         {
             "name": "elasticsearch/elasticsearch",
@@ -8775,22 +8775,21 @@
         },
         {
             "name": "symfony/expression-language",
-            "version": "v6.4.0",
+            "version": "v7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/expression-language.git",
-                "reference": "6c8b12f1e5ee5d91b812fb8628fca86e2fe5d152"
+                "reference": "46520d885b340f44a369967835a4bec178d7ab3d"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/expression-language/zipball/6c8b12f1e5ee5d91b812fb8628fca86e2fe5d152",
-                "reference": "6c8b12f1e5ee5d91b812fb8628fca86e2fe5d152",
+                "url": "https://api.github.com/repos/symfony/expression-language/zipball/46520d885b340f44a369967835a4bec178d7ab3d",
+                "reference": "46520d885b340f44a369967835a4bec178d7ab3d",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1",
-                "symfony/cache": "^5.4|^6.0|^7.0",
-                "symfony/deprecation-contracts": "^2.5|^3",
+                "php": ">=8.2",
+                "symfony/cache": "^6.4|^7.0",
                 "symfony/service-contracts": "^2.5|^3"
             },
             "type": "library",
@@ -8819,7 +8818,7 @@
             "description": "Provides an engine that can compile and evaluate expressions",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/expression-language/tree/v6.4.0"
+                "source": "https://github.com/symfony/expression-language/tree/v7.0.0"
             },
             "funding": [
                 {
@@ -8835,7 +8834,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-07-27T06:52:43+00:00"
+            "time": "2023-07-27T16:29:09+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -8902,23 +8901,23 @@
         },
         {
             "name": "symfony/finder",
-            "version": "v6.4.0",
+            "version": "v7.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/finder.git",
-                "reference": "11d736e97f116ac375a81f96e662911a34cd50ce"
+                "reference": "6e5688d69f7cfc4ed4a511e96007e06c2d34ce56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/finder/zipball/11d736e97f116ac375a81f96e662911a34cd50ce",
-                "reference": "11d736e97f116ac375a81f96e662911a34cd50ce",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/6e5688d69f7cfc4ed4a511e96007e06c2d34ce56",
+                "reference": "6e5688d69f7cfc4ed4a511e96007e06c2d34ce56",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.1"
+                "php": ">=8.2"
             },
             "require-dev": {
-                "symfony/filesystem": "^6.0|^7.0"
+                "symfony/filesystem": "^6.4|^7.0"
             },
             "type": "library",
             "autoload": {
@@ -8946,7 +8945,7 @@
             "description": "Finds files and directories via an intuitive fluent interface",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/finder/tree/v6.4.0"
+                "source": "https://github.com/symfony/finder/tree/v7.0.0"
             },
             "funding": [
                 {
@@ -8962,7 +8961,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-10-31T17:30:12+00:00"
+            "time": "2023-10-31T17:59:56+00:00"
         },
         {
             "name": "symfony/flex",
