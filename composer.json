@@ -62,7 +62,7 @@
     "symfony/webpack-encore-bundle": "2.1.*",
     "symfony/yaml": "6.3.*",
     "symfonycasts/reset-password-bundle": "1.18.*",
-    "symfonycasts/verify-email-bundle": "1.14.*",
+    "symfonycasts/verify-email-bundle": "1.15.*",
     "twig/extra-bundle": "3.8.*",
     "twig/twig": "3.8.*"
   },
