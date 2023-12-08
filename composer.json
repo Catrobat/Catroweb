@@ -56,7 +56,7 @@
     "symfony/routing": "6.3.*",
     "symfony/sendinblue-mailer": "6.3.*",
     "symfony/stimulus-bundle": "2.13.*",
-    "symfony/translation": "6.3.*",
+    "symfony/translation": "6.4.*",
     "symfony/twig-bundle": "6.3.*",
     "symfony/validator": "6.3.*",
     "symfony/webpack-encore-bundle": "2.1.*",
