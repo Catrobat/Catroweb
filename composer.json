@@ -68,7 +68,7 @@
   },
   "require-dev": {
     "behat/behat": "3.13.*",
-    "behat/mink": "1.10.*",
+    "behat/mink": "1.11.*",
     "deployer/deployer": "v7.3.*",
     "dmore/behat-chrome-extension": "1.4.*",
     "dmore/chrome-mink-driver": "2.9.*",
