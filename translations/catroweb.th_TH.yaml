@@ -920,3 +920,12 @@ media_library:
       default: 'ประเภท: ไม่ทราบ'
 snackbar:
   project_not_found: 'ไม่มีโครงการที่ร้องขอ'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+
