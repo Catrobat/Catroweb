@@ -38,10 +38,7 @@ class AsyncHttpClient
     };
     $promises = $promises();
 
-    $max_number_of_concurrent_requests = 1;
-    if (array_key_exists('max_number_of_concurrent_requests', $this->config)) {
-      $max_number_of_concurrent_requests = $this->config['max_number_of_concurrent_requests'];
-    }
+    $max_number_of_concurrent_requests = $this->config['max_number_of_concurrent_requests'] ?? 1;
 
     $this->scratch_info_data = [];
 

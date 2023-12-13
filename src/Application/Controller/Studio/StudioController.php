@@ -31,7 +31,9 @@ class StudioController extends AbstractController
     $user = $this->getUser();
     for ($i = 0; $i < count($studios); ++$i) {
       $studio = $this->studio_manager->findStudioById($studios[$i]['id']);
+
       $studios[$i]['is_joined'] = !is_null($user) && $this->studio_manager->isUserInStudio($user, $studio);
+
     }
 
     return $this->render('Studio/studios_overview.html.twig', [
@@ -109,7 +111,7 @@ class StudioController extends AbstractController
       return new JsonResponse(['message' => 'studio name is already taken'], Response::HTTP_CONFLICT);
     }
  
-    $studio = $this->studio_manager->createStudio($user, $name, $description,$is_public,$allow_comments);
+    $studio = $this->studio_manager->createStudio($user, $name, $description,$is_public,$allow_comments,$is_enabled);
 
     return new JsonResponse(['studio' => $studio], Response::HTTP_OK);
   }
@@ -127,13 +129,28 @@ class StudioController extends AbstractController
     }
 
     $studio = $this->studio_manager->findStudioById($id);
+    $admin=$this->studio_manager->getStudioAdmin($studio);
+      // Check if $admin is an empty array
+      if (empty($admin)) {
+          return new JsonResponse(['message' => 'No admin found for the studio'], Response::HTTP_NOT_FOUND);
+      }
+    $admin=$admin->getUser();
     if (!$studio) {
       return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
     }
+    if($this->studio_manager->isStudioPublic($studio))
+    {
 
-    /* add to join list so admin can accept/decline or so? */
+        $this->studio_manager->addUserToStudio($admin,  $studio,  $user);
 
-    return new JsonResponse(null, Response::HTTP_OK);
+    }
+    /* add to join list so admin can accept/decline or so?  for private studios*/
+    else
+    {
+
+    }
+      return new JsonResponse(['message' => sprintf('"%s" successfully entered the group', $user->getUsername())], Response::HTTP_OK);
+
   }
 
   /**
@@ -156,7 +173,7 @@ class StudioController extends AbstractController
     $this->studio_manager->isUserAStudioAdmin($user, $studio);
     $this->studio_manager->deleteUserFromStudio($user, $studio, $user);
 
-    return new JsonResponse(null, Response::HTTP_OK);
+      return new JsonResponse(['message' => sprintf('"%s" successfully left the group', $user->getUsername())], Response::HTTP_OK);
   }
 
   /**
@@ -189,7 +206,19 @@ class StudioController extends AbstractController
   /**
    * @internal route only
    */
-  #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
+
+    #[Route('/studio/{id}/report', name: 'studio_report', methods: ['POST'])]
+    public function studioReport(int $id): Response
+    {
+        // Your logic for handling studio report goes here
+
+        return new JsonResponse(['message' => 'Studio reported successfully']);
+    }
+
+    /**
+     * @internal route only
+     */
+    #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
   public function promoteMemberToAdmin(Request $request): Response
   {
     $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);

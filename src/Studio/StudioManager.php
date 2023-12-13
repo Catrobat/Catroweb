@@ -33,7 +33,7 @@ class StudioManager
     ;
 
     $this->saveStudio($studio);
-    $this->addUserToStudio($user, $studio, $user, StudioUser::ROLE_ADMIN);
+    $this->addAdminToStudio( $user,  $studio);
 
     return $studio;
   }
@@ -104,17 +104,45 @@ class StudioManager
     return $studioProject;
   }
 
-  public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $role = StudioUser::ROLE_MEMBER): ?StudioUser
-  {
-    if (($this->isUserInStudio($admin, $studio) && !$this->isUserAStudioAdmin($admin, $studio))
-      || (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN !== $role)) {
-      return null;
+    public function isStudioPublic(Studio $studio): bool
+    {
+        return $studio->isIsPublic();
     }
 
-    $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
+    public function isStudioEnabled(Studio $studio): bool
+    {
+        return $studio->isIsEnabled();
+    }
+    public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $role = StudioUser::ROLE_MEMBER): ?StudioUser
+  {
+    if (($this->isUserInStudio($admin, $studio) && $this->isUserAStudioAdmin( $admin, $studio))
+      && (!$this->isUserInStudio($newUser, $studio) && StudioUser::ROLE_ADMIN !== $role))
+    {
+        $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
+        return $this->createStudioUser($newUser, $studio, $activity, $role);
+    }
+    else
+    {
+        return null;
+    }
 
-    return $this->createStudioUser($newUser, $studio, $activity, $role);
+
   }
+
+    public function addAdminToStudio(User $admin, Studio $studio, string $role = StudioUser::ROLE_ADMIN): ?StudioUser
+    {
+        if ((!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN == $role))
+        {
+            $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
+            return $this->createStudioUser($admin, $studio, $activity, $role);
+        }
+        else
+        {
+            return null;
+        }
+
+
+    }
 
   public function addCommentToStudio(User $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
   {
@@ -270,7 +298,10 @@ class StudioManager
   {
     return $this->studio_activity_repository->countStudioActivities($studio);
   }
-
+  public function getStudioAdmin(Studio $studio): ?StudioUser
+  {
+      return $this->studio_user_repository->findStudioAdmin($studio);
+  }
   public function findStudioUser(?User $user, Studio $studio): ?StudioUser
   {
     return $this->studio_user_repository->findStudioUser($user, $studio);

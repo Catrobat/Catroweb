@@ -140,6 +140,7 @@ programs:
   tooLongName: پروجیکٹ کا نام بہت لمبا ہے!
   tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
   tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
+  trending: Trending projects
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
@@ -754,6 +755,7 @@ category:
   example: مثال
   scratch: سکریچ ریمکس
   recommended: سفارش کردہ منصوبے
+  popular: Most popular
 achievements:
   sidebar:
     title: 'کامیابیاں'
@@ -907,3 +909,12 @@ media_library:
       default: 'نامعلوم'
 snackbar:
   project_not_found: 'درخواست کردہ پروجیکٹ دستیاب نہیں ہے۔'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

@@ -139,6 +139,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: 설명이 너무 깁니다!
   tooLongCredits: 프로젝트 노트와 크레딧이 너무 깁니다!
+  trending: Trending projects
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
@@ -757,6 +758,7 @@ category:
   example: 예
   scratch: 스크래치 리믹스
   recommended: 추천 프로그램
+  popular: Most popular
 achievements:
   sidebar:
     title: '업적'
@@ -910,3 +912,12 @@ media_library:
       default: '유형: 불명'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

@@ -5,11 +5,6 @@
 @import '../base/variables';
 
 $list-item-padding-overflow-x: 1.5rem;
-$color1: red;
-$font-family1: sans-serif;
-$background-color1: #ffe6e6;
-$border-color1: #dc3545;
-$border-color2: #28a745;
 
 .studios-list {
   padding: 0;
@@ -336,44 +331,81 @@ $border-color2: #28a745;
     width: calc(100% - 250px);
   }
 }
+.add-button {
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+}
 
+
+$color_1: red;
+$font-family_1: sans-serif;
+$background-color_1: #ffe6e6;
+$border-color_1: #dc3545;
+$border-color_2: #28a745;
+
+/* Styles for radio buttons with warning class */
 .form-control.is-invalid {
-  border-color: $border-color1;
+  border-color: $border-color_1;
   padding-right: calc(1.5em + 0.75rem);
   background-repeat: no-repeat;
-  background-color: $background-color1;
+  background-color: $background-color_1;
 }
 .form-control.is-valid {
-  border-color: $border-color2;
+  border-color: $border-color_2;
   padding-right: calc(1.5em + 0.75rem);
 }
-
-.check_studios.warning {
-  border-color: $border-color1;
-  background-color: $background-color1;
+input[type="radio"].check_studios.warning {
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  background-color: $background-color_1;
+  border: 0.35em solid #FFF;
+  box-shadow: 0 0 0 0.15em #FF5722;
 }
-
-.check_studios_comments.warning {
-  border-color: $border-color1;
-  background-color: $background-color1;
+input[type="radio"].check_studios_comments.warning {
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  background-color: $background-color_1;
+  border: 0.35em solid #FFF;
+  box-shadow: 0 0 0 0.15em #FF5722;
 }
-
-.check_studios_public.warning {
-  border-color: $border-color1;
-  background-color: $background-color1;
+input[type="radio"].check_studios_public.warning {
+  background-repeat: no-repeat;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 50%;
+  background-color: $background-color_1;
+  border: 0.35em solid #FFF;
+  box-shadow: 0 0 0 0.15em #FF5722;
 }
-
 #name-warning {
   font-size: smaller;
-  color: $color1;
-  font-family: $font-family1;
-  padding-top: calc( 0.5rem);
+  color: $color_1;
+  font-family: $font-family_1;
+  padding-top: calc(0.5rem);
+}
+#enable_studio_name-warning {
+  font-size: smaller;
+  color: $color_1;
+  font-family: $font-family_1;
+  padding-top: calc(0.5rem);
+}
+#allow_comments-warning {
+  font-size: smaller;
+  color: $color_1;
+  font-family: $font-family_1;
+  padding-top: calc(0.5rem);
+}
+#is_public-warning {
+  font-size: smaller;
+  color: $color_1;
+  font-family: $font-family_1;
+  padding-top: calc(0.5rem);
 }
 
-#checkbox-warning {
-  font-size: smaller;
-  color: $color1;
-  font-family: $font-family1;
-  padding-top: calc( 0.5rem);
-}
 

@@ -140,6 +140,7 @@ programs:
   tooLongName: نام پروژه خیلی طولانی است!
   tooLongDescription: شرح پروژه خیلی طولانی است!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
@@ -764,6 +765,7 @@ category:
   example: مثال
   scratch: ریمیکس خراش
   recommended: پروژه های توصیه شده
+  popular: Most popular
 achievements:
   sidebar:
     title: 'دستاوردها'
@@ -917,3 +919,12 @@ media_library:
       default: 'نوع: ناشناخته'
 snackbar:
   project_not_found: 'پروژه درخواستی موجود نیست'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

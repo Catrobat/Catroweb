@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: ప్రాజెక్ట్ వివరణ చాలా పొడవుగా ఉంది!
   tooLongCredits: The project credits are too long!
+  trending: Trending projects
   most:
     viewed: ఎక్కువ చుడబడినవి
     downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
@@ -763,6 +764,7 @@ category:
   example: Example
   scratch: స్క్రాచ్ రీమిక్స్‌లు
   recommended: సిఫార్సు చేసిన ప్రాజెక్టులు
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'
@@ -916,3 +918,12 @@ media_library:
       default: 'రకం: తెలియదు'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

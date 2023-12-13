@@ -20,6 +20,11 @@ class StudioUserRepository extends ServiceEntityRepository
     return $this->findBy(['studio' => $studio, 'status' => StudioUser::STATUS_ACTIVE]);
   }
 
+  public function findStudioAdmin(?Studio $studio):  ?StudioUser
+  {
+        return $this->findOneBy(['studio' => $studio,'role'=>StudioUser::ROLE_ADMIN]);
+  }
+
   public function findStudioUser(?UserInterface $user, Studio $studio): ?StudioUser
   {
     return $this->findOneBy(['studio' => $studio, 'user' => $user]);

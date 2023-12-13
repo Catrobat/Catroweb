@@ -140,6 +140,7 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: ਪ੍ਰੋਜੈਕਟ ਦਾ ਵੇਰਵਾ ਬਹੁਤ ਲੰਬਾ ਹੈ!
   tooLongCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਬਹੁਤ ਲੰਬੇ ਹਨ!
+  trending: Trending projects
   most:
     viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
     downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
@@ -760,6 +761,7 @@ category:
   example: ਉਦਾਹਰਣ
   scratch: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
   recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
+  popular: Most popular
 achievements:
   sidebar:
     title: 'ਪ੍ਰਾਪਤੀਆਂ'
@@ -913,3 +915,12 @@ media_library:
       default: 'ਕਿਸਮ: ਅਣਜਾਣ'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

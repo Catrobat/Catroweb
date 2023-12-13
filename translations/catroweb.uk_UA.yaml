@@ -141,6 +141,7 @@ programs:
   tooLongName: Назва проєкту надто довге!
   tooLongDescription: Опис проэкту надто довге!
   tooLongCredits: Примітки та автори проєкту надто довгі!
+  trending: Популярні проєкти
   most:
     viewed: Найчастіше переглянуті
     downloaded: Найчастіше завантажувані
@@ -760,6 +761,7 @@ category:
   example: Приклад
   scratch: Scratch ремікси
   recommended: Рекомендовані проєкти
+  popular: Найпопулярніше
 achievements:
   sidebar:
     title: 'Досягнення'
@@ -913,3 +915,12 @@ media_library:
       default: 'Тип: невідомий'
 snackbar:
   project_not_found: 'Потрібний проєкт недоступний'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Додаткові відомості: additionalInfo'
+    feature_1: 'Функція featureName недоступна з maintenanceStart до maintenanceEnd'
+    feature_2: 'Функція'
+    feature_3: 'Функція'
+
+
+

@@ -924,6 +924,8 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
+
 
   details:
     showMore: 'show more'
@@ -933,6 +935,9 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Report'
 
     projects:
       title: 'Projects'
@@ -981,3 +986,16 @@ media_library:
 
 snackbar:
   project_not_found: 'The requested project is not available'
+
+
+
+
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

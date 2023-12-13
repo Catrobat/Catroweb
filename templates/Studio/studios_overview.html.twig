@@ -6,29 +6,39 @@
 
 {% block body %}
 
-    <div class="row">
-        <div class="col text-start">
-            <h1 >{{ 'studio.title'|trans({}, 'catroweb') }}</h1>
+        <div class="row">
+            <div class="col text-start">
+                <h1>{{ 'studio.title'|trans({}, 'catroweb') }}</h1>
+            </div>
         </div>
         {% if user_name %}
-            <div class="col text-end">
-                <a href="{{ path('studio_new') }}" class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
-            </div>
-        {% else %}
-            <div class="col text-end">
-                <a href="{{ path('login') }}" class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
-            </div>
+            <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
+            {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': false, 'user_name': user_name, 'joined': true} %}
+
+            <h2>{{ 'studio.overview.private_studios'|trans({}, 'catroweb') }}</h2>
+            {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': false, 'user_name': user_name, 'joined': false} %}
         {% endif %}
-    </div>
-    {% if user_name %}
-        <h2>{{ 'studio.overview.joined_studios'|trans({}, 'catroweb') }}</h2>
-        {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': false, 'user_name': user_name } %}
-    {% endif %}
+        <h2>{{ 'studio.overview.public_studios'|trans({}, 'catroweb') }}</h2>
+        {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': true, 'user_name': user_name, 'joined': false} %}
 
-    <h2>{{ 'studio.overview.public_studios'|trans({}, 'catroweb') }}</h2>
-    {% include 'Studio/studios_overview_list.html.twig' with { 'studios': studios, 'public': true, 'user_name': user_name } %}
+        <div class="row">
+            {% if user_name %}
+                <div class="text-end col">
+                    <a href="{{ path('studio_new') }}" >
+                        <span class=" add-button material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
+                    </a>
+                </div>
+            {% else %}
+                <div class="text-end col ">
+                    <a href="{{ path('login') }}" >
+                        <span class="add-button material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
+                    </a>
+                </div>
+            {% endif %}
+        </div>
 
-{% endblock %}
+        {% endblock %}
+
 
 {% block javascript %}
     {{ encore_entry_script_tags('studios_overview') }}

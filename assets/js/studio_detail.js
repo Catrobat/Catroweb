@@ -4,6 +4,8 @@ import './components/fullscreen_list_modal'
 import './components/switch'
 import './components/text_area'
 import './components/text_field'
+import { MDCMenu } from '@material/menu'
+import { showSnackbar } from './components/snackbar'
 
 require('../styles/components/project_list.scss')
 require('../styles/components/studio_admin_settings.scss')
@@ -172,3 +174,52 @@ require('../styles/custom/studio.scss')
 //   }
 // }
 // }
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.ajaxRequestJoinLeaveReport').forEach((el) => {
+    el.addEventListener('click', (event) => {
+      event.preventDefault();
+      const url = el.getAttribute('data-url');
+      makeAjaxRequest(url);
+    })
+  })
+
+})
+function makeAjaxRequest(url) {
+  fetch(url, {
+    method: 'POST',
+  })     .then(response => {
+    if (!response.ok) {
+      showSnackbar(
+        '#share-snackbar',
+        'There was a problem with the server.'
+      )
+      console.error('There was a problem with the server.')
+    } else {
+      return response.json()
+    }
+  })
+    .then(data => {
+      if (!data) {
+        showSnackbar(
+          '#share-snackbar',
+          'There was a problem with the server.'
+        )
+        console.error('There was a problem with the server.')
+      }
+      else {
+        showSnackbar(
+          '#share-snackbar',
+          data.message.toString()
+        )
+        window.location.reload()
+
+      }
+    })
+    .catch(error => {
+      console.error('There was an error with the fetch operation:', error)
+
+    })
+}
+

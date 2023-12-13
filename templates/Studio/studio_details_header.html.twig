@@ -75,9 +75,13 @@
 
     <div class="col-3">
       {% if user_role == null %}
-        <button class="studio-detail__header__details__join-button btn btn-primary btn-block">
+        {% if user_name %}
+        <button class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport"   data-url="{{ path('studio_join', {'id': studio.id}) }}">
           {{ "studio.join" |trans({}, 'catroweb') }}
         </button>
+        {% else %}
+              <a href="{{ path('login') }}"  class="studio-detail__header__details__join-button btn btn-primary btn-block">   {{ "studio.join" |trans({}, 'catroweb') }}</a>
+        {% endif %}
       {% elseif user_role == 'admin' %}
           {# <div class="position-relative"> #}
           {# <div class="studio-detail__header__details__button--upload-image d-flex"> #}
@@ -102,9 +106,13 @@
           {# <input type="submit" style="display: none;"> #}
           {# </form> #}
       {% else %}
-        <button id="studio-join-leave-btn" class="btn btn-outline-primary btn-block">
+        {% if user_name %}
+        <button id="studio-join-leave-btn" class="btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport"   data-url="{{ path('studio_leave', {'id': studio.id}) }}">
           {{ "studio.leave" |trans({}, 'catroweb') }}
         </button>
+        {% else %}
+            <a href="{{ path('login') }}"  id="studio-join-leave-btn" class="btn btn-outline-primary btn-block" > {{ "studio.leave" |trans({}, 'catroweb') }}</a>
+        {% endif %}
       {% endif %}
     </div>
   </div>

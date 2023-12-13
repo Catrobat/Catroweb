@@ -140,6 +140,7 @@ programs:
   tooLongName: प्रोजेक्ट का नाम बहुत बड़ा है!
   tooLongDescription: प्रोजेक्ट का वर्णन बहुत लंबा है!
   tooLongCredits: प्रोजेक्ट का श्रेय बहुत लंबा हैं!
+  trending: Trending projects
   most:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
@@ -760,6 +761,7 @@ category:
   example: उदाहरण
   scratch: स्क्रैच रिमिक्स
   recommended: खासकर आपके लिए
+  popular: Most popular
 achievements:
   sidebar:
     title: 'उपलब्धियां'
@@ -913,3 +915,12 @@ media_library:
       default: 'प्रकार: अज्ञात'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

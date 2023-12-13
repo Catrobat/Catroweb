@@ -140,6 +140,7 @@ programs:
   tooLongName: Слишком длинное название проекта!
   tooLongDescription: Описание проекта слишком длинное!
   tooLongCredits: Примечания и упоминания об авторах слишком длинные!
+  trending: Популярные проекты
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
@@ -761,6 +762,7 @@ category:
   example: Пример
   scratch: Scratch ремиксы
   recommended: Рекомендуемые проекты
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Достижения'
@@ -914,3 +916,12 @@ media_library:
       default: 'Тип: неизвестно'
 snackbar:
   project_not_found: 'Запрошенный проект недоступен'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

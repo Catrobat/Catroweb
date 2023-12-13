@@ -140,6 +140,7 @@ programs:
   tooLongName: 项目名称过长！
   tooLongDescription: 项目描述太长了！
   tooLongCredits: 项目说明和版权信息过长！
+  trending: Trending projects
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
@@ -765,6 +766,7 @@ category:
   example: 示例
   scratch: Scratch 混成
   recommended: 推荐的项目
+  popular: Most popular
 achievements:
   sidebar:
     title: '成就'
@@ -918,3 +920,12 @@ media_library:
       default: '类型：未知'
 snackbar:
   project_not_found: '请求的项目不可用'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

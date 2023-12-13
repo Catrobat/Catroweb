@@ -1,7 +1,7 @@
 
 <div class="studios-list">
     {% for studio in studios %}
-        {% if not public and studio.is_joined or public and not studio.is_joined and studio.is_public and studio.is_enabled %}
+        {% if not public and studio.is_joined and joined or public and not studio.is_joined  and not joined and studio.is_public and studio.is_enabled or not public and not joined and not studio.is_joined and not studio.is_public and studio.is_enabled %}
             <a href="{{ path('studio_details', {id: studio.id}) }}">
                 <div class="studios-list-item">
                     <img src="{{ asset(studio.cover_path|default('images/default/thumbnail.png')) }}" class="img-fluid studios-list-item--image" alt="">
@@ -40,17 +40,24 @@
                                 <ul class="mdc-deprecated-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
                                     <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            {% if not studio.is_joined %}
-                                                {{ 'studio.details.join'|trans({}, 'catroweb') }}
+                                        {% if not studio.is_joined %}
+                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport"
+                                              data-url="{{ path('studio_join', {'id': studio.id, }) }}">
+                                             {{ 'studio.details.join'|trans({}, 'catroweb') }}
+                                         </span>
                                             {% else %}
-                                                {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                                                <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport"
+                                                 data-url="{{ path('studio_leave', {'id': studio.id}) }}">
+                                                 {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                                               </span>
                                             {% endif %}
-                                        </span>
                                     </li>
                                     <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">{{ 'studio.report'|trans({}, 'catroweb') }}</span>
+                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport"
+                                              data-url="{{ path('studio_report', {'id':studio.id }) }}">
+                                            {{ 'studio.report'|trans({}, 'catroweb') }}"
+                                        </span>
                                     </li>
                                 </ul>
                             </div>
@@ -58,6 +65,9 @@
                     {% endif %}
                 </div>
             </a>
-        {% endif %}
+      {% endif %}
     {% endfor %}
+
+
 </div>
+

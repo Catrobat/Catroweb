@@ -11,18 +11,18 @@
         <div class="mb-3">
             <label class="form-label" for="inputStudioName">{{ 'studio.studio_name'|trans({}, 'catroweb') }}</label>
             <input class="form-control" id="inputStudioName" type="text" name="name" placeholder="Studio Name">
+
             <div id="name-warning"></div>
         </div>
         <div class="mb-3">
             <label class="form-label" for="inputStudioDescription">{{ 'studio.studio_description'|trans({}, 'catroweb') }}</label>
             <input class="form-control" id="inputStudioDescription" type="text" name="description" >
 
-
         </div>
         <div class="row">
+                <label>{{ 'Enable Studio'|trans({}, 'catroweb') }}</label>
                 <div class="col-md-2">
                     <div class="mb-3">
-                        <label>{{ 'Enable Studio'|trans({}, 'catroweb') }}</label>
                         <div>
                             <input type="radio" class="check_studios" id="is_enabled_true" name="form[is_enabled]" value="1">
                             <label for="is_enabled_true">Yes</label>
@@ -38,35 +38,43 @@
                         </div>
                     </div>
                 </div>
+            <div class="mb-3">
+                <div id="enable_studio_name-warning"></div>
+            </div>
+
             </div>
 
             <div class="row">
                 <div class="col-md-2">
                     <div class="mb-3">
-                        <label>{{ 'Is Public'|trans({}, 'catroweb') }}</label>
+                        <label>{{ 'Public Studio'|trans({}, 'catroweb') }}</label>
                         <div>
-                            <input type="checkbox" class="check_studios_public" id="is_public_true" name="form[is_public]" value="1">
-                            <label for="is_public_true">Yes</label>
+                            <input type="radio" class="check_studios_public" id="is_public_true" name="form[is_public]" value="1">
+                            <label for="is_public_true"></label>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="mb-3">
-                        <label></label>
+                        <label>{{ 'Private Studio'|trans({}, 'catroweb') }}</label>
                         <div>
-                            <input type="checkbox" class="check_studios_public" id="is_public_false" name="form[is_public]" value="0">
-                            <label for="is_public_false">No</label>
+                            <input type="radio" class="check_studios_public" id="is_public_false" name="form[is_public]" value="0">
+                            <label for="is_public_false"></label>
                         </div>
                     </div>
+                </div>
+
+                <div class="mb-3">
+                    <div id="is_public-warning"></div>
                 </div>
             </div>
 
             <div class="row">
+                <label>{{ 'Allow Comments'|trans({}, 'catroweb') }}</label>
                 <div class="col-md-2">
                     <div class="mb-3">
-                        <label>{{ 'Allow Comments'|trans({}, 'catroweb') }}</label>
                         <div>
-                            <input type="checkbox" class="check_studios_comments" id="allow_comments_true" name="form[allow_comments]" value="1">
+                            <input type="radio" class="check_studios_comments" id="allow_comments_true" name="form[allow_comments]" value="1">
                             <label for="allow_comments_true">Yes</label>
                         </div>
                     </div>
@@ -75,10 +83,13 @@
                     <div class="mb-3">
                         <label></label>
                         <div>
-                            <input type="checkbox" class="check_studios_comments" id="allow_comments_false" name="form[allow_comments]" value="0">
+                            <input type="radio" class="check_studios_comments" id="allow_comments_false" name="form[allow_comments]" value="0">
                             <label for="allow_comments_false">No</label>
                         </div>
                     </div>
+                </div>
+                <div class="mb-3">
+                   <div id="allow_comments-warning"></div>
                 </div>
             </div>
 
@@ -110,209 +121,8 @@
         </div>
         {% endif %}
     </form>
-<script>
-
-
-    const submitButton = document.getElementById('studioCreateFormSubmit')
-    submitButton.addEventListener('click', submitForm)
-
-    const cancelButton = document.getElementById('studioCreateFormCancel')
-    cancelButton.addEventListener('click', cancelForm)
-
-    const nameInput = document.getElementById('inputStudioName')
-    nameInput.addEventListener('input', resetCssInvalidNameInputfieled)
-
-    const checkboxes = document.getElementsByClassName('check_studios');
-
-    for (let i = 0; i < checkboxes.length; i++) {
-      checkboxes[i].addEventListener('input', resetCssInvalidCheckbox)
-    }
-
-    const checkboxes_public = document.getElementsByClassName('check_studios_public');
-
-    for (let i = 0; i < checkboxes_public.length; i++) {
-      checkboxes_public[i].addEventListener('input', resetCssInvalidCheckbox);
-    }
-
-    const checkboxes_comments = document.getElementsByClassName('check_studios_comments');
-
-    for (let i = 0; i < checkboxes_comments.length; i++) {
-      checkboxes_comments[i].addEventListener('input', resetCssInvalidCheckbox);
-    }
-
-
-
-  function submitForm() {
-    const nameInput = document.getElementById('inputStudioName').value.trim()
-    const descriptionInput = document.getElementById('inputStudioDescription').value.trim()
-    const is_enabledValue = document.querySelector('.check_studios[name="form[is_enabled]"]:checked') ? '1' : '0';
-    const is_publicValue = document.querySelector('.other_check_studios[name="form[is_public]"]:checked') ? '1' : '0';
-    const allow_commentsValue = document.querySelector('.another_check_studios[name="form[allow_comments]"]:checked') ? '1' : '0';
-
-
-    if (!parseInput()) {
-      return
-    }
-
-    const formData = new FormData()
-    formData.append('name', nameInput)
-    formData.append('description', descriptionInput)
-    formData.append('name', nameInput);
-    formData.append('description', descriptionInput);
-    formData.append('is_enabled', is_enabledValue);
-    formData.append('is_public', is_publicValue);
-    formData.append('allow_comments', allow_commentsValue);
-    const submitButton = document.getElementById('studioCreateFormSubmit')
-    const url = submitButton.getAttribute('data-url')
-    const urlBack = submitButton.getAttribute('data-url-back')
-
-    fetch(url, {
-      method: 'POST',
-      body: formData,
-    })
-      .then(response => {
-        if (!response.ok) {
-          return response.json() // Parse the JSON from the response
-        } else {
-          return response.json() // Parse the JSON from the successful response
-        }
-      })
-      .then(data => {
-        if (!data) {
-          console.error('There was a problem with the server.')
-          const warningMessage = document.getElementById('nameWarning')
-
-          warningMessage.textContent = 'There was a problem with the server'
-        } else if (data.message) {
-          console.error('There was a problem with the server:', data.message)
-          const warningMessage = document.getElementById('nameWarning')
-          document.getElementById('inputStudioName').classList.add('is-invalid')
-          warningMessage.textContent = data.message
-        } else {
-          console.log('Form submitted successfully', data)
-          window.location.href = urlBack
-        }
-      })
-      .catch(error => {
-        console.error('There was an error with the fetch operation:', error)
-        const warningMessage = document.getElementById('nameWarning')
-        warningMessage.textContent = 'There was an error with the fetch operation'
-      })
-  }
-
-  function cancelForm() {
-    const cancelButton = document.getElementById('studioCreateFormCancel')
-    const url = cancelButton.getAttribute('data-url')
-
-    console.log('Cancel request successful')
-    window.location.href = url
-  }
-
-  function parseInput() {
-    const isEnableChecked = document.querySelector('.check_studios[name="form[is_enabled]"]:checked');
-    const isPublicChecked = document.querySelector('.check_studios_public[name="form[is_public]"]:checked');
-    const allowCommentsChecked = document.querySelector('.check_studios_comments[name="form[allow_comments]"]:checked');
-
-    const nameInput = document.getElementById('inputStudioName')
-    let wrongInput=false
-    if (nameInput.value.trim() === '') {
-      nameInput.classList.add('is-invalid')
-      const warningMessage = document.getElementById('name-warning')
-      warningMessage.textContent = 'Please fill in all required fields.'
-      wrongInput = true
-    }
-    if(!isEnableChecked){
-      const radioInputs = document.getElementsByClassName('check_studios');
-      for (let i = 0; i < radioInputs.length; i++) {
-        radioInputs[i].classList.add('warning');
-      }
-      const warningMessage = document.getElementById('name-warning')
-      warningMessage.textContent = 'Please select whether to enable the studio.'
-      wrongInput = true
-    }
-
-    if(!allowCommentsChecked){
-      const radioInputs = document.getElementsByClassName('check_studios');
-      for (let i = 0; i < radioInputs.length; i++) {
-        radioInputs[i].classList.add('warning');
-      }
-      const warningMessage = document.getElementById('name-warning')
-      warningMessage.textContent = 'Please select whether to enable the studio.'
-      wrongInput = true
-    }
-    if(!isPublicChecked){
-      const radioInputs = document.getElementsByClassName('check_studios');
-      for (let i = 0; i < radioInputs.length; i++) {
-        radioInputs[i].classList.add('warning');
-      }
-      const warningMessage = document.getElementById('name-warning')
-      warningMessage.textContent = 'Please select whether to enable the studio.'
-      wrongInput = true
-    }
-    if (wrongInput)
-    {
-      return false
-    }
-    const warningMessage = document.getElementById('nameWarning')
-    warningMessage.textContent = ''
-    nameInput.classList.remove('is-invalid')
-    nameInput.classList.add('is-valid')
-
-    return true
-  }
-
-  function resetCssInvalidNameInputfieled() {
-    const nameInput = document.getElementById('inputStudioName')
-    if (nameInput.classList.contains('is-invalid')) {
-      const warningMessage = document.getElementById('name-warning')
-      warningMessage.textContent = '' // Reset warning message
-      nameInput.classList.remove('is-invalid')
-    }
-  }
-  function resetCssInvalidCheckbox() {
-    const allCheckboxes = document.querySelectorAll('.check_studios, .check_studios_comments , .check_studios_public');
-
-    for (let i = 0; i < allCheckboxes.length; i++) {
-      const checkbox = allCheckboxes[i];
-      if (checkbox.classList.contains('warning')) {
-        checkbox.classList.remove('warning');
-      }
-    }
-  }
-
-
-</script>
-<style>
-    .form-control.is-invalid {
-        border-color: #dc3545;
-        padding-right: calc(1.5em + 0.75rem);
-        background-repeat: no-repeat;
-        background-color: #ffe6e6;
-    }
-
-    .form-control.is-valid {
-        border-color: #28a745;
-        padding-right: calc(1.5em + 0.75rem);
-    }
-
-    .check_studios.warning,
-    .check_studios_comments.warning,
-    .check_studios_public.warning {
-        border-color: #dc3545;
-        background-color: #ffe6e6;
-    }
-
-    #name-warning,
-    #checkbox-warning {
-        font-size: smaller;
-        color: red;
-        font-family: sans-serif;
-        padding-top: calc(0.5rem);
-    }
-
-</style>
 {% endblock %}
 
 {% block javascript %}
-  {{ encore_entry_script_tags('studios_overview') }}
+    {{ encore_entry_script_tags('studios_overview') }}
 {% endblock %}
