@@ -16,7 +16,7 @@ class FeatureFlagManager
     protected EntityManagerInterface $entityManager,
     protected ParameterBagInterface $parameter_bag
   ) {
-    if($this->entityManager->getConnection()->isConnected()) {
+    if ($this->entityManager->getConnection()->isConnected()) {
       $this->defaultFlags = include $parameter_bag->get('features');
 
       $flagMap = [];

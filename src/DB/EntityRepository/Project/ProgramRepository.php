@@ -20,7 +20,6 @@ use FOS\ElasticaBundle\Finder\TransformedFinder;
 
 class ProgramRepository extends ServiceEntityRepository
 {
-
   public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request, protected FeatureFlagManager $feature_flag_manager, private readonly TransformedFinder $program_finder)
   {
     parent::__construct($managerRegistry, Program::class);
@@ -270,7 +269,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->getResult()
     ;
 
-    return array_map(fn($data) => $data['id'], $result);
+    return array_map(fn ($data) => $data['id'], $result);
   }
 
   /**
@@ -525,7 +524,6 @@ class ProgramRepository extends ServiceEntityRepository
     $qb->addMust($should);
   }
 
-
   private function excludeProjectsWithTooHighLanguageVersionElastica(BoolQuery $qb, string $max_version = ''): void
   {
     if ('' !== $max_version) {
@@ -557,6 +555,7 @@ class ProgramRepository extends ServiceEntityRepository
     if ('' != $order_by) {
       $query->addSort([$order_by => $order]);
     }
+
     return $query;
   }
 }
