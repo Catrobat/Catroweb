@@ -322,8 +322,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(MaintenanceInformationController::class, MaintenanceInformationController::class)
     ->public()
   ;
-
-    $services->set(ReportedUsersController::class, ReportedUsersController::class)
+  $services->set(ReportedUsersController::class, ReportedUsersController::class)
     ->public()
   ;
 
@@ -735,8 +734,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
   $services->set('admin.block.tools.maintenance_information', MaintenanceInformationAdmin::class)
-      ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Maintenance Information', 'code' => null, 'model_class' =>  MaintenanceInformation::class, 'controller' => MaintenanceInformationController::class])
-      ->public()
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Maintenance Information', 'code' => null, 'model_class' => MaintenanceInformation::class, 'controller' => MaintenanceInformationController::class])
+    ->public()
   ;
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 

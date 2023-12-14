@@ -920,11 +920,3 @@ maintenanceinformations:
     feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
     feature_2: 'The Feature'
     feature_3: 'The Feature'
-
-maintenanceinformations:
-  maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_33: 'The feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_34: 'The feature'
-    feature_35: 'The feature'
-

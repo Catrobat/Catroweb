@@ -14,7 +14,7 @@ Feature: Maintenance information
 
   Scenario: List all maintenance information:
     Given I log in as "Admin" with the password "123456"
-    And I am on "/admin/maintenanceinformation/list"
+    And I am on "/admin/maintenance information/list"
     And I wait for the page to be loaded
     Then I should see the ready maintenance information table:
       | Feature Name | Active   | LTM Code                                                  | Maintenance Start | Maintenance End | Additional Information | Icon  | Actions |
@@ -22,9 +22,19 @@ Feature: Maintenance information
       | test2        | no       | maintenanceinformations.maintenance_information.feature_2 | February 3, 2020  | May 4, 2020     |        test2           | error | Edit    |
       | test3        | no       | maintenanceinformations.maintenance_information.feature_3 | February 3, 2020  | May 4, 2020     |                        | error | Edit    |
 
-  Scenario: There should be a credits section on every project page
+  Scenario: There should be maintenance information
     Given I am on "/app/"
     And I wait for the page to be loaded
-    Then the element "#maintenance-container" should be visible
+    Then the element "#viewID_1" should be visible
     And I should see "test"
     And I should not see "test2"
+    When I click ".expand-button"
+    Then I should see "Additional information:"
+
+
+  Scenario: There should be no maintenance information if closed
+    Given I am on "/app/"
+    And I wait for the page to be loaded
+    Then the element "#viewID_1" should be visible
+    When I click ".close-button"
+    Then the element "#viewID_1" should not be visible

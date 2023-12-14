@@ -272,23 +272,30 @@ class DataFixturesContext implements Context
   //  MaintenanceInformation
   // -------------------------------------------------------------------------------------------------------------------
 
-    /**
+  /**
    * @Given /^there are maintenance information:$/
    */
   public function thereAreMaintenanceInformation(TableNode $table): void
   {
-      foreach ($table->getHash() as $maintenanceinformation_config) {
-          $maintenanceInformation=new MaintenanceInformation();
-          $maintenanceInformation->setLtmMaintenanceStart($maintenanceinformation_config['Maintenance Start']);
-          $maintenanceInformation->setLtmMaintenanceEnd($maintenanceinformation_config['Maintenance End']);
-          $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
-          $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_' . $maintenanceinformation_config['Id']);
-          $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
-          $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
-          $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
-
-      }
-
+    $em = $this->getManager();
+    foreach ($table->getHash() as $maintenanceinformation_config) {
+      $maintenanceInformation = new MaintenanceInformation();
+      $maintenance_start = $maintenanceinformation_config['Maintenance Start'];
+      $format = 'Y-m-d';
+      $date = \DateTime::createFromFormat($format, $maintenance_start);
+      $maintenanceInformation->setLtmMaintenanceStart($date);
+      $maintenance_end = $maintenanceinformation_config['Maintenance End'];
+      $date = \DateTime::createFromFormat($format, $maintenance_end);
+      $maintenanceInformation->setLtmMaintenanceEnd($date);
+      $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
+      $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
+      $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
+      $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
+      $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
+      $em->persist($maintenanceInformation);
+    }
+    $em->flush();
+    $this->getManager()->flush();
   }
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
