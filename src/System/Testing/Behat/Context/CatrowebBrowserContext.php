@@ -1380,27 +1380,8 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
     }
   }
-   /**
-    * @Then /^I should see the ready maintenance information table:$/
-    *
-    * @throws ResponseTextException
-    */
-    public function seeReadyMaintenanceInformationTable(TableNode $table): void
-    {
-        $user_stats = $table->getHash();
-        foreach ($user_stats as $user_stat) {
-            $this->assertSession()->pageTextContains($user_stat['Feature Name']);
-            $this->assertSession()->pageTextContains($user_stat['Active']);
-            $this->assertSession()->pageTextContains($user_stat['LTM Code']);
-            $this->assertSession()->pageTextContains($user_stat['Maintenance Start']);
-            $this->assertSession()->pageTextContains($user_stat['Maintenance End']);
-            $this->assertSession()->pageTextContains($user_stat['Additional Information']);
-            $this->assertSession()->pageTextContains($user_stat['Icon']);
-            $this->assertSession()->pageTextContains($user_stat['Actions']);
-        }
-    }
 
-  /**
+    /**
    * @Then /^I should see the ready maintenance information table:$/
    *
    * @throws ResponseTextException
