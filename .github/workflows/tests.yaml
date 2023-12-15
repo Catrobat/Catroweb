@@ -67,7 +67,7 @@ jobs:
           docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: catroweb-image
           path: docker
@@ -174,7 +174,7 @@ jobs:
           docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: catroweb-image
           path: docker
