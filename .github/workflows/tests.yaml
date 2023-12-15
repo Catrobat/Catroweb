@@ -38,7 +38,7 @@ jobs:
           docker save app.catroweb > catroweb-image.tar
 
       - name: Upload app.catroweb image
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: catroweb-image
           path: docker/catroweb-image.tar
@@ -67,7 +67,7 @@ jobs:
           docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: catroweb-image
           path: docker
@@ -84,7 +84,7 @@ jobs:
         run: docker exec app.catroweb bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 
       - name: Upload code coverage report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: PhpUnitTestReport
@@ -174,7 +174,7 @@ jobs:
           docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: catroweb-image
           path: docker
@@ -282,13 +282,13 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: screenshots_${{ matrix.testSuite }}
           path: tests/TestReports/TestScreenshots
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: logs_${{ matrix.testSuite }}
