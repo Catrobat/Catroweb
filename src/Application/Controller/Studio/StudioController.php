@@ -2,6 +2,8 @@
 
 namespace App\Application\Controller\Studio;
 
+use App\DB\Entity\Studio\Studio;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -31,9 +33,20 @@ class StudioController extends AbstractController
     $user = $this->getUser();
     for ($i = 0; $i < count($studios); ++$i) {
       $studio = $this->studio_manager->findStudioById($studios[$i]['id']);
-
       $studios[$i]['is_joined'] = !is_null($user) && $this->studio_manager->isUserInStudio($user, $studio);
+      if (!is_null($user)) {
+          $status = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
+          if (!is_null($status)) {
+              $studios[$i]['status'] = $status->getStatus();
+          } else {
+              $studios[$i]['status'] = 'false';
+          }
 
+      }
+      else
+      {
+          $studios[$i]['status'] = 'false';
+      }
     }
 
     return $this->render('Studio/studios_overview.html.twig', [
@@ -72,8 +85,19 @@ class StudioController extends AbstractController
     $projects_count = $this->studio_manager->countStudioProjects($studio);
     $comments_count = $this->studio_manager->countStudioComments($studio);
     $comments = $this->studio_manager->findAllStudioComments($studio);
+    $status='false';
+      if (!is_null($user))
+      {
+          $currentStatus = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
+          if (!is_null($currentStatus))
+          {
+              $status = $currentStatus->getStatus();
+          }
+
+      }
 
     return $this->render('Studio/studio_details.html.twig', [
+       'status' => $status,
       'studio' => $studio,
       'user_name' => !is_null($this->getUser()) ? $this->getUser()->getUserIdentifier() : '',
       'user_role' => $user_role,
@@ -83,6 +107,9 @@ class StudioController extends AbstractController
       'projects' => $this->getStudioProjectsListWithImg($projects),
       'comments_count' => $comments_count,
       'comments' => $this->getStudioCommentsListWithAvatar($comments),
+       'pending_join_requests' =>$this->studio_manager->findPendingJoinRequests($studio),
+       'declined_join_requests'=>$this->studio_manager->findDeclinedJoinRequests($studio),
+       'approved_join_requests'=>$this->studio_manager->findApprovedJoinRequests($studio),
     ]);
   }
 
@@ -97,9 +124,9 @@ class StudioController extends AbstractController
     if (is_null($user)) {
       throw $this->createAccessDeniedException();
     }
-    $is_enabled = (bool)$request->request->get('is_enabled', false);
-    $is_public = (bool)$request->request->get('is_public', false);
-    $allow_comments = (bool)$request->request->get('allow_comments', false);
+    $is_enabled = (bool) $request->request->get('is_enabled', false);
+    $is_public = (bool) $request->request->get('is_public', false);
+    $allow_comments = (bool) $request->request->get('allow_comments', false);
     $name = trim((string) $request->request->get('name', ''));
     $description = trim((string) $request->request->get('description', ''));
     if ('' === $name) {
@@ -110,10 +137,10 @@ class StudioController extends AbstractController
     if ($existingStudio) {
       return new JsonResponse(['message' => 'studio name is already taken'], Response::HTTP_CONFLICT);
     }
- 
-    $studio = $this->studio_manager->createStudio($user, $name, $description,$is_public,$allow_comments,$is_enabled);
 
-    return new JsonResponse(['studio' => $studio], Response::HTTP_OK);
+      $studio=$this->studio_manager->createStudio($user, $name, $description, $is_public, $allow_comments, $is_enabled);
+      $this->studio_manager->setJoinRequest( $user,  $studio,StudioJoinRequest::STATUS_JOINED);
+      return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
   }
 
   /**
@@ -127,30 +154,36 @@ class StudioController extends AbstractController
     if (is_null($user)) {
       throw $this->createAccessDeniedException();
     }
-
+    /** @var Studio|null $studio */
     $studio = $this->studio_manager->findStudioById($id);
-    $admin=$this->studio_manager->getStudioAdmin($studio);
-      // Check if $admin is an empty array
-      if (empty($admin)) {
-          return new JsonResponse(['message' => 'No admin found for the studio'], Response::HTTP_NOT_FOUND);
-      }
-    $admin=$admin->getUser();
-    if (!$studio) {
+    if (null == $studio) {
       return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
     }
-    if($this->studio_manager->isStudioPublic($studio))
-    {
-
-        $this->studio_manager->addUserToStudio($admin,  $studio,  $user);
+    $admin = $this->studio_manager->getStudioAdmin($studio);
+    // Check if $admin is an empty array
+    if (empty($admin)) {
+      return new JsonResponse(['message' => 'No admin found for the studio'], Response::HTTP_NOT_FOUND);
+    }
+    $admin = $admin->getUser();
+    if ($this->studio_manager->isStudioPublic($studio)) {
+        $joinRequest =$this->studio_manager->setJoinRequest( $user,  $studio,StudioJoinRequest::STATUS_JOINED);
+        if(!is_null($joinRequest)) {
+            $this->studio_manager->addJoinRequest($joinRequest, $studio);
+        }
+        $this->studio_manager->addUserToStudio($admin, $studio, $user);
 
     }
-    /* add to join list so admin can accept/decline or so?  for private studios*/
-    else
-    {
+    /* add to join list so admin can accept/decline or so?  for private studios */
+    if (!$this->studio_manager->isStudioPublic($studio)) {
+          $joinRequest =$this->studio_manager->setJoinRequest( $user,  $studio,StudioJoinRequest::STATUS_PENDING);
+          if(!is_null($joinRequest)) {
+            $this->studio_manager->addJoinRequest($joinRequest, $studio);
+        }
+      /*admin must get inform that a user wants to join the private studio*/
 
     }
-      return new JsonResponse(['message' => sprintf('"%s" successfully entered the group', $user->getUsername())], Response::HTTP_OK);
 
+    return new JsonResponse(['message' => sprintf('"%s" successfully entered the group', $user->getUsername())], Response::HTTP_OK);
   }
 
   /**
@@ -172,8 +205,9 @@ class StudioController extends AbstractController
 
     $this->studio_manager->isUserAStudioAdmin($user, $studio);
     $this->studio_manager->deleteUserFromStudio($user, $studio, $user);
-
-      return new JsonResponse(['message' => sprintf('"%s" successfully left the group', $user->getUsername())], Response::HTTP_OK);
+    $joinRequest=$this->studio_manager->findJoinRequestByUserAndStudio($user,$studio);
+    $this->studio_manager->removeJoinRequest($joinRequest,$studio);
+    return new JsonResponse(['message' => sprintf('"%s" successfully left the group', $user->getUsername())], Response::HTTP_OK);
   }
 
   /**
@@ -206,19 +240,18 @@ class StudioController extends AbstractController
   /**
    * @internal route only
    */
+  #[Route('/studio/{id}/report', name: 'studio_report', methods: ['POST'])]
+  public function studioReport(int $id): Response
+  {
+    // Your logic for handling studio report goes here
 
-    #[Route('/studio/{id}/report', name: 'studio_report', methods: ['POST'])]
-    public function studioReport(int $id): Response
-    {
-        // Your logic for handling studio report goes here
+    return new JsonResponse(['message' => 'Studio reported successfully']);
+  }
 
-        return new JsonResponse(['message' => 'Studio reported successfully']);
-    }
-
-    /**
-     * @internal route only
-     */
-    #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
+  /**
+   * @internal route only
+   */
+  #[Route(path: '/studio/member/promote', name: 'studio_promote_member', methods: ['PUT'])]
   public function promoteMemberToAdmin(Request $request): Response
   {
     $payload = json_decode($request->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -459,35 +492,49 @@ class StudioController extends AbstractController
   #[Route(path: '/updateStudioDetails/', name: 'update_studio_details', methods: ['POST'])]
   public function editStudioDetails(Request $request): Response
   {
-    if ($request->isMethod('POST')) {
-      $studio_id = trim(strval($request->request->get('studio_id')));
-      $studio = $this->studio_manager->findStudioById($studio_id);
-      if (is_null($this->getUser()) || is_null($studio)) {
-        return $this->redirect($request->headers->get('referer'));
+      if ($request->isMethod('POST')) {
+          $studio_id = trim(strval($request->request->get('studio_id')));
+          $studio = $this->studio_manager->findStudioById($studio_id);
+          if (is_null($this->getUser()) || is_null($studio)) {
+              return $this->redirect($request->headers->get('referer'));
+          }
+          $name = trim(strval($request->request->get('studio_name')));
+          if (strlen($name) > 0) {
+              $studio->setName($name);
+          }
+          $desc = trim(strval($request->request->get('studio_description')));
+          if (strlen($desc)) {
+              $studio->setDescription($desc);
+          }
+
+          $allow_comments = $request->request->get('allow_comments');
+          $studio->setAllowComments(!is_null($allow_comments) && true === filter_var($allow_comments, FILTER_VALIDATE_BOOLEAN));
+
+          $is_public = $request->request->get('is_public');
+          $studio->setIsPublic(!is_null($is_public) && true === filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
+          $studio->setUpdatedOn(new \DateTime('now'));
+
+          /** @var User|null $user */
+          $user = $this->getUser();
+          $formData = $request->request->all();
+          $switches = $formData['switches'] ?? [];
+          $approvedSwitches = $formData['approved_switches'] ?? [];
+          foreach ($switches as $requestId => $switchValue)
+          {
+              $joinRequest = $this->studio_manager->findJoinRequestById($requestId);
+              $this->studio_manager->updateJoinRequests($joinRequest, $switchValue, $joinRequest->getUser(), $user, $studio);
+          }
+          foreach ($approvedSwitches as $requestId => $switchValue)
+          {
+              $joinRequest = $this->studio_manager->findJoinRequestById($requestId);
+              $this->studio_manager->updateJoinRequests($joinRequest, $switchValue, $joinRequest->getUser(), $user, $studio);
+          }
+          $this->studio_manager->changeStudio($user, $studio);
+          return $this->redirect($request->headers->get('referer'));
       }
-      $name = trim(strval($request->request->get('studio_name')));
-      if (strlen($name) > 0) {
-        $studio->setName($name);
-      }
-      $desc = trim(strval($request->request->get('studio_description')));
-      if (strlen($desc)) {
-        $studio->setDescription($desc);
-      }
-
-      $allow_comments = $request->request->get('allow_comments');
-      $studio->setAllowComments(!is_null($allow_comments) && true === filter_var($allow_comments, FILTER_VALIDATE_BOOLEAN));
-
-      $is_public = $request->request->get('is_public');
-      $studio->setIsPublic(!is_null($is_public) && true === filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
-
-      $studio->setUpdatedOn(new \DateTime('now'));
-      /** @var User|null $user */
-      $user = $this->getUser();
-      $this->studio_manager->changeStudio($user, $studio);
-    }
-
-    return $this->redirect($request->headers->get('referer'));
+      return $this->redirect($request->headers->get('referer'));
   }
+
 
   /**
    * HELPER FUNCTIONS.

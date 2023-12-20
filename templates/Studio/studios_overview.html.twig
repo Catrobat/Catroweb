@@ -25,13 +25,13 @@
             {% if user_name %}
                 <div class="text-end col">
                     <a href="{{ path('studio_new') }}" >
-                        <span class=" add-button material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
+                        <span id="add-button" class="material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
                     </a>
                 </div>
             {% else %}
                 <div class="text-end col ">
                     <a href="{{ path('login') }}" >
-                        <span class="add-button material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
+                        <span id="add-button" class="material-icons" style="color: #00acc1; font-size: 3rem;">add_circle</span>
                     </a>
                 </div>
             {% endif %}

@@ -74,46 +74,74 @@
     </div>
 
     <div class="col-3">
-      {% if user_role == null %}
-        {% if user_name %}
-        <button class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport"   data-url="{{ path('studio_join', {'id': studio.id}) }}">
-          {{ "studio.join" |trans({}, 'catroweb') }}
-        </button>
-        {% else %}
-              <a href="{{ path('login') }}"  class="studio-detail__header__details__join-button btn btn-primary btn-block">   {{ "studio.join" |trans({}, 'catroweb') }}</a>
-        {% endif %}
-      {% elseif user_role == 'admin' %}
-          {# <div class="position-relative"> #}
-          {# <div class="studio-detail__header__details__button--upload-image d-flex"> #}
-          {# <div> #}
-          {# <form class="studio-detail__header__details__button--upload-image" id="std-header-form" method="post"> #}
-          {# <input id="std-header" type="file" name="header-img"> #}
-          {# <i class="material-icons md-light">camera_alt</i> #}
-          {# <div class="button-show-ajax"></div> #}
-          {# </form> #}
-          {# </div> #}
-          {# </div> #}
-          {# </div> #}
+        {% if user_role == 'admin' %}
+            {# <!--
+            <div class="position-relative">
+                <div class="studio-detail__header__details__button--upload-image d-flex">
+                    <div>
+                        <form class="studio-detail__header__details__button--upload-image" id="std-header-form" method="post">
+                            <input id="std-header" type="file" name="header-img">
+                            <i class="material-icons md-light">camera_alt</i>
+                            <div class="button-show-ajax"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
 
-          {# <button id="studio-detail__header__details__button--upload-image" class="btn btn-outline-primary btn-block" #}
-          {# onclick="(new Studio()).updateHeader()"> #}
-          {# <span class="material-icons">photo_camera</span> #}
-          {# </button> #}
-          {# <form class="studio-detail__header__details__button--upload-image" id="std-header-form" action="" method="post"> #}
-          {# <input id="std-header" name="header-img" type="file" #}
-          {# onchange="(new Studio()).uploadHeader()"> #}
-          {# <input id="std-id" name="std-id" type="hidden" value="{{ studio.id }}"> #}
-          {# <input type="submit" style="display: none;"> #}
-          {# </form> #}
-      {% else %}
-        {% if user_name %}
-        <button id="studio-join-leave-btn" class="btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport"   data-url="{{ path('studio_leave', {'id': studio.id}) }}">
-          {{ "studio.leave" |trans({}, 'catroweb') }}
-        </button>
-        {% else %}
-            <a href="{{ path('login') }}"  id="studio-join-leave-btn" class="btn btn-outline-primary btn-block" > {{ "studio.leave" |trans({}, 'catroweb') }}</a>
+            <button id="studio-detail__header__details__button--upload-image" class="btn btn-outline-primary btn-block" onclick="(new Studio()).updateHeader()">
+                <span class="material-icons">photo_camera</span>
+            </button>
+
+            <form class="studio-detail__header__details__button--upload-image" id="std-header-form" action="" method="post">
+                <input id="std-header" name="header-img" type="file" onchange="(new Studio()).uploadHeader()">
+                <input id="std-id" name="std-id" type="hidden" value="{{ studio.id }}">
+                <input type="submit" style="display: none;">
+            </form>
+             --> #}
+
+        {% elseif user_role is null and status != 'pending' and status != 'declined' %}
+            {% if user_name %}
+                <button class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport" data-url="{{ path('studio_join', {'id': studio.id}) }}">
+                    {{ "studio.join" |trans({}, 'catroweb') }}
+                </button>
+            {% else %}
+                <a href="{{ path('login') }}" class="studio-detail__header__details__join-button btn btn-primary btn-block">
+                    {{ "studio.join" |trans({}, 'catroweb') }}
+                </a>
+            {% endif %}
+        {% elseif status == 'pending' %}
+            {% if user_name %}
+                <button class="btn btn-outline-primary btn-block">
+                    {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+                </button>
+            {% else %}
+                <a href="{{ path('login') }}" class="btn btn-outline-primary btn-block">
+                    {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+                </a>
+            {% endif %}
+
+        {% elseif status == 'declined' %}
+            {% if user_name %}
+                <button class="btn btn-outline-primary btn-block">
+                    {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+                </button>
+            {% else %}
+                <a href="{{ path('login') }}" class="btn btn-outline-primary btn-block">
+                    {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+                </a>
+            {% endif %}
+        {% elseif status == 'approved' or status == 'joined' %}
+            {% if user_name %}
+                <button class="btn btn-outline-primary btn-block">
+                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                </button>
+            {% else %}
+                <a href="{{ path('login') }}" class="btn btn-outline-primary btn-block">
+                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                </a>
+            {% endif %}
         {% endif %}
-      {% endif %}
+
     </div>
   </div>
 

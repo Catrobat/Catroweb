@@ -83,7 +83,7 @@ class ResetCommand extends Command
     ];
 
     $this->createUsers($user_array, $output);
-
+      $this->createStudios($user_array, $output);
     $share_projects_import = $this->importProjectsFromShare(
       intval($input->getOption('limit')),
       $user_array,
@@ -117,14 +117,13 @@ class ResetCommand extends Command
     // if ($input->hasOption('with-remixes')) {
     // $this->remixGen($program_names, $output);  // Currently not working
     // }
-   $this->createStudios($user_array, $output);
+
     $this->commentOnProjects($program_names, $user_array, $output);
     $this->likeProjects($program_names, $user_array, $output);
     $this->featureProjects($program_names, $output);
     $this->followUsers($user_array, $output);
     $this->downloadProjects($program_names, $user_array, $output);
     $this->exampleProject($program_names, $output);
-
 
     // https://share.catrob.at/app/project/{id_of_project}/remix_graph_data to get remixes
 
@@ -255,26 +254,24 @@ class ResetCommand extends Command
     return $first[array_rand($first)].$second[array_rand($second)].$third[array_rand($third)].$fourth[array_rand($fourth)];
   }
 
+  private function randomStudioDescriptionGenerator(): string
+  {
+    $first = ['A', 'The', 'My', 'Our', 'This'];
+    $second = ['great', 'awesome', 'fantastic', 'amazing', 'cool', 'wonderful'];
+    $third = ['studio', 'creation', 'place', 'world', 'space', 'spot'];
 
+    return $first[array_rand($first)].' '.$second[array_rand($second)].' '.$third[array_rand($third)];
+  }
 
-    private function randomStudioDescriptionGenerator(): string
-    {
-        $first = ['A', 'The', 'My', 'Our', 'This'];
-        $second = ['great', 'awesome', 'fantastic', 'amazing', 'cool', 'wonderful'];
-        $third = ['studio', 'creation', 'place', 'world', 'space', 'spot'];
+  private function randomStudioNameGenerator(): string
+  {
+    $first = ['Creative', 'Innovative', 'Imaginary', 'Dreamy', 'Artistic', 'Visionary'];
+    $second = ['Studios', 'Creations', 'Projects', 'World', 'Realm'];
 
-        return $first[array_rand($first)] . ' ' . $second[array_rand($second)] . ' ' . $third[array_rand($third)];
-    }
+    return $first[array_rand($first)].$second[array_rand($second)];
+  }
 
-    private function randomStudioNameGenerator(): string
-    {
-        $first = ['Creative', 'Innovative', 'Imaginary', 'Dreamy', 'Artistic', 'Visionary'];
-        $second = ['Studios', 'Creations', 'Projects', 'World', 'Realm'];
-
-        return $first[array_rand($first)]  . $second[array_rand($second)];
-    }
-
-    /**
+  /**
    * @throws \Exception
    */
   private function commentOnProjects(array $program_names, array $user_array, OutputInterface $output): void
@@ -304,44 +301,68 @@ class ResetCommand extends Command
     }
   }
 
-    /**
-     * @throws \Exception
-     */
+  /**
+   * @throws \Exception
+   */
     private function createStudios(array $user_array, OutputInterface $output): void
     {
+        $random_studio_amount = random_int(1, 8);
+        $i = 0;
 
-      $random_studio_amount = random_int(1, 8);
-      $i = 0;
-      for ($j = 0; $j <= $random_studio_amount; ++$j) {
+        for ($j = 0; $j <= $random_studio_amount; ++$j) {
 
-          $user_id = array_rand($user_array);
-          $isPublic = (bool) random_int(0, 1);
-          $isEnabled = (bool) random_int(0, 1);
-          $allowComments = (bool) random_int(0, 1);
+            $admin_user_id = array_rand($user_array);
+            $admin_user = $user_array[$admin_user_id];
 
-          $parameters = [
-                'name' => $this->randomStudioNameGenerator().$i,
+            // Generate other studio parameters
+            $isPublic = (bool) random_int(0, 1);
+            $isEnabled = (bool) random_int(0, 1);
+            $allowComments = (bool) random_int(0, 1);
+            $numUsers = random_int(2, 5);
+
+            $users = [];
+            $status = [];
+
+
+            $users[] = $admin_user;
+            $status[] = $this->getRandomStatus();
+
+
+            for ($k = 1; $k < $numUsers; ++$k) {
+                do {
+                    $random_user_id = array_rand($user_array);
+                } while ($random_user_id == $admin_user_id);
+
+                $users[] = $user_array[$random_user_id];
+                $status[] = $this->getRandomStatus();
+            }
+
+            $parameters = [
+                'name' => $this->randomStudioNameGenerator() . $i,
                 'description' => $this->randomStudioDescriptionGenerator(),
-                'user' => $user_array[$user_id],
+                'admin' => $admin_user,
                 'is_public' => $isPublic,
                 'is_enabled' => $isEnabled,
                 'allow_comments' => $allowComments,
+                'users' => $users,
+                'status' => $status,
             ];
 
-
-        $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplication(), $parameters, $output);
-        if (0 !== $ret) {
-            $output->writeln('Failed to create studio' . json_encode($parameters, JSON_THROW_ON_ERROR) . ' error code: ' . $ret);
+            $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplication(), $parameters, $output);
+            if (0 !== $ret) {
+                $output->writeln('Failed to create studio' . json_encode($parameters, JSON_THROW_ON_ERROR) . ' error code: ' . $ret);
+            }
+            ++$i;
         }
-         ++$i;
-      }
+    }
 
-   }
+    private function getRandomStatus(): string
+    {
+        $statuses = ['pending', 'declined'];
+        return $statuses[array_rand($statuses)];
+    }
 
-
-
-
-    /**
+  /**
    * @throws \Exception
    */
   private function reportProjects(array $program_names, array $user_array, OutputInterface $output): void

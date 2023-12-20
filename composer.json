@@ -28,7 +28,7 @@
     "google/cloud-translate": "1.16.*",
     "http-interop/http-factory-guzzle": "*",
     "hwi/oauth-bundle": "dev-master",
-    "incenteev/composer-parameter-handler": "2.1.*",
+    "incenteev/composer-parameter-handler": "2.2.*",
     "lexik/jwt-authentication-bundle": "2.20.*",
     "php-http/guzzle7-adapter": "1.0.*",
     "php-http/httplug-bundle": "1.32.*",
@@ -89,7 +89,7 @@
     "symfony/phpunit-bridge": "6.4.*",
     "symfony/stopwatch": "6.4.*",
     "symfony/web-profiler-bundle": "6.4.*",
-    "vimeo/psalm": "5.17.*",
+    "vimeo/psalm": "5.18.*",
     "wapmorgan/php-deprecation-detector": "2.0.*",
     "textalk/websocket": "1.5.8.*"
   },

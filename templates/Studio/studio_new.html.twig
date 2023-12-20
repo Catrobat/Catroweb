@@ -24,7 +24,7 @@
                 <div class="col-md-2">
                     <div class="mb-3">
                         <div>
-                            <input type="radio" class="check_studios" id="is_enabled_true" name="form[is_enabled]" value="1">
+                            <input type="radio" class="check-studios" id="is_enabled_true" name="form[is_enabled]" value="1">
                             <label for="is_enabled_true">Yes</label>
                         </div>
                     </div>
@@ -33,13 +33,13 @@
                     <div class="mb-3">
                         <label></label>
                         <div>
-                            <input type="radio" class="check_studios" id="is_enabled_false" name="form[is_enabled]" value="0">
+                            <input type="radio" class="check-studios" id="is_enabled_false" name="form[is_enabled]" value="0">
                             <label for="is_enabled_false">No</label>
                         </div>
                     </div>
                 </div>
             <div class="mb-3">
-                <div id="enable_studio_name-warning"></div>
+                <div id="enable-studio-name-warning"></div>
             </div>
 
             </div>
@@ -49,7 +49,7 @@
                     <div class="mb-3">
                         <label>{{ 'Public Studio'|trans({}, 'catroweb') }}</label>
                         <div>
-                            <input type="radio" class="check_studios_public" id="is_public_true" name="form[is_public]" value="1">
+                            <input type="radio" class="check-studios-public" id="is_public_true" name="form[is_public]" value="1">
                             <label for="is_public_true"></label>
                         </div>
                     </div>
@@ -58,14 +58,14 @@
                     <div class="mb-3">
                         <label>{{ 'Private Studio'|trans({}, 'catroweb') }}</label>
                         <div>
-                            <input type="radio" class="check_studios_public" id="is_public_false" name="form[is_public]" value="0">
+                            <input type="radio" class="check-studios-public" id="is_public_false" name="form[is_public]" value="0">
                             <label for="is_public_false"></label>
                         </div>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <div id="is_public-warning"></div>
+                    <div id="is-public-warning"></div>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
                 <div class="col-md-2">
                     <div class="mb-3">
                         <div>
-                            <input type="radio" class="check_studios_comments" id="allow_comments_true" name="form[allow_comments]" value="1">
+                            <input type="radio" class="check-studios-comments" id="allow_comments_true" name="form[allow_comments]" value="1">
                             <label for="allow_comments_true">Yes</label>
                         </div>
                     </div>
@@ -83,13 +83,13 @@
                     <div class="mb-3">
                         <label></label>
                         <div>
-                            <input type="radio" class="check_studios_comments" id="allow_comments_false" name="form[allow_comments]" value="0">
+                            <input type="radio" class="check-studios-comments" id="allow_comments_false" name="form[allow_comments]" value="0">
                             <label for="allow_comments_false">No</label>
                         </div>
                     </div>
                 </div>
                 <div class="mb-3">
-                   <div id="allow_comments-warning"></div>
+                   <div id="allow-comments-warning"></div>
                 </div>
             </div>
 
@@ -110,12 +110,12 @@
         <div class="row">
             <div class="col-md-2">
                 <div class="mb-3">
-                    <a  href="{{ path('login') }}"   class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
+                    <a  href="{{ path('login') }}" id="studioCreateFormSubmit"   class="btn btn-primary">{{ 'studio.create_studio'|trans({}, 'catroweb') }}</a>
                 </div>
             </div>
             <div class="col-md-4 ">
                 <div class="mb-3">
-                    <a  href="{{ path('login') }}" class="btn btn-secondary">{{ 'studio.cancel_studio'|trans({}, 'catroweb') }}</a>
+                    <a  href="{{ path('login') }}"   id="studioCreateFormCancel" class="btn btn-secondary">{{ 'studio.cancel_studio'|trans({}, 'catroweb') }}</a>
                 </div>
             </div>
         </div>
@@ -124,5 +124,5 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ encore_entry_script_tags('studios_overview') }}
+{{ encore_entry_script_tags('studios_overview') }}
 {% endblock %}

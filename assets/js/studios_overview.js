@@ -30,43 +30,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.querySelectorAll('.ajaxRequestJoinLeaveReport').forEach((el) => {
     el.addEventListener('click', (event) => {
-      event.preventDefault();
-      const url = el.getAttribute('data-url');
-      makeAjaxRequest(url);
+      event.preventDefault()
+      const url = el.getAttribute('data-url')
+      makeAjaxRequest(url)
     })
   })
-
 })
 function makeAjaxRequest(url) {
   fetch(url, {
     method: 'POST',
-  })     .then(response => {
-    if (!response.ok) {
-      console.error('There was a problem with the server.')
-    } else {
-      return response.json()
-    }
   })
-    .then(data => {
-      if (!data) {
+    .then((response) => {
+      if (!response.ok) {
         console.error('There was a problem with the server.')
-      }
-      else {
-        showSnackbar(
-          '#share-snackbar',
-          data.message.toString()
-        )
-        window.location.reload()
-
+      } else {
+        return response.json()
       }
     })
-    .catch(error => {
+    .then((data) => {
+      if (!data) {
+        console.error('There was a problem with the server.')
+      } else {
+        showSnackbar('#share-snackbar', data.message.toString())
+        window.location.reload()
+      }
+    })
+    .catch((error) => {
       console.error('There was an error with the fetch operation:', error)
-
     })
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const submitButton = document.getElementById('studioCreateFormSubmit')
   submitButton.addEventListener('click', submitForm)
 
@@ -76,39 +70,49 @@ document.addEventListener('DOMContentLoaded', function() {
   const nameInput = document.getElementById('inputStudioName')
   nameInput.addEventListener('input', resetCssInvalidNameInputfield)
 
-
-  const checkboxes = document.getElementsByClassName('check_studios');
+  const checkboxes = document.getElementsByClassName('check-studios')
   for (let i = 0; i < checkboxes.length; i++) {
     checkboxes[i].addEventListener('input', function (event) {
-      resetCssInvalidCheckbox(checkboxes);
-      resetWarningMessage('enable_studio_name-warning');
-    });
+      resetCssInvalidCheckbox(checkboxes)
+      resetWarningMessage('enable-studio-name-warning')
+    })
   }
 
-  const checkboxesPublic = document.getElementsByClassName('check_studios_public');
+  const checkboxesPublic = document.getElementsByClassName(
+    'check-studios-public',
+  )
   for (let i = 0; i < checkboxesPublic.length; i++) {
     checkboxesPublic[i].addEventListener('input', function (event) {
-      resetCssInvalidCheckbox(checkboxesPublic);
-      resetWarningMessage('is_public-warning');
-    });
+      resetCssInvalidCheckbox(checkboxesPublic)
+      resetWarningMessage('is-public-warning')
+    })
   }
 
-  const checkboxesComments = document.getElementsByClassName('check_studios_comments');
+  const checkboxesComments = document.getElementsByClassName(
+    'check-studios-comments',
+  )
   for (let i = 0; i < checkboxesComments.length; i++) {
     checkboxesComments[i].addEventListener('input', function (event) {
-      resetCssInvalidCheckbox(checkboxesComments);
-      resetWarningMessage('allow_comments-warning');
-    });
+      resetCssInvalidCheckbox(checkboxesComments)
+      resetWarningMessage('allow-comments-warning')
+    })
   }
-
 })
 
 function submitForm() {
   const nameInput = document.getElementById('inputStudioName').value.trim()
-  const descriptionInput = document.getElementById('inputStudioDescription').value.trim()
-  const is_enabledValue = document.querySelector('.check_studios[name="form[is_enabled]"]:checked') ;
-  const is_publicValue = document.querySelector('.check_studios_public[name="form[is_public]"]:checked');
-  const allow_commentsValue = document.querySelector('.check_studios_comments[name="form[allow_comments]"]:checked') ;
+  const descriptionInput = document
+    .getElementById('inputStudioDescription')
+    .value.trim()
+  const isEnabledValue = document.querySelector(
+    '.check-studios[name="form[is_enabled]"]:checked',
+  )
+  const isPublicValue = document.querySelector(
+    '.check-studios-public[name="form[is_public]"]:checked',
+  )
+  const allowCommentsValue = document.querySelector(
+    '.check-studios-comments[name="form[allow_comments]"]:checked',
+  )
 
   if (!parseInput()) {
     return
@@ -116,10 +120,10 @@ function submitForm() {
 
   const formData = new FormData()
   formData.append('name', nameInput)
-  formData.append('description', descriptionInput);
-  formData.append('is_enabled', is_enabledValue.value);
-  formData.append('is_public', is_publicValue.value);
-  formData.append('allow_comments', allow_commentsValue.value);
+  formData.append('description', descriptionInput)
+  formData.append('is_enabled', isEnabledValue.value)
+  formData.append('is_public', isPublicValue.value)
+  formData.append('allow_comments', allowCommentsValue.value)
   const submitButton = document.getElementById('studioCreateFormSubmit')
   const url = submitButton.getAttribute('data-url')
   const urlBack = submitButton.getAttribute('data-url-back')
@@ -128,38 +132,27 @@ function submitForm() {
     method: 'POST',
     body: formData,
   })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
         console.error('There was a problem with the server.')
         const warningMessage = document.getElementById('name-warning')
         document.getElementById('inputStudioName').classList.add('is-invalid')
         warningMessage.textContent = 'There was a problem with the server.'
-
       } else {
         return response.json()
       }
     })
-    .then(data => {
+    .then((data) => {
       if (!data) {
         console.error('There was a problem with the server.')
         const warningMessage = document.getElementById('name-warning')
-
         warningMessage.textContent = 'There was a problem with the server'
       } else if (data.message) {
-        console.error('There was a problem with the server:', data.message)
-        const warningMessage = document.getElementById('name-warning')
-        document.getElementById('inputStudioName').classList.add('is-invalid')
-        warningMessage.textContent = data.message
-      } else {
-        showSnackbar(
-          '#share-snackbar',
-          data.message.toString()
-        )
+        showSnackbar('#share-snackbar', data.message.toString())
         window.location.href = urlBack
-
       }
     })
-    .catch(error => {
+    .catch((error) => {
       console.error('There was an error with the fetch operation:', error)
       const warningMessage = document.getElementById('name-warning')
       warningMessage.textContent = 'There was an error with the fetch operation'
@@ -168,56 +161,61 @@ function submitForm() {
 
 function cancelForm() {
   const cancelButton = document.getElementById('studioCreateFormCancel')
-  const url = cancelButton.getAttribute('data-url')
-
-  console.log('Cancel request successful')
-  window.location.href = url
+  window.location.href = cancelButton.getAttribute('data-url')
 }
 
 function parseInput() {
-  const isEnableChecked = document.querySelector('.check_studios[name="form[is_enabled]"]:checked');
-  const isPublicChecked = document.querySelector('.check_studios_public[name="form[is_public]"]:checked');
-  const allowCommentsChecked = document.querySelector('.check_studios_comments[name="form[allow_comments]"]:checked');
+  const isEnableChecked = document.querySelector(
+    '.check-studios[name="form[is_enabled]"]:checked',
+  )
+  const isPublicChecked = document.querySelector(
+    '.check-studios-public[name="form[is_public]"]:checked',
+  )
+  const allowCommentsChecked = document.querySelector(
+    '.check-studios-comments[name="form[allow_comments]"]:checked',
+  )
 
   const nameInput = document.getElementById('inputStudioName')
-  let wrongInput=false
+  let wrongInput = false
   if (nameInput.value.trim() === '') {
     nameInput.classList.add('is-invalid')
     const warningMessage = document.getElementById('name-warning')
     warningMessage.textContent = 'Please fill in all required fields.'
     wrongInput = true
   }
-  if(!isEnableChecked){
-    const radioInputs = document.getElementsByClassName('check_studios');
+  if (!isEnableChecked) {
+    const radioInputs = document.getElementsByClassName('check-studios')
     for (let i = 0; i < radioInputs.length; i++) {
-      console.log('dsf')
-      radioInputs[i].classList.add('warning');
+      radioInputs[i].classList.add('warning')
     }
-    const warningMessage = document.getElementById('enable_studio_name-warning')
+    const warningMessage = document.getElementById('enable-studio-name-warning')
     warningMessage.textContent = 'Please select whether to enable the studio!'
     wrongInput = true
   }
 
-  if(!allowCommentsChecked){
-    const radioInputs = document.getElementsByClassName('check_studios_comments');
+  if (!allowCommentsChecked) {
+    const radioInputs = document.getElementsByClassName(
+      'check-studios-comments',
+    )
     for (let i = 0; i < radioInputs.length; i++) {
-      radioInputs[i].classList.add('warning');
+      radioInputs[i].classList.add('warning')
     }
-    const warningMessage = document.getElementById('allow_comments-warning')
-    warningMessage.textContent = 'Please select whether to allow comments or not in the studio!'
+    const warningMessage = document.getElementById('allow-comments-warning')
+    warningMessage.textContent =
+      'Please select whether to allow comments or not in the studio!'
     wrongInput = true
   }
-  if(!isPublicChecked){
-    const radioInputs = document.getElementsByClassName('check_studios_public');
+  if (!isPublicChecked) {
+    const radioInputs = document.getElementsByClassName('check-studios-public')
     for (let i = 0; i < radioInputs.length; i++) {
-      radioInputs[i].classList.add('warning');
+      radioInputs[i].classList.add('warning')
     }
-    const warningMessage = document.getElementById('is_public-warning')
-    warningMessage.textContent = 'Please select whether the studio should be private or public!'
+    const warningMessage = document.getElementById('is-public-warning')
+    warningMessage.textContent =
+      'Please select whether the studio should be private or public!'
     wrongInput = true
   }
-  if (wrongInput)
-  {
+  if (wrongInput) {
     return false
   }
   const warningMessage = document.getElementById('name-warning')
@@ -239,17 +237,16 @@ function resetCssInvalidNameInputfield() {
 
 function resetCssInvalidCheckbox(checkboxes) {
   for (let i = 0; i < checkboxes.length; i++) {
-    const checkbox = checkboxes[i];
+    const checkbox = checkboxes[i]
     if (checkbox.classList.contains('warning')) {
-      checkbox.classList.remove('warning');
+      checkbox.classList.remove('warning')
     }
   }
 }
 
 function resetWarningMessage(elementIds) {
-
-  const element = document.getElementById(elementIds);
+  const element = document.getElementById(elementIds)
   if (element) {
-    element.textContent = '';
+    element.textContent = ''
   }
 }

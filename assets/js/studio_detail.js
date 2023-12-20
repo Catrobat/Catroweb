@@ -4,9 +4,8 @@ import './components/fullscreen_list_modal'
 import './components/switch'
 import './components/text_area'
 import './components/text_field'
-import { MDCMenu } from '@material/menu'
 import { showSnackbar } from './components/snackbar'
-
+import Swal from 'sweetalert2'
 require('../styles/components/project_list.scss')
 require('../styles/components/studio_admin_settings.scss')
 require('../styles/components/studio_members_list.scss')
@@ -176,50 +175,95 @@ require('../styles/custom/studio.scss')
 // }
 
 document.addEventListener('DOMContentLoaded', () => {
-
   document.querySelectorAll('.ajaxRequestJoinLeaveReport').forEach((el) => {
     el.addEventListener('click', (event) => {
-      event.preventDefault();
-      const url = el.getAttribute('data-url');
-      makeAjaxRequest(url);
+      event.preventDefault()
+      const url = el.getAttribute('data-url')
+      makeAjaxRequest(url)
     })
   })
 
+
+
+  let pendingJoinButton = document.querySelectorAll('#pending-join-requests button.mdc-switch');
+  let buttonsDeclined = document.querySelectorAll('#declined-join-requests button.mdc-switch');
+  pendingJoinButton.forEach(function (button) {
+    button.addEventListener('click', function () {
+
+      let buttonAriaChecked = button.getAttribute('aria-checked');
+      let labelFor = button.getAttribute('id');
+      let label = document.querySelector(`label[for="${labelFor}"]`);
+
+      if (buttonAriaChecked === 'true') {
+        Swal.fire({
+
+          title: `${label.textContent} gets declined`,
+          text: 'Pending Join Requests Button!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+      else{
+        Swal.fire({
+          title: `${label.textContent} gets approved`,
+          text: 'Pending Join Requests!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+  });
+
+
+
+  buttonsDeclined.forEach(function (button) {
+    button.addEventListener('click', function () {
+      let buttonAriaChecked = button.getAttribute('aria-checked');
+      let labelFor = button.getAttribute('id');
+      let label = document.querySelector(`label[for="${labelFor}"]`);
+
+      if (buttonAriaChecked === 'true') {
+        Swal.fire({
+
+          title: `${label.textContent} stay declined`,
+          text: 'Declined Join Requests Button Clicked!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+      else{
+        Swal.fire({
+          title: `${label.textContent} gets approved`,
+          text: 'Declined Join Requests Button Clicked!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+      }
+    });
+  });
 })
 function makeAjaxRequest(url) {
   fetch(url, {
     method: 'POST',
-  })     .then(response => {
-    if (!response.ok) {
-      showSnackbar(
-        '#share-snackbar',
-        'There was a problem with the server.'
-      )
-      console.error('There was a problem with the server.')
-    } else {
-      return response.json()
-    }
   })
-    .then(data => {
-      if (!data) {
-        showSnackbar(
-          '#share-snackbar',
-          'There was a problem with the server.'
-        )
+    .then((response) => {
+      if (!response.ok) {
+        showSnackbar('#share-snackbar', 'There was a problem with the server.')
         console.error('There was a problem with the server.')
-      }
-      else {
-        showSnackbar(
-          '#share-snackbar',
-          data.message.toString()
-        )
-        window.location.reload()
-
+      } else {
+        return response.json()
       }
     })
-    .catch(error => {
+    .then((data) => {
+      if (!data) {
+        showSnackbar('#share-snackbar', 'There was a problem with the server.')
+        console.error('There was a problem with the server.')
+      } else {
+        showSnackbar('#share-snackbar', data.message.toString())
+        window.location.reload()
+      }
+    })
+    .catch((error) => {
       console.error('There was an error with the fetch operation:', error)
-
     })
 }
-

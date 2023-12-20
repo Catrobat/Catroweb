@@ -38,23 +38,35 @@
                             </button>
                             <div id="studios-list-item--menu-{{ studio.id }}" class="mdc-menu mdc-menu-surface" data-studio-id="{{ studio.id }}">
                                 <ul class="mdc-deprecated-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
+                                    <li  class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
-                                        {% if not studio.is_joined %}
-                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport"
-                                              data-url="{{ path('studio_join', {'id': studio.id, }) }}">
-                                             {{ 'studio.details.join'|trans({}, 'catroweb') }}
-                                         </span>
-                                            {% else %}
-                                                <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport"
-                                                 data-url="{{ path('studio_leave', {'id': studio.id}) }}">
-                                                 {{ 'studio.details.leave'|trans({}, 'catroweb') }}
-                                               </span>
+                                        {% if not studio.is_joined and  studio.status != 'pending' and studio.status != 'declined'%}
+                                            <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                                                  data-url="{{ path('studio_join', {'id': studio.id }) }}">
+                                                 {{ 'studio.details.join'|trans({}, 'catroweb') }}
+                                           </span>
+                                        {% else %}
+                                            {% if studio.status == 'pending' %}
+                                                <span class="mdc-deprecated-list-item__text">
+                                                {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+                                                 </span>
+
+                                            {% elseif studio.status == 'declined' %}
+                                                    <span class="mdc-deprecated-list-item__text">
+                                                {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+                                                 </span>
+                                            {% elseif studio.status == 'approved' or studio.status == 'joined' %}
+                                                <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestLeave"
+                                                      data-url="{{ path('studio_leave', {'id': studio.id }) }}">
+                                                   {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                                                </span>
                                             {% endif %}
+                                        {% endif %}
                                     </li>
+
                                     <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport"
+                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestReport"
                                               data-url="{{ path('studio_report', {'id':studio.id }) }}">
                                             {{ 'studio.report'|trans({}, 'catroweb') }}"
                                         </span>

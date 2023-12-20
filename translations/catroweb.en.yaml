@@ -938,6 +938,8 @@ studio:
     join: 'Join'
     leave: 'Leave'
     report: 'Report'
+    pending: 'Pending'
+    decline: 'Declined'
 
     projects:
       title: 'Projects'

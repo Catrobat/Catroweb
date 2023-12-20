@@ -65,8 +65,48 @@
             'name': 'is_public'
           }
         } %}
+        <h3>Pending Join Requests</h3>
+        <ul id="pending-join-requests">
+          {% for request in pending_join_requests %}
+            <li class="mb-3" style="list-style: none;">
+            {% include 'components/switch.html.twig' with {
+              'switch':
+              {
+                'id': 'studio-setting__switch-studio-pending-join-' ~ request.id,
+                'label':  request.user,
+                'selected': 1,
+                'name': 'switches[' ~ request.id ~ ']'
+              }
+            } %}
+            </li>
+          {% endfor %}
+        </ul>
+        <h3>Approved Join Requests</h3>
+        <ul>
+          {% for request in approved_join_requests %}
+            <li  class="mb-3 " style="list-style: none;">{{ request.user }}</li>
+          {% endfor %}
+        </ul>
+        <h3>Declined Join Requests</h3>
+        <ul id="declined-join-requests">
+          {% for request in declined_join_requests %}
+            <li class="mb-3 " style="list-style: none;">
+              {% include 'components/switch.html.twig' with {
+                'switch':
+                {
+                  'id': 'studio-setting__switch-studio-declined-join-' ~ request.id,
+                  'label':  request.user,
+                  'selected': 0,
+                  'name': 'approved_switches[' ~ request.id ~ ']'
+                }
+              } %}
 
+            </li>
+          {% endfor %}
+        </ul>
       </form>
     </div>
   </div>
 </div>
+
+

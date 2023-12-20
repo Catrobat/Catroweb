@@ -42,3 +42,6 @@ Feature: Every Studio should have an overview containing the most necessary info
     When I click "#projects-tab"
     Then the element "#comments-pane" should not be visible
     And the element "#projects-pane" should be visible
+
+
+
