@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3e2d53033832309f63db411635d2b12c",
+    "content-hash": "de8d40b9d86bbdbc010a2f15d92067e4",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -13173,21 +13173,21 @@
         },
         {
             "name": "symfonycasts/verify-email-bundle",
-            "version": "v1.15.0",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
-                "reference": "10a11a69e658d9f0980eb2a330346ece44888123"
+                "reference": "b04714a7fa76ef3ba87e8747c87c5958dcc51979"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/10a11a69e658d9f0980eb2a330346ece44888123",
-                "reference": "10a11a69e658d9f0980eb2a330346ece44888123",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/b04714a7fa76ef3ba87e8747c87c5958dcc51979",
+                "reference": "b04714a7fa76ef3ba87e8747c87c5958dcc51979",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": ">=7.2.5",
+                "php": ">=8.1",
                 "symfony/config": "^5.4 | ^6.0 | ^7.0",
                 "symfony/dependency-injection": "^5.4 | ^6.0 | ^7.0",
                 "symfony/deprecation-contracts": "^2.2 | ^3.0",
@@ -13213,9 +13213,9 @@
             "description": "Simple, stylish Email Verification for Symfony",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.15.0"
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.16.0"
             },
-            "time": "2023-12-02T21:45:48+00:00"
+            "time": "2023-12-18T21:54:19+00:00"
         },
         {
             "name": "twig/extra-bundle",
