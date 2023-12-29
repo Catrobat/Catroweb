@@ -2162,16 +2162,16 @@
         },
         {
             "name": "gesdinet/jwt-refresh-token-bundle",
-            "version": "v1.2.0",
+            "version": "v1.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/markitosgv/JWTRefreshTokenBundle.git",
-                "reference": "58cb94c443300d19e89306ddcd13438699eed0bd"
+                "reference": "9cc564bf19cebf0d526124e102dea94881b7c4db"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/58cb94c443300d19e89306ddcd13438699eed0bd",
-                "reference": "58cb94c443300d19e89306ddcd13438699eed0bd",
+                "url": "https://api.github.com/repos/markitosgv/JWTRefreshTokenBundle/zipball/9cc564bf19cebf0d526124e102dea94881b7c4db",
+                "reference": "9cc564bf19cebf0d526124e102dea94881b7c4db",
                 "shasum": ""
             },
             "require": {
@@ -2200,11 +2200,11 @@
                 "doctrine/cache": "^1.11|^2.0",
                 "doctrine/mongodb-odm": "^2.2",
                 "doctrine/orm": "^2.7",
-                "matthiasnoback/symfony-config-test": "^4.2",
-                "matthiasnoback/symfony-dependency-injection-test": "^4.2",
+                "matthiasnoback/symfony-config-test": "^4.2|^5.0",
+                "matthiasnoback/symfony-dependency-injection-test": "^4.2|^5.0",
                 "phpunit/phpunit": "^9.5",
                 "symfony/cache": "^4.4|^5.4|^6.0|^7.0",
-                "symfony/security-guard": "^4.4|^5.4|^6.0|^7.0"
+                "symfony/security-guard": "^4.4|^5.4"
             },
             "type": "symfony-bundle",
             "extra": {
@@ -2236,9 +2236,9 @@
             ],
             "support": {
                 "issues": "https://github.com/markitosgv/JWTRefreshTokenBundle/issues",
-                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.2.0"
+                "source": "https://github.com/markitosgv/JWTRefreshTokenBundle/tree/v1.2.1"
             },
-            "time": "2023-11-11T08:08:42+00:00"
+            "time": "2023-12-26T15:17:53+00:00"
         },
         {
             "name": "google/apiclient",
