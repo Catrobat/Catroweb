@@ -28,7 +28,6 @@ export class ProjectList {
     this.isFullView = false
     this.theme = theme
     this.emptyMessage = emptyMessage
-
     this.$title = $('.project-list__title', $(this.container))
     this.$body = $('body')
     this.$chevronLeft = $('.project-list__chevrons__left', $(this.container))
@@ -38,7 +37,8 @@ export class ProjectList {
       self.closeFullView()
     }
 
-    let attributes = 'id,name,project_url,screenshot_small,screenshot_large,'
+    let attributes =
+      'id,name,project_url,screenshot_small,screenshot_large,not_for_kids,'
     attributes +=
       this.propertyToShow === 'uploaded'
         ? 'uploaded_string'
@@ -123,9 +123,13 @@ export class ProjectList {
     let projectUrl = data.project_url
     projectUrl = projectUrl.replace('/app/', '/' + this.theme + '/')
     //
-
     const $p = $('<a />', { class: 'project-list__project', href: projectUrl })
     $p.data('id', data.id)
+
+    let style = ''
+    if (data.not_for_kids) {
+      style = 'filter: blur(10px);'
+    }
     $('<img/>', {
       'data-src': data.screenshot_small,
       // TODO: generate larger thumbnails and adapt here (change 80w to width of thumbs)
@@ -133,6 +137,7 @@ export class ProjectList {
         data.screenshot_small + ' 80w, ' + data.screenshot_large + ' 480w',
       'data-sizes': '(min-width: 768px) 10vw, 25vw',
       class: 'lazyload project-list__project__image',
+      style,
     }).appendTo($p)
     $('<span/>', { class: 'project-list__project__name' })
       .text(data.name)
@@ -161,6 +166,23 @@ export class ProjectList {
     $('<span/>', { class: 'project-list__project__property__value' })
       .text(propertyValue)
       .appendTo($prop)
+
+    if (data.not_for_kids) {
+      const $newProp = $('<div />', {
+        class: 'lazyload project-list__project__property__not-for-kids',
+      })
+
+      $newProp.appendTo($p)
+
+      $('<img/>', {
+        class: 'lazyload project-list__not-for-kids-logo',
+        src: '/images/default/not_for_kids.svg',
+      }).appendTo($newProp)
+
+      $('<span/>', { class: 'project-list__project__property__value' })
+        .text('Not for kids')
+        .appendTo($newProp)
+    }
     return $p
   }
 

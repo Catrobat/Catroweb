@@ -42,6 +42,15 @@
     </div>
   </div>
 
+  {% if project.getNotForKids() %}
+  <div class="row">
+    <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
+      <img alt="Not for Kids" id="not-for-kids-logo" src="{{ asset('images/default/not_for_kids.svg') }}" style="width: 24px; height: 24px;">
+      <span id="notForKidsText" class="icon-text ms-2 align-bottom">{{ "project.notForKids"|trans({}, "catroweb") }}</span>
+    </div>
+  </div>
+  {% endif %}
+
   <div class="row mb-4">
     <div class="col-6 mb-3 d-lg-none mt-3">
       {% include 'components/redirect_button.twig' with {
