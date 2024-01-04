@@ -23,7 +23,7 @@
                         <div class="studios-list-item--icons">
                             <div class="studios-list-item--icon-wrapper">
                                 <span class="material-icons">person</span>
-                                <span class="studios-list-item--icons-text ms-2">{{ studio.studio_users }}</span>
+                                <span id="studios-user-count-{{ studio.id }}" class="studios-list-item--icons-text ms-2">{{ studio.studio_users }}</span>
                             </div>
                             <div class="studios-list-item--icon-wrapper">
                                 <span class="material-icons">app_shortcut</span>
@@ -41,22 +41,22 @@
                                     <li  class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
                                         {% if not studio.is_joined and  studio.status != 'pending' and studio.status != 'declined'%}
-                                            <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                                            <span id="requestJoin-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestJoin"
                                                   data-url="{{ path('studio_join', {'id': studio.id }) }}">
                                                  {{ 'studio.details.join'|trans({}, 'catroweb') }}
                                            </span>
                                         {% else %}
                                             {% if studio.status == 'pending' %}
-                                                <span class="mdc-deprecated-list-item__text">
+                                                <span id="requestPending-{{ studio.id }}" class="mdc-deprecated-list-item__text requestPending">
                                                 {{ 'studio.details.pending'|trans({}, 'catroweb') }}
                                                  </span>
 
                                             {% elseif studio.status == 'declined' %}
-                                                    <span class="mdc-deprecated-list-item__text">
+                                                    <span id="requestDecline-{{ studio.id }}" class="mdc-deprecated-list-item__text requestDecline">
                                                 {{ 'studio.details.decline'|trans({}, 'catroweb') }}
                                                  </span>
-                                            {% elseif studio.status == 'approved' or studio.status == 'joined' %}
-                                                <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestLeave"
+                                            {% elseif studio.status == 'approved' or studio.is_joined %}
+                                                <span id="requestLeave-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestLeave"
                                                       data-url="{{ path('studio_leave', {'id': studio.id }) }}">
                                                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
                                                 </span>

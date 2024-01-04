@@ -83,7 +83,7 @@ class ResetCommand extends Command
     ];
 
     $this->createUsers($user_array, $output);
-      $this->createStudios($user_array, $output);
+    $this->createStudios($user_array, $output);
     $share_projects_import = $this->importProjectsFromShare(
       intval($input->getOption('limit')),
       $user_array,
@@ -304,63 +304,61 @@ class ResetCommand extends Command
   /**
    * @throws \Exception
    */
-    private function createStudios(array $user_array, OutputInterface $output): void
-    {
-        $random_studio_amount = random_int(1, 8);
-        $i = 0;
+  private function createStudios(array $user_array, OutputInterface $output): void
+  {
+    $random_studio_amount = random_int(1, 8);
+    $i = 0;
 
-        for ($j = 0; $j <= $random_studio_amount; ++$j) {
+    for ($j = 0; $j <= $random_studio_amount; ++$j) {
+      $admin_user_id = array_rand($user_array);
+      $admin_user = $user_array[$admin_user_id];
 
-            $admin_user_id = array_rand($user_array);
-            $admin_user = $user_array[$admin_user_id];
+      // Generate other studio parameters
+      $isPublic = (bool) random_int(0, 1);
+      $isEnabled = (bool) random_int(0, 1);
+      $allowComments = (bool) random_int(0, 1);
+      $numUsers = random_int(2, 5);
 
-            // Generate other studio parameters
-            $isPublic = (bool) random_int(0, 1);
-            $isEnabled = (bool) random_int(0, 1);
-            $allowComments = (bool) random_int(0, 1);
-            $numUsers = random_int(2, 5);
+      $users = [];
+      $status = [];
 
-            $users = [];
-            $status = [];
+      $users[] = $admin_user;
+      $status[] = $this->getRandomStatus();
 
+      for ($k = 1; $k < $numUsers; ++$k) {
+        do {
+          $random_user_id = array_rand($user_array);
+        } while ($random_user_id == $admin_user_id);
 
-            $users[] = $admin_user;
-            $status[] = $this->getRandomStatus();
+        $users[] = $user_array[$random_user_id];
+        $status[] = $this->getRandomStatus();
+      }
 
+      $parameters = [
+        'name' => $this->randomStudioNameGenerator().$i,
+        'description' => $this->randomStudioDescriptionGenerator(),
+        'admin' => $admin_user,
+        'is_public' => $isPublic,
+        'is_enabled' => $isEnabled,
+        'allow_comments' => $allowComments,
+        'users' => $users,
+        'status' => $status,
+      ];
 
-            for ($k = 1; $k < $numUsers; ++$k) {
-                do {
-                    $random_user_id = array_rand($user_array);
-                } while ($random_user_id == $admin_user_id);
-
-                $users[] = $user_array[$random_user_id];
-                $status[] = $this->getRandomStatus();
-            }
-
-            $parameters = [
-                'name' => $this->randomStudioNameGenerator() . $i,
-                'description' => $this->randomStudioDescriptionGenerator(),
-                'admin' => $admin_user,
-                'is_public' => $isPublic,
-                'is_enabled' => $isEnabled,
-                'allow_comments' => $allowComments,
-                'users' => $users,
-                'status' => $status,
-            ];
-
-            $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplication(), $parameters, $output);
-            if (0 !== $ret) {
-                $output->writeln('Failed to create studio' . json_encode($parameters, JSON_THROW_ON_ERROR) . ' error code: ' . $ret);
-            }
-            ++$i;
-        }
+      $ret = CommandHelper::executeSymfonyCommand('catrobat:studio', $this->getApplication(), $parameters, $output);
+      if (0 !== $ret) {
+        $output->writeln('Failed to create studio'.json_encode($parameters, JSON_THROW_ON_ERROR).' error code: '.$ret);
+      }
+      ++$i;
     }
+  }
 
-    private function getRandomStatus(): string
-    {
-        $statuses = ['pending', 'declined'];
-        return $statuses[array_rand($statuses)];
-    }
+  private function getRandomStatus(): string
+  {
+    $statuses = ['pending', 'declined'];
+
+    return $statuses[array_rand($statuses)];
+  }
 
   /**
    * @throws \Exception

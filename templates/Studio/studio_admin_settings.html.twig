@@ -65,10 +65,11 @@
             'name': 'is_public'
           }
         } %}
+        {% if not  studio.isPublic %}
         <h3>Pending Join Requests</h3>
         <ul id="pending-join-requests">
           {% for request in pending_join_requests %}
-            <li class="mb-3" style="list-style: none;">
+            <li class="mb-3" id="studio-setting-studio-pending-join-{{ request.id }}"style="list-style: none;">
             {% include 'components/switch.html.twig' with {
               'switch':
               {
@@ -84,14 +85,15 @@
         <h3>Approved Join Requests</h3>
         <ul>
           {% for request in approved_join_requests %}
-            <li  class="mb-3 " style="list-style: none;">{{ request.user }}</li>
+            <li  class="mb-3" id="studio-setting-studio-approved-join-{{ request.id }}"style="list-style: none;">{{ request.user }}</li>
           {% endfor %}
         </ul>
         <h3>Declined Join Requests</h3>
         <ul id="declined-join-requests">
           {% for request in declined_join_requests %}
-            <li class="mb-3 " style="list-style: none;">
-              {% include 'components/switch.html.twig' with {
+            <li class="mb-3" id="studio-setting-studio-declined-join-{{ request.id }}" style="list-style: none;">
+
+            {% include 'components/switch.html.twig' with {
                 'switch':
                 {
                   'id': 'studio-setting__switch-studio-declined-join-' ~ request.id,
@@ -104,6 +106,7 @@
             </li>
           {% endfor %}
         </ul>
+        {% endif %}
       </form>
     </div>
   </div>

@@ -4,13 +4,11 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\EntityRepository\Studios\StudioRepository;
-use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
 use App\DB\Generator\MyUuidGenerator;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-
 
 /**
  * @ORM\Entity(repositoryClass=StudioRepository::class)
@@ -82,22 +80,23 @@ class Studio
    */
   protected Collection $user_comments;
 
-    /**
-     * @ORM\OneToMany(
-     *     targetEntity=StudioJoinRequest::class,
-     *     mappedBy="studio",
-     *     fetch="EXTRA_LAZY",
-     *     cascade={"persist", "remove"},
-     *     orphanRemoval=true
-     * )
-     */
-    protected Collection $join_requests;
-    public function __construct()
-    {
-        $this->join_requests = new ArrayCollection();
-    }
+  /**
+   * @ORM\OneToMany(
+   *     targetEntity=StudioJoinRequest::class,
+   *     mappedBy="studio",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"persist", "remove"},
+   *     orphanRemoval=true
+   * )
+   */
+  protected Collection $join_requests;
 
-    public function getId(): ?string
+  public function __construct()
+  {
+    $this->join_requests = new ArrayCollection();
+  }
+
+  public function getId(): ?string
   {
     return $this->id;
   }
@@ -205,10 +204,8 @@ class Studio
     return $this;
   }
 
-    public function getJoinRequests(): Collection
-    {
-        return $this->join_requests;
-    }
-
+  public function getJoinRequests(): Collection
+  {
+    return $this->join_requests;
+  }
 }
-

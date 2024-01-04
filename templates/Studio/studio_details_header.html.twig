@@ -73,9 +73,10 @@
       {% endif %}
     </div>
 
-    <div class="col-3">
-        {% if user_role == 'admin' %}
-            {# <!--
+      <div class="col-3">
+          {% if user_name %}
+              {% if user_role == 'admin' %}
+                  {# <!--
             <div class="position-relative">
                 <div class="studio-detail__header__details__button--upload-image d-flex">
                     <div>
@@ -98,52 +99,42 @@
                 <input type="submit" style="display: none;">
             </form>
              --> #}
+              {% elseif  not status_public and status_private != 'pending' and status_private != 'declined' %}
+                  <button class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                          data-url="{{ path('studio_join', {'id': studio.id}) }}">
+                      {{ 'studio.join'|trans({}, 'catroweb') }}
+                  </button>
+              {% elseif status_private == 'pending' %}
+                  <button class="studio-detail__header__details__pending-button btn btn-outline-primary btn-block requestPending">
+                      {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+                  </button>
+              {% elseif status_private == 'declined' %}
+                  <button class="studio-detail__header__details__declined-button btn btn-outline-primary btn-block requestDecline">
+                      {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+                  </button>
+              {% elseif status_private == 'approved' or status_public  %}
+                  <button class="studio-detail__header__details__leave-button btn btn-outline-primary btn-block ajaxRequestJoinLeaveReport ajaxRequestLeave"
+                          data-url="{{ path('studio_leave', {'id': studio.id }) }}">
+                      {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                  </button>
+              {% endif %}
+          {% else %}
+              <a href="{{ path('login') }}" class="studio-detail__header__details__join-button btn btn-outline-primary btn-block">
+                  {{ "studio.join" |trans({}, 'catroweb') }}
+              </a>
+          {% endif %}
+      </div>
 
-        {% elseif user_role is null and status != 'pending' and status != 'declined' %}
-            {% if user_name %}
-                <button class="studio-detail__header__details__join-button btn btn-primary btn-block ajaxRequestJoinLeaveReport" data-url="{{ path('studio_join', {'id': studio.id}) }}">
-                    {{ "studio.join" |trans({}, 'catroweb') }}
-                </button>
-            {% else %}
-                <a href="{{ path('login') }}" class="studio-detail__header__details__join-button btn btn-primary btn-block">
-                    {{ "studio.join" |trans({}, 'catroweb') }}
-                </a>
-            {% endif %}
-        {% elseif status == 'pending' %}
-            {% if user_name %}
-                <button class="btn btn-outline-primary btn-block">
-                    {{ 'studio.details.pending'|trans({}, 'catroweb') }}
-                </button>
-            {% else %}
-                <a href="{{ path('login') }}" class="btn btn-outline-primary btn-block">
-                    {{ 'studio.details.pending'|trans({}, 'catroweb') }}
-                </a>
-            {% endif %}
-
-        {% elseif status == 'declined' %}
-            {% if user_name %}
-                <button class="btn btn-outline-primary btn-block">
-                    {{ 'studio.details.decline'|trans({}, 'catroweb') }}
-                </button>
-            {% else %}
-                <a href="{{ path('login') }}" class="btn btn-outline-primary btn-block">
-                    {{ 'studio.details.decline'|trans({}, 'catroweb') }}
-                </a>
-            {% endif %}
-        {% elseif status == 'approved' or status == 'joined' %}
-            {% if user_name %}
-                <button class="btn btn-outline-primary btn-block">
-                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
-                </button>
-            {% else %}
-                <a href="{{ path('login') }}" class="btn btn-outline-primary btn-block">
-                    {{ 'studio.details.leave'|trans({}, 'catroweb') }}
-                </a>
-            {% endif %}
-        {% endif %}
-
-    </div>
   </div>
 
   {% include 'Studio/studio_details_tabs.html.twig' %}
 </div>
+
+
+
+
+
+
+
+
+

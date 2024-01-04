@@ -20,7 +20,15 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class StudioManager
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected StudioRepository $studio_repository, protected StudioActivityRepository $studio_activity_repository, protected StudioProgramRepository $studio_project_repository, protected StudioUserRepository $studio_user_repository, protected UserCommentRepository $user_comment_repository,protected StudioJoinRequestRepository $studio_join_request_repository) {}
+  public function __construct(
+    protected EntityManagerInterface $entity_manager,
+    protected StudioRepository $studio_repository,
+    protected StudioActivityRepository $studio_activity_repository,
+    protected StudioProgramRepository $studio_project_repository,
+    protected StudioUserRepository $studio_user_repository,
+    protected UserCommentRepository $user_comment_repository,
+    protected StudioJoinRequestRepository $studio_join_request_repository
+  ) {}
 
   public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): Studio
   {
@@ -394,92 +402,77 @@ class StudioManager
     $this->entity_manager->persist($studio);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($studio);
+
     return $studio;
   }
-    public function addJoinRequest(StudioJoinRequest $joinRequest,Studio $studio): void
-    {
-        if (!$studio->getJoinRequests()->contains($joinRequest))
-        {
-            $studio->getJoinRequests()->add($joinRequest);
-        }
-    }
-    public function removeJoinRequest(StudioJoinRequest $joinRequest, Studio $studio): void
-    {
-        if ($studio->getJoinRequests()->removeElement($joinRequest)) {
-            if ($joinRequest->getStudio() === $studio) {
-                $joinRequestId = $joinRequest->getId();
-                $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
-            }
-        }
+
+  public function removeJoinRequest(StudioJoinRequest $joinRequest): void
+  {
+    $joinRequestId = $joinRequest->getId();
+    $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
+  }
+
+  public function findJoinRequestByUserAndStudio(User $user, Studio $studio): ?StudioJoinRequest
+  {
+    return $this->studio_join_request_repository->findJoinRequestByUserAndStudio($user, $studio);
+  }
+
+  public function setJoinRequest(User $user, Studio $studio, string $status): ?StudioJoinRequest
+  {
+    if (is_null($this->findJoinRequestByUserAndStudio($user, $studio))) {
+      $joinRequest = new StudioJoinRequest();
+      $joinRequest->setUser($user);
+      $joinRequest->setStudio($studio);
+      $joinRequest->setStatus($status);
+      $this->entity_manager->persist($joinRequest);
+      $this->entity_manager->flush();
+      $this->entity_manager->refresh($joinRequest);
+
+      return $joinRequest;
     }
 
-    public function findJoinRequestByUserAndStudio(User $user, Studio $studio): ?StudioJoinRequest
-    {
-       return $this->studio_join_request_repository->findJoinRequestByUserAndStudio($user,$studio);
+    return null;
+  }
+
+  public function findPendingJoinRequests(Studio $studio): array
+  {
+    return $this->studio_join_request_repository->findPendingJoinRequests($studio);
+  }
+
+  public function findApprovedJoinRequests(Studio $studio): array
+  {
+    return $this->studio_join_request_repository->findApprovedJoinRequests($studio);
+  }
+
+  public function findDeclinedJoinRequests(Studio $studio): array
+  {
+    return $this->studio_join_request_repository->findDeclinedJoinRequests($studio);
+  }
+
+  public function findJoinRequestById(int $joinRequestId): ?StudioJoinRequest
+  {
+    return $this->studio_join_request_repository->findJoinRequestById($joinRequestId);
+  }
+
+  public function updateJoinRequests(StudioJoinRequest $joinRequest, string $switchValue, User $user, User $admin, Studio $studio): StudioJoinRequest
+  {
+    if ('pending' == $joinRequest->getStatus() && '1' == $switchValue) {
+      $joinRequest->setStatus('approved');
+      $this->addUserToStudio($admin, $studio, $user);
+    /* ---Notification*-- */
+    } elseif ('pending' == $joinRequest->getStatus() && '0' == $switchValue) {
+      $joinRequest->setStatus('declined');
+    /* ---Notification*-- */
+    } elseif ('declined' == $joinRequest->getStatus() && '0' == $switchValue) {
+      $joinRequest->setStatus('approved');
+      $this->addUserToStudio($admin, $studio, $user);
+      /* ---Notification*-- */
     }
 
-    public function setJoinRequest(User $user, Studio $studio,string $status): ?StudioJoinRequest
-    {
-        if (is_null($this->findJoinRequestByUserAndStudio($user,$studio)))
-        {
-            $joinRequest = new StudioJoinRequest();
-            $joinRequest->setUser($user);
-            $joinRequest->setStudio($studio);
-            $joinRequest->setStatus($status);
-            $this->entity_manager->persist($joinRequest);
-            $this->entity_manager->flush();
-            $this->entity_manager->refresh($joinRequest);
-            return $joinRequest;
-        }
-        return null;
-    }
-    public function findPendingJoinRequests(Studio $studio): array
-    {
-        return  $this->studio_join_request_repository->findPendingJoinRequests($studio);
-    }
+    $this->entity_manager->persist($joinRequest);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($joinRequest);
 
-    public function findApprovedJoinRequests(Studio $studio): array
-    {
-        return $this->studio_join_request_repository->findApprovedJoinRequests($studio);
-    }
-
-    public function findDeclinedJoinRequests(Studio $studio): array
-    {
-        return  $this->studio_join_request_repository->findDeclinedJoinRequests($studio);
-    }
-
-    public function findJoinRequestById(int $joinRequestId): ?StudioJoinRequest
-    {
-        return $this->studio_join_request_repository->findJoinRequestById($joinRequestId);
-    }
-    public function updateJoinRequests(StudioJoinRequest $joinRequest,String $switchValue,User $user, User $admin,Studio $studio): StudioJoinRequest
-    {
-        if($joinRequest->getStatus()=='pending')
-        {
-            if($switchValue=="1")
-            {
-                $joinRequest->setStatus('approved');
-                $this->addUserToStudio( $admin,  $studio,  $user);
-                /*---Notification*--*/
-            }
-            else
-            {
-                $joinRequest->setStatus('declined');
-                /*---Notification*--*/
-            }
-        }
-       elseif($joinRequest->getStatus()=='declined')
-        {
-            if($switchValue=="0")
-            {
-                $joinRequest->setStatus('approved');
-                $this->addUserToStudio( $admin,  $studio,  $user);
-                /*---Notification*--*/
-            }
-        }
-        $this->entity_manager->persist($joinRequest);
-        $this->entity_manager->flush();
-        $this->entity_manager->refresh($joinRequest);
-        return $joinRequest;
-    }
+    return $joinRequest;
+  }
 }

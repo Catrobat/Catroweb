@@ -183,64 +183,59 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 
-
-
-  let pendingJoinButton = document.querySelectorAll('#pending-join-requests button.mdc-switch');
-  let buttonsDeclined = document.querySelectorAll('#declined-join-requests button.mdc-switch');
+  const pendingJoinButton = document.querySelectorAll(
+    '#pending-join-requests button.mdc-switch',
+  )
+  const buttonsDeclined = document.querySelectorAll(
+    '#declined-join-requests button.mdc-switch',
+  )
   pendingJoinButton.forEach(function (button) {
     button.addEventListener('click', function () {
-
-      let buttonAriaChecked = button.getAttribute('aria-checked');
-      let labelFor = button.getAttribute('id');
-      let label = document.querySelector(`label[for="${labelFor}"]`);
+      const buttonAriaChecked = button.getAttribute('aria-checked')
+      const labelFor = button.getAttribute('id')
+      const label = document.querySelector(`label[for="${labelFor}"]`)
 
       if (buttonAriaChecked === 'true') {
         Swal.fire({
-
           title: `${label.textContent} gets declined`,
           text: 'Pending Join Requests Button!',
           icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      }
-      else{
+          confirmButtonText: 'OK',
+        })
+      } else {
         Swal.fire({
           title: `${label.textContent} gets approved`,
           text: 'Pending Join Requests!',
           icon: 'success',
-          confirmButtonText: 'OK'
-        });
+          confirmButtonText: 'OK',
+        })
       }
-    });
-  });
-
-
+    })
+  })
 
   buttonsDeclined.forEach(function (button) {
     button.addEventListener('click', function () {
-      let buttonAriaChecked = button.getAttribute('aria-checked');
-      let labelFor = button.getAttribute('id');
-      let label = document.querySelector(`label[for="${labelFor}"]`);
+      const buttonAriaChecked = button.getAttribute('aria-checked')
+      const labelFor = button.getAttribute('id')
+      const label = document.querySelector(`label[for="${labelFor}"]`)
 
       if (buttonAriaChecked === 'true') {
         Swal.fire({
-
           title: `${label.textContent} stay declined`,
           text: 'Declined Join Requests Button Clicked!',
           icon: 'success',
-          confirmButtonText: 'OK'
-        });
-      }
-      else{
+          confirmButtonText: 'OK',
+        })
+      } else {
         Swal.fire({
           title: `${label.textContent} gets approved`,
           text: 'Declined Join Requests Button Clicked!',
           icon: 'success',
-          confirmButtonText: 'OK'
-        });
+          confirmButtonText: 'OK',
+        })
       }
-    });
-  });
+    })
+  })
 })
 function makeAjaxRequest(url) {
   fetch(url, {

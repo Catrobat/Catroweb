@@ -16,27 +16,29 @@ class FeatureFlagManager
     protected EntityManagerInterface $entityManager,
     protected ParameterBagInterface $parameter_bag
   ) {
-    $this->defaultFlags = include $parameter_bag->get('features');
+    if ($this->entityManager->getConnection()->isConnected()) {
+      $this->defaultFlags = include $parameter_bag->get('features');
 
-    $flagMap = [];
-    foreach ($this->defaultFlags as $name => $value) {
-      $flagMap[$name] = new FeatureFlag($name, $value);
-      $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $name]);
+      $flagMap = [];
+      foreach ($this->defaultFlags as $name => $value) {
+        $flagMap[$name] = new FeatureFlag($name, $value);
+        $flag = $this->entityManager->getRepository(FeatureFlag::class)->findOneBy(['name' => $name]);
 
-      if (!$flag) {
-        $flag = $flagMap[$name];
-        $this->entityManager->persist($flag);
+        if (!$flag) {
+          $flag = $flagMap[$name];
+          $this->entityManager->persist($flag);
+        }
       }
-    }
 
-    $entityManagerFlags = $this->entityManager->getRepository(FeatureFlag::class)->findAll();
-    foreach ($entityManagerFlags as $flag) {
-      $flagName = $flag->getName();
-      if (!array_key_exists($flagName, $flagMap)) {
-        $this->entityManager->remove($flag);
+      $entityManagerFlags = $this->entityManager->getRepository(FeatureFlag::class)->findAll();
+      foreach ($entityManagerFlags as $flag) {
+        $flagName = $flag->getName();
+        if (!array_key_exists($flagName, $flagMap)) {
+          $this->entityManager->remove($flag);
+        }
       }
+      $this->entityManager->flush();
     }
-    $this->entityManager->flush();
   }
 
   public function isEnabled(string $flagName): ?bool
