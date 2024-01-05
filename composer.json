@@ -91,7 +91,7 @@
     "symfony/web-profiler-bundle": "6.4.*",
     "vimeo/psalm": "5.18.*",
     "wapmorgan/php-deprecation-detector": "2.0.*",
-    "textalk/websocket": "1.5.8.*"
+    "textalk/websocket": "1.6.3"
   },
   "config": {
     "platform": {
