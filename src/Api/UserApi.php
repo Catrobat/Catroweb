@@ -155,4 +155,10 @@ class UserApi extends AbstractApiController implements UserApiInterface
 
     return null;
   }
+
+    public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): null|array|object
+    {
+        $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+        return null;
+    }
 }
