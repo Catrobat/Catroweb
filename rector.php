@@ -20,7 +20,7 @@ return static function (RectorConfig $rectorConfig): void {
     //    SymfonyLevelSetList::UP_TO_SYMFONY_60,
     //    SymfonySetList::SYMFONY_CODE_QUALITY,
     //    SymfonySetList::SYMFONY_CONSTRUCTOR_INJECTION,
-    \Rector\Set\ValueObject\SetList::DEAD_CODE,
+    Rector\Set\ValueObject\SetList::DEAD_CODE,
   ]);
 
   $rectorConfig->skip([__DIR__.'/src/System/Testing/DataFixtures/DataBaseUtils.php']);

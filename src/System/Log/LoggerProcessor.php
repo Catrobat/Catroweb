@@ -12,7 +12,9 @@ class LoggerProcessor
 {
   private const ANON_USER = 'anonymous';
 
-  public function __construct(private readonly RequestStack $request_stack, private readonly TokenStorageInterface $security_token_storage) {}
+  public function __construct(private readonly RequestStack $request_stack, private readonly TokenStorageInterface $security_token_storage)
+  {
+  }
 
   public function __invoke(LogRecord $record): LogRecord
   {

@@ -241,7 +241,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->alias(\Sonata\UserBundle\Entity\UserManager::class, 'sonata.user.manager.user');
+  $services->alias(Sonata\UserBundle\Entity\UserManager::class, 'sonata.user.manager.user');
 
   $services->alias(UserProviderInterface::class, 'sonata.user.security.user_provider');
 

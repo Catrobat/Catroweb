@@ -9,7 +9,9 @@ use App\Api\Services\AuthenticationManager;
  */
 abstract class AbstractApiFacade implements ApiFacadeInterface
 {
-  public function __construct(protected AuthenticationManager $authentication_manager) {}
+  public function __construct(protected AuthenticationManager $authentication_manager)
+  {
+  }
 
   public function getAuthenticationManager(): AuthenticationManager
   {

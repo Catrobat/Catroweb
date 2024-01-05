@@ -7,7 +7,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ReportInsertEvent extends Event
 {
-  public function __construct(protected ?string $category, protected ?string $note, protected ProgramInappropriateReport $program) {}
+  public function __construct(protected ?string $category, protected ?string $note, protected ProgramInappropriateReport $program)
+  {
+  }
 
   public function getCategory(): ?string
   {

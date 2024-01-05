@@ -14,7 +14,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeViewController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator) {}
+  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator)
+  {
+  }
 
   #[Route(path: '/project/{id}/code_view', name: 'code_view', methods: ['GET'])]
   public function view(string $id): Response
