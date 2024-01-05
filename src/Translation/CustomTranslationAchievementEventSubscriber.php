@@ -12,7 +12,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class CustomTranslationAchievementEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProgramManager $program_manager, private readonly LoggerInterface $logger) {}
+  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProgramManager $program_manager, private readonly LoggerInterface $logger)
+  {
+  }
 
   public function onTerminateEvent(TerminateEvent $event): void
   {

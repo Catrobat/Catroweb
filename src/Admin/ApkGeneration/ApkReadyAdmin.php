@@ -32,7 +32,8 @@ class ApkReadyAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository
-  ) {}
+  ) {
+  }
 
   public function getThumbnailImageUrl(Program $object): string
   {

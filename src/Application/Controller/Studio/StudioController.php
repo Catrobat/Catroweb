@@ -20,7 +20,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StudioController extends AbstractController
 {
-  public function __construct(protected StudioManager $studio_manager, protected UserManager $user_manager, protected ProgramManager $program_manager, protected ScreenshotRepository $screenshot_repository, protected TranslatorInterface $translator, protected ParameterBagInterface $parameter_bag) {}
+  public function __construct(protected StudioManager $studio_manager, protected UserManager $user_manager, protected ProgramManager $program_manager, protected ScreenshotRepository $screenshot_repository, protected TranslatorInterface $translator, protected ParameterBagInterface $parameter_bag)
+  {
+  }
 
   #[Route(path: '/studios', name: 'studios_overview', methods: ['GET'])]
   public function studiosOverview(Request $request): Response

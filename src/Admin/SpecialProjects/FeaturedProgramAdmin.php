@@ -34,7 +34,8 @@ class FeaturedProgramAdmin extends AbstractAdmin
   public function __construct(
     private readonly ImageRepository $featured_image_repository,
     private readonly ProgramManager $program_manager
-  ) {}
+  ) {
+  }
 
   /**
    * @param FeaturedProgram $object

@@ -14,7 +14,9 @@ use PHPUnit\Framework\TestCase;
  */
 class CategoriesTest extends TestCase
 {
-  protected function setUp(): void {}
+  protected function setUp(): void
+  {
+  }
 
   public function testMustDetectAllControlBricks(): void
   {

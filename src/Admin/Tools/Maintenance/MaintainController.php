@@ -23,7 +23,8 @@ class MaintainController extends CRUDController
     private readonly string $file_storage_dir,
     private readonly string $apk_dir,
     private readonly string $log_dir
-  ) {}
+  ) {
+  }
 
   /**
    * @throws \Exception

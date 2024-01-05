@@ -21,7 +21,8 @@ class SendMailToUserController extends CRUDController
     protected UserManager $user_manager,
     protected LoggerInterface $logger,
     private readonly ResetPasswordHelperInterface $resetPasswordHelper
-  ) {}
+  ) {
+  }
 
   public function listAction(Request $request = null): Response
   {

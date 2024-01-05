@@ -245,7 +245,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     $this->addFileFlavorsCondition($qb, $flavor, 'f', true);
 
     if (null !== $package_name && '' !== trim($package_name)) {
-      $qb->join(\App\DB\Entity\MediaLibrary\MediaPackageCategory::class, 'c')
+      $qb->join(MediaPackageCategory::class, 'c')
         ->join(\App\DB\Entity\MediaLibrary\MediaPackage::class, 'p')
         ->andWhere('f.category = c')
         ->andWhere('c MEMBER OF p.categories')

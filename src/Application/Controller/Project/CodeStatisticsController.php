@@ -13,7 +13,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeStatisticsController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator) {}
+  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator)
+  {
+  }
 
   #[Route(path: '/project/{id}/code_statistics', name: 'code_statistics', methods: ['GET'])]
   public function view(string $id): Response

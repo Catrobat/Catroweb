@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UtilityApi extends AbstractApiController implements UtilityApiInterface
 {
-  public function __construct(private readonly UtilityApiFacade $facade) {}
+  public function __construct(private readonly UtilityApiFacade $facade)
+  {
+  }
 
   public function healthGet(int &$responseCode, array &$responseHeaders): void
   {

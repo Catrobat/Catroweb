@@ -23,7 +23,8 @@ class CronJobsAdminController extends CRUDController
     protected CronJobRepository $cron_job_repository,
     protected EntityManagerInterface $entity_manager,
     protected KernelInterface $kernel
-  ) {}
+  ) {
+  }
 
   public function listAction(Request $request = null): Response
   {

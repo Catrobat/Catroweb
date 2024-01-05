@@ -25,7 +25,9 @@ class BuildApkController extends AbstractController
     private readonly ProgramManager $program_manager,
     private readonly JenkinsDispatcher $dispatcher,
     private readonly ApkRepository $apk_repository,
-    private readonly array $arr_jenkins_config) {}
+    private readonly array $arr_jenkins_config)
+  {
+  }
 
   /**
    * @throws \Exception

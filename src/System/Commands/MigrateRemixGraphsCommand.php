@@ -368,7 +368,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->start();
     $number_imported_programs = 0;
 
-    $metadata = $this->entity_manager->getClassMetaData(\App\DB\Entity\Project\Program::class);
+    $metadata = $this->entity_manager->getClassMetaData(Program::class);
     $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     $batch_size = 300;

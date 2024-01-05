@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserApi extends AbstractApiController implements UserApiInterface
 {
-  public function __construct(private readonly UserApiFacade $facade) {}
+  public function __construct(private readonly UserApiFacade $facade)
+  {
+  }
 
   /**
    * @throws \Exception
