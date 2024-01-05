@@ -43,7 +43,7 @@
     "sonata-project/user-bundle": "5.10.*",
     "symfony/acl-bundle": "2.3.*",
     "symfony/asset": "6.4.*",
-    "symfony/cache": "6.4.*",
+    "symfony/cache": "7.0.*",
     "symfony/console": "6.4.*",
     "symfony/dotenv": "6.4.*",
     "symfony/flex": "2.4.*",
