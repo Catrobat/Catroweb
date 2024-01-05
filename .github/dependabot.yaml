@@ -31,7 +31,7 @@ updates:
     groups:
       material:
         patterns:
-          - "@material/*"
+          - '@material/*'
 
   - package-ecosystem: 'composer'
     directory: '/'
@@ -45,10 +45,10 @@ updates:
     groups:
       symfony:
         patterns:
-          - "symfony/*"
+          - 'symfony/*'
       phpstan:
         patterns:
-          - "phpstan/*"
+          - 'phpstan/*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
