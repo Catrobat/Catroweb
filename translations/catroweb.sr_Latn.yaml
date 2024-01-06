@@ -143,6 +143,7 @@ programs:
   most:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
+  popular: Popular projects
   random: Nasumični projekti
   related: Povezani projekti
   downloads: '%downloads% preuzimanja'

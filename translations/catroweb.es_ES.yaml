@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Más visto
     downloaded: Más descargados
+  popular: Popular projects
   random: Proyectos aleatorios
   related: Proyectos relacionados
   downloads: '%downloads% descargas'

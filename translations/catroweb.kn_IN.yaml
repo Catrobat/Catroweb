@@ -144,6 +144,7 @@ programs:
   most:
     viewed: ಬಹಳ ವೀಕ್ಷಿಸಿದ
     downloaded: ಅತ್ಯಂತ ಡೌನ್ಲೋಡಾದ
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads%ಡೌನ್ಲೋಡ್ಸ್'

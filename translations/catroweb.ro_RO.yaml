@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Cele mai vizualizate
     downloaded: Cele mai descărcate
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% descărcări'

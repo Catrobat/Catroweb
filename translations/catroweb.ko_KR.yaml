@@ -143,6 +143,7 @@ programs:
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
+  popular: Popular projects
   random: 랜덤 프로젝트
   related: 관련된 프로젝트
   downloads: '%downloads% 다운로드'

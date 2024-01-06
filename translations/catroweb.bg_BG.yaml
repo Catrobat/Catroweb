@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Най-преглеждани
     downloaded: Най-изтегляни
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% за сваляне'

@@ -144,6 +144,7 @@ programs:
   most:
     viewed: ఎక్కువ చుడబడినవి
     downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
+  popular: Popular projects
   random: యాదృచ్ఛిక ప్రాజెక్టులు
   related: సంబంధిత ప్రాజెక్టులు
   downloads: '%downloads% డౌన్లోడ్లు'

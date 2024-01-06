@@ -144,6 +144,7 @@ programs:
   most:
     viewed: 最受關注
     downloaded: 下載次數最多
+  popular: Popular projects
   random: 隨機項目
   related: 相關項目
   downloads: '%downloads% 下載'
