@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Πιο προβεβλημμένα
     downloaded: Πιο κατεβασμένα
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% λήψεις'

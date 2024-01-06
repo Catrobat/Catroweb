@@ -144,6 +144,7 @@ programs:
   most:
     viewed: সর্বোচ্চ  পরিদর্শন
     downloaded: সর্বোচ্চ ডাউনলোডকৃত
+  popular: Popular projects
   random: এলোমেলো প্রকল্প
   related: সংশ্লিষ্ট প্রকল্প
   downloads: '%downloads% ডাউনলোড'

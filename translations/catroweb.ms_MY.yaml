@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Most viewed
     downloaded: Most downloaded
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: 'Muat turn %downloads%'

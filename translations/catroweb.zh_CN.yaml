@@ -144,6 +144,7 @@ programs:
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
+  popular: Popular projects
   random: 随机项目
   related: 相关项目
   downloads: '%downloads% 下载'

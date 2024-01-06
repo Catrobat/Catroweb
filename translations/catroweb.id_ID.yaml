@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Paling banyak dilihat
     downloaded: Paling banyak diunduh
+  popular: Popular projects
   random: Proyek acak
   related: Proyek terkait
   downloads: '%downloads% unduhan'

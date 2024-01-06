@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Zilizoangaliwa zaidi
     downloaded: Zilizopakuliwa zaidi
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% downloads'

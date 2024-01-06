@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
+  popular: Popular projects
   random: Random projects
   related: Slicni Projekti
   downloads: '%downloads% preuzimanja'

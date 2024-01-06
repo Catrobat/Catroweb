@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Mest visade
     downloaded: Mest nedladdningar
+  popular: Popular projects
   random: Slumpmässiga projekt
   related: Relaterade projekt
   downloads: '%downloads% nedladdningar'

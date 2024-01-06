@@ -144,6 +144,7 @@ programs:
   most:
     viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
     downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
+  popular: Popular projects
   random: ਬੇਤਰਤੀਬੇ ਪ੍ਰੋਜੈਕਟ
   related: ਸਬੰਧਤ ਪ੍ਰੋਜੈਕਟ
   downloads: '%downloads%ਡਾਉਨਲੋਡਸ'

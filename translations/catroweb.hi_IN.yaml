@@ -144,6 +144,7 @@ programs:
   most:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
+  popular: Popular projects
   random: कुछ अन्य प्रोजेक्ट
   related: संबंधित प्रोजेक्ट
   downloads: '%downloads% डाउनलोड'
