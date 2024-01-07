@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Meest bekeken
     downloaded: Meest gedownload
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% downloads'

@@ -18,7 +18,8 @@ class UserDataReportController extends CRUDController
     protected UserManager $user_manager,
     protected NotificationRepository $notification_repository,
     protected EntityManagerInterface $entity_manager
-  ) {}
+  ) {
+  }
 
   /**
    * @param string $id The id of the user which data should be shown

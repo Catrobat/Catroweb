@@ -33,7 +33,8 @@ class ApiTokenAuthenticator extends AbstractAuthenticator
   public function __construct(
     private readonly EntityManagerInterface $em,
     protected TranslatorInterface $translator
-  ) {}
+  ) {
+  }
 
   /**
    * Called on every request to decide if this authenticator should be

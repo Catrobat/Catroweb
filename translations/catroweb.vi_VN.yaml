@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Xem nhiều nhất
     downloaded: Tải về nhiều nhất
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% Tải về'

@@ -145,6 +145,7 @@ programs:
   most:
     viewed: Ең көп қаралды
     downloaded: Ең көп жүктелген
+  popular: Popular projects
   random: Кездейсоқ жобалар
   related: Қатысты жобалар
   downloads: '%downloads% жүктеп алулар'

@@ -18,7 +18,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ApkStatusController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator) {}
+  public function __construct(private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator)
+  {
+  }
 
   #[Route(path: '/ci/status/{id}', name: 'ci_status', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getApkStatusAction(string $id): JsonResponse

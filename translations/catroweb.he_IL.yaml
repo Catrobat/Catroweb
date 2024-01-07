@@ -144,6 +144,7 @@ programs:
   most:
     viewed: הנצפים ביותר
     downloaded: ההורדות הנפוצות ביותר
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% הורדות'

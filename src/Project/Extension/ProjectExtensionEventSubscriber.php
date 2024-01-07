@@ -9,7 +9,8 @@ class ProjectExtensionEventSubscriber implements EventSubscriberInterface
 {
   public function __construct(
     protected ProjectExtensionManager $extension_manager,
-  ) {}
+  ) {
+  }
 
   public function onEvent(ProgramBeforePersistEvent $event): void
   {

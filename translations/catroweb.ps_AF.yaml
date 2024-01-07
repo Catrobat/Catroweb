@@ -143,6 +143,7 @@ programs:
   most:
     viewed: ډیری لیدل شوي
     downloaded: ډیری ډاونلوډ شوی
+  popular: Popular projects
   random: تصادفي پروژې
   related: اړوندې پروژې
   downloads: '%downloads%ډاونلوډونه'

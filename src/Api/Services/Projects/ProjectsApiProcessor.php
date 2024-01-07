@@ -22,7 +22,9 @@ class ProjectsApiProcessor extends AbstractApiProcessor
     private readonly EntityManagerInterface $entity_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly ProgramFileRepository $file_repository,
-    private readonly ScreenshotRepository $screenshot_repository) {}
+    private readonly ScreenshotRepository $screenshot_repository)
+  {
+  }
 
   /**
    * @throws \Exception

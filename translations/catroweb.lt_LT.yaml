@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Daugiausiai žiūretos
     downloaded: Labiausiai Atsisiųstos
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% Atsisiuntimai'

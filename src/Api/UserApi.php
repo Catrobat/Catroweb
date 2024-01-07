@@ -18,7 +18,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class UserApi extends AbstractApiController implements UserApiInterface
 {
-  public function __construct(private readonly UserApiFacade $facade) {}
+  public function __construct(private readonly UserApiFacade $facade)
+  {
+  }
 
   /**
    * @throws \Exception
@@ -150,6 +152,13 @@ class UserApi extends AbstractApiController implements UserApiInterface
     // Do not reveal whether a user account was found or not.
     $this->facade->getEventDispatcher()->dispatch(new PasswordResetRequestedEvent($reset_password_request->getEmail(), $accept_language));
     $responseCode = Response::HTTP_NO_CONTENT;
+
+    return null;
+  }
+
+  public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): null|array|object
+  {
+    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
 
     return null;
   }

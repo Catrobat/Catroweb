@@ -144,6 +144,7 @@ programs:
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
+  popular: Popular projects
   random: ランダムなプロジェクト
   related: 関連プロジェクト
   downloads: '%downloads% ダウンロード'

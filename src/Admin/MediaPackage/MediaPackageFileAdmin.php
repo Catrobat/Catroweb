@@ -25,7 +25,8 @@ class MediaPackageFileAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly MediaPackageFileRepository $media_package_file_repository
-  ) {}
+  ) {
+  }
 
   public function prePersist($object): void
   {

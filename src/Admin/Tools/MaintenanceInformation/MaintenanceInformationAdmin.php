@@ -23,7 +23,8 @@ class MaintenanceInformationAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly EntityManagerInterface $entityManager,
-  ) {}
+  ) {
+  }
 
   // Access the database to retrieve a list of entities
   private function updateLtmCodes(): void

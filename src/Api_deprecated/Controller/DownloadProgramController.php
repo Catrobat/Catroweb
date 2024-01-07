@@ -13,7 +13,9 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DownloadProgramController extends AbstractController
 {
-  public function __construct(protected ProjectsApi $projectsApi, protected LoggerInterface $logger) {}
+  public function __construct(protected ProjectsApi $projectsApi, protected LoggerInterface $logger)
+  {
+  }
 
   /**
    * @deprecated

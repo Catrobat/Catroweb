@@ -146,6 +146,7 @@ programs:
   most:
     viewed: เข้าดูมากที่สุด
     downloaded: ดาวน์โหลดมากที่สุด
+  popular: Popular projects
   random: โครงการสุ่ม
   related: โครงการที่เกี่ยวข้อง
   downloads: '%downloads% ดาวน์โหลด'
