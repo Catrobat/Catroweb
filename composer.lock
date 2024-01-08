@@ -13170,16 +13170,16 @@
         },
         {
             "name": "symfonycasts/verify-email-bundle",
-            "version": "v1.16.0",
+            "version": "v1.16.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SymfonyCasts/verify-email-bundle.git",
-                "reference": "b04714a7fa76ef3ba87e8747c87c5958dcc51979"
+                "reference": "418f33c5112bb2ee2ae7132e52100b279264ff52"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/b04714a7fa76ef3ba87e8747c87c5958dcc51979",
-                "reference": "b04714a7fa76ef3ba87e8747c87c5958dcc51979",
+                "url": "https://api.github.com/repos/SymfonyCasts/verify-email-bundle/zipball/418f33c5112bb2ee2ae7132e52100b279264ff52",
+                "reference": "418f33c5112bb2ee2ae7132e52100b279264ff52",
                 "shasum": ""
             },
             "require": {
@@ -13210,9 +13210,9 @@
             "description": "Simple, stylish Email Verification for Symfony",
             "support": {
                 "issues": "https://github.com/SymfonyCasts/verify-email-bundle/issues",
-                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.16.0"
+                "source": "https://github.com/SymfonyCasts/verify-email-bundle/tree/v1.16.1"
             },
-            "time": "2023-12-18T21:54:19+00:00"
+            "time": "2024-01-05T15:51:10+00:00"
         },
         {
             "name": "twig/extra-bundle",
