@@ -6,7 +6,7 @@ use App\Admin\SpecialProjects\Forms\FeaturedImageConstraint;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\FeaturedProgram;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -33,7 +33,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ImageRepository $featured_image_repository,
-    private readonly ProgramManager $program_manager
+    private readonly ProjectManager $program_manager
   ) {
   }
 

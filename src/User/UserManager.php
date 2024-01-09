@@ -4,7 +4,7 @@ namespace App\User;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Security\PasswordGenerator;
 use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\TimeUtils;
@@ -25,7 +25,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
   {
   }
 

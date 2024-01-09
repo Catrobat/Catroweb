@@ -117,7 +117,7 @@ use App\Project\EventListener\ProjectPostUpdateNotifier;
 use App\Project\EventSubscriber\ProjectDownloadEventSubscriber;
 use App\Project\Extension\ProjectExtensionEventSubscriber;
 use App\Project\Extension\ProjectExtensionManager;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Project\Remix\RemixGraphManipulator;
 use App\Project\Remix\RemixManager;
 use App\Project\Remix\RemixSubgraphManipulator;
@@ -139,7 +139,7 @@ use App\Security\TokenGenerator;
 use App\Storage\ImageRepository;
 use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
-use App\System\Commands\Helpers\RemixManipulationProgramManager;
+use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\System\Log\LoggerProcessor;
 use App\System\Mail\MailerAdapter;
 use App\Translation\CustomTranslationAchievementEventSubscriber;
@@ -245,7 +245,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
 
   $services->alias(UserProviderInterface::class, 'sonata.user.security.user_provider');
 
-  $services->set(ProgramManager::class, ProgramManager::class)
+  $services->set(ProjectManager::class, ProjectManager::class)
     ->public()
   ;
 
@@ -253,7 +253,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set(RemixManipulationProgramManager::class, RemixManipulationProgramManager::class)
+  $services->set(RemixManipulationProjectManager::class, RemixManipulationProjectManager::class)
     ->public()
   ;
 

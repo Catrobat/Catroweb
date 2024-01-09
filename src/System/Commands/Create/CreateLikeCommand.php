@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +18,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateLikeCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager,
-    private readonly ProgramManager $remix_manipulation_program_manager,
+    private readonly ProjectManager $remix_manipulation_program_manager,
     private readonly EntityManagerInterface $entity_manager,
     private readonly NotificationManager $notification_service)
   {

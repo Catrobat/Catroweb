@@ -16,7 +16,7 @@ Feature: Projects should have credits where a custom translation can be defined
     And I go to "/app/project/2"
     And I wait for the page to be loaded
     And I wait 10000 milliseconds
-    When I click "#edit-program-button"
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     When I click "#add-translation-button"
     And I wait for AJAX to finish

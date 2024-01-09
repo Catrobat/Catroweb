@@ -5,7 +5,7 @@ namespace App\Application\Controller\Comments;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -84,7 +84,7 @@ class CommentsController extends AbstractController
   }
 
   #[Route(path: '/comment', name: 'comment', methods: ['POST'])]
-  public function postCommentAction(NotificationManager $notification_service, ProgramManager $program_manager): Response
+  public function postCommentAction(NotificationManager $notification_service, ProjectManager $program_manager): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();

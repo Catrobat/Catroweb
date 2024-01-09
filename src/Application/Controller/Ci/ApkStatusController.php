@@ -3,7 +3,7 @@
 namespace App\Application\Controller\Ci;
 
 use App\DB\Entity\Project\Program;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ApkStatusController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator)
+  public function __construct(private readonly ProjectManager $program_manager, private readonly TranslatorInterface $translator)
   {
   }
 

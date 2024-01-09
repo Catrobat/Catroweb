@@ -121,7 +121,7 @@
   <script>
     let data_space_values = [['name', 'value'],
       ['Used ({{ usedSpace }})',          {{ usedSpace_raw }}],
-      ['Programs ({{ programsSpace }})',  {{ programsSpace_raw }}],
+      ['Projects ({{ projectsSpace }})',  {{ projectsSpace_raw }}],
       {% for ro in RemovableObjects %}
       ['{{ ro.name }} ({{ ro.size }})',   {{ ro.size_raw }}],
       {% endfor %}

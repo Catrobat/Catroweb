@@ -1,6 +1,6 @@
 import $ from 'jquery'
 import { MDCSelect } from '@material/select'
-import { ProgramEditorDialog } from '../custom/ProgramEditorDialog'
+import { ProjectEditorDialog } from '../custom/ProjectEditorDialog'
 import { showCustomTopBarTitle } from '../layout/top_bar'
 import { DIALOG } from './ProjectEditorModel'
 
@@ -16,13 +16,13 @@ export function ProjectEditor(projectDescriptionCredits, programId, model) {
     document.querySelector('#edit-language-selector'),
   )
 
-  this.closeEditorDialog = new ProgramEditorDialog(
+  this.closeEditorDialog = new ProjectEditorDialog(
     projectDescriptionCredits.data('trans-close-editor-prompt'),
     projectDescriptionCredits.data('trans-save'),
     projectDescriptionCredits.data('trans-discard'),
   )
 
-  this.confirmDeleteDialog = new ProgramEditorDialog(
+  this.confirmDeleteDialog = new ProjectEditorDialog(
     projectDescriptionCredits.data('trans-confirm-delete'),
     projectDescriptionCredits.data('trans-cancel'),
     projectDescriptionCredits.data('trans-delete'),
