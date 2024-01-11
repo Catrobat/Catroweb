@@ -158,8 +158,13 @@ class UserApi extends AbstractApiController implements UserApiInterface
 
   public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): null|array|object
   {
-    $responseCode = Response::HTTP_NOT_IMPLEMENTED;
+    $users = $this->facade->getLoader()->getAllUsers($query, $limit, $offset);
 
-    return null;
+    $responseCode = Response::HTTP_OK;
+    $response = $this->facade->getResponseManager()->createUsersDataResponse($users, 'ALL');
+    $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
+    $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
+
+    return $response;
   }
 }

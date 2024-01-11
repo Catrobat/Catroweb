@@ -28,7 +28,7 @@ class UserResponseManager extends AbstractResponseManager
     if (empty($attributes)) {
       $attributes_list = ['id', 'username'];
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects', 'followers', 'following'];
+      $attributes_list = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects', 'followers', 'following', 'ranking_score'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
