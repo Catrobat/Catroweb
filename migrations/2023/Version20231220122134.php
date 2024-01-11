@@ -27,8 +27,6 @@ final class Version20231220122134 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE user_like_similarity_relation CHANGE similarity similarity NUMERIC(4, 3) DEFAULT \'0.000\' NOT NULL');
-        $this->addSql('ALTER TABLE user_remix_similarity_relation CHANGE similarity similarity NUMERIC(4, 3) DEFAULT \'0.000\' NOT NULL');
         $this->addSql('DROP INDEX UNIQ_957A64793F5D60E0 ON fos_user');
         $this->addSql('ALTER TABLE fos_user DROP ranking_score');
     }
