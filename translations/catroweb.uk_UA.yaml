@@ -145,7 +145,7 @@ programs:
   most:
     viewed: Найчастіше переглянуті
     downloaded: Найчастіше завантажувані
-  popular: Popular projects
+  popular: Популярні проєкти
   random: Випадкові проєкти
   related: Пов’язані проєкти
   downloads: '%downloads% завантажень'
