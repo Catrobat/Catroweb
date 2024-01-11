@@ -6,7 +6,9 @@ use App\Security\TokenGenerator;
 
 class ProxyTokenGenerator extends TokenGenerator
 {
-  public function __construct(private TokenGenerator $generator) {}
+  public function __construct(private TokenGenerator $generator)
+  {
+  }
 
   public function generateToken(): string
   {

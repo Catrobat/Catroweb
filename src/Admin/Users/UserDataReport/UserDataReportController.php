@@ -18,7 +18,8 @@ class UserDataReportController extends CRUDController
     protected UserManager $user_manager,
     protected NotificationRepository $notification_repository,
     protected EntityManagerInterface $entity_manager
-  ) {}
+  ) {
+  }
 
   /**
    * @param string $id The id of the user which data should be shown
@@ -29,15 +30,15 @@ class UserDataReportController extends CRUDController
     $notifications = $this->getUserNotifications($id);
     $program_inappropriate_reports = $this->getReportedProjects($id);
     $user_comments = $this->getUserComments($id);
-    $user_programs = $this->getUserProjects($id);
+    $user_projects = $this->getUserProjects($id);
 
     return $this->renderWithExtraParams('Admin/CRUD/list__action_show_user_data.html.twig',
       [
         'user' => $user,
         'notifications' => $notifications,
-        'program_inappropriate_reports' => $program_inappropriate_reports,
+        'project_inappropriate_reports' => $program_inappropriate_reports,
         'user_comments' => $user_comments,
-        'user_programs' => $user_programs,
+        'user_projects' => $user_projects,
       ]);
   }
 

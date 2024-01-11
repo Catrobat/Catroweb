@@ -9,13 +9,15 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Achievements\AchievementRepository;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 
 class AchievementManager
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository, protected UserAchievementRepository $user_achievement_repository, private readonly ProgramManager $program_manager, private readonly ProjectCustomTranslationRepository $project_custom_translation_repository) {}
+  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository, protected UserAchievementRepository $user_achievement_repository, private readonly ProjectManager $program_manager, private readonly ProjectCustomTranslationRepository $project_custom_translation_repository)
+  {
+  }
 
   public function findAchievementByInternalTitle(string $internal_title): ?Achievement
   {

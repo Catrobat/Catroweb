@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Më të shikuarat
     downloaded: Më të shkarkuarat
+  popular: Popular projects
   random: Programe të rastësishëm
   related: Programe të ngjashëm
   downloads: '%downloads% shkarkimet'

@@ -939,12 +939,16 @@ class ApiContext implements Context
   /**
    * @Given /^I want to upload a program$/
    */
-  public function iWantToUploadAProgram(): void {}
+  public function iWantToUploadAProgram(): void
+  {
+  }
 
   /**
    * @Given /^I have no parameters$/
    */
-  public function iHaveNoParameters(): void {}
+  public function iHaveNoParameters(): void
+  {
+  }
 
   /**
    * @Then /^I should get no programs$/

@@ -20,7 +20,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ProgramListSerializerEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly ScreenshotRepository $screenshot_repository, private readonly RequestStack $request_stack, private readonly RouterInterface $router, private readonly ElapsedTimeStringFormatter $time_formatter, private readonly ImageRepository $example_image_repository, private readonly ParameterBagInterface $parameter_bag) {}
+  public function __construct(private readonly ScreenshotRepository $screenshot_repository, private readonly RequestStack $request_stack, private readonly RouterInterface $router, private readonly ElapsedTimeStringFormatter $time_formatter, private readonly ImageRepository $example_image_repository, private readonly ParameterBagInterface $parameter_bag)
+  {
+  }
 
   public function onKernelView(ViewEvent $event): void
   {

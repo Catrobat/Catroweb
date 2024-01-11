@@ -27,7 +27,7 @@ $(() => {
     $notifications.data('comment-notification-count'),
     $notifications.data('remix-notification-count'),
     $notifications.data('profile-path'),
-    $notifications.data('program-path'),
+    $notifications.data('project-path'),
     $notifications.data('img-asset'),
   )
 
@@ -55,7 +55,7 @@ class UserNotifications {
     commentNotificationCount,
     remixNotificationCount,
     profilePath,
-    programPath,
+    projectPath,
     imgAsset,
   ) {
     this.all = true
@@ -86,7 +86,7 @@ class UserNotifications {
     this.empty = false
     this.fetchActive = false
     this.profilePath = profilePath
-    this.programPath = programPath
+    this.projectPath = projectPath
     this.imgAsset = imgAsset
 
     this._initListeners()
@@ -376,7 +376,7 @@ class UserNotifications {
       msg = msg.replace(
         '%program_link%',
         '<a href="' +
-          self.programPath +
+          self.projectPath +
           '/' +
           fetched.program +
           '">' +
@@ -388,7 +388,7 @@ class UserNotifications {
       msg = msg.replace(
         '%remix_program_link%',
         '<a href="' +
-          self.programPath +
+          self.projectPath +
           '/' +
           fetched.remixed_program +
           '">' +

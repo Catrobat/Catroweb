@@ -13,14 +13,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemixController extends AbstractController
 {
-  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager) {}
+  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager)
+  {
+  }
 
   #[Route(path: '/project/{id}/remix_graph', name: 'remix_graph', methods: ['GET'])]
   public function view(string $id): Response
   {
-    return $this->render('Program/remix_graph.html.twig', [
+    return $this->render('Project/remix_graph.html.twig', [
       'id' => $id,
-      'program_details_url_template' => $this->router->generate('program', ['id' => 0]),
+      'project_details_url_template' => $this->router->generate('program', ['id' => 0]),
     ]);
   }
 

@@ -6,7 +6,7 @@ use App\DB\Entity\User\User;
 use App\Project\AddProgramRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixGraphLayout;
-use App\System\Commands\Helpers\RemixManipulationProgramManager;
+use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,7 +21,7 @@ class ProgramImportCommand extends Command
 {
   final public const REMIX_GRAPH_NO_LAYOUT = '0';
 
-  public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProgramManager $remix_manipulation_program_manager)
+  public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProjectManager $remix_manipulation_program_manager)
   {
     parent::__construct();
   }

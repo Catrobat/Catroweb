@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\AddProgramRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Exception;
@@ -24,7 +24,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UploadController
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProgramManager $program_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProjectManager $program_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
+  {
+  }
 
   /**
    * @deprecated

@@ -7,7 +7,9 @@ use App\DB\EntityRepository\User\Notification\NotificationRepository;
 
 class NotificationsApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly NotificationRepository $notification_repository) {}
+  public function __construct(private readonly NotificationRepository $notification_repository)
+  {
+  }
 
   public function findNotificationByID(int $id): ?object
   {

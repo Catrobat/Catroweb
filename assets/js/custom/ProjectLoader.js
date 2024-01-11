@@ -124,8 +124,8 @@ export const ProjectLoader = function (container, url) {
           data.CatrobatProjects.length === 0
         ) {
           $(self.container)
-            .find('.programs')
-            .append('<div class="no-programs">' + noProgramsText + '</div>')
+            .find('.projects')
+            .append('<div class="no-projects">' + noProgramsText + '</div>')
           return
         }
         self.totalNumberOfFoundProjects = parseInt(
@@ -138,9 +138,9 @@ export const ProjectLoader = function (container, url) {
 
   self.loadProjects = function (profileId) {
     self.initProfile(profileId)
-    $(document).on('click', '.program', function () {
+    $(document).on('click', '.project', function () {
       const clickedProgramId = this.id.replace('program-', '')
-      this.className += ' visited-program'
+      this.className += ' visited-project'
       const storedVisits = sessionStorage.getItem('visits')
       if (!storedVisits) {
         const newVisits = [clickedProgramId]
@@ -241,16 +241,16 @@ export const ProjectLoader = function (container, url) {
 
       const htmlProject = await buildProjectInHtml(projects[i], data)
 
-      $(self.container).find('.programs').append(htmlProject)
+      $(self.container).find('.projects').append(htmlProject)
       $(self.container).show()
     }
     self.numberOfLoadedProjects += projects.length
   }
 
   async function setNumberOfColumns() {
-    const projectsContainerWidth = $(self.container).find('.programs').width()
+    const projectsContainerWidth = $(self.container).find('.projects').width()
     const projectsOuterWidth = $(self.container)
-      .find('.program')
+      .find('.project')
       .outerWidth(true)
 
     let columns = Math.floor(projectsContainerWidth / projectsOuterWidth)
@@ -496,7 +496,7 @@ export const ProjectLoader = function (container, url) {
   }
 
   async function showVisibleProjects() {
-    const projects = $(self.container).find('.program')
+    const projects = $(self.container).find('.project')
     $(projects).hide()
     for (
       let i = 0;
@@ -529,8 +529,8 @@ export const ProjectLoader = function (container, url) {
     }
 
     return $(
-      '<div class="program ' +
-        (visited ? 'visited-program ' : '') +
+      '<div class="project ' +
+        (visited ? 'visited-project ' : '') +
         '" id="program-' +
         project.ProjectId +
         '">' +
@@ -541,7 +541,7 @@ export const ProjectLoader = function (container, url) {
         data.CatrobatInformation.BaseUrl +
         project.ScreenshotSmall +
         '" alt="" class="lazyload" />' +
-        '<span class="program-name">' +
+        '<span class="project-name">' +
         self.escapeJavaScript(project.ProjectName) +
         '</span>' +
         div +
@@ -559,7 +559,7 @@ export const ProjectLoader = function (container, url) {
           '</div>'
         )
 
-      case '#myprofile-programs':
+      case '#myprofile-projects':
         return (
           '<div><span class="project-thumb-icon material-icons">schedule</span>' +
           project.UploadedString +

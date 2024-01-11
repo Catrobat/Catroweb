@@ -4,7 +4,7 @@ namespace App\User;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Security\PasswordGenerator;
 use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\TimeUtils;
@@ -25,7 +25,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository) {}
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
+  {
+  }
 
   public function decodeToken(string $token): array
   {
@@ -125,7 +127,7 @@ class UserManager implements UserManagerInterface
   {
     $associative_array = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
-      ->from(\App\DB\Entity\User\User::class, 'user')
+      ->from(User::class, 'user')
       ->getQuery()
       ->execute()
     ;
@@ -137,7 +139,7 @@ class UserManager implements UserManagerInterface
   {
     $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
-      ->from(\App\DB\Entity\User\User::class, 'user')
+      ->from(User::class, 'user')
       ->leftjoin(\App\DB\Entity\Project\Program::class, 'project', Join::WITH, 'user.id = project.user')
       ->where('user.createdAt <= :date')
       ->setParameter('date', new \DateTime("-{$years} years"))

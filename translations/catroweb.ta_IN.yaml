@@ -144,6 +144,7 @@ programs:
   most:
     viewed: அதிகமாக பார்க்கபட்டது
     downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
+  popular: Popular projects
   random: தொடர்பின்றி எடுக்கப்பட்ட திட்டங்கள்
   related: தொடர்புடைய திட்டங்கள்
   downloads: '%downloads% பதிவிறக்கங்கள்'

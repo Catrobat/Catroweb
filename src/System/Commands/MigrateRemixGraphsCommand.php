@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixManager;
 use App\Project\Scratch\AsyncHttpClient;
@@ -38,7 +38,7 @@ class MigrateRemixGraphsCommand extends Command
   private ?MigrationFileLock $migration_file_lock = null;
 
   public function __construct(private readonly UserManager $user_manager,
-    private readonly ProgramManager $program_manager, private readonly RemixManager $remix_manager,
+    private readonly ProjectManager $program_manager, private readonly RemixManager $remix_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
     private readonly ProgramRepository $program_repository, ParameterBagInterface $parameter_bag)
   {
@@ -368,7 +368,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->start();
     $number_imported_programs = 0;
 
-    $metadata = $this->entity_manager->getClassMetaData(\App\DB\Entity\Project\Program::class);
+    $metadata = $this->entity_manager->getClassMetaData(Program::class);
     $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     $batch_size = 300;

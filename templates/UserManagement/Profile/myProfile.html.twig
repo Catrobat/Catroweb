@@ -62,7 +62,7 @@
           <div class="mdc-tab-scroller__scroll-content">
             <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
             <span class="mdc-tab__content">
-              <span class="mdc-tab__icon" id="projects-count">{{ program_count }}</span>
+              <span class="mdc-tab__icon" id="projects-count">{{ project_count }}</span>
               <span class="mdc-tab__icon-text">{{ "projects"|trans({}, "catroweb") }}</span>
             </span>
               <span class="mdc-tab-indicator mdc-tab-indicator--active">
@@ -102,7 +102,7 @@
            data-theme="{{ theme() }}"
            data-base-url="{{ app.request.getBaseURL() }}"
            data-flavor="{{ flavor() }}"
-           data-empty-message="{{ "programs.noPrograms"|trans({}, 'catroweb') }}"
+           data-empty-message="{{ "project.noProjects"|trans({}, 'catroweb') }}"
            class="own-project-list loading">
         <div class="container">
           <div class="lazyload projects-spinner-container">
@@ -123,12 +123,12 @@
       <li class="mdc-list-item" role="menuitem">
         <span class="mdc-list-item__ripple"></span>
         <span class="mdc-list-item__text"
-              data-text-private="{{ 'programs.setPrivateAction'|trans({}, 'catroweb') }}"
-              data-text-public="{{ 'programs.setPublicAction'|trans({}, 'catroweb') }}"></span>
+              data-text-private="{{ 'project.setPrivateAction'|trans({}, 'catroweb') }}"
+              data-text-public="{{ 'project.setPublicAction'|trans({}, 'catroweb') }}"></span>
       </li>
       <li class="mdc-list-item" role="menuitem">
         <span class="mdc-list-item__ripple"></span>
-        <span class="mdc-list-item__text">{{ 'programs.deleteAction'|trans({}, 'catroweb') }}</span>
+        <span class="mdc-list-item__text">{{ 'project.deleteAction'|trans({}, 'catroweb') }}</span>
       </li>
     </ul>
   </div>
@@ -145,15 +145,15 @@
 <script>
   const myProfileConfiguration = {
     projectInfo: {
-      visibilityPrivateText: '{{ "programs.private"|trans({}, "catroweb")|escape('js')|raw }}',
-      visibilityPublicText: '{{ "programs.public"|trans({}, "catroweb")|escape('js')|raw }}',
+      visibilityPrivateText: '{{ "project.private"|trans({}, "catroweb")|escape('js')|raw }}',
+      visibilityPublicText: '{{ "project.public"|trans({}, "catroweb")|escape('js')|raw }}',
     },
     projectActions: {
       delete: {
-        confirmationText: `{{ "programs.deleteConfirmation"|trans({}, "catroweb")|escape('js')|raw }}`
+        confirmationText: `{{ "project.deleteConfirmation"|trans({}, "catroweb")|escape('js')|raw }}`
       },
       visibility: {
-        confirmationText: `{{ "programs.changeVisibility"|trans({}, "catroweb")|escape('js')|raw }}`,
+        confirmationText: `{{ "project.changeVisibility"|trans({}, "catroweb")|escape('js')|raw }}`,
       }
     },
     securitySettings: {
@@ -161,12 +161,12 @@
     },
     userSettings: {
       deleteAccount: {
-        confirmationText: `{{ "programs.deleteAccountConfirmation"|trans({}, "catroweb")|escape('js')|raw }}`
+        confirmationText: `{{ "project.deleteAccountConfirmation"|trans({}, "catroweb")|escape('js')|raw }}`
       }
     },
     messages: {
       unspecifiedErrorText: '{{ 'myprofile.unspecifiedError'|trans({}, 'catroweb')|escape('js')|raw }}',
-      deleteProjectNotFoundText: '{{ 'programs.deleteNotFoundError'|trans({}, 'catroweb')|escape('js')|raw }}',
+      deleteProjectNotFoundText: '{{ 'project.deleteNotFoundError'|trans({}, 'catroweb')|escape('js')|raw }}',
       security: {
         passwordsDontMatch: '{{ 'passwordsNoMatch'|trans({}, 'catroweb')|escape('js')|raw }}'
       },

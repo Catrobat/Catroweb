@@ -144,6 +144,7 @@ programs:
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
+  popular: Popular projects
   random: پروژه های تصادفی
   related: پروژه های مرتبط
   downloads: '%downloads%دانلودها'

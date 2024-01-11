@@ -3,7 +3,7 @@
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Utils\RequestHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,7 +19,9 @@ class SearchController extends AbstractController
 
   private int $DEFAULT_OFFSET = 0;
 
-  public function __construct(protected RequestHelper $app_request) {}
+  public function __construct(protected RequestHelper $app_request)
+  {
+  }
 
   /**
    * @deprecated
@@ -27,7 +29,7 @@ class SearchController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/api/projects/search.json', name: 'api_search_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function searchProgramsAction(Request $request, ProgramManager $program_manager, LoggerInterface $searchLogger): ProgramListResponse
+  public function searchProgramsAction(Request $request, ProjectManager $program_manager, LoggerInterface $searchLogger): ProgramListResponse
   {
     $query = (string) $request->query->get('q', '');
     $username = $this->getUser() ? $this->getUser()->getUserIdentifier() : '-';
@@ -64,7 +66,7 @@ class SearchController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/search/tagProjects.json', name: 'api_search_tag', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function tagSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
+  public function tagSearchProgramsAction(Request $request, ProjectManager $program_manager): ProgramListResponse
   {
     $tag_name = (string) $request->query->get('q', 0);
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
@@ -79,7 +81,7 @@ class SearchController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/search/extensionProjects.json', name: 'api_search_extension', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function extensionSearchProgramsAction(Request $request, ProgramManager $program_manager): ProgramListResponse
+  public function extensionSearchProgramsAction(Request $request, ProjectManager $program_manager): ProgramListResponse
   {
     $query = (string) $request->query->get('q');
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);

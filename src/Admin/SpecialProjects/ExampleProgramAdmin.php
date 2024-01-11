@@ -6,7 +6,7 @@ use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\EntityRepository\FlavorRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -32,9 +32,10 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ImageRepository $example_image_repository,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly FlavorRepository $flavor_repository
-  ) {}
+  ) {
+  }
 
   /**
    * @param ExampleProgram $object

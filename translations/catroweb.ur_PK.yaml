@@ -144,6 +144,7 @@ programs:
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
+  popular: Popular projects
   random: بے ترتیب منصوبے
   related: متعلقہ منصوبے
   downloads: '%downloads% ڈاؤن لوڈز'

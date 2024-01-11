@@ -18,7 +18,8 @@ class SpecialUpdaterAdminController extends CRUDController
 {
   public function __construct(
     protected KernelInterface $kernel
-  ) {}
+  ) {
+  }
 
   public function listAction(Request $request = null): Response
   {

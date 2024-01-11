@@ -4,7 +4,7 @@ namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\Achievements\AchievementManager;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
@@ -23,10 +23,11 @@ class ProfileController extends AbstractController
   final public const MAX_PASSWORD_LENGTH = 4096;
 
   public function __construct(
-    protected ProgramManager $program_manager,
+    protected ProjectManager $program_manager,
     protected UserManager $user_manager,
     protected AchievementManager $achievement_manager,
-  ) {}
+  ) {
+  }
 
   /**
    * Overwrite for FosUser Profile Route (We don't use it!).
@@ -41,7 +42,7 @@ class ProfileController extends AbstractController
       if (is_null($user)) {
         return $this->redirectToRoute('login');
       }
-      $program_count = $this->program_manager->countUserProjects($user->getId());
+      $project_count = $this->program_manager->countUserProjects($user->getId());
       $view = 'UserManagement/Profile/myProfile.html.twig';
     } else {
       /** @var User|null $user */
@@ -49,13 +50,13 @@ class ProfileController extends AbstractController
       if (is_null($user)) {
         return $this->redirectToRoute('index');
       }
-      $program_count = $this->program_manager->countPublicUserProjects($id);
+      $project_count = $this->program_manager->countPublicUserProjects($id);
       $view = 'UserManagement/Profile/profile.html.twig';
     }
 
     return $this->render($view, [
       'profile' => $user,
-      'program_count' => $program_count,
+      'project_count' => $project_count,
       'firstMail' => $user->getEmail(),
       'minPassLength' => self::MIN_PASSWORD_LENGTH,
       'maxPassLength' => self::MAX_PASSWORD_LENGTH,

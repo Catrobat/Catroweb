@@ -3,14 +3,14 @@
 namespace App\Project\Scratch;
 
 use App\DB\Entity\Project\Program;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\UserManager;
 
 class ScratchManager
 {
   protected AsyncHttpClient $async_http_client;
 
-  public function __construct(protected ProgramManager $program_manager,
+  public function __construct(protected ProjectManager $program_manager,
     protected UserManager $user_manager)
   {
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);

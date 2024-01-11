@@ -5,7 +5,7 @@ namespace App\Application\Controller\Ci;
 use App\DB\Entity\Project\Program;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Utils\TimeUtils;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
@@ -22,10 +22,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class BuildApkController extends AbstractController
 {
   public function __construct(
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly JenkinsDispatcher $dispatcher,
     private readonly ApkRepository $apk_repository,
-    private readonly array $arr_jenkins_config) {}
+    private readonly array $arr_jenkins_config)
+  {
+  }
 
   /**
    * @throws \Exception

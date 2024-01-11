@@ -144,6 +144,7 @@ programs:
   most:
     viewed: Nejnavštěvovanější
     downloaded: Nejvíce stahované
+  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% stahování'

@@ -27,7 +27,7 @@ Feature: As a visitor I want to see a project page
   Scenario: Viewing the uploader's profile page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    And I click "#program-owner-username"
+    And I click "#project-owner-username"
     And I wait for the page to be loaded
     Then I should be on "/app/user/1"
 

@@ -3,12 +3,14 @@
 namespace App\Project\EventSubscriber;
 
 use App\Project\Event\ProjectDownloadEvent;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProjectDownloadEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(protected ProgramManager $program_manager) {}
+  public function __construct(protected ProjectManager $program_manager)
+  {
+  }
 
   public function onProjectDownload(ProjectDownloadEvent $event): void
   {

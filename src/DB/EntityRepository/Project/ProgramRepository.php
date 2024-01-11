@@ -2,6 +2,7 @@
 
 namespace App\DB\EntityRepository\Project;
 
+use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
 use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
@@ -12,10 +13,14 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr\Join;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
+use Elastica\Query\MatchQuery;
+use FOS\ElasticaBundle\Finder\TransformedFinder;
 
 class ProgramRepository extends ServiceEntityRepository
 {
-  public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request)
+  public function __construct(ManagerRegistry $managerRegistry, protected RequestHelper $app_request, protected FeatureFlagManager $feature_flag_manager, private readonly TransformedFinder $program_finder)
   {
     parent::__construct($managerRegistry, Program::class);
   }
@@ -23,7 +28,6 @@ class ProgramRepository extends ServiceEntityRepository
   public function getProjectByID(string $program_id, bool $include_private = false): array
   {
     $query_builder = $this->createQueryBuilder('e');
-
     $query_builder
       ->where($query_builder->expr()->eq('e.id', $query_builder->expr()->literal($program_id)))
     ;
@@ -40,6 +44,13 @@ class ProgramRepository extends ServiceEntityRepository
 
   public function getProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
+    if ($this->feature_flag_manager->isEnabled('GET_projects_elastica')) {
+      $bool_query = new BoolQuery();
+      $this->excludeUnavailableAndPrivateProjectsElastica($bool_query, $flavor, $max_version);
+      $query = $this->buildElasticaQuery($bool_query, $order_by, $order);
+
+      return $this->program_finder->find($query, $limit, ['from' => $offset]);
+    }
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
@@ -59,12 +70,23 @@ class ProgramRepository extends ServiceEntityRepository
   public function getTrendingProjects(string $flavor = null, string $max_version = '', int $limit = 20, int $offset = 0, string $order_by = '', string $order = 'DESC'): array
   {
     $now = new \DateTime('now', new \DateTimeZone('UTC'));
-    $interval = new \DateInterval('P7D');
+    $time_for_check = $now->sub(new \DateInterval('P7D'))->format('Y-m-d H:i:s');
+    if ($this->feature_flag_manager->isEnabled('GET_projects_elastica')) {
+      $bool_query = new BoolQuery();
+      $this->excludeUnavailableAndPrivateProjectsElastica($bool_query, $flavor, $max_version);
+      $should_query = new BoolQuery();
+      $should_query->addShould(new Query\Range('uploaded_at', ['gte' => $time_for_check]));
+      $should_query->addShould(new Query\Range('last_modified_at', ['gte' => $time_for_check]));
+      $bool_query->addMust($should_query);
+      $query = $this->buildElasticaQuery($bool_query, $order_by, $order);
+
+      return $this->program_finder->find($query, $limit, ['from' => $offset]);
+    }
     $query_builder = $this->createQueryAllBuilder();
     $query_builder = $this->excludeUnavailableAndPrivateProjects($query_builder, $flavor, $max_version);
     $query_builder = $this->setPagination($query_builder, $limit, $offset);
     $query_builder = $this->setOrderBy($query_builder, $order_by, $order);
-    $date_time_delta_7_days = $query_builder->expr()->literal($now->sub($interval)->format('Y-m-d H:i:s'));
+    $date_time_delta_7_days = $query_builder->expr()->literal($time_for_check);
     $left_or = $query_builder->expr()->gte('e.uploaded_at', $date_time_delta_7_days);
     $right_or = $query_builder->expr()->gte('e.last_modified_at', $date_time_delta_7_days);
     $query_builder->andWhere($query_builder->expr()->orX($left_or, $right_or));
@@ -470,5 +492,70 @@ class ProgramRepository extends ServiceEntityRepository
     return $query_builder->andWhere(
       $query_builder->expr()->eq($alias.'.private', $query_builder->expr()->literal(false))
     );
+  }
+
+  private function excludeUnavailableAndPrivateProjectsElastica(BoolQuery $qb, string $flavor = null, string $max_version = ''): void
+  {
+    $this->excludePrivateProjectsElastica($qb);
+    $this->excludeUnavailableProjectsElastica($qb, $flavor, $max_version);
+  }
+
+  private function excludeUnavailableProjectsElastica(BoolQuery $qb, string $flavor = null, string $max_version = ''): void
+  {
+    $this->excludeInvisibleProjectsElastica($qb);
+    $this->excludeDebugProjectsElastica($qb);
+    $this->setFlavorConstraintElastica($qb, $flavor);
+    $this->excludeProjectsWithTooHighLanguageVersionElastica($qb, $max_version);
+  }
+
+  private function setFlavorConstraintElastica(BoolQuery $qb, string $flavor = null): void
+  {
+    if ('' === trim($flavor)) {
+      return;
+    }
+    if ('!' === $flavor[0]) {
+      $must_not = new BoolQuery();
+      $must_not->addMustNot(new MatchQuery('flavor', strtolower(substr($flavor, 1))));
+      $qb->addMust($must_not);
+    }
+    $should = new BoolQuery();
+    $should->addShould(new Query\Wildcard('flavor', strtolower($flavor)));
+    $should->addShould(new Query\Wildcard('getExtensionsString', strtolower($flavor)));
+    $qb->addMust($should);
+  }
+
+  private function excludeProjectsWithTooHighLanguageVersionElastica(BoolQuery $qb, string $max_version = ''): void
+  {
+    if ('' !== $max_version) {
+      $qb->addMust(new Query\Range('language_version', ['lte' => $max_version]));
+    }
+  }
+
+  private function excludeDebugProjectsElastica(BoolQuery $qb): void
+  {
+    if (!$this->app_request->isDebugBuildRequest() && 'dev' !== $_ENV['APP_ENV']) {
+      $qb->addMust(new Query\Term(['debug_build' => false]));
+    }
+  }
+
+  private function excludeInvisibleProjectsElastica(BoolQuery $qb): void
+  {
+    $qb->addMust(new Query\Term(['visible' => true]));
+  }
+
+  private function excludePrivateProjectsElastica(BoolQuery $qb): void
+  {
+    $qb->addMust(new Query\Term(['private' => false]));
+  }
+
+  private function buildElasticaQuery(BoolQuery $bool_query, string $order_by, string $order): Query
+  {
+    $query = new Query();
+    $query->setQuery($bool_query);
+    if ('' != $order_by) {
+      $query->addSort([$order_by => $order]);
+    }
+
+    return $query;
   }
 }

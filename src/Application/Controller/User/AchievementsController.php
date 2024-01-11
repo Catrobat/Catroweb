@@ -11,7 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AchievementsController extends AbstractController
 {
-  public function __construct(protected AchievementManager $achievement_manager) {}
+  public function __construct(protected AchievementManager $achievement_manager)
+  {
+  }
 
   #[Route(path: '/achievements', name: 'achievements_overview', methods: ['GET'])]
   public function AchievementsOverview(): Response

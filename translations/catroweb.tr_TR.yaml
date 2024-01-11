@@ -144,6 +144,7 @@ programs:
   most:
     viewed: En çok İzlenenler
     downloaded: En çok indirilen
+  popular: Popular projects
   random: Rastgele projeler
   related: İlgili Projeler
   downloads: '%downloads% İndirme'

@@ -14,7 +14,9 @@ use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 class RegistrationController extends AbstractController
 {
-  public function __construct(protected VerifyEmailHelperInterface $verify_email_helper, protected EntityManagerInterface $entity_manager, protected LoggerInterface $logger) {}
+  public function __construct(protected VerifyEmailHelperInterface $verify_email_helper, protected EntityManagerInterface $entity_manager, protected LoggerInterface $logger)
+  {
+  }
 
   #[Route(path: '/register', name: 'register', methods: ['GET'])]
   public function registerAction(): Response

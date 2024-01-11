@@ -11,7 +11,9 @@ class ProjectDownloadEvent extends Event
 {
   protected Request $request;
 
-  public function __construct(protected ?User $user, protected Program $project, protected string $download_type) {}
+  public function __construct(protected ?User $user, protected Program $project, protected string $download_type)
+  {
+  }
 
   public function getUser(): ?User
   {

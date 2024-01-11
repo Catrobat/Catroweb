@@ -23,7 +23,8 @@ class MaintainController extends CRUDController
     private readonly string $file_storage_dir,
     private readonly string $apk_dir,
     private readonly string $log_dir
-  ) {}
+  ) {
+  }
 
   /**
    * @throws \Exception
@@ -140,14 +141,14 @@ class MaintainController extends CRUDController
     // ... use any methods or services to get statistics data
     $RemovableObjects = [];
 
-    $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the programs accordingly";
+    $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the projects accordingly";
     $rm = new RemovableMemory('Compressed Catrobatfiles', $description);
     $this->setSizeOfObject($rm, strval($this->file_storage_dir));
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
     $RemovableObjects[] = $rm;
 
-    $description = "This will remove all generated apk-files in the 'apk'-directory and flag the programs accordingly";
+    $description = "This will remove all generated apk-files in the 'apk'-directory and flag the projects accordingly";
     $rm = new RemovableMemory('Generated APKs', $description);
     $this->setSizeOfObject($rm, strval($this->apk_dir), ['apk']);
     $rm->setCommandName('Delete APKs');
@@ -172,8 +173,8 @@ class MaintainController extends CRUDController
       $usedSpaceRaw -= $obj->size_raw;
     }
 
-    $programsSize = $this->get_dir_size(strval($this->file_storage_dir));
-    $usedSpaceRaw -= $programsSize;
+    $projectsSize = $this->get_dir_size(strval($this->file_storage_dir));
+    $usedSpaceRaw -= $projectsSize;
 
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
     $used_ram = (float) shell_exec("free | grep Mem | awk '{print $3}'") * 1_000;
@@ -194,8 +195,8 @@ class MaintainController extends CRUDController
       'usedSpace_raw' => $usedSpaceRaw,
       'freeSpace_raw' => $freeSpace,
       'freeSpace' => $this->getSymbolByQuantity($freeSpace),
-      'programsSpace_raw' => $programsSize,
-      'programsSpace' => $this->getSymbolByQuantity($programsSize),
+      'projectsSpace_raw' => $projectsSize,
+      'projectsSpace' => $this->getSymbolByQuantity($projectsSize),
       'freeRamPercentage' => $free_ram_percentage,
       'usedRamPercentage' => $used_ram_percentage,
       'sharedRamPercentage' => $shared_ram_percentage,

@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\Comment\UserComment;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,7 +19,7 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
   private const CACHED_PROVIDER = 'etag';
   private readonly int $project_caching_threshold;
 
-  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramManager $program_manager, ParameterBagInterface $parameters)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProjectManager $program_manager, ParameterBagInterface $parameters)
   {
     $pct = $parameters->get('catrobat.translations.project_cache_threshold');
     $this->project_caching_threshold = is_numeric($pct) ? (int) $pct : 0;

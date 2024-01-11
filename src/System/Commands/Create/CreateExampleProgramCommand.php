@@ -5,7 +5,7 @@ namespace App\System\Commands\Create;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\ExampleProgram;
 use App\DB\EntityRepository\FlavorRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\File\File;
 class CreateExampleProgramCommand extends Command
 {
   public function __construct(
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly EntityManagerInterface $entity_manager,
     private readonly FlavorRepository $flavor_repository
   ) {

@@ -5,7 +5,7 @@ namespace App\Application\Controller\Project;
 use App\DB\Entity\Project\Program;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,7 +13,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeStatisticsController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator) {}
+  public function __construct(private readonly ProjectManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator)
+  {
+  }
 
   #[Route(path: '/project/{id}/code_statistics', name: 'code_statistics', methods: ['GET'])]
   public function view(string $id): Response
@@ -31,14 +33,14 @@ class CodeStatisticsController extends AbstractController
       }
     }
     if (null === $parsed_program) {
-      return $this->render('Program/code_statistics.html.twig', [
+      return $this->render('Project/code_statistics.html.twig', [
         'id' => $id,
       ]);
     }
     $stats = $parsed_program->getCodeStatistic();
     $brick_stats = $stats->getBrickTypeStatistic();
 
-    return $this->render('Program/code_statistics.html.twig', [
+    return $this->render('Project/code_statistics.html.twig', [
       'id' => $id,
       'data' => [
         'scenes' => $this->getMappedProjectStatistic('codeview.scenes', $stats->getSceneStatistic()),

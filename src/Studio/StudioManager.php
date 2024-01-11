@@ -18,7 +18,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class StudioManager
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected StudioRepository $studio_repository, protected StudioActivityRepository $studio_activity_repository, protected StudioProgramRepository $studio_project_repository, protected StudioUserRepository $studio_user_repository, protected UserCommentRepository $user_comment_repository) {}
+  public function __construct(protected EntityManagerInterface $entity_manager, protected StudioRepository $studio_repository, protected StudioActivityRepository $studio_activity_repository, protected StudioProgramRepository $studio_project_repository, protected StudioUserRepository $studio_user_repository, protected UserCommentRepository $user_comment_repository)
+  {
+  }
 
   public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): Studio
   {
