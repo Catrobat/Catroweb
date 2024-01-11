@@ -23,7 +23,7 @@
     "doctrine/orm": "2.17.*",
     "eightpoints/guzzle-bundle": "8.5.*",
     "friendsofsymfony/elastica-bundle": "6.3.*",
-    "gesdinet/jwt-refresh-token-bundle": "1.2.*",
+    "gesdinet/jwt-refresh-token-bundle": "1.3.*",
     "google/apiclient": "2.15.*",
     "google/cloud-translate": "1.16.*",
     "http-interop/http-factory-guzzle": "*",
