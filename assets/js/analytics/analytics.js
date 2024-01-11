@@ -1532,7 +1532,7 @@ if (isTrackingAllowed()) {
           /**
            * Tracks the click comment button
            */
-          BaseSelector: '#program-comments button#post-button',
+          BaseSelector: '#project-comments button#post-button',
           Category: 'engagement',
           Action: 'socialEngagement - program',
           Label: window.location.pathname,
@@ -1563,7 +1563,7 @@ if (isTrackingAllowed()) {
           /**
            * Tracks the clicks on a searched program
            */
-          BaseSelector: '.programs',
+          BaseSelector: '.projects',
           SubSelector: 'a',
           Category: searchCategory,
           Action: 'click - searched ' + actionSubstring,

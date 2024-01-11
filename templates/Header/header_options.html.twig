@@ -1,4 +1,4 @@
-{% if '/project/'       in app.request.pathinfo and program|default(false) and program.id|default(false) %}
+{% if '/project/'       in app.request.pathinfo and project|default(false) and project.id|default(false) %}
 
 <div class="mdc-menu-surface--anchor">
     {% include 'Header/header_option_button.html.twig' %}

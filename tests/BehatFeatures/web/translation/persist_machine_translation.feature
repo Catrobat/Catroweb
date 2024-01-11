@@ -21,7 +21,7 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#program-translation-button"
+    When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count |
@@ -35,7 +35,7 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/1"
     And I wait for the page to be loaded
-    When I click "#program-translation-button"
+    When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count |
@@ -49,7 +49,7 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-    When I click "#program-translation-button"
+    When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
@@ -62,7 +62,7 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-    When I click "#program-translation-button"
+    When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
@@ -77,7 +77,7 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-    When I click "#program-translation-button"
+    When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
@@ -92,7 +92,7 @@ Feature: Persist project and comment machine translation
     And I switch the language to "French"
     And I am on "/app/project/3"
     And I wait for the page to be loaded
-    When I click "#program-translation-button"
+    When I click "#project-translation-button"
     And I wait for AJAX to finish
     Then there should be project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |

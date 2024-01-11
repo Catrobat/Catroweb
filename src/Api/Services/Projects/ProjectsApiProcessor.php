@@ -8,7 +8,7 @@ use App\DB\Entity\User\User;
 use App\Project\AddProgramRequest;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use OpenAPI\Server\Model\UpdateProjectRequest;
@@ -18,7 +18,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
   final public const SERVER_ERROR_SAVE_XML = 1;
   final public const SERVER_ERROR_SCREENSHOT = 2;
 
-  public function __construct(private readonly ProgramManager $project_manager,
+  public function __construct(private readonly ProjectManager $project_manager,
     private readonly EntityManagerInterface $entity_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     private readonly ProgramFileRepository $file_repository,

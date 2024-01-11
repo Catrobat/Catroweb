@@ -4,7 +4,7 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProgramListResponse;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class ListProgramsController extends AbstractController
 {
-  public function __construct(private readonly ProgramManager $program_manager)
+  public function __construct(private readonly ProjectManager $program_manager)
   {
   }
 

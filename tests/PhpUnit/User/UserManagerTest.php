@@ -3,7 +3,7 @@
 namespace Tests\PhpUnit\User;
 
 use App\DB\EntityRepository\User\UserRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\UserManager;
 use App\Utils\CanonicalFieldsUpdater;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,7 +33,7 @@ class UserManagerTest extends TestCase
     $repository = $this->createMock(EntityRepository::class);
     $object_manager->expects($this->any())->method('getClassMetadata')->willReturn($meta);
     $object_manager->expects($this->any())->method('getRepository')->willReturn($repository);
-    $program_manager = $this->createMock(ProgramManager::class);
+    $program_manager = $this->createMock(ProjectManager::class);
     $user_finder = $this->createMock(TransformedFinder::class);
     $user_repository = $this->createMock(UserRepository::class);
     $url_helper = new UrlHelper(new RequestStack());

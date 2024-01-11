@@ -10,7 +10,7 @@ use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ProjectsApiLoader extends AbstractApiLoader
 {
   public function __construct(
-    private readonly ProgramManager $project_manager,
+    private readonly ProjectManager $project_manager,
     private readonly FeaturedRepository $featured_repository,
     private readonly TagRepository $tag_repository,
     private readonly ExtensionRepository $extension_repository,

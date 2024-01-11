@@ -9,7 +9,7 @@ use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
@@ -36,7 +36,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     private readonly ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    private readonly ProgramManager $project_manager,
+    private readonly ProjectManager $project_manager,
     ResponseCacheManager $response_cache_manager
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);

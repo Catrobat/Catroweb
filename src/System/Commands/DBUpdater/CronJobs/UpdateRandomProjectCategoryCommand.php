@@ -3,7 +3,7 @@
 namespace App\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\Entity\Project\Program;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -13,7 +13,7 @@ class UpdateRandomProjectCategoryCommand extends Command
 {
   protected const LIMIT = 100;
 
-  public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramManager $program_manager)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected ProjectManager $program_manager)
   {
     parent::__construct();
   }

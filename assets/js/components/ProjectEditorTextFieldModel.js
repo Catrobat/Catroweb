@@ -21,12 +21,12 @@ export function ProjectEditorTextFieldModel(
 
   this.customTranslationApi = new CustomTranslationApi(programSection)
 
-  this.pathEditName = projectDescriptionCredits.data('path-edit-program-name')
+  this.pathEditName = projectDescriptionCredits.data('path-edit-project-name')
   this.pathEditDescription = projectDescriptionCredits.data(
-    'path-edit-program-description',
+    'path-edit-project-description',
   )
   this.pathEditCredits = projectDescriptionCredits.data(
-    'path-edit-program-credits',
+    'path-edit-project-credits',
   )
 
   this.setOnTextChanged = (onTextChanged) => {

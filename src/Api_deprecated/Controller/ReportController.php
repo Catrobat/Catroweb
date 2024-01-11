@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\User\User;
 use App\Project\Event\ReportInsertEvent;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -26,7 +26,7 @@ class ReportController extends AbstractController
 {
   public function __construct(
     private readonly UserManager $user_manager,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly TranslatorInterface $translator,
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly AuthorizationCheckerInterface $authorization_checker,

@@ -5,7 +5,7 @@ namespace App\System\Commands\Create;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramInappropriateReport;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -16,7 +16,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateProgramInappropriateReportCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly EntityManagerInterface $entity_manager)
   {
     parent::__construct();

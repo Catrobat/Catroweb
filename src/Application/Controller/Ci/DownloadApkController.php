@@ -7,7 +7,7 @@ use App\DB\Entity\Project\ProgramDownloads;
 use App\DB\Entity\User\User;
 use App\Project\Apk\ApkRepository;
 use App\Project\Event\ProjectDownloadEvent;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DownloadApkController extends AbstractController
 {
   public function __construct(protected EventDispatcherInterface $event_dispatcher,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly ApkRepository $apk_repository,
     protected LoggerInterface $logger)
   {
