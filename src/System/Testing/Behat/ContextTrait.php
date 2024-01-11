@@ -32,7 +32,7 @@ use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRe
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use App\Studio\StudioManager;
 use App\System\Testing\DataFixtures\ProjectDataFixtures;
@@ -94,9 +94,9 @@ trait ContextTrait
     return $this->kernel->getContainer()->get(UserDataFixtures::class);
   }
 
-  public function getProgramManager(): ?ProgramManager
+  public function getProgramManager(): ?ProjectManager
   {
-    return $this->kernel->getContainer()->get(ProgramManager::class);
+    return $this->kernel->getContainer()->get(ProjectManager::class);
   }
 
   public function getProjectDataFixtures(): ?ProjectDataFixtures

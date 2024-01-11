@@ -7,7 +7,7 @@ use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
 use App\User\UserManager;
@@ -22,7 +22,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StudioController extends AbstractController
 {
-  public function __construct(protected StudioManager $studio_manager, protected UserManager $user_manager, protected ProgramManager $program_manager, protected ScreenshotRepository $screenshot_repository, protected TranslatorInterface $translator, protected ParameterBagInterface $parameter_bag)
+  public function __construct(protected StudioManager $studio_manager, protected UserManager $user_manager, protected ProjectManager $program_manager, protected ScreenshotRepository $screenshot_repository, protected TranslatorInterface $translator, protected ParameterBagInterface $parameter_bag)
   {
   }
 

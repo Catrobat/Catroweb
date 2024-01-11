@@ -3,7 +3,7 @@
 namespace App\Project\CatrobatFile;
 
 use App\DB\Entity\Project\Program;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -15,7 +15,7 @@ class ExtractedFileRepository
   private readonly string $web_path;
 
   public function __construct(ParameterBagInterface $parameter_bag,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $program_manager,
     private readonly LoggerInterface $logger)
   {
     $local_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.dir');

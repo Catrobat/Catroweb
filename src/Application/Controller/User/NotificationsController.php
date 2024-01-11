@@ -201,7 +201,7 @@ class NotificationsController extends AbstractController
             'remixed_program' => null,
             'remixed_program_name' => null,
             'type' => 'program',
-            'message' => $translator->trans('catro-notifications.program-upload.message', [], 'catroweb'),
+            'message' => $translator->trans('catro-notifications.project-upload.message', [], 'catroweb'),
             'seen' => $notification->getSeen(), ];
         }
         continue;

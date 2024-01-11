@@ -4,7 +4,7 @@ namespace App\Admin\ApkGeneration;
 
 use App\DB\Entity\Project\Program;
 use App\Project\Apk\JenkinsDispatcher;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ApkController extends CRUDController
 {
   public function __construct(
-    protected ProgramManager $program_manager,
+    protected ProjectManager $program_manager,
     protected JenkinsDispatcher $jenkins_dispatcher,
     protected EntityManagerInterface $entity_manager
   ) {

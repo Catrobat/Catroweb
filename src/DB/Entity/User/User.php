@@ -291,6 +291,11 @@ class User extends BaseUser
    */
   protected ?string $currentlyWorkingOn = null;
 
+  /**
+   * @ORM\Column(type="integer", nullable=true, unique=true)
+   */
+  protected ?int $ranking_score = null;
+
   public function __construct()
   {
     $this->programs = new ArrayCollection();
@@ -626,5 +631,15 @@ class User extends BaseUser
   public function setCurrentlyWorkingOn(?string $currentlyWorkingOn): void
   {
     $this->currentlyWorkingOn = $currentlyWorkingOn;
+  }
+
+  public function getRankingScore(): ?int
+  {
+    return $this->ranking_score;
+  }
+
+  public function setRankingScore(?int $ranking_score): void
+  {
+    $this->ranking_score = $ranking_score;
   }
 }

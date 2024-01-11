@@ -9,7 +9,7 @@ use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
 use App\Project\Apk\ApkRepository;
 use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +32,7 @@ class ProjectDataFixtures
 
   private static int $number_of_projects = 0;
 
-  public function __construct(private readonly UserManager $user_manager, private readonly ProgramManager $program_manager,
+  public function __construct(private readonly UserManager $user_manager, private readonly ProjectManager $program_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly ProgramFileRepository $project_file_repository,
     private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
     ParameterBagInterface $parameter_bag)

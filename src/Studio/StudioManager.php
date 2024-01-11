@@ -28,7 +28,8 @@ class StudioManager
     protected StudioUserRepository $studio_user_repository,
     protected UserCommentRepository $user_comment_repository,
     protected StudioJoinRequestRepository $studio_join_request_repository
-  ) {}
+  ) {
+  }
 
   public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): Studio
   {

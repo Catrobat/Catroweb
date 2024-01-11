@@ -5,7 +5,7 @@ namespace App\Api_deprecated\Controller;
 use App\Api_deprecated\Responses\ProgramListResponse;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\Project\ProgramLike;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,7 +22,7 @@ class ProgramController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/getInfoById.json', name: 'api_info_by_id', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function showProgramAction(Request $request, ProgramManager $program_manager): JsonResponse|ProgramListResponse
+  public function showProgramAction(Request $request, ProjectManager $program_manager): JsonResponse|ProgramListResponse
   {
     $id = (string) $request->query->get('id', '0');
     $programs = [];
@@ -42,7 +42,7 @@ class ProgramController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/api/project/{id}/likes', name: 'api_project_likes', methods: ['GET'])]
-  public function projectLikesAction(string $id, ProgramManager $program_manager): JsonResponse
+  public function projectLikesAction(string $id, ProjectManager $program_manager): JsonResponse
   {
     $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $program) {
@@ -75,7 +75,7 @@ class ProgramController extends AbstractController
    * @throws NotFoundHttpException
    */
   #[Route(path: '/api/project/{id}/likes/count', name: 'api_project_likes_count', methods: ['GET'])]
-  public function projectLikesCountAction(Request $request, string $id, ProgramManager $program_manager, TranslatorInterface $translator): JsonResponse
+  public function projectLikesCountAction(Request $request, string $id, ProjectManager $program_manager, TranslatorInterface $translator): JsonResponse
   {
     $program = $program_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $program) {

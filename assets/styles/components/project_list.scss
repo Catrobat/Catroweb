@@ -289,25 +289,25 @@ $container-padding: 1rem;
   }
 }
 
-.no-programs {
+.no-projects {
   margin-bottom: 25px;
   text-align: center;
 }
 
 // when changing tile size, adapt self.column_min and self.column_max in ProjectLoader.js
-$program-tile-width: 85px;
+$project-tile-width: 85px;
 
-.programs {
+.projects {
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
 
-  > .program {
+  > .project {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: $program-tile-width;
+    width: $project-tile-width;
     margin: 0.35rem;
 
     > a {
@@ -315,8 +315,8 @@ $program-tile-width: 85px;
       width: 100%;
 
       > img {
-        max-width: $program-tile-width !important;
-        max-height: $program-tile-width;
+        max-width: $project-tile-width !important;
+        max-height: $project-tile-width;
         object-fit: cover;
       }
 
@@ -324,7 +324,7 @@ $program-tile-width: 85px;
         text-decoration: none;
       }
 
-      .program-name {
+      .project-name {
         display: inline-block;
         width: 100%;
       }
@@ -334,7 +334,7 @@ $program-tile-width: 85px;
         font-size: 0.73rem;
       }
 
-      .program-name,
+      .project-name,
       > div {
         display: inline-flex;
         overflow: hidden;

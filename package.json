@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/Catrobat/Catroweb#readme",
   "devDependencies": {
-    "@babel/preset-env": "^7.23.6",
+    "@babel/preset-env": "^7.23.8",
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@hotwired/stimulus": "^3.2.2",
     "@symfony/webpack-encore": "^4.5.0",
@@ -49,7 +49,7 @@
     "n": "^9.2.0",
     "node-sass": "^9.0.0",
     "noop-webpack-plugin": "^1.0.1",
-    "npm": "^10.2.4",
+    "npm": "^10.3.0",
     "postcss-loader": "^7.3.4",
     "prettier": "3.1.1",
     "purgecss-webpack-plugin": "^5.0.0",

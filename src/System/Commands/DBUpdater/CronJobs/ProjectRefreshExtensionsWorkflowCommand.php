@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\Extension\ProjectExtensionManager;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProjectRefreshExtensionsWorkflowCommand extends Command
 {
-  public function __construct(protected ProgramManager $program_manager,
+  public function __construct(protected ProjectManager $program_manager,
     protected ProgramRepository $program_repository,
     protected ProjectExtensionManager $extension_manager,
     protected ExtractedFileRepository $extracted_file_repo,

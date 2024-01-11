@@ -146,8 +146,8 @@ Encore
   .addEntry('follower_overview', './assets/js/follower_overview.js')
   .addEntry('my_profile', './assets/js/my_profile.js')
   .addEntry('profile', './assets/js/profile.js')
-  .addEntry('project', './assets/js/project.js')
-  .addEntry('program_comments', './assets/js/custom/program_comments.js')
+  .addEntry('project_js', './assets/js/project.js')
+  .addEntry('project_comments', './assets/js/custom/project_comments.js')
   .addEntry('search_old', './assets/js/search_old.js')
   .addEntry('search', './assets/js/search.js')
   .addEntry('media_library', './assets/js/media_library.js')
@@ -163,7 +163,7 @@ Encore
 
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
-  .addStyleEntry('program', './assets/styles/custom/program.scss')
+  .addStyleEntry('project_scss', './assets/styles/custom/project.scss')
   .addStyleEntry(
     'multi_column_article',
     './assets/styles/custom/multi_column_article.scss',

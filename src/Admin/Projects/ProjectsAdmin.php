@@ -120,14 +120,14 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('thumbnail', 'string',
         [
           'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-          'template' => 'Admin/program_thumbnail_image_list.html.twig',
+          'template' => 'Admin/project_thumbnail_image_list.html.twig',
         ]
       )
       ->add('private', null, ['editable' => false, 'sortable' => false])
       ->add('approved', null, ['editable' => true, 'sortable' => false])
       ->add('visible', null, ['editable' => true, 'sortable' => false])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
-        'show' => ['template' => 'Admin/CRUD/list__action_show_program_details.html.twig'],
+        'show' => ['template' => 'Admin/CRUD/list__action_show_project_details.html.twig'],
       ]])
     ;
   }
@@ -156,7 +156,7 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('thumbnail', 'string',
         [
           'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-          'template' => 'Admin/program_thumbnail_image_list.html.twig',
+          'template' => 'Admin/project_thumbnail_image_list.html.twig',
         ]
       )
       ->add('private', null, ['editable' => false, 'sortable' => false])

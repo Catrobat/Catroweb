@@ -20,42 +20,42 @@ export class TranslateProgram extends Translation {
   _initListeners() {
     const translateProgram = this
 
-    if (document.getElementById('program-translation-button') == null) {
+    if (document.getElementById('project-translation-button') == null) {
       return
     }
 
-    $('#program-translation-button').on('click', function (event) {
+    $('#project-translation-button').on('click', function (event) {
       $(this).hide()
 
       if (translateProgram.isTranslationNotAvailable('#name-translation')) {
-        $('#program-translation-loading-spinner').show()
+        $('#project-translation-loading-spinner').show()
         translateProgram.translateProgram()
       } else {
         translateProgram.openTranslatedProgram()
       }
     })
 
-    $('#remove-program-translation-button').on('click', function (event) {
+    $('#remove-project-translation-button').on('click', function (event) {
       $(this).hide()
-      $('#program-translation-button').show()
+      $('#project-translation-button').show()
 
       const $name = $('#name')
       const $nameTranslation = $('#name-translation')
-      $name.removeClass('program-name').addClass('program-name-animation')
+      $name.removeClass('project-name').addClass('project-name-animation')
       $nameTranslation
-        .removeClass('program-name')
-        .addClass('program-name-animation')
+        .removeClass('project-name')
+        .addClass('project-name-animation')
       $nameTranslation.animate({ width: 'toggle' })
       $name.animate(
         { width: 'toggle' },
         translateProgram.ANIMATION_TIME,
         function () {
           $('#name')
-            .removeClass('program-name-animation')
-            .addClass('program-name')
+            .removeClass('project-name-animation')
+            .addClass('project-name')
           $('#name-translation')
-            .removeClass('program-name-animation')
-            .addClass('program-name')
+            .removeClass('project-name-animation')
+            .addClass('project-name')
         },
       )
 
@@ -85,37 +85,37 @@ export class TranslateProgram extends Translation {
     }
 
     const byLineElements = new ByLineElementContainer(
-      '#program-translation-before-languages',
-      '#program-translation-between-languages',
-      '#program-translation-after-languages',
-      '#program-translation-first-language',
-      '#program-translation-second-language',
+      '#project-translation-before-languages',
+      '#project-translation-between-languages',
+      '#project-translation-after-languages',
+      '#project-translation-first-language',
+      '#project-translation-second-language',
     )
 
     this.setTranslationCredit(data, byLineElements)
   }
 
   openTranslatedProgram() {
-    $('#program-translation-loading-spinner').hide()
-    $('#remove-program-translation-button').show()
+    $('#project-translation-loading-spinner').hide()
+    $('#remove-project-translation-button').show()
 
     const $name = $('#name')
     const $nameTranslation = $('#name-translation')
-    $name.removeClass('program-name').addClass('program-name-animation')
+    $name.removeClass('project-name').addClass('project-name-animation')
     $nameTranslation
-      .removeClass('program-name')
-      .addClass('program-name-animation')
+      .removeClass('project-name')
+      .addClass('project-name-animation')
     $name.animate({ width: 'toggle' })
     $nameTranslation.animate(
       { width: 'toggle' },
       this.ANIMATION_TIME,
       function () {
         $('#name')
-          .removeClass('program-name-animation')
-          .addClass('program-name')
+          .removeClass('project-name-animation')
+          .addClass('project-name')
         $('#name-translation')
-          .removeClass('program-name-animation')
-          .addClass('program-name')
+          .removeClass('project-name-animation')
+          .addClass('project-name')
       },
     )
 
@@ -131,8 +131,8 @@ export class TranslateProgram extends Translation {
   }
 
   programNotTranslated() {
-    $('#program-translation-loading-spinner').hide()
-    $('#program-translation-button').show()
+    $('#project-translation-loading-spinner').hide()
+    $('#project-translation-button').show()
 
     let text = document.getElementById('name').innerText
 
