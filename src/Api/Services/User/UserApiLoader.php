@@ -27,11 +27,12 @@ class UserApiLoader extends AbstractApiLoader
     return $this->user_manager->search($query, $limit, $offset);
   }
 
-    public function getAllUsers(string $query, int $limit, int $offset): array
-    {
-        if ('' === trim($query) || ctype_space($query)) {
-            return [];
-        }
-        return $this->user_manager->findAll();
+  public function getAllUsers(string $query, int $limit, int $offset): array
+  {
+    if ('' === trim($query) || ctype_space($query)) {
+      return [];
     }
+
+    return $this->user_manager->findAll();
+  }
 }
