@@ -34,12 +34,13 @@
   <div id="content" class="medialib-content">
     {% for category in categories %}
       <div id="category-{{ category.displayID }}" data-name="{{ category.name | e('html_attr') }}"
-           style="display: none;" class="category">
-        <h2>{{ category.name }}</h2>
+           style="display: none;" class="category active">
+        <div class="header">{{ category.name }}</div>
         <div class="files"></div>
       </div>
     {% endfor %}
   </div>
+  {{ encore_entry_script_tags('medialib_content') }}
 
   {%
     set translations = {

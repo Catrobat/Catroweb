@@ -17,7 +17,14 @@ $img-border-strength: 2px;
       margin-top: 0;
     }
 
-    .files {
+    & .files {
+      height: 0;
+      overflow: hidden;
+      transition: 1s;
+      overflow-y: auto;
+    }
+    &.active .files {
+      height: auto;
       display: flex;
       flex-flow: row wrap;
 
@@ -148,6 +155,23 @@ $img-border-strength: 2px;
           }
         }
       }
+    }
+    & .header {
+      position: relative;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    & .header::before {
+      content: '\e313';
+      font-family: 'Material Icons', serif;
+      position: absolute;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      font-size: 1.5rem;
+    }
+    &.active .header::before {
+      content: '\e316';
     }
   }
 }
