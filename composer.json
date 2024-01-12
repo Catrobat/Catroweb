@@ -75,7 +75,7 @@
     "doctrine/doctrine-fixtures-bundle": "3.5.*",
     "dvdoug/behat-code-coverage": "5.3.*",
     "friends-of-behat/symfony-extension": "2.4.*",
-    "friends-of-behat/mink-extension": "v2.7.4",
+    "friends-of-behat/mink-extension": "v2.7.5",
     "friendsofphp/php-cs-fixer": "3.46.*",
     "phpstan/phpstan": "1.10.*",
     "phpstan/phpstan-doctrine": "1.3.*",
