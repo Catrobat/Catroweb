@@ -41,7 +41,7 @@ country: کشور
 loginText: ورود به سیستم
 privacyPolicy: حریم خصوصی
 imprint: مشخصات ناشر
-programDetails: جزئيات
+projectDetails: جزئيات
 somethingWentWrong: 'ای وای یک مشکلی پیش اومد.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'لطفا دوباره سعی کن!'
@@ -94,116 +94,116 @@ follower:
   unfollowError: "قادر به پیگیری کاربر دلخواه نیست!"
   unfollowQuestion: " آیا مطمئن هستید که میخواهید این کاربر را دنبال کنید؟"
   unfollowButton: "دنبال نکردن %username%"
-programs:
+project:
   welcome:
-    title: به %theme% Catrobat خوش آمدید
-    title_mindstorms: به سایت Catrobat برای Mindstorms EV3 و NXT خوش آمدید
-    subtitle: ایجاد داستان ها، بازی ها و بیشتر ...
-    subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا مورد گوشی های هوشمند خود را بخیه کنید!
-    subtitle_mindstorms: پروژه های خود را با روبات های LEGO MindStorms EV3 و NXT ایجاد کنید 
-    download: دانلود اپلیکیشن
-    statistics: آمار بیشتر
-  featured: ' پيشنهادي'
-  example: نمونه ها
-  newest: جدیدترین پروژه ها
-  recommended: پروژه های توصیه شده
-  scratchremixes: ریمیکس خراش
-  noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: حذف پروژه
   deleteConfirmation: |+
-    مطمئنی؟
-    آیا مطمئن هستید که می خواهید "%programName%" را حذف کنید؟
-    هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
-    بله، آن را حذف کنید!
-    لغو
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    مطمئنی؟
-    اگر تو '%programName%' را به خصوصی تنظیم کنی، آن را توسط کاربران دیگر دیده نمی شود و یا یافت نمی شود.
-    شما هنوز هم می توانید لینک پروژه خود را با دوستان خود به اشتراک بگذارید. شما می توانید دید را تغییر دهید تا نماد قفل را لمس کنید.
-    اگر شما "%programName%" را به طور عمومی تنظیم کنید، می توان آن را دیده و توسط کاربران دیگر دیده می شود.
-    بله، به طور عمومی تنظیم شود
-    بله، به خصوصی تنظیم شود
-    نخیر
-  reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
-  deleteCommentConfirmation: آیا مطمئن هستید که می خواهید این نظر را حذف کنید؟
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    حذف حساب؟
-    آیا مطمئن هستید که می خواهید حساب خود را حذف کنید؟ این نیز پروژه ها و نظرات آپلود شده را حذف خواهد کرد!
-    هیچ راهی برای بازگرداندن اقدامات شما وجود ندارد!
-    بله، این را حذف کنید!
-    لغو
-  tooLongName: نام پروژه خیلی طولانی است!
-  tooLongDescription: شرح پروژه خیلی طولانی است!
-  tooLongCredits: The project credits are too long!
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: بیشترین بازدید
     downloaded: بیشترین برنامه دانلود شده
-  popular: Popular projects
-  random: پروژه های تصادفی
-  related: پروژه های مرتبط
-  downloads: '%downloads%دانلودها'
-  sample: نمونه پروژه‌ها
-  views: '%views%نمایش ها'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
+    likersTitle: "People who reacted to that project"
     all: "همه"
-  remixes: '{0}0 ریمیکس |{1}1 ریمیکس |]1,Inf]%remixes%% ریمیکس'
-  newRemixesNotificationTitle: '{1}%programName%دارای 1 ریمیکس جدید: |]1,Inf]%programName%دارای %remixes% ریمیکس جدید:'
-  submitted: پروژه های ارائه شده
-  uploaded: پروژه های آپلود شده
-  reportAsInappropriate: به عنوان نامناسب گزارش بده
-  reportProgram: گزارش پروژه
-  languageVersion: 'زبان برنامه "کت ربات":%languageVersion%'
-  reportLoginText: لطفا %login% برای گزارش این پروژه.
-  reportDialogHeader: چرا می خواهید این پروژه را گزارش دهید؟
-  reportDialogReason: یک دلیل وارد کن
-  reportRadioButtonInappropriate: این نامناسب است
-  reportRadioButtonCopyright: نقض قوانین حق تکثیر
-  reportRadioButtonSpam: این اسپم است
-  reportRadioButtonDislike: من این را دوست ندارم
-  reportOwnProgram: شما نمیتوانید پروژه خود را پرچم کنید.
-  reportAlready: شما قبلا این پروژه را پرچم گذاری کرده اید.
-  reportDone: شما این پروژه را گزارش کرده اید!
-  updateAppHeaderDownload: دانلود امکان پذیر نیست
-  updateAppTextDownload: لطفا برنامه خود را به جدیدترین نسخه به روز کنید. توجه داشته باشید که همه ویژگی های اندروید از قبل در IOS در دسترس نیستند.
-  updateAppTextDownloadApk: دانلود APK در حال حاضر فقط در اندروید و نه در IOS در دسترس است.
-  updateAppHeader: به روز رسانی اپلیکیشن
-  updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: تائید
-  checkout_this_program: پرداخت این پروژه Catrobat
-  show_more: نمایش بیشتر
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: نظرات
-  send: ارسال
+  send: Send
   delete: حذف
   report: گزارش
-  report_popup: نظرت با موفقیت گزارش شد.
-  report_popup_header: گزارش شد
-  deleted_popup: نظر با موفقیت حذف شد.
-  deleted_popup_header: حذف شده
-  noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: آیا مایلی تغییرات را ذخیره کنی؟
   btnDiscard: لغو
-  addComment: کامنتی بگذارید
-  thumbsUp: انگشت بالا
-  smile: لبخند
-  love: عشق
-  wow: ووو
-  linkTitle: لینک
-  link: پیوند پروژه را به کلیپ بورد کپی کنید
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: واکنش
-  downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
-  downloadStartText: بارگیری شروع شد ...
-  showTranslation: مشاهده ترجمه
-  hideTranslation: پنهان‌کردن ترجمه
-  translatedByLine: ترجمه شده توسط%provider% %sourceLanguage% به %targetLanguage%
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: پیش فرض
@@ -222,10 +222,10 @@ remixGraph:
   by: 'به وسیله'
   open: 'باز کن'
   showPaths: 'نمایش مسیر'
-  programNotAvailableErrorTitle: 'متأسفم...'
-  programNotAvailableErrorDescription: 'این پروژه بیشتر در دسترس نیست!'
-  programNotAvailable: 'در دسترس نیست'
-  programUnknownUser: 'کاربر ناشناس'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -713,8 +713,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -759,13 +759,13 @@ checkOutUser: 'Check out this user:'
 community: 'جامعه Catrobat'
 back_to_app: 'خروج از جامعه'
 category:
-  recent: جدیدترین پروژه ها
-  random: پروژه های تصادفی
+  recent: Newest projects
+  random: Random projects
   most_viewed: بیشترین بازدید
   most_downloaded: بیشترین برنامه دانلود شده
   example: مثال
-  scratch: ریمیکس خراش
-  recommended: پروژه های توصیه شده
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

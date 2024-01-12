@@ -41,7 +41,7 @@ country: Країна
 loginText: Увійти в обліковий запис
 privacyPolicy: Політика конфіденційності
 imprint: Контактні дані
-programDetails: Подробиці
+projectDetails: Подробиці
 somethingWentWrong: 'Упс, щось пішло не так.'
 doesNotExist: 'Наведеного ресурсу не існує.'
 pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
@@ -94,29 +94,29 @@ follower:
   unfollowError: "Не вдалося відписатися від даного користувача!"
   unfollowQuestion: "Ви дійсно хочете відписатися від цього користувача?"
   unfollowButton: "Відписатися від %username%"
-programs:
+project:
   welcome:
-    title: Ласкаво просимо в %theme% від Catrobat
-    title_mindstorms: Ласкаво просимо на сайт Catrobat для Mindstorms EV3 та NXT
-    subtitle: Створюйте історії, ігри та багато іншого...
-    subtitle_embroidery: Вишийте власні візерунки на футболках, сумках, штанах та чохлах для смартфона!
-    subtitle_mindstorms: Створіть свої власні проєкти використовуючи роботів Lego Mindstorms EV3 та NXT
-    download: Завантажити додаток
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
     statistics: Більше статистики
-  featured: Рекомендовані
-  example: Приклади
+  featured: Featured
+  example: Examples
   newest: Нещодавні проєкти
   recommended: Рекомендовані проєкти
   scratchremixes: Scratch ремікси
-  noPrograms: Наразі немає проєктів.
+  noProjects: Наразі немає проєктів.
   deleteAction: Видалити проєкт
   deleteConfirmation: |+
-    Ви впевнені?
-    Ви впевнені, що хочете видалити "%programName%"?
-    Відновити ваші дії буде неможливо!
-    Так, видалити це!
-    Скасувати
-  deleteNotFoundError: Проєкт, який ви хочете видалити не було знайдено у вашому профілі.
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  deleteNotFoundError: The project to be deleted could not be found under your user.
   private: приватний
   public: публічний
   setPrivateAction: Зробити приватним
@@ -130,7 +130,7 @@ programs:
     Так, установити приватний
     Ні 
   reportCommentConfirmation: Ви впевнені, що хочете поскаржитися на цей коментар?
-  deleteCommentConfirmation: Ви впевнені, що хочете видалити цей коментар?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
     Видалення облікового запису? 
     Ви впевнені, що хочете видалити свій обліковий запис? 
@@ -142,18 +142,18 @@ programs:
   tooLongDescription: Опис проэкту надто довге!
   tooLongCredits: Примітки та автори проєкту надто довгі!
   trending: Популярні проєкти
-  most:
-    viewed: Найчастіше переглянуті
-    downloaded: Найчастіше завантажувані
   popular: Популярні проєкти
-  random: Випадкові проєкти
+  most:
+    viewed: Найбільше переглянуті
+    downloaded: Найбільше завантажені
+  random: Random projects
   related: Пов’язані проєкти
-  downloads: '%downloads% завантажень'
-  sample: Приклад проєктів
+  downloads: '%downloads% downloads'
+  sample: Example projects
   views: '%views% перегляд(-ів)'
   likes:
     likersTitle: "Люди, які відреагували на цей проєкт"
-    all: "Усі"
+    all: "Всі"
   remixes: '{0}0 реміксів |{1}1 реміксів |]1,Inf]%remixes% реміксів'
   newRemixesNotificationTitle: '{1}"%programName%" має 1 новий ремікс: |] 1,Inf] "%programName%" має %remixes% нових реміксів: '
   submitted: Подані проєкти
@@ -177,7 +177,7 @@ programs:
   updateAppHeader: Оновити додаток
   updateAppText: Будь ласка, оновіть додаток до найновішої версії.
   btnClosePopup: Гаразд
-  checkout_this_program: Оцініть цей Catrobat проєкт
+  checkout_this_project: Оцініть цей Catrobat проєкт
   show_more: Показати більше
   comments: Коментарі
   send: Надіслати
@@ -207,15 +207,15 @@ programs:
   translatedByLine: 'Перекладано %provider% з мови: %sourceLanguage%, на мову: %targetLanguage%'
   googleTranslate: Перекладач Google
   confrimDelete: Ви справді хочете видалити цей переклад?
-  default: Стандартний
+  default: За замовчуванням
   save: Зберегти
-  translationTitle: 'Переклад: %language%'
-  editDefault: Редагувати стандартний
-  editTranslation: 'Редагувати переклад мовою: %language%'
-  translations: Переклади
-  createTranslation: Створити переклад
-  deletedComment: '**Видалено**'
-  replyLabel: відповісти
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
   repliesLabel: відповіді
 remixGraph:
   title: Ремікси
@@ -223,10 +223,10 @@ remixGraph:
   by: 'від'
   open: 'Відкрито'
   showPaths: 'Показати контури'
-  programNotAvailableErrorTitle: 'Вибачте...'
-  programNotAvailableErrorDescription: 'Проєкт більше не доступний!'
-  programNotAvailable: 'Недоступно'
-  programUnknownUser: 'Невідомий користувач'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
 accountConfirmation:
@@ -709,8 +709,8 @@ catro-notifications:
     message: '%user_link% реагує в %program_link%.'
   follow:
     message: '%user_link% підписується на вас.'
-  program-upload:
-    message: '%user_link% опубліковує нову гру %program_link%.'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% опубліковує ремікс %program_link% вашої гри %remix_program_link%.'
 clipboard:
@@ -756,7 +756,7 @@ community: 'Спільнота Catrobat'
 back_to_app: 'Вийти із спільноти'
 category:
   recent: Нещодавні проєкти
-  random: Випадкові проєкти
+  random: Random projects
   most_viewed: Найчастіше переглянуті
   most_downloaded: Найбільше завантажені
   example: Приклад

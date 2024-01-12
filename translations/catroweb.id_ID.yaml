@@ -41,7 +41,7 @@ country: Negara
 loginText: masuk
 privacyPolicy: Kebijakan privasi
 imprint: Jejak
-programDetails: Rincian
+projectDetails: Rincian
 somethingWentWrong: 'Ups ada kesalahan.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Silahkan coba lagi!'
@@ -94,116 +94,116 @@ follower:
   unfollowError: "Tidak dapat berhenti mengikuti pengguna yang diinginkan!"
   unfollowQuestion: "Anda yakin ingin berhenti mengikuti pengguna ini?"
   unfollowButton: "Berhenti mengikuti %username%"
-programs:
+project:
   welcome:
-    title: Selamat datang di %theme% Catrobat
-    title_mindstorms: Selamat datang di situs Catrobat untuk Mindstorms EV3 dan NXT
-    subtitle: Buat cerita, game, dan lainnya...
-    subtitle_embroidery: Stich patters Anda sendiri di T-shirt, tas, celana, atau case smartphone Anda!
-    subtitle_mindstorms: Buat proyek Anda sendiri dengan robot Lego Mindstorms EV3 dan NXT Anda
-    download: Unduh aplikasinya
-    statistics: Lebih banyak statistik
-  featured: Fitur
-  example: Contoh
-  newest: Proyek terbaru
-  recommended: Proyek yang direkomendasikan
-  scratchremixes: Gores remix
-  noPrograms: Saat ini tidak ada proyek.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: Hapus proyek
   deleteConfirmation: |+
-    Apakah kamu yakin
-    Anda yakin ingin menghapus "%programName%"?
-    Tidak ada cara untuk memulihkan tindakan Anda!
-    Ya, hapus!
-    Membatalkan
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    Apakah kamu yakin
-    Jika Anda menyetel '%programName%' menjadi pribadi, ini tidak akan terlihat atau ditemukan oleh pengguna lain.
-    Anda masih dapat membagikan tautan proyek Anda dengan teman-teman Anda. Anda dapat mengaktifkan visibilitas dengan mengetuk ikon gembok.
-    Jika Anda menyetel "%programName%" ke publik, itu dapat dilihat dan ditemukan oleh pengguna lain.
-    Ya, setel ke publik
-    Ya, setel ke pribadi
-    Tidak
-  reportCommentConfirmation: Apakah Anda yakin ingin melaporkan komentar ini?
-  deleteCommentConfirmation: Anda yakin ingin menghapus komentar ini?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Penghapusan akun?
-    Anda yakin ingin menghapus akun Anda? Ini juga akan menghapus proyek dan komentar yang Anda unggah!
-    Tidak ada cara untuk memulihkan tindakan Anda!
-    Ya, hapus!
-    Membatalkan
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: Deskripsi proyek terlalu panjang!
-  tooLongCredits: Catatan dan kredit proyek terlalu panjang!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Paling banyak dilihat
     downloaded: Paling banyak diunduh
-  popular: Popular projects
-  random: Proyek acak
-  related: Proyek terkait
-  downloads: '%downloads% unduhan'
-  sample: Contoh proyek
-  views: '%views% dilihat'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Orang-orang yang bereaksi terhadap proyek itu"
+    likersTitle: "People who reacted to that project"
     all: "Semua"
-  remixes: '{0}0 remix |{1}1 remix |] 1, Inf] %remixes% remix'
-  newRemixesNotificationTitle: '|{1}"%programName%" memiliki 1 remix baru: |]1,Inf] "%programName%" memiliki %remixes% remix baru:'
-  submitted: Proyek yang dikirim
-  uploaded: Proyek yang diunggah
-  reportAsInappropriate: Laporkan sebagai tidak pantas
-  reportProgram: Laporkan proyek
-  languageVersion: 'Versi bahasa Catrobat: %languageVersion%'
-  reportLoginText: Harap %login% untuk melaporkan proyek ini.
-  reportDialogHeader: Mengapa Anda ingin melaporkan proyek ini?
-  reportDialogReason: Masukkan alasan
-  reportRadioButtonInappropriate: itu tidak pantas
-  reportRadioButtonCopyright: pelanggaran hak cipta
-  reportRadioButtonSpam: Itu spam
-  reportRadioButtonDislike: Saya tidak menyukainya
-  reportOwnProgram: Anda tidak dapat menandai proyek Anda sendiri.
-  reportAlready: Anda sudah menandai proyek ini.
-  reportDone: Anda melaporkan proyek ini!
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Perbaharui Aplikasi
-  updateAppText: Harap perbarui aplikasi Anda ke versi terbaru untuk dapat mengunduh proyek ini.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Baik
-  checkout_this_program: Lihat proyek Catrobat ini
-  show_more: Selengkapnya
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Komentar
-  send: Kirim
+  send: Send
   delete: Hapus
   report: Laporkan
-  report_popup: Komentar berhasil dilaporkan.
-  report_popup_header: Telah dilaporkan
-  deleted_popup: Komentar tersebut berhasil dihapus.
-  deleted_popup_header: Dihapus
-  noAdminRights: Anda tidak memiliki hak admin. Silakan Masuk sebagai Admin.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Apakah Anda ingin menyimpan perubahan?
   btnDiscard: Singkirkan
-  addComment: Tulis komen
-  thumbsUp: Jempolan!
-  smile: Tersenyum!
-  love: Cinta!
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
   wow: Wooow!
-  linkTitle: Tautan
-  link: Salin tautan proyek ke papan klip
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Reaksi
-  downloadErrorText: Terjadi kesalahan saat mengunduh proyek. Silakan coba lagi nanti.
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: Tampilkan terjemahan
-  hideTranslation: Sembunyikan terjemahan
-  translatedByLine: Diterjemahkan oleh %provider% dari %sourceLanguage% ke %targetLanguage%
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
@@ -222,10 +222,10 @@ remixGraph:
   by: 'oleh'
   open: 'Buka '
   showPaths: 'Tampilkan Jalur'
-  programNotAvailableErrorTitle: 'Maaf...'
-  programNotAvailableErrorDescription: 'Proyek tidak tersedia lagi!'
-  programNotAvailable: 'Tidak tersedia'
-  programUnknownUser: 'Pengguna tidak dikenal'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -709,8 +709,8 @@ catro-notifications:
     message: '%user_link% bereaksi terhadap %program_link%.'
   follow:
     message: '%user_link% sekarang mengikuti Anda.'
-  program-upload:
-    message: '%user_link% membuat game baru %program_link%.'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% membuat remix %program_link% dari game Anda %remix_program_link%.'
 clipboard:
@@ -755,13 +755,13 @@ checkOutUser: 'Check out this user:'
 community: 'Komunitas Catrobat'
 back_to_app: 'Keluar dari komunitas'
 category:
-  recent: Proyek terbaru
-  random: Proyek acak
+  recent: Newest projects
+  random: Random projects
   most_viewed: Paling banyak dilihat
   most_downloaded: Paling banyak diunduh
   example: Contoh
-  scratch: Gores remix
-  recommended: Proyek yang direkomendasikan
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

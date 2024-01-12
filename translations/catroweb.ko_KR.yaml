@@ -41,7 +41,7 @@ country: 국가
 loginText: 로그인
 privacyPolicy: 개인 정보 보호 정책
 imprint: 표시하기
-programDetails: 세부 사항
+projectDetails: 세부 사항
 somethingWentWrong: '죄송합니다. 오류가 발생했습니다.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: '다시 시도하세요!'
@@ -94,115 +94,116 @@ follower:
   unfollowError: "언팔로우 할 수 없습니다!"
   unfollowQuestion: "정말 이 사용자를 언팔로우 하시겠습니까?"
   unfollowButton: "%username% 을(를) 팔로우 취소함"
-programs:
+project:
   welcome:
-    title: 환영합니다. Catrobat's %theme%
-    title_mindstorms: Mindstorms EV3 및 NXT 용 Catrobat 사이트에 오신 것을 환영합니다.
-    subtitle: 이야기, 게임 등등 만들고...
-    subtitle_embroidery: 티셔츠, 가방, 바지, 또는 스마트폰 케이스에 패턴을 스티치하세요!
-    subtitle_mindstorms: Lego Mindstorms EV3 및 NXT 로봇으로 자신 만의 프로젝트를 만드세요.
-    download: 앱 다운로드하기
-    statistics: 더 많은 통계자료
-  featured: 추천
-  example: 예시
-  newest: 최신 프로그램
-  recommended: 추천 프로그램
-  scratchremixes: 스크래치 리믹스
-  noPrograms: 프로젝트가 없습니다.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: 프로젝트 삭제
   deleteConfirmation: |+
-    맞습니까?
-    "%programName%"을 삭제할 예정이세요?
-    되돌릴 수 없습니다.
-    예, 삭제!
-    취소
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    확실한가요?
-    '%programName%'을 비공개로 설정한다면 다른 사용자들이 보거나 찾을 수 없을 것입니다. 그래도 당신은 당신의 친구들과 당신의 프로젝트의 링크를 공유할 수 있습니다. 자물쇠 아이콘을 눌러 공개 여부를 전환할 수 있습니다.
-    만약 당신이 '%programName%'을 공개로 설정한다면, 당신의 프로젝트를 다른 사용자들이 보거나 찾을 수 있습니다.
-    공개하는 데에 동의합니다.
-    비공개하는 데에 동의합니다.
-    아니오.
-  reportCommentConfirmation: 이 댓글을 리포트하시겠습니까?
-  deleteCommentConfirmation: 이 댓글을 정말 삭제하시겠습니까?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    계정 삭제?
-    게정 삭제를 원하세요? 업로드한 프로그램과 코멘트도 삭제됩니다!
-    이렇게 하면 되돌릴 수 없습니다!
-    예, 삭제합니다!
-    취소
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: 설명이 너무 깁니다!
-  tooLongCredits: 프로젝트 노트와 크레딧이 너무 깁니다!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: 가장 많이 본 프로그램
     downloaded: 인기 다운로드
-  popular: Popular projects
-  random: 랜덤 프로젝트
-  related: 관련된 프로젝트
-  downloads: '%downloads% 다운로드'
-  sample: 예제 프로젝트
-  views: '%views% 조회'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "이 프로젝트에 관심있는 사람들"
+    likersTitle: "People who reacted to that project"
     all: "모두"
-  remixes: '리믹스 {0}0|리믹스 {1}1|] 1, Inf]%remixes% 리믹스'
-  newRemixesNotificationTitle: '|{1} "%programName%" 1 새로운 리믹스: |] 1, Inf] "%programName%" 새로운 리믹스 %remixes%  :'
-  submitted: 제출된 프로그램
-  uploaded: 업로드된 프로그램
-  reportAsInappropriate: 부적합한 프로그램으로 보고
-  reportProgram: 프로젝트를 보고하다
-  languageVersion: 'Catrobat 언어 버전: %languageVersion%'
-  reportLoginText: 리포트 하려면 %login% 해 주세요.
-  reportDialogHeader: 이 프로그램을 리포트하는 이유는 무엇인가요?
-  reportDialogReason: 이유를 입력하세요
-  reportRadioButtonInappropriate: 부적절함
-  reportRadioButtonCopyright: 복사권 침해
-  reportRadioButtonSpam: 스팸입니다
-  reportRadioButtonDislike: 싫어요.
-  reportOwnProgram: 자신의 프로그램을 추천할 수 없습니다
-  reportAlready: 이미 이 프로그램을 추천했습니다.
-  reportDone: 이 프로젝트를 리포트했습니다.
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: 응용 프로그램 업데이트
-  updateAppText: 이 프로그램을 다운로드하려면 최신 버전으로 당신의 앱을 업데이트 하세요.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: 예
-  checkout_this_program: 이 Catrobat 프로그램을 점검하세요
-  show_more: 더 보기
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: 코멘트
-  send: 보내기
+  send: Send
   delete: 삭제
   report: 보고서
-  report_popup: 코멘트가 성공적으로 추가 되었습니다.
-  report_popup_header: 보고되었습니다
-  deleted_popup: 코멘트가 삭제되었습니다.
-  deleted_popup_header: 삭제됨
-  noAdminRights: 권한이 없습니다. 로그인 해 주세요.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: 변경 내용을 저장 하시겠습니까?
   btnDiscard: 저장 안함
-  addComment: 댓글 쓰기
-  thumbsUp: 좋아요!
-  smile: 웃는 표정
-  love: 좋아요!
-  wow: 와우!
-  linkTitle: 링크
-  link: 클립보드에 링크 복사하기
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: 좋아요
-  downloadErrorText: 프로젝트 다운중 오류 발생. 잠시 후 다시 시도.
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: 번역보기
-  hideTranslation: 번역 숨기기
-  translatedByLine: '%provider%가 %sourceLanguage%에서 %targetLanguage%로 번역했습니다.'
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: 기본값
@@ -221,10 +222,10 @@ remixGraph:
   by: '만큼'
   open: '열기'
   showPaths: '경로 표시'
-  programNotAvailableErrorTitle: '죄송합니다..'
-  programNotAvailableErrorDescription: '프로그램을 더 이상 사용할 수 없습니다!'
-  programNotAvailable: '사용할수 없음'
-  programUnknownUser: '알 수 없는 사용자'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -706,8 +707,8 @@ catro-notifications:
     message: '%user_link%가 %program_link%에 반응했습니다.'
   follow:
     message: '%user_link% 사용자가 당신을 팔로우합니다.'
-  program-upload:
-    message: '%user_link%가 %program_link%에 반응했습니다.'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link%님이 게임 %remix_program_link%의 %program_link% 리믹스를 만들었습니다.'
 clipboard:
@@ -752,13 +753,13 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat 공유'
 back_to_app: '커뮤니티 나가기'
 category:
-  recent: 최신 프로그램
-  random: 랜덤 프로젝트
+  recent: Newest projects
+  random: Random projects
   most_viewed: 가장 많이 본 프로그램
   most_downloaded: 인기 다운로드
   example: 예
-  scratch: 스크래치 리믹스
-  recommended: 추천 프로그램
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

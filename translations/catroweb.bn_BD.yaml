@@ -41,7 +41,7 @@ country: দেশ
 loginText: প্রবেশ করুন
 privacyPolicy: গোপনীয়তার নীতি
 imprint: মুদ্রিত করা
-programDetails: বিস্তারিত
+projectDetails: বিস্তারিত
 somethingWentWrong: 'ওহো, কিছু ভুল হয়েছে'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'অনুগ্রহ করে আবার চেষ্টা করুন।'
@@ -94,116 +94,116 @@ follower:
   unfollowError: "কাঙ্ক্ষিত ব্যবহারকারীকে অনুসরণ করতে অক্ষম!"
   unfollowQuestion: "আপনি কি নিশ্চিত যে আপনি এই ব্যবহারকারীকে অনুসরণ করতে চান?"
   unfollowButton: "অনুসরণ %username%"
-programs:
+project:
   welcome:
-    title: আপনাকে স্বাগতম Catrobat's %theme%
-    title_mindstorms: মাইন্ডস্টর্মস ইভি 3 এবং এনএক্সটি-র জন্য ক্যাটরোব্যাটের সাইটে আপনাকে স্বাগতম
-    subtitle: গল্প, খেলা এবং আরও অনেক কিছু তৈরি করুন ...
-    subtitle_embroidery: আপনার নিজের টি-শার্ট, ব্যাগ, প্যান্ট বা স্মার্টফোনের ক্ষেত্রে নিজের প্যাটারগুলি স্টিচ করুন!
-    subtitle_mindstorms: আপনার লেগো মাইন্ডস্টর্মস ইভি 3 এবং এনএক্সটি রোবট দিয়ে আপনার নিজস্ব প্রকল্প তৈরি করুন
-    download: অ্যাপ্লিকেশন ডাউনলোড করুন
-    statistics: আরও পরিসংখ্যান
-  featured: বৈশিষ্ট্য
-  example: উদাহরণ
-  newest: নতুন প্রকল্প
-  recommended: প্রস্তাবিত প্রকল্পগুলি
-  scratchremixes: স্ক্র্যাচ রিমিক্সস
-  noPrograms: বর্তমানে কোন প্রকল্প নেই।
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: প্রকল্প মুছুন
   deleteConfirmation: |+
-    আপনি কি নিশ্চিত?
-    আপনি কি  "%programName%" মুছতে চান?
-    আপনার কার্যটি  পুনরুদ্ধার করার কোনও উপায় নেই!
-    হ্যাঁ, এটি মুছুন!
-    বাতিল
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    তুমি কি নিশ্চিত?
-    আপনি যদি  '%programName%' বেসরকারীতে সেট করেন তবে এটি অন্য ব্যবহারকারীদের দ্বারা দেখা বা পাওয়া যাবে না।
-    আপনি এখনও আপনার প্রকল্পের লিঙ্কটি আপনার বন্ধুদের সাথে ভাগ করতে পারেন। প্যাডলক আইকনটি টেপ করে আপনি দৃশ্যমানতা টগল করতে পারেন।
-    যদি আপনি "%programName%" জনসাধারণের কাছে সেট করেন, এটি অন্যান্য ব্যবহারকারীদের দ্বারা দেখা ও পাওয়া যাবে।
-    হ্যাঁ, জনসাধারণের কাছে সেট করুন
-    হ্যাঁ, প্রাইভেটে সেট করুন
-    না
-  reportCommentConfirmation: আপনি কি নিশ্চিত যে আপনি এই মন্তব্যটি বিবরণ পেশ করতে চান?
-  deleteCommentConfirmation: আপনি কি নিশ্চিত যে আপনি এই মন্তব্যটি মুছে ফেলতে চান?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: প্রকল্পের বিবরণটি অনেক দীর্ঘ!
-  tooLongCredits: The project credits are too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: সর্বোচ্চ  পরিদর্শন
     downloaded: সর্বোচ্চ ডাউনলোডকৃত
-  popular: Popular projects
-  random: এলোমেলো প্রকল্প
-  related: সংশ্লিষ্ট প্রকল্প
-  downloads: '%downloads% ডাউনলোড'
-  sample: উদাহরণ প্রকল্প
-  views: '%views% পরিদর্শন'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "এই প্রকল্পে প্রতিক্রিয়াযুক্ত লোকেরা"
+    likersTitle: "People who reacted to that project"
     all: "সব"
-  remixes: '{0} ০ রিমিক্স | {1} ১ রিমিক্স |]1,Inf] %remixes% রিমিক্স'
-  newRemixesNotificationTitle: '{1}"%programName%" এর ১ টি নতুন রিমিক্স রয়েছে: |]1,Inf] "%programName%" এর রয়েছে %remixes% নতুন রিমিক্স রয়েছে:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
-  reportAsInappropriate: অনুপযুক্ত হিসাবে রিপোর্ট করুন
-  reportProgram: প্রকল্পের রিপোর্ট করুন
-  languageVersion: 'Catrobat ভাষার সংস্করণ: %languageVersion%'
-  reportLoginText: এই প্রকল্পটি রিপোর্ট করতে দয়া করে %login%
-  reportDialogHeader: আপনি কেন এই প্রকল্পটি রিপোর্ট করতে চান?
-  reportDialogReason: কারণ লিখুন
-  reportRadioButtonInappropriate: এটা সঠিক না
-  reportRadioButtonCopyright: কপিরাইট লঙ্ঘন
-  reportRadioButtonSpam: এটি স্প্যাম
-  reportRadioButtonDislike: আমি এটা পছন্দ করি না
-  reportOwnProgram: আপনি আপনার নিজের প্রকল্পটিকে ফ্ল্যাগ করতে পারবেন না।
-  reportAlready: আপনি ইতিমধ্যে এই প্রকল্পটি পতাকাঙ্কিত করেছেন।
-  reportDone: আপনি এই প্রকল্পের রিপোর্ট করেছেন!
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: অ্যাপ্লিকেশন আপডেট করুন
-  updateAppText: এই প্রকল্পটি ডাউনলোড করতে সক্ষম হতে দয়া করে আপনার অ্যাপ্লিকেশনটিকে নতুন সংস্করণে আপডেট করুন।
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: ঠিক আছে
-  checkout_this_program: এই ক্যাট্রোব্যাট প্রকল্পটি দেখুন
-  show_more: আরও দেখান
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: মন্তব্যসমূহ
-  send: পাঠান
+  send: Send
   delete: মুছুন
   report: প্রতিবেদন করুন
-  report_popup: মন্তব্য সফলভাবে প্রতিবেদন করা হয়েছিল
-  report_popup_header: প্রতিবেদন
-  deleted_popup: মন্তব্যটি সফলভাবে মুছে ফেলা হয়েছে।
-  deleted_popup_header: মুছুন
-  noAdminRights: আপনার অ্যাডমিন অধিকার নেই। অনুগ্রহ করে  অ্যাডমিন হিসাবে প্রবেশ করুন।
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: আপনি কি আপনার পরিবর্তনগুলি সংরক্ষণ করতে চান?
   btnDiscard: বাতিল করুন
-  addComment: মন্তব্য লিখুন
-  thumbsUp: সাবাস
-  smile: হাসি!
-  love: ভালবাসা
-  wow: কি দারুন
-  linkTitle: যোগসূত্র
-  link: ক্লিপবোর্ডে প্রকল্পের লিঙ্কটি অনুলিপি করুন
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: প্রতিক্রিয়া
-  downloadErrorText: প্রকল্পটি ডাউনলোড করার সময় ত্রুটি ঘটেছে। পরে আবার চেষ্টা করুন.
-  downloadStartText: ডাউনলোড শুরু হয়েছে...
-  showTranslation: অনুবাদ দেখান
-  hideTranslation: অনুবাদ লুকান
-  translatedByLine: '%provider% %sourceLanguage% থেকে %targetLanguage% দ্বারা অনুবাদিত'
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: পূর্ব-নির্ধারিত
@@ -222,10 +222,10 @@ remixGraph:
   by: 'দিয়ে'
   open: 'খুলুন'
   showPaths: 'পথ দেখান'
-  programNotAvailableErrorTitle: 'দুঃখিত'
-  programNotAvailableErrorDescription: 'প্রকল্পটি আর পাওয়া যায় না!'
-  programNotAvailable: 'পাওয়া যায়নি'
-  programUnknownUser: 'অপরিচিত ব্যবহারকারী'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -715,8 +715,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'ব্যবহারকারী %user_link% আপনাকে এখন অনুসরণ করে।'
-  program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -761,13 +761,13 @@ checkOutUser: 'Check out this user:'
 community: 'ক্যাট্রোব্যাট সম্প্রদায়'
 back_to_app: 'সম্প্রদায় থেকে প্রস্থান করুন'
 category:
-  recent: নতুন প্রকল্প
-  random: এলোমেলো প্রকল্প
+  recent: Newest projects
+  random: Random projects
   most_viewed: সর্বোচ্চ  পরিদর্শন
   most_downloaded: সর্বোচ্চ ডাউনলোডকৃত
   example: উদাহরণ
-  scratch: স্ক্র্যাচ রিমিক্সস
-  recommended: প্রস্তাবিত প্রকল্পগুলি
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

@@ -41,7 +41,7 @@ country: País
 loginText: Inicio de sesión
 privacyPolicy: Política de privacidad
 imprint: Grabado
-programDetails: Detalles
+projectDetails: Detalles
 somethingWentWrong: 'Ooooops algo está mal.'
 doesNotExist: 'La cosa que usted busca no existe.'
 pleaseTryAgain: 'Por favor inténtalo de nuevo!'
@@ -94,125 +94,125 @@ follower:
   unfollowError: "¡No se puede dejar de seguir al usuario deseado!"
   unfollowQuestion: "¿Estás seguro de que quieres dejar de seguir a este usuario?"
   unfollowButton: "Dejar de seguir a %username%"
-programs:
+project:
   welcome:
-    title: Bienvenido a %theme% de Catrobat
-    title_mindstorms: Bienvenido al sitio de Catrobat para Mindstorms EV3 y NXT
-    subtitle: Crear historias, juegos y mucho más...
-    subtitle_embroidery: '¡Pega tus propios patrones en tus camisetas, bolsas, pantalones o caja de smartphone!'
-    subtitle_mindstorms: Crea tus propios proyectos con tus robots Lego Mindstorms EV3 y NXT
-    download: Descargue la app
-    statistics: Más Estadísticas
-  featured: Destacados
-  example: Ejemplos
-  newest: Proyectos más recientes
-  recommended: Proyectos recomendados
-  scratchremixes: Remixes de Scratch
-  noPrograms: Actualmente no hay proyectos.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: Eliminar proyecto
   deleteConfirmation: |+
-    ¿Está seguro?
-    ¿Está seguro de que desea eliminar "%programName%"?
-    ¡No hay forma de restaurar sus acciones!
-    Sí, eliminarlo!
-    Cancelar
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: El proyecto a ser eliminado no se ha encontrado bajo tu usuario
   private: private
   public: public
   setPrivateAction: Hacer privado
   setPublicAction: Hacer público
   changeVisibility: |+
-    ¿Estás seguro?
-    Si estableces '%programName%' en privado, no será visto o encontrado por otros usuarios.
-    Todavía puedes compartir el enlace de tu proyecto con tus amigos. Puede cambiar la visibilidad tocando el icono de candado.
-    Si estableces "%programName%" a público, otros usuarios pueden verla y encontrarla.
-    Sí, establecer a público
-    Sí, establecer a privado
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
     No
-  reportCommentConfirmation: '¿Está seguro que desea reportar este comentario?'
-  deleteCommentConfirmation: '¿Está seguro que desea eliminar este comentario?'
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    ¿Eliminar la cuenta?
-    ¿Está seguro de que desea eliminar su cuenta? ¡Esto también eliminará sus proyectos y comentarios subidos!
-    ¡No hay forma de restaurar tus acciones!
-    Sí, eliminarla!
-    Cancelar
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: '¡El nombre del proyecto es demasiado largo!'
-  tooLongDescription: '¡La descripción del proyecto es demasiado larga!'
-  tooLongCredits: The project credits are too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Más visto
     downloaded: Más descargados
-  popular: Popular projects
-  random: Proyectos aleatorios
-  related: Proyectos relacionados
-  downloads: '%downloads% descargas'
-  sample: Proyectos de ejemplo
-  views: '%views% visitas'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Personas que reaccionaron a ese proyecto"
+    likersTitle: "People who reacted to that project"
     all: "Todos"
-  remixes: '{0}0 remixes | remix{1}1 |] 1, Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1} "%programName%" tiene 1 remix nuevo: |] 1, Inf] "%programName%" tiene nuevos remixes de %remixes%:'
-  submitted: Proyectos enviados
-  uploaded: Proyectos subidos
-  reportAsInappropriate: Reporte como inapropiado
-  reportProgram: Reportar proyecto
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
   languageVersion: 'Versión de idioma: %languageVersion%'
-  reportLoginText: Por favor %login% para reportar este proyecto.
-  reportDialogHeader: '¿Por qué quieres reportar este proyecto?'
-  reportDialogReason: Entre una razón
-  reportRadioButtonInappropriate: Es inapropiado
-  reportRadioButtonCopyright: Infracción de derechos de autor
-  reportRadioButtonSpam: Es spam
-  reportRadioButtonDislike: No me gusta
-  reportOwnProgram: No puedes marcar tu propio proyecto.
-  reportAlready: Ya has marcado este proyecto.
-  reportDone: '¡Has reportado este proyecto!'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: No se ha podido descargar 
   updateAppTextDownload: Por favor, actualiza tu app a la versión más reciente. Sé consciente que no todas las funciones de la versión de Android no están disponibles en la de iOS.
   updateAppTextDownloadApk: La conversión de .catrobat a app independiente solo está disponible en Android y no en iOS.
-  updateAppHeader: Actualizar la aplicación
-  updateAppText: Por favor, actualiza tu aplicación a la versión más reciente para poder descargar este proyecto.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Echa un vistazo a este proyecto Catrobat
-  show_more: Mostrar más
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Comentarios
-  send: Enviar
+  send: Send
   delete: Borrar
   report: Informe
-  report_popup: El comentario fue reportado con éxito.
-  report_popup_header: Reportado
-  deleted_popup: El comentario se ha eliminado correctamente.
-  deleted_popup_header: Eliminado
-  noAdminRights: No tiene derechos de administrador. Por favor, inicie sesión como administrador.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Editar proyecto
   closeProjectEditor: Cerrar el editor de proyectos
   closeEditorPrompt: '¿Quieres guardar los cambios?'
   btnDiscard: Ignorar
-  addComment: Escribir un comentario
-  thumbsUp: '¡Pulgar!'
-  smile: '¡Sonrisa!'
-  love: '¡Amor!'
-  wow: '¡Guau!'
-  linkTitle: Enlace
-  link: Copiar enlace del proyecto al portapapeles
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Reacciones
-  downloadErrorText: Error al descargar el proyecto. Inténtalo de nuevo más tarde.
-  downloadStartText: La descarga ha comenzado...
-  showTranslation: Mostrar traducción
-  hideTranslation: Ocultar la traducción
-  translatedByLine: Traducido por %provider% del %sourceLanguage% al %targetLanguage%
-  googleTranslate: Google Traductor
-  confrimDelete: '¿Estás segur@ que quieres eliminar esta traducción?'
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: Por defecto
   save: Guardar
-  translationTitle: 'Traducción de %language%'
-  editDefault: Editar default
-  editTranslation: Editar traducción de %language%
-  translations: Traducciones
-  createTranslation: Crear traducción 
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
   deletedComment: '**Deleted**'
   replyLabel: reply
   repliesLabel: replies
@@ -222,10 +222,10 @@ remixGraph:
   by: 'por'
   open: 'Abrir'
   showPaths: 'Mostrar rutas'
-  programNotAvailableErrorTitle: 'Lo sentimos...'
-  programNotAvailableErrorDescription: '¡El proyecto no está disponible más!'
-  programNotAvailable: 'No disponible'
-  programUnknownUser: 'Usuario desconocido'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -709,8 +709,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -755,13 +755,13 @@ checkOutUser: 'Check out this user:'
 community: 'Comunidad Catrobat'
 back_to_app: 'Salir de la comunidad'
 category:
-  recent: Proyectos más recientes
-  random: Proyectos aleatorios
+  recent: Newest projects
+  random: Random projects
   most_viewed: Más visto
   most_downloaded: Más descargados
   example: Ejemplo
-  scratch: Remixes de Scratch
-  recommended: Proyectos recomendados
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

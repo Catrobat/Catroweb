@@ -41,7 +41,7 @@ country: País
 loginText: login
 privacyPolicy: Política de Privacidade
 imprint: Imprimir
-programDetails: Detalhes
+projectDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
 doesNotExist: 'O recurso solicitado não existe.'
 pleaseTryAgain: 'Por favor, tente de novo!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Não foi possível deixar de seguir o usuário desejado!"
   unfollowQuestion: "Tem certeza de que deseja deixar de seguir este usuário?"
   unfollowButton: "Deixar de seguir %username%"
-programs:
+project:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
     title_mindstorms: Bem-vindo ao site do Catrobat's para Mindstorms EV3 e NXT
@@ -108,7 +108,7 @@ programs:
   newest: Novos projetos
   recommended: Projetos recomendados
   scratchremixes: Remixes do Scratch
-  noPrograms: Atualmente, não há nenhum projeto.
+  noProjects: Atualmente, não há nenhum projeto.
   deleteAction: Excluir projeto
   deleteConfirmation: |+
     Tem certeza?
@@ -141,10 +141,10 @@ programs:
   tooLongDescription: A descrição do projeto é muito longa!
   tooLongCredits: Os créditos do projeto são muito longos!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Mais vistos
     downloaded: Mais baixados
-  popular: Popular projects
   random: Projetos aleatórios
   related: Projetos Relacionados
   downloads: '%downloads% downloads'
@@ -171,50 +171,50 @@ programs:
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
   updateAppHeaderDownload: Não foi possível baixar
-  updateAppTextDownload: Por favor, atualize seu aplicativo para a versão mais recente. Esteja ciente de que nem todos os recursos do Android já estão disponíveis no IOS.
-  updateAppTextDownloadApk: O download de APK está disponível apenas no Android e não no IOS.
-  updateAppHeader: Atualizar aplicativo
-  updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Confira este projeto do Catrobat
-  show_more: Mostrar mais
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Comentários
-  send: Enviar
+  send: Send
   delete: Apagar
   report: Reportar
-  report_popup: Este comentário foi denunciado com sucesso.
-  report_popup_header: Denunciado
-  deleted_popup: Comentário apagado com sucesso.
-  deleted_popup_header: Apagado
-  noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
-  editProject: Editar o projeto
-  closeProjectEditor: Fechar editor de projeto
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Deseja salvar as alterações?
   btnDiscard: Descartar
-  addComment: Escrever comentário
-  thumbsUp: Joinha!
-  smile: Sorriso!
-  love: Coração!
-  wow: Uaaau!
-  linkTitle: Vincular
-  link: Copiar link do projeto para a área de transferência
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Curtidas
-  downloadErrorText: Ocorreu um erro ao baixar o projeto. Por favor, tente novamente mais tarde.
-  downloadStartText: Download iniciado...
-  showTranslation: Mostrar tradução
-  hideTranslation: Ocultar tradução
-  translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
-  googleTranslate: Google Tradutor
-  confrimDelete: Você tem certeza que deseja excluir a tradução?
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: Padrão
   save: Salvar
-  translationTitle: 'Tradução de %language% '
-  editDefault: Editar padrão
-  editTranslation: Editar tradução de %language%
-  translations: Traduções
-  createTranslation: Criar tradução
-  deletedComment: '**Excluído**'
-  replyLabel: responder
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
   repliesLabel: respostas
 remixGraph:
   title: Remixes
@@ -222,10 +222,10 @@ remixGraph:
   by: 'por'
   open: 'Abrir '
   showPaths: 'Mostrar Caminhos'
-  programNotAvailableErrorTitle: 'Desculpe...'
-  programNotAvailableErrorDescription: 'O projeto não está mais disponível!'
-  programNotAvailable: 'Indisponível'
-  programUnknownUser: 'Usuário desconhecido'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - Essa é uma mensagem automática - Por favor, não responda diretamente a este e-mail.
 accountConfirmation:
@@ -708,8 +708,8 @@ catro-notifications:
     message: '%user_link% reagiu no seu projeto %program_link%.'
   follow:
     message: '%user_link% está te seguindo.'
-  program-upload:
-    message: '%user_link% criou um novo projeto %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
 clipboard:

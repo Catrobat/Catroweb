@@ -41,7 +41,7 @@ country: ದೇಶ
 loginText: ಒಳನಡೆ
 privacyPolicy: ಎಕಾ೦ತತೆ ಕರ್ಯನೀತಿ
 imprint: ಅಚ್ಚು
-programDetails: Details
+projectDetails: Details
 somethingWentWrong: 'ಐಯೋ ಎನೋ ತಪಾಯಿತು.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'ದಯವಿಟ್ಟು ಪುನಹ ಪ್ರಯತ್ನಿಸಿ!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Unable to unfollow the desired user!"
   unfollowQuestion: "Are you sure you want to unfollow this user?"
   unfollowButton: "Unfollow %username%"
-programs:
+project:
   welcome:
     title: Welcome to Catrobat's %theme%
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
@@ -102,13 +102,13 @@ programs:
     subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Download the app
-    statistics: More Statistics
-  featured: ವಿಶಿಷ್ಟ
+    statistics: More statistics
+  featured: Featured
   example: Examples
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?
@@ -132,37 +132,37 @@ programs:
   reportCommentConfirmation: Are you sure you want to report this comment?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: ಬಹಳ ವೀಕ್ಷಿಸಿದ
     downloaded: ಅತ್ಯಂತ ಡೌನ್ಲೋಡಾದ
-  popular: Popular projects
   random: Random projects
   related: Related projects
-  downloads: '%downloads%ಡೌನ್ಲೋಡ್ಸ್'
+  downloads: '%downloads% downloads'
   sample: Example projects
-  views: '%views%ವೀಕ್ಷಣೆಗಳು'
+  views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
     all: "All"
-  remixes: '{0}0 ರೀಮಿಕ್ಸ್ ಗಳು|{1}1 ರೀಮಿಕ್ಸ್ |]1,Inf]%remixes% ರೀಮಿಕ್ಸ್ ಗಳು'
-  newRemixesNotificationTitle: '|{1}"%programName%" ಗೆ 1 ಹೊಸ ರೀಮಿಕ್ಸ್ ಇದೆ: |]1,Inf] "%programName%" ಗೆ %remixes% ಹೊಸ ರೀಮಿಕ್ಸ್ ಇದೆ:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
-  reportAsInappropriate: ಅಸಮರ್ಪಕ ಎಂದು ವರದಿ ಮಾಡಿ
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
-  languageVersion: "ಕ್ಯಾಟ್ರೋಬ್ಯಾಟ್ ಭಾಷೆಯ ಆವೃತ್ತಿ:\n%languageVersion%"
+  languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: ಒಂದು ಕಾರಣವನ್ನು ನಮೂದಿಸಿ
+  reportDialogReason: Enter a reason
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
@@ -173,17 +173,17 @@ programs:
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: ಅಪ್ಲಿಕೇಶನ್ ನವೀಕರಿಸಿ
+  updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
-  show_more: ಹೆಚ್ಚು ತೋರಿಸಿ
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: ಪ್ರತಿಕ್ರಿಯೆಗಳು
-  send: ಕಳುಹಿಸಿ
+  send: Send
   delete: ಅಳಿಸಿ
   report: ವರದೆ
-  report_popup: ಕಾಮೆಂಟ್ ಯಶಸ್ವಿಯಾಗಿ ವರದಿಯಾಗಿದೆ.
-  report_popup_header: ವರದಿಯಾಗಿದೆ
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
@@ -222,10 +222,10 @@ remixGraph:
   by: 'by'
   open: 'Open'
   showPaths: 'ದಾರಿ ತೋರಿಸು'
-  programNotAvailableErrorTitle: 'ಕ್ಷಮಿಸು...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'ಲಭ್ಯವಿಲ್ಲ'
-  programUnknownUser: 'ತಿಳಿಯದ ಬಳಕೆಗಾರ'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -708,8 +708,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
