@@ -13,6 +13,7 @@ use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\Survey;
 use App\DB\Entity\Translation\CommentMachineTranslation;
@@ -267,6 +268,36 @@ class DataFixturesContext implements Context
     $em->flush();
     $this->getManager()->flush();
   }
+  // -------------------------------------------------------------------------------------------------------------------
+  //
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @Given /^there are studio join requests:$/
+   */
+  public function thereAreStudioJoinRequests(TableNode $table): void
+  {
+    $em = $this->getManager();
+
+    foreach ($table->getHash() as $joinRequestConfig) {
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findUserByUsername($joinRequestConfig['User']);
+      if (!$user) {
+        throw new \RuntimeException('User not found: '.$joinRequestConfig['User']);
+      }
+      $studio = $this->getStudioManager()->findStudioByName($joinRequestConfig['Studio']);
+      if (!$studio) {
+        throw new \RuntimeException('Studio not found: '.$joinRequestConfig['Studio']);
+      }
+      $joinRequest = new StudioJoinRequest();
+      $joinRequest->setUser($user);
+      $joinRequest->setStudio($studio);
+      $joinRequest->setStatus($joinRequestConfig['Status']);
+      $em->persist($joinRequest);
+    }
+
+    $em->flush();
+  }
 
   // -------------------------------------------------------------------------------------------------------------------
   //  MaintenanceInformation
@@ -295,7 +326,6 @@ class DataFixturesContext implements Context
       $em->persist($maintenanceInformation);
     }
     $em->flush();
-    $this->getManager()->flush();
   }
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
@@ -1080,19 +1110,22 @@ class DataFixturesContext implements Context
         MyUuidGenerator::setNextValue($config['id']);
       }
 
+      $isPublic = filter_var($config['is_public'] ?? true, FILTER_VALIDATE_BOOLEAN);
+
       $studio = (new Studio())
         ->setName($config['name'])
         ->setDescription($config['description'] ?? '')
         ->setAllowComments($config['allow_comments'] ?? true)
-        ->setIsPublic($config['is_public'] ?? true)
+        ->setIsPublic($isPublic)
         ->setIsEnabled($config['is_enabled'] ?? true)
         ->setCreatedOn(isset($config['created_on']) ?
-          new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
-          new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
+            new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
+            new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
       ;
       $this->getManager()->persist($studio);
     }
+
     $this->getManager()->flush();
   }
 

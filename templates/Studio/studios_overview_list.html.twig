@@ -1,6 +1,7 @@
+
 <div class="studios-list">
     {% for studio in studios %}
-        {% if not public and studio.is_joined or public and not studio.is_joined and studio.is_public and studio.is_enabled %}
+        {% if not public and studio.is_joined and joined or public and not studio.is_joined  and not joined and studio.is_public and studio.is_enabled or not public and not joined and not studio.is_joined and not studio.is_public and studio.is_enabled %}
             <a href="{{ path('studio_details', {id: studio.id}) }}">
                 <div class="studios-list-item">
                     <img src="{{ asset(studio.cover_path|default('images/default/thumbnail.png')) }}" class="img-fluid studios-list-item--image" alt="">
@@ -22,7 +23,7 @@
                         <div class="studios-list-item--icons">
                             <div class="studios-list-item--icon-wrapper">
                                 <span class="material-icons">person</span>
-                                <span class="studios-list-item--icons-text ms-2">{{ studio.studio_users }}</span>
+                                <span id="studios-user-count-{{ studio.id }}" class="studios-list-item--icons-text ms-2">{{ studio.studio_users }}</span>
                             </div>
                             <div class="studios-list-item--icon-wrapper">
                                 <span class="material-icons">app_shortcut</span>
@@ -37,19 +38,38 @@
                             </button>
                             <div id="studios-list-item--menu-{{ studio.id }}" class="mdc-menu mdc-menu-surface" data-studio-id="{{ studio.id }}">
                                 <ul class="mdc-deprecated-list" role="menu" aria-hidden="true" aria-orientation="vertical" tabindex="-1">
-                                    <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
+                                    <li  class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">
-                                            {% if not studio.is_joined %}
-                                                {{ 'studio.details.join'|trans({}, 'catroweb') }}
-                                            {% else %}
-                                                {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                                        {% if not studio.is_joined and  studio.status != 'pending' and studio.status != 'declined'%}
+                                            <span id="requestJoin-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestJoin"
+                                                  data-url="{{ path('studio_join', {'id': studio.id }) }}">
+                                                 {{ 'studio.details.join'|trans({}, 'catroweb') }}
+                                           </span>
+                                        {% else %}
+                                            {% if studio.status == 'pending' %}
+                                                <span id="requestPending-{{ studio.id }}" class="mdc-deprecated-list-item__text requestPending">
+                                                {{ 'studio.details.pending'|trans({}, 'catroweb') }}
+                                                 </span>
+
+                                            {% elseif studio.status == 'declined' %}
+                                                    <span id="requestDecline-{{ studio.id }}" class="mdc-deprecated-list-item__text requestDecline">
+                                                {{ 'studio.details.decline'|trans({}, 'catroweb') }}
+                                                 </span>
+                                            {% elseif studio.status == 'approved' or studio.is_joined %}
+                                                <span id="requestLeave-{{ studio.id }}" class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestLeave"
+                                                      data-url="{{ path('studio_leave', {'id': studio.id }) }}">
+                                                   {{ 'studio.details.leave'|trans({}, 'catroweb') }}
+                                                </span>
                                             {% endif %}
-                                        </span>
+                                        {% endif %}
                                     </li>
+
                                     <li class="mdc-deprecated-list-item mdc-deprecated-list-item--disabled" role="menuitem">
                                         <span class="mdc-deprecated-list-item__ripple"></span>
-                                        <span class="mdc-deprecated-list-item__text">{{ 'studio.report'|trans({}, 'catroweb') }}</span>
+                                        <span class="mdc-deprecated-list-item__text ajaxRequestJoinLeaveReport ajaxRequestReport"
+                                              data-url="{{ path('studio_report', {'id':studio.id }) }}">
+                                            {{ 'studio.report'|trans({}, 'catroweb') }}"
+                                        </span>
                                     </li>
                                 </ul>
                             </div>
@@ -57,6 +77,9 @@
                     {% endif %}
                 </div>
             </a>
-        {% endif %}
+      {% endif %}
     {% endfor %}
+
+
 </div>
+

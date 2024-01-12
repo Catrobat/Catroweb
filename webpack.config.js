@@ -158,6 +158,7 @@ Encore
   .addEntry('check_email', './assets/js/check_email.js')
   .addEntry('studio_detail', './assets/js/studio_detail.js')
   .addEntry('studios_overview', './assets/js/studios_overview.js')
+  .addEntry('studios_new', './assets/js/studio_new.js')
   .addEntry('code_view', './assets/js/code_view.js')
 
   // SCSS to CSS

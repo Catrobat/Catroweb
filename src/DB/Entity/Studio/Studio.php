@@ -6,6 +6,7 @@ use App\DB\Entity\User\Comment\UserComment;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\Generator\MyUuidGenerator;
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -78,6 +79,22 @@ class Studio
    * )
    */
   protected Collection $user_comments;
+
+  /**
+   * @ORM\OneToMany(
+   *     targetEntity=StudioJoinRequest::class,
+   *     mappedBy="studio",
+   *     fetch="EXTRA_LAZY",
+   *     cascade={"persist", "remove"},
+   *     orphanRemoval=true
+   * )
+   */
+  protected Collection $join_requests;
+
+  public function __construct()
+  {
+    $this->join_requests = new ArrayCollection();
+  }
 
   public function getId(): ?string
   {
@@ -185,5 +202,10 @@ class Studio
     $this->created_on = $created_on;
 
     return $this;
+  }
+
+  public function getJoinRequests(): Collection
+  {
+    return $this->join_requests;
   }
 }

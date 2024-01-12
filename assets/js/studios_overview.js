@@ -1,6 +1,6 @@
 // import $ from 'jquery'
 import { MDCMenu } from '@material/menu'
-
+import { showSnackbar } from './components/snackbar'
 require('../styles/custom/studios.scss')
 
 const menus = []
@@ -27,4 +27,35 @@ document.addEventListener('DOMContentLoaded', () => {
         menus[id].open = menus[id].open ? !menus[id].open : true
       })
     })
+
+  document.querySelectorAll('.ajaxRequestJoinLeaveReport').forEach((el) => {
+    el.addEventListener('click', (event) => {
+      event.preventDefault()
+      const url = el.getAttribute('data-url')
+      makeAjaxRequest(url)
+    })
+  })
 })
+function makeAjaxRequest(url) {
+  fetch(url, {
+    method: 'POST',
+  })
+    .then((response) => {
+      if (!response.ok) {
+        console.error('There was a problem with the server.')
+      } else {
+        return response.json()
+      }
+    })
+    .then((data) => {
+      if (!data) {
+        console.error('There was a problem with the server.')
+      } else {
+        showSnackbar('#share-snackbar', data.message.toString())
+        window.location.reload()
+      }
+    })
+    .catch((error) => {
+      console.error('There was an error with the fetch operation:', error)
+    })
+}
