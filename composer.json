@@ -67,7 +67,7 @@
     "twig/twig": "3.8.*"
   },
   "require-dev": {
-    "behat/behat": "3.13.*",
+    "behat/behat": "3.14.*",
     "behat/mink": "1.11.*",
     "deployer/deployer": "v7.3.*",
     "dmore/behat-chrome-extension": "1.4.*",
