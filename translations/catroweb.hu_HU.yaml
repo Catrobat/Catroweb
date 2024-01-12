@@ -41,7 +41,7 @@ country: Ország
 loginText: bejelentkezés
 privacyPolicy: Adatvédelem
 imprint: Impresszum
-programDetails: Részletek
+projectDetails: Részletek
 somethingWentWrong: 'Hoppá, hiba történt.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Kérjük, próbálkozz újra!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Unable to unfollow the desired user!"
   unfollowQuestion: "Are you sure you want to unfollow this user?"
   unfollowButton: "Unfollow %username%"
-programs:
+project:
   welcome:
     title: Welcome to Catrobat's %theme%
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
@@ -103,12 +103,12 @@ programs:
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Download the app
     statistics: More statistics
-  featured: Kiemelt
+  featured: Featured
   example: Examples
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?
@@ -139,15 +139,15 @@ programs:
     Cancel
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Legnézettebb
     downloaded: Legtöbbször letöltött
-  popular: Popular projects
   random: Random projects
   related: Related projects
-  downloads: '%downloads% letöltések'
+  downloads: '%downloads% downloads'
   sample: Example projects
   views: '%views% views'
   likes:
@@ -157,12 +157,12 @@ programs:
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
   uploaded: Uploaded projects
-  reportAsInappropriate: Jelentés problémásként
+  reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
   languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Add meg az okot
+  reportDialogReason: Enter a reason
   reportRadioButtonInappropriate: It's inappropriate
   reportRadioButtonCopyright: Copyright infringement
   reportRadioButtonSpam: It's spam
@@ -173,10 +173,10 @@ programs:
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: App Frissítése
+  updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_project: Checkout this Catrobat project
   show_more: Show More
   comments: Comments
   send: Send
@@ -222,10 +222,10 @@ remixGraph:
   by: 'ennyivel:'
   open: 'Megnyitás '
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -708,8 +708,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:

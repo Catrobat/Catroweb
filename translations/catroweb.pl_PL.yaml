@@ -41,7 +41,7 @@ country: Kraj
 loginText: zaloguj się
 privacyPolicy: Polityka prywatności
 imprint: Stopka
-programDetails: Szczegóły
+projectDetails: Szczegóły
 somethingWentWrong: 'Ups, coś poszło nie tak.'
 doesNotExist: 'Żądany zasób nie istnieje.'
 pleaseTryAgain: 'Spróbuj ponownie!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Nie można przestać obserwować wybranego użytkownika!"
   unfollowQuestion: "Czy na pewno chcesz przestać obserwować tego użytkownika?"
   unfollowButton: "Przestań obserwować %username%"
-programs:
+project:
   welcome:
     title: Witamy w Catrobat %theme%
     title_mindstorms: Witamy w witrynie Catrobat dla Mindstorms EV3 i NXT
@@ -108,7 +108,7 @@ programs:
   newest: Najnowsze projekty
   recommended: Polecane projekty
   scratchremixes: Remiksy Scratcha
-  noPrograms: Obecnie nie ma żadnego projektu.
+  noProjects: Obecnie nie ma żadnego projektu.
   deleteAction: Usuń projekt
   deleteConfirmation: |+
     Na pewno?
@@ -137,14 +137,14 @@ programs:
     To jest nieodwracalne!
     Tak, usuń!
     Anuluj
-  tooLongName: Nazwa projektu jest zbyt długa!
+  tooLongName: The project name is too long!
   tooLongDescription: Opis projektu jest za długi!
   tooLongCredits: Uwagi i podziękowania są za długie!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
-  popular: Popular projects
   random: Losowe projekty
   related: Powiązane projekty
   downloads: '%downloads% pobrań'
@@ -166,55 +166,55 @@ programs:
   reportRadioButtonInappropriate: To jest nieodpowiednie
   reportRadioButtonCopyright: Naruszenie praw autorskich
   reportRadioButtonSpam: To jest spam
-  reportRadioButtonDislike: Nie lubię tego
-  reportOwnProgram: Nie możesz oflagować własnego projektu.
-  reportAlready: Już oflagowałeś ten projekt.
-  reportDone: Zgłosiłeś ten projekt!
-  updateAppHeaderDownload: Pobieranie nie jest możliwe
-  updateAppTextDownload: Zaktualizuj swoją aplikację do najnowszej wersji. Pamiętaj, że nie wszystkie funkcje Androida są już dostępne na IOS.
-  updateAppTextDownloadApk: Pobieranie APK jest obecnie dostępne tylko na Androidzie a nie na IOS.
-  updateAppHeader: Aktualizacja aplikacji
-  updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji.
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: OK
-  checkout_this_program: Sprawdź ten projekt z Catrobat
-  show_more: Pokaż więcej
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Komentarze
-  send: Wyślij
+  send: Send
   delete: Usuń
   report: Zgłoś
-  report_popup: Komentarz został pomyślnie wysłany.
-  report_popup_header: Zgłoszono
-  deleted_popup: Komentarz został pomyślnie usunięty.
-  deleted_popup_header: Usunięte
-  noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
-  editProject: Edytuj projekt
-  closeProjectEditor: Zamknij edytor projektu
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Czy chcesz zapisać zmiany?
   btnDiscard: Odrzuć
-  addComment: Napisz komentarz
-  thumbsUp: Kciuk do góry!
-  smile: Uśmiech!
-  love: Kocham!
-  wow: Wow!
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
   linkTitle: Link
-  link: Skopiuj link do projektu do schowka
+  link: Copy project link to clipboard
   reactionsText: Polubienia
-  downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
-  downloadStartText: Rozpoczęto pobieranie...
-  showTranslation: Pokaż tłumaczenie
-  hideTranslation: Ukryj tłumaczenie
-  translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
-  googleTranslate: Tłumacz Google
-  confrimDelete: Czy na pewno chcesz usunąć tłumaczenie?
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: Domyślny
   save: Zapisz
-  translationTitle: '%language% tłumaczenie'
-  editDefault: Edytuj domyślne
-  editTranslation: Edytuj tłumaczenie %language%
-  translations: Tłumaczenia
-  createTranslation: Utwórz tłumaczenie
-  deletedComment: '**Usunięty**'
-  replyLabel: odpowiedź
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
   repliesLabel: odpowiedzi
 remixGraph:
   title: Remiksy
@@ -222,10 +222,10 @@ remixGraph:
   by: 'o'
   open: 'Otwórz '
   showPaths: 'Pokaż ścieżki'
-  programNotAvailableErrorTitle: 'Przepraszamy...'
-  programNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
-  programNotAvailable: 'Niedostępny'
-  programUnknownUser: 'Nieznany użytkownik'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
 accountConfirmation:
@@ -709,8 +709,8 @@ catro-notifications:
     message: 'Użytkownik %user_link% polubił Twój projekt %program_link%.'
   follow:
     message: 'Użytkownik %user_link% obserwuje Cię teraz.'
-  program-upload:
-    message: 'Użytkownik %user_link% stworzył nowy projekt %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'Użytkownik %user_link% zremiksował Twój projekt %program_link%. Możesz zobaczyć remiks klikając link %remix_program_link%.'
 clipboard:
