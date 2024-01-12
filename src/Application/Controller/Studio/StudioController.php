@@ -445,11 +445,11 @@ class StudioController extends AbstractController
         $studio->setDescription($desc);
       }
 
-      $allow_comments = $request->request->get('allow_comments');
-      $studio->setAllowComments(!is_null($allow_comments) && true === filter_var($allow_comments, FILTER_VALIDATE_BOOLEAN));
+      $allow_comments = $request->request->get('allow_comments', false);
+      $studio->setAllowComments((bool) filter_var($allow_comments, FILTER_VALIDATE_BOOLEAN));
 
-      $is_public = $request->request->get('is_public');
-      $studio->setIsPublic(!is_null($is_public) && true === filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
+      $is_public = $request->request->get('is_public', false);
+      $studio->setIsPublic((bool) filter_var($is_public, FILTER_VALIDATE_BOOLEAN));
 
       $studio->setUpdatedOn(new \DateTime('now'));
       /** @var User|null $user */

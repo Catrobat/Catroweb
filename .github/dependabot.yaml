@@ -49,6 +49,10 @@ updates:
       phpstan:
         patterns:
           - 'phpstan/*'
+      behat:
+        patterns:
+          - 'behat/*'
+          - 'friends-of-behat/*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'
