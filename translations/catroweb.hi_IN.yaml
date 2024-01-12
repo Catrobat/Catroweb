@@ -41,7 +41,7 @@ country: देश
 loginText: प्रवेश करे
 privacyPolicy: गोपनीयता नीति
 imprint: मोहर
-programDetails: विवरण
+projectDetails: विवरण
 somethingWentWrong: 'ओह, कुछ गलत हो गया।'
 doesNotExist: 'अनुरोधित संसाधन मौजूद नहीं है।'
 pleaseTryAgain: 'कृपया फिर से कोशिश करें!'
@@ -94,127 +94,127 @@ follower:
   unfollowError: "इस उपभोक्ता को आपके आदर्शों में से हटाने में असमर्थ!"
   unfollowQuestion: "क्या आप वाकई इस उपभोक्ता को अपने आदर्शों से हटाना चाहते हैं?"
   unfollowButton: "%username% का अनुसरण न करें"
-programs:
+project:
   welcome:
-    title: कैट्रोबैट के %theme% में आपका स्वागत है
-    title_mindstorms: माइंडस्टॉर्म EV3 और NXT के लिए कैट्रोबैट की इस साइट में आपका स्वागत है
-    subtitle: कहानियां, खेल और बहुत कुछ बनाएं...
-    subtitle_embroidery: अपने खुद के डिजाइन की टी-शर्ट, बैग, पैंट, या स्मार्टफोन के केस पर सिलाई करें!
-    subtitle_mindstorms: अपने लेगो माइंडस्टॉर्म EV3 और NXT रोबोट के साथ अपने खुद के प्रोजेक्ट बनाएं
-    download: ऐप डाउनलोड करें
-    statistics: अधिक आंकड़े
-  featured: विशेषकर
-  example: उदाहरण
-  newest: नए प्रोजेक्ट
-  recommended: खासकर आपके लिए
-  scratchremixes: स्क्रैच रिमिक्स
-  noPrograms: अभी कोई प्रोजेक्ट नहीं है।
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: प्रोजेक्ट हटाएं
   deleteConfirmation: |+
-    वाकई में?
-    क्या आप वाकई "%programName%" को हटाना चाहते हैं?
-    इसे दोबारा नहीं बदला जाएगा!
-    हाँ, इसे हटा दें!
-    रद्द करें 
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: हटाया जाने वाला प्रोजेक्ट आपके उपयोगकर्ता के अंतर्गत नहीं पाया जा सका।
   private: "\nनिजी"
   public: सार्वजनिक
-  setPrivateAction: "\nनिजी सेट करें"
-  setPublicAction: सार्वजनिक सेट करें
+  setPrivateAction: Set private
+  setPublicAction: Set public
   changeVisibility: |+
-    वाकई में?
-    यदि आप '%programName%' को निजी बनाते हैं, तो इसे अन्य उपभोक्ता नहीं देख पाएंगे।
-    आप अभी भी इस प्रोजेक्ट की लिंक को अपने दोस्तों में बांट पाएंगे। आप ताले के आइकन पर क्लिक करके इसे वापस सार्वजनिक कर सकते हैं।
-    यदि आप '%programName%' को सार्वजनिक बनाते हैं, तो ही इसे अन्य उपभोक्ता देख पाएंगे।
-    हां, सार्वजनिक बनाएं
-    हां, निजी बनाएं
-    नहीं
-  reportCommentConfirmation: क्या आप वाकई इस टिप्पणी को रिपोर्ट करना चाहते हैं?
-  deleteCommentConfirmation: क्या आप वाकई इस टिप्पणी को मिटाना चाहते हैं?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    अकाउंट हटाए?
-    क्या आप वाकई अपना अकाउंट हटाना चाहते हैं? इससे आपके अपलोड किए गए प्रोजेक्ट और टिप्पणियां भी हट जाएंगी!
-    इसे दोबारा नहीं बदला जाएगा!
-    हाँ, इसे हटा दें!
-    रद्द करें
-  tooLongName: प्रोजेक्ट का नाम बहुत बड़ा है!
-  tooLongDescription: प्रोजेक्ट का वर्णन बहुत लंबा है!
-  tooLongCredits: प्रोजेक्ट का श्रेय बहुत लंबा हैं!
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: सबसे ज्यादा देखा गया
     downloaded: सबसे ज्यादा डाउनलोड किया हुआ
-  popular: Popular projects
-  random: कुछ अन्य प्रोजेक्ट
-  related: संबंधित प्रोजेक्ट
-  downloads: '%downloads% डाउनलोड'
-  sample: उदाहरण की परियोजनाएं
-  views: '%views% बार देखा गया'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "उस प्रोजेक्ट पर प्रतिक्रिया देने वाले लोग"
+    likersTitle: "People who reacted to that project"
     all: "सब"
-  remixes: '{0}0 रीमिक्स | {1}1 रीमिक्स |]1, Inf]%remixes% रीमिक्स'
-  newRemixesNotificationTitle: '|{1} "%programName%" में 1 नया रीमिक्स है: |] 1, Inf] "%programName%" में %remixes% नए रीमिक्स हैं:'
-  submitted: प्रस्तुत किए गए प्रोजेक्ट
-  uploaded: अपलोड किए गए प्रोजेक्ट
-  reportAsInappropriate: अनुचित विवरण दे
-  reportProgram: प्रोजेक्ट रिपोर्ट करें
-  languageVersion: 'कैट्रोबैट भाषा संस्करण: %languageVersion%'
-  reportLoginText: इस प्रोजेक्ट को रिपोर्ट करने के लिए कृपया %login% करें।
-  reportDialogHeader: आप इस प्रोजेक्ट को रिपोर्ट क्यों करना चाहते हैं?
-  reportDialogReason: एक कारण दर्ज करें
-  reportRadioButtonInappropriate: यह अनुचित है
-  reportRadioButtonCopyright: कॉपीराइट का उल्लंघन
-  reportRadioButtonSpam: यह स्पैम है
-  reportRadioButtonDislike: मुझे यह पसंद नहीं है
-  reportOwnProgram: आप खुद के प्रोजेक्ट को चिह्नित नहीं कर सकते।
-  reportAlready: आपने पहले ही इस प्रोजेक्ट को चिन्हित कर दिया है।
-  reportDone: आपने इस प्रोजेक्ट को रिपोर्ट कर दिया!
-  updateAppHeaderDownload: डाउनलोड संभव नहीं है
-  updateAppTextDownload: कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें। सावधान रहें कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।
-  updateAppTextDownloadApk: एपीके डाउनलोड वर्तमान में केवल एंड्रॉइड पर उपलब्ध है, आईओएस पर नहीं।
-  updateAppHeader: एप्लिकेशन को अपडेट करें
-  updateAppText: इस प्रोजेक्ट को डाउनलोड करने के लिए कृपया अपने ऐप को सबसे नए वर्जन में अपडेट करें।
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: ठीक है
-  checkout_this_program: इस कैट्रोबैट प्रोजेक्ट को देखें
-  show_more: और दिखाएं
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: टिप्पणियाँ
-  send: भेजें
+  send: Send
   delete: मिटायें
   report: विवरण
-  report_popup: टिप्पणी को सफलतापूर्वक रिपोर्ट किया गया
-  report_popup_header: रिपोर्ट कर दिया
-  deleted_popup: टिप्पणी को सफलतापूर्वक हटा दिया था।
-  deleted_popup_header: हटा दिया
-  noAdminRights: आपके पास व्यवस्थापक का अधिकार नहीं है। कृपया एक व्यवस्थापक के रूप में लॉग इन करें।
-  editProject: प्रोजेक्ट संपादित करें
-  closeProjectEditor: "\nप्रोजेक्ट एडिटर बंद करें"
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?
   btnDiscard: रद्द करें
-  addComment: टिप्पणी दें
-  thumbsUp: पसंद करें!
-  smile: मुस्कुराए!
-  love: प्यार दें!
-  wow: वाह!
-  linkTitle: लिंक
-  link: क्लिपबोर्ड पर प्रोजेक्ट लिंक कॉपी करें
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: प्रतिक्रियाएं
-  downloadErrorText: प्रोजेक्ट डाउनलोड करते समय कुछ गड़बड़ हुई। दोबारा कोशिश करें।
-  downloadStartText: डाउनलोड शुरू हुआ...
-  showTranslation: अनुवाद दिखाएं
-  hideTranslation: अनुवाद छुपाएं
-  translatedByLine: '%provider% द्वारा %sourceLanguage% से %targetLanguage% में अनुवादित'
-  googleTranslate: गूगल ट्रांसलेट
-  confrimDelete: क्या आप वाकई अनुवाद हटाना चाहते हैं?
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: पूर्व निर्धारित
   save: सहेजें
-  translationTitle: '%language% अनुवाद'
-  editDefault: "\nडिफ़ॉल्ट संपादित करें"
-  editTranslation: '%language% अनुवाद संपादित करें '
-  translations: "\nअनुवाद"
-  createTranslation: "\nअनुवाद करें"
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
   deletedComment: '**Deleted**'
-  replyLabel: "\nजवाब"
+  replyLabel: reply
   repliesLabel: जवाब
 remixGraph:
   title: रीमिक्स
@@ -222,10 +222,10 @@ remixGraph:
   by: 'द्वारा द्वारा'
   open: 'खुला हुआ'
   showPaths: 'पथ दिखाएं'
-  programNotAvailableErrorTitle: 'क्षमा करें...'
-  programNotAvailableErrorDescription: 'परियोजना कोई और उपलब्ध नहीं है!'
-  programNotAvailable: 'अनुपलब्ध'
-  programUnknownUser: 'अज्ञात उपयोगकर्ता'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - यह एक स्वचालित संदेश है - कृपया इस ईमेल का सीधे उत्तर न दें।
 accountConfirmation:
@@ -709,8 +709,8 @@ catro-notifications:
     message: '%user_link% ने %program_link% पर प्रतिक्रिया दी।'
   follow:
     message: '%user_link% अब आपका अनुसरण कर रहा है।'
-  program-upload:
-    message: '%user_link% ने एक नया गेम %program_link% बनाया है।'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% ने आपके गेम %remix_program_link% का रीमिक्स %program_link% बनाया है।'
 clipboard:
@@ -755,13 +755,13 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat समुदाय'
 back_to_app: 'समुदाय से बाहर निकलें'
 category:
-  recent: नए प्रोजेक्ट
-  random: कुछ अन्य प्रोजेक्ट
+  recent: Newest projects
+  random: Random projects
   most_viewed: सबसे ज्यादा देखा गया
   most_downloaded: सबसे ज्यादा डाउनलोड किया हुआ
   example: उदाहरण
-  scratch: स्क्रैच रिमिक्स
-  recommended: खासकर आपके लिए
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

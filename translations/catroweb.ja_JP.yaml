@@ -41,7 +41,7 @@ country: 国
 loginText: ログイン
 privacyPolicy: プライバシーポリシー
 imprint: インプリント
-programDetails: 詳細
+projectDetails: 詳細
 somethingWentWrong: '何か間違っています。'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'もう一度やり直してください。'
@@ -94,28 +94,28 @@ follower:
   unfollowError: "希望するユーザーのフォローを解除できません！"
   unfollowQuestion: "このユーザーのフォローを解除してもよろしいですか？"
   unfollowButton: "%username% のフォローを解除"
-programs:
+project:
   welcome:
-    title: Catrobat の %theme% へようこそ
-    title_mindstorms: マインドストームEV3とNXTのためのCatrobatのサイトへようこそ
-    subtitle: ストーリー、ゲームなどを作成する
-    subtitle_embroidery: あなたのTシャツ、バッグ、ズボン、またはスマートフォンのケースであなた自身のパターを固定!
-    subtitle_mindstorms: レゴ・マインドストームEV3とNXTロボットで独自のプロジェクトを作る
-    download: アプリをダウンロード
-    statistics: 統計情報
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
   featured: おすすめ
-  example: 例
-  newest: 最新のプロジェクト
-  recommended: おすすめのプロジェクト
-  scratchremixes: スクラッチのリミックス
-  noPrograms: 現在プロジェクトはありません。
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: プロジェクトを削除
   deleteConfirmation: |+
-    本当にいいの？
-    本当に"%programName%"を削除するのですか？
-    あなたの行動を元に戻すことはできません!
-    はい、削除してください!
-    キャンセル
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
@@ -129,81 +129,81 @@ programs:
     はい、公開に設定されています。
     はい、プライベートに設定
     いいえ
-  reportCommentConfirmation: このコメントを削除してもよろしいですか？
-  deleteCommentConfirmation: このコメントを削除してもよろしいですか？
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    アカウントの削除？
-    本当にアカウントを削除してもよろしいですか？これにより、あなたがアップロードしたプロジェクトやコメントも削除されます
-    あなたの行動を復元する方法はありません!
-    はい、削除してください!
-    キャンセル
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: プロジェクトの説明が長すぎます！
-  tooLongCredits: プロジェクトノートとクレジットが長すぎます！
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: よく見られているもの
     downloaded: 最もダウンロードされているもの
-  popular: Popular projects
-  random: ランダムなプロジェクト
-  related: 関連プロジェクト
-  downloads: '%downloads% ダウンロード'
-  sample: プロジェクトの例
-  views: '%views% ビュー'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "そのプロジェクトに反応した人"
+    likersTitle: "People who reacted to that project"
     all: "すべて"
-  remixes: '{0}0 リミックス |{1}1 リミックス |]1,Inf]%remixes% リミックス'
-  newRemixesNotificationTitle: '|{1}"%programName%" は 1 つの新しいリミックスがあります: |]1,Inf] "%programName%" は %remixes% つの新しいリミックスがあります:'
-  submitted: 提出されたプロジェクト
-  uploaded: アップロードされたプロジェクト
-  reportAsInappropriate: 不適切として報告します。
-  reportProgram: プロジェクトを報告
-  languageVersion: 'Catrobat 言語バージョン: %languageVersion%'
-  reportLoginText: このプロジェクトを報告するには %login% をしてください。
-  reportDialogHeader: なぜこのプロジェクトを報告したいのですか？
-  reportDialogReason: 理由を入力してください。
-  reportRadioButtonInappropriate: 不適切です
-  reportRadioButtonCopyright: 著作権違反
-  reportRadioButtonSpam: 迷惑メールです
-  reportRadioButtonDislike: 気に入らない
-  reportOwnProgram: 自分のプロジェクトにフラグを立てることはできません。
-  reportAlready: このプロジェクトは既にフラグを立てています。
-  reportDone: このプロジェクトを報告しました！
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: アプリの更新
-  updateAppText: このプロジェクトをダウンロードするには、アプリを最新バージョンにアップデートしてください。
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: OK
-  checkout_this_program: この Catrobat プロジェクトをチェックアウト
-  show_more: さらに表示する
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: コメント
-  send: 送信
+  send: Send
   delete: 削除
   report: 不適切として報告する
-  report_popup: 正常にコメントを報告しました。
-  report_popup_header: 報告済
-  deleted_popup: コメントは正常に削除されました。
-  deleted_popup_header: 削除しました
-  noAdminRights: 管理者権限がありません。管理者としてログインしてください。
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: 変更内容を保存しますか？
   btnDiscard: 破棄
-  addComment: コメントを書く
-  thumbsUp: 大げさだ！
-  smile: 笑顔！
-  love: 愛!
-  wow: うわー！
-  linkTitle: リンク
-  link: プロジェクトのリンクをクリップボードにコピー
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: リアクション
-  downloadErrorText: プロジェクトのダウンロード中にエラーが発生しました。後でもう一度やり直してください。
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: 翻訳を表示する
-  hideTranslation: 翻訳を隠す
-  translatedByLine: '%provider%を%sourceLanguage%から%targetLanguage%に翻訳'
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: デフォルト
@@ -222,10 +222,10 @@ remixGraph:
   by: 'によって'
   open: '開く '
   showPaths: 'パスを表示'
-  programNotAvailableErrorTitle: 'すみません・・・。'
-  programNotAvailableErrorDescription: 'このプロジェクトはもう利用できません！'
-  programNotAvailable: '利用できません'
-  programUnknownUser: '不明なユーザー'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -709,8 +709,8 @@ catro-notifications:
     message: '%user_link% が %program_link% にリアクションしました。'
   follow:
     message: '%user_link% さんがあなたをフォローしています。'
-  program-upload:
-    message: '%user_link% が新しいゲーム %program_link% を作成しました。'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% があなたのゲーム %program_link% のリミックス %remix_program_link% を作成しました。'
 clipboard:
@@ -755,13 +755,13 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat コミュニティ'
 back_to_app: 'コミュニティを終了'
 category:
-  recent: 最新のプロジェクト
-  random: ランダムなプロジェクト
+  recent: Newest projects
+  random: Random projects
   most_viewed: よく見られているもの
   most_downloaded: 最もダウンロードされているもの
   example: 例
-  scratch: スクラッチのリミックス
-  recommended: おすすめのプロジェクト
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

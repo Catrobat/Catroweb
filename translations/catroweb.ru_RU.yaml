@@ -41,7 +41,7 @@ country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
 imprint: Импринт
-programDetails: Детали
+projectDetails: Подробности
 somethingWentWrong: 'Ой, что-то пошло не так.'
 doesNotExist: 'Запрошенный ресурс не существует.'
 pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
@@ -94,28 +94,28 @@ follower:
   unfollowError: "Невозможно отписаться от этого пользователя!"
   unfollowQuestion: "Вы действительно хотите отписаться от этого пользователя?"
   unfollowButton: "Отписаться от %username%"
-programs:
+project:
   welcome:
-    title: Добро пожаловать в %theme% от Catrobat
-    title_mindstorms: Добро пожаловать на сайт Catrobat для Mindstorms EV3 и NXT
-    subtitle: Создавайте истории, игры и многое другое...
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
     subtitle_embroidery: Вышивайте собственные узоры на футболках, сумках, брюках или чехлах для смартфона!
-    subtitle_mindstorms: Создавайте собственные проекты с помощью своих роботов Lego Mindstorms EV3 и NXT
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Скачать приложение
-    statistics: Больше статистики
-  featured: Избранное
-  example: Примеры
+    statistics: More statistics
+  featured: Featured
+  example: Examples
   newest: Самые новые проекты
-  recommended: Рекомендуемые проекты
-  scratchremixes: Scratch ремиксы
-  noPrograms: На данный момент проекты отсутствуют.
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: На данный момент проекты отсутствуют.
   deleteAction: Удалить проект
   deleteConfirmation: |+
-    Вы уверены?
-    Вы уверены, что хотите удалить "%programName%"?
-    Это безвозвратное действие!
-    Да, удалить!
-    Отмена
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: Проект который вы хотите удалить не был найден в вашем аккаунте. 
   private: приватный
   public: публичный
@@ -129,92 +129,92 @@ programs:
     Да, сделать публичным
     Да, сделать приватным
     Отмена
-  reportCommentConfirmation: Вы уверены, что хотите пожаловаться на этот комментарий?
-  deleteCommentConfirmation: Вы уверены, что хотите удалить этот комментарий?
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
     Удаление аккаунта?
     Вы уверены, что хотите удалить свой аккаунт? Это также удалит выложенные вами проекты и комментарии!
     Это безвозвратное действие!
     Да, удалить!
     Отмена
-  tooLongName: Слишком длинное название проекта!
-  tooLongDescription: Описание проекта слишком длинное!
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
   tooLongCredits: Примечания и упоминания об авторах слишком длинные!
   trending: Популярные проекты
+  popular: Popular projects
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
-  popular: Popular projects
-  random: Случайные проекты
-  related: Связанные проекты
+  random: Random projects
+  related: Related projects
   downloads: '%downloads% скачиваний'
-  sample: Примеры проектов
-  views: '%views% просмотры'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Люди, которые отреагировали на этот проект"
+    likersTitle: "People who reacted to that project"
     all: "Все"
-  remixes: '{0}0 ремиксов |{1}1 ремикс |]1,Inf]%remixes% ремиксов'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" имеет 1 новый ремикс: |]1,Inf] "%programName%" имеет %remixes% новых ремиксов:'
   submitted: Опубликованные проекты
   uploaded: Выложенные проекты
   reportAsInappropriate: Пожаловаться
-  reportProgram: Сообщить о нарушении
-  languageVersion: 'Версия языка Catrobat: %languageVersion%'
-  reportLoginText: Пожалуйста, %login% чтобы пожаловаться на этот проект.
-  reportDialogHeader: Почему вы хотите пожаловаться на этот проект?
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Введите причину
-  reportRadioButtonInappropriate: Это неуместно
-  reportRadioButtonCopyright: Нарушение авторских прав
-  reportRadioButtonSpam: Это спам
-  reportRadioButtonDislike: Мне это не нравится
-  reportOwnProgram: Вы не можете отметить свой собственный проект.
-  reportAlready: Вы уже отметили этот проект.
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
   reportDone: Вы отправили жалобу на этот проект!
-  updateAppHeaderDownload: Скачивание невозможно
+  updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Пожалуйста, обновите приложение до последней версии. Имейте в виду, что еще не все функции Android уже доступны на iOS.
   updateAppTextDownloadApk: Скачивание APK файла в настоящее время доступно только на Android и не на iOS.
-  updateAppHeader: Обновить приложение
+  updateAppHeader: Update app
   updateAppText: "Пожалуйста, обновите приложение\nдо последней версии."
   btnClosePopup: Ок
-  checkout_this_program: Оцените этот Catrobat проект
+  checkout_this_project: Checkout this Catrobat project
   show_more: Больше
   comments: Комментарии
-  send: Отправить
+  send: Send
   delete: Удалить
   report: Отчет
-  report_popup: Жалоба на комментарий была отправлена.
-  report_popup_header: Сообщено
-  deleted_popup: Комментарий был успешно удален.
-  deleted_popup_header: '﻿Удалено'
-  noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
-  editProject: Изменить проект
-  closeProjectEditor: Закрыть редактор проекта
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Хотите ли вы сохранить свои изменения?
   btnDiscard: Сбросить
-  addComment: Написать комментарий
-  thumbsUp: Палец вверх!
-  smile: Улыбка!
-  love: Люблю!
-  wow: Вааау!
-  linkTitle: Ссылка
-  link: Скопировать ссылку проекта в буфер обмена
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Реакции
-  downloadErrorText: Во время скачивания проекта произошла ошибка. Повторите попытку позже.
-  downloadStartText: Скачивание началось...
-  showTranslation: Показать перевод
-  hideTranslation: Скрыть перевод
-  translatedByLine: Переведено %provider% с %sourceLanguage% на %targetLanguage%
-  googleTranslate: Google Переводчик
-  confrimDelete: Вы уверены, что хотите удалить перевод?
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: По умолчанию
   save: Сохранить
-  translationTitle: 'перевод на %language%'
-  editDefault: Изменить по умолчанию
-  editTranslation: Изменить %language% перевод
-  translations: Переводы
-  createTranslation: Создать перевод
-  deletedComment: '**Удалено**'
-  replyLabel: ответить
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
   repliesLabel: oтветы
 remixGraph:
   title: Ремиксы
@@ -222,10 +222,10 @@ remixGraph:
   by: 'на'
   open: 'Открыть '
   showPaths: 'Показать Пути'
-  programNotAvailableErrorTitle: 'Извините...'
-  programNotAvailableErrorDescription: 'Этот проект больше недоступен!'
-  programNotAvailable: 'Недоступно'
-  programUnknownUser: 'Неизвестный пользователь'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - Это системное сообщение - Пожалуйста, не отвечайте на это письмо.
 accountConfirmation:
@@ -710,8 +710,8 @@ catro-notifications:
     message: '%user_link% отправил %program_link%.'
   follow:
     message: '%user_link% теперь подписан на вас.'
-  program-upload:
-    message: '%user_link% создал новую игру %program_link%.'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% создал ремикс %program_link% вашей игры %remix_program_link%.'
 clipboard:
@@ -757,12 +757,12 @@ community: 'Сообщество Catrobat'
 back_to_app: 'Выйти из сообщества'
 category:
   recent: Самые новые проекты
-  random: Случайные проекты
+  random: Random projects
   most_viewed: Самые просматриваемые
   most_downloaded: Самые скачиваемые
   example: Пример
-  scratch: Scratch ремиксы
-  recommended: Рекомендуемые проекты
+  scratch: Scratch remixes
+  recommended: Recommended projects
   popular: Most popular
 achievements:
   sidebar:

@@ -41,7 +41,7 @@ country: Ел
 loginText: кіру
 privacyPolicy: Құпиялық саясаты
 imprint: Басып шығару
-programDetails: Детальдар
+projectDetails: Детальдар
 somethingWentWrong: 'Бірдеңе дұрыс болмады.'
 doesNotExist: 'Сұралған ресурс жоқ.'
 pleaseTryAgain: 'Қайталап көріңіз!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Қажетті пайдаланушыға жазылудан бас тарту мүмкін емес!"
   unfollowQuestion: "Осы пайдаланушыға жазылудан бас тартқыңыз келетініне сенімдісіз бе?"
   unfollowButton: "Жазылудан бас тарту %username%"
-programs:
+project:
   welcome:
     title: Catrobat's %theme% сайтына қош келдіңіз 
     title_mindstorms: Mindstorms EV3 және NXT үшін Catrobat сайтына қош келдіңіз
@@ -102,13 +102,13 @@ programs:
     subtitle_embroidery: Өзіңіздің үлгілеріңізді футболкаларыңызға, сөмкелеріңізге, шалбарларыңызға немесе смартфондарыңызға тігіңіз!
     subtitle_mindstorms: Lego Mindstorms EV3 және NXT роботтарымен жеке жобаларыңызды жасаңыз
     download: Қолданбаны жүктеп алыңыз
-    statistics: More Statistics
+    statistics: More statistics
   featured: Таңдаулы
   example: Мысалдар
   newest: Ең жаңа жобалар
   recommended: Ұсынылған жобалар
   scratchremixes: Scratch ремикстері
-  noPrograms: Қазіргі уақытта жобалар жоқ.
+  noProjects: Қазіргі уақытта жобалар жоқ.
   deleteAction: Жобаны жою
   deleteConfirmation: |+
     Сіз сенімдісіз бе?
@@ -133,89 +133,89 @@ programs:
   reportCommentConfirmation: Осы пікірді шынымен хабарлау керек пе?
   deleteCommentConfirmation: Осы пікірді шынымен жойғыңыз келе ме?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
   tooLongName: Жоба атауы тым ұзын!
   tooLongDescription: Жобаның сипаттамасы тым ұзақ!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Ең көп қаралды
     downloaded: Ең көп жүктелген
-  popular: Popular projects
   random: Кездейсоқ жобалар
   related: Қатысты жобалар
-  downloads: '%downloads% жүктеп алулар'
-  sample: Мысал жобалар
-  views: '%views% көріністер'
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Сол жобаға реакция жасаған адамдар"
+    likersTitle: "People who reacted to that project"
     all: "Барлық"
-  remixes: '{0} 0 ремикс |{1}1 ремикс |]1,Inf]%remixes%ремикстер'
-  newRemixesNotificationTitle: '|{1}"%programName%" 1 ремикс бар : |]1,Inf] "%programName%" %remixes% жаңа ремикстер бар:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
-  reportAsInappropriate: Орынсыз деп хабарлау
-  reportProgram: Есеп жобасы
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: Өтінем %login% осы жобаны хабарлау үшін.
-  reportDialogHeader: Неліктен бұл жоба туралы хабарлағыңыз келеді?
-  reportDialogReason: Себебін енгізіңіз
-  reportRadioButtonInappropriate: Бұл орынсыз
-  reportRadioButtonCopyright: Авторлық құқықты бұзу
-  reportRadioButtonSpam: Бұл спам
-  reportRadioButtonDislike: Осыны ұнатпаймын
-  reportOwnProgram: Сіз өзіңіздің жобаңызды белгілей алмайсыз.
-  reportAlready: Сіз бұл жобаны әлдеқашан белгілеп қойдыңыз.
-  reportDone: Сіз бұл жоба туралы хабарладыңыз!
-  updateAppHeaderDownload: Жүктеп алу мүмкін емес
-  updateAppTextDownload: Қолданбаңызды ең жаңа нұсқаға жаңартыңыз. Барлық Android мүмкіндіктері IOS жүйесінде бұрыннан қол жетімді емес екенін ескеріңіз.
-  updateAppTextDownloadApk: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
-  updateAppHeader: Update App
-  updateAppText: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ок
-  checkout_this_program: Осы Catrobat жобасын тексеріңіз
-  show_more: Көбірек көрсету
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Пікірлер
-  send: Жіберу
+  send: Send
   delete: Жою
   report: Есеп беру
-  report_popup: Пікір сәтті хабарланды.
-  report_popup_header: Хабарланды
-  deleted_popup: Пікір сәтті жойылды.
-  deleted_popup_header: Жойылды
-  noAdminRights: Әкімші құқықтарыңыз жоқ. Әкімші ретінде жүйеге кіріңіз.
-  editProject: Жобаны өзгеру
-  closeProjectEditor: Жоба редакторын жабу
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Өзгерістерді сақтағыңыз келе ме?
   btnDiscard: Жою
-  addComment: Пікір жазыңыз
-  thumbsUp: Бәрекелді!
-  smile: Күлімсіре!
-  love: Махаббат!
-  wow: Уау!
-  linkTitle: Сілтеме
-  link: Жоба сілтемесін алмасу буферіне көшіріңіз
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Реакциялар
-  downloadErrorText: Жобаны жүктеп алу кезінде қате орын алды. Тағы жасауды сәл кейінірек көріңізді өтінеміз.
-  downloadStartText: Жүктеп алу басталды...
-  showTranslation: Аударманы көрсету
-  hideTranslation: Аударманы жасыру
-  translatedByLine: Аударған %provider% %sourceLanguage%-нан %targetLanguage% дейін
-  googleTranslate: Google аудармашы
-  confrimDelete: Аударманы шынымен жойғыңыз келе ме?
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: Бастапқы
   save: Сақтау
-  translationTitle: '%language% аударма'
-  editDefault: Әдепкіді өңдеу
-  editTranslation: '%language% аударманы өзгеру'
-  translations: Аудармалар
-  createTranslation: Аудамарын құру
-  deletedComment: '**Кетірілген**'
-  replyLabel: жауап беру
+  translationTitle: '%language% translation'
+  editDefault: Edit default
+  editTranslation: Edit %language% translation
+  translations: Translations
+  createTranslation: Create translation
+  deletedComment: '**Deleted**'
+  replyLabel: reply
   repliesLabel: жауаптар
 remixGraph:
   title: Ремикстер
@@ -223,10 +223,10 @@ remixGraph:
   by: 'арқылы'
   open: 'Ашу'
   showPaths: 'Жолды көрсету'
-  programNotAvailableErrorTitle: 'Кешір...'
-  programNotAvailableErrorDescription: 'Жоба енді қолжетімді емес!'
-  programNotAvailable: 'Қолжетімсіз'
-  programUnknownUser: 'Unknown User'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - Бұл автоматтандырылған хабарлама - бұл эл. поштаға тікелей жауап бермеңіз
 accountConfirmation:
@@ -708,8 +708,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:

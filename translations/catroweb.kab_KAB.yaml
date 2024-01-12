@@ -41,7 +41,7 @@ country: Tamurt
 loginText: qqen
 privacyPolicy: Privacy Policy
 imprint: Imprint
-programDetails: Details
+projectDetails: Details
 somethingWentWrong: 'Ooooops yella kra ur yeddan akken iwata.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Ttxilek ɛreḍ tikkelt nniḍen!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Unable to unfollow the desired user!"
   unfollowQuestion: "Are you sure you want to unfollow this user?"
   unfollowButton: "Unfollow %username%"
-programs:
+project:
   welcome:
     title: Welcome to Catrobat's %theme%
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
@@ -108,14 +108,14 @@ programs:
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
-    Tetḥeqqeḍ?
-    Tetḥeqqeḍ belli tebɣiḍ ad tekkseḍ "%programName%"?
-    Ulac ţawil i tririt n tigawin-inek!
-    Ih, kkes-it!
-    Sefsex
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
@@ -130,7 +130,7 @@ programs:
     Yes, set to private
     No
   reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Tetḥeqqeḍ belli tebɣiḍ ad tekkseḍ awennit-agi?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
     Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
@@ -138,17 +138,17 @@ programs:
     Yes, delete it!
     Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: Aglam n usenfaṛ d aɣezfan aṭas!
+  tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Most viewed
     downloaded: Most downloaded
-  popular: Popular projects
   random: Random projects
   related: Related projects
   downloads: '%downloads% downloads'
-  sample: Isefaṛen imedyaten
+  sample: Example projects
   views: '%views% views'
   likes:
     likersTitle: "People who reacted to that project"
@@ -176,7 +176,7 @@ programs:
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_project: Checkout this Catrobat project
   show_more: Show More
   comments: Iwenniten
   send: Send
@@ -222,10 +222,10 @@ remixGraph:
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -708,7 +708,7 @@ catro-notifications:
     message: '%user_link% reacted to %program_link%.'
   follow:
     message: '%user_link% is now following you.'
-  program-upload:
+  project-upload:
     message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
