@@ -852,7 +852,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'منسوخ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'رپورٹ'
@@ -861,6 +863,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'مزید دکھائیں'
     showLess: 'کم دکھائیں'
@@ -869,6 +872,11 @@ studio:
     remove_project_success: 'پروجیکٹ کو کامیابی سے ہٹا دیا گیا۔'
     no_projects: 'اسٹوڈیو میں ابھی پروجیکٹ شامل نہیں ہے۔'
     updateCoverError: 'اسٹوڈیو کور کو اپ ڈیٹ کرتے وقت کچھ غلط ہو گیا!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'رپورٹ'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروجیکٹس'
     comments:

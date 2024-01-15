@@ -862,7 +862,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'தவிர்'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'அறிக்கையிடு'
@@ -871,6 +873,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'மேலும் காட்ட'
     showLess: 'குறைவாக காட்டு'
@@ -879,6 +882,11 @@ studio:
     remove_project_success: 'ஸ்டுடியோவிலிருந்து திட்டம் வெற்றிகரமாக அகற்றப்பட்டது!'
     no_projects: 'ஸ்டுடியோவில் இதுவரை எந்த திட்டமும் இல்லை'
     updateCoverError: 'ஸ்டுடியோ அட்டையைப் புதுப்பிக்கும் போது ஏதோ தவறு ஏற்பட்டது!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'அறிக்கையிடு'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'திட்டங்கள்'
     comments:

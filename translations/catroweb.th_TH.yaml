@@ -209,13 +209,13 @@ project:
   confrimDelete: Are you sure you want to delete the translation?
   default: ค่าเริ่มต้น
   save: บันทึก
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: '%language% การแปล'
+  editDefault: แก้ไขค่าเริ่มต้น
+  editTranslation: แก้ไข %language% การแปล
+  translations: คำแปล
+  createTranslation: สร้างการแปล
+  deletedComment: '**ลบแล้ว**'
+  replyLabel: ตอบกลับ
   repliesLabel: ตอบกลับ
 remixGraph:
   title: ผสม
@@ -862,7 +862,9 @@ studio:
   singular: 'สตูดิโอ'
   create_studio: 'สร้างสตูดิโอ'
   delete_studio: 'ลบสตูดิโอ'
+  cancel_studio: 'ยกเลิก'
   studio_name: 'ชื่อสตูดิโอ'
+  studio_description: 'Studio description'
   join: 'เข้าร่วม'
   leave: 'ออกจากระบบ'
   report: 'รายงาน'
@@ -871,6 +873,7 @@ studio:
   overview:
     joined_studios: 'เข้าร่วมสตูดิโอ'
     public_studios: 'สตูดิโอสาธารณะ'
+    private_studios: 'Private studios'
   details:
     showMore: 'แสดงมากขึ้น'
     showLess: 'แสดงน้อยลง'
@@ -879,6 +882,11 @@ studio:
     remove_project_success: 'นำโครงการออกจากสตูดิโอสำเร็จแล้ว!'
     no_projects: 'สตูดิโอยังไม่มีโครงการใด ๆ'
     updateCoverError: 'เกิดข้อผิดพลาดขณะอัปเดตหน้าปกสตูดิโอ!'
+    join: 'เข้าร่วม'
+    leave: 'ออกจากระบบ'
+    report: 'รายงาน'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'โครงการ'
     comments:

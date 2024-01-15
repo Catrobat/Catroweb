@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'ਰੱਦ ਕਰੋ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'ਰਿਪੋਰਟ'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'ਹੋਰ ਦਿਖਾਓ'
     showLess: 'ਘੱਟ ਦਿਖਾਓ'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਇਆ ਗਿਆ!'
     no_projects: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਸ਼ਾਮਲ ਨਹੀਂ ਹਨ'
     updateCoverError: 'ਸਟੂਡੀਓ ਕਵਰ ਨੂੰ ਅਪਡੇਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'ਰਿਪੋਰਟ'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'ਪ੍ਰੋਜੈਕਟ'
     comments:

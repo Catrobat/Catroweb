@@ -862,7 +862,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'انصراف'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'گزارش'
@@ -871,6 +873,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'نمایش بیشتر'
     showLess: 'نمایش کمتر'
@@ -879,6 +882,11 @@ studio:
     remove_project_success: 'پروژه با موفقیت از استودیو حذف شد!'
     no_projects: 'استودیو هیچ پروژه ای را شامل نمی شود'
     updateCoverError: 'در حالی که به روز رسانی پوشش استودیو، چیزی اشتباه رفت!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'گزارش'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروژه ها'
     comments:

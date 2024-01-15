@@ -208,11 +208,11 @@ project:
   confrimDelete: Are you sure you want to delete the translation?
   default: Varsayılan
   save: Kaydet
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: '%language% çevirisi'
+  editDefault: Varsayılanı düzenle
+  editTranslation: '%language% çevirisini düzenle'
+  translations: Çeviriler
+  createTranslation: Çeviri oluştur
   deletedComment: '**Deleted**'
   replyLabel: reply
   repliesLabel: yanıtlar
@@ -856,7 +856,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'İptal et'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Bildir'
@@ -865,6 +867,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'daha fazla göster'
     showLess: 'daha az göster'
@@ -873,6 +876,11 @@ studio:
     remove_project_success: 'proje stüdyodan başarıyla kaldırıldı!'
     no_projects: 'Studio henüz proje içermiyor'
     updateCoverError: 'Stüdyo kapağı güncellenirken bir şeyler ters gitti!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Bildir'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'projeler'
     comments:

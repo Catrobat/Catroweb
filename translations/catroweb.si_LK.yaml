@@ -155,11 +155,11 @@ project:
     all: "සියල්ල"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: ඉදිරිපත් කළ ව්‍යාපෘති
+  uploaded: උඩුගත කළ ව්‍යාපෘති
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
+  languageVersion: 'කැට්‍රොබැට් භාෂා අනුවාදය: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Enter a reason
@@ -173,7 +173,7 @@ project:
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
+  updateAppHeader: යෙදුම යාවත්කාල කරන්න
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
   checkout_this_project: Checkout this Catrobat project
@@ -225,7 +225,7 @@ remixGraph:
   projectNotAvailableErrorTitle: 'Sorry...'
   projectNotAvailableErrorDescription: 'The project is not available any more!'
   projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  projectUnknownUser: 'නොදන්නා පරිශීලකයෙකි'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -857,7 +857,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'අවලංගු කරන්න'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Report'
@@ -866,6 +868,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -874,6 +877,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Report'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projects'
     comments:

@@ -864,7 +864,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'বাতিল'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'প্রতিবেদন করুন'
@@ -873,6 +875,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'আরো দেখুন'
     showLess: 'প্রদর্শন কম'
@@ -881,6 +884,11 @@ studio:
     remove_project_success: 'প্রকল্পটি সফলভাবে স্টুডিও থেকে সরানো হয়েছে!'
     no_projects: 'স্টুডিওতে এখনও কোনো প্রকল্প নেই'
     updateCoverError: 'স্টুডিও কভার আপডেট করার সময় কিছু ভুল হয়েছে!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'প্রতিবেদন করুন'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'প্রজেক্টগুলো'
     comments:

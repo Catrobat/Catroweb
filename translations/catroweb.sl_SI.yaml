@@ -191,30 +191,30 @@ project:
   closeProjectEditor: Zapri urejevalnik projekta
   closeEditorPrompt: Ali želite shraniti spremembe?
   btnDiscard: Zavrzi
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
+  addComment: Napiši komentar
+  thumbsUp: Palec gor!
+  smile: Nasmeh!
+  love: Ljubezen!
   wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  linkTitle: Povezava
+  link: Kopiraj povezavo v odložišče
   reactionsText: Odzivi
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: Pri prenosu projekta je prišlo do napake. Prosimo, poskusi znova pozneje.
+  downloadStartText: Prenos se je začel …
+  showTranslation: Pokaži prevod
+  hideTranslation: Skrij prevod
+  translatedByLine: Prevedel %provider% iz %sourceLanguage% v %targetLanguage%
+  googleTranslate: Prevajalnik Google
+  confrimDelete: Ali si prepričan/a, da želiš izbrisati ta prevod?
   default: Privzeto
   save: Shrani
-  translationTitle: '%language% translation'
-  editDefault: Edit default
+  translationTitle: '%language% prevod'
+  editDefault: Uredi privzeto
   editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translations: Prevod
+  createTranslation: Ustvari prevod
+  deletedComment: '**Izbrisano**'
+  replyLabel: odgovori
   repliesLabel: odgovori
 remixGraph:
   title: Predelave
@@ -222,9 +222,9 @@ remixGraph:
   by: 'by'
   open: 'Odpri '
   showPaths: 'Show Paths'
-  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorTitle: 'Oprosti...'
   projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
+  projectNotAvailable: 'Ni na voljo'
   projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
@@ -857,7 +857,9 @@ studio:
   singular: 'Studijo'
   create_studio: 'UstvarI studijo'
   delete_studio: 'Izbriši studijo'
+  cancel_studio: 'Prekliči'
   studio_name: 'Ime Studija'
+  studio_description: 'Studio description'
   join: 'Pridruži se'
   leave: 'Zapusti'
   report: 'Prijavi'
@@ -866,6 +868,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'prikaži več'
     showLess: 'prikaži manj'
@@ -874,6 +877,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Pridruži se'
+    leave: 'Zapusti'
+    report: 'Prijavi'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programi'
     comments:

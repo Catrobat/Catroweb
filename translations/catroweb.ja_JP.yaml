@@ -157,7 +157,7 @@ project:
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Submitted projects
   uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
+  reportAsInappropriate: 不適切として報告します。
   reportProgram: Report project
   languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Please %login% to report this project.
@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'キャンセル'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: '不適切として報告する'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: '詳細を表示'
     showLess: 'ショーアップ'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: 'プロジェクトがスタジオから削除されました。'
     no_projects: 'スタジオにはまだプロジェクトがありません'
     updateCoverError: 'スタジオカバーの更新中に何か問題が発生しました'
+    join: 'Join'
+    leave: 'Leave'
+    report: '不適切として報告する'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'プログラム'
     comments:

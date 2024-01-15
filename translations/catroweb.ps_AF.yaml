@@ -860,7 +860,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'لغوه کړئ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'راپور'
@@ -869,6 +871,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'نور ښکاره کړئ'
     showLess: 'لږ ښودل'
@@ -877,6 +880,11 @@ studio:
     remove_project_success: 'پروژه په بریالیتوب سره له سټوډیو څخه لیرې شوه!'
     no_projects: 'سټوډیو تراوسه کومه پروژه نلري'
     updateCoverError: 'د سټوډیو پوښ تازه کولو پرمهال یو څه غلط شو!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'راپور'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروژې'
     comments:
