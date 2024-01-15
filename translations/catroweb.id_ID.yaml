@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Batalkan'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Laporkan'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'menampilkan lebih banyak'
     showLess: 'tampilkan lebih sedikit'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: 'proyek berhasil dihapus dari studio!'
     no_projects: 'Studio belum memiliki proyek apa pun'
     updateCoverError: 'Terjadi masalah saat memperbarui sampul studio!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Laporkan'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Program'
     comments:

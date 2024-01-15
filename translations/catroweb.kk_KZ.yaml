@@ -148,74 +148,74 @@ project:
     downloaded: Ең көп жүктелген
   random: Кездейсоқ жобалар
   related: Қатысты жобалар
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+  downloads: '%downloads% жүктеп алулар'
+  sample: Мысал жобалар
+  views: '%views% көріністер'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "Сол жобаға реакция жасаған адамдар"
     all: "Барлық"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  remixes: '{0} 0 ремикс |{1}1 ремикс |]1,Inf]%remixes%ремикстер'
+  newRemixesNotificationTitle: '|{1}"%programName%" 1 ремикс бар : |]1,Inf] "%programName%" %remixes% жаңа ремикстер бар:'
   submitted: Submitted projects
   uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
+  reportAsInappropriate: Орынсыз деп хабарлау
+  reportProgram: Есеп жобасы
   languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  reportLoginText: Өтінем %login% осы жобаны хабарлау үшін.
+  reportDialogHeader: Неліктен бұл жоба туралы хабарлағыңыз келеді?
+  reportDialogReason: Себебін енгізіңіз
+  reportRadioButtonInappropriate: Бұл орынсыз
+  reportRadioButtonCopyright: Авторлық құқықты бұзу
+  reportRadioButtonSpam: Бұл спам
+  reportRadioButtonDislike: Осыны ұнатпаймын
+  reportOwnProgram: Сіз өзіңіздің жобаңызды белгілей алмайсыз.
+  reportAlready: Сіз бұл жобаны әлдеқашан белгілеп қойдыңыз.
+  reportDone: Сіз бұл жоба туралы хабарладыңыз!
+  updateAppHeaderDownload: Жүктеп алу мүмкін емес
+  updateAppTextDownload: Қолданбаңызды ең жаңа нұсқаға жаңартыңыз. Барлық Android мүмкіндіктері IOS жүйесінде бұрыннан қол жетімді емес екенін ескеріңіз.
+  updateAppTextDownloadApk: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
   updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  updateAppText: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
   btnClosePopup: Ок
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: Осы Catrobat жобасын тексеріңіз
+  show_more: Көбірек көрсету
   comments: Пікірлер
-  send: Send
+  send: Жіберу
   delete: Жою
   report: Есеп беру
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  report_popup: Пікір сәтті хабарланды.
+  report_popup_header: Хабарланды
+  deleted_popup: Пікір сәтті жойылды.
+  deleted_popup_header: Жойылды
+  noAdminRights: Әкімші құқықтарыңыз жоқ. Әкімші ретінде жүйеге кіріңіз.
+  editProject: Жобаны өзгеру
+  closeProjectEditor: Жоба редакторын жабу
   closeEditorPrompt: Өзгерістерді сақтағыңыз келе ме?
   btnDiscard: Жою
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: Пікір жазыңыз
+  thumbsUp: Бәрекелді!
+  smile: Күлімсіре!
+  love: Махаббат!
+  wow: Уау!
+  linkTitle: Сілтеме
+  link: Жоба сілтемесін алмасу буферіне көшіріңіз
   reactionsText: Реакциялар
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: Жобаны жүктеп алу кезінде қате орын алды. Тағы жасауды сәл кейінірек көріңізді өтінеміз.
+  downloadStartText: Жүктеп алу басталды...
+  showTranslation: Аударманы көрсету
+  hideTranslation: Аударманы жасыру
+  translatedByLine: Аударған %provider% %sourceLanguage%-нан %targetLanguage% дейін
+  googleTranslate: Google аудармашы
+  confrimDelete: Аударманы шынымен жойғыңыз келе ме?
   default: Бастапқы
   save: Сақтау
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: '%language% аударма'
+  editDefault: Әдепкіді өңдеу
+  editTranslation: '%language% аударманы өзгеру'
+  translations: Аудармалар
+  createTranslation: Аудамарын құру
+  deletedComment: '**Кетірілген**'
+  replyLabel: жауап беру
   repliesLabel: жауаптар
 remixGraph:
   title: Ремикстер
@@ -223,9 +223,9 @@ remixGraph:
   by: 'арқылы'
   open: 'Ашу'
   showPaths: 'Жолды көрсету'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
+  projectNotAvailableErrorTitle: 'Кешір...'
+  projectNotAvailableErrorDescription: 'Жоба енді қолжетімді емес!'
+  projectNotAvailable: 'Қолжетімсіз'
   projectUnknownUser: 'Unknown user'
 noReply:
   - Бұл автоматтандырылған хабарлама - бұл эл. поштаға тікелей жауап бермеңіз
@@ -857,7 +857,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Болдырмау'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Кіру'
   leave: 'Шығу'
   report: 'Есеп беру'
@@ -866,6 +868,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
@@ -874,6 +877,11 @@ studio:
     remove_project_success: 'жоба студиядан сәттілік жойылды!'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Кіру'
+    leave: 'Шығу'
+    report: 'Есеп беру'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'жобалар'
     comments:

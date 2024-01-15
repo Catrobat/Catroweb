@@ -861,7 +861,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'రద్దు చేయు'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'రిపొర్ట్'
@@ -870,6 +872,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'ఇంకా చూపించు'
     showLess: 'తక్కువ చూపించు'
@@ -878,6 +881,11 @@ studio:
     remove_project_success: 'ప్రాజెక్ట్ స్టూడియో నుండి విజయవంతంగా తీసివేయబడింది!'
     no_projects: 'స్టూడియోలో ఇంకా ఏ ప్రాజెక్ట్‌లు లేవు'
     updateCoverError: 'స్టూడియో కవర్‌ని అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'రిపొర్ట్'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'ప్రాజెక్టులు'
     comments:

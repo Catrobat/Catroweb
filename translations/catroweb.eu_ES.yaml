@@ -122,13 +122,13 @@ project:
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    Are you sure?
-    If you set '%programName%' to private, it will not be seen or found by other users.
-    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
-    If you set "%programName%" to public, it can be seen and found by other users.
-    Yes, set to public
-    Yes, set to private
-    No
+    Ziur al zaude?
+    "%programName%" pribatua bihurtzen baduzu, ezingo du beste inork aurkitu.
+    Hala ere zure lagunekin proiektuaren esteka partekatu ahalko duzu. Ikusgarritasuna giltzarrapoan sakatzen aldatu dezakezu.
+    "%programName%" publiko bezala ezartzen baduzu, gainontzekoek ikusi eta aurkitu dezakete.
+    Bai, publikoa bezala ezarri
+    Bai, pribatua bezala ezarri
+    Ez
   reportCommentConfirmation: Are you sure you want to report this comment?
   deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
@@ -857,7 +857,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Cancel'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Salatu'
@@ -866,6 +868,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -874,6 +877,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Salatu'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Proiektuak'
     comments:

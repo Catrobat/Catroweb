@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: '取消'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: '報告'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: '展示更多'
     showLess: '顯示較少'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: '項目從工作室成功刪除！'
     no_projects: 'Studio 尚不包含任何項目'
     updateCoverError: '更新工作室封面時出了點問題！'
+    join: 'Join'
+    leave: 'Leave'
+    report: '報告'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: '程式檔'
     comments:

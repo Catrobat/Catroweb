@@ -857,7 +857,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Annuleren'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Rapporteren'
@@ -866,6 +868,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -874,6 +877,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Rapporteren'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programma''s'
     comments:

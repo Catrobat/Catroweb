@@ -200,19 +200,19 @@ project:
   link: Copy project link to clipboard
   reactionsText: Reacciones
   downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
+  downloadStartText: La descarga ha comenzado...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: Google Traductor
+  confrimDelete: '¿Estás segur@ que quieres eliminar esta traducción?'
   default: Por defecto
   save: Guardar
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: 'Traducción de %language%'
+  editDefault: Editar default
+  editTranslation: Editar traducción de %language%
+  translations: Traducciones
+  createTranslation: Crear traducción 
   deletedComment: '**Deleted**'
   replyLabel: reply
   repliesLabel: replies
@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Cancelar'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Informe'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'mostrar más'
     showLess: 'mostrar menos'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: 'proyecto eliminado con éxito del estudio!'
     no_projects: 'El estudio no contiene ningún proyecto aún'
     updateCoverError: 'Algo salió mal al actualizar la portada del estudio!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Informe'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programas'
     comments:

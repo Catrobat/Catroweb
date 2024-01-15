@@ -166,55 +166,55 @@ project:
   reportRadioButtonInappropriate: To jest nieodpowiednie
   reportRadioButtonCopyright: Naruszenie praw autorskich
   reportRadioButtonSpam: To jest spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  reportRadioButtonDislike: Nie lubię tego
+  reportOwnProgram: Nie możesz oflagować własnego projektu.
+  reportAlready: Już oflagowałeś ten projekt.
+  reportDone: Zgłosiłeś ten projekt!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
+  updateAppHeader: Aktualizacja aplikacji
   updateAppText: Please update your app to the newest version.
   btnClosePopup: OK
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: Sprawdź ten projekt z Catrobat
+  show_more: Pokaż więcej
   comments: Komentarze
-  send: Send
+  send: Wyślij
   delete: Usuń
   report: Zgłoś
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  report_popup: Komentarz został pomyślnie wysłany.
+  report_popup_header: Zgłoszono
+  deleted_popup: Komentarz został pomyślnie usunięty.
+  deleted_popup_header: Usunięte
+  noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Czy chcesz zapisać zmiany?
   btnDiscard: Odrzuć
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
+  addComment: Napisz komentarz
+  thumbsUp: Kciuk do góry!
+  smile: Uśmiech!
+  love: Kocham!
+  wow: Wow!
   linkTitle: Link
-  link: Copy project link to clipboard
+  link: Skopiuj link do projektu do schowka
   reactionsText: Polubienia
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  downloadErrorText: Wystąpił błąd podczas pobierania projektu. Spróbuj ponownie później.
+  downloadStartText: Rozpoczęto pobieranie...
+  showTranslation: Pokaż tłumaczenie
+  hideTranslation: Ukryj tłumaczenie
+  translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: Domyślny
   save: Zapisz
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: '%language% tłumaczenie'
+  editDefault: Edytuj domyślne
+  editTranslation: Edytuj tłumaczenie %language%
+  translations: Tłumaczenia
+  createTranslation: Utwórz tłumaczenie
+  deletedComment: '**Usunięty**'
+  replyLabel: odpowiedź
   repliesLabel: odpowiedzi
 remixGraph:
   title: Remiksy
@@ -222,10 +222,10 @@ remixGraph:
   by: 'o'
   open: 'Otwórz '
   showPaths: 'Pokaż ścieżki'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  projectNotAvailableErrorTitle: 'Przepraszamy...'
+  projectNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
+  projectNotAvailable: 'Niedostępny'
+  projectUnknownUser: 'Nieznany użytkownik'
 noReply:
   - To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
 accountConfirmation:
@@ -710,7 +710,7 @@ catro-notifications:
   follow:
     message: 'Użytkownik %user_link% obserwuje Cię teraz.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: 'Użytkownik %user_link% stworzył nowy projekt %program_link%'
   remix:
     message: 'Użytkownik %user_link% zremiksował Twój projekt %program_link%. Możesz zobaczyć remiks klikając link %remix_program_link%.'
 clipboard:
@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Utwórz studio'
   delete_studio: 'Usuń studio'
+  cancel_studio: 'Anuluj'
   studio_name: 'Nazwa Studia'
+  studio_description: 'Studio description'
   join: 'Dołącz'
   leave: 'Opuść'
   report: 'Zgłoś'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Członkostwo w Studiach'
     public_studios: 'Studia publiczne'
+    private_studios: 'Private studios'
   details:
     showMore: 'pokaż więcej'
     showLess: 'pokaż mniej'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: 'Projekt został pomyślnie usunięty ze studia!'
     no_projects: 'Studio nie zawiera jeszcze żadnych projektów'
     updateCoverError: 'Coś poszło nie tak podczas aktualizacji okładki studia!'
+    join: 'Dołącz'
+    leave: 'Opuść'
+    report: 'Zgłoś'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projekty'
     comments:

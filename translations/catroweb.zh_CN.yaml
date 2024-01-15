@@ -116,11 +116,11 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  deleteNotFoundError: The project to be deleted could not be found under your user.
+  deleteNotFoundError: 在您的账户下找不到要删除的项目。
   private: 私有的
   public: 公开的
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: 设为私有
+  setPublicAction: 设为公开
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -208,13 +208,13 @@ project:
   confrimDelete: Are you sure you want to delete the translation?
   default: 默认
   save: 保存
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: '%language% 翻译'
+  editDefault: 编辑默认值
+  editTranslation: 编辑 %language% 翻译
+  translations: 翻译
+  createTranslation: 创建翻译
+  deletedComment: '**已删除**'
+  replyLabel: 回复
   repliesLabel: 回复
 remixGraph:
   title: 调制
@@ -863,7 +863,9 @@ studio:
   singular: '工作室'
   create_studio: '创建工作室'
   delete_studio: '删除工作室'
+  cancel_studio: '取消'
   studio_name: '工作室名称'
+  studio_description: 'Studio description'
   join: '加入'
   leave: '退出'
   report: '报告'
@@ -872,6 +874,7 @@ studio:
   overview:
     joined_studios: '加入的工作室'
     public_studios: '公开的工作室'
+    private_studios: 'Private studios'
   details:
     showMore: '显示更多'
     showLess: '显示更多'
@@ -880,6 +883,11 @@ studio:
     remove_project_success: '项目已成功从工作室移除！'
     no_projects: '工作室尚未包含任何项目'
     updateCoverError: '更新工作室封面时出了错！'
+    join: '加入'
+    leave: '退出'
+    report: '报告'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: '项目'
     comments:

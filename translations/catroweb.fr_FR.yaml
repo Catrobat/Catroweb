@@ -111,11 +111,11 @@ project:
   noProjects: There are currently no projects.
   deleteAction: Supprimer le projet
   deleteConfirmation: |+
-    Are you sure?
-    Are you sure you want to delete "%programName%"?
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
+    Vous êtes sûr?
+    Êtes-vous sûr de vouloir supprimer "%programName%" ?
+    Il n'y a aucun moyen de restaurer vos actions !
+    Oui, supprimez-le !
+    Annuler
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
@@ -858,7 +858,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Annuler'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Signaler'
@@ -867,6 +869,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'afficher plus'
     showLess: 'montrer moins'
@@ -875,6 +878,11 @@ studio:
     remove_project_success: 'le projet a été retiré du studio avec succès !'
     no_projects: 'Studio ne contient pas encore de projets'
     updateCoverError: 'Un problème est survenu lors de la mise à jour de la couverture du studio !'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Signaler'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programmes'
     comments:

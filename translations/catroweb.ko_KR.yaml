@@ -856,7 +856,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: '취소'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: '보고서'
@@ -865,6 +867,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: '자세히보기'
     showLess: '덜 보여'
@@ -873,6 +876,11 @@ studio:
     remove_project_success: '프로젝트가 스튜디오에서 성공적으로 제거되었습니다!'
     no_projects: 'Studio에는 아직 프로젝트가 없습니다.'
     updateCoverError: '스튜디오 표지를 업데이트하는 동안 문제가 발생했습니다!'
+    join: 'Join'
+    leave: 'Leave'
+    report: '보고서'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: '프로그램'
     comments:
