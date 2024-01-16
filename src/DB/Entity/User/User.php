@@ -289,7 +289,7 @@ class User extends BaseUser
   /**
    * @ORM\Column(type="string", length=255, nullable=true)
    */
-  protected ?string $currentlyWorkingOn = null;
+  protected ?string $currently_working_on = null;
 
   /**
    * @ORM\Column(type="integer", nullable=true, unique=true)
@@ -625,12 +625,12 @@ class User extends BaseUser
 
   public function getCurrentlyWorkingOn(): ?string
   {
-    return $this->currentlyWorkingOn;
+    return $this->currently_working_on;
   }
 
-  public function setCurrentlyWorkingOn(?string $currentlyWorkingOn): void
+  public function setCurrentlyWorkingOn(?string $currently_working_on): void
   {
-    $this->currentlyWorkingOn = $currentlyWorkingOn;
+    $this->currently_working_on = $currently_working_on;
   }
 
   public function getRankingScore(): ?int
