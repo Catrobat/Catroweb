@@ -13,12 +13,12 @@ Feature: Upload a program with tag
   Scenario: uploading a embroidery project should add the extension to the program
     Given I have an embroidery project
     And I use the "english" app, API version 1
-    When I upload this generated program, API version 1
-    Then the embroidery program should have the "embroidery" extension
+    When I upload this generated project, API version 1
+    Then the embroidery project should have the "embroidery" file extension
 
   Scenario: uploading a normal project should not add an extension to the project
-    Given I have a program
+    Given I have a project
     And I use the "english" app, API version 1
-    When I upload this generated program, API version 1
+    When I upload this generated project, API version 1
     Then the project should have no extension
 

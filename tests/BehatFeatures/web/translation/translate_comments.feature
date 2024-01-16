@@ -10,7 +10,7 @@ Feature: Project comments should be translatable via a button
       | id | name     | owned by |
       | 1  | project1 | Catrobat |
     And there are comments:
-      | id | program_id | user_id | text |
+      | id | project_id | user_id | text |
       | 1  | 1          | 1       | c1   |
       | 2  | 1          | 2       | c2   |
 

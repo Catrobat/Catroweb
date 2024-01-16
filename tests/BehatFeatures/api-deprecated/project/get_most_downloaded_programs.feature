@@ -6,7 +6,7 @@ Feature: Get the most downloaded programs
       | name     | password | token      | id |
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
-    And there are programs:
+    And there are projects:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   |
@@ -53,7 +53,7 @@ Feature: Get the most downloaded programs
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/mostDownloaded.json" with these parameters
-    Then I should get programs in the following order:
+    Then I should get projects in the following order:
       | Name      |
       | program 2 |
       | program 3 |
@@ -62,15 +62,15 @@ Feature: Get the most downloaded programs
     Given I have a parameter "limit" with value "2"
     And I have a parameter "offset" with value "1"
     When I GET "/app/api/projects/mostDownloaded.json" with these parameters
-    Then I should get programs in the following order:
+    Then I should get projects in the following order:
       | Name      |
       | program 3 |
       | program 1 |
 
   Scenario: show only visible programs
-    Given program "program 2" is not visible
+    Given project "program 2" is not visible
     When I GET "/app/api/projects/mostDownloaded.json" with these parameters
-    Then I should get programs in the following order:
+    Then I should get projects in the following order:
       | Name      |
       | program 3 |
       | program 1 |

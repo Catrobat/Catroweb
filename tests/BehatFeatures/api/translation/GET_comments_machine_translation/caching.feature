@@ -9,7 +9,7 @@ Feature: Comment translation should be cached
       | id | name     | owned by | description   | credit   |
       | 1  | project1 | Catrobat | mydescription | mycredit |
     And there are comments:
-      | id | program_id | user_id | text |
+      | id | project_id | user_id | text |
       | 1  | 1          | 1       | c1   |
 
   Scenario: Comment translation should include etag

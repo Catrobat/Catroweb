@@ -11,7 +11,7 @@ Feature: Persist project and comment machine translation
       | 2  | project2 | Catrobat |              |         |
       | 3  | project3 | Catrobat | description3 | credit3 |
     And there are comments:
-      | id | program_id | user_id | text |
+      | id | project_id | user_id | text |
       | 1  | 2          | 1       | c1   |
       | 2  | 1          | 1       | c2   |
 

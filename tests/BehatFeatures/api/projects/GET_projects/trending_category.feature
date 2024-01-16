@@ -9,7 +9,7 @@ Feature: Get trending projects
       | 3  | User2    | 123456   |
       | 4  | User3    | 123456   |
     And the current time is "03.07.2012 12:00"
-    And there are programs:
+    And there are projects:
       | id | name      | owned by | views | downloads | upload time      | FileSize | version | language version | flavor     | upload_language |
       | 1  | project 1 | Catrobat | 10    | 10        | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.999            | pocketcode | en              |
       | 2  | project 2 | User1    | 50    | 5         | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.984            | luna       | fr              |

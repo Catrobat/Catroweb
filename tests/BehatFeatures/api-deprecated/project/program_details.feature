@@ -6,7 +6,7 @@ Feature: Get details for a specific program
       | name     | password | token      | id |
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
-    And there are programs:
+    And there are projects:
       | id | name      | description | owned by | downloads | views | upload time      | version | file_size |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 1024      |
       | 2  | program 2 |             | Catrobat | 333       | 9     | 22.04.2014 13:00 | 0.8.5   | 2621440   |

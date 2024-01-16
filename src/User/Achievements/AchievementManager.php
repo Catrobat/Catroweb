@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class AchievementManager
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository, protected UserAchievementRepository $user_achievement_repository, private readonly ProjectManager $program_manager, private readonly ProjectCustomTranslationRepository $project_custom_translation_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected AchievementRepository $achievement_repository, protected UserAchievementRepository $user_achievement_repository, private readonly ProjectManager $project_manager, private readonly ProjectCustomTranslationRepository $project_custom_translation_repository)
   {
   }
 
@@ -243,7 +243,7 @@ class AchievementManager
    */
   public function unlockAchievementCustomTranslation(User $user): void
   {
-    $projects = $this->program_manager->getPublicUserProjects($user->getId());
+    $projects = $this->project_manager->getPublicUserProjects($user->getId());
 
     $definedLanguages = $this->project_custom_translation_repository->countDefinedLanguages($projects);
     if ($definedLanguages >= 2) {

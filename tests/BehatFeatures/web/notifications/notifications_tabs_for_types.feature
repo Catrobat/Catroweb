@@ -45,9 +45,9 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     Then I should see "It looks like you don't have any remix notifications."
 
   Scenario: Notifications tabs contain only notifications of their type
-    Given there are "1" "like" notifications for program "program 1" from "User"
-    And there are "1" "comment" notifications for program "program 1" from "User"
-    And there are "1" "remix" notifications for program "program 1" from "User"
+    Given there are "1" "like" notifications for project "program 1" from "User"
+    And there are "1" "comment" notifications for project "program 1" from "User"
+    And there are "1" "remix" notifications for project "program 1" from "User"
     And there is a notification that "User" follows "Catrobat"
 
     When I log in as "Catrobat"

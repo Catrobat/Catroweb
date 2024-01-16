@@ -10,7 +10,7 @@ Feature: User gets notifications about comments on their programs
       | id | name      | owned by |
       | 1  | program 1 | Catrobat |
     And there are comments:
-      | id | program_id | user_id     | text |
+      | id | project_id | user_id     | text |
       | 1  | 1          | Catrobat-id | c1   |
       | 2  | 1          | User-id     | c2   |
 

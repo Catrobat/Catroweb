@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class CustomTranslationAchievementEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProjectManager $program_manager, private readonly LoggerInterface $logger)
+  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProjectManager $project_manager, private readonly LoggerInterface $logger)
   {
   }
 
@@ -31,7 +31,7 @@ class CustomTranslationAchievementEventSubscriber implements EventSubscriberInte
         return;
       }
 
-      $project = $this->program_manager->find($project_id);
+      $project = $this->project_manager->find($project_id);
 
       if (null === $project) {
         return;

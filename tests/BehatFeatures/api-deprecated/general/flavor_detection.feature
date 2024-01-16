@@ -6,10 +6,10 @@ Feature: Flag programs based on the app flavor
 
   Scenario: Flag a program uploaded with the phiro app
 
-    When I upload a catrobat program with the phiro app
-    Then the program should be flagged as phiro
+    When I upload a catrobat project with the phiro app
+    Then the project should be flagged as phiro
 
   Scenario: Do not flag a program as phiro if uploaded with pocketcode
 
-    When I upload a standard catrobat program
-    Then the program should not be flagged as phiro
+    When I upload a standard catrobat project
+    Then the project should not be flagged as phiro
