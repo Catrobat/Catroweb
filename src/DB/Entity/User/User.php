@@ -292,7 +292,7 @@ class User extends BaseUser
   protected ?string $currently_working_on = null;
 
   /**
-   * @ORM\Column(type="integer", nullable=true, unique=true)
+   * @ORM\Column(type="integer", nullable=true)
    */
   protected ?int $ranking_score = null;
 
