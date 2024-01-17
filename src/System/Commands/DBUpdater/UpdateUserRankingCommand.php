@@ -24,37 +24,36 @@ class UpdateUserRankingCommand extends Command
     ;
   }
 
-    protected function execute(InputInterface $input, OutputInterface $output): int
-    {
-        $output->writeln('Recomputing ELO ranking for all users');
+  protected function execute(InputInterface $input, OutputInterface $output): int
+  {
+    $output->writeln('Recomputing ELO ranking for all users');
+    $users = $this->userRepository->findAll();
 
-        $users = $this->userRepository->findAll();
+    $counter = 0;
+    foreach ($users as $user) {
+        $programs = $user->getPrograms();
+        $programsCount = $programs->count();
 
-        $counter = 0;
-        foreach ($users as $user) {
-            $programs = $user->getPrograms();
-            $programsCount = $programs->count();
-
-            $downloadsCount = 0;
-            foreach ($programs as $program) {
-                $downloadsCount += $program->getDownloads();
-            }
-
-            if (0 != $downloadsCount && 0 !== $programsCount) {
-                $elo = $downloadsCount / $programsCount;
-                $user->setRankingScore(intval($elo));
-                $this->entity_manager->persist($user);
-
-            }
-            $counter++;
-            if ($counter % 100 === 0) {
-                $this->entity_manager->flush();
-                $this->entity_manager->clear();
-            }
+        $downloadsCount = 0;
+        foreach ($programs as $program) {
+            $downloadsCount += $program->getDownloads();
         }
-        $this->entity_manager->flush();
-        $output->writeln('Update finished!');
 
-        return 0;
+        if (0 != $downloadsCount && 0 !== $programsCount) {
+            $elo = $downloadsCount / $programsCount;
+            $user->setRankingScore(intval($elo));
+            $this->entity_manager->persist($user);
+
+        }
+        $counter++;
+        if ($counter % 100 === 0) {
+            $this->entity_manager->flush();
+            $this->entity_manager->clear();
+        }
+    }
+    $this->entity_manager->flush();
+    $output->writeln('Update finished!');
+
+    return 0;
   }
 }
