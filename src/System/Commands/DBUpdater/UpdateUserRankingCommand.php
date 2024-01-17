@@ -31,25 +31,24 @@ class UpdateUserRankingCommand extends Command
 
     $counter = 0;
     foreach ($users as $user) {
-        $programs = $user->getPrograms();
-        $programsCount = $programs->count();
+      $programs = $user->getPrograms();
+      $programsCount = $programs->count();
 
-        $downloadsCount = 0;
-        foreach ($programs as $program) {
-            $downloadsCount += $program->getDownloads();
-        }
+      $downloadsCount = 0;
+      foreach ($programs as $program) {
+        $downloadsCount += $program->getDownloads();
+      }
 
-        if (0 != $downloadsCount && 0 !== $programsCount) {
-            $elo = $downloadsCount / $programsCount;
-            $user->setRankingScore(intval($elo));
-            $this->entity_manager->persist($user);
-
-        }
-        $counter++;
-        if ($counter % 100 === 0) {
-            $this->entity_manager->flush();
-            $this->entity_manager->clear();
-        }
+      if (0 != $downloadsCount && 0 !== $programsCount) {
+        $elo = $downloadsCount / $programsCount;
+        $user->setRankingScore(intval($elo));
+        $this->entity_manager->persist($user);
+      }
+      ++$counter;
+      if (0 === $counter % 100) {
+        $this->entity_manager->flush();
+        $this->entity_manager->clear();
+      }
     }
     $this->entity_manager->flush();
     $output->writeln('Update finished!');
