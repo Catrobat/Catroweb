@@ -1,0 +1,49 @@
+{% extends "Default/new_email.html.twig" %}
+
+{% block head_title %}
+  {% autoescape false %}
+    {{ 'resetPassword.newemail.title'|trans({}, 'catroweb')}}
+  {% endautoescape %}
+{% endblock %}
+
+{% block body_title %}
+  {% autoescape false %}
+  {% endautoescape %}
+{% endblock %} 
+
+{% block body_content %}
+  {% autoescape false %}
+
+  <style>
+
+  .content {
+    text-align:center; 
+    font-family: Arial, sans-serif;
+  }
+
+  .container {
+    padding: 25px;
+  }
+
+  .btn-reset {
+    padding: 20px 60px 0 60px;
+  }
+
+  </style>
+
+    <div class="content">
+        {{'resetPassword.newemail.content'|trans({}, 'catroweb')}}
+    </div>
+    <div align="center" class="container">
+      <a href="{{ url('app_reset_password', {theme: 'app', token: resetToken.token}) }}">
+      <button id="reset-password-button" class="btn btn-primary btn-reset">
+        <p><strong><big>{{ "resetPassword.newemail.visitLink"|trans({}, "catroweb") }}</big></strong></p>
+      </button>
+      </a>
+    </div>  
+  <small>
+    <p align="center">{{ "resetPassword.newemail.expire"|trans({'%time%': resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle')}, "catroweb") }}</p>
+  </small>
+  {% endautoescape %}
+{% endblock %}
+
