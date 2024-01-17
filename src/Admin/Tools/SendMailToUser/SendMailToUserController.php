@@ -141,10 +141,7 @@ class SendMailToUserController extends CRUDController
     }
 
     $title = (string) $request->query->get('title');
-    if ('' === $title) {
-      return new Response('Empty title!', Response::HTTP_BAD_REQUEST);
-    }
-
+  
     $messageText = (string) $request->query->get('message');
     if ('' === $messageText) {
       return new Response('Empty message!', Response::HTTP_BAD_REQUEST);
