@@ -237,6 +237,60 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 })
+
+document.addEventListener('DOMContentLoaded', function() {
+  const clickedProjectsAdminRemove = []
+  let AJAXdata = ''
+
+  document.querySelectorAll('.removeProjectsAdmin').forEach((el) => {
+    el.addEventListener('click', (event) => {
+      const projectId = event.target.id
+      handleImageClickRemove(projectId)
+    })
+
+    function handleImageClickRemove(projectId) {
+      const index = clickedProjectsAdminRemove.indexOf(projectId)
+      if (index === -1) {
+        clickedProjectsAdminRemove.push(projectId)
+      } else {
+        clickedProjectsAdminRemove.splice(index, 1)
+      }
+      AJAXdata = clickedProjectsAdminRemove.length > 0 ? JSON.stringify(clickedProjectsAdminRemove) : ''
+    }
+  })
+  const ajaxRequestDeleteProject = document.getElementById('ajaxRequestDeleteProject')
+  if (ajaxRequestDeleteProject) {
+    ajaxRequestDeleteProject.addEventListener('click', function() {
+      if (AJAXdata !== '') {
+        const formData = new FormData()
+        formData.append('projects_remove', AJAXdata)
+        formData.append('studio_id', event.currentTarget.dataset.studioId)
+
+        const url = event.currentTarget.dataset.url
+        fetch(url, {
+          method: 'POST',
+          body: formData,
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok')
+            }
+            return response.json()
+          })
+          .then(data => {
+            if (data.redirect_url) {
+              window.location.href = data.redirect_url
+            }
+            // Handle other responses as needed
+          })
+          .catch(error => {
+            console.error('There was an error with the fetch operation:', error)
+          })
+      }
+    })
+  }
+})
+
 function makeAjaxRequest(url) {
   fetch(url, {
     method: 'POST',

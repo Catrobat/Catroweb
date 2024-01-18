@@ -5,25 +5,55 @@
     <div class="studio-projects-container project-list vertical">
       <div class="project-list__wrapper">
         <div class="projects-container">
+          {% if user_role != 'admin' %}
           {% for project in projects %}
             <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin">
               <img class="project-list__project__image"
                    src="{{ asset(project.thumbnail|default("")) }}"
                    alt="{{ project.name }}">
               <span class="project-list__project__name">{{ project.name }}</span>
-              {% if user_role == 'admin' %}
-                <a class="project-delete-button" data-bs-toggle="tooltip"
-                   onclick="(new Studio()).removeProject('{{ project.id }}')"
-                   title="{{ 'studio.details.remove_project'|trans({}, 'catroweb') }}">
-                  <i class="ms-2 material-icons text-danger">delete</i>
-                </a>
-              {% endif %}
             </div>
           {% endfor %}
+          {% else %}
+          {% for project in projects %}
+          <div id="project-{{ project.id }}" class="project-list__project studio-project-list-admin ">
+            <img class="project-list__project__image removeProjectsAdmin"
+                 src="{{ asset(project.thumbnail|default("")) }}"
+                 alt="{{ project.name }}"
+                 id="{{ project.id }}">
+            <span class="project-list__project__name">{{ project.name }}</span>
+          </div>
+          {% endfor %}
+
+          {% endif %}
         </div>
+
       </div>
     </div>
   {% else %}
     <p class="mt-3">{{ 'studio.details.no_projects'|trans({}, 'catroweb') }}</p>
   {% endif %}
+  <div class="col-12 mt-3" data-bs-toggle="tooltip">
+    {% if user_role == 'admin' %}
+      <a id="ajaxRequestDeleteProject" class="project-delete-button" data-bs-toggle="tooltip"
+         title="{{ 'studio.details.remove_project'|trans({}, 'catroweb') }}"
+         data-url="{{ path('delete_studio_projects_admin')}}"
+        data-studio-id="{{ studio.id }}">
+        <i class="ms-2 material-icons text-danger">delete</i>
+      </a>
+    {% endif %}
+
+    <i id="show-add-studio-project-button" class="add-studio-project-button material-icons catro-round-icon-button"
+         data-bs-toggle="modal"  data-bs-target="#studio-add-project-modal" title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">add</i>
+    <i id="hide-add-comment-button" style="display:none;"
+       class="add-comment-button material-icons catro-round-icon-button" data-bs-toggle="tooltip"
+       title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">remove</i>
+
+  </div>
+  {% include 'Studio/studio_project_add.html.twig' %}
+
 </div>
+
+
+
+

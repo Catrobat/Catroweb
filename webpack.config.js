@@ -159,6 +159,7 @@ Encore
   .addEntry('studio_detail', './assets/js/studio_detail.js')
   .addEntry('studios_overview', './assets/js/studios_overview.js')
   .addEntry('studios_new', './assets/js/studio_new.js')
+  .addEntry('studio_add_new_project', './assets/js/studio_add_new_project.js')
   .addEntry('code_view', './assets/js/code_view.js')
   .addEntry('medialib_content', './assets/js/medialib_content.js')
 

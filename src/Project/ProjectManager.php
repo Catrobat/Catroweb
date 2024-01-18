@@ -18,10 +18,10 @@ use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CatrobatFile\CatrobatFileSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\Event\ProgramAfterInsertEvent;
-use App\Project\Event\ProgramBeforeInsertEvent;
-use App\Project\Event\ProgramBeforePersistEvent;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\Event\ProjectAfterInsertEvent;
+use App\Project\Event\ProjectBeforeInsertEvent;
+use App\Project\Event\ProjectBeforePersistEvent;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
 use App\Utils\RequestHelper;
@@ -46,7 +46,7 @@ use Symfony\Component\Security\Core\Security;
 
 class ProjectManager
 {
-  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProgramFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected TagRepository $tag_repository, protected ProgramLikeRepository $program_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $program_finder, private readonly ?UrlHelper $urlHelper, protected Security $security)
+  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProjectFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProgramRepository $project_repository, protected TagRepository $tag_repository, protected ProgramLikeRepository $project_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $program_finder, private readonly ?UrlHelper $urlHelper, protected Security $security)
   {
   }
 
@@ -62,7 +62,7 @@ class ProjectManager
 
   public function getProjectByID(string $id, bool $include_private = false): array
   {
-    return $this->program_repository->getProjectByID($id, $include_private);
+    return $this->project_repository->getProjectByID($id, $include_private);
   }
 
   /**
@@ -95,22 +95,22 @@ class ProjectManager
   }
 
   /*
-   * Adds a new program and notifies all followers of the uploader about it.
+   * Adds a new project and notifies all followers of the uploader about it.
    *
    * @throws Exception
    */
-  public function addProgram(AddProgramRequest $request): ?Program
+  public function addProject(AddProjectRequest $request): ?Program
   {
-    $file = $request->getProgramFile();
+    $file = $request->getProjectFile();
 
     $extracted_file = $this->file_extractor->extract($file);
 
     $this->file_sanitizer->sanitize($extracted_file);
 
     try {
-      $event = $this->event_dispatcher->dispatch(new ProgramBeforeInsertEvent($extracted_file));
+      $event = $this->event_dispatcher->dispatch(new ProjectBeforeInsertEvent($extracted_file));
     } catch (InvalidCatrobatFileException $e) {
-      $this->logger->error('addProgram failed with code: '.$e->getCode().' and message:'.$e->getMessage());
+      $this->logger->error('addProject failed with code: '.$e->getCode().' and message:'.$e->getMessage());
       throw $e;
     }
 
@@ -120,57 +120,57 @@ class ProjectManager
       return null;
     }
 
-    /** @var Program|null $old_program */
-    $old_program = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
-    if (null !== $old_program) {
-      $program = $old_program;
-      $this->removeAllTags($program);
+    /** @var Program|null $old_project */
+    $old_project = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
+    if (null !== $old_project) {
+      $project = $old_project;
+      $this->removeAllTags($project);
       // it's an update
-      $program->incrementVersion();
-      $program->setVisible($old_program->getVisible()); // necessary to keep reported projects invisible after re-upload!
+      $project->incrementVersion();
+      $project->setVisible($old_project->getVisible()); // necessary to keep reported projects invisible after re-upload!
     } else {
-      $program = new Program();
-      $program->setRemixRoot(true);
-      $program->setVisible(true);
+      $project = new Program();
+      $project->setRemixRoot(true);
+      $project->setVisible(true);
     }
 
-    $program->setName($extracted_file->getName());
-    $program->setDescription($extracted_file->getDescription());
-    $program->setCredits($extracted_file->getNotesAndCredits());
-    $program->setUser($request->getUser());
-    $program->setCatrobatVersionName($extracted_file->getApplicationVersion());
-    $program->setLanguageVersion($extracted_file->getLanguageVersion());
-    $program->setUploadIp($request->getIp());
-    $program->setFilesize($file->getSize());
-    $program->setApproved(false);
-    $program->setUploadLanguage('en');
-    $program->setUploadedAt(TimeUtils::getDateTime());
-    $program->setRemixMigratedAt(null);
-    $program->setFlavor($request->getFlavor());
-    $program->setDebugBuild($extracted_file->isDebugBuild());
-    $this->addTags($program, $extracted_file);
+    $project->setName($extracted_file->getName());
+    $project->setDescription($extracted_file->getDescription());
+    $project->setCredits($extracted_file->getNotesAndCredits());
+    $project->setUser($request->getUser());
+    $project->setCatrobatVersionName($extracted_file->getApplicationVersion());
+    $project->setLanguageVersion($extracted_file->getLanguageVersion());
+    $project->setUploadIp($request->getIp());
+    $project->setFilesize($file->getSize());
+    $project->setApproved(false);
+    $project->setUploadLanguage('en');
+    $project->setUploadedAt(TimeUtils::getDateTime());
+    $project->setRemixMigratedAt(null);
+    $project->setFlavor($request->getFlavor());
+    $project->setDebugBuild($extracted_file->isDebugBuild());
+    $this->addTags($project, $extracted_file);
 
-    $this->event_dispatcher->dispatch(new ProgramBeforePersistEvent($extracted_file, $program));
+    $this->event_dispatcher->dispatch(new ProjectBeforePersistEvent($extracted_file, $project));
 
-    $this->entity_manager->persist($program);
+    $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $this->entity_manager->refresh($program);
+    $this->entity_manager->refresh($project);
 
-    // Extensions are added via the ProgramExtensionListener!
+    // Extensions are added via the ProjectExtensionListener!
 
     try {
       if (null !== $extracted_file->getScreenshotPath()) {
-        $this->screenshot_repository->saveProgramAssetsTemp($extracted_file->getScreenshotPath(), $program->getId());
+        $this->screenshot_repository->saveProjectAssetsTemp($extracted_file->getScreenshotPath(), $project->getId());
       }
     } catch (\Exception $e) {
-      $this->logger->error('UploadError -> saveProgramAssetsTemp failed!', ['exception' => $e->getMessage()]);
-      $program_id = $program->getId();
-      $this->entity_manager->remove($program);
+      $this->logger->error('UploadError -> saveProjectAssetsTemp failed!', ['exception' => $e->getMessage()]);
+      $project_id = $project->getId();
+      $this->entity_manager->remove($project);
       $this->entity_manager->flush();
       try {
-        $this->screenshot_repository->deleteTempFilesForProgram($program_id);
+        $this->screenshot_repository->deleteTempFilesForProject($project_id);
       } catch (IOException $error) {
-        $this->logger->error('UploadError -> deleteTempFilesForProgram failed!', ['exception' => $error]);
+        $this->logger->error('UploadError -> deleteTempFilesForProject failed!', ['exception' => $error]);
         throw $error;
       }
 
@@ -179,18 +179,18 @@ class ProjectManager
 
     try {
       if (null !== $extracted_file->getScreenshotPath()) {
-        $this->screenshot_repository->makeTempProgramAssetsPerm($program->getId());
+        $this->screenshot_repository->makeTempProjectAssetsPerm($project->getId());
       }
     } catch (\Exception $e) {
-      $this->logger->error('UploadError -> makeTempProgramPerm failed!', ['exception' => $e]);
-      $program_id = $program->getId();
-      $this->entity_manager->remove($program);
+      $this->logger->error('UploadError -> makeTempProjectPerm failed!', ['exception' => $e]);
+      $project_id = $project->getId();
+      $this->entity_manager->remove($project);
       $this->entity_manager->flush();
       try {
-        $this->screenshot_repository->deletePermProgramAssets($program_id);
+        $this->screenshot_repository->deletePermProjectAssets($project_id);
       } catch (IOException $error) {
         $this->logger->error(
-          'UploadError -> deletePermProgramAssets or deleteProgramFile failed!', ['exception' => $e]
+          'UploadError -> deletePermProjectAssets or deleteProjectFile failed!', ['exception' => $e]
         );
         throw $error;
       }
@@ -198,92 +198,92 @@ class ProjectManager
       return null;
     }
 
-    $this->entity_manager->persist($program);
+    $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $this->entity_manager->refresh($program);
-    $this->file_repository->saveProjectZipFile($file, $program->getId());
+    $this->entity_manager->refresh($project);
+    $this->file_repository->saveProjectZipFile($file, $project->getId());
 
-    $this->event_dispatcher->dispatch(new ProgramAfterInsertEvent($extracted_file, $program));
-    $this->notifyFollower($program);
-    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$program->getId();
+    $this->event_dispatcher->dispatch(new ProjectAfterInsertEvent($extracted_file, $project));
+    $this->notifyFollower($project);
+    $compressed_file_directory = $this->file_extractor->getExtractDir().'/'.$project->getId();
     if (is_dir($compressed_file_directory)) {
       (new Filesystem())->remove($compressed_file_directory);
     }
     if (is_dir($extracted_file->getPath())) {
-      (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$program->getId());
+      (new Filesystem())->rename($extracted_file->getPath(), $this->file_extractor->getExtractDir().'/'.$project->getId());
     }
     (new Filesystem())->remove($extracted_file->getPath());
 
     // remove old "cached" zips - they will be re-generated on a project download
-    if (!$this->file_repository->checkIfProjectZipFileExists($program->getId())) {
-      $this->file_repository->deleteProjectZipFile($program->getId());
+    if (!$this->file_repository->checkIfProjectZipFileExists($project->getId())) {
+      $this->file_repository->deleteProjectZipFile($project->getId());
     }
 
-    return $program;
+    return $project;
   }
 
   /**
-   * Adds a new program from a scratch_program. Doesn't add the Project file.
+   * Adds a new project from a scratch_project. Doesn't add the Project file.
    *
    * @throws \Exception
    */
-  public function createProgramFromScratch(?Program $program, User $user, array $program_data): Program
+  public function createProjectFromScratch(?Program $project, User $user, array $project_data): Program
   {
-    $modified_time = TimeUtils::dateTimeFromScratch($program_data['history']['modified']);
-    if (null === $program) {
-      $program = new Program();
-      $program->setUser($user);
-      $program->setScratchId($program_data['id']);
-      $program->setDebugBuild(false);
+    $modified_time = TimeUtils::dateTimeFromScratch($project_data['history']['modified']);
+    if (null === $project) {
+      $project = new Program();
+      $project->setUser($user);
+      $project->setScratchId($project_data['id']);
+      $project->setDebugBuild(false);
     } else {
-      // throw new Exception($program->getLastModifiedAt()->format('Y-m-d H:i:s'));
-      if ($program->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
-        return $program;
+      // throw new Exception($project->getLastModifiedAt()->format('Y-m-d H:i:s'));
+      if ($project->getLastModifiedAt()->getTimestamp() > $modified_time->getTimestamp()) {
+        return $project;
       }
-      $program->incrementVersion();
+      $project->incrementVersion();
     }
-    $program->setVisible(true);
-    $program->setApproved(false);
+    $project->setVisible(true);
+    $project->setApproved(false);
 
     $description_text = '';
-    if ($instructions = $program_data['instructions'] ?? null) {
+    if ($instructions = $project_data['instructions'] ?? null) {
       $description_text .= $instructions;
     }
-    if ($description = $program_data['description'] ?? null) {
+    if ($description = $project_data['description'] ?? null) {
       if ($instructions) {
         $description_text .= "\n\n";
       }
       $description_text .= $description;
     }
-    $program->setDescription($description_text);
+    $project->setDescription($description_text);
 
-    if ($title = $program_data['title'] ?? null) {
-      $program->setName($title);
+    if ($title = $project_data['title'] ?? null) {
+      $project->setName($title);
     }
 
-    $shared_time = TimeUtils::dateTimeFromScratch($program_data['history']['shared']);
+    $shared_time = TimeUtils::dateTimeFromScratch($project_data['history']['shared']);
     if ($shared_time) {
-      $program->setUploadedAt($shared_time);
+      $project->setUploadedAt($shared_time);
     } else {
-      $program->setUploadedAt(TimeUtils::getDateTime());
+      $project->setUploadedAt(TimeUtils::getDateTime());
     }
     if ($modified_time) {
-      $program->setLastModifiedAt($modified_time);
+      $project->setLastModifiedAt($modified_time);
     } else {
-      $program->setLastModifiedAt(TimeUtils::getDateTime());
+      $project->setLastModifiedAt(TimeUtils::getDateTime());
     }
 
-    $this->entity_manager->persist($program);
+    $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $this->entity_manager->refresh($program);
+    $this->entity_manager->refresh($project);
 
-    $this->notifyFollower($program);
+    $this->notifyFollower($project);
 
-    if ($image_url = $program_data['image'] ?? null) {
-      $this->screenshot_repository->saveScratchScreenshot($program->getScratchId(), $program->getId());
+    if ($image_url = $project_data['image'] ?? null) {
+      $this->screenshot_repository->saveScratchScreenshot($project->getScratchId(), $project->getId());
     }
 
-    return $program;
+    return $project;
   }
 
   /**
@@ -291,12 +291,12 @@ class ProjectManager
    */
   public function findUserLikes(string $project_id, string $user_id): array
   {
-    return $this->program_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
+    return $this->project_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
   }
 
-  public function findProgramLikeTypes(string $project_id): array
+  public function findProjectLikeTypes(string $project_id): array
   {
-    return $this->program_like_repository->likeTypesOfProject($project_id);
+    return $this->project_like_repository->likeTypesOfProject($project_id);
   }
 
   /**
@@ -305,9 +305,9 @@ class ProjectManager
   public function changeLike(Program $project, User $user, int $type, string $action): void
   {
     if (ProgramLike::ACTION_ADD === $action) {
-      $this->program_like_repository->addLike($project, $user, $type);
+      $this->project_like_repository->addLike($project, $user, $type);
     } elseif (ProgramLike::ACTION_REMOVE === $action) {
-      $this->program_like_repository->removeLike($project, $user, $type);
+      $this->project_like_repository->removeLike($project, $user, $type);
     } else {
       throw new \InvalidArgumentException("Invalid action: {$action}");
     }
@@ -319,23 +319,23 @@ class ProjectManager
   public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
   {
     try {
-      return $this->program_like_repository->areThereOtherLikeTypes($project, $user, $type);
+      return $this->project_like_repository->areThereOtherLikeTypes($project, $user, $type);
     } catch (NonUniqueResultException) {
       return false;
     }
   }
 
-  public function likeTypeCount(string $program_id, int $type): int
+  public function likeTypeCount(string $project_id, int $type): int
   {
-    return $this->program_like_repository->likeTypeCount($program_id, $type);
+    return $this->project_like_repository->likeTypeCount($project_id, $type);
   }
 
-  public function totalLikeCount(string $program_id): int
+  public function totalLikeCount(string $project_id): int
   {
-    return $this->program_like_repository->totalLikeCount($program_id);
+    return $this->project_like_repository->totalLikeCount($project_id);
   }
 
-  public function addTags(Program $program, ExtractedCatrobatFile $extracted_file): void
+  public function addTags(Program $project, ExtractedCatrobatFile $extracted_file): void
   {
     $tags = $extracted_file->getTags();
 
@@ -346,7 +346,7 @@ class ProjectManager
         $db_tag = $this->tag_repository->findOneBy(['internal_title' => $tag]);
 
         if (null !== $db_tag) {
-          $program->addTag($db_tag);
+          $project->addTag($db_tag);
           ++$i;
         }
 
@@ -358,12 +358,12 @@ class ProjectManager
     }
   }
 
-  public function removeAllTags(Program $program): void
+  public function removeAllTags(Program $project): void
   {
-    $tags = $program->getTags();
+    $tags = $project->getTags();
 
     foreach ($tags as $tag) {
-      $program->removeTag($tag);
+      $project->removeTag($tag);
     }
   }
 
@@ -371,9 +371,9 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function markAllProgramsAsNotYetMigrated(): void
+  public function markAllProjectsAsNotYetMigrated(): void
   {
-    $this->program_repository->markAllProgramsAsNotYetMigrated();
+    $this->project_repository->markAllProjectsAsNotYetMigrated();
   }
 
   /**
@@ -382,10 +382,10 @@ class ProjectManager
    *
    * @return Program|object|null
    */
-  public function findOneByNameAndUser(string $program_name, UserInterface $user)
+  public function findOneByNameAndUser(string $project_name, UserInterface $user)
   {
-    return $this->program_repository->findOneBy([
-      'name' => $program_name,
+    return $this->project_repository->findOneBy([
+      'name' => $project_name,
       'user' => $user,
     ]);
   }
@@ -396,9 +396,9 @@ class ProjectManager
    *
    * @return Program|object|null
    */
-  public function findOneByName(string $programName)
+  public function findOneByName(string $project_name)
   {
-    return $this->program_repository->findOneBy(['name' => $programName]);
+    return $this->project_repository->findOneBy(['name' => $project_name]);
   }
 
   /**
@@ -409,7 +409,7 @@ class ProjectManager
    */
   public function findOneByScratchId(int $scratch_id)
   {
-    return $this->program_repository->findOneBy(['scratch_id' => $scratch_id]);
+    return $this->project_repository->findOneBy(['scratch_id' => $scratch_id]);
   }
 
   /**
@@ -418,7 +418,7 @@ class ProjectManager
    */
   public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
   {
-    return $this->program_repository->findBy($criteria, $orderBy, $limit, $offset);
+    return $this->project_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
   /**
@@ -427,7 +427,7 @@ class ProjectManager
    */
   public function findAll(): array
   {
-    return $this->program_repository->findAll();
+    return $this->project_repository->findAll();
   }
 
   /**
@@ -436,9 +436,9 @@ class ProjectManager
    *
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findNext(string $previous_program_id): mixed
+  public function findNext(string $previous_project_id): mixed
   {
-    return $this->program_repository->findNext($previous_program_id);
+    return $this->project_repository->findNext($previous_project_id);
   }
 
   /**
@@ -449,7 +449,7 @@ class ProjectManager
    */
   public function find(string $id)
   {
-    return $this->program_repository->find($id);
+    return $this->project_repository->find($id);
   }
 
   public function findProjectIfVisibleToCurrentUser(?string $id): ?Program
@@ -478,193 +478,193 @@ class ProjectManager
    */
   public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at)
   {
-    return $this->program_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
+    return $this->project_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
 
   public function getUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
-    return $this->program_repository->getUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version, $limit, $offset);
+    return $this->project_repository->getUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version, $limit, $offset);
   }
 
   public function countUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->countUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version);
+    return $this->project_repository->countUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version);
   }
 
   public function getMoreProjectsFromUser(string $user_id, string $project_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
-    return $this->program_repository->getMoreProjectsFromUser($user_id, $project_id, $flavor, $max_version, $limit, $offset);
+    return $this->project_repository->getMoreProjectsFromUser($user_id, $project_id, $flavor, $max_version, $limit, $offset);
   }
 
   public function getPublicUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
   {
-    return $this->program_repository->getPublicUserProjects($user_id, $flavor, $max_version, $limit, $offset);
+    return $this->project_repository->getPublicUserProjects($user_id, $flavor, $max_version, $limit, $offset);
   }
 
   public function countPublicUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->countPublicUserProjects($user_id, $flavor, $max_version);
+    return $this->project_repository->countPublicUserProjects($user_id, $flavor, $max_version);
   }
 
-  public function getRecentPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getRecentProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'uploaded_at');
+    return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'uploaded_at');
   }
 
-  public function getMostViewedPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getMostViewedProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'views');
+    return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'views');
   }
 
-  public function getExamplePrograms(string $flavor = null, int $limit = null, int $offset = 0, string $max_version = ''): array
+  public function getExampleProjects(string $flavor = null, int $limit = null, int $offset = 0, string $max_version = ''): array
   {
-    return $this->example_repository->getExamplePrograms(
+    return $this->example_repository->getExampleProjects(
       $this->request_helper->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  public function getExampleProgramsCount(string $flavor = null, string $max_version = ''): int
+  public function getExampleProjectsCount(string $flavor = null, string $max_version = ''): int
   {
-    return $this->example_repository->getExampleProgramsCount(
+    return $this->example_repository->getExampleProjectsCount(
       $this->request_helper->isDebugBuildRequest(), $flavor, $max_version
     );
   }
 
-  public function getScratchRemixesPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getScratchRemixesProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getScratchRemixProjects($flavor, $max_version, $limit, $offset);
+    return $this->project_repository->getScratchRemixProjects($flavor, $max_version, $limit, $offset);
   }
 
-  public function getScratchRemixesProgramsCount(string $flavor = null, string $max_version = ''): int
+  public function getScratchRemixesProjectsCount(string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->countScratchRemixProjects($flavor, $max_version);
+    return $this->project_repository->countScratchRemixProjects($flavor, $max_version);
   }
 
-  public function getMostDownloadedPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getMostDownloadedProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'downloads');
+    return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
 
-  private function getTrendingPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  private function getTrendingProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getTrendingProjects($flavor, $max_version, $limit, $offset, 'downloads');
+    return $this->project_repository->getTrendingProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
 
-  public function getRandomPrograms(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getRandomProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
-    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'rand');
+    return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'rand');
   }
 
   public function countProjects(string $flavor = null, string $max_version = ''): int
   {
-    return $this->program_repository->countProjects($flavor, $max_version);
+    return $this->project_repository->countProjects($flavor, $max_version);
   }
 
   public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', string $flavor = null, bool $is_debug_request = false): array
   {
-    $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
+    $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
-    return $this->program_finder->find($program_query, $limit, ['from' => $offset]);
+    return $this->program_finder->find($project_query, $limit, ['from' => $offset]);
   }
 
   public function searchCount(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): int
   {
-    $program_query = $this->programSearchQuery($query, $max_version, $flavor, $is_debug_request);
+    $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
-    $paginator = $this->program_finder->findPaginated($program_query);
+    $paginator = $this->program_finder->findPaginated($project_query);
 
     return $paginator->getNbResults();
   }
 
-  public function increaseViews(Program $program): void
+  public function increaseViews(Program $project): void
   {
     $this->entity_manager
       ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.views = p.views + 1 WHERE p.id = :pid')
-      ->setParameter('pid', $program->getId())
+      ->setParameter('pid', $project->getId())
       ->execute()
     ;
   }
 
-  public function increaseDownloads(Program $program, ?User $user): void
+  public function increaseDownloads(Program $project, ?User $user): void
   {
-    $this->increaseNumberOfDownloads($program, $user, ProgramDownloads::TYPE_PROJECT);
+    $this->increaseNumberOfDownloads($project, $user, ProgramDownloads::TYPE_PROJECT);
   }
 
-  public function increaseApkDownloads(Program $program, ?User $user): void
+  public function increaseApkDownloads(Program $project, ?User $user): void
   {
-    $this->increaseNumberOfDownloads($program, $user, ProgramDownloads::TYPE_APK);
+    $this->increaseNumberOfDownloads($project, $user, ProgramDownloads::TYPE_APK);
   }
 
-  protected function increaseNumberOfDownloads(Program $program, ?User $user, string $download_type): void
+  protected function increaseNumberOfDownloads(Program $project, ?User $user, string $download_type): void
   {
     if (!is_null($user)) {
       $download_repo = $this->entity_manager->getRepository(ProgramDownloads::class);
       // No matter which type it should only count once!
-      $download = $download_repo->findOneBy(['program' => $program, 'user' => $user, 'type' => $download_type]);
+      $download = $download_repo->findOneBy(['program' => $project, 'user' => $user, 'type' => $download_type]);
       // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
       if (is_null($download)) {
         if (ProgramDownloads::TYPE_PROJECT === $download_type) {
           $this->entity_manager
             ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.downloads = p.downloads + 1 WHERE p.id = :pid')
-            ->setParameter('pid', $program->getId())
+            ->setParameter('pid', $project->getId())
             ->execute()
           ;
         } elseif (ProgramDownloads::TYPE_APK === $download_type) {
           $this->entity_manager
             ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_downloads = p.apk_downloads + 1 WHERE p.id = :pid')
-            ->setParameter('pid', $program->getId())
+            ->setParameter('pid', $project->getId())
             ->execute()
           ;
         }
-        $this->addDownloadEntry($program, $user, $download_type);
+        $this->addDownloadEntry($project, $user, $download_type);
       }
     }
   }
 
-  protected function addDownloadEntry(Program $program, ?User $user, string $download_type): void
+  protected function addDownloadEntry(Program $project, ?User $user, string $download_type): void
   {
     $download = new ProgramDownloads();
     $download->setUser($user);
-    $download->setProgram($program);
+    $download->setProgram($project);
     $download->setType($download_type);
     $download->setDownloadedAt(new \DateTime('now'));
     $this->entity_manager->persist($download);
     $this->entity_manager->flush();
   }
 
-  public function save(Program $program, ProgramDownloads $downloads = null): void
+  public function save(Program $project, ProgramDownloads $downloads = null): void
   {
-    $this->entity_manager->persist($program);
+    $this->entity_manager->persist($project);
     if (!is_null($downloads)) {
       $this->entity_manager->persist($downloads);
     }
     $this->entity_manager->flush();
   }
 
-  public function getProgramsByTagInternalTitle(string $name, ?int $limit, int $offset): array
+  public function getProjectsByTagInternalTitle(string $name, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getProjectsByTagInternalTitle($name, $limit, $offset);
+    return $this->project_repository->getProjectsByTagInternalTitle($name, $limit, $offset);
   }
 
   public function getProjectsByExtensionInternalTitle(string $name, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getProjectsByExtensionInternalTitle($name, $limit, $offset);
+    return $this->project_repository->getProjectsByExtensionInternalTitle($name, $limit, $offset);
   }
 
   public function searchTagCount(string $tag_name): int
   {
-    return $this->program_repository->searchTagCount($tag_name);
+    return $this->project_repository->searchTagCount($tag_name);
   }
 
   public function searchExtensionCount(string $query): int
   {
-    return $this->program_repository->searchExtensionCount($query);
+    return $this->project_repository->searchExtensionCount($query);
   }
 
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
+  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $project, ?int $limit, int $offset): array
   {
-    return $this->program_repository->getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(
-      $flavor, $program, $limit, $offset
+    return $this->project_repository->getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(
+      $flavor, $project, $limit, $offset
     );
   }
 
@@ -690,14 +690,14 @@ class ProjectManager
     int $limit = 20, int $offset = 0, string $flavor = null): array
   {
     return match ($category) {
-      'recent' => $this->getRecentPrograms($flavor, $limit, $offset, $max_version),
-      'random' => $this->getRandomPrograms($flavor, $limit, $offset, $max_version),
-      'most_viewed' => $this->getMostViewedPrograms($flavor, $limit, $offset, $max_version),
-      'most_downloaded' => $this->getMostDownloadedPrograms($flavor, $limit, $offset, $max_version),
-      'example' => $this->getExamplePrograms($flavor, $limit, $offset, $max_version),
-      'scratch' => $this->getScratchRemixesPrograms($flavor, $limit, $offset, $max_version),
-      'popular' => $this->getPopularPrograms($flavor, $limit, $offset, $max_version),
-      'trending' => $this->getTrendingPrograms($flavor, $limit, $offset, $max_version),
+      'recent' => $this->getRecentProjects($flavor, $limit, $offset, $max_version),
+      'random' => $this->getRandomProjects($flavor, $limit, $offset, $max_version),
+      'most_viewed' => $this->getMostViewedProjects($flavor, $limit, $offset, $max_version),
+      'most_downloaded' => $this->getMostDownloadedProjects($flavor, $limit, $offset, $max_version),
+      'example' => $this->getExampleProjects($flavor, $limit, $offset, $max_version),
+      'scratch' => $this->getScratchRemixesProjects($flavor, $limit, $offset, $max_version),
+      'popular' => $this->getPopularProjects($flavor, $limit, $offset, $max_version),
+      'trending' => $this->getTrendingProjects($flavor, $limit, $offset, $max_version),
       default => [],
     };
   }
@@ -706,13 +706,13 @@ class ProjectManager
   {
     return match ($category) {
       'recent', 'random', 'most_viewed', 'most_downloaded', 'trending' => $this->countProjects($flavor, $max_version),
-      'example' => $this->getExampleProgramsCount($flavor, $max_version),
-      'scratch' => $this->getScratchRemixesProgramsCount($flavor, $max_version),
+      'example' => $this->getExampleProjectsCount($flavor, $max_version),
+      'scratch' => $this->getScratchRemixesProjectsCount($flavor, $max_version),
       default => 0,
     };
   }
 
-  private function programSearchQuery(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): BoolQuery
+  private function projectSearchQuery(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): BoolQuery
   {
     $query = Util::escapeTerm($query);
 
@@ -750,25 +750,25 @@ class ProjectManager
     return $bool_query;
   }
 
-  private function notifyFollower(Program $program): void
+  private function notifyFollower(Program $project): void
   {
-    $followers = $program->getUser()->getFollowers();
+    $followers = $project->getUser()->getFollowers();
     for ($i = 0; $i < $followers->count(); ++$i) {
-      $notification = new NewProgramNotification($followers[$i], $program);
+      $notification = new NewProgramNotification($followers[$i], $project);
       $this->notification_service->addNotification($notification);
     }
   }
 
-  public function deleteProject(Program $program): void
+  public function deleteProject(Program $project): void
   {
-    $program->setVisible(false);
-    $this->entity_manager->persist($program);
+    $project->setVisible(false);
+    $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $this->entity_manager->refresh($program);
+    $this->entity_manager->refresh($project);
   }
 
-  private function getPopularPrograms(?string $flavor, int $limit, int $offset, string $max_version): array
+  private function getPopularProjects(?string $flavor, int $limit, int $offset, string $max_version): array
   {
-    return $this->program_repository->getProjects($flavor, $max_version, $limit, $offset, 'popularity');
+    return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'popularity');
   }
 }

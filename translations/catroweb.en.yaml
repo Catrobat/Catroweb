@@ -944,6 +944,7 @@ studio:
 
     projects:
       title: 'Projects'
+      addProject: 'Add your own projects'
 
     comments:
       title: 'Comments'
