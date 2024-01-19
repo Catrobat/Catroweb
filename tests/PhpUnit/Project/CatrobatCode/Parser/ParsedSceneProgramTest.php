@@ -4,7 +4,7 @@ namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\CodeStatistic;
 use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\Project\CatrobatCode\Parser\ParsedSceneProgram;
+use App\Project\CatrobatCode\Parser\ParsedSceneProject;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -13,17 +13,17 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  *
- * @covers \App\Project\CatrobatCode\Parser\ParsedSceneProgram
+ * @covers \App\Project\CatrobatCode\Parser\ParsedSceneProject
  */
 class ParsedSceneProgramTest extends TestCase
 {
-  protected ParsedSceneProgram $program;
+  protected ParsedSceneProject $program;
 
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
-    $this->program = new ParsedSceneProgram($xml_properties);
+    $this->program = new ParsedSceneProject($xml_properties);
   }
 
   #[DataProvider('provideMethodNames')]

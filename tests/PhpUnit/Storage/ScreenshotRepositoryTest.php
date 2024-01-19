@@ -125,7 +125,7 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     Assert::assertFileDoesNotExist($this->screenshot_dir.'screen_'.$this->project_id.'.png');
-    $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
+    $this->screenshot_repository->saveProjectAssets($filepath, $this->project_id);
     Assert::assertFileExists($this->screenshot_dir.'screen_'.$this->project_id.'.png');
   }
 
@@ -136,7 +136,7 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     Assert::assertFileDoesNotExist($this->tmp_extract_dir.'/'.$this->project_id.'/manual_screenshot.png');
-    $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
+    $this->screenshot_repository->saveProjectAssets($filepath, $this->project_id);
     Assert::assertFileExists($this->tmp_extract_dir.'/'.$this->project_id.'/manual_screenshot.png');
   }
 
@@ -147,7 +147,7 @@ class ScreenshotRepositoryTest extends TestCase
   {
     $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
     Assert::assertFileDoesNotExist($this->thumbnail_dir.'screen_'.$this->project_id.'.png');
-    $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
+    $this->screenshot_repository->saveProjectAssets($filepath, $this->project_id);
     Assert::assertFileExists($this->thumbnail_dir.'screen_'.$this->project_id.'.png');
   }
 
@@ -157,7 +157,7 @@ class ScreenshotRepositoryTest extends TestCase
   public function testReturnsTheUrlOfAScreenshot(): void
   {
     $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
-    $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
+    $this->screenshot_repository->saveProjectAssets($filepath, $this->project_id);
     $web_path = $this->screenshot_repository->getScreenshotWebPath($this->project_id);
     $this->assertStringStartsWith($this->screenshot_base_url.'screen_'.$this->project_id.'.png', $web_path);
     $this->assertMatchesRegularExpression('/\?t=\d+$/', $web_path);
@@ -169,7 +169,7 @@ class ScreenshotRepositoryTest extends TestCase
   public function testReturnsTheUrlOfAThumbnail(): void
   {
     $filepath = BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/automatic_screenshot.png';
-    $this->screenshot_repository->saveProgramAssets($filepath, $this->project_id);
+    $this->screenshot_repository->saveProjectAssets($filepath, $this->project_id);
     $web_path = $this->screenshot_repository->getThumbnailWebPath($this->project_id);
     $this->assertStringStartsWith($this->thumbnail_base_url.'screen_'.$this->project_id.'.png', $web_path);
     $this->assertMatchesRegularExpression('/\?t=\d+$/', $web_path);

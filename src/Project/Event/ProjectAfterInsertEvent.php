@@ -6,9 +6,9 @@ use App\DB\Entity\Project\Program;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use Symfony\Contracts\EventDispatcher\Event;
 
-class ProgramBeforePersistEvent extends Event
+class ProjectAfterInsertEvent extends Event
 {
-  public function __construct(protected ExtractedCatrobatFile $extracted_file, protected Program $program)
+  public function __construct(protected ExtractedCatrobatFile $extracted_file, protected Program $project)
   {
   }
 
@@ -17,8 +17,8 @@ class ProgramBeforePersistEvent extends Event
     return $this->extracted_file;
   }
 
-  public function getProgramEntity(): Program
+  public function getProjectEntity(): Program
   {
-    return $this->program;
+    return $this->project;
   }
 }

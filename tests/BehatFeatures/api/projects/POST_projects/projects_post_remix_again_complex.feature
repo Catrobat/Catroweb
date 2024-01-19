@@ -1074,7 +1074,7 @@ Feature: Upload a remixed program with multiple parents
     And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
     And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
     And the project "9" should have no further Catrobat forward ancestors
-    And the project "9" should have no Catrobat backward parents the project "1" should have no Catrobat backward parents
+    And the project "9" should have no Catrobat backward parents
     And the project "9" should have no Scratch parents
     And the project "9" should have no Catrobat forward descendants except self-relation
 

@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class DownloadApkController extends AbstractController
 {
   public function __construct(protected EventDispatcherInterface $event_dispatcher,
-    private readonly ProjectManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly ApkRepository $apk_repository,
     protected LoggerInterface $logger)
   {
@@ -66,15 +66,15 @@ class DownloadApkController extends AbstractController
   protected function getApkFile(string $id): File
   {
     try {
-      $file = $this->apk_repository->getProgramFile($id);
+      $file = $this->apk_repository->getProjectFile($id);
       if (!$file->isFile()) {
         throw new NotFoundHttpException();
       }
     } catch (\Exception $exception) {
-      $project = $this->program_manager->find($id);
+      $project = $this->project_manager->find($id);
       if (null !== $project) {
         $project->setApkStatus(Program::APK_NONE);
-        $this->program_manager->save($project);
+        $this->project_manager->save($project);
         $this->logger->error("Project apk for id: \"{$id}\" not found; Status reset");
       }
       throw new NotFoundHttpException($exception->getMessage());
@@ -86,7 +86,7 @@ class DownloadApkController extends AbstractController
   protected function findProject(string $id): Program
   {
     /* @var $project Program|null */
-    $project = $this->program_manager->find($id);
+    $project = $this->project_manager->find($id);
     if (null === $project || !$project->isVisible() || Program::APK_READY != $project->getApkStatus()) {
       $this->logger->warning('Project with ID: '.$id.' not found');
       throw new NotFoundHttpException();

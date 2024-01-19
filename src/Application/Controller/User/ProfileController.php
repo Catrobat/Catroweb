@@ -23,7 +23,7 @@ class ProfileController extends AbstractController
   final public const MAX_PASSWORD_LENGTH = 4096;
 
   public function __construct(
-    protected ProjectManager $program_manager,
+    protected ProjectManager $project_manager,
     protected UserManager $user_manager,
     protected AchievementManager $achievement_manager,
   ) {
@@ -42,7 +42,7 @@ class ProfileController extends AbstractController
       if (is_null($user)) {
         return $this->redirectToRoute('login');
       }
-      $project_count = $this->program_manager->countUserProjects($user->getId());
+      $project_count = $this->project_manager->countUserProjects($user->getId());
       $view = 'UserManagement/Profile/myProfile.html.twig';
     } else {
       /** @var User|null $user */
@@ -50,7 +50,7 @@ class ProfileController extends AbstractController
       if (is_null($user)) {
         return $this->redirectToRoute('index');
       }
-      $project_count = $this->program_manager->countPublicUserProjects($id);
+      $project_count = $this->project_manager->countPublicUserProjects($id);
       $view = 'UserManagement/Profile/profile.html.twig';
     }
 

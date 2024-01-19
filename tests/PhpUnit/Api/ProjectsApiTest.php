@@ -17,7 +17,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\DefaultTestCase;
@@ -204,12 +204,12 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setLoaderAndAuthManager($project, $user);
 
     $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
-    $extracted_file_repository->method('loadProgramExtractedFile')->willReturn(null);
+    $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
     $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
       'project_manager' => $this->createMock(ProjectManager::class),
       'entity_manager' => $this->createMock(EntityManagerInterface::class),
       'extracted_file_repository' => $extracted_file_repository,
-      'file_repository' => $this->createMock(ProgramFileRepository::class),
+      'file_repository' => $this->createMock(ProjectFileRepository::class),
       'screenshot_repository' => $this->createMock(ScreenshotRepository::class),
     ]);
     $this->facade->method('getProcessor')->willReturn($processor);
@@ -361,14 +361,14 @@ final class ProjectsApiTest extends DefaultTestCase
 
     $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
     $extracted_file = $this->createMock(ExtractedCatrobatFile::class);
-    $extracted_file_repository->method('loadProgramExtractedFile')->willReturn($extracted_file);
-    $extracted_file_repository->method('saveProgramExtractedFile')->willThrowException(new \Exception(''));
+    $extracted_file_repository->method('loadProjectExtractedFile')->willReturn($extracted_file);
+    $extracted_file_repository->method('saveProjectExtractedFile')->willThrowException(new \Exception(''));
 
     $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
       'project_manager' => $this->createMock(ProjectManager::class),
       'entity_manager' => $this->createMock(EntityManagerInterface::class),
       'extracted_file_repository' => $extracted_file_repository,
-      'file_repository' => $this->createMock(ProgramFileRepository::class),
+      'file_repository' => $this->createMock(ProjectFileRepository::class),
       'screenshot_repository' => $this->createMock(ScreenshotRepository::class),
     ]);
     $this->facade->method('getProcessor')->willReturn($processor);

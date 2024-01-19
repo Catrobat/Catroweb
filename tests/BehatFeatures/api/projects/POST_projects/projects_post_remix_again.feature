@@ -284,7 +284,7 @@ Feature: Upload a remixed program with multiple parents
     And the project "3" should be a remix root
     And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
     And the project "3" should have no Catrobat ancestors except self-relation
-    And the project "3" should have no Catrobat backward parents the project "1" should have no Catrobat backward parents
+    And the project "3" should have no Catrobat backward parents
     And the project "3" should have no Scratch parents
     And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
     And the project "3" should have a Catrobat forward descendant having id "6" and depth "2"

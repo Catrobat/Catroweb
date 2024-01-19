@@ -17,16 +17,16 @@ trait ProjectPreUpdateTrait
     /** @var Program $object */
     /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
-    $old_program = $model_manager->getEntityManager($this->getClass())
+    $old_project = $model_manager->getEntityManager($this->getClass())
       ->getUnitOfWork()->getOriginalEntityData($object)
     ;
 
-    if (false == $old_program['approved'] && true == $object->getApproved()) {
+    if (false == $old_project['approved'] && true == $object->getApproved()) {
       /** @var User $user */
       $user = $this->security_token_storage->getToken()->getUser();
       $object->setApprovedByUser($user);
       $this->getModelManager()->update($object);
-    } elseif (true == $old_program['approved'] && false == $object->getApproved()) {
+    } elseif (true == $old_project['approved'] && false == $object->getApproved()) {
       $object->setApprovedByUser(null);
       $this->getModelManager()->update($object);
     }

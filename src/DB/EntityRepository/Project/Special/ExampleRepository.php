@@ -21,7 +21,7 @@ class ExampleRepository extends ServiceEntityRepository
   /**
    * @return Program[]
    */
-  public function getExamplePrograms(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): array
+  public function getExampleProjects(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): array
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -40,7 +40,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getExampleProgramsCount(bool $debug_build, ?string $flavor, string $max_version = null): int
+  public function getExampleProjectsCount(bool $debug_build, ?string $flavor, string $max_version = null): int
   {
     $qb = $this->createQueryBuilder('e');
 

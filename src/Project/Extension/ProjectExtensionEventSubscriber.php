@@ -2,7 +2,7 @@
 
 namespace App\Project\Extension;
 
-use App\Project\Event\ProgramBeforePersistEvent;
+use App\Project\Event\ProjectBeforePersistEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ProjectExtensionEventSubscriber implements EventSubscriberInterface
@@ -12,13 +12,13 @@ class ProjectExtensionEventSubscriber implements EventSubscriberInterface
   ) {
   }
 
-  public function onEvent(ProgramBeforePersistEvent $event): void
+  public function onEvent(ProjectBeforePersistEvent $event): void
   {
-    $this->extension_manager->addExtensions($event->getExtractedFile(), $event->getProgramEntity());
+    $this->extension_manager->addExtensions($event->getExtractedFile(), $event->getProjectEntity());
   }
 
   public static function getSubscribedEvents(): array
   {
-    return [ProgramBeforePersistEvent::class => 'onEvent'];
+    return [ProjectBeforePersistEvent::class => 'onEvent'];
   }
 }

@@ -21,15 +21,15 @@ class ScratchController extends AbstractController
   #[Route(path: '/scratch/project/{id}', name: 'scratch_program', methods: ['GET', 'POST'])]
   public function scratchProjectAction(Request $request, int $id): Response
   {
-    $program = $this->scratch_manager->createScratchProgramFromId($id);
-    if (null === $program) {
-      throw $this->createNotFoundException('Error creating Scratch program');
+    $project = $this->scratch_manager->createScratchProjectFromId($id);
+    if (null === $project) {
+      throw $this->createNotFoundException('Error creating Scratch project');
     }
-    $url = $this->generateUrl('program', ['id' => $program->getId()]);
+    $url = $this->generateUrl('program', ['id' => $project->getId()]);
     if ($request->isMethod('GET')) {
       return $this->redirect($url);
     }
 
-    return new Response($program->getId(), Response::HTTP_CREATED, ['Location' => $url]);
+    return new Response($project->getId(), Response::HTTP_CREATED, ['Location' => $url]);
   }
 }

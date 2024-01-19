@@ -19,7 +19,7 @@ class ApproveProjectsController extends CRUDController
     $object->setApproved(true);
     $object->setVisible(true);
     $this->admin->update($object);
-    $this->addFlash('sonata_flash_success', $object->getName().' approved. '.$this->getRemainingProgramCount().' remaining.');
+    $this->addFlash('sonata_flash_success', $object->getName().' approved. '.$this->getRemainingProjectCount().' remaining.');
 
     return new RedirectResponse($this->getRedirectionUrl());
   }
@@ -43,14 +43,14 @@ class ApproveProjectsController extends CRUDController
     $object->setVisible(false);
     $this->admin->update($object);
 
-    $this->addFlash('sonata_flash_success', $object->getName().' set to invisible'.$this->getRemainingProgramCount().' remaining.');
+    $this->addFlash('sonata_flash_success', $object->getName().' set to invisible'.$this->getRemainingProjectCount().' remaining.');
 
     return new RedirectResponse($this->getRedirectionUrl());
   }
 
   private function getRedirectionUrl(): string
   {
-    $nextId = $this->getNextRandomApproveProgramId();
+    $nextId = $this->getNextRandomApproveProjectId();
     if (null == $nextId) {
       return $this->admin->generateUrl('list');
     }
@@ -58,7 +58,7 @@ class ApproveProjectsController extends CRUDController
     return $this->admin->generateUrl('show', ['id' => $nextId]);
   }
 
-  private function getNextRandomApproveProgramId(): ?string
+  private function getNextRandomApproveProjectId(): ?string
   {
     $data_grid = $this->admin->getDatagrid();
     $objects = $data_grid->getResults();
@@ -78,7 +78,7 @@ class ApproveProjectsController extends CRUDController
     return $object->getId();
   }
 
-  private function getRemainingProgramCount(): int
+  private function getRemainingProjectCount(): int
   {
     $datagrid = $this->admin->getDatagrid();
     $objects = $datagrid->getResults();

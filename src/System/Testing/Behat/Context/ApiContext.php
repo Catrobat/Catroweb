@@ -2542,8 +2542,8 @@ class ApiContext implements Context
     /** @var Program $uploaded_project */
     $uploaded_project = $project_manager->find($project_id);
     $efr = $this->getExtractedFileRepository();
-    $extracted_catrobat_file = $efr->loadProgramExtractedFile($uploaded_project);
-    $project_xml_prop = $extracted_catrobat_file->getProgramXmlProperties();
+    $extracted_catrobat_file = $efr->loadProjectExtractedFile($uploaded_project);
+    $project_xml_prop = $extracted_catrobat_file->getProjectXmlProperties();
     Assert::assertEquals($value, $project_xml_prop->header->remixOf->__toString());
   }
 

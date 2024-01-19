@@ -28,20 +28,20 @@ class AsyncHttpClientTest extends TestCase
   public function testReturnsEmptyArrayWhenNoDetailsCanBeFetched(): void
   {
     $invalid_scratch_program_id = 0;
-    $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$invalid_scratch_program_id]);
+    $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails([$invalid_scratch_program_id]);
     $this->assertCount(0, $scratch_info_data);
   }
 
   public function testReturnsEmptyArrayWhenNoIdsAreGiven(): void
   {
-    $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([]);
+    $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails([]);
     $this->assertCount(0, $scratch_info_data);
   }
 
   public function testFetchesScratchProgramDetailsOfSingleProgram(): void
   {
     $expected_id_of_first_program = 117_697_631;
-    $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program]);
+    $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails([$expected_id_of_first_program]);
     $this->assertCount(1, $scratch_info_data);
     Assert::assertArrayHasKey($expected_id_of_first_program, $scratch_info_data);
     $first_program_data = $scratch_info_data[$expected_id_of_first_program];
@@ -58,7 +58,7 @@ class AsyncHttpClientTest extends TestCase
     $this->async_http_client = new AsyncHttpClient(['timeout' => 0.01]);
 
     $expected_id_of_first_program = 117_697_631;
-    $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program]);
+    $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails([$expected_id_of_first_program]);
     $this->assertCount(0, $scratch_info_data);
   }
 
@@ -67,7 +67,7 @@ class AsyncHttpClientTest extends TestCase
     $expected_id_of_first_program = 117_697_631;
     $expected_id_of_second_program = 118_499_611;
 
-    $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program, $expected_id_of_second_program]);
+    $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails([$expected_id_of_first_program, $expected_id_of_second_program]);
 
     $this->assertTheTwoFetchedPrograms($scratch_info_data, $expected_id_of_first_program, $expected_id_of_second_program);
   }
@@ -80,7 +80,7 @@ class AsyncHttpClientTest extends TestCase
     $expected_id_of_second_program = 118_499_611;
     $expected_id_of_third_program = 134_333_442;
 
-    $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails([$expected_id_of_first_program,
+    $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails([$expected_id_of_first_program,
       $expected_id_of_second_program, $expected_id_of_third_program, ]);
 
     $this->assertTheTwoFetchedPrograms($scratch_info_data, $expected_id_of_first_program, $expected_id_of_second_program);

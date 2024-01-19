@@ -6,7 +6,7 @@ use App\Storage\FileHelper;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\File;
 
-class ProgramFileRepository
+class ProjectFileRepository
 {
   public string $zip_dir;
 

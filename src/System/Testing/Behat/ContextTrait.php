@@ -31,7 +31,7 @@ use App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRep
 use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository;
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use App\Studio\StudioManager;
@@ -144,9 +144,9 @@ trait ContextTrait
     return $this->kernel->getContainer()->get(ScratchProgramRemixRepository::class);
   }
 
-  public function getFileRepository(): ?ProgramFileRepository
+  public function getFileRepository(): ?ProjectFileRepository
   {
-    return $this->kernel->getContainer()->get(ProgramFileRepository::class);
+    return $this->kernel->getContainer()->get(ProjectFileRepository::class);
   }
 
   public function getExtractedFileRepository(): ?ExtractedFileRepository

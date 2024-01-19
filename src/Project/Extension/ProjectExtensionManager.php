@@ -18,68 +18,68 @@ class ProjectExtensionManager
   ) {
   }
 
-  public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $program, bool $flush = true): void
+  public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $project, bool $flush = true): void
   {
-    $program->removeAllExtensions();
+    $project->removeAllExtensions();
 
-    $code_xml = strval($extracted_file->getProgramXmlProperties()->asXML());
+    $code_xml = strval($extracted_file->getProjectXmlProperties()->asXML());
 
     // What about drone, raspberry, chromecast ?
-    $this->addArduinoExtensions($program, $code_xml);
-    $this->addPhiroExtensions($program, $code_xml);
-    $this->addEmbroideryExtensions($program, $code_xml);
-    $this->addMindstormsExtensions($program, $code_xml);
-    $this->addMultiplayerExtensions($program, $code_xml);
+    $this->addArduinoExtensions($project, $code_xml);
+    $this->addPhiroExtensions($project, $code_xml);
+    $this->addEmbroideryExtensions($project, $code_xml);
+    $this->addMindstormsExtensions($project, $code_xml);
+    $this->addMultiplayerExtensions($project, $code_xml);
 
-    $this->saveProject($program, $flush);
+    $this->saveProject($project, $flush);
   }
 
-  public function addMultiplayerExtensions(Program $program, string $code_xml): void
+  public function addMultiplayerExtensions(Program $project, string $code_xml): void
   {
     if ($this->isMultiplayerProject($code_xml)) {
       $extension = $this->getExtension(Extension::MULTIPLAYER);
       if (!is_null($extension)) {
-        $program->addExtension($extension);
+        $project->addExtension($extension);
       }
     }
   }
 
-  public function addArduinoExtensions(Program $program, string $code_xml): void
+  public function addArduinoExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAnArduinoProject($code_xml)) {
       $extension = $this->getExtension(Extension::ARDUINO);
       if (!is_null($extension)) {
-        $program->addExtension($extension);
+        $project->addExtension($extension);
       }
     }
   }
 
-  public function addEmbroideryExtensions(Program $program, string $code_xml): void
+  public function addEmbroideryExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAnEmbroideryProject($code_xml)) {
       $extension = $this->getExtension(Extension::EMBROIDERY);
       if (!is_null($extension)) {
-        $program->addExtension($extension);
+        $project->addExtension($extension);
       }
     }
   }
 
-  public function addMindstormsExtensions(Program $program, string $code_xml): void
+  public function addMindstormsExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAMindstormsProject($code_xml)) {
       $extension = $this->getExtension(Extension::MINDSTORMS);
       if (!is_null($extension)) {
-        $program->addExtension($extension);
+        $project->addExtension($extension);
       }
     }
   }
 
-  public function addPhiroExtensions(Program $program, string $code_xml): void
+  public function addPhiroExtensions(Program $project, string $code_xml): void
   {
     if ($this->isAPhiroProject($code_xml)) {
       $extension = $this->getExtension(Extension::PHIRO);
       if (!is_null($extension)) {
-        $program->addExtension($extension);
+        $project->addExtension($extension);
       }
     }
   }

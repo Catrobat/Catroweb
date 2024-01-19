@@ -7,27 +7,27 @@ use App\Project\CatrobatFile\ExtractedCatrobatFile;
 class CatrobatCodeParser
 {
   /**
-   * @return ParsedSceneProgram|ParsedSimpleProgram|null
+   * @return ParsedSceneProject|ParsedSimpleProject|null
    */
-  public function parse(ExtractedCatrobatFile $extracted_catrobat_program)
+  public function parse(ExtractedCatrobatFile $extracted_catrobat_project)
   {
     try {
-      $parsed_program = $this->parseProgram($extracted_catrobat_program);
+      $parsed_project = $this->parseProject($extracted_catrobat_project);
     } catch (\Throwable) {
-      $parsed_program = null;
+      $parsed_project = null;
     }
 
-    return $parsed_program;
+    return $parsed_project;
   }
 
-  private function parseProgram(ExtractedCatrobatFile $extracted_program): ParsedSceneProgram|ParsedSimpleProgram
+  private function parseProject(ExtractedCatrobatFile $extracted_project): ParsedSceneProject|ParsedSimpleProject
   {
-    $program_xml_properties = $extracted_program->getProgramXmlProperties();
+    $project_xml_properties = $extracted_project->getProjectXmlProperties();
 
-    if ($extracted_program->hasScenes()) {
-      return new ParsedSceneProgram($program_xml_properties);
+    if ($extracted_project->hasScenes()) {
+      return new ParsedSceneProject($project_xml_properties);
     }
 
-    return new ParsedSimpleProgram($program_xml_properties);
+    return new ParsedSimpleProject($project_xml_properties);
   }
 }
