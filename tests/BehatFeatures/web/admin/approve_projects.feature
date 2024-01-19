@@ -12,7 +12,7 @@ Feature: Admin approve programs
       | Catroweb | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
       | User1    | 123456   | qwertyuiop | dev3@pocketcode.org | 4  |
 
-    And there are programs:
+    And there are projects:
       | id | name      | description  | owned by | upload time      | version | language version | visible |
       | 1  | program 1 | description1 | Catrobat | 01.01.2014 12:00 | 0.8.5   | 0.94             | true    |
       | 2  | program 2 | description2 | Catroweb | 22.04.2014 14:00 | 0.8.5   | 0.93             | true    |
@@ -141,7 +141,7 @@ Feature: Admin approve programs
     Given I log in as "Admin" with the password "123456"
     Given I am on "/admin/approve/list"
     And I wait for the page to be loaded
-    And I click on the show button of program with id "3" in the approve list
+    And I click on the show button of project with id "3" in the approve list
     Then I should be on "/admin/approve/3/show"
     And I should see "program 3"
     And I should see "description3"
@@ -155,7 +155,7 @@ Feature: Admin approve programs
     Given I log in as "Admin" with the password "123456"
     Given I am on "/admin/approve/list"
     And I wait for the page to be loaded
-    And I click on the program name "program 5"
+    And I click on the project name "program 5"
     And I wait for the page to be loaded
     Then I should be on "/admin/approve/5/show"
     And I should see "Approve Projects"

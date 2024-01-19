@@ -17,7 +17,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCommentCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $em,
-    private readonly ProjectManager $program_manager,
+    private readonly ProjectManager $project_manager,
   ) {
     parent::__construct();
   }
@@ -49,7 +49,7 @@ class CreateCommentCommand extends Command
     /** @var User|null $user */
     $user = $this->user_manager->findUserByUsername($username);
 
-    $program = $this->program_manager->findOneByName($program_name);
+    $program = $this->project_manager->findOneByName($program_name);
 
     if (null === $user || null === $program) {
       return 1;

@@ -14,7 +14,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
 
   Scenario: Users should be notified about reactions
     Given there are catro notifications:
-      | id | user     | type | like_from | program_id |
+      | id | user     | type | like_from | project_id |
       | 1  | Catrobat | like | User-id   | 1          |
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
@@ -23,7 +23,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
 
   Scenario: Users should not be notified about their own reactions
     Given there are catro notifications:
-      | id | user     | type | like_from   | program_id |
+      | id | user     | type | like_from   | project_id |
       | 1  | Catrobat | like | Catrobat-id | 1          |
       | 2  | User     | like | Catrobat-id | 2          |
     When I log in as "Catrobat"
@@ -33,7 +33,7 @@ Feature: User gets notifications for new followers, reactions, comments, ..
 
   Scenario: Clicking on a reaction notification should redirect the user to the project page for which the reaction was given
     Given there are catro notifications:
-      | id | user     | type | like_from | program_id |
+      | id | user     | type | like_from | project_id |
       | 1  | Catrobat | like | User-id   | 1          |
     And I log in as "Catrobat"
     And I am on "/app/user_notifications"

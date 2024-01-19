@@ -14,7 +14,7 @@ Feature: Every registered user should have at least one achievement
     And I am on "/app/achievements"
     And I wait for the page to be loaded
     Then the "#unlocked-achievements" element should not contain "Apprentice"
-    And there are programs:
+    And there are projects:
       | id        | name      | owned by |
       | isxs-adkt | project_1 | Catrobat |
     And I log in as "Catrobat"
@@ -28,7 +28,7 @@ Feature: Every registered user should have at least one achievement
       | name     |
       | Catrobat |
       | User1    |
-    And there are programs:
+    And there are projects:
       | id        | name      | owned by |
       | isxs-adkt | project_1 | Catrobat |
     And I log in as "Catrobat"
@@ -53,7 +53,7 @@ Feature: Every registered user should have at least one achievement
       | name     | following |
       | Catrobat | User1     |
       | User2    | User1     |
-    And there are programs:
+    And there are projects:
       | id        | name     | owned by |
       | isxs-adkt | Webteam  | Catrobat |
       | tvut-irkw | Catroweb | User1    |

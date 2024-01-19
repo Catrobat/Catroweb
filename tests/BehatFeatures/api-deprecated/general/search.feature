@@ -7,7 +7,7 @@ Feature: Search programs
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
       | NewUser  | vwxyz    | aaaaaaaaaa | 3  |
-    And there are programs:
+    And there are projects:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | Minions         |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |

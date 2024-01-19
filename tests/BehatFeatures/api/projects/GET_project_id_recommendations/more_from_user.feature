@@ -6,7 +6,7 @@ Feature: Get more projects from an user as recommendation
       | id | name     | password |
       | 1  | Catrobat | 123456   |
       | 2  | User1    | 123456   |
-    And there are programs:
+    And there are projects:
       | id | name      | owned by |
       | 1  | project 1 | Catrobat |
       | 2  | project 2 | Catrobat |

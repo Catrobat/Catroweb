@@ -6,7 +6,7 @@ Feature: Get recommended project based on a specific project
       | id | name     | password |
       | 1  | Catrobat | 123456   |
       | 2  | User1    | 123456   |
-    And there are programs:
+    And there are projects:
       | id | name      |
       | 1  | project 1 |
 

@@ -6,7 +6,7 @@ Feature: Delete project
       | id | name     | password |
       | 1  | Catrobat | 123456   |
       | 2  | User1    | 123456   |
-    And there are programs:
+    And there are projects:
       | id | name      | owned by | visible |
       | 1  | project 1 | Catrobat | true    |
       | 2  | project 2 | User1    | true    |
@@ -18,14 +18,14 @@ Feature: Delete project
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "DELETE" "/api/project/1"
     Then the response status code should be "204"
-    Then program "project 1" is not visible
+    Then project "project 1" is not visible
 
   Scenario: Delete project already deleted
     Given I use a valid JWT Bearer token for "Catrobat"
     And I have a request header "HTTP_ACCEPT" with value "application/json"
     And I request "DELETE" "/api/project/4"
     Then the response status code should be "404"
-    Then program "project 4" is not visible
+    Then project "project 4" is not visible
 
   Scenario: Delete project with invalid id
     Given I use a valid JWT Bearer token for "Catrobat"

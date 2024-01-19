@@ -8,7 +8,7 @@ Feature: Featured Projects
       | 2  | User1    | 123456   |
       | 3  | User2    | 123456   |
       | 4  | User3    | 123456   |
-    And there are programs:
+    And there are projects:
       | id | name       | owned by | views | upload time      | FileSize | version | language version | flavor     |
       | 1  | project 1  | Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.999            | pocketcode |
       | 2  | project 2  | User1    | 50    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.984            | pocketcode |
@@ -36,7 +36,7 @@ Feature: Featured Projects
       | 1  | pocketcode |
       | 2  | luna       |
       | 3  | arduino    |
-    And following programs are featured:
+    And following projects are featured:
       | name       | active | priority | ios_only | flavor     |
       | project 1  | 1      | 1        | no       | pocketcode |
       | project 5  | 1      | 4        | yes      | pocketcode |

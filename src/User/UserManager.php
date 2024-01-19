@@ -25,7 +25,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $project_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
   {
   }
 
@@ -60,7 +60,7 @@ class UserManager implements UserManagerInterface
         'username' => $user->getUsername(),
         'id' => $user->getId(),
         'avatar' => $user->getAvatar(),
-        'project_count' => $this->program_manager->countPublicUserProjects($user->getId()),
+        'project_count' => $this->project_manager->countPublicUserProjects($user->getId()),
         'profile' => $user,
       ];
     }
@@ -109,16 +109,16 @@ class UserManager implements UserManagerInterface
 
   public function search(string $query, ?int $limit = 10, int $offset = 0): array
   {
-    $program_query = $this->userSearchQuery($query);
+    $project_query = $this->userSearchQuery($query);
 
-    return $this->user_finder->find($program_query, $limit, ['from' => $offset]);
+    return $this->user_finder->find($project_query, $limit, ['from' => $offset]);
   }
 
   public function searchCount(string $query): int
   {
-    $program_query = $this->userSearchQuery($query);
+    $project_query = $this->userSearchQuery($query);
 
-    $paginator = $this->user_finder->findPaginated($program_query);
+    $paginator = $this->user_finder->findPaginated($project_query);
 
     return $paginator->getNbResults();
   }

@@ -8,7 +8,7 @@ Feature: Get most viewed projects
       | 2  | User1    | 123456   |
       | 3  | User2    | 123456   |
       | 4  | User3    | 123456   |
-    And there are programs:
+    And there are projects:
       | id | name      | owned by | views | upload time      | FileSize | version | language version | flavor     | upload_language |
       | 1  | project 1 | Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   | 0.999            | pocketcode | en              |
       | 2  | project 2 | User1    | 60    | 02.08.2014 12:00 | 1048576  | 0.8.5   | 0.982            | luna       | fr              |

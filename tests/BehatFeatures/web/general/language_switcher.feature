@@ -16,7 +16,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
       | Catrobat  | 1       | 1    | 01.01.2017 12:00 |
       | Catrobat  | 2       | 2    | 01.01.2017 12:00 |
       | OtherUser | 1       | 4    | 01.01.2017 12:00 |
-    And there are featured programs:
+    And there are featured projects:
       | id | name    | active | flavor     | priority | ios_only |
       | 1  | Minions | 1      | pocketcode | 1        | no       |
 

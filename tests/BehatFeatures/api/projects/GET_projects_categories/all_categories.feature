@@ -6,7 +6,7 @@ Feature: Get projects oversight
       | id | name     | password |
       | 1  | Catrobat | 123456   |
       | 2  | User1    | 123456   |
-    And there are programs:
+    And there are projects:
       | id | name      | owned by | views | upload time      | FileSize | version | flavor     | private | visible |
       | 1  | project 1 | Catrobat | 10    | 01.08.2014 12:00 | 1048576  | 0.8.5   | pocketcode | false   | true    |
       | 2  | project 2 | User1    | 50    | 02.08.2014 12:00 | 1048576  | 0.8.5   | luna       | false   | true    |
@@ -17,7 +17,7 @@ Feature: Get projects oversight
       | 1  | pocketcode |
       | 2  | luna       |
       | 3  | arduino    |
-    And following programs are featured:
+    And following projects are featured:
       | name      | active | priority | ios_only | flavor     |
       | project 1 | 1      | 1        | no       | pocketcode |
       | project 5 | 1      | 4        | yes      | pocketcode |
