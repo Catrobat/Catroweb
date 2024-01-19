@@ -1,0 +1,25 @@
+{% extends "Default/new_email.html.twig" %}
+
+{% block head_title %}
+  {% autoescape false %}
+    {{ subject }} 
+  {% endautoescape %}
+{% endblock %}
+
+{% block body_title %}
+  {% autoescape false %}
+    <div align="center">
+    {{ title }}
+    </div>
+  {% endautoescape %}
+{% endblock %}
+
+{% block body_content %}
+
+  {% autoescape false %}
+    <div align="center">
+      {{ message }}
+    </div>
+  {% endautoescape %}
+
+{% endblock %}

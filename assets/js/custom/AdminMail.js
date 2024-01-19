@@ -6,7 +6,7 @@ function AdminMail() {
   const previewBtn = document.querySelector('.btn-preview')
   const usernameInput = document.querySelector('#username')
   const subjectInput = document.querySelector('#subject')
-  const titelInput = document.querySelector('#titel')
+  const titleInput = document.querySelector('#title')
   const messageInput = document.querySelector('#content')
   const templateSelect = document.querySelector('#template-select')
   const resultBox = document.querySelector('.resultBox')
@@ -14,9 +14,9 @@ function AdminMail() {
   function sendMail() {
     const username = usernameInput.value
     const subject = subjectInput.value
-    const titel = titelInput.value
+    const title = titleInput.value
     const message = messageInput.value
-    const url = `send?username=${username}&subject=${subject}&titel=${titel}&message=${message}`
+    const url = `send?username=${username}&subject=${subject}&title=${title}&message=${message}`
 
     fetch(url)
       .then((response) => {
@@ -44,10 +44,10 @@ function AdminMail() {
   function previewMail() {
     const username = usernameInput.value
     const subject = subjectInput.value
-    const titel = titelInput.value
+    const title = titleInput.value
     const message = messageInput.value
     const template = templateSelect.value
-    const url = `preview?username=${username}&subject=${subject}&titel=${titel}&message=${message}&template=${template}`
+    const url = `preview?username=${username}&subject=${subject}&title=${title}&message=${message}&template=${template}`
     window.open(url, '_blank')
   }
 

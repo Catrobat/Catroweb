@@ -10,6 +10,7 @@ use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface;
+use SymfonyCasts\Bundle\VerifyEmail\VerifyEmailHelperInterface;
 
 /**
  * @phpstan-extends CRUDController<\stdClass>
@@ -20,7 +21,8 @@ class SendMailToUserController extends CRUDController
     protected MailerAdapter $mailer,
     protected UserManager $user_manager,
     protected LoggerInterface $logger,
-    private readonly ResetPasswordHelperInterface $resetPasswordHelper
+    private readonly ResetPasswordHelperInterface $resetPasswordHelper,
+    protected VerifyEmailHelperInterface $verify_email_helper
   ) {
   }
 
@@ -75,24 +77,54 @@ class SendMailToUserController extends CRUDController
 
   public function renderConfirmation(Request $request): Response
   {
-    $signature = 'https:://example.url';
     $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
     if (!$user) {
-      $user['username'] = 'User';
+      return new Response('User does not exist', Response::HTTP_NOT_FOUND);
     }
 
-    return $this->render('security/registration/confirmation_email.html.twig', [
-      'signedUrl' => $signature,
+    $signature = $this->verify_email_helper->generateSignature(
+      'registration_confirmation_route',
+      'user_id',
+      'user@email.com'
+    );
+
+    $expirationTime = $signature->getExpiresAt();
+
+    $confirm = 'https:://example.url'; // TODO: CHANGE!
+
+    return $this->render('security/registration/new_confirmation_email.html.twig', [
+      'signedUrl' => $confirm,
+      'deleteUrl' => $confirm,
       'user' => $user,
+      'expire' => $expirationTime->format('H:i'),
     ]);
   }
 
   public function renderReset(Request $request): Response
   {
+    $user = $this->user_manager->findUserByUsername((string) $request->query->get('username'));
+    if (!$user) {
+      return new Response('User does not exist', Response::HTTP_NOT_FOUND);
+    }
+
     $resetToken = $this->resetPasswordHelper->generateFakeResetToken();
 
-    return $this->render('security/reset_password/email.html.twig', [
+    $signature = $this->verify_email_helper->generateSignature(
+      'registration_confirmation_route',
+      'user_id',
+      'user@email.com'
+    );
+
+    $expirationTime = $signature->getExpiresAt();
+
+    $confirm = 'this is the url'; // TODO: CHANGE!
+
+    return $this->render('security/reset_password/new_email.html.twig', [
       'resetToken' => $resetToken,
+      'user' => $user,
+      'signedUrl' => $confirm,
+      'deleteUrl' => $confirm,
+      'expire' => $expirationTime->format('H:i'),
     ]);
   }
 
@@ -108,15 +140,21 @@ class SendMailToUserController extends CRUDController
       return new Response('Empty subject!', Response::HTTP_BAD_REQUEST);
     }
 
+    $title = (string) $request->query->get('title');
+
     $messageText = (string) $request->query->get('message');
     if ('' === $messageText) {
       return new Response('Empty message!', Response::HTTP_BAD_REQUEST);
     }
 
-    $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
+    // $htmlText = str_replace(PHP_EOL, '<br>', $messageText);
+    $text = str_replace(PHP_EOL, ' ', $messageText);
+    $htmlText = wordwrap($text, 60, "<br>\n");
 
-    return $this->render('Admin/Tools/Email/simple_message.html.twig', [
+    return $this->render('Admin/Tools/Email/new_simple_message.html.twig', [
       'message' => $htmlText,
+      'subject' => $subject,
+      'title' => $title,
     ]);
   }
 }
