@@ -28,7 +28,7 @@ class UserResponseManager extends AbstractResponseManager
     if (empty($attributes)) {
       $attributes_list = ['id', 'username'];
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'username', 'picture', 'about', 'currentlyWorkingOn', 'projects', 'followers', 'following', 'ranking_score'];
+      $attributes_list = ['id', 'username', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following', 'ranking_score'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -41,7 +41,7 @@ class UserResponseManager extends AbstractResponseManager
     if (empty($attributes)) {
       $attributes_list = ['id', 'username', 'email'];
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'username', 'email', 'picture', 'about', 'currentlyWorkingOn', 'projects', 'followers', 'following'];
+      $attributes_list = ['id', 'username', 'email', 'picture', 'about', 'currently_working_on', 'projects', 'followers', 'following'];
     } else {
       $attributes_list = explode(',', $attributes);
     }
@@ -69,7 +69,7 @@ class UserResponseManager extends AbstractResponseManager
     if (in_array('about', $attributes_list, true)) {
       $data['about'] = $user->getAbout() ?? '';
     }
-    if (in_array('currentlyWorkingOn', $attributes_list, true)) {
+    if (in_array('currently_working_on', $attributes_list, true)) {
       $data['currently_working_on'] = $user->getCurrentlyWorkingOn() ?? '';
     }
     if (in_array('projects', $attributes_list, true)) {
