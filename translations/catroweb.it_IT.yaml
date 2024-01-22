@@ -96,15 +96,15 @@ follower:
   unfollowButton: "Smetti di seguire %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: Benvenuto nel %theme% di Catrobat
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Create stories, games and more...
     subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Download the app
-    statistics: More statistics
-  featured: Featured
-  example: Examples
+    statistics: Più statistiche
+  featured: In evidenza
+  example: Esempi
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
@@ -155,21 +155,21 @@ project:
     all: "Tutti"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
+  submitted: Progetti inviati
+  uploaded: Progetti caricati
+  reportAsInappropriate: Segnala come inappropriato
+  reportProgram: Segnala progetto
+  languageVersion: 'Versione del linguaggio di Catrobat: %languageVersion%'
+  reportLoginText: Efffettua il %login% per segnalare il progetto.
+  reportDialogHeader: Per quale motivo vuoi segnalare questo progetto?
+  reportDialogReason: Scrivi il motivo
+  reportRadioButtonInappropriate: È inappropriato
+  reportRadioButtonCopyright: Violazione del copyright
+  reportRadioButtonSpam: È spam
+  reportRadioButtonDislike: Non mi piace
+  reportOwnProgram: Non puoi contrassegnare il tuo stesso progetto.
+  reportAlready: Hai già contrassegnato questo progetto.
+  reportDone: Hai segnalato il progetto!
   updateAppHeaderDownload: Download non possibile
   updateAppTextDownload: Aggiorna l'app alla versione più recente. Tieni presente che non tutte le funzionalità Android sono ancora disponibili su IOS.
   updateAppTextDownloadApk: Il download APK è attualmente disponibile solo su Android e non su IOS.
@@ -222,9 +222,9 @@ remixGraph:
   by: 'di'
   open: 'Apri '
   showPaths: 'Mostra percorsi'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
+  projectNotAvailableErrorTitle: 'Spiacente...'
+  projectNotAvailableErrorDescription: 'Il progetto non è più disponibile!'
+  projectNotAvailable: 'Non disponibile'
   projectUnknownUser: 'Unknown user'
 noReply:
   - Questo è un messaggio automatico - Si prega di non rispondere a questa email.
@@ -249,6 +249,28 @@ accountConfirmation:
     Cordiali saluti,<br>
     il Team di Catrobat.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFERMA E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -455,6 +477,11 @@ resetPassword:
     visitLink: "Per reimpostare la password, segui il seguente link"
     expire: "Questo link scadrà in %time%."
     cheers: "Saluti!"
+  newemail:
+    title: "Reimposta la tua password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reimposta la tua password"
     button:
