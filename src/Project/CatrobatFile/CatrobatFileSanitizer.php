@@ -4,8 +4,8 @@ namespace App\Project\CatrobatFile;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatCode\Parser\ParsedScene;
-use App\Project\CatrobatCode\Parser\ParsedSceneProgram;
-use App\Project\CatrobatCode\Parser\ParsedSimpleProgram;
+use App\Project\CatrobatCode\Parser\ParsedSceneProject;
+use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use Symfony\Component\Finder\Iterator\RecursiveDirectoryIterator;
 use Symfony\Component\HttpFoundation\File\File;
 
@@ -128,7 +128,7 @@ class CatrobatFileSanitizer
   {
     $scenes = [];
     $parsed_project = $this->catrobat_code_parser->parse($extracted_file);
-    /** @var ParsedSceneProgram|ParsedSimpleProgram $parsed_project */
+    /** @var ParsedSceneProject|ParsedSimpleProject $parsed_project */
     if (null !== $parsed_project && $parsed_project->hasScenes()) {
       $scenes_array = $parsed_project->getScenes();
       foreach ($scenes_array as $scene) {

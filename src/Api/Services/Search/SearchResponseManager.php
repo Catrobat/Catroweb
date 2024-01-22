@@ -74,8 +74,8 @@ class SearchResponseManager extends AbstractResponseManager
     return $projects_data_response;
   }
 
-  public function getProjectDataResponse(Program $program): ProjectResponse
+  public function getProjectDataResponse(Program $project): ProjectResponse
   {
-    return $this->projectsResponseManager->createProjectDataResponse($program, null);
+    return $this->projectsResponseManager->createProjectDataResponse($project, null);
   }
 }

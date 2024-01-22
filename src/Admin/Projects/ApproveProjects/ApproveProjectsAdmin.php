@@ -35,11 +35,11 @@ class ApproveProjectsAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'approve';
 
-  private ?ExtractedCatrobatFile $extractedProgram = null;
+  private ?ExtractedCatrobatFile $extractedProject = null;
 
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
-    private readonly ProjectManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     protected TokenStorageInterface $security_token_storage,
     protected ParameterBagInterface $parameter_bag
@@ -58,20 +58,20 @@ class ApproveProjectsAdmin extends AbstractAdmin
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
-     * @var $program_manager ProgramManager
+     * @var $project_manager ProjectManager
      * @var $object Project
      */
 
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram) {
+    if (null == $this->extractedProject) {
       return [];
     }
 
-    $image_paths = $this->extractedProgram->getContainingImagePaths();
+    $image_paths = $this->extractedProject->getContainingImagePaths();
 
     return $this->encodeFileNameOfPathsArray($image_paths);
   }
@@ -80,21 +80,21 @@ class ApproveProjectsAdmin extends AbstractAdmin
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
-     * @var $progManager ProgramManager
+     * @var $projectManager ProjectManager
      * @var $object Project
      */
 
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram) {
+    if (null == $this->extractedProject) {
       return [];
     }
 
-    return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
+    return $this->encodeFileNameOfPathsArray($this->extractedProject->getContainingSoundPaths());
   }
 
   /**
@@ -102,16 +102,16 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getContainingStrings($object): array
   {
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram) {
+    if (null == $this->extractedProject) {
       return [];
     }
 
-    return $this->extractedProgram->getContainingStrings();
+    return $this->extractedProject->getContainingStrings();
   }
 
   /**
@@ -119,17 +119,17 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getContainingCodeObjects($object): array
   {
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes()) {
+    if (null == $this->extractedProject || $this->extractedProject->hasScenes()) {
       return [];
     }
 
-    return $this->extractedProgram->getContainingCodeObjects();
+    return $this->extractedProject->getContainingCodeObjects();
   }
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface

@@ -44,7 +44,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
     }
 
     $remix_url_string = $previous_parent_string;
-    $program_xml_properties = $extracted_catrobat_file->getProgramXmlProperties();
+    $program_xml_properties = $extracted_catrobat_file->getProjectXmlProperties();
 
     // NOTE: force using Catrobat language version 0.994 in order to allow multiple parents (see: RemixUpdater.php)
     if ($program_xml_properties->header->catrobatLanguageVersion < '0.994') {
@@ -53,7 +53,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 
     $program_xml_properties->header->remixOf = '';
     $program_xml_properties->header->url = $remix_url_string;
-    $extracted_catrobat_file->saveProgramXmlProperties();
+    $extracted_catrobat_file->saveProjectXmlProperties();
 
     ++$this->current_program_id;
 

@@ -4,7 +4,7 @@ namespace Tests\PhpUnit\Project\CatrobatFile;
 
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
-use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
@@ -16,15 +16,15 @@ use Symfony\Component\HttpFoundation\File\File;
 /**
  * @internal
  *
- * @covers  \App\Project\CatrobatFile\ProgramFileRepository
+ * @covers  \App\Project\CatrobatFile\ProjectFileRepository
  */
-class ProgramFileRepositoryTest extends TestCase
+class ProjectFileRepositoryTest extends TestCase
 {
   private string $storage_dir;
 
   private string $extract_dir;
 
-  private ProgramFileRepository $program_file_repository;
+  private ProjectFileRepository $program_file_repository;
 
   protected function setUp(): void
   {
@@ -34,7 +34,7 @@ class ProgramFileRepositoryTest extends TestCase
     $filesystem->mkdir($this->storage_dir);
     $filesystem->mkdir($this->extract_dir);
     $filesystem->mkdir($this->storage_dir.'tmp/');
-    $this->program_file_repository = new ProgramFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
+    $this->program_file_repository = new ProjectFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
   }
 
   protected function tearDown(): void
@@ -44,21 +44,21 @@ class ProgramFileRepositoryTest extends TestCase
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(ProgramFileRepository::class, $this->program_file_repository);
+    $this->assertInstanceOf(ProjectFileRepository::class, $this->program_file_repository);
   }
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound(): void
   {
     $this->expectException(\Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
-    $this->program_file_repository = new ProgramFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
+    $this->program_file_repository = new ProjectFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
   }
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound2(): void
   {
     $this->expectException(\Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
-    $this->program_file_repository = new ProgramFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
+    $this->program_file_repository = new ProjectFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
   }
 
   public function testStoresAFileToTheGivenDirectory(): void

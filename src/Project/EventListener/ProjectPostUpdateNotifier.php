@@ -26,9 +26,9 @@ class ProjectPostUpdateNotifier
   /**
    * @throws \Exception
    */
-  protected function addCodingJam092021Achievement(Program $program, User $user): void
+  protected function addCodingJam092021Achievement(Program $project, User $user): void
   {
-    $tags = $program->getTags();
+    $tags = $project->getTags();
     /** @var Tag $tag */
     foreach ($tags as $tag) {
       if (Tag::CODING_JAM_09_2021 === $tag->getInternalTitle()) {
@@ -37,10 +37,10 @@ class ProjectPostUpdateNotifier
       }
     }
 
-    if (str_contains($program->getDescription() ?? '', '#catrobatfestival2021')) {
+    if (str_contains($project->getDescription() ?? '', '#catrobatfestival2021')) {
       $coding_jam_09_2021_tag = $this->tag_repository->findOneBy(['internal_title' => Tag::CODING_JAM_09_2021]);
-      if (!$program->getTags()->contains($coding_jam_09_2021_tag)) {
-        $program->addTag($coding_jam_09_2021_tag);
+      if (!$project->getTags()->contains($coding_jam_09_2021_tag)) {
+        $project->addTag($coding_jam_09_2021_tag);
       }
       $this->achievement_manager->unlockAchievementCodingJam092021($user);
     }

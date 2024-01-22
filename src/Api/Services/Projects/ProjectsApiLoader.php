@@ -9,7 +9,7 @@ use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
@@ -24,7 +24,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     private readonly TagRepository $tag_repository,
     private readonly ExtensionRepository $extension_repository,
     private readonly RequestStack $request_stack,
-    protected ProgramFileRepository $file_repository,
+    protected ProjectFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger
   ) {
@@ -90,7 +90,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->getUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }
 
-  public function getUserPublicPrograms(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
+  public function getUserPublicProjects(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
   {
     return $this->project_manager->getPublicUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }

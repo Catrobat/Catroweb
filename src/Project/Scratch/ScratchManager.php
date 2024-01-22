@@ -10,7 +10,7 @@ class ScratchManager
 {
   protected AsyncHttpClient $async_http_client;
 
-  public function __construct(protected ProjectManager $program_manager,
+  public function __construct(protected ProjectManager $project_manager,
     protected UserManager $user_manager)
   {
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 1]);
@@ -19,21 +19,21 @@ class ScratchManager
   /**
    * @throws \Exception
    */
-  public function createScratchProgramFromId(int $id): ?Program
+  public function createScratchProjectFromId(int $id): ?Program
   {
-    $program_arr = $this->async_http_client->fetchScratchProgramDetails([$id]);
-    if (null == $program_arr) {
+    $project_arr = $this->async_http_client->fetchScratchProjectDetails([$id]);
+    if (null == $project_arr) {
       return null;
     }
-    $program_data = $program_arr[$id];
-    /** @var Program|null $old_program */
-    $old_program = $this->program_manager->findOneByScratchId($id);
-    if (null === $old_program) {
-      $user = $this->user_manager->createUserFromScratch($program_data['author']);
+    $project_data = $project_arr[$id];
+    /** @var Program|null $old_project */
+    $old_project = $this->project_manager->findOneByScratchId($id);
+    if (null === $old_project) {
+      $user = $this->user_manager->createUserFromScratch($project_data['author']);
     } else {
-      $user = $old_program->getUser();
+      $user = $old_project->getUser();
     }
 
-    return $this->program_manager->createProgramFromScratch($old_program, $user, $program_data);
+    return $this->project_manager->createProjectFromScratch($old_project, $user, $project_data);
   }
 }

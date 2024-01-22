@@ -2,13 +2,13 @@
 
 namespace App\Project\CatrobatCode\Parser;
 
-class ParsedSceneProgram
+class ParsedSceneProject
 {
   protected array $scenes = [];
 
   protected CodeStatistic $code_statistic;
 
-  public function __construct(protected \SimpleXMLElement $program_xml_properties)
+  public function __construct(protected \SimpleXMLElement $project_xml_properties)
   {
     $this->parseScenes();
 
@@ -33,7 +33,7 @@ class ParsedSceneProgram
 
   protected function parseScenes(): void
   {
-    foreach ($this->program_xml_properties->scenes->scene as $scene_xml_properties) {
+    foreach ($this->project_xml_properties->scenes->scene as $scene_xml_properties) {
       $this->scenes[] = new ParsedScene($scene_xml_properties);
     }
   }
@@ -43,6 +43,6 @@ class ParsedSceneProgram
     foreach ($this->scenes as $scene) {
       $this->code_statistic->update($scene);
     }
-    $this->code_statistic->computeVariableStatistic($this->program_xml_properties);
+    $this->code_statistic->computeVariableStatistic($this->project_xml_properties);
   }
 }

@@ -18,24 +18,24 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ApkStatusController extends AbstractController
 {
-  public function __construct(private readonly ProjectManager $program_manager, private readonly TranslatorInterface $translator)
+  public function __construct(private readonly ProjectManager $project_manager, private readonly TranslatorInterface $translator)
   {
   }
 
   #[Route(path: '/ci/status/{id}', name: 'ci_status', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getApkStatusAction(string $id): JsonResponse
   {
-    /** @var Program|null $program */
-    $program = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
-    if (null === $program) {
+    /** @var Program|null $project */
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
+    if (null === $project) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
     $result = [];
-    switch ($program->getApkStatus()) {
+    switch ($project->getApkStatus()) {
       case Program::APK_READY:
         $result['status'] = 'ready';
         $result['url'] = $this->generateUrl('ci_download',
-          ['id' => $program->getId(), 'fname' => $program->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
+          ['id' => $project->getId(), 'fname' => $project->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
         $result['label'] = $this->translator->trans('ci.download', [], 'catroweb');
         break;
       case Program::APK_PENDING:

@@ -3,8 +3,8 @@
 namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
-use App\Project\CatrobatCode\Parser\ParsedSceneProgram;
-use App\Project\CatrobatCode\Parser\ParsedSimpleProgram;
+use App\Project\CatrobatCode\Parser\ParsedSceneProject;
+use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Storage\FileHelper;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
@@ -35,8 +35,8 @@ class CatrobatCodeParserTest extends TestCase
   {
     $actual = $this->parser->parse($extracted_catrobat_program);
     $expected = [
-      ParsedSimpleProgram::class,
-      ParsedSceneProgram::class,
+      ParsedSimpleProject::class,
+      ParsedSceneProject::class,
     ];
 
     $this->assertThat($actual, $this->logicalOr(
@@ -49,7 +49,7 @@ class CatrobatCodeParserTest extends TestCase
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
-    $expected = ParsedSimpleProgram::class;
+    $expected = ParsedSimpleProject::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
@@ -58,7 +58,7 @@ class CatrobatCodeParserTest extends TestCase
   {
     $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '');
     $actual = $this->parser->parse($extracted_catrobat_program);
-    $expected = ParsedSceneProgram::class;
+    $expected = ParsedSceneProject::class;
 
     $this->assertInstanceOf($expected, $actual);
   }

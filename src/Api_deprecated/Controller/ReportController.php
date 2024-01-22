@@ -26,7 +26,7 @@ class ReportController extends AbstractController
 {
   public function __construct(
     private readonly UserManager $user_manager,
-    private readonly ProjectManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly TranslatorInterface $translator,
     private readonly EventDispatcherInterface $event_dispatcher,
     private readonly AuthorizationCheckerInterface $authorization_checker,
@@ -39,9 +39,9 @@ class ReportController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/reportProject/reportProject.json', name: 'catrobat_api_report_program', defaults: ['_format' => 'json'], methods: ['POST', 'GET'])]
-  public function reportProgramAction(Request $request): JsonResponse
+  public function reportProjectAction(Request $request): JsonResponse
   {
-    /* @var $program Program */
+    /* @var $project Program */
     /* @var $user User */
     $response = [];
     if (!$request->request->get('program') || !$request->request->get('category') || !$request->request->get('note')) {
@@ -54,17 +54,17 @@ class ReportController extends AbstractController
     $category = strval($request->request->get('category'));
     $note = strval($request->request->get('note'));
     $projectId = strval($request->request->get('program'));
-    $program = $this->program_manager->find($projectId);
-    if (null == $program) {
+    $project = $this->project_manager->find($projectId);
+    if (null == $project) {
       $response['statusCode'] = 506; // should be 404!
-      $response['answer'] = $this->translator->trans('errors.program.invalid', [], 'catroweb');
+      $response['answer'] = $this->translator->trans('errors.project.invalid', [], 'catroweb');
       $response['preHeaderMessages'] = '';
 
       return new JsonResponse($response);
     }
     $report = new ProgramInappropriateReport();
-    $approved_project = $program->getApproved();
-    $featured_project = $this->program_manager->getFeaturedRepository()->isFeatured($program);
+    $approved_project = $project->getApproved();
+    $featured_project = $this->project_manager->getFeaturedRepository()->isFeatured($project);
     if ($approved_project || $featured_project) {
       $response['answer'] = $this->translator->trans('success.report', [], 'catroweb');
       $response['statusCode'] = Response::HTTP_OK;
@@ -96,11 +96,11 @@ class ReportController extends AbstractController
     } else {
       return new JsonResponse([], Response::HTTP_UNAUTHORIZED);
     }
-    $program->setVisible(false);
+    $project->setVisible(false);
     $report->setCategory($category);
     $report->setNote($note);
-    $report->setProgram($program);
-    $report->setReportedUser($program->getUser());
+    $report->setProgram($project);
+    $report->setReportedUser($project->getUser());
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();
     $this->event_dispatcher->dispatch(new ReportInsertEvent($category, $note, $report));

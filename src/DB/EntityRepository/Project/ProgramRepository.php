@@ -276,7 +276,7 @@ class ProgramRepository extends ServiceEntityRepository
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function markAllProgramsAsNotYetMigrated(): void
+  public function markAllProjectsAsNotYetMigrated(): void
   {
     $query_builder = $this->createQueryBuilder('p');
 
@@ -346,7 +346,7 @@ class ProgramRepository extends ServiceEntityRepository
     return array_map(fn ($result) => $result['program'], $results);
   }
 
-  public function getOtherMostDownloadedProgramsOfUsersThatAlsoDownloadedGivenProgram(string $flavor, Program $program, ?int $limit, int $offset): array
+  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $program, ?int $limit, int $offset): array
   {
     return []; // disabled
   }

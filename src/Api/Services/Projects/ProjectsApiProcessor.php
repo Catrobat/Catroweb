@@ -5,9 +5,9 @@ namespace App\Api\Services\Projects;
 use App\Api\Services\Base\AbstractApiProcessor;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +21,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
   public function __construct(private readonly ProjectManager $project_manager,
     private readonly EntityManagerInterface $entity_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
-    private readonly ProgramFileRepository $file_repository,
+    private readonly ProjectFileRepository $file_repository,
     private readonly ScreenshotRepository $screenshot_repository)
   {
   }
@@ -29,9 +29,9 @@ class ProjectsApiProcessor extends AbstractApiProcessor
   /**
    * @throws \Exception
    */
-  public function addProject(AddProgramRequest $add_program_request): ?Program
+  public function addProject(AddProjectRequest $add_program_request): ?Program
   {
-    return $this->project_manager->addProgram($add_program_request);
+    return $this->project_manager->addProject($add_program_request);
   }
 
   public function saveProject(Program $project): void
@@ -62,7 +62,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
         $project->setCredits($credits);
       }
 
-      $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($project);
+      $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
       if ($extracted_file) {
         if (!is_null($name)) {
           $extracted_file_properties_before_update['name'] = $extracted_file->getName();
@@ -78,7 +78,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
         }
 
         try {
-          $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+          $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
         } catch (\Exception) {
           return self::SERVER_ERROR_SAVE_XML;
         }
@@ -93,7 +93,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
 
     if (!is_null($request->getScreenshot())) {
       try {
-        $this->screenshot_repository->updateProgramAssets($request->getScreenshot(), $project->getId());
+        $this->screenshot_repository->updateProjectAssets($request->getScreenshot(), $project->getId());
       } catch (\Exception) {
         if ($extracted_file) {
           // restore old values
@@ -111,7 +111,7 @@ class ProjectsApiProcessor extends AbstractApiProcessor
             }
           }
           try {
-            $extracted_file->saveProgramXmlProperties();
+            $extracted_file->saveProjectXmlProperties();
           } catch (\Exception) {
             // ignore
           }

@@ -132,7 +132,7 @@ class MigrateRemixGraphsCommand extends Command
     // ==============================================================================================================
     $this->remix_manager->removeAllRelations();
     $this->entity_manager->clear();
-    $this->project_manager->markAllProgramsAsNotYetMigrated();
+    $this->project_manager->markAllProjectsAsNotYetMigrated();
     $this->entity_manager->clear();
 
     // ==============================================================================================================
@@ -317,20 +317,20 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function addRemixData(Program $project, array $remixes_data, bool $is_update = false): void
   {
-    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProgram());
+    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
     $scratch_info_data = [];
 
     if (count($scratch_remixes_data) > 0) {
-      $scratch_ids = array_map(fn (RemixData $data): string => $data->getProgramId(), $scratch_remixes_data);
-      $existing_scratch_ids = $this->remix_manager->filterExistingScratchProgramIds($scratch_ids);
+      $scratch_ids = array_map(fn (RemixData $data): string => $data->getProjectId(), $scratch_remixes_data);
+      $existing_scratch_ids = $this->remix_manager->filterExistingScratchProjectIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
-      $scratch_info_data = $this->async_http_client->fetchScratchProgramDetails($not_existing_scratch_ids);
+      $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails($not_existing_scratch_ids);
     }
 
     $preserved_version = $project->getVersion();
     $project->setVersion($is_update ? (Program::INITIAL_VERSION + 1) : Program::INITIAL_VERSION);
 
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
     $this->remix_manager->addRemixes($project, $remixes_data);
 
     $project->setVersion($preserved_version);
@@ -380,7 +380,7 @@ class MigrateRemixGraphsCommand extends Command
 
       $url_string = $extracted_file->getRemixUrlsString();
       $original_project_data = new RemixData($url_string);
-      $project_id = $original_project_data->getProgramId();
+      $project_id = $original_project_data->getProjectId();
 
       $progress_bar->setMessage('Importing project '.$extracted_file->getName().' (#'.$project_id.')');
       $progress_bar->advance();

@@ -93,7 +93,7 @@ class RemixManagerTest extends TestCase
       }))
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
   }
 
   /**
@@ -123,7 +123,7 @@ class RemixManagerTest extends TestCase
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
   }
 
   /**
@@ -179,7 +179,7 @@ class RemixManagerTest extends TestCase
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
   }
 
   /**

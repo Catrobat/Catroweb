@@ -19,19 +19,19 @@ class ReportedCommentsController extends CRUDController
   ) {
   }
 
-  public function unreportProgramAction(): RedirectResponse
+  public function unreportProjectAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       throw new NotFoundHttpException();
     }
-    $program = $object->getProgram();
-    $program->setVisible(true);
-    $program->setApproved(true);
+    $project = $object->getProgram();
+    $project->setVisible(true);
+    $project->setApproved(true);
     $object->setState(3);
     $this->admin->update($object);
-    $this->addFlash('sonata_flash_success', 'Program '.$object->getId().' is no longer reported');
+    $this->addFlash('sonata_flash_success', 'Project '.$object->getId().' is no longer reported');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }

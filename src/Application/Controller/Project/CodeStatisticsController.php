@@ -13,7 +13,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeStatisticsController extends AbstractController
 {
-  public function __construct(private readonly ProjectManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator)
+  public function __construct(private readonly ProjectManager $project_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly TranslatorInterface $translator)
   {
   }
 
@@ -23,21 +23,21 @@ class CodeStatisticsController extends AbstractController
     // Todo: create useful data structures in CodeStatistic.php
     // Todo: add more statistic
     // Todo: better display of statistics -> E.g. Dr.Scratch
-    $parsed_program = null;
-    /** @var Program|null $program */
-    $program = $this->program_manager->find($id);
-    if (null !== $program) {
-      $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    $parsed_project = null;
+    /** @var Program|null $project */
+    $project = $this->project_manager->find($id);
+    if (null !== $project) {
+      $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
       if (null !== $extracted_file) {
-        $parsed_program = $this->code_parser->parse($extracted_file);
+        $parsed_project = $this->code_parser->parse($extracted_file);
       }
     }
-    if (null === $parsed_program) {
+    if (null === $parsed_project) {
       return $this->render('Project/code_statistics.html.twig', [
         'id' => $id,
       ]);
     }
-    $stats = $parsed_program->getCodeStatistic();
+    $stats = $parsed_project->getCodeStatistic();
     $brick_stats = $stats->getBrickTypeStatistic();
 
     return $this->render('Project/code_statistics.html.twig', [

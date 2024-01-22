@@ -122,10 +122,10 @@ class CodeStatistic
     }
   }
 
-  public function computeVariableStatistic(\SimpleXMLElement $program_xml_properties): void
+  public function computeVariableStatistic(\SimpleXMLElement $project_xml_properties): void
   {
-    $this->countGlobalVariables($program_xml_properties);
-    $this->countLocalVariables($program_xml_properties);
+    $this->countGlobalVariables($project_xml_properties);
+    $this->countLocalVariables($project_xml_properties);
   }
 
   public function getSceneStatistic(): int
@@ -279,28 +279,28 @@ class CodeStatistic
     }
   }
 
-  protected function countGlobalVariables(\SimpleXMLElement $program_xml_properties): void
+  protected function countGlobalVariables(\SimpleXMLElement $project_xml_properties): void
   {
     try {
       $this->total_num_global_vars =
-        count($program_xml_properties->xpath('//programVariableList//userVariable')) +
-        count($program_xml_properties->xpath('//programListOfLists//userVariable'));
+        count($project_xml_properties->xpath('//programVariableList//userVariable')) +
+        count($project_xml_properties->xpath('//programListOfLists//userVariable'));
     } catch (Exception) {
       $this->total_num_global_vars = null;
     }
   }
 
-  protected function countLocalVariables(\SimpleXMLElement $program_xml_properties): void
+  protected function countLocalVariables(\SimpleXMLElement $project_xml_properties): void
   {
     try {
       $this->total_num_local_vars =
-        count($program_xml_properties->xpath('//userVariable//userVariable')) - $this->total_num_global_vars;
+        count($project_xml_properties->xpath('//userVariable//userVariable')) - $this->total_num_global_vars;
 
       if ($this->total_num_local_vars <= 0) {
         // might be a old project using the old deprecated format to define local variables
         $this->total_num_local_vars =
-          count($program_xml_properties->xpath('//objectListOfList//userVariable')) +
-          count($program_xml_properties->xpath('//objectVariableList//userVariable'));
+          count($project_xml_properties->xpath('//objectListOfList//userVariable')) +
+          count($project_xml_properties->xpath('//objectVariableList//userVariable'));
       }
     } catch (Exception) {
       $this->total_num_local_vars = null;

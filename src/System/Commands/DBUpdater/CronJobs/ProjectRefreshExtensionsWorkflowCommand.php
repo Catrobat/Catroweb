@@ -51,7 +51,7 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
     foreach ($iterator as $projects) {
       /** @var Program $project */
       $project = $projects[0];
-      $extracted_file = $this->extracted_file_repo->loadProgramExtractedFile($project);
+      $extracted_file = $this->extracted_file_repo->loadProjectExtractedFile($project);
       if (!is_null($extracted_file)) {
         $this->extension_manager->addExtensions($extracted_file, $project, false);
       }

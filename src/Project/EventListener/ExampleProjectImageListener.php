@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Special\ExampleProgram;
 use App\Storage\ImageRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
-class ExampleProgramImageListener
+class ExampleProjectImageListener
 {
   public function __construct(private readonly ImageRepository $repository)
   {

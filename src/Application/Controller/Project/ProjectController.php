@@ -12,8 +12,8 @@ use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\Event\CheckScratchProgramEvent;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\Event\CheckScratchProjectEvent;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\Translation\TranslationDelegate;
@@ -45,7 +45,7 @@ class ProjectController extends AbstractController
     private readonly TranslatorInterface $translator,
     private readonly ParameterBagInterface $parameter_bag,
     private readonly EventDispatcherInterface $event_dispatcher,
-    private readonly ProgramFileRepository $file_repository,
+    private readonly ProjectFileRepository $file_repository,
     private readonly TranslationDelegate $translation_delegate,
     private readonly EntityManagerInterface $entity_manager,
     private readonly UserCommentRepository $comment_repository
@@ -69,7 +69,7 @@ class ProjectController extends AbstractController
       return $this->redirectToRoute('index');
     }
     if ($project->isScratchProgram()) {
-      $this->event_dispatcher->dispatch(new CheckScratchProgramEvent($project->getScratchId()));
+      $this->event_dispatcher->dispatch(new CheckScratchProjectEvent($project->getScratchId()));
     }
     $viewed = $request->getSession()->get('viewed', []);
     $this->checkAndAddViewed($request, $project, $viewed);
@@ -86,14 +86,14 @@ class ProjectController extends AbstractController
         $active_user_like_types[] = $like->getType();
       }
     }
-    $active_like_types = $this->project_manager->findProgramLikeTypes($project->getId());
+    $active_like_types = $this->project_manager->findProjectLikeTypes($project->getId());
     $total_like_count = $this->project_manager->totalLikeCount($project->getId());
     $login_redirect = $this->generateUrl('login', [], UrlGeneratorInterface::ABSOLUTE_URL);
 
-    $program_comment_list = $this->comment_repository->getProjectCommentOverviewListData($project);
-    $project_details = $this->createProgramDetailsArray(
+    $project_comment_list = $this->comment_repository->getProjectCommentOverviewListData($project);
+    $project_details = $this->createProjectDetailsArray(
       $project, $active_like_types, $active_user_like_types, $total_like_count,
-      $referrer, $program_comment_list
+      $referrer, $project_comment_list
     );
 
     return $this->render('Project/project.html.twig', [
@@ -188,7 +188,7 @@ class ProjectController extends AbstractController
     }
     $user_locale = $request->getLocale();
     $total_like_count = $this->project_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->project_manager->findProgramLikeTypes($project->getId()));
+    $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->project_manager->findProjectLikeTypes($project->getId()));
 
     return new JsonResponse([
       'totalLikeCount' => [
@@ -238,15 +238,15 @@ class ProjectController extends AbstractController
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
     if ($project->getUser() !== $user) {
-      throw $this->createAccessDeniedException('Not your program!');
+      throw $this->createAccessDeniedException('Not your project!');
     }
     $project->setName($value);
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($project);
+    $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
     if ($extracted_file) {
       $extracted_file->setName($value);
-      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
+      $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
       $this->file_repository->deleteProjectZipFileIfExists($project->getId());
     }
 
@@ -272,21 +272,21 @@ class ProjectController extends AbstractController
     if (null === $user) {
       return $this->redirectToRoute('login');
     }
-    $program = $this->project_manager->find($id);
-    if (!$program) {
+    $project = $this->project_manager->find($id);
+    if (!$project) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-    if ($program->getUser() !== $user) {
-      throw $this->createAccessDeniedException('Not your program!');
+    if ($project->getUser() !== $user) {
+      throw $this->createAccessDeniedException('Not your project!');
     }
-    $program->setDescription($value);
-    $this->entity_manager->persist($program);
+    $project->setDescription($value);
+    $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
     if ($extracted_file) {
       $extracted_file->setDescription($value);
-      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
-      $this->file_repository->deleteProjectZipFileIfExists($program->getId());
+      $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
+      $this->file_repository->deleteProjectZipFileIfExists($project->getId());
     }
 
     return new JsonResponse(['statusCode' => Response::HTTP_OK]);
@@ -311,21 +311,21 @@ class ProjectController extends AbstractController
     if (null === $user) {
       return new JsonResponse(null, Response::HTTP_UNAUTHORIZED);
     }
-    $program = $this->project_manager->find($id);
-    if (null === $program) {
+    $project = $this->project_manager->find($id);
+    if (null === $project) {
       throw $this->createNotFoundException('Unable to find Project entity.');
     }
-    if ($program->getUser() !== $user) {
-      throw $this->createAccessDeniedException('Not your program!');
+    if ($project->getUser() !== $user) {
+      throw $this->createAccessDeniedException('Not your project!');
     }
-    $program->setCredits($value);
-    $this->entity_manager->persist($program);
+    $project->setCredits($value);
+    $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-    $extracted_file = $this->extracted_file_repository->loadProgramExtractedFile($program);
+    $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);
     if ($extracted_file) {
       $extracted_file->setNotesAndCredits($value);
-      $this->extracted_file_repository->saveProgramExtractedFile($extracted_file);
-      $this->file_repository->deleteProjectZipFileIfExists($program->getId());
+      $this->extracted_file_repository->saveProjectExtractedFile($extracted_file);
+      $this->file_repository->deleteProjectZipFileIfExists($project->getId());
     }
 
     return new JsonResponse(['statusCode' => Response::HTTP_OK]);
@@ -413,7 +413,7 @@ class ProjectController extends AbstractController
       'comment' => $arr_comment,
       'replies' => $comment_list,
       'isAdmin' => $this->isGranted('ROLE_ADMIN'),
-      'program' => $project,
+      'project' => $project,
       'are_replies' => true,
     ]);
   }
@@ -425,35 +425,35 @@ class ProjectController extends AbstractController
     return $this->redirectToRoute('index');
   }
 
-  private function checkAndAddViewed(Request $request, Program $program, array $viewed): void
+  private function checkAndAddViewed(Request $request, Program $project, array $viewed): void
   {
-    if (!in_array($program->getId(), $viewed, true)) {
-      $this->project_manager->increaseViews($program);
-      $viewed[] = $program->getId();
+    if (!in_array($project->getId(), $viewed, true)) {
+      $this->project_manager->increaseViews($project);
+      $viewed[] = $project->getId();
       $request->getSession()->set('viewed', $viewed);
     }
   }
 
-  private function createProgramDetailsArray(Program $program,
+  private function createProjectDetailsArray(Program $project,
     array $active_like_types,
     array $active_user_like_types,
     int $total_like_count,
     ?string $referrer,
-    array $program_comments): array
+    array $project_comments): array
   {
-    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $program->getId()]);
+    $url = $this->generateUrl('open_api_server_projects_projectidcatrobatget', ['id' => $project->getId()]);
 
     return [
-      'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($program->getId()),
+      'screenshotBig' => $this->screenshot_repository->getScreenshotWebPath($project->getId()),
       'downloadUrl' => $url,
-      'languageVersion' => $program->getLanguageVersion(),
-      'downloads' => $program->getDownloads() + $program->getApkDownloads(),
-      'views' => $program->getViews(),
-      'filesize' => sprintf('%.2f', $program->getFilesize() / 1_048_576),
-      'age' => $this->elapsed_time->format($program->getUploadedAt()->getTimestamp()),
+      'languageVersion' => $project->getLanguageVersion(),
+      'downloads' => $project->getDownloads() + $project->getApkDownloads(),
+      'views' => $project->getViews(),
+      'filesize' => sprintf('%.2f', $project->getFilesize() / 1_048_576),
+      'age' => $this->elapsed_time->format($project->getUploadedAt()->getTimestamp()),
       'referrer' => $referrer,
-      'id' => $program->getId(),
-      'comments' => $program_comments,
+      'id' => $project->getId(),
+      'comments' => $project_comments,
       'activeLikeTypes' => $active_like_types,
       'activeUserLikeTypes' => $active_user_like_types,
       'totalLikeCount' => $total_like_count,

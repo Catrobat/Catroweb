@@ -10,15 +10,15 @@ use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\CatrobatFile\CatrobatFileSanitizer;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\Event\ProgramAfterInsertEvent;
-use App\Project\Event\ProgramBeforeInsertEvent;
-use App\Project\Event\ProgramBeforePersistEvent;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\Event\ProjectAfterInsertEvent;
+use App\Project\Event\ProjectBeforeInsertEvent;
+use App\Project\Event\ProjectBeforePersistEvent;
 use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\User\Notification\NotificationManager;
@@ -43,7 +43,7 @@ class ProjectManagerTest extends TestCase
 {
   private ProjectManager $program_manager;
 
-  private MockObject|ProgramFileRepository $file_repository;
+  private MockObject|ProjectFileRepository $file_repository;
 
   private MockObject|ScreenshotRepository $screenshot_repository;
 
@@ -51,13 +51,13 @@ class ProjectManagerTest extends TestCase
 
   private EventDispatcherInterface|MockObject $event_dispatcher;
 
-  private AddProgramRequest|MockObject $request;
+  private AddProjectRequest|MockObject $request;
 
   private ExtractedCatrobatFile|MockObject $extracted_file;
 
-  private MockObject|ProgramBeforeInsertEvent $programBeforeInsertEvent;
+  private MockObject|ProjectBeforeInsertEvent $programBeforeInsertEvent;
 
-  private MockObject|ProgramAfterInsertEvent $programAfterInsertEvent;
+  private MockObject|ProjectAfterInsertEvent $programAfterInsertEvent;
 
   /**
    * @throws \Exception
@@ -65,12 +65,12 @@ class ProjectManagerTest extends TestCase
   protected function setUp(): void
   {
     $file_extractor = $this->createMock(CatrobatFileExtractor::class);
-    $this->file_repository = $this->createMock(ProgramFileRepository::class);
+    $this->file_repository = $this->createMock(ProjectFileRepository::class);
     $this->screenshot_repository = $this->createMock(ScreenshotRepository::class);
     $this->entity_manager = $this->createMock(EntityManager::class);
     $program_repository = $this->createMock(ProgramRepository::class);
     $this->event_dispatcher = $this->createMock(EventDispatcherInterface::class);
-    $this->request = $this->createMock(AddProgramRequest::class);
+    $this->request = $this->createMock(AddProjectRequest::class);
     $user = $this->createMock(User::class);
     $this->extracted_file = $this->createMock(ExtractedCatrobatFile::class);
     $inserted_program = $this->createMock(Program::class);
@@ -80,8 +80,8 @@ class ProjectManagerTest extends TestCase
     $example_repository = $this->createMock(ExampleRepository::class);
     $logger = $this->createMock(LoggerInterface::class);
     $app_request = $this->createMock(RequestHelper::class);
-    $this->programBeforeInsertEvent = $this->createMock(ProgramBeforeInsertEvent::class);
-    $this->programAfterInsertEvent = $this->createMock(ProgramAfterInsertEvent::class);
+    $this->programBeforeInsertEvent = $this->createMock(ProjectBeforeInsertEvent::class);
+    $this->programAfterInsertEvent = $this->createMock(ProjectAfterInsertEvent::class);
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $notification_service = $this->createMock(NotificationManager::class);
@@ -98,7 +98,7 @@ class ProjectManagerTest extends TestCase
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
     $this->extracted_file->expects($this->any())->method('getApplicationVersion')->willReturn('0.999');
-    $this->extracted_file->expects($this->any())->method('getProgramXmlProperties')
+    $this->extracted_file->expects($this->any())->method('getProjectXmlProperties')
       ->willReturn(new \SimpleXMLElement('<empty></empty>')
       )
     ;
@@ -106,7 +106,7 @@ class ProjectManagerTest extends TestCase
 
     fopen('/tmp/PhpUnitTest', 'w');
     $file = new File('/tmp/PhpUnitTest');
-    $this->request->expects($this->any())->method('getProgramfile')->willReturn($file);
+    $this->request->expects($this->any())->method('getProjectFile')->willReturn($file);
     $this->request->expects($this->any())->method('getUser')->willReturn($user);
     $this->request->expects($this->any())->method('getIp')->willReturn('127.0.0.1');
     $this->request->expects($this->any())->method('getLanguage')->willReturn('en');
@@ -144,7 +144,7 @@ class ProjectManagerTest extends TestCase
       ->willReturn($this->programBeforeInsertEvent)
     ;
 
-    $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
+    $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));
   }
 
   /**
@@ -167,7 +167,7 @@ class ProjectManagerTest extends TestCase
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
-    $this->program_manager->addProgram($this->request);
+    $this->program_manager->addProject($this->request);
   }
 
   /**
@@ -193,15 +193,15 @@ class ProjectManagerTest extends TestCase
     ;
 
     $this->screenshot_repository->expects($this->atLeastOnce())
-      ->method('saveProgramAssetsTemp')->with('./path/to/screenshot', 1)
+      ->method('saveProjectAssetsTemp')->with('./path/to/screenshot', 1)
     ;
     $this->screenshot_repository->expects($this->atLeastOnce())
-      ->method('makeTempProgramAssetsPerm')->with(1)
+      ->method('makeTempProjectAssetsPerm')->with(1)
     ;
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
-    $this->program_manager->addProgram($this->request);
+    $this->program_manager->addProject($this->request);
   }
 
   /**
@@ -228,7 +228,7 @@ class ProjectManagerTest extends TestCase
       ->willReturn($this->programBeforeInsertEvent)
     ;
 
-    $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
+    $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));
   }
 
   /**
@@ -246,7 +246,7 @@ class ProjectManagerTest extends TestCase
       ->will($this->throwException($validation_exception))
     ;
 
-    $this->program_manager->addProgram($this->request);
+    $this->program_manager->addProject($this->request);
   }
 
   /**
@@ -270,9 +270,9 @@ class ProjectManagerTest extends TestCase
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->createMock(ProgramBeforePersistEvent::class), $this->programAfterInsertEvent))
+      ->willReturn($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->createMock(ProjectBeforePersistEvent::class), $this->programAfterInsertEvent))
     ;
 
-    $this->assertInstanceOf(Program::class, $this->program_manager->addProgram($this->request));
+    $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));
   }
 }

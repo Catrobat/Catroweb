@@ -3,7 +3,7 @@
 namespace App\System\Commands\ImportProjects;
 
 use App\DB\Entity\User\User;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixGraphLayout;
 use App\System\Commands\Helpers\RemixManipulationProjectManager;
@@ -76,8 +76,8 @@ class ProgramImportCommand extends Command
     foreach ($finder as $file) {
       try {
         $output->writeln('Importing file '.$file);
-        $add_program_request = new AddProgramRequest($user, new File($file->__toString()));
-        $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
+        $add_program_request = new AddProjectRequest($user, new File($file->__toString()));
+        $program = $this->remix_manipulation_program_manager->addProject($add_program_request);
         $program->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$program->getName().'> for user: <'.$username.'>');
       } catch (InvalidCatrobatFileException $e) {
