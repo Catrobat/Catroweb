@@ -248,6 +248,28 @@ accountConfirmation:
     শুভেচ্ছান্তে,<br>
     আপনার Catrobat দল।
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: আপনার Catrobat পাসওয়ার্ড পুনরুদ্ধার
   message: |
@@ -457,6 +479,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -505,12 +532,12 @@ errors:
   unknown: অজানা ভুল
   token: 'ডিভাইসের প্রমাণীকরণ ব্যর্থ হয়েছে: অবৈধ প্রমাণীকরণ-টোকেন!'
   uploadTokenAuthFailed: 'প্রমাণীকরণ টোকেন আপলোড ব্যর্থ হয়েছে।'
-  program:
-    invalid: অবৈধ প্রকল্প।
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'দুঃখিত, আপনার প্রকল্পে ক্যাটরোব্যাট ভাষার একটি পুরানো সংস্করণ রয়েছে! আপনি কি পকেট কোডের সর্বশেষতম সংস্করণটি ব্যবহার করছেন?'
-  programversion:
-    tooold: 'দুঃখিত, আপনি পকেট কোডের একটি পুরানো সংস্করণ ব্যবহার করছেন। দয়া করে সর্বশেষ সংস্করণে আপডেট করুন।'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: প্রমাণ করতে ব্যর্থ
     webview: |
@@ -864,7 +891,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'বাতিল'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'প্রতিবেদন করুন'
@@ -873,6 +902,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'আরো দেখুন'
     showLess: 'প্রদর্শন কম'
@@ -881,6 +911,11 @@ studio:
     remove_project_success: 'প্রকল্পটি সফলভাবে স্টুডিও থেকে সরানো হয়েছে!'
     no_projects: 'স্টুডিওতে এখনও কোনো প্রকল্প নেই'
     updateCoverError: 'স্টুডিও কভার আপডেট করার সময় কিছু ভুল হয়েছে!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'প্রতিবেদন করুন'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'প্রজেক্টগুলো'
     comments:

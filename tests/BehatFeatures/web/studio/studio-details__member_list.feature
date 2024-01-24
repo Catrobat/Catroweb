@@ -6,7 +6,7 @@ Feature: Every studio provides a list of all members
       | id | name        |
       | 1  | StudioAdmin |
       | 2  | Catrobat    |
-    And there are programs:
+    And there are projects:
       | id | name      | owned by |
       | 1  | program 1 | Catrobat |
       | 2  | program 2 | Catrobat |

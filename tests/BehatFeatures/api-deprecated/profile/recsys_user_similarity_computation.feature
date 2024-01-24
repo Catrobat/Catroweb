@@ -15,7 +15,7 @@ Feature: Computes user similarities by analyzing common likes and remixes betwee
 #      | 2  | Catrobat2 | 12345    | cccccccccc |
 #      | 3  | Catrobat3 | 12345    | cccccccccc |
 #      | 4  | Catrobat4 | 12345    | cccccccccc |
-#    And there are programs:
+#    And there are projects:
 #      | id | name      | description | owned by  | downloads | views | upload time      | version | remix_root |
 #      | 1  | Game      | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | true       |
 #      | 2  | Minions   | p1          | Catrobat1 | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |

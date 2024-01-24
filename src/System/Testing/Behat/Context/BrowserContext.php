@@ -279,10 +279,9 @@ class BrowserContext extends MinkContext implements Context
   }
 
   /**
-   * @Then /^I select flavor "([^"]*)" for example program/
    * @Then /^I select flavor "([^"]*)" for example project/
    */
-  public function iSelectFlavorForExampleProgram(mixed $arg1): void
+  public function iSelectFlavorForExampleProject(mixed $arg1): void
   {
     $this->getSession()->getPage()->find('css', '.select2-container')->click();
 

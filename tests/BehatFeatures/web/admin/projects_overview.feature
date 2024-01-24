@@ -10,7 +10,7 @@ Feature: Admin all projects
       | name  | password | token      | email               | id |
       | Karim | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
       | Pauli | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
-    And there are downloadable programs:
+    And there are downloadable projects:
       | id | name      | description      | owned by | downloads | flavor     | views | upload time      | visible |
       | 1  | program 1 | a classy program | Karim    | 3         | pocketcode | 120   | 01.01.2019 12:00 | true    |
       | 2  | program 2 | abcef            | Karim    | 123       | luna       | 921   | 02.04.2019 13:00 | true    |
@@ -165,7 +165,7 @@ Feature: Admin all projects
 #    Given I am on "/admin/projects/list"
 #    And I wait for the page to be loaded
 #    And I change the approval of the project number "4" in the list to "yes"
-#    And I report program 2 with category "spam" and note "Bad Program" in Browser
+#    And I report project 2 with category "spam" and note "Bad Program" in Browser
 #    And I am on "/app"
 #    And I wait for the page to be loaded
 #    Then I should see "program 2"
@@ -195,7 +195,7 @@ Feature: Admin all projects
     Given I log in as "Admin" with the password "123456"
     Given I am on "/admin/projects/list"
     And I wait for the page to be loaded
-    And I click on the show button of the program number "3" in the list
+    And I click on the show button of the project number "3" in the list
     Then I should be on "/admin/approve/4/show"
     And I should see "program 4"
     And I should see "abcdef"
@@ -209,7 +209,7 @@ Feature: Admin all projects
     Given I log in as "Admin" with the password "123456"
     Given I am on "/admin/projects/list"
     And I wait for the page to be loaded
-    And I click on the program name "program 5"
+    And I click on the project name "program 5"
     And I wait for the page to be loaded
     Then I should be on "/admin/projects/5/show"
     And I should see "Projects Overview"

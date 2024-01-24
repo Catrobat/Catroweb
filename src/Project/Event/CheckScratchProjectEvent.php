@@ -4,7 +4,7 @@ namespace App\Project\Event;
 
 use Symfony\Contracts\EventDispatcher\Event;
 
-class CheckScratchProgramEvent extends Event
+class CheckScratchProjectEvent extends Event
 {
   public function __construct(protected int $scratch_id)
   {

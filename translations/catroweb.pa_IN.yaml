@@ -247,6 +247,28 @@ accountConfirmation:
     ਸ਼ੁਭਕਾਮਨਾਵਾਂ, <br>
     ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਟੀਮ.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਪਾਸਵਰਡ ਦੀ ਰਿਕਵਰੀ
   message: |
@@ -451,6 +473,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -499,12 +526,12 @@ errors:
   unknown: ਅਣਜਾਣ ਗਲਤੀ
   token: 'ਜੰਤਰ ਦੇ ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ: ਗਲਤ auth-ਟੋਕਨ!'
   uploadTokenAuthFailed: 'ਟੋਕਨ ਲੇਖ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ.'
-  program:
-    invalid: ਗਲਤ ਪ੍ਰੋਜੈਕਟ.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'ਮੁਆਫ ਕਰਨਾ, ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਵਿਚ ਕੈਟ੍ਰੋਬੈਟ ਭਾਸ਼ਾ ਦਾ ਪੁਰਾਣਾ ਸੰਸਕਰਣ ਹੈ! ਜੇਕਰ ਤੁਹਾਨੂੰ ਪਾਕੇਟ ਕੋਡ ਦਾ ਨਵੀਨਤਮ ਵਰਜਨ ਵਰਤ ਰਹੇ ਹੋ?'
-  programversion:
-    tooold: 'ਮੁਆਫ ਕਰਨਾ, ਤੁਸੀਂ ਪਾਕੇਟ ਕੋਡ ਦਾ ਪੁਰਾਣਾ ਸੰਸਕਰਣ ਵਰਤ ਰਹੇ ਹੋ. ਕਿਰਪਾ ਕਰਕੇ ਨਵੇਂ ਵਰਜ਼ਨ ਨੂੰ ਅਪਡੇਟ ਕਰੋ.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ
     webview: |
@@ -858,7 +885,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'ਰੱਦ ਕਰੋ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'ਰਿਪੋਰਟ'
@@ -867,6 +896,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'ਹੋਰ ਦਿਖਾਓ'
     showLess: 'ਘੱਟ ਦਿਖਾਓ'
@@ -875,6 +905,11 @@ studio:
     remove_project_success: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਇਆ ਗਿਆ!'
     no_projects: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਸ਼ਾਮਲ ਨਹੀਂ ਹਨ'
     updateCoverError: 'ਸਟੂਡੀਓ ਕਵਰ ਨੂੰ ਅਪਡੇਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'ਰਿਪੋਰਟ'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'ਪ੍ਰੋਜੈਕਟ'
     comments:

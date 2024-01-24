@@ -16,7 +16,7 @@ Feature: The extension should be used in addition to the flavor to find projects
       | 1  | pocketcode |
       | 2  | luna       |
       | 3  | embroidery |
-    And there are programs:
+    And there are projects:
       | id | name      | extensions | flavor     |
       | 1  | project 1 | embroidery | pocketcode |
       | 2  | project 2 | embroidery | embroidery |

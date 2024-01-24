@@ -28,7 +28,7 @@ class UserDataReportController extends CRUDController
   {
     $user = $this->user_manager->find($id);
     $notifications = $this->getUserNotifications($id);
-    $program_inappropriate_reports = $this->getReportedProjects($id);
+    $project_inappropriate_reports = $this->getReportedProjects($id);
     $user_comments = $this->getUserComments($id);
     $user_projects = $this->getUserProjects($id);
 
@@ -36,7 +36,7 @@ class UserDataReportController extends CRUDController
       [
         'user' => $user,
         'notifications' => $notifications,
-        'project_inappropriate_reports' => $program_inappropriate_reports,
+        'project_inappropriate_reports' => $project_inappropriate_reports,
         'user_comments' => $user_comments,
         'user_projects' => $user_projects,
       ]);

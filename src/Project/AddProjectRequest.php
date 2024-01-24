@@ -5,9 +5,9 @@ namespace App\Project;
 use App\DB\Entity\User\User;
 use Symfony\Component\HttpFoundation\File\File;
 
-class AddProgramRequest
+class AddProjectRequest
 {
-  public function __construct(private User $user, private File $program_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = 'pocketcode')
+  public function __construct(private User $user, private File $project_file, private readonly ?string $ip = '127.0.0.1', private ?string $language = null, private readonly ?string $flavor = 'pocketcode')
   {
   }
 
@@ -21,14 +21,14 @@ class AddProgramRequest
     $this->user = $user;
   }
 
-  public function getProgramFile(): File
+  public function getProjectFile(): File
   {
-    return $this->program_file;
+    return $this->project_file;
   }
 
-  public function setProgramFile(File $program_file): void
+  public function setProjectFile(File $project_file): void
   {
-    $this->program_file = $program_file;
+    $this->project_file = $project_file;
   }
 
   public function getIp(): ?string

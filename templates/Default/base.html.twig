@@ -47,10 +47,15 @@
 
 {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
-<div class="body-content">
-  <div class="page-content container">
-    {% block body %}{% endblock %}
-  </div>
+<div id="main_container_content" class="body-content">
+  {% if app.request.attributes.get('_route') == 'studio_details' %}
+  <div class="page-content">
+  {% else %}
+    <div class="page-content container">
+  {% endif %}
+      {% block body %}{% endblock %}
+    </div>
+
 </div>
 
 {% include 'Default/footer.html.twig' %}

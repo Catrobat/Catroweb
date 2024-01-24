@@ -96,15 +96,15 @@ follower:
   unfollowButton: "Smetti di seguire %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
+    title: Benvenuto nel %theme% di Catrobat
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Create stories, games and more...
     subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Download the app
-    statistics: More statistics
-  featured: Featured
-  example: Examples
+    statistics: Più statistiche
+  featured: In evidenza
+  example: Esempi
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
@@ -137,7 +137,7 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: The project name is too long!
+  tooLongName: Il nome del progetto è troppo lungo!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
@@ -155,24 +155,24 @@ project:
     all: "Tutti"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  submitted: Progetti inviati
+  uploaded: Progetti caricati
+  reportAsInappropriate: Segnala come inappropriato
+  reportProgram: Segnala progetto
+  languageVersion: 'Versione del linguaggio di Catrobat: %languageVersion%'
+  reportLoginText: Efffettua il %login% per segnalare il progetto.
+  reportDialogHeader: Per quale motivo vuoi segnalare questo progetto?
+  reportDialogReason: Scrivi il motivo
+  reportRadioButtonInappropriate: È inappropriato
+  reportRadioButtonCopyright: Violazione del copyright
+  reportRadioButtonSpam: È spam
+  reportRadioButtonDislike: Non mi piace
+  reportOwnProgram: Non puoi contrassegnare il tuo stesso progetto.
+  reportAlready: Hai già contrassegnato questo progetto.
+  reportDone: Hai segnalato il progetto!
+  updateAppHeaderDownload: Download non possibile
+  updateAppTextDownload: Aggiorna l'app alla versione più recente. Tieni presente che non tutte le funzionalità Android sono ancora disponibili su IOS.
+  updateAppTextDownloadApk: Il download APK è attualmente disponibile solo su Android e non su IOS.
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
@@ -187,8 +187,8 @@ project:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: Modifica il progetto
+  closeProjectEditor: Chiudi editor progetto
   closeEditorPrompt: Si desidera salvare le modifiche?
   btnDiscard: Scarta
   addComment: Write a comment
@@ -205,16 +205,16 @@ project:
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  confrimDelete: Sei sicuro di voler cancellare questa traduzione?
   default: Predefinito
   save: Salva
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: 'Traduzione in %language%'
+  editDefault: Modifica predefiniti
+  editTranslation: Modifica traduzione %language%
+  translations: Traduzioni
+  createTranslation: Crea traduzione
+  deletedComment: '**Eliminato**'
+  replyLabel: rispondi
   repliesLabel: risposte
 remixGraph:
   title: Remix
@@ -222,9 +222,9 @@ remixGraph:
   by: 'di'
   open: 'Apri '
   showPaths: 'Mostra percorsi'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
+  projectNotAvailableErrorTitle: 'Spiacente...'
+  projectNotAvailableErrorDescription: 'Il progetto non è più disponibile!'
+  projectNotAvailable: 'Non disponibile'
   projectUnknownUser: 'Unknown user'
 noReply:
   - Questo è un messaggio automatico - Si prega di non rispondere a questa email.
@@ -249,6 +249,28 @@ accountConfirmation:
     Cordiali saluti,<br>
     il Team di Catrobat.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFERMA E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Recupero della Password Catrobat
   message: |
@@ -455,6 +477,11 @@ resetPassword:
     visitLink: "Per reimpostare la password, segui il seguente link"
     expire: "Questo link scadrà in %time%."
     cheers: "Saluti!"
+  newemail:
+    title: "Reimposta la tua password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reimposta la tua password"
     button:
@@ -503,12 +530,12 @@ errors:
   unknown: errore sconosciuto
   token: 'Autenticazione del dispositivo non riuscita: auth-token non valido!'
   uploadTokenAuthFailed: 'Upload token di Autenticazione fallito.'
-  program:
-    invalid: Progetto non valido.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Spiacenti, il tuo progetto contiene una vecchia versione del linguaggio Catrobat! Stai usando l''ultima versione di Pocket Code?'
-  programversion:
-    tooold: 'Spiacenti ma stai usando una versione obsoleta di Pocket Code. Si raccomanda di passare all''ultima versione.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Autenticazione fallita
     webview: |
@@ -862,7 +889,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Annulla'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Rapporto'
@@ -871,6 +900,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'mostra di più'
     showLess: 'mostra meno'
@@ -879,6 +909,11 @@ studio:
     remove_project_success: 'progetto rimosso con successo dallo studio!'
     no_projects: 'Studio non contiene ancora nessun progetto'
     updateCoverError: 'Qualcosa è andato storto durante l''aggiornamento della copertina dello studio!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Rapporto'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'progetti'
     comments:

@@ -5,7 +5,7 @@ Feature: Update project
     Given there are users:
       | name     |
       | Catrobat |
-    Given there are programs:
+    Given there are projects:
       | id | name        | description   | credits | private | owned by |
       | 1  | Project One | First project |         | true    | Catrobat |
 

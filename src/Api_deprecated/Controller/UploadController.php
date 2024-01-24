@@ -4,7 +4,7 @@ namespace App\Api_deprecated\Controller;
 
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\ProjectManager;
 use App\User\UserManager;
@@ -24,7 +24,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class UploadController
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProjectManager $program_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
+  public function __construct(private readonly UserManager $user_manager, private readonly TokenStorageInterface $token_storage, private readonly ProjectManager $project_manager, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em)
   {
   }
 
@@ -90,13 +90,13 @@ class UploadController
 
     $language = $request->request->get('deviceLanguage');
     $language = is_null($language) ? $language : (string) $language;
-    $add_program_request = new AddProgramRequest($user, $file, $request->getClientIp(), $language, $flavor);
+    $add_project_request = new AddProjectRequest($user, $file, $request->getClientIp(), $language, $flavor);
 
-    $program = $this->program_manager->addProgram($add_program_request);
-    if (null === $program) {
+    $project = $this->project_manager->addProject($add_project_request);
+    if (null === $project) {
       $response = $this->createUploadFailedResponse($request, $user);
     } else {
-      $response = $this->createUploadResponse($request, $user, $program);
+      $response = $this->createUploadResponse($request, $user, $project);
     }
     $this->logger->info('Uploading a project done : '.json_encode($response, JSON_THROW_ON_ERROR));
 
@@ -108,16 +108,16 @@ class UploadController
     return $this->translator->trans($message, $parameters, 'catroweb');
   }
 
-  private function createUploadResponse(Request $request, User $user, Program $program): array
+  private function createUploadResponse(Request $request, User $user, Program $project): array
   {
     $response = [];
     $this->user_manager->updateUser($user);
 
-    $response['projectId'] = $program->getId();
+    $response['projectId'] = $project->getId();
     $response['statusCode'] = Response::HTTP_OK;
     $response['answer'] = $this->trans('success.upload');
     $response['token'] = $user->getUploadToken();
-    $request->attributes->set('program_id', $program->getId());
+    $request->attributes->set('program_id', $project->getId());
     $response['preHeaderMessages'] = '';
 
     return $response;

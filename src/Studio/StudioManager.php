@@ -163,13 +163,13 @@ class StudioManager
 
   public function addProjectToStudio(User $user, Studio $studio, Program $project): ?StudioProgram
   {
-      if (!$this->isUserInStudio($user, $studio)) {
-          return null;
-      }
+    if (!$this->isUserInStudio($user, $studio)) {
+      return null;
+    }
 
-      $activity = $this->createActivity($user, $studio, StudioActivity::TYPE_PROJECT);
+    $activity = $this->createActivity($user, $studio, StudioActivity::TYPE_PROJECT);
 
-      return $this->createStudioProgram($user, $studio, $activity, $project);
+    return $this->createStudioProgram($user, $studio, $activity, $project);
   }
 
   public function changeStudio(User $user, Studio $studio): ?studio

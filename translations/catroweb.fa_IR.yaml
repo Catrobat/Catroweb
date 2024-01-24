@@ -248,6 +248,28 @@ accountConfirmation:
     با احترام،<br>
     تیم کاتروبات شما. 
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: بازیابی رمز عبورت در کت ربات
   message: |
@@ -455,6 +477,11 @@ resetPassword:
     visitLink: "برای بازنشانی رمز عبور خود به لینک زیر مراجعه کنید"
     expire: "این پیوند در %time% منقضی می‌شود."
     cheers: "به سلامتی!"
+  newemail:
+    title: "رمز عبور خود را بازنشانی کنید"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "رمز عبور خود را بازنشانی کنید"
     button:
@@ -503,12 +530,12 @@ errors:
   unknown: خطای نامشخص
   token: 'تأیید اعتبار دستگاه انجام نشد: نشانه معتبر نیست!'
   uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
-  program:
-    invalid: پروژه نامعتبر
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'با عرض پوزش، پروژه شما شامل یک نسخه قدیمی از زبان Catrobat است! آیا شما از آخرین نسخه کد جیبی استفاده می کنید؟'
-  programversion:
-    tooold: 'با عرض پوزش، شما از یک نسخه قدیمی کد جیبی استفاده می کنید. لطفا به آخرین نسخه بروزرسانی کنید'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: تایید هویت موفق نبود
     webview: |
@@ -862,7 +889,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'انصراف'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'گزارش'
@@ -871,6 +900,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'نمایش بیشتر'
     showLess: 'نمایش کمتر'
@@ -879,6 +909,11 @@ studio:
     remove_project_success: 'پروژه با موفقیت از استودیو حذف شد!'
     no_projects: 'استودیو هیچ پروژه ای را شامل نمی شود'
     updateCoverError: 'در حالی که به روز رسانی پوشش استودیو، چیزی اشتباه رفت!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'گزارش'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروژه ها'
     comments:

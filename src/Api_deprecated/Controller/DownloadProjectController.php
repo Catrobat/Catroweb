@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @deprecated
  */
-class DownloadProgramController extends AbstractController
+class DownloadProjectController extends AbstractController
 {
   public function __construct(protected ProjectsApi $projectsApi, protected LoggerInterface $logger)
   {
@@ -21,7 +21,7 @@ class DownloadProgramController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/download/{id}.catrobat', name: 'legacy_download_route_deprecated', methods: ['GET'])]
-  public function downloadProgramAction(string $id): ?Response
+  public function downloadProjectAction(string $id): ?Response
   {
     $this->logger->warning("Deprecated 'download catrobat project file' route was used!");
     $responseCode = 200;

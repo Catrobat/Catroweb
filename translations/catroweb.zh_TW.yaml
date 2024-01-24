@@ -247,6 +247,28 @@ accountConfirmation:
     最好的問候，<br>
     您的 Catrobat 團隊。
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -451,6 +473,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -499,12 +526,12 @@ errors:
   unknown: 未知錯誤
   token: '裝置認證失敗:錯誤的認證標記!'
   uploadTokenAuthFailed: '上傳令牌認證失敗。'
-  program:
-    invalid: 項目無效。
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '抱歉，您的項目包含舊版本的 Catrobat 語言！您使用的是最新版本的 Pocket Code 嗎？'
-  programversion:
-    tooold: '抱歉，您使用的是舊版 Pocket Code。請更新到最新版本。'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 認證失敗
     webview: |
@@ -858,7 +885,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: '取消'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: '報告'
@@ -867,6 +896,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: '展示更多'
     showLess: '顯示較少'
@@ -875,6 +905,11 @@ studio:
     remove_project_success: '項目從工作室成功刪除！'
     no_projects: 'Studio 尚不包含任何項目'
     updateCoverError: '更新工作室封面時出了點問題！'
+    join: 'Join'
+    leave: 'Leave'
+    report: '報告'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: '程式檔'
     comments:

@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * @phpstan-extends AbstractAdmin<ExampleProgram>
  */
-class ExampleProgramAdmin extends AbstractAdmin
+class ExampleProjectAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'adminexample_program';
 
@@ -32,7 +32,7 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ImageRepository $example_image_repository,
-    private readonly ProjectManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly FlavorRepository $flavor_repository
   ) {
   }
@@ -47,25 +47,25 @@ class ExampleProgramAdmin extends AbstractAdmin
 
   public function getObjectMetadata($object): MetadataInterface
   {
-    /** @var ExampleProgram $example_program */
-    $example_program = $object;
+    /** @var ExampleProgram $example_project */
+    $example_project = $object;
 
-    return new Metadata($example_program->getProgram()->getName(), $example_program->getProgram()->getDescription(),
-      $this->getExampleImageUrl($example_program));
+    return new Metadata($example_project->getProgram()->getName(), $example_project->getProgram()->getDescription(),
+      $this->getExampleImageUrl($example_project));
   }
 
   public function preUpdate(object $object): void
   {
-    /** @var ExampleProgram $example_program */
-    $example_program = $object;
+    /** @var ExampleProgram $example_project */
+    $example_project = $object;
 
-    $example_program->old_image_type = $example_program->getImageType();
-    $this->checkProgramID($example_program);
+    $example_project->old_image_type = $example_project->getImageType();
+    $this->checkProjectID($example_project);
   }
 
   public function prePersist($object): void
   {
-    $this->checkProgramID($object);
+    $this->checkProjectID($object);
   }
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
@@ -157,15 +157,15 @@ class ExampleProgramAdmin extends AbstractAdmin
   /**
    * @param ExampleProgram $object
    */
-  private function checkProgramID($object): void
+  private function checkProjectID($object): void
   {
     $id = $this->getForm()->get('program_id')->getData();
-    $program = $this->program_manager->find($id);
+    $project = $this->project_manager->find($id);
 
-    if (null !== $program) {
-      $object->setProgram($program);
+    if (null !== $project) {
+      $object->setProgram($project);
     } else {
-      throw new NotFoundHttpException(sprintf('Unable to find program with id : %s', $id));
+      throw new NotFoundHttpException(sprintf('Unable to find project with id : %s', $id));
     }
   }
 

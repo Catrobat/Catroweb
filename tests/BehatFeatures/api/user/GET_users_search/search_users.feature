@@ -16,7 +16,7 @@ Feature: Search users
       | Catrobat | User1, Catroweb |
       | NewUser  | Catrobat        |
       | Catroweb | User1, NewUser  |
-    And there are programs:
+    And there are projects:
       | id        | name     | owned by | version | private | visible |
       | isxs-adkt | Webteam  | Catroweb | 0.8.5   | false   | true    |
       | tvut-irkw | Catroweb | NewUser  | 0.8.5   | false   | true    |

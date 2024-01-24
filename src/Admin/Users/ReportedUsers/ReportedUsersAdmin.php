@@ -68,7 +68,7 @@ class ReportedUsersAdmin extends AbstractAdmin
       ->add('email')
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'createUrlComments' => ['template' => 'Admin/CRUD/list__action_create_url_comments.html.twig'],
-        'createUrlPrograms' => ['template' => 'Admin/CRUD/list__action_create_url_programs.html.twig'],
+        'createUrlProjects' => ['template' => 'Admin/CRUD/list__action_create_url_programs.html.twig'],
       ]])
       ->add(
         'getReportedCommentsCount',
@@ -109,6 +109,6 @@ class ReportedUsersAdmin extends AbstractAdmin
   {
     $collection->remove('create')->remove('delete');
     $collection->add('createUrlComments');
-    $collection->add('createUrlPrograms');
+    $collection->add('createUrlProjects');
   }
 }

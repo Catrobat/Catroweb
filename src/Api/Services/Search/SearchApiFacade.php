@@ -21,7 +21,7 @@ class SearchApiFacade extends AbstractApiFacade
     private readonly SearchApiLoader $loader,
     private readonly SearchApiProcessor $processor,
     private readonly SearchRequestValidator $request_validator,
-    private readonly ProjectManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly UserManager $user_manager,
     private readonly TranslatorInterface $translator,
     private readonly ElapsedTimeStringFormatter $time_formatter,
@@ -53,9 +53,9 @@ class SearchApiFacade extends AbstractApiFacade
     return $this->request_validator;
   }
 
-  public function getProgramManager(): ProjectManager
+  public function getProjectManager(): ProjectManager
   {
-    return $this->program_manager;
+    return $this->project_manager;
   }
 
   public function getUserManager(): UserManager

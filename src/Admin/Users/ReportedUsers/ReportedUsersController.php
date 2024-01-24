@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class ReportedUsersController extends CRUDController
 {
-  public function createUrlProgramsAction(): RedirectResponse
+  public function createUrlProjectsAction(): RedirectResponse
   {
     $filter = [
       'reportedUser' => [

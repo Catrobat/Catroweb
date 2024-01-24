@@ -14,7 +14,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CodeViewController extends AbstractController
 {
-  public function __construct(private readonly ProjectManager $program_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator)
+  public function __construct(private readonly ProjectManager $project_manager, private readonly ExtractedFileRepository $extracted_file_repository, private readonly CatrobatCodeParser $code_parser, private readonly ParameterBagInterface $parameter_bag, private readonly TranslatorInterface $translator)
   {
   }
 
@@ -22,7 +22,7 @@ class CodeViewController extends AbstractController
   public function view(string $id): Response
   {
     /** @var Program|null $project */
-    $project = $this->program_manager->findProjectIfVisibleToCurrentUser($id);
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));
 
@@ -41,21 +41,21 @@ class CodeViewController extends AbstractController
   public function oldView(string $id, bool $visible = true): Response
   {
     try {
-      $program = $this->program_manager->find($id);
-      $extracted_program = $this->extracted_file_repository->loadProgramExtractedFile($program);
-      if (null === $extracted_program) {
+      $project = $this->project_manager->find($id);
+      $extracted_project = $this->extracted_file_repository->loadProjectExtractedFile($project);
+      if (null === $extracted_project) {
         throw new \Exception();
       }
-      $parsed_program = $this->code_parser->parse($extracted_program);
+      $parsed_project = $this->code_parser->parse($extracted_project);
 
-      $web_path = $extracted_program->getWebPath();
+      $web_path = $extracted_project->getWebPath();
     } catch (\Exception) {
-      $parsed_program = null;
+      $parsed_project = null;
       $web_path = null;
     }
 
     return $this->render('Project/old_code_view.html.twig', [
-      'parsed_project' => $parsed_program,
+      'parsed_project' => $parsed_project,
       'path' => $web_path,
       'visible' => $visible,
     ]);

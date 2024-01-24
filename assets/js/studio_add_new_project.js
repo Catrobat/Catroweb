@@ -18,11 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
 })
 function handleImageClickAdd(projectId) {
   const index = clickedProjectsAdd.indexOf(projectId)
-
+  const image = document.getElementById(projectId)
   if (index === -1) {
     clickedProjectsAdd.push(projectId)
+    image.classList.add('green-background')
   } else {
     clickedProjectsAdd.splice(index, 1)
+    image.classList.remove('green-background')
   }
   document.getElementById('clicked-projects_own_projects').value =
     clickedProjectsAdd.length > 0 ? JSON.stringify(clickedProjectsAdd) : ''
@@ -32,13 +34,17 @@ function handleImageClickAdd(projectId) {
 
 function handleImageClickRemove(projectId) {
   const index = clickedProjectsRemove.indexOf(projectId)
-
+  const image = document.getElementById(projectId)
   if (index === -1) {
-    clickedProjectsRemove.push(projectId)
+    clickedProjectsAdd.push(projectId)
+    image.classList.add('red-background')
   } else {
-    clickedProjectsRemove.splice(index, 1)
+    clickedProjectsAdd.splice(index, 1)
+    image.classList.remove('red-background')
   }
 
   document.getElementById('clicked-projects_own_and_studio_projects').value =
-    clickedProjectsRemove.length > 0 ? JSON.stringify(clickedProjectsRemove) : ''
+    clickedProjectsRemove.length > 0
+      ? JSON.stringify(clickedProjectsRemove)
+      : ''
 }

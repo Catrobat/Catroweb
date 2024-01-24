@@ -9,7 +9,7 @@ Feature: Get users programs
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
       | NewUser  | 54321    | bbbbbbbbbb | 3  |
-    And there are programs:
+    And there are projects:
       | id | name            | description | owned by | downloads | views | upload time      | version |
       | 1  | Galaxy War      | p1          | User1    | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | Minions         |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
@@ -79,19 +79,19 @@ Feature: Get users programs
   Scenario: show one project from one user
     Given I have a parameter "user_id" with value "3"
     When I GET "/app/api/projects/userProjects.json" with these parameters
-    Then I should get programs in the following order:
+    Then I should get projects in the following order:
       | Name         |
       | MarkoTheBest |
 
   Scenario: empty result set is returend if the user doesnt exist or has no programs
     Given I have a parameter "user_id" with value "5"
     When I GET "/app/api/projects/userProjects.json" with these parameters
-    Then I should get programs in the following order:
+    Then I should get projects in the following order:
       | Name |
 
   Scenario: show only visible programs
-    Given program "MarkoTheBest" is not visible
+    Given project "MarkoTheBest" is not visible
     And I have a parameter "user_id" with value "3"
     When I GET "/app/api/projects/userProjects.json" with these parameters
-    Then I should get programs in the following order:
+    Then I should get projects in the following order:
       | Name |

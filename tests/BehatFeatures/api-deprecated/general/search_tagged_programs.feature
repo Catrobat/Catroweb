@@ -22,7 +22,7 @@ Feature: Search tagged programs
       | single         | __Allein       |
       | bob            | __Bill         |
       | racing         | __Rennen       |
-    And there are programs:
+    And there are projects:
       | id | name            | description | owned by | downloads | views | upload time      | version | tags         |
       | 1  | Minions         | p1          | Catrobat | 3         | 12    | 01.01.2014 12:00 | 0.8.5   | games, story |
       | 2  | Galaxy          | p2          | User1    | 10        | 13    | 01.02.2014 12:00 | 0.8.5   | story        |
@@ -48,7 +48,7 @@ Feature: Search tagged programs
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search/tagProjects.json" with these parameters
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Minions |
 
@@ -57,7 +57,7 @@ Feature: Search tagged programs
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "Story"
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Galaxy  |
       | Minions |
@@ -65,7 +65,7 @@ Feature: Search tagged programs
   Scenario: Search a program with the tag over the normal search
 
     When I search for "Single"
-    Then I should get following programs:
+    Then I should get following projects:
       | name  |
       | Alone |
 
@@ -73,10 +73,10 @@ Feature: Search tagged programs
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "Bot Game"
-    Then I should get no programs
+    Then I should get no projects
 
   Scenario: Search is using And operation. More keywords reduce the result set.
     Given I use the limit "30"
     And I use the offset "0"
     When I search for "Galaxy Ponny Webteam dec1 Single"
-    Then I should get no programs
+    Then I should get no projects

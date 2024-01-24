@@ -2,7 +2,7 @@
   <p class="mt-3" id="studio-desc">{{ studio.description }}</p>
   <h3 class="mt-3">Projects</h3>
   {% if projects|length > 0 %}
-    <div class="studio-projects-container project-list vertical">
+    <div class="studio-projects-container project-list horizontal">
       <div class="project-list__wrapper">
         <div class="projects-container">
           {% if user_role != 'admin' %}
@@ -42,13 +42,13 @@
         <i class="ms-2 material-icons text-danger">delete</i>
       </a>
     {% endif %}
-
+    {% if user_role == 'admin' or user_role == 'member' %}
     <i id="show-add-studio-project-button" class="add-studio-project-button material-icons catro-round-icon-button"
          data-bs-toggle="modal"  data-bs-target="#studio-add-project-modal" title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">add</i>
     <i id="hide-add-comment-button" style="display:none;"
        class="add-comment-button material-icons catro-round-icon-button" data-bs-toggle="tooltip"
        title="{{ 'studio.details.projects.addProject'|trans({}, 'catroweb') }}">remove</i>
-
+    {% endif %}
   </div>
   {% include 'Studio/studio_project_add.html.twig' %}
 

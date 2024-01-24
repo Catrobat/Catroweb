@@ -10,7 +10,7 @@ Feature: APK-Generation Pending in Admin Area
       | name     | password | token      | email               | id |
       | Superman | 123456   | cccccccccc | dev1@pocketcode.org | 2  |
       | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
-    And there are programs:
+    And there are projects:
       | id | name      | description             | owned by | apk request time | apk_status |
       | 1  | program 1 | my superman description | Superman | 02.06.2020 10:00 | ready      |
       | 2  | program 2 | abcef                   | Gregor   | 02.06.2020 11:00 | ready      |

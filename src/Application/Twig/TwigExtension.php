@@ -210,7 +210,7 @@ class TwigExtension extends AbstractExtension
     return boolval(preg_match('/(iPad|iPhone)/', $this->getUserAgent()));
   }
 
-  public function checkCatrobatLanguage(mixed $program_catrobat_language): bool
+  public function checkCatrobatLanguage(mixed $project_catrobat_language): bool
   {
     $user_agent = $this->getUserAgent();
 
@@ -223,7 +223,7 @@ class TwigExtension extends AbstractExtension
       // $catrobat_language_array = [ "0.93", "PocketCode" ];
       $catrobat_language = floatval($catrobat_language_array[0]);
 
-      if ($catrobat_language < $program_catrobat_language) {
+      if ($catrobat_language < $project_catrobat_language) {
         return false;
       }
     }

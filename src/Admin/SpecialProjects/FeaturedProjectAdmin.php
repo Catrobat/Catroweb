@@ -25,7 +25,7 @@ use Symfony\Component\Form\FormError;
 /**
  * @phpstan-extends AbstractAdmin<FeaturedProgram>
  */
-class FeaturedProgramAdmin extends AbstractAdmin
+class FeaturedProjectAdmin extends AbstractAdmin
 {
   protected $baseRouteName = 'adminfeatured_program';
 
@@ -33,7 +33,7 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ImageRepository $featured_image_repository,
-    private readonly ProjectManager $program_manager
+    private readonly ProjectManager $project_manager
   ) {
   }
 
@@ -49,19 +49,19 @@ class FeaturedProgramAdmin extends AbstractAdmin
 
   public function getObjectMetadata($object): MetadataInterface
   {
-    /** @var FeaturedProgram $featured_program */
-    $featured_program = $object;
+    /** @var FeaturedProgram $featured_project */
+    $featured_project = $object;
 
-    return new Metadata($featured_program->getProgram()->getName(), $featured_program->getProgram()->getDescription(),
-      $this->getFeaturedImageUrl($featured_program));
+    return new Metadata($featured_project->getProgram()->getName(), $featured_project->getProgram()->getDescription(),
+      $this->getFeaturedImageUrl($featured_project));
   }
 
   public function preUpdate(object $object): void
   {
-    /** @var FeaturedProgram $featured_program */
-    $featured_program = $object;
+    /** @var FeaturedProgram $featured_project */
+    $featured_project = $object;
 
-    $featured_program->old_image_type = $featured_program->getImageType();
+    $featured_project->old_image_type = $featured_project->getImageType();
   }
 
   public function preValidate(object $object): void
@@ -82,15 +82,15 @@ class FeaturedProgramAdmin extends AbstractAdmin
         $id = preg_replace('$(.*)/project/$', '', $id);
       }
 
-      $program = $this->program_manager->find($id);
+      $project = $this->project_manager->find($id);
 
-      if (null !== $program) {
-        $object->setProgram($program);
+      if (null !== $project) {
+        $object->setProgram($project);
         if (null !== $object->getURL()) {
           $object->setURL(null);
         }
       } else {
-        $this->getForm()->addError(new FormError('Unable to find program with given ID.'));
+        $this->getForm()->addError(new FormError('Unable to find project with given ID.'));
       }
     }
   }

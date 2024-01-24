@@ -21,7 +21,7 @@ class RemixData
     return $this->remix_url;
   }
 
-  public function getProgramId(): string
+  public function getProjectId(): string
   {
     if (!array_key_exists('path', $this->remix_url_data)) {
       return '';
@@ -45,7 +45,7 @@ class RemixData
     return '';
   }
 
-  public function isScratchProgram(): bool
+  public function isScratchProject(): bool
   {
     if (!array_key_exists('host', $this->remix_url_data)) {
       return false;

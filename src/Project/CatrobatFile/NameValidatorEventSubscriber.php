@@ -3,12 +3,12 @@
 namespace App\Project\CatrobatFile;
 
 use App\Api\Services\Projects\ProjectsRequestValidator;
-use App\Project\Event\ProgramBeforeInsertEvent;
+use App\Project\Event\ProjectBeforeInsertEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class NameValidatorEventSubscriber implements EventSubscriberInterface
 {
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
+  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void
   {
     $this->validate($event->getExtractedFile());
   }
@@ -25,6 +25,6 @@ class NameValidatorEventSubscriber implements EventSubscriberInterface
 
   public static function getSubscribedEvents(): array
   {
-    return [ProgramBeforeInsertEvent::class => 'onProgramBeforeInsert'];
+    return [ProjectBeforeInsertEvent::class => 'onProjectBeforeInsert'];
   }
 }

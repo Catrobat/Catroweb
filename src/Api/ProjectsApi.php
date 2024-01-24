@@ -5,7 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
 use App\DB\Entity\Project\ProgramDownloads;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
@@ -178,7 +178,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     try {
       $project = $this->facade->getProcessor()->addProject(
-        new AddProgramRequest(
+        new AddProjectRequest(
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
@@ -191,7 +191,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return $error_response;
     }
 
-    // Setting the program's attributes
+    // Setting the project's attributes
     $project->setPrivate($private);
     $this->facade->getProcessor()->saveProject($project);
 
@@ -204,10 +204,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
-    $programs = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
+    $projects = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($programs, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -277,7 +277,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $projects = $this->facade->getLoader()->getUserPublicPrograms($id, $limit, $offset, $flavor, $max_version);
+    $projects = $this->facade->getLoader()->getUserPublicProjects($id, $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);

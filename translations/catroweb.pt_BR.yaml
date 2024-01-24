@@ -140,8 +140,8 @@ project:
   tooLongName: O nome do projeto é muito extenso!
   tooLongDescription: A descrição do projeto é muito longa!
   tooLongCredits: Os créditos do projeto são muito longos!
-  trending: Trending projects
-  popular: Popular projects
+  trending: Projetos em alta
+  popular: Projetos populares
   most:
     viewed: Mais vistos
     downloaded: Mais baixados
@@ -171,50 +171,50 @@ project:
   reportAlready: Você já sinalizou este projeto.
   reportDone: Projeto reportado!
   updateAppHeaderDownload: Não foi possível baixar
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  updateAppTextDownload: Por favor, atualize seu aplicativo para a versão mais recente. Esteja ciente de que nem todos os recursos do Android já estão disponíveis no IOS.
+  updateAppTextDownloadApk: O download de APK está disponível apenas no Android e não no IOS.
+  updateAppHeader: Atualizar aplicativo
+  updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: Confira este projeto do Catrobat
+  show_more: Mostrar mais
   comments: Comentários
-  send: Send
+  send: Enviar
   delete: Apagar
   report: Reportar
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  report_popup: Este comentário foi denunciado com sucesso.
+  report_popup_header: Denunciado
+  deleted_popup: Comentário apagado com sucesso.
+  deleted_popup_header: Apagado
+  noAdminRights: Você não possui permissões de administrador. Por favor, faça Login como Administrador.
+  editProject: Editar o projeto
+  closeProjectEditor: Fechar editor de projeto
   closeEditorPrompt: Deseja salvar as alterações?
   btnDiscard: Descartar
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: Escrever comentário
+  thumbsUp: Joinha!
+  smile: Sorriso!
+  love: Coração!
+  wow: Uaaau!
+  linkTitle: Vincular
+  link: Copiar link do projeto para a área de transferência
   reactionsText: Curtidas
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: Ocorreu um erro ao baixar o projeto. Por favor, tente novamente mais tarde.
+  downloadStartText: Download iniciado...
+  showTranslation: Mostrar tradução
+  hideTranslation: Ocultar tradução
+  translatedByLine: Traduzido por %provider% de %sourceLanguage% para %targetLanguage%
+  googleTranslate: Google Tradutor
+  confrimDelete: Você tem certeza que deseja excluir a tradução?
   default: Padrão
   save: Salvar
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: 'Tradução de %language% '
+  editDefault: Editar padrão
+  editTranslation: Editar tradução de %language%
+  translations: Traduções
+  createTranslation: Criar tradução
+  deletedComment: '**Excluído**'
+  replyLabel: responder
   repliesLabel: respostas
 remixGraph:
   title: Remixes
@@ -222,10 +222,10 @@ remixGraph:
   by: 'por'
   open: 'Abrir '
   showPaths: 'Mostrar Caminhos'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  projectNotAvailableErrorTitle: 'Desculpe...'
+  projectNotAvailableErrorDescription: 'O projeto não está mais disponível!'
+  projectNotAvailable: 'Indisponível'
+  projectUnknownUser: 'Usuário desconhecido'
 noReply:
   - Essa é uma mensagem automática - Por favor, não responda diretamente a este e-mail.
 accountConfirmation:
@@ -246,6 +246,28 @@ accountConfirmation:
     Atenciosamente,<br>
     Your Catrobat Team.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Sua recuperação de senha Catrobat
   message: |
@@ -450,6 +472,11 @@ resetPassword:
     visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"
     expire: "Este link expirará em %time%."
     cheers: "Saudações!"
+  newemail:
+    title: "Redefinir sua senha"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Redefinir sua senha"
     button:
@@ -498,11 +525,11 @@ errors:
   unknown: erro desconhecido
   token: 'Autenticação de dispositivo falhou: auth-token inválido!'
   uploadTokenAuthFailed: 'Falha de autenticação do token de upload.'
-  program:
+  project:
     invalid: Projeto inválido.
   languageversion:
     tooold: 'Desculpe, o seu projeto contém uma versão antiga da linguagem Catrobat! Você está usando a versão mais recente do Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Desculpe, você está usando uma versão antiga do Pocket Code. Por favor, atualize para a versão mais recente.'
   authentication:
     title: A autenticação falhou
@@ -709,7 +736,7 @@ catro-notifications:
   follow:
     message: '%user_link% está te seguindo.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% criou um novo projeto %program_link%'
   remix:
     message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
 clipboard:
@@ -761,7 +788,7 @@ category:
   example: Exemplo
   scratch: Remixes do Scratch
   recommended: Projetos recomendados
-  popular: Most popular
+  popular: Mais populares
 achievements:
   sidebar:
     title: 'Conquistas'
@@ -857,7 +884,9 @@ studio:
   singular: 'Estúdio'
   create_studio: 'Criar estúdio'
   delete_studio: 'Excluir estúdio'
+  cancel_studio: 'Cancelar'
   studio_name: 'Nome do estúdio'
+  studio_description: 'Studio description'
   join: 'Entrar'
   leave: 'Sair'
   report: 'Reportar'
@@ -866,6 +895,7 @@ studio:
   overview:
     joined_studios: 'Entrou em estúdios'
     public_studios: 'Estúdios públicos'
+    private_studios: 'Private studios'
   details:
     showMore: 'mostrar mais'
     showLess: 'mostrar menos'
@@ -874,6 +904,11 @@ studio:
     remove_project_success: 'projeto removido com sucesso do estúdio!'
     no_projects: 'Este estúdio ainda não contém nenhum projeto'
     updateCoverError: 'Algo deu errado ao atualizar a capa de estúdio!'
+    join: 'Entrar'
+    leave: 'Sair'
+    report: 'Reportar'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projetos'
     comments:
@@ -917,10 +952,10 @@ snackbar:
   project_not_found: 'O projeto solicitado não está disponível'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
+    additional_info: 'Informações adicionais: adicionar'
+    feature_1: 'O recurso featureName não está disponível desde a maintenanceStart até maintenanceEnd'
+    feature_2: 'O recurso'
+    feature_3: 'O recurso'
 
 
 

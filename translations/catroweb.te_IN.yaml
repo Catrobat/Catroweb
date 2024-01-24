@@ -249,6 +249,28 @@ accountConfirmation:
     మీ కాట్రోబాట్ బృందం.
     </p>
 
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: మీ కాట్రోబాట్ పాస్‌వర్డ్ రికవరీ
   message: |
@@ -454,6 +476,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -502,12 +529,12 @@ errors:
   unknown: గుర్తించలేని పొరపాటు
   token: 'పరికరం యొక్క ప్రామాణీకరణ విఫలమైంది: చెల్లని ఆత్-టోకెన్!'
   uploadTokenAuthFailed: 'అప్‌లోడ్ టోకెన్ ఆత్ విఫలమైంది.'
-  program:
-    invalid: చెల్లని ప్రాజెక్ట్.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'క్షమించండి, మీ ప్రాజెక్ట్ క్యాట్రోబాట్ భాష యొక్క పాత వెర్షన్‌ను కలిగి ఉంది! మీరు పాకెట్ కోడ్ యొక్క తాజా వెర్షన్‌ను ఉపయోగిస్తున్నారా?'
-  programversion:
-    tooold: 'క్షమించండి, మీరు పాకెట్ కోడ్ యొక్క పాత వెర్షన్‌ని ఉపయోగిస్తున్నారు. దయచేసి తాజా వెర్షన్‌కి అప్‌డేట్ చేయండి.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: ప్రామాణీకరణ విఫలమైంది
     webview: |
@@ -861,7 +888,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'రద్దు చేయు'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'రిపొర్ట్'
@@ -870,6 +899,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'ఇంకా చూపించు'
     showLess: 'తక్కువ చూపించు'
@@ -878,6 +908,11 @@ studio:
     remove_project_success: 'ప్రాజెక్ట్ స్టూడియో నుండి విజయవంతంగా తీసివేయబడింది!'
     no_projects: 'స్టూడియోలో ఇంకా ఏ ప్రాజెక్ట్‌లు లేవు'
     updateCoverError: 'స్టూడియో కవర్‌ని అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'రిపొర్ట్'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'ప్రాజెక్టులు'
     comments:

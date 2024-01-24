@@ -2,7 +2,7 @@
 
 namespace App\Project\Scratch;
 
-use App\Project\Event\CheckScratchProgramEvent;
+use App\Project\Event\CheckScratchProjectEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ScratchProjectUpdaterEventSubscriber implements EventSubscriberInterface
@@ -11,13 +11,13 @@ class ScratchProjectUpdaterEventSubscriber implements EventSubscriberInterface
   {
   }
 
-  public function onCheckScratchProgram(CheckScratchProgramEvent $event): void
+  public function onCheckScratchProgram(CheckScratchProjectEvent $event): void
   {
-    $this->scratch_manager->createScratchProgramFromId($event->getScratchId());
+    $this->scratch_manager->createScratchProjectFromId($event->getScratchId());
   }
 
   public static function getSubscribedEvents(): array
   {
-    return [CheckScratchProgramEvent::class => 'onCheckScratchProgram'];
+    return [CheckScratchProjectEvent::class => 'onCheckScratchProgram'];
   }
 }

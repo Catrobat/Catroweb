@@ -31,7 +31,7 @@ use App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRep
 use App\DB\EntityRepository\User\RecommenderSystem\UserRemixSimilarityRelationRepository;
 use App\Project\CatrobatFile\CatrobatFileCompressor;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
+use App\Project\CatrobatFile\ProjectFileRepository;
 use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use App\Studio\StudioManager;
@@ -94,7 +94,7 @@ trait ContextTrait
     return $this->kernel->getContainer()->get(UserDataFixtures::class);
   }
 
-  public function getProgramManager(): ?ProjectManager
+  public function getProjectManager(): ?ProjectManager
   {
     return $this->kernel->getContainer()->get(ProjectManager::class);
   }
@@ -124,29 +124,29 @@ trait ContextTrait
     return $this->kernel->getContainer()->get(ExtensionRepository::class);
   }
 
-  public function getProgramRemixForwardRepository(): ?ProgramRemixRepository
+  public function getProjectRemixForwardRepository(): ?ProgramRemixRepository
   {
     return $this->kernel->getContainer()->get(ProgramRemixRepository::class);
   }
 
-  public function getProgramRemixBackwardRepository(): ?ProgramRemixBackwardRepository
+  public function getProjectRemixBackwardRepository(): ?ProgramRemixBackwardRepository
   {
     return $this->kernel->getContainer()->get(ProgramRemixBackwardRepository::class);
   }
 
-  public function getScratchProgramRepository(): ?ScratchProgramRepository
+  public function getScratchProjectRepository(): ?ScratchProgramRepository
   {
     return $this->kernel->getContainer()->get(ScratchProgramRepository::class);
   }
 
-  public function getScratchProgramRemixRepository(): ?ScratchProgramRemixRepository
+  public function getScratchProjectRemixRepository(): ?ScratchProgramRemixRepository
   {
     return $this->kernel->getContainer()->get(ScratchProgramRemixRepository::class);
   }
 
-  public function getFileRepository(): ?ProgramFileRepository
+  public function getFileRepository(): ?ProjectFileRepository
   {
-    return $this->kernel->getContainer()->get(ProgramFileRepository::class);
+    return $this->kernel->getContainer()->get(ProjectFileRepository::class);
   }
 
   public function getExtractedFileRepository(): ?ExtractedFileRepository
@@ -222,7 +222,7 @@ trait ContextTrait
     return $this->kernel->getContainer()->get($service_class);
   }
 
-  public function getDefaultProgramFile(): string
+  public function getDefaultProjectFile(): string
   {
     $file = $this->FIXTURES_DIR.'/test.catrobat';
     Assert::assertTrue(is_file($file));
@@ -283,25 +283,25 @@ trait ContextTrait
   /**
    * @throws \Exception
    */
-  public function insertProgramLike(array $config = [], bool $andFlush = true): ProgramLike
+  public function insertProjectLike(array $config = [], bool $andFlush = true): ProgramLike
   {
     $user_manager = $this->getUserManager();
-    $program_manager = $this->getProgramManager();
+    $project_manager = $this->getProjectManager();
 
     /** @var User|null $user */
     $user = $user_manager->findUserByUsername($config['username']);
 
-    $program = $program_manager->find($config['program_id']);
+    $project = $project_manager->find($config['project_id']);
 
-    $program_like = new ProgramLike($program, $user, $config['type']);
-    $program_like->setCreatedAt(new \DateTime($config['created at'], new \DateTimeZone('UTC')));
+    $project_like = new ProgramLike($project, $user, $config['type']);
+    $project_like->setCreatedAt(new \DateTime($config['created at'], new \DateTimeZone('UTC')));
 
-    $this->getManager()->persist($program_like);
+    $this->getManager()->persist($project_like);
     if ($andFlush) {
       $this->getManager()->flush();
     }
 
-    return $program_like;
+    return $project_like;
   }
 
   public function insertTag(array $config = [], bool $andFlush = true): Tag
@@ -337,10 +337,10 @@ trait ContextTrait
   public function insertForwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixRelation
   {
     /** @var Program $ancestor */
-    $ancestor = $this->getProgramManager()->find($config['ancestor_id']);
+    $ancestor = $this->getProjectManager()->find($config['ancestor_id']);
 
     /** @var Program $descendant */
-    $descendant = $this->getProgramManager()->find($config['descendant_id']);
+    $descendant = $this->getProjectManager()->find($config['descendant_id']);
 
     $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int) $config['depth']);
 
@@ -355,10 +355,10 @@ trait ContextTrait
   public function insertBackwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixBackwardRelation
   {
     /** @var Program $parent */
-    $parent = $this->getProgramManager()->find($config['parent_id']);
+    $parent = $this->getProjectManager()->find($config['parent_id']);
 
     /** @var Program $child */
-    $child = $this->getProgramManager()->find($config['child_id']);
+    $child = $this->getProjectManager()->find($config['child_id']);
 
     $backward_relation = new ProgramRemixBackwardRelation($parent, $child);
 
@@ -373,7 +373,7 @@ trait ContextTrait
   public function insertScratchRemixRelation(array $config = [], bool $andFlush = true): ScratchProgramRemixRelation
   {
     /** @var Program $catrobat_child */
-    $catrobat_child = $this->getProgramManager()->find($config['catrobat_child_id']);
+    $catrobat_child = $this->getProjectManager()->find($config['catrobat_child_id']);
 
     $scratch_relation = new ScratchProgramRemixRelation(
       $config['scratch_parent_id'],
@@ -404,15 +404,15 @@ trait ContextTrait
   public function insertFeaturedProject(array $config, bool $andFlush = true): FeaturedProgram
   {
     $new_flavor = [];
-    $featured_program = new FeaturedProgram();
+    $featured_project = new FeaturedProgram();
 
-    /* @var Program $program */
-    if (isset($config['program_id'])) {
-      $program = $this->getProgramManager()->find($config['program_id']);
+    /* @var Program $project */
+    if (isset($config['project_id'])) {
+      $project = $this->getProjectManager()->find($config['project_id']);
     } else {
-      $program = $this->getProgramManager()->findOneByName($config['name']);
+      $project = $this->getProjectManager()->findOneByName($config['name']);
     }
-    $featured_program->setProgram($program);
+    $featured_project->setProgram($project);
 
     /* @var Flavor $flavor */
     $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
@@ -420,34 +420,34 @@ trait ContextTrait
       $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
       $flavor = $this->insertFlavor($new_flavor);
     }
-    $featured_program->setFlavor($flavor);
+    $featured_project->setFlavor($flavor);
 
-    $featured_program->setUrl($config['url'] ?? null);
-    $featured_program->setImageType($config['imagetype'] ?? 'jpg');
-    $featured_program->setActive(isset($config['active']) && '1' === $config['active']);
-    $featured_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
-    $featured_program->setForIos(isset($config['ios_only']) && 'yes' === $config['ios_only']);
+    $featured_project->setUrl($config['url'] ?? null);
+    $featured_project->setImageType($config['imagetype'] ?? 'jpg');
+    $featured_project->setActive(isset($config['active']) && '1' === $config['active']);
+    $featured_project->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
+    $featured_project->setForIos(isset($config['ios_only']) && 'yes' === $config['ios_only']);
 
-    $this->getManager()->persist($featured_program);
+    $this->getManager()->persist($featured_project);
     if ($andFlush) {
       $this->getManager()->flush();
     }
 
-    return $featured_program;
+    return $featured_project;
   }
 
   public function insertExampleProject(array $config, bool $andFlush = true): ExampleProgram
   {
     $new_flavor = [];
-    $example_program = new ExampleProgram();
+    $example_project = new ExampleProgram();
 
-    /* @var Program $program */
-    if (isset($config['program_id'])) {
-      $program = $this->getProgramManager()->find($config['program_id']);
-      $example_program->setProgram($program);
+    /* @var Program $project */
+    if (isset($config['project_id'])) {
+      $project = $this->getProjectManager()->find($config['project_id']);
+      $example_project->setProgram($project);
     } else {
-      $program = $this->getProgramManager()->findOneByName($config['name']);
-      $example_program->setProgram($program);
+      $project = $this->getProjectManager()->findOneByName($config['name']);
+      $example_project->setProgram($project);
     }
 
     /* @var Flavor $flavor */
@@ -456,19 +456,19 @@ trait ContextTrait
       $new_flavor['name'] = $config['flavor'] ?? 'pocketcode';
       $flavor = $this->insertFlavor($new_flavor);
     }
-    $example_program->setFlavor($flavor);
+    $example_project->setFlavor($flavor);
 
-    $example_program->setImageType($config['imagetype'] ?? 'jpg');
-    $example_program->setActive(isset($config['active']) && '1' === $config['active']);
-    $example_program->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
-    $example_program->setForIos(isset($config['ios_only']) && 'yes' === $config['ios_only']);
+    $example_project->setImageType($config['imagetype'] ?? 'jpg');
+    $example_project->setActive(isset($config['active']) && '1' === $config['active']);
+    $example_project->setPriority(isset($config['priority']) ? (int) $config['priority'] : 1);
+    $example_project->setForIos(isset($config['ios_only']) && 'yes' === $config['ios_only']);
 
-    $this->getManager()->persist($example_program);
+    $this->getManager()->persist($example_project);
     if ($andFlush) {
       $this->getManager()->flush();
     }
 
-    return $example_program;
+    return $example_project;
   }
 
   /**
@@ -477,7 +477,7 @@ trait ContextTrait
   public function insertUserComment(array $config, bool $andFlush = true): UserComment
   {
     /** @var Program $project */
-    $project = $this->getProgramManager()->find($config['program_id']);
+    $project = $this->getProjectManager()->find($config['project_id']);
 
     /** @var User|null $user */
     $user = $this->getUserManager()->find($config['user_id']);
@@ -520,7 +520,7 @@ trait ContextTrait
   public function insertProjectReport(array $config, bool $andFlush = true): ProgramInappropriateReport
   {
     /** @var Program $project */
-    $project = $this->getProgramManager()->find($config['program_id']);
+    $project = $this->getProjectManager()->find($config['project_id']);
 
     /** @var User|null $user */
     $user = $this->getUserManager()->find($config['user_id']);
@@ -545,18 +545,18 @@ trait ContextTrait
    *
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function generateProgramFileWith(mixed $parameters, mixed $is_embroidery = false): string
+  public function generateProjectFileWith(mixed $parameters, mixed $is_embroidery = false): string
   {
     $filesystem = new Filesystem();
-    FileHelper::emptyDirectory(sys_get_temp_dir().'/program_generated/');
-    $new_program_dir = sys_get_temp_dir().'/program_generated/';
+    FileHelper::emptyDirectory(sys_get_temp_dir().'/project_generated/');
+    $new_project_dir = sys_get_temp_dir().'/project_generated/';
 
     if ($is_embroidery) {
-      $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/embroidery', $new_program_dir);
+      $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/embroidery', $new_project_dir);
     } else {
-      $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/base', $new_program_dir);
+      $filesystem->mirror($this->FIXTURES_DIR.'/GeneratedFixtures/base', $new_project_dir);
     }
-    $properties = simplexml_load_file($new_program_dir.'/code.xml');
+    $properties = simplexml_load_file($new_project_dir.'/code.xml');
     if (!$properties) {
       throw new \Exception("Can't load code.xml file");
     }
@@ -593,17 +593,17 @@ trait ContextTrait
       }
     }
 
-    $file_overwritten = $properties->asXML($new_program_dir.'/code.xml');
+    $file_overwritten = $properties->asXML($new_project_dir.'/code.xml');
     if (!$file_overwritten) {
       throw new \Exception("Can't overwrite code.xml file");
     }
 
     $compressor = new CatrobatFileCompressor();
 
-    return $compressor->compress($new_program_dir, sys_get_temp_dir().'/', 'program_generated');
+    return $compressor->compress($new_project_dir, sys_get_temp_dir().'/', 'project_generated');
   }
 
-  public function getStandardProgramFile(): UploadedFile
+  public function getStandardProjectFile(): UploadedFile
   {
     $filepath = $this->FIXTURES_DIR.'test.catrobat';
     Assert::assertTrue(file_exists($filepath), 'File not found');

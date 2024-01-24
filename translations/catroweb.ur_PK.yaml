@@ -242,6 +242,28 @@ accountConfirmation:
     یہ لنک آپ کے اکاؤنٹ کی تصدیق کے لیے صرف ایک بار استعمال کیا جا سکتا ہے۔
     نیک تمنائیں،
     آپ کی کیٹروبیٹ ٹیم۔
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
@@ -446,6 +468,11 @@ resetPassword:
     visitLink: "اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے، براہ کرم درج ذیل لنک پر جائیں۔"
     expire: "یہ لنک %time% میں ختم ہو جائے گا۔"
     cheers: "شاباش"
+  newemail:
+    title: "اپنا پاس ورڈ ری سیٹ کریں"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "اپنا پاس ورڈ ری سیٹ کریں"
     button:
@@ -494,12 +521,12 @@ errors:
   unknown: نامعلوم غلطی
   token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
   uploadTokenAuthFailed: 'ٹوکن آرٹ اپ لوڈ کریں.'
-  program:
-    invalid: غلط منصوبے
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'افسوس، آپ کے منصوبے میں Catrobat زبان کا ایک پرانے ورژن شامل ہے! کیا آپ جیبی کوڈ کا تازہ ترین ورژن استعمال کرتے ہیں؟'
-  programversion:
-    tooold: 'افسوس، آپ جیبی کوڈ کا ایک پرانے ورژن استعمال کر رہے ہیں. تازہ ترین ورژن کو اپ ڈیٹ کریں.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: تصدیق میں ناکام رہے
     webview: |
@@ -852,7 +879,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'منسوخ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'رپورٹ'
@@ -861,6 +890,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'مزید دکھائیں'
     showLess: 'کم دکھائیں'
@@ -869,6 +899,11 @@ studio:
     remove_project_success: 'پروجیکٹ کو کامیابی سے ہٹا دیا گیا۔'
     no_projects: 'اسٹوڈیو میں ابھی پروجیکٹ شامل نہیں ہے۔'
     updateCoverError: 'اسٹوڈیو کور کو اپ ڈیٹ کرتے وقت کچھ غلط ہو گیا!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'رپورٹ'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروجیکٹس'
     comments:

@@ -182,39 +182,39 @@ project:
   send: Send
   delete: Удалить
   report: Отчет
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
+  report_popup: Жалоба на комментарий была отправлена.
+  report_popup_header: Сообщено
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: Изменить проект
+  closeProjectEditor: Закрыть редактор проекта
   closeEditorPrompt: Хотите ли вы сохранить свои изменения?
   btnDiscard: Сбросить
   addComment: Write a comment
   thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
+  smile: Улыбка!
+  love: Люблю!
   wow: Wooow!
   linkTitle: Link
   link: Copy project link to clipboard
   reactionsText: Реакции
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
+  downloadErrorText: Во время скачивания проекта произошла ошибка. Повторите попытку позже.
+  downloadStartText: Скачивание началось...
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: Google Переводчик
+  confrimDelete: Вы уверены, что хотите удалить перевод?
   default: По умолчанию
   save: Сохранить
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: 'перевод на %language%'
+  editDefault: Изменить по умолчанию
+  editTranslation: Изменить %language% перевод
+  translations: Переводы
+  createTranslation: Создать перевод
+  deletedComment: '**Удалено**'
+  replyLabel: ответить
   repliesLabel: oтветы
 remixGraph:
   title: Ремиксы
@@ -223,7 +223,7 @@ remixGraph:
   open: 'Открыть '
   showPaths: 'Показать Пути'
   projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailableErrorDescription: 'Этот проект больше недоступен!'
   projectNotAvailable: 'Not available'
   projectUnknownUser: 'Unknown user'
 noReply:
@@ -246,6 +246,28 @@ accountConfirmation:
     С наилучшими пожеланиями,<br>
     Команда Catrobat.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Восстановление пароля от вашего аккаунта Catrobat
   message: |
@@ -452,6 +474,11 @@ resetPassword:
     visitLink: "Чтобы сбросить пароль от аккаунта, пожалуйста перейдите по ссылке"
     expire: "Эта ссылка станет недействительной через %time%."
     cheers: "Ура!"
+  newemail:
+    title: "Сбросить ваш пароль"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Сбросить ваш пароль"
     button:
@@ -500,11 +527,11 @@ errors:
   unknown: неизвестная ошибка
   token: 'Аутентификация устройства провалилась: недействительный токен!'
   uploadTokenAuthFailed: 'Ошибка авторизации токена.'
-  program:
+  project:
     invalid: Неверный проект.
   languageversion:
     tooold: 'К сожалению, ваш проект содержит старую версию языка Catrobat! Используете ли вы последнюю версию Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'К сожалению, Вы используете старую версию Pocket Code. Пожалуйста, обновите его до последней версии.'
   authentication:
     title: Ошибка авторизации
@@ -711,7 +738,7 @@ catro-notifications:
   follow:
     message: '%user_link% теперь подписан на вас.'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% создал новую игру %program_link%.'
   remix:
     message: '%user_link% создал ремикс %program_link% вашей игры %remix_program_link%.'
 clipboard:
@@ -859,7 +886,9 @@ studio:
   singular: 'Студия'
   create_studio: 'Создать студию'
   delete_studio: 'Удалить студию'
+  cancel_studio: 'Отменить'
   studio_name: 'Название студии'
+  studio_description: 'Studio description'
   join: 'Присоединиться'
   leave: 'Покинуть'
   report: 'Отчет'
@@ -868,6 +897,7 @@ studio:
   overview:
     joined_studios: 'Участие в студиях'
     public_studios: 'Публичные студии'
+    private_studios: 'Private studios'
   details:
     showMore: 'показать больше'
     showLess: 'свернуть'
@@ -876,6 +906,11 @@ studio:
     remove_project_success: 'Проект был успешно удален из студии.'
     no_projects: 'В студии пока нет никаких проектов.'
     updateCoverError: 'Что-то пошло не так при обновлении обложки студии.'
+    join: 'Присоединиться'
+    leave: 'Покинуть'
+    report: 'Отчет'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Проекты'
     comments:

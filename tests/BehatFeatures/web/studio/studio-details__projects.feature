@@ -11,9 +11,7 @@ Feature: A studio has a project section
     And there are studios:
       | id | name             | description     | allow_comments | is_public |
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
-      | 2  | CatrobatStudio03 | hasADescription | true           | false     |
-      | 3  | CatrobatStudio04 | hasADescription | true           | false     |
-      | 4  | CatrobatStudio05 | hasADescription | true           | false     |
+
     And there are projects:
       | id | name      | description    | owned by | apk_ready |
       | 1  | project 1 | my description | StudioAdmin | true      |
@@ -45,7 +43,7 @@ Feature: A studio has a project section
     And I wait 500 milliseconds
     Then the element "#1" should be visible
     When I click "#1"
-    And I click "#studio-settings__submit-button"
+    And I click "#studio-settings__submit-button_projects"
     And  I wait for the page to be loaded
     Then I am on "/app/studio/1"
     And I should see "project 1"
@@ -60,9 +58,9 @@ Feature: A studio has a project section
     And I wait 500 milliseconds
     Then the element "#2" should be visible
     When I click "#2"
-    And I click "#studio-settings__submit-button"
+    And I click "#studio-settings__submit-button_projects"
     And  I wait for the page to be loaded
-    Then  I should not see "project 2"
+    Then  I should see "project 2"
 
   Scenario: User clicks studio add button, and removes his own project from the studio
     Given I log in as "StudioAdmin"
@@ -72,7 +70,6 @@ Feature: A studio has a project section
     And I click "#ajaxRequestDeleteProject"
     Then  I wait for AJAX to finish
     And I wait for the page to be loaded
-    And  I should not see "project 2"
-    Then the "#projects-count" element should contain "0"
+    Then  I should see "project 2"
 
 

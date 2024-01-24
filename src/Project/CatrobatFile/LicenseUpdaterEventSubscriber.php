@@ -2,7 +2,7 @@
 
 namespace App\Project\CatrobatFile;
 
-use App\Project\Event\ProgramBeforeInsertEvent;
+use App\Project\Event\ProjectBeforeInsertEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
@@ -14,9 +14,9 @@ class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
   /**
    * @var string
    */
-  final public const PROGRAM_LICENSE = 'https://developer.catrobat.org/agpl_v3';
+  final public const PROJECT_LICENSE = 'https://developer.catrobat.org/agpl_v3';
 
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
+  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void
   {
     $this->update($event->getExtractedFile());
   }
@@ -26,14 +26,14 @@ class LicenseUpdaterEventSubscriber implements EventSubscriberInterface
    */
   public function update(ExtractedCatrobatFile $file): void
   {
-    $program_xml_properties = $file->getProgramXmlProperties();
-    $program_xml_properties->header->mediaLicense = self::MEDIA_LICENSE;
-    $program_xml_properties->header->programLicense = self::PROGRAM_LICENSE;
-    $file->saveProgramXmlProperties();
+    $project_xml_properties = $file->getProjectXmlProperties();
+    $project_xml_properties->header->mediaLicense = self::MEDIA_LICENSE;
+    $project_xml_properties->header->programLicense = self::PROJECT_LICENSE;
+    $file->saveProjectXmlProperties();
   }
 
   public static function getSubscribedEvents(): array
   {
-    return [ProgramBeforeInsertEvent::class => ['onProgramBeforeInsert', -1]];
+    return [ProjectBeforeInsertEvent::class => ['onProjectBeforeInsert', -1]];
   }
 }

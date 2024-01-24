@@ -116,11 +116,11 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  deleteNotFoundError: The project to be deleted could not be found under your user.
+  deleteNotFoundError: 在您的账户下找不到要删除的项目。
   private: 私有的
   public: 公开的
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: 设为私有
+  setPublicAction: 设为公开
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -208,13 +208,13 @@ project:
   confrimDelete: Are you sure you want to delete the translation?
   default: 默认
   save: 保存
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: '%language% 翻译'
+  editDefault: 编辑默认值
+  editTranslation: 编辑 %language% 翻译
+  translations: 翻译
+  createTranslation: 创建翻译
+  deletedComment: '**已删除**'
+  replyLabel: 回复
   repliesLabel: 回复
 remixGraph:
   title: 调制
@@ -247,6 +247,28 @@ accountConfirmation:
     最好的祝福，<br>
     您的 Catrobat 团队。
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: 密码找回
   message: |
@@ -456,6 +478,11 @@ resetPassword:
     visitLink: "要重置您的密码，请访问以下链接"
     expire: "此链接将在 %time% 后过期。"
     cheers: "恭喜！"
+  newemail:
+    title: "重置您的密码"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "重置您的密码"
     button:
@@ -504,12 +531,12 @@ errors:
   unknown: 未知错误
   token: '设备验证失败： 无效的验证标记！'
   uploadTokenAuthFailed: '上传令牌认证失败。'
-  program:
-    invalid: 无效的项目。
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '对不起，您的项目包含旧版本的 Catrobat 语言！您是否使用最新版本的口袋编程？'
-  programversion:
-    tooold: '抱歉，您正在使用旧版本的口袋编程。请更新到最新版本。'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 身份验证失败
     webview: |
@@ -863,7 +890,9 @@ studio:
   singular: '工作室'
   create_studio: '创建工作室'
   delete_studio: '删除工作室'
+  cancel_studio: '取消'
   studio_name: '工作室名称'
+  studio_description: 'Studio description'
   join: '加入'
   leave: '退出'
   report: '报告'
@@ -872,6 +901,7 @@ studio:
   overview:
     joined_studios: '加入的工作室'
     public_studios: '公开的工作室'
+    private_studios: 'Private studios'
   details:
     showMore: '显示更多'
     showLess: '显示更多'
@@ -880,6 +910,11 @@ studio:
     remove_project_success: '项目已成功从工作室移除！'
     no_projects: '工作室尚未包含任何项目'
     updateCoverError: '更新工作室封面时出了错！'
+    join: '加入'
+    leave: '退出'
+    report: '报告'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: '项目'
     comments:

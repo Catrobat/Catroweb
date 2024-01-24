@@ -5,7 +5,7 @@ Feature: Filtering programs with specific flavor
   I want to see only programs with my flavor
 
   Background:
-    Given there are programs:
+    Given there are projects:
       | name          | flavor        |
       | Invaders      | pocketcode    |
       | Simple click  | luna          |
@@ -19,8 +19,8 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get most viewed programs of flavor pocketcode
 
-    When I get the most viewed programs with "app/api/projects/mostViewed.json"
-    Then I should get following programs:
+    When I get the most viewed projects with "app/api/projects/mostViewed.json"
+    Then I should get following projects:
       | name          |
       | Invaders      |
       | A new world   |
@@ -33,8 +33,8 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get most viewed programs of flavor luna
 
-    When I get the most viewed programs with "luna/api/projects/mostViewed.json"
-    Then I should get following programs:
+    When I get the most viewed projects with "luna/api/projects/mostViewed.json"
+    Then I should get following projects:
       | name          |
       | Simple click  |
       | Soon to be    |
@@ -47,8 +47,8 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get most downloaded programs of pocketcode
 
-    When I get the most downloaded programs with "app/api/projects/mostDownloaded.json"
-    Then I should get following programs:
+    When I get the most downloaded projects with "app/api/projects/mostDownloaded.json"
+    Then I should get following projects:
       | name          |
       | Invaders      |
       | A new world   |
@@ -61,8 +61,8 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get most downloaded programs of flavor luna
 
-    When I get the most downloaded programs with "luna/api/projects/mostDownloaded.json"
-    Then I should get following programs:
+    When I get the most downloaded projects with "luna/api/projects/mostDownloaded.json"
+    Then I should get following projects:
       | name          |
       | Simple click  |
       | Soon to be    |
@@ -75,8 +75,8 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get recent programs of flavor pocketcode
 
-    When I get the recent programs with "app/api/projects/recent.json"
-    Then I should get following programs:
+    When I get the recent projects with "app/api/projects/recent.json"
+    Then I should get following projects:
       | name          |
       | Simple click  |
       | Soon to be    |
@@ -89,25 +89,25 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get recent programs of flavor luna
 
-    When I get the recent programs with "luna/api/projects/recent.json"
-    Then I should get following programs:
+    When I get the recent projects with "luna/api/projects/recent.json"
+    Then I should get following projects:
       | name         |
       | Simple click |
       | Soon to be   |
       | Just for fun |
 
-  Scenario: Get recent programs of flavor create@school
+  Scenario: Get recent projects of flavor create@school
 
-    When I get the recent programs with "create@school/api/projects/recent.json"
-    Then I should get following programs:
+    When I get the recent projects with "create@school/api/projects/recent.json"
+    Then I should get following projects:
       | name          |
       | New adventure |
       | Amazing race  |
 
   Scenario: Get all programs of a user no matter the flavor (pocketcode)
 
-    Given I get the user's programs with "app/api/projects/userProjects.json"
-    Then I should get following programs:
+    Given I get the user's projects with "app/api/projects/userProjects.json"
+    Then I should get following projects:
       | name          |
       | Invaders      |
       | Simple click  |
@@ -120,8 +120,8 @@ Feature: Filtering programs with specific flavor
 
   Scenario: Get all programs of a user no matter the flavor (luna)
 
-    Given I get the user's programs with "luna/api/projects/userProjects.json"
-    Then I should get following programs:
+    Given I get the user's projects with "luna/api/projects/userProjects.json"
+    Then I should get following projects:
       | name          |
       | Invaders      |
       | Simple click  |

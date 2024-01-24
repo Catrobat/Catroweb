@@ -7,7 +7,7 @@ Feature: Create new studio page
       | 1  | StudioAdmin |
       | 2  | Catrobat    |
       | 3  | NewUser    |
-    And there are programs:
+    And there are projects:
       | id | name      | owned by |
       | 1  | program 1 | Catrobat |
     And there are studios:

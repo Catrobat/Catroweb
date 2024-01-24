@@ -209,13 +209,13 @@ project:
   confrimDelete: Are you sure you want to delete the translation?
   default: ค่าเริ่มต้น
   save: บันทึก
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translationTitle: '%language% การแปล'
+  editDefault: แก้ไขค่าเริ่มต้น
+  editTranslation: แก้ไข %language% การแปล
+  translations: คำแปล
+  createTranslation: สร้างการแปล
+  deletedComment: '**ลบแล้ว**'
+  replyLabel: ตอบกลับ
   repliesLabel: ตอบกลับ
 remixGraph:
   title: ผสม
@@ -252,6 +252,28 @@ accountConfirmation:
     ขอแสดงความนับถือ <br>
     ทีม Catrobat ของคุณ
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: การกู้คืนรหัสผ่าน Catrobat ของคุณ
   message: |
@@ -456,6 +478,11 @@ resetPassword:
     visitLink: "หากต้องการรีเซ็ตรหัสผ่าน โปรดไปที่ลิงก์ต่อไปนี้"
     expire: "ลิงก์นี้จะหมดอายุใน %time%"
     cheers: "ไชโย!"
+  newemail:
+    title: "รีเซ็ตรหัสผ่านของคุณ"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "รีเซ็ตรหัสผ่านของคุณ"
     button:
@@ -504,12 +531,12 @@ errors:
   unknown: ข้อผิดพลาดที่ไม่ทราบสาเหตุ
   token: 'การรับรองความถูกต้องของอุปกรณ์ล้มเหลว: ตรวจสอบอุปกรณ์ไม่ถูกต้อง'
   uploadTokenAuthFailed: 'การตรวจสอบสิทธิ์การอัปโหลดโทเค็นล้มเหลว'
-  program:
-    invalid: โครงการไม่ถูกต้อง
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'ขออภัยโครงการของคุณมีภาษา Catrobat เวอร์ชันเก่า! คุณใช้ Pocket Code เวอร์ชันล่าสุดหรือไม่?'
-  programversion:
-    tooold: 'ขออภัย คุณกำลังใช้ Pocket Code รุ่นเก่า  กรุณาปรับปรุงให้เป็นเวอร์ชันล่าสุด.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: รับรองความถูกต้องล้มเหลว
     webview: |
@@ -862,7 +889,9 @@ studio:
   singular: 'สตูดิโอ'
   create_studio: 'สร้างสตูดิโอ'
   delete_studio: 'ลบสตูดิโอ'
+  cancel_studio: 'ยกเลิก'
   studio_name: 'ชื่อสตูดิโอ'
+  studio_description: 'Studio description'
   join: 'เข้าร่วม'
   leave: 'ออกจากระบบ'
   report: 'รายงาน'
@@ -871,6 +900,7 @@ studio:
   overview:
     joined_studios: 'เข้าร่วมสตูดิโอ'
     public_studios: 'สตูดิโอสาธารณะ'
+    private_studios: 'Private studios'
   details:
     showMore: 'แสดงมากขึ้น'
     showLess: 'แสดงน้อยลง'
@@ -879,6 +909,11 @@ studio:
     remove_project_success: 'นำโครงการออกจากสตูดิโอสำเร็จแล้ว!'
     no_projects: 'สตูดิโอยังไม่มีโครงการใด ๆ'
     updateCoverError: 'เกิดข้อผิดพลาดขณะอัปเดตหน้าปกสตูดิโอ!'
+    join: 'เข้าร่วม'
+    leave: 'ออกจากระบบ'
+    report: 'รายงาน'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'โครงการ'
     comments:

@@ -13,7 +13,7 @@ Feature: Adminius example programs
       | Gregor    | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
       | Frank Jr. | 123456   | qwertyuiop | dev3@pocketcode.org | 4  |
 
-    And there are programs:
+    And there are projects:
       | id          | name      | description             | owned by  | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
       | 1337-c0ffee | program 1 | my superman description | Superman  | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
       | c0ffee-b00b | program 2 | abcef                   | Gregor    | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
@@ -26,7 +26,7 @@ Feature: Adminius example programs
       | 1  | arduino    |
       | 2  | embroidery |
 
-    And following programs are examples:
+    And following projects are examples:
       | name      | active | priority | flavor     | ios_only |
       | program 1 | 0      | 1        | arduino    | yes      |
       | program 2 | 1      | 2        | embroidery | no       |
@@ -38,7 +38,7 @@ Feature: Adminius example programs
     And I am on "/admin/example_program/list"
     And I wait for the page to be loaded
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
@@ -50,7 +50,7 @@ Feature: Adminius example programs
     And I am on "/admin/example_program/list"
     And I wait for the page to be loaded
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
@@ -60,7 +60,7 @@ Feature: Adminius example programs
     Then I click on the first ".btn-danger" button
     And I wait for the page to be loaded
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
       | 4  | program 4 (#b100d-c01d)  | arduino    | 3        |
@@ -72,7 +72,7 @@ Feature: Adminius example programs
     And I am on "/admin/example_program/list"
     And I wait for the page to be loaded
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
@@ -86,7 +86,7 @@ Feature: Adminius example programs
     And I am on "/admin/example_program/list"
     And I wait for the page to be loaded
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
@@ -97,12 +97,12 @@ Feature: Adminius example programs
     When I attach the avatar "galaxy.jpg" to "File"
     Then I write "dead-beef" in textarea with label "Program Id"
     Then I write "3" in textarea with label "Priority"
-    Then I select flavor "arduino" for example program
+    Then I select flavor "arduino" for example project
     Then I click ".btn-success"
     Then I should see "has been successfully created"
     And I am on "/admin/example_program/list"
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
@@ -114,7 +114,7 @@ Feature: Adminius example programs
     And I am on "/admin/example_program/list"
     And I wait for the page to be loaded
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |
@@ -128,7 +128,7 @@ Feature: Adminius example programs
     Then I click ".btn-success"
     And I am on "/admin/example_program/list"
     Then I should see the example table:
-      | Id | Program                  | Flavor     | Priority |
+      | Id | Project                  | Flavor     | Priority |
       | 1  | program 1 (#1337-c0ffee) | arduino    | 1        |
       | 2  | program 2 (#c0ffee-b00b) | embroidery | 1        |
       | 3  | program 3 (#c01d-cafe)   | embroidery | 2        |

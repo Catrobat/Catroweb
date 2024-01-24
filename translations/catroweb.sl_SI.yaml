@@ -191,30 +191,30 @@ project:
   closeProjectEditor: Zapri urejevalnik projekta
   closeEditorPrompt: Ali želite shraniti spremembe?
   btnDiscard: Zavrzi
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
+  addComment: Napiši komentar
+  thumbsUp: Palec gor!
+  smile: Nasmeh!
+  love: Ljubezen!
   wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  linkTitle: Povezava
+  link: Kopiraj povezavo v odložišče
   reactionsText: Odzivi
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: Pri prenosu projekta je prišlo do napake. Prosimo, poskusi znova pozneje.
+  downloadStartText: Prenos se je začel …
+  showTranslation: Pokaži prevod
+  hideTranslation: Skrij prevod
+  translatedByLine: Prevedel %provider% iz %sourceLanguage% v %targetLanguage%
+  googleTranslate: Prevajalnik Google
+  confrimDelete: Ali si prepričan/a, da želiš izbrisati ta prevod?
   default: Privzeto
   save: Shrani
-  translationTitle: '%language% translation'
-  editDefault: Edit default
+  translationTitle: '%language% prevod'
+  editDefault: Uredi privzeto
   editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
-  deletedComment: '**Deleted**'
-  replyLabel: reply
+  translations: Prevod
+  createTranslation: Ustvari prevod
+  deletedComment: '**Izbrisano**'
+  replyLabel: odgovori
   repliesLabel: odgovori
 remixGraph:
   title: Predelave
@@ -222,9 +222,9 @@ remixGraph:
   by: 'by'
   open: 'Odpri '
   showPaths: 'Show Paths'
-  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorTitle: 'Oprosti...'
   projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
+  projectNotAvailable: 'Ni na voljo'
   projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
@@ -246,6 +246,28 @@ accountConfirmation:
     Best regards,<br>
     Your Catrobat Team.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Vaše geslo za Catrobat
   message: |
@@ -450,6 +472,11 @@ resetPassword:
     visitLink: "Če želiš ponastaviti geslo, obišči naslednjo povezavo"
     expire: "Ta povezava poteče v %time%."
     cheers: "Na zdravje!"
+  newemail:
+    title: "Ponastavi svoje geslo"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Ponastavi svoje geslo"
     button:
@@ -498,11 +525,11 @@ errors:
   unknown: neznana napaka
   token: 'Preverjanje pristnosti naprave ni uspela: neveljaven auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
+  project:
     invalid: Invalid project.
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Authentication failed
@@ -857,7 +884,9 @@ studio:
   singular: 'Studijo'
   create_studio: 'UstvarI studijo'
   delete_studio: 'Izbriši studijo'
+  cancel_studio: 'Prekliči'
   studio_name: 'Ime Studija'
+  studio_description: 'Studio description'
   join: 'Pridruži se'
   leave: 'Zapusti'
   report: 'Prijavi'
@@ -866,6 +895,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'prikaži več'
     showLess: 'prikaži manj'
@@ -874,6 +904,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Pridruži se'
+    leave: 'Zapusti'
+    report: 'Prijavi'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programi'
     comments:

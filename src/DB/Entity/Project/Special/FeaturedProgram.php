@@ -4,14 +4,14 @@ namespace App\DB\Entity\Project\Special;
 
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
-use App\Project\EventListener\FeaturedProgramImageListener;
+use App\Project\EventListener\FeaturedProjectImageListener;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
 /**
  * @ORM\Entity(repositoryClass=FeaturedRepository::class)
  *
- * @ORM\EntityListeners({FeaturedProgramImageListener::class})
+ * @ORM\EntityListeners({FeaturedProjectImageListener::class})
  *
  * @ORM\Table(name="featured")
  */

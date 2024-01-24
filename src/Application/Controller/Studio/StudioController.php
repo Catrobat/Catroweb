@@ -127,6 +127,7 @@ class StudioController extends AbstractController
     $allow_comments = (bool) $request->request->get('allow_comments', false);
     $name = trim((string) $request->request->get('name', ''));
     $description = trim((string) $request->request->get('description', ''));
+    $headerImg = $request->files->get('image');
     if ('' === $name) {
       return new JsonResponse(['message' => 'arguments invalid'], Response::HTTP_BAD_REQUEST);
     }
@@ -137,6 +138,23 @@ class StudioController extends AbstractController
     }
 
     $studio = $this->studio_manager->createStudio($user, $name, $description, $is_public, $allow_comments, $is_enabled);
+
+    if (is_null($headerImg)) {
+      return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
+    }
+    $newPath = 'images/default/';
+    $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
+    $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
+    if (!file_exists($coverPath)) {
+      $fs = new Filesystem();
+      $fs->mkdir($coverPath);
+    }
+    $headerImg->move($coverPath, $coverName);
+    $pathToSave = '/'.$newPath.$coverName;
+    $studio->setCoverPath('resources'.$pathToSave);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->changeStudio($user, $studio);
 
     return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
   }

@@ -175,6 +175,21 @@ require('../styles/custom/studio.scss')
 // }
 
 document.addEventListener('DOMContentLoaded', () => {
+  const bodyContentParent = document.getElementById('main_container_content')
+  if (bodyContentParent) {
+    const pageContentContainerChild = bodyContentParent.children
+    if (pageContentContainerChild) {
+      for (let i = 0; i < pageContentContainerChild.length; i++) {
+        pageContentContainerChild[i].style.removeProperty('padding-left')
+        pageContentContainerChild[i].style.removeProperty('padding-right')
+        pageContentContainerChild[i].style.paddingTop = '1.5rem'
+        pageContentContainerChild[i].style.paddingBottom = '1.5rem'
+        pageContentContainerChild[i].style.paddingLeft = '0' // Reset left padding to 0
+        pageContentContainerChild[i].style.paddingRight = '0' // Reset right padding to 0
+      }
+    }
+  }
+
   document.querySelectorAll('.ajaxRequestJoinLeaveReport').forEach((el) => {
     el.addEventListener('click', (event) => {
       event.preventDefault()
@@ -238,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
   })
 })
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   const clickedProjectsAdminRemove = []
   let AJAXdata = ''
 
@@ -250,17 +265,25 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function handleImageClickRemove(projectId) {
       const index = clickedProjectsAdminRemove.indexOf(projectId)
+      const image = document.getElementById(projectId)
       if (index === -1) {
+        image.classList.add('red-background')
         clickedProjectsAdminRemove.push(projectId)
       } else {
+        image.classList.remove('red-background')
         clickedProjectsAdminRemove.splice(index, 1)
       }
-      AJAXdata = clickedProjectsAdminRemove.length > 0 ? JSON.stringify(clickedProjectsAdminRemove) : ''
+      AJAXdata =
+        clickedProjectsAdminRemove.length > 0
+          ? JSON.stringify(clickedProjectsAdminRemove)
+          : ''
     }
   })
-  const ajaxRequestDeleteProject = document.getElementById('ajaxRequestDeleteProject')
+  const ajaxRequestDeleteProject = document.getElementById(
+    'ajaxRequestDeleteProject',
+  )
   if (ajaxRequestDeleteProject) {
-    ajaxRequestDeleteProject.addEventListener('click', function() {
+    ajaxRequestDeleteProject.addEventListener('click', function () {
       if (AJAXdata !== '') {
         const formData = new FormData()
         formData.append('projects_remove', AJAXdata)
@@ -271,19 +294,18 @@ document.addEventListener('DOMContentLoaded', function() {
           method: 'POST',
           body: formData,
         })
-          .then(response => {
+          .then((response) => {
             if (!response.ok) {
               throw new Error('Network response was not ok')
             }
             return response.json()
           })
-          .then(data => {
+          .then((data) => {
             if (data.redirect_url) {
               window.location.href = data.redirect_url
             }
-            // Handle other responses as needed
           })
-          .catch(error => {
+          .catch((error) => {
             console.error('There was an error with the fetch operation:', error)
           })
       }

@@ -6,7 +6,7 @@ Feature: Upload a remixed program with multiple parents
       | name     | password | token      | id |
       | Catrobat | 12345    | cccccccccc | 1  |
 
-    And there are programs:
+    And there are projects:
       | id | name      | description | owned by | downloads | views | upload time      | version | remix_root |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
       | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | false      |
@@ -96,104 +96,104 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 2" and "url" set to ""
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
-    And the uploaded program should have no Catrobat ancestors except self-relation, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "" in the xml, API version 1
+    Given I have a project with "name" set to "program 2" and "url" set to ""
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
+    And the uploaded project should have no Catrobat ancestors except self-relation, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat forward descendants except self-relation
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat forward descendants except self-relation
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with parent-URLs referring to no existing Catrobat programs should unlink all former
   remix ancestors (except self referencing relation)
@@ -212,104 +212,104 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 2", "url" set to "Program 10 [/app/project/10], Program 11 [https://share.catrob.at/app/project/11]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
-    And the uploaded program should have no Catrobat ancestors except self-relation, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 10 [/app/project/10], Program 11 [https://share.catrob.at/app/project/11]" in the xml, API version 1
+    Given I have a project with "name" set to "program 2", "url" set to "Program 10 [/app/project/10], Program 11 [https://share.catrob.at/app/project/11]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
+    And the uploaded project should have no Catrobat ancestors except self-relation, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 10 [/app/project/10], Program 11 [https://share.catrob.at/app/project/11]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat forward descendants except self-relation
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat forward descendants except self-relation
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with parent-URL referring only to Scratch program should unlink all former
   Catrobat remix ancestors (except self referencing relation)
@@ -328,105 +328,105 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 2" and "url" set to "Music Inventor [https://scratch.mit.edu/projects/29495624]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
-    And the uploaded program should have no Catrobat ancestors except self-relation, API version 1
-    And the uploaded program should have a Scratch parent having id "29495624", API version 1
-    And the uploaded program should have no further Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 1
+    Given I have a project with "name" set to "program 2" and "url" set to "Music Inventor [https://scratch.mit.edu/projects/29495624]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
+    And the uploaded project should have no Catrobat ancestors except self-relation, API version 1
+    And the uploaded project should have a Scratch parent having id "29495624", API version 1
+    And the uploaded project should have no further Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat forward descendants except self-relation
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat forward descendants except self-relation
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with parent-URLs referring only to Scratch program but no valid Catrobat programs should
   unlink all former Catrobat remix ancestors (except self referencing relation)
@@ -445,105 +445,105 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 2", "url" set to "Program 10 [/app/project/10], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
-    And the uploaded program should have no Catrobat ancestors except self-relation, API version 1
-    And the uploaded program should have a Scratch parent having id "29495624", API version 1
-    And the uploaded program should have no further Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 10 [/app/project/10], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 1
+    Given I have a project with "name" set to "program 2", "url" set to "Program 10 [/app/project/10], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
+    And the uploaded project should have no Catrobat ancestors except self-relation, API version 1
+    And the uploaded project should have a Scratch parent having id "29495624", API version 1
+    And the uploaded project should have no further Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 10 [/app/project/10], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat forward descendants except self-relation
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat forward descendants except self-relation
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 4 with same parent-URLs should change remix graph
     #-------------------------------------------------------------------------------------------------------------------
@@ -564,121 +564,121 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 4", "url" set to "Program 2 [/app/project/2], Program 6 [/app/project/6]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "6", API version 1
-    And the uploaded program should have no further Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 2 [/app/project/2], Program 6 [/app/project/6]" in the xml, API version 1
+    Given I have a project with "name" set to "program 4", "url" set to "Program 2 [/app/project/2], Program 6 [/app/project/6]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "6", API version 1
+    And the uploaded project should have no further Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 2 [/app/project/2], Program 6 [/app/project/6]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 4 with parent-URLs referring only to its Catrobat forward ancestor (program 2) should
   unlink its Catrobat backward parent (program 6)
@@ -700,121 +700,121 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 4" and "url" set to "Program 2 [/app/project/2]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 2 [/app/project/2]" in the xml, API version 1
+    Given I have a project with "name" set to "program 4" and "url" set to "Program 2 [/app/project/2]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 2 [/app/project/2]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 4 with only backward parent (program 6) should only
   unlink all former Catrobat forward ancestors
@@ -837,118 +837,118 @@ Feature: Upload a remixed program with multiple parents
     #       Expected result after upload: 6 should remain being backward parent of 4 and 2.
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 4" and "url" set to "Program 6 [/app/project/6]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat backward parent having id "6", API version 1
-    And the uploaded program should have no further Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 6 [/app/project/6]" in the xml, API version 1
+    Given I have a project with "name" set to "program 4" and "url" set to "Program 6 [/app/project/6]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat backward parent having id "6", API version 1
+    And the uploaded project should have no further Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 6 [/app/project/6]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 3 with child program (program 6) as new parent should create backward relation
     #-------------------------------------------------------------------------------------------------------------------
@@ -968,115 +968,115 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: 6 should become backward parent of 3, as 6 is already a child before upload!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 3" and "url" set to "Program 6 [/app/project/6]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "3" and depth "0", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat backward parent having id "6", API version 1
-    And the uploaded program should have no further Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 6 [/app/project/6]" in the xml, API version 1
+    Given I have a project with "name" set to "program 3" and "url" set to "Program 6 [/app/project/6]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "0", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat backward parent having id "6", API version 1
+    And the uploaded project should have no further Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 6 [/app/project/6]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 3 with child program (program 6) as only parent should create backward relation and
   remove all former forward ancestors
@@ -1097,115 +1097,115 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: 7 should become backward parent of 3, as 7 is already a descendant of 3 before upload!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 3" and "url" set to "Program 7 [/app/project/7]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "3" and depth "0", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat backward parent having id "7", API version 1
-    And the uploaded program should have no further Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 7 [/app/project/7]" in the xml, API version 1
+    Given I have a project with "name" set to "program 3" and "url" set to "Program 7 [/app/project/7]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "3" and depth "0", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat backward parent having id "7", API version 1
+    And the uploaded project should have no further Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 7 [/app/project/7]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with other Scratch program and child programs (program 6 and 7)
   as additional parents should create backward relations and replace old Scratch parent with new Scratch parent
@@ -1226,123 +1226,123 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: 6 and 7 should be a backward parent of 2.
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 2", "url" set to "Program 6[https://share.catrob.at/app/project/6],Program 7[/pocketalice/project/7/], Merge 1[Program 1 [/flavors/project/1], The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "1", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat backward parent having id "7", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "6", API version 1
-    And the uploaded program should have no further Catrobat backward parents, API version 1
-    And the uploaded program should have a Scratch parent having id "70058680", API version 1
-    And the uploaded program should have no further Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 6[https://share.catrob.at/app/project/6],Program 7[/pocketalice/project/7/], Merge 1[Program 1 [/flavors/project/1], The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]]" in the xml, API version 1
+    Given I have a project with "name" set to "program 2", "url" set to "Program 6[https://share.catrob.at/app/project/6],Program 7[/pocketalice/project/7/], Merge 1[Program 1 [/flavors/project/1], The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "1", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat backward parent having id "7", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "6", API version 1
+    And the uploaded project should have no further Catrobat backward parents, API version 1
+    And the uploaded project should have a Scratch parent having id "70058680", API version 1
+    And the uploaded project should have no further Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 6[https://share.catrob.at/app/project/6],Program 7[/pocketalice/project/7/], Merge 1[Program 1 [/flavors/project/1], The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading root program 2 becomes backward child of all of its child programs
     #-------------------------------------------------------------------------------------------------------------------
@@ -1362,128 +1362,128 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: all Catrobat childs (2, 3, 4, 5, 6 and 7) become backward parent of program 1
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 1", "url" set to "program 1[/pocketalice/project/1],Merge 4 [program 7[/pocketalice/project/7], Merge3 [Program 6[/app/project/6], Merge 2[Program 5[https://share.catrob.at/app/project/5],Program 4[/pocketalice/project/4], Merge 1[Program 2 [/flavors/project/2], Program 3 [/flavors/project/3]]]]]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "0", API version 1
-    And the uploaded program should have no Catrobat forward ancestors except self-relation, API version 1
-    And the uploaded program should have a Catrobat backward parent having id "2", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "3", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "4", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "5", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "6", API version 1
-    And the uploaded program should have a Catrobat backward parent having id "7", API version 1
-    And the uploaded program should have no further Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "4", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "program 1[/pocketalice/project/1],Merge 4 [program 7[/pocketalice/project/7], Merge3 [Program 6[/app/project/6], Merge 2[Program 5[https://share.catrob.at/app/project/5],Program 4[/pocketalice/project/4], Merge 1[Program 2 [/flavors/project/2], Program 3 [/flavors/project/3]]]]]" in the xml, API version 1
+    Given I have a project with "name" set to "program 1", "url" set to "program 1[/pocketalice/project/1],Merge 4 [program 7[/pocketalice/project/7], Merge3 [Program 6[/app/project/6], Merge 2[Program 5[https://share.catrob.at/app/project/5],Program 4[/pocketalice/project/4], Merge 1[Program 2 [/flavors/project/2], Program 3 [/flavors/project/3]]]]]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0", API version 1
+    And the uploaded project should have no Catrobat forward ancestors except self-relation, API version 1
+    And the uploaded project should have a Catrobat backward parent having id "2", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "3", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "4", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "5", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "6", API version 1
+    And the uploaded project should have a Catrobat backward parent having id "7", API version 1
+    And the uploaded project should have no further Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "4", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "program 1[/pocketalice/project/1],Merge 4 [program 7[/pocketalice/project/7], Merge3 [Program 6[/app/project/6], Merge 2[Program 5[https://share.catrob.at/app/project/5],Program 4[/pocketalice/project/4], Merge 1[Program 2 [/flavors/project/2], Program 3 [/flavors/project/3]]]]]" in the xml, API version 1
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no further Catrobat forward descendants
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no further Catrobat forward descendants
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 2 with new parent (program 9) should inherit all its forward relations
     #-------------------------------------------------------------------------------------------------------------------
@@ -1506,158 +1506,158 @@ Feature: Upload a remixed program with multiple parents
     #  Expected result after upload: all Catrobat childs (2, 3, 4, 5, 6 and 7) become backward parent of program 1
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 1" and "url" set to "program 9[/pocketalice/project/9]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "9" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "8" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "6" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "4", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "program 9[/pocketalice/project/9]" in the xml, API version 1
+    Given I have a project with "name" set to "program 1" and "url" set to "program 9[/pocketalice/project/9]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "9" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "8" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "6" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "4", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "program 9[/pocketalice/project/9]" in the xml, API version 1
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have a Catrobat forward ancestor having id "9" and depth "2"
-    And the program "2" should have a Catrobat forward ancestor having id "8" and depth "3"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have a Catrobat forward ancestor having id "9" and depth "2"
+    And the project "2" should have a Catrobat forward ancestor having id "8" and depth "3"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have a Catrobat forward ancestor having id "9" and depth "3"
-    And the program "3" should have a Catrobat forward ancestor having id "8" and depth "4"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no further Catrobat forward descendants
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have a Catrobat forward ancestor having id "9" and depth "3"
+    And the project "3" should have a Catrobat forward ancestor having id "8" and depth "4"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no further Catrobat forward descendants
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have a Catrobat forward ancestor having id "9" and depth "3"
-    And the program "4" should have a Catrobat forward ancestor having id "8" and depth "4"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have a Catrobat forward ancestor having id "9" and depth "3"
+    And the project "4" should have a Catrobat forward ancestor having id "8" and depth "4"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have a Catrobat forward ancestor having id "9" and depth "4"
-    And the program "5" should have a Catrobat forward ancestor having id "8" and depth "5"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have a Catrobat forward ancestor having id "9" and depth "4"
+    And the project "5" should have a Catrobat forward ancestor having id "8" and depth "5"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should not be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have a Catrobat forward ancestor having id "4" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "6" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "6" should have a Catrobat forward ancestor having id "9" and depth "3"
-    And the program "6" should have a Catrobat forward ancestor having id "9" and depth "4"
-    And the program "6" should have a Catrobat forward ancestor having id "8" and depth "4"
-    And the program "6" should have a Catrobat forward ancestor having id "8" and depth "5"
-    And the program "6" should have no further Catrobat forward ancestors
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have a Scratch parent having id "70058680"
-    And the program "6" should have no further Scratch parents
-    And the program "6" should have no further Catrobat forward descendants
+    And the project "6" should not be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have a Catrobat forward ancestor having id "4" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "6" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "6" should have a Catrobat forward ancestor having id "9" and depth "3"
+    And the project "6" should have a Catrobat forward ancestor having id "9" and depth "4"
+    And the project "6" should have a Catrobat forward ancestor having id "8" and depth "4"
+    And the project "6" should have a Catrobat forward ancestor having id "8" and depth "5"
+    And the project "6" should have no further Catrobat forward ancestors
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have a Scratch parent having id "70058680"
+    And the project "6" should have no further Scratch parents
+    And the project "6" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "9" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "9" and depth "5"
-    And the program "7" should have a Catrobat forward ancestor having id "8" and depth "5"
-    And the program "7" should have a Catrobat forward ancestor having id "8" and depth "6"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "9" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "9" and depth "5"
+    And the project "7" should have a Catrobat forward ancestor having id "8" and depth "5"
+    And the project "7" should have a Catrobat forward ancestor having id "8" and depth "6"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have a Catrobat forward descendant having id "1" and depth "2"
-    And the program "8" should have a Catrobat forward descendant having id "2" and depth "3"
-    And the program "8" should have a Catrobat forward descendant having id "3" and depth "4"
-    And the program "8" should have a Catrobat forward descendant having id "4" and depth "4"
-    And the program "8" should have a Catrobat forward descendant having id "5" and depth "5"
-    And the program "8" should have a Catrobat forward descendant having id "6" and depth "4"
-    And the program "8" should have a Catrobat forward descendant having id "6" and depth "5"
-    And the program "8" should have a Catrobat forward descendant having id "7" and depth "5"
-    And the program "8" should have a Catrobat forward descendant having id "7" and depth "6"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have a Catrobat forward descendant having id "1" and depth "2"
+    And the project "8" should have a Catrobat forward descendant having id "2" and depth "3"
+    And the project "8" should have a Catrobat forward descendant having id "3" and depth "4"
+    And the project "8" should have a Catrobat forward descendant having id "4" and depth "4"
+    And the project "8" should have a Catrobat forward descendant having id "5" and depth "5"
+    And the project "8" should have a Catrobat forward descendant having id "6" and depth "4"
+    And the project "8" should have a Catrobat forward descendant having id "6" and depth "5"
+    And the project "8" should have a Catrobat forward descendant having id "7" and depth "5"
+    And the project "8" should have a Catrobat forward descendant having id "7" and depth "6"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have a Catrobat forward descendant having id "1" and depth "1"
-    And the program "9" should have a Catrobat forward descendant having id "2" and depth "2"
-    And the program "9" should have a Catrobat forward descendant having id "3" and depth "3"
-    And the program "9" should have a Catrobat forward descendant having id "4" and depth "3"
-    And the program "9" should have a Catrobat forward descendant having id "5" and depth "4"
-    And the program "9" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "9" should have a Catrobat forward descendant having id "6" and depth "4"
-    And the program "9" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "9" should have a Catrobat forward descendant having id "7" and depth "5"
-    And the program "9" should have no further Catrobat forward descendants
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have a Catrobat forward descendant having id "1" and depth "1"
+    And the project "9" should have a Catrobat forward descendant having id "2" and depth "2"
+    And the project "9" should have a Catrobat forward descendant having id "3" and depth "3"
+    And the project "9" should have a Catrobat forward descendant having id "4" and depth "3"
+    And the project "9" should have a Catrobat forward descendant having id "5" and depth "4"
+    And the project "9" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "9" should have a Catrobat forward descendant having id "6" and depth "4"
+    And the project "9" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "9" should have a Catrobat forward descendant having id "7" and depth "5"
+    And the project "9" should have no further Catrobat forward descendants
 
   Scenario: reuploading program 6 with one less parent (program 3) should unlink only forward relation to program 3
   but not deeper forward relations since these forward relations (1-6 and 2-6) are still needed
@@ -1679,119 +1679,119 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6", "url" set to "Merge 1[Program 4 [/app/project/4], Program 2 [/app/project/2]],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "1", API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have a Scratch parent having id "70058680", API version 1
-    And the uploaded program should have no further Scratch parents, API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Merge 1[Program 4 [/app/project/4], Program 2 [/app/project/2]],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" in the xml, API version 1
+    Given I have a project with "name" set to "program 6", "url" set to "Merge 1[Program 4 [/app/project/4], Program 2 [/app/project/2]],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have a Scratch parent having id "70058680", API version 1
+    And the uploaded project should have no further Scratch parents, API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Merge 1[Program 4 [/app/project/4], Program 2 [/app/project/2]],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 6 with one less parent (program 3) should unlink all program 3's forward relations
   since they have different depth level than the ones still needed
@@ -1813,111 +1813,111 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6", "url" set to "Program 4 [/app/project/4],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" and "catrobatLanguageVersion" set to "0.993"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "1", API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have a Scratch parent having id "70058680", API version 1
-    And the uploaded program should have no further Scratch parents, API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 4 [/app/project/4],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" in the xml, API version 1
+    Given I have a project with "name" set to "program 6", "url" set to "Program 4 [/app/project/4],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" and "catrobatLanguageVersion" set to "0.993"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have a Scratch parent having id "70058680", API version 1
+    And the uploaded project should have no further Scratch parents, API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 4 [/app/project/4],The Colour Divide - Trailer[https://scratch.mit.edu/projects/70058680]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 6 with removed Scratch parent and with one less Catrobat parent (program 3) should
   unlink Scratch parent relation and also unlink all program 3's forward relations since they have different
@@ -1940,110 +1940,110 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6" and "url" set to "Program 4 [/app/project/4]"
-    When I upload a generated program, API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "3", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "1", API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "Program 4 [/app/project/4]" in the xml, API version 1
+    Given I have a project with "name" set to "program 6" and "url" set to "Program 4 [/app/project/4]"
+    When I upload a generated project, API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "3", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "Program 4 [/app/project/4]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "6" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "6" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "6" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have a Catrobat backward parent having id "6"
-    And the program "2" should have no further Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "6" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have a Catrobat backward parent having id "6"
+    And the project "2" should have no further Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have a Catrobat backward parent having id "6"
-    And the program "4" should have no further Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have a Catrobat forward descendant having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "4" should have no further Catrobat forward descendants
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have a Catrobat backward parent having id "6"
+    And the project "4" should have no further Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have a Catrobat forward descendant having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "4" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "4" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "4" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: reuploading program 6 with no parents any more should convert former backward relation (6 -> 4)
   to a forward ancestor relation
@@ -2065,113 +2065,113 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6" and "url" set to ""
-    When I upload a generated program, API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
-    And the uploaded program should have no Catrobat forward ancestors except self-relation, API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "3" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "4" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "5" and depth "3", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward descendant having id "7" and depth "4", API version 1
-    And the uploaded program should have no further Catrobat forward descendants, API version 1
-    And the uploaded program should have RemixOf "" in the xml, API version 1
+    Given I have a project with "name" set to "program 6" and "url" set to ""
+    When I upload a generated project, API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "0", API version 1
+    And the uploaded project should have no Catrobat forward ancestors except self-relation, API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "3" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "4" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "5" and depth "3", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward descendant having id "7" and depth "4", API version 1
+    And the uploaded project should have no further Catrobat forward descendants, API version 1
+    And the uploaded project should have RemixOf "" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have no Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have no Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "6" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "6" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "4" should not be a remix root
-    And the program "4" should have a Catrobat forward ancestor having id "4" and depth "0"
-    And the program "4" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "4" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "4" should have a Catrobat forward ancestor having id "6" and depth "2"
-    And the program "4" should have no further Catrobat forward ancestors
-    And the program "4" should have no Catrobat backward parents
-    And the program "4" should have no Scratch parents
-    And the program "4" should have no Catrobat forward descendants except self-relation
+    And the project "4" should not be a remix root
+    And the project "4" should have a Catrobat forward ancestor having id "4" and depth "0"
+    And the project "4" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "4" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "4" should have a Catrobat forward ancestor having id "6" and depth "2"
+    And the project "4" should have no further Catrobat forward ancestors
+    And the project "4" should have no Catrobat backward parents
+    And the project "4" should have no Scratch parents
+    And the project "4" should have no Catrobat forward descendants except self-relation
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "6" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "6" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: multiple consecutive reuploads (example #1)
     #-------------------------------------------------------------------------------------------------------------------
@@ -2192,113 +2192,113 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6" and "url" set to ""
-    When I upload a generated program, API version 1
-    And I upload another program with name set to "program 4" and url set to "Program 2[/app/project/2]", API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "6" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have no Catrobat forward descendants except self-relation, API version 1
-    And the uploaded program should have RemixOf "Program 2[/app/project/2]" in the xml, API version 1
+    Given I have a project with "name" set to "program 6" and "url" set to ""
+    When I upload a generated project, API version 1
+    And I upload another project with name set to "program 4" and url set to "Program 2[/app/project/2]", API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "6" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have no Catrobat forward descendants except self-relation, API version 1
+    And the uploaded project should have RemixOf "Program 2[/app/project/2]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have no Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have no Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "6" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "6" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "6" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "6" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have no Catrobat forward ancestors except self-relation
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have no Scratch parents
-    And the program "6" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "6" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "6" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "6" should have no further Catrobat forward descendants
-    And the program "6" should have RemixOf "" in the xml
+    And the project "6" should be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have no Catrobat forward ancestors except self-relation
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have no Scratch parents
+    And the project "6" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "6" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "6" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "6" should have no further Catrobat forward descendants
+    And the project "6" should have RemixOf "" in the xml
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: multiple consecutive reuploads (example #2)
     #-------------------------------------------------------------------------------------------------------------------
@@ -2319,107 +2319,107 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6" and "url" set to ""
-    When I upload a generated program, API version 1
-    And I upload another program with name set to "program 4" and url set to "", API version 1
-    Then the uploaded program should be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
-    And the uploaded program should have no Catrobat forward ancestors except self-relation, API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have no Catrobat forward descendants except self-relation, API version 1
-    And the uploaded program should have RemixOf "" in the xml, API version 1
+    Given I have a project with "name" set to "program 6" and "url" set to ""
+    When I upload a generated project, API version 1
+    And I upload another project with name set to "program 4" and url set to "", API version 1
+    Then the uploaded project should be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
+    And the uploaded project should have no Catrobat forward ancestors except self-relation, API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have no Catrobat forward descendants except self-relation, API version 1
+    And the uploaded project should have RemixOf "" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have no Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have no Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have a Catrobat forward ancestor having id "6" and depth "2"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have a Catrobat forward ancestor having id "6" and depth "2"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have a Catrobat forward ancestor having id "6" and depth "3"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have a Catrobat forward ancestor having id "6" and depth "3"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have no Catrobat forward ancestors except self-relation
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have no Scratch parents
-    And the program "6" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "6" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "6" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "6" should have no further Catrobat forward descendants
-    And the program "6" should have RemixOf "" in the xml
+    And the project "6" should be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have no Catrobat forward ancestors except self-relation
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have no Scratch parents
+    And the project "6" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "6" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "6" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "6" should have no further Catrobat forward descendants
+    And the project "6" should have RemixOf "" in the xml
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "4"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "4"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation
 
   Scenario: multiple consecutive reuploads (example #3)
     #-------------------------------------------------------------------------------------------------------------------
@@ -2440,102 +2440,102 @@ Feature: Upload a remixed program with multiple parents
     #       (not drawn in this graph).
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a program with "name" set to "program 6" and "url" set to ""
-    When I upload a generated program, API version 1
-    And I upload another program with name set to "program 2", url set to "Program 1[/app/project/1],Music Inventor [https://scratch.mit.edu/projects/29495624]" and catrobatLanguageVersion set to "0.993", API version 1
-    And I upload another program with name set to "program 4" and url set to "Program 2[/app/project/2]", API version 1
-    Then the uploaded program should not be a remix root, API version 1
-    And the uploaded program should have remix migration date NOT NULL, API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
-    And the uploaded program should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
-    And the uploaded program should have no further Catrobat forward ancestors, API version 1
-    And the uploaded program should have no Catrobat backward parents, API version 1
-    And the uploaded program should have no Scratch parents, API version 1
-    And the uploaded program should have no Catrobat forward descendants except self-relation, API version 1
-    And the uploaded program should have RemixOf "Program 2[/app/project/2]" in the xml, API version 1
+    Given I have a project with "name" set to "program 6" and "url" set to ""
+    When I upload a generated project, API version 1
+    And I upload another project with name set to "program 2", url set to "Program 1[/app/project/1],Music Inventor [https://scratch.mit.edu/projects/29495624]" and catrobatLanguageVersion set to "0.993", API version 1
+    And I upload another project with name set to "program 4" and url set to "Program 2[/app/project/2]", API version 1
+    Then the uploaded project should not be a remix root, API version 1
+    And the uploaded project should have remix migration date NOT NULL, API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "4" and depth "0", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "2" and depth "1", API version 1
+    And the uploaded project should have a Catrobat forward ancestor having id "1" and depth "2", API version 1
+    And the uploaded project should have no further Catrobat forward ancestors, API version 1
+    And the uploaded project should have no Catrobat backward parents, API version 1
+    And the uploaded project should have no Scratch parents, API version 1
+    And the uploaded project should have no Catrobat forward descendants except self-relation, API version 1
+    And the uploaded project should have RemixOf "Program 2[/app/project/2]" in the xml, API version 1
 
-    And the program "1" should be a remix root
-    And the program "1" should have a Catrobat forward ancestor having id "1" and depth "0"
-    And the program "1" should have no further Catrobat forward ancestors
-    And the program "1" should have no Catrobat backward parents
-    And the program "1" should have no Scratch parents
-    And the program "1" should have a Catrobat forward descendant having id "2" and depth "1"
-    And the program "1" should have a Catrobat forward descendant having id "3" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "4" and depth "2"
-    And the program "1" should have a Catrobat forward descendant having id "5" and depth "3"
-    And the program "1" should have a Catrobat forward descendant having id "7" and depth "4"
-    And the program "1" should have no further Catrobat forward descendants
+    And the project "1" should be a remix root
+    And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
+    And the project "1" should have no further Catrobat forward ancestors
+    And the project "1" should have no Catrobat backward parents
+    And the project "1" should have no Scratch parents
+    And the project "1" should have a Catrobat forward descendant having id "2" and depth "1"
+    And the project "1" should have a Catrobat forward descendant having id "3" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "4" and depth "2"
+    And the project "1" should have a Catrobat forward descendant having id "5" and depth "3"
+    And the project "1" should have a Catrobat forward descendant having id "7" and depth "4"
+    And the project "1" should have no further Catrobat forward descendants
 
-    And the program "2" should not be a remix root
-    And the program "2" should have a Catrobat forward ancestor having id "2" and depth "0"
-    And the program "2" should have a Catrobat forward ancestor having id "1" and depth "1"
-    And the program "2" should have no further Catrobat forward ancestors
-    And the program "2" should have no Catrobat backward parents
-    And the program "2" should have a Scratch parent having id "29495624"
-    And the program "2" should have no further Scratch parents
-    And the program "2" should have a Catrobat forward descendant having id "3" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "4" and depth "1"
-    And the program "2" should have a Catrobat forward descendant having id "5" and depth "2"
-    And the program "2" should have a Catrobat forward descendant having id "7" and depth "3"
-    And the program "2" should have no further Catrobat forward descendants
-    And the program "2" should have RemixOf "Program 1[/app/project/1],Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml
+    And the project "2" should not be a remix root
+    And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
+    And the project "2" should have a Catrobat forward ancestor having id "1" and depth "1"
+    And the project "2" should have no further Catrobat forward ancestors
+    And the project "2" should have no Catrobat backward parents
+    And the project "2" should have a Scratch parent having id "29495624"
+    And the project "2" should have no further Scratch parents
+    And the project "2" should have a Catrobat forward descendant having id "3" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "4" and depth "1"
+    And the project "2" should have a Catrobat forward descendant having id "5" and depth "2"
+    And the project "2" should have a Catrobat forward descendant having id "7" and depth "3"
+    And the project "2" should have no further Catrobat forward descendants
+    And the project "2" should have RemixOf "Program 1[/app/project/1],Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml
 
-    And the program "3" should not be a remix root
-    And the program "3" should have a Catrobat forward ancestor having id "3" and depth "0"
-    And the program "3" should have a Catrobat forward ancestor having id "1" and depth "2"
-    And the program "3" should have a Catrobat forward ancestor having id "2" and depth "1"
-    And the program "3" should have no further Catrobat forward ancestors
-    And the program "3" should have no Catrobat backward parents
-    And the program "3" should have no Scratch parents
-    And the program "3" should have a Catrobat forward descendant having id "5" and depth "1"
-    And the program "3" should have a Catrobat forward descendant having id "7" and depth "2"
-    And the program "3" should have no further Catrobat forward descendants
+    And the project "3" should not be a remix root
+    And the project "3" should have a Catrobat forward ancestor having id "3" and depth "0"
+    And the project "3" should have a Catrobat forward ancestor having id "1" and depth "2"
+    And the project "3" should have a Catrobat forward ancestor having id "2" and depth "1"
+    And the project "3" should have no further Catrobat forward ancestors
+    And the project "3" should have no Catrobat backward parents
+    And the project "3" should have no Scratch parents
+    And the project "3" should have a Catrobat forward descendant having id "5" and depth "1"
+    And the project "3" should have a Catrobat forward descendant having id "7" and depth "2"
+    And the project "3" should have no further Catrobat forward descendants
 
-    And the program "5" should not be a remix root
-    And the program "5" should have a Catrobat forward ancestor having id "5" and depth "0"
-    And the program "5" should have a Catrobat forward ancestor having id "1" and depth "3"
-    And the program "5" should have a Catrobat forward ancestor having id "2" and depth "2"
-    And the program "5" should have a Catrobat forward ancestor having id "3" and depth "1"
-    And the program "5" should have no further Catrobat forward ancestors
-    And the program "5" should have no Catrobat backward parents
-    And the program "5" should have no Scratch parents
-    And the program "5" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "5" should have no further Catrobat forward descendants
+    And the project "5" should not be a remix root
+    And the project "5" should have a Catrobat forward ancestor having id "5" and depth "0"
+    And the project "5" should have a Catrobat forward ancestor having id "1" and depth "3"
+    And the project "5" should have a Catrobat forward ancestor having id "2" and depth "2"
+    And the project "5" should have a Catrobat forward ancestor having id "3" and depth "1"
+    And the project "5" should have no further Catrobat forward ancestors
+    And the project "5" should have no Catrobat backward parents
+    And the project "5" should have no Scratch parents
+    And the project "5" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "5" should have no further Catrobat forward descendants
 
-    And the program "6" should be a remix root
-    And the program "6" should have a Catrobat forward ancestor having id "6" and depth "0"
-    And the program "6" should have no Catrobat forward ancestors except self-relation
-    And the program "6" should have no Catrobat backward parents
-    And the program "6" should have no Scratch parents
-    And the program "6" should have a Catrobat forward descendant having id "7" and depth "1"
-    And the program "6" should have no further Catrobat forward descendants
-    And the program "6" should have RemixOf "" in the xml
+    And the project "6" should be a remix root
+    And the project "6" should have a Catrobat forward ancestor having id "6" and depth "0"
+    And the project "6" should have no Catrobat forward ancestors except self-relation
+    And the project "6" should have no Catrobat backward parents
+    And the project "6" should have no Scratch parents
+    And the project "6" should have a Catrobat forward descendant having id "7" and depth "1"
+    And the project "6" should have no further Catrobat forward descendants
+    And the project "6" should have RemixOf "" in the xml
 
-    And the program "7" should not be a remix root
-    And the program "7" should have a Catrobat forward ancestor having id "7" and depth "0"
-    And the program "7" should have a Catrobat forward ancestor having id "1" and depth "4"
-    And the program "7" should have a Catrobat forward ancestor having id "2" and depth "3"
-    And the program "7" should have a Catrobat forward ancestor having id "3" and depth "2"
-    And the program "7" should have a Catrobat forward ancestor having id "5" and depth "1"
-    And the program "7" should have a Catrobat forward ancestor having id "6" and depth "1"
-    And the program "7" should have no further Catrobat forward ancestors
-    And the program "7" should have no Catrobat backward parents
-    And the program "7" should have no Scratch parents
-    And the program "7" should have no Catrobat forward descendants except self-relation
+    And the project "7" should not be a remix root
+    And the project "7" should have a Catrobat forward ancestor having id "7" and depth "0"
+    And the project "7" should have a Catrobat forward ancestor having id "1" and depth "4"
+    And the project "7" should have a Catrobat forward ancestor having id "2" and depth "3"
+    And the project "7" should have a Catrobat forward ancestor having id "3" and depth "2"
+    And the project "7" should have a Catrobat forward ancestor having id "5" and depth "1"
+    And the project "7" should have a Catrobat forward ancestor having id "6" and depth "1"
+    And the project "7" should have no further Catrobat forward ancestors
+    And the project "7" should have no Catrobat backward parents
+    And the project "7" should have no Scratch parents
+    And the project "7" should have no Catrobat forward descendants except self-relation
 
-    And the program "8" should be a remix root
-    And the program "8" should have a Catrobat forward ancestor having id "8" and depth "0"
-    And the program "8" should have no Catrobat forward ancestors except self-relation
-    And the program "8" should have no Catrobat backward parents
-    And the program "8" should have no Scratch parents
-    And the program "8" should have a Catrobat forward descendant having id "9" and depth "1"
-    And the program "8" should have no further Catrobat forward descendants
+    And the project "8" should be a remix root
+    And the project "8" should have a Catrobat forward ancestor having id "8" and depth "0"
+    And the project "8" should have no Catrobat forward ancestors except self-relation
+    And the project "8" should have no Catrobat backward parents
+    And the project "8" should have no Scratch parents
+    And the project "8" should have a Catrobat forward descendant having id "9" and depth "1"
+    And the project "8" should have no further Catrobat forward descendants
 
-    And the program "9" should not be a remix root
-    And the program "9" should have a Catrobat forward ancestor having id "9" and depth "0"
-    And the program "9" should have a Catrobat forward ancestor having id "8" and depth "1"
-    And the program "9" should have no further Catrobat forward ancestors
-    And the program "9" should have no Catrobat backward parents
-    And the program "9" should have no Scratch parents
-    And the program "9" should have no Catrobat forward descendants except self-relation
+    And the project "9" should not be a remix root
+    And the project "9" should have a Catrobat forward ancestor having id "9" and depth "0"
+    And the project "9" should have a Catrobat forward ancestor having id "8" and depth "1"
+    And the project "9" should have no further Catrobat forward ancestors
+    And the project "9" should have no Catrobat backward parents
+    And the project "9" should have no Scratch parents
+    And the project "9" should have no Catrobat forward descendants except self-relation

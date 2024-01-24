@@ -3,7 +3,7 @@
 namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\CodeStatistic;
-use App\Project\CatrobatCode\Parser\ParsedSimpleProgram;
+use App\Project\CatrobatCode\Parser\ParsedSimpleProject;
 use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\Attributes\DataProvider;
@@ -12,17 +12,17 @@ use PHPUnit\Framework\TestCase;
 /**
  * @internal
  *
- * @covers \App\Project\CatrobatCode\Parser\ParsedSimpleProgram
+ * @covers \App\Project\CatrobatCode\Parser\ParsedSimpleProject
  */
 class ParsedSimpleProgramTest extends TestCase
 {
-  protected ParsedSimpleProgram $program;
+  protected ParsedSimpleProject $program;
 
   protected function setUp(): void
   {
     $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/code.xml');
     Assert::assertNotFalse($xml_properties);
-    $this->program = new ParsedSimpleProgram($xml_properties);
+    $this->program = new ParsedSimpleProject($xml_properties);
   }
 
   #[DataProvider('provideMethodNames')]

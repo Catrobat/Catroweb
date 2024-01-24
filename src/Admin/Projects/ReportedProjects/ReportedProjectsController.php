@@ -12,36 +12,36 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class ReportedProjectsController extends CRUDController
 {
-  public function unreportProgramAction(): RedirectResponse
+  public function unreportProjectAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       throw new NotFoundHttpException();
     }
-    $program = $object->getProgram();
-    $program->setVisible(true);
-    $program->setApproved(true);
+    $project = $object->getProgram();
+    $project->setVisible(true);
+    $project->setApproved(true);
     $object->setState(3);
     $this->admin->update($object);
-    $this->addFlash('sonata_flash_success', 'Program '.$object->getId().' is no longer reported');
+    $this->addFlash('sonata_flash_success', 'Project '.$object->getId().' is no longer reported');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  public function acceptProgramReportAction(): RedirectResponse
+  public function acceptProjectReportAction(): RedirectResponse
   {
     /** @var ProgramInappropriateReport|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       throw new NotFoundHttpException();
     }
-    $program = $object->getProgram();
-    $program->setVisible(false);
-    $program->setApproved(false);
+    $project = $object->getProgram();
+    $project->setVisible(false);
+    $project->setApproved(false);
     $object->setState(2);
     $this->admin->update($object);
-    $this->addFlash('sonata_flash_error', 'Program '.$object->getId().' report got accepted');
+    $this->addFlash('sonata_flash_error', 'Project '.$object->getId().' report got accepted');
 
     return new RedirectResponse($this->admin->generateUrl('list'));
   }

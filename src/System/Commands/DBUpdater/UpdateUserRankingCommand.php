@@ -27,9 +27,9 @@ class UpdateUserRankingCommand extends Command
   protected function execute(InputInterface $input, OutputInterface $output): int
   {
     $output->writeln('Recomputing ELO ranking for all users');
-
     $users = $this->userRepository->findAll();
 
+    $counter = 0;
     foreach ($users as $user) {
       $programs = $user->getPrograms();
       $programsCount = $programs->count();
@@ -43,10 +43,14 @@ class UpdateUserRankingCommand extends Command
         $elo = $downloadsCount / $programsCount;
         $user->setRankingScore(intval($elo));
         $this->entity_manager->persist($user);
+      }
+      ++$counter;
+      if (0 === $counter % 100) {
         $this->entity_manager->flush();
+        $this->entity_manager->clear();
       }
     }
-
+    $this->entity_manager->flush();
     $output->writeln('Update finished!');
 
     return 0;

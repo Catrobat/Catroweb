@@ -119,8 +119,8 @@ project:
   deleteNotFoundError: हटाया जाने वाला प्रोजेक्ट आपके उपयोगकर्ता के अंतर्गत नहीं पाया जा सका।
   private: "\nनिजी"
   public: सार्वजनिक
-  setPrivateAction: Set private
-  setPublicAction: Set public
+  setPrivateAction: "\nनिजी सेट करें"
+  setPublicAction: सार्वजनिक सेट करें
   changeVisibility: |+
     Are you sure?
     If you set '%programName%' to private, it will not be seen or found by other users.
@@ -137,7 +137,7 @@ project:
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: The project name is too long!
+  tooLongName: प्रोजेक्ट का नाम बहुत बड़ा है!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
   trending: Trending projects
@@ -170,9 +170,9 @@ project:
   reportOwnProgram: You cannot flag your own project.
   reportAlready: You've already flagged this project.
   reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeaderDownload: डाउनलोड संभव नहीं है
+  updateAppTextDownload: कृपया अपने ऐप को नवीनतम संस्करण में अपडेट करें। सावधान रहें कि सभी एंड्रॉयड सुविधाएँ पहले से ही आईओएस पर उपलब्ध नहीं हैं।
+  updateAppTextDownloadApk: एपीके डाउनलोड वर्तमान में केवल एंड्रॉइड पर उपलब्ध है, आईओएस पर नहीं।
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: ठीक है
@@ -187,8 +187,8 @@ project:
   deleted_popup: The comment was successfully deleted.
   deleted_popup_header: Deleted
   noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  editProject: प्रोजेक्ट संपादित करें
+  closeProjectEditor: "\nप्रोजेक्ट एडिटर बंद करें"
   closeEditorPrompt: क्या आप अपने परिवर्तनों को सहेजना चाहते हैं?
   btnDiscard: रद्द करें
   addComment: Write a comment
@@ -204,17 +204,17 @@ project:
   showTranslation: Show translation
   hideTranslation: Hide translation
   translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  googleTranslate: गूगल ट्रांसलेट
+  confrimDelete: क्या आप वाकई अनुवाद हटाना चाहते हैं?
   default: पूर्व निर्धारित
   save: सहेजें
-  translationTitle: '%language% translation'
-  editDefault: Edit default
-  editTranslation: Edit %language% translation
-  translations: Translations
-  createTranslation: Create translation
+  translationTitle: '%language% अनुवाद'
+  editDefault: "\nडिफ़ॉल्ट संपादित करें"
+  editTranslation: '%language% अनुवाद संपादित करें '
+  translations: "\nअनुवाद"
+  createTranslation: "\nअनुवाद करें"
   deletedComment: '**Deleted**'
-  replyLabel: reply
+  replyLabel: "\nजवाब"
   repliesLabel: जवाब
 remixGraph:
   title: रीमिक्स
@@ -247,6 +247,28 @@ accountConfirmation:
     सादर, <br>
     आपकी कैटोबैट टीम।
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: आपका Catrobat पारण शब्द वसूली
   message: |
@@ -451,6 +473,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -499,12 +526,12 @@ errors:
   unknown: अज्ञात गल्ती
   token: 'उपकरण का प्रमाणीकरण विफल हुआ: अमान्य स्थिति-टोकन!'
   uploadTokenAuthFailed: 'टोकन को अपलोड करें विफल।'
-  program:
-    invalid: अमान्य प्रोजेक्ट।
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'क्षमा करें, आपकी परियोजना में कैटरोबैट भाषा का एक पुराना संस्करण है! क्या आप पॉकेट कोड के नवीनतम संस्करण का उपयोग कर रहे हैं?'
-  programversion:
-    tooold: 'क्षमा करें, आप पॉकेट कोड के पुराने संस्करण का उपयोग कर रहे हैं। कृपया नवीनतम संस्करण में अपडेट करें।'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: प्रमाणिकरण ‌असफल
     webview: |
@@ -858,7 +885,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'रद्द करें'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'विवरण'
@@ -867,6 +896,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'और दिखाओ'
     showLess: 'कम दिखाएं'
@@ -875,6 +905,11 @@ studio:
     remove_project_success: 'स्टूडियो से प्रोजेक्ट सफलतापूर्वक निकाला गया!'
     no_projects: 'स्टूडियो में अभी तक कोई प्रोजेक्ट नहीं है'
     updateCoverError: 'स्टूडियो कवर को अपडेट करते समय कुछ गलत हुआ!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'विवरण'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'प्रोजेक्ट'
     comments:

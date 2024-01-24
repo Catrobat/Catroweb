@@ -320,23 +320,23 @@ Feature:
     And I am on "/app/user"
     And I wait for the page to be loaded
     And there are comments:
-      | id | program_id | user_id | text |
+      | id | project_id | user_id | text |
       | 1  | 1          | 1       | c1   |
       | 2  | 2          | 2       | c2   |
       | 3  | 3          | 1       | c1   |
     And there are catro notifications:
-      | user     | title | message | type           | commentID | like_from | follower_id | program_id | parent_program | child_program |
+      | user     | title | message | type           | commentID | like_from | follower_id | project_id | parent_project | child_project |
       | Catrobat |       |         | comment        | 2         |           |             |            |                |               |
       | Catrobat |       |         | like           |           | 2         |             | 2          |                |               |
       | Catrobat |       |         | follower       |           |           | 2           |            |                |               |
       | Catrobat | title | msg     | default        |           |           |             |            |                |               |
-      | Catrobat |       |         | follow_program |           |           |             | 2          |                |               |
+      | Catrobat |       |         | follow_project |           |           |             | 2          |                |               |
       | Catrobat |       |         | remix          |           |           |             |            | 1              | 3             |
       | User1    |       |         | comment        | 1         |           |             |            |                |               |
       | User1    |       |         | like           |           | 1         |             | 2          |                |               |
       | User1    |       |         | follower       |           |           | 1           |            |                |               |
       | User1    | title | msg     | default        |           |           |             |            |                |               |
-      | User1    |       |         | follow_program |           |           |             | 2          |                |               |
+      | User1    |       |         | follow_project |           |           |             | 2          |                |               |
       | User1    |       |         | remix          |           |           |             |            | 3              | 2             |
       | Catrobat | title | msg     | broadcast      |           |           |             |            |                |               |
       | User1    | title | msg     | broadcast      |           |           |             |            |                |               |

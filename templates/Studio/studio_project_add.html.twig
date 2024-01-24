@@ -13,39 +13,48 @@
                     <span class="mdc-top-app-bar__title">{{ 'studio.details.admin_settings.title'|trans({}, 'catroweb') }}</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    <button id="studio-settings__submit-button" class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
+                    <button id="studio-settings__submit-button_projects" class="material-icons mdc-top-app-bar__action-item mdc-icon-button"
                             type="submit" form="studio-settings_projects">
                         done
                     </button>
                 </section>
             </div>
 
-            <form id="studio-settings_projects" class="container-fluid justify-content-center" action="{{ path('update_studio_projects') }}" method="post">
+            <form id="studio-settings_projects" class="container-fluid justify-content-center page-content container" style="margin-top: 0px;" action="{{ path('update_studio_projects') }}" method="post">
                 <input type="hidden" name="studio_id" value="{{ studio.id }}">
-                <div class="studio-projects-container project-list vertical">
+                <h3 class="mt-3 mb-4">Your Projects</h3>
+                <div class="studio-projects-container project-list horizontal">
                     <div class="project-list__wrapper">
                         <div class="projects-container">
-                            <h3 class="mt-3">Your Projects</h3>
                             {% for project in user_projects %}
                                 {% if not project.isStudioProject %}
-                                    <div id="project-{{ project.id }}" class="project-list__project  studio-project-list-admin">
-                                        <img class="project-list__project__image addStudioProjects"
+                                    <div id="project-{{ project.id }}"  data-bs-toggle="tooltip" class="project-list__project  studio-project-list-admin">
+                                        <img class="ml-1 project-list__project__image addStudioProjects"
                                              src="{{ asset(project.thumbnail|default("")) }}"
                                              alt="{{ project.name }}"
+                                             title="{{ 'studio.details.add_project'|trans({}, 'catroweb') }}"
                                              id="{{ project.id }}">
                                         <span class="project-list__project__name">{{ project.name }}</span>
                                     </div>
                                 {% endif %}
                             {% endfor %}
-                            <h3 class="mt-3">Already Studio Projects</h3>
+                        </div>
+                    </div>
+                </div>
+                <h3 class="mt-3 mb-4">Already Studio Projects</h3>
+                <div class="studio-projects-container project-list horizontal">
+                    <div class="project-list__wrapper">
+                        <div class="projects-container">
+
                             {% for project in user_projects %}
                                 {% if project.isStudioProject %}
-                                    <div id="project-{{ project.id }}" class="project-list__project  studio-project-list-admin">
-                                        <img class="project-list__project__image removeStudioProjects"
+                                    <div id="project-{{ project.id }}" data-bs-toggle="tooltip" class="project-list__project  studio-project-list-admin">
+                                        <img class="ml-1 project-list__project__image removeStudioProjects"
                                              src="{{ asset(project.thumbnail|default("")) }}"
                                              alt="{{ project.name }}"
                                              id="{{ project.id }}"
-                                           >
+                                             title="{{ 'studio.details.remove_project'|trans({}, 'catroweb') }}"
+                                        >
                                         <span class="project-list__project__name">{{ project.name }}</span>
                                     </div>
                                 {% endif %}
@@ -62,6 +71,12 @@
         </div>
     </div>
 </div>
+<style>
+
+</style>
 {% block javascript %}
 {{ encore_entry_script_tags('studio_add_new_project') }}
 {% endblock %}
+
+
+

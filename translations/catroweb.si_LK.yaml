@@ -155,11 +155,11 @@ project:
     all: "සියල්ල"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted projects
-  uploaded: Uploaded projects
+  submitted: ඉදිරිපත් කළ ව්‍යාපෘති
+  uploaded: උඩුගත කළ ව්‍යාපෘති
   reportAsInappropriate: Report as inappropriate
   reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
+  languageVersion: 'කැට්‍රොබැට් භාෂා අනුවාදය: %languageVersion%'
   reportLoginText: Please %login% to report this project.
   reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Enter a reason
@@ -173,7 +173,7 @@ project:
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
+  updateAppHeader: යෙදුම යාවත්කාල කරන්න
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
   checkout_this_project: Checkout this Catrobat project
@@ -225,7 +225,7 @@ remixGraph:
   projectNotAvailableErrorTitle: 'Sorry...'
   projectNotAvailableErrorDescription: 'The project is not available any more!'
   projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  projectUnknownUser: 'නොදන්නා පරිශීලකයෙකි'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -246,6 +246,28 @@ accountConfirmation:
     Best regards,<br>
     Your Catrobat Team.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -450,6 +472,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -498,11 +525,11 @@ errors:
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
+  project:
     invalid: Invalid project.
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Authentication failed
@@ -857,7 +884,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'අවලංගු කරන්න'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Report'
@@ -866,6 +895,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -874,6 +904,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Report'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projects'
     comments:
