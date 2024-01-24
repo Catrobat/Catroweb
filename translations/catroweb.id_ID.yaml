@@ -526,12 +526,12 @@ errors:
   unknown: kesalahan tidak dikenal
   token: 'Otentikasi perangkat gagal: auth-token tidak valid!'
   uploadTokenAuthFailed: 'Otorisasi upload Token gagal.'
-  program:
-    invalid: Proyek tidak valid.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Maaf, proyek Anda berisi bahasa Catrobat versi lama! Apakah Anda menggunakan Pocket Code versi terbaru?'
-  programversion:
-    tooold: 'Maaf, Anda menggunakan Pocket Code versi lama. Harap perbarui ke versi terbaru.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Otentikasi gagal
     webview: |

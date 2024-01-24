@@ -526,12 +526,12 @@ errors:
   unknown: خطأ غير معروف
   token: 'لقد فشل التحقق من الجهاز : رمز مميز غير صالح!'
   uploadTokenAuthFailed: 'فشل تحميل مصادقة الرمز المميز.'
-  program:
-    invalid: مشروع غير صالح.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'عذراً، يحتوي مشروعك على نسخة قديمة من لغة كاتروبات! هل تستخدم أحدث إصدار من بوكت كوود؟'
-  programversion:
-    tooold: 'عذراً، أنت تستخدم نسخة قديمة من بوكت كوود. الرجاء التحديث إلى أحدث إصدار.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: فشلت المصادقة
     webview: |

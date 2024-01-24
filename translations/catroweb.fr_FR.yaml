@@ -526,12 +526,12 @@ errors:
   unknown: erreur inconnue
   token: 'Échec de l''authentification de l''appareil : jeton d''authentification invalide !'
   uploadTokenAuthFailed: 'Échec de l''authentification du jeton de téléchargement.'
-  program:
-    invalid: Projet invalide.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Désolé, votre projet contient une ancienne version de la langue Catrobat ! Utilisez-vous la dernière version de Pocket Code ?'
-  programversion:
-    tooold: 'Désolé, vous utilisez une ancienne version de Pocket Code. Veuillez mettre à jour vers la dernière version.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Echec de l'authentification
     webview: |

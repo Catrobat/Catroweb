@@ -531,12 +531,12 @@ errors:
   unknown: ข้อผิดพลาดที่ไม่ทราบสาเหตุ
   token: 'การรับรองความถูกต้องของอุปกรณ์ล้มเหลว: ตรวจสอบอุปกรณ์ไม่ถูกต้อง'
   uploadTokenAuthFailed: 'การตรวจสอบสิทธิ์การอัปโหลดโทเค็นล้มเหลว'
-  program:
-    invalid: โครงการไม่ถูกต้อง
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'ขออภัยโครงการของคุณมีภาษา Catrobat เวอร์ชันเก่า! คุณใช้ Pocket Code เวอร์ชันล่าสุดหรือไม่?'
-  programversion:
-    tooold: 'ขออภัย คุณกำลังใช้ Pocket Code รุ่นเก่า  กรุณาปรับปรุงให้เป็นเวอร์ชันล่าสุด.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: รับรองความถูกต้องล้มเหลว
     webview: |

@@ -530,12 +530,12 @@ errors:
   unknown: nepoznata greška
   token: 'Provjera autentičnosti uređaja nije uspela: neispravan auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
-    invalid: Neispravan projekat.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Izvinite, vaš projekat sadrži staru verziju Catrobat jezika! Koristite li najnoviju verziju Pocket Code?'
-  programversion:
-    tooold: 'Žao nam je, koristite staru verziju Pocket Code-a. Ažurirajte na najnoviju verziju.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Autentifikacija nije uspela
     webview: |

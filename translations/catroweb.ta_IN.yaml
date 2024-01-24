@@ -530,12 +530,12 @@ errors:
   unknown: அறியப்படாத பிழை
   token: 'சாதனத்தின் அங்கீகாரம் தோல்வியுற்றது: தவறான அங்கீகார டோக்கன்!'
   uploadTokenAuthFailed: 'டோக்கன் பதிவேற்ற அங்கீகாரம் தோல்வியுற்றது.'
-  program:
-    invalid: தவறான திட்டம்.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'மன்னிக்கவும், உங்கள் திட்டத்தில் கேட்ரோபாட் மொழியின் பழைய பதிப்பு உள்ளது! பாக்கெட் குறியீட்டின் சமீபத்திய பதிப்பைப் பயன்படுத்துகிறீர்களா?'
-  programversion:
-    tooold: 'மன்னிக்கவும், நீங்கள் பாக்கெட் குறியீட்டின் பழைய பதிப்பைப் பயன்படுத்துகிறீர்கள். சமீபத்திய பதிப்பிற்கு புதுப்பிக்கவும்.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: அங்கீகரிப்பு தோல்வியுற்றது
     webview: |

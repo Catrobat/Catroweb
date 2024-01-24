@@ -532,12 +532,12 @@ errors:
   unknown: অজানা ভুল
   token: 'ডিভাইসের প্রমাণীকরণ ব্যর্থ হয়েছে: অবৈধ প্রমাণীকরণ-টোকেন!'
   uploadTokenAuthFailed: 'প্রমাণীকরণ টোকেন আপলোড ব্যর্থ হয়েছে।'
-  program:
-    invalid: অবৈধ প্রকল্প।
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'দুঃখিত, আপনার প্রকল্পে ক্যাটরোব্যাট ভাষার একটি পুরানো সংস্করণ রয়েছে! আপনি কি পকেট কোডের সর্বশেষতম সংস্করণটি ব্যবহার করছেন?'
-  programversion:
-    tooold: 'দুঃখিত, আপনি পকেট কোডের একটি পুরানো সংস্করণ ব্যবহার করছেন। দয়া করে সর্বশেষ সংস্করণে আপডেট করুন।'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: প্রমাণ করতে ব্যর্থ
     webview: |

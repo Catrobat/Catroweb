@@ -526,12 +526,12 @@ errors:
   unknown: error desconocido
   token: 'La autenticación del dispositivo ha fallado: auth-token es inválido!'
   uploadTokenAuthFailed: 'Error al cargar la autenticación del token'
-  program:
-    invalid: Proyecto inválido.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '¡Lo sentimos, tu proyecto contiene una versión antigua del lenguaje Catrobat! ¿Estás usando la última versión de Pocket Code?'
-  programversion:
-    tooold: 'Lo sentimos, estás usando una versión antigua de Pocket Code. Por favor, actualiza a la última versión.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Autentificación fallida
     webview: |

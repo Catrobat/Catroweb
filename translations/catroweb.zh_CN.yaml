@@ -531,12 +531,12 @@ errors:
   unknown: 未知错误
   token: '设备验证失败： 无效的验证标记！'
   uploadTokenAuthFailed: '上传令牌认证失败。'
-  program:
-    invalid: 无效的项目。
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '对不起，您的项目包含旧版本的 Catrobat 语言！您是否使用最新版本的口袋编程？'
-  programversion:
-    tooold: '抱歉，您正在使用旧版本的口袋编程。请更新到最新版本。'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 身份验证失败
     webview: |

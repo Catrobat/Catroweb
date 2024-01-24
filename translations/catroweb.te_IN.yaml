@@ -529,12 +529,12 @@ errors:
   unknown: గుర్తించలేని పొరపాటు
   token: 'పరికరం యొక్క ప్రామాణీకరణ విఫలమైంది: చెల్లని ఆత్-టోకెన్!'
   uploadTokenAuthFailed: 'అప్‌లోడ్ టోకెన్ ఆత్ విఫలమైంది.'
-  program:
-    invalid: చెల్లని ప్రాజెక్ట్.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'క్షమించండి, మీ ప్రాజెక్ట్ క్యాట్రోబాట్ భాష యొక్క పాత వెర్షన్‌ను కలిగి ఉంది! మీరు పాకెట్ కోడ్ యొక్క తాజా వెర్షన్‌ను ఉపయోగిస్తున్నారా?'
-  programversion:
-    tooold: 'క్షమించండి, మీరు పాకెట్ కోడ్ యొక్క పాత వెర్షన్‌ని ఉపయోగిస్తున్నారు. దయచేసి తాజా వెర్షన్‌కి అప్‌డేట్ చేయండి.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: ప్రామాణీకరణ విఫలమైంది
     webview: |

@@ -530,12 +530,12 @@ errors:
   unknown: خطای نامشخص
   token: 'تأیید اعتبار دستگاه انجام نشد: نشانه معتبر نیست!'
   uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
-  program:
-    invalid: پروژه نامعتبر
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'با عرض پوزش، پروژه شما شامل یک نسخه قدیمی از زبان Catrobat است! آیا شما از آخرین نسخه کد جیبی استفاده می کنید؟'
-  programversion:
-    tooold: 'با عرض پوزش، شما از یک نسخه قدیمی کد جیبی استفاده می کنید. لطفا به آخرین نسخه بروزرسانی کنید'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: تایید هویت موفق نبود
     webview: |

@@ -526,12 +526,12 @@ errors:
   unknown: अज्ञात गल्ती
   token: 'उपकरण का प्रमाणीकरण विफल हुआ: अमान्य स्थिति-टोकन!'
   uploadTokenAuthFailed: 'टोकन को अपलोड करें विफल।'
-  program:
-    invalid: अमान्य प्रोजेक्ट।
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'क्षमा करें, आपकी परियोजना में कैटरोबैट भाषा का एक पुराना संस्करण है! क्या आप पॉकेट कोड के नवीनतम संस्करण का उपयोग कर रहे हैं?'
-  programversion:
-    tooold: 'क्षमा करें, आप पॉकेट कोड के पुराने संस्करण का उपयोग कर रहे हैं। कृपया नवीनतम संस्करण में अपडेट करें।'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: प्रमाणिकरण ‌असफल
     webview: |

@@ -526,11 +526,11 @@ errors:
   unknown: nieznany błąd
   token: 'Uwierzytelnienie urządzenia nie powiodło się: nieprawidłowy token uwierzytelniania!'
   uploadTokenAuthFailed: 'Autoryzacja tokena wysyłania nie powiodła się.'
-  program:
+  project:
     invalid: Nieprawidłowy projekt.
   languageversion:
     tooold: 'Przepraszamy, Twój projekt zawiera starą wersję języka Catrobat! Czy używasz najnowszej wersji Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Przepraszamy, używasz starej wersji Pocket Code. Zaktualizuj do najnowszej wersji.'
   authentication:
     title: Uwierzytelnianie nie powiodło się

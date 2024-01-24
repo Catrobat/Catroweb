@@ -526,12 +526,12 @@ errors:
   unknown: خطای ناشناخته
   token: 'احراز هویت دستگاه شکست خورد: نامعتبر auth-token!'
   uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
-  program:
-    invalid: پروژه نامعتبر
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'با عرض معزرت، پروژه شما شامل یک نسخه قدیمی از زبان کارتروبات Catrobat است! آیا شما از آخرین نسخه کد جیبی استفاده می کنید؟'
-  programversion:
-    tooold: 'با عرض معزرت، شما از یک نسخه قدیمی کد جیبی استفاده می کنید. لطفا به آخرین نسخه بروزرسانی کنید'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: احراز هویت شکست خورد
     webview: |
