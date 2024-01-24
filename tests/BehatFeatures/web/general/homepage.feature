@@ -112,14 +112,14 @@ Feature: Pocketcode homepage
     And I wait for the page to be loaded
     And the element "#welcome-section" should not exist
 
-  Scenario: Featured Programs and Urls
+  Scenario: Featured Projects and Urls
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
     And I should see the slider with the values "http://www.google.at/,project 2,project 3"
 
   @disabled
-  Scenario: Example Programs
+  Scenario: Example Projects
     Given I am on homepage
     And I wait for the page to be loaded
     Then the element "#home-projects__example" should exist

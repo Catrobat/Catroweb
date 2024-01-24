@@ -2,7 +2,7 @@
 
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixData;
@@ -30,17 +30,17 @@ class ExtractedCatrobatFileTest extends TestCase
     $this->assertInstanceOf(ExtractedCatrobatFile::class, $this->extracted_catrobat_file);
   }
 
-  public function testGetsTheProgramNameFromXml(): void
+  public function testGetsTheProjectNameFromXml(): void
   {
     $this->assertSame('test', $this->extracted_catrobat_file->getName());
   }
 
-  public function testGetsTheProgramDescriptionFromXml(): void
+  public function testGetsTheProjectDescriptionFromXml(): void
   {
     $this->assertSame('', $this->extracted_catrobat_file->getDescription());
   }
 
-  public function testGetsTheProgramCreditsFromXml(): void
+  public function testGetsTheProjectCreditsFromXml(): void
   {
     $this->assertSame('', $this->extracted_catrobat_file->getNotesAndCredits());
   }
@@ -50,7 +50,7 @@ class ExtractedCatrobatFileTest extends TestCase
    *
    * @psalm-suppress InvalidPropertyFetch
    */
-  public function testSetsTheProgramName(): void
+  public function testSetsTheProjectName(): void
   {
     $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
     $filesystem = new Filesystem();
@@ -72,7 +72,7 @@ class ExtractedCatrobatFileTest extends TestCase
    *
    * @psalm-suppress InvalidPropertyFetch
    */
-  public function testSetsTheProgramDescription(): void
+  public function testSetsTheProjectDescription(): void
   {
     $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
     $filesystem = new Filesystem();
@@ -94,7 +94,7 @@ class ExtractedCatrobatFileTest extends TestCase
    *
    * @psalm-suppress InvalidPropertyFetch
    */
-  public function testSetsTheProgramCredits(): void
+  public function testSetsTheProjectCredits(): void
   {
     $target_dir = BootstrapExtension::$CACHE_DIR.'base/';
     $filesystem = new Filesystem();
@@ -129,16 +129,16 @@ class ExtractedCatrobatFileTest extends TestCase
 
   public function testGetsRelativeAndAbsoluteRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/app/project/3570';
-    $new_program_id = '3571';
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $new_project_id = '3571';
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $expectedCount = 2;
-    $expectedProgramIds = ['117697631', '3570'];
+    $expectedProjectIds = ['117697631', '3570'];
     $expectedUrls = [$first_expected_url, $second_expected_url];
-    $this->assertions($expectedCount, $urls, $expectedUrls, $expectedProgramIds, [true, false], [true, false]);
+    $this->assertions($expectedCount, $urls, $expectedUrls, $expectedProjectIds, [true, false], [true, false]);
 
     /*
      $this->assertCount(2, $urls);
@@ -161,11 +161,11 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractSimpleCatrobatAbsoluteRemixUrl(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://pocketcode.org/details/1234/';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = '1300';
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $new_project_id = '1300';
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$first_expected_url], ['1234'], [false], [true]);
   }
@@ -175,11 +175,11 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testNotExtractNumberFromNormalText(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'SomeText 123';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = '124';
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $new_project_id = '124';
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
     $this->assertCount(0, $urls);
   }
 
@@ -188,11 +188,11 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractSimpleScratchAbsoluteRemixUrl(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = '1';
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $new_project_id = '1';
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$first_expected_url], ['117697631'], [true], [true]);
   }
@@ -202,11 +202,11 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractSimpleRelativeCatrobatRemixUrl(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = '/app/flavors/3570/';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $first_expected_url;
-    $new_program_id = '6310';
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $new_project_id = '6310';
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$first_expected_url], ['3570'], [false], [false]);
   }
@@ -214,16 +214,16 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testCanExtractMergedProgramRemixUrls(): void
+  public function testCanExtractMergedProjectRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     /* @psalm-suppress UndefinedPropertyAssignment */
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url], ['1234', '3570'], [false, false], [true, true]);
   }
@@ -231,15 +231,15 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testExtractUniqueProgramRemixUrls(): void
+  public function testExtractUniqueProjectRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/1234/';
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$first_expected_url, $second_expected_url], ['1234'], [false], [true]);
   }
@@ -247,15 +247,15 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testDontExtractProgramRemixUrlsReferencingToCurrentProgram(): void
+  public function testDontExtractProjectRemixUrlsReferencingToCurrentProject(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
-    $new_program_id = '1234';
+    $new_project_id = '1234';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
   }
@@ -263,15 +263,15 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testExtractOnlyOlderProgramRemixUrls(): void
+  public function testExtractOnlyOlderProjectRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/790/';
-    $new_program_id = '791';
+    $new_project_id = '791';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url.'], The Periodic Table 2 ['.$second_expected_url.']]';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$second_expected_url], ['790'], [false], [true]);
   }
@@ -279,18 +279,18 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testCanExtractDoubleMergedProgramRemixUrls(): void
+  public function testCanExtractDoubleMergedProjectRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/3570/';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url
         .'], いやいや棒 [ 01 やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$second_expected_url
         .'], The Periodic Table 2 ['.$third_expected_url.']]';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(3, $urls, [$first_expected_url, $second_expected_url, $third_expected_url],
       ['1234', '3570', '121648946'], [false, false, true], [true, true, true]);
@@ -299,18 +299,18 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testExtractUniqueProgramRemixUrlsOfDoubleMergedProgram(): void
+  public function testExtractUniqueProjectRemixUrlsOfDoubleMergedProject(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'https://scratch.mit.edu/projects/121648946/';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url
         .'], いやいや棒 [ 01 やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$second_expected_url
         .'], The Periodic Table 2 ['.$third_expected_url.']]';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url],
       ['1234', '121648946'], [false, true], [true, true]);
@@ -319,18 +319,18 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testDontExtractProgramRemixUrlsReferencingToCurrentDoubleMergedProgram(): void
+  public function testDontExtractProjectRemixUrlsReferencingToCurrentDoubleMergedProject(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://share2.catrob.at/details/1234';
     $second_expected_url = 'http://pocketcode.org/details/7901';
     $third_expected_url = 'http://pocketcode.org/details/1234/';
-    $new_program_id = '7901';
+    $new_project_id = '7901';
     $remixes_string = 'スーパー時計 12 ['.$first_expected_url
         .'], いやいや棒 [ 01 やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$second_expected_url
         .'], The Periodic Table 2 ['.$third_expected_url.']]';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$first_expected_url],
       ['1234'], [false], [true]);
@@ -341,17 +341,17 @@ class ExtractedCatrobatFileTest extends TestCase
    */
   public function testCanExtractMultipleMergedRemixUrls(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/3570';
     $third_expected_url = 'https://scratch.mit.edu/projects/121648946/';
     $fourth_expected_url = 'https://share.catrob.at/app/project/16267';
-    $new_program_id = '16268';
+    $new_project_id = '16268';
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$first_expected_url
         .'], The 12 Periodic Table 234 ['.$second_expected_url.']], スーパー時計 ['.$third_expected_url
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(4, $urls, [$first_expected_url, $second_expected_url, $third_expected_url, $fourth_expected_url],
       ['117697631', '3570', '121648946', '16267'], [true, false, true, false], [true, false, true, true]);
@@ -360,19 +360,19 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testExtractUniqueProgramRemixUrlsOfMultipleMergedProgram(): void
+  public function testExtractUniqueProjectRemixUrlsOfMultipleMergedProject(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;
     $fourth_expected_url = 'https://share.catrob.at/app/project/16267';
-    $new_program_id = '16268';
+    $new_project_id = '16268';
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$first_expected_url
         .'], The 12 Periodic Table 234 ['.$second_expected_url.']], スーパー時計 ['.$third_expected_url
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(2, $urls, [$first_expected_url, $second_expected_url],
       ['117697631', '16267'], [true, false], [true, false]);
@@ -381,19 +381,19 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testExtractOnlyOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsAnInitialVersion(): void
+  public function testExtractOnlyOlderProjectRemixUrlsOfMultipleMergedProjectIfItIsAnInitialVersion(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16268';
     $third_expected_url = $first_expected_url;
     $fourth_expected_url = 'https://share.catrob.at/app/project/16268';
-    $new_program_id = '16267';
+    $new_project_id = '16267';
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$first_expected_url
         .'], The 12 Periodic Table 234 ['.$second_expected_url.']], スーパー時計 ['.$third_expected_url
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, true, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, true, $project_repository);
 
     $this->assertions(1, $urls, [$first_expected_url],
       ['117697631'], [true], [true]);
@@ -402,19 +402,19 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testExtractOlderProgramRemixUrlsOfMultipleMergedProgramIfItIsNotAnInitialVersion(): void
+  public function testExtractOlderProjectRemixUrlsOfMultipleMergedProjectIfItIsNotAnInitialVersion(): void
   {
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $first_expected_url = 'https://scratch.mit.edu/projects/117697631/';
     $second_expected_url = '/pocketalice/project/16267';
     $third_expected_url = $first_expected_url;
     $fourth_expected_url = 'https://share.catrob.at/app/project/16268';
-    $new_program_id = '16267';
+    $new_project_id = '16267';
     $remixes_string = 'いやいや棒 12 [いやいや棒 9010~(89) [やねうら部屋(びっくりハウス) remix お化け屋敷 ['.$first_expected_url
         .'], The 12 Periodic Table 234 ['.$second_expected_url.']], スーパー時計 ['.$third_expected_url
         .']], NYAN CAT RUNNER (BETA) ['.$fourth_expected_url.']';
     $this->extracted_catrobat_file->getProjectXmlProperties()->header->url = $remixes_string;
-    $urls = $this->extracted_catrobat_file->getRemixesData($new_program_id, false, $program_repository);
+    $urls = $this->extracted_catrobat_file->getRemixesData($new_project_id, false, $project_repository);
 
     $this->assertions(2, $urls, [$first_expected_url, $fourth_expected_url],
       ['117697631', '16268'], [true, false], [true, true]);
@@ -513,14 +513,14 @@ class ExtractedCatrobatFileTest extends TestCase
   /**
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  private function assertions(int $expectedCount, array $urls, array $expectedURLs, array $expectedProgramIds, array $scratch, array $absolutePaths): void
+  private function assertions(int $expectedCount, array $urls, array $expectedURLs, array $expectedProjectIds, array $scratch, array $absolutePaths): void
   {
     $this->assertCount($expectedCount, $urls);
 
     for ($i = 0; $i < $expectedCount; ++$i) {
       $this->assertInstanceOf(RemixData::class, $urls[$i]);
       $this->assertSame($expectedURLs[$i], $urls[$i]->getUrl());
-      $this->assertSame($expectedProgramIds[$i], $urls[$i]->getProjectId());
+      $this->assertSame($expectedProjectIds[$i], $urls[$i]->getProjectId());
       if ($scratch[$i]) {
         $this->assertTrue($urls[$i]->isScratchProject());
       } else {

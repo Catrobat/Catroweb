@@ -5,7 +5,7 @@ namespace App\Application\Controller\User;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
@@ -51,22 +51,22 @@ class NotificationsController extends AbstractController
           $all_notifications[$notification->getId()] = $notification;
           $reaction_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'reaction';
-          $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
+          $redirect_array[$notification->getId()] = $notification->getProject()->getId();
         }
       } elseif ($notification instanceof CommentNotification) {
         if ($notification->getComment()->getUser() != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $comment_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'comment';
-          $redirect_array[$notification->getId()] = $notification->getComment()->getProgram()->getId();
+          $redirect_array[$notification->getId()] = $notification->getComment()->getProject()->getId();
         }
-      } elseif ($notification instanceof NewProgramNotification) {
-        $user = $notification->getProgram()->getUser();
+      } elseif ($notification instanceof NewProjectNotification) {
+        $user = $notification->getProject()->getUser();
         if ($user != $this->getUser()) {
           $all_notifications[$notification->getId()] = $notification;
           $follower_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'program';
-          $redirect_array[$notification->getId()] = $notification->getProgram()->getId();
+          $redirect_array[$notification->getId()] = $notification->getProject()->getId();
         }
       } elseif ($notification instanceof FollowNotification) {
         $user = $notification->getFollower();
@@ -82,7 +82,7 @@ class NotificationsController extends AbstractController
           $all_notifications[$notification->getId()] = $notification;
           $remix_notifications[$notification->getId()] = $notification;
           $notification_instance[$notification->getId()] = 'remix';
-          $redirect_array[$notification->getId()] = $notification->getRemixProgram()->getId();
+          $redirect_array[$notification->getId()] = $notification->getRemixProject()->getId();
         }
       } else {
         $all_notifications[$notification->getId()] = $notification;
@@ -162,8 +162,8 @@ class NotificationsController extends AbstractController
         $fetched_notifications[] = ['id' => $notification->getId(),
           'from' => $notification->getLikeFrom()->getId(),
           'from_name' => $notification->getLikeFrom()->getUserIdentifier(),
-          'program' => $notification->getProgram()->getId(),
-          'program_name' => $notification->getProgram()->getName(),
+          'program' => $notification->getProject()->getId(),
+          'program_name' => $notification->getProject()->getName(),
           'avatar' => $notification->getLikeFrom()->getAvatar(),
           'remixed_program' => null,
           'remixed_program_name' => null,
@@ -173,10 +173,10 @@ class NotificationsController extends AbstractController
 
         continue;
       }
-      if (($notification instanceof FollowNotification || $notification instanceof NewProgramNotification)
+      if (($notification instanceof FollowNotification || $notification instanceof NewProjectNotification)
           && ('follow' === $type || 'all' === $type)) {
         if (($notification instanceof FollowNotification && $notification->getFollower() === $this->getUser())
-            || ($notification instanceof NewProgramNotification && $notification->getProgram()->getUser() === $this->getUser())) {
+            || ($notification instanceof NewProjectNotification && $notification->getProject()->getUser() === $this->getUser())) {
           continue;
         }
         if ($notification instanceof FollowNotification) {
@@ -193,11 +193,11 @@ class NotificationsController extends AbstractController
             'seen' => $notification->getSeen(), ];
         } else {
           $fetched_notifications[] = ['id' => $notification->getId(),
-            'from' => $notification->getProgram()->getUser()->getId(),
-            'from_name' => $notification->getProgram()->getUser()->getUserIdentifier(),
-            'program' => $notification->getProgram()->getId(),
-            'program_name' => $notification->getProgram()->getName(),
-            'avatar' => $notification->getProgram()->getUser()->getAvatar(),
+            'from' => $notification->getProject()->getUser()->getId(),
+            'from_name' => $notification->getProject()->getUser()->getUserIdentifier(),
+            'program' => $notification->getProject()->getId(),
+            'program_name' => $notification->getProject()->getName(),
+            'avatar' => $notification->getProject()->getUser()->getAvatar(),
             'remixed_program' => null,
             'remixed_program_name' => null,
             'type' => 'program',
@@ -213,8 +213,8 @@ class NotificationsController extends AbstractController
         $fetched_notifications[] = ['id' => $notification->getId(),
           'from' => $notification->getComment()->getUser()->getId(),
           'from_name' => $notification->getComment()->getUser()->getUserIdentifier(),
-          'program' => $notification->getComment()->getProgram()->getId(),
-          'program_name' => $notification->getComment()->getProgram()->getName(),
+          'program' => $notification->getComment()->getProject()->getId(),
+          'program_name' => $notification->getComment()->getProject()->getName(),
           'avatar' => $notification->getComment()->getUser()->getAvatar(),
           'remixed_program' => null,
           'remixed_program_name' => null,
@@ -231,11 +231,11 @@ class NotificationsController extends AbstractController
         $fetched_notifications[] = ['id' => $notification->getId(),
           'from' => $notification->getRemixFrom()->getId(),
           'from_name' => $notification->getRemixFrom()->getUserIdentifier(),
-          'program' => $notification->getRemixProgram()->getId(),
-          'program_name' => $notification->getRemixProgram()->getName(),
+          'program' => $notification->getRemixProject()->getId(),
+          'program_name' => $notification->getRemixProject()->getName(),
           'avatar' => $notification->getRemixFrom()->getAvatar(),
-          'remixed_program' => $notification->getProgram()->getId(),
-          'remixed_program_name' => $notification->getProgram()->getName(),
+          'remixed_program' => $notification->getProject()->getId(),
+          'remixed_program_name' => $notification->getProject()->getName(),
           'type' => 'remix',
           'message' => $translator->trans('catro-notifications.remix.message', [], 'catroweb'),
           'seen' => $notification->getSeen(), ];

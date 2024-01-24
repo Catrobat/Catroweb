@@ -2,7 +2,7 @@
 
 namespace App\Admin\Comments\ReportedComments;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -56,9 +56,9 @@ class ReportedCommentsAdmin extends AbstractAdmin
   {
     $list
       ->add('id')
-      ->add('program', EntityType::class,
+      ->add('project', EntityType::class,
         [
-          'class' => Program::class,
+          'class' => Project::class,
           'editable' => false,
         ])
       ->add('user')

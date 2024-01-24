@@ -3,7 +3,7 @@
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiLoader;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
@@ -35,7 +35,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->getProjectByID($id, $include_private);
   }
 
-  public function findProjectByID(string $id, bool $include_private = false): ?Program
+  public function findProjectByID(string $id, bool $include_private = false): ?Project
   {
     $projects = $this->findProjectsByID($id, $include_private);
 
@@ -62,7 +62,7 @@ class ProjectsApiLoader extends AbstractApiLoader
 
   public function getFeaturedProjects(?string $flavor, int $limit, int $offset, string $platform, string $max_version): mixed
   {
-    return $this->featured_repository->getFeaturedPrograms($flavor, $limit, $offset, $platform, $max_version);
+    return $this->featured_repository->getFeaturedProjects($flavor, $limit, $offset, $platform, $max_version);
   }
 
   public function getRecommendedProjects(string $project_id, string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user): array
@@ -75,8 +75,8 @@ class ProjectsApiLoader extends AbstractApiLoader
         return []; // Features removed
 
       case 'more_from_user':
-        /** @var Program $project */
-        $project = $project->isExample() ? $project->getProgram() : $project;
+        /** @var Project $project */
+        $project = $project->isExample() ? $project->getProject() : $project;
         $project_user_id = $project->getUser()->getId();
 
         return $this->project_manager->getMoreProjectsFromUser($project_user_id, $project_id, $limit, $offset, $flavor, $max_version);

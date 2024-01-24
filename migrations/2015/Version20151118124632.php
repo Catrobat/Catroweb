@@ -18,7 +18,7 @@ class Version20151118124632 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program ADD fb_post_id VARCHAR(255) DEFAULT NULL');
+    $this->addSql('ALTER TABLE project ADD fb_post_id VARCHAR(255) DEFAULT NULL');
   }
 
   /**
@@ -29,6 +29,6 @@ class Version20151118124632 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program DROP fb_post_id');
+    $this->addSql('ALTER TABLE project DROP fb_post_id');
   }
 }

@@ -8,7 +8,7 @@ use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
@@ -42,7 +42,7 @@ class NotificationsResponseManager extends AbstractResponseManager
 
       if ($notification instanceof LikeNotification) {
         ++$likes;
-      } elseif ($notification instanceof FollowNotification || $notification instanceof NewProgramNotification) {
+      } elseif ($notification instanceof FollowNotification || $notification instanceof NewProjectNotification) {
         ++$followers;
       } elseif ($notification instanceof CommentNotification) {
         ++$comments;

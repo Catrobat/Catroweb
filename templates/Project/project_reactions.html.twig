@@ -12,28 +12,28 @@
 {% else %}
   <div id="project-like-buttons{{ suffix|default('') }}"
      {% if suffix is not defined %} style="display: inline;"{% endif %}>
-    {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_THUMBS_UP') in project_details.activeLikeTypes %}
+    {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_THUMBS_UP') in project_details.activeLikeTypes %}
       <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
         <i class="material-icons md-24 thumbs-up">
           thumb_up
         </i>
       </div>
     {% endif %}
-    {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_SMILE') in project_details.activeLikeTypes %}
+    {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_SMILE') in project_details.activeLikeTypes %}
       <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
         <i class="material-icons md-24 smile">
           sentiment_very_satisfied
         </i>
       </div>
     {% endif %}
-    {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_LOVE') in project_details.activeLikeTypes %}
+    {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_LOVE') in project_details.activeLikeTypes %}
       <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center">
         <i class="material-icons md-24 love">
           favorite
         </i>
       </div>
     {% endif %}
-    {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_WOW') in project_details.activeLikeTypes %}
+    {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_WOW') in project_details.activeLikeTypes %}
       <div class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center" id="wow-reaction">
         <img alt="Wow reaction" id="wow-reaction-img-small" class="wow" src="{{ asset('images/default/wow_white.svg') }}">
       </div>
@@ -61,8 +61,8 @@
   {# Thumbs-Up Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
-              {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_THUMBS_UP') in project_details.activeUserLikeTypes %} active{% endif %}"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_THUMBS_UP') }}"
+              {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_THUMBS_UP') in project_details.activeUserLikeTypes %} active{% endif %}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_THUMBS_UP') }}"
      data-bs-toggle="tooltip" title="{{ 'project.thumbsUp'|trans({}, 'catroweb') }}">
     <i class="material-icons md-24">
       thumb_up
@@ -71,8 +71,8 @@
   {# Smile Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
-              {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_SMILE') in project_details.activeUserLikeTypes %} active{% endif %}"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_SMILE') }}"
+              {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_SMILE') in project_details.activeUserLikeTypes %} active{% endif %}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_SMILE') }}"
      data-bs-toggle="tooltip" title="{{ 'project.smile'|trans({}, 'catroweb') }}">
             <span class="material-icons md-24">
               sentiment_very_satisfied
@@ -81,8 +81,8 @@
   {# Love Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
-              {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_LOVE') in project_details.activeUserLikeTypes %} active{% endif %}"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_LOVE') }}"
+              {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_LOVE') in project_details.activeUserLikeTypes %} active{% endif %}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_LOVE') }}"
      data-bs-toggle="tooltip" title="{{ 'project.love'|trans({}, 'catroweb') }}">
             <span class="material-icons md-24">
               favorite
@@ -91,8 +91,8 @@
   {# Wow Button #}
   <div
      class="btn btn-primary btn-round d-inline-flex justify-content-center align-items-center
-              {% if constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_WOW') in project_details.activeUserLikeTypes %} active{% endif %}"
-     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProgramLike::TYPE_WOW') }}"
+              {% if constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_WOW') in project_details.activeUserLikeTypes %} active{% endif %}"
+     data-like-type="{{ constant('App\\DB\\Entity\\Project\\ProjectLike::TYPE_WOW') }}"
      data-bs-toggle="tooltip" title="{{ 'project.wow'|trans({}, 'catroweb') }}">
     <img alt="Wow reaction" id="wow-reaction-img-small" src="{{ asset('images/default/wow_white.svg') }}">
   </div>

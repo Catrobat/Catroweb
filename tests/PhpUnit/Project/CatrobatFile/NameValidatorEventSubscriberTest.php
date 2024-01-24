@@ -26,7 +26,7 @@ class NameValidatorEventSubscriberTest extends TestCase
     $this->assertInstanceOf(NameValidatorEventSubscriber::class, $this->name_validator);
   }
 
-  public function testMakesSureTheGivenProgramNameIsValid(): void
+  public function testMakesSureTheGivenProjectNameIsValid(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $file->expects($this->atLeastOnce())->method('getName')->willReturn('John Doe');

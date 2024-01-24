@@ -2,7 +2,7 @@
 
 namespace App\Admin\Projects\ReportedProjects;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
@@ -16,7 +16,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
 /**
- * @phpstan-extends AbstractAdmin<Program>
+ * @phpstan-extends AbstractAdmin<Project>
  */
 class ReportedProjectsAdmin extends AbstractAdmin
 {
@@ -48,7 +48,7 @@ class ReportedProjectsAdmin extends AbstractAdmin
         ])
       ->add('category')
       ->add('reportingUser.username')
-      ->add('program.visible')
+      ->add('project.visible')
       ->add('reportedUser')
     ;
   }
@@ -70,13 +70,13 @@ class ReportedProjectsAdmin extends AbstractAdmin
       ->add('note', null, ['sortable' => false])
       ->add('reportingUser', EntityType::class, ['class' => User::class])
       ->add('reportedUser')
-      ->add('program', EntityType::class,
+      ->add('project', EntityType::class,
         [
-          'class' => Program::class,
+          'class' => Project::class,
           'editable' => false,
         ])
-      ->add('program.visible')
-      ->add('program.approved', null, ['sortable' => false])
+      ->add('project.visible')
+      ->add('project.approved', null, ['sortable' => false])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProject.html.twig'],
         'acceptProgramReport' => ['template' => 'Admin/CRUD/list__action_accept_project_report.html.twig'],

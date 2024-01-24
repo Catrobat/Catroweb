@@ -30,10 +30,10 @@ class CatrobatCodeParserTest extends TestCase
     FileHelper::emptyDirectory(BootstrapExtension::$CACHE_DIR);
   }
 
-  #[DataProvider('provideValidProgramData')]
-  public function testMustReturnParsedProgram(mixed $extracted_catrobat_program): void
+  #[DataProvider('provideValidProjectData')]
+  public function testMustReturnParsedProject(mixed $extracted_catrobat_project): void
   {
-    $actual = $this->parser->parse($extracted_catrobat_program);
+    $actual = $this->parser->parse($extracted_catrobat_project);
     $expected = [
       ParsedSimpleProject::class,
       ParsedSceneProject::class,
@@ -45,44 +45,44 @@ class CatrobatCodeParserTest extends TestCase
     ));
   }
 
-  public function testMustReturnParsedSimpleProgramIfNoScenes(): void
+  public function testMustReturnParsedSimpleProjectIfNoScenes(): void
   {
-    $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '');
-    $actual = $this->parser->parse($extracted_catrobat_program);
+    $extracted_catrobat_project = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '');
+    $actual = $this->parser->parse($extracted_catrobat_project);
     $expected = ParsedSimpleProject::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
 
-  public function testMustReturnParsedSceneProgramIfScenes(): void
+  public function testMustReturnParsedSceneProjectIfScenes(): void
   {
-    $extracted_catrobat_program = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '');
-    $actual = $this->parser->parse($extracted_catrobat_program);
+    $extracted_catrobat_project = new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '');
+    $actual = $this->parser->parse($extracted_catrobat_project);
     $expected = ParsedSceneProject::class;
 
     $this->assertInstanceOf($expected, $actual);
   }
 
-  #[DataProvider('provideFaultyProgramData')]
-  public function testMustReturnNullOnError(ExtractedCatrobatFile $faulty_program): void
+  #[DataProvider('provideFaultyProjectData')]
+  public function testMustReturnNullOnError(ExtractedCatrobatFile $faulty_project): void
   {
-    $this->assertNull($this->parser->parse($faulty_program));
+    $this->assertNull($this->parser->parse($faulty_project));
   }
 
   /**
    * @return \App\Project\CatrobatFile\ExtractedCatrobatFile[][]
    */
-  public static function provideValidProgramData(): array
+  public static function provideValidProjectData(): array
   {
-    $programs = [];
-    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')];
-    $programs[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')];
+    $projects = [];
+    $projects[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SimpleProgram/', '', '')];
+    $projects[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/', '', '')];
+    $projects[] = [new ExtractedCatrobatFile(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/AllBricksProgram/', '', '')];
 
-    return $programs;
+    return $projects;
   }
 
-  public static function provideFaultyProgramData(): \Generator
+  public static function provideFaultyProjectData(): \Generator
   {
     yield [
       new ExtractedCatrobatFile(

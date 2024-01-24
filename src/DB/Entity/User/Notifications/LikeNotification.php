@@ -2,7 +2,7 @@
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -21,7 +21,7 @@ class LikeNotification extends CatroNotification
    *
    * @param User    $user      the User to which this LikeNotification will be shown
    * @param User    $like_from the User which "like action" to another user triggered this LikeNotification
-   * @param Program $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
+   * @param Project $project   the Project to which the ProjectLike and this LikeNotification is notifying, belongs to
    */
   public function __construct(User $user, /**
    * The User which "like action" to another user triggered this LikeNotification.
@@ -39,20 +39,20 @@ class LikeNotification extends CatroNotification
    * )
    */
     private ?User $like_from, /**
-   * the Program about which this LikeNotification is notifying, belongs to.
+   * the Project about which this LikeNotification is notifying, belongs to.
    *
    * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
+   *     targetEntity=Project::class,
    *     inversedBy="like_notification_mentions"
    * )
    *
    * @ORM\JoinColumn(
-   *     name="program_id",
+   *     name="project_id",
    *     referencedColumnName="id",
    *     nullable=true
    * )
    */
-    private ?Program $program)
+    private ?Project $project)
   {
     parent::__construct($user, '', '', 'reaction');
   }
@@ -83,18 +83,18 @@ class LikeNotification extends CatroNotification
   }
 
   /**
-   * Returns the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
+   * Returns the Project to which the ProjectLike and this LikeNotification is notifying, belongs to.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
-   * Sets the Program to which the ProgramLike and this LikeNotification is notifying, belongs to.
+   * Sets the Project to which the ProjectLike and this LikeNotification is notifying, belongs to.
    */
-  public function setProgram(?Program $program): void
+  public function setProject(?Project $project): void
   {
-    $this->program = $program;
+    $this->project = $project;
   }
 }

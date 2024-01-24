@@ -2,7 +2,7 @@
 
 namespace App\System\Commands\DBUpdater\CronJobs;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
@@ -33,7 +33,7 @@ class AchievementWorkflow_Translation_Command extends Command
     $qb = $this->entity_manager->createQueryBuilder();
     $users = $qb->select('u')
       ->from(ProjectCustomTranslation::class, 'e')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->from(User::class, 'u')
       ->where($qb->expr()->eq('e.project', 'p'))
       ->andWhere($qb->expr()->eq('p.user', 'u'))

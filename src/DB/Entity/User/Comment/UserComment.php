@@ -2,7 +2,7 @@
 
 namespace App\DB\Entity\User\Comment;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\User\Notifications\CommentNotification;
@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  *         @ORM\Index(name="parent_id_idx", columns={"parent_id"}),
  *         @ORM\Index(name="user_id_idx", columns={"user_id"}),
- *         @ORM\Index(name="program_id_idx", columns={"programId"}),
+ *         @ORM\Index(name="project_id_idx", columns={"projectId"}),
  *         @ORM\Index(name="studio_idx", columns={"studio"}),
  *         @ORM\Index(name="upload_date_idx", columns={"uploadDate"})
  *     }
@@ -92,20 +92,20 @@ class UserComment implements \Stringable
   protected bool $isReported = false;
 
   /**
-   * The Program which this UserComment comments. If this Program gets deleted, this UserComment gets deleted as well.
+   * The Project which this UserComment comments. If this Project gets deleted, this UserComment gets deleted as well.
    *
    * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
+   *     targetEntity=Project::class,
    *     inversedBy="comments"
    * )
    *
    * @ORM\JoinColumn(
-   *     name="programId",
+   *     name="projectId",
    *     referencedColumnName="id",
    *     nullable=true
    * )
    */
-  private ?Program $program = null;
+  private ?Project $project = null;
 
   /**
    * @ORM\Column(type="integer", nullable=true)
@@ -142,19 +142,19 @@ class UserComment implements \Stringable
   }
 
   /**
-   * Returns the Program which this UserComment comments.
+   * Returns the Project which this UserComment comments.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
-   * Sets the Program which this UserComment comments.
+   * Sets the Project which this UserComment comments.
    */
-  public function setProgram(Program $program): UserComment
+  public function setProject(Project $project): UserComment
   {
-    $this->program = $program;
+    $this->project = $project;
 
     return $this;
   }

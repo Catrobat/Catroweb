@@ -4,14 +4,14 @@ namespace App\System\Testing\Behat;
 
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
-use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
-use App\DB\Entity\Project\Special\ExampleProgram;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectInappropriateReport;
+use App\DB\Entity\Project\ProjectLike;
+use App\DB\Entity\Project\Remix\ProjectRemixBackwardRelation;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
+use App\DB\Entity\Project\Special\ExampleProject;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
@@ -20,10 +20,10 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\FlavorRepository;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
-use App\DB\EntityRepository\Project\ProgramRemixRepository;
-use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
-use App\DB\EntityRepository\Project\ScratchProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRemixBackwardRepository;
+use App\DB\EntityRepository\Project\ProjectRemixRepository;
+use App\DB\EntityRepository\Project\ScratchProjectRemixRepository;
+use App\DB\EntityRepository\Project\ScratchProjectRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\DB\EntityRepository\System\CronJobRepository;
 use App\DB\EntityRepository\User\Notification\NotificationRepository;
@@ -124,24 +124,24 @@ trait ContextTrait
     return $this->kernel->getContainer()->get(ExtensionRepository::class);
   }
 
-  public function getProjectRemixForwardRepository(): ?ProgramRemixRepository
+  public function getProjectRemixForwardRepository(): ?ProjectRemixRepository
   {
-    return $this->kernel->getContainer()->get(ProgramRemixRepository::class);
+    return $this->kernel->getContainer()->get(ProjectRemixRepository::class);
   }
 
-  public function getProjectRemixBackwardRepository(): ?ProgramRemixBackwardRepository
+  public function getProjectRemixBackwardRepository(): ?ProjectRemixBackwardRepository
   {
-    return $this->kernel->getContainer()->get(ProgramRemixBackwardRepository::class);
+    return $this->kernel->getContainer()->get(ProjectRemixBackwardRepository::class);
   }
 
-  public function getScratchProjectRepository(): ?ScratchProgramRepository
+  public function getScratchProjectRepository(): ?ScratchProjectRepository
   {
-    return $this->kernel->getContainer()->get(ScratchProgramRepository::class);
+    return $this->kernel->getContainer()->get(ScratchProjectRepository::class);
   }
 
-  public function getScratchProjectRemixRepository(): ?ScratchProgramRemixRepository
+  public function getScratchProjectRemixRepository(): ?ScratchProjectRemixRepository
   {
-    return $this->kernel->getContainer()->get(ScratchProgramRemixRepository::class);
+    return $this->kernel->getContainer()->get(ScratchProjectRemixRepository::class);
   }
 
   public function getFileRepository(): ?ProjectFileRepository
@@ -283,7 +283,7 @@ trait ContextTrait
   /**
    * @throws \Exception
    */
-  public function insertProjectLike(array $config = [], bool $andFlush = true): ProgramLike
+  public function insertProjectLike(array $config = [], bool $andFlush = true): ProjectLike
   {
     $user_manager = $this->getUserManager();
     $project_manager = $this->getProjectManager();
@@ -293,7 +293,7 @@ trait ContextTrait
 
     $project = $project_manager->find($config['project_id']);
 
-    $project_like = new ProgramLike($project, $user, $config['type']);
+    $project_like = new ProjectLike($project, $user, $config['type']);
     $project_like->setCreatedAt(new \DateTime($config['created at'], new \DateTimeZone('UTC')));
 
     $this->getManager()->persist($project_like);
@@ -334,15 +334,15 @@ trait ContextTrait
     return $extension;
   }
 
-  public function insertForwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixRelation
+  public function insertForwardRemixRelation(array $config = [], bool $andFlush = true): ProjectRemixRelation
   {
-    /** @var Program $ancestor */
+    /** @var Project $ancestor */
     $ancestor = $this->getProjectManager()->find($config['ancestor_id']);
 
-    /** @var Program $descendant */
+    /** @var Project $descendant */
     $descendant = $this->getProjectManager()->find($config['descendant_id']);
 
-    $forward_relation = new ProgramRemixRelation($ancestor, $descendant, (int) $config['depth']);
+    $forward_relation = new ProjectRemixRelation($ancestor, $descendant, (int) $config['depth']);
 
     $this->getManager()->persist($forward_relation);
     if ($andFlush) {
@@ -352,15 +352,15 @@ trait ContextTrait
     return $forward_relation;
   }
 
-  public function insertBackwardRemixRelation(array $config = [], bool $andFlush = true): ProgramRemixBackwardRelation
+  public function insertBackwardRemixRelation(array $config = [], bool $andFlush = true): ProjectRemixBackwardRelation
   {
-    /** @var Program $parent */
+    /** @var Project $parent */
     $parent = $this->getProjectManager()->find($config['parent_id']);
 
-    /** @var Program $child */
+    /** @var Project $child */
     $child = $this->getProjectManager()->find($config['child_id']);
 
-    $backward_relation = new ProgramRemixBackwardRelation($parent, $child);
+    $backward_relation = new ProjectRemixBackwardRelation($parent, $child);
 
     $this->getManager()->persist($backward_relation);
     if ($andFlush) {
@@ -370,12 +370,12 @@ trait ContextTrait
     return $backward_relation;
   }
 
-  public function insertScratchRemixRelation(array $config = [], bool $andFlush = true): ScratchProgramRemixRelation
+  public function insertScratchRemixRelation(array $config = [], bool $andFlush = true): ScratchProjectRemixRelation
   {
-    /** @var Program $catrobat_child */
+    /** @var Project $catrobat_child */
     $catrobat_child = $this->getProjectManager()->find($config['catrobat_child_id']);
 
-    $scratch_relation = new ScratchProgramRemixRelation(
+    $scratch_relation = new ScratchProjectRemixRelation(
       $config['scratch_parent_id'],
       $catrobat_child
     );
@@ -391,7 +391,7 @@ trait ContextTrait
   /**
    * @throws \Exception
    */
-  public function insertProject(array $config, bool $andFlush = true): Program
+  public function insertProject(array $config, bool $andFlush = true): Project
   {
     return $this->getProjectDataFixtures()->insertProject($config, $andFlush);
   }
@@ -401,18 +401,18 @@ trait ContextTrait
     $this->getProjectDataFixtures()->assertProject($config);
   }
 
-  public function insertFeaturedProject(array $config, bool $andFlush = true): FeaturedProgram
+  public function insertFeaturedProject(array $config, bool $andFlush = true): FeaturedProject
   {
     $new_flavor = [];
-    $featured_project = new FeaturedProgram();
+    $featured_project = new FeaturedProject();
 
-    /* @var Program $project */
+    /* @var Project $project */
     if (isset($config['project_id'])) {
       $project = $this->getProjectManager()->find($config['project_id']);
     } else {
       $project = $this->getProjectManager()->findOneByName($config['name']);
     }
-    $featured_project->setProgram($project);
+    $featured_project->setProject($project);
 
     /* @var Flavor $flavor */
     $flavor = $this->getFlavorRepository()->getFlavorByName($config['flavor'] ?? 'pocketcode');
@@ -436,18 +436,18 @@ trait ContextTrait
     return $featured_project;
   }
 
-  public function insertExampleProject(array $config, bool $andFlush = true): ExampleProgram
+  public function insertExampleProject(array $config, bool $andFlush = true): ExampleProject
   {
     $new_flavor = [];
-    $example_project = new ExampleProgram();
+    $example_project = new ExampleProject();
 
-    /* @var Program $project */
+    /* @var Project $project */
     if (isset($config['project_id'])) {
       $project = $this->getProjectManager()->find($config['project_id']);
-      $example_project->setProgram($project);
+      $example_project->setProject($project);
     } else {
       $project = $this->getProjectManager()->findOneByName($config['name']);
-      $example_project->setProgram($project);
+      $example_project->setProject($project);
     }
 
     /* @var Flavor $flavor */
@@ -476,7 +476,7 @@ trait ContextTrait
    */
   public function insertUserComment(array $config, bool $andFlush = true): UserComment
   {
-    /** @var Program $project */
+    /** @var Project $project */
     $project = $this->getProjectManager()->find($config['project_id']);
 
     /** @var User|null $user */
@@ -491,7 +491,7 @@ trait ContextTrait
       new \DateTime($config['upload_date'], new \DateTimeZone('UTC')) :
       new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
     );
-    $new_comment->setProgram($project);
+    $new_comment->setProject($project);
     $new_comment->setUser($user);
     $new_comment->setParentId($parent_id);
     $new_comment->setIsDeleted($is_deleted);
@@ -517,17 +517,17 @@ trait ContextTrait
   /**
    * @throws \Exception
    */
-  public function insertProjectReport(array $config, bool $andFlush = true): ProgramInappropriateReport
+  public function insertProjectReport(array $config, bool $andFlush = true): ProjectInappropriateReport
   {
-    /** @var Program $project */
+    /** @var Project $project */
     $project = $this->getProjectManager()->find($config['project_id']);
 
     /** @var User|null $user */
     $user = $this->getUserManager()->find($config['user_id']);
 
-    $new_report = new ProgramInappropriateReport();
+    $new_report = new ProjectInappropriateReport();
     $new_report->setCategory($config['category']);
-    $new_report->setProgram($project);
+    $new_report->setProject($project);
     $new_report->setReportingUser($user);
     $new_report->setTime(new \DateTime($config['time'], new \DateTimeZone('UTC')));
     $new_report->setNote($config['note']);

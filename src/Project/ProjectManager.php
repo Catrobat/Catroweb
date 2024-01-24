@@ -2,15 +2,15 @@
 
 namespace App\Project;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramDownloads;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectDownloads;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\Project\Tag;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
@@ -46,7 +46,7 @@ use Symfony\Component\Security\Core\Security;
 
 class ProjectManager
 {
-  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProjectFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProgramRepository $project_repository, protected TagRepository $tag_repository, protected ProgramLikeRepository $project_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $program_finder, private readonly ?UrlHelper $urlHelper, protected Security $security)
+  public function __construct(protected CatrobatFileExtractor $file_extractor, protected ProjectFileRepository $file_repository, protected ScreenshotRepository $screenshot_repository, protected EntityManagerInterface $entity_manager, protected ProjectRepository $project_repository, protected TagRepository $tag_repository, protected ProjectLikeRepository $project_like_repository, protected FeaturedRepository $featured_repository, protected ExampleRepository $example_repository, protected EventDispatcherInterface $event_dispatcher, private readonly LoggerInterface $logger, protected RequestHelper $request_helper, protected ExtensionRepository $extension_repository, protected CatrobatFileSanitizer $file_sanitizer, protected NotificationManager $notification_service, private readonly TransformedFinder $project_finder, private readonly ?UrlHelper $urlHelper, protected Security $security)
   {
   }
 
@@ -68,7 +68,7 @@ class ProjectManager
   /**
    * Check visibility of the given project for the current user.
    */
-  protected function isProjectVisibleForCurrentUser(Program $project): bool
+  protected function isProjectVisibleForCurrentUser(Project $project): bool
   {
     /** @var User|null $user */
     $user = $this->security->getUser();
@@ -99,7 +99,7 @@ class ProjectManager
    *
    * @throws Exception
    */
-  public function addProject(AddProjectRequest $request): ?Program
+  public function addProject(AddProjectRequest $request): ?Project
   {
     $file = $request->getProjectFile();
 
@@ -120,7 +120,7 @@ class ProjectManager
       return null;
     }
 
-    /** @var Program|null $old_project */
+    /** @var Project|null $old_project */
     $old_project = $this->findOneByNameAndUser($extracted_file->getName(), $request->getUser());
     if (null !== $old_project) {
       $project = $old_project;
@@ -129,7 +129,7 @@ class ProjectManager
       $project->incrementVersion();
       $project->setVisible($old_project->getVisible()); // necessary to keep reported projects invisible after re-upload!
     } else {
-      $project = new Program();
+      $project = new Project();
       $project->setRemixRoot(true);
       $project->setVisible(true);
     }
@@ -227,11 +227,11 @@ class ProjectManager
    *
    * @throws \Exception
    */
-  public function createProjectFromScratch(?Program $project, User $user, array $project_data): Program
+  public function createProjectFromScratch(?Project $project, User $user, array $project_data): Project
   {
     $modified_time = TimeUtils::dateTimeFromScratch($project_data['history']['modified']);
     if (null === $project) {
-      $project = new Program();
+      $project = new Project();
       $project->setUser($user);
       $project->setScratchId($project_data['id']);
       $project->setDebugBuild(false);
@@ -287,11 +287,11 @@ class ProjectManager
   }
 
   /**
-   * @return ProgramLike[]
+   * @return ProjectLike[]
    */
   public function findUserLikes(string $project_id, string $user_id): array
   {
-    return $this->project_like_repository->findBy(['program_id' => $project_id, 'user_id' => $user_id]);
+    return $this->project_like_repository->findBy(['project_id' => $project_id, 'user_id' => $user_id]);
   }
 
   public function findProjectLikeTypes(string $project_id): array
@@ -302,11 +302,11 @@ class ProjectManager
   /**
    * @throws NoResultException|\InvalidArgumentException
    */
-  public function changeLike(Program $project, User $user, int $type, string $action): void
+  public function changeLike(Project $project, User $user, int $type, string $action): void
   {
-    if (ProgramLike::ACTION_ADD === $action) {
+    if (ProjectLike::ACTION_ADD === $action) {
       $this->project_like_repository->addLike($project, $user, $type);
-    } elseif (ProgramLike::ACTION_REMOVE === $action) {
+    } elseif (ProjectLike::ACTION_REMOVE === $action) {
       $this->project_like_repository->removeLike($project, $user, $type);
     } else {
       throw new \InvalidArgumentException("Invalid action: {$action}");
@@ -316,7 +316,7 @@ class ProjectManager
   /**
    * @throws NoResultException
    */
-  public function areThereOtherLikeTypes(Program $project, User $user, int $type): bool
+  public function areThereOtherLikeTypes(Project $project, User $user, int $type): bool
   {
     try {
       return $this->project_like_repository->areThereOtherLikeTypes($project, $user, $type);
@@ -335,7 +335,7 @@ class ProjectManager
     return $this->project_like_repository->totalLikeCount($project_id);
   }
 
-  public function addTags(Program $project, ExtractedCatrobatFile $extracted_file): void
+  public function addTags(Project $project, ExtractedCatrobatFile $extracted_file): void
   {
     $tags = $extracted_file->getTags();
 
@@ -358,7 +358,7 @@ class ProjectManager
     }
   }
 
-  public function removeAllTags(Program $project): void
+  public function removeAllTags(Project $project): void
   {
     $tags = $project->getTags();
 
@@ -377,10 +377,10 @@ class ProjectManager
   }
 
   /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
+   * @return Project|object|null
    *
-   * @return Program|object|null
+   *@internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
    */
   public function findOneByNameAndUser(string $project_name, UserInterface $user)
   {
@@ -391,10 +391,10 @@ class ProjectManager
   }
 
   /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
+   * @return Project|object|null
    *
-   * @return Program|object|null
+   *@internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
    */
   public function findOneByName(string $project_name)
   {
@@ -402,10 +402,10 @@ class ProjectManager
   }
 
   /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
+   * @return Project|object|null
    *
-   * @return Program|object|null
+   *@internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
    */
   public function findOneByScratchId(int $scratch_id)
   {
@@ -442,23 +442,23 @@ class ProjectManager
   }
 
   /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
+   * @return Project|object|null
    *
-   * @return Program|object|null
+   *@internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
    */
   public function find(string $id)
   {
     return $this->project_repository->find($id);
   }
 
-  public function findProjectIfVisibleToCurrentUser(?string $id): ?Program
+  public function findProjectIfVisibleToCurrentUser(?string $id): ?Project
   {
     if (null === $id) {
       return null;
     }
 
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->find($id);
 
     if (null === $project) {
@@ -471,10 +471,10 @@ class ProjectManager
   }
 
   /**
-   * @internal
-   * ATTENTION! Internal use only! (no visible/private/debug check)
+   * @return Project|object|null
    *
-   * @return Program|object|null
+   *@internal
+   * ATTENTION! Internal use only! (no visible/private/debug check)
    */
   public function findOneByRemixMigratedAt(?\DateTime $remix_migrated_at)
   {
@@ -564,54 +564,54 @@ class ProjectManager
   {
     $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
-    return $this->program_finder->find($project_query, $limit, ['from' => $offset]);
+    return $this->project_finder->find($project_query, $limit, ['from' => $offset]);
   }
 
   public function searchCount(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): int
   {
     $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
-    $paginator = $this->program_finder->findPaginated($project_query);
+    $paginator = $this->project_finder->findPaginated($project_query);
 
     return $paginator->getNbResults();
   }
 
-  public function increaseViews(Program $project): void
+  public function increaseViews(Project $project): void
   {
     $this->entity_manager
-      ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.views = p.views + 1 WHERE p.id = :pid')
+      ->createQuery('UPDATE App\DB\Entity\Project\Project p SET p.views = p.views + 1 WHERE p.id = :pid')
       ->setParameter('pid', $project->getId())
       ->execute()
     ;
   }
 
-  public function increaseDownloads(Program $project, ?User $user): void
+  public function increaseDownloads(Project $project, ?User $user): void
   {
-    $this->increaseNumberOfDownloads($project, $user, ProgramDownloads::TYPE_PROJECT);
+    $this->increaseNumberOfDownloads($project, $user, ProjectDownloads::TYPE_PROJECT);
   }
 
-  public function increaseApkDownloads(Program $project, ?User $user): void
+  public function increaseApkDownloads(Project $project, ?User $user): void
   {
-    $this->increaseNumberOfDownloads($project, $user, ProgramDownloads::TYPE_APK);
+    $this->increaseNumberOfDownloads($project, $user, ProjectDownloads::TYPE_APK);
   }
 
-  protected function increaseNumberOfDownloads(Program $project, ?User $user, string $download_type): void
+  protected function increaseNumberOfDownloads(Project $project, ?User $user, string $download_type): void
   {
     if (!is_null($user)) {
-      $download_repo = $this->entity_manager->getRepository(ProgramDownloads::class);
+      $download_repo = $this->entity_manager->getRepository(ProjectDownloads::class);
       // No matter which type it should only count once!
-      $download = $download_repo->findOneBy(['program' => $project, 'user' => $user, 'type' => $download_type]);
+      $download = $download_repo->findOneBy(['project' => $project, 'user' => $user, 'type' => $download_type]);
       // the simplified DQL is the only solution that guarantees proper count: https://stackoverflow.com/questions/24681613/doctrine-entity-increase-value-download-counter
       if (is_null($download)) {
-        if (ProgramDownloads::TYPE_PROJECT === $download_type) {
+        if (ProjectDownloads::TYPE_PROJECT === $download_type) {
           $this->entity_manager
-            ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.downloads = p.downloads + 1 WHERE p.id = :pid')
+            ->createQuery('UPDATE App\DB\Entity\Project\Project p SET p.downloads = p.downloads + 1 WHERE p.id = :pid')
             ->setParameter('pid', $project->getId())
             ->execute()
           ;
-        } elseif (ProgramDownloads::TYPE_APK === $download_type) {
+        } elseif (ProjectDownloads::TYPE_APK === $download_type) {
           $this->entity_manager
-            ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_downloads = p.apk_downloads + 1 WHERE p.id = :pid')
+            ->createQuery('UPDATE App\DB\Entity\Project\Project p SET p.apk_downloads = p.apk_downloads + 1 WHERE p.id = :pid')
             ->setParameter('pid', $project->getId())
             ->execute()
           ;
@@ -621,18 +621,18 @@ class ProjectManager
     }
   }
 
-  protected function addDownloadEntry(Program $project, ?User $user, string $download_type): void
+  protected function addDownloadEntry(Project $project, ?User $user, string $download_type): void
   {
-    $download = new ProgramDownloads();
+    $download = new ProjectDownloads();
     $download->setUser($user);
-    $download->setProgram($project);
+    $download->setProject($project);
     $download->setType($download_type);
     $download->setDownloadedAt(new \DateTime('now'));
     $this->entity_manager->persist($download);
     $this->entity_manager->flush();
   }
 
-  public function save(Program $project, ProgramDownloads $downloads = null): void
+  public function save(Project $project, ProjectDownloads $downloads = null): void
   {
     $this->entity_manager->persist($project);
     if (!is_null($downloads)) {
@@ -661,7 +661,7 @@ class ProjectManager
     return $this->project_repository->searchExtensionCount($query);
   }
 
-  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $project, ?int $limit, int $offset): array
+  public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Project $project, ?int $limit, int $offset): array
   {
     return $this->project_repository->getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(
       $flavor, $project, $limit, $offset
@@ -750,16 +750,16 @@ class ProjectManager
     return $bool_query;
   }
 
-  private function notifyFollower(Program $project): void
+  private function notifyFollower(Project $project): void
   {
     $followers = $project->getUser()->getFollowers();
     for ($i = 0; $i < $followers->count(); ++$i) {
-      $notification = new NewProgramNotification($followers[$i], $project);
+      $notification = new NewProjectNotification($followers[$i], $project);
       $this->notification_service->addNotification($notification);
     }
   }
 
-  public function deleteProject(Program $project): void
+  public function deleteProject(Project $project): void
   {
     $project->setVisible(false);
     $this->entity_manager->persist($project);

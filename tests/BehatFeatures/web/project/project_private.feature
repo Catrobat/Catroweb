@@ -1,5 +1,5 @@
 @homepage
-Feature: As a visitor I want to see a program page
+Feature: As a visitor I want to see a project page
 
   Background:
     Given there are users:

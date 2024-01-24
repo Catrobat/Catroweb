@@ -2,8 +2,8 @@
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -51,10 +51,10 @@ class CreateFeatureProgramCommand extends Command
     return 0;
   }
 
-  private function featureProgram(Program $program): void
+  private function featureProgram(Project $program): void
   {
-    $feature = new FeaturedProgram();
-    $feature->setProgram($program);
+    $feature = new FeaturedProject();
+    $feature->setProject($program);
     $feature->setActive(true);
     $feature->setFlavor($this->flavor_repository->getFlavorByName('pocketcode'));
     $feature->setImageType('jpeg'); // todo picture?

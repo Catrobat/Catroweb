@@ -28,11 +28,11 @@ final class Version20230303155205 extends AbstractMigration
     $this->addSql('DROP INDEX idx_cc794c66a76ed395 ON user_comment');
     $this->addSql('CREATE INDEX user_id_idx ON user_comment (user_id)');
     $this->addSql('DROP INDEX idx_cc794c66bb3368cf ON user_comment');
-    $this->addSql('CREATE INDEX program_id_idx ON user_comment (programId)');
+    $this->addSql('CREATE INDEX project_id_idx ON user_comment (projectId)');
     $this->addSql('DROP INDEX idx_cc794c664a2b07b6 ON user_comment');
     $this->addSql('CREATE INDEX studio_idx ON user_comment (studio)');
     $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C664A2B07B6 FOREIGN KEY (studio) REFERENCES studio (id) ON DELETE CASCADE');
-    $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66BB3368CF FOREIGN KEY (programId) REFERENCES program (id)');
+    $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66BB3368CF FOREIGN KEY (projectId) REFERENCES project (id)');
     $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66A76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id)');
   }
 
@@ -46,12 +46,12 @@ final class Version20230303155205 extends AbstractMigration
     $this->addSql('ALTER TABLE user_comment DROP FOREIGN KEY FK_CC794C664A2B07B6');
     $this->addSql('DROP INDEX studio_idx ON user_comment');
     $this->addSql('CREATE INDEX IDX_CC794C664A2B07B6 ON user_comment (studio)');
-    $this->addSql('DROP INDEX program_id_idx ON user_comment');
-    $this->addSql('CREATE INDEX IDX_CC794C66BB3368CF ON user_comment (programId)');
+    $this->addSql('DROP INDEX project_id_idx ON user_comment');
+    $this->addSql('CREATE INDEX IDX_CC794C66BB3368CF ON user_comment (projectId)');
     $this->addSql('DROP INDEX user_id_idx ON user_comment');
     $this->addSql('CREATE INDEX IDX_CC794C66A76ED395 ON user_comment (user_id)');
     $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66A76ED395 FOREIGN KEY (user_id) REFERENCES fos_user (id)');
-    $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66BB3368CF FOREIGN KEY (programId) REFERENCES program (id)');
+    $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C66BB3368CF FOREIGN KEY (projectId) REFERENCES project (id)');
     $this->addSql('ALTER TABLE user_comment ADD CONSTRAINT FK_CC794C664A2B07B6 FOREIGN KEY (studio) REFERENCES studio (id) ON DELETE CASCADE');
   }
 }

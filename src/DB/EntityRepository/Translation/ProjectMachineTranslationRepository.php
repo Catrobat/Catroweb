@@ -2,7 +2,7 @@
 
 namespace App\DB\EntityRepository\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\Translation\TranslationResult;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
@@ -16,7 +16,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, ProjectMachineTranslation::class);
   }
 
-  public function getCachedTranslation(Program $project, ?string $source_language, string $target_language): ?array
+  public function getCachedTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
     $criteria = Criteria::create()
       ->where(Criteria::expr()->eq('project', $project))
@@ -63,7 +63,7 @@ class ProjectMachineTranslationRepository extends ServiceEntityRepository
     return $result;
   }
 
-  public function invalidateCachedTranslation(Program $project): void
+  public function invalidateCachedTranslation(Project $project): void
   {
     /** @var ProjectMachineTranslation[] $entries */
     $entries = $this->findBy(['project' => $project]);

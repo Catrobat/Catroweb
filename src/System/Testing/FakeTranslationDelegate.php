@@ -2,13 +2,13 @@
 
 namespace App\System\Testing;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Translation\TranslationDelegate;
 use App\Translation\TranslationResult;
 
 class FakeTranslationDelegate extends TranslationDelegate
 {
-  public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
+  public function translateProject(Project $project, ?string $source_language, string $target_language): ?array
   {
     $cached_result = $this->getCachedProjectTranslation($project, $source_language, $target_language);
     if (null !== $cached_result) {

@@ -2,7 +2,7 @@
 
 namespace App\DB\Entity\User\Notifications;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,12 +20,12 @@ class RemixNotification extends CatroNotification
    * RemixNotification constructor.
    *
    * @param User    $user          the User to which this RemixNotification will be shown
-   * @param User    $remix_from    the owner of the parent Program
-   * @param Program $program       the parent Program
-   * @param Program $remix_program the newly remixed child Program
+   * @param User    $remix_from    the owner of the parent Project
+   * @param Project $project       the parent Project
+   * @param Project $remix_project the newly remixed child Project
    */
   public function __construct(User $user, /**
-   * the owner of the parent Program.
+   * the owner of the parent Project.
    *
    * @ORM\ManyToOne(
    *     targetEntity=User::class
@@ -38,40 +38,40 @@ class RemixNotification extends CatroNotification
    * )
    */
     private ?User $remix_from, /**
-   *  the parent Program.
+   *  the parent Project.
    *
    * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
+   *     targetEntity=Project::class,
    *     inversedBy="remix_notification_mentions_as_parent"
    * )
    *
    * @ORM\JoinColumn(
-   *     name="program_id",
+   *     name="project_id",
    *     referencedColumnName="id",
    *     nullable=true
    * )
    */
-    private ?Program $program, /**
-   * the newly remixed child Program.
+    private ?Project $project, /**
+   * the newly remixed child Project.
    *
    * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
+   *     targetEntity=Project::class,
    *     inversedBy="remix_notification_mentions_as_child"
    * )
    *
    * @ORM\JoinColumn(
-   *     name="remix_program_id",
+   *     name="remix_project_id",
    *     referencedColumnName="id",
    *     nullable=true
    * )
    */
-    private ?Program $remix_program)
+    private ?Project $remix_project)
   {
     parent::__construct($user, '', '', 'remix');
   }
 
   /**
-   * Returns the owner of the parent Program.
+   * Returns the owner of the parent Project.
    */
   public function getRemixFrom(): ?User
   {
@@ -79,7 +79,7 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * Sets the owner of the parent Program.
+   * Sets the owner of the parent Project.
    */
   public function setRemixFrom(?User $remix_from): void
   {
@@ -96,34 +96,34 @@ class RemixNotification extends CatroNotification
   }
 
   /**
-   * Returns the parent Program.
+   * Returns the parent Project.
    */
-  public function getProgram(): ?Program
+  public function getProject(): ?Project
   {
-    return $this->program;
+    return $this->project;
   }
 
   /**
-   * Sets the parent Program.
+   * Sets the parent Project.
    */
-  public function setProgram(?Program $program): void
+  public function setProject(?Project $project): void
   {
-    $this->program = $program;
+    $this->project = $project;
   }
 
   /**
-   * Returns the child Program.
+   * Returns the child Project.
    */
-  public function getRemixProgram(): ?Program
+  public function getRemixProject(): ?Project
   {
-    return $this->remix_program;
+    return $this->remix_project;
   }
 
   /**
-   * Sets the child Program.
+   * Sets the child Project.
    */
-  public function setRemixProgram(?Program $remix_program): void
+  public function setRemixProject(?Project $remix_project): void
   {
-    $this->remix_program = $remix_program;
+    $this->remix_project = $remix_project;
   }
 }

@@ -22,7 +22,7 @@ final class Version20191113124744 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program CHANGE description description LONGTEXT DEFAULT NULL');
+    $this->addSql('ALTER TABLE project CHANGE description description LONGTEXT DEFAULT NULL');
   }
 
   public function down(Schema $schema): void
@@ -30,6 +30,6 @@ final class Version20191113124744 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program CHANGE description description LONGTEXT NOT NULL COLLATE utf8mb4_unicode_ci');
+    $this->addSql('ALTER TABLE project CHANGE description description LONGTEXT NOT NULL COLLATE utf8mb4_unicode_ci');
   }
 }

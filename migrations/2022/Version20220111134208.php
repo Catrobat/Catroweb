@@ -20,12 +20,12 @@ final class Version20220111134208 extends AbstractMigration
   public function up(Schema $schema): void
   {
     // this up() migration is auto-generated, please modify it to your needs
-    $this->addSql('ALTER TABLE program_downloads ADD type VARCHAR(255) DEFAULT \'project\' NOT NULL');
+    $this->addSql('ALTER TABLE project_downloads ADD type VARCHAR(255) DEFAULT \'project\' NOT NULL');
   }
 
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs
-    $this->addSql('ALTER TABLE program_downloads DROP type');
+    $this->addSql('ALTER TABLE project_downloads DROP type');
   }
 }

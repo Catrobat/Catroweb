@@ -3,7 +3,7 @@
 namespace App\Api_deprecated\Listeners;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Storage\ImageRepository;
 use App\Storage\ScreenshotRepository;
 use App\Utils\ElapsedTimeStringFormatter;
@@ -37,7 +37,7 @@ class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
 
-    /** @var Program $project */
+    /** @var Project $project */
     foreach ($projects as $project) {
       $new_project = [];
       $example = false;
@@ -45,7 +45,7 @@ class ProjectListSerializerEventSubscriber implements EventSubscriberInterface
         $new_project['ExampleId'] = $project->getId();
         $new_project['Extension'] = $project->getImageType();
         $example = true;
-        $project = $project->getProgram();
+        $project = $project->getProject();
       }
       $new_project['ProjectId'] = $project->getId();
       $new_project['ProjectName'] = $project->getName();

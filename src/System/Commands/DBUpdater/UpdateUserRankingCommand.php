@@ -2,7 +2,7 @@
 
 namespace App\System\Commands\DBUpdater;
 
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\User\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -11,7 +11,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class UpdateUserRankingCommand extends Command
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected UserRepository $userRepository, protected ProgramRepository $programRepository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected UserRepository $userRepository, protected ProjectRepository $programRepository)
   {
     parent::__construct();
   }

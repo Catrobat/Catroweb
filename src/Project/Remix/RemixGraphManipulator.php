@@ -2,20 +2,20 @@
 
 namespace App\Project\Remix;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
-use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
-use App\DB\EntityRepository\Project\ProgramRemixRepository;
-use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
+use App\DB\EntityRepository\Project\ProjectRemixBackwardRepository;
+use App\DB\EntityRepository\Project\ProjectRemixRepository;
+use App\DB\EntityRepository\Project\ScratchProjectRemixRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class RemixGraphManipulator
 {
-  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly RemixSubgraphManipulator $remix_subgraph_manipulator, private readonly ProgramRemixRepository $project_remix_repository, private readonly ProgramRemixBackwardRepository $project_remix_backward_repository, private readonly ScratchProgramRemixRepository $scratch_project_remix_repository)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly RemixSubgraphManipulator $remix_subgraph_manipulator, private readonly ProjectRemixRepository $project_remix_repository, private readonly ProjectRemixBackwardRepository $project_remix_backward_repository, private readonly ScratchProjectRemixRepository $scratch_project_remix_repository)
   {
   }
 
-  public function convertBackwardParentsHavingNoForwardAncestor(Program $project, array $removed_forward_parent_ids): void
+  public function convertBackwardParentsHavingNoForwardAncestor(Project $project, array $removed_forward_parent_ids): void
   {
     $removed_forward_parents_ancestor_ids = $this->project_remix_repository->getAncestorIds($removed_forward_parent_ids);
     $removed_forward_parents_ancestor_descendant_relations = $this->project_remix_repository->getDescendantRelations($removed_forward_parents_ancestor_ids);
@@ -56,7 +56,7 @@ class RemixGraphManipulator
   /**
    * @param string[] $all_catrobat_forward_parent_ids
    */
-  public function unlinkFromAllCatrobatForwardParents(Program $project, array $all_catrobat_forward_parent_ids): void
+  public function unlinkFromAllCatrobatForwardParents(Project $project, array $all_catrobat_forward_parent_ids): void
   {
     $project_id = $project->getId();
     $parents_ancestor_ids = $this->project_remix_repository->getAncestorIds($all_catrobat_forward_parent_ids);
@@ -70,12 +70,12 @@ class RemixGraphManipulator
 
     $preserved_edges = $this
       ->project_remix_repository
-      ->getDirectEdgeRelationsBetweenProgramIds($parents_ancestor_ids, $direct_and_indirect_descendant_ids)
+      ->getDirectEdgeRelationsBetweenProjectIds($parents_ancestor_ids, $direct_and_indirect_descendant_ids)
     ;
 
     $this
       ->project_remix_repository
-      ->removeRelationsBetweenProgramIds($parents_ancestor_ids, $direct_and_indirect_descendant_ids_with_project_id)
+      ->removeRelationsBetweenProjectIds($parents_ancestor_ids, $direct_and_indirect_descendant_ids_with_project_id)
     ;
 
     foreach ($preserved_edges as $edge) {
@@ -88,7 +88,7 @@ class RemixGraphManipulator
     }
   }
 
-  public function unlinkFromCatrobatBackwardParents(Program $project, array $catrobat_backward_parent_ids_to_be_removed): void
+  public function unlinkFromCatrobatBackwardParents(Project $project, array $catrobat_backward_parent_ids_to_be_removed): void
   {
     $this
       ->project_remix_backward_repository
@@ -96,7 +96,7 @@ class RemixGraphManipulator
     ;
   }
 
-  public function unlinkFromScratchParents(Program $project, array $scratch_parent_ids_to_be_removed): void
+  public function unlinkFromScratchParents(Project $project, array $scratch_parent_ids_to_be_removed): void
   {
     $this
       ->scratch_project_remix_repository
@@ -104,17 +104,17 @@ class RemixGraphManipulator
     ;
   }
 
-  public function linkToScratchParents(Program $project, array $scratch_parent_ids_to_be_added): void
+  public function linkToScratchParents(Project $project, array $scratch_parent_ids_to_be_added): void
   {
     foreach ($scratch_parent_ids_to_be_added as $scratch_parent_id) {
-      $scratch_remix_relation = new ScratchProgramRemixRelation((string) $scratch_parent_id, $project);
+      $scratch_remix_relation = new ScratchProjectRemixRelation((string) $scratch_parent_id, $project);
       $this->entity_manager->detach($scratch_remix_relation);
       $this->entity_manager->persist($scratch_remix_relation);
       $this->entity_manager->flush();
     }
   }
 
-  public function appendRemixSubgraphToCatrobatParents(Program $project, array $ids_of_new_parents,
+  public function appendRemixSubgraphToCatrobatParents(Project $project, array $ids_of_new_parents,
     array $preserved_creation_date_mapping,
     array $preserved_seen_date_mapping): void
   {

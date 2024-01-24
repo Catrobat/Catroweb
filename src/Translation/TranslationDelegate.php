@@ -2,7 +2,7 @@
 
 namespace App\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use App\DB\EntityRepository\Translation\ProjectMachineTranslationRepository;
 use Symfony\Component\Intl\Countries;
@@ -22,7 +22,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function addProjectNameCustomTranslation(Program $project, string $target_language, string $name_translation): bool
+  public function addProjectNameCustomTranslation(Project $project, string $target_language, string $name_translation): bool
   {
     $this->validateLanguage($target_language);
 
@@ -32,7 +32,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function getProjectNameCustomTranslation(Program $project, string $target_language): ?string
+  public function getProjectNameCustomTranslation(Project $project, string $target_language): ?string
   {
     $this->validateLanguage($target_language);
 
@@ -42,7 +42,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function deleteProjectNameCustomTranslation(Program $project, string $target_language): bool
+  public function deleteProjectNameCustomTranslation(Project $project, string $target_language): bool
   {
     $this->validateLanguage($target_language);
 
@@ -52,7 +52,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function addProjectDescriptionCustomTranslation(Program $project, string $target_language, string $description_translation): bool
+  public function addProjectDescriptionCustomTranslation(Project $project, string $target_language, string $description_translation): bool
   {
     $this->validateLanguage($target_language);
 
@@ -62,7 +62,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function getProjectDescriptionCustomTranslation(Program $project, string $target_language): ?string
+  public function getProjectDescriptionCustomTranslation(Project $project, string $target_language): ?string
   {
     $this->validateLanguage($target_language);
 
@@ -72,7 +72,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function deleteProjectDescriptionCustomTranslation(Program $project, string $target_language): bool
+  public function deleteProjectDescriptionCustomTranslation(Project $project, string $target_language): bool
   {
     $this->validateLanguage($target_language);
 
@@ -82,7 +82,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function addProjectCreditCustomTranslation(Program $project, string $target_language, string $credit_translation): bool
+  public function addProjectCreditCustomTranslation(Project $project, string $target_language, string $credit_translation): bool
   {
     $this->validateLanguage($target_language);
 
@@ -92,7 +92,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function getProjectCreditCustomTranslation(Program $project, string $target_language): ?string
+  public function getProjectCreditCustomTranslation(Project $project, string $target_language): ?string
   {
     $this->validateLanguage($target_language);
 
@@ -102,7 +102,7 @@ class TranslationDelegate
   /**
    * @throws \InvalidArgumentException
    */
-  public function deleteProjectCreditCustomTranslation(Program $project, string $target_language): bool
+  public function deleteProjectCreditCustomTranslation(Project $project, string $target_language): bool
   {
     $this->validateLanguage($target_language);
 
@@ -114,7 +114,7 @@ class TranslationDelegate
    *
    * @psalm-return array<array-key, TranslationResult|null>|null
    */
-  public function translateProject(Program $project, ?string $source_language, string $target_language): ?array
+  public function translateProject(Project $project, ?string $source_language, string $target_language): ?array
   {
     $this->validateLanguage($source_language);
     $this->validateLanguage($target_language);
@@ -219,7 +219,7 @@ class TranslationDelegate
     }
   }
 
-  protected function getCachedProjectTranslation(Program $project, ?string $source_language, string $target_language): ?array
+  protected function getCachedProjectTranslation(Project $project, ?string $source_language, string $target_language): ?array
   {
     return $this->project_machine_translation_repository->getCachedTranslation($project, $source_language, $target_language);
   }

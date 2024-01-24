@@ -2,7 +2,7 @@
 
 namespace App\System\Commands\DBUpdater\CronJobs;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
@@ -34,7 +34,7 @@ class UpdateRandomProjectCategoryCommand extends Command
 
     $qb = $this->entity_manager->createQueryBuilder();
     $random_id_list = $qb->select('p.id')
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->setMaxResults(self::LIMIT)
       ->orderBy('RAND()', 'DESC')
       ->getQuery()
@@ -44,7 +44,7 @@ class UpdateRandomProjectCategoryCommand extends Command
     $rand_value = 1;
     foreach ($random_id_list as $arr_project) {
       $id = $arr_project['id'];
-      /** @var Program|null $program */
+      /** @var Project|null $program */
       $program = $this->program_manager->find($id);
       $program->setRand($rand_value);
       ++$rand_value;
@@ -59,7 +59,7 @@ class UpdateRandomProjectCategoryCommand extends Command
   {
     $qb = $this->entity_manager->createQueryBuilder();
     $qb->update()
-      ->from(Program::class, 'p')
+      ->from(Project::class, 'p')
       ->where("p.{$index} <> 0")
       ->set("p.{$index}", 0)
       ->getQuery()

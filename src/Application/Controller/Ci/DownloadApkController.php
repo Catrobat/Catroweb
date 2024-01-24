@@ -2,8 +2,8 @@
 
 namespace App\Application\Controller\Ci;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\User\User;
 use App\Project\Apk\ApkRepository;
 use App\Project\Event\ProjectDownloadEvent;
@@ -42,7 +42,7 @@ class DownloadApkController extends AbstractController
     $file = $this->getApkFile($id);
     $response = $this->createDownloadApkFileResponse($id, $file);
     $this->event_dispatcher->dispatch(
-      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_APK)
+      new ProjectDownloadEvent($user, $project, ProjectDownloads::TYPE_APK)
     );
 
     return $response;
@@ -73,7 +73,7 @@ class DownloadApkController extends AbstractController
     } catch (\Exception $exception) {
       $project = $this->project_manager->find($id);
       if (null !== $project) {
-        $project->setApkStatus(Program::APK_NONE);
+        $project->setApkStatus(Project::APK_NONE);
         $this->project_manager->save($project);
         $this->logger->error("Project apk for id: \"{$id}\" not found; Status reset");
       }
@@ -83,11 +83,11 @@ class DownloadApkController extends AbstractController
     return $file;
   }
 
-  protected function findProject(string $id): Program
+  protected function findProject(string $id): Project
   {
-    /* @var $project Program|null */
+    /* @var $project Project|null */
     $project = $this->project_manager->find($id);
-    if (null === $project || !$project->isVisible() || Program::APK_READY != $project->getApkStatus()) {
+    if (null === $project || !$project->isVisible() || Project::APK_READY != $project->getApkStatus()) {
       $this->logger->warning('Project with ID: '.$id.' not found');
       throw new NotFoundHttpException();
     }

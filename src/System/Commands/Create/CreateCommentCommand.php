@@ -2,7 +2,7 @@
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
@@ -27,7 +27,7 @@ class CreateCommentCommand extends Command
     $this->setName('catrobat:comment')
       ->setDescription('Add comment to a project')
       ->addArgument('user', InputArgument::REQUIRED, 'User who comments on program')
-      ->addArgument('program_name', InputArgument::REQUIRED, 'Program name of program to comment on')
+      ->addArgument('program_name', InputArgument::REQUIRED, 'Project name of program to comment on')
       ->addArgument('message', InputArgument::REQUIRED, 'Comment message')
       ->addArgument('reported', InputArgument::REQUIRED, 'Boolean if it should be a reported comment')
     ;
@@ -65,13 +65,13 @@ class CreateCommentCommand extends Command
     return 0;
   }
 
-  private function postComment(User $user, Program $program, string $message, bool $reported): void
+  private function postComment(User $user, Project $program, string $message, bool $reported): void
   {
     $comment = new UserComment();
     $comment->setUsername($user->getUsername());
     $comment->setUser($user);
     $comment->setText($message);
-    $comment->setProgram($program);
+    $comment->setProject($program);
     $comment->setUploadDate(date_create());
     $comment->setIsReported($reported);
 

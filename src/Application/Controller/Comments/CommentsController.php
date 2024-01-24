@@ -98,7 +98,7 @@ class CommentsController extends AbstractController
     $temp_comment->setUsername($user->getUserIdentifier());
     $temp_comment->setUser($user);
     $temp_comment->setText($_POST['Message']);
-    $temp_comment->setProgram($project);
+    $temp_comment->setProject($project);
     $date_time_zone = new \DateTimeZone('UTC');
     $temp_comment->setUploadDate(date_create('now', $date_time_zone));
     $temp_comment->setIsReported(false);

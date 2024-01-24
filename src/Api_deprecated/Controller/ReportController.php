@@ -2,8 +2,8 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectInappropriateReport;
 use App\DB\Entity\User\User;
 use App\Project\Event\ReportInsertEvent;
 use App\Project\ProjectManager;
@@ -41,10 +41,10 @@ class ReportController extends AbstractController
   #[Route(path: '/api/reportProject/reportProject.json', name: 'catrobat_api_report_program', defaults: ['_format' => 'json'], methods: ['POST', 'GET'])]
   public function reportProjectAction(Request $request): JsonResponse
   {
-    /* @var $project Program */
+    /* @var $project Project */
     /* @var $user User */
     $response = [];
-    if (!$request->request->get('program') || !$request->request->get('category') || !$request->request->get('note')) {
+    if (!$request->request->get('project') || !$request->request->get('category') || !$request->request->get('note')) {
       $response['statusCode'] = 501; // should be a bad request!
       $response['answer'] = $this->translator->trans('errors.post-data', [], 'catroweb');
       $response['preHeaderMessages'] = '';
@@ -53,7 +53,7 @@ class ReportController extends AbstractController
     }
     $category = strval($request->request->get('category'));
     $note = strval($request->request->get('note'));
-    $projectId = strval($request->request->get('program'));
+    $projectId = strval($request->request->get('project'));
     $project = $this->project_manager->find($projectId);
     if (null == $project) {
       $response['statusCode'] = 506; // should be 404!
@@ -62,7 +62,7 @@ class ReportController extends AbstractController
 
       return new JsonResponse($response);
     }
-    $report = new ProgramInappropriateReport();
+    $report = new ProjectInappropriateReport();
     $approved_project = $project->getApproved();
     $featured_project = $this->project_manager->getFeaturedRepository()->isFeatured($project);
     if ($approved_project || $featured_project) {
@@ -99,7 +99,7 @@ class ReportController extends AbstractController
     $project->setVisible(false);
     $report->setCategory($category);
     $report->setNote($note);
-    $report->setProgram($project);
+    $report->setProject($project);
     $report->setReportedUser($project->getUser());
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();

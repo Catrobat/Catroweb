@@ -2,7 +2,7 @@
 
 namespace App\DB\Entity\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -40,13 +40,13 @@ class ProjectCustomTranslation
   public function __construct(
     /**
      * @ORM\ManyToOne(
-     *     targetEntity=Program::class,
+     *     targetEntity=Project::class,
      *     inversedBy="custom_translations"
      * )
      *
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
      */
-    private Program $project,
+    private Project $project,
     /**
      * @ORM\Column(type="string", length=5)
      */
@@ -59,14 +59,14 @@ class ProjectCustomTranslation
     return $this->id;
   }
 
-  public function getProject(): Program
+  public function getProject(): Project
   {
     return $this->project;
   }
 
-  public function setProject(Program $program): void
+  public function setProject(Project $project): void
   {
-    $this->project = $program;
+    $this->project = $project;
   }
 
   public function getLanguage(): string

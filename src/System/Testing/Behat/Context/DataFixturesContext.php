@@ -7,9 +7,9 @@ use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
@@ -27,7 +27,7 @@ use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
-use App\DB\Entity\User\Notifications\NewProgramNotification;
+use App\DB\Entity\User\Notifications\NewProjectNotification;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
@@ -420,7 +420,7 @@ class DataFixturesContext implements Context
   public function thereAreFeaturedProjects(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      /** @var FeaturedProgram $project */
+      /** @var FeaturedProject $project */
       $project = $this->insertFeaturedProject($config, false);
       $this->featured_projects[] = $project;
     }
@@ -522,7 +522,7 @@ class DataFixturesContext implements Context
    */
   public function theProjectShouldHaveNoExtension(): void
   {
-    /** @var Program $project */
+    /** @var Project $project */
     $project = $this->getProjectManager()->findAll()[0];
     Assert::assertNotNull($project->getExtensions());
   }
@@ -532,7 +532,7 @@ class DataFixturesContext implements Context
    */
   public function theProjectShouldHaveDownloads(mixed $id, mixed $downloads): void
   {
-    /** @var Program $project */
+    /** @var Project $project */
     $project = $this->getProjectManager()->find($id);
     $this->getManager()->refresh($project);
     Assert::assertEquals($downloads, $project->getDownloads());
@@ -906,16 +906,16 @@ class DataFixturesContext implements Context
       if (ctype_digit($type)) {
         $type = (int) $type;
       } else {
-        $type = array_search($type, ProgramLike::$TYPE_NAMES, true);
+        $type = array_search($type, ProjectLike::$TYPE_NAMES, true);
         if (false === $type) {
           throw new \Exception('Unknown type "'.$data['type'].'" given.');
         }
       }
-      if (!ProgramLike::isValidType($type)) {
+      if (!ProjectLike::isValidType($type)) {
         throw new \Exception('Unknown type "'.$data['type'].'" given.');
       }
 
-      $like = new ProgramLike($project, $user, $type);
+      $like = new ProjectLike($project, $user, $type);
 
       if (array_key_exists('created at', $data) && !empty(trim((string) $data['created at']))) {
         $like->setCreatedAt(new \DateTime($data['created at'], new \DateTimeZone('UTC')));
@@ -960,15 +960,15 @@ class DataFixturesContext implements Context
           break;
         case 'follow_project':
           $project = $this->getProjectManager()->find($notification['project_id']);
-          $to_create = new NewProgramNotification($user, $project);
+          $to_create = new NewProjectNotification($user, $project);
           break;
         case 'broadcast':
           $to_create = new BroadcastNotification($user, 'title_deprecated', $notification['message']);
           break;
         case 'remix':
-          /** @var Program $parent_project */
+          /** @var Project $parent_project */
           $parent_project = $this->getProjectManager()->find($notification['parent_project']);
-          /** @var Program $child_project */
+          /** @var Project $child_project */
           $child_project = $this->getProjectManager()->find($notification['child_project']);
           $to_create = new RemixNotification($user, $parent_project->getUser(), $parent_project, $child_project);
           break;
@@ -1046,7 +1046,7 @@ class DataFixturesContext implements Context
           $temp_comment->setUsername($user->getUserIdentifier());
           $temp_comment->setUser($user);
           $temp_comment->setText('This is a comment');
-          $temp_comment->setProgram($project);
+          $temp_comment->setProject($project);
           $temp_comment->setUploadDate(date_create());
           $temp_comment->setIsReported(false);
           $em->persist($temp_comment);
@@ -1463,7 +1463,7 @@ class DataFixturesContext implements Context
     Assert::assertEquals(count($table_rows), count($project_machine_translations), 'table has different number of rows');
 
     foreach ($project_machine_translations as $translation) {
-      /** @var Program $project */
+      /** @var Project $project */
       $project = $translation->getProject();
       $project_id = $project->getId();
       $source_language = $translation->getSourceLanguage();

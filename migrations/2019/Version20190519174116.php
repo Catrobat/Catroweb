@@ -22,7 +22,7 @@ final class Version20190519174116 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program ADD debug_build TINYINT(1) DEFAULT \'0\' NOT NULL');
+    $this->addSql('ALTER TABLE project ADD debug_build TINYINT(1) DEFAULT \'0\' NOT NULL');
   }
 
   public function down(Schema $schema): void
@@ -30,6 +30,6 @@ final class Version20190519174116 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program DROP debug_build');
+    $this->addSql('ALTER TABLE project DROP debug_build');
   }
 }

@@ -1,6 +1,6 @@
 @homepage
 Feature:
-  In order to speed up the creation of a pocketcode program
+  In order to speed up the creation of a pocketcode project
   As UX/Design team
   We want to offer the user a library of assets to work with
 

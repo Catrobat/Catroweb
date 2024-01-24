@@ -3,7 +3,7 @@
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractApiProcessor;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -29,17 +29,17 @@ class ProjectsApiProcessor extends AbstractApiProcessor
   /**
    * @throws \Exception
    */
-  public function addProject(AddProjectRequest $add_program_request): ?Program
+  public function addProject(AddProjectRequest $add_program_request): ?Project
   {
     return $this->project_manager->addProject($add_program_request);
   }
 
-  public function saveProject(Program $project): void
+  public function saveProject(Project $project): void
   {
     $this->project_manager->save($project);
   }
 
-  public function updateProject(Program $project, UpdateProjectRequest $request): bool|int
+  public function updateProject(Project $project, UpdateProjectRequest $request): bool|int
   {
     $project_touched = false;
     $extracted_file = null;

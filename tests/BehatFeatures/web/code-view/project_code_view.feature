@@ -6,7 +6,7 @@ Feature: As a visitor I want to see the code view on a project page
   Scenario: For performance reasons the code view is on its own page
     Given there are projects:
       | id | name      |
-      | 1  | program 1 |
+      | 1  | project 1 |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     And I click "#projectCodeViewButton-small"
@@ -17,7 +17,7 @@ Feature: As a visitor I want to see the code view on a project page
   Scenario: Code view provide means to return to the project page
     Given there are projects:
       | id | name      |
-      | 1  | program 1 |
+      | 1  | project 1 |
     And I am on "/app"
     When I go to "/app/project/1/code_view"
     And I click "#top-app-bar__back__btn-back"
@@ -26,7 +26,7 @@ Feature: As a visitor I want to see the code view on a project page
   Scenario: Code view page title is no link
     Given there are projects:
       | id | name      |
-      | 1  | program 1 |
+      | 1  | project 1 |
     And I am on "/app/project/1/code_view"
     And I click "#top-app-bar__title"
     Then I should be on "/app/project/1/code_view"

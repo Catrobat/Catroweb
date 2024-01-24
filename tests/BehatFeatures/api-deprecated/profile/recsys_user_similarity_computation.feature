@@ -3,7 +3,7 @@ Feature: Computes user similarities by analyzing common likes and remixes betwee
   (user-based Collaborative Filtering using Jaccard distance as similarity measure)
 
   The results of the computed similarities are later used by the recommendation algorithm.
-  See tests: get_recommended_programs_homepage.feature
+  See tests: get_recommended_projects_homepage.feature
 
   Scenario: We don't have the import_*.sql files anymore
     Then We can't test anything here
@@ -29,7 +29,7 @@ Feature: Computes user similarities by analyzing common likes and remixes betwee
 #
 #  Scenario: Example #1, only one like-similarity
 #    Given there are likes:
-#      | username  | program_id | type | created at       |
+#      | username  | project_id | type | created at       |
 #      | Catrobat1 | 1          | 1    | 01.01.2017 12:00 |
 #      | Catrobat2 | 1          | 1    | 01.01.2017 12:00 |
 #      | Catrobat2 | 2          | 3    | 01.01.2017 12:00 |
@@ -42,7 +42,7 @@ Feature: Computes user similarities by analyzing common likes and remixes betwee
 #
 #  Scenario: Example #2, like-similarities between multiple users
 #    Given there are likes:
-#      | username  | program_id | type | created at       |
+#      | username  | project_id | type | created at       |
 #      | Catrobat1 | 1          | 1    | 01.01.2017 12:00 |
 #      | Catrobat2 | 1          | 1    | 01.01.2017 12:00 |
 #      | Catrobat2 | 2          | 3    | 01.01.2017 12:00 |

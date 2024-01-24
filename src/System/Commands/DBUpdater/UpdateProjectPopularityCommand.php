@@ -2,12 +2,12 @@
 
 namespace App\System\Commands\DBUpdater;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
-use App\DB\EntityRepository\Project\ProgramRemixRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
+use App\DB\EntityRepository\Project\ProjectRemixRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
 use Symfony\Component\Console\Command\Command;
@@ -24,7 +24,7 @@ class UpdateProjectPopularityCommand extends Command
   final public const REMIXES_W = 45;
   final public const REACTIONS_W = 15;
 
-  public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected ProgramRemixRepository $program_remix_repository, protected ProgramLikeRepository $program_like_repository)
+  public function __construct(protected EntityManagerInterface $entity_manager, protected ProjectRepository $program_repository, protected ProjectRemixRepository $program_remix_repository, protected ProjectLikeRepository $program_like_repository)
   {
     parent::__construct();
   }
@@ -57,14 +57,14 @@ class UpdateProjectPopularityCommand extends Command
     return Command::SUCCESS;
   }
 
-  protected function computePopularity(Program $program, array $min_max_values): float
+  protected function computePopularity(Project $program, array $min_max_values): float
   {
     $normalized_data = $this->getNormalizedData($program, $min_max_values);
 
     return round($normalized_data['views'] * self::VIEWS_W + $normalized_data['downloads'] * self::DOWNLOADS_W + $normalized_data['remixes'] * self::REMIXES_W + $normalized_data['reactions'] * self::REACTIONS_W, 2);
   }
 
-  protected function getNormalizedData(Program $program, array $min_max_values): array
+  protected function getNormalizedData(Project $program, array $min_max_values): array
   {
     return [
       'views' => $this->scale($program->getViews(), $min_max_values['views_min'], $min_max_values['views_max']),
@@ -127,8 +127,8 @@ class UpdateProjectPopularityCommand extends Command
     $query_builder = $this->entity_manager->createQueryBuilder();
     $query_builder
       ->select('COUNT(r.ancestor_id) as count')
-      ->from(Program::class, 'p')
-      ->leftJoin(ProgramRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
+      ->from(Project::class, 'p')
+      ->leftJoin(ProjectRemixRelation::class, 'r', Join::WITH, 'p.id = r.ancestor_id')
       ->groupBy('r.ancestor_id')
       ->orderBy('count', 'DESC')
     ;
@@ -148,10 +148,10 @@ class UpdateProjectPopularityCommand extends Command
     $query_builder = $this->entity_manager->createQueryBuilder();
 
     $query_builder
-      ->select('COUNT(e.program_id) as count')
-      ->from(Program::class, 'p')
-      ->leftJoin(ProgramLike::class, 'e', Join::WITH, 'p.id = e.program_id')
-      ->groupBy('e.program_id')
+      ->select('COUNT(e.project_id) as count')
+      ->from(Project::class, 'p')
+      ->leftJoin(ProjectLike::class, 'e', Join::WITH, 'p.id = e.project_id')
+      ->groupBy('e.project_id')
       ->orderBy('count', 'DESC')
       ->setMaxResults(1)
     ;

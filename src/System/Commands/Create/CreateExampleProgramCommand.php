@@ -2,8 +2,8 @@
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\ExampleProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\ExampleProject;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -56,10 +56,10 @@ class CreateExampleProgramCommand extends Command
   /**
    * @throws \Exception
    */
-  private function exampleProgram(Program $program): void
+  private function exampleProgram(Project $program): void
   {
-    $example = new ExampleProgram();
-    $example->setProgram($program);
+    $example = new ExampleProject();
+    $example->setProject($program);
     $example->setActive(true);
     $example->setFlavor(random_int(0, 1) ? $this->flavor_repository->getFlavorByName('arduino') : $this->flavor_repository->getFlavorByName('embroidery'));
     $example->setImageType('jpeg'); // todo picture?

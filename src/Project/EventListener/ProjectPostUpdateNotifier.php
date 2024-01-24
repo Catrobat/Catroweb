@@ -2,7 +2,7 @@
 
 namespace App\Project\EventListener;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\TagRepository;
@@ -16,7 +16,7 @@ class ProjectPostUpdateNotifier
   {
   }
 
-  public function postUpdate(Program $project, LifecycleEventArgs $event): void
+  public function postUpdate(Project $project, LifecycleEventArgs $event): void
   {
     $user = $project->getUser();
     $this->addCodingJam092021Achievement($project, $user);
@@ -26,7 +26,7 @@ class ProjectPostUpdateNotifier
   /**
    * @throws \Exception
    */
-  protected function addCodingJam092021Achievement(Program $project, User $user): void
+  protected function addCodingJam092021Achievement(Project $project, User $user): void
   {
     $tags = $project->getTags();
     /** @var Tag $tag */
@@ -46,7 +46,7 @@ class ProjectPostUpdateNotifier
     }
   }
 
-  private function invalidateTranslationCacheIfNecessary(Program $project): void
+  private function invalidateTranslationCacheIfNecessary(Project $project): void
   {
     if ($project->shouldInvalidateTranslationCache()) {
       $this->machine_translation_repository->invalidateCachedTranslation($project);

@@ -1,8 +1,8 @@
 @api @disabled
-Feature: Get recommended programs on homepage
+Feature: Get recommended projects on homepage
 
-  To find yet unliked programs that were liked by similar users.
-  Similar users are users that liked some of the same programs that the current user also liked
+  To find yet unliked projects that were liked by similar users.
+  Similar users are users that liked some of the same projects that the current user also liked
   (user-based Collaborative Filtering using Jaccard distance as similarity measure).
 
   Background:

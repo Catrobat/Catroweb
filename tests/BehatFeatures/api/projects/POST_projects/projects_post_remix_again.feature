@@ -1,5 +1,5 @@
 @api @projects @post @remixes @repost
-Feature: Upload a remixed program with multiple parents
+Feature: Upload a remixed project with multiple parents
 
   Background:
     Given there are users:
@@ -8,13 +8,13 @@ Feature: Upload a remixed program with multiple parents
 
     And there are projects:
       | id | name      | description | owned by | downloads | views | upload time      | version | remix_root |
-      | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
-      | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | true       |
-      | 3  | program 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | true       |
-      | 4  | program 4 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
-      | 5  | program 5 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | false      |
-      | 6  | program 6 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
-      | 7  | program 7 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
+      | 1  | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
+      | 2  | project 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | true       |
+      | 3  | project 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | true       |
+      | 4  | project 4 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
+      | 5  | project 5 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | false      |
+      | 6  | project 6 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
+      | 7  | project 7 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
 
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph looks like according to the following forward remix relations (closure table):
@@ -58,9 +58,9 @@ Feature: Upload a remixed program with multiple parents
       | 29495624          | 5                 |
       | 29495624          | 7                 |
 
-  Scenario: reuploading program 4 with only one parent unlinks former parent
+  Scenario: reuploading project 4 with only one parent unlinks former parent
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                  (1) (2)  (3)    (Scratch)                    (1) (2)  (3)    (Scratch)
     #                    \ /    /         /                           \      /         /
@@ -72,7 +72,7 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 4" and "url" set to "program 1[/pocketalice/project/1]"
+    Given I have a project with "name" set to "project 4" and "url" set to "project 1[/pocketalice/project/1]"
     When I upload this generated project, API version 2
     Then the uploaded project should not be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
@@ -84,7 +84,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded project should have a Catrobat forward descendant having id "6" and depth "1", API version 2
     And the uploaded project should have a Catrobat forward descendant having id "7" and depth "2", API version 2
     And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 1[/pocketalice/project/1]" in the xml, API version 2
+    And the uploaded project should have RemixOf "project 1[/pocketalice/project/1]" in the xml, API version 2
 
     And the project "1" should be a remix root
     And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -149,9 +149,9 @@ Feature: Upload a remixed program with multiple parents
     And the project "7" should have no further Scratch parents
     And the project "7" should have no Catrobat forward descendants except self-relation
 
-  Scenario: reuploading program 6 with only one parent unlinks former parent
+  Scenario: reuploading project 6 with only one parent unlinks former parent
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                  (1) (2)  (3)    (Scratch)                    (1) (2)  (3)    (Scratch)
     #                    \ /    /         /                           \ /    /         /
@@ -163,7 +163,7 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 6" and "url" set to "program 5[/pocketalice/project/5]"
+    Given I have a project with "name" set to "project 6" and "url" set to "project 5[/pocketalice/project/5]"
     When I upload this generated project, API version 2
     Then the uploaded project should not be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
@@ -175,7 +175,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded project should have no Scratch parents, API version 2
     And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 2
     And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 5[/pocketalice/project/5]" in the xml, API version 2
+    And the uploaded project should have RemixOf "project 5[/pocketalice/project/5]" in the xml, API version 2
 
     And the project "1" should be a remix root
     And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -234,9 +234,9 @@ Feature: Upload a remixed program with multiple parents
     And the project "7" should have no further Scratch parents
     And the project "7" should have no Catrobat forward descendants except self-relation
 
-  Scenario: reuploading program 6 with additional backward parent creates backward relation and unlinks former parent
+  Scenario: reuploading project 6 with additional backward parent creates backward relation and unlinks former parent
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                  (1) (2)  (3)    (Scratch)                    (1) (2)  (3)    (Scratch)
     #                    \ /    /         /                           \ /    /         /
@@ -247,10 +247,10 @@ Feature: Upload a remixed program with multiple parents
     #                      (7)_______/                                  (7)_______/
     #
     #-------------------------------------------------------------------------------------------------------------------
-    #  Expected result after upload: program 7 becomes a backward parent of program 6 as well!
+    #  Expected result after upload: project 7 becomes a backward parent of project 6 as well!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 6", "url" set to "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" and "catrobatLanguageVersion" set to "0.993"
+    Given I have a project with "name" set to "project 6", "url" set to "project 6[/app/project/6], Merge 1[project 5[/pocketalice/project/5], project 7[/pocketalice/project/7]]" and "catrobatLanguageVersion" set to "0.993"
     When I upload this generated project, API version 2
     Then the uploaded project should not be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
@@ -263,7 +263,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded project should have no Scratch parents, API version 2
     And the uploaded project should have a Catrobat forward descendant having id "7" and depth "1", API version 2
     And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 6[/app/project/6], Merge 1[program 5[/pocketalice/project/5], program 7[/pocketalice/project/7]]" in the xml, API version 2
+    And the uploaded project should have RemixOf "project 6[/app/project/6], Merge 1[project 5[/pocketalice/project/5], project 7[/pocketalice/project/7]]" in the xml, API version 2
 
     And the project "1" should be a remix root
     And the project "1" should have a Catrobat forward ancestor having id "1" and depth "0"
@@ -322,10 +322,10 @@ Feature: Upload a remixed program with multiple parents
     And the project "7" should have no further Scratch parents
     And the project "7" should have no Catrobat forward descendants except self-relation
 
-  Scenario: reuploading former root program 1 with two new Scratch parents and one additional backward parent
+  Scenario: reuploading former root project 1 with two new Scratch parents and one additional backward parent
   creates backward relation and two new Scratch relations
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                                                        (Scratch #2)              (Scratch #1)
     #                                                               \  ___________________/
@@ -339,10 +339,10 @@ Feature: Upload a remixed program with multiple parents
     #                      (7)_______/                                  (7)_______/
     #
     #-------------------------------------------------------------------------------------------------------------------
-    #  Expected result after upload: program 6 becomes a backward parent of program 1 as well!
+    #  Expected result after upload: project 6 becomes a backward parent of project 1 as well!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 1", "url" set to "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" and "catrobatLanguageVersion" set to "0.993"
+    Given I have a project with "name" set to "project 1", "url" set to "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[project 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" and "catrobatLanguageVersion" set to "0.993"
     When I upload this generated project, API version 2
     Then the uploaded project should be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
@@ -357,7 +357,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 2
     And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 2
     And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[program 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" in the xml, API version 2
+    And the uploaded project should have RemixOf "Test Scratch [https://scratch.mit.edu/projects/1], Merge1[project 6[/app/project/6], Music Inventor [https://scratch.mit.edu/projects/29495624]]" in the xml, API version 2
 
     And the project "2" should be a remix root
     And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
@@ -428,10 +428,10 @@ Feature: Upload a remixed program with multiple parents
     And the project "7" should have no further Scratch parents
     And the project "7" should have no Catrobat forward descendants except self-relation
 
-  Scenario: reuploading former root program 1 with one new Scratch parent and one additional backward parent
+  Scenario: reuploading former root project 1 with one new Scratch parent and one additional backward parent
   creates backward relation and new Scratch relation
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                                                                                  (Scratch)
     #                                                                  ___________________/
@@ -445,10 +445,10 @@ Feature: Upload a remixed program with multiple parents
     #                      (7)_______/                                  (7)_______/
     #
     #-------------------------------------------------------------------------------------------------------------------
-    #  Expected result after upload: program 7 becomes a backward parent of program 1 as well!
+    #  Expected result after upload: project 7 becomes a backward parent of project 1 as well!
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 1", "url" set to "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
+    Given I have a project with "name" set to "project 1", "url" set to "project 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" and "catrobatLanguageVersion" set to "0.993"
     When I upload this generated project, API version 2
     Then the uploaded project should be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
@@ -462,7 +462,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 2
     And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 2
     And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 2
+    And the uploaded project should have RemixOf "project 7[/app/project/7], Music Inventor [https://scratch.mit.edu/projects/29495624]" in the xml, API version 2
 
     And the project "2" should be a remix root
     And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"
@@ -533,10 +533,10 @@ Feature: Upload a remixed program with multiple parents
     And the project "7" should have no further Scratch parents
     And the project "7" should have no Catrobat forward descendants except self-relation
 
-  Scenario: reuploading former root program 1 with program 5 as forward parent appends program 1 accordingly and
-  inherits all ancestors of program 5 to program 1
+  Scenario: reuploading former root project 1 with project 5 as forward parent appends project 1 accordingly and
+  inherits all ancestors of project 5 to project 1
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                                                                      (3) (Scratch)
     #                                                                       \ /     \
@@ -552,7 +552,7 @@ Feature: Upload a remixed program with multiple parents
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 1" and "url" set to "program 5[/app/project/5]"
+    Given I have a project with "name" set to "project 1" and "url" set to "project 5[/app/project/5]"
     When I upload this generated project, API version 2
     Then the uploaded project should not be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
@@ -566,7 +566,7 @@ Feature: Upload a remixed program with multiple parents
     And the uploaded project should have a Catrobat forward descendant having id "6" and depth "2", API version 2
     And the uploaded project should have a Catrobat forward descendant having id "7" and depth "3", API version 2
     And the uploaded project should have no further Catrobat forward descendants, API version 2
-    And the uploaded project should have RemixOf "program 5[/app/project/5]" in the xml, API version 2
+    And the uploaded project should have RemixOf "project 5[/app/project/5]" in the xml, API version 2
 
     And the project "2" should be a remix root
     And the project "2" should have a Catrobat forward ancestor having id "2" and depth "0"

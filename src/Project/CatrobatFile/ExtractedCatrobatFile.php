@@ -2,7 +2,7 @@
 
 namespace App\Project\CatrobatFile;
 
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\CatrobatCode\CodeObject;
 use App\Project\CatrobatCode\StatementFactory;
 use App\Project\Remix\RemixData;
@@ -251,7 +251,7 @@ class ExtractedCatrobatFile
   /**
    * based on: http://stackoverflow.com/a/27295688.
    */
-  public function getRemixesData(string $project_id, bool $is_initial_version, ProgramRepository $project_repository, bool $migration_mode = false): array
+  public function getRemixesData(string $project_id, bool $is_initial_version, ProjectRepository $project_repository, bool $migration_mode = false): array
   {
     $remixes_string = $migration_mode ? $this->getRemixMigrationUrlsString() : $this->getRemixUrlsString();
     $state = RemixUrlParsingState::STARTING;

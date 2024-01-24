@@ -2,7 +2,7 @@
 
 namespace App\Application\Controller\Ci;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -25,20 +25,20 @@ class ApkStatusController extends AbstractController
   #[Route(path: '/ci/status/{id}', name: 'ci_status', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function getApkStatusAction(string $id): JsonResponse
   {
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       return new JsonResponse(null, Response::HTTP_NOT_FOUND);
     }
     $result = [];
     switch ($project->getApkStatus()) {
-      case Program::APK_READY:
+      case Project::APK_READY:
         $result['status'] = 'ready';
         $result['url'] = $this->generateUrl('ci_download',
           ['id' => $project->getId(), 'fname' => $project->getName()], UrlGeneratorInterface::ABSOLUTE_URL);
         $result['label'] = $this->translator->trans('ci.download', [], 'catroweb');
         break;
-      case Program::APK_PENDING:
+      case Project::APK_PENDING:
         $result['status'] = 'pending';
         $result['label'] = $this->translator->trans('ci.pending', [], 'catroweb');
         break;

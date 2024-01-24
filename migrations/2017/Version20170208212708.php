@@ -18,7 +18,7 @@ class Version20170208212708 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program_downloads ADD locale VARCHAR(255) DEFAULT \'\'');
+    $this->addSql('ALTER TABLE project_downloads ADD locale VARCHAR(255) DEFAULT \'\'');
     $this->addSql('ALTER TABLE click_statistics ADD locale VARCHAR(255) DEFAULT \'\'');
   }
 
@@ -31,6 +31,6 @@ class Version20170208212708 extends AbstractMigration
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
     $this->addSql('ALTER TABLE click_statistics DROP locale');
-    $this->addSql('ALTER TABLE program_downloads DROP locale');
+    $this->addSql('ALTER TABLE project_downloads DROP locale');
   }
 }

@@ -2,7 +2,7 @@
 
 namespace App\Admin\Projects;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -22,7 +22,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * @phpstan-extends AbstractAdmin<Program>
+ * @phpstan-extends AbstractAdmin<Project>
  */
 class ProjectsAdmin extends AbstractAdmin
 {
@@ -63,7 +63,7 @@ class ProjectsAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $form): void
   {
     $form
-      ->add('name', TextType::class, ['label' => 'Program name'])
+      ->add('name', TextType::class, ['label' => 'Project name'])
       ->add('description')
       ->add('user', EntityType::class, ['class' => User::class])
       ->add('flavor')

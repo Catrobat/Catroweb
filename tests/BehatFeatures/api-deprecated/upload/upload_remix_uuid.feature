@@ -1,5 +1,5 @@
 @api @upload @remixes @reupload
-Feature: Upload a remixed program with multiple parents should also work with the new UUIDs
+Feature: Upload a remixed project with multiple parents should also work with the new UUIDs
 
   Background:
     Given there are users:
@@ -8,13 +8,13 @@ Feature: Upload a remixed program with multiple parents should also work with th
 
     And there are projects:
       | id                                   | name      | description | owned by | downloads | views | upload time      | version | remix_root |
-      | 390a46b7-4dca-11ea-b467-08002765cf2c | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
-      | 38389632-4dca-11ea-b467-08002765cf2c | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | true       |
-      | 35d70287-4dca-11ea-b467-08002765cf2c | program 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | true       |
-      | 379dc210-4dca-11ea-b467-08002765cf2c | program 4 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
-      | 110a46b7-4dca-11ea-b467-08002765cf2c | program 5 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | false      |
-      | 220a46b7-4dca-11ea-b467-08002765cf2c | program 6 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
-      | 330a46b7-4dca-11ea-b467-08002765cf2c | program 7 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
+      | 390a46b7-4dca-11ea-b467-08002765cf2c | project 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | true       |
+      | 38389632-4dca-11ea-b467-08002765cf2c | project 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | true       |
+      | 35d70287-4dca-11ea-b467-08002765cf2c | project 3 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | true       |
+      | 379dc210-4dca-11ea-b467-08002765cf2c | project 4 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | false      |
+      | 110a46b7-4dca-11ea-b467-08002765cf2c | project 5 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   | false      |
+      | 220a46b7-4dca-11ea-b467-08002765cf2c | project 6 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
+      | 330a46b7-4dca-11ea-b467-08002765cf2c | project 7 |             | Catrobat | 133       | 33    | 01.01.2012 13:00 | 0.8.5   | false      |
 
     #-------------------------------------------------------------------------------------------------------------------
     # this is how the remix graph looks like according to the following forward remix relations (closure table):
@@ -58,9 +58,9 @@ Feature: Upload a remixed program with multiple parents should also work with th
       | 29495624          | 110a46b7-4dca-11ea-b467-08002765cf2c |
       | 29495624          | 330a46b7-4dca-11ea-b467-08002765cf2c |
 
-  Scenario: reuploading program 4 with only one parent unlinks former parent
+  Scenario: reuploading project 4 with only one parent unlinks former parent
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #                  (1) (2)  (3)    (Scratch)                    (1) (2)  (3)    (Scratch)
     #                    \ /    /         /                           \      /         /
@@ -72,7 +72,7 @@ Feature: Upload a remixed program with multiple parents should also work with th
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I am "Catrobat"
-    Given I have a project with "name" set to "program 4" and "url" set to "program 390a46b7-4dca-11ea-b467-08002765cf2c[/pocketalice/project/390a46b7-4dca-11ea-b467-08002765cf2c]"
+    Given I have a project with "name" set to "project 4" and "url" set to "project 390a46b7-4dca-11ea-b467-08002765cf2c[/pocketalice/project/390a46b7-4dca-11ea-b467-08002765cf2c]"
     When I upload a generated project, API version 1
     Then the uploaded project should not be a remix root, API version 1
     And the uploaded project should have remix migration date NOT NULL, API version 1
@@ -84,7 +84,7 @@ Feature: Upload a remixed program with multiple parents should also work with th
     And the uploaded project should have a Catrobat forward descendant having id "220a46b7-4dca-11ea-b467-08002765cf2c" and depth "1", API version 1
     And the uploaded project should have a Catrobat forward descendant having id "330a46b7-4dca-11ea-b467-08002765cf2c" and depth "2", API version 1
     And the uploaded project should have no further Catrobat forward descendants, API version 1
-    And the uploaded project should have RemixOf "program 390a46b7-4dca-11ea-b467-08002765cf2c[/pocketalice/project/390a46b7-4dca-11ea-b467-08002765cf2c]" in the xml, API version 1
+    And the uploaded project should have RemixOf "project 390a46b7-4dca-11ea-b467-08002765cf2c[/pocketalice/project/390a46b7-4dca-11ea-b467-08002765cf2c]" in the xml, API version 1
 
     And the project "390a46b7-4dca-11ea-b467-08002765cf2c" should be a remix root
     And the project "390a46b7-4dca-11ea-b467-08002765cf2c" should have a Catrobat forward ancestor having id "390a46b7-4dca-11ea-b467-08002765cf2c" and depth "0"

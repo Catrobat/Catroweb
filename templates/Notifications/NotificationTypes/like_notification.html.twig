@@ -17,7 +17,7 @@
       (
       {
         '%user_link%': '<a href="'~path('profile', {'id': notification.getLikeFrom.id|escape})~'">'~notification.getLikeFrom.getUserName|escape~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.program.id|escape})~'">'~notification.program.name|escape~'</a>'
+        '%program_link%': '<a href="'~path('program', {'id': notification.project.id|escape})~'">'~notification.project.name|escape~'</a>'
       },
       'catroweb'
     )

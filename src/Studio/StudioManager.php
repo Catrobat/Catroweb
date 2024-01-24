@@ -2,17 +2,17 @@
 
 namespace App\Studio;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
-use App\DB\EntityRepository\Studios\StudioProgramRepository;
+use App\DB\EntityRepository\Studios\StudioProjectRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
 use App\DB\EntityRepository\User\Comment\UserCommentRepository;
@@ -24,7 +24,7 @@ class StudioManager
     protected EntityManagerInterface $entity_manager,
     protected StudioRepository $studio_repository,
     protected StudioActivityRepository $studio_activity_repository,
-    protected StudioProgramRepository $studio_project_repository,
+    protected StudioProjectRepository $studio_project_repository,
     protected StudioUserRepository $studio_user_repository,
     protected UserCommentRepository $user_comment_repository,
     protected StudioJoinRequestRepository $studio_join_request_repository
@@ -99,13 +99,13 @@ class StudioManager
     return $comment;
   }
 
-  protected function createStudioProgram(User $user, Studio $studio, StudioActivity $activity, Program $project): StudioProgram
+  protected function createStudioProgram(User $user, Studio $studio, StudioActivity $activity, Project $project): StudioProject
   {
-    $studioProject = (new StudioProgram())
+    $studioProject = (new StudioProject())
       ->setStudio($studio)
       ->setActivity($activity)
       ->setUser($user)
-      ->setProgram($project)
+      ->setProject($project)
       ->setCreatedOn(new \DateTime())
     ;
 
@@ -159,7 +159,7 @@ class StudioManager
     return $this->createStudioComment($user, $studio, $activity, $comment_text, $parent_id);
   }
 
-  public function addProjectToStudio(User $user, Studio $studio, Program $project): ?StudioProgram
+  public function addProjectToStudio(User $user, Studio $studio, Project $project): ?StudioProject
   {
     if (!$this->isUserInStudio($user, $studio)) {
       return null;
@@ -249,7 +249,7 @@ class StudioManager
     }
   }
 
-  public function deleteProjectFromStudio(User $user, Studio $studio, Program $program): void
+  public function deleteProjectFromStudio(User $user, Studio $studio, Project $program): void
   {
     $studio_project = $this->findStudioProject($studio, $program);
 
@@ -373,7 +373,7 @@ class StudioManager
     return $this->studio_project_repository->findAllStudioProjects($studio);
   }
 
-  public function findStudioProject(Studio $studio, Program $program): ?StudioProgram
+  public function findStudioProject(Studio $studio, Project $program): ?StudioProject
   {
     return $this->studio_project_repository->findStudioProject($studio, $program);
   }

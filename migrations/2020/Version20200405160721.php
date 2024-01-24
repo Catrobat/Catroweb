@@ -23,7 +23,7 @@ final class Version20200405160721 extends AbstractMigration
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
     $this->addSql('CREATE FULLTEXT INDEX IDX_9FB73D775E237E06 ON extension (name)');
-    $this->addSql('CREATE FULLTEXT INDEX IDX_92ED7784BF3967505E237E066DE440264117D17E ON program (id, name, description, credits)');
+    $this->addSql('CREATE FULLTEXT INDEX IDX_92ED7784BF3967505E237E066DE440264117D17E ON project (id, name, description, credits)');
     $this->addSql('CREATE FULLTEXT INDEX IDX_6FBC9426F359C1427D90298BA28E7734CC75CECE ON tags (en, de, it, fr)');
     $this->addSql('CREATE FULLTEXT INDEX IDX_957A6479F85E0677 ON fos_user (username)');
   }
@@ -35,7 +35,7 @@ final class Version20200405160721 extends AbstractMigration
 
     $this->addSql('DROP INDEX IDX_9FB73D775E237E06 ON extension');
     $this->addSql('DROP INDEX IDX_957A6479F85E0677 ON fos_user');
-    $this->addSql('DROP INDEX IDX_92ED7784BF3967505E237E066DE440264117D17E ON program');
+    $this->addSql('DROP INDEX IDX_92ED7784BF3967505E237E066DE440264117D17E ON project');
     $this->addSql('DROP INDEX IDX_6FBC9426F359C1427D90298BA28E7734CC75CECE ON tags');
   }
 }

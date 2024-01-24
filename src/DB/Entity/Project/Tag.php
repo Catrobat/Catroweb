@@ -42,9 +42,9 @@ class Tag
   protected ?int $id = null;
 
   /**
-   * @ORM\ManyToMany(targetEntity=Program::class, mappedBy="tags")
+   * @ORM\ManyToMany(targetEntity=Project::class, mappedBy="tags")
    */
-  protected Collection $programs;
+  protected Collection $projects;
 
   /**
    * @ORM\Column(name="internal_title", type="string", nullable=false)
@@ -63,7 +63,7 @@ class Tag
 
   public function __construct()
   {
-    $this->programs = new ArrayCollection();
+    $this->projects = new ArrayCollection();
   }
 
   public function getId(): ?int
@@ -107,26 +107,26 @@ class Tag
     return $this;
   }
 
-  public function addProgram(Program $program): void
+  public function addProject(Project $project): void
   {
-    if ($this->programs->contains($program)) {
+    if ($this->projects->contains($project)) {
       return;
     }
-    $this->programs->add($program);
+    $this->projects->add($project);
   }
 
   public function getProjectCount(): int
   {
-    return count($this->programs);
+    return count($this->projects);
   }
 
-  public function removeProgram(Program $program): void
+  public function removeProject(Project $project): void
   {
-    $this->programs->removeElement($program);
+    $this->projects->removeElement($project);
   }
 
-  public function getPrograms(): Collection
+  public function getProjects(): Collection
   {
-    return $this->programs;
+    return $this->projects;
   }
 }

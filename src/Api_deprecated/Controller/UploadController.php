@@ -2,7 +2,7 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
@@ -108,7 +108,7 @@ class UploadController
     return $this->translator->trans($message, $parameters, 'catroweb');
   }
 
-  private function createUploadResponse(Request $request, User $user, Program $project): array
+  private function createUploadResponse(Request $request, User $user, Project $project): array
   {
     $response = [];
     $this->user_manager->updateUser($user);
@@ -117,7 +117,7 @@ class UploadController
     $response['statusCode'] = Response::HTTP_OK;
     $response['answer'] = $this->trans('success.upload');
     $response['token'] = $user->getUploadToken();
-    $request->attributes->set('program_id', $project->getId());
+    $request->attributes->set('project_id', $project->getId());
     $response['preHeaderMessages'] = '';
 
     return $response;
@@ -133,7 +133,7 @@ class UploadController
     $response['answer'] = $this->trans('failure.upload');
     $response['token'] = $user->getUploadToken();
 
-    $request->attributes->set('program_id', 0);
+    $request->attributes->set('project_id', 0);
     $response['preHeaderMessages'] = '';
 
     return $response;

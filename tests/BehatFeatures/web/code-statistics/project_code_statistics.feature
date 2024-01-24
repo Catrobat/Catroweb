@@ -4,7 +4,7 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: For performance reasons the code statistics are on its own page
     Given there are projects:
       | id | name      |
-      | 1  | program 1 |
+      | 1  | project 1 |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     And I click "#projectCodeStatsButton-small"
@@ -15,7 +15,7 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: Code statistics provide means to return to the project page
     Given there are projects:
       | id | name      |
-      | 1  | program 1 |
+      | 1  | project 1 |
     And I am on "/app"
     And I wait for the page to be loaded
     When I go to "/app/project/1/code_statistics"
@@ -26,7 +26,7 @@ Feature: As a visitor I want to see code statistics on the project page
   Scenario: Code statistics page title is no link
     Given there are projects:
       | id | name      |
-      | 1  | program 1 |
+      | 1  | project 1 |
     And I am on "/app/project/1/code_statistics"
     And I click "#top-app-bar__title"
     Then I should be on "/app/project/1/code_statistics"

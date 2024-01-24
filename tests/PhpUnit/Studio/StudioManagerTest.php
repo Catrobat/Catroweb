@@ -5,7 +5,7 @@ namespace Tests\PhpUnit\Studio;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
-use App\DB\Entity\Studio\StudioProgram;
+use App\DB\Entity\Studio\StudioProject;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -56,7 +56,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->entity_manager = $kernel->getContainer()->get('doctrine')->getManager();
     $studio_repository = $this->entity_manager->getRepository(Studio::class);
     $studio_activity_repository = $this->entity_manager->getRepository(StudioActivity::class);
-    $studio_project_repository = $this->entity_manager->getRepository(StudioProgram::class);
+    $studio_project_repository = $this->entity_manager->getRepository(StudioProject::class);
     $studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
     $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
     $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
@@ -236,7 +236,7 @@ class StudioManagerTest extends DefaultTestCase
     $this->object->addUserToStudio($this->user, $this->studio, $newUser);
     $this->object->addUserToStudio($this->user, $this->studio, $newUser_2);
     $studio_project = $this->object->addProjectToStudio($newUser, $this->studio, $project);
-    $this->assertInstanceOf(StudioProgram::class, $studio_project);
+    $this->assertInstanceOf(StudioProject::class, $studio_project);
     $this->object->deleteProjectFromStudio($newUser_2, $this->studio, $project);
     $this->assertNotNull($this->object->findStudioProject($this->studio, $project));
     $this->object->deleteProjectFromStudio($newUser, $this->studio, $project);

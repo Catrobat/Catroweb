@@ -1,5 +1,5 @@
 @api @tag 
-Feature: Upload a program with tag (Attention still the deprecated API!)
+Feature: Upload a project with tag (Attention still the deprecated API!)
 
   Background:
     And I run the update tags command

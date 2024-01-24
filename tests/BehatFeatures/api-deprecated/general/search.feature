@@ -1,5 +1,5 @@
 @api @search
-Feature: Search programs
+Feature: Search projects
 
   Background:
     Given there are users:
@@ -23,7 +23,7 @@ Feature: Search programs
     And the server name is "pocketcode.org"
     And I wait 1000 milliseconds
 
-  Scenario: Search for a program
+  Scenario: Search for a project
 
     Given the HTTP Request:
       | Method | GET                           |
@@ -65,7 +65,7 @@ Feature: Search programs
       }
       """
 
-  Scenario: No programs are found
+  Scenario: No projects are found
 
     When searching for "NOTHINGTOBEFIOUND"
     Then I should get the json object:

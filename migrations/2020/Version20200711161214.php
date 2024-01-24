@@ -21,13 +21,13 @@ final class Version20200711161214 extends AbstractMigration
   {
     // this up() migration is auto-generated, please modify it to your needs
     $this->addSql('ALTER TABLE fos_user DROP limited');
-    $this->addSql('ALTER TABLE program ADD snapshots_enabled TINYINT(1) DEFAULT \'0\' NOT NULL');
+    $this->addSql('ALTER TABLE project ADD snapshots_enabled TINYINT(1) DEFAULT \'0\' NOT NULL');
   }
 
   public function down(Schema $schema): void
   {
     // this down() migration is auto-generated, please modify it to your needs
     $this->addSql('ALTER TABLE fos_user ADD limited TINYINT(1) DEFAULT \'0\' NOT NULL');
-    $this->addSql('ALTER TABLE program DROP snapshots_enabled');
+    $this->addSql('ALTER TABLE project DROP snapshots_enabled');
   }
 }

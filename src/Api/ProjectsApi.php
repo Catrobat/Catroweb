@@ -4,7 +4,7 @@ namespace App\Api;
 
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
-use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\Project\AddProjectRequest;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
@@ -367,7 +367,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $this->facade->getEventDispatcher()->dispatch(
-      new ProjectDownloadEvent($user, $project, ProgramDownloads::TYPE_PROJECT)
+      new ProjectDownloadEvent($user, $project, ProjectDownloads::TYPE_PROJECT)
     );
 
     return $response;

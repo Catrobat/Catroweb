@@ -1,5 +1,5 @@
 @api @upload
-Feature: Upload a program to the website
+Feature: Upload a project to the website
 
   Background:
 
@@ -8,7 +8,7 @@ Feature: Upload a program to the website
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
 
-  Scenario: Upload program
+  Scenario: Upload project
     Given the HTTP Request:
       | Method | POST                        |
       | Url    | /app/api/upload/upload.json |
@@ -46,4 +46,4 @@ Feature: Upload a program to the website
     Examples:
       | problem              | errorcode | answer                            |
       | missing parameters   | 501       | POST-data not correct or missing! |
-      | invalid program file | 505       | invalid file                      |
+      | invalid project file | 505       | invalid file                      |

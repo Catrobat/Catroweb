@@ -2,7 +2,7 @@
 
 namespace App\Admin\Projects;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use Sonata\AdminBundle\Exception\ModelManagerThrowable;
 use Sonata\DoctrineORMAdminBundle\Model\ModelManager;
@@ -14,7 +14,7 @@ trait ProjectPreUpdateTrait
    */
   public function preUpdate(object $object): void
   {
-    /** @var Program $object */
+    /** @var Project $object */
     /** @var ModelManager $model_manager */
     $model_manager = $this->getModelManager();
     $old_project = $model_manager->getEntityManager($this->getClass())

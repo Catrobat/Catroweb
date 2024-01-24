@@ -1,5 +1,5 @@
 @homepage @remixgraph
-Feature: As a visitor I want to see the full remix graph of a program on the program page
+Feature: As a visitor I want to see the full remix graph of a project on the project page
 
   Background:
     Given there are users:

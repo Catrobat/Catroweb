@@ -10,8 +10,8 @@ Feature: User gets notifications for new followers, reactions, comments, ..
 
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
-      | 2  | program 2 | User     |
+      | 1  | project 1 | Catrobat |
+      | 2  | project 2 | User     |
 
   Scenario: Notification page must have multiple tabs
     Given I log in as "Catrobat"
@@ -45,50 +45,50 @@ Feature: User gets notifications for new followers, reactions, comments, ..
     Then I should see "It looks like you don't have any remix notifications."
 
   Scenario: Notifications tabs contain only notifications of their type
-    Given there are "1" "like" notifications for project "program 1" from "User"
-    And there are "1" "comment" notifications for project "program 1" from "User"
-    And there are "1" "remix" notifications for project "program 1" from "User"
+    Given there are "1" "like" notifications for project "project 1" from "User"
+    And there are "1" "comment" notifications for project "project 1" from "User"
+    And there are "1" "remix" notifications for project "project 1" from "User"
     And there is a notification that "User" follows "Catrobat"
 
     When I log in as "Catrobat"
     And I am on "/app/user_notifications"
     And I wait for the page to be loaded
     Then I should see "User is now following you."
-    And I should see "User created a remix program 1 of your game program 1."
-    And I should see "User commented on program 1."
-    And I should see "User reacted to program 1."
+    And I should see "User created a remix project 1 of your game project 1."
+    And I should see "User commented on project 1."
+    And I should see "User reacted to project 1."
 
     When I click "#reaction-notif"
     Then I should not see "User is now following you."
-    And I should not see "User created a remix program 1 of your game program 1."
-    And I should not see "User commented on program 1."
-    But I should see "User reacted to program 1."
+    And I should not see "User created a remix project 1 of your game project 1."
+    And I should not see "User commented on project 1."
+    But I should see "User reacted to project 1."
 
     When I click "#follow-notif"
     And I wait for the page to be loaded
     Then I should see "User is now following you."
-    But I should not see "User created a remix program 1 of your game program 1."
-    And I should not see "User commented on program 1."
-    And I should not see "User reacted to program 1."
+    But I should not see "User created a remix project 1 of your game project 1."
+    And I should not see "User commented on project 1."
+    And I should not see "User reacted to project 1."
 
     When I click "#comment-notif"
     And I wait for the page to be loaded
     Then I should not see "User is now following you."
-    And I should not see "User created a remix program 1 of your game program 1."
-    And I should not see "User reacted to program 1."
-    But I should see "User commented on program 1."
+    And I should not see "User created a remix project 1 of your game project 1."
+    And I should not see "User reacted to project 1."
+    But I should see "User commented on project 1."
 
     When I click "#remix-notif"
     And I wait for the page to be loaded
-    Then I should see "User created a remix program 1 of your game program 1."
+    Then I should see "User created a remix project 1 of your game project 1."
     But I should not see "User is now following you."
-    And I should not see "User commented on program 1."
-    And I should not see "User reacted to program 1."
+    And I should not see "User commented on project 1."
+    And I should not see "User reacted to project 1."
 
     When I click "#all-notif"
     And I wait for the page to be loaded
     Then I should see "User is now following you."
-    And I should see "User created a remix program 1 of your game program 1."
-    And I should see "User commented on program 1."
-    And I should see "User reacted to program 1."
+    And I should see "User created a remix project 1 of your game project 1."
+    And I should see "User commented on project 1."
+    And I should see "User reacted to project 1."
 

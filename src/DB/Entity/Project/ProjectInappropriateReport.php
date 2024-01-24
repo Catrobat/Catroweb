@@ -1,0 +1,217 @@
+<?php
+
+namespace App\DB\Entity\Project;
+
+use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Project\ProjectInappropriateReportRepository;
+use App\Utils\TimeUtils;
+use DateTime;
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * ProjectInappropriateReport.
+ *
+ * @ORM\HasLifecycleCallbacks
+ *
+ * @ORM\Table
+ *
+ * @ORM\Entity(repositoryClass=ProjectInappropriateReportRepository::class)
+ */
+class ProjectInappropriateReport
+{
+  final public const STATUS_NEW = 1;
+  final public const STATUS_REJECTED = 2;
+  final public const STATUS_ACCEPTED = 3;
+
+  /**
+   * @ORM\Column(name="id", type="integer")
+   *
+   * @ORM\Id
+   *
+   * @ORM\GeneratedValue(strategy="AUTO")
+   */
+  private ?int $id = null;
+
+  /**
+   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_triggered_by_this_user")
+   *
+   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+   */
+  private ?User $reporting_user = null;
+
+  /**
+   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_of_this_user")
+   *
+   * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
+   */
+  private ?User $reported_user = null;
+
+  /**
+   * @ORM\Column(name="category", type="text", length=256)
+   */
+  private ?string $category = null;
+
+  /**
+   * @ORM\Column(name="note", type="text")
+   */
+  private ?string $note = null;
+
+  /**
+   * @ORM\Column(name="time", type="datetime")
+   */
+  private ?\DateTime $time = null;
+
+  /**
+   * @ORM\Column(type="integer")
+   */
+  private ?int $state = null;
+
+  /**
+   * @ORM\ManyToOne(targetEntity=Project::class, inversedBy="reports")
+   *
+   * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="SET NULL")
+   */
+  private ?Project $project = null;
+
+  /**
+   * @ORM\Column(name="projectVersion", type="integer")
+   */
+  private int $projectVersion;
+
+  /**
+   * @ORM\PrePersist
+   *
+   * @throws \Exception
+   */
+  public function updateTimestamps(): void
+  {
+    if (null === $this->getTime()) {
+      $this->setTime(TimeUtils::getDateTime());
+    }
+  }
+
+  /**
+   * @ORM\PrePersist
+   */
+  public function updateState(): void
+  {
+    if (null === $this->getState()) {
+      $this->setState(self::STATUS_NEW);
+    }
+  }
+
+  /**
+   * @ORM\PrePersist
+   */
+  public function updateProjectVersion(): void
+  {
+    $this->setProjectVersion($this->getProject()->getVersion());
+  }
+
+  public function getId(): ?int
+  {
+    return $this->id;
+  }
+
+  public function setReportingUser(?User $reporting_user): ProjectInappropriateReport
+  {
+    $this->reporting_user = $reporting_user;
+
+    return $this;
+  }
+
+  public function getReportingUser(): ?User
+  {
+    return $this->reporting_user;
+  }
+
+  public function setReportedUser(?User $reported_user): ProjectInappropriateReport
+  {
+    $this->reported_user = $reported_user;
+
+    return $this;
+  }
+
+  public function getReportedUser(): ?User
+  {
+    return $this->reported_user;
+  }
+
+  public function setCategory(string $category): ProjectInappropriateReport
+  {
+    $this->category = $category;
+
+    return $this;
+  }
+
+  public function getCategory(): ?string
+  {
+    return $this->category;
+  }
+
+  public function setNote(string $note): ProjectInappropriateReport
+  {
+    $this->note = $note;
+
+    return $this;
+  }
+
+  public function getNote(): ?string
+  {
+    return $this->note;
+  }
+
+  public function setTime(\DateTime $time): ProjectInappropriateReport
+  {
+    $this->time = $time;
+
+    return $this;
+  }
+
+  public function getTime(): ?\DateTime
+  {
+    return $this->time;
+  }
+
+  /**
+   * @throws \InvalidArgumentException
+   */
+  public function setState(int $state): ProjectInappropriateReport
+  {
+    if (!in_array($state, [self::STATUS_NEW, self::STATUS_ACCEPTED, self::STATUS_REJECTED], true)) {
+      throw new \InvalidArgumentException('Invalid state');
+    }
+    $this->state = $state;
+
+    return $this;
+  }
+
+  public function getState(): ?int
+  {
+    return $this->state;
+  }
+
+  public function setProject(?Project $project): ProjectInappropriateReport
+  {
+    $this->project = $project;
+
+    return $this;
+  }
+
+  public function getProject(): ?Project
+  {
+    return $this->project;
+  }
+
+  public function setProjectVersion(int $projectVersion): ProjectInappropriateReport
+  {
+    $this->projectVersion = $projectVersion;
+
+    return $this;
+  }
+
+  public function getProjectVersion(): int
+  {
+    return $this->projectVersion;
+  }
+}

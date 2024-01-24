@@ -2,7 +2,7 @@
 Feature:
   In order to manage the my profile page
   As a logged in user
-  I want to be able to change my password, email, and upload an avatar image and delete my own programs
+  I want to be able to change my password, email, and upload an avatar image and delete my own projects
 
   Background:
     Given there are users:

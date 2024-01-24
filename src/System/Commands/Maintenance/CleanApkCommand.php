@@ -2,7 +2,7 @@
 
 namespace App\System\Commands\Maintenance;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Storage\FileHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -39,9 +39,9 @@ class CleanApkCommand extends Command
     FileHelper::emptyDirectory($apk_dir);
 
     $query = $this->entity_manager
-      ->createQuery('UPDATE App\DB\Entity\Project\Program p SET p.apk_status = :status WHERE p.apk_status != :status')
+      ->createQuery('UPDATE App\DB\Entity\Project\Project p SET p.apk_status = :status WHERE p.apk_status != :status')
     ;
-    $query->setParameter('status', Program::APK_NONE);
+    $query->setParameter('status', Project::APK_NONE);
     $result = $query->getSingleScalarResult();
     $output1->writeln('Reset the apk status of '.$result.' projects');
 
