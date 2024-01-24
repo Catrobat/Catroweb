@@ -54,7 +54,7 @@
     "prettier": "3.2.4",
     "purgecss-webpack-plugin": "^5.0.0",
     "sass": "^1.70.0",
-    "sass-loader": "^13.3.3",
+    "sass-loader": "^14.0.0",
     "standard": "^17.1.0",
     "stimulus": "^3.2.2",
     "stylelint": "^15.11.0",
