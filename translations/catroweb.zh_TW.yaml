@@ -526,12 +526,12 @@ errors:
   unknown: 未知錯誤
   token: '裝置認證失敗:錯誤的認證標記!'
   uploadTokenAuthFailed: '上傳令牌認證失敗。'
-  program:
-    invalid: 項目無效。
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '抱歉，您的項目包含舊版本的 Catrobat 語言！您使用的是最新版本的 Pocket Code 嗎？'
-  programversion:
-    tooold: '抱歉，您使用的是舊版 Pocket Code。請更新到最新版本。'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 認證失敗
     webview: |

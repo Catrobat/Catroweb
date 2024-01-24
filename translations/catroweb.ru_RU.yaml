@@ -527,11 +527,11 @@ errors:
   unknown: неизвестная ошибка
   token: 'Аутентификация устройства провалилась: недействительный токен!'
   uploadTokenAuthFailed: 'Ошибка авторизации токена.'
-  program:
+  project:
     invalid: Неверный проект.
   languageversion:
     tooold: 'К сожалению, ваш проект содержит старую версию языка Catrobat! Используете ли вы последнюю версию Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'К сожалению, Вы используете старую версию Pocket Code. Пожалуйста, обновите его до последней версии.'
   authentication:
     title: Ошибка авторизации

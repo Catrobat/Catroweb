@@ -525,11 +525,11 @@ errors:
   unknown: белгісіз қате
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
+  project:
     invalid: Қате жоба.
   languageversion:
     tooold: 'Кешіріңіз, жобаңызда Катробат тілінің ескі нұсқасы бар! Сіз Pocket Code-тың соңғы нұсқасын пайдаланасыз ба?'
-  programversion:
+  projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Аутентификация орындамалды

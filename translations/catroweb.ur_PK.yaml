@@ -521,12 +521,12 @@ errors:
   unknown: نامعلوم غلطی
   token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
   uploadTokenAuthFailed: 'ٹوکن آرٹ اپ لوڈ کریں.'
-  program:
-    invalid: غلط منصوبے
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'افسوس، آپ کے منصوبے میں Catrobat زبان کا ایک پرانے ورژن شامل ہے! کیا آپ جیبی کوڈ کا تازہ ترین ورژن استعمال کرتے ہیں؟'
-  programversion:
-    tooold: 'افسوس، آپ جیبی کوڈ کا ایک پرانے ورژن استعمال کر رہے ہیں. تازہ ترین ورژن کو اپ ڈیٹ کریں.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: تصدیق میں ناکام رہے
     webview: |

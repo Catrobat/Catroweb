@@ -524,12 +524,12 @@ errors:
   unknown: 알 수 없는 오류
   token: '인증 장치 실패: 잘못 된 인증 토큰!'
   uploadTokenAuthFailed: '계정 확인용 토큰 업로드 실패.'
-  program:
-    invalid: 잘못 된 프로그램입니다.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '죄송 합니다, 당신의 프로그램에 Catrobat 언어의 오래 된 버전을 포함하고 있습니다! 당신은 포켓 코드의 최신 버전을 사용하세요?'
-  programversion:
-    tooold: '죄송합니다, 오래된 포켓 코드 버전입니다. 최신 버전으로 업데이트 하세요.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 인증 실패
     webview: |

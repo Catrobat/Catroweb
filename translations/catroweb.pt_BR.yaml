@@ -525,11 +525,11 @@ errors:
   unknown: erro desconhecido
   token: 'Autenticação de dispositivo falhou: auth-token inválido!'
   uploadTokenAuthFailed: 'Falha de autenticação do token de upload.'
-  program:
+  project:
     invalid: Projeto inválido.
   languageversion:
     tooold: 'Desculpe, o seu projeto contém uma versão antiga da linguagem Catrobat! Você está usando a versão mais recente do Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Desculpe, você está usando uma versão antiga do Pocket Code. Por favor, atualize para a versão mais recente.'
   authentication:
     title: A autenticação falhou

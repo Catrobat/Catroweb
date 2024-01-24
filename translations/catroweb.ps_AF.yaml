@@ -528,12 +528,12 @@ errors:
   unknown: نامعلومه تېروتنه
   token: 'د وسیلې تصدیق ناکام شو: غلط تصدیق نښه!'
   uploadTokenAuthFailed: 'د ټوکن سند اپلوډ ناکام شو.'
-  program:
-    invalid: ناسمه پروژه
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'بخښنه غواړم، ستاسو پروژه د کاټروبیټ ژبې پخوانی نسخه لري! ایا تاسو د جیب کوډ وروستۍ نسخه کاروئ؟'
-  programversion:
-    tooold: 'بخښنه غواړئ، تاسو د جیب کوډ پخوانی نسخه کاروئ. مهرباني وکړئ وروستي نسخه ته تازه کړئ.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: تصدیق ناکام شو
     webview: |

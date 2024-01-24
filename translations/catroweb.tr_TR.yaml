@@ -525,12 +525,12 @@ errors:
   unknown: bilinmeyen hata
   token: 'Cihaz doğrulaması başarısız: geçersiz yetki-belirteci!'
   uploadTokenAuthFailed: 'Yükleme Jetonu kimlik doğrulaması başarısız oldu.'
-  program:
-    invalid: Geçersiz proje.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Üzgünüz, projeniz Catrobat dilinin eski bir sürümünü içeriyor! Cep Kodunun en son sürümünü mü kullanıyorsunuz?'
-  programversion:
-    tooold: 'Maalesef, Cep Kodunun eski bir sürümünü kullanıyorsunuz. Lütfen en son sürüme güncelleyin.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Kimlik doğrulaması başarısız oldu
     webview: |

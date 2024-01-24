@@ -526,12 +526,12 @@ errors:
   unknown: ਅਣਜਾਣ ਗਲਤੀ
   token: 'ਜੰਤਰ ਦੇ ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ: ਗਲਤ auth-ਟੋਕਨ!'
   uploadTokenAuthFailed: 'ਟੋਕਨ ਲੇਖ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ.'
-  program:
-    invalid: ਗਲਤ ਪ੍ਰੋਜੈਕਟ.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'ਮੁਆਫ ਕਰਨਾ, ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਵਿਚ ਕੈਟ੍ਰੋਬੈਟ ਭਾਸ਼ਾ ਦਾ ਪੁਰਾਣਾ ਸੰਸਕਰਣ ਹੈ! ਜੇਕਰ ਤੁਹਾਨੂੰ ਪਾਕੇਟ ਕੋਡ ਦਾ ਨਵੀਨਤਮ ਵਰਜਨ ਵਰਤ ਰਹੇ ਹੋ?'
-  programversion:
-    tooold: 'ਮੁਆਫ ਕਰਨਾ, ਤੁਸੀਂ ਪਾਕੇਟ ਕੋਡ ਦਾ ਪੁਰਾਣਾ ਸੰਸਕਰਣ ਵਰਤ ਰਹੇ ਹੋ. ਕਿਰਪਾ ਕਰਕੇ ਨਵੇਂ ਵਰਜ਼ਨ ਨੂੰ ਅਪਡੇਟ ਕਰੋ.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ
     webview: |

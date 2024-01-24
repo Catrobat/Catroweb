@@ -526,12 +526,12 @@ errors:
   unknown: 不明なエラー
   token: '失敗したデバイス認証： 認証トークンが無効です!'
   uploadTokenAuthFailed: 'トークンのアップロードに失敗しました。'
-  program:
-    invalid: 無効なプロジェクトです。
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '申し訳ありませんが、あなたのプロジェクトには Catrobat 言語の古いバージョンが含まれています! ポケットコードの最新バージョンを使用していますか?'
-  programversion:
-    tooold: '申し訳ありませんが、古いバージョンのポケットコードを使用しています。最新バージョンに更新してください。'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 認証に失敗しました
     webview: |

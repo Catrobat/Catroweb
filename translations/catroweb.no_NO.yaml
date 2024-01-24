@@ -527,12 +527,12 @@ errors:
   unknown: ukjent feil
   token: 'Autentisering av enheten feilet: Ugyldig auth-token!'
   uploadTokenAuthFailed: 'Opplasting av token auth feilet'
-  program:
-    invalid: Ugyldig prosjekt.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Beklager, prosjektet ditt inneholder en gammel versjon av Catrobat språk! Bruker du den nyeste versjonen av Pocket Code?'
-  programversion:
-    tooold: 'Beklager, du bruker en gammel versjon av Pocket Code. Vennligst oppdater til nyeste versjon.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Autentisering feilet
     webview: |

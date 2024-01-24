@@ -248,8 +248,8 @@ accountConfirmation:
     Команда Catrobat.
     </p>
 newAccountConfirmation:
-  subject: Please verify your E-Mail-Address
-  welcome: Welcome to Catrobat Community!
+  subject: Будь ласка, підтвердьте свою адресу ел. пошти
+  welcome: Вітаємо в спільноті Catrobat!
   message: |
     Please verify your E-Mail-Address
     Welcome to Catrobat Community
@@ -266,9 +266,9 @@ newAccountConfirmation:
     This link is valid until %time% and can be<br>
     used only once to confirm your email address.<br>
     </p>
-  button: CONFIRM E-MAIL
-  delete: You can delete your account here at any time.
-  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
+  button: ПІДТВЕРДИТИ ПОШТУ
+  delete: Ви можете видалити свій обліковий запис будь-коли.
+  deleteHtml: Ви можете <a href="%deleteUrl%">видалити</a> свій обліковий запис будь-коли.
 passwordRecovery:
   subject: Відновлення пароля Catrobat
   message: |
@@ -476,8 +476,8 @@ resetPassword:
   newemail:
     title: "Скинути свій пароль"
     content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
-    visitLink: RESET PASSWORD
-    expire: This link is valid for %time% - only one time use!
+    visitLink: СКИНУТИ ПАРОЛЬ
+    expire: Посилання дійсне протягом %time% — лише на один раз!
   reset:
     title: "Скинути свій пароль"
     button:
@@ -526,12 +526,12 @@ errors:
   unknown: Невідома помилка
   token: 'Не вдалося виконати автентифікацію пристрою: неприпустимий auth-token!'
   uploadTokenAuthFailed: 'Помилка автентифікації токена завантаження.'
-  program:
-    invalid: Неприпустимий проєкт.
+  project:
+    invalid: Недійсний проєкт.
   languageversion:
     tooold: 'Вибачте, ваш проєкт містить стару версію мови Catrobat! Ви використовуєте останню версію Pocket Code? '
-  programversion:
-    tooold: 'На жаль, ви використовуєте стару версію Pocket Code. Будь ласка, оновіть до останньої версії.'
+  projectversion:
+    tooold: 'Ви використовуєте стару версію Pocket Code. Будь ласка, оновіть застосунок до останньої версії.'
   authentication:
     title: Помилка автентифікації
     webview: |
