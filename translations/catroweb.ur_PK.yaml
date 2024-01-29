@@ -243,8 +243,8 @@ accountConfirmation:
     نیک تمنائیں،
     آپ کی کیٹروبیٹ ٹیم۔
 newAccountConfirmation:
-  subject: Please verify your E-Mail-Address
-  welcome: Welcome to Catrobat Community!
+  subject: براہ کرم اپنے ای میل ایڈریس کی تصدیق کریں۔
+  welcome: Catrobat کمیونٹی میں خوش آمدید!
   message: |
     Please verify your E-Mail-Address
     Welcome to Catrobat Community
@@ -261,9 +261,9 @@ newAccountConfirmation:
     This link is valid until %time% and can be<br>
     used only once to confirm your email address.<br>
     </p>
-  button: CONFIRM E-MAIL
-  delete: You can delete your account here at any time.
-  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
+  button: ای میل کی تصدیق کریں
+  delete: آپ یہاں کسی بھی وقت اپنا اکاؤنٹ ختم کر سکتے ہیں۔
+  deleteHtml: آپ یہاں کسی بھی وقت اپنا اکاؤنٹ <a href="%deleteUrl%">ختم</a> کر سکتے ہیں۔
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
@@ -470,9 +470,9 @@ resetPassword:
     cheers: "شاباش"
   newemail:
     title: "اپنا پاس ورڈ ری سیٹ کریں"
-    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
-    visitLink: RESET PASSWORD
-    expire: This link is valid for %time% - only one time use!
+    content: <p> آپ کو یہ ای میل اس لیے موصول ہو رہی ہے کیونکہ آپ<br>  نے حال ہی میں اپنے Catrobat اکاؤنٹ کے لیےپاس ورڈ  تبدیل کرنے کی درخواست کی ہے۔ پاس ورڈ <br> تبدیل کرنے کے لیے نیچے دیے گئے لنک <br> پرجا‎ئیں۔ اگر آپ نے پاس ورڈ تبدیل کرنے کی درخواست نہیں کی ہے،<br>  تو آپ اس ای میل کو نظر انداز کر سکتے ہیں۔<p><br> 
+    visitLink: پاس ورڈ ری سیٹ کریں۔
+    expire: یہ لنک  %time%  کے لیےقابل استعمال ہے - صرف ایک بار استعمال کریں!
   reset:
     title: "اپنا پاس ورڈ ری سیٹ کریں"
     button:
