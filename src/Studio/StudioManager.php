@@ -170,7 +170,7 @@ class StudioManager
     return $this->createStudioProgram($user, $studio, $activity, $project);
   }
 
-  public function changeStudio(User $user, Studio $studio): ?studio
+  public function changeStudio(User $user, Studio $studio): ?Studio
   {
     if ($this->isUserAStudioAdmin($user, $studio)) {
       return $this->saveStudio($studio);
