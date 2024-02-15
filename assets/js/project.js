@@ -22,7 +22,7 @@ import { ProjectEditorTextFieldModel } from './components/ProjectEditorTextField
 import { ProjectEditorModel } from './components/ProjectEditorModel'
 import MessageDialogs from './components/MessageDialogs'
 
-require('../styles/custom/project.scss')
+require('../styles/custom/program.scss')
 
 const $project = $('.js-project')
 const $projectShare = $('.js-project-share')

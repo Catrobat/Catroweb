@@ -2,7 +2,6 @@ import $ from 'jquery'
 import './analytics/analytics'
 import textFillDefault from './components/text_fill_default'
 import './layout/top_bar'
-import './layout/footer'
 import './layout/sidebar'
 import { TokenExpirationHandler } from './security/TokenExpirationHandler'
 import { showSnackbar } from './components/snackbar'
@@ -20,6 +19,7 @@ if (bugsnagApiKey) {
 }
 
 require('../styles/base.scss')
+require('../styles/layout/footer.scss')
 
 new TokenExpirationHandler()
 new LogoutTokenHandler()

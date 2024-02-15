@@ -268,3 +268,21 @@ function initSidebarSwipe() {
     desktop = false
   }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+  const languageButton = document.querySelector('#btn-language')
+  const languageMenu = document.querySelector('.language-body')
+  const languageMenuOverlay = document.querySelector('.language-body-overlay')
+
+  languageButton.addEventListener('click', function() {
+    if (languageMenu.style.display === 'none' || languageMenu.style.display === '') {
+      languageMenu.style.display = 'block'
+      languageMenuOverlay.style.display = 'block'
+      document.body.style.overflow = 'hidden'
+    } else {
+      languageMenu.style.display = 'none'
+      languageMenuOverlay.style.display = 'none'
+      document.body.style.overflow = 'auto'
+    }
+  })
+})
