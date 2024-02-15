@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "10952a6f3c28b58f25f99cc9d3fe8543",
+    "content-hash": "87856d7d738582dc61176255047029a1",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -16091,16 +16091,16 @@
         },
         {
             "name": "rector/rector",
-            "version": "0.19.5",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rectorphp/rector.git",
-                "reference": "89c895d127b9d248d2af007068a824b5348ef81f"
+                "reference": "362258a1f6369fc88d02d469a5478d220f78b0e6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/rector/zipball/89c895d127b9d248d2af007068a824b5348ef81f",
-                "reference": "89c895d127b9d248d2af007068a824b5348ef81f",
+                "url": "https://api.github.com/repos/rectorphp/rector/zipball/362258a1f6369fc88d02d469a5478d220f78b0e6",
+                "reference": "362258a1f6369fc88d02d469a5478d220f78b0e6",
                 "shasum": ""
             },
             "require": {
@@ -16135,7 +16135,7 @@
             ],
             "support": {
                 "issues": "https://github.com/rectorphp/rector/issues",
-                "source": "https://github.com/rectorphp/rector/tree/0.19.5"
+                "source": "https://github.com/rectorphp/rector/tree/1.0.0"
             },
             "funding": [
                 {
@@ -16143,7 +16143,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-29T23:53:47+00:00"
+            "time": "2024-02-06T13:38:07+00:00"
         },
         {
             "name": "sebastian/cli-parser",
