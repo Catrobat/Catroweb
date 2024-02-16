@@ -189,7 +189,10 @@ Encore
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
   .addStyleEntry('error', './assets/styles/error.scss')
-  .addStyleEntry('language_menu_styles', './assets/styles/custom/language_menu.scss')
+  .addStyleEntry(
+    'language_menu_styles',
+    './assets/styles/custom/language_menu.scss',
+  )
 
   // Themes
   .addStyleEntry('pocketcode', './assets/styles/themes/pocketcode.scss')

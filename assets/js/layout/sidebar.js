@@ -274,8 +274,11 @@ document.addEventListener('DOMContentLoaded', function () {
   const languageMenu = document.querySelector('.language-body')
   const languageMenuOverlay = document.querySelector('.language-body-overlay')
 
-  languageButton.addEventListener('click', function() {
-    if (languageMenu.style.display === 'none' || languageMenu.style.display === '') {
+  languageButton.addEventListener('click', function () {
+    if (
+      languageMenu.style.display === 'none' ||
+      languageMenu.style.display === ''
+    ) {
       languageMenu.style.display = 'block'
       languageMenuOverlay.style.display = 'block'
       document.body.style.overflow = 'hidden'

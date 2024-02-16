@@ -1,4 +1,4 @@
-.language-body{
+.language-body {
   display: none;
   background: white;
   width: 50%;
@@ -13,28 +13,28 @@
   z-index: 11001;
 }
 
-.language-header{
+.language-header {
   padding-left: 0.75rem;
   padding-top: 0.75rem;
   color: var(--primary);
   font-size: 1.5rem;
   border-bottom: 2px solid rgb(196 196 196 / 25500%);
 }
-.language-option-container{
+.language-option-container {
   overflow-y: auto;
   height: calc(100% - 6rem);
 }
-.language-option{
+.language-option {
   margin: 0.5rem;
   font-size: 1.25rem;
   display: flex;
   align-items: center;
 
-  & .radio{
+  & .radio {
     margin-right: 0.75rem;
   }
 }
-.language-button-container{
+.language-button-container {
   background: white;
   padding: 0.75rem;
   display: flex;
@@ -76,7 +76,7 @@
 }
 
 @media (width <= 768px) {
-  .language-body{
+  .language-body {
     width: 80%;
   }
 }
