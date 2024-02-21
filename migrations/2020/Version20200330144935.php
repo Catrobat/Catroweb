@@ -22,7 +22,7 @@ final class Version20200330144935 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE scratch_program CHANGE id id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\'');
+    $this->addSql('ALTER TABLE scratch_project CHANGE id id CHAR(36) NOT NULL COMMENT \'(DC2Type:guid)\'');
   }
 
   public function down(Schema $schema): void
@@ -30,6 +30,6 @@ final class Version20200330144935 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' !== $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE scratch_program CHANGE id id INT NOT NULL');
+    $this->addSql('ALTER TABLE scratch_project CHANGE id id INT NOT NULL');
   }
 }

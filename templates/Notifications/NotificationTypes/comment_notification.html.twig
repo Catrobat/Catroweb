@@ -17,7 +17,7 @@
       (
       {
         '%user_link%': '<a href="'~path('profile', {'id': notification.comment.user.id|escape})~'">'~notification.comment.username|escape~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.comment.program.id|escape})~'">'~notification.comment.program.name|escape~'</a>'
+        '%program_link%': '<a href="'~path('program', {'id': notification.comment.project.id|escape})~'">'~notification.comment.project.name|escape~'</a>'
       },
       'catroweb'
     )

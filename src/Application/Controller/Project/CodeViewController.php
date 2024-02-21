@@ -2,7 +2,7 @@
 
 namespace App\Application\Controller\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\ProjectManager;
@@ -21,7 +21,7 @@ class CodeViewController extends AbstractController
   #[Route(path: '/project/{id}/code_view', name: 'code_view', methods: ['GET'])]
   public function view(string $id): Response
   {
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
     if (null === $project) {
       $this->addFlash('snackbar', $this->translator->trans('snackbar.project_not_found', [], 'catroweb'));

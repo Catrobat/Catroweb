@@ -1,5 +1,5 @@
 @admin
-Feature: Admin featured programs
+Feature: Admin featured projects
 
 Background:
     Given there are admins:

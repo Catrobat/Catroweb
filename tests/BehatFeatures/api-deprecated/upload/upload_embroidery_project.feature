@@ -1,5 +1,5 @@
 @api @upload @tag
-Feature: Upload a program with tag
+Feature: Upload a project with tag
 
   Background:
     Given there are extensions:
@@ -10,7 +10,7 @@ Feature: Upload a program with tag
       | 4  | phiro          |
       | 5  | embroidery     |
 
-  Scenario: uploading a embroidery project should add the extension to the program
+  Scenario: uploading a embroidery project should add the extension to the project
     Given I have an embroidery project
     And I use the "english" app, API version 1
     When I upload this generated project, API version 1

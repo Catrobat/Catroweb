@@ -4,7 +4,7 @@ namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
 use App\Application\Twig\TwigExtension;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\ProjectLike;
 use App\Project\ProjectManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -50,7 +50,7 @@ class ProjectController extends AbstractController
     }
     $data = [];
     $user_objects = [];
-    /** @var ProgramLike $like */
+    /** @var ProjectLike $like */
     foreach ($project->getLikes()->getIterator() as $like) {
       if (array_key_exists($like->getUser()->getId(), $user_objects)) {
         $obj = $user_objects[$like->getUser()->getId()];
@@ -88,8 +88,8 @@ class ProjectController extends AbstractController
     $data->total->stringValue = TwigExtension::humanFriendlyNumber(
       $data->total->value, $translator, $user_locale
     );
-    foreach (ProgramLike::$VALID_TYPES as $type_id) {
-      $type_name = ProgramLike::$TYPE_NAMES[$type_id];
+    foreach (ProjectLike::$VALID_TYPES as $type_id) {
+      $type_name = ProjectLike::$TYPE_NAMES[$type_id];
       $data->{$type_name} = new \stdClass();
       $data->{$type_name}->value = $project_manager->likeTypeCount($id, $type_id);
       $data->{$type_name}->stringValue = TwigExtension::humanFriendlyNumber(

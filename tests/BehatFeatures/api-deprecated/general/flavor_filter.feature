@@ -1,8 +1,8 @@
-Feature: Filtering programs with specific flavor
+Feature: Filtering projects with specific flavor
 
-  In order provide an index of different flavored programs
+  In order provide an index of different flavored projects
   As a site owner
-  I want to see only programs with my flavor
+  I want to see only projects with my flavor
 
   Background:
     Given there are projects:
@@ -17,7 +17,7 @@ Feature: Filtering programs with specific flavor
       | Test game     | pocketcode    |
 
 
-  Scenario: Get most viewed programs of flavor pocketcode
+  Scenario: Get most viewed projects of flavor pocketcode
 
     When I get the most viewed projects with "app/api/projects/mostViewed.json"
     Then I should get following projects:
@@ -31,7 +31,7 @@ Feature: Filtering programs with specific flavor
       | Amazing race  |
       | Test game     |
 
-  Scenario: Get most viewed programs of flavor luna
+  Scenario: Get most viewed projects of flavor luna
 
     When I get the most viewed projects with "luna/api/projects/mostViewed.json"
     Then I should get following projects:
@@ -45,7 +45,7 @@ Feature: Filtering programs with specific flavor
       | Amazing race  |
       | Test game     |
 
-  Scenario: Get most downloaded programs of pocketcode
+  Scenario: Get most downloaded projects of pocketcode
 
     When I get the most downloaded projects with "app/api/projects/mostDownloaded.json"
     Then I should get following projects:
@@ -59,7 +59,7 @@ Feature: Filtering programs with specific flavor
       | Amazing race  |
       | Test game     |
 
-  Scenario: Get most downloaded programs of flavor luna
+  Scenario: Get most downloaded projects of flavor luna
 
     When I get the most downloaded projects with "luna/api/projects/mostDownloaded.json"
     Then I should get following projects:
@@ -73,7 +73,7 @@ Feature: Filtering programs with specific flavor
       | Amazing race  |
       | Test game     |
 
-  Scenario: Get recent programs of flavor pocketcode
+  Scenario: Get recent projects of flavor pocketcode
 
     When I get the recent projects with "app/api/projects/recent.json"
     Then I should get following projects:
@@ -87,7 +87,7 @@ Feature: Filtering programs with specific flavor
       | Amazing race  |
       | Test game     |
 
-  Scenario: Get recent programs of flavor luna
+  Scenario: Get recent projects of flavor luna
 
     When I get the recent projects with "luna/api/projects/recent.json"
     Then I should get following projects:
@@ -104,7 +104,7 @@ Feature: Filtering programs with specific flavor
       | New adventure |
       | Amazing race  |
 
-  Scenario: Get all programs of a user no matter the flavor (pocketcode)
+  Scenario: Get all projects of a user no matter the flavor (pocketcode)
 
     Given I get the user's projects with "app/api/projects/userProjects.json"
     Then I should get following projects:
@@ -118,7 +118,7 @@ Feature: Filtering programs with specific flavor
       | Amazing race  |
       | Test game     |
 
-  Scenario: Get all programs of a user no matter the flavor (luna)
+  Scenario: Get all projects of a user no matter the flavor (luna)
 
     Given I get the user's projects with "luna/api/projects/userProjects.json"
     Then I should get following projects:

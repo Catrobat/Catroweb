@@ -2,7 +2,7 @@
 Feature:
   In order to manage the my profile page
   As a logged in user
-  I want to be able to change my password, email and upload an avatar image and delete my own programs
+  I want to be able to change my password, email and upload an avatar image and delete my own projects
 
   Background:
     Given there are users:
@@ -286,7 +286,7 @@ Feature:
     And I wait for the element ".own-project-list__project[data-id='2'] .loading-spinner-backdrop" to appear and if so to disappear again
     Then the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "public"
 
-  Scenario: Programs with too high language version can also be set to visible
+  Scenario: Projects with too high language version can also be set to visible
     Then I should see "project 2"
     And the ".own-project-list__project[data-id='2'] .own-project-list__project__details__visibility__text" element should contain "private"
     When I click ".own-project-list__project[data-id='2'] .own-project-list__project__action"

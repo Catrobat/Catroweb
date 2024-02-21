@@ -2,9 +2,9 @@
 
 namespace App\DB\Entity\User;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectInappropriateReport;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -66,17 +66,17 @@ class User extends BaseUser
   protected ?string $avatar = null;
 
   /**
-   * Programs owned by this user.
-   * When this user is deleted, all the programs owned by him should be deleted too.
+   * Projects owned by this user.
+   * When this user is deleted, all the projects owned by him should be deleted too.
    *
    * @ORM\OneToMany(
-   *     targetEntity=Program::class,
+   *     targetEntity=Project::class,
    *     mappedBy="user",
    *     fetch="EXTRA_LAZY",
    *     cascade={"remove"}
    * )
    */
-  protected Collection $programs;
+  protected Collection $projects;
 
   /**
    * Requests to change the password issued by this user.
@@ -157,7 +157,7 @@ class User extends BaseUser
 
   /**
    * @ORM\OneToMany(
-   *     targetEntity=ProgramLike::class,
+   *     targetEntity=ProjectLike::class,
    *     mappedBy="user",
    *     cascade={"persist", "remove"},
    *     orphanRemoval=true
@@ -272,12 +272,12 @@ class User extends BaseUser
   protected bool $verified = true;
 
   /**
-   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reporting_user", fetch="EXTRA_LAZY")
+   * @ORM\OneToMany(targetEntity=ProjectInappropriateReport::class, mappedBy="reporting_user", fetch="EXTRA_LAZY")
    */
   protected Collection $reports_triggered_by_this_user;
 
   /**
-   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reported_user", fetch="EXTRA_LAZY")
+   * @ORM\OneToMany(targetEntity=ProjectInappropriateReport::class, mappedBy="reported_user", fetch="EXTRA_LAZY")
    */
   protected Collection $reports_of_this_user;
 
@@ -298,7 +298,7 @@ class User extends BaseUser
 
   public function __construct()
   {
-    $this->programs = new ArrayCollection();
+    $this->projects = new ArrayCollection();
     $this->notifications = new ArrayCollection();
     $this->comments = new ArrayCollection();
     $this->follow_notification_mentions = new ArrayCollection();
@@ -354,21 +354,21 @@ class User extends BaseUser
     return $this->id;
   }
 
-  public function addProgram(Program $program): User
+  public function addProject(Project $project): User
   {
-    $this->programs[] = $program;
+    $this->projects[] = $project;
 
     return $this;
   }
 
-  public function removeProgram(Program $program): void
+  public function removeProject(Project $project): void
   {
-    $this->programs->removeElement($program);
+    $this->projects->removeElement($project);
   }
 
-  public function getPrograms(): Collection
+  public function getProjects(): Collection
   {
-    return $this->programs;
+    return $this->projects;
   }
 
   public function getUploadToken(): ?string

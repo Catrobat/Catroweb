@@ -50,7 +50,7 @@ class LicenseUpdaterEventSubscriberTest extends TestCase
     Assert::assertEquals($xml->header->mediaLicense, 'https://developer.catrobat.org/ccbysa_v4');
   }
 
-  public function testSetsProgramLicense(): void
+  public function testSetsProjectLicense(): void
   {
     $filesystem = new Filesystem();
     $filesystem->mirror(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base', BootstrapExtension::$CACHE_DIR.'base');

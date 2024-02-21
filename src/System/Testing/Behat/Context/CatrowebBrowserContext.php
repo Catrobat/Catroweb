@@ -2,7 +2,7 @@
 
 namespace App\System\Testing\Behat\Context;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\RecommenderSystem\UserLikeSimilarityRelation;
@@ -38,7 +38,7 @@ class CatrowebBrowserContext extends BrowserContext
 
   protected bool $use_real_oauth_javascript_code = false;
 
-  protected ?Program $my_project = null;
+  protected ?Project $my_project = null;
 
   // -------------------------------------------------------------------------------------------------------------------
   //  Initialization
@@ -1186,9 +1186,9 @@ class CatrowebBrowserContext extends BrowserContext
     $pm = $this->getProjectManager();
     $project = $pm->find('1');
     match ($arg1) {
-      'pending' => Assert::assertEquals(Program::APK_PENDING, $project->getApkStatus()),
-      'ready' => Assert::assertEquals(Program::APK_READY, $project->getApkStatus()),
-      'none' => Assert::assertEquals(Program::APK_NONE, $project->getApkStatus()),
+      'pending' => Assert::assertEquals(Project::APK_PENDING, $project->getApkStatus()),
+      'ready' => Assert::assertEquals(Project::APK_READY, $project->getApkStatus()),
+      'none' => Assert::assertEquals(Project::APK_NONE, $project->getApkStatus()),
       default => throw new PendingException('Unknown state: '.$arg1),
     };
   }
@@ -1220,16 +1220,16 @@ class CatrowebBrowserContext extends BrowserContext
     $project = $pm->find('1');
     switch ($arg1) {
       case 'pending':
-        $project->setApkStatus(Program::APK_PENDING);
+        $project->setApkStatus(Project::APK_PENDING);
         break;
       case 'ready':
-        $project->setApkStatus(Program::APK_READY);
+        $project->setApkStatus(Project::APK_READY);
         /* @var $apk_repository ApkRepository */
         $apk_repository = $this->getSymfonyService(ApkRepository::class);
         $apk_repository->save(new File(strval($this->getTempCopy($this->FIXTURES_DIR.'/test.catrobat'))), $project->getId());
         break;
       default:
-        $project->setApkStatus(Program::APK_NONE);
+        $project->setApkStatus(Project::APK_NONE);
     }
     $pm->save($project);
   }
@@ -1586,7 +1586,7 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $project_manager = $this->getProjectManager();
     $project = $project_manager->find($project_id);
-    Assert::assertEquals(Program::APK_NONE, $project->getApkStatus());
+    Assert::assertEquals(Project::APK_NONE, $project->getApkStatus());
   }
 
   /**

@@ -1,0 +1,77 @@
+<?php
+
+namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
+
+use App\Project\CatrobatCode\Parser\CodeStatistic;
+use App\Project\CatrobatCode\Parser\ParsedScene;
+use App\Project\CatrobatCode\Parser\ParsedSceneProject;
+use App\System\Testing\PhpUnit\Extension\BootstrapExtension;
+use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\TestCase;
+
+/**
+ * @internal
+ *
+ * @covers \App\Project\CatrobatCode\Parser\ParsedSceneProject
+ */
+class ParsedSceneProjectTest extends TestCase
+{
+  protected ParsedSceneProject $project;
+
+  protected function setUp(): void
+  {
+    $xml_properties = simplexml_load_file(BootstrapExtension::$FIXTURES_DIR.'ValidPrograms/SceneProgram/code.xml');
+    Assert::assertNotFalse($xml_properties);
+    $this->project = new ParsedSceneProject($xml_properties);
+  }
+
+  #[DataProvider('provideMethodNames')]
+  public function testMustHaveMethod(mixed $method_name): void
+  {
+    $this->assertTrue(method_exists($this->project, $method_name));
+  }
+
+  /**
+   * @return string[][]
+   */
+  public static function provideMethodNames(): array
+  {
+    return [
+      ['hasScenes'],
+      ['getCodeStatistic'],
+      ['getScenes'],
+    ];
+  }
+
+  /**
+   * @depends testMustHaveMethod
+   */
+  public function testHasScenesMustReturnTrue(): void
+  {
+    $this->assertTrue($this->project->hasScenes());
+  }
+
+  /**
+   * @depends testMustHaveMethod
+   */
+  public function testGetCodeStatisticMustReturnCodeStatistic(): void
+  {
+    $actual = $this->project->getCodeStatistic();
+    $expected = CodeStatistic::class;
+
+    $this->assertInstanceOf($expected, $actual);
+  }
+
+  /**
+   * @depends testMustHaveMethod
+   */
+  public function testGetScenesMustReturnArrayOfScenes(): void
+  {
+    $expected = ParsedScene::class;
+
+    foreach ($this->project->getScenes() as $actual) {
+      $this->assertInstanceOf($expected, $actual);
+    }
+  }
+}

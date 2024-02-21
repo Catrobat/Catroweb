@@ -2,7 +2,7 @@
 
 namespace App\Application\Controller\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
 use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\ProjectManager;
@@ -24,7 +24,7 @@ class CodeStatisticsController extends AbstractController
     // Todo: add more statistic
     // Todo: better display of statistics -> E.g. Dr.Scratch
     $parsed_project = null;
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->find($id);
     if (null !== $project) {
       $extracted_file = $this->extracted_file_repository->loadProjectExtractedFile($project);

@@ -2,7 +2,7 @@
 
 namespace App\Admin\ApkGeneration;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
@@ -13,7 +13,7 @@ use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\DoctrineORMAdminBundle\Datagrid\ProxyQuery;
 
 /**
- * @phpstan-extends AbstractAdmin<Program>
+ * @phpstan-extends AbstractAdmin<Project>
  */
 class ApkReadyAdmin extends AbstractAdmin
 {
@@ -35,7 +35,7 @@ class ApkReadyAdmin extends AbstractAdmin
   ) {
   }
 
-  public function getThumbnailImageUrl(Program $object): string
+  public function getThumbnailImageUrl(Project $object): string
   {
     return '/'.$this->screenshot_repository->getThumbnailWebPath($object->getId());
   }
@@ -50,7 +50,7 @@ class ApkReadyAdmin extends AbstractAdmin
     $qb->andWhere(
       $qb->expr()->eq($qb->getRootAliases()[0].'.apk_status', ':apk_status')
     );
-    $qb->setParameter('apk_status', Program::APK_READY);
+    $qb->setParameter('apk_status', Project::APK_READY);
 
     return $query;
   }

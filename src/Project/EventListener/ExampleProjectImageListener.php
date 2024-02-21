@@ -2,7 +2,7 @@
 
 namespace App\Project\EventListener;
 
-use App\DB\Entity\Project\Special\ExampleProgram;
+use App\DB\Entity\Project\Special\ExampleProject;
 use App\Storage\ImageRepository;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
@@ -12,7 +12,7 @@ class ExampleProjectImageListener
   {
   }
 
-  public function prePersist(ExampleProgram $example, LifecycleEventArgs $event): void
+  public function prePersist(ExampleProject $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
     if (null == $file) {
@@ -21,7 +21,7 @@ class ExampleProjectImageListener
     $example->setImageType($file->guessExtension());
   }
 
-  public function postPersist(ExampleProgram $example, LifecycleEventArgs $event): void
+  public function postPersist(ExampleProject $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
     if (null == $file) {
@@ -30,7 +30,7 @@ class ExampleProjectImageListener
     $this->repository->save($file, $example->getId(), $example->getImageType(), false);
   }
 
-  public function preUpdate(ExampleProgram $example, LifecycleEventArgs $event): void
+  public function preUpdate(ExampleProject $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
     if (null == $file) {
@@ -41,7 +41,7 @@ class ExampleProjectImageListener
     $example->setImageType($file->guessExtension());
   }
 
-  public function postUpdate(ExampleProgram $example, LifecycleEventArgs $event): void
+  public function postUpdate(ExampleProject $example, LifecycleEventArgs $event): void
   {
     $file = $example->file;
     if (null == $file) {
@@ -50,12 +50,12 @@ class ExampleProjectImageListener
     $this->repository->save($file, $example->getId(), $example->getImageType(), false);
   }
 
-  public function preRemove(ExampleProgram $example, LifecycleEventArgs $event): void
+  public function preRemove(ExampleProject $example, LifecycleEventArgs $event): void
   {
     $example->removed_id = $example->getId();
   }
 
-  public function postRemove(ExampleProgram $example, LifecycleEventArgs $event): void
+  public function postRemove(ExampleProject $example, LifecycleEventArgs $event): void
   {
     $this->repository->remove($example->removed_id, $example->getImageType(), false);
   }

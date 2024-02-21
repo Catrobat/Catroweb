@@ -2,8 +2,8 @@
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramDownloads;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectDownloads;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\User\UserManager;
@@ -54,11 +54,11 @@ class CreateDownloadsCommand extends Command
     return 0;
   }
 
-  private function downloadProgram(Program $program, User $user): void
+  private function downloadProgram(Project $program, User $user): void
   {
-    $download = new ProgramDownloads();
+    $download = new ProjectDownloads();
     $download->setUser($user);
-    $download->setProgram($program);
+    $download->setProject($program);
     $download->setDownloadedAt(date_create());
     $program->setDownloads($program->getDownloads() + 1);
 

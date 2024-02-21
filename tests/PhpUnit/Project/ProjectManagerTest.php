@@ -2,11 +2,11 @@
 
 namespace Tests\PhpUnit\Project;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ExtensionRepository;
-use App\DB\EntityRepository\Project\ProgramLikeRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectLikeRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\DB\EntityRepository\Project\Special\ExampleRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
@@ -41,7 +41,7 @@ use Symfony\Component\Security\Core\Security;
  */
 class ProjectManagerTest extends TestCase
 {
-  private ProjectManager $program_manager;
+  private ProjectManager $project_manager;
 
   private MockObject|ProjectFileRepository $file_repository;
 
@@ -55,9 +55,9 @@ class ProjectManagerTest extends TestCase
 
   private ExtractedCatrobatFile|MockObject $extracted_file;
 
-  private MockObject|ProjectBeforeInsertEvent $programBeforeInsertEvent;
+  private MockObject|ProjectBeforeInsertEvent $projectBeforeInsertEvent;
 
-  private MockObject|ProjectAfterInsertEvent $programAfterInsertEvent;
+  private MockObject|ProjectAfterInsertEvent $projectAfterInsertEvent;
 
   /**
    * @throws \Exception
@@ -68,32 +68,32 @@ class ProjectManagerTest extends TestCase
     $this->file_repository = $this->createMock(ProjectFileRepository::class);
     $this->screenshot_repository = $this->createMock(ScreenshotRepository::class);
     $this->entity_manager = $this->createMock(EntityManager::class);
-    $program_repository = $this->createMock(ProgramRepository::class);
+    $project_repository = $this->createMock(ProjectRepository::class);
     $this->event_dispatcher = $this->createMock(EventDispatcherInterface::class);
     $this->request = $this->createMock(AddProjectRequest::class);
     $user = $this->createMock(User::class);
     $this->extracted_file = $this->createMock(ExtractedCatrobatFile::class);
-    $inserted_program = $this->createMock(Program::class);
+    $inserted_project = $this->createMock(Project::class);
     $tag_repository = $this->createMock(TagRepository::class);
-    $program_like_repository = $this->createMock(ProgramLikeRepository::class);
+    $project_like_repository = $this->createMock(ProjectLikeRepository::class);
     $featured_repository = $this->createMock(FeaturedRepository::class);
     $example_repository = $this->createMock(ExampleRepository::class);
     $logger = $this->createMock(LoggerInterface::class);
     $app_request = $this->createMock(RequestHelper::class);
-    $this->programBeforeInsertEvent = $this->createMock(ProjectBeforeInsertEvent::class);
-    $this->programAfterInsertEvent = $this->createMock(ProjectAfterInsertEvent::class);
+    $this->projectBeforeInsertEvent = $this->createMock(ProjectBeforeInsertEvent::class);
+    $this->projectAfterInsertEvent = $this->createMock(ProjectAfterInsertEvent::class);
     $extension_repository = $this->createMock(ExtensionRepository::class);
     $catrobat_file_sanitizer = $this->createMock(CatrobatFileSanitizer::class);
     $notification_service = $this->createMock(NotificationManager::class);
-    $program_finder = $this->createMock(TransformedFinder::class);
+    $project_finder = $this->createMock(TransformedFinder::class);
     $url_helper = new UrlHelper(new RequestStack());
     $security = $this->createMock(Security::class);
 
-    $this->program_manager = new ProjectManager(
+    $this->project_manager = new ProjectManager(
       $file_extractor, $this->file_repository, $this->screenshot_repository,
-      $this->entity_manager, $program_repository, $tag_repository, $program_like_repository, $featured_repository,
+      $this->entity_manager, $project_repository, $tag_repository, $project_like_repository, $featured_repository,
       $example_repository, $this->event_dispatcher, $logger, $app_request, $extension_repository,
-      $catrobat_file_sanitizer, $notification_service, $program_finder, $url_helper, $security
+      $catrobat_file_sanitizer, $notification_service, $project_finder, $url_helper, $security
     );
 
     $this->extracted_file->expects($this->any())->method('getName')->willReturn('TestProject');
@@ -112,48 +112,48 @@ class ProjectManagerTest extends TestCase
     $this->request->expects($this->any())->method('getLanguage')->willReturn('en');
     $this->request->expects($this->any())->method('getFlavor')->willReturn('pocketcode');
     $file_extractor->expects($this->any())->method('extract')->with($file)->willReturn($this->extracted_file);
-    $inserted_program->expects($this->any())->method('getId')->willReturn('1');
+    $inserted_project->expects($this->any())->method('getId')->willReturn('1');
 
-    $this->programBeforeInsertEvent->expects($this->any())->method('isPropagationStopped')->willReturn(false);
+    $this->projectBeforeInsertEvent->expects($this->any())->method('isPropagationStopped')->willReturn(false);
   }
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(ProjectManager::class, $this->program_manager);
+    $this->assertInstanceOf(ProjectManager::class, $this->project_manager);
   }
 
   /**
    * @throws \Exception
    */
-  public function testReturnsTheProgramAfterSuccessfullyAddingAProgram(): void
+  public function testReturnsTheProjectAfterSuccessfullyAddingAProject(): void
   {
-    $func = function (Program $project): Program {
+    $func = function (Project $project): Project {
       $project->setId('1');
 
       return $project;
     };
 
-    $this->entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Program::class))
+    $this->entity_manager->expects($this->atLeastOnce())->method('persist')->with($this->isInstanceOf(Project::class))
       ->will($this->returnCallback($func))
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->programBeforeInsertEvent)
+      ->willReturn($this->projectBeforeInsertEvent)
     ;
 
-    $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $this->project_manager->addProject($this->request));
   }
 
   /**
    * @throws \Exception
    */
-  public function testSavesTheProgramToTheFileRepositoryIfTheUploadSucceeded(): void
+  public function testSavesTheProjectToTheFileRepositoryIfTheUploadSucceeded(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(function (Project $project): Project {
         $project->setId('1');
 
         return $project;
@@ -163,11 +163,11 @@ class ProjectManagerTest extends TestCase
     $file = new File('/tmp/PhpUnitTest');
     $this->file_repository->expects($this->atLeastOnce())->method('saveProjectZipFile')->with($file, 1);
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Program::class));
+    $this->entity_manager->expects($this->atLeastOnce())->method('refresh')->with($this->isInstanceOf(Project::class));
 
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->projectBeforeInsertEvent);
 
-    $this->program_manager->addProject($this->request);
+    $this->project_manager->addProject($this->request);
   }
 
   /**
@@ -181,7 +181,7 @@ class ProjectManagerTest extends TestCase
     $this->extracted_file->expects($this->atLeastOnce())->method('getTags')->willReturn([]);
     $this->extracted_file->expects($this->atLeastOnce())->method('isDebugBuild')->willReturn(false);
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(function (Project $project): Project {
         $project->setId('1');
 
         return $project;
@@ -189,7 +189,7 @@ class ProjectManagerTest extends TestCase
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())
-      ->method('refresh')->with($this->isInstanceOf(Program::class))
+      ->method('refresh')->with($this->isInstanceOf(Project::class))
     ;
 
     $this->screenshot_repository->expects($this->atLeastOnce())
@@ -199,17 +199,17 @@ class ProjectManagerTest extends TestCase
       ->method('makeTempProjectAssetsPerm')->with(1)
     ;
 
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->projectBeforeInsertEvent);
 
-    $this->program_manager->addProject($this->request);
+    $this->project_manager->addProject($this->request);
   }
 
   /**
    * @throws \Exception
    */
-  public function testFiresAnEventBeforeInsertingAProgram(): void
+  public function testFiresAnEventBeforeInsertingAProject(): void
   {
-    $func = function (Program $project): Program {
+    $func = function (Project $project): Project {
       $project->setId('1');
 
       return $project;
@@ -221,20 +221,20 @@ class ProjectManagerTest extends TestCase
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->programBeforeInsertEvent)
+      ->willReturn($this->projectBeforeInsertEvent)
     ;
 
-    $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $this->project_manager->addProject($this->request));
   }
 
   /**
    * @throws \Exception
    */
-  public function testFiresAnEventWhenTheProgramIsInvalid(): void
+  public function testFiresAnEventWhenTheProjectIsInvalid(): void
   {
     $validation_exception = new InvalidCatrobatFileException('500', 500);
 
@@ -246,16 +246,16 @@ class ProjectManagerTest extends TestCase
       ->will($this->throwException($validation_exception))
     ;
 
-    $this->program_manager->addProject($this->request);
+    $this->project_manager->addProject($this->request);
   }
 
   /**
    * @throws \Exception
    */
-  public function testFiresAnEventWhenTheProgramIsStored(): void
+  public function testFiresAnEventWhenTheProjectIsStored(): void
   {
     $this->entity_manager->expects($this->atLeastOnce())->method('persist')
-      ->will($this->returnCallback(function (Program $project): Program {
+      ->will($this->returnCallback(function (Project $project): Project {
         $project->setId('1');
 
         return $project;
@@ -264,15 +264,15 @@ class ProjectManagerTest extends TestCase
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
     $this->entity_manager->expects($this->atLeastOnce())->method('refresh')
-      ->with($this->isInstanceOf(Program::class))
+      ->with($this->isInstanceOf(Project::class))
     ;
 
-    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->programBeforeInsertEvent);
+    $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')->willReturn($this->projectBeforeInsertEvent);
 
     $this->event_dispatcher->expects($this->atLeastOnce())->method('dispatch')
-      ->willReturn($this->onConsecutiveCalls($this->programBeforeInsertEvent, $this->createMock(ProjectBeforePersistEvent::class), $this->programAfterInsertEvent))
+      ->willReturn($this->onConsecutiveCalls($this->projectBeforeInsertEvent, $this->createMock(ProjectBeforePersistEvent::class), $this->projectAfterInsertEvent))
     ;
 
-    $this->assertInstanceOf(Program::class, $this->program_manager->addProject($this->request));
+    $this->assertInstanceOf(Project::class, $this->project_manager->addProject($this->request));
   }
 }

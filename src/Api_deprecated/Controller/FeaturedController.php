@@ -2,7 +2,7 @@
 
 namespace App\Api_deprecated\Controller;
 
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\Storage\ImageRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -44,8 +44,8 @@ class FeaturedController extends AbstractController
       $platform = 'ios';
     }
 
-    $featured_projects = $repository->getFeaturedPrograms($flavor, $limit, $offset, $platform);
-    $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $ios_only);
+    $featured_projects = $repository->getFeaturedProjects($flavor, $limit, $offset, $platform);
+    $numbOfTotalProjects = $repository->getFeaturedProjectCount($flavor, $ios_only);
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
@@ -62,12 +62,12 @@ class FeaturedController extends AbstractController
     return new JsonResponse($retArray);
   }
 
-  private function generateProjectObject(FeaturedProgram $featured_project, ImageRepository $image_repository): array
+  private function generateProjectObject(FeaturedProject $featured_project, ImageRepository $image_repository): array
   {
     $new_project = [];
-    $new_project['ProjectId'] = $featured_project->getProgram()->getId();
-    $new_project['ProjectName'] = $featured_project->getProgram()->getName();
-    $new_project['Author'] = $featured_project->getProgram()
+    $new_project['ProjectId'] = $featured_project->getProject()->getId();
+    $new_project['ProjectName'] = $featured_project->getProject()->getName();
+    $new_project['Author'] = $featured_project->getProject()
       ->getUser()
       ->getUserIdentifier()
     ;

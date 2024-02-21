@@ -73,7 +73,7 @@ class UserResponseManager extends AbstractResponseManager
       $data['currently_working_on'] = $user->getCurrentlyWorkingOn() ?? '';
     }
     if (in_array('projects', $attributes_list, true)) {
-      $data['projects'] = $user->getPrograms()->count();
+      $data['projects'] = $user->getProjects()->count();
     }
     if (in_array('followers', $attributes_list, true)) {
       $data['followers'] = $user->getFollowers()->count();

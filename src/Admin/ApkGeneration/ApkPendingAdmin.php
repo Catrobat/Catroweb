@@ -2,7 +2,7 @@
 
 namespace App\Admin\ApkGeneration;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridInterface;
@@ -16,7 +16,7 @@ use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType as SymfonyChoiceType;
 
 /**
- * @phpstan-extends AbstractAdmin<Program>
+ * @phpstan-extends AbstractAdmin<Project>
  */
 class ApkPendingAdmin extends AbstractAdmin
 {
@@ -36,7 +36,7 @@ class ApkPendingAdmin extends AbstractAdmin
   }
 
   /**
-   * @param Program $object
+   * @param Project $object
    */
   public function getThumbnailImageUrl($object): string
   {
@@ -53,7 +53,7 @@ class ApkPendingAdmin extends AbstractAdmin
     $qb->andWhere(
       $qb->expr()->eq($qb->getRootAliases()[0].'.apk_status', ':apk_status')
     );
-    $qb->setParameter('apk_status', Program::APK_PENDING);
+    $qb->setParameter('apk_status', Project::APK_PENDING);
 
     return $query;
   }
@@ -76,7 +76,7 @@ class ApkPendingAdmin extends AbstractAdmin
       ->add('apk_status', null,
         [
           'field_type' => SymfonyChoiceType::class,
-          'field_options' => ['choices' => ['None' => Program::APK_NONE, 'Pending' => Program::APK_PENDING, 'Ready' => Program::APK_READY]],
+          'field_options' => ['choices' => ['None' => Project::APK_NONE, 'Pending' => Project::APK_PENDING, 'Ready' => Project::APK_READY]],
         ])
     ;
   }
@@ -103,9 +103,9 @@ class ApkPendingAdmin extends AbstractAdmin
       ])
       ->add('apk_status', 'choice', [
         'choices' => [
-          Program::APK_NONE => 'None',
-          Program::APK_PENDING => 'Pending',
-          Program::APK_READY => 'Ready',
+          Project::APK_NONE => 'None',
+          Project::APK_PENDING => 'Pending',
+          Project::APK_READY => 'Ready',
         ], ])
       ->add(ListMapper::NAME_ACTIONS, null, [
         'actions' => [

@@ -14,7 +14,7 @@
 {% block content %}
   <h2>{{ 'myprofile.deleteAccount'|trans({}, 'catroweb') }}</h2>
   {% set text_parts = 'myprofile.deleteAccountWarning'
-    |trans({'%num_projects%': app.user.programs|length, '%num_followers%': app.user.followers|length}, 'catroweb')
+    |trans({'%num_projects%': app.user.projects|length, '%num_followers%': app.user.followers|length}, 'catroweb')
     |split('\n') %}
   <p><strong>{{ text_parts[0] }}</strong>
     {{ text_parts[1] }}</p>

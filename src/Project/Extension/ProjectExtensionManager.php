@@ -3,7 +3,7 @@
 namespace App\Project\Extension;
 
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use Doctrine\ORM\EntityManagerInterface;
@@ -18,7 +18,7 @@ class ProjectExtensionManager
   ) {
   }
 
-  public function addExtensions(ExtractedCatrobatFile $extracted_file, Program $project, bool $flush = true): void
+  public function addExtensions(ExtractedCatrobatFile $extracted_file, Project $project, bool $flush = true): void
   {
     $project->removeAllExtensions();
 
@@ -34,7 +34,7 @@ class ProjectExtensionManager
     $this->saveProject($project, $flush);
   }
 
-  public function addMultiplayerExtensions(Program $project, string $code_xml): void
+  public function addMultiplayerExtensions(Project $project, string $code_xml): void
   {
     if ($this->isMultiplayerProject($code_xml)) {
       $extension = $this->getExtension(Extension::MULTIPLAYER);
@@ -44,7 +44,7 @@ class ProjectExtensionManager
     }
   }
 
-  public function addArduinoExtensions(Program $project, string $code_xml): void
+  public function addArduinoExtensions(Project $project, string $code_xml): void
   {
     if ($this->isAnArduinoProject($code_xml)) {
       $extension = $this->getExtension(Extension::ARDUINO);
@@ -54,7 +54,7 @@ class ProjectExtensionManager
     }
   }
 
-  public function addEmbroideryExtensions(Program $project, string $code_xml): void
+  public function addEmbroideryExtensions(Project $project, string $code_xml): void
   {
     if ($this->isAnEmbroideryProject($code_xml)) {
       $extension = $this->getExtension(Extension::EMBROIDERY);
@@ -64,7 +64,7 @@ class ProjectExtensionManager
     }
   }
 
-  public function addMindstormsExtensions(Program $project, string $code_xml): void
+  public function addMindstormsExtensions(Project $project, string $code_xml): void
   {
     if ($this->isAMindstormsProject($code_xml)) {
       $extension = $this->getExtension(Extension::MINDSTORMS);
@@ -74,7 +74,7 @@ class ProjectExtensionManager
     }
   }
 
-  public function addPhiroExtensions(Program $project, string $code_xml): void
+  public function addPhiroExtensions(Project $project, string $code_xml): void
   {
     if ($this->isAPhiroProject($code_xml)) {
       $extension = $this->getExtension(Extension::PHIRO);
@@ -123,7 +123,7 @@ class ProjectExtensionManager
     return $extension;
   }
 
-  protected function saveProject(Program $project, bool $flush = true): void
+  protected function saveProject(Project $project, bool $flush = true): void
   {
     $this->entity_manager->persist($project);
     if ($flush) {

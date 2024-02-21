@@ -18,7 +18,7 @@ class Version20170309173506 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE nolb_example_program ADD downloads_from_male INT NOT NULL, ADD downloads_from_female INT NOT NULL');
+    $this->addSql('ALTER TABLE nolb_example_project ADD downloads_from_male INT NOT NULL, ADD downloads_from_female INT NOT NULL');
   }
 
   /**
@@ -29,6 +29,6 @@ class Version20170309173506 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE nolb_example_program DROP downloads_from_male, DROP downloads_from_female');
+    $this->addSql('ALTER TABLE nolb_example_project DROP downloads_from_male, DROP downloads_from_female');
   }
 }

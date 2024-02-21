@@ -1,5 +1,5 @@
 @api @projects
-Feature: Get remixed program from Scratch
+Feature: Get remixed project from Scratch
 
   Background:
     Given there are users:
@@ -8,17 +8,17 @@ Feature: Get remixed program from Scratch
 
     And there are projects:
       | id | name       | owned by | views | version | remix_root |
-      | 1  | program 1  | Catrobat | 14    | 0.8.5   | true       |
-      | 2  | program 2  | Catrobat | 9     | 0.8.5   | false      |
-      | 3  | program 3  | Catrobat | 33    | 0.8.5   | false      |
-      | 4  | program 4  | Catrobat | 15    | 0.8.5   | true       |
-      | 5  | program 5  | Catrobat | 7     | 0.8.5   | false      |
-      | 6  | program 6  | Catrobat | 30    | 0.8.5   | false      |
-      | 7  | program 7  | Catrobat | 35    | 0.8.5   | false      |
-      | 8  | program 8  | Catrobat | 30    | 0.8.5   | false      |
-      | 9  | program 9  | Catrobat | 38    | 0.8.5   | false      |
-      | 10 | program 10 | Catrobat | 38    | 0.8.5   | false      |
-      | 11 | program 11 | Catrobat | 38    | 0.8.5   | false      |
+      | 1  | project 1  | Catrobat | 14    | 0.8.5   | true       |
+      | 2  | project 2  | Catrobat | 9     | 0.8.5   | false      |
+      | 3  | project 3  | Catrobat | 33    | 0.8.5   | false      |
+      | 4  | project 4  | Catrobat | 15    | 0.8.5   | true       |
+      | 5  | project 5  | Catrobat | 7     | 0.8.5   | false      |
+      | 6  | project 6  | Catrobat | 30    | 0.8.5   | false      |
+      | 7  | project 7  | Catrobat | 35    | 0.8.5   | false      |
+      | 8  | project 8  | Catrobat | 30    | 0.8.5   | false      |
+      | 9  | project 9  | Catrobat | 38    | 0.8.5   | false      |
+      | 10 | project 10 | Catrobat | 38    | 0.8.5   | false      |
+      | 11 | project 11 | Catrobat | 38    | 0.8.5   | false      |
 
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
@@ -28,7 +28,7 @@ Feature: Get remixed program from Scratch
       | 70058680          | 8                 |
       | 70058680          | 9                 |
 
-  Scenario: show scratch remixes programs with limit and offset
+  Scenario: show scratch remixes projects with limit and offset
     Given I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
     And I have a parameter "category" with value "scratch"
@@ -38,25 +38,25 @@ Feature: Get remixed program from Scratch
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name      |
-      | program 9 |
-      | program 7 |
-      | program 6 |
-      | program 8 |
-      | program 5 |
+      | project 9 |
+      | project 7 |
+      | project 6 |
+      | project 8 |
+      | project 5 |
 
-  Scenario: program upload with parent-URL referring only to Scratch programs and
+  Scenario: project upload with parent-URL referring only to Scratch projects and
   Catrobat language version 0.999 should correctly add remix relations
     #-------------------------------------------------------------------------------------------------------------------
-    # this is how the remix graph should look like after the program is uploaded:
+    # this is how the remix graph should look like after the project is uploaded:
     #
     #       (SCRATCH #1)  (SCRATCH #2)
     #                \      /
     #                \     /
-    #                 (10)            <-- to be added (uploaded program will get ID "10")
+    #                 (10)            <-- to be added (uploaded project will get ID "10")
     #
     #-------------------------------------------------------------------------------------------------------------------
     Given I have a project with "catrobatLanguageVersion" set to "0.999" and "url" set to "Music Inventor [https://scratch.mit.edu/projects/29495624], The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/]"
-    When I upload the generated project with the id "18" and name "program 18", API version 2
+    When I upload the generated project with the id "18" and name "project 18", API version 2
     Then the uploaded project should be a remix root, API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
     And the uploaded project should have a Catrobat forward ancestor having its own id and depth "0", API version 2
@@ -75,14 +75,14 @@ Feature: Get remixed program from Scratch
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
-      | program 9  |
-      | program 7  |
-      | program 6  |
-      | program 8  |
-      | program 5  |
-      | program 18 |
+      | project 9  |
+      | project 7  |
+      | project 6  |
+      | project 8  |
+      | project 5  |
+      | project 18 |
 
-  Scenario: program upload with parent-URL referring to existing Catrobat programs and
+  Scenario: project upload with parent-URL referring to existing Catrobat projects and
   Catrobat language version 1.0 should correctly add remix relations (example #2)
     Given there are Scratch remix relations:
       | scratch_parent_id | catrobat_child_id |
@@ -95,15 +95,15 @@ Feature: Get remixed program from Scratch
       | 6         | 4        |
       | 6         | 1        |
 
-    Given I have a project with "catrobatLanguageVersion" set to "1.0" and "url" set to "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/project/2], Merge 1 [Program 6 [/app/project/6], Program 8 [https://share.catrob.at/app/project/8]]]"
-    When I upload the generated project with the id "18" and name "program 18", API version 2
+    Given I have a project with "catrobatLanguageVersion" set to "1.0" and "url" set to "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Project 2 [/pocketalice/project/2], Merge 1 [Project 6 [/app/project/6], Project 8 [https://share.catrob.at/app/project/8]]]"
+    When I upload the generated project with the id "18" and name "project 18", API version 2
     And the uploaded project should have remix migration date NOT NULL, API version 2
     And the uploaded project should have a Catrobat forward ancestor having its own id and depth "0", API version 2
     And the uploaded project should have no Catrobat backward parents, API version 2
     And the uploaded project should have a Scratch parent having id "70058680", API version 2
     And the uploaded project should have no further Scratch parents, API version 2
     And the uploaded project should have no Catrobat forward descendants except self-relation, API version 2
-    And the uploaded project should have RemixOf "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Program 2 [/pocketalice/project/2], Merge 1 [Program 6 [/app/project/6], Program 8 [https://share.catrob.at/app/project/8]]]" in the xml, API version 2
+    And the uploaded project should have RemixOf "The Colour Divide - Trailer [https://scratch.mit.edu/projects/70058680/], Merge 2 [Project 2 [/pocketalice/project/2], Merge 1 [Project 6 [/app/project/6], Project 8 [https://share.catrob.at/app/project/8]]]" in the xml, API version 2
     Given I have a parameter "limit" with value "9"
     And I have a parameter "offset" with value "0"
     And I have a parameter "category" with value "scratch"
@@ -113,14 +113,14 @@ Feature: Get remixed program from Scratch
     Then the response should have the default projects model structure
     Then the response should contain projects in the following order:
       | Name       |
-      | program 10 |
-      | program 11 |
-      | program 9  |
-      | program 7  |
-      | program 6  |
-      | program 8  |
-      | program 5  |
-      | program 18 |
+      | project 10 |
+      | project 11 |
+      | project 9  |
+      | project 7  |
+      | project 6  |
+      | project 8  |
+      | project 5  |
+      | project 18 |
 
 
 

@@ -2,8 +2,8 @@
 
 namespace App\DB\EntityRepository\Project\Special;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
@@ -15,22 +15,22 @@ class FeaturedRepository extends ServiceEntityRepository
 {
   public function __construct(ManagerRegistry $managerRegistry)
   {
-    parent::__construct($managerRegistry, FeaturedProgram::class);
+    parent::__construct($managerRegistry, FeaturedProject::class);
   }
 
-  public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): mixed
+  public function getFeaturedProjects(?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
     $qb
       ->select('e')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->isNotNull('e.program'))
+      ->andWhere($qb->expr()->isNotNull('e.project'))
       ->setFirstResult($offset)
       ->setMaxResults($limit)
     ;
     $qb->orderBy('e.priority', 'DESC');
-    $qb->leftJoin('e.program', 'program');
+    $qb->leftJoin('e.project', 'project');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
     $qb = $this->addPlatformCondition($qb, $platform);
@@ -38,17 +38,17 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getFeaturedProgramsCount(?string $flavor, string $platform = null, string $max_version = null): int
+  public function getFeaturedProjectsCount(?string $flavor, string $platform = null, string $max_version = null): int
   {
     $qb = $this->createQueryBuilder('e');
 
     $qb
       ->select('count(e.id)')
       ->where('e.active = true')
-      ->andWhere($qb->expr()->isNotNull('e.program'))
+      ->andWhere($qb->expr()->isNotNull('e.project'))
     ;
     $qb->orderBy('e.priority', 'DESC');
-    $qb->leftJoin('e.program', 'program');
+    $qb->leftJoin('e.project', 'project');
     $qb = $this->addMaxVersionCondition($qb, $max_version);
     $qb = $this->addFeaturedExampleFlavorCondition($qb, $flavor);
     $qb = $this->addPlatformCondition($qb, $platform);
@@ -66,7 +66,7 @@ class FeaturedRepository extends ServiceEntityRepository
    * @throws NoResultException
    * @throws NonUniqueResultException
    */
-  public function getFeaturedProgramCount(string $flavor, bool $for_ios = false): mixed
+  public function getFeaturedProjectCount(string $flavor, bool $for_ios = false): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -75,7 +75,7 @@ class FeaturedRepository extends ServiceEntityRepository
       ->join('e.flavor', 'fl')
       ->where('e.active = true')
       ->andWhere($qb->expr()->eq('fl.name', ':flavor'))
-      ->andWhere($qb->expr()->isNotNull('e.program'))
+      ->andWhere($qb->expr()->isNotNull('e.project'))
       ->andWhere($qb->expr()->eq('e.for_ios', ':for_ios'))
       ->setParameter('flavor', $flavor)
       ->setParameter('for_ios', $for_ios)
@@ -121,13 +121,13 @@ class FeaturedRepository extends ServiceEntityRepository
     ;
   }
 
-  public function isFeatured(Program $program): bool
+  public function isFeatured(Project $project): bool
   {
     $qb = $this->createQueryBuilder('e');
     $qb
       ->select('count(e.id)')
-      ->where($qb->expr()->eq('e.program', ':program'))
-      ->setParameter('program', $program)
+      ->where($qb->expr()->eq('e.project', ':project'))
+      ->setParameter('project', $project)
     ;
     try {
       $count = intval($qb->getQuery()->getSingleScalarResult());
@@ -181,8 +181,8 @@ class FeaturedRepository extends ServiceEntityRepository
     }
 
     $query_builder
-      ->innerJoin(Program::class, 'p', Join::WITH,
-        $query_builder->expr()->eq('e.program', 'p')->__toString())
+      ->innerJoin(Project::class, 'p', Join::WITH,
+        $query_builder->expr()->eq('e.project', 'p')->__toString())
       ->andWhere($query_builder->expr()->lte('p.language_version', ':max_version'))
       ->setParameter('max_version', $max_version)
       ->addOrderBy('e.id', 'ASC')

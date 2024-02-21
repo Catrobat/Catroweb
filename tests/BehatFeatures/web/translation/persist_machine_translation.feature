@@ -15,7 +15,7 @@ Feature: Persist project and comment machine translation
       | 1  | 2          | 1       | c1   |
       | 2  | 1          | 1       | c2   |
 
-  Scenario: Create new entry the first time a program is translated
+  Scenario: Create new entry the first time a project is translated
     Given there are project machine translations:
       | project_id | source_language | target_language | provider | usage_count |
     And I switch the language to "French"
@@ -27,7 +27,7 @@ Feature: Persist project and comment machine translation
       | project_id | source_language | target_language | provider   | usage_count |
       | 1          | en              | fr-FR           | itranslate | 1           |
 
-  Scenario: Increment usage count if program entry already exists
+  Scenario: Increment usage count if project entry already exists
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count |
       | 1          | en              | fr-FR           | itranslate | 2           |
@@ -42,7 +42,7 @@ Feature: Persist project and comment machine translation
       | 1          | en              | fr-FR           | itranslate | 3           |
       | 2          | en              | fr-FR           | itranslate | 1           |
 
-  Scenario: Cache program translation if used often
+  Scenario: Cache project translation if used often
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count |
       | 3          | en              | fr-FR           | itranslate | 15          |
@@ -55,7 +55,7 @@ Feature: Persist project and comment machine translation
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
 
-  Scenario: Create new entry for database cached program translation
+  Scenario: Create new entry for database cached project translation
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
@@ -69,7 +69,7 @@ Feature: Persist project and comment machine translation
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
       | 3          | en              | fr-FR           | db         | 1           |                     |                         |                    |
 
-  Scenario: Increment usage count for database cached program translation
+  Scenario: Increment usage count for database cached project translation
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
@@ -84,7 +84,7 @@ Feature: Persist project and comment machine translation
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |
       | 3          | en              | fr-FR           | db         | 2           |                     |                         |                    |
 
-  Scenario: Do not cache "cached" program translation
+  Scenario: Do not cache "cached" project translation
     Given there are project machine translations:
       | project_id | source_language | target_language | provider   | usage_count | cached_name         | cached_description      | cached_credits     |
       | 3          | en              | fr-FR           | itranslate | 16          | translated project3 | translated description3 | translated credit3 |

@@ -2,7 +2,7 @@
 
 namespace Tests\PhpUnit\Project\Remix;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Remix\RemixData;
@@ -31,7 +31,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
   private AsyncHttpClient|MockObject $async_http_client;
 
-  private MockObject|Program $program_entity;
+  private MockObject|Project $project_entity;
 
   protected function setUp(): void
   {
@@ -52,7 +52,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
       ->will($this->returnValueMap($route_map))
     ;
 
-    $this->program_entity = $this->createMock(Program::class);
+    $this->project_entity = $this->createMock(Project::class);
 
     $this->remix_updater = new RemixUpdaterEventSubscriber($this->remix_manager, $this->async_http_client, $router, '.');
 
@@ -67,7 +67,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
       ->willReturn('catroweb')
     ;
 
-    $this->program_entity
+    $this->project_entity
       ->expects($this->any())
       ->method('getUser')
       ->willReturn($user)
@@ -94,13 +94,13 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
 
-    $this->program_entity
+    $this->project_entity
       ->expects($this->atLeastOnce())
       ->method('getId')
       ->willReturn('3571')
     ;
 
-    $this->program_entity
+    $this->project_entity
       ->expects($this->atLeastOnce())
       ->method('isInitialVersion')
       ->willReturn(true)
@@ -125,14 +125,14 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
 
     Assert::assertNotEquals($xml->header->url->__toString(), $expected_url);
 
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
 
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
@@ -144,9 +144,9 @@ class RemixUpdaterEventSubscriberTest extends TestCase
    *
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testCallFetchesScratchProgramDetailsAndAddScratchProgramMethodIfCatrobatLanguageVersionIs0993(): void
+  public function testCallFetchesScratchProjectDetailsAndAddScratchProjectMethodIfCatrobatLanguageVersionIs0993(): void
   {
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $first_expected_scratch_id = '118499611';
     $second_expected_scratch_id = '70058680';
     $expected_scratch_ids = [$first_expected_scratch_id, $second_expected_scratch_id];
@@ -164,8 +164,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     }
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_project_id);
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $expected_scratch_info = [
       ['id' => $first_expected_scratch_id, 'creator' => ['username' => 'Techno-CAT']],
       ['id' => $second_expected_scratch_id, 'creator' => ['username' => 'bubble103']],
@@ -184,9 +184,9 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchProjects')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
-        $this->assertCount(2, $scratch_programs_data);
-        $this->assertSame($expected_scratch_info, $scratch_programs_data);
+      ->will($this->returnCallback(function ($scratch_projects_data) use ($expected_scratch_info) {
+        $this->assertCount(2, $scratch_projects_data);
+        $this->assertSame($expected_scratch_info, $scratch_projects_data);
       }))
     ;
     $this->remix_manager
@@ -196,10 +196,10 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
 
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
   }
 
   /**
@@ -209,7 +209,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
    */
   public function testIgnoresMultipleRemixParentsIfCatrobatLanguageVersionIs0992OrLower(): void
   {
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $first_expected_scratch_id = '118499611';
     $second_expected_scratch_id = '70058680';
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/'.$first_expected_scratch_id
@@ -226,8 +226,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     }
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_project_id);
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
       ->expects($this->atLeastOnce())
       ->method('fetchScratchProjectDetails')->with($this->isType('array'))
@@ -240,10 +240,10 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
   }
 
   /**
@@ -251,13 +251,13 @@ class RemixUpdaterEventSubscriberTest extends TestCase
    *
    * @psalm-suppress UndefinedPropertyAssignment
    */
-  public function testCallFetchesOnlyDetailsOfNotYetExistingScratchPrograms(): void
+  public function testCallFetchesOnlyDetailsOfNotYetExistingScratchProjects(): void
   {
-    $new_program_id = '3571';
+    $new_project_id = '3571';
     $first_expected_scratch_id = '118499611';
     $second_expected_scratch_id = '70058680';
     $expected_scratch_ids = [$first_expected_scratch_id, $second_expected_scratch_id];
-    $expected_already_existing_scratch_programs = [$first_expected_scratch_id];
+    $expected_already_existing_scratch_projects = [$first_expected_scratch_id];
     $current_url = 'Scratch 1 [https://scratch.mit.edu/projects/'.$first_expected_scratch_id
         .'], Scratch 2 [https://scratch.mit.edu/projects/'.$second_expected_scratch_id.']';
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
@@ -272,8 +272,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     }
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_program_id);
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn($new_project_id);
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $expected_scratch_info = [['id' => $second_expected_scratch_id, 'creator' => ['username' => 'bubble103']]];
     $this->async_http_client
       ->expects($this->atLeastOnce())
@@ -283,22 +283,22 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('filterExistingScratchProjectIds')->with($expected_scratch_ids)
-      ->willReturn($expected_already_existing_scratch_programs)
+      ->willReturn($expected_already_existing_scratch_projects)
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchProjects')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
-        $this->assertCount(1, $scratch_programs_data);
-        $this->assertSame($expected_scratch_info, $scratch_programs_data);
+      ->will($this->returnCallback(function ($scratch_projects_data) use ($expected_scratch_info) {
+        $this->assertCount(1, $scratch_projects_data);
+        $this->assertSame($expected_scratch_info, $scratch_projects_data);
       }))
     ;
 
     $this->remix_manager->expects($this->atLeastOnce())
-      ->method('addRemixes')->with($this->isInstanceOf(Program::class))
+      ->method('addRemixes')->with($this->isInstanceOf(Project::class))
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
   }
 
   /**
@@ -329,8 +329,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     }
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
       ->expects($this->atLeastOnce())
       ->method('fetchScratchProjectDetails')->with($this->isType('array'))
@@ -343,8 +343,8 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')
-      ->will($this->returnCallback(function (Program $project, array $remixes_data) use ($first_expected_url, $second_expected_url) {
-        $this->assertEquals($this->program_entity, $project);
+      ->will($this->returnCallback(function (Project $project, array $remixes_data) use ($first_expected_url, $second_expected_url) {
+        $this->assertEquals($this->project_entity, $project);
 
         $this->assertCount(2, $remixes_data);
 
@@ -368,13 +368,13 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager
       ->expects($this->atLeastOnce())
       ->method('addScratchProjects')->with($this->isType('array'))
-      ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
-        $this->assertCount(1, $scratch_programs_data);
-        $this->assertSame($expected_scratch_info, $scratch_programs_data);
+      ->will($this->returnCallback(function ($scratch_projects_data) use ($expected_scratch_info) {
+        $this->assertCount(1, $scratch_projects_data);
+        $this->assertSame($expected_scratch_info, $scratch_projects_data);
       }))
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
   }
 
   /**
@@ -388,9 +388,9 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->remix_updater->update($file, $this->project_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
     Assert::assertEquals($xml->header->url, $new_url);
@@ -402,25 +402,25 @@ class RemixUpdaterEventSubscriberTest extends TestCase
    */
   public function testSavesTheScratchUrlToRemixOf(): void
   {
-    $expected_scratch_program_id = '70058680';
-    $current_url = 'https://scratch.mit.edu/projects/'.$expected_scratch_program_id;
+    $expected_scratch_project_id = '70058680';
+    $current_url = 'https://scratch.mit.edu/projects/'.$expected_scratch_project_id;
     $new_url = 'http://share.catrob.at/details/3571';
 
     $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client->expects($this->atLeastOnce())->method('fetchScratchProjectDetails')->with([])->willReturn([]);
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProjectIds')->with([$expected_scratch_program_id])
-      ->willReturn([$expected_scratch_program_id])
+      ->method('filterExistingScratchProjectIds')->with([$expected_scratch_project_id])
+      ->willReturn([$expected_scratch_project_id])
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
-    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
+    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Project::class));
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
     Assert::assertEquals($xml->header->url, $new_url);
@@ -461,13 +461,13 @@ class RemixUpdaterEventSubscriberTest extends TestCase
       ->willReturn([])
     ;
     $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
-    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
+    $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Project::class));
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->remix_updater->update($file, $this->project_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
     Assert::assertEquals($xml->header->url, $new_url);
@@ -483,9 +483,9 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->getBaseXmlWithUrl($current_url);
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
-    $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
-    $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
-    $this->remix_updater->update($file, $this->program_entity);
+    $this->project_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
+    $this->project_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
+    $this->remix_updater->update($file, $this->project_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
     /* @psalm-suppress UndefinedPropertyAssignment */

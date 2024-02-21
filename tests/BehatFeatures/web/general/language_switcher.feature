@@ -52,7 +52,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
     Then one of the ".project-list__title" elements should contain "heruntergeladen"
     And the element "#home-projects__most_downloaded" should be visible
 
-  Scenario: User with selected russian language sees the remix graph button and details on program page
+  Scenario: User with selected russian language sees the remix graph button and details on project page
     Given there are forward remix relations:
       | ancestor_id | descendant_id | depth |
       | 1           | 1             | 0     |

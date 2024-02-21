@@ -15,25 +15,25 @@ use PHPUnit\Framework\TestCase;
  */
 class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
 {
-  private ProjectXmlHeaderValidatorEventSubscriber $program_xml_header_validator;
+  private ProjectXmlHeaderValidatorEventSubscriber $project_xml_header_validator;
 
   protected function setUp(): void
   {
-    $this->program_xml_header_validator = new ProjectXmlHeaderValidatorEventSubscriber();
+    $this->project_xml_header_validator = new ProjectXmlHeaderValidatorEventSubscriber();
   }
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(ProjectXmlHeaderValidatorEventSubscriber::class, $this->program_xml_header_validator);
+    $this->assertInstanceOf(ProjectXmlHeaderValidatorEventSubscriber::class, $this->project_xml_header_validator);
   }
 
-  public function testChecksIfTheProgramXmlHeaderIsValid(): void
+  public function testChecksIfTheProjectXmlHeaderIsValid(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/code.xml');
     $this->assertInstanceOf(\SimpleXMLElement::class, $xml);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
-    $this->program_xml_header_validator->validate($file);
+    $this->project_xml_header_validator->validate($file);
   }
 
   public function testThrowsAnExceptionIfHeaderIsMissing(): void
@@ -44,7 +44,7 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     unset($xml->header);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->program_xml_header_validator->validate($file);
+    $this->project_xml_header_validator->validate($file);
   }
 
   public function testThrowsAnExceptionIfHeaderInformationIsMissing(): void
@@ -55,10 +55,10 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     unset($xml->header->applicationName);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->program_xml_header_validator->validate($file);
+    $this->project_xml_header_validator->validate($file);
   }
 
-  public function testChecksIfProgramNameIsSet(): void
+  public function testChecksIfProjectNameIsSet(): void
   {
     $file = $this->createMock(ExtractedCatrobatFile::class);
     $xml = simplexml_load_file(BootstrapExtension::$GENERATED_FIXTURES_DIR.'/base/code.xml');
@@ -66,7 +66,7 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     unset($xml->header->programName);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->program_xml_header_validator->validate($file);
+    $this->project_xml_header_validator->validate($file);
   }
 
   public function testChecksIfDescriptionIsSet(): void
@@ -77,6 +77,6 @@ class ProjectXmlHeaderValidatorEventSubscriberTest extends TestCase
     unset($xml->header->description);
     $file->expects($this->atLeastOnce())->method('getProjectXmlProperties')->willReturn($xml);
     $this->expectException(InvalidCatrobatFileException::class);
-    $this->program_xml_header_validator->validate($file);
+    $this->project_xml_header_validator->validate($file);
   }
 }

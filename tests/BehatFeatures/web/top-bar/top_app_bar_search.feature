@@ -97,8 +97,8 @@ Feature: Searching should be possible using a specific Search Top App Bar
       | 2  | User1    |
     And there are projects:
       | id | name                | owned by |
-      | 1  | program 1           | User1    |
-      | 2  | test program        | User1    |
+      | 1  | project 1           | User1    |
+      | 2  | test project        | User1    |
       | 3  | Test advanced app   | Catrobat |
       | 4  | Catrobat            | User1    |
       | 5  | project 3           | Catrobat |
@@ -108,16 +108,16 @@ Feature: Searching should be possible using a specific Search Top App Bar
     Given I am on "/app"
     And I wait for the page to be loaded
     Then I click "#top-app-bar__btn-search"
-    And I enter "program" into visible "#top-app-bar__search-input"
+    And I enter "project" into visible "#top-app-bar__search-input"
     And I press enter in the search bar
     And I wait for the page to be loaded
-    Then I should be on "/app/search/program"
+    Then I should be on "/app/search/project"
     Then I should see "Search results"
     And the element "#top-app-bar__btn-search-back" should be visible
     And the element "#top-app-bar__search-form" should be visible
     And the element "#top-app-bar__search-input" should be visible
     And the element "#top-app-bar__btn-search-clear" should be visible
-    Then the "top-app-bar__search-input" field should contain "program"
+    Then the "top-app-bar__search-input" field should contain "project"
     Then I enter "Test advanced" into visible "#top-app-bar__search-input"
     And I press enter in the search bar
     And I wait for the page to be loaded

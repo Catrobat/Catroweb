@@ -18,7 +18,7 @@ class Version20160827124510 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program ADD private TINYINT(1) DEFAULT \'0\' NOT NULL');
+    $this->addSql('ALTER TABLE project ADD private TINYINT(1) DEFAULT \'0\' NOT NULL');
   }
 
   /**
@@ -29,6 +29,6 @@ class Version20160827124510 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE program DROP private');
+    $this->addSql('ALTER TABLE project DROP private');
   }
 }

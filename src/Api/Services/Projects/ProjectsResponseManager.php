@@ -6,8 +6,8 @@ use App\Api\Services\Base\AbstractResponseManager;
 use App\Api\Services\Base\TranslatorAwareTrait;
 use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\Project\Tag;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
@@ -45,7 +45,7 @@ class ProjectsResponseManager extends AbstractResponseManager
   /**
    * @param ?string $attributes Comma-separated list of attributes to include into response
    */
-  public function createProjectDataResponse(Program $project, ?string $attributes): ProjectResponse
+  public function createProjectDataResponse(Project $project, ?string $attributes): ProjectResponse
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
@@ -65,8 +65,8 @@ class ProjectsResponseManager extends AbstractResponseManager
       $attributes_list = explode(',', $attributes);
     }
 
-    /** @var Program $extraced_project */
-    $extraced_project = $project->isExample() ? $project->getProgram() : $project;
+    /** @var Project $extraced_project */
+    $extraced_project = $project->isExample() ? $project->getProject() : $project;
 
     $data = [];
 
@@ -135,7 +135,7 @@ class ProjectsResponseManager extends AbstractResponseManager
       $data['screenshot_small'] = $project->isExample() ? $this->image_repository->getAbsoluteWebPath($project->getId(), $project->getImageType(), false) : $this->project_manager->getScreenshotSmall($extraced_project->getId());
     }
     if (in_array('project_url', $attributes_list, true)) {
-      $data['project_url'] = ltrim($this->createProjectLocation($project->getProgram()), '/');
+      $data['project_url'] = ltrim($this->createProjectLocation($project->getProject()), '/');
     }
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = ltrim($this->url_generator->generate(
@@ -162,7 +162,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     return $response;
   }
 
-  public function createFeaturedProjectResponse(FeaturedProgram $featured_project, string $attributes = null): FeaturedProjectResponse
+  public function createFeaturedProjectResponse(FeaturedProject $featured_project, string $attributes = null): FeaturedProjectResponse
   {
     if (empty($attributes) || 'ALL' === $attributes) {
       $attributes_list = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
@@ -175,13 +175,13 @@ class ProjectsResponseManager extends AbstractResponseManager
       $data['id'] = $featured_project->getId() ?? -1;
     }
     if (in_array('project_id', $attributes_list, true)) {
-      $data['project_id'] = $featured_project->getProgram()->getId() ?? '';
+      $data['project_id'] = $featured_project->getProject()->getId() ?? '';
     }
     if (in_array('name', $attributes_list, true)) {
-      $data['name'] = $featured_project->getProgram()->getName();
+      $data['name'] = $featured_project->getProject()->getName();
     }
     if (in_array('author', $attributes_list, true)) {
-      $data['author'] = $featured_project->getProgram()->getUser()->getUserIdentifier();
+      $data['author'] = $featured_project->getProject()->getUser()->getUserIdentifier();
     }
     if (in_array('featured_image', $attributes_list, true)) {
       $data['featured_image'] = $this->image_repository->getAbsoluteWebPath($featured_project->getId(), $featured_project->getImageType(), true);
@@ -191,7 +191,7 @@ class ProjectsResponseManager extends AbstractResponseManager
       $url = $featured_project->getUrl();
       $project_url = null;
       if (empty($url)) {
-        $url = $project_url = ltrim($this->createProjectLocation($featured_project->getProgram()), '/');
+        $url = $project_url = ltrim($this->createProjectLocation($featured_project->getProject()), '/');
       }
 
       if (in_array('project_url', $attributes_list, true)) {
@@ -209,7 +209,7 @@ class ProjectsResponseManager extends AbstractResponseManager
   {
     $response = [];
 
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     foreach ($featured_projects as $featured_project) {
       $response[] = $this->createFeaturedProjectResponse($featured_project, $attributes);
     }
@@ -226,7 +226,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     ]);
   }
 
-  public function createProjectLocation(Program $project): string
+  public function createProjectLocation(Project $project): string
   {
     return $this->url_generator->generate(
       'program',

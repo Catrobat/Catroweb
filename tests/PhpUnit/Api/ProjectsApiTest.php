@@ -13,7 +13,7 @@ use App\Api\Services\Projects\ProjectsApiProcessor;
 use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Api\Services\Projects\ProjectsResponseManager;
 use App\Api\Services\ValidationWrapper;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -144,7 +144,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_headers = [];
 
     $loader = $this->createMock(ProjectsApiLoader::class);
-    $loader->method('findProjectByID')->willReturn($this->createMock(Program::class));
+    $loader->method('findProjectByID')->willReturn($this->createMock(Project::class));
     $this->facade->method('getLoader')->willReturn($loader);
 
     $response = $this->object->projectIdGet('id', $response_code, $response_headers);
@@ -153,14 +153,14 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
-  private function projectIdPut_setLoaderAndAuthManager(MockObject|Program $project = null, MockObject|User $user = null): void
+  private function projectIdPut_setLoaderAndAuthManager(MockObject|Project $project = null, MockObject|User $user = null): void
   {
     if (is_null($user)) {
       $user = $this->createMock(User::class);
     }
 
     if (is_null($project)) {
-      $project = $this->createMock(Program::class);
+      $project = $this->createMock(Project::class);
       $project->method('getUser')->willReturn($user);
     }
 
@@ -168,7 +168,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setAuthManager($user);
   }
 
-  private function projectIdPut_setLoader(null|MockObject|Program $project): void
+  private function projectIdPut_setLoader(null|MockObject|Project $project): void
   {
     $loader = $this->createMock(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
@@ -192,7 +192,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $project = new Program();
+    $project = new Project();
     $user = new User();
     $project->setId('id');
     $project->setName('Old name');
@@ -271,7 +271,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $this->projectIdPut_setLoader($this->createMock(Program::class));
+    $this->projectIdPut_setLoader($this->createMock(Project::class));
     $this->projectIdPut_setAuthManager(null);
 
     $update_project_request = $this->createMock(UpdateProjectRequest::class);
@@ -294,7 +294,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_code = 200;
     $response_headers = [];
 
-    $project = new Program();
+    $project = new Project();
     $user = new User();
     $user->setId('user1');
     $wrong_user = new User();
@@ -471,7 +471,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $response_headers = [];
 
     $loader = $this->createMock(ProjectsApiLoader::class);
-    $loader->method('findProjectByID')->willReturn($this->createMock(Program::class));
+    $loader->method('findProjectByID')->willReturn($this->createMock(Project::class));
     $loader->method('getRecommendedProjects')->willReturn([]);
     $this->facade->method('getLoader')->willReturn($loader);
 
@@ -657,7 +657,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $user = $this->createMock(User::class);
     $user->method('isVerified')->willReturn(true);
     $processor = $this->createMock(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willReturn($this->createMock(Program::class));
+    $processor->method('addProject')->willReturn($this->createMock(Project::class));
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
     $this->facade->method('getAuthenticationManager')->willReturn($authentication_manager);
@@ -690,7 +690,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $validation_wrapper->method('hasError')->willReturn(true);
     $validator->method('validateUploadFile')->willReturn($validation_wrapper);
     $processor = $this->createMock(ProjectsApiProcessor::class);
-    $processor->method('addProject')->willReturn($this->createMock(Program::class));
+    $processor->method('addProject')->willReturn($this->createMock(Project::class));
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $user = $this->createMock(User::class);
     $user->method('isVerified')->willReturn(true);

@@ -2,7 +2,7 @@
 
 namespace App\DB\EntityRepository\User\Notification;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\Notifications\CatroNotification;
 use App\DB\Entity\User\Notifications\FollowNotification;
 use App\DB\Entity\User\Notifications\LikeNotification;
@@ -20,15 +20,15 @@ class NotificationRepository extends ServiceEntityRepository
   /**
    * @return LikeNotification[]
    */
-  public function getLikeNotificationsForProject(Program $project, User $owner = null, User $likeFrom = null): array
+  public function getLikeNotificationsForProject(Project $project, User $owner = null, User $likeFrom = null): array
   {
     $qb = $this->_em->createQueryBuilder();
 
     $qb
       ->select('n')
       ->from(LikeNotification::class, 'n')
-      ->where($qb->expr()->eq('n.program', ':program_id'))
-      ->setParameter(':program_id', $project->getId())
+      ->where($qb->expr()->eq('n.project', ':project_id'))
+      ->setParameter(':project_id', $project->getId())
     ;
 
     if (null !== $owner) {

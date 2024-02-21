@@ -8,8 +8,8 @@ Feature: Every studio provides a list of all members
       | 2  | Catrobat    |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
-      | 2  | program 2 | Catrobat |
+      | 1  | project 1 | Catrobat |
+      | 2  | project 2 | Catrobat |
     And there are studios:
       | id | name             | description     | allow_comments | is_public |
       | 1  | CatrobatStudio01 | hasADescription | true           | true      |
@@ -19,7 +19,7 @@ Feature: Every studio provides a list of all members
       | 2  | Catrobat    | 1         | member |
     And there are studio projects:
       | id | project   | user     | studio_id |
-      | 1  | program 1 | Catrobat | 1         |
+      | 1  | project 1 | Catrobat | 1         |
 
   Scenario: If I am not logged in I should not be able see all members
     Given I am on "/app/studio/1"

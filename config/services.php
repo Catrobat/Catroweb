@@ -80,10 +80,10 @@ use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
-use App\DB\Entity\Project\Special\ExampleProgram;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectInappropriateReport;
+use App\DB\Entity\Project\Special\ExampleProject;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Survey;
 use App\DB\Entity\System\CronJob;
@@ -223,7 +223,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->bind('$catrobat_translation_dir', '%catrobat.translations.dir%')
     ->bind('$catrobat_file_storage_dir', '%catrobat.file.storage.dir%')
     ->bind('$catrobat_file_extract_dir', '%catrobat.file.extract.dir%')
-    ->bind('$program_finder', service('fos_elastica.finder.app_program'))
+    ->bind('$project_finder', service('fos_elastica.finder.app_program'))
     ->bind('$user_finder', service('fos_elastica.finder.app_user'))
     ->bind('$refresh_token_ttl', '%lexik_jwt_authentication.token_ttl%')
     ->bind('$dkim_private_key_path', '%dkim.private.key%')
@@ -467,7 +467,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set(ProjectPostUpdateNotifier::class)
-    ->tag('doctrine.orm.entity_listener', ['event' => 'postUpdate', 'entity' => Program::class])
+    ->tag('doctrine.orm.entity_listener', ['event' => 'postUpdate', 'entity' => Project::class])
   ;
 
   $services->set(UserPostPersistNotifier::class)
@@ -606,17 +606,17 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.projects.overview', ProjectsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Projects Overview', 'show_mosaic_button' => false, 'default' => true, 'code' => null, 'model_class' => Program::class, 'controller' => null])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Projects Overview', 'show_mosaic_button' => false, 'default' => true, 'code' => null, 'model_class' => Project::class, 'controller' => null])
     ->public()
   ;
 
   $services->set('admin.block.projects.approve', ApproveProjectsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Approve Projects', 'code' => null, 'model_class' => Program::class, 'controller' => ApproveProjectsController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Approve Projects', 'code' => null, 'model_class' => Project::class, 'controller' => ApproveProjectsController::class])
     ->public()
   ;
 
   $services->set('admin.block.projects.reported', ReportedProjectsAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Reported Projects', 'code' => null, 'model_class' => ProgramInappropriateReport::class, 'controller' => ReportedProjectsController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Reported Projects', 'code' => null, 'model_class' => ProjectInappropriateReport::class, 'controller' => ReportedProjectsController::class])
     ->public()
   ;
 
@@ -630,13 +630,13 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set('admin.block.featured.program', FeaturedProjectAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Featured Projects', 'code' => null, 'model_class' => FeaturedProgram::class, 'controller' => null])
+  $services->set('admin.block.featured.project', FeaturedProjectAdmin::class)
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Featured Projects', 'code' => null, 'model_class' => FeaturedProject::class, 'controller' => null])
     ->public()
   ;
 
-  $services->set('admin.block.example.program', ExampleProjectAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Example Projects', 'code' => null, 'model_class' => ExampleProgram::class, 'controller' => null])
+  $services->set('admin.block.example.project', ExampleProjectAdmin::class)
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Example Projects', 'code' => null, 'model_class' => ExampleProject::class, 'controller' => null])
     ->public()
   ;
 
@@ -656,12 +656,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   ;
 
   $services->set('admin.block.apk.pending', ApkPendingAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Pending', 'code' => null, 'model_class' => Program::class, 'controller' => ApkController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Pending', 'code' => null, 'model_class' => Project::class, 'controller' => ApkController::class])
     ->public()
   ;
 
   $services->set('admin.block.apk.list', ApkReadyAdmin::class)
-    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Ready', 'code' => null, 'model_class' => Program::class, 'controller' => ApkController::class])
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Ready', 'code' => null, 'model_class' => Project::class, 'controller' => ApkController::class])
     ->public()
   ;
 

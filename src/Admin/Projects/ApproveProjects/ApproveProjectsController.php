@@ -2,19 +2,19 @@
 
 namespace App\Admin\Projects\ApproveProjects;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @phpstan-extends CRUDController<Program>
+ * @phpstan-extends CRUDController<Project>
  */
 class ApproveProjectsController extends CRUDController
 {
   public function approveAction(): RedirectResponse
   {
-    /** @var Program|null $object */
+    /** @var Project|null $object */
     $object = $this->admin->getSubject();
     $object->setApproved(true);
     $object->setVisible(true);
@@ -34,7 +34,7 @@ class ApproveProjectsController extends CRUDController
 
   public function invisibleAction(): RedirectResponse
   {
-    /** @var Program|null $object */
+    /** @var Project|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       throw new NotFoundHttpException('Unable to find project');
@@ -71,7 +71,7 @@ class ApproveProjectsController extends CRUDController
     $object_key = array_rand($objectsArray);
     $object = $objectsArray[$object_key];
 
-    if (!$object instanceof Program) {
+    if (!$object instanceof Project) {
       return null;
     }
 

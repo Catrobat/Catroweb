@@ -2,8 +2,8 @@
 
 namespace App\System\Commands\Reset;
 
-use App\DB\Entity\Project\Program;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\System\Commands\Helpers\CommandHelper;
 use App\System\Commands\ImportProjects\ProgramImportCommand;
 use Symfony\Component\Console\Command\Command;
@@ -18,7 +18,7 @@ class ResetCommand extends Command
 
   private array $reported = [];
 
-  public function __construct(private readonly ProgramRepository $program_manager, private readonly ParameterBagInterface $parameter_bag)
+  public function __construct(private readonly ProjectRepository $program_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
   }
@@ -108,7 +108,7 @@ class ResetCommand extends Command
 
     $programs = $this->program_manager->findAll();
     $program_names = [];
-    /** @var Program $program */
+    /** @var Project $program */
     foreach ($programs as $program) {
       $program_names[] = $program->getName();
     }

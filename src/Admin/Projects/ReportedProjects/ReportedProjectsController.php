@@ -2,24 +2,24 @@
 
 namespace App\Admin\Projects\ReportedProjects;
 
-use App\DB\Entity\Project\ProgramInappropriateReport;
+use App\DB\Entity\Project\ProjectInappropriateReport;
 use Sonata\AdminBundle\Controller\CRUDController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
- * @phpstan-extends CRUDController<ProgramInappropriateReport>
+ * @phpstan-extends CRUDController<ProjectInappropriateReport>
  */
 class ReportedProjectsController extends CRUDController
 {
   public function unreportProjectAction(): RedirectResponse
   {
-    /** @var ProgramInappropriateReport|null $object */
+    /** @var ProjectInappropriateReport|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       throw new NotFoundHttpException();
     }
-    $project = $object->getProgram();
+    $project = $object->getProject();
     $project->setVisible(true);
     $project->setApproved(true);
     $object->setState(3);
@@ -31,12 +31,12 @@ class ReportedProjectsController extends CRUDController
 
   public function acceptProjectReportAction(): RedirectResponse
   {
-    /** @var ProgramInappropriateReport|null $object */
+    /** @var ProjectInappropriateReport|null $object */
     $object = $this->admin->getSubject();
     if (null === $object) {
       throw new NotFoundHttpException();
     }
-    $project = $object->getProgram();
+    $project = $object->getProject();
     $project->setVisible(false);
     $project->setApproved(false);
     $object->setState(2);

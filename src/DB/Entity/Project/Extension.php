@@ -41,9 +41,9 @@ class Extension implements \Stringable
   protected ?int $id = null;
 
   /**
-   * @ORM\ManyToMany(targetEntity=Program::class, mappedBy="extensions")
+   * @ORM\ManyToMany(targetEntity=Project::class, mappedBy="extensions")
    */
-  protected Collection $programs;
+  protected Collection $projects;
 
   /**
    * @ORM\Column(name="internal_title", type="string", nullable=false)
@@ -62,7 +62,7 @@ class Extension implements \Stringable
 
   public function __construct()
   {
-    $this->programs = new ArrayCollection();
+    $this->projects = new ArrayCollection();
   }
 
   public function __toString(): string
@@ -111,31 +111,31 @@ class Extension implements \Stringable
     return $this;
   }
 
-  public function addProgram(Program $program): void
+  public function addProject(Project $project): void
   {
-    if ($this->programs->contains($program)) {
+    if ($this->projects->contains($project)) {
       return;
     }
-    $this->programs->add($program);
+    $this->projects->add($project);
   }
 
-  public function removeProgram(Program $program): void
+  public function removeProject(Project $project): void
   {
-    $this->programs->removeElement($program);
+    $this->projects->removeElement($project);
   }
 
-  public function getPrograms(): Collection
+  public function getProjects(): Collection
   {
-    return $this->programs;
+    return $this->projects;
   }
 
   public function getProjectCount(): int
   {
-    return count($this->programs);
+    return count($this->projects);
   }
 
-  public function removeAllPrograms(): void
+  public function removeAllProjects(): void
   {
-    $this->programs->clear();
+    $this->projects->clear();
   }
 }

@@ -3,11 +3,11 @@
 namespace App\System\Testing\Behat\Context;
 
 use App\Api\Exceptions\ApiVersionNotSupportedException;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Remix\ProjectRemixBackwardRelation;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\Entity\Project\Scratch\ScratchProjectRemixRelation;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
 use App\System\Testing\Behat\ContextTrait;
@@ -452,7 +452,7 @@ class ApiContext implements Context
   {
     $url = '/app/api/reportProject/reportProject.json';
     $this->request_parameters = [
-      'program' => $project_id,
+      'project' => $project_id,
       'category' => $category,
       'note' => $note,
     ];
@@ -536,7 +536,7 @@ class ApiContext implements Context
   public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
     // Trying to find the id of the last uploaded project in the database
-    $uploaded_project = $this->getManager()->getRepository(Program::class)->findOneBy([
+    $uploaded_project = $this->getManager()->getRepository(Project::class)->findOneBy([
       'id' => $this->getIDOfLastUploadedProject($api_version),
     ]);
 
@@ -1107,7 +1107,7 @@ class ApiContext implements Context
    */
   public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
   {
-    $uploaded_project = $this->getManager()->getRepository(Program::class)->findOneBy([
+    $uploaded_project = $this->getManager()->getRepository(Project::class)->findOneBy([
       'name' => 'test',
     ]);
 
@@ -1865,7 +1865,7 @@ class ApiContext implements Context
         $this->request_parameters['username'] = 'Catrobat';
         $this->request_parameters['token'] = 'cccccccccc';
         break;
-      case 'invalid program file':
+      case 'invalid project file':
         $this->method = 'POST';
         $this->url = '/app/api/upload/upload.json';
         $this->request_parameters['username'] = 'Catrobat';
@@ -1994,7 +1994,7 @@ class ApiContext implements Context
   {
     $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
 
-    /** @var Program $project */
+    /** @var Project $project */
     $project = $this->getProjectManager()->find($id);
     $project->setName($name);
     $this->getProjectManager()->save($project);
@@ -2332,7 +2332,7 @@ class ApiContext implements Context
   public function theProjectShouldNotBeARemixRoot(mixed $project_id): void
   {
     $project_manager = $this->getProjectManager();
-    /** @var Program $uploaded_project */
+    /** @var Project $uploaded_project */
     $uploaded_project = $project_manager->find($project_id);
     Assert::assertFalse($uploaded_project->isRemixRoot());
   }
@@ -2362,7 +2362,7 @@ class ApiContext implements Context
     ]);
 
     $further_scratch_parent_relations = array_filter($direct_edge_relations,
-      fn (ScratchProgramRemixRelation $relation): bool => !array_key_exists(
+      fn (ScratchProjectRemixRelation $relation): bool => !array_key_exists(
         $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations
       ));
 
@@ -2416,7 +2416,7 @@ class ApiContext implements Context
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      fn (ProgramRemixRelation $relation): bool => $relation->getDepth() >= 1));
+      fn (ProjectRemixRelation $relation): bool => $relation->getDepth() >= 1));
   }
 
   /**
@@ -2430,7 +2430,7 @@ class ApiContext implements Context
     ;
 
     $further_forward_ancestor_relations = array_filter($forward_ancestors_including_self_referencing_relation,
-      fn (ProgramRemixRelation $relation): bool => !array_key_exists(
+      fn (ProjectRemixRelation $relation): bool => !array_key_exists(
         $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_ancestor_relations
       ));
 
@@ -2454,7 +2454,7 @@ class ApiContext implements Context
     $backward_parent_relations = $this->getProjectRemixBackwardRepository()->findBy(['child_id' => $project_id]);
 
     $further_backward_parent_relations = array_filter($backward_parent_relations,
-      fn (ProgramRemixBackwardRelation $relation): bool => !array_key_exists(
+      fn (ProjectRemixBackwardRelation $relation): bool => !array_key_exists(
         $relation->getUniqueKey(), $this->checked_catrobat_remix_backward_relations
       ));
 
@@ -2484,7 +2484,7 @@ class ApiContext implements Context
    */
   public function theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $project_id, mixed $descendant_project_id, mixed $depth): void
   {
-    /** @var ProgramRemixRelation $forward_descendant_relation */
+    /** @var ProjectRemixRelation $forward_descendant_relation */
     $forward_descendant_relation = $this->getProjectRemixForwardRepository()->findOneBy([
       'ancestor_id' => $project_id,
       'descendant_id' => $descendant_project_id,
@@ -2512,7 +2512,7 @@ class ApiContext implements Context
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
-      fn (ProgramRemixRelation $relation): bool => $relation->getDepth() >= 1));
+      fn (ProjectRemixRelation $relation): bool => $relation->getDepth() >= 1));
   }
 
   /**
@@ -2526,7 +2526,7 @@ class ApiContext implements Context
     ;
 
     $further_forward_descendant_relations = array_filter($forward_descendants_including_self_referencing_relation,
-      fn (ProgramRemixRelation $relation): bool => !array_key_exists(
+      fn (ProjectRemixRelation $relation): bool => !array_key_exists(
         $relation->getUniqueKey(), $this->checked_catrobat_remix_forward_descendant_relations
       ));
 
@@ -2539,7 +2539,7 @@ class ApiContext implements Context
   public function theProjectShouldHaveRemixofInTheXml(mixed $project_id, mixed $value): void
   {
     $project_manager = $this->getProjectManager();
-    /** @var Program $uploaded_project */
+    /** @var Project $uploaded_project */
     $uploaded_project = $project_manager->find($project_id);
     $efr = $this->getExtractedFileRepository();
     $extracted_catrobat_file = $efr->loadProjectExtractedFile($uploaded_project);
@@ -2724,7 +2724,7 @@ class ApiContext implements Context
   {
     $projects = array_merge($this->dataFixturesContext->getProjects(), $this->new_uploaded_projects);
     $stored_projects = [];
-    /** @var Program $project */
+    /** @var Project $project */
     foreach ($projects as $project) {
       if (!$this->expectProject($expected_projects, $project->getName())) {
         continue;
@@ -2753,13 +2753,13 @@ class ApiContext implements Context
   {
     $featured_projects = $this->dataFixturesContext->getFeaturedProjects();
     $projects = [];
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     foreach ($featured_projects as $featured_project) {
-      if (!$this->expectProject($expected_projects, $featured_project->getProgram()->getName())) {
+      if (!$this->expectProject($expected_projects, $featured_project->getProject()->getName())) {
         continue;
       }
       $url = $featured_project->getUrl();
-      $project_url = 'http://localhost/app/project/'.$featured_project->getProgram()->getId();
+      $project_url = 'http://localhost/app/project/'.$featured_project->getProject()->getId();
       if (empty($url)) {
         $url = $project_url;
       } else {
@@ -2767,9 +2767,9 @@ class ApiContext implements Context
       }
       $result = [
         'id' => $featured_project->getId(),
-        'name' => $featured_project->getProgram()->getName(),
-        'author' => $featured_project->getProgram()->getUser()->getUserIdentifier(),
-        'project_id' => $featured_project->getProgram()->getId(),
+        'name' => $featured_project->getProject()->getName(),
+        'author' => $featured_project->getProject()->getUser()->getUserIdentifier(),
+        'project_id' => $featured_project->getProject()->getId(),
         'project_url' => $project_url,
         'url' => $url,
         'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_project->getId().'.jpg',
@@ -2804,7 +2804,7 @@ class ApiContext implements Context
         'id' => $user->getId(),
         'username' => $user->getUsername(),
         'email' => $user->getEmail(),
-        'projects' => $user->getPrograms()->count(),
+        'projects' => $user->getProjects()->count(),
         'followers' => $user->getFollowers()->count(),
         'following' => $user->getFollowing()->count(),
       ];

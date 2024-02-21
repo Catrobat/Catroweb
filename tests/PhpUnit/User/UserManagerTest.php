@@ -33,7 +33,7 @@ class UserManagerTest extends TestCase
     $repository = $this->createMock(EntityRepository::class);
     $object_manager->expects($this->any())->method('getClassMetadata')->willReturn($meta);
     $object_manager->expects($this->any())->method('getRepository')->willReturn($repository);
-    $program_manager = $this->createMock(ProjectManager::class);
+    $project_manager = $this->createMock(ProjectManager::class);
     $user_finder = $this->createMock(TransformedFinder::class);
     $user_repository = $this->createMock(UserRepository::class);
     $url_helper = new UrlHelper(new RequestStack());
@@ -42,7 +42,7 @@ class UserManagerTest extends TestCase
       $userPasswordHasher,
       $object_manager,
       $user_finder,
-      $program_manager,
+      $project_manager,
       $url_helper,
       $user_repository
     );

@@ -9,8 +9,8 @@ Feature: User gets notifications for new followers, reactions, comments, ..
       | User-id     | User     |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
-      | 2  | program 2 | User     |
+      | 1  | project 1 | Catrobat |
+      | 2  | project 2 | User     |
 
   Scenario: Users should be notified about reactions
     Given there are catro notifications:

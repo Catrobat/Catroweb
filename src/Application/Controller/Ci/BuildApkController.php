@@ -2,7 +2,7 @@
 
 namespace App\Application\Controller\Ci;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\Apk\ApkRepository;
 use App\Project\Apk\JenkinsDispatcher;
 use App\Project\ProjectManager;
@@ -35,19 +35,19 @@ class BuildApkController extends AbstractController
   #[Route(path: '/ci/build/{id}', name: 'ci_build', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function createApkAction(string $id): JsonResponse
   {
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->find($id);
     if (null === $project || !$project->isVisible()) {
       throw $this->createNotFoundException();
     }
-    if (Program::APK_READY === $project->getApkStatus()) {
+    if (Project::APK_READY === $project->getApkStatus()) {
       return new JsonResponse(['status' => 'ready']);
     }
-    if (Program::APK_PENDING === $project->getApkStatus()) {
+    if (Project::APK_PENDING === $project->getApkStatus()) {
       return new JsonResponse(['status' => 'pending']);
     }
     $this->dispatcher->sendBuildRequest($project->getId());
-    $project->setApkStatus(Program::APK_PENDING);
+    $project->setApkStatus(Project::APK_PENDING);
     $project->setApkRequestTime(TimeUtils::getDateTime());
     $this->project_manager->save($project);
 
@@ -57,7 +57,7 @@ class BuildApkController extends AbstractController
   #[Route(path: '/ci/upload/{id}', name: 'ci_upload_apk', defaults: ['_format' => 'json'], methods: ['GET', 'POST'])]
   public function uploadApkAction(string $id, Request $request): JsonResponse
   {
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->find($id);
     if (null === $project || !$project->isVisible()) {
       throw $this->createNotFoundException();
@@ -71,7 +71,7 @@ class BuildApkController extends AbstractController
     }
     $file = array_values($request->files->all())[0];
     $this->apk_repository->save($file, $project->getId());
-    $project->setApkStatus(Program::APK_READY);
+    $project->setApkStatus(Project::APK_READY);
     $this->project_manager->save($project);
 
     return new JsonResponse(['result' => 'success']);
@@ -80,7 +80,7 @@ class BuildApkController extends AbstractController
   #[Route(path: '/ci/failed/{id}', name: 'ci_failed_apk', defaults: ['_format' => 'json'], methods: ['GET'])]
   public function failedApkAction(string $id, Request $request): JsonResponse
   {
-    /** @var Program|null $project */
+    /** @var Project|null $project */
     $project = $this->project_manager->find($id);
     if (null === $project || !$project->isVisible()) {
       throw $this->createNotFoundException();
@@ -89,8 +89,8 @@ class BuildApkController extends AbstractController
     if ($request->query->get('token') !== $config['uploadtoken']) {
       throw new AccessDeniedException();
     }
-    if (Program::APK_PENDING === $project->getApkStatus()) {
-      $project->setApkStatus(Program::APK_NONE);
+    if (Project::APK_PENDING === $project->getApkStatus()) {
+      $project->setApkStatus(Project::APK_NONE);
       $this->project_manager->save($project);
 
       return new JsonResponse(['OK']);

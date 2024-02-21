@@ -112,8 +112,8 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'translation_domain' => 'catroweb',
             'icon' => '<i class="fa fa-bullhorn"></i>',
             'items' => [
-              'admin.block.featured.program',
-              'admin.block.example.program',
+              'admin.block.featured.project',
+              'admin.block.example.project',
             ],
           ],
           'sonata.admin.group.mediapackage' => [

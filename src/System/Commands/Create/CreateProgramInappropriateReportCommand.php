@@ -2,8 +2,8 @@
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramInappropriateReport;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectInappropriateReport;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\User\UserManager;
@@ -64,14 +64,14 @@ class CreateProgramInappropriateReportCommand extends Command
     return 0;
   }
 
-  private function reportProgram(Program $program, User $user, string $note): void
+  private function reportProgram(Project $program, User $user, string $note): void
   {
-    $report = new ProgramInappropriateReport();
+    $report = new ProjectInappropriateReport();
     $report->setReportingUser($user);
     $program->setVisible(false);
     $report->setCategory('Inappropriate');
     $report->setNote($note);
-    $report->setProgram($program);
+    $report->setProject($program);
     $report->setReportedUser($program->getUser());
     $this->entity_manager->persist($report);
     $this->entity_manager->flush();

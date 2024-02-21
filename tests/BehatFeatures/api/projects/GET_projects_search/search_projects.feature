@@ -1,7 +1,7 @@
 @api @projects
 Feature: Search projects
 
-  To find programs, users should be able to search all available programs for specific words
+  To find projects, users should be able to search all available projects for specific words
 
   Background:
     Given there are users:

@@ -22,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     "comment": "CommentNotification",
  *     "like": "LikeNotification",
  *     "follow": "FollowNotification",
- *     "follow_project": "NewProgramNotification",
+ *     "follow_project": "NewProjectNotification",
  *     "broadcast_notification": "BroadcastNotification",
  *     "remix_notification": "RemixNotification"
  * })

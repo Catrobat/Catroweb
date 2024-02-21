@@ -17,8 +17,8 @@
       (
       {
         '%user_link%': '<a href="'~path('profile', {'id': notification.getRemixFrom.id|escape})~'">'~notification.getRemixFrom.getUserName|escape~'</a>',
-        '%program_link%': '<a href="'~path('program', {'id': notification.getRemixProgram.id|escape})~'">'~notification.getRemixProgram.name|escape~'</a>',
-        '%remix_program_link%': '<a href="'~path('program', {'id': notification.program.id|escape})~'">'~notification.program.name|escape~'</a>'
+        '%program_link%': '<a href="'~path('program', {'id': notification.getRemixProject.id|escape})~'">'~notification.getRemixProject.name|escape~'</a>',
+        '%remix_program_link%': '<a href="'~path('program', {'id': notification.project.id|escape})~'">'~notification.project.name|escape~'</a>'
       },
       'catroweb'
     )

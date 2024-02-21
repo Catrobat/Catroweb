@@ -2,7 +2,7 @@
 
 namespace App\Admin\Statistics\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Translation\ProjectCustomTranslation;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\ListMapper;
@@ -55,7 +55,7 @@ class ProjectCustomTranslationAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $form): void
   {
     $form
-      ->add('project', EntityType::class, ['class' => Program::class], [
+      ->add('project', EntityType::class, ['class' => Project::class], [
         'admin_code' => 'admin.block.projects.overview',
       ])
       ->add('language')

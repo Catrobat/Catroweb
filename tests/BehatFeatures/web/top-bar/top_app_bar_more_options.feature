@@ -13,7 +13,7 @@ Feature: On some page the top app bar should provide the user with additional fu
       | 1  | Catrobat |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
+      | 1  | project 1 | Catrobat |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#top-app-bar__default" should be visible
@@ -26,7 +26,7 @@ Feature: On some page the top app bar should provide the user with additional fu
 #      | 1  | Catrobat |
 #    And there are projects:
 #      | id | name      | owned by |
-#      | 1  | program 1 | Catrobat |
+#      | 1  | project 1 | Catrobat |
 #    And I am on "/app/project/1"
 #    And I wait for the page to be loaded
 #    Then the element "#top-app-bar__default" should be visible
@@ -41,7 +41,7 @@ Feature: On some page the top app bar should provide the user with additional fu
       | 1  | Catrobat |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
+      | 1  | project 1 | Catrobat |
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then the element "#top-app-bar__default" should be visible
@@ -56,7 +56,7 @@ Feature: On some page the top app bar should provide the user with additional fu
       | 1  | Catrobat |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
+      | 1  | project 1 | Catrobat |
     And I am on "/app/user/1"
     And I wait for the page to be loaded
     Then the element "#top-app-bar__default" should be visible

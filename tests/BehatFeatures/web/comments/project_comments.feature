@@ -36,7 +36,7 @@ Feature: As a visitor I want to write, see and report comments.
 #      3 has no comments
 
 
-  Scenario: There should be a commend section on every program page
+  Scenario: There should be a commend section on every project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "Comments"
@@ -275,7 +275,7 @@ Feature: As a visitor I want to write, see and report comments.
     Then the element "#catro-notification-1" should be visible
     And I should see "OtherUser"
 
-  Scenario: I should be able to write a comment for my own program but I wont get a notification
+  Scenario: I should be able to write a comment for my own project but I wont get a notification
     Given I log in as "Catrobat"
     And I am on "/app/project/1"
     And I wait for the page to be loaded

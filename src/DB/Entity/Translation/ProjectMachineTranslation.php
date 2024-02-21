@@ -2,7 +2,7 @@
 
 namespace App\DB\Entity\Translation;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\HasLifecycleCallbacks;
 
@@ -31,16 +31,16 @@ class ProjectMachineTranslation extends MachineTranslation
   private ?string $cached_credits = null;
 
   public function __construct(/**
-   * @ORM\ManyToOne(targetEntity=Program::class)
+   * @ORM\ManyToOne(targetEntity=Project::class)
    *
    * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
    */
-    protected Program $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)
+    protected Project $project, string $source_language, string $target_language, string $provider, int $usage_count = 1)
   {
     parent::__construct($source_language, $target_language, $provider, $usage_count);
   }
 
-  public function getProject(): Program
+  public function getProject(): Project
   {
     return $this->project;
   }

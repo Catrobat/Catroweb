@@ -2,12 +2,12 @@
 
 namespace App\Project\Event;
 
-use App\DB\Entity\Project\ProgramInappropriateReport;
+use App\DB\Entity\Project\ProjectInappropriateReport;
 use Symfony\Contracts\EventDispatcher\Event;
 
 class ReportInsertEvent extends Event
 {
-  public function __construct(protected ?string $category, protected ?string $note, protected ProgramInappropriateReport $project)
+  public function __construct(protected ?string $category, protected ?string $note, protected ProjectInappropriateReport $project)
   {
   }
 
@@ -21,7 +21,7 @@ class ReportInsertEvent extends Event
     return $this->note;
   }
 
-  public function getReport(): ProgramInappropriateReport
+  public function getReport(): ProjectInappropriateReport
   {
     return $this->project;
   }

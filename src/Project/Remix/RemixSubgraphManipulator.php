@@ -2,12 +2,12 @@
 
 namespace App\Project\Remix;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
-use App\DB\Entity\Project\Remix\ProgramRemixRelation;
-use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
-use App\DB\EntityRepository\Project\ProgramRemixRepository;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Remix\ProjectRemixBackwardRelation;
+use App\DB\Entity\Project\Remix\ProjectRemixRelation;
+use App\DB\EntityRepository\Project\ProjectRemixBackwardRepository;
+use App\DB\EntityRepository\Project\ProjectRemixRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
 class RemixSubgraphManipulator
@@ -17,11 +17,11 @@ class RemixSubgraphManipulator
    */
   final public const COMMON_TIMESTAMP = 'common_timestamp';
 
-  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramRepository $project_repository, private readonly ProgramRemixRepository $project_remix_repository, private readonly ProgramRemixBackwardRepository $project_remix_backward_repository)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProjectRepository $project_repository, private readonly ProjectRemixRepository $project_remix_repository, private readonly ProjectRemixBackwardRepository $project_remix_backward_repository)
   {
   }
 
-  public function appendRemixSubgraphToCatrobatParents(Program $project, array $ids_of_new_parents,
+  public function appendRemixSubgraphToCatrobatParents(Project $project, array $ids_of_new_parents,
     array $preserved_creation_date_mapping,
     array $preserved_seen_date_mapping): void
   {
@@ -46,7 +46,7 @@ class RemixSubgraphManipulator
     // case backward relation:
     foreach ($backward_parent_ids as $backward_parent_id) {
       $parent_project = $this->project_repository->find($backward_parent_id);
-      $project_remix_backward_relation = new ProgramRemixBackwardRelation($parent_project, $project);
+      $project_remix_backward_relation = new ProjectRemixBackwardRelation($parent_project, $project);
       $unique_key = $project_remix_backward_relation->getUniqueKey();
 
       if (!in_array($unique_key, $unique_keys_of_all_existing_relations, true)) {
@@ -57,7 +57,7 @@ class RemixSubgraphManipulator
     // case forward relation:
     foreach ($project_descendant_relations as $descendant_relation) {
       foreach ($parents_ancestor_relations as $parent_catrobat_relation) {
-        $project_remix_relation = new ProgramRemixRelation(
+        $project_remix_relation = new ProjectRemixRelation(
           $parent_catrobat_relation->getAncestor(),
           $descendant_relation->getDescendant(),
           $parent_catrobat_relation->getDepth() + $descendant_relation->getDepth() + 1

@@ -1,5 +1,5 @@
 @admin
-Feature: Admin featured programs
+Feature: Admin featured projects
   It should be possible to list all users, sort and filter etc. The created_at column does not work while creation of the users. They are updated afterwards.
 
   Background:

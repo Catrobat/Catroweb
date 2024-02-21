@@ -2,7 +2,7 @@
 
 namespace App\DB\EntityRepository\User\Comment;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
@@ -56,13 +56,13 @@ class UserCommentRepository extends ServiceEntityRepository
     return $this->count(['parent_id' => $comment_id]);
   }
 
-  public function findCommentsByProgramId(string $program_id): array
+  public function findCommentsByProjectId(string $project_id): array
   {
     $qb = $this->createQueryBuilder('uc');
 
     return $qb->select('uc')
-      ->where('uc.program = :program_id')
-      ->setParameter('program_id', $program_id)
+      ->where('uc.project = :project_id')
+      ->setParameter('project_id', $project_id)
       ->andWhere($qb->expr()->orX()->addMultiple([
         $qb->expr()->isNull('uc.parent_id'),
         $qb->expr()->eq('uc.parent_id', 0),
@@ -84,7 +84,7 @@ class UserCommentRepository extends ServiceEntityRepository
     ;
   }
 
-  public function getProjectCommentOverviewListData(Program $project): array
+  public function getProjectCommentOverviewListData(Project $project): array
   {
     return $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
@@ -97,9 +97,9 @@ class UserCommentRepository extends ServiceEntityRepository
         'cu.id as user_id',
         'cu.avatar as user_avatar',
         '(SELECT COUNT(c2.id) FROM '.UserComment::class.' c2 WHERE c2.parent_id = c.id) AS number_of_replies')
-      ->where('c.program = :program')
+      ->where('c.project = :project')
       ->andWhere('c.parent_id IS NULL')
-      ->setParameter('program', $project)
+      ->setParameter('project', $project)
       ->getQuery()
       ->getResult()
     ;
@@ -112,14 +112,14 @@ class UserCommentRepository extends ServiceEntityRepository
   {
     return $this->createQueryBuilder('c')
       ->innerJoin('c.user', 'cu')
-      ->innerJoin('c.program', 'cp')
+      ->innerJoin('c.project', 'cp')
       ->select(
         'c.id',
         'c.username',
         'c.text',
         'c.is_deleted',
         'c.uploadDate as upload_date',
-        'cp.id as program_id',
+        'cp.id as project_id',
         'cu.id as user_id',
         'cu.avatar as user_avatar'
       )

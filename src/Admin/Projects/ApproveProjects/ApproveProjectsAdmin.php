@@ -3,7 +3,7 @@
 namespace App\Admin\Projects\ApproveProjects;
 
 use App\Admin\Projects\ProjectPreUpdateTrait;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
@@ -25,7 +25,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
- * @phpstan-extends AbstractAdmin<Program>
+ * @phpstan-extends AbstractAdmin<Project>
  */
 class ApproveProjectsAdmin extends AbstractAdmin
 {
@@ -47,7 +47,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $object
+   * @param mixed|Project $object
    */
   public function getThumbnailImageUrl($object): string
   {
@@ -98,7 +98,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $object
+   * @param mixed|Project $object
    */
   public function getContainingStrings($object): array
   {
@@ -115,7 +115,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   }
 
   /**
-   * @param mixed|Program $object
+   * @param mixed|Project $object
    */
   public function getContainingCodeObjects($object): array
   {
@@ -195,7 +195,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
   protected function configureFormFields(FormMapper $form): void
   {
     $form
-      ->add('name', TextType::class, ['label' => 'Program name'])
+      ->add('name', TextType::class, ['label' => 'Project name'])
       ->add('user', EntityType::class, ['class' => User::class])
     ;
   }

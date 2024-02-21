@@ -4,8 +4,8 @@ namespace App\Admin\SpecialProjects;
 
 use App\Admin\SpecialProjects\Forms\FeaturedImageConstraint;
 use App\DB\Entity\Flavor;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
@@ -23,7 +23,7 @@ use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormError;
 
 /**
- * @phpstan-extends AbstractAdmin<FeaturedProgram>
+ * @phpstan-extends AbstractAdmin<FeaturedProject>
  */
 class FeaturedProjectAdmin extends AbstractAdmin
 {
@@ -38,7 +38,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
   }
 
   /**
-   * @param FeaturedProgram $object
+   * @param FeaturedProject $object
    *
    * @return string
    */
@@ -49,16 +49,16 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
   public function getObjectMetadata($object): MetadataInterface
   {
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     $featured_project = $object;
 
-    return new Metadata($featured_project->getProgram()->getName(), $featured_project->getProgram()->getDescription(),
+    return new Metadata($featured_project->getProject()->getName(), $featured_project->getProject()->getDescription(),
       $this->getFeaturedImageUrl($featured_project));
   }
 
   public function preUpdate(object $object): void
   {
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     $featured_project = $object;
 
     $featured_project->old_image_type = $featured_project->getImageType();
@@ -66,13 +66,13 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
   public function preValidate(object $object): void
   {
-    $id = $this->getForm()->get('Program_Id_or_Url')->getData();
+    $id = $this->getForm()->get('Project_Id_or_Url')->getData();
 
     if ($this->getForm()->get('Use_Url')->getData()) {
       if (filter_var($id, FILTER_VALIDATE_URL)) {
         $object->setUrl($id);
         if (null !== $object->getId()) {
-          $object->setProgram(null);
+          $object->setProject(null);
         }
       } else {
         $this->getForm()->addError(new FormError('Please enter a valid URL.'));
@@ -85,7 +85,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
       $project = $this->project_manager->find($id);
 
       if (null !== $project) {
-        $object->setProgram($project);
+        $object->setProject($project);
         if (null !== $object->getURL()) {
           $object->setURL(null);
         }
@@ -102,7 +102,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
    */
   protected function configureFormFields(FormMapper $form): void
   {
-    /** @var FeaturedProgram $featured_project */
+    /** @var FeaturedProject $featured_project */
     $featured_project = $this->getSubject();
     $file_options = [
       'required' => (null === $featured_project->getId()),
@@ -119,8 +119,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
       $id_value = $this->getSubject()->getUrl();
       $use_url = true;
-      if (null == $id_value && !is_null($this->getSubject()->getProgram())) {
-        $id_value = $this->getSubject()->getProgram()->getId();
+      if (null == $id_value && !is_null($this->getSubject()->getProject())) {
+        $id_value = $this->getSubject()->getProject()->getId();
         $use_url = false;
       }
     } else {
@@ -129,8 +129,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
     $form
       ->add('file', FileType::class, $file_options)
       ->add('Use_Url', CheckboxType::class, ['mapped' => false, 'required' => false,
-        'help' => 'Toggle to save URL instead of Program ID.', 'data' => $use_url, ])
-      ->add('Program_Id_or_Url', TextType::class, ['mapped' => false, 'data' => $id_value])
+        'help' => 'Toggle to save URL instead of Project ID.', 'data' => $use_url, ])
+      ->add('Project_Id_or_Url', TextType::class, ['mapped' => false, 'data' => $id_value])
       ->add('flavor', null, ['class' => Flavor::class, 'multiple' => false, 'required' => true])
       ->add('priority')
       ->add('for_ios', null, ['label' => 'iOS only', 'required' => false,
@@ -147,7 +147,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
   protected function configureDatagridFilters(DatagridMapper $filter): void
   {
     $filter
-      ->add('program.name')
+      ->add('project.name')
       ->add('for_ios')
       ->add('active')
       ->add('priority')
@@ -171,8 +171,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
         'accessor' => fn ($subject): string => $this->getFeaturedImageUrl($subject),
         'template' => 'Admin/featured_image.html.twig',
       ])
-      ->add('program', EntityType::class, [
-        'class' => Program::class,
+      ->add('project', EntityType::class, [
+        'class' => Project::class,
         'editable' => false,
       ])
       ->add('url', UrlType::class)

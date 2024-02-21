@@ -2,9 +2,9 @@
 
 namespace App\System\Commands;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\User\User;
-use App\DB\EntityRepository\Project\ProgramRepository;
+use App\DB\EntityRepository\Project\ProjectRepository;
 use App\Project\CatrobatFile\CatrobatFileExtractor;
 use App\Project\ProjectManager;
 use App\Project\Remix\RemixData;
@@ -40,7 +40,7 @@ class MigrateRemixGraphsCommand extends Command
   public function __construct(private readonly UserManager $user_manager,
     private readonly ProjectManager $project_manager, private readonly RemixManager $remix_manager,
     private readonly EntityManagerInterface $entity_manager, private readonly CatrobatFileExtractor $file_extractor,
-    private readonly ProgramRepository $project_repository, ParameterBagInterface $parameter_bag)
+    private readonly ProjectRepository $project_repository, ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
     $this->async_http_client = new AsyncHttpClient(['timeout' => 12, 'max_number_of_concurrent_requests' => 10]);
@@ -115,7 +115,7 @@ class MigrateRemixGraphsCommand extends Command
    */
   private function migrateRemixDataOfExistingProjects(OutputInterface $output, string $directory): void
   {
-    /* @var Program $unmigrated_project */
+    /* @var Project $unmigrated_project */
 
     $migration_start_time = TimeUtils::getDateTime();
     $progress_bar_format_simple = '%current%/%max% [%bar%] %percent:3s%% | Elapsed: %elapsed:6s% | Status: %message%';
@@ -285,7 +285,7 @@ class MigrateRemixGraphsCommand extends Command
       // ----------------------------------------------------------------------------------------------------------
       $url_data = $extracted_file->getRemixesData('.'.PHP_INT_MAX, true, $this->project_repository, false);
       assert(1 == count($url_data), 'WTH! This project has multiple urls with different project IDs?!!');
-      assert($url_data[0]->getProgramId() == $project_id);
+      assert($url_data[0]->getProjectId() == $project_id);
 
       // $remix_of_string = $extracted_file->getRemixMigrationUrlsString();
       $remix_data_only_forward_parents = $extracted_file->getRemixesData($project_id, true, $this->project_repository, true);
@@ -315,7 +315,7 @@ class MigrateRemixGraphsCommand extends Command
   /**
    * @throws \Exception
    */
-  private function addRemixData(Program $project, array $remixes_data, bool $is_update = false): void
+  private function addRemixData(Project $project, array $remixes_data, bool $is_update = false): void
   {
     $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
     $scratch_info_data = [];
@@ -328,7 +328,7 @@ class MigrateRemixGraphsCommand extends Command
     }
 
     $preserved_version = $project->getVersion();
-    $project->setVersion($is_update ? (Program::INITIAL_VERSION + 1) : Program::INITIAL_VERSION);
+    $project->setVersion($is_update ? (Project::INITIAL_VERSION + 1) : Project::INITIAL_VERSION);
 
     $this->remix_manager->addScratchProjects($scratch_info_data);
     $this->remix_manager->addRemixes($project, $remixes_data);
@@ -368,7 +368,7 @@ class MigrateRemixGraphsCommand extends Command
     $progress_bar->start();
     $number_imported_projects = 0;
 
-    $metadata = $this->entity_manager->getClassMetaData(Program::class);
+    $metadata = $this->entity_manager->getClassMetaData(Project::class);
     $metadata->setIdGeneratorType(ClassMetadata::GENERATOR_TYPE_NONE);
 
     $batch_size = 300;
@@ -401,7 +401,7 @@ class MigrateRemixGraphsCommand extends Command
         continue;
       }
 
-      $project = new Program();
+      $project = new Project();
       $project->setId($project_id);
       $project->setName($extracted_file->getName());
       $project->setDescription($extracted_file->getDescription());

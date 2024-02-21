@@ -3,7 +3,7 @@
 namespace App\System\Testing\DataFixtures;
 
 use App\DB\Entity\Project\Extension;
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
@@ -47,7 +47,7 @@ class ProjectDataFixtures
   /**
    * @throws \Exception
    */
-  public function insertProject(array $config, bool $andFlush = true): Program
+  public function insertProject(array $config, bool $andFlush = true): Project
   {
     ++ProjectDataFixtures::$number_of_projects;
 
@@ -61,7 +61,7 @@ class ProjectDataFixtures
       MyUuidGenerator::setNextValue($config['id']);
     }
 
-    $project = new Program();
+    $project = new Project();
     $project->setUser($user);
 
     $project->setName($config['name'] ?? 'Project '.ProjectDataFixtures::$number_of_projects);
@@ -73,11 +73,11 @@ class ProjectDataFixtures
     $project->setApkDownloads(isset($config['apk_downloads']) ? (int) $config['apk_downloads'] : 0);
     if (isset($config['apk_status']) && 'ready' === $config['apk_status']
       || (isset($config['apk_ready']) && 'true' === $config['apk_ready'])) {
-      $project->setApkStatus(Program::APK_READY);
+      $project->setApkStatus(Project::APK_READY);
     } elseif (isset($config['apk_status']) && 'pending' === $config['apk_status']) {
-      $project->setApkStatus(Program::APK_PENDING);
+      $project->setApkStatus(Project::APK_PENDING);
     } else {
-      $project->setApkStatus(Program::APK_NONE);
+      $project->setApkStatus(Project::APK_NONE);
     }
     $project->setUploadedAt(
       isset($config['upload time']) ?
@@ -125,7 +125,7 @@ class ProjectDataFixtures
       }
     }
 
-    if (Program::APK_READY === $project->getApkStatus()) {
+    if (Project::APK_READY === $project->getApkStatus()) {
       $temp_path = tempnam(sys_get_temp_dir(), 'apktest');
       copy($this->FIXTURE_DIR.'test.catrobat', $temp_path);
       $this->apk_repository->save(new File($temp_path), $project->getId());

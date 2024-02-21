@@ -14,9 +14,9 @@ Feature: Admin reported users
 
     And there are projects:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
-      | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
-      | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
-      | 3  | program 3 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+      | 1  | project 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
+      | 2  | project 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
+      | 3  | project 3 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
     And there are comments:
       | project_id | user_id | upload_date      | text | user_name | reported |
       | 2          | 2       | 01.01.2020 12:01 | c1   | Superman  | 1        |
@@ -45,7 +45,7 @@ Feature: Admin reported users
     And I should not see "Angel"
 
   @disabled
-  Scenario: List reported users sorted by reported programs
+  Scenario: List reported users sorted by reported projects
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getProgramInappropriateReportsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
@@ -55,7 +55,7 @@ Feature: Admin reported users
     And I should not see "Adminius"
     And I should not see "Superman"
 
-  Scenario: Show reported Programs by user
+  Scenario: Show reported Projects by user
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/reported_users/list"
     And I wait for the page to be loaded
@@ -67,7 +67,7 @@ Feature: Admin reported users
     And I wait for the page to be loaded
     Then I should be on "/admin/reported_projects/list?filter%5BreportedUser%5D%5Bvalue%5D=2"
 
-  Scenario: Show reported Programs by user
+  Scenario: Show reported Projects by user
     Given I log in as "Adminius" with the password "123456"
     And I am on "/admin/reported_users/list"
     And I wait for the page to be loaded

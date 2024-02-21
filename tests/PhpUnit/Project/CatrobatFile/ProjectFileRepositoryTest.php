@@ -24,7 +24,7 @@ class ProjectFileRepositoryTest extends TestCase
 
   private string $extract_dir;
 
-  private ProjectFileRepository $program_file_repository;
+  private ProjectFileRepository $project_file_repository;
 
   protected function setUp(): void
   {
@@ -34,7 +34,7 @@ class ProjectFileRepositoryTest extends TestCase
     $filesystem->mkdir($this->storage_dir);
     $filesystem->mkdir($this->extract_dir);
     $filesystem->mkdir($this->storage_dir.'tmp/');
-    $this->program_file_repository = new ProjectFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
+    $this->project_file_repository = new ProjectFileRepository($this->storage_dir, $this->extract_dir, new CatrobatFileCompressor());
   }
 
   protected function tearDown(): void
@@ -44,21 +44,21 @@ class ProjectFileRepositoryTest extends TestCase
 
   public function testInitialization(): void
   {
-    $this->assertInstanceOf(ProjectFileRepository::class, $this->program_file_repository);
+    $this->assertInstanceOf(ProjectFileRepository::class, $this->project_file_repository);
   }
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound(): void
   {
     $this->expectException(\Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
-    $this->program_file_repository = new ProjectFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
+    $this->project_file_repository = new ProjectFileRepository(__DIR__.'/invalid_directory/', $this->extract_dir, $file_compressor);
   }
 
   public function testThrowsAnExceptionIfDirectoryIsNotFound2(): void
   {
     $this->expectException(\Exception::class);
     $file_compressor = $this->createMock(CatrobatFileCompressor::class);
-    $this->program_file_repository = new ProjectFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
+    $this->project_file_repository = new ProjectFileRepository($this->storage_dir, __DIR__.'/invalid_directory/', $file_compressor);
   }
 
   public function testStoresAFileToTheGivenDirectory(): void
@@ -67,18 +67,18 @@ class ProjectFileRepositoryTest extends TestCase
     $id = 'test';
     $file = new File($file_name);
 
-    $this->program_file_repository->saveProjectZipFile($file, $id);
+    $this->project_file_repository->saveProjectZipFile($file, $id);
 
     $finder = new Finder();
     Assert::assertEquals(1, $finder->files()->in($this->storage_dir)->count());
   }
 
-  public function testSavesAGivenProgramDirectory(): void
+  public function testSavesAGivenProjectDirectory(): void
   {
-    $extracted_program = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
+    $extracted_project = new ExtractedCatrobatFile(BootstrapExtension::$GENERATED_FIXTURES_DIR.'base/', '/webpath', 'hash');
     $id = 'test';
 
-    $this->program_file_repository->zipProject($extracted_program->getPath(), $id);
+    $this->project_file_repository->zipProject($extracted_project->getPath(), $id);
 
     $finder = new Finder();
     Assert::assertEquals(1, $finder->files()->in($this->storage_dir)->count());
@@ -90,10 +90,10 @@ class ProjectFileRepositoryTest extends TestCase
     $id = 'test';
     $file = new File($file_name);
 
-    $this->program_file_repository->saveProjectZipFile($file, $id);
+    $this->project_file_repository->saveProjectZipFile($file, $id);
 
     $original_md5_sum = md5_file($file->getRealPath());
-    $returned_file = $this->program_file_repository->getProjectZipFile($id);
+    $returned_file = $this->project_file_repository->getProjectZipFile($id);
     $returned_file_md5_sum = md5_file($returned_file->getRealPath());
 
     Assert::assertEquals($returned_file_md5_sum, $original_md5_sum);

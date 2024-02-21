@@ -1,5 +1,5 @@
 @web @notifications
-Feature: Follower and new programs of users you follow notifications
+Feature: Follower and new projects of users you follow notifications
 
   Background:
     Given there are users:
@@ -8,7 +8,7 @@ Feature: Follower and new programs of users you follow notifications
       | User-id     | User     |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
+      | 1  | project 1 | Catrobat |
 
   Scenario: Uses should not be notified about follows under follower category
     Given there is a notification that "User" follows "Catrobat"
@@ -38,7 +38,7 @@ Feature: Follower and new programs of users you follow notifications
     Then I should be on "/app/follower"
 
 
-  Scenario: User should get new program notifications from users they are following under follower category
+  Scenario: User should get new project notifications from users they are following under follower category
     Given User "Catrobat-id" is followed by user "User-id"
     And there is a project with "url" set to "/app/project/1"
     And user "User" uploads a valid Catrobat project, API version 2
@@ -49,7 +49,7 @@ Feature: Follower and new programs of users you follow notifications
     And I wait for AJAX to finish
     Then I should see "User created a new game"
 
-  Scenario: Clicking on a new program notification should redirect the user to the program page
+  Scenario: Clicking on a new project notification should redirect the user to the project page
     Given there are catro notifications:
       | id | user | type           | follower_id | project_id |
       | 1  | User | follow_project |             | 1          |

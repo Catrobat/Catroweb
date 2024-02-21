@@ -1,5 +1,5 @@
 @web @notifications
-Feature: User gets notifications about comments on their programs
+Feature: User gets notifications about comments on their projects
 
   Background:
     Given there are users:
@@ -8,7 +8,7 @@ Feature: User gets notifications about comments on their programs
       | User-id     | User     |
     And there are projects:
       | id | name      | owned by |
-      | 1  | program 1 | Catrobat |
+      | 1  | project 1 | Catrobat |
     And there are comments:
       | id | project_id | user_id     | text |
       | 1  | 1          | Catrobat-id | c1   |
@@ -23,7 +23,7 @@ Feature: User gets notifications about comments on their programs
     Then I should see "User commented"
     When I click "#comment-notif"
     And I wait for AJAX to finish
-    Then I should see "User commented on program 1"
+    Then I should see "User commented on project 1"
 
   Scenario: Users should not be notified about their own comments
     Given there are catro notifications:

@@ -4,8 +4,8 @@ namespace App\Application\Controller\Project;
 
 use App\Api\Services\Projects\ProjectsRequestValidator;
 use App\Application\Twig\TwigExtension;
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Translation\ProjectCustomTranslationRepository;
@@ -68,7 +68,7 @@ class ProjectController extends AbstractController
 
       return $this->redirectToRoute('index');
     }
-    if ($project->isScratchProgram()) {
+    if ($project->isScratchProject()) {
       $this->event_dispatcher->dispatch(new CheckScratchProjectEvent($project->getScratchId()));
     }
     $viewed = $request->getSession()->get('viewed', []);
@@ -116,7 +116,7 @@ class ProjectController extends AbstractController
   {
     $type = $request->query->getInt('type');
     $action = (string) $request->query->get('action');
-    if (!ProgramLike::isValidType($type)) {
+    if (!ProjectLike::isValidType($type)) {
       if ($request->isXmlHttpRequest()) {
         return new JsonResponse([
           'statusCode' => Response::HTTP_UNPROCESSABLE_ENTITY,
@@ -169,12 +169,12 @@ class ProjectController extends AbstractController
         $project, $project->getUser(), $user
       );
 
-      if (ProgramLike::ACTION_ADD === $action) {
+      if (ProjectLike::ACTION_ADD === $action) {
         if (0 === count($existing_notifications)) {
           $notification = new LikeNotification($project->getUser(), $user, $project);
           $this->notification_service->addNotification($notification);
         }
-      } elseif (ProgramLike::ACTION_REMOVE === $action) {
+      } elseif (ProjectLike::ACTION_REMOVE === $action) {
         // check if there is no other reaction
         if (!$this->project_manager->areThereOtherLikeTypes($project, $user, $type)) {
           foreach ($existing_notifications as $notification) {
@@ -188,7 +188,7 @@ class ProjectController extends AbstractController
     }
     $user_locale = $request->getLocale();
     $total_like_count = $this->project_manager->totalLikeCount($project->getId());
-    $active_like_types = array_map(fn ($type_id) => ProgramLike::$TYPE_NAMES[$type_id], $this->project_manager->findProjectLikeTypes($project->getId()));
+    $active_like_types = array_map(fn ($type_id) => ProjectLike::$TYPE_NAMES[$type_id], $this->project_manager->findProjectLikeTypes($project->getId()));
 
     return new JsonResponse([
       'totalLikeCount' => [
@@ -402,7 +402,7 @@ class ProjectController extends AbstractController
   public function projectCommentDetail(string $id): Response
   {
     $arr_comment = $this->comment_repository->getProjectCommentDetailViewData($id);
-    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($arr_comment['program_id'] ?? null);
+    $project = $this->project_manager->findProjectIfVisibleToCurrentUser($arr_comment['project_id'] ?? null);
     if (null === $project) {
       return $this->redirectToIndexOnError();
     }
@@ -425,7 +425,7 @@ class ProjectController extends AbstractController
     return $this->redirectToRoute('index');
   }
 
-  private function checkAndAddViewed(Request $request, Program $project, array $viewed): void
+  private function checkAndAddViewed(Request $request, Project $project, array $viewed): void
   {
     if (!in_array($project->getId(), $viewed, true)) {
       $this->project_manager->increaseViews($project);
@@ -434,7 +434,7 @@ class ProjectController extends AbstractController
     }
   }
 
-  private function createProjectDetailsArray(Program $project,
+  private function createProjectDetailsArray(Project $project,
     array $active_like_types,
     array $active_user_like_types,
     int $total_like_count,

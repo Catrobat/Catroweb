@@ -2,7 +2,7 @@
 
 namespace App\Project\Apk;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\Event\ProjectBeforePersistEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
@@ -17,7 +17,7 @@ class ApkCleanupEventSubscriber implements EventSubscriberInterface
     $project = $event->getProjectEntity();
     if (null !== $project->getId()) {
       $this->repository->remove($project->getId());
-      $project->setApkStatus(Program::APK_NONE);
+      $project->setApkStatus(Project::APK_NONE);
     }
   }
 

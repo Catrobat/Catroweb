@@ -3,7 +3,7 @@
 namespace App\Application\Controller\Base;
 
 use App\DB\Entity\MaintenanceInformation;
-use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Special\FeaturedProject;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\Storage\ImageRepository;
@@ -44,15 +44,15 @@ class IndexController extends AbstractController
     }
 
     $featuredData = [];
-    /** @var FeaturedProgram $item */
+    /** @var FeaturedProject $item */
     foreach ($featured_items as $item) {
       $info = [];
-      if (null !== $item->getProgram()) {
+      if (null !== $item->getProject()) {
         if ($flavor) {
           $info['url'] = $this->generateUrl('program',
-            ['id' => $item->getProgram()->getId(), 'theme' => $flavor]);
+            ['id' => $item->getProject()->getId(), 'theme' => $flavor]);
         } else {
-          $info['url'] = $this->generateUrl('program', ['id' => $item->getProgram()->getId()]);
+          $info['url'] = $this->generateUrl('program', ['id' => $item->getProject()->getId()]);
         }
       } else {
         $info['url'] = $item->getUrl();

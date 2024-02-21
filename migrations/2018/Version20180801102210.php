@@ -18,7 +18,7 @@ class Version20180801102210 extends AbstractMigration
     // this up() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE ProgramInappropriateReport ADD category LONGTEXT NOT NULL');
+    $this->addSql('ALTER TABLE ProjectInappropriateReport ADD category LONGTEXT NOT NULL');
   }
 
   /**
@@ -29,6 +29,6 @@ class Version20180801102210 extends AbstractMigration
     // this down() migration is auto-generated, please modify it to your needs
     $this->abortIf('mysql' != $this->connection->getDatabasePlatform()->getName(), 'Migration can only be executed safely on \'mysql\'.');
 
-    $this->addSql('ALTER TABLE ProgramInappropriateReport DROP category');
+    $this->addSql('ALTER TABLE ProjectInappropriateReport DROP category');
   }
 }

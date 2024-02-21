@@ -2,8 +2,8 @@
 
 namespace App\System\Commands\Create;
 
-use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\ProgramLike;
+use App\DB\Entity\Project\Project;
+use App\DB\Entity\Project\ProjectLike;
 use App\DB\Entity\User\Notifications\LikeNotification;
 use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
@@ -69,11 +69,11 @@ class CreateLikeCommand extends Command
     return 0;
   }
 
-  private function likeProgram(Program $program, User $user): void
+  private function likeProgram(Project $program, User $user): void
   {
-    $program_like = $this->entity_manager->getRepository(ProgramLike::class)->findOneBy(['program' => $program, 'user' => $user]);
+    $program_like = $this->entity_manager->getRepository(ProjectLike::class)->findOneBy(['project' => $program, 'user' => $user]);
     if (null === $program_like) {
-      $like = new ProgramLike($program, $user, array_rand(ProgramLike::$TYPE_NAMES));
+      $like = new ProjectLike($program, $user, array_rand(ProjectLike::$TYPE_NAMES));
       $this->entity_manager->persist($like);
       $this->entity_manager->flush();
     }

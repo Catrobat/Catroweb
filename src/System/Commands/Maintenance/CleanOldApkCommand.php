@@ -2,7 +2,7 @@
 
 namespace App\System\Commands\Maintenance;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
@@ -97,9 +97,9 @@ class CleanOldApkCommand extends Command
     }
 
     $query = $this->entity_manager->createQuery(
-      'UPDATE App\DB\Entity\Project\Program p SET p.apk_status = :status WHERE p.apk_status != :status'.$id_query_part
+      'UPDATE App\DB\Entity\Project\Project p SET p.apk_status = :status WHERE p.apk_status != :status'.$id_query_part
     );
-    $query->setParameter('status', Program::APK_NONE);
+    $query->setParameter('status', Project::APK_NONE);
 
     return $query;
   }

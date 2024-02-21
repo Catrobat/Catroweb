@@ -2,7 +2,7 @@
 
 namespace Project\Extension;
 
-use App\DB\Entity\Project\Program;
+use App\DB\Entity\Project\Project;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\Extension\ProjectExtensionManager;
 use App\System\Testing\PhpUnit\DefaultTestCase;
@@ -42,8 +42,8 @@ class ProjectExtensionManagerTest extends DefaultTestCase
    */
   public function testAddExtensions(): void
   {
-    $program = $this
-      ->getMockBuilder(Program::class)
+    $project = $this
+      ->getMockBuilder(Project::class)
       ->onlyMethods(['removeAllExtensions'])
       ->getMockForAbstractClass()
     ;
@@ -62,7 +62,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
       ->getMockForAbstractClass()
     ;
 
-    $program->expects($this->once())->method('removeAllExtensions');
+    $project->expects($this->once())->method('removeAllExtensions');
     $this->object->expects($this->once())->method('addArduinoExtensions');
     $this->object->expects($this->once())->method('addPhiroExtensions');
     $this->object->expects($this->once())->method('addEmbroideryExtensions');
@@ -70,7 +70,7 @@ class ProjectExtensionManagerTest extends DefaultTestCase
     $this->object->expects($this->once())->method('addMultiplayerExtensions');
     $this->object->expects($this->once())->method('saveProject');
 
-    $this->object->addExtensions($this->extracted_catrobat_file_with_extensions, $program);
+    $this->object->addExtensions($this->extracted_catrobat_file_with_extensions, $project);
   }
 
   /**
