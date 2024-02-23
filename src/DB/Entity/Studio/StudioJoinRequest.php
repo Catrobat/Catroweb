@@ -6,11 +6,8 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=StudioJoinRequestRepository::class)
- *
- * @ORM\Table(name="studio_join_requests")
- */
+#[ORM\Table(name: 'studio_join_requests')]
+#[ORM\Entity(repositoryClass: StudioJoinRequestRepository::class)]
 class StudioJoinRequest
 {
   public const STATUS_PENDING = 'pending';
@@ -19,32 +16,20 @@ class StudioJoinRequest
 
   public const STATUS_JOINED = 'joined';
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue
-   *
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column(type: 'integer')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  /**
-   * @ORM\Column(type="string", length=20)
-   */
+  #[ORM\Column(type: 'string', length: 20)]
   protected ?string $status;
 
   public function getId(): ?int

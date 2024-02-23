@@ -99,21 +99,21 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
   {
     $translation = $this->findTranslation($project, $language);
 
-    return null === $translation ? null : $translation->getName();
+    return $translation?->getName();
   }
 
   public function getDescriptionTranslation(Program $project, string $language): ?string
   {
     $translation = $this->findTranslation($project, $language);
 
-    return null === $translation ? null : $translation->getDescription();
+    return $translation?->getDescription();
   }
 
   public function getCreditTranslation(Program $project, string $language): ?string
   {
     $translation = $this->findTranslation($project, $language);
 
-    return null === $translation ? null : $translation->getCredits();
+    return $translation?->getCredits();
   }
 
   public function deleteNameTranslation(Program $project, string $language): bool

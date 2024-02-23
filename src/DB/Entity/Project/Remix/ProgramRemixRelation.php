@@ -5,16 +5,11 @@ namespace App\DB\Entity\Project\Remix;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRemixRepository;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table(name="program_remix_relation")
- *
- * @ORM\Entity(repositoryClass=ProgramRemixRepository::class)
- */
+#[ORM\Table(name: 'program_remix_relation')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: ProgramRemixRepository::class)]
 class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface, \Stringable
 {
   /**
@@ -24,52 +19,30 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
    * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
-
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $ancestor_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="catrobat_remix_descendant_relations",
-   * fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="ancestor_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'ancestor_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_descendant_relations')]
   protected Program $ancestor;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $descendant_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="catrobat_remix_ancestor_relations",
-   * fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="descendant_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'descendant_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_ancestor_relations')]
   protected Program $descendant;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer", nullable=false, options={"default": 0})
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer', nullable: false, options: ['default' => 0])]
   protected int $depth = 0;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $created_at = null;
 
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
+  #[ORM\Column(type: 'datetime', nullable: true)]
   protected ?\DateTime $seen_at = null;
 
   public function __construct(Program $ancestor, Program $descendant, int $depth)
@@ -85,10 +58,9 @@ class ProgramRemixRelation implements ProgramRemixRelationInterface, ProgramCatr
   }
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
     if (null == $this->getCreatedAt()) {

@@ -14,34 +14,24 @@ use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\Generator\MyUuidGenerator;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table(
- *     name="program",
- *     indexes={
- *
- *         @ORM\Index(name="rand_idx", columns={"rand"}),
- *         @ORM\Index(name="uploaded_at_idx", columns={"uploaded_at"}),
- *         @ORM\Index(name="views_idx", columns={"views"}),
- *         @ORM\Index(name="downloads_idx", columns={"downloads"}),
- *         @ORM\Index(name="name_idx", columns={"name"}),
- *         @ORM\Index(name="user_idx", columns={"user_id"}),
- *         @ORM\Index(name="language_version_idx", columns={"language_version"}),
- *         @ORM\Index(name="visible_idx", columns={"visible"}),
- *         @ORM\Index(name="private_idx", columns={"private"}),
- *         @ORM\Index(name="debug_build_idx", columns={"debug_build"}),
- *         @ORM\Index(name="flavor_idx", columns={"flavor"}),
- *     }
- * )
- *
- * @ORM\Entity(repositoryClass=ProgramRepository::class)
- */
+#[ORM\Table(name: 'program')]
+#[ORM\Index(columns: ['rand'], name: 'rand_idx')]
+#[ORM\Index(columns: ['uploaded_at'], name: 'uploaded_at_idx')]
+#[ORM\Index(columns: ['views'], name: 'views_idx')]
+#[ORM\Index(columns: ['downloads'], name: 'downloads_idx')]
+#[ORM\Index(columns: ['name'], name: 'name_idx')]
+#[ORM\Index(columns: ['user_id'], name: 'user_idx')]
+#[ORM\Index(columns: ['language_version'], name: 'language_version_idx')]
+#[ORM\Index(columns: ['visible'], name: 'visible_idx')]
+#[ORM\Index(columns: ['private'], name: 'private_idx')]
+#[ORM\Index(columns: ['debug_build'], name: 'debug_build_idx')]
+#[ORM\Index(columns: ['flavor'], name: 'flavor_idx')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: ProgramRepository::class)]
 class Program implements \Stringable
 {
   final public const APK_NONE = 0;
@@ -52,336 +42,172 @@ class Program implements \Stringable
 
   final public const INITIAL_VERSION = 1;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(name="id", type="guid")
-   *
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   *
-   * @ORM\CustomIdGenerator(class=MyUuidGenerator::class)
-   */
+  #[ORM\Id]
+  #[ORM\Column(name: 'id', type: 'guid')]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected ?string $id = null;
 
-  /**
-   * @ORM\Column(type="string", length=300)
-   */
+  #[ORM\Column(type: 'string', length: 300)]
   protected string $name;
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $description = null;
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $credits = null;
 
-  /**
-   * @ORM\Column(type="integer", options={"default": 1})
-   */
+  #[ORM\Column(type: 'integer', options: ['default' => 1])]
   protected int $version = self::INITIAL_VERSION;
 
-  /**
-   * @ORM\Column(type="integer", nullable=true, unique=true)
-   */
+  #[ORM\Column(type: 'integer', unique: true, nullable: true)]
   protected ?int $scratch_id = null;
 
   /**
    * The user owning this Program. If this User gets deleted, this Program gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=User::class,
-   *     inversedBy="programs"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="user_id",
-   *     referencedColumnName="id",
-   *     nullable=false
-   * )
    */
+  #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: false)]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'programs')]
   protected ?User $user = null;
 
   /**
    * The UserComments commenting this Program. If this Program gets deleted, these UserComments get deleted as well.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=UserComment::class,
-   *     mappedBy="program",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'program', targetEntity: UserComment::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $comments;
 
   /**
    * The LikeNotifications mentioning this Program. If this Program gets deleted,
    * these LikeNotifications get deleted as well.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=LikeNotification::class,
-   *     mappedBy="program",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'program', targetEntity: LikeNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $like_notification_mentions;
 
   /**
    * The NewProgramNotification mentioning this Program as a new Program.
    * If this Program gets deleted, these NewProgramNotifications get deleted as well.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=NewProgramNotification::class,
-   *     mappedBy="program",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'program', targetEntity: NewProgramNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $new_program_notification_mentions;
 
   /**
    * RemixNotifications which are triggered when this Program (child) is created as a remix of
    *  another one (parent). If this Program gets deleted, all those RemixNotifications get deleted as well.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=RemixNotification::class,
-   *     mappedBy="remix_program",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'remix_program', targetEntity: RemixNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $remix_notification_mentions_as_child;
 
   /**
    * RemixNotifications mentioning this Program as a parent Program of a new remix Program (child).
    * If this Program gets deleted, all RemixNotifications mentioning this program get deleted as well.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=RemixNotification::class,
-   *     mappedBy="program",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'program', targetEntity: RemixNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $remix_notification_mentions_as_parent;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=Tag::class, inversedBy="programs")
-   *
-   * @ORM\JoinTable(
-   *     name="program_tag",
-   *     joinColumns={
-   *
-   *         @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   *     },
-   *     inverseJoinColumns={
-   *         @ORM\JoinColumn(name="tag_id", referencedColumnName="id")
-   *     }
-   * )
-   */
+  #[ORM\JoinTable(name: 'program_tag')]
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
+  #[ORM\InverseJoinColumn(name: 'tag_id', referencedColumnName: 'id')]
+  #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'programs')]
   protected Collection $tags;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=Extension::class, inversedBy="programs")
-   *
-   * @ORM\JoinTable(
-   *     name="program_extension",
-   *     joinColumns={
-   *
-   *         @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   *     },
-   *     inverseJoinColumns={
-   *         @ORM\JoinColumn(name="extension_id", referencedColumnName="id")
-   *     }
-   * )
-   */
+  #[ORM\JoinTable(name: 'program_extension')]
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
+  #[ORM\InverseJoinColumn(name: 'extension_id', referencedColumnName: 'id')]
+  #[ORM\ManyToMany(targetEntity: Extension::class, inversedBy: 'programs')]
   protected Collection $extensions;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   protected int $views = 0;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   protected int $downloads = 0;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected \DateTime $uploaded_at;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected \DateTime $last_modified_at;
 
-  /**
-   * @ORM\Column(type="string", options={"default": "0"})
-   */
+  #[ORM\Column(type: 'string', options: ['default' => '0'])]
   protected string $language_version = '0';
 
   /**
    * New name in android: applicationVersion.
-   *
-   * @ORM\Column(type="string", options={"default": ""})
    */
+  #[ORM\Column(type: 'string', options: ['default' => ''])]
   protected string $catrobat_version_name = '';
 
-  /**
-   * @ORM\Column(type="string", options={"default": ""})
-   */
+  #[ORM\Column(type: 'string', options: ['default' => ''])]
   protected string $upload_ip = '';
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": true})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => true])]
   protected bool $visible = true;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $private = false;
 
-  /**
-   * @ORM\Column(type="string", options={"default": "pocketcode"})
-   */
+  #[ORM\Column(type: 'string', options: ['default' => 'pocketcode'])]
   protected ?string $flavor = 'pocketcode';
 
-  /**
-   * @ORM\Column(type="string", options={"default": ""})
-   */
+  #[ORM\Column(type: 'string', options: ['default' => ''])]
   protected string $upload_language = '';
 
-  /**
-   * @ORM\Column(type="integer", options={"default": 0})
-   */
+  #[ORM\Column(type: 'integer', options: ['default' => 0])]
   protected int $filesize = 0;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": true})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => true])]
   protected bool $remix_root = true;
 
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
+  #[ORM\Column(type: 'datetime', nullable: true)]
   protected ?\DateTime $remix_migrated_at = null;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ProgramRemixRelation::class,
-   *     mappedBy="descendant",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'descendant', targetEntity: ProgramRemixRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_ancestor_relations;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ProgramRemixBackwardRelation::class,
-   *     mappedBy="child",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'child', targetEntity: ProgramRemixBackwardRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_backward_parent_relations;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ProgramRemixRelation::class,
-   *     mappedBy="ancestor",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'ancestor', targetEntity: ProgramRemixRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_descendant_relations;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ProgramRemixBackwardRelation::class,
-   *     mappedBy="parent",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'parent', targetEntity: ProgramRemixBackwardRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $catrobat_remix_backward_child_relations;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ScratchProgramRemixRelation::class,
-   *     mappedBy="catrobat_child",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'catrobat_child', targetEntity: ScratchProgramRemixRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $scratch_remix_parent_relations;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ProgramLike::class,
-   *     mappedBy="program",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'program', targetEntity: ProgramLike::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $approved = false;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class)
-   *
-   * @ORM\JoinColumn(name="approved_by_user", referencedColumnName="id", nullable=true)
-   */
+  #[ORM\JoinColumn(name: 'approved_by_user', referencedColumnName: 'id', nullable: true)]
+  #[ORM\ManyToOne(targetEntity: User::class)]
   protected ?User $approved_by_user = null;
 
-  /**
-   * @ORM\Column(type="smallint", options={"default": 0})
-   */
+  #[ORM\Column(type: 'smallint', options: ['default' => 0])]
   protected int $apk_status = 0;
 
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
+  #[ORM\Column(type: 'datetime', nullable: true)]
   protected ?\DateTime $apk_request_time = null;
 
-  /**
-   * @ORM\Column(type="integer", options={"default": 0})
-   */
+  #[ORM\Column(type: 'integer', options: ['default' => 0])]
   protected int $apk_downloads = 0;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $debug_build = false;
 
-  /**
-   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="program", fetch="EXTRA_LAZY")
-   */
+  #[ORM\OneToMany(mappedBy: 'program', targetEntity: ProgramInappropriateReport::class, fetch: 'EXTRA_LAZY')]
   protected Collection $reports;
 
-  /**
-   * @ORM\Column(type="integer", options={"default": 0})
-   */
+  #[ORM\Column(type: 'integer', options: ['default' => 0])]
   protected int $rand = 0;
 
-  /**
-   * @ORM\Column(type="float", options={"default": 0.0})
-   */
+  #[ORM\Column(type: 'float', options: ['default' => '0.0'])]
   protected float $popularity = 0.0;
 
-  /**
-   * @ORM\OneToMany(targetEntity=ProjectCustomTranslation::class, mappedBy="project", cascade={"remove"})
-   */
+  #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectCustomTranslation::class, cascade: ['remove'])]
   private Collection $custom_translations;
 
   /**
@@ -424,20 +250,18 @@ class Program implements \Stringable
   }
 
   /**
-   * @ORM\PreUpdate
-   *
    * @throws \Exception
    */
+  #[ORM\PreUpdate]
   public function updateLastModifiedTimestamp(): void
   {
     $this->setLastModifiedAt(TimeUtils::getDateTime());
   }
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
     $this->updateLastModifiedTimestamp();
@@ -446,9 +270,7 @@ class Program implements \Stringable
     }
   }
 
-  /**
-   * @ORM\PrePersist
-   */
+  #[ORM\PrePersist]
   public function setInitialVersion(): void
   {
     $this->version = self::INITIAL_VERSION;

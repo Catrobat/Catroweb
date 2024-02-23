@@ -5,9 +5,7 @@ namespace App\DB\Entity\User\Notifications;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class BroadcastNotification extends CatroNotification
 {
   /**

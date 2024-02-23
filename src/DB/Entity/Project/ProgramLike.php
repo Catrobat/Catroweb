@@ -5,16 +5,11 @@ namespace App\DB\Entity\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramLikeRepository;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table(name="program_like")
- *
- * @ORM\Entity(repositoryClass=ProgramLikeRepository::class)
- */
+#[ORM\Table(name: 'program_like')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: ProgramLikeRepository::class)]
 class ProgramLike implements \Stringable
 {
   final public const TYPE_NONE = 0;
@@ -50,45 +45,27 @@ class ProgramLike implements \Stringable
    * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
-
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid", nullable=false)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid', nullable: false)]
   protected string $program_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="likes", fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'likes')]
   protected Program $program;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid", nullable=false)
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid', nullable: false)]
   protected string $user_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="likes", fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'likes')]
   protected User $user;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer", nullable=false, options={"default": 0})
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer', nullable: false, options: ['default' => 0])]
   protected int $type = self::TYPE_THUMBS_UP;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $created_at = null;
 
   public function __construct(Program $program, User $user, int $type)
@@ -109,10 +86,9 @@ class ProgramLike implements \Stringable
   }
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
     if (null === $this->getCreatedAt()) {

@@ -5,61 +5,37 @@ namespace App\DB\Entity\Studio;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioProgramRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=StudioProgramRepository::class)
- *
- * @ORM\Table(name="studio_program")
- */
+#[ORM\Table(name: 'studio_program')]
+#[ORM\Entity(repositoryClass: StudioProgramRepository::class)]
 class StudioProgram
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(name="id", type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  /**
-   * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'activity', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\OneToOne(targetEntity: StudioActivity::class, cascade: ['persist'])]
   protected StudioActivity $activity;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="program", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'program', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: Program::class, cascade: ['persist'])]
   protected Program $program;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  /**
-   * @ORM\Column(name="updated_on", type="datetime", nullable=true)
-   */
+  #[ORM\Column(name: 'updated_on', type: 'datetime', nullable: true)]
   protected ?\DateTime $updated_on = null;
 
-  /**
-   * @ORM\Column(name="created_on", type="datetime", nullable=false)
-   */
+  #[ORM\Column(name: 'created_on', type: 'datetime', nullable: false)]
   protected \DateTime $created_on;
 
   public function getId(): ?int

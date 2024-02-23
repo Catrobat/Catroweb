@@ -5,9 +5,7 @@ namespace App\DB\Entity\User\Notifications;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class FollowNotification extends CatroNotification
 {
   /**
@@ -22,20 +20,11 @@ class FollowNotification extends CatroNotification
    * @param User $follower the User which "follow action" to another user triggered this FollowNotification
    */
   public function __construct(User $user, /**
-   * The User which "follow action" to another user triggered this FollowNotification.
-   * If this user gets deleted, this FollowNotification gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=User::class,
-   *     inversedBy="follow_notification_mentions"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="follower_id",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
-   */
+     * The User which "follow action" to another user triggered this FollowNotification.
+     * If this user gets deleted, this FollowNotification gets deleted as well.
+     */
+    #[ORM\JoinColumn(name: 'follower_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'follow_notification_mentions')]
     private User $follower)
   {
     parent::__construct($user, '', '', 'follow');

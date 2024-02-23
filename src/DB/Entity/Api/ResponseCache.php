@@ -3,41 +3,26 @@
 namespace App\DB\Entity\Api;
 
 use App\Api\Services\ResponseCache\ResponseCacheRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=ResponseCacheRepository::class)
- *
- * @ORM\Table(name="response_cache")
- */
+#[ORM\Table(name: 'response_cache')]
+#[ORM\Entity(repositoryClass: ResponseCacheRepository::class)]
 class ResponseCache
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="string")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'string')]
   private ?string $id = null;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   private int $response_code;
 
-  /**
-   * @ORM\Column(type="text")
-   */
+  #[ORM\Column(type: 'text')]
   private string $response;
 
-  /**
-   * @ORM\Column(type="string")
-   */
+  #[ORM\Column(type: 'string')]
   private string $response_headers;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected \DateTime $cached_at;
 
   public function setId(string $cache_id): self
@@ -93,11 +78,8 @@ class ResponseCache
     return $this->cached_at;
   }
 
-  /**
-   * @ORM\PrePersist
-   *
-   * @ORM\PreUpdate
-   */
+  #[ORM\PrePersist]
+  #[ORM\PreUpdate]
   public function updateTimestamps(): self
   {
     $this->cached_at = new \DateTime('now');
