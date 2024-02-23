@@ -2,13 +2,13 @@
 
 namespace App\DB\EntityRepository\MediaLibrary;
 
+use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\Storage\FileHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -246,7 +246,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
 
     if (null !== $package_name && '' !== trim($package_name)) {
       $qb->join(MediaPackageCategory::class, 'c')
-        ->join(\App\DB\Entity\MediaLibrary\MediaPackage::class, 'p')
+        ->join(MediaPackage::class, 'p')
         ->andWhere('f.category = c')
         ->andWhere('c MEMBER OF p.categories')
         ->andWhere('p.name = :package_name')
@@ -264,7 +264,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $id             the id/name of the file
    * @param string $file_extension File extension
    *
-   * @throws \ImagickException
+   * @throws \ImagickException|\ImagickDrawException
    */
   private function createThumbnail(string $id, string $file_extension): void
   {

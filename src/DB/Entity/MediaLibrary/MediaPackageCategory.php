@@ -16,40 +16,26 @@ use Doctrine\ORM\Mapping as ORM;
  *               Category 1               Category 2                    Category 3
  *              /     |    \              /        \                        |
  *         File 1  File 2  File 3      File 4    File 5                  File 6
- *
- * @ORM\Entity
- *
- * @ORM\Table(name="media_package_category")
  */
+#[ORM\Table(name: 'media_package_category')]
+#[ORM\Entity]
 class MediaPackageCategory implements \Stringable
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\Column(type="text", nullable=false)
-   */
+  #[ORM\Column(type: 'text', nullable: false)]
   protected ?string $name = null;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=MediaPackage::class, inversedBy="categories")
-   */
+  #[ORM\ManyToMany(targetEntity: MediaPackage::class, inversedBy: 'categories')]
   protected Collection $package;
 
-  /**
-   * @ORM\OneToMany(targetEntity=MediaPackageFile::class, mappedBy="category")
-   */
+  #[ORM\OneToMany(mappedBy: 'category', targetEntity: MediaPackageFile::class)]
   protected Collection $files;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   protected int $priority = 0;
 
   public function __construct()

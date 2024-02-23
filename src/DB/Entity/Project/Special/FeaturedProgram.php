@@ -8,18 +8,12 @@ use App\Project\EventListener\FeaturedProjectImageListener;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * @ORM\Entity(repositoryClass=FeaturedRepository::class)
- *
- * @ORM\EntityListeners({FeaturedProjectImageListener::class})
- *
- * @ORM\Table(name="featured")
- */
+#[ORM\Table(name: 'featured')]
+#[ORM\Entity(repositoryClass: FeaturedRepository::class)]
+#[ORM\EntityListeners([FeaturedProjectImageListener::class])]
 class FeaturedProgram extends SpecialProgram
 {
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
+  #[ORM\Column(type: 'string', nullable: true)]
   protected ?string $url = null;
 
   public function setImageType(string $image): FeaturedProgram

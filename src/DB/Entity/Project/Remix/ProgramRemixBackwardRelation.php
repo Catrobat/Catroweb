@@ -5,16 +5,11 @@ namespace App\DB\Entity\Project\Remix;
 use App\DB\Entity\Project\Program;
 use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table(name="program_remix_backward_relation")
- *
- * @ORM\Entity(repositoryClass=ProgramRemixBackwardRepository::class)
- */
+#[ORM\Table(name: 'program_remix_backward_relation')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: ProgramRemixBackwardRepository::class)]
 class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, ProgramCatrobatRemixRelationInterface, \Stringable
 {
   /**
@@ -24,44 +19,26 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
    * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
-
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $parent_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="catrobat_remix_backward_child_relations", fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="parent_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'parent_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_child_relations')]
   protected Program $parent;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $child_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="catrobat_remix_backward_parent_relations",
-   * fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="child_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'child_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'catrobat_remix_backward_parent_relations')]
   protected Program $child;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $created_at = null;
 
-  /**
-   * @ORM\Column(type="datetime", nullable=true)
-   */
+  #[ORM\Column(type: 'datetime', nullable: true)]
   protected ?\DateTime $seen_at = null;
 
   public function __construct(Program $parent, Program $child)
@@ -76,10 +53,9 @@ class ProgramRemixBackwardRelation implements ProgramRemixRelationInterface, Pro
   }
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
     if (null == $this->getCreatedAt()) {

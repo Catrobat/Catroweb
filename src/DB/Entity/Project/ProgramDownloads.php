@@ -3,50 +3,32 @@
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\User\User;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- *
- * @ORM\Table(name="program_downloads")
- */
+#[ORM\Table(name: 'program_downloads')]
+#[ORM\Entity]
 class ProgramDownloads
 {
   final public const TYPE_PROJECT = 'project';
   final public const TYPE_APK = 'apk';
 
-  /**
-   * @ORM\Column(name="id", type="integer")
-   *
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Id]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="program_downloads")
-   *
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   */
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+  #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'program_downloads')]
   protected Program $program;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class)
-   *
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   */
+  #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+  #[ORM\ManyToOne(targetEntity: User::class)]
   protected ?User $user = null;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $downloaded_at = null;
 
-  /**
-   * @ORM\Column(type="string", options={"default": "project"})
-   */
+  #[ORM\Column(type: 'string', options: ['default' => 'project'])]
   protected ?string $type = self::TYPE_PROJECT;
 
   public function getId(): ?int

@@ -5,16 +5,11 @@ namespace App\DB\Entity\User\RecommenderSystem;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\RecommenderSystem\UserLikeSimilarityRelationRepository;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table(name="user_like_similarity_relation")
- *
- * @ORM\Entity(repositoryClass=UserLikeSimilarityRelationRepository::class)
- */
+#[ORM\Table(name: 'user_like_similarity_relation')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: UserLikeSimilarityRelationRepository::class)]
 class UserLikeSimilarityRelation
 {
   /**
@@ -24,45 +19,26 @@ class UserLikeSimilarityRelation
    * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
-
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $first_user_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="relations_of_similar_users_based_on_likes",
-   * fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="first_user_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'first_user_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'relations_of_similar_users_based_on_likes')]
   protected User $first_user;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $second_user_id;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reverse_relations_of_similar_users_based_on_likes",
-   * fetch="LAZY")
-   *
-   * @ORM\JoinColumn(name="second_user_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'second_user_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: User::class, fetch: 'LAZY', inversedBy: 'reverse_relations_of_similar_users_based_on_likes')]
   protected User $second_user;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $created_at = null;
 
-  public function __construct(User $first_user, User $second_user, /**
-   * @ORM\Column(type="decimal", precision=4, scale=3, nullable=false, options={"default": 0.0})
-   */
+  public function __construct(User $first_user, User $second_user, #[ORM\Column(type: 'decimal', precision: 4, scale: 3, nullable: false, options: ['default' => '0.0'])]
     protected float $similarity)
   {
     $this->setFirstUser($first_user);
@@ -70,10 +46,9 @@ class UserLikeSimilarityRelation
   }
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
     if (null === $this->getCreatedAt()) {

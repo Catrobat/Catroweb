@@ -4,56 +4,30 @@ namespace App\DB\Entity\User\Achievements;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\Achievements\UserAchievementRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=UserAchievementRepository::class)
- *
- * @ORM\Table(
- *     name="user_achievement",
- *     uniqueConstraints={
- *
- *         @ORM\UniqueConstraint(
- *             name="user_achievement_unique",
- *             columns={"user", "achievement"}
- *         )
- *     }
- * )
- */
+#[ORM\Table(name: 'user_achievement')]
+#[ORM\UniqueConstraint(name: 'user_achievement_unique', columns: ['user', 'achievement'])]
+#[ORM\Entity(repositoryClass: UserAchievementRepository::class)]
 class UserAchievement
 {
-  /**
-   * @ORM\Column(name="id", type="integer")
-   *
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Id]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class)
-   *
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: User::class)]
   protected User $user;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Achievement::class)
-   *
-   * @ORM\JoinColumn(name="achievement", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'achievement', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: Achievement::class)]
   protected Achievement $achievement;
 
-  /**
-   * @ORM\Column(name="unlocked_at", type="datetime", nullable=true)
-   */
+  #[ORM\Column(name: 'unlocked_at', type: 'datetime', nullable: true)]
   protected ?\DateTimeInterface $unlocked_at = null;
 
-  /**
-   * @ORM\Column(name="seen_at", type="datetime", nullable=true)
-   */
+  #[ORM\Column(name: 'seen_at', type: 'datetime', nullable: true)]
   protected ?\DateTimeInterface $seen_at = null;
 
   public function getId(): ?int

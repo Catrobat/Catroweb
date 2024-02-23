@@ -20,11 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *               Category 1               Category 2                    Category 3
  *              /     |    \              /        \                        |
  *         File 1  File 2  File 3      File 4    File 5                  File 6
- *
- * @ORM\Table(name="media_package_file")
- *
- * @ORM\Entity(repositoryClass=MediaPackageFileRepository::class)
  */
+#[ORM\Table(name: 'media_package_file')]
+#[ORM\Entity(repositoryClass: MediaPackageFileRepository::class)]
 class MediaPackageFile
 {
   public ?File $file = null;
@@ -33,54 +31,34 @@ class MediaPackageFile
 
   public ?string $old_extension = null;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\Column(type="text", nullable=false)
-   */
+  #[ORM\Column(type: 'text', nullable: false)]
   protected string $name = '';
 
-  /**
-   * @ORM\Column(type="string")
-   */
+  #[ORM\Column(type: 'string')]
   protected string $extension = '';
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $url = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=MediaPackageCategory::class, inversedBy="files")
-   */
+  #[ORM\ManyToOne(targetEntity: MediaPackageCategory::class, inversedBy: 'files')]
   protected ?MediaPackageCategory $category = null;
 
-  /**
-   * @ORM\Column(type="boolean")
-   */
+  #[ORM\Column(type: 'boolean')]
   protected bool $active = true;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   protected int $downloads = 0;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=Flavor::class, inversedBy="media_package_files", fetch="EXTRA_LAZY")
-   */
   #[Assert\Count(min: 1)]
+  #[ORM\ManyToMany(targetEntity: Flavor::class, inversedBy: 'media_package_files', fetch: 'EXTRA_LAZY')]
   protected Collection $flavors;
 
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
+  #[ORM\Column(type: 'string', nullable: true)]
   protected ?string $author = null;
 
   public function __construct()

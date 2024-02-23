@@ -4,55 +4,32 @@ namespace App\DB\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- *
- * @ORM\Table(name="survey")
- */
+#[ORM\Table(name: 'survey')]
+#[ORM\Entity]
 class Survey
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: 'string', length: 255)]
   protected ?string $language_code = null;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: 'string', length: 255)]
   protected ?string $url = null;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": true}, nullable=false)
-   */
+  #[ORM\Column(type: 'boolean', nullable: false, options: ['default' => true])]
   protected bool $active = true;
 
   /**
    * The flavor for this Survey. If this Flavor gets deleted, this Survey gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=Flavor::class
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="flavor_id",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
    */
+  #[ORM\JoinColumn(name: 'flavor_id', referencedColumnName: 'id', nullable: true)]
+  #[ORM\ManyToOne(targetEntity: Flavor::class)]
   protected ?Flavor $flavor = null;
 
-  /**
-   * @ORM\Column(type="string", nullable=true)
-   */
+  #[ORM\Column(type: 'string', nullable: true)]
   protected ?string $platform = null;
 
   public function getId(): ?int

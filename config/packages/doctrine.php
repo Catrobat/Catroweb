@@ -23,7 +23,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
         'mappings' => [
           'App' => [
             'is_bundle' => false,
-            'type' => 'annotation',
+            'type' => 'attribute',
             'dir' => '%kernel.project_dir%/src/DB/Entity',
             'prefix' => 'App\DB\Entity', 'alias' => 'App',
           ],

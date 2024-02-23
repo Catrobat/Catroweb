@@ -19,281 +19,158 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Sonata\UserBundle\Entity\BaseUser;
 
-/**
- * @ORM\Entity(repositoryClass=UserRepository::class)
- *
- * @ORM\Table(
- *     name="fos_user",
- *     indexes={
- *
- *         @ORM\Index(name="upload_token_idx", columns={"upload_token"}),
- *         @ORM\Index(name="confirmation_token_isx", columns={"confirmation_token"}),
- *         @ORM\Index(name="username_canonical_idx", columns={"username_canonical"}),
- *         @ORM\Index(name="email_canonical_idx", columns={"email_canonical"}),
- *         @ORM\Index(name="scratch_user_id_idx", columns={"scratch_user_id"}),
- *         @ORM\Index(name="google_id_idx", columns={"google_id"}),
- *         @ORM\Index(name="facebook_id_idx", columns={"google_id"}),
- *         @ORM\Index(name="apple_id_idx", columns={"google_id"})
- *     }
- * )
- */
+#[ORM\Table(name: 'fos_user')]
+#[ORM\Index(columns: ['upload_token'], name: 'upload_token_idx')]
+#[ORM\Index(columns: ['confirmation_token'], name: 'confirmation_token_isx')]
+#[ORM\Index(columns: ['username_canonical'], name: 'username_canonical_idx')]
+#[ORM\Index(columns: ['email_canonical'], name: 'email_canonical_idx')]
+#[ORM\Index(columns: ['scratch_user_id'], name: 'scratch_user_id_idx')]
+#[ORM\Index(columns: ['google_id'], name: 'google_id_idx')]
+#[ORM\Index(columns: ['google_id'], name: 'facebook_id_idx')]
+#[ORM\Index(columns: ['google_id'], name: 'apple_id_idx')]
+#[ORM\Entity(repositoryClass: UserRepository::class)]
 class User extends BaseUser
 {
   public static string $SCRATCH_PREFIX = 'Scratch:';
   /**
-   * @ORM\Id
-   *
-   * @ORM\Column(name="id", type="guid")
-   *
-   * @ORM\GeneratedValue(strategy="CUSTOM")
-   *
-   * @ORM\CustomIdGenerator(class=MyUuidGenerator::class)
-   *
    * @var string
    */
+  #[ORM\Id]
+  #[ORM\Column(name: 'id', type: 'guid')]
+  #[ORM\GeneratedValue(strategy: 'CUSTOM')]
+  #[ORM\CustomIdGenerator(class: MyUuidGenerator::class)]
   protected $id;
 
   /**
    * @deprecated API v1
-   *
-   * @ORM\Column(type="string", length=300, nullable=true)
    */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $upload_token = null;
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $avatar = null;
 
   /**
    * Programs owned by this user.
    * When this user is deleted, all the programs owned by him should be deleted too.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=Program::class,
-   *     mappedBy="user",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: Program::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $programs;
 
   /**
    * Requests to change the password issued by this user.
    * When this user is deleted, all the reset-password requests issued by him should be deleted too.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=ResetPasswordRequest::class,
-   *     mappedBy="user",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: ResetPasswordRequest::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $reset_password_requests;
 
   /**
    * Notifications which are available for this user (shown upon login).
    * When this user is deleted, all notifications for him should also be deleted.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=CatroNotification::class,
-   *     mappedBy="user",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: CatroNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $notifications;
 
   /**
    * Comments written by this user.
    * When this user is deleted, all the comments he wrote should be deleted too.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=UserComment::class,
-   *     mappedBy="user",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserComment::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $comments;
 
   /**
    * FollowNotifications mentioning this user as a follower.
    * When this user will be deleted, all FollowNotifications mentioning
    * him as a follower, should also be deleted.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=FollowNotification::class,
-   *     mappedBy="follower",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'follower', targetEntity: FollowNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $follow_notification_mentions;
 
   /**
    * LikeNotifications mentioning this user as giving a like to another user.
    * When this user will be deleted, all LikeNotifications mentioning
    * him as a user giving a like to another user, should also be deleted.
-   *
-   * @ORM\OneToMany(
-   *     targetEntity=LikeNotification::class,
-   *     mappedBy="like_from",
-   *     fetch="EXTRA_LAZY",
-   *     cascade={"remove"}
-   * )
    */
+  #[ORM\OneToMany(mappedBy: 'like_from', targetEntity: LikeNotification::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $like_notification_mentions;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=User::class, mappedBy="following")
-   */
+  #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'following')]
   protected Collection $followers;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=User::class, inversedBy="followers")
-   */
+  #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'followers')]
   protected Collection $following;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=ProgramLike::class,
-   *     mappedBy="user",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'user', targetEntity: ProgramLike::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $likes;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=UserLikeSimilarityRelation::class,
-   *     mappedBy="first_user",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'first_user', targetEntity: UserLikeSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $relations_of_similar_users_based_on_likes;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=UserLikeSimilarityRelation::class,
-   *     mappedBy="second_user",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'second_user', targetEntity: UserLikeSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_likes;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=UserRemixSimilarityRelation::class,
-   *     mappedBy="first_user",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'first_user', targetEntity: UserRemixSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $relations_of_similar_users_based_on_remixes;
 
-  /**
-   * @ORM\OneToMany(
-   *     targetEntity=UserRemixSimilarityRelation::class,
-   *     mappedBy="second_user",
-   *     cascade={"persist", "remove"},
-   *     orphanRemoval=true
-   * )
-   */
+  #[ORM\OneToMany(mappedBy: 'second_user', targetEntity: UserRemixSimilarityRelation::class, cascade: ['persist', 'remove'], orphanRemoval: true)]
   protected Collection $reverse_relations_of_similar_users_based_on_remixes;
 
   /**
    * @deprecated
-   *
-   * @ORM\Column(type="string", length=300, nullable=true)
    */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $gplus_access_token = null;
 
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $google_id = null;
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $facebook_id = null;
 
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $google_access_token = null;
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $facebook_access_token = null;
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $apple_id = null;
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $apple_access_token = null;
   /**
    * @deprecated
-   *
-   * @ORM\Column(type="string", length=5000, nullable=true)
    */
+  #[ORM\Column(type: 'string', length: 5000, nullable: true)]
   protected ?string $gplus_id_token = null;
 
   /**
    * @deprecated
-   *
-   * @ORM\Column(type="string", length=300, nullable=true)
    */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $gplus_refresh_token = null;
 
-  /**
-   * @ORM\Column(type="integer", nullable=true, unique=true)
-   */
+  #[ORM\Column(type: 'integer', unique: true, nullable: true)]
   protected ?int $scratch_user_id = null;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $oauth_password_created = false;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $oauth_user = false;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": true})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => true])]
   protected bool $verified = true;
 
-  /**
-   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reporting_user", fetch="EXTRA_LAZY")
-   */
+  #[ORM\OneToMany(mappedBy: 'reporting_user', targetEntity: ProgramInappropriateReport::class, fetch: 'EXTRA_LAZY')]
   protected Collection $reports_triggered_by_this_user;
 
-  /**
-   * @ORM\OneToMany(targetEntity=ProgramInappropriateReport::class, mappedBy="reported_user", fetch="EXTRA_LAZY")
-   */
+  #[ORM\OneToMany(mappedBy: 'reported_user', targetEntity: ProgramInappropriateReport::class, fetch: 'EXTRA_LAZY')]
   protected Collection $reports_of_this_user;
 
-  /**
-   * @ORM\Column(type="text", length=65535, nullable=true)
-   */
+  #[ORM\Column(type: 'text', length: 65535, nullable: true)]
   protected ?string $about = null;
 
-  /**
-   * @ORM\Column(type="string", length=255, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 255, nullable: true)]
   protected ?string $currently_working_on = null;
 
-  /**
-   * @ORM\Column(type="integer", nullable=true)
-   */
+  #[ORM\Column(type: 'integer', nullable: true)]
   protected ?int $ranking_score = null;
 
   public function __construct()

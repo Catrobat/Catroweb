@@ -34,7 +34,6 @@ use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Terms;
 use Elastica\Util;
-use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Psr\Log\LoggerInterface;
 use Sonata\UserBundle\Model\UserInterface;

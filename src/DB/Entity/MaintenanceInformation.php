@@ -4,55 +4,34 @@ namespace App\DB\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- *
- * @ORM\Table(name="maintanance_information")
- */
+#[ORM\Table(name: 'maintanance_information')]
+#[ORM\Entity]
 class MaintenanceInformation
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue
-   *
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column(type: 'integer')]
   protected int $id;
 
-  /**
-   * @ORM\Column(type="string", length=255)
-   */
+  #[ORM\Column(type: 'string', length: 255)]
   protected string $internalTitle;
 
-  /**
-   * @ORM\Column(type="string", length=255, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 255, nullable: true)]
   protected ?string $icon;
 
-  /**
-   * @ORM\Column(type="string", length=255, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 255, nullable: true)]
   protected ?string $ltmCode;
 
-  /**
-   * @ORM\Column(type="date", nullable=true)
-   */
+  #[ORM\Column(type: 'date', nullable: true)]
   protected ?\DateTime $ltm_maintenanceStart;
 
-  /**
-   * @ORM\Column(type="date", nullable=true)
-   */
+  #[ORM\Column(type: 'date', nullable: true)]
   protected ?\DateTime $ltm_maintenanceEnd;
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $ltm_additionalInformation;
 
-  /**
-   * @ORM\Column(type="boolean")
-   */
+  #[ORM\Column(type: 'boolean')]
   protected bool $active;
 
   // Getters and setters

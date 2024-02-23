@@ -5,84 +5,56 @@ namespace App\DB\Entity\Project;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramInappropriateReportRepository;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * ProgramInappropriateReport.
- *
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table
- *
- * @ORM\Entity(repositoryClass=ProgramInappropriateReportRepository::class)
  */
+#[ORM\Table]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: ProgramInappropriateReportRepository::class)]
 class ProgramInappropriateReport
 {
   final public const STATUS_NEW = 1;
   final public const STATUS_REJECTED = 2;
   final public const STATUS_ACCEPTED = 3;
 
-  /**
-   * @ORM\Column(name="id", type="integer")
-   *
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\Id]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   private ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_triggered_by_this_user")
-   *
-   * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   */
+  #[ORM\JoinColumn(name: 'user_id', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reports_triggered_by_this_user')]
   private ?User $reporting_user = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, inversedBy="reports_of_this_user")
-   *
-   * @ORM\JoinColumn(name="user_id_rep", referencedColumnName="id", nullable=true, onDelete="SET NULL")
-   */
+  #[ORM\JoinColumn(name: 'user_id_rep', referencedColumnName: 'id', nullable: true, onDelete: 'SET NULL')]
+  #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'reports_of_this_user')]
   private ?User $reported_user = null;
 
-  /**
-   * @ORM\Column(name="category", type="text", length=256)
-   */
+  #[ORM\Column(name: 'category', type: 'text', length: 256)]
   private ?string $category = null;
 
-  /**
-   * @ORM\Column(name="note", type="text")
-   */
+  #[ORM\Column(name: 'note', type: 'text')]
   private ?string $note = null;
 
-  /**
-   * @ORM\Column(name="time", type="datetime")
-   */
+  #[ORM\Column(name: 'time', type: 'datetime')]
   private ?\DateTime $time = null;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   private ?int $state = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Program::class, inversedBy="reports")
-   *
-   * @ORM\JoinColumn(name="program_id", referencedColumnName="id", onDelete="SET NULL")
-   */
+  #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', onDelete: 'SET NULL')]
+  #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'reports')]
   private ?Program $program = null;
 
-  /**
-   * @ORM\Column(name="projectVersion", type="integer")
-   */
+  #[ORM\Column(name: 'projectVersion', type: 'integer')]
   private int $projectVersion;
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function updateTimestamps(): void
   {
     if (null === $this->getTime()) {
@@ -90,9 +62,7 @@ class ProgramInappropriateReport
     }
   }
 
-  /**
-   * @ORM\PrePersist
-   */
+  #[ORM\PrePersist]
   public function updateState(): void
   {
     if (null === $this->getState()) {
@@ -100,9 +70,7 @@ class ProgramInappropriateReport
     }
   }
 
-  /**
-   * @ORM\PrePersist
-   */
+  #[ORM\PrePersist]
   public function updateProgramVersion(): void
   {
     $this->setProjectVersion($this->getProgram()->getVersion());
