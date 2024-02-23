@@ -47,6 +47,8 @@
 
 {% include 'Default/sidebar.html.twig' with {sidebar_ul: (block('sidebar_ul')) ?? ''} %}
 
+{% include('Default/language_menu.html.twig') %}
+
 <div class="body-content">
   <div class="page-content container">
     {% block body %}{% endblock %}

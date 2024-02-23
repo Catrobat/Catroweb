@@ -147,7 +147,7 @@ Encore
   .addEntry('my_profile', './assets/js/my_profile.js')
   .addEntry('profile', './assets/js/profile.js')
   .addEntry('project_js', './assets/js/project.js')
-  .addEntry('project_comments', './assets/js/custom/project_comments.js')
+  .addEntry('program_comments', './assets/js/custom/program_comments.js')
   .addEntry('search_old', './assets/js/search_old.js')
   .addEntry('search', './assets/js/search.js')
   .addEntry('media_library', './assets/js/media_library.js')
@@ -161,10 +161,11 @@ Encore
   .addEntry('studios_new', './assets/js/studio_new.js')
   .addEntry('code_view', './assets/js/code_view.js')
   .addEntry('medialib_content', './assets/js/medialib_content.js')
+  .addEntry('language_menu', './assets/js/custom/languageMenu.js')
 
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
-  .addStyleEntry('project_scss', './assets/styles/custom/project.scss')
+  .addStyleEntry('project_scss', './assets/styles/custom/program.scss')
   .addStyleEntry(
     'multi_column_article',
     './assets/styles/custom/multi_column_article.scss',
@@ -188,6 +189,10 @@ Encore
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
   .addStyleEntry('error', './assets/styles/error.scss')
+  .addStyleEntry(
+    'language_menu_styles',
+    './assets/styles/custom/language_menu.scss',
+  )
 
   // Themes
   .addStyleEntry('pocketcode', './assets/styles/themes/pocketcode.scss')
