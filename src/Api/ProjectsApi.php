@@ -41,7 +41,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): null|UpdateProjectErrorResponse|UpdateProjectFailureResponse
+  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): UpdateProjectErrorResponse|UpdateProjectFailureResponse|null
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -152,7 +152,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, int &$responseCode, array &$responseHeaders): null|array|object
+  public function projectsPost(string $checksum, UploadedFile $file, string $accept_language, string $flavor, bool $private, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Getting the user who uploaded
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
@@ -336,7 +336,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): null|array|object
+  public function projectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // Currently not used due to an issue with the serializer and accept encoding in the generated code
     // The route is overwritten by the OverwriteController which uses the method: customProjectIdCatrobatGet
@@ -346,7 +346,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   /**
    * @psalm-param 200 $responseCode
    */
-  public function customProjectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders = null): ?BinaryFileResponse
+  public function customProjectIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (null === $project) {

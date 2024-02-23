@@ -201,7 +201,7 @@ class ProjectController extends AbstractController
 
   #[Route(path: '/search/{q}', name: 'search', requirements: ['q' => '.+'], methods: ['GET'])]
   #[Route(path: '/search/', name: 'empty_search', defaults: ['q' => null], methods: ['GET'])]
-  public function searchAction(string $q = null): Response
+  public function searchAction(?string $q = null): Response
   {
     return $this->render('Search/search.html.twig', ['q' => $q]);
   }

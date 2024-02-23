@@ -25,7 +25,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
   /**
    * @throws \Exception
    */
-  public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): null|JWTResponse|RegisterErrorResponse
+  public function userPost(RegisterRequest $register_request, string $accept_language, int &$responseCode, array &$responseHeaders): JWTResponse|RegisterErrorResponse|null
   {
     $validation_wrapper = $this->facade->getRequestValidator()->validateRegistration($register_request, $accept_language);
 
@@ -93,7 +93,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return $response;
   }
 
-  public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): null|array|object
+  public function userPut(UpdateUserRequest $update_user_request, string $accept_language, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
     $validation_wrapper = $this->facade->getRequestValidator()->validateUpdateRequest($user, $update_user_request, $accept_language);
@@ -156,7 +156,7 @@ class UserApi extends AbstractApiController implements UserApiInterface
     return null;
   }
 
-  public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): null|array|object
+  public function usersGet(string $query, int $limit, int $offset, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $users = $this->facade->getLoader()->getAllUsers($query, $limit, $offset);
 

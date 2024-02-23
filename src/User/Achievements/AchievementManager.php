@@ -262,7 +262,7 @@ class AchievementManager
   /**
    * @throws \Exception
    */
-  protected function unlockAchievement(User $user, string $internal_title, \DateTimeInterface $unlocked_at = null): ?UserAchievement
+  protected function unlockAchievement(User $user, string $internal_title, ?\DateTimeInterface $unlocked_at = null): ?UserAchievement
   {
     $achievement = $this->findAchievementByInternalTitle($internal_title);
     if (is_null($achievement)) {

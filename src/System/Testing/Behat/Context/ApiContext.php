@@ -3049,7 +3049,7 @@ class ApiContext implements Context
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \Exception                      when an error while uploading occurs
    */
-  private function uploadProject(string $file, string $api_version, User $user = null, string $desired_id = '',
+  private function uploadProject(string $file, string $api_version, ?User $user = null, string $desired_id = '',
     string $flavor = 'pocketcode'): void
   {
     if (null == $user) {
