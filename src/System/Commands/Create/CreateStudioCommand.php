@@ -71,7 +71,7 @@ class CreateStudioCommand extends Command
     }
   }
 
-  private function createStudio(User $admin, string $name, string $description, bool $is_public, bool $is_enabled, array $usernames, array $statuses, bool $allow_comments, string $cover_path = null): int
+  private function createStudio(User $admin, string $name, string $description, bool $is_public, bool $is_enabled, array $usernames, array $statuses, bool $allow_comments, ?string $cover_path = null): int
   {
     $studio = (new Studio())
       ->setName($name)

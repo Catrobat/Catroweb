@@ -230,7 +230,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @return mixed an array containing the found media files or null if no results found
    */
-  public function search(string $term, ?string $flavor = 'pocketcode', string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
+  public function search(string $term, ?string $flavor = 'pocketcode', ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
   {
     $flavor = $flavor ?: 'pocketcode';
 
@@ -360,7 +360,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     return $id.'.'.$extension;
   }
 
-  public function addFileFlavorsCondition(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  public function addFileFlavorsCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';

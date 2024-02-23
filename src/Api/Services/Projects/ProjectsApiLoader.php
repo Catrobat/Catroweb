@@ -51,7 +51,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->search($query, $limit, $offset, $max_version, $flavor);
   }
 
-  public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, User $user = null): array
+  public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user = null): array
   {
     if ('recommended' === $category) {
       return []; // Feature removed

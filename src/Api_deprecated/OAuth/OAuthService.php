@@ -222,7 +222,7 @@ class OAuthService
    * @throws \Exception
    */
   private function registerGoogleUser(Request $request, array &$retArray, string $googleId,
-    string $googleUsername, string $googleEmail, string $id_token = null): void
+    string $googleUsername, string $googleEmail, ?string $id_token = null): void
   {
     if ($this->user_manager->findUserByUsername($googleUsername)) {
       $username = PasswordGenerator::generateRandomPassword();

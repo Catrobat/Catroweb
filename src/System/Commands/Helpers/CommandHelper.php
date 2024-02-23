@@ -24,7 +24,7 @@ class CommandHelper
   }
 
   public static function executeShellCommand(array $command, array $config, string $description = '',
-    OutputInterface $output = null, KernelInterface $kernel = null): ?int
+    ?OutputInterface $output = null, ?KernelInterface $kernel = null): ?int
   {
     if (null !== $output) {
       $output->write($description." ('".implode(' ', $command)."') ... ");

@@ -147,7 +147,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     return $this->authentication_manager->deleteRefreshToken($x_refresh);
   }
 
-  protected function createRandomUsername(string $name = null): string
+  protected function createRandomUsername(?string $name = null): string
   {
     $username_base = 'user';
     if (!empty($name)) {

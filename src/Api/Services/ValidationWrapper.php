@@ -9,7 +9,7 @@ class ValidationWrapper
 {
   private array $errors = [];
 
-  public function addError(string $value, string $key = null): ValidationWrapper
+  public function addError(string $value, ?string $key = null): ValidationWrapper
   {
     if (!is_null($key)) {
       $this->errors[$key] = $value;
@@ -25,7 +25,7 @@ class ValidationWrapper
     return count($this->getErrors()) > 0;
   }
 
-  public function getError(string $key = null): string
+  public function getError(?string $key = null): string
   {
     return $this->hasError() ? (null !== $key ? $this->errors[$key] : $this->errors[0]) : '';
   }

@@ -153,7 +153,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
-  private function projectIdPut_setLoaderAndAuthManager(MockObject|Program $project = null, MockObject|User $user = null): void
+  private function projectIdPut_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
       $user = $this->createMock(User::class);
@@ -168,14 +168,14 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setAuthManager($user);
   }
 
-  private function projectIdPut_setLoader(null|MockObject|Program $project): void
+  private function projectIdPut_setLoader(MockObject|Program|null $project): void
   {
     $loader = $this->createMock(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
     $this->facade->method('getLoader')->willReturn($loader);
   }
 
-  private function projectIdPut_setAuthManager(null|MockObject|User $user): void
+  private function projectIdPut_setAuthManager(MockObject|User|null $user): void
   {
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);

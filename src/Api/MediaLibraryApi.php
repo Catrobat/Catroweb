@@ -26,7 +26,7 @@ class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiIn
     return $response;
   }
 
-  public function mediaPackageNameGet(string $name, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): null|array|object
+  public function mediaPackageNameGet(string $name, int $limit, int $offset, string $attributes, int &$responseCode, array &$responseHeaders): array|object|null
   {
     $media_package = $this->facade->getLoader()->getMediaPackageByName($name);
 

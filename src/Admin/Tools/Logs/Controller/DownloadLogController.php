@@ -17,7 +17,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class DownloadLogController extends AbstractController
 {
   #[Route(path: '/downloadLogs/', name: 'log_download')]
-  public function downloadLogAction(Request $request = null): Response
+  public function downloadLogAction(?Request $request = null): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
