@@ -424,6 +424,8 @@ menu:
   followersAndFollowing: Abonnenten
   mediaLibrary: Medienbibliothek
   studio: Studios
+  language: Sprache
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Einloggen
   button:

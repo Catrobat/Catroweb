@@ -419,6 +419,8 @@ menu:
   followersAndFollowing: Takipçin
   mediaLibrary: Medya kütüphanesi
   studio: Studios
+  language: Dil
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Oturum aç
   button:

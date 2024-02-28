@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: 追隨者
   mediaLibrary: 媒體庫
   studio: Studios
+  language: 語言
+  languageOptionsNotAvailable: No language options available.
 login:
   login: 登入
   button:

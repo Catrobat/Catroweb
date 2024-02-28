@@ -424,6 +424,8 @@ menu:
   followersAndFollowing: பின்பற்றுபவர்
   mediaLibrary: ஊடக நூலகம்
   studio: Studios
+  language: மொழி
+  languageOptionsNotAvailable: No language options available.
 login:
   login: உள்நுழை
   button:

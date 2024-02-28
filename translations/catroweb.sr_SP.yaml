@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: Follower
   mediaLibrary: Media library
   studio: Studios
+  language: Језик
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Login
   button:

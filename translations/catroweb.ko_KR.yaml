@@ -418,6 +418,8 @@ menu:
   followersAndFollowing: 팔로워
   mediaLibrary: 미디어 라이브러리
   studio: Studios
+  language: 언어
+  languageOptionsNotAvailable: No language options available.
 login:
   login: 로그인
   button:

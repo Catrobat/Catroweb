@@ -425,6 +425,8 @@ menu:
   followersAndFollowing: 关注者
   mediaLibrary: 媒体库
   studio: 工作室
+  language: 语言
+  languageOptionsNotAvailable: No language options available.
 login:
   login: 登录
   button:

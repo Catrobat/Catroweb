@@ -426,6 +426,8 @@ menu:
   followersAndFollowing: অনুসরণকারী
   mediaLibrary: মিডিয়া লাইব্রেরি
   studio: Studios
+  language: ভাষা
+  languageOptionsNotAvailable: No language options available.
 login:
   login: প্রবেশ করুন
   button:
