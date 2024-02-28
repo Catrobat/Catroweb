@@ -419,6 +419,8 @@ menu:
   followersAndFollowing: Follower
   mediaLibrary: Βιβλιοθήκη πολυμέσων
   studio: Studios
+  language: Γλώσσα
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Σύνδεση
   button:

@@ -419,6 +419,8 @@ menu:
   followersAndFollowing: Följare
   mediaLibrary: Mediabibliotek
   studio: Studios
+  language: Språk
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Logga in
   button:

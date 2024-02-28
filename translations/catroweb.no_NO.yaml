@@ -421,6 +421,8 @@ menu:
   followersAndFollowing: Følger
   mediaLibrary: Mediebibliotek
   studio: Studioer
+  language: Språk
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Logg på
   button:

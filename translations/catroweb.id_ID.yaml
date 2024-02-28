@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: Pengikut
   mediaLibrary: Perpustakaan media
   studio: Studios
+  language: Bahasa
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Gabung
   button:

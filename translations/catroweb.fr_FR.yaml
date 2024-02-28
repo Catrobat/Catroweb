@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: Suiveurs
   mediaLibrary: Bibliothèque multimédia
   studio: Studios
+  language: Langue
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Se connecter
   button:

@@ -424,6 +424,8 @@ menu:
   followersAndFollowing: پی‌گیر
   mediaLibrary: کتابخانه ی رسانه
   studio: Studios
+  language: زبان
+  languageOptionsNotAvailable: No language options available.
 login:
   login: ورود به سیستم
   button:

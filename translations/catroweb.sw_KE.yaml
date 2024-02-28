@@ -419,6 +419,8 @@ menu:
   followersAndFollowing: Follower
   mediaLibrary: Maktaba ya midia
   studio: Studios
+  language: Lugha
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Ingia
   button:

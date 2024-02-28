@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: متابع
   mediaLibrary: مكتبة الوسائط
   studio: Studios
+  language: اللغة
+  languageOptionsNotAvailable: No language options available.
 login:
   login: تسجيل الدخول
   button:

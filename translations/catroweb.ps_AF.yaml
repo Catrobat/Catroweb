@@ -422,6 +422,8 @@ menu:
   followersAndFollowing: پیروونکی
   mediaLibrary: د رسنیو کتابتون
   studio: Studios
+  language: ژبه
+  languageOptionsNotAvailable: No language options available.
 login:
   login: د ننه کیدل
   button:

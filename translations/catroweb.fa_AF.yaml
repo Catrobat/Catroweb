@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: دنبال کننده
   mediaLibrary: کتابخانه ی رسانه
   studio: Studios
+  language: زبان
+  languageOptionsNotAvailable: No language options available.
 login:
   login: وارد شدن
   button:
