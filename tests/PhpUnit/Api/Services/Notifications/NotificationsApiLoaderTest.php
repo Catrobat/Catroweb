@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class NotificationsApiLoaderTest extends DefaultTestCase
 {
-  protected NotificationsApiLoader|MockObject $object;
+  protected MockObject|NotificationsApiLoader $object;
 
   protected function setUp(): void
   {

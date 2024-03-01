@@ -2,7 +2,7 @@
 
 namespace App\Project\CatrobatFile;
 
-use App\Project\Event\ProgramBeforeInsertEvent;
+use App\Project\Event\ProjectBeforeInsertEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -25,9 +25,9 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
    */
   final public const MIN_WINDOWS_PROGRAM_VERSION = '0.1';
 
-  public function onProgramBeforeInsert(ProgramBeforeInsertEvent $event): void
+  public function onProjectBeforeInsert(ProjectBeforeInsertEvent $event): void
   {
-    $this->validate($event->getExtractedFile()->getProgramXmlProperties());
+    $this->validate($event->getExtractedFile()->getProjectXmlProperties());
   }
 
   public function validate(\SimpleXMLElement $xml): void
@@ -42,19 +42,19 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
     switch ((string) $xml->header->platform) {
       case 'Android':
         if (version_compare($version, self::MIN_ANDROID_PROGRAM_VERSION, '<')) {
-          throw new InvalidCatrobatFileException('errors.programversion.tooold', 519, 'android catrobat version too old');
+          throw new InvalidCatrobatFileException('errors.projectversion.tooold', 519, 'android catrobat version too old');
         }
         break;
 
       case 'Windows':
         if (version_compare((string) $xml->header->applicationVersion, self::MIN_WINDOWS_PROGRAM_VERSION, '<')) {
-          throw new InvalidCatrobatFileException('errors.programversion.tooold', 519, 'windows catrobat version too old');
+          throw new InvalidCatrobatFileException('errors.projectversion.tooold', 519, 'windows catrobat version too old');
         }
         break;
 
       case 'iOS':
         if (version_compare((string) $xml->header->applicationVersion, self::MIN_IOS_PROGRAM_VERSION, '<')) {
-          throw new InvalidCatrobatFileException('errors.programversion.tooold', 519, 'ios catrobat version too old');
+          throw new InvalidCatrobatFileException('errors.projectversion.tooold', 519, 'ios catrobat version too old');
         }
         break;
       default:
@@ -64,6 +64,6 @@ class VersionValidatorEventSubscriber implements EventSubscriberInterface
 
   public static function getSubscribedEvents(): array
   {
-    return [ProgramBeforeInsertEvent::class => 'onProgramBeforeInsert'];
+    return [ProjectBeforeInsertEvent::class => 'onProjectBeforeInsert'];
   }
 }

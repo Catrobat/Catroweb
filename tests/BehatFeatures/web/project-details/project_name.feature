@@ -15,8 +15,8 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should be visible
-    When I click "#edit-program-button"
+    Then the element "#edit-project-button" should be visible
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then I should see "Default"
     When I click "#edit-default-button"
@@ -36,8 +36,8 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should be visible
-    When I click "#edit-program-button"
+    Then the element "#edit-project-button" should be visible
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then I should see "Default"
     When I click "#edit-default-button"
@@ -56,8 +56,8 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should be visible
-    When I click "#edit-program-button"
+    Then the element "#edit-project-button" should be visible
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then I should see "Default"
     When I click "#edit-default-button"
@@ -77,8 +77,8 @@ Feature: Projects should have a name that can be changed by the project owner
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should be visible
-    When I click "#edit-program-button"
+    Then the element "#edit-project-button" should be visible
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then I should see "Default"
     When I click "#edit-default-button"

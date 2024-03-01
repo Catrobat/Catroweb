@@ -9,8 +9,8 @@ use App\DB\EntityRepository\Project\ExtensionRepository;
 use App\DB\EntityRepository\Project\Special\FeaturedRepository;
 use App\DB\EntityRepository\Project\TagRepository;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\ProjectManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\File\File;
@@ -19,15 +19,16 @@ use Symfony\Component\HttpFoundation\RequestStack;
 class ProjectsApiLoader extends AbstractApiLoader
 {
   public function __construct(
-    private readonly ProgramManager $project_manager,
+    private readonly ProjectManager $project_manager,
     private readonly FeaturedRepository $featured_repository,
     private readonly TagRepository $tag_repository,
     private readonly ExtensionRepository $extension_repository,
     private readonly RequestStack $request_stack,
-    protected ProgramFileRepository $file_repository,
+    protected ProjectFileRepository $file_repository,
     protected ExtractedFileRepository $extracted_file_repository,
     protected LoggerInterface $logger
-  ) {}
+  ) {
+  }
 
   public function findProjectsByID(string $id, bool $include_private = false): array
   {
@@ -50,7 +51,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->search($query, $limit, $offset, $max_version, $flavor);
   }
 
-  public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, User $user = null): array
+  public function getProjectsFromCategory(string $category, string $max_version, int $limit, int $offset, string $flavor, ?User $user = null): array
   {
     if ('recommended' === $category) {
       return []; // Feature removed
@@ -89,7 +90,7 @@ class ProjectsApiLoader extends AbstractApiLoader
     return $this->project_manager->getUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }
 
-  public function getUserPublicPrograms(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
+  public function getUserPublicProjects(string $user_id, int $limit, int $offset, string $flavor, string $max_version): array
   {
     return $this->project_manager->getPublicUserProjects($user_id, $limit, $offset, $flavor, $max_version);
   }

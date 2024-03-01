@@ -17,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 final class ProjectsRequestValidatorTest extends DefaultTestCase
 {
-  protected ProjectsRequestValidator|MockObject $object;
+  protected MockObject|ProjectsRequestValidator $object;
 
   protected function setUp(): void
   {

@@ -5,7 +5,7 @@ namespace App\Api;
 use App\Api\Services\Base\AbstractApiController;
 use App\Api\Services\Projects\ProjectsApiFacade;
 use App\DB\Entity\Project\ProgramDownloads;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\Event\ProjectDownloadEvent;
 use OpenAPI\Server\Api\ProjectsApiInterface;
 use OpenAPI\Server\Model\ProjectReportRequest;
@@ -20,7 +20,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 {
-  public function __construct(private readonly ProjectsApiFacade $facade) {}
+  public function __construct(private readonly ProjectsApiFacade $facade)
+  {
+  }
 
   public function projectIdGet(string $id, int &$responseCode, array &$responseHeaders): ?ProjectResponse
   {
@@ -39,7 +41,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
     return $response;
   }
 
-  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language = null, &$responseCode = null, array &$responseHeaders = null): UpdateProjectFailureResponse|UpdateProjectErrorResponse|null
+  public function projectIdPut(string $id, UpdateProjectRequest $update_project_request, string $accept_language, int &$responseCode, array &$responseHeaders): UpdateProjectErrorResponse|UpdateProjectFailureResponse|null
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (is_null($project)) {
@@ -176,7 +178,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     try {
       $project = $this->facade->getProcessor()->addProject(
-        new AddProgramRequest(
+        new AddProjectRequest(
           $user, $file, $this->facade->getLoader()->getClientIp(), $accept_language, $flavor
         )
       );
@@ -189,7 +191,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return $error_response;
     }
 
-    // Setting the program's attributes
+    // Setting the project's attributes
     $project->setPrivate($private);
     $this->facade->getProcessor()->saveProject($project);
 
@@ -202,10 +204,10 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
   public function projectsSearchGet(string $query, string $max_version, int $limit, int $offset, string $attributes, string $flavor, int &$responseCode, array &$responseHeaders): array
   {
-    $programs = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
+    $projects = $this->facade->getLoader()->searchProjects($query, $limit, $offset, $max_version, $flavor);
 
     $responseCode = Response::HTTP_OK;
-    $response = $this->facade->getResponseManager()->createProjectsDataResponse($programs, $attributes);
+    $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
     $this->facade->getResponseManager()->addResponseHashToHeaders($responseHeaders, $response);
     $this->facade->getResponseManager()->addContentLanguageToHeaders($responseHeaders);
 
@@ -232,7 +234,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
 
     $response = [];
 
-    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch'];
+    $categories = ['recent', 'example', 'most_downloaded', 'random', 'scratch', 'trending'];
     $user = $this->facade->getAuthenticationManager()->getAuthenticatedUser();
 
     foreach ($categories as $category) {
@@ -275,7 +277,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
       return null;
     }
 
-    $projects = $this->facade->getLoader()->getUserPublicPrograms($id, $limit, $offset, $flavor, $max_version);
+    $projects = $this->facade->getLoader()->getUserPublicProjects($id, $limit, $offset, $flavor, $max_version);
 
     $responseCode = Response::HTTP_OK;
     $response = $this->facade->getResponseManager()->createProjectsDataResponse($projects, $attributes);
@@ -344,7 +346,7 @@ class ProjectsApi extends AbstractApiController implements ProjectsApiInterface
   /**
    * @psalm-param 200 $responseCode
    */
-  public function customProjectIdCatrobatGet(string $id, int &$responseCode, array &$responseHeaders = null): ?BinaryFileResponse
+  public function customProjectIdCatrobatGet(string $id, int &$responseCode, ?array &$responseHeaders = null): ?BinaryFileResponse
   {
     $project = $this->facade->getLoader()->findProjectByID($id, true);
     if (null === $project) {

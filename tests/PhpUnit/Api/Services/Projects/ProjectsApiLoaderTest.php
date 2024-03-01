@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class ProjectsApiLoaderTest extends DefaultTestCase
 {
-  protected ProjectsApiLoader|MockObject $object;
+  protected MockObject|ProjectsApiLoader $object;
 
   protected function setUp(): void
   {

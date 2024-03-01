@@ -83,56 +83,6 @@
           {{ "copyright"|trans({'%year%' : "now"|date("Y")}, "catroweb")|raw }}
         </div>
 
-        <div class="form-group col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 mt-3 mt-sm-0">
-          <div id="footer-language-selector" class="mdc-select mdc-select--outlined mdc-select--locale">
-            <div class="mdc-select__anchor" aria-labelledby="outlined-select-label">
-              <span class="mdc-notched-outline">
-                <span class="mdc-notched-outline__leading"></span>
-                <span class="mdc-notched-outline__notch">
-                  <span id="outlined-select-label"
-                        class="mdc-floating-label">{{ 'footer.language'|trans({}, "catroweb") }}</span>
-                </span>
-                <span class="mdc-notched-outline__trailing"></span>
-              </span>
-              <span class="mdc-select__selected-text-container">
-                <span id="demo-selected-text" class="mdc-select__selected-text"></span>
-              </span>
-              <span class="mdc-select__dropdown-icon">
-                <svg
-                    class="mdc-select__dropdown-icon-graphic"
-                    viewBox="7 10 10 5" focusable="false">
-                  <polygon
-                      class="mdc-select__dropdown-icon-inactive"
-                      stroke="none"
-                      fill-rule="evenodd"
-                      points="7 10 12 15 17 10">
-                  </polygon>
-                  <polygon
-                      class="mdc-select__dropdown-icon-active"
-                      stroke="none"
-                      fill-rule="evenodd"
-                      points="7 15 12 10 17 15">
-                  </polygon>
-                </svg>
-               </span>
-            </div>
-            <div class="mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth">
-              <ul class="mdc-list" role="listbox">
-                {% set languageOptionList = getLanguageOptions() %}
-                {% for languageOption in languageOptionList %}
-                  <li class="mdc-list-item" data-value={{ languageOption[0] }} {% if languageOption[2] %}selected{% endif %}
-                      role="option">
-                    <span class="mdc-list-item__ripple"></span>
-                    <span class="mdc-list-item__text">
-                    {{ languageOption[1] }}
-                  </span>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </div>
-
       </div>
 
     </div>

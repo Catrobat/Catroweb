@@ -27,11 +27,11 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 {
   private RemixUpdaterEventSubscriber $remix_updater;
 
-  private RemixManager|MockObject $remix_manager;
+  private MockObject|RemixManager $remix_manager;
 
   private AsyncHttpClient|MockObject $async_http_client;
 
-  private Program|MockObject $program_entity;
+  private MockObject|Program $program_entity;
 
   protected function setUp(): void
   {
@@ -108,19 +108,19 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProgramDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
       ->willReturn([])
     ;
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with(['117697631'])
+      ->method('filterExistingScratchProjectIds')->with(['117697631'])
       ->willReturn([])
     ;
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchPrograms')
+      ->method('addScratchProjects')
       ->with([])
     ;
 
@@ -128,7 +128,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
       ->method('addRemixes')->with($this->isInstanceOf(Program::class))
     ;
 
-    $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
 
     Assert::assertNotEquals($xml->header->url->__toString(), $expected_url);
 
@@ -172,18 +172,18 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ];
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProgramDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
       ->willReturn($expected_scratch_info)
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with($expected_scratch_ids)
+      ->method('filterExistingScratchProjectIds')->with($expected_scratch_ids)
       ->willReturn([])
     ;
 
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchPrograms')->with($this->isType('array'))
+      ->method('addScratchProjects')->with($this->isType('array'))
       ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(2, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
@@ -191,7 +191,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('getProgramRepository')
+      ->method('getProjectRepository')
     ;
 
     $this->remix_manager
@@ -230,19 +230,19 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProgramDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
       ->willReturn([])
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with([$first_expected_scratch_id, $second_expected_scratch_id])
+      ->method('filterExistingScratchProjectIds')->with([$first_expected_scratch_id, $second_expected_scratch_id])
       ->willReturn([])
     ;
-    $this->remix_manager->expects($this->atLeastOnce())->method('addScratchPrograms')->with([]);
+    $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')->with($this->isInstanceOf(Program::class))
     ;
-    $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
   }
 
@@ -277,17 +277,17 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $expected_scratch_info = [['id' => $second_expected_scratch_id, 'creator' => ['username' => 'bubble103']]];
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProgramDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
       ->willReturn($expected_scratch_info)
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with($expected_scratch_ids)
+      ->method('filterExistingScratchProjectIds')->with($expected_scratch_ids)
       ->willReturn($expected_already_existing_scratch_programs)
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchPrograms')->with($this->isType('array'))
+      ->method('addScratchProjects')->with($this->isType('array'))
       ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
@@ -297,7 +297,7 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->remix_manager->expects($this->atLeastOnce())
       ->method('addRemixes')->with($this->isInstanceOf(Program::class))
     ;
-    $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
   }
 
@@ -333,12 +333,12 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProgramDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
       ->willReturn($expected_scratch_info)
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with([$expected_scratch_info[0]['id']])
+      ->method('filterExistingScratchProjectIds')->with([$expected_scratch_info[0]['id']])
       ->willReturn([])
     ;
     $this->remix_manager->expects($this->atLeastOnce())
@@ -352,28 +352,28 @@ class RemixUpdaterEventSubscriberTest extends TestCase
         $first_parent_remix_data = $remixes_data[0];
         $this->assertInstanceOf(RemixData::class, $first_parent_remix_data);
         $this->assertSame($first_expected_url, $first_parent_remix_data->getUrl());
-        $this->assertSame('117697631', $first_parent_remix_data->getProgramId());
-        $this->assertTrue($first_parent_remix_data->isScratchProgram());
+        $this->assertSame('117697631', $first_parent_remix_data->getProjectId());
+        $this->assertTrue($first_parent_remix_data->isScratchProject());
         $this->assertTrue($first_parent_remix_data->isAbsoluteUrl());
 
         /** @var RemixData $second_parent_remix_data */
         $second_parent_remix_data = $remixes_data[1];
         $this->assertInstanceOf(RemixData::class, $second_parent_remix_data);
         $this->assertSame($second_expected_url, $second_parent_remix_data->getUrl());
-        $this->assertSame('3570', $second_parent_remix_data->getProgramId());
-        $this->assertFalse($second_parent_remix_data->isScratchProgram());
+        $this->assertSame('3570', $second_parent_remix_data->getProjectId());
+        $this->assertFalse($second_parent_remix_data->isScratchProject());
         $this->assertFalse($second_parent_remix_data->isAbsoluteUrl());
       }))
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('addScratchPrograms')->with($this->isType('array'))
+      ->method('addScratchProjects')->with($this->isType('array'))
       ->will($this->returnCallback(function ($scratch_programs_data) use ($expected_scratch_info) {
         $this->assertCount(1, $scratch_programs_data);
         $this->assertSame($expected_scratch_info, $scratch_programs_data);
       }))
     ;
-    $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
   }
 
@@ -411,15 +411,15 @@ class RemixUpdaterEventSubscriberTest extends TestCase
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
-    $this->async_http_client->expects($this->atLeastOnce())->method('fetchScratchProgramDetails')->with([])->willReturn([]);
+    $this->async_http_client->expects($this->atLeastOnce())->method('fetchScratchProjectDetails')->with([])->willReturn([]);
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with([$expected_scratch_program_id])
+      ->method('filterExistingScratchProjectIds')->with([$expected_scratch_program_id])
       ->willReturn([$expected_scratch_program_id])
     ;
-    $this->remix_manager->expects($this->atLeastOnce())->method('addScratchPrograms')->with([]);
+    $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
-    $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);
@@ -452,21 +452,21 @@ class RemixUpdaterEventSubscriberTest extends TestCase
 
     $this->async_http_client
       ->expects($this->atLeastOnce())
-      ->method('fetchScratchProgramDetails')->with($this->isType('array'))
+      ->method('fetchScratchProjectDetails')->with($this->isType('array'))
       ->willReturn([])
     ;
     $this->remix_manager
       ->expects($this->atLeastOnce())
-      ->method('filterExistingScratchProgramIds')->with([$first_expected_scratch_id, $second_expected_scratch_id])
+      ->method('filterExistingScratchProjectIds')->with([$first_expected_scratch_id, $second_expected_scratch_id])
       ->willReturn([])
     ;
-    $this->remix_manager->expects($this->atLeastOnce())->method('addScratchPrograms')->with([]);
+    $this->remix_manager->expects($this->atLeastOnce())->method('addScratchProjects')->with([]);
     $this->remix_manager->expects($this->atLeastOnce())->method('addRemixes')->with($this->isInstanceOf(Program::class));
 
     $file = new ExtractedCatrobatFile(BootstrapExtension::$CACHE_DIR.'base/', '/webpath', 'hash');
     $this->program_entity->expects($this->atLeastOnce())->method('getId')->willReturn('3571');
     $this->program_entity->expects($this->atLeastOnce())->method('isInitialVersion')->willReturn(true);
-    $this->remix_manager->expects($this->atLeastOnce())->method('getProgramRepository');
+    $this->remix_manager->expects($this->atLeastOnce())->method('getProjectRepository');
     $this->remix_updater->update($file, $this->program_entity);
     $xml = simplexml_load_file(BootstrapExtension::$CACHE_DIR.'base/code.xml');
     Assert::assertInstanceOf(\SimpleXMLElement::class, $xml);

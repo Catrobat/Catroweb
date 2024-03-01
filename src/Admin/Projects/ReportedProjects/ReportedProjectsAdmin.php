@@ -78,8 +78,8 @@ class ReportedProjectsAdmin extends AbstractAdmin
       ->add('program.visible')
       ->add('program.approved', null, ['sortable' => false])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
-        'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProgram.html.twig'],
-        'acceptProgramReport' => ['template' => 'Admin/CRUD/list__action_accept_program_report.html.twig'],
+        'unreportProgram' => ['template' => 'Admin/CRUD/list__action_unreportProject.html.twig'],
+        'acceptProgramReport' => ['template' => 'Admin/CRUD/list__action_accept_project_report.html.twig'],
       ]])
     ;
   }

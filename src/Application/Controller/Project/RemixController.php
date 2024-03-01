@@ -13,14 +13,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemixController extends AbstractController
 {
-  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager) {}
+  public function __construct(private readonly RouterInterface $router, private readonly ScreenshotRepository $screenshot_repository, private readonly RemixManager $remix_manager)
+  {
+  }
 
   #[Route(path: '/project/{id}/remix_graph', name: 'remix_graph', methods: ['GET'])]
   public function view(string $id): Response
   {
-    return $this->render('Program/remix_graph.html.twig', [
+    return $this->render('Project/remix_graph.html.twig', [
       'id' => $id,
-      'program_details_url_template' => $this->router->generate('program', ['id' => 0]),
+      'project_details_url_template' => $this->router->generate('program', ['id' => 0]),
     ]);
   }
 
@@ -38,13 +40,13 @@ class RemixController extends AbstractController
   public function getRemixGraphData(Request $request, string $id): JsonResponse
   {
     $remix_graph_data = $this->remix_manager->getFullRemixGraph($id);
-    $catrobat_program_thumbnails = [];
+    $catrobat_project_thumbnails = [];
     foreach ($remix_graph_data['catrobatNodes'] as $node_id) {
       if (!array_key_exists($node_id, $remix_graph_data['catrobatNodesData'])) {
-        $catrobat_program_thumbnails[$node_id] = '/images/default/not_available.png';
+        $catrobat_project_thumbnails[$node_id] = '/images/default/not_available.png';
         continue;
       }
-      $catrobat_program_thumbnails[$node_id] = '/'.$this->screenshot_repository
+      $catrobat_project_thumbnails[$node_id] = '/'.$this->screenshot_repository
         ->getThumbnailWebPath($node_id)
       ;
     }
@@ -52,7 +54,7 @@ class RemixController extends AbstractController
     return new JsonResponse([
       'id' => $id,
       'remixGraph' => $remix_graph_data,
-      'catrobatProgramThumbnails' => $catrobat_program_thumbnails,
+      'catrobatProgramThumbnails' => $catrobat_project_thumbnails,
     ]);
   }
 }

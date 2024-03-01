@@ -22,15 +22,15 @@ class FeaturedController extends AbstractController
    * @throws NonUniqueResultException
    */
   #[Route(path: '/api/projects/ios-featured.json', name: 'api_ios_featured_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function getFeaturedIOSProgramsAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): JsonResponse
+  public function getFeaturedIOSProjectsAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): JsonResponse
   {
-    return $this->getFeaturedPrograms($request, true, $image_repository, $repository);
+    return $this->getFeaturedProjects($request, true, $image_repository, $repository);
   }
 
   /**
    * @throws NonUniqueResultException
    */
-  private function getFeaturedPrograms(Request $request, bool $ios_only, ImageRepository $image_repository,
+  private function getFeaturedProjects(Request $request, bool $ios_only, ImageRepository $image_repository,
     FeaturedRepository $repository): JsonResponse
   {
     $flavor = $request->attributes->get('flavor');
@@ -44,13 +44,13 @@ class FeaturedController extends AbstractController
       $platform = 'ios';
     }
 
-    $featured_programs = $repository->getFeaturedPrograms($flavor, $limit, $offset, $platform);
+    $featured_projects = $repository->getFeaturedPrograms($flavor, $limit, $offset, $platform);
     $numbOfTotalProjects = $repository->getFeaturedProgramCount($flavor, $ios_only);
 
     $retArray = [];
     $retArray['CatrobatProjects'] = [];
-    foreach ($featured_programs as $featured_program) {
-      $retArray['CatrobatProjects'][] = $this->generateProgramObject($featured_program, $image_repository);
+    foreach ($featured_projects as $featured_project) {
+      $retArray['CatrobatProjects'][] = $this->generateProjectObject($featured_project, $image_repository);
     }
     $retArray['preHeaderMessages'] = '';
     $retArray['CatrobatInformation'] = [
@@ -62,22 +62,22 @@ class FeaturedController extends AbstractController
     return new JsonResponse($retArray);
   }
 
-  private function generateProgramObject(FeaturedProgram $featured_program, ImageRepository $image_repository): array
+  private function generateProjectObject(FeaturedProgram $featured_project, ImageRepository $image_repository): array
   {
-    $new_program = [];
-    $new_program['ProjectId'] = $featured_program->getProgram()->getId();
-    $new_program['ProjectName'] = $featured_program->getProgram()->getName();
-    $new_program['Author'] = $featured_program->getProgram()
+    $new_project = [];
+    $new_project['ProjectId'] = $featured_project->getProgram()->getId();
+    $new_project['ProjectName'] = $featured_project->getProgram()->getName();
+    $new_project['Author'] = $featured_project->getProgram()
       ->getUser()
       ->getUserIdentifier()
     ;
 
-    $new_program['FeaturedImage'] = $image_repository->getWebPath(
-      $featured_program->getId(),
-      $featured_program->getImageType(),
+    $new_project['FeaturedImage'] = $image_repository->getWebPath(
+      $featured_project->getId(),
+      $featured_project->getImageType(),
       true
     );
 
-    return $new_program;
+    return $new_project;
   }
 }

@@ -41,7 +41,7 @@ country: நாடு
 loginText: உள்நுழைவு
 privacyPolicy: சுய செயலிட கொள்கை
 imprint: அச்சிடு
-programDetails: விவரங்கள்
+projectDetails: விவரங்கள்
 somethingWentWrong: 'ஐய்யோ! ஏதோ தவறாய் நிகழ்ந்து விட்டது.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'தயவுசெய்து மீண்டும் முயற்சிக்கவும்!'
@@ -94,114 +94,116 @@ follower:
   unfollowError: "விரும்பிய பயனரைப் பின்தொடர்வதில் இருந்து பின்வாங்க முடியவில்லை!"
   unfollowQuestion: "நீங்கள் இப் பயனரைப் பின்தொடர்வதில் இருந்து உறுதியாக பின்வாங்க விரும்புகிறீர்களா?"
   unfollowButton: "%username%-ஐ பின்தொடருவதில் இருந்து பின்வாங்கு"
-programs:
+project:
   welcome:
-    title: காட்ரோபாட்டின் %theme% -இற்கு நல்வரவு
-    title_mindstorms: மைண்ட்ஸ்டார்ம்ஸ் EV3 மற்றும் NXT க்கான கேட்ரோபாட்டின் தளத்திற்கு வருக
-    subtitle: கதைகள், விளையாட்டுகள், மற்றும் பலவற்றை உருவாக்குங்கள்...
-    subtitle_embroidery: உங்கள் டி-ஷர்ட்கள், பைகள், பேன்ட் அல்லது ஸ்மார்ட்போன் வழக்கில் உங்கள் சொந்த வடிவங்களை தைக்கவும்!
-    subtitle_mindstorms: உங்கள் லெகோ மைண்ட்ஸ்டார்ம்ஸ் EV3 மற்றும் NXT ரோபோக்களுடன் உங்கள் சொந்த திட்டங்களை உருவாக்கவும்
-    download: செயலியை பதிவிறக்கவும்
-    statistics: மேற்கொண்ட புள்ளிவிவரங்கள்
-  featured: சிறப்பு
-  example: சான்றுகள்
-  newest: புதிய திட்டங்கள்
-  recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
-  scratchremixes: Scratch மறுகலவைகள்
-  noPrograms: தற்போது திட்டங்கள் எதுவும் இல்லை.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: செயல்திட்டத்தை நீக்கு
   deleteConfirmation: |+
-    நீ சொல்வது உறுதியா?
-    %programName% ஐ நீக்க விரும்புகிறீர்களா?
-    உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
-    ஆம், அதை நீக்கு!
-    ரத்து
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    நீங்கள் உறுதியாக இருக்கிரீர்களா?
-    நீங்கள் '%programName%' ஐ தனிப்பட்டதாக அமைத்தால், அது பிற பயனர்களால் பார்க்கப்படாது அல்லது கண்டறியப்படாது.
-    உங்கள் திட்டத்தின் இணைப்பை உங்கள் நண்பர்களுடன் பகிர்ந்து கொள்ளலாம். பேட்லாக் ஐகானைத் தட்டுவதன் தெரிவுநிலையை நீங்கள் மாற்றலாம்.
-    நீங்கள் "%programName%" ஐ பொதுவில் அமைத்தால், அதை மற்ற பயனர்கள் காணலாம்.
-    ஆம், பொதுவில் அமைக்கவும்
-    ஆம், தனிப்பட்டதாக அமைக்கவும்
-    இல்லை
-  reportCommentConfirmation: உறுதியாக இந்த கருத்தை புகாரளிக்க வேண்டுமா?
-  deleteCommentConfirmation: உறுதியாக இந்த கருத்தை அழிக்க வேண்டுமா?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    கணக்கு நீக்கம்?
-    உங்கள் கணக்கை நீக்க விரும்புகிறீர்களா? இது உங்கள் பதிவேற்றிய திட்டங்களையும் கருத்துகளையும் நீக்கும்!
-    உங்கள் செயல்களை மீட்டெடுக்க வழி இல்லை!
-    ஆம், அழித்துவிடு!
-    ரத்து
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: திட்ட விளக்கம் மிக நீளமாக உள்ளது!
-  tooLongCredits: திட்ட நன் மதிப்ப மிக நீளமாக உள்ளது!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: அதிகமாக பார்க்கபட்டது
     downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
-  random: தொடர்பின்றி எடுக்கப்பட்ட திட்டங்கள்
-  related: தொடர்புடைய திட்டங்கள்
-  downloads: '%downloads% பதிவிறக்கங்கள்'
-  sample: எடுத்துக்காட்டு திட்டங்கள்
-  views: '%views% பார்வைகள்'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "அத்‌ திட்டப்பணியிற்கு மறுமொழிந்த நபர்கள்"
+    likersTitle: "People who reacted to that project"
     all: "அனைத்தும்"
-  remixes: '{0}0 ரீமிக்ஸ் |{1}1 ரீமிக்ஸ் |]1,Inf]%remixes% ரீமிக்ஸ்'
-  newRemixesNotificationTitle: '|{1}"%programName%" இல் 1 புதிய ரீமிக்ஸ் உள்ளது: |]1,Inf] "%programName%" இல் %remixes% புதிய ரீமிக்ஸ் உள்ளது:'
-  submitted: சமர்ப்பிக்கப்பட்ட திட்டங்கள்
-  uploaded: பதிவேற்றப்பட்டத் திட்டங்கள்
-  reportAsInappropriate: பொருத்தமற்றது என அறிவி
-  reportProgram: திட்டம் அறிக்கை
-  languageVersion: 'கேட்ரோபாட் மொழி பதிப்பு: %languageVersion%'
-  reportLoginText: தயவுகூர்ந்து இந்த திட்டத்தைப் புகாரளிக்க %login%.
-  reportDialogHeader: இந்த திட்டத்தை ஏன் புகாரளிக்க விரும்புகிறீர்கள்?
-  reportDialogReason: காரணத்தை பதிவிடவும்
-  reportRadioButtonInappropriate: அது பொருத்தமற்றது
-  reportRadioButtonCopyright: பதிப்புரிமை மீறல்
-  reportRadioButtonSpam: அது தேவையற்றது
-  reportRadioButtonDislike: எனக்கு அது பிடிக்கவில்லை
-  reportOwnProgram: உங்கள் சொந்த திட்டத்தை நீங்களே குறியிட இயலாது.
-  reportAlready: இந்த திட்டத்தை நீங்கள் ஏற்கனவே கொடியிட்டுள்ளீர்கள்.
-  reportDone: நீங்கள் இந்த திட்டத்தைப் புகாரளித்தீர்கள்!
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: செயலியை புதுபிக்கவும்
-  updateAppText: இந்த ப்ரொக்ராமை பதிவிறக்கம் செய்ய தயவுசெய்து உங்கள் செயலியை புதிய பதிப்பிற்கு புதுபிக்கவும்.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: ஆம்
-  checkout_this_program: இந்த Catrobat திட்டத்தைப் பாருங்கள்
-  show_more: மேலும் காட்டவும்
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: பின்கருத்துக்கள்
-  send: அனுப்பு
+  send: Send
   delete: அழித்துவிடு
   report: அறிக்கையிடு
-  report_popup: உங்கள் கருத்து வெற்றிகரமாக அளிக்கபட்டது.
-  report_popup_header: புகாரளிக்கப்பட்டது
-  deleted_popup: உங்கள் கருத்து வெற்றிகரமாக நீக்கப்பட்டது.
-  deleted_popup_header: நீக்கப்பட்டது
-  noAdminRights: உங்களுக்கு நிர்வாக உரிமைகள் இல்லை. நிர்வாகியாக உள்நுழைக.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: மாற்றங்களைச் சேமிக்க விரும்புகிறீர்களா?
   btnDiscard: புறக்கணி
-  addComment: தங்கள் கருத்தை பகிரவும்
-  thumbsUp: வெற்றி!
-  smile: புன்னகைக்கவும்!
-  love: அன்பு!
-  wow: அடடே!
-  linkTitle: இணைப்பு
-  link: திட்ட இணைப்பை கிளிப்போர்டுக்கு நகலெடுக்கவும்
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: மறுமொழிகள்
-  downloadErrorText: திட்டப்பணியைப் பதிவு இறக்கும் போது பிழை நிகழ்ந்தது. தயவுசெய்து பிறகு மீண்டும் முயற்சிக்கவும்.
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: மொழிபெயர்ப்பைக் காட்டு
-  hideTranslation: மொழிபெயர்ப்பை மறை
-  translatedByLine: '%sourceLanguage%-இல் இருந்து %targetLanguage%-இற்கு %provider%-ஆல் மொழிபெயர்க்கப்பட்டுள்ளது'
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: இயல்புநிலை
@@ -220,10 +222,10 @@ remixGraph:
   by: 'மூலம்'
   open: 'திறந்த'
   showPaths: 'பாதைகளைக் காட்டு'
-  programNotAvailableErrorTitle: 'மன்னிக்கவும்...'
-  programNotAvailableErrorDescription: 'திட்டம் இனி இல்லை!'
-  programNotAvailable: 'கிடைக்கவில்லை'
-  programUnknownUser: 'தெரியாத பயனர்'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
      வாழ்த்துக்கள், <br>
      உங்கள் கேட்ரோபாட் குழு.
      </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: உங்கள் கேட்ரோபாட் கடவுச்சொல் மீட்பு
   message: |
@@ -400,6 +424,8 @@ menu:
   followersAndFollowing: பின்பற்றுபவர்
   mediaLibrary: ஊடக நூலகம்
   studio: Studios
+  language: மொழி
+  languageOptionsNotAvailable: No language options available.
 login:
   login: உள்நுழை
   button:
@@ -453,6 +479,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -501,12 +532,12 @@ errors:
   unknown: அறியப்படாத பிழை
   token: 'சாதனத்தின் அங்கீகாரம் தோல்வியுற்றது: தவறான அங்கீகார டோக்கன்!'
   uploadTokenAuthFailed: 'டோக்கன் பதிவேற்ற அங்கீகாரம் தோல்வியுற்றது.'
-  program:
-    invalid: தவறான திட்டம்.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'மன்னிக்கவும், உங்கள் திட்டத்தில் கேட்ரோபாட் மொழியின் பழைய பதிப்பு உள்ளது! பாக்கெட் குறியீட்டின் சமீபத்திய பதிப்பைப் பயன்படுத்துகிறீர்களா?'
-  programversion:
-    tooold: 'மன்னிக்கவும், நீங்கள் பாக்கெட் குறியீட்டின் பழைய பதிப்பைப் பயன்படுத்துகிறீர்கள். சமீபத்திய பதிப்பிற்கு புதுப்பிக்கவும்.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: அங்கீகரிப்பு தோல்வியுற்றது
     webview: |
@@ -711,8 +742,8 @@ catro-notifications:
     message: 'பயனர் %user_link% உங்கள் %program_link% திட்டத்திர்க்கு லைக் செய்தார்.'
   follow:
     message: 'பயனர் %user_link% இப்போது உங்களைப் பின்தொடர்கிறார்.'
-  program-upload:
-    message: 'பயனர் %user_link% ஒரு புதிய திட்டத்தை %program_link% உருவாக்கிநார்'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -757,13 +788,14 @@ checkOutUser: 'Check out this user:'
 community: 'கற்றோபாட்டுச் சமூகம்'
 back_to_app: 'சமூகத்திலிருந்து வெளியேறு'
 category:
-  recent: புதிய திட்டங்கள்
-  random: தொடர்பின்றி எடுக்கப்பட்ட திட்டங்கள்
+  recent: Newest projects
+  random: Random projects
   most_viewed: அதிகமாக பார்க்கபட்டது
   most_downloaded: மிகவும் அதிகம்மாகப் பதிவிறக்கம் செய்யப்பட்டது
   example: உதாரணம்
-  scratch: Scratch மறுகலவைகள்
-  recommended: பரிந்துரைக்கப்பட்ட திட்டங்கள்
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'சாதனைகள்'
@@ -859,7 +891,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'தவிர்'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'அறிக்கையிடு'
@@ -868,6 +902,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'மேலும் காட்ட'
     showLess: 'குறைவாக காட்டு'
@@ -876,6 +911,11 @@ studio:
     remove_project_success: 'ஸ்டுடியோவிலிருந்து திட்டம் வெற்றிகரமாக அகற்றப்பட்டது!'
     no_projects: 'ஸ்டுடியோவில் இதுவரை எந்த திட்டமும் இல்லை'
     updateCoverError: 'ஸ்டுடியோ அட்டையைப் புதுப்பிக்கும் போது ஏதோ தவறு ஏற்பட்டது!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'அறிக்கையிடு'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'திட்டங்கள்'
     comments:
@@ -917,3 +957,12 @@ media_library:
       default: 'வகை: தெரியவில்லை'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

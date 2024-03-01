@@ -1,7 +1,7 @@
 Feature:
 
   Background:
-    Given there are programs:
+    Given there are projects:
       | name              | apk_status | visible | id |
       | Galaxy War        | none       | true    | 1  |
       | My little program | pending    | true    | 2  |

@@ -2,6 +2,7 @@
 
 namespace App\System\Testing\Behat\Context;
 
+use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -12,6 +13,7 @@ use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\Survey;
 use App\DB\Entity\Translation\CommentMachineTranslation;
@@ -44,8 +46,8 @@ class DataFixturesContext implements Context
 {
   use ContextTrait;
 
-  private array $programs = [];
-  private array $featured_programs = [];
+  private array $projects = [];
+  private array $featured_projects = [];
   private array $media_files = [];
   private array $users = [];
 
@@ -266,22 +268,79 @@ class DataFixturesContext implements Context
     $em->flush();
     $this->getManager()->flush();
   }
+  // -------------------------------------------------------------------------------------------------------------------
+  //
+  // -------------------------------------------------------------------------------------------------------------------
 
+  /**
+   * @Given /^there are studio join requests:$/
+   */
+  public function thereAreStudioJoinRequests(TableNode $table): void
+  {
+    $em = $this->getManager();
+
+    foreach ($table->getHash() as $joinRequestConfig) {
+      /** @var User|null $user */
+      $user = $this->getUserManager()->findUserByUsername($joinRequestConfig['User']);
+      if (!$user) {
+        throw new \RuntimeException('User not found: '.$joinRequestConfig['User']);
+      }
+      $studio = $this->getStudioManager()->findStudioByName($joinRequestConfig['Studio']);
+      if (!$studio) {
+        throw new \RuntimeException('Studio not found: '.$joinRequestConfig['Studio']);
+      }
+      $joinRequest = new StudioJoinRequest();
+      $joinRequest->setUser($user);
+      $joinRequest->setStudio($studio);
+      $joinRequest->setStatus($joinRequestConfig['Status']);
+      $em->persist($joinRequest);
+    }
+
+    $em->flush();
+  }
+
+  // -------------------------------------------------------------------------------------------------------------------
+  //  MaintenanceInformation
+  // -------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @Given /^there are maintenance information:$/
+   */
+  public function thereAreMaintenanceInformation(TableNode $table): void
+  {
+    $em = $this->getManager();
+    foreach ($table->getHash() as $maintenanceinformation_config) {
+      $maintenanceInformation = new MaintenanceInformation();
+      $maintenance_start = $maintenanceinformation_config['Maintenance Start'];
+      $format = 'Y-m-d';
+      $date = \DateTime::createFromFormat($format, $maintenance_start);
+      $maintenanceInformation->setLtmMaintenanceStart($date);
+      $maintenance_end = $maintenanceinformation_config['Maintenance End'];
+      $date = \DateTime::createFromFormat($format, $maintenance_end);
+      $maintenanceInformation->setLtmMaintenanceEnd($date);
+      $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
+      $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
+      $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
+      $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
+      $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
+      $em->persist($maintenanceInformation);
+    }
+    $em->flush();
+  }
   // -------------------------------------------------------------------------------------------------------------------
   //  Projects
   // -------------------------------------------------------------------------------------------------------------------
 
   /**
-   * @Given /^there are programs:$/
    * @Given /^there are projects:$/
    *
    * @throws \Exception
    */
-  public function thereArePrograms(TableNode $table): void
+  public function thereAreProjects(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $program = $this->insertProject($config, false);
-      $this->programs[] = $program;
+      $inserted_project = $this->insertProject($config, false);
+      $this->projects[] = $inserted_project;
     }
     $this->getManager()->flush();
   }
@@ -304,21 +363,21 @@ class DataFixturesContext implements Context
   public function thereAreNumberOfSimilarProjects(mixed $num_of_projects): void
   {
     for ($project = 1; $project <= $num_of_projects; ++$project) {
-      $program_info = ['name' => 'basic '.$project];
-      $program = $this->insertProject($program_info, false);
-      $this->programs[] = $program;
+      $project_info = ['name' => 'basic '.$project];
+      $inserted_project = $this->insertProject($project_info, false);
+      $this->projects[] = $inserted_project;
     }
     $this->getManager()->flush();
   }
 
-  public function getPrograms(): array
+  public function getProjects(): array
   {
-    return $this->programs;
+    return $this->projects;
   }
 
-  public function getFeaturedPrograms(): array
+  public function getFeaturedProjects(): array
   {
-    return $this->featured_programs;
+    return $this->featured_projects;
   }
 
   public function getMediaFiles(): array
@@ -340,44 +399,39 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given /^there are downloadable programs:$/
    * @Given /^there are downloadable projects:$/
    *
    * @throws \Exception
    */
-  public function thereAreDownloadablePrograms(TableNode $table): void
+  public function thereAreDownloadableProjects(TableNode $table): void
   {
     $file_repo = $this->getFileRepository();
     foreach ($table->getHash() as $config) {
-      $program = $this->insertProject($config, false);
-      $file_repo->saveProjectZipFile(new File($this->FIXTURES_DIR.'test.catrobat'), $program->getId());
+      $project = $this->insertProject($config, false);
+      $file_repo->saveProjectZipFile(new File($this->FIXTURES_DIR.'test.catrobat'), $project->getId());
     }
     $this->getManager()->flush();
   }
 
   /**
-   * @Given /^there are featured programs:$/
    * @Given /^there are featured projects:$/
-   * @Given /^following programs are featured:$/
    * @Given /^following projects are featured:$/
    */
-  public function thereAreFeaturedPrograms(TableNode $table): void
+  public function thereAreFeaturedProjects(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      /** @var FeaturedProgram $program */
-      $program = $this->insertFeaturedProject($config, false);
-      $this->featured_programs[] = $program;
+      /** @var FeaturedProgram $project */
+      $project = $this->insertFeaturedProject($config, false);
+      $this->featured_projects[] = $project;
     }
     $this->getManager()->flush();
   }
 
   /**
-   * @Given /^there are example programs:$/
    * @Given /^there are example projects:$/
-   * @Given /^following programs are examples:$/
    * @Given /^following projects are examples:$/
    */
-  public function thereAreExamplePrograms(TableNode $table): void
+  public function thereAreExampleProjects(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
       $this->insertExampleProject($config, false);
@@ -386,12 +440,11 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given /^there are programs with a large description:$/
    * @Given /^there are projects with a large description:$/
    *
    * @throws \Exception
    */
-  public function thereAreProgramsWithALargeDescription(TableNode $table): void
+  public function thereAreProjectsWithALargeDescription(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
       $config['description'] = str_repeat('10 chars !', 950).'the end of the description';
@@ -401,11 +454,11 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given /^I have a program "([^"]*)" with id "([^"]*)"$/
+   * @Given /^I have a project "([^"]*)" with id "([^"]*)"$/
    *
    * @throws \Exception
    */
-  public function iHaveAProgramWithId(mixed $name, mixed $id): void
+  public function iHaveAProjectWithId(mixed $name, mixed $id): void
   {
     $config = [
       'id' => $id,
@@ -418,48 +471,48 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given /^program "([^"]*)" is not visible$/
+   * @Given /^project "([^"]*)" is not visible$/
    */
-  public function programIsNotVisible(mixed $program_name): void
+  public function projectIsNotVisible(mixed $project_name): void
   {
-    $program = $this->getProgramManager()->findOneByName($program_name);
-    Assert::assertNotNull($program, 'There is no program named '.$program_name);
-    $program->setVisible(false);
-    $this->getManager()->persist($program);
+    $project = $this->getProjectManager()->findOneByName($project_name);
+    Assert::assertNotNull($project, 'There is no project named '.$project_name);
+    $project->setVisible(false);
+    $this->getManager()->persist($project);
     $this->getManager()->flush();
   }
 
   /**
-   * @Then /^there should be "([^"]*)" programs in the database$/
+   * @Then /^there should be "([^"]*)" projects in the database$/
    */
-  public function thereShouldBeProgramsInTheDatabase(mixed $number_of_projects): void
+  public function thereShouldBeProjectsInTheDatabase(mixed $number_of_projects): void
   {
-    $programs = $this->getProgramManager()->findAll();
-    Assert::assertCount($number_of_projects, $programs);
+    $projects = $this->getProjectManager()->findAll();
+    Assert::assertCount($number_of_projects, $projects);
   }
 
   /**
-   * @Then /^the program should not be tagged$/
+   * @Then /^the project should not be tagged$/
    */
-  public function theProgramShouldNotBeTagged(): void
+  public function theProjectShouldNotBeTagged(): void
   {
-    $program_tags = $this->getProgramManager()->findAll()[0]->getTags();
-    Assert::assertEmpty($program_tags, 'The program is tagged but should not be tagged');
+    $project_tags = $this->getProjectManager()->findAll()[0]->getTags();
+    Assert::assertEmpty($project_tags, 'The project is tagged but should not be tagged');
   }
 
   /**
-   * @Then /^the program should be tagged with "([^"]*)" in the database$/
+   * @Then /^the project should be tagged with "([^"]*)" in the database$/
    */
-  public function theProgramShouldBeTaggedWithInTheDatabase(mixed $arg1): void
+  public function theProjectShouldBeTaggedWithInTheDatabase(mixed $arg1): void
   {
-    $program_tags = $this->getProgramManager()->findAll()[0]->getTags() ?? [];
+    $project_tags = $this->getProjectManager()->findAll()[0]->getTags() ?? [];
     $tags = explode(',', (string) $arg1);
-    Assert::assertEquals(count($tags), is_countable($program_tags) ? count($program_tags) : 0, 'Too much or too less tags found!');
+    Assert::assertEquals(count($tags), is_countable($project_tags) ? count($project_tags) : 0, 'Too much or too less tags found!');
 
-    foreach ($program_tags as $program_tag) {
-      /* @var Tag $program_tag */
+    foreach ($project_tags as $project_tag) {
+      /* @var Tag $project_tag */
       Assert::assertTrue(
-        in_array($program_tag->getInternalTitle(), $tags, true), 'The tag is not found!'
+        in_array($project_tag->getInternalTitle(), $tags, true), 'The tag is not found!'
       );
     }
   }
@@ -469,9 +522,9 @@ class DataFixturesContext implements Context
    */
   public function theProjectShouldHaveNoExtension(): void
   {
-    /** @var Program $program */
-    $program = $this->getProgramManager()->findAll()[0];
-    Assert::assertNotNull($program->getExtensions());
+    /** @var Program $project */
+    $project = $this->getProjectManager()->findAll()[0];
+    Assert::assertNotNull($project->getExtensions());
   }
 
   /**
@@ -479,10 +532,10 @@ class DataFixturesContext implements Context
    */
   public function theProjectShouldHaveDownloads(mixed $id, mixed $downloads): void
   {
-    /** @var Program $program */
-    $program = $this->getProgramManager()->find($id);
-    $this->getManager()->refresh($program);
-    Assert::assertEquals($downloads, $program->getDownloads());
+    /** @var Program $project */
+    $project = $this->getProjectManager()->find($id);
+    $this->getManager()->refresh($project);
+    Assert::assertEquals($downloads, $project->getDownloads());
   }
 
   /**
@@ -490,8 +543,8 @@ class DataFixturesContext implements Context
    */
   public function theProjectWithNameShouldHaveTags(string $name, int $number_of_tags): void
   {
-    $program = $this->getProgramManager()->findOneByName($name);
-    Assert::assertCount($number_of_tags, $program->getTags());
+    $project = $this->getProjectManager()->findOneByName($name);
+    Assert::assertCount($number_of_tags, $project->getTags());
   }
 
   /**
@@ -499,74 +552,74 @@ class DataFixturesContext implements Context
    */
   public function theProjectWithNameShouldHaveExtensions(string $name, int $number_of_extensions): void
   {
-    $program = $this->getProgramManager()->findOneByName($name);
-    Assert::assertCount($number_of_extensions, $program->getExtensions());
+    $project = $this->getProjectManager()->findOneByName($name);
+    Assert::assertCount($number_of_extensions, $project->getExtensions());
   }
 
   /**
-   * @Then the embroidery program should have the :extension extension
+   * @Then the embroidery project should have the :extension file extension
    */
-  public function theEmbroideryProgramShouldHaveTheExtension(mixed $extension): void
+  public function theEmbroideryProjectShouldHaveTheExtension(mixed $extension): void
   {
-    $program_extensions = $this->getProgramManager()->findOneByName('ZigZag Stich')->getExtensions();
+    $project_extensions = $this->getProjectManager()->findOneByName('ZigZag Stich')->getExtensions();
 
-    Assert::assertNotNull($program_extensions);
+    Assert::assertNotNull($project_extensions);
 
-    foreach ($program_extensions as $program_extension) {
-      /* @var $program_extension Extension */
-      Assert::assertStringContainsString($program_extension->getInternalTitle(), $extension, 'The Extension was not found!');
+    foreach ($project_extensions as $project_extension) {
+      /* @var $project_extension Extension */
+      Assert::assertStringContainsString($project_extension->getInternalTitle(), $extension, 'The Extension was not found!');
     }
   }
 
   /**
-   * @Then the program with id :arg1 should be marked with :arg2 extensions in the database
+   * @Then the project with id :arg1 should be marked with :arg2 extensions in the database
    */
-  public function theProgramShouldBeMarkedWithExtensionsInTheDatabase(mixed $id, mixed $count): void
+  public function theProjectShouldBeMarkedWithExtensionsInTheDatabase(mixed $id, mixed $count): void
   {
-    $project = $this->getProgramManager()->find($id);
+    $project = $this->getProjectManager()->find($id);
     $this->getManager()->refresh($project);
-    $program_extensions = $project->getExtensions();
-    Assert::assertNotNull($program_extensions);
-    Assert::assertCount($count, $program_extensions, 'Too much or too less extensions found!');
+    $project_extensions = $project->getExtensions();
+    Assert::assertNotNull($project_extensions);
+    Assert::assertCount($count, $project_extensions, 'Too much or too less extensions found!');
   }
 
   /**
-   * @Then /^the program should be flagged as phiro$/
+   * @Then /^the project should be flagged as phiro$/
    */
-  public function theProgramShouldBeFlaggedAsPhiroPro(): void
+  public function theProjectShouldBeFlaggedAsPhiroPro(): void
   {
-    $program_manager = $this->getProgramManager();
-    $program = $program_manager->find('1');
-    Assert::assertNotNull($program, 'No program added');
-    Assert::assertEquals('phirocode', $program->getFlavor(), 'Program is NOT flagged as phiro');
+    $project_manager = $this->getProjectManager();
+    $project = $project_manager->find('1');
+    Assert::assertNotNull($project, 'No project added');
+    Assert::assertEquals('phirocode', $project->getFlavor(), 'Project is NOT flagged as phiro');
   }
 
   /**
-   * @Then /^the program should not be flagged as phiro$/
+   * @Then /^the project should not be flagged as phiro$/
    */
-  public function theProgramShouldNotBeFlaggedAsPhiroPro(): void
+  public function theProjectShouldNotBeFlaggedAsPhiroPro(): void
   {
-    $program_manager = $this->getProgramManager();
-    $program = $program_manager->find('1');
-    Assert::assertNotNull($program, 'No program added');
-    Assert::assertNotEquals('phirocode', $program->getFlavor(), 'Program is flagged as a phiro');
+    $project_manager = $this->getProjectManager();
+    $project = $project_manager->find('1');
+    Assert::assertNotNull($project, 'No project added');
+    Assert::assertNotEquals('phirocode', $project->getFlavor(), 'Project is flagged as a phiro');
   }
 
   /**
-   * @Given /^I have a program "([^"]*)" with id "([^"]*)" and a vibrator brick$/
+   * @Given /^I have a project "([^"]*)" with id "([^"]*)" and a vibrator brick$/
    *
    * @throws \Exception
    */
-  public function iHaveAProgramWithIdAndAVibratorBrick(mixed $name, mixed $id): void
+  public function iHaveAProjectWithIdAndAVibratorBrick(mixed $name, mixed $id): void
   {
     MyUuidGenerator::setNextValue($id);
     $config = [
       'name' => $name,
     ];
-    $program = $this->insertProject($config);
+    $project = $this->insertProject($config);
 
     $this->getFileRepository()->saveProjectZipFile(
-      new File($this->FIXTURES_DIR.'GeneratedFixtures/phiro.catrobat'), $program->getId()
+      new File($this->FIXTURES_DIR.'GeneratedFixtures/phiro.catrobat'), $project->getId()
     );
   }
 
@@ -768,7 +821,7 @@ class DataFixturesContext implements Context
   public function thereAreLikes(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $this->insertProgramLike($config, false);
+      $this->insertProjectLike($config, false);
     }
     $this->getManager()->flush();
   }
@@ -838,7 +891,7 @@ class DataFixturesContext implements Context
     $em = $this->getManager();
 
     foreach ($table->getHash() as $data) {
-      $project = $this->getProgramManager()->find($data['project']);
+      $project = $this->getProjectManager()->find($data['project']);
       if (null === $project) {
         throw new \Exception('Project with id '.$data['project'].' does not exist.');
       }
@@ -902,22 +955,22 @@ class DataFixturesContext implements Context
           /** @var User $liker */
           $liker = $this->getUserManager()->find($notification['like_from']);
 
-          $program = $this->getProgramManager()->find($notification['program_id']);
-          $to_create = new LikeNotification($user, $liker, $program);
+          $project = $this->getProjectManager()->find($notification['project_id']);
+          $to_create = new LikeNotification($user, $liker, $project);
           break;
-        case 'follow_program':
-          $program = $this->getProgramManager()->find($notification['program_id']);
-          $to_create = new NewProgramNotification($user, $program);
+        case 'follow_project':
+          $project = $this->getProjectManager()->find($notification['project_id']);
+          $to_create = new NewProgramNotification($user, $project);
           break;
         case 'broadcast':
           $to_create = new BroadcastNotification($user, 'title_deprecated', $notification['message']);
           break;
         case 'remix':
-          /** @var Program $parent_program */
-          $parent_program = $this->getProgramManager()->find($notification['parent_program']);
-          /** @var Program $child_program */
-          $child_program = $this->getProgramManager()->find($notification['child_program']);
-          $to_create = new RemixNotification($user, $parent_program->getUser(), $parent_program, $child_program);
+          /** @var Program $parent_project */
+          $parent_project = $this->getProjectManager()->find($notification['parent_project']);
+          /** @var Program $child_project */
+          $child_project = $this->getProjectManager()->find($notification['child_project']);
+          $to_create = new RemixNotification($user, $parent_project->getUser(), $parent_project, $child_project);
           break;
         default:
           $to_create = new CatroNotification($user, $notification['title'], $notification['message']);
@@ -973,16 +1026,16 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Given /^there are "([^"]*)" "([^"]*)" notifications for program "([^"]*)" from "([^"]*)"$/
+   * @Given /^there are "([^"]*)" "([^"]*)" notifications for project "([^"]*)" from "([^"]*)"$/
    */
-  public function thereAreSpecificNotificationsFor(mixed $amount, mixed $type, mixed $program_name, mixed $user): void
+  public function thereAreSpecificNotificationsFor(mixed $amount, mixed $type, mixed $project_name, mixed $user): void
   {
     $em = $this->getManager();
 
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($user);
 
-    $program = $this->getProgramManager()->findOneByName($program_name);
+    $project = $this->getProjectManager()->findOneByName($project_name);
 
     Assert::assertNotNull($user, 'user is null');
 
@@ -993,20 +1046,20 @@ class DataFixturesContext implements Context
           $temp_comment->setUsername($user->getUserIdentifier());
           $temp_comment->setUser($user);
           $temp_comment->setText('This is a comment');
-          $temp_comment->setProgram($program);
+          $temp_comment->setProgram($project);
           $temp_comment->setUploadDate(date_create());
           $temp_comment->setIsReported(false);
           $em->persist($temp_comment);
-          $to_create = new CommentNotification($program->getUser(), $temp_comment);
+          $to_create = new CommentNotification($project->getUser(), $temp_comment);
           $em->persist($to_create);
           break;
 
         case 'like':
-          $to_create = new LikeNotification($program->getUser(), $user, $program);
+          $to_create = new LikeNotification($project->getUser(), $user, $project);
           $em->persist($to_create);
           break;
         case 'remix':
-          $to_create = new RemixNotification($program->getUser(), $user, $program, $program);
+          $to_create = new RemixNotification($project->getUser(), $user, $project, $project);
           $em->persist($to_create);
           break;
         case 'catro notifications':
@@ -1050,19 +1103,22 @@ class DataFixturesContext implements Context
         MyUuidGenerator::setNextValue($config['id']);
       }
 
+      $isPublic = filter_var($config['is_public'] ?? true, FILTER_VALIDATE_BOOLEAN);
+
       $studio = (new Studio())
         ->setName($config['name'])
         ->setDescription($config['description'] ?? '')
         ->setAllowComments($config['allow_comments'] ?? true)
-        ->setIsPublic($config['is_public'] ?? true)
+        ->setIsPublic($isPublic)
         ->setIsEnabled($config['is_enabled'] ?? true)
         ->setCreatedOn(isset($config['created_on']) ?
-          new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
-          new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
+            new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
+            new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
         )
       ;
       $this->getManager()->persist($studio);
     }
+
     $this->getManager()->flush();
   }
 
@@ -1120,7 +1176,7 @@ class DataFixturesContext implements Context
       }
 
       $studio = $this->getStudioManager()->findStudioById($config['studio_id']);
-      $project = $this->getProgramManager()->findOneByName($config['project']);
+      $project = $this->getProjectManager()->findOneByName($config['project']);
       /** @var User|null $user */
       $user = $this->getUserManager()->findUserByUsername($config['user']);
 
@@ -1376,7 +1432,7 @@ class DataFixturesContext implements Context
   public function thereAreProjectMachineTranslations(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $project = $this->getProgramManager()->find($config['project_id']);
+      $project = $this->getProjectManager()->find($config['project_id']);
       $source_language = $config['source_language'];
       $target_language = $config['target_language'];
       $provider = $config['provider'];
@@ -1491,7 +1547,7 @@ class DataFixturesContext implements Context
   public function thereAreProjectCustomTranslations(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      $project = $this->getProgramManager()->find($config['project_id']);
+      $project = $this->getProjectManager()->find($config['project_id']);
       $language = $config['language'];
       $name = '' === $config['name'] ? null : $config['name'];
       $description = '' === $config['description'] ? null : $config['description'];

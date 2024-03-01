@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class UtilityRequestValidatorTest extends DefaultTestCase
 {
-  protected UtilityRequestValidator|MockObject $object;
+  protected MockObject|UtilityRequestValidator $object;
 
   protected function setUp(): void
   {

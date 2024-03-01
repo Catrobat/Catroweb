@@ -27,8 +27,8 @@ use App\Admin\Projects\ApproveProjects\ApproveProjectsController;
 use App\Admin\Projects\ProjectsAdmin;
 use App\Admin\Projects\ReportedProjects\ReportedProjectsAdmin;
 use App\Admin\Projects\ReportedProjects\ReportedProjectsController;
-use App\Admin\SpecialProjects\ExampleProgramAdmin;
-use App\Admin\SpecialProjects\FeaturedProgramAdmin;
+use App\Admin\SpecialProjects\ExampleProjectAdmin;
+use App\Admin\SpecialProjects\FeaturedProjectAdmin;
 use App\Admin\Statistics\Translation\CommentMachineTranslationAdmin;
 use App\Admin\Statistics\Translation\Controller\CommentMachineTranslationAdminController;
 use App\Admin\Statistics\Translation\Controller\ProjectMachineTranslationAdminController;
@@ -44,6 +44,8 @@ use App\Admin\Tools\Logs\Controller\LogsController;
 use App\Admin\Tools\Logs\LogsAdmin;
 use App\Admin\Tools\Maintenance\MaintainAdmin;
 use App\Admin\Tools\Maintenance\MaintainController;
+use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationAdmin;
+use App\Admin\Tools\MaintenanceInformation\MaintenanceInformationController;
 use App\Admin\Tools\SendMailToUser\SendMailToUserAdmin;
 use App\Admin\Tools\SendMailToUser\SendMailToUserController;
 use App\Admin\Users\ReportedUsers\ReportedUsersAdmin;
@@ -61,7 +63,7 @@ use App\Api\Services\Authentication\JWTTokenRefreshService;
 use App\Api\Services\OverwriteController;
 use App\Api\UserApi;
 use App\Api\UtilityApi;
-use App\Api_deprecated\Listeners\ProgramListSerializerEventSubscriber;
+use App\Api_deprecated\Listeners\ProjectListSerializerEventSubscriber;
 use App\Api_deprecated\Listeners\UploadExceptionEventSubscriber;
 use App\Api_deprecated\OAuth\OAuthService;
 use App\Api_deprecated\Security\ApiTokenAuthenticator;
@@ -73,6 +75,7 @@ use App\Application\Locale\LocaleEventSubscriber;
 use App\Application\Theme\ThemeRequestEventSubscriber;
 use App\Application\Twig\TwigExtension;
 use App\DB\Entity\FeatureFlag;
+use App\DB\Entity\MaintenanceInformation;
 use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
@@ -104,17 +107,17 @@ use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\CatrobatFile\LicenseUpdaterEventSubscriber;
 use App\Project\CatrobatFile\NameValidatorEventSubscriber;
 use App\Project\CatrobatFile\NotesAndCreditsValidatorEventSubscriber;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\CatrobatFile\ProgramFlavorEventSubscriber;
-use App\Project\CatrobatFile\ProgramXmlHeaderValidatorEventSubscriber;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\CatrobatFile\ProjectFlavorEventSubscriber;
+use App\Project\CatrobatFile\ProjectXmlHeaderValidatorEventSubscriber;
 use App\Project\CatrobatFile\VersionValidatorEventSubscriber;
-use App\Project\EventListener\ExampleProgramImageListener;
-use App\Project\EventListener\FeaturedProgramImageListener;
+use App\Project\EventListener\ExampleProjectImageListener;
+use App\Project\EventListener\FeaturedProjectImageListener;
 use App\Project\EventListener\ProjectPostUpdateNotifier;
 use App\Project\EventSubscriber\ProjectDownloadEventSubscriber;
 use App\Project\Extension\ProjectExtensionEventSubscriber;
 use App\Project\Extension\ProjectExtensionManager;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Project\Remix\RemixGraphManipulator;
 use App\Project\Remix\RemixManager;
 use App\Project\Remix\RemixSubgraphManipulator;
@@ -136,7 +139,7 @@ use App\Security\TokenGenerator;
 use App\Storage\ImageRepository;
 use App\Storage\ScreenshotRepository;
 use App\Studio\StudioManager;
-use App\System\Commands\Helpers\RemixManipulationProgramManager;
+use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\System\Log\LoggerProcessor;
 use App\System\Mail\MailerAdapter;
 use App\Translation\CustomTranslationAchievementEventSubscriber;
@@ -238,11 +241,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->alias(\Sonata\UserBundle\Entity\UserManager::class, 'sonata.user.manager.user');
+  $services->alias(Sonata\UserBundle\Entity\UserManager::class, 'sonata.user.manager.user');
 
   $services->alias(UserProviderInterface::class, 'sonata.user.security.user_provider');
 
-  $services->set(ProgramManager::class, ProgramManager::class)
+  $services->set(ProjectManager::class, ProjectManager::class)
     ->public()
   ;
 
@@ -250,7 +253,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set(RemixManipulationProgramManager::class, RemixManipulationProgramManager::class)
+  $services->set(RemixManipulationProjectManager::class, RemixManipulationProjectManager::class)
     ->public()
   ;
 
@@ -317,6 +320,9 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
+  $services->set(MaintenanceInformationController::class, MaintenanceInformationController::class)
+    ->public()
+  ;
   $services->set(ReportedUsersController::class, ReportedUsersController::class)
     ->public()
   ;
@@ -371,7 +377,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set(ProgramFileRepository::class, ProgramFileRepository::class)
+  $services->set(ProjectFileRepository::class, ProjectFileRepository::class)
     ->public()
   ;
 
@@ -512,7 +518,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('kernel.event_subscriber')
   ;
 
-  $services->set(ProgramXmlHeaderValidatorEventSubscriber::class)
+  $services->set(ProjectXmlHeaderValidatorEventSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 
@@ -524,7 +530,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('kernel.event_subscriber')
   ;
 
-  $services->set(ProgramFlavorEventSubscriber::class)
+  $services->set(ProjectFlavorEventSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 
@@ -544,7 +550,7 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('kernel.event_subscriber')
   ;
 
-  $services->set(ProgramListSerializerEventSubscriber::class)
+  $services->set(ProjectListSerializerEventSubscriber::class)
     ->tag('kernel.event_subscriber')
   ;
 
@@ -575,11 +581,11 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set(FeaturedProgramImageListener::class, FeaturedProgramImageListener::class)
+  $services->set(FeaturedProjectImageListener::class, FeaturedProjectImageListener::class)
     ->tag('doctrine.orm.entity_listener')
   ;
 
-  $services->set(ExampleProgramImageListener::class, ExampleProgramImageListener::class)
+  $services->set(ExampleProjectImageListener::class, ExampleProjectImageListener::class)
     ->tag('doctrine.orm.entity_listener')
   ;
 
@@ -624,12 +630,12 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->public()
   ;
 
-  $services->set('admin.block.featured.program', FeaturedProgramAdmin::class)
+  $services->set('admin.block.featured.program', FeaturedProjectAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Featured Projects', 'code' => null, 'model_class' => FeaturedProgram::class, 'controller' => null])
     ->public()
   ;
 
-  $services->set('admin.block.example.program', ExampleProgramAdmin::class)
+  $services->set('admin.block.example.program', ExampleProjectAdmin::class)
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Example Projects', 'code' => null, 'model_class' => ExampleProgram::class, 'controller' => null])
     ->public()
   ;
@@ -728,7 +734,10 @@ return static function (ContainerConfigurator $containerConfigurator): void {
     ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Feature Flag', 'code' => null, 'model_class' => FeatureFlag::class, 'controller' => FeatureFlagController::class])
     ->public()
   ;
-
+  $services->set('admin.block.tools.maintenance_information', MaintenanceInformationAdmin::class)
+    ->tag('sonata.admin', ['manager_type' => 'orm', 'label' => 'Maintenance Information', 'code' => null, 'model_class' => MaintenanceInformation::class, 'controller' => MaintenanceInformationController::class])
+    ->public()
+  ;
   $services->alias(SerializerInterface::class, 'open_api_server.service.serializer');
 
   $services->set('api.media-library', MediaLibraryApi::class)

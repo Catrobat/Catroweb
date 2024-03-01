@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class NotificationsRequestValidatorTest extends DefaultTestCase
 {
-  protected NotificationsRequestValidator|MockObject $object;
+  protected MockObject|NotificationsRequestValidator $object;
 
   protected function setUp(): void
   {

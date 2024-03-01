@@ -18,7 +18,7 @@ class FeaturedRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, FeaturedProgram::class);
   }
 
-  public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): mixed
+  public function getFeaturedPrograms(?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null): mixed
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -38,7 +38,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getFeaturedProgramsCount(?string $flavor, string $platform = null, string $max_version = null): int
+  public function getFeaturedProgramsCount(?string $flavor, ?string $platform = null, ?string $max_version = null): int
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -55,7 +55,7 @@ class FeaturedRepository extends ServiceEntityRepository
 
     try {
       $projects_count = $qb->getQuery()->getSingleScalarResult();
-    } catch (NoResultException|NonUniqueResultException) {
+    } catch (NonUniqueResultException|NoResultException) {
       $projects_count = 0;
     }
 
@@ -138,7 +138,7 @@ class FeaturedRepository extends ServiceEntityRepository
     }
   }
 
-  private function addPlatformCondition(QueryBuilder $query_builder, string $platform = null): QueryBuilder
+  private function addPlatformCondition(QueryBuilder $query_builder, ?string $platform = null): QueryBuilder
   {
     if (null !== $platform && '' !== trim($platform)) {
       if ('android' === $platform) {
@@ -157,7 +157,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
@@ -174,7 +174,7 @@ class FeaturedRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = null): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null): QueryBuilder
   {
     if (null === $max_version || '' === $max_version) {
       return $query_builder;

@@ -3,24 +3,26 @@
 namespace App\Project\Apk;
 
 use App\DB\Entity\Project\Program;
-use App\Project\Event\ProgramBeforePersistEvent;
+use App\Project\Event\ProjectBeforePersistEvent;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ApkCleanupEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(protected ApkRepository $repository) {}
-
-  public function handleEvent(ProgramBeforePersistEvent $event): void
+  public function __construct(protected ApkRepository $repository)
   {
-    $program = $event->getProgramEntity();
-    if (null !== $program->getId()) {
-      $this->repository->remove($program->getId());
-      $program->setApkStatus(Program::APK_NONE);
+  }
+
+  public function handleEvent(ProjectBeforePersistEvent $event): void
+  {
+    $project = $event->getProjectEntity();
+    if (null !== $project->getId()) {
+      $this->repository->remove($project->getId());
+      $project->setApkStatus(Program::APK_NONE);
     }
   }
 
   public static function getSubscribedEvents(): array
   {
-    return [ProgramBeforePersistEvent::class => 'handleEvent'];
+    return [ProjectBeforePersistEvent::class => 'handleEvent'];
   }
 }

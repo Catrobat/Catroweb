@@ -63,7 +63,7 @@ class ScreenshotRepository
   /**
    * @throws \ImagickException
    */
-  public function saveProgramAssets(string $screenshot_filepath, string $id): void
+  public function saveProjectAssets(string $screenshot_filepath, string $id): void
   {
     $this->saveScreenshot($screenshot_filepath, $id);
     $this->saveThumbnail($screenshot_filepath, $id);
@@ -82,7 +82,7 @@ class ScreenshotRepository
   /**
    * @throws \ImagickException
    */
-  public function updateProgramAssets(string $image, string $id): void
+  public function updateProjectAssets(string $image, string $id): void
   {
     $this->storeImageInTmp($image, $id);
     $tmp_file_path = $this->tmp_dir.$this->generateFileNameFromId($id);
@@ -121,7 +121,7 @@ class ScreenshotRepository
     return self::DEFAULT_SCREENSHOT;
   }
 
-  public function getThumbnailWebPath(string|int $id): string
+  public function getThumbnailWebPath(int|string $id): string
   {
     $filename = $this->thumbnail_dir.$this->generateFileNameFromId((string) $id);
     if (file_exists($filename)) {
@@ -131,7 +131,7 @@ class ScreenshotRepository
     return self::DEFAULT_THUMBNAIL;
   }
 
-  public function importProgramAssets(string $screenshot_filepath, string $thumbnail_filepath, string $id): void
+  public function importProjectAssets(string $screenshot_filepath, string $thumbnail_filepath, string $id): void
   {
     $filesystem = new Filesystem();
     $filesystem->copy($screenshot_filepath, $this->screenshot_dir.$this->generateFileNameFromId($id));
@@ -163,13 +163,13 @@ class ScreenshotRepository
   /**
    * @throws \ImagickException
    */
-  public function saveProgramAssetsTemp(string $screenshot_filepath, string $id): void
+  public function saveProjectAssetsTemp(string $screenshot_filepath, string $id): void
   {
     $this->saveScreenshotTemp($screenshot_filepath, $id);
     $this->saveThumbnailTemp($screenshot_filepath, $id);
   }
 
-  public function makeTempProgramAssetsPerm(string $id): void
+  public function makeTempProjectAssetsPerm(string $id): void
   {
     $this->makeScreenshotPerm($id);
     $this->makeThumbnailPerm($id);
@@ -207,23 +207,23 @@ class ScreenshotRepository
     $screen->destroy();
   }
 
-  public function deleteTempFilesForProgram(string $id): void
+  public function deleteTempFilesForProject(string $id): void
   {
     unlink($this->tmp_dir.$this->generateFileNameFromId($id));
     unlink($this->tmp_dir.'thumb/'.$this->generateFileNameFromId($id));
   }
 
-  public function deletePermProgramAssets(string $id): void
+  public function deletePermProjectAssets(string $id): void
   {
     $this->deleteScreenshot($id);
     $this->deleteThumbnail($id);
-    $this->deleteTempFilesForProgram($id);
+    $this->deleteTempFilesForProject($id);
   }
 
   /**
    * This function empties the tmp folder.
    * When this function is used while a user is
-   * uploading a program you will kill the process.
+   * uploading a project you will kill the process.
    * So don't use it. It's for testing purposes.
    */
   public function deleteTempFiles(): void

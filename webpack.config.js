@@ -146,7 +146,7 @@ Encore
   .addEntry('follower_overview', './assets/js/follower_overview.js')
   .addEntry('my_profile', './assets/js/my_profile.js')
   .addEntry('profile', './assets/js/profile.js')
-  .addEntry('project', './assets/js/project.js')
+  .addEntry('project_js', './assets/js/project.js')
   .addEntry('program_comments', './assets/js/custom/program_comments.js')
   .addEntry('search_old', './assets/js/search_old.js')
   .addEntry('search', './assets/js/search.js')
@@ -158,11 +158,14 @@ Encore
   .addEntry('check_email', './assets/js/check_email.js')
   .addEntry('studio_detail', './assets/js/studio_detail.js')
   .addEntry('studios_overview', './assets/js/studios_overview.js')
+  .addEntry('studios_new', './assets/js/studio_new.js')
   .addEntry('code_view', './assets/js/code_view.js')
+  .addEntry('medialib_content', './assets/js/medialib_content.js')
+  .addEntry('language_menu', './assets/js/custom/languageMenu.js')
 
   // SCSS to CSS
   .addStyleEntry('achievements', './assets/styles/components/achievements.scss')
-  .addStyleEntry('program', './assets/styles/custom/program.scss')
+  .addStyleEntry('project_scss', './assets/styles/custom/program.scss')
   .addStyleEntry(
     'multi_column_article',
     './assets/styles/custom/multi_column_article.scss',
@@ -172,11 +175,24 @@ Encore
     'code_statistics',
     './assets/styles/components/code_statistics.scss',
   )
+
+  .addStyleEntry(
+    'maintenance_slider',
+    './assets/styles/custom/maintenance_information_admin_slider.scss',
+  )
+  .addStyleEntry(
+    'maintenance',
+    './assets/styles/custom/maintenance_information_view.scss',
+  )
   .addStyleEntry('project_list', './assets/styles/components/project_list.scss')
   .addStyleEntry('user_list', './assets/styles/components/user_list.scss')
   .addStyleEntry('profile_styles', './assets/styles/custom/profile.scss')
   .addStyleEntry('remixgraph', './assets/styles/custom/remixgraph.scss')
   .addStyleEntry('error', './assets/styles/error.scss')
+  .addStyleEntry(
+    'language_menu_styles',
+    './assets/styles/custom/language_menu.scss',
+  )
 
   // Themes
   .addStyleEntry('pocketcode', './assets/styles/themes/pocketcode.scss')

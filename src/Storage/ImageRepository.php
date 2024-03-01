@@ -38,7 +38,7 @@ class ImageRepository
   /**
    * @throws \ImagickException
    */
-  public function save(File $file, string|int $id, string $extension, bool $featured): void
+  public function save(File $file, int|string $id, string $extension, bool $featured): void
   {
     $thumb = $this->getImagick();
     $thumb->readImage($file->__toString());
@@ -57,7 +57,7 @@ class ImageRepository
     $thumb->destroy();
   }
 
-  public function remove(string|int $id, string $extension, bool $featured): void
+  public function remove(int|string $id, string $extension, bool $featured): void
   {
     if ($featured) {
       $path = $this->featured_dir.$this->generateFileNameFromId($id, $extension, true);
@@ -69,7 +69,7 @@ class ImageRepository
     }
   }
 
-  public function getWebPath(string|int $id, string $extension, bool $featured): string
+  public function getWebPath(int|string $id, string $extension, bool $featured): string
   {
     if ($featured) {
       $path = $this->featured_path.$this->generateFileNameFromId($id, $extension, true);
@@ -80,7 +80,7 @@ class ImageRepository
     return $path.FileHelper::getTimestampParameter($this->example_dir.$this->generateFileNameFromId($id, $extension, $featured));
   }
 
-  public function getAbsoluteWebPath(string|int $id, string $extension, bool $featured): string
+  public function getAbsoluteWebPath(int|string $id, string $extension, bool $featured): string
   {
     return $this->urlHelper->getAbsoluteUrl('/').$this->getWebPath($id, $extension, $featured);
   }
@@ -97,7 +97,7 @@ class ImageRepository
     return $this->imagick;
   }
 
-  private function generateFileNameFromId(string|int $id, string $extension, bool $featured): string
+  private function generateFileNameFromId(int|string $id, string $extension, bool $featured): string
   {
     if ($featured) {
       if ('' === $extension) {

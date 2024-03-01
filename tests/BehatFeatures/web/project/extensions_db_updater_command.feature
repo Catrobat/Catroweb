@@ -21,7 +21,7 @@ Feature: Tags are inserted/update to the database by a symfony command
       | 2  | Catrobat |
     And I run the update extensions command
     Then there should be "7" extensions in the database
-    And there are programs:
+    And there are projects:
       | id | name    | owned by | extensions            |
       | 1  | Minions | Catrobat | embroidery,mindstorms |
     Then the project with name "Minions" should have 2 extensions

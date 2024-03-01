@@ -298,9 +298,9 @@ class ApiContext implements Context
    * @When I GET :url with these parameters
    * @When /^I GET from the api "([^"]*)"$/
    * @When /^I download "([^"]*)"$/
-   * @When /^I get the recent programs with "([^"]*)"$/
-   * @When /^I get the most downloaded programs with "([^"]*)"$/
-   * @When /^I get the most viewed programs with "([^"]*)"$/
+   * @When /^I get the recent projects with "([^"]*)"$/
+   * @When /^I get the most downloaded projects with "([^"]*)"$/
+   * @When /^I get the most viewed projects with "([^"]*)"$/
    * @When /^I GET the tag list from "([^"]*)" with these parameters$/
    */
   public function iGetFrom(mixed $url): void
@@ -335,11 +335,11 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I search similar programs for program id "([^"]*)"$/
+   * @When /^I search similar projects for project id "([^"]*)"$/
    */
-  public function iSearchSimilarProgramsForProgramId(mixed $id): void
+  public function iSearchSimilarProjectsForProjectId(mixed $id): void
   {
-    $this->iHaveAParameterWithValue('program_id', $id);
+    $this->iHaveAParameterWithValue('project_id', $id);
     if (!isset($this->request_parameters['limit'])) {
       $this->iHaveAParameterWithValue('limit', '1');
     }
@@ -356,21 +356,21 @@ class ApiContext implements Context
    */
   public function iWantToDownloadTheApkFileOf(mixed $arg1): void
   {
-    $program_manager = $this->getProgramManager();
+    $project_manager = $this->getProjectManager();
 
-    $program = $program_manager->findOneByName($arg1);
-    if (null === $program) {
-      throw new \Exception('Program not found: '.$arg1);
+    $project = $project_manager->findOneByName($arg1);
+    if (null === $project) {
+      throw new \Exception('Project not found: '.$arg1);
     }
     $router = $this->getRouter();
-    $url = $router->generate('ci_download', ['id' => $program->getId(), 'theme' => 'pocketcode']);
+    $url = $router->generate('ci_download', ['id' => $project->getId(), 'theme' => 'pocketcode']);
     $this->iGetFrom($url);
   }
 
   /**
-   * @When /^I get the user\'s programs with "([^"]*)"$/
+   * @When /^I get the user\'s projects with "([^"]*)"$/
    */
-  public function iGetTheUserSProgramsWith(mixed $url): void
+  public function iGetTheUserSProjectsWith(mixed $url): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->findAll()[0];
@@ -416,11 +416,11 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I upload another program using token "([^"]*)"$/
+   * @When /^I upload another project using token "([^"]*)"$/
    *
    * @throws \Exception when an error occurs during uploading
    */
-  public function iUploadAnotherProgramUsingToken(mixed $arg1): void
+  public function iUploadAnotherProjectUsingToken(mixed $arg1): void
   {
     $this->iHaveAValidCatrobatFile('1');
     $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
@@ -446,13 +446,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I report program (\d+) with category "([^"]*)" and note "([^"]*)"$/
+   * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)"$/
    */
-  public function iReportProgramWithNote(mixed $program_id, mixed $category, mixed $note): void
+  public function iReportProjectWithNote(mixed $project_id, mixed $category, mixed $note): void
   {
     $url = '/app/api/reportProject/reportProject.json';
     $this->request_parameters = [
-      'program' => $program_id,
+      'program' => $project_id,
       'category' => $category,
       'note' => $note,
     ];
@@ -515,15 +515,15 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then the uploaded program should be a remix root, API version :api_version
+   * @Then the uploaded project should be a remix root, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldBeARemixRoot(string $api_version): void
+  public function theUploadedProjectShouldBeARemixRoot(string $api_version): void
   {
-    $this->theProgramShouldBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
@@ -536,11 +536,11 @@ class ApiContext implements Context
   public function theUploadedProjectShouldExistInTheDatabase(string $api_version): void
   {
     // Trying to find the id of the last uploaded project in the database
-    $uploaded_program = $this->getManager()->getRepository(Program::class)->findOneBy([
+    $uploaded_project = $this->getManager()->getRepository(Program::class)->findOneBy([
       'id' => $this->getIDOfLastUploadedProject($api_version),
     ]);
 
-    Assert::assertNotNull($uploaded_program);
+    Assert::assertNotNull($uploaded_project);
   }
 
   /**
@@ -679,15 +679,15 @@ class ApiContext implements Context
   }
 
   /**
-   * @When I upload a program with :program_attribute, API version :api_version
+   * @When I upload a project with :project_attribute, API version :api_version
    *
    * @param string $api_version The API version to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProgramWith(string $program_attribute, string $api_version): void
+  public function iUploadAProjectWith(string $project_attribute, string $api_version): void
   {
-    $filename = match ($program_attribute) {
+    $filename = match ($project_attribute) {
       'a missing code.xml' => 'program_with_missing_code_xml.catrobat',
       'an invalid code.xml' => 'program_with_invalid_code_xml.catrobat',
       'a missing image' => 'program_with_missing_image.catrobat',
@@ -695,307 +695,311 @@ class ApiContext implements Context
       'an extra file' => 'program_with_too_many_files.catrobat',
       'valid parameters' => 'base.catrobat',
       'tags' => 'program_with_tags.catrobat',
-      default => throw new PendingException('No case defined for "'.$program_attribute.'"'),
+      default => throw new PendingException('No case defined for "'.$project_attribute.'"'),
     };
     $this->uploadProject($this->FIXTURES_DIR.'GeneratedFixtures/'.$filename, $api_version);
   }
 
   /**
-   * @When I upload an invalid program file, API version :api_version
+   * @When I upload an invalid project file, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnInvalidProgramFile(string $api_version): void
+  public function iUploadAnInvalidProjectFile(string $api_version): void
   {
     $this->uploadProject($this->FIXTURES_DIR.'/invalid_archive.catrobat', $api_version);
   }
 
   /**
-   * @When I upload this generated program with id :id, API version :api_version
+   * @When I upload this generated project with id :id, API version :api_version
    *
    * @param string $id          The desired id of the uploaded project
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadThisGeneratedProgramWithId(string $id, string $api_version): void
+  public function iUploadThisGeneratedProjectWithId(string $id, string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
   }
 
   /**
-   * @Given I upload the program with ":name" as name, API version :api_version
-   * @Given I upload the program with ":name" as name again, API version :api_version
+   * @Given I upload the project with ":name" as name, API version :api_version
+   * @Given I upload the project with ":name" as name again, API version :api_version
    *
    * @param string $api_version The API version to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadTheProgramWithAsName(mixed $name, string $api_version): void
+  public function iUploadTheProjectWithAsName(mixed $name, string $api_version): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       'name' => $name,
     ]);
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version);
   }
 
   /**
-   * @Then the uploaded program should not be a remix root, API version :api_version
+   * @Then the uploaded project should not be a remix root, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
-  public function theUploadedProgramShouldNotBeARemixRoot(string $api_version): void
+  public function theUploadedProjectShouldNotBeARemixRoot(string $api_version): void
   {
-    $this->theProgramShouldNotBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldNotBeARemixRoot($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have remix migration date NOT NULL, API version :api_version
+   * @Then the uploaded project should have remix migration date NOT NULL, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
-  public function theUploadedProgramShouldHaveMigrationDateNotNull(string $api_version): void
+  public function theUploadedProjectShouldHaveMigrationDateNotNull(string $api_version): void
   {
-    $program_manager = $this->getProgramManager();
-    $uploaded_program = $program_manager->find($this->getIDOfLastUploadedProject($api_version));
-    Assert::assertNotNull($uploaded_program->getRemixMigratedAt());
+    $project_manager = $this->getProjectManager();
+    $uploaded_project = $project_manager->find($this->getIDOfLastUploadedProject($api_version));
+    Assert::assertNotNull($uploaded_project->getRemixMigratedAt());
   }
 
   /**
-   * @Given the uploaded program should have a Scratch parent having id :id, API version :api_version
+   * @Given the uploaded project should have a Scratch parent having id :id, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveAScratchParentHavingScratchID(mixed $scratch_parent_id, string $api_version): void
+  public function theUploadedProjectShouldHaveAScratchParentHavingScratchID(mixed $scratch_parent_id, string $api_version): void
   {
-    $this->theProgramShouldHaveAScratchParentHavingScratchID($this->getIDOfLastUploadedProject($api_version), $scratch_parent_id);
+    $this->theProjectShouldHaveAScratchParentHavingScratchID($this->getIDOfLastUploadedProject($api_version), $scratch_parent_id);
   }
 
   /**
-   * @Given the uploaded program should have no further Scratch parents, API version :api_version
+   * @Given the uploaded project should have no further Scratch parents, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoFurtherScratchParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherScratchParents(string $api_version): void
   {
-    $this->theProgramShouldHaveNoFurtherScratchParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherScratchParents($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have a Catrobat forward ancestor having id :id and depth :depth, API version :api_version
+   * @Then the uploaded project should have a Catrobat forward ancestor having id :id and depth :depth, API version :api_version
    *
    * @param string $api_version The API version to be used
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
-  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth(mixed $id, mixed $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(mixed $id, mixed $depth, string $api_version): void
   {
-    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version),
+    $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version),
       $id, $depth);
   }
 
   /**
-   * @Then the uploaded program should have a Catrobat forward ancestor having its own id and depth :depth, API version :api_version
+   * @Then the uploaded project should have a Catrobat forward ancestor having its own id and depth :depth, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(mixed $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(mixed $depth, string $api_version): void
   {
-    $this->theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $this->getIDOfLastUploadedProject($api_version), $depth);
+    $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $this->getIDOfLastUploadedProject($api_version), $depth);
   }
 
   /**
-   * @Then the uploaded program should have a Catrobat backward parent having id :id, API version :api_version
+   * @Then the uploaded project should have a Catrobat backward parent having id :id, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveACatrobatBackwardParentHavingId(mixed $id, $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatBackwardParentHavingId(mixed $id, $api_version): void
   {
-    $this->theProgramShouldHaveACatrobatBackwardParentHavingId($this->getIDOfLastUploadedProject($api_version), $id);
+    $this->theProjectShouldHaveACatrobatBackwardParentHavingId($this->getIDOfLastUploadedProject($api_version), $id);
   }
 
   /**
-   * @Then the uploaded program should have no Catrobat forward ancestors except self-relation, API version :api_version
+   * @Then the uploaded project should have no Catrobat forward ancestors except self-relation, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $api_version): void
   {
-    $this->theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have no Catrobat backward parents, API version :api_version
+   * @Then the uploaded project should have no Catrobat backward parents, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoCatrobatBackwardParents($api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatBackwardParents($api_version): void
   {
-    $this->theProgramShouldHaveNoCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have no further Catrobat backward parents, API version :api_version
+   * @Then the uploaded project should have no further Catrobat backward parents, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoFurtherCatrobatBackwardParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherCatrobatBackwardParents(string $api_version): void
   {
-    $this->theProgramShouldHaveNoFurtherCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have no Catrobat ancestors except self-relation, API version :api_version
+   * @Then the uploaded project should have no Catrobat ancestors except self-relation, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoCatrobatAncestors(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatAncestors(string $api_version): void
   {
-    $this->theProgramShouldHaveNoCatrobatAncestors($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatAncestors($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have no Scratch parents, API version :api_version
+   * @Then the uploaded project should have no Scratch parents, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoScratchParents(string $api_version): void
+  public function theUploadedProjectShouldHaveNoScratchParents(string $api_version): void
   {
-    $this->theProgramShouldHaveNoScratchParents($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoScratchParents($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have a Catrobat forward descendant having id :id and depth :depth, API version :api_version
+   * @Then the uploaded project should have a Catrobat forward descendant having id :id and depth :depth, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $id, mixed $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $id, mixed $depth, string $api_version): void
   {
-    $this->theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $id, $depth);
+    $this->theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $id, $depth);
   }
 
   /**
-   * @Then the uploaded program should have no Catrobat forward descendants except self-relation, API version :api_version
+   * @Then the uploaded project should have no Catrobat forward descendants except self-relation, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $api_version): void
   {
-    $this->theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have no further Catrobat forward descendants, API version :api_version
+   * @Then the uploaded project should have no further Catrobat forward descendants, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardDescendants(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardDescendants(string $api_version): void
   {
-    $this->theProgramShouldHaveNoFurtherCatrobatForwardDescendants($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherCatrobatForwardDescendants($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @Then the uploaded program should have RemixOf :value in the xml, API version :api_version
+   * @Then the uploaded project should have RemixOf :value in the xml, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveRemixOfInTheXml(mixed $value, string $api_version): void
+  public function theUploadedProjectShouldHaveRemixOfInTheXml(mixed $value, string $api_version): void
   {
-    $this->theProgramShouldHaveRemixofInTheXml($this->getIDOfLastUploadedProject($api_version), $value);
+    $this->theProjectShouldHaveRemixofInTheXml($this->getIDOfLastUploadedProject($api_version), $value);
   }
 
   /**
-   * @Given /^I want to upload a program$/
+   * @Given /^I want to upload a project/
    */
-  public function iWantToUploadAProgram(): void {}
+  public function iWantToUploadAProject(): void
+  {
+  }
 
   /**
    * @Given /^I have no parameters$/
    */
-  public function iHaveNoParameters(): void {}
-
-  /**
-   * @Then /^I should get no programs$/
-   */
-  public function iShouldGetNoPrograms(): void
+  public function iHaveNoParameters(): void
   {
-    $response = $this->getKernelBrowser()->getResponse();
-    Assert::assertEquals(200, $response->getStatusCode());
-    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_programs = $responseArray['CatrobatProjects'];
-    Assert::assertEmpty($returned_programs, 'Projects were returned');
   }
 
   /**
-   * @Then /^I should get following programs:$/
+   * @Then /^I should get no projects/
    */
-  public function iShouldGetFollowingPrograms(TableNode $table): void
+  public function iShouldGetNoProjects(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals(200, $response->getStatusCode());
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_programs = $responseArray['CatrobatProjects'];
-    $expected_programs = $table->getHash();
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0, 'Wrong number of returned programs');
-    for ($i = 0; $i < count($expected_programs); ++$i) {
+    $returned_projects = $responseArray['CatrobatProjects'];
+    Assert::assertEmpty($returned_projects, 'Projects were returned');
+  }
+
+  /**
+   * @Then /^I should get following projects:$/
+   */
+  public function iShouldGetFollowingProjects(TableNode $table): void
+  {
+    $response = $this->getKernelBrowser()->getResponse();
+    Assert::assertEquals(200, $response->getStatusCode());
+    $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = $responseArray['CatrobatProjects'];
+    $expected_projects = $table->getHash();
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Wrong number of returned projects');
+    for ($i = 0; $i < count($expected_projects); ++$i) {
       $found = false;
-      for ($j = 0; $j < (is_countable($returned_programs) ? count($returned_programs) : 0); ++$j) {
-        if ($expected_programs[$i]['name'] === $returned_programs[$j]['ProjectName']) {
+      for ($j = 0; $j < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$j) {
+        if ($expected_projects[$i]['name'] === $returned_projects[$j]['ProjectName']) {
           $found = true;
         }
       }
-      Assert::assertTrue($found, $expected_programs[$i]['name'].' was not found in the returned programs');
+      Assert::assertTrue($found, $expected_projects[$i]['name'].' was not found in the returned projects');
     }
   }
 
   /**
-   * @Then the uploaded program should have no further Catrobat forward ancestors, API version :api_version
+   * @Then the uploaded project should have no further Catrobat forward ancestors, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProgramShouldHaveNoFurtherCatrobatForwardAncestors(string $api_version): void
+  public function theUploadedProjectShouldHaveNoFurtherCatrobatForwardAncestors(string $api_version): void
   {
-    $this->theProgramShouldHaveNoFurtherCatrobatForwardAncestors($this->getIDOfLastUploadedProject($api_version));
+    $this->theProjectShouldHaveNoFurtherCatrobatForwardAncestors($this->getIDOfLastUploadedProject($api_version));
   }
 
   /**
-   * @When /^I start an apk generation of my program$/
+   * @When /^I start an apk generation of my project$/
    */
-  public function iStartAnApkGenerationOfMyProgram(): void
+  public function iStartAnApkGenerationOfMyProject(): void
   {
     $id = 1;
     $this->iGetFrom('/app/ci/build/'.$id);
@@ -1029,17 +1033,17 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I get the most recent programs$/
+   * @When /^I get the most recent projects$/
    */
-  public function iGetTheMostRecentPrograms(): void
+  public function iGetTheMostRecentProjects(): void
   {
     $this->iGetFrom('/app/api/projects/recent.json');
   }
 
   /**
-   * @When /^I get the most recent programs with limit "([^"]*)" and offset "([^"]*)"$/
+   * @When /^I get the most recent projects with limit "([^"]*)" and offset "([^"]*)"$/
    */
-  public function iGetTheMostRecentProgramsWithLimitAndOffset(mixed $limit, mixed $offset): void
+  public function iGetTheMostRecentProjectsWithLimitAndOffset(mixed $limit, mixed $offset): void
   {
     $this->request_parameters = [
       'limit' => $limit,
@@ -1049,9 +1053,9 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I have downloaded a valid program$/
+   * @When /^I have downloaded a valid project$/
    */
-  public function iHaveDownloadedAValidProgram(): void
+  public function iHaveDownloadedAValidProject(): void
   {
     $id = 1;
     $this->iGetFrom('/api/project/'.$id.'/catrobat');
@@ -1103,19 +1107,19 @@ class ApiContext implements Context
    */
   public function theResponseShouldContainALocationHeaderWithURLOfTheUploadedProject(): void
   {
-    $uploaded_program = $this->getManager()->getRepository(Program::class)->findOneBy([
+    $uploaded_project = $this->getManager()->getRepository(Program::class)->findOneBy([
       'name' => 'test',
     ]);
 
-    Assert::assertNotNull($uploaded_program);
+    Assert::assertNotNull($uploaded_project);
 
     $location_header = $this->getKernelBrowser()->getResponse()->headers->get('Location');
-    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $location_header);
+    Assert::assertEquals('http://localhost/app/project/'.$uploaded_project->getId(), $location_header);
 
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals('http://localhost/app/project/'.$uploaded_program->getId(), $responseArray['project_url']);
+    Assert::assertEquals('http://localhost/app/project/'.$uploaded_project->getId(), $responseArray['project_url']);
   }
 
   /**
@@ -1127,19 +1131,19 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I update this program$/
+   * @When /^I update this project$/
    */
-  public function iUpdateThisProgram(): void
+  public function iUpdateThisProject(): void
   {
-    $pm = $this->getProgramManager();
-    $program = $pm->find('1');
-    if (null === $program) {
-      throw new \Exception('last program not found');
+    $pm = $this->getProjectManager();
+    $project = $pm->find('1');
+    if (null === $project) {
+      throw new \Exception('last project not found');
     }
-    $file = $this->generateProgramFileWith([
-      'name' => $program->getName(),
+    $file = $this->generateProjectFileWith([
+      'name' => $project->getName(),
     ]);
-    $this->uploadProject($file, '2', $program->getUser());
+    $this->uploadProject($file, '2', $project->getUser());
   }
 
   /**
@@ -1224,16 +1228,16 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program should get (.*)$/
+   * @Then /^the project should get (.*)$/
    */
-  public function theProgramShouldGet(mixed $result): void
+  public function theProjectShouldGet(mixed $result): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
     $code = $response_array['statusCode'];
     match ($result) {
-      'accepted' => Assert::assertEquals(200, $code, 'Program was rejected (Status code 200)'),
-      'rejected' => Assert::assertNotEquals(200, $code, 'Program was NOT rejected'),
+      'accepted' => Assert::assertEquals(200, $code, 'Project was rejected (Status code 200)'),
+      'rejected' => Assert::assertNotEquals(200, $code, 'Project was NOT rejected'),
       default => new PendingException(),
     };
   }
@@ -1281,91 +1285,91 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^I should get programs in the following order:$/
+   * @Then /^I should get projects in the following order:$/
    */
-  public function iShouldGetProgramsInTheFollowingOrder(TableNode $table): void
+  public function iShouldGetProjectsInTheFollowingOrder(TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_programs = $responseArray['CatrobatProjects'];
-    $expected_programs = $table->getHash();
+    $returned_projects = $responseArray['CatrobatProjects'];
+    $expected_projects = $table->getHash();
 
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0);
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0);
 
-    for ($i = 0; $i < (is_countable($returned_programs) ? count($returned_programs) : 0); ++$i) {
+    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
       Assert::assertEquals(
-        $expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'],
+        $expected_projects[$i]['Name'], $returned_projects[$i]['ProjectName'],
         'Wrong order of results'
       );
     }
   }
 
   /**
-   * @Then /^I should get (\d+) programs in random order:$/
+   * @Then /^I should get (\d+) projects in random order:$/
    */
-  public function iShouldGetProgramsInRandomOrder(mixed $program_count, TableNode $table): void
+  public function iShouldGetProjectsInRandomOrder(mixed $project_count, TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $random_programs = $response_array['CatrobatProjects'];
-    $random_programs_count = is_countable($random_programs) ? count($random_programs) : 0;
-    $expected_programs = $table->getHash();
-    $expected_programs_count = count($expected_programs);
-    Assert::assertEquals($program_count, $random_programs_count, 'Wrong number of random programs');
+    $random_projects = $response_array['CatrobatProjects'];
+    $random_projects_count = is_countable($random_projects) ? count($random_projects) : 0;
+    $expected_projects = $table->getHash();
+    $expected_projects_count = count($expected_projects);
+    Assert::assertEquals($project_count, $random_projects_count, 'Wrong number of random projects');
 
-    for ($i = 0; $i < $random_programs_count; ++$i) {
-      $program_found = false;
-      for ($j = 0; $j < $expected_programs_count; ++$j) {
-        if (0 === strcmp((string) $random_programs[$i]['ProjectName'], (string) $expected_programs[$j]['Name'])) {
-          $program_found = true;
+    for ($i = 0; $i < $random_projects_count; ++$i) {
+      $project_found = false;
+      for ($j = 0; $j < $expected_projects_count; ++$j) {
+        if (0 === strcmp((string) $random_projects[$i]['ProjectName'], (string) $expected_projects[$j]['Name'])) {
+          $project_found = true;
         }
       }
-      Assert::assertEquals($program_found, true, 'Program does not exist in the database');
+      Assert::assertEquals($project_found, true, 'Project does not exist in the database');
     }
   }
 
   /**
-   * @Then /^I should get the programs "([^"]*)" in random order$/
+   * @Then /^I should get the projects "([^"]*)" in random order$/
    *
-   * @param string $program_list
+   * @param string $project_list
    */
-  public function iShouldGetTheProgramsInRandomOrder($program_list): void
+  public function iShouldGetTheProjectsInRandomOrder($project_list): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $random_programs = $response_array['CatrobatProjects'];
-    $random_programs_count = is_countable($random_programs) ? count($random_programs) : 0;
-    $expected_programs = explode(',', $program_list);
-    $expected_programs_count = count($expected_programs);
-    Assert::assertEquals($expected_programs_count, $random_programs_count, 'Wrong number of random programs');
+    $random_projects = $response_array['CatrobatProjects'];
+    $random_projects_count = is_countable($random_projects) ? count($random_projects) : 0;
+    $expected_projects = explode(',', $project_list);
+    $expected_projects_count = count($expected_projects);
+    Assert::assertEquals($expected_projects_count, $random_projects_count, 'Wrong number of random projects');
 
-    for ($i = 0; $i < $random_programs_count; ++$i) {
-      $program_found = false;
-      for ($j = 0; $j < $expected_programs_count; ++$j) {
-        if (0 === strcmp((string) $random_programs[$i]['ProjectName'], $expected_programs[$j])) {
-          $program_found = true;
+    for ($i = 0; $i < $random_projects_count; ++$i) {
+      $project_found = false;
+      for ($j = 0; $j < $expected_projects_count; ++$j) {
+        if (0 === strcmp((string) $random_projects[$i]['ProjectName'], $expected_projects[$j])) {
+          $project_found = true;
         }
       }
-      Assert::assertEquals($program_found, true, 'Program does not exist in the database');
+      Assert::assertEquals($project_found, true, 'Project does not exist in the database');
     }
   }
 
   /**
-   * @Then /^I should get the programs "([^"]*)"$/
+   * @Then /^I should get the projects "([^"]*)"$/
    *
-   * @param string $program_list
+   * @param string $project_list
    */
-  public function iShouldGetThePrograms($program_list): void
+  public function iShouldGetTheProjects($project_list): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $returned_programs = $responseArray['CatrobatProjects'];
-    $expected_programs = explode(',', $program_list);
+    $returned_projects = $responseArray['CatrobatProjects'];
+    $expected_projects = explode(',', $project_list);
 
-    for ($i = 0; $i < (is_countable($returned_programs) ? count($returned_programs) : 0); ++$i) {
+    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
       $found = false;
-      for ($j = 0; $j < count($expected_programs); ++$j) {
-        if ($expected_programs[$j] === $returned_programs[$i]['ProjectName']) {
+      for ($j = 0; $j < count($expected_projects); ++$j) {
+        if ($expected_projects[$j] === $returned_projects[$i]['ProjectName']) {
           $found = true;
         }
       }
@@ -1406,13 +1410,13 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_program = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_project = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    $expected_program = $table->getHash();
-    $stored_programs = $this->getStoredPrograms($expected_program);
-    $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
+    $expected_project = $table->getHash();
+    $stored_projects = $this->getStoredProjects($expected_project);
+    $stored_project = $this->findProject($stored_projects, $returned_project['name']);
 
-    $this->assertProgramsEqual($stored_program, $returned_program);
+    $this->assertProjectsEqual($stored_project, $returned_project);
   }
 
   /**
@@ -1423,14 +1427,14 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $expected_programs = $table->getHash();
-    $stored_programs = $this->getStoredPrograms($expected_programs);
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0, 'Number of returned programs should be '.count($expected_programs));
+    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $expected_projects = $table->getHash();
+    $stored_projects = $this->getStoredProjects($expected_projects);
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Number of returned projects should be '.count($expected_projects));
 
-    foreach ($returned_programs as $returned_program) {
-      $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
-      $this->assertProgramsEqual($stored_program, $returned_program);
+    foreach ($returned_projects as $returned_project) {
+      $stored_project = $this->findProject($stored_projects, $returned_project['name']);
+      $this->assertProjectsEqual($stored_project, $returned_project);
     }
   }
 
@@ -1441,17 +1445,17 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $expected_programs = $table->getHash();
-    $stored_programs = $this->getStoredFeaturedPrograms($expected_programs);
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0,
-      'Number of returned programs should be '.count($expected_programs));
+    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $expected_projects = $table->getHash();
+    $stored_projects = $this->getStoredFeaturedProjects($expected_projects);
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
+      'Number of returned projects should be '.count($expected_projects));
 
-    foreach ($returned_programs as $returned_program) {
-      $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
+    foreach ($returned_projects as $returned_project) {
+      $stored_project = $this->findProject($stored_projects, $returned_project['name']);
       foreach ($this->default_featured_project_structure as $key) {
-        Assert::assertNotEmpty($stored_program);
-        Assert::assertEquals($returned_program[$key], $stored_program[$key]);
+        Assert::assertNotEmpty($stored_project);
+        Assert::assertEquals($returned_project[$key], $stored_project[$key]);
       }
     }
   }
@@ -1464,12 +1468,12 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    foreach ($responseArray as $program) {
-      Assert::assertEquals(count($this->default_project_structure), is_countable($program) ? count($program) : 0,
-        'Number of program fields should be '.count($this->default_project_structure));
+    foreach ($responseArray as $project) {
+      Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
+        'Number of project fields should be '.count($this->default_project_structure));
       foreach ($this->default_project_structure as $key) {
-        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
-        Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
+        Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
+        Assert::assertEquals($this->checkProjectFieldsValue($project, $key), true);
       }
     }
   }
@@ -1566,13 +1570,13 @@ class ApiContext implements Context
   public function responseShouldHaveProjectModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $program = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $project = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->full_project_structure),
-      'Number of program fields should be '.count($this->full_project_structure));
+    Assert::assertEquals(is_countable($project) ? count($project) : 0, count($this->full_project_structure),
+      'Number of project fields should be '.count($this->full_project_structure));
     foreach ($this->full_project_structure as $key) {
-      Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
-      Assert::assertEquals($this->checkProjectFieldsValue($program, $key), true);
+      Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
+      Assert::assertEquals($this->checkProjectFieldsValue($project, $key), true);
     }
   }
 
@@ -1582,14 +1586,14 @@ class ApiContext implements Context
   public function responseShouldHaveDefaultFeaturedProjectsModelStructure(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
-    $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    foreach ($returned_programs as $program) {
-      Assert::assertEquals(count($this->default_featured_project_structure), is_countable($program) ? count($program) : 0,
-        'Number of program fields should be '.count($this->default_featured_project_structure));
+    foreach ($returned_projects as $project) {
+      Assert::assertEquals(count($this->default_featured_project_structure), is_countable($project) ? count($project) : 0,
+        'Number of project fields should be '.count($this->default_featured_project_structure));
       foreach ($this->default_featured_project_structure as $key) {
-        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
-        Assert::assertEquals($this->checkFeaturedProjectFieldsValue($program, $key), true);
+        Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
+        Assert::assertEquals($this->checkFeaturedProjectFieldsValue($project, $key), true);
       }
     }
   }
@@ -1602,12 +1606,12 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $returned_media_files = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    foreach ($returned_media_files as $program) {
-      Assert::assertEquals(is_countable($program) ? count($program) : 0, count($this->default_media_file_structure),
-        'Number of program fields should be '.count($this->default_media_file_structure));
+    foreach ($returned_media_files as $project) {
+      Assert::assertEquals(is_countable($project) ? count($project) : 0, count($this->default_media_file_structure),
+        'Number of project fields should be '.count($this->default_media_file_structure));
       foreach ($this->default_media_file_structure as $key) {
-        Assert::assertArrayHasKey($key, $program, 'Program should contain '.$key);
-        Assert::assertEquals($this->checkMediaFileFieldsValue($program, $key), true);
+        Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
+        Assert::assertEquals($this->checkMediaFileFieldsValue($project, $key), true);
       }
     }
   }
@@ -1680,9 +1684,9 @@ class ApiContext implements Context
     $stored_files = $this->getStoredMediaFiles($expected_files);
 
     Assert::assertEquals(is_countable($returned_files) ? count($returned_files) : 0, count($expected_files),
-      'Number of returned programs should be '.count($expected_files));
+      'Number of returned projects should be '.count($expected_files));
     foreach ($returned_files as $returned_file) {
-      $stored_file = $this->findProgram($stored_files, $returned_file['name']);
+      $stored_file = $this->findProject($stored_files, $returned_file['name']);
       foreach ($this->default_media_file_structure as $key) {
         Assert::assertNotEmpty($stored_file);
         Assert::assertEquals($returned_file[$key], $stored_file[$key]);
@@ -1697,33 +1701,33 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    Assert::assertEquals(is_countable($returned_programs) ? count($returned_programs) : 0, $projects,
-      'Number of returned programs should be '.(is_countable($returned_programs) ? count($returned_programs) : 0));
+    Assert::assertEquals(is_countable($returned_projects) ? count($returned_projects) : 0, $projects,
+      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
   }
 
   /**
    * @Then /^I should get (\d+) programs in the following order:$/
    */
-  public function iShouldGetScratchProgramsInTheFollowingOrder(mixed $program_count, TableNode $table): void
+  public function iShouldGetScratchProgramsInTheFollowingOrder(mixed $project_count, TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
 
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $programs = $table->getHash();
+    $projects = $table->getHash();
 
-    $returned_programs = $responseArray['CatrobatProjects'];
-    $scratch_programs_count = count($programs);
-    Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
+    $returned_projects = $responseArray['CatrobatProjects'];
+    $scratch_projects_count = count($projects);
+    Assert::assertEquals($project_count, $scratch_projects_count, 'Wrong number of Scratch projects');
 
-    $expected_programs = $table->getHash();
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0,
-      'Number of returned programs should be '.(is_countable($returned_programs) ? count($returned_programs) : 0));
+    $expected_projects = $table->getHash();
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
+      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
 
-    for ($i = 0; $i < (is_countable($returned_programs) ? count($returned_programs) : 0); ++$i) {
+    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
       Assert::assertEquals(
-        $expected_programs[$i]['Name'], $returned_programs[$i]['ProjectName'],
+        $expected_projects[$i]['Name'], $returned_projects[$i]['ProjectName'],
         'Wrong order of results'
       );
     }
@@ -1740,23 +1744,23 @@ class ApiContext implements Context
   /**
    * @Then /^I should get (\d+) projects in the following order:$/
    */
-  public function iShouldGetScratchProjectsInTheFollowingOrder(int $program_count, TableNode $table): void
+  public function iShouldGetScratchProjectsInTheFollowingOrder(int $project_count, TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $programs = $table->getHash();
+    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $projects = $table->getHash();
 
-    $scratch_programs_count = count($programs);
-    Assert::assertEquals($program_count, $scratch_programs_count, 'Wrong number of Scratch programs');
+    $scratch_projects_count = count($projects);
+    Assert::assertEquals($project_count, $scratch_projects_count, 'Wrong number of Scratch projects');
 
-    $expected_programs = $table->getHash();
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0,
-      'Number of returned programs should be '.(is_countable($returned_programs) ? count($returned_programs) : 0));
+    $expected_projects = $table->getHash();
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0,
+      'Number of returned projects should be '.(is_countable($returned_projects) ? count($returned_projects) : 0));
 
-    for ($i = 0; $i < (is_countable($returned_programs) ? count($returned_programs) : 0); ++$i) {
+    for ($i = 0; $i < (is_countable($returned_projects) ? count($returned_projects) : 0); ++$i) {
       Assert::assertEquals(
-        $expected_programs[$i]['Name'], $returned_programs[$i]['name'],
+        $expected_projects[$i]['Name'], $returned_projects[$i]['name'],
         'Wrong order of results'
       );
     }
@@ -1901,32 +1905,32 @@ class ApiContext implements Context
   }
 
   /**
-   * @When I upload this program with id :id, API version :api_version
+   * @When I upload this project with id :id, API version :api_version
    *
    * @param string $id          The desired ID of the newly uploaded project
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
-  public function iUploadThisProgramWithId(string $id, string $api_version): void
+  public function iUploadThisProjectWithId(string $id, string $api_version): void
   {
     if ('1' == $api_version) {
-      $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat',
+      $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat',
         $api_version, null, $id);
 
       $resp_array = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
       $resp_array['projectId'] = $id;
       $this->getKernelBrowser()->getResponse()->setContent(json_encode($resp_array, JSON_THROW_ON_ERROR));
     } elseif ('2' == $api_version) {
-      $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
+      $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
     } else {
       throw new ApiVersionNotSupportedException($api_version);
     }
   }
 
   /**
-   * @When I upload this generated program, API version :api_version
-   * @When I upload a generated program, API version :api_version
+   * @When I upload this generated project, API version :api_version
+   * @When I upload a generated project, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
@@ -1934,11 +1938,11 @@ class ApiContext implements Context
    */
   public function iUploadThisGeneratedProject(string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version);
   }
 
   /**
-   * @When user :username uploads this generated program, API version :api_version
+   * @When user :username uploads this generated project, API version :api_version
    *
    * @param string $username    The name of the user uploading the project
    * @param string $api_version The version of the API to be used
@@ -1951,7 +1955,7 @@ class ApiContext implements Context
   }
 
   /**
-   * @When user :username uploads this generated program, API version :api_version, ID :id
+   * @When user :username uploads this generated project, API version :api_version, ID :id
    *
    * @param string $username    The name of the user uploading the project
    * @param string $api_version The version of the API to be used
@@ -1964,75 +1968,75 @@ class ApiContext implements Context
     /** @var User|null $user */
     $user = $this->getUserManager()->findUserByUsername($username);
     Assert::assertNotNull($user);
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, $user, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, $user, $id);
   }
 
   /**
-   * @When I upload the program with the id ":id", API version :api_version
+   * @When I upload the project with the id ":id", API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProgramWithId(mixed $id, string $api_version): void
+  public function iUploadAProjectWithId(mixed $id, string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
   }
 
   /**
-   * @When I upload the generated program with the id :id and name :name, API version :api_version
+   * @When I upload the generated project with the id :id and name :name, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadTheGeneratedProgramWithIdAndName(mixed $id, mixed $name, string $api_version): void
+  public function iUploadTheGeneratedProjectWithIdAndName(mixed $id, mixed $name, string $api_version): void
   {
-    $this->uploadProject(sys_get_temp_dir().'/program_generated.catrobat', $api_version, null, $id);
+    $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
 
     /** @var Program $project */
-    $project = $this->getProgramManager()->find($id);
+    $project = $this->getProjectManager()->find($id);
     $project->setName($name);
-    $this->getProgramManager()->save($project);
+    $this->getProjectManager()->save($project);
 
     $this->new_uploaded_projects[] = $project;
   }
 
   /**
-   * @When I upload this generated program again without extensions, API version :api_version
+   * @When I upload this generated project again without extensions, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API is not supported
    */
-  public function iUploadTheGeneratedProgramAgainWithoutExtensions(string $api_version): void
+  public function iUploadTheGeneratedProjectAgainWithoutExtensions(string $api_version): void
   {
     $this->iHaveAProjectWithAs('name', 'extensions');
     $this->iUploadThisGeneratedProject($api_version);
   }
 
   /**
-   * @When I upload another program with name set to ":name" and url set to ":url", API version :api_version
+   * @When I upload another project with name set to :name and url set to :url, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnotherProgramWithNameSetToAndUrlSetTo(mixed $name, mixed $url, $api_version): void
+  public function iUploadAnotherProjectWithNameSetToAndUrlSetTo(mixed $name, mixed $url, $api_version): void
   {
     $this->iHaveAProjectWithAsTwoHeaderFields('name', $name, 'url', $url);
     $this->iUploadThisGeneratedProject($api_version);
   }
 
   /**
-   * @When I upload another program with name set to :arg1, url set to :arg2 \
+   * @When I upload another project with name set to :arg1, url set to :arg2 \
    *       and catrobatLanguageVersion set to :arg3, API version :api_version
    *
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnotherProgramWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(mixed $name, mixed $url, mixed $catrobat_language_version, string $api_version): void
+  public function iUploadAnotherProjectWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(mixed $name, mixed $url, mixed $catrobat_language_version, string $api_version): void
   {
     $this->iHaveAProjectWithAsMultipleHeaderFields('name', $name, 'url', $url,
       'catrobatLanguageVersion', $catrobat_language_version);
@@ -2040,19 +2044,19 @@ class ApiContext implements Context
   }
 
   /**
-   * @When I upload this generated program again with the tags :arg1, API version :arg2
+   * @When I upload this generated project again with the tags :arg1, API version :arg2
    *
    * @param mixed  $tags        The tags of the project
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadThisProgramAgainWithTheTags(mixed $tags, $api_version): void
+  public function iUploadThisProjectAgainWithTheTags(mixed $tags, $api_version): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       'tags' => $tags,
     ]);
-    $file = sys_get_temp_dir().'/program_generated.catrobat';
+    $file = sys_get_temp_dir().'/project_generated.catrobat';
     $this->uploadProject($file, $api_version);
   }
 
@@ -2170,22 +2174,22 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^I have a program with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
+   * @Given /^I have a project with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
    */
   public function iHaveAProjectWithAsTwoHeaderFields(mixed $key1, mixed $value1, mixed $key2, mixed $value2): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       $key1 => $value1,
       $key2 => $value2,
     ]);
   }
 
   /**
-   * @Given I have a program with :key1 set to :value1, :key2 set to :value2 and :key3 set to :value3
+   * @Given I have a project with :key1 set to :value1, :key2 set to :value2 and :key3 set to :value3
    */
   public function iHaveAProjectWithAsMultipleHeaderFields(mixed $key1, mixed $value1, mixed $key2, mixed $value2, mixed $key3, mixed $value3): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       $key1 => $value1,
       $key2 => $value2,
       $key3 => $value3,
@@ -2238,12 +2242,11 @@ class ApiContext implements Context
 
   /**
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)"$/
-   * @Given /^I have a program with "([^"]*)" set to "([^"]*)"$/
    * @Given /^there is a project with "([^"]*)" set to "([^"]*)"$/
    */
   public function iHaveAProjectWithAs(mixed $key, mixed $value): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       $key => $value,
     ]);
   }
@@ -2303,9 +2306,9 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^I should see the hashtag "([^"]*)" in the program description$/
+   * @Then /^I should see the hashtag "([^"]*)" in the project description$/
    */
-  public function iShouldSeeTheHashtagInTheProgramDescription(mixed $hashtag): void
+  public function iShouldSeeTheHashtagInTheProjectDescription(mixed $hashtag): void
   {
     Assert::assertStringContainsString($hashtag, $this->getKernelBrowser()
       ->getResponse()
@@ -2314,34 +2317,34 @@ class ApiContext implements Context
 
   // to df ->
   /**
-   * @Then /^the program "([^"]*)" should be a remix root$/
+   * @Then /^the project "([^"]*)" should be a remix root$/
    */
-  public function theProgramShouldBeARemixRoot(mixed $program_id): void
+  public function theProjectShouldBeARemixRoot(mixed $project_id): void
   {
-    $program_manager = $this->getProgramManager();
-    $uploaded_program = $program_manager->find($program_id);
-    Assert::assertTrue($uploaded_program->isRemixRoot());
+    $project_manager = $this->getProjectManager();
+    $uploaded_project = $project_manager->find($project_id);
+    Assert::assertTrue($uploaded_project->isRemixRoot());
   }
 
   /**
-   * @Then /^the program "([^"]*)" should not be a remix root$/
+   * @Then /^the project "([^"]*)" should not be a remix root$/
    */
-  public function theProgramShouldNotBeARemixRoot(mixed $program_id): void
+  public function theProjectShouldNotBeARemixRoot(mixed $project_id): void
   {
-    $program_manager = $this->getProgramManager();
-    /** @var Program $uploaded_program */
-    $uploaded_program = $program_manager->find($program_id);
-    Assert::assertFalse($uploaded_program->isRemixRoot());
+    $project_manager = $this->getProjectManager();
+    /** @var Program $uploaded_project */
+    $uploaded_project = $project_manager->find($project_id);
+    Assert::assertFalse($uploaded_project->isRemixRoot());
   }
 
   /**
-   * @Given /^the program "([^"]*)" should have a Scratch parent having id "([^"]*)"$/
+   * @Given /^the project "([^"]*)" should have a Scratch parent having id "([^"]*)"$/
    */
-  public function theProgramShouldHaveAScratchParentHavingScratchID(mixed $program_id, mixed $scratch_parent_id): void
+  public function theProjectShouldHaveAScratchParentHavingScratchID(mixed $project_id, mixed $scratch_parent_id): void
   {
-    $direct_edge_relation = $this->getScratchProgramRemixRepository()->findOneBy([
+    $direct_edge_relation = $this->getScratchProjectRemixRepository()->findOneBy([
       'scratch_parent_id' => $scratch_parent_id,
-      'catrobat_child_id' => $program_id,
+      'catrobat_child_id' => $project_id,
     ]);
 
     Assert::assertNotNull($direct_edge_relation);
@@ -2350,12 +2353,12 @@ class ApiContext implements Context
   }
 
   /**
-   * @Given /^the program "([^"]*)" should have no further Scratch parents$/
+   * @Given /^the project "([^"]*)" should have no further Scratch parents$/
    */
-  public function theProgramShouldHaveNoFurtherScratchParents(mixed $program_id): void
+  public function theProjectShouldHaveNoFurtherScratchParents(mixed $project_id): void
   {
-    $direct_edge_relations = $this->getScratchProgramRemixRepository()->findBy([
-      'catrobat_child_id' => $program_id,
+    $direct_edge_relations = $this->getScratchProjectRemixRepository()->findBy([
+      'catrobat_child_id' => $project_id,
     ]);
 
     $further_scratch_parent_relations = array_filter($direct_edge_relations,
@@ -2367,13 +2370,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
+   * @Then /^the project "([^"]*)" should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
    */
-  public function theProgramShouldHaveACatrobatForwardAncestorHavingIdAndDepth(mixed $program_id, mixed $ancestor_program_id, mixed $depth): void
+  public function theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(mixed $project_id, mixed $ancestor_project_id, mixed $depth): void
   {
-    $forward_ancestor_relation = $this->getProgramRemixForwardRepository()->findOneBy([
-      'ancestor_id' => $ancestor_program_id,
-      'descendant_id' => $program_id,
+    $forward_ancestor_relation = $this->getProjectRemixForwardRepository()->findOneBy([
+      'ancestor_id' => $ancestor_project_id,
+      'descendant_id' => $project_id,
       'depth' => $depth,
     ]);
 
@@ -2381,20 +2384,20 @@ class ApiContext implements Context
     $this->checked_catrobat_remix_forward_ancestor_relations[$forward_ancestor_relation->getUniqueKey()] =
       $forward_ancestor_relation;
 
-    if ($program_id == $ancestor_program_id && 0 == $depth) {
+    if ($project_id == $ancestor_project_id && 0 == $depth) {
       $this->checked_catrobat_remix_forward_descendant_relations[$forward_ancestor_relation->getUniqueKey()] =
         $forward_ancestor_relation;
     }
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have a Catrobat backward parent having id "([^"]*)"$/
+   * @Then /^the project "([^"]*)" should have a Catrobat backward parent having id "([^"]*)"$/
    */
-  public function theProgramShouldHaveACatrobatBackwardParentHavingId(mixed $program_id, mixed $backward_parent_program_id): void
+  public function theProjectShouldHaveACatrobatBackwardParentHavingId(mixed $project_id, mixed $backward_parent_project_id): void
   {
-    $backward_parent_relation = $this->getProgramRemixBackwardRepository()->findOneBy([
-      'parent_id' => $backward_parent_program_id,
-      'child_id' => $program_id,
+    $backward_parent_relation = $this->getProjectRemixBackwardRepository()->findOneBy([
+      'parent_id' => $backward_parent_project_id,
+      'child_id' => $project_id,
     ]);
 
     Assert::assertNotNull($backward_parent_relation);
@@ -2403,13 +2406,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no Catrobat forward ancestors except self-relation$/
+   * @Then /^the project "([^"]*)" should have no Catrobat forward ancestors except self-relation$/
    */
-  public function theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(mixed $program_id): void
+  public function theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(mixed $project_id): void
   {
     $forward_ancestors_including_self_referencing_relation = $this
-      ->getProgramRemixForwardRepository()
-      ->findBy(['descendant_id' => $program_id])
+      ->getProjectRemixForwardRepository()
+      ->findBy(['descendant_id' => $project_id])
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
@@ -2417,13 +2420,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no further Catrobat forward ancestors$/
+   * @Then /^the project "([^"]*)" should have no further Catrobat forward ancestors$/
    */
-  public function theProgramShouldHaveNoFurtherCatrobatForwardAncestors(mixed $program_id): void
+  public function theProjectShouldHaveNoFurtherCatrobatForwardAncestors(mixed $project_id): void
   {
     $forward_ancestors_including_self_referencing_relation = $this
-      ->getProgramRemixForwardRepository()
-      ->findBy(['descendant_id' => $program_id])
+      ->getProjectRemixForwardRepository()
+      ->findBy(['descendant_id' => $project_id])
     ;
 
     $further_forward_ancestor_relations = array_filter($forward_ancestors_including_self_referencing_relation,
@@ -2435,20 +2438,20 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no Catrobat backward parents$/
+   * @Then /^the project "([^"]*)" should have no Catrobat backward parents$/
    */
-  public function theProgramShouldHaveNoCatrobatBackwardParents(mixed $program_id): void
+  public function theProjectShouldHaveNoCatrobatBackwardParents(mixed $project_id): void
   {
-    $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
+    $backward_parent_relations = $this->getProjectRemixBackwardRepository()->findBy(['child_id' => $project_id]);
     Assert::assertCount(0, $backward_parent_relations);
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no further Catrobat backward parents$/
+   * @Then /^the project "([^"]*)" should have no further Catrobat backward parents$/
    */
-  public function theProgramShouldHaveNoFurtherCatrobatBackwardParents(mixed $program_id): void
+  public function theProjectShouldHaveNoFurtherCatrobatBackwardParents(mixed $project_id): void
   {
-    $backward_parent_relations = $this->getProgramRemixBackwardRepository()->findBy(['child_id' => $program_id]);
+    $backward_parent_relations = $this->getProjectRemixBackwardRepository()->findBy(['child_id' => $project_id]);
 
     $further_backward_parent_relations = array_filter($backward_parent_relations,
       fn (ProgramRemixBackwardRelation $relation): bool => !array_key_exists(
@@ -2459,32 +2462,32 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no Catrobat ancestors except self-relation$/
+   * @Then /^the project "([^"]*)" should have no Catrobat ancestors except self-relation$/
    */
-  public function theProgramShouldHaveNoCatrobatAncestors(mixed $program_id): void
+  public function theProjectShouldHaveNoCatrobatAncestors(mixed $project_id): void
   {
-    $this->theProgramShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($program_id);
-    $this->theProgramShouldHaveNoCatrobatBackwardParents($program_id);
+    $this->theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($project_id);
+    $this->theProjectShouldHaveNoCatrobatBackwardParents($project_id);
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no Scratch parents$/
+   * @Then /^the project "([^"]*)" should have no Scratch parents$/
    */
-  public function theProgramShouldHaveNoScratchParents(mixed $program_id): void
+  public function theProjectShouldHaveNoScratchParents(mixed $project_id): void
   {
-    $scratch_parents = $this->getScratchProgramRemixRepository()->findBy(['catrobat_child_id' => $program_id]);
+    $scratch_parents = $this->getScratchProjectRemixRepository()->findBy(['catrobat_child_id' => $project_id]);
     Assert::assertCount(0, $scratch_parents);
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
+   * @Then /^the project "([^"]*)" should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
    */
-  public function theProgramShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $program_id, mixed $descendant_program_id, mixed $depth): void
+  public function theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $project_id, mixed $descendant_project_id, mixed $depth): void
   {
     /** @var ProgramRemixRelation $forward_descendant_relation */
-    $forward_descendant_relation = $this->getProgramRemixForwardRepository()->findOneBy([
-      'ancestor_id' => $program_id,
-      'descendant_id' => $descendant_program_id,
+    $forward_descendant_relation = $this->getProjectRemixForwardRepository()->findOneBy([
+      'ancestor_id' => $project_id,
+      'descendant_id' => $descendant_project_id,
       'depth' => $depth,
     ]);
 
@@ -2492,20 +2495,20 @@ class ApiContext implements Context
     $this->checked_catrobat_remix_forward_descendant_relations[$forward_descendant_relation->getUniqueKey()] =
       $forward_descendant_relation;
 
-    if ($program_id == $descendant_program_id && 0 == $depth) {
+    if ($project_id == $descendant_project_id && 0 == $depth) {
       $this->checked_catrobat_remix_forward_ancestor_relations[$forward_descendant_relation->getUniqueKey()] =
         $forward_descendant_relation;
     }
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have no Catrobat forward descendants except self-relation$/
+   * @Then /^the project "([^"]*)" should have no Catrobat forward descendants except self-relation$/
    */
-  public function theProgramShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(mixed $program_id): void
+  public function theProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(mixed $project_id): void
   {
     $forward_ancestors_including_self_referencing_relation = $this
-      ->getProgramRemixForwardRepository()
-      ->findBy(['ancestor_id' => $program_id])
+      ->getProjectRemixForwardRepository()
+      ->findBy(['ancestor_id' => $project_id])
     ;
 
     Assert::assertCount(0, array_filter($forward_ancestors_including_self_referencing_relation,
@@ -2513,13 +2516,13 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then the program :program_id should have no further Catrobat forward descendants
+   * @Then the project :project_id should have no further Catrobat forward descendants
    */
-  public function theProgramShouldHaveNoFurtherCatrobatForwardDescendants(mixed $program_id): void
+  public function theProjectShouldHaveNoFurtherCatrobatForwardDescendants(mixed $project_id): void
   {
     $forward_descendants_including_self_referencing_relation = $this
-      ->getProgramRemixForwardRepository()
-      ->findBy(['ancestor_id' => $program_id])
+      ->getProjectRemixForwardRepository()
+      ->findBy(['ancestor_id' => $project_id])
     ;
 
     $further_forward_descendant_relations = array_filter($forward_descendants_including_self_referencing_relation,
@@ -2531,16 +2534,16 @@ class ApiContext implements Context
   }
 
   /**
-   * @Then /^the program "([^"]*)" should have RemixOf "([^"]*)" in the xml$/
+   * @Then /^the project "([^"]*)" should have RemixOf "([^"]*)" in the xml$/
    */
-  public function theProgramShouldHaveRemixofInTheXml(mixed $program_id, mixed $value): void
+  public function theProjectShouldHaveRemixofInTheXml(mixed $project_id, mixed $value): void
   {
-    $program_manager = $this->getProgramManager();
-    /** @var Program $uploaded_program */
-    $uploaded_program = $program_manager->find($program_id);
+    $project_manager = $this->getProjectManager();
+    /** @var Program $uploaded_project */
+    $uploaded_project = $project_manager->find($project_id);
     $efr = $this->getExtractedFileRepository();
-    $extracted_catrobat_file = $efr->loadProgramExtractedFile($uploaded_program);
-    $project_xml_prop = $extracted_catrobat_file->getProgramXmlProperties();
+    $extracted_catrobat_file = $efr->loadProjectExtractedFile($uploaded_project);
+    $project_xml_prop = $extracted_catrobat_file->getProjectXmlProperties();
     Assert::assertEquals($value, $project_xml_prop->header->remixOf->__toString());
   }
 
@@ -2553,14 +2556,14 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I upload a catrobat program with the phiro app$/
+   * @When /^I upload a catrobat project with the phiro app$/
    *
    * @throws ApiVersionNotSupportedException
    */
-  public function iUploadACatrobatProgramWithThePhiroProApp(): void
+  public function iUploadACatrobatProjectWithThePhiroProApp(): void
   {
     $user = $this->insertUser();
-    $uploadedFile = $this->getStandardProgramFile();
+    $uploadedFile = $this->getStandardProjectFile();
     $this->uploadProject(strval($uploadedFile), '1', $user, '1', 'phirocode');
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
@@ -2592,23 +2595,23 @@ class ApiContext implements Context
   }
 
   /**
-   * @When /^I upload a standard catrobat program$/
+   * @When /^I upload a standard catrobat project$/
    *
    * @throws ApiVersionNotSupportedException
    */
-  public function iUploadAStandardCatrobatProgram(): void
+  public function iUploadAStandardCatrobatProject(): void
   {
     $user = $this->insertUser();
-    $uploadedFile = $this->getStandardProgramFile();
+    $uploadedFile = $this->getStandardProjectFile();
     $this->uploadProject(strval($uploadedFile), '1', $user, '1');
     Assert::assertEquals(200, $this->getKernelBrowser()->getResponse()->getStatusCode(),
       'Wrong response code. '.$this->getKernelBrowser()->getResponse()->getContent());
   }
 
   /**
-   * @Then /^I should be redirected to a catrobat program$/
+   * @Then /^I should be redirected to a catrobat project$/
    */
-  public function iShouldBeRedirectedToACatrobatProgram(): void
+  public function iShouldBeRedirectedToACatrobatProject(): void
   {
     Assert::assertStringStartsWith('/app/project/', $this->getKernelBrowser()->getRequest()->getPathInfo());
   }
@@ -2620,9 +2623,9 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch'];
+    $expected_categories = ['recent', 'random', 'most_downloaded', 'example', 'scratch', 'trending'];
     $categories = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    Assert::assertEquals(count($expected_categories), is_countable($categories) ? count($categories) : 0, 'Number of returned programs should be '.count($expected_categories));
+    Assert::assertEquals(count($expected_categories), is_countable($categories) ? count($categories) : 0, 'Number of returned projects should be '.count($expected_categories));
 
     foreach ($categories as $category) {
       Assert::assertIsString($category['type']);
@@ -2630,9 +2633,9 @@ class ApiContext implements Context
       Assert::assertIsArray($category['projectsList']);
       foreach ($category['projectsList'] as $project) {
         Assert::assertEquals(count($this->default_project_structure), is_countable($project) ? count($project) : 0,
-          'Number of program fields should be '.count($this->default_project_structure));
+          'Number of project fields should be '.count($this->default_project_structure));
         foreach ($this->default_project_structure as $key) {
-          Assert::assertArrayHasKey($key, $project, 'Program should contain '.$key);
+          Assert::assertArrayHasKey($key, $project, 'Project should contain '.$key);
           Assert::assertEquals($this->checkProjectFieldsValue($project, $key), true);
         }
       }
@@ -2646,15 +2649,15 @@ class ApiContext implements Context
   {
     $response = $this->getKernelBrowser()->getResponse();
 
-    $returned_programs = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
-    $expected_programs = $table->getHash();
-    $stored_programs = $this->getStoredPrograms($expected_programs);
-    Assert::assertEquals(count($expected_programs), is_countable($returned_programs) ? count($returned_programs) : 0, 'Number of returned programs should be '.count($expected_programs));
+    $returned_projects = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
+    $expected_projects = $table->getHash();
+    $stored_projects = $this->getStoredProjects($expected_projects);
+    Assert::assertEquals(count($expected_projects), is_countable($returned_projects) ? count($returned_projects) : 0, 'Number of returned projects should be '.count($expected_projects));
 
-    foreach ($returned_programs as $returned_program) {
-      $stored_program = $this->findProgram($stored_programs, $returned_program['name']);
-      Assert::assertNotEmpty($stored_program);
-      $this->testExampleProgramStructure($stored_program, $returned_program);
+    foreach ($returned_projects as $returned_project) {
+      $stored_project = $this->findProject($stored_projects, $returned_project['name']);
+      Assert::assertNotEmpty($stored_project);
+      $this->testExampleProjectStructure($stored_project, $returned_project);
     }
   }
 
@@ -2684,11 +2687,11 @@ class ApiContext implements Context
     return json_encode($credentials, JSON_THROW_ON_ERROR);
   }
 
-  private function findProgram(array $programs, string $wanted_program_name): array
+  private function findProject(array $projects, string $wanted_project_name): array
   {
-    foreach ($programs as $program) {
-      if ($program['name'] === $wanted_program_name) {
-        return $program;
+    foreach ($projects as $project) {
+      if ($project['name'] === $wanted_project_name) {
+        return $project;
       }
     }
 
@@ -2706,10 +2709,10 @@ class ApiContext implements Context
     return [];
   }
 
-  private function expectProgram(array $programs, string $value): bool
+  private function expectProject(array $projects, string $value): bool
   {
-    foreach ($programs as $program) {
-      if ($program['Name'] === $value) {
+    foreach ($projects as $project) {
+      if ($project['Name'] === $value) {
         return true;
       }
     }
@@ -2717,59 +2720,59 @@ class ApiContext implements Context
     return false;
   }
 
-  private function getStoredPrograms(array $expected_programs): array
+  private function getStoredProjects(array $expected_projects): array
   {
-    $programs = array_merge($this->dataFixturesContext->getPrograms(), $this->new_uploaded_projects);
-    $projects = [];
-    /** @var Program $program */
-    foreach ($programs as $program) {
-      if (!$this->expectProgram($expected_programs, $program->getName())) {
+    $projects = array_merge($this->dataFixturesContext->getProjects(), $this->new_uploaded_projects);
+    $stored_projects = [];
+    /** @var Program $project */
+    foreach ($projects as $project) {
+      if (!$this->expectProject($expected_projects, $project->getName())) {
         continue;
       }
       $result = [
-        'id' => $program->getId(),
-        'name' => $program->getName(),
-        'author' => $program->getUser()->getUserIdentifier(),
-        'description' => $program->getDescription(),
-        'version' => $program->getCatrobatVersionName(),
-        'views' => $program->getViews(),
-        'download' => $program->getDownloads(),
-        'private' => $program->getPrivate(),
-        'flavor' => $program->getFlavor(),
-        'project_url' => 'http://localhost/app/project/'.$program->getId(),
-        'download_url' => 'http://localhost/api/project/'.$program->getId().'/catrobat',
-        'filesize' => ($program->getFilesize() / 1_048_576),
+        'id' => $project->getId(),
+        'name' => $project->getName(),
+        'author' => $project->getUser()->getUserIdentifier(),
+        'description' => $project->getDescription(),
+        'version' => $project->getCatrobatVersionName(),
+        'views' => $project->getViews(),
+        'download' => $project->getDownloads(),
+        'private' => $project->getPrivate(),
+        'flavor' => $project->getFlavor(),
+        'project_url' => 'http://localhost/app/project/'.$project->getId(),
+        'download_url' => 'http://localhost/api/project/'.$project->getId().'/catrobat',
+        'filesize' => ($project->getFilesize() / 1_048_576),
       ];
-      $projects[] = $result;
+      $stored_projects[] = $result;
     }
 
-    return $projects;
+    return $stored_projects;
   }
 
-  private function getStoredFeaturedPrograms(array $expected_programs): array
+  private function getStoredFeaturedProjects(array $expected_projects): array
   {
-    $programs = $this->dataFixturesContext->getFeaturedPrograms();
+    $featured_projects = $this->dataFixturesContext->getFeaturedProjects();
     $projects = [];
-    /** @var FeaturedProgram $featured_program */
-    foreach ($programs as $featured_program) {
-      if (!$this->expectProgram($expected_programs, $featured_program->getProgram()->getName())) {
+    /** @var FeaturedProgram $featured_project */
+    foreach ($featured_projects as $featured_project) {
+      if (!$this->expectProject($expected_projects, $featured_project->getProgram()->getName())) {
         continue;
       }
-      $url = $featured_program->getUrl();
-      $project_url = 'http://localhost/app/project/'.$featured_program->getProgram()->getId();
+      $url = $featured_project->getUrl();
+      $project_url = 'http://localhost/app/project/'.$featured_project->getProgram()->getId();
       if (empty($url)) {
         $url = $project_url;
       } else {
         $project_url = null;
       }
       $result = [
-        'id' => $featured_program->getId(),
-        'name' => $featured_program->getProgram()->getName(),
-        'author' => $featured_program->getProgram()->getUser()->getUserIdentifier(),
-        'project_id' => $featured_program->getProgram()->getId(),
+        'id' => $featured_project->getId(),
+        'name' => $featured_project->getProgram()->getName(),
+        'author' => $featured_project->getProgram()->getUser()->getUserIdentifier(),
+        'project_id' => $featured_project->getProgram()->getId(),
         'project_url' => $project_url,
         'url' => $url,
-        'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_program->getId().'.jpg',
+        'featured_image' => 'http://localhost/resources_test/featured/featured_'.$featured_project->getId().'.jpg',
       ];
       $projects[] = $result;
     }
@@ -2777,15 +2780,15 @@ class ApiContext implements Context
     return $projects;
   }
 
-  private function getStoredMediaFiles(array $expected_programs): array
+  private function getStoredMediaFiles(array $expected_projects): array
   {
-    $programs = $this->dataFixturesContext->getMediaFiles();
+    $media_projects = $this->dataFixturesContext->getMediaFiles();
     $projects = [];
-    foreach ($programs as $program) {
-      if (!$this->expectProgram($expected_programs, $program['name'])) {
+    foreach ($media_projects as $project) {
+      if (!$this->expectProject($expected_projects, $project['name'])) {
         continue;
       }
-      $projects[] = $program;
+      $projects[] = $project;
     }
 
     return $projects;
@@ -2811,7 +2814,7 @@ class ApiContext implements Context
     return $users;
   }
 
-  private function checkProjectFieldsValue(array $program, string $key): bool
+  private function checkProjectFieldsValue(array $project, string $key): bool
   {
     $fields = [
       'id' => function ($id): void {
@@ -2889,12 +2892,12 @@ class ApiContext implements Context
     ];
 
     Assert::assertArrayHasKey($key, $fields);
-    call_user_func($fields[$key], $program[$key]);
+    call_user_func($fields[$key], $project[$key]);
 
     return true;
   }
 
-  private function checkFeaturedProjectFieldsValue(array $program, string $key): bool
+  private function checkFeaturedProjectFieldsValue(array $project, string $key): bool
   {
     $fields = [
       'id' => function ($id): void {
@@ -2927,12 +2930,12 @@ class ApiContext implements Context
     ];
 
     Assert::assertArrayHasKey($key, $fields);
-    call_user_func($fields[$key], $program[$key]);
+    call_user_func($fields[$key], $project[$key]);
 
     return true;
   }
 
-  private function checkMediaFileFieldsValue(array $program, string $key): bool
+  private function checkMediaFileFieldsValue(array $project, string $key): bool
   {
     $fields = [
       'id' => function ($id): void {
@@ -2971,7 +2974,7 @@ class ApiContext implements Context
     ];
 
     Assert::assertArrayHasKey($key, $fields);
-    call_user_func($fields[$key], $program[$key]);
+    call_user_func($fields[$key], $project[$key]);
 
     return true;
   }
@@ -3046,7 +3049,7 @@ class ApiContext implements Context
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    * @throws \Exception                      when an error while uploading occurs
    */
-  private function uploadProject(string $file, string $api_version, User $user = null, string $desired_id = '',
+  private function uploadProject(string $file, string $api_version, ?User $user = null, string $desired_id = '',
     string $flavor = 'pocketcode'): void
   {
     if (null == $user) {
@@ -3132,22 +3135,22 @@ class ApiContext implements Context
     return strtok($path, '?');
   }
 
-  private function assertProgramsEqual(array $stored_program, array $returned_program): void
+  private function assertProjectsEqual(array $stored_project, array $returned_project): void
   {
-    Assert::assertNotEmpty($stored_program);
-    Assert::assertNotEmpty($returned_program);
+    Assert::assertNotEmpty($stored_project);
+    Assert::assertNotEmpty($returned_project);
     foreach ($this->default_project_structure as $key) {
-      if (array_key_exists($key, $stored_program)) {
-        Assert::assertEquals($stored_program[$key], $returned_program[$key]);
+      if (array_key_exists($key, $stored_project)) {
+        Assert::assertEquals($stored_project[$key], $returned_project[$key]);
       } elseif ('screenshot_large' === $key) {
-        Assert::assertContains($this->pathWithoutParam($returned_program[$key]),
-          ['http://localhost/resources/screenshots/screen_'.$returned_program['id'].'.png',
-            'http://localhost/resources_test/screenshots/screen_'.$returned_program['id'].'.png',
+        Assert::assertContains($this->pathWithoutParam($returned_project[$key]),
+          ['http://localhost/resources/screenshots/screen_'.$returned_project['id'].'.png',
+            'http://localhost/resources_test/screenshots/screen_'.$returned_project['id'].'.png',
             'http://localhost/images/default/screenshot.png', ]);
       } elseif ('screenshot_small' === $key) {
-        Assert::assertContains($this->pathWithoutParam($returned_program[$key]),
-          ['http://localhost/resources/thumbnails/screen_'.$returned_program['id'].'.png',
-            'http://localhost/resources_test/thumbnails/screen_'.$returned_program['id'].'.png',
+        Assert::assertContains($this->pathWithoutParam($returned_project[$key]),
+          ['http://localhost/resources/thumbnails/screen_'.$returned_project['id'].'.png',
+            'http://localhost/resources_test/thumbnails/screen_'.$returned_project['id'].'.png',
             'http://localhost/images/default/thumbnail.png', ]);
       }
     }
@@ -3162,13 +3165,13 @@ class ApiContext implements Context
     }
   }
 
-  private function testExampleProgramStructure(array $stored_program, array $example_project): void
+  private function testExampleProjectStructure(array $stored_project, array $example_project): void
   {
-    Assert::assertNotEmpty($stored_program);
+    Assert::assertNotEmpty($stored_project);
     Assert::assertNotEmpty($example_project);
     foreach ($this->default_project_structure as $key) {
-      if (array_key_exists($key, $stored_program)) {
-        Assert::assertEquals($stored_program[$key], $example_project[$key]);
+      if (array_key_exists($key, $stored_project)) {
+        Assert::assertEquals($stored_project[$key], $example_project[$key]);
       } elseif ('screenshot_large' === $key) {
         Assert::assertContains($this->pathWithoutParam($example_project[$key]),
           ['http://localhost/resources/example/example_'.$example_project['id'].'.jpg']);

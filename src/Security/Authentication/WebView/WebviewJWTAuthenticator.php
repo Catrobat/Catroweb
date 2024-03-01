@@ -11,10 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
+/** @psalm-suppress UnimplementedInterfaceMethod */
 class WebviewJWTAuthenticator extends JWTAuthenticator
 {
   public function __construct(
@@ -23,14 +23,9 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
     EventDispatcherInterface $dispatcher,
     TokenExtractorInterface $tokenExtractor,
     UserProviderInterface $userProvider,
-    TranslatorInterface $translator = null)
+    ?TranslatorInterface $translator = null)
   {
     parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $userProvider, $translator);
-  }
-
-  public function authenticate(Request $request): Passport
-  {
-    return parent::doAuthenticate($request);
   }
 
   /**

@@ -45,7 +45,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
   ;
 
   $routingConfigurator->add('catrobat_web_index', '/')
-    ->controller([\Symfony\Bundle\FrameworkBundle\Controller\RedirectController::class, 'redirectAction'])
+    ->controller([Symfony\Bundle\FrameworkBundle\Controller\RedirectController::class, 'redirectAction'])
     ->defaults(['route' => 'index', 'theme' => 'app'])
   ;
 };

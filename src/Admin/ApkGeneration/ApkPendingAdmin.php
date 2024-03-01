@@ -32,7 +32,8 @@ class ApkPendingAdmin extends AbstractAdmin
 
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository
-  ) {}
+  ) {
+  }
 
   /**
    * @param Program $object
@@ -98,7 +99,7 @@ class ApkPendingAdmin extends AbstractAdmin
       ->add('apk_request_time')
       ->add('thumbnail', 'string', [
         'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-        'template' => 'Admin/program_thumbnail_image_list.html.twig',
+        'template' => 'Admin/project_thumbnail_image_list.html.twig',
       ])
       ->add('apk_status', 'choice', [
         'choices' => [

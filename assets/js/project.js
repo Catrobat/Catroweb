@@ -7,16 +7,16 @@ import './components/fullscreen_list_modal'
 import { TranslateProgram } from './custom/TranslateProgram'
 import { TranslateComments } from './custom/TranslateComments'
 import { ProjectList } from './components/project_list'
-import { Program } from './custom/Program'
+import { Project } from './custom/Project'
 import { shareLink } from './custom/ShareLink'
-import { ProgramDescription } from './custom/ProgramDescription'
-import { ProgramCredits } from './custom/ProgramCredits'
-import { ProgramComments } from './custom/ProgramComments'
+import { ProjectDescription } from './custom/ProjectDescription'
+import { ProjectCredits } from './custom/ProjectCredits'
+import { ProjectComments } from './custom/ProjectComments'
 import { CustomTranslationApi } from './api/CustomTranslationApi'
 import { ProjectEditorNavigation } from './components/ProjectEditorNavigation'
 import { ProjectEditor } from './components/ProjectEditor'
 import { ProjectEditorTextField } from './components/ProjectEditorTextField'
-import { ProgramName } from './custom/ProgramName'
+import { ProjectName } from './custom/ProjectName'
 import ProjectApi from './api/ProjectApi'
 import { ProjectEditorTextFieldModel } from './components/ProjectEditorTextFieldModel'
 import { ProjectEditorModel } from './components/ProjectEditorModel'
@@ -32,7 +32,7 @@ const $appLanguage = $('#app-language')
 
 let editorNavigation = null
 
-if ($project.data('my-program')) {
+if ($project.data('my-project')) {
   new MDCTextField(document.querySelector('.comment-message'))
 
   const nameEditorTextFieldModel = new ProjectEditorTextFieldModel(
@@ -94,8 +94,8 @@ shareLink(
   $projectShare.data('trans-clipboard-fail'),
 )
 
-/* TODO: Disable Report Program for now. Needs a separate flag in database - a new concept!
-ProgramReport(
+/* TODO: Disable Report Project for now. Needs a separate flag in database - a new concept!
+ProjectReport(
   $projectReport.data('project-id'),
   $projectReport.data('path-report'),
   $projectReport.data('path-login'),
@@ -114,11 +114,11 @@ ProgramReport(
 )
 */
 
-Program(
+Project(
   $project.data('project-id'),
   $project.data('project-name'),
   $project.data('user-role'),
-  $project.data('my-program') === 'true',
+  $project.data('my-project') === 'true',
   $project.data('path-ci-status'),
   $project.data('path-ci-build'),
   $project.data('path-project-like'),
@@ -138,27 +138,27 @@ Program(
   $project.data('trans-download-start'),
 )
 
-ProgramName(
+ProjectName(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
-  $project.data('my-program'),
+  $project.data('my-project'),
   new CustomTranslationApi('name'),
   editorNavigation,
 )
 
-ProgramDescription(
+ProjectDescription(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
   $projectDescriptionCredits.data('trans-more-info'),
   $projectDescriptionCredits.data('trans-less-info'),
-  $project.data('my-program'),
+  $project.data('my-project'),
   new CustomTranslationApi('description'),
 )
 
-ProgramCredits(
+ProjectCredits(
   $projectDescriptionCredits.data('project-id'),
   $appLanguage.data('app-language'),
-  $project.data('my-program'),
+  $project.data('my-project'),
   new CustomTranslationApi('credit'),
 )
 
@@ -265,7 +265,7 @@ new TranslateComments(
   $project.data('google-translate-display-name'),
 )
 
-ProgramComments(
+ProjectComments(
   $projectComments.data('project-id'),
   5,
   5,

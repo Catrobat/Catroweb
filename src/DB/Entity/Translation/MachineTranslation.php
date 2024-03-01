@@ -3,48 +3,29 @@
 namespace App\DB\Entity\Translation;
 
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 abstract class MachineTranslation
 {
-  /**
-   * @ORM\Id
-   *
-   * @ORM\GeneratedValue
-   *
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Id]
+  #[ORM\GeneratedValue]
+  #[ORM\Column(type: 'integer')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\Column(type="float")
-   */
+  #[ORM\Column(type: 'float')]
   protected float $usage_per_month;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected \DateTime $last_modified_at;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected \DateTime $created_at;
 
-  public function __construct(/**
-   * @ORM\Column(type="string", length=5)
-   */
-    protected string $source_language, /**
-   * @ORM\Column(type="string", length=5)
-   */
-    protected string $target_language, /**
-   * @ORM\Column(type="string")
-   */
-    protected string $provider, /**
-   * @ORM\Column(type="integer")
-   */
-    protected int $usage_count = 1)
+  public function __construct(
+    #[ORM\Column(type: 'string', length: 5)] protected string $source_language,
+    #[ORM\Column(type: 'string', length: 5)] protected string $target_language,
+    #[ORM\Column(type: 'string')] protected string $provider,
+    #[ORM\Column(type: 'integer')] protected int $usage_count = 1)
   {
     $this->usage_per_month = $usage_count;
   }
@@ -95,10 +76,9 @@ abstract class MachineTranslation
   }
 
   /**
-   * @ORM\PrePersist
-   *
    * @throws \Exception
    */
+  #[ORM\PrePersist]
   public function initTimestamps(): void
   {
     $this->last_modified_at = TimeUtils::getDateTime();
@@ -106,10 +86,9 @@ abstract class MachineTranslation
   }
 
   /**
-   * @ORM\PreUpdate
-   *
    * @throws \Exception
    */
+  #[ORM\PreUpdate]
   public function preUpdate(): void
   {
     $this->last_modified_at = TimeUtils::getDateTime();

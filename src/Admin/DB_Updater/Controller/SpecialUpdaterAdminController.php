@@ -18,9 +18,10 @@ class SpecialUpdaterAdminController extends CRUDController
 {
   public function __construct(
     protected KernelInterface $kernel
-  ) {}
+  ) {
+  }
 
-  public function listAction(Request $request = null): Response
+  public function listAction(?Request $request = null): Response
   {
     return $this->renderWithExtraParams('Admin/DB_Updater/admin_special_updater.html.twig', [
       'updateSpecialUrl' => $this->admin->generateUrl('update_special'),

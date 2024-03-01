@@ -5,7 +5,7 @@ namespace App\System\Commands\Create;
 use App\DB\Entity\User\Notifications\RemixNotification;
 use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixManager;
-use App\System\Commands\Helpers\RemixManipulationProgramManager;
+use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\Notification\NotificationManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class CreateRemixCommand extends Command
 {
-  public function __construct(private readonly RemixManipulationProgramManager $remix_manipulation_program_manager,
+  public function __construct(private readonly RemixManipulationProjectManager $remix_manipulation_program_manager,
     private readonly RemixManager $remix_manager,
     private readonly NotificationManager $notification_service)
   {

@@ -4,6 +4,7 @@ namespace Tests\PhpUnit\Studio;
 
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
@@ -23,7 +24,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class StudioManagerTest extends DefaultTestCase
 {
-  protected StudioManager|MockObject $object;
+  protected MockObject|StudioManager $object;
   /**
    * @var UserDataFixtures|null
    */
@@ -58,9 +59,10 @@ class StudioManagerTest extends DefaultTestCase
     $studio_project_repository = $this->entity_manager->getRepository(StudioProgram::class);
     $studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
     $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
+    $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
     $this->object = $this->getMockBuilder(StudioManager::class)->setConstructorArgs(
       [$this->entity_manager, $studio_repository, $studio_activity_repository,
-        $studio_project_repository, $studio_user_repository, $user_comment_repository, ])
+        $studio_project_repository, $studio_user_repository, $user_comment_repository, $studio_join_request_repository, ])
       ->getMockForAbstractClass()
     ;
     $this->user_manager = $kernel->getContainer()->get(UserManager::class);

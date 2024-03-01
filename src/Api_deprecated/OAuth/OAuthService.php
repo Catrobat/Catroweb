@@ -16,7 +16,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OAuthService
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly ValidatorInterface $validator, private readonly TranslatorInterface $translator, private readonly TokenGenerator $token_generator)
+  {
+  }
 
   /**
    * @throws \Exception
@@ -220,7 +222,7 @@ class OAuthService
    * @throws \Exception
    */
   private function registerGoogleUser(Request $request, array &$retArray, string $googleId,
-    string $googleUsername, string $googleEmail, string $id_token = null): void
+    string $googleUsername, string $googleEmail, ?string $id_token = null): void
   {
     if ($this->user_manager->findUserByUsername($googleUsername)) {
       $username = PasswordGenerator::generateRandomPassword();

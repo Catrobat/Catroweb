@@ -7,7 +7,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -35,15 +35,16 @@ class ApproveProjectsAdmin extends AbstractAdmin
 
   protected $baseRoutePattern = 'approve';
 
-  private ?ExtractedCatrobatFile $extractedProgram = null;
+  private ?ExtractedCatrobatFile $extractedProject = null;
 
   public function __construct(
     private readonly ScreenshotRepository $screenshot_repository,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly ExtractedFileRepository $extracted_file_repository,
     protected TokenStorageInterface $security_token_storage,
     protected ParameterBagInterface $parameter_bag
-  ) {}
+  ) {
+  }
 
   /**
    * @param mixed|Program $object
@@ -57,20 +58,20 @@ class ApproveProjectsAdmin extends AbstractAdmin
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
-     * @var $program_manager ProgramManager
-     * @var $object Program
+     * @var $project_manager ProjectManager
+     * @var $object Project
      */
 
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram) {
+    if (null == $this->extractedProject) {
       return [];
     }
 
-    $image_paths = $this->extractedProgram->getContainingImagePaths();
+    $image_paths = $this->extractedProject->getContainingImagePaths();
 
     return $this->encodeFileNameOfPathsArray($image_paths);
   }
@@ -79,21 +80,21 @@ class ApproveProjectsAdmin extends AbstractAdmin
   {
     /*
      * @var $extractedFileRepository ExtractedFileRepository
-     * @var $progManager ProgramManager
-     * @var $object Program
+     * @var $projectManager ProjectManager
+     * @var $object Project
      */
 
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram) {
+    if (null == $this->extractedProject) {
       return [];
     }
 
-    return $this->encodeFileNameOfPathsArray($this->extractedProgram->getContainingSoundPaths());
+    return $this->encodeFileNameOfPathsArray($this->extractedProject->getContainingSoundPaths());
   }
 
   /**
@@ -101,16 +102,16 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getContainingStrings($object): array
   {
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
-    if (null == $this->extractedProgram) {
+    if (null == $this->extractedProject) {
       return [];
     }
 
-    return $this->extractedProgram->getContainingStrings();
+    return $this->extractedProject->getContainingStrings();
   }
 
   /**
@@ -118,17 +119,17 @@ class ApproveProjectsAdmin extends AbstractAdmin
    */
   public function getContainingCodeObjects($object): array
   {
-    if (null == $this->extractedProgram) {
-      $this->extractedProgram = $this->extracted_file_repository->loadProgramExtractedFile(
-        $this->program_manager->find($object->getId())
+    if (null == $this->extractedProject) {
+      $this->extractedProject = $this->extracted_file_repository->loadProjectExtractedFile(
+        $this->project_manager->find($object->getId())
       );
     }
 
-    if (null == $this->extractedProgram || $this->extractedProgram->hasScenes()) {
+    if (null == $this->extractedProject || $this->extractedProject->hasScenes()) {
       return [];
     }
 
-    return $this->extractedProgram->getContainingCodeObjects();
+    return $this->extractedProject->getContainingCodeObjects();
   }
 
   protected function configureQuery(ProxyQueryInterface $query): ProxyQueryInterface
@@ -154,7 +155,7 @@ class ApproveProjectsAdmin extends AbstractAdmin
        */
       ->add('thumbnail', null, [
         'accessor' => fn ($subject): string => $this->getThumbnailImageUrl($subject),
-        'template' => 'Admin/program_thumbnail_image.html.twig',
+        'template' => 'Admin/project_thumbnail_image.html.twig',
       ])
       ->add('id')
       ->add('Name')
@@ -165,23 +166,23 @@ class ApproveProjectsAdmin extends AbstractAdmin
       ->add('visible', 'boolean')
       ->add('Images', null, [
         'accessor' => fn ($subject): array => $this->getContainingImageUrls($subject),
-        'template' => 'Admin/program_containing_image.html.twig',
+        'template' => 'Admin/project_containing_image.html.twig',
       ])
       ->add('Sounds', null, [
         'accessor' => fn ($subject): array => $this->getContainingSoundUrls($subject),
-        'template' => 'Admin/program_containing_sound.html.twig',
+        'template' => 'Admin/project_containing_sound.html.twig',
       ])
       ->add('Strings', null, [
         'accessor' => fn ($subject): array => $this->getContainingStrings($subject),
-        'template' => 'Admin/program_containing_strings.html.twig',
+        'template' => 'Admin/project_containing_strings.html.twig',
       ])
       ->add('Objects', null, [
         'accessor' => fn ($subject): array => $this->getContainingCodeObjects($subject),
-        'template' => 'Admin/program_containing_code_objects.html.twig',
+        'template' => 'Admin/project_containing_code_objects.html.twig',
       ])
       ->add('Actions', null, [
         'accessor' => function ($subject): void {}, // Just some buttons, nothing to "access"!
-        'template' => 'Admin/program_approve_action.html.twig',
+        'template' => 'Admin/project_approve_action.html.twig',
       ])
     ;
   }

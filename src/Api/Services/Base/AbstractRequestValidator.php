@@ -21,7 +21,7 @@ abstract class AbstractRequestValidator implements TranslatorAwareInterface
     $this->initTranslator($translator);
   }
 
-  public function validate(?string $value, Email $constraints = null, mixed $groups = null): ConstraintViolationListInterface
+  public function validate(?string $value, ?Email $constraints = null, mixed $groups = null): ConstraintViolationListInterface
   {
     return $this->validator->validate($value, $constraints, $groups);
   }

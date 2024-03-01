@@ -15,18 +15,18 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Given I log in as "Catrobat"
     When I am on "/app/project/1"
     And I wait for the page to be loaded
-    And the element "#edit-program-button" should be visible
+    And the element "#edit-project-button" should be visible
 
   Scenario: A button for editing project should not exist if I am not the owner of the project
     Given I log in as "Catrobat"
     When I am on "/app/project/2"
     And I wait for the page to be loaded
-    But the element "#edit-program-button" should not exist
+    But the element "#edit-project-button" should not exist
 
   Scenario: Editing a project is not possible if not logged in
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should not exist
+    Then the element "#edit-project-button" should not exist
     And the element "#edit-text-navigation" should not exist
     And the element "#edit-text-ui" should not exist
 
@@ -34,8 +34,8 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Given I log in as "Catrobat"
     And I go to "/app/project/1"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should be visible
-    When I click "#edit-program-button"
+    Then the element "#edit-project-button" should be visible
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-navigation" should be visible
     And I should see "Default"
@@ -61,8 +61,8 @@ Feature: As a project owner, I should be able to provide and edit name, descript
     Given I log in as "OtherUser"
     And I go to "/app/project/2"
     And I wait for the page to be loaded
-    Then the element "#edit-program-button" should be visible
-    When I click "#edit-program-button"
+    Then the element "#edit-project-button" should be visible
+    When I click "#edit-project-button"
     And I wait for AJAX to finish
     Then the element "#edit-text-navigation" should be visible
     And I should see "Default"

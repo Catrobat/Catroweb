@@ -13,7 +13,7 @@ education: Utdanning
 chat: Chat og forum
 privacyGuide: Privacy Awareness Guide
 others: Annet
-tutorials: Help
+tutorials: Hjelp
 googlePlay: Google Play
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGalleri
@@ -41,7 +41,7 @@ country: Land
 loginText: logg på
 privacyPolicy: Personvern
 imprint: Avtrykk
-programDetails: Detaljer
+projectDetails: Detaljer
 somethingWentWrong: 'Ooops, noe gikk galt.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Vennligst prøv igjen!'
@@ -94,118 +94,120 @@ follower:
   unfollowError: "Kan ikke slutte å følge den ønskede brukeren!"
   unfollowQuestion: "Er du sikker på at du vil slutt å følge denne brukeren?"
   unfollowButton: "Slutt å følge %username%"
-programs:
+project:
   welcome:
-    title: Velkommen til Catrobats %theme%
-    title_mindstorms: Velkommen til Catrobats nettsted for Mindstorms EV3 og NXT
-    subtitle: Opprett historier, spill og mer...
-    subtitle_embroidery: Søm  dine egne mønstre på T-skjorter, bager, pant eller smarttelefonsak!
-    subtitle_mindstorms: Opprett dine egne prosjekter med din Lego Mindstorms EV3 og NXT roboter
-    download: Last ned appen
-    statistics: Mer statistikk
-  featured: Anbefalt
-  example: Eksempler
-  newest: Nyeste prosjekter
-  recommended: Anbefalte prosjekter
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: Det finnes ingen prosjekter for tiden.
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
-    Er du sikker?
-    Er du sikker på at du vil slette "%programName%"?
-    Det er ingen måte å gjenopprette dine handlinger!
-    Ja, slett det!
-    Avbryt
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    Er du sikker?
-    Hvis du angir "%programName%" til privat, vil den ikke bli sett eller funnet av andre brukere.
-    Du kan fortsatt dele prosjektet med vennene dine. Du kan veksle synlighet ved å trykke på hengelåsikonet.
-    Hvis du setter "%programName%" til offentlig, sees den og finnes av andre brukere.
-    Ja, satt til offentlig
-    Ja, satt til privat
-    Nei
-  reportCommentConfirmation: Er du sikker på at du vil rapportere denne kommentaren?
-  deleteCommentConfirmation: Er du sikker på at du vil slette denne kommentaren?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Konto sletting?
-    Er du sikker på at du vil slette kontoen din? Dette vil slette dine opplastede prosjekter og kommentarer også!
-    Det er ingen måte å gjenopprette dine handlinger!
-    Ja, slett det!
-    Avbryt
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: Prosjektbeskrivelsen er for lang!
-  tooLongCredits: The project credits are too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Mest Sett
     downloaded: Mest nedlastet
-  random: Tilfeldige prosjekter
-  related: Relaterte prosjekter
-  downloads: '%downloads% nedlastinger'
-  sample: Eksempelprosjekter
-  views: '%views% visninger'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Folk som reagerte på dette prosjektet"
+    likersTitle: "People who reacted to that project"
     all: "Alle"
-  remixes: '{0}0 remikser |{1}1 remiks |]1,Inf]%remixes% remikser'
-  newRemixesNotificationTitle: '➤{1}"%programName%" har 1 ny remix: ″]1,Inf] "%programName%" har %remixes% nye remixes:'
-  submitted: Innsendte prosjekter
-  uploaded: Opplastede prosjekter
-  reportAsInappropriate: Rapporter som upassende
-  reportProgram: Rapportere prosjekt
-  languageVersion: 'Catrobat språk versjon: %languageVersion%'
-  reportLoginText: Vennligst %login% for å rapportere dette prosjektet.
-  reportDialogHeader: Hvorfor vil du rapportere dette prosjektet?
-  reportDialogReason: Angi en årsak
-  reportRadioButtonInappropriate: Det er upassende
-  reportRadioButtonCopyright: Brudd på opphavsrett
-  reportRadioButtonSpam: Den er spam
-  reportRadioButtonDislike: Jeg liker den ikke
-  reportOwnProgram: Du kan ikke flagge ditt eget prosjekt.
-  reportAlready: Du har allerede flagget dette prosjektet.
-  reportDone: Du rapporterte dette prosjektet!
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Oppdater app
-  updateAppText: Oppdater din app til den nyeste versjonen for å kunne laste ned dette prosjektet.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Sjekk ut dette Catrobat prosjektet
-  show_more: Vis mer
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Kommentarer
   send: Send
   delete: Slett
   report: Rapporter
-  report_popup: Kommentaren ble vellykket rapportert.
-  report_popup_header: Rapportert
-  deleted_popup: Kommentaren ble vellykket slettet.
-  deleted_popup_header: Slettet
-  noAdminRights: Du har ingen admin rettigheter. Vennligst logg inn som en admin.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Vil du lagre endringene?
-  btnDiscard: Discard
-  addComment: Skriv en kommentar
-  thumbsUp: Tomlene opp!
-  smile: Smil!
-  love: Elsk!
+  btnDiscard: Slett
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
   wow: Wooow!
-  linkTitle: Lenke
-  link: Kopier prosjektlenke til utklippstavlen
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Reaksjoner
-  downloadErrorText: Det oppstod en feil mens laste ned prosjektet. Prøv igjen senere.
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: Vis oversettelse
-  hideTranslation: Skjul oversettelse
-  translatedByLine: Oversatt av %provider% fra %sourceLanguage% til %targetLanguage%
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
-  default: Default
-  save: Save
+  default: Standard
+  save: Lagre
   translationTitle: '%language% translation'
   editDefault: Edit default
   editTranslation: Edit %language% translation
@@ -220,10 +222,10 @@ remixGraph:
   by: 'av'
   open: 'Åpne '
   showPaths: 'Vis baner'
-  programNotAvailableErrorTitle: 'Beklager...'
-  programNotAvailableErrorDescription: 'Prosjektet er ikke tilgjengelig lenger!'
-  programNotAvailable: 'Ikke tilgjengelig'
-  programUnknownUser: 'Ukjent bruker'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     Vennlig hilsen,<br>
     Ditt Catrobat lag.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Din Catrobat passordgjenoppretting
   message: |
@@ -396,7 +420,9 @@ menu:
   helpAndTutorials: Hjelp & opplæringer
   followersAndFollowing: Følger
   mediaLibrary: Mediebibliotek
-  studio: Studios
+  studio: Studioer
+  language: Språk
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Logg på
   button:
@@ -450,6 +476,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -498,12 +529,12 @@ errors:
   unknown: ukjent feil
   token: 'Autentisering av enheten feilet: Ugyldig auth-token!'
   uploadTokenAuthFailed: 'Opplasting av token auth feilet'
-  program:
-    invalid: Ugyldig prosjekt.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Beklager, prosjektet ditt inneholder en gammel versjon av Catrobat språk! Bruker du den nyeste versjonen av Pocket Code?'
-  programversion:
-    tooold: 'Beklager, du bruker en gammel versjon av Pocket Code. Vennligst oppdater til nyeste versjon.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Autentisering feilet
     webview: |
@@ -708,8 +739,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -754,13 +785,14 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat samfunn'
 back_to_app: 'Forlat samfunnet'
 category:
-  recent: Nyeste prosjekter
-  random: Tilfeldige prosjekter
+  recent: Newest projects
+  random: Random projects
   most_viewed: Mest Sett
   most_downloaded: Mest nedlastet
   example: Eksempel
   scratch: Scratch remixes
-  recommended: Anbefalte prosjekter
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Prestasjoner'
@@ -852,11 +884,13 @@ extensions:
     multiplayer:
       title: Multiplayer
 studio:
-  title: 'Studios'
+  title: 'Studioer'
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Avbryt'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Rapporter'
@@ -865,6 +899,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -873,6 +908,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Rapporter'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programmer'
     comments:
@@ -914,3 +954,12 @@ media_library:
       default: 'Type: unknown'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

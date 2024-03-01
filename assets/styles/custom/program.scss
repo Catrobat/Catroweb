@@ -224,24 +224,24 @@ table td:nth-child(1) {
   max-width: 100%;
 }
 
-.program-name {
+.project-name {
   min-width: 30px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.program-name-animation {
+.project-name-animation {
   overflow: hidden;
   white-space: nowrap;
 }
 
-.translate-program-button-wrapper {
+.translate-project-button-wrapper {
   flex: 1;
   white-space: nowrap;
 }
 
-#program-comments {
+#project-comments {
   #user-comment-wrapper {
     padding-bottom: 15px;
   }
@@ -473,7 +473,7 @@ input[type='number'] {
   color: var(--mdc-theme-primary);
 }
 
-.sign-program-help {
+.sign-project-help {
   top: 0;
   right: 0;
   display: none;

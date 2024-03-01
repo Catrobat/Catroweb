@@ -14,7 +14,7 @@ class LogLine
 
   private string $msg = '';
 
-  public function __construct(string $line = null)
+  public function __construct(?string $line = null)
   {
     if (null === $line) {
       $this->setMsg('No Logs with Loglevel');

@@ -4,36 +4,23 @@ namespace App\DB\Entity\Project\Scratch;
 
 use App\DB\EntityRepository\Project\ScratchProgramRepository;
 use App\Utils\TimeUtils;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\HasLifecycleCallbacks
- *
- * @ORM\Table(name="scratch_program")
- *
- * @ORM\Entity(repositoryClass=ScratchProgramRepository::class)
- */
+#[ORM\Table(name: 'scratch_program')]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\Entity(repositoryClass: ScratchProgramRepository::class)]
 class ScratchProgram
 {
-  /**
-   * @ORM\Column(type="string", length=300, nullable=true)
-   */
+  #[ORM\Column(type: 'string', length: 300, nullable: true)]
   protected ?string $name = null;
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $description = null;
 
-  /**
-   * @ORM\Column(type="text", nullable=true)
-   */
+  #[ORM\Column(type: 'text', nullable: true)]
   protected ?string $username = null;
 
-  /**
-   * @ORM\Column(type="datetime")
-   */
+  #[ORM\Column(type: 'datetime')]
   protected ?\DateTime $last_modified_at = null;
 
   /**
@@ -41,11 +28,9 @@ class ScratchProgram
    *
    * @throws \Exception
    */
-  public function __construct(/**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid", nullable=false)
-   */
+  public function __construct(
+    #[ORM\Id]
+    #[ORM\Column(type: 'guid', nullable: false)]
     protected string $id)
   {
     $this->updateLastModifiedTimestamp();
@@ -73,10 +58,9 @@ class ScratchProgram
   }
 
   /**
-   * @ORM\PreUpdate
-   *
    * @throws \Exception
    */
+  #[ORM\PreUpdate]
   public function updateLastModifiedTimestamp(): void
   {
     $this->setLastModifiedAt(TimeUtils::getDateTime());

@@ -2,13 +2,13 @@
 
 namespace App\DB\EntityRepository\MediaLibrary;
 
+use App\DB\Entity\MediaLibrary\MediaPackage;
 use App\DB\Entity\MediaLibrary\MediaPackageCategory;
 use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\Storage\FileHelper;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
-use Exception;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -230,7 +230,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    *
    * @return mixed an array containing the found media files or null if no results found
    */
-  public function search(string $term, ?string $flavor = 'pocketcode', string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
+  public function search(string $term, ?string $flavor = 'pocketcode', ?string $package_name = null, ?int $limit = PHP_INT_MAX, ?int $offset = 0)
   {
     $flavor = $flavor ?: 'pocketcode';
 
@@ -245,8 +245,8 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     $this->addFileFlavorsCondition($qb, $flavor, 'f', true);
 
     if (null !== $package_name && '' !== trim($package_name)) {
-      $qb->join(\App\DB\Entity\MediaLibrary\MediaPackageCategory::class, 'c')
-        ->join(\App\DB\Entity\MediaLibrary\MediaPackage::class, 'p')
+      $qb->join(MediaPackageCategory::class, 'c')
+        ->join(MediaPackage::class, 'p')
         ->andWhere('f.category = c')
         ->andWhere('c MEMBER OF p.categories')
         ->andWhere('p.name = :package_name')
@@ -264,7 +264,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
    * @param string $id             the id/name of the file
    * @param string $file_extension File extension
    *
-   * @throws \ImagickException
+   * @throws \ImagickException|\ImagickDrawException
    */
   private function createThumbnail(string $id, string $file_extension): void
   {
@@ -360,7 +360,7 @@ class MediaPackageFileRepository extends ServiceEntityRepository
     return $id.'.'.$extension;
   }
 
-  public function addFileFlavorsCondition(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  public function addFileFlavorsCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';

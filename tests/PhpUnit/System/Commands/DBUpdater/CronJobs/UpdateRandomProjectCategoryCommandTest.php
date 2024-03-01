@@ -16,7 +16,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class UpdateRandomProjectCategoryCommandTest extends KernelTestCase
 {
-  protected UpdateRandomProjectCategoryCommand|MockObject $object;
+  protected MockObject|UpdateRandomProjectCategoryCommand $object;
 
   protected function setUp(): void
   {

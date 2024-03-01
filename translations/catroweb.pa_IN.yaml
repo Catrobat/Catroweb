@@ -41,7 +41,7 @@ country: ਦੇਸ਼
 loginText: ਲਾਗਿਨ
 privacyPolicy: ਪਰਾਈਵੇਟ ਨੀਤੀ
 imprint: ਛਾਪ
-programDetails: ਵੇਰਵਾ
+projectDetails: ਵੇਰਵਾ
 somethingWentWrong: 'ਓਓਓਫਸ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'ਮੁੜ ਕੋਸ਼ਿਸ ਕਰੋ ਜੀ!'
@@ -94,114 +94,116 @@ follower:
   unfollowError: "ਲੋੜੀਂਦੇ ਉਪਭੋਗਤਾ ਨੂੰ ਅਨਫੌਲ ਕਰਨ ਵਿੱਚ ਅਸਮਰੱਥ!"
   unfollowQuestion: "ਕੀ ਤੁਸੀਂ ਯਕੀਨਨ ਇਸ ਉਪਯੋਗਕਰਤਾ ਨੂੰ ਅਨਫਾੱਲ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?"
   unfollowButton: "ਅਣਜਾਣ %username%"
-programs:
+project:
   welcome:
-    title: ਕਾਟਰੋਬੈਟ ਦਾ ਸੁਆਗਤ ਹੈ%theme%
-    title_mindstorms: ਮਾਈਂਡਸਟੋਰਮਜ਼ ਈਵੀ 3 ਅਤੇ ਐਨਐਕਸਟੀ ਲਈ ਕੈਟ੍ਰੋਬੈਟ ਦੀ ਸਾਈਟ ਤੇ ਤੁਹਾਡਾ ਸਵਾਗਤ ਹੈ
-    subtitle: ਕਹਾਣੀਆਂ, ਖੇਡਾਂ ਅਤੇ ਹੋਰ ਬਹੁਤ ਕੁਝ ਬਣਾਓ ...
-    subtitle_embroidery: ਆਪਣੀ ਟੀ-ਸ਼ਰਟ, ਬੈਗਾਂ, ਪੈਂਟਾਂ ਜਾਂ ਸਮਾਰਟਫੋਨ ਦੇ ਕੇਸਾਂ 'ਤੇ ਆਪਣੇ ਪੈਟਰਨ ਨੂੰ ਸਿਲਾਈ ਕਰੋ!
-    subtitle_mindstorms: ਆਪਣੇ ਲੇਗੋ ਮਾਈਂਡਸਟੋਰਮਜ਼ ਈਵੀ 3 ਅਤੇ ਐਨਐਕਸਟੀ ਰੋਬੋਟਾਂ ਨਾਲ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਬਣਾਓ
-    download: ਐਪ ਨੂੰ ਡਾਉਨਲੋਡ ਕਰੋ
-    statistics: ਹੋਰ ਅੰਕੜੇ
-  featured: ਫੀਚਰਡ
-  example: ਉਦਾਹਰਣ
-  newest: ਨਵੇਂ ਪ੍ਰੋਜੈਕਟ
-  recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
-  scratchremixes: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
-  noPrograms: ਇਸ ਵੇਲੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਨਹੀਂ ਹਨ.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਮਿਟਾਓ
   deleteConfirmation: |+
-    ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
-    ਕੀ ਤੁਸੀਂ ਪੱਕਾ "%programName%" ਨੂੰ ਹਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
-    ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
-    ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
-    ਰੱਦ ਕਰੋ
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    ਤੁਹਾਨੂੰ ਪੂਰਾ ਵਿਸ਼ਵਾਸ ਹੈ?
-    ਜੇ ਤੁਸੀਂ '%programName%' ਨੂੰ ਪ੍ਰਾਈਵੇਟ ਤੇ ਸੈਟ ਕਰਦੇ ਹੋ, ਤਾਂ ਇਹ ਦੂਜੇ ਉਪਭੋਗਤਾਵਾਂ ਦੁਆਰਾ ਵੇਖਿਆ ਜਾਂ ਲੱਭਿਆ ਨਹੀਂ ਜਾਏਗਾ.
-    ਤੁਸੀਂ ਅਜੇ ਵੀ ਆਪਣੇ ਪ੍ਰੋਜੈਕਟ ਦਾ ਲਿੰਕ ਆਪਣੇ ਦੋਸਤਾਂ ਨਾਲ ਸਾਂਝਾ ਕਰ ਸਕਦੇ ਹੋ. ਤੁਸੀਂ ਪੈਡਲਾਕ ਆਈਕਨ ਨੂੰ ਟੈਪ ਕਰਦੇ ਹੋਏ ਦਰਿਸ਼ਗੋਚਰਤਾ ਨੂੰ ਟੌਗਲ ਕਰ ਸਕਦੇ ਹੋ.
-    ਜੇ ਤੁਸੀਂ "%programName%" ਨੂੰ ਜਨਤਕ ਤੌਰ ਤੇ ਸੈਟ ਕਰਦੇ ਹੋ, ਤਾਂ ਇਹ ਦੂਜੇ ਉਪਭੋਗਤਾਵਾਂ ਦੁਆਰਾ ਵੇਖਿਆ ਅਤੇ ਪਾਇਆ ਜਾ ਸਕਦਾ ਹੈ.
-    ਹਾਂ, ਸਰਵਜਨਕ ਤੇ ਸੈਟ ਕਰੋ
-    ਹਾਂ, ਪ੍ਰਾਈਵੇਟ ਤੇ ਸੈਟ ਕੀਤਾ
-    ਨਹੀਂ
-  reportCommentConfirmation: ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਇਸ ਟਿੱਪਣੀ ਦੀ ਰਿਪੋਰਟ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?
-  deleteCommentConfirmation: ਕੀ ਤੁਸੀਂ ਪੱਕਾ ਇਸ ਟਿੱਪਣੀ ਨੂੰ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    ਖਾਤਾ ਮਿਟਾਉਣਾ?
-    ਕੀ ਤੁਹਾਨੂੰ ਯਕੀਨ ਹੈ ਕਿ ਤੁਸੀਂ ਆਪਣਾ ਖਾਤਾ ਮਿਟਾਉਣਾ ਚਾਹੁੰਦੇ ਹੋ? ਇਹ ਤੁਹਾਡੇ ਅਪਲੋਡ ਕੀਤੇ ਪ੍ਰੋਜੈਕਟਾਂ ਅਤੇ ਟਿੱਪਣੀਆਂ ਨੂੰ ਵੀ ਮਿਟਾ ਦੇਵੇਗਾ!
-    ਤੁਹਾਡੀਆਂ ਕਾਰਵਾਈਆਂ ਨੂੰ ਬਹਾਲ ਕਰਨ ਦਾ ਕੋਈ ਤਰੀਕਾ ਨਹੀਂ ਹੈ!
-    ਹਾਂ, ਇਸਨੂੰ ਮਿਟਾਓ!
-    ਰੱਦ ਕਰੋ
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: ਪ੍ਰੋਜੈਕਟ ਦਾ ਵੇਰਵਾ ਬਹੁਤ ਲੰਬਾ ਹੈ!
-  tooLongCredits: ਪ੍ਰੋਜੈਕਟ ਦੇ ਨੋਟ ਅਤੇ ਕ੍ਰੈਡਿਟ ਬਹੁਤ ਲੰਬੇ ਹਨ!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
     downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
-  random: ਬੇਤਰਤੀਬੇ ਪ੍ਰੋਜੈਕਟ
-  related: ਸਬੰਧਤ ਪ੍ਰੋਜੈਕਟ
-  downloads: '%downloads%ਡਾਉਨਲੋਡਸ'
-  sample: ਪ੍ਰਾਜੈਕਟ ਦੀ ਉਦਾਹਰਣ
-  views: '%views%ਵਿਚਾਰ'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "ਉਹ ਲੋਕ ਜਿਨ੍ਹਾਂ ਨੇ ਉਸ ਪ੍ਰਾਜੈਕਟ 'ਤੇ ਪ੍ਰਤੀਕ੍ਰਿਆ ਦਿੱਤੀ"
+    likersTitle: "People who reacted to that project"
     all: "ਸਾਰੇ"
   remixes: '{0} 0 ਰੀਮਿਕਸ | {1} 1 ਰੀਮਿਕਸ |] 1, Inf]%remixes%ਰੀਮਿਕਸ'
   newRemixesNotificationTitle: '| {1} "%programName%" ਦਾ 1 ਨਵਾਂ ਰੀਮਿਕਸ ਹੈ: |] 1, Inf] "%programName%" ਵਿੱਚ%remixes% ਨਵੇਂ ਰੀਮਿਕਸ ਹਨ:'
-  submitted: ਪੇਸ਼ ਪ੍ਰੋਜੈਕਟ
-  uploaded: ਅਪਲੋਡ ਕੀਤੇ ਪ੍ਰੋਜੈਕਟ
-  reportAsInappropriate: ਅਣਉਚਿਤ ਤੌਰ ਤੇ ਰਿਪੋਰਟ ਕਰੋ
-  reportProgram: ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਰਿਪੋਰਟ ਕਰੋ
-  languageVersion: 'ਕੈਟ੍ਰੋਬੈਟ ਭਾਸ਼ਾ ਦਾ ਸੰਸਕਰਣ:%languageVersion%'
-  reportLoginText: '%login% ਇਸ ਪ੍ਰਾਜੈਕਟ ਰਿਪੋਰਟ ਕਰਨ ਲਈ ਕਿਰਪਾ ਕਰਕੇ.'
-  reportDialogHeader: ਤੁਸੀਂ ਇਸ ਪ੍ਰਾਜੈਕਟ ਦੀ ਰਿਪੋਰਟ ਕਿਉਂ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?
-  reportDialogReason: ਇੱਕ ਕਾਰਨ ਦਰਜ
-  reportRadioButtonInappropriate: ਇਹ ਅਣਉਚਿਤ ਹੈ
-  reportRadioButtonCopyright: ਕਾਪੀਰਾਈਟ ਉਲੰਘਣਾ
-  reportRadioButtonSpam: ਇਹ ਸਪੈਮ ਹੈ
-  reportRadioButtonDislike: ਮੈਨੂੰ ਇਹ ਪਸੰਦ ਨਹੀਂ
-  reportOwnProgram: ਤੁਸੀਂ ਆਪਣੇ ਖੁਦ ਦੇ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਫਲੈਗ ਨਹੀਂ ਕਰ ਸਕਦੇ.
-  reportAlready: ਤੁਸੀਂ ਪਹਿਲਾਂ ਹੀ ਇਸ ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਫਲੈਗ ਕਰ ਚੁੱਕੇ ਹੋ.
-  reportDone: ਤੁਸੀਂ ਇਸ ਪ੍ਰਾਜੈਕਟ ਦੀ ਰਿਪੋਰਟ ਕੀਤੀ!
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: ਐਪ ਨੂੰ ਅਪਡੇਟ ਕਰੋ
-  updateAppText: ਇਸ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਲਈ ਯੋਗ ਹੋਣ ਲਈ ਨਵੀਨਤਮ ਵਰਜਨ ਲਈ ਆਪਣੇ ਐਪ ਨੂੰ ਅਪਡੇਟ ਕਰੋ.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: ਠੀਕ ਹੈ
-  checkout_this_program: ਇਸ ਕੈਟਰੋਬੈਟ ਪ੍ਰੋਜੈਕਟ ਦੀ ਜਾਂਚ ਕਰੋ
-  show_more: ਹੋਰ ਦਿਖਾਓ
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: ਟਿਪਣੀਆਂ
-  send: ਭੇਜੋ
+  send: Send
   delete: ਮਿਟਾਓ
   report: ਰਿਪੋਰਟ
-  report_popup: ਟਿੱਪਣੀ ਸਫਲਤਾਪੂਰਵਕ ਦੱਸੀ ਗਈ ਹੈ.
-  report_popup_header: ਰਿਪੋਰਟ ਕੀਤਾ
-  deleted_popup: ਟਿੱਪਣੀ ਸਫਲਤਾਪੂਰਵਕ ਹਟਾ ਦਿੱਤੀ ਗਈ ਸੀ.
-  deleted_popup_header: ਮਿਟਾਇਆ ਗਿਆ
-  noAdminRights: ਤੁਹਾਡੇ ਕੋਲ ਕੋਈ ਪ੍ਰਬੰਧਕੀ ਅਧਿਕਾਰ ਨਹੀਂ ਹਨ. ਕਿਰਪਾ ਕਰਕੇ ਪ੍ਰਬੰਧਕ ਵਜੋਂ ਲੌਗਇਨ ਕਰੋ.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: ਤੁਹਾਨੂੰ ਆਪਣੇ ਤਬਦੀਲੀ ਨੂੰ ਸੰਭਾਲਣ ਲਈ ਚਾਹੁੰਦੇ ਹੋ?
   btnDiscard: ਬਰਖਾਸਤ ਕਰੋ
-  addComment: ਇੱਕ ਟਿੱਪਣੀ ਲਿਖੋ
-  thumbsUp: ਚੜ੍ਹਦੀ ਕਲਾਂ!
-  smile: ਮੁਸਕਰਾਓ!
-  love: ਪਿਆਰ!
-  wow: ਵਾਹ!
-  linkTitle: ਲਿੰਕ
-  link: ਪ੍ਰੋਜੈਕਟ ਲਿੰਕ ਨੂੰ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: ਪ੍ਰਤੀਕਰਮ
-  downloadErrorText: ਜਦਕਿ ਪ੍ਰਾਜੈਕਟ ਨੂੰ ਡਾਊਨਲੋਡ ਕਰਨ ਦੌਰਾਨ ਗਲਤੀ ਆਈ ਹੈ. ਬਾਅਦ ਵਿੱਚ ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ ਜੀ.
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: ਅਨੁਵਾਦ ਦਿਖਾਓ
-  hideTranslation: ਅਨੁਵਾਦ ਲੁਕਾਓ
-  translatedByLine: '%provider% ਤੋਂ %sourceLanguage% ਤੋਂ %targetLanguage% ਤੱਕ ਅਨੁਵਾਦ ਕੀਤਾ'
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: ਮੂਲ
@@ -220,10 +222,10 @@ remixGraph:
   by: 'ਨਾਲ'
   open: 'ਖੁੱਲਾ'
   showPaths: 'ਮਾਰਗ ਦਿਖਾਓ'
-  programNotAvailableErrorTitle: 'ਮਾਫ ਕਰਨਾ…'
-  programNotAvailableErrorDescription: 'ਪ੍ਰੋਜੈਕਟ ਹੋਰ ਉਪਲਬਧ ਨਹੀਂ ਹੈ!'
-  programNotAvailable: 'ਉਪਲਭਦ ਨਹੀ'
-  programUnknownUser: 'ਅਣਜਾਣ ਯੂਜ਼ਰ'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     ਸ਼ੁਭਕਾਮਨਾਵਾਂ, <br>
     ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਟੀਮ.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: ਤੁਹਾਡੀ ਕੈਟ੍ਰੋਬੈਟ ਪਾਸਵਰਡ ਦੀ ਰਿਕਵਰੀ
   message: |
@@ -396,6 +420,8 @@ menu:
   followersAndFollowing: ਚੇਲਾ
   mediaLibrary: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ
   studio: Studios
+  language: ਭਾਸ਼ਾ
+  languageOptionsNotAvailable: No language options available.
 login:
   login: ਲਾਗਿਨ
   button:
@@ -449,6 +475,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -497,12 +528,12 @@ errors:
   unknown: ਅਣਜਾਣ ਗਲਤੀ
   token: 'ਜੰਤਰ ਦੇ ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ: ਗਲਤ auth-ਟੋਕਨ!'
   uploadTokenAuthFailed: 'ਟੋਕਨ ਲੇਖ ਅਪਲੋਡ ਕਰਨ ਵਿੱਚ ਅਸਫਲ.'
-  program:
-    invalid: ਗਲਤ ਪ੍ਰੋਜੈਕਟ.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'ਮੁਆਫ ਕਰਨਾ, ਤੁਹਾਡੇ ਪ੍ਰੋਜੈਕਟ ਵਿਚ ਕੈਟ੍ਰੋਬੈਟ ਭਾਸ਼ਾ ਦਾ ਪੁਰਾਣਾ ਸੰਸਕਰਣ ਹੈ! ਜੇਕਰ ਤੁਹਾਨੂੰ ਪਾਕੇਟ ਕੋਡ ਦਾ ਨਵੀਨਤਮ ਵਰਜਨ ਵਰਤ ਰਹੇ ਹੋ?'
-  programversion:
-    tooold: 'ਮੁਆਫ ਕਰਨਾ, ਤੁਸੀਂ ਪਾਕੇਟ ਕੋਡ ਦਾ ਪੁਰਾਣਾ ਸੰਸਕਰਣ ਵਰਤ ਰਹੇ ਹੋ. ਕਿਰਪਾ ਕਰਕੇ ਨਵੇਂ ਵਰਜ਼ਨ ਨੂੰ ਅਪਡੇਟ ਕਰੋ.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: ਪ੍ਰਮਾਣਿਕਤਾ ਅਸਫਲ
     webview: |
@@ -707,8 +738,8 @@ catro-notifications:
     message: '%user_link%ਨੂੰ ਪ੍ਰਤੀਕਰਮ ਦਿੱਤਾ %program_link%'
   follow:
     message: '%user_link% ਹੁਣ ਤੁਹਾਡੇ ਮਗਰ ਆ ਰਿਹਾ ਹੈ.'
-  program-upload:
-    message: '%user_link% ਇੱਕ ਨਵੀਂ ਖੇਡ ਬਣਾਈ %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% ਇੱਕ ਰੀਮਿਕਸ ਬਣਾਇਆ %program_link% ਤੁਹਾਡੀ ਖੇਡ ਦਾ %remix_program_link%'
 clipboard:
@@ -753,13 +784,14 @@ checkOutUser: 'Check out this user:'
 community: 'ਕੈਟ੍ਰੋਬੈਟ ਕਮਿ communityਨਿਟੀ'
 back_to_app: 'ਬੰਦ ਕਰੋ ਭਾਈਚਾਰੇ'
 category:
-  recent: ਨਵੇਂ ਪ੍ਰੋਜੈਕਟ
-  random: ਬੇਤਰਤੀਬੇ ਪ੍ਰੋਜੈਕਟ
+  recent: Newest projects
+  random: Random projects
   most_viewed: ਸਭ ਵੇਖਿਆ ਗਿਆ
   most_downloaded: ਬਹੁਤੇ ਡਾedਨਲੋਡ ਕੀਤੇ
   example: ਉਦਾਹਰਣ
-  scratch: ਸਕ੍ਰੈਚ ਰੀਮਿਕਸ
-  recommended: ਸਿਫਾਰਸ਼ ਕੀਤੇ ਪ੍ਰਾਜੈਕਟ
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'ਪ੍ਰਾਪਤੀਆਂ'
@@ -855,7 +887,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'ਰੱਦ ਕਰੋ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'ਰਿਪੋਰਟ'
@@ -864,6 +898,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'ਹੋਰ ਦਿਖਾਓ'
     showLess: 'ਘੱਟ ਦਿਖਾਓ'
@@ -872,6 +907,11 @@ studio:
     remove_project_success: 'ਪ੍ਰੋਜੈਕਟ ਨੂੰ ਸਫਲਤਾਪੂਰਵਕ ਸਟੂਡੀਓ ਤੋਂ ਹਟਾਇਆ ਗਿਆ!'
     no_projects: 'ਸਟੂਡੀਓ ਵਿੱਚ ਅਜੇ ਕੋਈ ਪ੍ਰੋਜੈਕਟ ਸ਼ਾਮਲ ਨਹੀਂ ਹਨ'
     updateCoverError: 'ਸਟੂਡੀਓ ਕਵਰ ਨੂੰ ਅਪਡੇਟ ਕਰਦੇ ਸਮੇਂ ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'ਰਿਪੋਰਟ'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'ਪ੍ਰੋਜੈਕਟ'
     comments:
@@ -913,3 +953,12 @@ media_library:
       default: 'ਕਿਸਮ: ਅਣਜਾਣ'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

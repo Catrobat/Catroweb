@@ -41,7 +41,7 @@ country: Kraj
 loginText: zaloguj się
 privacyPolicy: Polityka prywatności
 imprint: Stopka
-programDetails: Szczegóły
+projectDetails: Szczegóły
 somethingWentWrong: 'Ups, coś poszło nie tak.'
 doesNotExist: 'Żądany zasób nie istnieje.'
 pleaseTryAgain: 'Spróbuj ponownie!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Nie można przestać obserwować wybranego użytkownika!"
   unfollowQuestion: "Czy na pewno chcesz przestać obserwować tego użytkownika?"
   unfollowButton: "Przestań obserwować %username%"
-programs:
+project:
   welcome:
     title: Witamy w Catrobat %theme%
     title_mindstorms: Witamy w witrynie Catrobat dla Mindstorms EV3 i NXT
@@ -108,7 +108,7 @@ programs:
   newest: Najnowsze projekty
   recommended: Polecane projekty
   scratchremixes: Remiksy Scratcha
-  noPrograms: Obecnie nie ma żadnego projektu.
+  noProjects: Obecnie nie ma żadnego projektu.
   deleteAction: Usuń projekt
   deleteConfirmation: |+
     Na pewno?
@@ -137,9 +137,11 @@ programs:
     To jest nieodwracalne!
     Tak, usuń!
     Anuluj
-  tooLongName: Nazwa projektu jest zbyt długa!
+  tooLongName: The project name is too long!
   tooLongDescription: Opis projektu jest za długi!
   tooLongCredits: Uwagi i podziękowania są za długie!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Najczęściej oglądane
     downloaded: Najczęściej pobierane
@@ -168,13 +170,13 @@ programs:
   reportOwnProgram: Nie możesz oflagować własnego projektu.
   reportAlready: Już oflagowałeś ten projekt.
   reportDone: Zgłosiłeś ten projekt!
-  updateAppHeaderDownload: Pobieranie nie jest możliwe
-  updateAppTextDownload: Zaktualizuj swoją aplikację do najnowszej wersji. Pamiętaj, że nie wszystkie funkcje Androida są już dostępne na IOS.
-  updateAppTextDownloadApk: Pobieranie APK jest obecnie dostępne tylko na Androidzie a nie na IOS.
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: Aktualizacja aplikacji
-  updateAppText: Zaktualizuj swoją aplikację do najnowszej wersji.
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: OK
-  checkout_this_program: Sprawdź ten projekt z Catrobat
+  checkout_this_project: Sprawdź ten projekt z Catrobat
   show_more: Pokaż więcej
   comments: Komentarze
   send: Wyślij
@@ -185,8 +187,8 @@ programs:
   deleted_popup: Komentarz został pomyślnie usunięty.
   deleted_popup_header: Usunięte
   noAdminRights: Nie masz uprawnień administratora. Zaloguj się jako administrator.
-  editProject: Edytuj projekt
-  closeProjectEditor: Zamknij edytor projektu
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Czy chcesz zapisać zmiany?
   btnDiscard: Odrzuć
   addComment: Napisz komentarz
@@ -202,8 +204,8 @@ programs:
   showTranslation: Pokaż tłumaczenie
   hideTranslation: Ukryj tłumaczenie
   translatedByLine: Przetłumaczone przez %provider% z %sourceLanguage% do %targetLanguage%
-  googleTranslate: Tłumacz Google
-  confrimDelete: Czy na pewno chcesz usunąć tłumaczenie?
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: Domyślny
   save: Zapisz
   translationTitle: '%language% tłumaczenie'
@@ -220,10 +222,10 @@ remixGraph:
   by: 'o'
   open: 'Otwórz '
   showPaths: 'Pokaż ścieżki'
-  programNotAvailableErrorTitle: 'Przepraszamy...'
-  programNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
-  programNotAvailable: 'Niedostępny'
-  programUnknownUser: 'Nieznany użytkownik'
+  projectNotAvailableErrorTitle: 'Przepraszamy...'
+  projectNotAvailableErrorDescription: 'Projekt nie jest już dostępny!'
+  projectNotAvailable: 'Niedostępny'
+  projectUnknownUser: 'Nieznany użytkownik'
 noReply:
   - To jest wiadomość wysłana automatycznie - nie odpowiadaj na tego e-maila.
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     Pozdrawiamy<br>
     Twój zespół Catrobat.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Odzyskiwanie Twojego hasła Catrobat
   message: |
@@ -396,6 +420,8 @@ menu:
   followersAndFollowing: Obserwujący
   mediaLibrary: Biblioteka
   studio: Studia
+  language: Język
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Logowanie
   button:
@@ -449,6 +475,11 @@ resetPassword:
     visitLink: "Aby zresetować hasło, odwiedź poniższy link"
     expire: "Ten link wygaśnie za %time%."
     cheers: "Pozdrawiamy!"
+  newemail:
+    title: "Resetuj swoje hasło"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Resetuj swoje hasło"
     button:
@@ -497,11 +528,11 @@ errors:
   unknown: nieznany błąd
   token: 'Uwierzytelnienie urządzenia nie powiodło się: nieprawidłowy token uwierzytelniania!'
   uploadTokenAuthFailed: 'Autoryzacja tokena wysyłania nie powiodła się.'
-  program:
+  project:
     invalid: Nieprawidłowy projekt.
   languageversion:
     tooold: 'Przepraszamy, Twój projekt zawiera starą wersję języka Catrobat! Czy używasz najnowszej wersji Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Przepraszamy, używasz starej wersji Pocket Code. Zaktualizuj do najnowszej wersji.'
   authentication:
     title: Uwierzytelnianie nie powiodło się
@@ -707,7 +738,7 @@ catro-notifications:
     message: 'Użytkownik %user_link% polubił Twój projekt %program_link%.'
   follow:
     message: 'Użytkownik %user_link% obserwuje Cię teraz.'
-  program-upload:
+  project-upload:
     message: 'Użytkownik %user_link% stworzył nowy projekt %program_link%'
   remix:
     message: 'Użytkownik %user_link% zremiksował Twój projekt %program_link%. Możesz zobaczyć remiks klikając link %remix_program_link%.'
@@ -760,6 +791,7 @@ category:
   example: Przykład
   scratch: Remiksy Scratcha
   recommended: Polecane projekty
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Osiągnięcia'
@@ -855,7 +887,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Utwórz studio'
   delete_studio: 'Usuń studio'
+  cancel_studio: 'Anuluj'
   studio_name: 'Nazwa Studia'
+  studio_description: 'Studio description'
   join: 'Dołącz'
   leave: 'Opuść'
   report: 'Zgłoś'
@@ -864,6 +898,7 @@ studio:
   overview:
     joined_studios: 'Członkostwo w Studiach'
     public_studios: 'Studia publiczne'
+    private_studios: 'Private studios'
   details:
     showMore: 'pokaż więcej'
     showLess: 'pokaż mniej'
@@ -872,6 +907,11 @@ studio:
     remove_project_success: 'Projekt został pomyślnie usunięty ze studia!'
     no_projects: 'Studio nie zawiera jeszcze żadnych projektów'
     updateCoverError: 'Coś poszło nie tak podczas aktualizacji okładki studia!'
+    join: 'Dołącz'
+    leave: 'Opuść'
+    report: 'Zgłoś'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projekty'
     comments:
@@ -913,3 +953,12 @@ media_library:
       default: 'Typ: nieznany'
 snackbar:
   project_not_found: 'Żądany projekt nie jest dostępny'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

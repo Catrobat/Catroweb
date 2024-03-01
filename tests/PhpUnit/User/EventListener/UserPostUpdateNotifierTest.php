@@ -13,7 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class UserPostUpdateNotifierTest extends DefaultTestCase
 {
-  protected UserPostUpdateNotifier|MockObject $object;
+  protected MockObject|UserPostUpdateNotifier $object;
 
   protected function setUp(): void
   {

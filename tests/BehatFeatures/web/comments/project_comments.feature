@@ -17,7 +17,7 @@ Feature: As a visitor I want to write, see and report comments.
       | 5  | project 5 | OtherUser |
 
     And there are comments:
-      | program_id | user_id | text | parent_id  | is_deleted |
+      | project_id | user_id | text | parent_id  | is_deleted |
       | 1          | 1       | c1   |  NULL      |            |
       | 2          | 2       | c2   |  NULL      |            |
       | 2          | 2       | c3   |  NULL      |            |

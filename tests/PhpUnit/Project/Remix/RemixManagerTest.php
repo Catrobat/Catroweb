@@ -32,11 +32,11 @@ class RemixManagerTest extends TestCase
 
   private EntityManager|MockObject $entity_manager;
 
-  private ProgramRepository|MockObject $program_repository;
+  private MockObject|ProgramRepository $program_repository;
 
-  private ScratchProgramRepository|MockObject $scratch_program_repository;
+  private MockObject|ScratchProgramRepository $scratch_program_repository;
 
-  private ProgramRemixRepository|MockObject $program_remix_repository;
+  private MockObject|ProgramRemixRepository $program_remix_repository;
 
   protected function setUp(): void
   {
@@ -93,7 +93,7 @@ class RemixManagerTest extends TestCase
       }))
     ;
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
   }
 
   /**
@@ -123,7 +123,7 @@ class RemixManagerTest extends TestCase
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
   }
 
   /**
@@ -179,7 +179,7 @@ class RemixManagerTest extends TestCase
     ;
 
     $this->entity_manager->expects($this->atLeastOnce())->method('flush');
-    $this->remix_manager->addScratchPrograms($scratch_info_data);
+    $this->remix_manager->addScratchProjects($scratch_info_data);
   }
 
   /**

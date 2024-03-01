@@ -331,3 +331,75 @@ $list-item-padding-overflow-x: 1.5rem;
     width: calc(100% - 250px);
   }
 }
+#add-button {
+  &:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease;
+  }
+}
+
+$color-1: red;
+$font-family-1: sans-serif;
+$background-color-1: #ffe6e6;
+$border-color-1: #dc3545;
+$border-color-2: #28a745;
+
+/* Styles for radio buttons with warning class */
+.form-control.is-invalid {
+  border-color: $border-color-1;
+  padding-right: calc(1.5em + 0.75rem);
+  background-repeat: no-repeat;
+  background-color: $background-color-1;
+}
+.form-control.is-valid {
+  border-color: $border-color-2;
+  padding-right: calc(1.5em + 0.75rem);
+}
+.check-studios.warning {
+  background-repeat: no-repeat;
+  appearance: none;
+  border-radius: 50%;
+  background-color: $background-color-1;
+  border: 0.35em solid #fff;
+  box-shadow: 0 0 0 0.15em #ff5722;
+}
+.check-studios-comments.warning {
+  background-repeat: no-repeat;
+  appearance: none;
+  border-radius: 50%;
+  background-color: $background-color-1;
+  border: 0.35em solid #fff;
+  box-shadow: 0 0 0 0.15em #ff5722;
+}
+.check-studios-public.warning {
+  background-repeat: no-repeat;
+  appearance: none;
+  border-radius: 50%;
+  background-color: $background-color-1;
+  border: 0.35em solid #fff;
+  box-shadow: 0 0 0 0.15em #ff5722;
+}
+#name-warning {
+  font-size: smaller;
+  color: $color-1;
+  font-family: $font-family-1;
+  padding-top: calc(0.5rem);
+}
+#enable-studio-name-warning {
+  font-size: smaller;
+  color: $color-1;
+  font-family: $font-family-1;
+  padding-top: calc(0.5rem);
+}
+#allow-comments-warning {
+  font-size: smaller;
+  color: $color-1;
+  font-family: $font-family-1;
+  padding-top: calc(0.5rem);
+}
+#is-public-warning {
+  font-size: smaller;
+  color: $color-1;
+  font-family: $font-family-1;
+  padding-top: calc(0.5rem);
+}

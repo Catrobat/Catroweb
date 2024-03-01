@@ -41,7 +41,7 @@ country: Land
 loginText: Anmelden
 privacyPolicy: Datenschutz-Vereinbarung
 imprint: Impressum
-programDetails: Einzelheiten
+projectDetails: Einzelheiten
 somethingWentWrong: 'Ooooops etwas ging schief.'
 doesNotExist: 'Die angefragte Ressource existiert nicht.'
 pleaseTryAgain: 'Bitte versuche es noch einmal!'
@@ -94,21 +94,21 @@ follower:
   unfollowError: "Es ist nicht möglich den User nicht mehr zu folgen!"
   unfollowQuestion: "Bist du sicher, dass du diesem User nicht mehr folgen möchtest?"
   unfollowButton: "%username% entfernen"
-programs:
+project:
   welcome:
     title: Willkommen bei Catrobat's %theme%
-    title_mindstorms: Willkommen auf Catrobats Seite für Mindstorms EV3 und NXT
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
     subtitle: Erstelle Animationen, Spiele und mehr...
-    subtitle_embroidery: Sticke dein eigenes Muster auf deine T-shirts, Taschen, Hosen oder auf deine Smartphonehülle!
-    subtitle_mindstorms: Erstelle deine eigenen Projekte mit deinen Lego Mindstorms EV3 und NXT Robotern
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Lade die App herunter
     statistics: Mehr Statistiken
   featured: Empfohlen
   example: Beispiele
   newest: Neueste Projekte
   recommended: Empfohlene Projekte
-  scratchremixes: Scratch Remixes
-  noPrograms: Derzeit gibt es keine Projekte.
+  scratchremixes: Scratch remixes
+  noProjects: Derzeit gibt es keine Projekte.
   deleteAction: Projekt löschen
   deleteConfirmation: |+
     Bist du dir sicher?
@@ -122,24 +122,26 @@ programs:
   setPrivateAction: Auf privat setzen
   setPublicAction: Auf öffentlich setzen
   changeVisibility: |+
-    Bist du dir sicher?
-    Wenn du '%programName%' auf privat setzt, wird es von anderen Benutzern nicht gesehen oder gefunden.
-    Du kannst den Link dieses Projekts immer noch mit deinen Freunden teilen. Du kannst die Sichtbarkeit umschalten indem du auf das Schlosssymbol klickst.
-    Wenn du "%programName%" auf öffentlich setzt, kann es von anderen Benutzern gesehen und gefunden werden.
-    Ja, auf öffentliche setzen
-    Ja, auf privat setzen
-    Nein
-  reportCommentConfirmation: Bist du sicher, dass du diesen Kommentar melden möchtest?
-  deleteCommentConfirmation: Bist du sicher, dass du diesen Kommentar löschen möchtest?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Konto löschen?
-    Bist du dir sicher, dass du dein Konto löschen möchtest? Dadurch werden auch deine hochgeladenen Projekte und Kommentare gelöscht!
-    Es gibt keine Möglichkeit dein Konto wiederherzustellen!
-    Ja, löschen!
-    Abbrechen
-  tooLongName: Der Projektname ist zu lang!
-  tooLongDescription: Die Projektbeschreibung ist zu lang!
-  tooLongCredits: Die Anerkennung ist zu lang!
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Am meisten angesehen
     downloaded: Meist heruntergeladen
@@ -147,12 +149,12 @@ programs:
   related: Verwandte Projekte
   downloads: '%downloads% heruntergeladen'
   sample: Beispielprojekte
-  views: '%views% gesehen'
+  views: '%views% views'
   likes:
     likersTitle: "Benutzer, die auf dieses Projekt reagiert haben"
     all: "Alle"
-  remixes: '{0}0 Remixe |{1}1 Remix |] 1, Inf]%remixes% Remixe'
-  newRemixesNotificationTitle: '|{1} "%programName%" hat 1 neuen Remix: |] 1, Inf] "%programName%" hat %remixes% neue Remixe:'
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
   submitted: Eingereichte Projekte
   uploaded: Hochgeladene Projekte
   reportAsInappropriate: Als unpassend melden
@@ -168,13 +170,13 @@ programs:
   reportOwnProgram: Du kannst dein eigenes Programm nicht melden.
   reportAlready: Du hast dieses Projekt bereits gemeldet.
   reportDone: Du hast dieses Projekt gemeldet!
-  updateAppHeaderDownload: Download ist nicht möglich
-  updateAppTextDownload: Bitte aktualisiere diese App auf die neueste Version. Bitte beachte, dass nicht alle Android-Funktionen bereits auf IOS verfügbar sind.
-  updateAppTextDownloadApk: Der APK-Download ist derzeit nur für Android und nicht für IOS verfügbar.
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
   updateAppHeader: App aktualisieren
-  updateAppText: Bitte aktualisiere deine App auf die neueste Version, um dieses Projekt herunterladen zu können.
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Sieh dir diese Catrobat Projekt an
+  checkout_this_project: Sieh dir diese Catrobat Projekt an
   show_more: Mehr anzeigen
   comments: Kommentare
   send: Senden
@@ -198,10 +200,10 @@ programs:
   link: Link in Zwischenablage kopieren
   reactionsText: Likes
   downloadErrorText: Während des Downloads ist ein Fehler aufgetreten. Bitte versuche es später erneut.
-  downloadStartText: Der Download hat begonnen...
-  showTranslation: Übersetzung anzeigen
-  hideTranslation: Übersetzung ausblenden
-  translatedByLine: Übersetzt von %provider% von %sourceLanguage% nach %targetLanguage%
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Übersetzer
   confrimDelete: Bist du sicher, dass du die Übersetzung löschen willst?
   default: Standard
@@ -220,10 +222,10 @@ remixGraph:
   by: 'um'
   open: 'Öffne '
   showPaths: 'Wege anzeigen'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'Das Projekt ist nicht mehr verfügbar!'
-  programNotAvailable: 'Nicht verfügbar'
-  programUnknownUser: 'Unbekannter Benutzer'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'Das Projekt ist nicht mehr verfügbar!'
+  projectNotAvailable: 'Nicht verfügbar'
+  projectUnknownUser: 'Unbekannter Benutzer'
 noReply:
   - Dies ist eine automatische Meldung, bitte antworte nicht auf diese E-Mail
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     Grüße,<br>
     Dein Catrobat Team.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Ihre Catrobat Passwort Wiederherstellung
   message: |
@@ -400,6 +424,8 @@ menu:
   followersAndFollowing: Abonnenten
   mediaLibrary: Medienbibliothek
   studio: Studios
+  language: Sprache
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Einloggen
   button:
@@ -453,6 +479,11 @@ resetPassword:
     visitLink: "Um dein Passwort zurückzusetzen, besuche bitte folgenden Link"
     expire: "Dieser Link wird in %time% ablaufen."
     cheers: "Glückwunsch!"
+  newemail:
+    title: "Passwort zurücksetzen"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Passwort zurücksetzen"
     button:
@@ -501,12 +532,12 @@ errors:
   unknown: Unbekannter Fehler
   token: 'Authentifizierung des Geräts fehlgeschlagen: ungültiger auth-token!'
   uploadTokenAuthFailed: 'Upload-Token-Authentifizierung fehlgeschlagen.'
-  program:
-    invalid: Ungültiges Projekt.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Leider enthält dein Projekt eine alte Version der Catrobat-Sprache! Verwendest du die neueste Version von Pocket Code?'
-  programversion:
-    tooold: 'Es tut uns Leid, du nutzt eine alte Version von Pocket Code. Bitte lade dir die aktuelle Version herunter.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Authentifizierung fehlgeschlagen
     webview: |
@@ -711,8 +742,8 @@ catro-notifications:
     message: 'Benutzer %user_link% hat Ihr Projekt %program_link% geliked.'
   follow:
     message: 'Benutzer %user_link% folgt dir jetzt.'
-  program-upload:
-    message: 'Benutzer %user_link% hat ein neues Projekt %program_link% erstellt'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'Benutzer %user_link% hat einen Remix deines Programms %program_link% erstellt. Du kannst diesen unter folgendem Link sehen: %remix_program_link%.'
 clipboard:
@@ -762,8 +793,9 @@ category:
   most_viewed: Am meisten angesehen
   most_downloaded: Meist heruntergeladen
   example: Beispiel
-  scratch: Scratch Remixes
+  scratch: Scratch remixes
   recommended: Empfohlene Projekte
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Erreichte Ziele'
@@ -859,7 +891,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Studio erstellen'
   delete_studio: 'Studio löschen'
+  cancel_studio: 'Abbrechen'
   studio_name: 'Studio-Name'
+  studio_description: 'Studio description'
   join: 'Beitreten'
   leave: 'Verlassen'
   report: 'Melden'
@@ -868,6 +902,7 @@ studio:
   overview:
     joined_studios: 'Beigetretene Studios'
     public_studios: 'Öffentliche Studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'mehr anzeigen'
     showLess: 'weniger zeigen'
@@ -876,6 +911,11 @@ studio:
     remove_project_success: 'Projekt erfolgreich aus dem Studio entfernt!'
     no_projects: 'Studio enthält noch keine Projekte'
     updateCoverError: 'Beim Aktualisieren des Studio-Covers ist etwas schiefgelaufen!'
+    join: 'Beitreten'
+    leave: 'Verlassen'
+    report: 'Melden'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projekte'
     comments:
@@ -917,3 +957,12 @@ media_library:
       default: 'Typ: unbekannt'
 snackbar:
   project_not_found: 'Das angeforderte Projekt ist nicht verfügbar'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

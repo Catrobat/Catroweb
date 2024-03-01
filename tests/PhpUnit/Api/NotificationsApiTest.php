@@ -22,9 +22,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class NotificationsApiTest extends DefaultTestCase
 {
-  protected NotificationsApi|MockObject $object;
+  protected MockObject|NotificationsApi $object;
 
-  protected NotificationsApiFacade|MockObject $facade;
+  protected MockObject|NotificationsApiFacade $facade;
 
   protected function setUp(): void
   {

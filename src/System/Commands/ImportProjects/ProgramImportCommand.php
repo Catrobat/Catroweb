@@ -3,10 +3,10 @@
 namespace App\System\Commands\ImportProjects;
 
 use App\DB\Entity\User\User;
-use App\Project\AddProgramRequest;
+use App\Project\AddProjectRequest;
 use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixGraphLayout;
-use App\System\Commands\Helpers\RemixManipulationProgramManager;
+use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\UserManager;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -21,7 +21,7 @@ class ProgramImportCommand extends Command
 {
   final public const REMIX_GRAPH_NO_LAYOUT = '0';
 
-  public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProgramManager $remix_manipulation_program_manager)
+  public function __construct(private readonly UserManager $user_manager, private readonly RemixManipulationProjectManager $remix_manipulation_program_manager)
   {
     parent::__construct();
   }
@@ -76,8 +76,8 @@ class ProgramImportCommand extends Command
     foreach ($finder as $file) {
       try {
         $output->writeln('Importing file '.$file);
-        $add_program_request = new AddProgramRequest($user, new File($file->__toString()));
-        $program = $this->remix_manipulation_program_manager->addProgram($add_program_request);
+        $add_program_request = new AddProjectRequest($user, new File($file->__toString()));
+        $program = $this->remix_manipulation_program_manager->addProject($add_program_request);
         $program->setViews(random_int(0, 10));
         $output->writeln('Added program <'.$program->getName().'> for user: <'.$username.'>');
       } catch (InvalidCatrobatFileException $e) {

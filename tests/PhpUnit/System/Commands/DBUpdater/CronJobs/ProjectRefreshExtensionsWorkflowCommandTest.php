@@ -16,7 +16,7 @@ use Symfony\Component\Console\Command\Command;
  */
 class ProjectRefreshExtensionsWorkflowCommandTest extends KernelTestCase
 {
-  protected ProjectRefreshExtensionsWorkflowCommand|MockObject $object;
+  protected MockObject|ProjectRefreshExtensionsWorkflowCommand $object;
 
   protected function setUp(): void
   {

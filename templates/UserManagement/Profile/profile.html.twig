@@ -89,7 +89,7 @@
           <div class="mdc-tab-scroller__scroll-content">
             <button class="mdc-tab mdc-tab--active mdc-tab--stacked" role="tab" aria-selected="true" tabindex="0">
               <span class="mdc-tab__content">
-                <span class="mdc-tab__icon" id="projects-count">{{ program_count }}</span>
+                <span class="mdc-tab__icon" id="projects-count">{{ project_count }}</span>
                 <span class="mdc-tab__icon-text">{{ "projects"|trans({}, "catroweb") }}</span>
               </span>
               <span class="mdc-tab-indicator mdc-tab-indicator--active">
@@ -125,13 +125,13 @@
 
   <div class="tab-content mt-4">
     <div id="projects-section" class="tab-pane fade show active" role="tabpanel" aria-labelledby="projects-tab">
-      <div id="user-programs"
+      <div id="user-projects"
            data-property="uploaded"
            data-theme="{{ theme() }}"
            data-base-url="{{ app.request.getBaseURL() }}"
            data-user-id="{{ profile.id }}"
            data-flavor="{{ flavor() }}"
-           data-empty-message="{{ "programs.noPrograms"|trans({}, 'catroweb') }}"
+           data-empty-message="{{ "project.noProjects"|trans({}, 'catroweb') }}"
            class="project-list loading project-list--full">
         <div class="container">
           <div class="lazyload projects-spinner-container">

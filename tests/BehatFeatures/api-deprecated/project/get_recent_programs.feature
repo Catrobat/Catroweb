@@ -6,7 +6,7 @@ Feature: Get the most recent programs
       | name     | password | token      | id |
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
-    And there are programs:
+    And there are projects:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
@@ -49,33 +49,33 @@ Feature: Get the most recent programs
       """
 
   Scenario: show recent programs with limit and offset
-    When I get the most recent programs with limit "2" and offset "0"
-    Then I should get programs in the following order:
+    When I get the most recent projects with limit "2" and offset "0"
+    Then I should get projects in the following order:
       | Name      |
       | program 2 |
       | program 1 |
 
   Scenario: show recent programs with limit and offset
-    When I get the most recent programs with limit "3" and offset "1"
-    Then I should get programs in the following order:
+    When I get the most recent projects with limit "3" and offset "1"
+    Then I should get projects in the following order:
       | Name      |
       | program 1 |
       | program 3 |
 
   Scenario: show only visible programs
-    Given program "program 1" is not visible
-    When I get the most recent programs
-    Then I should get programs in the following order:
+    Given project "program 1" is not visible
+    When I get the most recent projects
+    Then I should get projects in the following order:
       | Name      |
       | program 2 |
       | program 3 |
 
   Scenario: show recent programs after uploading a new program
     Given I am "Catrobat"
-    And I have a program with "name" set to "WebTeam"
-    When I upload this generated program, API version 1
-    And I get the most recent programs
-    Then I should get programs in the following order:
+    And I have a project with "name" set to "WebTeam"
+    When I upload this generated project, API version 1
+    And I get the most recent projects
+    Then I should get projects in the following order:
       | Name      |
       | WebTeam   |
       | program 2 |
@@ -84,11 +84,11 @@ Feature: Get the most recent programs
 
   Scenario: show recent programs after updating an existing program
     Given I am "Catrobat"
-    And I upload the program with "WebTeam" as name, API version 1
-    And I upload the program with "WebTeamV2" as name, API version 1
-    And I upload the program with "WebTeam" as name again, API version 1
-    When I get the most recent programs
-    Then I should get programs in the following order:
+    And I upload the project with "WebTeam" as name, API version 1
+    And I upload the project with "WebTeamV2" as name, API version 1
+    And I upload the project with "WebTeam" as name again, API version 1
+    When I get the most recent projects
+    Then I should get projects in the following order:
       | Name      |
       | WebTeam   |
       | WebTeamV2 |

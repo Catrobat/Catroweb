@@ -41,7 +41,7 @@ country: Country
 loginText: login
 privacyPolicy: Privacy Policy
 imprint: Imprint
-programDetails: Details
+projectDetails: Details
 somethingWentWrong: 'Ooooops something went wrong.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Please try again!'
@@ -99,7 +99,7 @@ follower:
   unfollowQuestion: "Are you sure you want to unfollow this user?"
   unfollowButton: "Unfollow %username%"
 
-programs:
+project:
   welcome:
     title: Welcome to Catrobat's %theme%
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
@@ -113,7 +113,7 @@ programs:
   newest: Newest projects
   recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: There are currently no projects.
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
     Are you sure?
@@ -145,6 +145,8 @@ programs:
   tooLongName: The project name is too long!
   tooLongDescription: The project description is too long!
   tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Most viewed
     downloaded: Most downloaded
@@ -179,7 +181,7 @@ programs:
   updateAppHeader: Update app
   updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Checkout this Catrobat project
+  checkout_this_project: Checkout this Catrobat project
   show_more: Show More
   comments: Comments
   send: Send
@@ -226,10 +228,10 @@ remixGraph:
   by: 'by'
   open: 'Open'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Sorry...'
-  programNotAvailableErrorDescription: 'The project is not available any more!'
-  programNotAvailable: 'Not available'
-  programUnknownUser: 'Unknown user'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 
 noReply:
   This is an automated message - Please do not reply directly to this email.
@@ -252,6 +254,29 @@ accountConfirmation:
     Best regards,<br>
     Your Catrobat Team.
     </p>
+
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below 
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be 
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 
 passwordRecovery:
   subject: Your Catrobat password recovery
@@ -410,6 +435,8 @@ menu:
   followersAndFollowing: Follower
   mediaLibrary: Media library
   studio: Studios
+  language: Language
+  languageOptionsNotAvailable: No language options available.
 
 login:
   login: Login
@@ -469,6 +496,19 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: 
+      <p>
+      You are receiving this email because you<br>
+      recently requested a password reset for<br>
+      your Catrobat account. Follow the link<br>
+      below to change the password<br><br>
+      If you have not requested a password change,<br>
+      you can ignore this email.<br>
+      </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -520,11 +560,11 @@ errors:
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
+  project:
     invalid: Invalid project.
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Authentication failed
@@ -748,7 +788,7 @@ catro-notifications:
     message: '%user_link% reacted to %program_link%.'
   follow:
     message: '%user_link% is now following you.'
-  program-upload:
+  project-upload:
     message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
@@ -811,6 +851,7 @@ category:
   example: Example
   scratch: Scratch remixes
   recommended: Recommended projects
+  popular: Most popular
 
 achievements:
   sidebar:
@@ -910,7 +951,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Cancel'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Report'
@@ -920,6 +963,8 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
+
 
   details:
     showMore: 'show more'
@@ -929,6 +974,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Report'
+    pending: 'Pending'
+    decline: 'Declined'
 
     projects:
       title: 'Projects'
@@ -977,3 +1027,16 @@ media_library:
 
 snackbar:
   project_not_found: 'The requested project is not available'
+
+
+
+
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

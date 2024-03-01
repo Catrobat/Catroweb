@@ -4,7 +4,7 @@ namespace App\Admin\ApkGeneration;
 
 use App\DB\Entity\Project\Program;
 use App\Project\Apk\JenkinsDispatcher;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Utils\TimeUtils;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -16,10 +16,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class ApkController extends CRUDController
 {
   public function __construct(
-    protected ProgramManager $program_manager,
+    protected ProjectManager $project_manager,
     protected JenkinsDispatcher $jenkins_dispatcher,
     protected EntityManagerInterface $entity_manager
-  ) {}
+  ) {
+  }
 
   public function resetApkBuildStatusAction(): RedirectResponse
   {
@@ -83,14 +84,14 @@ class ApkController extends CRUDController
    */
   public function rebuildAllApkAction(): RedirectResponse
   {
-    $projects = $this->program_manager->findBy(['apk_status' => Program::APK_PENDING]);
+    $projects = $this->project_manager->findBy(['apk_status' => Program::APK_PENDING]);
 
-    /* @var $program Program */
-    foreach ($projects as $program) {
-      $this->jenkins_dispatcher->sendBuildRequest($program->getId());
-      $program->setApkRequestTime(TimeUtils::getDateTime());
-      $program->setApkStatus(Program::APK_PENDING);
-      $this->admin->update($program);
+    /* @var $project Program */
+    foreach ($projects as $project) {
+      $this->jenkins_dispatcher->sendBuildRequest($project->getId());
+      $project->setApkRequestTime(TimeUtils::getDateTime());
+      $project->setApkStatus(Program::APK_PENDING);
+      $this->admin->update($project);
     }
 
     $this->addFlash('sonata_flash_success', 'A new build request for all pending APKs has been sent');

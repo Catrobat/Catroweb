@@ -9,7 +9,7 @@ use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
 use App\Utils\ElapsedTimeStringFormatter;
 use OpenAPI\Server\Model\FeaturedProjectResponse;
@@ -36,7 +36,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     private readonly ParameterBagInterface $parameter_bag,
     TranslatorInterface $translator,
     SerializerInterface $serializer,
-    private readonly ProgramManager $project_manager,
+    private readonly ProjectManager $project_manager,
     ResponseCacheManager $response_cache_manager
   ) {
     parent::__construct($translator, $serializer, $response_cache_manager);
@@ -45,7 +45,7 @@ class ProjectsResponseManager extends AbstractResponseManager
   /**
    * @param ?string $attributes Comma-separated list of attributes to include into response
    */
-  public function createProjectDataResponse(Program $program, ?string $attributes): ProjectResponse
+  public function createProjectDataResponse(Program $project, ?string $attributes): ProjectResponse
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];
@@ -65,53 +65,53 @@ class ProjectsResponseManager extends AbstractResponseManager
       $attributes_list = explode(',', $attributes);
     }
 
-    /** @var Program $project */
-    $project = $program->isExample() ? $program->getProgram() : $program;
+    /** @var Program $extraced_project */
+    $extraced_project = $project->isExample() ? $project->getProgram() : $project;
 
     $data = [];
 
     if (in_array('id', $attributes_list, true)) {
-      $data['id'] = $project->getId();
+      $data['id'] = $extraced_project->getId();
     }
     if (in_array('name', $attributes_list, true)) {
-      $data['name'] = $project->getName();
+      $data['name'] = $extraced_project->getName();
     }
     if (in_array('author', $attributes_list, true)) {
-      $data['author'] = $project->getUser()->getUserIdentifier();
+      $data['author'] = $extraced_project->getUser()->getUserIdentifier();
     }
     if (in_array('description', $attributes_list, true)) {
-      $data['description'] = $project->getDescription() ?? '';
+      $data['description'] = $extraced_project->getDescription() ?? '';
     }
     if (in_array('credits', $attributes_list, true)) {
-      $data['credits'] = $project->getCredits() ?? '';
+      $data['credits'] = $extraced_project->getCredits() ?? '';
     }
     if (in_array('version', $attributes_list, true)) {
-      $data['version'] = $project->getCatrobatVersionName();
+      $data['version'] = $extraced_project->getCatrobatVersionName();
     }
     if (in_array('views', $attributes_list, true)) {
-      $data['views'] = $project->getViews();
+      $data['views'] = $extraced_project->getViews();
     }
     if (in_array('download', $attributes_list, true)) {
-      $data['download'] = $project->getDownloads(); // deprecated and will be removed
+      $data['download'] = $extraced_project->getDownloads(); // deprecated and will be removed
     }
     if (in_array('downloads', $attributes_list, true)) {
-      $data['downloads'] = $project->getDownloads();
+      $data['downloads'] = $extraced_project->getDownloads();
     }
     if (in_array('reactions', $attributes_list, true)) {
-      $data['reactions'] = $project->getLikes()->count();
+      $data['reactions'] = $extraced_project->getLikes()->count();
     }
     if (in_array('comments', $attributes_list, true)) {
-      $data['comments'] = $project->getComments()->count();
+      $data['comments'] = $extraced_project->getComments()->count();
     }
     if (in_array('private', $attributes_list, true)) {
-      $data['private'] = $project->getPrivate();
+      $data['private'] = $extraced_project->getPrivate();
     }
     if (in_array('flavor', $attributes_list, true)) {
-      $data['flavor'] = $project->getFlavor() ?? '';
+      $data['flavor'] = $extraced_project->getFlavor() ?? '';
     }
     if (in_array('tags', $attributes_list, true)) {
       $tags = [];
-      $project_tags = $project->getTags();
+      $project_tags = $extraced_project->getTags();
       /** @var Tag $tag */
       foreach ($project_tags as $tag) {
         $tags[$tag->getId()] = $tag->getInternalTitle();
@@ -119,40 +119,40 @@ class ProjectsResponseManager extends AbstractResponseManager
       $data['tags'] = $tags;
     }
     if (in_array('uploaded', $attributes_list, true)) {
-      $data['uploaded'] = $project->getUploadedAt()->getTimestamp();
+      $data['uploaded'] = $extraced_project->getUploadedAt()->getTimestamp();
     }
     if (in_array('uploaded_string', $attributes_list, true)) {
       try {
-        $data['uploaded_string'] = $this->time_formatter->format($project->getUploadedAt()->getTimestamp());
+        $data['uploaded_string'] = $this->time_formatter->format($extraced_project->getUploadedAt()->getTimestamp());
       } catch (\Exception) {
-        $data['uploaded_string'] = $project->getUploadedAt()->format(\DateTimeInterface::RFC2822);
+        $data['uploaded_string'] = $extraced_project->getUploadedAt()->format(\DateTimeInterface::RFC2822);
       }
     }
     if (in_array('screenshot_large', $attributes_list, true)) {
-      $data['screenshot_large'] = $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotLarge($project->getId());
+      $data['screenshot_large'] = $project->isExample() ? $this->image_repository->getAbsoluteWebPath($project->getId(), $project->getImageType(), false) : $this->project_manager->getScreenshotLarge($extraced_project->getId());
     }
     if (in_array('screenshot_small', $attributes_list, true)) {
-      $data['screenshot_small'] = $program->isExample() ? $this->image_repository->getAbsoluteWebPath($program->getId(), $program->getImageType(), false) : $this->project_manager->getScreenshotSmall($project->getId());
+      $data['screenshot_small'] = $project->isExample() ? $this->image_repository->getAbsoluteWebPath($project->getId(), $project->getImageType(), false) : $this->project_manager->getScreenshotSmall($extraced_project->getId());
     }
     if (in_array('project_url', $attributes_list, true)) {
-      $data['project_url'] = ltrim($this->createProjectLocation($program->getProgram()), '/');
+      $data['project_url'] = ltrim($this->createProjectLocation($project->getProgram()), '/');
     }
     if (in_array('download_url', $attributes_list, true)) {
       $data['download_url'] = ltrim($this->url_generator->generate(
         'open_api_server_projects_projectidcatrobatget',
         [
-          'id' => $project->getId(),
+          'id' => $extraced_project->getId(),
         ],
         UrlGeneratorInterface::ABSOLUTE_URL), '/');
     }
     if (in_array('filesize', $attributes_list, true)) {
-      $data['filesize'] = ($project->getFilesize() / 1_048_576);
+      $data['filesize'] = ($extraced_project->getFilesize() / 1_048_576);
     }
 
     return new ProjectResponse($data);
   }
 
-  public function createProjectsDataResponse(array $projects, string $attributes = null): array
+  public function createProjectsDataResponse(array $projects, ?string $attributes = null): array
   {
     $response = [];
     foreach ($projects as $project) {
@@ -162,7 +162,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     return $response;
   }
 
-  public function createFeaturedProjectResponse(FeaturedProgram $featured_project, string $attributes = null): FeaturedProjectResponse
+  public function createFeaturedProjectResponse(FeaturedProgram $featured_project, ?string $attributes = null): FeaturedProjectResponse
   {
     if (empty($attributes) || 'ALL' === $attributes) {
       $attributes_list = ['id', 'project_id', 'project_url', 'url', 'name', 'author', 'featured_image'];
@@ -205,7 +205,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     return new FeaturedProjectResponse($data);
   }
 
-  public function createFeaturedProjectsResponse(array $featured_projects, string $attributes = null): array
+  public function createFeaturedProjectsResponse(array $featured_projects, ?string $attributes = null): array
   {
     $response = [];
 
@@ -217,7 +217,7 @@ class ProjectsResponseManager extends AbstractResponseManager
     return $response;
   }
 
-  public function createProjectCategoryResponse(array $projects, string $category, string $locale, string $attributes = null): ProjectsCategory
+  public function createProjectCategoryResponse(array $projects, string $category, string $locale, ?string $attributes = null): ProjectsCategory
   {
     return new ProjectsCategory([
       'projects_list' => $this->createProjectsDataResponse($projects, $attributes),

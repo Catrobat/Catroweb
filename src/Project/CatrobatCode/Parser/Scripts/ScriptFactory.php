@@ -6,7 +6,7 @@ use App\Project\CatrobatCode\Parser\Constants;
 
 class ScriptFactory
 {
-  public static function generate(\SimpleXMLElement $script_xml_properties): BroadcastScript|CollisionScript|StartScript|UnknownScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript|UserDefinedScript
+  public static function generate(\SimpleXMLElement $script_xml_properties): BroadcastScript|CollisionScript|StartScript|UnknownScript|UserDefinedScript|WhenBGChangeScript|WhenBounceOffScript|WhenClonedScript|WhenConditionScript|WhenGamepadButtonScript|WhenNfcScript|WhenRaspiPinChangedScript|WhenScript|WhenTouchScript
   {
     return match ((string) $script_xml_properties[Constants::TYPE_ATTRIBUTE]) {
       Constants::START_SCRIPT => new StartScript($script_xml_properties),

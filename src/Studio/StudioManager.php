@@ -5,11 +5,13 @@ namespace App\Studio;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
+use App\DB\Entity\Studio\StudioJoinRequest;
 use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
+use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
 use App\DB\EntityRepository\Studios\StudioProgramRepository;
 use App\DB\EntityRepository\Studios\StudioRepository;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
@@ -18,9 +20,18 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class StudioManager
 {
-  public function __construct(protected EntityManagerInterface $entity_manager, protected StudioRepository $studio_repository, protected StudioActivityRepository $studio_activity_repository, protected StudioProgramRepository $studio_project_repository, protected StudioUserRepository $studio_user_repository, protected UserCommentRepository $user_comment_repository) {}
+  public function __construct(
+    protected EntityManagerInterface $entity_manager,
+    protected StudioRepository $studio_repository,
+    protected StudioActivityRepository $studio_activity_repository,
+    protected StudioProgramRepository $studio_project_repository,
+    protected StudioUserRepository $studio_user_repository,
+    protected UserCommentRepository $user_comment_repository,
+    protected StudioJoinRequestRepository $studio_join_request_repository
+  ) {
+  }
 
-  public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): Studio
+  public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, ?string $cover_path = null): Studio
   {
     $studio = (new Studio())
       ->setName($name)
@@ -33,7 +44,7 @@ class StudioManager
     ;
 
     $this->saveStudio($studio);
-    $this->addUserToStudio($user, $studio, $user, StudioUser::ROLE_ADMIN);
+    $this->addAdminToStudio($user, $studio);
 
     return $studio;
   }
@@ -104,16 +115,37 @@ class StudioManager
     return $studioProject;
   }
 
+  public function isStudioPublic(Studio $studio): bool
+  {
+    return $studio->isIsPublic();
+  }
+
+  public function isStudioEnabled(Studio $studio): bool
+  {
+    return $studio->isIsEnabled();
+  }
+
   public function addUserToStudio(User $admin, Studio $studio, User $newUser, string $role = StudioUser::ROLE_MEMBER): ?StudioUser
   {
-    if (($this->isUserInStudio($admin, $studio) && !$this->isUserAStudioAdmin($admin, $studio))
-      || (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN !== $role)) {
-      return null;
+    if (($this->isUserInStudio($admin, $studio) && $this->isUserAStudioAdmin($admin, $studio))
+      && (!$this->isUserInStudio($newUser, $studio) && StudioUser::ROLE_ADMIN !== $role)) {
+      $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
+
+      return $this->createStudioUser($newUser, $studio, $activity, $role);
     }
 
-    $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
+    return null;
+  }
 
-    return $this->createStudioUser($newUser, $studio, $activity, $role);
+  public function addAdminToStudio(User $admin, Studio $studio, string $role = StudioUser::ROLE_ADMIN): ?StudioUser
+  {
+    if (!$this->isUserInStudio($admin, $studio) && StudioUser::ROLE_ADMIN == $role) {
+      $activity = $this->createActivity($admin, $studio, StudioActivity::TYPE_USER);
+
+      return $this->createStudioUser($admin, $studio, $activity, $role);
+    }
+
+    return null;
   }
 
   public function addCommentToStudio(User $user, Studio $studio, string $comment_text, int $parent_id = 0): ?UserComment
@@ -138,7 +170,7 @@ class StudioManager
     return $this->createStudioProgram($user, $studio, $activity, $project);
   }
 
-  public function changeStudio(User $user, Studio $studio): ?studio
+  public function changeStudio(User $user, Studio $studio): ?Studio
   {
     if ($this->isUserAStudioAdmin($user, $studio)) {
       return $this->saveStudio($studio);
@@ -271,6 +303,11 @@ class StudioManager
     return $this->studio_activity_repository->countStudioActivities($studio);
   }
 
+  public function getStudioAdmin(Studio $studio): ?StudioUser
+  {
+    return $this->studio_user_repository->findStudioAdmin($studio);
+  }
+
   public function findStudioUser(?User $user, Studio $studio): ?StudioUser
   {
     return $this->studio_user_repository->findStudioUser($user, $studio);
@@ -368,5 +405,75 @@ class StudioManager
     $this->entity_manager->refresh($studio);
 
     return $studio;
+  }
+
+  public function removeJoinRequest(StudioJoinRequest $joinRequest): void
+  {
+    $joinRequestId = $joinRequest->getId();
+    $this->studio_join_request_repository->deleteJoinRequestById($joinRequestId);
+  }
+
+  public function findJoinRequestByUserAndStudio(User $user, Studio $studio): ?StudioJoinRequest
+  {
+    return $this->studio_join_request_repository->findJoinRequestByUserAndStudio($user, $studio);
+  }
+
+  public function setJoinRequest(User $user, Studio $studio, string $status): ?StudioJoinRequest
+  {
+    if (is_null($this->findJoinRequestByUserAndStudio($user, $studio))) {
+      $joinRequest = new StudioJoinRequest();
+      $joinRequest->setUser($user);
+      $joinRequest->setStudio($studio);
+      $joinRequest->setStatus($status);
+      $this->entity_manager->persist($joinRequest);
+      $this->entity_manager->flush();
+      $this->entity_manager->refresh($joinRequest);
+
+      return $joinRequest;
+    }
+
+    return null;
+  }
+
+  public function findPendingJoinRequests(Studio $studio): array
+  {
+    return $this->studio_join_request_repository->findPendingJoinRequests($studio);
+  }
+
+  public function findApprovedJoinRequests(Studio $studio): array
+  {
+    return $this->studio_join_request_repository->findApprovedJoinRequests($studio);
+  }
+
+  public function findDeclinedJoinRequests(Studio $studio): array
+  {
+    return $this->studio_join_request_repository->findDeclinedJoinRequests($studio);
+  }
+
+  public function findJoinRequestById(int $joinRequestId): ?StudioJoinRequest
+  {
+    return $this->studio_join_request_repository->findJoinRequestById($joinRequestId);
+  }
+
+  public function updateJoinRequests(StudioJoinRequest $joinRequest, string $switchValue, User $user, User $admin, Studio $studio): StudioJoinRequest
+  {
+    if ('pending' == $joinRequest->getStatus() && '1' == $switchValue) {
+      $joinRequest->setStatus('approved');
+      $this->addUserToStudio($admin, $studio, $user);
+    /* ---Notification*-- */
+    } elseif ('pending' == $joinRequest->getStatus() && '0' == $switchValue) {
+      $joinRequest->setStatus('declined');
+    /* ---Notification*-- */
+    } elseif ('declined' == $joinRequest->getStatus() && '0' == $switchValue) {
+      $joinRequest->setStatus('approved');
+      $this->addUserToStudio($admin, $studio, $user);
+      /* ---Notification*-- */
+    }
+
+    $this->entity_manager->persist($joinRequest);
+    $this->entity_manager->flush();
+    $this->entity_manager->refresh($joinRequest);
+
+    return $joinRequest;
   }
 }

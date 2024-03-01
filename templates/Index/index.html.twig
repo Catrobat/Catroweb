@@ -6,13 +6,20 @@
 
 {% block body %}
 
+
+  <div id="maintenance-container">
+    {% for maintenanceMessage in maintenanceInformation %}
+        {{ maintenanceMessage | raw }}
+    {% endfor %}
+  </div>
+
   {% if not app.user and not isWebview() %}
     {{ include('Index/welcome-section.html.twig') }}
   {% endif %}
 
   {% if featured|length > 0 %}
     {% if not app.user and not isWebview() %}
-      <h2>{{ "programs.featured"|trans({}, "catroweb") }}</h2>
+      <h2>{{ "project.featured"|trans({}, "catroweb") }}</h2>
     {% endif %}
     <div id="featured-slider" class="featured-slider">
       {{ include('components/carousel.html.twig',
@@ -38,15 +45,17 @@
       ['recent', 'newest', 'uploaded'],
       ['example', 'example', 'author'],
       ['most_downloaded', 'most.downloaded', 'downloads'],
+      ['trending', 'trending', 'downloads'],
       ['random', 'random', 'uploaded'],
       ['scratch', 'scratchremixes', 'views'],
+      ['popular', 'popular', 'author'],
     ] %}
       <div id="home-projects__{{ category[0] }}" data-category="{{ category[0] }}" data-property="{{ category[2] }}"
            data-theme="{{ theme() }}" data-flavor="{{ flavor() }}" data-base-url="{{ app.request.getBaseURL() }}"
            class="project-list loading horizontal">
         <div class="container">
           <div class="project-list__title">
-            <h2>{{ ("programs." ~ category[1]) | trans({}, "catroweb") }}</h2>
+            <h2>{{ ("project." ~ category[1]) | trans({}, "catroweb") }}</h2>
             <div class="project-list__title__btn-toggle btn-view-open">
               <div class="project-list__title__btn-toggle__text">{{ "show-more" | trans({}, "catroweb") }}</div>
               <div class="project-list__title__btn-toggle__icon material-icons">arrow_forward</div>

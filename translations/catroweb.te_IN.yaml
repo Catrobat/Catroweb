@@ -41,7 +41,7 @@ country: దేశం
 loginText: లాగిన్
 privacyPolicy: ప్రయివసి పాలిసి
 imprint: ఇంప్రింట్
-programDetails: వివరాలు
+projectDetails: వివరాలు
 somethingWentWrong: 'ఊప్స్ ఎధొ తప్పు జరిగొనది.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'మళ్ళి ప్రయత్నించండి!'
@@ -94,114 +94,116 @@ follower:
   unfollowError: "కావలసిన వినియోగదారుని అనుసరించడం సాధ్యం కాలేదు!"
   unfollowQuestion: "మీరు ఖచ్చితంగా ఈ వినియోగదారుని అనుసరించకూడదనుకుంటున్నారా?"
   unfollowButton: "అనుసరించవద్దు%username%"
-programs:
+project:
   welcome:
-    title: కాట్రోబాట్స్‌కు స్వాగతం%theme%
-    title_mindstorms: మైండ్‌స్టార్మ్స్ EV3 మరియు NXT కోసం కాట్రోబాట్ సైట్‌కు స్వాగతం
-    subtitle: కథలు, గేమ్స్ మరియు చాల సృష్టించవచ్చు
-    subtitle_embroidery: మీ టీ-షర్టులు, బ్యాగులు, ప్యాంట్లు లేదా స్మార్ట్‌ఫోన్ కేస్‌పై మీ స్వంత నమూనాలను స్టిచ్ చేయండి!
-    subtitle_mindstorms: మీ లెగో మైండ్‌స్టార్మ్స్ EV3 మరియు NXT రోబోట్‌లతో మీ స్వంత ప్రాజెక్ట్‌లను సృష్టించండి
-    download: యాప్ డౌన్‌లోడ్ చేసుకోండి
-    statistics: మరింత గణాంకాలు
-  featured: ఫీచర్డ్
-  example: ఉదాహరణలు
-  newest: సరికొత్త ప్రాజెక్టులు
-  recommended: సిఫార్సు చేసిన ప్రాజెక్టులు
-  scratchremixes: స్క్రాచ్ రీమిక్స్‌లు
-  noPrograms: ప్రస్తుతం ప్రాజెక్టులు లేవు.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
-    మీరు చెప్పేది నిజమా?
-    మీరు తొలగించాలనుకుంటున్నారా ఖచ్చితంగా"%programName%"?
-    మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
-    అవును, తొలగించండి!
-    రద్దు చేయండి
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    మీరు చెప్పేది నిజమా?
-    మీరు సెట్ చేస్తే '%programName%ప్రైవేట్‌గా, ఇది ఇతర వినియోగదారులకు కనిపించదు లేదా కనుగొనబడదు.
-    మీరు ఇప్పటికీ మీ ప్రాజెక్ట్ లింక్‌ను మీ స్నేహితులతో పంచుకోవచ్చు. ప్యాడ్‌లాక్ చిహ్నాన్ని నొక్కడం ద్వారా మీరు దృశ్యమానతను టోగుల్ చేయవచ్చు.
-    మీరు సెట్ చేస్తే "%programName%"ప్రజలకు, దీనిని ఇతర వినియోగదారులు చూడవచ్చు మరియు కనుగొనవచ్చు.
-    అవును, పబ్లిక్‌కు సెట్ చేయండి
-    అవును, ప్రైవేట్‌కు సెట్ చేయండి
-    లేదు
-  reportCommentConfirmation: మీరు ఈ వ్యాఖ్యను ఖచ్చితంగా నివేదించాలనుకుంటున్నారా?
-  deleteCommentConfirmation: మీరు ఖచ్చితంగా ఈ వ్యాఖ్యను తొలగించాలనుకుంటున్నారా?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    ఖాతా తొలగింపు?
-    మీరు ఖచ్చితంగా మీ ఖాతాను తొలగించాలనుకుంటున్నారా? ఇది మీ అప్‌లోడ్ ప్రాజెక్ట్‌లు మరియు వ్యాఖ్యలను కూడా తొలగిస్తుంది!
-    మీ చర్యలను పునరుద్ధరించడానికి మార్గం లేదు!
-    అవును, తొలగించండి!
-    రద్దు చేయండి
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: ప్రాజెక్ట్ వివరణ చాలా పొడవుగా ఉంది!
-  tooLongCredits: The project credits are too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: ఎక్కువ చుడబడినవి
     downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
-  random: యాదృచ్ఛిక ప్రాజెక్టులు
-  related: సంబంధిత ప్రాజెక్టులు
-  downloads: '%downloads% డౌన్లోడ్లు'
-  sample: ఉదాహరణ ప్రాజెక్టులు
-  views: '%views% వీక్షణలు'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "ఆ ప్రాజెక్ట్ పట్ల స్పందించిన వ్యక్తులు"
+    likersTitle: "People who reacted to that project"
     all: "అన్ని"
-  remixes: '{0}0 రీమిక్స్‌లు |{1}1 రీమిక్స్ |] 1, Inf]%remixes%రీమిక్స్‌లు'
-  newRemixesNotificationTitle: '|{1}"%programName%" 1 కొత్త రీమిక్స్ ఉంది: |] 1, Inf] "%programName%" ఉంది%remixes% కొత్త రీమిక్స్‌లు:'
-  submitted: సమర్పించిన ప్రాజెక్టులు
-  uploaded: సమర్పించిన ప్రాజెక్టులు
-  reportAsInappropriate: తగనిదని నివేదించు
-  reportProgram: ప్రాజెక్ట్ నివేదించండి
-  languageVersion: 'Catrobat భాష వెర్షన్: %languageVersion%'
-  reportLoginText: దయచేసి %login% ఈ ప్రాజెక్ట్ నివేదించడానికి.
-  reportDialogHeader: మీరు ఈ ప్రాజెక్ట్‌ను ఎందుకు నివేదించాలనుకుంటున్నారు?
-  reportDialogReason: కారణం నమోదు చేయండి
-  reportRadioButtonInappropriate: ఇది తగనిది
-  reportRadioButtonCopyright: కాపీరైట్ ఉల్లంఘన
-  reportRadioButtonSpam: ఇది స్పామ్
-  reportRadioButtonDislike: నాకు నచ్చలేదు
-  reportOwnProgram: మీరు మీ స్వంత ప్రాజెక్ట్‌ను ఫ్లాగ్ చేయలేరు.
-  reportAlready: మీరు ఇప్పటికే ఈ ప్రాజెక్ట్‌ను ఫ్లాగ్ చేసారు.
-  reportDone: మీరు ఈ ప్రాజెక్ట్ గురించి నివేదించారు!
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: యాప్‌ని అప్‌డేట్ చేయండి
-  updateAppText: దయచేసి ఈ ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేయడానికి మీ యాప్‌ని సరికొత్త వెర్షన్‌కు అప్‌డేట్ చేయండి.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: అలాగే
-  checkout_this_program: ఈ కాట్రోబాట్ ప్రాజెక్ట్‌ను తనిఖీ చేయండి
-  show_more: ఇంకా చూపిన్చు
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: వ్యాఖ్యలు
-  send: పంపించు
+  send: Send
   delete: తొలగించు
   report: రిపొర్ట్
-  report_popup: వ్యాఖ్య విజయవంతంగా నివేదించబడింది.
-  report_popup_header: నివేదించబడింది
-  deleted_popup: వ్యాఖ్య విజయవంతంగా తొలగించబడింది.
-  deleted_popup_header: తొలగించబడింది
-  noAdminRights: మీకు నిర్వాహక హక్కులు లేవు. దయచేసి అడ్మిన్‌గా లాగిన్ అవ్వండి.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Do you want to save your changes?
   btnDiscard: Discard
-  addComment: వ్యాఖ్య రాయండి
-  thumbsUp: బ్రొటనవేళ్లు!
-  smile: చిరునవ్వు!
-  love: ప్రేమ!
-  wow: అయ్యో!
-  linkTitle: లింక్
-  link: ప్రాజెక్ట్ లింక్‌ను క్లిప్‌బోర్డ్‌కు కాపీ చేయండి
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: ప్రతిచర్యలు
-  downloadErrorText: ప్రాజెక్ట్‌ను డౌన్‌లోడ్ చేస్తున్నప్పుడు లోపం సంభవించింది. దయచేసి తర్వాత మళ్లీ ప్రయత్నించండి.
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
-  showTranslation: అనువాదం చూపించు
-  hideTranslation: అనువాదాన్ని దాచు
-  translatedByLine: ద్వారా అనువదించబడింది %provider% నుండి %sourceLanguage% కు %targetLanguage%
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
@@ -220,10 +222,10 @@ remixGraph:
   by: 'ద్వారా'
   open: 'తెరవండి'
   showPaths: 'మార్గాలు చూపించు'
-  programNotAvailableErrorTitle: 'క్షమించండి...'
-  programNotAvailableErrorDescription: 'ప్రాజెక్ట్ ఇకపై అందుబాటులో లేదు!'
-  programNotAvailable: 'అందుబాటులో లేదు'
-  programUnknownUser: 'తెలియని యూజర్'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -247,6 +249,28 @@ accountConfirmation:
     మీ కాట్రోబాట్ బృందం.
     </p>
 
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: మీ కాట్రోబాట్ పాస్‌వర్డ్ రికవరీ
   message: |
@@ -399,6 +423,8 @@ menu:
   followersAndFollowing: అనుచరుడు
   mediaLibrary: Media library
   studio: Studios
+  language: భాష
+  languageOptionsNotAvailable: No language options available.
 login:
   login: ప్రవేశించండి
   button:
@@ -452,6 +478,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -500,12 +531,12 @@ errors:
   unknown: గుర్తించలేని పొరపాటు
   token: 'పరికరం యొక్క ప్రామాణీకరణ విఫలమైంది: చెల్లని ఆత్-టోకెన్!'
   uploadTokenAuthFailed: 'అప్‌లోడ్ టోకెన్ ఆత్ విఫలమైంది.'
-  program:
-    invalid: చెల్లని ప్రాజెక్ట్.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'క్షమించండి, మీ ప్రాజెక్ట్ క్యాట్రోబాట్ భాష యొక్క పాత వెర్షన్‌ను కలిగి ఉంది! మీరు పాకెట్ కోడ్ యొక్క తాజా వెర్షన్‌ను ఉపయోగిస్తున్నారా?'
-  programversion:
-    tooold: 'క్షమించండి, మీరు పాకెట్ కోడ్ యొక్క పాత వెర్షన్‌ని ఉపయోగిస్తున్నారు. దయచేసి తాజా వెర్షన్‌కి అప్‌డేట్ చేయండి.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: ప్రామాణీకరణ విఫలమైంది
     webview: |
@@ -710,8 +741,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -756,13 +787,14 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat community'
 back_to_app: 'Exit community'
 category:
-  recent: సరికొత్త ప్రాజెక్టులు
-  random: యాదృచ్ఛిక ప్రాజెక్టులు
+  recent: Newest projects
+  random: Random projects
   most_viewed: ఎక్కువ చుడబడినవి
   most_downloaded: ఎక్కువ డౌన్లొడుచెయబడినవి
   example: Example
-  scratch: స్క్రాచ్ రీమిక్స్‌లు
-  recommended: సిఫార్సు చేసిన ప్రాజెక్టులు
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'
@@ -858,7 +890,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'రద్దు చేయు'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'రిపొర్ట్'
@@ -867,6 +901,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'ఇంకా చూపించు'
     showLess: 'తక్కువ చూపించు'
@@ -875,6 +910,11 @@ studio:
     remove_project_success: 'ప్రాజెక్ట్ స్టూడియో నుండి విజయవంతంగా తీసివేయబడింది!'
     no_projects: 'స్టూడియోలో ఇంకా ఏ ప్రాజెక్ట్‌లు లేవు'
     updateCoverError: 'స్టూడియో కవర్‌ని అప్‌డేట్ చేస్తున్నప్పుడు ఏదో తప్పు జరిగింది!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'రిపొర్ట్'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'ప్రాజెక్టులు'
     comments:
@@ -916,3 +956,12 @@ media_library:
       default: 'రకం: తెలియదు'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

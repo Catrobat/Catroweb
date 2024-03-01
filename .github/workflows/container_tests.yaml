@@ -62,18 +62,17 @@ jobs:
         run: |
           docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature
 
-      - name: Test shared volumes
+      - name: Test shared volumes, by expecting a crash with invalid changes to the test file
         id: shared-test-run-must-fail
-        # Expecting failure inside a step is not supported. However, by manually adding a status variable and a second
-        # step to verify the result of the previous step (that can't fail) as a workaround it is possible.
         continue-on-error: true
         run: |
-          echo ::set-output name=status::failure
           echo "INVALID" > tests/BehatFeatures/web/general/homepage.feature
           docker exec app.catroweb bin/behat -s web-general tests/BehatFeatures/web/general/homepage.feature
-          echo ::set-output name=status::success
-      - name: This step is only executed if shared volumes are not working
-        if: steps.shared-test-run-must-fail.outputs.status == 'success'
+          TEST_RUN_EXIT_CODE=$?
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
+      - name: Assert shared volumes are working as expected
+        if: env.shared-test-run-must-fail.test-run-exit-code != '0'
         run: |
           exit -1
 
@@ -95,19 +94,19 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: screenshots_dev_container
           path: tests/TestReports/TestScreenshots
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: dev_logs_dev_container
           path: var/log/dev
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: test_logs_dev_container

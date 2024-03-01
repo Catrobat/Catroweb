@@ -6,7 +6,7 @@ Feature: Upload a program
       | name     | password | token      | id |
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
-    And there are programs:
+    And there are projects:
       | id | name      | description | owned by | downloads | views | upload time      | version |
       | 1  | program 1 | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   |
       | 2  | program 2 |             | Catrobat | 33        | 9     | 01.02.2013 13:00 | 0.8.5   |
@@ -81,7 +81,7 @@ Feature: Upload a program
     Given the next generated token will be "aabbccddee"
     And I am "Catrobat"
     And I upload a valid Catrobat project, API version 1
-    When I upload another program using token "cccccccccc"
+    When I upload another project using token "cccccccccc"
     Then the uploaded project should exist in the database, API version 1
 
   Scenario: Program Sanitizer should remove unnecessary files

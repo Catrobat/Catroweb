@@ -17,8 +17,8 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 use App\Project\CatrobatFile\ExtractedFileRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\ProjectManager;
 use App\Storage\ScreenshotRepository;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use Doctrine\ORM\EntityManagerInterface;
@@ -40,9 +40,9 @@ use Symfony\Component\HttpFoundation\Response;
  */
 final class ProjectsApiTest extends DefaultTestCase
 {
-  protected ProjectsApi|MockObject $object;
+  protected MockObject|ProjectsApi $object;
 
-  protected ProjectsApiFacade|MockObject $facade;
+  protected MockObject|ProjectsApiFacade $facade;
 
   protected mixed $full_validator;
   protected mixed $full_response_manager;
@@ -153,7 +153,7 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->assertInstanceOf(ProjectResponse::class, $response);
   }
 
-  private function projectIdPut_setLoaderAndAuthManager(Program|MockObject $project = null, User|MockObject $user = null): void
+  private function projectIdPut_setLoaderAndAuthManager(MockObject|Program|null $project = null, MockObject|User|null $user = null): void
   {
     if (is_null($user)) {
       $user = $this->createMock(User::class);
@@ -168,14 +168,14 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setAuthManager($user);
   }
 
-  private function projectIdPut_setLoader(Program|MockObject|null $project): void
+  private function projectIdPut_setLoader(MockObject|Program|null $project): void
   {
     $loader = $this->createMock(ProjectsApiLoader::class);
     $loader->method('findProjectByID')->willReturn($project);
     $this->facade->method('getLoader')->willReturn($loader);
   }
 
-  private function projectIdPut_setAuthManager(User|MockObject|null $user): void
+  private function projectIdPut_setAuthManager(MockObject|User|null $user): void
   {
     $authentication_manager = $this->createMock(AuthenticationManager::class);
     $authentication_manager->method('getAuthenticatedUser')->willReturn($user);
@@ -189,7 +189,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPut(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $project = new Program();
@@ -204,12 +204,12 @@ final class ProjectsApiTest extends DefaultTestCase
     $this->projectIdPut_setLoaderAndAuthManager($project, $user);
 
     $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
-    $extracted_file_repository->method('loadProgramExtractedFile')->willReturn(null);
+    $extracted_file_repository->method('loadProjectExtractedFile')->willReturn(null);
     $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
-      'project_manager' => $this->createMock(ProgramManager::class),
+      'project_manager' => $this->createMock(ProjectManager::class),
       'entity_manager' => $this->createMock(EntityManagerInterface::class),
       'extracted_file_repository' => $extracted_file_repository,
-      'file_repository' => $this->createMock(ProgramFileRepository::class),
+      'file_repository' => $this->createMock(ProjectFileRepository::class),
       'screenshot_repository' => $this->createMock(ScreenshotRepository::class),
     ]);
     $this->facade->method('getProcessor')->willReturn($processor);
@@ -246,7 +246,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutNotFound(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoader(null);
@@ -268,7 +268,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutUnauthorized(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoader($this->createMock(Program::class));
@@ -291,7 +291,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutForbidden(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $project = new Program();
@@ -318,7 +318,7 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutValidationError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoaderAndAuthManager();
@@ -354,21 +354,21 @@ final class ProjectsApiTest extends DefaultTestCase
    */
   public function testProjectIdPutSaveXMLError(): void
   {
-    $response_code = null;
+    $response_code = 200;
     $response_headers = [];
 
     $this->projectIdPut_setLoaderAndAuthManager();
 
     $extracted_file_repository = $this->createMock(ExtractedFileRepository::class);
     $extracted_file = $this->createMock(ExtractedCatrobatFile::class);
-    $extracted_file_repository->method('loadProgramExtractedFile')->willReturn($extracted_file);
-    $extracted_file_repository->method('saveProgramExtractedFile')->willThrowException(new \Exception(''));
+    $extracted_file_repository->method('loadProjectExtractedFile')->willReturn($extracted_file);
+    $extracted_file_repository->method('saveProjectExtractedFile')->willThrowException(new \Exception(''));
 
     $processor = $this->createTestProxy(ProjectsApiProcessor::class, [
-      'project_manager' => $this->createMock(ProgramManager::class),
+      'project_manager' => $this->createMock(ProjectManager::class),
       'entity_manager' => $this->createMock(EntityManagerInterface::class),
       'extracted_file_repository' => $extracted_file_repository,
-      'file_repository' => $this->createMock(ProgramFileRepository::class),
+      'file_repository' => $this->createMock(ProjectFileRepository::class),
       'screenshot_repository' => $this->createMock(ScreenshotRepository::class),
     ]);
     $this->facade->method('getProcessor')->willReturn($processor);

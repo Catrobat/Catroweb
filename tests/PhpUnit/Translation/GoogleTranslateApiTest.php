@@ -18,7 +18,7 @@ class GoogleTranslateApiTest extends TestCase
 {
   private GoogleTranslateApi $api;
 
-  private TranslateClient|MockObject $client;
+  private MockObject|TranslateClient $client;
 
   protected function setUp(): void
   {

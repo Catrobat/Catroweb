@@ -41,7 +41,7 @@ country: کشور
 loginText: وارد شدن
 privacyPolicy: سیاست حفظ حریم خصوصی
 imprint: دیدگاه
-programDetails: جزئیات
+projectDetails: جزئیات
 somethingWentWrong: 'اوهو، چیزی اشتباه شد.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'لطفا دوباره کوشش کن!'
@@ -94,114 +94,116 @@ follower:
   unfollowError: "کاربر مورد نظ قادر به غیر دنبال شدن نیست!"
   unfollowQuestion: "آیا مطمئن هستید که میخواهید این کاربر را دیگر دنبال نه کنید؟"
   unfollowButton: "%username% دیگر دنبال نکن"
-programs:
+project:
   welcome:
-    title: به موضوع %theme% کاتروباتس (Catrobat) خوش آمدی
-    title_mindstorms: به سایت کاتروبات برای Mindstorms EV3 و NXT خوش آمدید
-    subtitle: ایجاد کن داستان ها، بازی ها و بیشتر ...
-    subtitle_embroidery: الگوهای خود را بر روی تی شرت، کیسه، شلوار، یا پوش گوشی های خود را بخیه کنید!
-    subtitle_mindstorms: پروژه های خود را با ربات های Lego Mindstorms EV3 و NXT خود ایجاد کنید
-    download: برنامه را دانلود کن
-    statistics: More Statistics
-  featured: ارایه شده
-  example: مثال ها
-  newest: جدیدترین پروژه ها
-  recommended: پروژه های توصیه شده
-  scratchremixes: ریمیکس دوخت
-  noPrograms: در حال حاضر هیچ پروژه ای وجود ندارد.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: حذف پروژه
   deleteConfirmation: |+
-    مطمئنی؟
-    آیا مطمئنید که میخواهید %programName% را حذف کنید؟
-    هیچ راهی برای بازگرداندن این عمل شما وجود ندارد!
-    بله، آن را حذف کنید!
-    لغو کنید
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    مطمئنی؟
-    اگر شما %programName% را به خصوصی تنظیم کنید، این از طرف کاربران دیگر دیده نمی شود و یا یافت نمی شود.
-    شما هنوز هم می توانید لینک پروژه خود را با دوستان خود به اشتراک بگذارید. شما می توانید با ضربه زدن به آیکون قفل، دید را تغییر دهید.
-    اگر شما %programName% را به عموم تنظیم کنید، پس آن توسط کاربران دیگر دیده می شود.
-    بله، به طور عمومی تنظیم کن
-    بله، به طور عمومی عموم کن
-    نخیر
-  reportCommentConfirmation: آیا مطمئنی که میخواهی این کامنت را گزارش کنی؟
-  deleteCommentConfirmation: آیا مطمئن هستی که می خواهی این نظر را حذف کنی؟
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
-  tooLongName: نام پروژه خیلی طولانی است!
-  tooLongDescription: توضیح پروژه خیلی طولانی است!
-  tooLongCredits: The project credits are too long!
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: پربیننده ترین
     downloaded: بیشتر دانلود شده
-  random: پروژه های تصادفی
-  related: پروژه های مرتبط
-  downloads: 'دانلودها %downloads%'
-  sample: پروژه های مثالی
-  views: 'نمایش %views%'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "افرادی که به این پروژه واکنش نشان دادند"
+    likersTitle: "People who reacted to that project"
     all: "همه"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
-  reportAsInappropriate: گزارش به عنوان نامناسب
-  reportProgram: گزارش پروژه
-  languageVersion: 'Catrobat Language version: %languageVersion%'
-  reportLoginText: لطفا وارد شو %login% برای گزارش این پروژه.
-  reportDialogHeader: چرا می خواهی این پروژه را گزارش دهی؟
-  reportDialogReason: یک دلیل را وارد کنید
-  reportRadioButtonInappropriate: این نامناسب است
-  reportRadioButtonCopyright: نقض قوانین حق تکثیر
-  reportRadioButtonSpam: این اسپم است
-  reportRadioButtonDislike: من این را دوست ندارم
-  reportOwnProgram: شما نمیتوانید پروژه خود را علامت گزاری کنید.
-  reportAlready: شما قبلا این پروژه را علامت گذاری کرده اید.
-  reportDone: شما این پروژه را گزارش کرده اید!
-  updateAppHeaderDownload: دانلود امکان پذیر نیست
-  updateAppTextDownload: لطفاً برنامه خود را به جدیدترین نسخه به روز کنید. توجه داشته باشید که همه ویژگی های اندروید از قبل در IOS در دسترس نیستند.
-  updateAppTextDownloadApk: دانلود APK در حال حاضر فقط در اندروید و نه در IOS در دسترس است.
-  updateAppHeader: Update App
-  updateAppText: لطفا برنامه خود را به جدیدترین نسخه به روز کنید تا بتوانید این پروژه را دانلود کنید.
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: خوب
-  checkout_this_program: این پروژه کاتروبات (Catrobat) را نگاه کنید
-  show_more: بیشتر نشان بده
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: نظرات
-  send: ارسال
+  send: Send
   delete: حذف
   report: گزارش
-  report_popup: نظر با موفقیت گزارش شد.
-  report_popup_header: گزارش شد
-  deleted_popup: نظر با موفقیت حذف شد.
-  deleted_popup_header: حذف شد
-  noAdminRights: شما حقوق مدیر ندارید لطفا به عنوان یک مدیر وارد شوید.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: آیا می خواهید تغییرات خود را ذخیره کنید؟
   btnDiscard: لغو تغییرات
-  addComment: یک نظر بنویسید
-  thumbsUp: شست بالا!
-  smile: لبخند!
-  love: عشق!
-  wow: وآووو!
-  linkTitle: ارتباط
-  link: پیوند پروژه را به کلیپ بورد کپی کنید
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: واکنش ها
-  downloadErrorText: هنگام بارگیری پروژه خطا رخ داد. لطفا بعدا دوباره امتحان کنید.
-  downloadStartText: دانلود شروع شد...
-  showTranslation: نمایش ترجمه
-  hideTranslation: مخفی کردن ترجمه
-  translatedByLine: ترجمه شده توسط %provider% از %sourceLanguage% به %targetLanguage%
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: پیش فرض
@@ -220,10 +222,10 @@ remixGraph:
   by: 'توسط'
   open: 'باز'
   showPaths: 'مسیرها را نمایش دید '
-  programNotAvailableErrorTitle: 'با متاسف...'
-  programNotAvailableErrorDescription: 'این پروژه دیگر در دسترس نیست!'
-  programNotAvailable: 'در دسترس نیست'
-  programUnknownUser: 'Unknown User'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     با احترام،<br>
     تیم کاتروبات Catrobat شما.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Your Catrobat Password Recovery
   message: |
@@ -396,6 +420,8 @@ menu:
   followersAndFollowing: دنبال کننده
   mediaLibrary: کتابخانه ی رسانه
   studio: Studios
+  language: زبان
+  languageOptionsNotAvailable: No language options available.
 login:
   login: وارد شدن
   button:
@@ -449,6 +475,11 @@ resetPassword:
     visitLink: "برای بازنشانی رمز عبور خود به لینک زیر مراجعه کنید"
     expire: "این پیوند در %time% منقضی می‌شود."
     cheers: "به سلامتی!"
+  newemail:
+    title: "رمز عبور خود را بازنشانی کنید"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "رمز عبور خود را بازنشانی کنید"
     button:
@@ -497,12 +528,12 @@ errors:
   unknown: خطای ناشناخته
   token: 'احراز هویت دستگاه شکست خورد: نامعتبر auth-token!'
   uploadTokenAuthFailed: 'آپلود Token Auth ناموفق بود'
-  program:
-    invalid: پروژه نامعتبر
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'با عرض معزرت، پروژه شما شامل یک نسخه قدیمی از زبان کارتروبات Catrobat است! آیا شما از آخرین نسخه کد جیبی استفاده می کنید؟'
-  programversion:
-    tooold: 'با عرض معزرت، شما از یک نسخه قدیمی کد جیبی استفاده می کنید. لطفا به آخرین نسخه بروزرسانی کنید'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: احراز هویت شکست خورد
     webview: |
@@ -707,8 +738,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -753,13 +784,14 @@ checkOutUser: 'Check out this user:'
 community: 'جامعه کاتروبات Catrobat'
 back_to_app: 'خروج از جامعه'
 category:
-  recent: جدیدترین پروژه ها
-  random: پروژه های تصادفی
+  recent: Newest projects
+  random: Random projects
   most_viewed: پربیننده ترین
   most_downloaded: بیشتر دانلود شده
   example: مثال
-  scratch: ریمیکس دوخت
-  recommended: پروژه های توصیه شده
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'دستاوردها'
@@ -855,7 +887,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'لغو '
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'گزارش'
@@ -864,6 +898,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'بیشتر نشان بده، اطلاعات بیشتر'
     showLess: 'کمتر نشان دهد'
@@ -872,6 +907,11 @@ studio:
     remove_project_success: 'پروژه با موفقیت از استودیو حذف شد!'
     no_projects: 'استودیو هنوز هیچ پروژه ای ندارد'
     updateCoverError: 'هنگام به‌روزرسانی جلد استودیو، مشکلی پیش آمد!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'گزارش'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروژه ها'
     comments:
@@ -913,3 +953,12 @@ media_library:
       default: 'نوع: ناشناخته'
 snackbar:
   project_not_found: 'پروژه درخواستی موجود نیست'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

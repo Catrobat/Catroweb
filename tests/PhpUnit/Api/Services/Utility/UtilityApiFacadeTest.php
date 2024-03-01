@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class UtilityApiFacadeTest extends DefaultTestCase
 {
-  protected UtilityApiFacade|MockObject $object;
+  protected MockObject|UtilityApiFacade $object;
 
   protected function setUp(): void
   {

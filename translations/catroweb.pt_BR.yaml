@@ -41,7 +41,7 @@ country: País
 loginText: login
 privacyPolicy: Política de Privacidade
 imprint: Imprimir
-programDetails: Detalhes
+projectDetails: Detalhes
 somethingWentWrong: 'Ooooops! Algo deu errado.'
 doesNotExist: 'O recurso solicitado não existe.'
 pleaseTryAgain: 'Por favor, tente de novo!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Não foi possível deixar de seguir o usuário desejado!"
   unfollowQuestion: "Tem certeza de que deseja deixar de seguir este usuário?"
   unfollowButton: "Deixar de seguir %username%"
-programs:
+project:
   welcome:
     title: Bem-vindo ao %theme% da Catrobat
     title_mindstorms: Bem-vindo ao site do Catrobat's para Mindstorms EV3 e NXT
@@ -108,7 +108,7 @@ programs:
   newest: Novos projetos
   recommended: Projetos recomendados
   scratchremixes: Remixes do Scratch
-  noPrograms: Atualmente, não há nenhum projeto.
+  noProjects: Atualmente, não há nenhum projeto.
   deleteAction: Excluir projeto
   deleteConfirmation: |+
     Tem certeza?
@@ -140,6 +140,8 @@ programs:
   tooLongName: O nome do projeto é muito extenso!
   tooLongDescription: A descrição do projeto é muito longa!
   tooLongCredits: Os créditos do projeto são muito longos!
+  trending: Projetos em alta
+  popular: Projetos populares
   most:
     viewed: Mais vistos
     downloaded: Mais baixados
@@ -174,7 +176,7 @@ programs:
   updateAppHeader: Atualizar aplicativo
   updateAppText: Por favor, atualize seu aplicativo para a versão mais recente para baixar este projeto.
   btnClosePopup: Ok
-  checkout_this_program: Confira este projeto do Catrobat
+  checkout_this_project: Confira este projeto do Catrobat
   show_more: Mostrar mais
   comments: Comentários
   send: Enviar
@@ -220,10 +222,10 @@ remixGraph:
   by: 'por'
   open: 'Abrir '
   showPaths: 'Mostrar Caminhos'
-  programNotAvailableErrorTitle: 'Desculpe...'
-  programNotAvailableErrorDescription: 'O projeto não está mais disponível!'
-  programNotAvailable: 'Indisponível'
-  programUnknownUser: 'Usuário desconhecido'
+  projectNotAvailableErrorTitle: 'Desculpe...'
+  projectNotAvailableErrorDescription: 'O projeto não está mais disponível!'
+  projectNotAvailable: 'Indisponível'
+  projectUnknownUser: 'Usuário desconhecido'
 noReply:
   - Essa é uma mensagem automática - Por favor, não responda diretamente a este e-mail.
 accountConfirmation:
@@ -244,6 +246,28 @@ accountConfirmation:
     Atenciosamente,<br>
     Your Catrobat Team.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Sua recuperação de senha Catrobat
   message: |
@@ -395,6 +419,8 @@ menu:
   followersAndFollowing: Seguidor
   mediaLibrary: Biblioteca de mídia
   studio: Estúdios
+  language: Idioma
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Login
   button:
@@ -448,6 +474,11 @@ resetPassword:
     visitLink: "Para redefinir sua senha, por favor, clique no link a seguir"
     expire: "Este link expirará em %time%."
     cheers: "Saudações!"
+  newemail:
+    title: "Redefinir sua senha"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Redefinir sua senha"
     button:
@@ -496,11 +527,11 @@ errors:
   unknown: erro desconhecido
   token: 'Autenticação de dispositivo falhou: auth-token inválido!'
   uploadTokenAuthFailed: 'Falha de autenticação do token de upload.'
-  program:
+  project:
     invalid: Projeto inválido.
   languageversion:
     tooold: 'Desculpe, o seu projeto contém uma versão antiga da linguagem Catrobat! Você está usando a versão mais recente do Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Desculpe, você está usando uma versão antiga do Pocket Code. Por favor, atualize para a versão mais recente.'
   authentication:
     title: A autenticação falhou
@@ -706,7 +737,7 @@ catro-notifications:
     message: '%user_link% reagiu no seu projeto %program_link%.'
   follow:
     message: '%user_link% está te seguindo.'
-  program-upload:
+  project-upload:
     message: '%user_link% criou um novo projeto %program_link%'
   remix:
     message: '%user_link% fez um remix %program_link%, do seu projeto %remix_program_link%.'
@@ -759,6 +790,7 @@ category:
   example: Exemplo
   scratch: Remixes do Scratch
   recommended: Projetos recomendados
+  popular: Mais populares
 achievements:
   sidebar:
     title: 'Conquistas'
@@ -854,7 +886,9 @@ studio:
   singular: 'Estúdio'
   create_studio: 'Criar estúdio'
   delete_studio: 'Excluir estúdio'
+  cancel_studio: 'Cancelar'
   studio_name: 'Nome do estúdio'
+  studio_description: 'Studio description'
   join: 'Entrar'
   leave: 'Sair'
   report: 'Reportar'
@@ -863,6 +897,7 @@ studio:
   overview:
     joined_studios: 'Entrou em estúdios'
     public_studios: 'Estúdios públicos'
+    private_studios: 'Private studios'
   details:
     showMore: 'mostrar mais'
     showLess: 'mostrar menos'
@@ -871,6 +906,11 @@ studio:
     remove_project_success: 'projeto removido com sucesso do estúdio!'
     no_projects: 'Este estúdio ainda não contém nenhum projeto'
     updateCoverError: 'Algo deu errado ao atualizar a capa de estúdio!'
+    join: 'Entrar'
+    leave: 'Sair'
+    report: 'Reportar'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Projetos'
     comments:
@@ -912,3 +952,12 @@ media_library:
       default: 'Tipo: desconhecido'
 snackbar:
   project_not_found: 'O projeto solicitado não está disponível'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Informações adicionais: adicionar'
+    feature_1: 'O recurso featureName não está disponível desde a maintenanceStart até maintenanceEnd'
+    feature_2: 'O recurso'
+    feature_3: 'O recurso'
+
+
+

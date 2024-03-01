@@ -41,7 +41,7 @@ country: Država
 loginText: prijava
 privacyPolicy: Pravila privatnosti
 imprint: Impresum
-programDetails: Detalji
+projectDetails: Detalji
 somethingWentWrong: 'Izvinite, došlo je do greške.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'Pokušajte ponovo!'
@@ -94,107 +94,110 @@ follower:
   unfollowError: "Ne možete otpratiti željenog korisnika!"
   unfollowQuestion: "Da li ste sigurni da želite da otpratite ovog korisnika?"
   unfollowButton: "Otprati %username%"
-programs:
+project:
   welcome:
-    title: Dobrodošli u Catrobatovu %theme%
+    title: Welcome to Catrobat's %theme%
     title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Kreirajte priče, igre i još mnogo toga...
+    subtitle: Create stories, games and more...
     subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Preuzmi app
-    statistics: Više podataka
-  featured: Izdvojeni
-  example: Primeri
-  newest: Najnoviji projekti
-  recommended: Preporučeni projekti
-  scratchremixes: Scratch remixi
-  noPrograms: Trenutno nema projekata.
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: Izbriši projekat
   deleteConfirmation: |+
-    Da li ste sigurni?
-    Da li ste sigurni da želite izbrisati "%programName%"?
-    Nema načina da obnovite svoje postupke.
-    Da, obriši.
-    Otkaži
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    Ako postavite '%programName%'na privatno, drugi korisnici neće ga videti i naći.
-    I dalje možete da delite vezu vašeg projekta sa svojim prijateljima. Možete da prebacite vidljivost dodirom na ikonu katanca.
-    Ako postavite "%programName%"na javno, drugi korisnici ga mogu videti i pronaći.
-    Da, postavi javno
-    Da, postavi privatno
-    Ne
-  reportCommentConfirmation: Da li ste sigurni da želite prijaviti ovaj komentar?
-  deleteCommentConfirmation: Da li ste sigurni da želite da obrišete ovaj komentar?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Izbrisati nalog?
-    Da li ste sigurni da želite izbrisati nalog? Ovo će takođe izbrisati vaše projekte i komentare!
-    Nema načina da obnovite svoje postupke!
-    Da, obriši!
-    Poništi
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: Opis projekta je predug!
-  tooLongCredits: Zasluge projekta su preduge!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Najgledanije
     downloaded: Sa najviše preuzimanja
-  random: Nasumični projekti
-  related: Povezani projekti
-  downloads: '%downloads% preuzimanja'
-  sample: Primer projekata
-  views: '%views% pregledi'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Ljudi koji su reagovali na ovaj projekat"
+    likersTitle: "People who reacted to that project"
     all: "Sve"
-  remixes: '{0}0 remiksa |{1}1 remiksa |]1,Inf]%remixes% remiksa'
-  newRemixesNotificationTitle: '|{1}"%programName%" ima 1 novi remiks: |]1,Inf] "%programName%" ima %remixes% novih remiksa:'
-  submitted: Poslati projekti
-  uploaded: Otpremljeni projekti
-  reportAsInappropriate: Prijavi kao neprikladno
-  reportProgram: Prijavi projekat
-  languageVersion: 'Catrobat verzija jezika: %languageVersion%'
-  reportLoginText: Molimo vas da se %login% da biste prijavili ovaj projekat.
-  reportDialogHeader: Zašto želite da prijavite ovaj projekat?
-  reportDialogReason: Unesi razlog
-  reportRadioButtonInappropriate: Neprikladno je
-  reportRadioButtonCopyright: Prekršaj autorskih prava
-  reportRadioButtonSpam: Ovo je spam
-  reportRadioButtonDislike: Ne sviđa mi se ovo
-  reportOwnProgram: Ne možeš prijaviti vlastiti projekat.
-  reportAlready: Već ste prijavili ovaj projekat.
-  reportDone: Prijavili ste ovaj projekat!
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Ažuriraj app
-  updateAppText: Molimo vas ažurirajte aplikaciju da bi ste mogli preuzeti ovaj projekat.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ok
-  checkout_this_program: Pogledaj ovaj Catrobat projekat
-  show_more: Prikaži više
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Komentari
-  send: Pošalji
+  send: Send
   delete: Obriši
   report: Prijavi
-  report_popup: Komentar je uspešno prijavljen.
-  report_popup_header: Prijavljeno
-  deleted_popup: Komentar je uspešno izbrisan.
-  deleted_popup_header: Izbrisano
-  noAdminRights: Nemate administratorska prava. Molimo prijavite se kao administrator.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Da li želite da sačuvate svoje izmene?
   btnDiscard: Odbaci
-  addComment: Napiši komentar
-  thumbsUp: Svaka čast!
-  smile: Osmeh!
-  love: Voli!
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
   wow: Wooow!
   linkTitle: Link
-  link: Kopirajte vezu projekta u međuspremnik
+  link: Copy project link to clipboard
   reactionsText: Sviđanja
   downloadErrorText: Error occurred while downloading the project. Please try again later.
   downloadStartText: Download has started...
@@ -219,10 +222,10 @@ remixGraph:
   by: 'od'
   open: 'Otvori'
   showPaths: 'Prikaži putanje'
-  programNotAvailableErrorTitle: 'Izvinite...'
-  programNotAvailableErrorDescription: 'Ovaj projekat nije više dostupan!'
-  programNotAvailable: 'Nije dostupno'
-  programUnknownUser: 'Nepoznat korisnik'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -244,6 +247,28 @@ accountConfirmation:
     Srdačan pozdrav,<br>
     Vaš Catrobat Tim.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Vaša Catrobat lozinka za oporavak
   message: |
@@ -399,6 +424,8 @@ menu:
   followersAndFollowing: Pratilac
   mediaLibrary: Medijska biblioteka
   studio: Studios
+  language: Jezik
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Prijava
   button:
@@ -452,6 +479,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -500,12 +532,12 @@ errors:
   unknown: nepoznata greška
   token: 'Provjera autentičnosti uređaja nije uspela: neispravan auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
-    invalid: Neispravan projekat.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Izvinite, vaš projekat sadrži staru verziju Catrobat jezika! Koristite li najnoviju verziju Pocket Code?'
-  programversion:
-    tooold: 'Žao nam je, koristite staru verziju Pocket Code-a. Ažurirajte na najnoviju verziju.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Autentifikacija nije uspela
     webview: |
@@ -710,8 +742,8 @@ catro-notifications:
     message: 'Korisniku %user_link% se dopada Vaš projekat %program_link%.'
   follow:
     message: 'Korisnik %user_link% Vas sada prati.'
-  program-upload:
-    message: 'Korisnik %user_link% je napravio novi projekat %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'Korisnik %user_link% je remiksao vaš projekat %program_link%. Remiks možete pogledati na sledećem linku %remix_program_link%'
 clipboard:
@@ -756,13 +788,14 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat zajednica'
 back_to_app: 'Napusti zajednicu'
 category:
-  recent: Najnoviji projekti
-  random: Nasumični projekti
+  recent: Newest projects
+  random: Random projects
   most_viewed: Najgledanije
   most_downloaded: Sa najviše preuzimanja
   example: Example
-  scratch: Scratch remixi
-  recommended: Preporučeni projekti
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'
@@ -858,7 +891,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Otkaži'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Prijavi'
@@ -867,6 +902,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -875,6 +911,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Prijavi'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Programi'
     comments:
@@ -916,3 +957,12 @@ media_library:
       default: 'Type: unknown'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

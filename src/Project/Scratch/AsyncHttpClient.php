@@ -17,31 +17,28 @@ class AsyncHttpClient
     $this->async_http_client = new Client($config);
   }
 
-  public function fetchScratchProgramDetails(array $scratch_program_ids): array
+  public function fetchScratchProjectDetails(array $scratch_project_ids): array
   {
-    if (0 === count($scratch_program_ids)) {
+    if (0 === count($scratch_project_ids)) {
       return [];
     }
 
     // number of requests is limited, so the server cannot be abused to run DoS attacks against Scratch server
     if (array_key_exists('max_number_of_total_requests', $this->config)) {
       $max_number_of_total_requests = $this->config['max_number_of_total_requests'];
-      $scratch_program_ids = array_slice($scratch_program_ids, 0, $max_number_of_total_requests);
+      $scratch_project_ids = array_slice($scratch_project_ids, 0, $max_number_of_total_requests);
     }
 
-    $promises = function () use ($scratch_program_ids): \Generator {
-      /** @var string $scratch_program_id */
-      foreach ($scratch_program_ids as $scratch_program_id) {
-        $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_program_id.'/?format=json';
+    $promises = function () use ($scratch_project_ids): \Generator {
+      /** @var string $scratch_project_id */
+      foreach ($scratch_project_ids as $scratch_project_id) {
+        $scratch_api_url = 'https://api.scratch.mit.edu/projects/'.$scratch_project_id.'/?format=json';
         yield $this->async_http_client->requestAsync('GET', $scratch_api_url);
       }
     };
     $promises = $promises();
 
-    $max_number_of_concurrent_requests = 1;
-    if (array_key_exists('max_number_of_concurrent_requests', $this->config)) {
-      $max_number_of_concurrent_requests = $this->config['max_number_of_concurrent_requests'];
-    }
+    $max_number_of_concurrent_requests = $this->config['max_number_of_concurrent_requests'] ?? 1;
 
     $this->scratch_info_data = [];
 

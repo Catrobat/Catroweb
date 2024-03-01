@@ -1,4 +1,4 @@
-import { ProgramComments } from './ProgramComments'
+import { ProjectComments } from './ProjectComments'
 import { TranslateComments } from './TranslateComments'
 import $ from 'jquery'
 
@@ -6,7 +6,7 @@ require('../../styles/custom/program.scss')
 
 const $projectComments = $('.js-project-comments')
 
-ProgramComments(
+ProjectComments(
   $projectComments.data('project-id'),
   5,
   5,

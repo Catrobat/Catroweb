@@ -16,7 +16,7 @@ Feature: Search projects
       | 3  | mindstorms     |
       | 4  | phiro          |
       | 5  | raspberry_pi   |
-    And there are programs:
+    And there are projects:
       | id        | name            | description               | owned by | extensions       | upload time      | version | language version | private | visible |
       | qysm-rhwt | Galaxy War      | description1              | User1    | arduino          | 01.01.2014 12:00 | 0.8.5   | 0.982            | false   | true    |
       | phci-etqx | Minions         |                           | Catrobat | drone            | 02.02.2014 14:00 | 0.8.5   | 0.985            | false   | true    |

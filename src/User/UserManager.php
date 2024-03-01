@@ -4,7 +4,7 @@ namespace App\User;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\User\UserRepository;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Security\PasswordGenerator;
 use App\Utils\CanonicalFieldsUpdater;
 use App\Utils\TimeUtils;
@@ -25,7 +25,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class UserManager implements UserManagerInterface
 {
-  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProgramManager $program_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository) {}
+  public function __construct(protected CanonicalFieldsUpdater $canonicalFieldsUpdater, protected UserPasswordHasherInterface $userPasswordHasher, protected EntityManagerInterface $entity_manager, protected TransformedFinder $user_finder, protected ProjectManager $project_manager, protected UrlHelper $url_helper, protected UserRepository $user_repository)
+  {
+  }
 
   public function decodeToken(string $token): array
   {
@@ -58,7 +60,7 @@ class UserManager implements UserManagerInterface
         'username' => $user->getUsername(),
         'id' => $user->getId(),
         'avatar' => $user->getAvatar(),
-        'project_count' => $this->program_manager->countPublicUserProjects($user->getId()),
+        'project_count' => $this->project_manager->countPublicUserProjects($user->getId()),
         'profile' => $user,
       ];
     }
@@ -107,16 +109,16 @@ class UserManager implements UserManagerInterface
 
   public function search(string $query, ?int $limit = 10, int $offset = 0): array
   {
-    $program_query = $this->userSearchQuery($query);
+    $project_query = $this->userSearchQuery($query);
 
-    return $this->user_finder->find($program_query, $limit, ['from' => $offset]);
+    return $this->user_finder->find($project_query, $limit, ['from' => $offset]);
   }
 
   public function searchCount(string $query): int
   {
-    $program_query = $this->userSearchQuery($query);
+    $project_query = $this->userSearchQuery($query);
 
-    $paginator = $this->user_finder->findPaginated($program_query);
+    $paginator = $this->user_finder->findPaginated($project_query);
 
     return $paginator->getNbResults();
   }
@@ -125,7 +127,7 @@ class UserManager implements UserManagerInterface
   {
     $associative_array = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
-      ->from(\App\DB\Entity\User\User::class, 'user')
+      ->from(User::class, 'user')
       ->getQuery()
       ->execute()
     ;
@@ -137,7 +139,7 @@ class UserManager implements UserManagerInterface
   {
     $result = $this->entity_manager->createQueryBuilder()
       ->select('user.id as id')
-      ->from(\App\DB\Entity\User\User::class, 'user')
+      ->from(User::class, 'user')
       ->leftjoin(\App\DB\Entity\Project\Program::class, 'project', Join::WITH, 'user.id = project.user')
       ->where('user.createdAt <= :date')
       ->setParameter('date', new \DateTime("-{$years} years"))
@@ -233,12 +235,12 @@ class UserManager implements UserManagerInterface
     return $this->user_repository->findAll();
   }
 
-  public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
+  public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
-  public function findOneBy(array $criteria, array $orderBy = null): ?User
+  public function findOneBy(array $criteria, ?array $orderBy = null): ?User
   {
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }

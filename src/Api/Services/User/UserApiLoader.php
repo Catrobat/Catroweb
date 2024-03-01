@@ -8,7 +8,9 @@ use App\User\UserManager;
 
 class UserApiLoader extends AbstractApiLoader
 {
-  public function __construct(private readonly UserManager $user_manager) {}
+  public function __construct(private readonly UserManager $user_manager)
+  {
+  }
 
   public function findUserByID(string $id): ?User
   {
@@ -23,5 +25,14 @@ class UserApiLoader extends AbstractApiLoader
     }
 
     return $this->user_manager->search($query, $limit, $offset);
+  }
+
+  public function getAllUsers(string $query, int $limit, int $offset): array
+  {
+    if ('' === trim($query) || ctype_space($query)) {
+      return [];
+    }
+
+    return $this->user_manager->findAll();
   }
 }

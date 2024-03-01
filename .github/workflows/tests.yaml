@@ -38,7 +38,7 @@ jobs:
           docker save app.catroweb > catroweb-image.tar
 
       - name: Upload app.catroweb image
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: catroweb-image
           path: docker/catroweb-image.tar
@@ -67,7 +67,7 @@ jobs:
           docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: catroweb-image
           path: docker
@@ -84,12 +84,12 @@ jobs:
         run: docker exec app.catroweb bin/phpunit --coverage-html tests/TestReports/CoverageReports/PhpUnit --coverage-clover=tests/TestReports/CoverageReports/PhpUnit/coverage.xml
 
       - name: Upload code coverage report
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         if: always()
         with:
           name: PhpUnitTestReport
           path: tests/TestReports/CoverageReports/PhpUnit
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/TestReports/CoverageReports/PhpUnit/coverage.xml
@@ -174,7 +174,7 @@ jobs:
           docker-compose -f docker-compose.test.yaml pull
 
       - name: Download app.catroweb image
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: catroweb-image
           path: docker
@@ -192,16 +192,15 @@ jobs:
         continue-on-error: true
         # - The output will of the tests will be piped to the stdout and into the log file.
         # - A return code != 0 stops the execution of further commands in the pipeline.
-        #   "tee" always returns 0, even if the behat test fails. Therefore we need to exit with the first entry of
+        #   "tee" always returns 0, even if the behat test fails. Therefore, we need to exit with the first entry of
         #   the pipe status, which contains the correct exit code.
-        # - If the tests pass we can set the output status to success, this allows to only execute the reruns if needed
         run: |
-          echo ::set-output name=status::failure
           docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty \
           |& tee tests/TestReports/Behat/${{ matrix.testSuite }}.log ; \
-          ( exit ${PIPESTATUS[0]} )
-          echo ::set-output name=status::success
+          TEST_RUN_EXIT_CODE=${PIPESTATUS[0]}
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
 
       # Missing steps are not rerun by behat, without this step they will be lost in the process
       # We must explicitly kill the pipeline if the log contains undefined steps
@@ -234,7 +233,7 @@ jobs:
             cat tests/TestReports/Behat/${{ matrix.testSuite }}.log;
             docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} -f pretty;
           fi
-      - uses: codecov/codecov-action@v3
+      - uses: codecov/codecov-action@v4
         with:
           # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
           file: tests/TestReports/CoverageReports/Behat/coverage.xml
@@ -243,29 +242,31 @@ jobs:
           # fail_ci_if_error: true # optional (default = false)
 
       # Rerun #1
-      - name: 1. Rerun for Behat ${{ matrix.testSuite }} tests
-        if: steps.test-run.outputs.status != 'success'
+      - name: 1st rerun for Behat ${{ matrix.testSuite }} tests
+        if: env.test-run-exit-code != '0'
         id: test-rerun-1
         continue-on-error: true
         run: |
-          echo ::set-output name=status::failure
           docker exec app.catroweb chmod -R 777 var
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
-          echo ::set-output name=status::success
+          TEST_RUN_EXIT_CODE=$?
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
 
         # Rerun #2
-      - name: 2. Rerun for Behat ${{ matrix.testSuite }} tests
-        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success'
+      - name: 2d rerun for Behat ${{ matrix.testSuite }} tests
+        if: env.test-run-exit-code != '0'
         id: test-rerun-2
         continue-on-error: true
         run: |
-          echo ::set-output name=status::failure
           docker exec app.catroweb bin/behat -s ${{ matrix.testSuite }} --rerun
-          echo ::set-output name=status::success
+          TEST_RUN_EXIT_CODE=$?
+          echo "test-run-exit-code=$TEST_RUN_EXIT_CODE" > $GITHUB_ENV
+          ( exit $TEST_RUN_EXIT_CODE )
 
       # Rerun #3
-      - name: 3. Rerun for Behat ${{ matrix.testSuite }} tests
-        if: steps.test-run.outputs.status != 'success' && steps.test-rerun-1.outputs.status != 'success' && steps.test-rerun-2.outputs.status != 'success'
+      - name: 3rd rerun for Behat ${{ matrix.testSuite }}
+        if: env.test-run-exit-code != '0'
         id: test-rerun-3
         run: |
           docker exec app.catroweb bin/behat -f pretty -s ${{ matrix.testSuite }} --rerun
@@ -281,13 +282,13 @@ jobs:
           echo "--- Chrome ---"
           docker logs chrome.catroweb
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: screenshots_${{ matrix.testSuite }}
           path: tests/TestReports/TestScreenshots
 
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: failure()
         with:
           name: logs_${{ matrix.testSuite }}

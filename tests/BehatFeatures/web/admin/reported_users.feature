@@ -12,13 +12,13 @@ Feature: Admin reported users
       | Gregor   | 123456   | dddddddddd | dev2@pocketcode.org | 3  |
       | Angel    | 123456   | eeeeeeeeee | dev3@pocketcode.org | 4  |
 
-    And there are programs:
+    And there are projects:
       | id | name      | description             | owned by | downloads | apk_downloads | views | upload time      | version | language version | visible | apk_ready |
       | 1  | program 1 | my superman description | Superman | 3         | 2             | 12    | 01.01.2013 12:00 | 0.8.5   | 0.94             | true    | true      |
       | 2  | program 2 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
       | 3  | program 3 | abcef                   | Gregor   | 333       | 3             | 9     | 22.04.2014 13:00 | 0.8.5   | 0.93             | true    | true      |
     And there are comments:
-      | program_id | user_id | upload_date      | text | user_name | reported |
+      | project_id | user_id | upload_date      | text | user_name | reported |
       | 2          | 2       | 01.01.2020 12:01 | c1   | Superman  | 1        |
       | 1          | 3       | 01.01.2020 12:01 | c2   | Gregor    | 1        |
       | 1          | 3       | 01.01.2020 12:01 | c3   | Gregor    | 1        |
@@ -28,7 +28,7 @@ Feature: Admin reported users
       | 3          | 2       | 01.01.2020 12:01 | c7   | Superman  | 1        |
       | 3          | 2       | 01.01.2020 12:01 | c8   | Superman  | 1        |
     And there are inappropriate reports:
-      | category      | program_id | user_id | time             | note |
+      | category      | project_id | user_id | time             | note |
       | inappropriate | 2          | 2       | 01.01.2020 12:01 | c1   |
       | inappropriate | 2          | 2       | 01.01.2020 12:01 | c2   |
 
@@ -38,7 +38,7 @@ Feature: Admin reported users
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getReportedCommentsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the reported table:
-      | #Reported Comments | #Reported Programs | Username | Email               |
+      | #Reported Comments | #Reported Projects | Username | Email               |
       | 5                  | 0                  | Superman | dev1@pocketcode.org |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     And I should not see "Adminius"
@@ -50,7 +50,7 @@ Feature: Admin reported users
     And I am on "/admin/reported_users/list?filter%5B_sort_order%5D=DESC&filter%5B_sort_by%5D=getProgramInappropriateReportsCount&filter%5B_page%5D=1&filter%5B_per_page%5D=32&_list_mode=list"
     And I wait for the page to be loaded
     Then I should see the reported table:
-      | #Reported Comments | #Reported Programs | Username | Email               |
+      | #Reported Comments | #Reported Projects | Username | Email               |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     And I should not see "Adminius"
     And I should not see "Superman"
@@ -60,7 +60,7 @@ Feature: Admin reported users
     And I am on "/admin/reported_users/list"
     And I wait for the page to be loaded
     Then I should see the reported table:
-      | #Reported Comments | #Reported Programs | Username | Email               |
+      | #Reported Comments | #Reported Projects | Username | Email               |
       | 5                  | 0                  | Superman | dev1@pocketcode.org |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     Then I click on xpath "body/div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[4]/div/a[2]"
@@ -72,7 +72,7 @@ Feature: Admin reported users
     And I am on "/admin/reported_users/list"
     And I wait for the page to be loaded
     Then I should see the reported table:
-      | #Reported Comments | #Reported Programs | Username | Email               |
+      | #Reported Comments | #Reported Projects | Username | Email               |
       | 5                  | 0                  | Superman | dev1@pocketcode.org |
       | 3                  | 2                  | Gregor   | dev2@pocketcode.org |
     Then I click on xpath "body/div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr[1]/td[4]/div/a[2]"

@@ -38,7 +38,7 @@ class CatrowebBrowserContext extends BrowserContext
 
   protected bool $use_real_oauth_javascript_code = false;
 
-  protected ?Program $my_program = null;
+  protected ?Program $my_project = null;
 
   // -------------------------------------------------------------------------------------------------------------------
   //  Initialization
@@ -476,15 +476,15 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws \Exception
    */
-  public function iChangeTheVisibilityOfTheProgram(mixed $program_number, mixed $visibility): void
+  public function iChangeTheVisibilityOfTheProject(mixed $project_number, mixed $visibility): void
   {
-    // /param program number contains the number of the program position in the list on the admin page
+    // /param project_number contains the number of the project position in the list on the admin page
     // /
     $page = $this->getSession()->getPage();
 
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[10]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[10]/span')
       ->click()
     ;
 
@@ -494,20 +494,20 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the visibility of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
-   * @param string $program_number
+   * @param string $project_number
    * @param string $visibility
    *
    * @throws \Exception
    */
-  public function iChangeTheVisibilityOfTheProgramInTheApproveList($program_number, $visibility): void
+  public function iChangeTheVisibilityOfTheProjectInTheApproveList($project_number, $visibility): void
   {
-    // /param program number contains the number of the program position in the list on the admin page
+    // /param project_number contains the number of the project position in the list on the admin page
     // /
     $page = $this->getSession()->getPage();
 
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[5]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[5]/span')
       ->click()
     ;
 
@@ -519,14 +519,14 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws \Exception
    */
-  public function iChangeTheApprovalOfTheProject(mixed $program_number, mixed $approved): void
+  public function iChangeTheApprovalOfTheProject(mixed $project_number, mixed $approved): void
   {
-    // /param program number contains the number of the program position in the list on the admin page
+    // /param project_number contains the number of the project position in the list on the admin page
     // /
     $page = $this->getSession()->getPage();
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[9]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[9]/span')
       ->click()
     ;
 
@@ -536,19 +536,19 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I change the approval of the project number "([^"]*)" in the approve list to "([^"]*)"$/
    *
-   * @param string $program_number
+   * @param string $project_number
    * @param string $approved
    *
    * @throws \Exception
    */
-  public function iChangeTheApprovalOfTheProjectInApproveList($program_number, $approved): void
+  public function iChangeTheApprovalOfTheProjectInApproveList($project_number, $approved): void
   {
-    // /param program number contains the number of the program position in the list on the admin page
+    // /param project_number contains the number of the project position in the list on the admin page
     // /
     $page = $this->getSession()->getPage();
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[6]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[6]/span')
       ->click()
     ;
 
@@ -560,14 +560,14 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws \Exception
    */
-  public function iChangeTheFlavorOfTheProject(mixed $program_number, mixed $flavor): void
+  public function iChangeTheFlavorOfTheProject(mixed $project_number, mixed $flavor): void
   {
-    // /param program number contains the number of the program position in the list on the admin page
+    // /param project_number contains the number of the project position in the list on the admin page
 
     $page = $this->getSession()->getPage();
     // /click the visibility button (yes/no)
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/span')
       ->click()
     ;
     // click the input on the popup to show yes or no option
@@ -616,11 +616,11 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws \Exception
    */
-  public function iChangeUploadOfTheEntry(mixed $program_number, mixed $approved): void
+  public function iChangeUploadOfTheEntry(mixed $project_number, mixed $approved): void
   {
     $page = $this->getSession()->getPage();
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$program_number.']/td[4]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$project_number.']/td[4]/span')
       ->click()
     ;
 
@@ -633,11 +633,11 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws \Exception
    */
-  public function iChangeReportOfTheEntry(mixed $program_number, mixed $approved): void
+  public function iChangeReportOfTheEntry(mixed $project_number, mixed $approved): void
   {
     $page = $this->getSession()->getPage();
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$program_number.']/td[5]/span')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/form/div/div/table/tbody/tr['.$project_number.']/td[5]/span')
       ->click()
     ;
 
@@ -700,47 +700,47 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I click on the program name "([^"]*)"$/
+   * @Then /^I click on the project name "([^"]*)"$/
    *
    * @throws ElementNotFoundException
    */
-  public function iClickOnTheProgramName(mixed $program_name): void
+  public function iClickOnTheProjectName(mixed $project_name): void
   {
-    $this->assertSession()->elementExists('xpath', "//a[contains(text(),'".$program_name."')]");
+    $this->assertSession()->elementExists('xpath', "//a[contains(text(),'".$project_name."')]");
 
     $page = $this->getSession()->getPage();
     $page
-      ->find('xpath', "//a[contains(text(),'".$program_name."')]")
+      ->find('xpath', "//a[contains(text(),'".$project_name."')]")
       ->click()
     ;
   }
 
   /**
-   * @Then /^I click on the show button of the program number "([^"]*)" in the list$/
+   * @Then /^I click on the show button of the project number "([^"]*)" in the list$/
    *
    * @throws ElementNotFoundException
    */
-  public function iClickOnTheShowButton(mixed $program_number): void
+  public function iClickOnTheShowButton(mixed $project_number): void
   {
     $page = $this->getSession()->getPage();
     $this->assertSession()->elementExists('xpath',
-      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[11]/div/a');
+      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[11]/div/a');
 
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[11]/div/a')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[11]/div/a')
       ->click()
     ;
   }
 
   /**
-   * @Then /^I click on the show button of program with id "([^"]*)" in the approve list$/
+   * @Then /^I click on the show button of project with id "([^"]*)" in the approve list$/
    *
-   * @param string $program_id
+   * @param string $project_id
    */
-  public function iClickOnTheShowButtonInTheApproveList($program_id): void
+  public function iClickOnTheShowButtonInTheApproveList($project_id): void
   {
     $page = $this->getSession()->getPage();
-    $page->find('xpath', "//a[contains(@href,'/admin/approve/".$program_id."/show')]")->click();
+    $page->find('xpath', "//a[contains(@href,'/admin/approve/".$project_id."/show')]")->click();
   }
 
   /**
@@ -757,14 +757,14 @@ class CatrowebBrowserContext extends BrowserContext
    *
    * @throws ElementNotFoundException
    */
-  public function iClickOnTheEditButtonInAllExtensions(mixed $program_number): void
+  public function iClickOnTheEditButtonInAllExtensions(mixed $project_number): void
   {
     $page = $this->getSession()->getPage();
     $this->assertSession()->elementExists('xpath',
-      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/div/a');
+      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/div/a');
 
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$program_number.']/td[4]/div/a')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[4]/div/a')
       ->click()
     ;
   }
@@ -787,13 +787,13 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @When /^I report program (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
+   * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)" in Browser$/
    *
    * @throws ElementNotFoundException
    */
-  public function iReportProgramWithNoteInBrowser(mixed $program_id, mixed $category, mixed $note): void
+  public function iReportProjectWithNoteInBrowser(mixed $project_id, mixed $category, mixed $note): void
   {
-    $this->visit('app/project/'.$program_id);
+    $this->visit('app/project/'.$project_id);
     $this->iWaitForThePageToBeLoaded();
     $this->iClick('#top-app-bar__btn-report-project');
     $this->iWaitForAjaxToFinish();
@@ -987,10 +987,10 @@ class CatrowebBrowserContext extends BrowserContext
     for ($index = 0; $index < $owl_items_count; ++$index) {
       $url = $slider_items[$index];
       if (!str_starts_with($url, 'http://')) {
-        $program = $this->getProgramManager()->findOneByName($url);
-        Assert::assertNotNull($program);
-        Assert::assertNotNull($program->getId());
-        $url = $this->getRouter()->generate('program', ['id' => $program->getId(), 'theme' => 'pocketcode']);
+        $project = $this->getProjectManager()->findOneByName($url);
+        Assert::assertNotNull($project);
+        Assert::assertNotNull($project->getId());
+        $url = $this->getRouter()->generate('program', ['id' => $project->getId(), 'theme' => 'pocketcode']);
       }
 
       $feature_url = $owl_items[$index]->getAttribute('href');
@@ -1088,20 +1088,20 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Given I have a project zip :project_zip_name
    */
-  public function iHaveAProject(mixed $project_zip_name): void
+  public function iHaveAProjectZip(mixed $project_zip_name): void
   {
     $filesystem = new Filesystem();
     $original_file = $this->FIXTURES_DIR.$project_zip_name;
-    $target_file = sys_get_temp_dir().'/program_generated.catrobat';
+    $target_file = sys_get_temp_dir().'/project_generated.catrobat';
     $filesystem->copy($original_file, $target_file, true);
   }
 
   /**
-   * @Given I have a program
+   * @Given I have a project
    */
-  public function iHaveAProgram(): void
+  public function iHaveAProject(): void
   {
-    $this->generateProgramFileWith([]);
+    $this->generateProjectFileWith([]);
   }
 
   /**
@@ -1109,7 +1109,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iAmUsingPocketcodeWithLanguageVersion(mixed $version): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       'catrobatLanguageVersion' => $version,
     ]);
   }
@@ -1119,7 +1119,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iHaveAnEmbroideryProject(): void
   {
-    $this->generateProgramFileWith([], true);
+    $this->generateProjectFileWith([], true);
   }
 
   /**
@@ -1127,7 +1127,7 @@ class CatrowebBrowserContext extends BrowserContext
    */
   public function iAmUsingPocketcodeForWithVersion(mixed $platform, mixed $version): void
   {
-    $this->generateProgramFileWith([
+    $this->generateProjectFileWith([
       'platform' => $platform,
       'applicationVersion' => $version,
     ]);
@@ -1179,16 +1179,16 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^the program apk status will.* be flagged "([^"]*)"$/
+   * @Then /^the project apk status will.* be flagged "([^"]*)"$/
    */
-  public function theProgramApkStatusWillBeFlagged(mixed $arg1): void
+  public function theProjectApkStatusWillBeFlagged(mixed $arg1): void
   {
-    $pm = $this->getProgramManager();
-    $program = $pm->find('1');
+    $pm = $this->getProjectManager();
+    $project = $pm->find('1');
     match ($arg1) {
-      'pending' => Assert::assertEquals(Program::APK_PENDING, $program->getApkStatus()),
-      'ready' => Assert::assertEquals(Program::APK_READY, $program->getApkStatus()),
-      'none' => Assert::assertEquals(Program::APK_NONE, $program->getApkStatus()),
+      'pending' => Assert::assertEquals(Program::APK_PENDING, $project->getApkStatus()),
+      'ready' => Assert::assertEquals(Program::APK_READY, $project->getApkStatus()),
+      'none' => Assert::assertEquals(Program::APK_NONE, $project->getApkStatus()),
       default => throw new PendingException('Unknown state: '.$arg1),
     };
   }
@@ -1196,7 +1196,9 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Given /^I requested jenkins to build it$/
    */
-  public function iRequestedJenkinsToBuildIt(): void {}
+  public function iRequestedJenkinsToBuildIt(): void
+  {
+  }
 
   /**
    * @Then /^it will be stored on the server$/
@@ -1210,26 +1212,26 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^the program apk status is flagged "([^"]*)"$/
+   * @Given /^the project apk status is flagged "([^"]*)"$/
    */
-  public function theProgramApkStatusIsFlagged(mixed $arg1): void
+  public function theProjectApkStatusIsFlagged(mixed $arg1): void
   {
-    $pm = $this->getProgramManager();
-    $program = $pm->find('1');
+    $pm = $this->getProjectManager();
+    $project = $pm->find('1');
     switch ($arg1) {
       case 'pending':
-        $program->setApkStatus(Program::APK_PENDING);
+        $project->setApkStatus(Program::APK_PENDING);
         break;
       case 'ready':
-        $program->setApkStatus(Program::APK_READY);
+        $project->setApkStatus(Program::APK_READY);
         /* @var $apk_repository ApkRepository */
         $apk_repository = $this->getSymfonyService(ApkRepository::class);
-        $apk_repository->save(new File(strval($this->getTempCopy($this->FIXTURES_DIR.'/test.catrobat'))), $program->getId());
+        $apk_repository->save(new File(strval($this->getTempCopy($this->FIXTURES_DIR.'/test.catrobat'))), $project->getId());
         break;
       default:
-        $program->setApkStatus(Program::APK_NONE);
+        $project->setApkStatus(Program::APK_NONE);
     }
-    $pm->save($program);
+    $pm->save($project);
   }
 
   /**
@@ -1263,7 +1265,7 @@ class CatrowebBrowserContext extends BrowserContext
     $user_stats = $table->getHash();
     foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['#Reported Comments']);
-      $this->assertSession()->pageTextContains($user_stat['#Reported Programs']);
+      $this->assertSession()->pageTextContains($user_stat['#Reported Projects']);
       $this->assertSession()->pageTextContains($user_stat['Username']);
       $this->assertSession()->pageTextContains($user_stat['Email']);
     }
@@ -1318,7 +1320,7 @@ class CatrowebBrowserContext extends BrowserContext
     $user_stats = $table->getHash();
     foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['Program']);
+      $this->assertSession()->pageTextContains($user_stat['Project']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
       $this->assertSession()->pageTextContains($user_stat['Priority']);
     }
@@ -1347,11 +1349,11 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^I should see the reported programs table:$/
+   * @Then /^I should see the reported projects table:$/
    *
    * @throws ResponseTextException
    */
-  public function seeReportedProgramsTable(TableNode $table): void
+  public function seeReportedProjectsTable(TableNode $table): void
   {
     $user_stats = $table->getHash();
     foreach ($user_stats as $user_stat) {
@@ -1359,8 +1361,8 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['State']);
       $this->assertSession()->pageTextContains($user_stat['Category']);
       $this->assertSession()->pageTextContains($user_stat['Reporting User']);
-      $this->assertSession()->pageTextContains($user_stat['Program']);
-      $this->assertSession()->pageTextContains($user_stat['Program Visible']);
+      $this->assertSession()->pageTextContains($user_stat['Project']);
+      $this->assertSession()->pageTextContains($user_stat['Project Visible']);
     }
   }
 
@@ -1377,6 +1379,26 @@ class CatrowebBrowserContext extends BrowserContext
       $this->assertSession()->pageTextContains($user_stat['User']);
       $this->assertSession()->pageTextContains($user_stat['Name']);
       $this->assertSession()->pageTextContains($user_stat['Apk Request Time']);
+    }
+  }
+
+  /**
+   * @Then /^I should see the ready maintenance information table:$/
+   *
+   * @throws ResponseTextException
+   */
+  public function seeReadyMaintenanceInformationTable(TableNode $table): void
+  {
+    $user_stats = $table->getHash();
+    foreach ($user_stats as $user_stat) {
+      $this->assertSession()->pageTextContains($user_stat['Feature Name']);
+      $this->assertSession()->pageTextContains($user_stat['Active']);
+      $this->assertSession()->pageTextContains($user_stat['LTM Code']);
+      $this->assertSession()->pageTextContains($user_stat['Maintenance Start']);
+      $this->assertSession()->pageTextContains($user_stat['Maintenance End']);
+      $this->assertSession()->pageTextContains($user_stat['Additional Information']);
+      $this->assertSession()->pageTextContains($user_stat['Icon']);
+      $this->assertSession()->pageTextContains($user_stat['Actions']);
     }
   }
 
@@ -1558,13 +1580,13 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Then /^program with id "([^"]*)" should have no apk$/
+   * @Then /^project with id "([^"]*)" should have no apk$/
    */
-  public function programWithIdShouldHaveNoApk(mixed $program_id): void
+  public function projectWithIdShouldHaveNoApk(mixed $project_id): void
   {
-    $program_manager = $this->getProgramManager();
-    $program = $program_manager->find($program_id);
-    Assert::assertEquals(Program::APK_NONE, $program->getApkStatus());
+    $project_manager = $this->getProjectManager();
+    $project = $project_manager->find($project_id);
+    Assert::assertEquals(Program::APK_NONE, $project->getApkStatus());
   }
 
   /**
@@ -1607,7 +1629,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I should get following like similarities:$/
    */
-  public function iShouldGetFollowingLikePrograms(TableNode $table): void
+  public function iShouldGetFollowingLikeProjects(TableNode $table): void
   {
     $all_like_similarities = $this->getUserLikeSimilarityRelationRepository()->findAll();
     $all_like_similarities_count = count($all_like_similarities);
@@ -1638,7 +1660,7 @@ class CatrowebBrowserContext extends BrowserContext
   /**
    * @Then /^I should get following remix similarities:$/
    */
-  public function iShouldGetFollowingRemixPrograms(TableNode $table): void
+  public function iShouldGetFollowingRemixProjects(TableNode $table): void
   {
     $all_remix_similarities = $this->getUserRemixSimilarityRelationRepository()->findAll();
     $all_remix_similarities_count = count($all_remix_similarities);
@@ -1672,13 +1694,13 @@ class CatrowebBrowserContext extends BrowserContext
   }
 
   /**
-   * @Given /^I have a program with arduino, mindstorms and phiro extensions$/
+   * @Given /^I have a project with arduino, mindstorms and phiro extensions$/
    */
-  public function iHaveAProgramWithArduinoMindstormsAndPhiroExtensions(): void
+  public function iHaveAProjectWithArduinoMindstormsAndPhiroExtensions(): void
   {
     $filesystem = new Filesystem();
     $original_file = $this->FIXTURES_DIR.'extensions.catrobat';
-    $target_file = sys_get_temp_dir().'/program_generated.catrobat';
+    $target_file = sys_get_temp_dir().'/project_generated.catrobat';
     $filesystem->copy($original_file, $target_file, true);
   }
 
@@ -1708,7 +1730,7 @@ class CatrowebBrowserContext extends BrowserContext
     $user_stats = $table->getHash();
     foreach ($user_stats as $user_stat) {
       $this->assertSession()->pageTextContains($user_stat['Id']);
-      $this->assertSession()->pageTextContains($user_stat['Program']);
+      $this->assertSession()->pageTextContains($user_stat['Project']);
       $this->assertSession()->pageTextContains($user_stat['Url']);
       $this->assertSession()->pageTextContains($user_stat['Flavor']);
       $this->assertSession()->pageTextContains($user_stat['Priority']);

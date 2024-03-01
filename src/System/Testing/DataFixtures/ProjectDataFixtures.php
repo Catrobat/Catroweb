@@ -8,8 +8,8 @@ use App\DB\Entity\Project\Tag;
 use App\DB\Entity\User\User;
 use App\DB\Generator\MyUuidGenerator;
 use App\Project\Apk\ApkRepository;
-use App\Project\CatrobatFile\ProgramFileRepository;
-use App\Project\ProgramManager;
+use App\Project\CatrobatFile\ProjectFileRepository;
+use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,8 +32,8 @@ class ProjectDataFixtures
 
   private static int $number_of_projects = 0;
 
-  public function __construct(private readonly UserManager $user_manager, private readonly ProgramManager $program_manager,
-    private readonly EntityManagerInterface $entity_manager, private readonly ProgramFileRepository $project_file_repository,
+  public function __construct(private readonly UserManager $user_manager, private readonly ProjectManager $project_manager,
+    private readonly EntityManagerInterface $entity_manager, private readonly ProjectFileRepository $project_file_repository,
     private readonly ApkRepository $apk_repository, private readonly UserDataFixtures $user_data_fixtures,
     ParameterBagInterface $parameter_bag)
   {
@@ -97,6 +97,7 @@ class ProjectDataFixtures
     $project->setDebugBuild(isset($config['debug']) && 'true' === $config['debug']);
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
     $project->setRand($config['rand'] ?? 0);
+    $project->setPopularity($config['popularity'] ?? 0);
 
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));
@@ -147,7 +148,7 @@ class ProjectDataFixtures
   public function assertProject(array $config = []): void
   {
     Assert::assertNotNull($config['id'], 'Project ID needs to be specified.');
-    $project = $this->program_manager->find($config['id']);
+    $project = $this->project_manager->find($config['id']);
     Assert::assertNotNull($project, 'Project with id '.$config['id'].' not found.');
 
     if (isset($config['name'])) {

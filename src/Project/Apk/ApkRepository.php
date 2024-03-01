@@ -30,7 +30,7 @@ class ApkRepository
     }
   }
 
-  public function getProgramFile(string $id): File
+  public function getProjectFile(string $id): File
   {
     return new File($this->dir.$this->generateFileNameFromId($id));
   }

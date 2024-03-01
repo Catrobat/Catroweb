@@ -28,6 +28,10 @@ updates:
     reviewers:
       - 'dmetzner'
     open-pull-requests-limit: 99
+    groups:
+      material:
+        patterns:
+          - '@material/*'
 
   - package-ecosystem: 'composer'
     directory: '/'
@@ -38,6 +42,17 @@ updates:
     reviewers:
       - 'dmetzner'
     open-pull-requests-limit: 99
+    groups:
+      symfony:
+        patterns:
+          - 'symfony/*'
+      phpstan:
+        patterns:
+          - 'phpstan/*'
+      behat:
+        patterns:
+          - 'behat/*'
+          - 'friends-of-behat/*'
 
   - package-ecosystem: 'github-actions'
     directory: '/'

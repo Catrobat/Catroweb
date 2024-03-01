@@ -21,7 +21,7 @@ Feature: Tags are inserted/update to the database by a symfony command
       | 2  | Catrobat |
     And I run the update tags command
     Then there should be "8" tags in the database
-    And there are programs:
+    And there are projects:
       | id | name    | owned by | tags            |
       | 1  | Minions | Catrobat | game, animation |
     Then the project with name "Minions" should have 2 tags

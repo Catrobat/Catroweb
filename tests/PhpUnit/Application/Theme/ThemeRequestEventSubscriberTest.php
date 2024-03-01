@@ -24,9 +24,9 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class ThemeRequestEventSubscriberTest extends DefaultTestCase
 {
-  protected ThemeRequestEventSubscriber|MockObject $object;
+  protected MockObject|ThemeRequestEventSubscriber $object;
 
-  protected ParameterBagInterface|MockObject $parameter_bag;
+  protected MockObject|ParameterBagInterface $parameter_bag;
 
   protected function setUp(): void
   {
@@ -199,7 +199,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
   /**
    * @return ThemeRequestEventSubscriber|MockObject
    */
-  private function mockThemeRequestEventSubscriber(array $ctor_args = null)
+  private function mockThemeRequestEventSubscriber(?array $ctor_args = null)
   {
     if (null === $ctor_args) {
       return $this->getMockBuilder(ThemeRequestEventSubscriber::class)
@@ -263,7 +263,7 @@ class ThemeRequestEventSubscriberTest extends DefaultTestCase
    *
    * @throws \ReflectionException
    */
-  private function mockRequestEvent(int $request_type, $attributes = null, string $uri = null)
+  private function mockRequestEvent(int $request_type, $attributes = null, ?string $uri = null)
   {
     $event = $this->getMockBuilder(RequestEvent::class)->disableOriginalConstructor()->getMock();
     $event->expects($this->once())

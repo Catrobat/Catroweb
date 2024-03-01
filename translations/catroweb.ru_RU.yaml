@@ -11,7 +11,7 @@ aboutPocketCode: О Pocket Code
 about: О приложении
 education: Образование
 chat: Общение и форумы
-privacyGuide: Privacy Awareness Guide
+privacyGuide: Инструкция по конфиденциальности
 others: Другие
 tutorials: Помощь
 googlePlay: Google Play Маркет
@@ -41,7 +41,7 @@ country: Страна
 loginText: Войти
 privacyPolicy: Политика конфиденциальности
 imprint: Импринт
-programDetails: Детали
+projectDetails: Подробности
 somethingWentWrong: 'Ой, что-то пошло не так.'
 doesNotExist: 'Запрошенный ресурс не существует.'
 pleaseTryAgain: 'Пожалуйста, попробуйте еще раз!'
@@ -94,27 +94,27 @@ follower:
   unfollowError: "Невозможно отписаться от этого пользователя!"
   unfollowQuestion: "Вы действительно хотите отписаться от этого пользователя?"
   unfollowButton: "Отписаться от %username%"
-programs:
+project:
   welcome:
-    title: Добро пожаловать в %theme% от Catrobat
-    title_mindstorms: Добро пожаловать на сайт Catrobat для Mindstorms EV3 и NXT
+    title: Добро пожаловать в %theme% Catrobat'а
+    title_mindstorms: Добро пожаловать на место Catrobat'а для Mindstorms EV3 и NXT
     subtitle: Создавайте истории, игры и многое другое...
     subtitle_embroidery: Вышивайте собственные узоры на футболках, сумках, брюках или чехлах для смартфона!
     subtitle_mindstorms: Создавайте собственные проекты с помощью своих роботов Lego Mindstorms EV3 и NXT
     download: Скачать приложение
     statistics: Больше статистики
-  featured: Избранное
+  featured: Избранные
   example: Примеры
   newest: Самые новые проекты
   recommended: Рекомендуемые проекты
   scratchremixes: Scratch ремиксы
-  noPrograms: На данный момент проекты отсутствуют.
+  noProjects: На данный момент проекты отсутствуют.
   deleteAction: Удалить проект
   deleteConfirmation: |+
     Вы уверены?
     Вы уверены, что хотите удалить "%programName%"?
-    Это безвозвратное действие!
-    Да, удалить!
+    Отменить ваши действия будет нельзя!
+    Да, удалить это!
     Отмена
   deleteNotFoundError: Проект который вы хотите удалить не был найден в вашем аккаунте. 
   private: приватный
@@ -129,7 +129,7 @@ programs:
     Да, сделать публичным
     Да, сделать приватным
     Отмена
-  reportCommentConfirmation: Вы уверены, что хотите пожаловаться на этот комментарий?
+  reportCommentConfirmation: "Вы уверены, что хотите пожаловаться \nна этот комментарий?"
   deleteCommentConfirmation: Вы уверены, что хотите удалить этот комментарий?
   deleteAccountConfirmation: |+
     Удаление аккаунта?
@@ -137,17 +137,19 @@ programs:
     Это безвозвратное действие!
     Да, удалить!
     Отмена
-  tooLongName: Слишком длинное название проекта!
+  tooLongName: Название проекта слишком длинное!
   tooLongDescription: Описание проекта слишком длинное!
   tooLongCredits: Примечания и упоминания об авторах слишком длинные!
+  trending: Популярные проекты
+  popular: Популярные проекты
   most:
     viewed: Самые просматриваемые
     downloaded: Самые скачиваемые
   random: Случайные проекты
-  related: Связанные проекты
+  related: Похожие проекты
   downloads: '%downloads% скачиваний'
   sample: Примеры проектов
-  views: '%views% просмотры'
+  views: '%views% просмотр(а/ов)'
   likes:
     likersTitle: "Люди, которые отреагировали на этот проект"
     all: "Все"
@@ -156,7 +158,7 @@ programs:
   submitted: Опубликованные проекты
   uploaded: Выложенные проекты
   reportAsInappropriate: Пожаловаться
-  reportProgram: Сообщить о нарушении
+  reportProgram: Пожаловаться на проект
   languageVersion: 'Версия языка Catrobat: %languageVersion%'
   reportLoginText: Пожалуйста, %login% чтобы пожаловаться на этот проект.
   reportDialogHeader: Почему вы хотите пожаловаться на этот проект?
@@ -165,8 +167,8 @@ programs:
   reportRadioButtonCopyright: Нарушение авторских прав
   reportRadioButtonSpam: Это спам
   reportRadioButtonDislike: Мне это не нравится
-  reportOwnProgram: Вы не можете отметить свой собственный проект.
-  reportAlready: Вы уже отметили этот проект.
+  reportOwnProgram: Вы не можете пожаловаться на свой собственный проект.
+  reportAlready: Вы уже жаловались на этот проект.
   reportDone: Вы отправили жалобу на этот проект!
   updateAppHeaderDownload: Скачивание невозможно
   updateAppTextDownload: Пожалуйста, обновите приложение до последней версии. Имейте в виду, что еще не все функции Android уже доступны на iOS.
@@ -174,7 +176,7 @@ programs:
   updateAppHeader: Обновить приложение
   updateAppText: "Пожалуйста, обновите приложение\nдо последней версии."
   btnClosePopup: Ок
-  checkout_this_program: Оцените этот Catrobat проект
+  checkout_this_project: Посмотреть этот проект Catrobat
   show_more: Больше
   comments: Комментарии
   send: Отправить
@@ -183,8 +185,8 @@ programs:
   report_popup: Жалоба на комментарий была отправлена.
   report_popup_header: Сообщено
   deleted_popup: Комментарий был успешно удален.
-  deleted_popup_header: '﻿Удалено'
-  noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как Admin.
+  deleted_popup_header: Удалено
+  noAdminRights: У вас нет прав администратора. Пожалуйста, войдите в систему как администратор.
   editProject: Изменить проект
   closeProjectEditor: Закрыть редактор проекта
   closeEditorPrompt: Хотите ли вы сохранить свои изменения?
@@ -220,10 +222,10 @@ remixGraph:
   by: 'на'
   open: 'Открыть '
   showPaths: 'Показать Пути'
-  programNotAvailableErrorTitle: 'Извините...'
-  programNotAvailableErrorDescription: 'Этот проект больше недоступен!'
-  programNotAvailable: 'Недоступно'
-  programUnknownUser: 'Неизвестный пользователь'
+  projectNotAvailableErrorTitle: 'Извините...'
+  projectNotAvailableErrorDescription: 'Этот проект больше недоступен!'
+  projectNotAvailable: 'Недоступно'
+  projectUnknownUser: 'Неизвестный пользователь'
 noReply:
   - Это системное сообщение - Пожалуйста, не отвечайте на это письмо.
 accountConfirmation:
@@ -244,6 +246,27 @@ accountConfirmation:
     С наилучшими пожеланиями,<br>
     Команда Catrobat.
     </p>
+newAccountConfirmation:
+  subject: Пожалуйста, подтвердите ваш адрес электронной почты
+  welcome: Добро пожаловать в Сообщество Catrobat!
+  message: |
+    Пожалуйста, подтвердите ваш адрес электронной почты
+    Добро пожаловать в Сообщество Catrobat
+    Всего один клик по кнопке ниже позволит вам подтвердить вашу регистрацию в Catrobat.
+    Эта ссылка действительна до %time% и может быть
+    использована только один раз для подтверждения вашего адреса электронной почты.
+  messageHtml: |
+    <p>
+    Один клик по кнопке ниже<br>
+    позволит вам подтвердить вашу регистрацию в Catrobat.<br>
+    <br>
+    <br>
+    Эта ссылка действительна до %time% и может быть<br>
+    использована только один раз для подтверждения вашего адреса электронной почты.<br>
+    </p>
+  button: ПОДТВЕРДИТЬ АДРЕС ЭЛЕКТРОННОЙ ПОЧТЫ
+  delete: Вы можете удалить свой аккаунт здесь в любое время.
+  deleteHtml: Вы можете <a href="%deleteUrl%">удалить</a> свой аккаунт здесь в любое время.
 passwordRecovery:
   subject: Восстановление пароля от вашего аккаунта Catrobat
   message: |
@@ -397,6 +420,8 @@ menu:
   followersAndFollowing: Подписчик
   mediaLibrary: Медиатека
   studio: Студии
+  language: Язык
+  languageOptionsNotAvailable: Языковые настройки не доступны.
 login:
   login: Войти
   button:
@@ -450,6 +475,11 @@ resetPassword:
     visitLink: "Чтобы сбросить пароль от аккаунта, пожалуйста перейдите по ссылке"
     expire: "Эта ссылка станет недействительной через %time%."
     cheers: "Ура!"
+  newemail:
+    title: "Сбросить ваш пароль"
+    content: <p> Вы получаете это письмо потому что вы<br> недавно запросили сброс пароля для<br> вашего аккаунта Catrovat. Перейдите по ссылку<br> ниде чтобы изменить свой пароль<br><br> Если вы не запрашивали изменение пароля,<br> вы можете проигнорировать это письмо.<br> </p>
+    visitLink: СБРОСИТЬ ПАРОЛЬ
+    expire: Эта ссылка действительна %time% - и может использоваться только один раз!
   reset:
     title: "Сбросить ваш пароль"
     button:
@@ -498,11 +528,11 @@ errors:
   unknown: неизвестная ошибка
   token: 'Аутентификация устройства провалилась: недействительный токен!'
   uploadTokenAuthFailed: 'Ошибка авторизации токена.'
-  program:
+  project:
     invalid: Неверный проект.
   languageversion:
     tooold: 'К сожалению, ваш проект содержит старую версию языка Catrobat! Используете ли вы последнюю версию Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'К сожалению, Вы используете старую версию Pocket Code. Пожалуйста, обновите его до последней версии.'
   authentication:
     title: Ошибка авторизации
@@ -708,7 +738,7 @@ catro-notifications:
     message: '%user_link% отправил %program_link%.'
   follow:
     message: '%user_link% теперь подписан на вас.'
-  program-upload:
+  project-upload:
     message: '%user_link% создал новую игру %program_link%.'
   remix:
     message: '%user_link% создал ремикс %program_link% вашей игры %remix_program_link%.'
@@ -761,6 +791,7 @@ category:
   example: Пример
   scratch: Scratch ремиксы
   recommended: Рекомендуемые проекты
+  popular: Самое популярное
 achievements:
   sidebar:
     title: 'Достижения'
@@ -856,7 +887,9 @@ studio:
   singular: 'Студия'
   create_studio: 'Создать студию'
   delete_studio: 'Удалить студию'
+  cancel_studio: 'Отменить'
   studio_name: 'Название студии'
+  studio_description: 'Описание студии'
   join: 'Присоединиться'
   leave: 'Покинуть'
   report: 'Отчет'
@@ -865,6 +898,7 @@ studio:
   overview:
     joined_studios: 'Участие в студиях'
     public_studios: 'Публичные студии'
+    private_studios: 'Частные студии'
   details:
     showMore: 'показать больше'
     showLess: 'свернуть'
@@ -873,6 +907,11 @@ studio:
     remove_project_success: 'Проект был успешно удален из студии.'
     no_projects: 'В студии пока нет никаких проектов.'
     updateCoverError: 'Что-то пошло не так при обновлении обложки студии.'
+    join: 'Присоединиться'
+    leave: 'Покинуть'
+    report: 'Отчет'
+    pending: 'В обработке'
+    decline: 'Отклонено'
     projects:
       title: 'Проекты'
     comments:
@@ -914,3 +953,12 @@ media_library:
       default: 'Тип: неизвестно'
 snackbar:
   project_not_found: 'Запрошенный проект недоступен'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Дополнительная информация: additionalinfo'
+    feature_1: 'Функция featureName не доступна с maintenanceStart до maintenanceEnd'
+    feature_2: 'Функция'
+    feature_3: 'Функция'
+
+
+

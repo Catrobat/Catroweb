@@ -41,7 +41,7 @@ country: ملک
 loginText: لاگ آن
 privacyPolicy: رازداری کا طریقہ کار
 imprint: طباعت
-programDetails: تفصیلات
+projectDetails: تفصیلات
 somethingWentWrong: 'اف، کچھ غلط ہوگیا۔.'
 doesNotExist: 'The requested resource does not exist.'
 pleaseTryAgain: 'برائے مہربانی دوبارہ کوشش کریں!'
@@ -94,114 +94,116 @@ follower:
   unfollowError: "مطلوبہ صارف کی نا پیروی کرنے میں ناکام!"
   unfollowQuestion: "کیا آپ واقعی اس صارف کا پیروی ناکام کرنا چاہتے ہیں؟"
   unfollowButton: "%username% پیروی کرنا بند"
-programs:
+project:
   welcome:
-    title: Catrobat کی %theme% کو خوش آمدید
-    title_mindstorms: Mindstorms EV3 اور NXT کے لئے CATROBAT کی سائٹ میں خوش آمدید
-    subtitle: کہانیاں، کھیل اور مزید بنائیں ...
-    subtitle_embroidery: اپنے ٹی شرٹ، بیگ، پتلون، یا اسمارٹ فون کیس پر اپنے اپنے پیٹرن کو سلائی کریں!
-    subtitle_mindstorms: اپنے لیگو دماغ اسٹرموں EV3 اور NXT روبوٹ کے ساتھ اپنی اپنی منصوبوں کو بنائیں
-    download: پروگرام ڈاؤن لوڈ کریں
-    statistics: مزید اعداد و شمار
-  featured: نمایاں
-  example: مثالیں
-  newest: تازہ ترین منصوبے
-  recommended: سفارش کردہ منصوبے
-  scratchremixes: سکریچ ریمکس
-  noPrograms: فی الحال کوئی منصوبے نہیں ہیں.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: پروجیکٹ کو حذف کریں۔
   deleteConfirmation: |+
-    کیا تمہیں یقین ہے؟
-    کیا آپ کو یقین ہے کہ آپ %programName% کو حذف کرنا چاہتے ہیں؟
-    آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
-    جی ہاں، اسے حذف کریں!
-    منسوخ
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
   setPrivateAction: Set private
   setPublicAction: Set public
   changeVisibility: |+
-    کیا تمہیں یقین ہے؟
-    اگر آپ نجی طور پر '%programName%' مقرر کرتے ہیں، تو یہ دوسرے صارفین کی طرف سے دیکھا یا نہیں مل جائے گا.
-    آپ اب بھی اپنے دوستوں کے ساتھ آپ کے منصوبے کے لنک کا اشتراک کر سکتے ہیں. آپ Padlock آئکن کو ٹپ کرنے کی نمائش کو ٹول کر سکتے ہیں.
-    اگر آپ عوامی طور پر "%programName%" مقرر کرتے ہیں تو، یہ دوسرے صارفین کی طرف سے دیکھا اور پایا جا سکتا ہے.
-    جی ہاں، عوامی مقرر کر دیا جاے
-    جی ہاں، نجی پر مقرر کر دیا جاے
-    نہیں
-  reportCommentConfirmation: کیا آپ واقعی یہ تبصرہ رپورٹ کرنا چاہتے ہیں؟
-  deleteCommentConfirmation: کیا آپ واقعی یہ تبصرہ حذف کرنا چاہتے ہیں؟
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    اکاؤنٹ حذف؟
-    کیا آپ کو یقین ہے کہ آپ اپنا اکاؤنٹ حذف کرنا چاہتے ہیں؟ یہ آپ کے اپ لوڈ کردہ منصوبوں اور تبصرے کو بھی حذف کرے گا!
-    آپ کے اعمال کو بحال کرنے کا کوئی طریقہ نہیں ہے!
-    جی ہاں، اسے حذف کریں!
-    منسوخ
-  tooLongName: پروجیکٹ کا نام بہت لمبا ہے!
-  tooLongDescription: پروجیکٹ کی تفصیل بہت لمبی ہے!
-  tooLongCredits: پروجیکٹ نوٹس اور کریڈٹ بہت طویل ہیں!
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: سب سے زیادہ دیکھے گئے
     downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
-  random: بے ترتیب منصوبے
-  related: متعلقہ منصوبے
-  downloads: '%downloads% ڈاؤن لوڈز'
-  sample: مثالی منصوبے
-  views: '%views% مرتبہ دیکھی'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "جو لوگ اس منصوبے پر ردعمل کرتے ہیں"
+    likersTitle: "People who reacted to that project"
     all: "تمام"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
-  newRemixesNotificationTitle: "{1}\"%programName%\" has 1 new remix: |]1,Inf] \"%programName%\" has %remixes% new remixes:\n"
-  submitted: پیش کردہ منصوبے
-  uploaded: اپ لوڈ کردہ منصوبے
-  reportAsInappropriate: رپورٹ غیرموزوں ہے
-  reportProgram: پروجیکٹ کو رپورٹ کریں
-  languageVersion: 'کاٹروبٹ زبان ورژن: %languageVersion%'
-  reportLoginText: اس منصوبے کی اطلاع دینے کیلئے برائے مہربانی %login% کریں.
-  reportDialogHeader: آپ اس منصوبے کی رپورٹ کیوں کرنا چاہتے ہیں؟
-  reportDialogReason: وجہ بتائیں
-  reportRadioButtonInappropriate: یہ غیر مناسب ہے
-  reportRadioButtonCopyright: کاپی رائٹ کی خلاف ورزی
-  reportRadioButtonSpam: یہ فضول ہے
-  reportRadioButtonDislike: مجھے یہ پسند نہیں ہے
-  reportOwnProgram: آپ اپنے منصوبے مارک نہیں کر سکتے ہیں.
-  reportAlready: آپ نے پہلے ہی اس منصوبے کو مارک لگایا ہے.
-  reportDone: آپ نے اس منصوبے کی اطلاع دی!
-  updateAppHeaderDownload: ڈاؤن لوڈ ممکن نہیں۔
-  updateAppTextDownload: براہ کرم اپنی ایپ کو تازہ ترین ورژن میں اپ ڈیٹ کریں۔ آگاہ رہیں کہ تمام اینڈرائیڈ فیچرز پہلے سے ہی IOS پر دستیاب نہیں ہیں۔
-  updateAppTextDownloadApk: APK ڈاؤن لوڈ فی الحال صرف اینڈرائیڈ پر دستیاب ہے نہ کہ IOS پر۔
-  updateAppHeader: پروگرام اپ ڈیٹ کریں
-  updateAppText: براہ کرم اپنے اپلی کیشن کو تازہ ترین ورژن پر اپ ڈیٹ کریں تاکہ اس منصوبے کو ڈاؤن لوڈ کرنے کے قابل ہو.
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: ٹھیک
-  checkout_this_program: یہ CATROBAT منصوبہ چیک کریں
-  show_more: مزید دکھائیں
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: تبصرے
-  send: بھیجیں
+  send: Send
   delete: خارج کر دیں
   report: رپورٹ
-  report_popup: آپکا تبصرہ کامیابی سے پہنچ گیا.
-  report_popup_header: اطلاعات کے مطابق
-  deleted_popup: تبصرہ کامیابی سے حذف کر دیا گیا تھا.
-  deleted_popup_header: حذف کر دیا گیا
-  noAdminRights: آپ کے پاس کوئی انتظامی حقوق نہیں ہیں. منتظم کے طور پر لاگ ان کریں.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: کیا آپ تبدیلیاں محفوظ کرنا چاہتے ہیں?
   btnDiscard: مسترد کریں
-  addComment: اپنی رائے لکھیں
-  thumbsUp: بہت خوب!
-  smile: مسکراہٹ!
-  love: محبت!
-  wow: واہ!
-  linkTitle: لنک
-  link: کلپ بورڈ پر پراجیکٹ لنک کاپی کریں
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: ردعمل
-  downloadErrorText: منصوبے کو ڈاؤن لوڈ کرتے ہوئے خرابی ہوئی. براہ کرم کچھ دیر بعد کوشش کریں.
-  downloadStartText: ڈاؤن لوڈ شروع ہو گیا ہے۔
-  showTranslation: ترجمہ دکھائیں
-  hideTranslation: ترجمہ چھپائیں
-  translatedByLine: '%sourceLanguage% سے %targetLanguage% کو ترجمہ %provider% کی طرف سے فراہم ہوہ'
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: پہلے سے طے شدہ
@@ -220,10 +222,10 @@ remixGraph:
   by: 'کی طرف سے'
   open: 'کھولیں'
   showPaths: 'راستے دکھائیں'
-  programNotAvailableErrorTitle: 'معاف کریں ...'
-  programNotAvailableErrorDescription: 'اس منصوبہ مزید دستیاب نہیں ہے!'
-  programNotAvailable: 'دستیاب نہیں ہے'
-  programUnknownUser: 'نامعلوم صارف'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -240,6 +242,28 @@ accountConfirmation:
     یہ لنک آپ کے اکاؤنٹ کی تصدیق کے لیے صرف ایک بار استعمال کیا جا سکتا ہے۔
     نیک تمنائیں،
     آپ کی کیٹروبیٹ ٹیم۔
+newAccountConfirmation:
+  subject: براہ کرم اپنے ای میل ایڈریس کی تصدیق کریں۔
+  welcome: Catrobat کمیونٹی میں خوش آمدید!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: ای میل کی تصدیق کریں
+  delete: آپ یہاں کسی بھی وقت اپنا اکاؤنٹ ختم کر سکتے ہیں۔
+  deleteHtml: آپ یہاں کسی بھی وقت اپنا اکاؤنٹ <a href="%deleteUrl%">ختم</a> کر سکتے ہیں۔
 passwordRecovery:
   subject: آپ کے کاٹروبیٹ پاس ورڈ کی درستگی
   message: |
@@ -391,6 +415,8 @@ menu:
   followersAndFollowing: پیروکاروں
   mediaLibrary: میڈیا لائبریری
   studio: Studios
+  language: زبان
+  languageOptionsNotAvailable: No language options available.
 login:
   login: لاگ اِن
   button:
@@ -444,6 +470,11 @@ resetPassword:
     visitLink: "اپنا پاس ورڈ دوبارہ ترتیب دینے کے لیے، براہ کرم درج ذیل لنک پر جائیں۔"
     expire: "یہ لنک %time% میں ختم ہو جائے گا۔"
     cheers: "شاباش"
+  newemail:
+    title: "اپنا پاس ورڈ ری سیٹ کریں"
+    content: <p> آپ کو یہ ای میل اس لیے موصول ہو رہی ہے کیونکہ آپ<br>  نے حال ہی میں اپنے Catrobat اکاؤنٹ کے لیےپاس ورڈ  تبدیل کرنے کی درخواست کی ہے۔ پاس ورڈ <br> تبدیل کرنے کے لیے نیچے دیے گئے لنک <br> پرجا‎ئیں۔ اگر آپ نے پاس ورڈ تبدیل کرنے کی درخواست نہیں کی ہے،<br>  تو آپ اس ای میل کو نظر انداز کر سکتے ہیں۔<p><br> 
+    visitLink: پاس ورڈ ری سیٹ کریں۔
+    expire: یہ لنک  %time%  کے لیےقابل استعمال ہے - صرف ایک بار استعمال کریں!
   reset:
     title: "اپنا پاس ورڈ ری سیٹ کریں"
     button:
@@ -492,12 +523,12 @@ errors:
   unknown: نامعلوم غلطی
   token: 'ڈیوائسس کی تصدیق نمک: غلط اوتھ-ٹوکن!'
   uploadTokenAuthFailed: 'ٹوکن آرٹ اپ لوڈ کریں.'
-  program:
-    invalid: غلط منصوبے
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'افسوس، آپ کے منصوبے میں Catrobat زبان کا ایک پرانے ورژن شامل ہے! کیا آپ جیبی کوڈ کا تازہ ترین ورژن استعمال کرتے ہیں؟'
-  programversion:
-    tooold: 'افسوس، آپ جیبی کوڈ کا ایک پرانے ورژن استعمال کر رہے ہیں. تازہ ترین ورژن کو اپ ڈیٹ کریں.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: تصدیق میں ناکام رہے
     webview: |
@@ -701,8 +732,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: '%user_link% اب آپ کی پیروی کر رہا ہے۔'
-  program-upload:
-    message: '%user_link% نے ایک نیا گیم %program_link% بنایا۔'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% نے آپ کے گیم %remix_program_link% کا ایک ریمکس %program_link% بنایا۔'
 clipboard:
@@ -747,13 +778,14 @@ checkOutUser: 'Check out this user:'
 community: 'کاٹروبٹ کے تمام لوگ                      '
 back_to_app: 'کمیونٹی سے باہر نکلیں'
 category:
-  recent: تازہ ترین منصوبے
-  random: بے ترتیب منصوبے
+  recent: Newest projects
+  random: Random projects
   most_viewed: سب سے زیادہ دیکھے گئے
   most_downloaded: سب سے زیادہ ڈاؤنلوڈ کیے گئے
   example: مثال
-  scratch: سکریچ ریمکس
-  recommended: سفارش کردہ منصوبے
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'کامیابیاں'
@@ -849,7 +881,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'منسوخ'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'رپورٹ'
@@ -858,6 +892,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'مزید دکھائیں'
     showLess: 'کم دکھائیں'
@@ -866,6 +901,11 @@ studio:
     remove_project_success: 'پروجیکٹ کو کامیابی سے ہٹا دیا گیا۔'
     no_projects: 'اسٹوڈیو میں ابھی پروجیکٹ شامل نہیں ہے۔'
     updateCoverError: 'اسٹوڈیو کور کو اپ ڈیٹ کرتے وقت کچھ غلط ہو گیا!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'رپورٹ'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'پروجیکٹس'
     comments:
@@ -907,3 +947,12 @@ media_library:
       default: 'نامعلوم'
 snackbar:
   project_not_found: 'درخواست کردہ پروجیکٹ دستیاب نہیں ہے۔'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

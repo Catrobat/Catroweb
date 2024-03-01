@@ -9,7 +9,7 @@ Feature: Search programs
       | Catrobat | 12345    | cccccccccc | 1  |
       | User1    | vwxyz    | aaaaaaaaaa | 2  |
       | NewUser  | 54321    | bbbbbbbbbb | 3  |
-    And there are programs:
+    And there are projects:
       | id        | name            | description               | owned by | upload time      | version |
       | qysm-rhwt | Galaxy War      | description1              | User1    | 01.01.2014 12:00 | 0.8.5   |
       | phci-etqx | Minions         |                           | Catrobat | 02.02.2014 14:00 | 0.8.5   |
@@ -31,7 +31,7 @@ Feature: Search programs
     And I have a parameter "limit" with value "1"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search.json" with these parameters
-    Then I should get following programs:
+    Then I should get following projects:
       | name       |
       | Galaxy War |
 
@@ -74,7 +74,7 @@ Feature: Search programs
   Scenario: Search for a program with a certain name
 
     When I search for "Minions"
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Minions |
 
@@ -84,7 +84,7 @@ Feature: Search programs
     Given I have a parameter "limit" with value "10"
     And I have a parameter "offset" with value "0"
     When I search for "marko"
-    Then I should get following programs:
+    Then I should get following projects:
       | name            |
       | Whack the Marko |
       | MarkoTheBest    |
@@ -111,7 +111,7 @@ Feature: Search programs
 
     Given I use the limit "10"
     When I search for "description1"
-    Then I should get following programs:
+    Then I should get following projects:
       | name       |
       | Galaxy War |
       | Superponny |
@@ -121,7 +121,7 @@ Feature: Search programs
 
     Given I use the limit "10"
     When I search for "description2"
-    Then I should get following programs:
+    Then I should get following projects:
       | name       |
       | Ponny      |
       | Superponny |
@@ -131,7 +131,7 @@ Feature: Search programs
 
     Given I use the limit "10"
     When I search for "description1 description2"
-    Then I should get following programs:
+    Then I should get following projects:
       | name       |
       | Superponny |
 
@@ -139,7 +139,7 @@ Feature: Search programs
 
     Given I use the limit "10"
     When I search for "Universe"
-    Then I should get following programs:
+    Then I should get following projects:
       | name            |
       | Universe        |
       | Whack the Marko |
@@ -161,7 +161,7 @@ Feature: Search programs
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "kbrw"
-    Then I should get following programs:
+    Then I should get following projects:
       | name     |
       | Universe |
 
@@ -170,7 +170,7 @@ Feature: Search programs
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "phci"
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Minions |
 
@@ -179,15 +179,15 @@ Feature: Search programs
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "-etqx"
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Minions |
 
   Scenario: only show visible programs
-    Given program "Ponny" is not visible
+    Given project "Ponny" is not visible
     And I wait 1000 milliseconds
     And I use the limit "10"
     When I search for "description2"
-    Then I should get following programs:
+    Then I should get following projects:
       | name       |
       | Superponny |

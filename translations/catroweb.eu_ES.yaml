@@ -41,7 +41,7 @@ country: Herrialdea
 loginText: Saioa hasi
 privacyPolicy: Pribatutasun politika
 imprint: Argitaratzailea
-programDetails: Details
+projectDetails: Details
 somethingWentWrong: 'Ai ene! Zerbait ez doa ongi.'
 doesNotExist: 'Eskatutako baliabidea ez da existitzen.'
 pleaseTryAgain: 'Saiatu berriro mesedez!'
@@ -94,28 +94,28 @@ follower:
   unfollowError: "Ezin izan duzu erabiltzaile hori jarraitzeaz utzi!"
   unfollowQuestion: "Ziur al zaude erabiltzaile hau jarraitzeari utzi nahi duzula?"
   unfollowButton: "%username% jarraitzeari utzi"
-programs:
+project:
   welcome:
-    title: Ongi etorri Catrobaten %theme%-ra
-    title_mindstorms: Ongi etorri  Mindstorms EV3 eta NXTentzako Catrobaten lekura.
-    subtitle: Sortu istorioak, jokuak eta beste hainbat...
-    subtitle_embroidery: Itsatsi zuk sortutako diseinuak zure kamiseta, poltsa, galtza edo mugikorraren zorroan!
-    subtitle_mindstorms: Sortu zure proiektuak zure Lego Mindstorms EV3 eta NXT robotekin
-    download: Jeitsi aplikazioa
-    statistics: Estatistika gehiago
-  featured: ' Nabarmenak'
-  example: Adibideak
-  newest: Proiektu berrienak
-  recommended: Gomendatutako proiektuak
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
   scratchremixes: Scratch remixes
-  noPrograms: Oraingoz ez dago proiekturik.
+  noProjects: There are currently no projects.
   deleteAction: Delete project
   deleteConfirmation: |+
-    Ziur al  zaude?
-    Ziur zaude %programName% programa ezabatu nahi duzula?
-    Ez dago atzera itzulirik!
-    Bai, ezabatu!
-    Ezeztatu
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: The project to be deleted could not be found under your user.
   private: private
   public: public
@@ -129,79 +129,81 @@ programs:
     Bai, publikoa bezala ezarri
     Bai, pribatua bezala ezarri
     Ez
-  reportCommentConfirmation: Ziur zaude iruzkin hau salatu nahi duzula?
-  deleteCommentConfirmation: Ziur zaude iruzkin hau ezabatu nahi duzula?
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Kontua ezabatu?
-    Ziur zaude kontu hau ezabatu nahi duzula? Honek zuk igotako proiektuak eta zure iruzkinak ezabatuko ditu ere!
-    Ez dago atzera itzultzerik!
-    Bai, ezabatu!
-    Ezeztatu
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   tooLongName: The project name is too long!
-  tooLongDescription: Proiektuaren deskribapena luzeegia da!
-  tooLongCredits: Proiektuaren ohar eta aipamenak luzeegiak dira!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Most viewed
     downloaded: Most downloaded
   random: Random projects
-  related: Zerikusia duten proiektuak
-  downloads: '%downloads% deskarga'
-  sample: Adibide moduan erabilitako proiektuak
-  views: '%views% ikustaldi'
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Zure proiektuari erreakzionatu dion jendea"
+    likersTitle: "People who reacted to that project"
     all: "Dena"
   remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
   newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
-  submitted: Bidalitako proiektuak
-  uploaded: Igotako proiektuak
+  submitted: Submitted projects
+  uploaded: Uploaded projects
   reportAsInappropriate: Report as inappropriate
-  reportProgram: Proiektua salatu
-  languageVersion: 'Catrobaten hizkuntza bertsioa: %languageVersion%'
-  reportLoginText: Mesedez %login% proiektu hau salatzeko.
-  reportDialogHeader: Zergatik nahi duzu proiektu hau salatu?
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
   reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: Onartezina da
-  reportRadioButtonCopyright: Copyright urraketa
-  reportRadioButtonSpam: Spama
-  reportRadioButtonDislike: Ez dut gustukoa
-  reportOwnProgram: Ezin duzu zuk sortutako proiektu bat markatu.
-  reportAlready: Dagoeneko markatua duzu proiektu hau.
-  reportDone: Proiektu hau salatu egin duzu!
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
   updateAppHeaderDownload: Download not possible
   updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
   updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Aplikazioa eguneratu
-  updateAppText: Eguneratu zure aplikazioa azken bertsiora mesedez, proiektu hau deskargatu ahal izateko.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Ados
-  checkout_this_program: Begira Catrobat proiektu hau
-  show_more: Gehiago erakutsi 
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Iruzkinak
-  send: Bidali
+  send: Send
   delete: Delete
   report: Salatu
-  report_popup: Iruzkina ongi salatu da.
-  report_popup_header: Salatuta
-  deleted_popup: Iruzkina ongi ezabatu da.
-  deleted_popup_header: Ezabatua
-  noAdminRights: Ez daukazu admin eskubiderik. Mesedez hasi saioa admin moduan.
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
   editProject: Edit the project
   closeProjectEditor: Close project editor
   closeEditorPrompt: Ziur aldaketak gorde nahi dituzula?
   btnDiscard: Baztertu
-  addComment: Iruzkin bat idatzi
-  thumbsUp: Ederki!
-  smile: Irribarre!
-  love: Datsegit!
-  wow: Hara!
-  linkTitle: Esteka
-  link: Kopiatu proiektuaren esteka
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: Erreakzioak
-  downloadErrorText: Arazo bat egon da proiektua deskargatzen. Saiatu berriz beranduago.
-  downloadStartText: Deskarga hasi da...
-  showTranslation: Erakutsi itzulpena
-  hideTranslation: Ezkutatu itzulpena
-  translatedByLine: '%sourceLanguage%-(e)tik %targetLanguage%-(e)ra %provider%-(e)k itzulita.'
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
   googleTranslate: Google Translate
   confrimDelete: Are you sure you want to delete the translation?
   default: Default
@@ -220,10 +222,10 @@ remixGraph:
   by: 'by'
   open: 'Ireki'
   showPaths: 'Show Paths'
-  programNotAvailableErrorTitle: 'Barkatu...'
-  programNotAvailableErrorDescription: 'Proiektu hau jada ez dago eskuragarri!'
-  programNotAvailable: 'Ez dago eskuragarri'
-  programUnknownUser: 'Erabiltzaile ezezaguna'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -244,6 +246,28 @@ accountConfirmation:
     Best regards,<br>
     Your Catrobat Team.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Zure Catrobateko pasahitzaren berreskurapena.
   message: |
@@ -395,6 +419,8 @@ menu:
   followersAndFollowing: Follower
   mediaLibrary: Media library
   studio: Studios
+  language: Language
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Login
   button:
@@ -448,6 +474,11 @@ resetPassword:
     visitLink: "To reset your password, please visit the following link"
     expire: "This link will expire in %time%."
     cheers: "Cheers!"
+  newemail:
+    title: "Reset your password"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Reset your password"
     button:
@@ -496,11 +527,11 @@ errors:
   unknown: unknown error
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
+  project:
     invalid: Invalid project.
   languageversion:
     tooold: 'Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?'
-  programversion:
+  projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Authentication failed
@@ -706,7 +737,7 @@ catro-notifications:
     message: '%user_link% reacted to %program_link%.'
   follow:
     message: '%user_link% is now following you.'
-  program-upload:
+  project-upload:
     message: '%user_link% created a new game %program_link%.'
   remix:
     message: '%user_link% created a remix %program_link% of your game %remix_program_link%.'
@@ -752,13 +783,14 @@ checkOutUser: 'Check out this user:'
 community: 'Catrobat komunitatea'
 back_to_app: 'Exit community'
 category:
-  recent: Proiektu berrienak
+  recent: Newest projects
   random: Random projects
   most_viewed: Most viewed
   most_downloaded: Most downloaded
   example: Example
   scratch: Scratch remixes
-  recommended: Gomendatutako proiektuak
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Achievements'
@@ -854,7 +886,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Cancel'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Salatu'
@@ -863,6 +897,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'show more'
     showLess: 'show less'
@@ -871,6 +906,11 @@ studio:
     remove_project_success: 'Project removed successfully from studio.'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Salatu'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'Proiektuak'
     comments:
@@ -912,3 +952,12 @@ media_library:
       default: 'Type: unknown'
 snackbar:
   project_not_found: 'The requested project is not available'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

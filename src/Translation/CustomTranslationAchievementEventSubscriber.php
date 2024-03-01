@@ -2,7 +2,7 @@
 
 namespace App\Translation;
 
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\User\Achievements\AchievementManager;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -12,7 +12,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 
 class CustomTranslationAchievementEventSubscriber implements EventSubscriberInterface
 {
-  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProgramManager $program_manager, private readonly LoggerInterface $logger) {}
+  public function __construct(private readonly AchievementManager $achievement_manager, private readonly ProjectManager $project_manager, private readonly LoggerInterface $logger)
+  {
+  }
 
   public function onTerminateEvent(TerminateEvent $event): void
   {
@@ -29,7 +31,7 @@ class CustomTranslationAchievementEventSubscriber implements EventSubscriberInte
         return;
       }
 
-      $project = $this->program_manager->find($project_id);
+      $project = $this->project_manager->find($project_id);
 
       if (null === $project) {
         return;

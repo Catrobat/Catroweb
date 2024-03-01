@@ -6,7 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use App\DB\Entity\User\Comment\UserComment;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -19,7 +19,7 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
   private const CACHED_PROVIDER = 'etag';
   private readonly int $project_caching_threshold;
 
-  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProgramManager $program_manager, ParameterBagInterface $parameters)
+  public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ProjectManager $project_manager, ParameterBagInterface $parameters)
   {
     $pct = $parameters->get('catrobat.translations.project_cache_threshold');
     $this->project_caching_threshold = is_numeric($pct) ? (int) $pct : 0;
@@ -43,9 +43,9 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
       }
     } elseif (str_contains($path, '/translate/project/')) {
       if (200 === $status_code) {
-        $this->persistProgramTranslation($event);
+        $this->persistProjectTranslation($event);
       } else {
-        $this->persistCachedProgramTranslation($request);
+        $this->persistCachedProjectTranslation($request);
       }
     }
   }
@@ -57,7 +57,7 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     $this->findCommentAndIncrement($comment_id, $source_language, $target_language, $provider);
   }
 
-  private function persistProgramTranslation(TerminateEvent $event): void
+  private function persistProjectTranslation(TerminateEvent $event): void
   {
     [$project_id, $source_language, $target_language, $provider, $cache] = $this->getParameters($event);
     [$translated_name, $translated_description, $translated_credits] = $this->getTranslation($event);
@@ -74,7 +74,7 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
     $this->findCommentAndIncrement($comment_id, $source_language, $target_language, self::CACHED_PROVIDER);
   }
 
-  private function persistCachedProgramTranslation(Request $request): void
+  private function persistCachedProjectTranslation(Request $request): void
   {
     $project_id = $this->getId($request->getPathInfo());
     [$source_language, $target_language] = $this->getLanguages($request);
@@ -156,11 +156,11 @@ class MachineTranslationEventSubscriber implements EventSubscriberInterface
   }
 
   private function findProjectAndIncrement(string $project_id, string $source_language, string $target_language,
-    string $provider, string $cache = null,
-    string $translated_name = null, string $translated_description = null, string $translated_credits = null): void
+    string $provider, ?string $cache = null,
+    ?string $translated_name = null, ?string $translated_description = null, ?string $translated_credits = null): void
   {
     /** @var Program|null $project */
-    $project = $this->program_manager->find($project_id);
+    $project = $this->project_manager->find($project_id);
 
     if (null === $project) {
       return;

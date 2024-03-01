@@ -41,7 +41,7 @@ country: Ülke
 loginText: oturum aç
 privacyPolicy: Gizlilik politikası
 imprint: Damga
-programDetails: Ayrıntılar
+projectDetails: Ayrıntılar
 somethingWentWrong: 'Eyvah! Bir hata oluştu.'
 doesNotExist: 'İstenen kaynak mevcut değil.'
 pleaseTryAgain: 'Lütfen yeniden deneyin!'
@@ -94,28 +94,28 @@ follower:
   unfollowError: "İstenen kullanıcının takibi kaldırılamıyor!"
   unfollowQuestion: "Bu kullanıcıyı takip etmeyi bırakmak istediğinden emin misin?"
   unfollowButton: "Takip etmekten vazgeç %username%"
-programs:
+project:
   welcome:
-    title: Catrobat'ın %theme% projesinin websitesine hoş geldiniz
-    title_mindstorms: Catrobat'ın Mindstorms EV3 ve NXT sitesine hoş geldiniz
-    subtitle: Hikayeler, oyunlar ve daha fazlasını oluşturun...
-    subtitle_embroidery: T-shirt, çanta, pantolon veya akıllı telefon kasanızda kendi deseninizi dikin!
-    subtitle_mindstorms: Lego Mindstorm EV3 ve NXT robotlarınız ile kendi projelerinizi oluşturun
-    download: Uyglama'yı indirin
-    statistics: Diğer istatistikler
-  featured: Öne çıkan
-  example: Örnekler
-  newest: Yeni projeler
-  recommended: Önerilen projeler
-  scratchremixes: Scratch remixleri
-  noPrograms: Şu anda proje yok.
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: Projeyi sil
   deleteConfirmation: |+
-    Emin misiniz?
-    "%programName%" öğesini silmek istediğinizden emin misiniz?
-    Eylemlerinizi geri getirmenin bir yolu yok!
-    Evet, silin!
-    İptal et
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: Silinecek proje, kullanıcınızın altında bulunamadı.
   private: private
   public: public
@@ -129,81 +129,83 @@ programs:
     Herkese açık olarak ayarla
     Özel olarak ayarla
     İptal
-  reportCommentConfirmation: Bu yorumu bildirmek istediğinizden emin misiniz?
-  deleteCommentConfirmation: Bu yorumu silmek istediğinizden emin misiniz?
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    Hesap silme?
-    Hesabınızı silmek istediğinizden emin misiniz?
-    Bu, yüklediğiniz projeleri ve yorumları da silecek! Eylemlerinizi geri getirmenin bir yolu yok!
-    Evet, sil!
-    İptal et
-  tooLongName: Proje adı çok uzun!
-  tooLongDescription: Projenin açıklaması çok uzun!
-  tooLongCredits: Projenin yapanlar kısmı çok uzun!
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: En çok İzlenenler
     downloaded: En çok indirilen
-  random: Rastgele projeler
-  related: İlgili Projeler
-  downloads: '%downloads% İndirme'
-  sample: Örnek projeler
-  views: '%views% İzlenme'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "Bu projeye tepki gösteren insanlar"
+    likersTitle: "People who reacted to that project"
     all: "Tüm"
-  remixes: '{0}0 remixler |{1}1 remix |]1,Inf]%remixes% remixler'
-  newRemixesNotificationTitle: '| {1}"%programName%" yeni 1 remix içeriyor: |] 1,Inf]"%programName%" %remixes% sahipin yeni remixleri:'
-  submitted: Gönderilen projeler
-  uploaded: Yüklenen projeler
-  reportAsInappropriate: Uygunsuz olarak rapor et
-  reportProgram: Projeyi bildir
-  languageVersion: 'Catrobat dil sürümü: %languageVersion%'
-  reportLoginText: Lütfen projeyi bildirmek için %login%
-  reportDialogHeader: Bu projeyi neden bildirmek istiyorsunuz?
-  reportDialogReason: Bu programı uygunsuz olarak belirtmenizin sebebi ne
-  reportRadioButtonInappropriate: Uygunsuz
-  reportRadioButtonCopyright: Telif hakkı ihlali
-  reportRadioButtonSpam: Spam
-  reportRadioButtonDislike: Beğenmedim
-  reportOwnProgram: Kendi projenizi işaretleyemezsiniz.
-  reportAlready: Bu projeyi zaten işaretlediniz.
-  reportDone: Bu projeyi bildirdiniz!
-  updateAppHeaderDownload: İndirmek mümkün değil
-  updateAppTextDownload: Lütfen uygulamanızı en yeni sürüme güncelleyin. Tüm Android özelliklerinin IOS'ta mevcut olmadığını unutmayın.
-  updateAppTextDownloadApk: Uygulama olarak indirme şu anda yalnızca Android'de mevcuttur ve IOS'ta mevcut değildir.
-  updateAppHeader: Programı güncelleyin
-  updateAppText: Bu projeyi indirebilmek için lütfen uygulamanızı en yeni sürüme güncelleyin.
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: Tamam
-  checkout_this_program: Bu Catrobat projesine göz atın
-  show_more: Daha Fazla Göster
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: Yorumlar
-  send: Gönder
+  send: Send
   delete: Sil
   report: Bildir
-  report_popup: Bize başarıyla bildirildi.
-  report_popup_header: Raporlandı
-  deleted_popup: Yorum başarıyla silindi.
-  deleted_popup_header: Silindi
-  noAdminRights: Yönetici haklarınız yok. Lütfen Yönetici olarak giriş yapın.
-  editProject: Projeyi düzenle
-  closeProjectEditor: Proje düzenleyiciyi kapat
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: Değişiklikleri kaydetmek istiyor musunuz?
   btnDiscard: Vazgeç
-  addComment: Bir yorum Yaz
-  thumbsUp: Başparmak havaya!
-  smile: Gülümse!
-  love: Aşk!
-  wow: Vaycanına!
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
   linkTitle: Link
-  link: Proje bağlantısını panoya kopyala
+  link: Copy project link to clipboard
   reactionsText: Tepkiler
-  downloadErrorText: Proje indirilirken hata oluştu. Lütfen daha sonra tekrar deneyiniz.
-  downloadStartText: İndirme başladı...
-  showTranslation: Çeviriyi göster
-  hideTranslation: Çeviriyi gizle
-  translatedByLine: '%provider% tarafından %sourceLanguage%''den %targetLanguage%''ye çevrildi'
-  googleTranslate: Google Çeviri
-  confrimDelete: Çeviriyi silmek istediğinizden emin misiniz?
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: Varsayılan
   save: Kaydet
   translationTitle: '%language% çevirisi'
@@ -220,10 +222,10 @@ remixGraph:
   by: 'değiştir'
   open: 'Aç'
   showPaths: 'Yolları Göster'
-  programNotAvailableErrorTitle: 'Üzgünüz...'
-  programNotAvailableErrorDescription: 'Proje artık kullanılabilir değil!'
-  programNotAvailable: 'Kullanılabilir değil'
-  programUnknownUser: 'Bilinmeyen kullanıcı'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - This is an automated message - Please do not reply directly to this email.
 accountConfirmation:
@@ -244,6 +246,28 @@ accountConfirmation:
     Saygılarla,<br>
     Catrobat Takımı.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Catrobat şifre kurtarma
   message: |
@@ -395,6 +419,8 @@ menu:
   followersAndFollowing: Takipçin
   mediaLibrary: Medya kütüphanesi
   studio: Studios
+  language: Dil
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Oturum aç
   button:
@@ -448,6 +474,11 @@ resetPassword:
     visitLink: "Şifrenizi sıfırlamak için lütfen aşağıdaki bağlantıyı ziyaret edin"
     expire: "Bu bağlantı %time% içinde sona erecek."
     cheers: "Şerefe!"
+  newemail:
+    title: "Şifrenizi sıfırlayın"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Şifrenizi sıfırlayın"
     button:
@@ -496,12 +527,12 @@ errors:
   unknown: bilinmeyen hata
   token: 'Cihaz doğrulaması başarısız: geçersiz yetki-belirteci!'
   uploadTokenAuthFailed: 'Yükleme Jetonu kimlik doğrulaması başarısız oldu.'
-  program:
-    invalid: Geçersiz proje.
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: 'Üzgünüz, projeniz Catrobat dilinin eski bir sürümünü içeriyor! Cep Kodunun en son sürümünü mü kullanıyorsunuz?'
-  programversion:
-    tooold: 'Maalesef, Cep Kodunun eski bir sürümünü kullanıyorsunuz. Lütfen en son sürüme güncelleyin.'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Kimlik doğrulaması başarısız oldu
     webview: |
@@ -705,8 +736,8 @@ catro-notifications:
     message: '%user_link% kullanıcısı %program_link% projenize tepki verdi.'
   follow:
     message: 'Kullanıcı %user_link% şimdi sizi takip ediyor.'
-  program-upload:
-    message: '%user_link% kullanıcısı yeni bir proje oluşturdu %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'Kullanıcı %user_link% projenizi %program_link% yeniden düzenledi. Remix''i aşağıdaki %remix_program_link% bağlantısında görebilirsiniz.'
 clipboard:
@@ -751,13 +782,14 @@ checkOutUser: 'Bu kullanıcıya göz atın:'
 community: 'Catrobat topluluğu'
 back_to_app: 'Topluluktan çık'
 category:
-  recent: Yeni projeler
-  random: Rastgele projeler
+  recent: Newest projects
+  random: Random projects
   most_viewed: En çok İzlenenler
   most_downloaded: En çok indirilen
   example: Örnek
-  scratch: Scratch remixleri
-  recommended: Önerilen projeler
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Başarılar'
@@ -853,7 +885,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'İptal et'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Join'
   leave: 'Leave'
   report: 'Bildir'
@@ -862,6 +896,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'daha fazla göster'
     showLess: 'daha az göster'
@@ -870,6 +905,11 @@ studio:
     remove_project_success: 'proje stüdyodan başarıyla kaldırıldı!'
     no_projects: 'Studio henüz proje içermiyor'
     updateCoverError: 'Stüdyo kapağı güncellenirken bir şeyler ters gitti!'
+    join: 'Join'
+    leave: 'Leave'
+    report: 'Bildir'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'projeler'
     comments:
@@ -911,3 +951,12 @@ media_library:
       default: 'Tür: bilinmiyor'
 snackbar:
   project_not_found: 'İstenen proje mevcut değil'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

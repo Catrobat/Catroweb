@@ -15,7 +15,7 @@ Feature: Search extensions programs
       | 3  | mindstorms     |
       | 4  | phiro          |
       | 5  | raspberry_pi   |
-    And there are programs:
+    And there are projects:
       | id | name    | description | owned by | downloads | views | upload time      | version | extensions       |
       | 1  | Minions | p1          | Catrobat | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | mindstorms,phiro |
       | 2  | Galaxy  | p2          | User1    | 10        | 13    | 01.02.2013 12:00 | 0.8.5   | mindstorms,drone |
@@ -28,7 +28,7 @@ Feature: Search extensions programs
     And I have a parameter "limit" with value "5"
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search/extensionProjects.json" with these parameters
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Minions |
 
@@ -38,7 +38,7 @@ Feature: Search extensions programs
     Given I use the limit "10"
     And I use the offset "0"
     When I search for "mindstorms"
-    Then I should get following programs:
+    Then I should get following projects:
       | name    |
       | Galaxy  |
       | Minions |

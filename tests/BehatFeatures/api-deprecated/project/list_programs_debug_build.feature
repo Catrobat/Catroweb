@@ -10,7 +10,7 @@ Feature: List programs with and without debug build type
       | 1  | drone          |
       | 2  | mindstorms     |
       | 3  | phiro          |
-    And there are programs:
+    And there are projects:
       | id | name          | description | downloads | views | upload time      | version | debug | extensions       | owned by       |
       | 1  | program 1     | p1          | 3         | 12    | 01.01.2013 12:00 | 0.9.10  | false | mindstorms,drone | GeneratedUser1 |
       | 2  | program 2     |             | 333       | 9     | 22.04.2014 13:00 | 0.9.10  | false |                  | GeneratedUser1 |
@@ -189,7 +189,7 @@ Feature: List programs with and without debug build type
     And I have a parameter "user_id" with value "1"
     When I GET "/app/api/projects/userProjects.json" with these parameters
     Then I should get a total of <total> projects
-    And I should get the programs "<programs>"
+    And I should get the projects "<programs>"
 
     Examples:
       | build type | total | programs                                    |
@@ -200,7 +200,7 @@ Feature: List programs with and without debug build type
     Given I request from a <build type> build of the Catroid app
     When searching for "debug"
     Then I should get a total of <total> projects
-    And I should get the programs "<programs>"
+    And I should get the projects "<programs>"
 
     Examples:
       | build type | total | programs      |
@@ -214,7 +214,7 @@ Feature: List programs with and without debug build type
     And I have a parameter "offset" with value "0"
     When I GET "/app/api/projects/search/<end point>.json" with these parameters
     Then I should get a total of <total> projects
-    And I should get the programs "<programs>"
+    And I should get the projects "<programs>"
 
     Examples:
       | end point         | build type | q          | programs                          | total |

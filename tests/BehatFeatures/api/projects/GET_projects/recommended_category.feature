@@ -12,7 +12,7 @@ Feature: Get recommended programs on homepage
       | 2  | Catrobat2 | 12345    | cccccccccc | 2  |
       | 3  | Catrobat3 | 12345    | cccccccccc | 3  |
       | 4  | Catrobat4 | 12345    | cccccccccc | 4  |
-    And there are programs:
+    And there are projects:
       | id | name    | description | owned by  | downloads | views | upload time      | version | language version | flavor     |
       | 1  | Game    | p4          | Catrobat4 | 5         | 1     | 01.03.2013 12:00 | 0.8.5   | 0.985            | pocketcode |
       | 2  | Minions | p1          | Catrobat1 | 3         | 12    | 01.01.2013 12:00 | 0.8.5   | 0.985            | pocketcode |
@@ -24,7 +24,7 @@ Feature: Get recommended programs on homepage
       | 8  | Other5  | p7          | Catrobat3 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | 0.999            | luna       |
       | 9  | Other6  | p7          | Catrobat2 | 1         | 9     | 01.02.2013 12:00 | 0.8.5   | 0.999            | pocketcode |
     And there are likes:
-      | username  | program_id | type | created at       |
+      | username  | project_id | type | created at       |
       | Catrobat1 | 1          | 1    | 01.01.2017 12:00 |
       | Catrobat1 | 2          | 2    | 01.01.2017 12:00 |
       | Catrobat2 | 1          | 1    | 01.01.2017 12:00 |

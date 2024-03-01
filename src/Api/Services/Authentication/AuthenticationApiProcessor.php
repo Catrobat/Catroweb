@@ -14,7 +14,9 @@ use GuzzleHttp\Client;
 
 class AuthenticationApiProcessor extends AbstractApiProcessor
 {
-  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager) {}
+  public function __construct(private readonly UserManager $user_manager, private readonly AuthenticationManager $authentication_manager)
+  {
+  }
 
   public function createJWTByUser(User $user): string
   {
@@ -145,7 +147,7 @@ class AuthenticationApiProcessor extends AbstractApiProcessor
     return $this->authentication_manager->deleteRefreshToken($x_refresh);
   }
 
-  protected function createRandomUsername(string $name = null): string
+  protected function createRandomUsername(?string $name = null): string
   {
     $username_base = 'user';
     if (!empty($name)) {

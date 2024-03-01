@@ -13,7 +13,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 class SpecialUpdaterAdminControllerTest extends DefaultTestCase
 {
-  protected SpecialUpdaterAdminController|MockObject $object;
+  protected MockObject|SpecialUpdaterAdminController $object;
 
   protected function setUp(): void
   {

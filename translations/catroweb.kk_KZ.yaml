@@ -41,7 +41,7 @@ country: Ел
 loginText: кіру
 privacyPolicy: Құпиялық саясаты
 imprint: Басып шығару
-programDetails: Детальдар
+projectDetails: Детальдар
 somethingWentWrong: 'Бірдеңе дұрыс болмады.'
 doesNotExist: 'Сұралған ресурс жоқ.'
 pleaseTryAgain: 'Қайталап көріңіз!'
@@ -94,7 +94,7 @@ follower:
   unfollowError: "Қажетті пайдаланушыға жазылудан бас тарту мүмкін емес!"
   unfollowQuestion: "Осы пайдаланушыға жазылудан бас тартқыңыз келетініне сенімдісіз бе?"
   unfollowButton: "Жазылудан бас тарту %username%"
-programs:
+project:
   welcome:
     title: Catrobat's %theme% сайтына қош келдіңіз 
     title_mindstorms: Mindstorms EV3 және NXT үшін Catrobat сайтына қош келдіңіз
@@ -102,13 +102,13 @@ programs:
     subtitle_embroidery: Өзіңіздің үлгілеріңізді футболкаларыңызға, сөмкелеріңізге, шалбарларыңызға немесе смартфондарыңызға тігіңіз!
     subtitle_mindstorms: Lego Mindstorms EV3 және NXT роботтарымен жеке жобаларыңызды жасаңыз
     download: Қолданбаны жүктеп алыңыз
-    statistics: More Statistics
+    statistics: More statistics
   featured: Таңдаулы
   example: Мысалдар
   newest: Ең жаңа жобалар
   recommended: Ұсынылған жобалар
   scratchremixes: Scratch ремикстері
-  noPrograms: Қазіргі уақытта жобалар жоқ.
+  noProjects: Қазіргі уақытта жобалар жоқ.
   deleteAction: Жобаны жою
   deleteConfirmation: |+
     Сіз сенімдісіз бе?
@@ -133,14 +133,16 @@ programs:
   reportCommentConfirmation: Осы пікірді шынымен хабарлау керек пе?
   deleteCommentConfirmation: Осы пікірді шынымен жойғыңыз келе ме?
   deleteAccountConfirmation: |+
-    Account Deletion?
+    Account deletion?
     Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
     There is no way to restore your actions!
     Yes, delete it!
     Cancel
   tooLongName: Жоба атауы тым ұзын!
   tooLongDescription: Жобаның сипаттамасы тым ұзақ!
-  tooLongCredits: The project credits are too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: Ең көп қаралды
     downloaded: Ең көп жүктелген
@@ -154,11 +156,11 @@ programs:
     all: "Барлық"
   remixes: '{0} 0 ремикс |{1}1 ремикс |]1,Inf]%remixes%ремикстер'
   newRemixesNotificationTitle: '|{1}"%programName%" 1 ремикс бар : |]1,Inf] "%programName%" %remixes% жаңа ремикстер бар:'
-  submitted: Submitted Projects
-  uploaded: Uploaded Projects
+  submitted: Submitted projects
+  uploaded: Uploaded projects
   reportAsInappropriate: Орынсыз деп хабарлау
   reportProgram: Есеп жобасы
-  languageVersion: 'Catrobat Language version: %languageVersion%'
+  languageVersion: 'Catrobat language version: %languageVersion%'
   reportLoginText: Өтінем %login% осы жобаны хабарлау үшін.
   reportDialogHeader: Неліктен бұл жоба туралы хабарлағыңыз келеді?
   reportDialogReason: Себебін енгізіңіз
@@ -172,10 +174,10 @@ programs:
   updateAppHeaderDownload: Жүктеп алу мүмкін емес
   updateAppTextDownload: Қолданбаңызды ең жаңа нұсқаға жаңартыңыз. Барлық Android мүмкіндіктері IOS жүйесінде бұрыннан қол жетімді емес екенін ескеріңіз.
   updateAppTextDownloadApk: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
-  updateAppHeader: Update App
+  updateAppHeader: Update app
   updateAppText: APK жүктеп алу әзірше iOS жүйесінде емес, Android жүйесінде ғана қолжетімді.
   btnClosePopup: Ок
-  checkout_this_program: Осы Catrobat жобасын тексеріңіз
+  checkout_this_project: Осы Catrobat жобасын тексеріңіз
   show_more: Көбірек көрсету
   comments: Пікірлер
   send: Жіберу
@@ -221,10 +223,10 @@ remixGraph:
   by: 'арқылы'
   open: 'Ашу'
   showPaths: 'Жолды көрсету'
-  programNotAvailableErrorTitle: 'Кешір...'
-  programNotAvailableErrorDescription: 'Жоба енді қолжетімді емес!'
-  programNotAvailable: 'Қолжетімсіз'
-  programUnknownUser: 'Unknown User'
+  projectNotAvailableErrorTitle: 'Кешір...'
+  projectNotAvailableErrorDescription: 'Жоба енді қолжетімді емес!'
+  projectNotAvailable: 'Қолжетімсіз'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - Бұл автоматтандырылған хабарлама - бұл эл. поштаға тікелей жауап бермеңіз
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     Құрметпен,<br>
     Сіздің Catrobat командаңыз.
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: Catrobat құпия сөзін қалпына келтіру
   message: |
@@ -395,6 +419,8 @@ menu:
   followersAndFollowing: Бақылау
   mediaLibrary: Медиатека
   studio: Studios
+  language: Тіл
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Кіру
   button:
@@ -448,6 +474,11 @@ resetPassword:
     visitLink: "Құпия сөзді қалпына келтіру үшін мына сілтемеге өтіңіз"
     expire: "Бұл сілтеменің мерзімі %time% аяқталады."
     cheers: "Ура!"
+  newemail:
+    title: "Құпиясөзді қалпына келтіру"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "Құпиясөзді қалпына келтіру"
     button:
@@ -496,11 +527,11 @@ errors:
   unknown: белгісіз қате
   token: 'Authentication of device failed: invalid auth-token!'
   uploadTokenAuthFailed: 'Upload Token auth failed.'
-  program:
+  project:
     invalid: Қате жоба.
   languageversion:
     tooold: 'Кешіріңіз, жобаңызда Катробат тілінің ескі нұсқасы бар! Сіз Pocket Code-тың соңғы нұсқасын пайдаланасыз ба?'
-  programversion:
+  projectversion:
     tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: Аутентификация орындамалды
@@ -706,8 +737,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new Project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -759,6 +790,7 @@ category:
   example: Мысал
   scratch: Scratch ремикстері
   recommended: Ұсынылған жобалар
+  popular: Most popular
 achievements:
   sidebar:
     title: 'Жетістіктер:'
@@ -854,7 +886,9 @@ studio:
   singular: 'Studio'
   create_studio: 'Create studio'
   delete_studio: 'Delete studio'
+  cancel_studio: 'Болдырмау'
   studio_name: 'Studio name'
+  studio_description: 'Studio description'
   join: 'Кіру'
   leave: 'Шығу'
   report: 'Есеп беру'
@@ -863,6 +897,7 @@ studio:
   overview:
     joined_studios: 'Joined studios'
     public_studios: 'Public studios'
+    private_studios: 'Private studios'
   details:
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
@@ -871,6 +906,11 @@ studio:
     remove_project_success: 'жоба студиядан сәттілік жойылды!'
     no_projects: 'Studio does not contain any projects yet.'
     updateCoverError: 'Something went wrong while updating the studio cover.'
+    join: 'Кіру'
+    leave: 'Шығу'
+    report: 'Есеп беру'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: 'жобалар'
     comments:
@@ -912,3 +952,12 @@ media_library:
       default: 'Түрі: белгісіз'
 snackbar:
   project_not_found: 'Сұралған жоба қолжетімді емес'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

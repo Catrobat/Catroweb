@@ -64,9 +64,26 @@ return static function (ContainerConfigurator $containerConfigurator): void {
             'private' => null,
             'visible' => null,
             'debug_build' => null,
-            'getUsernameString' => null,
             'getTagsString' => null,
             'getExtensionsString' => null,
+            'getUsernameString' => null,
+            'downloads' => [
+              'type' => 'integer',
+            ],
+            'rand' => [
+              'type' => 'integer',
+            ],
+            'popularity' => [
+              'type' => 'float',
+            ],
+            'uploaded_at' => [
+              'type' => 'date',
+              'format' => 'yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis',
+            ],
+            'last_modified_at' => [
+              'type' => 'date',
+              'format' => 'yyyy-MM-dd HH:mm:ss||strict_date_optional_time ||epoch_millis',
+            ],
           ],
           'persistence' => [
             'driver' => 'orm',

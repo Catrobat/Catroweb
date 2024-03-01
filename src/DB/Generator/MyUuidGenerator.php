@@ -14,16 +14,16 @@ use Ramsey\Uuid\Doctrine\UuidGenerator;
  */
 class MyUuidGenerator extends AbstractIdGenerator
 {
-  public function __construct(protected UuidGenerator $uuid_generator) {}
+  public function __construct(protected UuidGenerator $uuid_generator)
+  {
+  }
 
   private static string $next_value = '';
 
   /**
-   * @return string
-   *
    * @throws \Exception
    */
-  public function generate(EntityManager $em, $entity)
+  public function generate(EntityManager $em, $entity): string
   {
     $app_env = $_ENV['APP_ENV'];
 

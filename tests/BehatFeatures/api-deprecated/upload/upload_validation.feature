@@ -5,14 +5,14 @@ Feature: All uploaded programs have to be validated.
     Given I am a valid user
 
   Scenario: program must have a code.xml
-    When I upload a program with "a missing code.xml", API version 1
+    When I upload a project with "a missing code.xml", API version 1
     Then I should get the json object:
       """
       {"statusCode":507,"answer":"unknown error: project_xml_not_found!","preHeaderMessages":""}
       """
 
   Scenario: program must have a valid code.xml
-    When I upload a program with "an invalid code.xml", API version 1
+    When I upload a project with "an invalid code.xml", API version 1
     Then I should get the json object:
       """
       {"statusCode":508,"answer":"invalid code xml","preHeaderMessages":""}
@@ -21,7 +21,7 @@ Feature: All uploaded programs have to be validated.
 
   @disabled
   Scenario: program with missing images are rejected
-    When I upload a program with "a missing image", API version 1
+    When I upload a project with "a missing image", API version 1
     Then I should get the json object:
       """
       {"statusCode":524,"answer":"Project XML mentions a file which does not exist in project-folder","preHeaderMessages":""}
@@ -29,7 +29,7 @@ Feature: All uploaded programs have to be validated.
 
   @disabled
   Scenario: program with media files not defined in xml are rejected
-    When I upload a program with "an additional image", API version 1
+    When I upload a project with "an additional image", API version 1
     Then I should get the json object:
       """
       {"statusCode":525,"answer":"unexpected file found","preHeaderMessages":""}
@@ -37,7 +37,7 @@ Feature: All uploaded programs have to be validated.
     And the response code should be "500"
 
   Scenario: invalid catrobat program files should be rejected
-    When I upload an invalid program file, API version 1
+    When I upload an invalid project file, API version 1
     Then I should get the json object:
       """
       {"statusCode":505,"answer":"invalid file","preHeaderMessages":""}
@@ -45,7 +45,7 @@ Feature: All uploaded programs have to be validated.
 
   Scenario Outline: user should not be able to upload a program with an old pocketcode version
     Given I am using pocketcode for "<Platform>" with version "<Version>"
-    When I upload a generated program, API version 1
+    When I upload a generated project, API version 1
     Then I should get the json object:
     """
       {"statusCode":519,"answer":"Sorry, you are using an old version of Pocket Code. Please update to the latest version.","preHeaderMessages":""}
@@ -59,7 +59,7 @@ Feature: All uploaded programs have to be validated.
 
   Scenario Outline: user should not be able to upload a program with an old pocketcode version
     Given I am using pocketcode for "<Platform>" with version "<Version>"
-    When I upload a generated program, API version 1
+    When I upload a generated project, API version 1
     Then the uploaded project should exist in the database, API version 1
 
     Examples:
@@ -72,7 +72,7 @@ Feature: All uploaded programs have to be validated.
 
   Scenario: user should not be able to upload a program with an old language version
     Given I am using pocketcode with language version "0.7"
-    When I upload a generated program, API version 1
+    When I upload a generated project, API version 1
     Then I should get the json object:
     """
       {"statusCode":518,"answer":"Sorry, your project contains an old version of the Catrobat language! Are you using the latest version of Pocket Code?","preHeaderMessages":""}

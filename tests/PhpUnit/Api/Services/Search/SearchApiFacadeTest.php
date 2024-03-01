@@ -14,7 +14,7 @@ use PHPUnit\Framework\MockObject\MockObject;
  */
 final class SearchApiFacadeTest extends DefaultTestCase
 {
-  protected SearchApiFacade|MockObject $object;
+  protected MockObject|SearchApiFacade $object;
 
   protected function setUp(): void
   {

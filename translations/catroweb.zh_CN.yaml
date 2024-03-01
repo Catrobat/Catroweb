@@ -41,7 +41,7 @@ country: 国家
 loginText: 登录
 privacyPolicy: Chính sách bảo mật
 imprint: 版权信息
-programDetails: 详细信息
+projectDetails: 详细信息
 somethingWentWrong: '哎呀，好像哪里错了哟！'
 doesNotExist: '请求的资源不存在。'
 pleaseTryAgain: '再试一次吧！'
@@ -94,116 +94,118 @@ follower:
   unfollowError: "无法取消关注所需的用户！"
   unfollowQuestion: "确定要取消关注吗？"
   unfollowButton: "取消关注 %username%"
-programs:
+project:
   welcome:
-    title: 欢迎使用 Catrobat %theme%
-    title_mindstorms: 欢迎来到Catrobat的Mindstorms EV3和NXT的网站
-    subtitle: 书写你的故事，游戏以及更多东西...。
-    subtitle_embroidery: 在您的T恤衫、袋子、裤子或智能手机等上制作您自己的图案！
-    subtitle_mindstorms: 用乐高Mindstorms EV3和NXT机器人创建你自己的项目
-    download: 下载该APP。
-    statistics: 更多统计信息
-  featured: 经典程序
-  example: 例如
-  newest: 最新项目
-  recommended: 推荐的项目
-  scratchremixes: Scratch 混成
-  noPrograms: 目前没有项目。
+    title: Welcome to Catrobat's %theme%
+    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
+    subtitle: Create stories, games and more...
+    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
+    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
+    download: Download the app
+    statistics: More statistics
+  featured: Featured
+  example: Examples
+  newest: Newest projects
+  recommended: Recommended projects
+  scratchremixes: Scratch remixes
+  noProjects: There are currently no projects.
   deleteAction: 删除项目
   deleteConfirmation: |+
-    您确定吗？
-    您确定要删除 "%programName%"？
-    再也无法恢复您的操作！
-    是的，删除它！
-    取消
+    Are you sure?
+    Are you sure you want to delete "%programName%"?
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
   deleteNotFoundError: 在您的账户下找不到要删除的项目。
   private: 私有的
   public: 公开的
   setPrivateAction: 设为私有
   setPublicAction: 设为公开
   changeVisibility: |+
-    您确定吗？
-    如果您将 '%programName%' 设置为私密，其他用户将不会看到或找到它。
-    您仍然可以与您的朋友分享您项目的链接。 您可以切换可视性点击挂锁图标。
-    如果您设置 "%programName%" 为公开，其他用户可以看到并找到它。
-    是的，设置为公开
-    是的，设置为私人
-    否。
-  reportCommentConfirmation: 您确定要举报此评论？
-  deleteCommentConfirmation: 确实要删除此评论吗?
+    Are you sure?
+    If you set '%programName%' to private, it will not be seen or found by other users.
+    You can still share the link of your project with your friends. You can toggle the visibility tapping the padlock icon.
+    If you set "%programName%" to public, it can be seen and found by other users.
+    Yes, set to public
+    Yes, set to private
+    No
+  reportCommentConfirmation: Are you sure you want to report this comment?
+  deleteCommentConfirmation: Are you sure you want to delete this comment?
   deleteAccountConfirmation: |+
-    账户删除？
-    您确定要删除您的账户？这也会删除您上传的项目和评论！
-    再也无法恢复您的操作！
-    是的，删除它！
-    取消
-  tooLongName: 项目名称过长！
-  tooLongDescription: 项目描述太长了！
-  tooLongCredits: 项目说明和版权信息过长！
+    Account deletion?
+    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
+    There is no way to restore your actions!
+    Yes, delete it!
+    Cancel
+  tooLongName: The project name is too long!
+  tooLongDescription: The project description is too long!
+  tooLongCredits: The project notes and credits are too long!
+  trending: Trending projects
+  popular: Popular projects
   most:
     viewed: 看得最多的
     downloaded: 下载得最多的
-  random: 随机项目
-  related: 相关项目
-  downloads: '%downloads% 下载'
-  sample: 范例项目
-  views: '%views% 查看'
+  random: Random projects
+  related: Related projects
+  downloads: '%downloads% downloads'
+  sample: Example projects
+  views: '%views% views'
   likes:
-    likersTitle: "对该项目作出反应的人"
+    likersTitle: "People who reacted to that project"
     all: "所有"
-  remixes: '{0}0 调制 |{1}1 调制 |]1，Inf]%remixes% 调制'
-  newRemixesNotificationTitle: '|{1}"%programName%"有 1 个新调制: |]1，Inf]"%programName%"有 %remixes% 个新调制：'
-  submitted: 提交的项目
-  uploaded: 上传的项目
-  reportAsInappropriate: 举报为不适当
-  reportProgram: 报告项目
-  languageVersion: 'Catrobat语言版: %languageVersion%'
-  reportLoginText: 请 %login% 报告此项目。
-  reportDialogHeader: 您为什么想要举报此项目？
-  reportDialogReason: 给个理由先
-  reportRadioButtonInappropriate: 有不当内容
-  reportRadioButtonCopyright: 版权侵犯
-  reportRadioButtonSpam: 是垃圾邮件
-  reportRadioButtonDislike: 我不喜欢
-  reportOwnProgram: 您不能标记您自己的项目。
-  reportAlready: 您已经标记了这个项目。
-  reportDone: 您举报了这个项目！
-  updateAppHeaderDownload: 无法下载
-  updateAppTextDownload: 请更新您的应用程序到最新版本。请注意，iOS 上并非所有的 Android 功能都可用。
-  updateAppTextDownloadApk: 目前仅在 Android 上提供APK下载，iOS 上暂不可用。
-  updateAppHeader: 升级
-  updateAppText: 请更新您的应用到最新版本以便能够下载此项目。
+  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  newRemixesNotificationTitle: '|{1}"%programName%" has 1 new remix: |]1,Inf] "%programName%" has %remixes% new remixes:'
+  submitted: Submitted projects
+  uploaded: Uploaded projects
+  reportAsInappropriate: Report as inappropriate
+  reportProgram: Report project
+  languageVersion: 'Catrobat language version: %languageVersion%'
+  reportLoginText: Please %login% to report this project.
+  reportDialogHeader: Why do you want to report this project?
+  reportDialogReason: Enter a reason
+  reportRadioButtonInappropriate: It's inappropriate
+  reportRadioButtonCopyright: Copyright infringement
+  reportRadioButtonSpam: It's spam
+  reportRadioButtonDislike: I don't like it
+  reportOwnProgram: You cannot flag your own project.
+  reportAlready: You've already flagged this project.
+  reportDone: You reported this project!
+  updateAppHeaderDownload: Download not possible
+  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
+  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
+  updateAppHeader: Update app
+  updateAppText: Please update your app to the newest version.
   btnClosePopup: 好
-  checkout_this_program: 检查这个Catrobat项目
-  show_more: 显示更多
+  checkout_this_project: Checkout this Catrobat project
+  show_more: Show More
   comments: 评论
-  send: 发送
+  send: Send
   delete: 删除
   report: 报告
-  report_popup: 您的评论以成功发送
-  report_popup_header: 已发送
-  deleted_popup: 评论已成功删除。
-  deleted_popup_header: 已删除
-  noAdminRights: 您没有管理员权限。请以管理员身份登录。
-  editProject: 编辑项目
-  closeProjectEditor: 关闭项目编辑器
+  report_popup: The comment was successfully reported.
+  report_popup_header: Reported
+  deleted_popup: The comment was successfully deleted.
+  deleted_popup_header: Deleted
+  noAdminRights: You have no admin rights. Please Log in as an Admin.
+  editProject: Edit the project
+  closeProjectEditor: Close project editor
   closeEditorPrompt: 您要保存这些更改吗？
   btnDiscard: 放弃
-  addComment: 写评论
-  thumbsUp: 赞
-  smile: 微笑
-  love: 爱！
-  wow: 哇！
-  linkTitle: 链接
-  link: 复制项目链接到剪贴板
+  addComment: Write a comment
+  thumbsUp: Thumbs up!
+  smile: Smile!
+  love: Love!
+  wow: Wooow!
+  linkTitle: Link
+  link: Copy project link to clipboard
   reactionsText: 我喜欢的
-  downloadErrorText: 下载项目时出错。请稍后再试。
-  downloadStartText: 下载已开始...
-  showTranslation: 显示翻译
-  hideTranslation: 隐藏翻译
-  translatedByLine: 由%provider%从%sourceLanguage%翻译成%targetLanguage%
-  googleTranslate: 谷歌翻译
-  confrimDelete: 您确定要删除该翻译吗？
+  downloadErrorText: Error occurred while downloading the project. Please try again later.
+  downloadStartText: Download has started...
+  showTranslation: Show translation
+  hideTranslation: Hide translation
+  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
+  googleTranslate: Google Translate
+  confrimDelete: Are you sure you want to delete the translation?
   default: 默认
   save: 保存
   translationTitle: '%language% 翻译'
@@ -220,10 +222,10 @@ remixGraph:
   by: 'bởi'
   open: '打开 '
   showPaths: '显示路径'
-  programNotAvailableErrorTitle: '抱歉...'
-  programNotAvailableErrorDescription: '该项目不再可用！'
-  programNotAvailable: '暂不可用'
-  programUnknownUser: '未知用户'
+  projectNotAvailableErrorTitle: 'Sorry...'
+  projectNotAvailableErrorDescription: 'The project is not available any more!'
+  projectNotAvailable: 'Not available'
+  projectUnknownUser: 'Unknown user'
 noReply:
   - 这是自动发送的消息 - 请不要直接回复此邮件。
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     最好的祝福，<br>
     您的 Catrobat 团队。
     </p>
+newAccountConfirmation:
+  subject: Please verify your E-Mail-Address
+  welcome: Welcome to Catrobat Community!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: CONFIRM E-MAIL
+  delete: You can delete your account here at any time.
+  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
 passwordRecovery:
   subject: 密码找回
   message: |
@@ -401,6 +425,8 @@ menu:
   followersAndFollowing: 关注者
   mediaLibrary: 媒体库
   studio: 工作室
+  language: 语言
+  languageOptionsNotAvailable: No language options available.
 login:
   login: 登录
   button:
@@ -454,6 +480,11 @@ resetPassword:
     visitLink: "要重置您的密码，请访问以下链接"
     expire: "此链接将在 %time% 后过期。"
     cheers: "恭喜！"
+  newemail:
+    title: "重置您的密码"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: RESET PASSWORD
+    expire: This link is valid for %time% - only one time use!
   reset:
     title: "重置您的密码"
     button:
@@ -502,12 +533,12 @@ errors:
   unknown: 未知错误
   token: '设备验证失败： 无效的验证标记！'
   uploadTokenAuthFailed: '上传令牌认证失败。'
-  program:
-    invalid: 无效的项目。
+  project:
+    invalid: Invalid project.
   languageversion:
     tooold: '对不起，您的项目包含旧版本的 Catrobat 语言！您是否使用最新版本的口袋编程？'
-  programversion:
-    tooold: '抱歉，您正在使用旧版本的口袋编程。请更新到最新版本。'
+  projectversion:
+    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
   authentication:
     title: 身份验证失败
     webview: |
@@ -712,8 +743,8 @@ catro-notifications:
     message: 'User %user_link% reacted to your project %program_link%.'
   follow:
     message: 'User %user_link% follows you now.'
-  program-upload:
-    message: 'User %user_link% created a new project %program_link%'
+  project-upload:
+    message: '%user_link% created a new game %program_link%.'
   remix:
     message: 'User %user_link% remixed your project %program_link%. You can see the remix on the following link %remix_program_link%.'
 clipboard:
@@ -758,13 +789,14 @@ checkOutUser: '查看此用户：'
 community: 'Catrobat社区'
 back_to_app: '退出社区'
 category:
-  recent: 最新项目
-  random: 随机项目
+  recent: Newest projects
+  random: Random projects
   most_viewed: 看得最多的
   most_downloaded: 下载得最多的
   example: 示例
-  scratch: Scratch 混成
-  recommended: 推荐的项目
+  scratch: Scratch remixes
+  recommended: Recommended projects
+  popular: Most popular
 achievements:
   sidebar:
     title: '成就'
@@ -860,7 +892,9 @@ studio:
   singular: '工作室'
   create_studio: '创建工作室'
   delete_studio: '删除工作室'
+  cancel_studio: '取消'
   studio_name: '工作室名称'
+  studio_description: 'Studio description'
   join: '加入'
   leave: '退出'
   report: '报告'
@@ -869,6 +903,7 @@ studio:
   overview:
     joined_studios: '加入的工作室'
     public_studios: '公开的工作室'
+    private_studios: 'Private studios'
   details:
     showMore: '显示更多'
     showLess: '显示更多'
@@ -877,6 +912,11 @@ studio:
     remove_project_success: '项目已成功从工作室移除！'
     no_projects: '工作室尚未包含任何项目'
     updateCoverError: '更新工作室封面时出了错！'
+    join: '加入'
+    leave: '退出'
+    report: '报告'
+    pending: 'Pending'
+    decline: 'Declined'
     projects:
       title: '项目'
     comments:
@@ -918,3 +958,12 @@ media_library:
       default: '类型：未知'
 snackbar:
   project_not_found: '请求的项目不可用'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Additional information: additionalInfo'
+    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
+    feature_2: 'The Feature'
+    feature_3: 'The Feature'
+
+
+

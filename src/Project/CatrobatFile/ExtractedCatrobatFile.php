@@ -12,7 +12,7 @@ use Symfony\Component\Finder\Finder;
 
 class ExtractedCatrobatFile
 {
-  protected \SimpleXMLElement $program_xml_properties;
+  protected \SimpleXMLElement $project_xml_properties;
 
   private array $xml_filenames;
 
@@ -38,12 +38,12 @@ class ExtractedCatrobatFile
     if (!$xml) {
       throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }
-    $this->program_xml_properties = $xml;
+    $this->project_xml_properties = $xml;
   }
 
   public function getName(): string
   {
-    return (string) $this->program_xml_properties->header->programName;
+    return (string) $this->project_xml_properties->header->programName;
   }
 
   /**
@@ -51,26 +51,26 @@ class ExtractedCatrobatFile
    */
   public function setName(string $name): void
   {
-    $this->program_xml_properties->header->programName = $name;
+    $this->project_xml_properties->header->programName = $name;
   }
 
   public function isDebugBuild(): bool
   {
-    if (!isset($this->program_xml_properties->header->applicationBuildType)) {
-      return false; // old program do not have this field, + they should be release programs
+    if (!isset($this->project_xml_properties->header->applicationBuildType)) {
+      return false; // old project do not have this field, + they should be release projects
     }
 
-    return 'debug' === (string) $this->program_xml_properties->header->applicationBuildType;
+    return 'debug' === (string) $this->project_xml_properties->header->applicationBuildType;
   }
 
   public function getLanguageVersion(): string
   {
-    return (string) $this->program_xml_properties->header->catrobatLanguageVersion;
+    return (string) $this->project_xml_properties->header->catrobatLanguageVersion;
   }
 
   public function getDescription(): string
   {
-    return (string) $this->program_xml_properties->header->description;
+    return (string) $this->project_xml_properties->header->description;
   }
 
   /**
@@ -78,12 +78,12 @@ class ExtractedCatrobatFile
    */
   public function setDescription(string $description): void
   {
-    $this->program_xml_properties->header->description = $description;
+    $this->project_xml_properties->header->description = $description;
   }
 
   public function getNotesAndCredits(): string
   {
-    return (string) $this->program_xml_properties->header->notesAndCredits;
+    return (string) $this->project_xml_properties->header->notesAndCredits;
   }
 
   /**
@@ -91,7 +91,7 @@ class ExtractedCatrobatFile
    */
   public function setNotesAndCredits(string $notesAndCredits): void
   {
-    $this->program_xml_properties->header->notesAndCredits = $notesAndCredits;
+    $this->project_xml_properties->header->notesAndCredits = $notesAndCredits;
   }
 
   public function getDirHash(): ?string
@@ -101,9 +101,9 @@ class ExtractedCatrobatFile
 
   public function getTags(): array
   {
-    $tags = (string) $this->program_xml_properties->header->tags;
+    $tags = (string) $this->project_xml_properties->header->tags;
     if (strlen($tags) > 0) {
-      return explode(',', (string) $this->program_xml_properties->header->tags);
+      return explode(',', (string) $this->project_xml_properties->header->tags);
     }
 
     return [];
@@ -197,17 +197,17 @@ class ExtractedCatrobatFile
 
   public function getApplicationVersion(): string
   {
-    return (string) $this->program_xml_properties->header->applicationVersion;
+    return (string) $this->project_xml_properties->header->applicationVersion;
   }
 
   public function getRemixUrlsString(): string
   {
-    return trim((string) $this->program_xml_properties->header->url);
+    return trim((string) $this->project_xml_properties->header->url);
   }
 
   public function getRemixMigrationUrlsString(): string
   {
-    return trim((string) $this->program_xml_properties->header->remixOf);
+    return trim((string) $this->project_xml_properties->header->remixOf);
   }
 
   public function getPath(): string
@@ -220,17 +220,17 @@ class ExtractedCatrobatFile
     return $this->web_path;
   }
 
-  public function getProgramXmlProperties(): \SimpleXMLElement
+  public function getProjectXmlProperties(): \SimpleXMLElement
   {
-    return $this->program_xml_properties;
+    return $this->project_xml_properties;
   }
 
   /**
    * @throws \Exception
    */
-  public function saveProgramXmlProperties(): void
+  public function saveProjectXmlProperties(): void
   {
-    $file_overwritten = $this->program_xml_properties->asXML($this->path.'code.xml');
+    $file_overwritten = $this->project_xml_properties->asXML($this->path.'code.xml');
     if (!$file_overwritten) {
       throw new \Exception("Can't overwrite code.xml file");
     }
@@ -251,7 +251,7 @@ class ExtractedCatrobatFile
   /**
    * based on: http://stackoverflow.com/a/27295688.
    */
-  public function getRemixesData(string $program_id, bool $is_initial_version, ProgramRepository $program_repository, bool $migration_mode = false): array
+  public function getRemixesData(string $project_id, bool $is_initial_version, ProgramRepository $project_repository, bool $migration_mode = false): array
   {
     $remixes_string = $migration_mode ? $this->getRemixMigrationUrlsString() : $this->getRemixUrlsString();
     $state = RemixUrlParsingState::STARTING;
@@ -291,25 +291,25 @@ class ExtractedCatrobatFile
     $unique_remixes = [];
     foreach ($extracted_remixes as $remix_data) {
       /** @var RemixData $remix_data */
-      if ('' === $remix_data->getProgramId()) {
+      if ('' === $remix_data->getProjectId()) {
         continue;
       }
 
-      if (!$remix_data->isScratchProgram()) {
+      if (!$remix_data->isScratchProject()) {
         // projects can't be a remix of them self
-        if ($remix_data->getProgramId() === $program_id) {
+        if ($remix_data->getProjectId() === $project_id) {
           continue;
         }
 
         // This id/date back and forth is for the legacy spec tests.
         // Real world scenarios should always be in the date scenario
-        $parent_upload_time = $remix_data->getProgramId();
-        $child_upload_time = $program_id;
+        $parent_upload_time = $remix_data->getProjectId();
+        $child_upload_time = $project_id;
 
         $parent = null;
         $child = null;
-        $parent = $program_repository->find($remix_data->getProgramId());
-        $child = $program_repository->find($program_id);
+        $parent = $project_repository->find($remix_data->getProjectId());
+        $child = $project_repository->find($project_id);
 
         if (null !== $parent && null !== $child) {
           $parent_upload_time = $parent->getUploadedAt();
@@ -322,7 +322,7 @@ class ExtractedCatrobatFile
         }
       }
 
-      $unique_key = $remix_data->getProgramId().'_'.$remix_data->isScratchProgram();
+      $unique_key = $remix_data->getProjectId().'_'.$remix_data->isScratchProject();
       if (!array_key_exists($unique_key, $unique_remixes)) {
         $unique_remixes[$unique_key] = $remix_data;
       }
@@ -345,7 +345,7 @@ class ExtractedCatrobatFile
   public function getCodeObjects(): array
   {
     $objects = [];
-    $objectList = $this->program_xml_properties->objectList->children();
+    $objectList = $this->project_xml_properties->objectList->children();
     foreach ($objectList as $object) {
       $newObject = $this->getObject($object);
       if (null != $newObject) {
@@ -358,7 +358,7 @@ class ExtractedCatrobatFile
 
   public function hasScenes(): bool
   {
-    return 0 !== count($this->program_xml_properties->xpath('//scenes'));
+    return 0 !== count($this->project_xml_properties->xpath('//scenes'));
   }
 
   private function getObject(\SimpleXMLElement $objectTree): ?CodeObject

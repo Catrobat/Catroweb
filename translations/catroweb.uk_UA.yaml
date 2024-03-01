@@ -41,7 +41,7 @@ country: Країна
 loginText: Увійти в обліковий запис
 privacyPolicy: Політика конфіденційності
 imprint: Контактні дані
-programDetails: Подробиці
+projectDetails: Подробиці
 somethingWentWrong: 'Упс, щось пішло не так.'
 doesNotExist: 'Наведеного ресурсу не існує.'
 pleaseTryAgain: 'Будь ласка, спробуйте ще раз!'
@@ -94,74 +94,76 @@ follower:
   unfollowError: "Не вдалося відписатися від даного користувача!"
   unfollowQuestion: "Ви дійсно хочете відписатися від цього користувача?"
   unfollowButton: "Відписатися від %username%"
-programs:
+project:
   welcome:
-    title: Ласкаво просимо в %theme% від Catrobat
-    title_mindstorms: Ласкаво просимо на сайт Catrobat для Mindstorms EV3 та NXT
+    title: Ласкаво просимо на вебсайт %theme% від Catrobat
+    title_mindstorms: Ласкаво просимо на вебсайт Catrobat для Mindstorms EV3 та NXT
     subtitle: Створюйте історії, ігри та багато іншого...
-    subtitle_embroidery: Вишийте власні візерунки на футболках, сумках, штанах та чохлах для смартфона!
-    subtitle_mindstorms: Створіть свої власні проєкти використовуючи роботів Lego Mindstorms EV3 та NXT
-    download: Завантажити додаток
+    subtitle_embroidery: Зшивайте власні візерунки на футболках, сумках, штанах чи чохлах для смартфонів!
+    subtitle_mindstorms: Створюйте власні проєкти з роботами Лего Mindstorms EV3 та NXT
+    download: Завантажити застосунок
     statistics: Більше статистики
-  featured: Рекомендовані
+  featured: Популярне
   example: Приклади
   newest: Нещодавні проєкти
   recommended: Рекомендовані проєкти
   scratchremixes: Scratch ремікси
-  noPrograms: Наразі немає проєктів.
+  noProjects: Наразі немає проєктів.
   deleteAction: Видалити проєкт
   deleteConfirmation: |+
     Ви впевнені?
-    Ви впевнені, що хочете видалити "%programName%"?
-    Відновити ваші дії буде неможливо!
-    Так, видалити це!
+    Ви дійсно бажаєте видалити «%programName%»?
+    Відновити свої дії буде неможливо!
+    Так, видалити!
     Скасувати
-  deleteNotFoundError: Проєкт, який ви хочете видалити не було знайдено у вашому профілі.
+  deleteNotFoundError: Проєкт, який потрібно видалити, не було знайдено під вашим ім’ям користувача.
   private: приватний
   public: публічний
   setPrivateAction: Зробити приватним
   setPublicAction: Зробити публічним
   changeVisibility: |+
     Ви впевнені?
-    Якщо встановити «%programName%» як приватний, його не побачать і не знайдуть інші користувачі.
+    Якщо задати проєкт «%programName%» як приватний, його не побачать і не знайдуть інші користувачі.
     Ви все ще можете поділитися посиланням на свій проєкт зі своїми друзями. Ви можете перемикати видимість, натиснувши піктограму замка.
-    Якщо встановити «%programName%» як публічний, його можуть побачити та знайти інші користувачі.
-    Так, установити публічний
-    Так, установити приватний
-    Ні 
-  reportCommentConfirmation: Ви впевнені, що хочете поскаржитися на цей коментар?
-  deleteCommentConfirmation: Ви впевнені, що хочете видалити цей коментар?
+    Якщо задати проєкт «%programName%» як публічний, його зможуть побачити та знайти інші користувачі.
+    Так, задати як публічний
+    Так, задати як приватний
+    Ні
+  reportCommentConfirmation: Ви дійсно бажаєте повідомити про цей коментар?
+  deleteCommentConfirmation: Ви дійсно бажаєте видалити цей коментар?
   deleteAccountConfirmation: |+
     Видалення облікового запису? 
-    Ви впевнені, що хочете видалити свій обліковий запис? 
-    Це також видалить ваші завантажені проєкти та коментарі! 
-    Відновити свої дії неможливо! 
+    Ви дійсно бажаєте видалити свій обліковий запис? 
+    Це також видалить ваші вивантажені проєкти та коментарі! 
+    Відновити свої дії буде неможливо! 
     Так, видалити! 
     Скасувати
-  tooLongName: Назва проєкту надто довге!
-  tooLongDescription: Опис проэкту надто довге!
-  tooLongCredits: Примітки та автори проєкту надто довгі!
+  tooLongName: Назва проєкту задовга!
+  tooLongDescription: Опис проєкту задовгий!
+  tooLongCredits: Примітки та автори до проєкту задовгі!
+  trending: Трендові проєкти
+  popular: Популярні проєкти
   most:
-    viewed: Найчастіше переглянуті
-    downloaded: Найчастіше завантажувані
+    viewed: Найбільше переглянуті
+    downloaded: Найбільше завантажені
   random: Випадкові проєкти
   related: Пов’язані проєкти
   downloads: '%downloads% завантажень'
-  sample: Приклад проєктів
+  sample: Приклади проєктів
   views: '%views% перегляд(-ів)'
   likes:
     likersTitle: "Люди, які відреагували на цей проєкт"
     all: "Усі"
-  remixes: '{0}0 реміксів |{1}1 реміксів |]1,Inf]%remixes% реміксів'
-  newRemixesNotificationTitle: '{1}"%programName%" має 1 новий ремікс: |] 1,Inf] "%programName%" має %remixes% нових реміксів: '
+  remixes: '{0}0 реміксів |{1}1 ремікс|]1,Inf]%remixes% ремікси'
+  newRemixesNotificationTitle: '|{1}«%programName%» має й новий ремікс: |]1,Inf] «%programName%» має нові ремікси (%remixes%):'
   submitted: Подані проєкти
   uploaded: Вивантажені проєкти
-  reportAsInappropriate: Поскаржитись
-  reportProgram: Поскаржитись на проєкт
+  reportAsInappropriate: Повідомити як недоречний
+  reportProgram: Повідомити про проєкт
   languageVersion: 'Версія мови Catrobat: %languageVersion%'
-  reportLoginText: Будь ласка, увійдіть в %login%, щоб поскаржитись на цей проєкт.
-  reportDialogHeader: Чому ви хочете поскаржитись на це проєкт?
-  reportDialogReason: Введіть причину
+  reportLoginText: Будь ласка, увійдіть в %login%, щоб повідомити про цей проєкт.
+  reportDialogHeader: Чому ви хочете повідомити на це проєкт?
+  reportDialogReason: Уведіть причину
   reportRadioButtonInappropriate: Це недоречно
   reportRadioButtonCopyright: Порушення авторських прав
   reportRadioButtonSpam: Це спам
@@ -175,7 +177,7 @@ programs:
   updateAppHeader: Оновити додаток
   updateAppText: Будь ласка, оновіть додаток до найновішої версії.
   btnClosePopup: Гаразд
-  checkout_this_program: Оцініть цей Catrobat проєкт
+  checkout_this_project: Оцініть цей Catrobat проєкт
   show_more: Показати більше
   comments: Коментарі
   send: Надіслати
@@ -205,11 +207,11 @@ programs:
   translatedByLine: 'Перекладано %provider% з мови: %sourceLanguage%, на мову: %targetLanguage%'
   googleTranslate: Перекладач Google
   confrimDelete: Ви справді хочете видалити цей переклад?
-  default: Стандартний
+  default: За замовчуванням
   save: Зберегти
   translationTitle: 'Переклад: %language%'
   editDefault: Редагувати стандартний
-  editTranslation: Редагувати %language% переклад
+  editTranslation: 'Редагувати переклад мовою: %language%'
   translations: Переклади
   createTranslation: Створити переклад
   deletedComment: '**Видалено**'
@@ -221,10 +223,10 @@ remixGraph:
   by: 'від'
   open: 'Відкрито'
   showPaths: 'Показати контури'
-  programNotAvailableErrorTitle: 'Вибачте...'
-  programNotAvailableErrorDescription: 'Проєкт більше не доступний!'
-  programNotAvailable: 'Недоступно'
-  programUnknownUser: 'Невідомий користувач'
+  projectNotAvailableErrorTitle: 'Вибачте...'
+  projectNotAvailableErrorDescription: 'Проєкт більше не доступний!'
+  projectNotAvailable: 'Недоступно'
+  projectUnknownUser: 'Невідомий користувач'
 noReply:
   - Це автоматичне повідомлення - Будь ласка, не відповідайте безпосередньо на цей електронний лист.
 accountConfirmation:
@@ -245,6 +247,28 @@ accountConfirmation:
     З найщирішими побажаннями,<br>
     Команда Catrobat.
     </p>
+newAccountConfirmation:
+  subject: Будь ласка, підтвердьте свою адресу ел. пошти
+  welcome: Вітаємо в спільноті Catrobat!
+  message: |
+    Please verify your E-Mail-Address
+    Welcome to Catrobat Community
+    With just one click on the button below
+    you can verify your regestration at Catrobat.
+    This link is valid until %time% and can be
+    used only once to confirm your email address.
+  messageHtml: |
+    <p>
+    With just one click on the button below<br>
+    you can verify your regestration at Catrobat.<br>
+    <br>
+    <br>
+    This link is valid until %time% and can be<br>
+    used only once to confirm your email address.<br>
+    </p>
+  button: ПІДТВЕРДИТИ ПОШТУ
+  delete: Ви можете видалити свій обліковий запис будь-коли.
+  deleteHtml: Ви можете <a href="%deleteUrl%">видалити</a> свій обліковий запис будь-коли.
 passwordRecovery:
   subject: Відновлення пароля Catrobat
   message: |
@@ -396,6 +420,8 @@ menu:
   followersAndFollowing: Підписник
   mediaLibrary: Медіатека
   studio: Студії
+  language: Мова
+  languageOptionsNotAvailable: Доступні мови відсутні.
 login:
   login: Увійти в обліковий запис
   button:
@@ -449,6 +475,11 @@ resetPassword:
     visitLink: "Щоб скинути пароль, відвідайте наступне посилання"
     expire: "Термін дії цього посилання минає через %time%."
     cheers: "Бувай!"
+  newemail:
+    title: "Скинути свій пароль"
+    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
+    visitLink: СКИНУТИ ПАРОЛЬ
+    expire: Посилання дійсне протягом %time% — лише на один раз!
   reset:
     title: "Скинути свій пароль"
     button:
@@ -497,12 +528,12 @@ errors:
   unknown: Невідома помилка
   token: 'Не вдалося виконати автентифікацію пристрою: неприпустимий auth-token!'
   uploadTokenAuthFailed: 'Помилка автентифікації токена завантаження.'
-  program:
-    invalid: Неприпустимий проєкт.
+  project:
+    invalid: Недійсний проєкт.
   languageversion:
     tooold: 'Вибачте, ваш проєкт містить стару версію мови Catrobat! Ви використовуєте останню версію Pocket Code? '
-  programversion:
-    tooold: 'На жаль, ви використовуєте стару версію Pocket Code. Будь ласка, оновіть до останньої версії.'
+  projectversion:
+    tooold: 'Ви використовуєте стару версію Pocket Code. Будь ласка, оновіть застосунок до останньої версії.'
   authentication:
     title: Помилка автентифікації
     webview: |
@@ -569,8 +600,8 @@ language:
   arabic: Арабська
   bulgarian: Болгарська
   catalan: Каталанська
-  chinese_simplified_han: Китайська (спрощене письмо)
-  chinese_traditional_han: Китайська (Традиційне письмо)
+  chinese_simplified_han: Китайська (Спрощена)
+  chinese_traditional_han: Китайська (Традиційна)
   croatian: Хорватська
   czech: Чеська
   danish: Датська
@@ -600,7 +631,7 @@ language:
   portuguese_portugal: Португальська (Португалія)
   romanian: Румунська
   russian: Російська
-  serbian: Сербський
+  serbian: Сербська
   slovak: Словацька
   slovenian: Словенська
   spanish_latin_america: Іспанська (Латинська Америка)
@@ -707,7 +738,7 @@ catro-notifications:
     message: '%user_link% реагує в %program_link%.'
   follow:
     message: '%user_link% підписується на вас.'
-  program-upload:
+  project-upload:
     message: '%user_link% опубліковує нову гру %program_link%.'
   remix:
     message: '%user_link% опубліковує ремікс %program_link% вашої гри %remix_program_link%.'
@@ -760,6 +791,7 @@ category:
   example: Приклад
   scratch: Scratch ремікси
   recommended: Рекомендовані проєкти
+  popular: Найпопулярніше
 achievements:
   sidebar:
     title: 'Досягнення'
@@ -847,7 +879,7 @@ extensions:
     embroidery:
       title: Вишивка
     mindstorms:
-      title: Мозкові бурі
+      title: Mindstorms
     multiplayer:
       title: Мережева гра
 studio:
@@ -855,7 +887,9 @@ studio:
   singular: 'Студія'
   create_studio: 'Створити студію'
   delete_studio: 'Видалити студію'
+  cancel_studio: 'Скасувати'
   studio_name: 'Назва студії'
+  studio_description: 'Опис студії'
   join: 'Приєднатися'
   leave: 'Покинути'
   report: 'Скарга'
@@ -864,6 +898,7 @@ studio:
   overview:
     joined_studios: 'Приєднані студії'
     public_studios: 'Публічні студії'
+    private_studios: 'Приватні студії'
   details:
     showMore: 'Показати більше'
     showLess: 'Показати менше'
@@ -872,6 +907,11 @@ studio:
     remove_project_success: 'Проєкт успішно видалено зі студії!'
     no_projects: 'Студія ще не містить жодних проєктів'
     updateCoverError: 'Під час оновлення зображення сталася помилка!'
+    join: 'Приєднатися'
+    leave: 'Покинути'
+    report: 'Скарга'
+    pending: 'Очікування'
+    decline: 'Відхилено'
     projects:
       title: 'проєкти'
     comments:
@@ -913,3 +953,12 @@ media_library:
       default: 'Тип: невідомий'
 snackbar:
   project_not_found: 'Потрібний проєкт недоступний'
+maintenanceinformations:
+  maintenance_information:
+    additional_info: 'Додаткові відомості: additionalInfo'
+    feature_1: 'Функція featureName недоступна з maintenanceStart до maintenanceEnd'
+    feature_2: 'Функція'
+    feature_3: 'Функція'
+
+
+

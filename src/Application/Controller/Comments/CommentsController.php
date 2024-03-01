@@ -5,7 +5,7 @@ namespace App\Application\Controller\Comments;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\Notifications\CommentNotification;
 use App\DB\Entity\User\User;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Translation\TranslationDelegate;
 use App\User\Notification\NotificationManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -19,7 +19,8 @@ class CommentsController extends AbstractController
 {
   public function __construct(
     private readonly EntityManagerInterface $entity_manager
-  ) {}
+  ) {
+  }
 
   /**
    * @throws \Exception
@@ -83,7 +84,7 @@ class CommentsController extends AbstractController
   }
 
   #[Route(path: '/comment', name: 'comment', methods: ['POST'])]
-  public function postCommentAction(NotificationManager $notification_service, ProgramManager $program_manager): Response
+  public function postCommentAction(NotificationManager $notification_service, ProjectManager $project_manager): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -92,12 +93,12 @@ class CommentsController extends AbstractController
     }
     /** @var User|null $user */
     $user = $this->getUser();
-    $program = $program_manager->find($_POST['ProgramId']);
+    $project = $project_manager->find($_POST['ProgramId']);
     $temp_comment = new UserComment();
     $temp_comment->setUsername($user->getUserIdentifier());
     $temp_comment->setUser($user);
     $temp_comment->setText($_POST['Message']);
-    $temp_comment->setProgram($program);
+    $temp_comment->setProgram($project);
     $date_time_zone = new \DateTimeZone('UTC');
     $temp_comment->setUploadDate(date_create('now', $date_time_zone));
     $temp_comment->setIsReported(false);
@@ -109,8 +110,8 @@ class CommentsController extends AbstractController
     $this->entity_manager->persist($temp_comment);
     $this->entity_manager->flush();
     $this->entity_manager->refresh($temp_comment);
-    if ($user !== $program->getUser()) {
-      $notification = new CommentNotification($program->getUser(), $temp_comment);
+    if ($user !== $project->getUser()) {
+      $notification = new CommentNotification($project->getUser(), $temp_comment);
       $notification_service->addNotification($notification);
 
       // Telling the new comment the CommentNotification it triggered. This is necessary to ensure the

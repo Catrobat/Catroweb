@@ -21,7 +21,7 @@ class ExampleRepository extends ServiceEntityRepository
   /**
    * @return Program[]
    */
-  public function getExamplePrograms(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, string $platform = null, string $max_version = null): array
+  public function getExampleProjects(bool $debug_build, ?string $flavor, ?int $limit = 20, ?int $offset = 0, ?string $platform = null, ?string $max_version = null): array
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -40,7 +40,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $qb->getQuery()->getResult();
   }
 
-  public function getExampleProgramsCount(bool $debug_build, ?string $flavor, string $max_version = null): int
+  public function getExampleProjectsCount(bool $debug_build, ?string $flavor, ?string $max_version = null): int
   {
     $qb = $this->createQueryBuilder('e');
 
@@ -56,7 +56,7 @@ class ExampleRepository extends ServiceEntityRepository
 
     try {
       $projects_count = $qb->getQuery()->getSingleScalarResult();
-    } catch (NoResultException|NonUniqueResultException) {
+    } catch (NonUniqueResultException|NoResultException) {
       $projects_count = 0;
     }
 
@@ -142,7 +142,7 @@ class ExampleRepository extends ServiceEntityRepository
     }
   }
 
-  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
+  private function addFeaturedExampleFlavorCondition(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e', bool $include_pocketcode = false): QueryBuilder
   {
     if (null !== $flavor && '' !== trim($flavor)) {
       $where = 'fl.name = :name';
@@ -159,7 +159,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, string $max_version = null, string $alias = 'e'): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null, string $alias = 'e'): QueryBuilder
   {
     if (null !== $max_version && '' !== $max_version) {
       $query_builder

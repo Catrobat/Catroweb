@@ -3,7 +3,7 @@
 namespace App\Project\CatrobatFile;
 
 use App\DB\Entity\Project\Program;
-use App\Project\ProgramManager;
+use App\Project\ProjectManager;
 use App\Storage\FileHelper;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
@@ -15,7 +15,7 @@ class ExtractedFileRepository
   private readonly string $web_path;
 
   public function __construct(ParameterBagInterface $parameter_bag,
-    private readonly ProgramManager $program_manager,
+    private readonly ProjectManager $project_manager,
     private readonly LoggerInterface $logger)
   {
     $local_extracted_path = (string) $parameter_bag->get('catrobat.file.extract.dir');
@@ -34,29 +34,29 @@ class ExtractedFileRepository
     return $this->local_path.$id.'/';
   }
 
-  public function loadProgramExtractedFile(Program $program): ?ExtractedCatrobatFile
+  public function loadProjectExtractedFile(Program $project): ?ExtractedCatrobatFile
   {
     try {
-      $program_id = $program->getId();
+      $project_id = $project->getId();
 
-      return new ExtractedCatrobatFile($this->getBaseDir($program_id), $this->web_path.$program_id.'/', $program_id);
+      return new ExtractedCatrobatFile($this->getBaseDir($project_id), $this->web_path.$project_id.'/', $project_id);
     } catch (InvalidCatrobatFileException) {
       return null;
     }
   }
 
-  public function removeProgramExtractedFile(Program $program): void
+  public function removeProjectExtractedFile(Program $project): void
   {
     try {
-      $program_id = $program->getId();
+      $project_id = $project->getId();
 
-      if (null === $program_id || !is_dir($this->local_path.$program_id.'/')) {
+      if (null === $project_id || !is_dir($this->local_path.$project_id.'/')) {
         return; // nothing to do
       }
 
-      $extract_dir = $this->local_path.$program_id.'/';
+      $extract_dir = $this->local_path.$project_id.'/';
       FileHelper::removeDirectory($extract_dir);
-      $this->program_manager->save($program);
+      $this->project_manager->save($project);
     } catch (\Exception $e) {
       $this->logger->error(
         "Removing extracted project files failed with code '".$e->getCode().
@@ -68,9 +68,9 @@ class ExtractedFileRepository
   /**
    * @throws \Exception
    */
-  public function saveProgramExtractedFile(ExtractedCatrobatFile $extracted_file): void
+  public function saveProjectExtractedFile(ExtractedCatrobatFile $extracted_file): void
   {
-    $file_overwritten = $extracted_file->getProgramXmlProperties()->asXML($extracted_file->getPath().'code.xml');
+    $file_overwritten = $extracted_file->getProjectXmlProperties()->asXML($extracted_file->getPath().'code.xml');
     if (!$file_overwritten) {
       throw new \Exception("Can't overwrite code.xml file");
     }

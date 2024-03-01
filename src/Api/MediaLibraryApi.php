@@ -10,7 +10,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class MediaLibraryApi extends AbstractApiController implements MediaLibraryApiInterface
 {
-  public function __construct(private readonly MediaLibraryApiFacade $facade) {}
+  public function __construct(private readonly MediaLibraryApiFacade $facade)
+  {
+  }
 
   public function mediaFilesSearchGet(string $query, int $limit, int $offset, string $attributes, string $flavor, string $package_name, int &$responseCode, array &$responseHeaders): array
   {

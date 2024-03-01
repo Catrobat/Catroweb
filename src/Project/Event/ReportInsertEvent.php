@@ -7,7 +7,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ReportInsertEvent extends Event
 {
-  public function __construct(protected ?string $category, protected ?string $note, protected ProgramInappropriateReport $program) {}
+  public function __construct(protected ?string $category, protected ?string $note, protected ProgramInappropriateReport $project)
+  {
+  }
 
   public function getCategory(): ?string
   {
@@ -21,6 +23,6 @@ class ReportInsertEvent extends Event
 
   public function getReport(): ProgramInappropriateReport
   {
-    return $this->program;
+    return $this->project;
   }
 }
