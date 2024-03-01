@@ -5,6 +5,58 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+
+## [v24.3.0]
+
+Switched to new versioning scheme. This is the first release with the new versioning scheme (year.month.patch).
+
+## What's Changed
+* SHARE-545 Small fixes by @schaubes in https://github.com/Catrobat/Catroweb/pull/3740
+* SHARE-539 Improve feedback for download project button by @EifonUser in https://github.com/Catrobat/Catroweb/pull/3745
+* Emails switch provider to sendInBlue by @dmetzner in https://github.com/Catrobat/Catroweb/pull/3751
+* Adding indexes for project/user by @dmetzner in https://github.com/Catrobat/Catroweb/pull/3752
+* Remove jquery from start page & prevent unnecessary 2nd query… by @dmetzner in https://github.com/Catrobat/Catroweb/pull/3753
+* Elasticsearch analyzer settings was not applied by @danielzhang130 in https://github.com/Catrobat/Catroweb/pull/3786
+* Hotfix comments performance by @dmetzner in https://github.com/Catrobat/Catroweb/pull/3816
+* SHARE-434 Add studio overview by @schaubes in https://github.com/Catrobat/Catroweb/pull/3442
+* SHARE-540 User profile page Project pagination by @bonbuo in https://github.com/Catrobat/Catroweb/pull/3877
+* SHARE-518 Enhance Email validation by @EifonUser in https://github.com/Catrobat/Catroweb/pull/3908
+* SHARE-524 Feedback for password reset attempts by @EifonUser in https://github.com/Catrobat/Catroweb/pull/3907
+* SHARE-543 Project download as non-user throws ugly error by @EifonUser in https://github.com/Catrobat/Catroweb/pull/3787
+* SHARE-327 Scratch Project Notes and Credits by @bonbuo in https://github.com/Catrobat/Catroweb/pull/3946
+* SHARE-541 Auto changelog by @hungryapeman in https://github.com/Catrobat/Catroweb/pull/3903
+* SHARE-550 Media Library improvements by @schaubes in https://github.com/Catrobat/Catroweb/pull/3954
+* SHARE-535 Feature flag management for new features by @EifonUser in https://github.com/Catrobat/Catroweb/pull/3929
+* SHARE-533 Email templates & preview by @EifonUser in https://github.com/Catrobat/Catroweb/pull/3779
+* SHARE-561 Fix stateless session error by @schaubes in https://github.com/Catrobat/Catroweb/pull/4186
+* SHARE-551 Privacy link in footer by @makne17 in https://github.com/Catrobat/Catroweb/pull/4260
+* SHARE-559: Comment translation bugs by @makne17 in https://github.com/Catrobat/Catroweb/pull/4253
+* SHARE-526 Incorrect google translations broke the screen by @makre10 in https://github.com/Catrobat/Catroweb/pull/4328
+* SHARE-433 Add Studios to sidebar by @makre10 in https://github.com/Catrobat/Catroweb/pull/4336
+* SHARE-530 translation achievement banner by @makne17 in https://github.com/Catrobat/Catroweb/pull/4344
+* SHARE-470 trending projects category by @makne17 in https://github.com/Catrobat/Catroweb/pull/4447
+* SHARE-471 Improved all-time ranking of projects by @makne17 in https://github.com/Catrobat/Catroweb/pull/4448
+* SHARE-393 Maintenance Information  by @makre10 in https://github.com/Catrobat/Catroweb/pull/4512
+* SHARE-544 by @dmetzner in https://github.com/Catrobat/Catroweb/pull/4593
+* SHARE-573 Clean up task: Consistency in naming by @greilberger13 in https://github.com/Catrobat/Catroweb/pull/4654
+* SHARE-124 - DB migration and implementation of UserAPI by @bonbuo in https://github.com/Catrobat/Catroweb/pull/4603
+* SHARE-549 Studio List - Part 2 by @makre10 in https://github.com/Catrobat/Catroweb/pull/4606
+* SHARE-564 Collapse and expand categories in MediaLibrary by @makne17 in https://github.com/Catrobat/Catroweb/pull/4619
+* SHARE-573 Clean up task: Consistency in naming by @greilberger13 in https://github.com/Catrobat/Catroweb/pull/4674
+* SHARE-124 rename currentlyWorkingOn to currently_working_on by @bonbuo in https://github.com/Catrobat/Catroweb/pull/4673
+* SHARE-525 New Email Design by @EifonUser in https://github.com/Catrobat/Catroweb/pull/4678
+* SHARE-573 Replacing finished, except for tests, DB and assets by @greilberger13 in https://github.com/Catrobat/Catroweb/pull/4689
+* SHARE-565 redesign language selection by @makne17 in https://github.com/Catrobat/Catroweb/pull/4762
+
+* Updated translations
+* Updated multiple dependencies to stay secure, and to keep up with the latest features and bug fixes.
+
+## New Contributors
+* @EifonUser, @bonbuo, @makne17, @makre10, @greilberger13 
+
+**Full Changelog**: https://github.com/Catrobat/Catroweb/compare/v3.38.1...v24.3.0
+
+
 ## [3.37.0]
 
 - Migrate yaml config to php
