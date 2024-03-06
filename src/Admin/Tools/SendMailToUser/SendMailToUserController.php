@@ -26,7 +26,7 @@ class SendMailToUserController extends CRUDController
   ) {
   }
 
-  public function listAction(Request $request = null): Response
+  public function listAction(?Request $request = null): Response
   {
     return $this->renderWithExtraParams('Admin/Tools/send_mail_to_user.html.twig');
   }

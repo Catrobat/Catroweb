@@ -23,7 +23,7 @@ class WebviewJWTAuthenticator extends JWTAuthenticator
     EventDispatcherInterface $dispatcher,
     TokenExtractorInterface $tokenExtractor,
     UserProviderInterface $userProvider,
-    TranslatorInterface $translator = null)
+    ?TranslatorInterface $translator = null)
   {
     parent::__construct($jwtManager, $dispatcher, $tokenExtractor, $userProvider, $translator);
   }

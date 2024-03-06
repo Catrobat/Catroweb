@@ -419,6 +419,8 @@ menu:
   followersAndFollowing: Бақылау
   mediaLibrary: Медиатека
   studio: Studios
+  language: Тіл
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Кіру
   button:

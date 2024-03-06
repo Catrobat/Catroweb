@@ -2,7 +2,7 @@ import { ProjectComments } from './ProjectComments'
 import { TranslateComments } from './TranslateComments'
 import $ from 'jquery'
 
-require('../../styles/custom/project.scss')
+require('../../styles/custom/program.scss')
 
 const $projectComments = $('.js-project-comments')
 

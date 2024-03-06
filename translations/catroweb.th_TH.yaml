@@ -425,6 +425,8 @@ menu:
   followersAndFollowing: ผู้ติดตาม
   mediaLibrary: ไลบรารีสื่อ
   studio: สตูดิโอ
+  language: ภาษา
+  languageOptionsNotAvailable: No language options available.
 login:
   login: เข้าสู่ระบบ
   button:

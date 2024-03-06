@@ -7,17 +7,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Table(
- *     name="tags",
- *     indexes={
- *
- *         @ORM\Index(name="internal_title_idx", columns={"internal_title"}),
- *     }
- * )
- *
- * @ORM\Entity(repositoryClass=TagRepository::class)
- */
+#[ORM\Table(name: 'tags')]
+#[ORM\Index(columns: ['internal_title'], name: 'internal_title_idx')]
+#[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
 {
   /**
@@ -32,33 +24,21 @@ class Tag
   final public const TUTORIAL = 'tutorial';
   final public const CODING_JAM_09_2021 = 'catrobatfestival2021';
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToMany(targetEntity=Program::class, mappedBy="tags")
-   */
+  #[ORM\ManyToMany(targetEntity: Program::class, mappedBy: 'tags')]
   protected Collection $programs;
 
-  /**
-   * @ORM\Column(name="internal_title", type="string", nullable=false)
-   */
+  #[ORM\Column(name: 'internal_title', type: 'string', nullable: false)]
   protected string $internal_title = '';
 
-  /**
-   * @ORM\Column(name="title_ltm_code", type="string", nullable=false)
-   */
+  #[ORM\Column(name: 'title_ltm_code', type: 'string', nullable: false)]
   protected string $title_ltm_code = '';
 
-  /**
-   * @ORM\Column(name="enabled", type="boolean", options={"default": true})
-   */
+  #[ORM\Column(name: 'enabled', type: 'boolean', options: ['default' => true])]
   protected bool $enabled = true;
 
   public function __construct()

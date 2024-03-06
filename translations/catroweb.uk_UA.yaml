@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: Підписник
   mediaLibrary: Медіатека
   studio: Студії
+  language: Мова
+  languageOptionsNotAvailable: Доступні мови відсутні.
 login:
   login: Увійти в обліковий запис
   button:

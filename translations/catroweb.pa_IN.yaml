@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: ਚੇਲਾ
   mediaLibrary: ਮੀਡੀਆ ਲਾਇਬ੍ਰੇਰੀ
   studio: Studios
+  language: ਭਾਸ਼ਾ
+  languageOptionsNotAvailable: No language options available.
 login:
   login: ਲਾਗਿਨ
   button:

@@ -9,7 +9,6 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Exception;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\JsonResponse;

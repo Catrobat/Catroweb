@@ -16,43 +16,27 @@ class SpecialProgram
 
   public ?string $old_image_type = null;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\Column(type="string")
-   */
+  #[ORM\Column(type: 'string')]
   protected string $imagetype;
 
-  /**
-   * @ORM\Column(type="boolean")
-   */
+  #[ORM\Column(type: 'boolean')]
   protected bool $active = true;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Flavor::class, fetch="EAGER")
-   */
+  #[ORM\ManyToOne(targetEntity: Flavor::class, fetch: 'EAGER')]
   protected ?Flavor $flavor = null;
 
-  /**
-   * @ORM\Column(type="integer")
-   */
+  #[ORM\Column(type: 'integer')]
   protected int $priority = 0;
 
-  /**
-   * @ORM\Column(type="boolean", options={"default": false})
-   */
+  #[ORM\Column(type: 'boolean', options: ['default' => false])]
   protected bool $for_ios = false;
 
-  /**
-   * @ORM\ManyToOne(targetEntity="App\DB\Entity\Project\Program", fetch="EAGER")
-   */
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'EAGER')]
   protected ?Program $program = null;
 
   public function getFlavor(): ?Flavor

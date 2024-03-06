@@ -4,14 +4,10 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=StudioActivityRepository::class)
- *
- * @ORM\Table(name="studio_activity")
- */
+#[ORM\Table(name: 'studio_activity')]
+#[ORM\Entity(repositoryClass: StudioActivityRepository::class)]
 class StudioActivity
 {
   /**
@@ -23,37 +19,23 @@ class StudioActivity
 
   private array $activity_types = [self::TYPE_COMMENT, self::TYPE_PROJECT, self::TYPE_USER];
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(name="id", type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  /**
-   * @ORM\Column(name="type", type="string", columnDefinition="ENUM('comment', 'project', 'user')", nullable=false)
-   */
+  #[ORM\Column(name: 'type', type: 'string', nullable: false, columnDefinition: "ENUM('comment', 'project', 'user')")]
   protected string $type;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  /**
-   * @ORM\Column(name="created_on", type="datetime", nullable=false)
-   */
+  #[ORM\Column(name: 'created_on', type: 'datetime', nullable: false)]
   protected \DateTime $created_on;
 
   public function getId(): ?int

@@ -33,7 +33,7 @@ class StudioManager
   ) {
   }
 
-  public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, string $cover_path = null): Studio
+  public function createStudio(User $user, string $name, string $description, bool $is_public = true, bool $is_enabled = true, bool $allow_comments = true, ?string $cover_path = null): Studio
   {
     $studio = (new Studio())
       ->setName($name)
@@ -172,7 +172,7 @@ class StudioManager
     return $this->createStudioProgram($user, $studio, $activity, $project);
   }
 
-  public function changeStudio(User $user, Studio $studio): ?studio
+  public function changeStudio(User $user, Studio $studio): ?Studio
   {
     if ($this->isUserAStudioAdmin($user, $studio)) {
       return $this->saveStudio($studio);

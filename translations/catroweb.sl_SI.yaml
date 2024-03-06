@@ -419,6 +419,8 @@ menu:
   followersAndFollowing: Sledilec
   mediaLibrary: Medijska knjižnica
   studio: Studiji
+  language: Jezik
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Prijava
   button:

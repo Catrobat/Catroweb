@@ -423,6 +423,8 @@ menu:
   followersAndFollowing: అనుచరుడు
   mediaLibrary: Media library
   studio: Studios
+  language: భాష
+  languageOptionsNotAvailable: No language options available.
 login:
   login: ప్రవేశించండి
   button:

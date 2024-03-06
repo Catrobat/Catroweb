@@ -23,7 +23,7 @@ class UserResponseManager extends AbstractResponseManager
     parent::__construct($translator, $serializer, $response_cache_manager);
   }
 
-  public function createBasicUserDataResponse(User $user, string $attributes = null): BasicUserDataResponse
+  public function createBasicUserDataResponse(User $user, ?string $attributes = null): BasicUserDataResponse
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'username'];
@@ -36,7 +36,7 @@ class UserResponseManager extends AbstractResponseManager
     return new BasicUserDataResponse($this->createBasicUserDataArray($user, $attributes_list));
   }
 
-  public function createExtendedUserDataResponse(User $user, string $attributes = null): ExtendedUserDataResponse
+  public function createExtendedUserDataResponse(User $user, ?string $attributes = null): ExtendedUserDataResponse
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'username', 'email'];
@@ -85,7 +85,7 @@ class UserResponseManager extends AbstractResponseManager
     return $data;
   }
 
-  public function createUsersDataResponse(array $users, string $attributes = null): array
+  public function createUsersDataResponse(array $users, ?string $attributes = null): array
   {
     $users_data_response = [];
     foreach ($users as $user) {

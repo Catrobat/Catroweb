@@ -3,51 +3,32 @@
 namespace App\DB\Entity\System;
 
 use App\DB\EntityRepository\System\CronJobRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=CronJobRepository::class)
- *
- * @ORM\Table(name="cronjob")
- */
+#[ORM\Table(name: 'cronjob')]
+#[ORM\Entity(repositoryClass: CronJobRepository::class)]
 class CronJob
 {
-  /**
-   * @ORM\Column(name="name", type="string", nullable=false, unique=true)
-   *
-   * @ORM\Id
-   */
+  #[ORM\Column(name: 'name', type: 'string', unique: true, nullable: false)]
+  #[ORM\Id]
   protected string $name = '';
 
-  /**
-   * @ORM\Column(name="state", type="string", nullable=false, options={"default": "idle"})
-   */
+  #[ORM\Column(name: 'state', type: 'string', nullable: false, options: ['default' => 'idle'])]
   protected string $state = 'idle';
 
-  /**
-   * @ORM\Column(name="cron_interval", type="string", nullable=false, options={"default": "1 days"})
-   */
+  #[ORM\Column(name: 'cron_interval', type: 'string', nullable: false, options: ['default' => '1 days'])]
   protected string $cron_interval = '1 days';
 
-  /**
-   * @ORM\Column(name="priority", type="integer", nullable=false, options={"default": 0})
-   */
+  #[ORM\Column(name: 'priority', type: 'integer', nullable: false, options: ['default' => 0])]
   protected int $priority = 0;
 
-  /**
-   * @ORM\Column(name="start_at", type="datetime", nullable=true)
-   */
+  #[ORM\Column(name: 'start_at', type: 'datetime', nullable: true)]
   protected ?\DateTime $start_at = null;
 
-  /**
-   * @ORM\Column(name="end_at", type="datetime", nullable=true)
-   */
+  #[ORM\Column(name: 'end_at', type: 'datetime', nullable: true)]
   protected ?\DateTime $end_at = null;
 
-  /**
-   * @ORM\Column(name="result_code", type="integer", nullable=true)
-   */
+  #[ORM\Column(name: 'result_code', type: 'integer', nullable: true)]
   protected ?int $result_code = null;
 
   public function getName(): string

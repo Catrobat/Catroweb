@@ -8,11 +8,11 @@ interface TranslatorAwareInterface
 {
   public function initTranslator(TranslatorInterface $translator): void;
 
-  public function __(string $id, array $parameter = [], string $locale = null): string;
+  public function __(string $id, array $parameter = [], ?string $locale = null): string;
 
-  public function trans(string $id, array $parameter = [], string $locale = null): string;
+  public function trans(string $id, array $parameter = [], ?string $locale = null): string;
 
-  public function sanitizeLocale(string $locale = null): string;
+  public function sanitizeLocale(?string $locale = null): string;
 
   public function isLocaleAValidLocaleWithUnderscore(string $locale): bool;
 

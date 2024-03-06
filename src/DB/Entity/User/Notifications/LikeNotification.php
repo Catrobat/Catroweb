@@ -6,9 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class LikeNotification extends CatroNotification
 {
   /*
@@ -19,39 +17,21 @@ class LikeNotification extends CatroNotification
   /**
    * LikeNotification constructor.
    *
-   * @param User    $user      the User to which this LikeNotification will be shown
-   * @param User    $like_from the User which "like action" to another user triggered this LikeNotification
-   * @param Program $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
+   * @param User         $user      the User to which this LikeNotification will be shown
+   * @param User|null    $like_from the User which "like action" to another user triggered this LikeNotification
+   * @param Program|null $program   the Program to which the ProgramLike and this LikeNotification is notifying, belongs to
    */
   public function __construct(User $user, /**
-   * The User which "like action" to another user triggered this LikeNotification.
-   * If this user gets deleted, this LikeNotification gets deleted as well.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=User::class,
-   *     inversedBy="like_notification_mentions"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="like_from",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
-   */
+     * The User which "like action" to another user triggered this LikeNotification.
+     * If this user gets deleted, this LikeNotification gets deleted as well.
+     */
+    #[ORM\JoinColumn(name: 'like_from', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'like_notification_mentions')]
     private ?User $like_from, /**
-   * the Program about which this LikeNotification is notifying, belongs to.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
-   *     inversedBy="like_notification_mentions"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="program_id",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
-   */
+     * the Program about which this LikeNotification is notifying, belongs to.
+     */
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'like_notification_mentions')]
     private ?Program $program)
   {
     parent::__construct($user, '', '', 'reaction');

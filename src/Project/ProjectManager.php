@@ -34,7 +34,6 @@ use Elastica\Query\QueryString;
 use Elastica\Query\Range;
 use Elastica\Query\Terms;
 use Elastica\Util;
-use Exception;
 use FOS\ElasticaBundle\Finder\TransformedFinder;
 use Psr\Log\LoggerInterface;
 use Sonata\UserBundle\Model\UserInterface;
@@ -416,7 +415,7 @@ class ProjectManager
    * @internal
    * ATTENTION! Internal use only! (no visible/private/debug check)
    */
-  public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
+  public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->project_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
@@ -481,93 +480,93 @@ class ProjectManager
     return $this->project_repository->findOneBy(['remix_migrated_at' => $remix_migrated_at]);
   }
 
-  public function getUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
+  public function getUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
   {
     return $this->project_repository->getUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function countUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
+  public function countUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
   {
     return $this->project_repository->countUserProjectsIncludingPrivateOnes($user_id, $flavor, $max_version);
   }
 
-  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
+  public function getMoreProjectsFromUser(string $user_id, string $project_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
   {
     return $this->project_repository->getMoreProjectsFromUser($user_id, $project_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function getPublicUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, string $flavor = null, string $max_version = ''): array
+  public function getPublicUserProjects(string $user_id, ?int $limit = 20, ?int $offset = 0, ?string $flavor = null, string $max_version = ''): array
   {
     return $this->project_repository->getPublicUserProjects($user_id, $flavor, $max_version, $limit, $offset);
   }
 
-  public function countPublicUserProjects(string $user_id, string $flavor = null, string $max_version = ''): int
+  public function countPublicUserProjects(string $user_id, ?string $flavor = null, string $max_version = ''): int
   {
     return $this->project_repository->countPublicUserProjects($user_id, $flavor, $max_version);
   }
 
-  public function getRecentProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getRecentProjects(?string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'uploaded_at');
   }
 
-  public function getMostViewedProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getMostViewedProjects(?string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'views');
   }
 
-  public function getExampleProjects(string $flavor = null, int $limit = null, int $offset = 0, string $max_version = ''): array
+  public function getExampleProjects(?string $flavor = null, ?int $limit = null, int $offset = 0, string $max_version = ''): array
   {
     return $this->example_repository->getExampleProjects(
       $this->request_helper->isDebugBuildRequest(), $flavor, $limit, $offset, $max_version
     );
   }
 
-  public function getExampleProjectsCount(string $flavor = null, string $max_version = ''): int
+  public function getExampleProjectsCount(?string $flavor = null, string $max_version = ''): int
   {
     return $this->example_repository->getExampleProjectsCount(
       $this->request_helper->isDebugBuildRequest(), $flavor, $max_version
     );
   }
 
-  public function getScratchRemixesProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getScratchRemixesProjects(?string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->project_repository->getScratchRemixProjects($flavor, $max_version, $limit, $offset);
   }
 
-  public function getScratchRemixesProjectsCount(string $flavor = null, string $max_version = ''): int
+  public function getScratchRemixesProjectsCount(?string $flavor = null, string $max_version = ''): int
   {
     return $this->project_repository->countScratchRemixProjects($flavor, $max_version);
   }
 
-  public function getMostDownloadedProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getMostDownloadedProjects(?string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
 
-  private function getTrendingProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  private function getTrendingProjects(?string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->project_repository->getTrendingProjects($flavor, $max_version, $limit, $offset, 'downloads');
   }
 
-  public function getRandomProjects(string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
+  public function getRandomProjects(?string $flavor = null, int $limit = 20, int $offset = 0, string $max_version = ''): array
   {
     return $this->project_repository->getProjects($flavor, $max_version, $limit, $offset, 'rand');
   }
 
-  public function countProjects(string $flavor = null, string $max_version = ''): int
+  public function countProjects(?string $flavor = null, string $max_version = ''): int
   {
     return $this->project_repository->countProjects($flavor, $max_version);
   }
 
-  public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', string $flavor = null, bool $is_debug_request = false): array
+  public function search(string $query, ?int $limit = 20, int $offset = 0, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): array
   {
     $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
     return $this->program_finder->find($project_query, $limit, ['from' => $offset]);
   }
 
-  public function searchCount(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): int
+  public function searchCount(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): int
   {
     $project_query = $this->projectSearchQuery($query, $max_version, $flavor, $is_debug_request);
 
@@ -632,7 +631,7 @@ class ProjectManager
     $this->entity_manager->flush();
   }
 
-  public function save(Program $project, ProgramDownloads $downloads = null): void
+  public function save(Program $project, ?ProgramDownloads $downloads = null): void
   {
     $this->entity_manager->persist($project);
     if (!is_null($downloads)) {
@@ -687,7 +686,7 @@ class ProjectManager
   }
 
   public function getProjects(string $category, string $max_version = '',
-    int $limit = 20, int $offset = 0, string $flavor = null): array
+    int $limit = 20, int $offset = 0, ?string $flavor = null): array
   {
     return match ($category) {
       'recent' => $this->getRecentProjects($flavor, $limit, $offset, $max_version),
@@ -702,7 +701,7 @@ class ProjectManager
     };
   }
 
-  public function getProjectsCount(string $category, string $max_version = '', string $flavor = null): int
+  public function getProjectsCount(string $category, string $max_version = '', ?string $flavor = null): int
   {
     return match ($category) {
       'recent', 'random', 'most_viewed', 'most_downloaded', 'trending' => $this->countProjects($flavor, $max_version),
@@ -712,7 +711,7 @@ class ProjectManager
     };
   }
 
-  private function projectSearchQuery(string $query, string $max_version = '', string $flavor = null, bool $is_debug_request = false): BoolQuery
+  private function projectSearchQuery(string $query, string $max_version = '', ?string $flavor = null, bool $is_debug_request = false): BoolQuery
   {
     $query = Util::escapeTerm($query);
 

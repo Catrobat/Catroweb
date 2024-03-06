@@ -103,7 +103,7 @@ project:
     subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
     download: Lade die App herunter
     statistics: Mehr Statistiken
-  featured: Featured
+  featured: Empfohlen
   example: Beispiele
   newest: Neueste Projekte
   recommended: Empfohlene Projekte
@@ -424,6 +424,8 @@ menu:
   followersAndFollowing: Abonnenten
   mediaLibrary: Medienbibliothek
   studio: Studios
+  language: Sprache
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Einloggen
   button:

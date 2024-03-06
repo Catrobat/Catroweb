@@ -132,7 +132,7 @@ class MaintainController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  public function listAction(Request $request = null): Response
+  public function listAction(?Request $request = null): Response
   {
     if (!$this->admin->isGranted('LIST')) {
       throw new AccessDeniedException();
@@ -210,7 +210,7 @@ class MaintainController extends CRUDController
     ]);
   }
 
-  private function get_dir_size(string $directory, array $extension = null): int
+  private function get_dir_size(string $directory, ?array $extension = null): int
   {
     $count_size = 0;
     $count = 0;
@@ -233,7 +233,7 @@ class MaintainController extends CRUDController
     return $count_size;
   }
 
-  private function setSizeOfObject(RemovableMemory &$object, string $path, array $extension = null): void
+  private function setSizeOfObject(RemovableMemory &$object, string $path, ?array $extension = null): void
   {
     if (is_dir($path)) {
       $size = $this->get_dir_size($path, $extension);

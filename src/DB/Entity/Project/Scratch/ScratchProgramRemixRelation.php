@@ -7,11 +7,8 @@ use App\DB\Entity\Project\Remix\ProgramRemixRelationInterface;
 use App\DB\EntityRepository\Project\ScratchProgramRemixRepository;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Table(name="scratch_program_remix_relation")
- *
- * @ORM\Entity(repositoryClass=ScratchProgramRemixRepository::class)
- */
+#[ORM\Table(name: 'scratch_program_remix_relation')]
+#[ORM\Entity(repositoryClass: ScratchProgramRemixRepository::class)]
 class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Stringable
 {
   /**
@@ -21,30 +18,16 @@ class ScratchProgramRemixRelation implements ProgramRemixRelationInterface, \Str
    * @see{http://stackoverflow.com/questions/6383964/primary-key-and-foreign-key-with-doctrine-2-at-the-same-time}
    * -----------------------------------------------------------------------------------------------------------------
    */
-
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $scratch_parent_id;
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(type="guid")
-   */
+  #[ORM\Id]
+  #[ORM\Column(type: 'guid')]
   protected string $catrobat_child_id;
 
-  /**
-   * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
-   *     inversedBy="scratch_remix_parent_relations",
-   *     fetch="LAZY"
-   * )
-   *
-   * @ORM\JoinColumn(name="catrobat_child_id", referencedColumnName="id")
-   */
+  #[ORM\JoinColumn(name: 'catrobat_child_id', referencedColumnName: 'id')]
+  #[ORM\ManyToOne(targetEntity: Program::class, fetch: 'LAZY', inversedBy: 'scratch_remix_parent_relations')]
   protected Program $catrobat_child;
 
   public function __construct(string $scratch_parent_id, Program $catrobat_child)

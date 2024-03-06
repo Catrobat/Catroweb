@@ -420,6 +420,8 @@ menu:
   followersAndFollowing: अनुगामी
   mediaLibrary: मीडिया लाइब्रेरी
   studio: Studios
+  language: भाषा
+  languageOptionsNotAvailable: No language options available.
 login:
   login: प्रवेश करे
   button:

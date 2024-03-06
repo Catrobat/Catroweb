@@ -235,12 +235,12 @@ class UserManager implements UserManagerInterface
     return $this->user_repository->findAll();
   }
 
-  public function findBy(array $criteria, array $orderBy = null, int $limit = null, int $offset = null): array
+  public function findBy(array $criteria, ?array $orderBy = null, ?int $limit = null, ?int $offset = null): array
   {
     return $this->user_repository->findBy($criteria, $orderBy, $limit, $offset);
   }
 
-  public function findOneBy(array $criteria, array $orderBy = null): ?User
+  public function findOneBy(array $criteria, ?array $orderBy = null): ?User
   {
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }

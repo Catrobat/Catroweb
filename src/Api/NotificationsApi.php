@@ -45,7 +45,7 @@ class NotificationsApi extends AbstractApiController implements NotificationsApi
     return $response;
   }
 
-  public function notificationsGet(string $accept_language, int $limit, int $offset, string $attributes, string $type, int &$responseCode, array &$responseHeaders): null|array|object
+  public function notificationsGet(string $accept_language, int $limit, int $offset, string $attributes, string $type, int &$responseCode, array &$responseHeaders): array|object|null
   {
     // TODO: Implement notificationsGet() method.
 

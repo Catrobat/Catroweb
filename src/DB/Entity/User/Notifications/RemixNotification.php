@@ -6,9 +6,7 @@ use App\DB\Entity\Project\Program;
 use App\DB\Entity\User\User;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity
- */
+#[ORM\Entity]
 class RemixNotification extends CatroNotification
 {
   /*
@@ -19,52 +17,26 @@ class RemixNotification extends CatroNotification
   /**
    * RemixNotification constructor.
    *
-   * @param User    $user          the User to which this RemixNotification will be shown
-   * @param User    $remix_from    the owner of the parent Program
-   * @param Program $program       the parent Program
-   * @param Program $remix_program the newly remixed child Program
+   * @param User         $user          the User to which this RemixNotification will be shown
+   * @param User|null    $remix_from    the owner of the parent Program
+   * @param Program|null $program       the parent Program
+   * @param Program|null $remix_program the newly remixed child Program
    */
   public function __construct(User $user, /**
-   * the owner of the parent Program.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=User::class
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="remix_root",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
-   */
+     * the owner of the parent Program.
+     */
+    #[ORM\JoinColumn(name: 'remix_root', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: User::class)]
     private ?User $remix_from, /**
-   *  the parent Program.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
-   *     inversedBy="remix_notification_mentions_as_parent"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="program_id",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
-   */
+     *  the parent Program.
+     */
+    #[ORM\JoinColumn(name: 'program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_parent')]
     private ?Program $program, /**
-   * the newly remixed child Program.
-   *
-   * @ORM\ManyToOne(
-   *     targetEntity=Program::class,
-   *     inversedBy="remix_notification_mentions_as_child"
-   * )
-   *
-   * @ORM\JoinColumn(
-   *     name="remix_program_id",
-   *     referencedColumnName="id",
-   *     nullable=true
-   * )
-   */
+     * the newly remixed child Program.
+     */
+    #[ORM\JoinColumn(name: 'remix_program_id', referencedColumnName: 'id', nullable: true)]
+    #[ORM\ManyToOne(targetEntity: Program::class, inversedBy: 'remix_notification_mentions_as_child')]
     private ?Program $remix_program)
   {
     parent::__construct($user, '', '', 'remix');

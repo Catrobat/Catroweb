@@ -424,6 +424,8 @@ menu:
   followersAndFollowing: Seguace
   mediaLibrary: Libreria multimediale
   studio: Studios
+  language: Lingua
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Login
   button:

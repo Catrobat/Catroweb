@@ -424,6 +424,8 @@ menu:
   followersAndFollowing: Pratilac
   mediaLibrary: Medijska biblioteka
   studio: Studios
+  language: Jezik
+  languageOptionsNotAvailable: No language options available.
 login:
   login: Prijava
   button:

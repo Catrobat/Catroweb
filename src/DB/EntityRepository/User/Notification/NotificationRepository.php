@@ -20,7 +20,7 @@ class NotificationRepository extends ServiceEntityRepository
   /**
    * @return LikeNotification[]
    */
-  public function getLikeNotificationsForProject(Program $project, User $owner = null, User $likeFrom = null): array
+  public function getLikeNotificationsForProject(Program $project, ?User $owner = null, ?User $likeFrom = null): array
   {
     $qb = $this->_em->createQueryBuilder();
 
@@ -51,7 +51,7 @@ class NotificationRepository extends ServiceEntityRepository
   /**
    * @return FollowNotification[]
    */
-  public function getFollowNotificationForUser(User $owner = null, User $follow_from = null): array
+  public function getFollowNotificationForUser(?User $owner = null, ?User $follow_from = null): array
   {
     $qb = $this->_em->createQueryBuilder();
 

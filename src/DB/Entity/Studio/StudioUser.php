@@ -4,14 +4,10 @@ namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Studios\StudioUserRepository;
-use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
-/**
- * @ORM\Entity(repositoryClass=StudioUserRepository::class)
- *
- * @ORM\Table(name="studio_user")
- */
+#[ORM\Table(name: 'studio_user')]
+#[ORM\Entity(repositoryClass: StudioUserRepository::class)]
 class StudioUser
 {
   /**
@@ -27,54 +23,33 @@ class StudioUser
   private array $roles = [self::ROLE_ADMIN, self::ROLE_MEMBER];
   private array $statuses = [self::STATUS_ACTIVE, self::STATUS_BANNED, self::STATUS_PENDING_REQUEST];
 
-  /**
-   * @ORM\Id
-   *
-   * @ORM\Column(name="id", type="integer")
-   *
-   * @ORM\GeneratedValue(strategy="AUTO")
-   */
+  #[ORM\Id]
+  #[ORM\Column(name: 'id', type: 'integer')]
+  #[ORM\GeneratedValue(strategy: 'AUTO')]
   protected ?int $id = null;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=Studio::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="studio", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'studio', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: Studio::class, cascade: ['persist'])]
   protected Studio $studio;
 
-  /**
-   * @ORM\OneToOne(targetEntity=StudioActivity::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="activity", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'activity', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\OneToOne(targetEntity: StudioActivity::class, cascade: ['persist'])]
   protected StudioActivity $activity;
 
-  /**
-   * @ORM\ManyToOne(targetEntity=User::class, cascade={"persist"})
-   *
-   * @ORM\JoinColumn(name="user", referencedColumnName="id", nullable=false, onDelete="CASCADE")
-   */
+  #[ORM\JoinColumn(name: 'user', referencedColumnName: 'id', nullable: false, onDelete: 'CASCADE')]
+  #[ORM\ManyToOne(targetEntity: User::class, cascade: ['persist'])]
   protected User $user;
 
-  /**
-   * @ORM\Column(name="role", type="string", columnDefinition="ENUM('admin', 'member')", nullable=false)
-   */
+  #[ORM\Column(name: 'role', type: 'string', nullable: false, columnDefinition: "ENUM('admin', 'member')")]
   protected string $role;
 
-  /**
-   * @ORM\Column(name="status", type="string", columnDefinition="ENUM('active', 'banned', 'pending_request')", nullable=false)
-   */
+  #[ORM\Column(name: 'status', type: 'string', nullable: false, columnDefinition: "ENUM('active', 'banned', 'pending_request')")]
   protected string $status;
 
-  /**
-   * @ORM\Column(name="updated_on", type="datetime", length=300, nullable=true)
-   */
+  #[ORM\Column(name: 'updated_on', type: 'datetime', length: 300, nullable: true)]
   protected ?\DateTime $updated_on = null;
 
-  /**
-   * @ORM\Column(name="created_on", type="datetime", length=300, nullable=false)
-   */
+  #[ORM\Column(name: 'created_on', type: 'datetime', length: 300, nullable: false)]
   protected \DateTime $created_on;
 
   public function getId(): ?int

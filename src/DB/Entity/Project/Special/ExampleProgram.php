@@ -8,13 +8,9 @@ use App\Project\EventListener\ExampleProjectImageListener;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 
-/**
- * @ORM\Entity(repositoryClass=ExampleRepository::class)
- *
- * @ORM\EntityListeners({ExampleProjectImageListener::class})
- *
- * @ORM\Table(name="example")
- */
+#[ORM\Table(name: 'example')]
+#[ORM\Entity(repositoryClass: ExampleRepository::class)]
+#[ORM\EntityListeners([ExampleProjectImageListener::class])]
 class ExampleProgram extends SpecialProgram
 {
   public function setImageType(string $image): ExampleProgram
