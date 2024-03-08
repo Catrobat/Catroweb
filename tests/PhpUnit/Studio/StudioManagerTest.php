@@ -2,6 +2,7 @@
 
 namespace Tests\PhpUnit\Studio;
 
+use App\DB\Entity\Project\Program;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
 use App\DB\Entity\Studio\StudioJoinRequest;
@@ -60,9 +61,10 @@ class StudioManagerTest extends DefaultTestCase
     $studio_user_repository = $this->entity_manager->getRepository(StudioUser::class);
     $user_comment_repository = $this->entity_manager->getRepository(UserComment::class);
     $studio_join_request_repository = $this->entity_manager->getRepository(StudioJoinRequest::class);
+    $studio_program_repository = $this->entity_manager->getRepository(Program::class);
     $this->object = $this->getMockBuilder(StudioManager::class)->setConstructorArgs(
       [$this->entity_manager, $studio_repository, $studio_activity_repository,
-        $studio_project_repository, $studio_user_repository, $user_comment_repository, $studio_join_request_repository, ])
+        $studio_project_repository, $studio_user_repository, $user_comment_repository, $studio_join_request_repository, $studio_program_repository])
       ->getMockForAbstractClass()
     ;
     $this->user_manager = $kernel->getContainer()->get(UserManager::class);

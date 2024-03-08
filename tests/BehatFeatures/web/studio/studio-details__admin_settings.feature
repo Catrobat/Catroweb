@@ -188,7 +188,6 @@ Feature: As studio admin I must be able to configure a studio
     Then I should see "private"
     Then the ".member_count" element should contain "2"
 
-
   Scenario:  Studio admin approves a pending join request
     Given I log in as "StudioAdmin2"
     And I am on "/app/studio/3"

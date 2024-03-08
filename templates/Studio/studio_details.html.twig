@@ -13,7 +13,7 @@
 
 {% include 'Studio/studio_details_header.html.twig' %}
 
-<div id="tab-content" class="tab-content">
+<div id="tab-content" class="tab-content container">
   {% include 'Studio/studio_details_project_list.html.twig' %}
   {% include 'Studio/studio_details_comment_list.html.twig' %}
   {% include 'Studio/studio_detail_comment_reply.html.twig' %}
@@ -28,6 +28,9 @@
     <input id="update-cover-error" type="hidden" value="{{ 'studio.details.updateCoverError'|trans({}, 'catroweb') }}">
     <input id="studio-id" name="studio-id" type="hidden" value="{{ studio.id }}">
     <div class="js-studio-detail" data-studio-id="{{ studio.id }}"></div>
+
+
+
 {% endblock %}
 {% block javascript %}
     {{ encore_entry_script_tags('studio_detail') }}

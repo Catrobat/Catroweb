@@ -83,7 +83,9 @@ class StudioController extends AbstractController
     $comments = $this->studio_manager->findAllStudioComments($studio);
     $statusPublicStudio = !is_null($user) && $this->studio_manager->isUserInStudio($user, $studio);
     $statusPrivateStudio = 'false';
+    $user_projects = [];
     if (!is_null($user)) {
+      $user_projects = $this->studio_manager->getUserProjects($user);
       $currentStatus = $this->studio_manager->findJoinRequestByUserAndStudio($user, $studio);
       if (!is_null($currentStatus)) {
         $statusPrivateStudio = $currentStatus->getStatus();
@@ -102,6 +104,7 @@ class StudioController extends AbstractController
       'projects' => $this->getStudioProjectsListWithImg($projects),
       'comments_count' => $comments_count,
       'comments' => $this->getStudioCommentsListWithAvatar($comments),
+      'user_projects' => $this->getUserProjectsListImgAndCheckIfStudioProject($user_projects, $studio),
       'pending_join_requests' => $this->studio_manager->findPendingJoinRequests($studio),
       'declined_join_requests' => $this->studio_manager->findDeclinedJoinRequests($studio),
       'approved_join_requests' => $this->studio_manager->findApprovedJoinRequests($studio),
@@ -124,6 +127,7 @@ class StudioController extends AbstractController
     $allow_comments = (bool) $request->request->get('allow_comments', false);
     $name = trim((string) $request->request->get('name', ''));
     $description = trim((string) $request->request->get('description', ''));
+    $headerImg = $request->files->get('image');
     if ('' === $name) {
       return new JsonResponse(['message' => 'arguments invalid'], Response::HTTP_BAD_REQUEST);
     }
@@ -134,6 +138,23 @@ class StudioController extends AbstractController
     }
 
     $studio = $this->studio_manager->createStudio($user, $name, $description, $is_public, $allow_comments, $is_enabled);
+
+    if (is_null($headerImg)) {
+      return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
+    }
+    $newPath = 'images/default/';
+    $coverPath = $this->parameter_bag->get('catrobat.resources.dir').$newPath;
+    $coverName = (new \DateTime())->getTimestamp().$headerImg->getClientOriginalName();
+    if (!file_exists($coverPath)) {
+      $fs = new Filesystem();
+      $fs->mkdir($coverPath);
+    }
+    $headerImg->move($coverPath, $coverName);
+    $pathToSave = '/'.$newPath.$coverName;
+    $studio->setCoverPath('resources'.$pathToSave);
+    /** @var User|null $user */
+    $user = $this->getUser();
+    $this->studio_manager->changeStudio($user, $studio);
 
     return new JsonResponse(['message' => sprintf('"%s" successfully created the studio', $user->getUsername())], Response::HTTP_OK);
   }
@@ -526,15 +547,102 @@ class StudioController extends AbstractController
   }
 
   /**
+   * ToDo: move to capi.
+   */
+  #[Route(path: '/updateStudioProjects/', name: 'update_studio_projects', methods: ['POST'])]
+  public function updateStudioProjects(Request $request): Response
+  {
+    if ($request->isMethod('POST')) {
+      $studio_id = trim(strval($request->request->get('studio_id')));
+      $studio = $this->studio_manager->findStudioById($studio_id);
+      if (is_null($this->getUser()) || is_null($studio)) {
+        return $this->redirect($request->headers->get('referer'));
+      }
+      /** @var User|null $user */
+      $user = $this->getUser();
+      $clickedProjectsJson = $request->request->get('projects_add');
+
+      if (strlen($clickedProjectsJson) > 0) {
+        $clickedProjects = json_decode($clickedProjectsJson, true);
+        foreach ($clickedProjects as $projectId) {
+          $project = $this->studio_manager->getProjectByID($projectId);
+          // check for error
+          $this->studio_manager->addProjectToStudio($user, $studio, $project);
+        }
+      }
+      $clickedRemoveProjectsJson = $request->request->get('projects_remove');
+      if (strlen($clickedRemoveProjectsJson) > 0) {
+        $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
+        foreach ($clickedRemoveProjects as $projectId) {
+          $project = $this->studio_manager->getProjectByID($projectId);
+          $this->studio_manager->deleteProjectFromStudio($user, $studio, $project);
+        }
+      }
+    }
+
+    return $this->redirect($request->headers->get('referer'));
+  }
+
+  #[Route(path: '/deleteStudioProjectsAdmin/', name: 'delete_studio_projects_admin', methods: ['POST'])]
+  public function deleteStudioProjects(Request $request): JsonResponse
+  {
+    try {
+      if ($request->isMethod('POST')) {
+        $studio_id = trim(strval($request->request->get('studio_id')));
+        $studio = $this->studio_manager->findStudioById($studio_id);
+
+        if (is_null($this->getUser()) || is_null($studio)) {
+          return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
+        }
+
+        /** @var User|null $user */
+        $user = $this->getUser();
+        $clickedRemoveProjectsJson = $request->request->get('projects_remove');
+
+        if (strlen($clickedRemoveProjectsJson) > 0) {
+          $clickedRemoveProjects = json_decode($clickedRemoveProjectsJson, true);
+
+          foreach ($clickedRemoveProjects as $projectId) {
+            $project = $this->studio_manager->getProjectByID($projectId);
+
+            $this->studio_manager->deleteProjectFromStudio($user, $studio, $project);
+          }
+
+          return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
+        }
+      }
+
+      return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
+    } catch (\Exception $e) {
+      return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
+    }
+  }
+
+  /**
    * HELPER FUNCTIONS.
    */
-  protected function getStudioProjectsListWithImg(array $studioProjects): array
+  protected function getStudioProjectsListWithImg(array $projects): array
   {
     $rs = [];
-    foreach ($studioProjects as $studioProject) {
+    foreach ($projects as $studioProject) {
       $project = [];
       $project['id'] = $studioProject->getProgram()->getId();
       $project['name'] = $studioProject->getProgram()->getName();
+      $project['thumbnail'] = $this->screenshot_repository->getThumbnailWebPath($project['id']);
+      $rs[] = $project;
+    }
+
+    return $rs;
+  }
+
+  protected function getUserProjectsListImgAndCheckIfStudioProject(array $userProjects, Studio $studio): array
+  {
+    $rs = [];
+    foreach ($userProjects as $userProject) {
+      $project = [];
+      $project['isStudioProject'] = !is_null($this->studio_manager->findStudioProject($studio, $userProject));
+      $project['id'] = $userProject->getId();
+      $project['name'] = $userProject->getName();
       $project['thumbnail'] = $this->screenshot_repository->getThumbnailWebPath($project['id']);
       $rs[] = $project;
     }

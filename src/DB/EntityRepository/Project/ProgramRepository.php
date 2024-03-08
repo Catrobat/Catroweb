@@ -25,6 +25,23 @@ class ProgramRepository extends ServiceEntityRepository
     parent::__construct($managerRegistry, Program::class);
   }
 
+  public function getProjectByUserID(string $user_id, bool $include_private = false): array
+  {
+    $query_builder = $this->createQueryBuilder('e');
+    $query_builder
+      ->where($query_builder->expr()->eq('e.user', $query_builder->expr()->literal($user_id)))
+    ;
+
+    $query_builder = $this->excludeInvisibleProjects($query_builder);
+    $query_builder = $this->excludeDebugProjects($query_builder);
+
+    if (!$include_private) {
+      $query_builder = $this->excludePrivateProjects($query_builder);
+    }
+
+    return $query_builder->getQuery()->getResult();
+  }
+
   public function getProjectByID(string $program_id, bool $include_private = false): array
   {
     $query_builder = $this->createQueryBuilder('e');
@@ -557,5 +574,10 @@ class ProgramRepository extends ServiceEntityRepository
     }
 
     return $query;
+  }
+
+  public function findOneByName(string $programName): ?Program
+  {
+    return $this->findOneBy(['name' => $programName]);
   }
 }
