@@ -900,6 +900,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'और दिखाओ'
     showLess: 'कम दिखाएं'
     remove_project: 'स्टूडियो से निकालें'
@@ -914,6 +915,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'प्रोजेक्ट'
+      addProject: 'Add your own projects'
     comments:
       title: 'टिप्पणियाँ'
       type_something: 'कुछ लिखें'

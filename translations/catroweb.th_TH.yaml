@@ -904,6 +904,7 @@ studio:
     public_studios: 'สตูดิโอสาธารณะ'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'แสดงมากขึ้น'
     showLess: 'แสดงน้อยลง'
     remove_project: 'นำออกจากสตูดิโอ'
@@ -918,6 +919,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'โครงการ'
+      addProject: 'Add your own projects'
     comments:
       title: 'ความคิดเห็น'
       type_something: 'พิมพ์บางอย่าง'

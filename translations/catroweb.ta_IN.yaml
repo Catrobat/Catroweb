@@ -904,6 +904,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'மேலும் காட்ட'
     showLess: 'குறைவாக காட்டு'
     remove_project: 'ஸ்டுடியோவிலிருந்து அகற்று'
@@ -918,6 +919,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'திட்டங்கள்'
+      addProject: 'Add your own projects'
     comments:
       title: 'பின்கருத்துக்கள்'
       type_something: 'Type something'

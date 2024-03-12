@@ -894,6 +894,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'مزید دکھائیں'
     showLess: 'کم دکھائیں'
     remove_project: 'اسٹوڈیو سے ہٹا دیں۔'
@@ -908,6 +909,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'پروجیکٹس'
+      addProject: 'Add your own projects'
     comments:
       title: 'تبصرے'
       type_something: 'کچھ لکھیں'

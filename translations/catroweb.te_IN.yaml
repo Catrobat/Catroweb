@@ -903,6 +903,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'ఇంకా చూపించు'
     showLess: 'తక్కువ చూపించు'
     remove_project: 'స్టూడియో నుండి తీసివేయండి'
@@ -917,6 +918,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'ప్రాజెక్టులు'
+      addProject: 'Add your own projects'
     comments:
       title: 'వ్యాఖ్యలు'
       type_something: 'Type something'
