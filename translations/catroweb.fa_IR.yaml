@@ -904,6 +904,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'نمایش بیشتر'
     showLess: 'نمایش کمتر'
     remove_project: 'حذف از استودیو'
@@ -918,6 +919,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'پروژه ها'
+      addProject: 'Add your own projects'
     comments:
       title: 'نظرات'
       type_something: 'چیزی تایپ کنید'

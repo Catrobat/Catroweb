@@ -898,6 +898,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'daha fazla göster'
     showLess: 'daha az göster'
     remove_project: 'Stüdyodan kaldır'
@@ -912,6 +913,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'projeler'
+      addProject: 'Add your own projects'
     comments:
       title: 'Yorumlar'
       type_something: 'Birşeyler yaz'

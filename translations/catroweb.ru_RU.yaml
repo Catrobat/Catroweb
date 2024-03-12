@@ -900,6 +900,7 @@ studio:
     public_studios: 'Публичные студии'
     private_studios: 'Частные студии'
   details:
+    add_project: 'click to add the project'
     showMore: 'показать больше'
     showLess: 'свернуть'
     remove_project: 'Удалить из студии'
@@ -914,6 +915,7 @@ studio:
     decline: 'Отклонено'
     projects:
       title: 'Проекты'
+      addProject: 'Add your own projects'
     comments:
       title: 'Комментарии'
       type_something: 'Введите что-нибудь'
