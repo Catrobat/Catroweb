@@ -35,7 +35,7 @@
     "@fortawesome/fontawesome-free": "^6.4.2",
     "@hotwired/stimulus": "^3.2.2",
     "@symfony/webpack-encore": "^4.6.1",
-    "autoprefixer": "^10.4.18",
+    "autoprefixer": "^10.4.19",
     "browserslist": "^4.23.0",
     "core-js": "^3.36.0",
     "eslint": "^8.57.0",
