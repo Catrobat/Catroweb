@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fd26af05f9d4ec7591787999aad6c6e9",
+    "content-hash": "1be533724341fa020df7776fc00129f2",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7095,22 +7095,22 @@
         },
         {
             "name": "sonata-project/doctrine-orm-admin-bundle",
-            "version": "4.15.0",
+            "version": "4.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle.git",
-                "reference": "c40d82dbe3f8b3fe46e602d6de66cfa0f49d3f66"
+                "reference": "e7e5bfe115aac6e6913c06350f2b36f76836d3b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/c40d82dbe3f8b3fe46e602d6de66cfa0f49d3f66",
-                "reference": "c40d82dbe3f8b3fe46e602d6de66cfa0f49d3f66",
+                "url": "https://api.github.com/repos/sonata-project/SonataDoctrineORMAdminBundle/zipball/e7e5bfe115aac6e6913c06350f2b36f76836d3b7",
+                "reference": "e7e5bfe115aac6e6913c06350f2b36f76836d3b7",
                 "shasum": ""
             },
             "require": {
-                "doctrine/dbal": "^3.4",
-                "doctrine/doctrine-bundle": "^2.7",
-                "doctrine/orm": "^2.14",
+                "doctrine/dbal": "^3.4 || ^4.0",
+                "doctrine/doctrine-bundle": "^2.10",
+                "doctrine/orm": "^2.17 || ^3.0",
                 "doctrine/persistence": "^3.0.2",
                 "php": "^8.0",
                 "sonata-project/admin-bundle": "^4.18",
@@ -7149,7 +7149,7 @@
                 "phpunit/phpunit": "^9.5",
                 "psalm/plugin-phpunit": "^0.18",
                 "psalm/plugin-symfony": "^5.0",
-                "rector/rector": "^0.18",
+                "rector/rector": "^0.19",
                 "sonata-project/block-bundle": "^5.0",
                 "sonata-project/entity-audit-bundle": "^1.1",
                 "symfony/browser-kit": "^5.4 || ^6.2 || ^7.0",
@@ -7204,7 +7204,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.15.0"
+                "source": "https://github.com/sonata-project/SonataDoctrineORMAdminBundle/tree/4.16.0"
             },
             "funding": [
                 {
@@ -7224,7 +7224,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-04T08:21:03+00:00"
+            "time": "2024-02-26T11:46:18+00:00"
         },
         {
             "name": "sonata-project/exporter",
