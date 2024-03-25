@@ -18,7 +18,7 @@
     "codercat/jwk-to-pem": "1.1.*",
     "doctrine/annotations": "2.0.*",
     "doctrine/dbal": "3.8.*",
-    "doctrine/doctrine-bundle": "2.11.*",
+    "doctrine/doctrine-bundle": "2.12.*",
     "doctrine/doctrine-migrations-bundle": "3.3.*",
     "doctrine/orm": "2.19.*",
     "eightpoints/guzzle-bundle": "8.5.*",
