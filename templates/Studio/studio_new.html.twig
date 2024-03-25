@@ -7,7 +7,7 @@
 {% block body %}
 
     <h1>{{ 'studio.create_studio'|trans({}, 'catroweb') }}</h1>
-    <form id="studioCreateForm">
+    <form id="studioCreateForm" class="container">
         <div class="mb-3">
             <label class="form-label" for="inputStudioName">{{ 'studio.studio_name'|trans({}, 'catroweb') }}</label>
             <input class="form-control" id="inputStudioName" type="text" name="name" placeholder="Studio Name">
@@ -92,7 +92,21 @@
                    <div id="allow-comments-warning"></div>
                 </div>
             </div>
-
+            <div class="row mb-3">
+                <label>{{ 'Studio Cover'|trans({}, 'catroweb') }}</label>
+                <div class="uploadOuter  mt-3">
+                    <span class="drag-box" >
+                    Darg and Drop image here
+                    <input type="file" id="uploadFile"  />
+                    </span>
+                </div>
+            </div>
+                <div class="row">
+                    <label id="cover__preview" style="display: none">{{ 'Preview Studio Cover'|trans({}, 'catroweb') }}</label>
+                    <div class="mb-3 mt-3">
+                        <div id="preview"></div>
+                    </div>
+                </div>
             {% if user_name %}
             <div class="row">
             <div class="col-md-2">
@@ -121,8 +135,11 @@
         </div>
         {% endif %}
     </form>
+
 {% endblock %}
 
 {% block javascript %}
  {{ encore_entry_script_tags('studios_new') }}
+
+
 {% endblock %}

@@ -900,6 +900,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'Trego më shumë'
     showLess: 'Trego më pak'
     remove_project: 'Hiqe nga studio '
@@ -914,6 +915,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'Projektet'
+      addProject: 'Add your own projects'
     comments:
       title: 'Komentet'
       type_something: 'Shkruani diçka '

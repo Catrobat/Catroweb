@@ -900,6 +900,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'أظهر المزيد'
     showLess: 'تظهر أقل'
     remove_project: 'إزالة من الاستوديو'
@@ -914,6 +915,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'المشاريع'
+      addProject: 'Add your own projects'
     comments:
       title: 'التعليقات'
       type_something: 'اكتب شيئًا'

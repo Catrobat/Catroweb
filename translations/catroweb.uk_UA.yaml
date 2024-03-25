@@ -900,6 +900,7 @@ studio:
     public_studios: 'Публічні студії'
     private_studios: 'Приватні студії'
   details:
+    add_project: 'натисніть, щоб додати проєкт'
     showMore: 'Показати більше'
     showLess: 'Показати менше'
     remove_project: 'Видалити зі студії'
@@ -914,6 +915,7 @@ studio:
     decline: 'Відхилено'
     projects:
       title: 'проєкти'
+      addProject: 'Додайте власні проєкти'
     comments:
       title: 'Коментарі'
       type_something: 'Введіть щось'

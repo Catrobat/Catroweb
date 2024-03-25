@@ -2,6 +2,63 @@
 import { showSnackbar } from './components/snackbar'
 require('../styles/custom/studios.scss')
 document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('uploadFile').addEventListener('change', dragNdrop)
+  document.getElementById('uploadFile').addEventListener('dragover', drag)
+  document.getElementById('uploadFile').addEventListener('drop', drop)
+
+  function dragNdrop(event) {
+    const fileName = URL.createObjectURL(event.target.files[0])
+
+    if (event.target.files[0].type.startsWith('image/')) {
+      document.getElementById('uploadFile').setAttribute('value', fileName)
+    } else {
+      document.getElementById('uploadFile').setAttribute('value', null)
+    }
+
+    const preview = document.getElementById('preview')
+    const previewImg = document.createElement('img')
+    previewImg.setAttribute('src', fileName)
+    preview.innerHTML = ''
+    preview.appendChild(previewImg)
+
+    previewImg.addEventListener('load', function () {
+      previewImg.classList.add('loaded')
+      document.getElementById('cover__preview').style.display = 'block'
+      addCloseIcon(preview)
+    })
+  }
+
+  function addCloseIcon(preview) {
+    const closeIcon = document.createElement('i')
+    closeIcon.className = 'material-icons close-icon'
+    closeIcon.textContent = 'close'
+    closeIcon.style.position = 'absolute'
+    closeIcon.style.top = '5px'
+    closeIcon.style.right = '5px'
+    closeIcon.style.cursor = 'pointer'
+
+    closeIcon.addEventListener('click', function () {
+      const previewImg = preview.querySelector('img')
+      if (previewImg) {
+        previewImg.remove()
+        closeIcon.remove()
+      }
+      document.getElementById('uploadFile').setAttribute('value', null)
+      document.getElementById('cover__preview').style.display = 'none'
+    })
+
+    preview.appendChild(closeIcon)
+  }
+
+  function drag() {
+    document.getElementById('uploadFile').parentNode.className =
+      'draging dragBox'
+  }
+
+  function drop() {
+    document.getElementById('uploadFile').parentNode.className = 'dragBox'
+  }
+
   const submitButton = document.getElementById('studioCreateFormSubmit')
   submitButton.addEventListener('click', submitForm)
 
@@ -65,6 +122,14 @@ function submitForm() {
   formData.append('is_enabled', isEnabledValue.value)
   formData.append('is_public', isPublicValue.value)
   formData.append('allow_comments', allowCommentsValue.value)
+  const fileInput = document.getElementById('uploadFile')
+
+  if (fileInput.value === 'null') {
+    formData.append('image', null)
+  } else {
+    formData.append('image', fileInput.files[0])
+  }
+
   const submitButton = document.getElementById('studioCreateFormSubmit')
   const url = submitButton.getAttribute('data-url')
   const urlBack = submitButton.getAttribute('data-url-back')
@@ -171,7 +236,7 @@ function resetCssInvalidNameInputfield() {
   const nameInput = document.getElementById('inputStudioName')
   if (nameInput.classList.contains('is-invalid')) {
     const warningMessage = document.getElementById('name-warning')
-    warningMessage.textContent = '' // Reset warning message
+    warningMessage.textContent = ''
     nameInput.classList.remove('is-invalid')
   }
 }

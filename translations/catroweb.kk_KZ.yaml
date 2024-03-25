@@ -899,6 +899,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'көбірек көру'
     showLess: 'азырақ көру'
     remove_project: 'Студиядан жою'
@@ -913,6 +914,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'жобалар'
+      addProject: 'Add your own projects'
     comments:
       title: 'Пікірлер'
       type_something: 'Бірдеңе теріңіз'

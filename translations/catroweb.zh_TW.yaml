@@ -900,6 +900,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: '展示更多'
     showLess: '顯示較少'
     remove_project: '從工作室中移除'
@@ -914,6 +915,7 @@ studio:
     decline: 'Declined'
     projects:
       title: '程式檔'
+      addProject: 'Add your own projects'
     comments:
       title: '註釋'
       type_something: 'Type something'

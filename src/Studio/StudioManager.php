@@ -10,6 +10,7 @@ use App\DB\Entity\Studio\StudioProgram;
 use App\DB\Entity\Studio\StudioUser;
 use App\DB\Entity\User\Comment\UserComment;
 use App\DB\Entity\User\User;
+use App\DB\EntityRepository\Project\ProgramRepository;
 use App\DB\EntityRepository\Studios\StudioActivityRepository;
 use App\DB\EntityRepository\Studios\StudioJoinRequestRepository;
 use App\DB\EntityRepository\Studios\StudioProgramRepository;
@@ -27,7 +28,8 @@ class StudioManager
     protected StudioProgramRepository $studio_project_repository,
     protected StudioUserRepository $studio_user_repository,
     protected UserCommentRepository $user_comment_repository,
-    protected StudioJoinRequestRepository $studio_join_request_repository
+    protected StudioJoinRequestRepository $studio_join_request_repository,
+    protected ProgramRepository $program_repository
   ) {
   }
 
@@ -475,5 +477,20 @@ class StudioManager
     $this->entity_manager->refresh($joinRequest);
 
     return $joinRequest;
+  }
+
+  public function getUserProjects(User $user): array
+  {
+    return $this->program_repository->getProjectByUserID($user->getId());
+  }
+
+  public function getProjectByID(string $projectID): Program
+  {
+    return current($this->program_repository->getProjectByID($projectID));
+  }
+
+  public function findOneByName(string $programName): ?Program
+  {
+    return $this->program_repository->findOneByName($programName);
   }
 }

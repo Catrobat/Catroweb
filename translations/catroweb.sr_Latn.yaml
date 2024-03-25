@@ -904,6 +904,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'show more'
     showLess: 'show less'
     remove_project: 'Remove from studio'
@@ -918,6 +919,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'Programi'
+      addProject: 'Add your own projects'
     comments:
       title: 'Komentari'
       type_something: 'Type something'

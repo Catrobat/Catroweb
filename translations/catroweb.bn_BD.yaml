@@ -906,6 +906,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'আরো দেখুন'
     showLess: 'প্রদর্শন কম'
     remove_project: 'স্টুডিও থেকে সরান'
@@ -920,6 +921,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'প্রজেক্টগুলো'
+      addProject: 'Add your own projects'
     comments:
       title: 'মন্তব্যসমূহ'
       type_something: 'কিছু টাইপ করুন'

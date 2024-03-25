@@ -194,6 +194,10 @@ $list-item-padding-overflow-x: 1.5rem;
   margin: 0 0 0 3%;
 }
 
+.add-studio-project-button {
+  float: right;
+}
+
 .studio-project-thumbnail {
   width: 45px;
   margin-right: 3%;
@@ -402,4 +406,65 @@ $border-color-2: #28a745;
   color: $color-1;
   font-family: $font-family-1;
   padding-top: calc(0.5rem);
+}
+
+$color-1: #999;
+
+.upload-outer {
+  text-align: left;
+  strong {
+    padding: 0 10px;
+  }
+}
+.drag-box {
+  width: 250px;
+  height: 100px;
+  margin: 0 auto;
+  position: relative;
+  text-align: center;
+  font-weight: bold;
+  line-height: 95px;
+  color: $color-1;
+  border: 2px dashed #ccc;
+  display: inline-block;
+  transition: transform 0.3s;
+  input[type='file'] {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    top: 0;
+    left: 0;
+  }
+  .draging {
+    transform: scale(1.1);
+  }
+}
+#preview {
+  max-width: 50%;
+  height: auto;
+  position: relative;
+  img {
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 1.5s ease-out;
+  }
+}
+img {
+  .loaded {
+    opacity: 1;
+  }
+}
+
+@media (width <= 576px) {
+  #preview {
+    max-width: 30%;
+  }
+}
+
+@media (width >= 577px) and (width <= 992px) {
+  #preview {
+    max-width: 40%;
+  }
 }

@@ -902,6 +902,7 @@ studio:
     public_studios: 'Public studios'
     private_studios: 'Private studios'
   details:
+    add_project: 'click to add the project'
     showMore: 'نور ښکاره کړئ'
     showLess: 'لږ ښودل'
     remove_project: 'له سټوډیو څخه لرې کړئ'
@@ -916,6 +917,7 @@ studio:
     decline: 'Declined'
     projects:
       title: 'پروژې'
+      addProject: 'Add your own projects'
     comments:
       title: 'تبصرې'
       type_something: 'یو څه ټایپ کړئ'
