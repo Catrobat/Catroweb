@@ -40,7 +40,7 @@
     "sonata-project/doctrine-orm-admin-bundle": "4.15.*",
     "sonata-project/exporter": "3.3.*",
     "sonata-project/twig-extensions": "2.4.*",
-    "sonata-project/user-bundle": "5.10.*",
+    "sonata-project/user-bundle": "5.11.*",
     "symfony/acl-bundle": "2.3.*",
     "symfony/asset": "6.4.*",
     "symfony/cache": "6.4.*",
