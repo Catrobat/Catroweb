@@ -245,7 +245,7 @@ class UserManager implements UserManagerInterface
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }
 
-  public function find($id): ?User
+  public function find(mixed $id): ?User
   {
     return $this->user_repository->find($id);
   }
