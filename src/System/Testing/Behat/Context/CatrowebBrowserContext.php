@@ -724,10 +724,10 @@ class CatrowebBrowserContext extends BrowserContext
   {
     $page = $this->getSession()->getPage();
     $this->assertSession()->elementExists('xpath',
-      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[11]/div/a');
+      '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[12]/div/a');
 
     $page
-      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[11]/div/a')
+      ->find('xpath', '//div[1]/div/section[2]/div[2]/div/div/div[1]/table/tbody/tr['.$project_number.']/td[12]/div/a')
       ->click()
     ;
   }

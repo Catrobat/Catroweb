@@ -118,6 +118,7 @@ $container-padding: 1rem;
       &__value {
         padding-left: 0.3rem;
         font-size: 0.9rem;
+        color: $text-muted;
 
         @include text-truncate;
       }
@@ -225,6 +226,11 @@ $container-padding: 1rem;
 
       &__property {
         grid-area: property;
+
+        &__not-for-kids {
+          grid-area: property;
+          padding-top: 1.25em;
+        }
       }
     }
 
@@ -286,6 +292,10 @@ $container-padding: 1rem;
       position: absolute;
       right: 0;
     }
+  }
+  &__not-for-kids-logo {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 

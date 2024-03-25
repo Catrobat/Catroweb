@@ -98,6 +98,7 @@ class ProjectDataFixtures
     $project->setFlavor($config['flavor'] ?? 'pocketcode');
     $project->setRand($config['rand'] ?? 0);
     $project->setPopularity($config['popularity'] ?? 0);
+    $project->setNotForKids($config['not_for_kids'] ?? 0);
 
     if (isset($config['apk request time'])) {
       $project->setApkRequestTime(new \DateTime($config['apk request time'], new \DateTimeZone('UTC')));

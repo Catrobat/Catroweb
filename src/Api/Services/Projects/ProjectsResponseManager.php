@@ -58,8 +58,9 @@ class ProjectsResponseManager extends AbstractResponseManager
       $attributes_list[] = 'uploaded'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
       $attributes_list[] = 'download_url'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
       $attributes_list[] = 'filesize'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
+      $attributes_list[] = 'not_for_kids'; // TODO: hotfix for Catroid. Remove after Catroid uses attributes-parameter.
     } elseif ('ALL' === $attributes) {
-      $attributes_list = ['id', 'name', 'author', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize'];
+      $attributes_list = ['id', 'name', 'author', 'description', 'credits', 'version', 'views', 'downloads', 'reactions', 'comments', 'private', 'flavor', 'tags', 'uploaded', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url', 'download_url', 'filesize', 'not_for_kids'];
       $attributes_list[] = 'download'; // TODO: hotfix for Catty + Catroid. Remove after Catty + Catroid uses attributes-parameter.
     } else {
       $attributes_list = explode(',', $attributes);
@@ -147,6 +148,9 @@ class ProjectsResponseManager extends AbstractResponseManager
     }
     if (in_array('filesize', $attributes_list, true)) {
       $data['filesize'] = ($extraced_project->getFilesize() / 1_048_576);
+    }
+    if (in_array('not_for_kids', $attributes_list, true)) {
+      $data['not_for_kids'] = $project->getNotForKids();
     }
 
     return new ProjectResponse($data);

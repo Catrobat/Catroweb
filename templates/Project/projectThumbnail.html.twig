@@ -2,7 +2,7 @@
   <a href="{{ project_details.downloadUrl }}">
 {% endif %}
 
-    <img alt="project thumbnail" id="project-thumbnail-big" src="{{ asset(project_details.screenshotBig) }}"/>
+    <img alt="project thumbnail" id="project-thumbnail-big" src="{{ asset(project_details.screenshotBig) }}" {% if project.notForKids() %} class="blurred" {% endif %}/>
 
     {% if my_project %}
       <div class="position-relative">

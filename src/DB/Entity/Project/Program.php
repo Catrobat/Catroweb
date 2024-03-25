@@ -210,6 +210,9 @@ class Program implements \Stringable
   #[ORM\OneToMany(mappedBy: 'project', targetEntity: ProjectCustomTranslation::class, cascade: ['remove'])]
   private Collection $custom_translations;
 
+  #[ORM\Column(type: 'integer', options: ['default' => 0])]
+  protected int $not_for_kids = 0;
+
   /**
    * No ORM entry.
    */
@@ -845,6 +848,18 @@ class Program implements \Stringable
   public function setPopularity(float $popularity): Program
   {
     $this->popularity = $popularity;
+
+    return $this;
+  }
+
+  public function getNotForKids(): int
+  {
+    return $this->not_for_kids;
+  }
+
+  public function setNotForKids(int $not_for_kids): Program
+  {
+    $this->not_for_kids = $not_for_kids;
 
     return $this;
   }

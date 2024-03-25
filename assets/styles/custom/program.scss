@@ -12,6 +12,10 @@
   border-radius: 10%;
 }
 
+#project-thumbnail-big.blurred {
+  filter: blur(10px);
+}
+
 .text-area-empty {
   border-color: #f00 !important;
   border-width: medium;
