@@ -8,9 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [v24.3.1]
 
 ## What's Changed
-* Bumped dependencies & translations
-* Removed recent projects from the start page
-* SHARE-574 Studio List - Part 3 (add and remove projects) by @makre10 in https://github.com/Catrobat/Catroweb/pull/4685
+
+- Bumped dependencies & translations
+- Removed recent projects from the start page
+- SHARE-574 Studio List - Part 3 (add and remove projects) by @makre10 in https://github.com/Catrobat/Catroweb/pull/4685
 
 **Full Changelog**: https://github.com/Catrobat/Catroweb/compare/v24.3.0...v24.3.1
 
