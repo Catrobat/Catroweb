@@ -11,7 +11,7 @@ Feature: Project list must be hidden if there are no projects in a category
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should not see "Newest projects"
-    And the element "#home-projects__recent" should not be visible
+    And the element "#home-projects__trending" should not be visible
     And I should not see "Recommended"
     And I should not see "Most downloaded"
     And I should not see "Most viewed"

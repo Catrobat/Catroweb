@@ -52,11 +52,6 @@ class ProjectController extends AbstractController
   ) {
   }
 
-  /**
-   * Legacy routes:.
-   *
-   * Legacy routes
-   */
   #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
   #[Route(path: '/program/{id}', name: 'program_deprecated')]
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
