@@ -21,6 +21,7 @@ img .lazyload:not([src]) {
 }
 
 .carousel-item__image {
-  max-width: 100%;
+  max-width: 1024px;
+  max-height: 400px;
   height: auto;
 }

@@ -36,7 +36,7 @@ function updateBadge(
   apiToCall = 'old',
   badgeText = null,
   maxAmountToFetch = 99,
-  refreshRate = 10000,
+  refreshRate = 300000, // 5 minutes
 ) {
   const badge = document.getElementById(badgeID)
   if (!badge) {

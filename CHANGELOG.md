@@ -5,6 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v24.3.2]
+
+## What's Changed
+
+- lazy load translation dependencies (performance)
+- disable remix & apks (performance)
+- refresh rate (achievements + notifications) bumped to 5 minutes (performance)
+- refresh rate (project api) bumped to 180 minutes (performance)
+- add FeatureFlags to twig functions (dx)
+- fix invalid entities
+- fix hero banner styling in test env
+- remove unnecessary fflags
+- fix language selector
+
 ## [v24.3.1]
 
 ## What's Changed

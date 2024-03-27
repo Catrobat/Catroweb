@@ -16,10 +16,6 @@ Feature: Using a release app I should not see debug projects
     Given I use a debug build of the Catroid app
     And I am on homepage
     And I wait for the page to be loaded
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "program 1"
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "program 2"
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "debug program"
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "program 4"
     Then one of the "#home-projects__most_downloaded .project-list__project__name" elements should contain "program 1"
     Then one of the "#home-projects__most_downloaded .project-list__project__name" elements should contain "program 2"
     Then one of the "#home-projects__most_downloaded .project-list__project__name" elements should contain "debug program"
@@ -33,10 +29,6 @@ Feature: Using a release app I should not see debug projects
     Given I use a release build of the Catroid app
     And I am on homepage
     And I wait for the page to be loaded
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "program 1"
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "program 2"
-    Then none of the "#home-projects__recent .project-list__project__name" elements should contain "debug program"
-    Then one of the "#home-projects__recent .project-list__project__name" elements should contain "program 4"
     Then one of the "#home-projects__most_downloaded .project-list__project__name" elements should contain "program 1"
     Then one of the "#home-projects__most_downloaded .project-list__project__name" elements should contain "program 2"
     Then none of the "#home-projects__most_downloaded .project-list__project__name" elements should contain "debug program"

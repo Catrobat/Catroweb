@@ -2,6 +2,7 @@
 
 namespace App\System\Testing\Behat;
 
+use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
 use App\DB\Entity\Flavor;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
@@ -177,6 +178,11 @@ trait ContextTrait
   public function getFlavorRepository(): ?FlavorRepository
   {
     return $this->kernel->getContainer()->get(FlavorRepository::class);
+  }
+
+  public function getFeatureFlagManager(): ?FeatureFlagManager
+  {
+    return $this->kernel->getContainer()->get(FeatureFlagManager::class);
   }
 
   public function getManager(): ?EntityManagerInterface

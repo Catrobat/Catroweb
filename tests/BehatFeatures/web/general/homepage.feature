@@ -62,11 +62,11 @@ Feature: Pocketcode homepage
     Given I am on homepage
     And I wait for the page to be loaded
     Then I should see the featured slider
-    Then one of the ".project-list__title" elements should contain "Newest projects"
     Then one of the ".project-list__title" elements should contain "Examples"
     Then one of the ".project-list__title" elements should contain "Most downloaded"
     Then one of the ".project-list__title" elements should contain "Scratch remixes"
     Then one of the ".project-list__title" elements should contain "Random projects"
+    Then one of the ".project-list__title" elements should contain "Popular projects"
 
   Scenario: Welcome Section
     Given I am on homepage
@@ -125,15 +125,6 @@ Feature: Pocketcode homepage
     Then the element "#home-projects__example" should exist
     And the "#home-projects__example" element should contain "project 5"
     And the "#home-projects__example" element should contain "project 6"
-
-  Scenario: Extension flavored homepage
-    Given I am on "/embroidery"
-    And I wait for the page to be loaded
-    Then the element "#home-projects__recent" should exist
-    And the "#home-projects__recent" element should contain "project 1"
-    And the "#home-projects__recent" element should contain "project 2"
-    And the "#home-projects__recent" element should contain "project 4"
-    And the "#home-projects__recent" element should not contain "project 3"
 
   Scenario: User should be able to see useful links
     Given I am on homepage

@@ -18,9 +18,4 @@ class TestFeatureFlagController extends AbstractController
   {
     return $this->render('Admin/Tools/test_feature_flag.html.twig', ['enabled' => $this->manager->isEnabled('Test-Flag')]);
   }
-
-  public function testFlagSidebarStudioLink(): Response
-  {
-    return $this->render('Admin/Tools/feature_flag_sidebar_studio_link.html.twig', ['enabled' => $this->manager->isEnabled('Sidebar-Studio-Link-Feature')]);
-  }
 }
