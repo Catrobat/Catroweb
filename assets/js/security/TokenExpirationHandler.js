@@ -1,4 +1,4 @@
-import jwtDecode from 'jwt-decode'
+import { jwtDecode } from 'jwt-decode'
 import { deleteCookie, getCookie, setCookie } from './CookieHelper'
 import { setScopedInterval } from '../custom/Utils'
 
