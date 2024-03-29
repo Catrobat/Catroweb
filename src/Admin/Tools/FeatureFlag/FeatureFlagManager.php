@@ -41,11 +41,9 @@ class FeatureFlagManager
     }
   }
 
-  public function isEnabled(string $flagName): ?bool
+  public function isEnabled(string $flagName): bool
   {
-    $flagValue = $this->getFlagValue($flagName);
-
-    return null !== $flagValue && $flagValue;
+    return $this->getFlagValue($flagName) ?? false;
   }
 
   public function setFlagValue(string $flagName, bool $value): void

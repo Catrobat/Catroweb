@@ -52,7 +52,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
     Then one of the ".project-list__title" elements should contain "heruntergeladen"
     And the element "#home-projects__most_downloaded" should be visible
 
-  Scenario: User with selected russian language sees the remix graph button and details on program page
+  Scenario: User with selected russian language see details on program page
     Given there are forward remix relations:
       | ancestor_id | descendant_id | depth |
       | 1           | 1             | 0     |
@@ -62,9 +62,7 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And I am on "/app/project/1"
     And the selected language is "English"
     And I wait for the page to be loaded
-    Then I should see "REMIX GRAPH"
-    And the element "#remixGraphButton-small" should be visible
+    Then I should see "Download"
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
-    Then I should see "Графа ремиксов"
-    And the element "#remixGraphButton-small" should be visible
+    Then I should see "Скачать"

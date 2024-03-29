@@ -9,7 +9,6 @@ use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
@@ -420,11 +419,21 @@ class DataFixturesContext implements Context
   public function thereAreFeaturedProjects(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      /** @var FeaturedProgram $project */
       $project = $this->insertFeaturedProject($config, false);
       $this->featured_projects[] = $project;
     }
     $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are feature flags:$/
+   */
+  public function thereAreFeatureFlags(TableNode $table): void
+  {
+    $manager = $this->getFeatureFlagManager();
+    foreach ($table->getHash() as $config) {
+      $manager->setFlagValue($config['name'], $config['value']);
+    }
   }
 
   /**
