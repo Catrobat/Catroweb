@@ -12,9 +12,9 @@ Feature: Project list to provides users with different categories of projects
     Then the element <category> should be visible
     Then the <category> element should contain <title>
     Examples:
-      | category                                               | title              | page |
-      | "#home-projects__trending .project-list__title"        | "Trending projects | "/"  |
-      | "#home-projects__most_downloaded .project-list__title" | "Most downloaded"  | "/"  |
+      | category                                               | title               | page |
+      | "#home-projects__trending .project-list__title"        | "Trending projects" | "/"  |
+      | "#home-projects__most_downloaded .project-list__title" | "Most downloaded"   | "/"  |
 
   Scenario Outline: Each project list has its own show more button
     Given I am on <page>
@@ -57,7 +57,7 @@ Feature: Project list to provides users with different categories of projects
     And the <category> element should contain <value>
     Examples:
       | category                                                                     | value     | page |
-      | "#home-projects__popular .project-list__project__property-uploaded"          | "person"  | "/"  |
+      | "#home-projects__popular .project-list__project__property-author"            | "person"  | "/"  |
       | "#home-projects__most_downloaded .project-list__project__property-downloads" | "get_app" | "/"  |
 
   Scenario Outline: A click on a project redirects to the project page

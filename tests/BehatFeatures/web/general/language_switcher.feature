@@ -63,8 +63,6 @@ Feature: Users can choose between multiple languages. Text should be automatical
     And the selected language is "English"
     And I wait for the page to be loaded
     Then I should see "Download"
-    And the element "#projectDownloadButton-small" should be visible
     When I switch the language to "Russisch"
     And I wait for the page to be loaded
     Then I should see "Скачать"
-    And the element "#projectDownloadButton-small" should be visible

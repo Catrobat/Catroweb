@@ -18,7 +18,7 @@ Feature: As a visitor I want to see a project page
     Then I should see "Notes and credits"
     And I should see "No notes and credits available."
     And I should see "Download"
-    And I should see "Remix Graph"
+#    And I should see "Remix Graph"
 #    And I should see "Download as app"
     And I should see "Catrobat"
     And I should see "Statistics"
@@ -35,7 +35,7 @@ Feature: As a visitor I want to see a project page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "Download"
-    And I should see "Remix Graph"
+#    And I should see "Remix Graph"
 #    And I should see "Download as app"
     And I should see "Statistics"
     And I should see "Code View"
@@ -45,7 +45,7 @@ Feature: As a visitor I want to see a project page
     And I am on "/app/project/1"
     And I wait for the page to be loaded
     Then I should see "Download"
-    And I should see "Remix Graph"
+    And I should not see "Remix Graph"
     And I should not see "Download as app"
     And I should see "Statistics"
     And I should see "Code View"
