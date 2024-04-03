@@ -60,6 +60,7 @@ class ProjectController extends AbstractController
   #[Route(path: '/project/{id}', name: 'program', defaults: ['id' => 0])]
   #[Route(path: '/program/{id}', name: 'program_deprecated')]
   #[Route(path: '/details/{id}', name: 'catrobat_web_detail', methods: ['GET'])]
+  #[Route(path: '/steal/{id}', name: 'steal_project', methods: ['POST'])]
   public function projectAction(Request $request, string $id): Response
   {
     $project = $this->project_manager->findProjectIfVisibleToCurrentUser($id);
@@ -75,6 +76,7 @@ class ProjectController extends AbstractController
     $this->checkAndAddViewed($request, $project, $viewed);
     $referrer = $request->headers->get('referer');
     $request->getSession()->set('referer', $referrer);
+
     /** @var User|null $user */
     $user = $this->getUser();
     $logged_in = null !== $user;
@@ -95,27 +97,17 @@ class ProjectController extends AbstractController
       $project, $active_like_types, $active_user_like_types, $total_like_count,
       $referrer, $project_comment_list
     );
-    /*
-     * some pseudo code and some first ideas how i coild implemente the steal functionality
-     * need to add the button itself if logged in then take a look at database rest should not be to hard
+        $can_steal = $logged_in && !$my_project;
 
-
-    $can_steal = $logged_in && !$my_project;
-
-      // Handle the "Steal" form submission
       if ($can_steal && $request->request->get('steal_project')) {
-          // Change ownership of the project
+
           $project->setUser($user);
           $this->entity_manager->persist($project);
           $this->entity_manager->flush();
 
-          // Provide feedback to the user
-          $this->addFlash('success', 'Project successfully stolen!');
-
-          // Redirect to the project details page
           return $this->redirectToRoute('program', ['id' => $id]);
       }
-    */
+
 
     return $this->render('Project/project.html.twig', [
       'project' => $project,

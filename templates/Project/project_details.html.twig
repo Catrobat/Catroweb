@@ -41,6 +41,20 @@
       } %}
     </div>
   </div>
+  <div class="row">
+    {% if logged_in and not my_project %}
+      <div class="d-none d-lg-block col-lg-4">
+        <form action="{{ path('steal_project', {'id': project.id }) }}" method="post">
+          <button type="submit" class="btn btn-primary">
+            <i class="material-icons">extension</i>
+            {{ 'Steal'|trans({}, 'catroweb') }}
+          </button>
+          <input type="hidden" name="steal_project" value="1">
+        </form>
+      </div>
+    {% endif %}
+  </div>
+
 
   <div class="row mb-4">
     <div class="col-6 mb-3 d-lg-none mt-3">
@@ -61,6 +75,16 @@
         'text': "codeview.title"|trans({}, "catroweb")
       } %}
     </div>
+    <div class="col-6 mb-3 d-lg-none mt-3">
+      {% include 'components/redirect_button.twig' with {
+        'id': 'projectCodeStatsButton',
+        'suffix': '-small',
+        'url': path('code_statistics', {'id': project.id }),
+        'icon': 'show_chart',
+        'text': "Steal"|trans({}, "catroweb")
+      } %}
+    </div>
+
   </div>
 
 </div>
