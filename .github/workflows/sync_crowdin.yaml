@@ -46,7 +46,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: crowdin/github-action@v1.20.1
+      - uses: crowdin/github-action@v1.20.2
         with:
           upload_sources: true
           upload_translations: false
