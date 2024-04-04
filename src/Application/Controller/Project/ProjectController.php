@@ -105,7 +105,9 @@ class ProjectController extends AbstractController
           $this->entity_manager->persist($project);
           $this->entity_manager->flush();
 
+          $this->addFlash('success', 'You successfully stole the project!');
           return $this->redirectToRoute('program', ['id' => $id]);
+
       }
 
 
