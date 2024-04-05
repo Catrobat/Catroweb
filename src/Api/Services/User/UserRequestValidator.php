@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractRequestValidator;
@@ -83,12 +85,12 @@ class UserRequestValidator extends AbstractRequestValidator
   private function validateEmail(?string $email, string $locale, string $mode): void
   {
     $KEY = 'email';
-    $emailParts = explode('.', $email);
+    $emailParts = explode('.', (string) $email);
     $tld = strtolower(end($emailParts));
 
     if (self::MODE_UPDATE !== $mode && (is_null($email) || '' === trim($email))) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailMissing', [], $locale), $KEY);
-    } elseif (self::MODE_UPDATE === $mode && '' === trim($email)) {
+    } elseif (self::MODE_UPDATE === $mode && '' === trim((string) $email)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailEmpty', [], $locale), $KEY);
     } elseif (0 !== count($this->validate($email, new Email()))) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.emailInvalid', [], $locale), $KEY);
@@ -105,7 +107,7 @@ class UserRequestValidator extends AbstractRequestValidator
 
     if (self::MODE_UPDATE !== $mode && (is_null($username) || '' === trim($username))) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameMissing', [], $locale), $KEY);
-    } elseif (self::MODE_UPDATE === $mode && '' === trim($username)) {
+    } elseif (self::MODE_UPDATE === $mode && '' === trim((string) $username)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameEmpty', [], $locale), $KEY);
     } elseif (strlen((string) $username) < self::MIN_USERNAME_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.usernameTooShort', [], $locale), $KEY);
@@ -126,13 +128,13 @@ class UserRequestValidator extends AbstractRequestValidator
 
     if (self::MODE_UPDATE !== $mode && (is_null($password) || '' === trim($password))) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordMissing', [], $locale), $KEY);
-    } elseif (self::MODE_UPDATE === $mode && '' === trim($password)) {
+    } elseif (self::MODE_UPDATE === $mode && '' === trim((string) $password)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordEmpty', [], $locale), $KEY);
     } elseif (strlen((string) $password) < self::MIN_PASSWORD_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordTooShort', [], $locale), $KEY);
     } elseif (strlen((string) $password) > self::MAX_PASSWORD_LENGTH) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordTooLong', [], $locale), $KEY);
-    } elseif (!mb_detect_encoding($password, 'ASCII', true)) {
+    } elseif (!mb_detect_encoding((string) $password, 'ASCII', true)) {
       $this->getValidationWrapper()->addError($this->__('api.registerUser.passwordInvalidChars', [], $locale), $KEY);
     }
   }

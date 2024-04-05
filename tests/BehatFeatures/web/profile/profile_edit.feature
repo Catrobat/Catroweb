@@ -215,6 +215,7 @@ Feature:
     When I click ".swal2-cancel"
     Then I should not see "delete it"
     When I reload the page
+    And I wait for the page to be loaded
     Then I should see "project 1"
     And I should see "project 2"
 

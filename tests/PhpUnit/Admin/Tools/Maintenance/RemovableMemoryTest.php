@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Admin\Tools\Maintenance;
 
 use App\Admin\Tools\Maintenance\RemovableMemory;

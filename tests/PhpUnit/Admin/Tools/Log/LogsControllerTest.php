@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Admin\Tools\Log;
 
 use App\Admin\Tools\Logs\Controller\LogsController;

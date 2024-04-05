@@ -23,6 +23,18 @@
     "brick/math": {
         "version": "0.9.3"
     },
+    "bugsnag/bugsnag-symfony": {
+        "version": "1.14",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.13",
+            "ref": "f571597c0e65ca904f2d853c2396017ab28da0df"
+        },
+        "files": [
+            "config/packages/bugsnag.yaml"
+        ]
+    },
     "catrobat/capi": {
         "version": "v1.0.43"
     },

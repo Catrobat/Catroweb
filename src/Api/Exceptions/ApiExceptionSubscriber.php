@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Exceptions;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
@@ -12,7 +14,7 @@ class ApiExceptionSubscriber implements EventSubscriberInterface
 {
   public function onKernelException(ExceptionEvent $event): void
   {
-    if (0 !== strpos($event->getRequest()->getPathInfo(), '/api')) {
+    if (!str_starts_with($event->getRequest()->getPathInfo(), '/api')) {
       return;
     }
     $exception = $event->getThrowable();

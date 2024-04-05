@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Services\User;
 
 use App\Api\Services\Base\AbstractApiProcessor;

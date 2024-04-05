@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Testing\Behat\Context;
 
 use App\Api\Exceptions\ApiVersionNotSupportedException;
@@ -66,19 +68,10 @@ class ApiContext implements Context
 
   private DataFixturesContext $dataFixturesContext;
 
-  /**
-   * @var mixed[]|string[]|bool[]
-   */
   private array $request_parameters;
 
-  /**
-   * @var mixed[]|UploadedFile[]
-   */
   private array $request_files;
 
-  /**
-   * @var mixed[]|string[]|bool[]
-   */
   private array $request_headers;
 
   private ?string $request_content = null;
@@ -250,7 +243,7 @@ class ApiContext implements Context
    *
    * @throws \Exception
    */
-  public function iRequestWith($method, $uri): void
+  public function iRequestWith(string $method, string $uri): void
   {
     $this->getKernelBrowser()->request(
       $method,
@@ -303,7 +296,7 @@ class ApiContext implements Context
    * @When /^I get the most viewed projects with "([^"]*)"$/
    * @When /^I GET the tag list from "([^"]*)" with these parameters$/
    */
-  public function iGetFrom(mixed $url): void
+  public function iGetFrom(string $url): void
   {
     $this->iRequestWith('GET', $url);
   }
@@ -320,7 +313,7 @@ class ApiContext implements Context
    *
    * @When /^I POST these parameters to "([^"]*)"$/
    */
-  public function iPostTo(mixed $url): void
+  public function iPostTo(string $url): void
   {
     $this->iRequestWith('POST', $url);
   }
@@ -328,7 +321,7 @@ class ApiContext implements Context
   /**
    * @Given /^I search for "([^"]*)"$/
    */
-  public function iSearchFor(mixed $arg1): void
+  public function iSearchFor(string $arg1): void
   {
     $this->iHaveAParameterWithValue('q', $arg1);
     $this->iGetFrom('/app/api/projects/search.json');
@@ -337,7 +330,7 @@ class ApiContext implements Context
   /**
    * @When /^I search similar projects for project id "([^"]*)"$/
    */
-  public function iSearchSimilarProjectsForProjectId(mixed $id): void
+  public function iSearchSimilarProjectsForProjectId(string $id): void
   {
     $this->iHaveAParameterWithValue('project_id', $id);
     if (!isset($this->request_parameters['limit'])) {
@@ -354,7 +347,7 @@ class ApiContext implements Context
    *
    * @throws \Exception
    */
-  public function iWantToDownloadTheApkFileOf(mixed $arg1): void
+  public function iWantToDownloadTheApkFileOf(string $arg1): void
   {
     $project_manager = $this->getProjectManager();
 
@@ -370,7 +363,7 @@ class ApiContext implements Context
   /**
    * @When /^I get the user\'s projects with "([^"]*)"$/
    */
-  public function iGetTheUserSProjectsWith(mixed $url): void
+  public function iGetTheUserSProjectsWith(string $url): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->findAll()[0];
@@ -382,7 +375,7 @@ class ApiContext implements Context
   /**
    * @Given /^I am "([^"]*)"$/
    */
-  public function iAm(mixed $username): void
+  public function iAm(string $username): void
   {
     $this->username = $username;
   }
@@ -420,12 +413,12 @@ class ApiContext implements Context
    *
    * @throws \Exception when an error occurs during uploading
    */
-  public function iUploadAnotherProjectUsingToken(mixed $arg1): void
+  public function iUploadAnotherProjectUsingToken(string $token): void
   {
     $this->iHaveAValidCatrobatFile('1');
     $this->iHaveAParameterWithTheMdChecksumOfTheUploadFile('fileChecksum', '1');
     $this->request_parameters['username'] = $this->username;
-    $this->request_parameters['token'] = $arg1;
+    $this->request_parameters['token'] = $token;
     $this->iPostTo('/app/api/upload/upload.json');
   }
 
@@ -448,7 +441,7 @@ class ApiContext implements Context
   /**
    * @When /^I report project (\d+) with category "([^"]*)" and note "([^"]*)"$/
    */
-  public function iReportProjectWithNote(mixed $project_id, mixed $category, mixed $note): void
+  public function iReportProjectWithNote(string $project_id, string $category, string $note): void
   {
     $url = '/app/api/reportProject/reportProject.json';
     $this->request_parameters = [
@@ -462,7 +455,7 @@ class ApiContext implements Context
   /**
    * @When /^I POST login with user "([^"]*)" and password "([^"]*)"$/
    */
-  public function iPostLoginUserWithPassword(mixed $uname, mixed $pwd): void
+  public function iPostLoginUserWithPassword(string $uname, string $pwd): void
   {
     $this->request_content = $this->getAuthenticationRequestBody($uname, $pwd);
     $this->iPostTo('/api/authentication');
@@ -477,7 +470,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should receive a "([^"]*)" file$/
    */
-  public function iShouldReceiveAFile(mixed $extension): void
+  public function iShouldReceiveAFile(string $extension): void
   {
     $content_type = $this->getKernelBrowser()->getResponse()->headers->get('Content-Type');
     Assert::assertEquals('image/'.$extension, $content_type);
@@ -486,7 +479,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should receive a file named "([^"]*)"$/
    */
-  public function iShouldReceiveAFileNamed(mixed $name): void
+  public function iShouldReceiveAFileNamed(string $name): void
   {
     $content_disposition = $this->getKernelBrowser()->getResponse()->headers->get('Content-Disposition');
     Assert::assertEquals('attachment; filename="'.$name.'"', $content_disposition);
@@ -546,7 +539,7 @@ class ApiContext implements Context
   /**
    * @Then /^the response status code should be "([^"]*)"$/
    */
-  public function theResponseStatusCodeShouldBe(mixed $status_code): void
+  public function theResponseStatusCodeShouldBe(string $status_code): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals(
@@ -567,7 +560,7 @@ class ApiContext implements Context
   /**
    * @Given /^I have a request parameter "([^"]*)" with value "([^"]*)"$/
    */
-  public function iHaveARequestParameterWithValue(mixed $name, mixed $value): void
+  public function iHaveARequestParameterWithValue(string $name, string $value): void
   {
     $this->request_parameters[$name] = $value;
   }
@@ -614,7 +607,7 @@ class ApiContext implements Context
    *
    * @throws JWTEncodeFailureException
    */
-  public function iUseAValidJwtBearerTokenFor(mixed $username): void
+  public function iUseAValidJwtBearerTokenFor(string $username): void
   {
     /** @var JWTManager $jwt_manager */
     $jwt_manager = $this->getJwtManager();
@@ -649,7 +642,7 @@ class ApiContext implements Context
    *
    * @throws JWTEncodeFailureException
    */
-  public function iUseAnExpiredJwtBearerTokenFor(mixed $username): void
+  public function iUseAnExpiredJwtBearerTokenFor(string $username): void
   {
     $token = $this->getJwtEncoder()->encode(['username' => $username, 'exp' => 1]);
     sleep(1);
@@ -733,7 +726,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadTheProjectWithAsName(mixed $name, string $api_version): void
+  public function iUploadTheProjectWithAsName(string $name, string $api_version): void
   {
     $this->generateProjectFileWith([
       'name' => $name,
@@ -774,7 +767,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProjectShouldHaveAScratchParentHavingScratchID(mixed $scratch_parent_id, string $api_version): void
+  public function theUploadedProjectShouldHaveAScratchParentHavingScratchID(string $scratch_parent_id, string $api_version): void
   {
     $this->theProjectShouldHaveAScratchParentHavingScratchID($this->getIDOfLastUploadedProject($api_version), $scratch_parent_id);
   }
@@ -798,7 +791,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified $api_version is not supported
    */
-  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(mixed $id, mixed $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(string $id, string $depth, string $api_version): void
   {
     $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version),
       $id, $depth);
@@ -811,7 +804,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(mixed $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatForwardAncestorHavingItsOwnIdAndDepth(string $depth, string $api_version): void
   {
     $this->theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $this->getIDOfLastUploadedProject($api_version), $depth);
   }
@@ -823,7 +816,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProjectShouldHaveACatrobatBackwardParentHavingId(mixed $id, $api_version): void
+  public function theUploadedProjectShouldHaveACatrobatBackwardParentHavingId(string $id, string $api_version): void
   {
     $this->theProjectShouldHaveACatrobatBackwardParentHavingId($this->getIDOfLastUploadedProject($api_version), $id);
   }
@@ -847,7 +840,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProjectShouldHaveNoCatrobatBackwardParents($api_version): void
+  public function theUploadedProjectShouldHaveNoCatrobatBackwardParents(string $api_version): void
   {
     $this->theProjectShouldHaveNoCatrobatBackwardParents($this->getIDOfLastUploadedProject($api_version));
   }
@@ -895,7 +888,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $id, mixed $depth, string $api_version): void
+  public function theUploadedProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(string $id, string $depth, string $api_version): void
   {
     $this->theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth($this->getIDOfLastUploadedProject($api_version), $id, $depth);
   }
@@ -931,7 +924,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function theUploadedProjectShouldHaveRemixOfInTheXml(mixed $value, string $api_version): void
+  public function theUploadedProjectShouldHaveRemixOfInTheXml(string $value, string $api_version): void
   {
     $this->theProjectShouldHaveRemixofInTheXml($this->getIDOfLastUploadedProject($api_version), $value);
   }
@@ -1043,7 +1036,7 @@ class ApiContext implements Context
   /**
    * @When /^I get the most recent projects with limit "([^"]*)" and offset "([^"]*)"$/
    */
-  public function iGetTheMostRecentProjectsWithLimitAndOffset(mixed $limit, mixed $offset): void
+  public function iGetTheMostRecentProjectsWithLimitAndOffset(string $limit, string $offset): void
   {
     $this->request_parameters = [
       'limit' => $limit,
@@ -1060,7 +1053,7 @@ class ApiContext implements Context
     $id = 1;
     $this->iGetFrom('/api/project/'.$id.'/catrobat');
     $this->iShouldReceiveAProjectFile();
-    $this->theResponseCodeShouldBe(200);
+    $this->theResponseCodeShouldBe('200');
   }
 
   /**
@@ -1079,7 +1072,7 @@ class ApiContext implements Context
   /**
    * @Given /^I am a user with role "([^"]*)"$/
    */
-  public function iAmAUserWithRole(mixed $role): void
+  public function iAmAUserWithRole(string $role): void
   {
     $this->insertUser([
       'role' => $role,
@@ -1092,11 +1085,11 @@ class ApiContext implements Context
   /**
    * @Then /^the client response should contain "([^"]*)"$/
    */
-  public function theResponseShouldContain(mixed $needle): void
+  public function theResponseShouldContain(string $needle): void
   {
     if (!str_contains((string) $this->getKernelBrowser()
       ->getResponse()
-      ->getContent(), (string) $needle)
+      ->getContent(), $needle)
     ) {
       Assert::assertTrue(false, $needle.' not found in the response ');
     }
@@ -1125,7 +1118,7 @@ class ApiContext implements Context
   /**
    * @Then /^the client response should not contain "([^"]*)"$/
    */
-  public function theResponseShouldNotContain(mixed $needle): void
+  public function theResponseShouldNotContain(string $needle): void
   {
     Assert::assertStringNotContainsString($needle, $this->getKernelBrowser()->getResponse()->getContent());
   }
@@ -1173,11 +1166,11 @@ class ApiContext implements Context
   /**
    * @Then /^URI from "([^"]*)" should be "([^"]*)"$/
    */
-  public function uriFromShouldBe(mixed $arg1, mixed $arg2): void
+  public function uriFromShouldBe(string $arg1, string $arg2): void
   {
     $link = $this->getKernelBrowser()->getCrawler()->selectLink($arg1)->link();
 
-    if (!strcmp($link->getUri(), (string) $arg2)) {
+    if (!strcmp($link->getUri(), $arg2)) {
       Assert::assertTrue(false, 'expected: '.$arg2.'  get: '.$link->getURI());
     }
   }
@@ -1185,7 +1178,7 @@ class ApiContext implements Context
   /**
    * @Then /^the response Header should contain the key "([^"]*)" with the value '([^']*)'$/
    */
-  public function theResponseHeadershouldContainTheKeyWithTheValue(mixed $headerKey, mixed $headerValue): void
+  public function theResponseHeadershouldContainTheKeyWithTheValue(string $headerKey, string $headerValue): void
   {
     $headers = $this->getKernelBrowser()->getResponse()->headers;
     Assert::assertEquals($headerValue, $headers->get($headerKey),
@@ -1196,7 +1189,7 @@ class ApiContext implements Context
   /**
    * @Then the returned json object with id :id will be:
    */
-  public function theReturnedJsonObjectWithIdWillBe(mixed $id, PyStringNode $string): void
+  public function theReturnedJsonObjectWithIdWillBe(string $id, PyStringNode $string): void
   {
     $response = $this->getKernelBrowser()->getResponse();
 
@@ -1210,7 +1203,7 @@ class ApiContext implements Context
   /**
    * @Then /^the response code will be "([^"]*)"$/
    */
-  public function theResponseCodeWillBe(mixed $code): void
+  public function theResponseCodeWillBe(string $code): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
@@ -1219,7 +1212,7 @@ class ApiContext implements Context
   /**
    * @When /^searching for "([^"]*)"$/
    */
-  public function searchingFor(mixed $arg1): void
+  public function searchingFor(string $arg1): void
   {
     $this->method = 'GET';
     $this->url = '/app/api/projects/search.json';
@@ -1230,7 +1223,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project should get (.*)$/
    */
-  public function theProjectShouldGet(mixed $result): void
+  public function theProjectShouldGet(string $result): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -1245,7 +1238,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should get a total of (\d+) projects$/
    */
-  public function iShouldGetATotalOfProjects(mixed $arg1): void
+  public function iShouldGetATotalOfProjects(string $arg1): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -1258,7 +1251,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should get (\d+) projects$/
    */
-  public function iShouldGetProjects(mixed $arg1): void
+  public function iShouldGetProjects(string $arg1): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $responseArray = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -1271,7 +1264,7 @@ class ApiContext implements Context
   /**
    * @Given /^I use the limit "([^"]*)"$/
    */
-  public function iUseTheLimit(mixed $arg1): void
+  public function iUseTheLimit(string $arg1): void
   {
     $this->iHaveAParameterWithValue('limit', $arg1);
   }
@@ -1279,7 +1272,7 @@ class ApiContext implements Context
   /**
    * @Given /^I use the offset "([^"]*)"$/
    */
-  public function iUseTheOffset(mixed $arg1): void
+  public function iUseTheOffset(string $arg1): void
   {
     $this->iHaveAParameterWithValue('offset', $arg1);
   }
@@ -1307,7 +1300,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should get (\d+) projects in random order:$/
    */
-  public function iShouldGetProjectsInRandomOrder(mixed $project_count, TableNode $table): void
+  public function iShouldGetProjectsInRandomOrder(string $project_count, TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     $response_array = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
@@ -1380,7 +1373,7 @@ class ApiContext implements Context
   /**
    * @Given /^the response code should be "([^"]*)"$/
    */
-  public function theResponseCodeShouldBe(mixed $code): void
+  public function theResponseCodeShouldBe(string $code): void
   {
     $response = $this->getKernelBrowser()->getResponse();
     Assert::assertEquals($code, $response->getStatusCode(), 'Wrong response code. '.$response->getContent());
@@ -1501,7 +1494,7 @@ class ApiContext implements Context
   /**
    * @Then /^the response should contain the following user:$/
    */
-  public function responseShouldContainTheFollowingUser(TableNode $table): void
+  public function responseShouldContainTheFollowingUser(): void
   {
     $response = $this->getKernelBrowser()->getResponse();
 
@@ -1624,7 +1617,7 @@ class ApiContext implements Context
     $response = $this->getKernelBrowser()->getResponse();
     $returned_languages = json_decode($response->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
-    $all_locales = array_filter(Locales::getNames(), fn ($key) => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
+    $all_locales = array_filter(Locales::getNames(), fn ($key): bool => 2 == strlen((string) $key) || 5 == strlen((string) $key), ARRAY_FILTER_USE_KEY);
     $all_locales_count = count($all_locales);
 
     Assert::assertEquals($all_locales_count, is_countable($returned_languages) ? count($returned_languages) : 0,
@@ -1710,7 +1703,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should get (\d+) programs in the following order:$/
    */
-  public function iShouldGetScratchProgramsInTheFollowingOrder(mixed $project_count, TableNode $table): void
+  public function iShouldGetScratchProgramsInTheFollowingOrder(string $project_count, TableNode $table): void
   {
     $response = $this->getKernelBrowser()->getResponse();
 
@@ -1769,7 +1762,7 @@ class ApiContext implements Context
   /**
    * @Given /^I have a parameter "([^"]*)" with an invalid md5checksum of my file$/
    */
-  public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile(mixed $parameter): void
+  public function iHaveAParameterWithAnInvalidMdchecksumOfMyFile(string $parameter): void
   {
     $this->request_parameters[$parameter] = 'INVALIDCHECKSUM';
   }
@@ -1815,7 +1808,7 @@ class ApiContext implements Context
   /**
    * @When /^I have a parameter "([^"]*)" with the returned projectId$/
    */
-  public function iHaveAParameterWithTheReturnedProjectid(mixed $name): void
+  public function iHaveAParameterWithTheReturnedProjectid(string $name): void
   {
     $response = json_decode($this->getKernelBrowser()
       ->getResponse()
@@ -1852,7 +1845,7 @@ class ApiContext implements Context
   /**
    * @Given /^the upload problem "([^"]*)"$/
    */
-  public function theUploadProblem(mixed $problem): void
+  public function theUploadProblem(string $problem): void
   {
     switch ($problem) {
       case 'no authentication':
@@ -1978,7 +1971,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAProjectWithId(mixed $id, string $api_version): void
+  public function iUploadAProjectWithId(string $id, string $api_version): void
   {
     $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
   }
@@ -1990,7 +1983,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadTheGeneratedProjectWithIdAndName(mixed $id, mixed $name, string $api_version): void
+  public function iUploadTheGeneratedProjectWithIdAndName(string $id, string $name, string $api_version): void
   {
     $this->uploadProject(sys_get_temp_dir().'/project_generated.catrobat', $api_version, null, $id);
 
@@ -2022,7 +2015,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnotherProjectWithNameSetToAndUrlSetTo(mixed $name, mixed $url, $api_version): void
+  public function iUploadAnotherProjectWithNameSetToAndUrlSetTo(string $name, string $url, string $api_version): void
   {
     $this->iHaveAProjectWithAsTwoHeaderFields('name', $name, 'url', $url);
     $this->iUploadThisGeneratedProject($api_version);
@@ -2036,7 +2029,7 @@ class ApiContext implements Context
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadAnotherProjectWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(mixed $name, mixed $url, mixed $catrobat_language_version, string $api_version): void
+  public function iUploadAnotherProjectWithNameSetToUrlSetToAndCatrobatLanguageVersionSetTo(string $name, string $url, string $catrobat_language_version, string $api_version): void
   {
     $this->iHaveAProjectWithAsMultipleHeaderFields('name', $name, 'url', $url,
       'catrobatLanguageVersion', $catrobat_language_version);
@@ -2046,12 +2039,12 @@ class ApiContext implements Context
   /**
    * @When I upload this generated project again with the tags :arg1, API version :arg2
    *
-   * @param mixed  $tags        The tags of the project
+   * @param string $tags        The tags of the project
    * @param string $api_version The version of the API to be used
    *
    * @throws ApiVersionNotSupportedException when the specified API version is not supported
    */
-  public function iUploadThisProjectAgainWithTheTags(mixed $tags, $api_version): void
+  public function iUploadThisProjectAgainWithTheTags(string $tags, string $api_version): void
   {
     $this->generateProjectFileWith([
       'tags' => $tags,
@@ -2071,7 +2064,7 @@ class ApiContext implements Context
   /**
    * @Given /^the POST parameter "([^"]*)" contains the MD5 sum of the attached file$/
    */
-  public function thePostParameterContainsTheMdSumOfTheGivenFile(mixed $arg1): void
+  public function thePostParameterContainsTheMdSumOfTheGivenFile(string $arg1): void
   {
     $this->request_parameters[$arg1] = md5_file($this->request_files[0]->getPathname());
   }
@@ -2081,7 +2074,7 @@ class ApiContext implements Context
    *
    * @When /^there is a check token problem ([^"]*)$/
    */
-  public function thereIsACheckTokenProblem(mixed $problem): void
+  public function thereIsACheckTokenProblem(string $problem): void
   {
     switch ($problem) {
       case 'invalid token':
@@ -2098,7 +2091,7 @@ class ApiContext implements Context
   /**
    * @Given /^I have a parameter "([^"]*)" with the tag "([^"]*)"$/
    */
-  public function iHaveAParameterWithTheTag(mixed $name, mixed $value): void
+  public function iHaveAParameterWithTheTag(string $name, string $value): void
   {
     $this->request_parameters[$name] = $value;
   }
@@ -2160,7 +2153,7 @@ class ApiContext implements Context
   /**
    * @Given /^the server name is "([^"]*)"$/
    */
-  public function theServerNameIs(mixed $name): void
+  public function theServerNameIs(string $name): void
   {
     $this->request_headers['HTTP_HOST'] = $name;
   }
@@ -2176,7 +2169,7 @@ class ApiContext implements Context
   /**
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)" and "([^"]*)" set to "([^"]*)"$/
    */
-  public function iHaveAProjectWithAsTwoHeaderFields(mixed $key1, mixed $value1, mixed $key2, mixed $value2): void
+  public function iHaveAProjectWithAsTwoHeaderFields(string $key1, string $value1, string $key2, string $value2): void
   {
     $this->generateProjectFileWith([
       $key1 => $value1,
@@ -2187,7 +2180,7 @@ class ApiContext implements Context
   /**
    * @Given I have a project with :key1 set to :value1, :key2 set to :value2 and :key3 set to :value3
    */
-  public function iHaveAProjectWithAsMultipleHeaderFields(mixed $key1, mixed $value1, mixed $key2, mixed $value2, mixed $key3, mixed $value3): void
+  public function iHaveAProjectWithAsMultipleHeaderFields(string $key1, string $value1, string $key2, string $value2, string $key3, string $value3): void
   {
     $this->generateProjectFileWith([
       $key1 => $value1,
@@ -2244,7 +2237,7 @@ class ApiContext implements Context
    * @Given /^I have a project with "([^"]*)" set to "([^"]*)"$/
    * @Given /^there is a project with "([^"]*)" set to "([^"]*)"$/
    */
-  public function iHaveAProjectWithAs(mixed $key, mixed $value): void
+  public function iHaveAProjectWithAs(string $key, string $value): void
   {
     $this->generateProjectFileWith([
       $key => $value,
@@ -2254,12 +2247,12 @@ class ApiContext implements Context
   /**
    * @Then The returned url with id :id should be
    */
-  public function theReturnedUrlShouldBe(mixed $id, PyStringNode $string): void
+  public function theReturnedUrlShouldBe(string $id, PyStringNode $string): void
   {
     $answer = (array) json_decode($this->getKernelBrowser()->getResponse()->getContent(), null, 512, JSON_THROW_ON_ERROR);
 
     $form_url = $answer['form'];
-    $form_url = preg_replace('/&id=.*?&mail=/', '&id='.$id.'&mail=', $form_url, -1);
+    $form_url = preg_replace('/&id=.*?&mail=/', '&id='.$id.'&mail=', (string) $form_url, -1);
 
     Assert::assertEquals($string->getRaw(), $form_url);
   }
@@ -2300,7 +2293,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should see the message "([^"]*)"$/
    */
-  public function iShouldSeeAMessage(mixed $arg1): void
+  public function iShouldSeeAMessage(string $arg1): void
   {
     Assert::assertStringContainsString($arg1, $this->getKernelBrowser()->getResponse()->getContent());
   }
@@ -2308,7 +2301,7 @@ class ApiContext implements Context
   /**
    * @Then /^I should see the hashtag "([^"]*)" in the project description$/
    */
-  public function iShouldSeeTheHashtagInTheProjectDescription(mixed $hashtag): void
+  public function iShouldSeeTheHashtagInTheProjectDescription(string $hashtag): void
   {
     Assert::assertStringContainsString($hashtag, $this->getKernelBrowser()
       ->getResponse()
@@ -2319,7 +2312,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should be a remix root$/
    */
-  public function theProjectShouldBeARemixRoot(mixed $project_id): void
+  public function theProjectShouldBeARemixRoot(string $project_id): void
   {
     $project_manager = $this->getProjectManager();
     $uploaded_project = $project_manager->find($project_id);
@@ -2329,7 +2322,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should not be a remix root$/
    */
-  public function theProjectShouldNotBeARemixRoot(mixed $project_id): void
+  public function theProjectShouldNotBeARemixRoot(string $project_id): void
   {
     $project_manager = $this->getProjectManager();
     /** @var Program $uploaded_project */
@@ -2340,7 +2333,7 @@ class ApiContext implements Context
   /**
    * @Given /^the project "([^"]*)" should have a Scratch parent having id "([^"]*)"$/
    */
-  public function theProjectShouldHaveAScratchParentHavingScratchID(mixed $project_id, mixed $scratch_parent_id): void
+  public function theProjectShouldHaveAScratchParentHavingScratchID(string $project_id, string $scratch_parent_id): void
   {
     $direct_edge_relation = $this->getScratchProjectRemixRepository()->findOneBy([
       'scratch_parent_id' => $scratch_parent_id,
@@ -2355,7 +2348,7 @@ class ApiContext implements Context
   /**
    * @Given /^the project "([^"]*)" should have no further Scratch parents$/
    */
-  public function theProjectShouldHaveNoFurtherScratchParents(mixed $project_id): void
+  public function theProjectShouldHaveNoFurtherScratchParents(string $project_id): void
   {
     $direct_edge_relations = $this->getScratchProjectRemixRepository()->findBy([
       'catrobat_child_id' => $project_id,
@@ -2372,7 +2365,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have a Catrobat forward ancestor having id "([^"]*)" and depth "([^"]*)"$/
    */
-  public function theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(mixed $project_id, mixed $ancestor_project_id, mixed $depth): void
+  public function theProjectShouldHaveACatrobatForwardAncestorHavingIdAndDepth(string $project_id, string $ancestor_project_id, string $depth): void
   {
     $forward_ancestor_relation = $this->getProjectRemixForwardRepository()->findOneBy([
       'ancestor_id' => $ancestor_project_id,
@@ -2393,7 +2386,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have a Catrobat backward parent having id "([^"]*)"$/
    */
-  public function theProjectShouldHaveACatrobatBackwardParentHavingId(mixed $project_id, mixed $backward_parent_project_id): void
+  public function theProjectShouldHaveACatrobatBackwardParentHavingId(string $project_id, string $backward_parent_project_id): void
   {
     $backward_parent_relation = $this->getProjectRemixBackwardRepository()->findOneBy([
       'parent_id' => $backward_parent_project_id,
@@ -2408,7 +2401,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no Catrobat forward ancestors except self-relation$/
    */
-  public function theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(mixed $project_id): void
+  public function theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation(string $project_id): void
   {
     $forward_ancestors_including_self_referencing_relation = $this
       ->getProjectRemixForwardRepository()
@@ -2422,7 +2415,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no further Catrobat forward ancestors$/
    */
-  public function theProjectShouldHaveNoFurtherCatrobatForwardAncestors(mixed $project_id): void
+  public function theProjectShouldHaveNoFurtherCatrobatForwardAncestors(string $project_id): void
   {
     $forward_ancestors_including_self_referencing_relation = $this
       ->getProjectRemixForwardRepository()
@@ -2440,7 +2433,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no Catrobat backward parents$/
    */
-  public function theProjectShouldHaveNoCatrobatBackwardParents(mixed $project_id): void
+  public function theProjectShouldHaveNoCatrobatBackwardParents(string $project_id): void
   {
     $backward_parent_relations = $this->getProjectRemixBackwardRepository()->findBy(['child_id' => $project_id]);
     Assert::assertCount(0, $backward_parent_relations);
@@ -2449,7 +2442,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no further Catrobat backward parents$/
    */
-  public function theProjectShouldHaveNoFurtherCatrobatBackwardParents(mixed $project_id): void
+  public function theProjectShouldHaveNoFurtherCatrobatBackwardParents(string $project_id): void
   {
     $backward_parent_relations = $this->getProjectRemixBackwardRepository()->findBy(['child_id' => $project_id]);
 
@@ -2464,7 +2457,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no Catrobat ancestors except self-relation$/
    */
-  public function theProjectShouldHaveNoCatrobatAncestors(mixed $project_id): void
+  public function theProjectShouldHaveNoCatrobatAncestors(string $project_id): void
   {
     $this->theProjectShouldHaveNoCatrobatForwardAncestorsExceptSelfRelation($project_id);
     $this->theProjectShouldHaveNoCatrobatBackwardParents($project_id);
@@ -2473,7 +2466,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no Scratch parents$/
    */
-  public function theProjectShouldHaveNoScratchParents(mixed $project_id): void
+  public function theProjectShouldHaveNoScratchParents(string $project_id): void
   {
     $scratch_parents = $this->getScratchProjectRemixRepository()->findBy(['catrobat_child_id' => $project_id]);
     Assert::assertCount(0, $scratch_parents);
@@ -2482,7 +2475,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have a Catrobat forward descendant having id "([^"]*)" and depth "([^"]*)"$/
    */
-  public function theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(mixed $project_id, mixed $descendant_project_id, mixed $depth): void
+  public function theProjectShouldHaveCatrobatForwardDescendantHavingIdAndDepth(string $project_id, string $descendant_project_id, string $depth): void
   {
     /** @var ProgramRemixRelation $forward_descendant_relation */
     $forward_descendant_relation = $this->getProjectRemixForwardRepository()->findOneBy([
@@ -2504,7 +2497,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have no Catrobat forward descendants except self-relation$/
    */
-  public function theProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(mixed $project_id): void
+  public function theProjectShouldHaveNoCatrobatForwardDescendantsExceptSelfRelation(string $project_id): void
   {
     $forward_ancestors_including_self_referencing_relation = $this
       ->getProjectRemixForwardRepository()
@@ -2518,7 +2511,7 @@ class ApiContext implements Context
   /**
    * @Then the project :project_id should have no further Catrobat forward descendants
    */
-  public function theProjectShouldHaveNoFurtherCatrobatForwardDescendants(mixed $project_id): void
+  public function theProjectShouldHaveNoFurtherCatrobatForwardDescendants(string $project_id): void
   {
     $forward_descendants_including_self_referencing_relation = $this
       ->getProjectRemixForwardRepository()
@@ -2536,7 +2529,7 @@ class ApiContext implements Context
   /**
    * @Then /^the project "([^"]*)" should have RemixOf "([^"]*)" in the xml$/
    */
-  public function theProjectShouldHaveRemixofInTheXml(mixed $project_id, mixed $value): void
+  public function theProjectShouldHaveRemixofInTheXml(string $project_id, string $value): void
   {
     $project_manager = $this->getProjectManager();
     /** @var Program $uploaded_project */
@@ -2550,7 +2543,7 @@ class ApiContext implements Context
   /**
    * @Given /^I request from a (debug|release) build of the Catroid app$/
    */
-  public function iRequestFromASpecificBuildTypeOfCatroidApp(mixed $build_type): void
+  public function iRequestFromASpecificBuildTypeOfCatroidApp(string $build_type): void
   {
     $this->iUseTheUserAgentParameterized('0.998', 'PocketCode', '0.9.60', $build_type);
   }
@@ -3101,7 +3094,6 @@ class ApiContext implements Context
    */
   private function getIDOfLastUploadedProject(string $api_version)
   {
-    $last_uploaded_project_id = null;
     $json = json_decode($this->getKernelBrowser()->getResponse()->getContent(), true, 512, JSON_THROW_ON_ERROR);
 
     if ('1' == $api_version) {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Project\CatrobatFile;
 
 use App\Project\CatrobatCode\CodeObject;

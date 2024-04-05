@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Parser\Scripts;
 
 use App\Project\CatrobatCode\Parser\Bricks\BrickFactory;
@@ -117,7 +119,7 @@ abstract class Script
   private function addBrick(\SimpleXMLElement $brick_as_xml): void
   {
     if (isset($brick_as_xml[Constants::REFERENCE_ATTRIBUTE])) {
-      $this->bricks[] = BrickFactory::generate($brick_as_xml->xpath($brick_as_xml[Constants::REFERENCE_ATTRIBUTE])[0]);
+      $this->bricks[] = BrickFactory::generate($brick_as_xml->xpath($brick_as_xml[Constants::REFERENCE_ATTRIBUTE]->__toString())[0]);
     } else {
       $this->bricks[] = BrickFactory::generate($brick_as_xml);
     }

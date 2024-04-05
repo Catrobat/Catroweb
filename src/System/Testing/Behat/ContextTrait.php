@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Testing\Behat;
 
 use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
@@ -315,7 +317,7 @@ trait ContextTrait
     $tag = new Tag();
     $tag->setInternalTitle($config['internal_title']);
     $tag->setTitleLtmCode($config['title_ltm_code'] ?? 'tag_ltm');
-    $tag->setEnabled($config['enabled'] ?? true);
+    $tag->setEnabled((bool) ($config['enabled'] ?? true));
 
     $this->getManager()->persist($tag);
     if ($andFlush) {
@@ -330,7 +332,7 @@ trait ContextTrait
     $extension = new Extension();
     $extension->setInternalTitle($config['internal_title']);
     $extension->setTitleLtmCode($config['title_ltm_code'] ?? 'extension_ltm');
-    $extension->setEnabled($config['enabled'] ?? true);
+    $extension->setEnabled((bool) ($config['enabled'] ?? true));
 
     $this->getManager()->persist($extension);
     if ($andFlush) {
@@ -502,14 +504,14 @@ trait ContextTrait
     $new_comment->setParentId($parent_id);
     $new_comment->setIsDeleted($is_deleted);
     $new_comment->setUsername($user->getUserIdentifier());
-    $new_comment->setIsReported($config['reported'] ?? false);
+    $new_comment->setIsReported((bool) ($config['reported'] ?? false));
     $new_comment->setText($config['text']);
 
     $this->getManager()->persist($new_comment);
 
     if (isset($config['id'])) {
       // overwrite id if desired
-      $new_comment->setId($config['id']);
+      $new_comment->setId((int) $config['id']);
       $this->getManager()->persist($new_comment);
     }
 

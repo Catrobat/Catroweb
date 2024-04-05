@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Studio;
 
 use App\DB\Entity\Studio\Studio;
@@ -27,10 +29,9 @@ class StudioController extends AbstractController
   }
 
   #[Route(path: '/studios', name: 'studios_overview', methods: ['GET'])]
-  public function studiosOverview(Request $request): Response
+  public function studiosOverview(): Response
   {
     $studios = $this->studio_manager->findAllStudiosWithUsersAndProjectsCount();
-
     /** @var User|null $user */
     $user = $this->getUser();
     for ($i = 0; $i < count($studios); ++$i) {
@@ -55,7 +56,7 @@ class StudioController extends AbstractController
    * @internal route for now
    */
   #[Route(path: '/studio/new', name: 'studio_new', methods: ['GET'])]
-  public function studioNew(Request $request): Response
+  public function studioNew(): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -163,7 +164,7 @@ class StudioController extends AbstractController
    * @internal route only
    */
   #[Route(path: '/studio/{id}/join', name: 'studio_join', methods: ['POST'])]
-  public function joinStudio(Request $request, string $id): JsonResponse
+  public function joinStudio(string $id): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -176,7 +177,7 @@ class StudioController extends AbstractController
       return new JsonResponse(['message' => 'studio not found'], Response::HTTP_NOT_FOUND);
     }
     $admin = $this->studio_manager->getStudioAdmin($studio);
-    if (empty($admin)) {
+    if (!$admin instanceof StudioUser) {
       return new JsonResponse(['message' => 'No admin found for the studio'], Response::HTTP_NOT_FOUND);
     }
     $admin = $admin->getUser();
@@ -196,7 +197,7 @@ class StudioController extends AbstractController
    * @internal route only
    */
   #[Route(path: '/studio/{id}/leave', name: 'studio_leave', methods: ['POST'])]
-  public function leaveStudio(Request $request, string $id): JsonResponse
+  public function leaveStudio(string $id): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -613,7 +614,7 @@ class StudioController extends AbstractController
       }
 
       return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
-    } catch (\Exception $e) {
+    } catch (\Exception) {
       return new JsonResponse(['redirect_url' => $request->headers->get('referer')]);
     }
   }

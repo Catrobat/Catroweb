@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Helpers;
 
 use App\Project\CatrobatFile\CatrobatFileExtractor;
@@ -11,7 +13,7 @@ class RemixManipulationCatrobatFileExtractor extends CatrobatFileExtractor
 {
   private int $current_program_id = 1;
 
-  public function __construct(private mixed $remix_graph_mapping, mixed $extract_dir, mixed $extract_path)
+  public function __construct(private readonly mixed $remix_graph_mapping, mixed $extract_dir, mixed $extract_path)
   {
     parent::__construct($extract_dir, $extract_path);
   }

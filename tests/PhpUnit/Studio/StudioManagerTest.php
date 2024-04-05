@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Studio;
 
 use App\DB\Entity\Project\Program;
@@ -231,8 +233,8 @@ class StudioManagerTest extends DefaultTestCase
   {
     $newUser = $this->user_fixture->insertUser(['name' => 'kitkat', 'password' => '123456']);
     $newUser_2 = $this->user_fixture->insertUser(['name' => 'peanutbutter', 'password' => '123456']);
-    $project = $this->project_fixture->insertProject(['owned by' => $newUser, 'name' => 'test prog',
-      'description' => 'test desc', 'credit' => $newUser, ]);
+    $project = $this->project_fixture->insertProject(['owned by' => 'kitkat', 'name' => 'test prog',
+      'description' => 'test desc', 'credit' => 'peanutbutter', ]);
     $studio_project = $this->object->addProjectToStudio($newUser, $this->studio, $project);
     $this->assertNull($studio_project);
     $this->object->addUserToStudio($this->user, $this->studio, $newUser);

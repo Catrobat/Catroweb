@@ -1,12 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Statements;
 
 class BaseUserListStatement extends Statement
 {
   private string $listName;
 
-  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, private mixed $start, private mixed $middle, private mixed $end)
+  public function __construct(mixed $statementFactory, mixed $xmlTree, mixed $spaces, private readonly mixed $start, private readonly mixed $middle, private readonly mixed $end)
   {
     parent::__construct($statementFactory, $xmlTree, $spaces,
       $start,

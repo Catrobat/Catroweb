@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Security;
 
 use App\Security\Authentication\CookieService;
@@ -18,7 +20,7 @@ class LogoutController extends AbstractController
   }
 
   #[Route(path: '/logout', name: 'logout')]
-  public function logoutAction(Request $request): RedirectResponse
+  public function logout(Request $request): RedirectResponse
   {
     $this->cookie_service->clearCookie('BEARER');
     $this->cookie_service->clearCookie('REFRESH_TOKEN');

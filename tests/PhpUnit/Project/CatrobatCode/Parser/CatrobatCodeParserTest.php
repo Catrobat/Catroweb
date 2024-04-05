@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;

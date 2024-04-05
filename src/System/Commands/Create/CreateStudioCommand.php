@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\Entity\Project\Program;
@@ -8,11 +10,13 @@ use App\DB\Entity\User\User;
 use App\Studio\StudioManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:studio', description: 'Create a studio')]
 class CreateStudioCommand extends Command
 {
   public function __construct(
@@ -25,7 +29,7 @@ class CreateStudioCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:studio')
+    $this
       ->addArgument('name', InputArgument::REQUIRED, 'Name for the Studio')
       ->addArgument('description', InputArgument::REQUIRED, 'Description for the studio')
       ->addArgument('admin', InputArgument::REQUIRED, 'User which is admin on a studio')

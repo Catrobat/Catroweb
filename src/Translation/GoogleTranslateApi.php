@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Translation;
 
 use Google\Cloud\Core\Exception\ServiceException;

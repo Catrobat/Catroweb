@@ -1,21 +1,13 @@
 parameters:
   bootstrapFiles:
       - config/bootstrap_test.php
-  level: 6  # 0 is the loosest lvl and 8 is the strictest
+  level: 6  # 0 is the loosest lvl and 9 is the strictest (https://phpstan.org/user-guide/rule-levels)
   paths:
       - src
       - config
       - tests
   inferPrivatePropertyTypeFromConstructor: true
-  reportUnmatchedIgnoredErrors: false
-  ignoreErrors:
-      # Even if it not is best practice, it works.
-      - '#Call to static method PHPUnit\\Framework\\Assert::assertTrue\(\) with false .*?#'
-
-      # ByPasFinal and phpstan seems to be having a problem currently
-      - '#Return type of call to method PHPUnit\\Framework\\MockObject\\MockBuilder<[a-zA-Z0-9\\_]+>::getMock(ForAbstractClass)?\(\) contains unresolvable type\.#'
-      - '#Return type of call to method PHPUnit\\Framework\\TestCase::createMock\(\) contains unresolvable type\.#'
-      - '#Return type of call to method PHPUnit\\Framework\\TestCase::createTestProxy\(\) contains unresolvable type\.#'
+  reportUnmatchedIgnoredErrors: true
 
   # Would be nice, but not worth the amount of work needed to fix this. Maybe in the future ;)
   checkMissingIterableValueType: false

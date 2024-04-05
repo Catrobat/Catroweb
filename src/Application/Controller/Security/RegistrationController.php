@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Security;
 
 use App\DB\Entity\User\User;
@@ -19,7 +21,7 @@ class RegistrationController extends AbstractController
   }
 
   #[Route(path: '/register', name: 'register', methods: ['GET'])]
-  public function registerAction(): Response
+  public function register(): Response
   {
     return $this->render('security/registration/register.html.twig');
   }

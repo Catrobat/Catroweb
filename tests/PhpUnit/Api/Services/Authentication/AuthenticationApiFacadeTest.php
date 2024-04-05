@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Api\Services\Authentication;
 
 use App\Api\Services\Authentication\AuthenticationApiFacade;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Parser;
 
 abstract class ParsedObjectsContainer
@@ -91,7 +93,7 @@ abstract class ParsedObjectsContainer
   private function dereference(\SimpleXMLElement $object_xml_properties): \SimpleXMLElement
   {
     if (null != $object_xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
-      $attribute = $object_xml_properties->xpath($object_xml_properties[Constants::REFERENCE_ATTRIBUTE]);
+      $attribute = $object_xml_properties->xpath($object_xml_properties[Constants::REFERENCE_ATTRIBUTE]->__toString());
       if (!isset($attribute[0])) {
         throw new \Exception('Invalid reference: '.$object_xml_properties[Constants::REFERENCE_ATTRIBUTE]);
       }

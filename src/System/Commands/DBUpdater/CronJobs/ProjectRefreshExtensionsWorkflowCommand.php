@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\Entity\Project\Program;
@@ -8,10 +10,12 @@ use App\Project\CatrobatFile\ExtractedFileRepository;
 use App\Project\Extension\ProjectExtensionManager;
 use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:workflow:project:refresh_extensions', description: 'Removes all extensions from a project an re-adds them again')]
 class ProjectRefreshExtensionsWorkflowCommand extends Command
 {
   public function __construct(protected ProjectManager $program_manager,
@@ -21,13 +25,6 @@ class ProjectRefreshExtensionsWorkflowCommand extends Command
     protected EntityManagerInterface $entity_manager)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:workflow:project:refresh_extensions')
-      ->setDescription('Removes all extensions from a project an re-adds them again')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

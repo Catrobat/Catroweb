@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Users\UserDataReport;
 
 use App\DB\Entity\User\User;

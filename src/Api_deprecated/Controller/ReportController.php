@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\DB\Entity\Project\Program;
@@ -39,7 +41,7 @@ class ReportController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/reportProject/reportProject.json', name: 'catrobat_api_report_program', defaults: ['_format' => 'json'], methods: ['POST', 'GET'])]
-  public function reportProjectAction(Request $request): JsonResponse
+  public function reportProject(Request $request): JsonResponse
   {
     /* @var $project Program */
     /* @var $user User */
