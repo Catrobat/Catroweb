@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
@@ -22,7 +24,7 @@ class ListProjectsController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/recent.json', name: 'api_recent_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function listProjectsAction(Request $request): ProjectListResponse
+  public function listProjects(Request $request): ProjectListResponse
   {
     return $this->listSortedProjects($request, 'recent');
   }
@@ -31,7 +33,7 @@ class ListProjectsController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/mostDownloaded.json', name: 'api_most_downloaded_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function listMostDownloadedProjectsAction(Request $request): ProjectListResponse
+  public function listMostDownloadedProjects(Request $request): ProjectListResponse
   {
     return $this->listSortedProjects($request, 'downloads');
   }
@@ -40,7 +42,7 @@ class ListProjectsController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/mostViewed.json', name: 'api_most_viewed_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function listMostViewedProjectsAction(Request $request): ProjectListResponse
+  public function listMostViewedProjects(Request $request): ProjectListResponse
   {
     return $this->listSortedProjects($request, 'views');
   }
@@ -49,7 +51,7 @@ class ListProjectsController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/randomProjects.json', name: 'api_random_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function listRandomProjectsAction(Request $request): ProjectListResponse
+  public function listRandomProjects(Request $request): ProjectListResponse
   {
     return $this->listSortedProjects($request, 'random');
   }
@@ -58,7 +60,7 @@ class ListProjectsController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/userProjects.json', name: 'api_user_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function listUserProjectsAction(Request $request): ProjectListResponse
+  public function listUserProjects(Request $request): ProjectListResponse
   {
     return $this->listSortedProjects($request, 'user');
   }

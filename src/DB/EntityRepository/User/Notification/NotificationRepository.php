@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\User\Notification;
 
 use App\DB\Entity\Project\Program;
@@ -92,7 +94,7 @@ class NotificationRepository extends ServiceEntityRepository
     $unseen_notifications = $qb->getQuery()->getResult();
 
     foreach ($unseen_notifications as $unseen_notification) {
-      $unseen_notification->setSeen(1);
+      $unseen_notification->setSeen(true);
       $this->getEntityManager()->persist($unseen_notification);
     }
 

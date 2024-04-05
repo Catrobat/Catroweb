@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\Entity\Project\Program;
@@ -9,11 +11,13 @@ use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:comment', description: 'Add comment to a project')]
 class CreateCommentCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $em,
@@ -24,8 +28,7 @@ class CreateCommentCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:comment')
-      ->setDescription('Add comment to a project')
+    $this
       ->addArgument('user', InputArgument::REQUIRED, 'User who comments on program')
       ->addArgument('program_name', InputArgument::REQUIRED, 'Program name of program to comment on')
       ->addArgument('message', InputArgument::REQUIRED, 'Comment message')

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\Logs\Controller;
 
 use App\Admin\Tools\Logs\LogLine;
@@ -25,7 +27,7 @@ class LogsController extends CRUDController
   final public const FILTER_LEVEL_ALERT = 6;
   final public const FILTER_LEVEL_EMERGENCY = 7;
 
-  public function listAction(?Request $request = null): Response
+  public function listAction(Request $request): Response
   {
     $filter = self::FILTER_LEVEL_WARNING;
     $greater_equal_than_level = true;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Comments\ReportedComments;
 
 use App\DB\Entity\Project\ProgramInappropriateReport;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Services;
 
 use App\Api\ProjectsApi;
@@ -12,7 +14,7 @@ class OverwriteController extends AbstractController
   {
   }
 
-  public function projectIdCatrobatGetAction(string $id): ?Response
+  public function projectIdCatrobatGet(string $id): ?Response
   {
     $responseCode = 200;
     $responseHeaders = [];

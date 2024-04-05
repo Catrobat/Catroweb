@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\FeatureFlag;
 
 use App\DB\Entity\FeatureFlag;

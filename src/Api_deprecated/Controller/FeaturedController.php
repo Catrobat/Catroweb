@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\DB\Entity\Project\Special\FeaturedProgram;
@@ -22,7 +24,7 @@ class FeaturedController extends AbstractController
    * @throws NonUniqueResultException
    */
   #[Route(path: '/api/projects/ios-featured.json', name: 'api_ios_featured_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function getFeaturedIOSProjectsAction(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): JsonResponse
+  public function getFeaturedIOSProjects(Request $request, ImageRepository $image_repository, FeaturedRepository $repository): JsonResponse
   {
     return $this->getFeaturedProjects($request, true, $image_repository, $repository);
   }

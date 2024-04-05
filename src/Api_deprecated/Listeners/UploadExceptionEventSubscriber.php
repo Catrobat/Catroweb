@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Listeners;
 
 use App\Project\CatrobatFile\InvalidCatrobatFileException;

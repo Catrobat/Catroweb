@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Api\Exceptions;
+declare(strict_types=1);
 
-use Exception;
+namespace App\Api\Exceptions;
 
 class ApiVersionNotSupportedException extends ApiException
 {

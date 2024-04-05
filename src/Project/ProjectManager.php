@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project;
 
 use App\DB\Entity\Project\Program;
@@ -278,7 +280,7 @@ class ProjectManager
 
     $this->notifyFollower($project);
 
-    if ($image_url = $project_data['image'] ?? null) {
+    if ($project_data['image'] ?? false) {
       $this->screenshot_repository->saveScratchScreenshot($project->getScratchId(), $project->getId());
     }
 

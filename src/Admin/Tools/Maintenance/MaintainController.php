@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\Maintenance;
 
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -132,29 +134,25 @@ class MaintainController extends CRUDController
     return new RedirectResponse($this->admin->generateUrl('list'));
   }
 
-  public function listAction(?Request $request = null): Response
+  public function listAction(Request $request): Response
   {
     if (!$this->admin->isGranted('LIST')) {
       throw new AccessDeniedException();
     }
-
     // ... use any methods or services to get statistics data
     $RemovableObjects = [];
-
     $description = "This will remove all compressed catrobat files in the 'compressed'-directory and flag the projects accordingly";
     $rm = new RemovableMemory('Compressed Catrobatfiles', $description);
     $this->setSizeOfObject($rm, strval($this->file_storage_dir));
     $rm->setCommandName('Delete compressed files');
     $rm->setCommandLink($this->admin->generateUrl('compressed'));
     $RemovableObjects[] = $rm;
-
     $description = "This will remove all generated apk-files in the 'apk'-directory and flag the projects accordingly";
     $rm = new RemovableMemory('Generated APKs', $description);
     $this->setSizeOfObject($rm, strval($this->apk_dir), ['apk']);
     $rm->setCommandName('Delete APKs');
     $rm->setCommandLink($this->admin->generateUrl('apk'));
     $RemovableObjects[] = $rm;
-
     $description = 'This will remove all log files.';
     $rm = new RemovableMemory('Logs', $description);
     $this->setSizeOfObject($rm, strval($this->log_dir));
@@ -162,9 +160,7 @@ class MaintainController extends CRUDController
     $rm->setCommandLink($this->admin->generateUrl('delete_logs'));
     $rm->setArchiveCommandLink($this->admin->generateUrl('archive_logs'));
     $rm->setArchiveCommandName('Archive logs files');
-
     $RemovableObjects[] = $rm;
-
     $freeSpace = disk_free_space('/');
     $usedSpace = disk_total_space('/') - $freeSpace;
     $usedSpace = $usedSpace < 0 ? 0 : $usedSpace;
@@ -172,17 +168,14 @@ class MaintainController extends CRUDController
     foreach ($RemovableObjects as $obj) {
       $usedSpaceRaw -= $obj->size_raw;
     }
-
     $projectsSize = $this->get_dir_size(strval($this->file_storage_dir));
     $usedSpaceRaw -= $projectsSize;
-
     $whole_ram = (float) shell_exec("free | grep Mem | awk '{print $2}'") * 1_000;
     $used_ram = (float) shell_exec("free | grep Mem | awk '{print $3}'") * 1_000;
     $free_ram = (float) shell_exec("free | grep Mem | awk '{print $4}'") * 1_000;
     $shared_ram = (float) shell_exec("free | grep Mem | awk '{print $5}'") * 1_000;
     $cached_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
     $available_ram = (float) shell_exec("free | grep Mem | awk '{print $6}'") * 1_000;
-
     $free_ram_percentage = ($free_ram / $whole_ram) * 100;
     $used_ram_percentage = ($used_ram / $whole_ram) * 100;
     $shared_ram_percentage = ($shared_ram / $whole_ram) * 100;

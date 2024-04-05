@@ -5,9 +5,13 @@ import { ApiPutFetch } from './ApiHelper'
 import MessageDialogs from '../components/MessageDialogs'
 
 export default class ProjectApi {
-  static update(id, data, successCallback, finalCallback) {
+  constructor() {
+    this.baseUrl = document.querySelector('#js-api-routing').dataset.baseUrl
+  }
+
+  updateProject(id, data, successCallback, finalCallback) {
     new ApiPutFetch(
-      '/api/project/' + id,
+      this.baseUrl + '/api/project/' + id,
       data,
       'Save Project',
       null,

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\Extension;
 
 use App\DB\Entity\Project\Extension;
@@ -101,7 +103,7 @@ class ProjectExtensionManager
 
   protected function isAMindstormsProject(string $code_xml): bool
   {
-    return 1 === preg_match('/\"legonxt|\"legoev3/i', $code_xml, $matches);
+    return 1 === preg_match('/\"legonxt|\"legoev3/i', $code_xml);
   }
 
   protected function isAPhiroProject(string $code_xml): bool

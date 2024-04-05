@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\Event;
 
 use App\DB\Entity\Project\Program;

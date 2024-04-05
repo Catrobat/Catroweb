@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Admin\DB_Updater;
 
 use App\Admin\DB_Updater\AchievementsAdmin;

@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\Entity\Project\Extension;
 use App\DB\EntityRepository\Project\ExtensionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:update:extensions', description: 'Inserting our static project extension into the Database')]
 class UpdateProjectExtensionsCommand extends Command
 {
   final public const EXTENSION_LTM_PREFIX = 'extensions.extension.';
@@ -16,13 +20,6 @@ class UpdateProjectExtensionsCommand extends Command
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ExtensionRepository $extension_repository)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:update:extensions')
-      ->setDescription('Inserting our static project extension into the Database')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

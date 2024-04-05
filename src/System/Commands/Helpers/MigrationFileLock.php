@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Helpers;
 
 use App\Project\Remix\RemixUpdaterEventSubscriber;

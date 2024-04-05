@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api_deprecated\Responses\ProjectListResponse;
@@ -29,7 +31,7 @@ class SearchController extends AbstractController
    * @throws \Exception
    */
   #[Route(path: '/api/projects/search.json', name: 'api_search_programs', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function searchProjectsAction(Request $request, ProjectManager $project_manager, LoggerInterface $searchLogger): ProjectListResponse
+  public function searchProjects(Request $request, ProjectManager $project_manager, LoggerInterface $searchLogger): ProjectListResponse
   {
     $query = (string) $request->query->get('q', '');
     $username = $this->getUser() ? $this->getUser()->getUserIdentifier() : '-';
@@ -66,7 +68,7 @@ class SearchController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/search/tagProjects.json', name: 'api_search_tag', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function tagSearchProjectsAction(Request $request, ProjectManager $project_manager): ProjectListResponse
+  public function tagSearchProjects(Request $request, ProjectManager $project_manager): ProjectListResponse
   {
     $tag_name = (string) $request->query->get('q', 0);
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);
@@ -81,7 +83,7 @@ class SearchController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/api/projects/search/extensionProjects.json', name: 'api_search_extension', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function extensionSearchProjectsAction(Request $request, ProjectManager $project_manager): ProjectListResponse
+  public function extensionSearchProjects(Request $request, ProjectManager $project_manager): ProjectListResponse
   {
     $query = (string) $request->query->get('q');
     $limit = (int) $request->query->get('limit', $this->DEFAULT_LIMIT);

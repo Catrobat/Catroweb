@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\Project;
 
 use App\DB\Entity\Project\Program;
@@ -46,7 +48,7 @@ class ProgramLikeRepository extends ServiceEntityRepository
       ->setParameter(':program_id', $project_id)
     ;
 
-    return array_map(fn ($x) => $x['type'], $qb->getQuery()->getResult());
+    return array_map(fn ($x): mixed => $x['type'], $qb->getQuery()->getResult());
   }
 
   public function totalLikeCount(string $program_id): int

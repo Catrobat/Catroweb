@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\Translation;
 
 use App\DB\Entity\Project\Program;
@@ -185,7 +187,7 @@ class ProjectCustomTranslationRepository extends ServiceEntityRepository
     ;
 
     return array_map(
-      fn ($e) => $e['language'], $result
+      fn ($e): mixed => $e['language'], $result
     );
   }
 

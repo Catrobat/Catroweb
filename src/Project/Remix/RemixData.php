@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\Remix;
 
 class RemixData
@@ -9,7 +11,7 @@ class RemixData
    */
   final public const SCRATCH_DOMAIN = 'scratch.mit.edu';
 
-  private $remix_url_data;
+  private int|string|array|bool|null $remix_url_data = null;
 
   public function __construct(private readonly string $remix_url)
   {

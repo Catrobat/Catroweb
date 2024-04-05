@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\Logs;
 
 use App\Admin\Tools\Logs\Controller\LogsController;
@@ -89,35 +91,16 @@ class LogLine
     $pos = strpos($string, '.');
     $extracted_string = substr($string, $pos + 1);
 
-    switch ($extracted_string) {
-      case 'INFO':
-        $debug_level = LogsController::FILTER_LEVEL_INFO;
-        break;
-      case 'WARNING':
-        $debug_level = LogsController::FILTER_LEVEL_WARNING;
-        break;
-      case 'ERROR':
-        $debug_level = LogsController::FILTER_LEVEL_ERROR;
-        break;
-      case 'CRITICAL':
-        $debug_level = LogsController::FILTER_LEVEL_CRITICAL;
-        break;
-      case 'NOTICE':
-        $debug_level = LogsController::FILTER_LEVEL_NOTICE;
-        break;
-      case 'ALERT':
-        $debug_level = LogsController::FILTER_LEVEL_ALERT;
-        break;
-      case 'EMERGENCY':
-        $debug_level = LogsController::FILTER_LEVEL_EMERGENCY;
-        break;
-      case 'DEBUG':
-        $debug_level = LogsController::FILTER_LEVEL_DEBUG;
-        break;
-      default:
-        $debug_level = LogsController::FILTER_LEVEL_DEBUG;
-    }
-
-    return $debug_level;
+    return match ($extracted_string) {
+      'INFO' => LogsController::FILTER_LEVEL_INFO,
+      'WARNING' => LogsController::FILTER_LEVEL_WARNING,
+      'ERROR' => LogsController::FILTER_LEVEL_ERROR,
+      'CRITICAL' => LogsController::FILTER_LEVEL_CRITICAL,
+      'NOTICE' => LogsController::FILTER_LEVEL_NOTICE,
+      'ALERT' => LogsController::FILTER_LEVEL_ALERT,
+      'EMERGENCY' => LogsController::FILTER_LEVEL_EMERGENCY,
+      'DEBUG' => LogsController::FILTER_LEVEL_DEBUG,
+      default => LogsController::FILTER_LEVEL_DEBUG,
+    };
   }
 }

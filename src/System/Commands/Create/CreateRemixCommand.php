@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\Entity\User\Notifications\RemixNotification;
@@ -7,11 +9,13 @@ use App\Project\Remix\RemixData;
 use App\Project\Remix\RemixManager;
 use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\Notification\NotificationManager;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:remix', description: 'add remixes to projects')]
 class CreateRemixCommand extends Command
 {
   public function __construct(private readonly RemixManipulationProjectManager $remix_manipulation_program_manager,
@@ -23,8 +27,7 @@ class CreateRemixCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:remix')
-      ->setDescription('add remixes to projects')
+    $this
       ->addArgument('program_original', InputArgument::REQUIRED, 'Name of program which gets remixed')
       ->addArgument('program_remix', InputArgument::REQUIRED, 'Names of program which is the remix')
     ;

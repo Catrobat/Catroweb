@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\DB_Updater\Controller;
 
 use App\DB\Entity\System\CronJob;
@@ -26,7 +28,7 @@ class CronJobsAdminController extends CRUDController
   ) {
   }
 
-  public function listAction(?Request $request = null): Response
+  public function listAction(Request $request): Response
   {
     return $this->renderWithExtraParams('Admin/DB_Updater/admin_cron_jobs.html.twig', [
       'action' => 'reset_cron_job',

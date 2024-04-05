@@ -1,15 +1,19 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\Entity\Translation\CommentMachineTranslation;
 use App\DB\Entity\Translation\ProjectMachineTranslation;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:translation:trim-storage', description: 'Clean up old db entries in machine translation schema')]
 class TranslationTrimStorageCommand extends Command
 {
   private const OLDER_THAN = 'older-than';
@@ -23,8 +27,7 @@ class TranslationTrimStorageCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:translation:trim-storage')
-      ->setDescription('Clean up old db entries in machine translation schema')
+    $this
       ->addOption(self::OLDER_THAN, null, InputOption::VALUE_REQUIRED,
         'delete entries older than the specified days',
         '30')

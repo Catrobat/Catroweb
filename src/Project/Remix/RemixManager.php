@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\Remix;
 
 use App\DB\Entity\Project\Program;
@@ -39,6 +41,7 @@ class RemixManager
   public function addScratchProjects(array $scratch_info_data): void
   {
     foreach ($scratch_info_data as $id => $project_data) {
+      $id = (string) $id;
       $scratch_project = $this->scratch_project_repository->find($id);
       if (null === $scratch_project) {
         $scratch_project = new ScratchProgram($id);
@@ -84,7 +87,7 @@ class RemixManager
     } else {
       // case: new project
       $all_project_remix_relations = $this->createNewRemixRelations($project, $remixes_data);
-      $catrobat_remix_relations = array_filter($all_project_remix_relations, fn ($relation) => !($relation instanceof ScratchProgramRemixRelation));
+      $catrobat_remix_relations = array_filter($all_project_remix_relations, fn ($relation): bool => !($relation instanceof ScratchProgramRemixRelation));
 
       $contains_only_catrobat_self_relation = (1 === count($catrobat_remix_relations));
       $project->setRemixRoot($contains_only_catrobat_self_relation);
@@ -133,13 +136,13 @@ class RemixManager
       ->getDescendantRelations($catrobat_ids_of_whole_graph)
     ;
 
-    $catrobat_forward_edge_data = array_map(fn (ProgramRemixRelation $relation) => [
+    $catrobat_forward_edge_data = array_map(fn (ProgramRemixRelation $relation): array => [
       'ancestor_id' => $relation->getAncestorId(),
       'descendant_id' => $relation->getDescendantId(),
       'depth' => $relation->getDepth(),
     ], $catrobat_forward_edge_relations);
 
-    $catrobat_forward_data = array_map(fn (ProgramRemixRelation $relation) => [
+    $catrobat_forward_data = array_map(fn (ProgramRemixRelation $relation): array => [
       'ancestor_id' => $relation->getAncestorId(),
       'descendant_id' => $relation->getDescendantId(),
       'depth' => $relation->getDepth(),
@@ -147,10 +150,10 @@ class RemixManager
 
     $scratch_edge_relations =
       $this->scratch_project_remix_repository->getDirectEdgeRelationsOfProgramIds($catrobat_ids_of_whole_graph);
-    $scratch_node_ids = array_values(array_unique(array_map(fn (ScratchProgramRemixRelation $relation) => $relation->getScratchParentId(), $scratch_edge_relations)));
+    $scratch_node_ids = array_values(array_unique(array_map(fn (ScratchProgramRemixRelation $relation): string => $relation->getScratchParentId(), $scratch_edge_relations)));
     sort($scratch_node_ids);
 
-    $scratch_edge_data = array_map(fn (ScratchProgramRemixRelation $relation) => [
+    $scratch_edge_data = array_map(fn (ScratchProgramRemixRelation $relation): array => [
       'ancestor_id' => $relation->getScratchParentId(),
       'descendant_id' => $relation->getCatrobatChildId(),
     ], $scratch_edge_relations);
@@ -160,7 +163,7 @@ class RemixManager
       ->getDirectEdgeRelations($catrobat_ids_of_whole_graph, $catrobat_ids_of_whole_graph)
     ;
 
-    $catrobat_backward_edge_data = array_map(fn (ProgramRemixBackwardRelation $relation) => [
+    $catrobat_backward_edge_data = array_map(fn (ProgramRemixBackwardRelation $relation): array => [
       'ancestor_id' => $relation->getParentId(),
       'descendant_id' => $relation->getChildId(),
     ], $catrobat_backward_edge_relations);
@@ -375,14 +378,14 @@ class RemixManager
     $graph_manipulator = $this->remix_graph_manipulator;
 
     // catrobat parents:
-    $catrobat_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data) => !$remix_data->isScratchProject());
-    $new_unfiltered_catrobat_parent_ids = array_map(fn (RemixData $remix_data) => $remix_data->getProjectId(), $catrobat_remixes_data);
+    $catrobat_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => !$remix_data->isScratchProject());
+    $new_unfiltered_catrobat_parent_ids = array_map(fn (RemixData $remix_data): string => $remix_data->getProjectId(), $catrobat_remixes_data);
     $new_catrobat_parent_ids =
       $this->project_repository->filterExistingProgramIds($new_unfiltered_catrobat_parent_ids);
 
     $old_forward_ancestor_relations = $project->getCatrobatRemixAncestorRelations()->getValues();
-    $old_forward_parent_relations = array_filter($old_forward_ancestor_relations, fn (ProgramRemixRelation $relation) => 1 === $relation->getDepth());
-    $old_forward_parent_ids = array_map(fn (ProgramRemixRelation $relation) => $relation->getAncestorId(), $old_forward_parent_relations);
+    $old_forward_parent_relations = array_filter($old_forward_ancestor_relations, fn (ProgramRemixRelation $relation): bool => 1 === $relation->getDepth());
+    $old_forward_parent_ids = array_map(fn (ProgramRemixRelation $relation): string => $relation->getAncestorId(), $old_forward_parent_relations);
 
     $preserved_creation_date_mapping = [];
     $preserved_seen_date_mapping = [];
@@ -394,8 +397,8 @@ class RemixManager
     }
 
     $old_backward_ancestor_relations = $project->getCatrobatRemixBackwardParentRelations()->getValues();
-    $old_backward_parent_relations = array_filter($old_backward_ancestor_relations, fn (ProgramRemixBackwardRelation $relation) => 1 === $relation->getDepth());
-    $old_backward_parent_ids = array_map(fn (ProgramRemixBackwardRelation $relation) => $relation->getParentId(), $old_backward_parent_relations);
+    $old_backward_parent_relations = array_filter($old_backward_ancestor_relations, fn (ProgramRemixBackwardRelation $relation): bool => 1 === $relation->getDepth());
+    $old_backward_parent_ids = array_map(fn (ProgramRemixBackwardRelation $relation): string => $relation->getParentId(), $old_backward_parent_relations);
     $old_catrobat_parent_ids = array_unique([...$old_forward_parent_ids, ...$old_backward_parent_ids]);
 
     $parent_ids_to_be_added = array_values(array_diff($new_catrobat_parent_ids, $old_catrobat_parent_ids));
@@ -423,10 +426,10 @@ class RemixManager
 
     // scratch parents:
     $old_scratch_parent_relations = $project->getScratchRemixParentRelations()->getValues();
-    $old_immediate_scratch_parent_ids = array_map(fn (ScratchProgramRemixRelation $relation) => $relation->getScratchParentId(), $old_scratch_parent_relations);
+    $old_immediate_scratch_parent_ids = array_map(fn (ScratchProgramRemixRelation $relation): string => $relation->getScratchParentId(), $old_scratch_parent_relations);
 
-    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data) => $remix_data->isScratchProject());
-    $new_scratch_parent_ids = array_map(fn (RemixData $remix_data) => $remix_data->getProjectId(), $scratch_remixes_data);
+    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
+    $new_scratch_parent_ids = array_map(fn (RemixData $remix_data): string => $remix_data->getProjectId(), $scratch_remixes_data);
 
     $scratch_parent_ids_to_be_added = array_values(
       array_diff($new_scratch_parent_ids, $old_immediate_scratch_parent_ids)
