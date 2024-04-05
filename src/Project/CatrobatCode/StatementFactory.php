@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode;
 
 use App\Project\CatrobatCode\Statements\AddItemToUserListStatement;
@@ -169,7 +171,7 @@ class StatementFactory
   public function createObject(\SimpleXMLElement $objectTree): ?CodeObject
   {
     $this->currentObject = new CodeObject();
-    $this->currentObject->setName($objectTree[self::NAME_ATTRIBUTE]);
+    $this->currentObject->setName($objectTree[self::NAME_ATTRIBUTE]?->__toString());
     if (null == $this->currentObject->getName()) {
       return null;
     }
@@ -273,10 +275,7 @@ class StatementFactory
     return $statements;
   }
 
-  /**
-   * @return Statement|null
-   */
-  public function generateBrickStatement(\SimpleXMLElement $statement, ?int $spaces)
+  public function generateBrickStatement(\SimpleXMLElement $statement, ?int $spaces): UnknownStatement|HideTextStatement|ShowTextStatement|WaitStatement|SetXStatement|PlaceAtStatement|ChangeXByNStatement|IfOnEdgeBounceStatement|GlideToStatement|GoNStepsBackStatement|ComeToFrontStatement|VibrationStatement|PointInDirectionStatement|ChangeSizeByNStatement|SetSizeToStatement|NextLookStatement|ShowStatement|SetTransparencyStatement|ChangeTransparencyByNStatement|SetBrightnessStatement|ChangeBrightnessByNStatement|ClearGraphicEffectStatement|LedOffStatement|LedOnStatement|HideStatement|SetLookStatement|ChangeVariableStatement|AddItemToUserListStatement|DeleteItemOfUserListStatement|InsertItemIntoUserListStatement|ReplaceItemInUserListStatement|SetVariableStatement|IfLogicEndStatement|IfLogicElseStatement|IfLogicBeginStatement|PointToStatement|MoveNStepsStatement|TurnRightStatement|TurnLeftStatement|ChangeYByNStatement|SetYStatement|BroadcastStatement|LoopEndlessStatement|ForeverStatement|LoopEndStatement|NoteStatement|RepeatStatement|BroadcastWaitStatement|ChangeVolumeByNStatement|SpeakStatement|SetVolumeToStatement|StopAllSoundsStatement|PlaySoundStatement|null
   {
     $stmt = null;
     $children = $statement;
@@ -559,7 +558,6 @@ class StatementFactory
     if (null != $reference) {
       $reference = (string) $statement[self::REFERENCE_ATTRIBUTE];
       $userListReference = $statement->xpath($reference)[0];
-      // @phpstan-ignore-next-line
       foreach ($userListReference->children() as $child) {
         if (self::NAME_ATTRIBUTE == $child->getName()) {
           $name = (string) $child;

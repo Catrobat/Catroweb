@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api\ProjectsApi;
@@ -21,7 +23,7 @@ class DownloadProjectController extends AbstractController
    * @deprecated
    */
   #[Route(path: '/download/{id}.catrobat', name: 'legacy_download_route_deprecated', methods: ['GET'])]
-  public function downloadProjectAction(string $id): ?Response
+  public function downloadProject(string $id): ?Response
   {
     $this->logger->warning("Deprecated 'download catrobat project file' route was used!");
     $responseCode = 200;

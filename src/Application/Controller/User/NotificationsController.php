@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\Notifications\CommentNotification;
@@ -13,7 +15,6 @@ use App\Project\Remix\RemixManager;
 use App\User\Notification\NotificationManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -24,7 +25,7 @@ class NotificationsController extends AbstractController
   final public const load_offset = 0;
 
   #[Route(path: '/user_notifications', name: 'notifications', methods: ['GET'])]
-  public function NotificationsAction(NotificationRepository $notification_repository, Request $request): Response
+  public function Notifications(NotificationRepository $notification_repository): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();

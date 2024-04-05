@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Generator;
 
 use Doctrine\ORM\EntityManager;

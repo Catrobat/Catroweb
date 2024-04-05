@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Reset;
 
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -11,6 +14,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
+#[AsCommand(name: 'catrobat:purge', description: 'Purge all database and file data')]
 class PurgeCommand extends Command
 {
   public function __construct(private readonly ParameterBagInterface $parameter_bag)
@@ -20,8 +24,7 @@ class PurgeCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:purge')
-      ->setDescription('Purge all database and file data')
+    $this
       ->addOption('force', 'f', InputOption::VALUE_NONE)
     ;
   }

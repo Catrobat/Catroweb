@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api\Services\Base\TranslatorAwareInterface;

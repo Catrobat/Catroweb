@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\System\Commands\DBUpdater;
 
 use App\System\Commands\DBUpdater\UpdateProjectExtensionsCommand;

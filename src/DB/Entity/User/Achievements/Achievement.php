@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User\Achievements;
 
 use App\DB\EntityRepository\User\Achievements\AchievementRepository;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\ImportProjects;
 
 use App\DB\Entity\User\User;
@@ -8,6 +10,7 @@ use App\Project\CatrobatFile\InvalidCatrobatFileException;
 use App\Project\Remix\RemixGraphLayout;
 use App\System\Commands\Helpers\RemixManipulationProjectManager;
 use App\User\UserManager;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -17,6 +20,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
+#[AsCommand(name: 'catrobat:import', description: 'Import programs from a given directory to the application')]
 class ProgramImportCommand extends Command
 {
   final public const REMIX_GRAPH_NO_LAYOUT = '0';
@@ -28,8 +32,7 @@ class ProgramImportCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:import')
-      ->setDescription('Import programs from a given directory to the application')
+    $this
       ->addArgument('directory', InputArgument::REQUIRED,
         'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::REQUIRED,

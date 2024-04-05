@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -34,7 +36,7 @@ class ProfileController extends AbstractController
    */
   #[Route(path: '/user/{id}', name: 'profile', defaults: ['id' => 0], methods: ['GET'])]
   #[Route(path: '/user/}')]
-  public function profileAction(string $id): Response
+  public function profile(string $id): Response
   {
     /** @var User|null $user */
     $user = $this->getUser();

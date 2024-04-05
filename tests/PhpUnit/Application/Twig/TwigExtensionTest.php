@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Application\Twig;
 
 use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
@@ -136,7 +138,7 @@ class TwigExtensionTest extends TestCase
   private function isSelected(string $short, array $locales): bool
   {
     foreach ($locales as $value) {
-      if (0 === strcmp($short, $value[0]) && 0 === strcmp('1', $value[2])) {
+      if (0 === strcmp($short, $value[0]) && $value[2]) {
         return true;
       }
     }

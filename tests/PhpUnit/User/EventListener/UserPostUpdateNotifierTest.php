@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\User\EventListener;
 
 use App\System\Testing\PhpUnit\DefaultTestCase;

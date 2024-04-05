@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Studio;
 
 use App\DB\Entity\User\User;
@@ -30,7 +32,7 @@ class StudioJoinRequest
   protected Studio $studio;
 
   #[ORM\Column(type: 'string', length: 20)]
-  protected ?string $status;
+  protected ?string $status = null;
 
   public function getId(): ?int
   {

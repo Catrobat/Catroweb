@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Test;
 
 use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
@@ -14,7 +16,7 @@ class TestFeatureFlagController extends AbstractController
   }
 
   #[Route(path: '/featureflag/test', name: 'test_flag', methods: ['GET'])]
-  public function testFlagAction(): Response
+  public function testFlag(): Response
   {
     return $this->render('Admin/Tools/test_feature_flag.html.twig', ['enabled' => $this->manager->isEnabled('Test-Flag')]);
   }

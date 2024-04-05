@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\SpecialProjects;
 
 use App\Admin\SpecialProjects\Forms\FeaturedImageConstraint;
@@ -39,10 +41,8 @@ class FeaturedProjectAdmin extends AbstractAdmin
 
   /**
    * @param FeaturedProgram $object
-   *
-   * @return string
    */
-  public function getFeaturedImageUrl($object)
+  public function getFeaturedImageUrl($object): string
   {
     return '../../'.$this->featured_image_repository->getWebPath($object->getId(), $object->getImageType(), true);
   }
@@ -79,7 +79,7 @@ class FeaturedProjectAdmin extends AbstractAdmin
       }
     } else {
       if (null !== $id) {
-        $id = preg_replace('$(.*)/project/$', '', $id);
+        $id = preg_replace('$(.*)/project/$', '', (string) $id);
       }
 
       $project = $this->project_manager->find($id);

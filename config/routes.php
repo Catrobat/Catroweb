@@ -24,7 +24,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
   ;
 
   $routingConfigurator->add('open_api_server_projects_projectidcatrobatget', '/api/project/{id}/catrobat')
-    ->controller([OverwriteController::class, 'projectIdCatrobatGetAction'])
+    ->controller([OverwriteController::class, 'projectIdCatrobatGet'])
     ->methods(['GET'])
     ->requirements(['id' => '^[a-zA-Z0-9\\\-]+$'])
   ;
@@ -35,7 +35,7 @@ return static function (RoutingConfigurator $routingConfigurator): void {
   ;
 
   $routingConfigurator->add('legacy_hour_of_code_route', '/hourOfCode')
-    ->controller([RedirectController::class, 'hourOfCodeAction'])
+    ->controller([RedirectController::class, 'hourOfCode'])
     ->methods(['GET'])
   ;
 

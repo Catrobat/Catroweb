@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\Entity\Project\Program;
@@ -10,10 +12,12 @@ use App\DB\EntityRepository\Project\ProgramRemixRepository;
 use App\DB\EntityRepository\Project\ProgramRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Query\Expr\Join;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:update:popularity', description: 'Updating the popularity score of projects')]
 class UpdateProjectPopularityCommand extends Command
 {
   final public const BATCH_SIZE = 1000;
@@ -27,13 +31,6 @@ class UpdateProjectPopularityCommand extends Command
   public function __construct(protected EntityManagerInterface $entity_manager, protected ProgramRepository $program_repository, protected ProgramRemixRepository $program_remix_repository, protected ProgramLikeRepository $program_like_repository)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:update:popularity')
-      ->setDescription('Updating the popularity score of projects')
-    ;
   }
 
   // Compute and update popularity score for every project

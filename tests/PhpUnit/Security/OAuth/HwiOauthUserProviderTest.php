@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Security\OAuth;
 
 use App\DB\Entity\User\User;

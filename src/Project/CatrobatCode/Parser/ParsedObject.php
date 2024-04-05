@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatCode\Parser\Scripts\ScriptFactory;
@@ -81,7 +83,7 @@ class ParsedObject
   private function dereference(\SimpleXMLElement $xml_properties): \SimpleXMLElement
   {
     if (null != $xml_properties[Constants::REFERENCE_ATTRIBUTE]) {
-      return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE])[0];
+      return $xml_properties->xpath($xml_properties[Constants::REFERENCE_ATTRIBUTE]->__toString())[0];
     }
 
     return $xml_properties;

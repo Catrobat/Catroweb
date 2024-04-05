@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User\Achievements;
 
 use App\DB\Entity\Project\Program;
@@ -110,9 +112,9 @@ class AchievementManager
   {
     $achievements = $this->findAllEnabledAchievements();
     $unlocked_achievements = $this->findUnlockedAchievements($user);
-    $achievements_unlocked_id_list = array_map(fn (Achievement $achievement) => $achievement->getId(), $unlocked_achievements);
+    $achievements_unlocked_id_list = array_map(fn (Achievement $achievement): ?int => $achievement->getId(), $unlocked_achievements);
 
-    return array_filter($achievements, fn (Achievement $achievement) => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
+    return array_filter($achievements, fn (Achievement $achievement): bool => !in_array($achievement->getId(), $achievements_unlocked_id_list, true));
   }
 
   public function findMostRecentUserAchievement(User $user): ?UserAchievement
@@ -291,6 +293,6 @@ class AchievementManager
    */
   protected function mapUserAchievementsToAchievements(array $user_achievements): array
   {
-    return array_map(fn (UserAchievement $achievement) => $achievement->getAchievement(), $user_achievements);
+    return array_map(fn (UserAchievement $achievement): \App\DB\Entity\User\Achievements\Achievement => $achievement->getAchievement(), $user_achievements);
   }
 }

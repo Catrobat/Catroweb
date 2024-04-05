@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Base;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,7 +13,7 @@ class RedirectController extends AbstractController
 {
   #[Route(path: '/stepByStep', name: 'legacy_stepByStep_routed_used_by_unkwown', methods: ['GET'])]
   #[Route(path: '/help', name: 'help', methods: ['GET'])]
-  public function helpAction(Request $request): Response
+  public function help(Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');
     if ('mindstorms' === $flavor) {
@@ -33,14 +35,14 @@ class RedirectController extends AbstractController
   }
 
   #[Route(path: '/robots.txt', name: 'robots.txt', methods: ['GET'])]
-  public function robotsTxt(Request $request): Response
+  public function robotsTxt(): Response
   {
     return $this->redirect('../../robots.txt', Response::HTTP_MOVED_PERMANENTLY);
     // The file is only hosted without flavors/themes!
   }
 
   #[Route(path: 'resetting/request', name: 'legacy_app_forgot_password_request')]
-  public function legacyAppReset(Request $request): Response
+  public function legacyAppReset(): Response
   {
     return $this->redirectToRoute('app_forgot_password_request', [], Response::HTTP_MOVED_PERMANENTLY);
   }
@@ -50,7 +52,7 @@ class RedirectController extends AbstractController
    */
   #[Route(path: '/hourOfCode', methods: ['GET'])]
   #[Route(path: '/certificate/check', methods: ['GET'])]
-  public function hourOfCodeAction(Request $request): Response
+  public function hourOfCode(): Response
   {
     return $this->redirect('/');
   }

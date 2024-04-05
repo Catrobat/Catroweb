@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Translation;
 
 use App\DB\Entity\Project\Program;
@@ -175,7 +177,7 @@ class TranslationDelegate
   {
     $apis = $this->apis;
 
-    usort($apis, fn (TranslationApiInterface $api_1, TranslationApiInterface $api_2) => -($api_1->getPreference($text, $source_language, $target_language) <=>
+    usort($apis, fn (TranslationApiInterface $api_1, TranslationApiInterface $api_2): int => -($api_1->getPreference($text, $source_language, $target_language) <=>
       $api_2->getPreference($text, $source_language, $target_language)));
 
     return $apis;

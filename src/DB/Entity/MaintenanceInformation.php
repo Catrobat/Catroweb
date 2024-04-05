@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -17,19 +19,19 @@ class MaintenanceInformation
   protected string $internalTitle;
 
   #[ORM\Column(type: 'string', length: 255, nullable: true)]
-  protected ?string $icon;
+  protected ?string $icon = null;
 
   #[ORM\Column(type: 'string', length: 255, nullable: true)]
-  protected ?string $ltmCode;
+  protected ?string $ltmCode = null;
 
   #[ORM\Column(type: 'date', nullable: true)]
-  protected ?\DateTime $ltm_maintenanceStart;
+  protected ?\DateTime $ltm_maintenanceStart = null;
 
   #[ORM\Column(type: 'date', nullable: true)]
-  protected ?\DateTime $ltm_maintenanceEnd;
+  protected ?\DateTime $ltm_maintenanceEnd = null;
 
   #[ORM\Column(type: 'text', nullable: true)]
-  protected ?string $ltm_additionalInformation;
+  protected ?string $ltm_additionalInformation = null;
 
   #[ORM\Column(type: 'boolean')]
   protected bool $active;

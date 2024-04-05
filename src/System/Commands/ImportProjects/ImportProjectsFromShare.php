@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\ImportProjects;
 
 use App\Storage\FileHelper;
 use App\System\Commands\Helpers\CommandHelper;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -11,12 +14,12 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 
+#[AsCommand(name: 'catrobat:import:share', description: 'Imports the specified amount of recent programs from share.catrob.at')]
 class ImportProjectsFromShare extends Command
 {
   protected function configure(): void
   {
-    $this->setName('catrobat:import:share')
-      ->setDescription('Imports the specified amount of recent programs from share.catrob.at')
+    $this
       ->addOption('limit', 'l', InputOption::VALUE_REQUIRED,
         'The limit of projects that should be downloaded and imported',
         '20')

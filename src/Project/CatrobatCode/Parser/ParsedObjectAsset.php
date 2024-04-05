@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Parser;
 
 class ParsedObjectAsset
@@ -10,7 +12,7 @@ class ParsedObjectAsset
 
   public function __construct(protected \SimpleXMLElement $asset_xml_properties)
   {
-    $this->name = $asset_xml_properties[Constants::NAME_ATTRIBUTE];
+    $this->name = $asset_xml_properties[Constants::NAME_ATTRIBUTE]?->__toString();
     $this->file_name = $this->extractFileName($asset_xml_properties);
   }
 
@@ -32,6 +34,6 @@ class ParsedObjectAsset
       $file_name = $asset_xml_properties->fileName;
     }
 
-    return rawurlencode($file_name ?? '');
+    return rawurlencode($file_name?->__toString() ?? '');
   }
 }

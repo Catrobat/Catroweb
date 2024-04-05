@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\DB_Updater;
 
 use App\DB\Entity\Project\Extension;

@@ -1,13 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Reset;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:drop:migration', description: 'Dropping the doctrine_migration_versions table')]
 class DropMigrationCommand extends Command
 {
   protected Connection $connection;
@@ -17,13 +21,6 @@ class DropMigrationCommand extends Command
   {
     parent::__construct();
     $this->connection = $this->entity_manager->getConnection();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:drop:migration')
-      ->setDescription('Dropping the doctrine_migration_versions table')
-    ;
   }
 
   /**

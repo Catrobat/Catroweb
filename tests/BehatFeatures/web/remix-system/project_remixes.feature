@@ -67,7 +67,7 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
 
     And there are feature flags:
       | name          | value |
-      | remix_graph   | true  |
+      | remix-graph   | true  |
 
   Scenario: For performance reasons the remix graph is on its own page
     Given I am on "/app/project/1"

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\Project;
 
 use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
@@ -286,7 +288,7 @@ class ProgramRepository extends ServiceEntityRepository
       ->getResult()
     ;
 
-    return array_map(fn ($data) => $data['id'], $result);
+    return array_map(fn ($data): mixed => $data['id'], $result);
   }
 
   /**
@@ -360,7 +362,7 @@ class ProgramRepository extends ServiceEntityRepository
 
     $results = $query_builder->getQuery()->getResult();
 
-    return array_map(fn ($result) => $result['program'], $results);
+    return array_map(fn ($result): mixed => $result['program'], $results);
   }
 
   public function getOtherMostDownloadedProjectsOfUsersThatAlsoDownloadedGivenProject(string $flavor, Program $program, ?int $limit, int $offset): array
@@ -451,7 +453,7 @@ class ProgramRepository extends ServiceEntityRepository
 
   private function setFlavorConstraint(QueryBuilder $query_builder, ?string $flavor = null, string $alias = 'e'): QueryBuilder
   {
-    if ('' === trim($flavor)) {
+    if ('' === trim($flavor ?? '')) {
       return $query_builder;
     }
 
@@ -527,17 +529,17 @@ class ProgramRepository extends ServiceEntityRepository
 
   private function setFlavorConstraintElastica(BoolQuery $qb, ?string $flavor = null): void
   {
-    if ('' === trim($flavor)) {
+    if ('' === trim((string) $flavor)) {
       return;
     }
     if ('!' === $flavor[0]) {
       $must_not = new BoolQuery();
-      $must_not->addMustNot(new MatchQuery('flavor', strtolower(substr($flavor, 1))));
+      $must_not->addMustNot(new MatchQuery('flavor', strtolower(substr((string) $flavor, 1))));
       $qb->addMust($must_not);
     }
     $should = new BoolQuery();
-    $should->addShould(new Query\Wildcard('flavor', strtolower($flavor)));
-    $should->addShould(new Query\Wildcard('getExtensionsString', strtolower($flavor)));
+    $should->addShould(new Query\Wildcard('flavor', strtolower((string) $flavor)));
+    $should->addShould(new Query\Wildcard('getExtensionsString', strtolower((string) $flavor)));
     $qb->addMust($should);
   }
 

@@ -1,9 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\BroadcastNotification;
 
 use App\DB\Entity\User\Notifications\BroadcastNotification;
-use App\DB\Entity\User\User;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Sonata\AdminBundle\Controller\CRUDController;
@@ -38,7 +39,6 @@ class BroadcastNotificationController extends CRUDController
 
   private function getNotifications(string $message, string $title, UserManager $user_manager): \Generator
   {
-    /** @var User $user */
     foreach ($user_manager->findAll() as $user) {
       yield new BroadcastNotification($user, $title, $message);
     }

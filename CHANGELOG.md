@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## What's Changed
 
+- Bumped dependencies & translations
+- Fixes minor bus and deprecated code
+- Added bugsnag monitoring for php errors
+
+**Full Changelog**: https://github.com/Catrobat/Catroweb/compare/v24.3.1...v24.4.1
+
+## [v24.3.2]
+
+## What's Changed
+
 - lazy load translation dependencies (performance)
 - disable remix & apks (performance)
 - refresh rate (achievements + notifications) bumped to 5 minutes (performance)

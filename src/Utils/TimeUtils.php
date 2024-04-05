@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Utils;
+declare(strict_types=1);
 
-use DateTime;
+namespace App\Utils;
 
 /**
  * Class TimeUtils.

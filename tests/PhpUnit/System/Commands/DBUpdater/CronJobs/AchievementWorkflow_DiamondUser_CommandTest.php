@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\System\Commands\DBUpdater\CronJobs;
 
 use App\System\Commands\DBUpdater\CronJobs\AchievementWorkflow_DiamondUser_Command;

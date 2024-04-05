@@ -9,12 +9,13 @@ import ProjectApi from '../api/ProjectApi'
 require('../../styles/components/own_project_list.scss')
 
 export class OwnProjectList {
-  constructor(container, apiUrl, theme, emptyMessage = '') {
+  constructor(container, apiUrl, theme, emptyMessage, baseUrl) {
     this.container = container
     this.projectsContainer =
       container.getElementsByClassName('projects-container')[0]
     const attributes =
       'attributes=id,project_url,screenshot_small,screenshot_large,name,downloads,views,reactions,comments,private'
+    this.baseUrl = baseUrl
     this.apiUrl = apiUrl.includes('?')
       ? apiUrl + '&' + attributes
       : apiUrl + '?' + attributes
@@ -310,7 +311,7 @@ export class OwnProjectList {
     }).then((result) => {
       if (result.value) {
         new ApiDeleteFetch(
-          '/api/project/' + id,
+          this.baseUrl + '/api/project/' + id,
           'Delete Project',
           myProfileConfiguration.messages.unspecifiedErrorText,
           function () {
@@ -353,7 +354,8 @@ export class OwnProjectList {
         )
         self._addLoadingSpinner(projectElem)
         const newValue = !project.private
-        ProjectApi.update(
+        const projectApi = new ProjectApi()
+        projectApi.updateProject(
           id,
           { private: newValue },
           function () {

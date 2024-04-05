@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\DB_Updater\Controller;
 
 use App\DB\Entity\User\Achievements\Achievement;
@@ -24,10 +26,9 @@ class AchievementsAdminController extends CRUDController
   ) {
   }
 
-  public function listAction(?Request $request = null): Response
+  public function listAction(Request $request): Response
   {
     $achievements = $this->achievement_manager->findAllAchievements();
-
     $numberOfUserAchievements = [];
     foreach ($achievements as $achievement) {
       $id = $achievement->getId();

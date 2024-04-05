@@ -37,7 +37,13 @@ $(() => {
 
   const url = baseUrl + '/api/projects/user'
 
-  new OwnProjectList(projectsContainer, url, theme, emptyMessage).initialize()
+  new OwnProjectList(
+    projectsContainer,
+    url,
+    theme,
+    emptyMessage,
+    baseUrl,
+  ).initialize()
   new OwnProfile(baseUrl).initializeAll()
 })
 
