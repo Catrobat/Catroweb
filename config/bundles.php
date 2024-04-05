@@ -34,4 +34,5 @@ return [
   Sonata\Form\Bridge\Symfony\SonataFormBundle::class => ['all' => true],
   Sonata\Twig\Bridge\Symfony\SonataTwigBundle::class => ['all' => true],
   Symfony\UX\StimulusBundle\StimulusBundle::class => ['all' => true],
+  Bugsnag\BugsnagBundle\BugsnagBundle::class => ['all' => true],
 ];
