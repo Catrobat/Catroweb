@@ -5,14 +5,6 @@
     {{ "projectDetails"|trans({}, "catroweb") }}
   </h2>
 
-  {% set successFlashMessages = app.flashes('success') %}
-  {% if successFlashMessages is not empty %}
-    <div class="alert alert-success" role="alert">
-      {% for message in successFlashMessages %}
-        {{ message }}
-      {% endfor %}
-    </div>
-  {% endif %}
 
   <div class="row">
     <div class="col-6 col-lg-4 mt-2 mb-2 no-overflow">
@@ -98,6 +90,14 @@
     {% endif %}
 
   </div>
+  {% set successFlashMessages = app.flashes('success') %}
+  {% if successFlashMessages is not empty %}
+    <div class="alert alert-success" role="alert">
+      {% for message in successFlashMessages %}
+        {{ message }}
+      {% endfor %}
+    </div>
+  {% endif %}
 
 </div>
 
