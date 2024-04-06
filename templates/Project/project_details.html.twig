@@ -47,7 +47,7 @@
     {% if logged_in and not my_project %}
       <div class="d-none d-lg-block col-lg-4">
         <form action="{{ path('steal_project', {'id': project.id }) }}" method="post">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" id="stealButton">
             <i class="material-icons">terminal</i>
             {{ 'Steal'|trans({}, 'catroweb') }}
           </button>
@@ -80,7 +80,7 @@
     {% if logged_in and not my_project %}
       <div class="col-6 mb-3 d-lg-none mt-3">
         <form action="{{ path('steal_project', {'id': project.id }) }}" method="post">
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" id="stealButton-small">
             <i class="material-icons">terminal</i>
             {{ 'Steal'|trans({}, 'catroweb') }}
           </button>
@@ -89,10 +89,10 @@
       </div>
     {% endif %}
 
-  </div>
+    </div>
   {% set successFlashMessages = app.flashes('success') %}
   {% if successFlashMessages is not empty %}
-    <div class="alert alert-success" role="alert">
+    <div class="alert alert-success" role="alert" id="successMessage">
       {% for message in successFlashMessages %}
         {{ message }}
       {% endfor %}
