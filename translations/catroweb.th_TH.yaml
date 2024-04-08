@@ -14,7 +14,7 @@ chat: แชทและฟอรัม
 privacyGuide: คู่มือควรรู้เกี่ยวกับความเป็นส่วนตัว
 others: อื่นๆ
 tutorials: ช่วยเหลือ
-googlePlay: Google Play
+googlePlay: Google Play สโตร์
 iosAppStore: IOS App store
 huaweiAppGallery: Huawei AppGallery
 instagram: อินสตาแกรม
@@ -96,19 +96,19 @@ follower:
   unfollowButton: "เลิกติดตาม %username%"
 project:
   welcome:
-    title: Welcome to Catrobat's %theme%
-    title_mindstorms: Welcome to Catrobat's site for Mindstorms EV3 and NXT
-    subtitle: Create stories, games and more...
-    subtitle_embroidery: Stitch your own patterns on your T-shirts, bags, pants, or smartphone case!
-    subtitle_mindstorms: Create your own projects with your Lego Mindstorms EV3 and NXT robots
-    download: Download the app
-    statistics: More statistics
-  featured: Featured
-  example: Examples
-  newest: Newest projects
-  recommended: Recommended projects
-  scratchremixes: Scratch remixes
-  noProjects: There are currently no projects.
+    title: ยินดีต้อนรับสู่ %theme% ของ Catrobat
+    title_mindstorms: ยินดีต้อนรับสู่เว็บไซต์ของ Catrobat สำหรับ Mindstorms EV3 และ NXT
+    subtitle: สร้างเรื่องราว เกม และอื่นๆ...
+    subtitle_embroidery: เย็บลวดลายของคุณเองบนเสื้อยืด กระเป๋า กางเกง หรือเคสสมาร์ทโฟน!
+    subtitle_mindstorms: สร้างโครงการของคุณเองด้วยหุ่นยนต์ Lego Mindstorms EV3 และ NXT
+    download: ดาวน์โหลดแอพพลิเคชั่น
+    statistics: สถิติเพิ่มเติม
+  featured: จุดเด่น
+  example: ตัวอย่าง
+  newest: โครงการใหม่ล่าสุด
+  recommended: โครงการแนะนำ
+  scratchremixes: รีมิกซ์แบบเกา
+  noProjects: ขณะนี้ยังไม่มีโครงการใดๆ
   deleteAction: ลบโปรเจค
   deleteConfirmation: |+
     คุณแน่ใจไหม?
@@ -130,83 +130,83 @@ project:
     ใช่ตั้งค่าเป็นสาธารณะ
     ใช่ตั้งค่าเป็นส่วนตัว
     ไม่
-  reportCommentConfirmation: Are you sure you want to report this comment?
-  deleteCommentConfirmation: Are you sure you want to delete this comment?
+  reportCommentConfirmation: แน่ใจหรือว่าคุณต้องการที่จะแจ้งลบความคิดเห็นนี้?
+  deleteCommentConfirmation: แน่ใจหรือไม่ว่าคุณต้องการลบความคิดเห็นนี้?
   deleteAccountConfirmation: |+
-    Account deletion?
-    Are you sure that you want to delete your account? This will also delete your uploaded projects and comments!
-    There is no way to restore your actions!
-    Yes, delete it!
-    Cancel
-  tooLongName: The project name is too long!
-  tooLongDescription: The project description is too long!
-  tooLongCredits: The project notes and credits are too long!
-  trending: Trending projects
-  popular: Popular projects
+    การลบบัญชี?
+    คุณแน่ใจหรือไม่ว่าต้องการลบบัญชีของคุณ? การดำเนินการนี้จะลบโครงการและความคิดเห็นที่คุณอัปโหลดด้วย
+    ไม่มีทางที่จะฟื้นฟูการกระทำของคุณได้!
+    ใช่ ลบมัน!
+    ยกเลิก
+  tooLongName: ชื่อโครงการยาวเกินไป!
+  tooLongDescription: คำอธิบายโครงการยาวเกินไป!
+  tooLongCredits: หมายเหตุและเครดิตโครงการยาวเกินไป!
+  trending: โครงการที่กำลังมาแรง
+  popular: โครงการยอดนิยม
   most:
     viewed: เข้าดูมากที่สุด
     downloaded: ดาวน์โหลดมากที่สุด
-  random: Random projects
-  related: Related projects
-  downloads: '%downloads% downloads'
-  sample: Example projects
-  views: '%views% views'
+  random: โครงการสุ่ม
+  related: โครงการที่เกี่ยวข้อง
+  downloads: '%downloads% ดาวน์โหลด'
+  sample: ตัวอย่างโครงการ
+  views: '%views% ดู'
   likes:
-    likersTitle: "People who reacted to that project"
+    likersTitle: "ผู้ที่ตอบสนองต่อโครงการนั้น"
     all: "ทั้งหมด"
-  remixes: '{0}0 remixes |{1}1 remix |]1,Inf]%remixes% remixes'
+  remixes: '{0}0 รีมิกซ์ |{1}1 รีมิกซ์ |]1,ข้อมูล]%remixes% รีมิกซ์'
   newRemixesNotificationTitle: "|{1} \"%programName%\" มี 1 รีมิกซ์ใหม่: |] 1, Inf]\n\"%programName%\" มี%remixes% รีมิกซ์ใหม่:"
-  submitted: Submitted projects
-  uploaded: Uploaded projects
-  reportAsInappropriate: Report as inappropriate
-  reportProgram: Report project
-  languageVersion: 'Catrobat language version: %languageVersion%'
-  reportLoginText: Please %login% to report this project.
-  reportDialogHeader: Why do you want to report this project?
-  reportDialogReason: Enter a reason
-  reportRadioButtonInappropriate: It's inappropriate
-  reportRadioButtonCopyright: Copyright infringement
-  reportRadioButtonSpam: It's spam
-  reportRadioButtonDislike: I don't like it
-  reportOwnProgram: You cannot flag your own project.
-  reportAlready: You've already flagged this project.
-  reportDone: You reported this project!
-  updateAppHeaderDownload: Download not possible
-  updateAppTextDownload: Please update your app to the newest version. Be aware that not all Android features are already available on IOS.
-  updateAppTextDownloadApk: The APK download is currently only available on Android and not on IOS.
-  updateAppHeader: Update app
-  updateAppText: Please update your app to the newest version.
+  submitted: โครงการที่ส่ง
+  uploaded: โครงการที่อัปโหลด
+  reportAsInappropriate: รายงานว่าไม่เหมาะสม
+  reportProgram: รายงานโครงการ
+  languageVersion: 'เวอร์ชันภาษา Catrobat: %languageVersion%'
+  reportLoginText: กรุณา %login% เพื่อรายงานโครงการนี้
+  reportDialogHeader: ทำไมคุณถึงต้องการรายงานโครงการนี้?
+  reportDialogReason: ระบุเหตุผล
+  reportRadioButtonInappropriate: มันไม่เหมาะสม
+  reportRadioButtonCopyright: การละเมิดลิขสิทธิ์
+  reportRadioButtonSpam: มันเป็นสแปม
+  reportRadioButtonDislike: ฉันไม่ชอบมัน
+  reportOwnProgram: คุณไม่สามารถตั้งค่าสถานะโครงการของคุณเองได้
+  reportAlready: คุณได้ตั้งค่าสถานะโครงการนี้แล้ว
+  reportDone: คุณรายงานโครงการนี้แล้ว!
+  updateAppHeaderDownload: ดาวน์โหลดไม่ได้
+  updateAppTextDownload: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด โปรดทราบว่าคุณลักษณะของ Android บางรายการอาจไม่พร้อมใช้งานบน IOS อยู่แล้ว
+  updateAppTextDownloadApk: ขณะนี้การดาวน์โหลด APK มีให้บริการบน Android เท่านั้น และไม่มีบน IOS
+  updateAppHeader: อัปเดตแอป
+  updateAppText: โปรดอัปเดตแอปของคุณเป็นเวอร์ชันใหม่ล่าสุด
   btnClosePopup: ตกลง
-  checkout_this_project: Checkout this Catrobat project
-  show_more: Show More
+  checkout_this_project: ชำระเงินโครงการ Catrobat นี้
+  show_more: แสดงเพิ่มเติม
   comments: ความคิดเห็น
-  send: Send
+  send: ส่ง
   delete: ลบ
   report: รายงาน
-  report_popup: The comment was successfully reported.
-  report_popup_header: Reported
-  deleted_popup: The comment was successfully deleted.
-  deleted_popup_header: Deleted
-  noAdminRights: You have no admin rights. Please Log in as an Admin.
-  editProject: Edit the project
-  closeProjectEditor: Close project editor
+  report_popup: รายงานความคิดเห็นเรียบร้อยแล้ว
+  report_popup_header: รายงานแล้ว
+  deleted_popup: ลบความคิดเห็นเรียบร้อยแล้ว
+  deleted_popup_header: ลบทิ้งแล้ว
+  noAdminRights: คุณไม่มีสิทธิ์ของผู้ดูแลระบบ กรุณาเข้าสู่ระบบในฐานะผู้ดูแลระบบ
+  editProject: แก้ไขโครงการ
+  closeProjectEditor: ปิดตัวแก้ไขโครงการ
   closeEditorPrompt: คุณต้องบันทึกการเปลี่ยนแปลงหรือไม่?
   btnDiscard: ละทิ้ง
-  addComment: Write a comment
-  thumbsUp: Thumbs up!
-  smile: Smile!
-  love: Love!
-  wow: Wooow!
-  linkTitle: Link
-  link: Copy project link to clipboard
+  addComment: เขียนข้อคิดเห็น
+  thumbsUp: ยอดเยี่ยม
+  smile: ยิ้ม
+  love: รัก
+  wow: ว้าว
+  linkTitle: ลิงค์
+  link: คัดลอกลิงก์โครงการไปยังคลิปบอร์ด
   reactionsText: ถูกใจ
-  downloadErrorText: Error occurred while downloading the project. Please try again later.
-  downloadStartText: Download has started...
-  showTranslation: Show translation
-  hideTranslation: Hide translation
-  translatedByLine: Translated by %provider% from %sourceLanguage% to %targetLanguage%
-  googleTranslate: Google Translate
-  confrimDelete: Are you sure you want to delete the translation?
+  downloadErrorText: เกิดข้อผิดพลาดขณะดาวน์โหลดโครงการ กรุณาลองใหม่อีกครั้งในภายหลัง.
+  downloadStartText: เริ่มดาวน์โหลดแล้ว...
+  showTranslation: แสดงคำแปล
+  hideTranslation: ซ่อนคำแปล
+  translatedByLine: แปลโดย %provider% จาก %sourceLanguage% เป็น %targetLanguage%
+  googleTranslate: Google แปลภาษา
+  confrimDelete: คุณแน่ใจหรือไม่ว่าต้องการลบการแปล
   default: ค่าเริ่มต้น
   save: บันทึก
   translationTitle: '%language% การแปล'
@@ -223,10 +223,10 @@ remixGraph:
   by: 'โดย'
   open: 'เปิด​'
   showPaths: 'แสดงเส้นทาง'
-  projectNotAvailableErrorTitle: 'Sorry...'
-  projectNotAvailableErrorDescription: 'The project is not available any more!'
-  projectNotAvailable: 'Not available'
-  projectUnknownUser: 'Unknown user'
+  projectNotAvailableErrorTitle: 'ขอโทษ'
+  projectNotAvailableErrorDescription: 'โครงการนี้ไม่มีอีกแล้ว!'
+  projectNotAvailable: 'ไม่มี'
+  projectUnknownUser: 'ผู้ใช้งานที่ไม่รู้จัก'
 noReply:
   - นี่เป็นข้อความอัตโนมัติ - โปรดอย่าตอบกลับอีเมลนี้โดยตรง
 accountConfirmation:
@@ -253,27 +253,27 @@ accountConfirmation:
     ทีม Catrobat ของคุณ
     </p>
 newAccountConfirmation:
-  subject: Please verify your E-Mail-Address
-  welcome: Welcome to Catrobat Community!
+  subject: กรุณาตรวจสอบอีเมล์-แอดเดรสของคุณ
+  welcome: ยินดีต้อนรับสู่ชุมชน Catrobat!
   message: |
-    Please verify your E-Mail-Address
-    Welcome to Catrobat Community
-    With just one click on the button below
-    you can verify your regestration at Catrobat.
-    This link is valid until %time% and can be
-    used only once to confirm your email address.
+    กรุณาตรวจสอบอีเมล์-แอดเดรสของคุณ
+    ยินดีต้อนรับสู่ชุมชน Catrobat
+    เพียงคลิกปุ่มด้านล่างเพียงครั้งเดียว
+    คุณสามารถตรวจสอบการลงทะเบียนของคุณได้ที่ Catrobat
+    ลิงก์นี้ใช้ได้จนถึง %time% และสามารถเป็นได้
+    ใช้เพียงครั้งเดียวเพื่อยืนยันที่อยู่อีเมลของคุณ
   messageHtml: |
     <p>
-    With just one click on the button below<br>
-    you can verify your regestration at Catrobat.<br>
+    เพียงคลิกปุ่มด้านล่างเพียงครั้งเดียว<br>
+    คุณสามารถตรวจสอบการลงทะเบียนได้ที่ Catrobat<br>
     <br>
     <br>
-    This link is valid until %time% and can be<br>
-    used only once to confirm your email address.<br>
+    ลิงก์นี้ใช้ได้จนถึง %time% และสามารถ<br>ได้
+    ใช้เพียงครั้งเดียวเพื่อยืนยันที่อยู่อีเมลของคุณ<br>
     </p>
-  button: CONFIRM E-MAIL
-  delete: You can delete your account here at any time.
-  deleteHtml: You can <a href="%deleteUrl%">delete</a> your account here at any time.
+  button: ยืนยันอีเมล์
+  delete: คุณสามารถลบบัญชีของคุณได้ที่นี่เมื่อใดก็ได้
+  deleteHtml: คุณสามารถ <a href="%deleteUrl%">ลบ</a> บัญชีของคุณได้ที่นี่เมื่อใดก็ได้
 passwordRecovery:
   subject: การกู้คืนรหัสผ่าน Catrobat ของคุณ
   message: |
@@ -426,7 +426,7 @@ menu:
   mediaLibrary: ไลบรารีสื่อ
   studio: สตูดิโอ
   language: ภาษา
-  languageOptionsNotAvailable: No language options available.
+  languageOptionsNotAvailable: ไม่มีตัวเลือกภาษาให้เลือก
 login:
   login: เข้าสู่ระบบ
   button:
@@ -482,9 +482,9 @@ resetPassword:
     cheers: "ไชโย!"
   newemail:
     title: "รีเซ็ตรหัสผ่านของคุณ"
-    content: <p> You are receiving this email because you<br> recently requested a password reset for<br> your Catrobat account. Follow the link<br> below to change the password<br><br> If you have not requested a password change,<br> you can ignore this email.<br> </p>
-    visitLink: RESET PASSWORD
-    expire: This link is valid for %time% - only one time use!
+    content: <p> คุณได้รับอีเมลนี้เนื่องจากคุณ<br>เพิ่งร้องขอการรีเซ็ตรหัสผ่านสำหรับ<br>บัญชี Catrobat ของคุณ ตามลิงค์<br>ด้านล่างเพื่อเปลี่ยนรหัสผ่าน<br><br> หากคุณไม่ได้ขอเปลี่ยนรหัสผ่าน<br> คุณไม่ต้องสนใจอีเมลฉบับนี้<br> </p>
+    visitLink: รีเซ็ตรหัสผ่าน
+    expire: ลิงค์นี้ใช้ได้ %time% - ใช้เพียงครั้งเดียวเท่านั้น!
   reset:
     title: "รีเซ็ตรหัสผ่านของคุณ"
     button:
@@ -534,11 +534,11 @@ errors:
   token: 'การรับรองความถูกต้องของอุปกรณ์ล้มเหลว: ตรวจสอบอุปกรณ์ไม่ถูกต้อง'
   uploadTokenAuthFailed: 'การตรวจสอบสิทธิ์การอัปโหลดโทเค็นล้มเหลว'
   project:
-    invalid: Invalid project.
+    invalid: โครงการไม่ถูกต้อง
   languageversion:
     tooold: 'ขออภัยโครงการของคุณมีภาษา Catrobat เวอร์ชันเก่า! คุณใช้ Pocket Code เวอร์ชันล่าสุดหรือไม่?'
   projectversion:
-    tooold: 'Sorry, you are using an old version of Pocket Code. Please update to the latest version.'
+    tooold: 'ขออภัย คุณกำลังใช้ Pocket Code เวอร์ชันเก่า กรุณาอัปเดตเป็นเวอร์ชันล่าสุด'
   authentication:
     title: รับรองความถูกต้องล้มเหลว
     webview: |
@@ -743,7 +743,7 @@ catro-notifications:
   follow:
     message: '%user_link% กำลังติดตามคุณอยู่'
   project-upload:
-    message: '%user_link% created a new game %program_link%.'
+    message: '%user_link% สร้างเกมใหม่ %program_link%'
   remix:
     message: '%user_link% สร้างรีมิกซ์ %program_link% ของเกมของคุณ %remix_program_link%'
 clipboard:
@@ -788,14 +788,14 @@ checkOutUser: 'ตรวจสอบผู้ใช้รายนี้:'
 community: 'ชุมชน Catrobat'
 back_to_app: 'ออกจากชุมชน'
 category:
-  recent: Newest projects
-  random: Random projects
+  recent: โครงการใหม่ล่าสุด
+  random: โครงการสุ่ม
   most_viewed: เข้าดูมากที่สุด
   most_downloaded: ดาวน์โหลดมากที่สุด
   example: ตัวอย่าง
-  scratch: Scratch remixes
-  recommended: Recommended projects
-  popular: Most popular
+  scratch: รีมิกซ์แบบเกา
+  recommended: โครงการแนะนำ
+  popular: ที่นิยมมากที่สุด
 achievements:
   sidebar:
     title: 'ความสำเร็จ'
@@ -893,7 +893,7 @@ studio:
   delete_studio: 'ลบสตูดิโอ'
   cancel_studio: 'ยกเลิก'
   studio_name: 'ชื่อสตูดิโอ'
-  studio_description: 'Studio description'
+  studio_description: 'คำอธิบายของสตูดิโอ'
   join: 'เข้าร่วม'
   leave: 'ออกจากระบบ'
   report: 'รายงาน'
@@ -902,9 +902,9 @@ studio:
   overview:
     joined_studios: 'เข้าร่วมสตูดิโอ'
     public_studios: 'สตูดิโอสาธารณะ'
-    private_studios: 'Private studios'
+    private_studios: 'สตูดิโอส่วนตัว'
   details:
-    add_project: 'click to add the project'
+    add_project: 'คลิกเพื่อเพิ่มโครงการ'
     showMore: 'แสดงมากขึ้น'
     showLess: 'แสดงน้อยลง'
     remove_project: 'นำออกจากสตูดิโอ'
@@ -915,11 +915,11 @@ studio:
     join: 'เข้าร่วม'
     leave: 'ออกจากระบบ'
     report: 'รายงาน'
-    pending: 'Pending'
-    decline: 'Declined'
+    pending: 'รอดำเนินการ'
+    decline: 'ปฏิเสธ'
     projects:
       title: 'โครงการ'
-      addProject: 'Add your own projects'
+      addProject: 'เพิ่มโครงการของคุณเอง'
     comments:
       title: 'ความคิดเห็น'
       type_something: 'พิมพ์บางอย่าง'
@@ -961,10 +961,10 @@ snackbar:
   project_not_found: 'ไม่มีโครงการที่ร้องขอ'
 maintenanceinformations:
   maintenance_information:
-    additional_info: 'Additional information: additionalInfo'
-    feature_1: 'The Feature featureName is not available from maintenanceStart until maintenanceEnd'
-    feature_2: 'The Feature'
-    feature_3: 'The Feature'
+    additional_info: 'ข้อมูลเพิ่มเติม: ข้อมูลเพิ่มเติม'
+    feature_1: 'คุณลักษณะ ชื่อคุณลักษณะ ไม่พร้อมใช้งานตั้งแต่เริ่มต้นการบำรุงรักษาจนถึงสิ้นสุดการบำรุงรักษา'
+    feature_2: 'คุณสมบัติ'
+    feature_3: 'คุณสมบัติ'
 
 
 

@@ -1,27 +1,24 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater\CronJobs;
 
 use App\DB\Entity\User\Achievements\Achievement;
 use App\DB\Entity\User\User;
 use App\User\Achievements\AchievementManager;
 use App\User\UserManager;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:workflow:achievement:gold_user', description: 'Unlocking gold_user user achievements')]
 class AchievementWorkflow_GoldUser_Command extends Command
 {
   public function __construct(protected UserManager $user_manager, protected AchievementManager $achievement_manager)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:workflow:achievement:gold_user')
-      ->setDescription('Unlocking gold_user user achievements')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\Controller;
 
 use App\Api\Services\Base\TranslatorAwareInterface;
@@ -8,7 +10,6 @@ use App\DB\Entity\Project\Tag;
 use App\DB\EntityRepository\Project\TagRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -28,7 +29,7 @@ class TaggingController extends AbstractController implements TranslatorAwareInt
    * @deprecated
    */
   #[Route(path: '/api/tags/getTags.json', name: 'api_get_tags', defaults: ['_format' => 'json'], methods: ['GET'])]
-  public function taggingAction(Request $request, TagRepository $tags_repo): JsonResponse
+  public function tagging(TagRepository $tags_repo): JsonResponse
   {
     $tags = [];
     $tags['statusCode'] = 200;

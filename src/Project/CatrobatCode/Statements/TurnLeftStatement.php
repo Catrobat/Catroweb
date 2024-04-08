@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Statements;
 
 class TurnLeftStatement extends Statement

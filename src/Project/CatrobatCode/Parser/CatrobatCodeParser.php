@@ -1,15 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatCode\Parser;
 
 use App\Project\CatrobatFile\ExtractedCatrobatFile;
 
 class CatrobatCodeParser
 {
-  /**
-   * @return ParsedSceneProject|ParsedSimpleProject|null
-   */
-  public function parse(ExtractedCatrobatFile $extracted_catrobat_project)
+  public function parse(ExtractedCatrobatFile $extracted_catrobat_project): ParsedSceneProject|ParsedSimpleProject|null
   {
     try {
       $parsed_project = $this->parseProject($extracted_catrobat_project);

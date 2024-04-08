@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Testing\Behat\Context;
 
 use App\DB\Entity\MaintenanceInformation;
@@ -9,7 +11,6 @@ use App\DB\Entity\MediaLibrary\MediaPackageFile;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\ProgramLike;
-use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\Entity\Project\Tag;
 use App\DB\Entity\Studio\Studio;
 use App\DB\Entity\Studio\StudioActivity;
@@ -63,7 +64,7 @@ class DataFixturesContext implements Context
   /**
    * @Given the next Uuid Value will be :id
    */
-  public function theNextUuidValueWillBe(mixed $id): void
+  public function theNextUuidValueWillBe(string $id): void
   {
     MyUuidGenerator::setNextValue($id);
   }
@@ -73,7 +74,7 @@ class DataFixturesContext implements Context
    *
    * @throws \Exception
    */
-  public function theCurrentTimeIs(mixed $time): void
+  public function theCurrentTimeIs(string $time): void
   {
     $date = new \DateTime($time, new \DateTimeZone('UTC'));
     TimeUtils::freezeTime($date);
@@ -138,7 +139,7 @@ class DataFixturesContext implements Context
    * @Given /^there are (\d+) additional users$/
    * @Given /^there are (\d+) users$/
    */
-  public function thereAreManyUsers(mixed $user_count): void
+  public function thereAreManyUsers(string $user_count): void
   {
     $list = ['name'];
     $base = 10 ** strlen(strval((int) $user_count - 1));
@@ -162,31 +163,31 @@ class DataFixturesContext implements Context
   /**
    * @Then /^the user "([^"]*)" should not exist$/
    */
-  public function theUserShouldNotExist(mixed $arg1): void
+  public function theUserShouldNotExist(string $username): void
   {
-    $user = $this->getUserManager()->findUserByUsername($arg1);
+    $user = $this->getUserManager()->findUserByUsername($username);
     Assert::assertNull($user);
   }
 
   /**
    * @Then /^the user "([^"]*)" with email "([^"]*)" should exist and be enabled$/
    */
-  public function theUserWithUsernameAndEmailShouldExistAndBeEnabled(mixed $arg1, mixed $arg2): void
+  public function theUserWithUsernameAndEmailShouldExistAndBeEnabled(string $username, string $email): void
   {
     $em = $this->getManager();
     $user = $em->getRepository(User::class)->findOneBy([
-      'username' => $arg1,
+      'username' => $username,
     ]);
 
     Assert::assertInstanceOf(User::class, $user);
-    Assert::assertEquals($arg2, $user->getEmail());
+    Assert::assertEquals($email, $user->getEmail());
     Assert::assertTrue($user->IsEnabled());
   }
 
   /**
    * @Given :number_of_users users follow:
    */
-  public function thereAreNUsersThatFollow(mixed $number_of_users, TableNode $table): void
+  public function thereAreNUsersThatFollow(string $number_of_users, TableNode $table): void
   {
     $user = $table->getHash()[0];
     $followedUser = $this->insertUser($user, false);
@@ -203,12 +204,12 @@ class DataFixturesContext implements Context
   /**
    * @When /^User "([^"]*)" is followed by "([^"]*)"$/
    */
-  public function userIsFollowed(mixed $user_id, mixed $follow_ids): void
+  public function userIsFollowed(string $user_id, string $follow_ids_as_string): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->find($user_id);
 
-    $ids = explode(',', (string) $follow_ids);
+    $ids = explode(',', $follow_ids_as_string);
     foreach ($ids as $id) {
       /** @var User|null $followUser */
       $followUser = $this->getUserManager()->find($id);
@@ -220,7 +221,7 @@ class DataFixturesContext implements Context
   /**
    * @When /^User "([^"]*)" is followed by user "([^"]*)"$/
    */
-  public function userIsFollowedByUser(mixed $user_id, mixed $follow_id): void
+  public function userIsFollowedByUser(string $user_id, string $follow_id): void
   {
     /** @var User|null $user */
     $user = $this->getUserManager()->find($user_id);
@@ -321,7 +322,7 @@ class DataFixturesContext implements Context
       $maintenanceInformation->setLtmAdditionalInformation($maintenanceinformation_config['Additional Information']);
       $maintenanceInformation->setLtmCode('maintenanceinformations.maintenance_information.feature_'.$maintenanceinformation_config['Id']);
       $maintenanceInformation->setIcon($maintenanceinformation_config['Icon']);
-      $maintenanceInformation->setActive($maintenanceinformation_config['Active']);
+      $maintenanceInformation->setActive((bool) $maintenanceinformation_config['Active']);
       $maintenanceInformation->setInternalTitle($maintenanceinformation_config['Title']);
       $em->persist($maintenanceInformation);
     }
@@ -360,7 +361,7 @@ class DataFixturesContext implements Context
    *
    * @throws \Exception
    */
-  public function thereAreNumberOfSimilarProjects(mixed $num_of_projects): void
+  public function thereAreNumberOfSimilarProjects(string $num_of_projects): void
   {
     for ($project = 1; $project <= $num_of_projects; ++$project) {
       $project_info = ['name' => 'basic '.$project];
@@ -420,11 +421,21 @@ class DataFixturesContext implements Context
   public function thereAreFeaturedProjects(TableNode $table): void
   {
     foreach ($table->getHash() as $config) {
-      /** @var FeaturedProgram $project */
       $project = $this->insertFeaturedProject($config, false);
       $this->featured_projects[] = $project;
     }
     $this->getManager()->flush();
+  }
+
+  /**
+   * @Given /^there are feature flags:$/
+   */
+  public function thereAreFeatureFlags(TableNode $table): void
+  {
+    $manager = $this->getFeatureFlagManager();
+    foreach ($table->getHash() as $config) {
+      $manager->setFlagValue($config['name'], (bool) $config['value']);
+    }
   }
 
   /**
@@ -458,7 +469,7 @@ class DataFixturesContext implements Context
    *
    * @throws \Exception
    */
-  public function iHaveAProjectWithId(mixed $name, mixed $id): void
+  public function iHaveAProjectWithId(string $name, string $id): void
   {
     $config = [
       'id' => $id,
@@ -473,7 +484,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^project "([^"]*)" is not visible$/
    */
-  public function projectIsNotVisible(mixed $project_name): void
+  public function projectIsNotVisible(string $project_name): void
   {
     $project = $this->getProjectManager()->findOneByName($project_name);
     Assert::assertNotNull($project, 'There is no project named '.$project_name);
@@ -485,10 +496,10 @@ class DataFixturesContext implements Context
   /**
    * @Then /^there should be "([^"]*)" projects in the database$/
    */
-  public function thereShouldBeProjectsInTheDatabase(mixed $number_of_projects): void
+  public function thereShouldBeProjectsInTheDatabase(string $number_of_projects): void
   {
     $projects = $this->getProjectManager()->findAll();
-    Assert::assertCount($number_of_projects, $projects);
+    Assert::assertCount((int) $number_of_projects, $projects);
   }
 
   /**
@@ -503,10 +514,10 @@ class DataFixturesContext implements Context
   /**
    * @Then /^the project should be tagged with "([^"]*)" in the database$/
    */
-  public function theProjectShouldBeTaggedWithInTheDatabase(mixed $arg1): void
+  public function theProjectShouldBeTaggedWithInTheDatabase(string $tags_as_string): void
   {
     $project_tags = $this->getProjectManager()->findAll()[0]->getTags() ?? [];
-    $tags = explode(',', (string) $arg1);
+    $tags = explode(',', $tags_as_string);
     Assert::assertEquals(count($tags), is_countable($project_tags) ? count($project_tags) : 0, 'Too much or too less tags found!');
 
     foreach ($project_tags as $project_tag) {
@@ -530,7 +541,7 @@ class DataFixturesContext implements Context
   /**
    * @Then the project :id should have :downloads downloads
    */
-  public function theProjectShouldHaveDownloads(mixed $id, mixed $downloads): void
+  public function theProjectShouldHaveDownloads(string $id, string $downloads): void
   {
     /** @var Program $project */
     $project = $this->getProjectManager()->find($id);
@@ -559,7 +570,7 @@ class DataFixturesContext implements Context
   /**
    * @Then the embroidery project should have the :extension file extension
    */
-  public function theEmbroideryProjectShouldHaveTheExtension(mixed $extension): void
+  public function theEmbroideryProjectShouldHaveTheExtension(string $extension): void
   {
     $project_extensions = $this->getProjectManager()->findOneByName('ZigZag Stich')->getExtensions();
 
@@ -572,15 +583,15 @@ class DataFixturesContext implements Context
   }
 
   /**
-   * @Then the project with id :arg1 should be marked with :arg2 extensions in the database
+   * @Then the project with id :id should be marked with :arg2 extensions in the database
    */
-  public function theProjectShouldBeMarkedWithExtensionsInTheDatabase(mixed $id, mixed $count): void
+  public function theProjectShouldBeMarkedWithExtensionsInTheDatabase(string $id, string $count): void
   {
     $project = $this->getProjectManager()->find($id);
     $this->getManager()->refresh($project);
     $project_extensions = $project->getExtensions();
     Assert::assertNotNull($project_extensions);
-    Assert::assertCount($count, $project_extensions, 'Too much or too less extensions found!');
+    Assert::assertCount((int) $count, $project_extensions, 'Too much or too less extensions found!');
   }
 
   /**
@@ -610,7 +621,7 @@ class DataFixturesContext implements Context
    *
    * @throws \Exception
    */
-  public function iHaveAProjectWithIdAndAVibratorBrick(mixed $name, mixed $id): void
+  public function iHaveAProjectWithIdAndAVibratorBrick(string $name, string $id): void
   {
     MyUuidGenerator::setNextValue($id);
     $config = [
@@ -663,13 +674,13 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there is a notification that "([^"]*)" follows "([^"]*)"$/
    */
-  public function thereAreFollowNotifications(mixed $user, mixed $user_to_follow): void
+  public function thereAreFollowNotifications(string $username, string $username_to_follow): void
   {
     /** @var User $user_to_follow */
-    $user_to_follow = $this->getUserManager()->findUserByUsername($user_to_follow);
+    $user_to_follow = $this->getUserManager()->findUserByUsername($username_to_follow);
 
     /** @var User|null $user */
-    $user = $this->getUserManager()->findUserByUsername($user);
+    $user = $this->getUserManager()->findUserByUsername($username);
 
     Assert::assertNotNull($user, 'user is null');
 
@@ -710,7 +721,7 @@ class DataFixturesContext implements Context
       $new_category = new MediaPackageCategory();
       $new_category->setName($category['name']);
       if (!empty($category['priority'])) {
-        $new_category->setPriority($category['priority']);
+        $new_category->setPriority((int) $category['priority']);
       }
 
       /** @var MediaPackage|null $package */
@@ -742,7 +753,7 @@ class DataFixturesContext implements Context
       $new_file->setName($file['name']);
       $new_file->setDownloads(0);
       $new_file->setExtension($file['extension']);
-      $new_file->setActive($file['active']);
+      $new_file->setActive((bool) $file['active']);
 
       /** @var MediaPackageCategory|null $category */
       $category = $em->getRepository(MediaPackageCategory::class)->findOneBy(['name' => $file['category']]);
@@ -758,8 +769,11 @@ class DataFixturesContext implements Context
       }
       $new_file->setAuthor($file['author']);
 
-      $file_repo->saveFile(new File($this->MEDIA_PACKAGE_DIR.$file['id'].'.'.
-        $file['extension']), $file['id'], $file['extension']);
+      $file_repo->saveFile(
+        new File($this->MEDIA_PACKAGE_DIR.$file['id'].'.'.$file['extension']),
+        (int) $file['id'],
+        $file['extension']
+      );
 
       $em->persist($new_file);
 
@@ -903,7 +917,7 @@ class DataFixturesContext implements Context
       }
 
       $type = $data['type'];
-      if (ctype_digit($type)) {
+      if (ctype_digit((string) $type)) {
         $type = (int) $type;
       } else {
         $type = array_search($type, ProgramLike::$TYPE_NAMES, true);
@@ -979,10 +993,10 @@ class DataFixturesContext implements Context
 
       // Some specific id desired?
       if (isset($notification['id'])) {
-        $to_create->setId($notification['id']);
+        $to_create->setId((int) $notification['id']);
       }
       if (isset($notification['seen'])) {
-        $to_create->setSeen($notification['seen']);
+        $to_create->setSeen((bool) $notification['seen']);
       }
 
       $em->persist($to_create);
@@ -1010,7 +1024,7 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are "([^"]*)"\+ notifications for "([^"]*)"$/
    */
-  public function thereAreNotificationsFor(mixed $arg1, mixed $username): void
+  public function thereAreNotificationsFor(string $count, string $username): void
   {
     $em = $this->getManager();
 
@@ -1018,7 +1032,7 @@ class DataFixturesContext implements Context
     $user = $this->getUserManager()->findUserByUsername($username);
     Assert::assertNotNull($user, 'user is null');
 
-    for ($i = 0; $i < $arg1; ++$i) {
+    for ($i = 0; $i < (int) $count; ++$i) {
       $to_create = new CatroNotification($user, 'Random Title', 'Random Text');
       $em->persist($to_create);
     }
@@ -1028,12 +1042,12 @@ class DataFixturesContext implements Context
   /**
    * @Given /^there are "([^"]*)" "([^"]*)" notifications for project "([^"]*)" from "([^"]*)"$/
    */
-  public function thereAreSpecificNotificationsFor(mixed $amount, mixed $type, mixed $project_name, mixed $user): void
+  public function thereAreSpecificNotificationsFor(string $amount, string $type, string $project_name, string $username): void
   {
     $em = $this->getManager();
 
     /** @var User|null $user */
-    $user = $this->getUserManager()->findUserByUsername($user);
+    $user = $this->getUserManager()->findUserByUsername($username);
 
     $project = $this->getProjectManager()->findOneByName($project_name);
 
@@ -1087,10 +1101,10 @@ class DataFixturesContext implements Context
   /**
    * @Then /^there should be "([^"]*)" users in the database$/
    */
-  public function thereShouldBeUsersInTheDatabase(mixed $number_of_users): void
+  public function thereShouldBeUsersInTheDatabase(string $number_of_users): void
   {
     $users = $this->getUserManager()->findAll();
-    Assert::assertCount($number_of_users, $users);
+    Assert::assertCount((int) $number_of_users, $users);
   }
 
   /**
@@ -1104,13 +1118,15 @@ class DataFixturesContext implements Context
       }
 
       $isPublic = filter_var($config['is_public'] ?? true, FILTER_VALIDATE_BOOLEAN);
+      $allowComments = filter_var($config['allow_comments'] ?? true, FILTER_VALIDATE_BOOLEAN);
+      $isEnabled = filter_var($config['is_enabled'] ?? true, FILTER_VALIDATE_BOOLEAN);
 
       $studio = (new Studio())
         ->setName($config['name'])
         ->setDescription($config['description'] ?? '')
-        ->setAllowComments($config['allow_comments'] ?? true)
+        ->setAllowComments($allowComments)
         ->setIsPublic($isPublic)
-        ->setIsEnabled($config['is_enabled'] ?? true)
+        ->setIsEnabled($isEnabled)
         ->setCreatedOn(isset($config['created_on']) ?
             new \DateTime($config['created_on'], new \DateTimeZone('UTC')) :
             new \DateTime('01.01.2013 12:00', new \DateTimeZone('UTC'))
@@ -1221,8 +1237,8 @@ class DataFixturesContext implements Context
         ->setBadgeLockedSvgPath($config['badge_locked_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_badge_locked_1.svg')
         ->setBannerSvgPath($config['banner_svg_path'] ?? UpdateAchievementsCommand::ACHIEVEMENT_IMAGE_ASSETS_PATH.'achievement_banner.svg')
         ->setBannerColor($config['banner_color'] ?? '#00ff00')
-        ->setEnabled($config['enabled'] ?? true)
-        ->setPriority($config['priority'] ?? 0)
+        ->setEnabled((bool) ($config['enabled'] ?? true))
+        ->setPriority((int) ($config['priority'] ?? 0))
       ;
       $this->getManager()->persist($achievement);
     }
@@ -1436,7 +1452,7 @@ class DataFixturesContext implements Context
       $source_language = $config['source_language'];
       $target_language = $config['target_language'];
       $provider = $config['provider'];
-      $usage_count = $config['usage_count'];
+      $usage_count = (int) $config['usage_count'];
       $cached_name = $config['cached_name'] ?? null;
       $cached_description = $config['cached_description'] ?? null;
       $cached_credits = $config['cached_credits'] ?? null;
@@ -1475,7 +1491,7 @@ class DataFixturesContext implements Context
       $cached_credits = $translation->getCachedCredits();
 
       $matching_row = array_filter($table_rows,
-        fn ($row) => $project_id == $row['project_id']
+        fn ($row): bool => $project_id == $row['project_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
@@ -1501,7 +1517,7 @@ class DataFixturesContext implements Context
       $source_language = $config['source_language'];
       $target_language = $config['target_language'];
       $provider = $config['provider'];
-      $usage_count = $config['usage_count'];
+      $usage_count = (int) $config['usage_count'];
 
       $comment_machine_translation = new CommentMachineTranslation($comment, $source_language, $target_language, $provider, $usage_count);
       $this->getManager()->persist($comment_machine_translation);
@@ -1531,7 +1547,7 @@ class DataFixturesContext implements Context
       $usage_count = $translation->getUsageCount();
 
       $matching_row = array_filter($table_rows,
-        fn ($row) => $comment_id == $row['comment_id']
+        fn ($row): bool => $comment_id == $row['comment_id']
           && $source_language == $row['source_language']
           && $target_language == $row['target_language']
           && $provider == $row['provider']
@@ -1586,7 +1602,7 @@ class DataFixturesContext implements Context
       $credit = $translation->getCredits();
 
       $matching_row = array_filter($table_rows,
-        fn ($row) => $project_id == $row['project_id']
+        fn ($row): bool => $project_id == $row['project_id']
           && $language == $row['language']
           && $name == $row['name']
           && $description == $row['description']

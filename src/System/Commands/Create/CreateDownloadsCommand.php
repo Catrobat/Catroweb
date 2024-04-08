@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\Entity\Project\Program;
@@ -8,11 +10,13 @@ use App\DB\Entity\User\User;
 use App\Project\ProjectManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:download', description: 'download a project')]
 class CreateDownloadsCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager, private readonly EntityManagerInterface $entity_manager,
@@ -23,8 +27,7 @@ class CreateDownloadsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:download')
-      ->setDescription('download a project')
+    $this
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program which gets downloaded')
       ->addArgument('user_name', InputArgument::REQUIRED, 'User who download program')
     ;

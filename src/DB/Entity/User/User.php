@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\User;
 
 use App\DB\Entity\Project\Program;
@@ -412,7 +414,7 @@ class User extends BaseUser
 
   public function getScratchUsername(): string
   {
-    return preg_replace('/^'.self::$SCRATCH_PREFIX.'/', '', $this->getUsername());
+    return preg_replace('/^'.self::$SCRATCH_PREFIX.'/', '', (string) $this->getUsername());
   }
 
   public function setScratchUserId(?int $scratch_user_id): void

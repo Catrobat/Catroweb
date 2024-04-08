@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Project\Extension;
 
 use App\DB\Entity\Project\Program;

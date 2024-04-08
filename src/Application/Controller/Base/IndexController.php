@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Base;
 
 use App\DB\Entity\MaintenanceInformation;
@@ -21,7 +23,7 @@ class IndexController extends AbstractController
   }
 
   #[Route(path: '/', name: 'index', methods: ['GET'])]
-  public function indexAction(Request $request): Response
+  public function index(Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');
     /** @var User|null $user */
@@ -98,7 +100,7 @@ class IndexController extends AbstractController
 
       return new JsonResponse(['success' => true]);
     } catch (\Exception $e) {
-      return new JsonResponse(['success' => false, 'error' => $e->getMessage()], 500);
+      return new JsonResponse(['success' => false, 'error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
     }
   }
 }

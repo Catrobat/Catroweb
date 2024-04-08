@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Maintenance;
 
 use App\DB\Entity\Project\Program;
@@ -8,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -15,12 +18,13 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
-define('HOURS', 24);
-define('MINUTES', 60);
-define('SECONDS', 60);
-
+#[AsCommand(name: 'catrobat:clean:old-apk', description: 'Delete all APKs older than X days and resets the status to NONE')]
 class CleanOldApkCommand extends Command
 {
+  private const HOURS = 24;
+  private const MINUTES = 60;
+  private const SECONDS = 60;
+
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly ParameterBagInterface $parameter_bag)
   {
     parent::__construct();
@@ -28,8 +32,7 @@ class CleanOldApkCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:clean:old-apk')
-      ->setDescription('Delete all APKs older than X days and resets the status to NONE')
+    $this
       ->addArgument('days')
     ;
   }
@@ -49,7 +52,7 @@ class CleanOldApkCommand extends Command
     }
 
     $output->writeln('Deleting all APKs older than '.$days.' days.');
-    $last_point_of_time_to_save = TimeUtils::getTimestamp() - ((int) $days * HOURS * MINUTES * SECONDS);
+    $last_point_of_time_to_save = TimeUtils::getTimestamp() - ((int) $days * self::HOURS * self::MINUTES * self::SECONDS);
 
     $directory = $this->parameter_bag->get('catrobat.apk.dir');
     $finder = new Finder();

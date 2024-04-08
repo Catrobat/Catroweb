@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api\Services\Projects;
 
 use App\Api\Services\Base\AbstractResponseManager;
@@ -8,6 +10,7 @@ use App\Api\Services\ResponseCache\ResponseCacheManager;
 use App\DB\Entity\Project\Extension;
 use App\DB\Entity\Project\Program;
 use App\DB\Entity\Project\Special\FeaturedProgram;
+use App\DB\Entity\Project\Special\SpecialProgram;
 use App\DB\Entity\Project\Tag;
 use App\Project\ProjectManager;
 use App\Storage\ImageRepository;
@@ -45,7 +48,7 @@ class ProjectsResponseManager extends AbstractResponseManager
   /**
    * @param ?string $attributes Comma-separated list of attributes to include into response
    */
-  public function createProjectDataResponse(Program $project, ?string $attributes): ProjectResponse
+  public function createProjectDataResponse(Program|SpecialProgram $project, ?string $attributes): ProjectResponse
   {
     if (empty($attributes)) {
       $attributes_list = ['id', 'name', 'author', 'views', 'downloads', 'flavor', 'uploaded_string', 'screenshot_large', 'screenshot_small', 'project_url'];

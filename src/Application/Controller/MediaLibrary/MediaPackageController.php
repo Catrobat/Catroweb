@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\MediaLibrary;
 
 use App\DB\Entity\MediaLibrary\MediaPackage;
@@ -28,7 +30,7 @@ class MediaPackageController extends AbstractController
    */
   #[Route(path: '/media-library/', name: 'media_library_overview', methods: ['GET'])]
   #[Route(path: '/pocket-library/', name: 'pocket_library_overview', methods: ['GET'])]
-  public function indexAction(): Response
+  public function index(): Response
   {
     /** @var MediaPackage $packages */
     $packages = $this->entity_manager->getRepository(MediaPackage::class)->findAll();
@@ -45,7 +47,7 @@ class MediaPackageController extends AbstractController
    */
   #[Route(path: '/media-library/{package_name}', name: 'media_library', methods: ['GET'])]
   #[Route(path: '/pocket-library/{package_name}', name: 'pocket_library', methods: ['GET'])]
-  public function mediaPackageAction(Request $request, string $package_name, TranslatorInterface $translator): Response
+  public function mediaPackage(Request $request, string $package_name, TranslatorInterface $translator): Response
   {
     $flavor = $request->attributes->get('flavor');
     if ('' === $flavor) {
@@ -86,7 +88,7 @@ class MediaPackageController extends AbstractController
   #[Route(path: '/media-library/{package_name}/search/', name: 'medialibrary_empty_search', defaults: ['q' => null], methods: ['GET'])]
   #[Route(path: '/pocket-library/{package_name}/search/{q}', name: 'pocketlibrary_search', requirements: ['q' => '.+'], methods: ['GET'])]
   #[Route(path: '/pocket-library/{package_name}/search/', name: 'pocketlibrary_empty_search', defaults: ['q' => null], methods: ['GET'])]
-  public function mediaPackageSearchAction(?string $q, string $package_name, TranslatorInterface $translator, MediaPackageFileRepository $media_file_repository, UrlGeneratorInterface $url_generator, Request $request): Response
+  public function mediaPackageSearch(?string $q, string $package_name, TranslatorInterface $translator, MediaPackageFileRepository $media_file_repository, UrlGeneratorInterface $url_generator, Request $request): Response
   {
     $flavor = $request->attributes->get('flavor');
     $found_media_files = $media_file_repository->search($q ?? '', $flavor, $package_name);
@@ -126,7 +128,7 @@ class MediaPackageController extends AbstractController
    *
    * @return array the sorted array
    */
-  private function sortCategoriesFlavoredFirst(array $unsorted_categories, string $flavor, TranslatorInterface $translator)
+  private function sortCategoriesFlavoredFirst(array $unsorted_categories, string $flavor, TranslatorInterface $translator): array
   {
     $categories = [];
 
@@ -149,13 +151,13 @@ class MediaPackageController extends AbstractController
       }
 
       $categories[] = [
-        'displayID' => preg_replace('#[^A-Za-z0-9-_:.]#', '', $category->getName()),
+        'displayID' => preg_replace('#[^A-Za-z0-9-_:.]#', '', (string) $category->getName()),
         'name' => $category->getName(),
         'priority' => $category->getPriority(),
       ];
     }
 
-    usort($categories, fn ($category_a, $category_b) => $category_b['priority'] <=> $category_a['priority']);
+    usort($categories, fn ($category_a, $category_b): int => $category_b['priority'] <=> $category_a['priority']);
 
     return $categories;
   }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\EntityRepository\Project\Special;
 
 use App\DB\Entity\Project\Program;
@@ -159,7 +161,7 @@ class ExampleRepository extends ServiceEntityRepository
     return $query_builder;
   }
 
-  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null, string $alias = 'e'): QueryBuilder
+  private function addMaxVersionCondition(QueryBuilder $query_builder, ?string $max_version = null): QueryBuilder
   {
     if (null !== $max_version && '' !== $max_version) {
       $query_builder

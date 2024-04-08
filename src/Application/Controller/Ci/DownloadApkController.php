@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\Ci;
 
 use App\DB\Entity\Project\Program;
@@ -13,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\File\File;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
@@ -34,7 +35,7 @@ class DownloadApkController extends AbstractController
   }
 
   #[Route(path: '/ci/download/{id}', name: 'ci_download', methods: ['GET'])]
-  public function downloadApkAction(string $id, Request $request): BinaryFileResponse
+  public function downloadApk(string $id): BinaryFileResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();

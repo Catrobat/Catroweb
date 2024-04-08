@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\MaintenanceInformation;
 
 use App\DB\Entity\MaintenanceInformation;

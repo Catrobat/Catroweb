@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\Remix;
 
 use App\DB\Entity\Project\Program;
@@ -45,7 +47,7 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
       $project->isInitialVersion(),
       $this->remix_manager->getProjectRepository()
     );
-    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data) => $remix_data->isScratchProject());
+    $scratch_remixes_data = array_filter($remixes_data, fn (RemixData $remix_data): bool => $remix_data->isScratchProject());
     $scratch_info_data = [];
     $project_xml_properties = $file->getProjectXmlProperties();
     $remix_url_string = $file->getRemixUrlsString();
@@ -58,7 +60,7 @@ class RemixUpdaterEventSubscriber implements EventSubscriberInterface
     }
 
     if (count($scratch_remixes_data) > 0) {
-      $scratch_ids = array_map(fn (RemixData $data) => $data->getProjectId(), $scratch_remixes_data);
+      $scratch_ids = array_map(fn (RemixData $data): string => $data->getProjectId(), $scratch_remixes_data);
       $existing_scratch_ids = $this->remix_manager->filterExistingScratchProjectIds($scratch_ids);
       $not_existing_scratch_ids = array_diff($scratch_ids, $existing_scratch_ids);
       $scratch_info_data = $this->async_http_client->fetchScratchProjectDetails($not_existing_scratch_ids);

@@ -63,7 +63,7 @@ Feature:
     And I fill in "_password" with "123456"
     When I press "Login"
     And I wait for the page to be loaded
-    Then I should see "Newest"
+    Then I should be on "/app/"
 
   Scenario: The password should be hidden as default behaviour
     Given I am on "/app/login"

@@ -1,14 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\DBUpdater;
 
 use App\DB\Entity\Project\Tag;
 use App\DB\EntityRepository\Project\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:update:tags', description: 'Inserting our static project tags into the Database')]
 class UpdateTagsCommand extends Command
 {
   final public const TAG_LTM_PREFIX = 'tags.tag.';
@@ -16,13 +20,6 @@ class UpdateTagsCommand extends Command
   public function __construct(private readonly EntityManagerInterface $entity_manager, private readonly TagRepository $tag_repository)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:update:tags')
-      ->setDescription('Inserting our static project tags into the Database')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

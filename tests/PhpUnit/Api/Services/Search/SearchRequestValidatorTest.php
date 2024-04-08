@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Api\Services\Search;
 
 use App\Api\Services\Base\AbstractRequestValidator;

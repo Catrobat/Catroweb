@@ -178,7 +178,8 @@ function initProjectScreenshotUpload() {
       }
       reader.onload = (event) => {
         const image = event.currentTarget.result // base64 data url
-        ProjectApi.update(
+        const projectApi = new ProjectApi()
+        projectApi.updateProject(
           $project.data('project-id'),
           { screenshot: image },
           function () {

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Application\Controller\User;
 
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -22,7 +24,7 @@ class FollowerController extends AbstractController
   }
 
   #[Route(path: '/follower', name: 'catrobat_follower', methods: ['GET'])]
-  public function followerAction(Request $request, string $id = '0'): Response
+  public function follower(Request $request, string $id = '0'): Response
   {
     $page = $request->request->getInt('page');
     $pageSize = $request->request->getInt('pageSize');
@@ -62,7 +64,7 @@ class FollowerController extends AbstractController
    * Todo -> move to CAPI.
    */
   #[Route(path: '/follower/unfollow/{id}', name: 'unfollow', methods: ['DELETE'], defaults: ['id' => 0])]
-  public function unfollowUser(Request $request, string $id): JsonResponse
+  public function unfollowUser(string $id): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();
@@ -91,7 +93,7 @@ class FollowerController extends AbstractController
    * Todo -> move to CAPI.
    */
   #[Route(path: '/follower/follow/{id}', name: 'follow', methods: ['POST'], defaults: ['id' => 0])]
-  public function followUser(Request $request, string $id): JsonResponse
+  public function followUser(string $id): JsonResponse
   {
     /** @var User|null $user */
     $user = $this->getUser();

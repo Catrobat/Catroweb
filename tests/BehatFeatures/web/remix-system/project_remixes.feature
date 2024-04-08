@@ -65,6 +65,10 @@ Feature: As a visitor I want to see the full remix graph of a program on the pro
       | 8           | 9             | 1     |
       | 9           | 9             | 0     |
 
+    And there are feature flags:
+      | name          | value |
+      | remix-graph   | true  |
+
   Scenario: For performance reasons the remix graph is on its own page
     Given I am on "/app/project/1"
     And I wait for the page to be loaded

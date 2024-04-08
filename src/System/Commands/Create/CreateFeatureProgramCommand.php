@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\Entity\Project\Program;
@@ -7,12 +9,14 @@ use App\DB\Entity\Project\Special\FeaturedProgram;
 use App\DB\EntityRepository\FlavorRepository;
 use App\Project\ProjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\HttpFoundation\File\File;
 
+#[AsCommand(name: 'catrobat:feature', description: 'feature a project')]
 class CreateFeatureProgramCommand extends Command
 {
   public function __construct(
@@ -25,8 +29,7 @@ class CreateFeatureProgramCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:feature')
-      ->setDescription('feature a project')
+    $this
       ->addArgument('program_name', InputArgument::REQUIRED, 'Name of program  which gets featured')
     ;
   }

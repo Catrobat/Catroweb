@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatFile;
 
 use App\DB\EntityRepository\Project\ProgramRepository;
@@ -26,7 +28,7 @@ class ExtractedCatrobatFile
     if (!$content) {
       throw new InvalidCatrobatFileException('errors.xml.invalid', 508);
     }
-    $content = str_replace('&#x0;', '', $content, $count);
+    $content = str_replace('&#x0;', '', $content);
 
     preg_match_all('@fileName=?[">](.*?)[<"]@', $content, $matches);
     $this->xml_filenames = sizeof($matches) > 1 ? $matches[1] : [];
@@ -241,7 +243,7 @@ class ExtractedCatrobatFile
       '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;&#x0;ANYTHING&#x0;</receivedMessage>', $xml_string);
 
     $xml_string = preg_replace('#<receivedMessage>(.*)&lt;-&gt;(.*)</receivedMessage>#',
-      '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', $xml_string);
+      '<receivedMessage>$1&lt;&#x0;-&#x0;&gt;$2</receivedMessage>', (string) $xml_string);
 
     if (null != $xml_string) {
       file_put_contents($this->path.'code.xml', $xml_string);

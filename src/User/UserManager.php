@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\User;
 
 use App\DB\Entity\User\User;
@@ -132,7 +134,7 @@ class UserManager implements UserManagerInterface
       ->execute()
     ;
 
-    return array_map(fn ($value) => $value['id'], $associative_array);
+    return array_map(fn ($value): mixed => $value['id'], $associative_array);
   }
 
   public function getActiveUserIDList(int $years): array
@@ -149,7 +151,7 @@ class UserManager implements UserManagerInterface
       ->execute()
     ;
 
-    return array_map(fn ($value) => $value['id'], $result);
+    return array_map(fn ($value): mixed => $value['id'], $result);
   }
 
   protected function userSearchQuery(string $query): BoolQuery
@@ -245,7 +247,7 @@ class UserManager implements UserManagerInterface
     return $this->user_repository->findOneBy($criteria, $orderBy);
   }
 
-  public function find($id): ?User
+  public function find(mixed $id): ?User
   {
     return $this->user_repository->find($id);
   }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\Entity\User\Notifications\FollowNotification;
@@ -7,11 +9,13 @@ use App\DB\Entity\User\User;
 use App\User\Notification\NotificationManager;
 use App\User\UserManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+#[AsCommand(name: 'catrobat:follow', description: 'follow an user')]
 class CreateFollowersCommand extends Command
 {
   public function __construct(private readonly UserManager $user_manager,
@@ -23,8 +27,7 @@ class CreateFollowersCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:follow')
-      ->setDescription('follow an user')
+    $this
       ->addArgument('user_name', InputArgument::REQUIRED, 'Name of user who gets followed')
       ->addArgument('follower', InputArgument::REQUIRED, 'User who follows')
     ;

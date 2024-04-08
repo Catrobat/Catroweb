@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\DB_Updater\Controller;
 
 use App\DB\Entity\Project\Extension;
@@ -22,7 +24,7 @@ class ExtensionsAdminController extends CRUDController
   ) {
   }
 
-  public function listAction(?Request $request = null): Response
+  public function listAction(Request $request): Response
   {
     return $this->renderWithExtraParams('Admin/DB_Updater/admin_extensions.html.twig', [
       'action' => 'update_extensions',

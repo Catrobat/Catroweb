@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands;
 
 use App\DB\Entity\Project\Program;
@@ -17,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputArgument;
@@ -27,6 +30,7 @@ use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 use Symfony\Component\HttpFoundation\File\File;
 
+#[AsCommand(name: 'catrobat:remixgraph:migrate', description: 'Imports remix graphs from all XML files of uploaded programs to database')]
 class MigrateRemixGraphsCommand extends Command
 {
   private readonly AsyncHttpClient $async_http_client;
@@ -64,8 +68,7 @@ class MigrateRemixGraphsCommand extends Command
 
   protected function configure(): void
   {
-    $this->setName('catrobat:remixgraph:migrate')
-      ->setDescription('Imports remix graphs from all XML files of uploaded programs to database')
+    $this
       ->addArgument('directory', InputArgument::REQUIRED, 'Directory containing catrobat files for import')
       ->addArgument('user', InputArgument::OPTIONAL, 'User who will be the owner of these programs '.
         '(only required if --debug-import-missing-programs is set)')
@@ -97,7 +100,7 @@ class MigrateRemixGraphsCommand extends Command
       return 2;
     }
 
-    $directory = ('/' != substr((string) $directory, -1)) ? $directory.'/' : $directory;
+    $directory = (!str_ends_with((string) $directory, '/')) ? $directory.'/' : $directory;
 
     if ($is_debug_import_missing_projects) {
       $username = $input->getArgument('user');

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Project;
 
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
@@ -649,7 +651,7 @@ class Program implements \Stringable
   {
     $relations = $this->getCatrobatRemixDescendantRelations()->getValues();
 
-    return array_unique(array_map(fn (ProgramRemixRelation $ra) => $ra->getDescendantId(), $relations));
+    return array_unique(array_map(fn (ProgramRemixRelation $ra): string => $ra->getDescendantId(), $relations));
   }
 
   public function getScratchRemixParentRelations(): Collection

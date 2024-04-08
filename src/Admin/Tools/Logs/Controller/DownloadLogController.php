@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Admin\Tools\Logs\Controller;
 
 use App\DB\Entity\User\User;

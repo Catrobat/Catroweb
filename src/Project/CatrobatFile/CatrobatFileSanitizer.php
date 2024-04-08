@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Project\CatrobatFile;
 
 use App\Project\CatrobatCode\Parser\CatrobatCodeParser;
@@ -11,11 +13,11 @@ use Symfony\Component\HttpFoundation\File\File;
 
 class CatrobatFileSanitizer
 {
-  private ?array $scenes;
+  private ?array $scenes = null;
 
-  private ?array $image_paths;
+  private ?array $image_paths = null;
 
-  private ?array $sound_paths;
+  private ?array $sound_paths = null;
 
   private ?string $extracted_file_root_path = null;
 

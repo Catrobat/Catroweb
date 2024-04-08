@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\System\Commands\Create;
 
 use App\DB\EntityRepository\FlavorRepository;
@@ -7,6 +9,7 @@ use App\DB\EntityRepository\MediaLibrary\MediaPackageCategoryRepository;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageRepository;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -29,6 +32,7 @@ use Symfony\Component\HttpFoundation\File\File;
  *              /     |    \              /        \                        |
  *         File 1  File 2  File 3      File 4    File 5                  File 6
  */
+#[AsCommand(name: 'catrobat:create:media-packages-samples', description: 'create sample Media Packages')]
 class CreateMediaPackageSamplesCommand extends Command
 {
   public function __construct(private readonly MediaPackageRepository $media_package_repo, private readonly MediaPackageCategoryRepository $media_package_category_repo,
@@ -36,13 +40,6 @@ class CreateMediaPackageSamplesCommand extends Command
     private readonly FlavorRepository $flavor_repo)
   {
     parent::__construct();
-  }
-
-  protected function configure(): void
-  {
-    $this->setName('catrobat:create:media-packages-samples')
-      ->setDescription('create sample Media Packages')
-    ;
   }
 
   protected function execute(InputInterface $input, OutputInterface $output): int

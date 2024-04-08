@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\DB\Entity\Translation;
 
 use App\DB\Entity\User\Comment\UserComment;

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Api_deprecated\OAuth;
 
 use App\DB\Entity\User\User;
@@ -100,7 +102,6 @@ class OAuthService
       if ($payload) {
         $gPlusId = $payload['sub'];
         $gEmail = $payload['email'];
-        $gLocale = $payload['locale'];
       } else {
         return new JsonResponse('Token invalid', 777);
       }
@@ -122,7 +123,7 @@ class OAuthService
     if (null !== $google_user) {
       $this->setGoogleTokens($google_user, null, null, $id_token);
     } elseif (null !== $user) {
-      $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $gPlusId, $username, $gLocale);
+      $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $gPlusId, $username);
       $this->setGoogleTokens($user, null, null, $id_token);
     } else {
       $this->registerGoogleUser($request, $retArray, $gPlusId, $username, $gEmail, $id_token);
@@ -142,7 +143,6 @@ class OAuthService
     $google_username = (string) $request->request->get('username');
     $google_id = (string) $request->request->get('id');
     $google_mail = (string) $request->request->get('email');
-    $locale = (string) $request->request->get('locale');
 
     /** @var User|null $google_user */
     $google_user = $this->user_manager->findOneBy([
@@ -160,7 +160,7 @@ class OAuthService
       $user = $this->user_manager->findUserByEmail($google_mail);
 
       if (null !== $user) {
-        $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $google_id, $google_username, $locale);
+        $this->connectGoogleUserToExistingUserAccount($request, $retArray, $user, $google_id, $google_username);
         $user->setUploadToken($this->token_generator->generateToken());
         $this->user_manager->updateUser($user);
         $retArray['token'] = $user->getUploadToken();
@@ -189,13 +189,11 @@ class OAuthService
   /**
    * @throws \Exception
    */
-  private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, mixed $googleId, string $googleUsername, string $locale): void
+  private function connectGoogleUserToExistingUserAccount(Request $request, array &$retArray, User $user, mixed $googleId, string $googleUsername): void
   {
     $violations = $this->validateOAuthUser($request, $retArray);
     if (0 === count($violations)) {
       if ('' === $user->getUsername()) {
-        $locale = substr($locale, 0, 180);
-
         if ($user->getUsername() != $googleUsername) {
           if ($this->user_manager->findUserByUsername($googleUsername)) {
             $username = PasswordGenerator::generateRandomPassword();
@@ -205,10 +203,6 @@ class OAuthService
           $user->setUsername($username);
         }
       }
-      if ('NO_GOOGLE_LOCALE' !== $locale) {
-        $locale = substr($locale, 0, 5);
-      }
-
       $user->setGoogleId($googleId);
 
       $user->setEnabled(true);

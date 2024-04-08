@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\PhpUnit\Application\Twig;
 
+use App\Admin\Tools\FeatureFlag\FeatureFlagManager;
 use App\Application\Twig\TwigExtension;
 use App\DB\EntityRepository\MediaLibrary\MediaPackageFileRepository;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -116,8 +119,9 @@ class TwigExtensionTest extends TestCase
     $request_stack = $this->mockRequestStack($locale);
     $parameter_bag = $this->createMock(ParameterBag::class);
     $translator = $this->createMock(TranslatorInterface::class);
+    $featureFlagManager = $this->createMock(FeatureFlagManager::class);
 
-    return new TwigExtension($request_stack, $repo, $parameter_bag, $this->translationPath, $translator);
+    return new TwigExtension($request_stack, $repo, $parameter_bag, $this->translationPath, $translator, $featureFlagManager);
   }
 
   private function inArray(string $needle, array $haystack): bool
@@ -134,7 +138,7 @@ class TwigExtensionTest extends TestCase
   private function isSelected(string $short, array $locales): bool
   {
     foreach ($locales as $value) {
-      if (0 === strcmp($short, $value[0]) && 0 === strcmp('1', $value[2])) {
+      if (0 === strcmp($short, $value[0]) && $value[2]) {
         return true;
       }
     }

@@ -789,18 +789,26 @@ return static function (ContainerConfigurator $containerConfigurator): void {
   $services->set(HwiOauthRegistrationFormType::class, HwiOauthRegistrationFormType::class);
 
   $services->set(ItranslateApi::class, ItranslateApi::class)
+    ->lazy()
     ->args([service('eight_points_guzzle.client.itranslate')])
   ;
 
   $services->set(GoogleTranslateApi::class, GoogleTranslateApi::class)
+    ->lazy()
     ->arg('$client', service(TranslateClient::class))
     ->arg('$short_text_length', 20)
   ;
 
-  $services->set(TranslateClient::class);
+  $services->set(TranslateClient::class)
+    ->lazy()
+  ;
 
   $services->set(TranslationDelegate::class, TranslationDelegate::class)
-    ->arg('$apis', [service(ItranslateApi::class), service(GoogleTranslateApi::class)])
+    ->lazy()
+    ->arg('$apis', [
+      service(ItranslateApi::class),
+      service(GoogleTranslateApi::class),
+    ])
   ;
 
   $services->set('admin.block.statistics.project_machine_translation', ProjectMachineTranslationAdmin::class)
