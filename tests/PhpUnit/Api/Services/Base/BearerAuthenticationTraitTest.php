@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Tests\PhpUnit\Api\Services\Base;
 
 use App\Api\Exceptions\ApiException;
-use App\Api\Services\Base\PandaAuthenticationTrait;
+use App\Api\Services\Base\BearerAuthenticationTrait;
 use App\System\Testing\PhpUnit\DefaultTestCase;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -13,15 +13,15 @@ use PHPUnit\Framework\MockObject\MockObject;
 /**
  * @internal
  *
- * @covers \Tests\PhpUnit\Api\Services\Base\PandaAuthenticationTraitTestClass
+ * @covers \Tests\PhpUnit\Api\Services\Base\BearerAuthenticationTraitTestClass
  */
-final class PandaAuthenticationTraitTest extends DefaultTestCase
+final class BearerAuthenticationTraitTest extends DefaultTestCase
 {
-  protected MockObject|PandaAuthenticationTraitTestClass $object;
+  protected MockObject|BearerAuthenticationTraitTestClass $object;
 
   protected function setUp(): void
   {
-    $this->object = $this->getMockForAbstractClass(PandaAuthenticationTraitTestClass::class);
+    $this->object = $this->getMockForAbstractClass(BearerAuthenticationTraitTestClass::class);
   }
 
   /**
@@ -31,7 +31,7 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
    */
   public function testTestTraitExists(): void
   {
-    $this->assertTrue(trait_exists(PandaAuthenticationTrait::class));
+    $this->assertTrue(trait_exists(BearerAuthenticationTrait::class));
   }
 
   /**
@@ -39,23 +39,23 @@ final class PandaAuthenticationTraitTest extends DefaultTestCase
    *
    * @small
    *
-   * @covers \App\Api\Services\Base\PandaAuthenticationTrait::setPandaAuth
+   * @covers \App\Api\Services\Base\BearerAuthenticationTrait::setBearerAuth
    *
    * @throws \Exception
    */
-  #[DataProvider('providePandaAuthData')]
-  public function testSetPandaAuth(?string $value, bool $expect_exception, string $expected = ''): void
+  #[DataProvider('provideBearerAuthData')]
+  public function testSetBearerAuth(?string $value, bool $expect_exception, string $expected = ''): void
   {
     if ($expect_exception) {
       $this->expectException(ApiException::class);
     }
 
-    $this->object->setPandaAuth($value);
+    $this->object->setBearerAuth($value);
 
     $this->assertEquals($expected, $this->object->getAuthenticationToken());
   }
 
-  public static function providePandaAuthData(): array
+  public static function provideBearerAuthData(): array
   {
     return [
       'Empty' => [

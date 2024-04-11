@@ -8,13 +8,13 @@ use App\Api\Exceptions\ApiException;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * Trait PandaAuthenticationTrait.
+ * Trait BearerAuthenticationTrait.
  */
-trait PandaAuthenticationTrait
+trait BearerAuthenticationTrait
 {
   private string $token;
 
-  public function setPandaAuth(?string $value): void
+  public function setBearerAuth(?string $value): void
   {
     $this->token = $this->extractAuthenticationToken($value ?? '');
   }

@@ -257,16 +257,16 @@
         },
         {
             "name": "catrobat/capi",
-            "version": "v1.4.0",
+            "version": "v1.4.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Catrobat/Catroweb-API.git",
-                "reference": "4c2093212b70bb60547fbe7a586c9db922c31df9"
+                "reference": "de33395a07b93dbaaecc9ed670638d9061d43a69"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/4c2093212b70bb60547fbe7a586c9db922c31df9",
-                "reference": "4c2093212b70bb60547fbe7a586c9db922c31df9",
+                "url": "https://api.github.com/repos/Catrobat/Catroweb-API/zipball/de33395a07b93dbaaecc9ed670638d9061d43a69",
+                "reference": "de33395a07b93dbaaecc9ed670638d9061d43a69",
                 "shasum": ""
             },
             "require": {
@@ -309,10 +309,10 @@
                 "sdk"
             ],
             "support": {
-                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.4.0",
+                "source": "https://github.com/Catrobat/Catroweb-API/tree/v1.4.2",
                 "issues": "https://github.com/Catrobat/Catroweb-API/issues"
             },
-            "time": "2024-04-11T11:59:37+00:00"
+            "time": "2024-04-11T12:53:20+00:00"
         },
         {
             "name": "clue/stream-filter",
@@ -18222,5 +18222,5 @@
         "ext-posix": "8.2",
         "ext-zip": "8.2"
     },
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.2.0"
 }
