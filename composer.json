@@ -15,7 +15,7 @@
     "ext-zip": "*",
     "beberlei/doctrineextensions": "1.5.*",
     "bugsnag/bugsnag-symfony": "^1.14",
-    "catrobat/capi": "1.3.*",
+    "catrobat/capi": "1.4.*",
     "codercat/jwk-to-pem": "1.1.*",
     "doctrine/annotations": "2.0.*",
     "doctrine/dbal": "3.8.*",
