@@ -23,7 +23,7 @@ class MailerAdapter
   public function send(string $to, string $subject, string $template, array $context = []): void
   {
     $email = $this->buildEmail($to, $subject, $template, $context);
-    // $email = $this->signEmail($email); // Signing is currently disabled due to sendinblue
+    // $email = $this->signEmail($email); // Signing is currently disabled due to breveo
     $this->sendEmail($email, $to);
   }
 
