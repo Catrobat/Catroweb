@@ -79,6 +79,7 @@ behat.yaml
 !/docker/app/wait-for-it.sh
 !/docker/app/set-permissions.sh
 !/docker/app/execute-tests.sh
+!/docker/app/prepare-for-deploy.sh
 
 ###> friendsofphp/php-cs-fixer ###
 /.php-cs-fixer.php

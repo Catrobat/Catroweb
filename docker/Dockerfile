@@ -4,7 +4,7 @@ COPY composer.json composer.lock ./
 RUN composer install --no-scripts
 
 # Use node image for better caching
-FROM node:21 AS node-build
+FROM node:lts AS node-build
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install && npm install -g @symfony/webpack-encore
@@ -42,9 +42,8 @@ RUN apt-get update && \
     curl \
     libgconf-2-4 \
     npm
-RUN npm install -g sass
 RUN npm install -g n
-RUN n stable
+RUN n lts
 
 # Overwrite default apache config
 RUN a2enmod rewrite
