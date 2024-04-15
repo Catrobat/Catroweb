@@ -5,6 +5,22 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [v24.4.2]
+
+## What's Changed
+
+- Bumped dependencies & translations
+- Fixes minor bugs and deprecated code
+- Bumped php version to 8.3
+- Switched sendinblue to brevo
+- **Full Changelog**: https://github.com/Catrobat/Catroweb/compare/v24.4.1...v24.4.2
+
+## [v24.4.1]
+
+- Bumped dependencies & translations
+- Fixes minor bus and deprecated code
+  **Full Changelog**: https://github.com/Catrobat/Catroweb/compare/v24.3.1...v24.4.1
+
 ## [v24.3.2]
 
 ## What's Changed
