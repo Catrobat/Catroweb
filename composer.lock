@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "319b3fc78e92d9f7d3b0eff929a78176",
+    "content-hash": "e29d2dd81a3eb294f262f14dd62c8a76",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -7740,16 +7740,16 @@
         },
         {
             "name": "sonata-project/user-bundle",
-            "version": "5.11.0",
+            "version": "5.12.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataUserBundle.git",
-                "reference": "58ceb3f0730247bfe8ddc0aeb4d62ae07e075c2f"
+                "reference": "14bde91fef2b47b4679d8ca7fc3e8a9b0f2105fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/58ceb3f0730247bfe8ddc0aeb4d62ae07e075c2f",
-                "reference": "58ceb3f0730247bfe8ddc0aeb4d62ae07e075c2f",
+                "url": "https://api.github.com/repos/sonata-project/SonataUserBundle/zipball/14bde91fef2b47b4679d8ca7fc3e8a9b0f2105fb",
+                "reference": "14bde91fef2b47b4679d8ca7fc3e8a9b0f2105fb",
                 "shasum": ""
             },
             "require": {
@@ -7789,7 +7789,7 @@
                 "dama/doctrine-test-bundle": "^7.0",
                 "doctrine/doctrine-bundle": "^2.7",
                 "doctrine/mongodb-odm": "^2.3",
-                "doctrine/orm": "^2.14",
+                "doctrine/orm": "^2.14 || ^3.0",
                 "egulias/email-validator": "^3.1 || ^4.0",
                 "friendsofphp/php-cs-fixer": "^3.4",
                 "matthiasnoback/symfony-config-test": "^4.2",
@@ -7846,7 +7846,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataUserBundle/issues",
-                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.11.0"
+                "source": "https://github.com/sonata-project/SonataUserBundle/tree/5.12.0"
             },
             "funding": [
                 {
@@ -7866,7 +7866,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-03-08T02:19:21+00:00"
+            "time": "2024-04-18T19:43:56+00:00"
         },
         {
             "name": "symfony/acl-bundle",
