@@ -687,3 +687,59 @@ $(document).ready(function () {
     }
   })
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+  const button = document.getElementById('projectNotForKidsButton')
+  if (button != null) {
+    button.addEventListener('click', function (event) {
+      event.preventDefault()
+      const markSafeForKidsText = document.getElementById('markSafeForKidsText')
+      const markNotForKidsText = document.getElementById('markNotForKidsText')
+      const url = document
+        .getElementById('projectNotForKidsButton')
+        .getAttribute('data-url')
+      let text = ''
+      if (markSafeForKidsText != null) {
+        text =
+          'Are you sure you want to remove the not for kids flag from this project?'
+      } else if (markNotForKidsText != null) {
+        text = 'Are you sure you want to mark this project as not for kids?'
+      }
+      askForConfirmation(submitNotForKidsForm, url, text)
+    })
+  }
+})
+
+function askForConfirmation(continueWithAction, url, text) {
+  const areYouSure = 'Confirmation'
+  const cancel = 'Cancel'
+  const okayText = 'Yes, proceed!'
+
+  Swal.fire({
+    title: areYouSure,
+    html: text + '<br><br>',
+    icon: 'warning',
+    showCancelButton: true,
+    allowOutsideClick: false,
+    customClass: {
+      confirmButton: 'btn btn-primary',
+      cancelButton: 'btn btn-outline-primary',
+    },
+    buttonsStyling: false,
+    confirmButtonText: okayText,
+    cancelButtonText: cancel,
+  }).then((result) => {
+    if (result.value) {
+      continueWithAction(url)
+    }
+  })
+}
+
+function submitNotForKidsForm(url) {
+  const form = document.createElement('form')
+  form.setAttribute('method', 'post')
+  form.setAttribute('action', url)
+  form.style.display = 'hidden'
+  document.body.appendChild(form)
+  form.submit()
+}
