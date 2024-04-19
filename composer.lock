@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e29d2dd81a3eb294f262f14dd62c8a76",
+    "content-hash": "75ce464d8082db5db99e90d4c909db43",
     "packages": [
         {
             "name": "beberlei/doctrineextensions",
@@ -6948,16 +6948,16 @@
         },
         {
             "name": "sonata-project/admin-bundle",
-            "version": "4.29.3",
+            "version": "4.30.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sonata-project/SonataAdminBundle.git",
-                "reference": "9b1294e569d23a6d4c848af526362e0ec12e91d7"
+                "reference": "8fd565884ed2b3be6e6ec20cf65cb213de0c776c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/9b1294e569d23a6d4c848af526362e0ec12e91d7",
-                "reference": "9b1294e569d23a6d4c848af526362e0ec12e91d7",
+                "url": "https://api.github.com/repos/sonata-project/SonataAdminBundle/zipball/8fd565884ed2b3be6e6ec20cf65cb213de0c776c",
+                "reference": "8fd565884ed2b3be6e6ec20cf65cb213de0c776c",
                 "shasum": ""
             },
             "require": {
@@ -7061,7 +7061,7 @@
             ],
             "support": {
                 "issues": "https://github.com/sonata-project/SonataAdminBundle/issues",
-                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.29.3"
+                "source": "https://github.com/sonata-project/SonataAdminBundle/tree/4.30.1"
             },
             "funding": [
                 {
@@ -7081,7 +7081,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-01-22T09:11:36+00:00"
+            "time": "2024-04-10T20:09:57+00:00"
         },
         {
             "name": "sonata-project/block-bundle",
