@@ -221,6 +221,7 @@ project:
   deletedComment: '**Deleted**'
   replyLabel: reply
   repliesLabel: replies
+  notForKids: Not safe for kids
 
 remixGraph:
   title: Remixes
@@ -1029,6 +1030,9 @@ media_library:
 
 snackbar:
   project_not_found: 'The requested project is not available'
+  project_not_for_kids: 'The project was marked as not safe for kids!'
+  project_safe_for_kids: 'The project was marked safe for kids!'
+  project_not_for_kids_moderator: 'The project was marked by a moderator. You can not undo this!'
 
 
 
@@ -1040,5 +1044,6 @@ maintenanceinformations:
     feature_2: 'The Feature'
     feature_3: 'The Feature'
 
-
+MarkNotForKids: Mark as not safe for kids
+MarkSafeForKids: Mark as safe for kids
 

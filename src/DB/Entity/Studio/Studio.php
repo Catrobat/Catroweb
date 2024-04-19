@@ -48,10 +48,10 @@ class Studio
   /**
    * When this studio is deleted, all its comments should be removed too.
    */
-  #[ORM\OneToMany(mappedBy: 'studio', targetEntity: UserComment::class, cascade: ['remove'], fetch: 'EXTRA_LAZY')]
+  #[ORM\OneToMany(targetEntity: UserComment::class, mappedBy: 'studio', cascade: ['remove'], fetch: 'EXTRA_LAZY')]
   protected Collection $user_comments;
 
-  #[ORM\OneToMany(mappedBy: 'studio', targetEntity: StudioJoinRequest::class, cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY', orphanRemoval: true)]
+  #[ORM\OneToMany(targetEntity: StudioJoinRequest::class, mappedBy: 'studio', cascade: ['persist', 'remove'], fetch: 'EXTRA_LAZY', orphanRemoval: true)]
   protected Collection $join_requests;
 
   public function __construct()

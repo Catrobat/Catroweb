@@ -34,7 +34,7 @@ class MediaPackageCategory implements \Stringable
   #[ORM\ManyToMany(targetEntity: MediaPackage::class, inversedBy: 'categories')]
   protected Collection $package;
 
-  #[ORM\OneToMany(mappedBy: 'category', targetEntity: MediaPackageFile::class)]
+  #[ORM\OneToMany(targetEntity: MediaPackageFile::class, mappedBy: 'category')]
   protected Collection $files;
 
   #[ORM\Column(type: 'integer')]

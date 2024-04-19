@@ -12,11 +12,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: StudioJoinRequestRepository::class)]
 class StudioJoinRequest
 {
-  public const STATUS_PENDING = 'pending';
-  public const STATUS_APPROVED = 'approved';
-  public const STATUS_DECLINED = 'declined';
+  public const string STATUS_PENDING = 'pending';
+  public const string STATUS_APPROVED = 'approved';
+  public const string STATUS_DECLINED = 'declined';
 
-  public const STATUS_JOINED = 'joined';
+  public const string STATUS_JOINED = 'joined';
 
   #[ORM\Id]
   #[ORM\GeneratedValue]

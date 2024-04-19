@@ -10,21 +10,21 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Table(name: 'tags')]
-#[ORM\Index(columns: ['internal_title'], name: 'internal_title_idx')]
+#[ORM\Index(name: 'internal_title_idx', columns: ['internal_title'])]
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag
 {
   /**
    * Static Tags - added/updated with UpdateTagsCommand.
    */
-  final public const GAME = 'game';
-  final public const ANIMATION = 'animation';
-  final public const STORY = 'story';
-  final public const MUSIC = 'music';
-  final public const ART = 'art';
-  final public const EXPERIMENTAL = 'experimental';
-  final public const TUTORIAL = 'tutorial';
-  final public const CODING_JAM_09_2021 = 'catrobatfestival2021';
+  final public const string GAME = 'game';
+  final public const string ANIMATION = 'animation';
+  final public const string STORY = 'story';
+  final public const string MUSIC = 'music';
+  final public const string ART = 'art';
+  final public const string EXPERIMENTAL = 'experimental';
+  final public const string TUTORIAL = 'tutorial';
+  final public const string CODING_JAM_09_2021 = 'catrobatfestival2021';
 
   #[ORM\Id]
   #[ORM\Column(type: 'integer')]

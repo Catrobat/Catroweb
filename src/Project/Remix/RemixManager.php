@@ -5,14 +5,12 @@ declare(strict_types=1);
 namespace App\Project\Remix;
 
 use App\DB\Entity\Project\Program;
-use App\DB\Entity\Project\Remix\ProgramCatrobatRemixRelationInterface;
 use App\DB\Entity\Project\Remix\ProgramRemixBackwardRelation;
 use App\DB\Entity\Project\Remix\ProgramRemixRelation;
 use App\DB\Entity\Project\Remix\ProgramRemixRelationInterface;
 use App\DB\Entity\Project\Scratch\ScratchProgram;
 use App\DB\Entity\Project\Scratch\ScratchProgramRemixRelation;
 use App\DB\Entity\User\Notifications\RemixNotification;
-use App\DB\Entity\User\User;
 use App\DB\EntityRepository\Project\ProgramRemixBackwardRepository;
 use App\DB\EntityRepository\Project\ProgramRemixRepository;
 use App\DB\EntityRepository\Project\ProgramRepository;
@@ -192,23 +190,6 @@ class RemixManager
     ];
   }
 
-  public function findCatrobatRelation(string $ancestor_id, string $descendant_id): mixed
-  {
-    $remix_relation = $this
-      ->project_remix_repository
-      ->findOneBy(['ancestor_id' => $ancestor_id, 'descendant_id' => $descendant_id, 'depth' => 1])
-    ;
-
-    if (null === $remix_relation) {
-      $remix_relation = $this
-        ->project_remix_backward_repository
-        ->findOneBy(['parent_id' => $ancestor_id, 'child_id' => $descendant_id])
-      ;
-    }
-
-    return $remix_relation;
-  }
-
   public function removeAllRelations(): void
   {
     $this->project_remix_repository->removeAllRelations();
@@ -216,59 +197,10 @@ class RemixManager
     $this->scratch_project_remix_repository->removeAllRelations();
   }
 
-  /**
-   * @throws \Exception
-   */
-  public function markAllUnseenRemixRelationsOfUserAsSeen(User $user): void
-  {
-    $unseen_relations = $this->getUnseenRemixRelationsOfUser($user);
-    $now = TimeUtils::getDateTime();
-    foreach ($unseen_relations as $relation) {
-      $relation->setSeenAt($now);
-      $this->entity_manager->persist($relation);
-    }
-    $this->entity_manager->flush();
-  }
-
   public function markAllUnseenRemixRelationsAsSeen(\DateTime $seen_at): void
   {
     $this->project_remix_repository->markAllUnseenRelationsAsSeen($seen_at);
     $this->project_remix_backward_repository->markAllUnseenRelationsAsSeen($seen_at);
-  }
-
-  /**
-   * @throws \Exception
-   */
-  public function markRemixRelationAsSeen(ProgramCatrobatRemixRelationInterface $remix_relation): void
-  {
-    $now = TimeUtils::getDateTime();
-    $remix_relation->setSeenAt($now);
-    $this->entity_manager->persist($remix_relation);
-    $this->entity_manager->flush();
-  }
-
-  public function getUnseenRemixProjectsDataOfUser(User $user): array
-  {
-    $unseen_relations = $this->getUnseenRemixRelationsOfUser($user);
-    $unseen_remix_projects_data = [];
-
-    foreach ($unseen_relations as $relation) {
-      $original_project = $relation->getAncestor();
-      $remixed_project = $relation->getDescendant();
-      $remixed_project_user = $remixed_project->getUser();
-      $remixed_project_username = $remixed_project_user->getUserIdentifier();
-
-      $unseen_remix_projects_data[] = [
-        'originalProgramId' => $original_project->getId(),
-        'originalProgramName' => $original_project->getName(),
-        'remixProgramId' => $remixed_project->getId(),
-        'remixProgramName' => $remixed_project->getName(),
-        'remixProgramAuthor' => $remixed_project_username,
-        'createdAt' => $relation->getCreatedAt(),
-      ];
-    }
-
-    return $unseen_remix_projects_data;
   }
 
   public function remixCount(string $project_id): int
@@ -457,23 +389,5 @@ class RemixManager
     $project->setRemixMigratedAt(TimeUtils::getDateTime());
     $this->entity_manager->persist($project);
     $this->entity_manager->flush();
-  }
-
-  /**
-   * @return ProgramCatrobatRemixRelationInterface[]
-   */
-  private function getUnseenRemixRelationsOfUser(User $user): array
-  {
-    $forward_relations = $this
-      ->project_remix_repository
-      ->getUnseenDirectDescendantRelationsOfUser($user)
-    ;
-
-    $backward_relations = $this
-      ->project_remix_backward_repository
-      ->getUnseenChildRelationsOfUser($user)
-    ;
-
-    return array_merge($forward_relations, $backward_relations);
   }
 }

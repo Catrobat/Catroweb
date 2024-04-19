@@ -17,9 +17,11 @@ use Sonata\AdminBundle\Object\MetadataInterface;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\DoctrineORMAdminBundle\Filter\DateTimeRangeFilter;
+use Sonata\DoctrineORMAdminBundle\Filter\NumberFilter;
 use Sonata\Form\Type\DateTimeRangePickerType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -33,6 +35,10 @@ class ProjectsAdmin extends AbstractAdmin
   protected $baseRouteName = 'admin_catrobat_adminbundle_projectsadmin';
 
   protected $baseRoutePattern = 'projects';
+
+  protected const SAFE_FOR_KIDS = 0;
+
+  protected const NOT_FOR_KIDS_MOD = 2;
 
   protected function configureDefaultSortValues(array &$sortValues): void
   {
@@ -90,6 +96,15 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('flavor')
       ->add('approved')
       ->add('visible')
+      ->add('not_for_kids', NumberFilter::class, [
+        'field_type' => ChoiceType::class,
+        'field_options' => [
+          'choices' => [
+            'Safe for kids' => self::SAFE_FOR_KIDS,
+            'Not for kids' => self::NOT_FOR_KIDS_MOD,
+          ],
+        ],
+      ])
     ;
   }
 
@@ -128,6 +143,14 @@ class ProjectsAdmin extends AbstractAdmin
       ->add('private', null, ['editable' => false, 'sortable' => false])
       ->add('approved', null, ['editable' => true, 'sortable' => false])
       ->add('visible', null, ['editable' => true, 'sortable' => false])
+      ->add('not_for_kids', 'choice', [
+        'editable' => true,
+        'sortable' => false,
+        'choices' => [
+          self::SAFE_FOR_KIDS => 'Safe for kids',
+          self::NOT_FOR_KIDS_MOD => 'Not for kids',
+        ],
+      ])
       ->add(ListMapper::NAME_ACTIONS, null, ['actions' => [
         'show' => ['template' => 'Admin/CRUD/list__action_show_project_details.html.twig'],
       ]])
