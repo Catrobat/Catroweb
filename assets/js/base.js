@@ -1,5 +1,4 @@
 import $ from 'jquery'
-// import './analytics/analytics'
 import textFillDefault from './components/text_fill_default'
 import './layout/top_bar'
 import './layout/sidebar'
@@ -10,6 +9,9 @@ import { LogoutTokenHandler } from './security/LogoutTokenHandler'
 import Bugsnag from '@bugsnag/js'
 import BugsnagPerformance from '@bugsnag/browser-performance'
 
+import Analytics from 'analytics'
+import googleTagManager from '@analytics/google-tag-manager'
+
 // Start the stimulus app
 import './bootstrap'
 
@@ -18,6 +20,19 @@ const bugsnagApiKey = $('#bugsnag').data('api-key')
 if (bugsnagApiKey) {
   Bugsnag.start({ apiKey: bugsnagApiKey, appVersion })
   BugsnagPerformance.start({ apiKey: bugsnagApiKey, appVersion })
+}
+
+const gtmContainerId = $('#gtm-container-id').data('gtm-container-id')
+if (gtmContainerId) {
+  const analytics = Analytics({
+    app: 'share.catrob.at',
+    plugins: [
+      googleTagManager({
+        containerId: gtmContainerId,
+      }),
+    ],
+  })
+  analytics.page() /* Track a page view */
 }
 
 require('../styles/base.scss')
